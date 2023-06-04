@@ -1,12 +1,17 @@
 import React from 'react';
+import Loadable from '../app/components/Header/Loader/Loadable';
 import ScrollToTop from '../app/utils/ScrolltoTop';
 import Login from '../app/pages/Login/Login';
-import Dashboard from '../app/pages/Dashboard/Dashboard';
+
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Applayout from '../layout/Applayout';
 import AdminLayout from '../layout/AdminLayout';
 import ProtectedRoute from './ProtectedRoute';
+
+
+
+const Dashboard = Loadable(lazy(() => import('../app/pages/Dashboard/Dashboard')));
 
 const AppRoutes = () => {
   return (
