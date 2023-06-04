@@ -9,10 +9,11 @@ export const axiosInstance = Axios.create({
 });
 
 axiosInstance.interceptors.request.use(function (config) {
-  const { token } = getUser;
+  const data = getUser();
+
   config.withCredentials = false;
-  if (token) {
-    config.headers['Authorization'] = 'Bearer ' + token;
+  if (data) {
+    config.headers['Authorization'] = 'Bearer ' + data?.token;
   }
 
   return config;
@@ -36,14 +37,7 @@ axiosInstance.interceptors.response.use(
         return Promise.reject(error);
       } else if (errorMessage === 'access_denied_no_permission') {
         window.location.replace('/not-found');
-      } else if (errorMessage === 'Not a UK location') {
-        localStorage.removeItem('local-area');
-        window.location.replace('/');
-      } else if (errorMessage === 'This shop is not around you') {
-        return Promise.reject(error);
-      } /*else {
-          return Promise.reject(errorMessage)
-      }*/ else if (errorMessage) {
+      } else if (errorMessage) {
         // Show the error message using toastify
         toast.error(errorMessage);
         return Promise.reject({ message: errorMessage });
