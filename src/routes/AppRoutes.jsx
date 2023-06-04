@@ -7,6 +7,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Applayout from '../layout/Applayout';
 import AdminLayout from '../layout/AdminLayout';
 import ProtectedRoute from './ProtectedRoute';
+import Employee from '../app/pages/Employee/Employee';
+import AddEmployee from '../app/pages/Employee/AddEmployee/AddEmployee';
 
 const AppRoutes = () => {
   return (
@@ -15,9 +17,11 @@ const AppRoutes = () => {
         <Routes>
           <Route path='/' exact element={<Applayout />}>
             <Route path='/' exact element={<Login />} />
-            <Route path='/admin' exact element={<AdminLayout />}>
+            <Route path='/admin' element={<AdminLayout />}>
               <Route element={<ProtectedRoute redirectTo='/' />}>
                 <Route path='dashboard' exact element={<Dashboard />} />
+                <Route path='employee' exact element={<Employee />} />
+                <Route path='employee/add' exact element={<AddEmployee />} />
               </Route>
             </Route>
           </Route>
