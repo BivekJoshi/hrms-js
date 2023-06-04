@@ -1,6 +1,6 @@
 import React from 'react';
 import ScrollToTop from '../app/utils/ScrolltoTop';
-import Login from '../app/pages/Login/Login';
+// import Login from '../app/pages/Login/Login';
 import Dashboard from '../app/pages/Dashboard/Dashboard';
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
