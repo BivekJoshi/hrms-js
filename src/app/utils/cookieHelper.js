@@ -15,7 +15,6 @@ export const getUser = () => {
   if (data) {
     return JSON.parse(data);
   }
-
   return null;
 };
 export const removeUser = (navigate) => {
