@@ -56,43 +56,29 @@ export const ThemeContextProvider = ({ children }) => {
     },
     palette: {
       mode: mode,
-      ...(mode === 'light'
-        ? {
-            // palette values for light mode
-            primary: {
-              main: '#427b62',
-            },
-            secondary: {
-              main: '#f5f5f5',
-            },
-            background: {
-              imageCaption: '#c5c7cb',
-            },
-            text: {
-              black: '#fff',
-            },
-            divider: 'rgba(0,0,0,0.12)',
-          }
-        : {
-            // palette values for dark mode
-            primary: {
-              main: '#689CF3',
-            },
-            divider: 'rgba(53,53,53,0.12)',
-            background: {
-              default: '#303030',
-              paper: '#424242',
-            },
-            text: {
-              primary: '#fff',
-              secondary: 'rgba(255, 255, 255, 0.7)',
-              black: '#000',
-            },
-          }),
+      primary: {
+        main: mode === 'light' ? '#1626C9' : '#689CF3',
+      },
+      secondary: {
+        main: mode === 'light' ? '#C98421' : '#689CF3',
+      },
+      background: {
+        default: mode === 'light' ? '#f5f5f5' : '#303030',
+        paper: mode === 'light' ? '#fff' : '#424242',
+        imageCaption: mode === 'light' ? '#c5c7cb' : '#fff',
+      },
+      text: {
+        primary: mode === 'light' ? '#000' : '#fff',
+        secondary:
+          mode === 'light' ? 'rgba(0, 0, 0, 0.7)' : 'rgba(255, 255, 255, 0.7)',
+      },
+      divider:
+        mode === 'light' ? 'rgba(0, 0, 0, 0.12)' : 'rgba(53, 53, 53, 0.12)',
     },
   });
 
   theme = responsiveFontSizes(theme);
+
   return (
     <ThemeModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>{children}</ThemeProvider>

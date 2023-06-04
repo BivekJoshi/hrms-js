@@ -159,20 +159,19 @@ export default function SideBar() {
         <List>
           {drawerMenus.map((menu, index) => (
             <React.Fragment key={index}>
-               <NavLink key={index} to={menu.path}>
-
-              <ListItemButton onClick={() => handleSubMenuToggle(index)}>
-                <ListItemIcon>{menu.icon}</ListItemIcon>
-                <ListItemText primary={menu.name} />
-                {menu.subMenus.length > 0 ? (
-                  subMenuOpen[index] ? (
-                    <ExpandLess />
-                  ) : (
-                    <ExpandMore />
+              <NavLink key={index} to={menu.path}>
+                <ListItemButton onClick={() => handleSubMenuToggle(index)}>
+                  <ListItemIcon>{menu.icon}</ListItemIcon>
+                  <ListItemText primary={menu.name} />
+                  {menu.subMenus.length > 0 ? (
+                    subMenuOpen[index] ? (
+                      <ExpandLess />
+                    ) : (
+                      <ExpandMore />
                     )
-                ) : null}
-              </ListItemButton>
-                    </NavLink>
+                  ) : null}
+                </ListItemButton>
+              </NavLink>
               {menu.subMenus.length > 0 && (
                 <Collapse in={subMenuOpen[index]} timeout='auto' unmountOnExit>
                   <List component='div' disablePadding>
