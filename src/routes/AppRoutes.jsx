@@ -1,6 +1,6 @@
 import React from 'react';
 import ScrollToTop from '../app/utils/ScrolltoTop';
-// import Login from '../app/pages/Login/Login';
+import Login from '../app/pages/Login/Login';
 import Dashboard from '../app/pages/Dashboard/Dashboard';
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
@@ -9,6 +9,7 @@ import AdminLayout from '../layout/AdminLayout';
 import ProtectedRoute from './ProtectedRoute';
 import Employee from '../app/pages/Employee/Employee';
 import AddEmployee from '../app/pages/Employee/AddEmployee/AddEmployee';
+import LoginLayout from '../app/pages/Login/LoginLayout';
 
 const AppRoutes = () => {
   return (
@@ -16,7 +17,7 @@ const AppRoutes = () => {
       <ScrollToTop>
         <Routes>
           <Route path='/' exact element={<Applayout />}>
-            <Route path='/' exact element={<Login />} />
+            <Route path='/' exact element={<LoginLayout />} />
             <Route path='/admin' element={<AdminLayout />}>
               <Route element={<ProtectedRoute redirectTo='/' />}>
                 <Route path='dashboard' exact element={<Dashboard />} />
