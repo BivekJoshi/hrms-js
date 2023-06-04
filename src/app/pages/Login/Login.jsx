@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import {
   Box,
@@ -10,6 +11,7 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useLoginForm } from '../../../auth/hooks/component/login/useLoginForm';
+import './Login.css';
 
 const Login = () => {
   const {
@@ -21,6 +23,8 @@ const Login = () => {
   } = useLoginForm({});
   return (
     <Box component='form' noValidate className='input-section'>
+      <img className='avatar' src='https://raw.githubusercontent.com/sefyudem/Responsive-Login-Form/master/img/avatar.svg' />
+      <p className='welcome-text'>WELCOME</p>
       <TextField
         required
         fullWidth
