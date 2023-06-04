@@ -18,9 +18,9 @@ export const getUser = () => {
 
   return null;
 };
-
-export const removeUser = () => {
+export const removeUser = (navigate) => {
   Cookies.remove(COOKIE_NAME);
   sessionStorage.removeItem(COOKIE_NAME);
   sessionStorage.clear();
+  navigate('/');
 };
