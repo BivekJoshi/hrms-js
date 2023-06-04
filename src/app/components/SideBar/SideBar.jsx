@@ -17,10 +17,11 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
-import { Collapse, Switch } from '@mui/material';
+import { Button, Collapse, Switch } from '@mui/material';
 import { ThemeModeContext } from '../../../theme/ThemeModeContext';
+import { removeUser } from '../../utils/cookieHelper';
 
 const drawerWidth = 240;
 
@@ -71,6 +72,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 export default function SideBar() {
   const theme = useTheme();
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const { toggleMode, themeMode } = useContext(ThemeModeContext); // Accessing themeMode from context
 
@@ -157,6 +159,8 @@ export default function SideBar() {
         <List>
           {drawerMenus.map((menu, index) => (
             <React.Fragment key={index}>
+               <NavLink key={index} to={menu.path}>
+
               <ListItemButton onClick={() => handleSubMenuToggle(index)}>
                 <ListItemIcon>{menu.icon}</ListItemIcon>
                 <ListItemText primary={menu.name} />
@@ -165,9 +169,10 @@ export default function SideBar() {
                     <ExpandLess />
                   ) : (
                     <ExpandMore />
-                  )
+                    )
                 ) : null}
               </ListItemButton>
+                    </NavLink>
               {menu.subMenus.length > 0 && (
                 <Collapse in={subMenuOpen[index]} timeout='auto' unmountOnExit>
                   <List component='div' disablePadding>
@@ -192,8 +197,17 @@ export default function SideBar() {
             justifyContent: 'center',
             alignItems: 'center',
             padding: '10px',
+            flexDirection: 'column',
           }}
         >
+          <Button
+            variant='contained'
+            onClick={() => {
+              removeUser(navigate);
+            }}
+          >
+            Logout
+          </Button>
           <Typography variant='body2' sx={{ marginRight: '8px' }}>
             {themeMode === 'light' ? 'Light' : 'Dark'} Mode
           </Typography>

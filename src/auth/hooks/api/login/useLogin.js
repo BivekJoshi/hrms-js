@@ -11,7 +11,7 @@ export const useLogin = ({ onSuccess }) => {
     ({ email, password }) => login(email, password),
     {
       onSuccess: (data, variables, context) => {
-        navigate('/admin');
+        navigate('/admin/dashboard');
         toast.success('Login Successful');
 
         setUser({
