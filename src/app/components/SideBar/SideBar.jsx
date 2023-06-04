@@ -44,6 +44,18 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   })
 );
 
+const StyledNavLink = styled(NavLink)`
+  text-decoration: none;
+  background-color: #e5e5e5;
+  color: #000;
+  &.active {
+    && {
+      background-color: #e5e5e5;
+      color: #1626c9;
+    }
+  }
+`;
+
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
 })(({ theme, open }) => ({
@@ -159,7 +171,7 @@ export default function SideBar() {
         <List>
           {drawerMenus.map((menu, index) => (
             <React.Fragment key={index}>
-              <NavLink key={index} to={menu.path}>
+              <StyledNavLink key={index} to={menu.path}>
                 <ListItemButton onClick={() => handleSubMenuToggle(index)}>
                   <ListItemIcon>{menu.icon}</ListItemIcon>
                   <ListItemText primary={menu.name} />
@@ -171,17 +183,17 @@ export default function SideBar() {
                     )
                   ) : null}
                 </ListItemButton>
-              </NavLink>
+              </StyledNavLink>
               {menu.subMenus.length > 0 && (
                 <Collapse in={subMenuOpen[index]} timeout='auto' unmountOnExit>
                   <List component='div' disablePadding>
                     {menu.subMenus.map((subMenu, subIndex) => (
-                      <NavLink key={subIndex} to={subMenu.path}>
+                      <StyledNavLink key={subIndex} to={subMenu.path}>
                         <ListItemButton sx={{ pl: 4 }}>
                           <ListItemIcon>{subMenu.icon}</ListItemIcon>
                           <ListItemText primary={subMenu.name} />
                         </ListItemButton>
-                      </NavLink>
+                      </StyledNavLink>
                     ))}
                   </List>
                 </Collapse>
