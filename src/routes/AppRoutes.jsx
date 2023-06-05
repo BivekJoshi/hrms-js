@@ -8,8 +8,6 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Applayout from '../layout/Applayout';
 import AdminLayout from '../layout/AdminLayout';
 import ProtectedRoute from './ProtectedRoute';
-// import Employee from '../app/pages/Employee/Employee';
-// import AddEmployee from '../app/pages/Employee/AddEmployee/AddEmployee';
 import LoginLayout from '../app/pages/Login/LoginLayout';
 
 const Dashboard = Loadable(lazy(() => import('../app/pages/Dashboard/Dashboard')));
