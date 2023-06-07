@@ -9,7 +9,6 @@ import AdminLayout from '../layout/AdminLayout';
 import ProtectedRoute from './ProtectedRoute';
 import Employee from '../app/pages/Employee/Employee';
 import AddEmployee from '../app/pages/Employee/AddEmployee/AddEmployee';
-import LoginLayout from '../app/pages/Login/LoginLayout';
 
 const AppRoutes = () => {
   return (
@@ -17,7 +16,7 @@ const AppRoutes = () => {
       <ScrollToTop>
         <Routes>
           <Route path='/' exact element={<Applayout />}>
-            <Route path='/' exact element={<LoginLayout />} />
+            <Route path='/' exact element={<Login />} />
             <Route path='/admin' element={<AdminLayout />}>
               <Route element={<ProtectedRoute redirectTo='/' />}>
                 <Route path='dashboard' exact element={<Dashboard />} />
