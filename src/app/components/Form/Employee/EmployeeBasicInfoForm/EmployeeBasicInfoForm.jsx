@@ -1,11 +1,11 @@
-import { Grid, MenuItem, TextField } from '@mui/material';
+import { Grid, MenuItem, TextField, Select } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers';
 import React from 'react';
 
 const gender = [
   {
     value: 'MALE',
-    label: 'male',
+    label: 'Male',
   },
   {
     value: 'FEMALE',
@@ -14,7 +14,7 @@ const gender = [
   {
     value: 'OTHERS',
     label: 'Others',
-  }
+  },
 ];
 const maritalStatus = [
   {
@@ -24,7 +24,7 @@ const maritalStatus = [
   {
     value: 'UNMARRIED',
     label: 'Unmarried',
-  }
+  },
 ];
 
 const EmployeeBasicInfoForm = ({ formik }) => {
@@ -36,7 +36,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           id='firstName'
           name='firstName'
           label='First Name'
-          placeholder='Enter your firstname'
+          placeholder='Enter your first name'
           fullWidth
           value={formik.values.firstName}
           onChange={formik.handleChange}
@@ -52,6 +52,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           id='middleName'
           name='middleName'
           label='Middle Name'
+          placeholder='Enter your last name'
           fullWidth
           value={formik.values.middleName}
           onChange={formik.handleChange}
@@ -67,6 +68,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           id='lastName'
           name='lastName'
           label='Last Name'
+          placeholder='Enter your last name'
           fullWidth
           value={formik.values.lastName}
           onChange={formik.handleChange}
@@ -78,10 +80,11 @@ const EmployeeBasicInfoForm = ({ formik }) => {
         />
       </Grid>
       <Grid item xs={12} sm={4}>
-        <TextField
-          id="gender"
+        <Select
+          id='gender'
           select
-          label="Gender"
+          label='Gender'
+          placeholder='Select your gender'
           fullWidth
           value={formik.values.gender}
           onChange={formik.handleChange}
@@ -96,28 +99,32 @@ const EmployeeBasicInfoForm = ({ formik }) => {
               {option.label}
             </MenuItem>
           ))}
-        </TextField>
+        </Select>
       </Grid>
       <Grid item xs={12} sm={4}>
-          <DatePicker
+        <DatePicker
           id='dateOfBirth'
           name='dateOfBirth'
-          label='dateOfBirth'
+          label='Date of Birth'
+          placeholder='Select your date of birth'
           fullWidth
           value={formik.values.dateOfBirth}
           onChange={formik.handleChange}
-          error={formik.touched.dateOfBirth && Boolean(formik.errors.dateOfBirth)}
+          error={
+            formik.touched.dateOfBirth && Boolean(formik.errors.dateOfBirth)
+          }
           helperText={formik.touched.dateOfBirth && formik.errors.dateOfBirth}
           variant='outlined'
           autoFocus
           InputLabelProps={{ shrink: true }}
-          />
+        />
       </Grid>
       <Grid item xs={12} sm={4}>
-          <DatePicker
+        <DatePicker
           id='dateOfJoin'
           name='dateOfJoin'
-          label='dateOfJoin'
+          label='Date of Join'
+          placeholder='Select date of join'
           fullWidth
           value={formik.values.dateOfJoin}
           onChange={formik.handleChange}
@@ -126,17 +133,20 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           variant='outlined'
           autoFocus
           InputLabelProps={{ shrink: true }}
-          />
+        />
       </Grid>
       <Grid item xs={12} sm={4}>
         <TextField
           id='mobileNumber'
           name='mobileNumber'
-          label='mobileNumber'
+          label='Mobile Number'
+          placeholder='Enter your mobile number'
           fullWidth
           value={formik.values.mobileNumber}
           onChange={formik.handleChange}
-          error={formik.touched.mobileNumber && Boolean(formik.errors.mobileNumber)}
+          error={
+            formik.touched.mobileNumber && Boolean(formik.errors.mobileNumber)
+          }
           helperText={formik.touched.mobileNumber && formik.errors.mobileNumber}
           variant='outlined'
           autoFocus
@@ -145,14 +155,20 @@ const EmployeeBasicInfoForm = ({ formik }) => {
       </Grid>
       <Grid item xs={12} sm={4}>
         <TextField
-          id='CitizeshipNumber'
+          id='CitizenshipNumber'
           name='citizenshipNumber'
           label='Citizenship Number'
+          placeholder='Enter citizenship number'
           fullWidth
           value={formik.values.citizenshipNumber}
           onChange={formik.handleChange}
-          error={formik.touched.citizenshipNumber && Boolean(formik.errors.citizenshipNumber)}
-          helperText={formik.touched.citizenshipNumber && formik.errors.citizenshipNumber}
+          error={
+            formik.touched.citizenshipNumber &&
+            Boolean(formik.errors.citizenshipNumber)
+          }
+          helperText={
+            formik.touched.citizenshipNumber && formik.errors.citizenshipNumber
+          }
           variant='outlined'
           autoFocus
           InputLabelProps={{ shrink: true }}
@@ -162,7 +178,8 @@ const EmployeeBasicInfoForm = ({ formik }) => {
         <TextField
           id='panNumber'
           name='panNumber'
-          label='panNumber'
+          label='PAN Number'
+          placeholder='Enter PAN number'
           fullWidth
           value={formik.values.panNumber}
           onChange={formik.handleChange}
@@ -177,11 +194,14 @@ const EmployeeBasicInfoForm = ({ formik }) => {
         <TextField
           id='officeEmail'
           name='officeEmail'
-          label='officeEmail'
+          label='Office Email'
+          placeholder='Enter office email'
           fullWidth
           value={formik.values.officeEmail}
           onChange={formik.handleChange}
-          error={formik.touched.officeEmail && Boolean(formik.errors.officeEmail)}
+          error={
+            formik.touched.officeEmail && Boolean(formik.errors.officeEmail)
+          }
           helperText={formik.touched.officeEmail && formik.errors.officeEmail}
           variant='outlined'
           autoFocus
@@ -190,14 +210,19 @@ const EmployeeBasicInfoForm = ({ formik }) => {
       </Grid>
       <Grid item xs={12} sm={4}>
         <TextField
-          id="maritalStatus"
+          id='maritalStatus'
           select
-          label="maritalStatus"
+          label='Marital Status'
+          placeholder='Select marital status'
           fullWidth
           value={formik.values.maritalStatus}
           onChange={formik.handleChange}
-          error={formik.touched.maritalStatus && Boolean(formik.errors.maritalStatus)}
-          helperText={formik.touched.maritalStatus && formik.errors.maritalStatus}
+          error={
+            formik.touched.maritalStatus && Boolean(formik.errors.maritalStatus)
+          }
+          helperText={
+            formik.touched.maritalStatus && formik.errors.maritalStatus
+          }
           variant='outlined'
           autoFocus
           InputLabelProps={{ shrink: true }}
@@ -209,7 +234,6 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           ))}
         </TextField>
       </Grid>
-
     </Grid>
   );
 };
