@@ -8,6 +8,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Applayout from '../layout/Applayout';
 import AdminLayout from '../layout/AdminLayout';
 import ProtectedRoute from './ProtectedRoute';
+import EmployeeOverview from '../app/pages/Employee/AddEmployee/EmployeeOverview/EmployeeOverview';
+// import EmployeeOverview from '../app/pages/Employee/EmployeeOverview/EmployeeOverview';
 
 const Dashboard = Loadable(lazy(() => import('../app/pages/Dashboard/Dashboard')));
 const Employee = Loadable(lazy(() => import('../app/pages/Employee/Employee')));
@@ -28,6 +30,7 @@ const AppRoutes = () => {
               <Route element={<ProtectedRoute redirectTo='/' />}>
                 <Route path='dashboard' exact element={<Dashboard />} />
                 <Route path='employee' exact element={<Employee />} />
+                <Route path='employeeview' exact element={<EmployeeOverview />} />
                 <Route path='employee/add' exact element={<AddEmployee />} />
                 <Route path='designation' exact element={<Designation />} />
                 <Route path='department' exact element={<Department />} />
