@@ -1,4 +1,4 @@
-import { axiosInstance } from "../../auth/axiosInterceptor";
+import { axiosInstance } from "../../../auth/axiosInterceptor";
 
 export const getCompany = async () => {
   const data = await axiosInstance.get(`/company`);

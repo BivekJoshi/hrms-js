@@ -11,6 +11,7 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import { Email, LocalPhone } from '@mui/icons-material';
 import { Avatar } from '@mui/material';
+import { NavLink } from 'react-router-dom';
 
 
 const Employee = () => {
@@ -21,6 +22,7 @@ const Employee = () => {
     <Stack spacing={{ xs: 1, sm: 2 }} direction="row" useFlexGap flexWrap="wrap">
       {employeeData.map((employee) => (
         <Paper
+          key={employee.id}
           sx={{
             p: 2,
             // margin: 'auto',
@@ -35,7 +37,7 @@ const Employee = () => {
               <ButtonBase sx={{ width: 110, height: 150 }}>
                 <Avatar
                   alt="Remy Sharp"
-                  src="/static/images/avatar/1.jpg"
+                  src=""
                   sx={{ width: 66, height: 66 }}
                 />
               </ButtonBase>
@@ -69,7 +71,9 @@ const Employee = () => {
                 <Grid container direction="row" justifyContent="flex-end">
                   <Stack spacing={2} direction="row">
                     <Button variant="outlined">Edit</Button>
-                    <Button variant="contained">View Profile</Button>
+                    <NavLink to={`${employee.id}`}>
+                      <Button variant="contained">View Profile</Button>
+                    </NavLink>
                   </Stack>
                 </Grid>
               </Grid>
