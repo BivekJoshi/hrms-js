@@ -1,12 +1,8 @@
 import * as React from 'react';
-// import { useGetCompany } from '../../hooks/useCompany';
 import MaterialTable from '@material-table/core';
 import { useGetCompany } from '../../hooks/company/useCompany';
 
 const Company = () => {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
 
   const { data: companyData, isLoading } = useGetCompany();
   if (isLoading) return <>Loading</>;
@@ -14,7 +10,22 @@ const Company = () => {
     <>
       {' '}
       <MaterialTable
-        columns={[]}
+        columns={[
+          {
+            title: "Company Name",
+            field: "companyName",
+            emptyValue: "-",
+          },
+          {
+            title: "Company Type",
+            field: "companyType",
+            emptyValue: "-",
+          },{
+            title: "Description",
+            field: "companyDescription",
+            emptyValue: "-",
+          },
+        ]}
         data={companyData}
         title='Company'
         isLoading={isLoading}
