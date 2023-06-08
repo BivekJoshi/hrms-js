@@ -100,7 +100,39 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           ))}
         </Select>
       </Grid>
-    
+      <Grid item xs={12} sm={4}>
+        <TextField
+          type='date'
+          id='dateOfBirth'
+          name='dateOfBirth'
+          label='Date of Birth'
+          placeholder='Select your date of birth'
+          fullWidth
+          value={formik.values.dateOfBirth}
+          onChange={formik.handleChange}
+          error={
+            formik.touched.dateOfBirth && Boolean(formik.errors.dateOfBirth)
+          }
+          helperText={formik.touched.dateOfBirth && formik.errors.dateOfBirth}
+          variant='outlined'
+          autoFocus
+          InputLabelProps={{ shrink: true }}
+        />
+      </Grid>
+      <Grid item xs={12} sm={4}>
+        <TextField
+          id='dateOfJoin'
+          name='dateOfJoin'
+          label='Date of Join'
+          placeholder='Select date of join'
+          fullWidth
+          value={formik.values.dateOfJoin}
+          onChange={formik.handleChange}
+          error={formik.touched.dateOfJoin && Boolean(formik.errors.dateOfJoin)}
+          helperText={formik.touched.dateOfJoin && formik.errors.dateOfJoin}
+          InputLabelProps={{ shrink: true }}
+        />
+      </Grid>
       <Grid item xs={12} sm={4}>
         <TextField
           id='mobileNumber'
