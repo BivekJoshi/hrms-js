@@ -1,6 +1,6 @@
 import { useFormik } from 'formik';
 import { addLeaveSchema } from './addLeaveSchema';
-import { useAddLeave } from './useLeave';
+import { useAddLeave } from '../useLeave';
 
 const useAddLeaveTypeForm = () => {
     const { mutate } = useAddLeave({});

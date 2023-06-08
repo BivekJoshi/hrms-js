@@ -1,6 +1,6 @@
 import { Grid, TextField, Button } from '@mui/material'
 import React from 'react'
-import useAddDepartmentForm from '../../../hooks/department/useAddDepartmentForm';
+import useAddDepartmentForm from '../../../hooks/department/addDepartment/useAddDepartmentForm';
 import { toast } from 'react-toastify';
 
 

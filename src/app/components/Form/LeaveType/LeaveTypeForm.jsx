@@ -1,7 +1,7 @@
 import { Grid, TextField, Button, FormControlLabel, Switch } from '@mui/material'
 import React from 'react'
 import { toast } from 'react-toastify';
-import useAddLeaveTypeForm from '../../../hooks/leaveType/useAddLeaveTypeForm';
+import useAddLeaveTypeForm from '../../../hooks/leaveType/addLeaveType/useAddLeaveTypeForm';
 import { ThemeSwitch } from '../../../../theme/ThemeSwitch';
 
 

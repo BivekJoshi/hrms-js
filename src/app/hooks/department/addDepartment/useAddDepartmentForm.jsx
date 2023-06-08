@@ -1,6 +1,6 @@
 import React from 'react';
 import { useFormik } from 'formik';
-import { useAddDepartment } from './useDepartment';
+import { useAddDepartment } from '../useDepartment';
 import { addDepartmentSchema } from './addDepartmentSchema';
 
 const useAddDepartmentForm = () => {

@@ -1,5 +1,5 @@
 import { useFormik } from 'formik';
-import { useAddDesignation } from './useDesignation';
+import { useAddDesignation } from '../useDesignation';
 import { addDesignationSchema } from './addDesigationSchema';
 
 const useAddDepartmentForm = () => {

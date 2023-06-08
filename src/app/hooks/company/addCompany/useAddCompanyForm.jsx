@@ -1,5 +1,5 @@
 import { useFormik } from 'formik';
-import { useAddCompany } from './useCompany';
+import { useAddCompany } from '../useCompany';
 import { addCompanySchema } from './addCompanySchema';
 
 const useAddCompanyForm = () => {

@@ -1,7 +1,7 @@
 import { Grid, TextField, Button } from '@mui/material'
 import React from 'react'
 import { toast } from 'react-toastify';
-import useAddDepartmentForm from '../../../hooks/designation/useAddDesignationForm';
+import useAddDepartmentForm from '../../../hooks/designation/addDesignation/useAddDesignationForm';
 
 
 const DesignationForm = ({ onClose }) => {
