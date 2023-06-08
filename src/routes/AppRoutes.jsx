@@ -10,6 +10,7 @@ import ProtectedRoute from './ProtectedRoute';
 import Employee from '../app/pages/Employee/Employee';
 import AddEmployee from '../app/pages/Employee/AddEmployee/AddEmployee';
 import LoginLayout from '../app/pages/Login/LoginLayout';
+import Attendance from '../app/pages/Attendance/Attendance';
 
 const AppRoutes = () => {
   return (
@@ -23,6 +24,8 @@ const AppRoutes = () => {
                 <Route path='dashboard' exact element={<Dashboard />} />
                 <Route path='employee' exact element={<Employee />} />
                 <Route path='employee/add' exact element={<AddEmployee />} />
+                <Route path='empAttendance' exact element={<Attendance />} />
+
               </Route>
             </Route>
           </Route>

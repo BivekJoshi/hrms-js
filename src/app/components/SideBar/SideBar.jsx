@@ -120,6 +120,11 @@ export default function SideBar() {
           path: 'employee/add',
           icon: <InboxIcon />,
         },
+        {
+          name:'Attendance',
+          path: 'empAttendance'
+        }
+        
       ],
     },
   ];

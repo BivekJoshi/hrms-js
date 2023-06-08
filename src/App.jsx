@@ -2,6 +2,7 @@ import * as React from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AppRoutes from './routes/AppRoutes';
+import Attendance from './app/pages/Attendance/Attendance';
 export default function App() {
   return (
     <>
@@ -16,8 +17,9 @@ export default function App() {
         theme='light'
         draggable
         pauseOnHover
-      />
-      <AppRoutes />
-    </>
+      /> 
+       <AppRoutes />
+
+  </>
   );
 }
