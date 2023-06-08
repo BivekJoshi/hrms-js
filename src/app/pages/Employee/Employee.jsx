@@ -1,5 +1,5 @@
-import React from 'react';
-import { useGetEmployee } from '../../hooks/employee/useEmployee';
+import React from "react";
+import { useGetEmployee } from "../../hooks/employee/useEmployee";
 
 const Employee = () => {
   const { data: employeeData, isLoading } = useGetEmployee();
