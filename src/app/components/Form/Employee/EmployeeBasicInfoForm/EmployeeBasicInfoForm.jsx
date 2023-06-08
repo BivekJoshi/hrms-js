@@ -1,5 +1,4 @@
 import { Grid, MenuItem, TextField, Select } from '@mui/material';
-import { DatePicker } from '@mui/x-date-pickers';
 import React from 'react';
 
 const gender = [
@@ -101,40 +100,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           ))}
         </Select>
       </Grid>
-      <Grid item xs={12} sm={4}>
-        <DatePicker
-          id='dateOfBirth'
-          name='dateOfBirth'
-          label='Date of Birth'
-          placeholder='Select your date of birth'
-          fullWidth
-          value={formik.values.dateOfBirth}
-          onChange={formik.handleChange}
-          error={
-            formik.touched.dateOfBirth && Boolean(formik.errors.dateOfBirth)
-          }
-          helperText={formik.touched.dateOfBirth && formik.errors.dateOfBirth}
-          variant='outlined'
-          autoFocus
-          InputLabelProps={{ shrink: true }}
-        />
-      </Grid>
-      <Grid item xs={12} sm={4}>
-        <DatePicker
-          id='dateOfJoin'
-          name='dateOfJoin'
-          label='Date of Join'
-          placeholder='Select date of join'
-          fullWidth
-          value={formik.values.dateOfJoin}
-          onChange={formik.handleChange}
-          error={formik.touched.dateOfJoin && Boolean(formik.errors.dateOfJoin)}
-          helperText={formik.touched.dateOfJoin && formik.errors.dateOfJoin}
-          variant='outlined'
-          autoFocus
-          InputLabelProps={{ shrink: true }}
-        />
-      </Grid>
+    
       <Grid item xs={12} sm={4}>
         <TextField
           id='mobileNumber'
