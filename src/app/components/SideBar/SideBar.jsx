@@ -135,6 +135,11 @@ export default function SideBar() {
 					path: 'employee/add',
 					icon: <InboxIcon />,
 				},
+				{
+					name: 'Overview',
+					path: 'overview',
+					icon: <InboxIcon />,
+				},
 			],
 		},
 		{

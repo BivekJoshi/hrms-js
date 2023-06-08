@@ -10,6 +10,8 @@ import ProtectedRoute from './ProtectedRoute';
 // import Employee from '../app/pages/Employee/Employee';
 // import AddEmployee from '../app/pages/Employee/AddEmployee/AddEmployee';
 import LoginLayout from '../app/pages/Login/LoginLayout';
+import EmployeeOverview from '../app/pages/Employee/Overview/EmployeeOverview';
+import TodoList from '../app/pages/TodoList/TodoList';
 
 const Dashboard = Loadable(
 	lazy(() => import('../app/pages/Dashboard/Dashboard'))
@@ -41,6 +43,8 @@ const AppRoutes = () => {
 								<Route path='designation' exact element={<Designation />} />
 								<Route path='department' exact element={<Department />} />
 								<Route path='company' exact element={<Company />} />
+								<Route path='overview' exact element={<EmployeeOverview />} />
+								<Route path='todolist' exact element={<TodoList />} />
 							</Route>
 						</Route>
 					</Route>
