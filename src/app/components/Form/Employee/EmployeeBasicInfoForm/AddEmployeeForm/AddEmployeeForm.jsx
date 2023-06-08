@@ -19,6 +19,7 @@ const steps = [
   'Address Details',
   'Other Details',
 ];
+
 const AddEmployeeForm = () => {
   const [activeStep, setActiveStep] = useState(0);
   const { formik } = useAddEmployeeForm();

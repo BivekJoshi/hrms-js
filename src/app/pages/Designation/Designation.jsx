@@ -7,8 +7,22 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { useGetDesignation } from '../../hooks/useDesignation';
+import { useGetDesignation } from '../../hooks/designation/useDesignation';
+import { Box, Button, Modal } from '@mui/material';
+import DesignationForm from '../../components/Form/Designation/DesignationForm';
 
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -31,9 +45,27 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const Designation = () => {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   const { data: designationData, isLoading } = useGetDesignation();
   if (isLoading) return <>Loading</>;
   return (
+    <>
+    <div>
+        <Button onClick={handleOpen}>+Add Department</Button>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <DesignationForm onClose={handleClose}/>
+          </Box>
+        </Modal>
+      </div>
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
@@ -59,6 +91,7 @@ const Designation = () => {
         </TableBody>
       </Table>
     </TableContainer>
+    </>
   );
 }
 export default Designation

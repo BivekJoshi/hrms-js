@@ -1,8 +1,13 @@
 import * as React from 'react';
-import { useGetCompany } from '../../hooks/useCompany';
+// import { useGetCompany } from '../../hooks/useCompany';
 import MaterialTable from '@material-table/core';
+import { useGetCompany } from '../../hooks/company/useCompany';
 
 const Company = () => {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   const { data: companyData, isLoading } = useGetCompany();
   if (isLoading) return <>Loading</>;
   return (

@@ -126,6 +126,16 @@ export default function SideBar() {
           icon: <InboxIcon />,
         },
         {
+          name: 'Leave',
+          path: 'leave',
+          icon: <InboxIcon />,
+        },
+        {
+          name: 'Leave Type',
+          path: 'leavetype',
+          icon: <InboxIcon />,
+        },
+        {
           name: 'Attendance',
           path: 'employee/add',
           icon: <InboxIcon />,

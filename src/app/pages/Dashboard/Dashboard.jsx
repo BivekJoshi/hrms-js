@@ -1,5 +1,5 @@
 import React from 'react';
-import DashboardCard from '../../components/cards/DashboardCard';
+import DashboardCard from '../../components/cards/Dashboard/DashboardCard';
 import { Grid, Typography } from '@mui/material';
 
 const Dashboard = () => {
