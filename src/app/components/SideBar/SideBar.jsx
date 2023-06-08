@@ -89,7 +89,7 @@ export default function SideBar() {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const { toggleMode, themeMode } = useContext(ThemeModeContext); // Accessing themeMode from context
-
+  console.log(useContext(ThemeModeContext));
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -128,7 +128,56 @@ export default function SideBar() {
           path: "employee/add",
           icon: <InboxIcon />,
         },
+        {
+          name: 'Employee',
+          path: 'employee/add',
+          icon: <InboxIcon />,
+        },
+        {
+          name: 'Leave',
+          path: 'leave',
+          icon: <InboxIcon />,
+        },
+        {
+          name: 'Leave Type',
+          path: 'leavetype',
+          icon: <InboxIcon />,
+        },
+        {
+          name: 'Attendance',
+          path: 'employee/add',
+          icon: <InboxIcon />,
+        },
+        {
+          name: 'Birthday',
+          path: 'employee/add',
+          icon: <InboxIcon />,
+        },
       ],
+    },
+    {
+      name: 'Department',
+      icon: <InboxIcon />,
+      path: 'department',
+      subMenus: [],
+    },
+    {
+      name: 'Designation',
+      icon: <InboxIcon />,
+      path: 'designation',
+      subMenus: [],
+    },
+    {
+      name: 'Company',
+      icon: <InboxIcon />,
+      path: 'company',
+      subMenus: [],
+    },
+    {
+      name: 'ToDo List',
+      icon: <InboxIcon />,
+      path: 'todolist',
+      subMenus: [],
     },
   ];
 
