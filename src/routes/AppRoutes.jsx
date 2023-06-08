@@ -8,8 +8,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Applayout from '../layout/Applayout';
 import AdminLayout from '../layout/AdminLayout';
 import ProtectedRoute from './ProtectedRoute';
-import EmployeeOverview from '../app/pages/Employee/AddEmployee/EmployeeOverview/EmployeeOverview';
-// import EmployeeOverview from '../app/pages/Employee/EmployeeOverview/EmployeeOverview';
+
 
 const Dashboard = Loadable(lazy(() => import('../app/pages/Dashboard/Dashboard')));
 const Employee = Loadable(lazy(() => import('../app/pages/Employee/Employee')));
@@ -18,6 +17,8 @@ const Designation = Loadable(lazy(() => import('../app/pages/Designation/Designa
 const Department = Loadable(lazy(() => import('../app/pages/Department/Department')));
 const Company = Loadable(lazy(() => import('../app/pages/Company/Company')));
 const EmployeeOverview = Loadable(lazy(() => import('../app/pages/Employee/AddEmployee/EmployeeOverview/EmployeeOverview')));
+const LeaveType = Loadable(lazy(() => import('../app/pages/LeaveType/LeaveType')));
+const Leave = Loadable(lazy(() => import('../app/pages/Leave/Leave')));
 
 const AppRoutes = () => {
   return (
@@ -32,6 +33,8 @@ const AppRoutes = () => {
                 <Route path='employee' exact element={<Employee />} />
                 <Route path="employee/:id" element={<EmployeeOverview />} />
                 <Route path='employee/add' exact element={<AddEmployee />} />
+                <Route path='leave' exact element={<Leave />} />
+                <Route path='leavetype' exact element={<LeaveType />} />
                 <Route path='designation' exact element={<Designation />} />
                 <Route path='department' exact element={<Department />} />
                 <Route path='company' exact element={<Company />} />
