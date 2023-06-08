@@ -26,7 +26,7 @@ const AddEmployeeForm = () => {
   const handleNext = () => {
     switch (activeStep) {
       case 0:
-        formik.setFieldTouched('serviceProviderId');
+        formik.setFieldTouched('');
         break;
 
       default:
@@ -54,7 +54,7 @@ const AddEmployeeForm = () => {
   };
 
   return (
-    <Container component='main' maxWidth='md' sx={{ mt: 5 }}>
+    <Container component='main' maxWidth='xlg' sx={{ mt: 5 }}>
       <Paper variant='plain' sx={{ my: { xs: 0, md: 6 }, p: { xs: 0, md: 3 } }}>
         <Typography component='h1' varient='h4' align='center'>
           Add Employee

@@ -5,6 +5,11 @@ export const getEmployee = async () => {
   return data;
 };
 
+export const getEmployeeById = (id) => {
+  const data = axiosInstance.get(`employee/${id}`);
+  return data;
+};
+
 export const addEmployee = async (formData) => {
   const data = await axiosInstance.post('/employee', formData);
   return data;

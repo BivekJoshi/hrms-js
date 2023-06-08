@@ -9,7 +9,7 @@ const Company = () => {
     <>
       {' '}
       <MaterialTable
-        columns={columns}
+        columns={[]}
         data={companyData}
         title='Company'
         isLoading={isLoading}

@@ -1,9 +1,16 @@
 import { useMutation, useQuery } from 'react-query';
-import { addEmployee, getEmployee } from '../../api/employee/employee-api';
+import { addEmployee, getEmployee, getEmployeeById } from '../../api/employee/employee-api';
 import { toast } from 'react-toastify';
 
 export const useGetEmployee = () => {
   return useQuery(['getEmployee'], () => getEmployee(), {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
+};
+
+export const useGetEmployeeById = (id) => {
+  return useQuery(['getEmployeeById'], () => getEmployeeById(id), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
