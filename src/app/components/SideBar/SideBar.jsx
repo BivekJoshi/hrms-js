@@ -6,7 +6,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
-import Typography from '@mui/material/Typography';
+import Typography from '@mui/material/Typography';git 
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -23,7 +23,9 @@ import { Button, Collapse, Switch } from '@mui/material';
 import { ThemeModeContext } from '../../../theme/ThemeModeContext';
 import { removeUser } from '../../utils/cookieHelper';
 
-const drawerWidth = 240;
+import DashboardRoundedIcon from '@mui/icons-material/DashboardRounded';
+
+const drawerWidth = 260;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
@@ -106,7 +108,7 @@ export default function SideBar() {
   const drawerMenus = [
     {
       name: 'Dashboard',
-      icon: <InboxIcon />,
+      icon: <DashboardRoundedIcon />,
       path: 'dashboard',
       subMenus: [],
     },
