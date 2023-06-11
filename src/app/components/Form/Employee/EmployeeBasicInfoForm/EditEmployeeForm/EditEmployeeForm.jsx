@@ -13,6 +13,7 @@ import { toast } from 'react-toastify';
 import EmployeeBasicInfoForm from '../EmployeeBasicInfoForm';
 import useEditEmployeeForm from '../../../../../hooks/employee/EditEmployee/useEditEmployeeForm';
 import Modal from '@mui/material/Modal';
+import EmployeeEducationDetailForm from '../../EmployeeEducationDetailForm/EmployeeEducationDetailForm';
 
 const steps = [
   'Basic Details',
@@ -22,13 +23,14 @@ const steps = [
 ];
 const EditEmployeeForm = () => {
   const [activeStep, setActiveStep] = useState(0);
-  const { formik } = useEditEmployeeForm();
+  const { formik, isLoading } = useEditEmployeeForm();
 
   const handleNext = () => {
     switch (activeStep) {
       case 0:
         formik.setFieldTouched('');
         break;
+      case 1: 
 
       default:
         break;
@@ -39,7 +41,10 @@ const EditEmployeeForm = () => {
   const getStepContent = (step) => {
     switch (step) {
       case 0:
-        return <EmployeeBasicInfoForm formik={formik} />;
+        return <EmployeeBasicInfoForm formik={formik} isLoading={isLoading} />;
+
+      case 1:
+        return <EmployeeEducationDetailForm />;
 
       default:
         throw new Error('Unknown Step');
@@ -105,7 +110,7 @@ const EditEmployeeForm = () => {
                 ) : (
                   <Button
                     variant='contained'
-                    onClick={handleNext}
+                        onClick={() => { formik.handleSubmit(); handleNext }}
                     sx={{ mt: 3, ml: 1 }}
                   >
                     Next
