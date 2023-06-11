@@ -1,0 +1,51 @@
+.container {
+  height: 100vh;
+  display: flex;
+
+  padding: 0 2rem;
+}
+.wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  z-index: -1;
+}
+.login-left {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: cover;
+  margin: 64px 0;
+
+  align-items: center;
+}
+.login-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.welcome-text {
+  font-size: x-large;
+  font-weight: 600;
+  text-align: center;
+}
+.avatar {
+  height: 100px;
+}
+
+@media (max-width: 900px) {
+  .wave {
+    display: none;
+  }
+  .login-left {
+    display: none;
+  }
+  .login-right {
+    justify-content: center;
+  }
+}
