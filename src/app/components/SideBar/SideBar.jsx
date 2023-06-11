@@ -23,7 +23,9 @@ import { Button, Collapse, Switch } from '@mui/material';
 import { ThemeModeContext } from '../../../theme/ThemeModeContext';
 import { removeUser } from '../../utils/cookieHelper';
 
-const drawerWidth = 240;
+import DashboardRoundedIcon from '@mui/icons-material/DashboardRounded';
+
+const drawerWidth = 260;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
 	({ theme, open }) => ({
