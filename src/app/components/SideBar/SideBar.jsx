@@ -87,7 +87,7 @@ export default function SideBar() {
 	const navigate = useNavigate();
 	const [open, setOpen] = useState(false);
 	const { toggleMode, themeMode } = useContext(ThemeModeContext); // Accessing themeMode from context
-
+	console.log(useContext(ThemeModeContext));
 	const handleDrawerOpen = () => {
 		setOpen(true);
 	};
@@ -126,6 +126,16 @@ export default function SideBar() {
 					icon: <InboxIcon />,
 				},
 				{
+					name: 'Leave',
+					path: 'leave',
+					icon: <InboxIcon />,
+				},
+				{
+					name: 'Leave Type',
+					path: 'leavetype',
+					icon: <InboxIcon />,
+				},
+				{
 					name: 'Attendance',
 					path: 'employee/add',
 					icon: <InboxIcon />,
@@ -133,11 +143,6 @@ export default function SideBar() {
 				{
 					name: 'Birthday',
 					path: 'employee/add',
-					icon: <InboxIcon />,
-				},
-				{
-					name: 'Overview',
-					path: 'overview',
 					icon: <InboxIcon />,
 				},
 			],
