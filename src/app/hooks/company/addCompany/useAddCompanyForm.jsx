@@ -1,18 +1,17 @@
 import { useFormik } from 'formik';
-import { useAddLeaveType } from './useLeaveType';
-import { addLeaveTypeSchema } from './addLeaveTypeScheme';
+import { useAddCompany } from '../useCompany';
+import { addCompanySchema } from './addCompanySchema';
 
-const useAddLeaveTypeForm = () => {
-    const { mutate } = useAddLeaveType({});
+const useAddCompanyForm = () => {
+    const { mutate } = useAddCompany({});
 
     const formik = useFormik({
         initialValues: {
-            leaveName: '',
-            leaveTotal: '',
-            leaveDescription: '',
-            carryForward: '',
+            companyName: '',
+            companyType: '',
+            companyDescription: '',
         },
-        validationSchema: addLeaveTypeSchema,
+        validationSchema: addCompanySchema,
         onSubmit: (values) => {
             handleRequest(values);
         },
@@ -28,4 +27,4 @@ const useAddLeaveTypeForm = () => {
     return { formik };
 };
 
-export default useAddLeaveTypeForm;
+export default useAddCompanyForm;
