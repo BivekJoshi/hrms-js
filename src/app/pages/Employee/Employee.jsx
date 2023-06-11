@@ -18,7 +18,6 @@ const Employee = () => {
   const { data: employeeData, isLoading } = useGetEmployee();
   if (isLoading) return <>Loading</>;
   return (
-    // <div>{employeeData[0].firstName}</div>
     <Stack spacing={{ xs: 1, sm: 2 }} direction="row" useFlexGap flexWrap="wrap">
       {employeeData.map((employee) => (
         <Paper

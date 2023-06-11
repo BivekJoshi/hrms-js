@@ -13,7 +13,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useLoginForm } from '../../../auth/hooks/component/login/useLoginForm';
 import './Login.css';
-import bg1 from '../../../assets/background.svg';
+import main from '../../../assets/main.png';
 
 const Login = () => {
   const {
@@ -28,20 +28,20 @@ const Login = () => {
       <div className='container'>
         <img
           className='wave'
-          src='https://raw.githubusercontent.com/sefyudem/Responsive-Login-Form/master/img/wave.png'
+          src=''
         />
         <div
           className='login-left'
-          style={{ backgroundImage: `url(${bg1})` }}
+          style={{ backgroundImage: `url(${main})` }}
         ></div>
         <div className='login-right'>
           <Box component='form' noValidate className='input-section'>
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
+            {/* <div style={{ display: 'flex', justifyContent: 'center' }}>
               <img
                 className='avatar'
                 src='https://raw.githubusercontent.com/sefyudem/Responsive-Login-Form/master/img/avatar.svg'
               />
-            </div>
+            </div> */}
             <p className='welcome-text'>WELCOME</p>
             <Grid>
               <TextField

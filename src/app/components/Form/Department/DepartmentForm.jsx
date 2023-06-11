@@ -27,6 +27,11 @@ const DepartmentForm = ({ onClose }) => {
                     variant='outlined'
                     autoFocus
                     InputLabelProps={{ shrink: true }}
+                    // sx={{
+                    //     '& .MuiInputBase-root': {
+                    //         fontSize: '16px',
+                    //       },
+                    // }}
                 />
             </Grid>
             <Grid item xs={12} sm={12}>
