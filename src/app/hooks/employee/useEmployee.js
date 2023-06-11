@@ -1,5 +1,9 @@
 import { useMutation, useQuery } from 'react-query';
-import { addEmployee, getEmployee, getEmployeeById } from '../../api/employee/employee-api';
+import {
+  addEmployee,
+  getEmployee,
+  getEmployeeById,
+} from '../../api/employee/employee-api';
 import { toast } from 'react-toastify';
 
 export const useGetEmployee = () => {
@@ -16,10 +20,22 @@ export const useGetEmployeeById = (id) => {
   });
 };
 
-export const useAddEmployee = ({ onSuccess }) => {
+export const useEditEmployee = ({ onSuccess }) => {
   return useMutation(['addEmployee'], (formData) => addEmployee(formData), {
     onSuccess: (data, variables, context) => {
-      toast.success('Succesfully added Employee');
+      toast.success('Employee added successfully');
+      onSuccess && onSuccess(data, variables, context);
+    },
+    onError: (err, _variables, _context) => {
+      toast.error(`error: ${err.message}`);
+    },
+  });
+};
+
+export const useAddEmployee = ({ onSuccess }) => {
+  return useMutation(['addEmployees'], (formData) => addEmployee(formData), {
+    onSuccess: (data, variables, context) => {
+      toast.success('Employee added successfully');
       onSuccess && onSuccess(data, variables, context);
     },
     onError: (err, _variables, _context) => {

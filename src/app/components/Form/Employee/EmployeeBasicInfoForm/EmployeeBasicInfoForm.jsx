@@ -1,5 +1,8 @@
 import { Grid, MenuItem, TextField, Select } from '@mui/material';
 import React from 'react';
+import { useGetCompany } from '../../../../hooks/company/useCompany';
+import { useGetDesignation } from '../../../../hooks/designation/useDesignation';
+import { useGetDepartment } from '../../../../hooks/department/useDepartment';
 
 const gender = [
   {
@@ -27,10 +30,19 @@ const maritalStatus = [
 ];
 
 const EmployeeBasicInfoForm = ({ formik }) => {
-  // console.log("bivek", formik)
+  const { data: departmentData, isLoading: loadingDepartment } = useGetDepartment();
+  const { data: companyData, isLoading: loadingCompany } = useGetCompany();
+  const { data: designationData, isLoading: loadingDesignation } = useGetDesignation();
+
+  console.log(companyData);
+  console.log(designationData);
+  console.log(departmentData);
+
   return (
+
     <Grid container spacing={3}>
       <Grid item xs={12} sm={4}>
+
         <TextField
           id='firstName'
           name='firstName'
@@ -79,8 +91,9 @@ const EmployeeBasicInfoForm = ({ formik }) => {
         />
       </Grid>
       <Grid item xs={12} sm={4}>
-        <Select
+        <TextField
           id='gender'
+          name='gender'
           select
           label='Gender'
           placeholder='Select your gender'
@@ -98,15 +111,15 @@ const EmployeeBasicInfoForm = ({ formik }) => {
               {option.label}
             </MenuItem>
           ))}
-        </Select>
+        </TextField>
       </Grid>
       <Grid item xs={12} sm={4}>
         <TextField
-          type='date'
-          id='dateOfBirth'
           name='dateOfBirth'
           label='Date of Birth'
-          placeholder='Select your date of birth'
+          type='date'
+          required
+          InputLabelProps={{ shrink: true }}
           fullWidth
           value={formik.values.dateOfBirth}
           onChange={formik.handleChange}
@@ -114,23 +127,20 @@ const EmployeeBasicInfoForm = ({ formik }) => {
             formik.touched.dateOfBirth && Boolean(formik.errors.dateOfBirth)
           }
           helperText={formik.touched.dateOfBirth && formik.errors.dateOfBirth}
-          variant='outlined'
-          autoFocus
-          InputLabelProps={{ shrink: true }}
         />
       </Grid>
       <Grid item xs={12} sm={4}>
         <TextField
-          id='dateOfJoin'
           name='dateOfJoin'
           label='Date of Join'
-          placeholder='Select date of join'
+          type='date'
+          required
+          InputLabelProps={{ shrink: true }}
           fullWidth
           value={formik.values.dateOfJoin}
           onChange={formik.handleChange}
           error={formik.touched.dateOfJoin && Boolean(formik.errors.dateOfJoin)}
           helperText={formik.touched.dateOfJoin && formik.errors.dateOfJoin}
-          InputLabelProps={{ shrink: true }}
         />
       </Grid>
       <Grid item xs={12} sm={4}>
@@ -209,6 +219,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
       <Grid item xs={12} sm={4}>
         <TextField
           id='maritalStatus'
+          name='maritalStatus'
           select
           label='Marital Status'
           placeholder='Select marital status'
@@ -232,8 +243,83 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           ))}
         </TextField>
       </Grid>
+      <Grid item xs={12} sm={4}>
+        <TextField
+          id='companyId'
+          name='companyId'
+          select
+          label='Company Name'
+          placeholder='Select your company'
+          fullWidth
+          value={formik.values.companyId}
+          onChange={formik.handleChange}
+          error={formik.touched.companyId && Boolean(formik.errors.companyId)}
+          helperText={formik.touched.companyId && formik.errors.companyId}
+          variant='outlined'
+          autoFocus
+          InputLabelProps={{ shrink: true }}
+        >
+          {!loadingCompany &&
+            companyData.map((option) => (
+              <MenuItem key={option.id} value={option.id}>
+                {option.companyName}
+              </MenuItem>
+            ))}
+        </TextField>
+      </Grid>
+      <Grid item xs={12} sm={4}>
+        <TextField
+          id='positionId'
+          name='positionId'
+          select
+          label='Designation'
+          placeholder='Select your designation'
+          fullWidth
+          value={formik.values.positionId}
+          onChange={formik.handleChange}
+          error={formik.touched.positionId && Boolean(formik.errors.positionId)}
+          helperText={formik.touched.positionId && formik.errors.positionId}
+          variant='outlined'
+          autoFocus
+          InputLabelProps={{ shrink: true }}
+        >
+          {!loadingDesignation &&
+            designationData.map((option) => (
+              <MenuItem key={option.id} value={option.id}>
+                {option.positionName}
+              </MenuItem>
+            ))}
+        </TextField>
+      </Grid>
+      <Grid item xs={12} sm={4}>
+        <TextField
+          id='departmentId'
+          name='departmentId'
+          select
+          label='Department Name'
+          placeholder='Select your department'
+          fullWidth
+          value={formik.values.departmentId}
+          onChange={formik.handleChange}
+          error={
+            formik.touched.departmentId && Boolean(formik.errors.departmentId)
+          }
+          helperText={formik.touched.departmentId && formik.errors.departmentId}
+          variant='outlined'
+          autoFocus
+          InputLabelProps={{ shrink: true }}
+        >
+          {!loadingDepartment &&
+            departmentData.map((option) => (
+              <MenuItem key={option.id} value={option.id}>
+                {option.departmentName}
+              </MenuItem>
+            ))}
+        </TextField>
+      </Grid>
     </Grid>
-  );
+
+  )
 };
 
 export default EmployeeBasicInfoForm;

@@ -3,18 +3,24 @@ import Loadable from '../app/components/Header/Loader/Loadable';
 import ScrollToTop from '../app/utils/ScrolltoTop';
 import Login from '../app/pages/Login/Login';
 
-
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Applayout from '../layout/Applayout';
 import AdminLayout from '../layout/AdminLayout';
 import ProtectedRoute from './ProtectedRoute';
 
-
-const Dashboard = Loadable(lazy(() => import('../app/pages/Dashboard/Dashboard')));
+const Dashboard = Loadable(
+  lazy(() => import('../app/pages/Dashboard/Dashboard'))
+);
 const Employee = Loadable(lazy(() => import('../app/pages/Employee/Employee')));
-const AddEmployee = Loadable(lazy(() => import('../app/pages/Employee/AddEmployee/AddEmployee')));
-const Designation = Loadable(lazy(() => import('../app/pages/Designation/Designation')));
-const Department = Loadable(lazy(() => import('../app/pages/Department/Department')));
+const EditEmployee = Loadable(
+  lazy(() => import('../app/pages/Employee/AddEmployee/EditEmployee'))
+);
+const Designation = Loadable(
+  lazy(() => import('../app/pages/Designation/Designation'))
+);
+const Department = Loadable(
+  lazy(() => import('../app/pages/Department/Department'))
+);
 const Company = Loadable(lazy(() => import('../app/pages/Company/Company')));
 const EmployeeOverview = Loadable(lazy(() => import('../app/pages/Employee/AddEmployee/EmployeeOverview/EmployeeOverview')));
 const LeaveType = Loadable(lazy(() => import('../app/pages/LeaveType/LeaveType')));
@@ -32,12 +38,13 @@ const AppRoutes = () => {
                 <Route path='dashboard' exact element={<Dashboard />} />
                 <Route path='employee' exact element={<Employee />} />
                 <Route path="employee/:id" element={<EmployeeOverview />} />
-                <Route path='employee/add' exact element={<AddEmployee />} />
+                {/* <Route path='employee/add' exact element={<AddEmployee />} /> */}
                 <Route path='leave' exact element={<Leave />} />
                 <Route path='leavetype' exact element={<LeaveType />} />
                 <Route path='designation' exact element={<Designation />} />
                 <Route path='department' exact element={<Department />} />
                 <Route path='company' exact element={<Company />} />
+                <Route path='employee/edit/:id' element={<EditEmployee/>} />
               </Route>
             </Route>
           </Route>
