@@ -18,10 +18,12 @@ import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
-import { ExpandLess, ExpandMore } from "@mui/icons-material";
-import { Button, Card, Collapse, Switch } from "@mui/material";
+import { CakeOutlined, ExpandLess, ExpandMore } from "@mui/icons-material";
+import { Badge, Button, Card, Collapse, Switch } from "@mui/material";
 import { ThemeModeContext } from "../../../theme/ThemeModeContext";
 import { removeUser } from "../../utils/cookieHelper";
+import { useGetTodayBirthday } from "../../hooks/birthday/useBirthday";
+import TodayBirthday from "../../pages/Birthday/TodayBirthday";
 
 const drawerWidth = 240;
 
