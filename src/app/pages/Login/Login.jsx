@@ -14,6 +14,7 @@ import { Link } from 'react-router-dom';
 import { useLoginForm } from '../../../auth/hooks/component/login/useLoginForm';
 import './Login.css';
 import bg1 from '../../../assets/background.svg';
+import Cookies from 'js-cookie';
 
 const Login = () => {
   const {
@@ -23,6 +24,7 @@ const Login = () => {
     loading,
     handleMouseDownPassword,
   } = useLoginForm({});
+  Cookies.remove('hrms');
   return (
     <>
       <div className='container'>

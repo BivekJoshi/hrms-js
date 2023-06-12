@@ -1,11 +1,5 @@
-import { useTheme } from '@mui/material/styles';
-import { Card, CardContent, CardHeader, Divider, Typography } from '@mui/material';
-import React from 'react'
-
-const headerSX = {
-  p: 2.5,
-  '& .MuiCardHeader-action': { m: '0px auto', alignSelf: 'center' }
-};
+import React from 'react';
+import './MainCard.css'; // Import the CSS file
 
 const MainCard = ({
   border = true,
@@ -17,62 +11,18 @@ const MainCard = ({
   elevation,
   secondary,
   shadow,
-  sx = {},
   title,
   codeHighlight,
   ...others
 }) => {
-  const theme = useTheme();
-  boxShadow = theme.palette.mode === 'dark' ? boxShadow || true : boxShadow;
-
   return (
-    <Card
-      elevation={elevation || 0}
+    <div
+      className={`main-card ${border ? '' : 'no-border'}`}
       {...others}
-      sx={{
-        border: border ? '1px solid' : 'none',
-        borderRadius: 2,
-        borderColor:
-          theme.palette.mode === 'dark'
-            ? theme.palette.divider
-            : theme.palette.grey.A800,
-        boxShadow:
-          boxShadow && (!border || theme.palette.mode === 'dark')
-            ? shadow || theme.customShadows.z1
-            : 'inherit',
-        ':hover': {
-          boxShadow: boxShadow ? shadow || theme.customShadows.z1 : 'inherit'
-        },
-        '& pre': {
-          m: 0,
-          p: '16px !important',
-          fontFamily: theme.typography.fontFamily,
-          fontSize: '0.75rem'
-        },
-        ...sx
-      }}
     >
-      {/* card header and action */}
-      {!darkTitle && title && (
-        <CardHeader
-          sx={headerSX}
-          titleTypographyProps={{ variant: 'subtitle1' }}
-          title={title}
-          action={secondary}
-        />
-      )}
-      {darkTitle && title && (
-        <CardHeader
-          sx={headerSX}
-          title={<Typography variant="h3">{title}</Typography>}
-          action={secondary}
-        />
-      )}
-
-      {/* card content */}
-      {content && <CardContent sx={contentSX}>{children}</CardContent>}
+      {content && <div className="card-content">{children}</div>}
       {!content && children}
-    </Card>
+    </div>
   );
 };
 
