@@ -75,6 +75,7 @@ const Company = () => {
           padding: 'dense',
           margin: 50,
           pageSize: 12,
+          exportRowsWhenPaging: false,
           headerStyle: {
             backgroundColor: '#01579b',
             color: '#FFF',
