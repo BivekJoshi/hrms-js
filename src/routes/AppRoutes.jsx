@@ -2,7 +2,6 @@ import React, { lazy } from "react";
 import Loadable from "../app/components/Header/Loader/Loadable";
 import ScrollToTop from "../app/utils/ScrolltoTop";
 import Login from "../app/pages/Login/Login";
-
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Applayout from "../layout/Applayout";
 import AdminLayout from "../layout/AdminLayout";
@@ -21,6 +20,10 @@ const Designation = Loadable(
 const Department = Loadable(
   lazy(() => import("../app/pages/Department/Department"))
 );
+const Birthday = Loadable(
+  lazy(() => import("../app/pages/Birthday/Birthdaylist"))
+);
+
 const Company = Loadable(lazy(() => import("../app/pages/Company/Company")));
 const EmployeeOverview = Loadable(
   lazy(() =>
@@ -51,6 +54,7 @@ const AppRoutes = () => {
                 <Route path="leavetype" exact element={<LeaveType />} />
                 <Route path="designation" exact element={<Designation />} />
                 <Route path="department" exact element={<Department />} />
+                <Route path="birthday" exact element={<Birthday />} />
                 <Route path="company" exact element={<Company />} />
               </Route>
             </Route>

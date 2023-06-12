@@ -1,30 +1,24 @@
-import React, { useState } from "react";
-import { Button, Menu, MenuItem } from "@mui/material";
-import { Cake } from "@mui/icons-material";
-import { useGetTodayBirthday } from "../../hooks/birthday/useBirthday";
+import React from "react";
+import { Menu, MenuItem } from "@mui/material";
+
 import PersonIcon from "@mui/icons-material/Person";
-const TodayBirthday = () => {
-  const [open, setOpen] = useState(false);
-  const [todayBirthdays, setTodayBirthdays] = useState([]);
-  const { data: TodayBirthdayData, isloading } = useGetTodayBirthday();
+import { NavLink } from "react-router-dom";
+const TodayBirthday = ({ open, setOpen, data, isLoading }) => {
+  // const checkTodayBirthdays = () => {
+  //   const today = new Date();
+  //   const formattedToday = `${today.getMonth() + 1}-${today.getDate()}`;
 
-  const checkTodayBirthdays = () => {
-    const today = new Date();
-    const formattedToday = `${today.getMonth() + 1}-${today.getDate()}`;
+  //   const birthdays = TodayBirthdayData
+  //     ? TodayBirthdayData.filter((employee) => {
+  //         const date = new Date(employee.dateOfBirth);
+  //         const month = date.getMonth() + 1;
+  //         const day = date.getDate();
+  //         const outputDate = `${month}-${day}`;
+  //         return outputDate === formattedToday;
+  //       })
+  //     : [];
 
-    const birthdays = TodayBirthdayData
-      ? TodayBirthdayData.filter((employee) => {
-          const date = new Date(employee.dateOfBirth);
-          const month = date.getMonth() + 1;
-          const day = date.getDate();
-          const outputDate = `${month}-${day}`;
-          return outputDate === formattedToday;
-        })
-      : [];
-
-    setTodayBirthdays(birthdays);
-    setOpen(true);
-  };
+  // setTodayBirthdays(birthdays);
 
   const handleClose = () => {
     setOpen(false);
@@ -32,15 +26,6 @@ const TodayBirthday = () => {
 
   return (
     <div>
-      <Button
-        id="basic-button"
-        aria-controls={open ? "basic-menu" : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? "true" : undefined}
-        onClick={checkTodayBirthdays}
-      >
-        <Cake style={{ color: "white" }} />
-      </Button>
       <Menu
         id="basic-menu"
         anchorEl={document.getElementById("basic-button")}
@@ -60,35 +45,38 @@ const TodayBirthday = () => {
           >
             Today's Birthdays!!
           </p>
-          {todayBirthdays.length > 0 &&
-            todayBirthdays.map((employees, index) => (
-              <MenuItem
-                style={{
-                  color: "green",
-                  display: "inline-block",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-                key={index}
-                onClick={handleClose}
-              >
-                <div
+          {!isLoading &&
+            data.length > 0 &&
+            data.map((employees, index) => (
+              <NavLink to={"birthday"} key={employees.id}>
+                <MenuItem
                   style={{
-                    display: "flex",
-                    columnGap: "10px",
-                    width: "100%",
+                    color: "green",
+                    display: "inline-block",
                     alignItems: "center",
+                    justifyContent: "center",
                   }}
+                  key={index}
+                  onClick={handleClose}
                 >
-                  <p style={{ height: "25px" }}>
-                    <PersonIcon />
-                  </p>
-                  <p style={{ fontSize: "16px" }}>
-                    {employees.firstName} {employees.middleName}{" "}
-                    {employees.lastName}
-                  </p>
-                </div>
-              </MenuItem>
+                  <div
+                    style={{
+                      display: "flex",
+                      columnGap: "10px",
+                      width: "100%",
+                      alignItems: "center",
+                    }}
+                  >
+                    <p style={{ height: "25px" }}>
+                      <PersonIcon />
+                    </p>
+                    <p style={{ fontSize: "16px" }}>
+                      {employees.firstName} {employees.middleName}{" "}
+                      {employees.lastName}
+                    </p>
+                  </div>
+                </MenuItem>
+              </NavLink>
             ))}
         </div>
       </Menu>

@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext } from "react";
-import "./Birthday.css";
 
 import { addMonths, format } from "date-fns";
 import Birthdaytable from "./Birthdaytable";
@@ -8,7 +7,6 @@ import { Typography } from "@mui/material";
 
 const Birthdaylist = () => {
   const today = new Date();
-
   const { data: upcomingBirthdayData, isloading } = useGetUpcomingBirthday();
   const thisMonth = today.getMonth();
   const upcomingMonth = (thisMonth + 1) % 12;
@@ -45,15 +43,15 @@ const Birthdaylist = () => {
         Birthday List of Employees
       </Typography>
 
-      <h2>
-        Month<span> {format(new Date(), "MMMM")}</span>{" "}
-      </h2>
+      <Birthdaytable
+        data={thisMonthBirthdays}
+        currMonth={format(new Date(), "MMMM")}
+      />
 
-      <Birthdaytable data={thisMonthBirthdays} />
-      <h2>
-        Month<span> {format(addMonths(new Date(), 1), "MMMM")} </span>
-      </h2>
-      <Birthdaytable data={upcomingBirthdays} />
+      <Birthdaytable
+        data={upcomingBirthdays}
+        currMonth={format(addMonths(new Date(), 1), "MMMM")}
+      />
     </div>
   );
 };

@@ -18,13 +18,17 @@ import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
-import { Cake, ExpandLess, ExpandMore } from "@mui/icons-material";
-import { Button, Collapse, Switch } from "@mui/material";
+import {
+  Cake,
+  CakeOutlined,
+  ExpandLess,
+  ExpandMore,
+} from "@mui/icons-material";
+import { Badge, Button, Collapse, Switch } from "@mui/material";
 import { ThemeModeContext } from "../../../theme/ThemeModeContext";
 import { removeUser } from "../../utils/cookieHelper";
-import Birthdaylist from "../../pages/Birthday/Birthdaylist";
-import BirthdayEventList from "../../pages/Birthday/TodayBirthday";
 import TodayBirthday from "../../pages/Birthday/TodayBirthday";
+import { useGetTodayBirthday } from "../../hooks/birthday/useBirthday";
 const drawerWidth = 240;
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
@@ -89,10 +93,10 @@ export default function SideBar() {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const { toggleMode, themeMode } = useContext(ThemeModeContext); // Accessing themeMode from context
-  console.log(useContext(ThemeModeContext));
   const handleDrawerOpen = () => {
     setOpen(true);
   };
+  const { data, isLoading } = useGetTodayBirthday();
 
   const handleDrawerClose = () => {
     setOpen(false);
@@ -113,12 +117,6 @@ export default function SideBar() {
       subMenus: [],
     },
     {
-      name: "Birthday",
-      icon: <InboxIcon />,
-      path: "birthday",
-      subMenus: [],
-    },
-    {
       name: "Employee",
       icon: <MailIcon />,
       path: "employee",
@@ -129,59 +127,63 @@ export default function SideBar() {
           icon: <InboxIcon />,
         },
         {
-          name: 'Employee',
-          path: 'employee/add',
+          name: "Employee",
+          path: "employee/add",
           icon: <InboxIcon />,
         },
         {
-          name: 'Leave',
-          path: 'leave',
+          name: "Leave",
+          path: "leave",
           icon: <InboxIcon />,
         },
         {
-          name: 'Leave Type',
-          path: 'leavetype',
+          name: "Leave Type",
+          path: "leavetype",
           icon: <InboxIcon />,
         },
         {
-          name: 'Attendance',
-          path: 'employee/add',
+          name: "Attendance",
+          path: "employee/add",
           icon: <InboxIcon />,
         },
         {
-          name: 'Birthday',
-          path: 'employee/add',
+          name: "Birthday",
           icon: <InboxIcon />,
+          path: "birthday",
         },
       ],
     },
     {
-      name: 'Department',
+      name: "Department",
       icon: <InboxIcon />,
-      path: 'department',
+      path: "department",
       subMenus: [],
     },
     {
-      name: 'Designation',
+      name: "Designation",
       icon: <InboxIcon />,
-      path: 'designation',
+      path: "designation",
       subMenus: [],
     },
     {
-      name: 'Company',
+      name: "Company",
       icon: <InboxIcon />,
-      path: 'company',
+      path: "company",
       subMenus: [],
     },
     {
-      name: 'ToDo List',
+      name: "ToDo List",
       icon: <InboxIcon />,
-      path: 'todolist',
+      path: "todolist",
       subMenus: [],
     },
   ];
+  const [openNotification, setOpenNotification] = useState(false);
 
   const [subMenuOpen, setSubMenuOpen] = useState({});
+  const handleChange = () => {
+    setOpenNotification(!openNotification);
+  };
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -207,11 +209,28 @@ export default function SideBar() {
                 display: "flex",
                 position: "absolute",
                 right: "100px",
-                top: "10px",
+                top: "30px",
                 width: "30px",
               }}
             >
-              <TodayBirthday />
+              <Badge color="secondary" badgeContent={data?.length}>
+                <CakeOutlined
+                  id="basic-button"
+                  aria-controls={open ? "basic-menu" : undefined}
+                  aria-haspopup="true"
+                  aria-expanded={open ? "true" : undefined}
+                  onClick={handleChange}
+                  style={{ color: "white", cursor: "pointer" }}
+                />
+              </Badge>
+              {openNotification && (
+                <TodayBirthday
+                  data={data}
+                  isLoading={isLoading}
+                  open={openNotification}
+                  setOpen={setOpenNotification}
+                />
+              )}
             </div>
           </div>
         </Toolbar>
