@@ -11,24 +11,26 @@ import {
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import EmployeeBasicInfoForm from '../EmployeeBasicInfoForm';
-import useAddEmployeeForm from '../../../../../hooks/employee/addEmployee/useAddEmployeeForm';
+import useEditEmployeeForm from '../../../../../hooks/employee/EditEmployee/useEditEmployeeForm';
+import Modal from '@mui/material/Modal';
+import EmployeeEducationDetailForm from '../../EmployeeEducationDetailForm/EmployeeEducationDetailForm';
 
 const steps = [
   'Basic Details',
-  'Educational details',
+  'Educational Details',
   'Address Details',
   'Other Details',
 ];
-
-const AddEmployeeForm = () => {
+const EditEmployeeForm = () => {
   const [activeStep, setActiveStep] = useState(0);
-  const { formik } = useAddEmployeeForm();
+  const { formik, isLoading } = useEditEmployeeForm();
 
   const handleNext = () => {
     switch (activeStep) {
       case 0:
         formik.setFieldTouched('');
         break;
+      case 1: 
 
       default:
         break;
@@ -39,7 +41,10 @@ const AddEmployeeForm = () => {
   const getStepContent = (step) => {
     switch (step) {
       case 0:
-        return <EmployeeBasicInfoForm formik={formik} />;
+        return <EmployeeBasicInfoForm formik={formik} isLoading={isLoading} />;
+
+      case 1:
+        return <EmployeeEducationDetailForm />;
 
       default:
         throw new Error('Unknown Step');
@@ -58,7 +63,7 @@ const AddEmployeeForm = () => {
     <Container component='main' maxWidth='xlg' sx={{ mt: 5 }}>
       <Paper variant='plain' sx={{ my: { xs: 0, md: 6 }, p: { xs: 0, md: 3 } }}>
         <Typography component='h1' varient='h4' align='center'>
-          Add Employee
+          Edit Employee
         </Typography>
         <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
           {steps.map((label) => (
@@ -93,7 +98,7 @@ const AddEmployeeForm = () => {
                     onClick={() => {
                       formik.handleSubmit();
                       formik.isValid
-                        ? handleNext()
+                        ? null
                         : toast.error(
                             'Please make sure you have filled the form correctly'
                           );
@@ -105,7 +110,7 @@ const AddEmployeeForm = () => {
                 ) : (
                   <Button
                     variant='contained'
-                    onClick={handleNext}
+                        onClick={() => { formik.handleSubmit(); handleNext }}
                     sx={{ mt: 3, ml: 1 }}
                   >
                     Next
@@ -120,4 +125,4 @@ const AddEmployeeForm = () => {
   );
 };
 
-export default AddEmployeeForm;
+export default EditEmployeeForm;

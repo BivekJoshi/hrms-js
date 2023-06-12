@@ -1,7 +1,8 @@
 import { Grid, TextField, Button } from '@mui/material'
 import React from 'react'
 import { toast } from 'react-toastify';
-import useAddCompanyForm from '../../../hooks/company/useAddCompanyForm';
+import useAddCompanyForm from '../../../hooks/company/addCompany/useAddCompanyForm';
+
 
 
 const CompanyForm = ({ onClose }) => {

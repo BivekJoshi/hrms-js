@@ -18,17 +18,11 @@ import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
-import {
-  Cake,
-  CakeOutlined,
-  ExpandLess,
-  ExpandMore,
-} from "@mui/icons-material";
-import { Badge, Button, Collapse, Switch } from "@mui/material";
+import { ExpandLess, ExpandMore } from "@mui/icons-material";
+import { Button, Card, Collapse, Switch } from "@mui/material";
 import { ThemeModeContext } from "../../../theme/ThemeModeContext";
 import { removeUser } from "../../utils/cookieHelper";
-import TodayBirthday from "../../pages/Birthday/TodayBirthday";
-import { useGetTodayBirthday } from "../../hooks/birthday/useBirthday";
+
 const drawerWidth = 240;
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
@@ -322,7 +316,15 @@ export default function SideBar() {
 
       <Main open={open}>
         <DrawerHeader />
-        <Outlet />
+        <Card
+          variant="outlined"
+          sx={{
+            width: open ? "calc(100% - drawerWidth)" : "100%",
+            padding: "20px",
+          }}
+        >
+          <Outlet />
+        </Card>
       </Main>
     </Box>
   );
