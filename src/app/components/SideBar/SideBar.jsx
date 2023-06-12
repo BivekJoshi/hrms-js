@@ -15,15 +15,24 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import { Button, Collapse, Switch } from '@mui/material';
 import { ThemeModeContext } from '../../../theme/ThemeModeContext';
 import { removeUser } from '../../utils/cookieHelper';
 
-import DashboardRoundedIcon from '@mui/icons-material/DashboardRounded';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import PersonIcon from '@mui/icons-material/Person';
+import MailIcon from '@mui/icons-material/Mail';
+import CakeIcon from '@mui/icons-material/Cake';
+import HowToRegIcon from '@mui/icons-material/HowToReg';
+import WorkspacesIcon from '@mui/icons-material/Workspaces';
+import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
+import BusinessIcon from '@mui/icons-material/Business';
+import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck';
 
 const drawerWidth = 260;
 
@@ -53,7 +62,6 @@ const StyledNavLink = styled(NavLink)`
 	&.active {
 		&& {
 			background-color: #e5e5e5;
-			color: #1626c9;
 		}
 	}
 `;
@@ -105,71 +113,80 @@ export default function SideBar() {
 		}));
 	};
 
+	const primaryColor = '#1c7ed6';
+
 	const drawerMenus = [
 		{
 			name: 'Dashboard',
-			icon: <InboxIcon />,
+			icon: <DashboardIcon style={{ color: primaryColor }} fontSize='large' />,
 			path: 'dashboard',
 			subMenus: [],
 		},
 		{
 			name: 'Employee',
-			icon: <MailIcon />,
+			icon: <PeopleAltIcon style={{ color: primaryColor }} fontSize='large' />,
 			path: 'employee',
 			subMenus: [
 				{
 					name: 'Add Employee',
 					path: 'employee/add',
-					icon: <InboxIcon />,
+					icon: <PersonAddIcon style={{ color: primaryColor }} />,
 				},
 				{
 					name: 'Employee',
 					path: 'employee/add',
-					icon: <InboxIcon />,
+					icon: <PersonIcon style={{ color: primaryColor }} />,
 				},
 				{
 					name: 'Leave',
 					path: 'leave',
-					icon: <InboxIcon />,
+					icon: <MailIcon style={{ color: primaryColor }} />,
 				},
 				{
 					name: 'Leave Type',
 					path: 'leavetype',
-					icon: <InboxIcon />,
+					icon: <MailIcon style={{ color: primaryColor }} />,
 				},
 				{
 					name: 'Attendance',
 					path: 'employee/add',
-					icon: <InboxIcon />,
+					icon: <HowToRegIcon style={{ color: primaryColor }} />,
 				},
 				{
 					name: 'Birthday',
 					path: 'employee/add',
-					icon: <InboxIcon />,
+					icon: <CakeIcon style={{ color: primaryColor }} />,
 				},
 			],
 		},
 		{
 			name: 'Department',
-			icon: <InboxIcon />,
+			icon: <WorkspacesIcon style={{ color: primaryColor }} fontSize='large' />,
 			path: 'department',
 			subMenus: [],
 		},
 		{
 			name: 'Designation',
-			icon: <InboxIcon />,
+			icon: (
+				<AssignmentIndIcon style={{ color: primaryColor }} fontSize='large' />
+			),
 			path: 'designation',
 			subMenus: [],
 		},
 		{
 			name: 'Company',
-			icon: <InboxIcon />,
+			icon: <BusinessIcon style={{ color: primaryColor }} fontSize='large' />,
 			path: 'company',
 			subMenus: [],
 		},
 		{
 			name: 'ToDo List',
-			icon: <InboxIcon />,
+			icon: (
+				<PlaylistAddCheckIcon
+					style={{ color: primaryColor }}
+					fontSize='large'
+				/>
+			),
 			path: 'todolist',
 			subMenus: [],
 		},
@@ -264,6 +281,7 @@ export default function SideBar() {
 				>
 					<Button
 						variant='contained'
+						sx={{ backgroundColor: '#1c7ed6' }}
 						onClick={() => {
 							removeUser(navigate);
 						}}
@@ -276,7 +294,7 @@ export default function SideBar() {
 					<Switch
 						checked={themeMode === 'dark'}
 						onChange={toggleMode}
-						color='primary'
+						style={{ color: primaryColor }}
 					/>
 				</Box>
 			</Drawer>
