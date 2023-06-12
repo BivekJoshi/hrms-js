@@ -1,6 +1,12 @@
 import { useMutation, useQuery } from 'react-query';
-import { addEmployee, getEmployee, getEmployeeById } from '../../api/employee/employee-api';
+import {
+  addEmployee,
+  editEmployee,
+  getEmployee,
+  getEmployeeById,
+} from '../../api/employee/employee-api';
 import { toast } from 'react-toastify';
+import { useParams } from 'react-router-dom';
 
 export const useGetEmployee = () => {
   return useQuery(['getEmployee'], () => getEmployee(), {
@@ -10,16 +16,37 @@ export const useGetEmployee = () => {
 };
 
 export const useGetEmployeeById = (id) => {
-  return useQuery(['getEmployeeById'], () => getEmployeeById(id), {
+  return useQuery(['getEmployeeById', id], () => getEmployeeById(id), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
 };
 
+export const useEditEmployee = ({ onSuccess }) => {
+  const { id } = useParams();
+
+  return useMutation(
+    ['editEmployee'],
+    (formData) => {
+      console.log(formData);
+      editEmployee(formData, id);
+    },
+    {
+      onSuccess: (data, variables, context) => {
+        toast.success('Employee added successfully');
+        onSuccess && onSuccess(data, variables, context);
+      },
+      onError: (err, _variables, _context) => {
+        toast.error(`error: ${err.message}`);
+      },
+    }
+  );
+};
+
 export const useAddEmployee = ({ onSuccess }) => {
-  return useMutation(['addEmployee'], (formData) => addEmployee(formData), {
+  return useMutation(['addEmployees'], (formData) => addEmployee(formData), {
     onSuccess: (data, variables, context) => {
-      toast.success('Succesfully added Employee');
+      toast.success('Employee added successfully');
       onSuccess && onSuccess(data, variables, context);
     },
     onError: (err, _variables, _context) => {
