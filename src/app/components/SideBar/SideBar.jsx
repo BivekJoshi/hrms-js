@@ -19,7 +19,7 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
-import { Button, Collapse, Switch } from '@mui/material';
+import { Button, Card, Collapse, Switch } from '@mui/material';
 import { ThemeModeContext } from '../../../theme/ThemeModeContext';
 import { removeUser } from '../../utils/cookieHelper';
 
@@ -280,7 +280,9 @@ export default function SideBar() {
 
       <Main open={open}>
         <DrawerHeader />
-        <Outlet />
+        <Card variant="outlined" sx={{ width: open ? 'calc(100% - drawerWidth)' : '100%', padding: '20px' }}>
+          <Outlet />
+        </Card>
       </Main>
     </Box>
   );

@@ -36,7 +36,6 @@ const Employee = () => {
   if (isLoading) return <>Loading</>;
   return (
     <>
-      {/* // <div>{employeeData[0].firstName}</div> */}
       <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
         <Button
           variant='contained'
@@ -66,11 +65,12 @@ const Employee = () => {
           >
             <Grid container spacing={2} key={employee.id}>
               <Grid item>
-                <ButtonBase sx={{ width: 110, height: 150 }}>
+                <ButtonBase sx={{ width: '100%', height: 'auto' }}>
                   <Avatar
                     alt='Remy Sharp'
                     src=''
                     sx={{ width: 66, height: 66 }}
+                  // variant={isFemale ? "female" : "male"}
                   />
                 </ButtonBase>
                 <Typography variant='body2' color='text.secondary'>
@@ -138,8 +138,8 @@ const Employee = () => {
                   formik.isValid
                     ? null
                     : toast.error(
-                        'Please make sure you have filled the form correctly'
-                      );
+                      'Please make sure you have filled the form correctly'
+                    );
                 }}
                 sx={{ mt: 3, ml: 1 }}
               >
