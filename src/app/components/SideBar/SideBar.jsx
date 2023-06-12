@@ -87,7 +87,6 @@ export default function SideBar() {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const { toggleMode, themeMode } = useContext(ThemeModeContext); // Accessing themeMode from context
-
   const handleDrawerOpen = () => {
     setOpen(true);
   };
