@@ -14,3 +14,8 @@ export const getEmployeeById = (id) => {
 
 	return data;
 };
+
+export const editEmployee = async (formData, id) => {
+	const data = await axiosInstance.put(`/employee/=${id}`, formData);
+	return data;
+};

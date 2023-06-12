@@ -18,7 +18,7 @@ import ListItemText from '@mui/material/ListItemText';
 
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
-import { Button, Collapse, Switch } from '@mui/material';
+import { Button, Card, Collapse, Switch } from '@mui/material';
 import { ThemeModeContext } from '../../../theme/ThemeModeContext';
 import { removeUser } from '../../utils/cookieHelper';
 

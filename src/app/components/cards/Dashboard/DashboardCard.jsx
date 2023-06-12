@@ -1,25 +1,19 @@
 import React from 'react'
 import { Box, Card, Chip, Grid, Stack, Typography } from '@mui/material';
+import MainCard from '../MainCard';
 
-const DashboardCard = ({title,count,color,extra}) => {
+const DashboardCard = ({ title, icon }) => {
   return (
-    <Card contentSX={{ p: 2.25 }}>
-    <Stack spacing={0.5}>
-      <Typography variant="h6" color="textSecondary">
-        {title}
-      </Typography>
-      <Grid container alignItems="center">
-        <Grid item>
-          <Typography variant="h4" color="inherit">
-            {count}
-          </Typography>
-        </Grid>
-      </Grid>
-    </Stack>
-    {/* <Box sx={{ pt: 2.25 }}>
-    
-    </Box> */}
-  </Card>
+    <MainCard contentSX={{ p: 2.25 }}>
+      <Stack spacing={0.5}>
+        <Typography variant="h4" color="textSecondary" align='center'>
+          {icon}
+        </Typography>
+        <Typography variant="h6" color="inherit" align='center'>
+          {title}
+        </Typography>
+      </Stack>
+    </MainCard>
   )
 }
 
