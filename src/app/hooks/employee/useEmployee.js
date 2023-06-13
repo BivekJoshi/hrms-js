@@ -28,7 +28,6 @@ export const useEditEmployee = ({ onSuccess }) => {
   return useMutation(
     ['editEmployee'],
     (formData) => {
-      console.log(formData);
       editEmployee(formData, id);
     },
     {
