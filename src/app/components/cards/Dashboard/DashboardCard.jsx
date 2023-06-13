@@ -6,16 +6,13 @@ const DashboardCard = ({ title, icon }) => {
   return (
     <MainCard contentSX={{ p: 2.25 }}>
       <Stack spacing={0.5}>
-        <Typography variant="h6" color="textSecondary" align='center'>
+        <Typography variant="h4" color="textSecondary" align='center'>
           {icon}
         </Typography>
-        <Typography variant="h4" color="inherit" align='center'>
+        <Typography variant="h6" color="inherit" align='center'>
           {title}
         </Typography>
       </Stack>
-      {/* <Box sx={{ pt: 2.25 }}>
-    
-    </Box> */}
     </MainCard>
   )
 }
