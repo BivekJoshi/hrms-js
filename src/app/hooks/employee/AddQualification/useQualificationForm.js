@@ -1,11 +1,8 @@
 import { useFormik } from 'formik';
-import React from 'react';
-import { useParams } from 'react-router-dom';
 import QualificationSchema from './QualificationSchema';
 import { useAddQualification } from '../useQualification';
 
 const useQualificationForm = () => {
-  const { id } = useParams();
   const { mutate } = useAddQualification({});
 
   const formik = useFormik({

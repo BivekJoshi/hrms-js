@@ -29,7 +29,7 @@ const maritalStatus = [
   },
 ];
 
-const EmployeeBasicInfoForm = ({ formik }) => {
+const EmployeeBasicInfoForm = ({ formik, isLoading }) => {
   const { data: departmentData, isLoading: loadingDepartment } = useGetDepartment();
   const { data: companyData, isLoading: loadingCompany } = useGetCompany();
   const { data: designationData, isLoading: loadingDesignation } = useGetDesignation();
