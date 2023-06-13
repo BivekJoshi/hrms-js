@@ -1,11 +1,11 @@
-import React, { lazy } from 'react';
-import ScrollToTop from '../app/utils/ScrolltoTop';
-import Login from '../app/pages/Login/Login';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Applayout from '../layout/Applayout';
-import AdminLayout from '../layout/AdminLayout';
-import ProtectedRoute from './ProtectedRoute';
-import routes from './routes';
+import React, { lazy } from "react";
+import ScrollToTop from "../app/utils/ScrolltoTop";
+import Login from "../app/pages/Login/Login";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Applayout from "../layout/Applayout";
+import AdminLayout from "../layout/AdminLayout";
+import ProtectedRoute from "./ProtectedRoute";
+import routes from "./routes";
 
 const AppRoutes = () => {
   return (
