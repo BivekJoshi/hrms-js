@@ -4,15 +4,16 @@ import { Box, Button, Modal } from '@mui/material';
 import { useGetLeave } from '../../hooks/leave/useLeave';
 import { useGetEmployee } from '../../hooks/employee/useEmployee';
 import { useGetLeaveType } from '../../hooks/leaveType/useLeaveType';
+import LeaveForm from '../../components/Form/Leave/LeaveForm';
 
 const style = {
   position: 'absolute',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
   bgcolor: 'background.paper',
-  border: '2px solid #000',
+  border: '1px solid #808080',
+  borderRadius: 2,
   boxShadow: 24,
   p: 4,
 };
@@ -123,8 +124,9 @@ const Leave = ({ isLoading }) => {
 
   return (
     <>
-      { }
-      <Button variant='contained' sx={{ mt: 3, ml: 1 }} onClick={handleOpen}>+Add Leave</Button>
+      <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+        <Button variant='contained' sx={{ mt: 3, ml: 1 }} onClick={handleOpen}>+Add Leave</Button>
+      </Box>
       <Modal
         open={open}
         onClose={handleClose}
@@ -132,9 +134,10 @@ const Leave = ({ isLoading }) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          {/* <CompanyForm onClose={handleClose} /> */}
+          <LeaveForm onClose={handleClose} />
         </Box>
       </Modal>
+
       <br /><br />
       <MaterialTable
         columns={columns}

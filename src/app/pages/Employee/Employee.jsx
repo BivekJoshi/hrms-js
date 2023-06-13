@@ -22,6 +22,7 @@ const Employee = () => {
   const [openAddModal, setOpenAddModal] = useState(false);
   const { data: employeeData, isLoading } = useGetEmployee();
   const { formik } = useAddEmployeeForm();
+
   const style = {
     position: 'absolute',
     top: '50%',
@@ -33,6 +34,7 @@ const Employee = () => {
     boxShadow: 24,
     p: 4,
   };
+  
   if (isLoading) return <>Loading</>;
   return (
     <>

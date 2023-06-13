@@ -115,11 +115,6 @@ export default function SideBar() {
       path: 'employee',
       subMenus: [
         {
-          name: 'Add Employee',
-          path: 'employee/add',
-          icon: <InboxIcon />,
-        },
-        {
           name: 'Employee',
           path: 'employee/add',
           icon: <InboxIcon />,
