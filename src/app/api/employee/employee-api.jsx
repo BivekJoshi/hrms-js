@@ -1,4 +1,4 @@
-import { axiosInstance } from '../../../auth/axiosInterceptor';
+import { axiosInstance } from "../../../auth/axiosInterceptor";
 
 export const getEmployee = async () => {
   const data = await axiosInstance.get(`/employee`);
@@ -11,7 +11,7 @@ export const getEmployeeById = (id) => {
 };
 
 export const addEmployee = async (formData) => {
-  const data = await axiosInstance.post('/employee', formData);
+  const data = await axiosInstance.post("/employee", formData);
   console.log(data);
   return data;
 };

@@ -175,12 +175,15 @@ export default function SideBar() {
     },
   ];
   const [openNotification, setOpenNotification] = useState(false);
-
+  const [notificationSeen, setNotificationSeen] = useState(false);
   const [subMenuOpen, setSubMenuOpen] = useState({});
   const handleChange = () => {
     setOpenNotification(!openNotification);
+    setNotificationSeen(true);
   };
-
+  // const handleClose = () => {
+  //   setOpenNotification(false);
+  // };
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -209,24 +212,28 @@ export default function SideBar() {
                 width: "30px",
               }}
             >
-              <Badge color="secondary" badgeContent={data?.length}>
-                <CakeOutlined
-                  id="basic-button"
-                  aria-controls={open ? "basic-menu" : undefined}
-                  aria-haspopup="true"
-                  aria-expanded={open ? "true" : undefined}
-                  onClick={handleChange}
-                  style={{ color: "white", cursor: "pointer" }}
-                />
-              </Badge>
-              {openNotification && (
-                <TodayBirthday
-                  data={data}
-                  isLoading={isLoading}
-                  open={openNotification}
-                  setOpen={setOpenNotification}
-                />
-              )}
+              <div>
+                <Badge color="secondary" badgeContent={data?.length}>
+                  <CakeOutlined
+                    id="basic-button"
+                    aria-controls={open ? "basic-menu" : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open ? "true" : undefined}
+                    onClick={handleChange}
+                    style={{ color: "white", cursor: "pointer" }}
+                  />
+                </Badge>
+                {openNotification && (
+                  <TodayBirthday
+                    data={data}
+                    isLoading={isLoading}
+                    open={openNotification}
+                    setOpen={setOpenNotification}
+                    notificationSeen={notificationSeen}
+                    setNotificationSeen={setNotificationSeen}
+                  />
+                )}
+              </div>
             </div>
           </div>
         </Toolbar>
