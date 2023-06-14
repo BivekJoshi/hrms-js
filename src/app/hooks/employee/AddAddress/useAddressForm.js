@@ -30,7 +30,6 @@ export const usePermanentAddressForm = ({
     },
     // validationSchema: AddressSchema,
     onSubmit: (values) => {
-      console.log(values);
       handleRequest(values);
     },
     enableReinitialize: 'true',

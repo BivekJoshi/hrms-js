@@ -1,7 +1,6 @@
 .container {
-  height: 100vh;
+  height: 95vh;
   display: flex;
-
   padding: 0 2rem;
 }
 .wave {
@@ -16,9 +15,9 @@
   display: flex;
   justify-content: center;
   background-repeat: no-repeat;
-  background-position: top center;
-  background-size: cover;
-  margin: 64px 0;
+  background-position: center center;
+  background-size: 35vh;
+  /* margin: 64px 0; */
 
   align-items: center;
 }

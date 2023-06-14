@@ -4,22 +4,20 @@ import { useGetCompany } from '../../hooks/company/useCompany';
 import { Box, Button, Modal } from '@mui/material';
 import CompanyForm from '../../components/Form/Company/CompanyForm';
 
-
 const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
+	position: 'absolute',
+	top: '50%',
+	left: '50%',
+	transform: 'translate(-50%, -50%)',
+	width: 400,
+	bgcolor: 'background.paper',
+	border: '2px solid #000',
+	boxShadow: 24,
+	p: 4,
 };
 
 const Company = () => {
-
-  const { data: companyData, isLoading } = useGetCompany();
+	const { data: companyData, isLoading } = useGetCompany();
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);

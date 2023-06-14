@@ -1,21 +1,18 @@
-import { axiosInstance } from "../../../auth/axiosInterceptor";
+import { axiosInstance } from '../../../auth/axiosInterceptor';
 
 export const getEmployee = async () => {
-  const data = await axiosInstance.get(`/employee`);
-
-  return data;
-};
-
-export const getEmployeeById = (id) => {
-  const data = axiosInstance.get(`employee/${id}`);
-
-  return data;
+	const data = await axiosInstance.get(`/employee`);
+	return data;
 };
 
 export const addEmployee = async (formData) => {
-  const data = await axiosInstance.post("/employee", formData);
+	const data = await axiosInstance.post(`/employee`, formData);
+	return data;
+};
+export const getEmployeeById = (id) => {
+	const data = axiosInstance.get(`employee/${id}`);
 
-  return data;
+	return data;
 };
 
 export const editEmployee = async (formData, id) => {
