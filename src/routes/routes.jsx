@@ -12,6 +12,7 @@ const EmployeeOverview = Loadable(lazy(() =>import("../app/pages/Employee/AddEmp
 const LeaveType = Loadable(lazy(() => import("../app/pages/LeaveType/LeaveType")));
 const Leave = Loadable(lazy(() => import("../app/pages/Leave/Leave")));
 const EditEmployee = Loadable(lazy(() => import('../app/pages/Employee/AddEmployee/EditEmployee')));
+const Attendance = Loadable(lazy(() => import('../app/pages/Attendance/Attendance')));
 
 const routes = [
     {
@@ -50,10 +51,16 @@ const routes = [
         component: <Designation />,
     },
     {
+        path: "attendance",
+        id: nanoid(),
+        component: <Attendance />,
+    },
+    {
         path: "company",
         id: nanoid(),
         component: <Company />,
     },
+   
     {
         path: "department",
         id: nanoid(),

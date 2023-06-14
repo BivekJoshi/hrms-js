@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useMemo } from "react";
-import { TextField, Select, Button, Box, MenuItem } from "@mui/material";
-// import InputLabel from "@mui/material/InputLabel";
+import React, { useState, useMemo } from "react";
+import { TextField, Button, Box, MenuItem } from "@mui/material";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -12,6 +11,9 @@ import { useGetAttendance } from "../../hooks/attendance/useAttendance";
 import "./Attendance.css";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
+
+
+
 
 let cMonth;
 
@@ -163,7 +165,7 @@ const Attendance = () => {
 
 
   return (
-    <div style={{ maxWidth: "96.5vw" }}>
+    <div className="main">
       <h1>Attendance</h1>
 
       <div className="Search">

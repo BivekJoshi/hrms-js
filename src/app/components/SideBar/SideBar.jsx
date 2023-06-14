@@ -137,7 +137,7 @@ export default function SideBar() {
         },
         {
           name: 'Attendance',
-          path: 'empAttendance',
+          path: 'attendance',
           icon: <InboxIcon />,
         },
         {
