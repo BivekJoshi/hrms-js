@@ -6,7 +6,7 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
 const Dashboard = () => {
   return (
-    <Grid container rowSpacing={4.5} columnSpacing={2.75}>
+    <Grid container rowSpacing={4.5} columnSpacing={2.75} style={{display:'flex', justifyContent:'space-around' }}>
       <Grid item xs={12} sx={{ mb: -2.25 }}>
         <Typography variant="h5">Dashboard</Typography>
       </Grid>
@@ -26,7 +26,7 @@ const Dashboard = () => {
         <DashboardCard title="Holiday" icon={<CalendarMonthIcon/>}/>
       </Grid>
     </Grid>
-  );
+ );
 };
 
 export default Dashboard;

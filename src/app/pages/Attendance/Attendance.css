@@ -1,0 +1,79 @@
+
+.button{
+    padding-top: 20px;
+    display: flex ;
+    justify-content: flex-end;
+    column-gap: 20px;
+}
+
+*{
+  overflow-x: hidden;
+}
+
+
+  
+
+
+
+
+.cntnr{
+    height: 600px;
+    overflow: scroll;
+}
+
+
+.table-wrapper {
+  max-width: 93vw;
+  padding: 10px;
+  overflow-x: scroll;
+
+}
+
+
+.heading{
+      position: sticky;
+    top: 0;
+      background-color: white;
+    z-index: 99;
+}
+
+.sn {
+    position: sticky;
+    left: 0;
+      background-color: white;
+    z-index: 99;
+}
+
+.emp{
+    position: sticky;
+  left: 3.75%;
+    background-color: white;
+    z-index: 99;
+
+}
+
+
+.snNo{
+    position: sticky;
+    left: 0%;
+    background-color: white;
+    z-index: 1;
+}
+
+
+ .empname{
+       position: sticky;
+    background-color: white;
+    left: 3.75%;
+    z-index: 1;
+
+} 
+
+
+
+
+
+
+
+
+

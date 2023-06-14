@@ -127,6 +127,7 @@ export default function SideBar() {
           path: "employee/add",
           icon: <InboxIcon />,
         },
+    
         {
           name: "Leave",
           path: "leave",
@@ -139,7 +140,7 @@ export default function SideBar() {
         },
         {
           name: "Attendance",
-          path: "employee/add",
+          path: "attendance",
           icon: <InboxIcon />,
         },
         {
