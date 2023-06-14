@@ -1,4 +1,4 @@
-import { Grid, MenuItem, TextField, Select } from '@mui/material';
+import { Grid, MenuItem, TextField } from '@mui/material';
 import React from 'react';
 import { useGetCompany } from '../../../../hooks/company/useCompany';
 import { useGetDesignation } from '../../../../hooks/designation/useDesignation';

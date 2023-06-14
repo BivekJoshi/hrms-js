@@ -1,8 +1,8 @@
 import { useFormik } from 'formik';
 import { addLeaveSchema } from './addLeaveSchema';
-import { useAddLeave } from './useLeave';
+import { useAddLeave } from '../useLeave';
 
-const useAddLeaveTypeForm = () => {
+const useAddLeaveForm = () => {
     const { mutate } = useAddLeave({});
 
     const formik = useFormik({
@@ -11,10 +11,13 @@ const useAddLeaveTypeForm = () => {
             leaveTypeId: '',
             leaveReason: '',
             fromDate: '',
-            employeeId: '',
-            leaveTypeId: '',
-            leaveReason: '',
-            fromDate: '',
+            toDate: '',
+            applyLeaveDays: '',
+            leaveBalance: '',
+            leaveStatus: '',
+            confirmById: '',
+            leaveRemarks: '',
+            halfDay: '',
         },
         validationSchema: addLeaveSchema,
         onSubmit: (values) => {
@@ -32,4 +35,4 @@ const useAddLeaveTypeForm = () => {
     return { formik };
 };
 
-export default useAddLeaveTypeForm;
+export default useAddLeaveForm;

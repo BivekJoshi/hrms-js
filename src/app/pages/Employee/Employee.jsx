@@ -1,27 +1,27 @@
-import React, { useState } from "react";
-import { useGetEmployee } from "../../hooks/employee/useEmployee";
+import React, { useState } from 'react';
+import { useGetEmployee } from '../../hooks/employee/useEmployee';
 
-import { styled } from "@mui/material/styles";
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
-import ButtonBase from "@mui/material/ButtonBase";
-import Chip from "@mui/material/Chip";
-import Button from "@mui/material/Button";
-import Stack from "@mui/material/Stack";
-import { Email, LocalPhone } from "@mui/icons-material";
-import { Avatar } from "@mui/material";
-import { NavLink } from "react-router-dom";
-import Modal from "@mui/material/Modal";
-import { Box } from "@mui/material";
-import EmployeeBasicInfoForm from "../../components/Form/Employee/EmployeeBasicInfoForm/EmployeeBasicInfoForm";
-import useAddEmployeeForm from "../../hooks/employee/AddEmployee/useAddEmployeeForm";
-import { toast } from "react-toastify";
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
+import ButtonBase from '@mui/material/ButtonBase';
+import Chip from '@mui/material/Chip';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
+import { Email, LocalPhone } from '@mui/icons-material';
+import { Avatar } from '@mui/material';
+import { NavLink } from 'react-router-dom';
+import Modal from '@mui/material/Modal';
+import { Box } from '@mui/material';
+import EmployeeBasicInfoForm from '../../components/Form/Employee/EmployeeBasicInfoForm/EmployeeBasicInfoForm';
+import useAddEmployeeForm from '../../hooks/employee/AddEmployee/useAddEmployeeForm';
+import { toast } from 'react-toastify';
 
 const Employee = () => {
   const [openAddModal, setOpenAddModal] = useState(false);
   const { data: employeeData, isLoading } = useGetEmployee();
   const { formik } = useAddEmployeeForm();
+
   const style = {
     position: "absolute",
     top: "50%",
@@ -33,6 +33,7 @@ const Employee = () => {
     boxShadow: 24,
     p: 4,
   };
+  
   if (isLoading) return <>Loading</>;
   return (
     <>

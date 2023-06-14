@@ -4,22 +4,48 @@ import { useGetCompany } from '../../hooks/company/useCompany';
 import { Box, Button, Modal } from '@mui/material';
 import CompanyForm from '../../components/Form/Company/CompanyForm';
 
-
 const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
+	position: 'absolute',
+	top: '50%',
+	left: '50%',
+	transform: 'translate(-50%, -50%)',
+	width: 400,
+	bgcolor: 'background.paper',
+	border: '2px solid #000',
+	boxShadow: 24,
+	p: 4,
 };
 
-const Company = () => {
+const columns=[
+  {
+    title: "SN",
+    render: (rowData) => rowData.tableData.id,
+    cellStyle: {
+      whiteSpace: 'nowrap', // Prevents content from wrapping
+    },
+    width: 100,
+  },
+  {
+    title: "Company Name",
+    field: "companyName",
+    emptyValue: "-",
+    width: 300,
+  },
+  {
+    title: "Company Type",
+    field: "companyType",
+    emptyValue: "-",
+    width: 340,
+  },
+  {
+    title: "Description",
+    field: "companyDescription",
+    emptyValue: "-",
+  },
+]
 
-  const { data: companyData, isLoading } = useGetCompany();
+const Company = () => {
+	const { data: companyData, isLoading } = useGetCompany();
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -28,7 +54,9 @@ const Company = () => {
   if (isLoading) return <>Loading</>;
   return (
     <>
-      <Button variant='contained' sx={{ mt: 3, ml: 1 }} onClick={handleOpen}>+Add Company</Button>
+      <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+        <Button variant='contained' sx={{ mt: 3, ml: 1 }} onClick={handleOpen}>+Add Company</Button>
+      </Box>
       <Modal
         open={open}
         onClose={handleClose}
@@ -41,33 +69,7 @@ const Company = () => {
       </Modal>
       <br/><br/>
       <MaterialTable
-        columns={[
-          {
-            title: "SN",
-            render: (rowData) => rowData.tableData.id,
-            cellStyle: {
-              whiteSpace: 'nowrap', // Prevents content from wrapping
-            },
-            width: 100,
-          },
-          {
-            title: "Company Name",
-            field: "companyName",
-            emptyValue: "-",
-            width: 300,
-          },
-          {
-            title: "Company Type",
-            field: "companyType",
-            emptyValue: "-",
-            width: 340,
-          },
-          {
-            title: "Description",
-            field: "companyDescription",
-            emptyValue: "-",
-          },
-        ]}
+        columns={columns}
         data={companyData}
         title=''
         isLoading={isLoading}
@@ -75,7 +77,7 @@ const Company = () => {
           padding: 'dense',
           margin: 50,
           pageSize: 12,
-          exportRowsWhenPaging: false,
+          emptyRowsWhenPaging: false,
           headerStyle: {
             backgroundColor: '#01579b',
             color: '#FFF',
