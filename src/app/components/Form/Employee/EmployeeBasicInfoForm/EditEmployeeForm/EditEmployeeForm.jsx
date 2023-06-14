@@ -18,6 +18,9 @@ import {
   usePermanentAddressForm,
   useTemporaryAddressForm,
 } from '../../../../../hooks/employee/AddAddress/useAddressForm';
+import { useGetAddressById } from '../../../../../hooks/employee/useAddress';
+import { useParams } from 'react-router';
+import { useGetEmployeeById } from '../../../../../hooks/employee/useEmployee';
 
 const steps = [
   'Basic Details',
@@ -27,11 +30,18 @@ const steps = [
   'Other Details',
 ];
 const EditEmployeeForm = () => {
+  const { id } = useParams();
   const [activeStep, setActiveStep] = useState(0);
-  const { formik, isLoading } = useEditEmployeeForm();
-  const { formik: permanentFormik } = usePermanentAddressForm();
-  const { formik: temporaryFormik } = useTemporaryAddressForm();
+  // const { data, isLoading: addressLoading } = useGetAddressById(id);
+  const { data, isLoading: employeeLoading } = useGetEmployeeById(id);
 
+  const { formik, isLoading } = useEditEmployeeForm({ data, employeeLoading });
+  const { formik: permanentFormik } = usePermanentAddressForm({
+    data,
+    employeeLoading,
+  });
+  const { formik: temporaryFormik } = useTemporaryAddressForm();
+  console.log(permanentFormik);
   const handleNext = () => {
     switch (activeStep) {
       case 0:
@@ -45,7 +55,8 @@ const EditEmployeeForm = () => {
         permanentFormik.setFieldTouched('');
         if (permanentFormik.dirty) {
           permanentFormik.handleSubmit();
-          // temporaryFormik.handleSubmit();
+        } else if (temporaryFormik.dirty) {
+          temporaryFormik.handleSubmit();
         }
         break;
 

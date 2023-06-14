@@ -7,30 +7,36 @@ import {
 } from '../useAddress';
 import { useParams } from 'react-router-dom';
 
-export const usePermanentAddressForm = () => {
-  const { id } = useParams();
+export const usePermanentAddressForm = ({
+  data,
+  employeeLoading: isLoading,
+}) => {
   const { mutate: permanentMutate } = usePermanentAddAddress({});
-  const { data, isLoading } = useGetAddressById(id);
-  console.log(data);
-
+  const addressDetails = !isLoading && data?.addresses[0];
+  console.log(addressDetails?.district);
   const formik = useFormik({
     initialValues: {
-      district: '',
-      wardNumber: '',
-      city: '',
-      street: '',
-      province: '',
-      country: '',
-      temporaryAndPermanentAddressSame: '',
+      addresses: [
+        {
+          district: '',
+          wardNumber: '',
+          city: '',
+          street: '',
+          province: '',
+          country: '',
+          temporaryAndPermanentAddressSame: false,
+        },
+      ],
     },
-    validationSchema: AddressSchema,
+    // validationSchema: AddressSchema,
     onSubmit: (values) => {
       console.log(values);
       handleRequest(values);
     },
+    enableReinitialize: 'true',
   });
+  console.log(formik);
   const handleRequest = (values) => {
-    console.log('request', values);
     values = { ...values };
     permanentMutate(values);
   };
@@ -41,12 +47,16 @@ export const useTemporaryAddressForm = () => {
   const { mutate: temporaryMutate } = useTemporaryAddress({});
   const formik = useFormik({
     initialValues: {
-      district: '',
-      wardNumber: '',
-      city: '',
-      street: '',
-      province: '',
-      country: '',
+      addresses: [
+        {
+          district: '',
+          wardNumber: '',
+          city: '',
+          street: '',
+          province: '',
+          country: '',
+        },
+      ],
     },
     onSubmit: (values) => {
       handleRequest(values);

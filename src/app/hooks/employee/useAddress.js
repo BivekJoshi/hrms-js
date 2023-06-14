@@ -2,6 +2,7 @@ import { useMutation, useQuery } from 'react-query';
 import {
   addPermanentAddress,
   addTemporaryAddress,
+  editPermanentAddress,
   getAddressById,
 } from '../../api/address/address-api';
 import { useParams } from 'react-router-dom';
@@ -46,4 +47,22 @@ export const useGetAddressById = (id) => {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
+};
+
+export const useEditAddress = (addressId) => {
+  return useMutation(
+    ['editAddress'],
+    (formData) => {
+      editPermanentAddress(formData, id);
+    },
+    {
+      onSuccess: (data, variables, context) => {
+        toast.success('Address edited successfully');
+        onSuccess && onSuccess(data, variables, context);
+      },
+      onError: (err, _variables, _context) => {
+        toast.error(`error: ${err.message}`);
+      },
+    }
+  );
 };
