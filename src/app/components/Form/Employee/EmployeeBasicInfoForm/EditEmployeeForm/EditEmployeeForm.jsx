@@ -12,12 +12,17 @@ import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import EmployeeBasicInfoForm from '../EmployeeBasicInfoForm';
 import useEditEmployeeForm from '../../../../../hooks/employee/EditEmployee/useEditEmployeeForm';
-import EmployeeEducationDetailForm from '../../EmployeeEducationDetailForm/EmployeeEducationDetailForm';
+
 import EmployeeAddressDetailForm from '../../EmployeeAddressDetailForm/EmployeeAddressDetailForm';
 import {
   usePermanentAddressForm,
   useTemporaryAddressForm,
 } from '../../../../../hooks/employee/AddAddress/useAddressForm';
+
+import useQualificationForm from '../../../../../hooks/employee/AddQualification/useQualificationForm';
+import EmployeeQualifiactionDetailForm from '../../EmployeeQualaificationDetailForm/EmployeeQualificationDetailForm';
+import EmployeeFamilyDetailForm from '../../EmployeeFamilyDetailForm/EmployeeFamilyDetailForm';
+import useFamilyForm from '../../../../../hooks/employee/AddFamily/useFamilyForm';
 
 const steps = [
   'Basic Details',
@@ -31,6 +36,8 @@ const EditEmployeeForm = () => {
   const { formik, isLoading } = useEditEmployeeForm();
   const { formik: permanentFormik } = usePermanentAddressForm();
   const { formik: temporaryFormik } = useTemporaryAddressForm();
+  const { formik: qualificationFormik, isLoading: isLoadingQualification } = useQualificationForm();
+  const { formik: familyFormik, isLoading: isLoadingFamily } = useFamilyForm();
 
   const handleNext = () => {
     switch (activeStep) {
@@ -46,6 +53,12 @@ const EditEmployeeForm = () => {
         if (permanentFormik.dirty) {
           permanentFormik.handleSubmit();
           // temporaryFormik.handleSubmit();
+        }
+        break;
+      case 2:
+        familyFormik.setFieldTouched('');
+        familyFormik?.handleSubmit();
+        if (familyFormik.dirty) {
         }
         break;
 
@@ -69,7 +82,20 @@ const EditEmployeeForm = () => {
         );
 
       case 2:
-        return <EmployeeEducationDetailForm />;
+        return (
+          <EmployeeFamilyDetailForm
+            formik={familyFormik}
+            isLoading={isLoadingFamily}
+          />
+        );
+
+      case 3:
+        return (
+          <EmployeeQualifiactionDetailForm
+            formik={qualificationFormik}
+            isLoading={isLoadingQualification}
+          />
+        );
 
       default:
         throw new Error('Unknown Step');
@@ -125,8 +151,8 @@ const EditEmployeeForm = () => {
                       formik.isValid
                         ? null
                         : toast.error(
-                            'Please make sure you have filled the form correctly'
-                          );
+                          'Please make sure you have filled the form correctly'
+                        );
                     }}
                     sx={{ mt: 3, ml: 1 }}
                   >

@@ -11,7 +11,6 @@ export const usePermanentAddressForm = () => {
   const { id } = useParams();
   const { mutate: permanentMutate } = usePermanentAddAddress({});
   const { data, isLoading } = useGetAddressById(id);
-  console.log(data);
 
   const formik = useFormik({
     initialValues: {
@@ -25,7 +24,6 @@ export const usePermanentAddressForm = () => {
     },
     validationSchema: AddressSchema,
     onSubmit: (values) => {
-      console.log(values);
       handleRequest(values);
     },
   });

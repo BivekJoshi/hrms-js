@@ -1,5 +1,5 @@
 import { useFormik } from 'formik';
-import QualificationSchema from './QualificationSchema';
+import {QualificationSchema} from './QualificationSchema';
 import { useAddQualification } from '../useQualification';
 
 const useQualificationForm = () => {
@@ -8,6 +8,10 @@ const useQualificationForm = () => {
   const formik = useFormik({
     initialValues: {
       board: '',
+      institute:'',
+      passedLevel:'',
+      passedYear:'',
+      grade:'',
     },
     validationSchema: QualificationSchema,
     onSubmit: (values) => {
