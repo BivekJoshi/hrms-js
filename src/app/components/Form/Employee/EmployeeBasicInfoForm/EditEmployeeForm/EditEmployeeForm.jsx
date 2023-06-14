@@ -22,7 +22,7 @@ import {
 import useQualificationForm from '../../../../../hooks/employee/AddQualification/useQualificationForm';
 import EmployeeQualifiactionDetailForm from '../../EmployeeQualaificationDetailForm/EmployeeQualificationDetailForm';
 import EmployeeFamilyDetailForm from '../../EmployeeFamilyDetailForm/EmployeeFamilyDetailForm';
-import useFamilyForm from '../../../../../hooks/employee/AddFamily/useFamilyForm';
+import useAddLeaveForm from '../../../../../hooks/employee/AddFamily/useFamilyForm';
 
 const steps = [
   'Basic Details',
@@ -37,7 +37,7 @@ const EditEmployeeForm = () => {
   const { formik: permanentFormik } = usePermanentAddressForm();
   const { formik: temporaryFormik } = useTemporaryAddressForm();
   const { formik: qualificationFormik, isLoading: isLoadingQualification } = useQualificationForm();
-  const { formik: familyFormik, isLoading: isLoadingFamily } = useFamilyForm();
+  const { formik: familyFormik, isLoading: isLoadingFamily } = useAddLeaveForm();
 
   const handleNext = () => {
     switch (activeStep) {
@@ -57,8 +57,8 @@ const EditEmployeeForm = () => {
         break;
       case 2:
         familyFormik.setFieldTouched('');
-        familyFormik?.handleSubmit();
         if (familyFormik.dirty) {
+          familyFormik.handleSubmit();
         }
         break;
 
