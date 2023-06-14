@@ -21,12 +21,15 @@ import {
 import { useGetAddressById } from '../../../../../hooks/employee/useAddress';
 import { useParams } from 'react-router';
 import { useGetEmployeeById } from '../../../../../hooks/employee/useEmployee';
+import EmployeeBankDetailForm from '../../EmployeeBankDetailForm/EmployeeBankDetailForm';
+import useAddBankForm from '../../../../../hooks/employee/AddBankForm/useAddBankForm';
 
 const steps = [
   'Basic Details',
   'Address Details',
   'Family Details',
   'Educational Details',
+  'Bank Details',
   'Other Details',
 ];
 const EditEmployeeForm = () => {
@@ -41,7 +44,7 @@ const EditEmployeeForm = () => {
     employeeLoading,
   });
   const { formik: temporaryFormik } = useTemporaryAddressForm();
-  console.log(permanentFormik);
+  const { formik: bankFormik } = useAddBankForm();
   const handleNext = () => {
     switch (activeStep) {
       case 0:
@@ -81,6 +84,9 @@ const EditEmployeeForm = () => {
 
       case 2:
         return <EmployeeEducationDetailForm />;
+
+      // case 4:
+        // return <EmployeeBankDetailForm formik={bankFormik} />;
 
       default:
         throw new Error('Unknown Step');
