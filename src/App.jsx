@@ -14,7 +14,7 @@ export default function App() {
         closeOnClick
         rtl={false}
         pauseOnFocusLoss
-        theme='light'
+        theme="light"
         draggable
         pauseOnHover
       /> 
