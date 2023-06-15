@@ -1,8 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Email, LocalPhone } from "@mui/icons-material";
-import { Box, Button, Card, CardMedia, Chip, ClickAwayListener, Grow, Stack } from "@mui/material";
+import {
+  Box,
+  Button,
+  Card,
+  CardMedia,
+  Chip,
+  ClickAwayListener,
+  Grow,
+  Stack,
+} from "@mui/material";
 import { MenuItem, MenuList, Paper, Popper, Typography } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import Image1 from "../../../../assets/wave.png";
 
@@ -20,7 +29,7 @@ const EmployeeCard = ({
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
   const prevOpen = useRef(open);
-
+  const navigate = useNavigate();
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
   };
@@ -53,7 +62,7 @@ const EmployeeCard = ({
       key={key}
       sx={{
         p: 2,
-        width: 265,
+        width: 300,
         backgroundColor: (theme) =>
           theme.palette.mode === "dark" ? "#1A2027" : "#fff",
         cursor: "pointer",
@@ -64,7 +73,7 @@ const EmployeeCard = ({
       }}
     >
       <Box display="flex" justifyContent={"end"}>
-        <Button 
+        <Button
           style={{
             marginTop: "5px",
             fontSize: ".7rem",
@@ -109,16 +118,25 @@ const EmployeeCard = ({
                       id="composition-menu"
                       aria-labelledby="composition-button"
                       onKeyDown={handleListKeyDown}
+                      style={{ fontSize: ".8rem" }}
                     >
-                      <MenuItem onClick={handleClose}>
-                        <NavLink to={`edit/${EmployeeId}`} style={{textDecoration:"none", color:"black", fontSize:".8rem"}}>
+                      <MenuItem
+                        onClick={() => {
+                          navigate(`edit/${EmployeeId}`);
+                          handleClose();
+                        }}
+                        style={{ fontSize: ".8rem" }}
+                      >
                         Edit
-                        </NavLink>
                       </MenuItem>
-                      <MenuItem onClick={handleClose}>
-                        <NavLink to={`${EmployeeId}`} style={{textDecoration:"none", color:"black", fontSize:".8rem"}}>
+                      <MenuItem
+                        onClick={() => {
+                          navigate(`${EmployeeId}`);
+                          handleClose();
+                        }}
+                        style={{ fontSize: ".8rem" }}
+                      >
                         View Profile
-                        </NavLink>
                       </MenuItem>
                     </MenuList>
                   </ClickAwayListener>
@@ -149,7 +167,6 @@ const EmployeeCard = ({
       <div
         style={{
           fontSize: ".9rem",
-          // padding: ".5rem",
         }}
       >
         <Box backgroundColor="#f5f5f5" padding=".5rem" borderRadius=".5rem">
