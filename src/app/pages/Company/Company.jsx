@@ -3,98 +3,96 @@ import MaterialTable from '@material-table/core';
 import { useGetCompany } from '../../hooks/company/useCompany';
 import { Box, Button, Modal } from '@mui/material';
 import CompanyForm from '../../components/Form/Company/CompanyForm';
+import FormModal from '../../components/Modal/FormModal';
 
-const style = {
-	position: 'absolute',
-	top: '50%',
-	left: '50%',
-	transform: 'translate(-50%, -50%)',
-	width: 400,
-	bgcolor: 'background.paper',
-	border: '2px solid #000',
-	boxShadow: 24,
-	p: 4,
-};
+
+const columns = [
+  {
+    title: "SN",
+    render: (rowData) => rowData.tableData.id,
+    cellStyle: {
+      whiteSpace: 'nowrap', // Prevents content from wrapping
+    },
+    width: 100,
+  },
+  {
+    title: "Company Name",
+    field: "companyName",
+    emptyValue: "-",
+    width: 300,
+  },
+  {
+    title: "Company Type",
+    field: "companyType",
+    emptyValue: "-",
+    width: 340,
+  },
+  {
+    title: "Description",
+    field: "companyDescription",
+    emptyValue: "-",
+  },
+  {
+    title: "Actions",
+    render: (rowData) => (
+      <Button
+        variant="contained"
+        color="secondary"
+        // onClick={() => handleDeleteCompany(rowData.id)}
+      >
+        Delete
+      </Button>
+    ),
+    sorting: false,
+    width: 120,
+  },
+]
 
 const Company = () => {
-	const { data: companyData, isLoading } = useGetCompany();
+  const { data: companyData, isLoading } = useGetCompany();
 
-	const [open, setOpen] = React.useState(false);
-	const handleOpen = () => setOpen(true);
-	const handleClose = () => setOpen(false);
+  const [openModal, setOpenModal] = React.useState(false);
 
-	if (isLoading) return <>Loading</>;
-	return (
-		<>
-			<Button
-				variant='contained'
-				sx={{ mt: 3, ml: 1, backgroundColor: '#1c7ed6' }}
-				onClick={handleOpen}
-			>
-				+Add Company
-			</Button>
-			<Modal
-				open={open}
-				onClose={handleClose}
-				aria-labelledby='modal-modal-title'
-				aria-describedby='modal-modal-description'
-			>
-				<Box sx={style}>
-					<CompanyForm onClose={handleClose} />
-				</Box>
-			</Modal>
-			<br />
-			<br />
-			<MaterialTable
-				columns={[
-					{
-						title: 'SN',
-						render: (rowData) => rowData.tableData.id,
-						cellStyle: {
-							whiteSpace: 'nowrap', // Prevents content from wrapping
-						},
-						width: 100,
-					},
-					{
-						title: 'Company Name',
-						field: 'companyName',
-						emptyValue: '-',
-						width: 300,
-					},
-					{
-						title: 'Company Type',
-						field: 'companyType',
-						emptyValue: '-',
-						width: 340,
-					},
-					{
-						title: 'Description',
-						field: 'companyDescription',
-						emptyValue: '-',
-					},
-				]}
-				data={companyData}
-				title=''
-				isLoading={isLoading}
-				options={{
-					padding: 'dense',
-					margin: 50,
-					pageSize: 12,
-					headerStyle: {
-						backgroundColor: '#1c7ed6',
-						color: '#FFF',
-						fontSize: 20,
-						padding: 'dense',
-						height: 50,
-					},
-					rowStyle: {
-						// backgroundColor: '#EEE',
-						fontSize: 18,
-					},
-				}}
-				onRowDoubleClick={(_event, rowData) => handleDoubleClickRow(rowData)}
-			/>
-		</>
-	);
+  const handleOpenModal = () => setOpenModal(true);
+  const handleCloseModal = () => setOpenModal(false);
+
+  if (isLoading) return <>Loading</>;
+  return (
+    <>
+      <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+        <Button variant='contained' sx={{ mt: 3, ml: 1 }} onClick={handleOpenModal}>+Add Company</Button>
+      </Box>
+      <br /><br />
+      <MaterialTable
+        columns={columns}
+        data={companyData}
+        title=''
+        isLoading={isLoading}
+        options={{
+          padding: 'dense',
+          margin: 50,
+          pageSize: 12,
+          emptyRowsWhenPaging: false,
+          headerStyle: {
+            backgroundColor: '#01579b',
+            color: '#FFF',
+            fontSize: 20,
+            padding: 'dense',
+            height: 50,
+          },
+          rowStyle: {
+            // backgroundColor: '#EEE',
+            fontSize: 18,
+          }
+        }}
+        onRowDoubleClick={(_event, rowData) => handleDoubleClickRow(rowData)}
+      />
+      <FormModal
+        open={openModal}
+        onClose={handleCloseModal}
+        formComponent={<CompanyForm onClose={handleCloseModal} />}
+      />
+    </>
+  );
 };
 export default Company;

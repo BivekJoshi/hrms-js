@@ -7,8 +7,16 @@ import { toast } from 'react-toastify';
 const DepartmentForm = ({ onClose }) => {
 	const { formik } = useAddDepartmentForm();
 
-	const handleOK = () => {
-		formik.setFieldTouched('');
+	const handleFormSubmit = () => {
+		formik.handleSubmit();
+
+		if (formik.isValid) {
+			// Handle successful data posting
+			// Close the model
+			onClose();
+		} else {
+			toast.error('Please make sure you have filled the form correctly');
+		}
 	};
 
 	return (
@@ -17,8 +25,8 @@ const DepartmentForm = ({ onClose }) => {
 				<TextField
 					id='departmentName'
 					name='departmentName'
-					label='department Name'
-					placeholder='Enter your departmentName'
+					label='Department Name'
+					placeholder='Enter department name'
 					fullWidth
 					value={formik.values.departmentName}
 					onChange={formik.handleChange}
@@ -38,8 +46,8 @@ const DepartmentForm = ({ onClose }) => {
 				<TextField
 					id='departmentType'
 					name='departmentType'
-					label='department Type'
-					placeholder='Enter your departmentType'
+					label='Department Type'
+					placeholder='Enter department type'
 					fullWidth
 					value={formik.values.departmentType}
 					onChange={formik.handleChange}
@@ -59,8 +67,8 @@ const DepartmentForm = ({ onClose }) => {
 				<TextField
 					id='departmentDescription'
 					name='departmentDescription'
-					label='department Description'
-					placeholder='Enter your departmentDescription'
+					label='Description'
+					placeholder='Enter department description'
 					fullWidth
 					value={formik.values.departmentDescription}
 					onChange={formik.handleChange}
@@ -77,24 +85,24 @@ const DepartmentForm = ({ onClose }) => {
 					InputLabelProps={{ shrink: true }}
 				/>
 			</Grid>
-			<Button variant='contained' onClick={onClose} sx={{ mt: 3, ml: 1 }}>
-				Cancel
-			</Button>
-			<Button
-				variant='contained'
-				onClick={() => {
-					formik.handleSubmit();
-					// onClose;
-					formik.isValid
-						? handleOK()
-						: toast.error(
-								'Please make sure you have filled the form correctly'
-						  );
-				}}
-				sx={{ mt: 3, ml: 1 }}
+
+			<Grid
+				container
+				direction='row'
+				justifyContent='flex-end'
+				alignItems='flex-end'
 			>
-				Add Department
-			</Button>
+				<Button variant='contained' onClick={onClose} sx={{ mt: 3, ml: 1 }} color='error'>
+					Cancel
+				</Button>
+				<Button
+					variant='contained'
+					onClick={handleFormSubmit}
+					sx={{ mt: 3, ml: 1 }}
+				>
+					Add Department
+				</Button>
+			</Grid>
 		</Grid>
 	);
 };

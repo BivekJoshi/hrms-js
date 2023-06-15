@@ -1,22 +1,22 @@
-import { useMutation, useQuery } from 'react-query';
+import { useMutation, useQuery } from "react-query";
 import {
   addEmployee,
   editEmployee,
   getEmployee,
   getEmployeeById,
-} from '../../api/employee/employee-api';
-import { toast } from 'react-toastify';
-import { useParams } from 'react-router-dom';
+} from "../../api/employee/employee-api";
+import { toast } from "react-toastify";
+import { useParams } from "react-router-dom";
 
 export const useGetEmployee = () => {
-  return useQuery(['getEmployee'], () => getEmployee(), {
+  return useQuery(["getEmployee"], () => getEmployee(), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
 };
 
 export const useGetEmployeeById = (id) => {
-  return useQuery(['getEmployeeById', id], () => getEmployeeById(id), {
+  return useQuery(["getEmployeeById", id], () => getEmployeeById(id), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
@@ -26,14 +26,13 @@ export const useEditEmployee = ({ onSuccess }) => {
   const { id } = useParams();
 
   return useMutation(
-    ['editEmployee'],
+    ["editEmployee "],
     (formData) => {
-      console.log(formData);
       editEmployee(formData, id);
     },
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Employee added successfully');
+        toast.success('Employee edited successfully');
         onSuccess && onSuccess(data, variables, context);
       },
       onError: (err, _variables, _context) => {
@@ -44,9 +43,9 @@ export const useEditEmployee = ({ onSuccess }) => {
 };
 
 export const useAddEmployee = ({ onSuccess }) => {
-  return useMutation(['addEmployees'], (formData) => addEmployee(formData), {
+  return useMutation(["addEmployees"], (formData) => addEmployee(formData), {
     onSuccess: (data, variables, context) => {
-      toast.success('Employee added successfully');
+      toast.success("Employee added successfully");
       onSuccess && onSuccess(data, variables, context);
     },
     onError: (err, _variables, _context) => {

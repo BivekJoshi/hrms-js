@@ -1,8 +1,9 @@
 import React from 'react';
 import './MainCard.css'; // Import the CSS file
+import { Paper } from '@mui/material';
 
 const MainCard = ({
-  border = true,
+  border = false,
   boxShadow,
   children,
   content = true,
@@ -16,13 +17,15 @@ const MainCard = ({
   ...others
 }) => {
   return (
-    <div
-      className={`main-card ${border ? '' : 'no-border'}`}
-      {...others}
-    >
-      {content && <div className="card-content">{children}</div>}
-      {!content && children}
-    </div>
+    <Paper elevation={3} >
+      <div
+        className={`main-card ${border ? '1rem' : 'no-border'}`}
+        {...others}
+      >
+        {content && <div className="card-content">{children}</div>}
+        {!content && children}
+      </div>
+    </Paper>
   );
 };
 

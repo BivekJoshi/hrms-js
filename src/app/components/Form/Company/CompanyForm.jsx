@@ -6,18 +6,29 @@ import useAddCompanyForm from '../../../hooks/company/addCompany/useAddCompanyFo
 const CompanyForm = ({ onClose }) => {
 	const { formik } = useAddCompanyForm();
 
-	const handleOK = () => {
-		formik.setFieldTouched('');
-	};
+	const handleFormSubmit = () => {
 
+		formik.handleSubmit();
+
+		if (formik.isValid) {
+			formik.setTouched({
+				companyName: true,
+				companyType: true,
+				companyDescription: true,
+			});
+			onClose(); // Close the modal
+		} else {
+			toast.error('Please make sure you have filled the form correctly');
+		}
+	};
 	return (
 		<Grid container spacing={3}>
 			<Grid item xs={12} sm={12}>
 				<TextField
 					id='companyName'
 					name='companyName'
-					label='company Name'
-					placeholder='Enter your companyName'
+					label='Company Name'
+					placeholder='Enter company name'
 					fullWidth
 					value={formik.values.companyName}
 					onChange={formik.handleChange}
@@ -34,8 +45,8 @@ const CompanyForm = ({ onClose }) => {
 				<TextField
 					id='companyType'
 					name='companyType'
-					label='company Type'
-					placeholder='Enter your companyType'
+					label='Company Type'
+					placeholder='Enter company type'
 					fullWidth
 					value={formik.values.companyType}
 					onChange={formik.handleChange}
@@ -52,8 +63,8 @@ const CompanyForm = ({ onClose }) => {
 				<TextField
 					id='companyDescription'
 					name='companyDescription'
-					label='company Description'
-					placeholder='Enter your companyDescription'
+					label='Description'
+					placeholder='Enter your Company Description'
 					fullWidth
 					value={formik.values.companyDescription}
 					onChange={formik.handleChange}
@@ -70,24 +81,23 @@ const CompanyForm = ({ onClose }) => {
 					InputLabelProps={{ shrink: true }}
 				/>
 			</Grid>
-			<Button variant='contained' onClick={onClose} sx={{ mt: 3, ml: 1 }}>
-				Cancel
-			</Button>
-			<Button
-				variant='contained'
-				onClick={() => {
-					formik.handleSubmit();
-					// onClose;
-					formik.isValid
-						? handleOK()
-						: toast.error(
-								'Please make sure you have filled the form correctly'
-						  );
-				}}
-				sx={{ mt: 3, ml: 1 }}
+			<Grid
+				container
+				direction='row'
+				justifyContent='flex-end'
+				alignItems='flex-end'
 			>
-				Add Department
-			</Button>
+				<Button variant='contained' onClick={onClose} sx={{ mt: 3, ml: 1 }} color='error'>
+					Cancel
+				</Button>
+				<Button
+					variant='contained'
+					onClick={handleFormSubmit}
+					sx={{ mt: 3, ml: 1 }}
+				>
+					Add Company
+				</Button>
+			</Grid>
 		</Grid>
 	);
 };
