@@ -50,7 +50,6 @@ const Birthdaytable = ({ data, isLoading, currMonth }) => {
 
   // console.log(Data);
   return (
-    <div>
     <MaterialTable
       title={currMonth}
       columns={[
@@ -77,9 +76,6 @@ const Birthdaytable = ({ data, isLoading, currMonth }) => {
         }),
       }}
     />
-    <br/>
-    <br/>
-    </div>
   );
 };
 

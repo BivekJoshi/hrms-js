@@ -3,25 +3,15 @@ import * as React from 'react';
 import MaterialTable from '@material-table/core';
 
 import { useGetDesignation } from '../../hooks/designation/useDesignation';
-import { Box, Button, Modal } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import DesignationForm from '../../components/Form/Designation/DesignationForm';
+import FormModal from '../../components/Modal/FormModal';
 
-const style = {
-	position: 'absolute',
-	top: '50%',
-	left: '50%',
-	transform: 'translate(-50%, -50%)',
-	width: 400,
-	bgcolor: 'background.paper',
-	border: '2px solid #000',
-	boxShadow: 24,
-	p: 4,
-};
 
 const columns = [
 	{
-		title: "SN",
-		render: (rowData) => rowData.tableData.id,
+		title: 'SN',
+		render: (rowData) => rowData.tableData.id + 1,
 		cellStyle: {
 			whiteSpace: 'nowrap',
 		},
@@ -55,27 +45,21 @@ const columns = [
 const Designation = () => {
 	const { data: designationData, isLoading } = useGetDesignation();
 
-	const [open, setOpen] = React.useState(false);
-	const handleOpen = () => setOpen(true);
-	const handleClose = () => setOpen(false);
+	const [openModal, setOpenModal] = React.useState(false);
+
+	const handleOpenModal = () => setOpenModal(true);
+	const handleCloseModal = () => setOpenModal(false);
 
 	if (isLoading) return <>Loading</>;
+
 	return (
 		<>
 			<div>
 				<Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-					<Button variant='contained' sx={{ mt: 3, ml: 1 }} onClick={handleOpen}>+Add Designation</Button>
+					<Button variant='contained' sx={{ mt: 3, ml: 1 }} onClick={handleOpenModal}>
+						+Add Designation
+					</Button>
 				</Box>
-				<Modal
-					open={open}
-					onClose={handleClose}
-					aria-labelledby='modal-modal-title'
-					aria-describedby='modal-modal-description'
-				>
-					<Box sx={style}>
-						<DesignationForm onClose={handleClose} />
-					</Box>
-				</Modal>
 				<br />
 				<br />
 			</div>
@@ -102,6 +86,12 @@ const Designation = () => {
 					},
 				}}
 				onRowDoubleClick={(_event, rowData) => handleDoubleClickRow(rowData)}
+			/>
+
+			<FormModal
+				open={openModal}
+				onClose={handleCloseModal}
+				formComponent={<DesignationForm onClose={handleCloseModal} />}
 			/>
 		</>
 	);

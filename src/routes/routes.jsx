@@ -3,6 +3,7 @@ import Loadable from "../app/components/Header/Loader/Loadable";
 import React, { lazy } from "react";
 import Birthdaylist from "../app/pages/Birthday/Birthdaylist";
 import Attendance from "../app/pages/Attendance/Attendance";
+import TodoList from "../app/pages/TodoList/TodoList";
 
 const Dashboard = Loadable(
 	lazy(() => import('../app/pages/Dashboard/Dashboard'))
@@ -88,6 +89,11 @@ const routes = [
     path: "attendance",
     id: nanoid(),
     component: <Attendance />,
+  },
+  {
+    path: "todolist",
+    id: nanoid(),
+    component: <TodoList/>,
   },
 ];
 

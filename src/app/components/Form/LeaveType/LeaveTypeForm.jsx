@@ -13,8 +13,20 @@ import { ThemeSwitch } from '../../../../theme/ThemeSwitch';
 const LeaveTypeForm = ({ onClose }) => {
   const { formik } = useAddLeaveTypeForm();
 
-  const handleOK = () => {
-    formik.setFieldTouched('');
+  const handleFormSubmit = () => {
+
+    formik.handleSubmit();
+
+    if (formik.isValid) {
+      formik.setTouched({
+        leaveName: true,
+        leaveTotal: true,
+        leaveDescription: true,
+      });
+      onClose(); // Close the modal
+    } else {
+      toast.error('Please make sure you have filled the form correctly');
+    }
   };
 
   return (
@@ -23,8 +35,8 @@ const LeaveTypeForm = ({ onClose }) => {
         <TextField
           id='leaveName'
           name='leaveName'
-          label='leaveName'
-          placeholder='Enter your leaveName'
+          label='Leave Name'
+          placeholder='Enter leave name'
           fullWidth
           value={formik.values.leaveName}
           onChange={formik.handleChange}
@@ -39,8 +51,8 @@ const LeaveTypeForm = ({ onClose }) => {
         <TextField
           id='leaveTotal'
           name='leaveTotal'
-          label='leaveTotal'
-          placeholder='Enter your leaveTotal'
+          label='Total Leave Days'
+          placeholder='Enter total leave days'
           fullWidth
           value={formik.values.leaveTotal}
           onChange={formik.handleChange}
@@ -55,8 +67,8 @@ const LeaveTypeForm = ({ onClose }) => {
         <TextField
           id='leaveDescription'
           name='leaveDescription'
-          label='leaveDescription'
-          placeholder='Enter your leaveDescription'
+          label='Description'
+          placeholder='Enter leave description'
           fullWidth
           value={formik.values.leaveDescription}
           onChange={formik.handleChange}
@@ -87,24 +99,24 @@ const LeaveTypeForm = ({ onClose }) => {
           helperText={formik.touched.carryForward && formik.errors.carryForward}
         />
       </Grid>
-      <Button variant='contained' onClick={onClose} sx={{ mt: 3, ml: 1 }}>
-        Cancel
-      </Button>
-      <Button
-        variant='contained'
-        onClick={() => {
-          formik.handleSubmit();
-          // onClose;
-          formik.isValid
-            ? handleOK()
-            : toast.error(
-                'Please make sure you have filled the form correctly'
-              );
-        }}
-        sx={{ mt: 3, ml: 1 }}
+
+      <Grid
+        container
+        direction='row'
+        justifyContent='flex-end'
+        alignItems='flex-end'
       >
-        Add Leave Type
-      </Button>
+        <Button variant='contained' onClick={onClose} sx={{ mt: 3, ml: 1 }} color='error'>
+          Cancel
+        </Button>
+        <Button
+          variant='contained'
+          onClick={handleFormSubmit}
+          sx={{ mt: 3, ml: 1 }}
+        >
+          Add Leave Type
+        </Button>
+      </Grid>
     </Grid>
   );
 };

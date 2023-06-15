@@ -3,24 +3,14 @@ import * as React from 'react';
 import { Box, Button, Modal } from '@mui/material';
 import MaterialTable from '@material-table/core';
 import { useGetLeaveType } from '../../hooks/leaveType/useLeaveType';
-import LeaveForm from '../../components/Form/LeaveType/LeaveTypeForm';
+import FormModal from '../../components/Modal/FormModal';
+import LeaveTypeForm from '../../components/Form/LeaveType/LeaveTypeForm';
 
-const style = {
-	position: 'absolute',
-	top: '50%',
-	left: '50%',
-	transform: 'translate(-50%, -50%)',
-	width: 400,
-	bgcolor: 'background.paper',
-	border: '2px solid #000',
-	boxShadow: 24,
-	p: 4,
-};
 
 const columns = [
 	{
 		title: 'SN',
-		render: (rowData) => rowData.tableData.id ,
+		render: (rowData) => rowData.tableData.id,
 		cellStyle: {
 			whiteSpace: 'nowrap', // Prevents content from wrapping
 		},
@@ -53,28 +43,20 @@ const columns = [
 ]
 
 const LeaveType = () => {
-	const [open, setOpen] = React.useState(false);
-	const handleOpen = () => setOpen(true);
-	const handleClose = () => setOpen(false);
-
 	const { data: leaveTypeData, isLoading } = useGetLeaveType();
+
+	const [openModal, setOpenModal] = React.useState(false);
+
+	const handleOpenModal = () => setOpenModal(true);
+	const handleCloseModal = () => setOpenModal(false);
+
 	if (isLoading) return <>Loading</>;
 	return (
 		<>
 			<div>
 				<Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-					<Button variant='contained' sx={{ mt: 3, ml: 1 }} onClick={handleOpen}>+Add Leave Type</Button>
+					<Button variant='contained' sx={{ mt: 3, ml: 1 }} onClick={handleOpenModal}>+Add Leave Type</Button>
 				</Box>
-				<Modal
-					open={open}
-					onClose={handleClose}
-					aria-labelledby='modal-modal-title'
-					aria-describedby='modal-modal-description'
-				>
-					<Box sx={style}>
-						<LeaveForm onClose={handleClose} />
-					</Box>
-				</Modal>
 			</div>
 			<br></br>
 			<MaterialTable
@@ -99,6 +81,11 @@ const LeaveType = () => {
 					},
 				}}
 				onRowDoubleClick={(_event, rowData) => handleDoubleClickRow(rowData)}
+			/>
+			<FormModal
+				open={openModal}
+				onClose={handleCloseModal}
+				formComponent={<LeaveTypeForm onClose={handleCloseModal} />}
 			/>
 		</>
 	);
