@@ -19,9 +19,9 @@ export const editEmployee = async (formData, id) => {
 	const data = await axiosInstance.put(`/employee/=${id}`, formData);
 	return data;
 };
-export const editEmployee = async (formData, id) => {
-  console.log(id);
+// export const editEmployee = async (formData, id) => {
+//   console.log(id);
 
-  const data = await axiosInstance.put(`/employee/${id}`, formData);
-  return data;
-};
+//   const data = await axiosInstance.put(`/employee/${id}`, formData);
+//   return data;
+// };

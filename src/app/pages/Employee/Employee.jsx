@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import { useGetEmployee } from "../../hooks/employee/useEmployee";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
@@ -13,7 +13,6 @@ const Employee = () => {
   const [openAddModal, setOpenAddModal] = useState(false);
   const { data: employeeData, isLoading } = useGetEmployee();
   const { formik } = useAddEmployeeForm();
-
 
   const style = {
     position: "absolute",
@@ -40,23 +39,22 @@ const Employee = () => {
         </Button>
       </Box>
       <Stack
-        spacing={{ xs: 1, sm: 3 }}
+        spacing={{ xs: 1, sm: 5 }}
         direction="row"
         useFlexGap
         flexWrap="wrap"
       >
         {employeeData.map((employee, index) => (
           <Box key={index}>
-          <EmployeeCard
-          IsActive={employee.isActive}
-          EmployeeId={employee.id}
-          EFirstName={employee.firstName}
-          EMiddleName={employee.middleName}
-          ELastName={employee.lastName}
-          OfficeEmail={employee?.officeEmail}
-          MobileNumber={employee?.mobileNumber}
-          />
-
+            <EmployeeCard
+              IsActive={employee.isActive}
+              EmployeeId={employee.id}
+              EFirstName={employee.firstName}
+              EMiddleName={employee.middleName}
+              ELastName={employee.lastName}
+              OfficeEmail={employee?.officeEmail}
+              MobileNumber={employee?.mobileNumber}
+            />
           </Box>
         ))}
       </Stack>
@@ -66,7 +64,7 @@ const Employee = () => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <div>
+        <Box>
           <Box sx={style}>
             <EmployeeBasicInfoForm formik={formik} />
             <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
@@ -87,7 +85,7 @@ const Employee = () => {
               </Button>
             </Box>
           </Box>
-        </div>
+        </Box>
       </Modal>
     </>
   );
