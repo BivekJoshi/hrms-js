@@ -38,7 +38,7 @@ const useEditEmployeeForm = () => {
     values = {
       ...values,
     };
-    mutate(values);
+    mutate(values, formik);
   };
 
   return { formik, isLoading };

@@ -12,25 +12,55 @@ import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import EmployeeBasicInfoForm from '../EmployeeBasicInfoForm';
 import useEditEmployeeForm from '../../../../../hooks/employee/EditEmployee/useEditEmployeeForm';
-import Modal from '@mui/material/Modal';
-import EmployeeEducationDetailForm from '../../EmployeeEducationDetailForm/EmployeeEducationDetailForm';
+
+import EmployeeAddressDetailForm from '../../EmployeeAddressDetailForm/EmployeeAddressDetailForm';
+import {
+  usePermanentAddressForm,
+  useTemporaryAddressForm,
+} from '../../../../../hooks/employee/AddAddress/useAddressForm';
+
+import useQualificationForm from '../../../../../hooks/employee/AddQualification/useQualificationForm';
+import EmployeeQualifiactionDetailForm from '../../EmployeeQualaificationDetailForm/EmployeeQualificationDetailForm';
+import EmployeeFamilyDetailForm from '../../EmployeeFamilyDetailForm/EmployeeFamilyDetailForm';
+import useFamilyForm from '../../../../../hooks/employee/AddFamily/useFamilyForm';
 
 const steps = [
   'Basic Details',
-  'Educational Details',
   'Address Details',
+  'Family Details',
+  'Educational Details',
   'Other Details',
 ];
 const EditEmployeeForm = () => {
   const [activeStep, setActiveStep] = useState(0);
   const { formik, isLoading } = useEditEmployeeForm();
+  const { formik: permanentFormik } = usePermanentAddressForm();
+  const { formik: temporaryFormik } = useTemporaryAddressForm();
+  const { formik: qualificationFormik, isLoading: isLoadingQualification } = useQualificationForm();
+  const { formik: familyFormik, isLoading: isLoadingFamily } = useFamilyForm();
 
   const handleNext = () => {
     switch (activeStep) {
       case 0:
         formik.setFieldTouched('');
+        if (formik.dirty) {
+          formik.handleSubmit();
+        }
+
         break;
-      case 1: 
+      case 1:
+        permanentFormik.setFieldTouched('');
+        if (permanentFormik.dirty) {
+          permanentFormik.handleSubmit();
+          // temporaryFormik.handleSubmit();
+        }
+        break;
+      case 2:
+        familyFormik.setFieldTouched('');
+        if (familyFormik.dirty) {
+          familyFormik.handleSubmit();
+        }
+        break;
 
       default:
         break;
@@ -44,7 +74,28 @@ const EditEmployeeForm = () => {
         return <EmployeeBasicInfoForm formik={formik} isLoading={isLoading} />;
 
       case 1:
-        return <EmployeeEducationDetailForm />;
+        return (
+          <EmployeeAddressDetailForm
+            formik={permanentFormik}
+            temporaryFormik={temporaryFormik}
+          />
+        );
+
+      case 2:
+        return (
+          <EmployeeFamilyDetailForm
+            formik={familyFormik}
+            isLoading={isLoadingFamily}
+          />
+        );
+
+      case 3:
+        return (
+          <EmployeeQualifiactionDetailForm
+            formik={qualificationFormik}
+            isLoading={isLoadingQualification}
+          />
+        );
 
       default:
         throw new Error('Unknown Step');
@@ -62,7 +113,7 @@ const EditEmployeeForm = () => {
   return (
     <Container component='main' maxWidth='xlg' sx={{ mt: 5 }}>
       <Paper variant='plain' sx={{ my: { xs: 0, md: 6 }, p: { xs: 0, md: 3 } }}>
-        <Typography component='h1' varient='h4' align='center'>
+        <Typography component='h1' variant='h4' align='center'>
           Edit Employee
         </Typography>
         <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
@@ -100,8 +151,8 @@ const EditEmployeeForm = () => {
                       formik.isValid
                         ? null
                         : toast.error(
-                            'Please make sure you have filled the form correctly'
-                          );
+                          'Please make sure you have filled the form correctly'
+                        );
                     }}
                     sx={{ mt: 3, ml: 1 }}
                   >
@@ -110,7 +161,9 @@ const EditEmployeeForm = () => {
                 ) : (
                   <Button
                     variant='contained'
-                        onClick={() => { formik.handleSubmit(); handleNext }}
+                    onClick={() => {
+                      handleNext();
+                    }}
                     sx={{ mt: 3, ml: 1 }}
                   >
                     Next

@@ -13,28 +13,28 @@ const Birthdaylist = () => {
 
   const thisMonthBirthdays = upcomingBirthdayData
     ? upcomingBirthdayData
-        .filter((employee) => {
-          const dateOfBirth = new Date(employee.dateOfBirth);
-          return dateOfBirth.getMonth() === thisMonth;
-        })
-        .sort((a, b) => {
-          const adateOfBirth = new Date(a.dateOfBirth);
-          const bdateOfBirth = new Date(b.dateOfBirth);
-          return adateOfBirth.getDate() - bdateOfBirth.getDate();
-        })
+      .filter((employee) => {
+        const dateOfBirth = new Date(employee.dateOfBirth);
+        return dateOfBirth.getMonth() === thisMonth;
+      })
+      .sort((a, b) => {
+        const adateOfBirth = new Date(a.dateOfBirth);
+        const bdateOfBirth = new Date(b.dateOfBirth);
+        return adateOfBirth.getDate() - bdateOfBirth.getDate();
+      })
     : [];
 
   const upcomingBirthdays = upcomingBirthdayData
     ? upcomingBirthdayData
-        .filter((employee) => {
-          const dateOfBirth = new Date(employee.dateOfBirth);
-          return dateOfBirth.getMonth() === upcomingMonth;
-        })
-        .sort((a, b) => {
-          const adateOfBirth = new Date(a.dateOfBirth);
-          const bdateOfBirth = new Date(b.dateOfBirth);
-          return adateOfBirth.getDate() - bdateOfBirth.getDate();
-        })
+      .filter((employee) => {
+        const dateOfBirth = new Date(employee.dateOfBirth);
+        return dateOfBirth.getMonth() === upcomingMonth;
+      })
+      .sort((a, b) => {
+        const adateOfBirth = new Date(a.dateOfBirth);
+        const bdateOfBirth = new Date(b.dateOfBirth);
+        return adateOfBirth.getDate() - bdateOfBirth.getDate();
+      })
     : [];
 
   return (
@@ -47,7 +47,7 @@ const Birthdaylist = () => {
         data={thisMonthBirthdays}
         currMonth={format(new Date(), "MMMM")}
       />
-
+      <br />
       <Birthdaytable
         data={upcomingBirthdays}
         currMonth={format(addMonths(new Date(), 1), "MMMM")}

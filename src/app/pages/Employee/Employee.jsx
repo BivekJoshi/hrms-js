@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useGetEmployee } from "../../hooks/employee/useEmployee";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
@@ -13,6 +13,7 @@ const Employee = () => {
   const [openAddModal, setOpenAddModal] = useState(false);
   const { data: employeeData, isLoading } = useGetEmployee();
   const { formik } = useAddEmployeeForm();
+
 
   const style = {
     position: "absolute",
@@ -46,15 +47,16 @@ const Employee = () => {
       >
         {employeeData.map((employee, index) => (
           <Box key={index}>
-            <EmployeeCard
-              IsActive={employee.isActive}
-              EmployeeId={employee.id}
-              EFirstName={employee.firstName}
-              EMiddleName={employee.middleName}
-              ELastName={employee.lastName}
-              OfficeEmail={employee?.officeEmail}
-              MobileNumber={employee?.mobileNumber}
-            />
+          <EmployeeCard
+          IsActive={employee.isActive}
+          EmployeeId={employee.id}
+          EFirstName={employee.firstName}
+          EMiddleName={employee.middleName}
+          ELastName={employee.lastName}
+          OfficeEmail={employee?.officeEmail}
+          MobileNumber={employee?.mobileNumber}
+          />
+
           </Box>
         ))}
       </Stack>
@@ -64,7 +66,7 @@ const Employee = () => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box>
+        <div>
           <Box sx={style}>
             <EmployeeBasicInfoForm formik={formik} />
             <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
@@ -85,7 +87,7 @@ const Employee = () => {
               </Button>
             </Box>
           </Box>
-        </Box>
+        </div>
       </Modal>
     </>
   );

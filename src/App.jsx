@@ -1,13 +1,13 @@
-import * as React from 'react';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import AppRoutes from './routes/AppRoutes';
+import * as React from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import AppRoutes from "./routes/AppRoutes";
 
 export default function App() {
   return (
     <>
       <ToastContainer
-        position='bottom-right'
+        position="bottom-right"
         autoClose={3000}
         hideProgressBar={false}
         newestOnTop={false}
@@ -17,8 +17,9 @@ export default function App() {
         theme="light"
         draggable
         pauseOnHover
-      />
-      <AppRoutes />
-    </>
+      /> 
+       <AppRoutes />
+
+  </>
   );
 }

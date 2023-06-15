@@ -12,7 +12,6 @@ const Age = (dateOfBirth) => {
 
 const Birthdaytable = ({ data, isLoading, currMonth }) => {
   const today = new Date();
-
   const Data = data
     .map((row, i) => {
       const currentYear = new Date().getFullYear();
@@ -25,9 +24,8 @@ const Birthdaytable = ({ data, isLoading, currMonth }) => {
       const age = Age(row.dateOfBirth);
 
       return {
-        fullName: `${row.firstName} ${
-          row.middleName === null ? "" : row.middleName
-        } ${row.lastName}`,
+        fullName: `${row.firstName} ${row.middleName === null ? "" : row.middleName
+          } ${row.lastName}`,
         position: row.position?.positionName,
         dateOfBirth: format(new Date(row.dateOfBirth), "dd MMMM", {
           locale: enUS,
@@ -50,7 +48,7 @@ const Birthdaytable = ({ data, isLoading, currMonth }) => {
       }
     });
 
-  console.log(Data);
+  // console.log(Data);
   return (
     <MaterialTable
       title={currMonth}
@@ -64,6 +62,10 @@ const Birthdaytable = ({ data, isLoading, currMonth }) => {
       ]}
       data={Data}
       options={{
+        padding: 'dense',
+        margin: 50,
+        pageSize: 5,
+        emptyRowsWhenPaging: false,
         headerStyle: {
           backgroundColor: "#01579b",
           color: "#FFF",
