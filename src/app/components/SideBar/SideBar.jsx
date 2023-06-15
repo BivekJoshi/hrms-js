@@ -24,7 +24,7 @@ import { ThemeModeContext } from "../../../theme/ThemeModeContext";
 import { removeUser } from "../../utils/cookieHelper";
 import { useGetTodayBirthday } from "../../hooks/birthday/useBirthday";
 import TodayBirthday from "../../pages/Birthday/TodayBirthday";
-
+import { RemoveNotificationContext } from "../../../Usecontext/BirthdayContext";
 const drawerWidth = 240;
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
@@ -174,16 +174,19 @@ export default function SideBar() {
       subMenus: [],
     },
   ];
+  const removeNotificationContext = useContext(RemoveNotificationContext);
   const [openNotification, setOpenNotification] = useState(false);
-  const [notificationSeen, setNotificationSeen] = useState(false);
+
   const [subMenuOpen, setSubMenuOpen] = useState({});
   const handleChange = () => {
+    //call notification api to change value to active false if any active true data is present
+    removeNotificationContext.dispatch({
+      type: "notifications",
+      payload: null,
+    });
     setOpenNotification(!openNotification);
-    setNotificationSeen(true);
   };
-  // const handleClose = () => {
-  //   setOpenNotification(false);
-  // };
+
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -213,6 +216,7 @@ export default function SideBar() {
               }}
             >
               <div>
+                {/* // data.filtert((d)=>a.active).length */}
                 <Badge color="secondary" badgeContent={data?.length}>
                   <CakeOutlined
                     id="basic-button"
@@ -229,10 +233,11 @@ export default function SideBar() {
                     isLoading={isLoading}
                     open={openNotification}
                     setOpen={setOpenNotification}
-                    notificationSeen={notificationSeen}
-                    setNotificationSeen={setNotificationSeen}
                   />
                 )}
+                {/* {openNotification && (
+                  <TodayBirthday data={data} onClose={handleClose} />
+                )} */}
               </div>
             </div>
           </div>
