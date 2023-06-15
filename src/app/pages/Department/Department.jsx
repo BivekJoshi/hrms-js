@@ -3,79 +3,63 @@ import { useGetDepartment } from '../../hooks/department/useDepartment';
 
 import MaterialTable from '@material-table/core';
 
-import { Box, Button, Modal } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import DepartmentForm from '../../components/Form/Department/DepartmentForm';
+import FormModal from '../../components/Modal/FormModal';
 
-const style = {
-	position: 'absolute',
-	top: '50%',
-	left: '50%',
-	transform: 'translate(-50%, -50%)',
-	width: 400,
-	bgcolor: 'background.paper',
-	border: '2px solid #000',
-	boxShadow: 24,
-	p: 4,
-};
+
+const columns = [
+	{
+		title: 'SN',
+		render: (rowData) => rowData.tableData.id,
+		cellStyle: {
+			whiteSpace: 'nowrap', // Prevents content from wrapping
+		},
+		width: 80,
+	},
+	{
+		title: 'Department Name',
+		field: 'departmentName',
+		emptyValue: '-',
+		width: 250,
+	},
+	{
+		title: 'Department Type',
+		field: 'departmentType',
+		emptyValue: '-',
+		width: 200,
+	},
+	{
+		title: 'Description',
+		field: 'departmentDescription',
+		emptyValue: '-',
+	},
+];
 
 const Department = () => {
-	const [open, setOpen] = React.useState(false);
-	const handleOpen = () => setOpen(true);
-	const handleClose = () => setOpen(false);
+	const [openModal, setOpenModal] = React.useState(false);
+
+	const handleOpenModal = () => setOpenModal(true);
+	const handleCloseModal = () => setOpenModal(false);
 
 	const { data: departmentData, isLoading } = useGetDepartment();
+
+
 	if (isLoading) return <>Loading</>;
 	return (
 		<>
 			<div>
-				<Button
-					variant='contained'
-					sx={{ backgroundColor: '#1c7ed6' }}
-					onClick={handleOpen}
-				>
-					+Add Department
-				</Button>
-				<Modal
-					open={open}
-					onClose={handleClose}
-					aria-labelledby='modal-modal-title'
-					aria-describedby='modal-modal-description'
-				>
-					<Box sx={style}>
-						<DepartmentForm onClose={handleClose} />
-					</Box>
-				</Modal>
+				<Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+					<Button variant='contained' sx={{ mt: 3, ml: 1 }} onClick={handleOpenModal}>
+						+Add Department
+					</Button>
+				</Box>
 			</div>
-			<br></br>
+			<br>
+			</br>
 
 			<MaterialTable
-				columns={[
-					{
-						title: 'SN',
-						render: (rowData) => rowData.tableData.id,
-						cellStyle: {
-							whiteSpace: 'nowrap', // Prevents content from wrapping
-						},
-						width: 100,
-					},
-					{
-						title: 'Department Name',
-						field: 'departmentName',
-						emptyValue: '-',
-						width: 300,
-					},
-					{
-						title: 'Department Type',
-						field: 'departmentType',
-						emptyValue: '-',
-						width: 340,
-					},
-					{
-						title: 'Description',
-						field: 'departmentDescription',
-						emptyValue: '-',
-					},
-				]}
+				columns={columns}
 				data={departmentData}
 				title=''
 				isLoading={isLoading}
@@ -83,6 +67,7 @@ const Department = () => {
 					padding: 'dense',
 					margin: 50,
 					pageSize: 12,
+					emptyRowsWhenPaging: false,
 					headerStyle: {
 						backgroundColor: '#1c7ed6',
 						color: '#FFF',
@@ -95,6 +80,12 @@ const Department = () => {
 					},
 				}}
 				onRowDoubleClick={(_event, rowData) => handleDoubleClickRow(rowData)}
+			/>
+
+			<FormModal
+				open={openModal}
+				onClose={handleCloseModal}
+				formComponent={<DepartmentForm onClose={handleCloseModal} />}
 			/>
 		</>
 	);

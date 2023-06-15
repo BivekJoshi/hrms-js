@@ -2,37 +2,23 @@ import React, { useContext, useState } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
-import CssBaseline from '@mui/material/CssBaseline';
-import MuiAppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
-import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-
+import Collapse from '@mui/material/Collapse';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
-import { Button, Card, Collapse, Switch } from '@mui/material';
-import { ThemeModeContext } from '../../../theme/ThemeModeContext';
-import { removeUser } from '../../utils/cookieHelper';
+import { Button, Card, Switch, Typography } from '@mui/material';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import IconButton from '@mui/material/IconButton';
 
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
-import PersonAddIcon from '@mui/icons-material/PersonAdd';
-import PersonIcon from '@mui/icons-material/Person';
-import MailIcon from '@mui/icons-material/Mail';
-import CakeIcon from '@mui/icons-material/Cake';
-import HowToRegIcon from '@mui/icons-material/HowToReg';
-import WorkspacesIcon from '@mui/icons-material/Workspaces';
-import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
-import BusinessIcon from '@mui/icons-material/Business';
-import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck';
+import { removeUser } from '../../utils/cookieHelper';
+import { drawerMenus } from './drawerMenus';
+import { ThemeModeContext } from '../../../theme/ThemeModeContext';
+import Header from '../Header/Header';
 
 const drawerWidth = 260;
 
@@ -56,32 +42,15 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
 );
 
 const StyledNavLink = styled(NavLink)`
-	text-decoration: none;
-	background-color: #e5e5e5;
-	color: #000;
-	&.active {
-		&& {
-			background-color: #e5e5e5;
-		}
-	}
+  text-decoration: none;
+  background-color: #e5e5e5;
+  color: #000;
+  &.active {
+    && {
+      background-color: #e5e5e5;
+    }
+  }
 `;
-
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== 'open',
-})(({ theme, open }) => ({
-  transition: theme.transitions.create(['margin', 'width'], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  ...(open && {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: `${drawerWidth}px`,
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  }),
-}));
 
 const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
@@ -92,12 +61,12 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
-export default function SideBar() {
-  const theme = useTheme();
+export default function Sidebar() {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const { toggleMode, themeMode } = useContext(ThemeModeContext); // Accessing themeMode from context
-  console.log(useContext(ThemeModeContext));
+  const [subMenuOpen, setSubMenuOpen] = useState({});
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -113,117 +82,13 @@ export default function SideBar() {
     }));
   };
 
-  const primaryColor = '#1c7ed6';
-
-  const drawerMenus = [
-    {
-      name: 'Dashboard',
-      icon: <DashboardIcon style={{ color: primaryColor }} fontSize='large' />,
-      path: 'dashboard',
-      subMenus: [],
-    },
-    {
-      name: 'Employee',
-      icon: <PeopleAltIcon style={{ color: primaryColor }} fontSize='large' />,
-      path: 'employee',
-      subMenus: [
-        {
-          name: 'Add Employee',
-          path: 'employee/add',
-          icon: <PersonAddIcon style={{ color: primaryColor }} />,
-        },
-        {
-          name: 'Employee',
-          path: 'employee/add',
-          icon: <PersonIcon style={{ color: primaryColor }} />,
-        },
-        {
-          name: 'Leave',
-          path: 'leave',
-          icon: <MailIcon style={{ color: primaryColor }} />,
-        },
-        {
-          name: 'Leave Type',
-          path: 'leavetype',
-          icon: <MailIcon style={{ color: primaryColor }} />,
-        },
-        {
-          name: 'Attendance',
-          path: 'attendance',
-          icon: <HowToRegIcon style={{ color: primaryColor }} />,
-        },
-        {
-          name: 'Birthday',
-          path: 'birthday',
-          icon: <CakeIcon style={{ color: primaryColor }} />,
-        },
-      ],
-    },
-    {
-      name: 'Department',
-      icon: <WorkspacesIcon style={{ color: primaryColor }} fontSize='large' />,
-      path: 'department',
-      subMenus: [],
-    },
-    {
-      name: 'Designation',
-      icon: (
-        <AssignmentIndIcon style={{ color: primaryColor }} fontSize='large' />
-      ),
-      path: 'designation',
-      subMenus: [],
-    },
-    {
-      name: 'Company',
-      icon: <BusinessIcon style={{ color: primaryColor }} fontSize='large' />,
-      path: 'company',
-      subMenus: [],
-    },
-    // {
-    //   name: 'Employee Overview',
-    //   icon: (
-    //     <PlaylistAddCheckIcon
-    //       style={{ color: primaryColor }}
-    //       fontSize='large'
-    //     />
-    //   ),
-    //   path: 'practice',
-    //   subMenus: [],
-    // },
-    {
-      name: 'ToDo List',
-      icon: (
-        <PlaylistAddCheckIcon
-          style={{ color: primaryColor }}
-          fontSize='large'
-        />
-      ),
-      path: 'todolist',
-      subMenus: [],
-    },
-  ];
-
-  const [subMenuOpen, setSubMenuOpen] = useState({});
-
   return (
     <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
-      <AppBar position='fixed' open={open}>
-        <Toolbar>
-          <IconButton
-            color='inherit'
-            aria-label='open drawer'
-            onClick={handleDrawerOpen}
-            edge='start'
-            sx={{ mr: 2, ...(open && { display: 'none' }) }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant='h6' noWrap component='div'>
-            Human Resource Management System
-          </Typography>
-        </Toolbar>
-      </AppBar>
+      <Header
+        open={open}
+        handleDrawerOpen={handleDrawerOpen}
+        drawerWidth={drawerWidth}
+      />
       <Drawer
         sx={{
           width: drawerWidth,
@@ -239,11 +104,7 @@ export default function SideBar() {
       >
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? (
-              <ChevronLeftIcon />
-            ) : (
-              <ChevronRightIcon />
-            )}
+            <ChevronLeftIcon />
           </IconButton>
         </DrawerHeader>
         <Divider />
@@ -302,21 +163,17 @@ export default function SideBar() {
           <Typography variant='body2' sx={{ marginRight: '8px' }}>
             {themeMode === 'light' ? 'Light' : 'Dark'} Mode
           </Typography>
-          <Switch
-            checked={themeMode === 'dark'}
-            onChange={toggleMode}
-            style={{ color: primaryColor }}
-          />
+          <Switch checked={themeMode === 'dark'} onChange={toggleMode} />
         </Box>
       </Drawer>
 
       <Main open={open}>
         <DrawerHeader />
         <Card
-          variant="outlined"
+          variant='outlined'
           sx={{
-            width: open ? "calc(100% - drawerWidth)" : "100%",
-            padding: "20px",
+            width: open ? 'calc(100% - drawerWidth)' : '100%',
+            padding: '20px',
           }}
         >
           <Outlet />
