@@ -65,6 +65,7 @@ const EmployeeQualificationDetailForm = ({ formik, isLoading }) => {
                     <TextField
                       id={`education[${index}].passedYear`}
                       name={`education[${index}].passedYear`}
+                      type="number"
                       label="Passed Year"
                       placeholder="Enter your passed year"
                       fullWidth

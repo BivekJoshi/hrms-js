@@ -6,7 +6,7 @@ import CompanyForm from '../../components/Form/Company/CompanyForm';
 import FormModal from '../../components/Modal/FormModal';
 
 
-const columns=[
+const columns = [
   {
     title: "SN",
     render: (rowData) => rowData.tableData.id,
@@ -32,15 +32,29 @@ const columns=[
     field: "companyDescription",
     emptyValue: "-",
   },
+  {
+    title: "Actions",
+    render: (rowData) => (
+      <Button
+        variant="contained"
+        color="secondary"
+        // onClick={() => handleDeleteCompany(rowData.id)}
+      >
+        Delete
+      </Button>
+    ),
+    sorting: false,
+    width: 120,
+  },
 ]
 
 const Company = () => {
-	const { data: companyData, isLoading } = useGetCompany();
+  const { data: companyData, isLoading } = useGetCompany();
 
-	const [openModal, setOpenModal] = React.useState(false);
+  const [openModal, setOpenModal] = React.useState(false);
 
-	const handleOpenModal = () => setOpenModal(true);
-	const handleCloseModal = () => setOpenModal(false);
+  const handleOpenModal = () => setOpenModal(true);
+  const handleCloseModal = () => setOpenModal(false);
 
   if (isLoading) return <>Loading</>;
   return (
@@ -48,7 +62,7 @@ const Company = () => {
       <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
         <Button variant='contained' sx={{ mt: 3, ml: 1 }} onClick={handleOpenModal}>+Add Company</Button>
       </Box>
-      <br/><br/>
+      <br /><br />
       <MaterialTable
         columns={columns}
         data={companyData}
@@ -74,10 +88,10 @@ const Company = () => {
         onRowDoubleClick={(_event, rowData) => handleDoubleClickRow(rowData)}
       />
       <FormModal
-				open={openModal}
-				onClose={handleCloseModal}
-				formComponent={<CompanyForm onClose={handleCloseModal} />}
-			/>
+        open={openModal}
+        onClose={handleCloseModal}
+        formComponent={<CompanyForm onClose={handleCloseModal} />}
+      />
     </>
   );
 };

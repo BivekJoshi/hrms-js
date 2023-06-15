@@ -6,6 +6,7 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
 
   return (
     !isLoading && (
+      <Grid container spacing={3}>
       <FormikProvider value={formik}>
         <FieldArray
           name="family"
@@ -13,7 +14,7 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
             <div>
               {formik.values.family.map((friend, index) => (
                 <div key={index} style={{ display: "flex", gap: "1rem" }}>
-                  <Grid item xs={12} sm={6}>
+                  <Grid item xs={12} sm={4}>
                     <TextField
                       id={`family[${index}].name`}
                       name={`family[${index}].name`}
@@ -29,7 +30,7 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
                       InputLabelProps={{ shrink: true }}
                     />
                   </Grid>
-                  <Grid item xs={12} sm={6}>
+                  <Grid item xs={12} sm={4}>
                     <TextField
                       id={`family[${index}].relation`}
                       name={`family[${index}].relation`}
@@ -65,6 +66,7 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
           )}
         />
       </FormikProvider>
+      </Grid>
     )
   );
 };
