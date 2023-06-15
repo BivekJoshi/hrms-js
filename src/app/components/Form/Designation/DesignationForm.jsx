@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import useAddDepartmentForm from '../../../hooks/designation/addDesignation/useAddDesignationForm';
 
 const DesignationForm = ({ onClose }) => {
-  const { formik } = useAddDepartmentForm();
+	const { formik } = useAddDepartmentForm();
 
   const handleFormSubmit = () => {
     formik.handleSubmit();

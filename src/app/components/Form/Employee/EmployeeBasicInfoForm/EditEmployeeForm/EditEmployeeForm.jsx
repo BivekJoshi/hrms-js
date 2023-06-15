@@ -18,10 +18,16 @@ import {
   usePermanentAddressForm,
   useTemporaryAddressForm,
 } from '../../../../../hooks/employee/AddAddress/useAddressForm';
+import { useGetAddressById } from '../../../../../hooks/employee/useAddress';
+import { useParams } from 'react-router';
+import { useGetEmployeeById } from '../../../../../hooks/employee/useEmployee';
+import EmployeeBankDetailForm from '../../EmployeeBankDetailForm/EmployeeBankDetailForm';
+import useAddBankForm from '../../../../../hooks/employee/AddBankForm/useAddBankForm';
 
 import useQualificationForm from '../../../../../hooks/employee/AddQualification/useQualificationForm';
 import EmployeeQualifiactionDetailForm from '../../EmployeeQualaificationDetailForm/EmployeeQualificationDetailForm';
 import EmployeeFamilyDetailForm from '../../EmployeeFamilyDetailForm/EmployeeFamilyDetailForm';
+import useAddLeaveForm from '../../../../../hooks/employee/AddFamily/useFamilyForm';
 import useFamilyForm from '../../../../../hooks/employee/AddFamily/useFamilyForm';
 
 const steps = [
@@ -29,16 +35,26 @@ const steps = [
   'Address Details',
   'Family Details',
   'Educational Details',
+  'Bank Details',
   'Other Details',
 ];
 const EditEmployeeForm = () => {
+  const { id } = useParams();
   const [activeStep, setActiveStep] = useState(0);
-  const { formik, isLoading } = useEditEmployeeForm();
-  const { formik: permanentFormik } = usePermanentAddressForm();
-  const { formik: temporaryFormik } = useTemporaryAddressForm();
-  const { formik: qualificationFormik, isLoading: isLoadingQualification } = useQualificationForm();
-  const { formik: familyFormik, isLoading: isLoadingFamily } = useFamilyForm();
+  const { data, isLoading: employeeLoading } = useGetEmployeeById(id);
+  const { formik: qualificationFormik, isLoading: isLoadingQualification } =
+    useQualificationForm();
+  const { formik: familyFormik, isLoading: isLoadingFamily } =
+    useAddLeaveForm();
+  console.log(data);
 
+  const { formik, isLoading } = useEditEmployeeForm({ data, employeeLoading });
+  const { formik: permanentFormik } = usePermanentAddressForm({
+    data,
+    employeeLoading,
+  });
+  const { formik: temporaryFormik } = useTemporaryAddressForm();
+  const { formik: bankFormik } = useAddBankForm({ data, employeeLoading });
   const handleNext = () => {
     switch (activeStep) {
       case 0:
@@ -52,13 +68,24 @@ const EditEmployeeForm = () => {
         permanentFormik.setFieldTouched('');
         if (permanentFormik.dirty) {
           permanentFormik.handleSubmit();
-          // temporaryFormik.handleSubmit();
+        } else if (temporaryFormik.dirty) {
+          temporaryFormik.handleSubmit();
         }
         break;
       case 2:
         familyFormik.setFieldTouched('');
         if (familyFormik.dirty) {
           familyFormik.handleSubmit();
+        }
+        break;
+      case 3:
+        qualificationFormik.setFieldTouched('');
+        break;
+
+      case 4:
+        bankFormik.setFieldTouched('');
+        if (bankFormik.dirty) {
+          bankFormik.handleSubmit();
         }
         break;
 
@@ -96,6 +123,12 @@ const EditEmployeeForm = () => {
             isLoading={isLoadingQualification}
           />
         );
+
+      case 4:
+        return <EmployeeBankDetailForm formik={bankFormik} />;
+
+      case 5:
+        return <p>Hello World</p>;
 
       default:
         throw new Error('Unknown Step');
