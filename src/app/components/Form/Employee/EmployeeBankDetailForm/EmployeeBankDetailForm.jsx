@@ -1,7 +1,9 @@
 import { Grid, TextField } from '@mui/material';
 import React from 'react';
+import { useGetBank } from '../../../../hooks/employee/useBank';
 
 const EmployeeBankDetailForm = ({ formik }) => {
+  const { data, isLoading } = useGetBank()
   return (
     <Grid container spacing={3}>
       <Grid item xs={12} sm={4}>

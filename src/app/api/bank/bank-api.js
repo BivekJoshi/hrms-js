@@ -1,3 +1,4 @@
+import { useParams } from 'react-router';
 import { axiosInstance } from '../../../auth/axiosInterceptor';
 
 export const getBankDetailById = async (id) => {
@@ -24,9 +25,10 @@ export const addBankDetail = async (formData, id) => {
   return data;
 };
 
-export const editBankDetail = async (formData, bankId) => {
+export const editBankDetail = async (formData) => {
+  const { id } = formData;
   const data = await axiosInstance.put(
-    `/bank-details/update/${bankId}`,
+    `/bank-details/update/${id}`,
     formData
   );
   return data;

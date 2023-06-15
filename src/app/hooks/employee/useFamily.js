@@ -11,7 +11,7 @@ export const useAddFamily = ({ onSuccess }) => {
         (formData) => addfamily(formData, id),
         {
             onSuccess: (data, variables, context) => {
-                toast.success('Succesfully added Family Member');
+                toast.success('Successfully added Family Member');
                 onSuccess && onSuccess(data, variables, context);
             },
             onError: (err, _variables, _context) => {

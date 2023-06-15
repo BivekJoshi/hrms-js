@@ -40,8 +40,12 @@ const steps = [
 const EditEmployeeForm = () => {
   const { id } = useParams();
   const [activeStep, setActiveStep] = useState(0);
-  const { formik: qualificationFormik, isLoading: isLoadingQualification } = useQualificationForm();
-  const { formik: familyFormik, isLoading: isLoadingFamily } = useAddLeaveForm();
+  const { data, isLoading: employeeLoading } = useGetEmployeeById(id);
+  const { formik: qualificationFormik, isLoading: isLoadingQualification } =
+    useQualificationForm();
+  const { formik: familyFormik, isLoading: isLoadingFamily } =
+    useAddLeaveForm();
+  console.log(data);
 
   const { formik, isLoading } = useEditEmployeeForm({ data, employeeLoading });
   const { formik: permanentFormik } = usePermanentAddressForm({
@@ -49,7 +53,7 @@ const EditEmployeeForm = () => {
     employeeLoading,
   });
   const { formik: temporaryFormik } = useTemporaryAddressForm();
-  const { formik: bankFormik } = useAddBankForm();
+  const { formik: bankFormik } = useAddBankForm({ data, employeeLoading });
   const handleNext = () => {
     switch (activeStep) {
       case 0:
@@ -71,6 +75,16 @@ const EditEmployeeForm = () => {
         familyFormik.setFieldTouched('');
         if (familyFormik.dirty) {
           familyFormik.handleSubmit();
+        }
+        break;
+      case 3:
+        qualificationFormik.setFieldTouched('');
+        break;
+
+      case 4:
+        bankFormik.setFieldTouched('');
+        if (bankFormik.dirty) {
+          bankFormik.handleSubmit();
         }
         break;
 
@@ -109,8 +123,11 @@ const EditEmployeeForm = () => {
           />
         );
 
-      // case 4:
-        // return <EmployeeBankDetailForm formik={bankFormik} />;
+      case 4:
+        return <EmployeeBankDetailForm formik={bankFormik} />;
+
+      case 5:
+        return <p>Hello World</p>;
 
       default:
         throw new Error('Unknown Step');
@@ -166,8 +183,8 @@ const EditEmployeeForm = () => {
                       formik.isValid
                         ? null
                         : toast.error(
-                          'Please make sure you have filled the form correctly'
-                        );
+                            'Please make sure you have filled the form correctly'
+                          );
                     }}
                     sx={{ mt: 3, ml: 1 }}
                   >
