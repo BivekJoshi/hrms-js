@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useGetEmployee } from "../../hooks/employee/useEmployee";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
@@ -13,6 +13,7 @@ const Employee = () => {
   const [openAddModal, setOpenAddModal] = useState(false);
   const { data: employeeData, isLoading } = useGetEmployee();
   const { formik } = useAddEmployeeForm();
+
 
   const style = {
     position: "absolute",
@@ -39,7 +40,7 @@ const Employee = () => {
         </Button>
       </Box>
       <Stack
-        spacing={{ xs: 1, sm: 5 }}
+        spacing={{ xs: 1, sm: 3 }}
         direction="row"
         useFlexGap
         flexWrap="wrap"
@@ -55,6 +56,7 @@ const Employee = () => {
               OfficeEmail={employee?.officeEmail}
               MobileNumber={employee?.mobileNumber}
             />
+
           </Box>
         ))}
       </Stack>
@@ -64,7 +66,7 @@ const Employee = () => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box>
+        <div>
           <Box sx={style}>
             <EmployeeBasicInfoForm formik={formik} />
             <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
@@ -76,8 +78,8 @@ const Employee = () => {
                   formik.isValid
                     ? null
                     : toast.error(
-                        "Please make sure you have filled the form correctly"
-                      );
+                      "Please make sure you have filled the form correctly"
+                    );
                 }}
                 sx={{ mt: 3, ml: 1 }}
               >
@@ -85,7 +87,7 @@ const Employee = () => {
               </Button>
             </Box>
           </Box>
-        </Box>
+        </div>
       </Modal>
     </>
   );
