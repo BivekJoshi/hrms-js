@@ -7,6 +7,8 @@ import FormModal from '../../components/Modal/FormModal';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import { useState } from 'react';
+import useEditCompanyForm from '../../hooks/company/editCompany/useEditCompanyForm';
+import { editCompany } from '../../api/company/company-api';
 
 const Company = () => {
   const { data: companyData, isLoading } = useGetCompany();
@@ -18,18 +20,21 @@ const Company = () => {
 
   const deleteCompanyMutation = useDeleteCompany({});
 
-  const [editedCompanyId, setEditedCompanyId] = useState();
-  console.log("editedCompanyId", editedCompanyId)
+  const [editedCompany, setEditedCompany] = useState({});
 
   const handleDeleteCompany = (companyId) => {
     deleteCompanyMutation.mutate(companyId);
   };
 
+const {formik}=useEditCompanyForm()
 
-  const handleEditCompany = (companyId, formData) => {
-    setEditedCompanyId(companyId);
+  const handleEditCompany = (rowData) => {
+    setEditedCompany(rowData);
+    // useEditCompanyForm(rowData);
+    // formik(rowData)
     setOpenModal(true);
-    // console.log(companyId);
+    // console.log("row ddat", rowData)
+    console.log(rowData);
   };
 
   const columns = [
@@ -62,7 +67,7 @@ const Company = () => {
       title: 'Actions',
       render: (rowData) => (
         <Stack direction="row" spacing={0}>
-          <Button color="primary" onClick={() => handleEditCompany(rowData.id, rowData)}>
+          <Button color="primary" onClick={() => handleEditCompany(rowData)}>
             <ModeEditOutlineIcon />
           </Button>
           <Button color="primary" onClick={() => handleDeleteCompany(rowData.id)}>
@@ -112,7 +117,7 @@ const Company = () => {
       <FormModal
         open={openModal}
         onClose={handleCloseModal}
-        formComponent={<CompanyForm onClose={handleCloseModal} isEditMode={editedCompanyId} companyId={editedCompanyId} />}
+        formComponent={<CompanyForm onClose={handleCloseModal} isEditMode={editedCompany} rowData={editedCompany} />}
       />
     </>
   );

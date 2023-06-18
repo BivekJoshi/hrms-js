@@ -41,10 +41,7 @@ export const useDeleteCompany = ({ onSuccess }) => {
 export const useEditCompany = ({ onSuccess }) => {
   const { companyId } = useParams();
   return useMutation(['editCompany'],
-
-    (formData) => {
-      editCompany(formData, companyId)
-    },
+    (formData) => editCompany(formData, companyId),
     {
       onSuccess: (data, variables, context) => {
         toast.success('Successfully edited Company');
@@ -55,3 +52,19 @@ export const useEditCompany = ({ onSuccess }) => {
       },
     });
 };
+// export const useEditCompany = ({ onSuccess }) => {
+//   const { companyId } = useParams();
+//   return useMutation(['editCompany'],
+//     ( formData ) => {
+//       editCompany(companyId, formData);
+//     },
+//     {
+//       onSuccess: (data, variables, context) => {
+//         toast.success('Successfully edited Company');
+//         onSuccess && onSuccess(data, variables, context);
+//       },
+//       onError: (err, _variables, _context) => {
+//         toast.error(`Error: ${err.message}`);
+//       },
+//     });
+// };

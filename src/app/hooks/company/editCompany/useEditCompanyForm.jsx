@@ -2,14 +2,15 @@ import { useFormik } from 'formik';
 import { useEditCompany } from '../useCompany';
 import { addCompanySchema } from '../addCompany/addCompanySchema';
 
-const useEditCompanyForm = (data) => {
+const useEditCompanyForm = () => {
     const { mutate } = useEditCompany({});
-    // console.log(data)
+
     const formik = useFormik({
         initialValues: {
-            companyName: data?.companyName || '',
-            companyType: data?.companyType || '',
-            companyDescription: data?.companyDescription || '',
+            companyName:'' ,
+            companyType: '',
+            companyDescription:'',
+            id: '',
         },
         validationSchema: addCompanySchema,
         enableReinitialize: 'true',

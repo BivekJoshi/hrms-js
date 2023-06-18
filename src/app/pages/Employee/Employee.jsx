@@ -14,7 +14,6 @@ const Employee = () => {
   const { data: employeeData, isLoading } = useGetEmployee();
   const { formik } = useAddEmployeeForm();
 
-
   const style = {
     position: "absolute",
     top: "50%",
@@ -45,7 +44,7 @@ const Employee = () => {
         useFlexGap
         flexWrap="wrap"
       >
-        {employeeData.map((employee, index) => (
+        {employeeData.employees.map((employee, index) => (
           <Box key={index}>
             <EmployeeCard
               IsActive={employee.isActive}

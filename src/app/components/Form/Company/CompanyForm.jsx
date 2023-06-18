@@ -4,12 +4,13 @@ import { toast } from 'react-toastify';
 import useAddCompanyForm from '../../../hooks/company/addCompany/useAddCompanyForm';
 import useEditCompanyForm from '../../../hooks/company/editCompany/useEditCompanyForm';
 
-const CompanyForm = ({ onClose, companyId, isEditMode, isLoading }) => {
+const CompanyForm = ({ onClose, rowData, isEditMode, isLoading }) => {
 	const { formik: addCompanyFormik } = useAddCompanyForm();
-	const { formik: editCompanyFormik } = useEditCompanyForm({companyId});
+	const { formik: editCompanyFormik } = useEditCompanyForm();
 
 	const formik = isEditMode ? editCompanyFormik : addCompanyFormik;
 
+	console.log("asuixhiasux",rowData)
 	const handleFormSubmit = () => {
 
 		formik.handleSubmit();
