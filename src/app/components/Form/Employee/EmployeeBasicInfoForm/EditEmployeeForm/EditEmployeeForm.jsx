@@ -29,6 +29,7 @@ import EmployeeQualifiactionDetailForm from '../../EmployeeQualaificationDetailF
 import EmployeeFamilyDetailForm from '../../EmployeeFamilyDetailForm/EmployeeFamilyDetailForm';
 import useAddLeaveForm from '../../../../../hooks/employee/AddFamily/useFamilyForm';
 import useFamilyForm from '../../../../../hooks/employee/AddFamily/useFamilyForm';
+import EmployeeDocumentDetailForm from '../../EmployeeDocumentDetailForm/EmployeeDocumentDetailForm';
 
 const steps = [
   'Basic Details',
@@ -36,6 +37,7 @@ const steps = [
   'Family Details',
   'Educational Details',
   'Bank Details',
+  'Document Details',
   'Other Details',
 ];
 const EditEmployeeForm = () => {
@@ -128,6 +130,9 @@ const EditEmployeeForm = () => {
         return <EmployeeBankDetailForm formik={bankFormik} />;
 
       case 5:
+        return <EmployeeDocumentDetailForm />;
+
+      case 6:
         return <p>Hello World</p>;
 
       default:
@@ -184,8 +189,8 @@ const EditEmployeeForm = () => {
                       formik.isValid
                         ? null
                         : toast.error(
-                          'Please make sure you have filled the form correctly'
-                        );
+                            'Please make sure you have filled the form correctly'
+                          );
                     }}
                     sx={{ mt: 3, ml: 1 }}
                   >

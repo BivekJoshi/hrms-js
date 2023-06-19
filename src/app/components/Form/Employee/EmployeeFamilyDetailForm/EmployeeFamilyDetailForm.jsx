@@ -96,7 +96,7 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
                     id={`family[${index}].relation`}
                     name={`family[${index}].relation`}
                     label="Relation"
-                    placeholder="Enter your Relation"
+                    placeholder="Enter your relation"
                     fullWidth
                     value={formik.values.family[index].relation}
                     onChange={formik.handleChange}
