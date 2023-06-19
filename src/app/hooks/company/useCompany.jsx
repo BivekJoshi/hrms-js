@@ -1,7 +1,6 @@
 import { useMutation, useQuery } from 'react-query';
 import { addCompany, deleteCompany, editCompany, getCompany, getCompanyById } from '../../api/company/company-api';
 import { toast } from 'react-toastify';
-import { useParams } from 'react-router-dom';
 
 {/*________________________GET_____________________________________*/ }
 export const useGetCompany = () => {
@@ -47,10 +46,8 @@ export const useDeleteCompany = ({ onSuccess }) => {
 
 {/*________________________EDIT_____________________________________*/ }
 export const useEditCompany = ({ onSuccess }) => {
-  const { id } = useParams();
-
   return useMutation(['editCompany'],
-    (formData) => editCompany(formData, id),
+    (formData) => editCompany(formData),
     {
       onSuccess: (data, variables, context) => {
         toast.success('Successfully edited Company');

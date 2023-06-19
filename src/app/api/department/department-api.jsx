@@ -21,6 +21,13 @@ export const addDepartment = async (formData) => {
 };
 
 {/*________________________EDIT_____________________________________*/ }
+export const editDepartment = async (formData) => {
+  // console.log(formData)
+  const {id} = formData;
+  const data = await axiosInstance.put(`/department/${id}`, formData);
+  return data;
+};
+
 {/*________________________DELETE_____________________________________*/ }
 export const deleteDepartment = async (departmentId) => {
   const response = await axiosInstance.delete(`/department/${departmentId}`);
