@@ -1,11 +1,19 @@
 import { useMutation, useQuery } from 'react-query';
-import { addCompany, deleteCompany, editCompany, getCompany } from '../../api/company/company-api';
+import { addCompany, deleteCompany, editCompany, getCompany, getCompanyById } from '../../api/company/company-api';
 import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
 
 {/*________________________GET_____________________________________*/ }
 export const useGetCompany = () => {
   return useQuery(['getCompany'], () => getCompany(), {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
+};
+
+{/*________________________GETBYID_____________________________________*/ }
+export const useGetCompanyById = (id) => {
+  return useQuery(['getCompanyById', id], () => getCompanyById(id), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
@@ -39,9 +47,10 @@ export const useDeleteCompany = ({ onSuccess }) => {
 
 {/*________________________EDIT_____________________________________*/ }
 export const useEditCompany = ({ onSuccess }) => {
-  const { companyId } = useParams();
+  const { id } = useParams();
+
   return useMutation(['editCompany'],
-    (formData) => editCompany(formData, companyId),
+    (formData) => editCompany(formData, id),
     {
       onSuccess: (data, variables, context) => {
         toast.success('Successfully edited Company');
@@ -52,19 +61,3 @@ export const useEditCompany = ({ onSuccess }) => {
       },
     });
 };
-// export const useEditCompany = ({ onSuccess }) => {
-//   const { companyId } = useParams();
-//   return useMutation(['editCompany'],
-//     ( formData ) => {
-//       editCompany(companyId, formData);
-//     },
-//     {
-//       onSuccess: (data, variables, context) => {
-//         toast.success('Successfully edited Company');
-//         onSuccess && onSuccess(data, variables, context);
-//       },
-//       onError: (err, _variables, _context) => {
-//         toast.error(`Error: ${err.message}`);
-//       },
-//     });
-// };
