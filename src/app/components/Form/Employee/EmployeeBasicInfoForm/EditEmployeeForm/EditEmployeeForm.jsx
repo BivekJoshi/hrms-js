@@ -25,7 +25,7 @@ import EmployeeBankDetailForm from '../../EmployeeBankDetailForm/EmployeeBankDet
 import useAddBankForm from '../../../../../hooks/employee/AddBankForm/useAddBankForm';
 
 import useQualificationForm from '../../../../../hooks/employee/AddQualification/useQualificationForm';
-import EmployeeQualifiactionDetailForm from '../../EmployeeQualaificationDetailForm/EmployeeQualificationDetailForm';
+import EmployeeQualificationDetailForm from '../../EmployeeQualificationDetailForm/EmployeeQualificationDetailForm';
 import EmployeeFamilyDetailForm from '../../EmployeeFamilyDetailForm/EmployeeFamilyDetailForm';
 import useAddLeaveForm from '../../../../../hooks/employee/AddFamily/useFamilyForm';
 import useFamilyForm from '../../../../../hooks/employee/AddFamily/useFamilyForm';
@@ -82,6 +82,10 @@ const EditEmployeeForm = () => {
         break;
       case 3:
         qualificationFormik.setFieldTouched('');
+        if (qualificationFormik.dirty) {
+          qualificationFormik.handleSubmit();
+        }
+
         break;
 
       case 4:
@@ -120,7 +124,7 @@ const EditEmployeeForm = () => {
 
       case 3:
         return (
-          <EmployeeQualifiactionDetailForm
+          <EmployeeQualificationDetailForm
             formik={qualificationFormik}
             isLoading={isLoadingQualification}
           />

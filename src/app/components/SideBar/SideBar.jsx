@@ -12,7 +12,6 @@ import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import { Button, Card, Switch, Typography } from '@mui/material';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import IconButton from '@mui/material/IconButton';
 
 import { removeUser } from '../../utils/cookieHelper';
@@ -172,8 +171,14 @@ export default function Sidebar() {
         <Card
           variant='outlined'
           sx={{
-            width: open ? 'calc(100% - drawerWidth)' : '100%',
+            width: '100%',
+            maxWidth: '100%',
             padding: '20px',
+            boxSizing: 'border-box',
+            '@media (min-width: 600px)': {
+              maxWidth: 'calc(100% - drawerWidth)',
+              width: open ? 'calc(100% - drawerWidth)' : '100%',
+            },
           }}
         >
           <Outlet />

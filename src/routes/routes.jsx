@@ -9,9 +9,7 @@ const Dashboard = Loadable(
 	lazy(() => import('../app/pages/Dashboard/Dashboard'))
 );
 const Employee = Loadable(lazy(() => import('../app/pages/Employee/Employee')));
-const AddEmployee = Loadable(
-	lazy(() => import('../app/pages/Employee/AddEmployee/AddEmployee'))
-);
+
 const Designation = Loadable(
 	lazy(() => import('../app/pages/Designation/Designation'))
 );

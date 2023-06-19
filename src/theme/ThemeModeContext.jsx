@@ -1,6 +1,11 @@
-import React from 'react';
-import { createTheme, responsiveFontSizes, ThemeProvider } from '@mui/material';
-import { createContext, useEffect, useMemo, useState } from 'react';
+import { responsiveFontSizes, ThemeProvider, createTheme } from '@mui/material';
+import React, {
+  createContext,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 
 export const ThemeModeContext = createContext({
   toggleMode: () => {},
@@ -10,70 +15,65 @@ export const ThemeModeContext = createContext({
 });
 
 export const ThemeContextProvider = ({ children }) => {
-  const [mode, setMode] = useState('light');
+  const [isDarkMode, setIsDarkMode] = useState(
+    window.matchMedia &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches
+  );
+  const [mode, setMode] = useState(isDarkMode ? 'dark' : 'light');
   const [width, setWidth] = useState(window.innerWidth);
+  const [isMobile, setIsMobile] = useState(width <= 768);
 
-  function handleWindowSizeChange() {
+  const handleWindowSizeChange = useCallback(() => {
     setWidth(window.innerWidth);
-  }
+    setIsMobile(width <= 768);
+  }, [width]);
+
   useEffect(() => {
     window.addEventListener('resize', handleWindowSizeChange);
     return () => {
       window.removeEventListener('resize', handleWindowSizeChange);
     };
-  }, []);
-  const [isMobile, setIsMobile] = useState(width <= 768);
+  }, [handleWindowSizeChange]);
 
-  useEffect(() => {
-    setIsMobile(width <= 768);
-  }, [width]);
+  const toggleMode = useCallback(() => {
+    setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+    setIsDarkMode((prevMode) => !prevMode);
+  }, []);
 
   const colorMode = useMemo(
     () => ({
-      toggleMode: () =>
-        setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light')),
+      toggleMode,
       mode,
+      isDarkMode,
       isMobile,
-      toggleMobile: () => {
-        setIsMobile((prevMode) => !prevMode);
-      },
     }),
-    [mode, isMobile]
+    [mode, isDarkMode, isMobile, toggleMode]
   );
 
   let theme = createTheme({
-    overrides: {
-      MuiDialog: {
-        paper: {
-          overflowX: 'hidden',
-        },
-      },
-    },
-    typography: {
-      button: {
-        textTransform: 'none',
-      },
-    },
     palette: {
-      mode: mode,
+      mode: isDarkMode ? 'dark' : 'light',
       primary: {
-        main: mode === 'light' ? '#1626C9' : '#689CF3',
+        main: '#1c7ed6',
+        light: '#f0ca92',
+        dark: '#cd7539',
       },
       secondary: {
-        main: mode === 'light' ? '#C98421' : '#689CF3',
+        main: '#418fdd',
+        light: '#75baf0',
+        dark: '#336cb8',
       },
       background: {
-        default: mode === 'light' ? '#f5f5f5' : '#303030',
-        paper: mode === 'light' ? '#fff' : '#424242',
-        imageCaption: mode === 'light' ? '#c5c7cb' : '#fff',
+        default: isDarkMode ? '#303030' : '#f8f8f8',
+        paper: isDarkMode ? '#424242' : '#fff',
+        imageCaption: isDarkMode ? '#c5c7cb' : '#616161',
       },
       text: {
-        primary: mode === 'light' ? '#000' : '#fff',
-        secondary:
-          mode === 'light' ? 'rgba(0, 0, 0, 0.7)' : 'rgba(255, 255, 255, 0.7)',
+        primary: isDarkMode ? '#fff' : '#000',
+        secondary: isDarkMode ? '#bdbdbd' : '#616161',
+        white: '#fff',
       },
-      divider:
-        mode === 'light' ? 'rgba(0, 0, 0, 0.12)' : 'rgba(53, 53, 53, 0.12)',
+      divider: isDarkMode ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.12)',
     },
   });
 
@@ -85,3 +85,5 @@ export const ThemeContextProvider = ({ children }) => {
     </ThemeModeContext.Provider>
   );
 };
+
+export default ThemeModeContext;
