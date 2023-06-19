@@ -21,8 +21,9 @@ export const addCompany = async (formData) => {
 };
 
 {/*________________________EDIT_____________________________________*/ }
-export const editCompany = async (formData, id) => {
-  // const {id} = formData;
+export const editCompany = async (formData) => {
+  // console.log(formData)
+  const {id} = formData;
   const data = await axiosInstance.put(`/company/${id}`, formData);
   return data;
 };

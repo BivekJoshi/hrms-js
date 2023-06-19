@@ -1,7 +1,6 @@
-import React from 'react';
 import { useFormik } from 'formik';
-import { useAddDepartment } from '../useDepartment';
-import { addDepartmentSchema } from './addDepartmentSchema';
+import { useAddDepartment } from '../../useDepartment';
+import { DepartmentSchema } from '../Validation/DepartmentSchema';
 
 const useAddDepartmentForm = () => {
   const { mutate } = useAddDepartment({});
@@ -12,7 +11,7 @@ const useAddDepartmentForm = () => {
       departmentType: '',
       departmentDescription: '',
     },
-    validationSchema: addDepartmentSchema,
+    validationSchema: DepartmentSchema,
     onSubmit: (values) => {
       handleRequest(values);
     },

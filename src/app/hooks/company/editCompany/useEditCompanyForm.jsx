@@ -10,7 +10,7 @@ const useEditCompanyForm = (data) => {
             companyName: data?.companyName || '',
             companyType: data?.companyType || '',
             companyDescription: data?.companyDescription || '',
-            id: data?.companyId,
+            id: data?.id,
         },
         validationSchema: CompanySchema,
         enableReinitialize: 'true',
