@@ -28,12 +28,11 @@ export const useEditEmployee = ({ onSuccess }) => {
   return useMutation(
     ["editEmployee "],
     (formData) => {
-      console.log(formData);
       editEmployee(formData, id);
     },
     {
       onSuccess: (data, variables, context) => {
-        toast.success("Employee added successfully");
+        toast.success("Employee edited successfully");
         onSuccess && onSuccess(data, variables, context);
       },
       onError: (err, _variables, _context) => {

@@ -2,6 +2,8 @@ import * as React from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AppRoutes from "./routes/AppRoutes";
+import Bankdetail from "./app/pages/Employee/Overview/OverviewBody/Bankdetail";
+import BasicInfoTab from "./app/pages/Employee/Overview/OverviewBody/Bankdetail";
 
 export default function App() {
   return (
@@ -19,6 +21,7 @@ export default function App() {
         pauseOnHover
       />
       <AppRoutes />
+      {/* <Bankdetail /> */}
     </>
   );
 }

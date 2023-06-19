@@ -47,7 +47,7 @@ const Birthdaylist = () => {
         data={thisMonthBirthdays}
         currMonth={format(new Date(), "MMMM")}
       />
-
+      <br />
       <Birthdaytable
         data={upcomingBirthdays}
         currMonth={format(addMonths(new Date(), 1), "MMMM")}

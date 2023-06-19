@@ -235,9 +235,6 @@ export default function SideBar() {
                     setOpen={setOpenNotification}
                   />
                 )}
-                {/* {openNotification && (
-                  <TodayBirthday data={data} onClose={handleClose} />
-                )} */}
               </div>
             </div>
           </div>
