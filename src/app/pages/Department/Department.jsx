@@ -36,7 +36,7 @@ const Department = () => {
 	const columns = [
 		{
 			title: 'SN',
-			render: (rowData) => rowData.id,
+			render: (rowData) => rowData.tableData.id,
 			cellStyle: {
 				whiteSpace: 'nowrap', // Prevents content from wrapping
 			},
@@ -85,62 +85,6 @@ const Department = () => {
 			</Box>
 			<br>
 			</br>
-const columns = [
-  {
-    title: "SN",
-    render: (rowData) => rowData.departmentName,
-    cellStyle: {
-      whiteSpace: "nowrap", // Prevents content from wrapping
-    },
-    width: 80,
-  },
-  {
-    title: "Department Name",
-    field: "departmentName",
-    emptyValue: "-",
-    width: 250,
-  },
-  {
-    title: "Department Type",
-    field: "departmentType",
-    emptyValue: "-",
-    width: 200,
-  },
-  {
-    title: "Description",
-    field: "departmentDescription",
-    emptyValue: "-",
-  },
-];
-
-const Department = () => {
-  const [openModal, setOpenModal] = React.useState(false);
-
-  const handleOpenModal = () => setOpenModal(true);
-  const handleCloseModal = () => setOpenModal(false);
-
-  const { data: departmentData, isLoading } = useGetDepartment();
-  
-    // const newDepartmentData = departmentData.map((item, index) => {
-    //   return { ...item, sn: index + 1 };
-    // });
-    // console.log({"data" : newDepartmentData})
-
-  if (isLoading) return <>Loading</>;
-  return (
-    <>
-      <div>
-        <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-          <Button
-            variant="contained"
-            sx={{ mt: 3, ml: 1 }}
-            onClick={handleOpenModal}
-          >
-            +Add Department
-          </Button>
-        </Box>
-      </div>
-      <br></br>
 
 			<MaterialTable
 				columns={columns}
