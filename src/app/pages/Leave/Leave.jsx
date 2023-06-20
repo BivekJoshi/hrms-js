@@ -32,18 +32,18 @@ const Leave = ({ isLoading }) => {
 
   const getEmployeeName = (rowData) => {
     const employeeId = rowData.employeeId;
-    const employee = employeeData.find((emp) => emp.id === employeeId);
+    const employee = employeeData?.employees?.find(
+      (emp) => emp.id === employeeId
+    );
     const name = `${employee.firstName} ${employee.middleName} ${employee.lastName}`;
     return name;
   };
-
   const getLeaveTypeName = (rowData) => {
     const leaveTypeId = rowData.leaveTypeId;
     const leaveType = leaveTypeData.find((leave) => leave.id === leaveTypeId);
     const name = `${leaveType.leaveName}`;
     return name;
   };
-
   const columns = [
     {
       title: 'SN',
@@ -57,8 +57,7 @@ const Leave = ({ isLoading }) => {
       title: 'Employee Name',
       render: (rowData) => {
         return (
-          <p>hi</p>
-          // <p>{getEmployeeName(rowData)}</p>
+          <p>{getEmployeeName(rowData)}</p>
         );
       },
       width: 200,
