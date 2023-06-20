@@ -2,7 +2,7 @@ import { useFormik } from 'formik';
 import { useAddDesignation } from '../useDesignation';
 import { addDesignationSchema } from './addDesigationSchema';
 
-const useAddDepartmentForm = () => {
+const useAddDesignationForm = () => {
   const { mutate } = useAddDesignation({});
 
   const formik = useFormik({
@@ -28,4 +28,4 @@ const useAddDepartmentForm = () => {
   return { formik };
 };
 
-export default useAddDepartmentForm;
+export default useAddDesignationForm;

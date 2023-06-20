@@ -1,6 +1,6 @@
 import { useFormik } from 'formik';
-import { useAddDepartment } from '../../useDepartment';
 import { DepartmentSchema } from '../Validation/DepartmentSchema';
+import { useAddDepartment } from '../useDepartment';
 
 const useAddDepartmentForm = () => {
   const { mutate } = useAddDepartment({});

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import MaterialTable from '@material-table/core';
-import { Box, Button, Modal } from '@mui/material';
+import { Box, Button, Chip, Modal } from '@mui/material';
 import { useGetLeave } from '../../hooks/leave/useLeave';
 import { useGetEmployee } from '../../hooks/employee/useEmployee';
 import { useGetLeaveType } from '../../hooks/leaveType/useLeaveType';
@@ -15,6 +15,7 @@ const style = {
   border: '1px solid #808080',
   borderRadius: 2,
   boxShadow: 24,
+  width: 1000,
   p: 4,
 };
 
@@ -32,8 +33,8 @@ const Leave = ({ isLoading }) => {
 
   const getEmployeeName = (rowData) => {
     const employeeId = rowData.employeeId;
-    const employee = employeeData.find((emp) => emp.id === employeeId);
-    const name = `${employee.firstName} ${employee.middleName} ${employee.lastName}`
+    const employee = rowData.employees.find((emp) => emp.id === employeeId);
+    const name = `${employee.firstName} ${employee.middleName} ${employee.lastName}`;
     return name;
   };
 
@@ -57,7 +58,9 @@ const Leave = ({ isLoading }) => {
       title: "Employee Name",
       render: (rowData) => {
         return (
-          <p>{getEmployeeName(rowData)}</p>
+          <p>
+            {/* {getEmployeeName(rowData)} */}
+          </p>
         )
       },
       width: 200,
@@ -69,7 +72,7 @@ const Leave = ({ isLoading }) => {
           <p>{getLeaveTypeName(rowData)}</p>
         )
       },
-      width: 200,
+      width: 150,
     },
     {
       title: "From",
@@ -88,25 +91,26 @@ const Leave = ({ isLoading }) => {
       field: "leaveStatus",
       emptyValue: "-",
       width: 100,
-      cellStyle: rowData => {
-        let color;
-        switch (rowData.leaveStatus) {
-          case "APPROVED":
-            color = "green";
-            break;
-          case "PENDING":
-            color = "orange";
-            break;
-          case "REJECTED":
-            color = "red";
-            break;
-          default:
-            color = "inherit";
-        }
-        return {
-          color: color,
-        };
+      cellStyle: {
+        whiteSpace: 'nowrap',
       },
+      render: (rowData) => {
+        const status = rowData.leaveStatus;
+        let chipColor = "";
+
+        if (status === "APPROVED") {
+          chipColor = "green";
+        } else if (status === "REJECTED") {
+          chipColor = "red";
+        } else if (status === "PENDING") {
+          chipColor = "orange";
+        }
+
+        return (
+          <Chip label={status} style={{ backgroundColor: chipColor, color: "white", width:' 9rem' }} />
+        );
+      },
+
     },
     {
       title: "Remark",
@@ -150,7 +154,7 @@ const Leave = ({ isLoading }) => {
           pageSize: 12,
           emptyRowsWhenPaging: false,
           headerStyle: {
-            backgroundColor: '#01579b',
+            backgroundColor: '#1c7ed6',
             color: '#FFF',
             fontSize: 20,
             padding: 'dense',

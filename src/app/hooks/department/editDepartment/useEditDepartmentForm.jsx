@@ -13,6 +13,8 @@ const useEditDepartmentForm = (data) => {
             id: data?.id,
         },
         validationSchema: DepartmentSchema,
+        enableReinitialize: 'true',
+
         onSubmit: (values) => {
             handleRequest(values);
         },
