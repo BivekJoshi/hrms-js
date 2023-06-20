@@ -51,10 +51,11 @@ const EditEmployeeForm = () => {
   console.log(data);
 
   const { formik, isLoading } = useEditEmployeeForm({ data, employeeLoading });
-  const { formik: permanentFormik } = usePermanentAddressForm({
-    data,
-    employeeLoading,
-  });
+  const { formik: permanentFormik, isLoading: addressLoading } =
+    usePermanentAddressForm({
+      data,
+      employeeLoading,
+    });
   const { formik: temporaryFormik } = useTemporaryAddressForm();
   const { formik: bankFormik } = useAddBankForm({ data, employeeLoading });
   const handleNext = () => {
@@ -110,6 +111,7 @@ const EditEmployeeForm = () => {
         return (
           <EmployeeAddressDetailForm
             formik={permanentFormik}
+            isLoading={addressLoading}
             temporaryFormik={temporaryFormik}
           />
         );
