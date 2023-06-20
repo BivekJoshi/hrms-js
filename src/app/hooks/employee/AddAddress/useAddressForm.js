@@ -18,12 +18,12 @@ export const usePermanentAddressForm = ({
     initialValues: {
       addresses: [
         {
+          country: '',
+          province: '',
           district: '',
           wardNumber: '',
           city: '',
           street: '',
-          province: '',
-          country: '',
           temporaryAndPermanentAddressSame: false,
         },
       ],

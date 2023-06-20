@@ -22,8 +22,8 @@ const style = {
 const Leave = ({ isLoading }) => {
   const { data: leaveData, isLoading: loadingleave } = useGetLeave();
   const { data: employeeData, isLoading: loadingemployee } = useGetEmployee();
-  const { data: leaveTypeData, isLoading: loadingleaveType } = useGetLeaveType();
-
+  const { data: leaveTypeData, isLoading: loadingleaveType } =
+    useGetLeaveType();
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -41,13 +41,13 @@ const Leave = ({ isLoading }) => {
   const getLeaveTypeName = (rowData) => {
     const leaveTypeId = rowData.leaveTypeId;
     const leaveType = leaveTypeData.find((leave) => leave.id === leaveTypeId);
-    const name = `${leaveType.leaveName}`
+    const name = `${leaveType.leaveName}`;
     return name;
   };
 
   const columns = [
     {
-      title: "SN",
+      title: 'SN',
       render: (rowData) => rowData.tableData.id,
       cellStyle: {
         whiteSpace: 'nowrap',
@@ -55,7 +55,7 @@ const Leave = ({ isLoading }) => {
       width: 80,
     },
     {
-      title: "Employee Name",
+      title: 'Employee Name',
       render: (rowData) => {
         return (
           <p>
@@ -66,30 +66,28 @@ const Leave = ({ isLoading }) => {
       width: 200,
     },
     {
-      title: "Leave Type",
+      title: 'Leave Type',
       render: (rowData) => {
-        return (
-          <p>{getLeaveTypeName(rowData)}</p>
-        )
+        return <p>{getLeaveTypeName(rowData)}</p>;
       },
       width: 150,
     },
     {
-      title: "From",
-      field: "fromDate",
-      emptyValue: "-",
+      title: 'From',
+      field: 'fromDate',
+      emptyValue: '-',
       width: 100,
     },
     {
-      title: "To",
-      field: "toDate",
-      emptyValue: "-",
+      title: 'To',
+      field: 'toDate',
+      emptyValue: '-',
       width: 100,
     },
     {
-      title: "Status",
-      field: "leaveStatus",
-      emptyValue: "-",
+      title: 'Status',
+      field: 'leaveStatus',
+      emptyValue: '-',
       width: 100,
       cellStyle: {
         whiteSpace: 'nowrap',
@@ -113,15 +111,15 @@ const Leave = ({ isLoading }) => {
 
     },
     {
-      title: "Remark",
-      field: "leaveRemarks",
-      emptyValue: "-",
+      title: 'Remark',
+      field: 'leaveRemarks',
+      emptyValue: '-',
       width: 100,
     },
     {
-      title: "Approved By",
-      field: "confirmById",
-      emptyValue: "-",
+      title: 'Approved By',
+      field: 'confirmById',
+      emptyValue: '-',
       width: 40,
     },
   ];
@@ -129,20 +127,23 @@ const Leave = ({ isLoading }) => {
   return (
     <>
       <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-        <Button variant='contained' sx={{ mt: 3, ml: 1 }} onClick={handleOpen}>+Add Leave</Button>
+        <Button variant='contained' sx={{ mt: 3, ml: 1 }} onClick={handleOpen}>
+          +Add Leave
+        </Button>
       </Box>
       <Modal
         open={open}
         onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        aria-labelledby='modal-modal-title'
+        aria-describedby='modal-modal-description'
       >
         <Box sx={style}>
           <LeaveForm onClose={handleClose} />
         </Box>
       </Modal>
 
-      <br /><br />
+      <br />
+      <br />
       <MaterialTable
         columns={columns}
         data={leaveData}
@@ -162,12 +163,12 @@ const Leave = ({ isLoading }) => {
           },
           rowStyle: {
             fontSize: 18,
-          }
+          },
         }}
         onRowDoubleClick={(_event, rowData) => handleDoubleClickRow(rowData)}
       />
     </>
   );
-}
+};
 
 export default Leave;

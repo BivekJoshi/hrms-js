@@ -6,7 +6,7 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
 
   return (
     !isLoading && (
-      <div style={{ backgroundColor: 'red' }}>
+      <div>
         <FormikProvider value={formik}>
           <FieldArray
             name="family"
