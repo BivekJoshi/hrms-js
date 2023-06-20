@@ -1,7 +1,7 @@
 import { Grid, TextField, Button } from '@mui/material';
 import React from 'react';
 import { toast } from 'react-toastify';
-import useAddDepartmentForm from '../../../hooks/designation/addDesignation/useAddDesignationForm';
+import useAddDepartmentForm from '../../../hooks/department/addDepartment/useAddDepartmentForm';
 
 const AddDepartmentFields = ({ onClose, isLoading }) => {
 	const { formik } = useAddDepartmentForm();
@@ -35,12 +35,9 @@ const AddDepartmentFields = ({ onClose, isLoading }) => {
 						value={formik.values.departmentName}
 						onChange={formik.handleChange}
 						error={
-							formik.touched.departmentName &&
-							Boolean(formik.errors.departmentName)
+							formik.touched.departmentName && Boolean(formik.errors.departmentName)
 						}
-						helperText={
-							formik.touched.departmentName && formik.errors.departmentName
-						}
+						helperText={formik.touched.departmentName && formik.errors.departmentName}
 						variant='outlined'
 						autoFocus
 						InputLabelProps={{ shrink: true }}

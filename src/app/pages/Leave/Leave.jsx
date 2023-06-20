@@ -1,6 +1,6 @@
 import * as React from 'react';
 import MaterialTable from '@material-table/core';
-import { Box, Button, Modal } from '@mui/material';
+import { Box, Button, Chip, Modal } from '@mui/material';
 import { useGetLeave } from '../../hooks/leave/useLeave';
 import { useGetEmployee } from '../../hooks/employee/useEmployee';
 import { useGetLeaveType } from '../../hooks/leaveType/useLeaveType';
@@ -15,14 +15,15 @@ const style = {
   border: '1px solid #808080',
   borderRadius: 2,
   boxShadow: 24,
+  width: 1000,
   p: 4,
 };
 
 const Leave = ({ isLoading }) => {
   const { data: leaveData, isLoading: loadingleave } = useGetLeave();
   const { data: employeeData, isLoading: loadingemployee } = useGetEmployee();
-  const { data: leaveTypeData, isLoading: loadingleaveType } = useGetLeaveType();
-
+  const { data: leaveTypeData, isLoading: loadingleaveType } =
+    useGetLeaveType();
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -32,21 +33,23 @@ const Leave = ({ isLoading }) => {
 
   const getEmployeeName = (rowData) => {
     const employeeId = rowData.employeeId;
-    const employee = employeeData.find((emp) => emp.id === employeeId);
-    const name = `${employee.firstName} ${employee.middleName} ${employee.lastName}`
+    const employee = employeeData?.employees?.find(
+      (emp) => emp.id === employeeId
+    );
+    const name = `${employee.firstName} ${employee.middleName} ${employee.lastName}`;
     return name;
   };
 
   const getLeaveTypeName = (rowData) => {
     const leaveTypeId = rowData.leaveTypeId;
     const leaveType = leaveTypeData.find((leave) => leave.id === leaveTypeId);
-    const name = `${leaveType.leaveName}`
+    const name = `${leaveType.leaveName}`;
     return name;
   };
 
   const columns = [
     {
-      title: "SN",
+      title: 'SN',
       render: (rowData) => rowData.tableData.id,
       cellStyle: {
         whiteSpace: 'nowrap',
@@ -54,70 +57,71 @@ const Leave = ({ isLoading }) => {
       width: 80,
     },
     {
-      title: "Employee Name",
+      title: 'Employee Name',
       render: (rowData) => {
         return (
-          <p>{getEmployeeName(rowData)}</p>
+          <p>
+            {getEmployeeName(rowData)}
+          </p>
         )
       },
       width: 200,
     },
     {
-      title: "Leave Type",
+      title: 'Leave Type',
       render: (rowData) => {
-        return (
-          <p>{getLeaveTypeName(rowData)}</p>
-        )
+        return <p>{getLeaveTypeName(rowData)}</p>;
       },
-      width: 200,
+      width: 150,
     },
     {
-      title: "From",
-      field: "fromDate",
-      emptyValue: "-",
+      title: 'From',
+      field: 'fromDate',
+      emptyValue: '-',
       width: 100,
     },
     {
-      title: "To",
-      field: "toDate",
-      emptyValue: "-",
+      title: 'To',
+      field: 'toDate',
+      emptyValue: '-',
       width: 100,
     },
     {
-      title: "Status",
-      field: "leaveStatus",
-      emptyValue: "-",
+      title: 'Status',
+      field: 'leaveStatus',
+      emptyValue: '-',
       width: 100,
-      cellStyle: rowData => {
-        let color;
-        switch (rowData.leaveStatus) {
-          case "APPROVED":
-            color = "green";
-            break;
-          case "PENDING":
-            color = "orange";
-            break;
-          case "REJECTED":
-            color = "red";
-            break;
-          default:
-            color = "inherit";
+      cellStyle: {
+        whiteSpace: 'nowrap',
+      },
+      render: (rowData) => {
+        const status = rowData.leaveStatus;
+        let chipColor = "";
+
+        if (status === "APPROVED") {
+          chipColor = "green";
+        } else if (status === "REJECTED") {
+          chipColor = "red";
+        } else if (status === "PENDING") {
+          chipColor = "orange";
         }
-        return {
-          color: color,
-        };
+
+        return (
+          <Chip label={status} style={{ backgroundColor: chipColor, color: "white", width:' 9rem' }} />
+        );
       },
+
     },
     {
-      title: "Remark",
-      field: "leaveRemarks",
-      emptyValue: "-",
+      title: 'Remark',
+      field: 'leaveRemarks',
+      emptyValue: '-',
       width: 100,
     },
     {
-      title: "Approved By",
-      field: "confirmById",
-      emptyValue: "-",
+      title: 'Approved By',
+      field: 'confirmById',
+      emptyValue: '-',
       width: 40,
     },
   ];
@@ -125,20 +129,23 @@ const Leave = ({ isLoading }) => {
   return (
     <>
       <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-        <Button variant='contained' sx={{ mt: 3, ml: 1 }} onClick={handleOpen}>+Add Leave</Button>
+        <Button variant='contained' sx={{ mt: 3, ml: 1 }} onClick={handleOpen}>
+          +Add Leave
+        </Button>
       </Box>
       <Modal
         open={open}
         onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        aria-labelledby='modal-modal-title'
+        aria-describedby='modal-modal-description'
       >
         <Box sx={style}>
           <LeaveForm onClose={handleClose} />
         </Box>
       </Modal>
 
-      <br /><br />
+      <br />
+      <br />
       <MaterialTable
         columns={columns}
         data={leaveData}
@@ -150,7 +157,7 @@ const Leave = ({ isLoading }) => {
           pageSize: 12,
           emptyRowsWhenPaging: false,
           headerStyle: {
-            backgroundColor: '#01579b',
+            backgroundColor: '#1c7ed6',
             color: '#FFF',
             fontSize: 20,
             padding: 'dense',
@@ -158,12 +165,12 @@ const Leave = ({ isLoading }) => {
           },
           rowStyle: {
             fontSize: 18,
-          }
+          },
         }}
         onRowDoubleClick={(_event, rowData) => handleDoubleClickRow(rowData)}
       />
     </>
   );
-}
+};
 
 export default Leave;

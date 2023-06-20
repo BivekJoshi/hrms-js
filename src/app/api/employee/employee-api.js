@@ -11,7 +11,6 @@ export const addEmployee = async (formData) => {
 };
 export const getEmployeeById = (id) => {
 	const data = axiosInstance.get(`employee/${id}`);
-
 	return data;
 };
 
