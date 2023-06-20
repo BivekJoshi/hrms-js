@@ -1,8 +1,7 @@
 import { Grid, TextField, Button } from '@mui/material';
 import React from 'react';
-
-import useAddDepartmentForm from '../../../hooks/department/addDepartment/useAddDepartmentForm';
 import { toast } from 'react-toastify';
+import useAddDepartmentForm from '../../../hooks/designation/addDesignation/useAddDesignationForm';
 
 const DepartmentForm = ({ onClose }) => {
 	const { formik } = useAddDepartmentForm();

@@ -2,15 +2,10 @@ import { Grid, TextField, Button } from '@mui/material';
 import React from 'react';
 import { toast } from 'react-toastify';
 import useAddCompanyForm from '../../../hooks/company/addCompany/useAddCompanyForm';
-import useEditCompanyForm from '../../../hooks/company/editCompany/useEditCompanyForm';
 
-const CompanyForm = ({ onClose, rowData, isEditMode, isLoading }) => {
-	const { formik: addCompanyFormik } = useAddCompanyForm();
-	const { formik: editCompanyFormik } = useEditCompanyForm();
+const AddCompanyFields = ({ onClose, isLoading }) => {
+	const { formik } = useAddCompanyForm();
 
-	const formik = isEditMode ? editCompanyFormik : addCompanyFormik;
-
-	console.log("asuixhiasux",rowData)
 	const handleFormSubmit = () => {
 
 		formik.handleSubmit();
@@ -101,7 +96,7 @@ const CompanyForm = ({ onClose, rowData, isEditMode, isLoading }) => {
 						onClick={handleFormSubmit}
 						sx={{ mt: 3, ml: 1 }}
 					>
-						{isEditMode ? 'Update Company' : 'Add Company'}
+						Add Company
 					</Button>
 				</Grid>
 			</Grid>
@@ -109,4 +104,4 @@ const CompanyForm = ({ onClose, rowData, isEditMode, isLoading }) => {
 	);
 };
 
-export default CompanyForm;
+export default AddCompanyFields;

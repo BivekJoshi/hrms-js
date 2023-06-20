@@ -1,40 +1,37 @@
 import * as React from 'react';
+import { useState } from 'react';
 import MaterialTable from '@material-table/core';
-import { useDeleteCompany, useGetCompany } from '../../hooks/company/useCompany';
-import { Box, Button, Modal, Stack } from '@mui/material';
-import CompanyForm from '../../components/Form/Company/CompanyForm';
-import FormModal from '../../components/Modal/FormModal';
+import { Box, Button, Stack } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
-import { useState } from 'react';
-import useEditCompanyForm from '../../hooks/company/editCompany/useEditCompanyForm';
-import { editCompany } from '../../api/company/company-api';
+
+import { useDeleteCompany, useGetCompany } from '../../hooks/company/useCompany';
+import { AddCompanyModal, EditCompanyModal } from './CompanyModal/CompanyModal';
+
 
 const Company = () => {
   const { data: companyData, isLoading } = useGetCompany();
 
-  const [openModal, setOpenModal] = React.useState(false);
-
-  const handleOpenModal = () => setOpenModal(true);
-  const handleCloseModal = () => setOpenModal(false);
-
-  const deleteCompanyMutation = useDeleteCompany({});
+  const [openAddModal, setOpenAddModal] = useState(false);
+  const [openEditModal, setOpenEditModal] = useState(false);
 
   const [editedCompany, setEditedCompany] = useState({});
 
+  const handleAddOpenModal = () => setOpenAddModal(true);
+  const handleCloseAddModal = () => setOpenAddModal(false);
+
+  const handleCloseEditModal = () => setOpenEditModal(false);
+
+  
+  const deleteCompanyMutation = useDeleteCompany({});
   const handleDeleteCompany = (companyId) => {
     deleteCompanyMutation.mutate(companyId);
   };
 
-const {formik}=useEditCompanyForm()
 
   const handleEditCompany = (rowData) => {
     setEditedCompany(rowData);
-    // useEditCompanyForm(rowData);
-    // formik(rowData)
-    setOpenModal(true);
-    // console.log("row ddat", rowData)
-    console.log(rowData);
+    setOpenEditModal(true);
   };
 
   const columns = [
@@ -85,7 +82,7 @@ const {formik}=useEditCompanyForm()
   return (
     <>
       <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-        <Button variant="contained" sx={{ mt: 3, ml: 1 }} onClick={handleOpenModal}>
+        <Button variant="contained" sx={{ mt: 3, ml: 1 }} onClick={handleAddOpenModal}>
           +Add Company
         </Button>
       </Box>
@@ -112,13 +109,20 @@ const {formik}=useEditCompanyForm()
             fontSize: 18,
           },
         }}
-        onRowDoubleClick={(_event, rowData) => handleDoubleClickRow(rowData)}
       />
-      <FormModal
-        open={openModal}
-        onClose={handleCloseModal}
-        formComponent={<CompanyForm onClose={handleCloseModal} isEditMode={editedCompany} rowData={editedCompany} />}
-      />
+      {openEditModal && (
+        <EditCompanyModal
+          id={editedCompany?.id}
+          open={openEditModal}
+          handleCloseModal={handleCloseEditModal}
+        />
+      )}
+      {openAddModal && (
+        <AddCompanyModal
+          open={openAddModal}
+          handleCloseModal={handleCloseAddModal}
+        />
+      )}
     </>
   );
 };
