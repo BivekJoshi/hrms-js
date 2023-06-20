@@ -12,7 +12,7 @@ import { AddDepartmentModal, EditDepartmentModal } from './DepartmentModal/Depar
 
 const Department = () => {
 	const { data: departmentData, isLoading } = useGetDepartment();
-
+	
 	const [openAddModal, setOpenAddModal] = useState(false);
 	const [openEditModal, setOpenEditModal] = useState(false);
 

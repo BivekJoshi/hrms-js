@@ -1,58 +1,82 @@
-import React, { useEffect, useState } from "react";
+import * as React from "react";
+import { useState } from "react";
+
 import MaterialTable from "@material-table/core";
-import { axiosInstance } from "../../../auth/axiosInterceptor";
-import "./todolist.css";
-import { toast } from "react-toastify";
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Box, Button, Stack } from "@mui/material";
+import Skeleton from "@mui/material/Skeleton";
+
+import { useGetTodoList } from "../../hooks/todoList/useTodoList";
+import { AddTodoModal } from "./TodoModal/TodoModal";
 
 const TodoList = () => {
-  const [ msg, setMsg ] = useState("");
-  const [ getData, setGetData] = useState([]);
+  const { data: todoListData, isLoading } = useGetTodoList();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!msg) {
-      toast("Message is required")
-      return;
-    }
-    axiosInstance.post(`/to-do-list?message=${msg}`)
-      .then(res => {
-        console.log(res)
-        toast("Message sent successfully");
-      })
-      .catch((err) => console.log(err))
-      .finally(setMsg(""));
-  };
+  const [openAddModal, setOpenAddModal] = useState(false);
 
-  useEffect(() => {
-    axiosInstance.get("/to-do-list/get-all")
-      .then((res) => {
-        setGetData(res)
-      })
-      .catch((err) => console.log(err));
-  }, []);
+  const handleAddOpenModal = () => setOpenAddModal(true);
+  const handleCloseAddModal = () => setOpenAddModal(false);
+
+  const column = [
+    { title: "SN", field: "id", width: 80 },
+    { title: "Message", field: "message", width: 80 },
+    { title: "SN", field: "userId", width: 80 },
+    { title: "Actions", field: "Edit", width: 60 },
+  ];
+
+  if (isLoading)
+    return (
+      <>
+        <Box sx={{ width: 968 }}>
+          <Skeleton />
+          <Skeleton animation="wave" />
+          <Skeleton animation={false} />
+        </Box>
+      </>
+    );
 
   return (
     <>
-      <div style={{ maxWidth: "90%" }}>
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="message">Message:</label>
-          <input type="text" name="message" placeholder="Enter a message..." value={msg} onChange={(e) => setMsg(e.target.value)} />
-          <button type="submit">Send</button>
-        </form>
-      </div>
+      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+        <Button
+          variant="contained"
+          sx={{ mt: 3, ml: 1 }}
+          onClick={handleAddOpenModal}
+        >
+          + Add Todo
+        </Button>
+      </Box>
+      <br />
 
       <MaterialTable
+        columns={column}
+        data={todoListData}
         title="Todo List"
-        data={getData}
-        columns={[
-          { title: "ID", field: "id" },
-          { title: "Message", field: "message" },
-          { title: "UserId", field: "userId" },
-          { action: "edit", field: "Edit" },
-          
-        ]}
+        isLoading={isLoading}
+        options={{
+          padding: "dense",
+          margin: 50,
+          pageSize: 10,
+          emptyRowsWhenPaging: false,
+          headerStyle: {
+            backgroundColor: "#1c7ed6",
+            color: "#FFF",
+            fontSize: 20,
+            padding: "dense",
+            height: 50,
+          },
+          rowStyle: {
+            fontSize: 18,
+          },
+        }}
+        onRowDoubleClick={(_event, rowData) => handleDoubleClickRow(rowData)}
       />
+
+      {openAddModal && (
+        <AddTodoModal
+          open={openAddModal}
+          handleCloseModal={handleCloseAddModal}
+        />
+      )}
     </>
   );
 };
