@@ -1,7 +1,6 @@
 import { useEditEmployee, useGetEmployeeById } from '../useEmployee';
 import { EditEmployeeSchema } from './EditEmployeeSchema';
 import { useFormik } from 'formik';
-import { useParams } from 'react-router-dom';
 
 const useEditEmployeeForm = ({ data, employeeLoading: isLoading }) => {
   const { mutate } = useEditEmployee({});
