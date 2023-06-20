@@ -33,7 +33,9 @@ const Leave = ({ isLoading }) => {
 
   const getEmployeeName = (rowData) => {
     const employeeId = rowData.employeeId;
-    const employee = rowData.employees.find((emp) => emp.id === employeeId);
+    const employee = employeeData?.employees?.find(
+      (emp) => emp.id === employeeId
+    );
     const name = `${employee.firstName} ${employee.middleName} ${employee.lastName}`;
     return name;
   };
@@ -59,7 +61,7 @@ const Leave = ({ isLoading }) => {
       render: (rowData) => {
         return (
           <p>
-            {/* {getEmployeeName(rowData)} */}
+            {getEmployeeName(rowData)}
           </p>
         )
       },
