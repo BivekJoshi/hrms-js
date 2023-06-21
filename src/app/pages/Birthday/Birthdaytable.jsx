@@ -24,8 +24,9 @@ const Birthdaytable = ({ data, isLoading, currMonth }) => {
       const age = Age(row.dateOfBirth);
 
       return {
-        fullName: `${row.firstName} ${row.middleName === null ? "" : row.middleName
-          } ${row.lastName}`,
+        // fullName: `${row.firstName} ${row.middleName === null ? "" : row.middleName
+        //   } ${row.lastName}`,
+        fullName:`${row.fullName}`,
         position: row.position?.positionName,
         dateOfBirth: format(new Date(row.dateOfBirth), "dd MMMM", {
           locale: enUS,
@@ -54,11 +55,11 @@ const Birthdaytable = ({ data, isLoading, currMonth }) => {
       title={currMonth}
       columns={[
         { title: "Name", field: "fullName" },
-        { title: "Position", field: "position" },
+        // { title: "Position", field: "position" },
         { title: "Date", field: "dateOfBirth" },
         { title: "Day", field: "dayOfBirth" },
         { title: "Age", field: "age" },
-        { title: "Gender", field: "gender" },
+        // { title: "Gender", field: "gender" },
       ]}
       data={Data}
       options={{

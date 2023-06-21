@@ -1,36 +1,41 @@
 import * as React from 'react';
+import { useState } from 'react';
 import MaterialTable from '@material-table/core';
-import { Box, Button, Chip, Modal } from '@mui/material';
-import { useGetLeave } from '../../hooks/leave/useLeave';
-import { useGetEmployee } from '../../hooks/employee/useEmployee';
+import { Box, Button, Chip, Stack } from '@mui/material';
 import { useGetLeaveType } from '../../hooks/leaveType/useLeaveType';
-import LeaveForm from '../../components/Form/Leave/LeaveForm';
 
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  bgcolor: 'background.paper',
-  border: '1px solid #808080',
-  borderRadius: 2,
-  boxShadow: 24,
-  width: 1000,
-  p: 4,
-};
+import { useDeleteLeave, useGetLeave } from '../../hooks/leave/useLeave';
+import { useGetEmployee } from '../../hooks/employee/useEmployee';
 
-const Leave = ({ isLoading }) => {
+
+import DeleteIcon from '@mui/icons-material/Delete';
+import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
+import { AddLeaveModal, EditLeaveModal } from './LeaveModal/LeaveModal';
+
+const Leave = ({isLoading}) => {
   const { data: leaveData, isLoading: loadingleave } = useGetLeave();
   const { data: employeeData, isLoading: loadingemployee } = useGetEmployee();
-  const { data: leaveTypeData, isLoading: loadingleaveType } =
-    useGetLeaveType();
+  const { data: leaveTypeData, isLoading: loadingleaveType } = useGetLeaveType();
 
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [openAddModal, setOpenAddModal] = useState(false);
+  const [openEditModal, setOpenEditModal] = useState(false);
 
-  if (isLoading || loadingemployee || loadingleaveType) return <>Loading</>;
+  const [editedLeave, setEditedLeave] = useState({});
 
+  const handleAddOpenModal = () => setOpenAddModal(true);
+  const handleCloseAddModal = () => setOpenAddModal(false);
+
+  const handleCloseEditModal = () => setOpenEditModal(false);
+
+  const deleteLeaveMutation = useDeleteLeave({});
+  const handleDeleteLeave = (leaveId) => {
+    deleteLeaveMutation.mutate(leaveId);
+  };
+
+  const handleEditLeave = (rowData) => {
+    setEditedLeave(rowData);
+    setOpenEditModal(true);
+  };
   const getEmployeeName = (rowData) => {
     const employeeId = rowData.employeeId;
     const employee = employeeData?.employees?.find(
@@ -107,7 +112,7 @@ const Leave = ({ isLoading }) => {
         }
 
         return (
-          <Chip label={status} style={{ backgroundColor: chipColor, color: "white", width:' 9rem' }} />
+          <Chip label={status} style={{ backgroundColor: chipColor, color: "white", width: ' 9rem' }} />
         );
       },
 
@@ -124,28 +129,35 @@ const Leave = ({ isLoading }) => {
       emptyValue: '-',
       width: 40,
     },
+    {
+      title: 'Actions',
+      render: (rowData) => (
+        <Stack direction="row" spacing={0}>
+          <Button color="primary" onClick={() => handleEditLeave(rowData)}>
+            <ModeEditOutlineIcon />
+          </Button>
+          <Button color="primary" onClick={() => handleDeleteLeave(rowData.id)}>
+            <DeleteIcon />
+          </Button>
+        </Stack>
+      ),
+      sorting: false,
+      width: 120,
+    },
   ];
+
+  if (isLoading || loadingemployee || loadingleaveType) return <>Loading</>;
 
   return (
     <>
       <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-        <Button variant='contained' sx={{ mt: 3, ml: 1 }} onClick={handleOpen}>
+        <Button variant='contained' sx={{ mt: 3, ml: 1 }} onClick={handleAddOpenModal}>
           +Add Leave
         </Button>
       </Box>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby='modal-modal-title'
-        aria-describedby='modal-modal-description'
-      >
-        <Box sx={style}>
-          <LeaveForm onClose={handleClose} />
-        </Box>
-      </Modal>
+      <br />
+      <br />
 
-      <br />
-      <br />
       <MaterialTable
         columns={columns}
         data={leaveData}
@@ -167,10 +179,24 @@ const Leave = ({ isLoading }) => {
             fontSize: 18,
           },
         }}
-        onRowDoubleClick={(_event, rowData) => handleDoubleClickRow(rowData)}
       />
+      {openEditModal && (
+        <EditLeaveModal
+          id={editedLeave?.id}
+          open={openEditModal}
+          handleCloseModal={handleCloseEditModal}
+        />
+      )}
+      {openAddModal && (
+        <AddLeaveModal
+          open={openAddModal}
+          handleCloseModal={handleCloseAddModal}
+        />
+      )}
     </>
   );
 };
 
 export default Leave;
+
+

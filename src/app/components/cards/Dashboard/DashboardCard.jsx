@@ -1,10 +1,10 @@
-import React from 'react'
+import React from 'react';
 import { Stack, Typography } from '@mui/material';
 import MainCard from '../MainCard';
 
 const DashboardCard = ({ title, icon }) => {
   return (
-    <MainCard contentSX={{ p: 2.25 }}>
+    <MainCard grow={true}>
       <Stack spacing={0.5}>
         <Typography variant="h6" color="primary.main" align='center'>
           {icon}
@@ -14,7 +14,7 @@ const DashboardCard = ({ title, icon }) => {
         </Typography>
       </Stack>
     </MainCard>
-  )
-}
+  );
+};
 
-export default DashboardCard
+export default DashboardCard;
