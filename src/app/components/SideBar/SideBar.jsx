@@ -2,30 +2,17 @@ import React, { useContext, useState } from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
-import CssBaseline from "@mui/material/CssBaseline";
-import MuiAppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import List from "@mui/material/List";
-import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
+import Collapse from "@mui/material/Collapse";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
-import { CakeOutlined, ExpandLess, ExpandMore } from "@mui/icons-material";
-import { Badge, Button, Card, Collapse, Switch } from "@mui/material";
-import { ThemeModeContext } from "../../../theme/ThemeModeContext";
-import { removeUser } from "../../utils/cookieHelper";
-import { useGetTodayBirthday } from "../../hooks/birthday/useBirthday";
-import TodayBirthday from "../../pages/Birthday/TodayBirthday";
-import { RemoveNotificationContext } from "../../../Usecontext/BirthdayContext";
-const drawerWidth = 240;
+import { ExpandLess, ExpandMore } from "@mui/icons-material";
+import { Button, Card, Switch, Typography } from "@mui/material";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import IconButton from "@mui/material/IconButton";
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
   ({ theme, open }) => ({
@@ -330,8 +317,14 @@ export default function SideBar() {
         <Card
           variant="outlined"
           sx={{
-            width: open ? "calc(100% - drawerWidth)" : "100%",
+            width: "100%",
+            maxWidth: "100%",
             padding: "20px",
+            boxSizing: "border-box",
+            "@media (min-width: 600px)": {
+              maxWidth: "calc(100% - drawerWidth)",
+              width: open ? "calc(100% - drawerWidth)" : "100%",
+            },
           }}
         >
           <Outlet />

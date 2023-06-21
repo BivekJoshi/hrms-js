@@ -83,7 +83,7 @@ const EditEmployeeForm = () => {
         if (qualificationFormik.dirty) {
           qualificationFormik.handleSubmit();
         }
-        break;
+
         break;
 
       case 4:
