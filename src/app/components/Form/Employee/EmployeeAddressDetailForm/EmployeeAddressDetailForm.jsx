@@ -1,65 +1,70 @@
 import {
-  Button,
   FormControlLabel,
   Grid,
-  MenuItem,
   Switch,
   TextField,
-  Typography,
+  Button,
+  MenuItem,
 } from '@mui/material';
 import { FieldArray, FormikProvider } from 'formik';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const province = [
   {
     value: 'KOSHI',
     label: 'Koshi Pradesh',
+    id: 1,
   },
   {
     value: 'MADHESH',
     label: 'Madhesh Pradesh',
+    id: 2,
   },
   {
     value: 'BAGMATI',
     label: 'Bagmati Pradesh',
+    id: 3,
   },
   {
     value: 'GANDAKI',
     label: 'Gandaki Pradesh',
+    id: 4,
   },
   {
     value: 'LUMBINI',
     label: 'Lumbini Pradesh',
+    id: 5,
   },
   {
     value: 'KARNALI',
     label: 'Karnali Pradesh',
+    id: 6,
   },
   {
     value: 'SUDURPASHCHIM',
     label: 'Sudurpashchim Pradesh',
+    id: 7,
   },
 ];
 
-const EmployeeAddressDetailForm = ({ formik, temporaryFormik, isLoading }) => {
-  console.log(formik);
+const EmployeeAddressDetailForm = ({ formik, isLoading }) => {
   return (
-    !isLoading && (
-      <FormikProvider value={formik}>
-        <FieldArray
-          name='addresses'
-          render={(arrayHelpers) => {
-            <div>
+    <FormikProvider value={formik}>
+      <FieldArray
+        name='addresses'
+        render={(arrayHelpers) => (
+          <div>
+            <Grid spacing={3}>
               {formik.values.addresses.map((address, index) => (
-                <div key={index} style={{ display: 'flex', gap: '1rem' }}>
+                <div key={index}>
                   <Grid item xs={12} sm={4}>
                     <TextField
                       id={`addresses[${index}].country`}
                       name={`addresses[${index}].country`}
                       label='Country'
-                      placeholder='Enter your country'
+                      placeholder='Enter country'
                       fullWidth
-                      value={formik.values.addresses[index].country}
+                      value={address.country}
                       onChange={formik.handleChange}
                       error={
                         formik.touched.addresses?.[index]?.country &&
@@ -78,11 +83,11 @@ const EmployeeAddressDetailForm = ({ formik, temporaryFormik, isLoading }) => {
                     <TextField
                       id={`addresses[${index}].province`}
                       name={`addresses[${index}].province`}
-                      label='Province'
                       select
-                      placeholder='Enter your province'
+                      label='Province'
+                      placeholder='Enter province'
                       fullWidth
-                      value={formik.values.addresses[index].province}
+                      value={address.province}
                       onChange={formik.handleChange}
                       error={
                         formik.touched.addresses?.[index]?.province &&
@@ -96,9 +101,9 @@ const EmployeeAddressDetailForm = ({ formik, temporaryFormik, isLoading }) => {
                       autoFocus
                       InputLabelProps={{ shrink: true }}
                     >
-                      {province.map((option) => (
-                        <MenuItem key={option.value} value={option.value}>
-                          {option.label}
+                      {province?.map((option) => (
+                        <MenuItem key={option?.id} value={option?.value}>
+                          {option?.label}
                         </MenuItem>
                       ))}
                     </TextField>
@@ -108,9 +113,9 @@ const EmployeeAddressDetailForm = ({ formik, temporaryFormik, isLoading }) => {
                       id={`addresses[${index}].district`}
                       name={`addresses[${index}].district`}
                       label='District'
-                      placeholder='Enter your district'
+                      placeholder='Enter district'
                       fullWidth
-                      value={formik.values.addresses[index].district}
+                      value={address.district}
                       onChange={formik.handleChange}
                       error={
                         formik.touched.addresses?.[index]?.district &&
@@ -130,9 +135,9 @@ const EmployeeAddressDetailForm = ({ formik, temporaryFormik, isLoading }) => {
                       id={`addresses[${index}].wardNumber`}
                       name={`addresses[${index}].wardNumber`}
                       label='Ward Number'
-                      placeholder='Enter your ward number'
+                      placeholder='Enter ward number'
                       fullWidth
-                      value={formik.values.addresses[index].wardNumber}
+                      value={address.wardNumber}
                       onChange={formik.handleChange}
                       error={
                         formik.touched.addresses?.[index]?.wardNumber &&
@@ -152,9 +157,9 @@ const EmployeeAddressDetailForm = ({ formik, temporaryFormik, isLoading }) => {
                       id={`addresses[${index}].city`}
                       name={`addresses[${index}].city`}
                       label='City'
-                      placeholder='Enter your city'
+                      placeholder='Enter city'
                       fullWidth
-                      value={formik.values.addresses[index].city}
+                      value={address.city}
                       onChange={formik.handleChange}
                       error={
                         formik.touched.addresses?.[index]?.city &&
@@ -174,9 +179,9 @@ const EmployeeAddressDetailForm = ({ formik, temporaryFormik, isLoading }) => {
                       id={`addresses[${index}].street`}
                       name={`addresses[${index}].street`}
                       label='Street'
-                      placeholder='Enter your street'
+                      placeholder='Enter street'
                       fullWidth
-                      value={formik.values.addresses[index].street}
+                      value={address.street}
                       onChange={formik.handleChange}
                       error={
                         formik.touched.addresses?.[index]?.street &&
@@ -191,71 +196,54 @@ const EmployeeAddressDetailForm = ({ formik, temporaryFormik, isLoading }) => {
                       InputLabelProps={{ shrink: true }}
                     />
                   </Grid>
-                  <Grid item xs={12} sm={12}>
+                  {index === 0 && (
                     <FormControlLabel
                       control={
                         <Switch
-                          id={`addresses[${index}].temporaryAndPermanentAddressSame`}
-                          name={`addresses[${index}].temporaryAndPermanentAddressSame`}
+                          id='temporaryAndPermanentAddressSame'
+                          name='temporaryAndPermanentAddressSame'
                           checked={
-                            formik.values.addresses[index]
-                              .temporaryAndPermanentAddressSame
+                            formik.values.temporaryAndPermanentAddressSame
                           }
                           onChange={(e) => {
                             formik.setFieldValue(
                               'temporaryAndPermanentAddressSame',
+
                               e.target.checked
                             );
+                            if (e.target.checked) {
+                              arrayHelpers.push({
+                                country: '',
+                                province: '',
+                                district: '',
+                                wardNumber: '',
+                                city: '',
+                                street: '',
+                              });
+                            } else {
+                              arrayHelpers.remove(index + 1);
+                            }
                           }}
                         />
                       }
-                      label='Do you have different permanent and temporary address?'
+                      label='Do you have different temporary address?'
                       error={
-                        formik.touched.addresses?.[index]
-                          ?.temporaryAndPermanentAddressSame &&
-                        Boolean(
-                          formik.errors.addresses?.[index]
-                            ?.temporaryAndPermanentAddressSame
-                        )
+                        formik.touched.temporaryAndPermanentAddressSame &&
+                        Boolean(formik.errors.temporaryAndPermanentAddressSame)
                       }
                       helperText={
-                        formik.touched.addresses?.[index]
-                          ?.temporaryAndPermanentAddressSame &&
-                        formik.errors.addresses?.[index]
-                          ?.temporaryAndPermanentAddressSame
+                        formik.touched.temporaryAndPermanentAddressSame &&
+                        formik.errors.temporaryAndPermanentAddressSame
                       }
                     />
-                  </Grid>
-                  <Button
-                    disabled={formik.values.addresses?.length === 1}
-                    type='button'
-                    onClick={() => arrayHelpers.remove(index)}
-                    className='deleteButton'
-                  >
-                    Remove
-                  </Button>
+                  )}
                 </div>
               ))}
-              <Button
-                type='button'
-                onClick={() =>
-                  arrayHelpers.push({
-                    district: '',
-                    wardNumber: '',
-                    city: '',
-                    street: '',
-                    province: '',
-                    country: '',
-                  })
-                }
-              >
-                Add
-              </Button>
-            </div>;
-          }}
-        />
-      </FormikProvider>
-    )
+            </Grid>
+          </div>
+        )}
+      />
+    </FormikProvider>
   );
 };
 
