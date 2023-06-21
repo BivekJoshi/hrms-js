@@ -14,6 +14,13 @@ import { Button, Card, Switch, Typography } from "@mui/material";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import IconButton from "@mui/material/IconButton";
 
+import { removeUser } from "../../utils/cookieHelper";
+import { drawerMenus } from "./drawerMenus";
+import { ThemeModeContext } from "../../../theme/ThemeModeContext";
+import Header from "../Header/Header";
+
+const drawerWidth = 260;
+
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
   ({ theme, open }) => ({
     flexGrow: 1,
@@ -40,27 +47,9 @@ const StyledNavLink = styled(NavLink)`
   &.active {
     && {
       background-color: #e5e5e5;
-      color: #1626c9;
     }
   }
 `;
-
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== "open",
-})(({ theme, open }) => ({
-  transition: theme.transitions.create(["margin", "width"], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  ...(open && {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: `${drawerWidth}px`,
-    transition: theme.transitions.create(["margin", "width"], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  }),
-}));
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
@@ -71,15 +60,15 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 
-export default function SideBar() {
-  const theme = useTheme();
+export default function Sidebar() {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const { toggleMode, themeMode } = useContext(ThemeModeContext); // Accessing themeMode from context
+  const [subMenuOpen, setSubMenuOpen] = useState({});
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
-  const { data, isLoading } = useGetTodayBirthday();
 
   const handleDrawerClose = () => {
     setOpen(false);
@@ -92,141 +81,13 @@ export default function SideBar() {
     }));
   };
 
-  const drawerMenus = [
-    {
-      name: "Dashboard",
-      icon: <InboxIcon />,
-      path: "dashboard",
-      subMenus: [],
-    },
-    {
-      name: "Employee",
-      icon: <MailIcon />,
-      path: "employee",
-      subMenus: [
-        {
-          name: "Add Employee",
-          path: "employee/add",
-          icon: <InboxIcon />,
-        },
-        {
-          name: "Employee",
-          path: "employee/add",
-          icon: <InboxIcon />,
-        },
-        {
-          name: "Leave",
-          path: "leave",
-          icon: <InboxIcon />,
-        },
-        {
-          name: "Leave Type",
-          path: "leavetype",
-          icon: <InboxIcon />,
-        },
-        {
-          name: "Attendance",
-          path: "employee/add",
-          icon: <InboxIcon />,
-        },
-        {
-          name: "Birthday",
-          icon: <InboxIcon />,
-          path: "birthday",
-        },
-      ],
-    },
-    {
-      name: "Department",
-      icon: <InboxIcon />,
-      path: "department",
-      subMenus: [],
-    },
-    {
-      name: "Designation",
-      icon: <InboxIcon />,
-      path: "designation",
-      subMenus: [],
-    },
-    {
-      name: "Company",
-      icon: <InboxIcon />,
-      path: "company",
-      subMenus: [],
-    },
-    {
-      name: "ToDo List",
-      icon: <InboxIcon />,
-      path: "todolist",
-      subMenus: [],
-    },
-  ];
-  const removeNotificationContext = useContext(RemoveNotificationContext);
-  const [openNotification, setOpenNotification] = useState(false);
-
-  const [subMenuOpen, setSubMenuOpen] = useState({});
-  const handleChange = () => {
-    //call notification api to change value to active false if any active true data is present
-    removeNotificationContext.dispatch({
-      type: "notifications",
-      payload: null,
-    });
-    setOpenNotification(!openNotification);
-  };
-
   return (
     <Box sx={{ display: "flex" }}>
-      <CssBaseline />
-      <AppBar position="fixed" open={open}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            sx={{ mr: 2, ...(open && { display: "none" }) }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <div>
-            <Typography variant="h6" noWrap component="div">
-              Human Resource Management System
-            </Typography>
-            <div
-              style={{
-                Color: "white",
-                display: "flex",
-                position: "absolute",
-                right: "100px",
-                top: "30px",
-                width: "30px",
-              }}
-            >
-              <div>
-                {/* // data.filtert((d)=>a.active).length */}
-                <Badge color="secondary" badgeContent={data?.length}>
-                  <CakeOutlined
-                    id="basic-button"
-                    aria-controls={open ? "basic-menu" : undefined}
-                    aria-haspopup="true"
-                    aria-expanded={open ? "true" : undefined}
-                    onClick={handleChange}
-                    style={{ color: "white", cursor: "pointer" }}
-                  />
-                </Badge>
-                {openNotification && (
-                  <TodayBirthday
-                    data={data}
-                    isLoading={isLoading}
-                    open={openNotification}
-                    setOpen={setOpenNotification}
-                  />
-                )}
-              </div>
-            </div>
-          </div>
-        </Toolbar>
-      </AppBar>
+      <Header
+        open={open}
+        handleDrawerOpen={handleDrawerOpen}
+        drawerWidth={drawerWidth}
+      />
       <Drawer
         sx={{
           width: drawerWidth,
@@ -242,11 +103,7 @@ export default function SideBar() {
       >
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === "ltr" ? (
-              <ChevronLeftIcon />
-            ) : (
-              <ChevronRightIcon />
-            )}
+            <ChevronLeftIcon />
           </IconButton>
         </DrawerHeader>
         <Divider />
@@ -295,6 +152,7 @@ export default function SideBar() {
         >
           <Button
             variant="contained"
+            sx={{ backgroundColor: "#1c7ed6" }}
             onClick={() => {
               removeUser(navigate);
             }}
@@ -304,11 +162,7 @@ export default function SideBar() {
           <Typography variant="body2" sx={{ marginRight: "8px" }}>
             {themeMode === "light" ? "Light" : "Dark"} Mode
           </Typography>
-          <Switch
-            checked={themeMode === "dark"}
-            onChange={toggleMode}
-            color="primary"
-          />
+          <Switch checked={themeMode === "dark"} onChange={toggleMode} />
         </Box>
       </Drawer>
 

@@ -1,0 +1,142 @@
+import React from "react";
+import { Grid, TextField, Button } from "@mui/material";
+import { toast } from "react-toastify";
+import useEditDesignationForm from "../../../hooks/designation/editDesignation/useEditDesignationForm";
+
+// const DesignationSchema = Yup.object().shape({
+//   designationName: Yup.string()
+//     .required("Designation Name is Required")
+//     .min(3, "Designation Name must be at least 3 characters"),
+//   designationLevel: Yup.string().required("Designation Level is Required"),
+//   salary: Yup.string().required("Salary is Required"),
+//   positionDetails: Yup.string().required("Details is Required"),
+// });
+
+const EditDesignationfield = ({ handleonClose, isLoading, data }) => {
+  const { formik } = useEditDesignationForm(data);
+  const handleFormSubmit = () => {
+    formik.handleSubmit();
+
+    if (formik.isValid) {
+      formik.setTouched({
+        designationName: true,
+        designationLevel: true,
+        Salary: true,
+        Details: true,
+      });
+
+      handleonClose(); // Close the modal
+    } else {
+      toast.error("Please make sure you have filled the form correctly");
+    }
+  };
+
+  return (
+    !isLoading && (
+      <form onSubmit={formik.handleSubmit}>
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={12}>
+            <TextField
+              id="designationName"
+              name="positionName"
+              label="Designation Name"
+              placeholder="Enter a Designation Name"
+              fullWidth
+              value={formik.values.positionName}
+              onChange={formik.handleChange}
+              error={
+                formik.touched.positionName &&
+                Boolean(formik.errors.positionName)
+              }
+              helperText={
+                formik.touched.positionName && formik.errors.positionName
+              }
+              variant="outlined"
+              autoFocus
+              InputLabelProps={{ shrink: true }}
+            />
+          </Grid>
+          <Grid item xs={12} sm={12}>
+            <TextField
+              id="designationLevel"
+              name="positionLevel"
+              label="Designation Level"
+              placeholder="Enter Designation Level"
+              fullWidth
+              value={formik.values.positionLevel}
+              onChange={formik.handleChange}
+              error={
+                formik.touched.positionLevel &&
+                Boolean(formik.errors.positionLevel)
+              }
+              helperText={
+                formik.touched.positionLevel && formik.errors.positionLevel
+              }
+              variant="outlined"
+              InputLabelProps={{ shrink: true }}
+            />
+          </Grid>
+          <Grid item xs={12} sm={12}>
+            <TextField
+              id="salary"
+              name="salary"
+              label="Salary"
+              placeholder="Enter salary"
+              fullWidth
+              value={formik.values.salary}
+              onChange={formik.handleChange}
+              error={formik.touched.salary && Boolean(formik.errors.salary)}
+              helperText={formik.touched.salary && formik.errors.salary}
+              variant="outlined"
+              InputLabelProps={{ shrink: true }}
+            />
+          </Grid>
+          <Grid item xs={12} sm={12}>
+            <TextField
+              id="positionDetails"
+              name="positionDetails"
+              label="Details"
+              placeholder="Enter position Details"
+              fullWidth
+              value={formik.values.positionDetails}
+              onChange={formik.handleChange}
+              error={
+                formik.touched.positionDetails &&
+                Boolean(formik.errors.positionDetails)
+              }
+              helperText={
+                formik.touched.positionDetails && formik.errors.positionDetails
+              }
+              variant="outlined"
+              InputLabelProps={{ shrink: true }}
+            />
+          </Grid>
+          <Grid
+            container
+            direction="row"
+            justifyContent="flex-end"
+            alignItems="flex-end"
+          >
+            <Button
+              variant="contained"
+              onClick={handleonClose}
+              sx={{ mt: 3, ml: 1 }}
+              color="error"
+            >
+              Cancel
+            </Button>
+            <Button
+              onClick={handleFormSubmit}
+              variant="contained"
+              sx={{ mt: 3, ml: 1 }}
+            >
+              Update
+            </Button>
+          </Grid>
+        </Grid>
+      </form>
+    )
+  );
+};
+
+export default EditDesignationfield;
