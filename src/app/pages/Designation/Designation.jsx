@@ -1,68 +1,98 @@
 import * as React from 'react';
-
+import { useState } from 'react';
 import MaterialTable from '@material-table/core';
+import { Box, Button, Stack } from '@mui/material';
 
-import { useGetDesignation } from '../../hooks/designation/useDesignation';
-import { Box, Button } from '@mui/material';
-import DesignationForm from '../../components/Form/Designation/DesignationForm';
-import FormModal from '../../components/Modal/FormModal';
+import DeleteIcon from '@mui/icons-material/Delete';
+import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 
+import { useDeleteDesignation, useGetDesignation } from '../../hooks/designation/useDesignation';
+import { AddDesignationModal, EditDesignationModal } from './DesignationModal/DesignationModal';
 
-const columns = [
-	{
-		title: 'SN',
-		render: (rowData) => rowData.tableData.id + 1,
-		cellStyle: {
-			whiteSpace: 'nowrap',
-		},
-		width: 80,
-	},
-	{
-		title: 'Designation Name',
-		field: 'positionName',
-		emptyValue: '-',
-		width: 200,
-	},
-	{
-		title: 'Designation Level',
-		field: 'positionLevel',
-		emptyValue: '-',
-		width: 100,
-	},
-	{
-		title: 'Salary',
-		field: 'salary',
-		emptyValue: '-',
-		width: 200,
-	},
-	{
-		title: 'Details',
-		field: 'positionDetails',
-		emptyValue: '-',
-	},
-]
 
 const Designation = () => {
 	const { data: designationData, isLoading } = useGetDesignation();
 
-	const [openModal, setOpenModal] = React.useState(false);
+	const [openAddModal, setOpenAddModal] = useState(false);
+	const [openEditModal, setOpenEditModal] = useState(false);
 
-	const handleOpenModal = () => setOpenModal(true);
-	const handleCloseModal = () => setOpenModal(false);
+	const [editedDesignation, setEditedDesignation] = useState({});
 
+	const handleAddOpenModal = () => setOpenAddModal(true);
+	const handleCloseAddModal = () => setOpenAddModal(false);
+
+	const handleCloseEditModal = () => setOpenEditModal(false);
+
+	const deleteDesignationMutation = useDeleteDesignation({});
+	const handleDeleteDesignation = (designationId) => {
+		deleteDesignationMutation.mutate(designationId);
+	};
+
+
+	const handleEditDesignation = (rowData) => {
+		setEditedDesignation(rowData);
+		setOpenEditModal(true);
+	};
+
+	const columns = [
+		{
+			title: 'SN',
+			render: (rowData) => rowData.tableData.id + 1,
+			cellStyle: {
+				whiteSpace: 'nowrap',
+			},
+			width: 80,
+		},
+		{
+			title: 'Designation Name',
+			field: 'positionName',
+			emptyValue: '-',
+			width: 200,
+		},
+		{
+			title: 'Designation Level',
+			field: 'positionLevel',
+			emptyValue: '-',
+			width: 100,
+		},
+		{
+			title: 'Salary',
+			field: 'salary',
+			emptyValue: '-',
+			width: 200,
+		},
+		{
+			title: 'Details',
+			field: 'positionDetails',
+			emptyValue: '-',
+		},
+		{
+			title: 'Actions',
+			render: (rowData) => (
+				<Stack direction="row" spacing={0}>
+					<Button color="primary" onClick={() => handleEditDesignation(rowData)}>
+						<ModeEditOutlineIcon />
+					</Button>
+					<Button color="primary" onClick={() => handleDeleteDesignation(rowData.id)}>
+						<DeleteIcon />
+					</Button>
+				</Stack>
+			),
+			sorting: false,
+			width: 120,
+		},
+	]
 	if (isLoading) return <>Loading</>;
 
 	return (
 		<>
-			<div>
-				<Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-					<Button variant='contained' sx={{ mt: 3, ml: 1 }} onClick={handleOpenModal}>
-						+Add Designation
-					</Button>
-				</Box>
-				<br />
-				<br />
-			</div>
+			<Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+				<Button variant='contained' sx={{ mt: 3, ml: 1 }} onClick={handleAddOpenModal}>
+					+Add Designation
+				</Button>
+			</Box>
+			<br />
+			<br />
 
 			<MaterialTable
 				columns={columns}
@@ -85,14 +115,21 @@ const Designation = () => {
 						fontSize: 18,
 					},
 				}}
-				onRowDoubleClick={(_event, rowData) => handleDoubleClickRow(rowData)}
 			/>
 
-			<FormModal
-				open={openModal}
-				onClose={handleCloseModal}
-				formComponent={<DesignationForm onClose={handleCloseModal} />}
-			/>
+			{openEditModal && (
+				<EditDesignationModal
+					id={editedDesignation?.id}
+					open={openEditModal}
+					handleCloseModal={handleCloseEditModal}
+				/>
+			)}
+			{openAddModal && (
+				<AddDesignationModal
+					open={openAddModal}
+					handleCloseModal={handleCloseAddModal}
+				/>
+			)}
 		</>
 	);
 };

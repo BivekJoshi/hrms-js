@@ -1,17 +1,21 @@
 import { Grid, TextField, Button } from '@mui/material';
 import React from 'react';
 import { toast } from 'react-toastify';
-import useAddDepartmentForm from '../../../hooks/designation/addDesignation/useAddDesignationForm';
+import useEditDesignationForm from '../../../hooks/designation/editDesignation/useEditDesignationForm';
 
-const DesignationForm = ({ onClose }) => {
-	const { formik } = useAddDepartmentForm();
+const EditDesignationFields = ({ onClose, isLoading,data }) => {
+  const { formik } = useEditDesignationForm(data);
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
 
     if (formik.isValid) {
-      // Handle successful data posting
-      // Close the model
+      formik.setTouched({
+        positionName: true,
+        positionLevel: true,
+        salary: true,
+        positionDetails:true,
+      });
       onClose();
     } else {
       toast.error('Please make sure you have filled the form correctly');
@@ -19,6 +23,7 @@ const DesignationForm = ({ onClose }) => {
   };
 
   return (
+    !isLoading && (
     <Grid container spacing={3}>
       <Grid item xs={12} sm={12}>
         <TextField
@@ -98,11 +103,12 @@ const DesignationForm = ({ onClose }) => {
           onClick={handleFormSubmit}
           sx={{ mt: 3, ml: 1 }}
         >
-          Add Designation
+          Update Designation
         </Button>
       </Grid>
     </Grid>
+    )
   );
 };
 
-export default DesignationForm;
+export default EditDesignationFields;

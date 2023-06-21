@@ -126,7 +126,7 @@ const EmployeeBasicInfoForm = ({ formik, isLoading }) => {
             InputLabelProps={{ shrink: true }}
             fullWidth
             value={formik.values.dateOfBirth}
-            onChange={handleChange}
+            onChange={formik.handleChange}
             error={
               formik.touched.dateOfBirth && Boolean(formik.errors.dateOfBirth)
             }
