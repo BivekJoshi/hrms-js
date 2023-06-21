@@ -29,8 +29,8 @@ const TodoList = () => {
 
   const deleteTodoListMutation = useDeleteTodoList({});
 
-  const handleDeleteTodoList = (id) => {
-    deleteTodoListMutation.mutate(id);
+  const handleDeleteTodoList = (userId) => {
+    deleteTodoListMutation.mutate(userId);
   };
 
   const handleEditTodoList = (rowData) => {
@@ -66,7 +66,7 @@ const TodoList = () => {
         </Stack>
       ),
       sorting: false,
-      width: 60,
+      width: 80,
     },
   ];
 
