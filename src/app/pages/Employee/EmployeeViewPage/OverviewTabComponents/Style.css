@@ -1,0 +1,24 @@
+.BasicInfoList {
+
+    position: 'relative';
+  
+    display: flex;
+  
+    flex-direction: column;
+  
+    max-width: 450px;
+  
+  }
+  
+  
+  
+  
+  .editBasicInfoBtn {
+  
+    align-self: flex-end;
+  
+    top: 5px;
+  
+    right: 10px;
+  
+  }

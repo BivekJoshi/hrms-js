@@ -29,6 +29,7 @@ import EmployeeQualificationDetailForm from '../../EmployeeQualificationDetailFo
 import EmployeeFamilyDetailForm from '../../EmployeeFamilyDetailForm/EmployeeFamilyDetailForm';
 import useAddLeaveForm from '../../../../../hooks/employee/AddFamily/useFamilyForm';
 import useFamilyForm from '../../../../../hooks/employee/AddFamily/useFamilyForm';
+import EmployeeDocumentDetailForm from '../../EmployeeDocumentDetailForm/EmployeeDocumentDetailForm';
 
 const steps = [
   'Basic Details',
@@ -36,6 +37,7 @@ const steps = [
   'Family Details',
   'Educational Details',
   'Bank Details',
+  'Document Details',
   'Other Details',
 ];
 const EditEmployeeForm = () => {
@@ -49,10 +51,11 @@ const EditEmployeeForm = () => {
   console.log(data);
 
   const { formik, isLoading } = useEditEmployeeForm({ data, employeeLoading });
-  const { formik: permanentFormik } = usePermanentAddressForm({
-    data,
-    employeeLoading,
-  });
+  const { formik: permanentFormik, isLoading: addressLoading } =
+    usePermanentAddressForm({
+      data,
+      employeeLoading,
+    });
   const { formik: temporaryFormik } = useTemporaryAddressForm();
   const { formik: bankFormik } = useAddBankForm({ data, employeeLoading });
   const handleNext = () => {
@@ -108,6 +111,7 @@ const EditEmployeeForm = () => {
         return (
           <EmployeeAddressDetailForm
             formik={permanentFormik}
+            isLoading={addressLoading}
             temporaryFormik={temporaryFormik}
           />
         );
@@ -132,6 +136,9 @@ const EditEmployeeForm = () => {
         return <EmployeeBankDetailForm formik={bankFormik} />;
 
       case 5:
+        return <EmployeeDocumentDetailForm />;
+
+      case 6:
         return <p>Hello World</p>;
 
       default:
@@ -176,7 +183,7 @@ const EditEmployeeForm = () => {
               {getStepContent(activeStep)}
               <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                 {activeStep !== 0 && (
-                  <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
+                  <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }} variant="outlined">
                     Back
                   </Button>
                 )}
@@ -188,8 +195,8 @@ const EditEmployeeForm = () => {
                       formik.isValid
                         ? null
                         : toast.error(
-                          'Please make sure you have filled the form correctly'
-                        );
+                            'Please make sure you have filled the form correctly'
+                          );
                     }}
                     sx={{ mt: 3, ml: 1 }}
                   >

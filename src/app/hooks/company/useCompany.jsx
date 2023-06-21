@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import {
   addCompany,
   deleteCompany,
@@ -32,10 +32,12 @@ export const useGetCompanyById = (id) => {
   /*________________________POST_____________________________________*/
 }
 export const useAddCompany = ({ onSuccess }) => {
+  const queryClient = useQueryClient();
   return useMutation(["addCompany"], (formData) => addCompany(formData), {
     onSuccess: (data, variables, context) => {
       toast.success("Succesfully added Company");
       onSuccess && onSuccess(data, variables, context);
+      queryClient.invalidateQueries("getCompany");
     },
     onError: (err, _variables, _context) => {
       toast.error(`error: ${err.message}`);
@@ -47,13 +49,15 @@ export const useAddCompany = ({ onSuccess }) => {
   /*________________________DELETE_____________________________________*/
 }
 export const useDeleteCompany = ({ onSuccess }) => {
+  const queryClient = useQueryClient();
   return useMutation(
     ["deleteCompany"],
     (companyId) => deleteCompany(companyId),
     {
       onSuccess: (data, variables, context) => {
-        toast.success("Successfully deleted Company");
+        toast.success("Successfully edited Company");
         onSuccess && onSuccess(data, variables, context);
+        queryClient.invalidateQueries("getCompany");
       },
       onError: (err, _variables, _context) => {
         toast.error(`Error: ${err.message}`);
@@ -66,10 +70,12 @@ export const useDeleteCompany = ({ onSuccess }) => {
   /*________________________EDIT_____________________________________*/
 }
 export const useEditCompany = ({ onSuccess }) => {
+  const queryClient = useQueryClient();
   return useMutation(["editCompany"], (formData) => editCompany(formData), {
     onSuccess: (data, variables, context) => {
       toast.success("Successfully edited Company");
       onSuccess && onSuccess(data, variables, context);
+      queryClient.invalidateQueries("getCompany");
     },
     onError: (err, _variables, _context) => {
       toast.error(`Error: ${err.message}`);

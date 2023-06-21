@@ -89,10 +89,10 @@ export const drawerMenus = [
   //   path: 'practice',
   //   subMenus: [],
   // }
-  {
-    name: 'ToDo',
-    icon: <PlaylistAddCheckIcon style={{ color: primaryColor }} />,
-    path: 'todolist',
-    subMenus: [],
-  },
+  // {
+  //   name: 'ToDo',
+  //   icon: <PlaylistAddCheckIcon style={{ color: primaryColor }} />,
+  //   path: 'todolist',
+  //   subMenus: [],
+  // },
 ];

@@ -4,6 +4,7 @@ import React, { lazy } from "react";
 import Birthdaylist from "../app/pages/Birthday/Birthdaylist";
 import Attendance from "../app/pages/Attendance/Attendance";
 import TodoList from "../app/pages/TodoList/TodoList";
+import EmployeeViewPage from "../app/pages/Employee/EmployeeViewPage/EmployeeViewPage";
 
 const Dashboard = Loadable(
 	lazy(() => import('../app/pages/Dashboard/Dashboard'))
@@ -46,7 +47,7 @@ const routes = [
   {
     path: "employee/:id",
     id: nanoid(),
-    component: <EmployeeOverview />,
+    component: <EmployeeViewPage/>,
   },
   {
     path: "employee/edit/:id",

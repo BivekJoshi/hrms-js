@@ -8,11 +8,11 @@ import {
 } from '@mui/material';
 import React from 'react';
 import { toast } from 'react-toastify';
-import useAddLeaveForm from '../../../hooks/leave/addLeave/useAddLeaveForm';
 import { useGetEmployee } from '../../../hooks/employee/useEmployee';
 import { useGetLeaveType } from '../../../hooks/leaveType/useLeaveType';
+import useEditLeaveForm from '../../../hooks/leave/editLeave/useEditLeaveForm';
 
-const leaveStatus=[
+const leaveStatus = [
   {
     value: 'APPROVED',
     label: 'Approved',
@@ -26,17 +26,34 @@ const leaveStatus=[
     label: 'Pending',
   },
 ];
-const LeaveForm = ({ onClose, isLoading }) => {
+const EditLeaveFields = ({ onClose, isLoading,data }) => {
   const { data: employeeData, isLoading: loadingEmployee } = useGetEmployee();
   const { data: leaveTypeData, isLoading: loadingLeaveType } = useGetLeaveType();
 
+  const { formik } = useEditLeaveForm(data);
 
-  const { formik } = useAddLeaveForm();
+  const handleFormSubmit = () => {
 
-  const handleOK = () => {
-    formik.setFieldTouched('');
+    formik.handleSubmit();
+
+    if (formik.isValid) {
+      formik.setTouched({
+        employeeId: true,
+        leaveTypeId: true,
+        leaveReason: true,
+        fromDate: true,
+        toDate: true,
+        applyLeaveDays: true,
+        leaveBalance: true,
+        confirmById: true,
+        leaveRemarks: true,
+        halfDay: true,
+      });
+      onClose(); // Close the modal
+    } else {
+      toast.error('Please make sure you have filled the form correctly');
+    }
   };
-
   return (
     !isLoading && (
       <Grid container spacing={3}>
@@ -44,7 +61,7 @@ const LeaveForm = ({ onClose, isLoading }) => {
           <Autocomplete
             id='employeeId'
             name='employeeId'
-            options={employeeData}
+            options={employeeData?.employees}
             getOptionLabel={(option) => `${option.firstName} ${option.middleName} ${option.lastName}`}
             value={formik.values.employeeId || null}
             onChange={(event, value) => formik.setFieldValue('employeeId', value)}
@@ -156,31 +173,26 @@ const LeaveForm = ({ onClose, isLoading }) => {
           />
         </Grid>
 
-
-
-        <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <Button variant='contained' onClick={onClose} sx={{ mt: 3, ml: 1 }}>
+        <Grid
+          container
+          direction='row'
+          justifyContent='flex-end'
+          alignItems='flex-end'
+        >
+          <Button variant='contained' onClick={onClose} sx={{ mt: 3, ml: 1 }} color='error'>
             Cancel
           </Button>
           <Button
             variant='contained'
-            onClick={() => {
-              formik.handleSubmit();
-              // onClose;
-              formik.isValid
-                ? handleOK()
-                : toast.error(
-                  'Please make sure you have filled the form correctly'
-                );
-            }}
+            onClick={handleFormSubmit}
             sx={{ mt: 3, ml: 1 }}
           >
-            Add Leave Type
+            Update Leave
           </Button>
-        </Box>
-      </Grid>
+        </Grid>
+      </Grid >
     )
   );
 };
 
-export default LeaveForm;
+export default EditLeaveFields;
