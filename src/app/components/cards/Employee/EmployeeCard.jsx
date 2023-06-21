@@ -14,6 +14,7 @@ import { MenuItem, MenuList, Paper, Popper, Typography } from "@mui/material";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import Image1 from "../../../../assets/wave.png";
+import MainCard from "../MainCard";
 
 const EmployeeCard = ({
   key,
@@ -58,20 +59,21 @@ const EmployeeCard = ({
   }, [open]);
 
   return (
-    <Card
-      key={key}
-      sx={{
-        p: 2,
-        width: 300,
-        backgroundColor: (theme) =>
-          theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-        cursor: "pointer",
-      }}
-      style={{
-        textAlign: "center",
-        padding: ".5rem",
-      }}
-    >
+    // <Card
+    //   key={key}
+    //   sx={{
+    //     p: 2,
+    //     width: 300,
+    //     backgroundColor: (theme) =>
+    //       theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+    //     cursor: "pointer",
+    //   }}
+    //   style={{
+    //     textAlign: "center",
+    //     padding: ".5rem",
+    //   }}
+    // >
+    <MainCard grow={true}>
       <Box display="flex" justifyContent={"end"}>
         <Button
           style={{
@@ -193,7 +195,8 @@ const EmployeeCard = ({
           </Stack>
         </Box>
       </div>
-    </Card>
+    {/* </Card> */}
+    </MainCard>
   );
 };
 

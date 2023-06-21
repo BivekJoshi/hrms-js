@@ -1,6 +1,7 @@
 import React from 'react';
 import './MainCard.css'; // Import the CSS file
 import { Paper } from '@mui/material';
+import { Grow } from '@mui/material';
 
 const MainCard = ({
   border = false,
@@ -14,18 +15,21 @@ const MainCard = ({
   shadow,
   title,
   codeHighlight,
+  grow = false,
   ...others
 }) => {
   return (
-    <Paper elevation={3} >
-      <div
-        className={`main-card ${border ? '1rem' : 'no-border'}`}
-        {...others}
-      >
-        {content && <div className="card-content">{children}</div>}
-        {!content && children}
-      </div>
-    </Paper>
+    <Grow in={grow}>
+      <Paper elevation={3} sx={{ cursor: "pointer", }}>
+        <div
+          className={`main-card ${border ? '1rem' : 'no-border'}`}
+          {...others}
+        >
+          {content && <div className="card-content">{children}</div>}
+          {!content && children}
+        </div>
+      </Paper>
+    </Grow>
   );
 };
 
