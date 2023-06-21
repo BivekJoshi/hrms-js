@@ -1,17 +1,17 @@
 import React from 'react';
-import useAddTodoForm from './useAddTodoForm';
 import { Grid, TextField, Button } from '@mui/material';
 import { toast } from 'react-toastify';
+import useAddTodoListForm from '../../../hooks/todoList/addTodoList/useAddTodoListForm';
 
-const AddTodoFields = ({ onClose, isLoading }) => {
-    const { formik } = useAddTodoForm();
+const AddTodoListFields = ({ onClose, isLoading }) => {
+    const { formik } = useAddTodoListForm();
 
-    const handleTodoSubmit = () => {
+    const handleFormSubmit = () => {
         formik.handleSubmit();
 
         if(formik.isValid) {
             formik.setTouched({
-                todoMessage: true,
+                message: true,
             });
             onClose();
         } else{
@@ -23,21 +23,21 @@ const AddTodoFields = ({ onClose, isLoading }) => {
     return (
         !isLoading && (
             <Grid container spacing={3}>
-                <Grid item xs={12} sm={12}>
+                <Grid item xs={10} sm={10}>
                     <TextField
-                        id='todoMessage'
-                        name="todoMessage"
-                        label="todoMessage"
+                        id='message'
+                        name="message"
+                        label="message"
                         placeholder='Enter your message...'
                         fullWidth
-                        value={formik.values.todoMessage}
-                        onChange={formik.handChange}
+                        value={formik.values.message}
+                        onChange={formik.handleChange}
                         error={
-                            formik.touched.todoMessage && 
-                            Boolean(formik.errors.todoMessage)
+                            formik.touched.message && 
+                            Boolean(formik.errors.message)
                         }
                         helperText={
-							formik.touched.todoMessage && formik.errors.todoMessage
+							formik.touched.message && formik.errors.message
 						}
 						variant='outlined'
 						autoFocus
@@ -56,10 +56,10 @@ const AddTodoFields = ({ onClose, isLoading }) => {
                     </Button>
                     <Button
                         variant="contained" 
-                        onClick={handleTodoSubmit}
+                        onClick={handleFormSubmit}
                         sx={{ mt: 3, ml: 1 }}
                     >
-                        Add Todo
+                        Add Message
                     </Button>
                 </Grid>
             </Grid>
@@ -67,4 +67,4 @@ const AddTodoFields = ({ onClose, isLoading }) => {
     );
 };
 
-export default AddTodoFields;
+export default AddTodoListFields;

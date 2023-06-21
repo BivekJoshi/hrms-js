@@ -1,14 +1,15 @@
 import { useFormik } from "formik";
-import { addMessageSchema } from "../Message/addMessage/addMessageSchema";
+import { useAddTodoList } from "../useTodoList";
+import { TodoListSchema } from "../valaidation/todoListSchema";
 
 const useAddTodoForm = () => {
-    const mutate = useAddMessage({});
+    const { mutate } = useAddTodoList({});
 
     const formik = useFormik({
         initialValues: {
             message: "",
         },
-        validationSchema: addMessageSchema,
+        validationSchema: TodoListSchema,
         onSubmit: (values) => {
             handleRequest(values);
         },

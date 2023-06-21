@@ -1,13 +1,30 @@
 import React from 'react';
 import FormModal from '../../../components/Modal/FormModal';
+import AddTodoListFields from '../../../components/Form/todoList/AddTodoListFields';
+import EditTodoListFields from '../../../components/Form/todoList/EditTodoListFields';
+import { useGetTodoListById, useEditTodoList } from '../../../hooks/todoList/useTodoList';
 
-export const AddTodoModal = ({ open, handleCloseModal }) => {
+export const AddTodoListModal = ({ open, handleCloseModal }) => {
     return (
         <div>
             <FormModal
                 open={open}
                 onClose={handleCloseModal}
-                formComponent={<AddFromFields onclose= {handleCloseModal} />}
+                formComponent={<AddTodoListFields onclose= {handleCloseModal} />}
+            />
+        </div>
+    );
+};
+
+export const EditTodoListModal = ({ open, handleCloseModal, id }) => {
+    const data = useEditTodoList(id);
+    
+    return (
+        <div>
+            <FormModal
+                open={open}
+                onClose={handleCloseModal}
+                formComponent={<EditTodoListFields onclose= {handleCloseModal} data={ data } />}
             />
         </div>
     );

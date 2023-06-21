@@ -7,7 +7,6 @@ const EditDepartmentFields = ({ onClose, isLoading, data }) => {
 	const { formik } = useEditDepartmentForm(data);
 
 	const handleFormSubmit = () => {
-		
 		formik.handleSubmit();
 
 		if (formik.isValid) {

@@ -2,7 +2,7 @@ import { axiosInstance } from "../../../auth/axiosInterceptor";
 
 {/*________________________GET_____________________________________*/ }
 export const getTodoList = async () => {
-    const data = await axiosInstance.get("/to-do-list/get-all");
+    const data = await axiosInstance.get(`/to-do-list/get-all`);
     return data;
 };
 
@@ -30,12 +30,13 @@ export const addTodoList = async (formData) => {
 
 {/*________________________EDIT_____________________________________*/ }
 export const editTodoList = async (formData) => {
-    const data = await axiosInstance.put("/to-do-list/edit/", formData);
+    const { id } = formData;
+    const data = await axiosInstance.put(`/to-do-list/edit/${id}`, formData);
     return data;
 }
 
 {/*________________________DELETE_____________________________________*/ }
 export const deleteTodoList = async (id) => {
-    const data = await axiosInstance.delete(`/to-do-list/delete/${id}`);
-    return data;
+    const res = await axiosInstance.delete(`/to-do-list/delete/${id}`);
+    return res.data;
 }
