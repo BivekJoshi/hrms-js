@@ -55,7 +55,6 @@ const Employee = () => {
               OfficeEmail={employee?.officeEmail}
               MobileNumber={employee?.mobileNumber}
             />
-
           </Box>
         ))}
       </Stack>
@@ -77,8 +76,8 @@ const Employee = () => {
                   formik.isValid
                     ? null
                     : toast.error(
-                      "Please make sure you have filled the form correctly"
-                    );
+                        "Please make sure you have filled the form correctly"
+                      );
                 }}
                 sx={{ mt: 3, ml: 1 }}
               >
