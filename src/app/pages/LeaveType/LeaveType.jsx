@@ -1,63 +1,93 @@
 import * as React from 'react';
-
-import { Box, Button, Modal } from '@mui/material';
+import { useState } from 'react';
 import MaterialTable from '@material-table/core';
-import { useGetLeaveType } from '../../hooks/leaveType/useLeaveType';
-import FormModal from '../../components/Modal/FormModal';
-import LeaveTypeForm from '../../components/Form/LeaveType/LeaveTypeForm';
+import { Box, Button, Stack } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 
+import { useDeleteLeaveType, useGetLeaveType } from '../../hooks/leaveType/useLeaveType';
+import { AddLeaveTypeModal, EditLeaveTypeModal } from './LeaveTypeModal/LeaveTypeModal';
 
-const columns = [
-	{
-		title: 'SN',
-		render: (rowData) => rowData.tableData.id,
-		cellStyle: {
-			whiteSpace: 'nowrap', // Prevents content from wrapping
-		},
-		width: 80,
-	},
-	{
-		title: 'Leave Name',
-		field: 'leaveName',
-		emptyValue: '-',
-		width: 200,
-	},
-	{
-		title: 'Total Leave Days',
-		field: 'leaveTotal',
-		emptyValue: '-',
-		width: 150,
-	},
-	{
-		title: 'Carry Forward',
-		field: 'carryForward',
-		emptyValue: '-',
-		width: 100,
-		render: (rowData) => (rowData.carryForward ? 'Yes' : 'No'),
-	},
-	{
-		title: 'Description',
-		field: 'leaveDescription',
-		emptyValue: '-',
-	},
-]
 
 const LeaveType = () => {
 	const { data: leaveTypeData, isLoading } = useGetLeaveType();
 
-	const [openModal, setOpenModal] = React.useState(false);
+	const [openAddModal, setOpenAddModal] = useState(false);
+	const [openEditModal, setOpenEditModal] = useState(false);
 
-	const handleOpenModal = () => setOpenModal(true);
-	const handleCloseModal = () => setOpenModal(false);
+	const [editedLeaveType, setEditedLeaveType] = useState({});
 
+	const handleAddOpenModal = () => setOpenAddModal(true);
+	const handleCloseAddModal = () => setOpenAddModal(false);
+
+	const handleCloseEditModal = () => setOpenEditModal(false);
+
+	const deleteLeaveTypeMutation = useDeleteLeaveType({});
+	const handleDeleteLeaveType = (leavetypeId) => {
+		deleteLeaveTypeMutation.mutate(leavetypeId);
+	};
+
+	const handleEditLeaveType = (rowData) => {
+		setEditedLeaveType(rowData);
+		setOpenEditModal(true);
+	};
+
+
+	const columns = [
+		{
+			title: 'SN',
+			render: (rowData) => rowData.tableData.id,
+			cellStyle: {
+				whiteSpace: 'nowrap', // Prevents content from wrapping
+			},
+			width: 80,
+		},
+		{
+			title: 'Leave Name',
+			field: 'leaveName',
+			emptyValue: '-',
+			width: 200,
+		},
+		{
+			title: 'Total Leave Days',
+			field: 'leaveTotal',
+			emptyValue: '-',
+			width: 150,
+		},
+		{
+			title: 'Carry Forward',
+			field: 'carryForward',
+			emptyValue: '-',
+			width: 100,
+			render: (rowData) => (rowData.carryForward ? 'Yes' : 'No'),
+		},
+		{
+			title: 'Description',
+			field: 'leaveDescription',
+			emptyValue: '-',
+		},
+		{
+			title: 'Actions',
+			render: (rowData) => (
+				<Stack direction="row" spacing={0}>
+					<Button color="primary" onClick={() => handleEditLeaveType(rowData)}>
+						<ModeEditOutlineIcon />
+					</Button>
+					<Button color="primary" onClick={() => handleDeleteLeaveType(rowData.id)}>
+						<DeleteIcon />
+					</Button>
+				</Stack>
+			),
+			sorting: false,
+			width: 120,
+		},
+	]
 	if (isLoading) return <>Loading</>;
 	return (
 		<>
-			<div>
-				<Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-					<Button variant='contained' sx={{ mt: 3, ml: 1 }} onClick={handleOpenModal}>+Add Leave Type</Button>
-				</Box>
-			</div>
+			<Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+				<Button variant='contained' sx={{ mt: 3, ml: 1 }} onClick={handleAddOpenModal}>+Add Leave Type</Button>
+			</Box>
 			<br></br>
 			<MaterialTable
 				columns={columns}
@@ -80,13 +110,20 @@ const LeaveType = () => {
 						fontSize: 18,
 					},
 				}}
-				onRowDoubleClick={(_event, rowData) => handleDoubleClickRow(rowData)}
 			/>
-			<FormModal
-				open={openModal}
-				onClose={handleCloseModal}
-				formComponent={<LeaveTypeForm onClose={handleCloseModal} />}
-			/>
+			{openEditModal && (
+				<EditLeaveTypeModal
+					id={editedLeaveType?.id}
+					open={openEditModal}
+					handleCloseModal={handleCloseEditModal}
+				/>
+			)}
+			{openAddModal && (
+				<AddLeaveTypeModal
+					open={openAddModal}
+					handleCloseModal={handleCloseAddModal}
+				/>
+			)}
 		</>
 	);
 };

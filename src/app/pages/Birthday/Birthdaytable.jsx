@@ -55,11 +55,11 @@ const Birthdaytable = ({ data, isLoading, currMonth }) => {
       title={currMonth}
       columns={[
         { title: "Name", field: "fullName" },
-        // { title: "Position", field: "position" },
+        { title: "Position", field: "positionName" },
         { title: "Date", field: "dateOfBirth" },
         { title: "Day", field: "dayOfBirth" },
         { title: "Age", field: "age" },
-        // { title: "Gender", field: "gender" },
+        { title: "Gender", field: "gender" },
       ]}
       data={Data}
       options={{
