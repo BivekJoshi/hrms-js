@@ -1,6 +1,7 @@
 import { useFormik } from 'formik';
 import { AddressSchema } from './AddressSchema';
 import {
+  useEditAddress,
   useGetAddressById,
   usePermanentAddAddress,
   useTemporaryAddress,
@@ -11,22 +12,38 @@ export const usePermanentAddressForm = ({
   employeeLoading: isLoading,
 }) => {
   const { mutate: permanentMutate } = usePermanentAddAddress({});
-  const addressDetails = !isLoading && data?.addresses[0];
-  console.log(addressDetails?.district);
+  const { mutate: editMutate } = useEditAddress({});
+  const addressDetails =
+    !isLoading &&
+    data?.addresses.map((address) => ({
+      id: address?.id || '',
+      country: address?.country || '',
+      province: address?.province || '',
+      district: address?.district || '',
+      wardNumber: address?.wardNumber || '',
+      city: address?.city || '',
+      street: address?.street || '',
+      temporaryAndPermanentAddressSame:
+        address?.temporaryAndPermanentAddressSame,
+    }));
+  console.log(data);
   const formik = useFormik({
     initialValues: {
-      addresses: [
-        {
-          country: addressDetails?.country || '',
-          province: addressDetails?.province || '',
-          district: addressDetails?.district || '',
-          wardNumber: addressDetails?.wardNumber || '',
-          city: addressDetails?.city || '',
-          street: addressDetails?.street || '',
-          temporaryAndPermanentAddressSame:
-            addressDetails?.temporaryAndPermanentAddressSame,
-        },
-      ],
+      addresses:
+        addressDetails && addressDetails.length > 0
+          ? addressDetails
+          : [
+              {
+                country: '',
+                province: '',
+                district: '',
+                wardNumber: '',
+                city: '',
+                street: '',
+                temporaryAndPermanentAddressSame: false,
+                addressType: '',
+              },
+            ],
     },
     // validationSchema: AddressSchema,
     onSubmit: (values) => {
@@ -34,10 +51,14 @@ export const usePermanentAddressForm = ({
     },
     enableReinitialize: 'true',
   });
-  console.log(formik);
   const handleRequest = (values) => {
     values = { ...values };
     permanentMutate(values);
+  };
+  const handleEditRequest = (values) => {
+    values = { ...values };
+
+    editMutate(values, formik);
   };
   return { formik };
 };
