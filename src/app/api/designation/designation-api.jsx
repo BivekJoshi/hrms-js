@@ -1,4 +1,4 @@
-import { axiosInstance } from "../../../auth/axiosInterceptor";
+import { axiosInstance } from '../../../auth/axiosInterceptor';
 
 {/*________________________GET_____________________________________*/ }
 export const getDesignation = async () => {
