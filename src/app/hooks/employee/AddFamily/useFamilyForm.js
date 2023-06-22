@@ -1,30 +1,42 @@
 import { useFormik } from 'formik';
 import { FamilySchema } from './FamilySchema';
-import { useAddFamily } from '../useFamily';
-import { useParams } from 'react-router-dom';
+import { useAddFamily, useEditFamily } from '../useFamily';
 
-const useFamilyForm = () => {
-    const { id } = useParams();
+const useFamilyForm = ({ data, isLoadingFamily: isLoading }) => {
     const { mutate } = useAddFamily({});
+    const { mutate: editMutate } = useEditFamily({});
+
+    const familyDetails = !isLoading && data?.familyMembers.map((familyMember) => ({
+        name: familyMember.name || '',
+        relation: familyMember.relation || '',
+        mobileNumber: familyMember.mobileNumber || '',
+    }));
 
     const formik = useFormik({
         initialValues: {
-            family: [{ name: "", relation: "" }]
+            family: familyDetails || [],
         },
         enableReinitialize: "true",
         validationSchema: FamilySchema,
         onSubmit: (values) => {
-            handleRequest(values);
-        },
+            if (familyDetails?.id) {
+              handledEditRequest(values);
+            } else {
+              handleRequest(values);
+            }
+          },
     });
 
     const handleRequest = (values) => {
-        // console.log(values);
-        values = {
-            ...values,
-        };
+        values = {...values,};
         mutate(values, formik, { onSuccess: () => console.log(values) });
     };
+
+    const handledEditRequest = (values) => {
+        values = { ...values };
+        editMutate(values, formik);
+      };
+
     return { formik }
 };
 

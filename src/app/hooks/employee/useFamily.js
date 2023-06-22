@@ -29,15 +29,18 @@ export const useGetFammilyById = (id) => {
 };
 
 {/*________________________EDIT_____________________________________*/ }
-// export const useEditFamily=()=>{
-//     return useMutation(['editFamily'],(formData)=>{
-//         editFamily(formData,id);
-//     },
-//     {
-//         onSuccess:(data,variables,context)=>{
-//             toast.success('Family edited sucessfully');
-//             onSuces
-//         }
-//     }
-//     )
-// }
+export const useEditFamily = () => {
+    return useMutation(['editFamily'], (formData) => {
+        editFamily(formData, id);
+    },
+        {
+            onSuccess: (data, variables, context) => {
+                toast.success('Family edited sucessfully');
+                onSuccess && onSuccess(data, variables, context);
+            },
+            onError: (err, _variables, _context) => {
+                toast.error(`error: ${err.message}`);
+            },
+        }
+    );
+};
