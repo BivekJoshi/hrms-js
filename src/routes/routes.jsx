@@ -4,6 +4,7 @@ import React, { lazy } from "react";
 import Birthdaylist from "../app/pages/Birthday/Birthdaylist";
 import Attendance from "../app/pages/Attendance/Attendance";
 import TodoList from "../app/pages/TodoList/TodoList";
+import Project from "../app/pages/project/Project";
 
 const Dashboard = Loadable(lazy(() => import('../app/pages/Dashboard/Dashboard')));
 const Employee = Loadable(lazy(() => import('../app/pages/Employee/Employee')));

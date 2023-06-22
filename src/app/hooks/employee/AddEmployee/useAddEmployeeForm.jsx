@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAddEmployee } from '../useEmployee';
 import { useFormik } from 'formik';
-import { AddEmployeeSchema } from './AddEmployeeSchema';
+import { AddEmployeeSchema } from './addEmployeeSchema';
 
 const useAddEmployeeForm = () => {
   const { mutate } = useAddEmployee({});
