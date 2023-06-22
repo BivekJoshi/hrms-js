@@ -44,20 +44,19 @@ const EditEmployeeForm = () => {
   const { id } = useParams();
   const [activeStep, setActiveStep] = useState(0);
   const { data, isLoading: employeeLoading } = useGetEmployeeById(id);
-  const { formik: qualificationFormik, isLoading: isLoadingQualification } =
-    useQualificationForm();
-  const { formik: familyFormik, isLoading: isLoadingFamily } =
-    useAddLeaveForm();
-  console.log(data);
+
+  const { formik: qualificationFormik, isLoading: isLoadingQualification } =useQualificationForm();
+
+  const { formik: familyFormik, isLoading: isLoadingFamily } =useFamilyForm({data,employeeLoading});
 
   const { formik, isLoading } = useEditEmployeeForm({ data, employeeLoading });
-  const { formik: permanentFormik, isLoading: addressLoading } =
-    usePermanentAddressForm({
-      data,
-      employeeLoading,
-    });
+
+  const { formik: permanentFormik, isLoading: addressLoading } =usePermanentAddressForm({data,employeeLoading, });
   const { formik: temporaryFormik } = useTemporaryAddressForm();
+
   const { formik: bankFormik } = useAddBankForm({ data, employeeLoading });
+  
+  
   const handleNext = () => {
     switch (activeStep) {
       case 0:
