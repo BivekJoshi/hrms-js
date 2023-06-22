@@ -80,7 +80,7 @@ export const useEditDesignation = ({ onSuccess }) => {
     (formData) => editDesignation(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Successfully edited Designation');
+        toast.success('Successfully edited designation');
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries('getDesignation');
       },

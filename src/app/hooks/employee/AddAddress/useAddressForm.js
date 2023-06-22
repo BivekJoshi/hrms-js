@@ -5,7 +5,6 @@ import {
   usePermanentAddAddress,
   useTemporaryAddress,
 } from '../useAddress';
-import { useParams } from 'react-router-dom';
 
 export const usePermanentAddressForm = ({
   data,
