@@ -1,0 +1,24 @@
+.card-content{
+    position: relative;
+}
+.card-position{
+    position: relative;
+}
+.card-id{
+    position: absolute;
+    top: 1%;
+    left: 6%;
+    border-radius: 12px;
+    padding: 5px;
+    background: rgb(192, 189, 189);
+    color: #000;
+}
+.card-status{
+    font-size: 0.8rem;
+    top: 54%;
+    left: 142px;
+    border-radius: 12px;
+    padding: 6px;
+    background: blue;
+    color: #fff;
+}

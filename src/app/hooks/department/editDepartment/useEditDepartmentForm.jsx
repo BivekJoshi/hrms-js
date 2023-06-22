@@ -4,7 +4,6 @@ import { useEditDepartment } from '../useDepartment';
 
 const useEditDepartmentForm = (data) => {
     const { mutate } = useEditDepartment({});
-
     const formik = useFormik({
         initialValues: {
             departmentName: data?.departmentName || '',

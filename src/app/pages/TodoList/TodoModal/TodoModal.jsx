@@ -10,15 +10,15 @@ export const AddTodoListModal = ({ open, handleCloseModal }) => {
             <FormModal
                 open={open}
                 onClose={handleCloseModal}
-                formComponent={<AddTodoListFields onclose= {handleCloseModal} />}
+                formComponent={<AddTodoListFields onClose= {handleCloseModal} />}
             />
         </div>
     );
 };
 
 export const EditTodoListModal = ({ open, handleCloseModal, id }) => {
-    const data = useEditTodoList(id);
-    
+    const { data } = useGetTodoListById(id);
+    // console.log(data)
     return (
         <div>
             <FormModal

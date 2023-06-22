@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import MaterialTable from "@material-table/core";
 import { Box, Button, Stack } from "@mui/material";
 import Skeleton from "@mui/material/Skeleton";
@@ -18,19 +17,19 @@ const TodoList = () => {
   const { data: todoListData, isLoading } = useGetTodoList();
 
   const [openAddModal, setOpenAddModal] = useState(false);
-  const [openEditModal, setOpenEditModal] = useState(false);
+	const [openEditModal, setOpenEditModal] = useState(false);
 
-  const [editedTodo, setEditedTodo] = useState({});
+	const [editedTodo, setEditedTodo] = useState({});
 
-  const handleAddOpenModal = () => setOpenAddModal(true);
-  const handleCloseAddModal = () => setOpenAddModal(false);
+	const handleAddOpenModal = () => setOpenAddModal(true);
+	const handleCloseAddModal = () => setOpenAddModal(false);
 
-  const handleCloseEditModal = () => setOpenEditModal(false);
+	const handleCloseEditModal = () => setOpenEditModal(false);
 
   const deleteTodoListMutation = useDeleteTodoList({});
 
-  const handleDeleteTodoList = (userId) => {
-    deleteTodoListMutation.mutate(userId);
+  const handleDeleteTodoList = (id) => {
+    deleteTodoListMutation.mutate(id);
   };
 
   const handleEditTodoList = (rowData) => {
@@ -39,14 +38,6 @@ const TodoList = () => {
   };
 
   const columns = [
-    // {
-    //   title: "SN",
-    //   render: (rowData) => rowData.id,
-    //   cellStyle: {
-    //     whiteSpace: "nowrap",
-    //   },
-    //   width: 80,
-    // },
     { title: "SN", field: "id", width: 80 },
     { title: "Message", field: "message", width: 80 },
     { title: "UserID", field: "userId", width: 80 },
@@ -59,7 +50,7 @@ const TodoList = () => {
           </Button>
           <Button
             color="primary"
-            onClick={() => handleDeleteTodoList(rowData.userId)}
+            onClick={() => handleDeleteTodoList(rowData.id)}
           >
             <DeleteIcon />
           </Button>
@@ -73,11 +64,9 @@ const TodoList = () => {
   if (isLoading)
     return (
       <>
-        <Box sx={{ width: 968 }}>
           <Skeleton />
           <Skeleton animation="wave" />
           <Skeleton animation={false} />
-        </Box>
       </>
     );
 

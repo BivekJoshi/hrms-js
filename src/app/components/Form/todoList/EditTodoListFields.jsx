@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import useEditTodoListForm from "../../../hooks/todoList/editTodoList/useEditTodoListForm";
 
 const EditTodoListFields = ({ onClose, isLoading, data }) => {
+	// console.log(onClose)
     const { formik } = useEditTodoListForm(data);
 	 //console.log(data)
     const handleFormSubmit = () => {

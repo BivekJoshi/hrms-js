@@ -37,6 +37,6 @@ export const editTodoList = async (formData) => {
 
 {/*________________________DELETE_____________________________________*/ }
 export const deleteTodoList = async (id) => {
-    const res = await axiosInstance.delete(`/to-do-list/delete/${id}`);
-    return res.data;
+    const data = await axiosInstance.delete(`/to-do-list/delete/${id}`);
+    return data;
 }

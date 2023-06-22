@@ -17,6 +17,8 @@ const Department = Loadable(
 	lazy(() => import('../app/pages/Department/Department'))
 );
 const Company = Loadable(lazy(() => import('../app/pages/Company/Company')));
+const Project = Loadable(lazy(() => import('../app/pages/Project/Project')));
+
 const EmployeeOverview = Loadable(
 	lazy(() =>
 		import(
@@ -92,6 +94,11 @@ const routes = [
     path: "todolist",
     id: nanoid(),
     component: <TodoList/>,
+  },
+  {
+    path: "project",
+    id: nanoid(),
+    component: <Project />,
   },
 ];
 
