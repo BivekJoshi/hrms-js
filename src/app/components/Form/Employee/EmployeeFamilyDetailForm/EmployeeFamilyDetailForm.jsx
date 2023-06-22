@@ -1,6 +1,8 @@
-import { Button, Grid, TextField } from '@mui/material';
+import { Grid, TextField, Button, Typography } from '@mui/material';
 import React from 'react';
-import { Field, FieldArray, FormikProvider } from 'formik';
+import { FieldArray, FormikProvider } from 'formik';
+import CloseIcon from '@mui/icons-material/Close';
+import AddIcon from '@mui/icons-material/Add';
 
 const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
 
@@ -11,55 +13,91 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
           <FieldArray
             name="family"
             render={(arrayHelpers) => (
-              <div>
+              <>
                 {formik.values.family.map((familyMember, index) => (
-                  <div key={index} style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
-                    <Grid item xs={12} sm={12}>
-                      <TextField
-                        id={`family[${index}].name`}
-                        name={`family[${index}].name`}
-                        label="Name"
-                        placeholder="Enter name"
-                        fullWidth
-                        value={familyMember.name}
-                        onChange={formik.handleChange}
-                        error={formik.touched.family?.[index]?.name && Boolean(formik.errors.family?.[index]?.name)}
-                        helperText={formik.touched.family?.[index]?.name && formik.errors.family?.[index]?.name}
-                        variant="outlined"
-                      />
-                    </Grid>
-                    <Grid item xs={12} sm={12}>
-                      <TextField
-                        id={`family[${index}].relation`}
-                        name={`family[${index}].relation`}
-                        label="Relation"
-                        placeholder="Enter relation"
-                        fullWidth
-                        value={familyMember.relation}
-                        onChange={formik.handleChange}
-                        error={formik.touched.family?.[index]?.relation && Boolean(formik.errors.family?.[index]?.relation)}
-                        helperText={formik.touched.family?.[index]?.relation && formik.errors.family?.[index]?.relation}
-                        variant="outlined"
-                      />
-                    </Grid>
-                    {index > 0 && (
-                      <Button
-                        variant="outlined"
-                        onClick={() => arrayHelpers.remove(index)}
-                        className="deleteButton"
+                  <>
+                    <br />
+                    <Typography variant="button" display="block" gutterBottom>
+                      Add Family Detail
+                    </Typography>
+                    <br />
+                    <Grid container spacing={3} key={index}>
+                      <Grid item xs={12} sm={3}>
+                        <TextField
+                          id={`family[${index}].name`}
+                          name={`family[${index}].name`}
+                          label="Name"
+                          placeholder="Enter name"
+                          fullWidth
+                          value={familyMember.name}
+                          onChange={formik.handleChange}
+                          error={formik.touched.family?.[index]?.name && Boolean(formik.errors.family?.[index]?.name)}
+                          helperText={formik.touched.family?.[index]?.name && formik.errors.family?.[index]?.name}
+                          variant="outlined"
+                          autoFocus
+                          InputLabelProps={{ shrink: true }}
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={3}>
+                        <TextField
+                          id={`family[${index}].relation`}
+                          name={`family[${index}].relation`}
+                          label="Relation"
+                          placeholder="Enter relation"
+                          fullWidth
+                          value={familyMember.relation}
+                          onChange={formik.handleChange}
+                          error={formik.touched.family?.[index]?.relation && Boolean(formik.errors.family?.[index]?.relation)}
+                          helperText={formik.touched.family?.[index]?.relation && formik.errors.family?.[index]?.relation}
+                          variant="outlined"
+                          autoFocus
+                          InputLabelProps={{ shrink: true }}
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={3}>
+                        <TextField
+                          id={`family[${index}].mobileNumber`}
+                          name={`family[${index}].mobileNumber`}
+                          label="mobileNumber"
+                          placeholder="Enter mobileNumber"
+                          fullWidth
+                          value={familyMember.mobileNumber}
+                          onChange={formik.handleChange}
+                          error={formik.touched.family?.[index]?.mobileNumber && Boolean(formik.errors.family?.[index]?.mobileNumber)}
+                          helperText={formik.touched.family?.[index]?.mobileNumber && formik.errors.family?.[index]?.mobileNumber}
+                          variant="outlined"
+                          autoFocus
+                          InputLabelProps={{ shrink: true }}
+                        />
+                      </Grid>
+
+                      <Grid
+                        item xs={12}
+                        sm={1}
+                        container
+                        direction="row"
+                        justifyContent="flex-end"
+                        alignItems="center"
                       >
-                        Remove
-                      </Button>
-                    )}
-                  </div>
+                        <Button variant='contained'
+                          disabled={formik.values.family?.length === 1}
+                          onClick={() => arrayHelpers.remove(index)}
+                          color='error'
+                        >
+                          <CloseIcon />
+                        </Button>
+                      </Grid>
+                    </Grid>
+                  </>
                 ))}
+                <br />
                 <Button
-                  variant="outlined"
+                  variant='contained'
                   onClick={() => arrayHelpers.push({ name: "", relation: "" })}
                 >
-                  Add Family Member
+                  <AddIcon />
                 </Button>
-              </div>
+              </>
             )}
           />
         </FormikProvider>

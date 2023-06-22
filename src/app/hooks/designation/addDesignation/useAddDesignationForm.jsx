@@ -1,6 +1,6 @@
 import { useFormik } from 'formik';
 import { useAddDesignation } from '../useDesignation';
-import { addDesignationSchema } from './addDesigationSchema';
+import { DesignationSchema } from '../Validation/DesigationSchema';
 
 const useAddDesignationForm = () => {
   const { mutate } = useAddDesignation({});
@@ -12,7 +12,7 @@ const useAddDesignationForm = () => {
       salary: '',
       positionDetails: '',
     },
-    validationSchema: addDesignationSchema,
+    validationSchema: DesignationSchema,
     onSubmit: (values) => {
       handleRequest(values);
     },

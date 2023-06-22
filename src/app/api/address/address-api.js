@@ -1,7 +1,7 @@
 import { axiosInstance } from '../../../auth/axiosInterceptor';
 
 export const addPermanentAddress = async (formData, id) => {
-  const data = await axiosInstance.post(`/address/${id}`, formData);
+  const data = await axiosInstance.post(`/address/${id}`, formData.addresses);
   return data;
 };
 
@@ -19,6 +19,7 @@ export const getAddressById = (id) => {
 };
 
 export const editPermanentAddress = async (formData, addressId) => {
-  const data = await axiosInstance.put(`/address/${addressId}`, formData);
+  const {id} = formData
+  const data = await axiosInstance.put(`/address/${id}`, formData);
   return data;
 };
