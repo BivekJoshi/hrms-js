@@ -1,44 +1,44 @@
-import React, { useState } from "react";
+import * as React from "react";
+import { useState } from "react";
 import MaterialTable from "@material-table/core";
-import { Stack, Button } from "@mui/material";
-import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
+import { Box, Button, Stack } from "@mui/material";
+
 import DeleteIcon from "@mui/icons-material/Delete";
-import FormModal from "../../components/Modal/FormModal";
+import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
+
 import {
   useDeleteDesignation,
   useGetDesignation,
 } from "../../hooks/designation/useDesignation";
-import AddDesignationForm from "../../components/Form/Designation/AddDesignationField";
-import { AddDesignatioModal, EditDesignationModal } from "./DesignationModal";
+import {
+  AddDesignationModal,
+  EditDesignationModal,
+} from "./DesignationModal/DesignationModal";
 
 const Designation = () => {
   const { data: designationData, isLoading } = useGetDesignation();
+
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
-  const [openModal, setOpenModal] = useState(false);
-  const [editedDesignation, setEditedDesignation] = useState(null);
+
+  const [editedDesignation, setEditedDesignation] = useState({});
+
+  const handleAddOpenModal = () => setOpenAddModal(true);
+  const handleCloseAddModal = () => setOpenAddModal(false);
+
+  const handleCloseEditModal = () => setOpenEditModal(false);
 
   const deleteDesignationMutation = useDeleteDesignation({});
-  const handleDeleteDesignation = (posId) => {
-    deleteDesignationMutation.mutate(posId);
+  const handleDeleteDesignation = (designationId) => {
+    deleteDesignationMutation.mutate(designationId);
   };
 
   const handleEditDesignation = (rowData) => {
     setEditedDesignation(rowData);
     setOpenEditModal(true);
   };
-  // const handleEditField = (field) => {
-  //   setSelectedField(field);
-  // };
 
-  const handleOpenModal = () => setOpenModal(true);
-  const handleCloseModal = () => setOpenModal(false);
-  const handleCloseAddModal = () => setOpenAddModal(false);
-  const handleCloseEditModal = () => setOpenEditModal(false);
-
-  if (isLoading) return <>Loading</>;
-
-  const column = [
+  const columns = [
     {
       title: "SN",
       render: (rowData) => rowData.tableData.id + 1,
@@ -92,26 +92,24 @@ const Designation = () => {
       width: 120,
     },
   ];
-
   if (isLoading) return <>Loading</>;
+
   return (
     <>
-      <div>
-        <Stack direction="row" spacing={2} justifyContent="flex-end">
-          <Button
-            variant="contained"
-            onClick={handleOpenModal}
-            sx={{ mt: 3, ml: 1 }}
-          >
-            +Add Designation
-          </Button>
-        </Stack>
-        <br />
-        <br />
-      </div>
+      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+        <Button
+          variant="contained"
+          sx={{ mt: 3, ml: 1 }}
+          onClick={handleAddOpenModal}
+        >
+          +Add Designation
+        </Button>
+      </Box>
+      <br />
+      <br />
 
       <MaterialTable
-        columns={column}
+        columns={columns}
         data={designationData}
         title=""
         isLoading={isLoading}
@@ -137,29 +135,15 @@ const Designation = () => {
         <EditDesignationModal
           id={editedDesignation?.id}
           open={openEditModal}
-          onClose={handleCloseEditModal}
-          // formComponent={
-          //   <DesignationForm
-          //     id={editedDesignation?.id}
-          //     onClose={handleCloseEditModal}
-          //   />
-          // }
+          handleCloseModal={handleCloseEditModal}
         />
       )}
-
       {openAddModal && (
-        <AddDesignatioModal
+        <AddDesignationModal
           open={openAddModal}
-          onClose={handleCloseAddModal}
-          // formComponent={<AddDesignationForm onClose={handleCloseAddModal} />}
+          handleCloseModal={handleCloseAddModal}
         />
       )}
-
-      <FormModal
-        open={openModal}
-        onClose={handleCloseModal}
-        formComponent={<AddDesignationForm onClose={handleCloseModal} />}
-      />
     </>
   );
 };

@@ -22,7 +22,7 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
                     </Typography>
                     <br />
                     <Grid container spacing={3} key={index}>
-                      <Grid item xs={12} sm={4}>
+                      <Grid item xs={12} sm={3}>
                         <TextField
                           id={`family[${index}].name`}
                           name={`family[${index}].name`}
@@ -38,7 +38,7 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
                           InputLabelProps={{ shrink: true }}
                         />
                       </Grid>
-                      <Grid item xs={12} sm={4}>
+                      <Grid item xs={12} sm={3}>
                         <TextField
                           id={`family[${index}].relation`}
                           name={`family[${index}].relation`}
@@ -54,17 +54,33 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
                           InputLabelProps={{ shrink: true }}
                         />
                       </Grid>
+                      <Grid item xs={12} sm={3}>
+                        <TextField
+                          id={`family[${index}].mobileNumber`}
+                          name={`family[${index}].mobileNumber`}
+                          label="mobileNumber"
+                          placeholder="Enter mobileNumber"
+                          fullWidth
+                          value={familyMember.mobileNumber}
+                          onChange={formik.handleChange}
+                          error={formik.touched.family?.[index]?.mobileNumber && Boolean(formik.errors.family?.[index]?.mobileNumber)}
+                          helperText={formik.touched.family?.[index]?.mobileNumber && formik.errors.family?.[index]?.mobileNumber}
+                          variant="outlined"
+                          autoFocus
+                          InputLabelProps={{ shrink: true }}
+                        />
+                      </Grid>
 
                       <Grid
                         item xs={12}
-                        sm={4}
+                        sm={1}
                         container
                         direction="row"
                         justifyContent="flex-end"
                         alignItems="center"
                       >
                         <Button variant='contained'
-                          disabled={formik.values.education?.length === 1}
+                          disabled={formik.values.family?.length === 1}
                           onClick={() => arrayHelpers.remove(index)}
                           color='error'
                         >

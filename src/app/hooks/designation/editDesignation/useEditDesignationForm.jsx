@@ -1,10 +1,9 @@
 import { useFormik } from "formik";
-
-import { useEditDesigination } from "../useDesignation";
-import { DesignationSchema } from "../validation/DesignationSchema";
+import { useEditDesignation } from "../useDesignation";
+import { DesignationSchema } from "../Validation/DesigationSchema";
 
 const useEditDesignationForm = (data) => {
-  const { mutate } = useEditDesigination({});
+  const { mutate } = useEditDesignation({});
 
   const formik = useFormik({
     initialValues: {
@@ -22,7 +21,9 @@ const useEditDesignationForm = (data) => {
   });
 
   const handleRequest = (values) => {
-    values = { ...values };
+    values = {
+      ...values,
+    };
     mutate(values, formik);
   };
 

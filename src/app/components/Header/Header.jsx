@@ -71,7 +71,6 @@ export default function Header({ open, handleDrawerOpen }) {
               style={{ color: "white", cursor: "pointer" }}
             />
           </Badge>
-
           {openNotification && (
             <TodayBirthday
               data={data}
