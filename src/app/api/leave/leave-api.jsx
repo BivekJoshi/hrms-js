@@ -6,7 +6,15 @@ export const getleave = async () => {
   return data;
 };
 
-{/*________________________GETBYID_____________________________________*/ }
+{/*________________________GETEMPLOYEELEAVEBYID_____________________________________*/ }
+export const getEmployeeLeaveById = async (id) => {
+  if (id) {
+    const data = await axiosInstance.get(`/leave/employee/${id}`);
+    return data;
+  }
+};
+
+{/*________________________GETLEAVEBYID_____________________________________*/ }
 export const getLeaveById = async (id) => {
   if (id) {
     const data = await axiosInstance.get(`/leave/${id}`);

@@ -24,7 +24,7 @@ const LeaveType = () => {
 
 	const deleteLeaveTypeMutation = useDeleteLeaveType({});
 	const handleDeleteLeaveType = (leavetypeId) => {
-		deleteLeaveTypeMutation.mutate(leavetypeId);
+		// deleteLeaveTypeMutation.mutate(leavetypeId);
 	};
 
 	const handleEditLeaveType = (rowData) => {

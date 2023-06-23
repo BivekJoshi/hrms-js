@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 import { ThemeSwitch } from '../../../../theme/ThemeSwitch';
 import useEditLeaveTypeForm from '../../../hooks/leaveType/editLeaveType/useEditLeaveTypeForm';
 
-const EditLeaveTypeFields = ({ onClose, isLoading ,data}) => {
+const EditLeaveTypeFields = ({ onClose, isLoading, data }) => {
     const { formik } = useEditLeaveTypeForm(data);
 
     const handleFormSubmit = () => {
@@ -21,6 +21,7 @@ const EditLeaveTypeFields = ({ onClose, isLoading ,data}) => {
                 leaveName: true,
                 leaveTotal: true,
                 leaveDescription: true,
+                carryForward: true,
             });
             onClose(); // Close the modal
         } else {
@@ -87,7 +88,11 @@ const EditLeaveTypeFields = ({ onClose, isLoading ,data}) => {
                 <Grid item xs={12} sm={12}>
                     <FormControlLabel
                         required
-                        control={<ThemeSwitch />}
+                        control={<ThemeSwitch
+                            checked={formik.values.carryForward} // Set the checked value based on formik's values
+                            onChange={formik.handleChange} // Handle the change event
+                            name="carryForward"
+                        />}
                         label='Carry Forward'
                         id='carryForward'
                         name='carryForward'

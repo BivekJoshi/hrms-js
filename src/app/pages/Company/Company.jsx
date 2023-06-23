@@ -3,31 +3,38 @@ import { useState } from 'react';
 import MaterialTable from '@material-table/core';
 import { Box, Button, Stack } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
+import EditIcon from '@mui/icons-material/Edit';
 
 import { useDeleteCompany, useGetCompany } from '../../hooks/company/useCompany';
 import { AddCompanyModal, EditCompanyModal } from './CompanyModal/CompanyModal';
-
+import DeleteConfirmationModal from './CompanyModal/DeleteConfirmationModal';
 
 const Company = () => {
   const { data: companyData, isLoading } = useGetCompany();
 
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
+  const [openDeleteModal, setOpenDeleteModal] = useState(false); // State to control the delete confirmation modal
 
   const [editedCompany, setEditedCompany] = useState({});
+  const [deletedCompany, setDeletedCompany] = useState({});
 
   const handleAddOpenModal = () => setOpenAddModal(true);
   const handleCloseAddModal = () => setOpenAddModal(false);
 
   const handleCloseEditModal = () => setOpenEditModal(false);
+  const handleCloseDeleteModal = () => setOpenDeleteModal(false);
 
-  
   const deleteCompanyMutation = useDeleteCompany({});
-  const handleDeleteCompany = (companyId) => {
-    deleteCompanyMutation.mutate(companyId);
+  const handleDeleteCompany = (rowData) => {
+    setDeletedCompany(rowData);
+    setOpenDeleteModal(true);
   };
 
+  const handleConfirmDelete = () => {
+    deleteCompanyMutation.mutate(deletedCompany.id);
+    setOpenDeleteModal(false);
+  };
 
   const handleEditCompany = (rowData) => {
     setEditedCompany(rowData);
@@ -65,9 +72,9 @@ const Company = () => {
       render: (rowData) => (
         <Stack direction="row" spacing={0}>
           <Button color="primary" onClick={() => handleEditCompany(rowData)}>
-            <ModeEditOutlineIcon />
+            <EditIcon />
           </Button>
-          <Button color="primary" onClick={() => handleDeleteCompany(rowData.id)}>
+          <Button color="primary" onClick={() => handleDeleteCompany(rowData)}>
             <DeleteIcon />
           </Button>
         </Stack>
@@ -121,6 +128,13 @@ const Company = () => {
         <AddCompanyModal
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
+        />
+      )}
+      {openDeleteModal && (
+        <DeleteConfirmationModal
+          open={openDeleteModal}
+          handleCloseModal={handleCloseDeleteModal}
+          handleConfirmDelete={handleConfirmDelete}
         />
       )}
     </>

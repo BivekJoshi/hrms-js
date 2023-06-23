@@ -8,7 +8,7 @@ const useEditLeaveTypeForm = (data) => {
     const formik = useFormik({
         initialValues: {
             leaveName: data?.leaveName || '',
-            leaveTotal: data?.LeaveTotal || '',
+            leaveTotal: data?.leaveTotal || '',
             leaveDescription: data?.leaveDescription || '',
             carryForward: data?.carryForward || '',
             id: data?.id,

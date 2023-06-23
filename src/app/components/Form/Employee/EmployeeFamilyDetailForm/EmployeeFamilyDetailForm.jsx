@@ -93,7 +93,7 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
                 <br />
                 <Button
                   variant='contained'
-                  onClick={() => arrayHelpers.push({ name: "", relation: "" })}
+                  onClick={() => arrayHelpers.push({ name: "", relation: "", mobileNumber: "" })}
                 >
                   <AddIcon />
                 </Button>
