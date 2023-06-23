@@ -1,26 +1,29 @@
+import {
+	Avatar,
+	Box,
+	Chip,
+	Divider,
+	List,
+	ListItem,
+	ListItemAvatar,
+	ListItemText,
+	Typography
+} from '@mui/material';
 import React from 'react';
 
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
 import EmailIcon from '@mui/icons-material/Email';
-import Divider from '@mui/material/Divider';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import PersonIcon from '@mui/icons-material/Person';
-import { ListItemAvatar, Chip, Box, Avatar, Typography } from '@mui/material';
 
 const primaryColor = '#1c7ed6';
 
 const LeftProfile = ({ data }) => {
-	// console.log(data);
-	const MiddleName = data?.middleName === null ? ' ' : data?.middleName;
-
 	return (
 		<div>
 			<Box
 				className='profileBasic'
 				sx={{
-					width: 400,
+					width: 350,
 					height: 600,
 					bgcolor: '#cfe8fc',
 					borderRadius: 5,
@@ -28,8 +31,8 @@ const LeftProfile = ({ data }) => {
 			>
 				<Avatar
 					sx={{
-						width: 200,
-						height: 200,
+						width: 190,
+						height: 190,
 						bgcolor: primaryColor,
 						alignSelf: 'center',
 					}}
@@ -44,9 +47,9 @@ const LeftProfile = ({ data }) => {
 							fontWeight: 'bolder',
 						}}
 					>
-						{data?.firstName + ' ' + MiddleName + ' ' + data?.lastName}
+						{data?.firstName + ' ' + data?.middleName + ' ' + data?.lastName}
 					</Typography>
-					<Chip label={data?.position.positionName} />
+					<Chip label={data?.position.positionName} style={{ backgroundColor: primaryColor, color: "white", width: ' 9rem' }}/>
 				</div>
 
 				<List

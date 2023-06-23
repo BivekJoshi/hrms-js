@@ -4,12 +4,15 @@ import MaterialTable from '@material-table/core';
 import { Box, Button, Stack } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 
 import { useDeleteCompany, useGetCompany } from '../../hooks/company/useCompany';
 import { AddCompanyModal, EditCompanyModal } from './CompanyModal/CompanyModal';
 import DeleteConfirmationModal from './CompanyModal/DeleteConfirmationModal';
+import { useNavigate } from 'react-router-dom';
 
 const Company = () => {
+  const navigate = useNavigate();
   const { data: companyData, isLoading } = useGetCompany();
 
   const [openAddModal, setOpenAddModal] = useState(false);
@@ -88,6 +91,16 @@ const Company = () => {
 
   return (
     <>
+      <Button
+        size='large'
+        sx={{ bgcolor: '#1c7ed6' }}
+        variant='contained'
+        onClick={() => {
+          navigate(-1);
+        }}
+      >
+        <KeyboardBackspaceIcon />
+      </Button>
       <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
         <Button variant="contained" sx={{ mt: 3, ml: 1 }} onClick={handleAddOpenModal}>
           +Add Company

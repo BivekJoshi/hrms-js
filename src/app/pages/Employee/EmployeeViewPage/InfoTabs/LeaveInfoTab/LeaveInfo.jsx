@@ -2,10 +2,12 @@ import MaterialTable from '@material-table/core';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Chip } from '@mui/material';
-import { useGetLeaveType } from '../../../../hooks/leaveType/useLeaveType';
-import { useGetEmployeeLeaveById } from '../../../../hooks/leave/useLeave';
+import { useGetEmployeeLeaveById } from '../../../../../hooks/leave/useLeave';
+import { useGetLeaveType } from '../../../../../hooks/leaveType/useLeaveType';
+// import { useGetLeaveType } from '../../../../hooks/leaveType/useLeaveType';
+// import { useGetEmployeeLeaveById } from '../../../../hooks/leave/useLeave';
 
-const LeaveRecordsTab = ({ isLoading }) => {
+const LeaveInfo = ({ isLoading }) => {
 	const { id } = useParams();
 	const { data: leaveData, isLoading: loadingLeave } = useGetEmployeeLeaveById(id);
 	const { data: leaveTypeData, isLoading: loadingLeaveType } = useGetLeaveType();
@@ -71,12 +73,12 @@ const LeaveRecordsTab = ({ isLoading }) => {
 			},
 
 		},
-		{
-			title: 'Remark',
-			field: 'leaveRemarks',
-			emptyValue: '-',
-			width: 100,
-		},
+		// {
+		// 	title: 'Remark',
+		// 	field: 'leaveRemarks',
+		// 	emptyValue: '-',
+		// 	width: 100,
+		// },
 		{
 			title: 'Approved By',
 			field: 'confirmById',
@@ -112,4 +114,4 @@ const LeaveRecordsTab = ({ isLoading }) => {
 	);
 };
 
-export default LeaveRecordsTab;
+export default LeaveInfo;

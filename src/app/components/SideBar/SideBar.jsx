@@ -18,6 +18,8 @@ import { removeUser } from '../../utils/cookieHelper';
 import { drawerMenus } from './drawerMenus';
 import { ThemeModeContext } from '../../../theme/ThemeModeContext';
 import Header from '../Header/Header';
+import CustomBreadcrumb from '../../../theme/overrides/CustomBreadcrumb';
+import BreadCrumbs from '../../../routes/routes';
 
 const drawerWidth = 260;
 
@@ -181,6 +183,8 @@ export default function Sidebar() {
             },
           }}
         >
+          <BreadCrumbs />
+          <br/>
           <Outlet />
         </Card>
       </Main>
