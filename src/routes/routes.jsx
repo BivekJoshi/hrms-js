@@ -3,7 +3,6 @@ import Loadable from "../app/components/Header/Loader/Loadable";
 import React, { lazy } from "react";
 import Birthdaylist from "../app/pages/Birthday/Birthdaylist";
 import Attendance from "../app/pages/Attendance/Attendance";
-import TodoList from "../app/pages/TodoList/TodoList";
 import CustomBreadcrumb from "../theme/overrides/CustomBreadcrumb";
 import { useLocation } from "react-router-dom";
 
@@ -16,6 +15,7 @@ const LeaveType = Loadable(lazy(() => import('../app/pages/LeaveType/LeaveType')
 const Leave = Loadable(lazy(() => import('../app/pages/Leave/Leave')));
 const EditEmployee = Loadable(lazy(() => import('../app/pages/Employee/AddEmployee/EditEmployee')));
 const EmployeeViewPage = Loadable(lazy(() => import('../app/pages/Employee/EmployeeViewPage/EmployeeViewPage')))
+const TodoList= Loadable(lazy(()=>import('../app/pages/TodoList/TodoList')));
 
 const routes = [
   {
