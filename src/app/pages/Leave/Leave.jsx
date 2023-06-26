@@ -12,7 +12,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import { AddLeaveModal, EditLeaveModal } from './LeaveModal/LeaveModal';
 
-const Leave = ({isLoading}) => {
+const Leave = ({ isLoading }) => {
   const { data: leaveData, isLoading: loadingleave } = useGetLeave();
   const { data: employeeData, isLoading: loadingemployee } = useGetEmployee();
   const { data: leaveTypeData, isLoading: loadingleaveType } = useGetLeaveType();
@@ -55,11 +55,9 @@ const Leave = ({isLoading}) => {
   const columns = [
     {
       title: 'SN',
-      render: (rowData) => rowData.tableData.id,
-      cellStyle: {
-        whiteSpace: 'nowrap',
-      },
+      render: (rowData) => rowData.tableData.index + 1,
       width: 80,
+      sortable: false,
     },
     {
       title: 'Employee Name',

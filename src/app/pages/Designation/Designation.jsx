@@ -14,23 +14,33 @@ import {
   AddDesignationModal,
   EditDesignationModal,
 } from './DesignationModal/DesignationModal';
+import DeleteConfirmationModal from '../../components/Modal/DeleteConfirmationModal';
 
 const Designation = () => {
   const { data: designationData, isLoading } = useGetDesignation();
 
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
   const [editedDesignation, setEditedDesignation] = useState({});
+  const [deletedDesignation, setDeletedDesignation] = useState({});
 
   const handleAddOpenModal = () => setOpenAddModal(true);
   const handleCloseAddModal = () => setOpenAddModal(false);
 
   const handleCloseEditModal = () => setOpenEditModal(false);
+  const handleCloseDeleteModal = () => setOpenDeleteModal(false);
 
   const deleteDesignationMutation = useDeleteDesignation({});
-  const handleDeleteDesignation = (designationId) => {
-    deleteDesignationMutation.mutate(designationId);
+  const handleDeleteDesignation = (rowData) => {
+    setDeletedDesignation(rowData);
+    setOpenDeleteModal(true);
+  };
+
+  const handleConfirmDelete = () => {
+    deleteDesignationMutation.mutate(deletedDesignation.id);
+    setOpenDeleteModal(false);
   };
 
   const handleEditDesignation = (rowData) => {
@@ -41,11 +51,9 @@ const Designation = () => {
   const columns = [
     {
       title: 'SN',
-      render: (rowData) => rowData.tableData.id + 1,
-      cellStyle: {
-        whiteSpace: 'nowrap',
-      },
+      render: (rowData) => rowData.tableData.index + 1,
       width: 80,
+      sortable: false,
     },
     {
       title: 'Designation Name',
@@ -82,7 +90,7 @@ const Designation = () => {
           </Button>
           <Button
             color='primary'
-            onClick={() => handleDeleteDesignation(rowData.id)}
+            onClick={() => handleDeleteDesignation(rowData)}
           >
             <DeleteIcon />
           </Button>
@@ -142,6 +150,14 @@ const Designation = () => {
         <AddDesignationModal
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
+        />
+      )}
+      {openDeleteModal && (
+        <DeleteConfirmationModal
+          open={openDeleteModal}
+          handleCloseModal={handleCloseDeleteModal}
+          handleConfirmDelete={handleConfirmDelete}
+          message={"Designation"}
         />
       )}
     </>

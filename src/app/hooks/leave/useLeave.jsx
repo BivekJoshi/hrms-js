@@ -10,14 +10,14 @@ export const useGetLeave = () => {
   });
 };
 
-{/*________________________GETBYID_____________________________________*/ }
+{/*________________________GETBYLEAVEID_____________________________________*/ }
 export const useGetLeaveById = (id) => {
-  return useQuery(['getCompanyById', id], () => getLeaveById(id), {
+  return useQuery(['getLeaveById', id], () => getLeaveById(id), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
 };
-{/*________________________GETBYID_____________________________________*/ }
+{/*________________________GETEMPLOYEELEAVEBYID_____________________________________*/ }
 export const useGetEmployeeLeaveById = (id) => {
   return useQuery(['getEmployeeLeaveById', id], () => getEmployeeLeaveById(id), {
     refetchInterval: false,

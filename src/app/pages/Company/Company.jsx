@@ -7,7 +7,7 @@ import EditIcon from '@mui/icons-material/Edit';
 
 import { useDeleteCompany, useGetCompany } from '../../hooks/company/useCompany';
 import { AddCompanyModal, EditCompanyModal } from './CompanyModal/CompanyModal';
-import DeleteConfirmationModal from './CompanyModal/DeleteConfirmationModal';
+import DeleteConfirmationModal from '../../components/Modal/DeleteConfirmationModal';
 
 const Company = () => {
   const { data: companyData, isLoading } = useGetCompany();
@@ -44,11 +44,9 @@ const Company = () => {
   const columns = [
     {
       title: 'SN',
-      render: (rowData) => rowData.tableData.id,
-      cellStyle: {
-        whiteSpace: 'nowrap',
-      },
-      width: 100,
+      render: (rowData) => rowData.tableData.index + 1,
+      width: 80,
+      sortable: false,
     },
     {
       title: 'Company Name',
@@ -135,6 +133,7 @@ const Company = () => {
           open={openDeleteModal}
           handleCloseModal={handleCloseDeleteModal}
           handleConfirmDelete={handleConfirmDelete}
+          message={"Company"}
         />
       )}
     </>

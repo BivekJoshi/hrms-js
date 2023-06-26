@@ -22,11 +22,9 @@ const LeaveInfo = ({ isLoading }) => {
 	const columns = [
 		{
 			title: 'SN',
-			render: (rowData) => rowData.tableData.id,
-			cellStyle: {
-				whiteSpace: 'nowrap',
-			},
+			render: (rowData) => rowData.tableData.index + 1,
 			width: 80,
+			sortable: false,
 		},
 		{
 			title: 'Leave Type',

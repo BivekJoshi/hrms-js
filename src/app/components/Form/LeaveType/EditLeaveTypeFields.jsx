@@ -21,7 +21,7 @@ const EditLeaveTypeFields = ({ onClose, isLoading, data }) => {
                 leaveName: true,
                 leaveTotal: true,
                 leaveDescription: true,
-                carryForward: true,
+                isCarryForward: true,
             });
             onClose(); // Close the modal
         } else {
@@ -89,19 +89,19 @@ const EditLeaveTypeFields = ({ onClose, isLoading, data }) => {
                     <FormControlLabel
                         required
                         control={<ThemeSwitch
-                            checked={formik.values.carryForward} // Set the checked value based on formik's values
+                            checked={formik.values.isCarryForward} // Set the checked value based on formik's values
                             onChange={formik.handleChange} // Handle the change event
-                            name="carryForward"
+                            name="isCarryForward"
                         />}
                         label='Carry Forward'
-                        id='carryForward'
-                        name='carryForward'
-                        value={formik.values.carryForward}
+                        id='isCarryForward'
+                        name='isCarryForward'
+                        value={formik.values.isCarryForward}
                         onChange={formik.handleChange}
                         error={
-                            formik.touched.carryForward && Boolean(formik.errors.carryForward)
+                            formik.touched.isCarryForward && Boolean(formik.errors.isCarryForward)
                         }
-                        helperText={formik.touched.carryForward && formik.errors.carryForward}
+                        helperText={formik.touched.isCarryForward && formik.errors.isCarryForward}
                     />
                 </Grid>
 
