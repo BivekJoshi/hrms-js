@@ -79,7 +79,6 @@ import {
 import React from "react";
 import "./style-card.css";
 import butterfly from "../../../../assets/butterfly.png";
-import { Image } from "@mui/icons-material";
 
 const arr = [1, 2, 3, 4, 5, 6, 7, 8];
 

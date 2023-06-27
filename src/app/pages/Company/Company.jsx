@@ -7,6 +7,7 @@ import TabPanel from '@mui/lab/TabPanel';
 import CompanyButton from './CompanyModal/CompanyButton';
 import { AddCompanyModal } from './CompanyModal/CompanyModal';
 import { useState } from 'react';
+import CompanyGridView from './CompanyView/CompanyGridView';
 
 const Company = () => {
   const [value, setValue] = React.useState('1');
@@ -50,7 +51,7 @@ const Company = () => {
           <TabPanel value="1">
             <CompanyButton />
           </TabPanel>
-          <TabPanel value="2">Item Two</TabPanel>
+          <TabPanel value="2"><CompanyGridView /></TabPanel>
         </Box>
       </TabContext>
       {openAddModal && (
