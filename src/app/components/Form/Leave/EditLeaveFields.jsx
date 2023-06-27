@@ -2,9 +2,7 @@ import {
   Grid,
   TextField,
   Button,
-  Box,
   MenuItem,
-  Autocomplete,
 } from '@mui/material';
 import React from 'react';
 import { toast } from 'react-toastify';
@@ -27,10 +25,23 @@ const leaveStatus = [
   },
 ];
 const EditLeaveFields = ({ onClose, isLoading, data }) => {
-  const { data: employeeData, isLoading: loadingEmployee } = useGetEmployee();
-  const { data: leaveTypeData, isLoading: loadingLeaveType } = useGetLeaveType();
-
+  const { data: employeeData } = useGetEmployee();
+  const { data: leaveTypeData } = useGetLeaveType();
   const { formik } = useEditLeaveForm(data);
+
+  const getLeaveTypeName = (leaveTypeId) => {
+    const leaveType = leaveTypeData?.find((type) => type.id === leaveTypeId);
+    return leaveType ? leaveType.leaveName : '';
+  };
+
+  const getEmployeeFullName = (employeeId) => {
+    const employee = employeeData?.employees.find((emp) => emp.id === employeeId);
+    if (employee) {
+      const { firstName, middleName, lastName } = employee;
+      return `${firstName || ''} ${middleName || ''} ${lastName || ''}`;
+    }
+    return '';
+  };
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
@@ -54,7 +65,6 @@ const EditLeaveFields = ({ onClose, isLoading, data }) => {
     }
   };
 
-  const { firstName, middleName, lastName } = employeeData?.employees || {};
 
   return (
     !isLoading && (
@@ -66,29 +76,35 @@ const EditLeaveFields = ({ onClose, isLoading, data }) => {
             required
             InputLabelProps={{ shrink: true }}
             fullWidth
-            // value={`${firstName || ''} ${middleName || ''} ${lastName || ''}`}
-            value={formik.values.employeeId}
-            onChange={formik.handleChange}
+            value={getEmployeeFullName(formik.values.employeeId)}
+            onChange={(event) => {
+              formik.handleChange(event);
+              formik.setFieldValue('employeeId', event.target.value);
+            }}
             error={
               formik.touched.employeeId && Boolean(formik.errors.employeeId)
             }
             helperText={formik.touched.employeeId && formik.errors.employeeId}
+            disabled={formik.values.employeeId}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
             name='leaveTypeId'
-            label='leaveTypeId'
+            label='Leave Type'
             required
             InputLabelProps={{ shrink: true }}
             fullWidth
-            // value={`${firstName || ''} ${middleName || ''} ${lastName || ''}`}
-            value={formik.values.leaveTypeId}
-            onChange={formik.handleChange}
+            value={getLeaveTypeName(formik.values.leaveTypeId)}
+            onChange={(event) => {
+              formik.handleChange(event);
+              formik.setFieldValue('leaveTypeId', event.target.value);
+            }}
             error={
               formik.touched.leaveTypeId && Boolean(formik.errors.leaveTypeId)
             }
             helperText={formik.touched.leaveTypeId && formik.errors.leaveTypeId}
+            disabled={formik.values.leaveTypeId}
           />
         </Grid>
         <Grid item xs={12} sm={6}>

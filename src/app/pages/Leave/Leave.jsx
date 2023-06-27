@@ -11,6 +11,7 @@ import { useGetEmployee } from '../../hooks/employee/useEmployee';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import { AddLeaveModal, EditLeaveModal } from './LeaveModal/LeaveModal';
+import DeleteConfirmationModal from '../../components/Modal/DeleteConfirmationModal';
 
 const Leave = ({ isLoading }) => {
   const { data: leaveData, isLoading: loadingleave } = useGetLeave();
@@ -19,17 +20,26 @@ const Leave = ({ isLoading }) => {
 
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
   const [editedLeave, setEditedLeave] = useState({});
+  const [deletedLeave, setDeletedLeave] = useState({});
 
   const handleAddOpenModal = () => setOpenAddModal(true);
   const handleCloseAddModal = () => setOpenAddModal(false);
 
   const handleCloseEditModal = () => setOpenEditModal(false);
+  const handleCloseDeleteModal = () => setOpenDeleteModal(false);
 
   const deleteLeaveMutation = useDeleteLeave({});
-  const handleDeleteLeave = (leaveId) => {
-    deleteLeaveMutation.mutate(leaveId);
+  const handleDeleteLeave = (rowData) => {
+    setDeletedLeave(rowData);
+    setOpenDeleteModal(true);
+  };
+
+  const handleConfirmDelete = () => {
+    deleteLeaveMutation.mutate(deletedLeave.id);
+    setOpenDeleteModal(false);
   };
 
   const handleEditLeave = (rowData) => {
@@ -134,7 +144,7 @@ const Leave = ({ isLoading }) => {
           <Button color="primary" onClick={() => handleEditLeave(rowData)}>
             <ModeEditOutlineIcon />
           </Button>
-          <Button color="primary" onClick={() => handleDeleteLeave(rowData.id)}>
+          <Button color="primary" onClick={() => handleDeleteLeave(rowData)}>
             <DeleteIcon />
           </Button>
         </Stack>
@@ -189,6 +199,14 @@ const Leave = ({ isLoading }) => {
         <AddLeaveModal
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
+        />
+      )}
+      {openDeleteModal && (
+        <DeleteConfirmationModal
+          open={openDeleteModal}
+          handleCloseModal={handleCloseDeleteModal}
+          handleConfirmDelete={handleConfirmDelete}
+          message={"Leave"}
         />
       )}
     </>

@@ -35,13 +35,8 @@ export const addleave = async (formData) => {
 
 {/*________________________EDIT_____________________________________*/ }
 export const editLeave = async (formData) => {
-  const submitedData = {
-    ...formData,
-    employeeId: formData.employeeId?.id,
-    leaveTypeId: formData.leaveTypeId?.id,
-  }
-  const {id} = formData;
-  const data = await axiosInstance.put(`/leave/${id}`, submitedData);
+  const { id } = formData;
+  const data = await axiosInstance.put(`/leave/${id}`, formData);
   return data;
 };
 

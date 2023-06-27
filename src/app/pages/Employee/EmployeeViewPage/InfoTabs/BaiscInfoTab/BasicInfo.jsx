@@ -24,6 +24,14 @@ const BasicInfo = ({ data }) => {
         'Contact Number': data?.familyMembers[0].mobileNumber || '',
     };
 
+    const QUALIFICATION = {
+        Board: data?.qualifications[0]?.board || '',
+        Institute: data?.qualifications[0]?.institute || '',
+        'Passed Level': data?.qualifications[0]?.passedLevel || '',
+        'Passed Year': data?.qualifications[0]?.passedYear || '',
+        Grade: data?.qualifications[0]?.grade || '',
+    }
+
     const BANKDETAILS = {
         'Bank Name': data?.bankDetailSet[0]?.bankName || '',
         'Account Number': data?.bankDetailSet[0]?.bankAccountNumber || '',
@@ -43,6 +51,10 @@ const BasicInfo = ({ data }) => {
                         <ListUserDetails
                             data={FAMILYMEMBERS}
                             cardTitle={'Family Info Details'}
+                        />
+                        <ListUserDetails
+                            data={QUALIFICATION}
+                            cardTitle={'Education Info Details'}
                         />
                     </div>
                 </Grid>

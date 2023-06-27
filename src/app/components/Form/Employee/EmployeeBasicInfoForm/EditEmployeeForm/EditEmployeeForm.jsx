@@ -27,7 +27,6 @@ import useAddBankForm from '../../../../../hooks/employee/AddBankForm/useAddBank
 import useQualificationForm from '../../../../../hooks/employee/AddQualification/useQualificationForm';
 import EmployeeQualificationDetailForm from '../../EmployeeQualificationDetailForm/EmployeeQualificationDetailForm';
 import EmployeeFamilyDetailForm from '../../EmployeeFamilyDetailForm/EmployeeFamilyDetailForm';
-import useAddLeaveForm from '../../../../../hooks/employee/AddFamily/useFamilyForm';
 import useFamilyForm from '../../../../../hooks/employee/AddFamily/useFamilyForm';
 import EmployeeDocumentDetailForm from '../../EmployeeDocumentDetailForm/EmployeeDocumentDetailForm';
 
@@ -45,18 +44,18 @@ const EditEmployeeForm = () => {
   const [activeStep, setActiveStep] = useState(0);
   const { data, isLoading: employeeLoading } = useGetEmployeeById(id);
 
-  const { formik: qualificationFormik, isLoading: isLoadingQualification } =useQualificationForm();
+  const { formik: qualificationFormik, isLoading: isLoadingQualification } = useQualificationForm({ data, employeeLoading });
 
-  const { formik: familyFormik, isLoading: isLoadingFamily } =useFamilyForm({data,employeeLoading});
+  const { formik: familyFormik, isLoading: isLoadingFamily } = useFamilyForm({ data, employeeLoading });
 
   const { formik, isLoading } = useEditEmployeeForm({ data, employeeLoading });
 
-  const { formik: permanentFormik, isLoading: addressLoading } =usePermanentAddressForm({data,employeeLoading, });
+  const { formik: permanentFormik, isLoading: addressLoading } = usePermanentAddressForm({ data, employeeLoading, });
   const { formik: temporaryFormik } = useTemporaryAddressForm();
 
   const { formik: bankFormik } = useAddBankForm({ data, employeeLoading });
-  
-  
+
+
   const handleNext = () => {
     switch (activeStep) {
       case 0:
@@ -194,8 +193,8 @@ const EditEmployeeForm = () => {
                       formik.isValid
                         ? null
                         : toast.error(
-                            'Please make sure you have filled the form correctly'
-                          );
+                          'Please make sure you have filled the form correctly'
+                        );
                     }}
                     sx={{ mt: 3, ml: 1 }}
                   >
