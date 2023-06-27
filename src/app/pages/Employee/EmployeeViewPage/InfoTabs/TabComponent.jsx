@@ -64,7 +64,7 @@ const TabComponent = ({ data }) => {
                     <LeaveInfo />
                 </TabPanel>
                 <TabPanel value='3'>
-                    <AcademicsInfo />
+                    <AcademicsInfo data={data}/>
                 </TabPanel>
                 <TabPanel value='4'>
                     <AcademicsInfo />
