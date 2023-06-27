@@ -1,6 +1,6 @@
 import { useMutation } from 'react-query';
 import { toast } from 'react-toastify';
-import { addfamily, editFamily, getFamilyById } from '../../api/family/family-api';
+import { addfamily, deleteFamily, editFamily, getFamilyById } from '../../api/family/family-api';
 import { useParams } from 'react-router-dom';
 
 
@@ -44,3 +44,19 @@ export const useEditFamily = () => {
         }
     );
 };
+
+{/*________________________DELETE_____________________________________*/ }
+export const useDeleteFamily = ({ onSuccess }) => {
+    return useMutation(['deleteFamily'],
+      (memberId) => deleteFamily(memberId),
+      {
+        onSuccess: (data, variables, context) => {
+          toast.success('Family member deleted successfully');
+          onSuccess && onSuccess(data, variables, context);
+        },
+        onError: (err, _variables, _context) => {
+          toast.error(`Error: ${err.message}`);
+        },
+      }
+    );
+  };

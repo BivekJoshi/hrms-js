@@ -4,9 +4,10 @@ import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
-import CompanyButton from './CompanyModal/CompanyButton';
 import { AddCompanyModal } from './CompanyModal/CompanyModal';
 import { useState } from 'react';
+import CompanyTable from './CompanyModal/CompanyTable';
+import CompanyGrid from './CompanyModal/CompanyGrid';
 
 const Company = () => {
   const [value, setValue] = React.useState('1');
@@ -48,9 +49,11 @@ const Company = () => {
             </Button>
           </Box>
           <TabPanel value="1">
-            <CompanyButton />
+            <CompanyTable />
           </TabPanel>
-          <TabPanel value="2">Item Two</TabPanel>
+          <TabPanel value="2">
+            <CompanyGrid />
+          </TabPanel>
         </Box>
       </TabContext>
       {openAddModal && (
