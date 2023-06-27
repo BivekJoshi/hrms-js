@@ -9,9 +9,9 @@ const BasicInfo = ({ data }) => {
         Gender: data?.gender,
         'Citizenship Number': data?.citizenshipNumber,
         'Date of Birth': data?.dateOfBirth,
-        'Mobile Number': data?.mobileNumber,
+        // 'Mobile Number': data?.mobileNumber,
         Email: data?.officeEmail,
-        Address: data?.addresses[0].city,
+        // Address: data?.addresses[0].city,
         'Marital Status': data?.maritalStatus,
         'Date of Join': data?.dateOfJoin,
         Position: data?.position.positionName,
@@ -20,8 +20,8 @@ const BasicInfo = ({ data }) => {
 
     const FAMILYMEMBERS = {
         Name: data?.familyMembers[0]?.name || '',
-        Relation: data?.familyMembers[0].relation || '',
-        'Contact Number': data?.familyMembers[0].mobileNumber || '',
+        // Relation: data?.familyMembers[0].relation || '',
+        // 'Contact Number': data?.familyMembers[0].mobileNumber || '',
     };
 
     const QUALIFICATION = {
