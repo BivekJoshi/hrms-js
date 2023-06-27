@@ -18,6 +18,7 @@ const useEditLeaveForm = (data) => {
             confirmById: data?.confirmById || '',
             leaveRemarks: data?.leaveRemarks || '',
             halfDay: data?.halfDay || '',
+            id: data?.id,
         },
         validationSchema: LeaveSchema,
         enableReinitialize: 'true',

@@ -1,38 +1,39 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
-import { addleave, deleteLeave, editLeave, getEmployeeLeaveById, getLeaveById, getleave } from '../../api/leave/leave-api';
+import { addList, deleteList, editList, getList, getListById, getListByUserId } from '../../api/Todo/todo-api';
 
 {/*________________________GET_____________________________________*/ }
-export const useGetLeave = () => {
-  return useQuery(['getLeave'], () => getleave(), {
+export const useGetList = () => {
+  return useQuery(['getList'], () => getList(), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
 };
 
-{/*________________________GETBYLEAVEID_____________________________________*/ }
-export const useGetLeaveById = (id) => {
-  return useQuery(['getLeaveById', id], () => getLeaveById(id), {
+{/*________________________GETBYUSERID_____________________________________*/ }
+export const useGetUserListById = (id) => {
+  return useQuery(['getListByUserId', id], () => getListByUserId(id), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
 };
-{/*________________________GETEMPLOYEELEAVEBYID_____________________________________*/ }
-export const useGetEmployeeLeaveById = (id) => {
-  return useQuery(['getEmployeeLeaveById', id], () => getEmployeeLeaveById(id), {
+
+{/*________________________GETBYID_____________________________________*/ }
+export const useGetListById = (id) => {
+  return useQuery(['getListById', id], () => getListById(id), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
 };
 
 {/*________________________POST_____________________________________*/ }
-export const useAddLeave = ({ onSuccess }) => {
+export const useAddList = ({ onSuccess }) => {
   const queryClient = useQueryClient();
-  return useMutation(['addLeave'], (formData) => addleave(formData), {
+  return useMutation(['addList'], (formData) => addList(formData), {
     onSuccess: (data, variables, context) => {
-      toast.success('Succesfully added Leave');
+      toast.success('Succesfully added To List');
       onSuccess && onSuccess(data, variables, context);
-      queryClient.invalidateQueries('getLeave');
+      queryClient.invalidateQueries('getListByUserId');
     },
     onError: (err, _variables, _context) => {
       toast.error(`error: ${err.message}`);
@@ -41,13 +42,13 @@ export const useAddLeave = ({ onSuccess }) => {
 };
 
 {/*________________________DELETE_____________________________________*/ }
-export const useDeleteLeave = ({ onSuccess }) => {
+export const useDeleteList = ({ onSuccess }) => {
   const queryClient = useQueryClient();
-  return useMutation(['deleteLeave'], (leaveId) => deleteLeave(leaveId), {
+  return useMutation(['deleteList'], (listId) => deleteList(listId), {
     onSuccess: (data, variables, context) => {
-      toast.success('Successfully deleted Leave');
+      toast.success('Successfully deleted List');
       onSuccess && onSuccess(data, variables, context);
-      queryClient.invalidateQueries('getLeave');
+      queryClient.invalidateQueries('getListByUserId');
     },
     onError: (err, _variables, _context) => {
       toast.error(`Error: ${err.message}`);
@@ -56,15 +57,15 @@ export const useDeleteLeave = ({ onSuccess }) => {
 };
 
 {/*________________________EDIT_____________________________________*/ }
-export const useEditLeave = ({ onSuccess }) => {
+export const useEditList = ({ onSuccess }) => {
   const queryClient = useQueryClient();
-  return useMutation(['editLeave'],
-    (formData) => editLeave(formData),
+  return useMutation(['editList'],
+    (formData) => editList(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Successfully edited Leave');
+        toast.success('Successfully edited List');
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries('getLeave');
+        queryClient.invalidateQueries('getListByUserId');
       },
       onError: (err, _variables, _context) => {
         toast.error(`Error: ${err.message}`);

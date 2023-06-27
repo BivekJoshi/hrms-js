@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { Button, Avatar, Typography } from '@mui/material';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 
-import './EmployeeViewPage.css';
+import './Style/EmployeeViewPage.css';
 import LeftProfile from './LeftProfile';
-import OverviewTabComponents from './OverviewTabComponents/OverviewTabComponents';
+import TabComponent from './InfoTabs/TabComponent';
 
 const primaryColor = '#1c7ed6';
 
@@ -45,7 +45,7 @@ const Overview = ({ data }) => {
 
 			<div className='employeeBody'>
 				<LeftProfile data={data} />
-				<OverviewTabComponents data={data} />
+				<TabComponent data={data} />
 			</div>
 		</>
 	);

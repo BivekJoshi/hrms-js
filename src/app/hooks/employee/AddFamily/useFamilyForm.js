@@ -6,28 +6,27 @@ const useFamilyForm = ({ data, isLoadingFamily: isLoading }) => {
   const { mutate } = useAddFamily({});
   const { mutate: editMutate } = useEditFamily({});
 
-  const familyDetails =
-    !isLoading &&
-    data?.familyMembers.map((familyMember) => ({
-      name: familyMember.name || '',
-      relation: familyMember.relation || '',
-      mobileNumber: familyMember.mobileNumber || '',
-    }));
+  const familyDetails = !isLoading && data?.familyMembers.map((familyMember) => ({
+    // id: bankDetails?.id || '',
+    name: familyMember.name || '',
+    relation: familyMember.relation || '',
+    mobileNumber: familyMember.mobileNumber || '',
+  }));
 
   const formik = useFormik({
     initialValues: {
-      family:
-        familyDetails && familyDetails.length > 0
-          ? familyDetails
-          : [
-              {
-                name: '',
-                relation: '',
-                mobileNumber: '',
-              },
-            ],
+      family: familyDetails &&
+        familyDetails.length > 0 ?
+        familyDetails :
+        [
+          {
+            name: '',
+            relation: '',
+            mobileNumber: ''
+          }
+        ],
     },
-    enableReinitialize: 'true',
+    enableReinitialize: "true",
     validationSchema: FamilySchema,
     onSubmit: (values) => {
       if (familyDetails?.id) {
@@ -39,7 +38,7 @@ const useFamilyForm = ({ data, isLoadingFamily: isLoading }) => {
   });
 
   const handleRequest = (values) => {
-    values = { ...values };
+    values = { ...values, };
     mutate(values, formik, { onSuccess: () => console.log(values) });
   };
 
@@ -48,7 +47,7 @@ const useFamilyForm = ({ data, isLoadingFamily: isLoading }) => {
     editMutate(values, formik);
   };
 
-  return { formik };
+  return { formik }
 };
 
 export default useFamilyForm;

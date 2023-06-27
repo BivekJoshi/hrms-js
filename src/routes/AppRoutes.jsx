@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Applayout from "../layout/Applayout";
 import AdminLayout from "../layout/AdminLayout";
 import ProtectedRoute from "./ProtectedRoute";
-import routes from "./routes";
+import {routes} from "./routes";
 
 const AppRoutes = () => {
 	return (
