@@ -23,8 +23,6 @@ export const usePermanentAddressForm = ({
       wardNumber: address?.wardNumber || '',
       city: address?.city || '',
       street: address?.street || '',
-      temporaryAndPermanentAddressSame:
-        address?.temporaryAndPermanentAddressSame,
     }));
   console.log(data);
   const formik = useFormik({
@@ -40,51 +38,35 @@ export const usePermanentAddressForm = ({
                 wardNumber: '',
                 city: '',
                 street: '',
-                temporaryAndPermanentAddressSame: false,
-                addressType: '',
+              },
+              {
+                country: '',
+                province: '',
+                district: '',
+                wardNumber: '',
+                city: '',
+                street: '',
               },
             ],
     },
     // validationSchema: AddressSchema,
-    onSubmit: (values) => {
-      handleRequest(values);
-    },
     enableReinitialize: 'true',
+    onSubmit: (values) => {
+      if (addressDetails.length > 0) {
+        handleEditRequest(values);
+      } else {
+        handleRequest(values);
+      }
+    },
   });
   const handleRequest = (values) => {
     values = { ...values };
     permanentMutate(values);
   };
+
   const handleEditRequest = (values) => {
     values = { ...values };
-
-    editMutate(values, formik);
-  };
-  return { formik };
-};
-
-export const useTemporaryAddressForm = () => {
-  const { mutate: temporaryMutate } = useTemporaryAddress({});
-  const formik = useFormik({
-    initialValues: {
-      addresses: [
-        {
-          district: '',
-          wardNumber: '',
-          city: '',
-          street: '',
-          province: '',
-          country: '',
-        },
-      ],
-    },
-    onSubmit: (values) => {
-      handleRequest(values);
-    },
-  });
-  const handleRequest = (values) => {
-    values = { ...values };
-    temporaryMutate(values);
+    editMutate(values);
   };
   return { formik };
 };

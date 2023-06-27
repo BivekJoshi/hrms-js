@@ -25,6 +25,7 @@ const Employee = () => {
     boxShadow: 24,
     p: 4,
   };
+  console.log(employeeData);
   if (isLoading) return <>Loading</>;
   return (
     <>
@@ -44,7 +45,7 @@ const Employee = () => {
         useFlexGap
         flexWrap='wrap'
       >
-        {employeeData?.employees?.map((employee, index) => (
+        {employeeData?.map((employee, index) => (
           <Box key={index}>
             <EmployeeCard
               IsActive={employee.isActive}
