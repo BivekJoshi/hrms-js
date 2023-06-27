@@ -1,10 +1,10 @@
 import * as React from "react";
+import { useState } from "react";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import Avatar from "@mui/material/Avatar";
-import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { red } from "@mui/material/colors";
 import List from "@mui/material/List";
@@ -12,32 +12,62 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Groups2Icon from "@mui/icons-material/Groups2";
-import { Button, Grid } from "@mui/material";
+import { Box, Button, Grid, Stack } from "@mui/material";
 import "./project.css";
+import { useGetProject } from "../../hooks/project/useProject";
+import { AddProjectModal, EditProjectModal } from "./ProjectModal/ProjectModal";
+import { useNavigate } from "react-router-dom";
 
 const Project = () => {
-  const arr = [1, 2, 3, 4, 5, 6, 7, 8];
+  const navigate = useNavigate();
+  const { data: projectData, isLoading } = useGetProject();
+
+  const [editedProject, setEditedProject] = useState({});
+
+  const [openAddModal, setOpenAddModal] = useState(false);
+  const [openEditModal, setOpenEditModal] = useState(false);
+
+  const handleAddOpenModal = () => setOpenAddModal(true);
+  const handleCloseAddModal = () => setOpenAddModal(false);
+
+  const handleCloseEditModal = () => setOpenEditModal(false);
+
+  const handleEditProject = (rowData) => {
+    setEditedProject(rowData);
+    setOpenEditModal(true);
+  };
+
+  if (isLoading) return <>Loading</>;
+
   return (
     <>
-      <Typography variant="h6" sx={{ textAlign: "center" }}>
-        On-Going Projects
-      </Typography>
-      <Grid container spacing={3}>
-      {arr.map((item, index) => (
-        <Grid item
-        key={index}
-        xs={12}
-        sm={6}
-        md={4}
-        lg={3}
-        xl={3}
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          marginLeft: "auto",
-          marginRight: "auto",
-        }}>
-          <Card style={{ maxWidth: 345 }} className="card-all">
+      <Box>
+        <Typography
+          variant="h4"
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            marginBottom: "1.2rem",
+          }}
+        >
+          On-Going Projects
+          <Button variant="contained" onClick={handleAddOpenModal}>
+            +Add Project
+          </Button>
+        </Typography>
+      </Box>
+
+      <Grid
+        container
+        item
+        gap={2}
+        sx={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+        }}
+      >
+        {projectData.map((item, index) => (
+          <Card key={index}>
             <CardHeader
               avatar={
                 <Avatar
@@ -47,15 +77,19 @@ const Project = () => {
                   LOGO
                 </Avatar>
               }
+              title={item.projectName}
+              subheader={item.startDate}
               action={
-                <IconButton aria-label="settings">
-                  <Button variant="contained">Edit</Button>
-                </IconButton>
+                <Button variant="contained" sx={{ marginLeft: "12px" }} onClick={() => handleEditProject}>
+                  Edit
+                </Button>
               }
-              title="HRMS "
-              subheader="September 14, 2016"
             />
-            <CardContent sx={{ cursor: "pointer" }}>
+            <CardContent
+              sx={{ cursor: "pointer" }}
+              className="card-content"
+              onClick={() => navigate(`/admin/project/${item.id}`)}
+            >
               <div
                 style={{
                   width: 120,
@@ -66,7 +100,6 @@ const Project = () => {
                 }}
               >
                 <CardMedia
-                  className="card-content"
                   style={{
                     width: "100%",
                     height: "100%",
@@ -78,14 +111,16 @@ const Project = () => {
                   image="https://images.pexels.com/photos/3775157/pexels-photo-3775157.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                   alt="Paella dish"
                 />
-                <Grid className="card-position">
                 <Typography variant="p" className="card-id">
-                  id
+                  {item.id}
                 </Typography>
                 <Typography variant="p" className="card-status">
-                  Work In Progress
+                  {item.projectStatus === "COMPLETED"
+                    ? "Completed"
+                    : item.projectStatus === "WORK_IN_PROGRESS"
+                    ? "Work in progress"
+                    : "DELAYED"}
                 </Typography>
-                </Grid>
               </div>
             </CardContent>
 
@@ -96,7 +131,7 @@ const Project = () => {
                 Deadline
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                2023-08-22
+                {item.endDate}
               </Typography>
             </CardContent>
             <List component="nav" aria-labelledby="nested-list-subheader">
@@ -104,21 +139,35 @@ const Project = () => {
                 <ListItemIcon>
                   <Groups2Icon />
                 </ListItemIcon>
-                <ListItemText primary="Lead Project ID:" />
-                <ListItemText primary="1" />
+                <ListItemText primary="Project Leader:" />
+                <ListItemText primary={item.projectLeaderId} />
               </ListItemButton>
               <ListItemButton>
                 <ListItemIcon>
                   <Groups2Icon />
                 </ListItemIcon>
-                <ListItemText primary="Company ID:" />
-                <ListItemText primary="1" />
+                <ListItemText primary="Company Name:" />
+                <ListItemText primary={item.associateCompanies[0].companyName} />
               </ListItemButton>
             </List>
           </Card>
-        </Grid>
-      ))}
+        ))}
+        
       </Grid>
+      {openAddModal && (
+        <AddProjectModal
+          open={openAddModal}
+          handleCloseModal={handleCloseAddModal}
+        />
+      )}
+
+      {openEditModal && (
+        <EditProjectModal
+          id={editedProject?.id}
+          open={openEditModal}
+          handleCloseModal={handleCloseEditModal}
+        />
+      )}
     </>
   );
 };

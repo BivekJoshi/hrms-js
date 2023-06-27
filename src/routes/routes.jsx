@@ -5,6 +5,7 @@ import Birthdaylist from "../app/pages/Birthday/Birthdaylist";
 import Attendance from "../app/pages/Attendance/Attendance";
 import TodoList from "../app/pages/TodoList/TodoList";
 import Project from "../app/pages/project/Project";
+import ProjectDetail from "../app/pages/Project/ProjectDetail/ProjectDetail";
 
 const Dashboard = Loadable(lazy(() => import('../app/pages/Dashboard/Dashboard')));
 const Employee = Loadable(lazy(() => import('../app/pages/Employee/Employee')));
@@ -81,6 +82,11 @@ const routes = [
     path: "project",
     id: nanoid(),
     component: <Project />,
+  },
+  {
+    path: "project/:id",
+    id: nanoid(),
+    component: <ProjectDetail />,
   },
 ];
 
