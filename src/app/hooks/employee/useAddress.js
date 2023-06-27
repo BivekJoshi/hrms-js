@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import {
   addPermanentAddress,
   addTemporaryAddress,
@@ -9,6 +9,7 @@ import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 export const usePermanentAddAddress = ({ onSuccess }) => {
+  const queryClient = useQueryClient()
   const { id } = useParams();
   return useMutation(
     ['addAddress'],
@@ -17,6 +18,7 @@ export const usePermanentAddAddress = ({ onSuccess }) => {
       onSuccess: (data, variables, context) => {
         toast.success('Permanent address added successfully');
         onSuccess && onSuccess(data, variables, context);
+        queryClient.invalidateQueries('getAddressById');
       },
       onError: (err, _variables, _context) => {
         toast.error(`error: ${err.message}`);
@@ -50,6 +52,7 @@ export const useGetAddressById = (id) => {
 };
 
 export const useEditAddress = (addressId) => {
+  const queryClient = useQueryClient()
   return useMutation(
     ['editAddress'],
     (formData) => {
@@ -59,6 +62,7 @@ export const useEditAddress = (addressId) => {
       onSuccess: (data, variables, context) => {
         toast.success('Address edited successfully');
         onSuccess && onSuccess(data, variables, context);
+        queryClient.invalidateQueries('getAddressById');
       },
       onError: (err, _variables, _context) => {
         toast.error(`error: ${err.message}`);

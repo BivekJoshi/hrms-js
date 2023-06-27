@@ -13,7 +13,6 @@ const AddLeaveTypeFields = ({ onClose, isLoading }) => {
   const { formik } = useAddLeaveTypeForm();
 
   const handleFormSubmit = () => {
-
     formik.handleSubmit();
 
     if (formik.isValid) {
@@ -87,16 +86,22 @@ const AddLeaveTypeFields = ({ onClose, isLoading }) => {
         <Grid item xs={12} sm={12}>
           <FormControlLabel
             required
-            control={<ThemeSwitch />}
-            label='Carry Forward'
-            id='carryForward'
-            name='carryForward'
-            value={formik.values.carryForward}
-            onChange={formik.handleChange}
-            error={
-              formik.touched.carryForward && Boolean(formik.errors.carryForward)
+            control={
+              <ThemeSwitch
+                checked={formik.values.isCarryForward}
+                onChange={formik.handleChange}
+              />
             }
-            helperText={formik.touched.carryForward && formik.errors.carryForward}
+            label='Carry Forward'
+            id='isCarryForward'
+            name='isCarryForward'
+            error={
+              formik.touched.isCarryForward &&
+              Boolean(formik.errors.isCarryForward)
+            }
+            helperText={
+              formik.touched.isCarryForward && formik.errors.isCarryForward
+            }
           />
         </Grid>
 

@@ -25,3 +25,24 @@
 	display: flex;
 	justify-content: space-between;
 }
+
+@media (max-width: 600px) {
+	.header {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	.avatarNname {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 10px;
+	}
+
+	.profileBasic {
+		font-size: medium;
+	}
+
+	.employeeBody {
+		flex-direction: column;
+	}
+}

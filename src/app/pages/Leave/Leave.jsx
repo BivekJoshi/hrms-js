@@ -11,25 +11,35 @@ import { useGetEmployee } from '../../hooks/employee/useEmployee';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import { AddLeaveModal, EditLeaveModal } from './LeaveModal/LeaveModal';
+import DeleteConfirmationModal from '../../components/Modal/DeleteConfirmationModal';
 
-const Leave = ({isLoading}) => {
+const Leave = ({ isLoading }) => {
   const { data: leaveData, isLoading: loadingleave } = useGetLeave();
   const { data: employeeData, isLoading: loadingemployee } = useGetEmployee();
   const { data: leaveTypeData, isLoading: loadingleaveType } = useGetLeaveType();
 
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
   const [editedLeave, setEditedLeave] = useState({});
+  const [deletedLeave, setDeletedLeave] = useState({});
 
   const handleAddOpenModal = () => setOpenAddModal(true);
   const handleCloseAddModal = () => setOpenAddModal(false);
 
   const handleCloseEditModal = () => setOpenEditModal(false);
+  const handleCloseDeleteModal = () => setOpenDeleteModal(false);
 
   const deleteLeaveMutation = useDeleteLeave({});
-  const handleDeleteLeave = (leaveId) => {
-    deleteLeaveMutation.mutate(leaveId);
+  const handleDeleteLeave = (rowData) => {
+    setDeletedLeave(rowData);
+    setOpenDeleteModal(true);
+  };
+
+  const handleConfirmDelete = () => {
+    deleteLeaveMutation.mutate(deletedLeave.id);
+    setOpenDeleteModal(false);
   };
 
   const handleEditLeave = (rowData) => {
@@ -55,11 +65,9 @@ const Leave = ({isLoading}) => {
   const columns = [
     {
       title: 'SN',
-      render: (rowData) => rowData.tableData.id,
-      cellStyle: {
-        whiteSpace: 'nowrap',
-      },
+      render: (rowData) => rowData.tableData.index + 1,
       width: 80,
+      sortable: false,
     },
     {
       title: 'Employee Name',
@@ -136,7 +144,7 @@ const Leave = ({isLoading}) => {
           <Button color="primary" onClick={() => handleEditLeave(rowData)}>
             <ModeEditOutlineIcon />
           </Button>
-          <Button color="primary" onClick={() => handleDeleteLeave(rowData.id)}>
+          <Button color="primary" onClick={() => handleDeleteLeave(rowData)}>
             <DeleteIcon />
           </Button>
         </Stack>
@@ -191,6 +199,14 @@ const Leave = ({isLoading}) => {
         <AddLeaveModal
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
+        />
+      )}
+      {openDeleteModal && (
+        <DeleteConfirmationModal
+          open={openDeleteModal}
+          handleCloseModal={handleCloseDeleteModal}
+          handleConfirmDelete={handleConfirmDelete}
+          message={"Leave"}
         />
       )}
     </>

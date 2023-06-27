@@ -6,6 +6,8 @@ import Attendance from "../app/pages/Attendance/Attendance";
 import TodoList from "../app/pages/TodoList/TodoList";
 import Project from "../app/pages/project/Project";
 import ProjectDetail from "../app/pages/Project/ProjectDetail/ProjectDetail";
+import CustomBreadcrumb from "../theme/overrides/CustomBreadcrumb";
+import { useLocation } from "react-router-dom";
 
 const Dashboard = Loadable(lazy(() => import('../app/pages/Dashboard/Dashboard')));
 const Employee = Loadable(lazy(() => import('../app/pages/Employee/Employee')));
@@ -16,6 +18,7 @@ const LeaveType = Loadable(lazy(() => import('../app/pages/LeaveType/LeaveType')
 const Leave = Loadable(lazy(() => import('../app/pages/Leave/Leave')));
 const EditEmployee = Loadable(lazy(() => import('../app/pages/Employee/AddEmployee/EditEmployee')));
 const EmployeeViewPage = Loadable(lazy(() => import('../app/pages/Employee/EmployeeViewPage/EmployeeViewPage')))
+const TodoList= Loadable(lazy(()=>import('../app/pages/TodoList/TodoList')));
 
 const routes = [
   {
@@ -90,4 +93,12 @@ const routes = [
   },
 ];
 
-export default routes;
+export { routes };
+
+export default function BreadCrumbs() {
+  const location = useLocation();
+  const currentPath = location.pathname;
+  return (
+    <CustomBreadcrumb routes={routes} currentPath={currentPath} />
+  );
+}

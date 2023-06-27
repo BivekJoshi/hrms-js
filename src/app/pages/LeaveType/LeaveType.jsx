@@ -36,11 +36,9 @@ const LeaveType = () => {
 	const columns = [
 		{
 			title: 'SN',
-			render: (rowData) => rowData.tableData.id,
-			cellStyle: {
-				whiteSpace: 'nowrap', // Prevents content from wrapping
-			},
+			render: (rowData) => rowData.tableData.index + 1,
 			width: 80,
+			sortable: false,
 		},
 		{
 			title: 'Leave Name',
@@ -56,10 +54,10 @@ const LeaveType = () => {
 		},
 		{
 			title: 'Carry Forward',
-			field: 'carryForward',
+			field: 'isCarryForward',
 			emptyValue: '-',
 			width: 100,
-			render: (rowData) => (rowData.carryForward ? 'Yes' : 'No'),
+			render: (rowData) => (rowData.isCarryForward ? 'Yes' : 'No'),
 		},
 		{
 			title: 'Description',

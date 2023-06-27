@@ -10,7 +10,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Collapse from '@mui/material/Collapse';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
-import { Button, Card, Switch, Typography } from '@mui/material';
+import { Button, Card, Fab, Switch, Typography } from '@mui/material';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import IconButton from '@mui/material/IconButton';
 
@@ -18,6 +18,7 @@ import { removeUser } from '../../utils/cookieHelper';
 import { drawerMenus } from './drawerMenus';
 import { ThemeModeContext } from '../../../theme/ThemeModeContext';
 import Header from '../Header/Header';
+import BreadCrumbs from '../../../routes/routes';
 
 const drawerWidth = 260;
 
@@ -181,7 +182,19 @@ export default function Sidebar() {
             },
           }}
         >
+          <BreadCrumbs />
+          <br />
           <Outlet />
+          <br />
+          <Fab
+            color="primary"
+            aria-label="add"
+            variant="extended"
+            onClick={() => {
+              navigate(-1);
+            }}>
+            Go Back
+          </Fab>
         </Card>
       </Main>
     </Box>

@@ -82,9 +82,9 @@ const EmployeeCard = ({
             padding: "1px 5px",
           }}
           variant="outlined"
-          color={IsActive === true ? "success" : "warning"}
+          color={IsActive = "TRUE" ? "success" : "warning"}
         >
-          {IsActive === true ? "IsActive" : "InActive"}
+          {IsActive = "TRUE" ? "Active" : "InActive"}
         </Button>
         <Box>
           <Button

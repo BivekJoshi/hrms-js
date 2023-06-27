@@ -1,16 +1,16 @@
 import { useFormik } from 'formik';
-import { useAddLeaveType } from '../useLeaveType';
+import { useEditLeaveType } from '../useLeaveType';
 import { LeaveTypeSchema } from '../Validation/LeaveTypeScheme';
 
 const useEditLeaveTypeForm = (data) => {
-    const { mutate } = useAddLeaveType({});
+    const { mutate } = useEditLeaveType({});
 
     const formik = useFormik({
         initialValues: {
             leaveName: data?.leaveName || '',
-            leaveTotal: data?.LeaveTotal || '',
+            leaveTotal: data?.leaveTotal || '',
             leaveDescription: data?.leaveDescription || '',
-            carryForward: data?.carryForward || '',
+            isCarryForward: data?.isCarryForward || '',
             id: data?.id,
         },
         validationSchema: LeaveTypeSchema,
