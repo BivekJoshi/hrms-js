@@ -1,5 +1,5 @@
 // Header.js
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { styled } from "@mui/material/styles";
 import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
@@ -9,7 +9,10 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { Badge } from "@mui/material";
 import { CakeOutlined } from "@mui/icons-material";
 import TodayBirthday from "../../pages/Birthday/TodayBirthday";
-import { useGetTodayBirthday } from "../../hooks/birthday/useBirthday";
+import {
+  useGetTodayBirthday,
+  useRemoveNotification,
+} from "../../hooks/birthday/useBirthday";
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -32,9 +35,16 @@ export default function Header({ open, handleDrawerOpen }) {
   const [openNotification, setOpenNotification] = useState(false); // Moved inside the component function
   const { data, isLoading } = useGetTodayBirthday();
 
+  const { mutate } = useRemoveNotification();
   const handleChange = () => {
     setOpenNotification(!openNotification);
   };
+
+  useEffect(() => {
+    if (openNotification) {
+      mutate();
+    }
+  }, [openNotification]);
 
   return (
     <AppBar position="fixed" open={open}>
@@ -61,7 +71,7 @@ export default function Header({ open, handleDrawerOpen }) {
             width: "30px",
           }}
         >
-          <Badge color="secondary" badgeContent={data?.length}>
+          <Badge color="success" badgeContent={data?.length}>
             <CakeOutlined
               id="basic-button"
               aria-controls={open ? "basic-menu" : undefined}

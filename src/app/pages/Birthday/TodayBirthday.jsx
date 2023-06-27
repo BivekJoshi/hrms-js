@@ -71,10 +71,7 @@ const TodayBirthday = ({ open, setOpen, data, isLoading }) => {
                     <p style={{ height: "25px" }}>
                       <PersonIcon />
                     </p>
-                    <p style={{ fontSize: "16px" }}>
-                      {employees.firstName} {employees.middleName}{" "}
-                      {employees.lastName}
-                    </p>
+                    <p style={{ fontSize: "16px" }}>{employees.fullName}</p>
                   </div>
                 </MenuItem>
               </NavLink>

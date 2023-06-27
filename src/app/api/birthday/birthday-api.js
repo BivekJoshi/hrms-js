@@ -14,3 +14,10 @@ export const getUpcomingBirthday = async () => {
   );
   return data;
 };
+//
+export const removeNotification = async () => {
+  const data = await axiosInstance.post(
+    `/birthday-notification/check-birthday`
+  );
+  return data;
+};
