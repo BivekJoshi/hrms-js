@@ -35,7 +35,7 @@ const EditLeaveFields = ({ onClose, isLoading, data }) => {
   };
 
   const getEmployeeFullName = (employeeId) => {
-    const employee = employeeData?.employees.find((emp) => emp.id === employeeId);
+    const employee = employeeData?.find((emp) => emp.id === employeeId);
     if (employee) {
       const { firstName, middleName, lastName } = employee;
       return `${firstName || ''} ${middleName || ''} ${lastName || ''}`;

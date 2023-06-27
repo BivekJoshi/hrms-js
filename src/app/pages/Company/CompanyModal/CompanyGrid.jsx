@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 
-import CompanyTableView from '../CompanyView/CompanyTableView';
 import { EditCompanyModal } from './CompanyModal';
 import { useDeleteCompany, useGetCompany } from '../../../hooks/company/useCompany';
 import DeleteConfirmationModal from '../../../components/Modal/DeleteConfirmationModal';
+import CompanyGridView from '../CompanyView/CompanyGridView';
 
-const CompanyButton = () => {
+const CompanyGrid = () => {
     const { data: companyData, isLoading } = useGetCompany();
 
     const [openEditModal, setOpenEditModal] = useState(false);
@@ -17,8 +17,8 @@ const CompanyButton = () => {
     const handleCloseDeleteModal = () => setOpenDeleteModal(false);
 
     const deleteCompanyMutation = useDeleteCompany({});
-    const handleDeleteCompany = (rowData) => {
-        setDeletedCompany(rowData);
+    const handleDeleteCompany = (item) => {
+        setDeletedCompany(item);
         setOpenDeleteModal(true);
     };
 
@@ -27,14 +27,14 @@ const CompanyButton = () => {
         setOpenDeleteModal(false);
     };
 
-    const handleEditCompany = (rowData) => {
-        setEditedCompany(rowData);
+    const handleEditCompany = (item) => {
+        setEditedCompany(item);
         setOpenEditModal(true);
     };
 
     return (
         <>
-            <CompanyTableView
+            <CompanyGridView
                 companyData={companyData}
                 isLoading={isLoading}
                 handleEditCompany={handleEditCompany}
@@ -59,5 +59,5 @@ const CompanyButton = () => {
     );
 };
 
-export default CompanyButton;
+export default CompanyGrid;
 

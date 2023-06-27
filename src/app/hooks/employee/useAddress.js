@@ -2,14 +2,14 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import {
   addPermanentAddress,
   addTemporaryAddress,
-  editPermanentAddress,
+  editAddress,
   getAddressById,
 } from '../../api/address/address-api';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 export const usePermanentAddAddress = ({ onSuccess }) => {
-  const queryClient = useQueryClient()
+  const queryClient = useQueryClient();
   const { id } = useParams();
   return useMutation(
     ['addAddress'],
@@ -51,12 +51,13 @@ export const useGetAddressById = (id) => {
   });
 };
 
-export const useEditAddress = (addressId) => {
-  const queryClient = useQueryClient()
+export const useEditAddress = ({ onSuccess }) => {
+  const queryClient = useQueryClient();
+  const { id } = useParams();
   return useMutation(
     ['editAddress'],
     (formData) => {
-      editPermanentAddress(formData, id);
+      editAddress(formData, id);
     },
     {
       onSuccess: (data, variables, context) => {

@@ -3,8 +3,15 @@ import React from 'react';
 import { FieldArray, FormikProvider } from 'formik';
 import CloseIcon from '@mui/icons-material/Close';
 import AddIcon from '@mui/icons-material/Add';
+import { useDeleteFamily } from '../../../../hooks/employee/useFamily';
 
 const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
+  const { values, handleChange } = formik;
+
+  const { mutate } = useDeleteFamily({
+    onSuccess: (data, variables, context) => {
+    },
+  });
 
   return (
     !isLoading && (
@@ -14,14 +21,14 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
             name="family"
             render={(arrayHelpers) => (
               <>
-                {formik.values.family.map((familyMember, index) => (
-                  <>
+                {values.family.map((familyMember, index) => (
+                  <React.Fragment key={index}>
                     <br />
                     <Typography variant="button" display="block" gutterBottom>
                       Add Family Detail
                     </Typography>
                     <br />
-                    <Grid container spacing={3} key={index}>
+                    <Grid container spacing={3}>
                       <Grid item xs={12} sm={3}>
                         <TextField
                           id={`family[${index}].name`}
@@ -30,8 +37,8 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
                           placeholder="Enter name"
                           fullWidth
                           value={familyMember.name}
-                          onChange={formik.handleChange}
-                          error={formik.touched.family?.[index]?.name && Boolean(formik.errors.family?.[index]?.name)}
+                          onChange={handleChange}
+                          error={Boolean(formik.touched.family?.[index]?.name && formik.errors.family?.[index]?.name)}
                           helperText={formik.touched.family?.[index]?.name && formik.errors.family?.[index]?.name}
                           variant="outlined"
                           autoFocus
@@ -46,8 +53,8 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
                           placeholder="Enter relation"
                           fullWidth
                           value={familyMember.relation}
-                          onChange={formik.handleChange}
-                          error={formik.touched.family?.[index]?.relation && Boolean(formik.errors.family?.[index]?.relation)}
+                          onChange={handleChange}
+                          error={Boolean(formik.touched.family?.[index]?.relation && formik.errors.family?.[index]?.relation)}
                           helperText={formik.touched.family?.[index]?.relation && formik.errors.family?.[index]?.relation}
                           variant="outlined"
                           autoFocus
@@ -58,12 +65,12 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
                         <TextField
                           id={`family[${index}].mobileNumber`}
                           name={`family[${index}].mobileNumber`}
-                          label="mobileNumber"
-                          placeholder="Enter mobileNumber"
+                          label="Mobile Number"
+                          placeholder="Enter mobile number"
                           fullWidth
                           value={familyMember.mobileNumber}
-                          onChange={formik.handleChange}
-                          error={formik.touched.family?.[index]?.mobileNumber && Boolean(formik.errors.family?.[index]?.mobileNumber)}
+                          onChange={handleChange}
+                          error={Boolean(formik.touched.family?.[index]?.mobileNumber && formik.errors.family?.[index]?.mobileNumber)}
                           helperText={formik.touched.family?.[index]?.mobileNumber && formik.errors.family?.[index]?.mobileNumber}
                           variant="outlined"
                           autoFocus
@@ -79,20 +86,25 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
                         justifyContent="flex-end"
                         alignItems="center"
                       >
-                        <Button variant='contained'
-                          disabled={formik.values.family?.length === 1}
-                          onClick={() => arrayHelpers.remove(index)}
-                          color='error'
-                        >
-                          <CloseIcon />
-                        </Button>
+                        {values.family.length > 1 && (
+                          <Button
+                            variant="contained"
+                            onClick={() => {
+                              arrayHelpers.remove(index); 
+                              mutate(familyMember.id); 
+                            }}
+                            color="error"
+                          >
+                            <CloseIcon />
+                          </Button>
+                        )}
                       </Grid>
                     </Grid>
-                  </>
+                  </React.Fragment>
                 ))}
                 <br />
                 <Button
-                  variant='contained'
+                  variant="contained"
                   onClick={() => arrayHelpers.push({ name: "", relation: "", mobileNumber: "" })}
                 >
                   <AddIcon />

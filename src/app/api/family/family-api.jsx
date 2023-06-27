@@ -20,3 +20,9 @@ export const editFamily = async (formData, memberId) => {
   const data = await axiosInstance.put(`/family-member/${id}`, formData);
   return data;
 };
+
+{/*________________________DELETE_____________________________________*/ }
+export const deleteFamily = async (memberId) => {
+  const data = await axiosInstance.delete(`/family-member/${memberId}`);
+  return data;
+};

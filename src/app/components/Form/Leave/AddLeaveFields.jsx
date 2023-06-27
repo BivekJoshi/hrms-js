@@ -59,7 +59,7 @@ const AddLeaveFields = ({ onClose, isLoading }) => {
           <Autocomplete
             id='employeeId'
             name='employeeId'
-            options={employeeData?.employees}
+            options={employeeData}
             getOptionLabel={(option) => `${option.firstName} ${option.middleName} ${option.lastName}`}
             value={formik.values.employeeId || null}
             onChange={(event, value) => formik.setFieldValue('employeeId', value)}

@@ -1,4 +1,3 @@
-import React from 'react';
 import { useAddEmployee } from '../useEmployee';
 import { useFormik } from 'formik';
 import { AddEmployeeSchema } from './addEmployeeSchema';
