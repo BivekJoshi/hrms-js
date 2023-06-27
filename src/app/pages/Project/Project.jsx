@@ -63,7 +63,7 @@ const Project = () => {
         gap={2}
         sx={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+          gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
         }}
       >
         {projectData.map((item, index) => (

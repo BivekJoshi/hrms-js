@@ -3,7 +3,7 @@ import Loadable from "../app/components/Header/Loader/Loadable";
 import React, { lazy } from "react";
 import Birthdaylist from "../app/pages/Birthday/Birthdaylist";
 import Attendance from "../app/pages/Attendance/Attendance";
-import TodoList from "../app/pages/TodoList/TodoList";
+// import TodoList from "../app/pages/TodoList/TodoList";
 import Project from "../app/pages/project/Project";
 import ProjectDetail from "../app/pages/Project/ProjectDetail/ProjectDetail";
 import CustomBreadcrumb from "../theme/overrides/CustomBreadcrumb";
