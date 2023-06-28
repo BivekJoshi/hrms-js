@@ -8,6 +8,7 @@ import Project from "../app/pages/project/Project";
 import ProjectDetail from "../app/pages/Project/ProjectDetail/ProjectDetail";
 import CustomBreadcrumb from "../theme/overrides/CustomBreadcrumb";
 import { useLocation } from "react-router-dom";
+import PromotionHistory from "../app/pages/PromotionHistory/PromotionHistory";
 
 const Dashboard = Loadable(lazy(() => import('../app/pages/Dashboard/Dashboard')));
 const Employee = Loadable(lazy(() => import('../app/pages/Employee/Employee')));
@@ -80,6 +81,11 @@ const routes = [
     path: "todolist",
     id: nanoid(),
     component: <TodoList />,
+  },
+  {
+    path: "promotionHistory",
+    id: nanoid(),
+    component: <PromotionHistory />,
   },
   {
     path: "project",
