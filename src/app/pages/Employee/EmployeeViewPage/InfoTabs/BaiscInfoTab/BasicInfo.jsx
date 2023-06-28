@@ -11,7 +11,7 @@ const BasicInfo = ({ data }) => {
 		'Date of Birth': data?.dateOfBirth,
 		'Mobile Number': data?.mobileNumber,
 		Email: data?.officeEmail,
-		Address: data?.addresses[0].city,
+		// Address: data?.addresses[0].city,
 		'Marital Status': data?.maritalStatus,
 		'Date of Join': data?.dateOfJoin,
 		Position: data?.position.positionName,

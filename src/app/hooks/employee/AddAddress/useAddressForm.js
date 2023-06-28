@@ -24,7 +24,7 @@ export const usePermanentAddressForm = ({
       city: address?.city || '',
       street: address?.street || '',
     }));
-  console.log(data);
+  // console.log(data);
   const formik = useFormik({
     initialValues: {
       addresses:
