@@ -4,7 +4,7 @@ import React, { lazy } from "react";
 import Birthdaylist from "../app/pages/Birthday/Birthdaylist";
 import Attendance from "../app/pages/Attendance/Attendance";
 // import TodoList from "../app/pages/TodoList/TodoList";
-import Project from "../app/pages/project/Project";
+import Project from "../app/pages/Project/Project";
 import ProjectDetail from "../app/pages/Project/ProjectDetail/ProjectDetail";
 import CustomBreadcrumb from "../theme/overrides/CustomBreadcrumb";
 import { useLocation } from "react-router-dom";
