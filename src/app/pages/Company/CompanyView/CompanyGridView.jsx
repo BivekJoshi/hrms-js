@@ -77,6 +77,7 @@ const CompanyGridView = ({ companyData, isLoading, handleEditCompany, handleDele
             </CardActions>
           </Card>
         ))}
+        
       </Grid>
     </>
   );
