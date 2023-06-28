@@ -14,27 +14,54 @@ import ListItemText from "@mui/material/ListItemText";
 import Groups2Icon from "@mui/icons-material/Groups2";
 import { Box, Button, Grid, Stack } from "@mui/material";
 import "./project.css";
-import { useGetProject } from "../../hooks/project/useProject";
+import { useDeleteProject, useGetProject } from "../../hooks/project/useProject";
 import { AddProjectModal, EditProjectModal } from "./ProjectModal/ProjectModal";
 import { useNavigate } from "react-router-dom";
+import { useGetEmployee } from "../../hooks/employee/useEmployee";
+import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
+import DeleteIcon from '@mui/icons-material/Delete';
+import DeleteConfirmationModal from '../../components/Modal/DeleteConfirmationModal';
 
 const Project = () => {
   const navigate = useNavigate();
   const { data: projectData, isLoading } = useGetProject();
-
-  const [editedProject, setEditedProject] = useState({});
+  const { data: employeeData } = useGetEmployee();
 
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
+
+  const [editedProject, setEditedProject] = useState({});
+  const [deletedProject, setDeletedProject] = useState({});
 
   const handleAddOpenModal = () => setOpenAddModal(true);
   const handleCloseAddModal = () => setOpenAddModal(false);
 
   const handleCloseEditModal = () => setOpenEditModal(false);
+  const handleCloseDeleteModal = () => setOpenDeleteModal(false);
 
-  const handleEditProject = (rowData) => {
-    setEditedProject(rowData);
+  const deleteProjectMutation = useDeleteProject({});
+  const handleDeleteProject = () => {
+    setDeletedProject();
+    setOpenDeleteModal(true);
+  };
+
+  const handleConfirmDelete = () => {
+    deleteProjectMutation.mutate(deletedProject.id);
+    setOpenDeleteModal(false);
+  };
+
+  const handleEditProject = () => {
+     setEditedProject();
+    console.log("clicked")
     setOpenEditModal(true);
+  };
+
+  const getProjectLeaderName = (projectLeaderId) => {
+    return (
+      employeeData?.find((employee) => employee.id == projectLeaderId)
+        ?.firstName || projectLeaderId
+    );
   };
 
   if (isLoading) return <>Loading</>;
@@ -56,14 +83,15 @@ const Project = () => {
           </Button>
         </Typography>
       </Box>
+      {/* {JSON.stringify(employeeData)} */}
 
       <Grid
         container
         item
-        gap={2}
+        gap={3}
         sx={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+          gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
         }}
       >
         {projectData.map((item, index) => (
@@ -80,9 +108,23 @@ const Project = () => {
               title={item.projectName}
               subheader={item.startDate}
               action={
-                <Button variant="contained" sx={{ marginLeft: "12px" }} onClick={() => handleEditProject}>
-                  Edit
+                <>
+                <Button
+                  variant="outlined"
+                  color="secondary"
+                  sx={{ marginRight: "2px" }}
+                  onClick={() => handleEditProject()}
+                >
+                  <ModeEditOutlineIcon />
                 </Button>
+                <Button
+                  variant="outlined"
+                  color="error"
+                  onClick={() => handleDeleteProject(`${item.id}`) }
+                >
+                  <DeleteIcon />
+                </Button>
+                </>
               }
             />
             <CardContent
@@ -140,20 +182,32 @@ const Project = () => {
                   <Groups2Icon />
                 </ListItemIcon>
                 <ListItemText primary="Project Leader:" />
-                <ListItemText primary={item.projectLeaderId} />
+                <ListItemText
+                  primary={getProjectLeaderName(item.projectLeaderId)}
+                />
               </ListItemButton>
               <ListItemButton>
                 <ListItemIcon>
                   <Groups2Icon />
                 </ListItemIcon>
                 <ListItemText primary="Company Name:" />
-                <ListItemText primary={item.associateCompanies[0].companyName} />
+                <ListItemText
+                  primary={item.associateCompanies[0].companyName}
+                />
               </ListItemButton>
             </List>
           </Card>
         ))}
-        
       </Grid>
+
+      {openEditModal && (
+        <EditProjectModal
+          id={editedProject?.id}
+          open={openEditModal}
+          handleCloseModal={handleCloseEditModal}
+        />
+      )}
+
       {openAddModal && (
         <AddProjectModal
           open={openAddModal}
@@ -161,11 +215,12 @@ const Project = () => {
         />
       )}
 
-      {openEditModal && (
-        <EditProjectModal
-          id={editedProject?.id}
-          open={openEditModal}
-          handleCloseModal={handleCloseEditModal}
+      {openDeleteModal && (
+        <DeleteConfirmationModal
+          open={openDeleteModal}
+          handleCloseModal={handleCloseDeleteModal}
+          handleConfirmDelete={handleConfirmDelete}
+          message={"Project"}
         />
       )}
     </>

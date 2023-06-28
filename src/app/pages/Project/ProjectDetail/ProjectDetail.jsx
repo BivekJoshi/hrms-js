@@ -67,59 +67,72 @@
 
 // export default ProjectDetail;
 
-import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  CardHeader,
-  Grid,
-  Typography,
-} from "@mui/material";
-import React from "react";
-import "./style-card.css";
-import butterfly from "../../../../assets/butterfly.png";
+// import {
+//   Box,
+//   Button,
+//   Card,
+//   CardContent,
+//   CardHeader,
+//   Grid,
+//   Typography,
+// } from "@mui/material";
+// import React from "react";
+// import "./style-card.css";
+// import butterfly from "../../../../assets/butterfly.png";
 
-const arr = [1, 2, 3, 4, 5, 6, 7, 8];
+// const arr = [1, 2, 3, 4, 5, 6, 7, 8];
+
+// const ProjectDetail = () => {
+//   return (
+//     <>
+//       <Box>
+//         <Typography
+//           variant="h4"
+//           sx={{
+//             display: "flex",
+//             justifyContent: "space-between",
+//             marginBottom: "1.2rem",
+//           }}
+//         >
+//           Flex Box
+//         </Typography>
+//       </Box>
+//       <Grid
+//         container
+//         item
+//         gap={2}
+//         sx={{
+//           display: "grid",
+//           gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+//         }}
+//       >
+//         {arr.map((item, index) => (
+//             <Card key={index} className="icon-style-card">
+//               <div className="icon-style-inner"></div>
+//               <div className="butterfly-inner"><img src={butterfly} alt="butteryfly-image" /></div>
+//               <CardHeader
+//                 sx={{textAlign: "center", display: "flex", justifyContent: "space-around" }}
+                
+//                 title="HRMS"
+//               />
+//               <CardContent>Lorem ipsum dolor sit amet consectetur.</CardContent>
+//             </Card>
+//         ))}
+//       </Grid>
+//     </>
+//   );
+// };
+
+// export default ProjectDetail;
+
+
+import React from 'react';
 
 const ProjectDetail = () => {
   return (
-    <>
-      <Box>
-        <Typography
-          variant="h4"
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            marginBottom: "1.2rem",
-          }}
-        >
-          Flex Box
-        </Typography>
-      </Box>
-      <Grid
-        container
-        item
-        gap={2}
-        sx={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-        }}
-      >
-        {arr.map((item, index) => (
-            <Card key={index} className="icon-style-card">
-              <div className="icon-style-inner"></div>
-              <div className="butterfly-inner"><img src={butterfly} alt="butteryfly-image" /></div>
-              <CardHeader
-                sx={{textAlign: "center", display: "flex", justifyContent: "space-around" }}
-                
-                title="HRMS"
-              />
-              <CardContent>Lorem ipsum dolor sit amet consectetur.</CardContent>
-            </Card>
-        ))}
-      </Grid>
-    </>
+    <div>
+      
+    </div>
   );
 };
 

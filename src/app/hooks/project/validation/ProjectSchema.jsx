@@ -1,6 +1,6 @@
 import * as Yup from "yup";
 
-const ProjectSChema = Yup.object().shape({
+const ProjectSchema = Yup.object().shape({
     projectName: Yup.string().required(),
     startDate: Yup.string().required(),
     endDate: Yup.string().required(),
@@ -10,5 +10,5 @@ const ProjectSChema = Yup.object().shape({
 })
 
 export {
-    ProjectSChema
+    ProjectSchema
 };

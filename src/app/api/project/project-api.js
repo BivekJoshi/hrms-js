@@ -28,7 +28,7 @@ export const editProject = async (formData) => {
 };
 
 {/*________________________DELETE_____________________________________*/ }
-export const deleteProject = async () => {
+export const deleteProject = async (id) => {
     const data = await axiosInstance.delete(`/project/deactivate/${id}`);
     return data;
 };

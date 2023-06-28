@@ -1,6 +1,6 @@
 import React from 'react';
 import { useFormik } from 'formik';
-import { ProjectSChema } from '../validation/ProjectSchema';
+import { ProjectSchema } from '../validation/ProjectSchema';
 import { useAddProject } from '../useProject';
 
 const useAddProjectForm = () => {
@@ -15,7 +15,7 @@ const useAddProjectForm = () => {
             projectLeadId: "",
             companyId: "",
         },
-        validationSchema: ProjectSChema,
+        validationSchema: ProjectSchema,
         onSubmit: (values) => {
             handleRequest(values);
         },

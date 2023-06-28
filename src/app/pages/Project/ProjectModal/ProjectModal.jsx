@@ -1,6 +1,8 @@
 import React from 'react';
 import FormModal from "../../../components/Modal/FormModal"
 import AddProjectFields from "../../../components/Form/Project/AddProjectFields";
+import EditProjectFields from '../../../components/Form/Project/EditProjectFields';
+import { useGetProjectById } from '../../../hooks/project/useProject';
 
 export const AddProjectModal = ({open, handleCloseModal}) => {
     return(

@@ -3,6 +3,7 @@ import {
   getProject,
   addProject,
   getProjectById,
+  deleteProject,
 } from "../../api/project/project-api";
 import { toast } from "react-toastify";
 
@@ -40,7 +41,7 @@ export const useAddProject = ({ onSuccess }) => {
 {
   /*________________________EDIT_____________________________________*/
 }
-export const editProject = async ({ onSuccess }) => {
+export const useEditProject = async ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(["editProject"], (formData) => editProject(formData), {
     onSuccess: (data, variables, context) => {
@@ -52,4 +53,22 @@ export const editProject = async ({ onSuccess }) => {
       toast.error(`Error: ${(err, message)}`);
     },
   });
+};
+
+export const useDeleteProject = ({ onSuccess }) => {
+  const queryClient = useQueryClient();
+  return useMutation(
+    ["deleteProject"],
+    (id) => deleteProject(id),
+    {
+      onSuccess: (data, variables, context) => {
+        toast.success("Successfully deleted Project");
+        onSuccess && onSuccess(data, variables, context);
+        queryClient.invalidateQueries("getProject");
+      },
+      onError: (err, _variables, _context) => {
+        toast.error(`Error: ${err.message}`);
+      },
+    }
+  );
 };

@@ -3,6 +3,7 @@ import React from "react";
 import { toast } from "react-toastify";
 import useAddProjectForm from "../../../hooks/project/addProject/useAddProjectForm";
 import { useGetEmployee } from "../../../hooks/employee/useEmployee";
+import { useGetCompany } from "../../../hooks/company/useCompany";
 
 const projectOptions = [
   {
@@ -23,7 +24,8 @@ const projectOptions = [
 ];
 
 const AddprojectFields = ({ onClose, isLoading }) => {
-  const { data: employeeData } = useGetEmployee();
+  const { data: employeeData, isLoading: loadingEmployee } = useGetEmployee();
+  const { data: companyData, isLoading: loadingCompany } = useGetCompany();
  // console.log(employeeData)
 
   const { formik } = useAddProjectForm();
@@ -120,7 +122,7 @@ const AddprojectFields = ({ onClose, isLoading }) => {
 
         <Grid item xs={12} sm={12}>
 
-            <Autocomplete
+            {/* <Autocomplete
             id='projectLeadId'
             name='projectLeadId'
             options={employeeData}
@@ -138,9 +140,9 @@ const AddprojectFields = ({ onClose, isLoading }) => {
                 InputLabelProps={{ shrink: true }}
               />
             )}
-          />
+          /> */}
 
-          {/* <TextField
+          <TextField
             id="projectLeadId"
             name="projectLeadId"
             select
@@ -159,18 +161,20 @@ const AddprojectFields = ({ onClose, isLoading }) => {
             variant="outlined"
             InputLabelProps={{ shrink: true }}
           >
-            {newData.map((option) => (
+            {!loadingEmployee &&
+            employeeData.map((option) => (
               <MenuItem key={option?.id} value={option?.id}>
                 {option?.firstName}
               </MenuItem>
             ))}
-          </TextField> */}
+          </TextField>
         </Grid>
 
         <Grid item xs={12} sm={12}>
           <TextField
             id="companyId"
             name="companyId"
+            select
             label="Project Company ID"
             placeholder="Enter Company Id"
             fullWidth
@@ -183,7 +187,14 @@ const AddprojectFields = ({ onClose, isLoading }) => {
             variant="outlined"
             autoFocus
             InputLabelProps={{ shrink: true }}
-          />
+          >
+            {!loadingCompany &&
+              companyData.map((option) => (
+                <MenuItem key={option?.id} value={option?.id}>
+                  {option?.companyName}
+                </MenuItem>
+              ))}
+          </TextField>
         </Grid>
 
         <Grid
