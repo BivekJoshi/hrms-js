@@ -10,8 +10,9 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
 
   const deleteFamilyMutation = useDeleteFamily({});
   const handleDeleteFamily = (familyMember) => {
-    deleteFamilyMutation.mutate(familyMember.id);
-    console.log(familyMember);
+    if (familyMember.id) {
+      deleteFamilyMutation.mutate(familyMember.id);
+    }
   };
 
   return (
@@ -91,7 +92,7 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
                           <Button
                             variant="contained"
                             onClick={() => {
-                              arrayHelpers.remove(index); 
+                              arrayHelpers.remove(index);
                               handleDeleteFamily(familyMember);
                             }}
                             color="error"
