@@ -34,6 +34,7 @@ const steps = [
   'Family Details',
   'Educational Details',
   'Bank Details',
+  'Employee History',
   'Document Details',
   'Other Details',
 ];
@@ -61,7 +62,7 @@ const EditEmployeeForm = () => {
     data,
     employeeLoading,
   });
-  console.log(permanentFormik);
+  // console.log(permanentFormik);
 
   const handleNext = () => {
     switch (activeStep) {
