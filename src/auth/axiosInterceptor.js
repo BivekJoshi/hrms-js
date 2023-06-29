@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import { getUser } from '../app/utils/cookieHelper';
 
 export const axiosInstance = Axios.create({
-  baseURL: 'http://10.14.15.156:8484/hrms/api/',
+  baseURL: 'http://10.14.14.198:8484/hrms/api/',
   // baseURL: 'http://192.168.137.114/:8484/hrms/api/',
   //   baseURL: 'http://localhost:8484/hrms/api/',
   timeout: 20000,
