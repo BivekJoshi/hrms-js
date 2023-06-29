@@ -13,7 +13,7 @@ import DeleteConfirmationModal from '../../components/Modal/DeleteConfirmationMo
 
 const Department = () => {
 	const { data: departmentData, isLoading } = useGetDepartment();
-
+	
 	const [openAddModal, setOpenAddModal] = useState(false);
 	const [openEditModal, setOpenEditModal] = useState(false);
 	const [openDeleteModal, setOpenDeleteModal] = useState(false);

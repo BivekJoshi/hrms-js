@@ -10,7 +10,7 @@ import WorkspacesIcon from '@mui/icons-material/Workspaces';
 import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import BusinessIcon from '@mui/icons-material/Business';
 import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck';
-
+import AddchartIcon from '@mui/icons-material/Addchart';
 
 const primaryColor = '#1c7ed6';
 
@@ -101,4 +101,10 @@ export const drawerMenus = [
     path: 'todolist',
     subMenus: [],
   },
+  {
+    name: "Project",
+    icon: <AddchartIcon style={{ color: primaryColor }} />,
+    path: "project",
+    subMenus: [],
+  }
 ];

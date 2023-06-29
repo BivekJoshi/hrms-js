@@ -3,6 +3,9 @@ import Loadable from "../app/components/Header/Loader/Loadable";
 import React, { lazy } from "react";
 import Birthdaylist from "../app/pages/Birthday/Birthdaylist";
 import Attendance from "../app/pages/Attendance/Attendance";
+// import TodoList from "../app/pages/TodoList/TodoList";
+import Project from "../app/pages/Project/Project";
+import ProjectDetail from "../app/pages/Project/ProjectDetail/ProjectDetail";
 import CustomBreadcrumb from "../theme/overrides/CustomBreadcrumb";
 import { useLocation } from "react-router-dom";
 import PromotionHistory from "../app/pages/PromotionHistory/PromotionHistory";
@@ -83,6 +86,16 @@ const routes = [
     path: "promotionHistory",
     id: nanoid(),
     component: <PromotionHistory />,
+  },
+  {
+    path: "project",
+    id: nanoid(),
+    component: <Project />,
+  },
+  {
+    path: "project/:id",
+    id: nanoid(),
+    component: <ProjectDetail />,
   },
 ];
 

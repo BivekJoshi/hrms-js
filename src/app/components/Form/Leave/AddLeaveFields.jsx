@@ -27,11 +27,9 @@ const leaveStatus = [
   },
 ];
 const AddLeaveFields = ({ onClose, isLoading }) => {
-  const { data: employeeData, isLoading: loadingEmployee } = useGetEmployee();
-  const { data: leaveTypeData, isLoading: loadingLeaveType } = useGetLeaveType();
-
+  const { data: employeeData } = useGetEmployee();
+  const { data: leaveTypeData } = useGetLeaveType();
   const { formik } = useAddLeaveForm();
-
   const handleFormSubmit = () => {
 
     formik.handleSubmit();
