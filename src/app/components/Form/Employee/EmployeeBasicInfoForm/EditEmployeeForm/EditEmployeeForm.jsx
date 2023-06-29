@@ -61,39 +61,59 @@ const EditEmployeeForm = () => {
     data,
     employeeLoading,
   });
+  console.log(permanentFormik);
 
   const handleNext = () => {
     switch (activeStep) {
       case 0:
         formik.setFieldTouched('');
         if (formik.dirty) {
+          if (!formik.isValid) {
+            toast.error('Please make sure you have filled the form correctly');
+            return;
+          }
           formik.handleSubmit();
         }
 
         break;
       case 1:
         permanentFormik.setFieldTouched('');
+
         if (permanentFormik.dirty) {
+          if (!permanentFormik.isValid) {
+            toast.error('Please make sure you have filled the form correctly');
+            return;
+          }
           permanentFormik.handleSubmit();
         }
         break;
       case 2:
         familyFormik.setFieldTouched('');
         if (familyFormik.dirty) {
+          if (!familyFormik.isValid) {
+            toast.error('Please make sure you have filled the form correctly');
+            return;
+          }
           familyFormik.handleSubmit();
         }
         break;
       case 3:
         qualificationFormik.setFieldTouched('');
         if (qualificationFormik.dirty) {
+          if (!qualificationFormik.isValid) {
+            toast.error('Please make sure you have filled the form correctly');
+            return;
+          }
           qualificationFormik.handleSubmit();
         }
-
         break;
-
       case 4:
         bankFormik.setFieldTouched('');
         if (bankFormik.dirty) {
+          if (!bankFormik.isValid) {
+            toast.error('Please make sure you have filled the form correctly');
+            return;
+          }
           bankFormik.handleSubmit();
         }
         break;
@@ -161,6 +181,11 @@ const EditEmployeeForm = () => {
     setActiveStep(0);
   };
 
+  const handleStepClick = (label) => {
+    const stepIndex = steps.indexOf(label);
+    setActiveStep(stepIndex);
+  };
+
   return (
     <Container component='main' maxWidth='xlg' sx={{ mt: 5 }}>
       <Paper variant='plain' sx={{ my: { xs: 0, md: 6 }, p: { xs: 0, md: 3 } }}>
@@ -169,7 +194,7 @@ const EditEmployeeForm = () => {
         </Typography>
         <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
           {steps.map((label) => (
-            <Step key={label}>
+            <Step key={label} onClick={() => handleStepClick(label)}>
               <StepLabel>{label}</StepLabel>
             </Step>
           ))}
@@ -203,11 +228,6 @@ const EditEmployeeForm = () => {
                     variant='contained'
                     onClick={() => {
                       formik.handleSubmit();
-                      formik.isValid
-                        ? null
-                        : toast.error(
-                          'Please make sure you have filled the form correctly'
-                        );
                     }}
                     sx={{ mt: 3, ml: 1 }}
                   >
