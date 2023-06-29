@@ -1,13 +1,14 @@
 import * as React from 'react';
 import { useState } from 'react';
 import MaterialTable from '@material-table/core';
-import { Box, Button,Stack } from '@mui/material';
+import { Box, Button, Stack } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 
 
 import { useDeleteDepartment, useGetDepartment } from '../../hooks/department/useDepartment';
 import { AddDepartmentModal, EditDepartmentModal } from './DepartmentModal/DepartmentModal';
+import DeleteConfirmationModal from '../../components/Modal/DeleteConfirmationModal';
 
 
 const Department = () => {
@@ -15,32 +16,38 @@ const Department = () => {
 
 	const [openAddModal, setOpenAddModal] = useState(false);
 	const [openEditModal, setOpenEditModal] = useState(false);
+	const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
 	const [editedDepartment, setEditedDepartment] = useState({});
+	const [deletedDepartment, setDeletedDepartment] = useState({});
 
-	
 	const handleAddOpenModal = () => setOpenAddModal(true);
 	const handleCloseAddModal = () => setOpenAddModal(false);
 
 	const handleCloseEditModal = () => setOpenEditModal(false);
+	const handleCloseDeleteModal = () => setOpenDeleteModal(false);
 
 	const deleteDepartmentMutation = useDeleteDepartment({});
-	const handleDeleteDepartment = (departmentId) => {
-	  deleteDepartmentMutation.mutate(departmentId);
+	const handleDeleteDepartment = (rowData) => {
+		setDeletedDepartment(rowData);
+		setOpenDeleteModal(true);
+	};
+
+	const handleConfirmDelete = () => {
+		deleteDepartmentMutation.mutate(deletedDepartment.id);
+		setOpenDeleteModal(false);
 	};
 
 	const handleEditDepartment = (rowData) => {
 		setEditedDepartment(rowData);
 		setOpenEditModal(true);
-	  };
+	};
 	const columns = [
 		{
 			title: 'SN',
-			render: (rowData) => rowData.tableData.id,
-			cellStyle: {
-				whiteSpace: 'nowrap', // Prevents content from wrapping
-			},
+			render: (rowData) => rowData.tableData.index + 1,
 			width: 80,
+			sortable: false,
 		},
 		{
 			title: 'Department Name',
@@ -62,18 +69,18 @@ const Department = () => {
 		{
 			title: 'Actions',
 			render: (rowData) => (
-			  <Stack direction="row" spacing={0}>
-				<Button color="primary" onClick={() => handleEditDepartment(rowData)}>
-				  <ModeEditOutlineIcon />
-				</Button>
-				<Button color="primary" onClick={() => handleDeleteDepartment(rowData.id)}>
-				  <DeleteIcon />
-				</Button>
-			  </Stack>
+				<Stack direction="row" spacing={0}>
+					<Button color="primary" onClick={() => handleEditDepartment(rowData)}>
+						<ModeEditOutlineIcon />
+					</Button>
+					<Button color="primary" onClick={() => handleDeleteDepartment(rowData)}>
+						<DeleteIcon />
+					</Button>
+				</Stack>
 			),
 			sorting: false,
 			width: 120,
-		  },
+		},
 	];
 	if (isLoading) return <>Loading</>;
 	return (
@@ -107,7 +114,6 @@ const Department = () => {
 						fontSize: 18,
 					},
 				}}
-				onRowDoubleClick={(_event, rowData) => handleDoubleClickRow(rowData)}
 			/>
 
 			{openEditModal && (
@@ -121,6 +127,14 @@ const Department = () => {
 				<AddDepartmentModal
 					open={openAddModal}
 					handleCloseModal={handleCloseAddModal}
+				/>
+			)}
+			{openDeleteModal && (
+				<DeleteConfirmationModal
+					open={openDeleteModal}
+					handleCloseModal={handleCloseDeleteModal}
+					handleConfirmDelete={handleConfirmDelete}
+					message={"Department"}
 				/>
 			)}
 		</>

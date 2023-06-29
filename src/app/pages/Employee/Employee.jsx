@@ -25,6 +25,7 @@ const Employee = () => {
     boxShadow: 24,
     p: 4,
   };
+
   if (isLoading) return <>Loading</>;
   return (
     <>
@@ -44,7 +45,7 @@ const Employee = () => {
         useFlexGap
         flexWrap="wrap"
       >
-        {employeeData?.employees?.map((employee, index) => (
+        {employeeData?.map((employee, index) => (
           <Box key={index}>
             <EmployeeCard
               IsActive={employee.isActive}
@@ -73,6 +74,7 @@ const Employee = () => {
                 style={{ marginTop: "10px" }}
                 onClick={() => {
                   formik.handleSubmit();
+                  setOpenAddModal(false);
                   formik.isValid
                     ? null
                     : toast.error(

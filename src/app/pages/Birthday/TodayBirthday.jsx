@@ -47,8 +47,8 @@ const TodayBirthday = ({ open, setOpen, data, isLoading }) => {
             Today's Birthdays!!
           </p>
           {!isLoading &&
-            data.length > 0 &&
-            data.map((employees, index) => (
+            data.birthdayEmployees.length > 0 &&
+            data.birthdayEmployees?.map((employees, index) => (
               <NavLink to={"birthday"} key={employees.id}>
                 <MenuItem
                   style={{
@@ -71,7 +71,7 @@ const TodayBirthday = ({ open, setOpen, data, isLoading }) => {
                     <p style={{ height: "25px" }}>
                       <PersonIcon />
                     </p>
-                    <p style={{ fontSize: "16px" }}>{employees.fullName}</p>
+                    <p style={{ fontSize: "16px" }}>{employees?.fullName}</p>
                   </div>
                 </MenuItem>
               </NavLink>

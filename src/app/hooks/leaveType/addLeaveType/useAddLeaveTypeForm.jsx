@@ -10,7 +10,7 @@ const useAddLeaveTypeForm = () => {
       leaveName: '',
       leaveTotal: '',
       leaveDescription: '',
-      carryForward: '',
+      isCarryForward: '',
     },
     validationSchema: LeaveTypeSchema,
     onSubmit: (values) => {

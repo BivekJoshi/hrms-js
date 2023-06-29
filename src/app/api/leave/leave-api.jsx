@@ -6,7 +6,15 @@ export const getleave = async () => {
   return data;
 };
 
-{/*________________________GETBYID_____________________________________*/ }
+{/*________________________GETEMPLOYEELEAVEBYID_____________________________________*/ }
+export const getEmployeeLeaveById = async (id) => {
+  if (id) {
+    const data = await axiosInstance.get(`/leave/employee/${id}`);
+    return data;
+  }
+};
+
+{/*________________________GETLEAVEBYID_____________________________________*/ }
 export const getLeaveById = async (id) => {
   if (id) {
     const data = await axiosInstance.get(`/leave/${id}`);
@@ -27,13 +35,8 @@ export const addleave = async (formData) => {
 
 {/*________________________EDIT_____________________________________*/ }
 export const editLeave = async (formData) => {
-  const submitedData = {
-    ...formData,
-    employeeId: formData.employeeId?.id,
-    leaveTypeId: formData.leaveTypeId?.id,
-  }
-  const {id} = formData;
-  const data = await axiosInstance.put(`/leave/${id}`, submitedData);
+  const { id } = formData;
+  const data = await axiosInstance.put(`/leave/${id}`, formData);
   return data;
 };
 

@@ -6,20 +6,25 @@ import useAddCompanyForm from "../../../hooks/company/addCompany/useAddCompanyFo
 const AddCompanyFields = ({ onClose, isLoading }) => {
   const { formik } = useAddCompanyForm();
 
-  const handleFormSubmit = () => {
-    formik.handleSubmit();
+  const handleFormSubmit = async () => {
+    const isValid = await formik.validateForm(); // Validate the form
 
-    if (formik.isValid) {
-      formik.setTouched({
-        companyName: true,
-        companyType: true,
-        companyDescription: true,
-      });
-      onClose(); // Close the modal
-    } else {
-      toast.error("Please make sure you have filled the form correctly");
+    if (isValid) {
+      formik.handleSubmit(); // Submit the form
+
+      if (formik.isValid) {
+        formik.setTouched({
+          companyName: false,
+          companyType: false,
+          companyDescription: false,
+        });
+        onClose(); // Close the modal
+      } else {
+        toast.error("Please make sure you have filled the form correctly");
+      }
     }
   };
+
   return (
     !isLoading && (
       <Grid container spacing={3}>

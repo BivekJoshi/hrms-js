@@ -4,7 +4,10 @@ import React, { lazy } from "react";
 import Birthdaylist from "../app/pages/Birthday/Birthdaylist";
 import Attendance from "../app/pages/Attendance/Attendance";
 import TodoList from "../app/pages/TodoList/TodoList";
-import GmailForm from "../app/pages/Gmail/Gmail";
+
+import { useLocation } from "react-router-dom";
+import CustomBreadcrumb from "../theme/overrides/CustomBreadcrumb";
+import EmailForm from "../app/pages/Email/Email";
 
 const Dashboard = Loadable(
   lazy(() => import("../app/pages/Dashboard/Dashboard"))
@@ -27,7 +30,7 @@ const EditEmployee = Loadable(
 const EmployeeViewPage = Loadable(
   lazy(() => import("../app/pages/Employee/EmployeeViewPage/EmployeeViewPage"))
 );
-const gmail = Loadable(lazy(() => import("../app/pages/Gmail/Gmail")));
+
 const routes = [
   {
     path: "dashboard",
@@ -90,10 +93,16 @@ const routes = [
     component: <TodoList />,
   },
   {
-    path: "Gmail",
+    path: "Email",
     id: nanoid(),
-    component: <GmailForm />,
+    component: <EmailForm />,
   },
 ];
 
-export default routes;
+export { routes };
+
+export default function BreadCrumbs() {
+  const location = useLocation();
+  const currentPath = location.pathname;
+  return <CustomBreadcrumb routes={routes} currentPath={currentPath} />;
+}

@@ -1,17 +1,17 @@
 import React from 'react';
 
-import './Style.css';
-import ListUserDetails from '../Components/ListUserDetails';
+import '../../Style/BasicInfoStyle.css';
 import { Grid } from '@mui/material';
+import ListUserDetails from './Components/ListUserDetails';
 
-const BasicInfoTab = ({ data }) => {
+const BasicInfo = ({ data }) => {
 	const EMPLOYEE = {
 		Gender: data?.gender,
 		'Citizenship Number': data?.citizenshipNumber,
 		'Date of Birth': data?.dateOfBirth,
 		'Mobile Number': data?.mobileNumber,
 		Email: data?.officeEmail,
-		// Address: data?.addresses[0].city,
+		Address: data?.addresses[0].city,
 		'Marital Status': data?.maritalStatus,
 		'Date of Join': data?.dateOfJoin,
 		Position: data?.position.positionName,
@@ -20,8 +20,8 @@ const BasicInfoTab = ({ data }) => {
 
 	const FAMILYMEMBERS = {
 		Name: data?.familyMembers[0]?.name || '',
-		// Relation: data?.familyMembers[0].relation || '',
-		// 'Contact Number': data?.familyMembers[0].mobileNumber,
+		Relation: data?.familyMembers[0].relation || '',
+		'Contact Number': data?.familyMembers[0].mobileNumber,
 	};
 
 	const BANKDETAILS = {
@@ -29,10 +29,9 @@ const BasicInfoTab = ({ data }) => {
 		'Account Number': data?.bankDetailSet[0]?.bankAccountNumber || '',
 		Location: data?.bankDetailSet[0]?.bankAddress || '',
 		'PAN Number': data?.panNumber,
-		Salary: data?.position?.salary,
 	};
-	return (
-		<>
+    return (
+        <>
 			<Grid container>
 				<Grid item xs={6}>
 					<ListUserDetails data={EMPLOYEE} cardTitle={'Basic Info Details'} />
@@ -48,7 +47,7 @@ const BasicInfoTab = ({ data }) => {
 				</Grid>
 			</Grid>
 		</>
-	);
+    );
 };
 
-export default BasicInfoTab;
+export default BasicInfo;

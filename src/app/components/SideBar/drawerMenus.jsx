@@ -66,8 +66,8 @@ export const drawerMenus = [
     subMenus: [],
   },
   {
-    name: "Gmail",
-    path: "gmail",
+    name: "Email",
+    path: "email",
     icon: <Mail style={{ color: primaryColor }} />,
     subMenus: [],
   },
@@ -83,6 +83,12 @@ export const drawerMenus = [
     path: "company",
     subMenus: [],
   },
+  {
+    name: "Promotion History",
+    icon: <BusinessIcon style={{ color: primaryColor }} />,
+    path: "promotionHistory",
+    subMenus: [],
+  },
   // {
   //   name: 'Employee Overview',
   //   icon: (
@@ -94,10 +100,10 @@ export const drawerMenus = [
   //   path: 'practice',
   //   subMenus: [],
   // }
-  // {
-  //   name: 'ToDo',
-  //   icon: <PlaylistAddCheckIcon style={{ color: primaryColor }} />,
-  //   path: 'todolist',
-  //   subMenus: [],
-  // },
+  {
+    name: "ToDo",
+    icon: <PlaylistAddCheckIcon style={{ color: primaryColor }} />,
+    path: "todolist",
+    subMenus: [],
+  },
 ];

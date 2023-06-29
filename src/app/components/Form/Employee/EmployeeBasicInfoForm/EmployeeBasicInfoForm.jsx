@@ -41,6 +41,7 @@ const EmployeeBasicInfoForm = ({ formik, isLoading }) => {
   const handleChange = (event) => {
     formik.setFieldValue('gender', event.target.value);
   };
+  
   return (
     !isLoading && (
       <Grid container spacing={3}>

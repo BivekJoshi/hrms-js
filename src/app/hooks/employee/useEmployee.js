@@ -1,32 +1,36 @@
-import { useMutation, useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import {
   addEmployee,
   editEmployee,
   getEmployee,
+  getEmployeeByCompany,
+  getEmployeeByDesignation,
   getEmployeeById,
-} from "../../api/employee/employee-api";
-import { toast } from "react-toastify";
-import { useParams } from "react-router-dom";
+  getEmployeeBydepartment,
+} from '../../api/employee/employee-api';
+import { toast } from 'react-toastify';
+import { useParams } from 'react-router-dom';
 
 export const useGetEmployee = () => {
-  return useQuery(["getEmployee"], () => getEmployee(), {
+  return useQuery(['getEmployee'], () => getEmployee(), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
 };
 
 export const useGetEmployeeById = (id) => {
-  return useQuery(["getEmployeeById", id], () => getEmployeeById(id), {
+  return useQuery(['getEmployeeById', id], () => getEmployeeById(id), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
 };
 
 export const useEditEmployee = ({ onSuccess }) => {
+  const queryClient = useQueryClient();
   const { id } = useParams();
 
   return useMutation(
-    ["editEmployee "],
+    ['editEmployee '],
     (formData) => {
       editEmployee(formData, id);
     },
@@ -34,6 +38,7 @@ export const useEditEmployee = ({ onSuccess }) => {
       onSuccess: (data, variables, context) => {
         toast.success("Employee edited successfully");
         onSuccess && onSuccess(data, variables, context);
+        queryClient.invalidateQueries('getEmployeeById');
       },
       onError: (err, _variables, _context) => {
         toast.error(`error: ${err.message}`);
@@ -43,13 +48,37 @@ export const useEditEmployee = ({ onSuccess }) => {
 };
 
 export const useAddEmployee = ({ onSuccess }) => {
-  return useMutation(["addEmployees"], (formData) => addEmployee(formData), {
+  const queryClient = useQueryClient();
+  return useMutation(['addEmployees'], (formData) => addEmployee(formData), {
     onSuccess: (data, variables, context) => {
-      toast.success("Employee added successfully");
+      toast.success('Employee added successfully');
       onSuccess && onSuccess(data, variables, context);
+      queryClient.invalidateQueries('getEmployee');
     },
     onError: (err, _variables, _context) => {
       toast.error(`error: ${err.message}`);
     },
+  });
+};
+
+
+export const useGetEmployeeByDepartment = (searchQuery) => {
+  return useQuery(['getEmployeeBydepartment',searchQuery], () => getEmployeeBydepartment(), {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
+};
+
+export const useGetEmployeeByCompany = (searchQuery) => {
+  return useQuery(['getEmployeeByCompany',searchQuery], () => getEmployeeByCompany(searchQuery), {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
+};
+
+export const useGetEmployeeByDesignation = (searchQuery) => {
+  return useQuery(['getEmployeeByDesignation',searchQuery], () => getEmployeeByDesignation(searchQuery), {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
   });
 };

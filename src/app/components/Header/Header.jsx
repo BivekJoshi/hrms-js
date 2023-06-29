@@ -12,6 +12,7 @@ import TodayBirthday from "../../pages/Birthday/TodayBirthday";
 import {
   useGetTodayBirthday,
   useRemoveNotification,
+  // useRemoveNotification,
 } from "../../hooks/birthday/useBirthday";
 
 const AppBar = styled(MuiAppBar, {
@@ -71,7 +72,10 @@ export default function Header({ open, handleDrawerOpen }) {
             width: "30px",
           }}
         >
-          <Badge color="success" badgeContent={data?.length}>
+          <Badge
+            color="success"
+            badgeContent={!data?.isChecked ? data?.birthdayEmployeeCount : 0}
+          >
             <CakeOutlined
               id="basic-button"
               aria-controls={open ? "basic-menu" : undefined}

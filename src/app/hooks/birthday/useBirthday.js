@@ -1,8 +1,9 @@
-import { useMutation, useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import {
   getTodayBirthday,
   getUpcomingBirthday,
   removeNotification,
+  // removeNotification,
 } from "../../api/birthday/birthday-api";
 
 export const useGetTodayBirthday = () => {
@@ -20,6 +21,8 @@ export const useGetUpcomingBirthday = () => {
 };
 
 export const useRemoveNotification = () => {
+  const queryClient = useQueryClient();
+
   return useMutation(["removeNotification"], () => removeNotification(), {
     onSuccess: (data, variables, context) => {
       // onSuccess && onSuccess(data, variables, context);
