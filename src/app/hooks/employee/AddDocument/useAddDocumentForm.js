@@ -1,26 +1,22 @@
 import { useFormik } from 'formik';
 import { useAddDocument } from '../useDocument';
 
-const useAddDocumentForm = () => {
+const useAddDocumentForm = ({ document }) => {
   const { mutate } = useAddDocument({});
+  // console.log(document);
   const formik = useFormik({
     initialValues: {
       documentType: '',
-      files: [],
+      // files: [],
     },
     onSubmit: (values) => {
-      handleRequest(values);
+      values = { ...values, document };
+      console.log(values);
+      mutate(values);
     },
   });
 
-  const handleRequest = (values) => {
-    values = {
-      ...values,
-    };
-    mutate(values);
-  };
-
-  return formik;
+  return { formik };
 };
 
 export default useAddDocumentForm;

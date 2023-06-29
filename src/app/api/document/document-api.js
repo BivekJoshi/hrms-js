@@ -1,8 +1,11 @@
 import { axiosInstance } from '../../../auth/axiosInterceptor';
 
-export const addDocument = async ({ image, id }) => {
+export const addDocument = async (image, id) => {
+  const { documentType, document } = image;
+  console.log(document, documentType);
   const imgData = new FormData();
-  imgData.append('image', image);
+  imgData.append('file', document);
+  imgData.append('documentType', documentType);
   const { data } = await axiosInstance.post(
     `/employee/document/uploadFile/${id}`,
     imgData,

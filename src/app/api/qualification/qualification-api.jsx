@@ -18,8 +18,14 @@ export const addQualification = async (formData, id) => {
 };
 
 {/*________________________EDIT_____________________________________*/ }
-export const editQualification = async (formData) => {
-  const {id} = formData
-  const data = await axiosInstance.put(`/qualification/${id}`, formData);
+export const editQualification = async (formData, id) => {
+  // const {id} = formData
+  const data = await axiosInstance.put(`/qualification/${id}`, formData?.education);
   return data;
 };
+
+{/*________________________DELETE_____________________________________*/ }
+export const deleteQualifiaction = async (qualificationId) => {
+  const data = await axiosInstance.delete(`/qualification/${qualificationId}`);
+  return data;
+}

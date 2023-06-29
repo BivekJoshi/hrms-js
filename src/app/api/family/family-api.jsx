@@ -9,7 +9,7 @@ export const addfamily = async (formData, id) => {
 {/*________________________GETBYID_____________________________________*/ }
 export const getFamilyById = (id) => {
   if (id) {
-    const data = axiosInstance.get(`/family-member/${id}`);
+    const data = axiosInstance.get(`/family-member/employee/${id}`);
     return data;
   }
 };
