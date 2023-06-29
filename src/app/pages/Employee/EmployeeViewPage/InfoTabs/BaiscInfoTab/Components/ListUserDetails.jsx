@@ -33,7 +33,7 @@ export default function ListUserDetails({ cardTitle, data }) {
 				<List
 					className='BasicInfoList'
 					sx={{
-						bgcolor: 'background.paper',
+						bgcolor: '#ededed',
 					}}
 				>
 					<Button

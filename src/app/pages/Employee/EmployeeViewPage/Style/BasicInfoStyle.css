@@ -1,8 +1,9 @@
 .BasicInfoList {
-  position: 'relative';
+  /* position: 'relative'; */
   display: flex;
   flex-direction: column;
-  max-width: 450px;
+  max-width: 420px;
+  padding-bottom: none;
 }
 
 .editBasicInfoBtn {

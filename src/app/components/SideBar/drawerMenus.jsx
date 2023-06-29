@@ -78,6 +78,12 @@ export const drawerMenus = [
     path: 'company',
     subMenus: [],
   },
+  {
+    name: 'Promotion History',
+    icon: <BusinessIcon style={{ color: primaryColor }} />,
+    path: 'promotionHistory',
+    subMenus: [],
+  },
   // {
   //   name: 'Employee Overview',
   //   icon: (
