@@ -14,6 +14,13 @@ export const getProjectById = async (id) => {
     }
 };
 
+{/*________________________POST-TO-ACTIVATE-PROJECT_____________________________________*/ }
+export const addActiveProject = async (formData) => {
+    const { id } = formData;
+    const data = await axiosInstance.post(`/project/activate/${id}`, formData);
+    return data;
+};
+
 {/*________________________POST_____________________________________*/ }
 export const addProject = async (formData) => {
     const data = await axiosInstance.post(`/project`, formData);
@@ -29,6 +36,12 @@ export const editProject = async (formData) => {
 
 {/*________________________DELETE_____________________________________*/ }
 export const deleteProject = async (id) => {
+    const data = await axiosInstance.delete(`/project/deactivate/${id}`);
+    return data;
+};
+
+
+export const deleteProjectEmployee = async (id) => {
     const data = await axiosInstance.delete(`/project/deactivate/${id}`);
     return data;
 };

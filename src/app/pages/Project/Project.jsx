@@ -14,13 +14,16 @@ import ListItemText from "@mui/material/ListItemText";
 import Groups2Icon from "@mui/icons-material/Groups2";
 import { Box, Button, Grid, Stack } from "@mui/material";
 import "./project.css";
-import { useDeleteProject, useGetProject } from "../../hooks/project/useProject";
-import { AddProjectModal, EditProjectModal } from "./ProjectModal/ProjectModal";
+import {
+  useDeleteProject,
+  useGetProject,
+} from "../../hooks/project/useProject";
+import { AddProjectActiveModal, AddProjectModal, EditProjectModal } from "./ProjectModal/ProjectModal";
 import { useNavigate } from "react-router-dom";
 import { useGetEmployee } from "../../hooks/employee/useEmployee";
-import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
-import DeleteIcon from '@mui/icons-material/Delete';
-import DeleteConfirmationModal from '../../components/Modal/DeleteConfirmationModal';
+import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
+import DeleteIcon from "@mui/icons-material/Delete";
+import DeleteConfirmationModal from "../../components/Modal/DeleteConfirmationModal";
 
 const Project = () => {
   const navigate = useNavigate();
@@ -28,6 +31,7 @@ const Project = () => {
   const { data: employeeData } = useGetEmployee();
 
   const [openAddModal, setOpenAddModal] = useState(false);
+  const [openAddActiveModal, setOpenAddActiveModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
@@ -37,12 +41,15 @@ const Project = () => {
   const handleAddOpenModal = () => setOpenAddModal(true);
   const handleCloseAddModal = () => setOpenAddModal(false);
 
+  const handleAddActiveOpenModal = () => setOpenAddActiveModal(true);
+  const handleCloseAddActiveModal = () => setOpenAddActiveModal(false);
+
   const handleCloseEditModal = () => setOpenEditModal(false);
   const handleCloseDeleteModal = () => setOpenDeleteModal(false);
 
   const deleteProjectMutation = useDeleteProject({});
-  const handleDeleteProject = () => {
-    setDeletedProject();
+  const handleDeleteProject = (item) => {
+    setDeletedProject(item);
     setOpenDeleteModal(true);
   };
 
@@ -51,9 +58,8 @@ const Project = () => {
     setOpenDeleteModal(false);
   };
 
-  const handleEditProject = () => {
-     setEditedProject();
-    console.log("clicked")
+  const handleEditProject = (item) => {
+    setEditedProject(item);
     setOpenEditModal(true);
   };
 
@@ -70,6 +76,7 @@ const Project = () => {
     <>
       <Box>
         <Typography
+        className="project-button"
           variant="h4"
           sx={{
             display: "flex",
@@ -78,9 +85,18 @@ const Project = () => {
           }}
         >
           On-Going Projects
-          <Button variant="contained" onClick={handleAddOpenModal}>
-            +Add Project
-          </Button>
+          <Typography>
+            <Button variant="contained" onClick={handleAddOpenModal}>
+              +Add Project
+            </Button>
+            <Button
+              variant="contained"
+              sx={{ marginLeft: "4px" }}
+              onClick={handleAddActiveOpenModal}
+            >
+              Active Project
+            </Button>
+          </Typography>
         </Typography>
       </Box>
       {/* {JSON.stringify(employeeData)} */}
@@ -89,6 +105,7 @@ const Project = () => {
         container
         item
         gap={3}
+        className="project-card-control"
         sx={{
           display: "grid",
           gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
@@ -109,21 +126,21 @@ const Project = () => {
               subheader={item.startDate}
               action={
                 <>
-                <Button
-                  variant="outlined"
-                  color="secondary"
-                  sx={{ marginRight: "2px" }}
-                  onClick={() => handleEditProject()}
-                >
-                  <ModeEditOutlineIcon />
-                </Button>
-                <Button
-                  variant="outlined"
-                  color="error"
-                  onClick={() => handleDeleteProject(`${item.id}`) }
-                >
-                  <DeleteIcon />
-                </Button>
+                  <Button
+                    variant="outlined"
+                    color="secondary"
+                    sx={{ marginRight: "2px" }}
+                    onClick={() => handleEditProject(item)}
+                  >
+                    <ModeEditOutlineIcon />
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    color="error"
+                    onClick={() => handleDeleteProject(item)}
+                  >
+                    <DeleteIcon />
+                  </Button>
                 </>
               }
             />
@@ -212,6 +229,13 @@ const Project = () => {
         <AddProjectModal
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
+        />
+      )}
+
+      {openAddActiveModal && (
+        <AddProjectActiveModal
+          open={openAddActiveModal}
+          handleCloseModal={handleCloseAddActiveModal}
         />
       )}
 

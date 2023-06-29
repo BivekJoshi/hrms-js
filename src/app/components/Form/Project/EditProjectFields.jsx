@@ -5,7 +5,6 @@ import useEditProjectForm from "../../../hooks/project/editProject/useEditProjec
 
 const EditProjectFields = ({ onClose, isLoading, data }) => {
     const { formik } = useEditProjectForm(data);
-
     const handleFormSubmit = () => {
         formik.handleSubmit();
 
@@ -15,15 +14,8 @@ const EditProjectFields = ({ onClose, isLoading, data }) => {
                 startDate: true,
                 endDate: true,
                 projectStatus: true,
-                ProjectLeadId: true,
+                projectLeaderId: true,
                 companyId: true,
-                // projectName: data?.projectName || "",
-                // startDate: data?.startDate || "",
-                // endDate: data?.endDate || "",
-                // projectStatus: data?.projectStatus || "",
-                // ProjectLeadId: data?.projectLeadId || "",
-                // companyId: data?.companyId || "",
-                // id: data?.id || "",
             });
             onClose();
         }else{
@@ -82,7 +74,7 @@ const EditProjectFields = ({ onClose, isLoading, data }) => {
                     <TextField
                         id="projectStatus"
                         name="projectStatus"
-                        label="Project Name"
+                        label="Project Status"
                         placeholder="enter project status"
                         fullWidth
                         value={formik.values.projectStatus}
@@ -97,13 +89,13 @@ const EditProjectFields = ({ onClose, isLoading, data }) => {
                     <TextField
                         id="ProjectLeadId"
                         name="ProjectLeadId"
-                        label="Project Lead"
+                        label="Project Leader Name"
                         placeholder="enter ProjectLeadId"
                         fullWidth
-                        value={formik.values.ProjectLeadId}
+                        value={formik.values.projectLeaderId}
                         onChange={formik.handleChange}
-                        error={formik.touched.ProjectLeadId && Boolean(formik.errors.ProjectLeadId)}
-                        helperText={formik.touched.ProjectLeadId && formik.errors.ProjectLeadId}
+                        error={formik.touched.projectLeaderId && Boolean(formik.errors.projectLeaderId)}
+                        helperText={formik.touched.projectLeaderId && formik.errors.projectLeaderId}
                         variant="outlined"
                         InputLabelProps={{ shrink: true }}
                     />
@@ -112,7 +104,7 @@ const EditProjectFields = ({ onClose, isLoading, data }) => {
                     <TextField
                         id="companyId"
                         name="companyId"
-                        label="Company Id"
+                        label="Company Name"
                         placeholder="enter companyId"
                         fullWidth
                         value={formik.values.companyId}

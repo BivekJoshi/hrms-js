@@ -4,6 +4,8 @@ import {
   addProject,
   getProjectById,
   deleteProject,
+  addActiveProject,
+  editProject,
 } from "../../api/project/project-api";
 import { toast } from "react-toastify";
 
@@ -29,6 +31,21 @@ export const useAddProject = ({ onSuccess }) => {
   return useMutation(["addProject"], (formData) => addProject(formData), {
     onSuccess: (data, variables, context) => {
       toast.success("Project added successfully");
+      onSuccess && onSuccess(data, variables, context);
+      queryClient.invalidateQueries("getProject");
+    },
+    onError: (err, _variables, _context) => {
+      toast.error(`error: ${err.message}`);
+    },
+  });
+};
+
+/*________________________POST-TO-ACTIVATE-PROJECT_____________________________________*/
+export const useAddActivateProject = ({ onSuccess }) => {
+  const queryClient = useQueryClient();
+  return useMutation(["addProject"], (formData) => addActiveProject(formData), {
+    onSuccess: (data, variables, context) => {
+      toast.success("Project activated successfully");
       onSuccess && onSuccess(data, variables, context);
       queryClient.invalidateQueries("getProject");
     },

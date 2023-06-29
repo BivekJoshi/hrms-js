@@ -32,6 +32,7 @@ const AddprojectFields = ({ onClose, isLoading }) => {
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
+    onClose();
   };
 
 
@@ -48,7 +49,7 @@ const AddprojectFields = ({ onClose, isLoading }) => {
             fullWidth
             value={formik.values.projectName}
             onChange={formik.handleChange}
-            errror={
+            error={
               formik.touched.projectName && Boolean(formik.errors.projectName)
             }
             helperText={formik.touched.projectName && formik.errors.projectName}
@@ -66,7 +67,7 @@ const AddprojectFields = ({ onClose, isLoading }) => {
             fullWidth
             value={formik.values.startDate}
             onChange={formik.handleChange}
-            errror={
+            error={
               formik.touched.startDate && Boolean(formik.errors.startDate)
             }
             helperText={formik.touched.startDate && formik.errors.startDate}
@@ -84,7 +85,7 @@ const AddprojectFields = ({ onClose, isLoading }) => {
             fullWidth
             value={formik.values.endDate}
             onChange={formik.handleChange}
-            errror={formik.touched.endDate && Boolean(formik.errors.endDate)}
+            error={formik.touched.endDate && Boolean(formik.errors.endDate)}
             helperText={formik.touched.endDate && formik.errors.endDate}
             variant="outlined"
             autoFocus
@@ -102,7 +103,7 @@ const AddprojectFields = ({ onClose, isLoading }) => {
             fullWidth
             value={formik.values.projectStatus}
             onChange={formik.handleChange}
-            errror={
+            error={
               formik.touched.projectStatus &&
               Boolean(formik.errors.projectStatus)
             }
@@ -146,12 +147,12 @@ const AddprojectFields = ({ onClose, isLoading }) => {
             id="projectLeadId"
             name="projectLeadId"
             select
-            label="Project LEADING ID"
+            label="Project Leader Name"
             placeholder="Enter project Id"
             fullWidth
             value={formik.values.projectLeadId}
             onChange={formik.handleChange}
-            errror={
+            error={
               formik.touched.projectLeadId &&
               Boolean(formik.errors.projectLeadId)
             }
@@ -175,12 +176,12 @@ const AddprojectFields = ({ onClose, isLoading }) => {
             id="companyId"
             name="companyId"
             select
-            label="Project Company ID"
+            label="Project Company Name"
             placeholder="Enter Company Id"
             fullWidth
             value={formik.values.companyId}
             onChange={formik.handleChange}
-            errror={
+            error={
               formik.touched.companyId && Boolean(formik.errors.companyId)
             }
             helperText={formik.touched.companyId && formik.errors.companyId}

@@ -1,138 +1,173 @@
-// import { Card, CardContent, CardHeader, Grid, Typography } from "@mui/material";
-// import React from "react";
-// import { DataGrid } from '@mui/x-data-grid';
-// import "../project.css";
+import React, { useState } from "react";
+import Typography from "@mui/material/Typography";
+import {
+  useDeleteProjectEmployee,
+  useGetProjectEmployeeById,
+} from "../../../hooks/project/projectEmployee/useProjectEmployee";
+import { useParams } from "react-router-dom";
+import MaterialTable from "@material-table/core";
+import { useGetEmployee } from "../../../hooks/employee/useEmployee";
+import { Box, Button, Grid, Stack } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import DeleteConfirmationModal from '../../../components/Modal/DeleteConfirmationModal';
+import { AddProjectEmployeeModal } from "../ProjectEmployee/ProjectEmployeeModal/ProjectEmployeeModal";
 
-// const columns = [
-//     { field: 'id', headerName: 'ID', width: 70 },
-//     {
-//       field: 'fullName',
-//       headerName: 'Full name',
-//       description: 'This column has a value getter and is not sortable.',
-//       sortable: false,
-//       width: 160,
-//       valueGetter: (params) =>
-//         `${params.row.firstName || ''} ${params.row.lastName || ''}`,
-//     },
-//   ];
-
-//   const rows = [
-//     { id: 1, lastName: 'Snow', firstName: 'Jon' },
-//     { id: 2, lastName: 'Lannister', firstName: 'Cersei' },
-//     { id: 3, lastName: 'Lannister', firstName: 'Jaime' },
-//     { id: 4, lastName: 'Stark', firstName: 'Arya' },
-//     { id: 5, lastName: 'Targaryen', firstName: 'Daenerys' },
-//     { id: 6, lastName: 'Melisandre', firstName: null },
-//     { id: 7, lastName: 'Clifford', firstName: 'Ferrara' },
-//     { id: 8, lastName: 'Frances', firstName: 'Rossini' },
-//     { id: 9, lastName: 'Roxie', firstName: 'Harvey' },
-//   ];
-
-// const ProjectDetail = () => {
-//   return (
-//     <>
-//       <Grid container spacing={3}>
-//         <Grid item xs={8}>
-//           <Typography variant="h6" sx={{ width: 200, height: 200 }}>
-//             <Card>company Details</Card>
-//           </Typography>
-//         </Grid>
-//         <Grid item xs={4}>
-//           <Typography variant="h6">
-//             Employee
-//           </Typography>
-//            <div style={{ height: 400, width: '100%' }}>
-//       <DataGrid
-//         rows={rows}
-//         columns={columns}
-//         initialState={{
-//           pagination: {
-//             paginationModel: { page: 0, pageSize: 5 },
-//           },
-//         }}
-//         pageSizeOptions={[5, 10]}
-//         checkboxSelection
-//       />
-//     </div>
-//         </Grid>
-//       </Grid>
-//       <Grid item xs={12}>
-//         <Typography variant="h6" sx={{ width: 200, height: 200 }}>
-//           three
-//         </Typography>
-//       </Grid>
-//     </>
-//   );
-// };
-
-// export default ProjectDetail;
-
-// import {
-//   Box,
-//   Button,
-//   Card,
-//   CardContent,
-//   CardHeader,
-//   Grid,
-//   Typography,
-// } from "@mui/material";
-// import React from "react";
-// import "./style-card.css";
-// import butterfly from "../../../../assets/butterfly.png";
-
-// const arr = [1, 2, 3, 4, 5, 6, 7, 8];
-
-// const ProjectDetail = () => {
-//   return (
-//     <>
-//       <Box>
-//         <Typography
-//           variant="h4"
-//           sx={{
-//             display: "flex",
-//             justifyContent: "space-between",
-//             marginBottom: "1.2rem",
-//           }}
-//         >
-//           Flex Box
-//         </Typography>
-//       </Box>
-//       <Grid
-//         container
-//         item
-//         gap={2}
-//         sx={{
-//           display: "grid",
-//           gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-//         }}
-//       >
-//         {arr.map((item, index) => (
-//             <Card key={index} className="icon-style-card">
-//               <div className="icon-style-inner"></div>
-//               <div className="butterfly-inner"><img src={butterfly} alt="butteryfly-image" /></div>
-//               <CardHeader
-//                 sx={{textAlign: "center", display: "flex", justifyContent: "space-around" }}
-                
-//                 title="HRMS"
-//               />
-//               <CardContent>Lorem ipsum dolor sit amet consectetur.</CardContent>
-//             </Card>
-//         ))}
-//       </Grid>
-//     </>
-//   );
-// };
-
-// export default ProjectDetail;
-
-
-import React from 'react';
 
 const ProjectDetail = () => {
+  const { id } = useParams();
+  const { data: projectEmployeeData, isLoading } =
+    useGetProjectEmployeeById(id);
+  const { data: employeeData } = useGetEmployee();
+  
+	const [openAddModal, setOpenAddModal] = useState(false);
+
+  const handleAddOpenModal = () => setOpenAddModal(true);
+  const handleCloseAddModal = () => setOpenAddModal(false);
+	const [openDeleteModal, setOpenDeleteModal] = useState(false);
+  const handleCloseEditModal = () => setOpenEditModal(false);
+  const handleCloseDeleteModal = () => setOpenDeleteModal(false);
+
+  const [deletedProjectEmployee, setDeletedProjectEmployee] = useState({});
+
+  const getEmployeeName = (rowData) => {
+    const employeeId = rowData.employeeId;
+    const employee = employeeData?.find((emp) => emp.id === employeeId);
+    const name = `${employee.firstName} ${employee.middleName} ${employee.lastName}`;
+    return name;
+  };
+
+  const getLeaderName = (rowData) => {
+    const projectId = rowData.projectId;
+    const employee = employeeData?.find((emp) => emp.id === projectId);
+    const name = `${employee.firstName} ${employee.middleName} ${employee.lastName}`;
+    return name;
+  };
+
+  const deleteProjectEmployeeMutation = useDeleteProjectEmployee({});
+  const handleDeleteProjectEmployee = (rowData) => {
+    setDeletedProjectEmployee(rowData);
+    setOpenDeleteModal(true);
+  };
+
+  const handleConfirmDelete = () => {
+    deleteProjectEmployeeMutation.mutate(deletedProjectEmployee.id);
+    setOpenDeleteModal(false);
+  };
+
+  const columns = [
+    {
+      title: "SN",
+      render: (rowData) => rowData.tableData.index + 1,
+      width: 80,
+      sortable: false,
+    },
+    {
+      title: "Assigned On",
+      field: "assignedOn",
+      emptyValue: "-",
+      width: 80,
+    },
+    {
+      title: "Deassigned On",
+      field: "deAssignedOn",
+      emptyValue: "-",
+      width: 80,
+    },
+    {
+      title: "Employee Name",
+      render: (rowData) => {
+        return <p>{getEmployeeName(rowData)}</p>;
+      },
+      width: 80,
+    },
+    {
+      title: "Project Status",
+      field: "onProject",
+      emptyValue: "-",
+      width: 80,
+    },
+    {
+      title: "project Leader",
+      field: "projectId",
+      render: (rowData) => {
+        return <p>{getLeaderName(rowData)}</p>;
+      },
+      width: 80,
+    },
+    {
+      title: "Actions",
+      render: (rowData) => (
+        <Stack direction="row" spacing={0}>
+          <Button
+            color="primary"
+            onClick={() => handleDeleteProjectEmployee(rowData)}
+          >
+            <DeleteIcon />
+          </Button>
+        </Stack>
+      ),
+      sorting: false,
+      width: 100,
+    },
+  ];
+
+  if (isLoading) return <>Loading</>;
+
   return (
-    <div>
-      
-    </div>
+    <>
+      <Box>
+        <Typography
+          variant="h4"
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            marginBottom: "1.2rem",
+          }}
+        >
+          Assign Projects
+          <Button variant="contained" onClick={handleAddOpenModal}>
+            +Add Employee
+          </Button>
+        </Typography>
+      </Box>
+      <br />
+      <MaterialTable
+        columns={columns}
+        data={projectEmployeeData}
+        title="Project Employee Data"
+        isLoading={isLoading}
+        options={{
+          padding: "dense",
+          margin: 50,
+          pageSize: 12,
+          emptyRowsWhenPaging: false,
+          headerStyle: {
+            backgroundColor: "#1c7ed6",
+            color: "#FFF",
+            fontSize: 20,
+            padding: "dense",
+            height: 50,
+          },
+          rowStyle: {
+            fontSize: 18,
+          },
+        }}
+      />
+      {openAddModal && (
+				<AddProjectEmployeeModal
+					open={openAddModal}
+					handleCloseModal={handleCloseAddModal}
+				/>
+			)}
+      {openDeleteModal && (
+        <DeleteConfirmationModal
+          open={openDeleteModal}
+          handleCloseModal={handleCloseDeleteModal}
+          handleConfirmDelete={handleConfirmDelete}
+          message={"projectEmployee"}
+        />
+      )}
+    </>
   );
 };
 
