@@ -6,8 +6,10 @@ const useFamilyForm = ({ data, isLoadingFamily: isLoading }) => {
   const { mutate } = useAddFamily({});
   const { mutate: editMutate } = useEditFamily({});
 
-  const familyDetails = !isLoading && data?.familyMembers.map((familyMember) => ({
-    // id: bankDetails?.id || '',
+  const familyDetails = 
+  !isLoading &&
+   data?.familyMembers.map((familyMember) => ({
+    id:familyMember?.id ||'',
     name: familyMember.name || '',
     relation: familyMember.relation || '',
     mobileNumber: familyMember.mobileNumber || '',
@@ -29,7 +31,7 @@ const useFamilyForm = ({ data, isLoadingFamily: isLoading }) => {
     enableReinitialize: "true",
     validationSchema: FamilySchema,
     onSubmit: (values) => {
-      if (familyDetails?.id) {
+      if (familyDetails.length>0) {
         handledEditRequest(values);
       } else {
         handleRequest(values);
@@ -39,7 +41,7 @@ const useFamilyForm = ({ data, isLoadingFamily: isLoading }) => {
 
   const handleRequest = (values) => {
     values = { ...values, };
-    mutate(values, formik, { onSuccess: () => console.log(values) });
+    mutate(values, formik);
   };
 
   const handledEditRequest = (values) => {

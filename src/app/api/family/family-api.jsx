@@ -15,9 +15,9 @@ export const getFamilyById = (id) => {
 };
 
 {/*________________________EDIT_____________________________________*/ }
-export const editFamily = async (formData, memberId) => {
-  const {id} = formData
-  const data = await axiosInstance.put(`/family-member/${id}`, formData);
+export const editFamily = async (formData, id) => {
+  // const {id} = formData
+  const data = await axiosInstance.put(`/family-member/${id}`, formData?.family);
   return data;
 };
 

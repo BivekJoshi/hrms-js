@@ -1,4 +1,4 @@
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
 import { addfamily, deleteFamily, editFamily, getFamilyById } from '../../api/family/family-api';
 import { useParams } from 'react-router-dom';
@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 
 {/*________________________POST_____________________________________*/ }
 export const useAddFamily = ({ onSuccess }) => {
+    const queryClient = useQueryClient();
     const { id } = useParams();
     return useMutation(['addFamily'],
         (formData) => addfamily(formData, id),
@@ -13,6 +14,7 @@ export const useAddFamily = ({ onSuccess }) => {
             onSuccess: (data, variables, context) => {
                 toast.success('Successfully added family member');
                 onSuccess && onSuccess(data, variables, context);
+                queryClient.invalidateQueries('getFamilyById');
             },
             onError: (err, _variables, _context) => {
                 toast.error(`error: ${err.message}`);
@@ -29,7 +31,9 @@ export const useGetFammilyById = (id) => {
 };
 
 {/*________________________EDIT_____________________________________*/ }
-export const useEditFamily = () => {
+export const useEditFamily = ({ onSuccess }) => {
+    const queryClient = useQueryClient();
+    const { id } = useParams();
     return useMutation(['editFamily'], (formData) => {
         editFamily(formData, id);
     },
@@ -37,6 +41,7 @@ export const useEditFamily = () => {
             onSuccess: (data, variables, context) => {
                 toast.success('Family edited sucessfully');
                 onSuccess && onSuccess(data, variables, context);
+                queryClient.invalidateQueries('getFamilyById');
             },
             onError: (err, _variables, _context) => {
                 toast.error(`error: ${err.message}`);
@@ -47,16 +52,18 @@ export const useEditFamily = () => {
 
 {/*________________________DELETE_____________________________________*/ }
 export const useDeleteFamily = ({ onSuccess }) => {
+    const queryClient = useQueryClient();
     return useMutation(['deleteFamily'],
-      (memberId) => deleteFamily(memberId),
-      {
-        onSuccess: (data, variables, context) => {
-          toast.success('Family member deleted successfully');
-          onSuccess && onSuccess(data, variables, context);
-        },
-        onError: (err, _variables, _context) => {
-          toast.error(`Error: ${err.message}`);
-        },
-      }
+        (memberId) => deleteFamily(memberId),
+        {
+            onSuccess: (data, variables, context) => {
+                toast.success('Family member deleted successfully');
+                onSuccess && onSuccess(data, variables, context);
+                queryClient.invalidateQueries('getFamilyById');
+            },
+            onError: (err, _variables, _context) => {
+                toast.error(`Error: ${err.message}`);
+            },
+        }
     );
-  };
+};

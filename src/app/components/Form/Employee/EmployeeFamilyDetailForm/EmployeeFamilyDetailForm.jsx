@@ -8,10 +8,11 @@ import { useDeleteFamily } from '../../../../hooks/employee/useFamily';
 const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
   const { values, handleChange } = formik;
 
-  const { mutate } = useDeleteFamily({
-    onSuccess: (data, variables, context) => {
-    },
-  });
+  const deleteFamilyMutation = useDeleteFamily({});
+  const handleDeleteFamily = (familyMember) => {
+    deleteFamilyMutation.mutate(familyMember.id);
+    console.log(familyMember);
+  };
 
   return (
     !isLoading && (
@@ -21,7 +22,7 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
             name="family"
             render={(arrayHelpers) => (
               <>
-                {values.family.map((familyMember, index) => (
+                {formik.values.family.map((familyMember, index) => (
                   <React.Fragment key={index}>
                     <br />
                     <Typography variant="button" display="block" gutterBottom>
@@ -91,11 +92,11 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
                             variant="contained"
                             onClick={() => {
                               arrayHelpers.remove(index); 
-                              mutate(familyMember.id); 
+                              handleDeleteFamily(familyMember);
                             }}
                             color="error"
                           >
-                            <CloseIcon />
+                            Delete
                           </Button>
                         )}
                       </Grid>
@@ -107,7 +108,7 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
                   variant="contained"
                   onClick={() => arrayHelpers.push({ name: "", relation: "", mobileNumber: "" })}
                 >
-                  <AddIcon />
+                  Add
                 </Button>
               </>
             )}
