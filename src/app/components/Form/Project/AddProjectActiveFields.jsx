@@ -3,11 +3,11 @@ import React from "react";
 import { toast } from "react-toastify";
 import useAddProjectActiveForm from "../../../hooks/project/addProject/useAddProjectActiveForm";
 import { useGetEmployee } from "../../../hooks/employee/useEmployee";
-import { useGetProject } from "../../../hooks/project/useProject";
+import { useGetDeactivatedProject, useGetProject } from "../../../hooks/project/useProject";
 
 
 const AddprojectFields = ({ onClose, isLoading }) => {
-  const { data: projectData, isLoading: loadingProject } = useGetProject();
+  const { data: projectData, isLoading: loadingProject } = useGetDeactivatedProject();
  // console.log(employeeData)
 
   const { formik } = useAddProjectActiveForm();

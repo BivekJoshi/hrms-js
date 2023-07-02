@@ -4,6 +4,7 @@ import AddProjectFields from "../../../components/Form/Project/AddProjectFields"
 import AddProjectActiveFields from "../../../components/Form/Project/AddProjectActiveFields";
 import EditProjectFields from '../../../components/Form/Project/EditProjectFields';
 import { useGetProjectById } from '../../../hooks/project/useProject';
+import EditProjectDeactivateFields from '../../../components/Form/Project/EditProjectDeactivateFields';
 
 export const AddProjectModal = ({open, handleCloseModal}) => {
     return(
@@ -34,6 +35,19 @@ export const EditProjectModal = ({ open, handleCloseModal, id }) => {
                 open={open}
                 onClose={handleCloseModal}
                 formComponent={<EditProjectFields onClose={handleCloseModal} data={data} />} />
+        </div>
+    )
+}
+
+
+export const DeactivateProjectModal = ({ open, handleCloseModal, id }) => {
+    const { data } = useGetProjectById(id);
+    return (
+        <div>
+            <FormModal
+                open={open}
+                onClose={handleCloseModal}
+                formComponent={<EditProjectDeactivateFields onClose={handleCloseModal} data={data} />} />
         </div>
     )
 }

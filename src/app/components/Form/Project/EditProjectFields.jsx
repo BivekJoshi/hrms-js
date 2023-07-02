@@ -5,6 +5,7 @@ import useEditProjectForm from "../../../hooks/project/editProject/useEditProjec
 
 const EditProjectFields = ({ onClose, isLoading, data }) => {
     const { formik } = useEditProjectForm(data);
+    
     const handleFormSubmit = () => {
         formik.handleSubmit();
 

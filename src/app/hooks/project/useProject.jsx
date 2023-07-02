@@ -6,12 +6,22 @@ import {
   deleteProject,
   addActiveProject,
   editProject,
+  getDeactivatedProject,
+  removeActiveProject,
 } from "../../api/project/project-api";
 import { toast } from "react-toastify";
 
 /*________________________GET_____________________________________*/
 export const useGetProject = () => {
   return useQuery(["getProject"], () => getProject(), {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
+};
+
+/*________________________GET_____________________________________*/
+export const useGetDeactivatedProject = () => {
+  return useQuery(["getDeactivatedProject"], () => getDeactivatedProject(), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
@@ -55,9 +65,8 @@ export const useAddActivateProject = ({ onSuccess }) => {
   });
 };
 
-{
+
   /*________________________EDIT_____________________________________*/
-}
 export const useEditProject = async ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(["editProject"], (formData) => editProject(formData), {
@@ -72,16 +81,17 @@ export const useEditProject = async ({ onSuccess }) => {
   });
 };
 
+
+/*________________________DE-ACTIVATE-PROJECT_____________________________________*/
 export const useDeleteProject = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(
-    ["deleteProject"],
-    (id) => deleteProject(id),
+    ["removeProject"], (formData) => removeActiveProject(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success("Successfully deleted Project");
+        toast.success("Successfully Deactivated Project");
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries("getProject");
+        queryClient.invalidateQueries("removeProject");
       },
       onError: (err, _variables, _context) => {
         toast.error(`Error: ${err.message}`);

@@ -1,5 +1,6 @@
 import React from "react";
 import { useGetCompany } from "../../../hooks/company/useCompany";
+import { TabScrollButton } from '@mui/material';
 import {
   Box,
   Button,
@@ -10,8 +11,6 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-// import "../../Project/project.css";
-// import butterfly from "../../../../assets/butterfly.png";
 
 const CompanyGridView = ({ companyData, isLoading, handleEditCompany, handleDeleteCompany }) => {
 
@@ -39,11 +38,7 @@ const CompanyGridView = ({ companyData, isLoading, handleEditCompany, handleDele
         }}
       >
         {companyData.map((item, index) => (
-          <Card key={index} className="icon-style-card">
-            <div className="icon-style-inner"></div>
-            {/* <div className="butterfly-inner">
-            //   <img src={butterfly} alt="butteryfly-image" />
-            </div> */}
+          <Card key={index}>
             <CardHeader
               sx={{
                 textAlign: "center",
@@ -52,26 +47,21 @@ const CompanyGridView = ({ companyData, isLoading, handleEditCompany, handleDele
               }}
               title={item.companyName}
             />
-            <CardContent>
-              {item.companyType} <br />
-              {item.companyDescription
-                ? item.companyDescription.slice(0, 30)
-                : null}
+            <CardContent sx={{display: "flex", flexDirection: "column", gap: "1rem", overflow: "auto", height: "6rem"}}>
+              <Typography variant="h5">{item?.companyType || null}</Typography>
+              <Typography variant="p">{item?.companyDescription || null}</Typography>
             </CardContent>
             <CardActions
               sx={{
                 display: "flex",
-                justifyContent: "space-between",
-                alignItems: "baseline",
+                justifyContent: "space-around",
+                marginTop: "0.4rem"
               }}
             >
-              <Button size="small" variant="contained">
-                Show more
-              </Button>
-              <Button size="small" variant="contained" onClick={() => handleEditCompany(item)}>
+              <Button variant="contained" color="primary" onClick={() => handleEditCompany(item)}>
                 Edit
               </Button>
-              <Button size="small" variant="contained" onClick={() => handleDeleteCompany(item)}>
+              <Button variant="contained" color="error" onClick={() => handleDeleteCompany(item)}>
                 Delete
               </Button>
             </CardActions>

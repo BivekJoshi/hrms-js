@@ -18,12 +18,13 @@ import {
   useDeleteProject,
   useGetProject,
 } from "../../hooks/project/useProject";
-import { AddProjectActiveModal, AddProjectModal, EditProjectModal } from "./ProjectModal/ProjectModal";
+import { AddProjectActiveModal, AddProjectModal, DeactivateProjectModal, EditProjectModal } from "./ProjectModal/ProjectModal";
 import { useNavigate } from "react-router-dom";
 import { useGetEmployee } from "../../hooks/employee/useEmployee";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import DeleteIcon from "@mui/icons-material/Delete";
 import DeleteConfirmationModal from "../../components/Modal/DeleteConfirmationModal";
+import DeactivateConfirmationModal from "../../components/Modal/DeactivateConfirmationModal";
 
 const Project = () => {
   const navigate = useNavigate();
@@ -33,10 +34,10 @@ const Project = () => {
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openAddActiveModal, setOpenAddActiveModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
-  const [openDeleteModal, setOpenDeleteModal] = useState(false);
+  const [openDeactivateModal, setOpenDeactiveModal] = useState(false);
 
   const [editedProject, setEditedProject] = useState({});
-  const [deletedProject, setDeletedProject] = useState({});
+  const [deactivateProject, setDeactivateProject] = useState({});
 
   const handleAddOpenModal = () => setOpenAddModal(true);
   const handleCloseAddModal = () => setOpenAddModal(false);
@@ -45,17 +46,11 @@ const Project = () => {
   const handleCloseAddActiveModal = () => setOpenAddActiveModal(false);
 
   const handleCloseEditModal = () => setOpenEditModal(false);
-  const handleCloseDeleteModal = () => setOpenDeleteModal(false);
+  const handleCloseDeactivateModal = () => setOpenDeactiveModal(false);
 
-  const deleteProjectMutation = useDeleteProject({});
-  const handleDeleteProject = (item) => {
-    setDeletedProject(item);
-    setOpenDeleteModal(true);
-  };
-
-  const handleConfirmDelete = () => {
-    deleteProjectMutation.mutate(deletedProject.id);
-    setOpenDeleteModal(false);
+  const handleDeactivateProject = (item) => {
+    setDeactivateProject(item);
+    setOpenDeactiveModal(true);
   };
 
   const handleEditProject = (item) => {
@@ -92,9 +87,9 @@ const Project = () => {
             <Button
               variant="contained"
               sx={{ marginLeft: "4px" }}
-              onClick={handleAddActiveOpenModal}
+              onClick={() => {navigate(`get-deactivated-projects`)}}
             >
-              Active Project
+              In-Active Project
             </Button>
           </Typography>
         </Typography>
@@ -137,7 +132,7 @@ const Project = () => {
                   <Button
                     variant="outlined"
                     color="error"
-                    onClick={() => handleDeleteProject(item)}
+                    onClick={() => handleDeactivateProject(item)}
                   >
                     <DeleteIcon />
                   </Button>
@@ -239,12 +234,11 @@ const Project = () => {
         />
       )}
 
-      {openDeleteModal && (
-        <DeleteConfirmationModal
-          open={openDeleteModal}
-          handleCloseModal={handleCloseDeleteModal}
-          handleConfirmDelete={handleConfirmDelete}
-          message={"Project"}
+      {openDeactivateModal && (
+        <DeactivateProjectModal
+          id={deactivateProject?.id}
+          open={openDeactivateModal}
+          handleCloseModal={handleCloseDeactivateModal}
         />
       )}
     </>

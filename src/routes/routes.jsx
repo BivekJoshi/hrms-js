@@ -9,6 +9,7 @@ import ProjectDetail from "../app/pages/Project/ProjectDetail/ProjectDetail";
 import CustomBreadcrumb from "../theme/overrides/CustomBreadcrumb";
 import { useLocation } from "react-router-dom";
 import PromotionHistory from "../app/pages/PromotionHistory/PromotionHistory";
+import DeactivatedProject from "../app/pages/Project/DeactivatedProject/DeactivatedProject";
 
 const Dashboard = Loadable(lazy(() => import('../app/pages/Dashboard/Dashboard')));
 const Employee = Loadable(lazy(() => import('../app/pages/Employee/Employee')));
@@ -96,6 +97,11 @@ const routes = [
     path: "project/:id",
     id: nanoid(),
     component: <ProjectDetail />,
+  },
+  {
+    path: "project/get-deactivated-projects",
+    id: nanoid(),
+    component: <DeactivatedProject />,
   },
 ];
 
