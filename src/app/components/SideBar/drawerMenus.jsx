@@ -11,6 +11,8 @@ import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import BusinessIcon from '@mui/icons-material/Business';
 import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck';
 import AddchartIcon from '@mui/icons-material/Addchart';
+import EventIcon from '@mui/icons-material/Event';
+import HolidayVillageIcon from '@mui/icons-material/HolidayVillage';
 
 const primaryColor = '#1c7ed6';
 
@@ -96,15 +98,27 @@ export const drawerMenus = [
   //   subMenus: [],
   // }
   {
+    name: "Project",
+    icon: <AddchartIcon style={{ color: primaryColor }} />,
+    path: "project",
+    subMenus: [],
+  },
+  {
+    name: "Event",
+    icon: <EventIcon style={{ color: primaryColor }} />,
+    path: "event",
+    subMenus: [],
+  },
+  {
+    name: "Holiday",
+    icon: <HolidayVillageIcon style={{ color: primaryColor }} />,
+    path: "holiday",
+    subMenus: [],
+  },
+  {
     name: 'ToDo',
     icon: <PlaylistAddCheckIcon style={{ color: primaryColor }} />,
     path: 'todolist',
     subMenus: [],
   },
-  {
-    name: "Project",
-    icon: <AddchartIcon style={{ color: primaryColor }} />,
-    path: "project",
-    subMenus: [],
-  }
 ];

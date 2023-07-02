@@ -3,7 +3,7 @@ import { useGetEmployee } from '../../hooks/employee/useEmployee';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Modal from '@mui/material/Modal';
-import { Box } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import EmployeeBasicInfoForm from '../../components/Form/Employee/EmployeeBasicInfoForm/EmployeeBasicInfoForm';
 import useAddEmployeeForm from '../../hooks/employee/AddEmployee/useAddEmployeeForm';
 import { toast } from 'react-toastify';
@@ -29,7 +29,6 @@ const Employee = () => {
   if (isLoading) return <>Loading</>;
   return (
     <>
-      {/* // <div>{employeeData[0].firstName}</div> */}
       <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
         <Button
           variant='contained'
@@ -39,11 +38,15 @@ const Employee = () => {
           Add Employee
         </Button>
       </Box>
-      <Stack
-        spacing={{ xs: 1, sm: 3 }}
-        direction='row'
-        useFlexGap
-        flexWrap='wrap'
+      <Grid
+        container
+        item
+        gap={3}
+        className="project-card-control"
+        sx={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+        }}
       >
         {employeeData?.map((employee, index) => (
           <Box key={index}>
@@ -55,10 +58,11 @@ const Employee = () => {
               ELastName={employee.lastName}
               OfficeEmail={employee?.officeEmail}
               MobileNumber={employee?.mobileNumber}
+              Position={employee?.position?.positionName}
             />
           </Box>
         ))}
-      </Stack>
+      </Grid>
       <Modal
         open={openAddModal}
         onClose={() => setOpenAddModal(false)}
@@ -78,8 +82,8 @@ const Employee = () => {
                   formik.isValid
                     ? null
                     : toast.error(
-                        'Please make sure you have filled the form correctly'
-                      );
+                      'Please make sure you have filled the form correctly'
+                    );
                 }}
                 sx={{ mt: 3, ml: 1 }}
               >

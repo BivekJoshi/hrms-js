@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { addEmployeeHistory, getEmployeeHistoryById } from "../../api/employeeHistory/employeeHistory";
+import { addEmployeeHistory, deleteEmployeeHistory, getEmployeeHistoryById } from "../../api/employeeHistory/employeeHistory";
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 {/*________________________GETBYID_____________________________________*/ }
 export const useGetEmployeeHistoryById = (id) => {
@@ -31,13 +32,13 @@ export const useAddEmployeeHistory = ({ onSuccess }) => {
 {/*________________________DELETE_____________________________________*/ }
 export const useDeleteFamily = ({ onSuccess }) => {
     const queryClient = useQueryClient();
-    return useMutation(['deleteFamily'],
-        (employeeHistoryId) => deleteEmployeeHistory(memberId),
+    return useMutation(['deleteEmployeeHistory'],
+        (employeeHistoryId) => deleteEmployeeHistory(employeeHistoryId),
         {
             onSuccess: (data, variables, context) => {
-                toast.success('Family member deleted successfully');
+                toast.success('Employee History deleted successfully');
                 onSuccess && onSuccess(data, variables, context);
-                queryClient.invalidateQueries('getFamilyById');
+                queryClient.invalidateQueries('getEmployeeHistoryById');
             },
             onError: (err, _variables, _context) => {
                 toast.error(`Error: ${err.message}`);

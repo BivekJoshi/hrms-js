@@ -25,6 +25,7 @@ const EmployeeCard = ({
   ELastName,
   OfficeEmail,
   MobileNumber,
+  Position
 }) => {
   //dropdown menu
   const [open, setOpen] = useState(false);
@@ -59,20 +60,6 @@ const EmployeeCard = ({
   }, [open]);
 
   return (
-    // <Card
-    //   key={key}
-    //   sx={{
-    //     p: 2,
-    //     width: 300,
-    //     backgroundColor: (theme) =>
-    //       theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-    //     cursor: "pointer",
-    //   }}
-    //   style={{
-    //     textAlign: "center",
-    //     padding: ".5rem",
-    //   }}
-    // >
     <MainCard grow={true}>
       <Box display="flex" justifyContent={"end"}>
         <Button
@@ -82,9 +69,9 @@ const EmployeeCard = ({
             padding: "1px 5px",
           }}
           variant="outlined"
-          color={IsActive = "TRUE" ? "success" : "warning"}
+          color={IsActive = true ? "success" : "warning"}
         >
-          {IsActive = "TRUE" ? "Active" : "InActive"}
+          {IsActive = true ? "Active" : "InActive"}
         </Button>
         <Box>
           <Button
@@ -162,7 +149,7 @@ const EmployeeCard = ({
         </p>
         <Box padding={"0 1rem"}>
           <Typography variant="body2" gutterBottom>
-            <Chip label="Intern" style={{ width: 230 }} />
+            <Chip label={Position} style={{ width: 230 }} />
           </Typography>
         </Box>
       </div>
@@ -195,7 +182,6 @@ const EmployeeCard = ({
           </Stack>
         </Box>
       </div>
-    {/* </Card> */}
     </MainCard>
   );
 };
