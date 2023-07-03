@@ -9,7 +9,7 @@ import { useGetEvent } from '../../hooks/event/useEvent';
 
 const Event = () => {
     const { data: eventData, isLoading } = useGetEvent();
-    console.log(eventData)
+    // console.log(eventData)
 
 
     const [openAddModal, setOpenAddModal] = useState(false);
@@ -24,7 +24,9 @@ const Event = () => {
         if (eventData) {
             const formattedEvents = eventData.map(event => ({
                 title: event.eventName,
-                date: event.eventDate
+                date: event.eventDate,
+                description: event.eventDescription,
+                // backgroundColor: "red",
             }));
             setEvents(formattedEvents);
         }
@@ -56,11 +58,6 @@ const Event = () => {
                 height={"90vh"}
                 events={events}
             />
-            {/* {eventData?.map((event, index) => (
-                <Box key={index}>
-                    <p>{event.eventName}</p>
-                </Box>
-            ))} */}
         </>
     )
 }

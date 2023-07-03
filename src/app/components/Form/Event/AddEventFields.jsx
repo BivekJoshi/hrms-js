@@ -16,6 +16,7 @@ const AddEventFields = ({ onClose, isLoading }) => {
                 formik.setTouched({
                     eventName: false,
                     eventDate: false,
+                    eventTime: false,
                     eventDescription: false,
                 });
                 onClose(); // Close the modal
@@ -56,6 +57,23 @@ const AddEventFields = ({ onClose, isLoading }) => {
                         onChange={formik.handleChange}
                         error={formik.touched.eventDate && Boolean(formik.errors.eventDate)}
                         helperText={formik.touched.eventDate && formik.errors.eventDate}
+                        variant="outlined"
+                        autoFocus
+                        InputLabelProps={{ shrink: true }}
+                    />
+                </Grid>
+                <Grid item xs={12} sm={12}>
+                    <TextField
+                        id="eventTime"
+                        name="eventTime"
+                        type='time'
+                        required
+                        label="Time of Event"
+                        fullWidth
+                        value={formik.values.eventTime}
+                        onChange={formik.handleChange}
+                        error={formik.touched.eventTime && Boolean(formik.errors.eventTime)}
+                        helperText={formik.touched.eventTime && formik.errors.eventTime}
                         variant="outlined"
                         autoFocus
                         InputLabelProps={{ shrink: true }}

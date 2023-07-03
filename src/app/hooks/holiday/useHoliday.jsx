@@ -1,10 +1,18 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
-import { addHoliday, getHoliday } from '../../api/holiday/holiday-api';
+import { addHoliday, getHoliday, getHolidayCurrent } from '../../api/holiday/holiday-api';
 
 {/*________________________GET_____________________________________*/ }
 export const useGetHoliday = () => {
     return useQuery(['getHoliday'], () => getHoliday(), {
+        refetchInterval: false,
+        refetchOnWindowFocus: false,
+    });
+};
+
+{/*________________________GETCURRENTMONTH_____________________________________*/ }
+export const useGetHolidayCurrent = () => {
+    return useQuery(['getHolidayCurrent'], () => getHolidayCurrent(), {
         refetchInterval: false,
         refetchOnWindowFocus: false,
     });

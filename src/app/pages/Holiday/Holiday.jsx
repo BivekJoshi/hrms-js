@@ -1,16 +1,16 @@
-import { Box, Button } from '@mui/material';
+import { Box, Button, Grid, Paper } from '@mui/material';
 import React, { useState, useRef, useEffect } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 
-import { useGetHoliday } from '../../hooks/holiday/useHoliday';
+import { useGetHoliday, useGetHolidayCurrent } from '../../hooks/holiday/useHoliday';
 import { AddHolidayModal } from './HolidayModal/HolidayModal';
+import CurrentHoliday from './CurrentHoliday';
 
 const Holiday = () => {
     const { data: holidayData, isLoading } = useGetHoliday();
-
 
     const [openAddModal, setOpenAddModal] = useState(false);
 
@@ -24,7 +24,8 @@ const Holiday = () => {
         if (holidayData) {
             const formattedEvents = holidayData.map(event => ({
                 title: event.holidayName,
-                date: event.holidayDate
+                date: event.holidayDate,
+                backgroundColor: "red",
             }));
             setEvents(formattedEvents);
         }
@@ -32,7 +33,7 @@ const Holiday = () => {
 
     const handleEditHolidaySelectAndOpenModal = () => {
         console.log("CLICKEDDDDD")
-        
+
     };
 
     return (
@@ -49,19 +50,26 @@ const Holiday = () => {
                     handleCloseModal={handleCloseAddModal}
                 />
             )}
-            <FullCalendar
-                ref={calendarRef}
-                plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-                initialView="dayGridMonth"
-                headerToolbar={{
-                    start: "today prev,next",
-                    center: "title",
-                    end: "dayGridMonth,timeGridWeek,timeGridDay",
-                }}
-                height={"90vh"}
-                events={events}
-                eventClick={handleEditHolidaySelectAndOpenModal}
-            />
+            <Grid container spacing={2}>
+                <Grid item xs={3}>
+                    <CurrentHoliday/>
+                </Grid>
+                <Grid item xs={9}>
+                    <FullCalendar
+                        ref={calendarRef}
+                        plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+                        initialView="dayGridMonth"
+                        headerToolbar={{
+                            start: "today prev,next",
+                            center: "title",
+                            end: "dayGridMonth,timeGridWeek,timeGridDay",
+                        }}
+                        height={"90vh"}
+                        events={events}
+                        eventClick={handleEditHolidaySelectAndOpenModal}
+                    />
+                </Grid>
+            </Grid>
         </>
     )
 }

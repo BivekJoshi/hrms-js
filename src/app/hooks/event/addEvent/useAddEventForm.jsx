@@ -10,6 +10,7 @@ const useAddEventForm = () => {
         initialValues: {
             eventName: '',
             eventDate: '',
+            eventTime: '',
             eventDescription: '',
         },
         validationSchema: EventSchema,
