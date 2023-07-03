@@ -20,7 +20,9 @@ const LeaveType = Loadable(lazy(() => import('../app/pages/LeaveType/LeaveType')
 const Leave = Loadable(lazy(() => import('../app/pages/Leave/Leave')));
 const EditEmployee = Loadable(lazy(() => import('../app/pages/Employee/AddEmployee/EditEmployee')));
 const EmployeeViewPage = Loadable(lazy(() => import('../app/pages/Employee/EmployeeViewPage/EmployeeViewPage')))
-const TodoList= Loadable(lazy(()=>import('../app/pages/TodoList/TodoList')));
+const TodoList = Loadable(lazy(() => import('../app/pages/TodoList/TodoList')));
+const Event = Loadable(lazy(() => import('../app/pages/Event/Event')));
+const Holiday = Loadable(lazy(() => import('../app/pages/Holiday/Holiday')));
 
 const routes = [
   {
@@ -102,6 +104,16 @@ const routes = [
     path: "project/get-deactivated-projects",
     id: nanoid(),
     component: <DeactivatedProject />,
+  },
+  {
+    path: "event",
+    id: nanoid(),
+    component: <Event />,
+  },
+  {
+    path: "holiday",
+    id: nanoid(),
+    component: <Holiday />,
   },
 ];
 
