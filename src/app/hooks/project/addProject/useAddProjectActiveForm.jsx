@@ -5,11 +5,11 @@ import { useAddActivateProject, useDeleteProject } from '../useProject';
 
 const useRemoveActiveProject = (data) => {
     const { mutate } = useDeleteProject({});
-   
+   console.log(data)
     const formik = useFormik({
         initialValues: {
             projectId: data?.id || "",
-            isActive: data?.isActive || true,
+            isActive: data?.isActive || "",
         },
         enableReinitialize: "true",
         onSubmit: (values) => {

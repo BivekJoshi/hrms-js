@@ -14,8 +14,8 @@ const EditProjectFields = ({ onClose, isLoading, data }) => {
                 projectName: true,
                 startDate: true,
                 endDate: true,
-                projectStatus: true,
-                projectLeaderId: true,
+                taskStatus: true,
+                projectLeadId: true,
                 companyId: true,
             });
             onClose();
@@ -73,15 +73,15 @@ const EditProjectFields = ({ onClose, isLoading, data }) => {
                 </Grid>
                 <Grid item xs={12} sm={12}>
                     <TextField
-                        id="projectStatus"
-                        name="projectStatus"
+                        id="taskStatus"
+                        name="taskStatus"
                         label="Project Status"
                         placeholder="enter project status"
                         fullWidth
-                        value={formik.values.projectStatus}
+                        value={formik.values.taskStatus}
                         onChange={formik.handleChange}
-                        error={formik.touched.projectStatus && Boolean(formik.errors.projectStatus)}
-                        helperText={formik.touched.projectStatus && formik.errors.projectStatus}
+                        error={formik.touched.taskStatus && Boolean(formik.errors.taskStatus)}
+                        helperText={formik.touched.taskStatus && formik.errors.taskStatus}
                         variant="outlined"
                         InputLabelProps={{ shrink: true }}
                     />
@@ -93,10 +93,10 @@ const EditProjectFields = ({ onClose, isLoading, data }) => {
                         label="Project Leader Name"
                         placeholder="enter ProjectLeadId"
                         fullWidth
-                        value={formik.values.projectLeaderId}
+                        value={formik.values.projectLeadId}
                         onChange={formik.handleChange}
-                        error={formik.touched.projectLeaderId && Boolean(formik.errors.projectLeaderId)}
-                        helperText={formik.touched.projectLeaderId && formik.errors.projectLeaderId}
+                        error={formik.touched.projectLeadId && Boolean(formik.errors.projectLeadId)}
+                        helperText={formik.touched.projectLeadId && formik.errors.projectLeadId}
                         variant="outlined"
                         InputLabelProps={{ shrink: true }}
                     />

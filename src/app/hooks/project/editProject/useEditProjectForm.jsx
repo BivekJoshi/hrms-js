@@ -6,6 +6,7 @@ import { useGetEmployee } from '../../employee/useEmployee';
 
 const useEditProjectForm = (data) => {
     const { mutate } = useEditProject({});
+    
     const { data: employeeData }  = useGetEmployee();
 
     const getProjectLeaderName = (projectLeaderId) => {
@@ -20,13 +21,15 @@ const useEditProjectForm = (data) => {
             projectName: data?.projectName || "",
             startDate: data?.startDate || "",
             endDate: data?.endDate || "",
-            projectStatus: data?.projectStatus || "",
-            projectLeaderId: getProjectLeaderName(data?.projectLeaderId) || data?.projectLeaderId || "",
-            companyId: data?.associateCompanies[0]?.companyName || "",
-            id: data?.id || "",
+            taskStatus: data?.taskStatus || "",
+            // projectLeaderId: getProjectLeaderName(data?.projectLeaderId) || "",
+            projectLeadId: data?.projectLeaderId || "",
+            companyId: data?.associateCompanies[0]?.id || "",
+            id: data?.id,
         },
         validationSchema: ProjectSchema,
         enableReinitialize: "true",
+
         onSubmit: (values) => {
             handleRequest(values);
         }

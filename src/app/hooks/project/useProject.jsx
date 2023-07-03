@@ -67,7 +67,7 @@ export const useAddActivateProject = ({ onSuccess }) => {
 
 
   /*________________________EDIT_____________________________________*/
-export const useEditProject = async ({ onSuccess }) => {
+export const useEditProject = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(["editProject"], (formData) => editProject(formData), {
     onSuccess: (data, variables, context) => {
@@ -76,7 +76,7 @@ export const useEditProject = async ({ onSuccess }) => {
       queryClient.invalidateQueries("getProject");
     },
     onError: (err, _variables, _context) => {
-      toast.error(`Error: ${(err, message)}`);
+      toast.error(`Error: ${(err.message)}`);
     },
   });
 };
@@ -91,7 +91,7 @@ export const useDeleteProject = ({ onSuccess }) => {
       onSuccess: (data, variables, context) => {
         toast.success("Successfully Deactivated Project");
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries("removeProject");
+        queryClient.invalidateQueries("getProject");
       },
       onError: (err, _variables, _context) => {
         toast.error(`Error: ${err.message}`);

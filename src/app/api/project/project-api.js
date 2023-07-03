@@ -36,7 +36,7 @@ export const removeActiveProject = async (formData) => {
 
 {/*________________________POST_____________________________________*/ }
 export const addProject = async (formData) => {
-    const data = await axiosInstance.post(`/project`, formData);
+    const data = await axiosInstance.post('/project', formData);
     return data;
 };
 

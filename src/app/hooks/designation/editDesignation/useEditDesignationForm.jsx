@@ -21,9 +21,7 @@ const useEditDesignationForm = (data) => {
     });
 
     const handleRequest = (values) => {
-        values = {
-            ...values,
-        };
+        values = { ...values };
         mutate(values, formik);
     };
 
