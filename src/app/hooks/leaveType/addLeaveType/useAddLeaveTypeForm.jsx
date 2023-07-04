@@ -1,6 +1,6 @@
 import { useFormik } from 'formik';
 import { useAddLeaveType } from '../useLeaveType';
-import { addLeaveTypeSchema } from './addLeaveTypeScheme';
+import { LeaveTypeSchema } from '../Validation/LeaveTypeScheme';
 
 const useAddLeaveTypeForm = () => {
   const { mutate } = useAddLeaveType({});
@@ -10,9 +10,9 @@ const useAddLeaveTypeForm = () => {
       leaveName: '',
       leaveTotal: '',
       leaveDescription: '',
-      carryForward: '',
+      isCarryForward: '',
     },
-    validationSchema: addLeaveTypeSchema,
+    validationSchema: LeaveTypeSchema,
     onSubmit: (values) => {
       handleRequest(values);
     },

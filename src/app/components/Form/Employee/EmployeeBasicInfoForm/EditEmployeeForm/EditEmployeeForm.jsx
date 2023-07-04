@@ -14,10 +14,7 @@ import EmployeeBasicInfoForm from '../EmployeeBasicInfoForm';
 import useEditEmployeeForm from '../../../../../hooks/employee/EditEmployee/useEditEmployeeForm';
 
 import EmployeeAddressDetailForm from '../../EmployeeAddressDetailForm/EmployeeAddressDetailForm';
-import {
-  usePermanentAddressForm,
-  useTemporaryAddressForm,
-} from '../../../../../hooks/employee/AddAddress/useAddressForm';
+import { usePermanentAddressForm } from '../../../../../hooks/employee/AddAddress/useAddressForm';
 import { useGetAddressById } from '../../../../../hooks/employee/useAddress';
 import { useParams } from 'react-router';
 import { useGetEmployeeById } from '../../../../../hooks/employee/useEmployee';
@@ -27,8 +24,9 @@ import useAddBankForm from '../../../../../hooks/employee/AddBankForm/useAddBank
 import useQualificationForm from '../../../../../hooks/employee/AddQualification/useQualificationForm';
 import EmployeeQualificationDetailForm from '../../EmployeeQualificationDetailForm/EmployeeQualificationDetailForm';
 import EmployeeFamilyDetailForm from '../../EmployeeFamilyDetailForm/EmployeeFamilyDetailForm';
-import useAddLeaveForm from '../../../../../hooks/employee/AddFamily/useFamilyForm';
 import useFamilyForm from '../../../../../hooks/employee/AddFamily/useFamilyForm';
+import EmployeeDocumentDetailForm from '../../EmployeeDocumentDetailForm/EmployeeDocumentDetailForm';
+import useAddDocumentForm from '../../../../../hooks/employee/AddDocument/useAddDocumentForm';
 
 const steps = [
   'Basic Details',
@@ -36,62 +34,96 @@ const steps = [
   'Family Details',
   'Educational Details',
   'Bank Details',
+  'Employee History',
+  'Document Details',
   'Other Details',
 ];
 const EditEmployeeForm = () => {
   const { id } = useParams();
   const [activeStep, setActiveStep] = useState(0);
   const { data, isLoading: employeeLoading } = useGetEmployeeById(id);
-  const { formik: qualificationFormik, isLoading: isLoadingQualification } =
-    useQualificationForm();
-  const { formik: familyFormik, isLoading: isLoadingFamily } =
-    useAddLeaveForm();
-  console.log(data);
 
-  const { formik, isLoading } = useEditEmployeeForm({ data, employeeLoading });
-  const { formik: permanentFormik } = usePermanentAddressForm({
+  const { formik: qualificationFormik, isLoading: isLoadingQualification } =
+    useQualificationForm({ data, employeeLoading });
+
+  const { formik: familyFormik, isLoading: isLoadingFamily } = useFamilyForm({
     data,
     employeeLoading,
   });
-  const { formik: temporaryFormik } = useTemporaryAddressForm();
+
+  const { formik, isLoading } = useEditEmployeeForm({ data, employeeLoading });
+
+  const { formik: permanentFormik, isLoading: addressLoading } =
+    usePermanentAddressForm({ data, employeeLoading });
+
   const { formik: bankFormik } = useAddBankForm({ data, employeeLoading });
+
+  const { formik: documentFormik } = useAddDocumentForm({
+    data,
+    employeeLoading,
+  });
+  // console.log(permanentFormik);
+
   const handleNext = () => {
     switch (activeStep) {
       case 0:
         formik.setFieldTouched('');
         if (formik.dirty) {
+          if (!formik.isValid) {
+            toast.error('Please make sure you have filled the form correctly');
+            return;
+          }
           formik.handleSubmit();
         }
 
         break;
       case 1:
         permanentFormik.setFieldTouched('');
+
         if (permanentFormik.dirty) {
+          if (!permanentFormik.isValid) {
+            toast.error('Please make sure you have filled the form correctly');
+            return;
+          }
           permanentFormik.handleSubmit();
-        } else if (temporaryFormik.dirty) {
-          temporaryFormik.handleSubmit();
         }
         break;
       case 2:
         familyFormik.setFieldTouched('');
         if (familyFormik.dirty) {
+          if (!familyFormik.isValid) {
+            toast.error('Please make sure you have filled the form correctly');
+            return;
+          }
           familyFormik.handleSubmit();
         }
         break;
       case 3:
         qualificationFormik.setFieldTouched('');
         if (qualificationFormik.dirty) {
+          if (!qualificationFormik.isValid) {
+            toast.error('Please make sure you have filled the form correctly');
+            return;
+          }
           qualificationFormik.handleSubmit();
         }
         break;
-        break;
-
       case 4:
         bankFormik.setFieldTouched('');
         if (bankFormik.dirty) {
+          if (!bankFormik.isValid) {
+            toast.error('Please make sure you have filled the form correctly');
+            return;
+          }
           bankFormik.handleSubmit();
         }
         break;
+
+      // case 5:
+      //   documentFormik.setFieldTouched('');
+      //   if (documentFormik.dirty) {
+      //     documentFormik.handleSubmit();
+      //   }
 
       default:
         break;
@@ -108,7 +140,7 @@ const EditEmployeeForm = () => {
         return (
           <EmployeeAddressDetailForm
             formik={permanentFormik}
-            temporaryFormik={temporaryFormik}
+            isLoading={addressLoading}
           />
         );
 
@@ -132,6 +164,9 @@ const EditEmployeeForm = () => {
         return <EmployeeBankDetailForm formik={bankFormik} />;
 
       case 5:
+        return <EmployeeDocumentDetailForm formik={documentFormik} />;
+
+      case 6:
         return <p>Hello World</p>;
 
       default:
@@ -147,6 +182,11 @@ const EditEmployeeForm = () => {
     setActiveStep(0);
   };
 
+  const handleStepClick = (label) => {
+    const stepIndex = steps.indexOf(label);
+    setActiveStep(stepIndex);
+  };
+
   return (
     <Container component='main' maxWidth='xlg' sx={{ mt: 5 }}>
       <Paper variant='plain' sx={{ my: { xs: 0, md: 6 }, p: { xs: 0, md: 3 } }}>
@@ -155,7 +195,7 @@ const EditEmployeeForm = () => {
         </Typography>
         <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
           {steps.map((label) => (
-            <Step key={label}>
+            <Step key={label} onClick={() => handleStepClick(label)}>
               <StepLabel>{label}</StepLabel>
             </Step>
           ))}
@@ -176,7 +216,11 @@ const EditEmployeeForm = () => {
               {getStepContent(activeStep)}
               <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                 {activeStep !== 0 && (
-                  <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
+                  <Button
+                    onClick={handleBack}
+                    sx={{ mt: 3, ml: 1 }}
+                    variant='outlined'
+                  >
                     Back
                   </Button>
                 )}
@@ -185,11 +229,6 @@ const EditEmployeeForm = () => {
                     variant='contained'
                     onClick={() => {
                       formik.handleSubmit();
-                      formik.isValid
-                        ? null
-                        : toast.error(
-                          'Please make sure you have filled the form correctly'
-                        );
                     }}
                     sx={{ mt: 3, ml: 1 }}
                   >

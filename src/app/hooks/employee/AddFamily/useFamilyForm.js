@@ -1,31 +1,55 @@
 import { useFormik } from 'formik';
 import { FamilySchema } from './FamilySchema';
-import { useAddFamily } from '../useFamily';
-import { useParams } from 'react-router-dom';
+import { useAddFamily, useEditFamily } from '../useFamily';
 
-const useFamilyForm = () => {
-    const { id } = useParams();
-    const { mutate } = useAddFamily({});
+const useFamilyForm = ({ data, isLoadingFamily: isLoading }) => {
+  const { mutate } = useAddFamily({});
+  const { mutate: editMutate } = useEditFamily({});
 
-    const formik = useFormik({
-        initialValues: {
-            family: [{ name: "", relation: "" }]
-        },
-        enableReinitialize: "true",
-        validationSchema: FamilySchema,
-        onSubmit: (values) => {
-            handleRequest(values);
-        },
-    });
+  const familyDetails = 
+  !isLoading &&
+   data?.familyMembers.map((familyMember) => ({
+    id:familyMember?.id ||'',
+    name: familyMember.name || '',
+    relation: familyMember.relation || '',
+    mobileNumber: familyMember.mobileNumber || '',
+  }));
 
-    const handleRequest = (values) => {
-        // console.log(values);
-        values = {
-            ...values,
-        };
-        mutate(values, formik, { onSuccess: () => console.log(values) });
-    };
-    return { formik }
+  const formik = useFormik({
+    initialValues: {
+      family: familyDetails &&
+        familyDetails.length > 0 ?
+        familyDetails :
+        [
+          {
+            name: '',
+            relation: '',
+            mobileNumber: ''
+          }
+        ],
+    },
+    enableReinitialize: "true",
+    validationSchema: FamilySchema,
+    onSubmit: (values) => {
+      if (familyDetails.length>0) {
+        handledEditRequest(values);
+      } else {
+        handleRequest(values);
+      }
+    },
+  });
+
+  const handleRequest = (values) => {
+    values = { ...values, };
+    mutate(values, formik);
+  };
+
+  const handledEditRequest = (values) => {
+    values = { ...values };
+    editMutate(values, formik);
+  };
+
+  return { formik }
 };
 
 export default useFamilyForm;

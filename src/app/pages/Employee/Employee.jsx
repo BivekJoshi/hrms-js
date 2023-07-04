@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import { useGetEmployee } from "../../hooks/employee/useEmployee";
-import Button from "@mui/material/Button";
-import Stack from "@mui/material/Stack";
-import Modal from "@mui/material/Modal";
-import { Box } from "@mui/material";
-import EmployeeBasicInfoForm from "../../components/Form/Employee/EmployeeBasicInfoForm/EmployeeBasicInfoForm";
-import useAddEmployeeForm from "../../hooks/employee/AddEmployee/useAddEmployeeForm";
-import { toast } from "react-toastify";
-import EmployeeCard from "../../components/cards/Employee/EmployeeCard";
+import React, { useState, useEffect, useRef } from 'react';
+import { useGetEmployee } from '../../hooks/employee/useEmployee';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
+import Modal from '@mui/material/Modal';
+import { Box, Grid } from '@mui/material';
+import EmployeeBasicInfoForm from '../../components/Form/Employee/EmployeeBasicInfoForm/EmployeeBasicInfoForm';
+import useAddEmployeeForm from '../../hooks/employee/AddEmployee/useAddEmployeeForm';
+import { toast } from 'react-toastify';
+import EmployeeCard from '../../components/cards/Employee/EmployeeCard';
 
 const Employee = () => {
   const [openAddModal, setOpenAddModal] = useState(false);
@@ -15,36 +15,40 @@ const Employee = () => {
   const { formik } = useAddEmployeeForm();
 
   const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    bgcolor: "background.paper",
-    border: "1px solid #808080",
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    bgcolor: 'background.paper',
+    border: '1px solid #808080',
     borderRadius: 2,
     boxShadow: 24,
     p: 4,
   };
+  console.log(employeeData);
   if (isLoading) return <>Loading</>;
   return (
     <>
-      {/* // <div>{employeeData[0].firstName}</div> */}
-      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+      <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
         <Button
-          variant="contained"
+          variant='contained'
           onClick={() => setOpenAddModal(true)}
-          style={{ marginBottom: "20px" }}
+          style={{ marginBottom: '20px' }}
         >
           Add Employee
         </Button>
       </Box>
-      <Stack
-        spacing={{ xs: 1, sm: 5 }}
-        direction="row"
-        useFlexGap
-        flexWrap="wrap"
+      <Grid
+        container
+        item
+        gap={3}
+        className="project-card-control"
+        sx={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+        }}
       >
-        {employeeData.map((employee, index) => (
+        {employeeData?.map((employee, index) => (
           <Box key={index}>
             <EmployeeCard
               IsActive={employee.isActive}
@@ -54,30 +58,32 @@ const Employee = () => {
               ELastName={employee.lastName}
               OfficeEmail={employee?.officeEmail}
               MobileNumber={employee?.mobileNumber}
+              Position={employee?.position?.positionName}
             />
           </Box>
         ))}
-      </Stack>
+      </Grid>
       <Modal
         open={openAddModal}
         onClose={() => setOpenAddModal(false)}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        aria-labelledby='modal-modal-title'
+        aria-describedby='modal-modal-description'
       >
-        <Box>
+        <div>
           <Box sx={style}>
             <EmployeeBasicInfoForm formik={formik} />
-            <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+            <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
               <Button
-                variant="contained"
-                style={{ marginTop: "10px" }}
+                variant='contained'
+                style={{ marginTop: '10px' }}
                 onClick={() => {
                   formik.handleSubmit();
+                  setOpenAddModal(false);
                   formik.isValid
                     ? null
                     : toast.error(
-                        "Please make sure you have filled the form correctly"
-                      );
+                      'Please make sure you have filled the form correctly'
+                    );
                 }}
                 sx={{ mt: 3, ml: 1 }}
               >
@@ -85,7 +91,7 @@ const Employee = () => {
               </Button>
             </Box>
           </Box>
-        </Box>
+        </div>
       </Modal>
     </>
   );

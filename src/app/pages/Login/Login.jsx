@@ -35,12 +35,12 @@ const Login = () => {
 				></div>
 				<div className='login-right'>
 					<Box component='form' noValidate className='input-section'>
-						{/* <div style={{ display: 'flex', justifyContent: 'center' }}>
-              <img
-                className='avatar'
-                src='https://raw.githubusercontent.com/sefyudem/Responsive-Login-Form/master/img/avatar.svg'
-              />
-            </div> */}
+						<div style={{ display: 'flex', justifyContent: 'center' }}>
+							<img
+								className='avatar'
+								src='https://raw.githubusercontent.com/sefyudem/Responsive-Login-Form/master/img/avatar.svg'
+							/>
+						</div>
 						<p className='welcome-text'>WELCOME</p>
 						<Grid>
 							<TextField
