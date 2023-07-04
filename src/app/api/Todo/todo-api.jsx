@@ -2,17 +2,17 @@ import { axiosInstance } from "../../../auth/axiosInterceptor";
 
 {/*________________________GET_____________________________________*/ }
 export const getList = async () => {
-  const data = await axiosInstance.get(`/to-do-list/get-all`);
+  const data = await axiosInstance.get(`/to-do-list/get-all-by-user`);
   return data;
 };
 
-{/*________________________GETBYUSERID_____________________________________*/ }
-export const getListByUserId = async (id) => {
-  if (id) {
-    const data = await axiosInstance.get(`/to-do-list/get-by-user-id/${id}`);
-    return data;
-  }
-};
+// {/*________________________GETBYUSERID_____________________________________*/ }
+// export const getListByUserId = async (id) => {
+//   if (id) {
+//     const data = await axiosInstance.get(`/to-do-list/get-by-id/${id}`);
+//     return data;
+//   }
+// };
 
 {/*________________________GETBYID_____________________________________*/ }
 export const getListById = async (id) => {

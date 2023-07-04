@@ -1,6 +1,6 @@
 import { Box, Button } from '@mui/material';
 import React, { useState, useRef, useEffect } from "react";
-import { AddEventModal } from './EventModal/EventModal';
+import { AddEventModal, OpenEvent } from './EventModal/EventModal';
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
@@ -11,11 +11,21 @@ const Event = () => {
     const { data: eventData, isLoading } = useGetEvent();
     // console.log(eventData)
 
+    const [getEventID, setEventGetID] = useState({});
+
+
+    const handleOpenModal = (e) => {
+        setEventGetID(e?.event?._def?.publicId);
+        setOpenModal(true);
+    };
 
     const [openAddModal, setOpenAddModal] = useState(false);
+    const [openModal, setOpenModal] = useState(false);
 
     const handleAddOpenModal = () => setOpenAddModal(true);
     const handleCloseAddModal = () => setOpenAddModal(false);
+
+    const handleCloseModal = () => setOpenModal(false);
 
     const calendarRef = useRef(null);
 
@@ -27,6 +37,7 @@ const Event = () => {
                 date: event.eventDate,
                 description: event.eventDescription,
                 // backgroundColor: "red",
+                id:event.id,
             }));
             setEvents(formattedEvents);
         }
@@ -57,7 +68,16 @@ const Event = () => {
                 }}
                 height={"90vh"}
                 events={events}
+                eventClick={handleOpenModal}
             />
+
+               {openModal && (
+                <OpenEvent
+                    id={getEventID}
+                    open={openModal}
+                    handleCloseModal={handleCloseModal}
+                />
+            )}
         </>
     )
 }

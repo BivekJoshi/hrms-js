@@ -6,16 +6,31 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 
 import { useGetHoliday, useGetHolidayCurrent } from '../../hooks/holiday/useHoliday';
-import { AddHolidayModal } from './HolidayModal/HolidayModal';
+import { AddHolidayModal, OpenHoliday } from './HolidayModal/HolidayModal';
 import CurrentHoliday from './CurrentHoliday';
 
 const Holiday = () => {
     const { data: holidayData, isLoading } = useGetHoliday();
 
+    const [getID, setGetID] = useState({});
+
+    const handleOpenModal = (e) => {
+        // console.log(e)
+        setGetID(e?.event?._def?.publicId);
+        setOpenModal(true);
+    };
+
+    console.log(getID)
+
     const [openAddModal, setOpenAddModal] = useState(false);
+    const [openModal, setOpenModal] = useState(false);
+
 
     const handleAddOpenModal = () => setOpenAddModal(true);
     const handleCloseAddModal = () => setOpenAddModal(false);
+
+    // const handleOpenModal = () => setOpenModal(true)
+    const handleCloseModal = () => setOpenModal(false);
 
     const calendarRef = useRef(null);
 
@@ -26,15 +41,15 @@ const Holiday = () => {
                 title: event.holidayName,
                 date: event.holidayDate,
                 backgroundColor: "red",
+                id: event.id,
             }));
             setEvents(formattedEvents);
         }
     }, [holidayData]);
 
-    const handleEditHolidaySelectAndOpenModal = () => {
-        console.log("CLICKEDDDDD")
-
-    };
+    // const handleOpenModal = () => {
+    //     console.log("CLICKEDDDDD")
+    // };
 
     return (
         <>
@@ -44,15 +59,9 @@ const Holiday = () => {
                 </Button>
             </Box>
             <br />
-            {openAddModal && (
-                <AddHolidayModal
-                    open={openAddModal}
-                    handleCloseModal={handleCloseAddModal}
-                />
-            )}
             <Grid container spacing={2}>
                 <Grid item xs={3}>
-                    <CurrentHoliday/>
+                    <CurrentHoliday />
                 </Grid>
                 <Grid item xs={9}>
                     <FullCalendar
@@ -64,12 +73,29 @@ const Holiday = () => {
                             center: "title",
                             end: "dayGridMonth,timeGridWeek,timeGridDay",
                         }}
+                        eventClick={handleOpenModal}
                         height={"90vh"}
                         events={events}
-                        eventClick={handleEditHolidaySelectAndOpenModal}
+                    // eventClick={handleOpenModal}
+                    // dateClick={handleOpenModal}
                     />
                 </Grid>
             </Grid>
+
+            {openAddModal && (
+                <AddHolidayModal
+                    open={openAddModal}
+                    handleCloseModal={handleCloseAddModal}
+                />
+            )}
+
+            {openModal && (
+                <OpenHoliday
+                    id={getID}
+                    open={openModal}
+                    handleCloseModal={handleCloseModal}
+                />
+            )}
         </>
     )
 }

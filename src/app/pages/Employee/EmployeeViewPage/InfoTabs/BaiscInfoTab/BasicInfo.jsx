@@ -20,8 +20,8 @@ const BasicInfo = ({ data }) => {
 
 	const FAMILYMEMBERS = {
 		Name: data?.familyMembers[0]?.name || '',
-		Relation: data?.familyMembers[0].relation || '',
-		'Contact Number': data?.familyMembers[0].mobileNumber,
+		// Relation: data?.familyMembers[0].relation || '',
+		// 'Contact Number': data?.familyMembers[0].mobileNumber,
 	};
 
 	const BANKDETAILS = {

@@ -5,6 +5,7 @@ import { TabContext, TabList, TabPanel } from '@mui/lab';
 import BasicInfo from './BaiscInfoTab/BasicInfo';
 import LeaveInfo from './LeaveInfoTab/LeaveInfo';
 import AcademicsInfo from './AcademicsInfoTab/AcademicsInfo';
+import PromotionHistory from './PromotionHistory/PromotionHistory';
 
 
 const primaryColor = '#1c7ed6';
@@ -55,6 +56,15 @@ const TabComponent = ({ data }) => {
                                 fontWeight: 'bolder',
                             }}
                         />
+                        <Tab
+                            label='Promotion History'
+                            value='5'
+                            style={{
+                                fontSize: '20px',
+                                color: primaryColor,
+                                fontWeight: 'bolder',
+                            }}
+                        />
                     </TabList>
                 </Box>
                 <TabPanel value='1'>
@@ -64,10 +74,13 @@ const TabComponent = ({ data }) => {
                     <LeaveInfo />
                 </TabPanel>
                 <TabPanel value='3'>
-                    <AcademicsInfo data={data}/>
+                    <AcademicsInfo data={data} />
                 </TabPanel>
                 <TabPanel value='4'>
                     <AcademicsInfo />
+                </TabPanel>
+                <TabPanel value='5'>
+                    <PromotionHistory />
                 </TabPanel>
             </TabContext>
         </Box>

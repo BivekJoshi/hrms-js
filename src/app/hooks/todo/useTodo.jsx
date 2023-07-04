@@ -11,12 +11,12 @@ export const useGetList = () => {
 };
 
 {/*________________________GETBYUSERID_____________________________________*/ }
-export const useGetUserListById = (id) => {
-  return useQuery(['getListByUserId', id], () => getListByUserId(id), {
-    refetchInterval: false,
-    refetchOnWindowFocus: false,
-  });
-};
+// export const useGetUserListById = (id) => {
+//   return useQuery(['getListByUserId', id], () => getListByUserId(id), {
+//     refetchInterval: false,
+//     refetchOnWindowFocus: false,
+//   });
+// };
 
 {/*________________________GETBYID_____________________________________*/ }
 export const useGetListById = (id) => {
