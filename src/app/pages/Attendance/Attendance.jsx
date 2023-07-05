@@ -18,7 +18,7 @@ import CloseIcon from "@mui/icons-material/Close";
 let cMonth;
 
 const month = [
-  
+
 
   {
     label: "January",
@@ -98,14 +98,14 @@ const Attendance = () => {
   const date = new Date();
   const year = date.getFullYear();
 
-  
+
   const [cMonth, setCMonth] = useState(date.getMonth() + 1);
   date.setMonth(cMonth - 1);
 
 
 
   const monthName = date.toLocaleString("default", { month: "long" });
-  
+
 
   const daysInMonth = new Date(year, cMonth, 0).getDate();
 
@@ -183,12 +183,12 @@ const Attendance = () => {
             label="Search Employee"
             variant="outlined"
             value={searchEmployee}
-          onChange={(e) => setSearchEmployee(e.target.value)}
+            onChange={(e) => setSearchEmployee(e.target.value)}
           />
 
-          <TextField select label="Select Month" defaultValue={monthName}           value={searchMonth}
-          onChange={(e) => setSearchMonth(e.target.value)}
->
+          <TextField select label="Select Month" defaultValue={monthName} value={searchMonth}
+            onChange={(e) => setSearchMonth(e.target.value)}
+          >
             {month.map((option) => (
               <MenuItem key={option.value} value={option.value}>
                 {option.label}
@@ -196,8 +196,8 @@ const Attendance = () => {
             ))}
           </TextField>
 
-          <TextField select label="Select Year" defaultValue={year}    value={searchYear}
-          onChange={(e) => setSearchYear(e.target.value)}>
+          <TextField select label="Select Year" defaultValue={year} value={searchYear}
+            onChange={(e) => setSearchYear(e.target.value)}>
             {year0.map((option) => (
               <MenuItem key={option.value} value={option.value}>
                 {option.label}
@@ -205,7 +205,7 @@ const Attendance = () => {
             ))}
           </TextField>
 
-        
+
         </Box>
       </div>
 
@@ -214,12 +214,12 @@ const Attendance = () => {
       <div className="table-wrapper">
         <TableContainer className="cntnr"
           component={Paper}
-        >  
+        >
           <Table aria-label="simple table" className="table">
             <TableHead className="heading">
               <TableRow>
-              <TableCell  className="sn" >Sn No.</TableCell>
-   
+                <TableCell className="sn" >Sn No.</TableCell>
+
                 {daysArray.map((d, i) => {
                   const dayName = new Date(year, cMonth - 1, d).toLocaleString(
                     "default",
@@ -227,17 +227,17 @@ const Attendance = () => {
                   );
 
                   return (
-                    <>           {i === 0 && ( 
-                    <TableCell   style={{
-                      width: "140px",
-                      fontWeight: "bold",
-                      fontSize: "20px",
-                    }} className="emp">
+                    <>           {i === 0 && (
+                      <TableCell style={{
+                        width: "140px",
+                        fontWeight: "bold",
+                        fontSize: "20px",
+                      }} className="emp">
                         Employee
-                    </TableCell>
-                  
+                      </TableCell>
+
                     )}
-                              <TableCell style={{textAlign:"center"}} key={d}>
+                      <TableCell style={{ textAlign: "center" }} key={d}>
                         <div >{d}</div>
                         <div >{dayName}</div>
                       </TableCell>
@@ -247,7 +247,7 @@ const Attendance = () => {
               </TableRow>
             </TableHead>
 
-            {filteredData.length> 0 ? (
+            {filteredData.length > 0 ? (
               <TableBody>
                 {filteredData.map((employee, i) => {
                   const serialNumber = i + 1; // Increment serial number for each employee
@@ -256,7 +256,7 @@ const Attendance = () => {
                       <TableCell className="snNo" >{serialNumber}</TableCell>
                       <TableCell className="empname">{employee.employeeName}</TableCell>
                       {daysArray.map((d) => {
-                     
+
                         const currentDate = new Date();
 
                         const isPast =
@@ -283,7 +283,7 @@ const Attendance = () => {
                           );
                           const isPresent = !!attendanceEntry;
                           return (
-                            <TableCell style={{textAlign:'center'}} key={d}>
+                            <TableCell style={{ textAlign: 'center' }} key={d}>
                               {isPresent ? (
                                 <>
                                   <div >
@@ -307,16 +307,16 @@ const Attendance = () => {
                     </TableRow>
                   );
                 })}
-               </TableBody>
-      ) : (
-        <TableBody>
-          <TableRow>
-            <TableCell colSpan={daysArray.length + 2}>
-              No matching records found.
-            </TableCell>
-          </TableRow>
-        </TableBody>
-      )}
+              </TableBody>
+            ) : (
+              <TableBody>
+                <TableRow>
+                  <TableCell colSpan={daysArray.length + 2}>
+                    No matching records found.
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            )}
           </Table>
         </TableContainer>
       </div>

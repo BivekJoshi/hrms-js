@@ -8,43 +8,46 @@ import EmployeeBasicInfoForm from "../../components/Form/Employee/EmployeeBasicI
 import useAddEmployeeForm from "../../hooks/employee/AddEmployee/useAddEmployeeForm";
 import { toast } from "react-toastify";
 import EmployeeCard from "../../components/cards/Employee/EmployeeCard";
-import { PagePagination } from "../../components/Pagination/PagePagination";
 
 const Employee = () => {
   const [openAddModal, setOpenAddModal] = useState(false);
   const { data: employeeData, isLoading } = useGetEmployee();
   const { formik } = useAddEmployeeForm();
   const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    bgcolor: "background.paper",
-    border: "1px solid #808080",
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    bgcolor: 'background.paper',
+    border: '1px solid #808080',
     borderRadius: 2,
     boxShadow: 24,
     p: 4,
   };
+  console.log(employeeData);
   if (isLoading) return <>Loading</>;
   return (
-    <Box padding="1rem">
-      {/* // <div>{employeeData[0].firstName}</div> */}
-      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+    <>
+      <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
         <Button
-          variant="contained"
+          variant='contained'
           onClick={() => setOpenAddModal(true)}
-          style={{ marginBottom: "20px" }}
+          style={{ marginBottom: '20px' }}
         >
           Add Employee
         </Button>
       </Box>
-      <Stack
-        spacing={{ xs: 1, sm: 5 }}
-        direction="row"
-        useFlexGap
-        flexWrap="wrap"
+      <Grid
+        container
+        item
+        gap={3}
+        className="project-card-control"
+        sx={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+        }}
       >
-        {employeeData.employees.map((employee, index) => (
+        {employeeData?.map((employee, index) => (
           <Box key={index}>
             <EmployeeCard
               key={index}
@@ -55,31 +58,31 @@ const Employee = () => {
               ELastName={employee.lastName}
               OfficeEmail={employee?.officeEmail}
               MobileNumber={employee?.mobileNumber}
-              Position={employee?.position?.positionName}
             />
           </Box>
         ))}
-      </Stack>
+      </Grid>
       <Modal
         open={openAddModal}
         onClose={() => setOpenAddModal(false)}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        aria-labelledby='modal-modal-title'
+        aria-describedby='modal-modal-description'
       >
-        <Box>
+        <div>
           <Box sx={style}>
             <EmployeeBasicInfoForm formik={formik} />
-            <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+            <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
               <Button
-                variant="contained"
-                style={{ marginTop: "10px" }}
+                variant='contained'
+                style={{ marginTop: '10px' }}
                 onClick={() => {
                   formik.handleSubmit();
+                  setOpenAddModal(false);
                   formik.isValid
                     ? null
                     : toast.error(
-                        "Please make sure you have filled the form correctly"
-                      );
+                      'Please make sure you have filled the form correctly'
+                    );
                 }}
                 sx={{ mt: 3, ml: 1 }}
               >
@@ -87,17 +90,9 @@ const Employee = () => {
               </Button>
             </Box>
           </Box>
-        </Box>
+        </div>
       </Modal>
-      {/* <Box padding="2rem">
-        <PagePagination 
-        Count={employeeData.totalPages}
-        // Page={2} 
-        OnChange={employeeData?.pageNumber}
-        onPageChange={employeeData?.pageNumber}
-        />
-      </Box> */}
-    </Box>
+    </>
   );
 };
 

@@ -16,7 +16,9 @@
   justify-content: center;
   background-repeat: no-repeat;
   background-position: center center;
-  background-size: 35vh;
+  /* background-size: 35vh; */
+  background-size: cover;
+
   /* margin: 64px 0; */
 
   align-items: center;

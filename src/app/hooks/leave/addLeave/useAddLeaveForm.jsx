@@ -1,6 +1,6 @@
 import { useFormik } from 'formik';
-import { addLeaveSchema } from './addLeaveSchema';
 import { useAddLeave } from '../useLeave';
+import { LeaveSchema } from '../Validation/LeaveSchema';
 
 const useAddLeaveForm = () => {
     const { mutate } = useAddLeave({});
@@ -19,7 +19,7 @@ const useAddLeaveForm = () => {
             leaveRemarks: '',
             halfDay: '',
         },
-        validationSchema: addLeaveSchema,
+        validationSchema: LeaveSchema,
         onSubmit: (values) => {
             handleRequest(values);
         },

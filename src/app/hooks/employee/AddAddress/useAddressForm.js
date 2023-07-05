@@ -1,58 +1,56 @@
 import { useFormik } from 'formik';
 import { AddressSchema } from './AddressSchema';
-import {
-  useGetAddressById,
-  usePermanentAddAddress,
-  useTemporaryAddress,
-} from '../useAddress';
-import { useParams } from 'react-router-dom';
+import { useEditAddress, usePermanentAddAddress } from '../useAddress';
 
-export const usePermanentAddressForm = () => {
-  const { id } = useParams();
+export const usePermanentAddressForm = ({
+  data,
+  employeeLoading: isLoading,
+}) => {
   const { mutate: permanentMutate } = usePermanentAddAddress({});
-  const { data, isLoading } = useGetAddressById(id);
-
+  const { mutate: editMutate } = useEditAddress({});
+  const addressDetails = !isLoading && data?.addresses;
   const formik = useFormik({
     initialValues: {
-      district: '',
-      wardNumber: '',
-      city: '',
-      street: '',
-      province: '',
-      country: '',
-      temporaryAndPermanentAddressSame: '',
+      addresses: [
+        {
+          id: addressDetails[0]?.id || '',
+          country: addressDetails[0]?.country || '',
+          province: addressDetails[0]?.province || '',
+          district: addressDetails[0]?.district || '',
+          wardNumber: addressDetails[0]?.wardNumber || '',
+          city: addressDetails[0]?.city || '',
+          street: addressDetails[0]?.street || '',
+        },
+        {
+          id: addressDetails[1]?.id || '',
+          country: addressDetails[1]?.country || '',
+          province: addressDetails[1]?.province || '',
+          district: addressDetails[1]?.district || '',
+          wardNumber: addressDetails[1]?.wardNumber || '',
+          city: addressDetails[1]?.city || '',
+          street: addressDetails[1]?.street || '',
+        },
+      ],
     },
     validationSchema: AddressSchema,
+    enableReinitialize: 'true',
     onSubmit: (values) => {
-      handleRequest(values);
+      if (data?.addresses.length > 0) {
+        handleEditRequest(values);
+      } else {
+        handleRequest(values);
+      }
     },
   });
+
   const handleRequest = (values) => {
-    console.log('request', values);
     values = { ...values };
     permanentMutate(values);
   };
-  return { formik };
-};
 
-export const useTemporaryAddressForm = () => {
-  const { mutate: temporaryMutate } = useTemporaryAddress({});
-  const formik = useFormik({
-    initialValues: {
-      district: '',
-      wardNumber: '',
-      city: '',
-      street: '',
-      province: '',
-      country: '',
-    },
-    onSubmit: (values) => {
-      handleRequest(values);
-    },
-  });
-  const handleRequest = (values) => {
+  const handleEditRequest = (values) => {
     values = { ...values };
-    temporaryMutate(values);
+    editMutate(values);
   };
   return { formik };
 };

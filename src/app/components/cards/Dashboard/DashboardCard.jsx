@@ -1,20 +1,24 @@
-import React from 'react'
-import { Box, Card, Chip, Grid, Stack, Typography } from '@mui/material';
+import React from 'react';
+import { Grid, Stack, Typography } from '@mui/material';
 import MainCard from '../MainCard';
 
 const DashboardCard = ({ title, icon }) => {
   return (
-    <MainCard contentSX={{ p: 2.25 }}>
-      <Stack spacing={0.5}>
-        <Typography variant="h6" color="blue" align='center'>
-          {icon}
-        </Typography>
-        <Typography variant="h6" color="inherit" align='center'>
-          {title}
-        </Typography>
-      </Stack>
-    </MainCard>
-  )
-}
+    <Grid item xs={12} sm={6} md={3} lg={2}>
 
-export default DashboardCard
+      <MainCard grow={true}>
+        <Stack spacing={0.5}>
+          <Typography variant="h6" color="primary.main" align='center'>
+            {icon}
+          </Typography>
+          <Typography variant="h6" color="inherit" align='center'>
+            {title}
+          </Typography>
+        </Stack>
+      </MainCard>
+      </Grid>
+
+      );
+};
+
+      export default DashboardCard;

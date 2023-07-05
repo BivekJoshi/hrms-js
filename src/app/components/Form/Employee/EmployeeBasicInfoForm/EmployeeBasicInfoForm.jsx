@@ -4,18 +4,21 @@ import { useGetCompany } from '../../../../hooks/company/useCompany';
 import { useGetDesignation } from '../../../../hooks/designation/useDesignation';
 import { useGetDepartment } from '../../../../hooks/department/useDepartment';
 
-const gender = [
+const genderOptions = [
   {
     value: 'MALE',
     label: 'Male',
+    id: 1,
   },
   {
     value: 'FEMALE',
     label: 'Female',
+    id: 2,
   },
   {
     value: 'OTHERS',
     label: 'Others',
+    id: 3,
   },
 ];
 const maritalStatus = [
@@ -35,7 +38,10 @@ const EmployeeBasicInfoForm = ({ formik, isLoading }) => {
     useGetDesignation();
   const { data: departmentData, isLoading: loadingDepartment } =
     useGetDepartment();
-
+  const handleChange = (event) => {
+    formik.setFieldValue('gender', event.target.value);
+  };
+  
   return (
     !isLoading && (
       <Grid container spacing={3}>
@@ -60,7 +66,7 @@ const EmployeeBasicInfoForm = ({ formik, isLoading }) => {
             id='middleName'
             name='middleName'
             label='Middle Name'
-            placeholder='Enter your last name'
+            placeholder='Enter your middle name'
             fullWidth
             value={formik.values.middleName}
             onChange={formik.handleChange}
@@ -102,12 +108,12 @@ const EmployeeBasicInfoForm = ({ formik, isLoading }) => {
             error={formik.touched.gender && Boolean(formik.errors.gender)}
             helperText={formik.touched.gender && formik.errors.gender}
             variant='outlined'
-            autoFocus
+            onBlur={formik.handleBlur}
             InputLabelProps={{ shrink: true }}
           >
-            {gender.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
+            {genderOptions?.map((option) => (
+              <MenuItem key={option?.id} value={option?.value}>
+                {option?.label}
               </MenuItem>
             ))}
           </TextField>
@@ -256,7 +262,7 @@ const EmployeeBasicInfoForm = ({ formik, isLoading }) => {
             label='Company Name'
             placeholder='Select your company'
             fullWidth
-            value={formik.values.companyId}
+            value={!loadingCompany && formik.values.companyId}
             onChange={formik.handleChange}
             error={formik.touched.companyId && Boolean(formik.errors.companyId)}
             helperText={formik.touched.companyId && formik.errors.companyId}
@@ -266,8 +272,8 @@ const EmployeeBasicInfoForm = ({ formik, isLoading }) => {
           >
             {!loadingCompany &&
               companyData.map((option) => (
-                <MenuItem key={option.id} value={option.id}>
-                  {option.companyName}
+                <MenuItem key={option?.id} value={option?.id}>
+                  {option?.companyName}
                 </MenuItem>
               ))}
           </TextField>
@@ -280,7 +286,7 @@ const EmployeeBasicInfoForm = ({ formik, isLoading }) => {
             label='Designation'
             placeholder='Select your designation'
             fullWidth
-            value={formik.values.positionId}
+            value={!loadingDesignation && formik.values.positionId}
             onChange={formik.handleChange}
             error={
               formik.touched.positionId && Boolean(formik.errors.positionId)
@@ -306,7 +312,7 @@ const EmployeeBasicInfoForm = ({ formik, isLoading }) => {
             label='Department Name'
             placeholder='Select your department'
             fullWidth
-            value={formik.values.departmentId}
+            value={!loadingDepartment && formik.values.departmentId}
             onChange={formik.handleChange}
             error={
               formik.touched.departmentId && Boolean(formik.errors.departmentId)

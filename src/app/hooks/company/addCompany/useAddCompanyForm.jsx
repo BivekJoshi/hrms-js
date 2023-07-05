@@ -1,6 +1,6 @@
 import { useFormik } from 'formik';
 import { useAddCompany } from '../useCompany';
-import { addCompanySchema } from './addCompanySchema';
+import { CompanySchema } from '../Validation/CompanySchema';
 
 const useAddCompanyForm = () => {
     const { mutate } = useAddCompany({});
@@ -11,7 +11,7 @@ const useAddCompanyForm = () => {
             companyType: '',
             companyDescription: '',
         },
-        validationSchema: addCompanySchema,
+        validationSchema: CompanySchema,
         onSubmit: (values) => {
             handleRequest(values);
         },

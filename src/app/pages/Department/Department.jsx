@@ -1,60 +1,95 @@
 import * as React from 'react';
-import { useGetDepartment } from '../../hooks/department/useDepartment';
-
+import { useState } from 'react';
 import MaterialTable from '@material-table/core';
+import { Box, Button, Stack } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 
-import { Box, Button } from '@mui/material';
-import DepartmentForm from '../../components/Form/Department/DepartmentForm';
-import FormModal from '../../components/Modal/FormModal';
 
+import { useDeleteDepartment, useGetDepartment } from '../../hooks/department/useDepartment';
+import { AddDepartmentModal, EditDepartmentModal } from './DepartmentModal/DepartmentModal';
+import DeleteConfirmationModal from '../../components/Modal/DeleteConfirmationModal';
 
-const columns = [
-	{
-		title: 'SN',
-		render: (rowData) => rowData.tableData.id,
-		cellStyle: {
-			whiteSpace: 'nowrap', // Prevents content from wrapping
-		},
-		width: 80,
-	},
-	{
-		title: 'Department Name',
-		field: 'departmentName',
-		emptyValue: '-',
-		width: 250,
-	},
-	{
-		title: 'Department Type',
-		field: 'departmentType',
-		emptyValue: '-',
-		width: 200,
-	},
-	{
-		title: 'Description',
-		field: 'departmentDescription',
-		emptyValue: '-',
-	},
-];
 
 const Department = () => {
-	const [openModal, setOpenModal] = React.useState(false);
-
-	const handleOpenModal = () => setOpenModal(true);
-	const handleCloseModal = () => setOpenModal(false);
-
 	const { data: departmentData, isLoading } = useGetDepartment();
+	
+	const [openAddModal, setOpenAddModal] = useState(false);
+	const [openEditModal, setOpenEditModal] = useState(false);
+	const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
+	const [editedDepartment, setEditedDepartment] = useState({});
+	const [deletedDepartment, setDeletedDepartment] = useState({});
 
+	const handleAddOpenModal = () => setOpenAddModal(true);
+	const handleCloseAddModal = () => setOpenAddModal(false);
+
+	const handleCloseEditModal = () => setOpenEditModal(false);
+	const handleCloseDeleteModal = () => setOpenDeleteModal(false);
+
+	const deleteDepartmentMutation = useDeleteDepartment({});
+	const handleDeleteDepartment = (rowData) => {
+		setDeletedDepartment(rowData);
+		setOpenDeleteModal(true);
+	};
+
+	const handleConfirmDelete = () => {
+		deleteDepartmentMutation.mutate(deletedDepartment.id);
+		setOpenDeleteModal(false);
+	};
+
+	const handleEditDepartment = (rowData) => {
+		setEditedDepartment(rowData);
+		setOpenEditModal(true);
+	};
+	const columns = [
+		{
+			title: 'SN',
+			render: (rowData) => rowData.tableData.index + 1,
+			width: 80,
+			sortable: false,
+		},
+		{
+			title: 'Department Name',
+			field: 'departmentName',
+			emptyValue: '-',
+			width: 250,
+		},
+		{
+			title: 'Department Type',
+			field: 'departmentType',
+			emptyValue: '-',
+			width: 200,
+		},
+		{
+			title: 'Description',
+			field: 'departmentDescription',
+			emptyValue: '-',
+		},
+		{
+			title: 'Actions',
+			render: (rowData) => (
+				<Stack direction="row" spacing={0}>
+					<Button color="primary" onClick={() => handleEditDepartment(rowData)}>
+						<ModeEditOutlineIcon />
+					</Button>
+					<Button color="primary" onClick={() => handleDeleteDepartment(rowData)}>
+						<DeleteIcon />
+					</Button>
+				</Stack>
+			),
+			sorting: false,
+			width: 120,
+		},
+	];
 	if (isLoading) return <>Loading</>;
 	return (
 		<>
-			<div>
-				<Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-					<Button variant='contained' sx={{ mt: 3, ml: 1 }} onClick={handleOpenModal}>
-						+Add Department
-					</Button>
-				</Box>
-			</div>
+			<Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+				<Button variant='contained' sx={{ mt: 3, ml: 1 }} onClick={handleAddOpenModal}>
+					+Add Department
+				</Button>
+			</Box>
 			<br>
 			</br>
 
@@ -79,14 +114,29 @@ const Department = () => {
 						fontSize: 18,
 					},
 				}}
-				onRowDoubleClick={(_event, rowData) => handleDoubleClickRow(rowData)}
 			/>
 
-			<FormModal
-				open={openModal}
-				onClose={handleCloseModal}
-				formComponent={<DepartmentForm onClose={handleCloseModal} />}
-			/>
+			{openEditModal && (
+				<EditDepartmentModal
+					id={editedDepartment?.id}
+					open={openEditModal}
+					handleCloseModal={handleCloseEditModal}
+				/>
+			)}
+			{openAddModal && (
+				<AddDepartmentModal
+					open={openAddModal}
+					handleCloseModal={handleCloseAddModal}
+				/>
+			)}
+			{openDeleteModal && (
+				<DeleteConfirmationModal
+					open={openDeleteModal}
+					handleCloseModal={handleCloseDeleteModal}
+					handleConfirmDelete={handleConfirmDelete}
+					message={"Department"}
+				/>
+			)}
 		</>
 	);
 };

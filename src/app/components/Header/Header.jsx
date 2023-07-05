@@ -1,11 +1,15 @@
 // Header.js
-import React from 'react';
+import React, { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import { Badge } from "@mui/material";
+import { CakeOutlined } from "@mui/icons-material";
+import TodayBirthday from "../../pages/Birthday/TodayBirthday";
+import { useGetTodayBirthday } from "../../hooks/birthday/useBirthday";
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
@@ -25,6 +29,13 @@ const AppBar = styled(MuiAppBar, {
 }));
 
 export default function Header({ open, handleDrawerOpen }) {
+  const [openNotification, setOpenNotification] = useState(false); // Moved inside the component function
+  const { data, isLoading } = useGetTodayBirthday();
+
+  const handleChange = () => {
+    setOpenNotification(!openNotification);
+  };
+
   return (
     <AppBar position='fixed' open={open}>
       <Toolbar>
@@ -40,6 +51,35 @@ export default function Header({ open, handleDrawerOpen }) {
         <Typography variant='h6' noWrap component='div'>
           Human Resource Management System
         </Typography>
+        <div
+          style={{
+            Color: "white",
+            display: "flex",
+            position: "absolute",
+            right: "100px",
+            top: "30px",
+            width: "30px",
+          }}
+        >
+          <Badge color="secondary" badgeContent={data?.length}>
+            <CakeOutlined
+              id="basic-button"
+              aria-controls={open ? "basic-menu" : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? "true" : undefined}
+              onClick={handleChange}
+              style={{ color: "white", cursor: "pointer" }}
+            />
+          </Badge>
+          {openNotification && (
+            <TodayBirthday
+              data={data}
+              isLoading={isLoading}
+              open={openNotification}
+              setOpen={setOpenNotification}
+            />
+          )}
+        </div>
       </Toolbar>
     </AppBar>
   );
