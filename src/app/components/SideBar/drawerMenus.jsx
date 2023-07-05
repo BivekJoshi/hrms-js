@@ -80,23 +80,6 @@ export const drawerMenus = [
     subMenus: [],
   },
   {
-    name: 'Promotion History',
-    icon: <BusinessIcon style={{ color: primaryColor }} />,
-    path: 'promotionHistory',
-    subMenus: [],
-  },
-  // {
-  //   name: 'Employee Overview',
-  //   icon: (
-  //     <PlaylistAddCheckIcon
-  //       style={{ color: primaryColor }}
-  //       fontSize='large'
-  //     />
-  //   ),
-  //   path: 'practice',
-  //   subMenus: [],
-  // }
-  {
     name: "Project",
     icon: <AddchartIcon style={{ color: primaryColor }} />,
     path: "project",
