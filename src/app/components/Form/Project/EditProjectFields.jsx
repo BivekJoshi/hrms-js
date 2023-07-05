@@ -96,7 +96,7 @@ const EditProjectFields = ({ onClose, isLoading, data }) => {
                     <TextField
                         id="taskStatus"
                         name="taskStatus"
-                        select
+                    
                         label="Project Status"
                         placeholder="enter project status"
                         fullWidth
