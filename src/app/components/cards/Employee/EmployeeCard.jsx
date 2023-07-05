@@ -24,6 +24,7 @@ const EmployeeCard = ({
   ELastName,
   OfficeEmail,
   MobileNumber,
+  Position
 }) => {
   //dropdown menu
   const [open, setOpen] = useState(false);
@@ -175,7 +176,7 @@ const EmployeeCard = ({
           </p>
           <Box padding={"0 1rem"}>
             <Typography variant="body2" gutterBottom>
-              <Chip label="Intern" style={{ width: 230 }} />
+              <Chip label={Position} style={{ width: 230 }} />
             </Typography>
           </Box>
         </div>
