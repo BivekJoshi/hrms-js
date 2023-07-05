@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import MaterialTable from "@material-table/core";
-import { Box, Button, Stack } from "@mui/material";
+import { Box, Button, Chip, Stack } from "@mui/material";
 import Skeleton from "@mui/material/Skeleton";
 
 import {
@@ -17,14 +17,14 @@ const TodoList = () => {
   const { data: todoListData, isLoading } = useGetTodoList();
 
   const [openAddModal, setOpenAddModal] = useState(false);
-	const [openEditModal, setOpenEditModal] = useState(false);
+  const [openEditModal, setOpenEditModal] = useState(false);
 
-	const [editedTodo, setEditedTodo] = useState({});
+  const [editedTodo, setEditedTodo] = useState({});
 
-	const handleAddOpenModal = () => setOpenAddModal(true);
-	const handleCloseAddModal = () => setOpenAddModal(false);
+  const handleAddOpenModal = () => setOpenAddModal(true);
+  const handleCloseAddModal = () => setOpenAddModal(false);
 
-	const handleCloseEditModal = () => setOpenEditModal(false);
+  const handleCloseEditModal = () => setOpenEditModal(false);
 
   const deleteTodoListMutation = useDeleteTodoList({});
 
@@ -38,9 +38,63 @@ const TodoList = () => {
   };
 
   const columns = [
-    { title: "SN", field: "id", width: 80 },
-    { title: "Message", field: "message", width: 80 },
-    { title: "UserID", field: "userId", width: 80 },
+    {
+      title: 'SN',
+      render: (rowData) => rowData.tableData.index + 1,
+      width: 80,
+      sortable: false,
+    },
+    {
+      title: "Message",
+      field: "message",
+      width: 80
+    },
+    {
+      title: "Due",
+      field: "dueDate",
+      width: 80,
+      type: 'numeric',
+    },
+    // {
+    //   title: "priority",
+    //   field: "priority",
+    //   width: 80
+    // },
+    // {
+    //   title: "status",
+    //   field: "status",
+    // },
+    {
+      title: 'priority',
+      field: 'priority',
+      emptyValue: '-',
+      width: 100,
+      cellStyle: {
+        whiteSpace: 'nowrap',
+      },
+      render: (rowData) => {
+        const priority = rowData.priority;
+        let chipColor = "";
+
+        if (priority === "HIGH") {
+          chipColor = "green";
+        } else if (priority === "MEDIUM") {
+          chipColor = "red";
+        } else if (priority === "LOW") {
+          chipColor = "orange";
+        }
+
+        return (
+          <Chip label={priority} style={{ backgroundColor: chipColor, color: "white", width: ' 9rem' }} />
+        );
+      },
+
+    },
+    // {
+    //   title: "UserID",
+    //   field: "userId",
+    //   width: 80
+    // },
     {
       title: "Actions",
       render: (rowData) => (
@@ -64,9 +118,9 @@ const TodoList = () => {
   if (isLoading)
     return (
       <>
-          <Skeleton />
-          <Skeleton animation="wave" />
-          <Skeleton animation={false} />
+        <Skeleton />
+        <Skeleton animation="wave" />
+        <Skeleton animation={false} />
       </>
     );
 
