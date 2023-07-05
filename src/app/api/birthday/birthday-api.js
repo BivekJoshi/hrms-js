@@ -19,3 +19,8 @@ export const removeNotification = async () => {
   const data = await axiosInstance.put(`/birthday-notification/check-birthday`);
   return data;
 };
+
+export const remmoveNotification = async () => {
+  const data = await axiosInstance.put(`/birthday-notification/check-birthday`);
+  return data;
+};

@@ -26,8 +26,8 @@ const Birthdaytable = ({ data, isloading, currMonth }) => {
       return {
         // fullName: `${row.firstName} ${row.middleName === null ? "" : row.middleName
         //   } ${row.lastName}`,
-        fullName: `${row.fullName}`,
-        position: row?.positionName || "",
+        fullName:`${row.fullName}`,
+        position: row?.positionName || '',
         dateOfBirth: format(new Date(row.dateOfBirth), "dd MMMM", {
           locale: enUS,
         }),
