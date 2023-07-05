@@ -1,20 +1,20 @@
-import * as React from 'react';
-import { useState } from 'react';
-import MaterialTable from '@material-table/core';
-import { Box, Button, Stack } from '@mui/material';
+import * as React from "react";
+import { useState } from "react";
+import MaterialTable from "@material-table/core";
+import { Box, Button, Stack } from "@mui/material";
 
-import DeleteIcon from '@mui/icons-material/Delete';
-import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
+import DeleteIcon from "@mui/icons-material/Delete";
+import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 
 import {
   useDeleteDesignation,
   useGetDesignation,
-} from '../../hooks/designation/useDesignation';
+} from "../../hooks/designation/useDesignation";
 import {
   AddDesignationModal,
   EditDesignationModal,
-} from './DesignationModal/DesignationModal';
-import DeleteConfirmationModal from '../../components/Modal/DeleteConfirmationModal';
+} from "./DesignationModal/DesignationModal";
+import DeleteConfirmationModal from "../../components/Modal/DeleteConfirmationModal";
 
 const Designation = () => {
   const { data: designationData, isLoading } = useGetDesignation();
@@ -50,46 +50,46 @@ const Designation = () => {
 
   const columns = [
     {
-      title: 'SN',
+      title: "SN",
       render: (rowData) => rowData.tableData.index + 1,
       width: 80,
       sortable: false,
     },
     {
-      title: 'Designation Name',
-      field: 'positionName',
-      emptyValue: '-',
+      title: "Designation Name",
+      field: "positionName",
+      emptyValue: "-",
       width: 200,
     },
     {
-      title: 'Designation Level',
-      field: 'positionLevel',
-      emptyValue: '-',
+      title: "Designation Level",
+      field: "positionLevel",
+      emptyValue: "-",
       width: 100,
     },
     {
-      title: 'Salary',
-      field: 'salary',
-      emptyValue: '-',
+      title: "Salary",
+      field: "salary",
+      emptyValue: "-",
       width: 200,
     },
     {
-      title: 'Details',
-      field: 'positionDetails',
-      emptyValue: '-',
+      title: "Details",
+      field: "positionDetails",
+      emptyValue: "-",
     },
     {
-      title: 'Actions',
+      title: "Actions",
       render: (rowData) => (
-        <Stack direction='row' spacing={0}>
+        <Stack direction="row" spacing={0}>
           <Button
-            color='primary'
+            color="primary"
             onClick={() => handleEditDesignation(rowData)}
           >
             <ModeEditOutlineIcon />
           </Button>
           <Button
-            color='primary'
+            color="primary"
             onClick={() => handleDeleteDesignation(rowData)}
           >
             <DeleteIcon />
@@ -104,9 +104,9 @@ const Designation = () => {
 
   return (
     <>
-      <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
         <Button
-          variant='contained'
+          variant="contained"
           sx={{ mt: 3, ml: 1 }}
           onClick={handleAddOpenModal}
         >
@@ -119,18 +119,18 @@ const Designation = () => {
       <MaterialTable
         columns={columns}
         data={designationData}
-        title=''
+        title=""
         isLoading={isLoading}
         options={{
-          padding: 'dense',
+          padding: "dense",
           margin: 50,
           pageSize: 12,
           emptyRowsWhenPaging: false,
           headerStyle: {
-            backgroundColor: '#1c7ed6',
-            color: '#FFF',
+            backgroundColor: "#1c7ed6",
+            color: "#FFF",
             fontSize: 20,
-            padding: 'dense',
+            padding: "dense",
             height: 50,
           },
           rowStyle: {
@@ -163,4 +163,5 @@ const Designation = () => {
     </>
   );
 };
+
 export default Designation;

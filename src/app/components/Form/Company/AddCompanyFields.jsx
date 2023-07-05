@@ -1,7 +1,7 @@
-import React from 'react';
-import { Grid, TextField, Button } from '@mui/material';
-import { toast } from 'react-toastify';
-import useAddCompanyForm from '../../../hooks/company/addCompany/useAddCompanyForm';
+import { Grid, TextField, Button } from "@mui/material";
+import React from "react";
+import { toast } from "react-toastify";
+import useAddCompanyForm from "../../../hooks/company/addCompany/useAddCompanyForm";
 
 const AddCompanyFields = ({ onClose, isLoading }) => {
   const { formik } = useAddCompanyForm();
@@ -20,7 +20,7 @@ const AddCompanyFields = ({ onClose, isLoading }) => {
         });
         onClose(); // Close the modal
       } else {
-        toast.error('Please make sure you have filled the form correctly');
+        toast.error("Please make sure you have filled the form correctly");
       }
     }
   };
@@ -37,7 +37,9 @@ const AddCompanyFields = ({ onClose, isLoading }) => {
             fullWidth
             value={formik.values.companyName}
             onChange={formik.handleChange}
-            error={formik.touched.companyName && Boolean(formik.errors.companyName)}
+            error={
+              formik.touched.companyName && Boolean(formik.errors.companyName)
+            }
             helperText={formik.touched.companyName && formik.errors.companyName}
             variant="outlined"
             autoFocus
@@ -53,7 +55,9 @@ const AddCompanyFields = ({ onClose, isLoading }) => {
             fullWidth
             value={formik.values.companyType}
             onChange={formik.handleChange}
-            error={formik.touched.companyType && Boolean(formik.errors.companyType)}
+            error={
+              formik.touched.companyType && Boolean(formik.errors.companyType)
+            }
             helperText={formik.touched.companyType && formik.errors.companyType}
             variant="outlined"
             autoFocus
@@ -74,7 +78,8 @@ const AddCompanyFields = ({ onClose, isLoading }) => {
               Boolean(formik.errors.companyDescription)
             }
             helperText={
-              formik.touched.companyDescription && formik.errors.companyDescription
+              formik.touched.companyDescription &&
+              formik.errors.companyDescription
             }
             variant="outlined"
             autoFocus
@@ -87,10 +92,19 @@ const AddCompanyFields = ({ onClose, isLoading }) => {
           justifyContent="flex-end"
           alignItems="flex-end"
         >
-          <Button variant="contained" onClick={onClose} sx={{ mt: 3, ml: 1 }} color="error">
+          <Button
+            variant="contained"
+            onClick={onClose}
+            sx={{ mt: 3, ml: 1 }}
+            color="error"
+          >
             Cancel
           </Button>
-          <Button variant="contained" onClick={handleFormSubmit} sx={{ mt: 3, ml: 1 }}>
+          <Button
+            variant="contained"
+            onClick={handleFormSubmit}
+            sx={{ mt: 3, ml: 1 }}
+          >
             Add Company
           </Button>
         </Grid>

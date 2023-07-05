@@ -1,38 +1,38 @@
-import React, { useContext, useState } from 'react';
-import { styled, useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import Divider from '@mui/material/Divider';
-import List from '@mui/material/List';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import Collapse from '@mui/material/Collapse';
-import { NavLink, Outlet, useNavigate } from 'react-router-dom';
-import { ExpandLess, ExpandMore } from '@mui/icons-material';
-import { Button, Card, Fab, Switch, Typography } from '@mui/material';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import IconButton from '@mui/material/IconButton';
+import React, { useContext, useState } from "react";
+import { styled, useTheme } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import Drawer from "@mui/material/Drawer";
+import Divider from "@mui/material/Divider";
+import List from "@mui/material/List";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import Collapse from "@mui/material/Collapse";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { ExpandLess, ExpandMore } from "@mui/icons-material";
+import { Button, Card, Fab, Switch, Typography } from "@mui/material";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import IconButton from "@mui/material/IconButton";
 
-import { removeUser } from '../../utils/cookieHelper';
-import { drawerMenus } from './drawerMenus';
-import { ThemeModeContext } from '../../../theme/ThemeModeContext';
-import Header from '../Header/Header';
-import BreadCrumbs from '../../../routes/routes';
+import { removeUser } from "../../utils/cookieHelper";
+import { drawerMenus } from "./drawerMenus";
+import { ThemeModeContext } from "../../../theme/ThemeModeContext";
+import Header from "../Header/Header";
+import BreadCrumbs from "../../../routes/routes";
 
 const drawerWidth = 260;
 
-const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
+const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
   ({ theme, open }) => ({
     flexGrow: 1,
     padding: theme.spacing(3),
-    transition: theme.transitions.create('margin', {
+    transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
     marginLeft: `-${drawerWidth}px`,
     ...(open && {
-      transition: theme.transitions.create('margin', {
+      transition: theme.transitions.create("margin", {
         easing: theme.transitions.easing.easeOut,
         duration: theme.transitions.duration.enteringScreen,
       }),
@@ -52,13 +52,13 @@ const StyledNavLink = styled(NavLink)`
   }
 `;
 
-const DrawerHeader = styled('div')(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
+const DrawerHeader = styled("div")(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
   padding: theme.spacing(0, 1),
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
-  justifyContent: 'flex-end',
+  justifyContent: "flex-end",
 }));
 
 export default function Sidebar() {
@@ -83,7 +83,7 @@ export default function Sidebar() {
   };
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: "flex" }}>
       <Header
         open={open}
         handleDrawerOpen={handleDrawerOpen}
@@ -93,13 +93,13 @@ export default function Sidebar() {
         sx={{
           width: drawerWidth,
           flexShrink: 0,
-          '& .MuiDrawer-paper': {
+          "& .MuiDrawer-paper": {
             width: drawerWidth,
-            boxSizing: 'border-box',
+            boxSizing: "border-box",
           },
         }}
-        variant='persistent'
-        anchor='left'
+        variant="persistent"
+        anchor="left"
         open={open}
       >
         <DrawerHeader>
@@ -125,8 +125,8 @@ export default function Sidebar() {
                 </ListItemButton>
               </StyledNavLink>
               {menu.subMenus.length > 0 && (
-                <Collapse in={subMenuOpen[index]} timeout='auto' unmountOnExit>
-                  <List component='div' disablePadding>
+                <Collapse in={subMenuOpen[index]} timeout="auto" unmountOnExit>
+                  <List component="div" disablePadding>
                     {menu.subMenus.map((subMenu, subIndex) => (
                       <StyledNavLink key={subIndex} to={subMenu.path}>
                         <ListItemButton sx={{ pl: 4 }}>
@@ -144,41 +144,41 @@ export default function Sidebar() {
         <Divider />
         <Box
           sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            padding: '10px',
-            flexDirection: 'column',
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            padding: "10px",
+            flexDirection: "column",
           }}
         >
           <Button
-            variant='contained'
-            sx={{ backgroundColor: '#1c7ed6' }}
+            variant="contained"
+            sx={{ backgroundColor: "#1c7ed6" }}
             onClick={() => {
               removeUser(navigate);
             }}
           >
             Logout
           </Button>
-          <Typography variant='body2' sx={{ marginRight: '8px' }}>
-            {themeMode === 'light' ? 'Light' : 'Dark'} Mode
+          <Typography variant="body2" sx={{ marginRight: "8px" }}>
+            {themeMode === "light" ? "Light" : "Dark"} Mode
           </Typography>
-          <Switch checked={themeMode === 'dark'} onChange={toggleMode} />
+          <Switch checked={themeMode === "dark"} onChange={toggleMode} />
         </Box>
       </Drawer>
 
       <Main open={open}>
         <DrawerHeader />
         <Card
-          variant='outlined'
+          variant="outlined"
           sx={{
-            width: '100%',
-            maxWidth: '100%',
-            padding: '20px',
-            boxSizing: 'border-box',
-            '@media (min-width: 600px)': {
-              maxWidth: 'calc(100% - drawerWidth)',
-              width: open ? 'calc(100% - drawerWidth)' : '100%',
+            width: "100%",
+            maxWidth: "100%",
+            padding: "20px",
+            boxSizing: "border-box",
+            "@media (min-width: 600px)": {
+              maxWidth: "calc(100% - drawerWidth)",
+              width: open ? "calc(100% - drawerWidth)" : "100%",
             },
           }}
         >
@@ -192,7 +192,8 @@ export default function Sidebar() {
             variant="extended"
             onClick={() => {
               navigate(-1);
-            }}>
+            }}
+          >
             Go Back
           </Fab>
         </Card>

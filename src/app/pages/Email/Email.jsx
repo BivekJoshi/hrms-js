@@ -1,24 +1,14 @@
 import React, { useState } from "react";
-import { Button, Grid, Modal, TextField } from "@mui/material";
-import { useParams } from "react-router-dom";
-import { useSendEmail } from "../../hooks/email/useEmail";
+import { useSendEmail } from "../../hooks/Email/useemail";
 
-function EmailForm({ employeeId, onClose, officeEmail }) {
-  console.log("here", employeeId);
-  // console.log("hello", data);
+function EmailForm() {
   const [emailData, setEmailData] = useState({
-    to: officeEmail || "",
+    to: "",
     subject: "",
-    message: "",
-  });
-  console.log(emailData);
-
-  const [errors, setErrors] = useState({
-    to: false,
-    message: false,
+    body: "",
   });
 
-  const { mutate } = useSendEmail({ employeeId });
+  const { mutate } = useSendEmail();
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -30,106 +20,61 @@ function EmailForm({ employeeId, onClose, officeEmail }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (validateForm()) {
-      console.log("Sending email:", emailData);
 
-      mutate(emailData);
+    console.log("Sending email:", emailData);
 
-      setEmailData({
-        to: "",
-        subject: "",
-        message: "",
-      });
+    mutate(emailData);
 
-      setErrors({
-        to: false,
-        subject: false,
-      });
-    }
-  };
-
-  const validateForm = () => {
-    let isValid = true;
-    const updatedErrors = { ...errors };
-
-    if (emailData.to.trim() === "") {
-      updatedErrors.to = true;
-      isValid = false;
-    } else {
-      updatedErrors.to = false;
-    }
-
-    if (emailData.message.trim() === "") {
-      updatedErrors.message = true;
-      isValid = false;
-    } else {
-      updatedErrors.message = false;
-    }
-
-    setErrors(updatedErrors);
-    return isValid;
+    setEmailData({
+      to: "",
+      subject: "",
+      body: "",
+    });
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2>Email</h2>
-      <div style={{ width: "400px" }}>
-        <Grid container spacing={2}>
-          <Grid item xs={10}>
-            <TextField
-              fullWidth
-              label="To"
-              name="to"
-              value={emailData.to}
-              onChange={handleInputChange}
-              error={errors.to}
-              helperText={errors.to ? "To is required" : ""}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              label="Subject"
-              name="subject"
-              value={emailData.subject}
-              onChange={handleInputChange}
-            />
-          </Grid>
-        </Grid>
-        <Grid container spacing={1} style={{ marginTop: "20px" }}>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              multiline
-              rows={12}
-              cols={100}
-              label="Body"
-              name="message"
-              value={emailData.message}
-              onChange={handleInputChange}
-              error={errors.message}
-              helperText={errors.message ? "message is required" : ""}
-            />
-          </Grid>
-        </Grid>
-        <div style={{ marginTop: "20px", columnGap: "20px", display: "flex" }}>
-          <Button
-            type="button"
-            variant="contained"
-            color="primary"
-            onClick={onClose}
-            style={{ marginLeft: "10px" }}
-          >
-            Cancel
-          </Button>
-          <Button type="submit" variant="contained" color="primary">
-            Send
-          </Button>
+      <div style={{ display: "flex", columnGap: "25px", lineHeight: "40px" }}>
+        <div style={{ display: "grid", rowGap: "25px" }}>
+          <label>To:</label>
+          <label>Subject:</label>
+        </div>
+        <div style={{ display: "grid", rowGap: "25px", width: "400px" }}>
+          <input
+            type="text"
+            name="to"
+            value={emailData.to}
+            onChange={handleInputChange}
+          />
+          <input
+            type="text"
+            name="subject"
+            value={emailData.subject}
+            onChange={handleInputChange}
+          />
         </div>
       </div>
+      <div
+        style={{
+          display: "flex",
+          columnGap: "43px",
+          lineHeight: "40px",
+          marginTop: "20px",
+        }}
+      >
+        <label>Body:</label>
+        <textarea
+          style={{ width: "400px" }}
+          type="text"
+          name="body"
+          value={emailData.body}
+          onChange={handleInputChange}
+        ></textarea>
+      </div>
+      <br />
+      <button type="submit">Send Email</button>
     </form>
   );
-  console.log(emailData);
 }
 
 export default EmailForm;
