@@ -1,19 +1,24 @@
 import MaterialTable from "@material-table/core";
-import React, {useState} from "react";
-import { useAddActivateProject, useGetDeactivatedProject } from "../../../hooks/project/useProject";
+import React, { useState } from "react";
+import {
+  useAddActivateProject,
+  useGetDeactivatedProject,
+} from "../../../hooks/project/useProject";
 import { useGetEmployee } from "../../../hooks/employee/useEmployee";
 import { useGetProjectEmployeeById } from "../../../hooks/project/projectEmployee/useProjectEmployee";
 import { Box, Button, Grid, Stack } from "@mui/material";
-import ActiveConfirmationModal from '../../../components/Modal/ActivateConfirmationModal';
+import ActiveConfirmationModal from "../../../components/Modal/ActivateConfirmationModal";
+import { AddProjectActiveModal } from "../ProjectModal/ProjectModal";
+
 
 const DeactivatedProject = () => {
   const { data: deactivatedProject, isLoading } = useGetDeactivatedProject();
   const { data: employeeData } = useGetEmployee();
 
-  const [activeProject, setActiveProject] = useState({});
-	const [openActiveModal, setOpenActiveModal] = useState(false);
-    const handleCloseActiveModal = () => setOpenActiveModal(false);
-
+  const [openActivateModal, setOpenActivateModal] = useState(false);
+  const [activateProject, setActivateProject] = useState({});
+  const handleCloseActivateModal = () => setOpenActivateModal(false);
+  
 
   const getLeaderName = (rowData) => {
     const projectId = rowData.projectLeaderId;
@@ -31,6 +36,11 @@ const DeactivatedProject = () => {
   const handleConfirmActive = () => {
     ActiveProjectEmployeeMutation.mutate(activeProject.id);
     setOpenActiveModal(false);
+  };
+
+  const handleActivateProject = (rowData) => {
+    setActivateProject(rowData);
+    setOpenActivateModal(true);
   };
 
   const columns = [
@@ -57,7 +67,11 @@ const DeactivatedProject = () => {
       title: "Action",
       render: (rowData) => (
         <Stack direction="row" spacing={0}>
-          <Button variant="contained" color="primary" onClick={() => handleActiveProject(rowData)}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => handleActivateProject(rowData)}
+          >
             Activate Project
           </Button>
         </Stack>
@@ -94,12 +108,11 @@ const DeactivatedProject = () => {
         }}
       />
 
-      {openActiveModal && (
-        <ActiveConfirmationModal
-          open={openActiveModal}
-          handleCloseModal={handleCloseActiveModal}
-          handleConfirmActive={handleConfirmActive}
-          message={"Activate"}
+      {openActivateModal && (
+        <AddProjectActiveModal
+          id={activateProject?.id}
+          open={openActivateModal}
+          handleCloseModal={handleCloseActivateModal}
         />
       )}
     </>

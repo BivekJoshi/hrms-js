@@ -18,7 +18,12 @@ import {
   useDeleteProject,
   useGetProject,
 } from "../../hooks/project/useProject";
-import { AddProjectActiveModal, AddProjectModal, DeactivateProjectModal, EditProjectModal } from "./ProjectModal/ProjectModal";
+import {
+  AddProjectActiveModal,
+  AddProjectModal,
+  DeactivateProjectModal,
+  EditProjectModal,
+} from "./ProjectModal/ProjectModal";
 import { useNavigate } from "react-router-dom";
 import { useGetEmployee } from "../../hooks/employee/useEmployee";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
@@ -37,6 +42,7 @@ const Project = () => {
   const [openDeactivateModal, setOpenDeactiveModal] = useState(false);
 
   const [editedProject, setEditedProject] = useState({});
+  const [activateProject, setActivateProject] = useState({});
   const [deactivateProject, setDeactivateProject] = useState({});
 
   const handleAddOpenModal = () => setOpenAddModal(true);
@@ -46,7 +52,13 @@ const Project = () => {
   const handleCloseAddActiveModal = () => setOpenAddActiveModal(false);
 
   const handleCloseEditModal = () => setOpenEditModal(false);
+  const handleCloseActivateModal = () => setOpenActiveModal(false);
   const handleCloseDeactivateModal = () => setOpenDeactiveModal(false);
+
+  const handleActivateProject = (item) => {
+    setActivateProject(item);
+    setOpenActiveModal(true);
+  };
 
   const handleDeactivateProject = (item) => {
     setDeactivateProject(item);
@@ -71,7 +83,7 @@ const Project = () => {
     <>
       <Box>
         <Typography
-        className="project-button"
+          className="project-button"
           variant="h4"
           sx={{
             display: "flex",
@@ -80,14 +92,16 @@ const Project = () => {
           }}
         >
           On-Going Projects
-          <Typography>
+          <Typography className="project-button-inner">
             <Button variant="contained" onClick={handleAddOpenModal}>
               +Add Project
             </Button>
             <Button
               variant="contained"
               sx={{ marginLeft: "4px" }}
-              onClick={() => {navigate(`get-deactivated-projects`)}}
+              onClick={() => {
+                navigate(`get-deactivated-projects`);
+              }}
             >
               In-Active Project
             </Button>
@@ -224,13 +238,6 @@ const Project = () => {
         <AddProjectModal
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
-        />
-      )}
-
-      {openAddActiveModal && (
-        <AddProjectActiveModal
-          open={openAddActiveModal}
-          handleCloseModal={handleCloseAddActiveModal}
         />
       )}
 

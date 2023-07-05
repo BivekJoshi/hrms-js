@@ -22,15 +22,15 @@ export const getDeactivatedProject = async () => {
 
 {/*________________________EDIT-TO-ACTIVATE-PROJECT_____________________________________*/ }
 export const addActiveProject = async (formData) => {
-    const { id } = formData;
-    const data = await axiosInstance.post(`/project/activate/${id}`, formData);
+    const { projectId } = formData;
+    const data = await axiosInstance.put(`/project/change-activation-status/${projectId}?isActive=true`);
     return data;
 };
 
 {/*________________________EDIT-TO-DE-ACTIVATE-PROJECT_____________________________________*/ }
 export const removeActiveProject = async (formData) => {
-    const { id } = formData;
-    const data = await axiosInstance.put(`/project/change-activation-status/${id}`, formData);
+    const { projectId } = formData;
+    const data = await axiosInstance.put(`/project/change-activation-status/${projectId}?isActive=false`);
     return data;
 };
 
@@ -47,8 +47,8 @@ export const editProject = async (formData) => {
     return data;
 };
 
-{/*________________________DELETE_____________________________________*/ }
-export const deleteProject = async (id) => {
-    const data = await axiosInstance.delete(`/project/deactivate/${id}`);
-    return data;
-};
+// {/*________________________DELETE_____________________________________*/ }
+// export const deleteProject = async (id) => {
+//     const data = await axiosInstance.delete(`/project/deactivate/${id}`);
+//     return data;
+// };
