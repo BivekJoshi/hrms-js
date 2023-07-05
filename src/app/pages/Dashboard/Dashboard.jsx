@@ -15,7 +15,8 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
-import { useGetDashboard } from "../../hooks/dashboard/useDashboard";
+import { useGetDashboard, useGetProjectStatus } from "../../hooks/dashboard/useDashboard";
+import MainCard from "../../components/cards/MainCard";
 
 ChartJS.register(
   CategoryScale,
@@ -27,8 +28,11 @@ ChartJS.register(
 );
 
 const Dashboard = () => {
-  const { data: dashboardData, isLoading: loadingDashboard } =
-    useGetDashboard();
+  const { data: dashboardData, isLoading: loadingDashboard } =  useGetDashboard();
+  const { data: projectStatusData } = useGetProjectStatus();
+
+  console.log(projectStatusData)
+ 
   const options = {
     responsive: true,
     plugins: {
@@ -107,6 +111,14 @@ const Dashboard = () => {
               }
             })}
         </Card>
+        {/* <MainCard>
+        {Object.keys(projectStatusData).map(([key, value]) => (
+        <div key={key} className="card">
+          <span>{key}: </span>
+          <span>{value}</span>
+        </div>
+      ))}
+        </MainCard> */}
       </Typography>
     </>
   );

@@ -109,6 +109,8 @@ const routes = [
     path: "holiday",
     id: nanoid(),
     component: <Holiday />,
+  },
+  {
     path: "Email",
     id: nanoid(),
     component: <EmailForm />,
