@@ -1,17 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Email, LocalPhone } from "@mui/icons-material";
-import {
-  Box,
-  Button,
-  Card,
-  CardMedia,
-  Chip,
-  ClickAwayListener,
-  Grow,
-  Stack,
-} from "@mui/material";
+import { Box, Button, Card, CardMedia } from "@mui/material";
+import { Chip, ClickAwayListener, Grow, Stack } from "@mui/material";
 import { MenuItem, MenuList, Paper, Popper, Typography } from "@mui/material";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import Image1 from "../../../../assets/wave.png";
 
@@ -24,6 +16,7 @@ const EmployeeCard = ({
   ELastName,
   OfficeEmail,
   MobileNumber,
+  Position,
 }) => {
   //dropdown menu
   const [open, setOpen] = useState(false);
@@ -70,6 +63,7 @@ const EmployeeCard = ({
       style={{
         textAlign: "center",
         padding: ".5rem",
+        borderRadius: "1rem",
       }}
     >
       <Box display="flex" justifyContent={"end"}>
@@ -160,7 +154,7 @@ const EmployeeCard = ({
         </p>
         <Box padding={"0 1rem"}>
           <Typography variant="body2" gutterBottom>
-            <Chip label="Intern" style={{ width: 230 }} />
+            <Chip label={Position} style={{ width: 230 }} />
           </Typography>
         </Box>
       </div>

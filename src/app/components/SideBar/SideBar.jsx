@@ -173,7 +173,7 @@ export default function Sidebar() {
           variant='outlined'
           sx={{
             width: open ? 'calc(100% - drawerWidth)' : '100%',
-            padding: '20px',
+            // padding: '20px',
           }}
         >
           <Outlet />

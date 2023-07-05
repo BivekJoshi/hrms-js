@@ -1,10 +1,12 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App.jsx';
-import './index.css';
-import { QueryClient, QueryClientProvider } from 'react-query';
-import { ThemeContextProvider } from './theme/ThemeModeContext.jsx';
-import ErrorBoundary from './app/utils/ErrorBoundary.jsx';
+import React from "react";
+import ReactDOM from "react-dom/client";
+// import { Provider } from "react-redux";
+// import {store} from "./Redux/Store/index.js";
+import App from "./App.jsx";
+import "./index.css";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ThemeContextProvider } from "./theme/ThemeModeContext.jsx";
+import ErrorBoundary from "./app/utils/ErrorBoundary.jsx";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -13,14 +15,16 @@ const queryClient = new QueryClient({
   },
 });
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <ErrorBoundary>
-      <QueryClientProvider client={queryClient}>
-        <ThemeContextProvider>
-          <App />
-        </ThemeContextProvider>
-      </QueryClientProvider>
-    </ErrorBoundary>
-  </React.StrictMode>
+ReactDOM.createRoot(document.getElementById("root")).render(
+  // <Provider store={store}>
+    <React.StrictMode>
+      <ErrorBoundary>
+        <QueryClientProvider client={queryClient}>
+          <ThemeContextProvider>
+            <App />
+          </ThemeContextProvider>
+        </QueryClientProvider>
+      </ErrorBoundary>
+    </React.StrictMode>
+  // </Provider>
 );

@@ -8,12 +8,12 @@ import EmployeeBasicInfoForm from "../../components/Form/Employee/EmployeeBasicI
 import useAddEmployeeForm from "../../hooks/employee/AddEmployee/useAddEmployeeForm";
 import { toast } from "react-toastify";
 import EmployeeCard from "../../components/cards/Employee/EmployeeCard";
+import { PagePagination } from "../../components/Pagination/PagePagination";
 
 const Employee = () => {
   const [openAddModal, setOpenAddModal] = useState(false);
   const { data: employeeData, isLoading } = useGetEmployee();
   const { formik } = useAddEmployeeForm();
-
   const style = {
     position: "absolute",
     top: "50%",
@@ -27,7 +27,7 @@ const Employee = () => {
   };
   if (isLoading) return <>Loading</>;
   return (
-    <>
+    <Box padding="1rem">
       {/* // <div>{employeeData[0].firstName}</div> */}
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
         <Button
@@ -44,9 +44,10 @@ const Employee = () => {
         useFlexGap
         flexWrap="wrap"
       >
-        {employeeData.map((employee, index) => (
+        {employeeData.employees.map((employee, index) => (
           <Box key={index}>
             <EmployeeCard
+              key={index}
               IsActive={employee.isActive}
               EmployeeId={employee.id}
               EFirstName={employee.firstName}
@@ -54,6 +55,7 @@ const Employee = () => {
               ELastName={employee.lastName}
               OfficeEmail={employee?.officeEmail}
               MobileNumber={employee?.mobileNumber}
+              Position={employee?.position?.positionName}
             />
           </Box>
         ))}
@@ -87,7 +89,15 @@ const Employee = () => {
           </Box>
         </Box>
       </Modal>
-    </>
+      {/* <Box padding="2rem">
+        <PagePagination 
+        Count={employeeData.totalPages}
+        // Page={2} 
+        OnChange={employeeData?.pageNumber}
+        onPageChange={employeeData?.pageNumber}
+        />
+      </Box> */}
+    </Box>
   );
 };
 
