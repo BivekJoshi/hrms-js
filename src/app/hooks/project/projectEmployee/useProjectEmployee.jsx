@@ -28,9 +28,9 @@ export const useAddProjectEmployee = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(["addProjectEmployee"], (formData) => addProjectEmployee(formData), {
     onSuccess: (data, variables, context) => {
-      toast.success("Project added successfully");
+      toast.success("Employee added successfully");
       onSuccess && onSuccess(data, variables, context);
-      queryClient.invalidateQueries("getProjectEmployeeById");
+      queryClient.invalidateQueries("getProjectEmployee");
     },
     onError: (err, _variables, _context) => {
       toast.error(`error: ${err.message}`);
@@ -73,3 +73,4 @@ export const useDeleteProjectEmployee = ({ onSuccess }) => {
     }
   );
 };
+

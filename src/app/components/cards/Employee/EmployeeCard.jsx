@@ -16,7 +16,7 @@ import Image1 from "../../../../assets/wave.png";
 import MainCard from "../MainCard";
 import EmailModal from "../../../pages/Email/EmailModal";
 const EmployeeCard = ({
-  key,
+    key,
   IsActive,
   EmployeeId,
   EFirstName,

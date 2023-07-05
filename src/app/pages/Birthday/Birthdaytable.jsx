@@ -10,10 +10,10 @@ const Age = (dateOfBirth) => {
   return age;
 };
 
-const Birthdaytable = ({ data, isLoading, currMonth }) => {
+const Birthdaytable = ({ data, isloading, currMonth }) => {
   const today = new Date();
   const Data = data
-    .map((row, i) => {
+    ?.map((row, i) => {
       const currentYear = new Date().getFullYear();
       let empBday = row.dateOfBirth.split("-");
       const bdayThisYear = `${currentYear}-${empBday[1]}-${empBday[2]}`;
@@ -22,7 +22,7 @@ const Birthdaytable = ({ data, isLoading, currMonth }) => {
         dateOfBirth.getMonth() === today.getMonth() &&
         dateOfBirth.getDate() === today.getDate();
       const age = Age(row.dateOfBirth);
-
+      console.log(data[0].positionName);
       return {
         // fullName: `${row.firstName} ${row.middleName === null ? "" : row.middleName
         //   } ${row.lastName}`,
@@ -55,7 +55,7 @@ const Birthdaytable = ({ data, isLoading, currMonth }) => {
       title={currMonth}
       columns={[
         { title: "Name", field: "fullName" },
-        { title: "Position", field: "positionName" },
+        { title: "Position", field: "position" },
         { title: "Date", field: "dateOfBirth" },
         { title: "Day", field: "dayOfBirth" },
         { title: "Age", field: "age" },
@@ -63,7 +63,7 @@ const Birthdaytable = ({ data, isLoading, currMonth }) => {
       ]}
       data={Data}
       options={{
-        padding: 'dense',
+        padding: "dense",
         margin: 50,
         pageSize: 5,
         emptyRowsWhenPaging: false,

@@ -1,16 +1,16 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import { ProjectSchema } from '../validation/ProjectSchema';
-import { useAddActivateProject } from '../useProject';
+import { useActiveProject, useDeleteProject } from '../useProject';
 
-const useAddProjectActiveForm = () => {
-    const { mutate } = useAddActivateProject({});
-
+export const useRemoveActiveProject = (data) => {
+    const { mutate } = useDeleteProject({});
+   
     const formik = useFormik({
         initialValues: {
-            projectLeadId: "",
+            projectId: data?.id || "",
         },
-        validationSchema: ProjectSchema,
+        enableReinitialize: "true",
         onSubmit: (values) => {
             handleRequest(values);
         },
@@ -20,10 +20,31 @@ const useAddProjectActiveForm = () => {
         values = {
             ...values,
         };
-        mutate(values, formik, { onSuccess: () => formik.handleReset() });
+        mutate(values, formik);
     };
 
     return { formik };
 };
 
-export default useAddProjectActiveForm;
+export const useAddActiveProject = (data) => {
+    
+    const { mutate } = useActiveProject({});
+    const formik = useFormik({
+        initialValues: {
+            projectId: data || "",
+        },
+        enableReinitialize: "true",
+        onSubmit: (values) => {
+            handleRequest(values);
+        },
+    });
+
+    const handleRequest = (values) => {
+        values = {
+            ...values,
+        };
+        mutate(values, formik);
+    };
+
+    return { formik };
+};

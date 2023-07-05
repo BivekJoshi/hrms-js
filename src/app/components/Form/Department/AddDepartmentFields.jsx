@@ -7,7 +7,6 @@ const AddDepartmentFields = ({ onClose, isLoading }) => {
 	const { formik } = useAddDepartmentForm();
 
 	const handleFormSubmit = () => {
-		
 		formik.handleSubmit();
 
 		if (formik.isValid) {

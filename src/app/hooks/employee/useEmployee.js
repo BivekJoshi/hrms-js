@@ -36,7 +36,7 @@ export const useEditEmployee = ({ onSuccess }) => {
     },
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Employee edited successfully');
+        toast.success("Employee edited successfully");
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries('getEmployeeById');
       },

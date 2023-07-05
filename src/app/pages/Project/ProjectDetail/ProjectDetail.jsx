@@ -11,14 +11,15 @@ import { Box, Button, Grid, Stack } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import DeleteConfirmationModal from '../../../components/Modal/DeleteConfirmationModal';
 import { AddProjectEmployeeModal } from "../ProjectEmployee/ProjectEmployeeModal/ProjectEmployeeModal";
+import { useGetProject } from "../../../hooks/project/useProject";
 
 
 const ProjectDetail = () => {
   const { id } = useParams();
-  const { data: projectEmployeeData, isLoading } =
-    useGetProjectEmployeeById(id);
+  const { data: projectEmployeeData, isLoading } = useGetProjectEmployeeById(id);
   const { data: employeeData } = useGetEmployee();
-  
+  const { data: projectData } = useGetProject();
+
 	const [openAddModal, setOpenAddModal] = useState(false);
 
   const handleAddOpenModal = () => setOpenAddModal(true);
@@ -31,15 +32,15 @@ const ProjectDetail = () => {
 
   const getEmployeeName = (rowData) => {
     const employeeId = rowData.employeeId;
-    const employee = employeeData?.find((emp) => emp.id === employeeId);
-    const name = `${employee.firstName} ${employee.middleName} ${employee.lastName}`;
+    const employee = employeeData?.find((emp) => emp.id == employeeId);
+    const name = `${employee?.firstName} ${employee?.lastName}`;
     return name;
   };
 
   const getLeaderName = (rowData) => {
     const projectId = rowData.projectId;
-    const employee = employeeData?.find((emp) => emp.id === projectId);
-    const name = `${employee.firstName} ${employee.middleName} ${employee.lastName}`;
+    const project = projectData?.find((prj) => prj.id == projectId);
+    const name = `${project?.projectName}`;
     return name;
   };
 
@@ -87,7 +88,7 @@ const ProjectDetail = () => {
       width: 80,
     },
     {
-      title: "project Leader",
+      title: "project Name",
       field: "projectId",
       render: (rowData) => {
         return <p>{getLeaderName(rowData)}</p>;

@@ -3,7 +3,8 @@ import FormModal from "../../../components/Modal/FormModal"
 import AddProjectFields from "../../../components/Form/Project/AddProjectFields";
 import AddProjectActiveFields from "../../../components/Form/Project/AddProjectActiveFields";
 import EditProjectFields from '../../../components/Form/Project/EditProjectFields';
-import { useGetProjectById } from '../../../hooks/project/useProject';
+import { useGetDeactivatedProject, useGetProjectById } from '../../../hooks/project/useProject';
+import {EditProjectDeactivateFields, EditProjectActivateFields} from '../../../components/Form/Project/EditProjectDeactivateFields';
 
 export const AddProjectModal = ({open, handleCloseModal}) => {
     return(
@@ -15,16 +16,6 @@ export const AddProjectModal = ({open, handleCloseModal}) => {
     )
 }
 
-export const AddProjectActiveModal = ({open, handleCloseModal, id}) => {
-    const { data } = useGetProjectById(id)
-    return(
-        <FormModal
-            open={open}
-            onClose={handleCloseModal}
-            formComponent={<AddProjectActiveFields onClose={handleCloseModal} data={data} />}
-        />
-    )
-}
 
 export const EditProjectModal = ({ open, handleCloseModal, id }) => {
     const { data } = useGetProjectById(id);
@@ -34,6 +25,29 @@ export const EditProjectModal = ({ open, handleCloseModal, id }) => {
                 open={open}
                 onClose={handleCloseModal}
                 formComponent={<EditProjectFields onClose={handleCloseModal} data={data} />} />
+        </div>
+    )
+}
+
+
+export const AddProjectActiveModal = ({open, handleCloseModal, id}) => {
+    return(
+        <FormModal
+            open={open}
+            onClose={handleCloseModal}
+            formComponent={<EditProjectActivateFields onClose={handleCloseModal} data={id} />}
+        />
+    )
+}
+
+export const DeactivateProjectModal = ({ open, handleCloseModal, id }) => {
+    const { data } = useGetProjectById(id);
+    return (
+        <div>
+            <FormModal
+                open={open}
+                onClose={handleCloseModal}
+                formComponent={<EditProjectDeactivateFields onClose={handleCloseModal} data={data} />} />
         </div>
     )
 }
