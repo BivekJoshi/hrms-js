@@ -19,6 +19,7 @@ export const useGetProject = () => {
   });
 };
 
+
 /*________________________GET_____________________________________*/
 export const useGetDeactivatedProject = (id) => {
   return useQuery(["getDeactivatedProject",id], () => getDeactivatedProject(id), {

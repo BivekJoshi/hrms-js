@@ -5,7 +5,6 @@ import "./index.css";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ThemeContextProvider } from "./theme/ThemeModeContext.jsx";
 import ErrorBoundary from "./app/utils/ErrorBoundary.jsx";
-import { BirthdayContext } from "./Usecontext/BirthdayContext.jsx";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -19,9 +18,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <ErrorBoundary>
       <QueryClientProvider client={queryClient}>
         <ThemeContextProvider>
-          <BirthdayContext>
             <App />
-          </BirthdayContext>
         </ThemeContextProvider>
       </QueryClientProvider>
     </ErrorBoundary>

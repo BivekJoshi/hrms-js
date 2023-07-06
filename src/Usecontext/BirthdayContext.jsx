@@ -2,7 +2,8 @@ import React, { createContext, useEffect, useReducer } from "react";
 import { useGetTodayBirthday } from "../app/hooks/birthday/useBirthday";
 import BirthdayReducer, { initialState } from "./BirthdayReducer";
 export const RemoveNotificationContext = createContext();
-export const BirthdayContext = ({ children }) => {
+export const 
+BirthdayContext = ({ children }) => {
   const { data } = useGetTodayBirthday();
   const [notificationState, dispatch] = useReducer(
     BirthdayReducer,

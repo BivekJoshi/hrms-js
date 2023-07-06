@@ -5,7 +5,8 @@ export const getDashboard = async () => {
   return data;
 };
 
-export const getProjectStatus = async () => {
+{/*________________________GET-PROJECT_COUNT_____________________________________*/ }
+export const getProjectCount = async () => {
   const data = await axiosInstance.get(`/project/count`);
   return data;
 };
