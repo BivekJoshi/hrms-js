@@ -4,19 +4,22 @@ import { toast } from "react-toastify";
 import { getUser } from "../app/utils/cookieHelper";
 
 export const axiosInstance = Axios.create({
-  // baseURL: 'http://10.14.14.251:8484/hrms/api/',
+  baseURL: 'http://10.14.15.14:8484/hrms/api/',
   // baseURL: 'http://10.14.15.156:8484/hrms/api/',
   // baseURL: 'http://localhost:8484/hrms/api/',
+<<<<<<< HEAD
   baseURL: 'http://10.14.15.156:8484/hrms/api/',
+=======
+  // baseURL: "http://10.14.15.4:8484/hrms/api/",
+>>>>>>> f6de41a995c1bf692dd5e1645e796d11aa203cd9
   timeout: 20000,
 });
 
 axiosInstance.interceptors.request.use(function (config) {
   const data = getUser();
-
   config.withCredentials = false;
-  if (data) {
-    config.headers["Authorization"] = "Bearer " + data?.token;
+  if (data !== null) {
+    config.headers["Authorization"] = "Bearer " + data;
   }
 
   return config;

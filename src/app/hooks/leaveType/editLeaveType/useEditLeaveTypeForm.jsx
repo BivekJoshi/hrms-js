@@ -10,7 +10,7 @@ const useEditLeaveTypeForm = (data) => {
             leaveName: data?.leaveName || '',
             leaveTotal: data?.leaveTotal || '',
             leaveDescription: data?.leaveDescription || '',
-            isCarryForward: data?.isCarryForward || '',
+            isCarryForward: data?.isCarryForward || false,
             id: data?.id,
         },
         validationSchema: LeaveTypeSchema,

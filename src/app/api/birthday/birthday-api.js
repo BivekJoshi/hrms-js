@@ -1,10 +1,7 @@
 import { axiosInstance } from "../../../auth/axiosInterceptor";
 
 export const getTodayBirthday = async () => {
-  const data = await axiosInstance.get(
-    `/birthday-notification/today-birthdays`
-  );
-
+  const data = await axiosInstance.get(`/birthday-notification/today-birthdays`);
   return data;
 };
 
