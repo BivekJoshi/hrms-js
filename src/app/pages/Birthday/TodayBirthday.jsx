@@ -6,22 +6,6 @@ import { NavLink } from "react-router-dom";
 import SideBar from "../../components/SideBar/SideBar";
 
 const TodayBirthday = ({ open, setOpen, data, isLoading }) => {
-  // const checkTodayBirthdays = () => {
-  //   const today = new Date();
-  //   const formattedToday = `${today.getMonth() + 1}-${today.getDate()}`;
-
-  //   const birthdays = TodayBirthdayData
-  //     ? TodayBirthdayData.filter((employee) => {
-  //         const date = new Date(employee.dateOfBirth);
-  //         const month = date.getMonth() + 1;
-  //         const day = date.getDate();
-  //         const outputDate = `${month}-${day}`;
-  //         return outputDate === formattedToday;
-  //       })
-  //     : [];
-
-  // setTodayBirthdays(birthdays);
-
   const handleClose = () => {
     setOpen(false);
   };

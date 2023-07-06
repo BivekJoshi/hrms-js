@@ -1,25 +1,15 @@
-import Cookies from 'js-cookie';
-
-const COOKIE_NAME = 'hrms';
+const STORAGE_KEY = "hrms";
 
 export const setUser = (data) => {
-  Cookies.set(COOKIE_NAME, JSON.stringify(data), {
-    expires: 3,
-    secure: true,
-    sameSite: 'strict',
-  });
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
 };
 
 export const getUser = () => {
-  const data = Cookies.get(COOKIE_NAME);
-  if (data) {
-    return JSON.parse(data);
-  }
-  return null;
+  return JSON.parse(localStorage.getItem(STORAGE_KEY));
 };
-export const removeUser = (navigate) => {
-  Cookies.remove(COOKIE_NAME);
-  sessionStorage.removeItem(COOKIE_NAME);
+
+export const removeUser = () => {
+  localStorage.removeItem(STORAGE_KEY);
+  sessionStorage.removeItem(STORAGE_KEY);
   sessionStorage.clear();
-  navigate('/');
 };
