@@ -7,7 +7,7 @@ const ProtectedRoute = ({ redirectTo }) => {
   const user = getUser();
   useEffect(() => {
     if (!user || !user.token) {
-      removeUser();
+      removeUser(navigate);
       navigate('/');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

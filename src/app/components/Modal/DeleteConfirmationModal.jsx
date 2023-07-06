@@ -22,7 +22,7 @@ const DeleteConfirmationModal = ({ open, handleCloseModal, handleConfirmDelete, 
                     disabled={isLoading}
                     startIcon={isLoading ? <CircularProgress size={20} /> : null}
                 >
-                    {isLoading ? 'Deleting...' : 'Delete'}
+                    {isLoading ? 'Deleting...' : 'Confirm'}
                 </Button>
             </DialogActions>
         </Dialog>

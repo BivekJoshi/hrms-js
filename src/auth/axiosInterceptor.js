@@ -4,16 +4,15 @@ import { toast } from "react-toastify";
 import { getUser } from "../app/utils/cookieHelper";
 
 export const axiosInstance = Axios.create({
-  // baseURL: 'http://10.14.14.251:8484/hrms/api/',
+  baseURL: 'http://10.14.15.14:8484/hrms/api/',
   // baseURL: 'http://10.14.15.156:8484/hrms/api/',
   // baseURL: 'http://localhost:8484/hrms/api/',
-  baseURL: 'http://10.14.14.146:8484/hrms/api/',
+  // baseURL: 'http://10.14.14.146:8484/hrms/api/',
   timeout: 20000,
 });
 
 axiosInstance.interceptors.request.use(function (config) {
   const data = getUser();
-
   config.withCredentials = false;
   if (data) {
     config.headers["Authorization"] = "Bearer " + data?.token;
@@ -35,7 +34,7 @@ axiosInstance.interceptors.response.use(
         errorMessage === "invalid_or_missing_token" ||
         errorMessage === "user_disabled"
       ) {
-        removeUser();
+        // removeUser();
         window.location.replace("/login");
         return Promise.reject(error);
       } else if (errorMessage === "access_denied_no_permission") {

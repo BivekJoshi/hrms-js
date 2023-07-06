@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import MaterialTable from '@material-table/core';
 import { Box, Button, Stack } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -11,6 +11,8 @@ import { AddLeaveTypeModal, EditLeaveTypeModal } from './LeaveTypeModal/LeaveTyp
 
 const LeaveType = () => {
 	const { data: leaveTypeData, isLoading } = useGetLeaveType();
+
+	const [existingLeaveTypes, setExistingLeaveTypes] = useState([]);
 
 	const [openAddModal, setOpenAddModal] = useState(false);
 	const [openEditModal, setOpenEditModal] = useState(false);
@@ -32,6 +34,12 @@ const LeaveType = () => {
 		setOpenEditModal(true);
 	};
 
+	useEffect(() => {
+		if (leaveTypeData) {
+			const leaveNames = leaveTypeData.map((leaveType) => leaveType.leaveName);
+			setExistingLeaveTypes(leaveNames);
+		}
+	}, [leaveTypeData]);
 
 	const columns = [
 		{
@@ -79,7 +87,8 @@ const LeaveType = () => {
 			sorting: false,
 			width: 120,
 		},
-	]
+	];
+	
 	if (isLoading) return <>Loading</>;
 	return (
 		<>
@@ -120,9 +129,11 @@ const LeaveType = () => {
 				<AddLeaveTypeModal
 					open={openAddModal}
 					handleCloseModal={handleCloseAddModal}
+					existingLeaveTypes={existingLeaveTypes}
 				/>
 			)}
 		</>
 	);
 };
+
 export default LeaveType;

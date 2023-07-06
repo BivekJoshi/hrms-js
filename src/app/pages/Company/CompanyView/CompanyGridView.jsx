@@ -16,18 +16,6 @@ const CompanyGridView = ({ companyData, isLoading, handleEditCompany, handleDele
 
   return (
     <>
-      <Box>
-        <Typography
-          variant="h6"
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            marginBottom: "1.2rem",
-          }}
-        >
-          Company List
-        </Typography>
-      </Box>
       <Grid
         container
         item
@@ -45,9 +33,9 @@ const CompanyGridView = ({ companyData, isLoading, handleEditCompany, handleDele
                 display: "flex",
                 justifyContent: "space-around",
               }}
-              title={item.companyName}
+              title={item?.companyName}
             />
-            <CardContent sx={{display: "flex", flexDirection: "column", gap: "1rem", overflow: "auto", height: "6rem"}}>
+            <CardContent sx={{ display: "flex", flexDirection: "column", gap: "1rem", overflow: "auto", height: "5rem" }}>
               <Typography variant="h5">{item?.companyType || null}</Typography>
               <Typography variant="p">{item?.companyDescription || null}</Typography>
             </CardContent>
@@ -58,16 +46,33 @@ const CompanyGridView = ({ companyData, isLoading, handleEditCompany, handleDele
                 marginTop: "0.4rem"
               }}
             >
-              <Button variant="contained" color="primary" onClick={() => handleEditCompany(item)}>
-                Edit
-              </Button>
-              <Button variant="contained" color="error" onClick={() => handleDeleteCompany(item)}>
-                Delete
-              </Button>
+
+              <Grid
+                container
+                direction="row"
+                justifyContent="flex-end"
+                alignItems="flex-end"
+              >
+                <Button
+                  variant="outlined"
+                  onClick={() => handleDeleteCompany(item)}
+                  sx={{ mt: 3, ml: 1 }}
+                  color="error"
+                >
+                  Delete
+                </Button>
+                <Button
+                  variant="contained"
+                  onClick={() => handleEditCompany(item)}
+                  sx={{ mt: 3, ml: 1 }}
+                >
+                  Edit
+                </Button>
+              </Grid>
             </CardActions>
           </Card>
         ))}
-        
+
       </Grid>
     </>
   );

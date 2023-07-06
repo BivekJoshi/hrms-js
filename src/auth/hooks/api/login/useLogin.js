@@ -11,12 +11,11 @@ export const useLogin = ({ onSuccess }) => {
     ({ email, password }) => login(email, password),
     {
       onSuccess: (data, variables, context) => {
-        navigate('/admin/dashboard');
         toast.success('Login Successful');
-
         setUser({
           token: data,
         });
+        navigate('/admin/dashboard');
       },
     }
   );

@@ -14,6 +14,7 @@ import {
   useRemoveNotification,
   // useRemoveNotification,
 } from "../../hooks/birthday/useBirthday";
+import { BirthdayContext } from "../../../Usecontext/BirthdayContext";
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -85,14 +86,16 @@ export default function Header({ open, handleDrawerOpen }) {
               style={{ color: "white", cursor: "pointer" }}
             />
           </Badge>
-          {openNotification && (
-            <TodayBirthday
-              data={data}
-              isLoading={isLoading}
-              open={openNotification}
-              setOpen={setOpenNotification}
-            />
-          )}
+          {/* <BirthdayContext> */}
+            {openNotification && (
+              <TodayBirthday
+                data={data}
+                isLoading={isLoading}
+                open={openNotification}
+                setOpen={setOpenNotification}
+              />
+            )}
+          {/* </BirthdayContext> */}
         </div>
       </Toolbar>
     </AppBar>
