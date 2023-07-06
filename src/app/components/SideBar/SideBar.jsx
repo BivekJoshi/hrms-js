@@ -155,7 +155,8 @@ export default function Sidebar() {
             variant="contained"
             sx={{ backgroundColor: "#1c7ed6" }}
             onClick={() => {
-              removeUser(navigate);
+              removeUser();
+              navigate("/");
             }}
           >
             Logout

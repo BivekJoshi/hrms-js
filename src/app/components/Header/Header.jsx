@@ -14,7 +14,7 @@ import {
   useRemoveNotification,
   // useRemoveNotification,
 } from "../../hooks/birthday/useBirthday";
-import { BirthdayContext } from "../../../Usecontext/BirthdayContext";
+// import { BirthdayContext } from "../../../Usecontext/BirthdayContext";
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -35,7 +35,9 @@ const AppBar = styled(MuiAppBar, {
 
 export default function Header({ open, handleDrawerOpen }) {
   const [openNotification, setOpenNotification] = useState(false); // Moved inside the component function
-  const { data, isLoading } = useGetTodayBirthday();
+  // const { data, isLoading } = useGetTodayBirthday();
+  const data = [0];
+  const isLoading = false;
 
   const { mutate } = useRemoveNotification();
   const handleChange = () => {

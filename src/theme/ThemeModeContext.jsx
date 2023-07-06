@@ -1,25 +1,27 @@
-import { responsiveFontSizes, ThemeProvider, createTheme } from '@mui/material';
+import { responsiveFontSizes, ThemeProvider, createTheme } from "@mui/material";
 import React, {
   createContext,
   useCallback,
   useEffect,
   useMemo,
   useState,
-} from 'react';
+} from "react";
 
 export const ThemeModeContext = createContext({
   toggleMode: () => {},
-  mode: 'light',
-  isMobile: 'false',
+  mode: "light",
+  isMobile: "false",
   toggleMobile: () => {},
 });
 
 export const ThemeContextProvider = ({ children }) => {
-  const [isDarkMode, setIsDarkMode] = useState(
-    window.matchMedia &&
-      window.matchMedia('(prefers-color-scheme: dark)').matches
-  );
-  const [mode, setMode] = useState(isDarkMode ? 'dark' : 'light');
+  // const [isDarkMode, setIsDarkMode] = useState(
+  //   window.matchMedia &&
+  //     window.matchMedia('(prefers-color-scheme: dark)').matches
+  // );
+
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [mode, setMode] = useState("light");
   const [width, setWidth] = useState(window.innerWidth);
   const [isMobile, setIsMobile] = useState(width <= 768);
 
@@ -29,14 +31,14 @@ export const ThemeContextProvider = ({ children }) => {
   }, [width]);
 
   useEffect(() => {
-    window.addEventListener('resize', handleWindowSizeChange);
+    window.addEventListener("resize", handleWindowSizeChange);
     return () => {
-      window.removeEventListener('resize', handleWindowSizeChange);
+      window.removeEventListener("resize", handleWindowSizeChange);
     };
   }, [handleWindowSizeChange]);
 
   const toggleMode = useCallback(() => {
-    setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+    setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
     setIsDarkMode((prevMode) => !prevMode);
   }, []);
 
@@ -52,28 +54,28 @@ export const ThemeContextProvider = ({ children }) => {
 
   let theme = createTheme({
     palette: {
-      mode: isDarkMode ? 'dark' : 'light',
+      mode: isDarkMode ? "dark" : "light",
       primary: {
-        main: '#1c7ed6',
-        light: '#f0ca92',
-        dark: '#cd7539',
+        main: "#1c7ed6",
+        light: "#f0ca92",
+        dark: "#cd7539",
       },
       secondary: {
-        main: '#418fdd',
-        light: '#75baf0',
-        dark: '#336cb8',
+        main: "#418fdd",
+        light: "#75baf0",
+        dark: "#336cb8",
       },
       background: {
-        default: isDarkMode ? '#303030' : '#f8f8f8',
-        paper: isDarkMode ? '#424242' : '#fff',
-        imageCaption: isDarkMode ? '#c5c7cb' : '#616161',
+        default: isDarkMode ? "#303030" : "#f8f8f8",
+        paper: isDarkMode ? "#424242" : "#fff",
+        imageCaption: isDarkMode ? "#c5c7cb" : "#616161",
       },
       text: {
-        primary: isDarkMode ? '#fff' : '#000',
-        secondary: isDarkMode ? '#bdbdbd' : '#616161',
-        white: '#fff',
+        primary: isDarkMode ? "#fff" : "#000",
+        secondary: isDarkMode ? "#bdbdbd" : "#616161",
+        white: "#fff",
       },
-      divider: isDarkMode ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.12)',
+      divider: isDarkMode ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.12)",
     },
   });
 
