@@ -81,7 +81,7 @@ const Dashboard = () => {
     responsive: true,
     plugins: {
       legend: {
-        position: "top",
+        position: "right",
       },
       title: {
         display: true,
@@ -111,41 +111,18 @@ const Dashboard = () => {
     ],
   };
 
-  const pieChartData = {
-    labels,
-    datasets: [
-      {
-        label: "Dataset 2",
-        data: dashboardData,
-        backgroundColor: ["yellowgreen", "red", "green", "blue", "pink"],
-      },
-    ],
-  };
-
   const data = {
     labels,
     datasets: [
       {
         labels: "Data Pie Chart",
-        data: [200, 400, 500, 600, 700],
+        data: [`${dashboardData?.allEmployees}`, `${dashboardData?.allProjects}`,`${dashboardData?.newEmployees}`, `${dashboardData?.femaleEmployees}`, `${dashboardData?.newEmployees}`],
         backgroundColor: ["yellowgreen", "red", "green", "blue", "pink"],
         borderColor: ["yellowgreen", "red", "green", "blue", "pink"],
-        borderWidth: 1,
+        borderWidth: 3,
       }
     ]
   }
-
-  // const barChartRef = useRef(null);
-  // const pieChartRef = useRef(null);
-
-  // useEffect(() => {
-  //   // Destroy previous chart instances before rendering new ones
-  //   if (pieChartRef.current && pieChartRef.current.chartInstance) {
-  //     pieChartRef.current.chartInstance.destroy();
-  //   }
-  // }, [dashboardData]);
-
-
   return (
     <>
       <Grid container rowSpacing={4.5} columnSpacing={2.75}>
@@ -171,11 +148,11 @@ const Dashboard = () => {
 
       <EmployeeCount />
 
-      <Stack sx={{ display: "flex", justifyContent: "space-between" }}>
-        <Card sx={{ width: "500px" }}>
+      <Stack sx={{ display: "flex", flexDirection: "row", gap: "1rem" }}>
+        <Card sx={{ width: "600px" }}>
           <Bar options={barChartOptions} data={barChartData} />
         </Card>
-        <Card sx={{ width: "500px" }}>
+        <Card sx={{ width: "400px" }}>
           <Pie options={pieChartOptions} data={data} />
         </Card>
       </Stack>
