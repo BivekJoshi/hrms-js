@@ -9,16 +9,16 @@ import {
 } from "../../../../hooks/project/projectEmployee/useProjectEmployee";
 import { addProjectEmployee } from "../../../../api/project/projectEmployee-api";
 import useAddProjectEmployeeForm from "../../../../hooks/project/projectEmployee/addProjectEmployee/useAddProjectEmployeeForm";
-import { useGetProject } from "../../../../hooks/project/useProject";
+import { useGetProject, useGetProjectById } from "../../../../hooks/project/useProject";
 import { useParams } from "react-router-dom";
 
 const AddprojectEmployeeFields = ({ onClose, isLoading }) => {
-  //const { id } = useParams();
+  const { id } = useParams();
+  // console.log({"id" : id})
   const { data: employeeData, isLoading: loadingEmployee } = useGetEmployee();
   // const { data: projectEmployeeData } = useGetProjectEmployeeById(id);
   const { data: projectData, isLoading: loadingProject } = useGetProject();
-
-  console.log({ prjdata: projectData, empdata: employeeData });
+  const { data: projectDataById } = useGetProjectById();
   const { formik } = useAddProjectEmployeeForm();
 
   const handleFormSubmit = () => {
@@ -38,7 +38,7 @@ const AddprojectEmployeeFields = ({ onClose, isLoading }) => {
   };
 
   const getProjectName = (projectId) => {
-    const project = projectData.find((prj) => prj.id == projectId);
+    const project = projectData.find((prj) => prj.id === projectId);
     const name = project?.projectName;
     return name;
   };

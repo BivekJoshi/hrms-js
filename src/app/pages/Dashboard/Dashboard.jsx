@@ -116,7 +116,7 @@ const Dashboard = () => {
     datasets: [
       {
         labels: "Data Pie Chart",
-        data: [`${dashboardData?.allEmployees}`, `${dashboardData?.allProjects}`,`${dashboardData?.newEmployees}`, `${dashboardData?.femaleEmployees}`, `${dashboardData?.newEmployees}`],
+        data: [`${dashboardData?.allEmployees}`, `${dashboardData?.newEmployees}`, `${dashboardData?.maleEmployees}`,  `${dashboardData?.femaleEmployees}`, `${dashboardData?.allProjects}` ],
         backgroundColor: ["yellowgreen", "red", "green", "blue", "pink"],
         borderColor: ["yellowgreen", "red", "green", "blue", "pink"],
         borderWidth: 3,
@@ -180,7 +180,7 @@ const Dashboard = () => {
             <Stack sx={{ display: "flex", justifyContent: "space-between" }}>
               <Typography variant="h5">Total Project</Typography>
               <Typography variant="h6">
-                {(projectDataCount?.total / projectDataCount?.total) * 100}%
+                {Math.ceil((projectDataCount?.total / projectDataCount?.total) * 100)}%
               </Typography>
             </Stack>
             <BorderLinearProgress
@@ -189,9 +189,9 @@ const Dashboard = () => {
             />
 
             <Stack sx={{ display: "flex", justifyContent: "space-between" }}>
-              <Typography variant="h5">Complted Project</Typography>
+              <Typography variant="h5">Completed Project</Typography>
               <Typography variant="h6">
-                {(projectDataCount?.completed / projectDataCount?.total) * 100}%
+                {Math.ceil((projectDataCount?.completed / projectDataCount?.total) * 100)}%
               </Typography>
             </Stack>
             <BorderLinearProgress
@@ -202,7 +202,7 @@ const Dashboard = () => {
             <Stack sx={{ display: "flex", justifyContent: "space-between" }}>
               <Typography variant="h5">Pending Project</Typography>
               <Typography variant="h6">
-                {(projectDataCount?.pending / projectDataCount?.total) * 100}%
+                {Math.ceil((projectDataCount?.pending / projectDataCount?.total) * 100)}%
               </Typography>
             </Stack>
             <BorderLinearProgress
@@ -213,7 +213,7 @@ const Dashboard = () => {
             <Stack sx={{ display: "flex", justifyContent: "space-between" }}>
               <Typography variant="h5">Work In Progress</Typography>
               <Typography variant="h6">
-                {(projectDataCount?.workInProgress / projectDataCount?.total) * 100}%
+                {Math.ceil((projectDataCount?.workInProgress / projectDataCount?.total) * 100)}%
               </Typography>
             </Stack>
             <BorderLinearProgress
@@ -236,14 +236,14 @@ const Dashboard = () => {
         </CardContent> */}
       </Card>
 
-      <Card sx={{maxWidth: "500px", height: "400px", overflowY: "scroll"}}>
-        <CardHeader sx={{ color: "#2c2945" }} title="Projects" />
+      <Card sx={{maxWidth: "500px", height: "350px", overflowY: "scroll"}}>
+        <CardHeader sx={{ color: "#2c2945", fontSize: "1.4rem" }} title="Projects" />
         <CardContent>
-          <ListItem sx={{display: "flex", flexDirection: "column" }}>
+          <ListItem sx={{display: "flex", flexDirection: "column", alignItems: "baseline" }}>
             { projectData &&
               projectData.map((item,index)=> (
                 <List key={index} sx={{cursor: "pointer", "&:hover": {
-                  boxShadow: "0 0 4em 0px rgba(0, 0, 0, 0.4)"},}}>{item?.projectName}</List>
+                  boxShadow: "0 0 4em 0px rgba(0, 0, 0, 0.4)"}, listStyle: "inherit", display: "flex", alignItems: "center", gap: "1rem", color: "#2c2945", fontSize: "1.4rem" }}><p>{index + 1}</p>{item?.projectName}</List>
               ))
             }
           </ListItem>
