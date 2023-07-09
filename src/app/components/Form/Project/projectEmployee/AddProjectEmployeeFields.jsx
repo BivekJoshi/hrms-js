@@ -18,7 +18,8 @@ const AddprojectEmployeeFields = ({ onClose, isLoading }) => {
   const { data: employeeData, isLoading: loadingEmployee } = useGetEmployee();
   // const { data: projectEmployeeData } = useGetProjectEmployeeById(id);
   const { data: projectData, isLoading: loadingProject } = useGetProject();
-  const { data: projectDataById } = useGetProjectById();
+  const { data: projectDataById } = useGetProjectById(id);
+  console.log(projectDataById)
   const { formik } = useAddProjectEmployeeForm();
 
   const handleFormSubmit = () => {
@@ -36,13 +37,7 @@ const AddprojectEmployeeFields = ({ onClose, isLoading }) => {
       toast.error("Please make sure you have filled the form correctly");
     }
   };
-
-  const getProjectName = (projectId) => {
-    const project = projectData.find((prj) => prj.id === projectId);
-    const name = project?.projectName;
-    return name;
-  };
-
+  
   // const getProjectName = (projectId) => {
   //   const project = projectData.find((prj) => prj.id == projectId );
   //   const name = `${project?.projectName}`;
@@ -81,25 +76,25 @@ const AddprojectEmployeeFields = ({ onClose, isLoading }) => {
 
         <Grid item xs={12} sm={12}>
           <TextField
-            name="projectId"
+            id="projectId"
             select
+            name="projectId"
             label="Project Name"
-            placeholder="Enter Project Leader Name"
+            placeholder="Enter Project Name"
             fullWidth
-            value={getProjectName(formik.values.projectId)}
+            value={(formik.values.projectId)}
             onChange={formik.handleChange}
             error={formik.touched.projectId && Boolean(formik.errors.projectId)}
             helperText={formik.touched.projectId && formik.errors.projectId}
             variant="outlined"
             autoFocus
             InputLabelProps={{ shrink: true }}
-          >
-            {!loadingProject &&
-              projectData.map((option) => (
-                <MenuItem key={option?.id} value={option?.id}>
-                  {option?.id}
+            >
+            {
+                <MenuItem value={projectDataById?.id}>
+                  {projectDataById?.projectName}
                 </MenuItem>
-              ))}
+            }
           </TextField>
         </Grid>
         <Grid item xs={12} sm={12}>
