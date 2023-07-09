@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from "react-query";
-import { toast } from "react-toastify";
 import { sendEmail } from "../../api/email/email-api";
+import { toast } from "react-toastify";
 
 export const useSendEmail = ({ employeeId, onSuccess }) => {
-  console.log("use", onSuccess);
+  // console.log("use", onSuccess);
   const queryClient = useQueryClient();
 
   return useMutation(

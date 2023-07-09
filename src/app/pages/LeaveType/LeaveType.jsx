@@ -88,7 +88,7 @@ const LeaveType = () => {
 			width: 120,
 		},
 	];
-	
+
 	if (isLoading) return <>Loading</>;
 	return (
 		<>

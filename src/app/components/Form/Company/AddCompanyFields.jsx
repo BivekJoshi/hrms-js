@@ -13,7 +13,7 @@ const AddCompanyFields = ({ onClose, isLoading }) => {
       formik.handleSubmit(); // Submit the form
 
       if (formik.isValid) {
-        formik.setTouched({
+        formik({
           companyName: false,
           companyType: false,
           companyDescription: false,
