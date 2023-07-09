@@ -42,7 +42,7 @@ const AddTodoListFields = ({ onClose, isLoading }) => {
         formik.handleSubmit();
 
         if (formik.isValid) {
-            formik.setTouched({
+            formik({
                 message: true,
                 dueDate: true,
                 priority: true,

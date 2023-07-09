@@ -13,7 +13,7 @@ const AddEventFields = ({ onClose, isLoading }) => {
             formik.handleSubmit(); // Submit the form
 
             if (formik.isValid) {
-                formik.setTouched({
+                formik({
                     eventName: false,
                     eventDate: false,
                     eventTime: false,

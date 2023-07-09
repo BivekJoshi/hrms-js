@@ -13,7 +13,7 @@ const AddHolidayFields = ({ onClose, isLoading }) => {
             formik.handleSubmit(); // Submit the form
 
             if (formik.isValid) {
-                formik.setTouched({
+                formik({
                     holidayName: false,
                     holidayDate: false,
                     holidayDescription: false,
