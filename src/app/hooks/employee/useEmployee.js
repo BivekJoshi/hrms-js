@@ -3,6 +3,7 @@ import {
   addEmployee,
   editEmployee,
   getEmployee,
+  getEmployeeData,
   getEmployeeByCompany,
   getEmployeeByDesignation,
   getEmployeeById,
@@ -16,6 +17,13 @@ export const useGetEmployee = () => {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
+};
+export const useGetEmployeeData = (pageNumber) => {
+  return useQuery(['getEmployeeData', pageNumber], () => getEmployeeData(pageNumber), {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
+
 };
 
 export const useGetEmployeeById = (id) => {
@@ -60,7 +68,6 @@ export const useAddEmployee = ({ onSuccess }) => {
     },
   });
 };
-
 
 export const useGetEmployeeByDepartment = (searchQuery) => {
   return useQuery(['getEmployeeBydepartment',searchQuery], () => getEmployeeBydepartment(), {

@@ -80,7 +80,15 @@ const EmployeeCard = ({
     // >
     <>
       {/* {JSON.stringify(EmployeeId)} */}
-      <MainCard grow={true}>
+      <MainCard
+        grow={true}
+        key={key}
+        style={{
+          textAlign: "center",
+          padding: ".5rem",
+          maxWidth:"350px"
+        }}
+      >
         <Box display="flex" justifyContent={"end"}>
           <Button
             style={{
@@ -89,9 +97,9 @@ const EmployeeCard = ({
               padding: "1px 5px",
             }}
             variant="outlined"
-            color={(IsActive = "TRUE" ? "success" : "warning")}
+            color={(IsActive = true ? "success" : "warning")}
           >
-            {(IsActive = "TRUE" ? "Active" : "InActive")}
+            {(IsActive = true ? "Active" : "InActive")}
           </Button>
           <Box>
             <Button
@@ -169,7 +177,7 @@ const EmployeeCard = ({
           </p>
           <Box padding={"0 1rem"}>
             <Typography variant="body2" gutterBottom>
-              <Chip label="Intern" style={{ width: 230 }} />
+              <Chip label={Position} style={{ width: 230 }} />
             </Typography>
           </Box>
         </div>
