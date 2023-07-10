@@ -3,9 +3,11 @@ import {
   TextField,
   MenuItem,
   Typography,
+  Button,
 } from '@mui/material';
 import { FieldArray, FormikProvider } from 'formik';
-import React from 'react';
+import React, { useState } from 'react';
+import { ThemeSwitch } from '../../../../../theme/ThemeSwitch';
 
 const province = [
   {
@@ -46,6 +48,21 @@ const province = [
 ];
 
 const EmployeeAddressDetailForm = ({ formik, isLoading }) => {
+  
+    const handleTemporaryButtonClick = (index) => {
+      const permanentAddress = formik.values.addresses[0]; //permanent address is at index 0
+      const { country, province, district, wardNumber, city, street } = permanentAddress;
+      const temporaryAddress = {
+        country,
+        province,
+        district,
+        wardNumber,
+        city,
+        street,
+      };
+      formik.setFieldValue(`addresses[${index}]`, temporaryAddress);
+    };
+
   return (
     !isLoading && (
       <FormikProvider value={formik}>
@@ -213,7 +230,7 @@ const EmployeeAddressDetailForm = ({ formik, isLoading }) => {
                       <Typography
                         style={{ marginTop: '20px', marginBottom: '20px' }}
                       >
-                        Temporary Address
+                        Temporary Address <ThemeSwitch onClick={() => handleTemporaryButtonClick(index)}/> same as permanent
                       </Typography>
                       <Grid container spacing={3} key={index}>
                         <Grid item xs={12} sm={4}>

@@ -10,7 +10,7 @@ const AddDesignationFields = ({ onClose, isLoading }) => {
     formik.handleSubmit();
 
     if (formik.isValid) {
-      formik.setTouched({
+      formik({
         positionName: true,
         positionLevel: true,
         salary: true,

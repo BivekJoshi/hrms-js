@@ -9,7 +9,7 @@ const EditDepartmentFields = ({ onClose, isLoading, data }) => {
 	const handleFormSubmit = () => {
 		formik.handleSubmit();
 
-		if (formik.isValid) {
+		if(formik.isValid) {
 			formik.setTouched({
 				departmentName: true,
 				departmentType: true,

@@ -8,6 +8,9 @@ const useAddTodoForm = () => {
     const formik = useFormik({
         initialValues: {
             message: "",
+            dueDate:"",
+            priority:"",
+            // status:"",
         },
         validationSchema: TodoListSchema,
         onSubmit: (values) => {

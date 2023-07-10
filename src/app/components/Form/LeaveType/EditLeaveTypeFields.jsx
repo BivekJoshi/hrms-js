@@ -17,11 +17,11 @@ const EditLeaveTypeFields = ({ onClose, isLoading, data }) => {
         formik.handleSubmit();
 
         if (formik.isValid) {
-            formik.setTouched({
+            formik({
                 leaveName: true,
                 leaveTotal: true,
                 leaveDescription: true,
-                isCarryForward: true,
+                isCarryForward: false,
             });
             onClose(); // Close the modal
         } else {

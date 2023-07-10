@@ -3,15 +3,26 @@ import {
   getProject,
   addProject,
   getProjectById,
-  deleteProject,
+  // deleteProject,
   addActiveProject,
   editProject,
+  getDeactivatedProject,
+  removeActiveProject,
 } from "../../api/project/project-api";
 import { toast } from "react-toastify";
 
 /*________________________GET_____________________________________*/
 export const useGetProject = () => {
   return useQuery(["getProject"], () => getProject(), {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
+};
+
+
+/*________________________GET_____________________________________*/
+export const useGetDeactivatedProject = (id) => {
+  return useQuery(["getDeactivatedProject",id], () => getDeactivatedProject(id), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
@@ -55,10 +66,9 @@ export const useAddActivateProject = ({ onSuccess }) => {
   });
 };
 
-{
+
   /*________________________EDIT_____________________________________*/
-}
-export const useEditProject = async ({ onSuccess }) => {
+export const useEditProject = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(["editProject"], (formData) => editProject(formData), {
     onSuccess: (data, variables, context) => {
@@ -67,25 +77,38 @@ export const useEditProject = async ({ onSuccess }) => {
       queryClient.invalidateQueries("getProject");
     },
     onError: (err, _variables, _context) => {
-      toast.error(`Error: ${(err, message)}`);
+      toast.error(`Error: ${(err.message)}`);
     },
   });
 };
 
+
+/*________________________DE-ACTIVATE-PROJECT_____________________________________*/
 export const useDeleteProject = ({ onSuccess }) => {
   const queryClient = useQueryClient();
-  return useMutation(
-    ["deleteProject"],
-    (id) => deleteProject(id),
-    {
-      onSuccess: (data, variables, context) => {
-        toast.success("Successfully deleted Project");
-        onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries("getProject");
-      },
-      onError: (err, _variables, _context) => {
-        toast.error(`Error: ${err.message}`);
-      },
-    }
-  );
+  return useMutation(["removeProject"], (formData) => removeActiveProject(formData), {
+    onSuccess: (data, variables, context) => {
+      toast.success("successfully removed project");
+      onSuccess && onSuccess(data, variables, context);
+      queryClient.invalidateQueries("getProject");
+    },
+    onError: (err, _variables, _context) => {
+      toast.error(`Error: ${(err.message)}`);
+    },
+  });
+};
+
+/*________________________ACTIVATE-PROJECT_____________________________________*/
+export const useActiveProject = ({ onSuccess }) => {
+  const queryClient = useQueryClient();
+  return useMutation(["activeProject"], (formData) => addActiveProject(formData), {
+    onSuccess: (data, variables, context) => {
+      toast.success("successfully added project");
+      onSuccess && onSuccess(data, variables, context);
+      queryClient.invalidateQueries("getDeactivatedProject");
+    },
+    onError: (err, _variables, _context) => {
+      toast.error(`Error: ${(err.message)}`);
+    },
+  });
 };

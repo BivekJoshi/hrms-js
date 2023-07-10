@@ -46,14 +46,16 @@ const Leave = ({ isLoading }) => {
     setEditedLeave(rowData);
     setOpenEditModal(true);
   };
+
   const getEmployeeName = (rowData) => {
     const employeeId = rowData.employeeId;
-    const employee = employeeData?.find(
-      (emp) => emp.id === employeeId
-    );
-    const name = `${employee.firstName} ${employee.middleName} ${employee.lastName}`;
+     console.log({"rowDarations": rowData.employeeId, "emplData": employeeData})
+    const employee = employeeData?.find((emp) => emp.id === employeeId);
+    const name = `${employee?.firstName} ${employee?.middleName || ''} ${employee?.lastName}`;
+    console.log({"name": name})
     return name;
   };
+  // console.log(getEmployeeName)
 
   const getLeaveTypeName = (rowData) => {
     const leaveTypeId = rowData.leaveTypeId;
@@ -61,7 +63,7 @@ const Leave = ({ isLoading }) => {
     const name = `${leaveType.leaveName}`;
     return name;
   };
-
+  console.log(getLeaveTypeName)
   const columns = [
     {
       title: 'SN',
@@ -72,13 +74,9 @@ const Leave = ({ isLoading }) => {
     {
       title: 'Employee Name',
       render: (rowData) => {
-        return (
-          <p>
-            {getEmployeeName(rowData)}
-          </p>
-        )
+        return <p>{getEmployeeName(rowData)} </p>
       },
-      width: 200,
+      width: 120,
     },
     {
       title: 'Leave Type',
@@ -214,5 +212,3 @@ const Leave = ({ isLoading }) => {
 };
 
 export default Leave;
-
-

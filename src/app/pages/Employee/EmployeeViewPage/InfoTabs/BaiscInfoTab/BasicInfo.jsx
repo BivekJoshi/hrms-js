@@ -6,29 +6,29 @@ import ListUserDetails from './Components/ListUserDetails';
 
 const BasicInfo = ({ data }) => {
 	const EMPLOYEE = {
-		Gender: data?.gender,
-		'Citizenship Number': data?.citizenshipNumber,
-		'Date of Birth': data?.dateOfBirth,
-		'Mobile Number': data?.mobileNumber,
-		Email: data?.officeEmail,
-		// Address: data?.addresses[0].city,
-		'Marital Status': data?.maritalStatus,
-		'Date of Join': data?.dateOfJoin,
-		Position: data?.position.positionName,
-		Department: data?.department.departmentName,
+		Gender: data?.gender ||'',
+		'Citizenship Number': data?.citizenshipNumber ||'',
+		'Date of Birth': data?.dateOfBirth ||'',
+		'Mobile Number': data?.mobileNumber || '',
+		Email: data?.officeEmail ||'',
+		Address: data?.addresses[0]?.city ||'',
+		'Marital Status': data?.maritalStatus ||'',
+		'Date of Join': data?.dateOfJoin ||'',
+		Position: data?.position?.positionName ||'',
+		// Department: data?.department.departmentName ||'',
 	};
 
 	const FAMILYMEMBERS = {
 		Name: data?.familyMembers[0]?.name || '',
-		// Relation: data?.familyMembers[0].relation || '',
-		// 'Contact Number': data?.familyMembers[0].mobileNumber,
+		Relation: data?.familyMembers[0]?.relation || '',
+		'Contact Number': data?.familyMembers[0]?.mobileNumber ||'',
 	};
 
 	const BANKDETAILS = {
 		'Bank Name': data?.bankDetailSet[0]?.bankName || '',
 		'Account Number': data?.bankDetailSet[0]?.bankAccountNumber || '',
 		Location: data?.bankDetailSet[0]?.bankAddress || '',
-		'PAN Number': data?.panNumber,
+		'PAN Number': data?.panNumber ||'',
 	};
     return (
         <>
