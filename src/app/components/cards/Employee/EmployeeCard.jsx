@@ -9,7 +9,6 @@ import Image1 from "../../../../assets/wave.png";
 import MainCard from "../MainCard";
 import EmailModal from "../../../pages/Email/EmailModal";
 const EmployeeCard = ({
-    key,
   IsActive,
   EmployeeId,
   EFirstName,
@@ -82,7 +81,6 @@ const EmployeeCard = ({
       {/* {JSON.stringify(EmployeeId)} */}
       <MainCard
         grow={true}
-        key={key}
         style={{
           textAlign: "center",
           padding: ".5rem",

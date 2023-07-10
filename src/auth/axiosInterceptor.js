@@ -7,7 +7,7 @@ export const axiosInstance = Axios.create({
 
   // baseURL: 'http://localhost:8484/hrms/api/',
   // baseURL: 'http://10.14.15.156:8484/hrms/api/',
-  // baseURL: "http://10.14.15.4:8484/hrms/api/",
+  baseURL: "http://10.14.15.218:8484/hrms/api/",
   timeout: 20000,
 });
 

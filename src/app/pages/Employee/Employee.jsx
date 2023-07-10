@@ -8,10 +8,12 @@ import EmployeeCard from "../../components/cards/Employee/EmployeeCard";
 import { PagePagination } from "../../components/Pagination/PagePagination";
 
 const Employee = () => {
+  const [openAddModal, setOpenAddModal] = useState(false);
+  const { data: employeeData, isLoading } = useGetEmployee();
+  const { formik } = useAddEmployeeForm();
+
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(5);
-  const { data : employeeData, isLoading } = useGetEmployee();
-  console.log({"employeeData": employeeData})
+  const [postsPerPage] = useState(12);
 
 const employeArray = Array.isArray(employeeData)
 ? employeeData : employeeData? Object.values(employeeData) : [];
@@ -34,6 +36,7 @@ const employeArray = Array.isArray(employeeData)
   };
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+  if (isLoading) return <>Loading</>;
   return (
     <Box padding="1rem">
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
@@ -57,7 +60,7 @@ const employeArray = Array.isArray(employeeData)
       >
         {currentPosts?.map((employee, index) => (
             <EmployeeCard
-              Key={index}
+              key={index}
               IsActive={employee.isActive}
               EmployeeId={employee.id}
               EFirstName={employee.firstName}
@@ -80,17 +83,6 @@ const employeArray = Array.isArray(employeeData)
           <Box sx={style}>
             <EmployeeBasicInfoForm formik={formik} />
             <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-              <Button
-                variant="contained"
-                style={{ marginTop: "10px" }}
-                onClick={()=>{
-                  setOpenAddModal(false);
-                }}
-                sx={{ mt: 3, ml: 1 }}
-                color="error"
-              >
-                Cancel
-              </Button>
               <Button
                 variant="contained"
                 style={{ marginTop: "10px" }}

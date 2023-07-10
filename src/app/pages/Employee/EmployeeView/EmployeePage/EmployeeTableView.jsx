@@ -7,7 +7,8 @@ import { useNavigate } from 'react-router-dom';
 
 const EmployeeTableView = ({ employeeData, isLoading }) => {
     const navigate = useNavigate();
-
+     // const position = employeeData[0]?.position?.positionName;
+     
     const columns = [
         {
             title: 'SN',
@@ -23,7 +24,10 @@ const EmployeeTableView = ({ employeeData, isLoading }) => {
         },
         {
             title: 'Position',
-            field: 'position?.positionName',
+            render: (rowData) => {
+                 console.log({"rowData": rowData})},
+                // return position ? position : '-';}
+                
             emptyValue: '-',
             width: 340,
         },
