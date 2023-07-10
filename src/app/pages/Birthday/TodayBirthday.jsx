@@ -1,6 +1,5 @@
 import React from "react";
 import { Menu, MenuItem } from "@mui/material";
-
 import PersonIcon from "@mui/icons-material/Person";
 import { NavLink } from "react-router-dom";
 
@@ -8,6 +7,7 @@ const TodayBirthday = ({ open, setOpen, data, isLoading }) => {
   const handleClose = () => {
     setOpen(false);
   };
+
 
   return (
     <div>
@@ -31,9 +31,9 @@ const TodayBirthday = ({ open, setOpen, data, isLoading }) => {
             Today's Birthdays!!
           </p>
           {!isLoading &&
-            data.birthdayEmployees.length > 0 &&
-            data.birthdayEmployees?.map((employees, index) => (
-              <NavLink to={"birthday"} key={employees.id}>
+            data.length > 0 &&
+            data?.map((employees, index) => (
+              <NavLink to={`employee/${employees.id}`} key={employees.id}>
                 <MenuItem
                   style={{
                     color: "green",
