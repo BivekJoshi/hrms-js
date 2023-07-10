@@ -1,16 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Email, LocalPhone } from "@mui/icons-material";
-import {
-  Box,
-  Button,
-  CardMedia,
-  Chip,
-  ClickAwayListener,
-  Grow,
-  Stack,
-} from "@mui/material";
+import { Box, Button, Card, CardMedia } from "@mui/material";
+import { Chip, ClickAwayListener, Grow, Stack } from "@mui/material";
 import { MenuItem, MenuList, Paper, Popper, Typography } from "@mui/material";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import Image1 from "../../../../assets/wave.png";
 import MainCard from "../MainCard";
@@ -24,7 +17,7 @@ const EmployeeCard = ({
   ELastName,
   OfficeEmail,
   MobileNumber,
-  Position
+  Position,
 }) => {
   //dropdown menu
   const [open, setOpen] = useState(false);
@@ -87,7 +80,15 @@ const EmployeeCard = ({
     // >
     <>
       {/* {JSON.stringify(EmployeeId)} */}
-      <MainCard grow={true}>
+      <MainCard
+        grow={true}
+        key={key}
+        style={{
+          textAlign: "center",
+          padding: ".5rem",
+          maxWidth:"350px"
+        }}
+      >
         <Box display="flex" justifyContent={"end"}>
           <Button
             style={{
@@ -96,9 +97,9 @@ const EmployeeCard = ({
               padding: "1px 5px",
             }}
             variant="outlined"
-            color={(IsActive = "TRUE" ? "success" : "warning")}
+            color={(IsActive = true ? "success" : "warning")}
           >
-            {(IsActive = "TRUE" ? "Active" : "InActive")}
+            {(IsActive = true ? "Active" : "InActive")}
           </Button>
           <Box>
             <Button

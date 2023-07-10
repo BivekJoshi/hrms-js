@@ -1,110 +1,11 @@
-// import React, { useState, useEffect, useRef } from "react";
-// import { useGetEmployee } from "../../hooks/employee/useEmployee";
-// import Button from "@mui/material/Button";
-// import Modal from "@mui/material/Modal";
-// import { Box, Grid } from "@mui/material";
-// import EmployeeBasicInfoForm from "../../components/Form/Employee/EmployeeBasicInfoForm/EmployeeBasicInfoForm";
-// import useAddEmployeeForm from "../../hooks/employee/AddEmployee/useAddEmployeeForm";
-// import { toast } from "react-toastify";
-// import EmployeeCard from "../../components/cards/Employee/EmployeeCard";
-
-// const Employee = () => {
-//   const [openAddModal, setOpenAddModal] = useState(false);
-//   const { data: employeeData, isLoading } = useGetEmployee();
-//   const { formik } = useAddEmployeeForm();
-//   const [currentPage, setCurrentPage] = useState(1);
-//   const [postsPerPage] = useState(5);
-
-//   const style = {
-//     position: "absolute",
-//     top: "50%",
-//     left: "50%",
-//     transform: "translate(-50%, -50%)",
-//     bgcolor: "background.paper",
-//     border: "1px solid #808080",
-//     borderRadius: 2,
-//     boxShadow: 24,
-//     p: 4,
-//   };
-
-//     if (isLoading) return <>Loading</>;
-//   return (
-//     <>
-//       {/* // <div>{employeeData[0].firstName}</div> */}
-//       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-//         <Button
-//           variant="contained"
-//           onClick={() => setOpenAddModal(true)}
-//           style={{ marginBottom: "20px" }}
-//         >
-//           Add Employee
-//         </Button>
-//       </Box>
-//       <Grid
-//         container
-//         item
-//         gap={3}
-//         className="project-card-control"
-//         sx={{
-//           display: "grid",
-//           gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
-//         }}
-//       >
-//         {employeeData?.map((employee, index) => (
-//           <Box key={index}>
-//             <EmployeeCard
-//               IsActive={employee.isActive}
-//               EmployeeId={employee.id}
-//               EFirstName={employee.firstName}
-//               EMiddleName={employee.middleName}
-//               ELastName={employee.lastName}
-//               OfficeEmail={employee?.officeEmail}
-//               MobileNumber={employee?.mobileNumber}
-//               Position={employee?.position?.positionName}
-//             />
-//           </Box>
-//         ))}
-//       </Grid>
-//       <Modal
-//         open={openAddModal}
-//         onClose={() => setOpenAddModal(false)}
-//         aria-labelledby="modal-modal-title"
-//         aria-describedby="modal-modal-description"
-//       >
-//         <div>
-//           <Box sx={style}>
-//             <EmployeeBasicInfoForm formik={formik} />
-//             <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-//               <Button
-//                 variant="contained"
-//                 style={{ marginTop: "10px" }}
-//                 onClick={() => {
-//                   formik.handleSubmit();
-//                   setOpenAddModal(false);
-//                   formik.isValid
-//                     ? null
-//                     : toast.error(
-//                       'Please make sure you have filled the form correctly'
-//                     );
-//                 }}
-//                 sx={{ mt: 3, ml: 1 }}
-//               >
-//                 Submit
-//               </Button>
-//             </Box>
-//           </Box>
-//         </div>
-//       </Modal>
-//     </>
-//   );
-// };
-
-// export default Employee;
-
-import React, { useEffect, useState } from "react";
-import PageItem from "./pagination/PageItem";
-import EmployeeCardData from "./pagination/EmployeeCardData";
-import { useGetEmployee } from "../../hooks/employee/useEmployee";
+import React, { useState } from "react";
+import { useGetEmployee, useGetEmployeeData } from "../../hooks/employee/useEmployee";
+import { Box, Grid, Button, Modal } from "@mui/material";
+import EmployeeBasicInfoForm from "../../components/Form/Employee/EmployeeBasicInfoForm/EmployeeBasicInfoForm";
+import useAddEmployeeForm from "../../hooks/employee/AddEmployee/useAddEmployeeForm";
+import { toast } from "react-toastify";
+import EmployeeCard from "../../components/cards/Employee/EmployeeCard";
+import { PagePagination } from "../../components/Pagination/PagePagination";
 
 const Employee = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -112,30 +13,29 @@ const Employee = () => {
   const { data : employeeData, isLoading } = useGetEmployee();
   console.log({"employeeData": employeeData})
 
-  const employeeArray = Array.isArray(employeeData)
-  ? employeeData
-  : employeeData ? Object.values(employeeData) : [];
+const employeArray = Array.isArray(employeeData)
+? employeeData : employeeData? Object.values(employeeData) : [];
 
-  // Get current posts
+
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
- const currentPosts = employeeArray.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = employeArray.slice(indexOfFirstPost, indexOfLastPost);
 
-  // Change page
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    bgcolor: "background.paper",
+    border: "1px solid #808080",
+    borderRadius: 2,
+    boxShadow: 24,
+    p: 4,
+  };
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  if(isLoading) return <>Loading...</>;
-
   return (
-    <>
-      <EmployeeCardData employeeData={currentPosts} />
-      <PageItem
-        postsPerPage={postsPerPage}
-        totalPosts={employeeData.length}
-        currentPage={currentPage}
-        paginate={paginate}
-      />
-      {/* // <div>{employeeData[0].firstName}</div> */}
+    <Box padding="1rem">
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
         <Button
           variant="contained"
@@ -152,12 +52,12 @@ const Employee = () => {
         className="project-card-control"
         sx={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
         }}
       >
-        {employeeData?.map((employee, index) => (
-          <Box key={index}>
+        {currentPosts?.map((employee, index) => (
             <EmployeeCard
+              Key={index}
               IsActive={employee.isActive}
               EmployeeId={employee.id}
               EFirstName={employee.firstName}
@@ -166,8 +66,8 @@ const Employee = () => {
               OfficeEmail={employee?.officeEmail}
               MobileNumber={employee?.mobileNumber}
               Position={employee?.position?.positionName}
+              EmployeeData={currentPosts}
             />
-          </Box>
         ))}
       </Grid>
       <Modal
@@ -176,7 +76,7 @@ const Employee = () => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <div>
+        <Box>
           <Box sx={style}>
             <EmployeeBasicInfoForm formik={formik} />
             <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
@@ -196,12 +96,11 @@ const Employee = () => {
                 style={{ marginTop: "10px" }}
                 onClick={() => {
                   formik.handleSubmit();
-                  // setOpenAddModal(false);
                   formik.isValid
                     ? null
                     : toast.error(
-                      'Please make sure you have filled the form correctly'
-                    );
+                        "Please make sure you have filled the form correctly"
+                      );
                 }}
                 sx={{ mt: 3, ml: 1 }}
               >
@@ -209,9 +108,17 @@ const Employee = () => {
               </Button>
             </Box>
           </Box>
-        </div>
+        </Box>
       </Modal>
-    </>
+      <Box padding="2rem" display="grid" justifyContent={"center"}>
+        <PagePagination 
+        PostsPerPage={postsPerPage}
+        TotalPosts={employeeData.length}
+        CurrentPage={currentPage}
+        Paginate={paginate}
+        />
+      </Box>
+    </Box>
   );
 };
 
