@@ -55,7 +55,7 @@ export const useDeleteCompany = ({ onSuccess }) => {
     (companyId) => deleteCompany(companyId),
     {
       onSuccess: (data, variables, context) => {
-        toast.success("Successfully edited Company");
+        toast.success("Successfully deleted Company");
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries("getCompany");
       },

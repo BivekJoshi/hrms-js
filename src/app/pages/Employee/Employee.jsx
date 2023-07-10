@@ -76,9 +76,20 @@ const Employee = () => {
               <Button
                 variant="contained"
                 style={{ marginTop: "10px" }}
+                onClick={()=>{
+                  setOpenAddModal(false);
+                }}
+                sx={{ mt: 3, ml: 1 }}
+                color="error"
+              >
+                Cancel
+              </Button>
+              <Button
+                variant="contained"
+                style={{ marginTop: "10px" }}
                 onClick={() => {
                   formik.handleSubmit();
-                  setOpenAddModal(false);
+                  // setOpenAddModal(false);
                   formik.isValid
                     ? null
                     : toast.error(
