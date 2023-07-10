@@ -70,6 +70,8 @@ const EmployeeTableView = ({ employeeData, isLoading }) => {
                 title="Employees"
                 isLoading={isLoading}
                 options={{
+                    toolbar:true,
+                    exportButton: true,
                     padding: 'dense',
                     margin: 50,
                     pageSize: 12,
