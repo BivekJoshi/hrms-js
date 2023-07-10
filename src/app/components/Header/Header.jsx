@@ -6,15 +6,13 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-import { Badge } from "@mui/material";
+import { Badge, Stack } from "@mui/material";
 import { CakeOutlined } from "@mui/icons-material";
 import TodayBirthday from "../../pages/Birthday/TodayBirthday";
 import {
-  useGetTodayBirthday,
+  useGetUpcomingBirthday,
   useRemoveNotification,
-  // useRemoveNotification,
 } from "../../hooks/birthday/useBirthday";
-// import { BirthdayContext } from "../../../Usecontext/BirthdayContext";
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -34,9 +32,27 @@ const AppBar = styled(MuiAppBar, {
 }));
 
 export default function Header({ open, handleDrawerOpen }) {
-  const [openNotification, setOpenNotification] = useState(false); // Moved inside the component function
-  // const { data, isLoading } = useGetTodayBirthday();
-  const data = [0];
+  const [showLength, setShowLength] = useState(true);
+  const [showNotification, setShowNotification] = useState(true);
+  const [notificationClicked, setNotificationClicked] = useState(false);
+
+  const handleClick = () => {
+    setShowLength(false);
+  };
+
+  const today = new Date();
+  const { data: upcomingBirthdayData, isloading } = useGetUpcomingBirthday();
+  const thisMonth = today.getMonth();
+  const thisDay = today.getDate();
+
+  const thisDayBirthdays = upcomingBirthdayData
+  ? upcomingBirthdayData
+      .filter((employee) => {
+        const dateOfBirth = new Date(employee.dateOfBirth);
+        return (dateOfBirth.getMonth() === thisMonth && dateOfBirth.getDate() === thisDay);
+      }) : [];
+
+  const [openNotification, setOpenNotification] = useState(false);
   const isLoading = false;
 
   const { mutate } = useRemoveNotification();
@@ -77,7 +93,8 @@ export default function Header({ open, handleDrawerOpen }) {
         >
           <Badge
             color="success"
-            badgeContent={!data?.isChecked ? data?.birthdayEmployeeCount : 0}
+            onClick={handleClick}
+            badgeContent={showLength ? thisDayBirthdays.length : null}
           >
             <CakeOutlined
               id="basic-button"
@@ -87,17 +104,16 @@ export default function Header({ open, handleDrawerOpen }) {
               onClick={handleChange}
               style={{ color: "white", cursor: "pointer" }}
             />
+            
           </Badge>
-          {/* <BirthdayContext> */}
             {openNotification && (
               <TodayBirthday
-                data={data}
+                data={thisDayBirthdays}
                 isLoading={isLoading}
                 open={openNotification}
                 setOpen={setOpenNotification}
               />
             )}
-          {/* </BirthdayContext> */}
         </div>
       </Toolbar>
     </AppBar>

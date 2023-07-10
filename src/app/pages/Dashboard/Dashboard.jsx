@@ -1,6 +1,20 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import DashboardCard from "../../components/cards/Dashboard/DashboardCard";
-import { Card, Grid, List, ListItem, Typography } from "@mui/material";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  Grid,
+  List,
+  ListItem,
+  Typography,
+  Stack,
+} from "@mui/material";
+import { styled } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import LinearProgress, {
+  linearProgressClasses,
+} from "@mui/material/LinearProgress";
 import PersonIcon from "@mui/icons-material/Person";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
@@ -14,9 +28,15 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { Bar } from "react-chartjs-2";
-import { useGetDashboard, useGetProjectStatus } from "../../hooks/dashboard/useDashboard";
-import MainCard from "../../components/cards/MainCard";
+import { Bar, Pie } from "react-chartjs-2";
+import { ArcElement } from 'chart.js';
+
+ChartJS.register(ArcElement, Tooltip, Legend);
+import {
+  useGetDashboard,
+  useGetProjectCount,
+} from "../../hooks/dashboard/useDashboard";
+import { useGetProject } from "../../hooks/project/useProject";
 
 ChartJS.register(
   CategoryScale,
@@ -24,16 +44,27 @@ ChartJS.register(
   BarElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  ArcElement,
 );
 
-const Dashboard = () => {
-  const { data: dashboardData, isLoading: loadingDashboard } =  useGetDashboard();
-  const { data: projectStatusData } = useGetProjectStatus();
+const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
+  height: 16,
+  borderRadius: 18,
+  [`&.${linearProgressClasses.colorPrimary}`]: {
+    backgroundColor:
+      theme.palette.grey[theme.palette.mode === "light" ? 200 : 800],
+  },
+}));
 
-  console.log(projectStatusData)
+
+
+const Dashboard = () => {
+  const { data: dashboardData, isLoading: loadingDashboard } = useGetDashboard();
+  const { data: projectDataCount } = useGetProjectCount();
+  const { data: projectData } = useGetProject();
  
-  const options = {
+  const barChartOptions = {
     responsive: true,
     plugins: {
       legend: {
@@ -46,6 +77,19 @@ const Dashboard = () => {
     },
   };
 
+  const pieChartOptions = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "right",
+      },
+      title: {
+        display: true,
+        text: "Dashboard Pie Chart",
+      },
+    },
+  };
+
   const labels = [
     "allEmployees",
     "newEmployees",
@@ -54,17 +98,31 @@ const Dashboard = () => {
     "allProjects",
   ];
 
-  const data = {
+
+
+  const barChartData = {
     labels,
     datasets: [
       {
         label: "Dataset 1",
         data: dashboardData,
-        backgroundColor: "yellowgreen",
+        backgroundColor: ["yellowgreen", "red", "green", "blue", "pink"],
       },
     ],
   };
 
+  const data = {
+    labels,
+    datasets: [
+      {
+        labels: "Data Pie Chart",
+        data: [`${dashboardData?.allEmployees}`, `${dashboardData?.newEmployees}`, `${dashboardData?.maleEmployees}`,  `${dashboardData?.femaleEmployees}`, `${dashboardData?.allProjects}` ],
+        backgroundColor: ["yellowgreen", "red", "green", "blue", "pink"],
+        borderColor: ["yellowgreen", "red", "green", "blue", "pink"],
+        borderWidth: 3,
+      }
+    ]
+  }
   return (
     <>
       <Grid container rowSpacing={4.5} columnSpacing={2.75}>
@@ -87,39 +145,111 @@ const Dashboard = () => {
         />
       </Grid>
       <br />
+
       <EmployeeCount />
-      <Typography sx={{ display: "flex", justifyContent: "space-around" }}>
-        <Card sx={{ width: "700px" }}>
-          <Bar options={options} data={data} />
+
+      <Stack sx={{ display: "flex", flexDirection: "row", gap: "1rem" }}>
+        <Card sx={{ width: "600px" }}>
+          <Bar options={barChartOptions} data={barChartData} />
         </Card>
-        <Card sx={{maxHeight: "380px", Width: "400px", overflowY: "scroll"}}>
-          {dashboardData &&
-            Object.keys(dashboardData).map((key) => {
-              if (key.includes("projectNames")) {
-                return (
-                  <ListItem key={key}>
-                    <Typography variant="body1">
-                      <Typography variant="h5" sx={{textAlign: "center", color: "blue"}}>All Projects</Typography>
-                      {dashboardData[key].map((projectName) => (
-                        <List key={projectName}>
-                          <ListItem sx={{fontSize: "1.6rem", color: "yellowgreen",  '&:hover': {boxShadow: "0 0 4em 0px rgba(0, 0, 0, 0.4)"}, transform: "scale(1.01)", cursor: "pointer"}}>{projectName}</ListItem>
-                        </List>
-                      ))}
-                    </Typography>
-                  </ListItem>
-                );
-              }
-            })}
+        <Card sx={{ width: "400px" }}>
+          <Pie options={pieChartOptions} data={data} />
         </Card>
-        {/* <MainCard>
-        {Object.keys(projectStatusData).map(([key, value]) => (
-        <div key={key} className="card">
-          <span>{key}: </span>
-          <span>{value}</span>
-        </div>
-      ))}
-        </MainCard> */}
-      </Typography>
+      </Stack>
+
+      <hr />
+      <div style={{display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(500px, 1fr))"}}>
+      <Card sx={{maxWidth: "500px"}}>
+        <CardHeader sx={{ color: "#2c2945" }} title="Project statistics" />
+        <CardContent
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            "&>p": { borderRight: "1px solid #c6c3c3", padding: "1.2rem" },
+          }}
+        >
+          <Typography> Total Project: {projectDataCount?.total}</Typography>
+          <Typography>Completed: {projectDataCount?.completed}</Typography>
+          <Typography>Pending: {projectDataCount?.pending}</Typography>
+          <Typography>
+            Work In Progress: {projectDataCount?.workInProgress}
+          </Typography>
+        </CardContent>
+        <CardContent>
+          <Box sx={{ display: "flex", flexDirection: "column", color: "#2c2945" }}>
+            <Stack sx={{ display: "flex", justifyContent: "space-between" }}>
+              <Typography variant="h5">Total Project</Typography>
+              <Typography variant="h6">
+                {Math.ceil((projectDataCount?.total / projectDataCount?.total) * 100)}%
+              </Typography>
+            </Stack>
+            <BorderLinearProgress
+              variant="determinate"
+              value={(projectDataCount?.total / projectDataCount?.total) * 100}
+            />
+
+            <Stack sx={{ display: "flex", justifyContent: "space-between" }}>
+              <Typography variant="h5">Completed Project</Typography>
+              <Typography variant="h6">
+                {Math.ceil((projectDataCount?.completed / projectDataCount?.total) * 100)}%
+              </Typography>
+            </Stack>
+            <BorderLinearProgress
+              variant="determinate"
+              value={(projectDataCount?.completed / projectDataCount?.total) * 100}
+            />
+
+            <Stack sx={{ display: "flex", justifyContent: "space-between" }}>
+              <Typography variant="h5">Pending Project</Typography>
+              <Typography variant="h6">
+                {Math.ceil((projectDataCount?.pending / projectDataCount?.total) * 100)}%
+              </Typography>
+            </Stack>
+            <BorderLinearProgress
+              variant="determinate"
+              value={(projectDataCount?.pending / projectDataCount?.total) * 100}
+            />
+
+            <Stack sx={{ display: "flex", justifyContent: "space-between" }}>
+              <Typography variant="h5">Work In Progress</Typography>
+              <Typography variant="h6">
+                {Math.ceil((projectDataCount?.workInProgress / projectDataCount?.total) * 100)}%
+              </Typography>
+            </Stack>
+            <BorderLinearProgress
+              variant="determinate"
+              value={(projectDataCount?.workInProgress / projectDataCount?.total) * 100}
+            />
+          </Box>
+        </CardContent>
+        {/* <CardContent>
+          <Box sx={{ flexGrow: 1 }}>
+            {Object.entries(projectDataCount).map(([keys,values]) => (
+              console.log({"keys": keys, "values": values})
+              // <BorderLinearProgress
+              //   key={keys}
+              //   variant="determinate"
+              //   value={values * 10}
+              // />
+            ))}
+          </Box>
+        </CardContent> */}
+      </Card>
+
+      <Card sx={{maxWidth: "500px", height: "350px", overflowY: "scroll"}}>
+        <CardHeader sx={{ color: "#2c2945", fontSize: "1.4rem" }} title="Projects" />
+        <CardContent>
+          <ListItem sx={{display: "flex", flexDirection: "column", alignItems: "baseline" }}>
+            { projectData &&
+              projectData.map((item,index)=> (
+                <List key={index} sx={{cursor: "pointer", "&:hover": {
+                  boxShadow: "0 0 4em 0px rgba(0, 0, 0, 0.4)"}, listStyle: "inherit", display: "flex", alignItems: "center", gap: "1rem", color: "#2c2945", fontSize: "1.4rem" }}><p>{index + 1}</p>{item?.projectName}</List>
+              ))
+            }
+          </ListItem>
+        </CardContent>
+      </Card>
+      </div>
     </>
   );
 };

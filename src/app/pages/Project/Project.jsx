@@ -30,11 +30,13 @@ import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import DeleteIcon from "@mui/icons-material/Delete";
 import DeleteConfirmationModal from "../../components/Modal/DeleteConfirmationModal";
 import DeactivateConfirmationModal from "../../components/Modal/DeactivateConfirmationModal";
+import { useGetProjectEmployee } from "../../hooks/project/projectEmployee/useProjectEmployee";
 
 const Project = () => {
   const navigate = useNavigate();
   const { data: projectData, isLoading } = useGetProject();
   const { data: employeeData } = useGetEmployee();
+  const { data: projectEmployeeData } = useGetProjectEmployee();
 
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openAddActiveModal, setOpenAddActiveModal] = useState(false);
@@ -77,6 +79,14 @@ const Project = () => {
     );
   };
 
+
+  const getEmployeeNumber = (id) => {
+    const projectId = id;
+    const projectEmployeeNumber = projectEmployeeData?.filter((empNum) => empNum.projectId === projectId).length;
+    return projectEmployeeNumber || 0;
+  }
+
+  console.log(projectData)
   if (isLoading) return <>Loading</>;
 
   return (
@@ -121,7 +131,7 @@ const Project = () => {
         }}
       >
         {projectData.map((item, index) => (
-          <Card key={index}>
+          <Card key={index} sx={{maxWidth: "360px"}}>
             <CardHeader
               avatar={
                 <Avatar
@@ -180,12 +190,12 @@ const Project = () => {
                   alt="Paella dish"
                 />
                 <Typography variant="p" className="card-id">
-                  {item.id}
+                  {getEmployeeNumber(item.id)}
                 </Typography>
                 <Typography variant="p" className="card-status">
-                  {item.projectStatus === "COMPLETED"
+                  {item.taskStatus === "COMPLETED"
                     ? "Completed"
-                    : item.projectStatus === "WORK_IN_PROGRESS"
+                    : item.taskStatus === "WORK_IN_PROGRESS"
                     ? "Work in progress"
                     : "DELAYED"}
                 </Typography>

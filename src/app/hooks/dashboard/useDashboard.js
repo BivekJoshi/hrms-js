@@ -1,5 +1,5 @@
 import { useQuery } from 'react-query';
-import { getDashboard, getProjectStatus } from '../../api/dashboard/dashboard-api';
+import { getDashboard, getProjectCount } from '../../api/dashboard/dashboard-api';
 
 export const useGetDashboard = () => {
   return useQuery(['getDashboard'], () => getDashboard(), {
@@ -8,8 +8,10 @@ export const useGetDashboard = () => {
   });
 };
 
-export const useGetProjectStatus = () => {
-  return useQuery(['getProjectStatus'], () => getProjectStatus(), {
+
+/*________________________GET-PROJECT-COUNT_____________________________________*/
+export const useGetProjectCount = () => {
+  return useQuery(["getProjectCount"], () => getProjectCount(), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
