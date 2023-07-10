@@ -135,6 +135,82 @@ const Employee = () => {
         currentPage={currentPage}
         paginate={paginate}
       />
+      {/* // <div>{employeeData[0].firstName}</div> */}
+      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+        <Button
+          variant="contained"
+          onClick={() => setOpenAddModal(true)}
+          style={{ marginBottom: "20px" }}
+        >
+          Add Employee
+        </Button>
+      </Box>
+      <Grid
+        container
+        item
+        gap={3}
+        className="project-card-control"
+        sx={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+        }}
+      >
+        {employeeData?.map((employee, index) => (
+          <Box key={index}>
+            <EmployeeCard
+              IsActive={employee.isActive}
+              EmployeeId={employee.id}
+              EFirstName={employee.firstName}
+              EMiddleName={employee.middleName}
+              ELastName={employee.lastName}
+              OfficeEmail={employee?.officeEmail}
+              MobileNumber={employee?.mobileNumber}
+              Position={employee?.position?.positionName}
+            />
+          </Box>
+        ))}
+      </Grid>
+      <Modal
+        open={openAddModal}
+        onClose={() => setOpenAddModal(false)}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <div>
+          <Box sx={style}>
+            <EmployeeBasicInfoForm formik={formik} />
+            <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+              <Button
+                variant="contained"
+                style={{ marginTop: "10px" }}
+                onClick={()=>{
+                  setOpenAddModal(false);
+                }}
+                sx={{ mt: 3, ml: 1 }}
+                color="error"
+              >
+                Cancel
+              </Button>
+              <Button
+                variant="contained"
+                style={{ marginTop: "10px" }}
+                onClick={() => {
+                  formik.handleSubmit();
+                  // setOpenAddModal(false);
+                  formik.isValid
+                    ? null
+                    : toast.error(
+                      'Please make sure you have filled the form correctly'
+                    );
+                }}
+                sx={{ mt: 3, ml: 1 }}
+              >
+                Submit
+              </Button>
+            </Box>
+          </Box>
+        </div>
+      </Modal>
     </>
   );
 };

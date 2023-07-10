@@ -51,7 +51,7 @@ const Leave = ({ isLoading }) => {
     const employeeId = rowData.employeeId;
      console.log({"rowDarations": rowData.employeeId, "emplData": employeeData})
     const employee = employeeData?.find((emp) => emp.id === employeeId);
-    const name = `${employee?.firstName}`;
+    const name = `${employee?.firstName} ${employee?.middleName || ''} ${employee?.lastName}`;
     console.log({"name": name})
     return name;
   };
