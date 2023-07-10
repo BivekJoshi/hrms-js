@@ -7,11 +7,10 @@ const AddDepartmentFields = ({ onClose, isLoading }) => {
 	const { formik } = useAddDepartmentForm();
 
 	const handleFormSubmit = () => {
-		
 		formik.handleSubmit();
 
 		if (formik.isValid) {
-			formik.setTouched({
+			formik({
 				departmentName: true,
 				departmentType: true,
 				departmentDescription: true,

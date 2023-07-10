@@ -11,7 +11,7 @@ const useAddProjectForm = () => {
             projectName: "",
             startDate: "",
             endDate: "",
-            projectStatus: "",
+            taskStatus: "",
             projectLeadId: "",
             companyId: "",
         },

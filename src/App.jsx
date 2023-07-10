@@ -17,9 +17,8 @@ export default function App() {
         theme="light"
         draggable
         pauseOnHover
-      /> 
-       <AppRoutes />
-
-  </>
+      />
+      <AppRoutes />
+    </>
   );
 }

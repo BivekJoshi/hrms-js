@@ -14,16 +14,29 @@ export const getProjectById = async (id) => {
     }
 };
 
-{/*________________________POST-TO-ACTIVATE-PROJECT_____________________________________*/ }
+{/*________________________GET-DEACTIVATE-PROJECT_____________________________________*/ }
+export const getDeactivatedProject = async () => {
+    const data = await axiosInstance.get(`/project/get-deactivated-projects`);
+    return data;
+};
+
+{/*________________________EDIT-TO-ACTIVATE-PROJECT_____________________________________*/ }
 export const addActiveProject = async (formData) => {
-    const { id } = formData;
-    const data = await axiosInstance.post(`/project/activate/${id}`, formData);
+    const { projectId } = formData;
+    const data = await axiosInstance.put(`/project/change-activation-status/${projectId}?isActive=true`);
+    return data;
+};
+
+{/*________________________EDIT-TO-DE-ACTIVATE-PROJECT_____________________________________*/ }
+export const removeActiveProject = async (formData) => {
+    const { projectId } = formData;
+    const data = await axiosInstance.put(`/project/change-activation-status/${projectId}?isActive=false`);
     return data;
 };
 
 {/*________________________POST_____________________________________*/ }
 export const addProject = async (formData) => {
-    const data = await axiosInstance.post(`/project`, formData);
+    const data = await axiosInstance.post('/project', formData);
     return data;
 };
 
@@ -34,14 +47,8 @@ export const editProject = async (formData) => {
     return data;
 };
 
-{/*________________________DELETE_____________________________________*/ }
-export const deleteProject = async (id) => {
-    const data = await axiosInstance.delete(`/project/deactivate/${id}`);
-    return data;
-};
-
-
-export const deleteProjectEmployee = async (id) => {
-    const data = await axiosInstance.delete(`/project/deactivate/${id}`);
-    return data;
-};
+// {/*________________________DELETE_____________________________________*/ }
+// export const deleteProject = async (id) => {
+//     const data = await axiosInstance.delete(`/project/deactivate/${id}`);
+//     return data;
+// };

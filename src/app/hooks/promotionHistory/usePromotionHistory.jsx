@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { addPromotionHistory, getPromotionHistory } from "../../api/promotionHistory/promotionHistory-api";
 import { toast } from "react-toastify";
+import { useParams } from "react-router-dom";
 
 {/*________________________GET_____________________________________*/ }
 export const useGetPromotionHistory = (id) => {
@@ -13,7 +14,8 @@ export const useGetPromotionHistory = (id) => {
 {/*________________________POST_____________________________________*/ }
 export const useAddPromotionHistory = ({ onSuccess }) => {
     const queryClient = useQueryClient();
-    return useMutation(['addPromotionHistory'], (formData) => addPromotionHistory(formData), {
+    const { id } = useParams();
+    return useMutation(['addPromotionHistory'], (formData) => addPromotionHistory(formData,id), {
         onSuccess: (data, variables, context) => {
             toast.success('Succesfully added Promotion of Employee');
             onSuccess && onSuccess(data, variables, context);

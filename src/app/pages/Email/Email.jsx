@@ -1,17 +1,17 @@
 import React, { useState } from "react";
-import { Button, Grid, Modal, TextField } from "@mui/material";
-import { useParams } from "react-router-dom";
-import { useSendEmail } from "../../hooks/email/useEmail";
+import { useSendEmail } from "../../hooks/Email/useemail";
+import { Button, Grid, TextField } from "@mui/material";
+// import { useParams } from "react-router-dom";
 
 function EmailForm({ employeeId, onClose, officeEmail }) {
-  console.log("here", employeeId);
+  // console.log("here", employeeId);
   // console.log("hello", data);
   const [emailData, setEmailData] = useState({
     to: officeEmail || "",
     subject: "",
     message: "",
   });
-  console.log(emailData);
+  // console.log(emailData);
 
   const [errors, setErrors] = useState({
     to: false,
@@ -129,7 +129,7 @@ function EmailForm({ employeeId, onClose, officeEmail }) {
       </div>
     </form>
   );
-  console.log(emailData);
+  // console.log(emailData);
 }
 
 export default EmailForm;

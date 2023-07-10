@@ -1,27 +1,10 @@
-import React, { useReducer, createContext } from "react";
+import React from "react";
 import { Menu, MenuItem } from "@mui/material";
 
 import PersonIcon from "@mui/icons-material/Person";
 import { NavLink } from "react-router-dom";
-import SideBar from "../../components/SideBar/SideBar";
 
 const TodayBirthday = ({ open, setOpen, data, isLoading }) => {
-  // const checkTodayBirthdays = () => {
-  //   const today = new Date();
-  //   const formattedToday = `${today.getMonth() + 1}-${today.getDate()}`;
-
-  //   const birthdays = TodayBirthdayData
-  //     ? TodayBirthdayData.filter((employee) => {
-  //         const date = new Date(employee.dateOfBirth);
-  //         const month = date.getMonth() + 1;
-  //         const day = date.getDate();
-  //         const outputDate = `${month}-${day}`;
-  //         return outputDate === formattedToday;
-  //       })
-  //     : [];
-
-  // setTodayBirthdays(birthdays);
-
   const handleClose = () => {
     setOpen(false);
   };
@@ -48,8 +31,8 @@ const TodayBirthday = ({ open, setOpen, data, isLoading }) => {
             Today's Birthdays!!
           </p>
           {!isLoading &&
-            data.length > 0 &&
-            data.map((employees, index) => (
+            data.birthdayEmployees.length > 0 &&
+            data.birthdayEmployees?.map((employees, index) => (
               <NavLink to={"birthday"} key={employees.id}>
                 <MenuItem
                   style={{
@@ -72,10 +55,7 @@ const TodayBirthday = ({ open, setOpen, data, isLoading }) => {
                     <p style={{ height: "25px" }}>
                       <PersonIcon />
                     </p>
-                    <p style={{ fontSize: "16px" }}>
-                      {employees.firstName} {employees.middleName}{" "}
-                      {employees.lastName}
-                    </p>
+                    <p style={{ fontSize: "16px" }}>{employees?.fullName||''}</p>
                   </div>
                 </MenuItem>
               </NavLink>

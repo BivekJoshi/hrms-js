@@ -1,22 +1,19 @@
-import { useMutation } from 'react-query';
-import { setUser } from '../../../../app/utils/cookieHelper';
-import { login } from '../../../api/login/login-api';
-import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
+import { useMutation } from "react-query";
+import { setUser } from "../../../../app/utils/cookieHelper";
+import { login } from "../../../api/login/login-api";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
-export const useLogin = ({ onSuccess }) => {
+export const useLogin = () => {
   const navigate = useNavigate();
   return useMutation(
-    ['login'],
+    ["login"],
     ({ email, password }) => login(email, password),
     {
-      onSuccess: (data, variables, context) => {
-        navigate('/admin/dashboard');
-        toast.success('Login Successful');
-
-        setUser({
-          token: data,
-        });
+      onSuccess: (data) => {
+        setUser(data);
+        toast.success("Login Successful");
+        navigate("/admin/dashboard");
       },
     }
   );

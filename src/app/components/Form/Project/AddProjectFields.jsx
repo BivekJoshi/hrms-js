@@ -26,16 +26,27 @@ const projectOptions = [
 const AddprojectFields = ({ onClose, isLoading }) => {
   const { data: employeeData, isLoading: loadingEmployee } = useGetEmployee();
   const { data: companyData, isLoading: loadingCompany } = useGetCompany();
- // console.log(employeeData)
+  // console.log(employeeData)
 
   const { formik } = useAddProjectForm();
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
-    onClose();
+
+    if (formik.isValid) {
+      formik.setTouched({
+        projectName: true,
+        startDate: true,
+        endDate: true,
+        taskStatus: true,
+        projectLeadId: true,
+        companyId: true,
+      });
+      onClose();
+    }else {
+			toast.error('Please make sure you have filled the form correctly');    
   };
-
-
+}
 
   return (
     !isLoading && (
@@ -67,9 +78,7 @@ const AddprojectFields = ({ onClose, isLoading }) => {
             fullWidth
             value={formik.values.startDate}
             onChange={formik.handleChange}
-            error={
-              formik.touched.startDate && Boolean(formik.errors.startDate)
-            }
+            error={formik.touched.startDate && Boolean(formik.errors.startDate)}
             helperText={formik.touched.startDate && formik.errors.startDate}
             variant="outlined"
             autoFocus
@@ -95,20 +104,20 @@ const AddprojectFields = ({ onClose, isLoading }) => {
 
         <Grid item xs={12} sm={12}>
           <TextField
-            id="projectStatus"
-            name="projectStatus"
+            id="taskStatus"
+            name="taskStatus"
             select
             label="Project Status"
             placeholder="Select your project status"
             fullWidth
-            value={formik.values.projectStatus}
+            value={formik.values.taskStatus}
             onChange={formik.handleChange}
             error={
-              formik.touched.projectStatus &&
-              Boolean(formik.errors.projectStatus)
+              formik.touched.taskStatus &&
+              Boolean(formik.errors.taskStatus)
             }
             helperText={
-              formik.touched.projectStatus && formik.errors.projectStatus
+              formik.touched.taskStatus && formik.errors.taskStatus
             }
             variant="outlined"
             InputLabelProps={{ shrink: true }}
@@ -122,8 +131,7 @@ const AddprojectFields = ({ onClose, isLoading }) => {
         </Grid>
 
         <Grid item xs={12} sm={12}>
-
-            {/* <Autocomplete
+          {/* <Autocomplete
             id='projectLeadId'
             name='projectLeadId'
             options={employeeData}
@@ -163,11 +171,11 @@ const AddprojectFields = ({ onClose, isLoading }) => {
             InputLabelProps={{ shrink: true }}
           >
             {!loadingEmployee &&
-            employeeData.map((option) => (
-              <MenuItem key={option?.id} value={option?.id}>
-                {option?.firstName}
-              </MenuItem>
-            ))}
+              employeeData.map((option) => (
+                <MenuItem key={option?.id} value={option?.id}>
+                  {option?.firstName}
+                </MenuItem>
+              ))}
           </TextField>
         </Grid>
 
@@ -181,9 +189,7 @@ const AddprojectFields = ({ onClose, isLoading }) => {
             fullWidth
             value={formik.values.companyId}
             onChange={formik.handleChange}
-            error={
-              formik.touched.companyId && Boolean(formik.errors.companyId)
-            }
+            error={formik.touched.companyId && Boolean(formik.errors.companyId)}
             helperText={formik.touched.companyId && formik.errors.companyId}
             variant="outlined"
             autoFocus

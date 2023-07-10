@@ -4,27 +4,32 @@ import AddLeaveTypeFields from '../../../components/Form/LeaveType/AddLeaveTypeF
 import EditLeaveTypeFields from '../../../components/Form/LeaveType/EditLeaveTypeFields';
 import { useGetLeaveTypeById } from '../../../hooks/leaveType/useLeaveType';
 
-export const AddLeaveTypeModal = ({ open, handleCloseModal}) => {
+export const AddLeaveTypeModal = ({ open, handleCloseModal, existingLeaveTypes }) => {
   return (
     <div>
       <FormModal
         open={open}
         onClose={handleCloseModal}
-        formComponent={<AddLeaveTypeFields onClose={handleCloseModal} />}
+        formComponent={
+          <AddLeaveTypeFields
+            onClose={handleCloseModal}
+            existingLeaveTypes={existingLeaveTypes}
+          />
+        }
       />
     </div>
   )
 }
 
 export const EditLeaveTypeModal = ({ open, handleCloseModal, id }) => {
-    const { data } = useGetLeaveTypeById(id);
-    return (
-      <div>
-        <FormModal
-          open={open}
-          onClose={handleCloseModal}
-          formComponent={<EditLeaveTypeFields onClose={handleCloseModal} data={data} />}
-        />
-      </div>
-    )
-  }
+  const { data } = useGetLeaveTypeById(id);
+  return (
+    <div>
+      <FormModal
+        open={open}
+        onClose={handleCloseModal}
+        formComponent={<EditLeaveTypeFields onClose={handleCloseModal} data={data} />}
+      />
+    </div>
+  )
+}

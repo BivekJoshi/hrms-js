@@ -1,5 +1,6 @@
 import React from "react";
 import { useGetCompany } from "../../../hooks/company/useCompany";
+import { TabScrollButton } from '@mui/material';
 import {
   Box,
   Button,
@@ -10,25 +11,11 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-// import "../../Project/project.css";
-// import butterfly from "../../../../assets/butterfly.png";
 
 const CompanyGridView = ({ companyData, isLoading, handleEditCompany, handleDeleteCompany }) => {
 
   return (
     <>
-      <Box>
-        <Typography
-          variant="h6"
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            marginBottom: "1.2rem",
-          }}
-        >
-          Company List
-        </Typography>
-      </Box>
       <Grid
         container
         item
@@ -39,45 +26,53 @@ const CompanyGridView = ({ companyData, isLoading, handleEditCompany, handleDele
         }}
       >
         {companyData.map((item, index) => (
-          <Card key={index} className="icon-style-card">
-            <div className="icon-style-inner"></div>
-            {/* <div className="butterfly-inner">
-            //   <img src={butterfly} alt="butteryfly-image" />
-            </div> */}
+          <Card key={index}>
             <CardHeader
               sx={{
                 textAlign: "center",
                 display: "flex",
                 justifyContent: "space-around",
               }}
-              title={item.companyName}
+              title={item?.companyName}
             />
-            <CardContent>
-              {item.companyType} <br />
-              {item.companyDescription
-                ? item.companyDescription.slice(0, 30)
-                : null}
+            <CardContent sx={{ display: "flex", flexDirection: "column", gap: "1rem", overflow: "auto", height: "5rem" }}>
+              <Typography variant="h5">{item?.companyType || null}</Typography>
+              <Typography variant="p">{item?.companyDescription || null}</Typography>
             </CardContent>
             <CardActions
               sx={{
                 display: "flex",
-                justifyContent: "space-between",
-                alignItems: "baseline",
+                justifyContent: "space-around",
+                marginTop: "0.4rem"
               }}
             >
-              <Button size="small" variant="contained">
-                Show more
-              </Button>
-              <Button size="small" variant="contained" onClick={() => handleEditCompany(item)}>
-                Edit
-              </Button>
-              <Button size="small" variant="contained" onClick={() => handleDeleteCompany(item)}>
-                Delete
-              </Button>
+
+              <Grid
+                container
+                direction="row"
+                justifyContent="flex-end"
+                alignItems="flex-end"
+              >
+                <Button
+                  variant="outlined"
+                  onClick={() => handleDeleteCompany(item)}
+                  sx={{ mt: 3, ml: 1 }}
+                  color="error"
+                >
+                  Delete
+                </Button>
+                <Button
+                  variant="contained"
+                  onClick={() => handleEditCompany(item)}
+                  sx={{ mt: 3, ml: 1 }}
+                >
+                  Edit
+                </Button>
+              </Grid>
             </CardActions>
           </Card>
         ))}
-        
+
       </Grid>
     </>
   );
