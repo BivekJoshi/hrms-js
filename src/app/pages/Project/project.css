@@ -38,6 +38,10 @@
         display: flex;
         font-size: small;
     }
+    .project-card-control{
+        display: flex;
+        flex-direction: row;
+    }
 }
 @media (max-width: 768px) {
     .project-button{

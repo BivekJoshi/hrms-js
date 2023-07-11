@@ -6,7 +6,6 @@ export const getEmployee = async () => {
 };
 export const getEmployeeData = async (pageNumber) => {
   const data = await axiosInstance.get(`/employee/page-wise?pageNumber=${pageNumber}`);
-  console.log(data);
   return data;
 };
 
@@ -50,16 +49,16 @@ export const getEmployeeBydepartment = async () => {
 
 
 
-{/*________________________EDIT-TO-ACTIVATE-EMPLOYEE_____________________________________*/ }
-export const addActiveEmployee = async (formData) => {
-  const { employeeId } = formData;
-  const data = await axiosInstance.put(`/project/change-activation-status/${employeeId}?isActive=true`);
-  return data;
-};
+// {/*________________________EDIT-TO-ACTIVATE-EMPLOYEE_____________________________________*/ }
+// export const addActiveEmployee = async (formData) => {
+//   const { employeeId } = formData;
+//   const data = await axiosInstance.put(`/project/change-activation-status/${employeeId}?isActive=true`);
+//   return data;
+// };
 
 {/*________________________EDIT-TO-DE-ACTIVATE-EMPLOYEE_____________________________________*/ }
 export const removeActiveEmployee = async (formData) => {
   const { employeeId } = formData;
-  const data = await axiosInstance.put(`/project/change-activation-status/${employeeId}?isActive=false`);
+  const data = await axiosInstance.put(`/employee/edit-activation/${employeeId}?setActivation=false&effectiveDate=2022-10-12`);
   return data;
 };
