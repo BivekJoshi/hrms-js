@@ -11,7 +11,8 @@ const PaginationItem = ({ number, currentPage }) => (
   </Button>
 );
 
-export const PagePagination = ({
+export const   PagePagination = ({
+  
   PostsPerPage,
   TotalPosts,
   Paginate,

@@ -31,16 +31,16 @@ const routes = [
     id: nanoid(),
     component: <Dashboard />,
   },
-  // {
-  //   path: "employee",
-  //   id: nanoid(),
-  //   component: <Employee />,
-  // },
   {
     path: "employee",
     id: nanoid(),
-    component: <EmployeeTest />,
+    component: <Employee />,
   },
+  // {
+  //   path: "employee",
+  //   id: nanoid(),
+  //   component: <EmployeeTest />,
+  // },
   {
     path: "employee/:id",
     id: nanoid(),
