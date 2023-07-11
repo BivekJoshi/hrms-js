@@ -60,7 +60,7 @@ const employeArray = Array.isArray(employeeData)
       >
         {currentPosts?.map((employee, index) => (
             <EmployeeCard
-              key={index}
+              Key={index}
               IsActive={employee.isActive}
               EmployeeId={employee.id}
               EFirstName={employee.firstName}
@@ -105,7 +105,7 @@ const employeArray = Array.isArray(employeeData)
       <Box padding="2rem" display="grid" justifyContent={"center"}>
         <PagePagination 
         PostsPerPage={postsPerPage}
-        TotalPosts={employeeData.length}
+        TotalPosts={employeArray.length}
         CurrentPage={currentPage}
         Paginate={paginate}
         />

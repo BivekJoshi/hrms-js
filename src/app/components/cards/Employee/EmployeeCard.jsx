@@ -63,28 +63,13 @@ const EmployeeCard = ({
     console.log("hello");
   };
   return (
-    // <Card
-    //   key={key}
-    //   sx={{
-    //     p: 2,
-    //     width: 300,
-    //     backgroundColor: (theme) =>
-    //       theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-    //     cursor: "pointer",
-    //   }}
-    //   style={{
-    //     textAlign: "center",
-    //     padding: ".5rem",
-    //   }}
-    // >
-    <>
-      {/* {JSON.stringify(EmployeeId)} */}
+    <Box maxWidth="350px">
       <MainCard
         grow={true}
         style={{
           textAlign: "center",
           padding: ".5rem",
-          maxWidth:"350px"
+         
         }}
       >
         <Box display="flex" justifyContent={"end"}>
@@ -219,7 +204,7 @@ const EmployeeCard = ({
           handleOpenEmailform={handleOpenEmailform}
         />
       )}
-    </>
+    </Box>
   );
 };
 
