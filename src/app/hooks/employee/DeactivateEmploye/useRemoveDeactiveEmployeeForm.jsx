@@ -8,6 +8,8 @@ export const useRemoveDeactiveEmployeeForm = (data) => {
     const formik = useFormik({
         initialValues: {
             employeeId: data?.id || "",
+            setActivation: data?.setActivation || "",
+            effectiveDate: data?.effectiveDate || "",
         },
         enableReinitialize: "true",
         onSubmit: (values) => {
