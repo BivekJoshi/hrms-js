@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { Box, Button, Modal } from '@mui/material';
+import { Box, Button, ButtonGroup, Modal } from '@mui/material';
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
@@ -56,13 +56,18 @@ const Employee = () => {
               <Tab label="Grid View" value="1" />
               <Tab label="Table View" value="2" />
             </TabList>
-            <Button
-              variant="contained"
-              sx={{ mt: 3, ml: 1 }}
-              onClick={handleAddOpenModal}
-            >
-              +Add Employee
-            </Button>
+            <ButtonGroup variant="contained" sx={{ mt: 3, ml: 1 }}>
+              <Button
+                onClick={handleAddOpenModal}
+              >
+                +Add Employee
+              </Button>
+              {/* <Button
+                onClick={handleAddOpenModal}
+              >
+                InActive Employee
+              </Button> */}
+            </ButtonGroup>
           </Box>
           <TabPanel value="1">
             <EmployeeGrid />
@@ -86,7 +91,7 @@ const Employee = () => {
               <Button
                 variant="contained"
                 style={{ marginTop: "10px" }}
-                onClick={()=>{
+                onClick={() => {
                   setOpenAddModal(false);
                 }}
                 sx={{ mt: 3, ml: 1 }}
