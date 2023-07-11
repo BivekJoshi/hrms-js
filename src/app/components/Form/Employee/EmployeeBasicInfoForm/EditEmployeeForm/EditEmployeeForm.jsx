@@ -7,26 +7,26 @@ import {
   StepLabel,
   Stepper,
   Typography,
-} from '@mui/material';
-import React, { useState } from 'react';
-import { toast } from 'react-toastify';
-import EmployeeBasicInfoForm from '../EmployeeBasicInfoForm';
-import useEditEmployeeForm from '../../../../../hooks/employee/EditEmployee/useEditEmployeeForm';
+} from "@mui/material";
+import React, { useState } from "react";
+import { toast } from "react-toastify";
+import EmployeeBasicInfoForm from "../EmployeeBasicInfoForm";
+import useEditEmployeeForm from "../../../../../hooks/employee/EditEmployee/useEditEmployeeForm";
 
-import EmployeeAddressDetailForm from '../../EmployeeAddressDetailForm/EmployeeAddressDetailForm';
-import { usePermanentAddressForm } from '../../../../../hooks/employee/AddAddress/useAddressForm';
-import { useGetAddressById } from '../../../../../hooks/employee/useAddress';
-import { useParams } from 'react-router';
-import { useGetEmployeeById } from '../../../../../hooks/employee/useEmployee';
-import EmployeeBankDetailForm from '../../EmployeeBankDetailForm/EmployeeBankDetailForm';
-import useAddBankForm from '../../../../../hooks/employee/AddBankForm/useAddBankForm';
+import EmployeeAddressDetailForm from "../../EmployeeAddressDetailForm/EmployeeAddressDetailForm";
+import { usePermanentAddressForm } from "../../../../../hooks/employee/AddAddress/useAddressForm";
+import { useGetAddressById } from "../../../../../hooks/employee/useAddress";
+import { useParams } from "react-router";
+import { useGetEmployeeById } from "../../../../../hooks/employee/useEmployee";
+import EmployeeBankDetailForm from "../../EmployeeBankDetailForm/EmployeeBankDetailForm";
+import useAddBankForm from "../../../../../hooks/employee/AddBankForm/useAddBankForm";
 
-import useQualificationForm from '../../../../../hooks/employee/AddQualification/useQualificationForm';
-import EmployeeQualificationDetailForm from '../../EmployeeQualificationDetailForm/EmployeeQualificationDetailForm';
-import EmployeeFamilyDetailForm from '../../EmployeeFamilyDetailForm/EmployeeFamilyDetailForm';
-import useFamilyForm from '../../../../../hooks/employee/AddFamily/useFamilyForm';
-import EmployeeDocumentDetailForm from '../../EmployeeDocumentDetailForm/EmployeeDocumentDetailForm';
-import useAddDocumentForm from '../../../../../hooks/employee/AddDocument/useAddDocumentForm';
+import useQualificationForm from "../../../../../hooks/employee/AddQualification/useQualificationForm";
+import EmployeeQualificationDetailForm from "../../EmployeeQualificationDetailForm/EmployeeQualificationDetailForm";
+import EmployeeFamilyDetailForm from "../../EmployeeFamilyDetailForm/EmployeeFamilyDetailForm";
+import useFamilyForm from "../../../../../hooks/employee/AddFamily/useFamilyForm";
+import EmployeeDocumentDetailForm from "../../EmployeeDocumentDetailForm/EmployeeDocumentDetailForm";
+import useAddDocumentForm from "../../../../../hooks/employee/AddDocument/useAddDocumentForm";
 
 const steps = [
   'Basic Details',
@@ -67,10 +67,10 @@ const EditEmployeeForm = () => {
   const handleNext = () => {
     switch (activeStep) {
       case 0:
-        formik.setFieldTouched('');
+        formik.setFieldTouched("");
         if (formik.dirty) {
           if (!formik.isValid) {
-            toast.error('Please make sure you have filled the form correctly');
+            toast.error("Please make sure you have filled the form correctly");
             return;
           }
           formik.handleSubmit();
@@ -78,41 +78,41 @@ const EditEmployeeForm = () => {
 
         break;
       case 1:
-        permanentFormik.setFieldTouched('');
+        permanentFormik.setFieldTouched("");
 
         if (permanentFormik.dirty) {
           if (!permanentFormik.isValid) {
-            toast.error('Please make sure you have filled the form correctly');
+            toast.error("Please make sure you have filled the form correctly");
             return;
           }
           permanentFormik.handleSubmit();
         }
         break;
       case 2:
-        familyFormik.setFieldTouched('');
+        familyFormik.setFieldTouched("");
         if (familyFormik.dirty) {
           if (!familyFormik.isValid) {
-            toast.error('Please make sure you have filled the form correctly');
+            toast.error("Please make sure you have filled the form correctly");
             return;
           }
           familyFormik.handleSubmit();
         }
         break;
       case 3:
-        qualificationFormik.setFieldTouched('');
+        qualificationFormik.setFieldTouched("");
         if (qualificationFormik.dirty) {
           if (!qualificationFormik.isValid) {
-            toast.error('Please make sure you have filled the form correctly');
+            toast.error("Please make sure you have filled the form correctly");
             return;
           }
           qualificationFormik.handleSubmit();
         }
         break;
       case 4:
-        bankFormik.setFieldTouched('');
+        bankFormik.setFieldTouched("");
         if (bankFormik.dirty) {
           if (!bankFormik.isValid) {
-            toast.error('Please make sure you have filled the form correctly');
+            toast.error("Please make sure you have filled the form correctly");
             return;
           }
           bankFormik.handleSubmit();
@@ -169,8 +169,11 @@ const EditEmployeeForm = () => {
       case 6:
         return <p>Hello World</p>;
 
+      case 7:
+        return <p>Other Details</p>;
+
       default:
-        throw new Error('Unknown Step');
+        throw new Error("Unknown Step");
     }
   };
 
@@ -182,15 +185,19 @@ const EditEmployeeForm = () => {
     setActiveStep(0);
   };
 
+  const handleSkip = () => {
+    setActiveStep(activeStep + 1);
+  };
+
   const handleStepClick = (label) => {
     const stepIndex = steps.indexOf(label);
     setActiveStep(stepIndex);
   };
 
   return (
-    <Container component='main' maxWidth='xlg' sx={{ mt: 5 }}>
-      <Paper variant='plain' sx={{ my: { xs: 0, md: 6 }, p: { xs: 0, md: 3 } }}>
-        <Typography component='h1' variant='h4' align='center'>
+    <Container component="main" maxWidth="xlg" sx={{ mt: 5 }}>
+      <Paper variant="plain" sx={{ my: { xs: 0, md: 6 }, p: { xs: 0, md: 3 } }}>
+        <Typography component="h1" variant="h4" align="center">
           Edit Employee
         </Typography>
         <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
@@ -203,10 +210,10 @@ const EditEmployeeForm = () => {
         <React.Fragment>
           {activeStep === steps.length ? (
             <React.Fragment>
-              <Typography variant='h5' gutterBottom>
+              <Typography variant="h5" gutterBottom>
                 Employee added successfully
               </Typography>
-              <Typography variant='subtitle1'>SuccessFul.</Typography>
+              <Typography variant="subtitle1">SuccessFul.</Typography>
               <Button onClick={handleReturn} sx={{ mt: 3, ml: 1 }}>
                 Return
               </Button>
@@ -214,19 +221,28 @@ const EditEmployeeForm = () => {
           ) : (
             <React.Fragment>
               {getStepContent(activeStep)}
-              <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+              <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
                 {activeStep !== 0 && (
                   <Button
                     onClick={handleBack}
                     sx={{ mt: 3, ml: 1 }}
-                    variant='outlined'
+                    variant="outlined"
                   >
                     Back
                   </Button>
                 )}
+                {activeStep !== 0 && (
+                  <Button
+                    sx={{ mt: 3, ml: 1 }}
+                    variant="outlined"
+                    onClick={handleSkip}
+                  >
+                    Skip
+                  </Button>
+                )}
                 {activeStep === steps.length - 1 ? (
                   <Button
-                    variant='contained'
+                    variant="contained"
                     onClick={() => {
                       formik.handleSubmit();
                     }}
@@ -236,7 +252,7 @@ const EditEmployeeForm = () => {
                   </Button>
                 ) : (
                   <Button
-                    variant='contained'
+                    variant="contained"
                     onClick={() => {
                       handleNext();
                     }}
