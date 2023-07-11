@@ -66,10 +66,10 @@ const EmployeeCard = ({
   };
 
   const [editedEmployee, seteditedEmployee] = useState({});
-  const [openEditModal, setOpenEditModal] = useState(false);
-  const handleCloseEditModal = () => setOpenEditModal(false);
+  const [openDeactivateModal, setOpenDeactivateModal] = useState(false);
+  const handleCloseDeactivateModal = () => setOpenDeactivateModal(false);
   const handleClick = () => {
-    setOpenEditModal(true);
+    setOpenDeactivateModal(true);
   };
 
   return (
@@ -219,11 +219,11 @@ const EmployeeCard = ({
         )}
       </Box>
 
-      {openEditModal && (
+      {openDeactivateModal && (
         <EditDeactivationEmployeeModal
           id={EmployeeId}
-          open={openEditModal}
-          handleClose={handleCloseEditModal}
+          open={openDeactivateModal}
+          handleCloseModal={handleCloseDeactivateModal}
         />
       )}
     </>
