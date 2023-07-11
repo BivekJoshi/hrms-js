@@ -58,7 +58,7 @@ export const getEmployeeBydepartment = async () => {
 
 {/*________________________EDIT-TO-DE-ACTIVATE-EMPLOYEE_____________________________________*/ }
 export const removeActiveEmployee = async (formData) => {
-  const { employeeId } = formData;
-  const data = await axiosInstance.put(`/employee/edit-activation/${employeeId}?setActivation=false&effectiveDate=2022-10-12`);
+  const { employeeId, setActivation, effectiveDate } = formData;
+  const data = await axiosInstance.put(`/employee/edit-activation/${employeeId}?setActivation=${setActivation}&effectiveDate=${effectiveDate}`);
   return data;
 };

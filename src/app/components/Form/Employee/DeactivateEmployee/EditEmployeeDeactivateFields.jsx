@@ -1,4 +1,4 @@
-import { Grid, Button, TextField, Checkbox } from "@mui/material";
+import { Grid, Button, TextField, Checkbox, MenuItem } from "@mui/material";
 import React, { useState } from "react";
 //import useAddProjectActiveForm from "../../../hooks/project/addProject/useAddProjectActiveForm";
 import { pink } from "@mui/material/colors";
@@ -15,12 +15,27 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
     if (formik.isValid) {
       formik.setTouched({
         employeeId: true,
+        setActivation: true,
+        effectiveDate: true,
       });
       onClose();
     } else {
       toast.error("please fill all the required fields");
     }
   };
+
+  const options = [
+    {
+      value: "true",
+      label: "Active Employee",
+      id: 1,
+    },
+    {
+      value: "False",
+      label: "In Active Employee",
+      id: 2,
+    },
+  ]
 
   return (
     !isLoading && (
@@ -36,6 +51,46 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
             onChange={formik.handleChange}
             error={formik.touched.employeeId && Boolean(formik.errors.employeeId)}
             helperText={formik.touched.employeeId && formik.errors.employeeId}
+            variant="outlined"
+            InputLabelProps={{ shrink: true }}
+          />
+        </Grid>
+        <Grid item xs={12} sm={12}>
+          <TextField
+            id="setActivation"
+            select
+            name="setActivation"
+            label="Employee Status"
+            placeholder="Enter Employee staus"
+            fullWidth
+            value={formik.values.setActivation}
+            onChange={formik.handleChange}
+            error={formik.touched.setActivation && Boolean(formik.errors.setActivation)}
+            helperText={formik.touched.setActivation && formik.errors.setActivation}
+            variant="outlined"
+            InputLabelProps={{ shrink: true }}
+          >
+            {
+              options?.map((option)=> (
+                <MenuItem key={option?.id} value={option?.value}>
+                {option?.label}
+              </MenuItem>
+              ))
+            }
+          </TextField>
+        </Grid>
+        <Grid item xs={12} sm={12}>
+          <TextField
+            id="effectiveDate"
+            name="effectiveDate"
+            label="Employee Name"
+            placeholder="Effective Date"
+            type="date"
+            fullWidth
+            value={formik.values.effectiveDate}
+            onChange={formik.handleChange}
+            error={formik.touched.effectiveDate && Boolean(formik.errors.effectiveDate)}
+            helperText={formik.touched.effectiveDate && formik.errors.effectiveDate}
             variant="outlined"
             InputLabelProps={{ shrink: true }}
           />
