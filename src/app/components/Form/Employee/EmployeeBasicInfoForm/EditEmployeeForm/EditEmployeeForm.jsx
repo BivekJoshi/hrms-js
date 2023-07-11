@@ -34,7 +34,7 @@ const steps = [
   'Family Details',
   'Educational Details',
   'Bank Details',
-  'Employee History',
+  // 'Employee History',
   'Document Details',
   'Other Details',
 ];
