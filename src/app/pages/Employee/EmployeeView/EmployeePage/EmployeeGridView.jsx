@@ -24,7 +24,7 @@ const EmployeeGridView = () => {
       <Grid
         container
         item
-        gap={3}
+        gap={1}
         className="project-card-control"
         sx={{
           display: "grid",

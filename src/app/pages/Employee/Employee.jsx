@@ -70,6 +70,9 @@ const Employee = () => {
             </TabList>
             <ButtonGroup variant="contained" sx={{ mt: 3, ml: 1 }}>
               <Button onClick={handleAddOpenModal}>+Add Employee</Button>
+              <Button onClick={() => {
+                navigate("deactivated")
+              }}>Inactive Employee</Button>
             </ButtonGroup>
           </Box>
           <TabPanel value="1">

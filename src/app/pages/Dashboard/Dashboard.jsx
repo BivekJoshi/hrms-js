@@ -171,9 +171,7 @@ const Dashboard = () => {
           <Typography> Total Project: {projectDataCount?.total}</Typography>
           <Typography>Completed: {projectDataCount?.completed}</Typography>
           <Typography>Pending: {projectDataCount?.pending}</Typography>
-          <Typography>
-            Work In Progress: {projectDataCount?.workInProgress}
-          </Typography>
+          <Typography> Work In Progress: {projectDataCount?.workInProgress}</Typography>
         </CardContent>
         <CardContent>
           <Box sx={{ display: "flex", flexDirection: "column", color: "#2c2945" }}>
