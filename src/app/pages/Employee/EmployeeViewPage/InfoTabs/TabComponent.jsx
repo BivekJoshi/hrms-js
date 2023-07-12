@@ -47,7 +47,7 @@ const TabComponent = ({ data }) => {
                                 fontWeight: 'bolder',
                             }}
                         />
-                        <Tab
+                        {/* <Tab
                             label='Experiences'
                             value='4'
                             style={{
@@ -55,7 +55,7 @@ const TabComponent = ({ data }) => {
                                 color: primaryColor,
                                 fontWeight: 'bolder',
                             }}
-                        />
+                        /> */}
                         <Tab
                             label='Promotion History'
                             value='5'
@@ -77,7 +77,7 @@ const TabComponent = ({ data }) => {
                     <AcademicsInfo data={data} />
                 </TabPanel>
                 <TabPanel value='4'>
-                    <AcademicsInfo />
+                    <AcademicsInfo data={data}/>
                 </TabPanel>
                 <TabPanel value='5'>
                     <PromotionHistory />

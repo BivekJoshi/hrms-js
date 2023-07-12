@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { Box, Button, Modal } from '@mui/material';
+import { Box, Button, ButtonGroup, Modal } from '@mui/material';
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
@@ -10,7 +10,6 @@ import EmployeeBasicInfoForm from '../../components/Form/Employee/EmployeeBasicI
 import useAddEmployeeForm from '../../hooks/employee/AddEmployee/useAddEmployeeForm';
 import EmployeeGrid from './EmployeeView/EmployeeGrid';
 import { useNavigate } from 'react-router-dom';
-
 
 const style = {
   position: "absolute",
@@ -32,8 +31,21 @@ const Employee = () => {
   const [openAddModal, setOpenAddModal] = useState(false);
   const handleAddOpenModal = () => setOpenAddModal(true);
 
-  const handleChange = (newValue) => {
+  const [openSubmitModal, setOpenSubmitModal] = useState(false);
+  const handleOpenSubmitModal = () => setOpenSubmitModal(true);
+
+  const handleChange = (event, newValue) => {
     setValue(newValue);
+  };
+
+  const handleSubmit = () => {
+    formik.handleSubmit();
+    if (formik.isValid) {
+      handleOpenSubmitModal(); 
+      setOpenAddModal(false)
+    } else {
+      toast.error('Please make sure you have filled the form correctly');
+    }
   };
 
   return (
@@ -56,22 +68,9 @@ const Employee = () => {
               <Tab label="Grid View" value="1" />
               <Tab label="Table View" value="2" />
             </TabList>
-            <Button
-              variant="contained"
-              sx={{ mt: 3, ml: 1 }}
-              onClick={handleAddOpenModal}
-            >
-              +Add Employee
-            </Button>
-            <Button
-              variant="contained"
-              sx={{ mt: 3, ml: 1 }}
-              onClick={() => {
-                navigate(`deactivated`)
-              }}
-            >
-              Inactive Employee
-            </Button>
+            <ButtonGroup variant="contained" sx={{ mt: 3, ml: 1 }}>
+              <Button onClick={handleAddOpenModal}>+Add Employee</Button>
+            </ButtonGroup>
           </Box>
           <TabPanel value="1">
             <EmployeeGrid />
@@ -94,7 +93,7 @@ const Employee = () => {
               <Button
                 variant="contained"
                 style={{ marginTop: "10px" }}
-                onClick={()=>{
+                onClick={() => {
                   setOpenAddModal(false);
                 }}
                 sx={{ mt: 3, ml: 1 }}
@@ -105,20 +104,40 @@ const Employee = () => {
               <Button
                 variant="contained"
                 style={{ marginTop: "10px" }}
-                onClick={() => {
-                  formik.handleSubmit();
-                  formik.isValid
-                    ? null
-                    : toast.error(
-                      'Please make sure you have filled the form correctly'
-                    );
-                }}
+                onClick={handleSubmit}
                 sx={{ mt: 3, ml: 1 }}
               >
                 Submit
               </Button>
             </Box>
           </Box>
+      </Modal>
+
+      <Modal
+        open={openSubmitModal}
+        onClose={() => setOpenSubmitModal(false)}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <div>
+          <Box sx={style}>
+            {/* Content of the second modal */}
+            <h1>Second Modal Content</h1>
+            <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+              <Button
+                variant="contained"
+                style={{ marginTop: "10px" }}
+                onClick={() => {
+                  setOpenSubmitModal(false);
+                }}
+                sx={{ mt: 3, ml: 1 }}
+                color="error"
+              >
+                Close
+              </Button>
+            </Box>
+          </Box>
+        </div>
       </Modal>
     </>
   );
