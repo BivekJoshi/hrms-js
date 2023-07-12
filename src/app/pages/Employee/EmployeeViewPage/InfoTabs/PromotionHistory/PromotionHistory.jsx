@@ -46,7 +46,6 @@ const columns = [
 const PromotionHistory = () => {
     const { id } = useParams();
     const { data: PromotionHistory, isLoading } = useGetPromotionHistory(id);
-    console.log("PromotionHistory", PromotionHistory)
 
     const [openAddModal, setOpenAddModal] = useState(false);
 

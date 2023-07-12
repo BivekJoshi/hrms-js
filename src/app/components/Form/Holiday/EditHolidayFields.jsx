@@ -6,7 +6,6 @@ import { useDeleteHoliday } from '../../../hooks/holiday/useHoliday';
 
 const EditHolidayFields = ({ onClose, isLoading ,data}) => {
     const { formik } = useEditHolidayForm(data);
-    // console.log("jkcxbasuibxcuiasbuicx",data)
 
     const handleFormSubmit = async () => {
         const isValid = await formik.validateForm(); // Validate the form

@@ -101,7 +101,6 @@ const EmployeeDocumentDetailForm = () => {
   };
 
   const handleChangeImage = (e) => {
-    console.log(e);
     setDocument(e.target.files[0]);
   };
 

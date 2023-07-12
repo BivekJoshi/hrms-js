@@ -1,6 +1,15 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { toast } from "react-toastify";
-import { removeActiveEmployee } from "../../../api/employee/employee-api";
+import { getDeactivatedEmployee, removeActiveEmployee } from "../../../api/employee/employee-api";
+
+/*________________________GET-DEACTIVATE-EMPLOYEE_____________________________________*/
+export const useGetDeactivatedEmployee = () => {
+  return useQuery(['getDeactivateEmployee'], () => getDeactivatedEmployee(), {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
+};
+
 
 /*________________________DE-ACTIVATE-EMPLOYEE_____________________________________*/
 export const useDeleteEmployee = ({ onSuccess }) => {

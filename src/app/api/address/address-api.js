@@ -1,7 +1,6 @@
 import { axiosInstance } from '../../../auth/axiosInterceptor';
 
 export const addPermanentAddress = async (formData, id) => {
-  console.log(formData.addresses[1]);
   if (formData.addresses[1]?.province === '') {
     const submittedData = formData.addresses[0];
     const finalData = {
@@ -9,7 +8,7 @@ export const addPermanentAddress = async (formData, id) => {
       addressType: "PERMANENT"
     }
   
-    console.log(submittedData);
+  
     const data = await axiosInstance.post(`/address/${id}`, [finalData]);
     return data;
   } else if (formData.addresses[1]?.province !== '') {
@@ -19,7 +18,7 @@ export const addPermanentAddress = async (formData, id) => {
         addressType: index === 0 ? 'PERMANENT' : 'TEMPORARY',
       };
     });
-    console.log(submittedData);
+  
     const data = await axiosInstance.post(`/address/${id}`, submittedData);
     return data;
   }
@@ -33,7 +32,6 @@ export const addTemporaryAddress = async (formData, id) => {
 export const getAddressById = (id) => {
   if (id) {
     const data = axiosInstance.get(`/address/employee/${id}`);
-    console.log(data?.district);
     return data;
   }
 };

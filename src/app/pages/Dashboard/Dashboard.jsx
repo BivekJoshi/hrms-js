@@ -222,18 +222,6 @@ const Dashboard = () => {
             />
           </Box>
         </CardContent>
-        {/* <CardContent>
-          <Box sx={{ flexGrow: 1 }}>
-            {Object.entries(projectDataCount).map(([keys,values]) => (
-              console.log({"keys": keys, "values": values})
-              // <BorderLinearProgress
-              //   key={keys}
-              //   variant="determinate"
-              //   value={values * 10}
-              // />
-            ))}
-          </Box>
-        </CardContent> */}
       </Card>
 
       <Card sx={{maxWidth: "500px", height: "350px", overflowY: "scroll"}}>

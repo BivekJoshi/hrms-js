@@ -39,7 +39,6 @@ const AddPromotionHistoryFields = ({ onClose, isLoading }) => {
                         getOptionLabel={(option) => `${option.positionName}` || ''}
                         value={formik.values.positionId || null}
                         onChange={(event, value) => {
-                            console.log(value); // Check the selected value in the console
                             formik.setFieldValue('positionId', value ? value.id : null);
                           }}
                         renderInput={(params) => (

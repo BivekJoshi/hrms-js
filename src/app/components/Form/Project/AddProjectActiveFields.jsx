@@ -8,9 +8,6 @@ import { useGetDeactivatedProject, useGetProject } from "../../../hooks/project/
 
 const AddprojectFields = ({ onClose, isLoading }) => {
   const { data: projectData, isLoading: loadingProject } = useGetDeactivatedProject();
- // console.log(employeeData)
-
- // const { formik } = useAddProjectActiveForm();
 
   const handleFormSubmit = () => {
     formik.handleSubmit();

@@ -10,6 +10,7 @@ import CustomBreadcrumb from "../theme/overrides/CustomBreadcrumb";
 import DeactivatedProject from "../app/pages/Project/DeactivatedProject/DeactivatedProject";
 import { useLocation } from "react-router-dom";
 import EmailForm from "../app/pages/Email/Email";
+import DeactivatedEmployee from "../app/pages/Employee/EmployeeDeactivationModal/DearctivateEmployee";
 
 const TodoList = Loadable(lazy(() => import("../app/pages/TodoList/TodoList")));
 const Event = Loadable(lazy(() => import("../app/pages/Event/Event")));
@@ -34,6 +35,11 @@ const routes = [
     path: "employee",
     id: nanoid(),
     component: <Employee />,
+  },
+  {
+    path: "employee/deactivated",
+    id: nanoid(),
+    component: <DeactivatedEmployee />,
   },
   {
     path: "employee/:id",

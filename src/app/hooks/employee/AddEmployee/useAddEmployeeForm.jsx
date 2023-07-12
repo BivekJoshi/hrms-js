@@ -29,11 +29,10 @@ const useAddEmployeeForm = () => {
   });
 
   const handleRequest = (values) => {
-    console.log(values);
     values = {
       ...values,
     };
-    mutate(values, formik, { onSuccess: () => console.log(values) });
+    mutate(values, formik);
   };
   return { formik };
 };

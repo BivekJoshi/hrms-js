@@ -22,10 +22,7 @@ const Birthdaytable = ({ data, isloading, currMonth }) => {
         dateOfBirth.getMonth() === today.getMonth() &&
         dateOfBirth.getDate() === today.getDate();
       const age = Age(row.dateOfBirth);
-      console.log(data[0].positionName);
       return {
-        // fullName: `${row.firstName} ${row.middleName === null ? "" : row.middleName
-        //   } ${row.lastName}`,
         fullName:`${row.fullName}`,
         position: row?.positionName || '',
         dateOfBirth: format(new Date(row.dateOfBirth), "dd MMMM", {
@@ -48,8 +45,6 @@ const Birthdaytable = ({ data, isloading, currMonth }) => {
         return 0;
       }
     });
-
-  // console.log(Data);
   return (
     <MaterialTable
       title={currMonth}

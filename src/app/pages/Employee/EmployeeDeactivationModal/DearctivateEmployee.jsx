@@ -1,47 +1,16 @@
 import MaterialTable from "@material-table/core";
 import React, { useState } from "react";
-import {
-  useAddActivateProject,
-  useGetDeactivatedProject,
-} from "../../../hooks/project/useProject";
 import { useGetEmployee } from "../../../hooks/employee/useEmployee";
-import { useGetProjectEmployeeById } from "../../../hooks/project/projectEmployee/useProjectEmployee";
-import { Box, Button, Grid, Stack } from "@mui/material";
-import ActiveConfirmationModal from "../../../components/Modal/ActivateConfirmationModal";
-import { AddProjectActiveModal } from "../ProjectModal/ProjectModal";
+import { Button, Stack } from "@mui/material";
+import { useGetDeactivatedEmployee } from "../../../hooks/employee/DeactivateEmploye/useEmployee";
 
 
 const DeactivatedEmployee = () => {
-  const { data: deactivatedProject, isLoading } = useGetDeactivatedProject();
-  const { data: employeeData } = useGetEmployee();
+  const { data: deactivatedEmployee, isLoading } = useGetDeactivatedEmployee();
 
   const [openActivateModal, setOpenActivateModal] = useState(false);
   const [activateProject, setActivateProject] = useState({});
   const handleCloseActivateModal = () => setOpenActivateModal(false);
-  
-
-  const getLeaderName = (rowData) => {
-    const projectId = rowData.projectLeaderId;
-    const employee = employeeData?.find((emp) => emp.id === projectId);
-    const name = `${employee.firstName} ${employee.middleName} ${employee.lastName}`;
-    return name;
-  };
-
-  const ActiveProjectEmployeeMutation = useAddActivateProject({});
-  const handleActiveProject = (rowData) => {
-    setActiveProject(rowData);
-    setOpenActiveModal(true);
-  };
-
-  const handleConfirmActive = () => {
-    ActiveProjectEmployeeMutation.mutate(activeProject.id);
-    setOpenActiveModal(false);
-  };
-
-  const handleActivateProject = (rowData) => {
-    setActivateProject(rowData);
-    setOpenActivateModal(true);
-  };
 
   const columns = [
     {
@@ -51,16 +20,9 @@ const DeactivatedEmployee = () => {
       sortable: false,
     },
     {
-      title: "Project Name",
-      field: "projectName",
+      title: "first Name",
+      field: "firstName",
       emptyValue: "-",
-      width: 120,
-    },
-    {
-      title: "Project Leader Name",
-      render: (rowData) => {
-        return <p>{getLeaderName(rowData)}</p>;
-      },
       width: 120,
     },
     {
@@ -70,9 +32,8 @@ const DeactivatedEmployee = () => {
           <Button
             variant="contained"
             color="primary"
-            onClick={() => handleActivateProject(rowData)}
           >
-            Activate Project
+            Activate Employee
           </Button>
         </Stack>
       ),
@@ -107,14 +68,6 @@ const DeactivatedEmployee = () => {
           },
         }}
       />
-
-      {openActivateModal && (
-        <AddEmployeeActiveModal
-          id={activateProject?.id}
-          open={openActivateModal}
-          handleCloseModal={handleCloseActivateModal}
-        />
-      )}
     </>
   );
 };

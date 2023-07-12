@@ -5,12 +5,11 @@ import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
-
 import EmployeeTable from './EmployeeView/EmployeeTable';
-
 import EmployeeBasicInfoForm from '../../components/Form/Employee/EmployeeBasicInfoForm/EmployeeBasicInfoForm';
 import useAddEmployeeForm from '../../hooks/employee/AddEmployee/useAddEmployeeForm';
 import EmployeeGrid from './EmployeeView/EmployeeGrid';
+import { useNavigate } from 'react-router-dom';
 
 
 const style = {
@@ -26,13 +25,14 @@ const style = {
 };
 
 const Employee = () => {
+  const navigate = useNavigate();
   const [value, setValue] = React.useState('1');
   const { formik } = useAddEmployeeForm();
 
   const [openAddModal, setOpenAddModal] = useState(false);
   const handleAddOpenModal = () => setOpenAddModal(true);
 
-  const handleChange = (event, newValue) => {
+  const handleChange = (newValue) => {
     setValue(newValue);
   };
 
@@ -63,6 +63,15 @@ const Employee = () => {
             >
               +Add Employee
             </Button>
+            <Button
+              variant="contained"
+              sx={{ mt: 3, ml: 1 }}
+              onClick={() => {
+                navigate(`deactivated`)
+              }}
+            >
+              Inactive Employee
+            </Button>
           </Box>
           <TabPanel value="1">
             <EmployeeGrid />
@@ -79,7 +88,6 @@ const Employee = () => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <div>
           <Box sx={style}>
             <EmployeeBasicInfoForm formik={formik} />
             <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
@@ -99,7 +107,6 @@ const Employee = () => {
                 style={{ marginTop: "10px" }}
                 onClick={() => {
                   formik.handleSubmit();
-                  // setOpenAddModal(false);
                   formik.isValid
                     ? null
                     : toast.error(
@@ -112,7 +119,6 @@ const Employee = () => {
               </Button>
             </Box>
           </Box>
-        </div>
       </Modal>
     </>
   );

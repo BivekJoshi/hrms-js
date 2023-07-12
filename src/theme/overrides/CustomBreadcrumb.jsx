@@ -7,7 +7,6 @@ const StyledBreadcrumbs = styled(Breadcrumbs)(({ theme }) => ({
 }));
 
 export default function CustomBreadcrumb({ routes, currentPath }) {
-  // console.log("CURRENT", currentPath)
   return (
     <div role="presentation" >
       <StyledBreadcrumbs aria-label="breadcrumb">

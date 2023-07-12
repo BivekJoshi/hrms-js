@@ -40,21 +40,12 @@ export const getEmployeeBydepartment = async () => {
   return data;
 };
 
+{/*________________________GET-DEACTTIVATED-EMPLOYEE_____________________________________*/ }
+export const getDeactivatedEmployee = async () => {
+  const data = await axiosInstance.get(`/employee/deactivated`);
+  return data;
+};
 
-
-
-
-
-
-
-
-
-// {/*________________________EDIT-TO-ACTIVATE-EMPLOYEE_____________________________________*/ }
-// export const addActiveEmployee = async (formData) => {
-//   const { employeeId } = formData;
-//   const data = await axiosInstance.put(`/project/change-activation-status/${employeeId}?isActive=true`);
-//   return data;
-// };
 
 {/*________________________EDIT-TO-DE-ACTIVATE-EMPLOYEE_____________________________________*/ }
 export const removeActiveEmployee = async (formData) => {

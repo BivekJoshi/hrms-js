@@ -12,24 +12,14 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Groups2Icon from "@mui/icons-material/Groups2";
-import { Box, Button, Grid, Stack } from "@mui/material";
+import { Box, Button, Grid } from "@mui/material";
 import "./project.css";
-import {
-  useDeleteProject,
-  useGetProject,
-} from "../../hooks/project/useProject";
-import {
-  AddProjectActiveModal,
-  AddProjectModal,
-  DeactivateProjectModal,
-  EditProjectModal,
-} from "./ProjectModal/ProjectModal";
+import { useGetProject } from "../../hooks/project/useProject";
+import { AddProjectModal, DeactivateProjectModal, EditProjectModal } from "./ProjectModal/ProjectModal";
 import { useNavigate } from "react-router-dom";
 import { useGetEmployee } from "../../hooks/employee/useEmployee";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import DeleteIcon from "@mui/icons-material/Delete";
-import DeleteConfirmationModal from "../../components/Modal/DeleteConfirmationModal";
-import DeactivateConfirmationModal from "../../components/Modal/DeactivateConfirmationModal";
 import { useGetProjectEmployee } from "../../hooks/project/projectEmployee/useProjectEmployee";
 
 const Project = () => {
@@ -39,28 +29,18 @@ const Project = () => {
   const { data: projectEmployeeData } = useGetProjectEmployee();
 
   const [openAddModal, setOpenAddModal] = useState(false);
-  const [openAddActiveModal, setOpenAddActiveModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openDeactivateModal, setOpenDeactiveModal] = useState(false);
 
   const [editedProject, setEditedProject] = useState({});
-  const [activateProject, setActivateProject] = useState({});
   const [deactivateProject, setDeactivateProject] = useState({});
 
   const handleAddOpenModal = () => setOpenAddModal(true);
   const handleCloseAddModal = () => setOpenAddModal(false);
 
-  const handleAddActiveOpenModal = () => setOpenAddActiveModal(true);
-  const handleCloseAddActiveModal = () => setOpenAddActiveModal(false);
-
   const handleCloseEditModal = () => setOpenEditModal(false);
-  const handleCloseActivateModal = () => setOpenActiveModal(false);
   const handleCloseDeactivateModal = () => setOpenDeactiveModal(false);
 
-  const handleActivateProject = (item) => {
-    setActivateProject(item);
-    setOpenActiveModal(true);
-  };
 
   const handleDeactivateProject = (item) => {
     setDeactivateProject(item);
@@ -86,7 +66,6 @@ const Project = () => {
     return projectEmployeeNumber || 0;
   }
 
-  console.log(projectData)
   if (isLoading) return <>Loading</>;
 
   return (
@@ -118,7 +97,6 @@ const Project = () => {
           </Typography>
         </Typography>
       </Box>
-      {/* {JSON.stringify(employeeData)} */}
 
       <Grid
         container
