@@ -33,7 +33,16 @@
     display: flex;
     justify-content: space-between;
 }
-
+@media (max-width: 968px) {
+    .project-button-inner{
+        display: flex;
+        font-size: small;
+    }
+    .project-card-control{
+        display: flex;
+        flex-direction: row;
+    }
+}
 @media (max-width: 768px) {
     .project-button{
         display: flex;
@@ -44,6 +53,9 @@
     .project-card-control{
         display: flex;
         flex-direction: column;
+    }
+    .project-button-inner{
+        display: flex;
     }
 }
 
@@ -64,5 +76,8 @@
         left: 33%;
         border-radius: 12px;
         width: 32%;
+    }
+    .project-button-inner{
+        display: flex;
     }
 }

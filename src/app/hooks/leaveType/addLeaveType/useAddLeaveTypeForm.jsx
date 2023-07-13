@@ -2,7 +2,7 @@ import { useFormik } from 'formik';
 import { useAddLeaveType } from '../useLeaveType';
 import { LeaveTypeSchema } from '../Validation/LeaveTypeScheme';
 
-const useAddLeaveTypeForm = () => {
+const useAddLeaveTypeForm = (onClose) => {
   const { mutate } = useAddLeaveType({});
 
   const formik = useFormik({
@@ -10,7 +10,7 @@ const useAddLeaveTypeForm = () => {
       leaveName: '',
       leaveTotal: '',
       leaveDescription: '',
-      isCarryForward: '',
+      isCarryForward: false,
     },
     validationSchema: LeaveTypeSchema,
     onSubmit: (values) => {
@@ -22,7 +22,12 @@ const useAddLeaveTypeForm = () => {
     values = {
       ...values,
     };
-    mutate(values, formik, { onSuccess: () => formik.handleReset() });
+    mutate(values, formik, {
+      onSuccess: () => {
+        formik.handleReset();
+        onClose(); 
+      }
+    });
   };
 
   return { formik };

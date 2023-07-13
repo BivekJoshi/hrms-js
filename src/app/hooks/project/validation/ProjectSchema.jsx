@@ -4,8 +4,8 @@ const ProjectSchema = Yup.object().shape({
     projectName: Yup.string().required(),
     startDate: Yup.string().required(),
     endDate: Yup.string().required(),
-    projectStatus: Yup.string().required(),
-    projectLeadId: Yup.number().required(),
+    taskStatus: Yup.string().required(),
+    projectLeadId: Yup.number(),
     companyId: Yup.number().required(),
 })
 

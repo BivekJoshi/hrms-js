@@ -3,6 +3,7 @@ import {
   addEmployee,
   editEmployee,
   getEmployee,
+  getEmployeeData,
   getEmployeeByCompany,
   getEmployeeByDesignation,
   getEmployeeById,
@@ -16,6 +17,13 @@ export const useGetEmployee = () => {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
+};
+export const useGetEmployeeData = (pageNumber) => {
+  return useQuery(['getEmployeeData', pageNumber], () => getEmployeeData(pageNumber), {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
+
 };
 
 export const useGetEmployeeById = (id) => {
@@ -36,7 +44,7 @@ export const useEditEmployee = ({ onSuccess }) => {
     },
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Employee edited successfully');
+        toast.success("Employee edited successfully");
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries('getEmployeeById');
       },
@@ -47,7 +55,8 @@ export const useEditEmployee = ({ onSuccess }) => {
   );
 };
 
-export const useAddEmployee = ({ onSuccess }) => {
+export const useAddEmployee = (onSuccess) => {
+  console.log(onSuccess)
   const queryClient = useQueryClient();
   return useMutation(['addEmployees'], (formData) => addEmployee(formData), {
     onSuccess: (data, variables, context) => {
@@ -61,23 +70,22 @@ export const useAddEmployee = ({ onSuccess }) => {
   });
 };
 
-
 export const useGetEmployeeByDepartment = (searchQuery) => {
-  return useQuery(['getEmployeeBydepartment',searchQuery], () => getEmployeeBydepartment(), {
+  return useQuery(['getEmployeeBydepartment', searchQuery], () => getEmployeeBydepartment(), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
 };
 
 export const useGetEmployeeByCompany = (searchQuery) => {
-  return useQuery(['getEmployeeByCompany',searchQuery], () => getEmployeeByCompany(searchQuery), {
+  return useQuery(['getEmployeeByCompany', searchQuery], () => getEmployeeByCompany(searchQuery), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
 };
 
 export const useGetEmployeeByDesignation = (searchQuery) => {
-  return useQuery(['getEmployeeByDesignation',searchQuery], () => getEmployeeByDesignation(searchQuery), {
+  return useQuery(['getEmployeeByDesignation', searchQuery], () => getEmployeeByDesignation(searchQuery), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });

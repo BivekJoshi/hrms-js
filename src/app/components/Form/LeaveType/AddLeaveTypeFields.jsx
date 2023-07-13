@@ -3,29 +3,80 @@ import {
   TextField,
   Button,
   FormControlLabel,
+  MenuItem,
 } from '@mui/material';
 import React from 'react';
 import { toast } from 'react-toastify';
 import useAddLeaveTypeForm from '../../../hooks/leaveType/addLeaveType/useAddLeaveTypeForm';
 import { ThemeSwitch } from '../../../../theme/ThemeSwitch';
 
-const AddLeaveTypeFields = ({ onClose, isLoading }) => {
-  const { formik } = useAddLeaveTypeForm();
+
+const LEAVENAME = [
+  {
+    value: 'CASUAL_LEAVE',
+    label: 'Casual Leave',
+  },
+  {
+    value: 'SICK_LEAVE',
+    label: 'Sick Leave',
+  },
+  {
+    value: 'ANNUAL_LEAVE',
+    label: 'Annual Leave',
+  },
+  {
+    value: 'FESTIVAL_LEAVE',
+    label: 'Festival Leave',
+  },
+  {
+    value: 'MARRIAGE_LEAVE',
+    label: 'Marriage Leave',
+  },
+  {
+    value: 'MATERNITY_LEAVE',
+    label: 'Maternity Leave',
+  },
+  {
+    value: 'MATERNITY_LEAVE_ADDITIONAL',
+    label: 'Maternity leave Additional',
+  },
+  {
+    value: 'PATERNITY_LEAVE',
+    label: 'Paternity Leave',
+  },
+  {
+    value: 'BEREAVEMENT_LEAVE',
+    label: 'Bereavement Leave',
+  },
+  {
+    value: 'UNPAID_LEAVE ',
+    label: 'Unpaid Leave',
+  },
+];
+
+const AddLeaveTypeFields = ({ onClose, isLoading, existingLeaveTypes }) => {
+  const { formik } = useAddLeaveTypeForm(onClose);
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
 
     if (formik.isValid) {
-      formik.setTouched({
+      formik({
         leaveName: true,
         leaveTotal: true,
         leaveDescription: true,
+        isCarryForward: false,
       });
-      onClose(); // Close the modal
     } else {
       toast.error('Please make sure you have filled the form correctly');
     }
   };
+
+  {/*Filter the leave names that are not already existing in the table*/ }
+
+  const FILTEREDLEAVENAMES = LEAVENAME.filter(
+    (option) => !existingLeaveTypes.includes(option.value)
+  );
 
   return (
     !isLoading && (
@@ -34,8 +85,9 @@ const AddLeaveTypeFields = ({ onClose, isLoading }) => {
           <TextField
             id='leaveName'
             name='leaveName'
-            label='Leave Name'
-            placeholder='Enter leave name'
+            select
+            label='Leave Type'
+            placeholder='Select your leaveName'
             fullWidth
             value={formik.values.leaveName}
             onChange={formik.handleChange}
@@ -44,7 +96,13 @@ const AddLeaveTypeFields = ({ onClose, isLoading }) => {
             variant='outlined'
             autoFocus
             InputLabelProps={{ shrink: true }}
-          />
+          >
+            {FILTEREDLEAVENAMES.map((option) => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
@@ -86,22 +144,20 @@ const AddLeaveTypeFields = ({ onClose, isLoading }) => {
         <Grid item xs={12} sm={12}>
           <FormControlLabel
             required
-            control={
-              <ThemeSwitch
-                checked={formik.values.isCarryForward}
-                onChange={formik.handleChange}
-              />
-            }
+            control={<ThemeSwitch
+              checked={formik.values.isCarryForward} // Set the checked value based on formik's values
+              onChange={formik.handleChange} // Handle the change event
+              name="isCarryForward"
+            />}
             label='Carry Forward'
             id='isCarryForward'
             name='isCarryForward'
+            value={formik.values.isCarryForward}
+            onChange={formik.handleChange}
             error={
-              formik.touched.isCarryForward &&
-              Boolean(formik.errors.isCarryForward)
+              formik.touched.isCarryForward && Boolean(formik.errors.isCarryForward)
             }
-            helperText={
-              formik.touched.isCarryForward && formik.errors.isCarryForward
-            }
+            helperText={formik.touched.isCarryForward && formik.errors.isCarryForward}
           />
         </Grid>
 
@@ -118,6 +174,7 @@ const AddLeaveTypeFields = ({ onClose, isLoading }) => {
             variant='contained'
             onClick={handleFormSubmit}
             sx={{ mt: 3, ml: 1 }}
+            onClose={onClose}
           >
             Add Leave Type
           </Button>

@@ -71,9 +71,9 @@ export const ThemeContextProvider = ({ children }) => {
         imageCaption: isDarkMode ? "#c5c7cb" : "#616161",
       },
       text: {
-        primary: isDarkMode ? "#fff" : "#000",
-        secondary: isDarkMode ? "#bdbdbd" : "#616161",
-        white: "#fff",
+        primary: isDarkMode ? "#000" : "#000",
+        secondary: isDarkMode ? "#fff" : "#616161",
+        white: "#000",
       },
       divider: isDarkMode ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.12)",
     },

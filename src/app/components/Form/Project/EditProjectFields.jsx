@@ -2,9 +2,14 @@ import { Grid, TextField, Button } from "@mui/material";
 import React from 'react';
 import { toast } from 'react-toastify';
 import useEditProjectForm from "../../../hooks/project/editProject/useEditProjectForm";
+import { useGetCompany } from "../../../hooks/company/useCompany";
+import { useGetEmployee } from "../../../hooks/employee/useEmployee";
 
 const EditProjectFields = ({ onClose, isLoading, data }) => {
     const { formik } = useEditProjectForm(data);
+    const { data: employeeData }  = useGetEmployee();
+    const {data: companyData} = useGetCompany();
+
     const handleFormSubmit = () => {
         formik.handleSubmit();
 
@@ -13,8 +18,8 @@ const EditProjectFields = ({ onClose, isLoading, data }) => {
                 projectName: true,
                 startDate: true,
                 endDate: true,
-                projectStatus: true,
-                projectLeaderId: true,
+                taskStatus: true,
+                projectLeadId: true,
                 companyId: true,
             });
             onClose();
@@ -22,6 +27,23 @@ const EditProjectFields = ({ onClose, isLoading, data }) => {
             toast.error("please fill all the required fields")
         }
     }
+
+
+    const getProjectLeaderName = (projectLeadId) => {
+        return(           
+            employeeData?.find((employee) => employee.id == projectLeadId)
+            ?.firstName || projectLeadId
+        )
+    }
+
+    const getCompanyName = (associateCompanies) => {
+        return(   
+            companyData?.find((company) => company.id == associateCompanies)
+            ?.companyName || associateCompanies
+        )
+    }
+
+
     return (
         !isLoading && (
             <Grid container spacing={3}>
@@ -72,15 +94,16 @@ const EditProjectFields = ({ onClose, isLoading, data }) => {
                 </Grid>
                 <Grid item xs={12} sm={12}>
                     <TextField
-                        id="projectStatus"
-                        name="projectStatus"
+                        id="taskStatus"
+                        name="taskStatus"
+                    
                         label="Project Status"
                         placeholder="enter project status"
                         fullWidth
-                        value={formik.values.projectStatus}
+                        value={formik.values.taskStatus}
                         onChange={formik.handleChange}
-                        error={formik.touched.projectStatus && Boolean(formik.errors.projectStatus)}
-                        helperText={formik.touched.projectStatus && formik.errors.projectStatus}
+                        error={formik.touched.taskStatus && Boolean(formik.errors.taskStatus)}
+                        helperText={formik.touched.taskStatus && formik.errors.taskStatus}
                         variant="outlined"
                         InputLabelProps={{ shrink: true }}
                     />
@@ -92,12 +115,13 @@ const EditProjectFields = ({ onClose, isLoading, data }) => {
                         label="Project Leader Name"
                         placeholder="enter ProjectLeadId"
                         fullWidth
-                        value={formik.values.projectLeaderId}
+                        value={getProjectLeaderName(formik.values.projectLeadId)}
                         onChange={formik.handleChange}
-                        error={formik.touched.projectLeaderId && Boolean(formik.errors.projectLeaderId)}
-                        helperText={formik.touched.projectLeaderId && formik.errors.projectLeaderId}
+                        error={formik.touched.projectLeadId && Boolean(formik.errors.projectLeadId)}
+                        helperText={formik.touched.projectLeadId && formik.errors.projectLeadId}
                         variant="outlined"
                         InputLabelProps={{ shrink: true }}
+                        
                     />
                 </Grid>
                 <Grid item xs={12} sm={12}>
@@ -107,12 +131,13 @@ const EditProjectFields = ({ onClose, isLoading, data }) => {
                         label="Company Name"
                         placeholder="enter companyId"
                         fullWidth
-                        value={formik.values.companyId}
+                        value={getCompanyName(formik.values.companyId)}
                         onChange={formik.handleChange}
                         error={formik.touched.companyId && Boolean(formik.errors.companyId)}
                         helperText={formik.touched.companyId && formik.errors.companyId}
                         variant="outlined"
                         InputLabelProps={{ shrink: true }}
+                        
                     />
                 </Grid>
 

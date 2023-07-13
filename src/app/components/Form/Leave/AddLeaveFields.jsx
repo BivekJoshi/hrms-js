@@ -35,7 +35,7 @@ const AddLeaveFields = ({ onClose, isLoading }) => {
     formik.handleSubmit();
 
     if (formik.isValid) {
-      formik.setTouched({
+      formik({
         employeeId: true,
         leaveTypeId: true,
         leaveReason: true,

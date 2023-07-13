@@ -1,14 +1,13 @@
-import React, { useReducer, createContext } from "react";
+import React from "react";
 import { Menu, MenuItem } from "@mui/material";
-
 import PersonIcon from "@mui/icons-material/Person";
 import { NavLink } from "react-router-dom";
-import SideBar from "../../components/SideBar/SideBar";
 
 const TodayBirthday = ({ open, setOpen, data, isLoading }) => {
   const handleClose = () => {
     setOpen(false);
   };
+
 
   return (
     <div>
@@ -33,8 +32,8 @@ const TodayBirthday = ({ open, setOpen, data, isLoading }) => {
           </p>
           {!isLoading &&
             data.length > 0 &&
-            data.map((employees, index) => (
-              <NavLink to={"birthday"} key={employees.id}>
+            data?.map((employees, index) => (
+              <NavLink to={`employee/${employees.id}`} key={employees.id}>
                 <MenuItem
                   style={{
                     color: "green",
@@ -56,10 +55,7 @@ const TodayBirthday = ({ open, setOpen, data, isLoading }) => {
                     <p style={{ height: "25px" }}>
                       <PersonIcon />
                     </p>
-                    <p style={{ fontSize: "16px" }}>
-                      {employees.firstName} {employees.middleName}{" "}
-                      {employees.lastName}
-                    </p>
+                    <p style={{ fontSize: "16px" }}>{employees?.fullName||''}</p>
                   </div>
                 </MenuItem>
               </NavLink>

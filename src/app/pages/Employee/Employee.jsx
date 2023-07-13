@@ -1,93 +1,154 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useGetEmployee } from '../../hooks/employee/useEmployee';
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
-import Modal from '@mui/material/Modal';
-import { Box, Grid } from '@mui/material';
+import * as React from 'react';
+import { useState } from 'react';
+import { Box, Button, ButtonGroup, Modal } from '@mui/material';
+import Tab from '@mui/material/Tab';
+import TabContext from '@mui/lab/TabContext';
+import TabList from '@mui/lab/TabList';
+import TabPanel from '@mui/lab/TabPanel';
+
+import EmployeeTable from './EmployeeView/EmployeeTable';
 import EmployeeBasicInfoForm from '../../components/Form/Employee/EmployeeBasicInfoForm/EmployeeBasicInfoForm';
 import useAddEmployeeForm from '../../hooks/employee/AddEmployee/useAddEmployeeForm';
-import { toast } from 'react-toastify';
-import EmployeeCard from '../../components/cards/Employee/EmployeeCard';
+import EmployeeGrid from './EmployeeView/EmployeeGrid';
+import { useNavigate } from 'react-router-dom';
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  bgcolor: "background.paper",
+  border: "1px solid #808080",
+  borderRadius: 2,
+  boxShadow: 24,
+  p: 4,
+};
 
 const Employee = () => {
-  const [openAddModal, setOpenAddModal] = useState(false);
-  const { data: employeeData, isLoading } = useGetEmployee();
-  const { formik } = useAddEmployeeForm();
+  const navigate = useNavigate();
 
-  const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    bgcolor: 'background.paper',
-    border: '1px solid #808080',
-    borderRadius: 2,
-    boxShadow: 24,
-    p: 4,
+  const [value, setValue] = React.useState('1');
+
+  const { formik, data } = useAddEmployeeForm({});
+
+  const [openAddModal, setOpenAddModal] = useState(false);
+  const handleAddOpenModal = () => setOpenAddModal(true);
+
+  const [openSubmitModal, setOpenSubmitModal] = useState(false);
+  const handleOpenSubmitModal = () => setOpenSubmitModal(true);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
   };
-  console.log(employeeData);
-  if (isLoading) return <>Loading</>;
+
+  const handleSubmit = () => {
+    formik.handleSubmit();
+    if (formik.isValid) {
+      handleOpenSubmitModal();
+      setOpenAddModal(false)
+    } else {
+      toast.error('Please make sure you have filled the form correctly');
+    }
+  };
+
   return (
     <>
-      <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-        <Button
-          variant='contained'
-          onClick={() => setOpenAddModal(true)}
-          style={{ marginBottom: '20px' }}
-        >
-          Add Employee
-        </Button>
-      </Box>
-      <Grid
-        container
-        item
-        gap={3}
-        className="project-card-control"
-        sx={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
-        }}
-      >
-        {employeeData?.map((employee, index) => (
-          <Box key={index}>
-            <EmployeeCard
-              IsActive={employee.isActive}
-              EmployeeId={employee.id}
-              EFirstName={employee.firstName}
-              EMiddleName={employee.middleName}
-              ELastName={employee.lastName}
-              OfficeEmail={employee?.officeEmail}
-              MobileNumber={employee?.mobileNumber}
-              Position={employee?.position?.positionName}
-            />
+      <TabContext value={value}>
+        <Box sx={{ width: '100%' }}>
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              borderTop: 1,
+              borderColor: 'divider',
+            }}
+          >
+            <TabList
+              onChange={handleChange}
+              aria-label="lab API tabs example"
+            >
+              <Tab label="Grid View" value="1" />
+              <Tab label="Table View" value="2" />
+            </TabList>
+            <ButtonGroup variant="contained" sx={{ mt: 3, ml: 1 }}>
+              <Button onClick={handleAddOpenModal}>+Add Employee</Button>
+            </ButtonGroup>
           </Box>
-        ))}
-      </Grid>
+          <TabPanel value="1">
+            <EmployeeGrid />
+          </TabPanel>
+          <TabPanel value="2">
+            <EmployeeTable />
+          </TabPanel>
+        </Box>
+      </TabContext>
+
       <Modal
         open={openAddModal}
         onClose={() => setOpenAddModal(false)}
-        aria-labelledby='modal-modal-title'
-        aria-describedby='modal-modal-description'
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
       >
         <div>
           <Box sx={style}>
             <EmployeeBasicInfoForm formik={formik} />
-            <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
               <Button
-                variant='contained'
-                style={{ marginTop: '10px' }}
-                onClick={() => {
-                  formik.handleSubmit();
-                  setOpenAddModal(false);
-                  formik.isValid
-                    ? null
-                    : toast.error(
-                      'Please make sure you have filled the form correctly'
-                    );
-                }}
+                variant="contained"
+                style={{ marginTop: "10px" }}
+                onClick={handleSubmit}
                 sx={{ mt: 3, ml: 1 }}
               >
                 Submit
+              </Button>
+
+              <Button
+                variant="contained"
+                style={{ marginTop: "10px" }}
+                onClick={() => {
+                  setOpenAddModal(false);
+                }}
+                sx={{ mt: 3, ml: 1 }}
+                color="error"
+              >
+                Cancel
+              </Button>
+            </Box>
+          </Box>
+        </div>
+      </Modal>
+
+      <Modal
+        open={openSubmitModal}
+        onClose={() => setOpenSubmitModal(false)}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <div>
+          <Box sx={style}>
+            <h3>Do you like to add more Details of this Employee??</h3>
+            <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+              <Button
+                variant="contained"
+                style={{ marginTop: "10px" }}
+                sx={{ mt: 3, ml: 1 }}
+                onClick={() => {
+                  navigate(`edit/${data.id}`);
+                }}
+              >
+                Yes
+              </Button>
+              <Button
+                variant="contained"
+                style={{ marginTop: "10px" }}
+                onClick={() => {
+                  setOpenSubmitModal(false);
+                }}
+                sx={{ mt: 3, ml: 1 }}
+                color="error"
+              >
+                No
               </Button>
             </Box>
           </Box>

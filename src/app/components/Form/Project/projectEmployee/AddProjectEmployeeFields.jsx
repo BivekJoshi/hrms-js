@@ -3,13 +3,23 @@ import React from "react";
 import { toast } from "react-toastify";
 import { useGetEmployee } from "../../../../hooks/employee/useEmployee";
 import { useGetCompany } from "../../../../hooks/company/useCompany";
-import { useAddProjectEmployee } from "../../../../hooks/project/projectEmployee/useProjectEmployee";
+import {
+  useAddProjectEmployee,
+  useGetProjectEmployeeById,
+} from "../../../../hooks/project/projectEmployee/useProjectEmployee";
 import { addProjectEmployee } from "../../../../api/project/projectEmployee-api";
 import useAddProjectEmployeeForm from "../../../../hooks/project/projectEmployee/addProjectEmployee/useAddProjectEmployeeForm";
+import { useGetProject, useGetProjectById } from "../../../../hooks/project/useProject";
+import { useParams } from "react-router-dom";
 
 const AddprojectEmployeeFields = ({ onClose, isLoading }) => {
+  const { id } = useParams();
+  // console.log({"id" : id})
   const { data: employeeData, isLoading: loadingEmployee } = useGetEmployee();
-  // console.log(companyData);
+  // const { data: projectEmployeeData } = useGetProjectEmployeeById(id);
+  const { data: projectData, isLoading: loadingProject } = useGetProject();
+  const { data: projectDataById } = useGetProjectById(id);
+  console.log(projectDataById)
   const { formik } = useAddProjectEmployeeForm();
 
   const handleFormSubmit = () => {
@@ -18,7 +28,7 @@ const AddprojectEmployeeFields = ({ onClose, isLoading }) => {
     if (formik.isValid) {
       formik.setTouched({
         assignedOn: true,
-        deAssignOn: true,
+        deAssignedOn: true,
         employeeId: true,
         projectId: true,
       });
@@ -27,6 +37,12 @@ const AddprojectEmployeeFields = ({ onClose, isLoading }) => {
       toast.error("Please make sure you have filled the form correctly");
     }
   };
+  
+  // const getProjectName = (projectId) => {
+  //   const project = projectData.find((prj) => prj.id == projectId );
+  //   const name = `${project?.projectName}`;
+  //   return name;
+  // };
 
   return (
     !isLoading && (
@@ -61,26 +77,24 @@ const AddprojectEmployeeFields = ({ onClose, isLoading }) => {
         <Grid item xs={12} sm={12}>
           <TextField
             id="projectId"
-            name="projectId"
             select
-            label="Project Lead Name"
-            placeholder="Enter Project Leader Name"
+            name="projectId"
+            label="Project Name"
+            placeholder="Enter Project Name"
             fullWidth
-            value={formik.values.projectId}
+            value={(formik.values.projectId)}
             onChange={formik.handleChange}
             error={formik.touched.projectId && Boolean(formik.errors.projectId)}
             helperText={formik.touched.projectId && formik.errors.projectId}
             variant="outlined"
             autoFocus
             InputLabelProps={{ shrink: true }}
-          >
-            {!loadingEmployee &&
-              employeeData.map((option) => (
-                // <MenuItem key={option?.id} value={option?.id}>
-                //   {option?.id.firstName}
-                //   </MenuItem>
-                console.log(option)
-              ))}
+            >
+            {
+                <MenuItem value={projectDataById?.id}>
+                  {projectDataById?.projectName}
+                </MenuItem>
+            }
           </TextField>
         </Grid>
         <Grid item xs={12} sm={12}>

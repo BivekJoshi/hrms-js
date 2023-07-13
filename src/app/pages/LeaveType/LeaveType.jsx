@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import MaterialTable from '@material-table/core';
 import { Box, Button, Stack } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -7,24 +7,36 @@ import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 
 import { useDeleteLeaveType, useGetLeaveType } from '../../hooks/leaveType/useLeaveType';
 import { AddLeaveTypeModal, EditLeaveTypeModal } from './LeaveTypeModal/LeaveTypeModal';
+import DeleteConfirmationModal from '../../components/Modal/DeleteConfirmationModal';
 
 
 const LeaveType = () => {
 	const { data: leaveTypeData, isLoading } = useGetLeaveType();
 
+	const [existingLeaveTypes, setExistingLeaveTypes] = useState([]);
+
 	const [openAddModal, setOpenAddModal] = useState(false);
 	const [openEditModal, setOpenEditModal] = useState(false);
+	const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
 	const [editedLeaveType, setEditedLeaveType] = useState({});
+	const [deletedLeaveType, setDeletedLeaveType] = useState({});
 
 	const handleAddOpenModal = () => setOpenAddModal(true);
 	const handleCloseAddModal = () => setOpenAddModal(false);
 
 	const handleCloseEditModal = () => setOpenEditModal(false);
+	const handleCloseDeleteModal = () => setOpenDeleteModal(false);
 
 	const deleteLeaveTypeMutation = useDeleteLeaveType({});
-	const handleDeleteLeaveType = (leavetypeId) => {
-		deleteLeaveTypeMutation.mutate(leavetypeId);
+	const handleDeleteLeaveType = (rowData) => {
+		setDeletedLeaveType(rowData);
+		setOpenDeleteModal(true);
+	};
+
+	const handleConfirmDelete = () => {
+		deleteLeaveTypeMutation.mutate(deletedLeaveType.id);
+		setOpenDeleteModal(false);
 	};
 
 	const handleEditLeaveType = (rowData) => {
@@ -32,6 +44,12 @@ const LeaveType = () => {
 		setOpenEditModal(true);
 	};
 
+	useEffect(() => {
+		if (leaveTypeData) {
+			const leaveNames = leaveTypeData.map((leaveType) => leaveType.leaveName);
+			setExistingLeaveTypes(leaveNames);
+		}
+	}, [leaveTypeData]);
 
 	const columns = [
 		{
@@ -71,7 +89,7 @@ const LeaveType = () => {
 					<Button color="primary" onClick={() => handleEditLeaveType(rowData)}>
 						<ModeEditOutlineIcon />
 					</Button>
-					<Button color="primary" onClick={() => handleDeleteLeaveType(rowData.id)}>
+					<Button color="primary" onClick={() => handleDeleteLeaveType(rowData)}>
 						<DeleteIcon />
 					</Button>
 				</Stack>
@@ -79,7 +97,8 @@ const LeaveType = () => {
 			sorting: false,
 			width: 120,
 		},
-	]
+	];
+
 	if (isLoading) return <>Loading</>;
 	return (
 		<>
@@ -120,9 +139,19 @@ const LeaveType = () => {
 				<AddLeaveTypeModal
 					open={openAddModal}
 					handleCloseModal={handleCloseAddModal}
+					existingLeaveTypes={existingLeaveTypes}
+				/>
+			)}
+			{openDeleteModal && (
+				<DeleteConfirmationModal
+					open={openDeleteModal}
+					handleCloseModal={handleCloseDeleteModal}
+					handleConfirmDelete={handleConfirmDelete}
+					message={"Leave Type"}
 				/>
 			)}
 		</>
 	);
 };
+
 export default LeaveType;
