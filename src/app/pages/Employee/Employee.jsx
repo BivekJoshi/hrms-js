@@ -71,7 +71,17 @@ const Employee = () => {
               <Tab label="Grid View" value="1" />
               <Tab label="Table View" value="2" />
             </TabList>
-            <ButtonGroup variant="contained" sx={{ mt: 3, ml: 1 }}>
+            <ButtonGroup variant="contained" sx={{ gap: "12px" }}>
+              {/* <TextField
+                label="Filter by Name"
+                value={nameFilter}
+                onChange={(e) => setNameFilter(e.target.value)}
+              />
+              <TextField
+                label="Filter by Position"
+                value={positionFilter}
+                onChange={(e) => setPositionFilter(e.target.value)}
+              /> */}
               <Button onClick={handleAddOpenModal}>+Add Employee</Button>
             </ButtonGroup>
           </Box>
