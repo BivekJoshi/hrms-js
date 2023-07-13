@@ -12,14 +12,14 @@ const EmployeeTableView = ({ employeeData, isLoading }) => {
         {
             title: 'SN',
             render: (rowData) => rowData.tableData.index + 1,
-            width: 80,
+            width: "3%",
             sortable: false,
         },
         {
             title: 'Employee',
             field: 'firstName',
             emptyValue: '-',
-            width: 300,
+            width: "10%",
         },
         {
             title: 'Position',

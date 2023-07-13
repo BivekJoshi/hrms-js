@@ -13,12 +13,6 @@ const AddEventFields = ({ onClose, isLoading }) => {
             formik.handleSubmit(); // Submit the form
 
             if (formik.isValid) {
-                formik({
-                    eventName: false,
-                    eventDate: false,
-                    eventTime: false,
-                    eventDescription: false,
-                });
                 onClose(); // Close the modal
             } else {
                 toast.error('Please make sure you have filled the form correctly');
@@ -106,11 +100,11 @@ const AddEventFields = ({ onClose, isLoading }) => {
                     justifyContent="flex-end"
                     alignItems="flex-end"
                 >
-                    <Button variant="contained" onClick={onClose} sx={{ mt: 3, ml: 1 }} color="error">
-                        Cancel
-                    </Button>
                     <Button variant="contained" onClick={handleFormSubmit} sx={{ mt: 3, ml: 1 }}>
                         Add Event
+                    </Button>
+                    <Button variant="contained" onClick={onClose} sx={{ mt: 3, ml: 1 }} color="error">
+                        Cancel
                     </Button>
                 </Grid>
             </Grid>
