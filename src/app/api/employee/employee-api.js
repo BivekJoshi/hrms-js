@@ -53,3 +53,10 @@ export const removeActiveEmployee = async (formData) => {
   const data = await axiosInstance.put(`/employee/edit-activation/${employeeId}?setActivation=${setActivation}&effectiveDate=${effectiveDate}`);
   return data;
 };
+
+{/*________________________EDIT-TO-ACTIVATE-EMPLOYEE_____________________________________*/ }
+export const addActiveEmployee = async (formData) => {
+  const { employeeId, setActivation, effectiveDate } = formData;
+  const data = await axiosInstance.put(`/employee/edit-activation/${employeeId}?setActivation=${setActivation}&effectiveDate=${effectiveDate}`);
+  return data;
+};

@@ -174,7 +174,8 @@ const Dashboard = () => {
           <Typography> Work In Progress: {projectDataCount?.workInProgress}</Typography>
         </CardContent>
         <CardContent>
-          <Box sx={{ display: "flex", flexDirection: "column", color: "#2c2945" }}>
+          {projectDataCount?.total >0 && 
+           ( <Box sx={{ display: "flex", flexDirection: "column", color: "#2c2945" }}>
             <Stack sx={{ display: "flex", justifyContent: "space-between" }}>
               <Typography variant="h5">Total Project</Typography>
               <Typography variant="h6">
@@ -218,7 +219,8 @@ const Dashboard = () => {
               variant="determinate"
               value={(projectDataCount?.workInProgress / projectDataCount?.total) * 100}
             />
-          </Box>
+          </Box>) || "No Projects"
+}
         </CardContent>
       </Card>
 

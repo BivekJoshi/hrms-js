@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useGetEmployee } from "../../../hooks/employee/useEmployee";
 import { Button, Stack } from "@mui/material";
 import { useGetDeactivatedEmployee } from "../../../hooks/employee/DeactivateEmploye/useEmployee";
-import { EditDeactivationEmployeeModal } from "../EmployeeDeactivationModal/EditDeactivationEmployeeModal";
+import { EditActivationEmployeeModal } from "../EmployeeDeactivationModal/EditDeactivationEmployeeModal";
 
 
 const DeactivatedEmployee = () => {
@@ -17,6 +17,7 @@ const DeactivatedEmployee = () => {
     setDeactivatedEmployee(rowData);
     setOpenDeactivatedModal(true);
   }
+  
   const columns = [
     {
       title: "SN",
@@ -77,7 +78,7 @@ const DeactivatedEmployee = () => {
       <MaterialTable
         columns={columns}
         data={deactivateEmployee}
-        title="In Active Projects"
+        title="In Active Employee"
         isLoading={isLoading}
         options={{
           padding: "dense",
@@ -96,9 +97,10 @@ const DeactivatedEmployee = () => {
           },
         }}
       />
+      
       {
         openDeactivatedModal && (
-          <EditDeactivationEmployeeModal
+          <EditActivationEmployeeModal
             id={deactivatedEmployee?.id}
             open={openDeactivatedModal}
             handleCloseModal={handleCloseDeactivatedModal}

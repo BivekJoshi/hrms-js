@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { toast } from "react-toastify";
-import { getDeactivatedEmployee, removeActiveEmployee } from "../../../api/employee/employee-api";
+import { addActiveEmployee, getDeactivatedEmployee, removeActiveEmployee } from "../../../api/employee/employee-api";
 
 /*________________________GET-DEACTIVATE-EMPLOYEE_____________________________________*/
 export const useGetDeactivatedEmployee = () => {
@@ -26,17 +26,17 @@ export const useDeleteEmployee = ({ onSuccess }) => {
     });
   };
   
-  // /*________________________ACTIVATE-EMPLOYEE_____________________________________*/
-  // export const useActiveEmployee = ({ onSuccess }) => {
-  //   const queryClient = useQueryClient();
-  //   return useMutation(["activeEmployee"], (formData) => addActiveProject(formData), {
-  //     onSuccess: (data, variables, context) => {
-  //       toast.success("successfully added Employee");
-  //       onSuccess && onSuccess(data, variables, context);
-  //       queryClient.invalidateQueries("getDeactivatedEmployee");
-  //     },
-  //     onError: (err, _variables, _context) => {
-  //       toast.error(`Error: ${(err.message)}`);
-  //     },
-  //   });
-  // };
+  /*________________________ACTIVATE-EMPLOYEE_____________________________________*/
+  export const useActiveEmployee = ({ onSuccess }) => {
+    const queryClient = useQueryClient();
+    return useMutation(["activeEmployee"], (formData) => addActiveEmployee(formData), {
+      onSuccess: (data, variables, context) => {
+        toast.success("successfully activated Employee");
+        onSuccess && onSuccess(data, variables, context);
+        queryClient.invalidateQueries("getDeactivateEmployee");
+      },
+      onError: (err, _variables, _context) => {
+        toast.error(`Error: ${(err.message)}`);
+      },
+    });
+  };
