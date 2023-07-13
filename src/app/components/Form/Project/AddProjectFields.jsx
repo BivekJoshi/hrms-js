@@ -26,7 +26,6 @@ const projectOptions = [
 const AddprojectFields = ({ onClose, isLoading }) => {
   const { data: employeeData, isLoading: loadingEmployee } = useGetEmployee();
   const { data: companyData, isLoading: loadingCompany } = useGetCompany();
-  // console.log(employeeData)
 
   const { formik } = useAddProjectForm();
 

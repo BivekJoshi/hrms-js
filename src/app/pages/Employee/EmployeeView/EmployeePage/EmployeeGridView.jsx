@@ -1,9 +1,8 @@
 import { Grid, Box } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import EmployeeCard from "../../../../components/cards/Employee/EmployeeCard";
 import { useGetEmployee } from "../../../../hooks/employee/useEmployee";
 import { PagePagination } from "../../../../components/Pagination/PagePagination";
-import { useState } from "react";
 
 const EmployeeGridView = () => {
   const { data: employeeData, isLoading } = useGetEmployee();
@@ -11,11 +10,7 @@ const EmployeeGridView = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(12);
 
-  const employeArray = Array.isArray(employeeData)
-    ? employeeData
-    : employeeData
-    ? Object.values(employeeData)
-    : [];
+  const employeArray = Array.isArray(employeeData) ? employeeData : employeeData ? Object.values(employeeData) : [];
 
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
@@ -29,7 +24,7 @@ const EmployeeGridView = () => {
       <Grid
         container
         item
-        gap={3}
+        gap={1}
         className="project-card-control"
         sx={{
           display: "grid",

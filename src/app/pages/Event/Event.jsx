@@ -9,7 +9,6 @@ import { useGetEvent } from '../../hooks/event/useEvent';
 
 const Event = () => {
     const { data: eventData, isLoading } = useGetEvent();
-    // console.log(eventData)
 
     const [getEventID, setEventGetID] = useState({});
 
@@ -36,7 +35,6 @@ const Event = () => {
                 title: event.eventName,
                 date: event.eventDate,
                 description: event.eventDescription,
-                // backgroundColor: "red",
                 id:event.id,
             }));
             setEvents(formattedEvents);

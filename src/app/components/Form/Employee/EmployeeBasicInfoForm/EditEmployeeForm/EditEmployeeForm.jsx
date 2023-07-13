@@ -29,14 +29,14 @@ import EmployeeDocumentDetailForm from "../../EmployeeDocumentDetailForm/Employe
 import useAddDocumentForm from "../../../../../hooks/employee/AddDocument/useAddDocumentForm";
 
 const steps = [
-  "Basic Details",
-  "Address Details",
-  "Family Details",
-  "Educational Details",
-  "Bank Details",
-  "Employee History",
-  "Document Details",
-  "Other Details",
+  'Basic Details',
+  'Address Details',
+  'Family Details',
+  'Educational Details',
+  'Bank Details',
+  // 'Employee History',
+  'Document Details',
+  'Other Details',
 ];
 const EditEmployeeForm = () => {
   const { id } = useParams();
@@ -62,7 +62,6 @@ const EditEmployeeForm = () => {
     data,
     employeeLoading,
   });
-  // console.log(permanentFormik);
 
   const handleNext = () => {
     switch (activeStep) {

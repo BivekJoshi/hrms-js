@@ -171,12 +171,11 @@ const Dashboard = () => {
           <Typography> Total Project: {projectDataCount?.total}</Typography>
           <Typography>Completed: {projectDataCount?.completed}</Typography>
           <Typography>Pending: {projectDataCount?.pending}</Typography>
-          <Typography>
-            Work In Progress: {projectDataCount?.workInProgress}
-          </Typography>
+          <Typography> Work In Progress: {projectDataCount?.workInProgress}</Typography>
         </CardContent>
         <CardContent>
-          <Box sx={{ display: "flex", flexDirection: "column", color: "#2c2945" }}>
+          {projectDataCount?.total >0 && 
+           ( <Box sx={{ display: "flex", flexDirection: "column", color: "#2c2945" }}>
             <Stack sx={{ display: "flex", justifyContent: "space-between" }}>
               <Typography variant="h5">Total Project</Typography>
               <Typography variant="h6">
@@ -220,20 +219,9 @@ const Dashboard = () => {
               variant="determinate"
               value={(projectDataCount?.workInProgress / projectDataCount?.total) * 100}
             />
-          </Box>
+          </Box>) || "No Projects"
+}
         </CardContent>
-        {/* <CardContent>
-          <Box sx={{ flexGrow: 1 }}>
-            {Object.entries(projectDataCount).map(([keys,values]) => (
-              console.log({"keys": keys, "values": values})
-              // <BorderLinearProgress
-              //   key={keys}
-              //   variant="determinate"
-              //   value={values * 10}
-              // />
-            ))}
-          </Box>
-        </CardContent> */}
       </Card>
 
       <Card sx={{maxWidth: "500px", height: "350px", overflowY: "scroll"}}>

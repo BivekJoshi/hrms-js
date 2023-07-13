@@ -1,27 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Email, LocalPhone } from "@mui/icons-material";
-import { Box, Button, Card, CardMedia } from "@mui/material";
+import { Box, Button, CardMedia } from "@mui/material";
 import { Chip, ClickAwayListener, Grow, Stack } from "@mui/material";
 import { MenuItem, MenuList, Paper, Popper, Typography } from "@mui/material";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import Image1 from "../../../../assets/wave.png";
 import MainCard from "../MainCard";
 import EmailModal from "../../../pages/Email/EmailModal";
 import { EditDeactivationEmployeeModal } from "../../../pages/Employee/EmployeeDeactivationModal/EditDeactivationEmployeeModal";
-import { useGetEmployeeById } from "../../../hooks/employee/useEmployee";
 
-const EmployeeCard = ({
-  IsActive,
-  EmployeeId,
-  EFirstName,
-  EMiddleName,
-  ELastName,
-  OfficeEmail,
-  MobileNumber,
-  Position,
-}) => {
-  //dropdown menu
+const EmployeeCard = ({ IsActive, EmployeeId, EFirstName, EMiddleName, ELastName, OfficeEmail, MobileNumber, Position }) => {
   const [open, setOpen] = useState(false);
   const [openEmailForm, setOpenEmailForm] = useState(false);
 
@@ -57,15 +46,10 @@ const EmployeeCard = ({
   const handleOpenEmailform = () => {
     setOpenEmailForm(true);
   };
-  // const handleOpenEmail = (emailData) => {
-  //   setEditEmail(emailData);
-  //   // setOpenEditModal(true);
-  // };
   const handleCloseEmailform = () => {
     setOpenEmailForm(false);
   };
 
-  const [editedEmployee, seteditedEmployee] = useState({});
   const [openDeactivateModal, setOpenDeactivateModal] = useState(false);
   const handleCloseDeactivateModal = () => setOpenDeactivateModal(false);
   const handleClick = () => {
@@ -91,9 +75,9 @@ const EmployeeCard = ({
               }}
               onClick={handleClick}
               variant="outlined"
-              color={(IsActive = true ? "success" : "warning")}
+              color={IsActive = true ? "success" : "warning"}
             >
-              {(IsActive = true ? "Active" : "InActive")}
+              {IsActive = true ? "Active" : "InActive"}
             </Button>
             <Box>
               <Button
@@ -159,25 +143,25 @@ const EmployeeCard = ({
               </Popper>
             </Box>
           </Box>
-          <div style={{ textAlign: " -webkit-center", marginTop: "1rem" }}>
+          <Stack style={{ textAlign: " -webkit-center", marginTop: "1rem" }}>
             <CardMedia
               component="img"
               src={Image1}
               alt="Paella dish"
               sx={{ width: 66, height: 66, borderRadius: "2rem" }}
             />
-          </div>
-          <div>
-            <p style={{ fontWeight: 700, margin: "1rem 0", fontSize: "20px" }}>
+          </Stack>
+          <Stack>
+            <Typography style={{ fontWeight: 700, margin: "1rem 0", fontSize: "20px" }}>
               {EFirstName} {EMiddleName} {ELastName}
-            </p>
+            </Typography>
             <Box padding={"0 1rem"}>
               <Typography variant="body2" gutterBottom>
                 <Chip label={Position} style={{ width: 230 }} />
               </Typography>
             </Box>
-          </div>
-          <div
+          </Stack>
+          <Stack
             style={{
               fontSize: ".9rem",
             }}
@@ -192,7 +176,7 @@ const EmployeeCard = ({
                 alignItems="center"
               >
                 <Email />
-                <p style={{ margin: "10px 0" }}>{OfficeEmail}</p>
+                <Typography variant="p" style={{ margin: "10px 0" }}>{OfficeEmail}</Typography>
               </Stack>
 
               <Stack
@@ -203,10 +187,10 @@ const EmployeeCard = ({
                 alignItems="center"
               >
                 <LocalPhone />
-                <p style={{ margin: "10px 0" }}> {MobileNumber}</p>
+                <Typography variant="p" style={{ margin: "10px 0" }}> {MobileNumber}</Typography>
               </Stack>
             </Box>
-          </div>
+          </Stack>
         </MainCard>
         {openEmailForm && (
           <EmailModal

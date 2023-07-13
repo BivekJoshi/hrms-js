@@ -3,7 +3,7 @@ import { sendEmail } from "../../api/email/email-api";
 import { toast } from "react-toastify";
 
 export const useSendEmail = ({ employeeId, onSuccess }) => {
-  // console.log("use", onSuccess);
+
   const queryClient = useQueryClient();
 
   return useMutation(
@@ -12,7 +12,6 @@ export const useSendEmail = ({ employeeId, onSuccess }) => {
     {
       onSuccess: (data, variables, context) => {
         toast.success("Successful send Mail");
-        // Perform any additional logic on success
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries("sendEmail");
       },
