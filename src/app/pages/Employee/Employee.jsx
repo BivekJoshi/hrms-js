@@ -10,6 +10,7 @@ import EmployeeTable from './EmployeeView/EmployeeTable';
 import EmployeeBasicInfoForm from '../../components/Form/Employee/EmployeeBasicInfoForm/EmployeeBasicInfoForm';
 import useAddEmployeeForm from '../../hooks/employee/AddEmployee/useAddEmployeeForm';
 import EmployeeGrid from './EmployeeView/EmployeeGrid';
+import { useNavigate } from 'react-router-dom';
 
 const style = {
   position: "absolute",
@@ -24,8 +25,11 @@ const style = {
 };
 
 const Employee = () => {
+  const navigate = useNavigate();
+
   const [value, setValue] = React.useState('1');
-  const { formik } = useAddEmployeeForm();
+
+  const { formik, data } = useAddEmployeeForm({});
 
   const [openAddModal, setOpenAddModal] = useState(false);
   const handleAddOpenModal = () => setOpenAddModal(true);
@@ -40,7 +44,7 @@ const Employee = () => {
   const handleSubmit = () => {
     formik.handleSubmit();
     if (formik.isValid) {
-      handleOpenSubmitModal(); 
+      handleOpenSubmitModal();
       setOpenAddModal(false)
     } else {
       toast.error('Please make sure you have filled the form correctly');
@@ -93,6 +97,15 @@ const Employee = () => {
               <Button
                 variant="contained"
                 style={{ marginTop: "10px" }}
+                onClick={handleSubmit}
+                sx={{ mt: 3, ml: 1 }}
+              >
+                Submit
+              </Button>
+
+              <Button
+                variant="contained"
+                style={{ marginTop: "10px" }}
                 onClick={() => {
                   setOpenAddModal(false);
                 }}
@@ -100,14 +113,6 @@ const Employee = () => {
                 color="error"
               >
                 Cancel
-              </Button>
-              <Button
-                variant="contained"
-                style={{ marginTop: "10px" }}
-                onClick={handleSubmit}
-                sx={{ mt: 3, ml: 1 }}
-              >
-                Submit
               </Button>
             </Box>
           </Box>
@@ -122,9 +127,18 @@ const Employee = () => {
       >
         <div>
           <Box sx={style}>
-            {/* Content of the second modal */}
-            <h1>Second Modal Content</h1>
+            <h3>Do you like to add more Details of this Employee??</h3>
             <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+              <Button
+                variant="contained"
+                style={{ marginTop: "10px" }}
+                sx={{ mt: 3, ml: 1 }}
+                onClick={() => {
+                  navigate(`edit/${data.id}`);
+                }}
+              >
+                Yes
+              </Button>
               <Button
                 variant="contained"
                 style={{ marginTop: "10px" }}
@@ -134,7 +148,7 @@ const Employee = () => {
                 sx={{ mt: 3, ml: 1 }}
                 color="error"
               >
-                Close
+                No
               </Button>
             </Box>
           </Box>

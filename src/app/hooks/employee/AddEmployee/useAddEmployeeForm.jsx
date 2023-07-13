@@ -3,7 +3,11 @@ import { useFormik } from 'formik';
 import { AddEmployeeSchema } from './addEmployeeSchema';
 
 const useAddEmployeeForm = () => {
-  const { mutate } = useAddEmployee({});
+  const { mutate, data, isLoading } = useAddEmployee(() => console.log('tesst'));
+
+  // console.log('Úse Add Employee')
+  // console.log(isLoading)
+  // console.log(data);
 
   const formik = useFormik({
     initialValues: {
@@ -29,13 +33,12 @@ const useAddEmployeeForm = () => {
   });
 
   const handleRequest = (values) => {
-    console.log(values);
     values = {
       ...values,
     };
-    mutate(values, formik, { onSuccess: () => console.log(values) });
+    mutate(values, formik, { onSuccess: (response) => console.log(response, 'from useaddemployee') });
   };
-  return { formik };
+  return { formik, data, isLoading };
 };
 
 export default useAddEmployeeForm;

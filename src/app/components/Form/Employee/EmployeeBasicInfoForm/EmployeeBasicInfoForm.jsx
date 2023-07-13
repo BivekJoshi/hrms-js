@@ -34,18 +34,13 @@ const maritalStatus = [
 
 const currentDate = new Date();
 const minAge = new Date(currentDate.getFullYear() - 18, currentDate.getMonth(), currentDate.getDate()).toISOString().split('T')[0];
-
+const today = new Date().toISOString().split('T')[0];
 
 const EmployeeBasicInfoForm = ({ formik, isLoading }) => {
   const { data: companyData, isLoading: loadingCompany } = useGetCompany();
-  const { data: designationData, isLoading: loadingDesignation } =
-    useGetDesignation();
-  const { data: departmentData, isLoading: loadingDepartment } =
-    useGetDepartment();
-  // const handleChange = (event) => {
-  //   formik.setFieldValue('gender', event.target.value);
-  // };
-  
+  const { data: designationData, isLoading: loadingDesignation } = useGetDesignation();
+  const { data: departmentData, isLoading: loadingDepartment } = useGetDepartment();
+
   return (
     !isLoading && (
       <Grid container spacing={3}>
@@ -155,6 +150,9 @@ const EmployeeBasicInfoForm = ({ formik, isLoading }) => {
               formik.touched.dateOfJoin && Boolean(formik.errors.dateOfJoin)
             }
             helperText={formik.touched.dateOfJoin && formik.errors.dateOfJoin}
+            inputProps={{
+              max: today,
+            }}
           />
         </Grid>
         <Grid item xs={12} sm={4}>
