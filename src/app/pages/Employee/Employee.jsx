@@ -1,6 +1,14 @@
 import * as React from "react";
 import { useState } from "react";
-import { Box, Button, ButtonGroup, Modal, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  Modal,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
@@ -10,6 +18,7 @@ import EmployeeBasicInfoForm from "../../components/Form/Employee/EmployeeBasicI
 import useAddEmployeeForm from "../../hooks/employee/AddEmployee/useAddEmployeeForm";
 import EmployeeGrid from "./EmployeeView/EmployeeGrid";
 import { useNavigate } from "react-router-dom";
+import { useGetEmployee } from "../../hooks/employee/useEmployee";
 
 const style = {
   position: "absolute",
@@ -39,7 +48,7 @@ const Employee = () => {
   };
 
   const handleSubmit = () => {
-     formik.handleSubmit();
+    formik.handleSubmit();
     if (formik.isValid) {
       handleOpenSubmitModal();
       setOpenAddModal(false);
@@ -53,6 +62,8 @@ const Employee = () => {
     toast.success("Form submitted successfully!");
     navigate(`/edit/${2}`);
   };
+
+
 
   return (
     <>
@@ -71,7 +82,17 @@ const Employee = () => {
               <Tab label="Grid View" value="1" />
               <Tab label="Table View" value="2" />
             </TabList>
-            <ButtonGroup variant="contained" sx={{ mt: 3, ml: 1 }}>
+            <ButtonGroup variant="contained" sx={{ gap: "12px" }}>
+              {/* <TextField
+                label="Filter by Name"
+                value={nameFilter}
+                onChange={(e) => setNameFilter(e.target.value)}
+              />
+              <TextField
+                label="Filter by Position"
+                value={positionFilter}
+                onChange={(e) => setPositionFilter(e.target.value)}
+              /> */}
               <Button onClick={handleAddOpenModal}>+Add Employee</Button>
               <Button
                 onClick={() => {
