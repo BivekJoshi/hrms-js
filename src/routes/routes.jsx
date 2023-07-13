@@ -8,8 +8,10 @@ import Project from "../app/pages/Project/Project";
 import ProjectDetail from "../app/pages/Project/ProjectDetail/ProjectDetail";
 import CustomBreadcrumb from "../theme/overrides/CustomBreadcrumb";
 import DeactivatedProject from "../app/pages/Project/DeactivatedProject/DeactivatedProject";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import EmailForm from "../app/pages/Email/Email";
+import DeactivatedEmployee from "../app/pages/Employee/DeactivatedEmployee/DeactivateEmployee";
+import { Breadcrumbs, Typography } from "@mui/material";
 
 const TodoList = Loadable(lazy(() => import("../app/pages/TodoList/TodoList")));
 const Event = Loadable(lazy(() => import("../app/pages/Event/Event")));
@@ -34,6 +36,11 @@ const routes = [
     path: "employee",
     id: nanoid(),
     component: <Employee />,
+  },
+  {
+    path: "employee/deactivated",
+    id: nanoid(),
+    component: <DeactivatedEmployee />,
   },
   {
     path: "employee/:id",
@@ -118,6 +125,22 @@ const routes = [
 ];
 
 export { routes };
+
+
+
+<Breadcrumbs aria-label="breadcrumb">
+  <Link underline="hover" color="inherit" href="/">
+    MUI
+  </Link>
+  <Link
+    underline="hover"
+    color="inherit"
+    to="/material-ui/getting-started/installation/"
+  >
+    Core
+  </Link>
+  <Typography color="text.primary">Breadcrumbs</Typography>
+</Breadcrumbs>
 
 export default function BreadCrumbs() {
   const location = useLocation();

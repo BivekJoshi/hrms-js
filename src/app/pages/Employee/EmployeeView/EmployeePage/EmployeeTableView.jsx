@@ -7,8 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 const EmployeeTableView = ({ employeeData, isLoading }) => {
     const navigate = useNavigate();
-    //  const position = employeeData[0]?.position?.positionName;
-    //  console.log(position)
+
     const columns = [
         {
             title: 'SN',
@@ -78,7 +77,7 @@ const EmployeeTableView = ({ employeeData, isLoading }) => {
                     exportButton: true,
                     padding: 'dense',
                     margin: 50,
-                    pageSize: 12,
+                    pageSize: 10,
                     emptyRowsWhenPaging: false,
                     headerStyle: {
                         backgroundColor: '#1c7ed6',

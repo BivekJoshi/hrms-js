@@ -5,7 +5,6 @@ import { HolidaySchema } from '../Validation/HolidaySchema';
 
 const useEditHolidayForm = (data) => {
     const { mutate } = useEditHoliday({});
-    // console.log("xuasncxjnaskjcxjkas",data)
     const formik = useFormik({
         initialValues: {
             holidayName: data?.holidayName || '',

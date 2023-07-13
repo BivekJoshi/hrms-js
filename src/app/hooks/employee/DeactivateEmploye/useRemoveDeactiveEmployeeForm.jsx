@@ -1,6 +1,6 @@
 import React from 'react';
 import { useFormik } from 'formik';
-import { useDeleteEmployee } from './useEmployee';
+import { useActiveEmployee, useDeleteEmployee } from './useEmployee';
 
 export const useRemoveDeactiveEmployeeForm = (data) => {
     
@@ -23,29 +23,28 @@ export const useRemoveDeactiveEmployeeForm = (data) => {
         };
         mutate(values, formik);
     };
-
     return { formik };
 };
 
-// export const useAddActiveEmployee = (data) => {
-    
-//     const { mutate } = useActiveProject({});
-//     const formik = useFormik({
-//         initialValues: {
-//             employeeId: data || "",
-//         },
-//         enableReinitialize: "true",
-//         onSubmit: (values) => {
-//             handleRequest(values);
-//         },
-//     });
+export const useAddActiveEmployeeForm = (id) => {
+    const { mutate } = useActiveEmployee({});
+    const formik = useFormik({
+        initialValues: {
+            employeeId: id || "",
+            setActivation: "",
+            effectiveDate: "",
+        },
+        enableReinitialize: "true",
+        onSubmit: (values) => {
+            handleRequest(values);
+        },
+    });
 
-//     const handleRequest = (values) => {
-//         values = {
-//             ...values,
-//         };
-//         mutate(values, formik);
-//     };
-
-//     return { formik };
-// };
+    const handleRequest = (values) => {
+        values = {
+            ...values,
+        };
+        mutate(values, formik);
+    };
+    return { formik };
+};

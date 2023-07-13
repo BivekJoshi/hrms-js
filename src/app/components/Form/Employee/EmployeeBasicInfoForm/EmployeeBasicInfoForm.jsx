@@ -44,7 +44,7 @@ const EmployeeBasicInfoForm = ({ formik, isLoading }) => {
   return (
     !isLoading && (
       <Grid container spacing={3}>
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} sm={12} md={4}>
           <TextField
             id='firstName'
             name='firstName'
@@ -60,7 +60,7 @@ const EmployeeBasicInfoForm = ({ formik, isLoading }) => {
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} sm={12} md={4}>
           <TextField
             id='middleName'
             name='middleName'
@@ -78,7 +78,7 @@ const EmployeeBasicInfoForm = ({ formik, isLoading }) => {
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} sm={12} md={4}>
           <TextField
             id='lastName'
             name='lastName'
@@ -94,7 +94,7 @@ const EmployeeBasicInfoForm = ({ formik, isLoading }) => {
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} sm={12} md={4}>
           <TextField
             id='gender'
             name='gender'
@@ -117,7 +117,7 @@ const EmployeeBasicInfoForm = ({ formik, isLoading }) => {
             ))}
           </TextField>
         </Grid>
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} sm={12} md={4}>
           <TextField
             name='dateOfBirth'
             label='Date of Birth'
@@ -136,7 +136,7 @@ const EmployeeBasicInfoForm = ({ formik, isLoading }) => {
             }}
           />
         </Grid>
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} sm={12} md={4}>
           <TextField
             name='dateOfJoin'
             label='Date of Join'
@@ -155,7 +155,7 @@ const EmployeeBasicInfoForm = ({ formik, isLoading }) => {
             }}
           />
         </Grid>
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} sm={12} md={4}>
           <TextField
             id='mobileNumber'
             name='mobileNumber'
@@ -175,7 +175,7 @@ const EmployeeBasicInfoForm = ({ formik, isLoading }) => {
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} sm={12} md={4}>
           <TextField
             id='CitizenshipNumber'
             name='citizenshipNumber'
@@ -197,7 +197,7 @@ const EmployeeBasicInfoForm = ({ formik, isLoading }) => {
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} sm={12} md={4}>
           <TextField
             id='panNumber'
             name='panNumber'
@@ -213,7 +213,7 @@ const EmployeeBasicInfoForm = ({ formik, isLoading }) => {
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} sm={12} md={4}>
           <TextField
             id='officeEmail'
             name='officeEmail'
@@ -231,7 +231,7 @@ const EmployeeBasicInfoForm = ({ formik, isLoading }) => {
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} sm={12} md={4}>
           <TextField
             id='maritalStatus'
             name='maritalStatus'
@@ -259,7 +259,7 @@ const EmployeeBasicInfoForm = ({ formik, isLoading }) => {
             ))}
           </TextField>
         </Grid>
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} sm={12} md={4}>
           <TextField
             id='companyId'
             name='companyId'
@@ -283,7 +283,7 @@ const EmployeeBasicInfoForm = ({ formik, isLoading }) => {
               ))}
           </TextField>
         </Grid>
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} sm={12} md={4}>
           <TextField
             id='positionId'
             name='positionId'
@@ -309,7 +309,7 @@ const EmployeeBasicInfoForm = ({ formik, isLoading }) => {
               ))}
           </TextField>
         </Grid>
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} sm={12} md={4}>
           <TextField
             id='departmentId'
             name='departmentId'

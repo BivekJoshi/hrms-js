@@ -62,7 +62,6 @@ const EditEmployeeForm = () => {
     data,
     employeeLoading,
   });
-  // console.log(permanentFormik);
 
   const handleNext = () => {
     switch (activeStep) {

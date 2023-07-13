@@ -1,6 +1,4 @@
-import React, { useState } from 'react';
-
-
+import React from 'react';
 import { useGetEmployee } from '../../../hooks/employee/useEmployee';
 import EmployeeTableView from './EmployeePage/EmployeeTableView';
 
@@ -12,8 +10,6 @@ const EmployeeTable = () => {
             <EmployeeTableView
                 employeeData={employeeData}
                 isLoading={isLoading}
-                // handleEditCompany={handleEditCompany}
-                // handleDeleteCompany={handleDeleteCompany}
             />
         </>
     );

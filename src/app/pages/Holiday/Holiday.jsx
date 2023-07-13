@@ -1,26 +1,23 @@
-import { Box, Button, Grid, Paper } from '@mui/material';
+import { Box, Button, Grid } from '@mui/material';
 import React, { useState, useRef, useEffect } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 
-import { useGetHoliday, useGetHolidayCurrent } from '../../hooks/holiday/useHoliday';
+import { useGetHoliday } from '../../hooks/holiday/useHoliday';
 import { AddHolidayModal, OpenHoliday } from './HolidayModal/HolidayModal';
 import CurrentHoliday from './CurrentHoliday';
 
 const Holiday = () => {
-    const { data: holidayData, isLoading } = useGetHoliday();
+    const { data: holidayData } = useGetHoliday();
 
     const [getID, setGetID] = useState({});
 
     const handleOpenModal = (e) => {
-        // console.log(e)
         setGetID(e?.event?._def?.publicId);
         setOpenModal(true);
     };
-
-    console.log(getID)
 
     const [openAddModal, setOpenAddModal] = useState(false);
     const [openModal, setOpenModal] = useState(false);
@@ -29,7 +26,6 @@ const Holiday = () => {
     const handleAddOpenModal = () => setOpenAddModal(true);
     const handleCloseAddModal = () => setOpenAddModal(false);
 
-    // const handleOpenModal = () => setOpenModal(true)
     const handleCloseModal = () => setOpenModal(false);
 
     const calendarRef = useRef(null);
@@ -46,10 +42,6 @@ const Holiday = () => {
             setEvents(formattedEvents);
         }
     }, [holidayData]);
-
-    // const handleOpenModal = () => {
-    //     console.log("CLICKEDDDDD")
-    // };
 
     return (
         <>
@@ -76,8 +68,6 @@ const Holiday = () => {
                         eventClick={handleOpenModal}
                         height={"90vh"}
                         events={events}
-                    // eventClick={handleOpenModal}
-                    // dateClick={handleOpenModal}
                     />
                 </Grid>
             </Grid>

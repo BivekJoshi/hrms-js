@@ -46,7 +46,6 @@ const columns = [
 const PromotionHistory = () => {
     const { id } = useParams();
     const { data: PromotionHistory, isLoading } = useGetPromotionHistory(id);
-    console.log("PromotionHistory", PromotionHistory)
 
     const [openAddModal, setOpenAddModal] = useState(false);
 
@@ -72,7 +71,7 @@ const PromotionHistory = () => {
                 options={{
                     padding: "dense",
                     margin: 50,
-                    pageSize: 12,
+                    pageSize: 10,
                     emptyRowsWhenPaging: false,
                     headerStyle: {
                         backgroundColor: "#1c7ed6",
