@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 const EmployeeTableView = ({ employeeData, isLoading }) => {
     const navigate = useNavigate();
-    
+
     const columns = [
         {
             title: 'SN',

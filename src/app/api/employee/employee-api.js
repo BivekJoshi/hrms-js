@@ -9,8 +9,8 @@ export const getEmployeeData = async (pageNumber) => {
   return data;
 };
 
-export const addEmployee = async (formData) => {
-  const data = await axiosInstance.post(`/employee`, formData);
+export const addEmployee = async (formData, getId) => {
+  const data = await axiosInstance.post(`/employee`, formData)
   return data;
 };
 
