@@ -1,15 +1,15 @@
-import * as React from "react";
-import { useState } from "react";
-import { Box, Button, ButtonGroup, Modal, Stack, Typography } from "@mui/material";
-import Tab from "@mui/material/Tab";
-import TabContext from "@mui/lab/TabContext";
-import TabList from "@mui/lab/TabList";
-import TabPanel from "@mui/lab/TabPanel";
-import EmployeeTable from "./EmployeeView/EmployeeTable";
-import EmployeeBasicInfoForm from "../../components/Form/Employee/EmployeeBasicInfoForm/EmployeeBasicInfoForm";
-import useAddEmployeeForm from "../../hooks/employee/AddEmployee/useAddEmployeeForm";
-import EmployeeGrid from "./EmployeeView/EmployeeGrid";
-import { useNavigate } from "react-router-dom";
+import * as React from 'react';
+import { useState } from 'react';
+import { Box, Button, ButtonGroup, Modal } from '@mui/material';
+import Tab from '@mui/material/Tab';
+import TabContext from '@mui/lab/TabContext';
+import TabList from '@mui/lab/TabList';
+import TabPanel from '@mui/lab/TabPanel';
+
+import EmployeeTable from './EmployeeView/EmployeeTable';
+import EmployeeBasicInfoForm from '../../components/Form/Employee/EmployeeBasicInfoForm/EmployeeBasicInfoForm';
+import useAddEmployeeForm from '../../hooks/employee/AddEmployee/useAddEmployeeForm';
+import EmployeeGrid from './EmployeeView/EmployeeGrid';
 
 const style = {
   position: "absolute",
@@ -24,8 +24,7 @@ const style = {
 };
 
 const Employee = () => {
-  const navigate = useNavigate();
-  const [value, setValue] = React.useState("1");
+  const [value, setValue] = React.useState('1');
   const { formik } = useAddEmployeeForm();
 
   const [openAddModal, setOpenAddModal] = useState(false);
@@ -41,8 +40,8 @@ const Employee = () => {
   const handleSubmit = () => {
      formik.handleSubmit();
     if (formik.isValid) {
-      handleOpenSubmitModal();
-      setOpenAddModal(false);
+      handleOpenSubmitModal(); 
+      setOpenAddModal(false)
     } else {
       toast.error("Please make sure you have filled the form correctly");
     }
@@ -97,30 +96,32 @@ const Employee = () => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
-          <EmployeeBasicInfoForm formik={formik} />
-          <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-            <Button
-              variant="contained"
-              style={{ marginTop: "10px" }}
-              onClick={() => {
-                setOpenAddModal(false);
-              }}
-              sx={{ mt: 3, ml: 1 }}
-              color="error"
-            >
-              Cancel
-            </Button>
-            <Button
-              variant="contained"
-              style={{ marginTop: "10px" }}
-              onClick={handleSubmit}
-              sx={{ mt: 3, ml: 1 }}
-            >
-              Submit
-            </Button>
+        <div>
+          <Box sx={style}>
+            <EmployeeBasicInfoForm formik={formik} />
+            <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+              <Button
+                variant="contained"
+                style={{ marginTop: "10px" }}
+                onClick={() => {
+                  setOpenAddModal(false);
+                }}
+                sx={{ mt: 3, ml: 1 }}
+                color="error"
+              >
+                Cancel
+              </Button>
+              <Button
+                variant="contained"
+                style={{ marginTop: "10px" }}
+                onClick={handleSubmit}
+                sx={{ mt: 3, ml: 1 }}
+              >
+                Submit
+              </Button>
+            </Box>
           </Box>
-        </Box>
+        </div>
       </Modal>
 
       <Modal
@@ -131,11 +132,19 @@ const Employee = () => {
       >
         <Stack>
           <Box sx={style}>
-            <Typography variant="h5">Confirm Submission</Typography>
-            <Typography variant="p">
-              Do you want to proceed with the form submission?
-            </Typography>
+            {/* Content of the second modal */}
+            <h1>Second Modal Content</h1>
             <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+              <Button
+                variant="contained"
+                style={{ marginTop: "10px" }}
+                sx={{ mt: 3, ml: 1 }}
+                onClick={() => {
+                  navigate(`edit/${data.id}`);
+                }}
+              >
+                Yes
+              </Button>
               <Button
                 variant="contained"
                 style={{ marginTop: "10px" }}
@@ -145,15 +154,7 @@ const Employee = () => {
                 sx={{ mt: 3, ml: 1 }}
                 color="error"
               >
-                Cancel
-              </Button>
-              <Button
-                variant="contained"
-                style={{ marginTop: "10px" }}
-                onClick={handleConfirmSubmit}
-                sx={{ mt: 3, ml: 1 }}
-              >
-                Proceed
+                Close
               </Button>
             </Box>
           </Box>
