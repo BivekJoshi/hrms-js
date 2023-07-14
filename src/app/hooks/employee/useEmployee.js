@@ -8,6 +8,7 @@ import {
   getEmployeeByDesignation,
   getEmployeeById,
   getEmployeeBydepartment,
+  getEmployeeProgress,
 } from '../../api/employee/employee-api';
 import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
@@ -86,6 +87,14 @@ export const useGetEmployeeByCompany = (searchQuery) => {
 
 export const useGetEmployeeByDesignation = (searchQuery) => {
   return useQuery(['getEmployeeByDesignation', searchQuery], () => getEmployeeByDesignation(searchQuery), {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
+};
+
+
+export const useGetEmployeeProgress = (id) => {
+  return useQuery(['getEmployeeProgress',id], () => getEmployeeProgress(id), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });

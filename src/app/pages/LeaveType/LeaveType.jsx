@@ -117,7 +117,7 @@ const LeaveType = () => {
 					pageSize: 10,
 					emptyRowsWhenPaging: false,
 					headerStyle: {
-						backgroundColor: '#1c7ed6',
+						backgroundColor: '#01579b',
 						color: '#FFF',
 						fontSize: 20,
 						padding: 'dense',
