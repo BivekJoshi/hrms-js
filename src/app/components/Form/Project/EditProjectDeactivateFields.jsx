@@ -60,7 +60,7 @@ export const EditProjectDeactivateFields = ({ onClose, isLoading, data }) => {
             onClick={handleFormSubmit}
             sx={{ mt: 3, ml: 1 }}
           >
-            De Activate Project
+            Terminate Project
           </Button>
         </Grid>
       </Grid>

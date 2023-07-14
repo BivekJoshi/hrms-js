@@ -112,7 +112,7 @@ const Project = () => {
                 navigate(`get-deactivated-projects`);
               }}
             >
-              In-Active Project
+              Terminated Project
             </Button>
           </Typography>
         </Typography>
@@ -192,10 +192,9 @@ const Project = () => {
                     {getEmployeeNumber(item.id)}
                   </Typography>
                   <Typography variant="p" className="card-status">
-                    {item.taskStatus === "COMPLETED"
-                      ? "Completed"
-                      : item.taskStatus === "WORK_IN_PROGRESS"
-                      ? "Work in progress"
+                    {item.taskStatus === "COMPLETED" ? "Completed"
+                      : item.taskStatus === "WORK_IN_PROGRESS" ? "Work in progress"
+                      : item.taskStatus === "PENDING" ? "Pending"
                       : "DELAYED"}
                   </Typography>
                 </div>

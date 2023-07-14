@@ -30,7 +30,7 @@ export const useAddProjectEmployee = ({ onSuccess }) => {
     onSuccess: (data, variables, context) => {
       toast.success("Employee added successfully");
       onSuccess && onSuccess(data, variables, context);
-      queryClient.invalidateQueries("getProjectEmployee");
+      queryClient.invalidateQueries("getProjectEmployeeById");
     },
     onError: (err, _variables, _context) => {
       toast.error(`error: ${err.message}`);
