@@ -184,6 +184,55 @@ const AddprojectFields = ({ onClose, isLoading }) => {
         </Grid>
 
         <Grid item xs={12} sm={12}>
+          {/* <Autocomplete
+            id='projectLeadId'
+            name='projectLeadId'
+            options={employeeData}
+            getOptionLabel={(option) => `${option.firstName}`}
+            value={formik.values.projectLeadId || null}
+            onChange={(event, value) => formik.setFieldValue('projectLeadId', value)}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label='Project LEADING ID'
+                fullWidth
+                error={formik.touched.projectLeadId && Boolean(formik.errors.projectLeadId)}
+                helperText={formik.touched.projectLeadId && formik.errors.projectLeadId}
+                variant='outlined'
+                InputLabelProps={{ shrink: true }}
+              />
+            )}
+          /> */}
+
+          <TextField
+            id="projectLeadId"
+            name="projectLeadId"
+            select
+            label="Project Leader Name"
+            placeholder="Enter project Id"
+            fullWidth
+            value={formik.values.projectLeadId}
+            onChange={formik.handleChange}
+            error={
+              formik.touched.projectLeadId &&
+              Boolean(formik.errors.projectLeadId)
+            }
+            helperText={
+              formik.touched.projectLeadId && formik.errors.projectLeadId
+            }
+            variant="outlined"
+            InputLabelProps={{ shrink: true }}
+          >
+            {!loadingEmployee &&
+              employeeData.map((option) => (
+                <MenuItem key={option?.id} value={option?.id}>
+                  {option?.firstName}
+                </MenuItem>
+              ))}
+          </TextField>
+        </Grid>
+
+        <Grid item xs={12} sm={12}>
           <TextField
             id="companyId"
             name="companyId"

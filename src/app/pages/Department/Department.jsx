@@ -46,20 +46,20 @@ const Department = () => {
 		{
 			title: 'SN',
 			render: (rowData) => rowData.tableData.index + 1,
-			width: 80,
+			width: "3vh",
 			sortable: false,
 		},
 		{
 			title: 'Department Name',
 			field: 'departmentName',
 			emptyValue: '-',
-			width: 250,
+			width: "20vh",
 		},
 		{
 			title: 'Department Type',
 			field: 'departmentType',
 			emptyValue: '-',
-			width: 200,
+			width: "20vh",
 		},
 		{
 			title: 'Description',
@@ -79,7 +79,7 @@ const Department = () => {
 				</Stack>
 			),
 			sorting: false,
-			width: 120,
+			width: "1vh",
 		},
 	];
 	if (isLoading) return <>Loading</>;
