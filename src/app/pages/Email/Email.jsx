@@ -21,6 +21,7 @@ function EmailForm({ employeeId, onClose, officeEmail }) {
     setEmailData((prevData) => ({
       ...prevData,
       [name]: value,
+      [employeeId]: value,
     }));
   };
 
