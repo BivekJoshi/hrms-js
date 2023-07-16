@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useGetEmployee } from "../../../hooks/employee/useEmployee";
 import EmployeeGridView from "./EmployeePage/EmployeeGridView";
 import { Stack, TextField } from "@mui/material";
+// import FilterAltIcon from '@mui/icons-material/FilterAlt';
 
 const EmployeeGrid = () => {
   const { data: employeeData } = useGetEmployee();
@@ -21,6 +22,7 @@ const EmployeeGrid = () => {
   return (
     <>
       <Stack sx={{ display: "flex", flexDirection: "row-reverse" }}>
+        {/* <FilterAltIcon /> */}
         <TextField
           style={{ maxWidth: "200px" }}
           label="Filter by Position"

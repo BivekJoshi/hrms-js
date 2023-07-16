@@ -63,6 +63,12 @@ const LeaveType = () => {
 			field: 'leaveName',
 			emptyValue: '-',
 			width: 200,
+			render: (rowData) => {
+				const formattedLeaveName = rowData.leaveName.replace('_', ' ').toLowerCase();
+				const words = formattedLeaveName.split(' ');
+				const capitalizedWords = words.map((word) => word.charAt(0).toUpperCase() + word.slice(1));
+				return capitalizedWords.join(' ');
+			},
 		},
 		{
 			title: 'Total Leave Days',
