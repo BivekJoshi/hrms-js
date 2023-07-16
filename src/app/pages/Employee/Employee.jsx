@@ -1,116 +1,186 @@
-import React, { useState } from "react";
-import { useGetEmployee, useGetEmployeeData } from "../../hooks/employee/useEmployee";
-import { Box, Grid, Button, Modal } from "@mui/material";
+import * as React from "react";
+import { useState } from "react";
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  Modal,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
+import Tab from "@mui/material/Tab";
+import TabContext from "@mui/lab/TabContext";
+import TabList from "@mui/lab/TabList";
+import TabPanel from "@mui/lab/TabPanel";
+import EmployeeTable from "./EmployeeView/EmployeeTable";
 import EmployeeBasicInfoForm from "../../components/Form/Employee/EmployeeBasicInfoForm/EmployeeBasicInfoForm";
 import useAddEmployeeForm from "../../hooks/employee/AddEmployee/useAddEmployeeForm";
-import { toast } from "react-toastify";
-import EmployeeCard from "../../components/cards/Employee/EmployeeCard";
-import { PagePagination } from "../../components/Pagination/PagePagination";
+import EmployeeGrid from "./EmployeeView/EmployeeGrid";
+import { useNavigate } from "react-router-dom";
+import { useGetEmployee } from "../../hooks/employee/useEmployee";
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  bgcolor: "background.paper",
+  border: "1px solid #808080",
+  borderRadius: 2,
+  boxShadow: 24,
+  p: 4,
+};
 
 const Employee = () => {
-  const [openAddModal, setOpenAddModal] = useState(false);
-  const { data: employeeData, isLoading } = useGetEmployee();
+  const navigate = useNavigate();
+  const [value, setValue] = React.useState("1");
   const { formik } = useAddEmployeeForm();
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(12);
+  const [openAddModal, setOpenAddModal] = useState(false);
+  const handleAddOpenModal = () => setOpenAddModal(true);
 
-const employeArray = Array.isArray(employeeData)
-? employeeData : employeeData? Object.values(employeeData) : [];
+  const [openSubmitModal, setOpenSubmitModal] = useState(false);
+  const handleOpenSubmitModal = () => setOpenSubmitModal(true);
 
-
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = employeArray.slice(indexOfFirstPost, indexOfLastPost);
-
-  const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    bgcolor: "background.paper",
-    border: "1px solid #808080",
-    borderRadius: 2,
-    boxShadow: 24,
-    p: 4,
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
   };
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  if (isLoading) return <>Loading</>;
+  const handleSubmit = () => {
+    formik.handleSubmit();
+    if (formik.isValid) {
+      handleOpenSubmitModal();
+      setOpenAddModal(false);
+    } else {
+      toast.error("Please make sure you have filled the form correctly");
+    }
+  };
+
+  const handleConfirmSubmit = () => {
+    setOpenSubmitModal(false);
+    toast.success("Form submitted successfully!");
+    navigate(`/edit/${2}`);
+  };
+
+
+
   return (
-    <Box padding="1rem">
-      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-        <Button
-          variant="contained"
-          onClick={() => setOpenAddModal(true)}
-          style={{ marginBottom: "20px" }}
-        >
-          Add Employee
-        </Button>
-      </Box>
-      <Grid
-        container
-        item
-        gap={3}
-        className="project-card-control"
-        sx={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-        }}
-      >
-        {currentPosts?.map((employee, index) => (
-            <EmployeeCard
-              Key={index}
-              IsActive={employee.isActive}
-              EmployeeId={employee.id}
-              EFirstName={employee.firstName}
-              EMiddleName={employee.middleName}
-              ELastName={employee.lastName}
-              OfficeEmail={employee?.officeEmail}
-              MobileNumber={employee?.mobileNumber}
-              Position={employee?.position?.positionName}
-              EmployeeData={currentPosts}
-            />
-        ))}
-      </Grid>
+    <>
+      <TabContext value={value}>
+        <Box sx={{ width: "100%" }}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              borderTop: 1,
+              borderColor: "divider",
+            }}
+          >
+            <TabList onChange={handleChange} aria-label="lab API tabs example">
+              <Tab label="Grid View" value="1" />
+              <Tab label="Table View" value="2" />
+            </TabList>
+            <ButtonGroup variant="contained" sx={{ gap: "12px" }}>
+              {/* <TextField
+                label="Filter by Name"
+                value={nameFilter}
+                onChange={(e) => setNameFilter(e.target.value)}
+              />
+              <TextField
+                label="Filter by Position"
+                value={positionFilter}
+                onChange={(e) => setPositionFilter(e.target.value)}
+              /> */}
+              <Button onClick={handleAddOpenModal}>+Add Employee</Button>
+              <Button
+                onClick={() => {
+                  navigate("deactivated");
+                }}
+              >
+                Inactive Employee
+              </Button>
+            </ButtonGroup>
+          </Box>
+          <TabPanel value="1">
+            <EmployeeGrid />
+          </TabPanel>
+          <TabPanel value="2">
+            <EmployeeTable />
+          </TabPanel>
+        </Box>
+      </TabContext>
+
       <Modal
         open={openAddModal}
         onClose={() => setOpenAddModal(false)}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box>
+        <Box sx={style}>
+          <EmployeeBasicInfoForm formik={formik} />
+          <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+            <Button
+              variant="contained"
+              style={{ marginTop: "10px" }}
+              onClick={() => {
+                setOpenAddModal(false);
+              }}
+              sx={{ mt: 3, ml: 1 }}
+              color="error"
+            >
+              Cancel
+            </Button>
+            <Button
+              variant="contained"
+              style={{ marginTop: "10px" }}
+              onClick={handleSubmit}
+              sx={{ mt: 3, ml: 1 }}
+            >
+              Submit
+            </Button>
+          </Box>
+        </Box>
+      </Modal>
+
+      <Modal
+        open={openSubmitModal}
+        onClose={() => setOpenSubmitModal(false)}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Stack>
           <Box sx={style}>
-            <EmployeeBasicInfoForm formik={formik} />
+            <Typography variant="h5">Confirm Submission</Typography>
+            <Typography variant="p">
+              Do you want to proceed with the form submission?
+            </Typography>
             <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
               <Button
                 variant="contained"
                 style={{ marginTop: "10px" }}
                 onClick={() => {
-                  formik.handleSubmit();
-                  formik.isValid
-                    ? null
-                    : toast.error(
-                        "Please make sure you have filled the form correctly"
-                      );
+                  setOpenSubmitModal(false);
                 }}
                 sx={{ mt: 3, ml: 1 }}
+                color="error"
               >
-                Submit
+                Cancel
+              </Button>
+              <Button
+                variant="contained"
+                style={{ marginTop: "10px" }}
+                onClick={handleConfirmSubmit}
+                sx={{ mt: 3, ml: 1 }}
+              >
+                Proceed
               </Button>
             </Box>
           </Box>
-        </Box>
+        </Stack>
       </Modal>
-      <Box padding="2rem" display="grid" justifyContent={"center"}>
-        <PagePagination 
-        PostsPerPage={postsPerPage}
-        TotalPosts={employeArray.length}
-        CurrentPage={currentPage}
-        Paginate={paginate}
-        />
-      </Box>
-    </Box>
+    </>
   );
 };
 

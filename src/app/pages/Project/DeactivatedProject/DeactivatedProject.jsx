@@ -93,7 +93,7 @@ const DeactivatedProject = () => {
         options={{
           padding: "dense",
           margin: 50,
-          pageSize: 12,
+          pageSize: 10,
           emptyRowsWhenPaging: false,
           headerStyle: {
             backgroundColor: "#1c7ed6",

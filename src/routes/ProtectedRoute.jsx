@@ -6,7 +6,6 @@ const ProtectedRoute = ({ redirectTo }) => {
   const navigate = useNavigate();
   const user = getUser();
 
-  console.log(user);
   useEffect(() => {
     if (!user) {
       removeUser();

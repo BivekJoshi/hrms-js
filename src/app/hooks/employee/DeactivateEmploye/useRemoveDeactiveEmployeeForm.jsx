@@ -1,14 +1,15 @@
 import React from 'react';
 import { useFormik } from 'formik';
-import { ProjectSchema } from '../validation/ProjectSchema';
-import { useActiveProject, useDeleteProject } from '../useProject';
+import { useActiveEmployee, useDeleteEmployee } from './useEmployee';
 
-export const useRemoveActiveEmployee = (data) => {
+export const useRemoveDeactiveEmployeeForm = (data) => {
+    
     const { mutate } = useDeleteEmployee({});
-   
     const formik = useFormik({
         initialValues: {
             employeeId: data?.id || "",
+            setActivation: data?.setActivation || "",
+            effectiveDate: data?.effectiveDate || "",
         },
         enableReinitialize: "true",
         onSubmit: (values) => {
@@ -22,16 +23,16 @@ export const useRemoveActiveEmployee = (data) => {
         };
         mutate(values, formik);
     };
-
     return { formik };
 };
 
-export const useAddActiveEmployee = (data) => {
-    
-    const { mutate } = useActiveProject({});
+export const useAddActiveEmployeeForm = (id) => {
+    const { mutate } = useActiveEmployee({});
     const formik = useFormik({
         initialValues: {
-            employeeId: data || "",
+            employeeId: id || "",
+            setActivation: "",
+            effectiveDate: "",
         },
         enableReinitialize: "true",
         onSubmit: (values) => {
@@ -45,6 +46,5 @@ export const useAddActiveEmployee = (data) => {
         };
         mutate(values, formik);
     };
-
     return { formik };
 };

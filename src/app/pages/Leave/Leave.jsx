@@ -49,13 +49,10 @@ const Leave = ({ isLoading }) => {
 
   const getEmployeeName = (rowData) => {
     const employeeId = rowData.employeeId;
-     console.log({"rowDarations": rowData.employeeId, "emplData": employeeData})
     const employee = employeeData?.find((emp) => emp.id === employeeId);
     const name = `${employee?.firstName} ${employee?.middleName || ''} ${employee?.lastName}`;
-    console.log({"name": name})
     return name;
   };
-  // console.log(getEmployeeName)
 
   const getLeaveTypeName = (rowData) => {
     const leaveTypeId = rowData.leaveTypeId;
@@ -63,7 +60,6 @@ const Leave = ({ isLoading }) => {
     const name = `${leaveType.leaveName}`;
     return name;
   };
-  console.log(getLeaveTypeName)
   const columns = [
     {
       title: 'SN',
@@ -172,7 +168,7 @@ const Leave = ({ isLoading }) => {
         options={{
           padding: 'dense',
           margin: 50,
-          pageSize: 12,
+          pageSize: 10,
           emptyRowsWhenPaging: false,
           headerStyle: {
             backgroundColor: '#1c7ed6',

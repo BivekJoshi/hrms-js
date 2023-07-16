@@ -29,7 +29,6 @@ const useEditEmployeeForm = ({ data, isLoading }) => {
     },
   });
   const handleRequest = (values) => {
-    console.log(values);
     values = {
       ...values,
     };

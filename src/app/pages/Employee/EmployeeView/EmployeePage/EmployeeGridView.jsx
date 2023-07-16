@@ -1,39 +1,63 @@
-import { Grid,Box } from '@mui/material'
-import React from 'react'
-import EmployeeCard from '../../../../components/cards/Employee/EmployeeCard'
-import { useGetEmployee } from '../../../../hooks/employee/useEmployee';
+import { Grid, Box, TextField } from "@mui/material";
+import React, { useState } from "react";
+import EmployeeCard from "../../../../components/cards/Employee/EmployeeCard";
+import { useGetEmployee } from "../../../../hooks/employee/useEmployee";
+import { PagePagination } from "../../../../components/Pagination/PagePagination";
 
-const EmployeeGridView = () => {
-  const { data: employeeData, isLoading } = useGetEmployee();
+const EmployeeGridView = ({ employeeData }) => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(12);
 
-  if (isLoading) return <>Loading</>;
+  const employeArray = Array.isArray(employeeData)
+    ? employeeData
+    : employeeData
+    ? Object.values(employeeData)
+    : [];
+
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = employeArray.slice(indexOfFirstPost, indexOfLastPost);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
   return (
-    <Grid
+    <>
+   
+      <Grid
         container
         item
-        gap={3}
+        gap={1}
         className="project-card-control"
         sx={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
         }}
       >
-        {employeeData?.map((employee, index) => (
-          <Box key={index}>
-            <EmployeeCard
-              IsActive={employee.isActive}
-              EmployeeId={employee.id}
-              EFirstName={employee.firstName}
-              EMiddleName={employee.middleName}
-              ELastName={employee.lastName}
-              OfficeEmail={employee?.officeEmail}
-              MobileNumber={employee?.mobileNumber}
-              Position={employee?.position?.positionName}
-            />
-          </Box>
+        {currentPosts?.map((employee, index) => (
+          <EmployeeCard
+            key={index}
+            IsActive={employee.isActive}
+            EmployeeId={employee.id}
+            EFirstName={employee.firstName}
+            EMiddleName={employee.middleName}
+            ELastName={employee.lastName}
+            OfficeEmail={employee?.officeEmail}
+            MobileNumber={employee?.mobileNumber}
+            Position={employee?.position?.positionName}
+            EmployeeData={currentPosts}
+          />
         ))}
       </Grid>
-  )
-}
 
-export default EmployeeGridView
+      <Box padding="2rem" display="grid" justifyContent={"center"}>
+        <PagePagination
+          PostsPerPage={postsPerPage}
+          TotalPosts={employeArray.length}
+          CurrentPage={currentPage}
+          Paginate={paginate}
+        />
+      </Box>
+    </>
+  );
+};
+
+export default EmployeeGridView;

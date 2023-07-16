@@ -36,9 +36,9 @@ const status = [
 ];
 
 const EditTodoListFields = ({ onClose, isLoading, data }) => {
-	// console.log(onClose)
+
 	const { formik } = useEditTodoListForm(data);
-	//console.log(data)
+	
 	const handleFormSubmit = () => {
 		formik.handleSubmit();
 
@@ -47,7 +47,6 @@ const EditTodoListFields = ({ onClose, isLoading, data }) => {
 				message: true,
 				dueDate: true,
 				priority: true,
-				// status: true,
 			});
 			onClose();
 		} else {

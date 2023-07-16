@@ -55,7 +55,7 @@ const LEAVENAME = [
 ];
 
 const AddLeaveTypeFields = ({ onClose, isLoading, existingLeaveTypes }) => {
-  const { formik } = useAddLeaveTypeForm();
+  const { formik } = useAddLeaveTypeForm(onClose);
 
   const handleFormSubmit = () => {
     formik.handleSubmit();

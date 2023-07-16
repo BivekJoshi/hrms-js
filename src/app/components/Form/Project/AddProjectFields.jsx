@@ -21,12 +21,16 @@ const projectOptions = [
     label: "Delayed",
     id: 3,
   },
+  {
+    value: "PENDING",
+    label: "Pending",
+    id: 4,
+  },
 ];
 
 const AddprojectFields = ({ onClose, isLoading }) => {
   const { data: employeeData, isLoading: loadingEmployee } = useGetEmployee();
   const { data: companyData, isLoading: loadingCompany } = useGetCompany();
-  // console.log(employeeData)
 
   const { formik } = useAddProjectForm();
 
@@ -102,7 +106,7 @@ const AddprojectFields = ({ onClose, isLoading }) => {
           />
         </Grid>
 
-        <Grid item xs={12} sm={12}>
+        {/* <Grid item xs={12} sm={12}>
           <TextField
             id="taskStatus"
             name="taskStatus"
@@ -128,7 +132,7 @@ const AddprojectFields = ({ onClose, isLoading }) => {
               </MenuItem>
             ))}
           </TextField>
-        </Grid>
+        </Grid> */}
 
         <Grid item xs={12} sm={12}>
           {/* <Autocomplete

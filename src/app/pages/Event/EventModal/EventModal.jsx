@@ -18,7 +18,6 @@ export const AddEventModal = ({ open, handleCloseModal}) => {
 
   export const OpenEvent = ({ open, handleCloseModal ,id}) => {
   const { data } = useGetEventById(id);
-  // console.log("hellooooooo",data)
   return (
     <div>
       <FormModal
