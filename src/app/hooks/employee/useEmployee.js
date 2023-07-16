@@ -55,7 +55,8 @@ export const useEditEmployee = ({ onSuccess }) => {
   );
 };
 
-export const useAddEmployee = ({ onSuccess }) => {
+export const useAddEmployee = (onSuccess) => {
+  console.log(onSuccess)
   const queryClient = useQueryClient();
   return useMutation(['addEmployees'], (formData) => addEmployee(formData), {
     onSuccess: (data, variables, context) => {
@@ -70,21 +71,21 @@ export const useAddEmployee = ({ onSuccess }) => {
 };
 
 export const useGetEmployeeByDepartment = (searchQuery) => {
-  return useQuery(['getEmployeeBydepartment',searchQuery], () => getEmployeeBydepartment(), {
+  return useQuery(['getEmployeeBydepartment', searchQuery], () => getEmployeeBydepartment(), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
 };
 
 export const useGetEmployeeByCompany = (searchQuery) => {
-  return useQuery(['getEmployeeByCompany',searchQuery], () => getEmployeeByCompany(searchQuery), {
+  return useQuery(['getEmployeeByCompany', searchQuery], () => getEmployeeByCompany(searchQuery), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
 };
 
 export const useGetEmployeeByDesignation = (searchQuery) => {
-  return useQuery(['getEmployeeByDesignation',searchQuery], () => getEmployeeByDesignation(searchQuery), {
+  return useQuery(['getEmployeeByDesignation', searchQuery], () => getEmployeeByDesignation(searchQuery), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
