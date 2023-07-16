@@ -23,6 +23,6 @@ export const getDocument = async () => {
 };
 
 export const getDocumentById = async (id) => {
-  const data = await axiosInstance.get(`/employee/document/${id}`);
+  const data = await axiosInstance.get(`/employee/document/file-details/${id}`);
   return data;
 };

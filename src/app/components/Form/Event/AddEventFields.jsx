@@ -23,19 +23,13 @@ const AddEventFields = ({ onClose, isLoading }) => {
     if (isValid) {
       formik.handleSubmit(); // Submit the form
 
-      if (formik.isValid) {
-        formik.setTouched({
-          eventName: false,
-          eventDate: false,
-          eventTime: false,
-          eventDescription: false,
-        });
-        onClose(); // Close the modal
-      } else {
-        toast.error("Please make sure you have filled the form correctly");
-      }
-    }
-  };
+            if (formik.isValid) {
+                onClose(); // Close the modal
+            } else {
+                toast.error('Please make sure you have filled the form correctly');
+            }
+        }
+    };
 
   return (
     !isLoading && (

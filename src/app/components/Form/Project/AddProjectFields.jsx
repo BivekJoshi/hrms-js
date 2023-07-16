@@ -21,6 +21,11 @@ const projectOptions = [
     label: "Delayed",
     id: 3,
   },
+  {
+    value: "PENDING",
+    label: "Pending",
+    id: 4,
+  },
 ];
 
 const AddprojectFields = ({ onClose, isLoading }) => {

@@ -13,11 +13,6 @@ const AddHolidayFields = ({ onClose, isLoading }) => {
             formik.handleSubmit(); // Submit the form
 
             if (formik.isValid) {
-                formik({
-                    holidayName: false,
-                    holidayDate: false,
-                    holidayDescription: false,
-                });
                 onClose(); // Close the modal
             } else {
                 toast.error('Please make sure you have filled the form correctly');
@@ -88,11 +83,11 @@ const AddHolidayFields = ({ onClose, isLoading }) => {
                     justifyContent="flex-end"
                     alignItems="flex-end"
                 >
-                    <Button variant="contained" onClick={onClose} sx={{ mt: 3, ml: 1 }} color="error">
-                        Cancel
-                    </Button>
                     <Button variant="contained" onClick={handleFormSubmit} sx={{ mt: 3, ml: 1 }}>
                         Add Event
+                    </Button>
+                    <Button variant="contained" onClick={onClose} sx={{ mt: 3, ml: 1 }} color="error">
+                        Cancel
                     </Button>
                 </Grid>
             </Grid>

@@ -10,11 +10,6 @@ const AddDepartmentFields = ({ onClose, isLoading }) => {
 		formik.handleSubmit();
 
 		if (formik.isValid) {
-			formik({
-				departmentName: true,
-				departmentType: true,
-				departmentDescription: true,
-			});
 			onClose();
 		} else {
 			toast.error('Please make sure you have filled the form correctly');
@@ -92,15 +87,15 @@ const AddDepartmentFields = ({ onClose, isLoading }) => {
 					justifyContent='flex-end'
 					alignItems='flex-end'
 				>
-					<Button variant='contained' onClick={onClose} sx={{ mt: 3, ml: 1 }} color='error'>
-						Cancel
-					</Button>
 					<Button
 						variant='contained'
 						onClick={handleFormSubmit}
 						sx={{ mt: 3, ml: 1 }}
 					>
 						Add Department
+					</Button>
+					<Button variant='contained' onClick={onClose} sx={{ mt: 3, ml: 1 }} color='error'>
+						Cancel
 					</Button>
 				</Grid>
 			</Grid>
