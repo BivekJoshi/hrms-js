@@ -5,12 +5,13 @@ import { Chip, ClickAwayListener, Grow, Stack } from "@mui/material";
 import { MenuItem, MenuList, Paper, Popper, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import Image1 from "../../../../assets/wave.png";
+import Male from "../../../../assets/male.png"
+import Female from "../../../../assets/female.png"
 import MainCard from "../MainCard";
 import EmailModal from "../../../pages/Email/EmailModal";
 import { EditDeactivationEmployeeModal } from "../../../pages/Employee/EmployeeDeactivationModal/EditDeactivationEmployeeModal";
 
-const EmployeeCard = ({ IsActive, EmployeeId, EFirstName, EMiddleName, ELastName, OfficeEmail, MobileNumber, Position }) => {
+const EmployeeCard = ({ IsActive, EmployeeId, EFirstName, EMiddleName, ELastName, OfficeEmail, MobileNumber, Position, EGender }) => {
   const [open, setOpen] = useState(false);
   const [openEmailForm, setOpenEmailForm] = useState(false);
 
@@ -143,10 +144,10 @@ const EmployeeCard = ({ IsActive, EmployeeId, EFirstName, EMiddleName, ELastName
               </Popper>
             </Box>
           </Box>
-          <Stack style={{ textAlign: " -webkit-center", marginTop: "1rem" }}>
+          <Stack style={{ textAlign: " -webkit-center", marginTop: "1rem", alignItems:"center" }}>
             <CardMedia
               component="img"
-              src={Image1}
+              src={EGender === "MALE" ? Male : Female}
               alt="Paella dish"
               sx={{ width: 66, height: 66, borderRadius: "2rem" }}
             />
