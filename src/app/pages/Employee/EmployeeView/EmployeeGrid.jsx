@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import EmployeeGridView from "./EmployeePage/EmployeeGridView";
 import { useGetEmployee } from "../../../hooks/employee/useEmployee";
+import EmployeeGridView from "./EmployeePage/EmployeeGridView";
 import { Stack, TextField } from "@mui/material";
 
 const EmployeeGrid = () => {
@@ -17,6 +17,7 @@ const EmployeeGrid = () => {
         .toLowerCase()
         .includes(positionFilter.toLowerCase())
   );
+
   return (
     <>
       <Stack sx={{ display: "flex", flexDirection: "row-reverse" }}>

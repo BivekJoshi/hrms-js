@@ -13,11 +13,6 @@ const AddCompanyFields = ({ onClose, isLoading }) => {
       formik.handleSubmit(); // Submit the form
 
       if (formik.isValid) {
-        formik({
-          companyName: false,
-          companyType: false,
-          companyDescription: false,
-        });
         onClose(); // Close the modal
       } else {
         toast.error("Please make sure you have filled the form correctly");
@@ -94,18 +89,18 @@ const AddCompanyFields = ({ onClose, isLoading }) => {
         >
           <Button
             variant="contained"
+            onClick={handleFormSubmit}
+            sx={{ mt: 3, ml: 1 }}
+          >
+            Add Company
+          </Button>
+          <Button
+            variant="contained"
             onClick={onClose}
             sx={{ mt: 3, ml: 1 }}
             color="error"
           >
             Cancel
-          </Button>
-          <Button
-            variant="contained"
-            onClick={handleFormSubmit}
-            sx={{ mt: 3, ml: 1 }}
-          >
-            Add Company
           </Button>
         </Grid>
       </Grid>

@@ -14,7 +14,7 @@ import AddchartIcon from '@mui/icons-material/Addchart';
 import EventIcon from '@mui/icons-material/Event';
 import HolidayVillageIcon from '@mui/icons-material/HolidayVillage';
 
-const primaryColor = '#1c7ed6';
+const primaryColor = '#01579b';
 
 export const drawerMenus = [
   {

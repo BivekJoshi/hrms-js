@@ -6,6 +6,7 @@ import BasicInfo from './BaiscInfoTab/BasicInfo';
 import LeaveInfo from './LeaveInfoTab/LeaveInfo';
 import AcademicsInfo from './AcademicsInfoTab/AcademicsInfo';
 import PromotionHistory from './PromotionHistory/PromotionHistory';
+import ProgressById from '../../ProgressEmployeeData/ProgressById';
 
 
 const primaryColor = '#1c7ed6';
@@ -17,6 +18,9 @@ const TabComponent = ({ data }) => {
     };
     return (
         <Box sx={{ width: '74%', typography: 'body1' }}>
+            
+            <ProgressById/>
+
             <TabContext value={value}>
                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                     <TabList onChange={handleChange} aria-label='lab API tabs example'>
