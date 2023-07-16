@@ -13,43 +13,43 @@ import { ThemeSwitch } from '../../../../theme/ThemeSwitch';
 
 const LEAVENAME = [
   {
-    value: 'CASUAL_LEAVE',
+    value: 'CASUAL',
     label: 'Casual Leave',
   },
   {
-    value: 'SICK_LEAVE',
+    value: 'SICK',
     label: 'Sick Leave',
   },
   {
-    value: 'ANNUAL_LEAVE',
+    value: 'ANNUAL',
     label: 'Annual Leave',
   },
   {
-    value: 'FESTIVAL_LEAVE',
+    value: 'FESTIVAL',
     label: 'Festival Leave',
   },
   {
-    value: 'MARRIAGE_LEAVE',
+    value: 'MARRIAGE',
     label: 'Marriage Leave',
   },
   {
-    value: 'MATERNITY_LEAVE',
+    value: 'MATERNITY',
     label: 'Maternity Leave',
   },
   {
-    value: 'MATERNITY_LEAVE_ADDITIONAL',
+    value: 'MATERNITY_ADDITIONAL',
     label: 'Maternity leave Additional',
   },
   {
-    value: 'PATERNITY_LEAVE',
+    value: 'PATERNITY',
     label: 'Paternity Leave',
   },
   {
-    value: 'BEREAVEMENT_LEAVE',
+    value: 'BEREAVEMENT',
     label: 'Bereavement Leave',
   },
   {
-    value: 'UNPAID_LEAVE ',
+    value: 'UNPAID',
     label: 'Unpaid Leave',
   },
 ];

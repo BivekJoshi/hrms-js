@@ -62,18 +62,10 @@ const LeaveType = () => {
 			title: 'Leave Name',
 			field: 'leaveName',
 			render: (rowData) => {
-                const formattedLeaveName = rowData.leaveName.replace('_', ' ').toLowerCase();
-                const words = formattedLeaveName.split(' ');
-                const capitalizedWords = words.map((word) => word.charAt(0).toUpperCase() + word.slice(1));
-                return capitalizedWords.join(' ');
-            },
+				const formattedLeaveName = rowData.leaveName.charAt(0).toUpperCase() + rowData.leaveName.slice(1).toLowerCase();
+				return `${formattedLeaveName} Leave`;
+			  },
 			width: 200,
-			render: (rowData) => {
-				const formattedLeaveName = rowData.leaveName.replace('_', ' ').toLowerCase();
-				const words = formattedLeaveName.split(' ');
-				const capitalizedWords = words.map((word) => word.charAt(0).toUpperCase() + word.slice(1));
-				return capitalizedWords.join(' ');
-			},
 		},
 		{
 			title: 'Total Leave Days',
