@@ -1,5 +1,4 @@
-import * as React from "react";
-import { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
@@ -12,14 +11,29 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Groups2Icon from "@mui/icons-material/Groups2";
-import { Box, Button, Grid } from "@mui/material";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import {
+  Box,
+  Button,
+  ClickAwayListener,
+  Grid,
+  Grow,
+  MenuItem,
+  MenuList,
+  Paper,
+  Popper,
+} from "@mui/material";
 import "./project.css";
 import { useGetProject } from "../../hooks/project/useProject";
-import { AddProjectModal, DeactivateProjectModal, EditProjectModal } from "./ProjectModal/ProjectModal";
+import {
+  AddProjectModal,
+  DeactivateProjectModal,
+  EditProjectModal,
+} from "./ProjectModal/ProjectModal";
 import { useNavigate } from "react-router-dom";
 import { useGetEmployee } from "../../hooks/employee/useEmployee";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
-import DeleteIcon from "@mui/icons-material/Delete";
+// import DeleteIcon from "@mui/icons-material/Delete";
 import { useGetProjectEmployee } from "../../hooks/project/projectEmployee/useProjectEmployee";
 
 const Project = () => {
@@ -27,6 +41,42 @@ const Project = () => {
   const { data: projectData, isLoading } = useGetProject();
   const { data: employeeData } = useGetEmployee();
   const { data: projectEmployeeData } = useGetProjectEmployee();
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(anchorEl ? null : event.currentTarget);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popper" : undefined;
+
+  // const [open, setOpen] = useState(false);
+  // const anchorRef = useRef(null);
+  // const prevOpen = useRef(open);
+  // const handleToggle = () => {
+  //   setOpen((prevOpen) => !prevOpen);
+  // };
+  // const handleClose = (event) => {
+  //   if (anchorRef.current && anchorRef.current.contains(event.target)) {
+  //     return;
+  //   }
+  //   setOpen(false);
+  // };
+  // function handleListKeyDown(event) {
+  //   if (event.key === "Tab") {
+  //     event.preventDefault();
+  //     setOpen(false);
+  //   } else if (event.key === "Escape") {
+  //     setOpen(false);
+  //   }
+  // }
+  // useEffect(() => {
+  //   if (prevOpen.current === true && open === false) {
+  //     anchorRef.current.focus();
+  //   }
+  //   prevOpen.current = open;
+  // }, [open]);
 
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
@@ -40,7 +90,6 @@ const Project = () => {
 
   const handleCloseEditModal = () => setOpenEditModal(false);
   const handleCloseDeactivateModal = () => setOpenDeactiveModal(false);
-
 
   const handleDeactivateProject = (item) => {
     setDeactivateProject(item);
@@ -59,12 +108,13 @@ const Project = () => {
     );
   };
 
-
   const getEmployeeNumber = (id) => {
     const projectId = id;
-    const projectEmployeeNumber = projectEmployeeData?.filter((empNum) => empNum.projectId === projectId).length;
+    const projectEmployeeNumber = projectEmployeeData?.filter(
+      (empNum) => empNum.projectId === projectId
+    ).length;
     return projectEmployeeNumber || 0;
-  }
+  };
 
   if (isLoading) return <>Loading</>;
 
@@ -109,7 +159,7 @@ const Project = () => {
         }}
       >
         {projectData.map((item, index) => (
-          <Card key={index} sx={{maxWidth: "360px"}}>
+          <Card key={index} sx={{ maxWidth: "360px" }}>
             <CardHeader
               avatar={
                 <Avatar
@@ -124,20 +174,38 @@ const Project = () => {
               action={
                 <>
                   <Button
-                    variant="outlined"
-                    color="secondary"
-                    sx={{ marginRight: "2px" }}
-                    onClick={() => handleEditProject(item)}
+                    aria-describedby={id}
+                    type="button"
+                    onClick={handleClick}
                   >
-                    <ModeEditOutlineIcon />
+                    <MoreHorizIcon />
                   </Button>
-                  <Button
-                    variant="outlined"
-                    color="error"
-                    onClick={() => handleDeactivateProject(item)}
-                  >
-                    <DeleteIcon />
-                  </Button>
+                  <Popper id={id} open={open} anchorEl={anchorEl}>
+                    <Box
+                      sx={{
+                        bgcolor: "background.paper",
+                        display: "flex",
+                        flexDirection: "column",
+                      }}
+                    >
+                      <MenuList>
+                      <MenuItem
+                        onClick={() => {
+                          handleEditProject(item);
+                        }}
+                        style={{ fontSize: ".8rem" }}
+                      >
+                        Edit
+                      </MenuItem>
+                      <MenuItem
+                        onClick={() => handleDeactivateProject(item)}
+                        style={{ fontSize: ".8rem" }}
+                      >
+                        Terminate Project
+                      </MenuItem>
+                      </MenuList>
+                    </Box>
+                  </Popper>
                 </>
               }
             />
