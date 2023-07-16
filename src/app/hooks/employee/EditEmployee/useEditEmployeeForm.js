@@ -18,7 +18,7 @@ const useEditEmployeeForm = ({ data, isLoading }) => {
       panNumber: data?.panNumber,
       officeEmail: data?.officeEmail,
       maritalStatus: data?.maritalStatus || '',
-      companyId: data?.company?.id,
+      companyId: isLoading ? '' : data?.company?.id,
       positionId: data?.position?.id,
       departmentId: data?.department?.id,
     },

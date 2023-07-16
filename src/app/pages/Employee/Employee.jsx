@@ -71,7 +71,8 @@ const Employee = () => {
               <Tab label="Grid View" value="1" />
               <Tab label="Table View" value="2" />
             </TabList>
-            <ButtonGroup variant="contained" sx={{ mt: 3, ml: 1 }}>
+            <ButtonGroup variant="contained" sx={{gap: "12px"}}>
+            <Button onClick={() => {navigate("deactivated")}}>Inactive Employee</Button>
               <Button onClick={handleAddOpenModal}>+Add Employee</Button>
             </ButtonGroup>
           </Box>

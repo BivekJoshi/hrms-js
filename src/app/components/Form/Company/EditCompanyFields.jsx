@@ -88,18 +88,18 @@ const EditCompanyFields = ({ onClose, isLoading, data }) => {
         >
           <Button
             variant="contained"
+            onClick={handleFormSubmit}
+            sx={{ mt: 3, ml: 1 }}
+          >
+            Update Company
+          </Button>
+          <Button
+            variant="contained"
             onClick={onClose}
             sx={{ mt: 3, ml: 1 }}
             color="error"
           >
             Cancel
-          </Button>
-          <Button
-            variant="contained"
-            onClick={handleFormSubmit}
-            sx={{ mt: 3, ml: 1 }}
-          >
-            Update Company
           </Button>
         </Grid>
       </Grid>

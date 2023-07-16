@@ -12,14 +12,14 @@ const EmployeeTableView = ({ employeeData, isLoading }) => {
         {
             title: 'SN',
             render: (rowData) => rowData.tableData.index + 1,
-            width: 80,
+            width: "3%",
             sortable: false,
         },
         {
             title: 'Employee',
             field: 'firstName',
             emptyValue: '-',
-            width: 300,
+            width: "10%",
         },
         {
             title: 'Position',
@@ -80,7 +80,7 @@ const EmployeeTableView = ({ employeeData, isLoading }) => {
                     pageSize: 10,
                     emptyRowsWhenPaging: false,
                     headerStyle: {
-                        backgroundColor: '#1c7ed6',
+                        backgroundColor: '#01579b',
                         color: '#FFF',
                         fontSize: 20,
                         padding: 'dense',

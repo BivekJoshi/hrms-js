@@ -1,6 +1,7 @@
 import React from 'react';
 import FormModal from "../../../../components/Modal/FormModal";
-import AddProjectEmployeeFields from "../../../../components/Form/Project/projectEmployee/AddProjectEmployeeFields";
+import { AddprojectEmployeeFields, EditProjectEmployeeFields } from "../../../../components/Form/Project/projectEmployee/AddProjectEmployeeFields";
+import { useGetProjectEmployee, useGetProjectEmployeeById } from '../../../../hooks/project/projectEmployee/useProjectEmployee';
 
 
 export const AddProjectEmployeeModal = ({open, handleCloseModal}) => {
@@ -8,7 +9,22 @@ export const AddProjectEmployeeModal = ({open, handleCloseModal}) => {
         <FormModal
             open={open}
             onClose={handleCloseModal}
-            formComponent={<AddProjectEmployeeFields onClose={handleCloseModal} />}
+            formComponent={<AddprojectEmployeeFields onClose={handleCloseModal} />}
         />
     )
 }
+
+export const EditProjectEmployeeModal = ({ open, handleCloseModal, id }) => {
+    const { data } = useGetProjectEmployeeById(id);
+    return (
+      <div>
+        <FormModal
+          open={open}
+          onClose={handleCloseModal}
+          formComponent={
+            <EditProjectEmployeeFields onClose={handleCloseModal} data={data} />
+          }
+        />
+      </div>
+    );
+  };

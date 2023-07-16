@@ -61,12 +61,7 @@ const AddLeaveTypeFields = ({ onClose, isLoading, existingLeaveTypes }) => {
     formik.handleSubmit();
 
     if (formik.isValid) {
-      formik({
-        leaveName: true,
-        leaveTotal: true,
-        leaveDescription: true,
-        isCarryForward: false,
-      });
+      onClose();
     } else {
       toast.error('Please make sure you have filled the form correctly');
     }
@@ -167,9 +162,6 @@ const AddLeaveTypeFields = ({ onClose, isLoading, existingLeaveTypes }) => {
           justifyContent='flex-end'
           alignItems='flex-end'
         >
-          <Button variant='contained' onClick={onClose} sx={{ mt: 3, ml: 1 }} color='error'>
-            Cancel
-          </Button>
           <Button
             variant='contained'
             onClick={handleFormSubmit}
@@ -177,6 +169,9 @@ const AddLeaveTypeFields = ({ onClose, isLoading, existingLeaveTypes }) => {
             onClose={onClose}
           >
             Add Leave Type
+          </Button>
+          <Button variant='contained' onClick={onClose} sx={{ mt: 3, ml: 1 }} color='error'>
+            Cancel
           </Button>
         </Grid>
       </Grid>

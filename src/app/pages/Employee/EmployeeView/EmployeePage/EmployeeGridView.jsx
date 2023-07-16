@@ -1,12 +1,9 @@
 import { Grid, Box } from "@mui/material";
 import React, { useState } from "react";
 import EmployeeCard from "../../../../components/cards/Employee/EmployeeCard";
-import { useGetEmployee } from "../../../../hooks/employee/useEmployee";
 import { PagePagination } from "../../../../components/Pagination/PagePagination";
 
-const EmployeeGridView = () => {
-  const { data: employeeData, isLoading } = useGetEmployee();
-
+const EmployeeGridView = ({ employeeData }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(12);
 
@@ -18,7 +15,7 @@ const EmployeeGridView = () => {
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  if (isLoading) return <>Loading</>;
+  // if (isLoading) return <>Loading</>;
   return (
     <>
       <Grid
