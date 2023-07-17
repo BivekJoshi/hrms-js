@@ -21,8 +21,9 @@ export const useSendEmail = ({ employeeId, onSuccess }) => {
     }
   );
 };
-export const useSendEmailToAll = ({ employeeId, onSuccess }) => {
 
+
+export const useSendEmailToAll = ({ onSuccess, employeeId }) => {
   const queryClient = useQueryClient();
 
   return useMutation(

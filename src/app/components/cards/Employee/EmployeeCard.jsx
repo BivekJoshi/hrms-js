@@ -14,7 +14,7 @@ import ProgressById from "../../../pages/Employee/ProgressEmployeeData/ProgressB
 import { useSelector } from 'react-redux';
 
 const EmployeeCard = ({ IsActive, EmployeeId, EFirstName, EMiddleName, ELastName, OfficeEmail, MobileNumber, Position, EGender }) => {
-  const progress = useSelector((state) => state.progress);
+  const progressId = useSelector((state) => state.progress);
   const [open, setOpen] = useState(false);
   const [openEmailForm, setOpenEmailForm] = useState(false);
 
