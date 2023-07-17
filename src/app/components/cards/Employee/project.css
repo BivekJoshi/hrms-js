@@ -1,0 +1,83 @@
+.card-content{
+    cursor: pointer;
+    position: relative;
+}
+.card-id{
+    text-align: center;
+    align-items: center;
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    top: 5%;
+    right: 32%;
+    border-radius: 22px;
+    padding: 5px;
+    background: #1c7ed6;
+    color: #fff;
+}
+.card-status{
+    position: absolute;
+    font-size: 0.8rem;
+    bottom: 8%;
+    left: 24%;
+    border-radius: 12px;
+    width: 52%;
+    padding: 6px 0px;
+    text-align: center;
+    background: #1c7ed6;
+    color: #fff;
+}
+
+
+.project-detail{
+    display: flex;
+    justify-content: space-between;
+}
+@media (max-width: 968px) {
+    .project-button-inner{
+        display: flex;
+        font-size: small;
+    }
+    .project-card-control{
+        display: flex;
+        flex-direction: row;
+    }
+}
+@media (max-width: 768px) {
+    .project-button{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.6rem;
+    }
+    .project-card-control{
+        display: flex;
+        flex-direction: column;
+    }
+    .project-button-inner{
+        display: flex;
+    }
+}
+
+@media (max-width: 568px) {
+    .card-id{
+        text-align: center;
+        align-items: center;
+        position: absolute;
+        width: 22px;
+        height: 22px;
+        top: 4%;
+        right: 36%;
+        border-radius: 22px;
+    }
+    .card-status{
+        position: absolute;
+        bottom: 8%;
+        left: 33%;
+        border-radius: 12px;
+        width: 32%;
+    }
+    .project-button-inner{
+        display: flex;
+    }
+}
