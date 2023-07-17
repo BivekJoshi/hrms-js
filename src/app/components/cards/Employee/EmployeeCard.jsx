@@ -191,7 +191,7 @@ const EmployeeCard = ({ IsActive, EmployeeId, EFirstName, EMiddleName, ELastName
                 alignItems="center"
               >
                 <LocalPhone />
-                <Typography variant="p" style={{ margin: "10px 0" }}> {MobileNumber} {JSON.stringify(progressId)} </Typography>
+                <Typography variant="p" style={{ margin: "10px 0" }}> {MobileNumber} {JSON.stringifd)}y(progressI </Typography>
               </Stack>
             </Box>
           </Stack>

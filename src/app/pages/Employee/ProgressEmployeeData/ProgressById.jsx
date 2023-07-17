@@ -38,7 +38,7 @@ const ProgressById = () => {
       // dispatch(setProgressData(progress));
       dispatch(setProgressId(progress));
     }
-  }, [progress, id, isLoading, data]);
+  }, [ ]);
 
   if (isLoading) {
     return <p>Loading...</p>;
