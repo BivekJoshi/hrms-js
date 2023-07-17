@@ -39,6 +39,7 @@ const EmployeeGridView = ({ employeeData }) => {
             OfficeEmail={employee?.officeEmail}
             MobileNumber={employee?.mobileNumber}
             Position={employee?.position?.positionName}
+            EGender={employee?.gender}
             EmployeeData={currentPosts}
           />
         ))}
