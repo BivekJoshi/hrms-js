@@ -3,14 +3,18 @@ import { Email, LocalPhone } from "@mui/icons-material";
 import { Box, Button, CardMedia } from "@mui/material";
 import { Chip, ClickAwayListener, Grow, Stack } from "@mui/material";
 import { MenuItem, MenuList, Paper, Popper, Typography } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import Image1 from "../../../../assets/wave.png";
 import MainCard from "../MainCard";
 import EmailModal from "../../../pages/Email/EmailModal";
 import { EditDeactivationEmployeeModal } from "../../../pages/Employee/EmployeeDeactivationModal/EditDeactivationEmployeeModal";
+import ProgressById from "../../../pages/Employee/ProgressEmployeeData/ProgressById";
+import { useSelector } from 'react-redux';
 
 const EmployeeCard = ({ IsActive, EmployeeId, EFirstName, EMiddleName, ELastName, OfficeEmail, MobileNumber, Position }) => {
+  const progress = useSelector((state) => state.progress);
+
   const [open, setOpen] = useState(false);
   const [openEmailForm, setOpenEmailForm] = useState(false);
 
@@ -143,6 +147,7 @@ const EmployeeCard = ({ IsActive, EmployeeId, EFirstName, EMiddleName, ELastName
               </Popper>
             </Box>
           </Box>
+          
           <Stack style={{ textAlign: " -webkit-center", marginTop: "1rem" }}>
             <CardMedia
               component="img"
@@ -153,7 +158,7 @@ const EmployeeCard = ({ IsActive, EmployeeId, EFirstName, EMiddleName, ELastName
           </Stack>
           <Stack>
             <Typography style={{ fontWeight: 700, margin: "1rem 0", fontSize: "20px" }}>
-              {EFirstName} {EMiddleName} {ELastName}
+              {EFirstName} {EMiddleName} {ELastName} {EmployeeId}
             </Typography>
             <Box padding={"0 1rem"}>
               <Typography variant="body2" gutterBottom>
@@ -187,7 +192,7 @@ const EmployeeCard = ({ IsActive, EmployeeId, EFirstName, EMiddleName, ELastName
                 alignItems="center"
               >
                 <LocalPhone />
-                <Typography variant="p" style={{ margin: "10px 0" }}> {MobileNumber}</Typography>
+                <Typography variant="p" style={{ margin: "10px 0" }}> {MobileNumber} {JSON.stringify(progressId)} </Typography>
               </Stack>
             </Box>
           </Stack>
