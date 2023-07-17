@@ -22,6 +22,7 @@ import Groups2Icon from "@mui/icons-material/Groups2";
 import { useGetEmployee } from '../../../hooks/employee/useEmployee';
 import { useGetProjectEmployee } from '../../../hooks/project/projectEmployee/useProjectEmployee';
 import { DeactivateProjectModal, EditProjectModal } from '../../../pages/Project/ProjectModal/ProjectModal';
+import { useNavigate } from 'react-router-dom';
 
 const ProjectCard = ({
     Id,
@@ -33,6 +34,7 @@ const ProjectCard = ({
     TaskStatus,
     item
 }) => {
+    const navigate = useNavigate();
     const { data: employeeData } = useGetEmployee();
     const { data: projectEmployeeData } = useGetProjectEmployee();
 
