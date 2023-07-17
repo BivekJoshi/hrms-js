@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { Grid, TextField, Button } from "@mui/material";
 import { toast } from "react-toastify";
 import useAddEventForm from "../../../hooks/event/addEvent/useAddEventForm";
-import EmailModal from "../../../pages/Email/EmailModal";
+import EmailToAll from "../../../pages/Email/EmailTOAll";
 import { useGetEmployee } from "../../../hooks/employee/useEmployee";
 
 const AddEventFields = ({ onClose, isLoading }) => {
   const { formik } = useAddEventForm();
   const [openEmail, setOpenEmail] = useState(false);
-  const{data:employeedata } = useGetEmployee();
+  const { data: employeedata } = useGetEmployee();
 
   const handleOpenEmailform = () => {
     setOpenEmail(true);
@@ -23,13 +23,13 @@ const AddEventFields = ({ onClose, isLoading }) => {
     if (isValid) {
       formik.handleSubmit(); // Submit the form
 
-            if (formik.isValid) {
-                onClose(); // Close the modal
-            } else {
-                toast.error('Please make sure you have filled the form correctly');
-            }
-        }
-    };
+      if (formik.isValid) {
+        onClose(); // Close the modal
+      } else {
+        toast.error("Please make sure you have filled the form correctly");
+      }
+    }
+  };
 
   return (
     !isLoading && (
@@ -127,14 +127,14 @@ const AddEventFields = ({ onClose, isLoading }) => {
             Add Event
           </Button>
           {handleFormSubmit && openEmail && (
-            <EmailModal
-              officeEmail={employeedata.OfficeEmail}
-              employeeId={employeedata.employeeId}
+            <EmailToAll
+              employeeData={employeedata}
+              employeeid={employeedata.id}
               open={openEmail}
               onClose={handleCloseEmailform}
               handleOpenEmailform={handleOpenEmailform}
             />
-          )}{" "}
+          )}
         </Grid>
       </Grid>
     )
