@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import useAddDesignationForm from '../../../hooks/designation/addDesignation/useAddDesignationForm';
 
 const designationLevel = [
-  { value: '1', label: 'Entry-level/Junior', id: nanoid(), },
+  { value: 'Entry-level/Junior', label: 'Entry-level/Junior', id: nanoid(), },
   { value: '2', label: 'Mid-level', id: nanoid(), },
   { value: '3', label: 'Senior-level', id: nanoid(), },
   { value: '4', label: 'Executive/Top-level', id: nanoid(), },
