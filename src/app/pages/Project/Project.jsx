@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
@@ -15,12 +15,9 @@ import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import {
   Box,
   Button,
-  ClickAwayListener,
   Grid,
-  Grow,
   MenuItem,
   MenuList,
-  Paper,
   Popper,
 } from "@mui/material";
 import "./project.css";
@@ -32,9 +29,8 @@ import {
 } from "./ProjectModal/ProjectModal";
 import { useNavigate } from "react-router-dom";
 import { useGetEmployee } from "../../hooks/employee/useEmployee";
-import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
-// import DeleteIcon from "@mui/icons-material/Delete";
 import { useGetProjectEmployee } from "../../hooks/project/projectEmployee/useProjectEmployee";
+import { FilterProject } from "../../components/Filter/Filter"
 
 const Project = () => {
   const navigate = useNavigate();
@@ -42,6 +38,7 @@ const Project = () => {
   const { data: employeeData } = useGetEmployee();
   const { data: projectEmployeeData } = useGetProjectEmployee();
 
+  const [projectFilter, setProjectFilter] = useState("");
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -50,33 +47,6 @@ const Project = () => {
 
   const open = Boolean(anchorEl);
   const id = open ? "simple-popper" : undefined;
-
-  // const [open, setOpen] = useState(false);
-  // const anchorRef = useRef(null);
-  // const prevOpen = useRef(open);
-  // const handleToggle = () => {
-  //   setOpen((prevOpen) => !prevOpen);
-  // };
-  // const handleClose = (event) => {
-  //   if (anchorRef.current && anchorRef.current.contains(event.target)) {
-  //     return;
-  //   }
-  //   setOpen(false);
-  // };
-  // function handleListKeyDown(event) {
-  //   if (event.key === "Tab") {
-  //     event.preventDefault();
-  //     setOpen(false);
-  //   } else if (event.key === "Escape") {
-  //     setOpen(false);
-  //   }
-  // }
-  // useEffect(() => {
-  //   if (prevOpen.current === true && open === false) {
-  //     anchorRef.current.focus();
-  //   }
-  //   prevOpen.current = open;
-  // }, [open]);
 
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
@@ -116,6 +86,10 @@ const Project = () => {
     return projectEmployeeNumber || 0;
   };
 
+  const filteredProjects = projectData && projectData?.filter((item) =>
+  item?.projectName.toLowerCase().includes(projectFilter.toLowerCase())
+);
+
   if (isLoading) return <>Loading</>;
 
   return (
@@ -131,13 +105,13 @@ const Project = () => {
           }}
         >
           On-Going Projects
-          <Typography className="project-button-inner">
+          <Typography className="project-button-inner" sx={{display: "flex", gap: "6px"}}>
+            <FilterProject data={projectData} handleProjectFilter={(value) => setProjectFilter(value)} />
             <Button variant="contained" onClick={handleAddOpenModal}>
               +Add Project
             </Button>
             <Button
               variant="contained"
-              sx={{ marginLeft: "4px" }}
               onClick={() => {
                 navigate(`get-deactivated-projects`);
               }}
@@ -158,7 +132,7 @@ const Project = () => {
           gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
         }}
       >
-        {projectData.map((item, index) => (
+        {filteredProjects.map((item, index) => (
           <Card key={index} sx={{ maxWidth: "360px" }}>
             <CardHeader
               avatar={
@@ -180,7 +154,7 @@ const Project = () => {
                   >
                     <MoreHorizIcon />
                   </Button>
-                  <Popper id={id} open={open} anchorEl={anchorEl}>
+                  <Popper open={open} anchorEl={anchorEl}>
                     <Box
                       sx={{
                         bgcolor: "background.paper",
@@ -189,20 +163,20 @@ const Project = () => {
                       }}
                     >
                       <MenuList>
-                      <MenuItem
-                        onClick={() => {
-                          handleEditProject(item);
-                        }}
-                        style={{ fontSize: ".8rem" }}
-                      >
-                        Edit
-                      </MenuItem>
-                      <MenuItem
-                        onClick={() => handleDeactivateProject(item)}
-                        style={{ fontSize: ".8rem" }}
-                      >
-                        Terminate Project
-                      </MenuItem>
+                        <MenuItem
+                          onClick={() => {
+                            handleEditProject(item);
+                          }}
+                          style={{ fontSize: ".8rem" }}
+                        >
+                          Edit
+                        </MenuItem>
+                        <MenuItem
+                          onClick={() => handleDeactivateProject(item)}
+                          style={{ fontSize: ".8rem" }}
+                        >
+                          Terminate Project
+                        </MenuItem>
                       </MenuList>
                     </Box>
                   </Popper>
