@@ -11,9 +11,7 @@ export const FilterProject = ({ data, handleProjectFilter }) => {
           options={data}
           autoHighlight
           getOptionLabel={(option) => option.projectName}
-          onChange={(event, value) =>
-            handleProjectFilter(value?.projectName || "")
-          }
+          onChange={(event, value) =>(value?.projectName || "")}
           renderOption={(props, option) => (
             <Box component="li" {...props}>
               {option.projectName}

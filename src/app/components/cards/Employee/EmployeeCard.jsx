@@ -3,18 +3,16 @@ import { Email, LocalPhone } from "@mui/icons-material";
 import { Box, Button, CardMedia } from "@mui/material";
 import { Chip, ClickAwayListener, Grow, Stack } from "@mui/material";
 import { MenuItem, MenuList, Paper, Popper, Typography } from "@mui/material";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import Male from "../../../../assets/male.png"
 import Female from "../../../../assets/female.png"
 import MainCard from "../MainCard";
 import EmailModal from "../../../pages/Email/EmailModal";
 import { EditDeactivationEmployeeModal } from "../../../pages/Employee/EmployeeDeactivationModal/EditDeactivationEmployeeModal";
-import ProgressById from "../../../pages/Employee/ProgressEmployeeData/ProgressById";
 import { useSelector } from 'react-redux';
 
-const EmployeeCard = ({ IsActive, EmployeeId, EFirstName, EMiddleName, ELastName, OfficeEmail, MobileNumber, Position, EGender }) => {
-  const progressId = useSelector((state) => state.progress);
+const EmployeeCard = ({ IsActive, EmployeeId, EFirstName, EMiddleName, ELastName, OfficeEmail, MobileNumber, PositionName, PositionLevel, EGender }) => {
   const [open, setOpen] = useState(false);
   const [openEmailForm, setOpenEmailForm] = useState(false);
 
@@ -147,7 +145,7 @@ const EmployeeCard = ({ IsActive, EmployeeId, EFirstName, EMiddleName, ELastName
               </Popper>
             </Box>
           </Box>
-          <Stack style={{ textAlign: " -webkit-center", marginTop: "1rem", alignItems:"center" }}>
+          <Stack style={{ textAlign: " -webkit-center", marginTop: "1rem", alignItems: "center" }}>
             <CardMedia
               component="img"
               src={EGender === "MALE" ? Male : Female}
@@ -157,11 +155,11 @@ const EmployeeCard = ({ IsActive, EmployeeId, EFirstName, EMiddleName, ELastName
           </Stack>
           <Stack>
             <Typography style={{ fontWeight: 700, margin: "1rem 0", fontSize: "20px" }}>
-              {EFirstName} {EMiddleName} {ELastName} {EmployeeId}
+              {EFirstName} {EMiddleName} {ELastName}
             </Typography>
             <Box padding={"0 1rem"}>
               <Typography variant="body2" gutterBottom>
-                <Chip label={Position} style={{ width: 230 }} />
+                <Chip label={`${PositionName} (${PositionLevel})`} style={{ width: 230 }} />
               </Typography>
             </Box>
           </Stack>
@@ -191,7 +189,7 @@ const EmployeeCard = ({ IsActive, EmployeeId, EFirstName, EMiddleName, ELastName
                 alignItems="center"
               >
                 <LocalPhone />
-                <Typography variant="p" style={{ margin: "10px 0" }}> {MobileNumber} {JSON.stringify(progressId)} </Typography>
+                <Typography variant="p" style={{ margin: "10px 0" }}> {MobileNumber} </Typography>
               </Stack>
             </Box>
           </Stack>

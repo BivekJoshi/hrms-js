@@ -3,19 +3,31 @@ import Typography from "@mui/material/Typography";
 import {
   Box,
   Button,
+  Card,
+  Container,
   Grid,
+  Stack,
+  TextField,
 } from "@mui/material";
-import "./project.css";
+import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 import { useGetProject } from "../../hooks/project/useProject";
 import { AddProjectModal, } from "./ProjectModal/ProjectModal";
 import { useNavigate } from "react-router-dom";
 
 import ProjectCard from "../../components/cards/Employee/ProjectCard";
 import { PagePagination } from "../../components/Pagination/PagePagination";
+import { FilterProject } from "../../components/Filter/Filter";
 
 const Project = () => {
   const navigate = useNavigate();
   const { data: projectData, isLoading } = useGetProject();
+  const [nameFilter, setNameFilter] = useState("");
+
+  const [isContainerVisible, setIsContainerVisible] = useState(false);
+
+  const handleFilterIconClick = () => {
+    setIsContainerVisible(!isContainerVisible);
+  };
 
   const [openAddModal, setOpenAddModal] = useState(false);
 
@@ -65,6 +77,27 @@ const Project = () => {
         </Typography>
       </Box>
 
+      <Stack sx={{ display: "flex", flexDirection: "row-reverse" }}>
+        <FilterAltOutlinedIcon onClick={handleFilterIconClick} style={{ fontSize: '32px' }} />
+        {isContainerVisible && (
+          <Container maxWidth="100vh">
+            <Card sx={{ padding: 1 }} >
+              <Grid container spacing={3}>
+                <Grid item xs={12} sm={12} md={4}>
+                  {/* <TextField
+                    label="Filter by Project Name"
+                    value={nameFilter}
+                    onChange={(e) => setNameFilter(e.target.value)}
+                    fullWidth
+                  /> */}
+                  <FilterProject data={projectData} />
+                </Grid>
+              </Grid>
+            </Card>
+          </Container>
+        )}
+      </Stack>
+      <br />
       <Grid
         container
         item
@@ -76,17 +109,19 @@ const Project = () => {
         }}
       >
         {currentPosts.map((item, index) => (
-          <ProjectCard
-            item={item}
-            Id={item.id}
-            key={index}
-            ProjectName={item.projectName}
-            StartDate={item.startDate}
-            EndDate={item.endDate}
-            ProjectLeaderId={item.projectLeaderId}
-            AssociateCompanies={item.associateCompanies[0].companyName}
-            TaskStatus={item.taskStatus}
-          />
+          <>
+            <ProjectCard
+              item={item}
+              Id={item.id}
+              key={index}
+              ProjectName={item.projectName}
+              StartDate={item.startDate}
+              EndDate={item.endDate}
+              ProjectLeaderId={item.projectLeaderId}
+              AssociateCompanies={item.associateCompanies[0].companyName}
+              TaskStatus={item.taskStatus}
+            />
+          </>
         ))}
       </Grid>
 

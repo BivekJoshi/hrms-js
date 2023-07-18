@@ -3,7 +3,7 @@ import { useFormik } from 'formik';
 import { AddEmployeeSchema } from './addEmployeeSchema';
 
 const useAddEmployeeForm = () => {
-  const { mutate, data, isLoading } = useAddEmployee(() => console.log('tesst'));
+  const { mutate, data, isLoading } = useAddEmployee();
 
   // console.log('Úse Add Employee')
   // console.log(isLoading)
