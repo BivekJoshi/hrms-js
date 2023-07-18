@@ -304,7 +304,7 @@ const EmployeeBasicInfoForm = ({ formik, isLoading }) => {
             {!loadingDesignation &&
               designationData.map((option) => (
                 <MenuItem key={option.id} value={option.id}>
-                  {option.positionName}
+                  {option.positionName} ({option.positionLevel})
                 </MenuItem>
               ))}
           </TextField>

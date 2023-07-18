@@ -10,9 +10,9 @@ import Female from "../../../../assets/female.png"
 import MainCard from "../MainCard";
 import EmailModal from "../../../pages/Email/EmailModal";
 import { EditDeactivationEmployeeModal } from "../../../pages/Employee/EmployeeDeactivationModal/EditDeactivationEmployeeModal";
-import { useGetDocumentById } from "../../../hooks/employee/useDocument";
+import { useSelector } from 'react-redux';
 
-const EmployeeCard = ({ IsActive, EmployeeId, EFirstName, EMiddleName, ELastName, OfficeEmail, MobileNumber, Position, EGender }) => {
+const EmployeeCard = ({ IsActive, EmployeeId, EFirstName, EMiddleName, ELastName, OfficeEmail, MobileNumber, PositionName, PositionLevel, EGender }) => {
   const [open, setOpen] = useState(false);
   const [openEmailForm, setOpenEmailForm] = useState(false);
 
@@ -141,7 +141,7 @@ const EmployeeCard = ({ IsActive, EmployeeId, EFirstName, EMiddleName, ELastName
               </Popper>
             </Box>
           </Box>
-          <Stack style={{ textAlign: " -webkit-center", marginTop: "1rem", alignItems:"center" }}>
+          <Stack style={{ textAlign: " -webkit-center", marginTop: "1rem", alignItems: "center" }}>
             <CardMedia
               component="img"
               src={EGender === "MALE" ? Male : Female}
@@ -153,11 +153,10 @@ const EmployeeCard = ({ IsActive, EmployeeId, EFirstName, EMiddleName, ELastName
           <Stack>
             <Typography style={{ fontWeight: 700, margin: "1rem 0", fontSize: "20px" }}>
               {EFirstName} {EMiddleName} {ELastName}
-              
             </Typography>
             <Box padding={"0 1rem"}>
               <Typography variant="body2" gutterBottom>
-                <Chip label={Position} style={{ width: 230 }} />
+                <Chip label={`${PositionName} (${PositionLevel})`} style={{ width: 230 }} />
               </Typography>
             </Box>
           </Stack>
