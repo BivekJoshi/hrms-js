@@ -42,7 +42,6 @@ export const AddProjectActiveModal = ({open, handleCloseModal, id}) => {
 
 export const DeactivateProjectModal = ({ open, handleCloseModal, id }) => {
     const { data } = useGetProjectById(id);
-    console.log(data)
     return (
         <div>
             <FormModal

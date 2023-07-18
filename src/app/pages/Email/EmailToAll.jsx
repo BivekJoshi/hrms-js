@@ -42,21 +42,6 @@ const EmailToAll = ({ open, onClose }) => {
   const validateForm = () => {
     let isValid = true;
     const updatedErrors = { ...errors };
-
-    if (emailData.subject.trim() === "") {
-      updatedErrors.subject = true;
-      isValid = false;
-    } else {
-      updatedErrors.subject = false;
-    }
-
-    if (emailData.message.trim() === "") {
-      updatedErrors.message = true;
-      isValid = false;
-    } else {
-      updatedErrors.message = false;
-    }
-
     setErrors(updatedErrors);
     return isValid;
   };

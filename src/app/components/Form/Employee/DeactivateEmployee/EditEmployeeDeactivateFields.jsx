@@ -155,7 +155,6 @@ export const EditEmployeeActivateFields = ({ onClose, isLoading, id }) => {
   };
 
   const getEmployeeName = (employeeId) => {
-    console.log(employeeData)
     return (
       employeeData?.find((employee) => employee?.id === employeeId)
       ?.firstName || employeeId

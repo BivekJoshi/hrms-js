@@ -27,7 +27,6 @@ function EmailForm({ employeeId, onClose, officeEmail }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (validateForm()) {
-      console.log("Sending email:", emailData);
 
       mutate(emailData);
 

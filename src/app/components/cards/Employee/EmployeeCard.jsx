@@ -3,18 +3,16 @@ import { Email, LocalPhone } from "@mui/icons-material";
 import { Box, Button, CardMedia } from "@mui/material";
 import { Chip, ClickAwayListener, Grow, Stack } from "@mui/material";
 import { MenuItem, MenuList, Paper, Popper, Typography } from "@mui/material";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import Male from "../../../../assets/male.png"
 import Female from "../../../../assets/female.png"
 import MainCard from "../MainCard";
 import EmailModal from "../../../pages/Email/EmailModal";
 import { EditDeactivationEmployeeModal } from "../../../pages/Employee/EmployeeDeactivationModal/EditDeactivationEmployeeModal";
-import ProgressById from "../../../pages/Employee/ProgressEmployeeData/ProgressById";
-import { useSelector } from 'react-redux';
+import { useGetDocumentById } from "../../../hooks/employee/useDocument";
 
 const EmployeeCard = ({ IsActive, EmployeeId, EFirstName, EMiddleName, ELastName, OfficeEmail, MobileNumber, Position, EGender }) => {
-  const progressId = useSelector((state) => state.progress);
   const [open, setOpen] = useState(false);
   const [openEmailForm, setOpenEmailForm] = useState(false);
 
@@ -47,21 +45,17 @@ const EmployeeCard = ({ IsActive, EmployeeId, EFirstName, EMiddleName, ELastName
     }
     prevOpen.current = open;
   }, [open]);
-  const handleOpenEmailform = () => {
-    setOpenEmailForm(true);
-  };
-  const handleCloseEmailform = () => {
-    setOpenEmailForm(false);
-  };
+
+  const handleOpenEmailform = () => {setOpenEmailForm(true)};
+  const handleCloseEmailform = () => {setOpenEmailForm(false)};
 
   const [openDeactivateModal, setOpenDeactivateModal] = useState(false);
   const handleCloseDeactivateModal = () => setOpenDeactivateModal(false);
-  const handleClick = () => {
-    setOpenDeactivateModal(true);
-  };
+  const handleClick = () => {setOpenDeactivateModal(true) };
 
   return (
     <>
+    
       <Box maxWidth="350px">
         <MainCard
           grow={true}
@@ -154,10 +148,12 @@ const EmployeeCard = ({ IsActive, EmployeeId, EFirstName, EMiddleName, ELastName
               alt="Paella dish"
               sx={{ width: 66, height: 66, borderRadius: "2rem" }}
             />
+         
           </Stack>
           <Stack>
             <Typography style={{ fontWeight: 700, margin: "1rem 0", fontSize: "20px" }}>
-              {EFirstName} {EMiddleName} {ELastName} {EmployeeId}
+              {EFirstName} {EMiddleName} {ELastName}
+              
             </Typography>
             <Box padding={"0 1rem"}>
               <Typography variant="body2" gutterBottom>
@@ -191,10 +187,12 @@ const EmployeeCard = ({ IsActive, EmployeeId, EFirstName, EMiddleName, ELastName
                 alignItems="center"
               >
                 <LocalPhone />
-                <Typography variant="p" style={{ margin: "10px 0" }}> {MobileNumber} {JSON.stringify(progressId)} </Typography>
+                <Typography variant="p" style={{ margin: "10px 0" }}> {MobileNumber} </Typography>
               </Stack>
             </Box>
           </Stack>
+      
+
         </MainCard>
         {openEmailForm && (
           <EmailModal

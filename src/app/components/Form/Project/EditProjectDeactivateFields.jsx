@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import { useGetDeactivatedProject } from "../../../hooks/project/useProject";
 
 export const EditProjectDeactivateFields = ({ onClose, isLoading, data }) => {
-  console.log(data)
+ 
   const { formik } = useRemoveActiveProject(data);
 
   const handleFormSubmit = () => {
