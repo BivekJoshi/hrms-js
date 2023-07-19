@@ -61,7 +61,7 @@ const ProjectEmployee = () => {
     const employee = employeeData?.find(
       (emp) => emp.id === employeeId
     );
-    const name = `${employee.firstName} ${employee.middleName} ${employee.lastName}`;
+    const name = `${employee?.firstName} ${employee?.middleName} ${employee?.lastName}`;
     return name;
   };
 
