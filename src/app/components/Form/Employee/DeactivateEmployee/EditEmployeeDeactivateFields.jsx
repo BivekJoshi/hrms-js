@@ -5,8 +5,11 @@ import { pink } from "@mui/material/colors";
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 import { toast } from "react-toastify";
 import { useAddActiveEmployeeForm, useRemoveDeactiveEmployeeForm } from "../../../../hooks/employee/DeactivateEmploye/useRemoveDeactiveEmployeeForm";
+import { useGetEmployee } from "../../../../hooks/employee/useEmployee";
+import { useGetDeactivatedEmployee } from "../../../../hooks/employee/DeactivateEmploye/useEmployee";
 
 export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
+  const { data : employeeData } = useGetEmployee();
   const { formik } = useRemoveDeactiveEmployeeForm(data);
 
   const handleFormSubmit = () => {
@@ -32,6 +35,13 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
     },
   ]
 
+  const getEmployeeName = (employeeId) => {
+    return (
+      employeeData?.find((employee) => employee?.id === employeeId)
+      ?.firstName || employeeId
+    )
+  };
+
   return (
     !isLoading && (
       <Grid container spacing={3}>
@@ -42,7 +52,7 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
             label="Employee Name"
             placeholder="Enter Employee Id"
             fullWidth
-            value={formik.values.employeeId}
+            value={getEmployeeName(formik.values.employeeId)}
             onChange={formik.handleChange}
             error={formik.touched.employeeId && Boolean(formik.errors.employeeId)}
             helperText={formik.touched.employeeId && formik.errors.employeeId}
@@ -119,6 +129,7 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
 };
 
 export const EditEmployeeActivateFields = ({ onClose, isLoading, id }) => {
+  const { data : employeeData } = useGetDeactivatedEmployee();
   const { formik } = useAddActiveEmployeeForm(id);
   const options = [
     {
@@ -143,6 +154,13 @@ export const EditEmployeeActivateFields = ({ onClose, isLoading, id }) => {
     }
   };
 
+  const getEmployeeName = (employeeId) => {
+    return (
+      employeeData?.find((employee) => employee?.id === employeeId)
+      ?.firstName || employeeId
+    )
+  };
+
   return (
     !isLoading && (
       <Grid container spacing={3}>
@@ -153,7 +171,7 @@ export const EditEmployeeActivateFields = ({ onClose, isLoading, id }) => {
             label="Employee Name"
             placeholder="Enter project Id"
             fullWidth
-            value={formik.values.employeeId}
+            value={getEmployeeName(formik.values.employeeId)}
             onChange={formik.handleChange}
             error={formik.touched.employeeId && Boolean(formik.errors.employeeId)}
             helperText={formik.touched.employeeId && formik.errors.employeeId}

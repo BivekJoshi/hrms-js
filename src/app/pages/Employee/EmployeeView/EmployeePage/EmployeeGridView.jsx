@@ -14,8 +14,7 @@ const EmployeeGridView = ({ employeeData }) => {
   const currentPosts = employeArray.slice(indexOfFirstPost, indexOfLastPost);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
-  // if (isLoading) return <>Loading</>;
+ 
   return (
     <>
       <Grid
@@ -38,8 +37,10 @@ const EmployeeGridView = ({ employeeData }) => {
             ELastName={employee.lastName}
             OfficeEmail={employee?.officeEmail}
             MobileNumber={employee?.mobileNumber}
-            Position={employee?.position?.positionName}
+            PositionName={employee?.position?.positionName}
+            PositionLevel={employee?.position?.positionLevel}
             EGender={employee?.gender}
+            // EmployeePhoto={getEmployeePhoto?.id}
             EmployeeData={currentPosts}
           />
         ))}

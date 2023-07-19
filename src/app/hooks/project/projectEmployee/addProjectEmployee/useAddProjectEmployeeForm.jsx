@@ -31,7 +31,7 @@ export const useAddProjectEmployeeForm = () => {
 
 export const useEditProjectEmployeeForm = (data) => {
     const { mutate } = useEditProjectEmployee({});
-    console.log(data)
+  
     const formik = useFormik({
         initialValues: {
             id: data?.id || "",

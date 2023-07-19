@@ -57,7 +57,6 @@ export const useEditEmployee = ({ onSuccess }) => {
 };
 
 export const useAddEmployee = (onSuccess) => {
-  console.log(onSuccess)
   const queryClient = useQueryClient();
   return useMutation(['addEmployees'], (formData) => addEmployee(formData), {
     onSuccess: (data, variables, context) => {

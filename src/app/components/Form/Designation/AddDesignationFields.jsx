@@ -4,18 +4,6 @@ import React from 'react';
 import { toast } from 'react-toastify';
 import useAddDesignationForm from '../../../hooks/designation/addDesignation/useAddDesignationForm';
 
-const designationLevel = [
-  { value: '1', label: 'Entry-level/Junior', id: nanoid(), },
-  { value: '2', label: 'Mid-level', id: nanoid(), },
-  { value: '3', label: 'Senior-level', id: nanoid(), },
-  { value: '4', label: 'Executive/Top-level', id: nanoid(), },
-  { value: '5', label: 'Team Lead/Supervisor', id: nanoid(), },
-  { value: '6', label: 'Assistant Manager/Associate', id: nanoid(), },
-  { value: '7', label: 'Department Head/Manager', id: nanoid(), },
-  { value: '8', label: 'Intern', id: nanoid(), },
-  { value: '9', label: 'Chief Officer', id: nanoid(), },
-];
-
 const AddDesignationFields = ({ onClose, isLoading }) => {
   const { formik } = useAddDesignationForm();
 
@@ -52,7 +40,6 @@ const AddDesignationFields = ({ onClose, isLoading }) => {
           <TextField
             id='positionLevel'
             name='positionLevel'
-            select
             label='Position Level'
             placeholder='Enter position level'
             fullWidth
@@ -64,11 +51,6 @@ const AddDesignationFields = ({ onClose, isLoading }) => {
             autoFocus
             InputLabelProps={{ shrink: true }}
           >
-            {designationLevel?.map((option) => (
-              <MenuItem key={option?.id} value={option?.value}>
-                {option?.label}
-              </MenuItem>
-            ))}
           </TextField>
         </Grid>
         <Grid item xs={12} sm={12}>

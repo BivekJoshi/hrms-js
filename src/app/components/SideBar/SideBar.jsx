@@ -173,13 +173,11 @@ export default function Sidebar() {
         <Card
           variant="outlined"
           sx={{
-            width: "100%",
             maxWidth: "100%",
             padding: "20px",
             boxSizing: "border-box",
             "@media (min-width: 600px)": {
-              maxWidth: "calc(100% - drawerWidth)",
-              width: open ? "calc(100% - drawerWidth)" : "100%",
+              maxWidth: open ? "calc(100% - drawerWidth)" : "100%",
             },
           }}
         >

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import FormModal from "../../components/Modal/FormModal";
 import { useSendEmailToAll } from "../../hooks/email/useEmail";
 import {
@@ -11,88 +11,49 @@ import {
   Select,
   TextField,
 } from "@mui/material";
-import { useState } from "react";
 import { useGetEmployee } from "../../hooks/employee/useEmployee";
-import { useEffect } from "react";
 
 const EmailToAll = ({ open, onClose }) => {
   const { data: employeeData } = useGetEmployee();
   const [employeeId, setEmployeeId] = useState([]);
-  const [emailData, setEmailData] = useState({
-    to: employeeData.officeEmail || "",
-    subject: "",
-    message: "",
+  const [emailData, setEmailData] = useState({ subject: "", message: "" });
+  const [errors, setErrors] = useState({ subject: false, message: false });
+
+  const sendEmailMutation = useSendEmailToAll({
+    onSuccess: () => {
+      setEmailData({ subject: "", message: "" });
+      setErrors({ subject: false, message: false });
+    },
+    employeeId: employeeId,
   });
-
-useEffect(() => {
-  // if (employeeId)
-  // useGetEmployee();
-  console.log(employeeId);
-}, [employeeId])
-
-
-  const [errors, setErrors] = useState({
-    to: false,
-    message: false,
-  });
-
-  const { mutate } = useSendEmailToAll({ employeeId });
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setEmailData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    setEmailData((prevData) => ({ ...prevData, [name]: value }));
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     if (validateForm()) {
-      mutate(emailData);
-      setEmailData({
-        to: "",
-        subject: "",
-        message: "",
-      });
-      setErrors({
-        to: false,
-        subject: false,
-      });
+      sendEmailMutation.mutate(emailData);
     }
   };
 
   const validateForm = () => {
     let isValid = true;
     const updatedErrors = { ...errors };
-
-    if (emailData.to.trim() === "") {
-      updatedErrors.to = true;
-      isValid = false;
-    } else {
-      updatedErrors.to = false;
-    }
-
-    if (emailData.message.trim() === "") {
-      updatedErrors.message = true;
-      isValid = false;
-    } else {
-      updatedErrors.message = false;
-    }
-
     setErrors(updatedErrors);
     return isValid;
   };
 
-  // select email
-  const [personName, setPersonName] = useState([]);
-
-  const handleChange = (event, id) => {
-    setEmployeeId(id);
-    const {
-      target: { value },
-    } = event;
-    setPersonName(value);
+  const handleChange = (event) => {
+    const { value } = event.target;
+    if (value === "all") {
+      const allEmployeeId = employeeData.map((employee) => employee.id);
+      setEmployeeId(allEmployeeId);
+    } else {
+      setEmployeeId(value);
+    }
   };
 
   return (
@@ -105,40 +66,24 @@ useEffect(() => {
             <h2>Email</h2>
             <Box style={{ width: "400px" }}>
               <Grid container spacing={2}>
-                <Grid item xs={10}>
-                  {/* <TextField
-                    fullWidth
-                    label="To"
-                    name="to"
-                    value={emailData.to}
-                    onChange={handleInputChange}
-                    error={errors.to}
-                    helperText={errors.to ? "To is required" : ""}
-                  /> */}
-
-                  <InputLabel id="demo-multiple-name-label">To</InputLabel>
+                <Grid
+                  item
+                  spacing={1}
+                  xs={12}
+                  sx={{ display: "flex", alignItems: "center" }}
+                >
+                  <InputLabel id="demo-multiple-name-label">To: </InputLabel>
                   <Select
                     sx={{ m: 1, width: 300 }}
                     labelId="demo-multiple-name-label"
                     id="employeeId"
-                    multiple
-                    value={personName}
+                    select
+                    value={employeeId}
                     onChange={handleChange}
                     input={<OutlinedInput label="To" />}
-                    onClick={() => employeeId}
-
-                    // MenuProps={MenuProps}
                   >
-                    {employeeData.map((name, employeeId) => (
-                      <MenuItem
-                        key={name.id}
-                        value={name.officeEmail}
-                        // style={getStyles(name, personName, theme)}
-                        // onClick={employeeId}
-                      >
-                        {name.officeEmail}
-                      </MenuItem>
-                    ))}
+                    <MenuItem value="all">All Employees</MenuItem>
+                    <MenuItem value="none">None</MenuItem>
                   </Select>
                 </Grid>
                 <Grid item xs={12}>
@@ -156,8 +101,8 @@ useEffect(() => {
                   <TextField
                     fullWidth
                     multiline
-                    rows={12}
-                    cols={100}
+                    rows={10}
+                    cols={40}
                     label="Body"
                     name="message"
                     value={emailData.message}
@@ -178,7 +123,6 @@ useEffect(() => {
                   type="button"
                   variant="contained"
                   color="primary"
-                  onClick={onClose}
                   style={{ marginLeft: "10px" }}
                 >
                   Cancel

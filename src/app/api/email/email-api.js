@@ -10,12 +10,10 @@ export const sendEmail = async ({ formData, employeeId }) => {
   return data;
 };
 
-export const sendEmailToAll = async ({ formData, employeeId }) => {
-  const res = await axiosInstance.post(
-    `/employee/send-email/employee-list`,
-    formData
-  );
 
+export const sendEmailToAll = async ({ formData, employeeId }) => {
+  const employeeIdParams = employeeId.map((id) => `employeeIds=${id}`).join("&");
+  const url = `/employee/send-email/employee-list?${employeeIdParams}`;
+  const res = await axiosInstance.post(url, formData);
   return res;
 };
-
