@@ -7,6 +7,7 @@ import LeaveInfo from './LeaveInfoTab/LeaveInfo';
 import AcademicsInfo from './AcademicsInfoTab/AcademicsInfo';
 import PromotionHistory from './PromotionHistory/PromotionHistory';
 import ProgressById from '../../ProgressEmployeeData/ProgressById';
+import AttendenceInfo from './AttendenceInfoTab/AttendenceInfo';
 
 
 const primaryColor = '#1c7ed6';
@@ -51,15 +52,15 @@ const TabComponent = ({ data }) => {
                                 fontWeight: 'bolder',
                             }}
                         />
-                        {/* <Tab
-                            label='Experiences'
+                        <Tab
+                            label='Attendence'
                             value='4'
                             style={{
                                 fontSize: '20px',
                                 color: primaryColor,
                                 fontWeight: 'bolder',
                             }}
-                        /> */}
+                        />
                         <Tab
                             label='Promotion History'
                             value='5'
@@ -81,7 +82,7 @@ const TabComponent = ({ data }) => {
                     <AcademicsInfo data={data} />
                 </TabPanel>
                 <TabPanel value='4'>
-                    <AcademicsInfo data={data}/>
+                    <AttendenceInfo />
                 </TabPanel>
                 <TabPanel value='5'>
                     <PromotionHistory />
