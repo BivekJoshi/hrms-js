@@ -38,6 +38,7 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
                           label="Name"
                           placeholder="Enter name"
                           fullWidth
+                          required
                           value={familyMember.name}
                           onChange={handleChange}
                           error={Boolean(formik.touched.family?.[index]?.name && formik.errors.family?.[index]?.name)}

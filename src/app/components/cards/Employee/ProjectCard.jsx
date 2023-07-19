@@ -96,12 +96,12 @@ const ProjectCard = ({
 
     return (
         <>
-            <Box maxWidth="350px">
+            <Box maxWidth="450px">
                 <MainCard
                     grow={true}
                     style={{
                         textAlign: "center",
-                        padding: ".2rem",
+                        padding: ".1rem",
                     }}
                 >
 
@@ -239,22 +239,14 @@ const ProjectCard = ({
                             <Box backgroundColor="#f5f5f5" padding=".5rem" borderRadius=".5rem">
                                 <Stack
                                     spacing={{ xs: 1 }}
-                                    direction="row"
+                                    // direction="row"
                                     useFlexGap
                                     flexWrap="wrap"
                                     alignItems="center"
                                 >
                                     {/* <Email /> */}
-                                    <Typography variant="p" style={{ margin: "10px 0" }}>Project Leader: {getProjectLeaderName(ProjectLeaderId)}</Typography>
-                                </Stack>
-
-                                <Stack
-                                    spacing={{ xs: 1 }}
-                                    direction="row"
-                                    useFlexGap
-                                    flexWrap="wrap"
-                                    alignItems="center"
-                                >
+                                    <Typography variant="p">Project Leader: </Typography>
+                                    <Typography variant="p">{getProjectLeaderName(ProjectLeaderId)}</Typography>
                                     {/* <LocalPhone /> */}
                                     <Typography variant="p" style={{ margin: "10px 0" }}>Associate Companies {AssociateCompanies}</Typography>
                                 </Stack>
