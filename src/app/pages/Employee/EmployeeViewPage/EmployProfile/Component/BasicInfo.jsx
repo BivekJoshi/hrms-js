@@ -1,17 +1,18 @@
 import React from "react";
 
-import "../../Style/BasicInfoStyle.css";
+// import "../Style/tyle.css";
+import "../Style/Style.css";
 import { Box, Grid } from "@mui/material";
-import ListUserDetails from "./Components/ListUserDetails";
+import ListUserDetails from "../../InfoTabs/BaiscInfoTab/Components/ListUserDetails";
 
-const BasicInfo = ({ data }) => {
+const BasicInfo = ({ data, MarTop }) => {
   const EMPLOYEE = {
     Gender: data?.gender || "",
     "Citizenship Number": data?.citizenshipNumber || "",
     "Date of Birth": data?.dateOfBirth || "",
-    "Mobile Number": data?.mobileNumber || "",
-    Email: data?.officeEmail || "",
-    Address: data?.addresses[0]?.city || "",
+    // "Mobile Number": data?.mobileNumber || "",
+    // Email: data?.officeEmail || "",
+    // Address: data?.addresses[0]?.city || "",
     "Marital Status": data?.maritalStatus || "",
     "Date of Join": data?.dateOfJoin || "",
     Position: data?.position?.positionName || "",
@@ -32,13 +33,15 @@ const BasicInfo = ({ data }) => {
   };
   return (
     <>
-      <Box container  className="ProfileStyle">
-        <Grid item xs={6} >
-          <ListUserDetails data={EMPLOYEE} cardTitle={"Basic Informations"} />
+      <Box container className="ProfileStyle">
+        <Grid item xs={6}>
+          <div className="FAM-BANK-DETAILS">
+            {/* <ListUserDetails data={EMPLOYEE} cardTitle={"Basic Informations"} MarginBottom={"1rem"}/> */}
+            <ListUserDetails data={BANKDETAILS} cardTitle={"Bank Details"} />
+          </div>
         </Grid>
         <Grid item xs={6}>
           <div className="FAM-BANK-DETAILS">
-            <ListUserDetails data={BANKDETAILS} cardTitle={"Bank Details"} />
             <ListUserDetails
               data={FAMILYMEMBERS}
               cardTitle={"Family Informations"}
