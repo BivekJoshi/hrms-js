@@ -61,7 +61,10 @@ const LeaveType = () => {
 		{
 			title: 'Leave Name',
 			field: 'leaveName',
-			emptyValue: '-',
+			render: (rowData) => {
+				const formattedLeaveName = rowData.leaveName.charAt(0).toUpperCase() + rowData.leaveName.slice(1).toLowerCase();
+				return `${formattedLeaveName} Leave`;
+			  },
 			width: 200,
 		},
 		{

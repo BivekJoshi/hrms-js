@@ -9,7 +9,7 @@ import TabComponent from './InfoTabs/TabComponent';
 
 const primaryColor = '#1c7ed6';
 
-const Overview = ({ data }) => {
+const Overview = ({ data, photo }) => {
 	const navigate = useNavigate();
 	const MiddleName = data?.middleName === null ? ' ' : data?.middleName;
 	return (
@@ -44,7 +44,7 @@ const Overview = ({ data }) => {
 			</div>
 
 			<div className='employeeBody'>
-				<LeftProfile data={data} />
+				<LeftProfile data={data} photo={photo} />
 				<TabComponent data={data} />
 			</div>
 		</>

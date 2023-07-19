@@ -5,9 +5,7 @@ export const addDocument = async (image, id) => {
   const imgData = new FormData();
   imgData.append('file', document);
   imgData.append('documentType', documentType);
-  const { data } = await axiosInstance.post(
-    `/employee/document/uploadFile/${id}`,
-    imgData,
+  const { data } = await axiosInstance.post(`/employee/document/uploadFile/${id}?documentType=${imgData}`,
     {
       headers: {
         'Content-Type': 'multipart/form-data',
@@ -23,6 +21,6 @@ export const getDocument = async () => {
 };
 
 export const getDocumentById = async (id) => {
-  const data = await axiosInstance.get(`/employee/document/file-details/${id}`);
+  const data = await axiosInstance.get(`/employee/document/file-details-by-employee/${id}`);
   return data;
 };

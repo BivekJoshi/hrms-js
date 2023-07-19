@@ -14,10 +14,14 @@ import React from 'react';
 import EmailIcon from '@mui/icons-material/Email';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import PersonIcon from '@mui/icons-material/Person';
+import { useGetDocumentById } from '../../../hooks/employee/useDocument';
 
 const primaryColor = '#1c7ed6';
 
-const LeftProfile = ({ data }) => {
+const LeftProfile = ({ data, photo }) => {
+	console.log(photo)
+	const realPath = photo && photo[0]?.path
+	console.log(realPath)
 	return (
 		<div>
 			<Box
@@ -36,8 +40,9 @@ const LeftProfile = ({ data }) => {
 						bgcolor: primaryColor,
 						alignSelf: 'center',
 					}}
-					variant='circle'
-					src='/broken-image.jpg'
+					// variant='circle'
+					// src='/broken-image.jpg'
+					src={realPath}
 				/>
 				<div style={{ display: 'flex', justifyContent: 'space-between' }}>
 					<Typography
@@ -73,6 +78,7 @@ const LeftProfile = ({ data }) => {
 						<ListItemAvatar>
 							<Avatar sx={{ bgcolor: primaryColor }}>
 								<EmailIcon />
+								
 							</Avatar>
 						</ListItemAvatar>
 						<ListItemText primary='Email' secondary={data?.officeEmail} />

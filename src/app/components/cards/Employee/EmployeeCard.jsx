@@ -10,8 +10,9 @@ import Female from "../../../../assets/female.png"
 import MainCard from "../MainCard";
 import EmailModal from "../../../pages/Email/EmailModal";
 import { EditDeactivationEmployeeModal } from "../../../pages/Employee/EmployeeDeactivationModal/EditDeactivationEmployeeModal";
+import { useSelector } from 'react-redux';
 
-const EmployeeCard = ({ IsActive, EmployeeId, EFirstName, EMiddleName, ELastName, OfficeEmail, MobileNumber, Position, EGender }) => {
+const EmployeeCard = ({ IsActive, EmployeeId, EFirstName, EMiddleName, ELastName, OfficeEmail, MobileNumber, PositionName, PositionLevel, EGender }) => {
   const [open, setOpen] = useState(false);
   const [openEmailForm, setOpenEmailForm] = useState(false);
 
@@ -44,21 +45,17 @@ const EmployeeCard = ({ IsActive, EmployeeId, EFirstName, EMiddleName, ELastName
     }
     prevOpen.current = open;
   }, [open]);
-  const handleOpenEmailform = () => {
-    setOpenEmailForm(true);
-  };
-  const handleCloseEmailform = () => {
-    setOpenEmailForm(false);
-  };
+
+  const handleOpenEmailform = () => {setOpenEmailForm(true)};
+  const handleCloseEmailform = () => {setOpenEmailForm(false)};
 
   const [openDeactivateModal, setOpenDeactivateModal] = useState(false);
   const handleCloseDeactivateModal = () => setOpenDeactivateModal(false);
-  const handleClick = () => {
-    setOpenDeactivateModal(true);
-  };
+  const handleClick = () => {setOpenDeactivateModal(true) };
 
   return (
     <>
+    
       <Box maxWidth="350px">
         <MainCard
           grow={true}
@@ -144,13 +141,14 @@ const EmployeeCard = ({ IsActive, EmployeeId, EFirstName, EMiddleName, ELastName
               </Popper>
             </Box>
           </Box>
-          <Stack style={{ textAlign: " -webkit-center", marginTop: "1rem", alignItems:"center" }}>
+          <Stack style={{ textAlign: " -webkit-center", marginTop: "1rem", alignItems: "center" }}>
             <CardMedia
               component="img"
               src={EGender === "MALE" ? Male : Female}
               alt="Paella dish"
               sx={{ width: 66, height: 66, borderRadius: "2rem" }}
             />
+         
           </Stack>
           <Stack>
             <Typography style={{ fontWeight: 700, margin: "1rem 0", fontSize: "20px" }}>
@@ -158,7 +156,7 @@ const EmployeeCard = ({ IsActive, EmployeeId, EFirstName, EMiddleName, ELastName
             </Typography>
             <Box padding={"0 1rem"}>
               <Typography variant="body2" gutterBottom>
-                <Chip label={Position} style={{ width: 230 }} />
+                <Chip label={`${PositionName} (${PositionLevel})`} style={{ width: 230 }} />
               </Typography>
             </Box>
           </Stack>
@@ -188,10 +186,12 @@ const EmployeeCard = ({ IsActive, EmployeeId, EFirstName, EMiddleName, ELastName
                 alignItems="center"
               >
                 <LocalPhone />
-                <Typography variant="p" style={{ margin: "10px 0" }}> {MobileNumber}</Typography>
+                <Typography variant="p" style={{ margin: "10px 0" }}> {MobileNumber} </Typography>
               </Stack>
             </Box>
           </Stack>
+      
+
         </MainCard>
         {openEmailForm && (
           <EmailModal
