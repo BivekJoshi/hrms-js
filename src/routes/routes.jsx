@@ -24,6 +24,7 @@ const Company = Loadable(lazy(() => import("../app/pages/Company/Company")));
 const LeaveType = Loadable(lazy(() => import("../app/pages/LeaveType/LeaveType")));
 const Leave = Loadable(lazy(() => import("../app/pages/Leave/Leave")));
 const EditEmployee = Loadable(lazy(() => import("../app/pages/Employee/AddEmployee/EditEmployee")));
+// const EmployeeViewPage = Loadable(lazy(() => import("../app/pages/Employee/EmployeeViewPage/EmployeeViewPage")));
 const EmployeeViewPage = Loadable(lazy(() => import("../app/pages/Employee/EmployeeViewPage/EmployeeViewPage")));
 
 const routes = [
