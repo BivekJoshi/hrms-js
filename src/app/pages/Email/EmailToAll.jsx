@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { useGetEmployee } from "../../hooks/employee/useEmployee";
+import { useEffect } from "react";
 
 const EmailToAll = ({ open, onClose }) => {
   const { data: employeeData } = useGetEmployee();
@@ -23,7 +24,13 @@ const EmailToAll = ({ open, onClose }) => {
     message: "",
   });
 
-  console.log(employeeData.officeEmail);
+useEffect(() => {
+  // if (employeeId)
+  // useGetEmployee();
+  console.log(employeeId);
+}, [employeeId])
+
+
   const [errors, setErrors] = useState({
     to: false,
     message: false,
@@ -80,12 +87,12 @@ const EmailToAll = ({ open, onClose }) => {
   // select email
   const [personName, setPersonName] = useState([]);
 
-  const handleChange = (event , id) => {
-    setEmployeeId(id)
+  const handleChange = (event, id) => {
+    setEmployeeId(id);
     const {
       target: { value },
     } = event;
-    setPersonName(typeof value === "string" ? value.split(",") : value);
+    setPersonName(value);
   };
 
   return (
@@ -118,7 +125,7 @@ const EmailToAll = ({ open, onClose }) => {
                     value={personName}
                     onChange={handleChange}
                     input={<OutlinedInput label="To" />}
-                    onClick={employeeId}
+                    onClick={() => employeeId}
 
                     // MenuProps={MenuProps}
                   >
@@ -127,8 +134,7 @@ const EmailToAll = ({ open, onClose }) => {
                         key={name.id}
                         value={name.officeEmail}
                         // style={getStyles(name, personName, theme)}
-                        onClick={employeeId}
-
+                        // onClick={employeeId}
                       >
                         {name.officeEmail}
                       </MenuItem>

@@ -1,7 +1,7 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
-import { useGetEmployeeProgress } from '../../../hooks/employee/useEmployee';
-import { LinearProgress } from '@mui/material';
+import React from "react";
+import { useParams } from "react-router-dom";
+import { useGetEmployeeProgress } from "../../../hooks/employee/useEmployee";
+import { LinearProgress, Typography } from "@mui/material";
 
 const ProgressById = () => {
   const { id } = useParams();
@@ -46,11 +46,13 @@ const ProgressById = () => {
   const progress = calculateProgress();
 
   return (
-    <div>
-      <h2>Progress</h2>
+    <>
+      <h2>Profile Completed</h2>
       <LinearProgress variant="determinate" value={progress} />
-      <p>{progress}% Complete</p>
-    </div>
+      <Typography textAlign={"end"} marginBottom={"1rem"}>
+        {progress}% Complete
+      </Typography>
+    </>
   );
 };
 
