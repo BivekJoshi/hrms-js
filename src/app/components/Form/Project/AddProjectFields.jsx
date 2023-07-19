@@ -34,21 +34,16 @@ const AddprojectFields = ({ onClose, isLoading }) => {
 
   const { formik } = useAddProjectForm();
 
-  const handleFormSubmit = () => {
-    formik.handleSubmit();
-
-    if (formik.isValid) {
-      formik.setTouched({
-        projectName: true,
-        startDate: true,
-        endDate: true,
-        taskStatus: true,
-        projectLeadId: true,
-        companyId: true,
-      });
-    } else {
-      toast.error('Please make sure you have filled the form correctly');
-    };
+  const handleFormSubmit = async () => {
+    const isValid = await formik.validateForm();
+    if (isValid) {
+      formik.handleSubmit();
+      if (formik.isValid) {
+        onClose();
+      } else {
+        toast.error('Please make sure you have filled the form correctly');
+      };
+    }
   }
 
   return (
@@ -110,7 +105,7 @@ const AddprojectFields = ({ onClose, isLoading }) => {
         <Grid item xs={12} sm={6}>
           <TextField
             name="taskStatus"
-            label="Task Status"
+            label="Project Status"
             fullWidth
             select
             required
@@ -137,7 +132,7 @@ const AddprojectFields = ({ onClose, isLoading }) => {
             select
             required
             label="Assign a Project Leader."
-            placeholder="Enter project Id"
+            placeholder="Enter project Leader"
             fullWidth
             value={formik.values.projectLeadId}
             onChange={formik.handleChange}
@@ -154,7 +149,7 @@ const AddprojectFields = ({ onClose, isLoading }) => {
             {!loadingEmployee &&
               employeeData.map((option) => (
                 <MenuItem key={option?.id} value={option?.id}>
-                  {option?.firstName}
+                  {option?.firstName} {option?.middleName} {option?.lastName}
                 </MenuItem>
               ))}
           </TextField>
@@ -193,19 +188,19 @@ const AddprojectFields = ({ onClose, isLoading }) => {
           alignItems="flex-end"
         >
           <Button
-            variant="container"
-            onClick={onClose}
-            sx={{ mt: 3, ml: 1 }}
-            color="error"
-          >
-            Cancel
-          </Button>
-          <Button
             variant="contained"
             onClick={handleFormSubmit}
             sx={{ mt: 3, ml: 1 }}
           >
             Add Project
+          </Button>
+          <Button
+            variant="contained"
+            onClick={onClose}
+            sx={{ mt: 3, ml: 1 }}
+            color="error"
+          >
+            Cancel
           </Button>
         </Grid>
       </Grid>

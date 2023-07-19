@@ -29,10 +29,12 @@ const EditProjectFields = ({ onClose, isLoading, data }) => {
   };
 
   const getProjectLeaderName = (projectLeadId) => {
-    return (
-      employeeData?.find((employee) => employee.id == projectLeadId)
-        ?.firstName || projectLeadId
-    );
+    const projectLeader = employeeData?.find((employee) => employee.id == projectLeadId);
+    if (projectLeader) {
+      const { firstName, middleName, lastName } = projectLeader;
+      return `${firstName} ${middleName} ${lastName}`;
+    }
+    return projectLeadId;
   };
 
   const getCompanyName = (associateCompanies) => {
@@ -75,6 +77,7 @@ const EditProjectFields = ({ onClose, isLoading, data }) => {
             label="Project Name"
             placeholder="enter project name"
             fullWidth
+            required
             value={formik.values.projectName}
             onChange={formik.handleChange}
             error={
@@ -85,13 +88,14 @@ const EditProjectFields = ({ onClose, isLoading, data }) => {
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
-        <Grid item xs={12} sm={12}>
+        <Grid item xs={12} sm={6}>
           <TextField
             id="startDate"
             name="startDate"
             label="Start Date"
             type="date"
             fullWidth
+            required
             value={formik.values.startDate}
             onChange={formik.handleChange}
             error={formik.touched.startDate && Boolean(formik.errors.startDate)}
@@ -100,7 +104,7 @@ const EditProjectFields = ({ onClose, isLoading, data }) => {
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
-        <Grid item xs={12} sm={12}>
+        <Grid item xs={12} sm={6}>
           <TextField
             id="endDate"
             name="endDate"
@@ -115,7 +119,7 @@ const EditProjectFields = ({ onClose, isLoading, data }) => {
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
-        <Grid item xs={12} sm={12}>
+        <Grid item xs={12} sm={6}>
           <TextField
             id="taskStatus"
             select
@@ -123,6 +127,7 @@ const EditProjectFields = ({ onClose, isLoading, data }) => {
             label="Project Status"
             placeholder="enter project status"
             fullWidth
+            required
             value={formik.values.taskStatus}
             onChange={formik.handleChange}
             error={
@@ -139,13 +144,14 @@ const EditProjectFields = ({ onClose, isLoading, data }) => {
             ))}
           </TextField>
         </Grid>
-        <Grid item xs={12} sm={12}>
+        <Grid item xs={12} sm={6}>
           <TextField
             id="ProjectLeadId"
             name="ProjectLeadId"
-            label="Project Leader Name"
-            placeholder="enter ProjectLeadId"
+            label="Assign a Project Leader"
+            placeholder="Enter ProjectLeadId"
             fullWidth
+            required
             value={getProjectLeaderName(formik.values.projectLeadId)}
             onChange={formik.handleChange}
             error={
