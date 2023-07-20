@@ -74,19 +74,19 @@ const ProjectEmployee = () => {
 			sortable: false,
     },
     {
-			title: 'assignedOn',
+			title: 'Assigned On',
 			field: 'assignedOn',
 			emptyValue: '-',
 			width: 80,
 		},
     {
-			title: 'deAssignedOn',
+			title: 'DeAssigned On',
 			field: 'deAssignedOn',
 			emptyValue: '-',
 			width: 80,
 		},
     {
-			title: 'employeeId',
+			title: 'Employee Name',
 			render: (rowData) => {
         return(
           <p>

@@ -1,18 +1,11 @@
 import * as React from "react";
 import { useState } from "react";
 import MaterialTable from "material-table";
-// import MaterialTable from '@material-table/core';
 import { Box, Button, Stack } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
-import {
-  useDeleteDepartment,
-  useGetDepartment,
-} from "../../hooks/department/useDepartment";
-import {
-  AddDepartmentModal,
-  EditDepartmentModal,
-} from "./DepartmentModal/DepartmentModal";
+import { useDeleteDepartment, useGetDepartment } from "../../hooks/department/useDepartment";
+import { AddDepartmentModal, EditDepartmentModal } from "./DepartmentModal/DepartmentModal";
 import DeleteConfirmationModal from "../../components/Modal/DeleteConfirmationModal";
 import tableIcons from "../../../theme/overrides/TableIcon"
 
@@ -47,11 +40,12 @@ const Department = () => {
     setEditedDepartment(rowData);
     setOpenEditModal(true);
   };
+
   const columns = [
     {
       title: "SN",
-      render: (rowData) => rowData.id,
-      width: "3vh",
+      render: (rowData) =>rowData.tableData.id + 1,
+      width: "3%",
       sortable: false,
     },
     {
@@ -86,8 +80,6 @@ const Department = () => {
           </Button>
         </Stack>
       ),
-      sorting: false,
-      width: "1vh",
     },
   ];
   if (isLoading) return <>Loading</>;
