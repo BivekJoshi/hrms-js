@@ -13,14 +13,14 @@ export const PersonalProfile = ({ data }) => {
   return (
     <>
       <Grid
-        // className="profileBasic"
         sx={{
           bgcolor: "#cfe8fc",
           display: "grid",
           gridTemplateColumns: "1fr 3fr",
           borderRadius: 5,
           alignItems: "center",
-          padding: "3rem 3rem 3rem 0rem",
+          p: "1rem",
+          gap: "1rem",
         }}
       >
         <Box className="profileInfo">
@@ -35,7 +35,7 @@ export const PersonalProfile = ({ data }) => {
             src={data?.gender === "MALE" ? Male : Female}
           />
           <Typography
-            style={{
+            sx={{
               color: primaryColor,
               fontSize: "1.3rem",
               fontWeight: "600",
@@ -45,43 +45,27 @@ export const PersonalProfile = ({ data }) => {
           </Typography>
           <Chip
             label={data?.position.positionName}
-            style={{
-              backgroundColor: primaryColor,
-              color: "white",
-              width: " 9rem",
-            }}
+            sx={{ bgcolor: primaryColor, color: "white", width: " 9rem" }}
           />
           <Typography
-            style={{
-              color: primaryColor,
-              fontSize: "1rem",
-              fontWeight: "600",
-            }}
+            sx={{ color: primaryColor, fontSize: "1rem", fontWeight: "600" }}
           >
             {data?.officeEmail}
           </Typography>
           <Typography
-            style={{
-              color: primaryColor,
-              fontSize: "1rem",
-              fontWeight: "600",
-            }}
+            sx={{ color: primaryColor, fontSize: "1rem", fontWeight: "600" }}
           >
             {data?.data?.addresses[0]?.city === null
               ? ""
               : data?.data?.addresses[0]?.city}
           </Typography>
           <Typography
-            style={{
-              color: primaryColor,
-              fontSize: "1rem",
-              fontWeight: "600",
-            }}
+            sx={{ color: primaryColor, fontSize: "1rem", fontWeight: "600" }}
           >
             {data?.mobileNumber}
           </Typography>
         </Box>
-        <BasicInfo data={data}/>
+        <BasicInfo data={data} />
       </Grid>
     </>
   );

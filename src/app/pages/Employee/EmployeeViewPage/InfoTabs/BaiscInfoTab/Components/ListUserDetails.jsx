@@ -1,9 +1,8 @@
-import { Box, Button, CardHeader } from "@mui/material";
-import { List, Modal, Typography } from "@mui/material";
+import { Box, List, Modal, Typography } from "@mui/material";
 import React from "react";
 
 import InfoItem from "./InfoItem";
-import BorderColorIcon from '@mui/icons-material/BorderColor';
+import BorderColorIcon from "@mui/icons-material/BorderColor";
 
 const style = {
   position: "absolute",
@@ -27,7 +26,10 @@ export default function ListUserDetails({ cardTitle, data }) {
         <Typography variant="h6" sx={{ fontWeight: 600 }}>
           {cardTitle}
         </Typography>
-        <BorderColorIcon  onClick={openModal} sx={{color:"rgb(28, 126, 214)", paddingRight:"1rem"}}/>
+        <BorderColorIcon
+          onClick={openModal}
+          sx={{ color: "rgb(28, 126, 214)", paddingRight: "1rem"}}
+        />
 
         <Modal open={open} onClose={handleClose}>
           <Box sx={style}>
@@ -38,12 +40,7 @@ export default function ListUserDetails({ cardTitle, data }) {
           </Box>
         </Modal>
       </Box>
-      <List
-        sx={{
-          bgcolor: "#ededed",
-          borderRadius: "1rem",
-        }}
-      >
+      <List sx={{ bgcolor: "#ededed", borderRadius: "1rem" }}>
         {Object.keys(data).map((item, index) => (
           <InfoItem key={index} field={item} value={data[item]} />
         ))}

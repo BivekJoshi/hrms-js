@@ -1,8 +1,7 @@
 import React from "react";
-
-// import "../Style/tyle.css";
 import "../Style/Style.css";
-import { Box, Grid } from "@mui/material";
+import { Box, Divider } from "@mui/material";
+
 import ListUserDetails from "../../InfoTabs/BaiscInfoTab/Components/ListUserDetails";
 
 const BasicInfo = ({ data }) => {
@@ -10,13 +9,9 @@ const BasicInfo = ({ data }) => {
     Gender: data?.gender || "",
     "Citizenship Number": data?.citizenshipNumber || "",
     "Date of Birth": data?.dateOfBirth || "",
-    // "Mobile Number": data?.mobileNumber || "",
-    // Email: data?.officeEmail || "",
-    // Address: data?.addresses[0]?.city || "",
     "Marital Status": data?.maritalStatus || "",
     "Date of Join": data?.dateOfJoin || "",
     Position: data?.position?.positionName || "",
-    // Department: data?.department.departmentName ||'',
   };
 
   const FAMILYMEMBERS = {
@@ -40,9 +35,15 @@ const BasicInfo = ({ data }) => {
             cardTitle={"Basic Informations"}
             MarginBottom={"1rem"}
           />
+          <Divider />
         </Box>
         <Box
-          sx={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}
+          sx={{
+            display: "grid",
+            gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr" },
+            gap: "1rem",
+            marginTop:{xs:"-3rem", sm:0},
+          }}
           className="FAM-BANK-DETAILS"
         >
           <Box>

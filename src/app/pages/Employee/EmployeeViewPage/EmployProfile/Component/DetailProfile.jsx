@@ -1,9 +1,8 @@
 import React from "react";
-import { Box, Tab, Table, TableCell, Tabs } from "@mui/material";
-import { TableContainer, TableHead, TableRow } from "@mui/material";
-import { TabContext, TabList, TabPanel } from "@mui/lab";
+import { Box, Tab, Table, Tabs } from "@mui/material";
+import { TableContainer, TableHead } from "@mui/material";
+import { TabContext, TabPanel } from "@mui/lab";
 
-import BasicInfo from "./BasicInfo";
 import LeaveInfo from "../../InfoTabs/LeaveInfoTab/LeaveInfo";
 import AcademicsInfo from "../../InfoTabs/AcademicsInfoTab/AcademicsInfo";
 import PromotionHistory from "../../InfoTabs/PromotionHistory/PromotionHistory";
@@ -20,7 +19,6 @@ export const DetailProfile = ({ data }) => {
   return (
     <Box sx={{ typography: "body1" }}>
       <TabContext value={value}>
-        {/* <Box className="infoStyle" minHeight={"400px"}> */}
         <TableContainer sx={{ borderBottom: 1, borderColor: "divider" }}>
           <Table aria-label="simple table">
             <TableHead>
@@ -88,7 +86,6 @@ export const DetailProfile = ({ data }) => {
             <PromotionHistory data={data} />
           </TabPanel>
         </Box>
-        {/* </Box> */}
       </TabContext>
     </Box>
   );
