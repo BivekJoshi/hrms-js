@@ -18,7 +18,7 @@ const style = {
 };
 
 const AddEventFields = ({ onClose, isLoading }) => {
-  const { formik } = useAddEventForm();
+  const { formik, data } = useAddEventForm();
   const [openEmail, setOpenEmail] = useState(false);
   const { data: employeeData } = useGetEmployee();
   const [openSubmitModal, setOpenSubmitModal] = useState(false);
@@ -200,6 +200,7 @@ const AddEventFields = ({ onClose, isLoading }) => {
         <EmailToAll
           employeeData={employeeData}
           employeeid={employeeData.id}
+          eventId={data?.id}
           open={openEmail}
           onClose={handleCloseEmailform}
           handleOpenEmailform={handleOpenEmailform}
