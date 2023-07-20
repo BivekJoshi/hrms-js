@@ -80,7 +80,7 @@ const Department = () => {
   const columns = [
     {
       title: "SN",
-      render: (rowData) => rowData.tableData.index + 1,
+      render: (rowData) => rowData.id,
       width: "3vh",
       sortable: false,
     },

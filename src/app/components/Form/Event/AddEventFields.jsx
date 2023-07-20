@@ -1,38 +1,53 @@
 import React, { useState } from "react";
-import { Grid, TextField, Button } from "@mui/material";
+import { Grid, TextField, Button, Modal, Box } from "@mui/material";
 import { toast } from "react-toastify";
 import useAddEventForm from "../../../hooks/event/addEvent/useAddEventForm";
 import EmailToAll from "../../../pages/Email/EmailTOAll";
 import { useGetEmployee } from "../../../hooks/employee/useEmployee";
 
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  bgcolor: "background.paper",
+  border: "1px solid #808080",
+  borderRadius: 2,
+  boxShadow: 24,
+  p: 4,
+};
+
 const AddEventFields = ({ onClose, isLoading }) => {
   const { formik } = useAddEventForm();
   const [openEmail, setOpenEmail] = useState(false);
-  const { data: employeedata } = useGetEmployee();
+  const { data: employeeData } = useGetEmployee();
+  const [openSubmitModal, setOpenSubmitModal] = useState(false);
+
+  const handleOpenSubmitModal = () => {
+    setOpenSubmitModal(true);
+  };
 
   const handleOpenEmailform = () => {
     setOpenEmail(true);
+    setOpenSubmitModal(true);
   };
+
   const handleCloseEmailform = () => {
     setOpenEmail(false);
   };
 
   const handleFormSubmit = async () => {
-    const isValid = await formik.validateForm(); // Validate the form
+    formik.handleSubmit();
 
-    if (isValid) {
-      formik.handleSubmit(); // Submit the form
-
-      if (formik.isValid) {
-        onClose(); // Close the modal
-      } else {
-        toast.error("Please make sure you have filled the form correctly");
-      }
+    if (formik.isValid) {
+      handleOpenSubmitModal();
+    } else {
+      toast.error("Please make sure you have filled the form correctly");
     }
   };
 
   return (
-    !isLoading && (
+    <>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
           <TextField
@@ -105,6 +120,27 @@ const AddEventFields = ({ onClose, isLoading }) => {
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
+        <Grid item xs={12} sm={12}>
+          <TextField
+            id="eventLocation"
+            name="eventLocation"
+            label="Event Location"
+            placeholder="Enter your Event Location"
+            fullWidth
+            value={formik.values.eventLocation}
+            onChange={formik.handleChange}
+            error={
+              formik.touched.eventLocation &&
+              Boolean(formik.errors.eventLocation)
+            }
+            helperText={
+              formik.touched.eventLocation && formik.errors.eventLocation
+            }
+            variant="outlined"
+            autoFocus
+            InputLabelProps={{ shrink: true }}
+          />
+        </Grid>
         <Grid
           container
           direction="row"
@@ -121,23 +157,55 @@ const AddEventFields = ({ onClose, isLoading }) => {
           </Button>
           <Button
             variant="contained"
-            onClick={handleFormSubmit && handleOpenEmailform}
+            onClick={handleFormSubmit}
             sx={{ mt: 3, ml: 1 }}
           >
             Add Event
           </Button>
-          {handleFormSubmit && openEmail && (
-            <EmailToAll
-              employeeData={employeedata}
-              employeeid={employeedata.id}
-              open={openEmail}
-              onClose={handleCloseEmailform}
-              handleOpenEmailform={handleOpenEmailform}
-            />
-          )}
         </Grid>
       </Grid>
-    )
+
+      <Modal
+        open={openSubmitModal}
+        onClose={() => setOpenSubmitModal(false)}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <div>
+          <Box sx={style}>
+            <h3>Do you like to Email this event to Employee</h3>
+            <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+              <Button
+                variant="contained"
+                sx={{ mt: 3, ml: 1 }}
+                onClick={handleOpenEmailform}
+              >
+                Yes
+              </Button>
+              <Button
+                variant="contained"
+                onClick={() => {
+                  setOpenSubmitModal(false);
+                }}
+                sx={{ mt: 3, ml: 1 }}
+                color="error"
+              >
+                No
+              </Button>
+            </Box>
+          </Box>
+        </div>
+      </Modal>
+      {openSubmitModal && openEmail && (
+        <EmailToAll
+          employeeData={employeeData}
+          employeeid={employeeData.id}
+          open={openEmail}
+          onClose={handleCloseEmailform}
+          handleOpenEmailform={handleOpenEmailform}
+        />
+      )}
+    </>
   );
 };
 

@@ -12,9 +12,14 @@ import {
   TextField,
 } from "@mui/material";
 import { useGetEmployee } from "../../hooks/employee/useEmployee";
+import { useParams } from "react-router-dom";
+import { useGetEventById } from "../../hooks/event/useEvent";
 
 const EmailToAll = ({ open, onClose }) => {
+  const { id } = useParams();
   const { data: employeeData } = useGetEmployee();
+  const eventId = useGetEventById(id);
+  console.log(eventId)
   const [employeeId, setEmployeeId] = useState([]);
   const [emailData, setEmailData] = useState({ subject: "", message: "" });
   const [errors, setErrors] = useState({ subject: false, message: false });
@@ -25,6 +30,7 @@ const EmailToAll = ({ open, onClose }) => {
       setErrors({ subject: false, message: false });
     },
     employeeId: employeeId,
+    eventId: eventId,
   });
 
   const handleInputChange = (event) => {
@@ -85,31 +91,6 @@ const EmailToAll = ({ open, onClose }) => {
                     <MenuItem value="all">All Employees</MenuItem>
                     <MenuItem value="none">None</MenuItem>
                   </Select>
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    fullWidth
-                    label="Subject"
-                    name="subject"
-                    value={emailData.subject}
-                    onChange={handleInputChange}
-                  />
-                </Grid>
-              </Grid>
-              <Grid container spacing={1} style={{ marginTop: "20px" }}>
-                <Grid item xs={12}>
-                  <TextField
-                    fullWidth
-                    multiline
-                    rows={10}
-                    cols={40}
-                    label="Body"
-                    name="message"
-                    value={emailData.message}
-                    onChange={handleInputChange}
-                    error={errors.message}
-                    helperText={errors.message ? "message is required" : ""}
-                  />
                 </Grid>
               </Grid>
               <div

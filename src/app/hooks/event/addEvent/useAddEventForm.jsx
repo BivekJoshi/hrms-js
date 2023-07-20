@@ -12,6 +12,7 @@ const useAddEventForm = () => {
             eventDate: '',
             eventTime: '',
             eventDescription: '',
+            eventLocation: '',
         },
         validationSchema: EventSchema,
         onSubmit: (values) => {
