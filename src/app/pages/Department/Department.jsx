@@ -50,8 +50,8 @@ const Department = () => {
   const columns = [
     {
       title: "SN",
-      render: (rowData) => rowData.id,
-      width: "3vh",
+      render: (rowData) =>rowData.tableData.id + 1,
+      width: "3%",
       sortable: false,
     },
     {
