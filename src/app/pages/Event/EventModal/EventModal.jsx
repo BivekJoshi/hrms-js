@@ -4,7 +4,7 @@ import AddEventFields from '../../../components/Form/Event/AddEventFields';
 import { useGetEventById } from '../../../hooks/event/useEvent';
 import EditEventFields from '../../../components/Form/Event/EditEventFields';
 
-export const AddEventModal = ({ open, handleCloseModal}) => {
+export const AddEventModal = ({ open, handleCloseModal }) => {
     return (
       <div>
         <FormModal 

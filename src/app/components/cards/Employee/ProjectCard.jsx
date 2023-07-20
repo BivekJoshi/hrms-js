@@ -111,8 +111,8 @@ const ProjectCard = ({
                         justifyContent="space-between"
                         alignItems="flex-start"
                     >
-                        <Grid item sx={{ display: "flex", justifyContent: "center", alignItems: "center"  }} >
-                            <Avatar sx={{ bgcolor: "red" }} style={{width:'30px',height:'30px'}}>
+                        <Grid item sx={{ display: "flex", justifyContent: "center", alignItems: "center" }} >
+                            <Avatar sx={{ bgcolor: "red" }} style={{ width: '30px', height: '30px' }}>
                                 {ProjectName.charAt(0)}
                             </Avatar>
                             {/* <Typography style={{ fontWeight: 600, margin: "1rem 0", fontSize: "20px",marginLeft:".1rem" }}>
@@ -248,7 +248,8 @@ const ProjectCard = ({
                                     <Typography variant="p">Project Leader: </Typography>
                                     <Typography variant="p">{getProjectLeaderName(ProjectLeaderId)}</Typography>
                                     {/* <LocalPhone /> */}
-                                    <Typography variant="p" style={{ margin: "10px 0" }}>Associate Companies {AssociateCompanies}</Typography>
+                                    <Typography variant="p" >Associate Companies</Typography>
+                                    <Typography variant="p" >{AssociateCompanies}</Typography>
                                 </Stack>
                             </Box>
                         </Stack>
