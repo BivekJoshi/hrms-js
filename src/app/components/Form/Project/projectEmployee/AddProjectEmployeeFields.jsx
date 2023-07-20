@@ -64,7 +64,7 @@ export const AddprojectEmployeeFields = ({ onClose, isLoading }) => {
             {!loadingEmployee &&
               employeeData.map((option) => (
                 <MenuItem key={option?.id} value={option?.id}>
-                  {option?.firstName}
+                  {option?.firstName} {option?.middleName} {option?.lastName}
                 </MenuItem>
               ))}
           </TextField>

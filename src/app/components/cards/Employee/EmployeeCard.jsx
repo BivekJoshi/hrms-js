@@ -5,14 +5,25 @@ import { Chip, ClickAwayListener, Grow, Stack } from "@mui/material";
 import { MenuItem, MenuList, Paper, Popper, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import Male from "../../../../assets/male.png"
-import Female from "../../../../assets/female.png"
+import Male from "../../../../assets/male.png";
+import Female from "../../../../assets/female.png";
 import MainCard from "../MainCard";
 import EmailModal from "../../../pages/Email/EmailModal";
 import { EditDeactivationEmployeeModal } from "../../../pages/Employee/EmployeeDeactivationModal/EditDeactivationEmployeeModal";
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 
-const EmployeeCard = ({ IsActive, EmployeeId, EFirstName, EMiddleName, ELastName, OfficeEmail, MobileNumber, PositionName, PositionLevel, EGender }) => {
+const EmployeeCard = ({
+  IsActive,
+  EmployeeId,
+  EFirstName,
+  EMiddleName,
+  ELastName,
+  OfficeEmail,
+  MobileNumber,
+  PositionName,
+  PositionLevel,
+  EGender,
+}) => {
   const [open, setOpen] = useState(false);
   const [openEmailForm, setOpenEmailForm] = useState(false);
 
@@ -46,17 +57,22 @@ const EmployeeCard = ({ IsActive, EmployeeId, EFirstName, EMiddleName, ELastName
     prevOpen.current = open;
   }, [open]);
 
-  const handleOpenEmailform = () => {setOpenEmailForm(true)};
-  const handleCloseEmailform = () => {setOpenEmailForm(false)};
+  const handleOpenEmailform = () => {
+    setOpenEmailForm(true);
+  };
+  const handleCloseEmailform = () => {
+    setOpenEmailForm(false);
+  };
 
   const [openDeactivateModal, setOpenDeactivateModal] = useState(false);
   const handleCloseDeactivateModal = () => setOpenDeactivateModal(false);
-  const handleClick = () => {setOpenDeactivateModal(true) };
+  const handleClick = () => {
+    setOpenDeactivateModal(true);
+  };
 
   return (
     <>
-    
-      <Box maxWidth="350px">
+      <Box>
         <MainCard
           grow={true}
           style={{
@@ -73,9 +89,9 @@ const EmployeeCard = ({ IsActive, EmployeeId, EFirstName, EMiddleName, ELastName
               }}
               onClick={handleClick}
               variant="outlined"
-              color={IsActive = true ? "success" : "warning"}
+              color={(IsActive = true ? "success" : "warning")}
             >
-              {IsActive = true ? "Active" : "InActive"}
+              {(IsActive = true ? "Active" : "InActive")}
             </Button>
             <Box>
               <Button
@@ -141,22 +157,32 @@ const EmployeeCard = ({ IsActive, EmployeeId, EFirstName, EMiddleName, ELastName
               </Popper>
             </Box>
           </Box>
-          <Stack style={{ textAlign: " -webkit-center", marginTop: "1rem", alignItems: "center" }}>
+          <Stack
+            style={{
+              textAlign: " -webkit-center",
+              marginTop: "1rem",
+              alignItems: "center",
+            }}
+          >
             <CardMedia
               component="img"
               src={EGender === "MALE" ? Male : Female}
               alt="Paella dish"
               sx={{ width: 66, height: 66, borderRadius: "2rem" }}
             />
-         
           </Stack>
           <Stack>
-            <Typography style={{ fontWeight: 700, margin: "1rem 0", fontSize: "20px" }}>
+            <Typography
+              style={{ fontWeight: 700, margin: "1rem 0", fontSize: "20px" }}
+            >
               {EFirstName} {EMiddleName} {ELastName}
             </Typography>
             <Box padding={"0 1rem"}>
               <Typography variant="body2" gutterBottom>
-                <Chip label={`${PositionName} (${PositionLevel})`} style={{ width: 230 }} />
+                <Chip
+                  label={`${PositionName} (${PositionLevel})`}
+                  style={{ width: 230 }}
+                />
               </Typography>
             </Box>
           </Stack>
@@ -175,7 +201,9 @@ const EmployeeCard = ({ IsActive, EmployeeId, EFirstName, EMiddleName, ELastName
                 alignItems="center"
               >
                 <Email />
-                <Typography variant="p" style={{ margin: "10px 0" }}>{OfficeEmail}</Typography>
+                <Typography variant="p" style={{ margin: "10px 0" }}>
+                  {OfficeEmail}
+                </Typography>
               </Stack>
 
               <Stack
@@ -186,12 +214,13 @@ const EmployeeCard = ({ IsActive, EmployeeId, EFirstName, EMiddleName, ELastName
                 alignItems="center"
               >
                 <LocalPhone />
-                <Typography variant="p" style={{ margin: "10px 0" }}> {MobileNumber} </Typography>
+                <Typography variant="p" style={{ margin: "10px 0" }}>
+                  {" "}
+                  {MobileNumber}{" "}
+                </Typography>
               </Stack>
             </Box>
           </Stack>
-      
-
         </MainCard>
         {openEmailForm && (
           <EmailModal

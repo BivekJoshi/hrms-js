@@ -4,6 +4,8 @@ import { Button, Stack } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import StartIcon from '@mui/icons-material/Start';
 import { useNavigate } from 'react-router-dom';
+import tableIcons from '../../../../../theme/overrides/TableIcon';
+import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 
 const EmployeeTableView = ({ employeeData, isLoading }) => {
     const navigate = useNavigate();
@@ -11,7 +13,7 @@ const EmployeeTableView = ({ employeeData, isLoading }) => {
     const columns = [
         {
             title: 'SN',
-            render: (rowData) => rowData.tableData.index + 1,
+            render: (rowData) => rowData.tableData.id + 1,
             width: "3%",
             sortable: false,
         },
@@ -27,7 +29,7 @@ const EmployeeTableView = ({ employeeData, isLoading }) => {
                 const position = rowData?.position?.positionName;
                 return position ? position : '-';
             }
-                ,
+            ,
             width: 340,
         },
         {
@@ -48,7 +50,7 @@ const EmployeeTableView = ({ employeeData, isLoading }) => {
                         <EditIcon />
                     </Button>
                     <Button color="primary" onClick={() => handleViewEmployee(rowData)}>
-                        <StartIcon />
+                        <RemoveRedEyeOutlinedIcon />
                     </Button>
                 </Stack>
             ),
@@ -68,12 +70,13 @@ const EmployeeTableView = ({ employeeData, isLoading }) => {
     return (
         <>
             <MaterialTable
+                icons={tableIcons}
                 columns={columns}
                 data={employeeData}
                 title="Employees"
                 isLoading={isLoading}
                 options={{
-                    toolbar:true,
+                    toolbar: true,
                     exportButton: true,
                     padding: 'dense',
                     margin: 50,
