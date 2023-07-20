@@ -1,8 +1,8 @@
-import { Box, Button, CardHeader } from "@mui/material";
-import { List, Modal, Typography } from "@mui/material";
+import { Box, List, Modal, Typography } from "@mui/material";
 import React from "react";
 
 import InfoItem from "./InfoItem";
+import BorderColorIcon from "@mui/icons-material/BorderColor";
 
 const style = {
   position: "absolute",
@@ -22,24 +22,14 @@ export default function ListUserDetails({ cardTitle, data }) {
   const handleClose = () => setOpen(false);
   return (
     <>
-      <h3>{cardTitle}</h3>
-      <List
-        sx={{
-          bgcolor: "#ededed",
-          borderRadius: "1rem",
-          padding: "1rem",
-        }}
-      >
-        <Button
-          className="editBasicInfoBtn"
-          variant="contained"
+      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+        <Typography variant="h6" sx={{ fontWeight: 600 }}>
+          {cardTitle}
+        </Typography>
+        <BorderColorIcon
           onClick={openModal}
-          sx={{
-            bgcolor: "#1c7ed6",
-          }}
-        >
-          Edit
-        </Button>
+          sx={{ color: "rgb(28, 126, 214)", paddingRight: "1rem"}}
+        />
 
         <Modal open={open} onClose={handleClose}>
           <Box sx={style}>
@@ -49,7 +39,8 @@ export default function ListUserDetails({ cardTitle, data }) {
             <Typography sx={{ mt: 2 }}>Here is the edited Details</Typography>
           </Box>
         </Modal>
-
+      </Box>
+      <List sx={{ bgcolor: "#ededed", borderRadius: "1rem" }}>
         {Object.keys(data).map((item, index) => (
           <InfoItem key={index} field={item} value={data[item]} />
         ))}
