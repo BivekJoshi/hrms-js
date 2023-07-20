@@ -8,6 +8,7 @@ import LeaveInfo from "../../InfoTabs/LeaveInfoTab/LeaveInfo";
 import AcademicsInfo from "../../InfoTabs/AcademicsInfoTab/AcademicsInfo";
 import PromotionHistory from "../../InfoTabs/PromotionHistory/PromotionHistory";
 import "../Style/Style.css";
+import AttendenceInfo from "../../InfoTabs/AttendenceInfoTab/AttendenceInfo";
 
 const primaryColor = "#1c7ed6";
 
@@ -30,16 +31,6 @@ export const DetailProfile = ({ data }) => {
                 aria-label="lab API tabs example"
                 className="tableAlignment"
               >
-                {/* <Tab label={<PersonalProfile/>}/> */}
-                {/* <Tab
-                  label="Basic Info"
-                  value="1"
-                  style={{
-                    fontSize: "1rem",
-                    color: primaryColor,
-                    fontWeight: "bolder",
-                  }}
-                /> */}
                 <Tab
                   label="Leave Records"
                   value="1"
@@ -58,18 +49,18 @@ export const DetailProfile = ({ data }) => {
                     fontWeight: "bolder",
                   }}
                 />
-                {/* <Tab
-                            label='Experiences'
-                            value='3'
-                            style={{
-                                fontSize: '1rem',
-                                color: primaryColor,
-                                fontWeight: 'bolder',
-                            }}
-                        /> */}
+                <Tab
+                  label='Attendence'
+                  value='4'
+                  style={{
+                    fontSize: '1rem',
+                    color: primaryColor,
+                    fontWeight: 'bolder',
+                  }}
+                />
                 <Tab
                   label="Promotion History"
-                  value="4"
+                  value="5"
                   style={{
                     fontSize: "1rem",
                     color: primaryColor,
@@ -81,11 +72,8 @@ export const DetailProfile = ({ data }) => {
           </Table>
         </TableContainer>
         <Box>
-          {/* <TabPanel value="1" style={{ padding: 10 }}>
-            <BasicInfo data={data}/>
-          </TabPanel> */}
           <TabPanel value="1" style={{ padding: 10 }}>
-            <LeaveInfo data={data}/>
+            <LeaveInfo data={data} />
           </TabPanel>
           <TabPanel value="2" style={{ padding: 10 }}>
             <AcademicsInfo data={data} />
@@ -94,7 +82,10 @@ export const DetailProfile = ({ data }) => {
             <AcademicsInfo data={data} />
           </TabPanel>
           <TabPanel value="4" style={{ padding: 10 }}>
-            <PromotionHistory data={data}/>
+            <AttendenceInfo data={data} />
+          </TabPanel>
+          <TabPanel value="5" style={{ padding: 10 }}>
+            <PromotionHistory data={data} />
           </TabPanel>
         </Box>
         {/* </Box> */}
