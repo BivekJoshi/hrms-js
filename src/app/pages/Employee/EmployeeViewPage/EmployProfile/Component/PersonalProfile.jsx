@@ -2,11 +2,6 @@ import React from "react";
 
 import { Box, Chip, Grid, List, ListItem } from "@mui/material";
 import { Typography, Avatar } from "@mui/material";
-import { ListItemAvatar, ListItemText, Divider } from "@mui/material";
-
-import EmailIcon from "@mui/icons-material/Email";
-import PersonIcon from "@mui/icons-material/Person";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 
 import Male from "../../../../../../assets/male.png";
 import Female from "../../../../../../assets/female.png";
@@ -18,11 +13,14 @@ export const PersonalProfile = ({ data }) => {
   return (
     <>
       <Grid
-        className="profileBasic"
         sx={{
-          // bgcolor: "#cfe8fc",
+          bgcolor: "#cfe8fc",
+          display: "grid",
+          gridTemplateColumns: "1fr 3fr",
           borderRadius: 5,
           alignItems: "center",
+          p: "1rem",
+          gap: "1rem",
         }}
       >
         <Box className="profileInfo">
@@ -37,7 +35,7 @@ export const PersonalProfile = ({ data }) => {
             src={data?.gender === "MALE" ? Male : Female}
           />
           <Typography
-            style={{
+            sx={{
               color: primaryColor,
               fontSize: "1.3rem",
               fontWeight: "600",
@@ -47,42 +45,27 @@ export const PersonalProfile = ({ data }) => {
           </Typography>
           <Chip
             label={data?.position.positionName}
-            style={{
-              backgroundColor: primaryColor,
-              color: "white",
-              width: " 9rem",
-            }}
+            sx={{ bgcolor: primaryColor, color: "white", width: " 9rem" }}
           />
           <Typography
-            style={{
-              color: primaryColor,
-              fontSize: "1rem",
-              fontWeight: "600",
-            }}
+            sx={{ color: primaryColor, fontSize: "1rem", fontWeight: "600" }}
           >
             {data?.officeEmail}
           </Typography>
           <Typography
-            style={{
-              color: primaryColor,
-              fontSize: "1rem",
-              fontWeight: "600",
-            }}
+            sx={{ color: primaryColor, fontSize: "1rem", fontWeight: "600" }}
           >
-            {data?.data?.addresses[0]?.city === null ? "" : data?.data?.addresses[0]?.city}
+            {data?.data?.addresses[0]?.city === null
+              ? ""
+              : data?.data?.addresses[0]?.city}
           </Typography>
           <Typography
-            style={{
-              color: primaryColor,
-              fontSize: "1rem",
-              fontWeight: "600",
-            }}
+            sx={{ color: primaryColor, fontSize: "1rem", fontWeight: "600" }}
           >
             {data?.mobileNumber}
           </Typography>
         </Box>
-<BasicInfo/>
-        
+        <BasicInfo data={data} />
       </Grid>
     </>
   );
