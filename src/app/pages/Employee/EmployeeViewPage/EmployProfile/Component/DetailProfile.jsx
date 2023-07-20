@@ -8,6 +8,7 @@ import LeaveInfo from "../../InfoTabs/LeaveInfoTab/LeaveInfo";
 import AcademicsInfo from "../../InfoTabs/AcademicsInfoTab/AcademicsInfo";
 import PromotionHistory from "../../InfoTabs/PromotionHistory/PromotionHistory";
 import "../Style/Style.css";
+import AttendenceInfo from "../../InfoTabs/AttendenceInfoTab/AttendenceInfo";
 
 const primaryColor = "#1c7ed6";
 
@@ -58,15 +59,15 @@ export const DetailProfile = ({ data }) => {
                     fontWeight: "bolder",
                   }}
                 />
-                {/* <Tab
-                            label='Experiences'
-                            value='4'
-                            style={{
-                                fontSize: '1rem',
-                                color: primaryColor,
-                                fontWeight: 'bolder',
-                            }}
-                        /> */}
+                <Tab
+                  label='Attendence'
+                  value='4'
+                  style={{
+                    fontSize: '1rem',
+                    color: primaryColor,
+                    fontWeight: 'bolder',
+                  }}
+                />
                 <Tab
                   label="Promotion History"
                   value="5"
@@ -85,16 +86,16 @@ export const DetailProfile = ({ data }) => {
             <BasicInfo data={data}/>
           </TabPanel> */}
           <TabPanel value="1" style={{ padding: 10 }}>
-            <LeaveInfo data={data}/>
+            <LeaveInfo data={data} />
           </TabPanel>
           <TabPanel value="3" style={{ padding: 10 }}>
             <AcademicsInfo data={data} />
           </TabPanel>
           <TabPanel value="4" style={{ padding: 10 }}>
-            <AcademicsInfo data={data} />
+            <AttendenceInfo data={data} />
           </TabPanel>
           <TabPanel value="5" style={{ padding: 10 }}>
-            <PromotionHistory data={data}/>
+            <PromotionHistory data={data} />
           </TabPanel>
         </Box>
         {/* </Box> */}
