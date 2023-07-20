@@ -51,7 +51,7 @@ export const DetailProfile = ({ data }) => {
                 />
                 <Tab
                   label="Academics"
-                  value="3"
+                  value="2"
                   style={{
                     fontSize: "1rem",
                     color: primaryColor,
@@ -60,7 +60,7 @@ export const DetailProfile = ({ data }) => {
                 />
                 {/* <Tab
                             label='Experiences'
-                            value='4'
+                            value='3'
                             style={{
                                 fontSize: '1rem',
                                 color: primaryColor,
@@ -69,7 +69,7 @@ export const DetailProfile = ({ data }) => {
                         /> */}
                 <Tab
                   label="Promotion History"
-                  value="5"
+                  value="4"
                   style={{
                     fontSize: "1rem",
                     color: primaryColor,
@@ -87,13 +87,13 @@ export const DetailProfile = ({ data }) => {
           <TabPanel value="1" style={{ padding: 10 }}>
             <LeaveInfo data={data}/>
           </TabPanel>
+          <TabPanel value="2" style={{ padding: 10 }}>
+            <AcademicsInfo data={data} />
+          </TabPanel>
           <TabPanel value="3" style={{ padding: 10 }}>
             <AcademicsInfo data={data} />
           </TabPanel>
           <TabPanel value="4" style={{ padding: 10 }}>
-            <AcademicsInfo data={data} />
-          </TabPanel>
-          <TabPanel value="5" style={{ padding: 10 }}>
             <PromotionHistory data={data}/>
           </TabPanel>
         </Box>

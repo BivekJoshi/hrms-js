@@ -12,7 +12,7 @@ const InfoItem = ({ field, value }) => {
           <Grid item xs={6}>
             <ListItemText primary={value} />
           </Grid>
-          <Divider component="li" />
+          {/* <Divider component="li" /> */}
         </Grid>
       </ListItem>
       <Divider component="li" />

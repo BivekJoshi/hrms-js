@@ -19,16 +19,16 @@
   padding: 20px;
   gap: 20px;
   font-size: larger;
-  /* margin-top: 5rem; */
-  /* justify-content: center !important; */
   background-color: #cfe8fc;
 }
 
 .ProfileStyle {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 2rem;
+  grid-template-rows: 1fr 1fr;
+  row-gap: 2rem;
   border-radius: 1rem;
+  background-color: #ededed;
+  padding: 1rem;
 }
 .css-heg063-MuiTabs-flexContainer {
   /* display: -webkit-box;

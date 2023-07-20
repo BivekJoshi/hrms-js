@@ -5,7 +5,7 @@ import "../Style/Style.css";
 import { Box, Grid } from "@mui/material";
 import ListUserDetails from "../../InfoTabs/BaiscInfoTab/Components/ListUserDetails";
 
-const BasicInfo = ({ data, MarTop }) => {
+const BasicInfo = ({ data }) => {
   const EMPLOYEE = {
     Gender: data?.gender || "",
     "Citizenship Number": data?.citizenshipNumber || "",
@@ -34,20 +34,27 @@ const BasicInfo = ({ data, MarTop }) => {
   return (
     <>
       <Box container className="ProfileStyle">
-        <Grid item xs={6}>
-          <div className="FAM-BANK-DETAILS">
-            {/* <ListUserDetails data={EMPLOYEE} cardTitle={"Basic Informations"} MarginBottom={"1rem"}/> */}
+        <Box>
+          <ListUserDetails
+            data={EMPLOYEE}
+            cardTitle={"Basic Informations"}
+            MarginBottom={"1rem"}
+          />
+        </Box>
+        <Box
+          sx={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}
+          className="FAM-BANK-DETAILS"
+        >
+          <Box>
             <ListUserDetails data={BANKDETAILS} cardTitle={"Bank Details"} />
-          </div>
-        </Grid>
-        <Grid item xs={6}>
-          <div className="FAM-BANK-DETAILS">
+          </Box>
+          <Box>
             <ListUserDetails
               data={FAMILYMEMBERS}
               cardTitle={"Family Informations"}
             />
-          </div>
-        </Grid>
+          </Box>
+        </Box>
       </Box>
     </>
   );

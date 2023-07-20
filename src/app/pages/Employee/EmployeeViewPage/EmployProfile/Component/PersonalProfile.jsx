@@ -2,11 +2,6 @@ import React from "react";
 
 import { Box, Chip, Grid, List, ListItem } from "@mui/material";
 import { Typography, Avatar } from "@mui/material";
-import { ListItemAvatar, ListItemText, Divider } from "@mui/material";
-
-import EmailIcon from "@mui/icons-material/Email";
-import PersonIcon from "@mui/icons-material/Person";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 
 import Male from "../../../../../../assets/male.png";
 import Female from "../../../../../../assets/female.png";
@@ -18,11 +13,14 @@ export const PersonalProfile = ({ data }) => {
   return (
     <>
       <Grid
-        className="profileBasic"
+        // className="profileBasic"
         sx={{
-          // bgcolor: "#cfe8fc",
+          bgcolor: "#cfe8fc",
+          display: "grid",
+          gridTemplateColumns: "1fr 3fr",
           borderRadius: 5,
           alignItems: "center",
+          padding: "3rem 3rem 3rem 0rem",
         }}
       >
         <Box className="profileInfo">
@@ -69,7 +67,9 @@ export const PersonalProfile = ({ data }) => {
               fontWeight: "600",
             }}
           >
-            {data?.data?.addresses[0]?.city === null ? "" : data?.data?.addresses[0]?.city}
+            {data?.data?.addresses[0]?.city === null
+              ? ""
+              : data?.data?.addresses[0]?.city}
           </Typography>
           <Typography
             style={{
@@ -81,8 +81,7 @@ export const PersonalProfile = ({ data }) => {
             {data?.mobileNumber}
           </Typography>
         </Box>
-<BasicInfo/>
-        
+        <BasicInfo data={data}/>
       </Grid>
     </>
   );
