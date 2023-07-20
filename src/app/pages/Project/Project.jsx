@@ -105,7 +105,7 @@ const Project = () => {
         className="project-card-control"
         sx={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+          gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))",
         }}
       >
         {currentPosts.map((item, index) => (
