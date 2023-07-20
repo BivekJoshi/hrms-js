@@ -23,11 +23,11 @@ export const useSendEmail = ({ employeeId, onSuccess }) => {
 };
 
 
-export const useSendEmailToAll = ({ onSuccess, employeeId }) => {
+export const useSendEmailToAll = ({ onSuccess, employeeId, eventId }) => {
   const queryClient = useQueryClient();
   return useMutation(
     ["sendEmailToAll"],
-    (formData) => sendEmailToAll({ formData, employeeId }),
+    (formData) => sendEmailToAll({ formData, employeeId, eventId }),
     {
       onSuccess: (data, variables, context) => {
         toast.success("Successful send Mail To All The Employee");
