@@ -2,7 +2,7 @@ import { useAddEmployee } from '../useEmployee';
 import { useFormik } from 'formik';
 import { AddEmployeeSchema } from './addEmployeeSchema';
 
-const useAddEmployeeForm = () => {
+const useAddEmployeeForm = (handleOpenSubmitModal) => {
   const { mutate, data, isLoading } = useAddEmployee();
 
 
@@ -26,6 +26,8 @@ const useAddEmployeeForm = () => {
     validationSchema: AddEmployeeSchema,
     onSubmit: (values) => {
       handleRequest(values);
+      handleOpenSubmitModal();
+      formik.resetForm();
     },
   });
 
