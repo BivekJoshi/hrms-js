@@ -10,12 +10,11 @@ import { DetailProfile } from "./Component/DetailProfile";
 import { PersonalProfile } from "./Component/PersonalProfile";
 import ProgressById from "../../ProgressEmployeeData/ProgressById";
 
-export const EmployeeProfile = () => {
+const EmployeeProfile = () => {
   const { id } = useParams();
   const { data: employeeDataById, isLoading } = useGetEmployeeById(id);
   const navigate = useNavigate();
-  const MiddleName =
-    employeeDataById?.middleName === null ? " " : employeeDataById?.middleName;
+
   if (isLoading) return <>Loading</>;
   return (
     <>
@@ -39,4 +38,6 @@ export const EmployeeProfile = () => {
       </div>
     </>
   );
-};
+}
+
+export default EmployeeProfile

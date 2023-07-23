@@ -4,17 +4,28 @@ import {
   editBankDetail,
   getBankDetailById,
   getBankDetails,
+  getBankDetailsBankId,
 } from '../../api/bank/bank-api';
 import { toast } from 'react-toastify';
 import { useParams } from 'react-router';
 
-export const useGetBankById = (id) => {
+{/*____________________________GETBANKDETAILSBYID____________________________________________*/}
+export const useGetBankByEmployeeId = (id) => {
   return useQuery(['getBankById'], () => getBankDetailById(id), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
 };
 
+{/*____________________________GETBANKDETAILSBYID____________________________________________*/}
+export const useGetBankById = (id) => {
+  return useQuery(['getBankDetailsBankId'], () => getBankDetailsBankId(id), {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
+};
+
+{/*____________________________GETALL____________________________________________*/}
 export const useGetBank = () => {
   return useQuery(['getBank'], () => getBankDetails(), {
     refetchInterval: false,
@@ -22,6 +33,7 @@ export const useGetBank = () => {
   });
 };
 
+{/*____________________________POST____________________________________________*/}
 export const useAddBank = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   const { id } = useParams();
@@ -37,6 +49,7 @@ export const useAddBank = ({ onSuccess }) => {
   });
 };
 
+{/*____________________________EDIT____________________________________________*/}
 export const useEditBank = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(

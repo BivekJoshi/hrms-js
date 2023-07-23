@@ -29,13 +29,15 @@ const Employee = () => {
 
   const [value, setValue] = React.useState('1');
 
-  const { formik, data } = useAddEmployeeForm({});
 
   const [openAddModal, setOpenAddModal] = useState(false);
   const handleAddOpenModal = () => setOpenAddModal(true);
 
   const [openSubmitModal, setOpenSubmitModal] = useState(false);
   const handleOpenSubmitModal = () => setOpenSubmitModal(true);
+
+  const { formik, data } = useAddEmployeeForm(handleOpenSubmitModal);
+
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -44,7 +46,7 @@ const Employee = () => {
   const handleSubmit = () => {
     formik.handleSubmit();
     if (formik.isValid) {
-      handleOpenSubmitModal();
+      // handleOpenSubmitModal();
       setOpenAddModal(false)
     } else {
       toast.error('Please make sure you have filled the form correctly');
