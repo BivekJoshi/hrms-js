@@ -9,14 +9,11 @@ import {
   MenuItem,
   OutlinedInput,
   Select,
-  TextField,
 } from "@mui/material";
 import { useGetEmployee } from "../../hooks/employee/useEmployee";
-import { useParams } from "react-router-dom";
 
 const EmailToAll = ({ open, onClose, eventId }) => {
   const { data: employeeData } = useGetEmployee();
-
   const [employeeId, setEmployeeId] = useState([]);
   const [emailData, setEmailData] = useState({ subject: "", message: "" });
   const [errors, setErrors] = useState({ subject: false, message: false });
@@ -29,11 +26,6 @@ const EmailToAll = ({ open, onClose, eventId }) => {
     employeeId: employeeId,
     eventId: eventId,
   });
-
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setEmailData((prevData) => ({ ...prevData, [name]: value }));
-  };
 
   const handleSubmit = (event) => {
     event.preventDefault();

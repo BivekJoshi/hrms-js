@@ -11,6 +11,8 @@ import MainCard from "../MainCard";
 import EmailModal from "../../../pages/Email/EmailModal";
 import { EditDeactivationEmployeeModal } from "../../../pages/Employee/EmployeeDeactivationModal/EditDeactivationEmployeeModal";
 import { useSelector } from "react-redux";
+import ProgressbyAll from "../../../pages/Employee/ProgressEmployeeData/ProgressbyAll";
+import PopOver from "../../../../theme/overrides/PopOver";
 
 const EmployeeCard = ({
   IsActive,
@@ -23,6 +25,7 @@ const EmployeeCard = ({
   PositionName,
   PositionLevel,
   EGender,
+  ProgressBarRes,
 }) => {
   const [open, setOpen] = useState(false);
   const [openEmailForm, setOpenEmailForm] = useState(false);
@@ -77,22 +80,28 @@ const EmployeeCard = ({
           grow={true}
           style={{
             textAlign: "center",
-            padding: ".5rem",
+            padding: "1.5rem",
           }}
         >
           <Box display="flex" justifyContent={"end"}>
-            <Button
-              style={{
-                marginTop: "5px",
-                fontSize: ".7rem",
-                padding: "1px 5px",
-              }}
-              onClick={handleClick}
-              variant="outlined"
-              color={(IsActive = true ? "success" : "warning")}
-            >
-              {(IsActive = true ? "Active" : "InActive")}
-            </Button>
+            <PopOver
+              triggerContent={
+                <Button
+                  style={{
+                    marginTop: "5px",
+                    fontSize: ".7rem",
+                    padding: "1px 5px",
+                  }}
+                  onClick={handleClick}
+                  variant="outlined"
+                  color={(IsActive = true ? "success" : "warning")}
+                >
+                  {(IsActive = true ? "Active" : "InActive")}
+                </Button>
+              }
+              popoverContent={<Typography sx={{ p: 1 }}>Inactive Employee</Typography>}
+            />
+
             <Box>
               <Button
                 ref={anchorRef}
@@ -171,6 +180,12 @@ const EmployeeCard = ({
               sx={{ width: 66, height: 66, borderRadius: "2rem" }}
             />
           </Stack>
+
+          <PopOver
+            triggerContent={<ProgressbyAll ProgressbyAll={ProgressBarRes} />}
+            popoverContent={<Typography sx={{ p: 1 }}>Information Progress Data</Typography>}
+          />
+
           <Stack>
             <Typography
               style={{ fontWeight: 700, margin: "1rem 0", fontSize: "20px" }}
@@ -179,9 +194,13 @@ const EmployeeCard = ({
             </Typography>
             <Box padding={"0 1rem"}>
               <Typography variant="body2" gutterBottom>
-                <Chip
-                  label={`${PositionName} (${PositionLevel})`}
-                  style={{ width: 230 }}
+                <PopOver
+                  triggerContent={
+                    <Chip
+                      label={`${PositionName} (${PositionLevel})`}
+                      style={{ width: 230 }}
+                    />}
+                  popoverContent={<Typography sx={{ p: 1 }}>{`${PositionName} (${PositionLevel})`}</Typography>}
                 />
               </Typography>
             </Box>
@@ -192,19 +211,24 @@ const EmployeeCard = ({
             }}
           >
             <Box backgroundColor="#f5f5f5" padding=".5rem" borderRadius=".5rem">
-              <Stack
-                onClick={handleOpenEmailform}
-                spacing={{ xs: 1 }}
-                direction="row"
-                useFlexGap
-                flexWrap="wrap"
-                alignItems="center"
-              >
-                <Email />
-                <Typography variant="p" style={{ margin: "10px 0" }}>
-                  {OfficeEmail}
-                </Typography>
-              </Stack>
+              <PopOver
+                triggerContent={
+                  <Stack
+                    onClick={handleOpenEmailform}
+                    spacing={{ xs: 1 }}
+                    direction="row"
+                    useFlexGap
+                    flexWrap="wrap"
+                    alignItems="center"
+                  >
+                    <Email />
+                    <Typography variant="p" style={{ margin: "10px 0" }}>
+                      {OfficeEmail}
+                    </Typography>
+                  </Stack>
+                }
+                popoverContent={<Typography sx={{ p: 1 }}>Send Email To {EFirstName} {EMiddleName} {ELastName}</Typography>}
+              />
 
               <Stack
                 spacing={{ xs: 1 }}

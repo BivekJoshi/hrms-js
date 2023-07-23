@@ -26,6 +26,7 @@ const useAddEventForm = () => {
         };
         mutate(values, formik, { onSuccess: () => formik.handleReset() });
     };
+
     return { formik, data };
 };
 

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Grid, TextField, Button, Modal, Box } from "@mui/material";
 import { toast } from "react-toastify";
 import useAddEventForm from "../../../hooks/event/addEvent/useAddEventForm";
-import { useGetEmployee } from "../../../hooks/employee/useEmployee";
 import ModalComponent from "../../Modal/ModalComponent";
 
 
