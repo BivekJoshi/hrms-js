@@ -102,7 +102,7 @@ const Login = () => {
                 }}
               />
               <div className="forgot-password d-flex justify-content-end">
-                <Link to="/reset-password">Forgot password?</Link>
+                <Link to="api/user/forgot-password">Forgot password?</Link>
               </div>
               <LoadingButton
                 fullWidth
