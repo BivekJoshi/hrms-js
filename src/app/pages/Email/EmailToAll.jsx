@@ -14,7 +14,6 @@ import { useGetEmployee } from "../../hooks/employee/useEmployee";
 
 const EmailToAll = ({ open, onClose, eventId }) => {
   const { data: employeeData } = useGetEmployee();
-  console.log(eventId)
   const [employeeId, setEmployeeId] = useState([]);
   const [emailData, setEmailData] = useState({ subject: "", message: "" });
   const [errors, setErrors] = useState({ subject: false, message: false });
