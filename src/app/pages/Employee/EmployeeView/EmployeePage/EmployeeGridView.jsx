@@ -14,7 +14,7 @@ const EmployeeGridView = ({ employeeData }) => {
   const currentPosts = employeArray.slice(indexOfFirstPost, indexOfLastPost);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
- 
+
   return (
     <>
       <Grid
@@ -25,17 +25,17 @@ const EmployeeGridView = ({ employeeData }) => {
         sx={{
           display: "grid",
           gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))",
-          gap:"1rem"
+          gap: "1rem"
         }}
       >
         {currentPosts?.map((employee, index) => (
           <EmployeeCard
             key={index}
-            IsActive={employee.isActive}
-            EmployeeId={employee.id}
-            EFirstName={employee.firstName}
-            EMiddleName={employee.middleName}
-            ELastName={employee.lastName}
+            IsActive={employee?.isActive}
+            EmployeeId={employee?.id}
+            EFirstName={employee?.firstName}
+            EMiddleName={employee?.middleName}
+            ELastName={employee?.lastName}
             OfficeEmail={employee?.officeEmail}
             MobileNumber={employee?.mobileNumber}
             PositionName={employee?.position?.positionName}
@@ -43,6 +43,7 @@ const EmployeeGridView = ({ employeeData }) => {
             EGender={employee?.gender}
             // EmployeePhoto={getEmployeePhoto?.id}
             EmployeeData={currentPosts}
+            ProgressBarRes={employee?.progressBarRes}
           />
         ))}
       </Grid>
