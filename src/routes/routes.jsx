@@ -13,6 +13,7 @@ import EmailForm from "../app/pages/Email/Email";
 import DeactivatedEmployee from "../app/pages/Employee/DeactivatedEmployee/DeactivateEmployee";
 import { Breadcrumbs, Typography } from "@mui/material";
 import { EmployeeProfile } from "../app/pages/Employee/EmployeeViewPage/EmployProfile/EmployeeProfile";
+import ForgetPassword from "../auth/forgetPassword/ForgetPassword";
 
 const TodoList = Loadable(lazy(() => import("../app/pages/TodoList/TodoList")));
 const Event = Loadable(lazy(() => import("../app/pages/Event/Event")));
@@ -37,6 +38,11 @@ const EditEmployee = Loadable(
 );
 
 const routes = [
+  {
+    path: "user/forgot-password",
+    id: nanoid(),
+    component: <ForgetPassword />,
+  },
   {
     path: "dashboard",
     id: nanoid(),
