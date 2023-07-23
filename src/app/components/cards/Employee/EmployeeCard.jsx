@@ -80,7 +80,7 @@ const EmployeeCard = ({
           grow={true}
           style={{
             textAlign: "center",
-            padding: ".5rem",
+            padding: "1.5rem",
           }}
         >
           <Box display="flex" justifyContent={"end"}>
