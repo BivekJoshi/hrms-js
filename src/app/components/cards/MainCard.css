@@ -12,9 +12,7 @@
   .main-card.no-border {
     border: none;
   } 
-  .card-content {
-    /* padding: 20px; */
-  }
+
   
   @media (max-width: 768px) {
     .card-header,

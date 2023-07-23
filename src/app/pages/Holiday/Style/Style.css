@@ -1,0 +1,11 @@
+.calenderDesign .fc .fc-dayGridMonth-view .fc-scrollgrid .fc-scrollgrid-section .fc-day-today .fc-daygrid-day-frame{
+    background-color: red;
+}
+
+.calenderDesign .fc-daygrid-event{
+    border: 0px;
+}
+
+.calenderDesign .fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {
+    min-height: 4em;
+}
