@@ -11,3 +11,19 @@
   top: 5px;
   right: 10px;
 }
+
+.attendenceDesign .fc-daygrid-event {
+  border: 0px;
+}
+
+.timeInO {
+  display: none;
+}
+
+.attendanceHover:hover .timeInO {
+  display: block;
+  opacity: 0.5;
+  background-color: black;
+  margin-top: -3rem;
+}
+
