@@ -101,7 +101,9 @@ export default Holiday;
 function renderEventContent(eventInfo) {
   return (
     <Box border={"none"}>
-      <li style={{fontWeight:600, fontSize:"1rem", marginLeft:".5rem"}}>{eventInfo.event.title}</li>
+      <li style={{ fontWeight: 600, fontSize: "1rem", marginLeft: ".5rem" }}>
+        {eventInfo.event.title}
+      </li>
       {/* <DeleteIcon sx={{width:"2rem"}}/> */}
     </Box>
   );
