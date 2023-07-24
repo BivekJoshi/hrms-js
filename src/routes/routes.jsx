@@ -59,12 +59,15 @@ const Leave = Loadable(lazy(() =>
 const EditEmployee = Loadable(lazy(() =>
   import("../app/pages/Employee/AddEmployee/EditEmployee")
 ));
+const ForgotPassword = Loadable(lazy(() =>
+  import("../app/pages/Auth/FogotPassword/ForgotPassword")
+));
 
 const routes = [
   {
     path: "user/forgot-password",
     id: nanoid(),
-    component: <ForgetPassword />,
+    component: <ForgotPassword />,
   },
   {
     path: "dashboard",
