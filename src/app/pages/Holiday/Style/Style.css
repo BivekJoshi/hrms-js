@@ -1,5 +1,5 @@
-.calenderDesign .fc .fc-dayGridMonth-view .fc-scrollgrid .fc-scrollgrid-section .fc-day-today .fc-daygrid-day-frame{
-    background-color: red;
+/* .calenderDesign .fc .fc-dayGridMonth-view .fc-scrollgrid .fc-scrollgrid-section .fc-day-today .fc-daygrid-day-frame{
+    background-color: green;
 }
 
 .calenderDesign .fc-daygrid-event{
@@ -9,3 +9,18 @@
 .calenderDesign .fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {
     min-height: 4em;
 }
+  
+  .fc-daygrid-day.fc-day-today,
+  .fc-daygrid-day.fc-day-has-event {
+    background-color: green;
+    background: green;
+    width: 100%;
+  }
+
+  .fc-event {
+    background-color: red;
+    border: 1px solid transparent;
+    opacity: 0.5;
+    border-radius: 3px;
+    padding: 2px;
+  } */

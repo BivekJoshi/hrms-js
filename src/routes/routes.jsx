@@ -62,11 +62,6 @@ const EditEmployee = Loadable(lazy(() =>
 
 const routes = [
   {
-    path: "user/forgot-password",
-    id: nanoid(),
-    component: <ForgetPassword />,
-  },
-  {
     path: "dashboard",
     id: nanoid(),
     component: <Dashboard />,

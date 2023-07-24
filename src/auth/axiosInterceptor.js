@@ -4,7 +4,9 @@ import { getUser } from "../app/utils/cookieHelper";
 
 
 export const axiosInstance = Axios.create({
-  baseURL: "http://103.94.159.144:8083/hrms/api/",
+  // baseURL: "http://103.94.159.144:8083/hrms/api/",
+   baseURL: "http://10.14.15.156:8484/hrms/api/",
+  
   timeout: 20000,
 });
 

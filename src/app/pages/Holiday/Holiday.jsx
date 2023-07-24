@@ -1,10 +1,9 @@
-import { Box, Button, Grid, Icon } from "@mui/material";
+import { Box, Button, Grid } from "@mui/material";
 import React, { useState, useRef, useEffect } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
-
 import { useGetHoliday } from "../../hooks/holiday/useHoliday";
 import { AddHolidayModal, OpenHoliday } from "./HolidayModal/HolidayModal";
 import CurrentHoliday from "./CurrentHoliday";
@@ -36,12 +35,18 @@ const Holiday = () => {
       const formattedEvents = holidayData.map((event) => ({
         title: event.holidayName,
         date: event.holidayDate,
-        backgroundColor: "red",
         id: event.id,
       }));
       setEvents(formattedEvents);
     }
   }, [holidayData]);
+
+  const dayCellContentHandler = (arg) => {
+    const eventDates = events.map((event) => event.date);
+    if (eventDates.includes(arg.dateStr)) {
+      arg.dayEl.classList.add("highlight-day");
+    }
+  };
 
   return (
     <>
@@ -71,8 +76,7 @@ const Holiday = () => {
             }}
             eventClick={handleOpenModal}
             height={"90vh"}
-            events={events}
-            eventContent={renderEventContent}
+            events={events}s
           />
         </Grid>
       </Grid>
@@ -96,13 +100,3 @@ const Holiday = () => {
 };
 
 export default Holiday;
-
-// a custom render function
-function renderEventContent(eventInfo) {
-  return (
-    <Box border={"none"}>
-      <li style={{fontWeight:600, fontSize:"1rem", marginLeft:".5rem"}}>{eventInfo.event.title}</li>
-      {/* <DeleteIcon sx={{width:"2rem"}}/> */}
-    </Box>
-  );
-}
