@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Icon } from "@mui/material";
+import { Box, Button, Grid } from "@mui/material";
 import React, { useState, useRef, useEffect } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
