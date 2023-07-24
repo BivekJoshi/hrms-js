@@ -100,3 +100,15 @@ const Holiday = () => {
 };
 
 export default Holiday;
+
+// a custom render function
+function renderEventContent(eventInfo) {
+  return (
+    <Box border={"none"}>
+      <li style={{ fontWeight: 600, fontSize: "1rem", marginLeft: ".5rem" }}>
+        {eventInfo.event.title}
+      </li>
+      {/* <DeleteIcon sx={{width:"2rem"}}/> */}
+    </Box>
+  );
+}
