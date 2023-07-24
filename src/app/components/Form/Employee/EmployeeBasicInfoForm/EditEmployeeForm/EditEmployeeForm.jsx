@@ -7,6 +7,8 @@ import EmployeeDocumentDetailForm from "../../EmployeeDocumentDetailForm/Employe
 import EmployeeFamilyDetailForm from "../../EmployeeFamilyDetailForm/EmployeeFamilyDetailForm";
 import EmployeeQualificationDetailForm from "../../EmployeeQualificationDetailForm/EmployeeQualificationDetailForm";
 import EmployeeBasicInfoForm from "../EmployeeBasicInfoForm";
+import EmployeeHistoryDetailForm from "../../EmployeeHistoryDetailForm/EmployeeHistoryDetailForm";
+
 
 import useQualificationForm from "../../../../../hooks/employee/AddQualification/useQualificationForm";
 import useFamilyForm from "../../../../../hooks/employee/AddFamily/useFamilyForm";
@@ -16,6 +18,7 @@ import useAddBankForm from "../../../../../hooks/employee/AddBankForm/useAddBank
 import useAddDocumentForm from "../../../../../hooks/employee/AddDocument/useAddDocumentForm";
 import { useGetEmployeeById } from "../../../../../hooks/employee/useEmployee";
 import { toast } from "react-toastify";
+import { useAddEmployeeHistory } from "../../../../../hooks/employee/useEmployeeHistory";
 
 
 
@@ -28,11 +31,11 @@ const EditEmployeeForm = () => {
     'Family Details',
     'Educational Details',
     'Bank Details',
-    // 'Employee History',
+    'Employee History',
     'Document Details',
     'Other Details',
   ];
-  
+
   const { data, isLoading: employeeLoading } = useGetEmployeeById(id);
 
   const { formik: qualificationFormik, isLoading: isLoadingQualification } = useQualificationForm({ data, employeeLoading });
@@ -46,6 +49,8 @@ const EditEmployeeForm = () => {
   const { formik: bankFormik } = useAddBankForm({ data, employeeLoading });
 
   const { formik: documentFormik } = useAddDocumentForm({ data, employeeLoading, });
+
+  const { formik: employeeHistoryFormik } = useAddEmployeeHistory({ data, employeeLoading, });
 
   const getStepContent = (step) => {
     switch (step) {
@@ -88,17 +93,25 @@ const EditEmployeeForm = () => {
           />
         );
 
+
       case 5:
+        return (
+          <EmployeeHistoryDetailForm
+            formik={bankFormik}
+          />
+        );
+
+      case 6:
         return (
           <EmployeeDocumentDetailForm
             formik={documentFormik}
           />
         );
 
-      case 6:
+      case 7:
         return <p>Hello World</p>;
 
-      case 7:
+      case 8:
         return <p>Other Details</p>;
 
       default:
@@ -164,12 +177,16 @@ const EditEmployeeForm = () => {
           bankFormik.handleSubmit();
         }
         break;
-
-      // case 5:
-      //   documentFormik.setFieldTouched('');
-      //   if (documentFormik.dirty) {
-      //     documentFormik.handleSubmit();
-      //   }
+      case 5:
+        employeeHistoryFormik.setFieldTouched("");
+        if (employeeHistoryFormik.dirty) {
+          if (!employeeHistoryFormik.isValid) {
+            toast.error("Please make sure you have filled the form correctly");
+            return;
+          }
+          employeeHistoryFormik.handleSubmit();
+        }
+        break;
 
       default:
         break;

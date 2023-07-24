@@ -30,7 +30,7 @@ export const useAddEmployeeHistory = ({ onSuccess }) => {
 };
 
 {/*________________________DELETE_____________________________________*/ }
-export const useDeleteFamily = ({ onSuccess }) => {
+export const useDeleteHistory = ({ onSuccess }) => {
     const queryClient = useQueryClient();
     return useMutation(['deleteEmployeeHistory'],
         (employeeHistoryId) => deleteEmployeeHistory(employeeHistoryId),
