@@ -11,9 +11,9 @@ import {
 import LoadingButton from "@mui/lab/LoadingButton";
 import React from "react";
 import { Link } from "react-router-dom";
-import { useLoginForm } from "../../../auth/hooks/component/login/useLoginForm";
+import { useLoginForm } from "../../../../auth/hooks/component/login/useLoginForm";
 import "./Login.css";
-import bg1 from "../../../assets/background.svg";
+import bg1 from "../../../../assets/background.svg";
 
 const Login = () => {
   const {
@@ -102,7 +102,7 @@ const Login = () => {
                 }}
               />
               <div className="forgot-password d-flex justify-content-end">
-                <Link to="api/user/forgot-password">Forgot password?</Link>
+                <Link to="forgot-password">forget password?</Link>
               </div>
               <LoadingButton
                 fullWidth

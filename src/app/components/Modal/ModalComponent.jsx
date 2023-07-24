@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Modal, Button, Box } from "@mui/material";
-import EmailToAll from "../../../pages/Email/EmailTOAll";
-import { useGetEmployee } from "../../../hooks/employee/useEmployee";
-import useAddEventForm from "../../../hooks/event/addEvent/useAddEventForm";
+import EmailToAll from "../../pages/Email/EmailToAll";
+import { useGetEmployee } from "../../hooks/employee/useEmployee";
 
 const style = {
   position: "absolute",
