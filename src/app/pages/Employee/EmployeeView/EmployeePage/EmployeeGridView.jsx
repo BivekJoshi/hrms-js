@@ -31,19 +31,19 @@ const EmployeeGridView = ({ employeeData }) => {
         {currentPosts?.map((employee, index) => (
           <EmployeeCard
             key={index}
-            IsActive={employee?.isActive}
-            EmployeeId={employee?.id}
-            EFirstName={employee?.firstName}
-            EMiddleName={employee?.middleName}
-            ELastName={employee?.lastName}
-            OfficeEmail={employee?.officeEmail}
-            MobileNumber={employee?.mobileNumber}
-            PositionName={employee?.position?.positionName}
-            PositionLevel={employee?.position?.positionLevel}
-            EGender={employee?.gender}
+            IsActive={employee?.isActive || ''}
+            EmployeeId={employee?.id || ''}
+            EFirstName={employee?.firstName || ''}
+            EMiddleName={employee?.middleName ||''}
+            ELastName={employee?.lastName ||''}
+            OfficeEmail={employee?.officeEmail || ''}
+            MobileNumber={employee?.mobileNumber || ''}
+            PositionName={employee?.position?.positionName || ''}
+            PositionLevel={employee?.position?.positionLevel || ''}
+            EGender={employee?.gender || ''}
             // EmployeePhoto={getEmployeePhoto?.id}
             EmployeeData={currentPosts}
-            ProgressBarRes={employee?.progressBarRes}
+            ProgressBarRes={employee?.progressBarRes || ''}
           />
         ))}
       </Grid>

@@ -200,7 +200,7 @@ const EmployeeCard = ({
                       label={`${PositionName} (${PositionLevel})`}
                       style={{ width: 230 }}
                     />}
-                  popoverContent={<Typography sx={{ p: 1 }}>{`${PositionName} (${PositionLevel})`}</Typography>}
+                  popoverContent={<Typography sx={{ p: 1 }}>{`${PositionName || ''} (${PositionLevel || ''})`}</Typography>}
                 />
               </Typography>
             </Box>
@@ -223,7 +223,7 @@ const EmployeeCard = ({
                   >
                     <Email />
                     <Typography variant="p" style={{ margin: "10px 0" }}>
-                      {OfficeEmail}
+                      {OfficeEmail || ''}
                     </Typography>
                   </Stack>
                 }
@@ -240,7 +240,7 @@ const EmployeeCard = ({
                 <LocalPhone />
                 <Typography variant="p" style={{ margin: "10px 0" }}>
                   {" "}
-                  {MobileNumber}{" "}
+                  {MobileNumber || ''}{" "}
                 </Typography>
               </Stack>
             </Box>
@@ -248,7 +248,7 @@ const EmployeeCard = ({
         </MainCard>
         {openEmailForm && (
           <EmailModal
-            officeEmail={OfficeEmail}
+            officeEmail={OfficeEmail || ''}
             employeeId={EmployeeId}
             open={openEmailForm}
             onClose={handleCloseEmailform}
