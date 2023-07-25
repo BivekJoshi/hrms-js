@@ -10,7 +10,6 @@ import Female from "../../../../assets/female.png";
 import MainCard from "../MainCard";
 import EmailModal from "../../../pages/Email/EmailModal";
 import { EditDeactivationEmployeeModal } from "../../../pages/Employee/EmployeeDeactivationModal/EditDeactivationEmployeeModal";
-import { useSelector } from "react-redux";
 import ProgressbyAll from "../../../pages/Employee/ProgressEmployeeData/ProgressbyAll";
 import PopOver from "../../../../theme/overrides/PopOver";
 
