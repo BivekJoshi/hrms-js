@@ -1,5 +1,5 @@
 import * as React from 'react';
-import MaterialTable from '@material-table/core';
+import MaterialTable from "material-table";
 import { Button, Stack } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import StartIcon from '@mui/icons-material/Start';
