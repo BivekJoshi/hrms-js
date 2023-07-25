@@ -12,6 +12,7 @@ export const usePermanentAddressForm = ({ data, employeeLoading: isLoading }) =>
     initialValues: {
       addresses: [
         {
+          addressType:'PERMANENT',
           id: addressDetails[0]?.id || '',
           addressType: "PERMANENT",
           country: addressDetails[0]?.country || '',
@@ -22,6 +23,7 @@ export const usePermanentAddressForm = ({ data, employeeLoading: isLoading }) =>
           street: addressDetails[0]?.street || '',
         },
         {
+          addressType:'TEMPORARY',
           id: addressDetails[1]?.id || '',
           addressType: "TEMPORARY",
           country: addressDetails[1]?.country || '',

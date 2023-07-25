@@ -13,6 +13,7 @@ const Event = () => {
 
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+
   const [events, setEvents] = useState([]);
   const [getEventID, setEventGetID] = useState({});
 
