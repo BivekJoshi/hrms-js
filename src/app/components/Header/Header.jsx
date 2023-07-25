@@ -33,8 +33,6 @@ const AppBar = styled(MuiAppBar, {
 
 export default function Header({ open, handleDrawerOpen }) {
   const [showLength, setShowLength] = useState(true);
-  const [showNotification, setShowNotification] = useState(true);
-  const [notificationClicked, setNotificationClicked] = useState(false);
 
   const handleClick = () => {
     setShowLength(false);

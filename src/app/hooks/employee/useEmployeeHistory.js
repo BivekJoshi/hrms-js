@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { addEmployeeHistory, deleteEmployeeHistory, getEmployeeHistoryById } from "../../api/employeeHistory/employeeHistory";
+import { addEmployeeHistory, deleteEmployeeHistory, editEmployeeHistory, getEmployeeHistoryById } from "../../api/employeeHistory/employeeHistory";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -19,7 +19,7 @@ export const useAddEmployeeHistory = ({ onSuccess }) => {
         (formData) => addEmployeeHistory(formData, id),
         {
             onSuccess: (data, variables, context) => {
-                toast.success('Successfully added family History');
+                toast.success('Successfully added Employee History');
                 onSuccess && onSuccess(data, variables, context);
                 queryClient.invalidateQueries('getEmployeeHistoryById');
             },
@@ -30,7 +30,7 @@ export const useAddEmployeeHistory = ({ onSuccess }) => {
 };
 
 {/*________________________DELETE_____________________________________*/ }
-export const useDeleteFamily = ({ onSuccess }) => {
+export const useDeleteHistory = ({ onSuccess }) => {
     const queryClient = useQueryClient();
     return useMutation(['deleteEmployeeHistory'],
         (employeeHistoryId) => deleteEmployeeHistory(employeeHistoryId),
@@ -42,6 +42,26 @@ export const useDeleteFamily = ({ onSuccess }) => {
             },
             onError: (err, _variables, _context) => {
                 toast.error(`Error: ${err.message}`);
+            },
+        }
+    );
+};
+
+{/*________________________EDIT_____________________________________*/ }
+export const useEditEmployeeHistory = ({ onSuccess }) => {
+    const queryClient = useQueryClient();
+    const { id } = useParams();
+    return useMutation(['editEmployeeHistory'], (formData) => {
+        editEmployeeHistory(formData, id);
+    },
+        {
+            onSuccess: (data, variables, context) => {
+                toast.success('Employee History edited sucessfully');
+                onSuccess && onSuccess(data, variables, context);
+                queryClient.invalidateQueries('useGetEmployeeHistoryById');
+            },
+            onError: (err, _variables, _context) => {
+                toast.error(`error: ${err.message}`);
             },
         }
     );
