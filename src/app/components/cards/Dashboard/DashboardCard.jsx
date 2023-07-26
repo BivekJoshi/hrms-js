@@ -6,8 +6,8 @@ const DashboardCard = ({ title, icon }) => {
   return (
     <Grid item xs={12} sm={6} md={3} lg={2}>
 
-      <MainCard grow={true}>
-        <Stack spacing={0.5}>
+      <MainCard grow={true} >
+        <Stack spacing={0.5} padding="1rem 0">
           <Typography variant="h6" color="primary.main" align='center'>
             {icon}
           </Typography>

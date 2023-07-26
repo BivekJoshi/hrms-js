@@ -1,5 +1,6 @@
 import React from "react";
 import { useParams } from "react-router";
+import { toast } from "react-toastify";
 
 import EmployeeAddressDetailForm from "../../EmployeeAddressDetailForm/EmployeeAddressDetailForm";
 import EmployeeBankDetailForm from "../../EmployeeBankDetailForm/EmployeeBankDetailForm";
@@ -17,9 +18,7 @@ import { usePermanentAddressForm } from "../../../../../hooks/employee/AddAddres
 import useAddBankForm from "../../../../../hooks/employee/AddBankForm/useAddBankForm";
 import useAddDocumentForm from "../../../../../hooks/employee/AddDocument/useAddDocumentForm";
 import { useGetEmployeeById } from "../../../../../hooks/employee/useEmployee";
-import { toast } from "react-toastify";
-import { useAddEmployeeHistory } from "../../../../../hooks/employee/useEmployeeHistory";
-
+import useEmployeeHistoryForm from "../../../../../hooks/employee/AddEmployeeHistory/useEmployeeHistoryForm";
 
 
 const EditEmployeeForm = () => {
@@ -50,7 +49,7 @@ const EditEmployeeForm = () => {
 
   const { formik: documentFormik } = useAddDocumentForm({ data, employeeLoading, });
 
-  const { formik: employeeHistoryFormik } = useAddEmployeeHistory({ data, employeeLoading, });
+  const { formik: employeeHistoryFormik } = useEmployeeHistoryForm({ data, employeeLoading, });
 
   const getStepContent = (step) => {
     switch (step) {
@@ -97,7 +96,7 @@ const EditEmployeeForm = () => {
       case 5:
         return (
           <EmployeeHistoryDetailForm
-            formik={bankFormik}
+            formik={employeeHistoryFormik}
           />
         );
 
@@ -188,6 +187,12 @@ const EditEmployeeForm = () => {
         }
         break;
 
+      case 6:
+        documentFormik.setFieldTouched('');
+        if (documentFormik.dirty) {
+          documentFormik.handleSubmit();
+        }
+
       default:
         break;
     }
@@ -197,5 +202,3 @@ const EditEmployeeForm = () => {
 };
 
 export default EditEmployeeForm;
-
-

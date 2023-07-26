@@ -65,11 +65,6 @@ const ForgotPassword = Loadable(lazy(() =>
 
 const routes = [
   {
-    path: "user/forgot-password",
-    id: nanoid(),
-    component: <ForgotPassword />,
-  },
-  {
     path: "dashboard",
     id: nanoid(),
     component: <Dashboard />,

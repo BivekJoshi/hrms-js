@@ -53,6 +53,13 @@ const Holiday = () => {
     }
   }, [holidayData, dispatch]);
 
+  const dayCellContentHandler = (arg) => {
+    const eventDates = events.map((event) => event.date);
+    if (eventDates.includes(arg.dateStr)) {
+      arg.dayEl.classList.add("highlight-day");
+    }
+  };
+
   return (
     <>
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
