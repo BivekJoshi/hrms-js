@@ -7,13 +7,16 @@ import { useGetEvent } from "../../hooks/event/useEvent";
  const Notification = ({data}) => {
   const { data: events } = useGetEvent();
   const { data: holidays, isLoading, isError } = useGetHolidayCurrent();
-  const todayBirthday = data;
+
 
 
   const todayDate = new Date().toISOString().split("T")[0];
   const todayHoliday = holidays?.filter((event) => event?.holidayDate === todayDate);
   const todayEvent = events?.filter((event) => event?.eventDate === todayDate);
+  const todayBirthday = data;
 
+  const notificationNumber = (todayEvent?.length ?? 0) + (todayHoliday?.length ?? 0) + (todayBirthday?.length ?? 0);
+  
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
