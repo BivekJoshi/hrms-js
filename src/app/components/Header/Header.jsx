@@ -13,6 +13,8 @@ import {
   useGetUpcomingBirthday,
   useRemoveNotification,
 } from "../../hooks/birthday/useBirthday";
+import Notification from "../../pages/Notification/Notification";
+import Profile from "../../pages/Auth/Profile/Profile";
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -44,11 +46,14 @@ export default function Header({ open, handleDrawerOpen }) {
   const thisDay = today.getDate();
 
   const thisDayBirthdays = upcomingBirthdayData
-  ? upcomingBirthdayData
-      .filter((employee) => {
+    ? upcomingBirthdayData.filter((employee) => {
         const dateOfBirth = new Date(employee.dateOfBirth);
-        return (dateOfBirth.getMonth() === thisMonth && dateOfBirth.getDate() === thisDay);
-      }) : [];
+        return (
+          dateOfBirth.getMonth() === thisMonth &&
+          dateOfBirth.getDate() === thisDay
+        );
+      })
+    : [];
 
   const [openNotification, setOpenNotification] = useState(false);
   const isLoading = false;
@@ -76,43 +81,17 @@ export default function Header({ open, handleDrawerOpen }) {
         >
           <MenuIcon />
         </IconButton>
-        <Typography variant="h6" noWrap component="div">
-          Human Resource Management System
-        </Typography>
-        <div
-          style={{
-            Color: "white",
-            display: "flex",
-            position: "absolute",
-            right: "100px",
-            top: "30px",
-            width: "30px",
-          }}
-        >
-          <Badge
-            color="success"
-            onClick={handleClick}
-            badgeContent={showLength ? thisDayBirthdays.length : null}
-          >
-            <CakeOutlined
-              id="basic-button"
-              aria-controls={open ? "basic-menu" : undefined}
-              aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}
-              onClick={handleChange}
-              style={{ color: "white", cursor: "pointer" }}
-            />
-            
-          </Badge>
-            {openNotification && (
-              <TodayBirthday
-                data={thisDayBirthdays}
-                isLoading={isLoading}
-                open={openNotification}
-                setOpen={setOpenNotification}
-              />
-            )}
-        </div>
+        <Stack sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Typography variant="h6" noWrap>
+            Human Resource Management System
+          </Typography>
+          <Stack>
+            <Typography>
+              <Notification data={thisDayBirthdays} />
+            </Typography>
+            <Typography><Profile /></Typography>
+          </Stack>
+        </Stack>
       </Toolbar>
     </AppBar>
   );

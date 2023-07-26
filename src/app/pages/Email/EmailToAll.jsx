@@ -12,9 +12,9 @@ import {
 } from "@mui/material";
 import { useGetEmployee } from "../../hooks/employee/useEmployee";
 
-const EmailToAll = ({ open, onClose, eventId }) => {
+const EmailToAll = ({ open, onClose, eventId, }) => {
   const { data: employeeData } = useGetEmployee();
-  const [employeeId, setEmployeeId] = useState([]);
+  const [employeeId, setEmployeeId] = useState("employee");
   const [emailData, setEmailData] = useState({ subject: "", message: "" });
   const [errors, setErrors] = useState({ subject: false, message: false });
 
@@ -42,11 +42,17 @@ const EmailToAll = ({ open, onClose, eventId }) => {
   };
 
   const handleChange = (event) => {
+    const newEmployeeId = event.target.value;
+  setEmployeeId(newEmployeeId);
     const { value } = event.target;
-    if (value === "all") {
+    if (value === "employee") {
       const allEmployeeId = employeeData.map((employee) => employee.id);
       setEmployeeId(allEmployeeId);
-    } else {
+    } else if (value === "admin") {
+      setEmployeeId(value);
+    } else if (value === "hr") {
+      setEmployeeId(value);
+    } else if (value === "superadmin") {
       setEmployeeId(value);
     }
   };
@@ -71,14 +77,16 @@ const EmailToAll = ({ open, onClose, eventId }) => {
                   <Select
                     sx={{ m: 1, width: 300 }}
                     labelId="demo-multiple-name-label"
-                    id="employeeId"
+                    id="email-multiple"
                     select
                     value={employeeId}
                     onChange={handleChange}
                     input={<OutlinedInput label="To" />}
                   >
-                    <MenuItem value="all">All Employees</MenuItem>
-                    <MenuItem value="none">None</MenuItem>
+                    <MenuItem value="employee">All Employees</MenuItem>
+                    <MenuItem value="admin">All Admin</MenuItem>
+                    <MenuItem value="hr">All HR</MenuItem>
+                    <MenuItem value="superadmin">Super Admin</MenuItem>
                   </Select>
                 </Grid>
               </Grid>

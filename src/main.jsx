@@ -5,6 +5,8 @@ import "./index.css";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ThemeContextProvider } from "./theme/ThemeModeContext.jsx";
 import ErrorBoundary from "./app/utils/ErrorBoundary.jsx";
+import { Provider } from "react-redux";
+import store from "./store.js";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -14,6 +16,7 @@ const queryClient = new QueryClient({
 });
 
 ReactDOM.createRoot(document.getElementById("root")).render(
+  <Provider store={store}>
   <React.StrictMode>
     <ErrorBoundary>
       <QueryClientProvider client={queryClient}>
@@ -23,4 +26,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       </QueryClientProvider>
     </ErrorBoundary>
   </React.StrictMode>
+  </Provider>
 );

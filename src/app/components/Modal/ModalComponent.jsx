@@ -33,7 +33,7 @@ const ModalComponent = ({ open, handleProceed, onClose, data }) => {
     <div>
         <Modal
         open={open}
-        onClose={() => onClose()}
+        onClose={onClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -50,7 +50,7 @@ const ModalComponent = ({ open, handleProceed, onClose, data }) => {
               </Button>
               <Button
                 variant="contained"
-                onClick={() => onClose() }
+                onClick={onClose}
                 sx={{ mt: 3, ml: 1 }}
                 color="error"
               >
