@@ -1,6 +1,5 @@
 import React from "react";
 import { PieChart, Pie, Cell, Legend } from "recharts";
-import { useGetDashboard } from "../../hooks/dashboard/useDashboard";
 import { Box } from "@mui/material";
 import "./Style/Style.css"
 

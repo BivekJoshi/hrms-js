@@ -21,7 +21,7 @@ const Dashboard = () => {
   const { data: projectData } = useGetProject();
 
   return (
-    <Box sx={{ display: "grid", gridTemplateRows: "1fr", rowGap: "2rem" }}>
+    <Box sx={{ display: "grid", gridTemplateRows: "1fr", rowGap: "3rem" }}>
       <Stack flexDirection="row" gap="1rem" alignItems="center">
         <h3>DASHBORD</h3> <AiFillHome />
       </Stack>
@@ -66,10 +66,12 @@ const Dashboard = () => {
         style={{
           display: "grid",
           gridTemplateRows: "1fr",
+          rowGap:"3rem"
         }}
-      >
+      ><Box>
         <h3>Project Information</h3>
         <ProjectProgressCard projectDataCount={projectDataCount} />
+      </Box>
 
         <Box sx={{ height: "350px", overflowY: "scroll" }}>
           <h3>Our Projects</h3>
