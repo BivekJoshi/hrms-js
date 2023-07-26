@@ -48,14 +48,24 @@ ChartJS.register(
   ArcElement,
 );
 
-const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
-  height: 16,
-  borderRadius: 18,
-  [`&.${linearProgressClasses.colorPrimary}`]: {
-    backgroundColor:
-      theme.palette.grey[theme.palette.mode === "light" ? 200 : 800],
-  },
-}));
+const BorderLinearProgress = ({ color, ...props }) => {
+  return (
+    <LinearProgress
+      {...props}
+      variant="determinate"
+      style={{
+        height: 16,
+        borderRadius: 18,
+        backgroundColor: 'grey',
+      }}
+      sx={{
+        '& .MuiLinearProgress-bar': {
+          backgroundColor: color || 'blue',
+        },
+      }}
+    />
+  );
+};
 
 
 
@@ -71,7 +81,6 @@ const Dashboard = () => {
         position: "top",
       },
       title: {
-        display: true,
         text: "Dashboard Bar Chart",
       },
     },
@@ -91,28 +100,28 @@ const Dashboard = () => {
   };
 
   const labels = [
-    "allEmployees",
-    "newEmployees",
-    "maleEmployees",
-    "femaleEmployees",
-    "allProjects",
+    "All Employees",
+    "New Employees",
+    "Male Employees",
+    "Female Employees",
+    "All Projects",
   ];
 
 
 
-  const barChartData = {
-    labels,
-    datasets: [
-      {
-        label: "Dataset 1",
-        data: dashboardData,
-        backgroundColor: ["yellowgreen", "red", "green", "blue", "pink"],
-      },
-    ],
-  };
+  // const barChartData = {
+  //   labels,
+  //   datasets: [
+  //     {
+  //       label: "Dataset 1",
+  //       data: dashboardData,
+  //       backgroundColor: ["yellowgreen", "red", "green", "blue", "pink"],
+  //     },
+  //   ],
+  // };
 
   const data = {
-    labels,
+     labels,
     datasets: [
       {
         labels: "Data Pie Chart",
@@ -150,7 +159,7 @@ const Dashboard = () => {
 
       <Stack sx={{ display: "flex", flexDirection: "row", gap: "1rem" }}>
         <Card sx={{ width: "600px" }}>
-          <Bar options={barChartOptions} data={barChartData} />
+          <Bar options={barChartOptions} data={data} />
         </Card>
         <Card sx={{ width: "400px" }}>
           <Pie options={pieChartOptions} data={data} />
@@ -185,6 +194,7 @@ const Dashboard = () => {
             <BorderLinearProgress
               variant="determinate"
               value={(projectDataCount?.total / projectDataCount?.total) * 100}
+              color="red"
             />
 
             <Stack sx={{ display: "flex", justifyContent: "space-between" }}>
@@ -196,6 +206,7 @@ const Dashboard = () => {
             <BorderLinearProgress
               variant="determinate"
               value={(projectDataCount?.completed / projectDataCount?.total) * 100}
+              color="orange"
             />
 
             <Stack sx={{ display: "flex", justifyContent: "space-between" }}>
@@ -207,6 +218,7 @@ const Dashboard = () => {
             <BorderLinearProgress
               variant="determinate"
               value={(projectDataCount?.pending / projectDataCount?.total) * 100}
+              color="orange"
             />
 
             <Stack sx={{ display: "flex", justifyContent: "space-between" }}>

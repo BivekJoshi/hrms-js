@@ -18,13 +18,13 @@ const CompanyTableView = ({ companyData, isLoading, handleEditCompany, handleDel
             title: 'Company Name',
             field: 'companyName',
             emptyValue: '-',
-            width: 300,
+            width: 80,
         },
         {
             title: 'Company Type',
             field: 'companyType',
             emptyValue: '-',
-            width: 340,
+            width: 200,
         },
         {
             title: 'Description',

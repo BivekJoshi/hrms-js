@@ -1,5 +1,7 @@
 import { Box, Button, Grid } from "@mui/material";
 import React, { useState, useRef, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setTodayHoliday, addHoliday } from "../../../Redux/Slice/holidaySlice";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
@@ -7,12 +9,15 @@ import interactionPlugin from "@fullcalendar/interaction";
 import { useGetHoliday } from "../../hooks/holiday/useHoliday";
 import { AddHolidayModal, OpenHoliday } from "./HolidayModal/HolidayModal";
 import CurrentHoliday from "./CurrentHoliday";
-import "./Style/Style.css";
 
 const Holiday = () => {
+  const dispatch = useDispatch();
   const { data: holidayData } = useGetHoliday();
 
   const [getID, setGetID] = useState({});
+
+  const holidays = useSelector((state) => state.holiday.holidays);
+  const todayHoliday = useSelector((state) => state.holiday.todayHoliday);
 
   const handleOpenModal = (e) => {
     setGetID(e?.event?._def?.publicId);
@@ -38,15 +43,15 @@ const Holiday = () => {
         id: event.id,
       }));
       setEvents(formattedEvents);
-    }
-  }, [holidayData]);
 
-  const dayCellContentHandler = (arg) => {
-    const eventDates = events.map((event) => event.date);
-    if (eventDates.includes(arg.dateStr)) {
-      arg.dayEl.classList.add("highlight-day");
+      // Check if there's a holiday today and update the state accordingly
+      const today = new Date().toISOString().split("T")[0];
+      const todayEvents = formattedEvents.filter((event) => event.date === today);
+      const isTodayHoliday = todayEvents.length > 0;
+      dispatch(setTodayHoliday(isTodayHoliday));
+      dispatch(addHoliday(todayEvents));
     }
-  };
+  }, [holidayData, dispatch]);
 
   return (
     <>
@@ -76,7 +81,8 @@ const Holiday = () => {
             }}
             eventClick={handleOpenModal}
             height={"90vh"}
-            events={events}s
+            events={events}
+            
           />
         </Grid>
       </Grid>
@@ -100,15 +106,3 @@ const Holiday = () => {
 };
 
 export default Holiday;
-
-// a custom render function
-function renderEventContent(eventInfo) {
-  return (
-    <Box border={"none"}>
-      <li style={{ fontWeight: 600, fontSize: "1rem", marginLeft: ".5rem" }}>
-        {eventInfo.event.title}
-      </li>
-      {/* <DeleteIcon sx={{width:"2rem"}}/> */}
-    </Box>
-  );
-}

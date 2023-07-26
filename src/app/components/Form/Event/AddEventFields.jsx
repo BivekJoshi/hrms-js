@@ -8,12 +8,10 @@ import ModalComponent from "../../Modal/ModalComponent";
 const AddEventFields = ({ onClose, isLoading }) => {
   const { formik, data } = useAddEventForm();
 
-  const [openEmail, setOpenEmail] = useState(false);
-  const [openSubmitModal, setOpenSubmitModal] = useState(false);
   const [showInitialView, setShowInitialView] = useState(true);
+  const [openSubmitModal, setOpenSubmitModal] = useState(false);
 
   const handleProceed = () => {
-    setOpenEmail(true);
     setOpenSubmitModal(false);
   };
 
@@ -25,7 +23,7 @@ const AddEventFields = ({ onClose, isLoading }) => {
   const handleFormSubmit = async () => {
     formik.handleSubmit();
 
-    if (formik.isValid) {
+    if (!formik.isValidating && formik.isValid) {
       setOpenSubmitModal(true);
     } else {
       toast.error("Please make sure you have filled the form correctly");
@@ -163,7 +161,7 @@ const AddEventFields = ({ onClose, isLoading }) => {
       <ModalComponent
         open={openSubmitModal}
         handleProceed={handleProceed}
-        onClose={onClose}
+        onClose={handleCloseEmailform}
         data={data}
       />
     </>
