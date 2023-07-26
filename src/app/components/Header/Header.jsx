@@ -14,6 +14,7 @@ import {
   useRemoveNotification,
 } from "../../hooks/birthday/useBirthday";
 import Notification from "../../pages/Notification/Notification";
+import Profile from "../../pages/Auth/Profile/Profile";
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -88,7 +89,7 @@ export default function Header({ open, handleDrawerOpen }) {
             <Typography>
               <Notification data={thisDayBirthdays} />
             </Typography>
-            <Typography>profile</Typography>
+            <Typography><Profile /></Typography>
           </Stack>
         </Stack>
       </Toolbar>

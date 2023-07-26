@@ -59,8 +59,8 @@ const Leave = Loadable(lazy(() =>
 const EditEmployee = Loadable(lazy(() =>
   import("../app/pages/Employee/AddEmployee/EditEmployee")
 ));
-const ForgotPassword = Loadable(lazy(() =>
-  import("../app/pages/Auth/FogotPassword/ForgotPassword")
+const ResetPassword = Loadable(lazy(() =>
+  import("../app/pages/Auth/ResetPassword/ResetPassword")
 ));
 
 const routes = [
@@ -154,6 +154,11 @@ const routes = [
     id: nanoid(),
     component: <Holiday />,
   },
+  {
+    path: "reset-password",
+    id: nanoid(),
+    component: <ResetPassword />,
+  }
 ];
 
 export { routes };
