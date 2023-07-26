@@ -22,8 +22,6 @@ function getDate() {
 const AttendenceInfo = () => {
   const { id } = useParams();
   const { data: attendanceData } = useGetEmployeeAttendanceById(id);
-  // const { ...title } = attendanceData;
-  console.log(attendanceData);
 
   const calendarRef = useRef(null);
 
@@ -66,7 +64,6 @@ const AttendenceInfo = () => {
 export default AttendenceInfo;
 
 function renderEventContent(eventInfo) {
-  console.log(eventInfo.event.date);
   return (
     <Box className="attendanceHover">
       <Box border={"none"} textAlign="center" >

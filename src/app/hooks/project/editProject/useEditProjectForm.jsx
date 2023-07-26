@@ -3,7 +3,7 @@ import { useEditProject } from "../useProject";
 import { useFormik } from "formik";
 import { ProjectSchema } from "../validation/ProjectSchema";
 
-const useEditProjectForm = (data) => {
+const  useEditProjectForm = (data) => {
   const { mutate } = useEditProject({});
 
   const formik = useFormik({

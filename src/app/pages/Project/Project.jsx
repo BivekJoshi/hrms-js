@@ -84,13 +84,7 @@ const Project = () => {
             <Card sx={{ padding: 1 }} >
               <Grid container spacing={3}>
                 <Grid item xs={12} sm={12} md={4}>
-                  {/* <TextField
-                    label="Filter by Project Name"
-                    value={nameFilter}
-                    onChange={(e) => setNameFilter(e.target.value)}
-                    fullWidth
-                  /> */}
-                  <FilterProject data={projectData} />
+                  <FilterProject data={currentPosts} />
                 </Grid>
               </Grid>
             </Card>

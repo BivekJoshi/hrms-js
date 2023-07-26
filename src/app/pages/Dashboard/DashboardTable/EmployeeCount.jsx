@@ -41,4 +41,4 @@ const EmployeeCount = () => {
     )
 }
 
-export default EmployeeCount
+export default EmployeeCount;
