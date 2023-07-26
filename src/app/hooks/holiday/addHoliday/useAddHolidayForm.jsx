@@ -4,7 +4,7 @@ import { HolidaySchema } from '../Validation/HolidaySchema';
 
 
 const useAddHolidayForm = () => {
-    const { mutate } = useAddHoliday({});
+    const { mutate, data } = useAddHoliday({});
 
     const formik = useFormik({
         initialValues: {
@@ -25,7 +25,7 @@ const useAddHolidayForm = () => {
         mutate(values, formik, { onSuccess: () => formik.handleReset() });
     };
 
-    return { formik };
+    return { formik, data };
 };
 
 export default useAddHolidayForm;

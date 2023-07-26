@@ -202,5 +202,3 @@ const EditEmployeeForm = () => {
 };
 
 export default EditEmployeeForm;
-
-

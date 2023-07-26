@@ -22,11 +22,11 @@ const CompanyGridView = ({ companyData, isLoading, handleEditCompany, handleDele
         gap={2}
         sx={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+          gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))",
         }}
       >
         {companyData.map((item, index) => (
-          <Card key={index}>
+          <Card key={index} sx={{border: "2px solid gray"}}>
             <CardHeader
               sx={{
                 textAlign: "center",
@@ -35,7 +35,7 @@ const CompanyGridView = ({ companyData, isLoading, handleEditCompany, handleDele
               }}
               title={item?.companyName}
             />
-            <CardContent sx={{ display: "flex", flexDirection: "column", gap: "1rem", overflow: "auto", height: "5rem" }}>
+            <CardContent sx={{ display: "flex", flexDirection: "column", gap: "1rem", minHeight: "12rem" }}>
               <Typography variant="h5">{item?.companyType || null}</Typography>
               <Typography variant="p">{item?.companyDescription || null}</Typography>
             </CardContent>

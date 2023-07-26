@@ -19,7 +19,6 @@ const Dashboard = () => {
   const { data: dashboardData } = useGetDashboard();
   const { data: projectDataCount } = useGetProjectCount();
   const { data: projectData } = useGetProject();
-
   return (
     <Box sx={{ display: "grid", gridTemplateRows: "1fr", rowGap: "3rem" }}>
       <Stack flexDirection="row" gap="1rem" alignItems="center">

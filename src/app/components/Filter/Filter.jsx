@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 
-export const FilterProject = ({ data, handleProjectFilter }) => {
+export const FilterProject = ({ data }) => {
   return (
     <>
         <Autocomplete
@@ -11,7 +11,7 @@ export const FilterProject = ({ data, handleProjectFilter }) => {
           options={data}
           autoHighlight
           getOptionLabel={(option) => option.projectName}
-          onChange={(event, value) =>(value?.projectName || "")}
+          onChange={(event, value) => (value?.projectName || "")}
           renderOption={(props, option) => (
             <Box component="li" {...props}>
               {option.projectName}
