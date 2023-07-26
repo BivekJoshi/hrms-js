@@ -72,9 +72,11 @@ const Dashboard = () => {
         <ProjectProgressCard projectDataCount={projectDataCount} />
       </Box>
 
-        <Box sx={{ height: "350px", overflowY: "scroll" }}>
+        <Box >
           <h3>Our Projects</h3>
-         <ProjectTable projectData={projectData}/>
+          {/* <Box sx={{ height: "350px", overflowY: "scroll" }}> */}
+          <ProjectTable projectData={projectData}/>
+          {/* </Box> */}
         </Box>
       </Box>
     </Box>
