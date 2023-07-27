@@ -71,7 +71,7 @@ export const ProjectProgressCard = ({ projectDataCount }) => {
           </Stack>
           <BorderLinearProgress
             variant="determinate"
-            value={(projectDataCount?.pending / projectDataCount?.total) * 100}
+            value={(projectDataCount?.completed / projectDataCount?.total) * 100}
             // color="#e8c315 "
           />
         </Box>
