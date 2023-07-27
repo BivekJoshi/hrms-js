@@ -1,65 +1,80 @@
-import {
-  Box,
-  LinearProgress,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from "@mui/material";
+import { Box, Stack, Button, LinearProgress } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
+import MaterialTable from "@material-table/core";
 import React from "react";
 
 export const ProjectTable = ({ projectData }) => {
-  
-  function createData(name, calories, fat, carbs, protein) {
-    return { name, calories, fat, carbs, protein };
-  }
-
-  const rows = [
-    createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-    createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-    createData("Eclair", 262, 16.0, 24, 6.0),
-    createData("Cupcake", 305, 3.7, 67, 4.3),
-    createData("Gingerbread", 356, 16.0, 49, 3.9),
+  const columns = [
+    {
+      title: "SN",
+      render: (rowData) => rowData.tableData.index + 1,
+      width: 80,
+      sortable: false,
+    },
+    {
+      title: "Project Name",
+      field: "projectName",
+      emptyValue: "-",
+      width: 100,
+    },
+    {
+      title: "Started",
+      field: "startDate",
+      emptyValue: "-",
+      width: 100,
+    },
+    {
+      title: "Progress",
+      render: (rowData) => (<LinearProgress variant="determinate" value={50} />),
+      width: 200,
+    },
+    {
+      title: "Actions",
+      render: (rowData) => (
+        <Stack direction="row" spacing={0}>
+          <Button
+            color="primary"
+            onClick={() => handleEditDesignation(rowData)}
+          >
+            <ModeEditOutlineIcon />
+          </Button>
+          <Button
+            color="primary"
+            onClick={() => handleDeleteDesignation(rowData)}
+          >
+            <DeleteIcon />
+          </Button>
+        </Stack>
+      ),
+      sorting: false,
+      width: 120,
+    },
   ];
   return (
     <>
-      <Box className="tableStyle">
-        {/* {projectData &&
-          projectData.map((item, index) => (
-            <Box key={index}>{item?.projectName}</Box>
-          ))} */}
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-            <TableHead>
-              <TableRow>
-                <TableCell>Dessert (100g serving)</TableCell>
-                <TableCell align="right">Calories</TableCell>
-                <TableCell align="right">Fat&nbsp;(g)</TableCell>
-                <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-                <TableCell align="right">Protein&nbsp;(g)</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows.map((row) => (
-                <TableRow
-                  key={row.name}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell component="th" scope="row">
-                    {row.name}
-                  </TableCell>
-                  <TableCell align="right">{row.calories}</TableCell>
-                  <TableCell align="right">{row.fat}</TableCell>
-                  <TableCell align="right">{row.carbs}</TableCell>
-                  <TableCell align="right">{row.protein}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+      <Box>
+        <MaterialTable
+          columns={columns}
+          data={projectData}
+          title="Recent Projects"
+          options={{
+            padding: "dense",
+            margin: 50,
+            pageSize: 10,
+            emptyRowsWhenPaging: false,
+            headerStyle: {
+              backgroundColor: "#01579b",
+              color: "#FFF",
+              fontSize: 20,
+              padding: "dense",
+              height: 50,
+            },
+            rowStyle: {
+              fontSize: 18,
+            },
+          }}
+        />
       </Box>
     </>
   );

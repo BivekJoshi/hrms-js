@@ -4,6 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Breadcrumbs, Typography } from "@mui/material";
 import Loadable from "../app/components/Header/Loader/Loadable";
 import CustomBreadcrumb from "../theme/overrides/CustomBreadcrumb";
+import ProfileDetail from "../app/pages/Auth/Profile/ProfileDetail";
 
 const EmployeeProfile = Loadable(lazy(() =>
   import("../app/pages/Employee/EmployeeViewPage/EmployProfile/EmployeeProfile")
@@ -158,7 +159,12 @@ const routes = [
     path: "reset-password",
     id: nanoid(),
     component: <ResetPassword />,
-  }
+  },
+  {
+    path: "profile",
+    id: nanoid(),
+    component: <ProfileDetail />,
+  },
 ];
 
 export { routes };
