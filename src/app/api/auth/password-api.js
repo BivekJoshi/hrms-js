@@ -1,5 +1,11 @@
 import { axiosInstance } from "../../../auth/axiosInterceptor";
 
+{/*____________________________GET-LOGGED-IN-USER____________________________________________*/}
+export const getLoggedInUser = async () => {
+    const data = await axiosInstance.get(`/public/logged-in/user-details`);
+    return data;
+};
+
 {/*____________________________GET____________________________________________*/}
 export const getUserById = async (id) => {
     const data = await axiosInstance.get(`/user/${id}`);
@@ -14,6 +20,7 @@ export const addforgotPassword = async (formData) => {
 
 {/*____________________________PUT____________________________________________*/}
 export const addResetPassword = async (formData) => {
+    console.log(formData)
     const {id} = formData;
     const data = await axiosInstance.put(`/user/reset-password/${id}`, formData);
     return data;
