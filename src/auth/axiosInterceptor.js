@@ -1,14 +1,16 @@
 import Axios from "axios";
-
 import { toast } from "react-toastify";
 import { getUser } from "../app/utils/cookieHelper";
 
 export const axiosInstance = Axios.create({
-
   // baseURL: 'http://localhost:8484/hrms/api/',
   // baseURL: 'http://10.14.15.233:8484/hrms/api/',
-  // baseURL: 'http://10.14.14.146:8484/hrms/api/',
-  baseURL: "http://10.14.15.218:8484/hrms/api/",
+  // baseURL: 'http://10.14.14.146:8083/hrms/api/',
+   baseURL: "http://10.14.15.156:8083/hrms/api/",
+  // baseURL: "http://10.14.14.198:8484/hrms/api/",
+  // baseURL: 'http://103.94.159.144:8083/hrms/api/',
+  // baseURL: "http://10.14.15.218:8484/hrms/api/",
+
   timeout: 20000,
 });
 

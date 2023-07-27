@@ -9,22 +9,23 @@ import MaterialTable from "@material-table/core";
 import { useGetEmployee } from "../../../hooks/employee/useEmployee";
 import { Box, Button, Grid, Stack } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import DeleteConfirmationModal from '../../../components/Modal/DeleteConfirmationModal';
-import { AddProjectEmployeeModal } from "../ProjectEmployee/ProjectEmployeeModal/ProjectEmployeeModal";
+import DeleteConfirmationModal from "../../../components/Modal/DeleteConfirmationModal";
+import { AddProjectEmployeeModal, EditProjectEmployeeModal } from "../ProjectEmployee/ProjectEmployeeModal/ProjectEmployeeModal";
 import { useGetProject } from "../../../hooks/project/useProject";
-
+import EditIcon from "@mui/icons-material/Edit";
 
 const ProjectDetail = () => {
   const { id } = useParams();
-  const { data: projectEmployeeData, isLoading } = useGetProjectEmployeeById(id);
+  const { data: projectEmployeeData, isLoading } =
+    useGetProjectEmployeeById(id);
   const { data: employeeData } = useGetEmployee();
   const { data: projectData } = useGetProject();
 
-	const [openAddModal, setOpenAddModal] = useState(false);
+  const [openAddModal, setOpenAddModal] = useState(false);
 
   const handleAddOpenModal = () => setOpenAddModal(true);
   const handleCloseAddModal = () => setOpenAddModal(false);
-	const [openDeleteModal, setOpenDeleteModal] = useState(false);
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const handleCloseEditModal = () => setOpenEditModal(false);
   const handleCloseDeleteModal = () => setOpenDeleteModal(false);
 
@@ -42,6 +43,13 @@ const ProjectDetail = () => {
     const project = projectData?.find((prj) => prj.id == projectId);
     const name = `${project?.projectName}`;
     return name;
+  };
+
+  const [openEditModal, setOpenEditModal] = useState(false);
+  const [editedEmployee, setEditedEmployee] = useState({});
+  const handleEditProjectEmployee = (rowData) => {
+    setEditedEmployee(rowData);
+    setOpenEditModal(true);
   };
 
   const deleteProjectEmployeeMutation = useDeleteProjectEmployee({});
@@ -63,6 +71,13 @@ const ProjectDetail = () => {
       sortable: false,
     },
     {
+      title: "Employee Name",
+      render: (rowData) => {
+        return <p>{getEmployeeName(rowData)}</p>;
+      },
+      width: 80,
+    },
+    {
       title: "Assigned On",
       field: "assignedOn",
       emptyValue: "-",
@@ -72,13 +87,6 @@ const ProjectDetail = () => {
       title: "Deassigned On",
       field: "deAssignedOn",
       emptyValue: "-",
-      width: 80,
-    },
-    {
-      title: "Employee Name",
-      render: (rowData) => {
-        return <p>{getEmployeeName(rowData)}</p>;
-      },
       width: 80,
     },
     {
@@ -99,6 +107,9 @@ const ProjectDetail = () => {
       title: "Actions",
       render: (rowData) => (
         <Stack direction="row" spacing={0}>
+          {/* <Button color="primary" onClick={() => handleEditProjectEmployee(rowData)}>
+            <EditIcon />
+          </Button> */}
           <Button
             color="primary"
             onClick={() => handleDeleteProjectEmployee(rowData)}
@@ -155,11 +166,19 @@ const ProjectDetail = () => {
         }}
       />
       {openAddModal && (
-				<AddProjectEmployeeModal
-					open={openAddModal}
-					handleCloseModal={handleCloseAddModal}
-				/>
-			)}
+        <AddProjectEmployeeModal
+          open={openAddModal}
+          handleCloseModal={handleCloseAddModal}
+        />
+      )}
+      
+      {openEditModal && (
+        <EditProjectEmployeeModal
+          id={editedEmployee?.id}
+          open={openEditModal}
+          handleCloseModal={handleCloseEditModal}
+        />
+      )}
       {openDeleteModal && (
         <DeleteConfirmationModal
           open={openDeleteModal}

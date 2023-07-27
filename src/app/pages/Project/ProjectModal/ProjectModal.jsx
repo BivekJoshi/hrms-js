@@ -1,13 +1,12 @@
 import React from 'react';
 import FormModal from "../../../components/Modal/FormModal"
 import AddProjectFields from "../../../components/Form/Project/AddProjectFields";
-import AddProjectActiveFields from "../../../components/Form/Project/AddProjectActiveFields";
 import EditProjectFields from '../../../components/Form/Project/EditProjectFields';
-import { useGetDeactivatedProject, useGetProjectById } from '../../../hooks/project/useProject';
-import {EditProjectDeactivateFields, EditProjectActivateFields} from '../../../components/Form/Project/EditProjectDeactivateFields';
+import { useGetProjectById } from '../../../hooks/project/useProject';
+import { EditProjectDeactivateFields, EditProjectActivateFields } from '../../../components/Form/Project/EditProjectDeactivateFields';
 
-export const AddProjectModal = ({open, handleCloseModal}) => {
-    return(
+export const AddProjectModal = ({ open, handleCloseModal }) => {
+    return (
         <FormModal
             open={open}
             onClose={handleCloseModal}
@@ -30,8 +29,8 @@ export const EditProjectModal = ({ open, handleCloseModal, id }) => {
 }
 
 
-export const AddProjectActiveModal = ({open, handleCloseModal, id}) => {
-    return(
+export const AddProjectActiveModal = ({ open, handleCloseModal, id }) => {
+    return (
         <FormModal
             open={open}
             onClose={handleCloseModal}

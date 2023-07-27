@@ -14,11 +14,13 @@
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@fontsource/roboto": "^5.0.2",
+    "@fullcalendar/core": "^6.1.8",
     "@fullcalendar/daygrid": "^6.1.8",
     "@fullcalendar/interaction": "^6.1.8",
     "@fullcalendar/react": "^6.1.8",
     "@fullcalendar/timegrid": "^6.1.8",
     "@material-table/core": "^6.1.17",
+    "@material-ui/icons": "^4.11.3",
     "@mui/icons-material": "^5.11.16",
     "@mui/lab": "^5.0.0-alpha.132",
     "@mui/material": "^5.13.4",
@@ -35,10 +37,13 @@
     "focus-formik-error": "^1.1.0",
     "formik": "^2.2.9",
     "js-cookie": "^3.0.1",
+    "material-table": "^2.0.5",
     "nanoid": "^4.0.2",
+    "npm": "^9.8.0",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
+    "react-icons": "^4.10.1",
     "react-query": "^3.39.2",
     "react-redux": "^8.1.0",
     "react-router-dom": "^6.11.2",
@@ -56,11 +61,10 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.3.4",
-    "sass": "^1.62.1",
     "vite": "^4.3.9"
   },
   "engines": {
     "npm": ">=8.1.2",
-    "node": ">=16.13.2 <18.16.0"
+    "node": ">=16.13.2"
   }
 }

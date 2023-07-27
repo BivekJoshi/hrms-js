@@ -8,7 +8,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Collapse from "@mui/material/Collapse";
-import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import { Button, Card, Fab, Switch, Typography } from "@mui/material";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -63,6 +63,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 
 export default function Sidebar() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [open, setOpen] = useState(false);
   const { toggleMode, themeMode } = useContext(ThemeModeContext); // Accessing themeMode from context
   const [subMenuOpen, setSubMenuOpen] = useState({});
@@ -173,30 +174,30 @@ export default function Sidebar() {
         <Card
           variant="outlined"
           sx={{
-            width: "100%",
             maxWidth: "100%",
             padding: "20px",
             boxSizing: "border-box",
             "@media (min-width: 600px)": {
-              maxWidth: "calc(100% - drawerWidth)",
-              width: open ? "calc(100% - drawerWidth)" : "100%",
+              maxWidth: open ? "calc(100% - drawerWidth)" : "100%",
             },
           }}
         >
           <BreadCrumbs />
-          <br />
+          {/* <br /> */}
           <Outlet />
           <br />
-          <Fab
-            color="primary"
-            aria-label="add"
-            variant="extended"
-            onClick={() => {
-              navigate(-1);
-            }}
-          >
-            Go Back
-          </Fab>
+          {location.pathname !== "/admin/dashboard" && (
+            <Fab
+              color="primary"
+              aria-label="add"
+              variant="extended"
+              onClick={() => {
+                navigate(-1);
+              }}
+            >
+              Go Back
+            </Fab>
+          )}
         </Card>
       </Main>
     </Box>

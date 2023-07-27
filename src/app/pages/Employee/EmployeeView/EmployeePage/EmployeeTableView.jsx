@@ -1,9 +1,11 @@
 import * as React from 'react';
-import MaterialTable from '@material-table/core';
+import MaterialTable from "material-table";
 import { Button, Stack } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import StartIcon from '@mui/icons-material/Start';
 import { useNavigate } from 'react-router-dom';
+import tableIcons from '../../../../../theme/overrides/TableIcon';
+import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 
 const EmployeeTableView = ({ employeeData, isLoading }) => {
     const navigate = useNavigate();
@@ -11,15 +13,15 @@ const EmployeeTableView = ({ employeeData, isLoading }) => {
     const columns = [
         {
             title: 'SN',
-            render: (rowData) => rowData.tableData.index + 1,
-            width: 80,
+            render: (rowData) => rowData.tableData.id + 1,
+            width: "3%",
             sortable: false,
         },
         {
             title: 'Employee',
             field: 'firstName',
             emptyValue: '-',
-            width: 300,
+            width: "10%",
         },
         {
             title: 'Position',
@@ -27,7 +29,7 @@ const EmployeeTableView = ({ employeeData, isLoading }) => {
                 const position = rowData?.position?.positionName;
                 return position ? position : '-';
             }
-                ,
+            ,
             width: 340,
         },
         {
@@ -48,7 +50,7 @@ const EmployeeTableView = ({ employeeData, isLoading }) => {
                         <EditIcon />
                     </Button>
                     <Button color="primary" onClick={() => handleViewEmployee(rowData)}>
-                        <StartIcon />
+                        <RemoveRedEyeOutlinedIcon />
                     </Button>
                 </Stack>
             ),
@@ -68,19 +70,20 @@ const EmployeeTableView = ({ employeeData, isLoading }) => {
     return (
         <>
             <MaterialTable
+                icons={tableIcons}
                 columns={columns}
                 data={employeeData}
                 title="Employees"
                 isLoading={isLoading}
                 options={{
-                    toolbar:true,
+                    toolbar: true,
                     exportButton: true,
                     padding: 'dense',
                     margin: 50,
                     pageSize: 10,
                     emptyRowsWhenPaging: false,
                     headerStyle: {
-                        backgroundColor: '#1c7ed6',
+                        backgroundColor: '#01579b',
                         color: '#FFF',
                         fontSize: 20,
                         padding: 'dense',

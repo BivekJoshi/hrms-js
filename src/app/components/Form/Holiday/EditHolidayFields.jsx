@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import useEditHolidayForm from '../../../hooks/holiday/editHoliday/useEditHolidayForm';
 import { useDeleteHoliday } from '../../../hooks/holiday/useHoliday';
 
-const EditHolidayFields = ({ onClose, isLoading ,data}) => {
+const EditHolidayFields = ({ onClose, isLoading, data }) => {
     const { formik } = useEditHolidayForm(data);
 
     const handleFormSubmit = async () => {
@@ -26,7 +26,7 @@ const EditHolidayFields = ({ onClose, isLoading ,data}) => {
         }
     };
     const deleteHolidayMutation = useDeleteHoliday({});
-    const handleDeleteHoliday=()=>{
+    const handleDeleteHoliday = () => {
         deleteHolidayMutation.mutate(data.id);
         onClose()
     }
@@ -94,14 +94,14 @@ const EditHolidayFields = ({ onClose, isLoading ,data}) => {
                     justifyContent="flex-end"
                     alignItems="flex-end"
                 >
-                    <Button variant="contained" onClick={onClose} sx={{ mt: 3, ml: 1 }} color="error">
-                        Cancel
-                    </Button>
                     <Button variant="contained" onClick={handleDeleteHoliday} sx={{ mt: 3, ml: 1 }} color="error">
                         Delete
                     </Button>
                     <Button variant="contained" onClick={handleFormSubmit} sx={{ mt: 3, ml: 1 }}>
                         Update Event
+                    </Button>
+                    <Button variant="contained" onClick={onClose} sx={{ mt: 3, ml: 1 }} color="error">
+                        Cancel
                     </Button>
                 </Grid>
             </Grid>

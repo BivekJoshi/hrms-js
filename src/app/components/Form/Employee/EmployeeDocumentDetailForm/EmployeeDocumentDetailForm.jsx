@@ -77,8 +77,6 @@ const EmployeeDocumentDetailForm = () => {
   const fileInputRef = useRef(null);
   const [expandedAccordion, setExpandedAccordion] = useState(null);
   const [document, setDocument] = useState('');
-  const { mutate } = useAddDocument({});
-  const [selectedDocument, setSelectedDocument] = useState('');
 
   const { formik } = useAddDocumentForm({ document });
   const handleFormSubmit = (documentType) => {

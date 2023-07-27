@@ -2,17 +2,14 @@
 import React, { useEffect, useState } from "react";
 import { styled } from "@mui/material/styles";
 import MuiAppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-import { Badge, Stack } from "@mui/material";
-import { CakeOutlined } from "@mui/icons-material";
-import TodayBirthday from "../../pages/Birthday/TodayBirthday";
+import { Box, IconButton, Stack, Toolbar, Typography } from "@mui/material";
 import {
   useGetUpcomingBirthday,
   useRemoveNotification,
 } from "../../hooks/birthday/useBirthday";
+import Notification from "../../pages/Notification/Notification";
+import Profile from "../../pages/Auth/Profile/Profile";
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -33,8 +30,6 @@ const AppBar = styled(MuiAppBar, {
 
 export default function Header({ open, handleDrawerOpen }) {
   const [showLength, setShowLength] = useState(true);
-  const [showNotification, setShowNotification] = useState(true);
-  const [notificationClicked, setNotificationClicked] = useState(false);
 
   const handleClick = () => {
     setShowLength(false);
@@ -46,11 +41,14 @@ export default function Header({ open, handleDrawerOpen }) {
   const thisDay = today.getDate();
 
   const thisDayBirthdays = upcomingBirthdayData
-  ? upcomingBirthdayData
-      .filter((employee) => {
+    ? upcomingBirthdayData.filter((employee) => {
         const dateOfBirth = new Date(employee.dateOfBirth);
-        return (dateOfBirth.getMonth() === thisMonth && dateOfBirth.getDate() === thisDay);
-      }) : [];
+        return (
+          dateOfBirth.getMonth() === thisMonth &&
+          dateOfBirth.getDate() === thisDay
+        );
+      })
+    : [];
 
   const [openNotification, setOpenNotification] = useState(false);
   const isLoading = false;
@@ -68,53 +66,36 @@ export default function Header({ open, handleDrawerOpen }) {
 
   return (
     <AppBar position="fixed" open={open}>
-      <Toolbar>
-        <IconButton
-          color="inherit"
-          aria-label="open drawer"
-          onClick={handleDrawerOpen}
-          edge="start"
-          sx={{ mr: 2, ...(open && { display: "none" }) }}
-        >
-          <MenuIcon />
-        </IconButton>
-        <Typography variant="h6" noWrap component="div">
-          Human Resource Management System
-        </Typography>
-        <div
-          style={{
-            Color: "white",
-            display: "flex",
-            position: "absolute",
-            right: "100px",
-            top: "30px",
-            width: "30px",
-          }}
-        >
-          <Badge
-            color="success"
-            onClick={handleClick}
-            badgeContent={showLength ? thisDayBirthdays.length : null}
+      <Toolbar
+        sx={{
+          display: "felx",
+          flexDirection: "row",
+          justifyContent: "space-between",
+        }}
+      >
+        <Box display="flex" flexDirection="row" alignItems="center">
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            edge="start"
+            sx={{ mr: 2, ...(open && { display: "none" }) }}
           >
-            <CakeOutlined
-              id="basic-button"
-              aria-controls={open ? "basic-menu" : undefined}
-              aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}
-              onClick={handleChange}
-              style={{ color: "white", cursor: "pointer" }}
-            />
-            
-          </Badge>
-            {openNotification && (
-              <TodayBirthday
-                data={thisDayBirthdays}
-                isLoading={isLoading}
-                open={openNotification}
-                setOpen={setOpenNotification}
-              />
-            )}
-        </div>
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" noWrap>
+            Human Resource Management System
+          </Typography>
+        </Box>
+
+        <Stack flexDirection="row">
+          <Typography>
+            <Notification data={thisDayBirthdays} />
+          </Typography>
+          <Typography>
+            <Profile />
+          </Typography>
+        </Stack>
       </Toolbar>
     </AppBar>
   );

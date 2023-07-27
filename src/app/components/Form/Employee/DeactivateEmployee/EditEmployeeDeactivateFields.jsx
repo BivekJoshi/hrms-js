@@ -1,12 +1,12 @@
-import { Grid, Button, TextField, Checkbox, MenuItem } from "@mui/material";
+import { Grid, Button, TextField, MenuItem } from "@mui/material";
 import React, { useState } from "react";
-//import useAddProjectActiveForm from "../../../hooks/project/addProject/useAddProjectActiveForm";
-import { pink } from "@mui/material/colors";
-const label = { inputProps: { "aria-label": "Checkbox demo" } };
 import { toast } from "react-toastify";
 import { useAddActiveEmployeeForm, useRemoveDeactiveEmployeeForm } from "../../../../hooks/employee/DeactivateEmploye/useRemoveDeactiveEmployeeForm";
+import { useGetEmployee } from "../../../../hooks/employee/useEmployee";
+import { useGetDeactivatedEmployee } from "../../../../hooks/employee/DeactivateEmploye/useEmployee";
 
 export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
+  const { data: employeeData } = useGetEmployee();
   const { formik } = useRemoveDeactiveEmployeeForm(data);
 
   const handleFormSubmit = () => {
@@ -32,6 +32,17 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
     },
   ]
 
+  const getEmployeeName = (employeeId) => {
+    const employee = employeeData?.find((employee) => employee?.id === employeeId);
+
+    if (employee) {
+      const { firstName, middleName, lastName } = employee;
+      return `${firstName} ${middleName || ''} ${lastName || ''}`.trim();
+    }
+
+    return employeeId;
+  };
+
   return (
     !isLoading && (
       <Grid container spacing={3}>
@@ -42,7 +53,7 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
             label="Employee Name"
             placeholder="Enter Employee Id"
             fullWidth
-            value={formik.values.employeeId}
+            value={getEmployeeName(formik.values.employeeId)}
             onChange={formik.handleChange}
             error={formik.touched.employeeId && Boolean(formik.errors.employeeId)}
             helperText={formik.touched.employeeId && formik.errors.employeeId}
@@ -66,10 +77,10 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
             InputLabelProps={{ shrink: true }}
           >
             {
-              options?.map((option)=> (
+              options?.map((option) => (
                 <MenuItem key={option?.id} value={option?.value}>
-                {option?.label}
-              </MenuItem>
+                  {option?.label}
+                </MenuItem>
               ))
             }
           </TextField>
@@ -78,7 +89,7 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
           <TextField
             id="effectiveDate"
             name="effectiveDate"
-            label="Employee Name"
+            label="Effective From Date"
             placeholder="Effective Date"
             type="date"
             fullWidth
@@ -98,19 +109,19 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
           alignItems="flex-end"
         >
           <Button
-            variant="container"
-            onClick={onClose}
-            sx={{ mt: 3, ml: 1 }}
-            color="error"
-          >
-            Cancel
-          </Button>
-          <Button
             variant="contained"
             onClick={handleFormSubmit}
             sx={{ mt: 3, ml: 1 }}
           >
             Deactivate Employee
+          </Button>
+          <Button
+            variant="contained"
+            onClick={onClose}
+            sx={{ mt: 3, ml: 1 }}
+            color="error"
+          >
+            Cancel
           </Button>
         </Grid>
       </Grid>
@@ -119,6 +130,7 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
 };
 
 export const EditEmployeeActivateFields = ({ onClose, isLoading, id }) => {
+  const { data: employeeData } = useGetDeactivatedEmployee();
   const { formik } = useAddActiveEmployeeForm(id);
   const options = [
     {
@@ -143,6 +155,17 @@ export const EditEmployeeActivateFields = ({ onClose, isLoading, id }) => {
     }
   };
 
+  const getEmployeeName = (employeeId) => {
+    const employee = employeeData?.find((employee) => employee?.id === employeeId);
+
+    if (employee) {
+      const { firstName, middleName, lastName } = employee;
+      return `${firstName} ${middleName || ''} ${lastName || ''}`.trim();
+    }
+
+    return employeeId;
+  };
+
   return (
     !isLoading && (
       <Grid container spacing={3}>
@@ -153,7 +176,7 @@ export const EditEmployeeActivateFields = ({ onClose, isLoading, id }) => {
             label="Employee Name"
             placeholder="Enter project Id"
             fullWidth
-            value={formik.values.employeeId}
+            value={getEmployeeName(formik.values.employeeId)}
             onChange={formik.handleChange}
             error={formik.touched.employeeId && Boolean(formik.errors.employeeId)}
             helperText={formik.touched.employeeId && formik.errors.employeeId}
@@ -177,10 +200,10 @@ export const EditEmployeeActivateFields = ({ onClose, isLoading, id }) => {
             InputLabelProps={{ shrink: true }}
           >
             {
-              options?.map((option)=> (
+              options?.map((option) => (
                 <MenuItem key={option?.id} value={option?.value}>
-                {option?.label}
-              </MenuItem>
+                  {option?.label}
+                </MenuItem>
               ))
             }
           </TextField>
@@ -189,7 +212,7 @@ export const EditEmployeeActivateFields = ({ onClose, isLoading, id }) => {
           <TextField
             id="effectiveDate"
             name="effectiveDate"
-            label="Employee Name"
+            label="Effective From Date"
             placeholder="Effective Date"
             type="date"
             fullWidth
@@ -209,19 +232,19 @@ export const EditEmployeeActivateFields = ({ onClose, isLoading, id }) => {
           alignItems="flex-end"
         >
           <Button
-            variant="container"
-            onClick={onClose}
-            sx={{ mt: 3, ml: 1 }}
-            color="error"
-          >
-            Cancel
-          </Button>
-          <Button
             variant="contained"
             onClick={handleFormSubmit}
             sx={{ mt: 3, ml: 1 }}
           >
             Activate Employee
+          </Button>
+          <Button
+            variant="contained"
+            onClick={onClose}
+            sx={{ mt: 3, ml: 1 }}
+            color="error"
+          >
+            Cancel
           </Button>
         </Grid>
       </Grid>
