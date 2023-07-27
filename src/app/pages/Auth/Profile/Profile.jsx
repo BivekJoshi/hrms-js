@@ -4,6 +4,7 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { useNavigate } from "react-router-dom";
 import ResetPassword from "../ResetPassword/ResetPassword";
+import { useGetLoggedInUser } from "../../../hooks/auth/usePassword";
 
 const Profile = () => {
     const navigate= useNavigate();
@@ -18,6 +19,10 @@ const Profile = () => {
 
   const handleChangePassword = () => {
     navigate("/admin/reset-password");
+    handleClose();
+  };
+  const handleProfile = () => {
+    navigate("/admin/profile");
     handleClose();
   };
   const btnStyle = {
@@ -45,7 +50,7 @@ const Profile = () => {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
+        <MenuItem onClick={handleProfile}>Profile</MenuItem>
         <MenuItem onClick={handleClose}>My account</MenuItem>
         <MenuItem onClick={handleChangePassword}>Reset Password</MenuItem>
         <MenuItem onClick={handleClose}>Logout</MenuItem>

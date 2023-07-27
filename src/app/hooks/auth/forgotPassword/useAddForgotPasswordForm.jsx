@@ -1,6 +1,6 @@
 import React from 'react';
 import { useFormik } from 'formik';
-import { useAddForgotPassword } from '../useAddPassword';
+import { useAddForgotPassword } from '../usePassword';
 
 const useAddForgotPasswordForm = () => {
     const { mutate } = useAddForgotPassword({});

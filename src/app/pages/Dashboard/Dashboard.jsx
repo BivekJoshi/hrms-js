@@ -73,10 +73,7 @@ const Dashboard = () => {
       </Box>
 
         <Box >
-          <h3>Our Projects</h3>
-          {/* <Box sx={{ height: "350px", overflowY: "scroll" }}> */}
           <ProjectTable projectData={projectData}/>
-          {/* </Box> */}
         </Box>
       </Box>
     </Box>

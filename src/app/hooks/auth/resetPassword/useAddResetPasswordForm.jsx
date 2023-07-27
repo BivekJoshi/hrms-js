@@ -1,13 +1,15 @@
 import React from 'react';
 import { useFormik } from 'formik';
-import { useAddResetPassword } from '../useAddPassword';
+import { useAddResetPassword, useGetLoggedInUser } from '../usePassword';
 
 const useAddForgotPasswordForm = () => {
+    const { data: loggedInUser } = useGetLoggedInUser();
+    
     const { mutate } = useAddResetPassword({});
 
     const formik = useFormik({
         initialValues: {
-            id: "",
+            id: loggedInUser?.id,
             password: "",
         },
         onSubmit: (values) => {

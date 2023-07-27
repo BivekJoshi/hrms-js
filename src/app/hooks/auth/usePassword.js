@@ -1,6 +1,14 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { toast } from "react-toastify";
-import { addResetPassword, addforgotPassword } from "../../api/auth/password-api";
+import { addResetPassword, addforgotPassword, getLoggedInUser } from "../../api/auth/password-api";
+
+{/*________________________GET-LOGGED-IN-USER_____________________________________*/ }
+export const useGetLoggedInUser = () => {
+  return useQuery(['getLoggedInUser'], () => getLoggedInUser(), {
+      refetchInterval: false,
+      refetchOnWindowFocus: false,
+  });
+};
 
 {/*________________________GET-USER-BY-ID_____________________________________*/ }
 export const useGetEventById = (id) => {
