@@ -8,20 +8,20 @@ const DashboardCard = ({ title, icon }) => {
       <MainCard grow={true}>
         <Stack
           spacing={0.5}
-          padding="1rem 0"
+          padding="1rem"
           flexDirection="row"
-          justifyContent="space-around"
+          justifyContent="space-between"
           alignItems="center"
         >
-          <Typography variant="h4" color="primary.main" align="center">
+          <Typography variant="h4" color="#3e019b" align="center">
             {icon}
           </Typography>
           <Box>
-            <Typography variant="h6" color="inherit" align="center">
-            120
+            <Typography variant="h6" color="inherit" align="center" fontWeight={600}>
+              120
             </Typography>
-            <Typography  color="inherit" align="center">
-               {title}
+            <Typography color="inherit" align="center">
+              {title}
             </Typography>
           </Box>
         </Stack>

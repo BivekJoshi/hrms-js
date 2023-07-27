@@ -1,13 +1,15 @@
-import { Box } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import React from "react";
 import { Outlet } from "react-router-dom";
 
 const Applayout = () => {
   return (
     <>
-      <Box className="appBoxLayout">
-        <Outlet />
-      </Box>
+      <Container maxWidth="1736px">
+        <Box className="appBoxLayout">
+          <Outlet />
+        </Box>
+      </Container>
     </>
   );
 };

@@ -27,8 +27,8 @@ const Dashboard = () => {
       <Grid
         container
         rowSpacing={4.5}
-        columnSpacing={2.75}
-        justifyContent="space-between"
+        // columnSpacing={2.75}
+        justifyContent="space-around"
       >
         <DashboardCard title="Users" icon={<FaUsers fontSize="3rem" />} />
         <DashboardCard
