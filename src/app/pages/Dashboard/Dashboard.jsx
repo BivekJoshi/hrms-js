@@ -1,9 +1,6 @@
 import React from "react";
 import DashboardCard from "../../components/cards/Dashboard/DashboardCard";
 import { Box, Grid, Stack } from "@mui/material";
-import PersonIcon from "@mui/icons-material/Person";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import { AiFillHome } from "react-icons/ai";
 import EmployeeCount from "./DashboardTable/EmployeeCount";
 
@@ -14,6 +11,9 @@ import { PieChartDiagram } from "../../components/Charts/PieChartDiagram";
 import { BarChatDiagram } from "../../components/Charts/BarChatDiagram";
 import { ProjectProgressCard } from "../../components/cards/ProjectProgress/ProjectProgressCard";
 import { ProjectTable } from "./DashboardTable/ProjectTable";
+import {FaPeopleGroup, FaGifts, FaUsers} from "react-icons/fa6";
+import {BiSolidCalendarEvent} from "react-icons/bi";
+import { AiFillProject } from "react-icons/ai";
 
 const Dashboard = () => {
   const { data: dashboardData } = useGetDashboard();
@@ -27,25 +27,25 @@ const Dashboard = () => {
       <Grid
         container
         rowSpacing={4.5}
-        columnSpacing={2.75}
-        justifyContent="space-between"
+        // columnSpacing={2.75}
+        justifyContent="space-around"
       >
-        <DashboardCard title="Users" icon={<PersonIcon fontSize="large" />} />
+        <DashboardCard title="Users" icon={<FaUsers fontSize="3rem" />} />
         <DashboardCard
           title="Employees"
-          icon={<PeopleAltIcon fontSize="large" />}
+          icon={<FaPeopleGroup fontSize="3rem" />}
         />
         <DashboardCard
           title="Events"
-          icon={<CalendarMonthIcon fontSize="large" />}
+          icon={<BiSolidCalendarEvent fontSize="3rem" />}
         />
         <DashboardCard
           title="Holiday"
-          icon={<CalendarMonthIcon fontSize="large" />}
+          icon={<FaGifts fontSize="3rem" />}
         />
         <DashboardCard
           title="Project"
-          icon={<CalendarMonthIcon fontSize="large" />}
+          icon={<AiFillProject fontSize="3rem" />}
         />
       </Grid>
       <EmployeeCount />

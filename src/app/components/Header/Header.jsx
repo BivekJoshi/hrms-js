@@ -2,13 +2,8 @@
 import React, { useEffect, useState } from "react";
 import { styled } from "@mui/material/styles";
 import MuiAppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-import { Badge, Stack } from "@mui/material";
-import { CakeOutlined } from "@mui/icons-material";
-import TodayBirthday from "../../pages/Birthday/TodayBirthday";
+import { Box, IconButton, Stack, Toolbar, Typography } from "@mui/material";
 import {
   useGetUpcomingBirthday,
   useRemoveNotification,
@@ -71,26 +66,35 @@ export default function Header({ open, handleDrawerOpen }) {
 
   return (
     <AppBar position="fixed" open={open}>
-      <Toolbar>
-        <IconButton
-          color="inherit"
-          aria-label="open drawer"
-          onClick={handleDrawerOpen}
-          edge="start"
-          sx={{ mr: 2, ...(open && { display: "none" }) }}
-        >
-          <MenuIcon />
-        </IconButton>
-        <Stack sx={{ display: "flex", justifyContent: "space-between" }}>
+      <Toolbar
+        sx={{
+          display: "felx",
+          flexDirection: "row",
+          justifyContent: "space-between",
+        }}
+      >
+        <Box display="flex" flexDirection="row" alignItems="center">
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            edge="start"
+            sx={{ mr: 2, ...(open && { display: "none" }) }}
+          >
+            <MenuIcon />
+          </IconButton>
           <Typography variant="h6" noWrap>
             Human Resource Management System
           </Typography>
-          <Stack>
-            <Typography>
-              <Notification data={thisDayBirthdays} />
-            </Typography>
-            <Typography><Profile /></Typography>
-          </Stack>
+        </Box>
+
+        <Stack flexDirection="row">
+          <Typography>
+            <Notification data={thisDayBirthdays} />
+          </Typography>
+          <Typography>
+            <Profile />
+          </Typography>
         </Stack>
       </Toolbar>
     </AppBar>
