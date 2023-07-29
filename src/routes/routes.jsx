@@ -4,9 +4,17 @@ import { Link, useLocation } from "react-router-dom";
 import { Breadcrumbs, Typography } from "@mui/material";
 import Loadable from "../app/components/Header/Loader/Loadable";
 import CustomBreadcrumb from "../theme/overrides/CustomBreadcrumb";
-import ProfileDetail from "../app/pages/Auth/Profile/ProfileDetail";
-import AddUser from "../app/pages/Auth/UserControl/AddUser";
 
+
+const ProfileDetail = Loadable(lazy(() =>
+  import("../app/pages/Auth/Profile/ProfileDetail")
+));
+const OfficeResource = Loadable(lazy(() =>
+  import("../app/pages/Resource/OfficeResource/OfficeResource")
+));
+const EmployeeResource = Loadable(lazy(() =>
+  import("../app/pages/Resource/EmployeeResource/EmployeeResource")
+));
 const EmployeeProfile = Loadable(lazy(() =>
   import("../app/pages/Employee/EmployeeViewPage/EmployProfile/EmployeeProfile")
 ));
@@ -167,9 +175,14 @@ const routes = [
     component: <ProfileDetail />,
   },
   {
-    path: "addUser",
+    path: "resource/office",
     id: nanoid(),
-    component: <AddUser />,
+    component: <OfficeResource />,
+  },
+  {
+    path: "resource/employee",
+    id: nanoid(),
+    component: <EmployeeResource />,
   },
 ];
 
