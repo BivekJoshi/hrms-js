@@ -1,8 +1,9 @@
-import { Box, List, Modal, Typography } from "@mui/material";
-import React from "react";
+import { Box, Button, List, Modal, Stack, Typography } from "@mui/material";
+import React, { useState } from "react";
 
 import InfoItem from "./InfoItem";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
+import { useNavigate } from "react-router-dom";
 
 const style = {
   position: "absolute",
@@ -17,19 +18,25 @@ const style = {
 };
 
 export default function ListUserDetails({ cardTitle, data }) {
-  const [open, setOpen] = React.useState(false);
+  const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+
   const openModal = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
   return (
     <>
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <Typography variant="h6" sx={{ fontWeight: 600 }}>
           {cardTitle}
         </Typography>
-        <BorderColorIcon
-          onClick={openModal}
-          sx={{ color: "rgb(28, 126, 214)", paddingRight: "1rem"}}
-        />
+        <Stack sx={{display: "flex", alignItems: "center" }}>
+          <BorderColorIcon
+            onClick={openModal}
+            fontSize="large"
+            sx={{ color: "rgb(28, 126, 214)", paddingRight: "1rem" }}
+          />
+        </Stack>
 
         <Modal open={open} onClose={handleClose}>
           <Box sx={style}>
@@ -39,6 +46,7 @@ export default function ListUserDetails({ cardTitle, data }) {
             <Typography sx={{ mt: 2 }}>Here is the edited Details</Typography>
           </Box>
         </Modal>
+
       </Box>
       <List sx={{ bgcolor: "#ededed", borderRadius: "1rem" }}>
         {Object.keys(data).map((item, index) => (

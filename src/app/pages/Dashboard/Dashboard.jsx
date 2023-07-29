@@ -2,7 +2,6 @@ import React from "react";
 import DashboardCard from "../../components/cards/Dashboard/DashboardCard";
 import { Box, Grid, Stack } from "@mui/material";
 import { AiFillHome } from "react-icons/ai";
-import EmployeeCount from "./DashboardTable/EmployeeCount";
 
 import { useGetDashboard } from "../../hooks/dashboard/useDashboard";
 import { useGetProjectCount } from "../../hooks/dashboard/useDashboard";
@@ -27,7 +26,6 @@ const Dashboard = () => {
       <Grid
         container
         rowSpacing={4.5}
-        // columnSpacing={2.75}
         justifyContent="space-around"
       >
         <DashboardCard title="Users" icon={<FaUsers fontSize="3rem" />} />
@@ -48,7 +46,6 @@ const Dashboard = () => {
           icon={<AiFillProject fontSize="3rem" />}
         />
       </Grid>
-      <EmployeeCount />
 
       <Box
         sx={{

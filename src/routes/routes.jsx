@@ -5,6 +5,7 @@ import { Breadcrumbs, Typography } from "@mui/material";
 import Loadable from "../app/components/Header/Loader/Loadable";
 import CustomBreadcrumb from "../theme/overrides/CustomBreadcrumb";
 import ProfileDetail from "../app/pages/Auth/Profile/ProfileDetail";
+import AddUser from "../app/pages/Auth/UserControl/AddUser";
 
 const EmployeeProfile = Loadable(lazy(() =>
   import("../app/pages/Employee/EmployeeViewPage/EmployProfile/EmployeeProfile")
@@ -164,6 +165,11 @@ const routes = [
     path: "profile",
     id: nanoid(),
     component: <ProfileDetail />,
+  },
+  {
+    path: "addUser",
+    id: nanoid(),
+    component: <AddUser />,
   },
 ];
 

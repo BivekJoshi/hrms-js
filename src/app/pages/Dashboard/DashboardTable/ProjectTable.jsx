@@ -9,20 +9,20 @@ export const ProjectTable = ({ projectData }) => {
     {
       title: "SN",
       render: (rowData) => rowData.tableData.index + 1,
-      width: 80,
+      width: 60,
       sortable: false,
     },
     {
       title: "Project Name",
       field: "projectName",
       emptyValue: "-",
-      width: 100,
+      width: 120,
     },
     {
       title: "Started",
       field: "startDate",
       emptyValue: "-",
-      width: 100,
+      width: 120,
     },
     {
       title: "Progress",
@@ -48,7 +48,7 @@ export const ProjectTable = ({ projectData }) => {
         </Stack>
       ),
       sorting: false,
-      width: 120,
+      width: 60,
     },
   ];
   return (
