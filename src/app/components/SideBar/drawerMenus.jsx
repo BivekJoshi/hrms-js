@@ -13,6 +13,7 @@ import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck';
 import AddchartIcon from '@mui/icons-material/Addchart';
 import EventIcon from '@mui/icons-material/Event';
 import HolidayVillageIcon from '@mui/icons-material/HolidayVillage';
+import LaptopIcon from '@mui/icons-material/Laptop';
 
 const primaryColor = '#01579b';
 
@@ -59,6 +60,12 @@ export const drawerMenus = [
         icon: <CakeIcon style={{ color: primaryColor }} />,
       },
     ],
+  },
+  {
+    name: 'Office Reource',
+    icon: <LaptopIcon style={{ color: primaryColor }} />,
+    path: 'resource/employee',
+    subMenus: [],
   },
   {
     name: 'Department',
