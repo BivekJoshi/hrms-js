@@ -12,3 +12,15 @@ body {
 .css-1dyux1k-MuiPaper-root-MuiCard-root {
   padding: "0 !important";
 }
+
+.profile-img{
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+   img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
