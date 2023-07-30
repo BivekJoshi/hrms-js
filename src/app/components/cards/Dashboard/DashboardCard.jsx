@@ -17,7 +17,12 @@ const DashboardCard = ({ title, icon }) => {
             {icon}
           </Typography>
           <Box>
-            <Typography variant="h6" color={"light" ?"black":"white"} align="center" fontWeight={600}>
+            <Typography
+              variant="h6"
+              color={"light" ? "black" : "white"}
+              align="center"
+              fontWeight={600}
+            >
               120
             </Typography>
             <Typography color="black" align="center">
