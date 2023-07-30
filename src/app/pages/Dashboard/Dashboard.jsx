@@ -28,19 +28,20 @@ const Dashboard = () => {
         rowSpacing={4.5}
         justifyContent="space-around"
       >
-        <DashboardCard title="Users" icon={<FaUsers fontSize="3rem" />} />
+        <DashboardCard title="Users" icon={<FaUsers fontSize="3rem" />} value={42} />
         <DashboardCard
           title="Employees"
           icon={<FaPeopleGroup fontSize="3rem" />}
+          value={28}
         />
         <DashboardCard
           title="Events"
-          icon={<BiSolidCalendarEvent fontSize="3rem" />}
+          icon={<BiSolidCalendarEvent fontSize="3rem" />} value={24}
         />
         <DashboardCard title="Holiday" icon={<FaGifts fontSize="3rem" />} />
         <DashboardCard
           title="Project"
-          icon={<AiFillProject fontSize="3rem" />}
+          icon={<AiFillProject fontSize="3rem" />} value={6}
         />
       </Grid>
       {/* <EmployeeCount /> */}
