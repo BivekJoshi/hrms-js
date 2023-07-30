@@ -5,7 +5,7 @@ import { Outlet } from "react-router-dom";
 const Applayout = () => {
   return (
     <>
-      <Container maxWidth="1736px">
+      <Container maxWidth="xl">
         <Box className="appBoxLayout">
           <Outlet />
         </Box>

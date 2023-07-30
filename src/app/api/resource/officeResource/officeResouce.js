@@ -13,8 +13,8 @@ export const getofficeResourceById = async (id) => {
 };
 
 {/*________________________POST OFFICE RESOURCE_____________________________________*/ }
-export const addofficeResource = async () => {
-  const data = await axiosInstance.post(`/office-resource`);
+export const addofficeResource = async (formData) => {
+  const data = await axiosInstance.post(`/office-resource`, formData);
   return data;
 };
 

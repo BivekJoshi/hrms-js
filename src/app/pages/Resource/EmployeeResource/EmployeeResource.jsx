@@ -14,7 +14,7 @@ const EmployeeResource = () => {
   const navigate = useNavigate();
   const { data: employeeResourceData, isLoading } = useGetEmployeeResource();
   const { data: employeeData, isLoading: loadingemployee } = useGetEmployee();
-
+  console.log(employeeResourceData)
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [deletedData, setDeletedData] = useState({});
   const handleCloseDeleteModal = () => setOpenDeleteModal(false);
@@ -45,6 +45,7 @@ const EmployeeResource = () => {
     }`;
     return name;
   };
+
 
   const columns = [
     {
@@ -102,7 +103,7 @@ const EmployeeResource = () => {
             navigate(`/admin/resource/office`);
           }}
         >
-          +Add Resource
+          Resources
         </Button>
         <Button variant="contained" sx={{ mt: 3, ml: 1 }} onClick={handleAddOpenModal}>
           +Add Employee

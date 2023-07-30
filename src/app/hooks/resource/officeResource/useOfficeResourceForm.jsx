@@ -21,7 +21,7 @@ const useOfficeResourceForm = () => {
     values = {
       ...values,
     };
-    mutate(values, formik);
+    mutate(values, formik, { onSuccess: () => formik.handleReset() });
   };
 
   return { formik };
