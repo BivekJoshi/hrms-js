@@ -24,6 +24,7 @@ export const useGetEmployeeResourceById = (id) => {
   });
 };
 
+/*________________________POST_____________________________________*/
 export const useAddEmployeeResource = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(["addemployeeResource"], (formData) => addemployeeResource(formData), {

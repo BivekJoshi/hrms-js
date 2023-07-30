@@ -3,7 +3,6 @@ import {
   getProject,
   addProject,
   getProjectById,
-  // deleteProject,
   addActiveProject,
   editProject,
   getDeactivatedProject,

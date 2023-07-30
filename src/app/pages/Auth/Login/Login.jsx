@@ -23,7 +23,6 @@ const Login = () => {
     loading,
     handleMouseDownPassword,
   } = useLoginForm({});
-  // Cookies.remove('hrms');
   return (
     <>
       <div className="container">

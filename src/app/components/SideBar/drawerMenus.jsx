@@ -1,7 +1,6 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
-import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import PersonIcon from '@mui/icons-material/Person';
 import MailIcon from '@mui/icons-material/Mail';
 import CakeIcon from '@mui/icons-material/Cake';
@@ -13,53 +12,48 @@ import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck';
 import AddchartIcon from '@mui/icons-material/Addchart';
 import EventIcon from '@mui/icons-material/Event';
 import HolidayVillageIcon from '@mui/icons-material/HolidayVillage';
-import ThemeModeContext from '../../../theme/ThemeModeContext';
 
-const { toggleMode, mode } = useContext(ThemeModeContext); // Accessing mode from context
-
-console.log(mode);
-// const primaryColor = '#01579b';
+const primaryColor = "#01579b";
 
 export const drawerMenus = [
   {
-    name: 'Dashboard',
-    icon: <DashboardIcon style={mode === "light " ? { color: "#01579b" }: {color:"white"}} />,
-    path: 'dashboard',
+    name: "Dashboard",
+    icon: (
+      <DashboardIcon
+        style={mode === "light " ? { color: "#01579b" } : { color: "white" }}
+      />
+    ),
+    path: "dashboard",
     subMenus: [],
   },
   {
-    name: 'Employee',
+    name: "Employee",
     icon: <PeopleAltIcon style={{ color: primaryColor }} />,
-    path: 'employee',
+    path: "employee",
     subMenus: [
-      // {
-      //   name: 'Add Employee',
-      //   path: 'employee/add',
-      //   icon: <PersonAddIcon style={{ color: primaryColor }} />,
-      // },
       {
-        name: 'Employee',
-        path: 'employee',
+        name: "Employee",
+        path: "employee",
         icon: <PersonIcon style={{ color: primaryColor }} />,
       },
       {
-        name: 'Leave',
-        path: 'leave',
+        name: "Leave",
+        path: "leave",
         icon: <MailIcon style={{ color: primaryColor }} />,
       },
       {
-        name: 'Leave Type',
-        path: 'leavetype',
+        name: "Leave Type",
+        path: "leavetype",
         icon: <MailIcon style={{ color: primaryColor }} />,
       },
       {
-        name: 'Attendance',
-        path: 'attendance',
+        name: "Attendance",
+        path: "attendance",
         icon: <HowToRegIcon style={{ color: primaryColor }} />,
       },
       {
-        name: 'Birthday',
-        path: 'birthday',
+        name: "Birthday",
+        path: "birthday",
         icon: <CakeIcon style={{ color: primaryColor }} />,
       },
     ],
@@ -73,21 +67,19 @@ export const drawerMenus = [
   {
     name: 'Department',
     icon: <WorkspacesIcon style={{ color: primaryColor }} />,
-    path: 'department',
+    path: "department",
     subMenus: [],
   },
   {
-    name: 'Designation',
-    icon: (
-      <AssignmentIndIcon style={{ color: primaryColor }} />
-    ),
-    path: 'designation',
+    name: "Designation",
+    icon: <AssignmentIndIcon style={{ color: primaryColor }} />,
+    path: "designation",
     subMenus: [],
   },
   {
-    name: 'Company',
+    name: "Company",
     icon: <BusinessIcon style={{ color: primaryColor }} />,
-    path: 'company',
+    path: "company",
     subMenus: [],
   },
   {
@@ -109,9 +101,9 @@ export const drawerMenus = [
     subMenus: [],
   },
   {
-    name: 'ToDo',
+    name: "ToDo",
     icon: <PlaylistAddCheckIcon style={{ color: primaryColor }} />,
-    path: 'todolist',
+    path: "todolist",
     subMenus: [],
   },
 ];

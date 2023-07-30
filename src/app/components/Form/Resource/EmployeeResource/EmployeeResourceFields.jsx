@@ -7,8 +7,7 @@ import { useGetEmployee } from "../../../../hooks/employee/useEmployee";
 const EmployeeResourceFields = ({ onClose, isLoading }) => {
   const { data: officeResourceData } = useGetOfficeResource();
   const { data: employeeData } = useGetEmployee();
-
-  // console.log(officeResourceData);
+  
   const { formik } = useEmployeeResourceForm();
   const handleFormSubmit = () => {
     formik.handleSubmit();

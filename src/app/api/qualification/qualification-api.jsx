@@ -19,7 +19,6 @@ export const addQualification = async (formData, id) => {
 
 {/*________________________EDIT_____________________________________*/ }
 export const editQualification = async (formData, id) => {
-  // const {id} = formData
   const data = await axiosInstance.put(`/qualification/${id}`, formData?.education);
   return data;
 };

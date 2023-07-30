@@ -8,10 +8,10 @@ const EditHolidayFields = ({ onClose, isLoading, data }) => {
     const { formik } = useEditHolidayForm(data);
 
     const handleFormSubmit = async () => {
-        const isValid = await formik.validateForm(); // Validate the form
+        const isValid = await formik.validateForm();
 
         if (isValid) {
-            formik.handleSubmit(); // Submit the form
+            formik.handleSubmit();
 
             if (formik.isValid) {
                 formik.setTouched({
@@ -19,7 +19,7 @@ const EditHolidayFields = ({ onClose, isLoading, data }) => {
                     holidayDate: false,
                     holidayDescription: false,
                 });
-                onClose(); // Close the modal
+                onClose();
             } else {
                 toast.error('Please make sure you have filled the form correctly');
             }

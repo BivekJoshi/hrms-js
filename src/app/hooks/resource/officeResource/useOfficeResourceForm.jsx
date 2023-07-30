@@ -1,5 +1,4 @@
 import { useFormik } from 'formik';
-// import { DepartmentSchema } from '../Validation/DepartmentSchema';
 import { useAddOfficeResource } from './useOfficeResource';
 
 const useOfficeResourceForm = () => {
@@ -11,7 +10,6 @@ const useOfficeResourceForm = () => {
       uniqueNumber: '',
       description: '',
     },
-    // validationSchema: DepartmentSchema,
     onSubmit: (values) => {
       handleRequest(values);
     },

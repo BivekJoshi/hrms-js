@@ -12,7 +12,6 @@ const ProtectedRoute = ({ redirectTo }) => {
       removeUser();
       navigate("/");
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   if (!user) return <Navigate to={redirectTo} replace />;
   return <Outlet />;

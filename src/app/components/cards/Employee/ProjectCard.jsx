@@ -4,7 +4,6 @@ import {
   Box,
   Button,
   CardContent,
-  CardMedia,
   Chip,
   Divider,
   Grid,
@@ -137,9 +136,6 @@ const ProjectCard = ({
               >
                 {ProjectName.charAt(0)}
               </Avatar>
-              {/* <Typography style={{ fontWeight: 600, margin: "1rem 0", fontSize: "20px",marginLeft:".1rem" }}>
-                                {ProjectName}
-                            </Typography> */}
             </Grid>
             <Grid item>
               <Box display="flex" justifyContent={"end"}>
@@ -256,7 +252,7 @@ const ProjectCard = ({
                           : TaskStatus === "WORK_IN_PROGRESS"
                           ? "orange"
                           : "red",
-                      color: "#fff", // You can customize the text color if needed
+                      color: "#fff",
                     }}
                   />
                 </Typography>
@@ -275,19 +271,16 @@ const ProjectCard = ({
               >
                 <Stack
                   spacing={{ xs: 1 }}
-                  // direction="row"
                   useFlexGap
                   flexWrap="wrap"
                   alignItems="center"
                 >
-                  {/* <Email /> */}
                   <Typography sx={{ fontSize: "1rem", fontWeight: 600 }}>
                     Project Leader
                   </Typography>
                   <Typography variant="p">
                     {getProjectLeaderName(ProjectLeaderId)}
                   </Typography>
-                  {/* <LocalPhone /> */}
                   <Typography variant="p" style={{ margin: "10px 0" }}>
                     <Typography sx={{ fontSize: "1rem", fontWeight: 600 }}>
                       Associate Companies
