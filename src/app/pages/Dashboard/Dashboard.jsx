@@ -2,7 +2,6 @@ import React from "react";
 import DashboardCard from "../../components/cards/Dashboard/DashboardCard";
 import { Box, Grid, Stack } from "@mui/material";
 import { AiFillHome } from "react-icons/ai";
-import EmployeeCount from "./DashboardTable/EmployeeCount";
 
 import { useGetDashboard } from "../../hooks/dashboard/useDashboard";
 import { useGetProjectCount } from "../../hooks/dashboard/useDashboard";
@@ -11,8 +10,8 @@ import { PieChartDiagram } from "../../components/Charts/PieChartDiagram";
 import { BarChatDiagram } from "../../components/Charts/BarChatDiagram";
 import { ProjectProgressCard } from "../../components/cards/ProjectProgress/ProjectProgressCard";
 import { ProjectTable } from "./DashboardTable/ProjectTable";
-import {FaPeopleGroup, FaGifts, FaUsers} from "react-icons/fa6";
-import {BiSolidCalendarEvent} from "react-icons/bi";
+import { FaPeopleGroup, FaGifts, FaUsers } from "react-icons/fa6";
+import { BiSolidCalendarEvent } from "react-icons/bi";
 import { AiFillProject } from "react-icons/ai";
 
 const Dashboard = () => {
@@ -27,7 +26,6 @@ const Dashboard = () => {
       <Grid
         container
         rowSpacing={4.5}
-        // columnSpacing={2.75}
         justifyContent="space-around"
       >
         <DashboardCard title="Users" icon={<FaUsers fontSize="3rem" />} />
@@ -39,16 +37,13 @@ const Dashboard = () => {
           title="Events"
           icon={<BiSolidCalendarEvent fontSize="3rem" />}
         />
-        <DashboardCard
-          title="Holiday"
-          icon={<FaGifts fontSize="3rem" />}
-        />
+        <DashboardCard title="Holiday" icon={<FaGifts fontSize="3rem" />} />
         <DashboardCard
           title="Project"
           icon={<AiFillProject fontSize="3rem" />}
         />
       </Grid>
-      <EmployeeCount />
+      {/* <EmployeeCount /> */}
 
       <Box
         sx={{
@@ -65,15 +60,16 @@ const Dashboard = () => {
         style={{
           display: "grid",
           gridTemplateRows: "1fr",
-          rowGap:"3rem"
+          rowGap: "3rem",
         }}
-      ><Box>
-        <h3>Project Information</h3>
-        <ProjectProgressCard projectDataCount={projectDataCount} />
-      </Box>
+      >
+        <Box>
+          <h3>Project Information</h3>
+          <ProjectProgressCard projectDataCount={projectDataCount} />
+        </Box>
 
-        <Box >
-          <ProjectTable projectData={projectData}/>
+        <Box>
+          <ProjectTable projectData={projectData} />
         </Box>
       </Box>
     </Box>

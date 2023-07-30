@@ -238,7 +238,8 @@ const EmployeeCard = ({
               >
                 <LocalPhone />
                 <Typography variant="p" style={{ margin: "10px 0" }}>
-                  {MobileNumber || ''}
+                  {" "}
+                  {MobileNumber || ''}{" "}
                 </Typography>
               </Stack>
             </Box>

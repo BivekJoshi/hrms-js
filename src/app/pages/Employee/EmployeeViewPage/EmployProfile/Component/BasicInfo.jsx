@@ -30,7 +30,7 @@ const BasicInfo = ({ data }) => {
     <>
       <Box container className="ProfileStyle">
         <Box>
-          <ListUserDetails
+        <ListUserDetails
             data={EMPLOYEE}
             cardTitle={"Basic Informations"}
             MarginBottom={"1rem"}

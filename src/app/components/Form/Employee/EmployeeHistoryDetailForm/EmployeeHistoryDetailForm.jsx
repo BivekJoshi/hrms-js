@@ -1,9 +1,17 @@
 import { Button, Grid, TextField, Typography } from '@mui/material';
 import { FieldArray, FormikProvider } from 'formik';
 import React from 'react'
+import { useDeleteHistory } from '../../../../hooks/employee/useEmployeeHistory';
 
 const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
   const { values, handleChange } = formik;
+
+  const deleteHistoryMutation = useDeleteHistory({});
+  const handleDeleteHistory = (history) => {
+    if (history.id) {
+      deleteHistoryMutation.mutate(history.id);
+    }
+  };
 
   return (
     !isLoading && (
@@ -134,6 +142,27 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                           autoFocus
                           InputlabelProps={{ shrink: true }}
                         />
+                      </Grid>
+                      <Grid
+                        item xs={12}
+                        sm={1}
+                        container
+                        direction="row"
+                        justifyContent="flex-end"
+                        alignItems="center"
+                      >
+                        {values.history.length > 1 && (
+                          <Button
+                            variant="contained"
+                            onClick={() => {
+                              arrayHelpers.remove(index);
+                              handleDeleteHistory(employeeHistory);
+                            }}
+                            color="error"
+                          >
+                            Delete
+                          </Button>
+                        )}
                       </Grid>
                     </Grid>
                   </React.Fragment>
