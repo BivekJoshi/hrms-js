@@ -8,10 +8,10 @@ const EditEventFields = ({ onClose, isLoading, data }) => {
     const { formik } = useEditEventForm(data);
 
     const handleFormSubmit = async () => {
-        const isValid = await formik.validateForm(); // Validate the form
+        const isValid = await formik.validateForm();
 
         if (isValid) {
-            formik.handleSubmit(); // Submit the form
+            formik.handleSubmit();
 
             if (formik.isValid) {
                 formik.setTouched({
@@ -20,7 +20,7 @@ const EditEventFields = ({ onClose, isLoading, data }) => {
                     eventTime: false,
                     eventDescription: false,
                 });
-                onClose(); // Close the modal
+                onClose();
             } else {
                 toast.error('Please make sure you have filled the form correctly');
             }
@@ -111,14 +111,14 @@ const EditEventFields = ({ onClose, isLoading, data }) => {
                     justifyContent="flex-end"
                     alignItems="flex-end"
                 >
-                    <Button variant="contained" onClick={onClose} sx={{ mt: 3, ml: 1 }} color="error">
-                        Cancel
-                    </Button>
                     <Button variant="contained" onClick={handleDeleteEvent} sx={{ mt: 3, ml: 1 }} color="error">
                         Delete
                     </Button>
                     <Button variant="contained" onClick={handleFormSubmit} sx={{ mt: 3, ml: 1 }}>
                         Update Event
+                    </Button>
+                    <Button variant="contained" onClick={onClose} sx={{ mt: 3, ml: 1 }} color="error">
+                        Cancel
                     </Button>
                 </Grid>
             </Grid>

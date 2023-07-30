@@ -13,43 +13,43 @@ import { ThemeSwitch } from '../../../../theme/ThemeSwitch';
 
 const LEAVENAME = [
   {
-    value: 'CASUAL_LEAVE',
+    value: 'CASUAL',
     label: 'Casual Leave',
   },
   {
-    value: 'SICK_LEAVE',
+    value: 'SICK',
     label: 'Sick Leave',
   },
   {
-    value: 'ANNUAL_LEAVE',
+    value: 'ANNUAL',
     label: 'Annual Leave',
   },
   {
-    value: 'FESTIVAL_LEAVE',
+    value: 'FESTIVAL',
     label: 'Festival Leave',
   },
   {
-    value: 'MARRIAGE_LEAVE',
+    value: 'MARRIAGE',
     label: 'Marriage Leave',
   },
   {
-    value: 'MATERNITY_LEAVE',
+    value: 'MATERNITY',
     label: 'Maternity Leave',
   },
   {
-    value: 'MATERNITY_LEAVE_ADDITIONAL',
+    value: 'MATERNITY_ADDITIONAL',
     label: 'Maternity leave Additional',
   },
   {
-    value: 'PATERNITY_LEAVE',
+    value: 'PATERNITY',
     label: 'Paternity Leave',
   },
   {
-    value: 'BEREAVEMENT_LEAVE',
+    value: 'BEREAVEMENT',
     label: 'Bereavement Leave',
   },
   {
-    value: 'UNPAID_LEAVE ',
+    value: 'UNPAID',
     label: 'Unpaid Leave',
   },
 ];
@@ -61,18 +61,12 @@ const AddLeaveTypeFields = ({ onClose, isLoading, existingLeaveTypes }) => {
     formik.handleSubmit();
 
     if (formik.isValid) {
-      formik({
-        leaveName: true,
-        leaveTotal: true,
-        leaveDescription: true,
-        isCarryForward: false,
-      });
+      onClose();
     } else {
       toast.error('Please make sure you have filled the form correctly');
     }
   };
 
-  {/*Filter the leave names that are not already existing in the table*/ }
 
   const FILTEREDLEAVENAMES = LEAVENAME.filter(
     (option) => !existingLeaveTypes.includes(option.value)
@@ -145,8 +139,8 @@ const AddLeaveTypeFields = ({ onClose, isLoading, existingLeaveTypes }) => {
           <FormControlLabel
             required
             control={<ThemeSwitch
-              checked={formik.values.isCarryForward} // Set the checked value based on formik's values
-              onChange={formik.handleChange} // Handle the change event
+              checked={formik.values.isCarryForward}
+              onChange={formik.handleChange}
               name="isCarryForward"
             />}
             label='Carry Forward'
@@ -167,9 +161,6 @@ const AddLeaveTypeFields = ({ onClose, isLoading, existingLeaveTypes }) => {
           justifyContent='flex-end'
           alignItems='flex-end'
         >
-          <Button variant='contained' onClick={onClose} sx={{ mt: 3, ml: 1 }} color='error'>
-            Cancel
-          </Button>
           <Button
             variant='contained'
             onClick={handleFormSubmit}
@@ -177,6 +168,9 @@ const AddLeaveTypeFields = ({ onClose, isLoading, existingLeaveTypes }) => {
             onClose={onClose}
           >
             Add Leave Type
+          </Button>
+          <Button variant='contained' onClick={onClose} sx={{ mt: 3, ml: 1 }} color='error'>
+            Cancel
           </Button>
         </Grid>
       </Grid>

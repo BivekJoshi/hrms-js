@@ -9,7 +9,15 @@ export const addEmployeeHistory = async (formData, id) => {
 {/*________________________GETBYID_____________________________________*/ }
 export const getEmployeeHistoryById = (id) => {
     if (id) {
-        const data = axiosInstance.get(`/employment-history/${id}`);
+        const data = axiosInstance.get(`/employment-history/emp-history/${id}`);
+        return data;
+    }
+};
+
+{/*________________________GETBY EMPLOYEE HISTORY ID_____________________________________*/ }
+export const getEmployeeHistory = (id) => {
+    if (id) {
+        const data = axiosInstance.get(`/employment-history/emp-histories/${id}`);
         return data;
     }
 };
@@ -18,4 +26,10 @@ export const getEmployeeHistoryById = (id) => {
 export const deleteEmployeeHistory = async (employeeHistoryId) => {
     const data = await axiosInstance.delete(`/employment-history/${employeeHistoryId}`);
     return data;
-  };
+};
+
+{/*________________________EDIT_____________________________________*/ }
+export const editEmployeeHistory = async (formData, id) => {
+    const data = await axiosInstance.put(`/employee-history/${id}`, formData?.history);
+    return data;
+};

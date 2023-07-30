@@ -59,7 +59,7 @@ const EditLeaveFields = ({ onClose, isLoading, data }) => {
         leaveRemarks: true,
         halfDay: true,
       });
-      onClose(); // Close the modal
+      onClose();
     } else {
       toast.error('Please make sure you have filled the form correctly');
     }
@@ -185,15 +185,15 @@ const EditLeaveFields = ({ onClose, isLoading, data }) => {
           justifyContent='flex-end'
           alignItems='flex-end'
         >
-          <Button variant='contained' onClick={onClose} sx={{ mt: 3, ml: 1 }} color='error'>
-            Cancel
-          </Button>
           <Button
             variant='contained'
             onClick={handleFormSubmit}
             sx={{ mt: 3, ml: 1 }}
           >
             Update Leave
+          </Button>
+          <Button variant='contained' onClick={onClose} sx={{ mt: 3, ml: 1 }} color='error'>
+            Cancel
           </Button>
         </Grid>
       </Grid >

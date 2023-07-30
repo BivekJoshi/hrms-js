@@ -1,244 +1,78 @@
-import React, { useRef, useEffect } from "react";
+import React from "react";
 import DashboardCard from "../../components/cards/Dashboard/DashboardCard";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  Grid,
-  List,
-  ListItem,
-  Typography,
-  Stack,
-} from "@mui/material";
-import { styled } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import LinearProgress, {
-  linearProgressClasses,
-} from "@mui/material/LinearProgress";
-import PersonIcon from "@mui/icons-material/Person";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
-import EmployeeCount from "./DashboardTable/EmployeeCount";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-} from "chart.js";
-import { Bar, Pie } from "react-chartjs-2";
-import { ArcElement } from 'chart.js';
+import { Box, Grid, Stack } from "@mui/material";
+import { AiFillHome } from "react-icons/ai";
 
-ChartJS.register(ArcElement, Tooltip, Legend);
-import {
-  useGetDashboard,
-  useGetProjectCount,
-} from "../../hooks/dashboard/useDashboard";
+import { useGetDashboard } from "../../hooks/dashboard/useDashboard";
+import { useGetProjectCount } from "../../hooks/dashboard/useDashboard";
 import { useGetProject } from "../../hooks/project/useProject";
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-  ArcElement,
-);
-
-const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
-  height: 16,
-  borderRadius: 18,
-  [`&.${linearProgressClasses.colorPrimary}`]: {
-    backgroundColor:
-      theme.palette.grey[theme.palette.mode === "light" ? 200 : 800],
-  },
-}));
-
-
+import { PieChartDiagram } from "../../components/Charts/PieChartDiagram";
+import { BarChatDiagram } from "../../components/Charts/BarChatDiagram";
+import { ProjectProgressCard } from "../../components/cards/ProjectProgress/ProjectProgressCard";
+import { ProjectTable } from "./DashboardTable/ProjectTable";
+import { FaPeopleGroup, FaGifts, FaUsers } from "react-icons/fa6";
+import { BiSolidCalendarEvent } from "react-icons/bi";
+import { AiFillProject } from "react-icons/ai";
 
 const Dashboard = () => {
-  const { data: dashboardData, isLoading: loadingDashboard } = useGetDashboard();
+  const { data: dashboardData } = useGetDashboard();
   const { data: projectDataCount } = useGetProjectCount();
   const { data: projectData } = useGetProject();
- 
-  const barChartOptions = {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: "top",
-      },
-      title: {
-        display: true,
-        text: "Dashboard Bar Chart",
-      },
-    },
-  };
-
-  const pieChartOptions = {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: "right",
-      },
-      title: {
-        display: true,
-        text: "Dashboard Pie Chart",
-      },
-    },
-  };
-
-  const labels = [
-    "allEmployees",
-    "newEmployees",
-    "maleEmployees",
-    "femaleEmployees",
-    "allProjects",
-  ];
-
-
-
-  const barChartData = {
-    labels,
-    datasets: [
-      {
-        label: "Dataset 1",
-        data: dashboardData,
-        backgroundColor: ["yellowgreen", "red", "green", "blue", "pink"],
-      },
-    ],
-  };
-
-  const data = {
-    labels,
-    datasets: [
-      {
-        labels: "Data Pie Chart",
-        data: [`${dashboardData?.allEmployees}`, `${dashboardData?.newEmployees}`, `${dashboardData?.maleEmployees}`,  `${dashboardData?.femaleEmployees}`, `${dashboardData?.allProjects}` ],
-        backgroundColor: ["yellowgreen", "red", "green", "blue", "pink"],
-        borderColor: ["yellowgreen", "red", "green", "blue", "pink"],
-        borderWidth: 3,
-      }
-    ]
-  }
   return (
-    <>
-      <Grid container rowSpacing={4.5} columnSpacing={2.75}>
-        <DashboardCard title="Users" icon={<PersonIcon fontSize="large" />} />
+    <Box sx={{ display: "grid", gridTemplateRows: "1fr", rowGap: "3rem" }}>
+      <Stack flexDirection="row" gap="1rem" alignItems="center">
+        <h3>DASHBORD</h3> <AiFillHome />
+      </Stack>
+      <Grid
+        container
+        rowSpacing={4.5}
+        justifyContent="space-around"
+      >
+        <DashboardCard title="Users" icon={<FaUsers fontSize="3rem" />} value={42} />
         <DashboardCard
           title="Employees"
-          icon={<PeopleAltIcon fontSize="large" />}
+          icon={<FaPeopleGroup fontSize="3rem" />}
+          value={28}
         />
         <DashboardCard
           title="Events"
-          icon={<CalendarMonthIcon fontSize="large" />}
+          icon={<BiSolidCalendarEvent fontSize="3rem" />} value={24}
         />
-        <DashboardCard
-          title="Holiday"
-          icon={<CalendarMonthIcon fontSize="large" />}
-        />
+        <DashboardCard title="Holiday" icon={<FaGifts fontSize="3rem" />} value={32} />
         <DashboardCard
           title="Project"
-          icon={<CalendarMonthIcon fontSize="large" />}
+          icon={<AiFillProject fontSize="3rem" />} value={6}
         />
       </Grid>
-      <br />
 
-      <EmployeeCount />
+      <Box
+        sx={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))",
+          gap: "2rem",
+        }}
+      >
+        <BarChatDiagram data={dashboardData} />
+        <PieChartDiagram data={dashboardData} />
+      </Box>
 
-      <Stack sx={{ display: "flex", flexDirection: "row", gap: "1rem" }}>
-        <Card sx={{ width: "600px" }}>
-          <Bar options={barChartOptions} data={barChartData} />
-        </Card>
-        <Card sx={{ width: "400px" }}>
-          <Pie options={pieChartOptions} data={data} />
-        </Card>
-      </Stack>
+      <Box
+        style={{
+          display: "grid",
+          gridTemplateRows: "1fr",
+          rowGap: "3rem",
+        }}
+      >
+        <Box>
+          <h3>Project Information</h3>
+          <ProjectProgressCard projectDataCount={projectDataCount} />
+        </Box>
 
-      <hr />
-      <div style={{display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(500px, 1fr))"}}>
-      <Card sx={{maxWidth: "500px"}}>
-        <CardHeader sx={{ color: "#2c2945" }} title="Project statistics" />
-        <CardContent
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            "&>p": { borderRight: "1px solid #c6c3c3", padding: "1.2rem" },
-          }}
-        >
-          <Typography> Total Project: {projectDataCount?.total}</Typography>
-          <Typography>Completed: {projectDataCount?.completed}</Typography>
-          <Typography>Pending: {projectDataCount?.pending}</Typography>
-          <Typography> Work In Progress: {projectDataCount?.workInProgress}</Typography>
-        </CardContent>
-        <CardContent>
-          {projectDataCount?.total >0 && 
-           ( <Box sx={{ display: "flex", flexDirection: "column", color: "#2c2945" }}>
-            <Stack sx={{ display: "flex", justifyContent: "space-between" }}>
-              <Typography variant="h5">Total Project</Typography>
-              <Typography variant="h6">
-                {Math.ceil((projectDataCount?.total / projectDataCount?.total) * 100)}%
-              </Typography>
-            </Stack>
-            <BorderLinearProgress
-              variant="determinate"
-              value={(projectDataCount?.total / projectDataCount?.total) * 100}
-            />
-
-            <Stack sx={{ display: "flex", justifyContent: "space-between" }}>
-              <Typography variant="h5">Completed Project</Typography>
-              <Typography variant="h6">
-                {Math.ceil((projectDataCount?.completed / projectDataCount?.total) * 100)}%
-              </Typography>
-            </Stack>
-            <BorderLinearProgress
-              variant="determinate"
-              value={(projectDataCount?.completed / projectDataCount?.total) * 100}
-            />
-
-            <Stack sx={{ display: "flex", justifyContent: "space-between" }}>
-              <Typography variant="h5">Pending Project</Typography>
-              <Typography variant="h6">
-                {Math.ceil((projectDataCount?.pending / projectDataCount?.total) * 100)}%
-              </Typography>
-            </Stack>
-            <BorderLinearProgress
-              variant="determinate"
-              value={(projectDataCount?.pending / projectDataCount?.total) * 100}
-            />
-
-            <Stack sx={{ display: "flex", justifyContent: "space-between" }}>
-              <Typography variant="h5">Work In Progress</Typography>
-              <Typography variant="h6">
-                {Math.ceil((projectDataCount?.workInProgress / projectDataCount?.total) * 100)}%
-              </Typography>
-            </Stack>
-            <BorderLinearProgress
-              variant="determinate"
-              value={(projectDataCount?.workInProgress / projectDataCount?.total) * 100}
-            />
-          </Box>) || "No Projects"
-}
-        </CardContent>
-      </Card>
-
-      <Card sx={{maxWidth: "500px", height: "350px", overflowY: "scroll"}}>
-        <CardHeader sx={{ color: "#2c2945", fontSize: "1.4rem" }} title="Projects" />
-        <CardContent>
-          <ListItem sx={{display: "flex", flexDirection: "column", alignItems: "baseline" }}>
-            { projectData &&
-              projectData.map((item,index)=> (
-                <List key={index} sx={{cursor: "pointer", "&:hover": {
-                  boxShadow: "0 0 4em 0px rgba(0, 0, 0, 0.4)"}, listStyle: "inherit", display: "flex", alignItems: "center", gap: "1rem", color: "#2c2945", fontSize: "1.4rem" }}><p>{index + 1}</p>{item?.projectName}</List>
-              ))
-            }
-          </ListItem>
-        </CardContent>
-      </Card>
-      </div>
-    </>
+        <Box>
+          <ProjectTable projectData={projectData} />
+        </Box>
+      </Box>
+    </Box>
   );
 };
 

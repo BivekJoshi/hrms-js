@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSendEmail } from "../../hooks/email/useEmail";
-import { Button, Grid, TextField } from "@mui/material";
+import { Button, Grid, TextField, Box, Typography } from "@mui/material";
 
 function EmailForm({ employeeId, onClose, officeEmail }) {
   const [emailData, setEmailData] = useState({
@@ -26,11 +26,9 @@ function EmailForm({ employeeId, onClose, officeEmail }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    
     if (validateForm()) {
-      console.log("Sending email:", emailData);
-
       mutate(emailData);
-
       setEmailData({
         to: "",
         subject: "",
@@ -68,15 +66,18 @@ function EmailForm({ employeeId, onClose, officeEmail }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2>Email</h2>
       <div style={{ width: "400px" }}>
+        <Typography variant="h6" gutterBottom>
+          Send Email 
+        </Typography>
+        <br />
         <Grid container spacing={2}>
-          <Grid item xs={10}>
+          <Grid item xs={12}>
             <TextField
               fullWidth
               label="To"
               name="to"
-              value={emailData.to}
+              value={emailData?.to}
               onChange={handleInputChange}
               error={errors.to}
               helperText={errors.to ? "To is required" : ""}
@@ -87,7 +88,7 @@ function EmailForm({ employeeId, onClose, officeEmail }) {
               fullWidth
               label="Subject"
               name="subject"
-              value={emailData.subject}
+              value={emailData?.subject}
               onChange={handleInputChange}
             />
           </Grid>
@@ -97,31 +98,32 @@ function EmailForm({ employeeId, onClose, officeEmail }) {
             <TextField
               fullWidth
               multiline
-              rows={12}
-              cols={100}
+              rows={10}
+              cols={90}
               label="Body"
               name="message"
-              value={emailData.message}
+              value={emailData?.message}
               onChange={handleInputChange}
               error={errors.message}
               helperText={errors.message ? "message is required" : ""}
             />
           </Grid>
         </Grid>
-        <div style={{ marginTop: "20px", columnGap: "20px", display: "flex" }}>
+        <br />
+        <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+          <Button type="submit" variant="contained">
+            Send
+          </Button>
           <Button
             type="button"
             variant="contained"
-            color="primary"
+            color="error"
             onClick={onClose}
             style={{ marginLeft: "10px" }}
           >
             Cancel
           </Button>
-          <Button type="submit" variant="contained" color="primary">
-            Send
-          </Button>
-        </div>
+        </Box>
       </div>
     </form>
   );

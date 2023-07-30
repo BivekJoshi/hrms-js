@@ -14,7 +14,7 @@ const EditCompanyFields = ({ onClose, isLoading, data }) => {
         companyType: true,
         companyDescription: true,
       });
-      onClose(); // Close the modal
+      onClose();
     } else {
       toast.error("Please make sure you have filled the form correctly");
     }
@@ -88,18 +88,18 @@ const EditCompanyFields = ({ onClose, isLoading, data }) => {
         >
           <Button
             variant="contained"
+            onClick={handleFormSubmit}
+            sx={{ mt: 3, ml: 1 }}
+          >
+            Update Company
+          </Button>
+          <Button
+            variant="contained"
             onClick={onClose}
             sx={{ mt: 3, ml: 1 }}
             color="error"
           >
             Cancel
-          </Button>
-          <Button
-            variant="contained"
-            onClick={handleFormSubmit}
-            sx={{ mt: 3, ml: 1 }}
-          >
-            Update Company
           </Button>
         </Grid>
       </Grid>

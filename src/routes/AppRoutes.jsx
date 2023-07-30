@@ -1,11 +1,12 @@
 import React, { lazy } from "react";
 import ScrollToTop from "../app/utils/ScrolltoTop";
-import Login from "../app/pages/Login/Login";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Applayout from "../layout/Applayout";
 import AdminLayout from "../layout/AdminLayout";
 import ProtectedRoute from "./ProtectedRoute";
 import { routes } from "./routes";
+import ForgotPassword from "../app/pages/Auth/FogotPassword/ForgotPassword";
+import Login from "../app/pages/Auth/Login/Login";
 
 const AppRoutes = () => {
   return (
@@ -14,6 +15,7 @@ const AppRoutes = () => {
         <Routes>
           <Route path="/" exact element={<Applayout />}>
             <Route path="/" exact element={<Login />} />
+            <Route path="/forgot-password" exact element={<ForgotPassword />} />
             <Route path="/admin" element={<AdminLayout />}>
               <Route element={<ProtectedRoute redirectTo="/" />}>
                 {routes.map((route) => (

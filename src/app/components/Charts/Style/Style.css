@@ -1,0 +1,17 @@
+.recharts-legend-wrapper {
+    position: inherit !important;
+  /* left: 55% !important;
+  top: 139% !important; */
+}
+
+.BulletLabel {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 5px;
+
+}
+
+ul{
+    margin-top: -12rem;
+}

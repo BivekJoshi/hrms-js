@@ -12,9 +12,6 @@ import "./Attendance.css";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 
-
-
-
 let cMonth;
 
 const month = [
@@ -250,7 +247,7 @@ const Attendance = () => {
             {filteredData.length > 0 ? (
               <TableBody>
                 {filteredData.map((employee, i) => {
-                  const serialNumber = i + 1; // Increment serial number for each employee
+                  const serialNumber = i + 1;
                   return (
                     <TableRow className="trhighlight" key={i}>
                       <TableCell className="snNo" >{serialNumber}</TableCell>

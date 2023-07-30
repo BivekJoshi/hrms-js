@@ -3,8 +3,6 @@ import {
   getTodayBirthday,
   getUpcomingBirthday,
   remmoveNotification,
-  
-  // removeNotification,
 } from "../../api/birthday/birthday-api";
 
 export const useGetTodayBirthday = () => {
@@ -26,7 +24,6 @@ export const useRemoveNotification = () => {
 
   return useMutation(["removeNotification"], () => remmoveNotification(), {
     onSuccess: (data, variables, context) => {
-      // onSuccess && onSuccess(data, variables, context);
       queryClient.invalidateQueries("getTodayBirthday");
     },
     onError: (err, _variables, _context) => {

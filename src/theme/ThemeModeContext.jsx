@@ -15,11 +15,6 @@ export const ThemeModeContext = createContext({
 });
 
 export const ThemeContextProvider = ({ children }) => {
-  // const [isDarkMode, setIsDarkMode] = useState(
-  //   window.matchMedia &&
-  //     window.matchMedia('(prefers-color-scheme: dark)').matches
-  // );
-
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [mode, setMode] = useState("light");
   const [width, setWidth] = useState(window.innerWidth);
@@ -56,7 +51,7 @@ export const ThemeContextProvider = ({ children }) => {
     palette: {
       mode: isDarkMode ? "dark" : "light",
       primary: {
-        main: "#1c7ed6",
+        main: "#01579b",
         light: "#f0ca92",
         dark: "#cd7539",
       },
@@ -71,7 +66,7 @@ export const ThemeContextProvider = ({ children }) => {
         imageCaption: isDarkMode ? "#c5c7cb" : "#616161",
       },
       text: {
-        primary: isDarkMode ? "#000" : "#000",
+        primary: isDarkMode ? "#FFFFFF " : "#000",
         secondary: isDarkMode ? "#fff" : "#616161",
         white: "#000",
       },
@@ -83,7 +78,7 @@ export const ThemeContextProvider = ({ children }) => {
 
   return (
     <ThemeModeContext.Provider value={colorMode}>
-      <ThemeProvider theme={theme}>{children}</ThemeProvider>
+      <ThemeProvider theme={theme} >{children}</ThemeProvider>
     </ThemeModeContext.Provider>
   );
 };

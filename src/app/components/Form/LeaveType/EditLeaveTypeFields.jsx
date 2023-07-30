@@ -23,7 +23,7 @@ const EditLeaveTypeFields = ({ onClose, isLoading, data }) => {
                 leaveDescription: true,
                 isCarryForward: false,
             });
-            onClose(); // Close the modal
+            onClose();
         } else {
             toast.error('Please make sure you have filled the form correctly');
         }
@@ -89,8 +89,8 @@ const EditLeaveTypeFields = ({ onClose, isLoading, data }) => {
                     <FormControlLabel
                         required
                         control={<ThemeSwitch
-                            checked={formik.values.isCarryForward} // Set the checked value based on formik's values
-                            onChange={formik.handleChange} // Handle the change event
+                            checked={formik.values.isCarryForward}
+                            onChange={formik.handleChange}
                             name="isCarryForward"
                         />}
                         label='Carry Forward'
@@ -111,15 +111,15 @@ const EditLeaveTypeFields = ({ onClose, isLoading, data }) => {
                     justifyContent='flex-end'
                     alignItems='flex-end'
                 >
-                    <Button variant='contained' onClick={onClose} sx={{ mt: 3, ml: 1 }} color='error'>
-                        Cancel
-                    </Button>
                     <Button
                         variant='contained'
                         onClick={handleFormSubmit}
                         sx={{ mt: 3, ml: 1 }}
                     >
                         Update Leave Type
+                    </Button>
+                    <Button variant='contained' onClick={onClose} sx={{ mt: 3, ml: 1 }} color='error'>
+                        Cancel
                     </Button>
                 </Grid>
             </Grid>

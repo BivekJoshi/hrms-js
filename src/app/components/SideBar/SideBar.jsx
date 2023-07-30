@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { styled, useTheme } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import Divider from "@mui/material/Divider";
@@ -8,19 +8,31 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Collapse from "@mui/material/Collapse";
-import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import { Button, Card, Fab, Switch, Typography } from "@mui/material";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import IconButton from "@mui/material/IconButton";
-
 import { removeUser } from "../../utils/cookieHelper";
-import { drawerMenus } from "./drawerMenus";
 import { ThemeModeContext } from "../../../theme/ThemeModeContext";
 import Header from "../Header/Header";
 import BreadCrumbs from "../../../routes/routes";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
+import PersonIcon from "@mui/icons-material/Person";
+import MailIcon from "@mui/icons-material/Mail";
+import CakeIcon from "@mui/icons-material/Cake";
+import HowToRegIcon from "@mui/icons-material/HowToReg";
+import WorkspacesIcon from "@mui/icons-material/Workspaces";
+import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
+import BusinessIcon from "@mui/icons-material/Business";
+import PlaylistAddCheckIcon from "@mui/icons-material/PlaylistAddCheck";
+import AddchartIcon from "@mui/icons-material/Addchart";
+import EventIcon from "@mui/icons-material/Event";
+import HolidayVillageIcon from "@mui/icons-material/HolidayVillage";
+import LaptopIcon from '@mui/icons-material/Laptop';
 
-const drawerWidth = 260;
+const drawerWidth = 250;
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
   ({ theme, open }) => ({
@@ -56,21 +68,114 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
   ...theme.mixins.toolbar,
   justifyContent: "flex-end",
 }));
 
 export default function Sidebar() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [open, setOpen] = useState(false);
-  const { toggleMode, themeMode } = useContext(ThemeModeContext); // Accessing themeMode from context
+  const { toggleMode, mode } = useContext(ThemeModeContext);
   const [subMenuOpen, setSubMenuOpen] = useState({});
+
+  const primaryColor = mode === "light " ? "black" : "white";
+  const drawerMenus = [
+    {
+      name: "Dashboard",
+      icon: (
+        <DashboardIcon
+          sx={mode === "light" ? { color: "black" } : { color: "white" }}
+        />
+      ),
+      path: "dashboard",
+      subMenus: [],
+    },
+    {
+      name: "Employee",
+      icon: <PeopleAltIcon style={{ color: primaryColor }} />,
+      path: "employee",
+      subMenus: [
+        {
+          name: "Employee",
+          path: "employee",
+          icon: <PersonIcon style={{ color: primaryColor }} />,
+        },
+        {
+          name: "Leave",
+          path: "leave",
+          icon: <MailIcon style={{ color: primaryColor }} />,
+        },
+        {
+          name: "Leave Type",
+          path: "leavetype",
+          icon: <MailIcon style={{ color: primaryColor }} />,
+        },
+        {
+          name: "Attendance",
+          path: "attendance",
+          icon: <HowToRegIcon style={{ color: primaryColor }} />,
+        },
+        {
+          name: "Birthday",
+          path: "birthday",
+          icon: <CakeIcon style={{ color: primaryColor }} />,
+        },
+      ],
+    },
+    {
+      name: 'Office Reource',
+      icon: <LaptopIcon style={{ color: primaryColor }} />,
+      path: 'resource/employee',
+      subMenus: [],
+    },
+    {
+      name: "Department",
+      icon: <WorkspacesIcon style={{ color: primaryColor }} />,
+      path: "department",
+      subMenus: [],
+    },
+    {
+      name: "Designation",
+      icon: <AssignmentIndIcon style={{ color: primaryColor }} />,
+      path: "designation",
+      subMenus: [],
+    },
+    {
+      name: "Company",
+      icon: <BusinessIcon style={{ color: primaryColor }} />,
+      path: "company",
+      subMenus: [],
+    },
+    {
+      name: "Project",
+      icon: <AddchartIcon style={{ color: primaryColor }} />,
+      path: "project",
+      subMenus: [],
+    },
+    {
+      name: "Event",
+      icon: <EventIcon style={{ color: primaryColor }} />,
+      path: "event",
+      subMenus: [],
+    },
+    {
+      name: "Holiday",
+      icon: <HolidayVillageIcon style={{ color: primaryColor }} />,
+      path: "holiday",
+      subMenus: [],
+    },
+    {
+      name: "ToDo",
+      icon: <PlaylistAddCheckIcon style={{ color: primaryColor }} />,
+      path: "todolist",
+      subMenus: [],
+    },
+  ];
 
   const handleDrawerOpen = () => {
     setOpen(true);
   };
-
   const handleDrawerClose = () => {
     setOpen(false);
   };
@@ -113,8 +218,19 @@ export default function Sidebar() {
             <React.Fragment key={index}>
               <StyledNavLink key={index} to={menu.path}>
                 <ListItemButton onClick={() => handleSubMenuToggle(index)}>
-                  <ListItemIcon>{menu.icon}</ListItemIcon>
-                  <ListItemText primary={menu.name} />
+                  <ListItemIcon
+                    sx={
+                      mode === "light" ? { color: "Light" } : { color: "White" }
+                    }
+                  >
+                    {menu.icon}
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={menu.name}
+                    sx={
+                      mode === "light" ? { color: "black" } : { color: "white" }
+                    }
+                  />
                   {menu.subMenus.length > 0 ? (
                     subMenuOpen[index] ? (
                       <ExpandLess />
@@ -128,10 +244,29 @@ export default function Sidebar() {
                 <Collapse in={subMenuOpen[index]} timeout="auto" unmountOnExit>
                   <List component="div" disablePadding>
                     {menu.subMenus.map((subMenu, subIndex) => (
-                      <StyledNavLink key={subIndex} to={subMenu.path}>
+                      <StyledNavLink
+                        key={subIndex}
+                        to={subMenu.path}
+                        sx={{ color: "light" ? "black" : "white" }}
+                      >
                         <ListItemButton sx={{ pl: 4 }}>
-                          <ListItemIcon>{subMenu.icon}</ListItemIcon>
-                          <ListItemText primary={subMenu.name} />
+                          <ListItemIcon
+                            sx={
+                              mode === "light"
+                                ? { color: "black" }
+                                : { color: "white" }
+                            }
+                          >
+                            {subMenu.icon}
+                          </ListItemIcon>
+                          <ListItemText
+                            primary={subMenu.name}
+                            sx={
+                              mode === "light"
+                                ? { color: "black" }
+                                : { color: "white" }
+                            }
+                          />
                         </ListItemButton>
                       </StyledNavLink>
                     ))}
@@ -162,9 +297,9 @@ export default function Sidebar() {
             Logout
           </Button>
           <Typography variant="body2" sx={{ marginRight: "8px" }}>
-            {themeMode === "light" ? "Light" : "Dark"} Mode
+            {mode === "light" ? "Light" : "Dark"} Mode
           </Typography>
-          <Switch checked={themeMode === "dark"} onChange={toggleMode} />
+          <Switch checked={mode === "dark"} onChange={toggleMode} />
         </Box>
       </Drawer>
 
@@ -173,30 +308,29 @@ export default function Sidebar() {
         <Card
           variant="outlined"
           sx={{
-            width: "100%",
             maxWidth: "100%",
             padding: "20px",
             boxSizing: "border-box",
             "@media (min-width: 600px)": {
-              maxWidth: "calc(100% - drawerWidth)",
-              width: open ? "calc(100% - drawerWidth)" : "100%",
+              maxWidth: open ? "calc(100% - drawerWidth)" : "100%",
             },
           }}
         >
           <BreadCrumbs />
-          <br />
           <Outlet />
           <br />
-          <Fab
-            color="primary"
-            aria-label="add"
-            variant="extended"
-            onClick={() => {
-              navigate(-1);
-            }}
-          >
-            Go Back
-          </Fab>
+          {location.pathname !== "/admin/dashboard" && (
+            <Fab
+              color="primary"
+              aria-label="add"
+              variant="extended"
+              onClick={() => {
+                navigate(-1);
+              }}
+            >
+              Go Back
+            </Fab>
+          )}
         </Card>
       </Main>
     </Box>

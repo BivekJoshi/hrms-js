@@ -1,18 +1,7 @@
 import * as React from "react";
 import { useState } from "react";
-import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
-import CardMedia from "@mui/material/CardMedia";
-import CardContent from "@mui/material/CardContent";
-import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
-import { red } from "@mui/material/colors";
-import List from "@mui/material/List";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import Groups2Icon from "@mui/icons-material/Groups2";
-import { Box, Button, Grid, Stack } from "@mui/material";
+import { Box, Button, Stack } from "@mui/material";
 import "./projectEmployee.css";
 import { AddProjectEmployeeModal } from "./ProjectEmployeeModal/ProjectEmployeeModal";
 import { useNavigate } from "react-router-dom";
@@ -23,7 +12,6 @@ import { useGetProjectEmployee } from "../../hooks/projectEmployee/useProjectEmp
 import MaterialTable from "@material-table/core";
 
 const ProjectEmployee = () => {
-  const navigate = useNavigate();
   const { data: projectEmployeeData, isLoading } = useGetProjectEmployee();
   const { data: employeeData } = useGetEmployee();
 
@@ -31,37 +19,18 @@ const ProjectEmployee = () => {
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
-  const [editedProjectEmployee, setEditedProjectEmployee] = useState({});
-  const [deletedProjectEmployee, setDeletedProjectEmployee] = useState({});
-
   const handleAddOpenModal = () => setOpenAddModal(true);
   const handleCloseAddModal = () => setOpenAddModal(false);
 
   const handleCloseEditModal = () => setOpenEditModal(false);
   const handleCloseDeleteModal = () => setOpenDeleteModal(false);
 
-  // const deleteProjectMutation = useDeleteProjectEmployee({});
-  // const handleDeleteProjectEmployee = (rowData) => {
-  //   setDeletedProjectEmployee(rowData);
-  //   setOpenDeleteModal(true);
-  // };
-
-  // const handleConfirmDelete = () => {
-  //   deleteProjectMutation.mutate(deletedProjectEmployee.id);
-  //   setOpenDeleteModal(false);
-  // };
-
-  // const handleEditProjectEmployee = (rowData) => {
-  //    setEditedProjectEmployee(rowData);
-  //   setOpenEditModal(true);
-  // };
-
   const getEmployeeName = (rowData) => {
     const employeeId = rowData.employeeId;
     const employee = employeeData?.find(
       (emp) => emp.id === employeeId
     );
-    const name = `${employee.firstName} ${employee.middleName} ${employee.lastName}`;
+    const name = `${employee?.firstName} ${employee?.middleName} ${employee?.lastName}`;
     return name;
   };
 
@@ -74,19 +43,19 @@ const ProjectEmployee = () => {
 			sortable: false,
     },
     {
-			title: 'assignedOn',
+			title: 'Assigned On',
 			field: 'assignedOn',
 			emptyValue: '-',
 			width: 80,
 		},
     {
-			title: 'deAssignedOn',
+			title: 'DeAssigned On',
 			field: 'deAssignedOn',
 			emptyValue: '-',
 			width: 80,
 		},
     {
-			title: 'employeeId',
+			title: 'Employee Name',
 			render: (rowData) => {
         return(
           <p>
@@ -144,7 +113,6 @@ const ProjectEmployee = () => {
           </Button>
         </Typography>
       </Box> <br />
-      {/* {JSON.stringify(employeeData)} */}
       <MaterialTable
         columns={columns}
         data={projectEmployeeData}
@@ -156,7 +124,7 @@ const ProjectEmployee = () => {
 					pageSize: 10,
 					emptyRowsWhenPaging: false,
 					headerStyle: {
-						backgroundColor: '#1c7ed6',
+						backgroundColor: '#01579b',
 						color: '#FFF',
 						fontSize: 20,
 						padding: 'dense',
@@ -167,14 +135,6 @@ const ProjectEmployee = () => {
 					},
         }}
       />
-
-      {/* {openEditModal && (
-        <EditProjectEmployeeModal
-          id={editedProject?.id}
-          open={openEditModal}
-          handleCloseModal={handleCloseEditModal}
-        />
-      )} */}
 
       {openAddModal && (
         <AddProjectEmployeeModal

@@ -51,6 +51,7 @@ const EmployeeBasicInfoForm = ({ formik, isLoading }) => {
             label='First Name'
             placeholder='Enter your first name'
             fullWidth
+            required
             value={formik.values.firstName}
             onChange={formik.handleChange}
             error={formik.touched.firstName && Boolean(formik.errors.firstName)}
@@ -85,6 +86,7 @@ const EmployeeBasicInfoForm = ({ formik, isLoading }) => {
             label='Last Name'
             placeholder='Enter your last name'
             fullWidth
+            required
             value={formik.values.lastName}
             onChange={formik.handleChange}
             error={formik.touched.lastName && Boolean(formik.errors.lastName)}
@@ -102,6 +104,7 @@ const EmployeeBasicInfoForm = ({ formik, isLoading }) => {
             label='Gender'
             placeholder='Select your gender'
             fullWidth
+            required
             value={formik.values.gender}
             onChange={formik.handleChange}
             error={formik.touched.gender && Boolean(formik.errors.gender)}
@@ -162,6 +165,7 @@ const EmployeeBasicInfoForm = ({ formik, isLoading }) => {
             label='Mobile Number'
             placeholder='Enter your mobile number'
             fullWidth
+            required
             value={formik.values.mobileNumber}
             onChange={formik.handleChange}
             error={
@@ -182,6 +186,7 @@ const EmployeeBasicInfoForm = ({ formik, isLoading }) => {
             label='Citizenship Number'
             placeholder='Enter citizenship number'
             fullWidth
+            required
             value={formik.values.citizenshipNumber}
             onChange={formik.handleChange}
             error={
@@ -220,6 +225,7 @@ const EmployeeBasicInfoForm = ({ formik, isLoading }) => {
             label='Office Email'
             placeholder='Enter office email'
             fullWidth
+            required
             value={formik.values.officeEmail}
             onChange={formik.handleChange}
             error={
@@ -239,6 +245,7 @@ const EmployeeBasicInfoForm = ({ formik, isLoading }) => {
             label='Marital Status'
             placeholder='Select marital status'
             fullWidth
+            required
             value={formik.values.maritalStatus}
             onChange={formik.handleChange}
             error={
@@ -267,6 +274,7 @@ const EmployeeBasicInfoForm = ({ formik, isLoading }) => {
             label='Company Name'
             placeholder='Select your company'
             fullWidth
+            required
             value={!loadingCompany && formik.values.companyId}
             onChange={formik.handleChange}
             error={formik.touched.companyId && Boolean(formik.errors.companyId)}
@@ -291,6 +299,7 @@ const EmployeeBasicInfoForm = ({ formik, isLoading }) => {
             label='Designation'
             placeholder='Select your designation'
             fullWidth
+            required
             value={!loadingDesignation && formik.values.positionId}
             onChange={formik.handleChange}
             error={
@@ -304,7 +313,7 @@ const EmployeeBasicInfoForm = ({ formik, isLoading }) => {
             {!loadingDesignation &&
               designationData.map((option) => (
                 <MenuItem key={option.id} value={option.id}>
-                  {option.positionName}
+                  {option.positionName} ({option.positionLevel})
                 </MenuItem>
               ))}
           </TextField>
@@ -317,6 +326,7 @@ const EmployeeBasicInfoForm = ({ formik, isLoading }) => {
             label='Department Name'
             placeholder='Select your department'
             fullWidth
+            required
             value={!loadingDepartment && formik.values.departmentId}
             onChange={formik.handleChange}
             error={

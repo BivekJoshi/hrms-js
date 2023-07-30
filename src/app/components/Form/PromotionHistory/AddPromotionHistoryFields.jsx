@@ -10,10 +10,10 @@ const AddPromotionHistoryFields = ({ onClose, isLoading }) => {
     const { data: designationData } = useGetDesignation();
 
     const handleFormSubmit = async () => {
-        const isValid = await formik.validateForm(); // Validate the form
+        const isValid = await formik.validateForm();
 
         if (isValid) {
-            formik.handleSubmit(); // Submit the form
+            formik.handleSubmit();
 
             if (formik.isValid) {
                 formik.setTouched({
@@ -21,7 +21,7 @@ const AddPromotionHistoryFields = ({ onClose, isLoading }) => {
                     effectiveFromDate: false,
                     remarks: false,
                 });
-                onClose(); // Close the modal
+                onClose();
             } else {
                 toast.error('Please make sure you have filled the form correctly');
             }
@@ -36,7 +36,7 @@ const AddPromotionHistoryFields = ({ onClose, isLoading }) => {
                         id='positionId'
                         name='positionId'
                         options={designationData}
-                        getOptionLabel={(option) => `${option.positionName}` || ''}
+                        getOptionLabel={(option) => `${option?.positionName} (${option?.positionLevel})`  || ''}
                         value={formik.values.positionId || null}
                         onChange={(event, value) => {
                             formik.setFieldValue('positionId', value ? value.id : null);
@@ -60,7 +60,7 @@ const AddPromotionHistoryFields = ({ onClose, isLoading }) => {
                     <TextField
                         id="effectiveFromDate"
                         name="effectiveFromDate"
-                        label="effectiveFromDate"
+                        label="Effective From Date"
                         type='date'
                         fullWidth
                         value={formik.values.effectiveFromDate}
@@ -81,7 +81,7 @@ const AddPromotionHistoryFields = ({ onClose, isLoading }) => {
                     <TextField
                         id="remarks"
                         name="remarks"
-                        label="remarks Type"
+                        label="Remarks"
                         placeholder="Enter remarks type"
                         fullWidth
                         value={formik.values.remarks}

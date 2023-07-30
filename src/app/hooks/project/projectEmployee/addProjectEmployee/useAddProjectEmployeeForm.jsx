@@ -1,9 +1,9 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import { ProjectEmployeeSchema } from '../validation/ProjectEmployeeSchema';
-import { useAddProjectEmployee } from '../useProjectEmployee';
+import { useAddProjectEmployee, useEditProjectEmployee } from '../useProjectEmployee';
 
-const useAddProjectEmployeeForm = () => {
+export const useAddProjectEmployeeForm = () => {
     const { mutate } = useAddProjectEmployee({});
 
     const formik = useFormik({
@@ -29,4 +29,26 @@ const useAddProjectEmployeeForm = () => {
     return { formik };
 };
 
-export default useAddProjectEmployeeForm;
+export const useEditProjectEmployeeForm = (data) => {
+    const { mutate } = useEditProjectEmployee({});
+  
+    const formik = useFormik({
+        initialValues: {
+            id: data?.id || "",
+            assignedOn: data?.assignedOn || "",
+            deAssignedOn: data?.deAssignedOn || "",
+            employeeId: data?.employeeId || "",
+            projectId: data?.projectId || "",
+        },
+        validationSchema: ProjectEmployeeSchema,
+        enableReinitialize: 'true',
+        onSubmit: (values) => {
+            handleRequest(values);
+        },
+    });
+    const handleRequest = (values) => {
+        values = { ...values };
+        mutate(values, formik);
+    };
+    return { formik };
+}

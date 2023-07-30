@@ -4,7 +4,7 @@ import { EventSchema } from '../Validation/EventSchema';
 
 
 const useAddEventForm = () => {
-    const { mutate } = useAddEvent({});
+    const { mutate, data } = useAddEvent({});
 
     const formik = useFormik({
         initialValues: {
@@ -12,6 +12,7 @@ const useAddEventForm = () => {
             eventDate: '',
             eventTime: '',
             eventDescription: '',
+            eventLocation: '',
         },
         validationSchema: EventSchema,
         onSubmit: (values) => {
@@ -26,7 +27,7 @@ const useAddEventForm = () => {
         mutate(values, formik, { onSuccess: () => formik.handleReset() });
     };
 
-    return { formik };
+    return { formik, data };
 };
 
 export default useAddEventForm;

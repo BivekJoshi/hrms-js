@@ -1,0 +1,11 @@
+  .profile-img img{
+    width: 100%;
+    object-fit: contain;
+    border-radius: 50%;
+    padding: 6px;
+    background: linear-gradient(blue, yellow, rgb(255, 0, 43), rgb(255, 0, 255), red);
+  }
+hr {
+    border: 1px dashed rgb(157, 149, 149);
+    margin: 12px;
+  }

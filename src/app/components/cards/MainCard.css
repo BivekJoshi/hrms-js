@@ -1,20 +1,18 @@
 .main-card {
     border-radius: 8px;
     box-shadow: none;
-    transition: box-shadow 0.3s;
+    /* transition: box-shadow 0.2s; */
     background-color: #fff;
   }
   
   .main-card:hover {
-    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
   }
   
   .main-card.no-border {
     border: none;
   } 
-  .card-content {
-    padding: 20px;
-  }
+
   
   @media (max-width: 768px) {
     .card-header,

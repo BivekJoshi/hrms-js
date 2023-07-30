@@ -1,12 +1,11 @@
-import { Grid, Button, TextField, Checkbox } from "@mui/material";
-import React, { useState } from "react";
-//import useAddProjectActiveForm from "../../../hooks/project/addProject/useAddProjectActiveForm";
-import { pink } from "@mui/material/colors";
-import {useRemoveActiveProject, useAddActiveProject} from "../../../hooks/project/addProject/useAddProjectActiveForm";
-const label = { inputProps: { "aria-label": "Checkbox demo" } };
+import { Grid, Button, TextField } from "@mui/material";
+import React from "react";
+import { useRemoveActiveProject, useAddActiveProject } from "../../../hooks/project/addProject/useAddProjectActiveForm";
 import { toast } from "react-toastify";
+import { useGetDeactivatedProject } from "../../../hooks/project/useProject";
 
 export const EditProjectDeactivateFields = ({ onClose, isLoading, data }) => {
+
   const { formik } = useRemoveActiveProject(data);
 
   const handleFormSubmit = () => {
@@ -22,6 +21,12 @@ export const EditProjectDeactivateFields = ({ onClose, isLoading, data }) => {
     }
   };
 
+  const getProjectName = (projectId) => {
+    if (data && data?.id === projectId) {
+      return data?.projectName
+    } return projectId
+  };
+
   return (
     !isLoading && (
       <Grid container spacing={3}>
@@ -32,7 +37,7 @@ export const EditProjectDeactivateFields = ({ onClose, isLoading, data }) => {
             label="Project Name"
             placeholder="Enter project Id"
             fullWidth
-            value={formik.values.projectId}
+            value={getProjectName(formik.values.projectId)}
             onChange={formik.handleChange}
             error={formik.touched.projectId && Boolean(formik.errors.projectId)}
             helperText={formik.touched.projectId && formik.errors.projectId}
@@ -48,19 +53,19 @@ export const EditProjectDeactivateFields = ({ onClose, isLoading, data }) => {
           alignItems="flex-end"
         >
           <Button
-            variant="container"
+            variant="contained"
+            onClick={handleFormSubmit}
+            sx={{ mt: 3, ml: 1 }}
+          >
+            Terminate Project
+          </Button>
+          <Button
+            variant="contained"
             onClick={onClose}
             sx={{ mt: 3, ml: 1 }}
             color="error"
           >
             Cancel
-          </Button>
-          <Button
-            variant="contained"
-            onClick={handleFormSubmit}
-            sx={{ mt: 3, ml: 1 }}
-          >
-            De Activate Project
           </Button>
         </Grid>
       </Grid>
@@ -69,8 +74,9 @@ export const EditProjectDeactivateFields = ({ onClose, isLoading, data }) => {
 };
 
 export const EditProjectActivateFields = ({ onClose, isLoading, data }) => {
+  const { data: projectData } = useGetDeactivatedProject();
   const { formik } = useAddActiveProject(data);
-  
+
   const handleFormSubmit = () => {
     formik.handleSubmit();
 
@@ -84,6 +90,13 @@ export const EditProjectActivateFields = ({ onClose, isLoading, data }) => {
     }
   };
 
+  const getProjectName = (projectId) => {
+    return (
+      projectData?.find((project) => project?.id === projectId)
+        ?.projectName || projectId
+    )
+  };
+
   return (
     !isLoading && (
       <Grid container spacing={3}>
@@ -94,7 +107,7 @@ export const EditProjectActivateFields = ({ onClose, isLoading, data }) => {
             label="Project Name"
             placeholder="Enter project Id"
             fullWidth
-            value={formik.values.projectId}
+            value={getProjectName(formik.values.projectId)}
             onChange={formik.handleChange}
             error={formik.touched.projectId && Boolean(formik.errors.projectId)}
             helperText={formik.touched.projectId && formik.errors.projectId}
@@ -110,19 +123,19 @@ export const EditProjectActivateFields = ({ onClose, isLoading, data }) => {
           alignItems="flex-end"
         >
           <Button
-            variant="container"
-            onClick={onClose}
-            sx={{ mt: 3, ml: 1 }}
-            color="error"
-          >
-            Cancel
-          </Button>
-          <Button
             variant="contained"
             onClick={handleFormSubmit}
             sx={{ mt: 3, ml: 1 }}
           >
             Activate Project
+          </Button>
+          <Button
+            variant="contained"
+            onClick={onClose}
+            sx={{ mt: 3, ml: 1 }}
+            color="error"
+          >
+            Cancel
           </Button>
         </Grid>
       </Grid>
