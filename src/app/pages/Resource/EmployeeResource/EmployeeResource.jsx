@@ -6,7 +6,6 @@ import tableIcons from "../../../../theme/overrides/TableIcon";
 import { useGetEmployee } from "../../../hooks/employee/useEmployee";
 import { useNavigate } from "react-router-dom";
 import DeleteIcon from '@mui/icons-material/Delete';
-import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import DeleteConfirmationModal from "../../../components/Modal/DeleteConfirmationModal";
 import { AddEmployeeResourceModal } from "./EmployeeResourceModal";
 

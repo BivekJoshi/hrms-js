@@ -14,7 +14,7 @@ import { useGetEmployee } from "../../hooks/employee/useEmployee";
 
 const EmailToAll = ({ open, onClose, eventId, }) => {
   const { data: employeeData } = useGetEmployee();
-  const [employeeId, setEmployeeId] = useState("employee");
+  const [employeeId, setEmployeeId] = useState();
   const [emailData, setEmailData] = useState({ subject: "", message: "" });
   const [errors, setErrors] = useState({ subject: false, message: false });
 
@@ -42,9 +42,8 @@ const EmailToAll = ({ open, onClose, eventId, }) => {
   };
 
   const handleChange = (event) => {
-    const newEmployeeId = event.target.value;
-  setEmployeeId(newEmployeeId);
     const { value } = event.target;
+    
     if (value === "employee") {
       const allEmployeeId = employeeData.map((employee) => employee.id);
       setEmployeeId(allEmployeeId);
