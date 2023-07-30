@@ -44,7 +44,6 @@ const Dashboard = () => {
           icon={<AiFillProject fontSize="3rem" />} value={6}
         />
       </Grid>
-      {/* <EmployeeCount /> */}
 
       <Box
         sx={{
