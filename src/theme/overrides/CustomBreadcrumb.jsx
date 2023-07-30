@@ -20,15 +20,3 @@ export default function CustomBreadcrumb ({currentPath}) {
     
   </Breadcrumbs>;
 };
-
-// export default function CustomBreadcrumb({ routes, currentPath }) {
-//   return (
-//     <div role="presentation" >
-//       <StyledBreadcrumbs aria-label="breadcrumb">
-//         <Link underline="hover" color="inherit" >
-//           <Typography variant="h5">HRMS{currentPath}</Typography>
-//         </Link>
-//       </StyledBreadcrumbs>
-//     </div>
-//   );
-// }

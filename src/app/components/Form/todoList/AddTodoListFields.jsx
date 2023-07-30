@@ -46,7 +46,6 @@ const AddTodoListFields = ({ onClose, isLoading }) => {
                 message: true,
                 dueDate: true,
                 priority: true,
-                // status: true,
             });
             onClose();
         } else {
@@ -119,29 +118,6 @@ const AddTodoListFields = ({ onClose, isLoading }) => {
                         ))}
                     </TextField>
                 </Grid>
-                {/* <Grid item xs={12} sm={6}>
-                    <TextField
-                        id='status'
-                        name='status'
-                        select
-                        label='status'
-                        placeholder='Select your status'
-                        fullWidth
-                        value={formik.values.status}
-                        onChange={formik.handleChange}
-                        error={formik.touched.status && Boolean(formik.errors.status)}
-                        helperText={formik.touched.status && formik.errors.status}
-                        variant='outlined'
-                        autoFocus
-                        InputLabelProps={{ shrink: true }}
-                    >
-                        {status.map((option) => (
-                            <MenuItem key={option.value} value={option.value}>
-                                {option.label}
-                            </MenuItem>
-                        ))}
-                    </TextField>
-                </Grid> */}
 
                 <Grid
                     container

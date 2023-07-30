@@ -14,7 +14,7 @@ const EmployeeResource = () => {
   const navigate = useNavigate();
   const { data: employeeResourceData, isLoading } = useGetEmployeeResource();
   const { data: employeeData, isLoading: loadingemployee } = useGetEmployee();
-  console.log(employeeResourceData)
+
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [deletedData, setDeletedData] = useState({});
   const handleCloseDeleteModal = () => setOpenDeleteModal(false);

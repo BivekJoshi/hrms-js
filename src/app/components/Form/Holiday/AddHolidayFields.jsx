@@ -29,17 +29,6 @@ const AddHolidayFields = ({ onClose, isLoading }) => {
     }
   };
 
-  //   const handleFormSubmit = async () => {
-  //     const isValid = await formik.validateForm();
-
-  //     if (isValid) {
-  //       formik.handleSubmit();
-  //       setOpenSubmitModal(true);
-  //     } else {
-  //       toast.error("Please make sure you have filled the form correctly");
-  //     }
-  //   };
-
   return (
     <>
       {showInitialView && (

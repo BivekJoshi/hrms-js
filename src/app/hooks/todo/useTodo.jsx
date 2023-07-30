@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
-import { addList, deleteList, editList, getList, getListById, getListByUserId } from '../../api/Todo/todo-api';
+import { addList, deleteList, editList, getList, getListById } from '../../api/Todo/todo-api';
 
 {/*________________________GET_____________________________________*/ }
 export const useGetList = () => {
@@ -9,14 +9,6 @@ export const useGetList = () => {
     refetchOnWindowFocus: false,
   });
 };
-
-{/*________________________GETBYUSERID_____________________________________*/ }
-// export const useGetUserListById = (id) => {
-//   return useQuery(['getListByUserId', id], () => getListByUserId(id), {
-//     refetchInterval: false,
-//     refetchOnWindowFocus: false,
-//   });
-// };
 
 {/*________________________GETBYID_____________________________________*/ }
 export const useGetListById = (id) => {

@@ -24,30 +24,12 @@ export const useGetEmployeeResourceById = (id) => {
   });
 };
 
-{/*________________________POST EMPLOYEE RESOURCE_____________________________________*/ }
-// export const useAddEmployeeResource = ({ onSuccess }) => {
-//   const queryClient = useQueryClient();
-//   return useMutation(['addemployeeResource'], (formData) => addemployeeResource(formData), {
-//     onSuccess: (data, variables, context) => {
-//       // console.log(data);
-//       toast.success('Succesfully added Resource to Employee');
-//       onSuccess && onSuccess(data, variables, context);
-//       queryClient.invalidateQueries('getemployeeResource');
-//       // console.log(formData);
-//     },
-//     onError: (err, _variables, _context) => {
-//       toast.error(`error: ${err.message}`);
-//     },
-//   });
-// };
-
 export const useAddEmployeeResource = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(["addemployeeResource"], (formData) => addemployeeResource(formData), {
     onSuccess: (data, variables, context) => {
       toast.success("Succesfully added Company");
       onSuccess && onSuccess(data, variables, context);
-      // queryClient.invalidateQueries("getCompany");
     },
     onError: (err, _variables, _context) => {
       toast.error(`error: ${err.message}`);

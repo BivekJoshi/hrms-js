@@ -27,8 +27,6 @@ export const   PagePagination = ({
   return (
     <Pagination
       count={pageNumbers.length}
-      // showFirstButton
-      // showLastButton
       spacing={2}
       page={CurrentPage}
       onChange={(event, page) => Paginate(page)}

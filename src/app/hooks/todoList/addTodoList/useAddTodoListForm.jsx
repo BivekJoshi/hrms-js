@@ -10,7 +10,6 @@ const useAddTodoForm = () => {
             message: "",
             dueDate:"",
             priority:"",
-            // status:"",
         },
         validationSchema: TodoListSchema,
         onSubmit: (values) => {

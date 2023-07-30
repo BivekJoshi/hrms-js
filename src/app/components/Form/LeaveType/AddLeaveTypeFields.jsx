@@ -67,7 +67,6 @@ const AddLeaveTypeFields = ({ onClose, isLoading, existingLeaveTypes }) => {
     }
   };
 
-  {/*Filter the leave names that are not already existing in the table*/ }
 
   const FILTEREDLEAVENAMES = LEAVENAME.filter(
     (option) => !existingLeaveTypes.includes(option.value)
@@ -140,8 +139,8 @@ const AddLeaveTypeFields = ({ onClose, isLoading, existingLeaveTypes }) => {
           <FormControlLabel
             required
             control={<ThemeSwitch
-              checked={formik.values.isCarryForward} // Set the checked value based on formik's values
-              onChange={formik.handleChange} // Handle the change event
+              checked={formik.values.isCarryForward}
+              onChange={formik.handleChange}
               name="isCarryForward"
             />}
             label='Carry Forward'

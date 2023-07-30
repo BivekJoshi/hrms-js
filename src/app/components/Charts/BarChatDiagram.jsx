@@ -6,8 +6,6 @@ import { ArcElement } from "chart.js";
 import { Box, Card } from "@mui/material";
 import "./Style/Style.css";
 
-// ChartJS.register(ArcElement, Tooltip, Legend);
-
 ChartJS.register(
   CategoryScale,
   LinearScale,

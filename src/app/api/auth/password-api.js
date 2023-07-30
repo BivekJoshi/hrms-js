@@ -20,7 +20,6 @@ export const addforgotPassword = async (formData) => {
 
 {/*____________________________PUT____________________________________________*/}
 export const addResetPassword = async (formData) => {
-    console.log(formData)
     const {id} = formData;
     const data = await axiosInstance.put(`/user/reset-password/${id}`, formData);
     return data;
