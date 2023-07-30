@@ -1,6 +1,28 @@
+import React, { useState, useEffect, useRef, useContext } from "react";
+import {
+  Avatar,
+  Box,
+  Button,
+  CardContent,
+  Chip,
+  Divider,
+  Grid,
+  Typography,
+} from "@mui/material";
+import { ClickAwayListener, Grow, Stack } from "@mui/material";
+import { MenuItem, MenuList, Paper, Popper } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+
+import MainCard from "../MainCard";
+import {
+  DeactivateProjectModal,
+  EditProjectModal,
+} from "../../../pages/Project/ProjectModal/ProjectModal";
 import { useGetEmployee } from "../../../hooks/employee/useEmployee";
 import { useGetProjectEmployee } from "../../../hooks/project/projectEmployee/useProjectEmployee";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
+
 const ProjectCard = ({
   Id,
   ProjectName,

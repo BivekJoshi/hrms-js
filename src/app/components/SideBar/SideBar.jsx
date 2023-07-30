@@ -30,7 +30,7 @@ import PlaylistAddCheckIcon from "@mui/icons-material/PlaylistAddCheck";
 import AddchartIcon from "@mui/icons-material/Addchart";
 import EventIcon from "@mui/icons-material/Event";
 import HolidayVillageIcon from "@mui/icons-material/HolidayVillage";
-import LaptopIcon from '@mui/icons-material/Laptop';
+import LaptopIcon from "@mui/icons-material/Laptop";
 
 const drawerWidth = 250;
 
@@ -147,10 +147,13 @@ export default function Sidebar() {
       ],
     },
     {
-      name: 'Office Reource',
-      icon: <LaptopIcon sx={mode === "light" ? { color: "black" } : { color: "white" }}
-       />,
-      path: 'resource/employee',
+      name: "Office Reource",
+      icon: (
+        <LaptopIcon
+          sx={mode === "light" ? { color: "black" } : { color: "white" }}
+        />
+      ),
+      path: "resource/employee",
       subMenus: [],
     },
     {
@@ -285,17 +288,21 @@ export default function Sidebar() {
                   />
                   {menu.subMenus.length > 0 ? (
                     subMenuOpen[index] ? (
-                      <ExpandLess  sx={
-                        mode === "light"
-                          ? { color: "black" }
-                          : { color: "white" }
-                      }/>
-                    ) : (
-                      <ExpandMore  sx={
+                      <ExpandLess
+                        sx={
                           mode === "light"
                             ? { color: "black" }
                             : { color: "white" }
-                        }/>
+                        }
+                      />
+                    ) : (
+                      <ExpandMore
+                        sx={
+                          mode === "light"
+                            ? { color: "black" }
+                            : { color: "white" }
+                        }
+                      />
                     )
                   ) : null}
                 </ListItemButton>
@@ -360,7 +367,10 @@ export default function Sidebar() {
           >
             Logout
           </Button>
-          <Typography variant="body2" sx={{ marginRight: "8px" , marginTop:"1rem"}}>
+          <Typography
+            variant="body2"
+            sx={{ marginRight: "8px", marginTop: "1rem" }}
+          >
             {mode === "light" ? "Light" : "Dark"} Mode
           </Typography>
           <Switch checked={mode === "dark"} onChange={toggleMode} />
