@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { styled, useTheme } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import Divider from "@mui/material/Divider";
@@ -13,13 +13,10 @@ import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import { Button, Card, Fab, Switch, Typography } from "@mui/material";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import IconButton from "@mui/material/IconButton";
-
 import { removeUser } from "../../utils/cookieHelper";
-// import { drawerMenus } from "./drawerMenus";
 import { ThemeModeContext } from "../../../theme/ThemeModeContext";
 import Header from "../Header/Header";
 import BreadCrumbs from "../../../routes/routes";
-
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import PersonIcon from "@mui/icons-material/Person";
@@ -33,8 +30,9 @@ import PlaylistAddCheckIcon from "@mui/icons-material/PlaylistAddCheck";
 import AddchartIcon from "@mui/icons-material/Addchart";
 import EventIcon from "@mui/icons-material/Event";
 import HolidayVillageIcon from "@mui/icons-material/HolidayVillage";
+import LaptopIcon from '@mui/icons-material/Laptop';
 
-const drawerWidth = 260;
+const drawerWidth = 250;
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
   ({ theme, open }) => ({
@@ -70,7 +68,6 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
   ...theme.mixins.toolbar,
   justifyContent: "flex-end",
 }));
@@ -79,7 +76,7 @@ export default function Sidebar() {
   const navigate = useNavigate();
   const location = useLocation();
   const [open, setOpen] = useState(false);
-  const { toggleMode, mode } = useContext(ThemeModeContext); // Accessing mode from context
+  const { toggleMode, mode } = useContext(ThemeModeContext);
   const [subMenuOpen, setSubMenuOpen] = useState({});
 
   const primaryColor = mode === "light " ? "black" : "white";
@@ -99,11 +96,6 @@ export default function Sidebar() {
       icon: <PeopleAltIcon style={{ color: primaryColor }} />,
       path: "employee",
       subMenus: [
-        // {
-        //   name: 'Add Employee',
-        //   path: 'employee/add',
-        //   icon: <PersonAddIcon style={{ color: primaryColor }} />,
-        // },
         {
           name: "Employee",
           path: "employee",
@@ -130,6 +122,12 @@ export default function Sidebar() {
           icon: <CakeIcon style={{ color: primaryColor }} />,
         },
       ],
+    },
+    {
+      name: 'Office Reource',
+      icon: <LaptopIcon style={{ color: primaryColor }} />,
+      path: 'resource/employee',
+      subMenus: [],
     },
     {
       name: "Department",
@@ -319,7 +317,6 @@ export default function Sidebar() {
           }}
         >
           <BreadCrumbs />
-          {/* <br /> */}
           <Outlet />
           <br />
           {location.pathname !== "/admin/dashboard" && (

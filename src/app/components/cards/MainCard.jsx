@@ -1,5 +1,5 @@
 import React from 'react';
-import './MainCard.css'; // Import the CSS file
+import './MainCard.css';
 import { Paper } from '@mui/material';
 import { Grow } from '@mui/material';
 

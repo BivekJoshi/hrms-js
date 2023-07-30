@@ -14,11 +14,6 @@ const AddHolidayFields = ({ onClose, isLoading }) => {
     setOpenSubmitModal(false);
   };
 
-  const handleCloseEmailform = () => {
-    setOpenEmail(false);
-    onClose();
-  };
-
   const handleFormSubmit = async () => {
     formik.handleSubmit();
 
@@ -29,16 +24,10 @@ const AddHolidayFields = ({ onClose, isLoading }) => {
     }
   };
 
-  //   const handleFormSubmit = async () => {
-  //     const isValid = await formik.validateForm();
-
-  //     if (isValid) {
-  //       formik.handleSubmit();
-  //       setOpenSubmitModal(true);
-  //     } else {
-  //       toast.error("Please make sure you have filled the form correctly");
-  //     }
-  //   };
+  const handleCloseEmailform = () => {
+    setOpenSubmitModal(false);
+    onClose();
+  };
 
   return (
     <>

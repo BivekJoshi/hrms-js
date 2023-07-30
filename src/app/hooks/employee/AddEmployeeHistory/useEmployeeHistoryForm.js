@@ -1,7 +1,5 @@
 import { useFormik } from 'formik';
 import { useAddEmployeeHistory, useEditEmployeeHistory } from '../useEmployeeHistory';
-import HistorySchema from './HistorySchema';
-
 
 const useEmployeeHistoryForm = ({ data, isLoadingHistory: isLoading }) => {
     const { mutate } = useAddEmployeeHistory({});
@@ -37,7 +35,6 @@ const useEmployeeHistoryForm = ({ data, isLoadingHistory: isLoading }) => {
                 ],
         },
         enableReinitialize: "true",
-        // validationSchema: HistorySchema,
         onSubmit: (values) => {
             if (historyDetails.length > 0) {
                 handleEditRequest(values);
@@ -59,4 +56,4 @@ const useEmployeeHistoryForm = ({ data, isLoadingHistory: isLoading }) => {
     return { formik };
 }
 
-export default useEmployeeHistoryForm
+export default useEmployeeHistoryForm;

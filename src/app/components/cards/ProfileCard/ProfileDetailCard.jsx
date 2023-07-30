@@ -1,7 +1,6 @@
 import React from "react";
 import { Button, List, ListItem, Stack, Typography } from "@mui/material";
 import "./style.css";
-// Styled component for ListItem typography
 const ListItemTypography = ({ variant, label, value }) => (
   <ListItem sx={{ display: "flex", gridGap: "4rem" }}>
     <Typography variant={variant} sx={{ flex: "50%" }}>

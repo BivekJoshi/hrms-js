@@ -2,7 +2,6 @@ import {
   Grid,
   TextField,
   Button,
-  Box,
   MenuItem,
   Autocomplete,
 } from '@mui/material';
@@ -35,7 +34,7 @@ const AddLeaveFields = ({ onClose, isLoading }) => {
     formik.handleSubmit();
 
     if (formik.isValid) {
-      onClose(); // Close the modal
+      onClose();
     } else {
       toast.error('Please make sure you have filled the form correctly');
     }

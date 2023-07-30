@@ -75,7 +75,6 @@ export const PieChartDiagram = ({data}) => {
         </Pie>
       </PieChart>
       <Legend
-      // style={{position:"inherit"}}
         content={
           <ul className="LegendList">
             {piedata.map((entry, index) => (
