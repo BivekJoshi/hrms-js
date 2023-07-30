@@ -1,13 +1,17 @@
 import { Box, Button, Stack } from "@mui/material";
 import MaterialTable from "material-table";
 import React, { useState } from "react";
-import { useDeleteEmployeeResource, useGetEmployeeResource } from "../../../hooks/resource/employeeResource/useEmployeeResource";
+import {
+  useDeleteEmployeeResource,
+  useGetEmployeeResource,
+} from "../../../hooks/resource/employeeResource/useEmployeeResource";
 import tableIcons from "../../../../theme/overrides/TableIcon";
 import { useGetEmployee } from "../../../hooks/employee/useEmployee";
 import { useNavigate } from "react-router-dom";
-import DeleteIcon from '@mui/icons-material/Delete';
+import DeleteIcon from "@mui/icons-material/Delete";
+import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import DeleteConfirmationModal from "../../../components/Modal/DeleteConfirmationModal";
-import { AddEmployeeResourceModal } from "./EmployeeResourceModal";
+import { AddEmployeeResourceModal, EditEmployeeResourceModal } from "./EmployeeResourceModal";
 import { useGetOfficeResource } from "../../../hooks/resource/officeResource/useOfficeResource";
 
 const EmployeeResource = () => {
@@ -16,8 +20,17 @@ const EmployeeResource = () => {
   const { data : officeResourceData } = useGetOfficeResource();
   const { data: employeeData, isLoading: loadingemployee } = useGetEmployee();
 
+  const [openAddModal, setOpenAddModal] = useState(false);
+  const [openEditModal, setOpenEditModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
+
   const [deletedData, setDeletedData] = useState({});
+  const [editedEmployeeResouce, setEditedEmployeeResource] = useState({});
+
+  const handleAddOpenModal = () => setOpenAddModal(true);
+  const handleCloseAddModal = () => setOpenAddModal(false);
+
+  const handleCloseEditModal = () => setOpenEditModal(false);
   const handleCloseDeleteModal = () => setOpenDeleteModal(false);
 
   const deleteRowDataMutation = useDeleteEmployeeResource({});
@@ -31,12 +44,10 @@ const EmployeeResource = () => {
     setOpenDeleteModal(false);
   };
 
-  const [openAddModal, setOpenAddModal] = useState(false);
-  const handleAddOpenModal = () => setOpenAddModal(true);
-  const handleCloseAddModal = () => setOpenAddModal(false);
-
-
-
+  const handleEditRowData = (rowData) => {
+    setEditedEmployeeResource(rowData);
+    setOpenEditModal(true);
+  };
 
   const getEmployeeName = (rowData) => {
     const employeeId = rowData?.employeeId;
@@ -46,13 +57,11 @@ const EmployeeResource = () => {
     }`;
     return name;
   };
-
   const getResourceName = (rowData) => {
     const resourceId = rowData?.officeResourceId;
     const resourceName = officeResourceData?.find((resource) => resource?.id === resourceId );
     return resourceName?.name;
   }
-
 
   const columns = [
     {
@@ -86,9 +95,12 @@ const EmployeeResource = () => {
       emptyValue: "-",
     },
     {
-      title: 'Actions',
+      title: "Actions",
       render: (rowData) => (
         <Stack direction="row" spacing={0}>
+          <Button color="primary" onClick={() => handleEditRowData(rowData)}>
+            <ModeEditOutlineIcon />
+          </Button>
           <Button color="primary" onClick={() => handleDeleteRowData(rowData)}>
             <DeleteIcon />
           </Button>
@@ -110,7 +122,11 @@ const EmployeeResource = () => {
         >
           Resources
         </Button>
-        <Button variant="contained" sx={{ mt: 3, ml: 1 }} onClick={handleAddOpenModal}>
+        <Button
+          variant="contained"
+          sx={{ mt: 3, ml: 1 }}
+          onClick={handleAddOpenModal}
+        >
           +Add Employee
         </Button>
       </Box>
@@ -140,7 +156,7 @@ const EmployeeResource = () => {
           },
         }}
       />
-        {openDeleteModal && (
+      {openDeleteModal && (
         <DeleteConfirmationModal
           open={openDeleteModal}
           handleCloseModal={handleCloseDeleteModal}
@@ -148,10 +164,17 @@ const EmployeeResource = () => {
           message={"Employee with Resource"}
         />
       )}
-        {openAddModal && (
+      {openAddModal && (
         <AddEmployeeResourceModal
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
+        />
+      )}
+      {openEditModal && (
+        <EditEmployeeResourceModal
+        id={editedEmployeeResouce?.id}
+          open={openEditModal}
+          handleCloseModal={handleCloseEditModal}
         />
       )}
     </>
