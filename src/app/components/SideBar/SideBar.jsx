@@ -21,6 +21,7 @@ import Header from "../Header/Header";
 import BreadCrumbs from "../../../routes/routes";
 
 import DashboardIcon from "@mui/icons-material/Dashboard";
+import laptopIcon from "@mui/icons-material/laptopIcon";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import PersonIcon from "@mui/icons-material/Person";
 import MailIcon from "@mui/icons-material/Mail";
@@ -34,7 +35,7 @@ import AddchartIcon from "@mui/icons-material/Addchart";
 import EventIcon from "@mui/icons-material/Event";
 import HolidayVillageIcon from "@mui/icons-material/HolidayVillage";
 
-const drawerWidth = 260;
+const drawerWidth = 250;
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
   ({ theme, open }) => ({
@@ -99,11 +100,6 @@ export default function Sidebar() {
       icon: <PeopleAltIcon style={{ color: primaryColor }} />,
       path: "employee",
       subMenus: [
-        // {
-        //   name: 'Add Employee',
-        //   path: 'employee/add',
-        //   icon: <PersonAddIcon style={{ color: primaryColor }} />,
-        // },
         {
           name: "Employee",
           path: "employee",
@@ -130,6 +126,12 @@ export default function Sidebar() {
           icon: <CakeIcon style={{ color: primaryColor }} />,
         },
       ],
+    },
+    {
+      name: "Office Resource",
+      icon: "icon",
+      path: "resource",
+      subMenu: [],
     },
     {
       name: "Department",
