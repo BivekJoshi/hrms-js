@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
@@ -13,13 +13,17 @@ import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck';
 import AddchartIcon from '@mui/icons-material/Addchart';
 import EventIcon from '@mui/icons-material/Event';
 import HolidayVillageIcon from '@mui/icons-material/HolidayVillage';
+import ThemeModeContext from '../../../theme/ThemeModeContext';
 
-const primaryColor = '#01579b';
+const { toggleMode, mode } = useContext(ThemeModeContext); // Accessing mode from context
+
+console.log(mode);
+// const primaryColor = '#01579b';
 
 export const drawerMenus = [
   {
     name: 'Dashboard',
-    icon: <DashboardIcon style={{ color: primaryColor }} />,
+    icon: <DashboardIcon style={mode === "light " ? { color: "#01579b" }: {color:"white"}} />,
     path: 'dashboard',
     subMenus: [],
   },
