@@ -1,23 +1,18 @@
-import React, { useContext } from "react";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
-import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import PersonIcon from "@mui/icons-material/Person";
-import MailIcon from "@mui/icons-material/Mail";
-import CakeIcon from "@mui/icons-material/Cake";
-import HowToRegIcon from "@mui/icons-material/HowToReg";
-import WorkspacesIcon from "@mui/icons-material/Workspaces";
-import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
-import BusinessIcon from "@mui/icons-material/Business";
-import PlaylistAddCheckIcon from "@mui/icons-material/PlaylistAddCheck";
-import AddchartIcon from "@mui/icons-material/Addchart";
-import EventIcon from "@mui/icons-material/Event";
-import HolidayVillageIcon from "@mui/icons-material/HolidayVillage";
-import LaptopIcon from "@mui/icons-material/Laptop";
+import React from 'react';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
+import PersonIcon from '@mui/icons-material/Person';
+import MailIcon from '@mui/icons-material/Mail';
+import CakeIcon from '@mui/icons-material/Cake';
+import HowToRegIcon from '@mui/icons-material/HowToReg';
+import WorkspacesIcon from '@mui/icons-material/Workspaces';
+import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
+import BusinessIcon from '@mui/icons-material/Business';
+import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck';
+import AddchartIcon from '@mui/icons-material/Addchart';
+import EventIcon from '@mui/icons-material/Event';
+import HolidayVillageIcon from '@mui/icons-material/HolidayVillage';
 
-// const { toggleMode, mode } = useContext(ThemeModeContext); // Accessing mode from context
-
-// console.log(mode);
 const primaryColor = "#01579b";
 
 export const drawerMenus = [
@@ -36,11 +31,6 @@ export const drawerMenus = [
     icon: <PeopleAltIcon style={{ color: primaryColor }} />,
     path: "employee",
     subMenus: [
-      // {
-      //   name: 'Add Employee',
-      //   path: 'employee/add',
-      //   icon: <PersonAddIcon style={{ color: primaryColor }} />,
-      // },
       {
         name: "Employee",
         path: "employee",

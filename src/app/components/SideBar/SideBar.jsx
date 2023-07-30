@@ -34,6 +34,7 @@ import PlaylistAddCheckIcon from "@mui/icons-material/PlaylistAddCheck";
 import AddchartIcon from "@mui/icons-material/Addchart";
 import EventIcon from "@mui/icons-material/Event";
 import HolidayVillageIcon from "@mui/icons-material/HolidayVillage";
+import LaptopIcon from '@mui/icons-material/Laptop';
 
 const drawerWidth = 250;
 
@@ -128,10 +129,10 @@ export default function Sidebar() {
       ],
     },
     {
-      name: "Office Resource",
-      icon: "icon",
-      path: "resource",
-      subMenu: [],
+      name: 'Office Reource',
+      icon: <LaptopIcon style={{ color: primaryColor }} />,
+      path: 'resource/employee',
+      subMenus: [],
     },
     {
       name: "Department",
