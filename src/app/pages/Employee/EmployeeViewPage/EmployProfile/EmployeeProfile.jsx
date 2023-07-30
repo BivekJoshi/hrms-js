@@ -18,11 +18,6 @@ const EmployeeProfile = () => {
 
   if (isLoading) return <>Loading</>;
 
-  const [openAddModal, setOpenAddModal] = useState(false);
-
-  const handleAddOpenModal = () => setOpenAddModal(true);
-  const handleCloseAddModal = () => setOpenAddModal(false);
-
   return (
     <>
       <div className="header">
@@ -36,7 +31,6 @@ const EmployeeProfile = () => {
         >
           <KeyboardBackspaceIcon />
         </Button>
-          <Button variant="contained" onClick={handleAddOpenModal}>Add User</Button>
       </div>
       <ProgressById />
 
@@ -45,12 +39,6 @@ const EmployeeProfile = () => {
         <DetailProfile data={employeeDataById} />
       </div>
 
-      {openAddModal && (
-        <AddUser
-          open={openAddModal}
-          handleCloseModal={handleCloseAddModal}
-        />
-      )}
     </>
   );
 };
