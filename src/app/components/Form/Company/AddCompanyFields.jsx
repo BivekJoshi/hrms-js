@@ -7,13 +7,13 @@ const AddCompanyFields = ({ onClose, isLoading }) => {
   const { formik } = useAddCompanyForm();
 
   const handleFormSubmit = async () => {
-    const isValid = await formik.validateForm(); // Validate the form
+    const isValid = await formik.validateForm();
 
     if (isValid) {
-      formik.handleSubmit(); // Submit the form
+      formik.handleSubmit();
 
       if (formik.isValid) {
-        onClose(); // Close the modal
+        onClose();
       } else {
         toast.error("Please make sure you have filled the form correctly");
       }

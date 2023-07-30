@@ -8,7 +8,6 @@ import {
 } from '@mui/material';
 import React, { useRef, useState } from 'react';
 import useAddDocumentForm from '../../../../hooks/employee/AddDocument/useAddDocumentForm';
-import { useAddDocument } from '../../../../hooks/employee/useDocument';
 
 const documentType = [
   {
@@ -82,17 +81,6 @@ const EmployeeDocumentDetailForm = () => {
   const handleFormSubmit = (documentType) => {
     formik.setFieldValue('documentType', documentType);
     formik.handleSubmit(documentType);
-
-    // if (formik.isValid) {
-    //   formik.setTouched({
-    //     departmentName: true,
-    //     departmentType: true,
-    //     departmentDescription: true,
-    //   });
-    //   onClose();
-    // } else {
-    //   toast.error('Please make sure you have filled the form correctly');
-    // }
   };
   const handleChange = (panel) => (_, isExpanded) => {
     setExpandedAccordion(isExpanded ? panel : null);

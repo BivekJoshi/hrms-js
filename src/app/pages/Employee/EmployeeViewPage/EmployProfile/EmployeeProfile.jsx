@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import { useGetEmployeeById } from "../../../../hooks/employee/useEmployee";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { Button, Stack } from "@mui/material";
+import { Button } from "@mui/material";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 
 import "./Style/Style.css";
@@ -23,9 +23,6 @@ const EmployeeProfile = () => {
   const handleAddOpenModal = () => setOpenAddModal(true);
   const handleCloseAddModal = () => setOpenAddModal(false);
 
-  // const handleClick = () => {
-  //   navigate("/admin/addUser", { state: { employeeData: employeeDataById } })
-  // };
   return (
     <>
       <div className="header">

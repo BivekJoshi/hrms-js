@@ -3,12 +3,14 @@ import React from "react";
 import useEmployeeResourceForm from "../../../../hooks/resource/employeeResource/useEmployeeResourceForm";
 import { useGetOfficeResource } from "../../../../hooks/resource/officeResource/useOfficeResource";
 import { useGetEmployee } from "../../../../hooks/employee/useEmployee";
+import useEditEmployeeResourceForm from "../../../../hooks/resource/employeeResource/useEditEmployeeResource";
 
-const EmployeeResourceFields = ({ onClose, isLoading }) => {
+const EditEmployeeResourceFields = ({ onClose, isLoading,data }) => {
   const { data: officeResourceData } = useGetOfficeResource();
   const { data: employeeData } = useGetEmployee();
-  
-  const { formik } = useEmployeeResourceForm();
+
+  console.log(officeResourceData);
+  const { formik } = useEditEmployeeResourceForm(data);
   const handleFormSubmit = () => {
     formik.handleSubmit();
 
@@ -125,7 +127,7 @@ const EmployeeResourceFields = ({ onClose, isLoading }) => {
             onClick={handleFormSubmit}
             sx={{ mt: 3, ml: 1 }}
           >
-            Add Resource
+            Update employee Resource
           </Button>
           <Button
             variant="contained"
@@ -141,4 +143,4 @@ const EmployeeResourceFields = ({ onClose, isLoading }) => {
   );
 };
 
-export default EmployeeResourceFields;
+export default EditEmployeeResourceFields;

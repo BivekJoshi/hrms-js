@@ -76,12 +76,6 @@ const LeaveInfo = ({ isLoading }) => {
         );
       },
     },
-    // {
-    // 	title: 'Remark',
-    // 	field: 'leaveRemarks',
-    // 	emptyValue: '-',
-    // 	width: 100,
-    // },
     {
       title: "Approved By",
       field: "confirmById",

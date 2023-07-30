@@ -6,14 +6,6 @@ export const getList = async () => {
   return data;
 };
 
-// {/*________________________GETBYUSERID_____________________________________*/ }
-// export const getListByUserId = async (id) => {
-//   if (id) {
-//     const data = await axiosInstance.get(`/to-do-list/get-by-id/${id}`);
-//     return data;
-//   }
-// };
-
 {/*________________________GETBYID_____________________________________*/ }
 export const getListById = async (id) => {
   if (id) {

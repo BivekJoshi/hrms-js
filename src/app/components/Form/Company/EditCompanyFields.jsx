@@ -14,7 +14,7 @@ const EditCompanyFields = ({ onClose, isLoading, data }) => {
         companyType: true,
         companyDescription: true,
       });
-      onClose(); // Close the modal
+      onClose();
     } else {
       toast.error("Please make sure you have filled the form correctly");
     }

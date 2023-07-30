@@ -2,20 +2,32 @@ import MaterialTable from "@material-table/core";
 import React, { useState } from "react";
 import tableIcons from "../../../../theme/overrides/TableIcon";
 import { useGetOfficeResource } from "../../../hooks/resource/officeResource/useOfficeResource";
-import { Box, Button } from "@mui/material";
-import { AddOfficeResourceModal } from "./OfficeResourceModal";
+import { Box, Button, Stack } from "@mui/material";
+import { AddOfficeResourceModal, EditOfficeResourceModal } from "./OfficeResourceModal";
+import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 
 const OfficeResource = () => {
   const { data: officeResourceData, isLoading } = useGetOfficeResource();
 
   const [openAddModal, setOpenAddModal] = useState(false);
+  const [openEditModal, setOpenEditModal] = useState(false);
+
+  const [editedRowData, setEditedRowData] = useState({});
+
   const handleAddOpenModal = () => setOpenAddModal(true);
   const handleCloseAddModal = () => setOpenAddModal(false);
+
+  const handleCloseEditModal = () => setOpenEditModal(false);
+
+  const handleEditRowData = (rowData) => {
+    setEditedRowData(rowData);
+    setOpenEditModal(true);
+  };
 
   const columns = [
     {
       title: "SN",
-      render: (rowData) => rowData?.tableData?.index+1,
+      render: (rowData) => rowData?.tableData?.index + 1,
       width: "3%",
       sortable: false,
     },
@@ -39,6 +51,18 @@ const OfficeResource = () => {
       title: "Status",
       field: "isActive",
       emptyValue: "-",
+    },
+    {
+      title: "Actions",
+      render: (rowData) => (
+        <Stack direction="row" spacing={0}>
+          <Button color="primary" onClick={() => handleEditRowData(rowData)}>
+            <ModeEditOutlineIcon />
+          </Button>
+        </Stack>
+      ),
+      sorting: false,
+      width: 120,
     },
   ];
   return (
@@ -82,6 +106,13 @@ const OfficeResource = () => {
         <AddOfficeResourceModal
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
+        />
+      )}
+      {openEditModal && (
+        <EditOfficeResourceModal
+          id={editedRowData?.id}
+          open={openEditModal}
+          handleCloseModal={handleCloseEditModal}
         />
       )}
     </>

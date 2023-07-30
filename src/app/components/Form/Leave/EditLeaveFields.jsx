@@ -59,7 +59,7 @@ const EditLeaveFields = ({ onClose, isLoading, data }) => {
         leaveRemarks: true,
         halfDay: true,
       });
-      onClose(); // Close the modal
+      onClose();
     } else {
       toast.error('Please make sure you have filled the form correctly');
     }
