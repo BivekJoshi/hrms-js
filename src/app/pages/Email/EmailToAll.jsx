@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import { useGetEmployee } from "../../hooks/employee/useEmployee";
 
-const EmailToAll = ({ open, onClose, eventId, }) => {
+const EmailToAll = ({ open, onClose, eventId }) => {
   const { data: employeeData } = useGetEmployee();
   const [employeeId, setEmployeeId] = useState();
   const [emailData, setEmailData] = useState({ subject: "", message: "" });
@@ -31,6 +31,7 @@ const EmailToAll = ({ open, onClose, eventId, }) => {
     event.preventDefault();
     if (validateForm()) {
       sendEmailMutation.mutate(emailData);
+      onClose();
     }
   };
 
@@ -43,7 +44,7 @@ const EmailToAll = ({ open, onClose, eventId, }) => {
 
   const handleChange = (event) => {
     const { value } = event.target;
-    
+
     if (value === "employee") {
       const allEmployeeId = employeeData.map((employee) => employee.id);
       setEmployeeId(allEmployeeId);
@@ -101,6 +102,7 @@ const EmailToAll = ({ open, onClose, eventId, }) => {
                   variant="contained"
                   color="primary"
                   style={{ marginLeft: "10px" }}
+                  onClick={onClose}
                 >
                   Cancel
                 </Button>

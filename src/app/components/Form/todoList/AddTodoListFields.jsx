@@ -42,11 +42,6 @@ const AddTodoListFields = ({ onClose, isLoading }) => {
         formik.handleSubmit();
 
         if (formik.isValid) {
-            formik({
-                message: true,
-                dueDate: true,
-                priority: true,
-            });
             onClose();
         } else {
             toast.error("Please make sure you have filled the form correctly")

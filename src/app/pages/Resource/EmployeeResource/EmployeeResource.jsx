@@ -8,10 +8,12 @@ import { useNavigate } from "react-router-dom";
 import DeleteIcon from '@mui/icons-material/Delete';
 import DeleteConfirmationModal from "../../../components/Modal/DeleteConfirmationModal";
 import { AddEmployeeResourceModal } from "./EmployeeResourceModal";
+import { useGetOfficeResource } from "../../../hooks/resource/officeResource/useOfficeResource";
 
 const EmployeeResource = () => {
   const navigate = useNavigate();
   const { data: employeeResourceData, isLoading } = useGetEmployeeResource();
+  const { data : officeResourceData } = useGetOfficeResource();
   const { data: employeeData, isLoading: loadingemployee } = useGetEmployee();
 
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
@@ -37,13 +39,19 @@ const EmployeeResource = () => {
 
 
   const getEmployeeName = (rowData) => {
-    const employeeId = rowData.employeeId;
-    const employee = employeeData?.find((emp) => emp.id === employeeId);
+    const employeeId = rowData?.employeeId;
+    const employee = employeeData?.find((emp) => emp?.id === employeeId);
     const name = `${employee?.firstName} ${employee?.middleName || ""} ${
       employee?.lastName
     }`;
     return name;
   };
+
+  const getResourceName = (rowData) => {
+    const resourceId = rowData?.officeResourceId;
+    const resourceName = officeResourceData?.find((resource) => resource?.id === resourceId );
+    return resourceName?.name;
+  }
 
 
   const columns = [
@@ -62,8 +70,9 @@ const EmployeeResource = () => {
     },
     {
       title: "Resource",
-      field: "officeResourceId",
-      emptyValue: "-",
+      render: (rowData) => {
+        return <p>{getResourceName(rowData)}</p>
+      },
       width: "20vh",
     },
     {
@@ -80,9 +89,6 @@ const EmployeeResource = () => {
       title: 'Actions',
       render: (rowData) => (
         <Stack direction="row" spacing={0}>
-          {/* <Button color="primary" onClick={() => handleEditLeave(rowData)}>
-            <ModeEditOutlineIcon />
-          </Button> */}
           <Button color="primary" onClick={() => handleDeleteRowData(rowData)}>
             <DeleteIcon />
           </Button>

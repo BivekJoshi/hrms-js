@@ -38,7 +38,7 @@ const Dashboard = () => {
           title="Events"
           icon={<BiSolidCalendarEvent fontSize="3rem" />} value={24}
         />
-        <DashboardCard title="Holiday" icon={<FaGifts fontSize="3rem" />} />
+        <DashboardCard title="Holiday" icon={<FaGifts fontSize="3rem" />} value={32} />
         <DashboardCard
           title="Project"
           icon={<AiFillProject fontSize="3rem" />} value={6}

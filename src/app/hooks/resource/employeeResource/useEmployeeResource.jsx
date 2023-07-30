@@ -24,12 +24,14 @@ export const useGetEmployeeResourceById = (id) => {
   });
 };
 
+/*________________________POST_____________________________________*/
 export const useAddEmployeeResource = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(["addemployeeResource"], (formData) => addemployeeResource(formData), {
     onSuccess: (data, variables, context) => {
       toast.success("Succesfully added Company");
       onSuccess && onSuccess(data, variables, context);
+      queryClient.invalidateQueries("getemployeeResource");
     },
     onError: (err, _variables, _context) => {
       toast.error(`error: ${err.message}`);
