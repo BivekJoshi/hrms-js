@@ -17,11 +17,9 @@ const useEmployeeResourceForm = () => {
   });
 
   const handleRequest = (values) => {
-    // console.log(values);
     values = {
       ...values,
     };
-    // console.log(object);
     mutate(values, formik, { onSucess: () => formik.handleReset() });
   };
   return { formik };

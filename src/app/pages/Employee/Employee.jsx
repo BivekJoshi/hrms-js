@@ -46,7 +46,6 @@ const Employee = () => {
   const handleSubmit = () => {
     formik.handleSubmit();
     if (formik.isValid) {
-      // handleOpenSubmitModal();
       setOpenAddModal(false)
     } else {
       toast.error('Please make sure you have filled the form correctly');

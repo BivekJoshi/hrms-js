@@ -1,4 +1,3 @@
-import React from 'react';
 import { useEditTodoList } from '../useTodoList';
 import { useFormik } from 'formik';
 import { TodoListSchema } from '../valaidation/todoListSchema';
@@ -12,7 +11,6 @@ const usEeditTodoListForm = (data) => {
             id: data?.id,
             dueDate: data?.dueDate || "",
             priority: data?.priority || "",
-            // status:data?.status||"",
         },
         validationSchema: TodoListSchema,
         enableReinitialize: "true",

@@ -32,11 +32,6 @@ export const drawerMenus = [
     icon: <PeopleAltIcon style={{ color: primaryColor }} />,
     path: "employee",
     subMenus: [
-      // {
-      //   name: 'Add Employee',
-      //   path: 'employee/add',
-      //   icon: <PersonAddIcon style={{ color: primaryColor }} />,
-      // },
       {
         name: "Employee",
         path: "employee",
@@ -65,13 +60,13 @@ export const drawerMenus = [
     ],
   },
   {
-    name: "Office Reource",
+    name: 'Office Reource',
     icon: <LaptopIcon style={{ color: primaryColor }} />,
-    path: "resource/employee",
+    path: 'resource/employee',
     subMenus: [],
   },
   {
-    name: "Department",
+    name: 'Department',
     icon: <WorkspacesIcon style={{ color: primaryColor }} />,
     path: "department",
     subMenus: [],

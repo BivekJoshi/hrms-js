@@ -1,9 +1,6 @@
-import { Grid, Button, TextField, Checkbox } from "@mui/material";
-import React, { useState } from "react";
-//import useAddProjectActiveForm from "../../../hooks/project/addProject/useAddProjectActiveForm";
-import { pink } from "@mui/material/colors";
+import { Grid, Button, TextField } from "@mui/material";
+import React from "react";
 import { useRemoveActiveProject, useAddActiveProject } from "../../../hooks/project/addProject/useAddProjectActiveForm";
-const label = { inputProps: { "aria-label": "Checkbox demo" } };
 import { toast } from "react-toastify";
 import { useGetDeactivatedProject } from "../../../hooks/project/useProject";
 

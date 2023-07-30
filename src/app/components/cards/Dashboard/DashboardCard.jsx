@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Grid, Stack, Typography } from "@mui/material";
 import MainCard from "../MainCard";
 
-const DashboardCard = ({ title, icon }) => {
+const DashboardCard = ({ title, icon, value }) => {
   return (
     <Grid item xs={12} sm={6} md={3} lg={2}>
       <MainCard grow={true}>
@@ -19,7 +19,7 @@ const DashboardCard = ({ title, icon }) => {
           <Box>
             <Typography
               variant="h6"
-              color={"light" ? "black" : "white"}
+              color={mode === "light" ? "black" : "white"}
               align="center"
               fontWeight={600}
             >

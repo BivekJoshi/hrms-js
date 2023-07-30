@@ -30,8 +30,7 @@ export const ProjectProgressCard = ({ projectDataCount }) => {
       <Box className="projectProgress">
         <Box className="progressBox" bgcolor="#306ED9">
           <Typography sx={{ fontWeight: 600, fontSize: "1.3rem" }}>
-            {" "}
-            Total Project{" "}
+            Total Project
           </Typography>
           <Stack
             justifyContent="space-between"
@@ -49,12 +48,11 @@ export const ProjectProgressCard = ({ projectDataCount }) => {
           <BorderLinearProgress
             variant="determinate"
             value={(projectDataCount?.total / projectDataCount?.total) * 100}
-            // color="#33d77a"
           />
         </Box>
         <Box className="progressBox" bgcolor="#33D77A">
           <Typography sx={{ fontWeight: 600, fontSize: "1.3rem" }}>
-            Completed{" "}
+            Completed
           </Typography>
           <Stack
             justifyContent="space-between"
@@ -72,12 +70,11 @@ export const ProjectProgressCard = ({ projectDataCount }) => {
           <BorderLinearProgress
             variant="determinate"
             value={(projectDataCount?.completed / projectDataCount?.total) * 100}
-            // color="#e8c315 "
           />
         </Box>
         <Box className="progressBox" bgcolor="#e8c315">
           <Typography sx={{ fontWeight: 600, fontSize: "1.3rem" }}>
-            Pending{" "}
+            Pending
           </Typography>
           <Stack
             justifyContent="space-between"
@@ -93,7 +90,6 @@ export const ProjectProgressCard = ({ projectDataCount }) => {
             </Typography>
           </Stack>
           <BorderLinearProgress
-            // color="#F68828"
             variant="determinate"
             value={(projectDataCount?.pending / projectDataCount?.total) * 100}
           />
@@ -117,7 +113,6 @@ export const ProjectProgressCard = ({ projectDataCount }) => {
             </Typography>
           </Stack>
           <BorderLinearProgress
-            // color="#80abf6"
             variant="determinate"
             value={
               (projectDataCount?.workInProgress / projectDataCount?.total) * 100
@@ -125,7 +120,6 @@ export const ProjectProgressCard = ({ projectDataCount }) => {
           />
         </Box>
       </Box>
-      {/* )} */}
     </>
   );
 };

@@ -14,13 +14,13 @@ const CurrentHoliday = () => {
   return (
     <Paper
       sx={{
-        backgroundColor: "#76818d",
+        backgroundColor: "#01579b",
         height: "90vh",
-        padding: 3,
+        padding: 1,
         color: "#fff",
       }}
     >
-      <h1> {currentMonth}</h1>
+      <Box sx={{textAlign: "center"}}><h1> {currentMonth}</h1></Box>
       {currentData &&
         currentData.map((item) => (
           <Timeline
@@ -31,7 +31,8 @@ const CurrentHoliday = () => {
                 padding: 0,
               },
               margin:" 0 !important",
-              padding:"0 16px"
+              padding:"0 16px",
+              overflowY: "auto",
             }}
           >
             <TimelineItem>
@@ -48,14 +49,8 @@ const CurrentHoliday = () => {
                   }}
                 >
                   {item.holidayName}
-                  <Box marginLeft=".5rem"> {item.holidayDate}</Box>
+                  <Box margin="0.4rem 0.8rem" fontSize= "0.8rem" > {item.holidayDate}</Box>
                 </Typography>
-                {/* <Typography style={{ fontWeight: 'bolder', fontSize: 'larger' }}>
-                                {item.holidayDate}
-                            </Typography> */}
-                {/* <Typography style={{ fontSize: '13px' }}>
-                                {item.holidayDescription}
-                            </Typography> */}
               </TimelineContent>
             </TimelineItem>
           </Timeline>

@@ -15,11 +15,6 @@ export const ThemeModeContext = createContext({
 });
 
 export const ThemeContextProvider = ({ children }) => {
-  // const [isDarkMode, setIsDarkMode] = useState(
-  //   window.matchMedia &&
-  //     window.matchMedia('(prefers-color-scheme: dark)').matches
-  // );
-
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [mode, setMode] = useState("light");
   const [width, setWidth] = useState(window.innerWidth);

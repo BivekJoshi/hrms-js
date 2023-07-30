@@ -6,7 +6,6 @@ import Skeleton from "@mui/material/Skeleton";
 import {
   useGetTodoList,
   useDeleteTodoList,
-  useGetTodoListById,
 } from "../../hooks/todoList/useTodoList";
 import { AddTodoListModal, EditTodoListModal } from "./TodoModal/TodoModal";
 
@@ -55,15 +54,6 @@ const TodoList = () => {
       width: 80,
       type: 'numeric',
     },
-    // {
-    //   title: "priority",
-    //   field: "priority",
-    //   width: 80
-    // },
-    // {
-    //   title: "status",
-    //   field: "status",
-    // },
     {
       title: 'priority',
       field: 'priority',
@@ -90,11 +80,6 @@ const TodoList = () => {
       },
 
     },
-    // {
-    //   title: "UserID",
-    //   field: "userId",
-    //   width: 80
-    // },
     {
       title: "Actions",
       render: (rowData) => (
