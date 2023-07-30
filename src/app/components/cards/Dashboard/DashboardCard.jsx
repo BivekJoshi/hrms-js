@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Box, Grid, Stack, Typography } from "@mui/material";
 import MainCard from "../MainCard";
+import ThemeModeContext from "../../../../theme/ThemeModeContext";
 
 const DashboardCard = ({ title, icon, value }) => {
+  const { mode } = useContext(ThemeModeContext);
+
   return (
     <Grid item xs={12} sm={6} md={3} lg={2}>
       <MainCard grow={true}>
