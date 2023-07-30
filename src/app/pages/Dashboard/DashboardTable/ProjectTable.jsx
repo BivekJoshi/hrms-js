@@ -16,18 +16,18 @@ export const ProjectTable = ({ projectData }) => {
       title: "Project Name",
       field: "projectName",
       emptyValue: "-",
-      width: 120,
+      width: 300,
     },
     {
       title: "Started",
       field: "startDate",
       emptyValue: "-",
-      width: 120,
+      width: 150,
     },
     {
       title: "Progress",
       render: (rowData) => (<LinearProgress variant="determinate" value={50} />),
-      width: 200,
+      width: 400,
     },
     {
       title: "Actions",
@@ -48,7 +48,7 @@ export const ProjectTable = ({ projectData }) => {
         </Stack>
       ),
       sorting: false,
-      width: 60,
+      width: 50,
     },
   ];
   return (
@@ -59,6 +59,7 @@ export const ProjectTable = ({ projectData }) => {
           data={projectData}
           title="Recent Projects"
           options={{
+            search:false,
             padding: "dense",
             margin: 50,
             pageSize: 10,
@@ -66,12 +67,12 @@ export const ProjectTable = ({ projectData }) => {
             headerStyle: {
               backgroundColor: "#01579b",
               color: "#FFF",
-              fontSize: 20,
+              fontSize: "1rem",
               padding: "dense",
               height: 50,
             },
             rowStyle: {
-              fontSize: 18,
+              fontSize: ".8rem",
             },
           }}
         />

@@ -21,7 +21,7 @@ const DashboardCard = ({ title, icon, value }) => {
             <Typography variant="h6" color="inherit" align="center" fontWeight={600}>
               {value}
             </Typography>
-            <Typography color="inherit" align="center">
+            <Typography color="black" align="center">
               {title}
             </Typography>
           </Box>
