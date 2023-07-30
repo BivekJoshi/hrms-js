@@ -153,7 +153,8 @@ export default function Sidebar() {
     },
     {
       name: 'Office Reource',
-      icon: <LaptopIcon style={{ color: primaryColor }} />,
+      icon: <LaptopIcon sx={mode === "light" ? { color: "black" } : { color: "white" }}
+       />,
       path: 'resource/employee',
       subMenus: [],
     },
