@@ -103,7 +103,7 @@ const EmployeeResource = () => {
             navigate(`/admin/resource/office`);
           }}
         >
-          +Add Resource
+          Resources
         </Button>
         <Button variant="contained" sx={{ mt: 3, ml: 1 }} onClick={handleAddOpenModal}>
           +Add Employee
