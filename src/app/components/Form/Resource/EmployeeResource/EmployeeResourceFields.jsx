@@ -4,6 +4,7 @@ import useEmployeeResourceForm from "../../../../hooks/resource/employeeResource
 
 const EmployeeResourceFields = ({onClose,isLoading}) => {
   const {formik}=useEmployeeResourceForm();
+  // console.log(formik);
   const handleFormSubmit = () => {
 
     formik.handleSubmit();

@@ -15,6 +15,7 @@ export const getemployeeResourceById = async (id) => {
 {/*________________________POST EMPLOYEE RESOURCE_____________________________________*/ }
 export const addemployeeResource = async (id) => {
   const data = await axiosInstance.post(`/employee-resource`);
+  console.log(data,"datahai ma");
   return data;
 };
 
