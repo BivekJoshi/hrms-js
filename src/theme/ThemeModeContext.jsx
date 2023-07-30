@@ -71,7 +71,7 @@ export const ThemeContextProvider = ({ children }) => {
         imageCaption: isDarkMode ? "#c5c7cb" : "#616161",
       },
       text: {
-        primary: isDarkMode ? "#000" : "#000",
+        primary: isDarkMode ? "#FFFFFF " : "#000",
         secondary: isDarkMode ? "#fff" : "#616161",
         white: "#000",
       },
@@ -83,7 +83,7 @@ export const ThemeContextProvider = ({ children }) => {
 
   return (
     <ThemeModeContext.Provider value={colorMode}>
-      <ThemeProvider theme={theme}>{children}</ThemeProvider>
+      <ThemeProvider theme={theme} >{children}</ThemeProvider>
     </ThemeModeContext.Provider>
   );
 };
