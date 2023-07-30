@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { Email, LocalPhone } from "@mui/icons-material";
 import { Box, Button, CardMedia } from "@mui/material";
 import { Chip, ClickAwayListener, Grow, Stack } from "@mui/material";
@@ -12,6 +12,7 @@ import EmailModal from "../../../pages/Email/EmailModal";
 import { EditDeactivationEmployeeModal } from "../../../pages/Employee/EmployeeDeactivationModal/EditDeactivationEmployeeModal";
 import ProgressbyAll from "../../../pages/Employee/ProgressEmployeeData/ProgressbyAll";
 import PopOver from "../../../../theme/overrides/PopOver";
+import ThemeModeContext from "../../../../theme/ThemeModeContext";
 
 const EmployeeCard = ({
   IsActive,
@@ -28,6 +29,7 @@ const EmployeeCard = ({
 }) => {
   const [open, setOpen] = useState(false);
   const [openEmailForm, setOpenEmailForm] = useState(false);
+  const { mode } = useContext(ThemeModeContext); // Accessing mode from context
 
   const anchorRef = useRef(null);
   const prevOpen = useRef(open);
@@ -80,7 +82,9 @@ const EmployeeCard = ({
           style={{
             textAlign: "center",
             padding: "1.5rem",
+            backgroundColor:mode === "light" ? "white" :"#292929"
           }}
+          
         >
           <Box display="flex" justifyContent={"end"}>
             <PopOver
@@ -98,7 +102,9 @@ const EmployeeCard = ({
                   {(IsActive = true ? "Active" : "InActive")}
                 </Button>
               }
-              popoverContent={<Typography sx={{ p: 1 }}>Inactive Employee</Typography>}
+              popoverContent={
+                <Typography sx={{ p: 1 }}>Inactive Employee</Typography>
+              }
             />
 
             <Box>
@@ -182,7 +188,9 @@ const EmployeeCard = ({
 
           <PopOver
             triggerContent={<ProgressbyAll ProgressbyAll={ProgressBarRes} />}
-            popoverContent={<Typography sx={{ p: 1 }}>Information Progress Data</Typography>}
+            popoverContent={
+              <Typography sx={{ p: 1 }}>Information Progress Data</Typography>
+            }
           />
 
           <Stack>
@@ -198,8 +206,13 @@ const EmployeeCard = ({
                     <Chip
                       label={`${PositionName} (${PositionLevel})`}
                       style={{ width: 230 }}
-                    />}
-                  popoverContent={<Typography sx={{ p: 1 }}>{`${PositionName || ''} (${PositionLevel || ''})`}</Typography>}
+                    />
+                  }
+                  popoverContent={
+                    <Typography sx={{ p: 1 }}>{`${PositionName || ""} (${
+                      PositionLevel || ""
+                    })`}</Typography>
+                  }
                 />
               </Typography>
             </Box>
@@ -209,7 +222,7 @@ const EmployeeCard = ({
               fontSize: ".9rem",
             }}
           >
-            <Box backgroundColor="#f5f5f5" padding=".5rem" borderRadius=".5rem">
+            <Box backgroundColor={mode === "light" ? "#f5f5f5": "#4d4c4c"} padding=".5rem" borderRadius=".5rem">
               <PopOver
                 triggerContent={
                   <Stack
@@ -222,11 +235,15 @@ const EmployeeCard = ({
                   >
                     <Email />
                     <Typography variant="p" style={{ margin: "10px 0" }}>
-                      {OfficeEmail || ''}
+                      {OfficeEmail || ""}
                     </Typography>
                   </Stack>
                 }
-                popoverContent={<Typography sx={{ p: 1 }}>Send Email To {EFirstName} {EMiddleName} {ELastName}</Typography>}
+                popoverContent={
+                  <Typography sx={{ p: 1 }}>
+                    Send Email To {EFirstName} {EMiddleName} {ELastName}
+                  </Typography>
+                }
               />
 
               <Stack
@@ -239,7 +256,7 @@ const EmployeeCard = ({
                 <LocalPhone />
                 <Typography variant="p" style={{ margin: "10px 0" }}>
                   {" "}
-                  {MobileNumber || ''}{" "}
+                  {MobileNumber || ""}{" "}
                 </Typography>
               </Stack>
             </Box>
@@ -247,7 +264,7 @@ const EmployeeCard = ({
         </MainCard>
         {openEmailForm && (
           <EmailModal
-            officeEmail={OfficeEmail || ''}
+            officeEmail={OfficeEmail || ""}
             employeeId={EmployeeId}
             open={openEmailForm}
             onClose={handleCloseEmailform}
