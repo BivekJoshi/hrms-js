@@ -1,11 +1,19 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { addEmployeeHistory, deleteEmployeeHistory, editEmployeeHistory, getEmployeeHistoryById } from "../../api/employeeHistory/employeeHistory";
+import { addEmployeeHistory, deleteEmployeeHistory, editEmployeeHistory, getEmployeeHistory, getEmployeeHistoryById } from "../../api/employeeHistory/employeeHistory";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
 {/*________________________GETBYID_____________________________________*/ }
 export const useGetEmployeeHistoryById = (id) => {
     return useQuery(['getEmployeeHistoryById', id], () => getEmployeeHistoryById(id), {
+        refetchInterval: false,
+        refetchOnWindowFocus: false,
+    });
+};
+
+{/*________________________GETBY EMPLOYEE HISTORY ID_____________________________________*/ }
+export const useGetEmployeeHistory = (id) => {
+    return useQuery(['getEmployeeHistory', id], () => getEmployeeHistory(id), {
         refetchInterval: false,
         refetchOnWindowFocus: false,
     });

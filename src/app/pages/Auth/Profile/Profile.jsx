@@ -3,8 +3,8 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { useNavigate } from "react-router-dom";
-import ResetPassword from "../ResetPassword/ResetPassword";
-import { useGetLoggedInUser } from "../../../hooks/auth/usePassword";
+import { removeUser } from "../../../utils/cookieHelper";
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 const Profile = () => {
     const navigate= useNavigate();
@@ -39,7 +39,7 @@ const Profile = () => {
         onClick={handleClick}
         style={btnStyle}
       >
-        Profile
+        Admin <KeyboardArrowDownIcon />
       </Button>
       <Menu
         id="basic-menu"
@@ -51,9 +51,11 @@ const Profile = () => {
         }}
       >
         <MenuItem onClick={handleProfile}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
         <MenuItem onClick={handleChangePassword}>Reset Password</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        <MenuItem onClick={() => {
+              removeUser();
+              navigate("/");
+            }}>Logout</MenuItem>
       </Menu>
     </div>
   );
