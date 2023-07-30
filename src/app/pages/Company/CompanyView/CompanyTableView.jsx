@@ -18,18 +18,21 @@ const CompanyTableView = ({ companyData, isLoading, handleEditCompany, handleDel
             title: 'Company Name',
             field: 'companyName',
             emptyValue: '-',
-            width: 80,
+            width: 180,
         },
         {
             title: 'Company Type',
             field: 'companyType',
             emptyValue: '-',
-            width: 200,
+            width: 170,
+
         },
         {
             title: 'Description',
             field: 'companyDescription',
             emptyValue: '-',
+            width: 400,
+
         },
         {
             title: 'Actions',
@@ -63,12 +66,12 @@ const CompanyTableView = ({ companyData, isLoading, handleEditCompany, handleDel
                     headerStyle: {
                         backgroundColor: '#01579b',
                         color: '#FFF',
-                        fontSize: 20,
+                        fontSize:"1rem",
                         padding: 'dense',
                         height: 50,
                     },
                     rowStyle: {
-                        fontSize: 18,
+                        fontSize: ".8rem",
                     },
                 }}
             />
