@@ -9,7 +9,8 @@ import BasicInfo from "./BasicInfo";
 
 const primaryColor = "#1c7ed6";
 
-export const PersonalProfile = ({ data }) => {
+export const PersonalProfile = ({ data, photo }) => {
+  console.log(photo);
   return (
     <>
       <Grid
@@ -32,7 +33,8 @@ export const PersonalProfile = ({ data }) => {
               alignSelf: "center",
             }}
             variant="circle"
-            src={data?.gender === "MALE" ? Male : Female}
+             src={data?.gender === "MALE" ? Male : Female}
+            //src={"https://103.94.159.144/emp-docs/16/screenshot-(175).png"}
           />
           <Typography
             sx={{
