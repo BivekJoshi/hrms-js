@@ -4,7 +4,7 @@ import { useAddOfficeResource } from "../../../../hooks/resource/officeResource/
 import useOfficeResourceForm from "../../../../hooks/resource/officeResource/useOfficeResourceForm";
 
 const OfficeResourceFields = ({ onClose, isLoading }) => {
-  const { formik } = useOfficeResourceForm(onClose);
+  const { formik } = useOfficeResourceForm();
 
 	const handleFormSubmit = () => {
 		formik.handleSubmit();
@@ -23,7 +23,7 @@ const OfficeResourceFields = ({ onClose, isLoading }) => {
             id="name"
             name="name"
             label=" Name"
-            placeholder="Enter position name"
+            placeholder="Enter resource name"
             fullWidth
             value={formik.values.name}
             onChange={formik.handleChange}
@@ -39,7 +39,7 @@ const OfficeResourceFields = ({ onClose, isLoading }) => {
             id="uniqueNumber"
             name="uniqueNumber"
             label=" uniqueNumber"
-            placeholder="Enter position uniqueNumber"
+            placeholder="Enter unique number of resource"
             fullWidth
             value={formik.values.uniqueNumber}
             onChange={formik.handleChange}
@@ -59,7 +59,7 @@ const OfficeResourceFields = ({ onClose, isLoading }) => {
             id="description"
             name="description"
             label=" description"
-            placeholder="Enter position description"
+            placeholder="Enter description of resource"
             fullWidth
             value={formik.values.description}
             onChange={formik.handleChange}
@@ -84,7 +84,7 @@ const OfficeResourceFields = ({ onClose, isLoading }) => {
             sx={{ mt: 3, ml: 1 }}
             onClose={onClose}
           >
-            Add Department
+            Add Resource
           </Button>
           <Button
             variant="contained"

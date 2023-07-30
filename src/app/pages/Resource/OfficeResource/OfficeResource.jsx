@@ -15,7 +15,7 @@ const OfficeResource = () => {
   const columns = [
     {
       title: "SN",
-      render: (rowData) => rowData.tableData.id + 1,
+      render: (rowData) => rowData?.tableData?.index+1,
       width: "3%",
       sortable: false,
     },
@@ -36,7 +36,7 @@ const OfficeResource = () => {
       emptyValue: "-",
     },
     {
-      title: "Is Active",
+      title: "Status",
       field: "isActive",
       emptyValue: "-",
     },

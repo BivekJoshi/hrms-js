@@ -12,5 +12,4 @@ export const AddOfficeResourceModal = ({ open, handleCloseModal}) => {
       />
     </div>
   )
-}
-
+};
