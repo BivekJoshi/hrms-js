@@ -28,9 +28,9 @@ export const drawerMenus = [
     subMenus: [],
   },
   {
-    name: 'Employee',
+    name: "Employee",
     icon: <PeopleAltIcon style={{ color: primaryColor }} />,
-    path: 'employee',
+    path: "employee",
     subMenus: [
       // {
       //   name: 'Add Employee',
@@ -38,50 +38,54 @@ export const drawerMenus = [
       //   icon: <PersonAddIcon style={{ color: primaryColor }} />,
       // },
       {
-        name: 'Employee',
-        path: 'employee',
+        name: "Employee",
+        path: "employee",
         icon: <PersonIcon style={{ color: primaryColor }} />,
       },
       {
-        name: 'Leave',
-        path: 'leave',
+        name: "Leave",
+        path: "leave",
         icon: <MailIcon style={{ color: primaryColor }} />,
       },
       {
-        name: 'Leave Type',
-        path: 'leavetype',
+        name: "Leave Type",
+        path: "leavetype",
         icon: <MailIcon style={{ color: primaryColor }} />,
       },
       {
-        name: 'Attendance',
-        path: 'attendance',
+        name: "Attendance",
+        path: "attendance",
         icon: <HowToRegIcon style={{ color: primaryColor }} />,
       },
       {
-        name: 'Birthday',
-        path: 'birthday',
+        name: "Birthday",
+        path: "birthday",
         icon: <CakeIcon style={{ color: primaryColor }} />,
       },
     ],
   },
   {
-    name: 'Department',
+    name: "Office Reource",
+    icon: <LaptopIcon style={{ color: primaryColor }} />,
+    path: "resource/employee",
+    subMenus: [],
+  },
+  {
+    name: "Department",
     icon: <WorkspacesIcon style={{ color: primaryColor }} />,
-    path: 'department',
+    path: "department",
     subMenus: [],
   },
   {
-    name: 'Designation',
-    icon: (
-      <AssignmentIndIcon style={{ color: primaryColor }} />
-    ),
-    path: 'designation',
+    name: "Designation",
+    icon: <AssignmentIndIcon style={{ color: primaryColor }} />,
+    path: "designation",
     subMenus: [],
   },
   {
-    name: 'Company',
+    name: "Company",
     icon: <BusinessIcon style={{ color: primaryColor }} />,
-    path: 'company',
+    path: "company",
     subMenus: [],
   },
   {
@@ -103,9 +107,9 @@ export const drawerMenus = [
     subMenus: [],
   },
   {
-    name: 'ToDo',
+    name: "ToDo",
     icon: <PlaylistAddCheckIcon style={{ color: primaryColor }} />,
-    path: 'todolist',
+    path: "todolist",
     subMenus: [],
   },
 ];
