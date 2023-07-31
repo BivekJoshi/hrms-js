@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 import { DepartmentSchema } from "../Validation/DepartmentSchema";
 import { useAddDepartment, useEditDepartment } from "../useDepartment";
 
-const DepartmentForm = (data) => {
+const useDepartmentForm = (data) => {
   const { mutate: addDepartment } = useAddDepartment({});
   const { mutate: editDepartment } = useEditDepartment({});
 
@@ -37,4 +37,4 @@ const DepartmentForm = (data) => {
   return { formik };
 };
 
-export default DepartmentForm;
+export default useDepartmentForm;

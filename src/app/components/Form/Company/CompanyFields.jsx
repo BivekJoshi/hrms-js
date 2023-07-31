@@ -1,10 +1,10 @@
 import { Grid, TextField, Button } from "@mui/material";
 import React from "react";
 import { toast } from "react-toastify";
-import useEditCompanyForm from "../../../hooks/company/editCompany/useEditCompanyForm";
+import useCompanyForm from "../../../hooks/company/CompanyForm/useCompanyForm";
 
-const EditCompanyFields = ({ onClose, isLoading, data }) => {
-  const { formik } = useEditCompanyForm(data);
+const CompanyFields = ({ onClose, isLoading, data }) => {
+  const { formik } = useCompanyForm(data);
   const handleFormSubmit = () => {
     formik.handleSubmit();
 
@@ -19,6 +19,7 @@ const EditCompanyFields = ({ onClose, isLoading, data }) => {
       toast.error("Please make sure you have filled the form correctly");
     }
   };
+  const submitButtonText = data ? "Update Company" : "Add Company";
   return (
     !isLoading && (
       <Grid container spacing={3}>
@@ -91,7 +92,7 @@ const EditCompanyFields = ({ onClose, isLoading, data }) => {
             onClick={handleFormSubmit}
             sx={{ mt: 3, ml: 1 }}
           >
-            Update Company
+            {submitButtonText}
           </Button>
           <Button
             variant="contained"
@@ -107,4 +108,4 @@ const EditCompanyFields = ({ onClose, isLoading, data }) => {
   );
 };
 
-export default EditCompanyFields;
+export default CompanyFields;

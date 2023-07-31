@@ -1,7 +1,7 @@
 import { Grid, TextField, Button } from "@mui/material";
 import React from "react";
 import { toast } from "react-toastify";
-import useDepartmentForm from "../../../hooks/department/Department/useDepartmentForm";
+import useDepartmentForm from "../../../hooks/department/DepartmentForm/useDepartmentForm";
 
 const DepartmentFields = ({ onClose, isLoading, data }) => {
   const { formik } = useDepartmentForm(data);

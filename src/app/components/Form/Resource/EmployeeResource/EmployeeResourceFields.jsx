@@ -4,11 +4,11 @@ import useEmployeeResourceForm from "../../../../hooks/resource/employeeResource
 import { useGetOfficeResource } from "../../../../hooks/resource/officeResource/useOfficeResource";
 import { useGetEmployee } from "../../../../hooks/employee/useEmployee";
 
-const EmployeeResourceFields = ({ onClose, isLoading }) => {
+const EmployeeResourceFields = ({ onClose, isLoading, data }) => {
   const { data: officeResourceData } = useGetOfficeResource();
   const { data: employeeData } = useGetEmployee();
-  
-  const { formik } = useEmployeeResourceForm();
+
+  const { formik } = useEmployeeResourceForm(data);
   const handleFormSubmit = () => {
     formik.handleSubmit();
 
@@ -18,6 +18,7 @@ const EmployeeResourceFields = ({ onClose, isLoading }) => {
       toast.error("Please make sure you have filled the form correctly");
     }
   };
+  const submitButtonText = data ? "Update Resource" : " Add Resource";
   return (
     !isLoading && (
       <Grid container spacing={3}>
@@ -52,7 +53,7 @@ const EmployeeResourceFields = ({ onClose, isLoading }) => {
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
-          select
+            select
             id="employeeId"
             name="employeeId"
             label="Employee Name"
@@ -125,7 +126,7 @@ const EmployeeResourceFields = ({ onClose, isLoading }) => {
             onClick={handleFormSubmit}
             sx={{ mt: 3, ml: 1 }}
           >
-            Add Resource
+            {submitButtonText}
           </Button>
           <Button
             variant="contained"
