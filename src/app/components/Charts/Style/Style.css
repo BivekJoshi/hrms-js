@@ -1,5 +1,5 @@
 .recharts-legend-wrapper {
-    position: inherit !important;
+  position: inherit !important;
   /* left: 55% !important;
   top: 139% !important; */
 }
@@ -9,15 +9,19 @@
   align-items: center;
   gap: 4px;
   margin-bottom: 5px;
-
 }
 
-ul{
-    margin-top: -12rem;
+ul {
+  margin-top: -12rem;
 }
 
-@media (max-width: 768px) {
-.pichartStyle{
-  justify-self: center !important;
+.pichartStyle {
+  align-self: self-start;
+  margin-top: -2rem;
 }
-}  
+
+@media (max-width: 1025px) {
+  .pichartStyle {
+    /* justify-self: center !important; */
+  }
+}
