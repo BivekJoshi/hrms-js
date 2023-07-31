@@ -1,8 +1,8 @@
 import { useFormik } from "formik";
 import { useAddHoliday, useEditHoliday } from "../useHoliday";
-import { HolidaySchema } from "../Validation/HolidaySchema";
+import { HolidaySchema } from "./HolidaySchema";
 
-const useHolidayForm = (data) => {
+const useHolidayForm = (data, handleSubmitModal) => {
   const { mutate: addHoliday } = useAddHoliday({});
   const { mutate: editHoliday } = useEditHoliday({});
 
@@ -27,6 +27,7 @@ const useHolidayForm = (data) => {
   const handleRequest = (values) => {
     values = { ...values };
     addHoliday(values, formik);
+    handleSubmitModal();
   };
 
   const handledEditRequest = (values) => {
