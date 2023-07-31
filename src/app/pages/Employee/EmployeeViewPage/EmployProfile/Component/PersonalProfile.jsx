@@ -10,13 +10,13 @@ import ThemeModeContext from "../../../../../../theme/ThemeModeContext";
 
 const primaryColor = "#1c7ed6";
 
-export const PersonalProfile = ({ data, mode }) => {
+export const PersonalProfile = ({ data }) => {
   const{mode} = useContext(ThemeModeContext)
   return (
     <>
       <Grid
         sx={{
-          bgcolor:mode=== "light" ? "#cfe8fc": "#292929",
+          bgcolor: mode=== "light" ? "#cfe8fc": "#292929",
           display: "grid",
           gridTemplateColumns: "1fr 3fr",
           borderRadius: 5,
