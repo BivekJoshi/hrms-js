@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { addDocument, getDocument, getDocumentById } from '../../api/document/document-api';
+import { addDocument, getDocument, getDocumentByDocumentType, getDocumentById } from '../../api/document/document-api';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { axiosInstance } from '../../../auth/axiosInterceptor';
@@ -13,7 +13,7 @@ export const useAddDocument = ({ onSuccess }) => {
     imgData.append('file', document);
     imgData.append('documentType', documentType);
     const { data } = await axiosInstance.post(
-      `/employee/document/uploadFile/${id}`,
+      `/employee/document/uploadFile/${id}?documentType=${documentType}`,
       imgData,
       {
         headers: {
@@ -24,6 +24,7 @@ export const useAddDocument = ({ onSuccess }) => {
     return data;
   };
 
+  const queryClient = useQueryClient();
   return useMutation(
     ['addDocument'],
     (formData) => {
@@ -33,6 +34,7 @@ export const useAddDocument = ({ onSuccess }) => {
       onSuccess: (data, variables, context) => {
         toast.success('Document added successfully');
         onSuccess && onSuccess(data, variables, context);
+        queryClient.invalidateQueries("getDocumentType");
       },
       onError: (err, _variables, _context) => {
         toast.error(`error: ${err.message}`);
@@ -52,6 +54,14 @@ export const useGetDocument = () => {
 {/*________________________GETBYID_____________________________________*/}
 export const useGetDocumentById = (id) => {
   return useQuery(["getDocumentById", id], () => getDocumentById(id), {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
+};
+
+{/*________________________GET-DOCUMENT BY DOUCUMENT-TYPE_____________________________________*/}
+export const useGetDocumentByDocumentType = (id, documentType) => {
+  return useQuery(["getDocumentType", id, documentType], () => getDocumentByDocumentType(id, documentType), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });

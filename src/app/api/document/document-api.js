@@ -24,3 +24,8 @@ export const getDocumentById = async (id) => {
   const data = await axiosInstance.get(`/employee/document/file-details-by-employee/${id}`);
   return data;
 };
+
+export const getDocumentByDocumentType = async (id, documentType) => {
+  const data = await axiosInstance.get(`/employee/document/file-details-employee-and-document-type/${id}?documentType=${documentType}`);
+  return data;
+};

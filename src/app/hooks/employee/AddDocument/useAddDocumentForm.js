@@ -1,7 +1,7 @@
 import { useFormik } from 'formik';
 import { useAddDocument } from '../useDocument';
 
-const useAddDocumentForm = ({ document }) => {
+const useAddDocumentForm = ({ selectedDocument }) => {
   const { mutate } = useAddDocument({});
 
   const formik = useFormik({
@@ -9,7 +9,7 @@ const useAddDocumentForm = ({ document }) => {
       documentType: '',
     },
     onSubmit: (values) => {
-      values = { ...values, document };
+      values = { ...values, document: selectedDocument };
       mutate(values);
     },
   });

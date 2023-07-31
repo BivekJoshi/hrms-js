@@ -2,7 +2,6 @@ import { useAddEmployeeResource, useEditEmployeeResource } from "./useEmployeeRe
 import { useFormik } from "formik";
 
 const useEditEmployeeResourceForm = (data) => {
-    console.log(data,"data hai ma chai timi ??");
   const { mutate } = useEditEmployeeResource({});
   
   const formik = useFormik({
@@ -19,11 +18,10 @@ const useEditEmployeeResourceForm = (data) => {
   });
 
   const handleRequest = (values) => {
-    // console.log(values);
     values = {
       ...values,
     };
-    // console.log(object);
+
     mutate(values, formik, { onSucess: () => formik.handleReset() });
   };
   return { formik };

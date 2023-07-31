@@ -9,7 +9,6 @@ import "./Style/Style.css";
 import { DetailProfile } from "./Component/DetailProfile";
 import { PersonalProfile } from "./Component/PersonalProfile";
 import ProgressById from "../../ProgressEmployeeData/ProgressById";
-import AddUser from "../../../../pages/Auth/UserControl/AddUser";
 import { useGetDocumentById } from "../../../../hooks/employee/useDocument";
 
 const EmployeeProfile = () => {
@@ -20,11 +19,6 @@ const EmployeeProfile = () => {
   const navigate = useNavigate();
 
   if (isLoading) return <>Loading</>;
-
-  const [openAddModal, setOpenAddModal] = useState(false);
-
-  const handleAddOpenModal = () => setOpenAddModal(true);
-  const handleCloseAddModal = () => setOpenAddModal(false);
 
   return (
     <>
@@ -39,7 +33,6 @@ const EmployeeProfile = () => {
         >
           <KeyboardBackspaceIcon />
         </Button>
-          <Button variant="contained" onClick={handleAddOpenModal}>Add User</Button>
       </div>
       <ProgressById />
 
@@ -47,13 +40,6 @@ const EmployeeProfile = () => {
         <PersonalProfile data={employeeDataById} photo={employeePhoto} />
         <DetailProfile data={employeeDataById} />
       </div>
-
-      {openAddModal && (
-        <AddUser
-          open={openAddModal}
-          handleCloseModal={handleCloseAddModal}
-        />
-      )}
     </>
   );
 };

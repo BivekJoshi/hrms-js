@@ -9,7 +9,6 @@ const EditEmployeeResourceFields = ({ onClose, isLoading,data }) => {
   const { data: officeResourceData } = useGetOfficeResource();
   const { data: employeeData } = useGetEmployee();
 
-  console.log(officeResourceData);
   const { formik } = useEditEmployeeResourceForm(data);
   const handleFormSubmit = () => {
     formik.handleSubmit();
