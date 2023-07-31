@@ -9,7 +9,7 @@ import "./Style/Style.css";
 import { DetailProfile } from "./Component/DetailProfile";
 import { PersonalProfile } from "./Component/PersonalProfile";
 import ProgressById from "../../ProgressEmployeeData/ProgressById";
-import AddUser from "../../../../pages/Auth/UserControl/AddUser";
+// import AddUser from "../../../../pages/Auth/UserControl/AddUser";
 
 const EmployeeProfile = () => {
   const { id } = useParams();

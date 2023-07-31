@@ -15,3 +15,9 @@
 ul{
     margin-top: -12rem;
 }
+
+@media (max-width: 768px) {
+.pichartStyle{
+  justify-self: center !important;
+}
+}  
