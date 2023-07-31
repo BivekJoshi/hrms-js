@@ -54,7 +54,6 @@ const LeaveTypeFields = ({ onClose, isLoading, data, existingLeaveTypes }) => {
       formik.handleSubmit();
   
       if (formik.isValid) {
-        // Assuming you want to reset the form fields after successful submission
         formik.resetForm({
           leaveName: "",
           leaveTotal: "",
@@ -67,7 +66,6 @@ const LeaveTypeFields = ({ onClose, isLoading, data, existingLeaveTypes }) => {
       }
     };
   
-    // Check if existingLeaveTypes is defined, and if not, set it to an empty array
     const filteredLeaveNames = existingLeaveTypes
       ? LEAVENAME.filter((option) => !existingLeaveTypes.includes(option.value))
       : [];
@@ -85,6 +83,7 @@ const LeaveTypeFields = ({ onClose, isLoading, data, existingLeaveTypes }) => {
                 label="Leave Name"
                 placeholder="Enter leave name"
                 fullWidth
+                required
                 value={formik.values.leaveName}
                 onChange={formik.handleChange}
                 error={
@@ -105,6 +104,7 @@ const LeaveTypeFields = ({ onClose, isLoading, data, existingLeaveTypes }) => {
                 label="Leave Type"
                 placeholder="Select your leaveName"
                 fullWidth
+                required
                 value={formik.values.leaveName}
                 onChange={formik.handleChange}
                 error={
@@ -131,6 +131,8 @@ const LeaveTypeFields = ({ onClose, isLoading, data, existingLeaveTypes }) => {
               label="Total Leave Days"
               placeholder="Enter total leave days"
               fullWidth
+              required
+              type="number"
               value={formik.values.leaveTotal}
               onChange={formik.handleChange}
               error={
@@ -149,6 +151,8 @@ const LeaveTypeFields = ({ onClose, isLoading, data, existingLeaveTypes }) => {
               label="Description"
               placeholder="Enter leave description"
               fullWidth
+              multiline
+              rows={3}
               value={formik.values.leaveDescription}
               onChange={formik.handleChange}
               error={

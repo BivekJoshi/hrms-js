@@ -30,6 +30,7 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
             label="Company Name"
             placeholder="Enter company name"
             fullWidth
+            required
             value={formik.values.companyName}
             onChange={formik.handleChange}
             error={
@@ -48,6 +49,7 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
             label="Company Type"
             placeholder="Enter company type"
             fullWidth
+            required
             value={formik.values.companyType}
             onChange={formik.handleChange}
             error={
@@ -66,6 +68,8 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
             label="Description"
             placeholder="Enter your Company Description"
             fullWidth
+            multiline
+            rows={3}
             value={formik.values.companyDescription}
             onChange={formik.handleChange}
             error={

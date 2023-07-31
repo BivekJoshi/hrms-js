@@ -1,8 +1,9 @@
 import React from 'react';
 import { Grid, TextField, Button } from '@mui/material';
 import { toast } from 'react-toastify';
-import useEditEventForm from '../../../hooks/event/editEvent/useEditEventForm';
 import { useDeleteEvent } from '../../../hooks/event/useEvent';
+import useEventForm from '../../../hooks/event/EventForm/useEventForm';
+import useEditEventForm from '../../../hooks/event/editEvent/useEditEventForm';
 
 const EditEventFields = ({ onClose, isLoading, data }) => {
     const { formik } = useEditEventForm(data);

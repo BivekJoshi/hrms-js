@@ -54,10 +54,13 @@ const Leave = ({ isLoading }) => {
     return name;
   };
 
+  const capitalizeFirstLetter = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+  };
   const getLeaveTypeName = (rowData) => {
     const leaveTypeId = rowData.leaveTypeId;
     const leaveType = leaveTypeData.find((leave) => leave.id === leaveTypeId);
-    const name = `${leaveType.leaveName}`;
+    const name = `${capitalizeFirstLetter(leaveType.leaveName)} Leave`;
     return name;
   };
   const columns = [
