@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import { Box, Chip, Grid, List, ListItem } from "@mui/material";
 import { Typography, Avatar } from "@mui/material";
@@ -6,16 +6,17 @@ import { Typography, Avatar } from "@mui/material";
 import Male from "../../../../../../assets/male.png";
 import Female from "../../../../../../assets/female.png";
 import BasicInfo from "./BasicInfo";
+import ThemeModeContext from "../../../../../../theme/ThemeModeContext";
 
 const primaryColor = "#1c7ed6";
 
-export const PersonalProfile = ({ data, photo }) => {
-
+export const PersonalProfile = ({ data }) => {
+  const{mode} = useContext(ThemeModeContext)
   return (
     <>
       <Grid
         sx={{
-          bgcolor: "#cfe8fc",
+          bgcolor: mode=== "light" ? "#cfe8fc": "#292929",
           display: "grid",
           gridTemplateColumns: "1fr 3fr",
           borderRadius: 5,
@@ -67,7 +68,7 @@ export const PersonalProfile = ({ data, photo }) => {
             {data?.mobileNumber}
           </Typography>
         </Box>
-        <BasicInfo data={data} />
+        <BasicInfo data={data} mode={mode} />
       </Grid>
     </>
   );

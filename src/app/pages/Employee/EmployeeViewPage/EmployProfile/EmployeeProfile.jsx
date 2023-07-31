@@ -10,6 +10,7 @@ import { DetailProfile } from "./Component/DetailProfile";
 import { PersonalProfile } from "./Component/PersonalProfile";
 import ProgressById from "../../ProgressEmployeeData/ProgressById";
 import { useGetDocumentById } from "../../../../hooks/employee/useDocument";
+// import AddUser from "../../../../pages/Auth/UserControl/AddUser";
 
 const EmployeeProfile = () => {
   const { id } = useParams();

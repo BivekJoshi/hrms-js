@@ -57,6 +57,7 @@ export const BarChatDiagram = ({ data }) => {
           "#D93084",
           "#B6D0D9",
         ],
+        color:"white"
       },
     ],
   };
@@ -64,7 +65,7 @@ export const BarChatDiagram = ({ data }) => {
   return (
     <Box alignSelf="self-start" marginTop="-1rem">
       <Card>
-        <Bar options={barChartOptions} data={barChartData} />
+        <Bar options={barChartOptions} data={barChartData} style={{color:"white"}}/>
       </Card>
     </Box>
   );

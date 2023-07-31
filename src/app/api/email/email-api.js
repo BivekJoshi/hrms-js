@@ -3,7 +3,7 @@ import { axiosInstance } from "../../../auth/axiosInterceptor";
 {/*___________________SEND EMAIL FOR PERTICULAR EMPLOYEE ON BASIS OF ID______________________________________*/}
 export const sendEmail = async ({ formData, employeeId }) => {
   const data = await axiosInstance.post(
-    `/employee/email/employee/${employeeId}`,
+    `/email/employee/${employeeId}`,
     formData
   );
 

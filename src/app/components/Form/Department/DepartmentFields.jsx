@@ -1,85 +1,89 @@
 import { Grid, TextField, Button } from "@mui/material";
 import React from "react";
 import { toast } from "react-toastify";
-import useEditCompanyForm from "../../../hooks/company/editCompany/useEditCompanyForm";
+import useDepartmentForm from "../../../hooks/department/DepartmentForm/useDepartmentForm";
 
-const EditCompanyFields = ({ onClose, isLoading, data }) => {
-  const { formik } = useEditCompanyForm(data);
+const DepartmentFields = ({ onClose, isLoading, data }) => {
+  const { formik } = useDepartmentForm(data);
+
   const handleFormSubmit = () => {
     formik.handleSubmit();
 
     if (formik.isValid) {
-      formik.setTouched({
-        companyName: true,
-        companyType: true,
-        companyDescription: true,
-      });
       onClose();
     } else {
       toast.error("Please make sure you have filled the form correctly");
     }
   };
+  const submitButtonText = data ? "Update Department" : "Add Department";
   return (
     !isLoading && (
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
           <TextField
-            id="companyName"
-            name="companyName"
-            label="Company Name"
-            placeholder="Enter company name"
+            id="departmentName"
+            name="departmentName"
+            label="Department Name"
+            placeholder="Enter department name"
             fullWidth
-            value={formik.values.companyName}
+            value={formik.values.departmentName}
             onChange={formik.handleChange}
             error={
-              formik.touched.companyName && Boolean(formik.errors.companyName)
-            }
-            helperText={formik.touched.companyName && formik.errors.companyName}
-            variant="outlined"
-            autoFocus
-            InputLabelProps={{ shrink: true }}
-          />
-        </Grid>
-        <Grid item xs={12} sm={12}>
-          <TextField
-            id="companyType"
-            name="companyType"
-            label="Company Type"
-            placeholder="Enter company type"
-            fullWidth
-            value={formik.values.companyType}
-            onChange={formik.handleChange}
-            error={
-              formik.touched.companyType && Boolean(formik.errors.companyType)
-            }
-            helperText={formik.touched.companyType && formik.errors.companyType}
-            variant="outlined"
-            autoFocus
-            InputLabelProps={{ shrink: true }}
-          />
-        </Grid>
-        <Grid item xs={12} sm={12}>
-          <TextField
-            id="companyDescription"
-            name="companyDescription"
-            label="Description"
-            placeholder="Enter your Company Description"
-            fullWidth
-            value={formik.values.companyDescription}
-            onChange={formik.handleChange}
-            error={
-              formik.touched.companyDescription &&
-              Boolean(formik.errors.companyDescription)
+              formik.touched.departmentName &&
+              Boolean(formik.errors.departmentName)
             }
             helperText={
-              formik.touched.companyDescription &&
-              formik.errors.companyDescription
+              formik.touched.departmentName && formik.errors.departmentName
             }
             variant="outlined"
             autoFocus
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
+        <Grid item xs={12} sm={12}>
+          <TextField
+            id="departmentType"
+            name="departmentType"
+            label="Department Type"
+            placeholder="Enter department type"
+            fullWidth
+            value={formik.values.departmentType}
+            onChange={formik.handleChange}
+            error={
+              formik.touched.departmentType &&
+              Boolean(formik.errors.departmentType)
+            }
+            helperText={
+              formik.touched.departmentType && formik.errors.departmentType
+            }
+            variant="outlined"
+            autoFocus
+            InputLabelProps={{ shrink: true }}
+          />
+        </Grid>
+        <Grid item xs={12} sm={12}>
+          <TextField
+            id="departmentDescription"
+            name="departmentDescription"
+            label="Description"
+            placeholder="Enter department description"
+            fullWidth
+            value={formik.values.departmentDescription}
+            onChange={formik.handleChange}
+            error={
+              formik.touched.departmentDescription &&
+              Boolean(formik.errors.departmentDescription)
+            }
+            helperText={
+              formik.touched.departmentDescription &&
+              formik.errors.departmentDescription
+            }
+            variant="outlined"
+            autoFocus
+            InputLabelProps={{ shrink: true }}
+          />
+        </Grid>
+
         <Grid
           container
           direction="row"
@@ -91,7 +95,7 @@ const EditCompanyFields = ({ onClose, isLoading, data }) => {
             onClick={handleFormSubmit}
             sx={{ mt: 3, ml: 1 }}
           >
-            Update Company
+            {submitButtonText}
           </Button>
           <Button
             variant="contained"
@@ -107,4 +111,4 @@ const EditCompanyFields = ({ onClose, isLoading, data }) => {
   );
 };
 
-export default EditCompanyFields;
+export default DepartmentFields;

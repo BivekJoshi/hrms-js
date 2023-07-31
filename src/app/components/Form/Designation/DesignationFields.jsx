@@ -1,26 +1,23 @@
-import { Grid, TextField, Button } from "@mui/material";
+import { nanoid } from "nanoid";
+import { Grid, TextField, Button, MenuItem } from "@mui/material";
 import React from "react";
 import { toast } from "react-toastify";
-import useEditDesignationForm from "../../../hooks/designation/editDesignation/useEditDesignationForm";
+import useDesignationForm from "../../../hooks/designation/DesignationForm/useDesignationForm";
 
-const EditDesignationFields = ({ onClose, isLoading, data }) => {
-  const { formik } = useEditDesignationForm(data);
+const DesignationFields = ({ onClose, isLoading, data }) => {
+  const { formik } = useDesignationForm(data);
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
 
     if (formik.isValid) {
-      formik.setTouched({
-        positionName: true,
-        positionLevel: true,
-        salary: true,
-        positionDetails: true,
-      });
       onClose();
     } else {
       toast.error("Please make sure you have filled the form correctly");
     }
   };
+
+  const submitButtonText = data ? "Update Designation" : "Add Designation";
 
   return (
     !isLoading && (
@@ -64,7 +61,7 @@ const EditDesignationFields = ({ onClose, isLoading, data }) => {
             variant="outlined"
             autoFocus
             InputLabelProps={{ shrink: true }}
-          />
+          ></TextField>
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
@@ -114,7 +111,7 @@ const EditDesignationFields = ({ onClose, isLoading, data }) => {
             onClick={handleFormSubmit}
             sx={{ mt: 3, ml: 1 }}
           >
-            Update Designation
+            {submitButtonText}
           </Button>
           <Button
             variant="contained"
@@ -130,4 +127,4 @@ const EditDesignationFields = ({ onClose, isLoading, data }) => {
   );
 };
 
-export default EditDesignationFields;
+export default DesignationFields;

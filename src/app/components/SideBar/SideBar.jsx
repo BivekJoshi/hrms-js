@@ -30,7 +30,7 @@ import PlaylistAddCheckIcon from "@mui/icons-material/PlaylistAddCheck";
 import AddchartIcon from "@mui/icons-material/Addchart";
 import EventIcon from "@mui/icons-material/Event";
 import HolidayVillageIcon from "@mui/icons-material/HolidayVillage";
-import LaptopIcon from '@mui/icons-material/Laptop';
+import LaptopIcon from "@mui/icons-material/Laptop";
 
 const drawerWidth = 250;
 
@@ -102,7 +102,7 @@ export default function Sidebar() {
         // {
         //   name: 'Add Employee',
         //   path: 'employee/add',
-        //   icon: <PersonAddIcon sx={mode === "light" ? { color: "black" } : { color: "white" }} />,
+        //   icon: <PersonAddIcon style={{ color: primaryColor }} />,
         // },
         {
           name: "Employee",
@@ -152,10 +152,13 @@ export default function Sidebar() {
       ],
     },
     {
-      name: 'Office Reource',
-      icon: <LaptopIcon sx={mode === "light" ? { color: "black" } : { color: "white" }}
-       />,
-      path: 'resource/employee',
+      name: "Office Reource",
+      icon: (
+        <LaptopIcon
+          sx={mode === "light" ? { color: "black" } : { color: "white" }}
+        />
+      ),
+      path: "resource/employee",
       subMenus: [],
     },
     {

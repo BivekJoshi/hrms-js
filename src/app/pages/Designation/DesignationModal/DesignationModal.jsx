@@ -1,8 +1,7 @@
 import React from 'react'
-import AddDesignationFields from '../../../components/Form/Designation/AddDesignationFields';
 import FormModal from '../../../components/Modal/FormModal';
 import { useGetDesignationById } from '../../../hooks/designation/useDesignation';
-import EditDesignationFields from '../../../components/Form/Designation/EditDesignationFields';
+import DesignationFields from '../../../components/Form/Designation/DesignationFields';
 
 export const AddDesignationModal = ({ open, handleCloseModal}) => {
   return (
@@ -10,7 +9,7 @@ export const AddDesignationModal = ({ open, handleCloseModal}) => {
       <FormModal
         open={open}
         onClose={handleCloseModal}
-        formComponent={<AddDesignationFields onClose={handleCloseModal} />}
+        formComponent={<DesignationFields onClose={handleCloseModal} />}
       />
     </div>
   )
@@ -23,7 +22,7 @@ export const EditDesignationModal = ({ open, handleCloseModal, id }) => {
         <FormModal
           open={open}
           onClose={handleCloseModal}
-          formComponent={<EditDesignationFields onClose={handleCloseModal} data={data} />}
+          formComponent={<DesignationFields onClose={handleCloseModal} data={data} />}
         />
       </div>
     )
