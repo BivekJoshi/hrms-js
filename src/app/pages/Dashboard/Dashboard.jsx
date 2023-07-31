@@ -50,6 +50,7 @@ const Dashboard = () => {
           display: "grid",
           gridTemplateColumns: "repeat(auto-fit, minmax(440px, 1fr))",
           gap: "2rem",
+          justifySelf:{ xs:"center", lg:"start" }
         }}
       >
         <BarChatDiagram data={dashboardData} />
