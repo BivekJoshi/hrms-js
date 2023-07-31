@@ -12,7 +12,7 @@ import LoadingButton from "@mui/lab/LoadingButton";
 import React from "react";
 import { Link } from "react-router-dom";
 import { useLoginForm } from "../../../../auth/hooks/component/login/useLoginForm";
-import "./Login.css";
+import "./Style/Login.css";
 import bg1 from "../../../../assets/background.svg";
 
 const Login = () => {
@@ -26,7 +26,7 @@ const Login = () => {
   return (
     <>
       <div className="container">
-        <img className="wave" src="" />
+        <img className="wave" src="https://raw.githubusercontent.com/sefyudem/Responsive-Login-Form/master/img/wave.png" />
         <div
           className="login-left"
           style={{ backgroundImage: `url(${bg1})` }}
