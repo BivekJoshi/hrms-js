@@ -24,21 +24,21 @@
 .heading {
   position: sticky;
   top: 0;
-  background-color: white;
+  /* background-color: white; */
   z-index: 99;
 }
 
-.sn {
+.sn { 
   position: sticky;
   left: 0;
-  background-color: white;
+  /* background-color: white; */
   z-index: 99;
 }
 
 .emp {
   position: sticky;
   left: 4.75%;
-  background-color: white;
+  /* background-color: white; */
   z-index: 99;
 
 }
@@ -47,14 +47,14 @@
 .snNo {
   position: sticky;
   left: 0%;
-  background-color: white;
+  /* background-color: white; */
   z-index: 1;
 }
 
 
 .empname {
   position: sticky;
-  background-color: white;
+  /* background-color: white; */
   left: 3.75%;
   z-index: 1;
 }
@@ -106,7 +106,7 @@
   .heading {
     position: sticky;
     top: 0;
-    background-color: white;
+    /* background-color: white; */
     z-index: 99;
   }
 }
