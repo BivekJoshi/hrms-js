@@ -3,6 +3,7 @@ import {
   useAddOfficeResource,
   useEditOfficeResource,
 } from "../useOfficeResource";
+import { OfficeResourceSchema } from "./OfficeResourceSchema";
 
 const useOfficeResourceForm = (data) => {
   const { mutate: addOfficeResource } = useAddOfficeResource({});
@@ -16,7 +17,7 @@ const useOfficeResourceForm = (data) => {
       id: data?.id || "",
     },
 
-    // validationSchema: DepartmentSchema,
+    validationSchema: OfficeResourceSchema,
     enableReinitialize: "true",
 
     onSubmit: (values) => {

@@ -1,5 +1,6 @@
 import { useAddEmployeeResource, useEditEmployeeResource } from "../useEmployeeResource";
 import { useFormik } from "formik";
+import { EmployeeResourceSchema } from "./EmployeeResourceSchema";
 
 const useEmployeeResourceForm = (data) => {
   const { mutate :addEmployeeResource} = useAddEmployeeResource({});
@@ -13,7 +14,7 @@ const useEmployeeResourceForm = (data) => {
       returnDate: data?.returnDate||"",
       id: data?.id ||"",
     },
-    // validationSchema: DepartmentSchema,
+    validationSchema: EmployeeResourceSchema,
     enableReinitialize: true,
 
     onSubmit: (values) => {

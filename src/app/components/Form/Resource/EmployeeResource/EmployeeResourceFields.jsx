@@ -30,6 +30,7 @@ const EmployeeResourceFields = ({ onClose, isLoading, data }) => {
             label="Employee Name"
             placeholder="Select employee name"
             fullWidth
+            required
             value={formik.values.employeeId}
             onChange={formik.handleChange}
             error={
@@ -55,6 +56,7 @@ const EmployeeResourceFields = ({ onClose, isLoading, data }) => {
             label="Office Resource"
             placeholder="Select Resource"
             fullWidth
+            required
             select
             value={formik.values.officeResourceId}
             onChange={formik.handleChange}
@@ -86,6 +88,7 @@ const EmployeeResourceFields = ({ onClose, isLoading, data }) => {
             label="Received Date"
             placeholder="Select date"
             fullWidth
+            required
             value={formik.values.receiveDate}
             onChange={formik.handleChange}
             error={
