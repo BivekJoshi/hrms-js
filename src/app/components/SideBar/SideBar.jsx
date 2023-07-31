@@ -99,6 +99,11 @@ export default function Sidebar() {
       ),
       path: "employee",
       subMenus: [
+        // {
+        //   name: 'Add Employee',
+        //   path: 'employee/add',
+        //   icon: <PersonAddIcon style={{ color: primaryColor }} />,
+        // },
         {
           name: "Employee",
           path: "employee",
@@ -288,21 +293,17 @@ export default function Sidebar() {
                   />
                   {menu.subMenus.length > 0 ? (
                     subMenuOpen[index] ? (
-                      <ExpandLess
-                        sx={
-                          mode === "light"
-                            ? { color: "black" }
-                            : { color: "white" }
-                        }
-                      />
+                      <ExpandLess  sx={
+                        mode === "light"
+                          ? { color: "black" }
+                          : { color: "white" }
+                      }/>
                     ) : (
-                      <ExpandMore
-                        sx={
+                      <ExpandMore  sx={
                           mode === "light"
                             ? { color: "black" }
                             : { color: "white" }
-                        }
-                      />
+                        }/>
                     )
                   ) : null}
                 </ListItemButton>
@@ -367,10 +368,7 @@ export default function Sidebar() {
           >
             Logout
           </Button>
-          <Typography
-            variant="body2"
-            sx={{ marginRight: "8px", marginTop: "1rem" }}
-          >
+          <Typography variant="body2" sx={{ marginRight: "8px" , marginTop:"1rem"}}>
             {mode === "light" ? "Light" : "Dark"} Mode
           </Typography>
           <Switch checked={mode === "dark"} onChange={toggleMode} />
