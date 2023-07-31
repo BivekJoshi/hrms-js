@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, TextField, Button, MenuItem } from '@mui/material';
 import { toast } from 'react-toastify';
-import useAddTodoListForm from '../../../hooks/todoList/addTodoList/useAddTodoListForm';
+import useTodoListForm from '../../../hooks/todoList/TodoListForm/useTodoListForm';
 
 
 const priority=[
@@ -35,8 +35,8 @@ const status=[
         label:'Pending',
     }
 ];
-const AddTodoListFields = ({ onClose, isLoading }) => {
-    const { formik } = useAddTodoListForm();
+const TodoListFields = ({ onClose, isLoading,data }) => {
+    const { formik } = useTodoListForm(data);
 
     const handleFormSubmit = () => {
         formik.handleSubmit();
@@ -48,17 +48,19 @@ const AddTodoListFields = ({ onClose, isLoading }) => {
         }
     };
 
+    const submitButtonText = data ? "Update Message" : "Add Message";
 
     return (
         !isLoading && (
             <Grid container spacing={3}>
-                <Grid item xs={10} sm={10}>
+                <Grid item xs={12} sm={12}>
                     <TextField
                         id='message'
                         name="message"
-                        label="message"
+                        label="Message"
                         placeholder='Enter your message...'
                         fullWidth
+                        required
                         value={formik.values.message}
                         onChange={formik.handleChange}
                         error={
@@ -73,7 +75,7 @@ const AddTodoListFields = ({ onClose, isLoading }) => {
                         InputLabelProps={{ shrink: true }}
                     />
                 </Grid>
-                <Grid item xs={10} sm={10}>
+                <Grid item xs={12} sm={12}>
                     <TextField
                         id='dueDate'
                         name='dueDate'
@@ -81,6 +83,7 @@ const AddTodoListFields = ({ onClose, isLoading }) => {
                         type='date'
                         InputLabelProps={{ shrink: true }}
                         fullWidth
+                        required
                         value={formik.values.dueDate}
                         onChange={formik.handleChange}
                         error={
@@ -90,14 +93,15 @@ const AddTodoListFields = ({ onClose, isLoading }) => {
                     />
                 </Grid>
 
-                <Grid item xs={12} sm={6}>
+                <Grid item xs={12} sm={12}>
                     <TextField
                         id='priority'
                         name='priority'
                         select
-                        label='priority'
+                        label='Priority'
                         placeholder='Select your priority'
                         fullWidth
+                        required
                         value={formik.values.priority}
                         onChange={formik.handleChange}
                         error={formik.touched.priority && Boolean(formik.errors.priority)}
@@ -128,7 +132,7 @@ const AddTodoListFields = ({ onClose, isLoading }) => {
                         onClick={handleFormSubmit}
                         sx={{ mt: 3, ml: 1 }}
                     >
-                        Add Message
+                        {submitButtonText}
                     </Button>
                 </Grid>
             </Grid>
@@ -136,4 +140,4 @@ const AddTodoListFields = ({ onClose, isLoading }) => {
     );
 };
 
-export default AddTodoListFields;
+export default TodoListFields;

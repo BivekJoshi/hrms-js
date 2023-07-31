@@ -1,4 +1,4 @@
-import { useAddEmployeeResource, useEditEmployeeResource } from "./useEmployeeResource";
+import { useAddEmployeeResource, useEditEmployeeResource } from "../useEmployeeResource";
 import { useFormik } from "formik";
 
 const useEmployeeResourceForm = (data) => {

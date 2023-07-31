@@ -1,20 +1,20 @@
 import { Button, Grid, TextField } from "@mui/material";
 import React from "react";
-import { useAddOfficeResource } from "../../../../hooks/resource/officeResource/useOfficeResource";
-import useOfficeResourceForm from "../../../../hooks/resource/officeResource/useOfficeResourceForm";
+import useOfficeResourceForm from "../../../../hooks/resource/officeResource/OfficeResourceForm/useOfficeResourceForm";
+// import useOfficeResourceForm from "../../../../hooks/resource/officeResource/useOfficeResourceForm";
 
-const OfficeResourceFields = ({ onClose, isLoading }) => {
-  const { formik } = useOfficeResourceForm();
+const OfficeResourceFields = ({ onClose, isLoading, data }) => {
+  const { formik } = useOfficeResourceForm(data);
 
-	const handleFormSubmit = () => {
-		formik.handleSubmit();
+  const handleFormSubmit = () => {
+    formik.handleSubmit();
 
-		if (formik.isValid) {
-			onClose();
-		} else {
-			toast.error('Please make sure you have filled the form correctly');
-		}
-	};
+    if (formik.isValid) {
+      onClose();
+    } else {
+      toast.error("Please make sure you have filled the form correctly");
+    }
+  };
   return (
     !isLoading && (
       <Grid container spacing={3}>
@@ -22,9 +22,10 @@ const OfficeResourceFields = ({ onClose, isLoading }) => {
           <TextField
             id="name"
             name="name"
-            label=" Name"
+            label="Resource Name"
             placeholder="Enter resource name"
             fullWidth
+            required
             value={formik.values.name}
             onChange={formik.handleChange}
             error={formik.touched.name && Boolean(formik.errors.name)}
@@ -38,9 +39,10 @@ const OfficeResourceFields = ({ onClose, isLoading }) => {
           <TextField
             id="uniqueNumber"
             name="uniqueNumber"
-            label=" uniqueNumber"
+            label=" Unique Number"
             placeholder="Enter unique number of resource"
             fullWidth
+            required
             value={formik.values.uniqueNumber}
             onChange={formik.handleChange}
             error={
@@ -58,9 +60,11 @@ const OfficeResourceFields = ({ onClose, isLoading }) => {
           <TextField
             id="description"
             name="description"
-            label=" description"
+            label=" Description"
             placeholder="Enter description of resource"
             fullWidth
+            multiline
+            rows={3}
             value={formik.values.description}
             onChange={formik.handleChange}
             error={
