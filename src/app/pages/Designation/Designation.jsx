@@ -52,7 +52,7 @@ const Designation = () => {
     {
       title: "SN",
       render: (rowData) => rowData.tableData.index + 1,
-      width: 80,
+      width: 50,
       sortable: false,
     },
     {
@@ -65,18 +65,20 @@ const Designation = () => {
       title: "Designation Level",
       field: "positionLevel",
       emptyValue: "-",
-      width: 100,
+      width: 200,
     },
     {
       title: "Salary",
       field: "salary",
       emptyValue: "-",
-      width: 200,
+      width: 80,
     },
     {
       title: "Details",
       field: "positionDetails",
       emptyValue: "-",
+      width: 80,
+
     },
     {
       title: "Actions",
@@ -97,7 +99,7 @@ const Designation = () => {
         </Stack>
       ),
       sorting: false,
-      width: 120,
+      width: 80,
     },
   ];
   if (isLoading) return <>Loading</>;
@@ -129,12 +131,12 @@ const Designation = () => {
           headerStyle: {
             backgroundColor: "#01579b",
             color: "#FFF",
-            fontSize: 20,
+            fontSize: "1rem",
             padding: "dense",
-            height: 50,
+            height: "50",
           },
           rowStyle: {
-            fontSize: 18,
+            fontSize: ".8rem",
           },
         }}
       />

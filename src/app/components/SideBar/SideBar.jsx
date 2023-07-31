@@ -79,7 +79,6 @@ export default function Sidebar() {
   const { toggleMode, mode } = useContext(ThemeModeContext);
   const [subMenuOpen, setSubMenuOpen] = useState({});
 
-  const primaryColor = mode === "light " ? "black" : "white";
   const drawerMenus = [
     {
       name: "Dashboard",
@@ -93,81 +92,132 @@ export default function Sidebar() {
     },
     {
       name: "Employee",
-      icon: <PeopleAltIcon style={{ color: primaryColor }} />,
+      icon: (
+        <PeopleAltIcon
+          sx={mode === "light" ? { color: "black" } : { color: "white" }}
+        />
+      ),
       path: "employee",
       subMenus: [
+        // {
+        //   name: 'Add Employee',
+        //   path: 'employee/add',
+        //   icon: <PersonAddIcon style={{ color: primaryColor }} />,
+        // },
         {
           name: "Employee",
           path: "employee",
-          icon: <PersonIcon style={{ color: primaryColor }} />,
+          icon: (
+            <PersonIcon
+              sx={mode === "light" ? { color: "black" } : { color: "white" }}
+            />
+          ),
         },
         {
           name: "Leave",
           path: "leave",
-          icon: <MailIcon style={{ color: primaryColor }} />,
+          icon: (
+            <MailIcon
+              sx={mode === "light" ? { color: "black" } : { color: "white" }}
+            />
+          ),
         },
         {
           name: "Leave Type",
           path: "leavetype",
-          icon: <MailIcon style={{ color: primaryColor }} />,
+          icon: (
+            <MailIcon
+              sx={mode === "light" ? { color: "black" } : { color: "white" }}
+            />
+          ),
         },
         {
           name: "Attendance",
           path: "attendance",
-          icon: <HowToRegIcon style={{ color: primaryColor }} />,
+          icon: (
+            <HowToRegIcon
+              sx={mode === "light" ? { color: "black" } : { color: "white" }}
+            />
+          ),
         },
         {
           name: "Birthday",
           path: "birthday",
-          icon: <CakeIcon style={{ color: primaryColor }} />,
+          icon: (
+            <CakeIcon
+              sx={mode === "light" ? { color: "black" } : { color: "white" }}
+            />
+          ),
         },
       ],
     },
     {
-      name: 'Office Reource',
-      icon: <LaptopIcon style={{ color: primaryColor }} />,
-      path: 'resource/employee',
-      subMenus: [],
-    },
-    {
       name: "Department",
-      icon: <WorkspacesIcon style={{ color: primaryColor }} />,
+      icon: (
+        <WorkspacesIcon
+          sx={mode === "light" ? { color: "black" } : { color: "white" }}
+        />
+      ),
       path: "department",
       subMenus: [],
     },
     {
       name: "Designation",
-      icon: <AssignmentIndIcon style={{ color: primaryColor }} />,
+      icon: (
+        <AssignmentIndIcon
+          sx={mode === "light" ? { color: "black" } : { color: "white" }}
+        />
+      ),
       path: "designation",
       subMenus: [],
     },
     {
       name: "Company",
-      icon: <BusinessIcon style={{ color: primaryColor }} />,
+      icon: (
+        <BusinessIcon
+          sx={mode === "light" ? { color: "black" } : { color: "white" }}
+        />
+      ),
       path: "company",
       subMenus: [],
     },
     {
       name: "Project",
-      icon: <AddchartIcon style={{ color: primaryColor }} />,
+      icon: (
+        <AddchartIcon
+          sx={mode === "light" ? { color: "black" } : { color: "white" }}
+        />
+      ),
       path: "project",
       subMenus: [],
     },
     {
       name: "Event",
-      icon: <EventIcon style={{ color: primaryColor }} />,
+      icon: (
+        <EventIcon
+          sx={mode === "light" ? { color: "black" } : { color: "white" }}
+        />
+      ),
       path: "event",
       subMenus: [],
     },
     {
       name: "Holiday",
-      icon: <HolidayVillageIcon style={{ color: primaryColor }} />,
+      icon: (
+        <HolidayVillageIcon
+          sx={mode === "light" ? { color: "black" } : { color: "white" }}
+        />
+      ),
       path: "holiday",
       subMenus: [],
     },
     {
       name: "ToDo",
-      icon: <PlaylistAddCheckIcon style={{ color: primaryColor }} />,
+      icon: (
+        <PlaylistAddCheckIcon
+          sx={mode === "light" ? { color: "black" } : { color: "white" }}
+        />
+      ),
       path: "todolist",
       subMenus: [],
     },
@@ -233,9 +283,17 @@ export default function Sidebar() {
                   />
                   {menu.subMenus.length > 0 ? (
                     subMenuOpen[index] ? (
-                      <ExpandLess />
+                      <ExpandLess  sx={
+                        mode === "light"
+                          ? { color: "black" }
+                          : { color: "white" }
+                      }/>
                     ) : (
-                      <ExpandMore />
+                      <ExpandMore  sx={
+                          mode === "light"
+                            ? { color: "black" }
+                            : { color: "white" }
+                        }/>
                     )
                   ) : null}
                 </ListItemButton>
@@ -247,7 +305,11 @@ export default function Sidebar() {
                       <StyledNavLink
                         key={subIndex}
                         to={subMenu.path}
-                        sx={{ color: "light" ? "black" : "white" }}
+                        sx={
+                          mode === "light"
+                            ? { color: "black" }
+                            : { color: "white" }
+                        }
                       >
                         <ListItemButton sx={{ pl: 4 }}>
                           <ListItemIcon
@@ -296,7 +358,7 @@ export default function Sidebar() {
           >
             Logout
           </Button>
-          <Typography variant="body2" sx={{ marginRight: "8px" }}>
+          <Typography variant="body2" sx={{ marginRight: "8px" , marginTop:"1rem"}}>
             {mode === "light" ? "Light" : "Dark"} Mode
           </Typography>
           <Switch checked={mode === "dark"} onChange={toggleMode} />

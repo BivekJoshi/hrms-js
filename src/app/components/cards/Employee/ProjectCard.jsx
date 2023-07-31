@@ -1,14 +1,6 @@
-import React, { useState, useEffect, useRef } from "react";
-import {
-  Avatar,
-  Box,
-  Button,
-  CardContent,
-  Chip,
-  Divider,
-  Grid,
-  Typography,
-} from "@mui/material";
+import React, { useState, useEffect, useRef, useContext } from "react";
+import { Avatar, Box, Button, CardContent } from "@mui/material";
+import { Chip, Divider, Grid, Typography } from "@mui/material";
 import { ClickAwayListener, Grow, Stack } from "@mui/material";
 import { MenuItem, MenuList, Paper, Popper } from "@mui/material";
 import { useNavigate } from "react-router-dom";
@@ -21,6 +13,7 @@ import {
 } from "../../../pages/Project/ProjectModal/ProjectModal";
 import { useGetEmployee } from "../../../hooks/employee/useEmployee";
 import { useGetProjectEmployee } from "../../../hooks/project/projectEmployee/useProjectEmployee";
+import ThemeModeContext from "../../../../theme/ThemeModeContext";
 
 const ProjectCard = ({
   Id,
@@ -35,6 +28,7 @@ const ProjectCard = ({
   const navigate = useNavigate();
   const { data: employeeData } = useGetEmployee();
   const { data: projectEmployeeData } = useGetProjectEmployee();
+  const { mode } = useContext(ThemeModeContext); // Accessing mode from context
 
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openDeactivateModal, setOpenDeactiveModal] = useState(false);
@@ -114,6 +108,7 @@ const ProjectCard = ({
           style={{
             textAlign: "center",
             padding: "1.5rem",
+            backgroundColor: mode === "light" ? "white" : "#292929",
           }}
         >
           <Grid
@@ -259,13 +254,9 @@ const ProjectCard = ({
               </Box>
             </Stack>
 
-            <Stack
-              style={{
-                fontSize: ".9rem",
-              }}
-            >
+            <Stack style={{ fontSize: ".9rem" }}>
               <Box
-                backgroundColor="#f5f5f5"
+                backgroundColor={mode === "light" ? "#f5f5f5" : "#4d4c4c"}
                 padding=".5rem"
                 borderRadius=".5rem"
               >

@@ -62,7 +62,7 @@ export const ThemeContextProvider = ({ children }) => {
       },
       background: {
         default: isDarkMode ? "#303030" : "#f8f8f8",
-        paper: isDarkMode ? "#424242" : "#fff",
+        paper: isDarkMode ? "#3838388a" : "#fff",
         imageCaption: isDarkMode ? "#c5c7cb" : "#616161",
       },
       text: {

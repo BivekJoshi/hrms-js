@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Box, Grid, Stack, Typography } from "@mui/material";
 import MainCard from "../MainCard";
+import ThemeModeContext from "../../../../theme/ThemeModeContext";
 
 const DashboardCard = ({ title, icon, value }) => {
+  const { mode } = useContext(ThemeModeContext);
+
   return (
     <Grid item xs={12} sm={6} md={3} lg={2}>
       <MainCard grow={true}>
@@ -17,8 +20,13 @@ const DashboardCard = ({ title, icon, value }) => {
             {icon}
           </Typography>
           <Box>
-            <Typography variant="h5" color="#3e019b" align="center" fontWeight={600}>
-              {value}
+            <Typography
+              variant="h6"
+              color={mode === "light" ? "black" : "white"}
+              align="center"
+              fontWeight={600}
+            >
+              120
             </Typography>
             <Typography color="black" align="center">
               {title}
