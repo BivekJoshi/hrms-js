@@ -43,7 +43,7 @@ export const PieChartDiagram = ({data}) => {
   };
 
   return (
-    <Box alignSelf="self-start" marginTop="-1rem">
+    <Box alignSelf="self-start" marginTop="-1rem" className="pichartStyle">
       <PieChart width={730} height={300} style={{position:"inherit"}}>
         <Pie
           data={piedata}
@@ -59,6 +59,7 @@ export const PieChartDiagram = ({data}) => {
           ))}
         </Pie>
         <Pie
+        style={{background:"black"}}
           data={piedata}
           dataKey="value"
           nameKey="name"
