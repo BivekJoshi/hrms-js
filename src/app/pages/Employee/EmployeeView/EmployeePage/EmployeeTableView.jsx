@@ -14,14 +14,14 @@ const EmployeeTableView = ({ employeeData, isLoading }) => {
         {
             title: 'SN',
             render: (rowData) => rowData.tableData.id + 1,
-            width: "3%",
+            // width: "3%",
             sortable: false,
         },
         {
             title: 'Employee',
             field: 'firstName',
             emptyValue: '-',
-            width: "10%",
+            // width: "10%",
         },
         {
             title: 'Position',
@@ -30,7 +30,7 @@ const EmployeeTableView = ({ employeeData, isLoading }) => {
                 return position ? position : '-';
             }
             ,
-            width: 340,
+            // width: 340,
         },
         {
             title: 'Email',
@@ -55,7 +55,7 @@ const EmployeeTableView = ({ employeeData, isLoading }) => {
                 </Stack>
             ),
             sorting: false,
-            width: 120,
+            // width: 120,
         },
     ];
 
@@ -85,12 +85,12 @@ const EmployeeTableView = ({ employeeData, isLoading }) => {
                     headerStyle: {
                         backgroundColor: '#01579b',
                         color: '#FFF',
-                        fontSize: 20,
+                        fontSize: "1rem",
                         padding: 'dense',
                         height: 50,
                     },
                     rowStyle: {
-                        fontSize: 18,
+                        fontSize:".8rem",
                     },
                 }}
             />
