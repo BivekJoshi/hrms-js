@@ -48,7 +48,7 @@ const Company = () => {
               +Add Company
             </Button>
           </Box>
-          <TabPanel value="1">
+          <TabPanel value="1" sx={{padding:"0"}}>
             <CompanyTable />
           </TabPanel>
           <TabPanel value="2">
