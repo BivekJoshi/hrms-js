@@ -1,26 +1,30 @@
 .container {
   height: 95vh;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   padding: 0 2rem;
+  gap: 1rem;
 }
 .wave {
   position: absolute;
   bottom: 0;
   left: 0;
   height: 100%;
-  z-index: -1;
 }
+
+.loginPic {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
 .login-left {
   flex: 1;
   display: flex;
   justify-content: center;
   background-repeat: no-repeat;
   background-position: center center;
-  /* background-size: 35vh; */
   background-size: cover;
-
-  /* margin: 64px 0; */
-
   align-items: center;
 }
 .login-right {
@@ -28,7 +32,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  z-index: 1;
+  padding: 0 6rem;
 }
 .welcome-text {
   font-size: x-large;
@@ -38,15 +43,52 @@
 .avatar {
   height: 100px;
 }
+.input-section {
+  display: grid;
+  gap: 0.5rem;
+}
 
-@media (max-width: 900px) {
+.wave2 {
+  display: none;
+  width: 100%;
+}
+@media (max-width: 920px) {
+  .css-19r6kue-MuiContainer-root {
+    padding: 0 !important;
+  }
+
+  .container {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    padding: 1rem;
+    height: max-content;
+    gap: 3rem;
+  }
+  .welcome-text {
+    font-size: 1rem;
+  }
+  .forgot-password {
+    font-size: 0.8rem;
+  }
+
+  .avatar {
+    height: 80px;
+  }
   .wave {
     display: none;
+  }
+  .wave2 {
+    display: block;
+    width: 100%;
+    height: -webkit-fill-available;
+    position: fixed;
   }
   .login-left {
     display: none;
   }
   .login-right {
     justify-content: center;
+    z-index: 1;
+    padding: 0 2rem;
   }
 }

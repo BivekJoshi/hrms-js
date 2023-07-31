@@ -25,12 +25,20 @@ const Login = () => {
   } = useLoginForm({});
   return (
     <>
+      <img
+        className="wave2"
+        src="https://raw.githubusercontent.com/sefyudem/Responsive-Login-Form/master/img/wave.png"
+      />
+
       <div className="container">
-        <img className="wave" src="https://raw.githubusercontent.com/sefyudem/Responsive-Login-Form/master/img/wave.png" />
-        <div
-          className="login-left"
-          style={{ backgroundImage: `url(${bg1})` }}
-        ></div>
+        <img
+          className="wave"
+          src="https://raw.githubusercontent.com/sefyudem/Responsive-Login-Form/master/img/wave.png"
+        />
+        <img
+          className="loginPic"
+          src="https://raw.githubusercontent.com/sefyudem/Responsive-Login-Form/master/img/bg.svg"
+        />
         <div className="login-right">
           <Box component="form" noValidate className="input-section">
             <div style={{ display: "flex", justifyContent: "center" }}>
@@ -40,7 +48,7 @@ const Login = () => {
               />
             </div>
             <p className="welcome-text">WELCOME</p>
-            <Grid>
+            <Box className="input-section">
               <TextField
                 required
                 fullWidth
@@ -100,8 +108,10 @@ const Login = () => {
                   ),
                 }}
               />
-              <div className="forgot-password d-flex justify-content-end">
-                <Link to="forgot-password">forget password?</Link>
+              <div className="d-flex justify-content-end">
+                <Link className="forgot-password" to="forgot-password">
+                  forget password?
+                </Link>
               </div>
               <LoadingButton
                 fullWidth
@@ -112,7 +122,7 @@ const Login = () => {
               >
                 Sign In
               </LoadingButton>
-            </Grid>
+            </Box>
           </Box>
         </div>
       </div>
