@@ -55,7 +55,7 @@ const TodoList = () => {
       type: 'numeric',
     },
     {
-      title: 'priority',
+      title: 'Priority',
       field: 'priority',
       emptyValue: '-',
       width: 100,

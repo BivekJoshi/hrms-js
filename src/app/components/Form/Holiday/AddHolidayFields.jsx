@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Grid, TextField, Button } from "@mui/material";
 import { toast } from "react-toastify";
-import useAddHolidayForm from "../../../hooks/holiday/addHoliday/useAddHolidayForm";
 import ModalComponent from "../../Modal/ModalComponent";
+import useHolidayForm from "../../../hooks/holiday/HolidayForm/useHolidayForm";
 
 const AddHolidayFields = ({ onClose, isLoading }) => {
-  const { formik, data } = useAddHolidayForm();
+  const { formik, data } = useHolidayForm();
 
   const [showInitialView, setShowInitialView] = useState(true);
   const [openSubmitModal, setOpenSubmitModal] = useState(false);

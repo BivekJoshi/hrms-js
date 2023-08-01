@@ -1,11 +1,11 @@
 import React from 'react';
 import { Grid, TextField, Button } from '@mui/material';
 import { toast } from 'react-toastify';
-import useEditHolidayForm from '../../../hooks/holiday/editHoliday/useEditHolidayForm';
 import { useDeleteHoliday } from '../../../hooks/holiday/useHoliday';
+import useHolidayForm from '../../../hooks/holiday/HolidayForm/useHolidayForm';
 
 const EditHolidayFields = ({ onClose, isLoading, data }) => {
-    const { formik } = useEditHolidayForm(data);
+    const { formik } = useHolidayForm(data);
 
     const handleFormSubmit = async () => {
         const isValid = await formik.validateForm();
