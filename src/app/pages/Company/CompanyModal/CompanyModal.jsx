@@ -1,8 +1,7 @@
 import React from "react";
 import FormModal from "../../../components/Modal/FormModal";
-import AddCompanyFields from "../../../components/Form/Company/AddCompanyFields";
-import EditCompanyFields from "../../../components/Form/Company/EditCompanyFields";
 import { useGetCompanyById } from "../../../hooks/company/useCompany";
+import CompanyFields from "../../../components/Form/Company/CompanyFields";
 
 export const AddCompanyModal = ({ open, handleCloseModal }) => {
   return (
@@ -10,7 +9,7 @@ export const AddCompanyModal = ({ open, handleCloseModal }) => {
       <FormModal
         open={open}
         onClose={handleCloseModal}
-        formComponent={<AddCompanyFields onClose={handleCloseModal} />}
+        formComponent={<CompanyFields onClose={handleCloseModal} />}
       />
     </div>
   );
@@ -24,7 +23,7 @@ export const EditCompanyModal = ({ open, handleCloseModal, id }) => {
         open={open}
         onClose={handleCloseModal}
         formComponent={
-          <EditCompanyFields onClose={handleCloseModal} data={data} />
+          <CompanyFields onClose={handleCloseModal} data={data} />
         }
       />
     </div>

@@ -1,7 +1,5 @@
 import { Box, Button, Grid } from "@mui/material";
 import React, { useState, useRef, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setTodayHoliday, addHoliday } from "../../../Redux/Slice/holidaySlice";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
@@ -11,26 +9,22 @@ import { AddHolidayModal, OpenHoliday } from "./HolidayModal/HolidayModal";
 import CurrentHoliday from "./CurrentHoliday";
 
 const Holiday = () => {
-  const dispatch = useDispatch();
   const { data: holidayData } = useGetHoliday();
 
   const [getID, setGetID] = useState({});
 
-  const holidays = useSelector((state) => state.holiday.holidays);
-  const todayHoliday = useSelector((state) => state.holiday.todayHoliday);
-
   const handleOpenModal = (e) => {
     setGetID(e?.event?._def?.publicId);
-    setOpenModal(true);
+    setOpenOnClickModal(true);
   };
 
   const [openAddModal, setOpenAddModal] = useState(false);
-  const [openModal, setOpenModal] = useState(false);
+  const [openOnClickModal, setOpenOnClickModal] = useState(false);
 
   const handleAddOpenModal = () => setOpenAddModal(true);
   const handleCloseAddModal = () => setOpenAddModal(false);
 
-  const handleCloseModal = () => setOpenModal(false);
+  const handleCloseModal = () => setOpenOnClickModal(false);
 
   const calendarRef = useRef(null);
 
@@ -43,22 +37,8 @@ const Holiday = () => {
         id: event.id,
       }));
       setEvents(formattedEvents);
-
-      // Check if there's a holiday today and update the state accordingly
-      const today = new Date().toISOString().split("T")[0];
-      const todayEvents = formattedEvents.filter((event) => event.date === today);
-      const isTodayHoliday = todayEvents.length > 0;
-      dispatch(setTodayHoliday(isTodayHoliday));
-      dispatch(addHoliday(todayEvents));
     }
-  }, [holidayData, dispatch]);
-
-  const dayCellContentHandler = (arg) => {
-    const eventDates = events.map((event) => event.date);
-    if (eventDates.includes(arg.dateStr)) {
-      arg.dayEl.classList.add("highlight-day");
-    }
-  };
+  }, [holidayData]);
 
   return (
     <>
@@ -73,10 +53,7 @@ const Holiday = () => {
       </Box>
       <br />
       <Grid container spacing={2}>
-        <Grid item xs={3}>
-          <CurrentHoliday />
-        </Grid>
-        <Grid item xs={9} className={holidayData ? "calenderDesign" : ""}>
+        <Grid item xs={12} sm={12} md={9}className={holidayData ? "calenderDesign" : ""}>
           <FullCalendar
             ref={calendarRef}
             plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
@@ -92,6 +69,9 @@ const Holiday = () => {
             
           />
         </Grid>
+        <Grid item xs={0} sm={0} md={3}>
+          <CurrentHoliday />
+        </Grid>
       </Grid>
 
       {openAddModal && (
@@ -101,10 +81,10 @@ const Holiday = () => {
         />
       )}
 
-      {openModal && (
+      {openOnClickModal && (
         <OpenHoliday
           id={getID}
-          open={openModal}
+          open={openOnClickModal}
           handleCloseModal={handleCloseModal}
         />
       )}
