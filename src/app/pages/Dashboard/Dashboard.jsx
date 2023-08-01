@@ -20,7 +20,7 @@ const Dashboard = () => {
   const { data: projectData } = useGetProject();
   return (
     <Box sx={{ display: "grid", gridTemplateRows: "1fr", rowGap: "3rem" }}>
-      <Grid
+      <Grid style={{marginTop:'10px'}}
         container
         rowSpacing={4.5}
         justifyContent="space-around"
