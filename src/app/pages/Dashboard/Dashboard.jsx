@@ -20,9 +20,6 @@ const Dashboard = () => {
   const { data: projectData } = useGetProject();
   return (
     <Box sx={{ display: "grid", gridTemplateRows: "1fr", rowGap: "3rem" }}>
-      <Stack flexDirection="row" gap="1rem" alignItems="center">
-        <h3>DASHBOARD</h3> <AiFillHome />
-      </Stack>
       <Grid
         container
         rowSpacing={4.5}
