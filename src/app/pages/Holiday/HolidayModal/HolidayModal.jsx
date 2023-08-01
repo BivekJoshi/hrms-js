@@ -1,8 +1,7 @@
 import React from 'react'
 import FormModal from '../../../components/Modal/FormModal';
-import AddHolidayFields from '../../../components/Form/Holiday/AddHolidayFields';
 import { useGetHolidayById } from '../../../hooks/holiday/useHoliday';
-import EditHolidayFields from '../../../components/Form/Holiday/EditHolidayFields';
+import HolidayFields from '../../../components/Form/Holiday/HolidayFields';
 
 export const AddHolidayModal = ({ open, handleCloseModal }) => {
   return (
@@ -10,7 +9,7 @@ export const AddHolidayModal = ({ open, handleCloseModal }) => {
       <FormModal
         open={open}
         onClose={handleCloseModal}
-        formComponent={<AddHolidayFields onClose={handleCloseModal} />}
+        formComponent={<HolidayFields onClose={handleCloseModal} />}
       />
     </div>
   )
@@ -23,7 +22,7 @@ export const OpenHoliday = ({ open, handleCloseModal ,id}) => {
       <FormModal
         open={open}
         onClose={handleCloseModal}
-        formComponent={<EditHolidayFields onClose={handleCloseModal} data={data}/>}
+        formComponent={<HolidayFields onClose={handleCloseModal} data={data}/>}
       />
     </div>
   )

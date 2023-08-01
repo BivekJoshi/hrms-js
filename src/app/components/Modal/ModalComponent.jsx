@@ -15,12 +15,12 @@ const style = {
   p: 4,
 };
 
-const ModalComponent = ({ open, handleProceed, onClose, data }) => {
+const ModalComponent = ({ open, handleSubmitModal, onClose, data }) => {
   const {data : employeeData } = useGetEmployee();
   const [openEmail, setOpenEmail] = useState(false);
 
   const handleEmailButtonClick = () => {
-    handleProceed();
+    handleSubmitModal();
     setOpenEmail(true);
   };
 
