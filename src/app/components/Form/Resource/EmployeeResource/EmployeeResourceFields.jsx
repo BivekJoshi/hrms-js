@@ -1,14 +1,14 @@
 import { Button, Grid, MenuItem, TextField } from "@mui/material";
 import React from "react";
-import useEmployeeResourceForm from "../../../../hooks/resource/employeeResource/useEmployeeResourceForm";
+import useEmployeeResourceForm from "../../../../hooks/resource/employeeResource/EmployeeResourceForm/useEmployeeResourceForm";
 import { useGetOfficeResource } from "../../../../hooks/resource/officeResource/useOfficeResource";
 import { useGetEmployee } from "../../../../hooks/employee/useEmployee";
 
-const EmployeeResourceFields = ({ onClose, isLoading }) => {
+const EmployeeResourceFields = ({ onClose, isLoading, data }) => {
   const { data: officeResourceData } = useGetOfficeResource();
   const { data: employeeData } = useGetEmployee();
-  
-  const { formik } = useEmployeeResourceForm();
+
+  const { formik } = useEmployeeResourceForm(data);
   const handleFormSubmit = () => {
     formik.handleSubmit();
 
@@ -18,9 +18,37 @@ const EmployeeResourceFields = ({ onClose, isLoading }) => {
       toast.error("Please make sure you have filled the form correctly");
     }
   };
+  const submitButtonText = data ? "Update Resource" : " Add Resource";
   return (
     !isLoading && (
       <Grid container spacing={3}>
+          <Grid item xs={12} sm={12}>
+          <TextField
+            select
+            id="employeeId"
+            name="employeeId"
+            label="Employee Name"
+            placeholder="Select employee name"
+            fullWidth
+            required
+            value={formik.values.employeeId}
+            onChange={formik.handleChange}
+            error={
+              formik.touched.employeeId && Boolean(formik.errors.employeeId)
+            }
+            helperText={formik.touched.employeeId && formik.errors.employeeId}
+            variant="outlined"
+            autoFocus
+            InputLabelProps={{ shrink: true }}
+          >
+            {employeeData &&
+              employeeData.map((option) => (
+                <MenuItem key={option?.id} value={option?.id}>
+                  {option?.firstName} {option?.middleName} {option?.lastName}
+                </MenuItem>
+              ))}
+          </TextField>
+        </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
             id="officeResourceId"
@@ -28,6 +56,7 @@ const EmployeeResourceFields = ({ onClose, isLoading }) => {
             label="Office Resource"
             placeholder="Select Resource"
             fullWidth
+            required
             select
             value={formik.values.officeResourceId}
             onChange={formik.handleChange}
@@ -50,32 +79,7 @@ const EmployeeResourceFields = ({ onClose, isLoading }) => {
               ))}
           </TextField>
         </Grid>
-        <Grid item xs={12} sm={12}>
-          <TextField
-          select
-            id="employeeId"
-            name="employeeId"
-            label="Employee Name"
-            placeholder="Select employee name"
-            fullWidth
-            value={formik.values.employeeId}
-            onChange={formik.handleChange}
-            error={
-              formik.touched.employeeId && Boolean(formik.errors.employeeId)
-            }
-            helperText={formik.touched.employeeId && formik.errors.employeeId}
-            variant="outlined"
-            autoFocus
-            InputLabelProps={{ shrink: true }}
-          >
-            {employeeData &&
-              employeeData.map((option) => (
-                <MenuItem key={option?.id} value={option?.id}>
-                  {option?.firstName}
-                </MenuItem>
-              ))}
-          </TextField>
-        </Grid>
+      
         <Grid item xs={12} sm={12}>
           <TextField
             type="date"
@@ -84,6 +88,7 @@ const EmployeeResourceFields = ({ onClose, isLoading }) => {
             label="Received Date"
             placeholder="Select date"
             fullWidth
+            required
             value={formik.values.receiveDate}
             onChange={formik.handleChange}
             error={
@@ -125,7 +130,7 @@ const EmployeeResourceFields = ({ onClose, isLoading }) => {
             onClick={handleFormSubmit}
             sx={{ mt: 3, ml: 1 }}
           >
-            Add Resource
+            {submitButtonText}
           </Button>
           <Button
             variant="contained"

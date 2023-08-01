@@ -1,8 +1,7 @@
 import React from 'react'
 import FormModal from '../../../components/Modal/FormModal';
-import AddLeaveFields from '../../../components/Form/Leave/AddLeaveFields';
-import EditLeaveFields from '../../../components/Form/Leave/EditLeaveFields';
 import { useGetLeaveById } from '../../../hooks/leave/useLeave';
+import LeaveFields from '../../../components/Form/Leave/LeaveFields';
 
 export const AddLeaveModal = ({ open, handleCloseModal}) => {
   return (
@@ -10,7 +9,7 @@ export const AddLeaveModal = ({ open, handleCloseModal}) => {
       <FormModal
         open={open}
         onClose={handleCloseModal}
-        formComponent={<AddLeaveFields onClose={handleCloseModal} />}
+        formComponent={<LeaveFields onClose={handleCloseModal} />}
       />
     </div>
   )
@@ -23,7 +22,7 @@ export const EditLeaveModal = ({ open, handleCloseModal, id }) => {
         <FormModal
           open={open}
           onClose={handleCloseModal}
-          formComponent={<EditLeaveFields onClose={handleCloseModal} data={data} />}
+          formComponent={<LeaveFields onClose={handleCloseModal} data={data} />}
         />
       </div>
     )

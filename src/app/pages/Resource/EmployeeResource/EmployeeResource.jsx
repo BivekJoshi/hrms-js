@@ -85,12 +85,12 @@ const EmployeeResource = () => {
       width: "20vh",
     },
     {
-      title: "Receive Date",
+      title: "Received Date",
       field: "receiveDate",
       emptyValue: "-",
     },
     {
-      title: "Return Date",
+      title: "Returned Date",
       field: "returnDate",
       emptyValue: "-",
     },
