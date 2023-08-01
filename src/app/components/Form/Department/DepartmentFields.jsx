@@ -1,9 +1,10 @@
-import { Button, Grid, TextField } from "@mui/material";
+import { Grid, TextField, Button } from "@mui/material";
 import React from "react";
-import useOfficeResourceForm from "../../../../hooks/resource/officeResource/OfficeResourceForm/useOfficeResourceForm";
+import { toast } from "react-toastify";
+import useDepartmentForm from "../../../hooks/department/DepartmentForm/useDepartmentForm";
 
-const OfficeResourceFields = ({ onClose, isLoading, data }) => {
-  const { formik } = useOfficeResourceForm(data);
+const DepartmentFields = ({ onClose, isLoading, data }) => {
+  const { formik } = useDepartmentForm(data);
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
@@ -14,41 +15,26 @@ const OfficeResourceFields = ({ onClose, isLoading, data }) => {
       toast.error("Please make sure you have filled the form correctly");
     }
   };
+  const submitButtonText = data ? "Update Department" : "Add Department";
   return (
     !isLoading && (
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
           <TextField
-            id="name"
-            name="name"
-            label="Resource Name"
-            placeholder="Enter resource name"
+            id="departmentName"
+            name="departmentName"
+            label="Department Name"
+            placeholder="Enter department name"
             fullWidth
             required
-            value={formik.values.name}
-            onChange={formik.handleChange}
-            error={formik.touched.name && Boolean(formik.errors.name)}
-            helperText={formik.touched.name && formik.errors.name}
-            variant="outlined"
-            autoFocus
-            InputLabelProps={{ shrink: true }}
-          />
-        </Grid>
-        <Grid item xs={12} sm={12}>
-          <TextField
-            id="uniqueNumber"
-            name="uniqueNumber"
-            label=" Unique Number"
-            placeholder="Enter unique number of resource"
-            fullWidth
-            required
-            value={formik.values.uniqueNumber}
+            value={formik.values.departmentName}
             onChange={formik.handleChange}
             error={
-              formik.touched.uniqueNumber && Boolean(formik.errors.uniqueNumber)
+              formik.touched.departmentName &&
+              Boolean(formik.errors.departmentName)
             }
             helperText={
-              formik.touched.uniqueNumber && formik.errors.uniqueNumber
+              formik.touched.departmentName && formik.errors.departmentName
             }
             variant="outlined"
             autoFocus
@@ -57,24 +43,51 @@ const OfficeResourceFields = ({ onClose, isLoading, data }) => {
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
-            id="description"
-            name="description"
-            label=" Description"
-            placeholder="Enter description of resource"
+            id="departmentType"
+            name="departmentType"
+            label="Department Type"
+            placeholder="Enter department type"
+            fullWidth
+            required
+            value={formik.values.departmentType}
+            onChange={formik.handleChange}
+            error={
+              formik.touched.departmentType &&
+              Boolean(formik.errors.departmentType)
+            }
+            helperText={
+              formik.touched.departmentType && formik.errors.departmentType
+            }
+            variant="outlined"
+            autoFocus
+            InputLabelProps={{ shrink: true }}
+          />
+        </Grid>
+        <Grid item xs={12} sm={12}>
+          <TextField
+            id="departmentDescription"
+            name="departmentDescription"
+            label="Description"
+            placeholder="Enter department description"
             fullWidth
             multiline
             rows={3}
-            value={formik.values.description}
+            value={formik.values.departmentDescription}
             onChange={formik.handleChange}
             error={
-              formik.touched.description && Boolean(formik.errors.description)
+              formik.touched.departmentDescription &&
+              Boolean(formik.errors.departmentDescription)
             }
-            helperText={formik.touched.description && formik.errors.description}
+            helperText={
+              formik.touched.departmentDescription &&
+              formik.errors.departmentDescription
+            }
             variant="outlined"
             autoFocus
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
+
         <Grid
           container
           direction="row"
@@ -85,9 +98,8 @@ const OfficeResourceFields = ({ onClose, isLoading, data }) => {
             variant="contained"
             onClick={handleFormSubmit}
             sx={{ mt: 3, ml: 1 }}
-            onClose={onClose}
           >
-            Add Resource
+            {submitButtonText}
           </Button>
           <Button
             variant="contained"
@@ -103,4 +115,4 @@ const OfficeResourceFields = ({ onClose, isLoading, data }) => {
   );
 };
 
-export default OfficeResourceFields;
+export default DepartmentFields;
