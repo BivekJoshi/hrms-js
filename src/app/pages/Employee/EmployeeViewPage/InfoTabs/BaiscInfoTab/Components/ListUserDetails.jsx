@@ -17,7 +17,7 @@ const style = {
   p: 4,
 };
 
-export default function ListUserDetails({ cardTitle, data }) {
+export default function ListUserDetails({ cardTitle, data, mode }) {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
 
@@ -48,7 +48,7 @@ export default function ListUserDetails({ cardTitle, data }) {
         </Modal>
 
       </Box>
-      <List sx={{ bgcolor: "#ededed", borderRadius: "1rem" }}>
+      <List sx={{ bgcolor: mode=== "light"? "#ededed" :"#3f413f", borderRadius: "1rem" }}>
         {Object.keys(data).map((item, index) => (
           <InfoItem key={index} field={item} value={data[item]} />
         ))}
