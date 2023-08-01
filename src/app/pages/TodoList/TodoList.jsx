@@ -40,26 +40,26 @@ const TodoList = () => {
     {
       title: 'SN',
       render: (rowData) => rowData.tableData.index + 1,
-      width: 50,
+      width: "50px",
       sortable: false,
     },
     {
       title: "Message",
       field: "message",
-      width: 100
+      width: "100px"
     },
     {
       title: "Due",
       field: "dueDate",
-      width: 80,
-      type: 'numeric',
+      width: "80px",
+      // type: 'numeric',
       
     },
     {
       title: 'Priority',
       field: 'priority',
       emptyValue: '-',
-      width: 80,
+      width: "180px",
       cellStyle: {
         whiteSpace: 'nowrap',
       },
@@ -97,7 +97,7 @@ const TodoList = () => {
         </Stack>
       ),
       sorting: false,
-      width: 80,
+      width: "80px",
     },
   ];
 

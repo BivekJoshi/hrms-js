@@ -151,7 +151,7 @@ const ProjectCard = ({
                   placement="bottom-start"
                   transition
                   disablePortal
-                  sx={{ left: "-3rem !important" }}
+                  // sx={{ left: "-3rem !important" }}
                 >
                   {({ TransitionProps, placement }) => (
                     <Grow
