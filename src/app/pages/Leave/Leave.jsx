@@ -173,12 +173,12 @@ const Leave = ({ isLoading }) => {
           headerStyle: {
             backgroundColor: '#01579b',
             color: '#FFF',
-            fontSize: 20,
+            fontSize: "1rem",
             padding: 'dense',
             height: 50,
           },
           rowStyle: {
-            fontSize: 18,
+            fontSize: ".8rem",
           },
         }}
       />
