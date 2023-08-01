@@ -52,6 +52,11 @@
   display: none;
   width: 100%;
 }
+@media (max-width: 1200px) {
+  .login-right {
+    padding: 0 3rem;
+  }
+}
 @media (max-width: 920px) {
   .css-19r6kue-MuiContainer-root {
     padding: 0 !important;
