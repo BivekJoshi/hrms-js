@@ -40,25 +40,26 @@ const TodoList = () => {
     {
       title: 'SN',
       render: (rowData) => rowData.tableData.index + 1,
-      width: 80,
+      width: 50,
       sortable: false,
     },
     {
       title: "Message",
       field: "message",
-      width: 80
+      width: 100
     },
     {
       title: "Due",
       field: "dueDate",
       width: 80,
       type: 'numeric',
+      
     },
     {
       title: 'priority',
       field: 'priority',
       emptyValue: '-',
-      width: 100,
+      width: 80,
       cellStyle: {
         whiteSpace: 'nowrap',
       },
