@@ -228,9 +228,10 @@ export default function BreadCrumbs() {
     <>
       {currentRoute &&
         (currentRoute.path === 'dashboard' ? (
-          <Typography color='text.primary'>{currentRoute.name}</Typography>
+          <h4 color='text.primary'>{currentRoute.name}</h4>
         ) : (
           <Breadcrumbs>
+            
             <Link underline='hover' color='inherit' to='/admin/dashboard'>
               Dashboard
             </Link>
