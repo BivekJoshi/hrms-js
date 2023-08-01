@@ -1,8 +1,7 @@
 import React from 'react'
 import FormModal from '../../../components/Modal/FormModal';
-import AddDepartmentFields from '../../../components/Form/Department/AddDepartmentFields';
-import EditDepartmentFields from '../../../components/Form/Department/EditDepartmentFields';
 import { useGetDepartmentById } from '../../../hooks/department/useDepartment';
+import DepartmentFields from '../../../components/Form/Department/DepartmentFields';
 
 export const AddDepartmentModal = ({ open, handleCloseModal}) => {
   return (
@@ -10,7 +9,7 @@ export const AddDepartmentModal = ({ open, handleCloseModal}) => {
       <FormModal 
         open={open}
         onClose={handleCloseModal}
-        formComponent={<AddDepartmentFields onClose={handleCloseModal} />}
+        formComponent={<DepartmentFields onClose={handleCloseModal} />}
       />
     </div>
   )
@@ -23,7 +22,7 @@ export const EditDepartmentModal = ({ open, handleCloseModal, id }) => {
         <FormModal
           open={open}
           onClose={handleCloseModal}
-          formComponent={<EditDepartmentFields onClose={handleCloseModal} data={data} />}
+          formComponent={<DepartmentFields onClose={handleCloseModal} data={data} />}
         />
       </div>
     )
