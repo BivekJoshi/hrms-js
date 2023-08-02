@@ -73,20 +73,6 @@ import { useGetEvent } from "../../hooks/event/useEvent";
             <Stack>
               <List>
                 <MenuItem disablePadding>
-                  <Typography variant="h6" color="primary" fontWeight={400}>Today's Event: </Typography>
-                </MenuItem>
-                <Divider />
-                {todayEvent ? todayEvent.map((item) => (
-                  <MenuItem key={item.id}>
-                    <ListItemText primary={item?.eventName} />
-                  </MenuItem>
-                )): ("No Event Today!")}
-              </List>
-            </Stack>
-
-            <Stack>
-              <List>
-                <MenuItem disablePadding>
                   <Typography variant="h6" color="primary" fontWeight={400}>Today's Brithday: </Typography>
                 </MenuItem>
                 <Divider />
