@@ -65,10 +65,12 @@ const Birthdaytable = ({ data, isloading, currMonth }) => {
         headerStyle: {
           backgroundColor: "#01579b",
           color: "#FFF",
+          fontSize:"1rem",
         },
         rowStyle: (rowData) => ({
           backgroundColor: rowData.isTodayBirthday === true ? "green" : "",
           color: rowData.isTodayBirthday ? "white" : "",
+          fontSize: ".8rem",
         }),
       }}
     />

@@ -7,6 +7,7 @@ import interactionPlugin from "@fullcalendar/interaction";
 import { useGetHoliday } from "../../hooks/holiday/useHoliday";
 import { AddHolidayModal, OpenHoliday } from "./HolidayModal/HolidayModal";
 import CurrentHoliday from "./CurrentHoliday";
+import "./Style/Style.css"
 
 const Holiday = () => {
   const { data: holidayData } = useGetHoliday();
@@ -68,11 +69,11 @@ const Holiday = () => {
             events={events}
             
           />
-        </Grid>
-        <Grid item xs={0} sm={0} md={3}>
+        </Box>
+        <Box >
           <CurrentHoliday />
-        </Grid>
-      </Grid>
+        </Box>
+      </Box>
 
       {openAddModal && (
         <AddHolidayModal

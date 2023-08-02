@@ -20,15 +20,17 @@ const Dashboard = () => {
   const { data: projectData } = useGetProject();
   return (
     <Box sx={{ display: "grid", gridTemplateRows: "1fr", rowGap: "3rem" }}>
-      <Stack flexDirection="row" gap="1rem" alignItems="center">
-        <h3>DASHBORD</h3> <AiFillHome />
-      </Stack>
       <Grid
+        style={{ marginTop: "10px" }}
         container
         rowSpacing={4.5}
         justifyContent="space-around"
       >
-        <DashboardCard title="Users" icon={<FaUsers fontSize="3rem" />} value={42} />
+        <DashboardCard
+          title="Users"
+          icon={<FaUsers fontSize="3rem" />}
+          value={42}
+        />
         <DashboardCard
           title="Employees"
           icon={<FaPeopleGroup fontSize="3rem" />}
@@ -36,12 +38,18 @@ const Dashboard = () => {
         />
         <DashboardCard
           title="Events"
-          icon={<BiSolidCalendarEvent fontSize="3rem" />} value={24}
+          icon={<BiSolidCalendarEvent fontSize="3rem" />}
+          value={24}
         />
-        <DashboardCard title="Holiday" icon={<FaGifts fontSize="3rem" />} value={32} />
+        <DashboardCard
+          title="Holiday"
+          icon={<FaGifts fontSize="3rem" />}
+          value={32}
+        />
         <DashboardCard
           title="Project"
-          icon={<AiFillProject fontSize="3rem" />} value={6}
+          icon={<AiFillProject fontSize="3rem" />}
+          value={6}
         />
       </Grid>
 
@@ -50,7 +58,7 @@ const Dashboard = () => {
           display: "grid",
           gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))",
           gap: "2rem",
-          justifySelf:{ xs:"center", lg:"auto" }
+          justifySelf: { xs: "center", lg: "auto" },
         }}
       >
         <BarChatDiagram data={dashboardData} />
