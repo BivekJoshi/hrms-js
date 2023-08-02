@@ -53,8 +53,8 @@ const Holiday = () => {
         </Button>
       </Box>
       <br />
-      <Box className="holidayDiv" sx={{display:"grid", gridTemplateColumns:{lg:"3fr 1fr", sm :"1fr"}}}>
-        <Box className={holidayData ? "calenderDesign" : ""}>
+      <Grid container spacing={2}>
+        <Grid item xs={12} sm={12} md={9}className={holidayData ? "calenderDesign" : ""}>
           <FullCalendar
             ref={calendarRef}
             plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
