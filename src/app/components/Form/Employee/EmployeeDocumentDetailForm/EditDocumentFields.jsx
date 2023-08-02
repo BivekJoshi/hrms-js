@@ -5,13 +5,13 @@ import useEditDocumentForm from "./useEditDocumentForm";
 
 const EditDocumentFields = ({ onClose, isLoading, id }) => {
   const [ document, setDocument ] = useState(null);
-  const { formik } = useEditDocumentForm({ document }, id);
+  const { formik } = useEditDocumentForm(document , id);
 
   const handleChangeImage = (e) => {
     setDocument(e.target.files[0]);
   };
   
-  const handleFormSubmit = (document) => {
+  const handleFormSubmit = () => {
     formik.handleSubmit(document);
 
     if (formik.isValid) {
