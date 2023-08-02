@@ -33,12 +33,10 @@ const AppBar = styled(MuiAppBar, {
 export default function Header({ open, handleDrawerOpen }) {
   const { data: birthdayData } = useGetTodayBirthday();
   const [showLength, setShowLength] = useState(true);
-  const [openNotification, setOpenNotification] = useState(false);
-  const [clearedNotification, setClearedNotification] = useState(false);
 
-  // const handleClick = () => {
-  //   setShowLength(false);
-  // };
+  const handleClick = () => {
+    setShowLength(false);
+  };
 
   const today = new Date();
   const { data: upcomingBirthdayData, isloading } = useGetUpcomingBirthday();
@@ -55,13 +53,14 @@ export default function Header({ open, handleDrawerOpen }) {
       })
     : [];
 
-  // const isLoading = false;
+  const [openNotification, setOpenNotification] = useState(false);
+  const [clearedNotification, setClearedNotification] = useState(false);
 
   const { mutate } = useRemoveNotification();
 
-  // const handleChange = () => {
-  //   setOpenNotification(!openNotification);
-  // };
+  const handleChange = () => {
+    setClearedNotification(!openNotification);
+  };
 
   const handleClearNotification = () => {
     setOpenNotification(false);
@@ -70,10 +69,10 @@ export default function Header({ open, handleDrawerOpen }) {
 
   useEffect(() => {
     if (clearedNotification) {
-      toast.success("Notifications cleared for today!", {
+      toast.success('Notifications cleared for today!', {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 3000,
-      });
+      })
       mutate();
     }
   }, [clearedNotification, mutate]);
@@ -109,15 +108,11 @@ export default function Header({ open, handleDrawerOpen }) {
         </Box>
 
         <Stack flexDirection="row">
-          <Typography>
-            <TodayBirthday data={birthdayData} />
+        <Typography>
+            <TodayBirthday data={birthdayData}  />
           </Typography>
-
           <Typography>
-            <Notification
-              data={thisDayBirthdays}
-              onClearNotification={handleClearNotification}
-            />
+            <Notification data={thisDayBirthdays}  onClearNotification={handleClearNotification} />
           </Typography>
           <Typography>
             <Profile />
