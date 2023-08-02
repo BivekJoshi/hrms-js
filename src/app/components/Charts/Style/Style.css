@@ -12,16 +12,18 @@
 }
 
 ul {
-  margin-top: -12rem;
+  margin-top: -8rem;
 }
 
 .pichartStyle {
   align-self: self-start;
-  margin-top: -2rem;
+  margin-top: -6rem;
 }
-
-@media (max-width: 1025px) {
+.recharts-surface{
+  height: 400px;
+}
+/* @media (max-width: 1025px) {
   .pichartStyle {
-    /* justify-self: center !important; */
+    justify-self: center !important;
   }
-}
+} */
