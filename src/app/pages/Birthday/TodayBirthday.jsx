@@ -1,68 +1,161 @@
-import React from "react";
-import { Menu, MenuItem } from "@mui/material";
-import PersonIcon from "@mui/icons-material/Person";
-import { NavLink } from "react-router-dom";
+import React, { useRef } from "react";
+import { Button, Box, Popper, Grow, Paper } from "@mui/material";
+import { ClickAwayListener, MenuList, Typography } from "@mui/material";
+import { MenuItem } from "@mui/material";
+import CakeIcon from "@mui/icons-material/Cake";
+import "../Style/Style.css";
+import { useState } from "react";
 
-const TodayBirthday = ({ open, setOpen, data, isLoading }) => {
-  const handleClose = () => {
+const TodayBirthday = ({ data }) => {
+  const [anchorEl, setAnchorEl] = useState(null);
+  const birthdayEmployeeName = data?.birthdayEmployees;
+  const birthdayEmployeeCount = data?.birthdayEmployeeCount || 0;
+  const displayCount = birthdayEmployeeCount > 0 ? birthdayEmployeeCount : null;
+
+  const [open, setOpen] = useState(false);
+  const anchorRef = useRef(null);
+
+  const handleToggle = () => {
+    setOpen((prevOpen) => !prevOpen);
+  };
+
+  const handleClose = (event) => {
+    if (anchorRef.current && anchorRef.current.contains(event.target)) {
+      return;
+    }
+
     setOpen(false);
   };
 
+  function handleListKeyDown(event) {
+    if (event.key === "Tab") {
+      event.preventDefault();
+      setOpen(false);
+    } else if (event.key === "Escape") {
+      setOpen(false);
+    }
+  }
+
+  // return focus to the button when we transitioned from !open -> open
+  const prevOpen = useRef(open);
+  React.useEffect(() => {
+    if (prevOpen.current === true && open === false) {
+      anchorRef.current.focus();
+    }
+
+    prevOpen.current = open;
+  }, [open]);
+
+  const btnStyle = {
+    color: "#fff",
+  };
 
   return (
-    <div>
-      <Menu
-        id="basic-menu"
-        anchorEl={document.getElementById("basic-button")}
-        open={open}
-        onClose={handleClose}
-        MenuListProps={{
-          "aria-labelledby": "basic-button",
-        }}
+    <Box>
+      <Button
+        ref={anchorRef}
+        id="composition-button"
+        aria-controls={open ? "composition-menu" : undefined}
+        aria-expanded={open ? "true" : undefined}
+        aria-haspopup="true"
+        onClick={handleToggle}
+        style={btnStyle}
       >
-        <div style={{ width: "300px" }}>
-          <p
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            Today's Birthdays!!
-          </p>
-          {!isLoading &&
-            data.length > 0 &&
-            data?.map((employees, index) => (
-              <NavLink to={`employee/${employees.id}`} key={employees.id}>
-                <MenuItem
-                  style={{
-                    color: "green",
-                    display: "inline-block",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                  key={index}
-                  onClick={handleClose}
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      columnGap: "10px",
-                      width: "100%",
-                      alignItems: "center",
+        <CakeIcon />
+        {data?.isChecked ? "" : displayCount}
+      </Button>
+      {birthdayEmployeeCount !== 0 ? (
+        <Popper
+          open={open}
+          anchorEl={anchorRef.current}
+          role={undefined}
+          placement="bottom-start"
+          transition
+          disablePortal
+          style={{ width: { xs: "30%", lg: "15%" }, marginLeft: "-4rem" }}
+        >
+          {({ TransitionProps, placement }) => (
+            <Grow
+              {...TransitionProps}
+              style={{
+                transformOrigin:
+                  placement === "bottom-start" ? "left top" : "left bottom",
+              }}
+            >
+              <Paper>
+                <ClickAwayListener onClickAway={handleClose}>
+                  <MenuList
+                    autoFocusItem={open}
+                    id="composition-menu"
+                    aria-labelledby="composition-button"
+                    onKeyDown={handleListKeyDown}
+                    sx={{
+                      textAlign: "center",
+                      width: { xs: "30%", lg: "15%" },
+                      padding: "0.5rem 1rem",
                     }}
                   >
-                    <p style={{ height: "25px" }}>
-                      <PersonIcon />
-                    </p>
-                    <p style={{ fontSize: "16px" }}>{employees?.fullName||''}</p>
-                  </div>
-                </MenuItem>
-              </NavLink>
-            ))}
-        </div>
-      </Menu>
-    </div>
+                    <Typography variant="h6" color="primary" fontWeight={400}>
+                      Today's Birthday
+                    </Typography>
+                    {birthdayEmployeeName &&
+                      birthdayEmployeeName.map((bname, index) => (
+                        <MenuItem
+                          key={index}
+                          onClick={handleClose}
+                          sx={{ justifyContent: "center" }}
+                        >
+                          {bname.fullName}
+                        </MenuItem>
+                      ))}
+                  </MenuList>
+                </ClickAwayListener>
+              </Paper>
+            </Grow>
+          )}
+        </Popper>
+      ) : (
+        <Popper
+          open={open}
+          anchorEl={anchorRef.current}
+          role={undefined}
+          placement="bottom-start"
+          transition
+          disablePortal
+          style={{ width: { xs: "30%", lg: "15%" }, marginLeft: "-4rem" }}
+        >
+          {({ TransitionProps, placement }) => (
+            <Grow
+              {...TransitionProps}
+              style={{
+                transformOrigin:
+                  placement === "bottom-start" ? "left top" : "left bottom",
+              }}
+            >
+              <Paper>
+                <ClickAwayListener onClickAway={handleClose}>
+                  <MenuList
+                    autoFocusItem={open}
+                    id="composition-menu"
+                    aria-labelledby="composition-button"
+                    onKeyDown={handleListKeyDown}
+                    sx={{
+                      textAlign: "center",
+                      width: "100%",
+                      padding: "1rem 2rem",
+                    }}
+                  >
+                    <Typography variant="h6" color="primary" fontWeight={400}>
+                      No One Birthday !
+                    </Typography>
+                  </MenuList>
+                </ClickAwayListener>
+              </Paper>
+            </Grow>
+          )}
+        </Popper>
+      )}
+    </Box>
   );
 };
 

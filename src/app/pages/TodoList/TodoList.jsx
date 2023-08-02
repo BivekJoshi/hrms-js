@@ -47,12 +47,12 @@ const TodoList = () => {
     {
       title: "Message",
       field: "message",
-      width: "100px",
+      width: "300px"
     },
     {
       title: "Due",
       field: "dueDate",
-      width: "80px",
+      width: "180px",
       // type: 'numeric',
     },
     {
@@ -140,16 +140,16 @@ const TodoList = () => {
           pageSize: 10,
           emptyRowsWhenPaging: false,
           headerStyle: {
-            backgroundColor: "#01579b",
-            color: "#FFF",
+            backgroundColor: '#01579b',
+            color: '#FFF',
             fontSize: "1rem",
-            padding: "dense",
+            padding: 'dense',
             height: 50,
-            textAlign: "center",
-            border: "2px solid #fff",
-            minHeight: "10px",
-            textTransform: "capitilize",
-          },
+            textAlign:'center',
+            border:'2px solid #fff',
+            minHeight:'10px',
+            textTransform:'capitilize'
+        },
           rowStyle: {
             fontSize: ".8rem",
           },

@@ -1,8 +1,9 @@
 import { Box, Stack, Button, LinearProgress } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
-import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
+// import DeleteIcon from "@mui/icons-material/Delete";
+// import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import MaterialTable from "@material-table/core";
 import React from "react";
+import "../Style/Style.css"
 
 export const ProjectTable = ({ projectData }) => {
   const columns = [
