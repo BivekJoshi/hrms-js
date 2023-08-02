@@ -4,7 +4,7 @@ import NotificationsIcon from "@mui/icons-material/NotificationsNone";
 import { useGetHolidayCurrent } from "../../hooks/holiday/useHoliday";
 import { useGetEvent } from "../../hooks/event/useEvent";
 
- const Notification = ({ data, onClearNotification }) => {
+ const Notification = ({data}) => {
   const { data: events } = useGetEvent();
   const { data: holidays, isLoading, isError } = useGetHolidayCurrent();
 
@@ -16,10 +16,9 @@ import { useGetEvent } from "../../hooks/event/useEvent";
   const todayBirthday = data;
 
   const notificationNumber = (todayEvent?.length ?? 0) + (todayHoliday?.length ?? 0) + (todayBirthday?.length ?? 0);
-
+  
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
-
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -44,7 +43,7 @@ import { useGetEvent } from "../../hooks/event/useEvent";
         onClick={handleClick}
         style={btnStyle}
       >
-        <NotificationsIcon />{notificationNumber}
+        <NotificationsIcon />
       </Button>
       <Menu
         id="basic-menu"
@@ -64,7 +63,7 @@ import { useGetEvent } from "../../hooks/event/useEvent";
                 </MenuItem>
                 <Divider />
                 {todayHoliday ? todayHoliday.map((item) => (
-                  <MenuItem key={item?.id}>
+                  <MenuItem key={item.id}>
                     <ListItemText primary={item?.holidayName} />
                   </MenuItem>
                 )): ("No Holiday Today!")}
@@ -74,18 +73,18 @@ import { useGetEvent } from "../../hooks/event/useEvent";
             <Stack>
               <List>
                 <MenuItem disablePadding>
-                  <Typography variant="h6" color="primary" fontWeight={400}>Today's Event: </Typography>
+                  <Typography variant="h6" color="primary" fontWeight={400}>Today's Brithday: </Typography>
                 </MenuItem>
                 <Divider />
-                {todayEvent ? todayEvent.map((item) => (
+                {todayBirthday ? todayBirthday.map((item) => (
                   <MenuItem key={item.id}>
-                    <ListItemText primary={item?.eventName} />
+                    <ListItemText primary={item?.fullName} />
                   </MenuItem>
-                )): ("No Event Today!")}
+                )): ("No Brithday Today!")}
               </List>
             </Stack>
+
            <Divider />
-           <MenuItem onClick={onClearNotification}>Clear All</MenuItem>
       </Menu>
     </div>
   );

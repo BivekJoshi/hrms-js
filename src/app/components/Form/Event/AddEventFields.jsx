@@ -16,6 +16,7 @@ const AddEventFields = ({ onClose, isLoading }) => {
   };
 
   const handleCloseEmailform = () => {
+    setOpenEmail(false);
     onClose();
   };
 
