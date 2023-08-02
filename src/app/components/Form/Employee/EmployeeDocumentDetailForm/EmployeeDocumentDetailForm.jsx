@@ -81,22 +81,22 @@ const EmployeeDocumentDetailForm = () => {
                   <div
                     style={{
                       position: "relative",
-                      width: "610px",
+                      width: "510px",
                       height: "300px",
                     }}
                   >
                     <img
                       src={`${url}${document?.path}`}
                       alt="Document"
-                      width="610px"
+                      width="510px"
                       height="300px"
                     />
                
                       <Box
                        style={{
                         position: "absolute",
-                        bottom: "10px", // Adjust the button position as needed
-                        right: "10px", // Adjust the button position as needed
+                        bottom: "10px", 
+                        right: "10px", 
                         padding: "8px 16px",
                         backgroundColor: "rgba(255, 255, 255, 0.8)",
                         borderRadius: "4px",
@@ -124,15 +124,6 @@ const EmployeeDocumentDetailForm = () => {
         
                   </div>
                 </Box>
-                // <Stack
-                //   key={document?.id}
-                //   // style={{
-                //   //   display: "flex",
-                //   //   flexDirection: "column",
-                //   //   gap: "1rem",
-                //   // }}
-                // >
-                // </Stack>
               ))}
           </div>
         </Grid>
