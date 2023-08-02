@@ -4,11 +4,9 @@ import { toast } from "react-toastify";
 import { useAddActiveEmployeeForm, useRemoveDeactiveEmployeeForm } from "../../../../hooks/employee/DeactivateEmploye/useRemoveDeactiveEmployeeForm";
 import { useGetEmployee } from "../../../../hooks/employee/useEmployee";
 import { useGetDeactivatedEmployee } from "../../../../hooks/employee/DeactivateEmploye/useEmployee";
-import { useGetDocumentByDocumentType } from "../../../../hooks/employee/useDocument";
 
 export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
   const { data: employeeData } = useGetEmployee();
-  const { data : employeePhotoData } = useGetDocumentByDocumentType(id, "EMPLOYEE_PHOTO");
   const { formik } = useRemoveDeactiveEmployeeForm(data);
 
   const handleFormSubmit = () => {

@@ -41,7 +41,8 @@ const EmployeeGridView = ({ employeeData }) => {
             PositionName={employee?.position?.positionName || ''}
             PositionLevel={employee?.position?.positionLevel || ''}
             EGender={employee?.gender || ''}
-            // EmployeeData={currentPosts}
+            // EmployeePhoto={getEmployeePhoto?.id}
+            EmployeeData={currentPosts}
             ProgressBarRes={employee?.progressBarRes || ''}
           />
         ))}

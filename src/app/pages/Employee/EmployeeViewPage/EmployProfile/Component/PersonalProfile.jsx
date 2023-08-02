@@ -34,8 +34,7 @@ export const PersonalProfile = ({ data }) => {
               alignSelf: "center",
             }}
             variant="circle"
-              src={data?.gender === "MALE" ? Male : Female}
-             // src={BASE_U}
+            src={data?.gender === "MALE" ? Male : Female}
           />
           <Typography
             sx={{
