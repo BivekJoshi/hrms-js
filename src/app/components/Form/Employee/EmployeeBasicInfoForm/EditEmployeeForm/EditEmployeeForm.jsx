@@ -16,7 +16,7 @@ import useFamilyForm from "../../../../../hooks/employee/AddFamily/useFamilyForm
 import useEditEmployeeForm from "../../../../../hooks/employee/EditEmployee/useEditEmployeeForm";
 import { usePermanentAddressForm } from "../../../../../hooks/employee/AddAddress/useAddressForm";
 import useAddBankForm from "../../../../../hooks/employee/AddBankForm/useAddBankForm";
-import useAddDocumentForm from "../../../../../hooks/employee/AddDocument/useAddDocumentForm";
+import { useAddDocumentForm } from "../../../../../hooks/employee/AddDocument/useAddDocumentForm";
 import { useGetEmployeeById } from "../../../../../hooks/employee/useEmployee";
 import useEmployeeHistoryForm from "../../../../../hooks/employee/AddEmployeeHistory/useEmployeeHistoryForm";
 
