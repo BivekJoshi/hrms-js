@@ -38,8 +38,6 @@ const EmployeeDocumentDetailForm = () => {
   );
   const url = DOC_URL;
 
-
-
   const handleFormSubmit = (documentType) => {
     formik.setFieldValue("documentType", documentType);
     formik.handleSubmit(documentType);
@@ -70,9 +68,9 @@ const EmployeeDocumentDetailForm = () => {
         <Grid item xs={12} sm={6}>
           <div
             style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "2rem",
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "0.6rem",
               alignItems: "center",
             }}
           >
@@ -86,13 +84,17 @@ const EmployeeDocumentDetailForm = () => {
                     gap: "1rem",
                   }}
                 >
-                  <Box><img
-                    src={`${url}${document?.path}`}
-                    alt="Document"
-                    width={340}
-                    height={340}
-                  /></Box>
-                  <Box sx={{display: "flex", justifyContent: "space-between"}}>
+                  <Box>
+                    <img
+                      src={`${url}${document?.path}`}
+                      alt="Document"
+                      width={240}
+                      height={140}
+                    />
+                  </Box>
+                  <Box
+                    sx={{ display: "flex", justifyContent: "center", gap: "1rem" }}
+                  >
                     <Button
                       sx={{ width: "fit-content" }}
                       type="button"
