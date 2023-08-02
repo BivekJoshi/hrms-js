@@ -69,11 +69,11 @@ const Holiday = () => {
             events={events}
             
           />
-        </Box>
+        </Grid>
         <Box >
           <CurrentHoliday />
         </Box>
-      </Box>
+      </Grid>
 
       {openAddModal && (
         <AddHolidayModal
