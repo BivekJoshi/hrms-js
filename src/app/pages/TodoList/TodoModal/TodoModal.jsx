@@ -1,8 +1,7 @@
 import React from 'react';
 import FormModal from '../../../components/Modal/FormModal';
-import AddTodoListFields from '../../../components/Form/todoList/AddTodoListFields';
-import EditTodoListFields from '../../../components/Form/todoList/EditTodoListFields';
 import { useGetTodoListById } from '../../../hooks/todoList/useTodoList';
+import TodoListFields from '../../../components/Form/todoList/TodoListFields';
 
 export const AddTodoListModal = ({ open, handleCloseModal }) => {
     return (
@@ -10,7 +9,7 @@ export const AddTodoListModal = ({ open, handleCloseModal }) => {
             <FormModal
                 open={open}
                 onClose={handleCloseModal}
-                formComponent={<AddTodoListFields onClose= {handleCloseModal} />}
+                formComponent={<TodoListFields onClose= {handleCloseModal} />}
             />
         </div>
     );
@@ -23,7 +22,7 @@ export const EditTodoListModal = ({ open, handleCloseModal, id }) => {
             <FormModal
                 open={open}
                 onClose={handleCloseModal}
-                formComponent={<EditTodoListFields onclose= {handleCloseModal} data={ data } />}
+                formComponent={<TodoListFields onclose= {handleCloseModal} data={ data } />}
             />
         </div>
     );

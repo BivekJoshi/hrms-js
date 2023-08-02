@@ -4,7 +4,7 @@ import { Box, Divider } from "@mui/material";
 
 import ListUserDetails from "../../InfoTabs/BaiscInfoTab/Components/ListUserDetails";
 
-const BasicInfo = ({ data }) => {
+const BasicInfo = ({ data, mode }) => {
   const EMPLOYEE = {
     Gender: data?.gender || "",
     "Citizenship Number": data?.citizenshipNumber || "",
@@ -26,14 +26,20 @@ const BasicInfo = ({ data }) => {
     Location: data?.bankDetailSet[0]?.bankAddress || "",
     "PAN Number": data?.panNumber || "",
   };
+
   return (
     <>
-      <Box container className="ProfileStyle">
+      <Box
+        container
+        className="ProfileStyle"
+        sx={{ backgroundColor: mode === "light" ? "#ededed" : "#292929" }}
+      >
         <Box>
-        <ListUserDetails
+          <ListUserDetails
             data={EMPLOYEE}
             cardTitle={"Basic Informations"}
             MarginBottom={"1rem"}
+            mode={mode}
           />
           <Divider />
         </Box>
@@ -42,17 +48,22 @@ const BasicInfo = ({ data }) => {
             display: "grid",
             gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr" },
             gap: "1rem",
-            marginTop:{xs:"-3rem", sm:0},
+            marginTop: { xs: "-3rem", sm: 0 },
           }}
           className="FAM-BANK-DETAILS"
         >
           <Box>
-            <ListUserDetails data={BANKDETAILS} cardTitle={"Bank Details"} />
+            <ListUserDetails
+              data={BANKDETAILS}
+              cardTitle={"Bank Details"}
+              mode={mode}
+            />
           </Box>
           <Box>
             <ListUserDetails
               data={FAMILYMEMBERS}
               cardTitle={"Family Informations"}
+              mode={mode}
             />
           </Box>
         </Box>

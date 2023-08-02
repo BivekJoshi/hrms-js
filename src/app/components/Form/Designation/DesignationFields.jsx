@@ -26,9 +26,10 @@ const DesignationFields = ({ onClose, isLoading, data }) => {
           <TextField
             id="positionName"
             name="positionName"
-            label="Position Name"
-            placeholder="Enter position name"
+            label="Designation Name"
+            placeholder="Enter Designation name"
             fullWidth
+            required
             value={formik.values.positionName}
             onChange={formik.handleChange}
             error={
@@ -46,9 +47,10 @@ const DesignationFields = ({ onClose, isLoading, data }) => {
           <TextField
             id="positionLevel"
             name="positionLevel"
-            label="Position Level"
-            placeholder="Enter position level"
+            label="Designation Level"
+            placeholder="Enter designation level"
             fullWidth
+            required
             value={formik.values.positionLevel}
             onChange={formik.handleChange}
             error={
@@ -70,6 +72,8 @@ const DesignationFields = ({ onClose, isLoading, data }) => {
             label="Salary"
             placeholder="Enter salary"
             fullWidth
+            required
+            type="number"
             value={formik.values.salary}
             onChange={formik.handleChange}
             error={formik.touched.salary && Boolean(formik.errors.salary)}
@@ -83,9 +87,11 @@ const DesignationFields = ({ onClose, isLoading, data }) => {
           <TextField
             id="positionDetails"
             name="positionDetails"
-            label="Position Details"
-            placeholder="Enter position details"
+            label="Designation Details"
+            placeholder="Enter designation details"
             fullWidth
+            multiline
+            rows={3}
             value={formik.values.positionDetails}
             onChange={formik.handleChange}
             error={

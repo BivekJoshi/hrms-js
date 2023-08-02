@@ -106,7 +106,7 @@ const LeaveInfo = ({ isLoading }) => {
 		  width:"150px"
         },
         rowStyle: {
-          fontSize: 13,
+          fontSize: ".8rem",
         },
       }}
     />

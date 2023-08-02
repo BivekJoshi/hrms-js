@@ -2,7 +2,6 @@ import React from 'react'
 import FormModal from '../../../components/Modal/FormModal';
 import OfficeResourceFields from '../../../components/Form/Resource/OfficeResource/OfficeResourceFields';
 import { useGetOfficeResourceById } from '../../../hooks/resource/officeResource/useOfficeResource';
-import EditOfficeResourceFields from '../../../components/Form/Resource/OfficeResource/EditOfficeResourceFields';
 
 export const AddOfficeResourceModal = ({ open, handleCloseModal}) => {
   return (
@@ -23,7 +22,7 @@ export const EditOfficeResourceModal = ({ open, handleCloseModal, id }) => {
       <FormModal
         open={open}
         onClose={handleCloseModal}
-        formComponent={<EditOfficeResourceFields onClose={handleCloseModal} data={data} />}
+        formComponent={<OfficeResourceFields onClose={handleCloseModal} data={data} />}
       />
     </div>
   )

@@ -40,25 +40,26 @@ const TodoList = () => {
     {
       title: 'SN',
       render: (rowData) => rowData.tableData.index + 1,
-      width: 80,
+      width: "50px",
       sortable: false,
     },
     {
       title: "Message",
       field: "message",
-      width: 80
+      width: "100px"
     },
     {
       title: "Due",
       field: "dueDate",
-      width: 80,
-      type: 'numeric',
+      width: "80px",
+      // type: 'numeric',
+      
     },
     {
       title: 'Priority',
       field: 'priority',
       emptyValue: '-',
-      width: 100,
+      width: "180px",
       cellStyle: {
         whiteSpace: 'nowrap',
       },
@@ -96,7 +97,7 @@ const TodoList = () => {
         </Stack>
       ),
       sorting: false,
-      width: 80,
+      width: "80px",
     },
   ];
 
@@ -134,12 +135,12 @@ const TodoList = () => {
           headerStyle: {
             backgroundColor: "#01579b",
             color: "#FFF",
-            fontSize: 20,
+            fontSize: "1rem",
             padding: "dense",
             height: 50,
           },
           rowStyle: {
-            fontSize: 18,
+            fontSize: ".8rem",
           },
         }}
         onRowDoubleClick={(_event, rowData) => handleDoubleClickRow(rowData)}

@@ -152,7 +152,7 @@ export default function Sidebar() {
       ],
     },
     {
-      name: "Office Reource",
+      name: "Resource",
       icon: (
         <LaptopIcon
           sx={mode === "light" ? { color: "black" } : { color: "white" }}

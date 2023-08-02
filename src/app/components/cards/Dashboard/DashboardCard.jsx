@@ -22,7 +22,7 @@ const DashboardCard = ({ title, icon, value }) => {
           <Box>
             <Typography
               variant="h6"
-              color={mode === "light" ? "black" : "white"}
+              color="black" 
               align="center"
               fontWeight={600}
             >

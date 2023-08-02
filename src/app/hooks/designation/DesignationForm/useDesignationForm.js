@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import { useAddDesignation, useEditDesignation } from "../useDesignation";
-import { DesignationSchema } from "../Validation/DesigationSchema";
+import { DesignationSchema } from "../Validation/DesignationSchema";
 
 const useDesignationForm = (data) => {
   const { mutate: addDesignation } = useAddDesignation({});

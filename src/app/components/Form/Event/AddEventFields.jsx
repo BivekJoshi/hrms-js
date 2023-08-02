@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Grid, TextField, Button, Modal, Box } from "@mui/material";
 import { toast } from "react-toastify";
-import useAddEventForm from "../../../hooks/event/addEvent/useAddEventForm";
 import ModalComponent from "../../Modal/ModalComponent";
+import useEventForm from "../../../hooks/event/EventForm/useEventForm";
 
 
 const AddEventFields = ({ onClose, isLoading }) => {
-  const { formik, data } = useAddEventForm();
+  const { formik, data } = useEventForm();
 
   const [showInitialView, setShowInitialView] = useState(true);
   const [openSubmitModal, setOpenSubmitModal] = useState(false);

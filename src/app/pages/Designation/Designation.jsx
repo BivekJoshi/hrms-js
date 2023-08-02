@@ -116,12 +116,11 @@ const Designation = () => {
         </Button>
       </Box>
       <br />
-      <br />
 
       <MaterialTable
         columns={columns}
         data={designationData}
-        title="Designnation"
+        title="Designation List"
         isLoading={isLoading}
         options={{
           padding: "dense",

@@ -24,6 +24,10 @@ const LeaveFields = ({ onClose, isLoading, data }) => {
   const { data: leaveTypeData } = useGetLeaveType();
   const { formik } = useLeaveForm(data);
 
+  const capitalize = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+  };
+
   const getLeaveTypeName = (leaveTypeId) => {
     const leaveType = leaveTypeData?.find((type) => type.id === leaveTypeId);
     return leaveType ? leaveType.leaveName : "";
@@ -64,8 +68,8 @@ const LeaveFields = ({ onClose, isLoading, data }) => {
   return (
     !isLoading && (
       <Grid container spacing={3}>
-        {data ? (
-          <Grid item xs={12} sm={12}>
+        <Grid item xs={12} sm={12}>
+          {data ? (
             <TextField
               name="employeeId"
               label="Employee Name"
@@ -83,9 +87,7 @@ const LeaveFields = ({ onClose, isLoading, data }) => {
               helperText={formik.touched.employeeId && formik.errors.employeeId}
               disabled={formik.values.employeeId}
             />
-          </Grid>
-        ) : (
-          <Grid item xs={12} sm={12}>
+          ) : (
             <Autocomplete
               id="employeeId"
               name="employeeId"
@@ -102,6 +104,7 @@ const LeaveFields = ({ onClose, isLoading, data }) => {
                   {...params}
                   label="Employee Name"
                   fullWidth
+                  required
                   error={
                     formik.touched.employeeId &&
                     Boolean(formik.errors.employeeId)
@@ -115,8 +118,8 @@ const LeaveFields = ({ onClose, isLoading, data }) => {
                 />
               )}
             />
-          </Grid>
-        )}
+          )}
+        </Grid>
         {data ? (
           <Grid item xs={12} sm={6}>
             <TextField
@@ -145,7 +148,9 @@ const LeaveFields = ({ onClose, isLoading, data }) => {
               id="leaveTypeId"
               name="leaveTypeId"
               options={leaveTypeData}
-              getOptionLabel={(option) => `${option.leaveName}`}
+              getOptionLabel={(option) =>
+                `${capitalize(option.leaveName)} Leave`
+              }
               value={formik.values.leaveTypeId || null}
               onChange={(event, value) =>
                 formik.setFieldValue("leaveTypeId", value)
@@ -155,6 +160,7 @@ const LeaveFields = ({ onClose, isLoading, data }) => {
                   {...params}
                   label="Leave Name"
                   fullWidth
+                  required
                   error={
                     formik.touched.leaveTypeId &&
                     Boolean(formik.errors.leaveTypeId)
@@ -190,7 +196,6 @@ const LeaveFields = ({ onClose, isLoading, data }) => {
             name="toDate"
             label="To"
             type="date"
-            required
             InputLabelProps={{ shrink: true }}
             fullWidth
             value={formik.values.toDate}
@@ -204,9 +209,10 @@ const LeaveFields = ({ onClose, isLoading, data }) => {
             id="leaveStatus"
             name="leaveStatus"
             select
-            label="leaveStatus"
+            label="Leave Status"
             placeholder="Select your leaveStatus"
             fullWidth
+            required
             value={formik.values.leaveStatus}
             onChange={formik.handleChange}
             error={
@@ -228,9 +234,11 @@ const LeaveFields = ({ onClose, isLoading, data }) => {
           <TextField
             id="leaveReason"
             name="leaveReason"
-            label="leave Reason"
+            label="Leave Reason"
             placeholder="Enter leave Reason"
             fullWidth
+            multiline
+            rows={2}
             value={formik.values.leaveReason}
             onChange={formik.handleChange}
             error={
