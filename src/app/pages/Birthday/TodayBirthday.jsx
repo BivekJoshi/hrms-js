@@ -24,7 +24,7 @@ const TodayBirthday = ({ data }) => {
   const removeNotificationMutation = useRemoveNotification();
 
   const handleClick = () => {
-    // removeNotificationMutation.mutate();
+    removeNotificationMutation.mutate();
     setAnchorEl((prevAnchorEl) => !prevAnchorEl);
   };
 

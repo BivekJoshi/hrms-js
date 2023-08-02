@@ -33,10 +33,12 @@ const AppBar = styled(MuiAppBar, {
 export default function Header({ open, handleDrawerOpen }) {
   const { data: birthdayData } = useGetTodayBirthday();
   const [showLength, setShowLength] = useState(true);
+  const [openNotification, setOpenNotification] = useState(false);
+  const [clearedNotification, setClearedNotification] = useState(false);
 
-  const handleClick = () => {
-    setShowLength(false);
-  };
+  // const handleClick = () => {
+  //   setShowLength(false);
+  // };
 
   const today = new Date();
   const { data: upcomingBirthdayData, isloading } = useGetUpcomingBirthday();
@@ -53,19 +55,19 @@ export default function Header({ open, handleDrawerOpen }) {
       })
     : [];
 
-  const [openNotification, setOpenNotification] = useState(false);
-  const [clearedNotification, setClearedNotification] = useState(false);
+  // const isLoading = false;
 
   const { mutate } = useRemoveNotification();
 
-  const handleChange = () => {
-    setClearedNotification(!openNotification);
-  };
+  // const handleChange = () => {
+  //   setOpenNotification(!openNotification);
+  // };
 
   const handleClearNotification = () => {
     setOpenNotification(false);
     setClearedNotification(true);
   };
+
 
   useEffect(() => {
     if (clearedNotification) {
@@ -73,6 +75,16 @@ export default function Header({ open, handleDrawerOpen }) {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 3000,
       })
+      mutate();
+    }
+  }, [clearedNotification, mutate]);
+
+  useEffect(() => {
+    if (clearedNotification) {
+      toast.success("Notifications cleared for today!", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 3000,
+      });
       mutate();
     }
   }, [clearedNotification, mutate]);
