@@ -56,9 +56,9 @@ const Dashboard = () => {
       <Box
         sx={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))",
+          gridTemplateColumns: "repeat(auto-fit, minmax(400px, 1fr))",
           gap: "2rem",
-          justifySelf: { xs: "center", lg: "auto" },
+          // justifySelf: { xs: "center", lg: "auto" },
         }}
       >
         <BarChatDiagram data={dashboardData} />
