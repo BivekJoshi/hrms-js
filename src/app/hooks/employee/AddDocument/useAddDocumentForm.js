@@ -1,15 +1,15 @@
 import { useFormik } from 'formik';
-import { useAddDocument, useEditDocument } from '../useDocument';
+import { useAddDocument } from '../useDocument';
 
-export const useAddDocumentForm = ({ selectedDocument }) => {
+const useAddDocumentForm = ({ document }) => {
   const { mutate } = useAddDocument({});
+
   const formik = useFormik({
     initialValues: {
       documentType: '',
     },
-    enableReinitialize: "true",
     onSubmit: (values) => {
-      values = { ...values, document: selectedDocument };
+      values = { ...values, document };
       mutate(values);
     },
   });
@@ -17,19 +17,4 @@ export const useAddDocumentForm = ({ selectedDocument }) => {
   return { formik };
 };
 
-export const useEditDocumentForm = ({ selectedDocument }) => {
-  
-  const { mutate } = useEditDocument({});
-  const formik = useFormik({
-    initialValues: {
-      documentType: '',
-    },
-    enableReinitialize: "true",
-    onSubmit: (values) => {
-      values = { ...values, document: selectedDocument };
-      mutate(values);
-    },
-  });
-
-  return { formik };
-};
+export default useAddDocumentForm;

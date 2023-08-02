@@ -1,114 +1,69 @@
 import React from "react";
-import {
-  Stack,
-  Typography,
-  List,
-  ListItem,
-  ListItemText,
-  Button,
-  Menu,
-  MenuItem,
-  Divider,
-} from "@mui/material";
+import { Menu, MenuItem } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
-import CakeIcon from "@mui/icons-material/Cake";
 import { NavLink } from "react-router-dom";
-import {
-  useGetTodayBirthday,
-  useRemoveNotification,
-} from "../../hooks/birthday/useBirthday";
 
-const TodayBirthday = ({ data }) => {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-  const birthdayEmployeeName = data?.birthdayEmployees;
-  const birthdayEmployeeCount = data?.birthdayEmployeeCount || 0;
-  const displayCount = birthdayEmployeeCount > 0 ? birthdayEmployeeCount : null;
-
+const TodayBirthday = ({ open, setOpen, data, isLoading }) => {
   const handleClose = () => {
-    setAnchorEl(null);
+    setOpen(false);
   };
-
-  const removeNotificationMutation = useRemoveNotification();
-
-  const handleClick = () => {
-    removeNotificationMutation.mutate();
-    setAnchorEl((prevAnchorEl) => !prevAnchorEl);
-    
-  };
-
-  const btnStyle = {
-    color: "#fff",
-  };
-
-  if (data?.isChecked) {
-    return null;
-  }
 
 
   return (
-      <Stack>
-      <Button
-        id="basic-button"
-        aria-controls={open ? "basic-menu" : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? "true" : undefined}
-        onClick={handleClick}
-        style={btnStyle}
-      >
-        <CakeIcon />
-      {displayCount}
-        
-      </Button>
+    <div>
       <Menu
         id="basic-menu"
-        anchorEl={anchorEl}
+        anchorEl={document.getElementById("basic-button")}
         open={open}
         onClose={handleClose}
         MenuListProps={{
           "aria-labelledby": "basic-button",
         }}
       >
-        <Stack>
-          <List>
-            <MenuItem disablePadding>
-              <Typography variant="h6" color="primary" fontWeight={400}>
-                Today's Birthday:
-              </Typography>
-            </MenuItem>
-            <Divider />
-            {birthdayEmployeeName &&
-              birthdayEmployeeName.map((bname, index) => (
-                <NavLink to={`employee/${bname?.id}`} key={bname?.id}>
-                  <MenuItem
-                    style={{
-                      color: "green",
-                      display: "inline-block",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                    key={index}
-                    onClick={handleClose}
-                  ></MenuItem>
+        <div style={{ width: "300px" }}>
+          <p
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            Today's Birthdays!!
+          </p>
+          {!isLoading &&
+            data.length > 0 &&
+            data?.map((employees, index) => (
+              <NavLink to={`employee/${employees.id}`} key={employees.id}>
+                <MenuItem
+                  style={{
+                    color: "green",
+                    display: "inline-block",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                  key={index}
+                  onClick={handleClose}
+                >
                   <div
                     style={{
                       display: "flex",
                       columnGap: "10px",
+                      width: "100%",
                       alignItems: "center",
                     }}
                   >
-                    <Typography style={{ height: "25px" }}>
+                    <p style={{ height: "25px" }}>
                       <PersonIcon />
-                    </Typography>
-                    <Typography variant="h6">{bname?.fullName}</Typography>
+                    </p>
+                    <p style={{ fontSize: "16px" }}>{employees?.fullName||''}</p>
                   </div>
-                </NavLink>
-              ))}
-          </List>
-        </Stack>
+                </MenuItem>
+              </NavLink>
+            ))}
+        </div>
       </Menu>
-    </Stack>
-    );
+    </div>
+  );
 };
 
 export default TodayBirthday;
