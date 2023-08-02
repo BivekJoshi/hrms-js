@@ -68,6 +68,17 @@ export default function Header({ open, handleDrawerOpen }) {
     setClearedNotification(true);
   };
 
+
+  useEffect(() => {
+    if (clearedNotification) {
+      toast.success('Notifications cleared for today!', {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 3000,
+      })
+      mutate();
+    }
+  }, [clearedNotification, mutate]);
+
   useEffect(() => {
     if (clearedNotification) {
       toast.success("Notifications cleared for today!", {
@@ -109,15 +120,11 @@ export default function Header({ open, handleDrawerOpen }) {
         </Box>
 
         <Stack flexDirection="row">
-          <Typography>
-            <TodayBirthday data={birthdayData} />
+        <Typography>
+            <TodayBirthday data={birthdayData}  />
           </Typography>
-
           <Typography>
-            <Notification
-              data={thisDayBirthdays}
-              onClearNotification={handleClearNotification}
-            />
+            <Notification data={thisDayBirthdays}  onClearNotification={handleClearNotification} />
           </Typography>
           <Typography>
             <Profile />
