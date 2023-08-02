@@ -1,15 +1,6 @@
 import React from "react";
-import {
-  Stack,
-  Typography,
-  List,
-  ListItem,
-  ListItemText,
-  Button,
-  Menu,
-  MenuItem,
-  Divider,
-} from "@mui/material";
+import { Stack, Typography, List, Button, Box } from "@mui/material";
+import { Menu, MenuItem, Divider } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
 import CakeIcon from "@mui/icons-material/Cake";
 import { NavLink } from "react-router-dom";
@@ -17,6 +8,7 @@ import {
   useGetTodayBirthday,
   useRemoveNotification,
 } from "../../hooks/birthday/useBirthday";
+import "../Style/Style.css";
 
 const TodayBirthday = ({ data }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -34,21 +26,14 @@ const TodayBirthday = ({ data }) => {
   const handleClick = () => {
     removeNotificationMutation.mutate();
     setAnchorEl((prevAnchorEl) => !prevAnchorEl);
-    
   };
 
   const btnStyle = {
     color: "#fff",
   };
 
-  if (data?.isChecked) {
-    data.birthdayEmployeeCount = null;
-  }
-  
-
-
   return (
-      <Stack>
+    <Box>
       <Button
         id="basic-button"
         aria-controls={open ? "basic-menu" : undefined}
@@ -58,10 +43,10 @@ const TodayBirthday = ({ data }) => {
         style={btnStyle}
       >
         <CakeIcon />
-      {displayCount}
-        
+        {data?.isChecked ? "" : displayCount}
       </Button>
       <Menu
+        // className="todayBN"
         id="basic-menu"
         anchorEl={anchorEl}
         open={open}
@@ -108,8 +93,8 @@ const TodayBirthday = ({ data }) => {
           </List>
         </Stack>
       </Menu>
-    </Stack>
-    );
+    </Box>
+  );
 };
 
 export default TodayBirthday;

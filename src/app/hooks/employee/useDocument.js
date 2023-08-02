@@ -18,7 +18,7 @@ export const useAddDocument = ({ onSuccess }) => {
     imgData.append("file", document);
     imgData.append("documentType", documentType);
     const { data } = await axiosInstance.post(
-      `/employee/document/upload-multipart-file/${id}?documentType=${documentType}`,
+      `/employee/document/uploadFile/${id}`,
       imgData,
       {
         headers: {
@@ -29,7 +29,6 @@ export const useAddDocument = ({ onSuccess }) => {
     return data;
   };
 
-  const queryClient = useQueryClient();
   return useMutation(
     ["addDocument"],
     (formData) => {
@@ -39,7 +38,6 @@ export const useAddDocument = ({ onSuccess }) => {
       onSuccess: (data, variables, context) => {
         toast.success("Document added successfully");
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries("getDocumentType");
       },
       onError: (err, _variables, _context) => {
         toast.error(`error: ${err.message}`);
@@ -86,14 +84,6 @@ export const useAddProfile = ({ onSuccess }) => {
     }
   );
 };
-
-// {/*________________________GET_____________________________________*/}
-// export const useGetDocument = () => {
-//   return useQuery(["getDocument"], () => getDocument(), {
-//     refetchInterval: false,
-//     refetchOnWindowFocus: false,
-//   });
-// };
 
 {
   /*________________________GETBYID_____________________________________*/
