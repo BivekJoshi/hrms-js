@@ -7,7 +7,9 @@ import {
   Typography,
 } from '@mui/material';
 import React, { useRef, useState } from 'react';
-import {useAddDocumentForm} from '../../../../hooks/employee/AddDocument/useAddDocumentForm';
+import { useAddDocumentForm } from '../../../../hooks/employee/AddDocument/useAddDocumentForm';
+import { useDeleteDocument, useGetDocumentByDocumentType } from '../../../../hooks/employee/useDocument';
+// import useAddDocumentForm from '../../../../hooks/employee/AddDocument/useAddDocumentForm';
 
 const documentType = [
   {
