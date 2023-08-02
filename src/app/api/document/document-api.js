@@ -1,21 +1,21 @@
 import { axiosInstance } from '../../../auth/axiosInterceptor';
 
 
-  /*________________________POST_____________________________________*/
-export const addDocument = async (image, id) => {
-  const { documentType, document } = image;
-  const imgData = new FormData();
-  imgData.append('file', document);
-  imgData.append('documentType', documentType);
-  const { data } = await axiosInstance.post(`/employee/document/uploadFile/${id}?documentType=${imgData}`,
-    {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    }
-  );
-  return data;
-};
+//   /*________________________POST_____________________________________*/
+// export const addDocument = async (image, id) => {
+//   const { documentType, document } = image;
+//   const imgData = new FormData();
+//   imgData.append('file', document);
+//   imgData.append('documentType', documentType);
+//   const { data } = await axiosInstance.post(`/employee/document/uploadFile/${id}?documentType=${imgData}`,
+//     {
+//       headers: {
+//         'Content-Type': 'multipart/form-data',
+//       },
+//     }
+//   );
+//   return data;
+// };
 
 export const addProfile = async (image, id) => {
   const { documentType, document } = image;
@@ -47,27 +47,29 @@ export const getDocumentById = async (id) => {
 
   /*________________________GET-BY-FILE-ID-AND-DOCUMENT_____________________________________*/
 export const getDocumentByDocumentType = async (id, documentType) => {
-  const data = await axiosInstance.get(`/employee/document/file-details-employee-and-document-type/${id}?documentType=${documentType}`);
-  return data;
+  if(id && documentType){
+    const data = await axiosInstance.get(`/employee/document/file-details-employee-and-document-type/${id}?documentType=${documentType}`);
+    return data;
+  }
+
 };
 
 
-  /*________________________EDIT_____________________________________*/
-  export const editDocument = async (formData) => {
-    console.log({"formData": formData})
-    const { id } = formData;
-    const imgData = new FormData();
-    imgData.append('file', formData);
+  // /*________________________EDIT_____________________________________*/
+  // export const editDocument = async (formData) => {
+  //   const { id, document } = formData;
+  //   const imgData = new FormData();
+  //   imgData.append('file', document);
 
-    const { data } = await axiosInstance.put(`employee/document/change-multipart-file/${id}`, imgData,
-    {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    }
-    );
-    return data;
-  };
+  //   const { data } = await axiosInstance.put(`employee/document/change-multipart-file/${id}`, imgData,
+  //   {
+  //     headers: {
+  //       'Content-Type': 'multipart/form-data',
+  //     },
+  //   }
+  //   );
+  //   return data;
+  // };
 
   /*________________________DELETE_____________________________________*/
 export const deleteDocumentByFileId = async (id) => {

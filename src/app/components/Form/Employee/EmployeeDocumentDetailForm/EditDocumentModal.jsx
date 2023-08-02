@@ -5,13 +5,12 @@ import { useGetDocumentByFileId } from '../../../../hooks/employee/useDocument';
 
 
 export const EditDocumentModal = ({ open, handleCloseModal, id }) => {
-    const { data } = useGetDocumentByFileId(id)
     return (
         <div>
             <FormModal
                 open={open}
                 onClose={handleCloseModal}
-                formComponent={<EditDocumentFields onClose={handleCloseModal} data={data} />} />
+                formComponent={<EditDocumentFields onClose={handleCloseModal} id={id} />} />
         </div>
     )
 }

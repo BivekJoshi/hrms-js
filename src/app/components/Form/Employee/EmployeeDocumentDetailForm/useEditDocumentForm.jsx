@@ -2,24 +2,20 @@ import React from "react";
 import { useFormik } from "formik";
 import { useEditDocument } from "../../../../hooks/employee/useDocument";
 
-const  useEditDocumentForm = (data) => {
+const  useEditDocumentForm = (data, fileId) => {
     const { mutate } = useEditDocument({});
-
+console.log({"data":data})
   const formik = useFormik({
     initialValues: {
-      id: data?.id,
+      document: "",
     },
     enableReinitialize: "true",
 
     onSubmit: (values) => {
-      handleRequest(values);
+      values = { ...values, document: data?.file, fileId: fileId };
+      mutate(values);
     },
   });
-
-  const handleRequest = (values) => {
-    values = { ...values };
-    mutate(values, formik);
-  };
 
   return { formik };
 };

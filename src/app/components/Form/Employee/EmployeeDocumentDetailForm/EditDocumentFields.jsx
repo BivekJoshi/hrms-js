@@ -1,21 +1,23 @@
 import { Grid, TextField, Button, MenuItem } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { toast } from "react-toastify";
 import useEditDocumentForm from "./useEditDocumentForm";
 
-const EditDocumentFields = ({ onClose, isLoading, data }) => {
-  const { formik } = useEditDocumentForm(data);
-  
+const EditDocumentFields = ({ onClose, isLoading, id }) => {
+  const [ document, setDocument ] = useState(null);
+  const { formik } = useEditDocumentForm({ document }, id);
+
   const handleChangeImage = (e) => {
-    setSelectedDocument(e.target.files[0]);
+    setDocument(e.target.files[0]);
   };
   
-  const handleFormSubmit = () => {
-    formik.handleSubmit();
+  const handleFormSubmit = (document) => {
+    formik.handleSubmit(document);
 
     if (formik.isValid) {
       formik.setTouched({
-        document: true,
+        
+        document,
       });
       onClose();
     } else {

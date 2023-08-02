@@ -16,20 +16,3 @@ export const useAddDocumentForm = ({ selectedDocument }) => {
 
   return { formik };
 };
-
-export const useEditDocumentForm = ({ selectedDocument }) => {
-  
-  const { mutate } = useEditDocument({});
-  const formik = useFormik({
-    initialValues: {
-      documentType: '',
-    },
-    enableReinitialize: "true",
-    onSubmit: (values) => {
-      values = { ...values, document: selectedDocument };
-      mutate(values);
-    },
-  });
-
-  return { formik };
-};

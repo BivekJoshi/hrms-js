@@ -36,7 +36,7 @@ const EmployeeDocumentDetailForm = () => {
     id,
     selectedDocument
   );
-  const url = DOC_URL;
+  const url = DOC_URL; 
 
   const handleFormSubmit = (documentType) => {
     formik.setFieldValue("documentType", documentType);

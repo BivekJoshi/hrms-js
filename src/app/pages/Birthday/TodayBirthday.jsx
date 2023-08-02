@@ -42,8 +42,9 @@ const TodayBirthday = ({ data }) => {
   };
 
   if (data?.isChecked) {
-    return null;
+    data.birthdayEmployeeCount = null;
   }
+  
 
 
   return (
