@@ -1,7 +1,7 @@
 import { useFormik } from 'formik';
 import { useAddDocument } from '../useDocument';
 
-const useAddDocumentForm = ({ document }) => {
+export const useAddDocumentForm = ({ document }) => {
   const { mutate } = useAddDocument({});
 
   const formik = useFormik({

@@ -5,7 +5,6 @@ import PersonIcon from "@mui/icons-material/Person";
 import CakeIcon from "@mui/icons-material/Cake";
 import { NavLink } from "react-router-dom";
 import {
-  useGetTodayBirthday,
   useRemoveNotification,
 } from "../../hooks/birthday/useBirthday";
 import "../Style/Style.css";
