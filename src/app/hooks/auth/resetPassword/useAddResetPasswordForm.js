@@ -1,59 +1,30 @@
-import React, { useState } from "react";
-import { useFormik } from "formik";
-import { useAddResetPassword, useGetLoggedInUser } from "../usePassword";
+import React from 'react';
+import { useFormik } from 'formik';
+import { useAddResetPassword, useGetLoggedInUser } from '../usePassword';
 
 const useAddForgotPasswordForm = () => {
-  const [loading, setLoading] = useState(false);
-  const [showValues, setShowValues] = useState({
-    password: "",
-    showPassword: false,
-  });
-  const { data: loggedInUser } = useGetLoggedInUser();
+    const { data: loggedInUser } = useGetLoggedInUser();
+    
+    const { mutate } = useAddResetPassword({});
 
-  const { mutate } = useAddResetPassword({});
-
-  const formik = useFormik({
-    initialValues: {
-      id: loggedInUser?.id,
-      password: "",
-    },
-    // validationSchema: loginSchema,
-    onSubmit: (values) => {
-      setLoading(true);
-      handleRequest(values);
-    },
-  });
-
-  const handleRequest = (values) => {
-    values = {
-      ...values,
-    };
-    mutate(
-      values,
-      formik,
-      { onSuccess: () => formik.handleReset() },
-      { onSettled: () => setLoading(false) }
-    );
-  };
-
-  const handleClickShowPassword = () => {
-    setShowValues({
-      ...showValues,
-      showPassword: !showValues.showPassword,
+    const formik = useFormik({
+        initialValues: {
+            id: loggedInUser?.id,
+            password: "",
+        },
+        onSubmit: (values) => {
+            handleRequest(values);
+        },
     });
-  };
 
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
+    const handleRequest = (values) => {
+        values = {
+            ...values,
+        };
+        mutate(values, formik, { onSuccess: () => formik.handleReset() });
+    };
 
-  return {
-    formik,
-    loading,
-    showValues,
-    handleClickShowPassword,
-    handleMouseDownPassword,
-  };
+    return { formik };
 };
 
 export default useAddForgotPasswordForm;
