@@ -4,11 +4,14 @@ import MuiAppBar from "@mui/material/AppBar";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Box, IconButton, Stack, Toolbar, Typography } from "@mui/material";
 import {
+  useGetTodayBirthday,
   useGetUpcomingBirthday,
   useRemoveNotification,
 } from "../../hooks/birthday/useBirthday";
 import Notification from "../../pages/Notification/Notification";
 import Profile from "../../pages/Auth/Profile/Profile";
+import { toast } from "react-toastify";
+import TodayBirthday from "../../pages/Birthday/TodayBirthday";
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -28,11 +31,14 @@ const AppBar = styled(MuiAppBar, {
 }));
 
 export default function Header({ open, handleDrawerOpen }) {
+  const { data: birthdayData } = useGetTodayBirthday();
   const [showLength, setShowLength] = useState(true);
+  const [openNotification, setOpenNotification] = useState(false);
+  const [clearedNotification, setClearedNotification] = useState(false);
 
-  const handleClick = () => {
-    setShowLength(false);
-  };
+  // const handleClick = () => {
+  //   setShowLength(false);
+  // };
 
   const today = new Date();
   const { data: upcomingBirthdayData, isloading } = useGetUpcomingBirthday();
@@ -49,13 +55,28 @@ export default function Header({ open, handleDrawerOpen }) {
       })
     : [];
 
-  const [openNotification, setOpenNotification] = useState(false);
-  const isLoading = false;
+  // const isLoading = false;
 
   const { mutate } = useRemoveNotification();
-  const handleChange = () => {
-    setOpenNotification(!openNotification);
+
+  // const handleChange = () => {
+  //   setOpenNotification(!openNotification);
+  // };
+
+  const handleClearNotification = () => {
+    setOpenNotification(false);
+    setClearedNotification(true);
   };
+
+  useEffect(() => {
+    if (clearedNotification) {
+      toast.success("Notifications cleared for today!", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 3000,
+      });
+      mutate();
+    }
+  }, [clearedNotification, mutate]);
 
   useEffect(() => {
     if (openNotification) {
@@ -89,7 +110,14 @@ export default function Header({ open, handleDrawerOpen }) {
 
         <Stack flexDirection="row">
           <Typography>
-            <Notification data={thisDayBirthdays} />
+            <TodayBirthday data={birthdayData} />
+          </Typography>
+
+          <Typography>
+            <Notification
+              data={thisDayBirthdays}
+              onClearNotification={handleClearNotification}
+            />
           </Typography>
           <Typography>
             <Profile />

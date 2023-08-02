@@ -44,7 +44,7 @@ export const PieChartDiagram = ({ data }) => {
 
   return (
     <Box className="pichartStyle">
-      <ResponsiveContainer width="110%" height={300}>
+      <ResponsiveContainer width="100%" height={300}>
         <PieChart width={650} height={300} style={{ position: "inherit", paddingLeft:"3rem" }}>
           <Pie
             data={piedata}
