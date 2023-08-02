@@ -110,7 +110,7 @@ const Login = () => {
               />
               <div className="d-flex justify-content-end">
                 <Link className="forgot-password" to="forgot-password">
-                  forget password?
+                  Forget password?
                 </Link>
               </div>
               <LoadingButton

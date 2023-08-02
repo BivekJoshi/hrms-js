@@ -26,7 +26,7 @@ function EmailForm({ employeeId, onClose, officeEmail }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    
+
     if (validateForm()) {
       mutate(emailData);
       setEmailData({
@@ -66,51 +66,49 @@ function EmailForm({ employeeId, onClose, officeEmail }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div style={{ width: "400px" }}>
-        <Typography variant="h6" gutterBottom>
-          Send Email 
-        </Typography>
-        <br />
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              label="To"
-              name="to"
-              value={emailData?.to}
-              onChange={handleInputChange}
-              error={errors.to}
-              helperText={errors.to ? "To is required" : ""}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              label="Subject"
-              name="subject"
-              value={emailData?.subject}
-              onChange={handleInputChange}
-            />
-          </Grid>
-        </Grid>
-        <Grid container spacing={1} style={{ marginTop: "20px" }}>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              multiline
-              rows={10}
-              cols={90}
-              label="Body"
-              name="message"
-              value={emailData?.message}
-              onChange={handleInputChange}
-              error={errors.message}
-              helperText={errors.message ? "message is required" : ""}
-            />
-          </Grid>
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
+          <Typography variant="h6" gutterBottom>
+            Send Email
+          </Typography>
         </Grid>
         <br />
-        <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+        <Grid item xs={12}>
+          <TextField
+            fullWidth
+            label="To"
+            name="to"
+            value={emailData?.to}
+            onChange={handleInputChange}
+            error={errors.to}
+            helperText={errors.to ? "To is required" : ""}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            fullWidth
+            label="Subject"
+            name="subject"
+            value={emailData?.subject}
+            onChange={handleInputChange}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            fullWidth
+            multiline
+            rows={10}
+            cols={90}
+            label="Body"
+            name="message"
+            value={emailData?.message}
+            onChange={handleInputChange}
+            error={errors.message}
+            helperText={errors.message ? "message is required" : ""}
+          />
+        </Grid>
+        <br />
+        <Grid item xs={12} sx={{ display: "flex", justifyContent: "flex-end" }}>
           <Button type="submit" variant="contained">
             Send
           </Button>
@@ -123,8 +121,8 @@ function EmailForm({ employeeId, onClose, officeEmail }) {
           >
             Cancel
           </Button>
-        </Box>
-      </div>
+        </Grid>
+      </Grid>
     </form>
   );
 }
