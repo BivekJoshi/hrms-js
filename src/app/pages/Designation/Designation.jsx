@@ -121,7 +121,7 @@ const Designation = () => {
       <MaterialTable
         columns={columns}
         data={designationData}
-        title=""
+        title="Designnation"
         isLoading={isLoading}
         options={{
           padding: "dense",

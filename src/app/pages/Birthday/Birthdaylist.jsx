@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext } from "react";
-
 import { addMonths, format } from "date-fns";
 import Birthdaytable from "./Birthdaytable";
 import { useGetUpcomingBirthday } from "../../hooks/birthday/useBirthday";

@@ -5,118 +5,115 @@ import {
   Button,
   Grid,
   Typography,
+  Stack,
+  Box,
 } from "@mui/material";
 import React, { useRef, useState } from "react";
-import useAddDocumentForm from "../../../../hooks/employee/AddDocument/useAddDocumentForm";
-import { useGetDocumentByDocumentType } from "../../../../hooks/employee/useDocument";
+import {
+  useDeleteDocument,
+  useGetDocumentByDocumentType,
+} from "../../../../hooks/employee/useDocument";
 import { useParams } from "react-router-dom";
 import { DOC_URL } from "../../../../../auth/axiosInterceptor";
-
-const documentType = [
-  {
-    label: "Employee Photo",
-    input: "EMPLOYEE_PHOTO",
-    id: 1,
-  },
-  {
-    label: "Curriculum Vitae",
-    input: "CURRICULUM_VITAE",
-    id: 2,
-  },
-  {
-    label: "Citizenship",
-    input: "CITIZENSHIP",
-    id: 3,
-  },
-  {
-    label: "PAN Card",
-    input: "PAN_CARD",
-    id: 4,
-  },
-  {
-    label: "Academic Document",
-    input: "ACADEMIC_DOCUMENT",
-    id: 5,
-  },
-  {
-    label: "Training Certificate",
-    input: "TRAINING_CERTIFICATE",
-    id: 6,
-  },
-  {
-    label: "Certification",
-    input: "CERTIFICATION",
-    id: 7,
-  },
-  {
-    label: "Experience Letter",
-    input: "EXPERIENCE_LETTER",
-    id: 8,
-  },
-  {
-    label: "Award and Achievement",
-    input: "AWARD_AND_ACHIEVEMENT",
-    id: 9,
-  },
-  {
-    label: "Signed Contract",
-    input: "SIGNED_CONTRACT",
-    id: 10,
-  },
-  {
-    label: "Health Insurance",
-    input: "HEALTH_INSURANCE",
-    id: 11,
-  },
-  {
-    label: "Other Document",
-    input: "OTHER_DOCUMENT ",
-    id: 12,
-  },
-];
+import { documentType } from "./documentType";
+import { useAddDocumentForm } from "../../../../hooks/employee/AddDocument/useAddDocumentForm";
+import { EditDocumentModal } from "./EditDocumentModal";
 
 const EmployeeDocumentDetailForm = () => {
   const { id } = useParams();
   const fileInputRef = useRef(null);
+  const [openEditModal, setOpenEditModal] = useState(false);
   const [expandedAccordion, setExpandedAccordion] = useState(null);
   const [selectedDocument, setSelectedDocument] = useState("");
+  const [editedDocument, setEditedDocument] = useState({});
+  const handleCloseEditModal = () => setOpenEditModal(false);
 
+  const { mutate: deleteDocument } = useDeleteDocument({});
+  const { formik } = useAddDocumentForm({ selectedDocument });
+
+  // const { data: documentPhoto } = documentTypeSelected ?? useGetDocumentByDocumentType(id, selectedDocument)
   const { data: documentPhoto } = useGetDocumentByDocumentType(
     id,
     selectedDocument
   );
-    let data
-  if (documentPhoto && documentPhoto.length > 0) {
-    const path = documentPhoto[0].path;
-    const url = DOC_URL
-    data=url+path;
-  } else {
-    console.log("No document photo available.");
-  }
+  const url = DOC_URL;
 
-  const { formik } = useAddDocumentForm({ selectedDocument });
+
 
   const handleFormSubmit = (documentType) => {
     formik.setFieldValue("documentType", documentType);
     formik.handleSubmit(documentType);
   };
+
   const handleChange = (panel, doc) => (_, isExpanded) => {
     setSelectedDocument(doc);
     setExpandedAccordion(isExpanded ? panel : null);
   };
 
-
   const handleChangeImage = (e) => {
     setSelectedDocument(e.target.files[0]);
+  };
+
+  const handleDelete = (document) => {
+    const { id } = document;
+    deleteDocument(id);
+  };
+
+  const handleEditFormSubmit = (document) => {
+    setEditedDocument(document);
+    setOpenEditModal(true);
   };
 
   return (
     <div>
       <Grid container>
         <Grid item xs={12} sm={6}>
-          <div style={{ display: "flex", marginLeft: "5%", marginTop: "2%" }}>
-            image
-             {documentPhoto && <img src={data} alt="Document" width={460} height={500}  />}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "2rem",
+              alignItems: "center",
+            }}
+          >
+            {documentPhoto &&
+              documentPhoto.map((document) => (
+                <Stack
+                  key={document?.id}
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "1rem",
+                  }}
+                >
+                  <Box><img
+                    src={`${url}${document?.path}`}
+                    alt="Document"
+                    width={340}
+                    height={340}
+                  /></Box>
+                  <Box sx={{display: "flex", justifyContent: "space-between"}}>
+                    <Button
+                      sx={{ width: "fit-content" }}
+                      type="button"
+                      variant="contained"
+                      color="primary"
+                      onClick={() => handleEditFormSubmit(document)}
+                    >
+                      Update
+                    </Button>
+                    <Button
+                      sx={{ width: "fit-content" }}
+                      type="button"
+                      variant="contained"
+                      color="error"
+                      onClick={() => handleDelete(document)}
+                    >
+                      Delete
+                    </Button>
+                  </Box>
+                </Stack>
+              ))}
           </div>
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -154,6 +151,13 @@ const EmployeeDocumentDetailForm = () => {
             ))}
         </Grid>
       </Grid>
+      {openEditModal && (
+        <EditDocumentModal
+          id={editedDocument?.id}
+          open={openEditModal}
+          handleCloseModal={handleCloseEditModal}
+        />
+      )}
     </div>
   );
 };

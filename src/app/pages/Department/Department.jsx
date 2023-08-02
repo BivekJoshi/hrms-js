@@ -100,7 +100,7 @@ const Department = () => {
 
       <MaterialTable
        icons={tableIcons}
-        title="Department Data"
+        title="Department"
         columns={columns}
         data={departmentData}
 
