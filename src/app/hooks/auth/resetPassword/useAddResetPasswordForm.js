@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import { useAddResetPassword, useGetLoggedInUser } from "../usePassword";
+import { ResetPasswordSchema } from "./ResetPasswordSchema";
 
 const useAddForgotPasswordForm = () => {
   const [loading, setLoading] = useState(false);
@@ -17,7 +18,7 @@ const useAddForgotPasswordForm = () => {
       id: loggedInUser?.id,
       password: "",
     },
-    // validationSchema: loginSchema,
+    validationSchema: ResetPasswordSchema,
     onSubmit: (values) => {
       setLoading(true);
       handleRequest(values);

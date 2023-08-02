@@ -130,8 +130,7 @@ const ResetPassword = ({ isLoading }) => {
               id="password"
               name="password"
               label="New Password"
-              // type="password"
-              placeholder="Enter your password..."
+              placeholder="Enter your new password..."
               fullWidth
               required
               value={formik.values.password}
@@ -172,8 +171,7 @@ const ResetPassword = ({ isLoading }) => {
               id="confirmPassword"
               name="confirmPassword"
               label="Confirm New Password"
-              // type="password"
-              placeholder="Confirm Your Password..."
+              placeholder="Confirm your new password..."
               fullWidth
               required
               value={formik.values.confirmPassword}
@@ -212,12 +210,7 @@ const ResetPassword = ({ isLoading }) => {
             />
           </Grid>
 
-          <Grid
-          // container
-          // direction="row"
-          // justifyContent="space-around"
-          // alignItems="flex-end"
-          >
+      
             <LoadingButton
               fullWidth
               onClick={handleFormSubmit}
@@ -227,7 +220,7 @@ const ResetPassword = ({ isLoading }) => {
             >
               Change Password
             </LoadingButton>
-          </Grid>
+    
         </Stack>
       </Grid>
     )

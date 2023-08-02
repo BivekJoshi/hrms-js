@@ -136,19 +136,28 @@ const Leave = ({ isLoading }) => {
     },
     {
       title: 'Actions',
-      render: (rowData) => (
-        <Stack direction="row" spacing={0}>
-          <Button color="primary" onClick={() => handleEditLeave(rowData)}>
-            <ModeEditOutlineIcon />
-          </Button>
-          <Button color="primary" onClick={() => handleDeleteLeave(rowData)}>
-            <DeleteIcon />
-          </Button>
-        </Stack>
-      ),
+      render: (rowData) => {
+        const isApprovedOrRejected = ['APPROVED', 'REJECTED'].includes(rowData.leaveStatus);
+    
+        return (
+          <Stack direction="row" spacing={0}>
+            <Button
+              color="primary"
+              onClick={() => handleEditLeave(rowData)}
+              disabled={isApprovedOrRejected}
+            >
+              <ModeEditOutlineIcon />
+            </Button>
+            <Button color="primary" onClick={() => handleDeleteLeave(rowData)}>
+              <DeleteIcon />
+            </Button>
+          </Stack>
+        );
+      },
       sorting: false,
       width: 120,
     },
+    
   ];
 
   if (isLoading || loadingemployee || loadingleaveType) return <>Loading</>;
