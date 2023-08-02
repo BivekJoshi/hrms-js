@@ -91,12 +91,16 @@ const OfficeResource = () => {
           pageSize: 20,
           emptyRowsWhenPaging: false,
           headerStyle: {
-            backgroundColor: "#01579b",
-            color: "#FFF",
+            backgroundColor: '#01579b',
+            color: '#FFF',
             fontSize: "1rem",
-            padding: "dense",
+            padding: 'dense',
             height: 50,
-          },
+            textAlign:'center',
+            border:'2px solid #fff',
+            minHeight:'10px',
+            textTransform:'capitilize'
+        },
           rowStyle: {
             fontSize: ".8rem",
           },

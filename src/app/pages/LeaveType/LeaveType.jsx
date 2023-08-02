@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import MaterialTable from '@material-table/core';
+import MaterialTable from "material-table";
 import { Box, Button, Stack } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
@@ -54,8 +54,8 @@ const LeaveType = () => {
 	const columns = [
 		{
 			title: 'SN',
-			render: (rowData) => rowData.tableData.index + 1,
-			width: 80,
+			render: (rowData) => rowData.tableData.id + 1,
+			width: '1%',
 			sortable: false,
 		},
 		{
@@ -65,25 +65,29 @@ const LeaveType = () => {
 				const formattedLeaveName = rowData.leaveName.charAt(0).toUpperCase() + rowData.leaveName.slice(1).toLowerCase();
 				return `${formattedLeaveName} Leave`;
 			  },
-			width: 200,
+			width: '10%',
+			sortable: false,
 		},
 		{
 			title: 'Total Leave Days',
 			field: 'leaveTotal',
 			emptyValue: '-',
-			width: 150,
+			// width: 15,
+			sortable: false,
 		},
 		{
 			title: 'Carry Forward',
 			field: 'isCarryForward',
 			emptyValue: '-',
-			width: 100,
+			// width: 10,
 			render: (rowData) => (rowData.isCarryForward ? 'Yes' : 'No'),
+			sortable: false,
 		},
 		{
 			title: 'Description',
 			field: 'leaveDescription',
-			emptyValue: '-',
+			sortable: false,
+			emptyValue: '-'
 		},
 		{
 			title: 'Actions',
@@ -98,7 +102,7 @@ const LeaveType = () => {
 				</Stack>
 			),
 			sorting: false,
-			width: 120,
+			// width: 2,
 		},
 	];
 
@@ -120,12 +124,16 @@ const LeaveType = () => {
 					pageSize: 10,
 					emptyRowsWhenPaging: false,
 					headerStyle: {
-						backgroundColor: '#01579b',
-						color: '#FFF',
-						fontSize: "1rem",
-						padding: 'dense',
-						height: 50,
-					},
+                        backgroundColor: '#01579b',
+                        color: '#FFF',
+                        fontSize: "1rem",
+                        padding: 'dense',
+                        height: 50,
+                        textAlign:'center',
+                        border:'2px solid #fff',
+                        minHeight:'10px',
+                        textTransform:'capitilize'
+                    },
 					rowStyle: {
 						fontSize: ".8rem",
 					},
