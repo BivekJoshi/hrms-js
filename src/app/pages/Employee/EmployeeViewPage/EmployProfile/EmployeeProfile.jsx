@@ -9,11 +9,14 @@ import "./Style/Style.css";
 import { DetailProfile } from "./Component/DetailProfile";
 import { PersonalProfile } from "./Component/PersonalProfile";
 import ProgressById from "../../ProgressEmployeeData/ProgressById";
+import { useGetDocumentById } from "../../../../hooks/employee/useDocument";
 // import AddUser from "../../../../pages/Auth/UserControl/AddUser";
 
 const EmployeeProfile = () => {
   const { id } = useParams();
   const { data: employeeDataById, isLoading } = useGetEmployeeById(id);
+  const { data : employeePhoto } = useGetDocumentById(id);
+
   const navigate = useNavigate();
 
   if (isLoading) return <>Loading</>;
@@ -35,10 +38,9 @@ const EmployeeProfile = () => {
       <ProgressById />
 
       <div className="employeeBody">
-        <PersonalProfile data={employeeDataById} />
+        <PersonalProfile data={employeeDataById} photo={employeePhoto} />
         <DetailProfile data={employeeDataById} />
       </div>
-
     </>
   );
 };
