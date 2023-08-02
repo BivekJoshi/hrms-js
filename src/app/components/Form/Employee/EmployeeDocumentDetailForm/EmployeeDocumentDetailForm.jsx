@@ -75,9 +75,20 @@ const documentType = [
 const EmployeeDocumentDetailForm = () => {
   const fileInputRef = useRef(null);
   const [expandedAccordion, setExpandedAccordion] = useState(null);
-  const [document, setDocument] = useState('');
+  const [selectedDocument, setSelectedDocument] = useState("");
+  const [editedDocument, setEditedDocument] = useState({});
+  const handleCloseEditModal = () => setOpenEditModal(false);
 
-  const { formik } = useAddDocumentForm({ document });
+  const { mutate: deleteDocument } = useDeleteDocument({});
+  const { formik } = useAddDocumentForm({ selectedDocument });
+
+  // const { data: documentPhoto } = documentTypeSelected ?? useGetDocumentByDocumentType(id, selectedDocument)
+  const { data: documentPhoto } = useGetDocumentByDocumentType(
+    id,
+    selectedDocument
+  );
+  const url = DOC_URL;
+
   const handleFormSubmit = (documentType) => {
     formik.setFieldValue('documentType', documentType);
     formik.handleSubmit(documentType);
@@ -95,8 +106,56 @@ const EmployeeDocumentDetailForm = () => {
       <Grid container>
         <Grid item xs={12} sm={6}>
           <div
-            style={{ display: 'flex', marginLeft: '5%', marginTop: '2%' }}
-          ></div>
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "0.6rem",
+              alignItems: "center",
+            }}
+          >
+            {documentPhoto &&
+              documentPhoto.map((document) => (
+                <Stack
+                  key={document?.id}
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "1rem",
+                  }}
+                >
+                  <Box>
+                    <img
+                      src={`${url}${document?.path}`}
+                      alt="Document"
+                      width={240}
+                      height={140}
+                    />
+                  </Box>
+                  <Box
+                    sx={{ display: "flex", justifyContent: "center", gap: "1rem" }}
+                  >
+                    <Button
+                      sx={{ width: "fit-content" }}
+                      type="button"
+                      variant="contained"
+                      color="primary"
+                      onClick={() => handleEditFormSubmit(document)}
+                    >
+                      Update
+                    </Button>
+                    <Button
+                      sx={{ width: "fit-content" }}
+                      type="button"
+                      variant="contained"
+                      color="error"
+                      onClick={() => handleDelete(document)}
+                    >
+                      Delete
+                    </Button>
+                  </Box>
+                </Stack>
+              ))}
+          </div>
         </Grid>
         <Grid item xs={12} sm={6}>
           {documentType.map((document) => {

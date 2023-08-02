@@ -1,9 +1,9 @@
 import React from "react";
-import { PieChart, Pie, Cell, Legend } from "recharts";
+import { PieChart, Pie, Cell, Legend, ResponsiveContainer } from "recharts";
 import { Box } from "@mui/material";
-import "./Style/Style.css"
+import "./Style/Style.css";
 
-export const PieChartDiagram = ({data}) => {
+export const PieChartDiagram = ({ data }) => {
   const piedata = [
     {
       name: "All Employees",
@@ -36,7 +36,7 @@ export const PieChartDiagram = ({data}) => {
         style={{
           backgroundColor,
           width: size,
-          height: size
+          height: size,
         }}
       ></div>
     );
@@ -44,53 +44,64 @@ export const PieChartDiagram = ({data}) => {
 
   return (
     <Box className="pichartStyle">
-      <PieChart width={730} height={300} style={{position:"inherit"}}>
-        <Pie
-          data={piedata}
-          dataKey="value"
-          nameKey="name"
-          cx="55%"
-          cy="55%"
-          outerRadius={80}
-          fill="#8884d8"
-        >
-          {piedata.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-          ))}
-        </Pie>
-        <Pie
-        style={{background:"black"}}
-          data={piedata}
-          dataKey="value"
-          nameKey="name"
-          cx="55%"
-          cy="55%"
-          innerRadius={90}
-          outerRadius={110}
-          fill="#82ca9d"
-          label
-        >
-          {piedata.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-          ))}
-        </Pie>
-      </PieChart>
-      <Legend
-        content={
-          <ul className="LegendList">
+      <ResponsiveContainer width="110%" height={300}>
+        <PieChart width={650} height={300} style={{ position: "inherit", paddingLeft:"3rem" }}>
+          <Pie
+            data={piedata}
+            dataKey="value"
+            nameKey="name"
+            cx="65%"
+            cy="65%"
+            outerRadius={70}
+            fill="#8884d8"
+          >
             {piedata.map((entry, index) => (
-              <Box key={`item-${index}`} >
-                <div className="BulletLabel">
-                  <Bullet backgroundColor={COLORS[index % COLORS.length]} size="10px" />
-                  <div className="BulletLabelText">{entry.name}</div>
-                  <div style={{ marginLeft: "20px" }}>{entry.value}</div>
-
-                </div>
-              </Box>
+              <Cell
+                key={`cell-${index}`}
+                fill={COLORS[index % COLORS.length]}
+              />
             ))}
-          </ul>
-        }
-      />
+          </Pie>
+          <Pie
+            style={{ background: "black" }}
+            data={piedata}
+            dataKey="value"
+            nameKey="name"
+            cx="65%"
+            cy="65%"
+            innerRadius={80}
+            outerRadius={100}
+            fill="#82ca9d"
+            label
+          >
+            {piedata.map((entry, index) => (
+              <Cell
+                key={`cell-${index}`}
+                fill={COLORS[index % COLORS.length]}
+              />
+            ))}
+          </Pie>
+        </PieChart>
+        
+      </ResponsiveContainer>
+      <Legend
+          content={
+            <ul className="LegendList">
+              {piedata.map((entry, index) => (
+                <Box key={`item-${index}`}>
+                  <div className="BulletLabel">
+                    <Bullet
+                      backgroundColor={COLORS[index % COLORS.length]}
+                      size="10px"
+                    />
+                    <div className="BulletLabelText">{entry.name}</div>
+                    <div style={{ marginLeft: "20px" }}>{entry.value}</div>
+                  </div>
+                </Box>
+              ))}
+            </ul>
+          }
+        />
     </Box>
   );
 };

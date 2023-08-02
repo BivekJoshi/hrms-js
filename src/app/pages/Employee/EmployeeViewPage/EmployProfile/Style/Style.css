@@ -27,7 +27,7 @@
   grid-template-rows: 1fr 1fr;
   row-gap: 2rem;
   border-radius: 1rem;
-  background-color: #ededed;
+  /* background-color: #ededed; */
   padding: 1rem;
 }
 .css-heg063-MuiTabs-flexContainer {

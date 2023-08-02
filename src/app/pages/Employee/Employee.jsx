@@ -136,7 +136,7 @@ const Employee = () => {
                 style={{ marginTop: "10px" }}
                 sx={{ mt: 3, ml: 1 }}
                 onClick={() => {
-                  navigate(`edit/${data.id}`);
+                  navigate(`edit/${data?.id}`);
                 }}
               >
                 Yes
