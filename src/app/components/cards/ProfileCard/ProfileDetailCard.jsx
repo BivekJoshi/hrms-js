@@ -54,7 +54,6 @@ const ProfileDetailCard = ({ data }) => {
             background: "linear-gradient(to right, #ff9b44 0%, #fc6075 100%)",
             color: "#ffffff",
             border: "1px solid #ff9b44",
-            color: "#fff",
             fontSize: "1rem",
             fontWeight: "400",
             padding: "2px 12px",
