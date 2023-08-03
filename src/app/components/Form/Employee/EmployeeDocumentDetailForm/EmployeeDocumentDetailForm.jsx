@@ -15,7 +15,8 @@ import {
 } from "../../../../hooks/employee/useDocument";
 import { useParams } from "react-router-dom";
 import { DOC_URL } from "../../../../../auth/axiosInterceptor";
-import { documentType } from "./documntType";
+// import { documentType } from "./documentType";
+import { documentType } from "./documentType";
 import { useAddDocumentForm } from "../../../../hooks/employee/AddDocument/useAddDocumentForm";
 import { EditDocumentModal } from "./EditDocumentModal";
 
@@ -25,21 +26,22 @@ const EmployeeDocumentDetailForm = () => {
   const [openEditModal, setOpenEditModal] = useState(false);
   const [expandedAccordion, setExpandedAccordion] = useState(null);
   const [selectedDocument, setSelectedDocument] = useState("");
+  const [document, setDocument] = useState("");
   const [editedDocument, setEditedDocument] = useState({});
 
   const handleCloseEditModal = () => setOpenEditModal(false);
 
   const { mutate: deleteDocument } = useDeleteDocument({});
-  const { formik } = useAddDocumentForm({ selectedDocument });
+  const { formik } = useAddDocumentForm({ document });
 
-  // const { data: documentPhoto } = documentTypeSelected ?? useGetDocumentByDocumentType(id, selectedDocument)
+
   const { data: documentPhoto } = useGetDocumentByDocumentType(
     id,
     selectedDocument
   );
   const url = DOC_URL; 
 
-  const handleFormSubmit = (documentType) => {
+  const handleFormSubmit = (documentType, ) => {
     formik.setFieldValue("documentType", documentType);
     formik.handleSubmit(documentType);
   };
@@ -50,7 +52,7 @@ const EmployeeDocumentDetailForm = () => {
   };
 
   const handleChangeImage = (e) => {
-    setSelectedDocument(e.target.files[0]);
+    setDocument(e.target.files[0]);
   };
 
   const handleDelete = (document) => {
@@ -154,7 +156,6 @@ const EmployeeDocumentDetailForm = () => {
             ))}
         </Grid>
       </Grid>
-      {JSON.stringify(editedDocument)}
       {openEditModal && (
         <EditDocumentModal
           id={editedDocument?.id}

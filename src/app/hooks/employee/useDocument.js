@@ -13,12 +13,13 @@ export const useAddDocument = ({ onSuccess }) => {
   const { id } = useParams();
 
   const addDocument = async (image, id) => {
+    
     const { documentType, document } = image;
     const imgData = new FormData();
     imgData.append("file", document);
     imgData.append("documentType", documentType);
     const { data } = await axiosInstance.post(
-      `/employee/document/uploadFile/${id}`,
+      `/employee/document/upload-multipart-file/${id}`,
       imgData,
       {
         headers: {
