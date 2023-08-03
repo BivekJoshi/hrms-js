@@ -142,13 +142,13 @@ export const useDeleteDocument = ({ onSuccess }) => {
 export const useEditDocument = ({ onSuccess }) => {
 
   const editDocument = async (image) => {
-   
-    const { fileId, document } = image;
+   console.log(image)
+    const { id, data } = image;
     const imgData = new FormData();
-    imgData.append("file", document);
+    imgData.append("file", data);
 
-    const { data } = await axiosInstance.put(
-      `employee/document/change-multipart-file/${fileId}`,
+    const { newData } = await axiosInstance.put(
+      `employee/document/change-multipart-file/${id}`,
       imgData,
       {
         headers: {
@@ -156,7 +156,7 @@ export const useEditDocument = ({ onSuccess }) => {
         },
       }
     );
-    return data;
+    return newData;
   };
 
   const queryClient = useQueryClient();
