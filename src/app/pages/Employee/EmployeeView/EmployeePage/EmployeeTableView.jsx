@@ -14,23 +14,23 @@ const EmployeeTableView = ({ employeeData, isLoading }) => {
         {
             title: 'SN',
             render: (rowData) => rowData.tableData.id + 1,
-            // width: "3%",
+            width: "3%",
             sortable: false,
         },
         {
             title: 'Employee',
             field: 'firstName',
-            emptyValue: '-',
+            render: (rowData) => `${rowData.firstName} ${rowData.middleName} ${rowData.lastName}`,
             // width: "10%",
         },
         {
             title: 'Position',
             render: (rowData) => {
-                const position = rowData?.position?.positionName;
+                const position = `${rowData?.position?.positionName ||'-'} (${rowData?.position?.positionLevel||'-'})`;
                 return position ? position : '-';
             }
             ,
-            // width: 340,
+            width: 340,
         },
         {
             title: 'Email',
@@ -88,6 +88,10 @@ const EmployeeTableView = ({ employeeData, isLoading }) => {
                         fontSize: "1rem",
                         padding: 'dense',
                         height: 50,
+                        textAlign:'center',
+                        border:'2px solid #fff',
+                        minHeight:'10px',
+                        textTransform:'capitilize'
                     },
                     rowStyle: {
                         fontSize:".8rem",
