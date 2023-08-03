@@ -11,12 +11,10 @@ import {
   Box,
 } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/NotificationsNone";
-import { useGetHolidayCurrent } from "../../hooks/holiday/useHoliday";
 import { useGetEvent } from "../../hooks/event/useEvent";
 
-const Notification = ({ data }) => {
+const Notification = () => {
   const { data: events } = useGetEvent();
-  const { data: holidays, isLoading, isError } = useGetHolidayCurrent();
 
   const todayDate = new Date().toISOString().split("T")[0];
   const todayHoliday = holidays?.filter(
@@ -37,9 +35,6 @@ const Notification = ({ data }) => {
     setAnchorEl(null);
   };
 
-  if (isError) {
-    return <div>Error fetching data.</div>;
-  }
   const btnStyle = {
     color: "#fff",
   };
