@@ -16,7 +16,8 @@ const Notification = ({ data }) => {
   const todayEvent = events?.filter((event) => event?.eventDate === todayDate);
 
   const notificationNumber =
-    (todayEvent?.length ?? 0) + (todayHoliday?.length ?? 0);
+    (todayEvent?.length ?? 0) +
+    (todayHoliday?.length ?? 0);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
