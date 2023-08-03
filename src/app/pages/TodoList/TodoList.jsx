@@ -46,12 +46,12 @@ const TodoList = () => {
     {
       title: "Message",
       field: "message",
-      width: "100px"
+      width: "300px"
     },
     {
       title: "Due",
       field: "dueDate",
-      width: "80px",
+      width: "180px",
       // type: 'numeric',
       
     },
