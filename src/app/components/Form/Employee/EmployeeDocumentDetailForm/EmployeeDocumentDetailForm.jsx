@@ -5,84 +5,47 @@ import {
   Button,
   Grid,
   Typography,
-} from '@mui/material';
-import React, { useRef, useState } from 'react';
-import useAddDocumentForm from '../../../../hooks/employee/AddDocument/useAddDocumentForm';
-
-const documentType = [
-  {
-    label: 'Employee Photo',
-    input: 'EMPLOYEE_PHOTO',
-    id: 1,
-  },
-  {
-    label: 'Curriculum Vitae',
-    input: 'CURRICULUM_VITAE',
-    id: 2,
-  },
-  {
-    label: 'Citizenship',
-    input: 'CITIZENSHIP',
-    id: 3,
-  },
-  {
-    label: 'PAN Card',
-    input: 'PAN_CARD',
-    id: 4,
-  },
-  {
-    label: 'Academic Document',
-    input: 'ACADEMIC_DOCUMENT',
-    id: 5,
-  },
-  {
-    label: 'Training Certificate',
-    input: 'TRAINING_CERTIFICATE',
-    id: 6,
-  },
-  {
-    label: 'Certification',
-    input: 'CERTIFICATION',
-    id: 7,
-  },
-  {
-    label: 'Experience Letter',
-    input: 'EXPERIENCE_LETTER',
-    id: 8,
-  },
-  {
-    label: 'Award and Achievement',
-    input: 'AWARD_AND_ACHIEVEMENT',
-    id: 9,
-  },
-  {
-    label: 'Signed Contract',
-    input: 'SIGNED_CONTRACT',
-    id: 10,
-  },
-  {
-    label: 'Health Insurance',
-    input: 'HEALTH_INSURANCE',
-    id: 11,
-  },
-  {
-    label: 'Other Document',
-    input: 'OTHER_DOCUMENT ',
-    id: 12,
-  },
-];
+  Stack,
+  Box,
+} from "@mui/material";
+import React, { useRef, useState } from "react";
+import {
+  useDeleteDocument,
+  useGetDocumentByDocumentType,
+} from "../../../../hooks/employee/useDocument";
+import { useParams } from "react-router-dom";
+import { DOC_URL } from "../../../../../auth/axiosInterceptor";
+import { documentType } from "./documentType";
+import { useAddDocumentForm } from "../../../../hooks/employee/AddDocument/useAddDocumentForm";
+import { EditDocumentModal } from "./EditDocumentModal";
 
 const EmployeeDocumentDetailForm = () => {
+  const { id } = useParams();
   const fileInputRef = useRef(null);
+  const [openEditModal, setOpenEditModal] = useState(false);
   const [expandedAccordion, setExpandedAccordion] = useState(null);
-  const [document, setDocument] = useState('');
+  const [selectedDocument, setSelectedDocument] = useState("");
+  const [document, setDocument] = useState("");
+  const [editedDocument, setEditedDocument] = useState({});
 
+  const handleCloseEditModal = () => setOpenEditModal(false);
+
+  const { mutate: deleteDocument } = useDeleteDocument({});
   const { formik } = useAddDocumentForm({ document });
+
+  const { data: documentPhoto } = useGetDocumentByDocumentType(
+    id,
+    selectedDocument
+  );
+  const url = DOC_URL;
+
   const handleFormSubmit = (documentType) => {
-    formik.setFieldValue('documentType', documentType);
+    formik.setFieldValue("documentType", documentType);
     formik.handleSubmit(documentType);
   };
-  const handleChange = (panel) => (_, isExpanded) => {
+
+  const handleChange = (panel, doc) => (_, isExpanded) => {
+    setSelectedDocument(doc);
     setExpandedAccordion(isExpanded ? panel : null);
   };
 
@@ -90,38 +53,104 @@ const EmployeeDocumentDetailForm = () => {
     setDocument(e.target.files[0]);
   };
 
+  const handleDelete = (document) => {
+    const { id } = document;
+    deleteDocument(id);
+  };
+
+  const handleEditFormSubmit = (document) => {
+    setEditedDocument(document);
+    setOpenEditModal(true);
+  };
+
   return (
     <div>
       <Grid container>
         <Grid item xs={12} sm={6}>
           <div
-            style={{ display: 'flex', marginLeft: '5%', marginTop: '2%' }}
-          ></div>
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr",
+              gap: "1rem",
+              // alignItems: "center",
+            }}
+          >
+            {documentPhoto &&
+              documentPhoto.map((document) => (
+                <Box key={document?.id}>
+                  <div
+                    style={{
+                      position: "relative",
+                      width: "510px",
+                      height: "300px",
+                    }}
+                  >
+                    <img
+                      src={`${url}${document?.path}`}
+                      alt="Document"
+                      width="510px"
+                      height="300px"
+                    />
+               
+                      <Box
+                       style={{
+                        position: "absolute",
+                        bottom: "10px", 
+                        right: "10px", 
+                        padding: "8px 16px",
+                        backgroundColor: "rgba(255, 255, 255, 0.8)",
+                        borderRadius: "4px",
+                      }}
+                      >
+                        <Button
+                          sx={{ width: "fit-content" }}
+                          type="button"
+                          variant="contained"
+                          color="primary"
+                          onClick={() => handleEditFormSubmit(document)}
+                        >
+                          Update
+                        </Button>
+                        <Button
+                          sx={{ width: "fit-content" }}
+                          type="button"
+                          variant="contained"
+                          color="error"
+                          onClick={() => handleDelete(document)}
+                        >
+                          Delete
+                        </Button>
+                      </Box>
+        
+                  </div>
+                </Box>
+              ))}
+          </div>
         </Grid>
         <Grid item xs={12} sm={6}>
-          {documentType.map((document) => {
-            return (
+          {documentType &&
+            documentType.map((document) => (
               <Accordion
                 key={document.id}
-                expanded={expandedAccordion === 'panel1'}
-                onChange={handleChange('panel1')}
+                expanded={expandedAccordion === `panel${document?.id}`}
+                onChange={handleChange(`panel${document?.id}`, document?.input)}
               >
                 <AccordionSummary
-                  aria-controls='panel1a-content'
-                  id='panel1a-header'
+                  aria-controls={`panel${document.id}a-content`}
+                  id={`panel${document.id}a-header`}
                 >
-                  <Typography>{document.label}</Typography>
+                  <Typography>{document?.label}</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                   <input
-                    type='file'
+                    type="file"
                     ref={fileInputRef}
-                    label='citizenship'
+                    label="citizenship"
                     onChange={handleChangeImage}
                   />
                   <Button
-                    variant='contained'
-                    type='button'
+                    variant="contained"
+                    type="button"
                     onClick={() => {
                       handleFormSubmit(document.input);
                     }}
@@ -130,10 +159,16 @@ const EmployeeDocumentDetailForm = () => {
                   </Button>
                 </AccordionDetails>
               </Accordion>
-            );
-          })}
+            ))}
         </Grid>
       </Grid>
+      {openEditModal && (
+        <EditDocumentModal
+          id={editedDocument?.id}
+          open={openEditModal}
+          handleCloseModal={handleCloseEditModal}
+        />
+      )}
     </div>
   );
 };

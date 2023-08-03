@@ -1,22 +1,25 @@
-import * as React from 'react';
-import { useState } from 'react';
-import MaterialTable from '@material-table/core';
-import { Box, Button, Chip, Stack } from '@mui/material';
-import { useGetLeaveType } from '../../hooks/leaveType/useLeaveType';
+import * as React from "react";
+import { useState } from "react";
+import MaterialTable from "material-table";
+import { Box, Button, Chip, Stack } from "@mui/material";
+import { useGetLeaveType } from "../../hooks/leaveType/useLeaveType";
 
-import { useDeleteLeave, useGetLeave } from '../../hooks/leave/useLeave';
-import { useGetEmployee } from '../../hooks/employee/useEmployee';
+import { useDeleteLeave, useGetLeave } from "../../hooks/leave/useLeave";
+import { useGetEmployee } from "../../hooks/employee/useEmployee";
 
-
-import DeleteIcon from '@mui/icons-material/Delete';
-import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
-import { AddLeaveModal, EditLeaveModal } from './LeaveModal/LeaveModal';
-import DeleteConfirmationModal from '../../components/Modal/DeleteConfirmationModal';
+import DeleteIcon from "@mui/icons-material/Delete";
+import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
+import { AddLeaveModal, EditLeaveModal } from "./LeaveModal/LeaveModal";
+import DeleteConfirmationModal from "../../components/Modal/DeleteConfirmationModal";
+import tableIcons from "../../../theme/overrides/TableIcon";
 
 const Leave = ({ isLoading }) => {
   const { data: leaveData, isLoading: loadingleave } = useGetLeave();
   const { data: employeeData, isLoading: loadingemployee } = useGetEmployee();
-  const { data: leaveTypeData, isLoading: loadingleaveType } = useGetLeaveType();
+  const {
+    data: leaveTypeData,
+    isLoading: loadingleaveType,
+  } = useGetLeaveType();
 
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
@@ -50,7 +53,9 @@ const Leave = ({ isLoading }) => {
   const getEmployeeName = (rowData) => {
     const employeeId = rowData.employeeId;
     const employee = employeeData?.find((emp) => emp.id === employeeId);
-    const name = `${employee?.firstName} ${employee?.middleName || ''} ${employee?.lastName}`;
+    const name = `${employee?.firstName} ${employee?.middleName || ""} ${
+      employee?.lastName
+    }`;
     return name;
   };
 
@@ -65,44 +70,44 @@ const Leave = ({ isLoading }) => {
   };
   const columns = [
     {
-      title: 'SN',
-      render: (rowData) => rowData.tableData.index + 1,
+      title: "SN",
+      render: (rowData) => rowData.tableData.id + 1,
       width: 80,
       sortable: false,
     },
     {
-      title: 'Employee Name',
+      title: "Employee Name",
       render: (rowData) => {
-        return <p>{getEmployeeName(rowData)} </p>
+        return <p>{getEmployeeName(rowData)} </p>;
       },
       width: 120,
     },
     {
-      title: 'Leave Type',
+      title: "Leave Type",
       render: (rowData) => {
         return <p>{getLeaveTypeName(rowData)}</p>;
       },
       width: 150,
     },
     {
-      title: 'From',
-      field: 'fromDate',
-      emptyValue: '-',
+      title: "From",
+      field: "fromDate",
+      emptyValue: "-",
       width: 100,
     },
     {
-      title: 'To',
-      field: 'toDate',
-      emptyValue: '-',
+      title: "To",
+      field: "toDate",
+      emptyValue: "-",
       width: 100,
     },
     {
-      title: 'Status',
-      field: 'leaveStatus',
-      emptyValue: '-',
+      title: "Status",
+      field: "leaveStatus",
+      emptyValue: "-",
       width: 100,
       cellStyle: {
-        whiteSpace: 'nowrap',
+        whiteSpace: "nowrap",
       },
       render: (rowData) => {
         const status = rowData.leaveStatus;
@@ -117,35 +122,51 @@ const Leave = ({ isLoading }) => {
         }
 
         return (
-          <Chip label={status} style={{ backgroundColor: chipColor, color: "white", width: ' 9rem' }} />
+          <Chip
+            label={status}
+            style={{
+              backgroundColor: chipColor,
+              color: "white",
+              width: " 9rem",
+            }}
+          />
         );
       },
-
     },
     {
-      title: 'Remark',
-      field: 'leaveRemarks',
-      emptyValue: '-',
+      title: "Remark",
+      field: "leaveRemarks",
+      emptyValue: "-",
       width: 100,
     },
     {
-      title: 'Approved By',
-      field: 'confirmById',
-      emptyValue: '-',
+      title: "Approved By",
+      field: "confirmById",
+      emptyValue: "-",
       width: 40,
     },
     {
-      title: 'Actions',
-      render: (rowData) => (
-        <Stack direction="row" spacing={0}>
-          <Button color="primary" onClick={() => handleEditLeave(rowData)}>
-            <ModeEditOutlineIcon />
-          </Button>
-          <Button color="primary" onClick={() => handleDeleteLeave(rowData)}>
-            <DeleteIcon />
-          </Button>
-        </Stack>
-      ),
+      title: "Actions",
+      render: (rowData) => {
+        const isApprovedOrRejected = ["APPROVED", "REJECTED"].includes(
+          rowData.leaveStatus
+        );
+
+        return (
+          <Stack direction="row" spacing={0}>
+            <Button
+              color="primary"
+              onClick={() => handleEditLeave(rowData)}
+              disabled={isApprovedOrRejected}
+            >
+              <ModeEditOutlineIcon />
+            </Button>
+            <Button color="primary" onClick={() => handleDeleteLeave(rowData)}>
+              <DeleteIcon />
+            </Button>
+          </Stack>
+        );
+      },
       sorting: false,
       width: 120,
     },
@@ -155,8 +176,12 @@ const Leave = ({ isLoading }) => {
 
   return (
     <>
-      <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-        <Button variant='contained' sx={{ mt: 3, ml: 1 }} onClick={handleAddOpenModal}>
+      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+        <Button
+          variant="contained"
+          sx={{ mt: 3, ml: 1 }}
+          onClick={handleAddOpenModal}
+        >
           +Add Leave
         </Button>
       </Box>
@@ -164,21 +189,26 @@ const Leave = ({ isLoading }) => {
       <br />
 
       <MaterialTable
+        icons={tableIcons}
         columns={columns}
         data={leaveData}
-        title=''
+        title=""
         isLoading={loadingleave}
         options={{
-          padding: 'dense',
+          padding: "dense",
           margin: 50,
           pageSize: 10,
           emptyRowsWhenPaging: false,
           headerStyle: {
-            backgroundColor: '#01579b',
-            color: '#FFF',
+            backgroundColor: "#01579b",
+            color: "#FFF",
             fontSize: "1rem",
-            padding: 'dense',
+            padding: "dense",
             height: 50,
+            textAlign: "center",
+            border: "2px solid #fff",
+            minHeight: "10px",
+            textTransform: "capitilize",
           },
           rowStyle: {
             fontSize: ".8rem",

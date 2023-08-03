@@ -33,25 +33,24 @@ const Company = () => {
               borderColor: 'divider',
             }}
           >
-            <TabList
-              onChange={handleChange}
-              aria-label="lab API tabs example"
-            >
-              <Tab label="Table View" value="1" />
-              <Tab label="Grid View" value="2" />
+            <TabList onChange={handleChange} aria-label='lab API tabs example'>
+              <Tab label='Table View' value='1' />
+              <Tab label='Grid View' value='2' />
             </TabList>
             <Button
-              variant="contained"
+              variant='contained'
               sx={{ mt: 3, ml: 1 }}
               onClick={handleAddOpenModal}
             >
               +Add Company
             </Button>
           </Box>
-          <TabPanel value="1" sx={{padding:"0"}}>
+          <TabPanel value='1' sx={{ padding: '0' }}>
+            <br />
             <CompanyTable />
           </TabPanel>
-          <TabPanel value="2">
+          <TabPanel value='2'>
+            <br />
             <CompanyGrid />
           </TabPanel>
         </Box>
