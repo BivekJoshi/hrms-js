@@ -223,7 +223,6 @@ export default function BreadCrumbs() {
   const currentRoute = routes.find(
     (route) => '/admin/' + route.path === currentPath
   );
-  console.log(currentRoute);
   return (
     <>
       {currentRoute &&
