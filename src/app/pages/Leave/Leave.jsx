@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState } from 'react';
-import MaterialTable from '@material-table/core';
+import MaterialTable from "material-table";
 import { Box, Button, Chip, Stack } from '@mui/material';
 import { useGetLeaveType } from '../../hooks/leaveType/useLeaveType';
 
@@ -66,7 +66,7 @@ const Leave = ({ isLoading }) => {
   const columns = [
     {
       title: 'SN',
-      render: (rowData) => rowData.tableData.index + 1,
+      render: (rowData) => rowData.tableData.id + 1,
       width: 80,
       sortable: false,
     },
@@ -188,7 +188,11 @@ const Leave = ({ isLoading }) => {
             fontSize: "1rem",
             padding: 'dense',
             height: 50,
-          },
+            textAlign:'center',
+            border:'2px solid #fff',
+            minHeight:'10px',
+            textTransform:'capitilize'
+        },
           rowStyle: {
             fontSize: ".8rem",
           },
