@@ -1,0 +1,7 @@
+.css-f7qtis-MuiButtonBase-root-MuiTableSortLabel-root:hover {
+    color: #fbf6f6;
+}
+
+.css-f7qtis-MuiButtonBase-root-MuiTableSortLabel-root:hover .MuiTableSortLabel-icon{
+    display: none;
+}

@@ -66,9 +66,13 @@ const CompanyTableView = ({ companyData, isLoading, handleEditCompany, handleDel
                     headerStyle: {
                         backgroundColor: '#01579b',
                         color: '#FFF',
-                        fontSize:"1rem",
+                        fontSize: "1rem",
                         padding: 'dense',
                         height: 50,
+                        textAlign:'center',
+                        border:'2px solid #fff',
+                        minHeight:'10px',
+                        textTransform:'capitilize'
                     },
                     rowStyle: {
                         fontSize: ".8rem",

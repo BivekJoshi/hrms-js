@@ -1,7 +1,9 @@
 import { useFormik } from 'formik';
 import { useAddDocument } from '../useDocument';
+import { useParams } from 'react-router-dom';
 
-const useAddDocumentForm = ({ document }) => {
+export const useAddDocumentForm = ({ document }) => {
+
   const { mutate } = useAddDocument({});
 
   const formik = useFormik({
@@ -16,5 +18,3 @@ const useAddDocumentForm = ({ document }) => {
 
   return { formik };
 };
-
-export default useAddDocumentForm;

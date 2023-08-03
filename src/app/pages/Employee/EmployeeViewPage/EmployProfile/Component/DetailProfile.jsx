@@ -8,6 +8,7 @@ import AcademicsInfo from "../../InfoTabs/AcademicsInfoTab/AcademicsInfo";
 import PromotionHistory from "../../InfoTabs/PromotionHistory/PromotionHistory";
 import "../Style/Style.css";
 import AttendenceInfo from "../../InfoTabs/AttendenceInfoTab/AttendenceInfo";
+import DocumentInfo from "../../InfoTabs/DocumentInfoTab/DocumentInfo";
 
 const primaryColor = "#1c7ed6";
 
@@ -65,6 +66,15 @@ export const DetailProfile = ({ data }) => {
                     fontWeight: "bolder",
                   }}
                 />
+                <Tab
+                  label="Documents"
+                  value="6"
+                  style={{
+                    fontSize: "1rem",
+                    color: primaryColor,
+                    fontWeight: "bolder",
+                  }}
+                />
               </Tabs>
             </TableHead>
           </Table>
@@ -84,6 +94,9 @@ export const DetailProfile = ({ data }) => {
           </TabPanel>
           <TabPanel value="5" style={{ padding: 10 }}>
             <PromotionHistory data={data} />
+          </TabPanel>
+          <TabPanel value="6" style={{ padding: 10 }}>
+            <DocumentInfo />
           </TabPanel>
         </Box>
       </TabContext>

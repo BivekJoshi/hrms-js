@@ -1,8 +1,9 @@
 import { Box, Stack, Button, LinearProgress } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
-import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
+// import DeleteIcon from "@mui/icons-material/Delete";
+// import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import MaterialTable from "@material-table/core";
 import React from "react";
+import "../Style/Style.css"
 
 export const ProjectTable = ({ projectData }) => {
   const columns = [
@@ -29,27 +30,6 @@ export const ProjectTable = ({ projectData }) => {
       render: (rowData) => (<LinearProgress variant="determinate" value={50} />),
       width: 400,
     },
-    {
-      title: "Actions",
-      render: (rowData) => (
-        <Stack direction="row" spacing={0}>
-          <Button
-            color="primary"
-            onClick={() => handleEditDesignation(rowData)}
-          >
-            <ModeEditOutlineIcon />
-          </Button>
-          <Button
-            color="primary"
-            onClick={() => handleDeleteDesignation(rowData)}
-          >
-            <DeleteIcon />
-          </Button>
-        </Stack>
-      ),
-      sorting: false,
-      width: 50,
-    },
   ];
   return (
     <>
@@ -62,7 +42,7 @@ export const ProjectTable = ({ projectData }) => {
             search:false,
             padding: "dense",
             margin: 50,
-            pageSize: 10,
+            pageSize: 5,
             emptyRowsWhenPaging: false,
             headerStyle: {
               backgroundColor: "#01579b",
@@ -80,3 +60,5 @@ export const ProjectTable = ({ projectData }) => {
     </>
   );
 };
+
+
