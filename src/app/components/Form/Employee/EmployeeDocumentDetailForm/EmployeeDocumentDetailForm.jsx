@@ -34,14 +34,13 @@ const EmployeeDocumentDetailForm = () => {
   const { mutate: deleteDocument } = useDeleteDocument({});
   const { formik } = useAddDocumentForm({ document });
 
-
   const { data: documentPhoto } = useGetDocumentByDocumentType(
     id,
     selectedDocument
   );
-  const url = DOC_URL; 
+  const url = DOC_URL;
 
-  const handleFormSubmit = (documentType, ) => {
+  const handleFormSubmit = (documentType) => {
     formik.setFieldValue("documentType", documentType);
     formik.handleSubmit(documentType);
   };
@@ -69,12 +68,14 @@ const EmployeeDocumentDetailForm = () => {
     <div>
       <Grid container>
         <Grid item xs={12} sm={6}>
-          <div
-            style={{
+          <Box
+            sx={{
               display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: "0.6rem",
+              gridTemplateColumns: {xs:"1fr 1fr", sm:"1fr", lg:"1fr 1fr"},
+              gap:{xs:"1rem",lg: "0.6rem"},
               alignItems: "center",
+              padding: {xs:"0 0 2rem", sm:"0 1rem 0"},
+
             }}
           >
             {documentPhoto &&
@@ -93,10 +94,15 @@ const EmployeeDocumentDetailForm = () => {
                       alt="Document"
                       width={240}
                       height={140}
+                      style={{objectFit:"contain", width:"100%"}}
                     />
                   </Box>
                   <Box
-                    sx={{ display: "flex", justifyContent: "center", gap: "1rem" }}
+                    sx={{
+                      display: "flex",
+                      justifyContent: "center",
+                      gap: "1rem",
+                    }}
                   >
                     <Button
                       sx={{ width: "fit-content" }}
@@ -119,7 +125,7 @@ const EmployeeDocumentDetailForm = () => {
                   </Box>
                 </Stack>
               ))}
-          </div>
+          </Box>
         </Grid>
         <Grid item xs={12} sm={6}>
           {documentType &&
