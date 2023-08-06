@@ -15,7 +15,6 @@ import {
 } from "../../../../hooks/employee/useDocument";
 import { useParams } from "react-router-dom";
 import { DOC_URL } from "../../../../../auth/axiosInterceptor";
-// import { documentType } from "./documentType";
 import { documentType } from "./documentType";
 import { useAddDocumentForm } from "../../../../hooks/employee/AddDocument/useAddDocumentForm";
 import { EditDocumentModal } from "./EditDocumentModal";
@@ -71,59 +70,60 @@ const EmployeeDocumentDetailForm = () => {
           <Box
             sx={{
               display: "grid",
-              gridTemplateColumns: {xs:"1fr 1fr", sm:"1fr", lg:"1fr 1fr"},
-              gap:{xs:"1rem",lg: "0.6rem"},
-              alignItems: "center",
-              padding: {xs:"0 0 2rem", sm:"0 1rem 0"},
-
+              gridTemplateColumns: "1fr",
+              gap: "1rem",
+              // alignItems: "center",
             }}
           >
             {documentPhoto &&
               documentPhoto.map((document) => (
-                <Stack
-                  key={document?.id}
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "1rem",
-                  }}
-                >
-                  <Box>
+                <Box key={document?.id}>
+                  <div
+                    style={{
+                      position: "relative",
+                      width: "510px",
+                      height: "300px",
+                    }}
+                  >
                     <img
                       src={`${url}${document?.path}`}
                       alt="Document"
-                      width={240}
-                      height={140}
-                      style={{objectFit:"contain", width:"100%"}}
+                      width="510px"
+                      height="300px"
                     />
-                  </Box>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: "center",
-                      gap: "1rem",
-                    }}
-                  >
-                    <Button
-                      sx={{ width: "fit-content" }}
-                      type="button"
-                      variant="contained"
-                      color="primary"
-                      onClick={() => handleEditFormSubmit(document)}
-                    >
-                      Update
-                    </Button>
-                    <Button
-                      sx={{ width: "fit-content" }}
-                      type="button"
-                      variant="contained"
-                      color="error"
-                      onClick={() => handleDelete(document)}
-                    >
-                      Delete
-                    </Button>
-                  </Box>
-                </Stack>
+               
+                      <Box
+                       style={{
+                        position: "absolute",
+                        bottom: "10px", 
+                        right: "10px", 
+                        padding: "8px 16px",
+                        backgroundColor: "rgba(255, 255, 255, 0.8)",
+                        borderRadius: "4px",
+                      }}
+                      >
+                        <Button
+                          sx={{ width: "fit-content" }}
+                          type="button"
+                          variant="contained"
+                          color="primary"
+                          onClick={() => handleEditFormSubmit(document)}
+                        >
+                          Update
+                        </Button>
+                        <Button
+                          sx={{ width: "fit-content" }}
+                          type="button"
+                          variant="contained"
+                          color="error"
+                          onClick={() => handleDelete(document)}
+                        >
+                          Delete
+                        </Button>
+                      </Box>
+        
+                  </div>
+                </Box>
               ))}
           </Box>
         </Grid>

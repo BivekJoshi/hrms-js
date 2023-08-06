@@ -2,7 +2,7 @@ import Axios from "axios";
 import { toast } from "react-toastify";
 import { getUser } from "../app/utils/cookieHelper";
 
-export const baseURL = 'http://103.94.159.144:8083/hrms/api/';
+export const baseURL = 'https://103.94.159.144:8083/hrms/api/';
 export const DOC_URL = 'https://103.94.159.144/';
 export const axiosInstance = Axios.create({
    baseURL: baseURL,  

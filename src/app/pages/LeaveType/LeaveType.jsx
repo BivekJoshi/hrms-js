@@ -8,6 +8,7 @@ import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import { useDeleteLeaveType, useGetLeaveType } from '../../hooks/leaveType/useLeaveType';
 import { AddLeaveTypeModal, EditLeaveTypeModal } from './LeaveTypeModal/LeaveTypeModal';
 import DeleteConfirmationModal from '../../components/Modal/DeleteConfirmationModal';
+import tableIcons from '../../../theme/overrides/TableIcon';
 
 
 const LeaveType = () => {
@@ -69,7 +70,7 @@ const LeaveType = () => {
 			sortable: false,
 		},
 		{
-			title: 'Total Leave Days',
+			title: 'Leave Days',
 			field: 'leaveTotal',
 			emptyValue: '-',
 			// width: 15,
@@ -114,6 +115,7 @@ const LeaveType = () => {
 			</Box>
 			<br></br>
 			<MaterialTable
+                icons={tableIcons}
 				columns={columns}
 				data={leaveTypeData}
 				title=''
