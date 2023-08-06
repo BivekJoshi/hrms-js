@@ -45,14 +45,14 @@ const DocumentInfo = () => {
           <TabPanel value="1">Loading...</TabPanel>
         ) : (
           Object.keys(groupedDocuments).map((documentType) => (
-            <TabPanel key={documentType} value={documentType} sx={{display:"grid", gridTemplateColumns:"repeat(2, 1fr)", gap:"1rem"}}>
+            <TabPanel key={documentType} value={documentType}>
               {groupedDocuments[documentType].map((document) => (
                 <img
                   key={document.id}
                   src={`${url}${document?.path}`}
                   alt="Document"
-                  width="100%"
-                  // height="340"
+                  width="540"
+                  height="340"
                 />
               ))}
             </TabPanel>
