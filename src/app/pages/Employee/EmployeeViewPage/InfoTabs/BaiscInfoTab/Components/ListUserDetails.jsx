@@ -1,9 +1,10 @@
 import { Box, Button, List, Modal, Stack, Typography } from "@mui/material";
 import React, { useState } from "react";
+import { useParams } from 'react-router';
 
 import InfoItem from "./InfoItem";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const style = {
   position: "absolute",
@@ -18,26 +19,28 @@ const style = {
 };
 
 export default function ListUserDetails({ cardTitle, data, mode }) {
+  const { id } = useParams();
   const navigate = useNavigate();
-  const [open, setOpen] = useState(false);
+  // const [open, setOpen] = useState(false);
 
-  const openModal = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
+  // const openModal = () => setOpen(true);
+  const handleOnClick = () => {
+    navigate(`/admin/employee/edit/${id}`);
+  };
   return (
     <>
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <Typography variant="h6" sx={{ fontWeight: 600 }}>
           {cardTitle}
         </Typography>
-        <Stack sx={{display: "flex", alignItems: "center" }}>
+        <Stack sx={{ display: "flex", alignItems: "center" }}>
           <BorderColorIcon
-            onClick={openModal}
+            onClick={handleOnClick}
             fontSize="large"
             sx={{ color: "rgb(28, 126, 214)", paddingRight: "1rem" }}
           />
         </Stack>
-
+        {/* 
         <Modal open={open} onClose={handleClose}>
           <Box sx={style}>
             <Typography variant="h6" component="h2">
@@ -45,10 +48,14 @@ export default function ListUserDetails({ cardTitle, data, mode }) {
             </Typography>
             <Typography sx={{ mt: 2 }}>Here is the edited Details</Typography>
           </Box>
-        </Modal>
-
+        </Modal> */}
       </Box>
-      <List sx={{ bgcolor: mode=== "light"? "#ededed" :"#3f413f", borderRadius: "1rem" }}>
+      <List
+        sx={{
+          bgcolor: mode === "light" ? "#ededed" : "#3f413f",
+          borderRadius: "1rem",
+        }}
+      >
         {Object.keys(data).map((item, index) => (
           <InfoItem key={index} field={item} value={data[item]} />
         ))}
