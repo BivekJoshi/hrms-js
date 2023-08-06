@@ -9,6 +9,9 @@ import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { axiosInstance } from "../../../auth/axiosInterceptor";
 
+{
+  /*________________________ADD DOCUMENT MULTIPLE FILE_____________________________________*/
+}
 export const useAddDocument = ({ onSuccess }) => {
   const { id } = useParams();
 
@@ -29,7 +32,7 @@ export const useAddDocument = ({ onSuccess }) => {
     );
     return data;
   };
-
+  const queryClient = useQueryClient();
   return useMutation(
     ["addDocument"],
     (formData) => {
@@ -39,6 +42,7 @@ export const useAddDocument = ({ onSuccess }) => {
       onSuccess: (data, variables, context) => {
         toast.success("Document added successfully");
         onSuccess && onSuccess(data, variables, context);
+        queryClient.invalidateQueries("getDocumentById");
       },
       onError: (err, _variables, _context) => {
         toast.error(`error: ${err.message}`);
@@ -47,6 +51,10 @@ export const useAddDocument = ({ onSuccess }) => {
   );
 };
 
+
+{
+  /*________________________ADD A SINGLE PROFILE PHOTO THAT IS PP PHOTO_____________________________________*/
+}
 export const useAddProfile = ({ onSuccess }) => {
   const { id } = useParams();
 
@@ -77,7 +85,7 @@ export const useAddProfile = ({ onSuccess }) => {
       onSuccess: (data, variables, context) => {
         toast.success("Document added successfully");
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries("getProfile");
+        queryClient.invalidateQueries("getDocumentById");
       },
       onError: (err, _variables, _context) => {
         toast.error(`error: ${err.message}`);
