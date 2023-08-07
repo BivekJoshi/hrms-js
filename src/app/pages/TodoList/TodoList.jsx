@@ -12,6 +12,7 @@ import { AddTodoListModal, EditTodoListModal } from "./TodoModal/TodoModal";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import tableIcons from "../../../theme/overrides/TableIcon";
+import { ButtonComponent } from "../../components/Button/ButtonComponent";
 
 const TodoList = () => {
   const { data: todoListData, isLoading } = useGetTodoList();
@@ -47,7 +48,7 @@ const TodoList = () => {
     {
       title: "Message",
       field: "message",
-      width: "300px"
+      width: "300px",
     },
     {
       title: "Due",
@@ -119,13 +120,10 @@ const TodoList = () => {
   return (
     <>
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-        <Button
-          variant="contained"
-          sx={{ mt: 3, ml: 1 }}
-          onClick={handleAddOpenModal}
-        >
-          + Add Todo
-        </Button>
+        <ButtonComponent
+          OnClick={handleAddOpenModal}
+          buttonName={"+ Add Todo"}
+        />
       </Box>
       <br />
       <MaterialTable
@@ -140,16 +138,16 @@ const TodoList = () => {
           pageSize: 10,
           emptyRowsWhenPaging: false,
           headerStyle: {
-            backgroundColor: '#01579b',
-            color: '#FFF',
+            backgroundColor: "#01579b",
+            color: "#FFF",
             fontSize: "1rem",
-            padding: 'dense',
+            padding: "dense",
             height: 50,
-            textAlign:'center',
-            border:'2px solid #fff',
-            minHeight:'10px',
-            textTransform:'capitilize'
-        },
+            textAlign: "center",
+            border: "2px solid #fff",
+            minHeight: "10px",
+            textTransform: "capitilize",
+          },
           rowStyle: {
             fontSize: ".8rem",
           },

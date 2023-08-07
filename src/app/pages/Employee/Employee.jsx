@@ -12,6 +12,7 @@ import useAddEmployeeForm from "../../hooks/employee/AddEmployee/useAddEmployeeF
 import EmployeeGrid from "./EmployeeView/EmployeeGrid";
 import { useNavigate } from "react-router-dom";
 import { ButtonComponent } from "../../components/Button/ButtonComponent";
+import "./Style/Style.css";
 
 const style = {
   position: "absolute",
@@ -68,8 +69,12 @@ const Employee = () => {
               <Tab label="Grid View" value="1" />
               <Tab label="Table View" value="2" />
             </TabList>
-            <ButtonGroup variant="contained" sx={{ gap: "12px", textDecoration:"none" }}>
+            <ButtonGroup
+              variant="contained"
+              sx={{ gap: "12px", textDecoration: "none", boxShadow:"0" }}
+            >
               <ButtonComponent
+                NameClass="buttonGroup"
                 OnClick={() => {
                   navigate("deactivated");
                 }}
