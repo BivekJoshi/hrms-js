@@ -4,10 +4,17 @@ import MaterialTable from "material-table";
 import { Box, Button, Stack } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
-import { useDeleteDepartment, useGetDepartment } from "../../hooks/department/useDepartment";
-import { AddDepartmentModal, EditDepartmentModal } from "./DepartmentModal/DepartmentModal";
+import {
+  useDeleteDepartment,
+  useGetDepartment,
+} from "../../hooks/department/useDepartment";
+import {
+  AddDepartmentModal,
+  EditDepartmentModal,
+} from "./DepartmentModal/DepartmentModal";
 import DeleteConfirmationModal from "../../components/Modal/DeleteConfirmationModal";
-import tableIcons from "../../../theme/overrides/TableIcon"
+import tableIcons from "../../../theme/overrides/TableIcon";
+import { ButtonComponent } from "../../components/Button/ButtonComponent";
 
 const Department = () => {
   const { data: departmentData, isLoading } = useGetDepartment();
@@ -44,7 +51,7 @@ const Department = () => {
   const columns = [
     {
       title: "SN",
-      render: (rowData) =>rowData.tableData.id + 1,
+      render: (rowData) => rowData.tableData.id + 1,
       width: "3%",
       sortable: false,
     },
@@ -87,23 +94,19 @@ const Department = () => {
   return (
     <>
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-        <Button
-          variant="contained"
-          sx={{ mt: 3, ml: 1 }}
-          onClick={handleAddOpenModal}
-        >
-          +Add Department
-        </Button>
+        <ButtonComponent
+          OnClick={handleAddOpenModal}
+          buttonName={" + Add Department"}
+        />
       </Box>
 
       <br></br>
 
       <MaterialTable
-       icons={tableIcons}
+        icons={tableIcons}
         title="Department Data"
         columns={columns}
         data={departmentData}
-
         isLoading={isLoading}
         options={{
           exportButton: true,
@@ -112,20 +115,19 @@ const Department = () => {
           pageSize: 10,
           emptyRowsWhenPaging: false,
           headerStyle: {
-            backgroundColor: '#01579b',
-            color: '#FFF',
+            backgroundColor: "#01579b",
+            color: "#FFF",
             fontSize: "1rem",
-            padding: 'dense',
+            padding: "dense",
             height: 50,
-            textAlign:'center',
-            border:'2px solid #fff',
-            minHeight:'10px',
-            textTransform:'capitilize'
-        },
+            textAlign: "center",
+            border: "2px solid #fff",
+            minHeight: "10px",
+            textTransform: "capitilize",
+          },
           rowStyle: {
             fontSize: ".8rem",
           },
-
         }}
       />
 

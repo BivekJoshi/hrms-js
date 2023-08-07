@@ -1,22 +1,15 @@
 import React, { useState } from "react";
 import Typography from "@mui/material/Typography";
-import {
-  Box,
-  Button,
-  Card,
-  Container,
-  Grid,
-  Stack,
-  TextField,
-} from "@mui/material";
-import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
+import { Box, Card, Container, Grid, Stack } from "@mui/material";
+import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
 import { useGetProject } from "../../hooks/project/useProject";
-import { AddProjectModal, } from "./ProjectModal/ProjectModal";
+import { AddProjectModal } from "./ProjectModal/ProjectModal";
 import { useNavigate } from "react-router-dom";
 
 import ProjectCard from "../../components/cards/Employee/ProjectCard";
 import { PagePagination } from "../../components/Pagination/PagePagination";
 import { FilterProject } from "../../components/Filter/Filter";
+import { ButtonComponent } from "../../components/Button/ButtonComponent";
 
 const Project = () => {
   const navigate = useNavigate();
@@ -34,11 +27,14 @@ const Project = () => {
   const handleAddOpenModal = () => setOpenAddModal(true);
   const handleCloseAddModal = () => setOpenAddModal(false);
 
-
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(12);
 
-  const projectArray = Array.isArray(projectData) ? projectData : projectData ? Object.values(projectData) : [];
+  const projectArray = Array.isArray(projectData)
+    ? projectData
+    : projectData
+    ? Object.values(projectData)
+    : [];
 
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
@@ -52,7 +48,7 @@ const Project = () => {
       <Box>
         <Typography
           className="project-button"
-          variant="h4"
+          variant="h5"
           sx={{
             display: "flex",
             justifyContent: "space-between",
@@ -60,28 +56,31 @@ const Project = () => {
           }}
         >
           On-Going Projects
-          <Typography className="project-button-inner">
-            <Button variant="contained" onClick={handleAddOpenModal}>
-              +Add Project
-            </Button>
-            <Button
-              variant="contained"
-              sx={{ marginLeft: "4px" }}
-              onClick={() => {
+          <Box display="flex" gap={".5rem"}>
+            <ButtonComponent
+              OnClick={() => {
                 navigate(`get-deactivated-projects`);
               }}
-            >
-              Terminated Project
-            </Button>
-          </Typography>
+              TextColor={"black"}
+              BGColor={"white"}
+              buttonName={"Terminated Project"}
+            />
+            <ButtonComponent
+              OnClick={handleAddOpenModal}
+              buttonName={"+Add Project"}
+            />
+          </Box>
         </Typography>
       </Box>
 
       <Stack sx={{ display: "flex", flexDirection: "row-reverse" }}>
-        <FilterAltOutlinedIcon onClick={handleFilterIconClick} style={{ fontSize: '32px' }} />
+        <FilterAltOutlinedIcon
+          onClick={handleFilterIconClick}
+          style={{ fontSize: "32px" }}
+        />
         {isContainerVisible && (
           <Container maxWidth="100vh">
-            <Card sx={{ padding: 1 }} >
+            <Card sx={{ padding: 1 }}>
               <Grid container spacing={3}>
                 <Grid item xs={12} sm={12} md={4}>
                   <FilterProject data={currentPosts} />
