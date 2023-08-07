@@ -204,7 +204,7 @@ const EmployeeCard = ({
                 <PopOver
                   triggerContent={
                     <Chip
-                      label={`${PositionName} (${PositionLevel})`}
+                      label={`${PositionName || ''} (${PositionLevel ||''})`}
                       style={{ width: 230 }}
                     />
                   }
@@ -241,7 +241,7 @@ const EmployeeCard = ({
                 }
                 popoverContent={
                   <Typography sx={{ p: 1 }}>
-                    Send Email To {EFirstName} {EMiddleName} {ELastName}
+                    Send Email To {EFirstName ||''} {EMiddleName|| ''} {ELastName ||''}
                   </Typography>
                 }
               />

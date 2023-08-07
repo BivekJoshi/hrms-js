@@ -1,6 +1,13 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import { useActiveEmployee, useDeleteEmployee } from './useEmployee';
+import * as Yup from 'yup';
+
+// Validation schema for removing a deactivated employee
+const removeDeactiveEmployeeSchema = Yup.object().shape({
+  effectiveDate: Yup.date().required('Effective date is required'),
+});
+
 
 export const useRemoveDeactiveEmployeeForm = (data) => {
     
@@ -8,10 +15,11 @@ export const useRemoveDeactiveEmployeeForm = (data) => {
     const formik = useFormik({
         initialValues: {
             employeeId: data?.id || "",
-            setActivation: data?.setActivation || "",
+            setActivation: false,
             effectiveDate: data?.effectiveDate || "",
         },
         enableReinitialize: "true",
+        validationSchema: removeDeactiveEmployeeSchema,
         onSubmit: (values) => {
             handleRequest(values);
         },
@@ -31,10 +39,11 @@ export const useAddActiveEmployeeForm = (id) => {
     const formik = useFormik({
         initialValues: {
             employeeId: id || "",
-            setActivation: "",
+            setActivation: true,
             effectiveDate: "",
         },
         enableReinitialize: "true",
+        validationSchema: removeDeactiveEmployeeSchema,
         onSubmit: (values) => {
             handleRequest(values);
         },

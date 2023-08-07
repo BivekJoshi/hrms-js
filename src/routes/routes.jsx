@@ -3,7 +3,6 @@ import { nanoid } from 'nanoid';
 import { Link, useLocation } from 'react-router-dom';
 import { Breadcrumbs, Typography } from '@mui/material';
 import Loadable from '../app/components/Header/Loader/Loadable';
-import CustomBreadcrumb from '../theme/overrides/CustomBreadcrumb';
 
 const ProfileDetail = Loadable(
   lazy(() => import('../app/pages/Auth/Profile/ProfileDetail'))
@@ -238,5 +237,4 @@ export default function BreadCrumbs() {
         ))}
     </>
   );
-  // return <CustomBreadcrumb routes={routes} currentPath={currentPath} />;
 }
