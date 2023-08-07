@@ -8,6 +8,7 @@ import { useGetHoliday } from "../../hooks/holiday/useHoliday";
 import { AddHolidayModal, OpenHoliday } from "./HolidayModal/HolidayModal";
 import CurrentHoliday from "./CurrentHoliday";
 import "./Style/Style.css";
+import { ButtonComponent } from "../../components/Button/ButtonComponent";
 
 const Holiday = () => {
   const { data: holidayData } = useGetHoliday();
@@ -44,13 +45,10 @@ const Holiday = () => {
   return (
     <>
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-        <Button
-          variant="contained"
-          sx={{ mt: 3, ml: 1 }}
+        <ButtonComponent
           onClick={handleAddOpenModal}
-        >
-          +Add Holiday
-        </Button>
+          buttonName={"+Add Holiday"}
+        />
       </Box>
       <br />
       {/* <Grid container spacing={2}> */}
@@ -59,8 +57,8 @@ const Holiday = () => {
         gridTemplateColumns={{ xs: "1fr", lg: "1fr 3fr" }}
         columnGap="1rem"
       >
-        <Box gridRow={{xs:"2/3", lg:"1"}}>
-        <CurrentHoliday />
+        <Box gridRow={{ xs: "2/3", lg: "1" }}>
+          <CurrentHoliday />
         </Box>
 
         <FullCalendar

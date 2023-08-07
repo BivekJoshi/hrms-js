@@ -6,6 +6,7 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import { useGetEvent } from "../../hooks/event/useEvent";
+import { ButtonComponent } from "../../components/Button/ButtonComponent";
 
 const Event = () => {
   const { data: eventData, isLoading } = useGetEvent();
@@ -34,8 +35,6 @@ const Event = () => {
     setOpenModal(true);
   };
 
-
-
   const handleAddOpenModal = () => setOpenAddModal(true);
   const handleCloseAddModal = () => setOpenAddModal(false);
   const handleCloseModal = () => setOpenModal(false);
@@ -43,13 +42,10 @@ const Event = () => {
   return (
     <>
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-        <Button
-          variant="contained"
-          sx={{ mt: 3, ml: 1 }}
-          onClick={handleAddOpenModal}
-        >
-          +Add Event
-        </Button>
+        <ButtonComponent
+          OnClick={handleAddOpenModal}
+          buttonName={"+Add Event"}
+        />
       </Box>
       <br />
       {openAddModal && (

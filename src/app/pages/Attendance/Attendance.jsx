@@ -6,6 +6,7 @@ import { useGetAttendance } from "../../hooks/attendance/useAttendance";
 import "./Attendance.css";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
+import { ButtonComponent } from "../../components/Button/ButtonComponent";
 
 let cMonth;
 
@@ -89,7 +90,6 @@ const Attendance = () => {
   const year = date.getFullYear();
 
   const [cMonth, setCMonth] = useState(date.getMonth() + 1);
-  console.log(date.getFullYear());
   date.setMonth(cMonth - 1);
 
   const monthName = date.toLocaleString("default", { month: "long" });
@@ -315,12 +315,13 @@ const Attendance = () => {
         </TableContainer>
       </div>
       <div className="button" style={{ maxWidth: "1480px" }}>
-        <Button variant="contained" onClick={Previous}>
-          Previous
-        </Button>
-        <Button variant="contained" onClick={Next}>
-          Next
-        </Button>
+        <ButtonComponent
+          OnClick={Previous}
+          buttonName={"Previous"}
+          BGColor="white"
+          TextColor="black"
+        />
+        <ButtonComponent OnClick={Next} buttonName={"Next"} BGColor />
       </div>
     </div>
   );

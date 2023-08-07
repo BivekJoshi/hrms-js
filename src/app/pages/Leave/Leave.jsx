@@ -12,14 +12,13 @@ import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import { AddLeaveModal, EditLeaveModal } from "./LeaveModal/LeaveModal";
 import DeleteConfirmationModal from "../../components/Modal/DeleteConfirmationModal";
 import tableIcons from "../../../theme/overrides/TableIcon";
+import { ButtonComponent } from "../../components/Button/ButtonComponent";
 
 const Leave = ({ isLoading }) => {
   const { data: leaveData, isLoading: loadingleave } = useGetLeave();
   const { data: employeeData, isLoading: loadingemployee } = useGetEmployee();
-  const {
-    data: leaveTypeData,
-    isLoading: loadingleaveType,
-  } = useGetLeaveType();
+  const { data: leaveTypeData, isLoading: loadingleaveType } =
+    useGetLeaveType();
 
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
@@ -154,13 +153,12 @@ const Leave = ({ isLoading }) => {
 
         return (
           <Stack direction="row" spacing={0}>
-            <Button
-              color="primary"
-              onClick={() => handleEditLeave(rowData)}
+            <ButtonComponent
+              Color="primary"
+              OnClick={() => handleEditLeave(rowData)}
               disabled={isApprovedOrRejected}
-            >
-              <ModeEditOutlineIcon />
-            </Button>
+              buttonName={<ModeEditOutlineIcon />}
+            />
             <Button color="primary" onClick={() => handleDeleteLeave(rowData)}>
               <DeleteIcon />
             </Button>
@@ -177,13 +175,11 @@ const Leave = ({ isLoading }) => {
   return (
     <>
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-        <Button
-          variant="contained"
-          sx={{ mt: 3, ml: 1 }}
-          onClick={handleAddOpenModal}
-        >
-          +Add Leave
-        </Button>
+        <ButtonComponent
+          OnClick={handleAddOpenModal}
+          Border="none"
+          buttonName={"+ Add Leave"}
+        />
       </Box>
       <br />
       <br />

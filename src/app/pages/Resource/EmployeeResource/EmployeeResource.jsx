@@ -11,13 +11,17 @@ import { useNavigate } from "react-router-dom";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import DeleteConfirmationModal from "../../../components/Modal/DeleteConfirmationModal";
-import { AddEmployeeResourceModal, EditEmployeeResourceModal } from "./EmployeeResourceModal";
+import {
+  AddEmployeeResourceModal,
+  EditEmployeeResourceModal,
+} from "./EmployeeResourceModal";
 import { useGetOfficeResource } from "../../../hooks/resource/officeResource/useOfficeResource";
+import { ButtonComponent } from "../../../components/Button/ButtonComponent";
 
 const EmployeeResource = () => {
   const navigate = useNavigate();
   const { data: employeeResourceData, isLoading } = useGetEmployeeResource();
-  const { data : officeResourceData } = useGetOfficeResource();
+  const { data: officeResourceData } = useGetOfficeResource();
   const { data: employeeData, isLoading: loadingemployee } = useGetEmployee();
 
   const [openAddModal, setOpenAddModal] = useState(false);
@@ -59,9 +63,11 @@ const EmployeeResource = () => {
   };
   const getResourceName = (rowData) => {
     const resourceId = rowData?.officeResourceId;
-    const resourceName = officeResourceData?.find((resource) => resource?.id === resourceId );
+    const resourceName = officeResourceData?.find(
+      (resource) => resource?.id === resourceId
+    );
     return resourceName?.name;
-  }
+  };
 
   const columns = [
     {
@@ -80,7 +86,7 @@ const EmployeeResource = () => {
     {
       title: "Resource",
       render: (rowData) => {
-        return <p>{getResourceName(rowData)}</p>
+        return <p>{getResourceName(rowData)}</p>;
       },
       width: "20vh",
     },
@@ -112,25 +118,22 @@ const EmployeeResource = () => {
   ];
   return (
     <>
-      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-        <Button
-          variant="contained"
-          sx={{ mt: 3, ml: 1 }}
-          onClick={() => {
+      <Box
+        sx={{ display: "flex", justifyContent: "flex-end", gap:"1rem" ,padding: ".5rem 0" }}
+      >
+        <ButtonComponent
+          OnClick={() => {
             navigate(`/admin/resource/office`);
           }}
-        >
-          Resources
-        </Button>
-        <Button
-          variant="contained"
-          sx={{ mt: 3, ml: 1 }}
-          onClick={handleAddOpenModal}
-        >
-          +Add Employee
-        </Button>
+          buttonName={"Resources"}
+          BGColor="white"
+          TextColor="black"
+        />
+        <ButtonComponent
+          OnClick={handleAddOpenModal}
+          buttonName={"+Provide Resource to Employee"}
+        />
       </Box>
-      <br></br>
 
       <MaterialTable
         icons={tableIcons}
@@ -145,16 +148,16 @@ const EmployeeResource = () => {
           pageSize: 20,
           emptyRowsWhenPaging: false,
           headerStyle: {
-            backgroundColor: '#01579b',
-            color: '#FFF',
+            backgroundColor: "#01579b",
+            color: "#FFF",
             fontSize: "1rem",
-            padding: 'dense',
+            padding: "dense",
             height: 50,
-            textAlign:'center',
-            border:'2px solid #fff',
-            minHeight:'10px',
-            textTransform:'capitilize'
-        },
+            textAlign: "center",
+            border: "2px solid #fff",
+            minHeight: "10px",
+            textTransform: "capitilize",
+          },
           rowStyle: {
             fontSize: ".8rem",
           },
@@ -176,7 +179,7 @@ const EmployeeResource = () => {
       )}
       {openEditModal && (
         <EditEmployeeResourceModal
-        id={editedEmployeeResouce?.id}
+          id={editedEmployeeResouce?.id}
           open={openEditModal}
           handleCloseModal={handleCloseEditModal}
         />
