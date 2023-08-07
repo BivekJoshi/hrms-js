@@ -15,7 +15,6 @@ export const ButtonComponent = ({
     <Button
       className={NameClass ? NameClass : "buttonHover"}
       variant="contained"
-      // style={{ margi?nTop: "10px" }}
       onClick={OnClick ? OnClick : ""}
       sx={{
         background: BGColor ? BGColor : "",

@@ -150,7 +150,7 @@ const Attendance = () => {
 
   return (
     <div className="main">
-      <h1>Attendance</h1>
+      <h2>Attendance</h2>
 
       <div className="Search">
         <Box
@@ -200,9 +200,9 @@ const Attendance = () => {
         </Box>
       </div>
 
-      <h1>
+      <h3>
         {monthName}, {year}
-      </h1>
+      </h3>
 
       <div className="table-wrapper">
         <TableContainer className="cntnr" component={Paper}>

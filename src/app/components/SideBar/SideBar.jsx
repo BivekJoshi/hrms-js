@@ -1,18 +1,12 @@
 import React, { useContext, useState } from "react";
 import { styled } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import Drawer from "@mui/material/Drawer";
-import Divider from "@mui/material/Divider";
-import List from "@mui/material/List";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import Collapse from "@mui/material/Collapse";
+import { Box, Drawer, Divider, List, ListItemButton } from "@mui/material";
+import { ListItemIcon } from "@mui/material";
+import { ListItemText, Collapse, IconButton } from "@mui/material/";
 import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import { Button, Card, Fab, Switch, Typography } from "@mui/material";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import IconButton from "@mui/material/IconButton";
 import { removeUser } from "../../utils/cookieHelper";
 import { ThemeModeContext } from "../../../theme/ThemeModeContext";
 import Header from "../Header/Header";
@@ -31,6 +25,7 @@ import AddchartIcon from "@mui/icons-material/Addchart";
 import EventIcon from "@mui/icons-material/Event";
 import HolidayVillageIcon from "@mui/icons-material/HolidayVillage";
 import LaptopIcon from "@mui/icons-material/Laptop";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const drawerWidth = 250;
 
@@ -293,17 +288,21 @@ export default function Sidebar() {
                   />
                   {menu.subMenus.length > 0 ? (
                     subMenuOpen[index] ? (
-                      <ExpandLess  sx={
-                        mode === "light"
-                          ? { color: "black" }
-                          : { color: "white" }
-                      }/>
-                    ) : (
-                      <ExpandMore  sx={
+                      <ExpandLess
+                        sx={
                           mode === "light"
                             ? { color: "black" }
                             : { color: "white" }
-                        }/>
+                        }
+                      />
+                    ) : (
+                      <ExpandMore
+                        sx={
+                          mode === "light"
+                            ? { color: "black" }
+                            : { color: "white" }
+                        }
+                      />
                     )
                   ) : null}
                 </ListItemButton>
@@ -368,7 +367,10 @@ export default function Sidebar() {
           >
             Logout
           </Button>
-          <Typography variant="body2" sx={{ marginRight: "8px" , marginTop:"1rem"}}>
+          <Typography
+            variant="body2"
+            sx={{ marginRight: "8px", marginTop: "1rem" }}
+          >
             {mode === "light" ? "Light" : "Dark"} Mode
           </Typography>
           <Switch checked={mode === "dark"} onChange={toggleMode} />
@@ -377,6 +379,8 @@ export default function Sidebar() {
 
       <Main open={open}>
         <DrawerHeader />
+        <br />
+
         <Card
           variant="outlined"
           sx={{
@@ -388,21 +392,29 @@ export default function Sidebar() {
             },
           }}
         >
-          <BreadCrumbs />
+          <Box
+            display="flex"
+            justifyContent="flex-start"
+            padding=" 0 0 1rem"
+            gap="1rem"
+            alignItems="center"
+          >
+            {location.pathname !== "/admin/dashboard" && (
+              <Fab
+                color="primary"
+                sx={{ height: "auto" , padding:".3rem 0"}}
+                aria-label="add"
+                variant="extended"
+                onClick={() => {
+                  navigate(-1);
+                }}
+              >
+                <ArrowBackIcon />
+              </Fab>
+            )}
+            <BreadCrumbs />
+          </Box>
           <Outlet />
-          <br />
-          {location.pathname !== "/admin/dashboard" && (
-            <Fab
-              color="primary"
-              aria-label="add"
-              variant="extended"
-              onClick={() => {
-                navigate(-1);
-              }}
-            >
-              Go Back
-            </Fab>
-          )}
         </Card>
       </Main>
     </Box>
