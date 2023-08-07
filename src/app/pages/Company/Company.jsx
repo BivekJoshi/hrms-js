@@ -1,16 +1,17 @@
-import * as React from 'react';
-import { Box, Button } from '@mui/material';
-import Tab from '@mui/material/Tab';
-import TabContext from '@mui/lab/TabContext';
-import TabList from '@mui/lab/TabList';
-import TabPanel from '@mui/lab/TabPanel';
-import { AddCompanyModal } from './CompanyModal/CompanyModal';
-import { useState } from 'react';
-import CompanyTable from './CompanyModal/CompanyTable';
-import CompanyGrid from './CompanyModal/CompanyGrid';
+import * as React from "react";
+import { Box, Button } from "@mui/material";
+import Tab from "@mui/material/Tab";
+import TabContext from "@mui/lab/TabContext";
+import TabList from "@mui/lab/TabList";
+import TabPanel from "@mui/lab/TabPanel";
+import { AddCompanyModal } from "./CompanyModal/CompanyModal";
+import { useState } from "react";
+import CompanyTable from "./CompanyModal/CompanyTable";
+import CompanyGrid from "./CompanyModal/CompanyGrid";
+import { ButtonComponent } from "../../components/Button/ButtonComponent";
 
 const Company = () => {
-  const [value, setValue] = React.useState('1');
+  const [value, setValue] = React.useState("1");
 
   const [openAddModal, setOpenAddModal] = useState(false);
   const handleAddOpenModal = () => setOpenAddModal(true);
@@ -23,33 +24,30 @@ const Company = () => {
   return (
     <>
       <TabContext value={value}>
-        <Box sx={{ width: '100%' }}>
+        <Box sx={{ width: "100%" }}>
           <Box
             sx={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
               borderTop: 1,
-              borderColor: 'divider',
+              borderColor: "divider",
             }}
           >
-            <TabList onChange={handleChange} aria-label='lab API tabs example'>
-              <Tab label='Table View' value='1' />
-              <Tab label='Grid View' value='2' />
+            <TabList onChange={handleChange} aria-label="lab API tabs example">
+              <Tab label="Table View" value="1" />
+              <Tab label="Grid View" value="2" />
             </TabList>
-            <Button
-              variant='contained'
-              sx={{ mt: 3, ml: 1 }}
-              onClick={handleAddOpenModal}
-            >
-              +Add Company
-            </Button>
+            <ButtonComponent
+              OnClick={handleAddOpenModal}
+              buttonName={"+Add Company"}
+            />
           </Box>
-          <TabPanel value='1' sx={{ padding: '0' }}>
+          <TabPanel value="1" sx={{ padding: "0" }}>
             <br />
             <CompanyTable />
           </TabPanel>
-          <TabPanel value='2'>
+          <TabPanel value="2">
             <br />
             <CompanyGrid />
           </TabPanel>

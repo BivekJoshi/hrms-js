@@ -1,0 +1,14 @@
+/* .css-aidwu-MuiButtonBase-root-MuiButton-root:hover {
+  background-color: #01457a;
+} */
+
+.css-15ab8u6-MuiButtonGroup-root
+  .MuiButtonGroup-grouped:not(:last-of-type):hover {
+  background: #01457a;
+  color: white;
+}
+
+.buttonHover:hover {
+  background: #01457a;
+  color: white;
+}
