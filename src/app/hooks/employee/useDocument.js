@@ -151,7 +151,6 @@ export const useDeleteDocument = ({ onSuccess }) => {
 export const useEditDocument = ({ onSuccess }) => {
 
   const editDocument = async (image) => {
-   console.log(image)
     const { id, data } = image;
     const imgData = new FormData();
     imgData.append("file", data);

@@ -67,8 +67,8 @@ const EmployeeDocumentDetailForm = () => {
     <div>
       <Grid container>
         <Grid item xs={12} sm={6}>
-          <div
-            style={{
+          <Box
+            sx={{
               display: "grid",
               gridTemplateColumns: "1fr",
               gap: "1rem",
@@ -125,7 +125,7 @@ const EmployeeDocumentDetailForm = () => {
                   </div>
                 </Box>
               ))}
-          </div>
+          </Box>
         </Grid>
         <Grid item xs={12} sm={6}>
           {documentType &&

@@ -66,7 +66,7 @@ const DeactivatedEmployee = () => {
         </Stack>
       ),
       sorting: false,
-      width: 120,
+      width: 220,
     },
   ];
 
