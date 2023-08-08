@@ -42,7 +42,7 @@ export const useAddDocument = ({ onSuccess }) => {
       onSuccess: (data, variables, context) => {
         toast.success("Document added successfully");
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries("getDocumentById");
+        queryClient.invalidateQueries("getDocumentType");
       },
       onError: (err, _variables, _context) => {
         toast.error(`error: ${err.message}`);

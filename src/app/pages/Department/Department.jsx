@@ -56,31 +56,31 @@ const Department = () => {
       sortable: false,
     },
     {
-      title: "Department Name",
-      field: "departmentName",
-      emptyValue: "-",
-      width: "20vh",
+      title: 'Department Name',
+      field: 'departmentName',
+      emptyValue: '-',
+      width: '20vh',
     },
     {
-      title: "Department Type",
-      field: "departmentType",
-      emptyValue: "-",
-      width: "20vh",
+      title: 'Department Type',
+      field: 'departmentType',
+      emptyValue: '-',
+      width: '20vh',
     },
     {
-      title: "Description",
-      field: "departmentDescription",
-      emptyValue: "-",
+      title: 'Description',
+      field: 'departmentDescription',
+      emptyValue: '-',
     },
     {
-      title: "Actions",
+      title: 'Actions',
       render: (rowData) => (
-        <Stack direction="row" spacing={0}>
-          <Button color="primary" onClick={() => handleEditDepartment(rowData)}>
+        <Stack direction='row' spacing={0}>
+          <Button color='primary' onClick={() => handleEditDepartment(rowData)}>
             <ModeEditOutlineIcon />
           </Button>
           <Button
-            color="primary"
+            color='primary'
             onClick={() => handleDeleteDepartment(rowData)}
           >
             <DeleteIcon />
@@ -110,9 +110,10 @@ const Department = () => {
         isLoading={isLoading}
         options={{
           exportButton: true,
-          padding: "dense",
+          padding: 'dense',
           margin: 50,
           pageSize: 10,
+          tableLayout: 'auto',
           emptyRowsWhenPaging: false,
           headerStyle: {
             backgroundColor: "#01579b",
@@ -126,7 +127,7 @@ const Department = () => {
             textTransform: "capitilize",
           },
           rowStyle: {
-            fontSize: ".8rem",
+            fontSize: '.8rem',
           },
         }}
       />
@@ -149,7 +150,7 @@ const Department = () => {
           open={openDeleteModal}
           handleCloseModal={handleCloseDeleteModal}
           handleConfirmDelete={handleConfirmDelete}
-          message={"Department"}
+          message={'Department'}
         />
       )}
     </>

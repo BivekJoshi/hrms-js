@@ -15,6 +15,9 @@ import { BiSolidCalendarEvent } from "react-icons/bi";
 import { AiFillProject } from "react-icons/ai";
 import PendingLeaveTable from "./DashboardTable/PendingLeaveTable";
 import { useGetPendingLeave } from "../../hooks/leave/useLeave";
+import { useGetEmployee } from "../../hooks/employee/useEmployee";
+import { useGetEvent } from "../../hooks/event/useEvent";
+import { useGetHoliday } from "../../hooks/holiday/useHoliday";
 
 const Dashboard = () => {
   const { data: dashboardData } = useGetDashboard();
@@ -24,6 +27,12 @@ const Dashboard = () => {
     data: pendingLeaveData,
     isLoading: loadingPendingLeave,
   } = useGetPendingLeave();
+  const { data: employeeData } = useGetEmployee();
+  const { data: eventData } = useGetEvent();
+  const { data: holidayData } = useGetHoliday();
+
+
+
   return (
     <Box sx={{ display: "grid", gridTemplateRows: "1fr", rowGap: "3rem" }}>
       <Grid
@@ -36,26 +45,31 @@ const Dashboard = () => {
           title="Users"
           icon={<FaUsers fontSize="3rem" />}
           value={42}
+          count={"4"}
         />
         <DashboardCard
           title="Employees"
           icon={<FaPeopleGroup fontSize="3rem" />}
           value={28}
+          count={employeeData?.length ? employeeData.length :"0"}
         />
         <DashboardCard
           title="Events"
-          icon={<BiSolidCalendarEvent fontSize="3rem" />}
+          icon={<BiSolidCalendarEvent fontSize="3rem" />} 
           value={24}
+          count={eventData?.length ? eventData?.length :"0"}
         />
         <DashboardCard
           title="Holiday"
           icon={<FaGifts fontSize="3rem" />}
           value={32}
+          count={holidayData?.length ? holidayData?.length :"0"}
         />
         <DashboardCard
           title="Project"
           icon={<AiFillProject fontSize="3rem" />}
           value={6}
+          count={projectDataCount?.total ? projectDataCount?.total: "0"}
         />
       </Grid>
 

@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
-import birthdayReducer from './Redux/Slice/birthdaySlice';
-import eventReducer from './Redux/Slice/eventSlice';
-import holidayReducer from './Redux/Slice/holidaySlice';
+import birthdayReducer from '../Slice/birthdaySlice';
+import eventReducer from '../Slice/eventSlice';
+import holidayReducer from '../Slice/holidaySlice';
 
 const store = configureStore({
   reducer: {
