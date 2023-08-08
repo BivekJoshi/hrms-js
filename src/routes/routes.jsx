@@ -42,6 +42,7 @@ const DeactivatedProject = Loadable(
   )
 );
 const TodoList = Loadable(lazy(() => import('../app/pages/TodoList/TodoList')));
+
 const Event = Loadable(lazy(() => import('../app/pages/Event/Event')));
 const Holiday = Loadable(lazy(() => import('../app/pages/Holiday/Holiday')));
 const Dashboard = Loadable(
@@ -65,6 +66,7 @@ const EditEmployee = Loadable(
 const ResetPassword = Loadable(
   lazy(() => import('../app/pages/Auth/ResetPassword/ResetPassword'))
 );
+const UserController = Loadable(lazy(() => import('../app/pages/Auth/UserControl/UserController')));
 
 const routes = [
   {
@@ -198,6 +200,12 @@ const routes = [
     name: 'Employee Resource',
     id: nanoid(),
     component: <EmployeeResource />,
+  },  
+  {
+    path: 'users',
+    name: 'Users',
+    id: nanoid(),
+    component: <UserController />,
   },
 ];
 
@@ -223,7 +231,7 @@ export default function BreadCrumbs() {
   const currentRoute = routes.find(
     (route) => '/admin/' + route.path === currentPath
   );
-  console.log(currentRoute);
+
   return (
     <>
       {currentRoute &&

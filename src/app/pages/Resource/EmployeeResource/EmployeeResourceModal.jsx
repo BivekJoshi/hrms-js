@@ -16,7 +16,7 @@ export const AddEmployeeResourceModal=({open,handleCloseModal})=>{
 }
 export const EditEmployeeResourceModal = ({ open, handleCloseModal, id }) => {
     const { data } = useGetEmployeeResourceById(id);
-    // console.log(data,"data hai ma");
+  
     return (
       <div>
         <FormModal

@@ -31,6 +31,7 @@ import AddchartIcon from "@mui/icons-material/Addchart";
 import EventIcon from "@mui/icons-material/Event";
 import HolidayVillageIcon from "@mui/icons-material/HolidayVillage";
 import LaptopIcon from "@mui/icons-material/Laptop";
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
 
 const drawerWidth = 250;
 
@@ -229,6 +230,16 @@ export default function Sidebar() {
         />
       ),
       path: "todolist",
+      subMenus: [],
+    },
+    {
+      name: "Users",
+      icon: (
+        <PersonAddIcon
+          sx={mode === "light" ? { color: "black" } : { color: "white" }}
+        />
+      ),
+      path: "users",
       subMenus: [],
     },
   ];

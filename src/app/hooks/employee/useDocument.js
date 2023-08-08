@@ -30,6 +30,7 @@ export const useAddDocument = ({ onSuccess }) => {
     return data;
   };
 
+  const queryClient = useQueryClient();
   return useMutation(
     ["addDocument"],
     (formData) => {
@@ -39,6 +40,7 @@ export const useAddDocument = ({ onSuccess }) => {
       onSuccess: (data, variables, context) => {
         toast.success("Document added successfully");
         onSuccess && onSuccess(data, variables, context);
+        queryClient.invalidateQueries("getDocumentType");
       },
       onError: (err, _variables, _context) => {
         toast.error(`error: ${err.message}`);
@@ -143,7 +145,7 @@ export const useDeleteDocument = ({ onSuccess }) => {
 export const useEditDocument = ({ onSuccess }) => {
 
   const editDocument = async (image) => {
-   console.log(image)
+  
     const { id, data } = image;
     const imgData = new FormData();
     imgData.append("file", data);
