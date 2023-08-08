@@ -108,11 +108,17 @@ const Login = () => {
                   ),
                 }}
               />
-              <div className="d-flex justify-content-end">
+              <Grid
+                container
+                direction="row"
+                justifyContent="flex-end"
+                alignItems="center"
+              >
                 <Link className="forgot-password" to="forgot-password">
                   Forget password?
                 </Link>
-              </div>
+              </Grid>
+
               <LoadingButton
                 fullWidth
                 onClick={() => formik.submitForm()}
