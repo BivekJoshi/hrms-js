@@ -132,10 +132,10 @@ const LeaveType = () => {
         icons={tableIcons}
         columns={columns}
         data={leaveTypeData}
-        title=""
+        title='Leave Type'
         isLoading={isLoading}
         options={{
-          padding: "dense",
+          padding: 'dense',
           margin: 50,
           pageSize: 10,
           emptyRowsWhenPaging: false,
@@ -148,7 +148,7 @@ const LeaveType = () => {
             textAlign: "center",
             border: "2px solid #fff",
             minHeight: "10px",
-            textTransform: "capitilize",
+            textTransform: "capitalize",
           },
           rowStyle: {
             fontSize: ".8rem",
