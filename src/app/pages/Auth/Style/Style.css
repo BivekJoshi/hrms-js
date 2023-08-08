@@ -14,3 +14,15 @@
 .style ul li .desc{
     width: 80%;
 }
+
+.css-10ojngq-MuiListItem-root{
+    /* text-align: center; */
+    display: block;
+}
+
+.leftGrid{
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    text-align-last: end;
+}
