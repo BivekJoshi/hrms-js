@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import MaterialTable from "@material-table/core";
+import MaterialTable from "material-table";
 import { Box, Button, Chip, Stack } from "@mui/material";
 import Skeleton from "@mui/material/Skeleton";
 
@@ -11,6 +11,8 @@ import { AddTodoListModal, EditTodoListModal } from "./TodoModal/TodoModal";
 
 import DeleteIcon from "@mui/icons-material/Delete";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
+import tableIcons from "../../../theme/overrides/TableIcon";
+import { ButtonComponent } from "../../components/Button/ButtonComponent";
 
 const TodoList = () => {
   const { data: todoListData, isLoading } = useGetTodoList();
@@ -38,30 +40,29 @@ const TodoList = () => {
 
   const columns = [
     {
-      title: 'SN',
-      render: (rowData) => rowData.tableData.index + 1,
+      title: "SN",
+      render: (rowData) => rowData.tableData.id + 1,
       width: "50px",
       sortable: false,
     },
     {
       title: "Message",
       field: "message",
-      width: "100px"
+      width: "300px",
     },
     {
       title: "Due",
       field: "dueDate",
-      width: "80px",
+      width: "180px",
       // type: 'numeric',
-      
     },
     {
-      title: 'Priority',
-      field: 'priority',
-      emptyValue: '-',
+      title: "Priority",
+      field: "priority",
+      emptyValue: "-",
       width: "180px",
       cellStyle: {
-        whiteSpace: 'nowrap',
+        whiteSpace: "nowrap",
       },
       render: (rowData) => {
         const priority = rowData.priority;
@@ -76,10 +77,16 @@ const TodoList = () => {
         }
 
         return (
-          <Chip label={priority} style={{ backgroundColor: chipColor, color: "white", width: ' 9rem' }} />
+          <Chip
+            label={priority}
+            style={{
+              backgroundColor: chipColor,
+              color: "white",
+              width: " 9rem",
+            }}
+          />
         );
       },
-
     },
     {
       title: "Actions",
@@ -97,7 +104,7 @@ const TodoList = () => {
         </Stack>
       ),
       sorting: false,
-      width: "80px",
+      width: "3",
     },
   ];
 
@@ -113,16 +120,14 @@ const TodoList = () => {
   return (
     <>
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-        <Button
-          variant="contained"
-          sx={{ mt: 3, ml: 1 }}
-          onClick={handleAddOpenModal}
-        >
-          + Add Todo
-        </Button>
+        <ButtonComponent
+          OnClick={handleAddOpenModal}
+          buttonName={"+ Add Todo"}
+        />
       </Box>
       <br />
       <MaterialTable
+        icons={tableIcons}
         columns={columns}
         data={todoListData}
         title="Todo List"
@@ -133,16 +138,16 @@ const TodoList = () => {
           pageSize: 10,
           emptyRowsWhenPaging: false,
           headerStyle: {
-            backgroundColor: '#01579b',
-            color: '#FFF',
+            backgroundColor: "#01579b",
+            color: "#FFF",
             fontSize: "1rem",
-            padding: 'dense',
+            padding: "dense",
             height: 50,
-            textAlign:'center',
-            border:'2px solid #fff',
-            minHeight:'10px',
-            textTransform:'capitilize'
-        },
+            textAlign: "center",
+            border: "2px solid #fff",
+            minHeight: "10px",
+            textTransform: "capitilize",
+          },
           rowStyle: {
             fontSize: ".8rem",
           },

@@ -1,22 +1,24 @@
-import * as React from 'react';
-import { useState } from 'react';
+import * as React from "react";
+import { useState } from "react";
 import MaterialTable from "material-table";
-import { Box, Button, Chip, Stack } from '@mui/material';
-import { useGetLeaveType } from '../../hooks/leaveType/useLeaveType';
+import { Box, Button, Chip, Stack } from "@mui/material";
+import { useGetLeaveType } from "../../hooks/leaveType/useLeaveType";
 
-import { useDeleteLeave, useGetLeave } from '../../hooks/leave/useLeave';
-import { useGetEmployee } from '../../hooks/employee/useEmployee';
+import { useDeleteLeave, useGetLeave } from "../../hooks/leave/useLeave";
+import { useGetEmployee } from "../../hooks/employee/useEmployee";
 
-
-import DeleteIcon from '@mui/icons-material/Delete';
-import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
-import { AddLeaveModal, EditLeaveModal } from './LeaveModal/LeaveModal';
-import DeleteConfirmationModal from '../../components/Modal/DeleteConfirmationModal';
+import DeleteIcon from "@mui/icons-material/Delete";
+import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
+import { AddLeaveModal, EditLeaveModal } from "./LeaveModal/LeaveModal";
+import DeleteConfirmationModal from "../../components/Modal/DeleteConfirmationModal";
+import tableIcons from "../../../theme/overrides/TableIcon";
+import { ButtonComponent } from "../../components/Button/ButtonComponent";
 
 const Leave = ({ isLoading }) => {
   const { data: leaveData, isLoading: loadingleave } = useGetLeave();
   const { data: employeeData, isLoading: loadingemployee } = useGetEmployee();
-  const { data: leaveTypeData, isLoading: loadingleaveType } = useGetLeaveType();
+  const { data: leaveTypeData, isLoading: loadingleaveType } =
+    useGetLeaveType();
 
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
@@ -50,7 +52,9 @@ const Leave = ({ isLoading }) => {
   const getEmployeeName = (rowData) => {
     const employeeId = rowData.employeeId;
     const employee = employeeData?.find((emp) => emp.id === employeeId);
-    const name = `${employee?.firstName} ${employee?.middleName || ''} ${employee?.lastName}`;
+    const name = `${employee?.firstName} ${employee?.middleName || ""} ${
+      employee?.lastName
+    }`;
     return name;
   };
 
@@ -65,89 +69,96 @@ const Leave = ({ isLoading }) => {
   };
   const columns = [
     {
-      title: 'SN',
+      title: "SN",
       render: (rowData) => rowData.tableData.id + 1,
       width: 80,
       sortable: false,
     },
     {
-      title: 'Employee Name',
+      title: "Employee Name",
       render: (rowData) => {
-        return <p>{getEmployeeName(rowData)} </p>
+        return <p>{getEmployeeName(rowData)} </p>;
       },
       width: 120,
     },
     {
-      title: 'Leave Type',
+      title: "Leave Type",
       render: (rowData) => {
         return <p>{getLeaveTypeName(rowData)}</p>;
       },
       width: 150,
     },
     {
-      title: 'From',
-      field: 'fromDate',
-      emptyValue: '-',
+      title: "From",
+      field: "fromDate",
+      emptyValue: "-",
       width: 100,
     },
     {
-      title: 'To',
-      field: 'toDate',
-      emptyValue: '-',
+      title: "To",
+      field: "toDate",
+      emptyValue: "-",
       width: 100,
     },
     {
-      title: 'Status',
-      field: 'leaveStatus',
-      emptyValue: '-',
+      title: "Status",
+      field: "leaveStatus",
+      emptyValue: "-",
       width: 100,
       cellStyle: {
-        whiteSpace: 'nowrap',
+        whiteSpace: "nowrap",
       },
       render: (rowData) => {
         const status = rowData.leaveStatus;
-        let chipColor = "";
+        let chipColor = '';
 
-        if (status === "APPROVED") {
-          chipColor = "green";
-        } else if (status === "REJECTED") {
-          chipColor = "red";
-        } else if (status === "PENDING") {
-          chipColor = "orange";
+        if (status === 'APPROVED') {
+          chipColor = 'green';
+        } else if (status === 'REJECTED') {
+          chipColor = 'red';
+        } else if (status === 'PENDING') {
+          chipColor = 'orange';
         }
 
         return (
-          <Chip label={status} style={{ backgroundColor: chipColor, color: "white", width: ' 9rem' }} />
+          <Chip
+            label={status}
+            style={{
+              backgroundColor: chipColor,
+              color: "white",
+              width: " 9rem",
+            }}
+          />
         );
       },
-
     },
     {
-      title: 'Remark',
-      field: 'leaveRemarks',
-      emptyValue: '-',
+      title: "Remark",
+      field: "leaveRemarks",
+      emptyValue: "-",
       width: 100,
     },
     {
-      title: 'Approved By',
-      field: 'confirmById',
-      emptyValue: '-',
+      title: "Approved By",
+      field: "confirmById",
+      emptyValue: "-",
       width: 40,
     },
     {
-      title: 'Actions',
+      title: "Actions",
       render: (rowData) => {
-        const isApprovedOrRejected = ['APPROVED', 'REJECTED'].includes(rowData.leaveStatus);
-    
+        const isApprovedOrRejected = ["APPROVED", "REJECTED"].includes(
+          rowData.leaveStatus
+        );
+
         return (
           <Stack direction="row" spacing={0}>
-            <Button
-              color="primary"
-              onClick={() => handleEditLeave(rowData)}
+            <ButtonComponent
+              Color="primary"
+              OnClick={() => handleEditLeave(rowData)}
               disabled={isApprovedOrRejected}
-            >
-              <ModeEditOutlineIcon />
-            </Button>
+              buttonName={<ModeEditOutlineIcon />}
+            />
             <Button color="primary" onClick={() => handleDeleteLeave(rowData)}>
               <DeleteIcon />
             </Button>
@@ -157,44 +168,46 @@ const Leave = ({ isLoading }) => {
       sorting: false,
       width: 120,
     },
-    
   ];
 
   if (isLoading || loadingemployee || loadingleaveType) return <>Loading</>;
 
   return (
     <>
-      <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-        <Button variant='contained' sx={{ mt: 3, ml: 1 }} onClick={handleAddOpenModal}>
-          +Add Leave
-        </Button>
+      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+        <ButtonComponent
+          OnClick={handleAddOpenModal}
+          Border="none"
+          buttonName={"+ Add Leave"}
+        />
       </Box>
       <br />
       <br />
 
       <MaterialTable
+        icons={tableIcons}
         columns={columns}
         data={leaveData}
-        title=''
+        title='Leave Data'
         isLoading={loadingleave}
         options={{
-          padding: 'dense',
+          padding: "dense",
           margin: 50,
           pageSize: 10,
           emptyRowsWhenPaging: false,
           headerStyle: {
             backgroundColor: '#01579b',
             color: '#FFF',
-            fontSize: "1rem",
+            fontSize: '1rem',
             padding: 'dense',
             height: 50,
-            textAlign:'center',
-            border:'2px solid #fff',
-            minHeight:'10px',
-            textTransform:'capitilize'
-        },
+            textAlign: 'center',
+            border: '2px solid #fff',
+            minHeight: '10px',
+            textTransform: 'capitalize',
+          },
           rowStyle: {
-            fontSize: ".8rem",
+            fontSize: '.8rem',
           },
         }}
       />
@@ -216,7 +229,7 @@ const Leave = ({ isLoading }) => {
           open={openDeleteModal}
           handleCloseModal={handleCloseDeleteModal}
           handleConfirmDelete={handleConfirmDelete}
-          message={"Leave"}
+          message={'Leave'}
         />
       )}
     </>

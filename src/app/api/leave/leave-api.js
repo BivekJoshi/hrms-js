@@ -2,7 +2,7 @@ import { axiosInstance } from "../../../auth/axiosInterceptor";
 
 {/*________________________GET_____________________________________*/ }
 export const getleave = async () => {
-  const data = await axiosInstance.get(`/leave`);
+  const data = await axiosInstance.get(`/leave/all-leaves`);
   return data;
 };
 

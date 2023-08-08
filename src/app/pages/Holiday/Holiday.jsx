@@ -7,7 +7,8 @@ import interactionPlugin from "@fullcalendar/interaction";
 import { useGetHoliday } from "../../hooks/holiday/useHoliday";
 import { AddHolidayModal, OpenHoliday } from "./HolidayModal/HolidayModal";
 import CurrentHoliday from "./CurrentHoliday";
-import "./Style/Style.css"
+import "./Style/Style.css";
+import { ButtonComponent } from "../../components/Button/ButtonComponent";
 
 const Holiday = () => {
   const { data: holidayData } = useGetHoliday();
@@ -44,36 +45,51 @@ const Holiday = () => {
   return (
     <>
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-        <Button
-          variant="contained"
-          sx={{ mt: 3, ml: 1 }}
+        <ButtonComponent
           onClick={handleAddOpenModal}
-        >
-          +Add Holiday
-        </Button>
+          buttonName={"+Add Holiday"}
+        />
       </Box>
       <br />
-      <Grid container spacing={2}>
-        <Grid item xs={12} sm={12} md={9}className={holidayData ? "calenderDesign" : ""}>
-          <FullCalendar
-            ref={calendarRef}
-            plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-            initialView="dayGridMonth"
-            headerToolbar={{
-              start: "today prev,next",
-              center: "title",
-              end: "dayGridMonth,timeGridWeek,timeGridDay",
-            }}
-            eventClick={handleOpenModal}
-            height={"90vh"}
-            events={events}
-            
-          />
-        </Grid>
-        <Box >
-          <CurrentHoliday />
+      {/* <Grid container spacing={2}> */}
+      <Box
+        display="grid"
+        gridTemplateColumns={{ xs: "1fr", lg: "1fr 3fr" }}
+        columnGap="1rem"
+      >
+        <Box gridRow={{xs:"2/3", lg:"1"}}>
+        <CurrentHoliday />
         </Box>
-      </Grid>
+        <br />
+        {/* <Grid container spacing={2}> */}
+        <Box
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: { xs: '1fr', lg: '1fr 3fr' },
+            columnGap: '1rem',
+          }}
+        >
+          <Box item xs={3} gridRow={{ xs: '2/3', lg: '1' }}>
+            <CurrentHoliday />
+          </Box>
+          <Grid item xs={9} className={holidayData ? 'calenderDesign' : ''}>
+            <FullCalendar
+              ref={calendarRef}
+              plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+              initialView='dayGridMonth'
+              headerToolbar={{
+                start: 'today prev,next',
+                center: 'title',
+                end: 'dayGridMonth,timeGridWeek,timeGridDay',
+              }}
+              eventClick={handleOpenModal}
+              height={'90vh'}
+              events={events}
+            />
+          </Grid>
+        </Box>
+        {/* </Grid> */}
+      </Box>
 
       {openAddModal && (
         <AddHolidayModal

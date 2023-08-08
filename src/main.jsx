@@ -6,7 +6,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { ThemeContextProvider } from "./theme/ThemeModeContext.jsx";
 import ErrorBoundary from "./app/utils/ErrorBoundary.jsx";
 import { Provider } from "react-redux";
-import store from "./store.js";
+import store from "../src/Redux/Store/store.js";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {

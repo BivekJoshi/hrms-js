@@ -1,4 +1,4 @@
-import { Typography, Stack, Button, Box, Tab, Tabs } from "@mui/material";
+import { Stack, Button } from "@mui/material";
 import React, { useState } from "react";
 import MaterialTable from "@material-table/core";
 import UserControlAction from "../../../../pages/Auth/UserControl/UserControlAction";

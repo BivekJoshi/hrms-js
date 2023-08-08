@@ -1,31 +1,54 @@
-import React from "react";
-import { Stack, Typography, List, Button, Box } from "@mui/material";
-import { Menu, MenuItem, Divider } from "@mui/material";
-import PersonIcon from "@mui/icons-material/Person";
+import React, { useRef } from "react";
+import { Button, Box, Popper, Grow, Paper } from "@mui/material";
+import { ClickAwayListener, MenuList, Typography } from "@mui/material";
+import { MenuItem } from "@mui/material";
 import CakeIcon from "@mui/icons-material/Cake";
 import { NavLink } from "react-router-dom";
 import {
   useRemoveNotification,
 } from "../../hooks/birthday/useBirthday";
 import "../Style/Style.css";
+import { useState } from "react";
 
 const TodayBirthday = ({ data }) => {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
+  const [anchorEl, setAnchorEl] = useState(null);
   const birthdayEmployeeName = data?.birthdayEmployees;
   const birthdayEmployeeCount = data?.birthdayEmployeeCount || 0;
   const displayCount = birthdayEmployeeCount > 0 ? birthdayEmployeeCount : null;
 
-  const handleClose = () => {
-    setAnchorEl(null);
+  const [open, setOpen] = useState(false);
+  const anchorRef = useRef(null);
+
+  const handleToggle = () => {
+    setOpen((prevOpen) => !prevOpen);
   };
 
-  const removeNotificationMutation = useRemoveNotification();
+  const handleClose = (event) => {
+    if (anchorRef.current && anchorRef.current.contains(event.target)) {
+      return;
+    }
 
-  const handleClick = () => {
-    removeNotificationMutation.mutate();
-    setAnchorEl((prevAnchorEl) => !prevAnchorEl);
+    setOpen(false);
   };
+
+  function handleListKeyDown(event) {
+    if (event.key === "Tab") {
+      event.preventDefault();
+      setOpen(false);
+    } else if (event.key === "Escape") {
+      setOpen(false);
+    }
+  }
+
+  // return focus to the button when we transitioned from !open -> open
+  const prevOpen = useRef(open);
+  React.useEffect(() => {
+    if (prevOpen.current === true && open === false) {
+      anchorRef.current.focus();
+    }
+
+    prevOpen.current = open;
+  }, [open]);
 
   const btnStyle = {
     color: "#fff",
@@ -34,64 +57,108 @@ const TodayBirthday = ({ data }) => {
   return (
     <Box>
       <Button
-        id="basic-button"
-        aria-controls={open ? "basic-menu" : undefined}
-        aria-haspopup="true"
+        ref={anchorRef}
+        id="composition-button"
+        aria-controls={open ? "composition-menu" : undefined}
         aria-expanded={open ? "true" : undefined}
-        onClick={handleClick}
+        aria-haspopup="true"
+        onClick={handleToggle}
         style={btnStyle}
       >
         <CakeIcon />
         {data?.isChecked ? "" : displayCount}
       </Button>
-      <Menu
-        // className="todayBN"
-        id="basic-menu"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        MenuListProps={{
-          "aria-labelledby": "basic-button",
-        }}
-      >
-        <Stack>
-          <List>
-            <MenuItem disablePadding>
-              <Typography variant="h6" color="primary" fontWeight={400}>
-                Today's Birthday:
-              </Typography>
-            </MenuItem>
-            <Divider />
-            {birthdayEmployeeName &&
-              birthdayEmployeeName.map((bname, index) => (
-                <NavLink to={`employee/${bname?.id}`} key={bname?.id}>
-                  <MenuItem
-                    style={{
-                      color: "green",
-                      display: "inline-block",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                    key={index}
-                    onClick={handleClose}
-                  ></MenuItem>
-                  <div
-                    style={{
-                      display: "flex",
-                      columnGap: "10px",
-                      alignItems: "center",
+      {birthdayEmployeeCount !== 0 ? (
+        <Popper
+          open={open}
+          anchorEl={anchorRef.current}
+          role={undefined}
+          placement="bottom-start"
+          transition
+          disablePortal
+          style={{ width: { xs: "30%", lg: "15%" }, marginLeft: "-4rem" }}
+        >
+          {({ TransitionProps, placement }) => (
+            <Grow
+              {...TransitionProps}
+              style={{
+                transformOrigin:
+                  placement === "bottom-start" ? "left top" : "left bottom",
+              }}
+            >
+              <Paper>
+                <ClickAwayListener onClickAway={handleClose}>
+                  <MenuList
+                    autoFocusItem={open}
+                    id="composition-menu"
+                    aria-labelledby="composition-button"
+                    onKeyDown={handleListKeyDown}
+                    sx={{
+                      textAlign: "center",
+                      width: { xs: "30%", lg: "15%" },
+                      padding: "0.5rem 1rem",
                     }}
                   >
-                    <Typography style={{ height: "25px" }}>
-                      <PersonIcon />
+                    <Typography variant="h6" color="primary" fontWeight={400}>
+                      Today's Birthday
                     </Typography>
-                    <Typography variant="h6">{bname?.fullName}</Typography>
-                  </div>
-                </NavLink>
-              ))}
-          </List>
-        </Stack>
-      </Menu>
+                    {birthdayEmployeeName &&
+                      birthdayEmployeeName.map((bname, index) => (
+                        <MenuItem
+                          key={index}
+                          onClick={handleClose}
+                          sx={{ justifyContent: "center" }}
+                        >
+                          {bname.fullName}
+                        </MenuItem>
+                      ))}
+                  </MenuList>
+                </ClickAwayListener>
+              </Paper>
+            </Grow>
+          )}
+        </Popper>
+      ) : (
+        <Popper
+          open={open}
+          anchorEl={anchorRef.current}
+          role={undefined}
+          placement="bottom-start"
+          transition
+          disablePortal
+          style={{ width: { xs: "30%", lg: "15%" }, marginLeft: "-4rem" }}
+        >
+          {({ TransitionProps, placement }) => (
+            <Grow
+              {...TransitionProps}
+              style={{
+                transformOrigin:
+                  placement === "bottom-start" ? "left top" : "left bottom",
+              }}
+            >
+              <Paper>
+                <ClickAwayListener onClickAway={handleClose}>
+                  <MenuList
+                    autoFocusItem={open}
+                    id="composition-menu"
+                    aria-labelledby="composition-button"
+                    onKeyDown={handleListKeyDown}
+                    sx={{
+                      textAlign: "center",
+                      width: "100%",
+                      padding: "1rem 2rem",
+                    }}
+                  >
+                    <Typography variant="h6" color="primary" fontWeight={400}>
+                      No One Birthday !
+                    </Typography>
+                  </MenuList>
+                </ClickAwayListener>
+              </Paper>
+            </Grow>
+          )}
+        </Popper>
+      )}
     </Box>
   );
 };

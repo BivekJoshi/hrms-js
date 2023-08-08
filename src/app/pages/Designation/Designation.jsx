@@ -15,6 +15,7 @@ import {
   EditDesignationModal,
 } from "./DesignationModal/DesignationModal";
 import DeleteConfirmationModal from "../../components/Modal/DeleteConfirmationModal";
+import { ButtonComponent } from "../../components/Button/ButtonComponent";
 
 const Designation = () => {
   const { data: designationData, isLoading } = useGetDesignation();
@@ -78,7 +79,6 @@ const Designation = () => {
       field: "positionDetails",
       emptyValue: "-",
       width: 80,
-
     },
     {
       title: "Actions",
@@ -107,13 +107,10 @@ const Designation = () => {
   return (
     <>
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-        <Button
-          variant="contained"
-          sx={{ mt: 3, ml: 1 }}
-          onClick={handleAddOpenModal}
-        >
-          +Add Designation
-        </Button>
+        <ButtonComponent
+          OnClick={handleAddOpenModal}
+          buttonName={"+Add Designation"}
+        />
       </Box>
       <br />
 
@@ -128,16 +125,16 @@ const Designation = () => {
           pageSize: 10,
           emptyRowsWhenPaging: false,
           headerStyle: {
-            backgroundColor: '#01579b',
-            color: '#FFF',
+            backgroundColor: "#01579b",
+            color: "#FFF",
             fontSize: "1rem",
-            padding: 'dense',
+            padding: "dense",
             height: 50,
-            textAlign:'center',
-            border:'2px solid #fff',
-            minHeight:'10px',
-            textTransform:'capitilize'
-        },
+            textAlign: "center",
+            border: "2px solid #fff",
+            minHeight: "10px",
+            textTransform: "capitilize",
+          },
           rowStyle: {
             fontSize: ".8rem",
           },

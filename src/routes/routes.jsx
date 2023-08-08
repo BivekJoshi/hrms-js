@@ -3,7 +3,6 @@ import { nanoid } from 'nanoid';
 import { Link, useLocation } from 'react-router-dom';
 import { Breadcrumbs, Typography } from '@mui/material';
 import Loadable from '../app/components/Header/Loader/Loadable';
-import CustomBreadcrumb from '../theme/overrides/CustomBreadcrumb';
 
 const ProfileDetail = Loadable(
   lazy(() => import('../app/pages/Auth/Profile/ProfileDetail'))
@@ -231,14 +230,14 @@ export default function BreadCrumbs() {
   const currentRoute = routes.find(
     (route) => '/admin/' + route.path === currentPath
   );
-
+  
   return (
     <>
       {currentRoute &&
         (currentRoute.path === 'dashboard' ? (
           <Typography color='text.primary'>{currentRoute.name}</Typography>
         ) : (
-          <Breadcrumbs>
+          <Breadcrumbs >
             <Link underline='hover' color='inherit' to='/admin/dashboard'>
               Dashboard
             </Link>
@@ -247,5 +246,4 @@ export default function BreadCrumbs() {
         ))}
     </>
   );
-  // return <CustomBreadcrumb routes={routes} currentPath={currentPath} />;
 }
