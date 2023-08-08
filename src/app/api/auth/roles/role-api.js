@@ -6,6 +6,14 @@ export const getRole = async () => {
   return data;
 };
 
+/*________________________GETBYID_____________________________________*/
+export const getRoleById = async (id) => {
+  if (id) {
+    const data = await axiosInstance.get(`/role/${id}`);
+    return data;
+  }
+};
+
 /*________________________POST_____________________________________*/
 export const addRole = async (formData) => {
   const data = await axiosInstance.post("/role", formData);
@@ -14,16 +22,17 @@ export const addRole = async (formData) => {
 
 /*____________________________EDIT-ROLE-PERMISSION____________________________________________*/
 export const editRole = async (formData) => {
-  const { roleId } = formData;
-  const data = await axiosInstance.post(`/role?roleId=${roleId}`, formData);
+  const { id } = formData;
+  const data = await axiosInstance.put(`/role/${id}`, formData);
   return data;
 };
 
 /*____________________________EDIT-ROLE-PERMISSION____________________________________________*/
 export const editPermissionRole = async (formData) => {
   const { roleId, permissionId } = formData;
-  const data = await axiosInstance.post(
-    `/role/add-permission/${roleId}?permissionId=${permissionId}`);
+  
+  const data = await axiosInstance.put(
+    `/role/add-permission/${roleId}`, { permissionId });
   return data;
 };
 

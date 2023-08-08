@@ -1,22 +1,25 @@
 import React, { useState } from "react";
 import { useDeleteRole, useGetRole } from "../../../../hooks/auth/roles/useRole";
 import { Box, Button, Typography, Stack } from "@mui/material";
-import { AddRoleModal } from "./AddRoleModal";
+import { AddRoleModal, EditPermissionRoleModal, EditRoleModal } from "./AddRoleModal";
 import DeleteConfirmationModal from "../../../../components/Modal/DeleteConfirmationModal";
 
 const Roles = () => {
   const { data: roleData } = useGetRole();
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
+  const [openEditPermissionModal,setOpenEditPermissionModal]=useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
   const [editedRole, setEditedRole] = useState({});
+  const [editedPermissionRole,setEditedPermissionRole]=useState({});
   const [deletedRole, setDeletedRole] = useState({});
 
   const handleAddOpenModal = () => setOpenAddModal(true);
   const handleCloseAddModal = () => setOpenAddModal(false);
 
   const handleCloseEditModal = () => setOpenEditModal(false);
+  const handleCloseEditPermissionModal=()=>setOpenEditPermissionModal(false);
   const handleCloseDeleteModal = () => setOpenDeleteModal(false);
 
   const getRandomColor = () => {
@@ -41,19 +44,24 @@ const Roles = () => {
     }
   };
 
-  const handleEditRole = (roleData) => {
-    setEditedRole(roleData);
+  const handleEditRole = (roleId) => {
+    setEditedRole(roleId);
     setOpenEditModal(true);
   };
 
+  const handleEditPermissionRole=(roleId)=>{
+    setEditedPermissionRole(roleId);
+    setOpenEditPermissionModal(true);
+  }
+
   const deleteRoleMutation = useDeleteRole({});
-  const handleDeleteRole = (roleData) => {
-    setDeletedRole(roleData);
+  const handleDeleteRole = (roleId) => {
+    setDeletedRole(roleId);
     setOpenDeleteModal(true);
   };
 
   const handleConfirmDelete = () => {
-    deleteRoleMutation.mutate(deletedRole?.id);
+    deleteRoleMutation.mutate(deletedRole);
     setOpenDeleteModal(false);
   };
 
@@ -121,14 +129,21 @@ const Roles = () => {
                   <Button
                     color="secondary"
                     variant="contained"
-                    onClick={() => handleEditRole(roleData)}
+                    onClick={() => handleEditRole(role?.id)}
                   >
                     Edit
                   </Button>
                   <Button
+                    color="primary"
+                    variant="contained"
+                    onClick={() => handleEditPermissionRole(role?.id)}
+                  >
+                    Add Permission
+                  </Button>
+                  <Button
                     color="error"
                     variant="contained"
-                    onClick={() => handleDeleteRole(roleData)}
+                    onClick={() => handleDeleteRole(role?.id)}
                   >
                     Delete
                   </Button>
@@ -143,13 +158,20 @@ const Roles = () => {
           handleCloseModal={handleCloseAddModal}
         />
       )}
-      {/* {openEditModal && (
+      {openEditModal && (
         <EditRoleModal
-          id={editedDesignation?.id}
+          id={editedRole}
           open={openEditModal}
           handleCloseModal={handleCloseEditModal}
         />
-      )} */}
+      )}
+      {openEditPermissionModal && (
+        <EditPermissionRoleModal
+          id={editedPermissionRole}
+          open={openEditPermissionModal}
+          handleCloseModal={handleCloseEditModal}
+        />
+      )}
       {openDeleteModal && (
         <DeleteConfirmationModal
           open={openDeleteModal}
