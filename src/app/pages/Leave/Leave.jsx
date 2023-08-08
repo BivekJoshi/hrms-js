@@ -110,14 +110,14 @@ const Leave = ({ isLoading }) => {
       },
       render: (rowData) => {
         const status = rowData.leaveStatus;
-        let chipColor = "";
+        let chipColor = '';
 
-        if (status === "APPROVED") {
-          chipColor = "green";
-        } else if (status === "REJECTED") {
-          chipColor = "red";
-        } else if (status === "PENDING") {
-          chipColor = "orange";
+        if (status === 'APPROVED') {
+          chipColor = 'green';
+        } else if (status === 'REJECTED') {
+          chipColor = 'red';
+        } else if (status === 'PENDING') {
+          chipColor = 'orange';
         }
 
         return (
@@ -188,7 +188,7 @@ const Leave = ({ isLoading }) => {
         icons={tableIcons}
         columns={columns}
         data={leaveData}
-        title=""
+        title='Leave Data'
         isLoading={loadingleave}
         options={{
           padding: "dense",
@@ -196,18 +196,18 @@ const Leave = ({ isLoading }) => {
           pageSize: 10,
           emptyRowsWhenPaging: false,
           headerStyle: {
-            backgroundColor: "#01579b",
-            color: "#FFF",
-            fontSize: "1rem",
-            padding: "dense",
+            backgroundColor: '#01579b',
+            color: '#FFF',
+            fontSize: '1rem',
+            padding: 'dense',
             height: 50,
-            textAlign: "center",
-            border: "2px solid #fff",
-            minHeight: "10px",
-            textTransform: "capitilize",
+            textAlign: 'center',
+            border: '2px solid #fff',
+            minHeight: '10px',
+            textTransform: 'capitalize',
           },
           rowStyle: {
-            fontSize: ".8rem",
+            fontSize: '.8rem',
           },
         }}
       />
@@ -229,7 +229,7 @@ const Leave = ({ isLoading }) => {
           open={openDeleteModal}
           handleCloseModal={handleCloseDeleteModal}
           handleConfirmDelete={handleConfirmDelete}
-          message={"Leave"}
+          message={'Leave'}
         />
       )}
     </>

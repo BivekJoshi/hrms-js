@@ -85,6 +85,7 @@ const DeactivatedProject = () => {
 
   return (
     <>
+      <br/>
       <MaterialTable
         columns={columns}
         data={deactivatedProject}
