@@ -3,7 +3,7 @@ import { Box, Grid, Stack, Typography } from "@mui/material";
 import MainCard from "../MainCard";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
 
-const DashboardCard = ({ title, icon, value }) => {
+const DashboardCard = ({ title, icon, count }) => {
   const { mode } = useContext(ThemeModeContext);
 
   return (
@@ -26,7 +26,7 @@ const DashboardCard = ({ title, icon, value }) => {
               align="center"
               fontWeight={600}
             >
-              120
+              {count}
             </Typography>
             <Typography color="black" align="center">
               {title}

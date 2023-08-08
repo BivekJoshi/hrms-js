@@ -57,8 +57,8 @@ const Holiday = () => {
         gridTemplateColumns={{ xs: "1fr", lg: "1fr 3fr" }}
         columnGap="1rem"
       >
-        <Box gridRow={{ xs: "2/3", lg: "1" }}>
-          <CurrentHoliday />
+        <Box gridRow={{xs:"2/3", lg:"1"}}>
+        <CurrentHoliday />
         </Box>
         <br />
         {/* <Grid container spacing={2}> */}
