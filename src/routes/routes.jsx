@@ -228,20 +228,20 @@ export default function BreadCrumbs() {
   const location = useLocation();
   const currentPath = location.pathname;
   const currentRoute = routes.find(
-    (route) => '/admin/' + route.path === currentPath
+    (route) => '/admin/' + route?.path === currentPath
   );
   
   return (
     <>
       {currentRoute &&
         (currentRoute.path === 'dashboard' ? (
-          <Typography color='text.primary'>{currentRoute.name}</Typography>
+          <Typography color='text.primary'>{currentRoute?.name}</Typography>
         ) : (
           <Breadcrumbs >
             <Link underline='hover' color='inherit' to='/admin/dashboard'>
               Dashboard
             </Link>
-            <Typography color='text.primary'>{currentRoute.name}</Typography>
+            <Typography color='text.primary'>{currentRoute?.name}</Typography>
           </Breadcrumbs>
         ))}
     </>

@@ -14,6 +14,7 @@ import BreadCrumbs from "../../../routes/routes";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import PersonIcon from "@mui/icons-material/Person";
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import MailIcon from "@mui/icons-material/Mail";
 import CakeIcon from "@mui/icons-material/Cake";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
@@ -26,6 +27,7 @@ import EventIcon from "@mui/icons-material/Event";
 import HolidayVillageIcon from "@mui/icons-material/HolidayVillage";
 import LaptopIcon from "@mui/icons-material/Laptop";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+
 
 const drawerWidth = 250;
 
@@ -229,7 +231,7 @@ export default function Sidebar() {
     {
       name: "Users",
       icon: (
-        <PersonAddIcon
+        <PersonAddIcon 
           sx={mode === "light" ? { color: "black" } : { color: "white" }}
         />
       ),
