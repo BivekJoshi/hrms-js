@@ -60,22 +60,36 @@ const Holiday = () => {
         <Box gridRow={{ xs: "2/3", lg: "1" }}>
           <CurrentHoliday />
         </Box>
-
-        <FullCalendar
-          ref={calendarRef}
-          plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-          initialView="dayGridMonth"
-          headerToolbar={{
-            start: "today prev,next",
-            center: "title",
-            end: "dayGridMonth,timeGridWeek,timeGridDay",
+        <br />
+        {/* <Grid container spacing={2}> */}
+        <Box
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: { xs: '1fr', lg: '1fr 3fr' },
+            columnGap: '1rem',
           }}
-          eventClick={handleOpenModal}
-          height={"90vh"}
-          events={events}
-        />
+        >
+          <Box item xs={3} gridRow={{ xs: '2/3', lg: '1' }}>
+            <CurrentHoliday />
+          </Box>
+          <Grid item xs={9} className={holidayData ? 'calenderDesign' : ''}>
+            <FullCalendar
+              ref={calendarRef}
+              plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+              initialView='dayGridMonth'
+              headerToolbar={{
+                start: 'today prev,next',
+                center: 'title',
+                end: 'dayGridMonth,timeGridWeek,timeGridDay',
+              }}
+              eventClick={handleOpenModal}
+              height={'90vh'}
+              events={events}
+            />
+          </Grid>
+        </Box>
+        {/* </Grid> */}
       </Box>
-      {/* </Grid> */}
 
       {openAddModal && (
         <AddHolidayModal
