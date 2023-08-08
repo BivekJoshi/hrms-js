@@ -1,8 +1,14 @@
 import { axiosInstance } from "../../../auth/axiosInterceptor";
 
-{/*________________________GET_____________________________________*/ }
+{/*________________________GET ALL_____________________________________*/ }
 export const getleave = async () => {
   const data = await axiosInstance.get(`/leave/all-leaves`);
+  return data;
+};
+
+{/*________________________GET PENDING LEAVE_____________________________________*/ }
+export const getpendingleave = async () => {
+  const data = await axiosInstance.get(`/leave/leaves-pending`);
   return data;
 };
 

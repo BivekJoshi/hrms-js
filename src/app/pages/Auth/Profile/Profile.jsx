@@ -4,10 +4,11 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { useNavigate } from "react-router-dom";
 import { removeUser } from "../../../utils/cookieHelper";
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { useGetLoggedInUser } from "../../../hooks/auth/usePassword";
 
 const Profile = () => {
-    const navigate= useNavigate();
+  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -29,6 +30,9 @@ const Profile = () => {
     color: "#fff",
   };
 
+  
+  const { data: loggedUserData } = useGetLoggedInUser();
+
   return (
     <div>
       <Button
@@ -39,7 +43,7 @@ const Profile = () => {
         onClick={handleClick}
         style={btnStyle}
       >
-        Admin <KeyboardArrowDownIcon />
+        {loggedUserData?.name} <KeyboardArrowDownIcon />
       </Button>
       <Menu
         id="basic-menu"
@@ -52,10 +56,14 @@ const Profile = () => {
       >
         <MenuItem onClick={handleProfile}>Profile</MenuItem>
         <MenuItem onClick={handleChangePassword}>Reset Password</MenuItem>
-        <MenuItem onClick={() => {
-              removeUser();
-              navigate("/");
-            }}>Logout</MenuItem>
+        <MenuItem
+          onClick={() => {
+            removeUser();
+            navigate("/");
+          }}
+        >
+          Logout
+        </MenuItem>
       </Menu>
     </div>
   );

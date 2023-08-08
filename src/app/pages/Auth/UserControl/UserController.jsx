@@ -1,35 +1,39 @@
-import { Box, Tab, Tabs } from "@mui/material";
-import React, { useState } from "react";
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import Tab from '@mui/material/Tab';
+import TabContext from '@mui/lab/TabContext';
+import TabList from '@mui/lab/TabList';
+import TabPanel from '@mui/lab/TabPanel';
 import Users from "./Users/Users";
 import Roles from "./Roles/Roles";
 import Permission from "./Permission/Permission";
 
 const UserController = () => {
-  const [value, setValue] = useState("one");
+  const [value, setValue] = React.useState('1');
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
   return (
     <>
-      <Box
-        sx={{ bgcolor: "background.paper", width: "100%", marginTop: "1rem" }}
-      >
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          indicatorColor="secondary"
-          textColor="secondary"
-          variant="fullWidth"
-          centered
-        >
-          <Tab value="one" label="Users" sx={{ fontWeight: "600", fontSize: "1.4rem" }} />
-          <Tab value="two" label="Role" sx={{ fontWeight: "600", fontSize: "1.4rem" }} />
-          <Tab value="three" label="Permission" sx={{ fontWeight: "600", fontSize: "1.4rem" }} />
-        </Tabs>
-        {value === "one" && ( <Box> <Users /></Box> )}
-        {value === "two" && <Box> <Roles /> </Box>}
-        {value === "three" && <Box> <Permission /> </Box>}
+      <Box sx={{ width: "100%", typography: "body1" }}>
+        <TabContext value={value}>
+          <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+            <TabList
+              onChange={handleChange}
+              aria-label="lab API tabs example"
+              variant="fullWidth"
+            >
+              <Tab label="Users" value="1" />
+              <Tab label="Roles" value="2" />
+              <Tab label="Permission" value="3" />
+            </TabList>
+          </Box>
+          <TabPanel value="1"> <Users/> </TabPanel>
+          <TabPanel value="2"> <Roles /> </TabPanel>
+          <TabPanel value="3"> <Permission /> </TabPanel>
+        </TabContext>
       </Box>
     </>
   );

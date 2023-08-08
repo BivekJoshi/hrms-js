@@ -13,6 +13,8 @@ import { ProjectTable } from "./DashboardTable/ProjectTable";
 import { FaPeopleGroup, FaGifts, FaUsers } from "react-icons/fa6";
 import { BiSolidCalendarEvent } from "react-icons/bi";
 import { AiFillProject } from "react-icons/ai";
+import PendingLeaveTable from "./DashboardTable/PendingLeaveTable";
+import { useGetPendingLeave } from "../../hooks/leave/useLeave";
 import { useGetEmployee } from "../../hooks/employee/useEmployee";
 import { useGetEvent } from "../../hooks/event/useEvent";
 import { useGetHoliday } from "../../hooks/holiday/useHoliday";
@@ -21,6 +23,10 @@ const Dashboard = () => {
   const { data: dashboardData } = useGetDashboard();
   const { data: projectDataCount } = useGetProjectCount();
   const { data: projectData } = useGetProject();
+  const {
+    data: pendingLeaveData,
+    isLoading: loadingPendingLeave,
+  } = useGetPendingLeave();
   const { data: employeeData } = useGetEmployee();
   const { data: eventData } = useGetEvent();
   const { data: holidayData } = useGetHoliday();
@@ -91,9 +97,17 @@ const Dashboard = () => {
           <ProjectProgressCard projectDataCount={projectDataCount} />
         </Box>
 
-        <Box>
-          <ProjectTable projectData={projectData} />
-        </Box>
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={6}>
+            <ProjectTable projectData={projectData} />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <PendingLeaveTable
+              pendingLeaveData={pendingLeaveData}
+              loading={loadingPendingLeave}
+            />
+          </Grid>
+        </Grid>
       </Box>
     </Box>
   );
