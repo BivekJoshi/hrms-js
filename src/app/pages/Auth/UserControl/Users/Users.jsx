@@ -35,7 +35,7 @@ const columns = [
   { title: "Email", field: "email", emptyValue: "-", width: "120" },
   {
     title: "Role",
-    render: (rowData) => getRoleLabel(rowData?.roles[0]?.name),
+    render: (rowData) => getRoleLabel(rowData?.roles?.name),
     width: "80",
   },
   {

@@ -6,7 +6,7 @@ const Roles = () => {
   const { data: roleData } = useGetRole();
 
   const getRandomColor = () => {
-    const colors = ["blue", "green", "navy", "purple"];
+    const colors = ["#9A7CA2", "#AE6F92", "#9F43C7", "#DC418F", "#6BA1B3", "#FF869E"];
     return colors[Math.floor(Math.random() * colors.length)];
   };
 
