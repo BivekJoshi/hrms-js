@@ -25,7 +25,7 @@ const TrainingField = ({ onClose, isLoading, data }) => {
   return (
     !isLoading && (
       <Grid container spacing={3}>
-        <Grid item xs={12} sm={12}>
+        <Grid item xs={12} sm={6}>
           <TextField
             id="trainingName"
             name="trainingName"
@@ -46,7 +46,7 @@ const TrainingField = ({ onClose, isLoading, data }) => {
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
-        <Grid item xs={12} sm={12}>
+        <Grid item xs={12} sm={6}>
           <TextField
             id="trainingLevel"
             name="trainingLevel"
@@ -68,11 +68,11 @@ const TrainingField = ({ onClose, isLoading, data }) => {
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
-        <Grid item xs={12} sm={12}>
+        <Grid item xs={12} sm={6}>
           <TextField
             id="trainingInstitute"
             name="trainingInstitute"
-            label="Training Institude"
+            label="Institude"
             placeholder="Enter training Institude"
             fullWidth
             required
@@ -91,11 +91,11 @@ const TrainingField = ({ onClose, isLoading, data }) => {
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
-        <Grid item xs={12} sm={12}>
+        <Grid item xs={12} sm={6}>
           <TextField
             id="category"
             name="category"
-            label="category"
+            label="Category"
             placeholder="Enter training category"
             fullWidth
             required
@@ -108,11 +108,11 @@ const TrainingField = ({ onClose, isLoading, data }) => {
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
-        <Grid item xs={12} sm={12}>
+        <Grid item xs={12} sm={6}>
           <TextField
             id="startDate"
             name="startDate"
-            label="startDate"
+            label="Start Date"
             placeholder="Enter training startDate"
             fullWidth
             type="date"
@@ -126,11 +126,11 @@ const TrainingField = ({ onClose, isLoading, data }) => {
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
-        <Grid item xs={12} sm={12}>
+        <Grid item xs={12} sm={6}>
           <TextField
             id="endDate"
             name="endDate"
-            label="endDate"
+            label="End Date"
             placeholder="Enter training endDate"
             fullWidth
             type="date"
