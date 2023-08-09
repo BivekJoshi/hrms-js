@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { useDeleteRole, useGetRole } from "../../../../hooks/auth/roles/useRole";
+import { useDeleteRole, useDeleteRole, useGetRole } from "../../../../hooks/auth/roles/useRole";
 import { Box, Button, Typography, Stack } from "@mui/material";
+import { AddRoleModal, EditPermissionRoleModal, EditRoleModal } from "./AddRoleModal";
+import DeleteConfirmationModal from "../../../../components/Modal/DeleteConfirmationModal";
 import { AddRoleModal, EditPermissionRoleModal, EditRoleModal } from "./AddRoleModal";
 import DeleteConfirmationModal from "../../../../components/Modal/DeleteConfirmationModal";
 
@@ -88,7 +90,6 @@ const Roles = () => {
         {roleData &&
           roleData.map((role, index) => {
             const { name } = getRoleStyle(role?.name);
-console.log(editedRole);
             return (
               <Stack
                 key={index}
