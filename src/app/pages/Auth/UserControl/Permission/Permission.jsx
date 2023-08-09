@@ -114,7 +114,6 @@ const Permission = () => {
             </Stack>
           );
         })}
-
       {openAddModal && (
         <AddPermissionModel
           open={openAddModal}

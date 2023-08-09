@@ -64,4 +64,3 @@ export const EditPermissionModel = ({ open, handleCloseModal, id }) => {
     />
   );
 };
-

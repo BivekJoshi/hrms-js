@@ -21,7 +21,6 @@ export const AddPermissionModel = ({ open, handleCloseModal }) => {
       }
     }
   };
-
   return (
     <FormModal
       open={open}
@@ -62,4 +61,3 @@ export const AddPermissionModel = ({ open, handleCloseModal }) => {
     />
   );
 };
-
