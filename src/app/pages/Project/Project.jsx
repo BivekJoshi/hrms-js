@@ -14,7 +14,6 @@ import { ButtonComponent } from "../../components/Button/ButtonComponent";
 const Project = () => {
   const navigate = useNavigate();
   const { data: projectData, isLoading } = useGetProject();
-  const [nameFilter, setNameFilter] = useState("");
 
   const [isContainerVisible, setIsContainerVisible] = useState(false);
 
@@ -28,7 +27,7 @@ const Project = () => {
   const handleCloseAddModal = () => setOpenAddModal(false);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(12);
+  const [postsPerPage] = useState(6);
 
   const projectArray = Array.isArray(projectData)
     ? projectData

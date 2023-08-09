@@ -34,7 +34,6 @@ const AttendenceInfo = () => {
         backgroundColor: "white",
         id: event.id,
       }));
-              console.log(formattedEvents)
 
       setEvents(formattedEvents);
     }
@@ -62,7 +61,6 @@ const AttendenceInfo = () => {
 export default AttendenceInfo;
 
 function renderEventContent(eventInfo) {
-  console.log(eventInfo)
   return (
     <Box className="attendanceHover">
       {/* {eventInfo?.map((info) => (

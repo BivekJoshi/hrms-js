@@ -4,7 +4,8 @@ import { useParams } from "react-router-dom";
 import { Chip } from "@mui/material";
 import { useGetEmployeeLeaveById } from "../../../../../hooks/leave/useLeave";
 import { useGetLeaveType } from "../../../../../hooks/leaveType/useLeaveType";
-import "../../EmployProfile/Style/Style.css"
+import "../../EmployProfile/Style/Style.css";
+
 const LeaveInfo = ({ isLoading }) => {
   const { id } = useParams();
   const { data: leaveData, isLoading: loadingLeave } =

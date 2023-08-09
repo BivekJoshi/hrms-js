@@ -51,7 +51,6 @@ export const getUserRole = async () => {
 
   {/*____________________________POST-PERMISSION____________________________________________*/}
   export const addPermissionRole = async (formData) => {
-    console.log(formData)
     const {roleId, userId, addRole } = formData;
     const data = await axiosInstance.post(`/user/role-setting?userId=${userId}&roleId=${roleId}&addRole=${addRole}`, formData);
     return data;
