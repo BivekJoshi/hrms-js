@@ -2,20 +2,25 @@ import React, { useState } from "react";
 import { useGetPermission } from "../../../../hooks/auth/permission/usePermission";
 import { Stack, Button, Typography, Box } from "@mui/material";
 import { AddPermissionModel } from "./Component/AddPermissionModel";
+import { EditPermissionModel } from "./Component/EditPermissionModel";
 
 const Permission = () => {
   const { data: permissionData } = useGetPermission();
   const [openAddModal, setOpenAddModal] = useState(false);
+  const [openEditModal, setOpenEditModal] = useState(false);
+  const [editedPermission, setEditedPermission] = useState({});
+
   const handleAddOpenModal = () => setOpenAddModal(true);
   const handleCloseAddModal = () => setOpenAddModal(false);
+  const handleCloseEditModal = () => setOpenEditModal(false);
 
   const getRandomColor = () => {
     const colors = ["#6527BE", "#45CFDD", "#45CFDD", "#9681EB", "#D58BDD"];
     return colors[Math.floor(Math.random() * colors.length)];
   };
 
-  const getPermissionStyle = (roleName) => {
-    switch (roleName) {
+  const getPermissionStyle = (permissionName) => {
+    switch (permissionName) {
       case "READ":
         return { name: "Read" };
       case "WRITE":
@@ -25,8 +30,13 @@ const Permission = () => {
       case "DELETE":
         return { name: "Delete" };
       default:
-        return { name: roleName };
+        return { name: permissionName };
     }
+  };
+
+  const handleEditPermession = (permissionId) => {
+    setEditedPermission(permissionId);
+    setOpenEditModal(true);
   };
 
   return (
@@ -45,12 +55,14 @@ const Permission = () => {
           sx={{ maxWidth: "fit-content" }}
           onClick={handleAddOpenModal}
         >
-         + Add Permission
+          + Add Permission
         </Button>
       </Stack>
       {permissionData &&
-        permissionData.map((role, index) => {
-          const { name } = getPermissionStyle(role?.name);
+        permissionData.map((permission, index) => {
+          const { name } = getPermissionStyle(permission?.name);
+          
+          console.log(editedPermission);
           return (
             <Stack
               key={index}
@@ -70,7 +82,7 @@ const Permission = () => {
                   fontWeight: "bold",
                 }}
               >
-                {role?.id}
+                {permission?.id}
               </Typography>
               <Typography
                 sx={{
@@ -88,7 +100,11 @@ const Permission = () => {
                   gap: "0.7rem",
                 }}
               >
-                <Button color="secondary" variant="contained">
+                <Button
+                  color="secondary"
+                  variant="contained"
+                  onClick={() => handleEditPermession(permission?.id)}
+                >
                   Edit
                 </Button>
                 <Button color="error" variant="contained">
@@ -98,11 +114,17 @@ const Permission = () => {
             </Stack>
           );
         })}
-      
       {openAddModal && (
         <AddPermissionModel
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
+        />
+      )}
+      {openEditModal && (
+        <EditPermissionModel
+          id={editedPermission}
+          open={openEditModal}
+          handleCloseModal={handleCloseEditModal}
         />
       )}
     </Box>

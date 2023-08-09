@@ -88,7 +88,7 @@ const Roles = () => {
         {roleData &&
           roleData.map((role, index) => {
             const { name } = getRoleStyle(role?.name);
-
+console.log(editedRole);
             return (
               <Stack
                 key={index}

@@ -51,7 +51,6 @@ const AttendenceInfo = () => {
 export default AttendenceInfo;
 
 function renderEventContent(eventInfo) {
-  console.log(eventInfo);
   return (
     <Box className="attendanceHover">
       <Box border={"none"} textAlign="center">
