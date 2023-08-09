@@ -61,7 +61,7 @@ export const useAddResetPassword = ({id, onSuccess }) => {
         toast.success("Password has been Changed Successfully");
          onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries("resetPassword");
-        navigate("/");
+        navigate("/admin/dashboard");
       },
       onError: (err, _variables, _context) => {
         toast.error(`error: ${err.message}`);
