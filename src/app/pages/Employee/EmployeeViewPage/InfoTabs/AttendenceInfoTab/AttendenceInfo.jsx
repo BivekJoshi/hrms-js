@@ -10,14 +10,6 @@ import { TbCircleLetterP } from "react-icons/tb";
 import { Box, Typography } from "@mui/material";
 import "../../Style/BasicInfoStyle.css";
 
-function getDate() {
-  const today = new Date();
-  const month = today.getMonth() + 1;
-  const year = today.getFullYear();
-  const date = today.getDate();
-  return `${year}-${month}-${date}/`;
-}
-
 const AttendenceInfo = () => {
   const { id } = useParams();
   const { data: attendanceData } = useGetEmployeeAttendanceById(id);
@@ -29,12 +21,10 @@ const AttendenceInfo = () => {
     if (attendanceData) {
       const formattedEvents = attendanceData.map((event) => ({
         title: event.timeIn,
-        start: event.timeOut,
         date: event.attendanceDate,
         backgroundColor: "white",
         id: event.id,
       }));
-
       setEvents(formattedEvents);
     }
   }, [attendanceData]);
@@ -63,23 +53,19 @@ export default AttendenceInfo;
 function renderEventContent(eventInfo) {
   return (
     <Box className="attendanceHover">
-      {/* {eventInfo?.map((info) => (
-        <> */}
-          <Box border={"none"} textAlign="center">
-            {!eventInfo ? (
-              <HdrAutoOutlinedIcon sx={{ color: "red" }} />
-            ) : (
-              <TbCircleLetterP
-                style={{ width: "2.5rem", height: "2.5rem", color: "green" }}
-              />
-            )}
-          </Box>
-          <Box className="timeInO">
-            <Typography>TimeIn : {eventInfo.event.title}</Typography>
-            <Typography>TimeOut : {eventInfo.event.date}</Typography>
-          </Box>
-        {/* </>
-      ))} */}
+      <Box border={"none"} textAlign="center">
+        {!eventInfo ? (
+          <HdrAutoOutlinedIcon sx={{ color: "red" }} />
+        ) : (
+          <TbCircleLetterP
+            style={{ width: "2.5rem", height: "2.5rem", color: "green" }}
+          />
+        )}
+      </Box>
+      <Box className="timeInO">
+        <Typography>TimeIn : {eventInfo.event.title}</Typography>
+        <Typography>TimeOut : {eventInfo.event.date}</Typography>
+      </Box>
     </Box>
   );
 }

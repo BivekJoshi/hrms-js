@@ -76,7 +76,7 @@ const TodayBirthday = ({ data }) => {
           placement="bottom-start"
           transition
           disablePortal
-          style={{ width: { xs: "30%", lg: "15%" }, marginLeft: "-4rem" }}
+          style={{ marginLeft: "-4rem" }}
         >
           {({ TransitionProps, placement }) => (
             <Grow
@@ -95,7 +95,6 @@ const TodayBirthday = ({ data }) => {
                     onKeyDown={handleListKeyDown}
                     sx={{
                       textAlign: "center",
-                      width: { xs: "30%", lg: "15%" },
                       padding: "0.5rem 1rem",
                     }}
                   >

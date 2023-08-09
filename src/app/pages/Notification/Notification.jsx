@@ -13,10 +13,10 @@ const Notification = ({ data }) => {
   const todayHoliday = events?.filter(
     (event) => event?.holidayDate === todayDate
   );
-  const todayEvent = events?.filter((event) => event?.eventDate === todayDate);
+  const todayEvent = events?.length;
 
   const notificationNumber =
-    (todayHoliday?.length ?? 0);
+    (todayEvent?.length ?? 0) + (todayHoliday?.length ?? 0);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -45,7 +45,7 @@ const Notification = ({ data }) => {
         style={btnStyle}
       >
         <NotificationsIcon />
-        {notificationNumber}
+        {todayEvent}
       </Button>
       <Menu
         id="basic-menu"
@@ -57,24 +57,24 @@ const Notification = ({ data }) => {
         }}
       >
         <Stack>
+          <Typography
+            variant="h6"
+            color="primary"
+            fontWeight={400}
+            padding="1rem 1rem 0.5rem"
+          >
+            {todayEvent !== 0 ? "Today's Event:" : "No Event Today!"}
+          </Typography>
           <List>
-            <MenuItem disablePadding>
-              <Typography variant="h6" color="primary" fontWeight={400}>
-                {notificationNumber !== 0
-                  ? "Today's Holiday:"
-                  : "No Event Today!"}
-              </Typography>
-            </MenuItem>
-            {notificationNumber !== 0 && <Divider />}
-            {todayHoliday &&
-              todayHoliday.map((item) => (
-                <MenuItem key={item?.id}>
+            {todayEvent !== 0 && <Divider />}
+            {events &&
+              events.map((item) => (
+                <MenuItem key={item.id} sx={{ background: "#ffe4c459" }}>
                   <ListItemText primary={item?.eventName} />
                 </MenuItem>
               ))}
           </List>
         </Stack>
-        {notificationNumber !== 0 && <Divider />}
       </Menu>
     </Box>
   );

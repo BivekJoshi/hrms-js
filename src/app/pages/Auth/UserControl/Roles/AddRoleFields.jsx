@@ -1,10 +1,10 @@
 import React from "react";
 import { Grid, TextField, Button } from "@mui/material";
-import { useAddRoleForm} from "./useAddRoleForm";
+import { useRoleForm } from "../../../../hooks/auth/roles/RoleForm/useRoleForm";
 
 
-export const AddRoleFields = ({ onClose }) => {
-  const { formik } = useAddRoleForm();
+export const AddRoleFields = ({ onClose,isLoading,data }) => {
+  const { formik } = useRoleForm(data);
 
   const handleFormSubmit = async () => {
     const isValid = await formik.validateForm();
@@ -17,9 +17,10 @@ export const AddRoleFields = ({ onClose }) => {
       }
     }
   };
+  const submitButtonText = data ? "Update Role" : "Add Role";
 
   return (
-    <>
+    !isLoading&&(
       <Grid container spacing={3}>
 
         <Grid item xs={12} sm={12}>
@@ -51,7 +52,7 @@ export const AddRoleFields = ({ onClose }) => {
             onClick={handleFormSubmit}
             sx={{ mt: 3, ml: 1 }}
           >
-            Add Role
+            {submitButtonText}
           </Button>
           <Button
             variant="contained"
@@ -63,6 +64,6 @@ export const AddRoleFields = ({ onClose }) => {
           </Button>
         </Grid>
       </Grid>
-    </>
+    )
   );
 };
