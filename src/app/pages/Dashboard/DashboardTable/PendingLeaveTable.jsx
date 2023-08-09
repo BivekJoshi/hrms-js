@@ -32,20 +32,20 @@ const PendingLeaveTable = ({ pendingLeaveData, loading }) => {
   };
 
   const columns = [
-    // {
-    //   title: "Employee Name",
-    //   render: (rowData) => {
-    //     return <p>{getEmployeeName(rowData)} </p>;
-    //   },
-    //   width: 120,
-    // },
-    // {
-    //   title: "Leave Type",
-    //   render: (rowData) => {
-    //     return <p>{getLeaveTypeName(rowData)}</p>;
-    //   },
-    //   width: 150,
-    // },
+    {
+      title: "Employee Name",
+      render: (rowData) => {
+        return <p>{getEmployeeName(rowData)} </p>;
+      },
+      width: 120,
+    },
+    {
+      title: "Leave Type",
+      render: (rowData) => {
+        return <p>{getLeaveTypeName(rowData)}</p>;
+      },
+      width: 150,
+    },
     {
       title: "Leave Reason",
       field: "leaveReason",
