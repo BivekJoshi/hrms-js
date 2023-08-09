@@ -5,11 +5,19 @@ import {
   deletePermission,
   editPermission,
   getPermission,
+  getPermissionById,
 } from "../../../api/auth/permission/permission-api";
 
 /*________________________GET_____________________________________*/
 export const useGetPermission = () => {
   return useQuery(["getUserControl"], () => getPermission(), {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
+};
+/*________________________GET_____________________________________*/
+export const useGetPermissionById = (id) => {
+  return useQuery(["getUserControl", id], () => getPermissionById(id), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
@@ -25,7 +33,7 @@ export const useAddPermission = ({ onSuccess }) => {
       onSuccess: (data, variables, context) => {
         toast.success("User added successfully");
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries("getUserControl");
+        queryClient.invalidateQueries("getPermission");
       },
       onError: (err, _variables, _context) => {
         toast.error(`error: ${err.message}`);
@@ -42,9 +50,9 @@ export const useEditPermission = ({ onSuccess }) => {
     (formData) => editPermission(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success("successfully edited user");
+        toast.success("successfully edited permission");
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries("getUserRole");
+        queryClient.invalidateQueries("getPermission");
       },
       onError: (err, _variables, _context) => {
         toast.error(`Error: ${err.message}`);
@@ -60,7 +68,7 @@ export const useDeletePermission = ({ onSuccess }) => {
     onSuccess: (data, variables, context) => {
       toast.success("Successfully deleted user");
       onSuccess && onSuccess(data, variables, context);
-      queryClient.invalidateQueries("getUserControl");
+      queryClient.invalidateQueries("getPermission");
     },
     onError: (err, _variables, _context) => {
       toast.error(`Error: ${err.message}`);

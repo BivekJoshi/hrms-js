@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { useDeleteRole, useGetRole } from "../../../../hooks/auth/roles/useRole";
+import { useDeleteRole, useDeleteRole, useGetRole } from "../../../../hooks/auth/roles/useRole";
 import { Box, Button, Typography, Stack } from "@mui/material";
+import { AddRoleModal, EditPermissionRoleModal, EditRoleModal } from "./AddRoleModal";
+import DeleteConfirmationModal from "../../../../components/Modal/DeleteConfirmationModal";
 import { AddRoleModal, EditPermissionRoleModal, EditRoleModal } from "./AddRoleModal";
 import DeleteConfirmationModal from "../../../../components/Modal/DeleteConfirmationModal";
 
@@ -23,7 +25,7 @@ const Roles = () => {
   const handleCloseDeleteModal = () => setOpenDeleteModal(false);
 
   const getRandomColor = () => {
-    const colors = ["blue", "green", "navy", "purple"];
+    const colors = ["#9A7CA2", "#AE6F92", "#9F43C7", "#DC418F", "#6BA1B3", "#FF869E"];
     return colors[Math.floor(Math.random() * colors.length)];
   };
 
@@ -88,7 +90,6 @@ const Roles = () => {
         {roleData &&
           roleData.map((role, index) => {
             const { name } = getRoleStyle(role?.name);
-
             return (
               <Stack
                 key={index}
