@@ -8,7 +8,6 @@ import { useGetHoliday } from "../../hooks/holiday/useHoliday";
 import { AddHolidayModal, OpenHoliday } from "./HolidayModal/HolidayModal";
 import CurrentHoliday from "./CurrentHoliday";
 import "./Style/Style.css";
-import { ButtonComponent } from "../../components/Button/ButtonComponent";
 
 const Holiday = () => {
   const { data: holidayData } = useGetHoliday();
@@ -45,10 +44,13 @@ const Holiday = () => {
   return (
     <>
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-        <ButtonComponent
+        <Button
+          variant="contained"
+          sx={{ mt: 3, ml: 1 }}
           onClick={handleAddOpenModal}
-          buttonName={"+Add Holiday"}
-        />
+        >
+          +Add Holiday
+        </Button>
       </Box>
       <br />
       {/* <Grid container spacing={2}> */}
@@ -60,36 +62,22 @@ const Holiday = () => {
         <Box gridRow={{xs:"2/3", lg:"1"}}>
         <CurrentHoliday />
         </Box>
-        <br />
-        {/* <Grid container spacing={2}> */}
-        <Box
-          sx={{
-            display: 'grid',
-            gridTemplateColumns: { xs: '1fr', lg: '1fr 3fr' },
-            columnGap: '1rem',
+
+        <FullCalendar
+          ref={calendarRef}
+          plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+          initialView="dayGridMonth"
+          headerToolbar={{
+            start: "today prev,next",
+            center: "title",
+            end: "dayGridMonth,timeGridWeek,timeGridDay",
           }}
-        >
-          <Box item xs={3} gridRow={{ xs: '2/3', lg: '1' }}>
-            <CurrentHoliday />
-          </Box>
-          <Grid item xs={9} className={holidayData ? 'calenderDesign' : ''}>
-            <FullCalendar
-              ref={calendarRef}
-              plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-              initialView='dayGridMonth'
-              headerToolbar={{
-                start: 'today prev,next',
-                center: 'title',
-                end: 'dayGridMonth,timeGridWeek,timeGridDay',
-              }}
-              eventClick={handleOpenModal}
-              height={'90vh'}
-              events={events}
-            />
-          </Grid>
-        </Box>
-        {/* </Grid> */}
+          eventClick={handleOpenModal}
+          height={"90vh"}
+          events={events}
+        />
       </Box>
+      {/* </Grid> */}
 
       {openAddModal && (
         <AddHolidayModal

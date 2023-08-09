@@ -25,8 +25,6 @@ const AttendenceInfo = () => {
         backgroundColor: "white",
         id: event.id,
       }));
-              console.log(formattedEvents)
-
       setEvents(formattedEvents);
     }
   }, [attendanceData]);
@@ -53,26 +51,22 @@ const AttendenceInfo = () => {
 export default AttendenceInfo;
 
 function renderEventContent(eventInfo) {
-  console.log(eventInfo)
+  console.log(eventInfo);
   return (
     <Box className="attendanceHover">
-      {/* {eventInfo?.map((info) => (
-        <> */}
-          <Box border={"none"} textAlign="center">
-            {!eventInfo ? (
-              <HdrAutoOutlinedIcon sx={{ color: "red" }} />
-            ) : (
-              <TbCircleLetterP
-                style={{ width: "2.5rem", height: "2.5rem", color: "green" }}
-              />
-            )}
-          </Box>
-          <Box className="timeInO">
-            <Typography>TimeIn : {eventInfo.event.title}</Typography>
-            <Typography>TimeOut : {eventInfo.event.date}</Typography>
-          </Box>
-        {/* </>
-      ))} */}
+      <Box border={"none"} textAlign="center">
+        {!eventInfo ? (
+          <HdrAutoOutlinedIcon sx={{ color: "red" }} />
+        ) : (
+          <TbCircleLetterP
+            style={{ width: "2.5rem", height: "2.5rem", color: "green" }}
+          />
+        )}
+      </Box>
+      <Box className="timeInO">
+        <Typography>TimeIn : {eventInfo.event.title}</Typography>
+        <Typography>TimeOut : {eventInfo.event.date}</Typography>
+      </Box>
     </Box>
   );
 }
