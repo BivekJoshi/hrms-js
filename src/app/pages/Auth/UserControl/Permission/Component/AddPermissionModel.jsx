@@ -21,7 +21,7 @@ export const AddPermissionModel = ({ open, handleCloseModal }) => {
       }
     }
   };
- 
+
   return (
     <FormModal
       open={open}
@@ -38,7 +38,6 @@ export const AddPermissionModel = ({ open, handleCloseModal }) => {
             onChange={formik.handleChange}
             error={formik.touched.name && Boolean(formik.errors.name)}
             helperText={formik.touched.name && formik.errors.name}
-
           />
 
           <Stack
@@ -63,3 +62,4 @@ export const AddPermissionModel = ({ open, handleCloseModal }) => {
     />
   );
 };
+

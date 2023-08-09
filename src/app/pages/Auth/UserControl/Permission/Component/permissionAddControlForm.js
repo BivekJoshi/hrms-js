@@ -1,34 +1,42 @@
-import React from "react";
 import { useFormik } from "formik";
-import { useAddPermission } from "../../../../../hooks/auth/permission/usePermission";
-import * as Yup from 'yup';
+import {
+  useAddPermission,
+  useEditPermission,
+} from "../../../../../hooks/auth/permission/usePermission";
+import * as Yup from "yup";
 
-const permationValidation = Yup.object().shape({
-  name: Yup.string()
-    .required('Permission name is required'),
-
+const permissioValidation = Yup.object().shape({
+  name: Yup.string().required("Permission name is required"),
 });
 
-export const permissionAddControlForm = (props) => {
-  const { mutate } = useAddPermission({});
+export const permissionAddControlForm = (data) => {
+  const { mutate: addPermission } = useAddPermission({});
+  const { mutate: editPermission } = useEditPermission({});
+
   const formik = useFormik({
     initialValues: {
-      id: "",
-      name: "",
+      id: data?.id || "",
+      name: data?.name || "",
     },
-    validationSchema:permationValidation,
+    validationSchema: permissioValidation,
     onSubmit: (values) => {
-      handleRequest(values);
+      if (data?.id) {
+        handledEditRequest(values);
+      } else {
+        handleRequest(values);
+      }
     },
   });
 
   const handleRequest = (values) => {
-    values = {
-      ...values,
-    };
-    mutate(values, formik, { onSuccess: () => formik.handleReset() });
+    values = { ...values };
+    addPermission(values, formik);
+  };
+
+  const handledEditRequest = (values) => {
+    values = { ...values };
+    editPermission(values, formik);
   };
 
   return { formik };
 };
-
