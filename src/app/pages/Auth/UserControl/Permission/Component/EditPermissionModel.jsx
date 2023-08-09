@@ -3,19 +3,18 @@ import FormModal from "../../../../../components/Modal/FormModal";
 import { Box, Stack, TextField } from "@mui/material";
 import { ButtonComponent } from "../../../../../components/Button/ButtonComponent";
 import { permissionAddControlForm } from "./permissionAddControlForm";
+import { useGetPermissionById } from "../../../../../hooks/auth/permission/usePermission";
 
-export const AddPermissionModel = ({ open, handleCloseModal }) => {
-  const { formik } = permissionAddControlForm();
+export const EditPermissionModel = ({ open, handleCloseModal, id }) => {
+  const { data } = useGetPermissionById(id);
+  const { formik } = permissionAddControlForm(data);
 
   const handleFormSubmit = async () => {
     const isValid = await formik.validateForm();
     if (isValid) {
       formik.handleSubmit();
       if (formik.isValid) {
-        formik.setTouched({
-          name: true,
-        });
-        onClose();
+        handleCloseModal();
       } else {
         toast.error("Please make sure you have filled the form correctly");
       }
@@ -28,7 +27,7 @@ export const AddPermissionModel = ({ open, handleCloseModal }) => {
       onClose={handleCloseModal}
       formComponent={
         <Box display="grid" gridTemplateRows="1fr" gap="1rem">
-          <h3>Add Permission</h3>
+          <h3>Edit Permission</h3>
           <TextField
             id="id"
             name="name"
@@ -38,7 +37,9 @@ export const AddPermissionModel = ({ open, handleCloseModal }) => {
             onChange={formik.handleChange}
             error={formik.touched.name && Boolean(formik.errors.name)}
             helperText={formik.touched.name && formik.errors.name}
-
+            variant="outlined"
+            autoFocus
+            InputLabelProps={{ shrink: true }}
           />
 
           <Stack
@@ -49,7 +50,7 @@ export const AddPermissionModel = ({ open, handleCloseModal }) => {
           >
             <ButtonComponent
               OnClick={handleFormSubmit}
-              buttonName={" Add Permission"}
+              buttonName={" Edit"}
             />
             <ButtonComponent
               OnClick={handleCloseModal}
