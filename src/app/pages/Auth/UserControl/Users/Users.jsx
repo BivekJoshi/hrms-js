@@ -35,7 +35,7 @@ const columns = [
   { title: "Email", field: "email", emptyValue: "-", width: "120" },
   {
     title: "Role",
-    render: (rowData) => getRoleLabel(rowData?.roles?.name),
+    render: (rowData) => getRoleLabel(rowData?.roles?.[0]?.name),
     width: "80",
   },
   {
@@ -48,7 +48,7 @@ const columns = [
 
 const getRoleLabel = (roleName) => {
   const role = roleType?.find((role) => role?.name === roleName);
-  return role ? role.label : "-";
+  return role ? role?.label : "-";
 };
 
 const Users = () => {

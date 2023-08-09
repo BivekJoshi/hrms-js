@@ -1,7 +1,9 @@
-import { axiosInstance } from '../../../auth/axiosInterceptor';
+import { axiosInstance } from "../../../auth/axiosInterceptor";
 
 export const addPermanentAddress = async (formData, id) => {
-  const permanentAddress = formData.addresses.find((address) => address.addressType === 'PERMANENT');
+  const permanentAddress = formData.addresses.find(
+    (address) => address.addressType === "PERMANENT"
+  );
   if (permanentAddress) {
     const data = await axiosInstance.post(`/address/${id}`, [permanentAddress]);
     return data;
@@ -11,8 +13,15 @@ export const addPermanentAddress = async (formData, id) => {
 };
 
 export const addTemporaryAddress = async (formData, id) => {
-  const data = await axiosInstance.post(`/address/temporary/${id}`, formData);
-  return data;
+  const temporaryAddress = formData.addresses.find(
+    (address) => address.addressType == "TEMPORARY"
+  );
+  if (temporaryAddress) {
+    const data = await axiosInstance.post(`/address/${id}`, [temporaryAddress]);
+    return data;
+  } else {
+    return null;
+  }
 };
 
 export const getAddressById = (id) => {
