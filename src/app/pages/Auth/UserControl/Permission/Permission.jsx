@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { useGetPermission } from "../../../../hooks/auth/permission/usePermission";
 import { Stack, Button, Typography, Box } from "@mui/material";
+import { AddPermissionModel } from "./Component/AddPermissionModel";
 
 const Permission = () => {
   const { data: permissionData } = useGetPermission();
+  const [openAddModal, setOpenAddModal] = useState(false);
+  const handleAddOpenModal = () => setOpenAddModal(true);
+  const handleCloseAddModal = () => setOpenAddModal(false);
 
   const getRandomColor = () => {
-    const colors = ["blue", "green", "navy", "purple"];
+    const colors = ["#6527BE", "#45CFDD", "#45CFDD", "#9681EB", "#D58BDD"];
     return colors[Math.floor(Math.random() * colors.length)];
   };
 
@@ -34,9 +38,16 @@ const Permission = () => {
         marginY: "1rem",
       }}
     >
-                        <Stack sx={{display: "flex", flexDirection: "row-reverse"}}><Button color="primary" variant="contained" sx={{maxWidth: "fit-content"}}>
-                  Add
-                </Button></Stack>
+      <Stack sx={{ display: "flex", flexDirection: "row-reverse" }}>
+        <Button
+          color="primary"
+          variant="contained"
+          sx={{ maxWidth: "fit-content" }}
+          onClick={handleAddOpenModal}
+        >
+         + Add Permission
+        </Button>
+      </Stack>
       {permissionData &&
         permissionData.map((role, index) => {
           const { name } = getPermissionStyle(role?.name);
@@ -77,7 +88,6 @@ const Permission = () => {
                   gap: "0.7rem",
                 }}
               >
-
                 <Button color="secondary" variant="contained">
                   Edit
                 </Button>
@@ -88,7 +98,13 @@ const Permission = () => {
             </Stack>
           );
         })}
-      ;
+      
+      {openAddModal && (
+        <AddPermissionModel
+          open={openAddModal}
+          handleCloseModal={handleCloseAddModal}
+        />
+      )}
     </Box>
   );
 };
