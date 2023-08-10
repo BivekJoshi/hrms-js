@@ -106,7 +106,7 @@ export const DetailProfile = ({ data }) => {
             <PromotionHistory data={data} />
           </TabPanel>
           <TabPanel value="6" style={{ padding: 10 }}>
-            <TrainingInfo/>
+            <TrainingInfo data={data}/>
           </TabPanel>
           <TabPanel value="7" style={{ padding: 10 }}>
             <DocumentInfo />

@@ -15,14 +15,14 @@ export const AddTrainingInfo = ({ open, handleCloseModal }) => {
   );
 };
 
-export const EditTrainingInfo = ({ open, handleCloseModal, id }) => {
+export const EditTrainingInfo = ({ open, handleCloseModal, id,empId }) => {
   const { data } = useGetTrainingById(id);
   return (
     <div>
       <FormModal
         open={open}
         onClose={handleCloseModal}
-        formComponent={<TrainingField onClose={handleCloseModal} data={data} />}
+        formComponent={<TrainingField onClose={handleCloseModal} data={data} empId={empId}/>}
       />
     </div>
   );

@@ -219,7 +219,7 @@ export default function Sidebar() {
       subMenus: [],
     },
     {
-      name: 'ToDo',
+      name: 'Todo',
       icon: (
         <PlaylistAddCheckIcon
           sx={mode === 'light' ? { color: 'black' } : { color: 'white' }}

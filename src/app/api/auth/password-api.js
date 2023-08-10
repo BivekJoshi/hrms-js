@@ -14,13 +14,19 @@ export const getUserById = async (id) => {
 {/*____________________________POST____________________________________________*/}
 export const addforgotPassword = async (formData) => {
     const emailData = formData.email;
-    const data = await axiosInstance.post(`/user/forgot-password-email/random-password?email=${emailData}`,);
+    const data = await axiosInstance.put(`/user/activate/forgot-password/activation-url?email=${emailData}`,);
     return data;
 };
 
 {/*____________________________PUT____________________________________________*/}
-export const addResetPassword = async (formData) => {
-    const {id} = formData;
+export const addResetPassword = async (id, formData) => {
     const data = await axiosInstance.put(`/user/reset-password/${id}`, formData);
+    return data;
+};
+
+{/*____________________________PUT____________________________________________*/}
+export const addRenamePassword = async (formData) => {
+    const { id, password } = formData;
+    const data = await axiosInstance.put(`/user/activate/set-password/${id}`, { password });
     return data;
 };

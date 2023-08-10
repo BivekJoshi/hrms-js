@@ -1,18 +1,20 @@
-import { axiosInstance } from '../../../auth/axiosInterceptor';
+import { axiosInstance } from "../../../auth/axiosInterceptor";
 
 /*___________________________________POST_________________________________________*/
-export const addTrainingDetail = async (formData,id) => {
-    const data = await axiosInstance.post(`/training/${id}`, formData);
-    return data;
+export const addTrainingDetail = async (formData, id) => {
+  const data = await axiosInstance.post(`/training/${id}`, formData);
+  return data;
 };
 
-/*________________________GET ALL_____________________________________*/ 
+/*________________________GET ALL_____________________________________*/
+
 export const getTrainingDetail = async () => {
   const data = await axiosInstance.get(`/training`);
   return data;
 };
 
-/*________________________GET BY TRAININGID_____________________________________*/ 
+/*________________________GET BY TRAININGID_____________________________________*/
+
 export const getTrainingById = async (id) => {
   if (id) {
     const data = await axiosInstance.get(`/training/${id}`);
@@ -20,16 +22,31 @@ export const getTrainingById = async (id) => {
   }
 };
 
-/*________________________EDIT_____________________________________*/ 
-export const editTraining = async (formData) => {
-  const {id} = formData;
-  const data = await axiosInstance.put(`/training/${id}`, formData);
-  return data;
+/*________________________GET BY EMPLOYEEID_____________________________________*/
+
+export const getEmployeeById = async (id) => {
+  if (id) {
+    const data = await axiosInstance.get(`/training/by-employee/${id}`);
+    return data;
+  }
 };
 
-/*________________________DELETE_____________________________________*/ 
+/*________________________EDIT_____________________________________*/
+
+export const editTraining = async (formData, empId) => {
+  const { id } = formData;
+  if (id && empId) {
+    const data = await axiosInstance.put(
+      `/training/${id}?employeeId=${empId}`,
+      formData
+    );
+    return data;
+  }
+};
+
+/*________________________DELETE_____________________________________*/
+
 export const deleteTraining = async (id) => {
   const response = await axiosInstance.delete(`/training/${id}`);
   return response.data;
 };
-
