@@ -28,12 +28,6 @@ const ForgotPassword = ({ onClose, isLoading }) => {
   const style = {
     display: "flex",
     width: "40%",
-    // justifyContent: "Column",
-    // padding: "1rem",
-    // border: "9px solid rgb(69 24 247)",
-    // boxShadow: "rgba(0, 0, 0, 0.5) 12px 12px 7px",
-    // background: "#3edbeb",
-    // gap: "1rem",
   };
 
   return (

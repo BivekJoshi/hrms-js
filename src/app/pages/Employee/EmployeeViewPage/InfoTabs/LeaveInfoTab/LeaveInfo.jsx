@@ -6,6 +6,7 @@ import { useGetEmployeeLeaveById } from "../../../../../hooks/leave/useLeave";
 import { useGetLeaveType } from "../../../../../hooks/leaveType/useLeaveType";
 import "../../EmployProfile/Style/Style.css";
 import DashboardCard from "../../../../../components/cards/Dashboard/DashboardCard";
+
 const LeaveInfo = ({ isLoading }) => {
   const { id } = useParams();
   const { data: leaveData, isLoading: loadingLeave } = useGetEmployeeLeaveById(
@@ -26,10 +27,10 @@ const LeaveInfo = ({ isLoading }) => {
   if (leaveData) {
     const pendingLeaves = leaveData.filter((item) => item.leaveStatus === 'PENDING');
    
-    console.log(pendingLeaves, "pendinggggggg");
+    // console.log(pendingLeaves, "pendinggggggg");
     // return pendingLeaves;
   } else {
-    console.log("leaveData is undefined or null");
+    // console.log("leaveData is undefined or null");
   }
 
 

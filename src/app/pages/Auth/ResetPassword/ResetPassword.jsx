@@ -78,12 +78,8 @@ const ResetPassword = ({ isLoading }) => {
 
   const style = {
     display: 'flex',
-    // width: '40%',
     justifyContent: 'center',
     padding: { lg: '40px', xs: 0 },
-    // border: "9px solid rgb(69 24 247)",
-    // boxShadow: "rgba(0, 0, 0, 0.5) 12px 12px 7px",
-    // background: "#3edbeb",
     gap: '1rem',
   };
 
@@ -96,9 +92,6 @@ const ResetPassword = ({ isLoading }) => {
           gridTemplateColumns: { lg: 'repeat(2, 1fr)', xs: '1fr' },
           marginTop: '30px',
           gap: { xs: '2rem', lg: 0 },
-          // justifyContent: "space-around",
-          // alignItems: "center",
-          // gridTemplateColumns: Repeat(2, 1fr),
         }}
       >
         <Stack>
@@ -137,7 +130,6 @@ const ResetPassword = ({ isLoading }) => {
           }}
         />
         <Stack style={style}>
-          {/* <Grid container spacing={3} > */}
           <Grid item>
             <TextField
               id='oldPassword'
@@ -146,13 +138,12 @@ const ResetPassword = ({ isLoading }) => {
               placeholder='Enter your old password...'
               fullWidth
               required
-              value={formik.values.password}
+              value={formik.values.oldPassword}
               onChange={(e) => {
                 formik.handleChange(e);
-                handleChangeValidation(e.target.value);
               }}
-              error={formik.touched.password && Boolean(formik.errors.password)}
-              helperText={formik.touched.password && formik.errors.password}
+              error={formik.touched.oldPassword && Boolean(formik.errors.oldPassword)}
+              helperText={formik.touched.oldPassword && formik.errors.oldPassword}
               variant='outlined'
               autoFocus
               type={showValues.showPassword ? 'text' : 'password'}
@@ -274,146 +265,8 @@ const ResetPassword = ({ isLoading }) => {
               Change Password
             </LoadingButton>
           </Grid>
-          {/* </Grid> */}
         </Stack>
       </Grid>
-      // <Grid
-      //   container
-      //   spacing={3}
-      //   sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
-      // >
-      //   <Grid item xs={6}>
-      //     <Typography variant='h4' component='h2'>
-      //       Change Password <LockPersonIcon sx={{ fontSize: '2rem' }} />
-      //     </Typography>
-      //     <br />
-      //     <div style={{ display: 'grid', justifyContent: 'center' }}>
-      //       <p>Password must contain :</p>
-      //       <ValidationItem
-      //         validated={lowerValidated}
-      //         message=' At least one lowercase letter'
-      //       />
-      //       <ValidationItem
-      //         validated={upperValidated}
-      //         message=' At least one uppercase letter'
-      //       />
-      //       <ValidationItem
-      //         validated={numberValidated}
-      //         message=' At least one number'
-      //       />
-      //       <ValidationItem
-      //         validated={specialValidated}
-      //         message=' At least one special character'
-      //       />
-      //       <ValidationItem
-      //         validated={lengthValidated}
-      //         message=' At least 8 characters'
-      //       />
-      //     </div>
-      //   </Grid>
-      //   <Grid item xs={6}>
-      //     <Grid container spacing={3}>
-      //       <Grid item xs={10}>
-      //         <TextField
-      //           id='password'
-      //           name='password'
-      //           label='New Password'
-      //           placeholder='Enter your new password...'
-      //           fullWidth
-      //           required
-      //           value={formik.values.password}
-      //           onChange={(e) => {
-      //             formik.handleChange(e);
-      //             handleChangeValidation(e.target.value);
-      //           }}
-      //           error={
-      //             formik.touched.password && Boolean(formik.errors.password)
-      //           }
-      //           helperText={formik.touched.password && formik.errors.password}
-      //           variant='outlined'
-      //           autoFocus
-      //           type={showValues.showPassword ? 'text' : 'password'}
-      //           InputLabelProps={{ shrink: true }}
-      //           InputProps={{
-      //             endAdornment: (
-      //               <InputAdornment position='end'>
-      //                 <Tooltip title='Show Password'>
-      //                   <IconButton
-      //                     aria-label='toggle password visibility'
-      //                     onClick={handleClickShowPassword}
-      //                     onMouseDown={handleMouseDownPassword}
-      //                     edge='end'
-      //                   >
-      //                     {showValues.showPassword ? (
-      //                       <VisibilityOff />
-      //                     ) : (
-      //                       <Visibility />
-      //                     )}
-      //                   </IconButton>
-      //                 </Tooltip>
-      //               </InputAdornment>
-      //             ),
-      //           }}
-      //         />
-      //       </Grid>
-      //       <Grid item xs={10}>
-      //         <TextField
-      //           id='confirmPassword'
-      //           name='confirmPassword'
-      //           label='Confirm New Password'
-      //           placeholder='Confirm your new password...'
-      //           fullWidth
-      //           required
-      //           value={formik.values.confirmPassword}
-      //           onChange={formik.handleChange}
-      //           error={
-      //             formik.touched.confirmPassword &&
-      //             Boolean(formik.errors.confirmPassword)
-      //           }
-      //           helperText={
-      //             formik.touched.confirmPassword &&
-      //             formik.errors.confirmPassword
-      //           }
-      //           variant='outlined'
-      //           autoFocus
-      //           type={showValues.showPassword ? 'text' : 'password'}
-      //           InputLabelProps={{ shrink: true }}
-      //           InputProps={{
-      //             endAdornment: (
-      //               <InputAdornment position='end'>
-      //                 <Tooltip title='Show Password'>
-      //                   <IconButton
-      //                     aria-label='toggle password visibility'
-      //                     onClick={handleClickShowPassword}
-      //                     onMouseDown={handleMouseDownPassword}
-      //                     edge='end'
-      //                   >
-      //                     {showValues.showPassword ? (
-      //                       <VisibilityOff />
-      //                     ) : (
-      //                       <Visibility />
-      //                     )}
-      //                   </IconButton>
-      //                 </Tooltip>
-      //               </InputAdornment>
-      //             ),
-      //           }}
-      //         />
-      //       </Grid>
-      //       <Grid item xs={10}>
-      //         <LoadingButton
-      //           fullWidth
-      //           onClick={handleFormSubmit}
-      //           variant='contained'
-      //           loading={loading}
-      //           className='login-btn'
-      //         >
-      //           Change Password
-      //         </LoadingButton>
-      //       </Grid>
-      //     </Grid>
-      //   </Grid>
-      // </Grid>
     )
   );
 };

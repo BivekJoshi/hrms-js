@@ -3,6 +3,7 @@ import {
   addTrainingDetail,
   deleteTraining,
   editTraining,
+  getEmployeeById,
   getTrainingById,
   getTrainingDetail,
 } from "../../api/training/training-api";
@@ -25,6 +26,14 @@ export const useGetTrainingById = (id) => {
   });
 };
 
+/*________________________GET BY EMPLOYEE ID_____________________________________*/
+export const useGetEmployeeById = (id) => {
+  return useQuery(["getEmployeeById", id], () => getEmployeeById(id), {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
+};
+
 /*________________________POST_____________________________________*/
 export const useAddTrainingDetail = ({ onSuccess }) => {
   const queryClient = useQueryClient();
@@ -36,7 +45,7 @@ export const useAddTrainingDetail = ({ onSuccess }) => {
       onSuccess: (data, variables, context) => {
         toast.success("Succesfully added Employee Training");
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries("getTrainingDetail");
+        queryClient.invalidateQueries("getEmployeeById");
       },
       onError: (err, _variables, _context) => {
         toast.error(`error: ${err.message}`);
@@ -55,7 +64,7 @@ export const useDeleteTraining = ({ onSuccess }) => {
       onSuccess: (data, variables, context) => {
         toast.success("Successfully deleted Employee Training");
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries("getTrainingDetail");
+        queryClient.invalidateQueries("getEmployeeById");
       },
       onError: (err, _variables, _context) => {
         toast.error(`Error: ${err.message}`);
@@ -65,13 +74,14 @@ export const useDeleteTraining = ({ onSuccess }) => {
 };
 
 /*________________________EDIT_____________________________________*/
-export const useEditTraining = ({ onSuccess }) => {
+export const useEditTraining = ({ onSuccess,empId }) => {
   const queryClient = useQueryClient();
-  return useMutation(["editTraining"], (formData) => editTraining(formData), {
+  console.log(empId,"employeeID");
+  return useMutation(["editTraining"], (formData) => editTraining(formData,empId), {
     onSuccess: (data, variables, context) => {
       toast.success("Successfully edited Employee Training");
       onSuccess && onSuccess(data, variables, context);
-      queryClient.invalidateQueries("getTrainingDetail");
+      queryClient.invalidateQueries("getEmployeeById");
     },
     onError: (err, _variables, _context) => {
       toast.error(`Error: ${err.message}`);

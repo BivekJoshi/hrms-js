@@ -1,19 +1,49 @@
-import { Box, Button } from "@mui/material";
+import { Box, Button, Stack } from "@mui/material";
 import MaterialTable from "@material-table/core";
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import { useGetTraining } from "../../../../../hooks/training/useTraining";
-import FormModal from "../../../../../components/Modal/FormModal";
-import { AddTrainingInfo } from "./TrainingModal";
+import {
+  useDeleteTraining,
+  useGetEmployeeById,
+  useGetTraining,
+} from "../../../../../hooks/training/useTraining";
+import { AddTrainingInfo, EditTrainingInfo } from "./TrainingModal";
+import DeleteIcon from "@mui/icons-material/Delete";
+import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
+import DeleteConfirmationModal from "../../../../../components/Modal/DeleteConfirmationModal";
 
 const TrainingInfo = () => {
   const { id } = useParams();
-  const { data: trainingData, isLoading } = useGetTraining(id);
+  const { data, isLoading } = useGetEmployeeById(id);
 
   const [openAddModal, setOpenAddModal] = useState(false);
+  const [openEditModal, setOpenEditModal] = useState(false);
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
+
+  const handleCloseDeleteModal = () => setOpenDeleteModal(false);
+  const handleCloseEditModal = () => setOpenEditModal(false);
+
+  const [deletedTraining, setDeletedTraining] = useState({});
+  const [editedTraining, setEditedTraining] = useState({});
 
   const handleAddOpenModal = () => setOpenAddModal(true);
   const handleCloseAddModal = () => setOpenAddModal(false);
+
+  const deleteTrainingMutation = useDeleteTraining({});
+  const handleDeleteTraining = (rowData) => {
+    setDeletedTraining(rowData);
+    setOpenDeleteModal(true);
+  };
+
+  const handleConfirmDelete = () => {
+    deleteTrainingMutation.mutate(deletedTraining.id);
+    setOpenDeleteModal(false);
+  };
+
+  const handleEditTraining = (rowData) => {
+    setEditedTraining(rowData);
+    setOpenEditModal(true);
+  };
 
   const columns = [
     {
@@ -52,6 +82,22 @@ const TrainingInfo = () => {
       emptyValue: "-",
       width: 200,
     },
+    {
+      title: "Actions",
+      render: (rowData) => (
+        <Stack direction="row" spacing={0}>
+          <Button
+            color="primary"
+            onClick={() => handleEditTraining(rowData)}
+          >
+            <ModeEditOutlineIcon />
+          </Button>
+          <Button color="primary" onClick={() => handleDeleteTraining(rowData)}>
+            <DeleteIcon />
+          </Button>
+        </Stack>
+      ),
+    },
   ];
   return (
     <Box className="tableIcon">
@@ -70,11 +116,10 @@ const TrainingInfo = () => {
           +Add Training
         </Button>
       </Box>
-
       <MaterialTable
         style={{ padding: "1rem" }}
         columns={columns}
-        data={trainingData}
+        data={Array.isArray(data) ? data : []}
         title="Training History"
         isLoading={isLoading}
         options={{
@@ -99,6 +144,23 @@ const TrainingInfo = () => {
         <AddTrainingInfo
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
+        />
+      )}
+      {openDeleteModal && (
+        <DeleteConfirmationModal
+          open={openDeleteModal}
+          handleCloseModal={handleCloseDeleteModal}
+          handleConfirmDelete={handleConfirmDelete}
+          message={"Employee Training"}
+        />
+      )}
+
+      {openEditModal && (
+        <EditTrainingInfo
+          empId={id}
+          id={editedTraining?.id}
+          open={openEditModal}
+          handleCloseModal={handleCloseEditModal}
         />
       )}
     </Box>

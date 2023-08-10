@@ -7,6 +7,8 @@ import ProtectedRoute from "./ProtectedRoute";
 import { routes } from "./routes";
 import ForgotPassword from "../app/pages/Auth/FogotPassword/ForgotPassword";
 import Login from "../app/pages/Auth/Login/Login";
+import RenamePassword from "../app/pages/Auth/ResetPassword/RenamePassword";
+import VerifyPassword from "../app/pages/Auth/VerifyPassword/VerifyPassword";
 
 const AppRoutes = () => {
   return (
@@ -15,7 +17,9 @@ const AppRoutes = () => {
         <Routes>
           <Route path="/" exact element={<Applayout />}>
             <Route path="/" exact element={<Login />} />
-            <Route path="/forgot-password" exact element={<ForgotPassword />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            {/* <Route path="/hrms/user-activation" element={<VerifyPassword />} /> */}
+             <Route path="/hrms/user-activation" element={<RenamePassword />} />
             <Route path="/admin" element={<AdminLayout />}>
               <Route element={<ProtectedRoute redirectTo="/" />}>
                 {routes.map((route) => (
