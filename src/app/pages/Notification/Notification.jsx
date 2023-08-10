@@ -10,7 +10,7 @@ const Notification = ({ data }) => {
   const { data: holidays, isLoading, isError } = useGetHolidayCurrent();
 
   const todayDate = new Date().toISOString().split("T")[0];
-  const todayHoliday = holidays?.filter(
+  const todayHoliday = events?.filter(
     (event) => event?.holidayDate === todayDate
   );
   const todayEvent = events?.length;

@@ -2,8 +2,8 @@ import React from "react";
 import useTrainingForm from "../../../hooks/training/TrainingForm/useTrainingForm";
 import { Button, Grid, TextField } from "@mui/material";
 
-const TrainingField = ({ onClose, isLoading, data }) => {
-  const { formik } = useTrainingForm(data);
+const TrainingField = ({ onClose, isLoading, data ,empId}) => {
+  const { formik } = useTrainingForm(data,empId);
   const handleFormSubmit = () => {
     formik.handleSubmit();
 

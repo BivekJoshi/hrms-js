@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Typography from "@mui/material/Typography";
-import { Box, Card, Container, Grid, Stack } from "@mui/material";
+import { Box, Card, Container, Grid, Stack, TextField } from "@mui/material";
 import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
 import { useGetProject } from "../../hooks/project/useProject";
 import { AddProjectModal } from "./ProjectModal/ProjectModal";
@@ -8,27 +8,26 @@ import { useNavigate } from "react-router-dom";
 
 import ProjectCard from "../../components/cards/Employee/ProjectCard";
 import { PagePagination } from "../../components/Pagination/PagePagination";
-import { FilterProject } from "../../components/Filter/Filter";
 import { ButtonComponent } from "../../components/Button/ButtonComponent";
 
 const Project = () => {
   const navigate = useNavigate();
   const { data: projectData, isLoading } = useGetProject();
+
   const [nameFilter, setNameFilter] = useState("");
-
+  const [companyFilter, setCompanyFilter] = useState("");
   const [isContainerVisible, setIsContainerVisible] = useState(false);
-
+  const [openAddModal, setOpenAddModal] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(6);
+  
   const handleFilterIconClick = () => {
     setIsContainerVisible(!isContainerVisible);
   };
 
-  const [openAddModal, setOpenAddModal] = useState(false);
-
   const handleAddOpenModal = () => setOpenAddModal(true);
   const handleCloseAddModal = () => setOpenAddModal(false);
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(12);
 
   const projectArray = Array.isArray(projectData)
     ? projectData
@@ -36,9 +35,11 @@ const Project = () => {
     ? Object.values(projectData)
     : [];
 
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = projectArray.slice(indexOfFirstPost, indexOfLastPost);
+  const filteredProject = projectData?.filter((project) =>
+    project?.projectName.toLowerCase().includes(nameFilter.toLowerCase())
+    // &&
+    // project?.associateCompanies?.companyName.toLowerCase().includes(companyFilter.toLowerCase())
+  );
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   if (isLoading) return <>Loading</>;
@@ -81,9 +82,25 @@ const Project = () => {
         {isContainerVisible && (
           <Container maxWidth="100vh">
             <Card sx={{ padding: 1 }}>
+              <Typography variant="h6" gutterBottom>
+                Search Project
+              </Typography>
               <Grid container spacing={3}>
-                <Grid item xs={12} sm={12} md={4}>
-                  <FilterProject data={currentPosts} />
+                <Grid item xs={12} sm={12} md={6}>
+                  <TextField
+                    label="Filter by Name"
+                    value={nameFilter}
+                    onChange={(e) => setNameFilter(e.target.value)}
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={12} sm={12} md={6}>
+                  <TextField
+                    label="Filter by Company"
+                    value={companyFilter}
+                    onChange={(e) => setCompanyFilter(e.target.value)}
+                    fullWidth
+                  />
                 </Grid>
               </Grid>
             </Card>
@@ -101,7 +118,7 @@ const Project = () => {
           gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))",
         }}
       >
-        {currentPosts.map((item, index) => (
+        {filteredProject.map((item, index) => (
           <>
             <ProjectCard
               item={item}

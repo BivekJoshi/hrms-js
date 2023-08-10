@@ -9,6 +9,42 @@ import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { axiosInstance } from "../../../auth/axiosInterceptor";
 
+
+
+{
+  /*________________________GETBYID_____________________________________*/
+}
+export const useGetDocumentById = (id) => {
+  return useQuery(["getDocumentById", id], () => getDocumentById(id), {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
+};
+
+{
+  /*________________________GETBYID_____________________________________*/
+}
+export const useGetDocumentByFileId = (id) => {
+  return useQuery(["getDocumentByFileId", id], () => getDocumentByFileId(id), {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
+};
+
+{
+  /*________________________GET-DOCUMENT BY DOUCUMENT-TYPE_____________________________________*/
+}
+export const useGetDocumentByDocumentType = (id, documentType) => {
+  return useQuery(
+    ["getDocumentType", id, documentType],
+    () => getDocumentByDocumentType(id, documentType),
+    {
+      refetchInterval: false,
+      refetchOnWindowFocus: false,
+    }
+  );
+};
+
 {
   /*________________________ADD DOCUMENT MULTIPLE FILE_____________________________________*/
 }
@@ -85,45 +121,11 @@ export const useAddProfile = ({ onSuccess }) => {
       onSuccess: (data, variables, context) => {
         toast.success("Document added successfully");
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries("getDocumentById");
+        queryClient.invalidateQueries("getDocumentType");
       },
       onError: (err, _variables, _context) => {
         toast.error(`error: ${err.message}`);
       },
-    }
-  );
-};
-
-{
-  /*________________________GETBYID_____________________________________*/
-}
-export const useGetDocumentById = (id) => {
-  return useQuery(["getDocumentById", id], () => getDocumentById(id), {
-    refetchInterval: false,
-    refetchOnWindowFocus: false,
-  });
-};
-
-{
-  /*________________________GETBYID_____________________________________*/
-}
-export const useGetDocumentByFileId = (id) => {
-  return useQuery(["getDocumentById", id], () => getDocumentByFileId(id), {
-    refetchInterval: false,
-    refetchOnWindowFocus: false,
-  });
-};
-
-{
-  /*________________________GET-DOCUMENT BY DOUCUMENT-TYPE_____________________________________*/
-}
-export const useGetDocumentByDocumentType = (id, documentType) => {
-  return useQuery(
-    ["getDocumentType", id, documentType],
-    () => getDocumentByDocumentType(id, documentType),
-    {
-      refetchInterval: false,
-      refetchOnWindowFocus: false,
     }
   );
 };
@@ -175,7 +177,7 @@ export const useEditDocument = ({ onSuccess }) => {
       onSuccess: (data, variables, context) => {
         toast.success("Successfully edited Document");
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries("getDocumentById");
+        queryClient.invalidateQueries("getDocumentType");
       },
       onError: (err, _variables, _context) => {
         toast.error(`Error: ${err.message}`);
