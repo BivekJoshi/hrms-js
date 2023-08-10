@@ -15,15 +15,15 @@ const BasicInfo = ({ data, mode }) => {
   };
 
   const FAMILYMEMBERS = {
-    Name: data?.familyMembers[0]?.name || "",
-    Relation: data?.familyMembers[0]?.relation || "",
-    "Contact Number": data?.familyMembers[0]?.mobileNumber || "",
+    Name: data?.familyMembers?.[0]?.name || "",
+    Relation: data?.familyMembers?.[0]?.relation || "",
+    "Contact Number": data?.familyMembers?.[0]?.mobileNumber || "",
   };
 
   const BANKDETAILS = {
-    "Bank Name": data?.bankDetailSet[0]?.bankName || "",
-    "Account Number": data?.bankDetailSet[0]?.bankAccountNumber || "",
-    Location: data?.bankDetailSet[0]?.bankAddress || "",
+    "Bank Name": data?.bankDetailSet?.[0]?.bankName || "",
+    "Account Number": data?.bankDetailSet?.[0]?.bankAccountNumber || "",
+    Location: data?.bankDetailSet?.[0]?.bankAddress || "",
     "PAN Number": data?.panNumber || "",
   };
 

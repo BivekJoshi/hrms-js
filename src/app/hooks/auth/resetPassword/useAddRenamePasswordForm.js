@@ -1,22 +1,19 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
-import { useAddResetPassword, useGetLoggedInUser } from "../usePassword";
+import { useAddRenamePassword } from "../usePassword";
 import { ResetPasswordSchema } from "./ResetPasswordSchema";
 
-const useAddForgotPasswordForm = () => {
+const useAddRenamePasswordForm = ({ id }) => {
   const [loading, setLoading] = useState(false);
   const [showValues, setShowValues] = useState({
-    oldPassword: "",
     password: "",
     showPassword: false,
   });
-  const { data: loggedInUser } = useGetLoggedInUser();
-  const id = loggedInUser?.id;
-  const { mutate } = useAddResetPassword({id});
+
+  const { mutate } = useAddRenamePassword({});
 
   const formik = useFormik({
     initialValues: {
-      oldPassword: "",
       password: "",
     },
     validationSchema: ResetPasswordSchema,
@@ -31,7 +28,7 @@ const useAddForgotPasswordForm = () => {
       ...values,
     };
     mutate(
-      values,
+      { ...values, id },
       formik,
       { onSuccess: () => formik.handleReset() },
       { onSettled: () => setLoading(false) }
@@ -58,4 +55,4 @@ const useAddForgotPasswordForm = () => {
   };
 };
 
-export default useAddForgotPasswordForm;
+export default useAddRenamePasswordForm;

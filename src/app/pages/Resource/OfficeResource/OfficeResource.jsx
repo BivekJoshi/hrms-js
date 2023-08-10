@@ -12,7 +12,6 @@ import { ButtonComponent } from "../../../components/Button/ButtonComponent";
 
 const OfficeResource = () => {
   const { data: officeResourceData, isLoading } = useGetOfficeResource();
-
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
 

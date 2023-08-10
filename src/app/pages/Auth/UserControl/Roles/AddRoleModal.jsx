@@ -17,7 +17,6 @@ export const AddRoleModal = ({ open, handleCloseModal }) => {
 
 export const EditRoleModal = ({ open, handleCloseModal, id }) => {
   const { data } = useGetRoleByID(id);
-  // console.log(data);
   return (
     <FormModal
       open={open}
