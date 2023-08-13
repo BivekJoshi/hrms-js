@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 import React from "react";
-import "../Style/Style.css"
+import "../Style/Style.css";
 
 export const ButtonComponent = ({
   buttonName,
@@ -11,6 +11,7 @@ export const ButtonComponent = ({
   Border,
   disabled
 }) => {
+
   return (
     <Button
       className={NameClass ? NameClass : "buttonHover"}
