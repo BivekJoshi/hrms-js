@@ -1,6 +1,7 @@
-import { Button, Grid, TextField } from "@mui/material";
+import { Button, FormControlLabel, Grid, TextField } from "@mui/material";
 import React from "react";
 import useOfficeResourceForm from "../../../../hooks/resource/officeResource/OfficeResourceForm/useOfficeResourceForm";
+import { ThemeSwitch } from "../../../../../theme/ThemeSwitch";
 
 const OfficeResourceFields = ({ onClose, isLoading, data }) => {
   const { formik } = useOfficeResourceForm(data);
@@ -14,6 +15,8 @@ const OfficeResourceFields = ({ onClose, isLoading, data }) => {
       toast.error("Please make sure you have filled the form correctly");
     }
   };
+  const submitButtonText = data ? "Update " : "Add ";
+
   return (
     !isLoading && (
       <Grid container spacing={3}>
@@ -75,6 +78,18 @@ const OfficeResourceFields = ({ onClose, isLoading, data }) => {
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
+        <Grid item xs={12} sm={12}>
+            <FormControlLabel
+              control={
+                <ThemeSwitch
+                  checked={formik.values.isActive}
+                  onChange={formik.handleChange}
+                  name="isActive"
+                />
+              }
+              label="If you want to deactive the office resource set switch to false"
+            />
+          </Grid>
         <Grid
           container
           direction="row"
@@ -87,7 +102,7 @@ const OfficeResourceFields = ({ onClose, isLoading, data }) => {
             sx={{ mt: 3, ml: 1 }}
             onClose={onClose}
           >
-            Add Resource
+            {submitButtonText}
           </Button>
           <Button
             variant="contained"

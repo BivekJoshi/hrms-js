@@ -13,7 +13,7 @@ import useAuth from "../../../auth/hooks/component/login/useAuth";
 
 const Company = () => {
   const { status, isSuperAdmin, isAdmin, isHr, isEmployee } = useAuth();
-console.log({"isAdmin": isAdmin})
+
   const [value, setValue] = React.useState("1");
 
   const [openAddModal, setOpenAddModal] = useState(false);
