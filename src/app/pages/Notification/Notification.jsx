@@ -10,13 +10,15 @@ const Notification = ({ data }) => {
   const { data: holidays, isLoading, isError } = useGetHolidayCurrent();
 
   const todayDate = new Date().toISOString().split("T")[0];
-  const todayHoliday = events?.filter(
-    (event) => event?.holidayDate === todayDate
-  );
-  const todayEvent = events?.length;
+  // const todayHoliday = holidays?.filter(
+  //   (event) => event?.holidayDate === todayDate
+  // );
+
+  const todayEvent = events?.filter((event) => event?.eventDate === todayDate);
+
 
   const notificationNumber =
-    (todayEvent?.length ?? 0) + (todayHoliday?.length ?? 0);
+    (todayEvent?.length ?? 0);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -63,12 +65,12 @@ const Notification = ({ data }) => {
             fontWeight={400}
             padding="1rem 1rem 0.5rem"
           >
-            {todayEvent !== 0 ? "Today's Event:" : "No Event Today!"}
+            {notificationNumber !== 0 ? "Today's Event:" : "No Event Today!"}
           </Typography>
           <List>
-            {todayEvent !== 0 && <Divider />}
-            {events &&
-              events.map((item) => (
+            {notificationNumber !== 0 && <Divider />}
+            {todayEvent &&
+              todayEvent.map((item) => (
                 <MenuItem key={item.id} sx={{ background: "#ffe4c459" }}>
                   <ListItemText primary={item?.eventName} />
                 </MenuItem>

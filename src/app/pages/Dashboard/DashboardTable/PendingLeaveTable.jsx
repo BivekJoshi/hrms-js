@@ -65,7 +65,7 @@ const PendingLeaveTable = ({ pendingLeaveData, loading }) => {
         padding: "dense",
         margin: 50,
         pageSize: 5,
-        emptyRowsWhenPaging: false,
+        // emptyRowsWhenPaging: false,
         headerStyle: {
           backgroundColor: "#01579b",
           color: "#FFF",

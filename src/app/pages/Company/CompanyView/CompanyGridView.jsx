@@ -1,6 +1,6 @@
 import React from "react";
 import { useGetCompany } from "../../../hooks/company/useCompany";
-import { TabScrollButton } from '@mui/material';
+import { TabScrollButton } from "@mui/material";
 import {
   Box,
   Button,
@@ -12,8 +12,12 @@ import {
   Typography,
 } from "@mui/material";
 
-const CompanyGridView = ({ companyData, isLoading, handleEditCompany, handleDeleteCompany }) => {
-
+const CompanyGridView = ({
+  companyData,
+  isLoading,
+  handleEditCompany,
+  handleDeleteCompany,
+}) => {
   return (
     <>
       <Grid
@@ -26,27 +30,40 @@ const CompanyGridView = ({ companyData, isLoading, handleEditCompany, handleDele
         }}
       >
         {companyData.map((item, index) => (
-          <Card key={index} sx={{border: "2px solid gray"}}>
+          <Card
+            dis
+            key={index}
+            sx={{
+              border: "1px solid black",
+              borderRadius:"1rem",
+              padding: "1rem",
+              textAlignLast: "center",
+              display: "grid",
+              gridTemplateColumns: "1fr",
+              gap: "1rem",
+            }}
+          >
             <CardHeader
               sx={{
-                textAlign: "center",
-                display: "flex",
-                justifyContent: "space-around",
+                fontSize: "1.4rem",
+                fontWeight: "600",
+                padding: "0",
               }}
               title={item?.companyName}
             />
-            <CardContent sx={{ display: "flex", flexDirection: "column", gap: "1rem", minHeight: "12rem" }}>
-              <Typography variant="h5">{item?.companyType || null}</Typography>
-              <Typography variant="p">{item?.companyDescription || null}</Typography>
-            </CardContent>
+            <Typography fontSize="1.2rem" fontWeight="600">
+              {item?.companyType || null}
+            </Typography>
+            <Typography fontSize="1rem">
+              {item?.companyDescription || null}
+            </Typography>
             <CardActions
               sx={{
                 display: "flex",
                 justifyContent: "space-around",
-                marginTop: "0.4rem"
+                marginTop: "0.4rem",
               }}
             >
-
               <Grid
                 container
                 direction="row"
@@ -72,7 +89,6 @@ const CompanyGridView = ({ companyData, isLoading, handleEditCompany, handleDele
             </CardActions>
           </Card>
         ))}
-
       </Grid>
     </>
   );
