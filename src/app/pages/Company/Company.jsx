@@ -9,8 +9,11 @@ import { useState } from "react";
 import CompanyTable from "./CompanyModal/CompanyTable";
 import CompanyGrid from "./CompanyModal/CompanyGrid";
 import { ButtonComponent } from "../../components/Button/ButtonComponent";
+import useAuth from "../../../auth/hooks/component/login/useAuth";
 
 const Company = () => {
+  const { status, isSuperAdmin, isAdmin, isHr, isEmployee } = useAuth();
+
   const [value, setValue] = React.useState("1");
 
   const [openAddModal, setOpenAddModal] = useState(false);
@@ -38,10 +41,12 @@ const Company = () => {
               <Tab label="Table View" value="1" />
               <Tab label="Grid View" value="2" />
             </TabList>
-            <ButtonComponent
-              OnClick={handleAddOpenModal}
-              buttonName={"+Add Company"}
-            />
+            {(isSuperAdmin || isAdmin) && (
+              <ButtonComponent
+                OnClick={handleAddOpenModal}
+                buttonName={"+Add Company"}
+              />
+            )}
           </Box>
           <TabPanel value="1" sx={{ padding: "0" }}>
             <br />
