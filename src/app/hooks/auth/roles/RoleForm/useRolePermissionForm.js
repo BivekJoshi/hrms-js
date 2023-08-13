@@ -7,8 +7,6 @@ const RolePermissionSchema = Yup.object().shape({
 });
 
 export const useRolePermissionForm = (data) => {
-  // console.log(data);
-  // (data);
   const { mutate } = useEditPermissionRole({});
 
   const formik = useFormik({

@@ -76,7 +76,6 @@ export const useDeleteTraining = ({ onSuccess }) => {
 /*________________________EDIT_____________________________________*/
 export const useEditTraining = ({ onSuccess,empId }) => {
   const queryClient = useQueryClient();
-  console.log(empId,"employeeID");
   return useMutation(["editTraining"], (formData) => editTraining(formData,empId), {
     onSuccess: (data, variables, context) => {
       toast.success("Successfully edited Employee Training");
