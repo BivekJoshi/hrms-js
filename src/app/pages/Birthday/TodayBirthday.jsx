@@ -5,7 +5,6 @@ import CakeIcon from "@mui/icons-material/Cake";
 import "../Style/Style.css";
 
 const TodayBirthday = ({ data }) => {
-  const [anchorEl, setAnchorEl] = useState(null);
   const birthdayEmployeeName = data?.birthdayEmployees;
   const birthdayEmployeeCount = data?.birthdayEmployeeCount || 0;
   const displayCount = birthdayEmployeeCount > 0 ? birthdayEmployeeCount : null;
