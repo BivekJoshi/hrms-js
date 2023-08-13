@@ -1,18 +1,11 @@
 import React, { useState, useRef } from "react";
 import {
   MenuItem,
-  Stack,
   Typography,
-  List,
-  ListItem,
   Popper,
   Grow,
   Paper,
-} from "@mui/material";
-import {
   Button,
-  Menu,
-  Divider,
   Box,
   ClickAwayListener,
   MenuList,
@@ -63,25 +56,6 @@ const Notification = ({ data }) => {
     color: "#fff",
   };
 
-  // const todayDate = new Date().toISOString().split("T")[0];
-
-  // const todayEvent = events?.filter((event) => event?.eventDate === todayDate);
-
-  // const notificationNumber = todayEvent?.length ?? 0;
-
-  // const [anchorEl, setAnchorEl] = React.useState(null);
-  // const open = Boolean(anchorEl);
-  // const handleClick = (event) => {
-  //   setAnchorEl(event.currentTarget);
-  // };
-  // const handleClose = () => {
-  //   setAnchorEl(null);
-  // };
-
-  // const btnStyle = {
-  //   color: "#fff",
-  // };
-
   return (
     <>
       <Box>
@@ -95,7 +69,7 @@ const Notification = ({ data }) => {
           style={btnStyle}
         >
           <NotificationsIcon />
-          {/* {data?.isChecked ? " " : displayCount } */}
+          {data?.isChecked ? " " : displayCount }
         </Button>
         {eventCount !== 0 ? (
           <Popper
