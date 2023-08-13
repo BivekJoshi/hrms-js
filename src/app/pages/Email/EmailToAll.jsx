@@ -1,15 +1,8 @@
 import React, { useState } from "react";
 import FormModal from "../../components/Modal/FormModal";
 import { useSendEmailToAll } from "../../hooks/email/useEmail";
-import {
-  Box,
-  Button,
-  Grid,
-  InputLabel,
-  MenuItem,
-  OutlinedInput,
-  Select,
-} from "@mui/material";
+import { Box, Button, Grid, InputLabel } from "@mui/material";
+import { MenuItem, OutlinedInput, Select } from "@mui/material";
 import { useGetEmployee } from "../../hooks/employee/useEmployee";
 
 const EmailToAll = ({ open, onClose, eventId }) => {
@@ -60,7 +53,6 @@ const EmailToAll = ({ open, onClose, eventId }) => {
   return (
     <>
       <FormModal
-        open={open}
         onClose={onClose}
         formComponent={
           <form onSubmit={handleSubmit}>
