@@ -9,8 +9,11 @@ import { useState } from "react";
 import CompanyTable from "./CompanyModal/CompanyTable";
 import CompanyGrid from "./CompanyModal/CompanyGrid";
 import { ButtonComponent } from "../../components/Button/ButtonComponent";
+import useAuth from "../../../auth/hooks/component/login/useAuth";
 
 const Company = () => {
+  const decoded = useAuth();
+  console.log(decoded)
   const [value, setValue] = React.useState("1");
 
   const [openAddModal, setOpenAddModal] = useState(false);
