@@ -9,8 +9,10 @@ import {
 } from "./OfficeResourceModal";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import { ButtonComponent } from "../../../components/Button/ButtonComponent";
+import { useNavigate } from "react-router-dom";
 
 const OfficeResource = () => {
+  const navigate = useNavigate();
   const { data: officeResourceData, isLoading } = useGetOfficeResource();
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
@@ -53,12 +55,6 @@ const OfficeResource = () => {
       width: "57rem",
     },
     {
-      title: "Status",
-      field: "isActive",
-      emptyValue: "-",
-      width: "8rem",
-    },
-    {
       title: "Actions",
       render: (rowData) => (
         <Stack direction="row" spacing={0}>
@@ -74,6 +70,14 @@ const OfficeResource = () => {
   return (
     <>
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+        <ButtonComponent
+          OnClick={() => {
+            navigate(`Deactivated`);
+          }}
+          buttonName={"Deactivated OfficeResource"}
+          BGColor="white"
+          TextColor="black"
+        />
         <ButtonComponent
           OnClick={handleAddOpenModal}
           buttonName={"+Add Office Resource"}
