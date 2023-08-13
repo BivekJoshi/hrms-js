@@ -129,14 +129,14 @@ export default function Header({ open, handleDrawerOpen }) {
           </Typography>
         </Box>
 
-        <Stack flexDirection="row">
+        {/* <Stack flexDirection="row">
             <TodayBirthday data={birthdayData} />
             <Notification
               data={thisDayBirthdays}
               onClearNotification={handleClearNotification}
             />
             <Profile />
-        </Stack>
+        </Stack> */}
       </Toolbar>
     </AppBar>
   );
