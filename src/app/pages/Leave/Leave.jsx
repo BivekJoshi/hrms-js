@@ -13,12 +13,15 @@ import { AddLeaveModal, EditLeaveModal } from "./LeaveModal/LeaveModal";
 import DeleteConfirmationModal from "../../components/Modal/DeleteConfirmationModal";
 import tableIcons from "../../../theme/overrides/TableIcon";
 import { ButtonComponent } from "../../components/Button/ButtonComponent";
+import { useGetUserControl } from "../../hooks/auth/userControl/useUserControl";
 
 const Leave = ({ isLoading }) => {
   const { data: leaveData, isLoading: loadingleave } = useGetLeave();
   const { data: employeeData, isLoading: loadingemployee } = useGetEmployee();
   const { data: leaveTypeData, isLoading: loadingleaveType } =
     useGetLeaveType();
+  const { data: UserData, isLoading: loadingUser } = useGetUserControl();
+
 
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
@@ -67,6 +70,14 @@ const Leave = ({ isLoading }) => {
     const name = `${capitalizeFirstLetter(leaveType.leaveName)} Leave`;
     return name;
   };
+  const getUserName = ( rowData) => {
+    const confirmById = rowData?.confirmById;  
+    const user = UserData?.find((confirmBy) => confirmBy.id === confirmById);
+    const name = `${user?.name || "-"}`;
+    return name;
+  };
+
+
   const columns = [
     {
       title: "SN",
@@ -138,11 +149,13 @@ const Leave = ({ isLoading }) => {
       emptyValue: "-",
       width: 100,
     },
+ 
     {
       title: "Approved By",
-      field: "confirmById",
-      emptyValue: "-",
-      width: 40,
+      render: (rowData) => {
+        return <p>{getUserName(rowData)} </p>;
+      },
+      width: 120,
     },
     {
       title: "Actions",

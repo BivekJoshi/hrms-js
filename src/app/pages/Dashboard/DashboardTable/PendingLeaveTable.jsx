@@ -54,6 +54,7 @@ const PendingLeaveTable = ({ pendingLeaveData, loading }) => {
     },
   ];
   return (
+    !loading &&(
     <MaterialTable
       icons={tableIcons}
       columns={columns}
@@ -81,6 +82,7 @@ const PendingLeaveTable = ({ pendingLeaveData, loading }) => {
         },
       }}
     />
+  )
   );
 };
 

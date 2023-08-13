@@ -15,7 +15,7 @@ import NotificationsIcon from "@mui/icons-material/NotificationsNone";
 const Notification = ({ data }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const eventName = data?.events;
-  console.log(eventName);
+  // console.log(eventName);
   const eventCount = data?.eventCount || 0;
   const displayCount = eventCount > 0 ? eventCount : null;
 
