@@ -8,7 +8,6 @@ import { routes } from "./routes";
 import ForgotPassword from "../app/pages/Auth/FogotPassword/ForgotPassword";
 import Login from "../app/pages/Auth/Login/Login";
 import RenamePassword from "../app/pages/Auth/ResetPassword/RenamePassword";
-import VerifyPassword from "../app/pages/Auth/VerifyPassword/VerifyPassword";
 
 const AppRoutes = () => {
   return (
@@ -18,7 +17,6 @@ const AppRoutes = () => {
           <Route path="/" exact element={<Applayout />}>
             <Route path="/" exact element={<Login />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
-            {/* <Route path="/hrms/user-activation" element={<VerifyPassword />} /> */}
              <Route path="/hrms/user-activation" element={<RenamePassword />} />
             <Route path="/admin" element={<AdminLayout />}>
               <Route element={<ProtectedRoute redirectTo="/" />}>
