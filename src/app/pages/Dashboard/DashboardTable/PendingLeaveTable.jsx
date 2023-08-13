@@ -25,9 +25,9 @@ const PendingLeaveTable = ({ pendingLeaveData, loading }) => {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
   };
   const getLeaveTypeName = (rowData) => {
-    const leaveTypeId = rowData.leaveTypeId;
-    const leaveType = leaveTypeData.find((leave) => leave.id === leaveTypeId);
-    const name = `${capitalizeFirstLetter(leaveType.leaveName)} Leave`;
+    const leaveTypeId = rowData?.leaveTypeId;
+    const leaveType = leaveTypeData?.find((leave) => leave?.id === leaveTypeId);
+    const name = `${capitalizeFirstLetter(leaveType?.leaveName)} Leave`;
     return name;
   };
 
