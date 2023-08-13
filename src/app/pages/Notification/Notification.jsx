@@ -13,13 +13,14 @@ import {
 import NotificationsIcon from "@mui/icons-material/NotificationsNone";
 
 const Notification = ({ data }) => {
-  const [anchorEl, setAnchorEl] = useState(null);
   const eventName = data?.events;
   const eventCount = data?.eventCount || 0;
   const displayCount = eventCount > 0 ? eventCount : null;
 
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
+
+  const checkStatus = data?.isChecked ?? true;
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -108,7 +109,7 @@ const Notification = ({ data }) => {
                           <MenuItem
                             key={index}
                             onClick={handleClose}
-                            sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}
+                            sx={{ display: "flex", gap: "1rem", alignItems: "center" }}
                           >
                             <Typography variant="h6">
                               {ename?.eventName}

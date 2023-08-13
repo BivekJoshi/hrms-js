@@ -7,7 +7,6 @@ const RoleSchema = Yup.object().shape({
 });
 
 export const useRoleForm = (data) => {
-  // console.log(data);
   const { mutate: addRole } = useAddRole({});
   const { mutate: editRole } = useEditRole({});
 
