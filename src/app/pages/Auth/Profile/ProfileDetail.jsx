@@ -5,6 +5,7 @@ import "../Style/Style.css";
 
 const ProfileDetail = () => {
   const { data: loggedUserData } = useGetLoggedInUser();
+  
   return (
     <Box
       display="grid"
@@ -25,7 +26,7 @@ const ProfileDetail = () => {
       <Stack sx={{ display: "flex", flexDirection: "column" }}>
         <List sx={{ display:"grid", gridTemplateColumns:"1fr 1fr"}}>
           <Box className="leftGrid">
-            <ListItem>Use Name :</ListItem>
+            <ListItem>User Name :</ListItem>
             <ListItem>Mobile:</ListItem>
             <ListItem>Address:</ListItem>
             <ListItem>User Type:</ListItem>
@@ -33,10 +34,11 @@ const ProfileDetail = () => {
             <ListItem>Email:</ListItem>
           </Box>
           <Box>
+
             <ListItem>{loggedUserData?.name}</ListItem>
             <ListItem> {loggedUserData?.mobileNo}</ListItem>
             <ListItem>{ loggedUserData?.address}</ListItem>
-            <ListItem>{loggedUserData?.roles[0].name}</ListItem>
+            <ListItem>{loggedUserData?.roles[0]?.name || "no roles Assigned"}</ListItem>
             <ListItem>{loggedUserData?.id}</ListItem>
             <ListItem>{loggedUserData?.email}</ListItem>
           </Box>
