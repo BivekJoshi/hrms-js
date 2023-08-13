@@ -3,8 +3,6 @@ import { toast } from 'react-toastify';
 import { 
     addofficeResource,
     editofficeResource,
-    editofficeResourceActiveInactive,
-    getdeactivaedofficeResource,
     getofficeResource, 
     getofficeResourceById, 
 } from '../../../api/resource/officeResource/officeResouce';
@@ -21,14 +19,6 @@ export const useGetOfficeResource = () => {
 {/*________________________GET OFFICE RESOURCE BY OFFICE RESOURCE ID_____________________________________*/ }
 export const useGetOfficeResourceById = (id) => {
   return useQuery(['getofficeResourceById', id], () => getofficeResourceById(id), {
-    refetchInterval: false,
-    refetchOnWindowFocus: false,
-  });
-};
-
-{/*________________________GET ALL DEACTIVATED OFFICE RESOURCE_____________________________________*/ }
-export const useGetDeactivatedOfficeResource = () => {
-  return useQuery(['getdeactivaedofficeResource'], () => getdeactivaedofficeResource(), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
@@ -57,23 +47,6 @@ export const useEditOfficeResource = ({ onSuccess }) => {
     {
       onSuccess: (data, variables, context) => {
         toast.success('Successfully edited office Resource');
-        onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries('getofficeResource');
-      },
-      onError: (err, _variables, _context) => {
-        toast.error(`Error: ${err.message}`);
-      },
-    });
-};
-
-{/*________________________EDIT ACTIVE-INACTIVE OFFICE RESOURCE____________________________________*/ }
-export const useEditActiveInactiveOfficeResource = ({ onSuccess }) => {
-  const queryClient = useQueryClient();
-  return useMutation(['editofficeResourceActiveInactive'],
-    (formData) => editofficeResourceActiveInactive(formData),
-    {
-      onSuccess: (data, variables, context) => {
-        toast.success('Successfully edited status of office Resource');
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries('getofficeResource');
       },
