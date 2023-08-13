@@ -1,8 +1,9 @@
-import React, { lazy } from "react";
-import { nanoid } from "nanoid";
-import { Link, useLocation } from "react-router-dom";
-import { Breadcrumbs, Typography } from "@mui/material";
-import Loadable from "../app/components/Header/Loader/Loadable";
+import React, { lazy } from 'react';
+import { nanoid } from 'nanoid';
+import { Link, useLocation } from 'react-router-dom';
+import { Breadcrumbs, Typography } from '@mui/material';
+import Loadable from '../app/components/Header/Loader/Loadable';
+import { EmployeeDashbord } from '../app/pages/EmployeePage/EmployeeDashbord';
 
 const ProfileDetail = Loadable(
   lazy(() => import("../app/pages/Auth/Profile/ProfileDetail"))
@@ -216,6 +217,12 @@ const routes = [
     name: "Users",
     id: nanoid(),
     component: <UserController />,
+  },
+  {
+    path: 'EmployDashbord',
+    name: 'Employ Dashbord',
+    id: nanoid(),
+    component: <EmployeeDashbord />,
   },
 ];
 
