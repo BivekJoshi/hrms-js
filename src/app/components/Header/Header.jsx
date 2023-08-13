@@ -132,7 +132,7 @@ export default function Header({ open, handleDrawerOpen }) {
         <Stack flexDirection="row">
             <TodayBirthday data={birthdayData} />
             <Notification
-              data={thisDayBirthdays}
+              // data={thisDayBirthdays}
               onClearNotification={handleClearNotification}
             />
             <Profile />
