@@ -1,14 +1,8 @@
-import React, { useRef } from "react";
+import React, { useState, useRef } from "react";
 import { Button, Box, Popper, Grow, Paper } from "@mui/material";
-import { ClickAwayListener, MenuList, Typography } from "@mui/material";
-import { MenuItem } from "@mui/material";
+import { MenuItem, ClickAwayListener, MenuList, Typography } from "@mui/material";
 import CakeIcon from "@mui/icons-material/Cake";
-import { NavLink } from "react-router-dom";
-import {
-  useRemoveNotification,
-} from "../../hooks/birthday/useBirthday";
 import "../Style/Style.css";
-import { useState } from "react";
 
 const TodayBirthday = ({ data }) => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -40,7 +34,6 @@ const TodayBirthday = ({ data }) => {
     }
   }
 
-  // return focus to the button when we transitioned from !open -> open
   const prevOpen = useRef(open);
   React.useEffect(() => {
     if (prevOpen.current === true && open === false) {
