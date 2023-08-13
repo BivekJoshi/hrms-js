@@ -2,34 +2,38 @@ import { getUser } from "../../../../app/utils/cookieHelper";
 import jwtDecode from "jwt-decode";
 
 const useAuth = () => {
-  const { data } = getUser();
-  const token = data;
-  let isManager = false;
+  const token  = getUser();
+
+  let isSuperAdmin = false;
+  let isHr = false;
   let isAdmin = false;
   let isEmployee = false;
   let status = "";
 
   if (token) {
     const decoded = jwtDecode(token);
-    // const { userName, userRoles } = decoded;
+    const { userRoles } = decoded;
 
     
-    // isAdmin = userRoles.includes("admin");
-    // isManager = userRoles.includes("manager");
-    // isEmployee = userRoles.includes("employee");
+    isSuperAdmin = userRoles.some(role => role?.name === "SUPER_ADMIN");
+    isAdmin = userRoles.some(role => role?.name === "ADMIN");
+    isHr = userRoles.some(role => role?.name === "HR_CLERK");
+    isEmployee = userRoles.some(role => role?.name === "EMPLOYEE");
 
-    // if (isAdmin) {
-    //   status = "Admin";
-    // } else if (isManager) {
-    //   status = "Manager";
-    // } else if (isEmployee) {
-    //   status = "Employee";
-    // }
+    if(isSuperAdmin){
+      status = "Super-Admin";
+    } else if (isAdmin) {
+      status = "Admin";
+    } else if (isHr) {
+      status = "HR-Clerk";
+    } else if (isEmployee) {
+      status = "Employee";
+    }
 
-    // return { userName, userRoles, status, isManager, isAdmin, isEmployee };
-    return decoded;
+    return { ...decoded, status, isSuperAdmin, isHr, isAdmin, isEmployee };
+    // return decoded;
   }
-  return { userName: "", userRoles: [], isManager, isAdmin, isEmployee, status };
+  return { userName: "", userRoles: [], isSuperAdmin, isHr, isAdmin, isEmployee, status };
 };
 
 export default useAuth;
