@@ -1,85 +1,176 @@
-import React from "react";
-import { Stack, Typography, List, ListItemText } from "@mui/material";
-import { Button, Menu, MenuItem, Divider, Box } from "@mui/material";
+import React, { useState, useRef } from "react";
+import {
+  MenuItem,
+  Typography,
+  Popper,
+  Grow,
+  Paper,
+  Button,
+  Box,
+  ClickAwayListener,
+  MenuList,
+} from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/NotificationsNone";
-import { useGetHolidayCurrent } from "../../hooks/holiday/useHoliday";
-import { useGetEvent } from "../../hooks/event/useEvent";
 
-const Notification = () => {
-  const { data: events } = useGetEvent();
-  // const { data: holidays, isLoading, isError } = useGetHolidayCurrent();
+const Notification = ({ data }) => {
+  const [anchorEl, setAnchorEl] = useState(null);
+  const eventName = data?.events;
+  console.log(eventName);
+  const eventCount = data?.eventCount || 0;
+  const displayCount = eventCount > 0 ? eventCount : null;
 
-  const todayDate = new Date().toISOString().split("T")[0];
-  // const todayHoliday = holidays?.filter(
-  //   (event) => event?.holidayDate === todayDate
-  // );
+  const [open, setOpen] = useState(false);
+  const anchorRef = useRef(null);
 
-  const todayEvent = events?.filter((event) => event?.eventDate === todayDate);
-
-
-  const notificationNumber =
-    (todayEvent?.length ?? 0);
-
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
+  const handleToggle = () => {
+    setOpen((prevOpen) => !prevOpen);
   };
 
-  // if (isError) {
-  //   return <div>Error fetching data.</div>;
-  // }
+  const handleClose = (event) => {
+    if (anchorRef.current && anchorRef.current.contains(event.target)) {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  function handleListKeyDown(event) {
+    if (event.key === "Tab") {
+      event.preventDefault();
+      setOpen(false);
+    } else if (event.key === "Escape") {
+      setOpen(false);
+    }
+  }
+
+  const prevOpen = useRef(open);
+  React.useEffect(() => {
+    if (prevOpen.current === true && open === false) {
+      anchorRef.current.focus();
+    }
+
+    prevOpen.current = open;
+  }, [open]);
+
   const btnStyle = {
     color: "#fff",
   };
 
   return (
-    <Box>
-      <Button
-      ref={anchorEl}
-        id="basic-button"
-        aria-controls={open ? "basic-menu" : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? "true" : undefined}
-        onClick={handleClick}
-        style={btnStyle}
-      >
-        <NotificationsIcon />
-        {todayEvent}
-      </Button>
-      <Menu
-        id="basic-menu"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        MenuListProps={{
-          "aria-labelledby": "basic-button",
-        }}
-      >
-        <Stack>
-          <Typography
-            variant="h6"
-            color="primary"
-            fontWeight={400}
-            padding="1rem 1rem 0.5rem"
+    <>
+      <Box>
+        <Button
+          ref={anchorRef}
+          id="basic-button"
+          aria-controls={open ? "basic-menu" : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? "true" : undefined}
+          onClick={handleToggle}
+          style={btnStyle}
+        >
+          <NotificationsIcon />
+          {data?.isChecked ? " " : displayCount }
+        </Button>
+        {eventCount !== 0 ? (
+          <Popper
+            open={open}
+            anchorEl={anchorRef.current}
+            role={undefined}
+            placement="bottom-start"
+            transition
+            disablePortal
+            style={{ marginLeft: "-4rem" }}
           >
-            {notificationNumber !== 0 ? "Today's Event:" : "No Event Today!"}
-          </Typography>
-          <List>
-            {notificationNumber !== 0 && <Divider />}
-            {todayEvent &&
-              todayEvent.map((item) => (
-                <MenuItem key={item.id} sx={{ background: "#ffe4c459" }}>
-                  <ListItemText primary={item?.eventName} />
-                </MenuItem>
-              ))}
-          </List>
-        </Stack>
-      </Menu>
-    </Box>
+            {({ TransitionProps, placement }) => (
+              <Grow
+                {...TransitionProps}
+                style={{
+                  transformOrigin:
+                    placement === "bottom-start" ? "left top" : "left bottom",
+                }}
+              >
+                <Paper>
+                  <ClickAwayListener onClickAway={handleClose}>
+                    <MenuList
+                      autoFocusItem={open}
+                      id="composition-menu"
+                      aria-labelledby="composition-button"
+                      onKeyDown={handleListKeyDown}
+                      sx={{
+                        textAlign: "center",
+                        padding: "0.5rem 1rem",
+                      }}
+                    >
+                      <Typography variant="h6" color="primary" fontWeight={400}>
+                        Today's Events
+                      </Typography>
+                      {eventName &&
+                        eventName.map((ename, index) => (
+                          <MenuItem
+                            key={index}
+                            onClick={handleClose}
+                            sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}
+                          >
+                            <Typography variant="h6">
+                              {ename?.eventName}
+                            </Typography>
+                            <Box
+                              sx={{ display: "flex", flexDirection: "start", color: "gray" }}
+                            >
+                              <Typography>{ename?.eventTime}</Typography> &nbsp;
+                              <Typography>{ename?.eventLocation}</Typography>
+                            </Box>
+                          </MenuItem>
+                        ))}
+                    </MenuList>
+                  </ClickAwayListener>
+                </Paper>
+              </Grow>
+            )}
+          </Popper>
+        ) : (
+          <Popper
+            open={open}
+            anchorEl={anchorRef.current}
+            role={undefined}
+            placement="bottom-start"
+            transition
+            disablePortal
+            style={{ width: { xs: "30%", lg: "15%" }, marginLeft: "-4rem" }}
+          >
+            {({ TransitionProps, placement }) => (
+              <Grow
+                {...TransitionProps}
+                style={{
+                  transformOrigin:
+                    placement === "bottom-start" ? "left top" : "left bottom",
+                }}
+              >
+                <Paper>
+                  <ClickAwayListener onClickAway={handleClose}>
+                    <MenuList
+                      autoFocusItem={open}
+                      id="composition-menu"
+                      aria-labelledby="composition-button"
+                      onKeyDown={handleListKeyDown}
+                      sx={{
+                        textAlign: "center",
+                        width: "100%",
+                        padding: "1rem 2rem",
+                      }}
+                    >
+                      <Typography variant="h6" color="primary" fontWeight={400}>
+                        No Events For Today !
+                      </Typography>
+                    </MenuList>
+                  </ClickAwayListener>
+                </Paper>
+              </Grow>
+            )}
+          </Popper>
+        )}
+      </Box>
+    </>
   );
 };
 

@@ -12,6 +12,7 @@ import Notification from "../../pages/Notification/Notification";
 import Profile from "../../pages/Auth/Profile/Profile";
 import { toast } from "react-toastify";
 import TodayBirthday from "../../pages/Birthday/TodayBirthday";
+import { useGetEventNotification } from "../../hooks/event/useEvent";
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -32,78 +33,50 @@ const AppBar = styled(MuiAppBar, {
 
 export default function Header({ open, handleDrawerOpen }) {
   const { data: birthdayData } = useGetTodayBirthday();
+  const { data : eventData } = useGetEventNotification();
   const [showLength, setShowLength] = useState(true);
   const [openNotification, setOpenNotification] = useState(false);
   const [clearedNotification, setClearedNotification] = useState(false);
+  
+  // const today = new Date();
+  // const { data: upcomingBirthdayData, isloading } = useGetUpcomingBirthday();
+  // const thisMonth = today.getMonth();
+  // const thisDay = today.getDate();
 
-  // const handleClick = () => {
-  //   setShowLength(false);
+  // const thisDayBirthdays = upcomingBirthdayData
+  //   ? upcomingBirthdayData.filter((employee) => {
+  //       const dateOfBirth = new Date(employee.dateOfBirth);
+  //       return (
+  //         dateOfBirth.getMonth() === thisMonth &&
+  //         dateOfBirth.getDate() === thisDay
+  //       );
+  //     })
+  //   : [];
+
+
+  // const { mutate } = useRemoveNotification();
+
+
+  // const handleClearNotification = () => {
+  //   setOpenNotification(false);
+  //   setClearedNotification(true);
   // };
 
-  const today = new Date();
-  const { data: upcomingBirthdayData, isloading } = useGetUpcomingBirthday();
-  const thisMonth = today.getMonth();
-  const thisDay = today.getDate();
+  // useEffect(() => {
+  //   if (clearedNotification) {
+  //     toast.success("Notifications cleared for today!", {
+  //       position: toast.POSITION.TOP_CENTER,
+  //       autoClose: 3000,
+  //     });
+  //     mutate();
+  //   }
+  // }, [clearedNotification, mutate]);
 
-  const thisDayBirthdays = upcomingBirthdayData
-    ? upcomingBirthdayData.filter((employee) => {
-        const dateOfBirth = new Date(employee.dateOfBirth);
-        return (
-          dateOfBirth.getMonth() === thisMonth &&
-          dateOfBirth.getDate() === thisDay
-        );
-      })
-    : [];
-
-  // const isLoading = false;
-
-  const { mutate } = useRemoveNotification();
-
-  // const handleChange = () => {
-  //   setOpenNotification(!openNotification);
-  // };
-
-  const handleClearNotification = () => {
-    setOpenNotification(false);
-    setClearedNotification(true);
-  };
-
-
-  useEffect(() => {
-    if (clearedNotification) {
-      toast.success('Notifications cleared for today!', {
-        position: toast.POSITION.TOP_CENTER,
-        autoClose: 3000,
-      })
-      mutate();
-    }
-  }, [clearedNotification, mutate]);
-
-  useEffect(() => {
-    if (clearedNotification) {
-      toast.success("Notifications cleared for today!", {
-        position: toast.POSITION.TOP_CENTER,
-        autoClose: 3000,
-      });
-      mutate();
-    }
-  }, [clearedNotification, mutate]);
-
-  useEffect(() => {
-    if (clearedNotification) {
-      toast.success("Notifications cleared for today!", {
-        position: toast.POSITION.TOP_CENTER,
-        autoClose: 3000,
-      });
-      mutate();
-    }
-  }, [clearedNotification, mutate]);
-
-  useEffect(() => {
-    if (openNotification) {
-      mutate();
-    }
-  }, [openNotification]);
+  // useEffect(() => {
+  //   if (openNotification) {
+  //     mutate();
+  //   }
+  // }, [openNotification]);
 
   return (
     <AppBar position="fixed" open={open}>
@@ -131,10 +104,7 @@ export default function Header({ open, handleDrawerOpen }) {
 
         <Stack flexDirection="row">
             <TodayBirthday data={birthdayData} />
-            <Notification
-              // data={thisDayBirthdays}
-              onClearNotification={handleClearNotification}
-            />
+            <Notification data={eventData} />
             <Profile />
         </Stack>
       </Toolbar>

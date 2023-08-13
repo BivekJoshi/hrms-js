@@ -21,10 +21,10 @@ const Event = () => {
   useEffect(() => {
     if (eventData) {
       const formattedEvents = eventData.map((event) => ({
-        title: event.eventName,
-        date: event.eventDate,
-        description: event.eventDescription,
-        id: event.id,
+        title: event?.eventName,
+        date: event?.eventDate,
+        description: event?.eventDescription,
+        id: event?.id,
       }));
       setEvents(formattedEvents);
     }

@@ -24,12 +24,13 @@ const Dashboard = () => {
   const { data: dashboardData } = useGetDashboard();
   const { data: projectDataCount } = useGetProjectCount();
   const { data: projectData } = useGetProject();
-  const { data: pendingLeaveData, isLoading: loadingPendingLeave } =
-    useGetPendingLeave();
+  const { data: pendingLeaveData, isLoading: loadingPendingLeave } = useGetPendingLeave();
   const { data: employeeData } = useGetEmployee();
-  const { data: eventData } = useGetEvent();
+  // const { data: eventData } = useGetEvent();
   const { data: holidayData } = useGetHoliday();
   const { data: userRoleData } = useGetUserRole();
+
+
 
   return (
     <Box sx={{ display: "grid", gridTemplateRows: "1fr", rowGap: "3rem" }}>
@@ -51,17 +52,17 @@ const Dashboard = () => {
           value={28}
           count={employeeData?.length ? employeeData.length : "0"}
         />
-        <DashboardCard
+        {/* <DashboardCard
           title="Events"
           icon={<BiSolidCalendarEvent fontSize="3rem" />}
           value={24}
-          count={eventData?.length ? eventData?.length : "0"}
-        />
+          count={eventData ? eventData?.length : "0"}
+        /> */}
         <DashboardCard
           title="Holiday"
           icon={<FaGifts fontSize="3rem" />}
           value={32}
-          count={holidayData?.length ? holidayData?.length : "0"}
+          count={holidayData ? holidayData?.length : "0"}
         />
         <DashboardCard
           title="Project"

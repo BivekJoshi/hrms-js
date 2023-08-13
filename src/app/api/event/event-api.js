@@ -6,6 +6,12 @@ export const getEvent = async () => {
   return data;
 };
 
+{/*________________________GET-NOTIFICATION_____________________________________*/ }
+export const getEventNotification = async () => {
+  const data = await axiosInstance.get(`/event/get-notification`);
+  return data;
+};
+
 {/*________________________GETBYID_____________________________________*/ }
 export const getEventById = async (id) => {
   const data = await axiosInstance.get(`/event/${id}`);

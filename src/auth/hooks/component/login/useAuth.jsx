@@ -14,7 +14,6 @@ const useAuth = () => {
     const decoded = jwtDecode(token);
     const { userRoles } = decoded;
 
-    
     isSuperAdmin = userRoles.some(role => role?.name === "SUPER_ADMIN");
     isAdmin = userRoles.some(role => role?.name === "ADMIN");
     isHr = userRoles.some(role => role?.name === "HR_CLERK");
@@ -31,7 +30,6 @@ const useAuth = () => {
     }
 
     return { ...decoded, status, isSuperAdmin, isHr, isAdmin, isEmployee };
-    // return decoded;
   }
   return { userName: "", userRoles: [], isSuperAdmin, isHr, isAdmin, isEmployee, status };
 };
