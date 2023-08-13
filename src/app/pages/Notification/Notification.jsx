@@ -69,7 +69,7 @@ const Notification = ({ data }) => {
           style={btnStyle}
         >
           <NotificationsIcon />
-          {checkStatus ? " " : displayCount }
+          {data?.isChecked ? " " : displayCount }
         </Button>
         {eventCount !== 0 ? (
           <Popper

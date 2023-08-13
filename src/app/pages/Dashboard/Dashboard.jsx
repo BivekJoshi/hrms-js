@@ -1,6 +1,6 @@
 import React from "react";
 import DashboardCard from "../../components/cards/Dashboard/DashboardCard";
-import { Box, Grid, Stack } from "@mui/material";
+import { Box, Grid, Stack, Typography } from "@mui/material";
 import { AiFillHome } from "react-icons/ai";
 
 import { useGetDashboard } from "../../hooks/dashboard/useDashboard";
@@ -92,7 +92,20 @@ const Dashboard = () => {
         }}
       >
         <Box>
-          <h3>Project Information</h3>
+          <Box
+            display="flex"
+            flexDirection="row"
+            justifyContent="space-between"
+          >
+            <h3>Project Information</h3>
+            <Typography
+              display="flex"
+              flexDirection="row"
+              justifyContent="space-between"
+            >
+              <h3 style={{fontWeight:"800"}}>Total Project : {projectDataCount?.total}</h3>
+            </Typography>
+          </Box>
           <ProjectProgressCard projectDataCount={projectDataCount} />
         </Box>
 
