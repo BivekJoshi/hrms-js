@@ -228,16 +228,16 @@ export default function Sidebar() {
       path: 'todolist',
       subMenus: [],
     },
-    // {
-    //   name: "Users",
-    //   icon: (
-    //     <PersonAddIcon 
-    //       sx={mode === "light" ? { color: "black" } : { color: "white" }}
-    //     />
-    //   ),
-    //   path: "users",
-    //   subMenus: [],
-    // },
+    {
+      name: "Users",
+      icon: (
+        <PersonAddIcon 
+          sx={mode === "light" ? { color: "black" } : { color: "white" }}
+        />
+      ),
+      path: "users",
+      subMenus: [],
+    },
   ];
 
   const handleDrawerOpen = () => {
