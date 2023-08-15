@@ -21,6 +21,11 @@
   gap: 1rem;
 }
 
-.employeeDeshbordBG{
+.employeeDeshbordBG {
   background-color: #fdfcfa;
+}
+
+.employeeDeshbordMP {
+  padding: 1rem 2rem;
+  margin-top: 1rem;
 }

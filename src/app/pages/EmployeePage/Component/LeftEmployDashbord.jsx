@@ -22,17 +22,8 @@ export const LeftEmployDashbord = (props) => {
       description: "Richard Miles is off sick today",
       photo: Male,
     },
-    {
-      icon: <AccessTimeIcon />,
-      description: "Richard Miles is off sick today",
-      photo: Male,
-    },
-    {
-      icon: <AccessTimeIcon />,
-      description: "Richard Miles is off sick today",
-      photo: Male,
-    },
   ];
+
   return (
     <Box className="employeeDeshbord">
       <Box className="employeeDeshbord">
@@ -60,18 +51,20 @@ export const LeftEmployDashbord = (props) => {
       </Box>
       <Box className="employeeDeshbord employeeDeshbordBG">
         <h3>Event</h3>
-        <Box className="employeeDeshbord" padding="2rem">
+        <Box className="employeeDeshbord" padding="1rem 2rem">
           <h5> Today Event</h5> <p>At Kamalpokhari </p>THis is description and
           Location.
         </Box>
-        <Box className="employeeDeshbord" padding="2rem">
-          <h5> Today Event</h5> <p>At Kamalpokhari </p>THis is description and
-          Location.
+        <Box className="employeeDeshbord" padding="0 2rem 1rem">
+          <h5> Upcoming Event</h5> <p>At Kamalpokhari </p>THis is description
+          and Location.
         </Box>
       </Box>
-      <Box className="employeeDeshbord employeeDeshbordBG">
+      <Box className="employeeDeshbord ">
         <h3>Check Mail</h3>
-        <Typography>please check birthday mail</Typography>
+        <Box className=" employeeDeshbordBG">
+          <Typography padding="1rem 2rem">please check birthday mail</Typography>
+        </Box>
       </Box>
     </Box>
   );
