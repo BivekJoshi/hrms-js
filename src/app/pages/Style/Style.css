@@ -15,3 +15,17 @@
   border: none !important;
 } */
 
+.employeeDeshbord {
+  display: grid;
+  grid-template-rows: 1fr;
+  gap: 1rem;
+}
+
+.employeeDeshbordBG {
+  background-color: #fdfcfa;
+}
+
+.employeeDeshbordMP {
+  padding: 1rem 2rem;
+  margin-top: 1rem;
+}

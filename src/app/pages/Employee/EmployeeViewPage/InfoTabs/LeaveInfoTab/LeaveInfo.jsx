@@ -36,11 +36,6 @@ const LeaveInfo = ({ isLoading ,data}) => {
 
   if (leaveData) {
     const pendingLeaves = leaveData.filter((item) => item.leaveStatus === 'PENDING');
-   
-    // console.log(pendingLeaves, "pendinggggggg");
-    // return pendingLeaves;
-  } else {
-    // console.log("leaveData is undefined or null");
   }
 
 

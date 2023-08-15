@@ -5,7 +5,6 @@ import { useGetLeaveType } from "../../../hooks/leaveType/useLeaveType";
 import { useGetEmployee } from "../../../hooks/employee/useEmployee";
 
 const PendingLeaveTable = ({ pendingLeaveData, loading }) => {
-  // console.log(pendingLeaveData);
   const { data: employeeData, isLoading: loadingemployee } = useGetEmployee();
   const {
     data: leaveTypeData,

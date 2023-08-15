@@ -44,17 +44,20 @@ const TodoList = () => {
       render: (rowData) => rowData.tableData.id + 1,
       width: "50px",
       sortable: false,
+      sorting: false,
     },
     {
       title: "Message",
       field: "message",
       width: "300px",
+      sorting: false,
     },
     {
       title: "Due",
       field: "dueDate",
       width: "180px",
       // type: 'numeric',
+      sorting: false,
     },
     {
       title: "Priority",
@@ -64,6 +67,7 @@ const TodoList = () => {
       cellStyle: {
         whiteSpace: "nowrap",
       },
+      sorting: false,
       render: (rowData) => {
         const priority = rowData.priority;
         let chipColor = "";

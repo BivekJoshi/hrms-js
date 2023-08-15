@@ -62,7 +62,6 @@ const Permission = () => {
         permissionData.map((permission, index) => {
           const { name } = getPermissionStyle(permission?.name);
           
-          // console.log(editedPermission);
           return (
             <Stack
               key={index}

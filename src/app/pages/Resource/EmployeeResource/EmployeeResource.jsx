@@ -75,6 +75,7 @@ const EmployeeResource = () => {
       render: (rowData) => rowData.tableData.id + 1,
       width: "3%",
       sortable: false,
+      sorting: false,
     },
     {
       title: "Employee Name",
@@ -82,6 +83,7 @@ const EmployeeResource = () => {
         return <p>{getEmployeeName(rowData)} </p>;
       },
       width: 120,
+      sorting: false,
     },
     {
       title: "Resource",
@@ -89,16 +91,19 @@ const EmployeeResource = () => {
         return <p>{getResourceName(rowData)}</p>;
       },
       width: "20vh",
+      sorting: false,
     },
     {
       title: "Received Date",
       field: "receiveDate",
       emptyValue: "-",
+      sorting: false,
     },
     {
       title: "Returned Date",
       field: "returnDate",
       emptyValue: "-",
+      sorting: false,
     },
     {
       title: "Actions",

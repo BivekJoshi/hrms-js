@@ -28,28 +28,6 @@ export const ProjectProgressCard = ({ projectDataCount }) => {
     <>
       {/* {projectDataCount?.total > 0 && ( */}
       <Box className="projectProgress">
-        <Box className="progressBox" bgcolor="#306ED9">
-          <Typography sx={{ fontWeight: 600, fontSize: "1.3rem" }}>
-            Total Project
-          </Typography>
-          <Stack
-            justifyContent="space-between"
-            flexDirection="row"
-            marginTop="1rem"
-          >
-            <Typography>{projectDataCount?.total}</Typography>
-            <Typography>
-              {Math.ceil(
-                (projectDataCount?.total / projectDataCount?.total) * 100
-              )}
-              %
-            </Typography>
-          </Stack>
-          <BorderLinearProgress
-            variant="determinate"
-            value={(projectDataCount?.total / projectDataCount?.total) * 100}
-          />
-        </Box>
         <Box className="progressBox" bgcolor="#33D77A">
           <Typography sx={{ fontWeight: 600, fontSize: "1.3rem" }}>
             Completed
@@ -69,7 +47,9 @@ export const ProjectProgressCard = ({ projectDataCount }) => {
           </Stack>
           <BorderLinearProgress
             variant="determinate"
-            value={(projectDataCount?.completed / projectDataCount?.total) * 100}
+            value={
+              (projectDataCount?.completed / projectDataCount?.total) * 100
+            }
           />
         </Box>
         <Box className="progressBox" bgcolor="#e8c315">
@@ -117,6 +97,29 @@ export const ProjectProgressCard = ({ projectDataCount }) => {
             value={
               (projectDataCount?.workInProgress / projectDataCount?.total) * 100
             }
+          />
+        </Box>
+        <Box className="progressBox" bgcolor="#306ED9">
+          <Typography sx={{ fontWeight: 600, fontSize: "1.3rem" }}>
+            Delayed
+          </Typography>
+
+          <Stack
+            justifyContent="space-between"
+            flexDirection="row"
+            marginTop="1rem"
+          >
+            <Typography>{projectDataCount?.delayed}</Typography>
+            <Typography>
+              {Math.ceil(
+                (projectDataCount?.delayed / projectDataCount?.total) * 100
+              )}
+              %
+            </Typography>
+          </Stack>
+          <BorderLinearProgress
+            variant="determinate"
+            value={(projectDataCount?.delayed / projectDataCount?.total) * 100}
           />
         </Box>
       </Box>
