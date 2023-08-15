@@ -85,47 +85,6 @@ export const AddUserControlFields = ({ onClose }) => {
 
       <Grid item xs={12} sm={12}>
         <TextField
-          id="password"
-          name="password"
-          label="password"
-          placeholder="Enter password..."
-          fullWidth
-          required
-          value={formik.values.password}
-          onChange={formik.handleChange}
-          error={formik.touched.password && Boolean(formik.errors.password)}
-          helperText={formik.touched.password && formik.errors.password}
-          variant="outlined"
-          autoFocus
-          InputLabelProps={{ shrink: true }}
-        />
-      </Grid>
-
-      <Grid item xs={12} sm={12}>
-        <TextField
-          id="confirmPassword"
-          name="confirmPassword"
-          label="Confirm Password"
-          placeholder="Re-enter your password..."
-          fullWidth
-          required
-          value={formik.values.confirmPassword}
-          onChange={formik.handleChange}
-          error={
-            formik.touched.confirmPassword &&
-            Boolean(formik.errors.confirmPassword)
-          }
-          helperText={
-            formik.touched.confirmPassword && formik.errors.confirmPassword
-          }
-          variant="outlined"
-          autoFocus
-          InputLabelProps={{ shrink: true }}
-        />
-      </Grid>
-
-      <Grid item xs={12} sm={12}>
-        <TextField
           id="roleId"
           name="roleId"
           label="Role"

@@ -12,7 +12,7 @@ import { ButtonComponent } from "../../components/Button/ButtonComponent";
 import useAuth from "../../../auth/hooks/component/login/useAuth";
 
 const Company = () => {
-  const { status, isSuperAdmin, isAdmin, isHr, isEmployee } = useAuth();
+  const { isSuperAdmin, isAdmin, isHr, isEmployee } = useAuth();
 
   const [value, setValue] = React.useState("1");
 
@@ -41,7 +41,7 @@ const Company = () => {
               <Tab label="Table View" value="1" />
               <Tab label="Grid View" value="2" />
             </TabList>
-            {(isSuperAdmin || isAdmin) && (
+            {(isSuperAdmin || isAdmin || isHr) && (
               <ButtonComponent
                 OnClick={handleAddOpenModal}
                 buttonName={"+Add Company"}
