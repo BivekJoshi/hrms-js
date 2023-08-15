@@ -13,6 +13,8 @@ import {
 import NotificationsIcon from "@mui/icons-material/NotificationsNone";
 
 const Notification = ({ data }) => {
+  const [ status, setStatus ] = useState();
+
   const eventName = data?.events;
   const eventCount = data?.eventCount || 0;
   const displayCount = eventCount > 0 ? eventCount : null;
@@ -20,10 +22,11 @@ const Notification = ({ data }) => {
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
 
-  const checkStatus = data?.isChecked ?? true;
+
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
+    setStatus(data?.isChecked ?? true)
   };
 
   const handleClose = (event) => {
@@ -69,7 +72,7 @@ const Notification = ({ data }) => {
           style={btnStyle}
         >
           <NotificationsIcon />
-          {data?.isChecked ? " " : displayCount }
+          {status ? " " : displayCount }
         </Button>
         {eventCount !== 0 ? (
           <Popper

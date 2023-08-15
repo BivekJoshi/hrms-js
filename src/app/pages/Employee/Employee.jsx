@@ -13,6 +13,7 @@ import EmployeeGrid from "./EmployeeView/EmployeeGrid";
 import { useNavigate } from "react-router-dom";
 import { ButtonComponent } from "../../components/Button/ButtonComponent";
 import "./Style/Style.css";
+import useAuth from "../../../auth/hooks/component/login/useAuth";
 
 const style = {
   position: "absolute",
@@ -27,6 +28,8 @@ const style = {
 };
 
 const Employee = () => {
+  const { isSuperAdmin, isAdmin, isHr, isEmployee } = useAuth();
+
   const navigate = useNavigate();
 
   const [value, setValue] = React.useState("1");
@@ -71,21 +74,25 @@ const Employee = () => {
             </TabList>
             <ButtonGroup
               variant="contained"
-              sx={{ gap: "12px", textDecoration: "none", boxShadow:"0" }}
+              sx={{ gap: "12px", textDecoration: "none", boxShadow: "0" }}
             >
-              <ButtonComponent
-                NameClass="buttonGroup"
-                OnClick={() => {
-                  navigate("deactivated");
-                }}
-                buttonName="Inactive Employee"
-                BGColor="white"
-                TextColor="black"
-              />
-              <ButtonComponent
-                OnClick={handleAddOpenModal}
-                buttonName="+Add Employee"
-              />
+              {(isSuperAdmin || isAdmin || isHr) && (
+                <ButtonComponent
+                  NameClass="buttonGroup"
+                  OnClick={() => {
+                    navigate("deactivated");
+                  }}
+                  buttonName="Inactive Employee"
+                  BGColor="white"
+                  TextColor="black"
+                />
+              )}
+              {(isSuperAdmin || isAdmin || isHr) && (
+                <ButtonComponent
+                  OnClick={handleAddOpenModal}
+                  buttonName="+Add Employee"
+                />
+              )}
             </ButtonGroup>
           </Box>
           <TabPanel value="1">

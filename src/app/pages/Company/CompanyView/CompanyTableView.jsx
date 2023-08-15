@@ -3,9 +3,11 @@ import MaterialTable from '@material-table/core';
 import { Button, Stack } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import useAuth from '../../../../auth/hooks/component/login/useAuth';
 
 
 const CompanyTableView = ({ companyData, isLoading, handleEditCompany, handleDeleteCompany }) => {
+    const { isSuperAdmin, isAdmin, isHr } = useAuth();
 
     const columns = [
         {
@@ -34,22 +36,28 @@ const CompanyTableView = ({ companyData, isLoading, handleEditCompany, handleDel
             width: 400,
 
         },
-        {
+       (isSuperAdmin || isAdmin || isHr) && {
             title: 'Actions',
             render: (rowData) => (
                 <Stack direction="row" spacing={0}>
-                    <Button color="primary" onClick={() => handleEditCompany(rowData)}>
-                        <EditIcon />
-                    </Button>
-                    <Button color="primary" onClick={() => handleDeleteCompany(rowData)}>
-                        <DeleteIcon />
-                    </Button>
+                        <Button
+                            color="primary"
+                            onClick={() => handleEditCompany(rowData)}
+                        >
+                            <EditIcon />
+                        </Button>
+                        <Button
+                            color="primary"
+                            onClick={() => handleDeleteCompany(rowData)}
+                        >
+                            <DeleteIcon />
+                        </Button>
                 </Stack>
             ),
             sorting: false,
             width: 120,
         },
-    ];
+    ].filter(Boolean);
 
     return (
         <>

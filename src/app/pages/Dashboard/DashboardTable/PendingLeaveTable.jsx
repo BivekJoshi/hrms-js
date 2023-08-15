@@ -53,33 +53,35 @@ const PendingLeaveTable = ({ pendingLeaveData, loading }) => {
     },
   ];
   return (
+   !loading && (
     <MaterialTable
-      icons={tableIcons}
-      columns={columns}
-      data={pendingLeaveData}
-      title="Pending Leave Request"
-      isLoading={loading}
-      options={{
-        search:false,
+    icons={tableIcons}
+    columns={columns}
+    data={pendingLeaveData}
+    title="Pending Leave Request"
+    isLoading={loading}
+    options={{
+      search:false,
+      padding: "dense",
+      margin: 50,
+      pageSize: 5,
+      // emptyRowsWhenPaging: false,
+      headerStyle: {
+        backgroundColor: "#01579b",
+        color: "#FFF",
+        fontSize: "1rem",
         padding: "dense",
-        margin: 50,
-        pageSize: 5,
-        // emptyRowsWhenPaging: false,
-        headerStyle: {
-          backgroundColor: "#01579b",
-          color: "#FFF",
-          fontSize: "1rem",
-          padding: "dense",
-          height: 50,
-          textAlign: "center",
-          minHeight: "10px",
-          textTransform: "capitilize",
-        },
-        rowStyle: {
-          fontSize: ".8rem",
-        },
-      }}
-    />
+        height: 50,
+        textAlign: "center",
+        minHeight: "10px",
+        textTransform: "capitilize",
+      },
+      rowStyle: {
+        fontSize: ".8rem",
+      },
+    }}
+  />
+   )
   );
 };
 
