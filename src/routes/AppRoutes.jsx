@@ -8,8 +8,11 @@ import { routes } from "./routes";
 import ForgotPassword from "../app/pages/Auth/FogotPassword/ForgotPassword";
 import Login from "../app/pages/Auth/Login/Login";
 import RenamePassword from "../app/pages/Auth/ResetPassword/RenamePassword";
+import useAuth from "../auth/hooks/component/login/useAuth";
 
 const AppRoutes = () => {
+  const { isSuperAdmin, isAdmin, isHr, isEmployee } = useAuth();
+
   return (
     <BrowserRouter>
       <ScrollToTop>
@@ -17,17 +20,27 @@ const AppRoutes = () => {
           <Route path="/" exact element={<Applayout />}>
             <Route path="/" exact element={<Login />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
-             <Route path="/hrms/user-activation" element={<RenamePassword />} />
+            <Route path="/hrms/user-activation" element={<RenamePassword />} />
             <Route path="/admin" element={<AdminLayout />}>
               <Route element={<ProtectedRoute redirectTo="/" />}>
-                {routes.map((route) => (
-                  <Route
-                    key={route.id}
-                    path={route.path}
-                    exact
-                    element={route.component}
-                  />
-                ))}
+                {routes.map((route) => {
+                  if (route.path === "users" && isSuperAdmin || isAdmin || isHr ) {
+                    
+                    return (
+                      <Route
+                        key={route.id}
+                        path={route.path}
+                        exact
+                        element={route.component}
+                      />
+                    );
+                  } else if (
+                    route.path === "users" && isEmployee
+                  ) {
+                    return <p>You Don Not Have Access!</p>
+                  }
+                  return null;
+                })}
               </Route>
             </Route>
           </Route>

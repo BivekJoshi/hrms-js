@@ -4,15 +4,17 @@ import { toast } from "react-toastify";
 import { useDeleteHoliday } from "../../../hooks/holiday/useHoliday";
 import useHolidayForm from "../../../hooks/holiday/HolidayForm/useHolidayForm";
 import ModalComponent from "../../Modal/ModalComponent";
+import useAuth from "../../../../auth/hooks/component/login/useAuth";
 
 const HolidayFields = ({ onClose, isLoading, data }) => {
+  const { isSuperAdmin, isAdmin, isHr, isEmployee } = useAuth();
   const [openSubmitModal, setOpenSubmitModal] = useState(false);
 
   const handleSubmitModal = () => {
     setOpenSubmitModal(true);
   };
   const handleCloseModal = () => {
-    setOpenSubmitModal()
+    setOpenSubmitModal();
   };
   const { formik } = useHolidayForm(data, handleSubmitModal, onClose);
 
@@ -109,34 +111,42 @@ const HolidayFields = ({ onClose, isLoading, data }) => {
           justifyContent="flex-end"
           alignItems="flex-end"
         >
-          {data ? (
+          {(isSuperAdmin || isAdmin || isHr) && (
+            <>
+              {data ? (
+                <Button
+                  variant="contained"
+                  onClick={handleDeleteHoliday}
+                  sx={{ mt: 3, ml: 1 }}
+                  color="error"
+                >
+                  Delete
+                </Button>
+              ) : (
+                ""
+              )}
+            </>
+          )}
+
+          {(isSuperAdmin || isAdmin || isHr) && (
             <Button
               variant="contained"
-              onClick={handleDeleteHoliday}
+              onClick={handleFormSubmit}
+              sx={{ mt: 3, ml: 1 }}
+            >
+              {submitButtonText}
+            </Button>
+          )}
+          {(isSuperAdmin || isAdmin || isHr) && (
+            <Button
+              variant="contained"
+              onClick={onClose}
               sx={{ mt: 3, ml: 1 }}
               color="error"
             >
-              Delete
+              Cancel
             </Button>
-          ) : (
-            ""
           )}
-
-          <Button
-            variant="contained"
-            onClick={handleFormSubmit}
-            sx={{ mt: 3, ml: 1 }}
-          >
-            {submitButtonText}
-          </Button>
-          <Button
-            variant="contained"
-            onClick={onClose}
-            sx={{ mt: 3, ml: 1 }}
-            color="error"
-          >
-            Cancel
-          </Button>
         </Grid>
       </Grid>
       {openSubmitModal && (

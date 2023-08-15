@@ -6,8 +6,11 @@ import StartIcon from '@mui/icons-material/Start';
 import { useNavigate } from 'react-router-dom';
 import tableIcons from '../../../../../theme/overrides/TableIcon';
 import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
+import useAuth from '../../../../../auth/hooks/component/login/useAuth';
 
 const EmployeeTableView = ({ employeeData, isLoading }) => {
+    const { isSuperAdmin, isAdmin, isHr } = useAuth();
+
     const navigate = useNavigate();
 
     const columns = [
@@ -42,7 +45,7 @@ const EmployeeTableView = ({ employeeData, isLoading }) => {
             field: 'mobileNumber',
             emptyValue: '-',
         },
-        {
+        (isSuperAdmin || isAdmin || isHr) && {
             title: 'Actions',
             render: (rowData) => (
                 <Stack direction="row" spacing={0}>
@@ -57,7 +60,7 @@ const EmployeeTableView = ({ employeeData, isLoading }) => {
             sorting: false,
             // width: 120,
         },
-    ];
+    ].filter(Boolean);
 
     const handleEditEmployee = (rowData) => {
         navigate(`edit/${rowData.id}`);
