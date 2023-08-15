@@ -219,7 +219,7 @@ const routes = [
     component: <UserController />,
   },
   {
-    path: 'EmployDashbord',
+    path: 'EmployeeDashbord',
     name: 'Employ Dashbord',
     id: nanoid(),
     component: <EmployeeDashbord />,
