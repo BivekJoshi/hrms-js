@@ -22,11 +22,9 @@ const Notification = ({ data }) => {
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
 
-
-
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
-    setStatus(data?.isChecked ?? true)
+    setStatus(data?.isChecked = true)
   };
 
   const handleClose = (event) => {

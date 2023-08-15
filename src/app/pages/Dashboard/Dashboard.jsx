@@ -26,6 +26,7 @@ const Dashboard = () => {
   const { data: projectData } = useGetProject();
   const { data: pendingLeaveData, isLoading: loadingPendingLeave } = useGetPendingLeave();
   const { data: employeeData } = useGetEmployee();
+  const { data: eventData } = useGetEvent();
   const { data: holidayData } = useGetHoliday();
   const { data: userRoleData } = useGetUserRole();
 
@@ -38,6 +39,7 @@ const Dashboard = () => {
         container
         rowSpacing={4.5}
         justifyContent="space-around"
+        gap={{sm:"1rem", lg:"0"}}
       >
         <DashboardCard
           title="Users"
@@ -50,6 +52,12 @@ const Dashboard = () => {
           icon={<FaPeopleGroup fontSize="3rem" />}
           value={28}
           count={employeeData?.length ? employeeData.length : "0"}
+        />
+        <DashboardCard
+          title="Events"
+          icon={<BiSolidCalendarEvent fontSize="3rem" />}
+          value={24}
+          count={eventData ? eventData?.length : "0"}
         />
         <DashboardCard
           title="Holiday"
