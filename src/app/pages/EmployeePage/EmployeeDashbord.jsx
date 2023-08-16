@@ -1,18 +1,22 @@
 import { Box, Stack } from "@mui/system";
-import React from "react";
+import React, { useContext } from "react";
 import Male from "../../../assets/male.png";
 import "../Style/Style.css";
 import { LeftEmployDashbord } from "./Component/LeftEmployDashbord";
 import { RightEmployDashbord } from "./Component/RightEmployDashbord";
+import ThemeModeContext from "../../../theme/ThemeModeContext";
 
 export const EmployeeDashbord = (props) => {
+  const { mode } = useContext(ThemeModeContext);
   return (
     <Box display="grid" gridTemplateRows="1fr" gap="1rem">
       <Box
         display="flex"
         flexDirection="row"
         gap="3rem"
-        className="employeeDeshbordBG"
+        className={
+          mode === "light" ? "employeeDeshbordBG" : "employeeDeshbordBGDark"
+        }
         padding="1rem 2rem"
       >
         <img src={Male} alt="profile" />

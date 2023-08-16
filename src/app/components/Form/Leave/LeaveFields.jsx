@@ -1,9 +1,10 @@
 import { Grid, TextField, Button, MenuItem, Autocomplete } from "@mui/material";
-import React from "react";
+import React, { useContext } from "react";
 import { toast } from "react-toastify";
 import { useGetEmployee } from "../../../hooks/employee/useEmployee";
 import { useGetLeaveType } from "../../../hooks/leaveType/useLeaveType";
 import useLeaveForm from "../../../hooks/leave/LeaveForm/useLeaveForm";
+import ThemeModeContext from "../../../../theme/ThemeModeContext";
 
 const leaveStatus = [
   {
@@ -23,6 +24,7 @@ const LeaveFields = ({ onClose, isLoading, data }) => {
   const { data: employeeData } = useGetEmployee();
   const { data: leaveTypeData } = useGetLeaveType();
   const { formik } = useLeaveForm(data);
+  const { mode } = useContext(ThemeModeContext);
 
   const capitalize = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
@@ -101,10 +103,11 @@ const LeaveFields = ({ onClose, isLoading, data }) => {
               }
               renderInput={(params) => (
                 <TextField
+                bgcolor="black"
                   {...params}
                   label="Employee Name"
                   fullWidth
-                  required
+                  requireds
                   error={
                     formik.touched.employeeId &&
                     Boolean(formik.errors.employeeId)
@@ -224,7 +227,11 @@ const LeaveFields = ({ onClose, isLoading, data }) => {
             InputLabelProps={{ shrink: true }}
           >
             {leaveStatus.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
+              <MenuItem
+                key={option.value}
+                value={option.value}
+                sx={mode === "light" ? "" : { bgcolor: "black" }}
+              >
                 {option.label}
               </MenuItem>
             ))}
