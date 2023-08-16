@@ -22,7 +22,7 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
   const submitButtonText = data ? "Update Company" : "Add Company";
   return (
     !isLoading && (
-      <Grid container spacing={3}>
+      <Grid container spacing={3} >
         <Grid item xs={12} sm={12}>
           <TextField
             id="companyName"

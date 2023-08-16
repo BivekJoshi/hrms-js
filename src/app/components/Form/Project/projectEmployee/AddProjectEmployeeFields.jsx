@@ -1,5 +1,5 @@
 import { Grid, Button, TextField, MenuItem, Autocomplete } from "@mui/material";
-import React from "react";
+import React, { useContext } from "react";
 import { toast } from "react-toastify";
 import { useGetEmployee } from "../../../../hooks/employee/useEmployee";
 import { useGetCompany } from "../../../../hooks/company/useCompany";
@@ -9,19 +9,23 @@ import {
   useGetProjectEmployeeById,
 } from "../../../../hooks/project/projectEmployee/useProjectEmployee";
 import { addProjectEmployee } from "../../../../api/project/projectEmployee-api";
-import { useAddProjectEmployeeForm, useEditProjectEmployeeForm } from "../../../../hooks/project/projectEmployee/addProjectEmployee/useAddProjectEmployeeForm";
+import {
+  useAddProjectEmployeeForm,
+  useEditProjectEmployeeForm,
+} from "../../../../hooks/project/projectEmployee/addProjectEmployee/useAddProjectEmployeeForm";
 import {
   useGetProject,
   useGetProjectById,
 } from "../../../../hooks/project/useProject";
 import { useParams } from "react-router-dom";
+import ThemeModeContext from "../../../../../theme/ThemeModeContext";
 
 export const AddprojectEmployeeFields = ({ onClose, isLoading }) => {
   const { id } = useParams();
   const { data: employeeData, isLoading: loadingEmployee } = useGetEmployee();
   const { data: projectData, isLoading: loadingProject } = useGetProject();
   const { data: projectDataById } = useGetProjectById(id);
-
+  const { mode } = useContext(ThemeModeContext);
   const { formik } = useAddProjectEmployeeForm();
 
   const handleFormSubmit = () => {
@@ -63,7 +67,11 @@ export const AddprojectEmployeeFields = ({ onClose, isLoading }) => {
           >
             {!loadingEmployee &&
               employeeData.map((option) => (
-                <MenuItem key={option?.id} value={option?.id}>
+                <MenuItem
+                  key={option?.id}
+                  value={option?.id}
+                  sx={mode === "light" ? "" : { bgcolor: "black" }}
+                >
                   {option?.firstName} {option?.middleName} {option?.lastName}
                 </MenuItem>
               ))}
@@ -162,7 +170,7 @@ export const AddprojectEmployeeFields = ({ onClose, isLoading }) => {
 
 export const EditProjectEmployeeFields = ({ data, onClose, isLoading }) => {
   const { formik } = useEditProjectEmployeeForm(data);
- 
+
   const handleFormSubmit = () => {
     formik.handleSubmit();
 
