@@ -1,22 +1,33 @@
 import { Box } from "@mui/system";
-import React from "react";
+import React, { useContext } from "react";
 import "../../Style/Style.css";
 import { ButtonComponent } from "../../../components/Button/ButtonComponent";
 import { Divider, Typography } from "@mui/material";
+import ThemeModeContext from "../../../../theme/ThemeModeContext";
 
 export const RightEmployDashbord = (props) => {
+  const { mode } = useContext(ThemeModeContext);
   return (
     <Box>
       <Box>
         <h3>Project</h3>
         <Box
-          className="employeeDeshbordBG employeeDeshbordMP"
+          className={
+            mode === "light"
+              ? "employeeDeshbordBG employeeDeshbord"
+              : "employeeDeshbordBGDark employeeDeshbord"
+          }
           display="flex"
           flexDirection="column"
           justifyContent="center"
+          padding="1rem"
         >
           <Box
-            className="employeeDeshbordBG employeeDeshbordMP"
+            className={
+              mode === "light"
+                ? "employeeDeshbordBG employeeDeshbord"
+                : "employeeDeshbordBGDark employeeDeshbord"
+            }
             display="flex"
             flexDirection="row"
             justifyContent="space-between"
@@ -40,10 +51,15 @@ export const RightEmployDashbord = (props) => {
       <Box marginTop="1rem">
         <h3>Your Leaves</h3>
         <Box
-          className="employeeDeshbordBG employeeDeshbordMP"
+          className={
+            mode === "light"
+              ? "employeeDeshbordBG employeeDeshbord"
+              : "employeeDeshbordBGDark employeeDeshbord"
+          }
           display="flex"
           flexDirection="column"
           justifyContent="center"
+          padding="1rem"
         >
           <Box
             display="flex"
@@ -68,9 +84,16 @@ export const RightEmployDashbord = (props) => {
           </Box>
         </Box>
       </Box>
-      <Box marginTop="1rem">
-        <h3>UPCOMMING HOLIDAY</h3>
-        <Box className="employeeDeshbordBG employeeDeshbordMP">
+      <Box margin="1rem 0">
+        <h3 style={{margin:"1rem 0"}}>UPCOMMING HOLIDAY</h3>
+        <Box
+          className={
+            mode === "light"
+              ? "employeeDeshbordBG employeeDeshbord"
+              : "employeeDeshbordBGDark employeeDeshbord"
+          }
+          padding="1rem"
+        >
           <Typography fontWeight="600" textAlign="center">
             MONDAY 10 JULY, 2023
           </Typography>

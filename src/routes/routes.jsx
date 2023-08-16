@@ -1,16 +1,18 @@
-import React, { lazy } from 'react';
-import { nanoid } from 'nanoid';
-import { Link, useLocation } from 'react-router-dom';
-import { Breadcrumbs, Typography } from '@mui/material';
-import Loadable from '../app/components/Header/Loader/Loadable';
-import { EmployeeDashbord } from '../app/pages/EmployeePage/EmployeeDashbord';
-import useAuth from '../auth/hooks/component/login/useAuth';
+import React, { lazy } from "react";
+import { nanoid } from "nanoid";
+import { Link, useLocation } from "react-router-dom";
+import { Breadcrumbs, Typography } from "@mui/material";
+import Loadable from "../app/components/Header/Loader/Loadable";
+import { EmployeeDashbord } from "../app/pages/EmployeePage/EmployeeDashbord";
+import useAuth from "../auth/hooks/component/login/useAuth";
 
 const ProfileDetail = Loadable(
   lazy(() => import("../app/pages/Auth/Profile/ProfileDetail"))
 );
 const DeactivatedOfficeResource = Loadable(
-  lazy(() => import("../app/pages/Resource/OfficeResource/DeactivatedOfficeResource"))
+  lazy(() =>
+    import("../app/pages/Resource/OfficeResource/DeactivatedOfficeResource")
+  )
 );
 const OfficeResource = Loadable(
   lazy(() => import("../app/pages/Resource/OfficeResource/OfficeResource"))
@@ -221,8 +223,8 @@ const routes = [
     requiresSuperAdmin: true,
   },
   {
-    path: 'EmployeeDashbord',
-    name: 'Employ Dashbord',
+    path: "EmployeeDashboard",
+    name: "Employ Dashboard",
     id: nanoid(),
     component: <EmployeeDashbord />,
   },
