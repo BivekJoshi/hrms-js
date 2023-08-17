@@ -84,6 +84,7 @@ const Leave = ({ isLoading }) => {
       render: (rowData) => rowData.tableData.id + 1,
       width: 80,
       sortable: false,
+      sorting: false,
     },
     {
       title: "Employee Name",
@@ -91,6 +92,7 @@ const Leave = ({ isLoading }) => {
         return <p>{getEmployeeName(rowData)} </p>;
       },
       width: 120,
+      sorting: false,
     },
     {
       title: "Leave Type",
@@ -98,18 +100,21 @@ const Leave = ({ isLoading }) => {
         return <p>{getLeaveTypeName(rowData)}</p>;
       },
       width: 150,
+      sorting: false,
     },
     {
       title: "From",
       field: "fromDate",
       emptyValue: "-",
       width: 100,
+      sorting: false,
     },
     {
       title: "To",
       field: "toDate",
       emptyValue: "-",
       width: 100,
+      sorting: false,
     },
     {
       title: "Status",
@@ -142,12 +147,14 @@ const Leave = ({ isLoading }) => {
           />
         );
       },
+      sorting: false,
     },
     {
       title: "Remark",
       field: "leaveRemarks",
       emptyValue: "-",
       width: 100,
+      sorting: false,
     },
  
     {
@@ -156,6 +163,7 @@ const Leave = ({ isLoading }) => {
         return <p>{getUserName(rowData)} </p>;
       },
       width: 120,
+      sorting: false,
     },
     {
       title: "Actions",
