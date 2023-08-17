@@ -63,7 +63,7 @@ const ForgotPassword = ({ onClose, isLoading }) => {
               name="email"
               label=" Your Email"
               type="email"
-              placeholder="me@dghub.io............"
+              placeholder="me@dghub.io"
               fullWidth
               required
               value={formik.values.email}

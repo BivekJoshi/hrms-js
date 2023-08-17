@@ -22,7 +22,7 @@ export const EditTodoListModal = ({ open, handleCloseModal, id }) => {
             <FormModal
                 open={open}
                 onClose={handleCloseModal}
-                formComponent={<TodoListFields onclose= {handleCloseModal} data={ data } />}
+                formComponent={<TodoListFields onClose= {handleCloseModal} data={ data } />}
             />
         </div>
     );

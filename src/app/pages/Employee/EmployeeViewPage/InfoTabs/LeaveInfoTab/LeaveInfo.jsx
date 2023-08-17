@@ -5,9 +5,11 @@ import { Box, Card, CardContent, Chip, Grid, Typography } from "@mui/material";
 import { useGetEmployeeLeaveById } from "../../../../../hooks/leave/useLeave";
 import { useGetLeaveType } from "../../../../../hooks/leaveType/useLeaveType";
 import "../../EmployProfile/Style/Style.css";
-import DashboardCard from "../../../../../components/cards/Dashboard/DashboardCard";
+import { useGetUserControl } from "../../../../../hooks/auth/userControl/useUserControl";
 
-const LeaveInfo = ({ isLoading }) => {
+const LeaveInfo = ({ isLoading ,data}) => {
+  const fullname=`${data?.firstName} ${data?.middleNam||""}${data?.lastName}`;
+  
   const { id } = useParams();
   const { data: leaveData, isLoading: loadingLeave } = useGetEmployeeLeaveById(
     id
@@ -16,11 +18,19 @@ const LeaveInfo = ({ isLoading }) => {
     data: leaveTypeData,
     isLoading: loadingLeaveType,
   } = useGetLeaveType();
+  const { data: UserData, isLoading: loadingUser } = useGetUserControl();
+
 
   const getLeaveTypeName = (rowData) => {
     const leaveTypeId = rowData.leaveTypeId;
     const leaveType = leaveTypeData.find((leave) => leave.id === leaveTypeId);
     const name = `${leaveType.leaveName}`;
+    return name;
+  };
+  const getUserName = ( rowData) => {
+    const confirmById = rowData?.confirmById;  
+    const user = UserData?.find((confirmBy) => confirmBy.id === confirmById);
+    const name = `${user?.name || "-"}`;
     return name;
   };
 
@@ -90,16 +100,17 @@ const LeaveInfo = ({ isLoading }) => {
     },
     {
       title: "Approved By",
-      field: "confirmById",
-      emptyValue: "-",
-      width: 40,
+      render: (rowData) => {
+        return <p>{getUserName(rowData)} </p>;
+      },
+      width: 120,
     },
   ];
   if (isLoading || loadingLeaveType || loadingLeave) return <>Loading</>;
 
   return (
     <>
-      <Grid container spacing={3}>
+      {/* <Grid container spacing={3}>
         <Grid item xs={4} sm={4}>
           <Card variant="outlined">
             <CardContent>
@@ -133,12 +144,12 @@ const LeaveInfo = ({ isLoading }) => {
             </CardContent>
           </Card>
         </Grid>
-      </Grid>
+      </Grid> */}
       <MaterialTable
         style={{ padding: "1rem" }}
         columns={columns}
         data={leaveData}
-        title=""
+        title={"Leave Data of " + fullname}
         isLoading={loadingLeave}
         options={{
           padding: "dense",

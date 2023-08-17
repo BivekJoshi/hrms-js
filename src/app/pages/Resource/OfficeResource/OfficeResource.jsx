@@ -35,24 +35,28 @@ const OfficeResource = () => {
       render: (rowData) => rowData?.tableData?.index + 1,
       width: "3.125rem",
       sortable: false,
+      sorting: false,
     },
     {
       title: "Appliance Name",
       field: "name",
       emptyValue: "-",
       width: "18.75rem",
+      sorting: false,
     },
     {
       title: "Identification Number",
       field: "uniqueNumber",
       emptyValue: "-",
       width: "18.75rem",
+      sorting: false,
     },
     {
       title: "Description",
       field: "description",
       emptyValue: "-",
       width: "57rem",
+      sorting: false,
     },
     {
       title: "Actions",

@@ -54,23 +54,27 @@ const Department = () => {
       render: (rowData) => rowData.tableData.id + 1,
       width: "3%",
       sortable: false,
+      sorting: false,
     },
     {
       title: 'Department Name',
       field: 'departmentName',
       emptyValue: '-',
       width: '20vh',
+      sorting: false,
     },
     {
       title: 'Department Type',
       field: 'departmentType',
       emptyValue: '-',
       width: '20vh',
+      sorting: false,
     },
     {
       title: 'Description',
       field: 'departmentDescription',
       emptyValue: '-',
+      sorting: false,
     },
     {
       title: 'Actions',
@@ -87,6 +91,7 @@ const Department = () => {
           </Button>
         </Stack>
       ),
+      sorting: false,
     },
   ];
   if (isLoading) return <>Loading</>;
