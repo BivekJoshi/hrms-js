@@ -115,10 +115,10 @@ const Dashboard = () => {
             <ProjectTable projectData={projectData} />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <PendingLeaveTable
+            {/* <PendingLeaveTable
               pendingLeaveData={pendingLeaveData}
               loading={loadingPendingLeave}
-            />
+            /> */}
           </Grid>
         </Grid>
       </Box>

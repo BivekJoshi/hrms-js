@@ -24,7 +24,7 @@ const Notification = ({ data }) => {
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
-    setStatus(data?.isChecked ?? true)
+    // setStatus(data?.isChecked = true)
   };
 
   const handleClose = (event) => {

@@ -63,18 +63,22 @@ const ResetPassword = ({ isLoading }) => {
     handleChangeValidation,
   } = usePasswordValidation();
 
+  const [showOldPassword, setShowOldPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   const handleFormSubmit = async () => {
     const isValid = await formik.validateForm();
     if (isValid) {
       if (formik.values.password === formik.values.confirmPassword) {
         formik.handleSubmit();
       } else {
-        toast.error('Password and confirm password does not match!');
+        toast.error('Password and confirm password do not match!');
       }
     } else {
       toast.error('Please make sure you have filled the form correctly!');
     }
-  };
+  }
 
   const style = {
     display: 'flex',
@@ -146,19 +150,19 @@ const ResetPassword = ({ isLoading }) => {
               helperText={formik.touched.oldPassword && formik.errors.oldPassword}
               variant='outlined'
               autoFocus
-              type={showValues.showPassword ? 'text' : 'password'}
+              type={showOldPassword ? 'text' : 'password'}
               InputLabelProps={{ shrink: true }}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position='end'>
-                    <Tooltip title='Show Password'>
+                    <Tooltip title={`Show ${showOldPassword ? 'Hidden' : 'Visible'} Old Password`}>
                       <IconButton
-                        aria-label='toggle password visibility'
-                        onClick={handleClickShowPassword}
+                        aria-label='toggle old password visibility'
+                        onClick={() => setShowOldPassword(!showOldPassword)}
                         onMouseDown={handleMouseDownPassword}
                         edge='end'
                       >
-                        {showValues.showPassword ? (
+                        {showOldPassword ? (
                           <VisibilityOff />
                         ) : (
                           <Visibility />
@@ -230,19 +234,18 @@ const ResetPassword = ({ isLoading }) => {
               }
               variant='outlined'
               autoFocus
-              type={showValues.showPassword ? 'text' : 'password'}
-              InputLabelProps={{ shrink: true }}
+              type={showConfirmPassword ? 'text' : 'password'}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position='end'>
-                    <Tooltip title='Show Password'>
+                    <Tooltip title={`Show ${showConfirmPassword ? 'Hidden' : 'Visible'} Confirm Password`}>
                       <IconButton
-                        aria-label='toggle password visibility'
-                        onClick={handleClickShowPassword}
+                        aria-label='toggle confirm password visibility'
+                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                         onMouseDown={handleMouseDownPassword}
                         edge='end'
                       >
-                        {showValues.showPassword ? (
+                        {showConfirmPassword ? (
                           <VisibilityOff />
                         ) : (
                           <Visibility />

@@ -14,20 +14,23 @@ import { useNavigate } from "react-router-dom";
 import { ButtonComponent } from "../../components/Button/ButtonComponent";
 import "./Style/Style.css";
 import useAuth from "../../../auth/hooks/component/login/useAuth";
-
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  bgcolor: "background.paper",
-  border: "1px solid #808080",
-  borderRadius: 2,
-  boxShadow: 24,
-  p: 4,
-};
+import ThemeModeContext from "../../../theme/ThemeModeContext";
 
 const Employee = () => {
+  const { mode } = React.useContext(ThemeModeContext);
+
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    bgcolor: "background.paper",
+    border: "1px solid #808080",
+    borderRadius: 2,
+    boxShadow: 24,
+    p: 4,
+    background: mode === "light" ? "" : "black",
+  };
   const { isSuperAdmin, isAdmin, isHr, isEmployee } = useAuth();
 
   const navigate = useNavigate();

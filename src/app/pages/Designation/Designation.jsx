@@ -57,30 +57,35 @@ const { isSuperAdmin, isAdmin, isHr, isEmployee } = useAuth();
       render: (rowData) => rowData.tableData.index + 1,
       width: 50,
       sortable: false,
+      sorting: false,
     },
     {
       title: "Designation Name",
       field: "positionName",
       emptyValue: "-",
       width: 200,
+      sorting: false,
     },
     {
       title: "Designation Level",
       field: "positionLevel",
       emptyValue: "-",
       width: 200,
+      sorting: false,
     },
     {
       title: "Salary",
       field: "salary",
       emptyValue: "-",
       width: 80,
+      sorting: false,
     },
     {
       title: "Details",
       field: "positionDetails",
       emptyValue: "-",
       width: 80,
+      sorting: false,
     },
     (isSuperAdmin || isAdmin || isHr) && {
       title: "Actions",
@@ -101,6 +106,7 @@ const { isSuperAdmin, isAdmin, isHr, isEmployee } = useAuth();
         </Stack>
       ),
       sorting: false,
+
       width: 80,
     },
   ].filter(Boolean);

@@ -24,8 +24,12 @@
 .employeeDeshbordBG {
   background-color: #fdfcfa;
 }
+.employeeDeshbordBGDark {
+  background-color: #3f413f;
+}
 
 .employeeDeshbordMP {
   padding: 1rem 2rem;
   margin-top: 1rem;
 }
+
