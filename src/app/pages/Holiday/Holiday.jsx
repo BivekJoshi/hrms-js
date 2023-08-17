@@ -8,8 +8,10 @@ import { useGetHoliday } from "../../hooks/holiday/useHoliday";
 import { AddHolidayModal, OpenHoliday } from "./HolidayModal/HolidayModal";
 import CurrentHoliday from "./CurrentHoliday";
 import "./Style/Style.css";
+import useAuth from "../../../auth/hooks/component/login/useAuth";
 
 const Holiday = () => {
+  const { isSuperAdmin, isAdmin, isHr, isEmployee } = useAuth();
   const { data: holidayData } = useGetHoliday();
 
   const [getID, setGetID] = useState({});
@@ -44,6 +46,7 @@ const Holiday = () => {
   return (
     <>
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+      {(isSuperAdmin || isAdmin || isHr) && (
         <Button
           variant="contained"
           sx={{ mt: 3, ml: 1 }}
@@ -51,6 +54,7 @@ const Holiday = () => {
         >
           +Add Holiday
         </Button>
+      )}
       </Box>
       <br />
       {/* <Grid container spacing={2}> */}

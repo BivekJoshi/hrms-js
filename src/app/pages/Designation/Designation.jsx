@@ -16,9 +16,11 @@ import {
 } from "./DesignationModal/DesignationModal";
 import DeleteConfirmationModal from "../../components/Modal/DeleteConfirmationModal";
 import { ButtonComponent } from "../../components/Button/ButtonComponent";
+import useAuth from "../../../auth/hooks/component/login/useAuth";
 
 const Designation = () => {
   const { data: designationData, isLoading } = useGetDesignation();
+const { isSuperAdmin, isAdmin, isHr, isEmployee } = useAuth();
 
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
@@ -85,7 +87,7 @@ const Designation = () => {
       width: 80,
       sorting: false,
     },
-    {
+    (isSuperAdmin || isAdmin || isHr) && {
       title: "Actions",
       render: (rowData) => (
         <Stack direction="row" spacing={0}>
@@ -107,16 +109,19 @@ const Designation = () => {
 
       width: 80,
     },
-  ];
+  ].filter(Boolean);
+
   if (isLoading) return <>Loading</>;
 
   return (
     <>
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+        {(isSuperAdmin || isAdmin || isHr) && (
         <ButtonComponent
           OnClick={handleAddOpenModal}
           buttonName={"+Add Designation"}
         />
+        )}
       </Box>
       <br />
 

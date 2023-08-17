@@ -7,8 +7,10 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import { useGetEvent } from "../../hooks/event/useEvent";
 import { ButtonComponent } from "../../components/Button/ButtonComponent";
+import useAuth from "../../../auth/hooks/component/login/useAuth";
 
 const Event = () => {
+  const { isSuperAdmin, isAdmin, isHr, isEmployee } = useAuth();
   const { data: eventData, isLoading } = useGetEvent();
   const calendarRef = useRef(null);
 
@@ -42,10 +44,12 @@ const Event = () => {
   return (
     <>
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+      {(isSuperAdmin || isAdmin || isHr) && (
         <ButtonComponent
           OnClick={handleAddOpenModal}
           buttonName={"+Add Event"}
         />
+      )}
       </Box>
       <br />
       {openAddModal && (

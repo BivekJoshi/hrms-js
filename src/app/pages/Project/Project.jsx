@@ -9,8 +9,10 @@ import { useNavigate } from "react-router-dom";
 import ProjectCard from "../../components/cards/Employee/ProjectCard";
 import { PagePagination } from "../../components/Pagination/PagePagination";
 import { ButtonComponent } from "../../components/Button/ButtonComponent";
+import useAuth from "../../../auth/hooks/component/login/useAuth";
 
 const Project = () => {
+  const { isSuperAdmin, isAdmin, isHr, isEmployee } = useAuth();
   const navigate = useNavigate();
   const { data: projectData, isLoading } = useGetProject();
 
@@ -37,8 +39,6 @@ const Project = () => {
 
   const filteredProject = projectData?.filter((project) =>
     project?.projectName.toLowerCase().includes(nameFilter.toLowerCase())
-    // &&
-    // project?.associateCompanies?.companyName.toLowerCase().includes(companyFilter.toLowerCase())
   );
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -58,6 +58,7 @@ const Project = () => {
         >
           On-Going Projects
           <Box display="flex" gap={".5rem"}>
+          {(isSuperAdmin || isAdmin || isHr) && (
             <ButtonComponent
               OnClick={() => {
                 navigate(`get-deactivated-projects`);
@@ -66,10 +67,13 @@ const Project = () => {
               BGColor={"white"}
               buttonName={"Terminated Project"}
             />
+          )}
+           {(isSuperAdmin || isAdmin || isHr) && (
             <ButtonComponent
               OnClick={handleAddOpenModal}
               buttonName={"+Add Project"}
             />
+           )}
           </Box>
         </Typography>
       </Box>

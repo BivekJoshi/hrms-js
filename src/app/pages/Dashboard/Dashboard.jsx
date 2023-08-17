@@ -26,7 +26,7 @@ const Dashboard = () => {
   const { data: projectData } = useGetProject();
   const { data: pendingLeaveData, isLoading: loadingPendingLeave } = useGetPendingLeave();
   const { data: employeeData } = useGetEmployee();
-  // const { data: eventData } = useGetEvent();
+  const { data: eventData } = useGetEvent();
   const { data: holidayData } = useGetHoliday();
   const { data: userRoleData } = useGetUserRole();
 
@@ -53,12 +53,12 @@ const Dashboard = () => {
           value={28}
           count={employeeData?.length ? employeeData.length : "0"}
         />
-        {/* <DashboardCard
+        <DashboardCard
           title="Events"
           icon={<BiSolidCalendarEvent fontSize="3rem" />}
           value={24}
           count={eventData ? eventData?.length : "0"}
-        /> */}
+        />
         <DashboardCard
           title="Holiday"
           icon={<FaGifts fontSize="3rem" />}
@@ -115,10 +115,10 @@ const Dashboard = () => {
             <ProjectTable projectData={projectData} />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <PendingLeaveTable
+            {/* <PendingLeaveTable
               pendingLeaveData={pendingLeaveData}
               loading={loadingPendingLeave}
-            />
+            /> */}
           </Grid>
         </Grid>
       </Box>
