@@ -224,7 +224,7 @@ const routes = [
     requiresSuperAdmin: true,
   },
   {
-    path: "EmployeeDashboard",
+    path: "employeedashboard",
     name: "Employ Dashboard",
     id: nanoid(),
     component: <EmployeeDashbord />,

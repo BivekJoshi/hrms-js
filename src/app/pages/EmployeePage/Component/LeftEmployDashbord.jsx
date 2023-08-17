@@ -29,7 +29,7 @@ export const LeftEmployDashbord = (props) => {
   return (
     <Box className="employeeDeshbord">
       <Box className="employeeDeshbord">
-        <h3>Today</h3>
+        <h3 style={{margin:"1rem 0"}}>Today</h3>
         {employeeEventData.map((eventData) => (
           <Box
             className={
@@ -53,25 +53,27 @@ export const LeftEmployDashbord = (props) => {
           </Box>
         ))}
       </Box>
-      <Box
-        className={
-          mode === "light"
-            ? "employeeDeshbordBG employeeDeshbord"
-            : "employeeDeshbordBGDark employeeDeshbord"
-        }
-      >
-        <h3>Event</h3>
-        <Box className="employeeDeshbord" padding="1rem 2rem">
-          <h5> Today Event</h5> <p>At Kamalpokhari </p>THis is description and
-          Location.
-        </Box>
-        <Box className="employeeDeshbord" padding="0 2rem 1rem">
-          <h5> Upcoming Event</h5> <p>At Kamalpokhari </p>THis is description
-          and Location.
+      <Box>
+        <h3 style={{margin:"1rem 0"}}>Event</h3>
+        <Box
+          className={
+            mode === "light"
+              ? "employeeDeshbordBG employeeDeshbord"
+              : "employeeDeshbordBGDark employeeDeshbord"
+          }
+        >
+          <Box className="employeeDeshbord" padding="1rem 2rem">
+            <h5> Today Event</h5> <p>At Kamalpokhari </p>THis is description and
+            Location.
+          </Box>
+          <Box className="employeeDeshbord" padding="0 2rem 1rem">
+            <h5> Upcoming Event</h5> <p>At Kamalpokhari </p>THis is description
+            and Location.
+          </Box>
         </Box>
       </Box>
       <Box className="employeeDeshbord ">
-        <h3>Check Mail</h3>
+        <h3 style={{margin:"1rem 0"}}>Check Mail</h3>
         <Box
           className={
             mode === "light" ? "employeeDeshbordBG" : "employeeDeshbordBGDark"
