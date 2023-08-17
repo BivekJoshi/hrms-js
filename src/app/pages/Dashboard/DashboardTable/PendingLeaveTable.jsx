@@ -53,7 +53,7 @@ const PendingLeaveTable = ({ pendingLeaveData, loading }) => {
     },
   ];
   return (
-   !loading && (
+    !loading &&(
     <MaterialTable
     icons={tableIcons}
     columns={columns}

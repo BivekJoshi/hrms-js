@@ -2,19 +2,14 @@ import { Box, Button, Stack } from "@mui/material";
 import MaterialTable from "@material-table/core";
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import {
-  useDeleteTraining,
-  useGetEmployeeById,
-  useGetTraining,
-} from "../../../../../hooks/training/useTraining";
+import { useDeleteTraining } from "../../../../../hooks/training/useTraining";
 import { AddTrainingInfo, EditTrainingInfo } from "./TrainingModal";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import DeleteConfirmationModal from "../../../../../components/Modal/DeleteConfirmationModal";
 
-const TrainingInfo = () => {
+const TrainingInfo = ({ data }) => {
   const { id } = useParams();
-  const { data, isLoading } = useGetEmployeeById(id);
 
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
@@ -86,10 +81,7 @@ const TrainingInfo = () => {
       title: "Actions",
       render: (rowData) => (
         <Stack direction="row" spacing={0}>
-          <Button
-            color="primary"
-            onClick={() => handleEditTraining(rowData)}
-          >
+          <Button color="primary" onClick={() => handleEditTraining(rowData)}>
             <ModeEditOutlineIcon />
           </Button>
           <Button color="primary" onClick={() => handleDeleteTraining(rowData)}>
@@ -119,9 +111,9 @@ const TrainingInfo = () => {
       <MaterialTable
         style={{ padding: "1rem" }}
         columns={columns}
-        data={Array.isArray(data) ? data : []}
+        data={Array.isArray(data?.trainings) ? data?.trainings : []}
         title="Training History"
-        isLoading={isLoading}
+        // isLoading={isLoading}
         options={{
           padding: "dense",
           margin: 50,

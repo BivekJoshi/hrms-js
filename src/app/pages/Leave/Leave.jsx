@@ -13,12 +13,15 @@ import { AddLeaveModal, EditLeaveModal } from "./LeaveModal/LeaveModal";
 import DeleteConfirmationModal from "../../components/Modal/DeleteConfirmationModal";
 import tableIcons from "../../../theme/overrides/TableIcon";
 import { ButtonComponent } from "../../components/Button/ButtonComponent";
+import { useGetUserControl } from "../../hooks/auth/userControl/useUserControl";
 
 const Leave = ({ isLoading }) => {
   const { data: leaveData, isLoading: loadingleave } = useGetLeave();
   const { data: employeeData, isLoading: loadingemployee } = useGetEmployee();
   const { data: leaveTypeData, isLoading: loadingleaveType } =
     useGetLeaveType();
+  const { data: UserData, isLoading: loadingUser } = useGetUserControl();
+
 
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
@@ -67,12 +70,21 @@ const Leave = ({ isLoading }) => {
     const name = `${capitalizeFirstLetter(leaveType.leaveName)} Leave`;
     return name;
   };
+  const getUserName = ( rowData) => {
+    const confirmById = rowData?.confirmById;  
+    const user = UserData?.find((confirmBy) => confirmBy.id === confirmById);
+    const name = `${user?.name || "-"}`;
+    return name;
+  };
+
+
   const columns = [
     {
       title: "SN",
       render: (rowData) => rowData.tableData.id + 1,
       width: 80,
       sortable: false,
+      sorting: false,
     },
     {
       title: "Employee Name",
@@ -80,6 +92,7 @@ const Leave = ({ isLoading }) => {
         return <p>{getEmployeeName(rowData)} </p>;
       },
       width: 120,
+      sorting: false,
     },
     {
       title: "Leave Type",
@@ -87,18 +100,21 @@ const Leave = ({ isLoading }) => {
         return <p>{getLeaveTypeName(rowData)}</p>;
       },
       width: 150,
+      sorting: false,
     },
     {
       title: "From",
       field: "fromDate",
       emptyValue: "-",
       width: 100,
+      sorting: false,
     },
     {
       title: "To",
       field: "toDate",
       emptyValue: "-",
       width: 100,
+      sorting: false,
     },
     {
       title: "Status",
@@ -131,18 +147,23 @@ const Leave = ({ isLoading }) => {
           />
         );
       },
+      sorting: false,
     },
     {
       title: "Remark",
       field: "leaveRemarks",
       emptyValue: "-",
       width: 100,
+      sorting: false,
     },
+ 
     {
       title: "Approved By",
-      field: "confirmById",
-      emptyValue: "-",
-      width: 40,
+      render: (rowData) => {
+        return <p>{getUserName(rowData)} </p>;
+      },
+      width: 120,
+      sorting: false,
     },
     {
       title: "Actions",
