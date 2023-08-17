@@ -89,9 +89,10 @@ const AddprojectFields = ({ onClose, isLoading }) => {
         <Grid item xs={12} sm={6}>
           <TextField
             name="endDate"
-            label="End Date"
+            label="Deadline Date"
             type="date"
             fullWidth
+            required
             value={formik.values.endDate}
             onChange={formik.handleChange}
             error={formik.touched.endDate && Boolean(formik.errors.endDate)}

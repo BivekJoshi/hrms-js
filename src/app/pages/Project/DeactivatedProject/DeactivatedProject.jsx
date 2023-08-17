@@ -23,7 +23,7 @@ const DeactivatedProject = () => {
   const getLeaderName = (rowData) => {
     const projectId = rowData.projectLeaderId;
     const employee = employeeData?.find((emp) => emp.id === projectId);
-    const name = `${employee.firstName} ${employee.middleName} ${employee.lastName}`;
+    const name = `${employee?.firstName} ${employee?.middleName} ${employee?.lastName}`;
     return name;
   };
 
