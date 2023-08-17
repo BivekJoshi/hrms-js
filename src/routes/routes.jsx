@@ -1,10 +1,11 @@
-import React, { lazy } from "react";
+import React, { lazy, useContext } from "react";
 import { nanoid } from "nanoid";
 import { Link, useLocation } from "react-router-dom";
 import { Breadcrumbs, Typography } from "@mui/material";
 import Loadable from "../app/components/Header/Loader/Loadable";
 import { EmployeeDashbord } from "../app/pages/EmployeePage/EmployeeDashbord";
 import useAuth from "../auth/hooks/component/login/useAuth";
+import ThemeModeContext from "../theme/ThemeModeContext";
 
 const ProfileDetail = Loadable(
   lazy(() => import("../app/pages/Auth/Profile/ProfileDetail"))
@@ -223,7 +224,7 @@ const routes = [
     requiresSuperAdmin: true,
   },
   {
-    path: "EmployeeDashboard",
+    path: "employeedashboard",
     name: "Employ Dashboard",
     id: nanoid(),
     component: <EmployeeDashbord />,
@@ -247,6 +248,7 @@ export { routes };
 </Breadcrumbs>;
 
 export default function BreadCrumbs() {
+  const { mode } = useContext(ThemeModeContext);
   const location = useLocation();
   const currentPath = location.pathname;
   const currentRoute = routes.find(
@@ -260,7 +262,11 @@ export default function BreadCrumbs() {
           <Typography color="text.primary">{currentRoute?.name}</Typography>
         ) : (
           <Breadcrumbs>
-            <Link underline="hover" color="inherit" to="/admin/dashboard">
+            <Link
+              underline="hover"
+              style={{ color: mode === "light" ? "inherit" : "white" }}
+              to="/admin/dashboard"
+            >
               Dashboard
             </Link>
             <Typography color="text.primary">{currentRoute?.name}</Typography>
