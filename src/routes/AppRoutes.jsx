@@ -1,18 +1,19 @@
 import React, { lazy } from "react";
 import ScrollToTop from "../app/utils/ScrolltoTop";
-import { HashRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, HashRouter, Route, Routes } from "react-router-dom";
 import Applayout from "../layout/Applayout";
 import AdminLayout from "../layout/AdminLayout";
 import ProtectedRoute from "./ProtectedRoute";
 import { routes } from "./routes";
 import ForgotPassword from "../app/pages/Auth/FogotPassword/ForgotPassword";
 import Login from "../app/pages/Auth/Login/Login";
+import useAuth from "../auth/hooks/component/login/useAuth";
 
 const AppRoutes = () => {
   const { isSuperAdmin, isAdmin, isHr, isEmployee } = useAuth();
 
   return (
-    <HashRouter>
+    <Router>
       <ScrollToTop>
         <Routes>
           <Route path="/" exact element={<Applayout />}>
@@ -43,7 +44,7 @@ const AppRoutes = () => {
           </Route>
         </Routes>
       </ScrollToTop>
-    </HashRouter>
+    </Router>
   );
 };
 
