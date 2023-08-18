@@ -7,6 +7,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import { routes } from "./routes";
 import ForgotPassword from "../app/pages/Auth/FogotPassword/ForgotPassword";
 import Login from "../app/pages/Auth/Login/Login";
+import useAuth from "../auth/hooks/component/login/useAuth";
 
 const AppRoutes = () => {
   const { isSuperAdmin, isAdmin, isHr, isEmployee } = useAuth();

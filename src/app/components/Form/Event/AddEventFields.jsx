@@ -25,6 +25,7 @@ const AddEventFields = ({ onClose, isLoading }) => {
 
     if (!formik.isValidating && formik.isValid) {
       setOpenSubmitModal(true);
+      // onClose();
     } else {
       toast.error("Please make sure you have filled the form correctly");
     }
