@@ -96,7 +96,7 @@ const ProjectDetail = () => {
       width: 80,
     },
     {
-      title: "project Name",
+      title: "Project Name",
       field: "projectId",
       render: (rowData) => {
         return <p>{getLeaderName(rowData)}</p>;

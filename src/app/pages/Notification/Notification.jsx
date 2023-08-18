@@ -13,14 +13,14 @@ import {
 import NotificationsIcon from "@mui/icons-material/NotificationsNone";
 
 const Notification = ({ data }) => {
-  const [ status, setStatus ] = useState();
-
   const eventName = data?.events;
   const eventCount = data?.eventCount || 0;
   const displayCount = eventCount > 0 ? eventCount : null;
 
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
+
+  const checkStatus = data?.isChecked ?? true;
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
