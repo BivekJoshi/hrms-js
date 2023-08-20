@@ -69,6 +69,7 @@ const ProjectDetail = () => {
       render: (rowData) => rowData.tableData.index + 1,
       width: 80,
       sortable: false,
+      sorting: false,
     },
     {
       title: "Employee Name",
@@ -76,24 +77,28 @@ const ProjectDetail = () => {
         return <p>{getEmployeeName(rowData)}</p>;
       },
       width: 80,
+      sorting: false,
     },
     {
       title: "Assigned On",
       field: "assignedOn",
       emptyValue: "-",
       width: 80,
+      sorting: false,
     },
     {
       title: "Deassigned On",
       field: "deAssignedOn",
       emptyValue: "-",
       width: 80,
+      sorting: false,
     },
     {
       title: "Project Status",
       field: "onProject",
       emptyValue: "-",
       width: 80,
+      sorting: false,
     },
     {
       title: "Project Name",
@@ -102,6 +107,7 @@ const ProjectDetail = () => {
         return <p>{getLeaderName(rowData)}</p>;
       },
       width: 80,
+      sorting: false,
     },
     {
       title: "Actions",

@@ -4,8 +4,11 @@ import { toast } from "react-toastify";
 import { useDeleteEvent } from "../../../hooks/event/useEvent";
 import useEventForm from "../../../hooks/event/EventForm/useEventForm";
 import useEditEventForm from "../../../hooks/event/editEvent/useEditEventForm";
+import useAuth from "../../../../auth/hooks/component/login/useAuth";
 
 const EditEventFields = ({ onClose, isLoading, data }) => {
+  const { isSuperAdmin, isAdmin, isHr, isEmployee } = useAuth();
+
   const { formik } = useEditEventForm(data);
 
   const handleFormSubmit = async () => {
