@@ -79,7 +79,7 @@ const Employee = () => {
               variant="contained"
               sx={{ gap: "12px", textDecoration: "none", boxShadow: "0" }}
             >
-              {(isSuperAdmin || isAdmin || isHr) && (
+              {(isSuperAdmin || isAdmin || isHr || isEmployee) && (
                 <ButtonComponent
                   NameClass="buttonGroup"
                   OnClick={() => {
@@ -90,7 +90,7 @@ const Employee = () => {
                   TextColor="black"
                 />
               )}
-              {(isSuperAdmin || isAdmin || isHr) && (
+              {(isSuperAdmin || isAdmin || isHr || isEmployee) && (
                 <ButtonComponent
                   OnClick={handleAddOpenModal}
                   buttonName="+Add Employee"

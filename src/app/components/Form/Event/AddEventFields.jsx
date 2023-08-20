@@ -8,8 +8,6 @@ import useEventForm from "../../../hooks/event/EventForm/useEventForm";
 const AddEventFields = ({ onClose, isLoading ,formik}) => {
   // const { formik, data } = useEventForm();
 
-  // const [showInitialView, setShowInitialView] = useState(true);
-  // const [openSubmitModal, setOpenSubmitModal] = useState(false);
 
   // const handleProceed = () => {
   //   setOpenSubmitModal(false);
@@ -33,7 +31,6 @@ const AddEventFields = ({ onClose, isLoading ,formik}) => {
 
   return (
     <>
-      {/* {showInitialView && ( */}
         <Grid container spacing={3}>
           <Grid item xs={12} sm={12}>
             <TextField
@@ -134,30 +131,7 @@ const AddEventFields = ({ onClose, isLoading ,formik}) => {
               InputLabelProps={{ shrink: true }}
             />
           </Grid>
-          {/* <Grid
-            container
-            direction="row"
-            justifyContent="flex-end"
-            alignItems="flex-end"
-          >
-            <Button
-              variant="contained"
-              onClick={onClose}
-              sx={{ mt: 3, ml: 1 }}
-              color="error"
-            >
-              Cancel
-            </Button>
-            <Button
-              variant="contained"
-              onClick={handleFormSubmit}
-              sx={{ mt: 3, ml: 1 }}
-            >
-              Add Event
-            </Button>
-          </Grid> */}
         </Grid>
-      {/* )} */}
 
       {/* <ModalComponent
         open={openSubmitModal}

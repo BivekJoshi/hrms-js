@@ -39,7 +39,7 @@ const AppRoutes = () => {
                 <Route element={<ProtectedRoute redirectTo="/" />}>
                   
                   {routes.map((route) => {
-                    if ( (route.path !== "users" && route.path !== "employee") || isSuperAdmin || isAdmin ) {
+                    if ( (route.path !== "users" && route.path !== "employee") || isSuperAdmin || isAdmin ||isEmployee) {
                       return (
                         <Route
                           key={route.id}

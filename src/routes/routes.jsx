@@ -6,7 +6,6 @@ import Loadable from "../app/components/Header/Loader/Loadable";
 import { EmployeeDashbord } from "../app/pages/EmployeePage/EmployeeDashbord";
 import useAuth from "../auth/hooks/component/login/useAuth";
 import ThemeModeContext from "../theme/ThemeModeContext";
-import EventTest from "../app/pages/EventTest";
 
 const ProfileDetail = Loadable(
   lazy(() => import("../app/pages/Auth/Profile/ProfileDetail"))
@@ -229,12 +228,6 @@ const routes = [
     name: "Employ Dashboard",
     id: nanoid(),
     component: <EmployeeDashbord />,
-  },
-  {
-    path: "eventTest",
-    name: "Employ Dashboard",
-    id: nanoid(),
-    component: <EventTest />,
   },
 ];
 

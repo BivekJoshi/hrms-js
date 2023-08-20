@@ -7,6 +7,7 @@ import AddEventFields from "../../../components/Form/Event/AddEventFields";
 import { useGetEventById } from "../../../hooks/event/useEvent";
 import EditEventFields from "../../../components/Form/Event/EditEventFields";
 import useEventForm from "../../../hooks/event/EventForm/useEventForm";
+import EmailToAll from "../../Email/EmailToAll";
 
 export const AddEventModal = ({ open, handleCloseModal }) => {
   const [openSubmitModal, setOpenSubmitModal] = useState();
@@ -15,16 +16,20 @@ export const AddEventModal = ({ open, handleCloseModal }) => {
 
   const { formik } = useEventForm(handleOpenSubmitModal);
 
+  const [openEmail, setOpenEmail] = useState(false);
+
   const handleFormSubmit = async () => {
     formik.handleSubmit();
     if (!formik.isValidating && formik.isValid) {
-      // handleOpenSubmitModal();
-      handleCloseModal();
-      // setOpenSubmitModal(true);
+      // handleCloseModal();
     } else {
       toast.error("Please make sure you have filled the form correctly");
     }
-    // handleCloseModal();
+  };
+
+  const handleEmailButtonClick = () => {
+    setOpenEmail(true);
+    setOpenSubmitModal(false);
   };
 
   return (
@@ -34,7 +39,8 @@ export const AddEventModal = ({ open, handleCloseModal }) => {
         onClose={handleCloseModal}
         formComponent={
           <>
-            <AddEventFields onClose={handleCloseModal} formik={formik} />
+            {/*Import Event Field Here*/}
+            <AddEventFields onClose={handleCloseModal} formik={formik}/>
             <Grid
               container
               direction="row"
@@ -43,18 +49,18 @@ export const AddEventModal = ({ open, handleCloseModal }) => {
             >
               <Button
                 variant="contained"
+                onClick={handleFormSubmit}
+                sx={{ mt: 3, ml: 1 }}
+              >
+                Add Event
+              </Button>
+              <Button
+                variant="contained"
                 onClick={handleCloseModal}
                 sx={{ mt: 3, ml: 1 }}
                 color="error"
               >
                 Cancel
-              </Button>
-              <Button
-                variant="contained"
-                onClick={handleFormSubmit}
-                sx={{ mt: 3, ml: 1 }}
-              >
-                Add Event
               </Button>
             </Grid>
 
@@ -69,7 +75,7 @@ export const AddEventModal = ({ open, handleCloseModal }) => {
                     <Button
                       variant="contained"
                       sx={{ mt: 3, ml: 1 }}
-                      // onClick={handleEmailButtonClick}
+                      onClick={handleEmailButtonClick}
                     >
                       Yes
                     </Button>
@@ -77,12 +83,40 @@ export const AddEventModal = ({ open, handleCloseModal }) => {
                       variant="contained"
                       onClick={() => {
                         setOpenSubmitModal(false);
-                        handleCloseModal();
                       }}
                       sx={{ mt: 3, ml: 1 }}
                       color="error"
                     >
                       No
+                    </Button>
+                  </Box>
+                </div>
+              }
+            />
+
+            <FormModal
+              open={openEmail}
+              onClose={() => setOpenEmail(false)}
+              formComponent={
+                <div>
+                  <EmailToAll formik={formik} />
+                  <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+                    <Button
+                      variant="contained"
+                      sx={{ mt: 3, ml: 1 }}
+                      onClick={handleEmailButtonClick}
+                    >
+                      Send
+                    </Button>
+                    <Button
+                      variant="contained"
+                      onClick={() => {
+                        setOpenEmail(false);
+                      }}
+                      sx={{ mt: 3, ml: 1 }}
+                      color="error"
+                    >
+                      Cancel
                     </Button>
                   </Box>
                 </div>
