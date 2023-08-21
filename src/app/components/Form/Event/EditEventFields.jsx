@@ -115,7 +115,7 @@ const EditEventFields = ({ onClose, isLoading, data }) => {
           justifyContent="flex-end"
           alignItems="flex-end"
         >
-          {(isSuperAdmin || isAdmin || isHr || isEmployee) && (
+          {/* {(isSuperAdmin || isAdmin || isHr || isEmployee) && ( */}
             <Button
               variant="contained"
               onClick={handleDeleteEvent}
@@ -124,8 +124,8 @@ const EditEventFields = ({ onClose, isLoading, data }) => {
             >
               Delete
             </Button>
-          )}
-          {(isSuperAdmin || isAdmin || isHr || isEmployee) && (
+          {/* )} */}
+          {/* {(isSuperAdmin || isAdmin || isHr || isEmployee) && ( */}
             <Button
               variant="contained"
               onClick={handleFormSubmit}
@@ -133,8 +133,8 @@ const EditEventFields = ({ onClose, isLoading, data }) => {
             >
               Update Event
             </Button>
-          )}
-          {(isSuperAdmin || isAdmin || isHr || isEmployee) && (
+          {/* )} */}
+          {/* {(isSuperAdmin || isAdmin || isHr || isEmployee) && ( */}
             <Button
               variant="contained"
               onClick={onClose}
@@ -143,7 +143,7 @@ const EditEventFields = ({ onClose, isLoading, data }) => {
             >
               Cancel
             </Button>
-          )}
+          {/* )} */}
         </Grid>
       </Grid>
     )

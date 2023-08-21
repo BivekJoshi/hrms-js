@@ -44,12 +44,12 @@ const Event= () => {
   return (
     <>
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-        {(isSuperAdmin || isAdmin || isHr || isEmployee) && (
+        {/* {(isSuperAdmin || isAdmin || isHr || isEmployee) && ( */}
           <ButtonComponent
             OnClick={() => setOpenAddModal(true)}
             buttonName={"+Add Event"}
           />
-        )}
+        {/* )} */}
       </Box>
       <br />
       {openAddModal && (

@@ -190,7 +190,7 @@ const ProjectDetail = () => {
           open={openDeleteModal}
           handleCloseModal={handleCloseDeleteModal}
           handleConfirmDelete={handleConfirmDelete}
-          message={"projectEmployee"}
+          message={"Project Employee"}
         />
       )}
     </>

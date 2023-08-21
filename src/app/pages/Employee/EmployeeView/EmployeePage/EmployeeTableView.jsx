@@ -50,7 +50,8 @@ const EmployeeTableView = ({ employeeData, isLoading }) => {
             emptyValue: '-',
             sorting: false,
         },
-        (isSuperAdmin || isAdmin || isHr) && {
+        // (isSuperAdmin || isAdmin || isHr) &&
+         {
             title: 'Actions',
             render: (rowData) => (
                 <Stack direction="row" spacing={0}>

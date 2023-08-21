@@ -12,24 +12,28 @@ export const ProjectTable = ({ projectData }) => {
       render: (rowData) => rowData.tableData.index + 1,
       width: 60,
       sortable: false,
+      sorting: false,
     },
     {
       title: "Project Name",
       field: "projectName",
       emptyValue: "-",
       width: 300,
+      sorting: false,
     },
     {
       title: "Started",
       field: "startDate",
       emptyValue: "-",
       width: 150,
+      sorting: false,
     },
-    {
-      title: "Progress",
-      render: (rowData) => (<LinearProgress variant="determinate" value={50} />),
-      width: 400,
-    },
+    // {
+    //   title: "Progress",
+    //   render: (rowData) => (<LinearProgress variant="determinate" value={50} />),
+    //   width: 400,
+    //   sorting: false,
+    // },
   ];
   return (
     <>
