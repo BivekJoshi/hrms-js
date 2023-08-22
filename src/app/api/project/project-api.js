@@ -2,7 +2,7 @@ import { axiosInstance } from "../../../auth/axiosInterceptor";
 
 {/*________________________GET_____________________________________*/ }
 export const getProject = async () => {
-    const data = await axiosInstance.get(`/project`);
+    const data = await axiosInstance.get(`/project/get-all`);
     return data;
 };
 
@@ -10,14 +10,14 @@ export const getProject = async () => {
 {/*________________________GETBYID_____________________________________*/ }
 export const getProjectById = async (id) => {
     if (id) {
-      const data = await axiosInstance.get(`/project/${id}`);
+      const data = await axiosInstance.get(`/project/project-id/${id}`);
       return data;
     }
 };
 
 {/*________________________GET-DEACTIVATE-PROJECT_____________________________________*/ }
 export const getDeactivatedProject = async () => {
-    const data = await axiosInstance.get(`/project/get-deactivated-projects`);
+    const data = await axiosInstance.get(`/project/get-deactivated`);
     return data;
 };
 
@@ -37,13 +37,13 @@ export const removeActiveProject = async (formData) => {
 
 {/*________________________POST_____________________________________*/ }
 export const addProject = async (formData) => {
-    const data = await axiosInstance.post('/project', formData);
+    const data = await axiosInstance.post('/project/create', formData);
     return data;
 };
 
 {/*________________________EDIT_____________________________________*/ }
 export const editProject = async (formData) => {
     const {id} = formData;
-    const data = await axiosInstance.put(`/project/${id}`, formData);
+    const data = await axiosInstance.put(`/project/update/${id}`, formData);
     return data;
 };

@@ -16,7 +16,7 @@ export const getListById = async (id) => {
 
 {/*________________________POST_____________________________________*/ }
 export const addList = async (formData) => {
-  const data = await axiosInstance.post('/to-do-list', formData);
+  const data = await axiosInstance.post('/to-do-list/create', formData);
   return data;
 };
 
@@ -28,7 +28,7 @@ export const editList = async (formData) => {
 };
 
 {/*________________________DELETE_____________________________________*/ }
-export const deleteList = async (companyId) => {
-  const response = await axiosInstance.delete(`/to-do-list/delete/${companyId}`);
+export const deleteList = async (id) => {
+  const response = await axiosInstance.delete(`/to-do-list/delete/${id}`);
   return response.data;
 };

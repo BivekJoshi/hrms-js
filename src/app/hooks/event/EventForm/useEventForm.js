@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 import { useAddEvent, useEditEvent } from "../useEvent";
 import { EventSchema } from "../Validation/EventSchema";
 
-const useEventForm = (handleOpenSubmitModal) => {
+const useEventForm = (handleOpenSubmitModal,handleCloseModal) => {
   const { mutate: addEvent, data } = useAddEvent({});
   const { mutate: editEvent } = useEditEvent({});
 
@@ -28,8 +28,10 @@ const useEventForm = (handleOpenSubmitModal) => {
     // },
     onSubmit: (values) => {
       handleRequest(values);
+      
       handleOpenSubmitModal();
       formik.resetForm();
+      // handleCloseModal();
     },
   });
 

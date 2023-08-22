@@ -2,7 +2,7 @@ import { axiosInstance } from "../../../auth/axiosInterceptor";
 
 {/*________________________GET_____________________________________*/ }
 export const getLeaveType = async () => {
-  const data = await axiosInstance.get(`/leave-type`);
+  const data = await axiosInstance.get(`/leave-type/get-all`);
   return data;
 };
 
@@ -16,19 +16,19 @@ export const getLeaveTypeById = async (id) => {
 
 {/*________________________POST_____________________________________*/ }
 export const addLeaveType = async (formData) => {
-  const data = await axiosInstance.post('/leave-type', formData);
+  const data = await axiosInstance.post('/leave-type/create', formData);
   return data;
 };
 
 {/*________________________EDIT_____________________________________*/ }
 export const editLeaveType = async (formData) => {
   const {id} = formData;
-  const data = await axiosInstance.put(`/leave-type/${id}`, formData);
+  const data = await axiosInstance.put(`/leave-type/update/${id}`, formData);
   return data;
 };
 
 {/*________________________DELETE_____________________________________*/ }
 export const deleteLeaveType = async (leavetypeId) => {
-  const response = await axiosInstance.delete(`/leave-type/${leavetypeId}`);
+  const response = await axiosInstance.delete(`/leave-type/delete/${leavetypeId}`);
   return response.data;
 };

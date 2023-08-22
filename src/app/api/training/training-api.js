@@ -2,14 +2,14 @@ import { axiosInstance } from "../../../auth/axiosInterceptor";
 
 /*___________________________________POST_________________________________________*/
 export const addTrainingDetail = async (formData, id) => {
-  const data = await axiosInstance.post(`/training/${id}`, formData);
+  const data = await axiosInstance.post(`/training/create/${id}`, formData);
   return data;
 };
 
 /*________________________GET ALL_____________________________________*/
 
 export const getTrainingDetail = async () => {
-  const data = await axiosInstance.get(`/training`);
+  const data = await axiosInstance.get(`/training/get-all`);
   return data;
 };
 
@@ -37,7 +37,7 @@ export const editTraining = async (formData, empId) => {
   const { id } = formData;
   if (id && empId) {
     const data = await axiosInstance.put(
-      `/training/${id}?employeeId=${empId}`,
+      `/training/update/${id}?employeeId=${empId}`,
       formData
     );
     return data;
