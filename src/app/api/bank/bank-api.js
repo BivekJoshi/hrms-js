@@ -4,7 +4,7 @@ import { axiosInstance } from '../../../auth/axiosInterceptor';
 {/*____________________________GETBANKDETAILSBYEMPLOYEEID____________________________________________*/}
 export const getBankDetailById = async (id) => {
   if (id) {
-    const data = await axiosInstance.get(`/bank-details/employee/${id}`);
+    const data = await axiosInstance.get(`/bank-details/employee-id/${id}`);
     return data;
   }
 };
@@ -19,7 +19,7 @@ export const getBankDetailsBankId = async (bankId) => {
 
 {/*____________________________GETALL____________________________________________*/}
 export const getBankDetails = async () => {
-  const data = await axiosInstance.get(`/bank-details`);
+  const data = await axiosInstance.get(`/bank-details/get-all`);
   return data;
 };
 

@@ -5,7 +5,7 @@ export const addPermanentAddress = async (formData, id) => {
     (address) => address.addressType === "PERMANENT"
   );
   if (permanentAddress) {
-    const data = await axiosInstance.post(`/address/${id}`, [permanentAddress]);
+    const data = await axiosInstance.post(`/address/create/${id}`, [permanentAddress]);
     return data;
   } else {
     return null;
@@ -17,7 +17,7 @@ export const addTemporaryAddress = async (formData, id) => {
     (address) => address.addressType == "TEMPORARY"
   );
   if (temporaryAddress) {
-    const data = await axiosInstance.post(`/address/${id}`, [temporaryAddress]);
+    const data = await axiosInstance.post(`/address/create/${id}`, [temporaryAddress]);
     return data;
   } else {
     return null;

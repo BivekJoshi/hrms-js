@@ -14,7 +14,7 @@ export const AddEventModal = ({ open, handleCloseModal }) => {
 
   const handleOpenSubmitModal = () => setOpenSubmitModal(true);
 
-  const { formik } = useEventForm(handleOpenSubmitModal);
+  const { formik } = useEventForm(handleOpenSubmitModal,handleCloseModal);
 
   const [openEmail, setOpenEmail] = useState(false);
 
@@ -40,7 +40,7 @@ export const AddEventModal = ({ open, handleCloseModal }) => {
         formComponent={
           <>
             {/*Import Event Field Here*/}
-            <AddEventFields onClose={handleCloseModal} formik={formik}/>
+            <AddEventFields formik={formik} />
             <Grid
               container
               direction="row"
@@ -63,66 +63,65 @@ export const AddEventModal = ({ open, handleCloseModal }) => {
                 Cancel
               </Button>
             </Grid>
-
-            <FormModal
-              open={openSubmitModal}
-              onClose={() => setOpenSubmitModal(false)}
-              formComponent={
-                <div>
-                  <h2>Event Added Successfully!</h2>
-                  <p>Do you like to Email this event to Employee.</p>
-                  <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-                    <Button
-                      variant="contained"
-                      sx={{ mt: 3, ml: 1 }}
-                      onClick={handleEmailButtonClick}
-                    >
-                      Yes
-                    </Button>
-                    <Button
-                      variant="contained"
-                      onClick={() => {
-                        setOpenSubmitModal(false);
-                      }}
-                      sx={{ mt: 3, ml: 1 }}
-                      color="error"
-                    >
-                      No
-                    </Button>
-                  </Box>
-                </div>
-              }
-            />
-
-            <FormModal
-              open={openEmail}
-              onClose={() => setOpenEmail(false)}
-              formComponent={
-                <div>
-                  <EmailToAll formik={formik} />
-                  <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-                    <Button
-                      variant="contained"
-                      sx={{ mt: 3, ml: 1 }}
-                      onClick={handleEmailButtonClick}
-                    >
-                      Send
-                    </Button>
-                    <Button
-                      variant="contained"
-                      onClick={() => {
-                        setOpenEmail(false);
-                      }}
-                      sx={{ mt: 3, ml: 1 }}
-                      color="error"
-                    >
-                      Cancel
-                    </Button>
-                  </Box>
-                </div>
-              }
-            />
           </>
+        }
+      />
+      <FormModal
+        open={openSubmitModal}
+        onClose={() => setOpenSubmitModal(false)}
+        formComponent={
+          <div>
+            <h2>Event Added Successfully!</h2>
+            <p>Do you like to Email this event to Employee.</p>
+            <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+              <Button
+                variant="contained"
+                sx={{ mt: 3, ml: 1 }}
+                onClick={handleEmailButtonClick}
+              >
+                Yes
+              </Button>
+              <Button
+                variant="contained"
+                onClick={() => {
+                  setOpenSubmitModal(false);
+                }}
+                sx={{ mt: 3, ml: 1 }}
+                color="error"
+              >
+                No
+              </Button>
+            </Box>
+          </div>
+        }
+      />
+
+      <FormModal
+        open={openEmail}
+        onClose={() => setOpenEmail(false)}
+        formComponent={
+          <div>
+            <EmailToAll formik={formik} />
+            <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+              <Button
+                variant="contained"
+                sx={{ mt: 3, ml: 1 }}
+                onClick={handleEmailButtonClick}
+              >
+                Send
+              </Button>
+              <Button
+                variant="contained"
+                onClick={() => {
+                  setOpenEmail(false);
+                }}
+                sx={{ mt: 3, ml: 1 }}
+                color="error"
+              >
+                Cancel
+              </Button>
+            </Box>
+          </div>
         }
       />
     </div>

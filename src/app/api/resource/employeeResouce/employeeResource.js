@@ -8,25 +8,25 @@ export const getemployeeResource = async () => {
 
 {/*________________________GET OFFICE RESOURCE BY EMPLOYEE RESOURCE ID_____________________________________*/ }
 export const getemployeeResourceById = async (id) => {
-  const data = await axiosInstance.get(`/employee-resource/get/${id}`);
+  const data = await axiosInstance.get(`/employee-resource/emp-res-id/${id}`);
   return data;
 };
 
 {/*________________________POST EMPLOYEE RESOURCE_____________________________________*/ }
 export const addemployeeResource = async (formData) => {
-  const data = await axiosInstance.post(`/employee-resource`, formData);
+  const data = await axiosInstance.post(`/employee-resource/create`, formData);
   return data;
 };
 
 {/*________________________EDIT EMPLOYEE RESOURCE_____________________________________*/ }
 export const editemployeeResource = async (formData) => {
   const { id } = formData;
-  const data = await axiosInstance.put(`/employee-resource/${id}`, formData);
+  const data = await axiosInstance.put(`/employee-resource/update/${id}`, formData);
   return data;
 };
 
 {/*________________________DELETE EMPLOYEE RESOURCE_____________________________________*/ }
 export const deleteemployeeResource = async (empResId) => {
-    const response = await axiosInstance.delete(`/employee-resource/${empResId}`);
+    const response = await axiosInstance.delete(`/employee-resource/delete/${empResId}`);
     return response.data;
   };

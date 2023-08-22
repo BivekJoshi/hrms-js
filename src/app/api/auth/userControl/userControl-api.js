@@ -4,7 +4,7 @@ import { axiosInstance } from "../../../../auth/axiosInterceptor";
   /*____________________________GET-USER____________________________________________*/
 }
 export const getUserControl = async () => {
-  const data = await axiosInstance.get(`/user`);
+  const data = await axiosInstance.get(`/user/get-all`);
   return data;
 };
 
@@ -13,7 +13,7 @@ export const getUserControl = async () => {
 }
 export const getUserControlById = async (id) => {
   if (id) {
-    const data = await axiosInstance.get(`/user/${id}`);
+    const data = await axiosInstance.get(`/user/user-id/${id}`);
     return data;
   }
 };
@@ -32,7 +32,7 @@ export const addUserControl = async (formData) => {
 }
 export const editUserControl = async (formData) => {
   const { id } = formData;
-  const data = await axiosInstance.put(`/company/${id}`, formData);
+  const data = await axiosInstance.put(`/user/${id}`, formData);
   return data;
 };
 
@@ -48,7 +48,7 @@ export const deleteCompany = async (id) => {
   /*____________________________GET-USER-ROLE____________________________________________*/
 }
 export const getUserRole = async () => {
-  const data = await axiosInstance.get(`/role`);
+  const data = await axiosInstance.get(`/role/get-all`);
   return data;
 };
 
