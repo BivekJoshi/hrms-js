@@ -111,7 +111,7 @@ const HolidayFields = ({ onClose, isLoading, data }) => {
           justifyContent="flex-end"
           alignItems="flex-end"
         >
-          {(isSuperAdmin || isAdmin || isHr) && (
+          {/* {(isSuperAdmin || isAdmin || isHr) && ( */}
             <>
               {data ? (
                 <Button
@@ -126,9 +126,9 @@ const HolidayFields = ({ onClose, isLoading, data }) => {
                 ""
               )}
             </>
-          )}
+          {/* )} */}
 
-          {(isSuperAdmin || isAdmin || isHr) && (
+          {/* {(isSuperAdmin || isAdmin || isHr) && ( */}
             <Button
               variant="contained"
               onClick={handleFormSubmit}
@@ -136,8 +136,8 @@ const HolidayFields = ({ onClose, isLoading, data }) => {
             >
               {submitButtonText}
             </Button>
-          )}
-          {(isSuperAdmin || isAdmin || isHr) && (
+          {/* )} */}
+          {/* {(isSuperAdmin || isAdmin || isHr) && ( */}
             <Button
               variant="contained"
               onClick={onClose}
@@ -146,7 +146,7 @@ const HolidayFields = ({ onClose, isLoading, data }) => {
             >
               Cancel
             </Button>
-          )}
+          {/* )} */}
         </Grid>
       </Grid>
       {openSubmitModal && (

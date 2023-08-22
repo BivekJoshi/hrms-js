@@ -41,12 +41,12 @@ const Company = () => {
               <Tab label="Table View" value="1" />
               <Tab label="Grid View" value="2" />
             </TabList>
-            {(isSuperAdmin || isAdmin || isHr) && (
+            {/* {(isSuperAdmin || isAdmin || isHr) && ( */}
               <ButtonComponent
                 OnClick={handleAddOpenModal}
                 buttonName={"+Add Company"}
               />
-            )}
+            {/* )} */}
           </Box>
           <TabPanel value="1" sx={{ padding: "0" }}>
             <br />

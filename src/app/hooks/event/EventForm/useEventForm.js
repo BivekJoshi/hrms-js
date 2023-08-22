@@ -2,8 +2,8 @@ import { useFormik } from "formik";
 import { useAddEvent, useEditEvent } from "../useEvent";
 import { EventSchema } from "../Validation/EventSchema";
 
-const useEventForm = (data) => {
-  const { mutate: addEvent } = useAddEvent({});
+const useEventForm = (handleOpenSubmitModal) => {
+  const { mutate: addEvent, data } = useAddEvent({});
   const { mutate: editEvent } = useEditEvent({});
 
   const formik = useFormik({
@@ -14,14 +14,22 @@ const useEventForm = (data) => {
       eventDescription: data?.eventDescription || "",
       id: data?.id,
     },
-    // validationSchema: EventSchema,
+    validationSchema: EventSchema,
     enableReinitialize: "true",
+    // onSubmit: (values) => {
+    //   if (data?.id) {
+    //     handledEditRequest(values);
+    //     // handleOpenSubmitModal();
+    //   } else {
+    //     handleRequest(values);
+    //     handleOpenSubmitModal();
+    //     formik.resetForm();
+    //   }
+    // },
     onSubmit: (values) => {
-      if (data?.id) {
-        handledEditRequest(values);
-      } else {
-        handleRequest(values);
-      }
+      handleRequest(values);
+      handleOpenSubmitModal();
+      formik.resetForm();
     },
   });
 

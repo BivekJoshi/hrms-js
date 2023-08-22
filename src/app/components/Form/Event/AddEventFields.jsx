@@ -5,34 +5,32 @@ import ModalComponent from "../../Modal/ModalComponent";
 import useEventForm from "../../../hooks/event/EventForm/useEventForm";
 
 
-const AddEventFields = ({ onClose, isLoading }) => {
-  const { formik, data } = useEventForm();
+const AddEventFields = ({ onClose, isLoading ,formik}) => {
+  // const { formik, data } = useEventForm();
 
-  const [showInitialView, setShowInitialView] = useState(true);
-  const [openSubmitModal, setOpenSubmitModal] = useState(false);
 
-  const handleProceed = () => {
-    setOpenSubmitModal(false);
-  };
+  // const handleProceed = () => {
+  //   setOpenSubmitModal(false);
+  // };
 
-  const handleCloseEmailform = () => {
-    setOpenEmail(false);
-    onClose();
-  };
+  // const handleCloseEmailform = () => {
+  //   setOpenEmail(false);
+  //   onClose();
+  // };
 
-  const handleFormSubmit = async () => {
-    formik.handleSubmit();
+  // const handleFormSubmit = async () => {
+  //   formik.handleSubmit();
 
-    if (!formik.isValidating && formik.isValid) {
-      setOpenSubmitModal(true);
-    } else {
-      toast.error("Please make sure you have filled the form correctly");
-    }
-  };
+  //   if (!formik.isValidating && formik.isValid) {
+  //     setOpenSubmitModal(true);
+  //     // onClose();
+  //   } else {
+  //     toast.error("Please make sure you have filled the form correctly");
+  //   }
+  // };
 
   return (
     <>
-      {showInitialView && (
         <Grid container spacing={3}>
           <Grid item xs={12} sm={12}>
             <TextField
@@ -133,37 +131,14 @@ const AddEventFields = ({ onClose, isLoading }) => {
               InputLabelProps={{ shrink: true }}
             />
           </Grid>
-          <Grid
-            container
-            direction="row"
-            justifyContent="flex-end"
-            alignItems="flex-end"
-          >
-            <Button
-              variant="contained"
-              onClick={onClose}
-              sx={{ mt: 3, ml: 1 }}
-              color="error"
-            >
-              Cancel
-            </Button>
-            <Button
-              variant="contained"
-              onClick={handleFormSubmit}
-              sx={{ mt: 3, ml: 1 }}
-            >
-              Add Event
-            </Button>
-          </Grid>
         </Grid>
-      )}
 
-      <ModalComponent
+      {/* <ModalComponent
         open={openSubmitModal}
         handleProceed={handleProceed}
         onClose={handleCloseEmailform}
         data={data}
-      />
+      /> */}
     </>
   );
 };

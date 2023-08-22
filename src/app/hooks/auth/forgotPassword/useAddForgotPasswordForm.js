@@ -1,6 +1,12 @@
-import React from 'react';
+import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import { useAddForgotPassword } from '../usePassword';
+
+const validationSchema = Yup.object({
+    email: Yup.string()
+        .email('Invalid email address')
+        .required('Email is required'),
+});
 
 const useAddForgotPasswordForm = () => {
     const { mutate } = useAddForgotPassword({});
@@ -9,6 +15,7 @@ const useAddForgotPasswordForm = () => {
         initialValues: {
             email: "",
         },
+        validationSchema: validationSchema,
         onSubmit: (values) => {
             handleRequest(values);
         },

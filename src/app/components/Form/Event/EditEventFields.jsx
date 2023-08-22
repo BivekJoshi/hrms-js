@@ -4,8 +4,11 @@ import { toast } from "react-toastify";
 import { useDeleteEvent } from "../../../hooks/event/useEvent";
 import useEventForm from "../../../hooks/event/EventForm/useEventForm";
 import useEditEventForm from "../../../hooks/event/editEvent/useEditEventForm";
+import useAuth from "../../../../auth/hooks/component/login/useAuth";
 
 const EditEventFields = ({ onClose, isLoading, data }) => {
+  const { isSuperAdmin, isAdmin, isHr, isEmployee } = useAuth();
+
   const { formik } = useEditEventForm(data);
 
   const handleFormSubmit = async () => {
@@ -112,35 +115,35 @@ const EditEventFields = ({ onClose, isLoading, data }) => {
           justifyContent="flex-end"
           alignItems="flex-end"
         >
-         {(isSuperAdmin || isAdmin || isHr) && ( 
-         <Button
-            variant="contained"
-            onClick={handleDeleteEvent}
-            sx={{ mt: 3, ml: 1 }}
-            color="error"
-          >
-            Delete
-          </Button>
-         )}
-         {(isSuperAdmin || isAdmin || isHr) && (
-          <Button
-            variant="contained"
-            onClick={handleFormSubmit}
-            sx={{ mt: 3, ml: 1 }}
-          >
-            Update Event
-          </Button>
-         )}
-         {(isSuperAdmin || isAdmin || isHr) && (
-          <Button
-            variant="contained"
-            onClick={onClose}
-            sx={{ mt: 3, ml: 1 }}
-            color="error"
-          >
-            Cancel
-          </Button>
-         )}
+          {/* {(isSuperAdmin || isAdmin || isHr || isEmployee) && ( */}
+            <Button
+              variant="contained"
+              onClick={handleDeleteEvent}
+              sx={{ mt: 3, ml: 1 }}
+              color="error"
+            >
+              Delete
+            </Button>
+          {/* )} */}
+          {/* {(isSuperAdmin || isAdmin || isHr || isEmployee) && ( */}
+            <Button
+              variant="contained"
+              onClick={handleFormSubmit}
+              sx={{ mt: 3, ml: 1 }}
+            >
+              Update Event
+            </Button>
+          {/* )} */}
+          {/* {(isSuperAdmin || isAdmin || isHr || isEmployee) && ( */}
+            <Button
+              variant="contained"
+              onClick={onClose}
+              sx={{ mt: 3, ml: 1 }}
+              color="error"
+            >
+              Cancel
+            </Button>
+          {/* )} */}
         </Grid>
       </Grid>
     )

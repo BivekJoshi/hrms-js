@@ -87,7 +87,8 @@ const { isSuperAdmin, isAdmin, isHr, isEmployee } = useAuth();
       width: 80,
       sorting: false,
     },
-    (isSuperAdmin || isAdmin || isHr) && {
+    // (isSuperAdmin || isAdmin || isHr) &&
+     {
       title: "Actions",
       render: (rowData) => (
         <Stack direction="row" spacing={0}>
@@ -116,12 +117,12 @@ const { isSuperAdmin, isAdmin, isHr, isEmployee } = useAuth();
   return (
     <>
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-        {(isSuperAdmin || isAdmin || isHr) && (
+        {/* {(isSuperAdmin || isAdmin || isHr) && ( */}
         <ButtonComponent
           OnClick={handleAddOpenModal}
           buttonName={"+Add Designation"}
         />
-        )}
+        {/* )} */}
       </Box>
       <br />
 
