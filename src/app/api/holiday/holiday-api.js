@@ -14,7 +14,7 @@ export const getHolidayById = async (id) => {
 
 {/*________________________GETCURRENTMONTH_____________________________________*/ }
 export const getHolidayCurrent = async () => {
-  const data = await axiosInstance.get(`/holiday/holidays/current-month`);
+  const data = await axiosInstance.get(`/holiday/holidays/this-month`);
   return data;
 };
 

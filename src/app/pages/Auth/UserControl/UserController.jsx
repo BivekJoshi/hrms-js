@@ -6,7 +6,6 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import Users from "./Users/Users";
 import Roles from "./Roles/Roles";
-import Permission from "./Permission/Permission";
 
 const UserController = () => {
   const [value, setValue] = React.useState('1');
@@ -27,12 +26,10 @@ const UserController = () => {
             >
               <Tab label="Users" value="1" />
               <Tab label="Roles" value="2" />
-              <Tab label="Permission" value="3" />
             </TabList>
           </Box>
           <TabPanel value="1"> <Users/> </TabPanel>
           <TabPanel value="2"> <Roles /> </TabPanel>
-          <TabPanel value="3"> <Permission /> </TabPanel>
         </TabContext>
       </Box>
     </>
