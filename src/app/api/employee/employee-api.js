@@ -20,7 +20,7 @@ export const addEmployee = async (formData, getId) => {
 
 {/*________________________GETBYID_____________________________________*/ }
 export const getEmployeeById = (id) => {
-  const data = axiosInstance.get(`employee/${id}`);
+  const data = axiosInstance.get(`employee/employee-id/${id}`);
   return data;
 };
 
@@ -32,25 +32,25 @@ export const editEmployee = async (formData, id) => {
 
 {/*________________________GETBYCOMPANY_____________________________________*/ }
 export const getEmployeeByCompany = async () => {
-  const data = await axiosInstance.get(`/employee/company/{companyId}`);
+  const data = await axiosInstance.get(`/employee/company-id/{companyId}`);
   return data;
 };
 
 {/*________________________GETBYDESIGNATION_____________________________________*/ }
 export const getEmployeeByDesignation = async () => {
-  const data = await axiosInstance.get(`/employee/position/{positionId}`);
+  const data = await axiosInstance.get(`/employee/position-id/{positionId}`);
   return data;
 };
 
 {/*________________________GETBYDEPARTMENT_____________________________________*/ }
 export const getEmployeeBydepartment = async () => {
-  const data = await axiosInstance.get(`/employee/department/{departmentId}`);
+  const data = await axiosInstance.get(`/employee/department-id/{departmentId}`);
   return data;
 };
 
 {/*________________________GET-DEACTTIVATED-EMPLOYEE_____________________________________*/ }
 export const getDeactivatedEmployee = async () => {
-  const data = await axiosInstance.get(`/employee/deactivated`);
+  const data = await axiosInstance.get(`/employee/get-deactivated`);
   return data;
 };
 
