@@ -46,30 +46,35 @@ const Dashboard = () => {
           icon={<FaUsers fontSize="3rem" />}
           value={42}
           count={userRoleData?.length ? userRoleData?.length : "0"}
+          linkTo="/admin/users"
         />
         <DashboardCard
           title="Employees"
           icon={<FaPeopleGroup fontSize="3rem" />}
           value={28}
           count={employeeData?.length ? employeeData.length : "0"}
+          linkTo="/admin/employee"
         />
         <DashboardCard
           title="Events"
           icon={<BiSolidCalendarEvent fontSize="3rem" />}
           value={24}
           count={eventData ? eventData?.length : "0"}
+          linkTo="/admin/event"
         />
         <DashboardCard
           title="Holiday"
           icon={<FaGifts fontSize="3rem" />}
           value={32}
           count={holidayData ? holidayData?.length : "0"}
+          linkTo="/admin/holiday"
         />
         <DashboardCard
           title="Project"
           icon={<AiFillProject fontSize="3rem" />}
           value={6}
           count={projectDataCount?.total ? projectDataCount?.total : "0"}
+          linkTo="/admin/project"
         />
       </Grid>
 

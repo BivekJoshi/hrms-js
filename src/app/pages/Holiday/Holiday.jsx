@@ -46,7 +46,7 @@ const Holiday = () => {
   return (
     <>
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-      {(isSuperAdmin || isAdmin || isHr) && (
+      {/* {(isSuperAdmin || isAdmin || isHr) && ( */}
         <Button
           variant="contained"
           sx={{ mt: 3, ml: 1 }}
@@ -54,7 +54,7 @@ const Holiday = () => {
         >
           +Add Holiday
         </Button>
-      )}
+      {/* )} */}
       </Box>
       <br />
       {/* <Grid container spacing={2}> */}

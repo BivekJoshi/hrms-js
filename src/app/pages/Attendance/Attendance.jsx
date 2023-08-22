@@ -326,6 +326,7 @@ const Attendance = () => {
           buttonName={"Previous"}
           BGColor="white"
           TextColor="black"
+          disabled={false}
         />
         <ButtonComponent OnClick={Next} buttonName={"Next"} BGColor />
       </div>

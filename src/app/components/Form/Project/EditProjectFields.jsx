@@ -190,19 +190,18 @@ const EditProjectFields = ({ onClose, isLoading, data }) => {
         >
           <Button
             variant="contained"
+            onClick={handleFormSubmit}
+            sx={{ mt: 3, ml: 1 }}
+          >
+            Update Project
+          </Button>
+          <Button
+            variant="contained"
             onClick={onClose}
             sx={{ mt: 3, ml: 1 }}
             color="error"
           >
-            cancel
-          </Button>
-          <Button
-            variant="contained"
-            onClick={handleFormSubmit}
-            sx={{ mt: 3, ml: 1 }}
-            color="error"
-          >
-            Update Project
+            Cancel
           </Button>
         </Grid>
       </Grid>

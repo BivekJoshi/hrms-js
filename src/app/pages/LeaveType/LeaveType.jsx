@@ -64,6 +64,7 @@ const LeaveType = () => {
       render: (rowData) => rowData.tableData.id + 1,
       width: "1%",
       sortable: false,
+      sorting: false,
     },
     {
       title: "Leave Name",
@@ -76,6 +77,7 @@ const LeaveType = () => {
       },
       width: "10%",
       sortable: false,
+      sorting: false,
     },
     {
       title: "Leave Days",
@@ -83,6 +85,7 @@ const LeaveType = () => {
       emptyValue: "-",
       // width: 15,
       sortable: false,
+      sorting: false,
     },
     {
       title: "Carry Forward",
@@ -91,11 +94,13 @@ const LeaveType = () => {
       // width: 10,
       render: (rowData) => (rowData.isCarryForward ? "Yes" : "No"),
       sortable: false,
+      sorting: false,
     },
     {
       title: "Description",
       field: "leaveDescription",
       sortable: false,
+      sorting: false,
       emptyValue: "-",
     },
     {

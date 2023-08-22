@@ -19,12 +19,14 @@ const EmployeeTableView = ({ employeeData, isLoading }) => {
             render: (rowData) => rowData.tableData.id + 1,
             width: "3%",
             sortable: false,
+            sorting: false,
         },
         {
             title: 'Employee',
             field: 'firstName',
             render: (rowData) => `${rowData.firstName} ${rowData.middleName} ${rowData.lastName}`,
             // width: "10%",
+            sorting: false,
         },
         {
             title: 'Position',
@@ -34,18 +36,22 @@ const EmployeeTableView = ({ employeeData, isLoading }) => {
             }
             ,
             width: 340,
+            sorting: false,
         },
         {
             title: 'Email',
             field: 'officeEmail',
             emptyValue: '-',
+            sorting: false,
         },
         {
             title: 'Contact No.',
             field: 'mobileNumber',
             emptyValue: '-',
+            sorting: false,
         },
-        (isSuperAdmin || isAdmin || isHr) && {
+        // (isSuperAdmin || isAdmin || isHr) &&
+         {
             title: 'Actions',
             render: (rowData) => (
                 <Stack direction="row" spacing={0}>

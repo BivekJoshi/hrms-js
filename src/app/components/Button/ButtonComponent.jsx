@@ -9,9 +9,8 @@ export const ButtonComponent = ({
   TextColor,
   NameClass,
   Border,
-  disabled
+  disabled,
 }) => {
-
   return (
     <Button
       className={NameClass ? NameClass : "buttonHover"}
@@ -20,9 +19,9 @@ export const ButtonComponent = ({
       sx={{
         background: BGColor ? BGColor : "",
         color: TextColor ? TextColor : "",
-        border: Border ? Border: "",
+        border: Border ? Border : "",
       }}
-      disabled= {disabled ? disabled :""}
+      disabled={disabled ? disabled : false}
     >
       {buttonName}
     </Button>

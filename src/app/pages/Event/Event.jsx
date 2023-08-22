@@ -1,24 +1,22 @@
-import { Box, Button } from "@mui/material";
 import React, { useState, useRef, useEffect } from "react";
-import { AddEventModal, OpenEvent } from "./EventModal/EventModal";
+import useAuth from "../../../auth/hooks/component/login/useAuth";
+import { Box, Button } from "@mui/material";
+
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
+
 import { useGetEvent } from "../../hooks/event/useEvent";
+import { AddEventModal, OpenEvent } from "./EventModal/EventModal";
 import { ButtonComponent } from "../../components/Button/ButtonComponent";
-import useAuth from "../../../auth/hooks/component/login/useAuth";
 
-const Event = () => {
-  const { isSuperAdmin, isAdmin, isHr, isEmployee } = useAuth();
-  const { data: eventData, isLoading } = useGetEvent();
+const Event= () => {
   const calendarRef = useRef(null);
-
-  const [openAddModal, setOpenAddModal] = useState(false);
-  const [openModal, setOpenModal] = useState(false);
-
   const [events, setEvents] = useState([]);
-  const [getEventID, setEventGetID] = useState({});
+  const { isSuperAdmin, isAdmin, isHr, isEmployee } = useAuth();
+
+  const { data: eventData, isLoading } = useGetEvent();
 
   useEffect(() => {
     if (eventData) {
@@ -32,30 +30,32 @@ const Event = () => {
     }
   }, [eventData]);
 
+  const [openAddModal, setOpenAddModal] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+  const [getEventID, setEventGetID] = useState({});
+
   const handleOpenModal = (e) => {
     setEventGetID(e?.event?._def?.publicId);
     setOpenModal(true);
   };
 
-  const handleAddOpenModal = () => setOpenAddModal(true);
-  const handleCloseAddModal = () => setOpenAddModal(false);
   const handleCloseModal = () => setOpenModal(false);
 
   return (
     <>
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-      {(isSuperAdmin || isAdmin || isHr) && (
-        <ButtonComponent
-          OnClick={handleAddOpenModal}
-          buttonName={"+Add Event"}
-        />
-      )}
+        {/* {(isSuperAdmin || isAdmin || isHr || isEmployee) && ( */}
+          <ButtonComponent
+            OnClick={() => setOpenAddModal(true)}
+            buttonName={"+Add Event"}
+          />
+        {/* )} */}
       </Box>
       <br />
       {openAddModal && (
         <AddEventModal
-          open={openAddModal}
-          handleCloseModal={handleCloseAddModal}
+          open={() => setOpenAddModal(true)}
+          handleCloseModal={() => setOpenAddModal(false)}
         />
       )}
       <FullCalendar
@@ -70,6 +70,7 @@ const Event = () => {
         height={"90vh"}
         events={events}
         eventClick={handleOpenModal}
+        // loading={isLoading}
       />
 
       {openModal && (

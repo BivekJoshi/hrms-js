@@ -147,6 +147,14 @@ export const AddprojectEmployeeFields = ({ onClose, isLoading }) => {
           justifyContent="flex-end"
           alignItems="flex-end"
         >
+          
+          <Button
+            variant="contained"
+            onClick={handleFormSubmit}
+            sx={{ mt: 3, ml: 1 }}
+          >
+            Add Employee
+          </Button>
           <Button
             variant="container"
             onClick={onClose}
@@ -154,13 +162,6 @@ export const AddprojectEmployeeFields = ({ onClose, isLoading }) => {
             color="error"
           >
             Cancel
-          </Button>
-          <Button
-            variant="contained"
-            onClick={handleFormSubmit}
-            sx={{ mt: 3, ml: 1 }}
-          >
-            Add Employee
           </Button>
         </Grid>
       </Grid>
@@ -272,6 +273,14 @@ export const EditProjectEmployeeFields = ({ data, onClose, isLoading }) => {
           justifyContent="flex-end"
           alignItems="flex-end"
         >
+          
+          <Button
+            variant="contained"
+            onClick={handleFormSubmit}
+            sx={{ mt: 3, ml: 1 }}
+          >
+            Edit Project
+          </Button>
           <Button
             variant="container"
             onClick={onClose}
@@ -279,13 +288,6 @@ export const EditProjectEmployeeFields = ({ data, onClose, isLoading }) => {
             color="error"
           >
             Cancel
-          </Button>
-          <Button
-            variant="contained"
-            onClick={handleFormSubmit}
-            sx={{ mt: 3, ml: 1 }}
-          >
-            Edit Project
           </Button>
         </Grid>
       </Grid>

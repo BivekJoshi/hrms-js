@@ -2,12 +2,19 @@ import React, { useContext } from "react";
 import { Box, Grid, Stack, Typography } from "@mui/material";
 import MainCard from "../MainCard";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
+import { useNavigate } from "react-router-dom";
 
-const DashboardCard = ({ title, icon, count }) => {
+const DashboardCard = ({ title, icon, count, linkTo }) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(linkTo);
+  };
+  
   const { mode } = useContext(ThemeModeContext);
 
   return (
-    <Grid item xs={12} sm={6} md={3} lg={2}>
+    <Grid item xs={12} sm={6} md={3} lg={2} onClick={handleClick}>
       <MainCard grow={true}>
         <Stack
           spacing={0.5}

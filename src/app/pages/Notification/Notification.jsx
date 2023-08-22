@@ -15,6 +15,8 @@ const Notification = ({ data }) => {
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
 
+  const checkStatus = data?.isChecked ?? true;
+
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
     // setStatus(data?.isChecked = true)

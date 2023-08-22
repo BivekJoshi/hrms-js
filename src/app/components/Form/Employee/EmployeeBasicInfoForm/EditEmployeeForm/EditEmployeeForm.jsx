@@ -32,7 +32,7 @@ const EditEmployeeForm = () => {
     'Bank Details',
     'Employee History',
     'Document Details',
-    'Other Details',
+    // 'Other Details',
   ];
 
   const { data, isLoading: employeeLoading } = useGetEmployeeById(id);
@@ -107,11 +107,11 @@ const EditEmployeeForm = () => {
           />
         );
 
-      case 7:
-        return <p>Hello World</p>;
+      // case 7:
+      //   return <p>Hello World</p>;
 
-      case 8:
-        return <p>Other Details</p>;
+      // case 8:
+      //   return <p>Other Details</p>;
 
       default:
         throw new Error("Unknown Step");

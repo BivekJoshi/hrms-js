@@ -1,6 +1,7 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import { useAddPermissionRole, useAddUserControl } from '../../../../hooks/auth/userControl/useUserControl';
+import { UserSchema } from './userSchema/UserSchema';
 
 
 export const useAddUserControlForm = () => {
@@ -11,6 +12,7 @@ export const useAddUserControlForm = () => {
             employeeId: "",
             roleId: "",
         },
+        validationSchema: UserSchema,
         onSubmit: (values) => {
             handleRequest(values);
         },

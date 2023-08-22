@@ -2,46 +2,64 @@ import MaterialTable from "material-table";
 import React from "react";
 import tableIcons from "../../../../theme/overrides/TableIcon";
 import { useGetDeactivatedOfficeResource } from "../../../hooks/resource/officeResource/useOfficeResource";
+import { Button, Stack } from "@mui/material";
+import useOfficeResourceForm from "../../../hooks/resource/officeResource/OfficeResourceForm/useOfficeResourceForm";
 
 const DeactivatedOfficeResource = () => {
-  const {
-    data: deactivatedOfficeResourceData,
-    isLoading,
-  } = useGetDeactivatedOfficeResource();
+  const { data, isLoading } = useGetDeactivatedOfficeResource();
+
+  const { formik } = useOfficeResourceForm(data);
+
+  const handleActivate = (rowData) => {
+    formik.setFieldValue("activated", true);
+  };
 
   const columns = [
     {
       title: "SN",
       render: (rowData) => rowData.tableData.id + 1,
       width: "3%",
-      sortable: false,
+      sorting: false,
     },
     {
       title: "Appliance Name",
       field: "name",
       emptyValue: "-",
       width: "18.75rem",
+      sorting: false,
     },
     {
       title: "Identification Number",
       field: "uniqueNumber",
       emptyValue: "-",
       width: "18.75rem",
+      sorting: false,
     },
     {
       title: "Description",
       field: "description",
       emptyValue: "-",
       width: "57rem",
+      sorting: false,
     },
-  
+    {
+      title: "Actions",
+      render: (rowData) => (
+        <Stack direction="row" spacing={0}>
+          <Button color="primary" onClick={() => handleActivate(rowData.id)}>
+            Activate
+          </Button>
+        </Stack>
+      ),
+      sorting: false,
+    },
   ];
   return (
     <MaterialTable
       icons={tableIcons}
       title="Deactivated Office Resource"
       columns={columns}
-      data={deactivatedOfficeResourceData}
+      data={data}
       isLoading={isLoading}
       options={{
         exportButton: true,
