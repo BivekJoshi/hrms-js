@@ -109,6 +109,7 @@ const ProjectCard = ({
             textAlign: "center",
             padding: "1.5rem",
             backgroundColor: mode === "light" ? "white" : "#292929",
+            overflow: "auto",
           }}
         >
           <Grid
