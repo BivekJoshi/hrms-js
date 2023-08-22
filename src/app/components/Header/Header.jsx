@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { styled } from "@mui/material/styles";
 import MuiAppBar from "@mui/material/AppBar";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Box, IconButton, Stack, Toolbar, Typography } from "@mui/material";
-import {
-  useGetTodayBirthday,
-} from "../../hooks/birthday/useBirthday";
+import { useGetTodayBirthday } from "../../hooks/birthday/useBirthday";
 import Notification from "../../pages/Notification/Notification";
 import Profile from "../../pages/Auth/Profile/Profile";
 import TodayBirthday from "../../pages/Birthday/TodayBirthday";
 import { useGetEventNotification } from "../../hooks/event/useEvent";
+import ThemeModeContext from "../../../theme/ThemeModeContext";
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -30,7 +29,8 @@ const AppBar = styled(MuiAppBar, {
 
 export default function Header({ open, handleDrawerOpen }) {
   const { data: birthdayData } = useGetTodayBirthday();
-  const { data : eventData } = useGetEventNotification();
+  const { data: eventData } = useGetEventNotification();
+  const { mode } = useContext(ThemeModeContext);
 
   return (
     <AppBar position="fixed" open={open}>
@@ -39,6 +39,7 @@ export default function Header({ open, handleDrawerOpen }) {
           display: "flex",
           flexDirection: "row",
           justifyContent: "space-between",
+          bgcolor: mode === "light" ? "" : "#413e3e",
         }}
       >
         <Box display="flex" flexDirection="row" alignItems="center">
@@ -57,9 +58,9 @@ export default function Header({ open, handleDrawerOpen }) {
         </Box>
 
         <Stack flexDirection="row">
-            <TodayBirthday data={birthdayData} />
-            <Notification data={eventData} />
-            <Profile />
+          <TodayBirthday data={birthdayData} />
+          <Notification data={eventData} />
+          <Profile />
         </Stack>
       </Toolbar>
     </AppBar>

@@ -1,13 +1,15 @@
-import React, { useState, useRef } from "react";
-import { Button, Box, Popper, Grow, Paper } from "@mui/material";
-import { MenuItem, ClickAwayListener, MenuList, Typography } from "@mui/material";
+import React, { useState, useRef, useContext } from "react";
+import { Button, Box, Popper, Grow, Paper, MenuItem } from "@mui/material";
+import { ClickAwayListener, MenuList, Typography } from "@mui/material";
 import CakeIcon from "@mui/icons-material/Cake";
 import "../Style/Style.css";
+import ThemeModeContext from "../../../theme/ThemeModeContext";
 
 const TodayBirthday = ({ data }) => {
   const birthdayEmployeeName = data?.birthdayEmployees;
   const birthdayEmployeeCount = data?.birthdayEmployeeCount || 0;
   const displayCount = birthdayEmployeeCount > 0 ? birthdayEmployeeCount : null;
+  const { mode } = useContext(ThemeModeContext);
 
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
@@ -74,6 +76,7 @@ const TodayBirthday = ({ data }) => {
             <Grow
               {...TransitionProps}
               style={{
+                background: mode === "light" ? "" : "#4d4c4c",
                 transformOrigin:
                   placement === "bottom-start" ? "left top" : "left bottom",
               }}
@@ -90,7 +93,11 @@ const TodayBirthday = ({ data }) => {
                       padding: "0.5rem 1rem",
                     }}
                   >
-                    <Typography variant="h6" color="primary" fontWeight={400}>
+                    <Typography
+                      variant="h6"
+                      color={mode === "light" ? "primary" : "white"}
+                      fontWeight={400}
+                    >
                       Today's Birthday
                     </Typography>
                     {birthdayEmployeeName &&
@@ -123,6 +130,7 @@ const TodayBirthday = ({ data }) => {
             <Grow
               {...TransitionProps}
               style={{
+                background: mode === "light" ? "" : "#4d4c4c",
                 transformOrigin:
                   placement === "bottom-start" ? "left top" : "left bottom",
               }}
@@ -140,7 +148,11 @@ const TodayBirthday = ({ data }) => {
                       padding: "1rem 2rem",
                     }}
                   >
-                    <Typography variant="h6" color="primary" fontWeight={400}>
+                    <Typography
+                      variant="h6"
+                      color={mode === "light" ? "primary" : "white"}
+                      fontWeight={400}
+                    >
                       No One Birthday !
                     </Typography>
                   </MenuList>
