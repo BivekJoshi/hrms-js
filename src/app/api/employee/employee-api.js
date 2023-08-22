@@ -2,7 +2,7 @@ import { axiosInstance } from '../../../auth/axiosInterceptor';
 
 {/*________________________GETALL_____________________________________*/ }
 export const getEmployee = async () => {
-  const data = await axiosInstance.get(`/employee`);
+  const data = await axiosInstance.get(`/employee/get-all`);
   return data;
 };
 

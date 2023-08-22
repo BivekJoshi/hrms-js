@@ -5,7 +5,7 @@ import ModalComponent from "../../Modal/ModalComponent";
 import useEventForm from "../../../hooks/event/EventForm/useEventForm";
 
 
-const AddEventFields = ({ onClose, isLoading ,formik}) => {
+const AddEventFields = ({ formik}) => {
   // const { formik, data } = useEventForm();
 
 
