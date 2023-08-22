@@ -16,7 +16,7 @@ const FormModal = ({ open, onClose, formComponent, sx }) => {
     borderRadius: 2,
     boxShadow: 24,
     p: 4,
-    background: mode === "light" ? "" : "black",
+    background: mode === "light" ? "" : "#413e3e",
     color: mode === "light" ? "" :'white'
   };
 
