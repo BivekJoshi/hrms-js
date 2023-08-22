@@ -1,21 +1,11 @@
-import {
-  Box,
-  Button,
-  Container,
-  Paper,
-  Step,
-  StepLabel,
-  Stepper,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Container, Paper, Step } from "@mui/material";
+import { StepLabel, Stepper, Typography } from "@mui/material";
 import React, { useState } from "react";
-import EditEmployeeForm from '../../../components/Form/Employee/EmployeeBasicInfoForm/EditEmployeeForm/EditEmployeeForm';
-
+import EditEmployeeForm from "../../../components/Form/Employee/EmployeeBasicInfoForm/EditEmployeeForm/EditEmployeeForm";
 
 const EditEmployee = () => {
   const { getStepContent, handleNext, steps } = EditEmployeeForm();
   const [activeStep, setActiveStep] = useState(0);
-
 
   const handleBack = () => {
     setActiveStep(activeStep - 1);
@@ -43,7 +33,7 @@ const EditEmployee = () => {
         <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }} alternativeLabel>
           {steps.map((label) => (
             <Step key={label} onClick={() => handleStepClick(label)}>
-              <StepLabel >{label}</StepLabel>
+              <StepLabel>{label}</StepLabel>
             </Step>
           ))}
         </Stepper>
