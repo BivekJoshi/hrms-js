@@ -82,26 +82,6 @@ const EmailToAll = ({ open, onClose, eventId }) => {
                   </Select>
                 </Grid>
               </Grid>
-              <div
-                style={{
-                  marginTop: "20px",
-                  columnGap: "20px",
-                  display: "flex",
-                }}
-              >
-                <Button
-                  type="button"
-                  variant="contained"
-                  color="primary"
-                  style={{ marginLeft: "10px" }}
-                  onClick={onClose}
-                >
-                  Cancel
-                </Button>
-                <Button type="submit" variant="contained" color="primary">
-                  Send
-                </Button>
-              </div>
             </Box>
           </form>
         }

@@ -78,7 +78,7 @@ const OfficeResource = () => {
           OnClick={() => {
             navigate(`Deactivated`);
           }}
-          buttonName={"Deactivated OfficeResource"}
+          buttonName={"Deactivated Office Resource"}
           BGColor="white"
           TextColor="black"
         />

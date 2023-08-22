@@ -73,21 +73,25 @@ const CompanyGridView = ({
                 justifyContent="flex-end"
                 alignItems="flex-end"
               >
-                {(isSuperAdmin || isHr || isAdmin ) && <Button
+                {/* {(isSuperAdmin || isHr || isAdmin ) &&  */}
+                <Button
                   variant="outlined"
                   onClick={() => handleDeleteCompany(item)}
                   sx={{ mt: 3, ml: 1 }}
                   color="error"
                 >
                   Delete
-                </Button>}
-                {(isSuperAdmin || isHr || isAdmin ) &&  <Button
+                </Button>
+                {/* } */}
+                {/* {(isSuperAdmin || isHr || isAdmin )&&  */}
+                 <Button
                   variant="contained"
                   onClick={() => handleEditCompany(item)}
                   sx={{ mt: 3, ml: 1 }}
                 >
                   Edit
-                </Button>}
+                </Button>
+                {/* } */}
               </Grid>
             </CardActions>
           </Card>
