@@ -69,6 +69,7 @@ const ProjectDetail = () => {
       render: (rowData) => rowData.tableData.index + 1,
       width: 80,
       sortable: false,
+      sorting: false,
     },
     {
       title: "Employee Name",
@@ -76,32 +77,37 @@ const ProjectDetail = () => {
         return <p>{getEmployeeName(rowData)}</p>;
       },
       width: 80,
+      sorting: false,
     },
     {
       title: "Assigned On",
       field: "assignedOn",
       emptyValue: "-",
       width: 80,
+      sorting: false,
     },
     {
       title: "Deassigned On",
       field: "deAssignedOn",
       emptyValue: "-",
       width: 80,
+      sorting: false,
     },
     {
       title: "Project Status",
       field: "onProject",
       emptyValue: "-",
       width: 80,
+      sorting: false,
     },
     {
-      title: "project Name",
+      title: "Project Name",
       field: "projectId",
       render: (rowData) => {
         return <p>{getLeaderName(rowData)}</p>;
       },
       width: 80,
+      sorting: false,
     },
     {
       title: "Actions",
@@ -184,7 +190,7 @@ const ProjectDetail = () => {
           open={openDeleteModal}
           handleCloseModal={handleCloseDeleteModal}
           handleConfirmDelete={handleConfirmDelete}
-          message={"projectEmployee"}
+          message={"Project Employee"}
         />
       )}
     </>

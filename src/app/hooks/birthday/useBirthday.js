@@ -1,9 +1,10 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import {
-  getTodayBirthday,
-  getUpcomingBirthday,
-  removeNotification,
-} from "../../api/birthday/birthday-api";
+import { getTodayBirthday, getUpcomingBirthday, removeNotification } from "../../api/birthday/birthday-api";
+// import {
+//   getTodayBirthday,
+//   getUpcomingBirthday,
+//   remmoveNotification,
+// } from "../../api/birthday/birthday-api";
 
 export const useGetTodayBirthday = () => {
   return useQuery(["getTodayBirthday"], () => getTodayBirthday(), {

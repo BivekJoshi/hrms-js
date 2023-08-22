@@ -58,7 +58,7 @@ const Project = () => {
         >
           On-Going Projects
           <Box display="flex" gap={".5rem"}>
-          {(isSuperAdmin || isAdmin || isHr) && (
+          {/* {(isSuperAdmin || isAdmin || isHr) && ( */}
             <ButtonComponent
               OnClick={() => {
                 navigate(`get-deactivated-projects`);
@@ -67,13 +67,13 @@ const Project = () => {
               BGColor={"white"}
               buttonName={"Terminated Project"}
             />
-          )}
-           {(isSuperAdmin || isAdmin || isHr) && (
+          {/* )} */}
+           {/* {(isSuperAdmin || isAdmin || isHr) && ( */}
             <ButtonComponent
               OnClick={handleAddOpenModal}
               buttonName={"+Add Project"}
             />
-           )}
+           {/* )} */}
           </Box>
         </Typography>
       </Box>

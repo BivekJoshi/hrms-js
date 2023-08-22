@@ -12,7 +12,6 @@ const DeleteConfirmationModal = ({ open, handleCloseModal, handleConfirmDelete, 
                 <Button
                     variant="contained"
                     onClick={handleConfirmDelete}
-                    color="error"
                     disabled={isLoading}
                     startIcon={isLoading ? <CircularProgress size={20} /> : null}
                 >
@@ -21,6 +20,7 @@ const DeleteConfirmationModal = ({ open, handleCloseModal, handleConfirmDelete, 
                 <Button
                     variant="contained"
                     onClick={handleCloseModal}
+                    color="error"
                 >
                     Cancel
                 </Button>
