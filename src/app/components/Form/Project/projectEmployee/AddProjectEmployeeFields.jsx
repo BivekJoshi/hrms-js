@@ -70,7 +70,7 @@ export const AddprojectEmployeeFields = ({ onClose, isLoading }) => {
                 <MenuItem
                   key={option?.id}
                   value={option?.id}
-                  sx={mode === "light" ? "" : { bgcolor: "black" }}
+                  sx={mode === "light" ? "" : { bgcolor: "#413e3e" }}
                 >
                   {option?.firstName} {option?.middleName} {option?.lastName}
                 </MenuItem>
@@ -158,7 +158,7 @@ export const AddprojectEmployeeFields = ({ onClose, isLoading }) => {
           <Button
             variant="container"
             onClick={onClose}
-            sx={{ mt: 3, ml: 1 }}
+            sx={{ mt: 3, ml: 1 , bgcolor:"red"}}
             color="error"
           >
             Cancel

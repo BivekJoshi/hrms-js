@@ -128,7 +128,7 @@ const LeaveTypeFields = ({ onClose, isLoading, data, existingLeaveTypes }) => {
                 <MenuItem
                   key={option.value}
                   value={option.value}
-                  sx={mode === "light" ? "" : { bgcolor: "black" }}
+                  sx={mode === "light" ? "" : { bgcolor: "#413e3e" }}
                 >
                   {option.label}
                 </MenuItem>
