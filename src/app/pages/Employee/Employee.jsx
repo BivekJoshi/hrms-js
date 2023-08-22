@@ -29,7 +29,7 @@ const Employee = () => {
     borderRadius: 2,
     boxShadow: 24,
     p: 4,
-    background: mode === "light" ? "" : "black",
+    background: mode === "light" ? "" : "#413e3e",
   };
   // const { isSuperAdmin, isAdmin, isHr, isEmployee } = useAuth();
 

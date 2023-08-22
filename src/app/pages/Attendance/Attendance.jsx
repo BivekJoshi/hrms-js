@@ -86,7 +86,7 @@ const year0 = [
 
 const Attendance = () => {
   const { data: attendanceData, isLoading } = useGetAttendance();
-  const{mode}= useContext(ThemeModeContext)
+  const { mode } = useContext(ThemeModeContext);
 
   const date = new Date();
   const year = date.getFullYear();
@@ -180,7 +180,11 @@ const Attendance = () => {
             onChange={(e) => setSearchMonth(e.target.value)}
           >
             {month.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
+              <MenuItem
+                key={option.value}
+                value={option.value}
+                sx={{ bgcolor: mode === "light" ? "" : "#413e3e" }}
+              >
                 {option.label}
               </MenuItem>
             ))}
@@ -197,7 +201,7 @@ const Attendance = () => {
               <MenuItem
                 key={option.value}
                 value={option.value}
-                sx={{ bgcolor: mode === "light" ? "" : "" }}
+                sx={{ bgcolor: mode === "light" ? "" : "#413e3e" }}
               >
                 {option.label}
               </MenuItem>
