@@ -9,11 +9,10 @@ import { useState } from "react";
 import CompanyTable from "./CompanyModal/CompanyTable";
 import CompanyGrid from "./CompanyModal/CompanyGrid";
 import { ButtonComponent } from "../../components/Button/ButtonComponent";
-import useAuth from "../../../auth/hooks/component/login/useAuth";
+import PermissionHoc from "../../hoc/permissionHoc";
+import HocButton from "../../hoc/hocButton";
 
-const Company = () => {
-  const { isSuperAdmin, isAdmin, isHr, isEmployee } = useAuth();
-
+const Company = ({ permissions }) => {
   const [value, setValue] = React.useState("1");
 
   const [openAddModal, setOpenAddModal] = useState(false);
@@ -41,12 +40,13 @@ const Company = () => {
               <Tab label="Table View" value="1" />
               <Tab label="Grid View" value="2" />
             </TabList>
-            {/* {(isSuperAdmin || isAdmin || isHr) && ( */}
-              <ButtonComponent
-                OnClick={handleAddOpenModal}
-                buttonName={"+Add Company"}
-              />
-            {/* )} */}
+
+            <HocButton
+              permissions={permissions.canAdd}
+              color= {"primary"}
+              onClick={handleAddOpenModal}
+              buttonName={"+ Add Company"}
+            />
           </Box>
           <TabPanel value="1" sx={{ padding: "0" }}>
             <br />
@@ -68,4 +68,4 @@ const Company = () => {
   );
 };
 
-export default Company;
+export default PermissionHoc(Company);
