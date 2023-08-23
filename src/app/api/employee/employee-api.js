@@ -14,7 +14,7 @@ export const getEmployeeData = async (pageNumber) => {
 
 {/*________________________POST_____________________________________*/ }
 export const addEmployee = async (formData, getId) => {
-  const data = await axiosInstance.post(`/employee`, formData)
+  const data = await axiosInstance.post(`/employee/create`, formData)
   return data;
 };
 
