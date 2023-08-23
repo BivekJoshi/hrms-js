@@ -14,15 +14,26 @@ export const addPermanentAddress = async (formData, id) => {
 
 export const addTemporaryAddress = async (formData, id) => {
   const temporaryAddress = formData.addresses.find(
-    (address) => address.addressType == "TEMPORARY"
+    (address) => address.addressType === "TEMPORARY"
   );
-  if (temporaryAddress) {
-    const data = await axiosInstance.post(`/address/create/${id}`, [temporaryAddress]);
-    return data;
+
+  const requiredFields = ['street', 'city']; 
+
+  const allRequiredFieldsFilled = requiredFields.every(field => temporaryAddress[field]);
+
+  if (temporaryAddress && allRequiredFieldsFilled) {
+    try {
+      const response = await axiosInstance.post(`/address/create/${id}`, [temporaryAddress]);
+      return response.data;
+    } catch (error) {
+      console.error("Error adding temporary address:", error);
+      throw error;
+    }
   } else {
-    return null;
+    return null; 
   }
 };
+
 
 export const getAddressById = (id) => {
   if (id) {
@@ -33,7 +44,7 @@ export const getAddressById = (id) => {
 
 export const editAddress = async (formData, id) => {
   let addressId = [];
-  if (formData?.addresses.length > 1) {
+  if (formData?.addresses.length > 0) {
     addressId.push(formData?.addresses[0]?.id);
     addressId.push(formData?.addresses[1]?.id);
     if (addressId[1]) {

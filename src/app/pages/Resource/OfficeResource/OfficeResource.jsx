@@ -73,7 +73,7 @@ const OfficeResource = () => {
   ];
   return (
     <>
-      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+      <Box sx={{ display: "flex", justifyContent: "flex-end" ,gap:"1rem" ,padding: ".5rem 0" }}>
         <ButtonComponent
           OnClick={() => {
             navigate(`Deactivated`);

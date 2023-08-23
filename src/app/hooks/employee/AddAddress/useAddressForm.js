@@ -14,7 +14,6 @@ export const usePermanentAddressForm = ({ data, employeeLoading: isLoading }) =>
         {
           addressType:'PERMANENT',
           id: addressDetails[0]?.id || '',
-          // addressType: "PERMANENT",
           country: addressDetails[0]?.country || '',
           province: addressDetails[0]?.province || '',
           district: addressDetails[0]?.district || '',
@@ -25,7 +24,6 @@ export const usePermanentAddressForm = ({ data, employeeLoading: isLoading }) =>
         {
           addressType:'TEMPORARY',
           id: addressDetails[1]?.id || '',
-          // addressType: "TEMPORARY",
           country: addressDetails[1]?.country || '',
           province: addressDetails[1]?.province || '',
           district: addressDetails[1]?.district || '',
