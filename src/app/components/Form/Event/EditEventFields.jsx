@@ -4,11 +4,10 @@ import { toast } from "react-toastify";
 import { useDeleteEvent } from "../../../hooks/event/useEvent";
 import useEventForm from "../../../hooks/event/EventForm/useEventForm";
 import useEditEventForm from "../../../hooks/event/editEvent/useEditEventForm";
-import useAuth from "../../../../auth/hooks/component/login/useAuth";
+import HocButton from "../../../hoc/hocButton";
+import PermissionHoc from "../../../hoc/permissionHoc";
 
-const EditEventFields = ({ onClose, isLoading, data }) => {
-  const { isSuperAdmin, isAdmin, isHr, isEmployee } = useAuth();
-
+const EditEventFields = ({ onClose, isLoading, data, permissions }) => {
   const { formik } = useEditEventForm(data);
 
   const handleFormSubmit = async () => {
@@ -115,39 +114,32 @@ const EditEventFields = ({ onClose, isLoading, data }) => {
           justifyContent="flex-end"
           alignItems="flex-end"
         >
-          {/* {(isSuperAdmin || isAdmin || isHr || isEmployee) && ( */}
-            <Button
-              variant="contained"
-              onClick={handleDeleteEvent}
-              sx={{ mt: 3, ml: 1 }}
-              color="error"
-            >
-              Delete
-            </Button>
-          {/* )} */}
-          {/* {(isSuperAdmin || isAdmin || isHr || isEmployee) && ( */}
-            <Button
-              variant="contained"
-              onClick={handleFormSubmit}
-              sx={{ mt: 3, ml: 1 }}
-            >
-              Update Event
-            </Button>
-          {/* )} */}
-          {/* {(isSuperAdmin || isAdmin || isHr || isEmployee) && ( */}
-            <Button
-              variant="contained"
-              onClick={onClose}
-              sx={{ mt: 3, ml: 1 }}
-              color="error"
-            >
-              Cancel
-            </Button>
-          {/* )} */}
+          <HocButton
+            permissions={permissions.canDelete}
+            color={"error"}
+            variant={"contained"}
+            onClick={handleDeleteEvent}
+            buttonName={"Delete"}
+          />
+          <HocButton
+            permissions={permissions.canEdit}
+            color={"error"}
+            variant={"contained"}
+            onClick={handleFormSubmit}
+            buttonName={"Update Event"}
+          />
+          <Button
+            variant="contained"
+            onClick={onClose}
+            sx={{ mt: 3, ml: 1 }}
+            color="error"
+          >
+            Cancel
+          </Button>
         </Grid>
       </Grid>
     )
   );
 };
 
-export default EditEventFields;
+export default PermissionHoc(EditEventFields);

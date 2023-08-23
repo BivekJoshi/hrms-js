@@ -149,7 +149,7 @@ const EmployeeResource = ({ permissions }) => {
         <HocButton
           permissions={permissions.canAdd}
           color= {"primary"}
-          variant={"outlined"}
+          variant={"contained"}
           onClick={handleAddOpenModal}
           buttonName={"+Provide Resource to Employee"}
         />

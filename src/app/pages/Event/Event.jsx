@@ -47,7 +47,7 @@ const Event = ({ permissions }) => {
         <HocButton
           permissions={permissions.canAdd}
           color={"primary"}
-          variant={"outlined"}
+          variant={"contained"}
           onClick={() => setOpenAddModal(true)}
           buttonName={"+Add Event"}
         />

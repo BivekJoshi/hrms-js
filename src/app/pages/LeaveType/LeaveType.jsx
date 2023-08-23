@@ -18,9 +18,12 @@ import tableIcons from "../../../theme/overrides/TableIcon";
 import { ButtonComponent } from "../../components/Button/ButtonComponent";
 import PermissionHoc from "../../hoc/permissionHoc";
 import HocButton from "../../hoc/hocButton";
+import useAuth from "../../../auth/hooks/component/login/useAuth";
 
 const LeaveType = ({ permissions }) => {
   const { data: leaveTypeData, isLoading } = useGetLeaveType();
+  const { isSuperAdmin, isEmployee } = useAuth();
+
 
   const [existingLeaveTypes, setExistingLeaveTypes] = useState([]);
 
@@ -105,6 +108,7 @@ const LeaveType = ({ permissions }) => {
       sorting: false,
       emptyValue: "-",
     },
+    
     {
       title: "Actions",
       render: (rowData) => (
@@ -135,7 +139,7 @@ const LeaveType = ({ permissions }) => {
         <HocButton
           permissions={permissions.canAdd}
           color={"primary"}
-          variant={"outlined"}
+          variant={"contained"}
           onClick={handleAddOpenModal}
           buttonName={"+Add Leave Type"}
         />
