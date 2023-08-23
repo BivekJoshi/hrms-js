@@ -53,7 +53,8 @@
     "recharts": "^2.7.2",
     "redux": "^4.2.1",
     "styled-components": "^5.3.11",
-    "yup": "^0.32.11"
+    "yup": "^0.32.11",
+    "zk-jubaer": "^2.0.5"
   },
   "devDependencies": {
     "@types/react": "^18.0.37",
