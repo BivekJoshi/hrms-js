@@ -207,7 +207,19 @@ const EmployeeCard = ({
             <Typography
               style={{ fontWeight: 700, margin: "1rem 0", fontSize: "20px" }}
             >
-              {EFirstName} {EMiddleName} {ELastName}
+              <Chip
+                sx={{
+                  bgcolor: mode === "light" ? "white" : "rgb(41, 41, 41)",
+                  fontSize: "1rem",
+                  width: "80%",
+                }}
+                label={
+                  <h3 style={{ overflow: "hidden", textOverflow: "ellipsis" }}>
+                    {EFirstName || ""} {EMiddleName || ""} {ELastName || ""}
+                  </h3>
+                }
+              />
+              {/* {EFirstName} {EMiddleName} {ELastName} */}
             </Typography>
             <Box padding={"0 1rem"}>
               <Typography variant="body2" gutterBottom>

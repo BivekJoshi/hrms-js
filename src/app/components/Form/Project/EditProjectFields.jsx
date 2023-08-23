@@ -1,14 +1,16 @@
 import { Grid, TextField, Button, MenuItem } from "@mui/material";
-import React from "react";
+import React, { useContext } from "react";
 import { toast } from "react-toastify";
 import useEditProjectForm from "../../../hooks/project/editProject/useEditProjectForm";
 import { useGetCompany } from "../../../hooks/company/useCompany";
 import { useGetEmployee } from "../../../hooks/employee/useEmployee";
+import ThemeModeContext from "../../../../theme/ThemeModeContext";
 
 const EditProjectFields = ({ onClose, isLoading, data }) => {
   const { formik } = useEditProjectForm(data);
   const { data: employeeData } = useGetEmployee();
   const { data: companyData } = useGetCompany();
+  const { mode } = useContext(ThemeModeContext);
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
@@ -29,7 +31,9 @@ const EditProjectFields = ({ onClose, isLoading, data }) => {
   };
 
   const getProjectLeaderName = (projectLeadId) => {
-    const projectLeader = employeeData?.find((employee) => employee.id == projectLeadId);
+    const projectLeader = employeeData?.find(
+      (employee) => employee.id == projectLeadId
+    );
     if (projectLeader) {
       const { firstName, middleName, lastName } = projectLeader;
       return `${firstName} ${middleName} ${lastName}`;
@@ -138,7 +142,11 @@ const EditProjectFields = ({ onClose, isLoading, data }) => {
             InputLabelProps={{ shrink: true }}
           >
             {projectOptions?.map((option) => (
-              <MenuItem key={option?.id} value={option?.value}>
+              <MenuItem
+                key={option?.id}
+                value={option?.value}
+                sx={{ bgcolor: mode === "light" ? "" : "#413e3e" }}
+              >
                 {option?.label}
               </MenuItem>
             ))}
