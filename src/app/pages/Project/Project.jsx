@@ -9,10 +9,10 @@ import { useNavigate } from "react-router-dom";
 import ProjectCard from "../../components/cards/Employee/ProjectCard";
 import { PagePagination } from "../../components/Pagination/PagePagination";
 import { ButtonComponent } from "../../components/Button/ButtonComponent";
-import useAuth from "../../../auth/hooks/component/login/useAuth";
+import HocButton from "../../hoc/hocButton";
+import PermissionHoc from "../../hoc/permissionHoc";
 
-const Project = () => {
-  const { isSuperAdmin, isAdmin, isHr, isEmployee } = useAuth();
+const Project = ({ permissions }) => {
   const navigate = useNavigate();
   const { data: projectData, isLoading } = useGetProject();
 
@@ -22,14 +22,13 @@ const Project = () => {
   const [openAddModal, setOpenAddModal] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(6);
-  
+
   const handleFilterIconClick = () => {
     setIsContainerVisible(!isContainerVisible);
   };
 
   const handleAddOpenModal = () => setOpenAddModal(true);
   const handleCloseAddModal = () => setOpenAddModal(false);
-
 
   const projectArray = Array.isArray(projectData)
     ? projectData
@@ -58,22 +57,22 @@ const Project = () => {
         >
           On-Going Projects
           <Box display="flex" gap={".5rem"}>
-          {/* {(isSuperAdmin || isAdmin || isHr) && ( */}
-            <ButtonComponent
-              OnClick={() => {
+            <HocButton
+              permissions={permissions.canAdd}
+              color={"primary"}
+              variant={"outlined"}
+              onClick={() => {
                 navigate(`get-deactivated-projects`);
               }}
-              TextColor={"black"}
-              BGColor={"white"}
               buttonName={"Terminated Project"}
             />
-          {/* )} */}
-           {/* {(isSuperAdmin || isAdmin || isHr) && ( */}
-            <ButtonComponent
-              OnClick={handleAddOpenModal}
+            <HocButton
+              permissions={permissions.canAdd}
+              color={"primary"}
+              variant={"outlined"}
+              onClick={handleAddOpenModal}
               buttonName={"+Add Project"}
             />
-           {/* )} */}
           </Box>
         </Typography>
       </Box>
@@ -158,4 +157,4 @@ const Project = () => {
   );
 };
 
-export default Project;
+export default PermissionHoc(Project);

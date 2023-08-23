@@ -16,8 +16,10 @@ import {
 import DeleteConfirmationModal from "../../components/Modal/DeleteConfirmationModal";
 import tableIcons from "../../../theme/overrides/TableIcon";
 import { ButtonComponent } from "../../components/Button/ButtonComponent";
+import PermissionHoc from "../../hoc/permissionHoc";
+import HocButton from "../../hoc/hocButton";
 
-const LeaveType = () => {
+const LeaveType = ({ permissions }) => {
   const { data: leaveTypeData, isLoading } = useGetLeaveType();
 
   const [existingLeaveTypes, setExistingLeaveTypes] = useState([]);
@@ -107,15 +109,18 @@ const LeaveType = () => {
       title: "Actions",
       render: (rowData) => (
         <Stack direction="row" spacing={0}>
-          <Button color="primary" onClick={() => handleEditLeaveType(rowData)}>
-            <ModeEditOutlineIcon />
-          </Button>
-          <Button
-            color="primary"
+          <HocButton
+            permissions={permissions.canEdit}
+            color={"primary"}
+            onClick={() => handleEditLeaveType(rowData)}
+            icon={<ModeEditOutlineIcon />}
+          />
+          <HocButton
+            permissions={permissions.canDelete}
+            color={"primary"}
             onClick={() => handleDeleteLeaveType(rowData)}
-          >
-            <DeleteIcon />
-          </Button>
+            icon={<DeleteIcon />}
+          />
         </Stack>
       ),
       sorting: false,
@@ -127,8 +132,11 @@ const LeaveType = () => {
   return (
     <>
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-        <ButtonComponent
-          OnClick={handleAddOpenModal}
+        <HocButton
+          permissions={permissions.canAdd}
+          color={"primary"}
+          variant={"outlined"}
+          onClick={handleAddOpenModal}
           buttonName={"+Add Leave Type"}
         />
       </Box>
@@ -137,10 +145,10 @@ const LeaveType = () => {
         icons={tableIcons}
         columns={columns}
         data={leaveTypeData}
-        title='Leave Type'
+        title="Leave Type"
         isLoading={isLoading}
         options={{
-          padding: 'dense',
+          padding: "dense",
           margin: 50,
           pageSize: 10,
           emptyRowsWhenPaging: false,
@@ -186,4 +194,4 @@ const LeaveType = () => {
   );
 };
 
-export default LeaveType;
+export default PermissionHoc(LeaveType);

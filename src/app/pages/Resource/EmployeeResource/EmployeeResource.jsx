@@ -17,8 +17,10 @@ import {
 } from "./EmployeeResourceModal";
 import { useGetOfficeResource } from "../../../hooks/resource/officeResource/useOfficeResource";
 import { ButtonComponent } from "../../../components/Button/ButtonComponent";
+import PermissionHoc from "../../../hoc/permissionHoc";
+import HocButton from "../../../hoc/hocButton";
 
-const EmployeeResource = () => {
+const EmployeeResource = ({ permissions }) => {
   const navigate = useNavigate();
   const { data: employeeResourceData, isLoading } = useGetEmployeeResource();
   const { data: officeResourceData } = useGetOfficeResource();
@@ -109,12 +111,16 @@ const EmployeeResource = () => {
       title: "Actions",
       render: (rowData) => (
         <Stack direction="row" spacing={0}>
-          <Button color="primary" onClick={() => handleEditRowData(rowData)}>
-            <ModeEditOutlineIcon />
-          </Button>
-          <Button color="primary" onClick={() => handleDeleteRowData(rowData)}>
-            <DeleteIcon />
-          </Button>
+          <HocButton
+            permissions={permissions.canEdit}
+            onClick={() => handleEditRowData(rowData)}
+            icon={<ModeEditOutlineIcon />}
+          />
+          <HocButton
+            permissions={permissions.canDelete}
+            onClick={() =>handleDeleteRowData(rowData)}
+            icon={<DeleteIcon />}
+          />
         </Stack>
       ),
       sorting: false,
@@ -124,18 +130,27 @@ const EmployeeResource = () => {
   return (
     <>
       <Box
-        sx={{ display: "flex", justifyContent: "flex-end", gap:"1rem" ,padding: ".5rem 0" }}
+        sx={{
+          display: "flex",
+          justifyContent: "flex-end",
+          gap: "1rem",
+          padding: ".5rem 0",
+        }}
       >
-        <ButtonComponent
-          OnClick={() => {
+        <HocButton
+          permissions={permissions.canAdd}
+          color= {"primary"}
+          variant={"outlined"}
+          onClick={() => {
             navigate(`/admin/resource/office`);
           }}
           buttonName={"Resources"}
-          BGColor="white"
-          TextColor="black"
         />
-        <ButtonComponent
-          OnClick={handleAddOpenModal}
+        <HocButton
+          permissions={permissions.canAdd}
+          color= {"primary"}
+          variant={"outlined"}
+          onClick={handleAddOpenModal}
           buttonName={"+Provide Resource to Employee"}
         />
       </Box>
@@ -193,4 +208,4 @@ const EmployeeResource = () => {
   );
 };
 
-export default EmployeeResource;
+export default PermissionHoc(EmployeeResource);

@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from "react";
-import useAuth from "../../../auth/hooks/component/login/useAuth";
 import { Box, Button } from "@mui/material";
 
 import FullCalendar from "@fullcalendar/react";
@@ -10,11 +9,12 @@ import interactionPlugin from "@fullcalendar/interaction";
 import { useGetEvent } from "../../hooks/event/useEvent";
 import { AddEventModal, OpenEvent } from "./EventModal/EventModal";
 import { ButtonComponent } from "../../components/Button/ButtonComponent";
+import HocButton from "../../hoc/hocButton";
+import PermissionHoc from "../../hoc/permissionHoc";
 
-const Event= () => {
+const Event = ({ permissions }) => {
   const calendarRef = useRef(null);
   const [events, setEvents] = useState([]);
-  const { isSuperAdmin, isAdmin, isHr, isEmployee } = useAuth();
 
   const { data: eventData, isLoading } = useGetEvent();
 
@@ -44,12 +44,13 @@ const Event= () => {
   return (
     <>
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-        {/* {(isSuperAdmin || isAdmin || isHr || isEmployee) && ( */}
-          <ButtonComponent
-            OnClick={() => setOpenAddModal(true)}
-            buttonName={"+Add Event"}
-          />
-        {/* )} */}
+        <HocButton
+          permissions={permissions.canAdd}
+          color={"primary"}
+          variant={"outlined"}
+          onClick={() => setOpenAddModal(true)}
+          buttonName={"+Add Event"}
+        />
       </Box>
       <br />
       {openAddModal && (
@@ -84,4 +85,4 @@ const Event= () => {
   );
 };
 
-export default Event;
+export default PermissionHoc(Event);

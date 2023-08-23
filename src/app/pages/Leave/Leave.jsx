@@ -174,12 +174,13 @@ const Leave = ({ isLoading }) => {
 
         return (
           <Stack direction="row" spacing={0}>
-            <ButtonComponent
-              Color="primary"
-              OnClick={() => handleEditLeave(rowData)}
+            <Button
+              color="primary"
+              onClick={() => handleEditLeave(rowData)}
               disabled={isApprovedOrRejected}
-              buttonName={<ModeEditOutlineIcon />}
-            />
+            >
+              <ModeEditOutlineIcon />
+            </Button>
             <Button color="primary" onClick={() => handleDeleteLeave(rowData)}>
               <DeleteIcon />
             </Button>
