@@ -25,7 +25,6 @@ const HocButton = ({ sx, bg, variant, permissions, onClick, icon, disabledIcon, 
         opacity: 1.7,
         cursor: "no-drop",
       }}
-      className={classes.disabledButton}
       variant={variant}
       onClick={onClick}
      >{disabledIcon || icon || buttonName}</Button>
