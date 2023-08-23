@@ -13,7 +13,6 @@ import EmployeeGrid from "./EmployeeView/EmployeeGrid";
 import { useNavigate } from "react-router-dom";
 import { ButtonComponent } from "../../components/Button/ButtonComponent";
 import "./Style/Style.css";
-import useAuth from "../../../auth/hooks/component/login/useAuth";
 import ThemeModeContext from "../../../theme/ThemeModeContext";
 
 const Employee = () => {
@@ -31,7 +30,6 @@ const Employee = () => {
     p: 4,
     background: mode === "light" ? "" : "#413e3e",
   };
-  // const { isSuperAdmin, isAdmin, isHr, isEmployee } = useAuth();
 
   const navigate = useNavigate();
 

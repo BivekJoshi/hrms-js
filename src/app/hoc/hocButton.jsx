@@ -25,21 +25,20 @@ const HocButton = ({
       {icon || buttonName}
     </Button>
   ) : (
-    // <Button
-    //   disabled
-    //   sx={{
-    //     ...sx,
-    //     backgroundColor: `${bg} "!important"`,
-    //     color: { color },
-    //     opacity: 1.7,
-    //     cursor: "no-drop",
-    //   }}
-    //   variant={variant}
-    //   onClick={onClick}
-    // >
-    //   {disabledIcon || icon || buttonName}
-    // </Button>
-    null
+    <Button
+      disabled
+      sx={{
+        ...sx,
+        backgroundColor: `${bg} "!important"`,
+        color: { color },
+        opacity: 1.7,
+        cursor: "not-allowed",
+      }}
+      variant={variant}
+      onClick={onClick}
+    >
+      {disabledIcon || icon || buttonName}
+    </Button>
   );
 };
 
