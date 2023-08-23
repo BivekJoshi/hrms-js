@@ -14,9 +14,10 @@ import {
 } from "./DepartmentModal/DepartmentModal";
 import DeleteConfirmationModal from "../../components/Modal/DeleteConfirmationModal";
 import tableIcons from "../../../theme/overrides/TableIcon";
-import { ButtonComponent } from "../../components/Button/ButtonComponent";
+import PermissionHoc from "../../hoc/permissionHoc";
+import HocButton from "../../hoc/hocButton";
 
-const Department = () => {
+const Department = ({ permissions }) => {
   const { data: departmentData, isLoading } = useGetDepartment();
 
   const [openAddModal, setOpenAddModal] = useState(false);
@@ -57,51 +58,54 @@ const Department = () => {
       sorting: false,
     },
     {
-      title: 'Department Name',
-      field: 'departmentName',
-      emptyValue: '-',
-      width: '20vh',
+      title: "Department Name",
+      field: "departmentName",
+      emptyValue: "-",
+      width: "20vh",
       sorting: false,
     },
     {
-      title: 'Department Type',
-      field: 'departmentType',
-      emptyValue: '-',
-      width: '20vh',
+      title: "Department Type",
+      field: "departmentType",
+      emptyValue: "-",
+      width: "20vh",
       sorting: false,
     },
     {
-      title: 'Description',
-      field: 'departmentDescription',
-      emptyValue: '-',
+      title: "Description",
+      field: "departmentDescription",
+      emptyValue: "-",
       sorting: false,
     },
     {
-      title: 'Actions',
+      title: "Actions",
       render: (rowData) => (
-        <Stack direction='row' spacing={0}>
-          <Button color='primary' onClick={() => handleEditDepartment(rowData)}>
-            <ModeEditOutlineIcon />
-          </Button>
-          <Button
-            color='primary'
-            onClick={() => handleDeleteDepartment(rowData)}
-          >
-            <DeleteIcon />
-          </Button>
+        <Stack direction="row" spacing={0}>
+          <HocButton
+            permissions={permissions.canEdit}
+            onClick={() =>handleEditDepartment(rowData)}
+            icon={<ModeEditOutlineIcon />}
+          />
+          <HocButton
+            permissions={permissions.canDelete}
+            onClick={() =>handleDeleteDepartment(rowData)}
+            icon={<DeleteIcon />}
+          />
         </Stack>
       ),
       sorting: false,
     },
-  ];
+  ].filter(Boolean);
+
   if (isLoading) return <>Loading</>;
 
   return (
     <>
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-        <ButtonComponent
-          OnClick={handleAddOpenModal}
-          buttonName={" + Add Department"}
+        <HocButton
+          permissions={permissions.canAdd}
+          onClick={handleAddOpenModal}
+          buttonName={"+ Add Department"}
         />
       </Box>
 
@@ -115,10 +119,10 @@ const Department = () => {
         isLoading={isLoading}
         options={{
           exportButton: true,
-          padding: 'dense',
+          padding: "dense",
           margin: 50,
           pageSize: 10,
-          tableLayout: 'auto',
+          tableLayout: "auto",
           emptyRowsWhenPaging: false,
           headerStyle: {
             backgroundColor: "#01579b",
@@ -132,7 +136,7 @@ const Department = () => {
             textTransform: "capitilize",
           },
           rowStyle: {
-            fontSize: '.8rem',
+            fontSize: ".8rem",
           },
         }}
       />
@@ -155,10 +159,10 @@ const Department = () => {
           open={openDeleteModal}
           handleCloseModal={handleCloseDeleteModal}
           handleConfirmDelete={handleConfirmDelete}
-          message={'Department'}
+          message={"Department"}
         />
       )}
     </>
   );
 };
-export default Department;
+export default PermissionHoc(Department);
