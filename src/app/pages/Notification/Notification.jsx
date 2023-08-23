@@ -1,18 +1,13 @@
-import React, { useState, useRef } from "react";
-import {
-  MenuItem,
-  Typography,
-  Popper,
-  Grow,
-  Paper,
-  Button,
-  Box,
-  ClickAwayListener,
-  MenuList,
-} from "@mui/material";
+import React, { useState, useRef, useContext } from "react";
+import { MenuItem, Typography, Popper, Grow } from "@mui/material";
+import { Paper, Button, Box, ClickAwayListener, MenuList } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/NotificationsNone";
+import ThemeModeContext from "../../../theme/ThemeModeContext";
 
 const Notification = ({ data }) => {
+  const [status, setStatus] = useState();
+  const { mode } = useContext(ThemeModeContext);
+
   const eventName = data?.events;
   const eventCount = data?.eventCount || 0;
   const displayCount = eventCount > 0 ? eventCount : null;
@@ -70,7 +65,7 @@ const Notification = ({ data }) => {
           style={btnStyle}
         >
           <NotificationsIcon />
-          {status ? " " : displayCount }
+          {status ? " " : displayCount}
         </Button>
         {eventCount !== 0 ? (
           <Popper
@@ -110,13 +105,21 @@ const Notification = ({ data }) => {
                           <MenuItem
                             key={index}
                             onClick={handleClose}
-                            sx={{ display: "flex", gap: "1rem", alignItems: "center" }}
+                            sx={{
+                              display: "flex",
+                              gap: "1rem",
+                              alignItems: "center",
+                            }}
                           >
                             <Typography variant="h6">
                               {ename?.eventName}
                             </Typography>
                             <Box
-                              sx={{ display: "flex", flexDirection: "start", color: "gray" }}
+                              sx={{
+                                display: "flex",
+                                flexDirection: "start",
+                                color: "gray",
+                              }}
                             >
                               <Typography>{ename?.eventTime}</Typography> &nbsp;
                               <Typography>{ename?.eventLocation}</Typography>
@@ -143,6 +146,7 @@ const Notification = ({ data }) => {
               <Grow
                 {...TransitionProps}
                 style={{
+                  background: mode === "light" ? "" : "#4d4c4c",
                   transformOrigin:
                     placement === "bottom-start" ? "left top" : "left bottom",
                 }}
@@ -160,7 +164,11 @@ const Notification = ({ data }) => {
                         padding: "1rem 2rem",
                       }}
                     >
-                      <Typography variant="h6" color="primary" fontWeight={400}>
+                      <Typography
+                        variant="h6"
+                        color={mode === "light" ? "primary" : "white"}
+                        fontWeight={400}
+                      >
                         No Events For Today !
                       </Typography>
                     </MenuList>

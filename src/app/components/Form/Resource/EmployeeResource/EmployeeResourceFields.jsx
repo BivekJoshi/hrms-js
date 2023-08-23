@@ -48,7 +48,7 @@ const EmployeeResourceFields = ({ onClose, isLoading, data }) => {
                 <MenuItem
                   key={option?.id}
                   value={option?.id}
-                  sx={mode === "light" ? "" : { bgcolor: "black" }}
+                  sx={mode === "light" ? "" : { bgcolor: "#413e3e" }}
                 >
                   {option?.firstName} {option?.middleName} {option?.lastName}
                 </MenuItem>

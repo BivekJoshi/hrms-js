@@ -16,19 +16,19 @@ export const getCompanyById = async (id) => {
 
 {/*________________________POST_____________________________________*/ }
 export const addCompany = async (formData) => {
-  const data = await axiosInstance.post('/company', formData);
+  const data = await axiosInstance.post('/company/create', formData);
   return data;
 };
 
 {/*________________________EDIT_____________________________________*/ }
 export const editCompany = async (formData) => {
   const {id} = formData;
-  const data = await axiosInstance.put(`/company/${id}`, formData);
+  const data = await axiosInstance.put(`/company/update/${id}`, formData);
   return data;
 };
 
 {/*________________________DELETE_____________________________________*/ }
 export const deleteCompany = async (companyId) => {
-  const response = await axiosInstance.delete(`/company/${companyId}`);
+  const response = await axiosInstance.delete(`/company/delete/${companyId}`);
   return response.data;
 };

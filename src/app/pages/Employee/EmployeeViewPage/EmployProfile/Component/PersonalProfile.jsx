@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 
-import { Box, Chip, Grid, List, ListItem } from "@mui/material";
+import { Box, Chip, Grid } from "@mui/material";
 import { Typography, Avatar } from "@mui/material";
 
 import Male from "../../../../../../assets/male.png";
@@ -11,12 +11,12 @@ import ThemeModeContext from "../../../../../../theme/ThemeModeContext";
 const primaryColor = "#1c7ed6";
 
 export const PersonalProfile = ({ data }) => {
-  const{mode} = useContext(ThemeModeContext)
+  const { mode } = useContext(ThemeModeContext);
   return (
     <>
       <Grid
         sx={{
-          bgcolor: mode=== "light" ? "#cfe8fc": "#292929",
+          bgcolor: mode === "light" ? "#cfe8fc" : "#292929",
           display: "grid",
           gridTemplateColumns: "1fr 3fr",
           borderRadius: 5,

@@ -8,7 +8,7 @@ export const getLoggedInUser = async () => {
 
 {/*____________________________GET____________________________________________*/}
 export const getUserById = async (id) => {
-    const data = await axiosInstance.get(`/user/${id}`);
+    const data = await axiosInstance.get(`/user/user-id/${id}`);
     return data;
 };
 {/*____________________________POST____________________________________________*/}
