@@ -114,11 +114,10 @@ const Designation = ({ permissions }) => {
   return (
     <>
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-        
         <HocButton
           permissions={permissions.canAdd}
           color= {"primary"}
-          variant={"outlined"}
+          variant={"contained"}
           OnClick={handleAddOpenModal}
           buttonName={"+ Add Designation"}
         />

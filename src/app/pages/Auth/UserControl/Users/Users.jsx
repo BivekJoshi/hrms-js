@@ -41,12 +41,10 @@ const columns = [
   },
 ];
 
-
 const getRoleLabel = (roleName) => {
   const role = roleType?.find((role) => role?.name === roleName);
   return role ? role?.label : "-";
 };
-
 
 const Users = ({ permissions }) => {
   const [openAddModal, setOpenAddModal] = useState(false);
@@ -54,76 +52,73 @@ const Users = ({ permissions }) => {
   const handleCloseAddModal = () => setOpenAddModal(false);
 
   const { data: userControlData, isLoading } = useGetUserControl();
-if(permissions.canView){
-  return (
-    <>
-   <Stack
-     sx={{
-       display: "flex",
-       flexDirection: "column",
-       gap: "1rem",
-       margin: "2rem 0",
-     }}
-   >
-     <Stack
-       sx={{
-         display: "flex",
-         flexDirection: "row-reverse",
-       }}
-     >
-       <Button
-         type="button"
-         variant="contained"
-         sx={{ maxWidth: "fit-content" }}
-         onClick={handleAddOpenModal}
-       >
-         + Add User
-       </Button>
-     </Stack>
-     <Stack>
-       <MaterialTable
-         columns={columns}
-         data={userControlData}
-         title="User List"
-         isLoading={isLoading}
-         options={{
-           padding: "dense",
-           margin: 50,
-           pageSize: 10,
-           emptyRowsWhenPaging: false,
-           headerStyle: {
-             backgroundColor: "#01579b",
-             color: "#FFF",
-             fontSize: "1rem",
-             padding: "dense",
-             height: 50,
-             textAlign: "center",
-             border: "2px solid #fff",
-             minHeight: "10px",
-             textTransform: "capitilize",
-           },
-           rowStyle: {
-             fontSize: ".8rem",
-           },
-         }}
-       />
-     </Stack>
-   </Stack>
+  if (permissions.canView) {
+    return (
+      <>
+        <Stack
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "1rem",
+            margin: "2rem 0",
+          }}
+        >
+          <Stack
+            sx={{
+              display: "flex",
+              flexDirection: "row-reverse",
+            }}
+          >
+            <Button
+              type="button"
+              variant="contained"
+              sx={{ maxWidth: "fit-content" }}
+              onClick={handleAddOpenModal}
+            >
+              + Add User
+            </Button>
+          </Stack>
+          <Stack>
+            <MaterialTable
+              columns={columns}
+              data={userControlData}
+              title="User List"
+              isLoading={isLoading}
+              options={{
+                padding: "dense",
+                margin: 50,
+                pageSize: 10,
+                emptyRowsWhenPaging: false,
+                headerStyle: {
+                  backgroundColor: "#01579b",
+                  color: "#FFF",
+                  fontSize: "1rem",
+                  padding: "dense",
+                  height: 50,
+                  textAlign: "center",
+                  border: "2px solid #fff",
+                  minHeight: "10px",
+                  textTransform: "capitilize",
+                },
+                rowStyle: {
+                  fontSize: ".8rem",
+                },
+              }}
+            />
+          </Stack>
+        </Stack>
 
-   {openAddModal && (
-     <AddUserControlModal
-       open={openAddModal}
-       handleCloseModal={handleCloseAddModal}
-     />
-   )}
- </>
-)
-    } else {
-  return (
-    <>You Donot have permissions to view this page</>
-  )
+        {openAddModal && (
+          <AddUserControlModal
+            open={openAddModal}
+            handleCloseModal={handleCloseAddModal}
+          />
+        )}
+      </>
+    );
+  } else {
+    return <>You Donot have permissions to view this page</>;
   }
-  
 };
 
 export default PermissionHoc(Users);

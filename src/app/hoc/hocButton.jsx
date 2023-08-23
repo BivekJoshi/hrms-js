@@ -1,11 +1,20 @@
 import { Button } from "@mui/material";
 import React from "react";
 
-const HocButton = ({ sx, bg, variant, permissions, onClick, icon, disabledIcon, buttonName, color }) => {
-
+const HocButton = ({
+  buttonName,
+  onClick,
+  sx,
+  bg,
+  variant,
+  permissions,
+  icon,
+  disabledIcon,
+  color,
+}) => {
   return permissions ? (
     <Button
-      sx= {{
+      sx={{
         ...sx,
         backgroundColor: bg,
         color: color,
@@ -16,18 +25,21 @@ const HocButton = ({ sx, bg, variant, permissions, onClick, icon, disabledIcon, 
       {icon || buttonName}
     </Button>
   ) : (
-    <Button
-      disabled
-      sx= {{
-        ...sx,
-        backgroundColor: `${bg} "!important"`,
-        color: {color},
-        opacity: 1.7,
-        cursor: "no-drop",
-      }}
-      variant={variant}
-      onClick={onClick}
-     >{disabledIcon || icon || buttonName}</Button>
+    // <Button
+    //   disabled
+    //   sx={{
+    //     ...sx,
+    //     backgroundColor: `${bg} "!important"`,
+    //     color: { color },
+    //     opacity: 1.7,
+    //     cursor: "no-drop",
+    //   }}
+    //   variant={variant}
+    //   onClick={onClick}
+    // >
+    //   {disabledIcon || icon || buttonName}
+    // </Button>
+    null
   );
 };
 

@@ -105,7 +105,7 @@ const Department = ({ permissions }) => {
         <HocButton
           permissions={permissions.canAdd}
           color= {"primary"}
-          variant={"outlined"}
+          variant={"contained"}
           onClick={handleAddOpenModal}
           buttonName={"+ Add Department"}
         />
