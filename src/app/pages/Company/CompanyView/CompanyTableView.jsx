@@ -3,8 +3,10 @@ import MaterialTable from "@material-table/core";
 import { Button, Stack } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import HocButton from "../../../hoc/hocButton";
 
 const CompanyTableView = ({
+  permissions,
   companyData,
   isLoading,
   handleEditCompany,
@@ -43,12 +45,17 @@ const CompanyTableView = ({
       title: "Actions",
       render: (rowData) => (
         <Stack direction="row" spacing={0}>
-          <Button color="primary" onClick={() => handleEditCompany(rowData)}>
-            <EditIcon />
-          </Button>
-          <Button color="primary" onClick={() => handleDeleteCompany(rowData)}>
-            <DeleteIcon />
-          </Button>
+          <HocButton
+            permissions={permissions.canEdit}
+            onClick={() => handleEditCompany(rowData)}
+            icon={<EditIcon />}
+          />
+
+          <HocButton
+            permissions={permissions.canDelete}
+            onClick={() => handleDeleteCompany(rowData)}
+            icon={<DeleteIcon />}
+          />
         </Stack>
       ),
       sorting: false,
