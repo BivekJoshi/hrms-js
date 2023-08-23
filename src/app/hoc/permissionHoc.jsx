@@ -6,6 +6,7 @@ const PermissionHoc = (WrappedComponent) => {
         const { isSuperAdmin, isEmployee } = useAuth();
 
         const permissions = {
+            canView: isSuperAdmin,
             canEdit: isSuperAdmin,
             canDelete: isSuperAdmin,
             canAdd: isSuperAdmin,

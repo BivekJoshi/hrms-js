@@ -4,6 +4,7 @@ import MaterialTable from "@material-table/core";
 import UserControlAction from "../../../../pages/Auth/UserControl/UserControlAction";
 import { AddUserControlModal } from "./AddUserControlModal";
 import { useGetUserControl } from "../../../../hooks/auth/userControl/useUserControl";
+import PermissionHoc from "../../../../hoc/permissionHoc";
 
 const roleType = [
   {
@@ -21,11 +22,6 @@ const roleType = [
     label: "Employee",
     id: 3,
   },
-  // {
-  //   name: "ADMIN",
-  //   label: "Admin",
-  //   id: 4,
-  // },
 ];
 
 const columns = [
@@ -51,76 +47,83 @@ const getRoleLabel = (roleName) => {
   return role ? role?.label : "-";
 };
 
-const Users = () => {
+
+const Users = ({ permissions }) => {
   const [openAddModal, setOpenAddModal] = useState(false);
   const handleAddOpenModal = () => setOpenAddModal(true);
   const handleCloseAddModal = () => setOpenAddModal(false);
 
   const { data: userControlData, isLoading } = useGetUserControl();
-
+if(permissions.canView){
   return (
-       <>
-      <Stack
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "1rem",
-          margin: "2rem 0",
-        }}
-      >
-        <Stack
-          sx={{
-            display: "flex",
-            flexDirection: "row-reverse",
-          }}
-        >
-          <Button
-            type="button"
-            variant="contained"
-            sx={{ maxWidth: "fit-content" }}
-            onClick={handleAddOpenModal}
-          >
-            + Add User
-          </Button>
-        </Stack>
-        <Stack>
-          <MaterialTable
-            columns={columns}
-            data={userControlData}
-            title="User List"
-            isLoading={isLoading}
-            options={{
-              padding: "dense",
-              margin: 50,
-              pageSize: 10,
-              emptyRowsWhenPaging: false,
-              headerStyle: {
-                backgroundColor: "#01579b",
-                color: "#FFF",
-                fontSize: "1rem",
-                padding: "dense",
-                height: 50,
-                textAlign: "center",
-                border: "2px solid #fff",
-                minHeight: "10px",
-                textTransform: "capitilize",
-              },
-              rowStyle: {
-                fontSize: ".8rem",
-              },
-            }}
-          />
-        </Stack>
-      </Stack>
+    <>
+   <Stack
+     sx={{
+       display: "flex",
+       flexDirection: "column",
+       gap: "1rem",
+       margin: "2rem 0",
+     }}
+   >
+     <Stack
+       sx={{
+         display: "flex",
+         flexDirection: "row-reverse",
+       }}
+     >
+       <Button
+         type="button"
+         variant="contained"
+         sx={{ maxWidth: "fit-content" }}
+         onClick={handleAddOpenModal}
+       >
+         + Add User
+       </Button>
+     </Stack>
+     <Stack>
+       <MaterialTable
+         columns={columns}
+         data={userControlData}
+         title="User List"
+         isLoading={isLoading}
+         options={{
+           padding: "dense",
+           margin: 50,
+           pageSize: 10,
+           emptyRowsWhenPaging: false,
+           headerStyle: {
+             backgroundColor: "#01579b",
+             color: "#FFF",
+             fontSize: "1rem",
+             padding: "dense",
+             height: 50,
+             textAlign: "center",
+             border: "2px solid #fff",
+             minHeight: "10px",
+             textTransform: "capitilize",
+           },
+           rowStyle: {
+             fontSize: ".8rem",
+           },
+         }}
+       />
+     </Stack>
+   </Stack>
 
-      {openAddModal && (
-        <AddUserControlModal
-          open={openAddModal}
-          handleCloseModal={handleCloseAddModal}
-        />
-      )}
-    </>
-  );
+   {openAddModal && (
+     <AddUserControlModal
+       open={openAddModal}
+       handleCloseModal={handleCloseAddModal}
+     />
+   )}
+ </>
+)
+    } else {
+  return (
+    <>You Donot have permissions to view this page</>
+  )
+  }
+  
 };
 
-export default Users;
+export default PermissionHoc(Users);

@@ -117,6 +117,8 @@ const Designation = ({ permissions }) => {
         
         <HocButton
           permissions={permissions.canAdd}
+          color= {"primary"}
+          variant={"outlined"}
           OnClick={handleAddOpenModal}
           buttonName={"+ Add Designation"}
         />
