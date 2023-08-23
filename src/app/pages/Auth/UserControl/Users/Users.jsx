@@ -7,25 +7,25 @@ import { useGetUserControl } from "../../../../hooks/auth/userControl/useUserCon
 
 const roleType = [
   {
-    name: "SUPER_ADMIN",
+    name: "ROLE_SUPER_ADMIN",
     label: "Super Admin",
     id: 1,
   },
   {
-    name: "HR_CLERK",
-    label: "HR Clerk",
+    name: "ROLE_ADMIN",
+    label: "ADMIN",
     id: 2,
   },
   {
-    name: "EMPLOYEE",
+    name: "ROLE_EMPLOYEE",
     label: "Employee",
     id: 3,
   },
-  {
-    name: "ADMIN",
-    label: "Admin",
-    id: 4,
-  },
+  // {
+  //   name: "ADMIN",
+  //   label: "Admin",
+  //   id: 4,
+  // },
 ];
 
 const columns = [

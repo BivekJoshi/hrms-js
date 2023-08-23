@@ -16,11 +16,11 @@ import {
 } from "./DesignationModal/DesignationModal";
 import DeleteConfirmationModal from "../../components/Modal/DeleteConfirmationModal";
 import { ButtonComponent } from "../../components/Button/ButtonComponent";
-import useAuth from "../../../auth/hooks/component/login/useAuth";
+import PermissionHoc from "../../hoc/permissionHoc";
+import HocButton from "../../hoc/hocButton";
 
-const Designation = () => {
+const Designation = ({ permissions }) => {
   const { data: designationData, isLoading } = useGetDesignation();
-const { isSuperAdmin, isAdmin, isHr, isEmployee } = useAuth();
 
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
@@ -87,23 +87,20 @@ const { isSuperAdmin, isAdmin, isHr, isEmployee } = useAuth();
       width: 80,
       sorting: false,
     },
-    // (isSuperAdmin || isAdmin || isHr) &&
-     {
+    {
       title: "Actions",
       render: (rowData) => (
         <Stack direction="row" spacing={0}>
-          <Button
-            color="primary"
+          <HocButton
+            permissions={permissions.canEdit}
             onClick={() => handleEditDesignation(rowData)}
-          >
-            <ModeEditOutlineIcon />
-          </Button>
-          <Button
-            color="primary"
+            icon={<ModeEditOutlineIcon />}
+          />
+          <HocButton
+            permissions={permissions.canDelete}
             onClick={() => handleDeleteDesignation(rowData)}
-          >
-            <DeleteIcon />
-          </Button>
+            icon={<DeleteIcon />}
+          />
         </Stack>
       ),
       sorting: false,
@@ -117,12 +114,12 @@ const { isSuperAdmin, isAdmin, isHr, isEmployee } = useAuth();
   return (
     <>
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-        {/* {(isSuperAdmin || isAdmin || isHr) && ( */}
-        <ButtonComponent
+        
+        <HocButton
+          permissions={permissions.canAdd}
           OnClick={handleAddOpenModal}
-          buttonName={"+Add Designation"}
+          buttonName={"+ Add Designation"}
         />
-        {/* )} */}
       </Box>
       <br />
 
@@ -178,4 +175,4 @@ const { isSuperAdmin, isAdmin, isHr, isEmployee } = useAuth();
   );
 };
 
-export default Designation;
+export default PermissionHoc(Designation);

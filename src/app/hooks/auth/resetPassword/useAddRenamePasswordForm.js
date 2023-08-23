@@ -16,7 +16,6 @@ const useAddRenamePasswordForm = ({ id }) => {
     initialValues: {
       password: "",
     },
-    validationSchema: ResetPasswordSchema,
     onSubmit: (values) => {
       setLoading(true);
       handleRequest(values);
