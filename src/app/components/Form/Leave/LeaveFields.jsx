@@ -1,4 +1,11 @@
-import { Grid, TextField, Button, MenuItem, Autocomplete } from "@mui/material";
+import {
+  Grid,
+  TextField,
+  Button,
+  MenuItem,
+  Autocomplete,
+  Box,
+} from "@mui/material";
 import React, { useContext } from "react";
 import { toast } from "react-toastify";
 import { useGetEmployee } from "../../../hooks/employee/useEmployee";
@@ -39,7 +46,11 @@ const LeaveFields = ({ onClose, isLoading, data }) => {
     const employee = employeeData?.find((emp) => emp.id === employeeId);
     if (employee) {
       const { firstName, middleName, lastName } = employee;
-      return `${firstName || ""} ${middleName || ""} ${lastName || ""}`;
+      return (
+        <Box sx={{ bgcolor: mode === "light" ? "" : "#413e3e" }}>
+          {firstName || ""} {middleName || ""} {lastName || ""}
+        </Box>
+      );
     }
     return "";
   };
@@ -103,7 +114,7 @@ const LeaveFields = ({ onClose, isLoading, data }) => {
               }
               renderInput={(params) => (
                 <TextField
-                bgcolor="black"
+                  bgcolor="black"
                   {...params}
                   label="Employee Name"
                   fullWidth
@@ -230,7 +241,7 @@ const LeaveFields = ({ onClose, isLoading, data }) => {
               <MenuItem
                 key={option.value}
                 value={option.value}
-                sx={mode === "light" ? "" : { bgcolor: "#0B0E10" }}
+                sx={{ bgcolor: mode === "light" ? "" : "#413e3e" }}
               >
                 {option.label}
               </MenuItem>
