@@ -24,7 +24,7 @@ export const getTodoListByUserId = async (userId) => {
 
 {/*________________________POST_____________________________________*/ }
 export const addTodoList = async (formData) => {
-    const data = await axiosInstance.post("/to-do-list", formData);
+    const data = await axiosInstance.post("/to-do-list/create", formData);
     return data;
 }
 

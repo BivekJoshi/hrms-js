@@ -8,7 +8,6 @@ import interactionPlugin from "@fullcalendar/interaction";
 
 import { useGetEvent } from "../../hooks/event/useEvent";
 import { AddEventModal, OpenEvent } from "./EventModal/EventModal";
-import { ButtonComponent } from "../../components/Button/ButtonComponent";
 import HocButton from "../../hoc/hocButton";
 import PermissionHoc from "../../hoc/permissionHoc";
 
@@ -41,6 +40,11 @@ const Event = ({ permissions }) => {
 
   const handleCloseModal = () => setOpenModal(false);
 
+  // const handleTodayClick = (events) => {
+  //   console.log(events)
+  //   events.gotoDate(new Date());
+  // };
+
   return (
     <>
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
@@ -64,13 +68,21 @@ const Event = ({ permissions }) => {
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
         initialView="dayGridMonth"
         headerToolbar={{
-          start: "today prev,next",
+          start: "customTodayButton prev,next",
           center: "title",
           end: "dayGridMonth,timeGridWeek,timeGridDay",
         }}
         height={"90vh"}
         events={events}
         eventClick={handleOpenModal}
+        customButtons={{
+            customTodayButton: {
+              text: "Today",
+              // click: function () {
+              //   handleTodayClick(events);
+              // },
+            },
+          }}
         // loading={isLoading}
       />
 
