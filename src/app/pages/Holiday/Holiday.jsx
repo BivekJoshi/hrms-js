@@ -43,10 +43,14 @@ const Holiday = () => {
     }
   }, [holidayData]);
 
+  // const handleTodayClick = (events) => {
+  //   events.gotoDate(new Date());
+  // };
+
   return (
     <>
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-      {/* {(isSuperAdmin || isAdmin || isHr) && ( */}
+      
         <Button
           variant="contained"
           sx={{ mt: 3, ml: 1 }}
@@ -54,10 +58,10 @@ const Holiday = () => {
         >
           +Add Holiday
         </Button>
-      {/* )} */}
+    
       </Box>
       <br />
-      {/* <Grid container spacing={2}> */}
+    
       <Box
         display="grid"
         gridTemplateColumns={{ xs: "1fr", lg: "1fr 3fr" }}
@@ -72,13 +76,21 @@ const Holiday = () => {
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           initialView="dayGridMonth"
           headerToolbar={{
-            start: "today prev,next",
+            start: "customTodayButton prev,next",
             center: "title",
             end: "dayGridMonth,timeGridWeek,timeGridDay",
           }}
           eventClick={handleOpenModal}
           height={"90vh"}
           events={events}
+          customButtons={{
+            customTodayButton: {
+              text: "Today",
+              // click: function () {
+              //   handleTodayClick(events);
+              // },
+            },
+          }}
         />
       </Box>
       {/* </Grid> */}

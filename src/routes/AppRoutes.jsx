@@ -31,6 +31,23 @@ const AppRoutes = () => {
                 ))}
               </Route>
             </Route>
+
+            {/* <Route path="/employee" element={<EmployeeLayout />}>
+                <Route element={<ProtectedEmployeeRoute redirectTo="/" />}>
+                  {
+                    routes.map((route) => (
+                      <Route
+                        key={route.id}
+                        path={route.path}
+                        exact
+                        element={routes.component}
+                      />
+                    ))
+                  }
+                </Route>
+              </Route> */}
+
+
             </Route>
           </Routes>
         </ScrollToTop>

@@ -10,6 +10,7 @@ const PermissionHoc = (WrappedComponent) => {
             canEdit: isSuperAdmin,
             canDelete: isSuperAdmin,
             canAdd: isSuperAdmin,
+            isEmployee: true,
         };
 
         return (
