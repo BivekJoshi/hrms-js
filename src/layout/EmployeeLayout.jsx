@@ -12,6 +12,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from '@mui/icons-material/Menu';
 import React, { useState } from "react";
 import Drawer from "@mui/material/Drawer";
+import EmployeeSidebar from "../app/components/SideBar/EmployeeSidebar";
 
 const EmployeeLayout = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -22,23 +23,18 @@ const EmployeeLayout = () => {
 
   const list = (
     <Box
-      sx={{ width: "250px" }}
+      sx={{ width: "250px", height: "100vh", overflow: "scroll", backgroundColor: "#e1e1e1" }}
       role="presentation"
       onClick={toggleDrawer}
       onKeyDown={toggleDrawer}
+      
     >
-      <Stack sx={{ display: "flex", flexDirection: "column" }} spacing={8}>
+      <Stack spacing={2}>
         <Button onClick={toggleDrawer}>
           <CloseIcon />
         </Button>
         <Divider />
-        <Stack>
-          <List>
-            <ListItem>hello</ListItem>
-            <ListItem>hello</ListItem>
-            <ListItem>hello</ListItem>
-          </List>
-        </Stack>
+        <EmployeeSidebar />
         <Divider />
 
         <Stack>Logout</Stack>
@@ -48,7 +44,7 @@ const EmployeeLayout = () => {
 
   return (
     <>
-      <div>
+      <div sx={{padding: "4rem"}}>
         <Stack
           sx={{
             display: "flex",
@@ -56,19 +52,21 @@ const EmployeeLayout = () => {
             justifyContent: "space-between",
             backgroundColor: "#01579b",
             color: "#fff",
-            fontWeight: "semi-bold",
             alignItems: "center",
+            paddingY: "0.5rem",
+            paddingX: "2rem",
           }}
         >
-          <Button sx={{color: "#fff"}} onClick={toggleDrawer}><MenuIcon /></Button>
-          <Typography>Human Resource Management System</Typography>
-          <Typography>Profile</Typography>
+          <Button sx={{color: "#fff"}} onClick={toggleDrawer}><MenuIcon sx={{ fontSize: 32 }} /></Button>
+          <Typography variant="h6">Human Resource Management System</Typography>
+          <Typography variant="h6">Profile</Typography>
         </Stack>
-        <Outlet />
         <Drawer anchor="left" open={isDrawerOpen} onClose={toggleDrawer}>
           {list}
 
         </Drawer>
+        <Outlet />
+        
         
       </div>
     
