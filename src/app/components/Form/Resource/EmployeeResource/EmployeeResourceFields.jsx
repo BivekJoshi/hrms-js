@@ -48,7 +48,7 @@ const EmployeeResourceFields = ({ onClose, isLoading, data }) => {
                 <MenuItem
                   key={option?.id}
                   value={option?.id}
-                  sx={mode === "light" ? "" : { bgcolor: "#413e3e" }}
+                  sx={{ bgcolor: mode === "light" ? "" : "#413e3e" }}
                 >
                   {option?.firstName} {option?.middleName} {option?.lastName}
                 </MenuItem>
@@ -79,7 +79,11 @@ const EmployeeResourceFields = ({ onClose, isLoading, data }) => {
           >
             {officeResourceData &&
               officeResourceData.map((option) => (
-                <MenuItem key={option?.id} value={option?.id}>
+                <MenuItem
+                  key={option?.id}
+                  value={option?.id}
+                  sx={{ bgcolor: mode === "light" ? "" : "#413e3e" }}
+                >
                   {option?.name}
                 </MenuItem>
               ))}
