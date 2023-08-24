@@ -10,7 +10,7 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { removeUser } from "../../utils/cookieHelper";
 import { ThemeModeContext } from "../../../theme/ThemeModeContext";
 import Header from "../Header/Header";
-import BreadCrumbs from "../../../routes/routes";
+import BreadCrumbs from "../../../routes/adminRoutes";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import PersonIcon from "@mui/icons-material/Person";
