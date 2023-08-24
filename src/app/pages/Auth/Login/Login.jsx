@@ -1,21 +1,16 @@
 /* eslint-disable no-unused-vars */
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import {
-  Box,
-  Grid,
-  IconButton,
-  InputAdornment,
-  TextField,
-  Tooltip,
-} from "@mui/material";
+import { Box, Grid, IconButton, InputAdornment } from "@mui/material";
+import { TextField, Tooltip } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { useLoginForm } from "../../../../auth/hooks/component/login/useLoginForm";
 import "./Style/Login.css";
-import bg1 from "../../../../assets/background.svg";
+import ThemeModeContext from "../../../../theme/ThemeModeContext";
 
 const Login = () => {
+  const { mode } = useContext(ThemeModeContext);
   const {
     formik,
     showValues,
@@ -47,7 +42,12 @@ const Login = () => {
                 src="https://raw.githubusercontent.com/sefyudem/Responsive-Login-Form/master/img/avatar.svg"
               />
             </div>
-            <p className="welcome-text">WELCOME</p>
+            <p
+              className="welcome-text"
+              style={{ color: mode === "light" ? "" : "white" }}
+            >
+              WELCOME
+            </p>
             <Box className="input-section">
               <TextField
                 required
@@ -114,7 +114,11 @@ const Login = () => {
                 justifyContent="flex-end"
                 alignItems="center"
               >
-                <Link className="forgot-password" to="forgot-password">
+                <Link
+                  className="forgot-password"
+                  to="forgot-password"
+                  style={{ color: mode === "light" ? "" : "white" }}
+                >
                   Forget password?
                 </Link>
               </Grid>

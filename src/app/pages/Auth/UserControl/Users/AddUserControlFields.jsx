@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Grid, TextField, Button, MenuItem } from "@mui/material";
 import { useGetEmployee } from "../../../../hooks/employee/useEmployee";
 import { useGetUserRole } from "../../../../hooks/auth/userControl/useUserControl";
@@ -6,11 +6,13 @@ import {
   useAddUserControlForm,
   useAddUserPermissionForm,
 } from "./useAddUserControlForm";
+import ThemeModeContext from "../../../../../theme/ThemeModeContext";
 
 export const AddUserControlFields = ({ onClose }) => {
   const { data: employeeData } = useGetEmployee();
   const { data: userRoleData } = useGetUserRole();
   const { formik } = useAddUserControlForm();
+  const { mode } = useContext(ThemeModeContext);
 
   const handleFormSubmit = async () => {
     const isValid = await formik.validateForm();
@@ -57,7 +59,11 @@ export const AddUserControlFields = ({ onClose }) => {
         >
           {employeeData &&
             employeeData.map((employee) => (
-              <MenuItem key={employee?.id} value={employee?.id}>
+              <MenuItem
+                key={employee?.id}
+                value={employee?.id}
+                sx={{ bgcolor: mode === "light" ? "" : "#413e3e" }}
+              >
                 {`${employee?.firstName} ${employee?.middleName} ${employee?.lastName}`}
               </MenuItem>
             ))}
@@ -102,7 +108,11 @@ export const AddUserControlFields = ({ onClose }) => {
         >
           {userRoleData &&
             userRoleData.map((role) => (
-              <MenuItem key={role?.id} value={role?.id}>
+              <MenuItem
+                key={role?.id}
+                value={role?.id}
+                sx={{ bgcolor: mode === "light" ? "" : "#413e3e" }}
+              >
                 {role?.name}
               </MenuItem>
             ))}
@@ -137,7 +147,7 @@ export const AddUserControlFields = ({ onClose }) => {
 
 export const AddPermissionFields = ({ onClose }) => {
   const { data: userRoleData } = useGetUserRole();
-
+  const { mode } = useContext(ThemeModeContext);
   const { formik } = useAddUserPermissionForm();
 
   const handleFormSubmit = async () => {
@@ -161,7 +171,7 @@ export const AddPermissionFields = ({ onClose }) => {
       id: 2,
       value: "false",
     },
-  ]
+  ];
 
   return (
     <>
@@ -203,7 +213,11 @@ export const AddPermissionFields = ({ onClose }) => {
           >
             {userRoleData &&
               userRoleData.map((role) => (
-                <MenuItem key={role?.id} value={role?.id}>
+                <MenuItem
+                  key={role?.id}
+                  value={role?.id}
+                  sx={{ bgcolor: mode === "light" ? "" : "#413e3e" }}
+                >
                   {role?.name}
                 </MenuItem>
               ))}
@@ -229,7 +243,11 @@ export const AddPermissionFields = ({ onClose }) => {
           >
             {addRole &&
               addRole.map((role) => (
-                <MenuItem key={role?.id} value={role?.value}>
+                <MenuItem
+                  key={role?.id}
+                  value={role?.value}
+                  sx={{ bgcolor: mode === "light" ? "" : "#413e3e" }}
+                >
                   {role?.value}
                 </MenuItem>
               ))}

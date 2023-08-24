@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Grid, TextField, Button, MenuItem } from "@mui/material";
 import { toast } from "react-toastify";
 import useTodoListForm from "../../../hooks/todoList/TodoListForm/useTodoListForm";
+import ThemeModeContext from "../../../../theme/ThemeModeContext";
 
 const priority = [
   {
@@ -37,6 +38,7 @@ const status = [
 ];
 const TodoListFields = ({ onClose, isLoading, data }) => {
   const { formik } = useTodoListForm(data);
+  const { mode } = useContext(ThemeModeContext);
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
@@ -104,7 +106,11 @@ const TodoListFields = ({ onClose, isLoading, data }) => {
             InputLabelProps={{ shrink: true }}
           >
             {priority.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
+              <MenuItem
+                key={option.value}
+                value={option.value}
+                sx={{ bgcolor: mode === "light" ? "" : "#413e3e" }}
+              >
                 {option.label}
               </MenuItem>
             ))}

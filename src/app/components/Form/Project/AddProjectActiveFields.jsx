@@ -1,26 +1,22 @@
-import { Grid, Button, TextField, MenuItem, Autocomplete } from "@mui/material";
-import React from "react";
-import { toast } from "react-toastify";
-import { useGetEmployee } from "../../../hooks/employee/useEmployee";
-import { useGetDeactivatedProject, useGetProject } from "../../../hooks/project/useProject";
-
+import { Grid, Button, TextField, MenuItem } from "@mui/material";
+import React, { useContext } from "react";
+import { useGetDeactivatedProject } from "../../../hooks/project/useProject";
+import ThemeModeContext from "../../../../theme/ThemeModeContext";
 
 const AddprojectFields = ({ onClose, isLoading }) => {
-  const { data: projectData, isLoading: loadingProject } = useGetDeactivatedProject();
+  const { data: projectData, isLoading: loadingProject } =
+    useGetDeactivatedProject();
+  const { mode } = useContext(ThemeModeContext);
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
     onClose();
   };
 
-
-
   return (
     !isLoading && (
       <Grid container spacing={3}>
-
         <Grid item xs={12} sm={12}>
-
           <TextField
             id="projectId"
             name="projectId"
@@ -30,22 +26,21 @@ const AddprojectFields = ({ onClose, isLoading }) => {
             fullWidth
             value={formik.values.projectId}
             onChange={formik.handleChange}
-            error={
-              formik.touched.projectId &&
-              Boolean(formik.errors.projectId)
-            }
-            helperText={
-              formik.touched.projectId && formik.errors.projectId
-            }
+            error={formik.touched.projectId && Boolean(formik.errors.projectId)}
+            helperText={formik.touched.projectId && formik.errors.projectId}
             variant="outlined"
             InputLabelProps={{ shrink: true }}
           >
             {!loadingProject &&
-            projectData.map((option) => (
-              <MenuItem key={option?.id} value={option?.id}>
-                {option?.projectName}
-              </MenuItem>
-            ))}
+              projectData.map((option) => (
+                <MenuItem
+                  key={option?.id}
+                  value={option?.id}
+                  sx={{ bgcolor: mode === "light" ? "" : "#413e3e" }}
+                >
+                  {option?.projectName}
+                </MenuItem>
+              ))}
           </TextField>
         </Grid>
 
