@@ -37,46 +37,6 @@ export default function Header({ open, handleDrawerOpen }) {
   const [showLength, setShowLength] = useState(true);
   const [openNotification, setOpenNotification] = useState(false);
   const [clearedNotification, setClearedNotification] = useState(false);
-  
-  // const today = new Date();
-  // const { data: upcomingBirthdayData, isloading } = useGetUpcomingBirthday();
-  // const thisMonth = today.getMonth();
-  // const thisDay = today.getDate();
-
-  // const thisDayBirthdays = upcomingBirthdayData
-  //   ? upcomingBirthdayData.filter((employee) => {
-  //       const dateOfBirth = new Date(employee.dateOfBirth);
-  //       return (
-  //         dateOfBirth.getMonth() === thisMonth &&
-  //         dateOfBirth.getDate() === thisDay
-  //       );
-  //     })
-  //   : [];
-
-
-  // const { mutate } = useRemoveNotification();
-
-
-  // const handleClearNotification = () => {
-  //   setOpenNotification(false);
-  //   setClearedNotification(true);
-  // };
-
-  // useEffect(() => {
-  //   if (clearedNotification) {
-  //     toast.success("Notifications cleared for today!", {
-  //       position: toast.POSITION.TOP_CENTER,
-  //       autoClose: 3000,
-  //     });
-  //     mutate();
-  //   }
-  // }, [clearedNotification, mutate]);
-
-  // useEffect(() => {
-  //   if (openNotification) {
-  //     mutate();
-  //   }
-  // }, [openNotification]);
 
   return (
     <AppBar position="fixed" open={open}>

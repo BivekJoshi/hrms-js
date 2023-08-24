@@ -3,8 +3,6 @@ import { nanoid } from "nanoid";
 import { Link, useLocation } from "react-router-dom";
 import { Breadcrumbs, Typography } from "@mui/material";
 import Loadable from "../app/components/Header/Loader/Loadable";
-import { EmployeeDashbord } from "../app/pages/EmployeePage/EmployeeDashbord";
-import useAuth from "../auth/hooks/component/login/useAuth";
 import ThemeModeContext from "../theme/ThemeModeContext";
 
 const ProfileDetail = Loadable(
@@ -77,7 +75,7 @@ const UserController = Loadable(
   lazy(() => import("../app/pages/Auth/UserControl/UserController"))
 );
 
-const routes = [
+const adminRoutes = [
   {
     path: "dashboard",
     name: "Dashboard",
@@ -223,15 +221,9 @@ const routes = [
     component: <UserController />,
     requiresSuperAdmin: true,
   },
-  {
-    path: "employeedashboard",
-    name: "Employ Dashboard",
-    id: nanoid(),
-    component: <EmployeeDashbord />,
-  },
 ];
 
-export { routes };
+export { adminRoutes };
 
 <Breadcrumbs aria-label="breadcrumb">
   <Link underline="hover" color="inherit" href="/">
@@ -251,7 +243,7 @@ export default function BreadCrumbs() {
   const { mode } = useContext(ThemeModeContext);
   const location = useLocation();
   const currentPath = location.pathname;
-  const currentRoute = routes.find(
+  const currentRoute = adminRoutes.find(
     (route) => "/admin/" + route?.path === currentPath
   );
 
