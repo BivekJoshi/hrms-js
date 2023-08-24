@@ -27,7 +27,7 @@ const AppBar = styled(MuiAppBar, {
   }),
 }));
 
-export default function Header({ open, handleDrawerOpen }) {
+export default function AdminHeader({ open, handleDrawerOpen }) {
   const { data: birthdayData } = useGetTodayBirthday();
   const { data: eventData } = useGetEventNotification();
   const { mode } = useContext(ThemeModeContext);
