@@ -32,7 +32,7 @@ const HocButton = ({
         backgroundColor: `${bg} "!important"`,
         color: { color },
         opacity: 1.7,
-        cursor: "no-drop",
+        cursor: "not-allowed",
       }}
       variant={variant}
       onClick={onClick}

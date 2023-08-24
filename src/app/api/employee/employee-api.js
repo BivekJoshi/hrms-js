@@ -8,7 +8,7 @@ export const getEmployee = async () => {
 
 {/*________________________GETBYPAGINATION_____________________________________*/ }
 export const getEmployeeData = async (pageNumber) => {
-  const data = await axiosInstance.get(`/employee/page-wise?pageNumber=${pageNumber}`);
+  const data = await axiosInstance.get(`/employee/get-all-page-wise/${pageNumber}/?pageSize=${pageNumber}&sortBy=id&sortDir=asc`);
   return data;
 };
 

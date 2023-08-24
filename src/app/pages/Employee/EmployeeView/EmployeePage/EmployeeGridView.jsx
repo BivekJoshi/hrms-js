@@ -1,19 +1,22 @@
-import { Grid, Box } from "@mui/material";
+import { Grid, Box, Pagination, Stack } from "@mui/material";
 import React, { useState } from "react";
 import EmployeeCard from "../../../../components/cards/Employee/EmployeeCard";
-import { PagePagination } from "../../../../components/Pagination/PagePagination";
+import { useGetEmployeeData } from "../../../../hooks/employee/useEmployee";
 
 const EmployeeGridView = ({ employeeData }) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(12);
+  const pageNumber = 12;
+  const { data: employeePageData } = useGetEmployeeData(pageNumber);
 
-  const employeArray = Array.isArray(employeeData) ? employeeData : employeeData ? Object.values(employeeData) : [];
+  const pageSize = employeePageData?.pageSize || 10;
+  const totalPages = employeePageData?.totalPages || 0;
 
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = employeArray.slice(indexOfFirstPost, indexOfLastPost);
+  const startIndex = (currentPage - 1) * pageSize;
+  const endIndex = startIndex + pageSize;
 
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const handlePageChange = (event, newPage) => {
+    setCurrentPage(newPage);
+  };
 
   return (
     <>
@@ -25,37 +28,40 @@ const EmployeeGridView = ({ employeeData }) => {
         sx={{
           display: "grid",
           gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-          gap: "1rem"
+          gap: "1rem",
         }}
       >
-        {currentPosts?.map((employee, index) => (
+        {employeeData?.slice(startIndex, endIndex).map((employee, index) => (
           <EmployeeCard
             key={index}
-            IsActive={employee?.isActive || ''}
-            EmployeeId={employee?.id || ''}
-            EFirstName={employee?.firstName || ''}
-            EMiddleName={employee?.middleName ||''}
-            ELastName={employee?.lastName ||''}
-            OfficeEmail={employee?.officeEmail || ''}
-            MobileNumber={employee?.mobileNumber || ''}
-            PositionName={employee?.position?.positionName || ''}
-            PositionLevel={employee?.position?.positionLevel || ''}
-            EGender={employee?.gender || ''}
-            EmployeeData={currentPosts}
-            ProgressBarRes={employee?.progressBarRes || ''}
+            IsActive={employee?.isActive || ""}
+            EmployeeId={employee?.id || ""}
+            EFirstName={employee?.firstName || ""}
+            EMiddleName={employee?.middleName || ""}
+            ELastName={employee?.lastName || ""}
+            OfficeEmail={employee?.officeEmail || ""}
+            MobileNumber={employee?.mobileNumber || ""}
+            PositionName={employee?.position?.positionName || ""}
+            PositionLevel={employee?.position?.positionLevel || ""}
+            EGender={employee?.gender || ""}
+            EmployeeData={employeeData}
+            ProgressBarRes={employee?.progressBarRes || ""}
             employeePhoto={employee?.employeePhotoPath}
           />
         ))}
       </Grid>
 
-      <Box padding="2rem" display="grid" justifyContent={"center"}>
-        <PagePagination
-          PostsPerPage={postsPerPage}
-          TotalPosts={employeArray.length}
-          CurrentPage={currentPage}
-          Paginate={paginate}
+      <Stack padding="2rem" display="grid" justifyContent={"center"}>
+        <Pagination
+          count={totalPages}
+          page={currentPage}
+          onChange={handlePageChange}
+          boundaryCount={3}
+          size="large"
+          color="primary"
+          
         />
-      </Box>
+      </Stack>
     </>
   );
 };
