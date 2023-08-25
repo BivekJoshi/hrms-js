@@ -26,7 +26,7 @@ const AppRoutes = () => {
             <Route path="/forgot-password" exact element={<ForgotPassword />} />
             <Route path="/hrms/user-activation" exact element={<RenamePassword />} />
        
-            <Route path="/admin/dashboard" element={<AccessControl Component={<AdminLayout />} /> }>
+            <Route path="/admin" element={<AccessControl Component={<AdminLayout />} /> }>
               <Route index element={<Dashboard />} />
                 {adminRoutes.map((route) => (
                   <Route
@@ -38,7 +38,7 @@ const AppRoutes = () => {
                 ))}
               </Route>
 
-            <Route path="/employee/dashboard" element={<AccessControl Component={<EmployeeLayout />} /> }>
+            <Route path="/employee" element={<AccessControl Component={<EmployeeLayout />} /> }>
                 <Route index element={<EmployeeDashbord />} />
                   {
                     employeeRoutes.map((route) => (

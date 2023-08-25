@@ -9,7 +9,7 @@ import { Button, Card, Fab, Switch, Typography } from "@mui/material";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { removeUser } from "../../utils/cookieHelper";
 import { ThemeModeContext } from "../../../theme/ThemeModeContext";
-import Header from "../Header/Header";
+import AdminHeader from "../Header/AdminHeader";
 import BreadCrumbs from "../../../routes/adminRoutes";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
@@ -69,7 +69,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
-export default function Sidebar() {
+export default function AdminSidebar() {
   const navigate = useNavigate();
   const location = useLocation();
   const [open, setOpen] = useState(false);
@@ -256,7 +256,7 @@ export default function Sidebar() {
 
   return (
     <Box sx={{ display: 'flex' }}>
-      <Header
+      <AdminHeader
         open={open}
         handleDrawerOpen={handleDrawerOpen}
         drawerWidth={drawerWidth}
