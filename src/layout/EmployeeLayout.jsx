@@ -30,8 +30,8 @@ const EmployeeLayout = () => {
       
     >
       <Stack spacing={2}>
-        <Button onClick={toggleDrawer}>
-          <CloseIcon />
+        <Button onClick={toggleDrawer} sx={{marginTop: "0.5rem", display: "flex",justifyContent: "row", flexDirection: "row-reverse", maxWidth: "fit-content"}}>
+          <CloseIcon sx={{fontSize: "3rem"}} />
         </Button>
         <Divider />
         <EmployeeSidebar />
