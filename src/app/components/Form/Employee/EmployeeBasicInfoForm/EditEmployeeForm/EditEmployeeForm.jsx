@@ -66,6 +66,7 @@ const EditEmployeeForm = () => {
           <EmployeeAddressDetailForm
             formik={permanentFormik}
             isLoading={addressLoading}
+            data={data}
           />
         );
 

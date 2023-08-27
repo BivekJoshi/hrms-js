@@ -4,20 +4,21 @@ import { getUser, removeUser } from "../app/utils/cookieHelper";
 import { Box, Container } from "@mui/material";
 import jwtDecode from "jwt-decode";
 
-const ProtectedRoute = ({ redirectTo , allowedRole }) => {
+const EmployeeProtectedRoute = ({ redirectTo }) => {
   const navigate = useNavigate();
   const user = getUser();
   const decode = jwtDecode(user);
   const userRole = decode?.userRoles?.[0]?.name;
- 
+  console.log(userRole)
+
   useEffect(() => {
     if (!userRole) {
       removeUser();
       navigate("/");
-    } else if ( userRole !== allowedRole ) {
-      navigate("/")
+    } else if (userRole === "ROLE_EMPLOYEE") {
+      navigate(redirectTo);
     }
-  }, []);
+  }, [userRole, navigate, redirectTo]);
 
   if (!userRole) return <Navigate to={redirectTo} replace />;
 
@@ -28,4 +29,4 @@ const ProtectedRoute = ({ redirectTo , allowedRole }) => {
   );
 };
 
-export default ProtectedRoute;
+export default EmployeeProtectedRoute;

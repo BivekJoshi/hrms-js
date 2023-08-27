@@ -37,7 +37,7 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                           placeholder="Enter the company name you worked last time"
                           fullWidth
                           value={employeeHistory.employerName}
-                          onChange={handleChange}
+                          onChange={formik.handleChange}
                           error={Boolean(
                             formik.touched.history?.[index]?.employerName &&
                               formik.errors.history?.[index]?.employerName
@@ -48,7 +48,7 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                           }
                           variant="outlined"
                           autoFocus
-                          InputlabelProps={{ shrink: true }}
+                          InputLabelProps={{ shrink: true }}
                         />
                       </Grid>
 
@@ -60,7 +60,7 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                           placeholder="Enter the company address you worked last time"
                           fullWidth
                           value={employeeHistory.employerAddress}
-                          onChange={handleChange}
+                          onChange={formik.handleChange}
                           error={Boolean(
                             formik.touched.history?.[index]?.employerAddress &&
                               formik.errors.history?.[index]?.employerAddress
@@ -71,14 +71,14 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                           }
                           variant="outlined"
                           autoFocus
-                          InputlabelProps={{ shrink: true }}
+                          InputLabelProps={{ shrink: true }}
                         />
                       </Grid>
                       <Grid item xs={12} sm={3}>
                         <TextField
                           id={`history[${index}].pastPosition`}
                           name={`history[${index}].pastPosition`}
-                          label="Past position"
+                          label="Past Position"
                           placeholder="Enter your past position"
                           fullWidth
                           value={employeeHistory.pastPosition}
@@ -93,7 +93,7 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                           }
                           variant="outlined"
                           autoFocus
-                          InputlabelProps={{ shrink: true }}
+                          InputLabelProps={{ shrink: true }}
                         />
                       </Grid>
                       <Grid item xs={12} sm={3}>
@@ -116,7 +116,7 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                           }
                           variant="outlined"
                           autoFocus
-                          InputlabelProps={{ shrink: true }}
+                          InputLabelProps={{ shrink: true }}
                         />
                       </Grid>
                       <Grid item xs={12} sm={3}>
@@ -139,7 +139,7 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                           }
                           variant="outlined"
                           autoFocus
-                          InputlabelProps={{ shrink: true }}
+                          InputLabelProps={{ shrink: true }}
                         />
                       </Grid>
                       <Grid item xs={12} sm={3}>
@@ -161,7 +161,7 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                           }
                           variant="outlined"
                           autoFocus
-                          InputlabelProps={{ shrink: true }}
+                          InputLabelProps={{ shrink: true }}
                         />
                       </Grid>
                       <Grid item xs={12} sm={3}>
@@ -169,7 +169,7 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                           id={`history[${index}].remarks`}
                           name={`history[${index}].remarks`}
                           label="Remarks"
-                          placeholder="remarks"
+                          placeholder="Remarks"
                           fullWidth
                           value={employeeHistory.remarks}
                           onChange={handleChange}
@@ -183,7 +183,7 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                           }
                           variant="outlined"
                           autoFocus
-                          InputlabelProps={{ shrink: true }}
+                          InputLabelProps={{ shrink: true }}
                         />
                       </Grid>
                       <Grid

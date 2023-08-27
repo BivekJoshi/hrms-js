@@ -1,9 +1,36 @@
-import React from "react";
-import { Grid, TextField, Button } from "@mui/material";
+import React, { useContext } from "react";
+import { Grid, TextField, Button, MenuItem } from "@mui/material";
 import { useRoleForm } from "../../../../hooks/auth/roles/RoleForm/useRoleForm";
+import ThemeModeContext from "../../../../../theme/ThemeModeContext";
 
-
+const roleStatus = [
+  {
+    value: "ROLE_SUPER_ADMIN",
+    label: "Super Admin",
+  },
+  {
+    value: "ROLE_MANAGER",
+    label: "Manager",
+  },
+  {
+    value: "ROLE_ADMIN",
+    label: "Admin",
+  },
+  {
+    value: "ROLE__HR_ADMIN",
+    label: "HR Admin",
+  },
+  {
+    value: "ROLE_HR_CLERK",
+    label: "HR Clerk",
+  },
+  {
+    value: "ROLE_EMPLOYEE",
+    label: "Employee",
+  },
+];
 export const AddRoleFields = ({ onClose,isLoading,data }) => {
+  const { mode } = useContext(ThemeModeContext);
   const { formik } = useRoleForm(data);
 
   const handleFormSubmit = async () => {
@@ -27,6 +54,7 @@ export const AddRoleFields = ({ onClose,isLoading,data }) => {
           <TextField
             id="name"
             name="name"
+            select
             label="Role Name"
             placeholder="Enter role you want to add..."
             fullWidth
@@ -38,7 +66,17 @@ export const AddRoleFields = ({ onClose,isLoading,data }) => {
             variant="outlined"
             autoFocus
             InputLabelProps={{ shrink: true }}
-          />
+          >
+             {roleStatus.map((option) => (
+              <MenuItem
+                key={option?.value}
+                value={option?.value}
+                sx={mode === "light" ? "" : { bgcolor: "#0B0E10" }}
+              >
+                {option?.label}
+              </MenuItem>
+            ))}
+          </TextField>
         </Grid>
 
         <Grid

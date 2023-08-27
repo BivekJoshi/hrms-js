@@ -58,7 +58,7 @@ export const useAddDocument = ({ onSuccess }) => {
     imgData.append("file", document);
     imgData.append("documentType", documentType);
     const { data } = await axiosInstance.post(
-      `/employee/document/upload-multipart-file/${id}`,
+      `/document/upload-multipart-file/${id}`,
       imgData,
       {
         headers: {
@@ -100,7 +100,7 @@ export const useAddProfile = ({ onSuccess }) => {
     imgData.append("file", document);
     imgData.append("documentType", documentType);
     const { data } = await axiosInstance.post(
-      `/employee/document/upload-employee-photo/${id}`,
+      `/document/upload-employee-photo/${id}`,
       imgData,
       {
         headers: {

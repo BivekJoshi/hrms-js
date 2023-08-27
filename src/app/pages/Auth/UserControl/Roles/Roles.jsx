@@ -1,25 +1,22 @@
 import React, { useState } from "react";
 import { useDeleteRole, useGetRole } from "../../../../hooks/auth/roles/useRole";
 import { Box, Button, Typography, Stack } from "@mui/material";
-import { AddRoleModal, EditPermissionRoleModal, EditRoleModal } from "./AddRoleModal";
+import { AddRoleModal, EditRoleModal } from "./AddRoleModal";
 import DeleteConfirmationModal from "../../../../components/Modal/DeleteConfirmationModal";
 
 const Roles = () => {
   const { data: roleData } = useGetRole();
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
-  const [openEditPermissionModal,setOpenEditPermissionModal]=useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
   const [editedRole, setEditedRole] = useState({});
-  const [editedPermissionRole,setEditedPermissionRole]=useState({});
   const [deletedRole, setDeletedRole] = useState({});
 
   const handleAddOpenModal = () => setOpenAddModal(true);
   const handleCloseAddModal = () => setOpenAddModal(false);
 
   const handleCloseEditModal = () => setOpenEditModal(false);
-  const handleCloseEditPermissionModal=()=>setOpenEditPermissionModal(false);
   const handleCloseDeleteModal = () => setOpenDeleteModal(false);
 
   const getRandomColor = () => {
@@ -29,13 +26,17 @@ const Roles = () => {
 
   const getRoleStyle = (roleName) => {
     switch (roleName) {
-      case "SUPER_ADMIN":
+      case "ROLE_SUPER_ADMIN":
         return { name: "Super Admin" };
-      case "HR_CLERK":
-        return { name: "HR Clerk" };
-      case "ADMIN":
+      case "ROLE_MANAGER":
+        return { name: "Manager" };
+      case "ROLE_ADMIN":
         return { name: "Admin" };
-      case "EMPLOYEE":
+        case "ROLE_HR_ADMIN":
+        return { name: "HR Admin" };
+        case "ROLE_HR_CLERK":
+        return { name: "HR Clerk" };
+      case "ROLE_EMPLOYEE":
         return { name: "Employee" };
       case "CLIENT":
         return { name: "Client" };
@@ -48,11 +49,6 @@ const Roles = () => {
     setEditedRole(roleId);
     setOpenEditModal(true);
   };
-
-  const handleEditPermissionRole=(roleId)=>{
-    setEditedPermissionRole(roleId);
-    setOpenEditPermissionModal(true);
-  }
 
   const deleteRoleMutation = useDeleteRole({});
   const handleDeleteRole = (roleId) => {
@@ -161,13 +157,6 @@ const Roles = () => {
         <EditRoleModal
           id={editedRole}
           open={openEditModal}
-          handleCloseModal={handleCloseEditModal}
-        />
-      )}
-      {openEditPermissionModal && (
-        <EditPermissionRoleModal
-          id={editedPermissionRole}
-          open={openEditPermissionModal}
           handleCloseModal={handleCloseEditModal}
         />
       )}
