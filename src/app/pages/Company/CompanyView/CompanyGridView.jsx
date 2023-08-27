@@ -20,7 +20,6 @@ const CompanyGridView = ({
   handleEditCompany,
   handleDeleteCompany,
 }) => {
-  
   return (
     <>
       <Grid
@@ -38,7 +37,7 @@ const CompanyGridView = ({
             key={index}
             sx={{
               border: "1px solid black",
-              borderRadius:"1rem",
+              borderRadius: "1rem",
               padding: "1rem",
               textAlignLast: "center",
               display: "grid",
@@ -73,7 +72,6 @@ const CompanyGridView = ({
                 justifyContent="flex-end"
                 alignItems="flex-end"
               >
-               
                 <HocButton
                   permissions={permissions.canDelete}
                   variant={"outlined"}
@@ -83,8 +81,8 @@ const CompanyGridView = ({
                   bg={"#d32f2f"}
                   buttonName={"Delete"}
                 />
-                 <HocButton
-                 permissions={permissions.canEdit}
+                <HocButton
+                  permissions={permissions.canEdit}
                   variant={"contained"}
                   color={"primary"}
                   onClick={() => handleEditCompany(item)}

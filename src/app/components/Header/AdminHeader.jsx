@@ -1,18 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { styled } from "@mui/material/styles";
 import MuiAppBar from "@mui/material/AppBar";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Box, IconButton, Stack, Toolbar, Typography } from "@mui/material";
-import {
-  useGetTodayBirthday,
-  useGetUpcomingBirthday,
-  useRemoveNotification,
-} from "../../hooks/birthday/useBirthday";
+import { useGetTodayBirthday } from "../../hooks/birthday/useBirthday";
 import Notification from "../../pages/Notification/Notification";
 import Profile from "../../pages/Auth/Profile/Profile";
-import { toast } from "react-toastify";
 import TodayBirthday from "../../pages/Birthday/TodayBirthday";
 import { useGetEventNotification } from "../../hooks/event/useEvent";
+import ThemeModeContext from "../../../theme/ThemeModeContext";
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -31,60 +27,19 @@ const AppBar = styled(MuiAppBar, {
   }),
 }));
 
-export default function Header({ open, handleDrawerOpen }) {
+export default function AdminHeader({ open, handleDrawerOpen }) {
   const { data: birthdayData } = useGetTodayBirthday();
-  const { data : eventData } = useGetEventNotification();
-  const [showLength, setShowLength] = useState(true);
-  const [openNotification, setOpenNotification] = useState(false);
-  const [clearedNotification, setClearedNotification] = useState(false);
-  
-  // const today = new Date();
-  // const { data: upcomingBirthdayData, isloading } = useGetUpcomingBirthday();
-  // const thisMonth = today.getMonth();
-  // const thisDay = today.getDate();
-
-  // const thisDayBirthdays = upcomingBirthdayData
-  //   ? upcomingBirthdayData.filter((employee) => {
-  //       const dateOfBirth = new Date(employee.dateOfBirth);
-  //       return (
-  //         dateOfBirth.getMonth() === thisMonth &&
-  //         dateOfBirth.getDate() === thisDay
-  //       );
-  //     })
-  //   : [];
-
-
-  // const { mutate } = useRemoveNotification();
-
-
-  // const handleClearNotification = () => {
-  //   setOpenNotification(false);
-  //   setClearedNotification(true);
-  // };
-
-  // useEffect(() => {
-  //   if (clearedNotification) {
-  //     toast.success("Notifications cleared for today!", {
-  //       position: toast.POSITION.TOP_CENTER,
-  //       autoClose: 3000,
-  //     });
-  //     mutate();
-  //   }
-  // }, [clearedNotification, mutate]);
-
-  // useEffect(() => {
-  //   if (openNotification) {
-  //     mutate();
-  //   }
-  // }, [openNotification]);
+  const { data: eventData } = useGetEventNotification();
+  const { mode } = useContext(ThemeModeContext);
 
   return (
     <AppBar position="fixed" open={open}>
       <Toolbar
         sx={{
-          display: "felx",
+          display: "flex",
           flexDirection: "row",
           justifyContent: "space-between",
+          bgcolor: mode === "light" ? "" : "#413e3e",
         }}
       >
         <Box display="flex" flexDirection="row" alignItems="center">
@@ -103,9 +58,9 @@ export default function Header({ open, handleDrawerOpen }) {
         </Box>
 
         <Stack flexDirection="row">
-            <TodayBirthday data={birthdayData} />
-            <Notification data={eventData} />
-            <Profile />
+          <TodayBirthday data={birthdayData} />
+          <Notification data={eventData} />
+          <Profile />
         </Stack>
       </Toolbar>
     </AppBar>
