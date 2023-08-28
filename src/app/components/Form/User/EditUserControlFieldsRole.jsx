@@ -1,16 +1,17 @@
 import React, { useContext } from "react";
 import { Grid, TextField, Button, MenuItem } from "@mui/material";
-import { useGetEmployee } from "../../../hooks/employee/useEmployee";
-import { useGetUserRole } from "../../../hooks/auth/userControl/useUserControl";
-import {
-  useAddUserControlForm,
-} from "../../../pages/Auth/UserControl/Users/useAddUserControlForm";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
+import { useEditUserControlForm } from "../../../pages/Auth/UserControl/Users/useEditUserControlForm";
+import { useGetUserControl, useGetUserRole } from "../../../hooks/auth/userControl/useUserControl";
 
-export const EditUserControlFieldsRole = ({ onClose }) => {
-  const { data: employeeData } = useGetEmployee();
+export const EditUserControlFieldsRole = ({ onClose ,rowData}) => {
+  console.log(rowData,"Hello");
+
+  const { data: userData } = useGetUserControl();
+
   const { data: userRoleData } = useGetUserRole();
-  const { formik } = useAddUserControlForm();
+
+  const { formik } = useEditUserControlForm({rowData});
   const { mode } = useContext(ThemeModeContext);
 
   const handleFormSubmit = async () => {
@@ -25,57 +26,27 @@ export const EditUserControlFieldsRole = ({ onClose }) => {
     }
   };
 
-  const handleUserNameChange = (event) => {
-    const selectedUserId = event.target.value;
-    const selectedEmployee = employeeData.find(
-      (employee) => employee?.id === selectedUserId
-    );
-    const selectedEmployeeEmail = selectedEmployee
-      ? selectedEmployee?.officeEmail
-      : "";
-    formik.setFieldValue("employeeId", selectedUserId);
-    formik.setFieldValue("email", selectedEmployeeEmail);
-  };
-
   return (
     <Grid container spacing={3}>
       <Grid item xs={12} sm={12}>
-        <TextField
-          id="employeeId"
-          name="employeeId"
+        {/* <TextField
+          id="rowData?.id"
+          name="userId"
           label="User Name"
           placeholder="Enter User name..."
           fullWidth
           required
           select
-          value={formik.values.employeeId}
-          onChange={handleUserNameChange}
-          error={formik.touched.employeeId && Boolean(formik.errors.employeeId)}
-          helperText={formik.touched.employeeId && formik.errors.employeeId}
+          value={formik.values.userId}
+          // onChange={handleUserNameChange}
+          error={formik.touched.userId && Boolean(formik.errors.userId)}
+          helperText={formik.touched.userId && formik.errors.userId}
           variant="outlined"
           autoFocus
           InputLabelProps={{ shrink: true }}
         >
-        </TextField>
-      </Grid>
-
-      <Grid item xs={12} sm={12}>
-        <TextField
-          id="email"
-          name="email"
-          label="Email"
-          placeholder="Enter email..."
-          type="email"
-          fullWidth
-          required
-          value={formik.values.email}
-          onChange={formik.handleChange}
-          error={formik.touched.email && Boolean(formik.errors.email)}
-          helperText={formik.touched.email && formik.errors.email}
-          variant="outlined"
-          autoFocus
-          InputLabelProps={{ shrink: true }}
-        />
+        </TextField> */}
+        <p>{rowData?.name}</p>
       </Grid>
 
       <Grid item xs={12} sm={12}>

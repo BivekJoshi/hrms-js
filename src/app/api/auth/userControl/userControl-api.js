@@ -38,8 +38,8 @@ export const editUserControlRoleSetting = async (formData) => {
 {
   /*________________________DELETE_____________________________________*/
 }
-export const deleteCompany = async (id) => {
-  const response = await axiosInstance.delete(`/user/${id}`);
+export const deleteUser = async (id) => {
+  const response = await axiosInstance.delete(`/user/set-activation/${id}?setIsActive=false`);
   return response.data;
 };
 

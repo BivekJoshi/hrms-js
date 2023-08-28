@@ -3,9 +3,9 @@ import {
   getUserControl,
   getUserControlById,
   addUserControl,
-  deleteCompany,
   getUserRole,
   editUserControlRoleSetting,
+  deleteUser,
 } from "../../../api/auth/userControl/userControl-api";
 import { toast } from "react-toastify";
 
@@ -66,9 +66,9 @@ export const useEditUserControl = ({ onSuccess }) => {
 };
 
 /*________________________DELETE_____________________________________*/
-export const useDeleteUserControl = ({ onSuccess }) => {
+export const useDeleteUserControl = ({ onSuccess ,rowData}) => {
   const queryClient = useQueryClient();
-  return useMutation(["deleteUserControl"], (id) => deleteCompany(id), {
+  return useMutation(["deleteUserControl"], (id) => deleteUser(rowData?.id), {
     onSuccess: (data, variables, context) => {
       toast.success("Successfully deleted user");
       onSuccess && onSuccess(data, variables, context);
