@@ -7,7 +7,7 @@ import { useGetEmployeeAttendanceById } from "../../../../../hooks/attendance/us
 import { useParams } from "react-router-dom";
 import HdrAutoOutlinedIcon from "@mui/icons-material/HdrAutoOutlined";
 import { TbCircleLetterP } from "react-icons/tb";
-import { Box, Typography } from "@mui/material";
+import { Box, Card, CardContent, Grid, Typography } from "@mui/material";
 import "../../Style/BasicInfoStyle.css";
 
 const AttendenceInfo = () => {
@@ -31,6 +31,108 @@ const AttendenceInfo = () => {
 
   return (
     <Box className={attendanceData ? "attendenceDesign" : ""}>
+      <Grid container spacing={3}>
+        <Grid item xs={4} sm={4}>
+          <Card variant="outlined">
+            <CardContent>
+              <Typography
+                gutterBottom
+                variant="h5"
+                component="div"
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  fontWeight: "bold",
+                  fontSize: "26px",
+                }}
+              >
+                Working Days
+              </Typography>
+              <Typography
+                gutterBottom
+                variant="h5"
+                component="div"
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  fontWeight: "bold",
+                  fontSize: "24px",
+                  color: "green",
+                }}
+              >
+                -
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item xs={4} sm={4}>
+          <Card variant="outlined">
+            <CardContent>
+              <Typography
+                gutterBottom
+                variant="h5"
+                component="div"
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  fontWeight: "bold",
+                  fontSize: "26px",
+                }}
+              >
+                Present Days
+              </Typography>
+              <Typography
+                gutterBottom
+                variant="h5"
+                component="div"
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  fontWeight: "bold",
+                  fontSize: "24px",
+                  color: "green",
+                }}
+              >
+                -
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item xs={4} sm={4}>
+          <Card variant="outlined">
+            <CardContent>
+              <Typography
+                gutterBottom
+                variant="h5"
+                component="div"
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  fontWeight: "bold",
+                  fontSize: "26px",
+                }}
+              >
+                Absent Days
+              </Typography>
+              <Typography
+                gutterBottom
+                variant="h5"
+                component="div"
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  fontWeight: "bold",
+                  fontSize: "24px",
+                  color: "green",
+                }}
+              >
+                -
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+      </Grid>
+      <br/>
       <FullCalendar
         ref={calendarRef}
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}

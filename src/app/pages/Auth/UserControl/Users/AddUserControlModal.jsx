@@ -1,6 +1,7 @@
 import React from 'react';
 import FormModal from '../../../../components/Modal/FormModal';
-import { AddPermissionFields, AddUserControlFields } from './AddUserControlFields';
+import { AddUserControlFields } from '../../../../components/Form/User/AddUserControlFields';
+import { EditUserControlFieldsRole } from '../../../../components/Form/User/EditUserControlFieldsRole';
 
 
 export const AddUserControlModal = ({ open, handleCloseModal }) => {
@@ -13,13 +14,12 @@ export const AddUserControlModal = ({ open, handleCloseModal }) => {
     )
 }
 
-
-export const AddUserPermissionModal = ({ open, handleCloseModal }) => {
+export const EditUserControlModal = ({ open, handleCloseModal,rowData }) => {
     return (
         <FormModal
             open={open}
             onClose={handleCloseModal}
-            formComponent={<AddPermissionFields onClose={handleCloseModal} />}
+            formComponent={<EditUserControlFieldsRole onClose={handleCloseModal} rowData={rowData}/>}
         />
     )
 }
