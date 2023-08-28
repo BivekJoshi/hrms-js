@@ -22,13 +22,12 @@ const ModalComponent = ({ open, handleSubmitModal, onClose, data }) => {
   const [openEmail, setOpenEmail] = useState(false);
 
   const handleEmailButtonClick = () => {
-    handleSubmitModal();
     setOpenEmail(true);
   };
 
   const handleCloseEmailform = () => {
     setOpenEmail(false);
-    onClose();
+    handleSubmitModal();
   };
 
   return (
@@ -52,7 +51,7 @@ const ModalComponent = ({ open, handleSubmitModal, onClose, data }) => {
               </Button>
               <Button
                 variant="contained"
-                onClick={onClose}
+                onClick={handleCloseEmailform}
                 sx={{ mt: 3, ml: 1 }}
                 color="error"
               >

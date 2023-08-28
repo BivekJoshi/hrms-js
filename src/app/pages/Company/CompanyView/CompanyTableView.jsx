@@ -4,6 +4,7 @@ import { Button, Stack } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import HocButton from "../../../hoc/hocButton";
+import PermissionHoc from "../../../hoc/permissionHoc";
 
 const CompanyTableView = ({
   permissions,
@@ -96,4 +97,4 @@ const CompanyTableView = ({
   );
 };
 
-export default CompanyTableView;
+export default PermissionHoc(CompanyTableView);

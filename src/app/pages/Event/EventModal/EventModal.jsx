@@ -10,7 +10,8 @@ import useEventForm from "../../../hooks/event/EventForm/useEventForm";
 import EmailToAll from "../../Email/EmailToAll";
 
 export const AddEventModal = ({ open, handleCloseModal }) => {
-  const [openSubmitModal, setOpenSubmitModal] = useState();
+  const [openSubmitModal, setOpenSubmitModal] = useState(false);
+  const [openConfirmationModal, setOpenConfirmationModal] = useState(false);
 
   const handleOpenSubmitModal = () => setOpenSubmitModal(true);
 
@@ -21,7 +22,7 @@ export const AddEventModal = ({ open, handleCloseModal }) => {
   const handleFormSubmit = async () => {
     formik.handleSubmit();
     if (!formik.isValidating && formik.isValid) {
-      // handleCloseModal();
+      setOpenConfirmationModal(true);
     } else {
       toast.error("Please make sure you have filled the form correctly");
     }
@@ -31,6 +32,11 @@ export const AddEventModal = ({ open, handleCloseModal }) => {
     setOpenEmail(true);
     setOpenSubmitModal(false);
   };
+
+  const handleCloseConfirmationModal = () => {
+    setOpenConfirmationModal(false);
+    handleCloseModal();
+  }
 
   return (
     <div>
@@ -71,7 +77,6 @@ export const AddEventModal = ({ open, handleCloseModal }) => {
         onClose={() => setOpenSubmitModal(false)}
         formComponent={
           <div>
-            <h2>Event Added Successfully!</h2>
             <p>Do you like to Email this event to Employee.</p>
             <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
               <Button
@@ -97,8 +102,8 @@ export const AddEventModal = ({ open, handleCloseModal }) => {
       />
 
       <FormModal
-        open={openEmail}
-        onClose={() => setOpenEmail(false)}
+        open={openConfirmationModal}
+        onClose={() => handleCloseConfirmationModal}
         formComponent={
           <div>
             <EmailToAll formik={formik} />

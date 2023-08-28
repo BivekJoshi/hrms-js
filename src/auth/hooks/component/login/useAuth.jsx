@@ -5,8 +5,10 @@ const useAuth = () => {
   const token  = getUser();
 
   let isSuperAdmin = false;
-  // let isHr = false;
+  let isManager = false;
   let isAdmin = false;
+  let isHrAdmin = false;
+  let isHrClerk = false;
   let isEmployee = false;
   let status = "";
 
@@ -15,25 +17,29 @@ const useAuth = () => {
     const { userRoles } = decoded;
 
     isSuperAdmin = userRoles.some(role => role?.name === "ROLE_SUPER_ADMIN");
+    isManager = userRoles.some(role => role?.name === "ROLE_MANAGER");
     isAdmin = userRoles.some(role => role?.name === "ROLE_ADMIN");
-    // isHr = userRoles.some(role => role?.name === "ROLE_HR_CLERK");
+    isHrAdmin = userRoles.some(role => role?.name === "ROLE_HR_ADMIN");
+    isHrClerk = userRoles.some(role => role?.name === "ROLE_HR_CLERK");
     isEmployee = userRoles.some(role => role?.name === "ROLE_EMPLOYEE");
 
     if(isSuperAdmin){
       status = "Super-Admin";
+    } else if (isManager) {
+      status = "Manager";
     } else if (isAdmin) {
       status = "Admin";
-    } 
-    // else if (isHr) {
-    //   status = "HR-Clerk";
-    // } 
-    else if (isEmployee) {
+    } else if (isHrAdmin) {
+      status = "HR-Admin";
+    } else if (isHrClerk) {
+      status = "HR-Clerk";
+    } else if (isEmployee) {
       status = "Employee";
     }
 
-    return { ...decoded, status, isSuperAdmin, isAdmin, isEmployee };
+    return { ...decoded, status, isSuperAdmin, isManager, isAdmin, isHrAdmin, isHrClerk, isEmployee };
   }
-  return { userName: "", userRoles: [], isSuperAdmin, isAdmin, isEmployee, status };
+  return { userName: "", userRoles: [], isSuperAdmin, isManager, isAdmin, isHrAdmin, isHrClerk, isEmployee, status };
 };
 
 export default useAuth;

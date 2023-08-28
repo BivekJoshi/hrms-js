@@ -3,13 +3,13 @@ import useAuth from "../../auth/hooks/component/login/useAuth";
 
 const PermissionHoc = (WrappedComponent) => {
     return (props) => {
-        const { isSuperAdmin, isEmployee } = useAuth();
+        const { isSuperAdmin, isManager, isAdmin, isHrAdmin, isHrClerk, isEmployee } = useAuth();
 
         const permissions = {
-            canView: isSuperAdmin,
-            canEdit: isSuperAdmin,
-            canDelete: isSuperAdmin,
-            canAdd: isSuperAdmin,
+            canView: isSuperAdmin || isManager || isAdmin || isHrAdmin || isHrClerk,
+            canEdit: isSuperAdmin || isManager || isAdmin || isHrAdmin,
+            canDelete: isSuperAdmin || isManager,
+            canAdd: isSuperAdmin || isManager || isAdmin || isHrAdmin,
             isEmployee: true,
         };
 

@@ -8,10 +8,9 @@ import { useGetHoliday } from "../../hooks/holiday/useHoliday";
 import { AddHolidayModal, OpenHoliday } from "./HolidayModal/HolidayModal";
 import CurrentHoliday from "./CurrentHoliday";
 import "./Style/Style.css";
-import useAuth from "../../../auth/hooks/component/login/useAuth";
+import PermissionHoc from "../../hoc/permissionHoc";
 
-const Holiday = () => {
-  const { isSuperAdmin, isAdmin, isHr, isEmployee } = useAuth();
+const Holiday = ({ permissions }) => {
   const { data: holidayData } = useGetHoliday();
 
   const [getID, setGetID] = useState({});
@@ -42,10 +41,6 @@ const Holiday = () => {
       setEvents(formattedEvents);
     }
   }, [holidayData]);
-
-  // const handleTodayClick = (events) => {
-  //   events.gotoDate(new Date());
-  // };
 
   return (
     <>
@@ -86,14 +81,10 @@ const Holiday = () => {
           customButtons={{
             customTodayButton: {
               text: "Today",
-              // click: function () {
-              //   handleTodayClick(events);
-              // },
             },
           }}
         />
       </Box>
-      {/* </Grid> */}
 
       {openAddModal && (
         <AddHolidayModal
@@ -113,4 +104,4 @@ const Holiday = () => {
   );
 };
 
-export default Holiday;
+export default PermissionHoc(Holiday);

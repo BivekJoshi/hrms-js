@@ -4,18 +4,17 @@ import { toast } from "react-toastify";
 import { useDeleteHoliday } from "../../../hooks/holiday/useHoliday";
 import useHolidayForm from "../../../hooks/holiday/HolidayForm/useHolidayForm";
 import ModalComponent from "../../Modal/ModalComponent";
-import useAuth from "../../../../auth/hooks/component/login/useAuth";
+import HocButton from "../../../hoc/hocButton";
+import PermissionHoc from "../../../hoc/permissionHoc";
 
-const HolidayFields = ({ onClose, isLoading, data }) => {
-  const { isSuperAdmin, isAdmin, isHr, isEmployee } = useAuth();
+const HolidayFields = ({ permissions, onClose, data }) => {
   const [openSubmitModal, setOpenSubmitModal] = useState(false);
+  const [confirmationModal, setConfirmationModal] =useState(false);
 
   const handleSubmitModal = () => {
     setOpenSubmitModal(true);
   };
-  const handleCloseModal = () => {
-    setOpenSubmitModal();
-  };
+
   const { formik } = useHolidayForm(data, handleSubmitModal, onClose);
 
   const handleFormSubmit = async () => {
@@ -23,10 +22,11 @@ const HolidayFields = ({ onClose, isLoading, data }) => {
 
     if (isValid) {
       formik.handleSubmit();
-
+      
       if (formik.isValid) {
-        // onClose();
-        // setOpenSubmitModal(false);
+        setConfirmationModal(true);
+        onClose();
+        
       } else {
         toast.error("Please make sure you have filled the form correctly");
       }
@@ -39,6 +39,10 @@ const HolidayFields = ({ onClose, isLoading, data }) => {
     onClose();
   };
   const submitButtonText = data ? "Update" : "Add Holiday";
+
+  const handleCloseConfirmationModal = () => {
+    setConfirmationModal(false);
+  };
 
   return (
     <>
@@ -111,24 +115,24 @@ const HolidayFields = ({ onClose, isLoading, data }) => {
           justifyContent="flex-end"
           alignItems="flex-end"
         >
-          {/* {(isSuperAdmin || isAdmin || isHr) && ( */}
+         
             <>
               {data ? (
-                <Button
-                  variant="contained"
+                <HocButton
+                permissions={permissions}
+                  variant={"contained"}
                   onClick={handleDeleteHoliday}
                   sx={{ mt: 3, ml: 1 }}
-                  color="error"
-                >
-                  Delete
-                </Button>
+                  color={"error"}
+                  buttonName={"Delete"}
+                />
               ) : (
                 ""
               )}
             </>
-          {/* )} */}
+       
 
-          {/* {(isSuperAdmin || isAdmin || isHr) && ( */}
+         
             <Button
               variant="contained"
               onClick={handleFormSubmit}
@@ -136,8 +140,7 @@ const HolidayFields = ({ onClose, isLoading, data }) => {
             >
               {submitButtonText}
             </Button>
-          {/* )} */}
-          {/* {(isSuperAdmin || isAdmin || isHr) && ( */}
+       
             <Button
               variant="contained"
               onClick={onClose}
@@ -146,19 +149,18 @@ const HolidayFields = ({ onClose, isLoading, data }) => {
             >
               Cancel
             </Button>
-          {/* )} */}
         </Grid>
       </Grid>
-      {openSubmitModal && (
+      
+      {confirmationModal && (
         <ModalComponent
-          open={openSubmitModal}
-          handleSubmitModal={handleSubmitModal}
+          open={confirmationModal}
           data={data}
-          onClose={handleCloseModal}
+          onClose={handleCloseConfirmationModal}
         />
       )}
     </>
   );
 };
 
-export default HolidayFields;
+export default PermissionHoc(HolidayFields);
