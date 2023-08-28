@@ -19,7 +19,7 @@ const Login = () => {
     handleMouseDownPassword,
   } = useLoginForm({});
   return (
-    <>
+    <Box height="100vh">
       <img
         className="wave2"
         src="https://raw.githubusercontent.com/sefyudem/Responsive-Login-Form/master/img/wave.png"
@@ -136,7 +136,7 @@ const Login = () => {
           </Box>
         </div>
       </div>
-    </>
+    </Box>
   );
 };
 

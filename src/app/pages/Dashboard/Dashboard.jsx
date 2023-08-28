@@ -24,13 +24,12 @@ const Dashboard = () => {
   const { data: dashboardData } = useGetDashboard();
   const { data: projectDataCount } = useGetProjectCount();
   const { data: projectData } = useGetProject();
-  const { data: pendingLeaveData, isLoading: loadingPendingLeave } = useGetPendingLeave();
+  const { data: pendingLeaveData, isLoading: loadingPendingLeave } =
+    useGetPendingLeave();
   const { data: employeeData } = useGetEmployee();
   const { data: eventData } = useGetEvent();
   const { data: holidayData } = useGetHoliday();
   const { data: userRoleData } = useGetUserRole();
-
-
 
   return (
     <Box sx={{ display: "grid", gridTemplateRows: "1fr", rowGap: "3rem" }}>
@@ -39,7 +38,7 @@ const Dashboard = () => {
         container
         rowSpacing={4.5}
         justifyContent="space-around"
-        gap={{sm:"1rem", lg:"0"}}
+        gap={{ sm: "1rem", lg: "0" }}
       >
         <DashboardCard
           title="Users"
@@ -109,7 +108,9 @@ const Dashboard = () => {
               flexDirection="row"
               justifyContent="space-between"
             >
-              <h3 style={{fontWeight:"800"}}>Total Project : {projectDataCount?.total}</h3>
+              <h3 style={{ fontWeight: "800" }}>
+                Total Project : {projectDataCount?.total}
+              </h3>
             </Typography>
           </Box>
           <ProjectProgressCard projectDataCount={projectDataCount} />
