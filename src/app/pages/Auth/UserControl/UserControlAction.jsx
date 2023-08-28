@@ -1,29 +1,59 @@
-import React, { useState } from 'react';
-import Button from '@mui/material/Button';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import React, { useState } from "react";
+import Button from "@mui/material/Button";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { EditUserControlModal } from "./Users/AddUserControlModal";
+import { useDeleteUserControl } from "../../../hooks/auth/userControl/useUserControl";
+import DeleteConfirmationModal from "../../../components/Modal/DeleteConfirmationModal";
 
-const UserControlAction = () => {
-  //   const [openAddModal, setOpenAddModal] = useState(false);
-  // const handlePermissionClick = () => setOpenAddModal(true);
-  // const handleCloseAddModal = () => setOpenAddModal(false);
+const UserControlAction = ({ rowData }) => {
+  // console.log(rowData);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
+  const [deletedUser, setDeletedUser] = useState({});
+
+  const handleCloseDeleteModal = () => setOpenDeleteModal(false);
+
+  const deleteUserMutation = useDeleteUserControl({rowData});
+  const handleDeleteButton = (rowData) => {
+    setDeletedUser(rowData);
+    setOpenDeleteModal(true);
+  };
+
+  const handleConfirmDelete = () => {
+    deleteUserMutation.mutate(deletedUser.id);
+    setOpenDeleteModal(false);
+  };
   const open = Boolean(anchorEl);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
+  const handleEditButton = () => {
+    setIsEditModalOpen(true);
+    handleClose();
+  };
+
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleCloseEditModal = () => {
+    setIsEditModalOpen(false);
+    handleClose();
   };
 
   return (
     <div>
       <Button
         id="basic-button"
-        aria-controls={open ? 'basic-menu' : undefined}
+        aria-controls={open ? "basic-menu" : undefined}
         aria-haspopup="true"
-        aria-expanded={open ? 'true' : undefined}
+        aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
       >
         <MoreVertIcon />
@@ -34,22 +64,30 @@ const UserControlAction = () => {
         open={open}
         onClose={handleClose}
         MenuListProps={{
-          'aria-labelledby': 'basic-button',
+          "aria-labelledby": "basic-button",
         }}
       >
-        {/* <MenuItem onClick={handlePermissionClick}>Permission</MenuItem> */}
-        <MenuItem onClick={handleClose}>Edit</MenuItem>
-        <MenuItem onClick={handleClose}>Delete</MenuItem>
+        <MenuItem onClick={handleEditButton}>Edit</MenuItem>
+        <MenuItem onClick={handleDeleteButton}>Delete</MenuItem>
       </Menu>
 
-      {/* {openAddModal && (
-        <AddUserPermissionModal
-          open={openAddModal}
-          handleCloseModal={handleCloseAddModal}
+      {isEditModalOpen && (
+        <EditUserControlModal
+          rowData={rowData}
+          open={isEditModalOpen}
+          handleCloseModal={handleCloseEditModal}
         />
-      )} */}
+      )}
+      {openDeleteModal && (
+        <DeleteConfirmationModal
+          open={openDeleteModal}
+          handleCloseModal={handleCloseDeleteModal}
+          handleConfirmDelete={handleConfirmDelete}
+          message={"User"}
+        />
+      )}
     </div>
   );
-}
+};
 
 export default UserControlAction;

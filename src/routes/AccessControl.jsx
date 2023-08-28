@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
+
 import { useNavigate } from "react-router-dom";
+
 import { getUser, removeUser } from "../app/utils/cookieHelper";
+
 import jwtDecode from "jwt-decode";
+
 import Loader from "../app/components/Header/Loader/Loader";
 
 export const AccessControl = ({ Component }) => {

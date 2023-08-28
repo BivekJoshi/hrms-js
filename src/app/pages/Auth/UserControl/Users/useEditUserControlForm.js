@@ -1,18 +1,18 @@
-import React from 'react';
 import { useFormik } from 'formik';
-import { useAddUserControl } from '../../../../hooks/auth/userControl/useUserControl';
+import { useEditUserControl } from '../../../../hooks/auth/userControl/useUserControl';
 import { UserSchema } from './userSchema/UserSchema';
 
 
-export const useAddUserControlForm = () => {
-    const { mutate } = useAddUserControl({});
+export const useEditUserControlForm = ({rowData}) => {
+    // console.log(rowData?.id);
+    const { mutate } = useEditUserControl({});
 
     const formik = useFormik({
         initialValues: {
-            employeeId: "",
+            userId: rowData?.id||"",
             roleId: "",
         },
-        validationSchema: UserSchema,
+        // validationSchema: UserSchema,
         onSubmit: (values) => {
             handleRequest(values);
         },

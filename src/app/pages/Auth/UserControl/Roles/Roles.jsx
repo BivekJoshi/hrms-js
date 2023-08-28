@@ -129,13 +129,6 @@ const Roles = () => {
                     Edit
                   </Button>
                   <Button
-                    color="primary"
-                    variant="contained"
-                    onClick={() => handleEditPermissionRole(role?.id)}
-                  >
-                    Add Permission
-                  </Button>
-                  <Button
                     color="error"
                     variant="contained"
                     onClick={() => handleDeleteRole(role?.id)}
