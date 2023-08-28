@@ -22,8 +22,8 @@ const EmployeeDashboard = Loadable(
     import("../app/pages/EmployeePage/EmployeeDashboard/EmployeeDashbord")
   )
 );
-const { data: loggedUserData } = useGetLoggedInUser();
-console.log(loggedUserData);
+// const { data: loggedUserData } = useGetLoggedInUser();
+// console.log(loggedUserData);
 const employeeRoutes = [
   {
     path: "dashboard",
@@ -31,12 +31,12 @@ const employeeRoutes = [
     id: nanoid(),
     component: <EmployeeDashboard />,
   },
-  {
-    path: `viewprofile/${loggedUserData?.id}`,
-    name: "Profile",
-    id: nanoid(),
-    component: <EmployeeProfile />,
-  },
+  // {
+  //   path: `viewprofile/${loggedUserData?.id}`,
+  //   name: "Profile",
+  //   id: nanoid(),
+  //   component: <EmployeeProfile />,
+  // },
   {
     path: "leavetype",
     name: "Leave Type",

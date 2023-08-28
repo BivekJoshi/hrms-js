@@ -12,6 +12,7 @@ const primaryColor = "#1c7ed6";
 
 export const PersonalProfile = ({ data }) => {
   const { mode } = useContext(ThemeModeContext);
+  console.log({"data": data?.uploadFiles?.[0]})
   return (
     <>
       <Grid
