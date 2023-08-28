@@ -14,13 +14,28 @@ const roleType = [
   },
   {
     name: "ROLE_ADMIN",
-    label: "ADMIN",
+    label: "Admin",
     id: 2,
+  },
+  {
+    name: "ROLE_MANAGER",
+    label: "Manager",
+    id: 3,
+  },
+  {
+    name: "ROLE_HR_ADMIN",
+    label: "HR Admin",
+    id: 1,
+  },
+  {
+    name: "RROLE_HR_CLERK",
+    label: "HR Clerk",
+    id: 1,
   },
   {
     name: "ROLE_EMPLOYEE",
     label: "Employee",
-    id: 3,
+    id: 1,
   },
 ];
 

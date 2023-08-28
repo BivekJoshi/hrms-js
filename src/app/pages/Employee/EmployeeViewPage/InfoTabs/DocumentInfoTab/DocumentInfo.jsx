@@ -20,11 +20,13 @@ const DocumentInfo = () => {
     setValue(newValue);
   };
 
-  const groupedDocuments = isLoading ? {} : groupBy(getDocument, "documentType");
+  const groupedDocuments = isLoading
+    ? {}
+    : groupBy(getDocument, "documentType");
 
   return (
     // {data?():()}
-    <Box sx={{ width: "100%" }}>
+    <Box>
       <TabContext value={value}>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <TabList onChange={handleChange} aria-label="lab API tabs example">
@@ -32,11 +34,7 @@ const DocumentInfo = () => {
               <p>Loding..</p>
             ) : (
               Object.keys(groupedDocuments).map((documentType, index) => (
-                <Tab
-                  key={index}
-                  label={documentType}
-                  value={documentType}
-                />
+                <Tab key={index} label={documentType} value={documentType} />
               ))
             )}
           </TabList>
@@ -45,7 +43,15 @@ const DocumentInfo = () => {
           <TabPanel value="1">Loading...</TabPanel>
         ) : (
           Object.keys(groupedDocuments).map((documentType) => (
-            <TabPanel key={documentType} value={documentType} sx={{display:"grid", gridTemplateColumns:"repeat(2, 1fr)", gap:"1rem"}}>
+            <TabPanel
+              key={documentType}
+              value={documentType}
+              sx={{
+                display: "grid",
+                gridTemplateColumns: "repeat(2, 1fr)",
+                gap: "1rem",
+              }}
+            >
               {groupedDocuments[documentType].map((document) => (
                 <img
                   key={document.id}

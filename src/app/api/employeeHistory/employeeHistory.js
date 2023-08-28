@@ -2,14 +2,14 @@ import { axiosInstance } from "../../../auth/axiosInterceptor";
 
 {/*________________________POST_____________________________________*/ }
 export const addEmployeeHistory = async (formData, id) => {
-    const data = await axiosInstance.post(`/employment-history/${id}`, formData?.history);
+    const data = await axiosInstance.post(`/employment-history/create/${id}`, formData?.history);
     return data;
 };
 
 {/*________________________GETBYID_____________________________________*/ }
 export const getEmployeeHistoryById = (id) => {
     if (id) {
-        const data = axiosInstance.get(`/employment-history/emp-history/${id}`);
+        const data = axiosInstance.get(`/employment-history/emp-history-id/${id}`);
         return data;
     }
 };
@@ -30,6 +30,6 @@ export const deleteEmployeeHistory = async (employeeHistoryId) => {
 
 {/*________________________EDIT_____________________________________*/ }
 export const editEmployeeHistory = async (formData, id) => {
-    const data = await axiosInstance.put(`/employee-history/${id}`, formData?.history);
+    const data = await axiosInstance.put(`/employment-history/update/${id}`, formData?.history);
     return data;
 };

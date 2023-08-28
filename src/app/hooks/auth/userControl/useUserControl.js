@@ -3,10 +3,9 @@ import {
   getUserControl,
   getUserControlById,
   addUserControl,
-  editUserControl,
-  deleteCompany,
   getUserRole,
-  addPermissionRole,
+  editUserControlRoleSetting,
+  deleteUser,
 } from "../../../api/auth/userControl/userControl-api";
 import { toast } from "react-toastify";
 
@@ -51,8 +50,8 @@ export const useAddUserControl = ({ onSuccess }) => {
 export const useEditUserControl = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(
-    ["editUserControl"],
-    (formData) => editUserControl(formData),
+    ["editUserControlRoleSetting"],
+    (formData) => editUserControlRoleSetting(formData),
     {
       onSuccess: (data, variables, context) => {
         toast.success("successfully edited user");
@@ -67,9 +66,9 @@ export const useEditUserControl = ({ onSuccess }) => {
 };
 
 /*________________________DELETE_____________________________________*/
-export const useDeleteUserControl = ({ onSuccess }) => {
+export const useDeleteUserControl = ({ onSuccess ,rowData}) => {
   const queryClient = useQueryClient();
-  return useMutation(["deleteUserControl"], (id) => deleteCompany(id), {
+  return useMutation(["deleteUserControl"], (id) => deleteUser(rowData?.id), {
     onSuccess: (data, variables, context) => {
       toast.success("Successfully deleted user");
       onSuccess && onSuccess(data, variables, context);
@@ -93,23 +92,4 @@ export const useDeleteUserControl = ({ onSuccess }) => {
       refetchInterval: false,
       refetchOnWindowFocus: false,
     });
-  };
-
-    {/*____________________________PUT-Permission____________________________________________*/}
-  export const useAddPermissionRole = ({ onSuccess }) => {
-    const queryClient = useQueryClient();
-    return useMutation(
-      ["editPermission"],
-      (formData) => addPermissionRole(formData),
-      {
-        onSuccess: (data, variables, context) => {
-          toast.success("successfully edited user");
-          onSuccess && onSuccess(data, variables, context);
-          queryClient.invalidateQueries("getUserRole");
-        },
-        onError: (err, _variables, _context) => {
-          toast.error(`Error: ${err.message}`);
-        },
-      }
-    );
   };

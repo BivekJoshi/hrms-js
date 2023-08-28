@@ -87,6 +87,16 @@ export default function EmployeeSidebar() {
       subMenus: [],
     },
     {
+      name: "My Profile",
+      icon: (
+        <DashboardIcon
+          sx={mode === "light" ? { color: "black" } : { color: "white" }}
+        />
+      ),
+      path: "profile",
+      subMenus: [],
+    },
+    {
       name: "Apply Leave",
       path: "leave",
       icon: (
