@@ -2,7 +2,6 @@ import React, { lazy, useContext } from "react";
 import { nanoid } from "nanoid";
 import Loadable from "../app/components/Header/Loader/Loadable";
 import LeaveType from "../app/pages/LeaveType/LeaveType";
-import Employee from "../app/pages/Employee/Employee";
 import Leave from "../app/pages/Leave/Leave";
 import Designation from "../app/pages/Designation/Designation";
 import Company from "../app/pages/Company/Company";
@@ -15,19 +14,28 @@ import ResetPassword from "../app/pages/Auth/ResetPassword/ResetPassword";
 import { Breadcrumbs, Typography } from "@mui/material";
 import { Link, useLocation } from "react-router-dom";
 import ThemeModeContext from "../theme/ThemeModeContext";
+import EmployeeProfile from "../app/pages/Employee/EmployeeViewPage/EmployProfile/EmployeeProfile";
+import { useGetLoggedInUser } from "../app/hooks/auth/usePassword";
 
 const EmployeeDashboard = Loadable(
   lazy(() =>
     import("../app/pages/EmployeePage/EmployeeDashboard/EmployeeDashbord")
   )
 );
-
+const { data: loggedUserData } = useGetLoggedInUser();
+console.log(loggedUserData);
 const employeeRoutes = [
   {
     path: "dashboard",
     name: "Employee Dashboard",
     id: nanoid(),
     component: <EmployeeDashboard />,
+  },
+  {
+    path: `viewprofile/${loggedUserData?.id}`,
+    name: "Profile",
+    id: nanoid(),
+    component: <EmployeeProfile />,
   },
   {
     path: "leavetype",
