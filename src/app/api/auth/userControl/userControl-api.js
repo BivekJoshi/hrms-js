@@ -30,9 +30,8 @@ export const addUserControl = async (formData) => {
 {
   /*________________________EDIT_____________________________________*/
 }
-export const editUserControl = async (formData) => {
-  const { id } = formData;
-  const data = await axiosInstance.put(`/user/${id}`, formData);
+export const editUserControlRoleSetting = async (formData) => {
+  const data = await axiosInstance.put(`/user/role-setting`);
   return data;
 };
 
@@ -49,17 +48,5 @@ export const deleteCompany = async (id) => {
 }
 export const getUserRole = async () => {
   const data = await axiosInstance.get(`/role/get-all`);
-  return data;
-};
-
-{
-  /*____________________________POST-PERMISSION____________________________________________*/
-}
-export const addPermissionRole = async (formData) => {
-  const { roleId, userId, addRole } = formData;
-  const data = await axiosInstance.post(
-    `/user/role-setting?userId=${userId}&roleId=${roleId}&addRole=${addRole}`,
-    formData
-  );
   return data;
 };

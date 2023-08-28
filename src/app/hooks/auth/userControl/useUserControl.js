@@ -3,10 +3,9 @@ import {
   getUserControl,
   getUserControlById,
   addUserControl,
-  editUserControl,
   deleteCompany,
   getUserRole,
-  addPermissionRole,
+  editUserControlRoleSetting,
 } from "../../../api/auth/userControl/userControl-api";
 import { toast } from "react-toastify";
 
@@ -51,8 +50,8 @@ export const useAddUserControl = ({ onSuccess }) => {
 export const useEditUserControl = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(
-    ["editUserControl"],
-    (formData) => editUserControl(formData),
+    ["editUserControlRoleSetting"],
+    (formData) => editUserControlRoleSetting(formData),
     {
       onSuccess: (data, variables, context) => {
         toast.success("successfully edited user");
@@ -93,23 +92,4 @@ export const useDeleteUserControl = ({ onSuccess }) => {
       refetchInterval: false,
       refetchOnWindowFocus: false,
     });
-  };
-
-    {/*____________________________PUT-Permission____________________________________________*/}
-  export const useAddPermissionRole = ({ onSuccess }) => {
-    const queryClient = useQueryClient();
-    return useMutation(
-      ["editPermission"],
-      (formData) => addPermissionRole(formData),
-      {
-        onSuccess: (data, variables, context) => {
-          toast.success("successfully edited user");
-          onSuccess && onSuccess(data, variables, context);
-          queryClient.invalidateQueries("getUserRole");
-        },
-        onError: (err, _variables, _context) => {
-          toast.error(`Error: ${err.message}`);
-        },
-      }
-    );
   };

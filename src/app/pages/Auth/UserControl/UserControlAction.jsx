@@ -5,9 +5,7 @@ import MenuItem from '@mui/material/MenuItem';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 const UserControlAction = () => {
-  //   const [openAddModal, setOpenAddModal] = useState(false);
-  // const handlePermissionClick = () => setOpenAddModal(true);
-  // const handleCloseAddModal = () => setOpenAddModal(false);
+
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -37,17 +35,9 @@ const UserControlAction = () => {
           'aria-labelledby': 'basic-button',
         }}
       >
-        {/* <MenuItem onClick={handlePermissionClick}>Permission</MenuItem> */}
         <MenuItem onClick={handleClose}>Edit</MenuItem>
         <MenuItem onClick={handleClose}>Delete</MenuItem>
       </Menu>
-
-      {/* {openAddModal && (
-        <AddUserPermissionModal
-          open={openAddModal}
-          handleCloseModal={handleCloseAddModal}
-        />
-      )} */}
     </div>
   );
 }
