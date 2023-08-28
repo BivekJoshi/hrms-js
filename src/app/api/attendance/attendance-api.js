@@ -8,7 +8,7 @@ export const getAttendance = async () => {
 {/*________________________GETEMPLOYEEATTENDANCEBYID_____________________________________*/ }
 export const getEmployeeAttendanceById = async (id) => {
   if (id) {
-    const data = await axiosInstance.get(`/attendance/${id}`);
+    const data = await axiosInstance.get(`/attendance/employee-id/${id}`);
     return data;
   }
 };
