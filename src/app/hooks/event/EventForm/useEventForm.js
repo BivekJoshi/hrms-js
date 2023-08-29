@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 import { useAddEvent, useEditEvent } from "../useEvent";
 import { EventSchema } from "../Validation/EventSchema";
 
-const useEventForm = (handleOpenSubmitModal,handleCloseModal) => {
+const useEventForm = (handleOpenSubmitModal) => {
   const { mutate: addEvent, data } = useAddEvent({});
   const { mutate: editEvent } = useEditEvent({});
 

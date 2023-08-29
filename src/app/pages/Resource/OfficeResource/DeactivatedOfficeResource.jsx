@@ -1,17 +1,17 @@
 import MaterialTable from "material-table";
 import React from "react";
 import tableIcons from "../../../../theme/overrides/TableIcon";
-import { useGetDeactivatedOfficeResource } from "../../../hooks/resource/officeResource/useOfficeResource";
+import {  useGetDeactivatedOfficeResource } from "../../../hooks/resource/officeResource/useOfficeResource";
 import { Button, Stack } from "@mui/material";
-import useOfficeResourceForm from "../../../hooks/resource/officeResource/OfficeResourceForm/useOfficeResourceForm";
+import useOfficeResourceInactiveForm from "../../../hooks/resource/officeResource/OfficeResourceForm/useOfficeResourceInactiveForm";
 
 const DeactivatedOfficeResource = () => {
   const { data, isLoading } = useGetDeactivatedOfficeResource();
 
-  const { formik } = useOfficeResourceForm(data);
-
+  const { formik } = useOfficeResourceInactiveForm(data);
   const handleActivate = (rowData) => {
-    formik.setFieldValue("activated", true);
+    const id = rowData.id;
+    console.log(id);
   };
 
   const columns = [
@@ -46,7 +46,7 @@ const DeactivatedOfficeResource = () => {
       title: "Actions",
       render: (rowData) => (
         <Stack direction="row" spacing={0}>
-          <Button color="primary" onClick={() => handleActivate(rowData.id)}>
+          <Button color="primary" onClick={() => handleActivate(rowData)}>
             Activate
           </Button>
         </Stack>
