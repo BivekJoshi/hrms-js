@@ -15,15 +15,15 @@ import { Breadcrumbs, Typography } from "@mui/material";
 import { Link, useLocation } from "react-router-dom";
 import ThemeModeContext from "../theme/ThemeModeContext";
 import EmployeeProfile from "../app/pages/Employee/EmployeeViewPage/EmployProfile/EmployeeProfile";
-import { useGetLoggedInUser } from "../app/hooks/auth/usePassword";
+// import { useGetLoggedInUser } from "../app/hooks/auth/usePassword";
 
 const EmployeeDashboard = Loadable(
   lazy(() =>
     import("../app/pages/EmployeePage/EmployeeDashboard/EmployeeDashbord")
   )
 );
-const { data: loggedUserData } = useGetLoggedInUser();
-console.log(loggedUserData);
+// const { data: loggedUserData } = useGetLoggedInUser();
+// console.log(loggedUserData);
 const employeeRoutes = [
   {
     path: "dashboard",
@@ -31,12 +31,12 @@ const employeeRoutes = [
     id: nanoid(),
     component: <EmployeeDashboard />,
   },
-  {
-    path: `viewprofile/${loggedUserData?.id}`,
-    name: "Profile",
-    id: nanoid(),
-    component: <EmployeeProfile />,
-  },
+  // {
+  //   path: `viewprofile/${loggedUserData?.id}`,
+  //   name: "Profile",
+  //   id: nanoid(),
+  //   component: <EmployeeProfile />,
+  // },
   {
     path: "leavetype",
     name: "Leave Type",

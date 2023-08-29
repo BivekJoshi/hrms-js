@@ -93,7 +93,7 @@ export default function EmployeeSidebar() {
           sx={mode === "light" ? { color: "black" } : { color: "white" }}
         />
       ),
-      path: "viewprofile/:id",
+      path: "profile",
       subMenus: [],
     },
     {
