@@ -37,7 +37,10 @@ export const addofficeResource = async (formData) => {
 }
 export const editofficeResource = async (formData) => {
   const { id } = formData;
-  const data = await axiosInstance.put(`/office-resource/update/${id}`, formData);
+  const data = await axiosInstance.put(
+    `/office-resource/update/${id}`,
+    formData
+  );
   return data;
 };
 
@@ -48,6 +51,15 @@ export const editofficeResourceActiveInactive = async (formData) => {
   const { id, isActive } = formData;
   const data = await axiosInstance.put(
     `/office-resource/set-activation/${id}?isActive=${isActive}`,
+    formData
+  );
+  return data;
+};
+
+export const editofficeResourceInactive = async (formData) => {
+  const { id } = formData;
+  const data = await axiosInstance.put(
+    `/office-resource/set-activation/${id}?isActive=true`,
     formData
   );
   return data;

@@ -52,9 +52,9 @@ const EmailToAll = ({ open, onClose, eventId }) => {
 
   return (
     <>
-      <FormModal
+      {/* <FormModal
         onClose={onClose}
-        formComponent={
+        formComponent={ */}
           <form onSubmit={handleSubmit}>
             <h2>Email</h2>
             <Box style={{ width: "400px" }}>
@@ -84,8 +84,8 @@ const EmailToAll = ({ open, onClose, eventId }) => {
               </Grid>
             </Box>
           </form>
-        }
-      />
+        {/* }
+      /> */}
     </>
   );
 };

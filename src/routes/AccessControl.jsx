@@ -23,7 +23,12 @@ export const AccessControl = ({ Component }) => {
     if (!userRole) {
       removeUser();
       navigate("/");
-    } else if (userRole === "ROLE_SUPER_ADMIN" || userRole === "ROLE_MANAGER") {
+    } else if (
+      userRole === "ROLE_SUPER_ADMIN" ||
+      userRole === "ROLE_MANAGER" ||
+      userRole === "ROLE_ADMIN" ||
+      userRole === "ROLE_HRCLERK"
+    ) {
       navigate("/admin/dashboard");
     } else if (userRole === "ROLE_EMPLOYEE") {
       navigate("/employee/dashboard");
