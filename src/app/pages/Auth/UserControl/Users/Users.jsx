@@ -28,7 +28,7 @@ const roleType = [
     id: 1,
   },
   {
-    name: "RROLE_HR_CLERK",
+    name: "ROLE_HR_CLERK",
     label: "HR Clerk",
     id: 1,
   },

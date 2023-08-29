@@ -93,7 +93,6 @@ const Holiday = () => {
           }}
         />
       </Box>
-      {/* </Grid> */}
 
       {openAddModal && (
         <AddHolidayModal
