@@ -70,7 +70,7 @@ export const RightEmployDashbord = (props) => {
               6<Typography>LEAVE TAKEN</Typography>
             </Box>
             <Divider sx={{ border: "1px solid black" }} />
-            <Box>
+            <Box alignSelf="center">
               <Typography>6</Typography> REMAINING
             </Box>
           </Box>
