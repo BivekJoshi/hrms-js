@@ -19,6 +19,8 @@ const AcademicsInfo = ({ data }) => {
             flex: 0,
             padding: 0,
           },
+          marginTop:"0rem"
+
         }}
       >
         {data.qualifications
