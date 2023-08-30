@@ -122,7 +122,7 @@ const adminRoutes = [
     path: "designation",
     name: "Designation",
     id: nanoid(),
-    component: <Designation />,
+    component: <Designation  componentName="designation" />,
   },
   {
     path: "company",

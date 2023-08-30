@@ -12,32 +12,21 @@ const HocButton = ({
   disabledIcon,
   color,
 }) => {
-  return permissions ? (
+  const isDiabled = !permissions === false;
+
+  return (
     <Button
       sx={{
         ...sx,
-        backgroundColor: bg,
-        color: color,
+        backgroundColor:isDiabled ? `${bg} "!important"` : bg,
+        color: isDiabled ? color : color,
+        opacity : isDiabled ? 0.7 : 1,
+        cursor: isDiabled ? "not-allowed !important" : "pointer",
       }}
       variant={variant}
-      onClick={onClick}
+      onClick={isDiabled ? null : onClick}
     >
-      {icon || buttonName}
-    </Button>
-  ) : (
-    <Button
-      disabled
-      sx={{
-        ...sx,
-        backgroundColor: `${bg} "!important"`,
-        color: { color },
-        opacity: 1.7,
-        cursor: "not-allowed",
-      }}
-      variant={variant}
-      onClick={onClick}
-    >
-      {disabledIcon || icon || buttonName}
+      {isDiabled ? (disabledIcon || icon || buttonName) : icon || buttonName}
     </Button>
   );
 };

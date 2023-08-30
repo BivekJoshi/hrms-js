@@ -7,12 +7,16 @@ import Male from "../../../../../../assets/male.png";
 import Female from "../../../../../../assets/female.png";
 import BasicInfo from "./BasicInfo";
 import ThemeModeContext from "../../../../../../theme/ThemeModeContext";
+import { DOC_URL } from "../../../../../../auth/axiosInterceptor";
 
 const primaryColor = "#1c7ed6";
 
 export const PersonalProfile = ({ data }) => {
   const { mode } = useContext(ThemeModeContext);
-  console.log({"data": data?.uploadFiles?.[0]})
+  const photo = data?.uploadFiles;
+  const employeePhoto = photo.find(file => file?.documentType === "EMPLOYEE_PHOTO");
+  const filePath = employeePhoto ? DOC_URL + employeePhoto.path : (data?.gender === "MALE" ? Male : Female);
+
   return (
     <>
       <Grid
@@ -27,6 +31,7 @@ export const PersonalProfile = ({ data }) => {
         }}
       >
         <Box className="profileInfo">
+         
           <Avatar
             sx={{
               width: 190,
@@ -35,7 +40,7 @@ export const PersonalProfile = ({ data }) => {
               alignSelf: "center",
             }}
             variant="circle"
-            src={data?.gender === "MALE" ? Male : Female}
+            src={filePath}
           />
           <Typography
             sx={{
