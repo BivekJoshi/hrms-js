@@ -101,7 +101,7 @@ export const LeftEmployDashbord = ({}) => {
         </Box>
       </Box>
 
-      <Box className="employeeDeshbord ">
+      {/* <Box className="employeeDeshbord ">
         <h3>Check Mail</h3>
         <Box
           className={
@@ -112,7 +112,7 @@ export const LeftEmployDashbord = ({}) => {
             please check birthday mail
           </Typography>
         </Box>
-      </Box>
+      </Box> */}
     </Box>
   );
 };
