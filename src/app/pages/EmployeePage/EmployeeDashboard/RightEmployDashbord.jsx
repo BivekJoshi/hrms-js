@@ -10,7 +10,7 @@ export const RightEmployDashbord = (props) => {
   return (
     <Box>
       <Box>
-        <h3 style={{ margin: "1rem 0" }}>Project</h3>
+        <h3>Project</h3>
         <Box
           className={
             mode === "light"
@@ -49,7 +49,7 @@ export const RightEmployDashbord = (props) => {
         </Box>
       </Box>
       <Box marginTop="1rem">
-        <h3 style={{ margin: "1rem 0" }}>Your Leaves</h3>
+        <h3>Your Leaves</h3>
         <Box
           className={
             mode === "light"
@@ -70,7 +70,7 @@ export const RightEmployDashbord = (props) => {
               6<Typography>LEAVE TAKEN</Typography>
             </Box>
             <Divider sx={{ border: "1px solid black" }} />
-            <Box>
+            <Box alignSelf="center">
               <Typography>6</Typography> REMAINING
             </Box>
           </Box>
@@ -85,7 +85,7 @@ export const RightEmployDashbord = (props) => {
         </Box>
       </Box>
       <Box margin="1rem 0">
-        <h3 style={{ margin: "1rem 0" }}>UPCOMMING HOLIDAY</h3>
+        <h3 style={{margin:"1rem 0"}}>UPCOMMING HOLIDAY</h3>
         <Box
           className={
             mode === "light"

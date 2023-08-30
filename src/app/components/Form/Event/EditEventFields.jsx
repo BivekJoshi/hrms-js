@@ -108,6 +108,27 @@ const EditEventFields = ({ onClose, isLoading, data, permissions }) => {
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
+        <Grid item xs={12} sm={12}>
+          <TextField
+            id="eventLocation"
+            name="eventLocation"
+            label="Event Location"
+            placeholder="Enter your Event Location"
+            fullWidth
+            value={formik.values.eventLocation}
+            onChange={formik.handleChange}
+            error={
+              formik.touched.eventLocation &&
+              Boolean(formik.errors.eventLocation)
+            }
+            helperText={
+              formik.touched.eventLocation && formik.errors.eventLocation
+            }
+            variant="outlined"
+            autoFocus
+            InputLabelProps={{ shrink: true }}
+          />
+        </Grid>
         <Grid
           container
           direction="row"

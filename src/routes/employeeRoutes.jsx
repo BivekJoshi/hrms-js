@@ -15,7 +15,7 @@ import { Breadcrumbs, Typography } from "@mui/material";
 import { Link, useLocation } from "react-router-dom";
 import ThemeModeContext from "../theme/ThemeModeContext";
 import EmployeeProfile from "../app/pages/Employee/EmployeeViewPage/EmployProfile/EmployeeProfile";
-import { useGetLoggedInUser } from "../app/hooks/auth/usePassword";
+// import { useGetLoggedInUser } from "../app/hooks/auth/usePassword";
 
 const EmployeeDashboard = Loadable(
   lazy(() =>
