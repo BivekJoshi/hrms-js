@@ -10,27 +10,16 @@ import useEventForm from "../../../hooks/event/EventForm/useEventForm";
 import EmailToAll from "../../Email/EmailToAll";
 
 export const AddEventModal = ({ open, handleCloseModal }) => {
-  const [openSubmitModal, setOpenSubmitModal] = useState();
+  // const [openSubmitModal, setOpenSubmitModal] = useState(false);
 
-  const handleOpenSubmitModal = () => setOpenSubmitModal(true);
+  // const { formik } = useEventForm(setOpenSubmitModal, handleCloseModal);
 
-  const { formik } = useEventForm(handleOpenSubmitModal,handleCloseModal);
+  // const [openEmail, setOpenEmail] = useState(false);
 
-  const [openEmail, setOpenEmail] = useState(false);
-
-  const handleFormSubmit = async () => {
-    formik.handleSubmit();
-    if (!formik.isValidating && formik.isValid) {
-      // handleCloseModal();
-    } else {
-      toast.error("Please make sure you have filled the form correctly");
-    }
-  };
-
-  const handleEmailButtonClick = () => {
-    setOpenEmail(true);
-    setOpenSubmitModal(false);
-  };
+  // const handleEmailButtonClick = () => {
+  //   setOpenEmail(true);
+  //   setOpenSubmitModal(false);
+  // };
 
   return (
     <div>
@@ -66,7 +55,7 @@ export const AddEventModal = ({ open, handleCloseModal }) => {
           </>
         }
       />
-      <FormModal
+      {/* <FormModal
         open={openSubmitModal}
         onClose={() => setOpenSubmitModal(false)}
         formComponent={
@@ -94,7 +83,7 @@ export const AddEventModal = ({ open, handleCloseModal }) => {
             </Box>
           </div>
         }
-      />
+      /> */}
 
       <FormModal
         open={openEmail}

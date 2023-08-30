@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Box, Button } from "@mui/material";
+import { Box, Button, Grid } from "@mui/material";
 
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
@@ -10,10 +10,16 @@ import { useGetEvent } from "../../hooks/event/useEvent";
 import { AddEventModal, OpenEvent } from "./EventModal/EventModal";
 import HocButton from "../../hoc/hocButton";
 import PermissionHoc from "../../hoc/permissionHoc";
+import FormModal from "../../components/Modal/FormModal";
+import useEventForm from "../../hooks/event/EventForm/useEventForm";
+import { toast } from "react-toastify";
+import AddEventFields from "../../components/Form/Event/AddEventFields";
 
 const Event = ({ permissions }) => {
   const calendarRef = useRef(null);
   const [events, setEvents] = useState([]);
+  const [openSubmitModal, setOpenSubmitModal] = useState(false);
+  const [openEmail, setOpenEmail] = useState(false);
 
   const { data: eventData, isLoading } = useGetEvent();
 
@@ -28,22 +34,36 @@ const Event = ({ permissions }) => {
       setEvents(formattedEvents);
     }
   }, [eventData]);
-
   const [openAddModal, setOpenAddModal] = useState(false);
+  console.log("🚀 ~ file: Event.jsx:38 ~ Event ~ openAddModal:", openAddModal);
   const [openModal, setOpenModal] = useState(false);
   const [getEventID, setEventGetID] = useState({});
 
+  const handleCloseModal = () => setOpenAddModal(false);
+  const { formik } = useEventForm(setOpenSubmitModal, handleCloseModal);
+
+  const handleFormSubmit = async () => {
+    formik.handleSubmit();
+    if (!formik.isValidating && formik.isValid) {
+      // handleCloseModal();
+    } else {
+      toast.error("Please make sure you have filled the form correctly");
+    }
+  };
   const handleOpenModal = (e) => {
     setEventGetID(e?.event?._def?.publicId);
     setOpenModal(true);
   };
 
-  const handleCloseModal = () => setOpenModal(false);
-
   // const handleTodayClick = (events) => {
   //   console.log(events)
   //   events.gotoDate(new Date());
   // };
+
+  const handleEmailButtonClick = () => {
+    setOpenEmail(true);
+    setOpenSubmitModal(false);
+  };
 
   return (
     <>
@@ -57,12 +77,76 @@ const Event = ({ permissions }) => {
         />
       </Box>
       <br />
+      {/* <AddEventModal
+        open={() => setOpenAddModal(true)}
+        handleCloseModal={() => setOpenAddModal(false)}
+      /> */}
       {openAddModal && (
-        <AddEventModal
-          open={() => setOpenAddModal(true)}
-          handleCloseModal={() => setOpenAddModal(false)}
+        <FormModal
+          open={open}
+          onClose={handleCloseModal}
+          formComponent={
+            <>
+              {/*Import Event Field Here*/}
+              <AddEventFields formik={formik} />
+              <Grid
+                container
+                direction="row"
+                justifyContent="flex-end"
+                alignItems="flex-end"
+              >
+                <Button
+                  variant="contained"
+                  onClick={handleFormSubmit}
+                  sx={{ mt: 3, ml: 1 }}
+                >
+                  Add Event
+                </Button>
+                <Button
+                  variant="contained"
+                  onClick={handleCloseModal}
+                  sx={{ mt: 3, ml: 1 }}
+                  color="error"
+                >
+                  Cancel
+                </Button>
+              </Grid>
+            </>
+          }
         />
       )}
+      {openSubmitModal && (
+        <FormModal
+          open={openSubmitModal}
+          onClose={() => setOpenSubmitModal(false)}
+          formComponent={
+            <div>
+              <h2>Event Added Successfully!</h2>
+              <p>Do you like to Email this event to Employee.</p>
+              <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+                <Button
+                  variant="contained"
+                  sx={{ mt: 3, ml: 1 }}
+                  onClick={handleEmailButtonClick}
+                >
+                  Yes
+                </Button>
+                <Button
+                  variant="contained"
+                  onClick={() => {
+                    setOpenSubmitModal(false);
+                  }}
+                  sx={{ mt: 3, ml: 1 }}
+                  color="error"
+                >
+                  No
+                </Button>
+              </Box>
+            </div>
+          }
+        />
+      )}
+
       <FullCalendar
         ref={calendarRef}
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
@@ -76,13 +160,13 @@ const Event = ({ permissions }) => {
         events={events}
         eventClick={handleOpenModal}
         customButtons={{
-            customTodayButton: {
-              text: "Today",
-              // click: function () {
-              //   handleTodayClick(events);
-              // },
-            },
-          }}
+          customTodayButton: {
+            text: "Today",
+            // click: function () {
+            //   handleTodayClick(events);
+            // },
+          },
+        }}
         // loading={isLoading}
       />
 
