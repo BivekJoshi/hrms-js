@@ -15,6 +15,9 @@ import { Breadcrumbs, Typography } from "@mui/material";
 import { Link, useLocation } from "react-router-dom";
 import ThemeModeContext from "../theme/ThemeModeContext";
 import EmployeeProfile from "../app/pages/Employee/EmployeeViewPage/EmployProfile/EmployeeProfile";
+import ApplyLeave from "../app/pages/Leave/ApplyLeave/ApplyLeave";
+import ApplyLeaveLayout from "../app/pages/Leave/ApplyLeave/ApplyLeaveLayout";
+import ApplyLeaveField from "../app/components/Form/Leave/ApplyLeave/ApplyLeaveField";
 // import { useGetLoggedInUser } from "../app/hooks/auth/usePassword";
 
 const EmployeeDashboard = Loadable(
@@ -43,11 +46,23 @@ const employeeRoutes = [
     id: nanoid(),
     component: <LeaveType />,
   },
+  // {
+  //   path: "leave",
+  //   name: "Leave",
+  //   id: nanoid(),
+  //   component: <Leave />,
+  // },
   {
-    path: "leave",
-    name: "Leave",
+    path:"applyleave",
+    name:"Apply Leave",
     id: nanoid(),
-    component: <Leave />,
+    component:<ApplyLeaveLayout/>,
+  },
+  {
+    path:"applyleavefield",
+    name:"Apply Leave",
+    id: nanoid(),
+    component:<ApplyLeaveField/>,
   },
   {
     path: "designation",

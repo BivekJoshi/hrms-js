@@ -98,7 +98,7 @@ export default function EmployeeSidebar() {
     },
     {
       name: "Apply Leave",
-      path: "leave",
+      path: "applyleave",
       icon: (
         <MailIcon
           sx={mode === "light" ? { color: "black" } : { color: "white" }}
