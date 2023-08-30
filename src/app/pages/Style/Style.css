@@ -33,3 +33,10 @@
   margin-top: 1rem;
 }
 
+.notification {
+  margin-bottom: 1rem;
+  border: 1px solid white;
+  text-align: center;
+  border-radius: 1rem;
+  padding: 0.5rem;
+}
