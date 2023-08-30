@@ -25,6 +25,7 @@ const EmployeeDashbord = (props) => {
       <Box
         display="flex"
         flexDirection="row"
+        padding="1rem"
         className={
           mode === "light" ? "employeeDeshbordBG" : "employeeDeshbordBGDark"
         }
