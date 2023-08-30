@@ -5,9 +5,18 @@ import Male from "../../../../assets/male.png";
 import "../../Style/Style.css";
 import { Typography } from "@mui/material";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
+import {
+  useGetEvent,
+  useGetEventNotification,
+} from "../../../hooks/event/useEvent";
+import { ButtonComponent } from "../../../components/Button/ButtonComponent";
 
-export const LeftEmployDashbord = (props) => {
+export const LeftEmployDashbord = ({}) => {
   const { mode } = useContext(ThemeModeContext);
+  const { data: employNotiData } = useGetEventNotification();
+  const { data: employAllNotiData } = useGetEvent();
+  console.log(employAllNotiData);
+
   const employeeEventData = [
     {
       icon: <AccessTimeIcon />,
@@ -53,24 +62,46 @@ export const LeftEmployDashbord = (props) => {
           </Box>
         ))}
       </Box>
-      <Box
-        className={
-          mode === "light"
-            ? "employeeDeshbordBG employeeDeshbord"
-            : "employeeDeshbordBGDark employeeDeshbord"
-        }
-      >
-        <h3>Event</h3>
-        <Box className="employeeDeshbord" padding="1rem 2rem">
-          <h5> Today Event</h5> <p>At Kamalpokhari </p>THis is description and
-          Location.
-        </Box>
-        <Box className="employeeDeshbord" padding="0 2rem 1rem">
-          <h5> Upcoming Event</h5> <p>At Kamalpokhari </p>THis is description
-          and Location.
+      <Box>
+        <h3 style={{ marginBottom: "1rem" }}>Event</h3>
+        <Box
+          className={
+            mode === "light"
+              ? "employeeDeshbordBG employeeDeshbord"
+              : "employeeDeshbordBGDark employeeDeshbord"
+          }
+        >
+          <Box className="employeeDeshbord" padding="1rem 2rem 0">
+            <h4> Today Event</h4>
+            <Box display="grid" gridTemplateColumns="repeat(2,1fr)" gap="1rem">
+              {employNotiData?.events?.map((notify, index) => (
+                <Box key={index} className="notification">
+                  <Typography>At {notify.eventLocation}</Typography>
+                  <Typography>Time: {notify.eventTime}</Typography>
+                  <Typography>{notify.eventName}</Typography>
+                </Box>
+              ))}
+            </Box>
+          </Box>
+          <Box className="employeeDeshbord" padding="0 2rem 1rem">
+            <h4> Upcoming Event </h4>{" "}
+            <Box display="grid" gridTemplateColumns="repeat(2,1fr)" gap="1rem">
+              {employAllNotiData?.slice(0, 2).map((notify, index) => (
+                <Box key={index} className="notification">
+                  <Typography>At {notify.eventLocation}</Typography>
+                  <Typography>Time: {notify.eventTime}</Typography>
+                  <Typography>{notify.eventName}</Typography>
+                </Box>
+              ))}
+            </Box>
+            <Box textAlign="center">
+              <ButtonComponent buttonName={"Click here to see full event"} />
+            </Box>
+          </Box>
         </Box>
       </Box>
-      <Box className="employeeDeshbord ">
+
+      {/* <Box className="employeeDeshbord ">
         <h3>Check Mail</h3>
         <Box
           className={
@@ -81,7 +112,7 @@ export const LeftEmployDashbord = (props) => {
             please check birthday mail
           </Typography>
         </Box>
-      </Box>
+      </Box> */}
     </Box>
   );
 };
