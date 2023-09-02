@@ -19,7 +19,7 @@ const userRole = decode?.userRoles?.[0]?.name;
     if (!userRole) {
       removeUser();
       navigate("/");
-    } else if (userRole === "ROLE_SUPER_ADMIN" || userRole === "ROLE_ADMIN" || userRole === "ROLE_MANAGER" || userRole === "ROLE_HR_CLERK" || userRole === "ROLE_HR_MANAGER") {
+    } else if (userRole === "ROLE_SUPER_ADMIN" || userRole === "ROLE_ADMIN" || userRole === "ROLE_MANAGER" || userRole === "ROLE_HR_ADMIN"  || userRole === "ROLE_HR_CLERK") {
       navigate("/admin/dashboard");
     } else if (userRole === "ROLE_EMPLOYEE") {
       navigate("/employee/dashboard");

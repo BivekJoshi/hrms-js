@@ -4,7 +4,6 @@ import CompanyTableView from '../CompanyView/CompanyTableView';
 import { EditCompanyModal } from './CompanyModal';
 import { useDeleteCompany, useGetCompany } from '../../../hooks/company/useCompany';
 import DeleteConfirmationModal from '../../../components/Modal/DeleteConfirmationModal';
-import PermissionHoc from "../../../hoc/permissionHoc";
 
 const CompanyTable = ({ permissions }) => {
     const { data: companyData, isLoading } = useGetCompany();
@@ -32,6 +31,8 @@ const CompanyTable = ({ permissions }) => {
         setEditedCompany(rowData);
         setOpenEditModal(true);
     };
+
+   
 
     return (
         <>
@@ -61,4 +62,4 @@ const CompanyTable = ({ permissions }) => {
     );
 };
 
-export default PermissionHoc(CompanyTable);
+export default CompanyTable;

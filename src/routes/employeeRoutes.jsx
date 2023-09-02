@@ -23,7 +23,6 @@ const EmployeeDashboard = Loadable(
   )
 );
 // const { data: loggedUserData } = useGetLoggedInUser();
-// console.log(loggedUserData);
 const employeeRoutes = [
   {
     path: "dashboard",

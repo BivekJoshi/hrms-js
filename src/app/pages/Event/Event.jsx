@@ -41,7 +41,6 @@ const Event = ({ permissions }) => {
   const handleCloseModal = () => setOpenModal(false);
 
   // const handleTodayClick = (events) => {
-  //   console.log(events)
   //   events.gotoDate(new Date());
   // };
 

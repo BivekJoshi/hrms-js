@@ -73,7 +73,7 @@ const CompanyGridView = ({
                 alignItems="flex-end"
               >
                 <HocButton
-                  permissions={permissions.canDelete}
+                  permissions={permissions?.canDelete}
                   variant={"outlined"}
                   onClick={() => handleDeleteCompany(item)}
                   sx={{ mt: 3, ml: 1 }}
@@ -82,7 +82,7 @@ const CompanyGridView = ({
                   buttonName={"Delete"}
                 />
                 <HocButton
-                  permissions={permissions.canEdit}
+                  permissions={permissions?.canEdit}
                   variant={"contained"}
                   color={"primary"}
                   onClick={() => handleEditCompany(item)}

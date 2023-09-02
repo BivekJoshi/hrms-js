@@ -13,7 +13,7 @@ import { CardMedia } from "@mui/material";
 const EmployeeDashbord = (props) => {
   const { data: employData } = useGetLoggedInUser();
   const { mode } = useContext(ThemeModeContext);
-  const img = DOC_URL + employData.userPhotoPath;
+  const img = DOC_URL + employData?.userPhotoPath;
 
   const today = new Date();
   const options = {

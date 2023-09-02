@@ -82,12 +82,12 @@ const Department = ({ permissions }) => {
       render: (rowData) => (
         <Stack direction="row" spacing={0}>
           <HocButton
-            permissions={permissions.canEdit}
+            permissions={permissions?.canEdit}
             onClick={() =>handleEditDepartment(rowData)}
             icon={<ModeEditOutlineIcon />}
           />
           <HocButton
-            permissions={permissions.canDelete}
+            permissions={permissions?.canDelete}
             onClick={() =>handleDeleteDepartment(rowData)}
             icon={<DeleteIcon />}
           />
@@ -103,7 +103,7 @@ const Department = ({ permissions }) => {
     <>
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
         <HocButton
-          permissions={permissions.canAdd}
+          permissions={permissions?.canAdd}
           color= {"primary"}
           variant={"contained"}
           onClick={handleAddOpenModal}
