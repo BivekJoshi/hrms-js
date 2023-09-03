@@ -218,7 +218,7 @@ const adminRoutes = [
     path: "users",
     name: "Users",
     id: nanoid(),
-    component: <UserController />,
+    component: <UserController component="users" />,
     requiresSuperAdmin: true,
   },
 ];

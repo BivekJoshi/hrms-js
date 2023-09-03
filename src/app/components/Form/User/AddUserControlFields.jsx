@@ -1,17 +1,27 @@
-import React, { useContext } from "react";
-import { Grid, TextField, Button, MenuItem } from "@mui/material";
+import React, { useContext, useEffect, useState } from "react";
+import { Grid, TextField, Button, MenuItem, Autocomplete } from "@mui/material";
 import { useGetEmployee } from "../../../hooks/employee/useEmployee";
 import { useGetUserRole } from "../../../hooks/auth/userControl/useUserControl";
-import {
-  useAddUserControlForm,
-} from "../../../pages/Auth/UserControl/Users/useAddUserControlForm";
+import { useAddUserControlForm } from "../../../pages/Auth/UserControl/Users/useAddUserControlForm";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
 
 export const AddUserControlFields = ({ onClose }) => {
   const { data: employeeData } = useGetEmployee();
-  const { data: userRoleData } = useGetUserRole();
   const { formik } = useAddUserControlForm();
   const { mode } = useContext(ThemeModeContext);
+
+  const handleUserNameChange = (event) => {
+    if (selectedEmployee) {}
+    const selectedUserId = event.target.value;
+    const selectedEmployee = employeeData.find(
+      (employee) => employee?.id === selectedUserId
+    );
+    const selectedEmployeeEmail = selectedEmployee
+      ? selectedEmployee?.officeEmail
+      : "";
+    formik.setFieldValue("employeeId", selectedUserId);
+    formik.setFieldValue("email", selectedEmployeeEmail);
+  };
 
   const handleFormSubmit = async () => {
     const isValid = await formik.validateForm();
@@ -25,22 +35,32 @@ export const AddUserControlFields = ({ onClose }) => {
     }
   };
 
-  const handleUserNameChange = (event) => {
-    const selectedUserId = event.target.value;
-    const selectedEmployee = employeeData.find(
-      (employee) => employee?.id === selectedUserId
-    );
-    const selectedEmployeeEmail = selectedEmployee
-      ? selectedEmployee?.officeEmail
-      : "";
-    formik.setFieldValue("employeeId", selectedUserId);
-    formik.setFieldValue("email", selectedEmployeeEmail);
-  };
-
   return (
     <Grid container spacing={3}>
       <Grid item xs={12} sm={12}>
-        <TextField
+        <Autocomplete
+        options={employeeData}
+        onChange={handleUserNameChange}
+        autoHighlight
+        getOptionLabel={(option) => `${option?.firstName} ${option?.middleName} ${option?.lastName}`}
+        
+        renderInput={(params) => (
+          <TextField
+          {...params}
+          label="Select Employee"
+          inputProps={{
+            ...params.inputProps,
+            autoComplete: "new-password",
+            
+          }}
+          
+          />
+          
+
+        )}
+        />
+
+        {/* <TextField
           id="employeeId"
           name="employeeId"
           label="User Name"
@@ -66,7 +86,7 @@ export const AddUserControlFields = ({ onClose }) => {
                 {`${employee?.firstName} ${employee?.middleName} ${employee?.lastName}`}
               </MenuItem>
             ))}
-        </TextField>
+        </TextField> */}
       </Grid>
 
       <Grid item xs={12} sm={12}>
@@ -86,36 +106,6 @@ export const AddUserControlFields = ({ onClose }) => {
           autoFocus
           InputLabelProps={{ shrink: true }}
         />
-      </Grid>
-
-      <Grid item xs={12} sm={12}>
-        <TextField
-          id="roleId"
-          name="roleId"
-          label="Role"
-          placeholder="Enter role..."
-          fullWidth
-          select
-          required
-          value={formik.values.roleId}
-          onChange={formik.handleChange}
-          error={formik.touched.roleId && Boolean(formik.errors.roleId)}
-          helperText={formik.touched.roleId && formik.errors.roleId}
-          variant="outlined"
-          autoFocus
-          InputLabelProps={{ shrink: true }}
-        >
-          {userRoleData &&
-            userRoleData.map((role) => (
-              <MenuItem
-                key={role?.id}
-                value={role?.id}
-                sx={{ bgcolor: mode === "light" ? "" : "#413e3e" }}
-              >
-                {role?.name}
-              </MenuItem>
-            ))}
-        </TextField>
       </Grid>
 
       <Grid
