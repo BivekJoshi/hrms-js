@@ -36,6 +36,17 @@ const HolidayFields = ({ formik }) => {
   // };
   // const submitButtonText = data ? "Update" : "Add Holiday";
 
+  const handleCloseConfirmationModal = () => {
+    setConfirmationModal(false);
+  };
+
+  // const deleteHolidayMutation = useDeleteHoliday({});
+  // const handleDeleteHoliday = () => {
+  //   deleteHolidayMutation.mutate(data.id);
+  //   onClose();
+  // };
+  // const submitButtonText = data ? "Update" : "Add Holiday";
+
   return (
     <>
       <Grid container spacing={3}>
@@ -144,4 +155,4 @@ const HolidayFields = ({ formik }) => {
   );
 };
 
-export default HolidayFields;
+export default PermissionHoc(HolidayFields);

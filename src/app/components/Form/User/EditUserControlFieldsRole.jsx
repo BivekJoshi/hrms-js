@@ -5,8 +5,6 @@ import { useEditUserControlForm } from "../../../pages/Auth/UserControl/Users/us
 import { useGetUserControl, useGetUserRole } from "../../../hooks/auth/userControl/useUserControl";
 
 export const EditUserControlFieldsRole = ({ onClose ,rowData}) => {
-  console.log(rowData,"Hello");
-
   const { data: userData } = useGetUserControl();
 
   const { data: userRoleData } = useGetUserRole();

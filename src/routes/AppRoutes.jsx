@@ -21,13 +21,13 @@ const AppRoutes = () => {
     <HashRouter>
       <ScrollToTop>
         <Routes>
-          <Route path="/" exact element={<Applayout />}>
-            <Route path="/" exact element={<Login />} />
-            <Route path="/forgot-password" exact element={<ForgotPassword />} />
-            <Route path="/hrms/user-activation" exact element={<RenamePassword />} />
+          <Route exact path="/" element={<Applayout />}>
+            <Route exact path="/" element={<Login />} />
+            <Route exact path="/forgot-password" element={<ForgotPassword />} />
+            <Route exact path="/hrms/user-activation" element={<RenamePassword />} />
        
-            <Route path="/admin" element={<AccessControl Component={<AdminLayout />} /> }>
-              <Route index element={<Dashboard />} />
+            <Route exact path="/admin" element={<AccessControl Component={<AdminLayout />} /> }>
+              <Route exact index element={<Dashboard />} />
                 {adminRoutes.map((route) => (
                   <Route
                     key={route.id}
@@ -38,8 +38,8 @@ const AppRoutes = () => {
                 ))}
               </Route>
 
-            <Route path="/employee" element={<AccessControl Component={<EmployeeLayout />} /> }>
-                <Route index element={<EmployeeDashbord />} />
+            <Route exact path="/employee" element={<AccessControl Component={<EmployeeLayout />} /> }>
+                <Route exact index element={<EmployeeDashbord />} />
                   {
                     employeeRoutes.map((route) => (
                       <Route

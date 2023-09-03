@@ -8,7 +8,6 @@ import { AddCompanyModal } from "./CompanyModal/CompanyModal";
 import { useState } from "react";
 import CompanyTable from "./CompanyModal/CompanyTable";
 import CompanyGrid from "./CompanyModal/CompanyGrid";
-import { ButtonComponent } from "../../components/Button/ButtonComponent";
 import PermissionHoc from "../../hoc/permissionHoc";
 import HocButton from "../../hoc/hocButton";
 
@@ -42,7 +41,7 @@ const Company = ({ permissions }) => {
             </TabList>
 
             <HocButton
-              permissions={permissions.canAdd}
+              permissions={permissions?.canAdd}
               color={"primary"}
               variant={"contained"}
               onClick={handleAddOpenModal}
@@ -51,11 +50,11 @@ const Company = ({ permissions }) => {
           </Box>
           <TabPanel value="1" sx={{ padding: "0" }}>
             <br />
-            <CompanyTable />
+            <CompanyTable permissions={permissions} />
           </TabPanel>
           <TabPanel value="2">
             <br />
-            <CompanyGrid />
+            <CompanyGrid permissions={permissions} />
           </TabPanel>
         </Box>
       </TabContext>

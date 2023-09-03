@@ -13,22 +13,13 @@ export const AccessControl = ({ Component }) => {
   const navigate = useNavigate();
   const user = getUser();
   const decode = jwtDecode(user);
-  const userRole = decode?.userRoles?.[0]?.name;
-  console.log(
-    "🚀 ~ file: AccessControl.jsx:13 ~ AccessControl ~ userRole:",
-    userRole
-  );
+const userRole = decode?.userRoles?.[0]?.name;
 
   useEffect(() => {
     if (!userRole) {
       removeUser();
       navigate("/");
-    } else if (
-      userRole === "ROLE_SUPER_ADMIN" ||
-      userRole === "ROLE_MANAGER" ||
-      userRole === "ROLE_ADMIN" ||
-      userRole === "ROLE_HRCLERK"
-    ) {
+    } else if (userRole === "ROLE_SUPER_ADMIN" || userRole === "ROLE_ADMIN" || userRole === "ROLE_MANAGER" || userRole === "ROLE_HR_ADMIN"  || userRole === "ROLE_HR_CLERK") {
       navigate("/admin/dashboard");
     } else if (userRole === "ROLE_EMPLOYEE") {
       navigate("/employee/dashboard");

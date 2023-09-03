@@ -15,7 +15,6 @@ export const LeftEmployDashbord = ({}) => {
   const { mode } = useContext(ThemeModeContext);
   const { data: employNotiData } = useGetEventNotification();
   const { data: employAllNotiData } = useGetEvent();
-  console.log(employAllNotiData);
 
   const employeeEventData = [
     {

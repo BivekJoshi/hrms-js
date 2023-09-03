@@ -5,7 +5,6 @@ import { useGetEventById } from "../../../hooks/event/useEvent";
 import EditEventFields from "../../../components/Form/Event/EditEventFields";
 
 
-
 export const OpenEvent = ({ open, handleCloseModal, id }) => {
   const { data } = useGetEventById(id);
   return (
