@@ -9,6 +9,7 @@ import {
   getleave,
   getpendingleave,
 } from "../../api/leave/leave-api";
+import { useGetLoggedInUser } from "../auth/usePassword";
 
 {
   /*________________________GET ALL_____________________________________*/
@@ -53,12 +54,13 @@ export const useGetEmployeeLeaveById = (id) => {
   );
 };
 
-{
-  /*________________________POST_____________________________________*/
-}
+/*________________________POST_____________________________________*/
 export const useAddLeave = ({ onSuccess }) => {
+  const { data: user } = useGetLoggedInUser();
+  const empId = user?.id;
+  console.log(user);
   const queryClient = useQueryClient();
-  return useMutation(["addLeave"], (formData) => addleave(formData), {
+  return useMutation(["addLeave"], (formData) => addleave(formData, empId), {
     onSuccess: (data, variables, context) => {
       toast.success("Succesfully added Leave");
       onSuccess && onSuccess(data, variables, context);

@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Box, Button, Grid } from "@mui/material";
+import { toast } from "react-toastify";
 
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
@@ -7,19 +8,28 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 
 import { useGetEvent } from "../../hooks/event/useEvent";
-import { AddEventModal, OpenEvent } from "./EventModal/EventModal";
+import useEventForm from "../../hooks/event/EventForm/useEventForm";
+import { OpenEvent } from "./EventModal/EventModal";
+import EmailToAll from "../Email/EmailToAll";
+
 import HocButton from "../../hoc/hocButton";
 import PermissionHoc from "../../hoc/permissionHoc";
+
 import FormModal from "../../components/Modal/FormModal";
-import useEventForm from "../../hooks/event/EventForm/useEventForm";
-import { toast } from "react-toastify";
 import AddEventFields from "../../components/Form/Event/AddEventFields";
 
 const Event = ({ permissions }) => {
   const calendarRef = useRef(null);
   const [events, setEvents] = useState([]);
+
+  const [openAddModal, setOpenAddModal] = useState(false);
   const [openSubmitModal, setOpenSubmitModal] = useState(false);
-  const [openEmail, setOpenEmail] = useState(false);
+  const [openEmailModal, setOpenEmailModal] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+
+  const [getEventID, setEventGetID] = useState({});
+
+  // console.log("🚀 ~ file: Event.jsx:38 ~ Event ~ openAddModal:", openAddModal);
 
   const { data: eventData, isLoading } = useGetEvent();
 
@@ -34,18 +44,13 @@ const Event = ({ permissions }) => {
       setEvents(formattedEvents);
     }
   }, [eventData]);
-  const [openAddModal, setOpenAddModal] = useState(false);
-  console.log("🚀 ~ file: Event.jsx:38 ~ Event ~ openAddModal:", openAddModal);
-  const [openModal, setOpenModal] = useState(false);
-  const [getEventID, setEventGetID] = useState({});
 
   const handleCloseModal = () => setOpenAddModal(false);
-  const { formik } = useEventForm(setOpenSubmitModal, handleCloseModal);
+  const { formik ,data} = useEventForm(setOpenSubmitModal, handleCloseModal);
 
   const handleFormSubmit = async () => {
     formik.handleSubmit();
     if (!formik.isValidating && formik.isValid) {
-      // handleCloseModal();
     } else {
       toast.error("Please make sure you have filled the form correctly");
     }
@@ -55,13 +60,8 @@ const Event = ({ permissions }) => {
     setOpenModal(true);
   };
 
-  // const handleTodayClick = (events) => {
-  //   console.log(events)
-  //   events.gotoDate(new Date());
-  // };
-
   const handleEmailButtonClick = () => {
-    setOpenEmail(true);
+    setOpenEmailModal(true);
     setOpenSubmitModal(false);
   };
 
@@ -77,14 +77,11 @@ const Event = ({ permissions }) => {
         />
       </Box>
       <br />
-      {/* <AddEventModal
-        open={() => setOpenAddModal(true)}
-        handleCloseModal={() => setOpenAddModal(false)}
-      /> */}
+
       {openAddModal && (
         <FormModal
-          open={open}
-          onClose={handleCloseModal}
+          open={openAddModal}
+          onClose={() => setOpenAddModal(false)}
           formComponent={
             <>
               {/*Import Event Field Here*/}
@@ -147,27 +144,30 @@ const Event = ({ permissions }) => {
         />
       )}
 
+      {openEmailModal && (
+        <FormModal
+          open={openEmailModal}
+          onClose={() => setOpenEmailModal(false)}
+          formComponent={
+            <div>
+              <EmailToAll getEventID={data?.id} onClose={()=>setOpenEmailModal(false)}/>
+            </div>
+          }
+        />
+      )}
+
       <FullCalendar
         ref={calendarRef}
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
         initialView="dayGridMonth"
         headerToolbar={{
-          start: "customTodayButton prev,next",
+          start: "today prev,next",
           center: "title",
           end: "dayGridMonth,timeGridWeek,timeGridDay",
         }}
         height={"90vh"}
         events={events}
         eventClick={handleOpenModal}
-        customButtons={{
-          customTodayButton: {
-            text: "Today",
-            // click: function () {
-            //   handleTodayClick(events);
-            // },
-          },
-        }}
-        // loading={isLoading}
       />
 
       {openModal && (
