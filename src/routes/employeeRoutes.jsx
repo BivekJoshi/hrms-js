@@ -1,32 +1,40 @@
 import React, { lazy, useContext } from "react";
 import { nanoid } from "nanoid";
 import Loadable from "../app/components/Header/Loader/Loadable";
-import LeaveType from "../app/pages/LeaveType/LeaveType";
-import Leave from "../app/pages/Leave/Leave";
-import Designation from "../app/pages/Designation/Designation";
-import Company from "../app/pages/Company/Company";
-import Department from "../app/pages/Department/Department";
-import TodoList from "../app/pages/TodoList/TodoList";
-import Project from "../app/pages/Project/Project";
-import Event from "../app/pages/Event/Event";
-import Holiday from "../app/pages/Holiday/Holiday";
-import ResetPassword from "../app/pages/Auth/ResetPassword/ResetPassword";
 import { Breadcrumbs, Typography } from "@mui/material";
 import { Link, useLocation } from "react-router-dom";
 import ThemeModeContext from "../theme/ThemeModeContext";
 import EmployeeProfile from "../app/pages/Employee/EmployeeViewPage/EmployProfile/EmployeeProfile";
-import ApplyLeave from "../app/pages/Leave/ApplyLeave/ApplyLeave";
-import ApplyLeaveLayout from "../app/pages/Leave/ApplyLeave/ApplyLeaveLayout";
-import ApplyLeaveField from "../app/components/Form/Leave/ApplyLeave/ApplyLeaveField";
-// import { useGetLoggedInUser } from "../app/hooks/auth/usePassword";
 
+const ResetPassword = Loadable(
+  lazy(() => import("../app/pages/Auth/ResetPassword/ResetPassword"))
+);
 const EmployeeDashboard = Loadable(
   lazy(() =>
     import("../app/pages/EmployeePage/EmployeeDashboard/EmployeeDashbord")
   )
 );
-// const { data: loggedUserData } = useGetLoggedInUser();
-// console.log(loggedUserData);
+const ApplyLeaveLayout = Loadable(
+  lazy(() => import("../app/pages/Leave/ApplyLeave/ApplyLeaveLayout"))
+);
+const ApplyLeaveField = Loadable(
+  lazy(() => import("../app/components/Form/Leave/ApplyLeave/ApplyLeaveField"))
+);
+const Designation = Loadable(
+  lazy(() => import("../app/pages/Designation/Designation"))
+);
+const Department = Loadable(
+  lazy(() => import("../app/pages/Department/Department"))
+);
+const LeaveType = Loadable(
+  lazy(() => import("../app/pages/LeaveType/LeaveType"))
+);
+const Event = Loadable(lazy(() => import("../app/pages/Event/Event")));
+const Holiday = Loadable(lazy(() => import("../app/pages/Holiday/Holiday")));
+const Project = Loadable(lazy(() => import("../app/pages/Project/Project")));
+const TodoList = Loadable(lazy(() => import("../app/pages/TodoList/TodoList")));
+const Company = Loadable(lazy(() => import("../app/pages/Company/Company")));
+
 const employeeRoutes = [
   {
     path: "dashboard",
@@ -41,28 +49,28 @@ const employeeRoutes = [
   //   component: <EmployeeProfile />,
   // },
   {
+    path: "viewprofile",
+    name: "My Profile",
+    id: nanoid(),
+    component: <EmployeeProfile />,
+  },
+  {
     path: "leavetype",
     name: "Leave Type",
     id: nanoid(),
     component: <LeaveType />,
   },
-  // {
-  //   path: "leave",
-  //   name: "Leave",
-  //   id: nanoid(),
-  //   component: <Leave />,
-  // },
   {
-    path:"applyleave",
-    name:"Apply Leave",
+    path: "applyleave",
+    name: "Apply Leave",
     id: nanoid(),
-    component:<ApplyLeaveLayout/>,
+    component: <ApplyLeaveLayout />,
   },
   {
-    path:"applyleavefield",
-    name:"Apply Leave",
+    path: "applyleavefield",
+    name: "Apply Leave",
     id: nanoid(),
-    component:<ApplyLeaveField/>,
+    component: <ApplyLeaveField />,
   },
   {
     path: "designation",
@@ -115,7 +123,6 @@ const employeeRoutes = [
 ];
 
 export { employeeRoutes };
-
 
 <Breadcrumbs aria-label="breadcrumb">
   <Link underline="hover" color="inherit" href="/">

@@ -110,7 +110,7 @@ const adminRoutes = [
     path: "leavetype",
     name: "Leave Type",
     id: nanoid(),
-    component: <LeaveType />,
+    component: <LeaveType component="leaveType"/>,
   },
   {
     path: "leave",
@@ -152,7 +152,7 @@ const adminRoutes = [
     path: "todolist",
     name: "To Do List",
     id: nanoid(),
-    component: <TodoList />,
+    component: <TodoList component="todo"/>,
   },
   {
     path: "project",
@@ -176,7 +176,7 @@ const adminRoutes = [
     path: "event",
     name: "Event",
     id: nanoid(),
-    component: <Event />,
+    component: <Event component="event"/>,
   },
   {
     path: "holiday",

@@ -1,28 +1,50 @@
-import React, {useState} from "react";
-import { useGetEmployeeById } from "../../../../hooks/employee/useEmployee";
+import React, { useState } from "react";
+import { useGetEmployeeById, useGetLoggedInUserInfo } from "../../../../hooks/employee/useEmployee";
 import { useParams } from "react-router-dom";
 
 import "./Style/Style.css";
 import { DetailProfile } from "./Component/DetailProfile";
 import { PersonalProfile } from "./Component/PersonalProfile";
 import ProgressById from "../../ProgressEmployeeData/ProgressById";
-// import AddUser from "../../../../pages/Auth/UserControl/AddUser";
+import useAuth from "../../../../../auth/hooks/component/login/useAuth";
 
 const EmployeeProfile = () => {
+  const {
+    isSuperAdmin,
+    isAdmin,
+    isHr,
+    isEmployee,
+    isHrAdmin,
+    isManager,
+  } = useAuth();
+
   const { id } = useParams();
-  const { data: employeeDataById, isLoading } = useGetEmployeeById(id);
+  const { data: employeeDataById, isLoading } =
+    isSuperAdmin || isAdmin || isHr || isHrAdmin || isManager
+      ? useGetEmployeeById(id)
+      : {};
+
+  const { data: loggedInUserData } = isEmployee ? useGetLoggedInUserInfo() : {};
+
 
   if (isLoading) return <>Loading</>;
 
   return (
     <>
       <ProgressById />
-
       <div className="employeeBody">
-        <PersonalProfile data={employeeDataById} />
-        <DetailProfile data={employeeDataById} />
+        {isSuperAdmin || isAdmin || isHrAdmin || isHr || isManager ? (
+          <>
+            <PersonalProfile data={employeeDataById} />
+            <DetailProfile data={employeeDataById} />
+          </>
+        ) : (
+          <>
+            <PersonalProfile data={loggedInUserData} />
+            <DetailProfile data={loggedInUserData} />
+          </>
+        )}
       </div>
-
     </>
   );
 };

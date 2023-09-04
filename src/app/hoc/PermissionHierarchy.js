@@ -35,7 +35,6 @@
 
 // export default PermissionHierarchy;
 
-
 const allPermissions = {
   canEdit: true,
   canAdd: true,
@@ -54,10 +53,13 @@ const commonPermissions = {
 
 const PermissionHierarchy = {
   company: commonPermissions,
-  designation: {...commonPermissions, hrAdmin: allPermissions },
+  designation: { ...commonPermissions, hrAdmin: allPermissions },
   department: commonPermissions,
   project: commonPermissions,
   users: commonPermissions,
+  event: commonPermissions,
+  todo: allPermissions,
+  leaveType:commonPermissions,
 };
 
 export default PermissionHierarchy;
