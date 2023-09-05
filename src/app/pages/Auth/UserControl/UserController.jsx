@@ -6,8 +6,9 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import Users from "./Users/Users";
 import Roles from "./Roles/Roles";
+import PermissionHoc from '../../../hoc/permissionHoc';
 
-const UserController = () => {
+const UserController = ({ permissions }) => {
   const [value, setValue] = React.useState('1');
 
   const handleChange = (event, newValue) => {
@@ -28,7 +29,7 @@ const UserController = () => {
               <Tab label="Roles" value="2" />
             </TabList>
           </Box>
-          <TabPanel value="1"> <Users/> </TabPanel>
+          <TabPanel value="1"> <Users permissions={permissions} /> </TabPanel>
           <TabPanel value="2"> <Roles /> </TabPanel>
         </TabContext>
       </Box>
@@ -36,4 +37,4 @@ const UserController = () => {
   );
 };
 
-export default UserController;
+export default PermissionHoc(UserController);

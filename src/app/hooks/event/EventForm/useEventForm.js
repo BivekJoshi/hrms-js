@@ -2,8 +2,9 @@ import { useFormik } from "formik";
 import { useAddEvent, useEditEvent } from "../useEvent";
 import { EventSchema } from "../Validation/EventSchema";
 
-const useEventForm = (handleOpenSubmitModal) => {
+const useEventForm = (setOpenSubmitModal, handleCloseModal) => {
   const { mutate: addEvent, data } = useAddEvent({});
+  console.log(data,"data hai ma ");
   const { mutate: editEvent } = useEditEvent({});
 
   const formik = useFormik({
@@ -27,17 +28,30 @@ const useEventForm = (handleOpenSubmitModal) => {
     //   }
     // },
     onSubmit: (values) => {
-      handleRequest(values);
-      
-      handleOpenSubmitModal();
-      formik.resetForm();
-      // handleCloseModal();
+      const formData = { ...values };
+      addEvent(formData, {
+        onSuccess: (data) => {
+          handleCloseModal();
+          formik.resetForm();
+        },
+      }),
+        setOpenSubmitModal(true);
     },
   });
+  //   onSubmit: (values) => {
+  //     handleRequest(values);
+  //     setOpenSubmitModal(true);
+  //     formik.resetForm();
+  //   },
+  // });
 
   const handleRequest = (values) => {
     values = { ...values };
-    addEvent(values, formik);
+    addEvent(values, {
+      onSuccess: (data) => {
+        console.log("pk");
+      },
+    });
   };
 
   const handledEditRequest = (values) => {
@@ -45,7 +59,7 @@ const useEventForm = (handleOpenSubmitModal) => {
     editEvent(values, formik);
   };
 
-  return { formik };
+  return { formik ,data};
 };
 
 export default useEventForm;

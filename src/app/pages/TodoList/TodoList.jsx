@@ -13,8 +13,10 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import tableIcons from "../../../theme/overrides/TableIcon";
 import { ButtonComponent } from "../../components/Button/ButtonComponent";
+import PermissionHoc from "../../hoc/permissionHoc";
+import HocButton from "../../hoc/hocButton";
 
-const TodoList = () => {
+const TodoList = ({ permissions }) => {
   const { data: todoListData, isLoading } = useGetTodoList();
 
   const [openAddModal, setOpenAddModal] = useState(false);
@@ -99,12 +101,12 @@ const TodoList = () => {
           <Button color="primary" onClick={() => handleEditTodoList(rowData)}>
             <ModeEditOutlineIcon />
           </Button>
-          <Button
-            color="primary"
+          <HocButton
+            permissions={permissions?.canDelete}
+            color={"primary"}
             onClick={() => handleDeleteTodoList(rowData.id)}
-          >
-            <DeleteIcon />
-          </Button>
+            icon={<DeleteIcon />}
+          />
         </Stack>
       ),
       sorting: false,
@@ -177,4 +179,4 @@ const TodoList = () => {
   );
 };
 
-export default TodoList;
+export default PermissionHoc(TodoList);

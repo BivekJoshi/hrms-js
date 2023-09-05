@@ -4,7 +4,6 @@ import { UserSchema } from './userSchema/UserSchema';
 
 
 export const useEditUserControlForm = ({rowData}) => {
-    // console.log(rowData?.id);
     const { mutate } = useEditUserControl({});
 
     const formik = useFormik({

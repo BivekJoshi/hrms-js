@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useSendEmailToAll } from "../../hooks/email/useEmail";
+import { useSendEmailForHoliday } from "../../hooks/email/useEmail";
 import {
   Button,
   Grid,
@@ -9,19 +9,19 @@ import {
 } from "@mui/material";
 import { useGetEmployee } from "../../hooks/employee/useEmployee";
 
-const EmailToAll = ({ getEventID, onClose }) => {
+const EmailForHoliday = ({ getEventID, onClose }) => {
 
   const { data: employeeData } = useGetEmployee();
   const [employeeId, setEmployeeId] = useState([]);
   const [emailData, setEmailData] = useState();
 
-  const sendEmailMutation = useSendEmailToAll({
+  const sendEmailMutation = useSendEmailForHoliday({
     onSuccess: () => {
       setEmailData();
       onClose();
     },
     employeeId: employeeId,
-    eventId: getEventID,
+    holidayId: getEventID,
   });
 
   const handleSubmit = (event) => {
@@ -87,4 +87,4 @@ const EmailToAll = ({ getEventID, onClose }) => {
   );
 };
 
-export default EmailToAll;
+export default EmailForHoliday;

@@ -1,31 +1,37 @@
 import React from "react";
-
 import useAuth from "../../auth/hooks/component/login/useAuth";
+import PermissionHierarchy from "./PermissionHierarchy";
 
 const PermissionHoc = (WrappedComponent) => {
   return (props) => {
     const {
       isSuperAdmin,
-      isManager,
       isAdmin,
+      isManager,
       isHrAdmin,
       isHrClerk,
       isEmployee,
     } = useAuth();
+    const component = props.component;
+    const permissions = PermissionHierarchy?.[component];
 
-    const permissions = {
-      canView: isSuperAdmin || isManager || isAdmin || isHrAdmin || isHrClerk,
+    const userRole = isSuperAdmin
+      ? "superAdmin"
+      : isAdmin
+      ? "admin"
+      : isManager
+      ? "manager"
+      : isHrAdmin
+      ? "hrAdmin"
+      : isHrClerk
+      ? "hrClerk"
+      : isEmployee
+      ? "employee"
+      : "";
 
-      canEdit: isSuperAdmin || isManager || isAdmin || isHrAdmin,
+    const componentPermissions = permissions?.[userRole];
 
-      canDelete: isSuperAdmin || isManager,
-
-      canAdd: isSuperAdmin || isManager || isAdmin || isHrAdmin,
-
-      isEmployee: true,
-    };
-
-    return <WrappedComponent {...props} permissions={permissions} />;
+    return <WrappedComponent {...props} permissions={componentPermissions} />;
   };
 };
 

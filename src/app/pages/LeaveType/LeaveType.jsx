@@ -114,13 +114,13 @@ const LeaveType = ({ permissions }) => {
       render: (rowData) => (
         <Stack direction="row" spacing={0}>
           <HocButton
-            permissions={permissions.canEdit}
+            permissions={permissions?.canEdit}
             color={"primary"}
             onClick={() => handleEditLeaveType(rowData)}
             icon={<ModeEditOutlineIcon />}
           />
           <HocButton
-            permissions={permissions.canDelete}
+            permissions={permissions?.canDelete}
             color={"primary"}
             onClick={() => handleDeleteLeaveType(rowData)}
             icon={<DeleteIcon />}
@@ -137,7 +137,7 @@ const LeaveType = ({ permissions }) => {
     <>
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
         <HocButton
-          permissions={permissions.canAdd}
+          permissions={permissions?.canAdd}
           color={"primary"}
           variant={"contained"}
           onClick={handleAddOpenModal}

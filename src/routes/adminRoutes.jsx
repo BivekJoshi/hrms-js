@@ -86,7 +86,7 @@ const adminRoutes = [
     path: "employee",
     name: "Employee",
     id: nanoid(),
-    component: <Employee />,
+    component: <Employee component="employee" />,
   },
   {
     path: "employee/deactivated",
@@ -110,7 +110,7 @@ const adminRoutes = [
     path: "leavetype",
     name: "Leave Type",
     id: nanoid(),
-    component: <LeaveType />,
+    component: <LeaveType component="leaveType"/>,
   },
   {
     path: "leave",
@@ -122,19 +122,19 @@ const adminRoutes = [
     path: "designation",
     name: "Designation",
     id: nanoid(),
-    component: <Designation />,
+    component: <Designation component="designation" />,
   },
   {
     path: "company",
     name: "Company",
     id: nanoid(),
-    component: <Company />,
+    component: <Company component="company" />,
   },
   {
     path: "department",
     name: "Department",
     id: nanoid(),
-    component: <Department />,
+    component: <Department component="department" />,
   },
   {
     path: "birthday",
@@ -152,13 +152,13 @@ const adminRoutes = [
     path: "todolist",
     name: "To Do List",
     id: nanoid(),
-    component: <TodoList />,
+    component: <TodoList component="todo"/>,
   },
   {
     path: "project",
     name: "Project",
     id: nanoid(),
-    component: <Project />,
+    component: <Project component="project" />,
   },
   {
     path: "project/:id",
@@ -170,13 +170,13 @@ const adminRoutes = [
     path: "project/get-deactivated-projects",
     name: "Inactive Project",
     id: nanoid(),
-    component: <DeactivatedProject />,
+    component: <DeactivatedProject component="deactivate-project" />,
   },
   {
     path: "event",
     name: "Event",
     id: nanoid(),
-    component: <Event />,
+    component: <Event component="event"/>,
   },
   {
     path: "holiday",
@@ -218,7 +218,7 @@ const adminRoutes = [
     path: "users",
     name: "Users",
     id: nanoid(),
-    component: <UserController />,
+    component: <UserController component="users" />,
     requiresSuperAdmin: true,
   },
 ];

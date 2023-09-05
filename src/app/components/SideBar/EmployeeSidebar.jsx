@@ -93,12 +93,12 @@ export default function EmployeeSidebar() {
           sx={mode === "light" ? { color: "black" } : { color: "white" }}
         />
       ),
-      path: "profile",
+      path: "viewprofile",
       subMenus: [],
     },
     {
       name: "Apply Leave",
-      path: "leave",
+      path: "applyleave",
       icon: (
         <MailIcon
           sx={mode === "light" ? { color: "black" } : { color: "white" }}

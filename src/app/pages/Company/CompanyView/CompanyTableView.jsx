@@ -4,6 +4,7 @@ import { Button, Stack } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import HocButton from "../../../hoc/hocButton";
+import PermissionHoc from "../../../hoc/permissionHoc";
 
 const CompanyTableView = ({
   permissions,
@@ -12,6 +13,7 @@ const CompanyTableView = ({
   handleEditCompany,
   handleDeleteCompany,
 }) => {
+  console.log({"permissions" : permissions})
   const columns = [
     {
       title: "SN",
@@ -46,13 +48,13 @@ const CompanyTableView = ({
       render: (rowData) => (
         <Stack direction="row" spacing={0}>
           <HocButton
-            permissions={permissions.canEdit}
+            permissions={permissions?.canEdit}
             onClick={() => handleEditCompany(rowData)}
             icon={<EditIcon />}
           />
 
           <HocButton
-            permissions={permissions.canDelete}
+            permissions={permissions?.canDelete}
             onClick={() => handleDeleteCompany(rowData)}
             icon={<DeleteIcon />}
           />
