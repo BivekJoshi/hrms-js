@@ -92,12 +92,12 @@ const Designation = ({ permissions }) => {
       render: (rowData) => (
         <Stack direction="row" spacing={0}>
           <HocButton
-            permissions={permissions.canEdit}
+            permissions={permissions?.canEdit}
             onClick={() => handleEditDesignation(rowData)}
             icon={<ModeEditOutlineIcon />}
           />
           <HocButton
-            permissions={permissions.canDelete}
+            permissions={permissions?.canDelete}
             onClick={() => handleDeleteDesignation(rowData)}
             icon={<DeleteIcon />}
           />
@@ -115,7 +115,7 @@ const Designation = ({ permissions }) => {
     <>
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
         <HocButton
-          permissions={permissions.canAdd}
+          permissions={permissions?.canAdd}
           color= {"primary"}
           variant={"contained"}
           OnClick={handleAddOpenModal}

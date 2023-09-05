@@ -11,7 +11,6 @@ const DeactivatedOfficeResource = () => {
   const { formik } = useOfficeResourceInactiveForm(data);
   const handleActivate = (rowData) => {
     const id = rowData.id;
-    console.log(id);
   };
 
   const columns = [

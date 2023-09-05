@@ -59,18 +59,6 @@ const LeaveFields = ({ onClose, isLoading, data }) => {
     formik.handleSubmit();
 
     if (formik.isValid) {
-      formik({
-        employeeId: true,
-        leaveTypeId: true,
-        leaveReason: true,
-        fromDate: true,
-        toDate: true,
-        applyLeaveDays: true,
-        leaveBalance: true,
-        confirmById: true,
-        leaveRemarks: true,
-        halfDay: true,
-      });
       onClose();
     } else {
       toast.error("Please make sure you have filled the form correctly");
