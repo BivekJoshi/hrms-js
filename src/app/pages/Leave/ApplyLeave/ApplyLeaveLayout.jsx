@@ -5,9 +5,9 @@ import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import ApplyLeave from "./ApplyLeave";
 import { Chip, Fab, Typography } from "@mui/material";
-import LeaveInfo from "../../Employee/EmployeeViewPage/InfoTabs/LeaveInfoTab/LeaveInfo";
 import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from "react-router-dom";
+import LeaveUserView from "../LeaveUserView";
 
 const fabStyle = {
   position: "fixed",
@@ -104,7 +104,7 @@ const ApplyLeaveLayout = () => {
       </Grid>
       <br/>
       <Grid item xs={12}>
-        <LeaveInfo />
+        <LeaveUserView/>
       </Grid>
       <Fab color="secondary" aria-label="add" style={fabStyle} onClick={() => navigate(`/employee/applyleavefield`)}>
         <AddIcon />

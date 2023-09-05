@@ -24,10 +24,11 @@ const EmployeeProfile = () => {
       ? useGetEmployeeById(id)
       : {};
 
-  const { data: loggedInUserData } = isEmployee ? useGetLoggedInUserInfo() : {};
+  const { data: loggedInUserData ,isLoading:isLoadingUserData} = isEmployee ? useGetLoggedInUserInfo() : {};
 
 
-  if (isLoading) return <>Loading</>;
+
+  if (isLoading||isLoadingUserData) return <>Loading</>;
 
   return (
     <>

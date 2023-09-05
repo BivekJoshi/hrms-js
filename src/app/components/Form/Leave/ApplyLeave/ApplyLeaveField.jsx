@@ -10,8 +10,10 @@ import React from "react";
 import { useGetLeaveType } from "../../../../hooks/leaveType/useLeaveType";
 import useApplyLeaveForm from "../../../../hooks/leave/LeaveForm/useApplyLeaveForm";
 import { toast } from "react-toastify";
+import { useGetLeaveById } from "../../../../hooks/leave/useLeave";
 
-const ApplyLeaveField = ({ data }) => {
+const ApplyLeaveField = ({ id}) => {
+  const { data } = useGetLeaveById(id);
   const { data: leaveTypeData } = useGetLeaveType();
   const { formik } = useApplyLeaveForm(data);
 
