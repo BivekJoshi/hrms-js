@@ -7,6 +7,7 @@ import { DetailProfile } from "./Component/DetailProfile";
 import { PersonalProfile } from "./Component/PersonalProfile";
 import ProgressById from "../../ProgressEmployeeData/ProgressById";
 import useAuth from "../../../../../auth/hooks/component/login/useAuth";
+import { EmployeeDetailProfile } from "./Component/EmployeeDetailProfile";
 
 const EmployeeProfile = () => {
   const {
@@ -42,7 +43,7 @@ const EmployeeProfile = () => {
         ) : (
           <>
             <PersonalProfile data={loggedInUserData} />
-            <DetailProfile data={loggedInUserData} />
+            <EmployeeDetailProfile data={loggedInUserData} />
           </>
         )}
       </div>
