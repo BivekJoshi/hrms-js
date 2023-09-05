@@ -9,12 +9,21 @@ import ThemeModeContext from "../../../../theme/ThemeModeContext";
 import { useGetLoggedInUser } from "../../../hooks/auth/usePassword";
 import { DOC_URL } from "../../../../auth/axiosInterceptor";
 import { CardMedia } from "@mui/material";
+import { EmployTaskCard } from "../Component/EmployTaskCard";
+import { EmployPichart } from "../Component/EmployPichart";
+import { EmployLineChart } from "../Component/EmployLineChart";
+import { MiddleEmployDashbord } from "./MiddleEmployDashbord";
 
 const EmployeeDashbord = (props) => {
   const { data: employData } = useGetLoggedInUser();
   const { mode } = useContext(ThemeModeContext);
-  const img = DOC_URL + employData.userPhotoPath;
-
+  // const img = DOC_URL + employData.userPhotoPath;
+  const task = [
+    { nameOfTask: "Total Project", numberOfTask: "4" },
+    { nameOfTask: "Total Task", numberOfTask: "4" },
+    { nameOfTask: "Task Pending", numberOfTask: "4" },
+    { nameOfTask: "Task Complete", numberOfTask: "4" },
+  ];
   const today = new Date();
   const options = {
     weekday: "long",
@@ -35,24 +44,40 @@ const EmployeeDashbord = (props) => {
         }
       >
         <CardMedia
+          src={Male}
           component="img"
-          src={
-            employData?.userPhotoPath
-              ? img : 
-              // EGender === "MALE" ?
-               Male
-              // : ""
-              // ? Female
-              // : Female
-          }
+          // src={
+          //   employData?.userPhotoPath
+          //     ? img :
+          //     // EGender === "MALE" ?
+          //      Male
+          //     // : ""
+          //     // ? Female
+          //     // : Female
+          // }
           alt="Paella dish"
           sx={{ width: 66, height: 66, borderRadius: "2rem" }}
-        />{" "}
+        />
         <Box alignSelf="center">
           <h3>Welcome , {employData.name}</h3>
           <h3>{formattedDate}</h3>
         </Box>
       </Box>
+      <Box
+        display="grid"
+        grid
+        gridTemplateColumns="repeat(auto-fit, minmax(125px, 1fr))"
+        gap="1rem"
+      >
+        {task.map((taskDetail, index) => (
+          <EmployTaskCard
+            nameOfTask={taskDetail.nameOfTask}
+            numberOfTask={taskDetail.numberOfTask}
+          />
+        ))}
+        <EmployPichart />
+      </Box>
+      <MiddleEmployDashbord />
       <Box display="grid" gridTemplateColumns="3fr 2fr" gap="3rem">
         <LeftEmployDashbord />
         <RightEmployDashbord />

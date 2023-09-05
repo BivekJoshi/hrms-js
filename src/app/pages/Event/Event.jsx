@@ -29,16 +29,20 @@ const Event = ({ permissions }) => {
     }
   }, [eventData]);
 
-  const [openAddModal, setOpenAddModal] = useState(false);
+  const [openAddModal, setOpenAddModal] = useState();
   const [openModal, setOpenModal] = useState(false);
   const [getEventID, setEventGetID] = useState({});
+  
+  const handleAddEventClick = () => {
+    setOpenAddModal(!openAddModal); // Toggle the state
+  };
 
   const handleOpenModal = (e) => {
     setEventGetID(e?.event?._def?.publicId);
     setOpenModal(true);
   };
 
-  const handleCloseModal = () => setOpenModal(false);
+  const handleCloseModal = () => setOpenAddModal(false);
 
   // const handleTodayClick = (events) => {
   //   console.log(events)
@@ -60,7 +64,7 @@ const Event = ({ permissions }) => {
       {openAddModal && (
         <AddEventModal
           open={() => setOpenAddModal(true)}
-          handleCloseModal={() => setOpenAddModal(false)}
+          handleCloseModal={() => console.log(handleCloseModal + "jlee")}
         />
       )}
       <FullCalendar

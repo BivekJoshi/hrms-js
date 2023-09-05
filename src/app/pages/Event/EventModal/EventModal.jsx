@@ -21,7 +21,7 @@ export const AddEventModal = ({ open, handleCloseModal }) => {
   const handleFormSubmit = async () => {
     formik.handleSubmit();
     if (!formik.isValidating && formik.isValid) {
-      // handleCloseModal();
+      onClose(handleCloseModal);
     } else {
       toast.error("Please make sure you have filled the form correctly");
     }
@@ -50,13 +50,14 @@ export const AddEventModal = ({ open, handleCloseModal }) => {
               <Button
                 variant="contained"
                 onClick={handleFormSubmit}
+                onClose={handleCloseModal}
                 sx={{ mt: 3, ml: 1 }}
               >
                 Add Event
               </Button>
               <Button
                 variant="contained"
-                onClick={handleCloseModal}
+                // onClick={handl/eCloseModal}
                 sx={{ mt: 3, ml: 1 }}
                 color="error"
               >
