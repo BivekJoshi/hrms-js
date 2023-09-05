@@ -1,14 +1,14 @@
 import { useFormik } from "formik";
-import { useAddLeave, useEditLeave } from "../useLeave";
+import { useAddLeave, useAddLeaveByAdmin, useEditLeave } from "../useLeave";
 import { LeaveSchema } from "../Validation/LeaveSchema";
 
 const useLeaveForm = (data) => {
-  const { mutate: addLeave } = useAddLeave({});
+  const { mutate: addLeave } = useAddLeaveByAdmin({});
   const { mutate: editLeave } = useEditLeave({});
 
   const formik = useFormik({
     initialValues: {
-      employeeId: data?.employeeId || "",
+      // employeeId: data?.employeeId || "",
       leaveTypeId: data?.leaveTypeId || "",
       leaveReason: data?.leaveReason || "",
       fromDate: data?.fromDate || "",

@@ -23,8 +23,8 @@ const Birthdaytable = ({ data, isloading, currMonth }) => {
         dateOfBirth.getDate() === today.getDate();
       const age = Age(row.dateOfBirth);
       return {
-        fullName:`${row.fullName}`,
-        position: row?.positionName || '',
+        fullName: `${row.fullName}`,
+        position: row?.positionName || "",
         dateOfBirth: format(new Date(row.dateOfBirth), "dd MMMM", {
           locale: enUS,
         }),
@@ -49,12 +49,12 @@ const Birthdaytable = ({ data, isloading, currMonth }) => {
     <MaterialTable
       title={currMonth}
       columns={[
-        { title: "Name", field: "fullName" },
-        { title: "Position", field: "position" },
-        { title: "Date", field: "dateOfBirth" },
-        { title: "Day", field: "dayOfBirth" },
-        { title: "Age", field: "age" },
-        { title: "Gender", field: "gender" },
+        { title: "Name", field: "fullName", sorting: false },
+        { title: "Position", field: "position", sorting: false },
+        { title: "Date", field: "dateOfBirth", sorting: false },
+        { title: "Day", field: "dayOfBirth", sorting: false },
+        { title: "Age", field: "age", sorting: false },
+        { title: "Gender", field: "gender", sorting: false },
       ]}
       data={Data}
       options={{
@@ -63,16 +63,16 @@ const Birthdaytable = ({ data, isloading, currMonth }) => {
         pageSize: 5,
         emptyRowsWhenPaging: false,
         headerStyle: {
-          backgroundColor: '#01579b',
-          color: '#FFF',
+          backgroundColor: "#01579b",
+          color: "#FFF",
           fontSize: "1rem",
-          padding: 'dense',
+          padding: "dense",
           height: 50,
-          textAlign:'center',
-          border:'2px solid #fff',
-          minHeight:'10px',
-          textTransform:'capitilize'
-      },
+          textAlign: "center",
+          border: "2px solid #fff",
+          minHeight: "10px",
+          textTransform: "capitilize",
+        },
         rowStyle: (rowData) => ({
           backgroundColor: rowData.isTodayBirthday === true ? "green" : "",
           color: rowData.isTodayBirthday ? "white" : "",

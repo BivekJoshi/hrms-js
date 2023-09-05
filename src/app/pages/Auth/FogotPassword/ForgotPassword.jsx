@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { toast } from "react-toastify";
 import forget from "../../../../assets/forget.avif";
 import useAddForgotPasswordForm from "../../../hooks/auth/forgotPassword/useAddForgotPasswordForm";
 import { Grid, Button, TextField, Stack, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ThemeModeContext from "../../../../theme/ThemeModeContext";
 
 const ForgotPassword = ({ onClose, isLoading }) => {
   const navigate = useNavigate();
   const { formik } = useAddForgotPasswordForm();
+  const {mode} = useContext(ThemeModeContext)
 
   const handleFormSubmit = async () => {
     const isValid = await formik.validateForm();
@@ -28,12 +30,6 @@ const ForgotPassword = ({ onClose, isLoading }) => {
   const style = {
     display: "flex",
     width: "40%",
-    // justifyContent: "Column",
-    // padding: "1rem",
-    // border: "9px solid rgb(69 24 247)",
-    // boxShadow: "rgba(0, 0, 0, 0.5) 12px 12px 7px",
-    // background: "#3edbeb",
-    // gap: "1rem",
   };
 
   return (
@@ -44,6 +40,7 @@ const ForgotPassword = ({ onClose, isLoading }) => {
           display: "flex",
           justifyContent: "space-around",
           alignItems: "center",
+          height:"100vh"
         }}
       >
         <Stack sx={{ width: "40%", height: "auto" }}>
@@ -51,16 +48,20 @@ const ForgotPassword = ({ onClose, isLoading }) => {
         </Stack>
         <Stack style={style}>
           <center>
-          <Typography variant="h4" gutterBottom>
-            Forgot Your Password?
-          </Typography>
-          <Typography
-            variant="p"
-            gutterBottom
-            sx={{ color: "rgba(0, 0, 0, 0.6)" }}
-          >
-            Enter a Email to get a Reset Link
-          </Typography>
+            <Typography
+              variant="h4"
+              gutterBottom
+              color={mode === "light" ? "" : "white"}
+            >
+              Forgot Your Password?
+            </Typography>
+            <Typography
+              variant="p"
+              gutterBottom
+              color={mode === "light" ? "" : "white"}
+            >
+              Enter a Email to get a Reset Link
+            </Typography>
           </center>
           <br />
           <Grid item>
@@ -69,7 +70,7 @@ const ForgotPassword = ({ onClose, isLoading }) => {
               name="email"
               label=" Your Email"
               type="email"
-              placeholder="me@dghub.io............"
+              placeholder="me@dghub.io"
               fullWidth
               required
               value={formik.values.email}
@@ -85,7 +86,9 @@ const ForgotPassword = ({ onClose, isLoading }) => {
           <Grid container direction="row" justifyContent="space-between">
             <Button onClick={handleCancel} sx={{ mt: 3, ml: 1 }}>
               <ArrowBackIcon />
-              Back to your login page
+              <Typography color={mode === "light" ? "" : "white"}>
+                Back to your login page
+              </Typography>
             </Button>
             <Button
               variant="contained"

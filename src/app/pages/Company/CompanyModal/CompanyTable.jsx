@@ -5,7 +5,7 @@ import { EditCompanyModal } from './CompanyModal';
 import { useDeleteCompany, useGetCompany } from '../../../hooks/company/useCompany';
 import DeleteConfirmationModal from '../../../components/Modal/DeleteConfirmationModal';
 
-const CompanyTable = () => {
+const CompanyTable = ({ permissions }) => {
     const { data: companyData, isLoading } = useGetCompany();
 
     const [openEditModal, setOpenEditModal] = useState(false);
@@ -32,9 +32,12 @@ const CompanyTable = () => {
         setOpenEditModal(true);
     };
 
+   
+
     return (
         <>
             <CompanyTableView
+                permissions={permissions}
                 companyData={companyData}
                 isLoading={isLoading}
                 handleEditCompany={handleEditCompany}
@@ -60,4 +63,3 @@ const CompanyTable = () => {
 };
 
 export default CompanyTable;
-

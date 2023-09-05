@@ -3,7 +3,7 @@ import { axiosInstance } from '../../../auth/axiosInterceptor';
 {/*________________________GETBYID_____________________________________*/ }
 export const getQualificationById = async (id) => {
   if (id) {
-    const data = axiosInstance.get(`/qualification/employee/${id}`);
+    const data = axiosInstance.get(`/qualification/employee-id/${id}`);
     return data;
   }
 };
@@ -19,12 +19,12 @@ export const addQualification = async (formData, id) => {
 
 {/*________________________EDIT_____________________________________*/ }
 export const editQualification = async (formData, id) => {
-  const data = await axiosInstance.put(`/qualification/${id}`, formData?.education);
+  const data = await axiosInstance.put(`/qualification/update/${id}`, formData?.education);
   return data;
 };
 
 {/*________________________DELETE_____________________________________*/ }
 export const deleteQualifiaction = async (qualificationId) => {
-  const data = await axiosInstance.delete(`/qualification/${qualificationId}`);
+  const data = await axiosInstance.delete(`/qualification/delete/${qualificationId}`);
   return data;
 }

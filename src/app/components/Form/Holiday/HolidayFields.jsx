@@ -2,41 +2,51 @@ import React, { useState } from "react";
 import { Grid, TextField, Button } from "@mui/material";
 import { toast } from "react-toastify";
 import { useDeleteHoliday } from "../../../hooks/holiday/useHoliday";
-import useHolidayForm from "../../../hooks/holiday/HolidayForm/useHolidayForm";
-import ModalComponent from "../../Modal/ModalComponent";
+import PermissionHoc from "../../../hoc/permissionHoc";
 
-const HolidayFields = ({ onClose, isLoading, data }) => {
-  const [openSubmitModal, setOpenSubmitModal] = useState(false);
+const HolidayFields = ({ formik }) => {
+  // const [openSubmitModal, setOpenSubmitModal] = useState(false);
 
-  const handleSubmitModal = () => {
-    setOpenSubmitModal(true);
+  // const handleSubmitModal = () => {
+  //   setOpenSubmitModal(true);
+  // };
+  // const handleCloseModal = () => {
+  //   setOpenSubmitModal();
+  // };
+  // const { formik } = useHolidayForm(data, handleSubmitModal, onClose);
+
+  // const handleFormSubmit = async () => {
+  //   const isValid = await formik.validateForm();
+
+  //   if (isValid) {
+  //     formik.handleSubmit();
+
+  //     if (formik.isValid) {
+  //       // onClose();
+  //       // setOpenSubmitModal(false);
+  //     } else {
+  //       toast.error("Please make sure you have filled the form correctly");
+  //     }
+  //   }
+  // };
+
+  // const deleteHolidayMutation = useDeleteHoliday({});
+  // const handleDeleteHoliday = () => {
+  //   deleteHolidayMutation.mutate(data.id);
+  //   onClose();
+  // };
+  // const submitButtonText = data ? "Update" : "Add Holiday";
+
+  const handleCloseConfirmationModal = () => {
+    setConfirmationModal(false);
   };
-  const handleCloseModal = () => {
-    setOpenSubmitModal()
-  };
-  const { formik } = useHolidayForm(data, handleSubmitModal, onClose);
 
-  const handleFormSubmit = async () => {
-    const isValid = await formik.validateForm();
-
-    if (isValid) {
-      formik.handleSubmit();
-
-      if (formik.isValid) {
-        // onClose();
-        // setOpenSubmitModal(false);
-      } else {
-        toast.error("Please make sure you have filled the form correctly");
-      }
-    }
-  };
-
-  const deleteHolidayMutation = useDeleteHoliday({});
-  const handleDeleteHoliday = () => {
-    deleteHolidayMutation.mutate(data.id);
-    onClose();
-  };
-  const submitButtonText = data ? "Update" : "Add Holiday";
+  // const deleteHolidayMutation = useDeleteHoliday({});
+  // const handleDeleteHoliday = () => {
+  //   deleteHolidayMutation.mutate(data.id);
+  //   onClose();
+  // };
+  // const submitButtonText = data ? "Update" : "Add Holiday";
 
   return (
     <>
@@ -103,24 +113,26 @@ const HolidayFields = ({ onClose, isLoading, data }) => {
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
-        <Grid
+        {/* <Grid
           container
           direction="row"
           justifyContent="flex-end"
           alignItems="flex-end"
         >
-          {data ? (
-            <Button
-              variant="contained"
-              onClick={handleDeleteHoliday}
-              sx={{ mt: 3, ml: 1 }}
-              color="error"
-            >
-              Delete
-            </Button>
-          ) : (
-            ""
-          )}
+          <>
+            {data ? (
+              <Button
+                variant="contained"
+                onClick={handleDeleteHoliday}
+                sx={{ mt: 3, ml: 1 }}
+                color="error"
+              >
+                Delete
+              </Button>
+            ) : (
+              ""
+            )}
+          </>
 
           <Button
             variant="contained"
@@ -129,6 +141,7 @@ const HolidayFields = ({ onClose, isLoading, data }) => {
           >
             {submitButtonText}
           </Button>
+
           <Button
             variant="contained"
             onClick={onClose}
@@ -137,18 +150,10 @@ const HolidayFields = ({ onClose, isLoading, data }) => {
           >
             Cancel
           </Button>
-        </Grid>
+        </Grid> */}
       </Grid>
-      {openSubmitModal && (
-        <ModalComponent
-          open={openSubmitModal}
-          handleSubmitModal={handleSubmitModal}
-          data={data}
-          onClose={handleCloseModal}
-        />
-      )}
     </>
   );
 };
 
-export default HolidayFields;
+export default PermissionHoc(HolidayFields);

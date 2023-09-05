@@ -86,7 +86,7 @@ export const useDeleteTodoList = ({ onSuccess }) => {
 
   return useMutation(["deleteTodoList"], (id) => deleteTodoList(id), {
     onSuccess: (data, variables, context) => {
-      toast.success("Message edited successfully");
+      toast.success("Message deleted successfully");
       onSuccess && onSuccess(data, variables, context);
       queryClient.invalidateQueries("getTodoList");
     },

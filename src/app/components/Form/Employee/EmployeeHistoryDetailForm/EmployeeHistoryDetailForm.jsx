@@ -1,7 +1,7 @@
-import { Button, Grid, TextField, Typography } from '@mui/material';
-import { FieldArray, FormikProvider } from 'formik';
-import React from 'react'
-import { useDeleteHistory } from '../../../../hooks/employee/useEmployeeHistory';
+import { Button, Grid, TextField, Typography } from "@mui/material";
+import { FieldArray, FormikProvider } from "formik";
+import React from "react";
+import { useDeleteHistory } from "../../../../hooks/employee/useEmployeeHistory";
 
 const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
   const { values, handleChange } = formik;
@@ -37,14 +37,21 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                           placeholder="Enter the company name you worked last time"
                           fullWidth
                           value={employeeHistory.employerName}
-                          onChange={handleChange}
-                          error={Boolean(formik.touched.history?.[index]?.employerName && formik.errors.history?.[index]?.employerName)}
-                          helperText={formik.touched.history?.[index]?.employerName && formik.errors.history?.[index]?.employerName}
+                          onChange={formik.handleChange}
+                          error={Boolean(
+                            formik.touched.history?.[index]?.employerName &&
+                              formik.errors.history?.[index]?.employerName
+                          )}
+                          helperText={
+                            formik.touched.history?.[index]?.employerName &&
+                            formik.errors.history?.[index]?.employerName
+                          }
                           variant="outlined"
                           autoFocus
-                          InputlabelProps={{ shrink: true }}
+                          InputLabelProps={{ shrink: true }}
                         />
                       </Grid>
+
                       <Grid item xs={12} sm={3}>
                         <TextField
                           id={`history[${index}].employerAddress`}
@@ -53,28 +60,40 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                           placeholder="Enter the company address you worked last time"
                           fullWidth
                           value={employeeHistory.employerAddress}
-                          onChange={handleChange}
-                          error={Boolean(formik.touched.history?.[index]?.employerAddress && formik.errors.history?.[index]?.employerAddress)}
-                          helperText={formik.touched.history?.[index]?.employerAddress && formik.errors.history?.[index]?.employerAddress}
+                          onChange={formik.handleChange}
+                          error={Boolean(
+                            formik.touched.history?.[index]?.employerAddress &&
+                              formik.errors.history?.[index]?.employerAddress
+                          )}
+                          helperText={
+                            formik.touched.history?.[index]?.employerAddress &&
+                            formik.errors.history?.[index]?.employerAddress
+                          }
                           variant="outlined"
                           autoFocus
-                          InputlabelProps={{ shrink: true }}
+                          InputLabelProps={{ shrink: true }}
                         />
                       </Grid>
                       <Grid item xs={12} sm={3}>
                         <TextField
                           id={`history[${index}].pastPosition`}
                           name={`history[${index}].pastPosition`}
-                          label="Past position"
+                          label="Past Position"
                           placeholder="Enter your past position"
                           fullWidth
                           value={employeeHistory.pastPosition}
                           onChange={handleChange}
-                          error={Boolean(formik.touched.history?.[index]?.pastPosition && formik.errors.history?.[index]?.pastPosition)}
-                          helperText={formik.touched.history?.[index]?.pastPosition && formik.errors.history?.[index]?.pastPosition}
+                          error={Boolean(
+                            formik.touched.history?.[index]?.pastPosition &&
+                              formik.errors.history?.[index]?.pastPosition
+                          )}
+                          helperText={
+                            formik.touched.history?.[index]?.pastPosition &&
+                            formik.errors.history?.[index]?.pastPosition
+                          }
                           variant="outlined"
                           autoFocus
-                          InputlabelProps={{ shrink: true }}
+                          InputLabelProps={{ shrink: true }}
                         />
                       </Grid>
                       <Grid item xs={12} sm={3}>
@@ -87,11 +106,17 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                           type="date"
                           value={employeeHistory.fromDate}
                           onChange={handleChange}
-                          error={Boolean(formik.touched.history?.[index]?.fromDate && formik.errors.history?.[index]?.fromDate)}
-                          helperText={formik.touched.history?.[index]?.fromDate && formik.errors.history?.[index]?.fromDate}
+                          error={Boolean(
+                            formik.touched.history?.[index]?.fromDate &&
+                              formik.errors.history?.[index]?.fromDate
+                          )}
+                          helperText={
+                            formik.touched.history?.[index]?.fromDate &&
+                            formik.errors.history?.[index]?.fromDate
+                          }
                           variant="outlined"
                           autoFocus
-                          InputlabelProps={{ shrink: true }}
+                          InputLabelProps={{ shrink: true }}
                         />
                       </Grid>
                       <Grid item xs={12} sm={3}>
@@ -104,11 +129,17 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                           type="date"
                           value={employeeHistory.toDate}
                           onChange={handleChange}
-                          error={Boolean(formik.touched.history?.[index]?.toDate && formik.errors.history?.[index]?.toDate)}
-                          helperText={formik.touched.history?.[index]?.toDate && formik.errors.history?.[index]?.toDate}
+                          error={Boolean(
+                            formik.touched.history?.[index]?.toDate &&
+                              formik.errors.history?.[index]?.toDate
+                          )}
+                          helperText={
+                            formik.touched.history?.[index]?.toDate &&
+                            formik.errors.history?.[index]?.toDate
+                          }
                           variant="outlined"
                           autoFocus
-                          InputlabelProps={{ shrink: true }}
+                          InputLabelProps={{ shrink: true }}
                         />
                       </Grid>
                       <Grid item xs={12} sm={3}>
@@ -120,11 +151,17 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                           fullWidth
                           value={employeeHistory.description}
                           onChange={handleChange}
-                          error={Boolean(formik.touched.history?.[index]?.description && formik.errors.history?.[index]?.description)}
-                          helperText={formik.touched.history?.[index]?.description && formik.errors.history?.[index]?.description}
+                          error={Boolean(
+                            formik.touched.history?.[index]?.description &&
+                              formik.errors.history?.[index]?.description
+                          )}
+                          helperText={
+                            formik.touched.history?.[index]?.description &&
+                            formik.errors.history?.[index]?.description
+                          }
                           variant="outlined"
                           autoFocus
-                          InputlabelProps={{ shrink: true }}
+                          InputLabelProps={{ shrink: true }}
                         />
                       </Grid>
                       <Grid item xs={12} sm={3}>
@@ -132,19 +169,26 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                           id={`history[${index}].remarks`}
                           name={`history[${index}].remarks`}
                           label="Remarks"
-                          placeholder="remarks"
+                          placeholder="Remarks"
                           fullWidth
                           value={employeeHistory.remarks}
                           onChange={handleChange}
-                          error={Boolean(formik.touched.history?.[index]?.remarks && formik.errors.history?.[index]?.remarks)}
-                          helperText={formik.touched.history?.[index]?.remarks && formik.errors.history?.[index]?.remarks}
+                          error={Boolean(
+                            formik.touched.history?.[index]?.remarks &&
+                              formik.errors.history?.[index]?.remarks
+                          )}
+                          helperText={
+                            formik.touched.history?.[index]?.remarks &&
+                            formik.errors.history?.[index]?.remarks
+                          }
                           variant="outlined"
                           autoFocus
-                          InputlabelProps={{ shrink: true }}
+                          InputLabelProps={{ shrink: true }}
                         />
                       </Grid>
                       <Grid
-                        item xs={12}
+                        item
+                        xs={12}
                         sm={1}
                         container
                         direction="row"
@@ -170,7 +214,17 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                 <br />
                 <Button
                   variant="contained"
-                  onClick={() => arrayHelpers.push({ employerName: "", employerAddress: "", pastPosition: "", fromDate: "", toDate: "", description: "", remarks: "" })}
+                  onClick={() =>
+                    arrayHelpers.push({
+                      employerName: "",
+                      employerAddress: "",
+                      pastPosition: "",
+                      fromDate: "",
+                      toDate: "",
+                      description: "",
+                      remarks: "",
+                    })
+                  }
                 >
                   Add
                 </Button>
@@ -183,4 +237,4 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
   );
 };
 
-export default EmployeeHistoryDetailForm
+export default EmployeeHistoryDetailForm;

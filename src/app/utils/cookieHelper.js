@@ -9,7 +9,6 @@ export const getUser = () => {
 };
 
 export const removeUser = () => {
-  localStorage.removeItem(STORAGE_KEY);
   sessionStorage.removeItem(STORAGE_KEY);
   sessionStorage.clear();
 };

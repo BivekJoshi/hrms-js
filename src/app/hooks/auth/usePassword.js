@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { toast } from "react-toastify";
 import {
+  addRenamePassword,
   addResetPassword,
   addforgotPassword,
   getLoggedInUser,
@@ -29,6 +30,7 @@ export const useGetEventById = (id) => {
 
 /*________________________POST_____________________________________*/
 export const useAddForgotPassword = ({ onSuccess }) => {
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
   return useMutation(
     ["forgotPassword"],
@@ -38,6 +40,28 @@ export const useAddForgotPassword = ({ onSuccess }) => {
         toast.success("Your new password has been sent to your email");
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries("forgotPassword");
+        navigate("/");
+      },
+      onError: (err, _variables, _context) => {
+        // toast.error(`error: ${err.message}`);
+      },
+    }
+  );
+};
+
+/*________________________PUT_____________________________________*/
+export const useAddResetPassword = ({id, onSuccess }) => {
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  return useMutation(
+    ["resetPassword"],
+    (formData) => addResetPassword(id, formData),
+    {
+      onSuccess: (data, variables, context) => {
+        toast.success("Password has been Changed Successfully");
+         onSuccess && onSuccess(data, variables, context);
+        queryClient.invalidateQueries("resetPassword");
+        navigate("/admin/dashboard");
       },
       onError: (err, _variables, _context) => {
         toast.error(`error: ${err.message}`);
@@ -46,17 +70,18 @@ export const useAddForgotPassword = ({ onSuccess }) => {
   );
 };
 
+
 /*________________________PUT_____________________________________*/
-export const useAddResetPassword = ({ onSuccess }) => {
+export const useAddRenamePassword = ({ onSuccess }) => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   return useMutation(
     ["resetPassword"],
-    (formData) => addResetPassword(formData),
+    (formData) => addRenamePassword(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success("Password has been Changed Successfully");
-        // onSuccess && onSuccess(data, variables, context);
+        toast.success("Password has been Created Successfully");
+         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries("resetPassword");
         navigate("/");
       },

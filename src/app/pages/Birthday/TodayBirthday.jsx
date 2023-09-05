@@ -1,20 +1,15 @@
-import React, { useRef } from "react";
-import { Button, Box, Popper, Grow, Paper } from "@mui/material";
+import React, { useState, useRef, useContext } from "react";
+import { Button, Box, Popper, Grow, Paper, MenuItem } from "@mui/material";
 import { ClickAwayListener, MenuList, Typography } from "@mui/material";
-import { MenuItem } from "@mui/material";
 import CakeIcon from "@mui/icons-material/Cake";
-import { NavLink } from "react-router-dom";
-import {
-  useRemoveNotification,
-} from "../../hooks/birthday/useBirthday";
 import "../Style/Style.css";
-import { useState } from "react";
+import ThemeModeContext from "../../../theme/ThemeModeContext";
 
 const TodayBirthday = ({ data }) => {
-  const [anchorEl, setAnchorEl] = useState(null);
   const birthdayEmployeeName = data?.birthdayEmployees;
   const birthdayEmployeeCount = data?.birthdayEmployeeCount || 0;
   const displayCount = birthdayEmployeeCount > 0 ? birthdayEmployeeCount : null;
+  const { mode } = useContext(ThemeModeContext);
 
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
@@ -40,7 +35,6 @@ const TodayBirthday = ({ data }) => {
     }
   }
 
-  // return focus to the button when we transitioned from !open -> open
   const prevOpen = useRef(open);
   React.useEffect(() => {
     if (prevOpen.current === true && open === false) {
@@ -76,12 +70,13 @@ const TodayBirthday = ({ data }) => {
           placement="bottom-start"
           transition
           disablePortal
-          style={{ width: { xs: "30%", lg: "15%" }, marginLeft: "-4rem" }}
+          style={{ marginLeft: "-4rem" }}
         >
           {({ TransitionProps, placement }) => (
             <Grow
               {...TransitionProps}
               style={{
+                background: mode === "light" ? "" : "#4d4c4c",
                 transformOrigin:
                   placement === "bottom-start" ? "left top" : "left bottom",
               }}
@@ -95,11 +90,14 @@ const TodayBirthday = ({ data }) => {
                     onKeyDown={handleListKeyDown}
                     sx={{
                       textAlign: "center",
-                      width: { xs: "30%", lg: "15%" },
                       padding: "0.5rem 1rem",
                     }}
                   >
-                    <Typography variant="h6" color="primary" fontWeight={400}>
+                    <Typography
+                      variant="h6"
+                      color={mode === "light" ? "primary" : "white"}
+                      fontWeight={400}
+                    >
                       Today's Birthday
                     </Typography>
                     {birthdayEmployeeName &&
@@ -132,6 +130,7 @@ const TodayBirthday = ({ data }) => {
             <Grow
               {...TransitionProps}
               style={{
+                background: mode === "light" ? "" : "#4d4c4c",
                 transformOrigin:
                   placement === "bottom-start" ? "left top" : "left bottom",
               }}
@@ -149,7 +148,11 @@ const TodayBirthday = ({ data }) => {
                       padding: "1rem 2rem",
                     }}
                   >
-                    <Typography variant="h6" color="primary" fontWeight={400}>
+                    <Typography
+                      variant="h6"
+                      color={mode === "light" ? "primary" : "white"}
+                      fontWeight={400}
+                    >
                       No One Birthday !
                     </Typography>
                   </MenuList>

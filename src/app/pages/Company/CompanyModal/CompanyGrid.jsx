@@ -5,7 +5,7 @@ import { useDeleteCompany, useGetCompany } from '../../../hooks/company/useCompa
 import DeleteConfirmationModal from '../../../components/Modal/DeleteConfirmationModal';
 import CompanyGridView from '../CompanyView/CompanyGridView';
 
-const CompanyGrid = () => {
+const CompanyGrid = ({ permissions }) => {
     const { data: companyData, isLoading } = useGetCompany();
 
     const [openEditModal, setOpenEditModal] = useState(false);
@@ -35,6 +35,7 @@ const CompanyGrid = () => {
     return (
         <>
             <CompanyGridView
+                permissions={permissions}
                 companyData={companyData}
                 isLoading={isLoading}
                 handleEditCompany={handleEditCompany}

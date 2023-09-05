@@ -1,5 +1,6 @@
 import React from 'react';
 import Popover from '@mui/material/Popover';
+import { Box } from '@mui/material';
 
 const PopOver = ({ triggerContent, popoverContent }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -15,10 +16,10 @@ const PopOver = ({ triggerContent, popoverContent }) => {
   const open = Boolean(anchorEl);
 
   return (
-    <div>
-      <div onMouseEnter={handlePopoverOpen} onMouseLeave={handlePopoverClose}>
+    <Box marginTop=".5rem">
+      <Box onMouseEnter={handlePopoverOpen} onMouseLeave={handlePopoverClose}>
         {triggerContent}
-      </div>
+      </Box>
       <Popover
         id="mouse-over-popover"
         sx={{
@@ -39,7 +40,7 @@ const PopOver = ({ triggerContent, popoverContent }) => {
       >
         {popoverContent}
       </Popover>
-    </div>
+    </Box>
   );
 };
 

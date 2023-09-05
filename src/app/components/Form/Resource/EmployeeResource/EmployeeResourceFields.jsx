@@ -1,12 +1,14 @@
 import { Button, Grid, MenuItem, TextField } from "@mui/material";
-import React from "react";
+import React, { useContext } from "react";
 import useEmployeeResourceForm from "../../../../hooks/resource/employeeResource/EmployeeResourceForm/useEmployeeResourceForm";
 import { useGetOfficeResource } from "../../../../hooks/resource/officeResource/useOfficeResource";
 import { useGetEmployee } from "../../../../hooks/employee/useEmployee";
+import ThemeModeContext from "../../../../../theme/ThemeModeContext";
 
 const EmployeeResourceFields = ({ onClose, isLoading, data }) => {
   const { data: officeResourceData } = useGetOfficeResource();
   const { data: employeeData } = useGetEmployee();
+  const { mode } = useContext(ThemeModeContext);
 
   const { formik } = useEmployeeResourceForm(data);
   const handleFormSubmit = () => {
@@ -22,7 +24,7 @@ const EmployeeResourceFields = ({ onClose, isLoading, data }) => {
   return (
     !isLoading && (
       <Grid container spacing={3}>
-          <Grid item xs={12} sm={12}>
+        <Grid item xs={12} sm={12}>
           <TextField
             select
             id="employeeId"
@@ -43,7 +45,11 @@ const EmployeeResourceFields = ({ onClose, isLoading, data }) => {
           >
             {employeeData &&
               employeeData.map((option) => (
-                <MenuItem key={option?.id} value={option?.id}>
+                <MenuItem
+                  key={option?.id}
+                  value={option?.id}
+                  sx={{ bgcolor: mode === "light" ? "" : "#413e3e" }}
+                >
                   {option?.firstName} {option?.middleName} {option?.lastName}
                 </MenuItem>
               ))}
@@ -73,13 +79,17 @@ const EmployeeResourceFields = ({ onClose, isLoading, data }) => {
           >
             {officeResourceData &&
               officeResourceData.map((option) => (
-                <MenuItem key={option?.id} value={option?.id}>
+                <MenuItem
+                  key={option?.id}
+                  value={option?.id}
+                  sx={{ bgcolor: mode === "light" ? "" : "#413e3e" }}
+                >
                   {option?.name}
                 </MenuItem>
               ))}
           </TextField>
         </Grid>
-      
+
         <Grid item xs={12} sm={12}>
           <TextField
             type="date"

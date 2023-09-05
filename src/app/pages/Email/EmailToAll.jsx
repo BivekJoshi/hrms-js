@@ -1,119 +1,88 @@
 import React, { useState } from "react";
-import FormModal from "../../components/Modal/FormModal";
 import { useSendEmailToAll } from "../../hooks/email/useEmail";
 import {
-  Box,
   Button,
   Grid,
-  InputLabel,
   MenuItem,
   OutlinedInput,
   Select,
 } from "@mui/material";
 import { useGetEmployee } from "../../hooks/employee/useEmployee";
 
-const EmailToAll = ({ open, onClose, eventId }) => {
+const EmailToAll = ({ getEventID, onClose }) => {
+
   const { data: employeeData } = useGetEmployee();
-  const [employeeId, setEmployeeId] = useState();
-  const [emailData, setEmailData] = useState({ subject: "", message: "" });
-  const [errors, setErrors] = useState({ subject: false, message: false });
+  const [employeeId, setEmployeeId] = useState([]);
+  const [emailData, setEmailData] = useState();
 
   const sendEmailMutation = useSendEmailToAll({
     onSuccess: () => {
-      setEmailData({ subject: "", message: "" });
-      setErrors({ subject: false, message: false });
+      setEmailData();
+      onClose();
     },
     employeeId: employeeId,
-    eventId: eventId,
+    eventId: getEventID,
   });
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (validateForm()) {
-      sendEmailMutation.mutate(emailData);
-      onClose();
-    }
-  };
-
-  const validateForm = () => {
-    let isValid = true;
-    const updatedErrors = { ...errors };
-    setErrors(updatedErrors);
-    return isValid;
+    sendEmailMutation.mutate(emailData);
   };
 
   const handleChange = (event) => {
     const { value } = event.target;
-
-    if (value === "employee") {
+    if (value === "all") {
       const allEmployeeId = employeeData.map((employee) => employee.id);
       setEmployeeId(allEmployeeId);
-    } else if (value === "admin") {
-      setEmployeeId(value);
-    } else if (value === "hr") {
-      setEmployeeId(value);
-    } else if (value === "superadmin") {
+    } else {
       setEmployeeId(value);
     }
   };
 
   return (
     <>
-      <FormModal
-        open={open}
-        onClose={onClose}
-        formComponent={
-          <form onSubmit={handleSubmit}>
-            <h2>Email</h2>
-            <Box style={{ width: "400px" }}>
-              <Grid container spacing={2}>
-                <Grid
-                  item
-                  spacing={1}
-                  xs={12}
-                  sx={{ display: "flex", alignItems: "center" }}
-                >
-                  <InputLabel id="demo-multiple-name-label">To: </InputLabel>
-                  <Select
-                    sx={{ m: 1, width: 300 }}
-                    labelId="demo-multiple-name-label"
-                    id="email-multiple"
-                    select
-                    value={employeeId}
-                    onChange={handleChange}
-                    input={<OutlinedInput label="To" />}
-                  >
-                    <MenuItem value="employee">All Employees</MenuItem>
-                    <MenuItem value="admin">All Admin</MenuItem>
-                    <MenuItem value="hr">All HR</MenuItem>
-                    <MenuItem value="superadmin">Super Admin</MenuItem>
-                  </Select>
-                </Grid>
-              </Grid>
-              <div
-                style={{
-                  marginTop: "20px",
-                  columnGap: "20px",
-                  display: "flex",
-                }}
-              >
-                <Button
-                  type="button"
-                  variant="contained"
-                  color="primary"
-                  style={{ marginLeft: "10px" }}
-                  onClick={onClose}
-                >
-                  Cancel
-                </Button>
-                <Button type="submit" variant="contained" color="primary">
-                  Send
-                </Button>
-              </div>
-            </Box>
-          </form>
-        }
-      />
+      <form onSubmit={handleSubmit}>
+        <h2>Email</h2>
+        <Grid container spacing={2}>
+          <Grid
+            item
+            spacing={1}
+            xs={12}
+            sx={{ display: "flex", alignItems: "center" }}
+          >
+            <Select
+              sx={{ m: 1, width: 300 }}
+              labelId="demo-multiple-name-label"
+              id="employeeId"
+              select
+              value={employeeId}
+              onChange={handleChange}
+              input={<OutlinedInput label="To" />}
+            >
+              <MenuItem value="all">All Employees</MenuItem>
+              <MenuItem value="none">None</MenuItem>
+            </Select>
+          </Grid>
+        </Grid>
+        <Grid
+          container
+          direction="row"
+          justifyContent="flex-end"
+          alignItems="flex-end"
+        >
+          <Button type="submit" variant="contained" color="primary">
+            Send
+          </Button>
+          <Button
+            variant="contained"
+            color="error"
+            style={{ marginLeft: "10px" }}
+            onClick={onClose}
+          >
+            Cancel
+          </Button>
+        </Grid>
+      </form>
     </>
   );
 };

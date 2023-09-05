@@ -9,6 +9,7 @@ import {
   getEmployeeById,
   getEmployeeBydepartment,
   getEmployeeProgress,
+  getLoggedInUserInfo,
 } from '../../api/employee/employee-api';
 import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
@@ -19,6 +20,14 @@ export const useGetEmployee = () => {
     refetchOnWindowFocus: false,
   });
 };
+
+export const useGetLoggedInUserInfo = () => {
+  return useQuery(['getLoggedInUserInfo'], () => getLoggedInUserInfo(), {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
+};
+
 export const useGetEmployeeData = (pageNumber) => {
   return useQuery(['getEmployeeData', pageNumber], () => getEmployeeData(pageNumber), {
     refetchInterval: false,

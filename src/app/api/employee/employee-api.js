@@ -2,25 +2,31 @@ import { axiosInstance } from '../../../auth/axiosInterceptor';
 
 {/*________________________GETALL_____________________________________*/ }
 export const getEmployee = async () => {
-  const data = await axiosInstance.get(`/employee`);
+  const data = await axiosInstance.get(`/employee/get-all`);
+  return data;
+};
+
+{/*________________________GETALL_____________________________________*/ }
+export const getLoggedInUserInfo = async () => {
+  const data = await axiosInstance.get(`/employee/logged-in/employee-details`);
   return data;
 };
 
 {/*________________________GETBYPAGINATION_____________________________________*/ }
 export const getEmployeeData = async (pageNumber) => {
-  const data = await axiosInstance.get(`/employee/page-wise?pageNumber=${pageNumber}`);
+  const data = await axiosInstance.get(`/employee/get-all-page-wise/${pageNumber}/?pageSize=${pageNumber}&sortBy=id&sortDir=asc`);
   return data;
 };
 
 {/*________________________POST_____________________________________*/ }
 export const addEmployee = async (formData, getId) => {
-  const data = await axiosInstance.post(`/employee`, formData)
+  const data = await axiosInstance.post(`/employee/create`, formData)
   return data;
 };
 
 {/*________________________GETBYID_____________________________________*/ }
 export const getEmployeeById = (id) => {
-  const data = axiosInstance.get(`employee/${id}`);
+  const data = axiosInstance.get(`employee/employee-id/${id}`);
   return data;
 };
 
@@ -32,25 +38,25 @@ export const editEmployee = async (formData, id) => {
 
 {/*________________________GETBYCOMPANY_____________________________________*/ }
 export const getEmployeeByCompany = async () => {
-  const data = await axiosInstance.get(`/employee/company/{companyId}`);
+  const data = await axiosInstance.get(`/employee/company-id/{companyId}`);
   return data;
 };
 
 {/*________________________GETBYDESIGNATION_____________________________________*/ }
 export const getEmployeeByDesignation = async () => {
-  const data = await axiosInstance.get(`/employee/position/{positionId}`);
+  const data = await axiosInstance.get(`/employee/position-id/{positionId}`);
   return data;
 };
 
 {/*________________________GETBYDEPARTMENT_____________________________________*/ }
 export const getEmployeeBydepartment = async () => {
-  const data = await axiosInstance.get(`/employee/department/{departmentId}`);
+  const data = await axiosInstance.get(`/employee/department-id/{departmentId}`);
   return data;
 };
 
 {/*________________________GET-DEACTTIVATED-EMPLOYEE_____________________________________*/ }
 export const getDeactivatedEmployee = async () => {
-  const data = await axiosInstance.get(`/employee/deactivated`);
+  const data = await axiosInstance.get(`/employee/get-deactivated`);
   return data;
 };
 

@@ -1,22 +1,17 @@
-import React, { useState, useMemo } from "react";
-import { TextField, Button, Box, MenuItem } from "@mui/material";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
+import React, { useState, useMemo, useContext } from "react";
+import { TextField, Button, Box, MenuItem, Paper } from "@mui/material";
+import { Table, TableBody, TableRow, TableContainer } from "@mui/material";
+import { TableCell, TableHead } from "@mui/material";
 import { useGetAttendance } from "../../hooks/attendance/useAttendance";
 import "./Attendance.css";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
+import { ButtonComponent } from "../../components/Button/ButtonComponent";
+import ThemeModeContext from "../../../theme/ThemeModeContext";
 
 let cMonth;
 
 const month = [
-
-
   {
     label: "January",
     value: 1,
@@ -91,18 +86,15 @@ const year0 = [
 
 const Attendance = () => {
   const { data: attendanceData, isLoading } = useGetAttendance();
+  const { mode } = useContext(ThemeModeContext);
 
   const date = new Date();
   const year = date.getFullYear();
 
-
   const [cMonth, setCMonth] = useState(date.getMonth() + 1);
   date.setMonth(cMonth - 1);
 
-
-
   const monthName = date.toLocaleString("default", { month: "long" });
-
 
   const daysInMonth = new Date(year, cMonth, 0).getDate();
 
@@ -119,7 +111,6 @@ const Attendance = () => {
     setCMonth(cMonth - 1);
   }
 
-
   const [searchEmployee, setSearchEmployee] = useState("");
   const [searchMonth, setSearchMonth] = useState("");
   const [searchYear, setSearchYear] = useState("");
@@ -130,40 +121,38 @@ const Attendance = () => {
     if (searchEmployee) {
       filtered = filtered.filter(
         (employee) =>
-          employee.employeeName.toLowerCase().indexOf(searchEmployee.toLowerCase()) !== -1
+          employee.employeeName
+            .toLowerCase()
+            .indexOf(searchEmployee.toLowerCase()) !== -1
       );
     }
 
     if (searchMonth) {
-      filtered = filtered.filter(
-        (employee) =>
-          employee.attendanceList.some((entry) => {
-            const entryDate = new Date(entry.attendanceDate);
-            const entryMonth = entryDate.getMonth() + 1;
-            return entryMonth === searchMonth;
-          })
+      filtered = filtered.filter((employee) =>
+        employee.attendanceList.some((entry) => {
+          const entryDate = new Date(entry.attendanceDate);
+          const entryMonth = entryDate.getMonth() + 1;
+          return entryMonth === searchMonth;
+        })
       );
     }
 
     if (searchYear) {
-      filtered = filtered.filter(
-        (employee) =>
-          employee.attendanceList.some((entry) => {
-            const entryDate = new Date(entry.attendanceDate);
-            const entryYear = entryDate.getFullYear();
-            return entryYear === searchYear;
-          })
+      filtered = filtered.filter((employee) =>
+        employee.attendanceList.some((entry) => {
+          const entryDate = new Date(entry.attendanceDate);
+          const entryYear = entryDate.getFullYear();
+          return entryYear === searchYear;
+        })
       );
     }
 
     return filtered;
   }, [attendanceData, searchEmployee, searchMonth, searchYear]);
 
-
-
   return (
     <div className="main">
-      <h1>Attendance</h1>
+      <h2>Attendance</h2>
 
       <div className="Search">
         <Box
@@ -183,39 +172,54 @@ const Attendance = () => {
             onChange={(e) => setSearchEmployee(e.target.value)}
           />
 
-          <TextField select label="Select Month" defaultValue={monthName} value={searchMonth}
+          <TextField
+            select
+            label="Select Month"
+            defaultValue={monthName}
+            value={searchMonth}
             onChange={(e) => setSearchMonth(e.target.value)}
           >
             {month.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
+              <MenuItem
+                key={option.value}
+                value={option.value}
+                sx={{ bgcolor: mode === "light" ? "" : "#413e3e" }}
+              >
                 {option.label}
               </MenuItem>
             ))}
           </TextField>
 
-          <TextField select label="Select Year" defaultValue={year} value={searchYear}
-            onChange={(e) => setSearchYear(e.target.value)}>
+          <TextField
+            select
+            label="Select Year"
+            defaultValue={year}
+            value={searchYear}
+            onChange={(e) => setSearchYear(e.target.value)}
+          >
             {year0.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
+              <MenuItem
+                key={option.value}
+                value={option.value}
+                sx={{ bgcolor: mode === "light" ? "" : "#413e3e" }}
+              >
                 {option.label}
               </MenuItem>
             ))}
           </TextField>
-
-
         </Box>
       </div>
 
-      <h1>{monthName}, {year}</h1>
+      <h4 style={{ marginLeft: "10px" }}>
+        {monthName}, {year}
+      </h4>
 
       <div className="table-wrapper">
-        <TableContainer className="cntnr"
-          component={Paper}
-        >
+        <TableContainer className="cntnr" component={Paper}>
           <Table aria-label="simple table" className="table">
             <TableHead className="heading">
               <TableRow>
-                <TableCell className="sn" >Sn No.</TableCell>
+                <TableCell className="sn">Sn No.</TableCell>
 
                 {daysArray.map((d, i) => {
                   const dayName = new Date(year, cMonth - 1, d).toLocaleString(
@@ -224,19 +228,23 @@ const Attendance = () => {
                   );
 
                   return (
-                    <>           {i === 0 && (
-                      <TableCell style={{
-                        width: "140px",
-                        fontWeight: "bold",
-                        fontSize: "20px",
-                      }} className="emp">
-                        Employee
-                      </TableCell>
-
-                    )}
+                    <>
+                      {" "}
+                      {i === 0 && (
+                        <TableCell
+                          style={{
+                            width: "140px",
+                            fontWeight: "bold",
+                            fontSize: "20px",
+                          }}
+                          className="emp"
+                        >
+                          Employee
+                        </TableCell>
+                      )}
                       <TableCell style={{ textAlign: "center" }} key={d}>
-                        <div >{d}</div>
-                        <div >{dayName}</div>
+                        <Box color="white">{d}</Box>
+                        <Box color="white">{dayName}</Box>
                       </TableCell>
                     </>
                   );
@@ -250,10 +258,11 @@ const Attendance = () => {
                   const serialNumber = i + 1;
                   return (
                     <TableRow className="trhighlight" key={i}>
-                      <TableCell className="snNo" >{serialNumber}</TableCell>
-                      <TableCell className="empname">{employee.employeeName}</TableCell>
+                      <TableCell className="snNo">{serialNumber}</TableCell>
+                      <TableCell className="empname">
+                        {employee.employeeName}
+                      </TableCell>
                       {daysArray.map((d) => {
-
                         const currentDate = new Date();
 
                         const isPast =
@@ -280,15 +289,13 @@ const Attendance = () => {
                           );
                           const isPresent = !!attendanceEntry;
                           return (
-                            <TableCell style={{ textAlign: 'center' }} key={d}>
+                            <TableCell style={{ textAlign: "center" }} key={d}>
                               {isPresent ? (
                                 <>
-                                  <div >
+                                  <div>
                                     <CheckIcon color="success" />
                                   </div>
-                                  <div >
-                                    {attendanceEntry.timeIn}
-                                  </div>
+                                  <div>{attendanceEntry.timeIn}</div>
                                 </>
                               ) : (
                                 <CloseIcon color="warning" />
@@ -318,12 +325,14 @@ const Attendance = () => {
         </TableContainer>
       </div>
       <div className="button" style={{ maxWidth: "1480px" }}>
-        <Button variant="contained" onClick={Previous}>
-          Previous
-        </Button>
-        <Button variant="contained" onClick={Next}>
-          Next
-        </Button>
+        <ButtonComponent
+          OnClick={Previous}
+          buttonName={"Previous"}
+          BGColor="white"
+          TextColor="black"
+          disabled={false}
+        />
+        <ButtonComponent OnClick={Next} buttonName={"Next"} BGColor />
       </div>
     </div>
   );

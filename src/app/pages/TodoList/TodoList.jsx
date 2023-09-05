@@ -12,8 +12,11 @@ import { AddTodoListModal, EditTodoListModal } from "./TodoModal/TodoModal";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import tableIcons from "../../../theme/overrides/TableIcon";
+import { ButtonComponent } from "../../components/Button/ButtonComponent";
+import PermissionHoc from "../../hoc/permissionHoc";
+import HocButton from "../../hoc/hocButton";
 
-const TodoList = () => {
+const TodoList = ({ permissions }) => {
   const { data: todoListData, isLoading } = useGetTodoList();
 
   const [openAddModal, setOpenAddModal] = useState(false);
@@ -43,17 +46,20 @@ const TodoList = () => {
       render: (rowData) => rowData.tableData.id + 1,
       width: "50px",
       sortable: false,
+      sorting: false,
     },
     {
       title: "Message",
       field: "message",
-      width: "300px"
+      width: "300px",
+      sorting: false,
     },
     {
       title: "Due",
       field: "dueDate",
       width: "180px",
       // type: 'numeric',
+      sorting: false,
     },
     {
       title: "Priority",
@@ -63,6 +69,7 @@ const TodoList = () => {
       cellStyle: {
         whiteSpace: "nowrap",
       },
+      sorting: false,
       render: (rowData) => {
         const priority = rowData.priority;
         let chipColor = "";
@@ -94,12 +101,12 @@ const TodoList = () => {
           <Button color="primary" onClick={() => handleEditTodoList(rowData)}>
             <ModeEditOutlineIcon />
           </Button>
-          <Button
-            color="primary"
+          <HocButton
+            permissions={permissions?.canDelete}
+            color={"primary"}
             onClick={() => handleDeleteTodoList(rowData.id)}
-          >
-            <DeleteIcon />
-          </Button>
+            icon={<DeleteIcon />}
+          />
         </Stack>
       ),
       sorting: false,
@@ -119,13 +126,10 @@ const TodoList = () => {
   return (
     <>
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-        <Button
-          variant="contained"
-          sx={{ mt: 3, ml: 1 }}
-          onClick={handleAddOpenModal}
-        >
-          + Add Todo
-        </Button>
+        <ButtonComponent
+          OnClick={handleAddOpenModal}
+          buttonName={"+ Add Todo"}
+        />
       </Box>
       <br />
       <MaterialTable
@@ -140,16 +144,16 @@ const TodoList = () => {
           pageSize: 10,
           emptyRowsWhenPaging: false,
           headerStyle: {
-            backgroundColor: '#01579b',
-            color: '#FFF',
+            backgroundColor: "#01579b",
+            color: "#FFF",
             fontSize: "1rem",
-            padding: 'dense',
+            padding: "dense",
             height: 50,
-            textAlign:'center',
-            border:'2px solid #fff',
-            minHeight:'10px',
-            textTransform:'capitilize'
-        },
+            textAlign: "center",
+            border: "2px solid #fff",
+            minHeight: "10px",
+            textTransform: "capitilize",
+          },
           rowStyle: {
             fontSize: ".8rem",
           },
@@ -175,4 +179,4 @@ const TodoList = () => {
   );
 };
 
-export default TodoList;
+export default PermissionHoc(TodoList);

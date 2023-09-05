@@ -15,8 +15,11 @@ import {
   EditDesignationModal,
 } from "./DesignationModal/DesignationModal";
 import DeleteConfirmationModal from "../../components/Modal/DeleteConfirmationModal";
+import { ButtonComponent } from "../../components/Button/ButtonComponent";
+import PermissionHoc from "../../hoc/permissionHoc";
+import HocButton from "../../hoc/hocButton";
 
-const Designation = () => {
+const Designation = ({ permissions }) => {
   const { data: designationData, isLoading } = useGetDesignation();
 
   const [openAddModal, setOpenAddModal] = useState(false);
@@ -54,66 +57,70 @@ const Designation = () => {
       render: (rowData) => rowData.tableData.index + 1,
       width: 50,
       sortable: false,
+      sorting: false,
     },
     {
       title: "Designation Name",
       field: "positionName",
       emptyValue: "-",
       width: 200,
+      sorting: false,
     },
     {
       title: "Designation Level",
       field: "positionLevel",
       emptyValue: "-",
       width: 200,
+      sorting: false,
     },
     {
       title: "Salary",
       field: "salary",
       emptyValue: "-",
       width: 80,
+      sorting: false,
     },
     {
       title: "Details",
       field: "positionDetails",
       emptyValue: "-",
       width: 80,
-
+      sorting: false,
     },
     {
       title: "Actions",
       render: (rowData) => (
         <Stack direction="row" spacing={0}>
-          <Button
-            color="primary"
+          <HocButton
+            permissions={permissions?.canEdit}
             onClick={() => handleEditDesignation(rowData)}
-          >
-            <ModeEditOutlineIcon />
-          </Button>
-          <Button
-            color="primary"
+            icon={<ModeEditOutlineIcon />}
+          />
+          <HocButton
+            permissions={permissions?.canDelete}
             onClick={() => handleDeleteDesignation(rowData)}
-          >
-            <DeleteIcon />
-          </Button>
+            icon={<DeleteIcon />}
+          />
         </Stack>
       ),
       sorting: false,
+
       width: 80,
     },
-  ];
+  ].filter(Boolean);
+
   if (isLoading) return <>Loading</>;
 
   return (
     <>
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-        <Button
-          variant="contained"
-          sx={{ mt: 3, ml: 1 }}
-          onClick={handleAddOpenModal}
-        >
-          +Add Designation
-        </Button>
+        <HocButton
+          permissions={permissions?.canAdd}
+          color= {"primary"}
+          variant={"contained"}
+          OnClick={handleAddOpenModal}
+          buttonName={"+ Add Designation"}
+        />
       </Box>
       <br />
 
@@ -128,16 +135,16 @@ const Designation = () => {
           pageSize: 10,
           emptyRowsWhenPaging: false,
           headerStyle: {
-            backgroundColor: '#01579b',
-            color: '#FFF',
+            backgroundColor: "#01579b",
+            color: "#FFF",
             fontSize: "1rem",
-            padding: 'dense',
+            padding: "dense",
             height: 50,
-            textAlign:'center',
-            border:'2px solid #fff',
-            minHeight:'10px',
-            textTransform:'capitilize'
-        },
+            textAlign: "center",
+            border: "2px solid #fff",
+            minHeight: "10px",
+            textTransform: "capitilize",
+          },
           rowStyle: {
             fontSize: ".8rem",
           },
@@ -169,4 +176,4 @@ const Designation = () => {
   );
 };
 
-export default Designation;
+export default PermissionHoc(Designation);

@@ -1,6 +1,6 @@
 import { Grid, TextField, MenuItem, Typography, Button } from "@mui/material";
 import { FieldArray, FormikProvider } from "formik";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ThemeSwitch } from "../../../../../theme/ThemeSwitch";
 
 const province = [
@@ -41,28 +41,18 @@ const province = [
   },
 ];
 
-const EmployeeAddressDetailForm = ({ formik, isLoading }) => {
-  const handleTemporaryButtonClick = (index) => {
-    const permanentAddress = formik.values.addresses[0];
-    const {
-      country,
-      province,
-      district,
-      wardNumber,
-      city,
-      street,
-    } = permanentAddress;
-    const temporaryAddress = {
-      country,
-      province,
-      district,
-      wardNumber,
-      city,
-      street,
-    };
-    formik.setFieldValue(`addresses[${index}]`, temporaryAddress);
-  };
+const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
+  const [showTemporaryAddress, setShowTemporaryAddress] = useState(
+    data?.addresses[1]?.id
+  );
 
+  useEffect(() => {
+    setShowTemporaryAddress(data?.addresses[1]?.id);
+  }, [data]);
+
+  const handleTemporaryButtonClick = (index) => {
+    setShowTemporaryAddress(!showTemporaryAddress);
+  };
   return (
     !isLoading && (
       <FormikProvider value={formik}>
@@ -85,6 +75,7 @@ const EmployeeAddressDetailForm = ({ formik, isLoading }) => {
                             label="Country"
                             placeholder="Enter country"
                             fullWidth
+                            select
                             value={address.country}
                             onChange={formik.handleChange}
                             error={
@@ -98,7 +89,11 @@ const EmployeeAddressDetailForm = ({ formik, isLoading }) => {
                             variant="outlined"
                             autoFocus
                             InputLabelProps={{ shrink: true }}
-                          />
+                          >
+                            <MenuItem key="Nepal" value="Nepal">
+                              Nepal
+                            </MenuItem>
+                          </TextField>
                         </Grid>
                         <Grid item xs={12} sm={4}>
                           <TextField
@@ -224,165 +219,178 @@ const EmployeeAddressDetailForm = ({ formik, isLoading }) => {
                           />
                         </Grid>
                       </Grid>
-                    </>
-                  ) : (
-                    <>
                       <Typography
                         style={{ marginTop: "20px", marginBottom: "20px" }}
                       >
-                        Temporary Address
                         <ThemeSwitch
                           onClick={() => handleTemporaryButtonClick(index)}
                         />
-                        same as permanent
+                        Temporary Address is not same as permanent
                       </Typography>
-                      <Grid container spacing={3} key={index}>
-                        <Grid item xs={12} sm={4}>
-                          <TextField
-                            id={`addresses[${index}].country`}
-                            name={`addresses[${index}].country`}
-                            label="Country"
-                            placeholder="Enter country"
-                            fullWidth
-                            value={address.country}
-                            onChange={formik.handleChange}
-                            error={
-                              formik.touched.addresses?.[index]?.country &&
-                              Boolean(formik.errors.addresses?.[index]?.country)
-                            }
-                            helperText={
-                              formik.touched.addresses?.[index]?.country &&
-                              formik.errors.addresses?.[index]?.country
-                            }
-                            variant="outlined"
-                            autoFocus
-                            InputLabelProps={{ shrink: true }}
-                          />
-                        </Grid>
-                        <Grid item xs={12} sm={4}>
-                          <TextField
-                            id={`addresses[${index}].province`}
-                            name={`addresses[${index}].province`}
-                            select
-                            label="Province"
-                            placeholder="Enter province"
-                            fullWidth
-                            value={address.province}
-                            onChange={formik.handleChange}
-                            error={
-                              formik.touched.addresses?.[index]?.province &&
-                              Boolean(
-                                formik.errors.addresses?.[index]?.province
-                              )
-                            }
-                            helperText={
-                              formik.touched.addresses?.[index]?.province &&
-                              formik.errors.addresses?.[index]?.province
-                            }
-                            variant="outlined"
-                            autoFocus
-                            InputLabelProps={{ shrink: true }}
-                          >
-                            {province?.map((option) => (
-                              <MenuItem key={option?.id} value={option?.value}>
-                                {option?.label}
+                    </>
+                  ) : (
+                    <>
+                      {showTemporaryAddress && (
+                        <Grid container spacing={3} key={index}>
+                          <Grid item xs={12} sm={4}>
+                            <TextField
+                              id={`addresses[${index}].country`}
+                              name={`addresses[${index}].country`}
+                              label="Country"
+                              placeholder="Enter country"
+                              fullWidth
+                              select
+                              value={address.country}
+                              onChange={formik.handleChange}
+                              error={
+                                formik.touched.addresses?.[index]?.country &&
+                                Boolean(
+                                  formik.errors.addresses?.[index]?.country
+                                )
+                              }
+                              helperText={
+                                formik.touched.addresses?.[index]?.country &&
+                                formik.errors.addresses?.[index]?.country
+                              }
+                              variant="outlined"
+                              autoFocus
+                              InputLabelProps={{ shrink: true }}
+                            >
+                              <MenuItem key="Nepal" value="Nepal">
+                                Nepal
                               </MenuItem>
-                            ))}
-                          </TextField>
-                        </Grid>
-                        <Grid item xs={12} sm={4}>
-                          <TextField
-                            id={`addresses[${index}].district`}
-                            name={`addresses[${index}].district`}
-                            label="District"
-                            placeholder="Enter district"
-                            fullWidth
-                            value={address.district}
-                            onChange={formik.handleChange}
-                            error={
-                              formik.touched.addresses?.[index]?.district &&
-                              Boolean(
+                            </TextField>
+                          </Grid>
+                          <Grid item xs={12} sm={4}>
+                            <TextField
+                              id={`addresses[${index}].province`}
+                              name={`addresses[${index}].province`}
+                              select
+                              label="Province"
+                              placeholder="Enter province"
+                              fullWidth
+                              value={address.province}
+                              onChange={formik.handleChange}
+                              error={
+                                formik.touched.addresses?.[index]?.province &&
+                                Boolean(
+                                  formik.errors.addresses?.[index]?.province
+                                )
+                              }
+                              helperText={
+                                formik.touched.addresses?.[index]?.province &&
+                                formik.errors.addresses?.[index]?.province
+                              }
+                              variant="outlined"
+                              autoFocus
+                              InputLabelProps={{ shrink: true }}
+                            >
+                              {province?.map((option) => (
+                                <MenuItem
+                                  key={option?.id}
+                                  value={option?.value}
+                                >
+                                  {option?.label}
+                                </MenuItem>
+                              ))}
+                            </TextField>
+                          </Grid>
+                          <Grid item xs={12} sm={4}>
+                            <TextField
+                              id={`addresses[${index}].district`}
+                              name={`addresses[${index}].district`}
+                              label="District"
+                              placeholder="Enter district"
+                              fullWidth
+                              value={address.district}
+                              onChange={formik.handleChange}
+                              error={
+                                formik.touched.addresses?.[index]?.district &&
+                                Boolean(
+                                  formik.errors.addresses?.[index]?.district
+                                )
+                              }
+                              helperText={
+                                formik.touched.addresses?.[index]?.district &&
                                 formik.errors.addresses?.[index]?.district
-                              )
-                            }
-                            helperText={
-                              formik.touched.addresses?.[index]?.district &&
-                              formik.errors.addresses?.[index]?.district
-                            }
-                            variant="outlined"
-                            autoFocus
-                            InputLabelProps={{ shrink: true }}
-                          />
-                        </Grid>
-                        <Grid item xs={12} sm={4}>
-                          <TextField
-                            id={`addresses[${index}].wardNumber`}
-                            name={`addresses[${index}].wardNumber`}
-                            label="Ward Number"
-                            placeholder="Enter ward number"
-                            fullWidth
-                            value={address.wardNumber}
-                            onChange={formik.handleChange}
-                            error={
-                              formik.touched.addresses?.[index]?.wardNumber &&
-                              Boolean(
+                              }
+                              variant="outlined"
+                              autoFocus
+                              InputLabelProps={{ shrink: true }}
+                            />
+                          </Grid>
+                          <Grid item xs={12} sm={4}>
+                            <TextField
+                              id={`addresses[${index}].wardNumber`}
+                              name={`addresses[${index}].wardNumber`}
+                              label="Ward Number"
+                              placeholder="Enter ward number"
+                              fullWidth
+                              value={address.wardNumber}
+                              onChange={formik.handleChange}
+                              error={
+                                formik.touched.addresses?.[index]?.wardNumber &&
+                                Boolean(
+                                  formik.errors.addresses?.[index]?.wardNumber
+                                )
+                              }
+                              helperText={
+                                formik.touched.addresses?.[index]?.wardNumber &&
                                 formik.errors.addresses?.[index]?.wardNumber
-                              )
-                            }
-                            helperText={
-                              formik.touched.addresses?.[index]?.wardNumber &&
-                              formik.errors.addresses?.[index]?.wardNumber
-                            }
-                            variant="outlined"
-                            autoFocus
-                            InputLabelProps={{ shrink: true }}
-                          />
+                              }
+                              variant="outlined"
+                              autoFocus
+                              InputLabelProps={{ shrink: true }}
+                            />
+                          </Grid>
+                          <Grid item xs={12} sm={4}>
+                            <TextField
+                              id={`addresses[${index}].city`}
+                              name={`addresses[${index}].city`}
+                              label="City"
+                              placeholder="Enter city"
+                              fullWidth
+                              value={address.city}
+                              onChange={formik.handleChange}
+                              error={
+                                formik.touched.addresses?.[index]?.city &&
+                                Boolean(formik.errors.addresses?.[index]?.city)
+                              }
+                              helperText={
+                                formik.touched.addresses?.[index]?.city &&
+                                formik.errors.addresses?.[index]?.city
+                              }
+                              variant="outlined"
+                              autoFocus
+                              InputLabelProps={{ shrink: true }}
+                            />
+                          </Grid>
+                          <Grid item xs={12} sm={4}>
+                            <TextField
+                              id={`addresses[${index}].street`}
+                              name={`addresses[${index}].street`}
+                              label="Street"
+                              placeholder="Enter street"
+                              fullWidth
+                              value={address.street}
+                              onChange={formik.handleChange}
+                              error={
+                                formik.touched.addresses?.[index]?.street &&
+                                Boolean(
+                                  formik.errors.addresses?.[index]?.street
+                                )
+                              }
+                              helperText={
+                                formik.touched.addresses?.[index]?.street &&
+                                formik.errors.addresses?.[index]?.street
+                              }
+                              variant="outlined"
+                              autoFocus
+                              InputLabelProps={{ shrink: true }}
+                            />
+                          </Grid>
                         </Grid>
-                        <Grid item xs={12} sm={4}>
-                          <TextField
-                            id={`addresses[${index}].city`}
-                            name={`addresses[${index}].city`}
-                            label="City"
-                            placeholder="Enter city"
-                            fullWidth
-                            value={address.city}
-                            onChange={formik.handleChange}
-                            error={
-                              formik.touched.addresses?.[index]?.city &&
-                              Boolean(formik.errors.addresses?.[index]?.city)
-                            }
-                            helperText={
-                              formik.touched.addresses?.[index]?.city &&
-                              formik.errors.addresses?.[index]?.city
-                            }
-                            variant="outlined"
-                            autoFocus
-                            InputLabelProps={{ shrink: true }}
-                          />
-                        </Grid>
-                        <Grid item xs={12} sm={4}>
-                          <TextField
-                            id={`addresses[${index}].street`}
-                            name={`addresses[${index}].street`}
-                            label="Street"
-                            placeholder="Enter street"
-                            fullWidth
-                            value={address.street}
-                            onChange={formik.handleChange}
-                            error={
-                              formik.touched.addresses?.[index]?.street &&
-                              Boolean(formik.errors.addresses?.[index]?.street)
-                            }
-                            helperText={
-                              formik.touched.addresses?.[index]?.street &&
-                              formik.errors.addresses?.[index]?.street
-                            }
-                            variant="outlined"
-                            autoFocus
-                            InputLabelProps={{ shrink: true }}
-                          />
-                        </Grid>
-                      </Grid>
+                      )}
                     </>
                   )}
                 </>

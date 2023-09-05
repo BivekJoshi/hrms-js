@@ -1,10 +1,18 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
-import { addEvent, deleteEvent, editEvent, getEvent, getEventById } from '../../api/event/event-api';
+import { addEvent, deleteEvent, editEvent, getEvent, getEventById, getEventNotification } from '../../api/event/event-api';
 
 {/*________________________GET_____________________________________*/ }
 export const useGetEvent = () => {
     return useQuery(['getEvent'], () => getEvent(), {
+        refetchInterval: false,
+        refetchOnWindowFocus: false,
+    });
+};
+
+{/*________________________GET_____________________________________*/ }
+export const useGetEventNotification = () => {
+    return useQuery(['getEventNofication'], () => getEventNotification(), {
         refetchInterval: false,
         refetchOnWindowFocus: false,
     });
