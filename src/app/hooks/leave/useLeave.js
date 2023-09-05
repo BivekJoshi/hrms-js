@@ -1,18 +1,18 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { toast } from "react-toastify";
 import {
+  addLeaveByAdmin,
   addleave,
   deleteLeave,
   editLeave,
   getEmployeeLeaveById,
   getLeaveById,
+  getLoggedInUserLeave,
   getleave,
   getpendingleave,
 } from "../../api/leave/leave-api";
 
-{
-  /*________________________GET ALL_____________________________________*/
-}
+/*________________________GET ALL_____________________________________*/
 export const useGetLeave = () => {
   return useQuery(["getLeave"], () => getleave(), {
     refetchInterval: false,
@@ -20,9 +20,7 @@ export const useGetLeave = () => {
   });
 };
 
-{
-  /*________________________GET PENDING LEAVE_____________________________________*/
-}
+/*________________________GET PENDING LEAVE_____________________________________*/
 export const useGetPendingLeave = () => {
   return useQuery(["getpendingleave"], () => getpendingleave(), {
     refetchInterval: false,
@@ -30,18 +28,23 @@ export const useGetPendingLeave = () => {
   });
 };
 
-{
-  /*________________________GETBYLEAVEID_____________________________________*/
-}
+/*________________________GET LOGGED IN USER LEAVE_____________________________________*/
+export const useGetLoggedInUserLeave = () => {
+  return useQuery(["getLoggedInUserLeave"], () => getLoggedInUserLeave(), {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
+};
+
+/*________________________GET BY LEAVE ID_____________________________________*/
 export const useGetLeaveById = (id) => {
   return useQuery(["getLeaveById", id], () => getLeaveById(id), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
 };
-{
-  /*________________________GETEMPLOYEELEAVEBYID_____________________________________*/
-}
+
+/*________________________GET EMPLOYEE LEAVE BY ID_____________________________________*/
 export const useGetEmployeeLeaveById = (id) => {
   return useQuery(
     ["getEmployeeLeaveById", id],
@@ -53,9 +56,22 @@ export const useGetEmployeeLeaveById = (id) => {
   );
 };
 
-{
-  /*________________________POST_____________________________________*/
-}
+/*________________________POST BY ADMIN_____________________________________*/
+export const useAddLeaveByAdmin = ({ onSuccess }) => {
+  const queryClient = useQueryClient();
+  return useMutation(["addLeaveByAdmin"], (formData) => addLeaveByAdmin(formData), {
+    onSuccess: (data, variables, context) => {
+      toast.success("Succesfully added Leave");
+      onSuccess && onSuccess(data, variables, context);
+      queryClient.invalidateQueries("getLeave");
+    },
+    onError: (err, _variables, _context) => {
+      toast.error(`error: ${err.message}`);
+    },
+  });
+};
+
+/*________________________POST BY USER_____________________________________*/
 export const useAddLeave = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(["addLeave"], (formData) => addleave(formData), {
@@ -70,9 +86,7 @@ export const useAddLeave = ({ onSuccess }) => {
   });
 };
 
-{
-  /*________________________DELETE_____________________________________*/
-}
+/*________________________DELETE_____________________________________*/
 export const useDeleteLeave = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(["deleteLeave"], (leaveId) => deleteLeave(leaveId), {
@@ -87,9 +101,7 @@ export const useDeleteLeave = ({ onSuccess }) => {
   });
 };
 
-{
-  /*________________________EDIT_____________________________________*/
-}
+/*________________________EDIT_____________________________________*/
 export const useEditLeave = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(["editLeave"], (formData) => editLeave(formData), {

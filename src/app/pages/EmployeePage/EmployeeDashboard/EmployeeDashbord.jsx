@@ -59,7 +59,7 @@ const EmployeeDashbord = (props) => {
           sx={{ width: 66, height: 66, borderRadius: "2rem" }}
         />
         <Box alignSelf="center">
-          <h3>Welcome , {employData.name}</h3>
+          <h3>Welcome , {employData?.name}</h3>
           <h3>{formattedDate}</h3>
         </Box>
       </Box>

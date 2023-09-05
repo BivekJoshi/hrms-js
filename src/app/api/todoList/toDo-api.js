@@ -2,7 +2,7 @@ import { axiosInstance } from "../../../auth/axiosInterceptor";
 
 {/*________________________GET_____________________________________*/ }
 export const getTodoList = async () => {
-    const data = await axiosInstance.get(`/to-do-list/get-all`);
+    const data = await axiosInstance.get(`/to-do-list/logged-in-user/get-all`);
     return data;
 };
 

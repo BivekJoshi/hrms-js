@@ -1,14 +1,11 @@
 import React, { useState } from "react";
-import { Box, Button, Grid } from "@mui/material";
-import { toast } from "react-toastify";
 
 import FormModal from "../../../components/Modal/FormModal";
-import AddEventFields from "../../../components/Form/Event/AddEventFields";
 import { useGetEventById } from "../../../hooks/event/useEvent";
 import EditEventFields from "../../../components/Form/Event/EditEventFields";
-import useEventForm from "../../../hooks/event/EventForm/useEventForm";
-import EmailToAll from "../../Email/EmailToAll";
 
+<<<<<<< HEAD
+=======
 export const AddEventModal = ({ open, handleCloseModal }) => {
   const [openSubmitModal, setOpenSubmitModal] = useState();
 
@@ -128,6 +125,7 @@ export const AddEventModal = ({ open, handleCloseModal }) => {
     </div>
   );
 };
+>>>>>>> 4c04c8ccdde7e7ffbba99b4c26844e9e47c246f5
 
 export const OpenEvent = ({ open, handleCloseModal, id }) => {
   const { data } = useGetEventById(id);

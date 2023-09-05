@@ -67,7 +67,7 @@ const Users = ({ permissions }) => {
   const handleCloseAddModal = () => setOpenAddModal(false);
 
   const { data: userControlData, isLoading } = useGetUserControl();
-  if (permissions.canView) {
+  if (permissions?.canView) {
     return (
       <>
         <Stack
@@ -136,4 +136,4 @@ const Users = ({ permissions }) => {
   }
 };
 
-export default PermissionHoc(Users);
+export default Users;

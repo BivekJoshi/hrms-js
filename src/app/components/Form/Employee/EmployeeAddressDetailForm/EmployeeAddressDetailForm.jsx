@@ -41,8 +41,10 @@ const province = [
   },
 ];
 
-const EmployeeAddressDetailForm = ({ formik, isLoading ,data}) => {
-  const [showTemporaryAddress, setShowTemporaryAddress] = useState(data?.addresses[1]?.id);
+const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
+  const [showTemporaryAddress, setShowTemporaryAddress] = useState(
+    data?.addresses[1]?.id
+  );
 
   useEffect(() => {
     setShowTemporaryAddress(data?.addresses[1]?.id);
@@ -73,6 +75,7 @@ const EmployeeAddressDetailForm = ({ formik, isLoading ,data}) => {
                             label="Country"
                             placeholder="Enter country"
                             fullWidth
+                            select
                             value={address.country}
                             onChange={formik.handleChange}
                             error={
@@ -86,7 +89,11 @@ const EmployeeAddressDetailForm = ({ formik, isLoading ,data}) => {
                             variant="outlined"
                             autoFocus
                             InputLabelProps={{ shrink: true }}
-                          />
+                          >
+                            <MenuItem key="Nepal" value="Nepal">
+                              Nepal
+                            </MenuItem>
+                          </TextField>
                         </Grid>
                         <Grid item xs={12} sm={4}>
                           <TextField
@@ -232,6 +239,7 @@ const EmployeeAddressDetailForm = ({ formik, isLoading ,data}) => {
                               label="Country"
                               placeholder="Enter country"
                               fullWidth
+                              select
                               value={address.country}
                               onChange={formik.handleChange}
                               error={
@@ -247,7 +255,11 @@ const EmployeeAddressDetailForm = ({ formik, isLoading ,data}) => {
                               variant="outlined"
                               autoFocus
                               InputLabelProps={{ shrink: true }}
-                            />
+                            >
+                              <MenuItem key="Nepal" value="Nepal">
+                                Nepal
+                              </MenuItem>
+                            </TextField>
                           </Grid>
                           <Grid item xs={12} sm={4}>
                             <TextField

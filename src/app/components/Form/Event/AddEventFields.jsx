@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Grid, TextField, Button, Modal, Box } from "@mui/material";
 import { toast } from "react-toastify";
-import ModalComponent from "../../Modal/ModalComponent";
 import useEventForm from "../../../hooks/event/EventForm/useEventForm";
 
 
@@ -132,13 +131,6 @@ const AddEventFields = ({ formik}) => {
             />
           </Grid>
         </Grid>
-
-      {/* <ModalComponent
-        open={openSubmitModal}
-        handleProceed={handleProceed}
-        onClose={handleCloseEmailform}
-        data={data}
-      /> */}
     </>
   );
 };

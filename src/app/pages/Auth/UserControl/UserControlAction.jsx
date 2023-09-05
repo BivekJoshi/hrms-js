@@ -8,7 +8,6 @@ import { useDeleteUserControl } from "../../../hooks/auth/userControl/useUserCon
 import DeleteConfirmationModal from "../../../components/Modal/DeleteConfirmationModal";
 
 const UserControlAction = ({ rowData }) => {
-  // console.log(rowData);
   const [anchorEl, setAnchorEl] = useState(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
