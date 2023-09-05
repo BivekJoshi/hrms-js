@@ -6,8 +6,11 @@ import StartIcon from '@mui/icons-material/Start';
 import { useNavigate } from 'react-router-dom';
 import tableIcons from '../../../../../theme/overrides/TableIcon';
 import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
+import useAuth from '../../../../../auth/hooks/component/login/useAuth';
 
 const EmployeeTableView = ({ employeeData, isLoading }) => {
+    const { isSuperAdmin, isAdmin, isHr } = useAuth();
+
     const navigate = useNavigate();
 
     const columns = [
@@ -16,12 +19,14 @@ const EmployeeTableView = ({ employeeData, isLoading }) => {
             render: (rowData) => rowData.tableData.id + 1,
             width: "3%",
             sortable: false,
+            sorting: false,
         },
         {
             title: 'Employee',
             field: 'firstName',
             render: (rowData) => `${rowData.firstName} ${rowData.middleName} ${rowData.lastName}`,
             // width: "10%",
+            sorting: false,
         },
         {
             title: 'Position',
@@ -31,18 +36,22 @@ const EmployeeTableView = ({ employeeData, isLoading }) => {
             }
             ,
             width: 340,
+            sorting: false,
         },
         {
             title: 'Email',
             field: 'officeEmail',
             emptyValue: '-',
+            sorting: false,
         },
         {
             title: 'Contact No.',
             field: 'mobileNumber',
             emptyValue: '-',
+            sorting: false,
         },
-        {
+        // (isSuperAdmin || isAdmin || isHr) &&
+         {
             title: 'Actions',
             render: (rowData) => (
                 <Stack direction="row" spacing={0}>
@@ -57,7 +66,7 @@ const EmployeeTableView = ({ employeeData, isLoading }) => {
             sorting: false,
             // width: 120,
         },
-    ];
+    ].filter(Boolean);
 
     const handleEditEmployee = (rowData) => {
         navigate(`edit/${rowData.id}`);

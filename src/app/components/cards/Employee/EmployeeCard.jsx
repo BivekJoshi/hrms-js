@@ -13,6 +13,7 @@ import { EditDeactivationEmployeeModal } from "../../../pages/Employee/EmployeeD
 import ProgressbyAll from "../../../pages/Employee/ProgressEmployeeData/ProgressbyAll";
 import PopOver from "../../../../theme/overrides/PopOver";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
+import { DOC_URL } from "../../../../auth/axiosInterceptor";
 
 const EmployeeCard = ({
   IsActive,
@@ -26,10 +27,12 @@ const EmployeeCard = ({
   PositionLevel,
   EGender,
   ProgressBarRes,
+  employeePhoto,
 }) => {
   const [open, setOpen] = useState(false);
   const [openEmailForm, setOpenEmailForm] = useState(false);
   const { mode } = useContext(ThemeModeContext); // Accessing mode from context
+  const img = DOC_URL + employeePhoto;
 
   const anchorRef = useRef(null);
   const prevOpen = useRef(open);
@@ -82,9 +85,8 @@ const EmployeeCard = ({
           style={{
             textAlign: "center",
             padding: "1.5rem",
-            backgroundColor:mode === "light" ? "white" :"#292929"
+            backgroundColor: mode === "light" ? "white" : "#292929",
           }}
-          
         >
           <Box display="flex" justifyContent={"end"}>
             <PopOver
@@ -180,7 +182,15 @@ const EmployeeCard = ({
           >
             <CardMedia
               component="img"
-              src={EGender === "MALE" ? Male : Female}
+              src={
+                employeePhoto
+                  ? img
+                  : EGender === "MALE"
+                  ? Male
+                  : ""
+                  ? Female
+                  : Female
+              }
               alt="Paella dish"
               sx={{ width: 66, height: 66, borderRadius: "2rem" }}
             />
@@ -197,14 +207,26 @@ const EmployeeCard = ({
             <Typography
               style={{ fontWeight: 700, margin: "1rem 0", fontSize: "20px" }}
             >
-              {EFirstName} {EMiddleName} {ELastName}
+              <Chip
+                sx={{
+                  bgcolor: mode === "light" ? "white" : "rgb(41, 41, 41)",
+                  fontSize: "1rem",
+                  width: "80%",
+                }}
+                label={
+                  <h3 style={{ overflow: "hidden", textOverflow: "ellipsis" }}>
+                    {EFirstName || ""} {EMiddleName || ""} {ELastName || ""}
+                  </h3>
+                }
+              />
+              {/* {EFirstName} {EMiddleName} {ELastName} */}
             </Typography>
             <Box padding={"0 1rem"}>
               <Typography variant="body2" gutterBottom>
                 <PopOver
                   triggerContent={
                     <Chip
-                      label={`${PositionName} (${PositionLevel})`}
+                      label={`${PositionName || ""} (${PositionLevel || ""})`}
                       style={{ width: 230 }}
                     />
                   }
@@ -222,7 +244,11 @@ const EmployeeCard = ({
               fontSize: ".9rem",
             }}
           >
-            <Box backgroundColor={mode === "light" ? "#f5f5f5": "#4d4c4c"} padding=".5rem" borderRadius=".5rem">
+            <Box
+              backgroundColor={mode === "light" ? "#f5f5f5" : "#4d4c4c"}
+              padding=".5rem"
+              borderRadius=".5rem"
+            >
               <PopOver
                 triggerContent={
                   <Stack
@@ -241,7 +267,8 @@ const EmployeeCard = ({
                 }
                 popoverContent={
                   <Typography sx={{ p: 1 }}>
-                    Send Email To {EFirstName} {EMiddleName} {ELastName}
+                    Send Email To {EFirstName || ""} {EMiddleName || ""}{" "}
+                    {ELastName || ""}
                   </Typography>
                 }
               />

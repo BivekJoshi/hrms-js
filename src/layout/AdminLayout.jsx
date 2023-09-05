@@ -1,11 +1,11 @@
 import React from 'react';
-import SideBar from '../app/components/SideBar/SideBar';
 import { Box } from '@mui/material';
+import AdminSidebar from '../app/components/SideBar/AdminSideBar';
 
 const AdminLayout = () => {
   return (
     <Box minHeight="100vh">
-      <SideBar />
+      <AdminSidebar />
     </Box>
   );
 };

@@ -1,22 +1,27 @@
 import React, { useContext } from "react";
 
-import { Box, Chip, Grid, List, ListItem } from "@mui/material";
+import { Box, Chip, Grid } from "@mui/material";
 import { Typography, Avatar } from "@mui/material";
 
 import Male from "../../../../../../assets/male.png";
 import Female from "../../../../../../assets/female.png";
 import BasicInfo from "./BasicInfo";
 import ThemeModeContext from "../../../../../../theme/ThemeModeContext";
+import { DOC_URL } from "../../../../../../auth/axiosInterceptor";
 
 const primaryColor = "#1c7ed6";
 
 export const PersonalProfile = ({ data }) => {
-  const{mode} = useContext(ThemeModeContext)
+  const { mode } = useContext(ThemeModeContext);
+  const photo = data?.uploadFiles;
+  const employeePhoto = photo.find(file => file?.documentType === "EMPLOYEE_PHOTO");
+  const filePath = employeePhoto ? DOC_URL + employeePhoto.path : (data?.gender === "MALE" ? Male : Female);
+
   return (
     <>
       <Grid
         sx={{
-          bgcolor: mode=== "light" ? "#cfe8fc": "#292929",
+          bgcolor: mode === "light" ? "#cfe8fc" : "#292929",
           display: "grid",
           gridTemplateColumns: "1fr 3fr",
           borderRadius: 5,
@@ -26,6 +31,7 @@ export const PersonalProfile = ({ data }) => {
         }}
       >
         <Box className="profileInfo">
+         
           <Avatar
             sx={{
               width: 190,
@@ -34,7 +40,7 @@ export const PersonalProfile = ({ data }) => {
               alignSelf: "center",
             }}
             variant="circle"
-            src={data?.gender === "MALE" ? Male : Female}
+            src={filePath}
           />
           <Typography
             sx={{
@@ -46,7 +52,7 @@ export const PersonalProfile = ({ data }) => {
             {data?.firstName + " " + data?.middleName + " " + data?.lastName}
           </Typography>
           <Chip
-            label={data?.position.positionName}
+            label={data?.position?.positionName}
             sx={{ bgcolor: primaryColor, color: "white", width: " 9rem" }}
           />
           <Typography

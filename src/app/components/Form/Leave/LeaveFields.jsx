@@ -1,9 +1,17 @@
-import { Grid, TextField, Button, MenuItem, Autocomplete } from "@mui/material";
-import React from "react";
+import {
+  Grid,
+  TextField,
+  Button,
+  MenuItem,
+  Autocomplete,
+  Box,
+} from "@mui/material";
+import React, { useContext } from "react";
 import { toast } from "react-toastify";
 import { useGetEmployee } from "../../../hooks/employee/useEmployee";
 import { useGetLeaveType } from "../../../hooks/leaveType/useLeaveType";
 import useLeaveForm from "../../../hooks/leave/LeaveForm/useLeaveForm";
+import ThemeModeContext from "../../../../theme/ThemeModeContext";
 
 const leaveStatus = [
   {
@@ -23,6 +31,7 @@ const LeaveFields = ({ onClose, isLoading, data }) => {
   const { data: employeeData } = useGetEmployee();
   const { data: leaveTypeData } = useGetLeaveType();
   const { formik } = useLeaveForm(data);
+  const { mode } = useContext(ThemeModeContext);
 
   const capitalize = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
@@ -37,7 +46,11 @@ const LeaveFields = ({ onClose, isLoading, data }) => {
     const employee = employeeData?.find((emp) => emp.id === employeeId);
     if (employee) {
       const { firstName, middleName, lastName } = employee;
-      return `${firstName || ""} ${middleName || ""} ${lastName || ""}`;
+      return (
+        <Box sx={{ bgcolor: mode === "light" ? "" : "#413e3e" }}>
+          {firstName || ""} {middleName || ""} {lastName || ""}
+        </Box>
+      );
     }
     return "";
   };
@@ -46,18 +59,6 @@ const LeaveFields = ({ onClose, isLoading, data }) => {
     formik.handleSubmit();
 
     if (formik.isValid) {
-      formik({
-        employeeId: true,
-        leaveTypeId: true,
-        leaveReason: true,
-        fromDate: true,
-        toDate: true,
-        applyLeaveDays: true,
-        leaveBalance: true,
-        confirmById: true,
-        leaveRemarks: true,
-        halfDay: true,
-      });
       onClose();
     } else {
       toast.error("Please make sure you have filled the form correctly");
@@ -101,10 +102,11 @@ const LeaveFields = ({ onClose, isLoading, data }) => {
               }
               renderInput={(params) => (
                 <TextField
+                  bgcolor="black"
                   {...params}
                   label="Employee Name"
                   fullWidth
-                  required
+                  requireds
                   error={
                     formik.touched.employeeId &&
                     Boolean(formik.errors.employeeId)
@@ -224,7 +226,11 @@ const LeaveFields = ({ onClose, isLoading, data }) => {
             InputLabelProps={{ shrink: true }}
           >
             {leaveStatus.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
+              <MenuItem
+                key={option.value}
+                value={option.value}
+                sx={{ bgcolor: mode === "light" ? "" : "#413e3e" }}
+              >
                 {option.label}
               </MenuItem>
             ))}

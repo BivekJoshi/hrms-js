@@ -1,91 +1,188 @@
-import { Box, Button, Grid } from "@mui/material";
 import React, { useState, useRef, useEffect } from "react";
+import { Box, Button, Grid } from "@mui/material";
+import { toast } from "react-toastify";
+
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
+
+import HocButton from "../../hoc/hocButton";
+import PermissionHoc from "../../hoc/permissionHoc";
+
 import { useGetHoliday } from "../../hooks/holiday/useHoliday";
-import { AddHolidayModal, OpenHoliday } from "./HolidayModal/HolidayModal";
-import CurrentHoliday from "./CurrentHoliday";
-import "./Style/Style.css"
+import useHolidayForm from "../../hooks/holiday/HolidayForm/useHolidayForm";
 
-const Holiday = () => {
-  const { data: holidayData } = useGetHoliday();
+import FormModal from "../../components/Modal/FormModal";
+import HolidayFields from "../../components/Form/Holiday/HolidayFields";
+import EmailForHoliday from "../Email/EmailForHoliday";
 
-  const [getID, setGetID] = useState({});
-
-  const handleOpenModal = (e) => {
-    setGetID(e?.event?._def?.publicId);
-    setOpenOnClickModal(true);
-  };
+const Holiday = ({ permissions }) => {
+  const calendarRef = useRef(null);
+  const [events, setEvents] = useState([]);
 
   const [openAddModal, setOpenAddModal] = useState(false);
-  const [openOnClickModal, setOpenOnClickModal] = useState(false);
+  const [openSubmitModal, setOpenSubmitModal] = useState(false);
+  const [openEmailModal, setOpenEmailModal] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
 
-  const handleAddOpenModal = () => setOpenAddModal(true);
-  const handleCloseAddModal = () => setOpenAddModal(false);
+  const [getEventID, setEventGetID] = useState({});
 
-  const handleCloseModal = () => setOpenOnClickModal(false);
+  const { data: holidayData } = useGetHoliday();
 
-  const calendarRef = useRef(null);
-
-  const [events, setEvents] = useState([]);
   useEffect(() => {
     if (holidayData) {
       const formattedEvents = holidayData.map((event) => ({
         title: event.holidayName,
         date: event.holidayDate,
+        description: event?.holidayDescription,
         id: event.id,
       }));
       setEvents(formattedEvents);
     }
   }, [holidayData]);
 
+  const handleCloseModal = () => setOpenAddModal(false);
+  const { formik, data } = useHolidayForm(setOpenSubmitModal, handleCloseModal);
+
+  const handleFormSubmit = async () => {
+    formik.handleSubmit();
+    if (!formik.isValidating && formik.isValid) {
+    } else {
+      toast.error("Please make sure you have filled the form correctly");
+    }
+  };
+  const handleOpenModal = (e) => {
+    setEventGetID(e?.event?._def?.publicId);
+    setOpenModal(true);
+  };
+
+  const handleEmailButtonClick = () => {
+    setOpenEmailModal(true);
+    setOpenSubmitModal(false);
+  };
+
   return (
     <>
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-        <Button
-          variant="contained"
-          sx={{ mt: 3, ml: 1 }}
-          onClick={handleAddOpenModal}
-        >
-          +Add Holiday
-        </Button>
+        <HocButton
+          permissions={permissions?.canAdd}
+          color={"primary"}
+          variant={"contained"}
+          onClick={() => setOpenAddModal(true)}
+          buttonName={"+Add Holiday"}
+        />
       </Box>
       <br />
-      <Grid container spacing={2}>
-        <Grid item xs={12} sm={12} md={9}className={holidayData ? "calenderDesign" : ""}>
-          <FullCalendar
-            ref={calendarRef}
-            plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-            initialView="dayGridMonth"
-            headerToolbar={{
-              start: "today prev,next",
-              center: "title",
-              end: "dayGridMonth,timeGridWeek,timeGridDay",
-            }}
-            eventClick={handleOpenModal}
-            height={"90vh"}
-            events={events}
-            
-          />
-        </Grid>
-        <Box >
-          <CurrentHoliday />
-        </Box>
-      </Grid>
 
       {openAddModal && (
-        <AddHolidayModal
+        <FormModal
           open={openAddModal}
-          handleCloseModal={handleCloseAddModal}
+          onClose={() => setOpenAddModal(false)}
+          formComponent={
+            <>
+              {/*Import Event Field Here*/}
+              <HolidayFields formik={formik} />
+              <Grid
+                container
+                direction="row"
+                justifyContent="flex-end"
+                alignItems="flex-end"
+              >
+                <Button
+                  variant="contained"
+                  onClick={handleFormSubmit}
+                  sx={{ mt: 3, ml: 1 }}
+                >
+                  Add Holiday
+                </Button>
+                <Button
+                  variant="contained"
+                  onClick={handleCloseModal}
+                  sx={{ mt: 3, ml: 1 }}
+                  color="error"
+                >
+                  Cancel
+                </Button>
+              </Grid>
+            </>
+          }
         />
       )}
 
-      {openOnClickModal && (
+      {openSubmitModal && (
+        <FormModal
+          open={openSubmitModal}
+          onClose={() => setOpenSubmitModal(false)}
+          formComponent={
+            <div>
+              <h2>Holiday Added Successfully!</h2>
+              <p>Do you like to Email this holiday to Employee.</p>
+              <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+                <Button
+                  variant="contained"
+                  sx={{ mt: 3, ml: 1 }}
+                  onClick={handleEmailButtonClick}
+                >
+                  Yes
+                </Button>
+                <Button
+                  variant="contained"
+                  onClick={() => {
+                    setOpenSubmitModal(false);
+                  }}
+                  sx={{ mt: 3, ml: 1 }}
+                  color="error"
+                >
+                  No
+                </Button>
+              </Box>
+            </div>
+          }
+        />
+      )}
+
+      {openEmailModal && (
+        <FormModal
+          open={openEmailModal}
+          onClose={() => setOpenEmailModal(false)}
+          formComponent={
+            <div>
+              <EmailForHoliday
+                getEventID={data?.id}
+                onClose={() => setOpenEmailModal(false)}
+              />
+            </div>
+          }
+        />
+      )}
+
+      <FullCalendar
+        ref={calendarRef}
+        plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+        initialView="dayGridMonth"
+        headerToolbar={{
+          start: "customTodayButton prev,next",
+          center: "title",
+          end: "dayGridMonth,timeGridWeek,timeGridDay",
+        }}
+        eventClick={handleOpenModal}
+        height={"90vh"}
+        events={events}
+        customButtons={{
+          customTodayButton: {
+            text: "Today",
+            // click: function () {
+            //   handleTodayClick(events);
+            // },
+          },
+        }}
+      />
+      
+      {openModal && (
         <OpenHoliday
-          id={getID}
-          open={openOnClickModal}
+          id={getEventID}
+          open={openModal}
           handleCloseModal={handleCloseModal}
         />
       )}
@@ -93,4 +190,4 @@ const Holiday = () => {
   );
 };
 
-export default Holiday;
+export default PermissionHoc(Holiday);

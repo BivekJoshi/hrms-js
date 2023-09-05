@@ -15,9 +15,11 @@ import {
 } from "../../../../hooks/employee/useDocument";
 import { useParams } from "react-router-dom";
 import { DOC_URL } from "../../../../../auth/axiosInterceptor";
+// import { documentType } from "./documentType";
 import { documentType } from "./documentType";
 import { useAddDocumentForm } from "../../../../hooks/employee/AddDocument/useAddDocumentForm";
 import { EditDocumentModal } from "./EditDocumentModal";
+import { toast } from "react-toastify";
 
 const EmployeeDocumentDetailForm = () => {
   const { id } = useParams();
@@ -40,8 +42,13 @@ const EmployeeDocumentDetailForm = () => {
   const url = DOC_URL;
 
   const handleFormSubmit = (documentType) => {
-    formik.setFieldValue("documentType", documentType);
-    formik.handleSubmit(documentType);
+    if(document) {
+      formik.setFieldValue("documentType", documentType);
+      formik.handleSubmit(documentType);
+    } else {
+      toast.warning("Please select a document to upload");
+    }
+    
   };
 
   const handleChange = (panel, doc) => (_, isExpanded) => {
@@ -67,65 +74,64 @@ const EmployeeDocumentDetailForm = () => {
     <div>
       <Grid container>
         <Grid item xs={12} sm={6}>
-          <div
-            style={{
+          <Box
+            sx={{
               display: "grid",
-              gridTemplateColumns: "1fr",
-              gap: "1rem",
-              // alignItems: "center",
+              gridTemplateColumns: {xs:"1fr 1fr", sm:"1fr", lg:"1fr 1fr"},
+              gap:{xs:"1rem",lg: "0.6rem"},
+              alignItems: "center",
+              padding: {xs:"0 0 2rem", sm:"0 1rem 0"},
+
             }}
           >
             {documentPhoto &&
               documentPhoto.map((document) => (
-                <Box key={document?.id}>
-                  <div
-                    style={{
-                      position: "relative",
-                      width: "510px",
-                      height: "300px",
-                    }}
-                  >
+                <Stack
+                  key={document?.id}
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "1rem",
+                  }}
+                >
+                  <Box>
                     <img
                       src={`${url}${document?.path}`}
                       alt="Document"
-                      width="510px"
-                      height="300px"
+                      width={240}
+                      height={140}
+                      style={{objectFit:"contain", width:"100%", height:"40vh"}}
                     />
-               
-                      <Box
-                       style={{
-                        position: "absolute",
-                        bottom: "10px", 
-                        right: "10px", 
-                        padding: "8px 16px",
-                        backgroundColor: "rgba(255, 255, 255, 0.8)",
-                        borderRadius: "4px",
-                      }}
-                      >
-                        <Button
-                          sx={{ width: "fit-content" }}
-                          type="button"
-                          variant="contained"
-                          color="primary"
-                          onClick={() => handleEditFormSubmit(document)}
-                        >
-                          Update
-                        </Button>
-                        <Button
-                          sx={{ width: "fit-content" }}
-                          type="button"
-                          variant="contained"
-                          color="error"
-                          onClick={() => handleDelete(document)}
-                        >
-                          Delete
-                        </Button>
-                      </Box>
-        
-                  </div>
-                </Box>
+                  </Box>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "center",
+                      gap: "1rem",
+                    }}
+                  >
+                    <Button
+                      sx={{ width: "fit-content" }}
+                      type="button"
+                      variant="contained"
+                      color="primary"
+                      onClick={() => handleEditFormSubmit(document)}
+                    >
+                      Update
+                    </Button>
+                    <Button
+                      sx={{ width: "fit-content" }}
+                      type="button"
+                      variant="contained"
+                      color="error"
+                      onClick={() => handleDelete(document)}
+                    >
+                      Delete
+                    </Button>
+                  </Box>
+                </Stack>
               ))}
-          </div>
+          </Box>
         </Grid>
         <Grid item xs={12} sm={6}>
           {documentType &&

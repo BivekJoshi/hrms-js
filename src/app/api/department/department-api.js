@@ -4,7 +4,7 @@ import { axiosInstance } from "../../../auth/axiosInterceptor";
   /*________________________GET_____________________________________*/
 }
 export const getDepartment = async () => {
-  const data = await axiosInstance.get(`/department`);
+  const data = await axiosInstance.get(`/department/get-all`);
   return data;
   s;
 };
@@ -14,7 +14,7 @@ export const getDepartment = async () => {
 }
 export const getDepartmentById = async (id) => {
   if (id) {
-    const data = await axiosInstance.get(`/department/${id}`);
+    const data = await axiosInstance.get(`/department/department-id/${id}`);
     return data;
   }
 };
@@ -23,7 +23,7 @@ export const getDepartmentById = async (id) => {
   /*________________________POST_____________________________________*/
 }
 export const addDepartment = async (formData) => {
-  const data = await axiosInstance.post("/department", formData);
+  const data = await axiosInstance.post("/department/create", formData);
   return data;
 };
 
@@ -32,7 +32,7 @@ export const addDepartment = async (formData) => {
 }
 export const editDepartment = async (formData) => {
   const {id} = formData;
-  const data = await axiosInstance.put(`/department/${id}`, formData);
+  const data = await axiosInstance.put(`/department/update/${id}`, formData);
   return data;
 };
 
@@ -40,6 +40,6 @@ export const editDepartment = async (formData) => {
   /*________________________DELETE_____________________________________*/
 }
 export const deleteDepartment = async (departmentId) => {
-  const response = await axiosInstance.delete(`/department/${departmentId}`);
+  const response = await axiosInstance.delete(`/department/delete/${departmentId}`);
   return response.data;
 };

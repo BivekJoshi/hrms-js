@@ -2,25 +2,31 @@ import { axiosInstance } from "../../../auth/axiosInterceptor";
 
 {/*________________________GET_____________________________________*/ }
 export const getEvent = async () => {
-  const data = await axiosInstance.get(`/event`);
+  const data = await axiosInstance.get(`/event/get-all`);
+  return data;
+};
+
+{/*________________________GET-NOTIFICATION_____________________________________*/ }
+export const getEventNotification = async () => {
+  const data = await axiosInstance.get(`/event/get-notification`);
   return data;
 };
 
 {/*________________________GETBYID_____________________________________*/ }
 export const getEventById = async (id) => {
-  const data = await axiosInstance.get(`/event/${id}`);
+  const data = await axiosInstance.get(`/event/event-id/${id}`);
   return data;
 };
 
 {/*________________________POST_____________________________________*/ }
 export const addEvent = async (formData) => {
-  const data = await axiosInstance.post('/event', formData);
+  const data = await axiosInstance.post('/event/create', formData);
   return data;
 };
 
 {/*________________________DELETE_____________________________________*/ }
 export const deleteEvent = async (eventId) => {
-  const response = await axiosInstance.delete(`/event/${eventId}`);
+  const response = await axiosInstance.delete(`/event/delete/${eventId}`);
   return response.data;
 };
 

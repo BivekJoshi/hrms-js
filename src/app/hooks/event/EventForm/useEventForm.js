@@ -2,8 +2,9 @@ import { useFormik } from "formik";
 import { useAddEvent, useEditEvent } from "../useEvent";
 import { EventSchema } from "../Validation/EventSchema";
 
-const useEventForm = (data) => {
-  const { mutate: addEvent } = useAddEvent({});
+const useEventForm = (setOpenSubmitModal, handleCloseModal) => {
+  const { mutate: addEvent, data } = useAddEvent({});
+  console.log(data,"data hai ma ");
   const { mutate: editEvent } = useEditEvent({});
 
   const formik = useFormik({
@@ -14,20 +15,43 @@ const useEventForm = (data) => {
       eventDescription: data?.eventDescription || "",
       id: data?.id,
     },
-    // validationSchema: EventSchema,
+    validationSchema: EventSchema,
     enableReinitialize: "true",
+    // onSubmit: (values) => {
+    //   if (data?.id) {
+    //     handledEditRequest(values);
+    //     // handleOpenSubmitModal();
+    //   } else {
+    //     handleRequest(values);
+    //     handleOpenSubmitModal();
+    //     formik.resetForm();
+    //   }
+    // },
     onSubmit: (values) => {
-      if (data?.id) {
-        handledEditRequest(values);
-      } else {
-        handleRequest(values);
-      }
+      const formData = { ...values };
+      addEvent(formData, {
+        onSuccess: (data) => {
+          handleCloseModal();
+          formik.resetForm();
+        },
+      }),
+        setOpenSubmitModal(true);
     },
   });
+  //   onSubmit: (values) => {
+  //     handleRequest(values);
+  //     setOpenSubmitModal(true);
+  //     formik.resetForm();
+  //   },
+  // });
 
   const handleRequest = (values) => {
     values = { ...values };
-    addEvent(values, formik);
+    addEvent(values, {
+      onSuccess: (data) => {
+        console.log("pk");
+      },
+    });
   };
 
   const handledEditRequest = (values) => {
@@ -35,7 +59,7 @@ const useEventForm = (data) => {
     editEvent(values, formik);
   };
 
-  return { formik };
+  return { formik ,data};
 };
 
 export default useEventForm;

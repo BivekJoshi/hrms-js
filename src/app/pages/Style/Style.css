@@ -9,4 +9,35 @@
 .todayBN .css-197drkz-MuiPaper-root-MuiPopover-paper-MuiMenu-paper {
   top: 50px !important;
   left: 80% !important;
+}
+
+.css-aidwu-MuiButtonBase-root-MuiButton-root{
+  border: none !important;
 } */
+
+.employeeDeshbord {
+  display: grid;
+  grid-template-rows: 1fr;
+  gap: 1rem;
+}
+
+.employeeDeshbordBG {
+  background-color: #efeeeb;
+}
+.employeeDeshbordBGDark {
+  background-color: #3f413f;
+}
+
+.employeeDeshbordMP {
+  padding: 1rem 2rem;
+  margin-top: 1rem;
+}
+
+.notification {
+  margin-bottom: 1rem;
+  border: 1px solid white;
+  text-align: center;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  background-color: #e7e2e2;
+}

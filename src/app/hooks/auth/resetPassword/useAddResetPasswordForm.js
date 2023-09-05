@@ -6,16 +6,17 @@ import { ResetPasswordSchema } from "./ResetPasswordSchema";
 const useAddForgotPasswordForm = () => {
   const [loading, setLoading] = useState(false);
   const [showValues, setShowValues] = useState({
+    oldPassword: "",
     password: "",
     showPassword: false,
   });
   const { data: loggedInUser } = useGetLoggedInUser();
-
-  const { mutate } = useAddResetPassword({});
+  const id = loggedInUser?.id;
+  const { mutate } = useAddResetPassword({id});
 
   const formik = useFormik({
     initialValues: {
-      id: loggedInUser?.id,
+      oldPassword: "",
       password: "",
     },
     validationSchema: ResetPasswordSchema,

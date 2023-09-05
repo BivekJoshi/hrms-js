@@ -1,33 +1,66 @@
 import { axiosInstance } from "../../../../auth/axiosInterceptor";
 
-{/*________________________GET ALL OFFICE RESOURCE_____________________________________*/ }
+{
+  /*________________________GET ALL OFFICE RESOURCE_____________________________________*/
+}
 export const getofficeResource = async () => {
-  const data = await axiosInstance.get(`/office-resource/all`);
+  const data = await axiosInstance.get(`/office-resource/get-all`);
   return data;
 };
 
-{/*________________________GET OFFICE RESOURCE BY OFFICE RESOURCE ID_____________________________________*/ }
+{
+  /*________________________GET OFFICE RESOURCE BY OFFICE RESOURCE ID_____________________________________*/
+}
 export const getofficeResourceById = async (id) => {
-  const data = await axiosInstance.get(`/office-resource/${id}`);
+  const data = await axiosInstance.get(`/office-resource/resource-id/${id}`);
   return data;
 };
 
-{/*________________________POST OFFICE RESOURCE_____________________________________*/ }
+{
+  /*________________________GET ALL DEACTIVATED OFFICE RESOURCE_____________________________________*/
+}
+export const getdeactivaedofficeResource = async () => {
+  const data = await axiosInstance.get(`/office-resource/get-deactivated`);
+  return data;
+};
+
+{
+  /*________________________POST OFFICE RESOURCE_____________________________________*/
+}
 export const addofficeResource = async (formData) => {
-  const data = await axiosInstance.post(`/office-resource`, formData);
+  const data = await axiosInstance.post(`/office-resource/create`, formData);
   return data;
 };
 
-{/*________________________EDIT OFFICE RESOURCE_____________________________________*/ }
+{
+  /*________________________EDIT OFFICE RESOURCE_____________________________________*/
+}
 export const editofficeResource = async (formData) => {
   const { id } = formData;
-  const data = await axiosInstance.put(`/office-resource/${id}`, formData);
+  const data = await axiosInstance.put(
+    `/office-resource/update/${id}`,
+    formData
+  );
   return data;
 };
 
-{/*________________________EDIT OFFICE RESOURCE ACTIVE-INACTIVE_____________________________________*/ }
+{
+  /*________________________EDIT OFFICE RESOURCE ACTIVE-INACTIVE_____________________________________*/
+}
 export const editofficeResourceActiveInactive = async (formData) => {
+  const { id, isActive } = formData;
+  const data = await axiosInstance.put(
+    `/office-resource/set-activation/${id}?isActive=${isActive}`,
+    formData
+  );
+  return data;
+};
+
+export const editofficeResourceInactive = async (formData) => {
   const { id } = formData;
-  const data = await axiosInstance.put(`/office-resource/set-activation/${id}`, formData);
+  const data = await axiosInstance.put(
+    `/office-resource/set-activation/${id}?isActive=true`,
+    formData
+  );
   return data;
 };

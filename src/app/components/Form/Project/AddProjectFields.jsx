@@ -1,9 +1,10 @@
 import { Grid, Button, TextField, MenuItem, Autocomplete } from "@mui/material";
-import React from "react";
+import React, { useContext } from "react";
 import { toast } from "react-toastify";
 import useAddProjectForm from "../../../hooks/project/addProject/useAddProjectForm";
 import { useGetEmployee } from "../../../hooks/employee/useEmployee";
 import { useGetCompany } from "../../../hooks/company/useCompany";
+import ThemeModeContext from "../../../../theme/ThemeModeContext";
 
 const projectOptions = [
   {
@@ -31,6 +32,7 @@ const projectOptions = [
 const AddprojectFields = ({ onClose, isLoading }) => {
   const { data: employeeData, isLoading: loadingEmployee } = useGetEmployee();
   const { data: companyData, isLoading: loadingCompany } = useGetCompany();
+  const { mode } = useContext(ThemeModeContext);
 
   const { formik } = useAddProjectForm();
 
@@ -41,10 +43,10 @@ const AddprojectFields = ({ onClose, isLoading }) => {
       if (formik.isValid) {
         onClose();
       } else {
-        toast.error('Please make sure you have filled the form correctly');
-      };
+        toast.error("Please make sure you have filled the form correctly");
+      }
     }
-  }
+  };
 
   return (
     !isLoading && (
@@ -89,9 +91,10 @@ const AddprojectFields = ({ onClose, isLoading }) => {
         <Grid item xs={12} sm={6}>
           <TextField
             name="endDate"
-            label="End Date"
+            label="Deadline Date"
             type="date"
             fullWidth
+            required
             value={formik.values.endDate}
             onChange={formik.handleChange}
             error={formik.touched.endDate && Boolean(formik.errors.endDate)}
@@ -111,14 +114,20 @@ const AddprojectFields = ({ onClose, isLoading }) => {
             required
             value={formik.values.taskStatus}
             onChange={formik.handleChange}
-            error={formik.touched.taskStatus && Boolean(formik.errors.taskStatus)}
+            error={
+              formik.touched.taskStatus && Boolean(formik.errors.taskStatus)
+            }
             helperText={formik.touched.taskStatus && formik.errors.taskStatus}
             variant="outlined"
             autoFocus
             InputLabelProps={{ shrink: true }}
           >
             {projectOptions?.map((option) => (
-              <MenuItem key={option?.id} value={option?.value}>
+              <MenuItem
+                key={option?.id}
+                value={option?.value}
+                sx={{ bgcolor: mode === "light" ? "" : "#413e3e" }}
+              >
                 {option?.label}
               </MenuItem>
             ))}
@@ -148,7 +157,11 @@ const AddprojectFields = ({ onClose, isLoading }) => {
           >
             {!loadingEmployee &&
               employeeData.map((option) => (
-                <MenuItem key={option?.id} value={option?.id}>
+                <MenuItem
+                  key={option?.id}
+                  value={option?.id}
+                  sx={{ bgcolor: mode === "light" ? "" : "#413e3e" }}
+                >
                   {option?.firstName} {option?.middleName} {option?.lastName}
                 </MenuItem>
               ))}
@@ -174,7 +187,11 @@ const AddprojectFields = ({ onClose, isLoading }) => {
           >
             {!loadingCompany &&
               companyData.map((option) => (
-                <MenuItem key={option?.id} value={option?.id}>
+                <MenuItem
+                  key={option?.id}
+                  value={option?.id}
+                  sx={{ bgcolor: mode === "light" ? "" : "#413e3e" }}
+                >
                   {option?.companyName}
                 </MenuItem>
               ))}

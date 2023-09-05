@@ -56,7 +56,7 @@ export default function ListUserDetails({ cardTitle, data, mode }) {
           borderRadius: "1rem",
         }}
       >
-        {Object.keys(data).map((item, index) => (
+        {Object.keys(data)?.map((item, index) => (
           <InfoItem key={index} field={item} value={data[item]} />
         ))}
       </List>

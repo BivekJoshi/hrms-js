@@ -12,53 +12,58 @@
   overflow: scroll;
 }
 
-
 .table-wrapper {
   max-width: 93vw;
   padding: 10px;
-  overflow-x: scroll;
-
+  overflow-x: hidden;
 }
-
 
 .heading {
   position: sticky;
   top: 0;
-  /* background-color: white; */
+  background-color: #0e68af;
   z-index: 99;
 }
 
-.sn { 
+.sn {
   position: sticky;
   left: 0;
-  /* background-color: white; */
+  background-color: #0e68af;
   z-index: 99;
+  color: white;
 }
 
 .emp {
   position: sticky;
   left: 4.75%;
-  /* background-color: white; */
+  background-color: #0e68af;
   z-index: 99;
-
+  color: white;
 }
 
 
 .snNo {
   position: sticky;
   left: 0%;
-  /* background-color: white; */
+  background-color: #0e68af;
   z-index: 1;
+  color: white;
 }
-
 
 .empname {
   position: sticky;
-  /* background-color: white; */
+  background-color: #0e68af;
   left: 3.75%;
   z-index: 1;
+  color: white;
 }
 
+.css-ttn1xo {
+  overflow: hidden;
+}
+.css-srtxtf{
+  padding: 0;
+}
 @media screen and (max-width: 768px) {
   .main {
     padding: 10px;

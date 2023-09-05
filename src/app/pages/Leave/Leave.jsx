@@ -12,14 +12,16 @@ import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import { AddLeaveModal, EditLeaveModal } from "./LeaveModal/LeaveModal";
 import DeleteConfirmationModal from "../../components/Modal/DeleteConfirmationModal";
 import tableIcons from "../../../theme/overrides/TableIcon";
+import { ButtonComponent } from "../../components/Button/ButtonComponent";
+import { useGetUserControl } from "../../hooks/auth/userControl/useUserControl";
 
 const Leave = ({ isLoading }) => {
   const { data: leaveData, isLoading: loadingleave } = useGetLeave();
   const { data: employeeData, isLoading: loadingemployee } = useGetEmployee();
-  const {
-    data: leaveTypeData,
-    isLoading: loadingleaveType,
-  } = useGetLeaveType();
+  const { data: leaveTypeData, isLoading: loadingleaveType } =
+    useGetLeaveType();
+  const { data: UserData, isLoading: loadingUser } = useGetUserControl();
+
 
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
@@ -68,12 +70,21 @@ const Leave = ({ isLoading }) => {
     const name = `${capitalizeFirstLetter(leaveType.leaveName)} Leave`;
     return name;
   };
+  const getUserName = ( rowData) => {
+    const confirmById = rowData?.confirmById;  
+    const user = UserData?.find((confirmBy) => confirmBy.id === confirmById);
+    const name = `${user?.name || "-"}`;
+    return name;
+  };
+
+
   const columns = [
     {
       title: "SN",
       render: (rowData) => rowData.tableData.id + 1,
       width: 80,
       sortable: false,
+      sorting: false,
     },
     {
       title: "Employee Name",
@@ -81,6 +92,7 @@ const Leave = ({ isLoading }) => {
         return <p>{getEmployeeName(rowData)} </p>;
       },
       width: 120,
+      sorting: false,
     },
     {
       title: "Leave Type",
@@ -88,18 +100,21 @@ const Leave = ({ isLoading }) => {
         return <p>{getLeaveTypeName(rowData)}</p>;
       },
       width: 150,
+      sorting: false,
     },
     {
       title: "From",
       field: "fromDate",
       emptyValue: "-",
       width: 100,
+      sorting: false,
     },
     {
       title: "To",
       field: "toDate",
       emptyValue: "-",
       width: 100,
+      sorting: false,
     },
     {
       title: "Status",
@@ -111,14 +126,14 @@ const Leave = ({ isLoading }) => {
       },
       render: (rowData) => {
         const status = rowData.leaveStatus;
-        let chipColor = "";
+        let chipColor = '';
 
-        if (status === "APPROVED") {
-          chipColor = "green";
-        } else if (status === "REJECTED") {
-          chipColor = "red";
-        } else if (status === "PENDING") {
-          chipColor = "orange";
+        if (status === 'APPROVED') {
+          chipColor = 'green';
+        } else if (status === 'REJECTED') {
+          chipColor = 'red';
+        } else if (status === 'PENDING') {
+          chipColor = 'orange';
         }
 
         return (
@@ -132,18 +147,23 @@ const Leave = ({ isLoading }) => {
           />
         );
       },
+      sorting: false,
     },
     {
       title: "Remark",
       field: "leaveRemarks",
       emptyValue: "-",
       width: 100,
+      sorting: false,
     },
+ 
     {
       title: "Approved By",
-      field: "confirmById",
-      emptyValue: "-",
-      width: 40,
+      render: (rowData) => {
+        return <p>{getUserName(rowData)} </p>;
+      },
+      width: 120,
+      sorting: false,
     },
     {
       title: "Actions",
@@ -177,13 +197,11 @@ const Leave = ({ isLoading }) => {
   return (
     <>
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-        <Button
-          variant="contained"
-          sx={{ mt: 3, ml: 1 }}
-          onClick={handleAddOpenModal}
-        >
-          +Add Leave
-        </Button>
+        <ButtonComponent
+          OnClick={handleAddOpenModal}
+          Border="none"
+          buttonName={"+ Add Leave"}
+        />
       </Box>
       <br />
       <br />
@@ -192,7 +210,7 @@ const Leave = ({ isLoading }) => {
         icons={tableIcons}
         columns={columns}
         data={leaveData}
-        title=""
+        title='Leave Data'
         isLoading={loadingleave}
         options={{
           padding: "dense",
@@ -200,18 +218,18 @@ const Leave = ({ isLoading }) => {
           pageSize: 10,
           emptyRowsWhenPaging: false,
           headerStyle: {
-            backgroundColor: "#01579b",
-            color: "#FFF",
-            fontSize: "1rem",
-            padding: "dense",
+            backgroundColor: '#01579b',
+            color: '#FFF',
+            fontSize: '1rem',
+            padding: 'dense',
             height: 50,
-            textAlign: "center",
-            border: "2px solid #fff",
-            minHeight: "10px",
-            textTransform: "capitilize",
+            textAlign: 'center',
+            border: '2px solid #fff',
+            minHeight: '10px',
+            textTransform: 'capitalize',
           },
           rowStyle: {
-            fontSize: ".8rem",
+            fontSize: '.8rem',
           },
         }}
       />
@@ -233,7 +251,7 @@ const Leave = ({ isLoading }) => {
           open={openDeleteModal}
           handleCloseModal={handleCloseDeleteModal}
           handleConfirmDelete={handleConfirmDelete}
-          message={"Leave"}
+          message={'Leave'}
         />
       )}
     </>

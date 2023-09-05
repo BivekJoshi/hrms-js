@@ -109,6 +109,7 @@ const ProjectCard = ({
             textAlign: "center",
             padding: "1.5rem",
             backgroundColor: mode === "light" ? "white" : "#292929",
+            overflow: "auto",
           }}
         >
           <Grid
@@ -200,7 +201,20 @@ const ProjectCard = ({
               <Typography
                 style={{ fontWeight: 700, margin: "1rem 0", fontSize: "20px" }}
               >
-                {ProjectName}
+                <Chip
+                  sx={{
+                    bgcolor: mode === "light" ? "white" : "rgb(41, 41, 41)",
+                    fontSize: "1rem",
+                    width: "80%",
+                  }}
+                  label={
+                    <h3
+                      style={{ overflow: "hidden", textOverflow: "ellipsis" }}
+                    >
+                      {ProjectName}
+                    </h3>
+                  }
+                />
               </Typography>
               <Typography variant="body2" color="text.primary">
                 Team Size: {getEmployeeNumber(Id)}

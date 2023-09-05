@@ -2,12 +2,12 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useGetDocumentById } from "../../../../../hooks/employee/useDocument";
 import { DOC_URL } from "../../../../../../auth/axiosInterceptor";
-
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
+import { groupBy } from "lodash";
 
 const DocumentInfo = () => {
   const url = DOC_URL;
@@ -20,26 +20,21 @@ const DocumentInfo = () => {
     setValue(newValue);
   };
 
+  const groupedDocuments = isLoading
+    ? {}
+    : groupBy(getDocument, "documentType");
+
   return (
-    <Box sx={{ width: "100%" }}>
-      <TabContext 
-      value={value}
-      variant="scrollable"
-      scrollButtons
-      allowScrollButtonsMobile
-      aria-label="scrollable force tabs example"
-      >
+    // {data?():()}
+    <Box>
+      <TabContext value={value}>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <TabList onChange={handleChange} aria-label="lab API tabs example">
             {isLoading ? (
-              <Tab label="Loading..." value="1" />
+              <p>Loding..</p>
             ) : (
-              getDocument.map((document) => (
-                <Tab
-                  key={document.id}
-                  label={document.documentType} 
-                  value={document.id.toString()} 
-                />
+              Object.keys(groupedDocuments).map((documentType, index) => (
+                <Tab key={index} label={documentType} value={documentType} />
               ))
             )}
           </TabList>
@@ -47,14 +42,25 @@ const DocumentInfo = () => {
         {isLoading ? (
           <TabPanel value="1">Loading...</TabPanel>
         ) : (
-          getDocument.map((document) => (
-            <TabPanel key={document.id} value={document.id.toString()}>
-              <img
-                src={`${url}${document?.path}`}
-                alt="Document"
-                width="640"
-                height="340"
-              />
+          Object.keys(groupedDocuments).map((documentType) => (
+            <TabPanel
+              key={documentType}
+              value={documentType}
+              sx={{
+                display: "grid",
+                gridTemplateColumns: "repeat(2, 1fr)",
+                gap: "1rem",
+              }}
+            >
+              {groupedDocuments[documentType].map((document) => (
+                <img
+                  key={document.id}
+                  src={`${url}${document?.path}`}
+                  alt="Document"
+                  width="100%"
+                  // height="340"
+                />
+              ))}
             </TabPanel>
           ))
         )}

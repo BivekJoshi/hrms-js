@@ -11,13 +11,19 @@ import { useNavigate } from "react-router-dom";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import DeleteConfirmationModal from "../../../components/Modal/DeleteConfirmationModal";
-import { AddEmployeeResourceModal, EditEmployeeResourceModal } from "./EmployeeResourceModal";
+import {
+  AddEmployeeResourceModal,
+  EditEmployeeResourceModal,
+} from "./EmployeeResourceModal";
 import { useGetOfficeResource } from "../../../hooks/resource/officeResource/useOfficeResource";
+import { ButtonComponent } from "../../../components/Button/ButtonComponent";
+import PermissionHoc from "../../../hoc/permissionHoc";
+import HocButton from "../../../hoc/hocButton";
 
-const EmployeeResource = () => {
+const EmployeeResource = ({ permissions }) => {
   const navigate = useNavigate();
   const { data: employeeResourceData, isLoading } = useGetEmployeeResource();
-  const { data : officeResourceData } = useGetOfficeResource();
+  const { data: officeResourceData } = useGetOfficeResource();
   const { data: employeeData, isLoading: loadingemployee } = useGetEmployee();
 
   const [openAddModal, setOpenAddModal] = useState(false);
@@ -59,9 +65,11 @@ const EmployeeResource = () => {
   };
   const getResourceName = (rowData) => {
     const resourceId = rowData?.officeResourceId;
-    const resourceName = officeResourceData?.find((resource) => resource?.id === resourceId );
+    const resourceName = officeResourceData?.find(
+      (resource) => resource?.id === resourceId
+    );
     return resourceName?.name;
-  }
+  };
 
   const columns = [
     {
@@ -69,6 +77,7 @@ const EmployeeResource = () => {
       render: (rowData) => rowData.tableData.id + 1,
       width: "3%",
       sortable: false,
+      sorting: false,
     },
     {
       title: "Employee Name",
@@ -76,34 +85,42 @@ const EmployeeResource = () => {
         return <p>{getEmployeeName(rowData)} </p>;
       },
       width: 120,
+      sorting: false,
     },
     {
       title: "Resource",
       render: (rowData) => {
-        return <p>{getResourceName(rowData)}</p>
+        return <p>{getResourceName(rowData)}</p>;
       },
       width: "20vh",
+      sorting: false,
     },
     {
       title: "Received Date",
       field: "receiveDate",
       emptyValue: "-",
+      sorting: false,
     },
     {
       title: "Returned Date",
       field: "returnDate",
       emptyValue: "-",
+      sorting: false,
     },
     {
       title: "Actions",
       render: (rowData) => (
         <Stack direction="row" spacing={0}>
-          <Button color="primary" onClick={() => handleEditRowData(rowData)}>
-            <ModeEditOutlineIcon />
-          </Button>
-          <Button color="primary" onClick={() => handleDeleteRowData(rowData)}>
-            <DeleteIcon />
-          </Button>
+          <HocButton
+            permissions={permissions.canEdit}
+            onClick={() => handleEditRowData(rowData)}
+            icon={<ModeEditOutlineIcon />}
+          />
+          <HocButton
+            permissions={permissions.canDelete}
+            onClick={() =>handleDeleteRowData(rowData)}
+            icon={<DeleteIcon />}
+          />
         </Stack>
       ),
       sorting: false,
@@ -112,25 +129,31 @@ const EmployeeResource = () => {
   ];
   return (
     <>
-      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-        <Button
-          variant="contained"
-          sx={{ mt: 3, ml: 1 }}
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "flex-end",
+          gap: "1rem",
+          padding: ".5rem 0",
+        }}
+      >
+        <HocButton
+          permissions={permissions.canAdd}
+          color= {"primary"}
+          variant={"outlined"}
           onClick={() => {
             navigate(`/admin/resource/office`);
           }}
-        >
-          Resources
-        </Button>
-        <Button
-          variant="contained"
-          sx={{ mt: 3, ml: 1 }}
+          buttonName={"Resources"}
+        />
+        <HocButton
+          permissions={permissions.canAdd}
+          color= {"primary"}
+          variant={"contained"}
           onClick={handleAddOpenModal}
-        >
-          +Add Employee
-        </Button>
+          buttonName={"+Provide Resource to Employee"}
+        />
       </Box>
-      <br></br>
 
       <MaterialTable
         icons={tableIcons}
@@ -145,16 +168,16 @@ const EmployeeResource = () => {
           pageSize: 20,
           emptyRowsWhenPaging: false,
           headerStyle: {
-            backgroundColor: '#01579b',
-            color: '#FFF',
+            backgroundColor: "#01579b",
+            color: "#FFF",
             fontSize: "1rem",
-            padding: 'dense',
+            padding: "dense",
             height: 50,
-            textAlign:'center',
-            border:'2px solid #fff',
-            minHeight:'10px',
-            textTransform:'capitilize'
-        },
+            textAlign: "center",
+            border: "2px solid #fff",
+            minHeight: "10px",
+            textTransform: "capitilize",
+          },
           rowStyle: {
             fontSize: ".8rem",
           },
@@ -176,7 +199,7 @@ const EmployeeResource = () => {
       )}
       {openEditModal && (
         <EditEmployeeResourceModal
-        id={editedEmployeeResouce?.id}
+          id={editedEmployeeResouce?.id}
           open={openEditModal}
           handleCloseModal={handleCloseEditModal}
         />
@@ -185,4 +208,4 @@ const EmployeeResource = () => {
   );
 };
 
-export default EmployeeResource;
+export default PermissionHoc(EmployeeResource);
