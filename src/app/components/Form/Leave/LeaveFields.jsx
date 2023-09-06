@@ -46,11 +46,7 @@ const LeaveFields = ({ onClose, isLoading, data }) => {
     const employee = employeeData?.find((emp) => emp.id === employeeId);
     if (employee) {
       const { firstName, middleName, lastName } = employee;
-      return (
-        <Box sx={{ bgcolor: mode === "light" ? "" : "#413e3e" }}>
-          {firstName || ""} {middleName || ""} {lastName || ""}
-        </Box>
-      );
+      return `${firstName || ""} ${middleName || ""} ${lastName || ""}`;
     }
     return "";
   };

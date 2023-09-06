@@ -45,18 +45,8 @@ const Event = ({ permissions }) => {
     }
   }, [eventData]);
 
-<<<<<<< HEAD
   const handleCloseModal = () => setOpenAddModal(false);
   const { formik ,data} = useEventForm(setOpenSubmitModal, handleCloseModal);
-=======
-  const [openAddModal, setOpenAddModal] = useState();
-  const [openModal, setOpenModal] = useState(false);
-  const [getEventID, setEventGetID] = useState({});
-  
-  const handleAddEventClick = () => {
-    setOpenAddModal(!openAddModal); // Toggle the state
-  };
->>>>>>> 4c04c8ccdde7e7ffbba99b4c26844e9e47c246f5
 
   const handleFormSubmit = async () => {
     formik.handleSubmit();
@@ -70,19 +60,10 @@ const Event = ({ permissions }) => {
     setOpenModal(true);
   };
 
-<<<<<<< HEAD
   const handleEmailButtonClick = () => {
     setOpenEmailModal(true);
     setOpenSubmitModal(false);
   };
-=======
-  const handleCloseModal = () => setOpenAddModal(false);
-
-  // const handleTodayClick = (events) => {
-  //   console.log(events)
-  //   events.gotoDate(new Date());
-  // };
->>>>>>> 4c04c8ccdde7e7ffbba99b4c26844e9e47c246f5
 
   return (
     <>
@@ -98,7 +79,6 @@ const Event = ({ permissions }) => {
       <br />
 
       {openAddModal && (
-<<<<<<< HEAD
         <FormModal
           open={openAddModal}
           onClose={() => setOpenAddModal(false)}
@@ -130,11 +110,6 @@ const Event = ({ permissions }) => {
               </Grid>
             </>
           }
-=======
-        <AddEventModal
-          open={() => setOpenAddModal(true)}
-          handleCloseModal={() => console.log(handleCloseModal + "jlee")}
->>>>>>> 4c04c8ccdde7e7ffbba99b4c26844e9e47c246f5
         />
       )}
       {openSubmitModal && (
