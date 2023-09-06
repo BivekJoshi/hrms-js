@@ -5,6 +5,7 @@ import { Breadcrumbs, Typography } from "@mui/material";
 import { Link, useLocation } from "react-router-dom";
 import ThemeModeContext from "../theme/ThemeModeContext";
 import EmployeeProfile from "../app/pages/Employee/EmployeeViewPage/EmployProfile/EmployeeProfile";
+import AttendenceInfo from "../app/pages/Employee/EmployeeViewPage/InfoTabs/AttendenceInfoTab/AttendenceInfo";
 
 const ResetPassword = Loadable(
   lazy(() => import("../app/pages/Auth/ResetPassword/ResetPassword"))
@@ -53,6 +54,12 @@ const employeeRoutes = [
     name: "My Profile",
     id: nanoid(),
     component: <EmployeeProfile />,
+  },
+  {
+    path: "attendance",
+    name: "My Attendance",
+    id: nanoid(),
+    component: <AttendenceInfo />,
   },
   {
     path: "leavetype",
