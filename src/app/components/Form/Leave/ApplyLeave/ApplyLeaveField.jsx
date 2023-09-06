@@ -11,10 +11,17 @@ import { useGetLeaveType } from "../../../../hooks/leaveType/useLeaveType";
 import useApplyLeaveForm from "../../../../hooks/leave/LeaveForm/useApplyLeaveForm";
 import { toast } from "react-toastify";
 import { useGetLeaveById } from "../../../../hooks/leave/useLeave";
+import { useLocation } from 'react-router-dom';
 
-const ApplyLeaveField = ({ id}) => {
+const ApplyLeaveField = () => {
+  const location = useLocation();
+  const rowData = location?.state?.rowData || {};
+
+  const id = rowData ? rowData.id : "";
+
   const { data } = useGetLeaveById(id);
   const { data: leaveTypeData } = useGetLeaveType();
+
   const { formik } = useApplyLeaveForm(data);
 
   const handleFormSubmit = () => {

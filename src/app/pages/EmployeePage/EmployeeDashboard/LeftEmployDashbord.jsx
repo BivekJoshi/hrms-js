@@ -36,7 +36,7 @@ export const LeftEmployDashbord = ({}) => {
               ? " employeeDeshbord"
               : "employeeDeshbordBGDark employeeDeshbord"
           }
-          boxShadow="7"
+          boxShadow="2"
           padding=".5rem"
         >
           <Box className="employeeDeshbord" padding="1rem 2rem 0">
@@ -51,7 +51,7 @@ export const LeftEmployDashbord = ({}) => {
                     flexDirection="row"
                     justifyContent="space-between"
                     border="1px solid blue"
-                    borderRadius="1rem"
+                    borderRadius=".5rem"
                     padding="0 1rem"
                     alignItems="center"
                   >
@@ -90,7 +90,7 @@ export const LeftEmployDashbord = ({}) => {
                     flexDirection="row"
                     justifyContent="space-between"
                     border="1px solid blue"
-                    borderRadius="1rem"
+                    borderRadius=".5rem"
                     padding="0 1rem"
                     alignItems="center"
                   >
