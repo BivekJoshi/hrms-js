@@ -17,7 +17,6 @@ const LeaveUserView = () => {
     data: leaveTypeData,
     isLoading: loadingLeaveType,
   } = useGetLeaveType();
-  const [editedLeave, setEditedLeave] = useState({});
   const [deletedLeave, setDeletedLeave] = useState({});
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
@@ -46,9 +45,7 @@ const LeaveUserView = () => {
     return name;
   };
   const handleEditLeave = (rowData) => {
-    // () => navigate(`/employee/applyleavefield`);
-    // setEditedLeave(rowData);
-    navigate(`/employee/applyleavefield`, { state: { leaveData: rowData } });
+    navigate(`/employee/applyleavefield`,{ state: { rowData } });
   };
   const columns = [
     {

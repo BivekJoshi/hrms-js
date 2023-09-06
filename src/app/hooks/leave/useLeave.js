@@ -5,9 +5,11 @@ import {
   addleave,
   deleteLeave,
   editLeave,
+  editLeaveByAdmin,
   getEmployeeLeaveById,
   getLeaveById,
   getLoggedInUserLeave,
+  getLoggedInUserLeaveBalance,
   getleave,
   getpendingleave,
 } from "../../api/leave/leave-api";
@@ -31,6 +33,14 @@ export const useGetPendingLeave = () => {
 /*________________________GET LOGGED IN USER LEAVE_____________________________________*/
 export const useGetLoggedInUserLeave = () => {
   return useQuery(["getLoggedInUserLeave"], () => getLoggedInUserLeave(), {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
+};
+
+/*________________________GET LEAVE OF LOGGED IN USER LEAVE BALANCE_____________________________________*/
+export const useGetLoggedInUserLeaveBalance = () => {
+  return useQuery(["getLoggedInUserLeaveBalance"], () => getLoggedInUserLeaveBalance(), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
@@ -78,7 +88,7 @@ export const useAddLeave = ({ onSuccess }) => {
     onSuccess: (data, variables, context) => {
       toast.success("Succesfully added Leave");
       onSuccess && onSuccess(data, variables, context);
-      queryClient.invalidateQueries("getLeave");
+      queryClient.invalidateQueries("useGetLoggedInUserLeave");
     },
     onError: (err, _variables, _context) => {
       toast.error(`error: ${err.message}`);
@@ -93,7 +103,7 @@ export const useDeleteLeave = ({ onSuccess }) => {
     onSuccess: (data, variables, context) => {
       toast.success("Successfully deleted Leave");
       onSuccess && onSuccess(data, variables, context);
-      queryClient.invalidateQueries("getLeave");
+      queryClient.invalidateQueries("useGetLoggedInUserLeave");
     },
     onError: (err, _variables, _context) => {
       toast.error(`Error: ${err.message}`);
@@ -105,6 +115,21 @@ export const useDeleteLeave = ({ onSuccess }) => {
 export const useEditLeave = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(["editLeave"], (formData) => editLeave(formData), {
+    onSuccess: (data, variables, context) => {
+      toast.success("Successfully edited Leave");
+      onSuccess && onSuccess(data, variables, context);
+      queryClient.invalidateQueries("useGetLoggedInUserLeave");
+    },
+    onError: (err, _variables, _context) => {
+      toast.error(`Error: ${err.message}`);
+    },
+  });
+};
+
+/*________________________EDIT BY ADMIN_____________________________________*/
+export const useEditLeaveByAdmin = ({ onSuccess }) => {
+  const queryClient = useQueryClient();
+  return useMutation(["editLeaveByAdmin"], (formData) => editLeaveByAdmin(formData), {
     onSuccess: (data, variables, context) => {
       toast.success("Successfully edited Leave");
       onSuccess && onSuccess(data, variables, context);
