@@ -97,6 +97,16 @@ export default function EmployeeSidebar() {
       subMenus: [],
     },
     {
+      name: "My Attendence",
+      path: "attendance",
+      icon: (
+        <MailIcon
+          sx={mode === "light" ? { color: "black" } : { color: "white" }}
+        />
+      ),
+      subMenus: [],
+    },
+    {
       name: "Apply Leave",
       path: "applyleave",
       icon: (

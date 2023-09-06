@@ -9,9 +9,21 @@ import HdrAutoOutlinedIcon from "@mui/icons-material/HdrAutoOutlined";
 import { TbCircleLetterP } from "react-icons/tb";
 import { Box, Card, CardContent, Grid, Typography } from "@mui/material";
 import "../../Style/BasicInfoStyle.css";
+import { useGetLoggedInUser } from "../../../../../hooks/auth/usePassword";
+import useAuth from "../../../../../../auth/hooks/component/login/useAuth";
 
 const AttendenceInfo = () => {
-  const { id } = useParams();
+  const { isEmployee } = useAuth();
+
+  let id;
+  if (isEmployee) {
+    const { data: loggedInUserDataInfo } = useGetLoggedInUser();
+    id = loggedInUserDataInfo?.employeeId;
+  } else {
+    const { id: paramId } = useParams();
+    id = paramId;
+  }
+
   const { data: attendanceData } = useGetEmployeeAttendanceById(id);
 
   const calendarRef = useRef(null);
@@ -132,7 +144,7 @@ const AttendenceInfo = () => {
           </Card>
         </Grid>
       </Grid>
-      <br/>
+      <br />
       <FullCalendar
         ref={calendarRef}
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
