@@ -1,13 +1,10 @@
-import { Box, Stack } from "@mui/system";
+import { Box } from "@mui/system";
 import React, { useContext, useState } from "react";
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import Male from "../../../../assets/male.png";
 import "../../Style/Style.css";
 import { Typography } from "@mui/material";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
 import {
   useGetEvent,
-  useGetEventNotification,
 } from "../../../hooks/event/useEvent";
 import { ButtonComponent } from "../../../components/Button/ButtonComponent";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
