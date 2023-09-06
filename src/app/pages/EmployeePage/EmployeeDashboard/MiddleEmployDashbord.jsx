@@ -8,8 +8,8 @@ export const MiddleEmployDashbord = (props) => {
   return (
     <Box
       display="grid"
-      gridTemplateColumns="1fr 1fr 1fr"
-      paddingTop="2rem"
+      gridTemplateColumns="repeat(auto-fit, minmax(250px, 1fr))"
+      padding="2rem 0 3rem"
       gap="1rem"
     >
       <Box>
