@@ -14,7 +14,7 @@ export const MiddleEmployDashbord = (props) => {
     >
       <Box>
         <h3>Employee overal Attendance</h3>
-        <Box marginTop="-2.5rem" height="100vh">
+        <Box marginTop="-2.5rem" height="100%">
           <EmployLineChart />
         </Box>
       </Box>
