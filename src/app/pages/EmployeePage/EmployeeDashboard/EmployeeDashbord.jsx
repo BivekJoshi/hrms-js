@@ -68,6 +68,7 @@ const EmployeeDashbord = (props) => {
         grid
         gridTemplateColumns="repeat(auto-fit, minmax(125px, 1fr))"
         gap="1rem"
+        padding="2rem 0 0"
       >
         {task.map((taskDetail, index) => (
           <EmployTaskCard

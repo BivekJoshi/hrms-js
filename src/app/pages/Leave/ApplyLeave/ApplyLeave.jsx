@@ -16,7 +16,8 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: "center",
   minHeight: 290,
   maxHeight: 310,
-  margin: 8,
+  padding: 30,
+  // margin: 8,
 }));
 
 const CustomArrow = ({ onClick, direction }) => {
