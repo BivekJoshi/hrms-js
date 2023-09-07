@@ -112,12 +112,12 @@ const EmployeeResource = ({ permissions }) => {
       render: (rowData) => (
         <Stack direction="row" spacing={0}>
           <HocButton
-            permissions={permissions.canEdit}
+            permissions={permissions}
             onClick={() => handleEditRowData(rowData)}
             icon={<ModeEditOutlineIcon />}
           />
           <HocButton
-            permissions={permissions.canDelete}
+            permissions={permissions}
             onClick={() =>handleDeleteRowData(rowData)}
             icon={<DeleteIcon />}
           />
@@ -138,7 +138,7 @@ const EmployeeResource = ({ permissions }) => {
         }}
       >
         <HocButton
-          permissions={permissions.canAdd}
+          permissions={permissions}
           color= {"primary"}
           variant={"outlined"}
           onClick={() => {
@@ -147,7 +147,7 @@ const EmployeeResource = ({ permissions }) => {
           buttonName={"Resources"}
         />
         <HocButton
-          permissions={permissions.canAdd}
+          permissions={permissions}
           color= {"primary"}
           variant={"contained"}
           onClick={handleAddOpenModal}

@@ -6,6 +6,7 @@ import { Link, useLocation } from "react-router-dom";
 import ThemeModeContext from "../theme/ThemeModeContext";
 import EmployeeProfile from "../app/pages/Employee/EmployeeViewPage/EmployProfile/EmployeeProfile";
 import AttendenceInfo from "../app/pages/Employee/EmployeeViewPage/InfoTabs/AttendenceInfoTab/AttendenceInfo";
+import ProjectEmpPage from "../app/pages/Project/ProjectEmployeeViewPage/ProjectEmppage";
 
 const ResetPassword = Loadable(
   lazy(() => import("../app/pages/Auth/ResetPassword/ResetPassword"))
@@ -32,7 +33,7 @@ const LeaveType = Loadable(
 );
 const Event = Loadable(lazy(() => import("../app/pages/Event/Event")));
 const Holiday = Loadable(lazy(() => import("../app/pages/Holiday/Holiday")));
-const Project = Loadable(lazy(() => import("../app/pages/Project/Project")));
+const Project = Loadable(lazy(() => import("../app/pages/Project/ProjectAdminViewPage/Project")));
 const TodoList = Loadable(lazy(() => import("../app/pages/TodoList/TodoList")));
 const Company = Loadable(lazy(() => import("../app/pages/Company/Company")));
 
@@ -107,7 +108,7 @@ const employeeRoutes = [
     path: "project",
     name: "Project",
     id: nanoid(),
-    component: <Project />,
+    component: <ProjectEmpPage />,
   },
   {
     path: "event",
@@ -163,7 +164,7 @@ export default function BreadCrumbs() {
             <Link
               underline="hover"
               style={{ color: mode === "light" ? "inherit" : "white" }}
-              to="/admin/dashboard"
+              to="/employee/dashboard"
             >
               Dashboard
             </Link>

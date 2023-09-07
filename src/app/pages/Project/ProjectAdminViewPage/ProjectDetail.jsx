@@ -10,9 +10,8 @@ import { useGetEmployee } from "../../../hooks/employee/useEmployee";
 import { Box, Button, Grid, Stack } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import DeleteConfirmationModal from "../../../components/Modal/DeleteConfirmationModal";
-import { AddProjectEmployeeModal, EditProjectEmployeeModal } from "../ProjectEmployee/ProjectEmployeeModal/ProjectEmployeeModal";
 import { useGetProject } from "../../../hooks/project/useProject";
-import EditIcon from "@mui/icons-material/Edit";
+import { AddProjectEmployeeModal, EditProjectEmployeeModal } from "../ProjectModal/ProjectModal";
 
 const ProjectDetail = () => {
   const { id } = useParams();
