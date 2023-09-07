@@ -47,16 +47,16 @@ const CustomArrow = ({ onClick, direction }) => {
 const ApplyLeave = () => {
   const { data: leavebalance, isLoading } = useGetLoggedInUserLeaveBalance();
   const { data: leaveTypeData } = useGetLeaveType();
-  console.log(leaveTypeData);
+
   if (isLoading || !leavebalance) {
     return <div>Loading...</div>;
   }
-console.log(leaveTypeData);
+
   const boxes = leavebalance.map((data, index) => (
     <Box key={index} boxShadow="7">
       <Item>
         <Typography variant="h5">
-       { data.leaveTypeId === leaveTypeData.id &&
+       { data.leaveTypeId === leaveTypeData &&
           <b>{leaveTypeData?.leaveName}</b>}
         </Typography>
         <Typography variant="h2" color="#3e019b" style={{ marginTop: 25 }}>
