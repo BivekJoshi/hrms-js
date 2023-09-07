@@ -58,7 +58,7 @@ const Project = ({ permissions }) => {
           On-Going Projects
           <Box display="flex" gap={".5rem"}>
             <HocButton
-              permissions={permissions?.canView}
+              permissions={permissions}
               color={"primary"}
               variant={"outlined"}
               onClick={() => {
@@ -67,7 +67,7 @@ const Project = ({ permissions }) => {
               buttonName={"Terminated Project"}
             />
             <HocButton
-              permissions={permissions?.canAdd}
+              permissions={permissions}
               color={"primary"}
               variant={"contained"}
               onClick={handleAddOpenModal}

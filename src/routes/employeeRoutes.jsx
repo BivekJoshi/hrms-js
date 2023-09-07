@@ -163,7 +163,7 @@ export default function BreadCrumbs() {
             <Link
               underline="hover"
               style={{ color: mode === "light" ? "inherit" : "white" }}
-              to="/admin/dashboard"
+              to="/employee/dashboard"
             >
               Dashboard
             </Link>

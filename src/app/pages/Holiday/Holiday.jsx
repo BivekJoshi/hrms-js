@@ -66,7 +66,7 @@ const Holiday = ({ permissions }) => {
     <>
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
         <HocButton
-          permissions={permissions?.canAdd}
+          permissions={permissions}
           color={"primary"}
           variant={"contained"}
           onClick={() => setOpenAddModal(true)}
