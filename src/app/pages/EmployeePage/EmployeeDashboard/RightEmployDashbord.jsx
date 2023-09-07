@@ -4,8 +4,10 @@ import "../../Style/Style.css";
 import { ButtonComponent } from "../../../components/Button/ButtonComponent";
 import { Divider, Typography } from "@mui/material";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
+import { useNavigate } from "react-router-dom";
 
 export const RightEmployDashbord = (props) => {
+  const navigate = useNavigate();
   const { mode } = useContext(ThemeModeContext);
   return (
     <Box>
@@ -77,7 +79,9 @@ export const RightEmployDashbord = (props) => {
           <Box alignSelf="center" paddingTop="2rem">
             <ButtonComponent
               buttonName={"APPLY Leave"}
-              // OnClick={}
+              OnClick={() => {
+                navigate("/employee/applyleave");
+              }}
               BGColor={"orange"}
               TextColor={"black"}
             />
