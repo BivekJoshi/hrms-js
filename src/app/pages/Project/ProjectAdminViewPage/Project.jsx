@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import Typography from "@mui/material/Typography";
 import { Box, Card, Container, Grid, Stack, TextField } from "@mui/material";
 import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
-import { useGetProject } from "../../hooks/project/useProject";
-import { AddProjectModal } from "./ProjectModal/ProjectModal";
+import { useGetProject } from "../../../hooks/project/useProject";
+import { AddProjectModal } from "../ProjectModal/ProjectModal";
 import { useNavigate } from "react-router-dom";
 
-import ProjectCard from "../../components/cards/Employee/ProjectCard";
-import { PagePagination } from "../../components/Pagination/PagePagination";
-import { ButtonComponent } from "../../components/Button/ButtonComponent";
-import HocButton from "../../hoc/hocButton";
-import PermissionHoc from "../../hoc/permissionHoc";
+import ProjectCard from "../../../components/cards/Employee/ProjectCard";
+import { PagePagination } from "../../../components/Pagination/PagePagination";
+import { ButtonComponent } from "../../../components/Button/ButtonComponent";
+import HocButton from "../../../hoc/hocButton";
+import PermissionHoc from "../../../hoc/permissionHoc";
 
 const Project = ({ permissions }) => {
   const navigate = useNavigate();
