@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
@@ -16,7 +16,7 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: "center",
   minHeight: 290,
   maxHeight: 310,
-  padding: 30,
+  // padding: 30,
   // margin: 8,
 }));
 
@@ -51,12 +51,13 @@ const ApplyLeave = () => {
   if (isLoading || !leavebalance) {
     return <div>Loading...</div>;
   }
-
+console.log(leaveTypeData);
   const boxes = leavebalance.map((data, index) => (
-    <div key={index}>
+    <Box key={index} boxShadow="7">
       <Item>
         <Typography variant="h5">
-          <b>{data.leaveTypeId}</b>
+       { data.leaveTypeId === leaveTypeData.id &&
+          <b>{leaveTypeData?.leaveName}</b>}
         </Typography>
         <Typography variant="h2" color="#3e019b" style={{ marginTop: 25 }}>
           <AirlineSeatFlatOutlinedIcon fontSize="300px" />
@@ -70,7 +71,7 @@ const ApplyLeave = () => {
           </Typography>
         </div>
       </Item>
-    </div>
+    </Box>
   ));
 
   const chunkedBoxes = [];
@@ -92,7 +93,15 @@ const ApplyLeave = () => {
         )}
       >
         {chunkedBoxes.map((chunk, index) => (
-          <Box style={{ display: "flex", padding: 0, margin: 0 }} key={index}>
+          <Box
+            style={{ padding: 0, margin: "1rem .5rem" }}
+            display="grid"
+            gridTemplateColumns="repeat(auto-fit, minmax(200px, 1fr))"
+            gap="1rem"
+            key={index}
+            // boxShadow="7"
+            // maxWidth="250px"
+          >
             {chunk}
           </Box>
         ))}
