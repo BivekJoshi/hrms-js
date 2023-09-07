@@ -2,10 +2,8 @@ import React, { useState } from "react";
 import {
   Box,
   SwipeableDrawer,
-  Button,
   Grid,
   Paper,
-  LinearProgress,
   List,
   ListItem,
   ListItemAvatar,
@@ -16,6 +14,8 @@ import {
 } from "@mui/material";
 import ProjectTaskField from "../../../components/Form/Project/ProjectTask/ProjectTaskFields";
 import { styled } from "@mui/material/styles";
+import { RightProjectHome } from "./component/RightProjectHome";
+import { MyTask } from "./component/MyTask";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -38,61 +38,11 @@ export default function ProjectHomePage() {
     setState({ ...state, [anchor]: open });
   };
 
-  const progress = 5 * 100;
-
   return (
     <>
       <Grid container spacing={2}>
         <Grid item xs={8}>
-          <div>
-            {["right"].map((anchor) => (
-              <React.Fragment key={anchor}>
-                <Button
-                  onClick={toggleDrawer(anchor, true)}
-                  variant="contained"
-                >
-                  +
-                </Button>
-                <SwipeableDrawer
-                  anchor={anchor}
-                  open={state[anchor]}
-                  onClose={toggleDrawer(anchor, false)}
-                  onOpen={toggleDrawer(anchor, true)}
-                >
-                  <Box
-                    sx={{ width: 350, padding: 5 }}
-                    role="presentation"
-                    //   onClick={toggleDrawer(anchor, false)}
-                    //   onKeyDown={toggleDrawer(anchor, false)}
-                  >
-                    <ProjectTaskField />
-                  </Box>
-                </SwipeableDrawer>
-              </React.Fragment>
-            ))}
-          </div>
-
-          <Item>
-            <h3>Human Resource Management System</h3>
-            <p>Team Size: 30s</p>
-            <p>Start Date: 2027-09-19 End Date: 2027-09-19</p>
-            <p>This is for the Project Information Project Information</p>
-            <LinearProgress variant="determinate" value={progress} />
-          </Item>
-          <Item>
-            <h3>Human Resource Management System</h3>
-            <p>Team Size: 30s</p>
-            <p>Start Date: 2027-09-19 End Date: 2027-09-19</p>
-            <p>This is for the Project Information Project Information</p>
-            <LinearProgress variant="determinate" value={progress} />
-          </Item>
-          <Item>
-            <h3>Human Resource Management System</h3>
-            <p>Team Size: 30s</p>
-            <p>Start Date: 2027-09-19 End Date: 2027-09-19</p>
-            <p>This is for the Project Information Project Information</p>
-            <LinearProgress variant="determinate" value={progress} />
-          </Item>
+          <RightProjectHome />
         </Grid>
 
         <Grid item xs={4}>
@@ -175,10 +125,36 @@ export default function ProjectHomePage() {
       </Grid>
 
       <Grid container spacing={2}>
-        <Grid item xs={8}>
-          
-        </Grid>
+        <Grid item xs={8}> <MyTask/></Grid>
       </Grid>
+
+      <div>
+        {["right"].map((anchor) => (
+          <React.Fragment key={anchor}>
+            {/* <Button
+                  onClick={toggleDrawer(anchor, true)}
+                  variant="contained"
+                >
+                  +
+                </Button> */}
+            <SwipeableDrawer
+              anchor={anchor}
+              open={state[anchor]}
+              onClose={toggleDrawer(anchor, false)}
+              onOpen={toggleDrawer(anchor, true)}
+            >
+              <Box
+                sx={{ width: 350, padding: 5 }}
+                role="presentation"
+                //   onClick={toggleDrawer(anchor, false)}
+                //   onKeyDown={toggleDrawer(anchor, false)}
+              >
+                <ProjectTaskField />
+              </Box>
+            </SwipeableDrawer>
+          </React.Fragment>
+        ))}
+      </div>
     </>
   );
 }
