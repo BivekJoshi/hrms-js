@@ -26,7 +26,7 @@ const Item = styled(Paper)(({ theme }) => ({
   margin: 3,
 }));
 
-export default function ProjectHomePage() {
+export default function ProjectHomePage({data}) {
   const [state, setState] = useState({ right: false });
 
   const toggleDrawer = (anchor, open) => (event) => {
@@ -126,7 +126,7 @@ export default function ProjectHomePage() {
       </Grid>
 
       <Grid container spacing={2}>
-        <Grid item xs={8}> <MyTask/></Grid>
+        <Grid item xs={8}> <MyTask data={data}/></Grid>
       </Grid>
 
       <div>
