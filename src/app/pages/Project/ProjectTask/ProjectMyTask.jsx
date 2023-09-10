@@ -3,7 +3,7 @@ import React from "react";
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 import Male from "../../../../assets/male.png";
 
-export const ProjectMyTask = (props) => {
+export default function ProjectMyTask(props) {
   const projectData = [
     {
       projectName: "Human Resource Management System",
@@ -118,4 +118,4 @@ export const ProjectMyTask = (props) => {
       </Box>
     </Box>
   );
-};
+}
