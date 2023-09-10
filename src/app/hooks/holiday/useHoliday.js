@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
-import { addHoliday, deleteHoliday, editHoliday, getHoliday, getHolidayById, getHolidayCurrent } from '../../api/holiday/holiday-api';
+import { addHoliday, deleteHoliday, editHoliday, getHoliday, getHolidayById, getHolidayByMonth } from '../../api/holiday/holiday-api';
 
 {/*________________________GET_____________________________________*/ }
 export const useGetHoliday = () => {
@@ -19,8 +19,8 @@ export const useGetHolidayById = (id) => {
 };
 
 {/*________________________GETCURRENTMONTH_____________________________________*/ }
-export const useGetHolidayCurrent = () => {
-  return useQuery(['getHolidayCurrent'], () => getHolidayCurrent(), {
+export const useGetHolidaybyMonth = (monthAd) => {
+  return useQuery(['getHolidayByMonth',monthAd], () => getHolidayByMonth(monthAd), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });

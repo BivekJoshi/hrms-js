@@ -48,16 +48,20 @@ const ApplyLeave = () => {
   const { data: leavebalance, isLoading } = useGetLoggedInUserLeaveBalance();
   const { data: leaveTypeData } = useGetLeaveType();
 
-  if (isLoading || !leavebalance) {
+  if (isLoading || !leavebalance || !leaveTypeData) {
     return <div>Loading...</div>;
   }
+
+  const leaveTypeMap = new Map();
+  leaveTypeData.forEach((leaveType) => {
+    leaveTypeMap.set(leaveType.id, leaveType.leaveName);
+  });
 
   const boxes = leavebalance.map((data, index) => (
     <Box key={index} boxShadow="7">
       <Item>
         <Typography variant="h5">
-       { data.leaveTypeId === leaveTypeData &&
-          <b>{leaveTypeData?.leaveName}</b>}
+          {leaveTypeMap.get(data?.leaveTypeId)}
         </Typography>
         <Typography variant="h2" color="#3e019b" style={{ marginTop: 25 }}>
           <AirlineSeatFlatOutlinedIcon fontSize="300px" />
