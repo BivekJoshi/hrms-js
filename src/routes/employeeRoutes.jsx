@@ -7,6 +7,7 @@ import ThemeModeContext from "../theme/ThemeModeContext";
 import EmployeeProfile from "../app/pages/Employee/EmployeeViewPage/EmployProfile/EmployeeProfile";
 import AttendenceInfo from "../app/pages/Employee/EmployeeViewPage/InfoTabs/AttendenceInfoTab/AttendenceInfo";
 import ProjectEmpPage from "../app/pages/Project/ProjectEmployeeViewPage/ProjectEmppage";
+import EditEmployee from "../app/pages/Employee/AddEmployee/EditEmployee";
 
 const ResetPassword = Loadable(
   lazy(() => import("../app/pages/Auth/ResetPassword/ResetPassword"))
@@ -33,7 +34,9 @@ const LeaveType = Loadable(
 );
 const Event = Loadable(lazy(() => import("../app/pages/Event/Event")));
 const Holiday = Loadable(lazy(() => import("../app/pages/Holiday/Holiday")));
-const Project = Loadable(lazy(() => import("../app/pages/Project/ProjectAdminViewPage/Project")));
+const Project = Loadable(
+  lazy(() => import("../app/pages/Project/ProjectAdminViewPage/Project"))
+);
 const TodoList = Loadable(lazy(() => import("../app/pages/TodoList/TodoList")));
 const Company = Loadable(lazy(() => import("../app/pages/Company/Company")));
 
@@ -55,6 +58,12 @@ const employeeRoutes = [
     name: "My Profile",
     id: nanoid(),
     component: <EmployeeProfile />,
+  },
+  {
+    path: "employee/edit/:id",
+    name: "Edit My Profile",
+    id: nanoid(),
+    component: <EditEmployee />,
   },
   {
     path: "attendance",
