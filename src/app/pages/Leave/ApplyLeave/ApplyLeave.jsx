@@ -3,13 +3,15 @@ import { Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
-import AirlineSeatFlatOutlinedIcon from "@mui/icons-material/AirlineSeatFlatOutlined";
+import "../../Style/Style.css"
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import { useGetLoggedInUserLeaveBalance } from "../../../hooks/leave/useLeave";
 import { useGetLeaveType } from "../../../hooks/leaveType/useLeaveType";
-import ChildFriendlyIcon from "@mui/icons-material/ChildFriendly";
-import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
+import { GiFireworkRocket } from "react-icons/gi";
+import { MdPregnantWoman, MdOutlineFlightTakeoff } from "react-icons/md";
+import {FaBaby} from "react-icons/fa";
+import {GiBigDiamondRing} from "react-icons/gi";
 import KitesurfingIcon from "@mui/icons-material/Kitesurfing";
 import BabyChangingStationIcon from "@mui/icons-material/BabyChangingStation";
 
@@ -59,58 +61,68 @@ const ApplyLeave = () => {
   const leaveIcon = [
     {
       id: 4,
-      leaveType: "FESTIVAL leave",
-      icon: "GiFireworkRocket",
+      leaveType: "FESTIVAL ",
+      icon: <GiFireworkRocket style={{width:"3rem"}}/>,
     },
     {
       id: 5,
-      leaveType: "MATERNITY leave",
-      icon: "MdPregnantWoman",
+      leaveType: "MATERNITY ",
+      icon: <MdPregnantWoman style={{width:"3rem"}}/>,
     },
     {
       id: 3,
-      leaveType: "ANNUAL leave",
-      icon: "MdOutlineFlightTakeoff",
+      leaveType: "ANNUAL ",
+      icon: <MdOutlineFlightTakeoff style={{width:"3rem"}}/>,
     },
     {
       id: 6,
-      leaveType: "PATERNITY leave",
-      icon: "ChildFriendlyIcon",
+      leaveType: "PATERNITY ",
+      icon: <FaBaby style={{width:"2rem"}}/>,
     },
     {
       id: 7,
-      leaveType: "MARRIAGE leave",
-      icon: "PeopleOutlineIcon",
+      leaveType: "MARRIAGE ",
+      icon: <GiBigDiamondRing style={{width:"3rem", height:"3rem"}}/>,
     },
     {
       id: 1,
-      leaveType: "CASUAL leave",
-      icon: "KitesurfingIcon",
+      leaveType: "CASUAL ",
+      icon: <KitesurfingIcon style={{width:"3rem", height:"3rem"}}/>,
     },
     {
       id: 8,
-      leaveType: "MATERNITY ADDITIONAL leave",
-      icon: "GiFireworkRocket",
+      leaveType: "MATERNITY ADDITIONAL ",
+      icon: <BabyChangingStationIcon style={{width:"3rem", height:"3rem"}}/>,
     },
   ];
+  if (isLoading || !leavebalance || !leaveTypeData) {
+    return <div>Loading...</div>;
+  }
+
+  const leaveTypeMap = new Map();
+  leaveIcon.forEach((leaveType) => {
+    leaveTypeMap.set(leaveType.id, leaveType.leaveType);
+  });
+  const leaveIconMap = new Map();
+  leaveIcon.forEach((leaveIcon) => {
+    leaveIconMap.set(leaveIcon.id, leaveIcon.icon);
+  });
+
   const boxes = leavebalance.map((data, index) => (
-    <Box key={index} boxShadow="7">
-      <Item>
-        <Typography variant="h5">
+    <Box key={index} boxShadow="7" borderRadius="1.5rem" minHeight="200px" >
+        <Typography fontSize="1.2rem" fontWeight="600" marginTop="1rem">
           {leaveTypeMap.get(data?.leaveTypeId)}
         </Typography>
         <Typography variant="h2" color="#3e019b" style={{ marginTop: 25 }}>
-          <AirlineSeatFlatOutlinedIcon fontSize="300px" />
+          {leaveIconMap.get(data?.leaveTypeId)}
+
         </Typography>
-        <div style={{ marginTop: 45 }}>
-          <Typography variant="h6">
-            <b>Available Leave:</b> {data.leaveBalance}
+          <Typography fontSize="1rem">
+            <b>Available Leave: {data.leaveBalance}</b>
           </Typography>
-          <Typography variant="h6">
-            <b>Total Leave:</b> {data.leaveTaken}
+          <Typography fontSize="1rem">
+            <b>Total Leave: {data.leaveTaken}</b>
           </Typography>
-        </div>
-      </Item>
     </Box>
   ));
 
@@ -120,7 +132,7 @@ const ApplyLeave = () => {
   }
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1 }} paddingBottom="2rem">
       <Carousel
         showThumbs={false}
         showArrows={false}
@@ -134,7 +146,7 @@ const ApplyLeave = () => {
       >
         {chunkedBoxes.map((chunk, index) => (
           <Box
-            style={{ padding: 0, margin: "1rem .5rem" }}
+            style={{ padding:" 0 0 1rem", margin: "1rem .5rem" }}
             display="grid"
             gridTemplateColumns="repeat(auto-fit, minmax(200px, 1fr))"
             gap="1rem"
