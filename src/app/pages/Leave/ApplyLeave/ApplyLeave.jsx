@@ -54,7 +54,7 @@ const ApplyLeave = () => {
   const { data: leavebalance, isLoading } = useGetLoggedInUserLeaveBalance();
   const { data: leaveTypeData } = useGetLeaveType();
 
-  if (isLoading || !leavebalance) {
+  if (isLoading || !leavebalance || !leaveTypeData) {
     return <div>Loading...</div>;
   }
 
