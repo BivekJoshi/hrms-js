@@ -10,7 +10,6 @@ export const useAddUserControlForm = () => {
     const formik = useFormik({
         initialValues: {
             employeeId: "",
-            roleId: "",
         },
         validationSchema: UserSchema,
         onSubmit: (values) => {

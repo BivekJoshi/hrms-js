@@ -8,6 +8,7 @@ import EmployeeProfile from "../app/pages/Employee/EmployeeViewPage/EmployProfil
 import AttendenceInfo from "../app/pages/Employee/EmployeeViewPage/InfoTabs/AttendenceInfoTab/AttendenceInfo";
 import ProjectEmpPage from "../app/pages/Project/ProjectEmployeeViewPage/ProjectEmppage";
 import EditEmployee from "../app/pages/Employee/AddEmployee/EditEmployee";
+import ProfileDetail from "../app/pages/Auth/Profile/ProfileDetail";
 
 const ResetPassword = Loadable(
   lazy(() => import("../app/pages/Auth/ResetPassword/ResetPassword"))
@@ -136,6 +137,12 @@ const employeeRoutes = [
     name: "Reset Password",
     id: nanoid(),
     component: <ResetPassword />,
+  },
+  {
+    path: "profile",
+    name: "Profile",
+    id: nanoid(),
+    component: <ProfileDetail />,
   },
 ];
 
