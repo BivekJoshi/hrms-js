@@ -42,7 +42,7 @@ const Company = Loadable(lazy(() => import("../app/pages/Company/Company")));
 
 const employeeRoutes = [
   {
-    path: "/dashboard",
+    path: "dashboard",
     name: "Employee Dashboard",
     id: nanoid(),
     component: <EmployeeDashboard />,
@@ -166,7 +166,7 @@ export default function BreadCrumbs() {
   return (
     <>
       {currentRoute &&
-        (currentRoute.path === "/employee/dashboard" ? (
+        (currentRoute.path === "dashboard" ? (
           <Typography color="text.primary">{currentRoute?.name}</Typography>
         ) : (
           <Breadcrumbs>
