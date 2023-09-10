@@ -1,6 +1,18 @@
 import React, { useState } from "react";
-import { Grid, Paper, List, ListItem, ListItemAvatar } from "@mui/material";
-import { Avatar, ListItemText, Divider, Typography } from "@mui/material";
+import {
+  Box,
+  SwipeableDrawer,
+  Grid,
+  Paper,
+  List,
+  ListItem,
+  ListItemAvatar,
+  Avatar,
+  ListItemText,
+  Divider,
+  Typography,
+  Button,
+} from "@mui/material";
 import ProjectTaskField from "../../../components/Form/Project/ProjectTask/ProjectTaskFields";
 import { styled } from "@mui/material/styles";
 import { RightProjectHome } from "./component/RightProjectHome";
@@ -14,7 +26,7 @@ const Item = styled(Paper)(({ theme }) => ({
   margin: 3,
 }));
 
-export default function ProjectHomePage() {
+export default function ProjectHomePage({data}) {
   const [state, setState] = useState({ right: false });
 
   const toggleDrawer = (anchor, open) => (event) => {
@@ -114,7 +126,7 @@ export default function ProjectHomePage() {
       </Grid>
 
       <Grid container spacing={2}>
-        <Grid item xs={8}> <MyTask/></Grid>
+        <Grid item xs={8}> <MyTask data={data}/></Grid>
       </Grid>
 
       <div>
