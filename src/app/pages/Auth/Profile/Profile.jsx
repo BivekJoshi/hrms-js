@@ -6,9 +6,19 @@ import { useNavigate } from "react-router-dom";
 import { removeUser } from "../../../utils/cookieHelper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useGetLoggedInUser } from "../../../hooks/auth/usePassword";
+import useAuth from "../../../../auth/hooks/component/login/useAuth";
 
 const Profile = () => {
   const navigate = useNavigate();
+
+  const {
+    isSuperAdmin,
+    isAdmin,
+    isHr,
+    isManager,
+    isEmployee,
+    isHrClerk,
+  } = useAuth();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -19,18 +29,26 @@ const Profile = () => {
   };
 
   const handleChangePassword = () => {
-    navigate("/admin/reset-password");
+    if (isAdmin || isManager || isSuperAdmin || isHrClerk || isHr) {
+      navigate("/admin/reset-password");
+    } else {
+      navigate("/employee/reset-password");
+    }
+
     handleClose();
   };
   const handleProfile = () => {
+    if (isAdmin || isManager || isSuperAdmin || isHrClerk || isHr) {
     navigate("/admin/profile");
+    }else{
+      navigate("/employee/profile");
+    }
     handleClose();
   };
   const btnStyle = {
     color: "#fff",
   };
 
-  
   const { data: loggedUserData } = useGetLoggedInUser();
 
   return (
