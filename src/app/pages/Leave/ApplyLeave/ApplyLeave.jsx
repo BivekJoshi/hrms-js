@@ -133,6 +133,7 @@ const ApplyLeave = () => {
 
   return (
     <Box sx={{ flexGrow: 1 }} paddingBottom="2rem">
+      <h2>Taken Leave</h2>
       <Carousel
         showThumbs={false}
         showArrows={false}
