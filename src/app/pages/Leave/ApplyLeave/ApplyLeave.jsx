@@ -97,9 +97,7 @@ const ApplyLeave = () => {
     <Box key={index} boxShadow="7">
       <Item>
         <Typography variant="h5">
-          {data.leaveTypeId === leaveTypeData && (
-            <b>{leaveTypeData?.leaveName}</b>
-          )}
+          {leaveTypeMap.get(data?.leaveTypeId)}
         </Typography>
         <Typography variant="h2" color="#3e019b" style={{ marginTop: 25 }}>
           <AirlineSeatFlatOutlinedIcon fontSize="300px" />

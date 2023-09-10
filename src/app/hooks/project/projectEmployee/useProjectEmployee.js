@@ -33,10 +33,10 @@ export const useGetProjectEmployeeById = (id) => {
 };
 
 /*________________________GET TASK ID_______________________________________________________________________________*/
-export const useGetProjectEmployeeTaskById = (id) => {
+export const useGetProjectEmployeeTaskById = (projectId) => {
   return useQuery(
-    ["getProjectEmployeeTaskById", id],
-    () => getProjectEmployeeTaskById(id),
+    ["getProjectEmployeeTaskById", projectId],
+    () => getProjectEmployeeTaskById(projectId),
     {
       refetchInterval: false,
       refetchOnWindowFocus: false,
