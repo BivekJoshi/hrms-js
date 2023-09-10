@@ -4,12 +4,12 @@ import * as React from "react";
 import ProjectHomePage from "./ProjectHomePage";
 import { useGetProjectEmployeeTaskById } from "../../../hooks/project/projectEmployee/useProjectEmployee";
 import ProjectTeamPage from "./ProjectTeamPage";
-import ProjectMyTask from "../ProjectTask/ProjectMyTask";
 import Project from "../ProjectAdminViewPage/Project";
+import ProjectMyTask from "../ProjectTask/ProjectMyTask";
 
 export default function ProjectEmpPage() {
-  const [value, setValue] = React.useState("2");
-  const { data: employeeTask } = useGetProjectEmployeeTaskById(1);
+  const [value, setValue] = React.useState("1");
+  const {data : employeeTask}=useGetProjectEmployeeTaskById(1);
   console.log(employeeTask);
 
   const handleChange = (event, newValue) => {
