@@ -42,7 +42,7 @@ const Company = Loadable(lazy(() => import("../app/pages/Company/Company")));
 
 const employeeRoutes = [
   {
-    path: "/employee/dashboard",
+    path: "/dashboard",
     name: "Employee Dashboard",
     id: nanoid(),
     component: <EmployeeDashboard />,
