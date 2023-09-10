@@ -3,18 +3,21 @@ import React, { useContext, useState } from "react";
 import "../../Style/Style.css";
 import { Typography } from "@mui/material";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
-import { useGetEvent } from "../../../hooks/event/useEvent";
+import { useGetEventByMonth } from "../../../hooks/event/useEvent";
 import { ButtonComponent } from "../../../components/Button/ButtonComponent";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { useGetHolidayCurrent } from "../../../hooks/holiday/useHoliday";
+import { useGetHolidaybyMonth } from "../../../hooks/holiday/useHoliday";
 import { useNavigate } from "react-router-dom";
 
 export const LeftEmployDashbord = ({}) => {
   const navigate = useNavigate();
   const { mode } = useContext(ThemeModeContext);
-  const { data: employAllNotiData } = useGetEvent();
-  const { data: currentHoliday } = useGetHolidayCurrent();
+
+  const monthAd = new Date().toLocaleString('en-US', { month: '2-digit' });
+
+  const { data: employAllNotiData } = useGetEventByMonth(monthAd);
+  const { data: currentHoliday } = useGetHolidaybyMonth(monthAd);
 
   const [openItemIndex, setOpenItemIndex] = useState(-1);
   const [openHolidayIndex, setOpenHolidayIndex] = useState(-1);

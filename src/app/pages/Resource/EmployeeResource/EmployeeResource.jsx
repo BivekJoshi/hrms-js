@@ -56,7 +56,7 @@ const EmployeeResource = ({ permissions }) => {
   };
 
   const getEmployeeName = (rowData) => {
-    const employeeId = rowData?.employeeId;
+    const employeeId = rowData?.id;
     const employee = employeeData?.find((emp) => emp?.id === employeeId);
     const name = `${employee?.firstName} ${employee?.middleName || ""} ${
       employee?.lastName

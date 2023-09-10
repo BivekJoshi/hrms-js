@@ -11,6 +11,7 @@ import {
   ListItemText,
   Divider,
   Typography,
+  Button,
 } from "@mui/material";
 import ProjectTaskField from "../../../components/Form/Project/ProjectTask/ProjectTaskFields";
 import { styled } from "@mui/material/styles";
@@ -131,12 +132,12 @@ export default function ProjectHomePage() {
       <div>
         {["right"].map((anchor) => (
           <React.Fragment key={anchor}>
-            {/* <Button
+            <Button
                   onClick={toggleDrawer(anchor, true)}
                   variant="contained"
                 >
                   +
-                </Button> */}
+                </Button>
             <SwipeableDrawer
               anchor={anchor}
               open={state[anchor]}

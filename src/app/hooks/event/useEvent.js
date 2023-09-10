@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
-import { addEvent, deleteEvent, editEvent, getEvent, getEventById, getEventNotification } from '../../api/event/event-api';
+import { addEvent, deleteEvent, editEvent, getEvent, getEventById, getEventByMonth, getEventNotification } from '../../api/event/event-api';
 
 {/*________________________GET_____________________________________*/ }
 export const useGetEvent = () => {
@@ -21,6 +21,14 @@ export const useGetEventNotification = () => {
 {/*________________________GETBYID_____________________________________*/ }
 export const useGetEventById = (id) => {
     return useQuery(['getEventById', id], () => getEventById(id), {
+        refetchInterval: false,
+        refetchOnWindowFocus: false,
+    });
+};
+
+{/*________________________GET BY MONTH_____________________________________*/ }
+export const useGetEventByMonth = (monthAd) => {
+    return useQuery(['getEventByMonth', monthAd], () => getEventByMonth(monthAd), {
         refetchInterval: false,
         refetchOnWindowFocus: false,
     });

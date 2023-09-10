@@ -13,7 +13,7 @@ export const getProjectEmployeeById = async (id) => {
 };
 
 /*________________________GET TASK ID_____________________________________*/ 
-export const getProjectEmployeeTaskById = async (id) => {
+export const getProjectEmployeeTaskById = async (projectId) => {
     const data = await axiosInstance.get(`project-employee/task/project-id/${projectId}`);
     return data;
 };
