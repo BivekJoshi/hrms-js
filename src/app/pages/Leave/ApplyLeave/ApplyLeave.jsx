@@ -8,6 +8,10 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import { useGetLoggedInUserLeaveBalance } from "../../../hooks/leave/useLeave";
 import { useGetLeaveType } from "../../../hooks/leaveType/useLeaveType";
+import ChildFriendlyIcon from "@mui/icons-material/ChildFriendly";
+import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
+import KitesurfingIcon from "@mui/icons-material/Kitesurfing";
+import BabyChangingStationIcon from "@mui/icons-material/BabyChangingStation";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -52,12 +56,50 @@ const ApplyLeave = () => {
     return <div>Loading...</div>;
   }
 
+  const leaveIcon = [
+    {
+      id: 4,
+      leaveType: "FESTIVAL leave",
+      icon: "GiFireworkRocket",
+    },
+    {
+      id: 5,
+      leaveType: "MATERNITY leave",
+      icon: "MdPregnantWoman",
+    },
+    {
+      id: 3,
+      leaveType: "ANNUAL leave",
+      icon: "MdOutlineFlightTakeoff",
+    },
+    {
+      id: 6,
+      leaveType: "PATERNITY leave",
+      icon: "ChildFriendlyIcon",
+    },
+    {
+      id: 7,
+      leaveType: "MARRIAGE leave",
+      icon: "PeopleOutlineIcon",
+    },
+    {
+      id: 1,
+      leaveType: "CASUAL leave",
+      icon: "KitesurfingIcon",
+    },
+    {
+      id: 8,
+      leaveType: "MATERNITY ADDITIONAL leave",
+      icon: "GiFireworkRocket",
+    },
+  ];
   const boxes = leavebalance.map((data, index) => (
     <Box key={index} boxShadow="7">
       <Item>
         <Typography variant="h5">
-       { data.leaveTypeId === leaveTypeData &&
-          <b>{leaveTypeData?.leaveName}</b>}
+          {data.leaveTypeId === leaveTypeData && (
+            <b>{leaveTypeData?.leaveName}</b>
+          )}
         </Typography>
         <Typography variant="h2" color="#3e019b" style={{ marginTop: 25 }}>
           <AirlineSeatFlatOutlinedIcon fontSize="300px" />

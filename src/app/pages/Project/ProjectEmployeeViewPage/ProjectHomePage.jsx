@@ -1,17 +1,6 @@
 import React, { useState } from "react";
-import {
-  Box,
-  SwipeableDrawer,
-  Grid,
-  Paper,
-  List,
-  ListItem,
-  ListItemAvatar,
-  Avatar,
-  ListItemText,
-  Divider,
-  Typography,
-} from "@mui/material";
+import { Grid, Paper, List, ListItem, ListItemAvatar } from "@mui/material";
+import { Avatar, ListItemText, Divider, Typography } from "@mui/material";
 import ProjectTaskField from "../../../components/Form/Project/ProjectTask/ProjectTaskFields";
 import { styled } from "@mui/material/styles";
 import { RightProjectHome } from "./component/RightProjectHome";
@@ -125,36 +114,11 @@ export default function ProjectHomePage() {
       </Grid>
 
       <Grid container spacing={2}>
-        <Grid item xs={8}> <MyTask/></Grid>
+        <Grid item xs={8}>
+          {" "}
+          <MyTask />
+        </Grid>
       </Grid>
-
-      <div>
-        {["right"].map((anchor) => (
-          <React.Fragment key={anchor}>
-            {/* <Button
-                  onClick={toggleDrawer(anchor, true)}
-                  variant="contained"
-                >
-                  +
-                </Button> */}
-            <SwipeableDrawer
-              anchor={anchor}
-              open={state[anchor]}
-              onClose={toggleDrawer(anchor, false)}
-              onOpen={toggleDrawer(anchor, true)}
-            >
-              <Box
-                sx={{ width: 350, padding: 5 }}
-                role="presentation"
-                //   onClick={toggleDrawer(anchor, false)}
-                //   onKeyDown={toggleDrawer(anchor, false)}
-              >
-                <ProjectTaskField />
-              </Box>
-            </SwipeableDrawer>
-          </React.Fragment>
-        ))}
-      </div>
     </>
   );
 }
