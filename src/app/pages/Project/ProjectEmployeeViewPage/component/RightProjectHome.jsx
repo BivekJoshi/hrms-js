@@ -6,7 +6,7 @@ export const RightProjectHome = (props) => {
   const projectData = [
     {
       projectName: "Human Resource Management System",
-      TeamSize: "Team Size: 30s",
+      TeamSize: "30",
       StartDate: "2027-09-19",
       EndDate: "2027-09-19",
       projectInfo: "This is for the Project Information Project Information",
@@ -14,7 +14,7 @@ export const RightProjectHome = (props) => {
     },
     {
       projectName: "Human Resource Management System",
-      TeamSize: "Team Size: 30s",
+      TeamSize: "30",
       StartDate: "2027-09-19",
       EndDate: "2027-09-19",
       projectInfo: "This is for the Project Information Project Information",
@@ -22,7 +22,7 @@ export const RightProjectHome = (props) => {
     },
     {
       projectName: "Human Resource Management System",
-      TeamSize: "Team Size: 30s",
+      TeamSize: "30",
       StartDate: "2027-09-19",
       EndDate: "2027-09-19",
       projectInfo: "This is for the Project Information Project Information",
@@ -37,20 +37,27 @@ export const RightProjectHome = (props) => {
 
       {projectData.map((data, index) => (
         <Box bgcolor="#ededed66" padding="1rem" boxShadow="5">
-          <Box display="flex" flexDirection="row" justifyContent="space-between">
-            <Typography fontSize="1.2rem" fontWeight="600">
-              {data.projectName}
-            </Typography>
-            <Chip label={data.Status} />
+          <Box
+            display="flex"
+            flexDirection="row"
+            justifyContent="space-between"
+          >
+            <h4 style={{color:"#01579b", fontSize:".95rem"}}>{data.projectName}</h4>
+            <Chip
+              label={data.Status}
+              sx={{ height: "16px", fontSize: ".7rem" }}
+            />
           </Box>
 
-          <Typography>{data.TeamSize}</Typography>
+          <Typography fontSize=".8rem">Team Size: {data.TeamSize}</Typography>
           <Box display="flex" flexDirection="row" gap="1rem">
-            <Typography>Start Data :{data.StartDate} </Typography>
-            <Typography>End Data :{data.EndDate} </Typography>
+            <Typography fontSize=".8rem">
+              Start Data :{data.StartDate}{" "}
+            </Typography>
+            <Typography fontSize=".8rem">End Data :{data.EndDate} </Typography>
           </Box>
-          <Typography>{data.projectInfo}</Typography>
-          <LinearProgress variant="determinate" value={progress} />
+          <Typography fontSize=".8rem">{data.projectInfo}</Typography>
+          {/* <LinearProgress variant="determinate" value={progress} /> */}
         </Box>
       ))}
     </Box>

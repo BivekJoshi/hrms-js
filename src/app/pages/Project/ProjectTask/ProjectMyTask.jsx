@@ -1,28 +1,63 @@
-import {
-  Avatar,
-  Box,
-  Chip,
-  Divider,
-  LinearProgress,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Avatar, Box, Chip, Divider, Stack, Typography } from "@mui/material";
 import React from "react";
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 import Male from "../../../../assets/male.png";
 
-const ProjectMyTask = ({data}) => {
+export const ProjectMyTask = (props) => {
+  const projectData = [
+    {
+      projectName: "Human Resource Management System",
+      projectInfo: "This is for the Project Information Project Information",
+      Status: "done",
+      message: 6,
+    },
+    {
+      projectName: "Human Resource Management System",
+      projectInfo: "This is for the Project Information Project Information",
+      Status: "done",
+      message: 6,
+    },
+    {
+      projectName: "Human Resource Management System",
+      projectInfo: "This is for the Project Information Project Information",
+      Status: "done",
+      message: 6,
+    },
+    {
+      projectName: "Human Resource Management System",
+      projectInfo: "This is for the Project Information Project Information",
+      Status: "progress",
+      message: 6,
+    },
+    {
+      projectName: "Human Resource Management System",
+      projectInfo: "This is for the Project Information Project Information",
+      Status: "done",
+      message: 6,
+    },
+    {
+      projectName: "Human Resource Management System",
+      projectInfo: "This is for the Project Information Project Information",
+      Status: "done",
+      message: 6,
+    },
+  ];
   return (
     <Box padding="2rem 0 0 0">
-      <h3>My Task</h3>
+      <h4 style={{ fontWeight: "800" }}>My Task</h4>
       <Box
         display="grid"
         gridTemplateColumns="repeat(auto-fit, minmax(300px, 1fr))"
         gap="1rem"
         padding="1rem 0"
       >
-        {data.map((data, index) => (
-          <Box bgcolor="#ededed66" padding="1rem" boxShadow="5">
+        {projectData.map((data, index) => (
+          <Box
+            bgcolor="#ededed66"
+            padding="1rem"
+            boxShadow="5"
+            borderRadius=".5rem"
+          >
             <Box
               display="flex"
               flexDirection="row"
@@ -41,31 +76,40 @@ const ProjectMyTask = ({data}) => {
                     bgcolor: "#ededed66",
                   }}
                   label={
-                    <h3
+                    <h4
                       style={{
                         overflow: "hidden",
                         textOverflow: "ellipsis",
                         marginLeft: "-.5rem",
+                        color: "#01579b",
                       }}
                     >
-                      {data?.name}
-                    </h3>
+                      {data.projectName}
+                    </h4>
                   }
                 />
               </Typography>
-              <Chip label={data?.status} />
+              <Chip
+                label={data.Status}
+                sx={{ fontSize: ".7rem", height: "18px" }}
+              />
             </Box>
-            <Typography>{data?.detail}</Typography>
+            <Typography fontSize=".8rem">{data.projectInfo}</Typography>
 
             <Divider />
-            <Stack marginTop=".5rem" flexDirection="row" justifyContent="space-between" >
+            <Stack
+              marginTop=".5rem"
+              flexDirection="row"
+              justifyContent="space-between"
+            >
               <Chip
                 label={data.message}
                 variant="outlined"
                 icon={<QuestionAnswerIcon sx={{ width: ".7rem" }} />}
+                sx={{ height: "20px" }}
               />
               <Chip
-              sx={{bgcolor:"#ededed66"}}
+                sx={{ bgcolor: "#ededed66", height: "20px" }}
                 avatar={<Avatar alt="Natacha" src={Male} />}
               />
             </Stack>
@@ -74,6 +118,4 @@ const ProjectMyTask = ({data}) => {
       </Box>
     </Box>
   );
-}
-
-export default ProjectMyTask;
+};
