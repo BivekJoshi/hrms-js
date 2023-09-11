@@ -21,20 +21,19 @@ const useAuth = () => {
 
   if (token) {
     const decoded = jwtDecode(token);
+    const { userRole } = decoded;
 
-    const { userRoles } = decoded;
+    isSuperAdmin = userRole.includes("ROLE_SUPER_ADMIN");
 
-    isSuperAdmin = userRoles.some((role) => role?.name === "ROLE_SUPER_ADMIN");
+    isManager = userRole.includes("ROLE_MANAGER");
 
-    isManager = userRoles.some((role) => role?.name === "ROLE_MANAGER");
+    isAdmin = userRole.includes("ROLE_ADMIN");
 
-    isAdmin = userRoles.some((role) => role?.name === "ROLE_ADMIN");
+    isHrAdmin = userRole.includes("ROLE_HR_ADMIN");
 
-    isHrAdmin = userRoles.some((role) => role?.name === "ROLE_HR_ADMIN");
+    isHrClerk = userRole.includes("ROLE_HR_CLERK");
 
-    isHrClerk = userRoles.some((role) => role?.name === "ROLE_HR_CLERK");
-
-    isEmployee = userRoles.some((role) => role?.name === "ROLE_EMPLOYEE");
+    isEmployee = userRole.includes("ROLE_EMPLOYEE");
 
     if (isSuperAdmin) {
       status = "Super-Admin";
@@ -64,7 +63,7 @@ const useAuth = () => {
 
   return {
     userName: "",
-    userRoles: [],
+    userRole: [],
     isSuperAdmin,
     isManager,
     isAdmin,

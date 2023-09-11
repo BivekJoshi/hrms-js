@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Grid, Button, MenuItem, TextField } from "@mui/material";
-import { Autocomplete } from "@mui/material"; // Import Autocomplete
+import { Autocomplete } from "@mui/material"; 
 import { useGetEmployee } from "../../../hooks/employee/useEmployee";
 import {
   useAddUserControlForm,
@@ -22,13 +22,6 @@ export const AddUserControlFields = ({ onClose }) => {
       }
     } else {
       toast.error("Please make sure you have filled the form correctly");
-    }
-  };
-
-  const handleUserNameChange = (event, selectedEmployee) => {
-    if (selectedEmployee) {
-      formik.setFieldValue("employeeId", selectedEmployee.id);
-      formik.setFieldValue("email", selectedEmployee.officeEmail);
     }
   };
 
