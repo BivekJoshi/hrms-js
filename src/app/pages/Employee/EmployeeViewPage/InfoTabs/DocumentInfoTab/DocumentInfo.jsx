@@ -37,6 +37,12 @@ const DocumentInfo = () => {
 
   
 
+  useEffect(() => {
+    if (!isLoading && Object.keys(groupedDocuments).length > 0) {
+      setValue(Object.keys(groupedDocuments)[0]);
+    }
+  }, [isLoading, groupedDocuments]);
+
   return (
     // {data?():()}
     <Box>
