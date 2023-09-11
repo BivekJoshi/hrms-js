@@ -9,6 +9,7 @@ import {
   addProjectEmployeeCreateTask,
   addProjectEmployeeUpdateTask,
   editProjectEmployeeAddRemoveTaskId,
+  getProjectEmployeeTaskByLoggedInUser
 } from "../../../api/project/projectEmployee-api";
 import { toast } from "react-toastify";
 
@@ -154,6 +155,18 @@ export const useDeleteProjectEmployee = ({ onSuccess }) => {
       onError: (err, _variables, _context) => {
         toast.error(`Error: ${err.message}`);
       },
+    }
+  );
+};
+
+/*________________________GET TASK Logged-In User_____________________________________*/ 
+export const useGetProjectEmployeeByLoggedInUser  = () => {
+  return useQuery(
+    ["getProjectEmployeeTaskByLoggedInUser"],
+    () => getProjectEmployeeTaskByLoggedInUser(),
+    {
+      refetchInterval: false,
+      refetchOnWindowFocus: false,
     }
   );
 };

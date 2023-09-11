@@ -195,13 +195,16 @@ const EmployeeCard = ({
               sx={{ width: 66, height: 66, borderRadius: "2rem" }}
             />
           </Stack>
-
-          <PopOver
-            triggerContent={<ProgressbyAll ProgressbyAll={ProgressBarRes} />}
-            popoverContent={
-              <Typography sx={{ p: 1 }}>Information Progress Data</Typography>
-            }
-          />
+          {ProgressBarRes ? (
+            <PopOver
+              triggerContent={<ProgressbyAll ProgressbyAll={ProgressBarRes} />}
+              popoverContent={
+                <Typography sx={{ p: 1 }}>Information Progress Data</Typography>
+              }
+            />
+          ) : (
+            ""
+          )}
 
           <Stack>
             <Typography
