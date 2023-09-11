@@ -5,7 +5,7 @@ import { useGetProjectEmployeeByLoggedInUser } from "../../../../hooks/project/p
 
 function ProjectTeamPage() {
   const { data: logInUserData } = useGetProjectEmployeeByLoggedInUser();
-
+console.log(logInUserData);
   const employeeData = [
     {
       isActive: true,
@@ -46,25 +46,27 @@ function ProjectTeamPage() {
   ];
   return (
     <Box>
-      {logInUserData.map((project, index) => (
-        <Box key={index}>
-          <h3 style={{ padding: " 0 0 1rem 0 " }}>{project.name}</h3>
-          <Box>
-            {project.projectEmployees.map((employ) => (
-              <>
-                {employ.assignedOn}
-                <Grid
-                  container
-                  item
-                  gap={1}
-                  className="project-card-control"
-                  sx={{
-                    display: "grid",
-                    gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-                    gap: "1rem",
-                  }}
-                >
-                  {employeeData?.map((employee, index) => (
+      {logInUserData ? (
+        logInUserData.map((project, index) => (
+          <Box key={index}>
+            <h3 style={{ padding: " 0 0 1rem 0 " }}>{project.name}</h3>
+            <Box>
+              {project?.projectEmployees?.map((employ) => (
+                <Box key={employ.empId}>
+                  {employ.assignedOn}
+                  <Grid
+                    container
+                    item
+                    gap={1}
+                    className="project-card-control"
+                    sx={{
+                      display: "grid",
+                      gridTemplateColumns:
+                        "repeat(auto-fit, minmax(250px, 1fr))",
+                      gap: "1rem",
+                    }}
+                  >
+                    {/* {employeeData?.map((employee, index) => (
                     <EmployeeCard
                       key={index}
                       IsActive={employee?.isActive || ""}
@@ -81,13 +83,16 @@ function ProjectTeamPage() {
                       // ProgressBarRes={employee?.progressBarRes || ""}
                       // employeePhoto={employee?.employeePhotoPath}
                     />
-                  ))}
-                </Grid>
-              </>
-            ))}
+                  ))} */}
+                  </Grid>
+                </Box>
+              ))}
+            </Box>
           </Box>
-        </Box>
-      ))}
+        ))
+      ) : (
+        <p>Loading or no data available</p>
+      )}
     </Box>
   );
 }
