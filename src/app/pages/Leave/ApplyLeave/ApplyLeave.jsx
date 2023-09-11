@@ -14,7 +14,7 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: "center",
   minHeight: 290,
   maxHeight: 290,
-  padding: 10,
+  // padding: 10,
   margin: 8,
   // minWidth: 132,
 }));
