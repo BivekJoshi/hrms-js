@@ -72,14 +72,14 @@ const Roles = () => {
         }}
       >
         <Stack sx={{ display: "flex", flexDirection: "row-reverse" }}>
-          <Button
+          {/* <Button
             color="primary"
             variant="contained"
             sx={{ maxWidth: "fit-content" }}
             onClick={handleAddOpenModal}
           >
             Add
-          </Button>
+          </Button> */}
         </Stack>
         {roleData &&
           roleData.map((role, index) => {

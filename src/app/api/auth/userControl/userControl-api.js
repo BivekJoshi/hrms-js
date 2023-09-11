@@ -30,8 +30,8 @@ export const addUserControl = async (formData) => {
 {
   /*________________________EDIT_____________________________________*/
 }
-export const editUserControlRoleSetting = async (formData) => {
-  const data = await axiosInstance.put(`/user/role-setting`);
+export const editUserControlRoleSetting = async (formData,userId,roleId) => {
+  const data = await axiosInstance.put(`/user/role-setting?userId=${formData?.userId}&roleId=${formData?.roleId}`);
   return data;
 };
 

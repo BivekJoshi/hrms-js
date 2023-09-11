@@ -25,6 +25,7 @@ export const AddprojectEmployeeFields = ({ onClose, isLoading }) => {
   const { data: employeeData, isLoading: loadingEmployee } = useGetEmployee();
   const { data: projectData, isLoading: loadingProject } = useGetProject();
   const { data: projectDataById } = useGetProjectById(id);
+  console.log(projectDataById,"projectData");
   const { mode } = useContext(ThemeModeContext);
   const { formik } = useAddProjectEmployeeForm();
 
@@ -86,7 +87,7 @@ export const AddprojectEmployeeFields = ({ onClose, isLoading }) => {
             label="Project Name"
             placeholder="Enter Project Name"
             fullWidth
-            value={formik.values.projectId}
+            value={formik.values.projectDataById?.id}
             onChange={formik.handleChange}
             error={formik.touched.projectId && Boolean(formik.errors.projectId)}
             helperText={formik.touched.projectId && formik.errors.projectId}
