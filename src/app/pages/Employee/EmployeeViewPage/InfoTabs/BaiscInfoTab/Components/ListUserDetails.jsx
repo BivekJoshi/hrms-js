@@ -1,10 +1,12 @@
 import { Box, Button, List, Modal, Stack, Typography } from "@mui/material";
 import React, { useState } from "react";
-import { useParams } from 'react-router';
+import { useParams } from "react-router";
 
 import InfoItem from "./InfoItem";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import { Link, useNavigate } from "react-router-dom";
+import { useGetLoggedInUser } from "../../../../../../hooks/auth/usePassword";
+import useAuth from "../../../../../../../auth/hooks/component/login/useAuth";
 
 const style = {
   position: "absolute",
@@ -19,13 +21,27 @@ const style = {
 };
 
 export default function ListUserDetails({ cardTitle, data, mode }) {
-  const { id } = useParams();
-  const navigate = useNavigate();
-  // const [open, setOpen] = useState(false);
+  const {
+    isSuperAdmin,
+    isAdmin,
+    isHr,
+    isEmployee,
+    isHrAdmin,
+    isManager,
+  } = useAuth();
 
-  // const openModal = () => setOpen(true);
+  const { id } = useParams();
+
+  const { data: loggedInUserData } = useGetLoggedInUser();
+
+  const navigate = useNavigate();
+
   const handleOnClick = () => {
-    navigate(`/admin/employee/edit/${id}`);
+    if (isAdmin || isSuperAdmin || isHr || isManager || isHrAdmin) {
+      navigate(`/admin/employee/edit/${id}`);
+    } else {
+      navigate(`/employee/employee/edit/${loggedInUserData?.employeeId}`)
+    }
   };
   return (
     <>
@@ -56,7 +72,7 @@ export default function ListUserDetails({ cardTitle, data, mode }) {
           borderRadius: "1rem",
         }}
       >
-        {Object.keys(data).map((item, index) => (
+        {Object.keys(data)?.map((item, index) => (
           <InfoItem key={index} field={item} value={data[item]} />
         ))}
       </List>

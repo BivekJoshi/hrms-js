@@ -5,9 +5,9 @@ import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import ApplyLeave from "./ApplyLeave";
 import { Chip, Fab, Typography } from "@mui/material";
-import LeaveInfo from "../../Employee/EmployeeViewPage/InfoTabs/LeaveInfoTab/LeaveInfo";
 import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from "react-router-dom";
+import LeaveUserView from "../LeaveUserView";
 
 const fabStyle = {
   position: "fixed",
@@ -76,37 +76,52 @@ const ApplyLeaveLayout = () => {
           <Item>
             <Box
               style={{
-                minHeight: 100,
                 borderLeft: "6px solid green",
                 paddingLeft: 10,
-                backgroundColor:'#efeeeb'
+                backgroundColor: "#efeeeb",
               }}
+              padding=".5rem"
             >
-              <Typography variant="h6">
+              <Typography fontSize="1.2rem">
                 <b>Your Leave Request</b>
               </Typography>
-              <Grid container spacing={2}>
+              <Grid container spacing={2} paddingTop=".5rem">
                 <Grid item xs={5}>
-                  <Typography variant="h5">From Date</Typography>
-                  <Typography variant="h6">2023-03-04</Typography>
+                  <Typography variant="h7" fontWeight="bold">
+                    From Date
+                  </Typography>
+                  <br />
+                  <Typography variant="h7" fontWeight="bold">
+                    2023-03-04
+                  </Typography>
                 </Grid>
                 <Grid item xs={5}>
-                  <Typography variant="h5">To Date</Typography>
-                  <Typography variant="h6">2023-03-19</Typography>
+                  <Typography variant="h7" fontWeight="bold">
+                    To Date
+                  </Typography>
+                  <br />
+                  <Typography variant="h7" fontWeight="bold">
+                    2023-03-19
+                  </Typography>
                 </Grid>
                 <Grid item xs={2}>
-                  <Chip label="Rejected" />
+                  <Chip label="Rejected" sx={{fontSize:".7rem"}}/>
                 </Grid>
               </Grid>
             </Box>
           </Item>
         </Grid>
       </Grid>
-      <br/>
+      <br />
       <Grid item xs={12}>
-        <LeaveInfo />
+        <LeaveUserView />
       </Grid>
-      <Fab color="secondary" aria-label="add" style={fabStyle} onClick={() => navigate(`/employee/applyleavefield`)}>
+      <Fab
+        color="secondary"
+        aria-label="add"
+        style={fabStyle}
+        onClick={() => navigate(`/employee/applyleavefield`)}
+      >
         <AddIcon />
       </Fab>
     </Box>

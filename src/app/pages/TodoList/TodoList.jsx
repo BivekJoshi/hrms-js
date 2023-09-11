@@ -102,7 +102,7 @@ const TodoList = ({ permissions }) => {
             <ModeEditOutlineIcon />
           </Button>
           <HocButton
-            permissions={permissions.canDelete}
+            permissions={permissions?.canDelete}
             color={"primary"}
             onClick={() => handleDeleteTodoList(rowData.id)}
             icon={<DeleteIcon />}

@@ -93,7 +93,17 @@ export default function EmployeeSidebar() {
           sx={mode === "light" ? { color: "black" } : { color: "white" }}
         />
       ),
-      path: "profile",
+      path: "viewprofile",
+      subMenus: [],
+    },
+    {
+      name: "My Attendence",
+      path: "attendance",
+      icon: (
+        <MailIcon
+          sx={mode === "light" ? { color: "black" } : { color: "white" }}
+        />
+      ),
       subMenus: [],
     },
     {

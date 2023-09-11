@@ -6,6 +6,12 @@ export const getEmployee = async () => {
   return data;
 };
 
+{/*________________________GETALL_____________________________________*/ }
+export const getLoggedInUserInfo = async () => {
+  const data = await axiosInstance.get(`/employee/logged-in/employee-details`);
+  return data;
+};
+
 {/*________________________GETBYPAGINATION_____________________________________*/ }
 export const getEmployeeData = async (pageNumber) => {
   const data = await axiosInstance.get(`/employee/get-all-page-wise/${pageNumber}/?pageSize=${pageNumber}&sortBy=id&sortDir=asc`);

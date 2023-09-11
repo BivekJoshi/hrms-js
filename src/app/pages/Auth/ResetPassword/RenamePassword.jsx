@@ -48,14 +48,14 @@ function ValidationItem(props) {
 }
 
 const RenamePassword = ({ isLoading }) => {
-    const navigate = useNavigate();
-    const location = useLocation();
-    const newId = location?.search;
-    const id = newId?.substring(6)
-    
-    const handleCancel = () => {
-        navigate("/");
-      };
+  const navigate = useNavigate();
+  const location = useLocation();
+  const newId = location?.search;
+  const id = newId?.substring(6);
+
+  const handleCancel = () => {
+    navigate("/");
+  };
 
   const {
     formik,
@@ -63,7 +63,7 @@ const RenamePassword = ({ isLoading }) => {
     handleClickShowPassword,
     loading,
     handleMouseDownPassword,
-  } = useAddRenamePasswordForm({id});
+  } = useAddRenamePasswordForm({ id });
 
   const {
     lowerValidated,
@@ -91,11 +91,12 @@ const RenamePassword = ({ isLoading }) => {
     display: "grid",
     marginRight: "4rem",
     marginLeft: "4rem",
-    gap: "1rem",
+    gap: ".5rem",
   };
 
   return (
     !isLoading && (
+      <>
       <Grid
         container
         sx={{
@@ -103,6 +104,8 @@ const RenamePassword = ({ isLoading }) => {
           gridTemplateColumns: { lg: "1fr 1fr", xs: "1fr" },
           marginTop: "5rem",
           gap: { xs: "1rem", lg: 0 },
+          border: ".5px solid grey",
+          padding:5
         }}
       >
         <Stack>
@@ -225,21 +228,23 @@ const RenamePassword = ({ isLoading }) => {
               }}
             />
           </Grid>
-          <Grid container direction="row" justifyContent="space-between">
+          <Grid item>
+          <Button
+            onClick={handleFormSubmit}
+            variant="contained"
+            // sx={{ mt: 5, ml: 1 }}
+            fullWidth
+          >
+            Create Password
+          </Button>
           <Button onClick={handleCancel} sx={{ mt: 3, ml: 1 }}>
-              <ArrowBackIcon />
-              Back to your login page
-            </Button>
-            <Button
-              onClick={handleFormSubmit}
-              variant="contained"
-              sx={{ mt: 3, ml: 1 }}
-            >
-              Create Password
-            </Button>
+            <ArrowBackIcon />
+            Back to your login page
+          </Button>
           </Grid>
         </Stack>
       </Grid>
+      </>
     )
   );
 };
