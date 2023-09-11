@@ -35,14 +35,6 @@ const DocumentInfo = () => {
     : groupBy(getDocument, "documentType");
     const [value, setValue] = React.useState(Object.keys(groupedDocuments)[0] || "1");
 
-  
-
-  useEffect(() => {
-    if (!isLoading && Object.keys(groupedDocuments).length > 0) {
-      setValue(Object.keys(groupedDocuments)[0]);
-    }
-  }, [isLoading, groupedDocuments]);
-
   return (
     // {data?():()}
     <Box>
