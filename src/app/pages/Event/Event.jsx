@@ -29,8 +29,6 @@ const Event = ({ permissions }) => {
 
   const [getEventID, setEventGetID] = useState({});
 
-  // console.log("🚀 ~ file: Event.jsx:38 ~ Event ~ openAddModal:", openAddModal);
-
   const { data: eventData, isLoading } = useGetEvent();
 
   useEffect(() => {
