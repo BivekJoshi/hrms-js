@@ -13,7 +13,7 @@ const CompanyTableView = ({
   handleEditCompany,
   handleDeleteCompany,
 }) => {
-  console.log({"permissions" : permissions})
+  // console.log({"permissions" : permissions})
   const columns = [
     {
       title: "SN",
