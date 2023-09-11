@@ -8,7 +8,7 @@ const EmployeeProtectedRoute = ({ redirectTo }) => {
   const navigate = useNavigate();
   const user = getUser();
   const decode = jwtDecode(user);
-  const userRole = decode?.userRoles?.[0]?.name;
+  const userRole = decode?.userRole;
 
   useEffect(() => {
     if (!userRole) {

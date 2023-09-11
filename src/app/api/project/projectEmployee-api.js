@@ -55,3 +55,9 @@ export const deleteProjectEmployee = async (id) => {
     const res = await axiosInstance.delete(`/project-employee/${id}`);
     return res.data;
 };
+
+/*________________________GET TASK Logged-In User_____________________________________*/ 
+export const getProjectEmployeeTaskByLoggedInUser = async () => {
+    const data = await axiosInstance.get(`project-employee/task/logged-in/user`);
+    return data;
+};

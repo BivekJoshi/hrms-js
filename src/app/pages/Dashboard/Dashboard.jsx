@@ -19,6 +19,7 @@ import { useGetEmployee } from "../../hooks/employee/useEmployee";
 import { useGetEvent } from "../../hooks/event/useEvent";
 import { useGetHoliday } from "../../hooks/holiday/useHoliday";
 import { useGetUserRole } from "../../hooks/auth/userControl/useUserControl";
+import { getUser } from "../../utils/cookieHelper";
 
 const Dashboard = () => {
   const { data: dashboardData } = useGetDashboard();
@@ -30,7 +31,8 @@ const Dashboard = () => {
   const { data: eventData } = useGetEvent();
   const { data: holidayData } = useGetHoliday();
   const { data: userRoleData } = useGetUserRole();
-
+//   const {data}=getUser();
+// console.log(data);
   return (
     <Box sx={{ display: "grid", gridTemplateRows: "1fr", rowGap: "3rem" }}>
       <Grid

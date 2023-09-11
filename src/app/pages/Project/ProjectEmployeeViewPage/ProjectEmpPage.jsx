@@ -10,7 +10,6 @@ import ProjectMyTask from "../ProjectTask/ProjectMyTask";
 export default function ProjectEmpPage() {
   const [value, setValue] = React.useState("1");
   const { data: employeeTask } = useGetProjectEmployeeTaskById(1);
-  console.log(employeeTask);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);

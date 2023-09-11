@@ -52,7 +52,7 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
   return (
     !isLoading && (
       <Grid container spacing={3}>
-        <Grid item xs={12} sm={12}>
+        <Grid item xs={12} sm={12} md={12}>
           <TextField
             id="EmployeeId"
             name="EmployeeId"
@@ -70,10 +70,10 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
             style={{ display: "none" }}
           />
         </Grid>
-        <Grid item xs={12} sm={12}>
+        <Grid item xs={12} sm={12} md={12}>
           <Typography variant="h6" component="h6">
-              Do you really want to deactivate employee
-             <b> {getEmployeeName(formik.values.employeeId)}</b> 
+            Do you really want to deactivate employee
+            <b> {getEmployeeName(formik.values.employeeId)}</b>
           </Typography>
         </Grid>
 
@@ -101,7 +101,7 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
             }
           </TextField>
         </Grid> */}
-        <Grid item xs={12} sm={12}>
+        <Grid item xs={12} sm={12} md={12}>
           <TextField
             id="effectiveDate"
             name="effectiveDate"
@@ -125,6 +125,7 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
         </Grid>
 
         <Grid
+          item xs={12} sm={12} md={12}
           container
           direction="row"
           justifyContent="flex-end"
@@ -211,10 +212,10 @@ export const EditEmployeeActivateFields = ({ onClose, isLoading, id }) => {
             style={{ display: "none" }}
           />
         </Grid>
-         <Grid item xs={12} sm={12}>
+        <Grid item xs={12} sm={12}>
           <Typography variant="h6" component="h6">
-              Do you really want to Activate employee
-             <b> {getEmployeeName(formik.values.employeeId)}</b> 
+            Do you really want to Activate employee
+            <b> {getEmployeeName(formik.values.employeeId)}</b>
           </Typography>
         </Grid>
         {/* <Grid item xs={12} sm={12}>

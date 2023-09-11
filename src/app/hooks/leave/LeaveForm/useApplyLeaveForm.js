@@ -4,7 +4,6 @@ import { LeaveSchema } from "../Validation/LeaveSchema";
 import { useGetLoggedInUser } from "../../auth/usePassword";
 
 const useApplyLeaveForm = (data) => {
-  console.log(data,"data");
   const { mutate: addLeave } = useAddLeave({});
   const { mutate: editLeave } = useEditLeave({});
   const {data:userData} = useGetLoggedInUser();
