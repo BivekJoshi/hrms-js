@@ -30,7 +30,7 @@ export const PersonalProfile = ({ data }) => {
           gap: "1rem",
         }}
       >
-        <Box className="profileInfo">
+        <Box className="profileInfo" bgcolor={mode === "light" ?"" :"#3f413f"}>
          
           <Avatar
             sx={{
