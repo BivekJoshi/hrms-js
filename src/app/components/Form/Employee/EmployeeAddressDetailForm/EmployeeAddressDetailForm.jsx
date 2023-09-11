@@ -68,7 +68,7 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                         Permanent Address
                       </Typography>
                       <Grid container spacing={3} key={index}>
-                        <Grid item xs={12} sm={4}>
+                        <Grid item xs={12} sm={6} md={4}>
                           <TextField
                             id={`addresses[${index}].country`}
                             name={`addresses[${index}].country`}
@@ -95,7 +95,7 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                             </MenuItem>
                           </TextField>
                         </Grid>
-                        <Grid item xs={12} sm={4}>
+                        <Grid item xs={12} sm={6} md={4}>
                           <TextField
                             id={`addresses[${index}].province`}
                             name={`addresses[${index}].province`}
@@ -126,7 +126,7 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                             ))}
                           </TextField>
                         </Grid>
-                        <Grid item xs={12} sm={4}>
+                        <Grid item xs={12} sm={6} md={4}>
                           <TextField
                             id={`addresses[${index}].district`}
                             name={`addresses[${index}].district`}
@@ -150,7 +150,7 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                             InputLabelProps={{ shrink: true }}
                           />
                         </Grid>
-                        <Grid item xs={12} sm={4}>
+                        <Grid item xs={12} sm={6} md={4}>
                           <TextField
                             id={`addresses[${index}].wardNumber`}
                             name={`addresses[${index}].wardNumber`}
@@ -174,7 +174,7 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                             InputLabelProps={{ shrink: true }}
                           />
                         </Grid>
-                        <Grid item xs={12} sm={4}>
+                        <Grid item xs={12} sm={6} md={4}>
                           <TextField
                             id={`addresses[${index}].city`}
                             name={`addresses[${index}].city`}
@@ -196,7 +196,7 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                             InputLabelProps={{ shrink: true }}
                           />
                         </Grid>
-                        <Grid item xs={12} sm={4}>
+                        <Grid item xs={12} sm={6} md={4}>
                           <TextField
                             id={`addresses[${index}].street`}
                             name={`addresses[${index}].street`}
@@ -232,7 +232,7 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                     <>
                       {showTemporaryAddress && (
                         <Grid container spacing={3} key={index}>
-                          <Grid item xs={12} sm={4}>
+                          <Grid item xs={12} sm={6} md={4}>
                             <TextField
                               id={`addresses[${index}].country`}
                               name={`addresses[${index}].country`}
@@ -261,7 +261,7 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                               </MenuItem>
                             </TextField>
                           </Grid>
-                          <Grid item xs={12} sm={4}>
+                          <Grid item xs={12} sm={6} md={4}>
                             <TextField
                               id={`addresses[${index}].province`}
                               name={`addresses[${index}].province`}
@@ -295,7 +295,7 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                               ))}
                             </TextField>
                           </Grid>
-                          <Grid item xs={12} sm={4}>
+                          <Grid item xs={12} sm={6} md={4}>
                             <TextField
                               id={`addresses[${index}].district`}
                               name={`addresses[${index}].district`}
@@ -319,7 +319,7 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                               InputLabelProps={{ shrink: true }}
                             />
                           </Grid>
-                          <Grid item xs={12} sm={4}>
+                          <Grid item xs={12} sm={6} md={4}>
                             <TextField
                               id={`addresses[${index}].wardNumber`}
                               name={`addresses[${index}].wardNumber`}
@@ -343,7 +343,7 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                               InputLabelProps={{ shrink: true }}
                             />
                           </Grid>
-                          <Grid item xs={12} sm={4}>
+                          <Grid item xs={12} sm={6} md={4}>
                             <TextField
                               id={`addresses[${index}].city`}
                               name={`addresses[${index}].city`}
@@ -365,7 +365,7 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                               InputLabelProps={{ shrink: true }}
                             />
                           </Grid>
-                          <Grid item xs={12} sm={4}>
+                          <Grid item xs={12} sm={6} md={4}>
                             <TextField
                               id={`addresses[${index}].street`}
                               name={`addresses[${index}].street`}
