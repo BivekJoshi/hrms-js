@@ -65,24 +65,24 @@ function ProjectTeamPage() {
                       gap: "1rem",
                     }}
                   >
-                    {/* {employeeData?.map((employee, index) => (
-                    <EmployeeCard
-                      key={index}
-                      IsActive={employee?.isActive || ""}
-                      EmployeeId={employee?.id || ""}
-                      EFirstName={employee?.firstName || ""}
-                      EMiddleName={employee?.middleName || ""}
-                      ELastName={employee?.lastName || ""}
-                      OfficeEmail={employee?.officeEmail || ""}
-                      MobileNumber={employee?.mobileNumber || ""}
-                      // PositionName={employee?.position?.positionName || ""}
-                      // PositionLevel={employee?.position?.positionLevel || ""}
-                      EGender={employee?.gender || ""}
-                      // EmployeeData={employeeData}
-                      // ProgressBarRes={employee?.progressBarRes || ""}
-                      // employeePhoto={employee?.employeePhotoPath}
-                    />
-                  ))} */}
+                    {employeeData?.map((employee, index) => (
+                      <EmployeeCard
+                        key={index}
+                        IsActive={employee?.isActive || ""}
+                        EmployeeId={employee?.id || ""}
+                        EFirstName={employee?.firstName || ""}
+                        EMiddleName={employee?.middleName || ""}
+                        ELastName={employee?.lastName || ""}
+                        OfficeEmail={employee?.officeEmail || ""}
+                        MobileNumber={employee?.mobileNumber || ""}
+                        // PositionName={employee?.position?.positionName || ""}
+                        // PositionLevel={employee?.position?.positionLevel || ""}
+                        EGender={employee?.gender || ""}
+                        // EmployeeData={employeeData}
+                        // ProgressBarRes={employee?.progressBarRes || ""}
+                        // employeePhoto={employee?.employeePhotoPath}
+                      />
+                    ))}
                   </Grid>
                 </Box>
               ))}

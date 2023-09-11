@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useGetDocumentById } from "../../../../../hooks/employee/useDocument";
 import { DOC_URL } from "../../../../../../auth/axiosInterceptor";
@@ -8,11 +8,22 @@ import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import { groupBy } from "lodash";
+import useAuth from "../../../../../../auth/hooks/component/login/useAuth";
+import { useGetLoggedInUserInfo } from "../../../../../hooks/employee/useEmployee";
 
 const DocumentInfo = () => {
+  const { isSuperAdmin, isAdmin, isHr, isEmployee, isHrAdmin, isManager } =
+    useAuth();
+  const { data: loggedInUserData, isLoading: isLoadingUserData } = isEmployee
+    ? useGetLoggedInUserInfo()
+    : {};
+  // console.log(loggedInUserData);
   const url = DOC_URL;
   const { id } = useParams();
-  const { data: getDocument, isLoading } = useGetDocumentById(id);
+  const { data: getDocument, isLoading } =
+    isSuperAdmin || isAdmin || isHr || isHrAdmin || isManager
+      ? useGetDocumentById(id)
+      : useGetDocumentById(loggedInUserData?.id);
 
   const [value, setValue] = React.useState("1");
 
@@ -23,6 +34,12 @@ const DocumentInfo = () => {
   const groupedDocuments = isLoading
     ? {}
     : groupBy(getDocument, "documentType");
+
+  useEffect(() => {
+    if (!isLoading && Object.keys(groupedDocuments).length > 0) {
+      setValue(Object.keys(groupedDocuments)[0]);
+    }
+  }, [isLoading, groupedDocuments]);
 
   return (
     // {data?():()}
