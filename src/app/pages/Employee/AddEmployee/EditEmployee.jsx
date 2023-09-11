@@ -78,7 +78,7 @@ const EditEmployee = () => {
                     }}
                     sx={{ mt: 3, ml: 1 }}
                   >
-                    Add Employee
+                    Add Changes
                   </Button>
                 ) : (
                   <Button
