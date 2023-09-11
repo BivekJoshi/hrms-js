@@ -13,8 +13,13 @@ import { EmployTaskCard } from "../Component/EmployTaskCard";
 import { EmployPichart } from "../Component/EmployPichart";
 import { EmployLineChart } from "../Component/EmployLineChart";
 import { MiddleEmployDashbord } from "./MiddleEmployDashbord";
+import { getBaseUrl } from "../../../../auth/getBaseUrl";
+import contextPath from "../../../../auth/contextPath";
 
 const EmployeeDashbord = (props) => {
+  const baseUrl = getBaseUrl();
+  const path = contextPath();
+  console.log(baseUrl, path)
   const { data: employData } = useGetLoggedInUser();
   const { mode } = useContext(ThemeModeContext);
   // const img = DOC_URL + employData.userPhotoPath;
