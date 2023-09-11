@@ -32,6 +32,13 @@ export const AddUserControlFields = ({ onClose }) => {
     }
   };
 
+  const handleUserNameChange = (event, selectedEmployee) => {
+    if (selectedEmployee) {
+      formik.setFieldValue("employeeId", selectedEmployee.id);
+      formik.setFieldValue("email", selectedEmployee.officeEmail);
+    }
+  };
+
   return (
     <Grid container spacing={3}>
       <Grid item xs={12} sm={12}>

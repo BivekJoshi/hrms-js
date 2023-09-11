@@ -3,14 +3,13 @@ import { Box, Tab } from "@mui/material";
 import * as React from "react";
 import ProjectHomePage from "./ProjectHomePage";
 import { useGetProjectEmployeeTaskById } from "../../../hooks/project/projectEmployee/useProjectEmployee";
-import ProjectTeamPage from "./ProjectTeamPage";
+import ProjectTeamPage from "./component/ProjectTeamPage";
 import Project from "../ProjectAdminViewPage/Project";
 import ProjectMyTask from "../ProjectTask/ProjectMyTask";
 
 export default function ProjectEmpPage() {
   const [value, setValue] = React.useState("1");
-  const {data : employeeTask}=useGetProjectEmployeeTaskById(1);
-  console.log(employeeTask);
+  const { data: employeeTask } = useGetProjectEmployeeTaskById(1);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -21,17 +20,17 @@ export default function ProjectEmpPage() {
       <TabContext value={value}>
         <Box sx={{ border: 2, borderColor: "divider" }}>
           <TabList onChange={handleChange}>
-            <Tab label="All Projects" value="1" />
-            <Tab label="Home" value="2" />
+            <Tab label="Home" value="1" />
+            <Tab label="All Projects" value="2" />
             <Tab label="Team" value="3" />
             <Tab label="My Task" value="4" />
           </TabList>
         </Box>
         <TabPanel value="1">
-          <Project/>
+          <ProjectHomePage data={employeeTask} />
         </TabPanel>
         <TabPanel value="2">
-          <ProjectHomePage data={employeeTask} />
+          <Project />
         </TabPanel>
         <TabPanel value="3">
           <ProjectTeamPage data={employeeTask} />

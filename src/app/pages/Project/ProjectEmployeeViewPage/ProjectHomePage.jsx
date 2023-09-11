@@ -1,18 +1,7 @@
 import React, { useState } from "react";
-import {
-  Box,
-  SwipeableDrawer,
-  Grid,
-  Paper,
-  List,
-  ListItem,
-  ListItemAvatar,
-  Avatar,
-  ListItemText,
-  Divider,
-  Typography,
-  Button,
-} from "@mui/material";
+import { Box, SwipeableDrawer, Grid, Paper, List } from "@mui/material";
+import { ListItem, ListItemAvatar, Avatar, ListItemText } from "@mui/material";
+import { Divider, Typography, Button } from "@mui/material";
 import ProjectTaskField from "../../../components/Form/Project/ProjectTask/ProjectTaskFields";
 import { styled } from "@mui/material/styles";
 import { RightProjectHome } from "./component/RightProjectHome";
@@ -26,7 +15,7 @@ const Item = styled(Paper)(({ theme }) => ({
   margin: 3,
 }));
 
-export default function ProjectHomePage({data}) {
+export default function ProjectHomePage({ data }) {
   const [state, setState] = useState({ right: false });
 
   const toggleDrawer = (anchor, open) => (event) => {
@@ -38,6 +27,26 @@ export default function ProjectHomePage({data}) {
     }
     setState({ ...state, [anchor]: open });
   };
+  const teamsData = [
+    {
+      img: "/static/images/avatar/1.jpg",
+      info: "Brunch this weekend?",
+      name: " Ali Connors",
+      desc: " — I'll be in your neighborhood doing errands this…",
+    },
+    {
+      img: "/static/images/avatar/1.jpg",
+      info: "Brunch this weekend?",
+      name: " Ali Connors",
+      desc: " — I'll be in your neighborhood doing errands this…",
+    },
+    {
+      img: "/static/images/avatar/1.jpg",
+      info: "Brunch this weekend?",
+      name: " Ali Connors",
+      desc: " — I'll be in your neighborhood doing errands this…",
+    },
+  ];
 
   return (
     <>
@@ -52,92 +61,49 @@ export default function ProjectHomePage({data}) {
             <List
               sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
             >
-              <ListItem alignItems="flex-start">
-                <ListItemAvatar>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                </ListItemAvatar>
-                <ListItemText
-                  primary="Brunch this weekend?"
-                  secondary={
-                    <React.Fragment>
-                      <Typography
-                        sx={{ display: "inline" }}
-                        component="span"
-                        variant="body2"
-                        color="text.primary"
-                      >
-                        Ali Connors
-                      </Typography>
-                      {" — I'll be in your neighborhood doing errands this…"}
-                    </React.Fragment>
-                  }
-                />
-              </ListItem>
-              <Divider variant="inset" component="li" />
-              <ListItem alignItems="flex-start">
-                <ListItemAvatar>
-                  <Avatar
-                    alt="Travis Howard"
-                    src="/static/images/avatar/2.jpg"
-                  />
-                </ListItemAvatar>
-                <ListItemText
-                  primary="Bivek Prasad Joshi"
-                  secondary={
-                    <React.Fragment>
-                      <Typography
-                        sx={{ display: "inline" }}
-                        component="span"
-                        variant="body2"
-                        color="text.primary"
-                      >
-                        Bivek
-                      </Typography>
-                      {" — Wish I could come, but I'm out of town this…"}
-                    </React.Fragment>
-                  }
-                />
-              </ListItem>
-              <Divider variant="inset" component="li" />
-              <ListItem alignItems="flex-start">
-                <ListItemAvatar>
-                  <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
-                </ListItemAvatar>
-                <ListItemText
-                  primary="Oui Oui"
-                  secondary={
-                    <React.Fragment>
-                      <Typography
-                        sx={{ display: "inline" }}
-                        component="span"
-                        variant="body2"
-                        color="text.primary"
-                      >
-                        Sandra Adams
-                      </Typography>
-                      {" — Do you have Paris recommendations? Have you ever…"}
-                    </React.Fragment>
-                  }
-                />
-              </ListItem>
+              {teamsData.map((team, index) => (
+                <Box>
+                  <ListItem alignItems="flex-start" key={index}>
+                    <ListItemAvatar>
+                      <Avatar alt="Remy Sharp" src={team.img} />
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary={team.info}
+                      secondary={
+                        <React.Fragment>
+                          <Typography
+                            sx={{ display: "inline" }}
+                            component="span"
+                            variant="body2"
+                            color="text.primary"
+                          >
+                            {team.name}
+                          </Typography>
+                          {team.desc}
+                        </React.Fragment>
+                      }
+                    />
+                  </ListItem>
+                  <Divider variant="inset" component="li" sx={{margin:"0 1rem"}} />
+                </Box>
+              ))}
             </List>
           </Item>
-        </Grid>
+        </Grid>     
       </Grid>
 
       <Grid container spacing={2}>
-        <Grid item xs={8}> <MyTask data={data}/></Grid>
+        <Grid item xs={12}>
+          <MyTask data={data} />
+        </Grid>
       </Grid>
 
       <div>
         {["right"].map((anchor) => (
           <React.Fragment key={anchor}>
-            <Button
-                  onClick={toggleDrawer(anchor, true)}
-                  variant="contained"
-                >
-                  +
-                </Button>
+            <Button onClick={toggleDrawer(anchor, true)} variant="contained">
+              +
+            </Button>
             <SwipeableDrawer
               anchor={anchor}
               open={state[anchor]}
