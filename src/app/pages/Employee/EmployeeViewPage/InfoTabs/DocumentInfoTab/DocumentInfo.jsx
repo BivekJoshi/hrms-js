@@ -17,7 +17,6 @@ const DocumentInfo = () => {
   const { data: loggedInUserData, isLoading: isLoadingUserData } = isEmployee
     ? useGetLoggedInUserInfo()
     : {};
-  // console.log(loggedInUserData);
   const url = DOC_URL;
   const { id } = useParams();
   const { data: getDocument, isLoading } =
@@ -25,16 +24,16 @@ const DocumentInfo = () => {
       ? useGetDocumentById(id)
       : useGetDocumentById(loggedInUserData?.id);
 
+  const groupedDocuments = isLoading
+    ? {}
+    : groupBy(getDocument, "documentType");
+
+  const [value, setValue] = React.useState("EMPLOYEE_PHOTO");
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
-  const groupedDocuments = isLoading
-    ? {}
-    : groupBy(getDocument, "documentType");
-    const [value, setValue] = React.useState(Object.keys(groupedDocuments)[0] || "1");
-
+  
   return (
     // {data?():()}
     <Box>
