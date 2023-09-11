@@ -59,6 +59,5 @@ export const deleteProjectEmployee = async (id) => {
 /*________________________GET TASK Logged-In User_____________________________________*/ 
 export const getProjectEmployeeTaskByLoggedInUser = async () => {
     const data = await axiosInstance.get(`project-employee/task/logged-in/user`);
-    console.log(data);
     return data;
 };
