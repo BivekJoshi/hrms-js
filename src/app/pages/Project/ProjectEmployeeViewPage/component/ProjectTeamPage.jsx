@@ -5,7 +5,6 @@ import { useGetProjectEmployeeByLoggedInUser } from "../../../../hooks/project/p
 
 function ProjectTeamPage() {
   const { data: logInUserData } = useGetProjectEmployeeByLoggedInUser();
-console.log(logInUserData);
   const employeeData = [
     {
       isActive: true,
