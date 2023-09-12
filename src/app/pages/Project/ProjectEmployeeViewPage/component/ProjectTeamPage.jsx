@@ -1,10 +1,10 @@
 import React from "react";
 import EmployeeCard from "../../../../components/cards/Employee/EmployeeCard";
 import { Box, Grid } from "@mui/material";
-import { useGetProjectEmployeeByLoggedInUser } from "../../../../hooks/project/projectEmployee/useProjectEmployee";
+import { useGetTaskLoggedInUser } from "../../../../hooks/project/ProjectTask/useProjectTask";
 
 function ProjectTeamPage() {
-  const { data: logInUserData } = useGetProjectEmployeeByLoggedInUser();
+  const { data: logInUserData } = useGetTaskLoggedInUser();
   const employeeData = [
     {
       isActive: true,
