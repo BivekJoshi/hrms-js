@@ -2,8 +2,11 @@ import { Avatar, Box, Chip, Divider, Stack, Typography } from "@mui/material";
 import React from "react";
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 import Male from "../../../../../assets/male.png";
+import { useGetTaskLoggedInUser } from "../../../../hooks/project/ProjectTask/useProjectTask";
 
 export const MyTask = (props) => {
+  const {data: loginUsertask}=useGetTaskLoggedInUser();
+  console.log(loginUsertask,"data hai ma chai");
   const projectData = [
     {
       projectName: "Human Resource Management System",
@@ -51,7 +54,7 @@ export const MyTask = (props) => {
         gap="1rem"
         padding="1rem 0"
       >
-        {projectData.map((data, index) => (
+        {/* {projectData.map((data, index) => ( */}
           <Box
             bgcolor="#ededed66"
             padding="1rem"
@@ -84,17 +87,17 @@ export const MyTask = (props) => {
                         color:"#01579b"
                       }}
                     >
-                      {data.projectName}
+                      {loginUsertask?.name}
                     </h4>
                   }
                 />
               </Typography>
               <Chip
-                label={data.Status}
+                label={"helo"}
                 sx={{ fontSize: ".7rem", height: "18px" }}
               />
             </Box>
-            <Typography fontSize=".8rem">{data.projectInfo}</Typography>
+            <Typography fontSize=".8rem">{loginUsertask?.detail}</Typography>
 
             <Divider />
             <Stack
@@ -103,7 +106,7 @@ export const MyTask = (props) => {
               justifyContent="space-between"
             >
               <Chip
-                label={data.message}
+                label={"helo"}
                 variant="outlined"
                 icon={<QuestionAnswerIcon sx={{ width: ".7rem" }} />}
                 sx={{ height: "20px" }}
@@ -114,7 +117,7 @@ export const MyTask = (props) => {
               />
             </Stack>
           </Box>
-        ))}
+        {/* ))} */}
       </Box>
     </Box>
   );

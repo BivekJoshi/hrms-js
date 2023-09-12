@@ -3,10 +3,21 @@ import MaterialTable from "@material-table/core";
 import { useGetProjectTaskByProjectId } from "../../../hooks/project/ProjectTask/useProjectTask";
 import tableIcons from "../../../../theme/overrides/TableIcon";
 import SaveIcon from "@material-ui/icons/Save";
+import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
+import { useState } from "react";
+import { EditProjectTaskModal } from "../ProjectModal/ProjectModal";
 
 const ProjectTask = () => {
   const { data: ProjectTask, isLoading } = useGetProjectTaskByProjectId();
-  console.log(ProjectTask);
+
+  const [openEditModal, setOpenEditModal] = useState(false);
+  const [editedRowData, setEditedRowData] = useState({});
+  // console.log(editedRowData,"edited Row Data");
+
+  const handleEditRowData = (rowData) => {
+    setEditedRowData(rowData);
+    setOpenEditModal(true);
+  };
 
   const columns = [
     {
@@ -52,7 +63,9 @@ const ProjectTask = () => {
       emptyValue: "-",
       width: "80",
       render: (rowData) => {
-        const employeeIds = rowData.projectEmployees.map((employee) => employee.id);
+        const employeeIds = rowData.projectEmployees.map(
+          (employee) => employee.id
+        );
         return employeeIds.join(", ");
       },
     },
@@ -88,12 +101,25 @@ const ProjectTask = () => {
         }}
         actions={[
           {
+            icon: () => <ModeEditOutlineIcon />,
+            tooltip: "Edit Project TaskDetails",
+            onClick: (event,rowData) => handleEditRowData(rowData),
+          },
+          {
             icon: () => <SaveIcon />,
             tooltip: "Save User",
             onClick: (event, rowData) => alert("You saved " + rowData.name),
           },
         ]}
       />
+      {openEditModal && (
+        <EditProjectTaskModal
+          id={editedRowData?.id}
+          data={editedRowData}
+          open={openEditModal}
+          handleCloseModal={() => setOpenEditModal(false)}
+        />
+      )}
     </>
   );
 };

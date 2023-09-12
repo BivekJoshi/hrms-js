@@ -2,14 +2,14 @@ import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { Box, Tab } from "@mui/material";
 import * as React from "react";
 import ProjectHomePage from "./ProjectHomePage";
-import { useGetProjectEmployeeTaskById } from "../../../hooks/project/projectEmployee/useProjectEmployee";
 import ProjectTeamPage from "./component/ProjectTeamPage";
 import Project from "../ProjectAdminViewPage/Project";
 import ProjectMyTask from "../ProjectTask/ProjectMyTask";
+import { useGetProjectTaskByProjectId } from "../../../hooks/project/ProjectTask/useProjectTask";
 
 export default function ProjectEmpPage() {
   const [value, setValue] = React.useState("1");
-  const { data: employeeTask } = useGetProjectEmployeeTaskById(1);
+  const { data: employeeTask } = useGetProjectTaskByProjectId(1);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);

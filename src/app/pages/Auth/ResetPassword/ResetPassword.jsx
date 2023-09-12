@@ -55,7 +55,6 @@ const ResetPassword = ({ isLoading }) => {
   } = usePasswordValidation();
 
   const [showOldPassword, setShowOldPassword] = useState(false);
-  const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleFormSubmit = async () => {
