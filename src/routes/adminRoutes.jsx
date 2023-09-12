@@ -4,6 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Breadcrumbs, Typography } from "@mui/material";
 import Loadable from "../app/components/Header/Loader/Loadable";
 import ThemeModeContext from "../theme/ThemeModeContext";
+import ProjectAddViewEmployeePage from "../app/pages/Project/ProjectEmployeeViewPage/ProjectAddViewEmployeePage";
 
 const ProfileDetail = Loadable(
   lazy(() => import("../app/pages/Auth/Profile/ProfileDetail"))
@@ -166,7 +167,7 @@ const adminRoutes = [
     path: "project/:id",
     name: "Project Detail",
     id: nanoid(),
-    component: <ProjectDetail />,
+    component: <ProjectAddViewEmployeePage />,
   },
   {
     path: "project/get-deactivated-projects",

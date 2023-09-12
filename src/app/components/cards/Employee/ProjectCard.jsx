@@ -14,6 +14,7 @@ import {
 import { useGetEmployee } from "../../../hooks/employee/useEmployee";
 import { useGetProjectEmployee } from "../../../hooks/project/projectEmployee/useProjectEmployee";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
+import useAuth from "../../../../auth/hooks/component/login/useAuth";
 
 const ProjectCard = ({
   Id,
@@ -26,9 +27,10 @@ const ProjectCard = ({
   item,
 }) => {
   const navigate = useNavigate();
+  const { isEmployee } = useAuth();
   const { data: employeeData } = useGetEmployee();
   const { data: projectEmployeeData } = useGetProjectEmployee();
-  const { mode } = useContext(ThemeModeContext); // Accessing mode from context
+  const { mode } = useContext(ThemeModeContext);
 
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openDeactivateModal, setOpenDeactiveModal] = useState(false);
@@ -135,16 +137,19 @@ const ProjectCard = ({
             </Grid>
             <Grid item>
               <Box display="flex" justifyContent={"end"}>
-                <Button
-                  ref={anchorRef}
-                  id="composition-button"
-                  aria-controls={open ? "composition-menu" : undefined}
-                  aria-expanded={open ? "true" : undefined}
-                  aria-haspopup="true"
-                  onClick={handleToggle}
-                >
-                  <MoreHorizIcon />
-                </Button>
+                {!isEmployee ? (
+                  <Button
+                    ref={anchorRef}
+                    id="composition-button"
+                    aria-controls={open ? "composition-menu" : undefined}
+                    aria-expanded={open ? "true" : undefined}
+                    aria-haspopup="true"
+                    onClick={handleToggle}
+                  >
+                    <MoreHorizIcon />
+                  </Button>
+                ) : null}
+
                 <Popper
                   open={open}
                   anchorEl={anchorRef.current}
@@ -196,7 +201,11 @@ const ProjectCard = ({
               </Box>
             </Grid>
           </Grid>
-          <Box onClick={() => navigate(`/admin/project/${Id}`)}>
+          <Box
+            onClick={
+              !isEmployee ? () => navigate(`/admin/project/${Id}`) : undefined
+            }
+          >
             <Stack>
               <Typography
                 style={{ fontWeight: 700, margin: "1rem 0", fontSize: "20px" }}
