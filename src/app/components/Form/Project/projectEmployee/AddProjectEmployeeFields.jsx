@@ -2,30 +2,16 @@ import { Grid, Button, TextField, MenuItem, Autocomplete } from "@mui/material";
 import React, { useContext } from "react";
 import { toast } from "react-toastify";
 import { useGetEmployee } from "../../../../hooks/employee/useEmployee";
-import { useGetCompany } from "../../../../hooks/company/useCompany";
-import {
-  useAddProjectEmployee,
-  useEditProjectEmployee,
-  useGetProjectEmployeeById,
-} from "../../../../hooks/project/projectEmployee/useProjectEmployee";
-import { addProjectEmployee } from "../../../../api/project/projectEmployee-api";
 import {
   useAddProjectEmployeeForm,
   useEditProjectEmployeeForm,
 } from "../../../../hooks/project/projectEmployee/addProjectEmployee/useAddProjectEmployeeForm";
-import {
-  useGetProject,
-  useGetProjectById,
-} from "../../../../hooks/project/useProject";
-import { useParams } from "react-router-dom";
 import ThemeModeContext from "../../../../../theme/ThemeModeContext";
 
 export const AddprojectEmployeeFields = ({ onClose, isLoading }) => {
-  const { id } = useParams();
   const { data: employeeData, isLoading: loadingEmployee } = useGetEmployee();
-  const { data: projectData, isLoading: loadingProject } = useGetProject();
-  const { data: projectDataById } = useGetProjectById(id);
-  console.log(projectDataById,"projectData");
+  console.log(employeeData);
+
   const { mode } = useContext(ThemeModeContext);
   const { formik } = useAddProjectEmployeeForm();
 
@@ -79,7 +65,7 @@ export const AddprojectEmployeeFields = ({ onClose, isLoading }) => {
           </TextField>
         </Grid>
 
-        <Grid item xs={12} sm={12}>
+        {/* <Grid item xs={12} sm={12}>
           <TextField
             id="projectId"
             select
@@ -101,7 +87,7 @@ export const AddprojectEmployeeFields = ({ onClose, isLoading }) => {
               </MenuItem>
             }
           </TextField>
-        </Grid>
+        </Grid> */}
         <Grid item xs={12} sm={12}>
           <TextField
             id="assignedOn"

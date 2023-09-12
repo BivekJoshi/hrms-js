@@ -2,8 +2,11 @@ import React from 'react';
 import { useFormik } from 'formik';
 import { ProjectEmployeeSchema } from '../validation/ProjectEmployeeSchema';
 import { useAddProjectEmployee, useEditProjectEmployee } from '../useProjectEmployee';
+import { useParams } from 'react-router-dom';
 
 export const useAddProjectEmployeeForm = () => {
+  const { id } = useParams();
+
     const { mutate } = useAddProjectEmployee({});
 
     const formik = useFormik({
@@ -11,7 +14,7 @@ export const useAddProjectEmployeeForm = () => {
             assignedOn: "",
             deAssignedOn: "",
             employeeId: "",
-            projectId: "",
+            projectId: id,
         },
         validationSchema: ProjectEmployeeSchema,
         onSubmit: (values) => {
