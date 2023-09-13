@@ -15,10 +15,10 @@ const ProjectAssignTaskField = ({ onClose, id, data }) => {
     }
   };
 
-  const {
-    data: employeeData,
-    isLoading: loadingEmployee,
-  } = useGetDepartment();
+  // const {
+  //   data: employeeData,
+  //   isLoading: loadingEmployee,
+  // } = useGetDepartment();
 
   return (
     <Grid container spacing={3}>
@@ -37,7 +37,7 @@ const ProjectAssignTaskField = ({ onClose, id, data }) => {
             placeholder="Select employee"
             fullWidth
             required
-            value={!loadingEmployee && formik.values.projectEmployeeId}
+            // value={!loadingEmployee && formik.values.projectEmployeeId}
             onChange={formik.handleChange}
             error={
               formik.touched.projectEmployeeId &&
@@ -51,7 +51,7 @@ const ProjectAssignTaskField = ({ onClose, id, data }) => {
             autoFocus
             InputLabelProps={{ shrink: true }}
           >
-            {!loadingEmployee &&
+            {/* {!loadingEmployee &&
               employeeData.map((option) => (
                 <MenuItem
                   key={option.id}
@@ -60,7 +60,7 @@ const ProjectAssignTaskField = ({ onClose, id, data }) => {
                 >
                   {option.employeename}
                 </MenuItem>
-              ))}
+              ))} */}
           </TextField>
         </Grid>
       </Grid>

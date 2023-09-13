@@ -5,11 +5,9 @@ import ProjectHomePage from "./ProjectHomePage";
 import ProjectTeamPage from "./component/ProjectTeamPage";
 import Project from "../ProjectAdminViewPage/Project";
 import ProjectMyTask from "../ProjectTask/ProjectMyTask";
-import { useGetProjectTaskByProjectId } from "../../../hooks/project/ProjectTask/useProjectTask";
 
 export default function ProjectEmpPage() {
   const [value, setValue] = React.useState("1");
-  const { data: employeeTask } = useGetProjectTaskByProjectId(1);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -27,16 +25,16 @@ export default function ProjectEmpPage() {
           </TabList>
         </Box>
         <TabPanel value="1">
-          <ProjectHomePage data={employeeTask} />
+          <ProjectHomePage  />
         </TabPanel>
         <TabPanel value="2">
           <Project />
         </TabPanel>
         <TabPanel value="3">
-          <ProjectTeamPage data={employeeTask} />
+          <ProjectTeamPage  />
         </TabPanel>
         <TabPanel value="4">
-          <ProjectMyTask data={employeeTask} />
+          <ProjectMyTask />
         </TabPanel>
       </TabContext>
     </Box>

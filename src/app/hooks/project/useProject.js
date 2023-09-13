@@ -7,6 +7,7 @@ import {
   editProject,
   getDeactivatedProject,
   removeActiveProject,
+  getProjectByEmployeeIdInvolved,
 } from "../../api/project/project-api";
 import { toast } from "react-toastify";
 
@@ -30,6 +31,15 @@ export const useGetDeactivatedProject = (id) => {
 /*________________________GET-BY_ID_____________________________________*/
 export const useGetProjectById = (id) => {
   return useQuery(["getProjectById", id], () => getProjectById(id), {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
+};
+
+
+/*________________________GET-BY_ID_____________________________________*/
+export const useGetProjectByEmployeeIdInvolved = (employeeId) => {
+  return useQuery(["getProjectByEmployeeIdInvolved", employeeId], () => getProjectByEmployeeIdInvolved(employeeId), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });

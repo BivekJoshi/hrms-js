@@ -152,7 +152,7 @@ const RenamePassword = ({ isLoading }) => {
               <TextField
                 id="password"
                 name="password"
-                label="New Password"
+                label="Password"
                 placeholder="Enter your new password..."
                 fullWidth
                 required

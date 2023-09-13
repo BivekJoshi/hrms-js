@@ -6,9 +6,23 @@ import SaveIcon from "@material-ui/icons/Save";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import { useState } from "react";
 import { EditProjectTaskModal } from "../ProjectModal/ProjectModal";
+import { Box, Button, SwipeableDrawer } from "@mui/material";
+import ProjectTaskField from "../../../components/Form/Project/ProjectTask/ProjectTaskFields";
 
 const ProjectTask = () => {
   const { data: ProjectTask, isLoading } = useGetProjectTaskByProjectId();
+
+  const [state, setState] = useState({ right: false });
+
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (
+      event?.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+    setState({ ...state, [anchor]: open });
+  };
 
   const [openEditModal, setOpenEditModal] = useState(false);
   const [editedRowData, setEditedRowData] = useState({});
@@ -19,6 +33,9 @@ const ProjectTask = () => {
     setOpenEditModal(true);
   };
 
+  const handleAssignTask=(rowData)=>{
+    console.log(hello);
+  }
   const columns = [
     {
       title: "SN",
@@ -73,6 +90,31 @@ const ProjectTask = () => {
 
   return (
     <>
+      <div>
+        {["right"].map((anchor) => (
+          <React.Fragment key={anchor}>
+            <Button onClick={toggleDrawer(anchor, true)} variant="contained">
+              Add Task
+            </Button>
+            <SwipeableDrawer
+              anchor={anchor}
+              open={state[anchor]}
+              onClose={toggleDrawer(anchor, false)}
+              onOpen={toggleDrawer(anchor, true)}
+            >
+              <Box
+                sx={{ width: 350, padding: 5 }}
+                role="presentation"
+                //   onClick={toggleDrawer(anchor, false)}
+                //   onKeyDown={toggleDrawer(anchor, false)}
+              >
+                <ProjectTaskField />
+              </Box>
+            </SwipeableDrawer>
+          </React.Fragment>
+        ))}
+      </div>
+      <br />
       <MaterialTable
         icons={tableIcons}
         columns={columns}
@@ -103,12 +145,12 @@ const ProjectTask = () => {
           {
             icon: () => <ModeEditOutlineIcon />,
             tooltip: "Edit Project TaskDetails",
-            onClick: (event,rowData) => handleEditRowData(rowData),
+            onClick: (event, rowData) => handleEditRowData(rowData),
           },
           {
             icon: () => <SaveIcon />,
             tooltip: "Save User",
-            onClick: (event, rowData) => alert("You saved " + rowData.name),
+            onClick: (event, rowData) => handleAssignTask(rowData),
           },
         ]}
       />
