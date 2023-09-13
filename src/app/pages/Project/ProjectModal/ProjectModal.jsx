@@ -8,6 +8,7 @@ import { EditProjectDeactivateFields, EditProjectActivateFields } from '../../..
 
 import { AddprojectEmployeeFields, EditProjectEmployeeFields } from '../../../components/Form/Project/projectEmployee/AddProjectEmployeeFields';
 import { useGetProjectEmployeeById } from '../../../hooks/project/projectEmployee/useProjectEmployee';
+import ProjectAssignTaskField from '../../../components/Form/Project/ProjectTask/ProjectAssignTaskField';
 
 
 
@@ -80,6 +81,22 @@ export const EditProjectEmployeeModal = ({ open, handleCloseModal, id }) => {
           onClose={handleCloseModal}
           formComponent={
             <EditProjectEmployeeFields onClose={handleCloseModal} data={data} />
+          }
+        />
+      </div>
+    );
+  };
+
+
+/*____________________________________________Project Employee Task  Modal_________________________________________________________________*/
+export const EditProjectTaskModal = ({ open, handleCloseModal, id ,data}) => {
+    return (
+      <div>
+        <FormModal
+          open={open}
+          onClose={handleCloseModal}
+          formComponent={
+            <ProjectAssignTaskField onClose={handleCloseModal} id={id} data={data}/>
           }
         />
       </div>

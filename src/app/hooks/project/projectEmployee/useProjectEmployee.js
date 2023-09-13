@@ -33,6 +33,17 @@ export const useGetProjectEmployeeById = (id) => {
   );
 };
 
+/*________________________GET TASK Logged-In User_____________________________________*/ 
+export const useGetProjectEmployeeByLoggedInUser  = () => {
+  return useQuery(
+    ["getProjectEmployeeTaskByLoggedInUser"],
+    () => getProjectEmployeeTaskByLoggedInUser(),
+    {
+      refetchInterval: false,
+      refetchOnWindowFocus: false,
+    }
+  );
+};
 /*________________________GET TASK ID_______________________________________________________________________________*/
 export const useGetProjectEmployeeTaskById = (projectId) => {
   return useQuery(
@@ -159,14 +170,3 @@ export const useDeleteProjectEmployee = ({ onSuccess }) => {
   );
 };
 
-/*________________________GET TASK Logged-In User_____________________________________*/ 
-export const useGetProjectEmployeeByLoggedInUser  = () => {
-  return useQuery(
-    ["getProjectEmployeeTaskByLoggedInUser"],
-    () => getProjectEmployeeTaskByLoggedInUser(),
-    {
-      refetchInterval: false,
-      refetchOnWindowFocus: false,
-    }
-  );
-};

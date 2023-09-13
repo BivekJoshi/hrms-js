@@ -29,7 +29,7 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                     </Typography>
                     <br />
                     <Grid container spacing={3}>
-                      <Grid item xs={12} sm={3}>
+                      <Grid item xs={12} sm={6} md={4}>
                         <TextField
                           id={`history[${index}].employerName`}
                           name={`history[${index}].employerName`}
@@ -52,7 +52,7 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                         />
                       </Grid>
 
-                      <Grid item xs={12} sm={3}>
+                      <Grid item xs={12} sm={6} md={4}>
                         <TextField
                           id={`history[${index}].employerAddress`}
                           name={`history[${index}].employerAddress`}
@@ -74,7 +74,7 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                           InputLabelProps={{ shrink: true }}
                         />
                       </Grid>
-                      <Grid item xs={12} sm={3}>
+                      <Grid item xs={12} sm={6} md={4}>
                         <TextField
                           id={`history[${index}].pastPosition`}
                           name={`history[${index}].pastPosition`}
@@ -96,7 +96,7 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                           InputLabelProps={{ shrink: true }}
                         />
                       </Grid>
-                      <Grid item xs={12} sm={3}>
+                      <Grid item xs={12} sm={6} md={4}>
                         <TextField
                           id={`history[${index}].fromDate`}
                           name={`history[${index}].fromDate`}
@@ -119,7 +119,7 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                           InputLabelProps={{ shrink: true }}
                         />
                       </Grid>
-                      <Grid item xs={12} sm={3}>
+                      <Grid item xs={12} sm={6} md={4}>
                         <TextField
                           id={`history[${index}].toDate`}
                           name={`history[${index}].toDate`}
@@ -142,7 +142,7 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                           InputLabelProps={{ shrink: true }}
                         />
                       </Grid>
-                      <Grid item xs={12} sm={3}>
+                      <Grid item xs={12} sm={6} md={4}>
                         <TextField
                           id={`history[${index}].description`}
                           name={`history[${index}].description`}
@@ -164,7 +164,7 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                           InputLabelProps={{ shrink: true }}
                         />
                       </Grid>
-                      <Grid item xs={12} sm={3}>
+                      <Grid item xs={12} sm={6} md={4}>
                         <TextField
                           id={`history[${index}].remarks`}
                           name={`history[${index}].remarks`}
