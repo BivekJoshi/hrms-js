@@ -5,6 +5,7 @@ import { useGetProjectEmployeeByLoggedInUser } from "../../../../hooks/project/p
 
 function ProjectTeamPage() {
   const { data: logInUserData } = useGetProjectEmployeeByLoggedInUser();
+ console.log(logInUserData);
   const employeeData = [
     {
       isActive: true,
@@ -53,7 +54,7 @@ function ProjectTeamPage() {
               {project?.projectEmployees?.map((employ) => (
                 <Box key={employ.empId}>
                   {employ.assignedOn}
-                  <Grid
+                  {/* <Grid
                     container
                     item
                     gap={1}
@@ -83,7 +84,7 @@ function ProjectTeamPage() {
                         // employeePhoto={employee?.employeePhotoPath}
                       />
                     ))}
-                  </Grid>
+                  </Grid> */}
                 </Box>
               ))}
             </Box>

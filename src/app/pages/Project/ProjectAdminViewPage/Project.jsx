@@ -1,14 +1,20 @@
 import React, { useState } from "react";
 import Typography from "@mui/material/Typography";
-import { Box, Card, Container, Grid, Stack, TextField } from "@mui/material";
+import {
+  Box,
+  Card,
+  Container,
+  Grid,
+  Pagination,
+  Stack,
+  TextField,
+} from "@mui/material";
 import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
-import { useGetProject } from "../../../hooks/project/useProject";
+import { useGetProject, useGetProjectPageWise } from "../../../hooks/project/useProject";
 import { AddProjectModal } from "../ProjectModal/ProjectModal";
 import { useNavigate } from "react-router-dom";
 
 import ProjectCard from "../../../components/cards/Employee/ProjectCard";
-import { PagePagination } from "../../../components/Pagination/PagePagination";
-import { ButtonComponent } from "../../../components/Button/ButtonComponent";
 import HocButton from "../../../hoc/hocButton";
 import PermissionHoc from "../../../hoc/permissionHoc";
 
@@ -16,12 +22,24 @@ const Project = ({ permissions }) => {
   const navigate = useNavigate();
   const { data: projectData, isLoading } = useGetProject();
 
+  //pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageNumber = 12;
+  const{data:projectDataCount}=useGetProjectPageWise(pageNumber);
+
+  const pageSize = projectDataCount?.pageSize || 5;
+  const totalPages = projectDataCount?.totalPages || 0;
+  const startIndex = (currentPage - 1) * pageSize;
+  const endIndex = startIndex + pageSize;
+
+  const handlePageChange = (event, newPage) => {
+    setCurrentPage(newPage);
+  };
+
   const [nameFilter, setNameFilter] = useState("");
   const [companyFilter, setCompanyFilter] = useState("");
   const [isContainerVisible, setIsContainerVisible] = useState(false);
   const [openAddModal, setOpenAddModal] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(6);
 
   const handleFilterIconClick = () => {
     setIsContainerVisible(!isContainerVisible);
@@ -121,29 +139,29 @@ const Project = ({ permissions }) => {
           gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))",
         }}
       >
-        {filteredProject.map((item, index) => (
-          <>
-            <ProjectCard
-              item={item}
-              Id={item.id}
-              key={index}
-              ProjectName={item.projectName}
-              StartDate={item.startDate}
-              EndDate={item.endDate}
-              ProjectLeaderId={item.projectLeaderId}
-              AssociateCompanies={item.associateCompanies[0].companyName}
-              TaskStatus={item.taskStatus}
-            />
-          </>
+        {filteredProject.slice(startIndex, endIndex).map((item, index) => (
+          <ProjectCard
+            item={item}
+            Id={item.id}
+            key={index}
+            ProjectName={item.projectName}
+            StartDate={item.startDate}
+            EndDate={item.endDate}
+            ProjectLeaderId={item.projectLeaderId}
+            AssociateCompanies={item.associateCompanies[0].companyName}
+            TaskStatus={item.taskStatus}
+          />
         ))}
       </Grid>
 
       <Box padding="2rem" display="grid" justifyContent={"center"}>
-        <PagePagination
-          PostsPerPage={postsPerPage}
-          TotalPosts={projectArray.length}
-          CurrentPage={currentPage}
-          Paginate={paginate}
+        <Pagination
+          count={totalPages}
+          page={currentPage}
+          onChange={handlePageChange}
+          boundaryCount={3}
+          size="large"
+          color="primary"
         />
       </Box>
 
