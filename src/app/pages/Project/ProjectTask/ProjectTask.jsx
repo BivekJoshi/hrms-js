@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import MaterialTable from "@material-table/core";
-import { useGetProjectTaskByProjectId } from "../../../hooks/project/ProjectTask/useProjectTask";
+import {
+  useDeleteProjectTask,
+  useGetProjectTaskByProjectId,
+} from "../../../hooks/project/ProjectTask/useProjectTask";
 import tableIcons from "../../../../theme/overrides/TableIcon";
 import SaveIcon from "@material-ui/icons/Save";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
@@ -8,11 +11,42 @@ import { useState } from "react";
 import { EditProjectTaskModal } from "../ProjectModal/ProjectModal";
 import { Box, Button, SwipeableDrawer } from "@mui/material";
 import ProjectTaskField from "../../../components/Form/Project/ProjectTask/ProjectTaskFields";
+import DeleteIcon from "@mui/icons-material/Delete";
+import DeleteConfirmationModal from "../../../components/Modal/DeleteConfirmationModal";
+import { useGetEmployee } from "../../../hooks/employee/useEmployee";
 
 const ProjectTask = () => {
-  const { data: ProjectTask, isLoading } = useGetProjectTaskByProjectId();
-
+  const {
+    data: ProjectTask,
+    isLoading,
+    refetch,
+    isRefetching
+  } = useGetProjectTaskByProjectId();
+console.log(ProjectTask);
   const [state, setState] = useState({ right: false });
+  const [editedTask, setEditedTask] = useState({});
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
+  const [deletedTask, setDeletedTask] = useState({});
+  const {data:employeeData}=useGetEmployee();
+  console.log(employeeData);
+
+  const [tableData, setTableData] = useState(ProjectTask);
+
+useEffect(() => {
+  setTableData(ProjectTask);
+}, [isRefetching,ProjectTask]);
+  const handleCloseDeleteModal = () => setOpenDeleteModal(false);
+
+  const deleteTaskMutation = useDeleteProjectTask({});
+  const handleDeleteTask = (rowData) => {
+    setDeletedTask(rowData);
+    setOpenDeleteModal(true);
+  };
+
+  const handleConfirmDelete = () => {
+    deleteTaskMutation.mutate(deletedTask.id);
+    setOpenDeleteModal(false);
+  };
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -26,16 +60,16 @@ const ProjectTask = () => {
 
   const [openEditModal, setOpenEditModal] = useState(false);
   const [editedRowData, setEditedRowData] = useState({});
-  // console.log(editedRowData,"edited Row Data");
 
   const handleEditRowData = (rowData) => {
     setEditedRowData(rowData);
     setOpenEditModal(true);
   };
 
-  const handleAssignTask=(rowData)=>{
-    console.log(hello);
-  }
+  const handleAssignTask = (rowData) => {
+    setState({ ...state, right: true });
+    setEditedTask(rowData);
+  };
   const columns = [
     {
       title: "SN",
@@ -79,13 +113,27 @@ const ProjectTask = () => {
       field: "projectEmployees",
       emptyValue: "-",
       width: "80",
-      render: (rowData) => {
-        const employeeIds = rowData.projectEmployees.map(
-          (employee) => employee.id
-        );
-        return employeeIds.join(", ");
-      },
+    //   render: (rowData) => {
+    //     const employeeIds = rowData.projectEmployees.map(
+    //       (employee) => employee.id
+    //     );
+    //     return employeeIds.join(", ");
+    //   },
+    // },
+    render: (rowData) => {
+      const employeeIds = rowData.projectEmployees.map(
+        (employee) => employee.id
+      );
+      console.log(employeeIds);
+      const matchedEmployees = employeeData.filter((employee) =>
+        employeeIds.includes(employee.id)
+      );
+      const matchedEmployeeNames = matchedEmployees.map((employee) =>
+        `${employee.firstName} ${employee.middleName} ${employee.lastName}`
+      );
+      return matchedEmployeeNames.join(", ");
     },
+  },
   ];
 
   return (
@@ -108,7 +156,7 @@ const ProjectTask = () => {
                 //   onClick={toggleDrawer(anchor, false)}
                 //   onKeyDown={toggleDrawer(anchor, false)}
               >
-                <ProjectTaskField />
+                <ProjectTaskField data={editedTask} onClose={()=>setState({right:false})}/>
               </Box>
             </SwipeableDrawer>
           </React.Fragment>
@@ -118,7 +166,7 @@ const ProjectTask = () => {
       <MaterialTable
         icons={tableIcons}
         columns={columns}
-        data={ProjectTask}
+        data={tableData}
         title="Project Task"
         isLoading={isLoading}
         options={{
@@ -152,6 +200,11 @@ const ProjectTask = () => {
             tooltip: "Save User",
             onClick: (event, rowData) => handleAssignTask(rowData),
           },
+          {
+            icon: () => <DeleteIcon />,
+            tooltip: "Delete Task",
+            onClick: (event, rowData) => handleDeleteTask(rowData),
+          },
         ]}
       />
       {openEditModal && (
@@ -160,6 +213,14 @@ const ProjectTask = () => {
           data={editedRowData}
           open={openEditModal}
           handleCloseModal={() => setOpenEditModal(false)}
+        />
+      )}
+      {openDeleteModal && (
+        <DeleteConfirmationModal
+          open={openDeleteModal}
+          handleCloseModal={handleCloseDeleteModal}
+          handleConfirmDelete={handleConfirmDelete}
+          message={"Task"}
         />
       )}
     </>

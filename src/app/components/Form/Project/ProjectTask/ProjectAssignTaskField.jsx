@@ -1,10 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import useProjectAssignTaskForm from "../../../../hooks/project/ProjectTask/ProjectTaskForm/useProjectAssignTaskForm";
 import { Button, Grid, MenuItem, TextField } from "@mui/material";
+import { useGetProjectEmployeeById } from "../../../../hooks/project/projectEmployee/useProjectEmployee";
+import { useParams } from "react-router-dom";
+import { useGetEmployee } from "../../../../hooks/employee/useEmployee";
+import ThemeModeContext from "../../../../../theme/ThemeModeContext";
 
 const ProjectAssignTaskField = ({ onClose, id, data }) => {
-  console.log(data);
-  const { formik } = useProjectAssignTaskForm({ id });
+  const { mode } = useContext(ThemeModeContext);
+
+  const { formik } = useProjectAssignTaskForm({ data});
+  const { id: projectTd } = useParams();
+
+  const { data: projectData } = useGetProjectEmployeeById(projectTd);
+  console.log(projectData, "Yesma employee ko Id use garnu xa malai");
+
+  const { data: employeeData, isLoading: loadingEmployee } = useGetEmployee();
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
@@ -30,37 +41,37 @@ const ProjectAssignTaskField = ({ onClose, id, data }) => {
         <p>{data?.detail}</p>
         <Grid item xs={12} sm={12}>
           <TextField
-            id="projectEmployeeId"
-            name="projectEmployeeId"
+            id="projectEmployeeId "
+            name="projectEmployeeId "
             select
-            label="Assign To"
-            placeholder="Select employee"
+            label="Employee Name"
+            placeholder="Enter Employyee Name"
             fullWidth
-            required
-            // value={!loadingEmployee && formik.values.projectEmployeeId}
+            value={formik.values.projectEmployeeId }
             onChange={formik.handleChange}
             error={
-              formik.touched.projectEmployeeId &&
-              Boolean(formik.errors.projectEmployeeId)
+              formik.touched.projectEmployeeId  && Boolean(formik.errors.projectEmployeeId )
             }
-            helperText={
-              formik.touched.projectEmployeeId &&
-              formik.errors.projectEmployeeId
-            }
+            helperText={formik.touched.projectEmployeeId  && formik.errors.projectEmployeeId }
             variant="outlined"
             autoFocus
             InputLabelProps={{ shrink: true }}
           >
-            {/* {!loadingEmployee &&
-              employeeData.map((option) => (
-                <MenuItem
-                  key={option.id}
-                  value={option.id}
-                  sx={{ bgcolor: mode === "light" ? "" : "#413e3e" }}
-                >
-                  {option.employeename}
-                </MenuItem>
-              ))} */}
+            {!loadingEmployee &&
+              employeeData
+                .filter((employee) =>
+                  projectData.some((project) => project.empId === employee.id)
+                )
+                .map((filteredOption) => (
+                  <MenuItem
+                    key={filteredOption?.id}
+                    value={filteredOption?.id}
+                    sx={mode === "light" ? "" : { bgcolor: "#413e3e" }}
+                  >
+                    {filteredOption?.firstName} {filteredOption?.middleName}{" "}
+                    {filteredOption?.lastName}
+                  </MenuItem>
+                ))}
           </TextField>
         </Grid>
       </Grid>

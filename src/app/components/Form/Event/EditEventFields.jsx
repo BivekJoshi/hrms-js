@@ -136,14 +136,14 @@ const EditEventFields = ({ onClose, isLoading, data, permissions }) => {
           alignItems="flex-end"
         >
           <HocButton
-            permissions={permissions.canDelete}
+            permissions={permissions}
             color={"error"}
             variant={"contained"}
             onClick={handleDeleteEvent}
             buttonName={"Delete"}
           />
           <HocButton
-            permissions={permissions.canEdit}
+            permissions={permissions}
             color={"error"}
             variant={"contained"}
             onClick={handleFormSubmit}

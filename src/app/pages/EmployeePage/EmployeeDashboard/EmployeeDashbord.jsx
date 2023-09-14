@@ -19,10 +19,10 @@ const EmployeeDashbord = (props) => {
   const { mode } = useContext(ThemeModeContext);
   // const img = DOC_URL + employData.userPhotoPath;
   const task = [
-    { nameOfTask: "Total Project", numberOfTask: "4" },
-    { nameOfTask: "Total Task", numberOfTask: "4" },
-    { nameOfTask: "Task Pending", numberOfTask: "4" },
-    { nameOfTask: "Task Complete", numberOfTask: "4" },
+    { nameOfTask: "Total Project", numberOfTask: "-" },
+    { nameOfTask: "Total Task", numberOfTask: "-" },
+    { nameOfTask: "Task Pending", numberOfTask: "-" },
+    { nameOfTask: "Task Complete", numberOfTask: "-" },
   ];
   const today = new Date();
   const options = {

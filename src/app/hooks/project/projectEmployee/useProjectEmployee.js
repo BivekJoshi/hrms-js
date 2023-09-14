@@ -17,10 +17,10 @@ export const useGetProjectEmployee = () => {
 };
 
 /*________________________GET-BY_ID________________________________________________________________________________*/
-export const useGetProjectEmployeeById = (id) => {
+export const useGetProjectEmployeeById = (projectTd) => {
   return useQuery(
-    ["getProjectEmployeeById", id],
-    () => getProjectEmployeeById(id),
+    ["getProjectEmployeeById", projectTd],
+    () => getProjectEmployeeById(projectTd),
     {
       refetchInterval: false,
       refetchOnWindowFocus: false,

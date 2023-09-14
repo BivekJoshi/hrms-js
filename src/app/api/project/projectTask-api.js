@@ -40,8 +40,8 @@ export const addProjectCreateTask = async (formData) => {
   return data;
 };
 
-/*________________________POST TASK_____________________________________*/ 
-export const addTaskAssignProject = async (formData,taskId) => {
+/*________________________UPDATE TASK_____________________________________*/ 
+export const editProjectCreateTask = async (formData,taskId) => {;
   const data = await axiosInstance.post(`/project-task/update/${taskId}`, formData);
   return data;
 };

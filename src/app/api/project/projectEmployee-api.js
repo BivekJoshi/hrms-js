@@ -7,8 +7,8 @@ export const getProjectEmployee = async () => {
 };
 
 /*________________________GETBYID_____________________________________*/ 
-export const getProjectEmployeeById = async (id) => {
-      const data = await axiosInstance.get(`project-employee/project-id/${id}`);
+export const getProjectEmployeeById = async (projectTd) => {
+      const data = await axiosInstance.get(`project-employee/project-id/${projectTd}`);
       return data;
 };
 
