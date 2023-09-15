@@ -179,13 +179,13 @@ const Holiday = ({ permissions }) => {
         }}
       />
       
-      {openModal && (
+      {/* {openModal && (
         <OpenHoliday
           id={getEventID}
           open={openModal}
           handleCloseModal={handleCloseModal}
         />
-      )}
+      )} */}
     </>
   );
 };

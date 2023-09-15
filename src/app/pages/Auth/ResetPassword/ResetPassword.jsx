@@ -55,7 +55,6 @@ const ResetPassword = ({ isLoading }) => {
   } = usePasswordValidation();
 
   const [showOldPassword, setShowOldPassword] = useState(false);
-  const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleFormSubmit = async () => {
@@ -230,6 +229,7 @@ const ResetPassword = ({ isLoading }) => {
               variant="outlined"
               autoFocus
               type={showConfirmPassword ? "text" : "password"}
+              InputLabelProps={{ shrink: true }}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">

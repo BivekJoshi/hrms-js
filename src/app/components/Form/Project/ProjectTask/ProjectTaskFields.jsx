@@ -3,6 +3,8 @@ import { Grid, TextField, Button, MenuItem } from "@mui/material";
 import { toast } from "react-toastify";
 import useProjectTaskForm from "../../../../hooks/project/ProjectTask/ProjectTaskForm/useProjectTaskForm";
 import ThemeModeContext from "../../../../../theme/ThemeModeContext";
+import { useGetProject } from "../../../../hooks/project/useProject";
+import { useParams } from "react-router-dom";
 
 const priority = [
   {
@@ -39,6 +41,7 @@ const status = [
 const ProjectTaskField = ({ onClose, isLoading, data }) => {
   const { formik } = useProjectTaskForm(data);
   const { mode } = useContext(ThemeModeContext);
+  const { id } = useParams();
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
@@ -50,16 +53,50 @@ const ProjectTaskField = ({ onClose, isLoading, data }) => {
     }
   };
 
+  const { data: projectData, isLoading: loadingProject } = useGetProject();
   const submitButtonText = data ? "Update Message" : "Add Message";
 
+  const ProjectNameField = id ? null : (
+    <Grid item xs={12} sm={12}>
+      <TextField
+        id="projectId"
+        name="projectId"
+        label="Project Name"
+        placeholder="Enter your message..."
+        fullWidth
+        select
+        required
+        value={formik.values.projectId}
+        onChange={formik.handleChange}
+        error={formik.touched.projectId && Boolean(formik.errors.projectId)}
+        helperText={formik.touched.projectId && formik.errors.projectId}
+        variant="standard"
+        autoFocus
+        InputLabelProps={{ shrink: true }}
+      >
+        {!loadingProject &&
+          projectData.map((option) => (
+            <MenuItem
+              key={option?.id}
+              value={option?.id}
+              sx={{ bgcolor: mode === "light" ? "" : "#413e3e" }}
+            >
+              {option?.projectName}
+            </MenuItem>
+          ))}
+      </TextField>
+    </Grid>
+  );
   return (
     !isLoading && (
       <Grid container spacing={3}>
+        {ProjectNameField}
+
         <Grid item xs={12} sm={12}>
           <TextField
             id="name"
             name="name"
-            label="Project Name"
+            label="Task"
             placeholder="Enter your message..."
             fullWidth
             required

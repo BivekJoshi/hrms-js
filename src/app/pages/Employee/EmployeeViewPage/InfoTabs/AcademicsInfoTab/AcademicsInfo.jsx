@@ -1,16 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import Timeline from "@mui/lab/Timeline";
 import { timelineItemClasses } from "@mui/lab/TimelineItem";
 import { Box } from "@mui/material";
 import AcademicsComponents from "./AcademicsComponents";
 import "../../EmployProfile/Style/Style.css"
+import ThemeModeContext from "../../../../../../theme/ThemeModeContext";
 
 const AcademicsInfo = ({ data }) => {
+  const{mode} =useContext(ThemeModeContext)
   return (
     <Box
       className="profileBasic"
       sx={{
-        bgcolor: "#ededed",
+        bgcolor: mode === "light" ? "#ededed":"#454546",
       }}
     >
       <Timeline

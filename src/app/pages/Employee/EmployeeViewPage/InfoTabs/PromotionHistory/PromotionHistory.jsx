@@ -7,11 +7,23 @@ import { useState } from "react";
 import MaterialTable from "@material-table/core";
 import "../../EmployProfile/Style/Style.css";
 import { useGetDesignation } from "../../../../../hooks/designation/useDesignation";
+import useAuth from "../../../../../../auth/hooks/component/login/useAuth";
+import { useGetLoggedInUserInfo } from "../../../../../hooks/employee/useEmployee";
 
 const PromotionHistory = () => {
+  const { isSuperAdmin, isAdmin, isHr, isEmployee, isHrAdmin, isManager } =
+    useAuth();
+  const { data: loggedInUserData, isLoading: isLoadingUserData } = isEmployee
+    ? useGetLoggedInUserInfo()
+    : {};
   const { id } = useParams();
-  const { data: PromotionHistory, isLoading } = useGetPromotionHistory(id);
-  const { data: designationData, isLoading: loadingDesignation } = useGetDesignation();
+  const { data: PromotionHistory, isLoading } =
+    isSuperAdmin || isAdmin || isHr || isHrAdmin || isManager
+      ? useGetPromotionHistory(id)
+      : useGetPromotionHistory(loggedInUserData?.id);
+      
+  const { data: designationData, isLoading: loadingDesignation } =
+    useGetDesignation();
 
   const [openAddModal, setOpenAddModal] = useState(false);
 
@@ -20,7 +32,9 @@ const PromotionHistory = () => {
 
   const mappedPromotionHistory = PromotionHistory?.map((item) => {
     const position = designationData?.find((pos) => pos.id === item.positionId);
-    const positionName = `${position?.positionName || "-"} (${position?.positionLevel || "-"})`;
+    const positionName = `${position?.positionName || "-"} (${
+      position?.positionLevel || "-"
+    })`;
     return {
       ...item,
       positionId: positionName,
@@ -59,7 +73,13 @@ const PromotionHistory = () => {
       width: 50,
       render: (rowData) => {
         return (
-          <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
             {rowData.lastPosition ? (
               <span style={{ color: "green" }}>✔</span>
             ) : (

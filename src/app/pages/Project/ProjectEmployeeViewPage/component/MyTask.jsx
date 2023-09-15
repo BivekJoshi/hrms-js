@@ -2,46 +2,11 @@ import { Avatar, Box, Chip, Divider, Stack, Typography } from "@mui/material";
 import React from "react";
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 import Male from "../../../../../assets/male.png";
+import { useGetTaskLoggedInUser } from "../../../../hooks/project/ProjectTask/useProjectTask";
 
 export const MyTask = (props) => {
-  const projectData = [
-    {
-      projectName: "Human Resource Management System",
-      projectInfo: "This is for the Project Information Project Information",
-      Status: "done",
-      message: 6,
-    },
-    {
-      projectName: "Human Resource Management System",
-      projectInfo: "This is for the Project Information Project Information",
-      Status: "done",
-      message: 6,
-    },
-    {
-      projectName: "Human Resource Management System",
-      projectInfo: "This is for the Project Information Project Information",
-      Status: "done",
-      message: 6,
-    },
-    {
-      projectName: "Human Resource Management System",
-      projectInfo: "This is for the Project Information Project Information",
-      Status: "progress",
-      message: 6,
-    },
-    {
-      projectName: "Human Resource Management System",
-      projectInfo: "This is for the Project Information Project Information",
-      Status: "done",
-      message: 6,
-    },
-    {
-      projectName: "Human Resource Management System",
-      projectInfo: "This is for the Project Information Project Information",
-      Status: "done",
-      message: 6,
-    },
-  ];
+  const {data: loginUsertask}=useGetTaskLoggedInUser();
+
   return (
     <Box padding="2rem 0 0 0">
       <h3>My Task</h3>
@@ -51,7 +16,7 @@ export const MyTask = (props) => {
         gap="1rem"
         padding="1rem 0"
       >
-        {projectData.map((data, index) => (
+        {loginUsertask?.map((data, index) => (
           <Box
             bgcolor="#ededed66"
             padding="1rem"
@@ -84,17 +49,17 @@ export const MyTask = (props) => {
                         color:"#01579b"
                       }}
                     >
-                      {data.projectName}
+                      {data?.name}
                     </h4>
                   }
                 />
               </Typography>
               <Chip
-                label={data.Status}
+                label={"Priority: "+data?.priority}
                 sx={{ fontSize: ".7rem", height: "18px" }}
               />
             </Box>
-            <Typography fontSize=".8rem">{data.projectInfo}</Typography>
+            <Typography fontSize=".8rem">{data?.detail}</Typography>
 
             <Divider />
             <Stack
@@ -103,7 +68,7 @@ export const MyTask = (props) => {
               justifyContent="space-between"
             >
               <Chip
-                label={data.message}
+                label={data?.dueDate}
                 variant="outlined"
                 icon={<QuestionAnswerIcon sx={{ width: ".7rem" }} />}
                 sx={{ height: "20px" }}
@@ -114,7 +79,7 @@ export const MyTask = (props) => {
               />
             </Stack>
           </Box>
-        ))}
+       ))} 
       </Box>
     </Box>
   );

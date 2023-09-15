@@ -1,10 +1,10 @@
 import React from "react";
 import EmployeeCard from "../../../../components/cards/Employee/EmployeeCard";
 import { Box, Grid } from "@mui/material";
-import { useGetProjectEmployeeByLoggedInUser } from "../../../../hooks/project/projectEmployee/useProjectEmployee";
+import { useGetTaskLoggedInUser } from "../../../../hooks/project/ProjectTask/useProjectTask";
 
 function ProjectTeamPage() {
-  const { data: logInUserData } = useGetProjectEmployeeByLoggedInUser();
+  const { data: logInUserData } = useGetTaskLoggedInUser();
   const employeeData = [
     {
       isActive: true,
@@ -65,24 +65,24 @@ function ProjectTeamPage() {
                       gap: "1rem",
                     }}
                   >
-                    {/* {employeeData?.map((employee, index) => (
-                    <EmployeeCard
-                      key={index}
-                      IsActive={employee?.isActive || ""}
-                      EmployeeId={employee?.id || ""}
-                      EFirstName={employee?.firstName || ""}
-                      EMiddleName={employee?.middleName || ""}
-                      ELastName={employee?.lastName || ""}
-                      OfficeEmail={employee?.officeEmail || ""}
-                      MobileNumber={employee?.mobileNumber || ""}
-                      // PositionName={employee?.position?.positionName || ""}
-                      // PositionLevel={employee?.position?.positionLevel || ""}
-                      EGender={employee?.gender || ""}
-                      // EmployeeData={employeeData}
-                      // ProgressBarRes={employee?.progressBarRes || ""}
-                      // employeePhoto={employee?.employeePhotoPath}
-                    />
-                  ))} */}
+                    {employeeData?.map((employee, index) => (
+                      <EmployeeCard
+                        key={index}
+                        IsActive={employee?.isActive || ""}
+                        EmployeeId={employee?.id || ""}
+                        EFirstName={employee?.firstName || ""}
+                        EMiddleName={employee?.middleName || ""}
+                        ELastName={employee?.lastName || ""}
+                        OfficeEmail={employee?.officeEmail || ""}
+                        MobileNumber={employee?.mobileNumber || ""}
+                        // PositionName={employee?.position?.positionName || ""}
+                        // PositionLevel={employee?.position?.positionLevel || ""}
+                        EGender={employee?.gender || ""}
+                        // EmployeeData={employeeData}
+                        // ProgressBarRes={employee?.progressBarRes || ""}
+                        // employeePhoto={employee?.employeePhotoPath}
+                      />
+                    ))}
                   </Grid>
                 </Box>
               ))}
