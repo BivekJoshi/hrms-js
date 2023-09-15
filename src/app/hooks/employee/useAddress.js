@@ -29,12 +29,20 @@ export const usePermanentAddAddress = ({ onSuccess }) => {
 
 export const useTemporaryAddress = ({ onSuccess }) => {
   const { id } = useParams();
+
+  const addTemporaryAddressMutation = (formData) => {
+    if (formData) {
+      return addTemporaryAddress(formData, id);
+    }
+    return Promise.resolve();
+  };
+
   return useMutation(
     ['temporaryAddress'],
-    (formData) => addTemporaryAddress(formData, id),
+    addTemporaryAddressMutation,
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Temporary address added successfully');
+        // toast.success('Temporary address added successfully');
         onSuccess && onSuccess(data, variables, context);
       },
       onError: (err, _variables, _context) => {
@@ -43,6 +51,7 @@ export const useTemporaryAddress = ({ onSuccess }) => {
     }
   );
 };
+
 
 export const useGetAddressById = (id) => {
   return useQuery(['getAddressById', id], () => getAddressById(id), {

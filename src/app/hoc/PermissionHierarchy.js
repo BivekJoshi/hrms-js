@@ -60,6 +60,10 @@ const PermissionHierarchy = {
   event: commonPermissions,
   todo: allPermissions,
   leaveType:commonPermissions,
+  resourceDeactivated:commonPermissions,
+  officeResource:commonPermissions,
+  employeeResource:commonPermissions,
+  holiday:commonPermissions,
 };
 
 export default PermissionHierarchy;
