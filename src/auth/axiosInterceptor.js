@@ -4,11 +4,8 @@ import { getUser } from '../app/utils/cookieHelper';
 import { getBaseUrl } from './getBaseUrl';
 
 const baseUrl= getBaseUrl();
-console.log(baseUrl, getBaseUrl())
- // export const baseURL = 'https://103.94.159.144:8083/hrms/api/';
-  // export const baseURL = 'http://172.16.16.143:8484/hrms/api/';
-   export const baseURL = 'http://172.16.16.162:8484/hrms/api/';
-  // export const baseURL = 'http://172.16.16.149:8484/hrms/api/';
+console.log(baseUrl)
+  export const baseURL = 'https://103.94.159.144:8083/hrms/api/';
 export const DOC_URL = 'https://103.94.159.144/';
 export const axiosInstance = Axios.create({
   baseURL: baseURL,
