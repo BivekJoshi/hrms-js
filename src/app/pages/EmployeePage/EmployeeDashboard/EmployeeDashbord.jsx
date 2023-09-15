@@ -19,7 +19,7 @@ import contextPath from "../../../../auth/contextPath";
 const EmployeeDashbord = (props) => {
   const baseUrl = getBaseUrl();
   const path = contextPath();
-  console.log(baseUrl, path)
+  console.log({"baseUrl": baseUrl, "path": path})
   const { data: employData } = useGetLoggedInUser();
   const { mode } = useContext(ThemeModeContext);
   // const img = DOC_URL + employData.userPhotoPath;

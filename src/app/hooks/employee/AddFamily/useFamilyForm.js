@@ -28,13 +28,13 @@ const useFamilyForm = ({ data, isLoadingFamily: isLoading }) => {
           }
         ],
     },
-    enableReinitialize: "true",
+    enableReinitialize: true,
     validationSchema: FamilySchema,
     onSubmit: (values) => {
-      if (familyDetails.length>0) {
-        handledEditRequest(values);
+      if (!values?.id || values?.id === "") {
+        handleRequest(values);        
       } else {
-        handleRequest(values);
+        handledEditRequest(values);
       }
     },
   });
