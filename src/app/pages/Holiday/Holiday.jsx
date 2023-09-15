@@ -178,7 +178,7 @@ const Holiday = ({ permissions }) => {
           },
         }}
       />
-      
+
       {/* {openModal && (
         <OpenHoliday
           id={getEventID}
@@ -186,6 +186,18 @@ const Holiday = ({ permissions }) => {
           handleCloseModal={handleCloseModal}
         />
       )} */}
+
+      {openModal && (
+        <FormModal
+          open={openModal}
+          onClose={() => setOpenSubmitModal(false)}
+          formComponent={
+            <div>
+              <p>hello</p>
+            </div>
+          }
+        />
+      )}
     </>
   );
 };

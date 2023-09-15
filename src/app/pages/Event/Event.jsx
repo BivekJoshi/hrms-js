@@ -172,7 +172,7 @@ const Event = ({ permissions }) => {
         <OpenEvent
           id={getEventID}
           open={openModal}
-          handleCloseModal={handleCloseModal}
+          handleCloseModal={()=>setOpenModal(false)}
         />
       )}
     </>

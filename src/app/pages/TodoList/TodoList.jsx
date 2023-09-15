@@ -101,12 +101,12 @@ const TodoList = ({ permissions }) => {
           <Button color="primary" onClick={() => handleEditTodoList(rowData)}>
             <ModeEditOutlineIcon />
           </Button>
-          <HocButton
-            permissions={permissions?.canDelete}
-            color={"primary"}
+          <Button
+            color="primary"
             onClick={() => handleDeleteTodoList(rowData.id)}
-            icon={<DeleteIcon />}
-          />
+          >
+            <DeleteIcon />
+          </Button>
         </Stack>
       ),
       sorting: false,
