@@ -1,4 +1,4 @@
-import { Grid, TextField, Button, MenuItem } from "@mui/material";
+import { Grid, TextField, Button, MenuItem, Autocomplete } from "@mui/material";
 import React, { useContext } from "react";
 import { toast } from "react-toastify";
 import useEditProjectForm from "../../../hooks/project/editProject/useEditProjectForm";
@@ -159,6 +159,7 @@ const EditProjectFields = ({ onClose, isLoading, data }) => {
             label="Assign a Project Leader"
             placeholder="Enter ProjectLeadId"
             fullWidth
+            disabled
             required
             value={getProjectLeaderName(formik.values.projectLeadId)}
             onChange={formik.handleChange}
@@ -172,6 +173,40 @@ const EditProjectFields = ({ onClose, isLoading, data }) => {
             variant="outlined"
             InputLabelProps={{ shrink: true }}
           />
+          {/* <Autocomplete
+            id="projectLeadId"
+            name="projectLeadId"
+            options={employeeData || []}
+            getOptionLabel={(employee) =>
+              `${employee?.firstName} ${employee?.middleName} ${employee?.lastName}`
+            }
+            value={employeeData?.find(
+              (employee) => employee?.id === formik.values?.employeeId
+            )}
+            onChange={(event, selectedEmployee) => {
+              if (selectedEmployee) {
+                formik.setFieldValue("projectLeadId", selectedEmployee.id);
+              }
+            }}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="User Name"
+                placeholder="Enter User name..."
+                fullWidth
+                required
+                variant="outlined"
+                autoFocus
+                InputLabelProps={{ shrink: true }}
+                error={
+                  formik.touched.employeeId && Boolean(formik.errors.employeeId)
+                }
+                helperText={
+                  formik.touched.employeeId && formik.errors.employeeId
+                }
+              />
+            )}
+          /> */}
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField

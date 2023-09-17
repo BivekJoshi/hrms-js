@@ -135,7 +135,7 @@ const AddprojectFields = ({ onClose, isLoading }) => {
         </Grid>
 
         <Grid item xs={12} sm={6}>
-          <TextField
+          {/* <TextField
             id="projectLeadId"
             name="projectLeadId"
             select
@@ -166,6 +166,41 @@ const AddprojectFields = ({ onClose, isLoading }) => {
                 </MenuItem>
               ))}
           </TextField>
+           */}
+          <Autocomplete
+            id="projectLeadId"
+            name="projectLeadId"
+            options={employeeData || []}
+            getOptionLabel={(employee) =>
+              `${employee?.firstName} ${employee?.middleName} ${employee?.lastName}`
+            }
+            value={employeeData?.find(
+              (employee) => employee?.id === formik.values?.employeeId
+            )}
+            onChange={(event, selectedEmployee) => {
+              if (selectedEmployee) {
+                formik.setFieldValue("projectLeadId", selectedEmployee.id);
+              }
+            }}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="User Name"
+                placeholder="Enter User name..."
+                fullWidth
+                required
+                variant="outlined"
+                autoFocus
+                InputLabelProps={{ shrink: true }}
+                error={
+                  formik.touched.employeeId && Boolean(formik.errors.employeeId)
+                }
+                helperText={
+                  formik.touched.employeeId && formik.errors.employeeId
+                }
+              />
+            )}
+          />
         </Grid>
 
         <Grid item xs={12} sm={12}>
