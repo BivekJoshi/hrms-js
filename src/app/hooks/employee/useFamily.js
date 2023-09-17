@@ -12,7 +12,7 @@ export const useAddFamily = ({ onSuccess }) => {
         (formData) => addfamily(formData, id),
         {
             onSuccess: (data, variables, context) => {
-                toast.success(`Successfully added family member + ${id}`);
+                toast.success(`Successfully added family member`);
                 onSuccess && onSuccess(data, variables, context);
                 queryClient.invalidateQueries('getFamilyById');
             },
