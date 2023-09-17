@@ -1,10 +1,26 @@
+import { useParams } from "react-router-dom";
 import { axiosInstance } from "../../../auth/axiosInterceptor";
 
 {/*________________________POST_____________________________________*/ }
 export const addfamily = async (formData, id) => {
-  const data = await axiosInstance.post(`/family-member/create/${id}`, formData?.family);
+  const newFam = formData?.family;
+  const dataToPost = newFam.filter(item => item.id === undefined || item.id === "");
+  const data = await axiosInstance.post(`/family-member/create/${id}`, dataToPost);
   return data;
 };
+
+// export const addfamily = async (formData, id) => {
+//   const newFam = formData?.family;
+//   const dataToPost = newFam.filter(item => item.id === undefined || item.id === "");
+//   console.log({"postdata": dataToPost, "id": id})
+//   if (dataToPost.length > 0) {
+//     const data = await axiosInstance.post(`/family-member/create/${id}`, dataToPost);
+//     return data;
+//   } else {
+//     // Handle the case where there is no data without an 'id' to post
+//     return { message: 'No data without an "id" property to post' };
+//   }
+// };
 
 {/*________________________GETBYID_____________________________________*/ }
 export const getFamilyById = (id) => {

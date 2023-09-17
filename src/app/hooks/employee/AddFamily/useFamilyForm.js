@@ -1,15 +1,16 @@
+import React from 'react';
 import { useFormik } from 'formik';
 import { FamilySchema } from './FamilySchema';
 import { useAddFamily, useEditFamily } from '../useFamily';
 
 const useFamilyForm = ({ data, isLoadingFamily: isLoading }) => {
-  const { mutate } = useAddFamily({});
+  const { mutate: addMutate } = useAddFamily({});
   const { mutate: editMutate } = useEditFamily({});
 
   const familyDetails = 
   !isLoading &&
    data?.familyMembers.map((familyMember) => ({
-    id:familyMember?.id ||'',
+    id:familyMember.id ||'',
     name: familyMember.name || '',
     relation: familyMember.relation || '',
     mobileNumber: familyMember.mobileNumber || '',
@@ -17,9 +18,8 @@ const useFamilyForm = ({ data, isLoadingFamily: isLoading }) => {
 
   const formik = useFormik({
     initialValues: {
-      family: familyDetails &&
-        familyDetails.length > 0 ?
-        familyDetails :
+      family: familyDetails && familyDetails.length > 0 
+      ? familyDetails :
         [
           {
             name: '',
@@ -28,20 +28,20 @@ const useFamilyForm = ({ data, isLoadingFamily: isLoading }) => {
           }
         ],
     },
-    enableReinitialize: "true",
+    enableReinitialize: true,
     validationSchema: FamilySchema,
     onSubmit: (values) => {
-      if (familyDetails.length>0) {
-        handledEditRequest(values);
+      if (!values?.id || values?.id === "") {
+        handleRequest(values);        
       } else {
-        handleRequest(values);
+        handledEditRequest(values);
       }
     },
   });
 
   const handleRequest = (values) => {
-    values = { ...values, };
-    mutate(values, formik);
+    values = { ...values };
+    addMutate(values, formik);
   };
 
   const handledEditRequest = (values) => {
