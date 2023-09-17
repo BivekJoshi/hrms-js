@@ -11,8 +11,11 @@ import { PagePagination } from "../../../components/Pagination/PagePagination";
 import { ButtonComponent } from "../../../components/Button/ButtonComponent";
 import HocButton from "../../../hoc/hocButton";
 import PermissionHoc from "../../../hoc/permissionHoc";
+import useAuth from "../../../../auth/hooks/component/login/useAuth";
 
 const Project = ({ permissions }) => {
+  const { isEmployee} = useAuth();
+
   const navigate = useNavigate();
   const { data: projectData, isLoading } = useGetProject();
 
@@ -56,24 +59,26 @@ const Project = ({ permissions }) => {
           }}
         >
           On-Going Projects
-          <Box display="flex" gap={".5rem"}>
-            <HocButton
-              permissions={permissions}
-              color={"primary"}
-              variant={"outlined"}
-              onClick={() => {
-                navigate(`get-deactivated-projects`);
-              }}
-              buttonName={"Terminated Project"}
-            />
-            <HocButton
-              permissions={permissions}
-              color={"primary"}
-              variant={"contained"}
-              onClick={handleAddOpenModal}
-              buttonName={"+Add Project"}
-            />
-          </Box>
+          {isEmployee ? null : (
+            <Box display="flex" gap={".5rem"}>
+              <HocButton
+                permissions={permissions}
+                color={"primary"}
+                variant={"outlined"}
+                onClick={() => {
+                  navigate(`get-deactivated-projects`);
+                }}
+                buttonName={"Terminated Project"}
+              />
+              <HocButton
+                permissions={permissions}
+                color={"primary"}
+                variant={"contained"}
+                onClick={handleAddOpenModal}
+                buttonName={"+Add Project"}
+              />
+            </Box>
+          )}
         </Typography>
       </Box>
 

@@ -16,8 +16,10 @@ import useHolidayForm from "../../hooks/holiday/HolidayForm/useHolidayForm";
 import FormModal from "../../components/Modal/FormModal";
 import HolidayFields from "../../components/Form/Holiday/HolidayFields";
 import EmailForHoliday from "../Email/EmailForHoliday";
+import useAuth from "../../../auth/hooks/component/login/useAuth";
 
 const Holiday = ({ permissions }) => {
+  const { isEmployee,isHrClerk } = useAuth();
   const calendarRef = useRef(null);
   const [events, setEvents] = useState([]);
 
@@ -64,15 +66,17 @@ const Holiday = ({ permissions }) => {
 
   return (
     <>
-      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-        <HocButton
-          permissions={permissions}
-          color={"primary"}
-          variant={"contained"}
-          onClick={() => setOpenAddModal(true)}
-          buttonName={"+Add Holiday"}
-        />
-      </Box>
+      {isEmployee || isHrClerk ? null : (
+        <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+          <HocButton
+            permissions={permissions}
+            color={"primary"}
+            variant={"contained"}
+            onClick={() => setOpenAddModal(true)}
+            buttonName={"+Add Holiday"}
+          />
+        </Box>
+      )}
       <br />
 
       {openAddModal && (

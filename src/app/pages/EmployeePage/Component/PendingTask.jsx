@@ -10,8 +10,10 @@ import {
 import React from "react";
 import { useGetTaskLoggedInUser } from "../../../hooks/project/ProjectTask/useProjectTask";
 import { useGetProject } from "../../../hooks/project/useProject";
+import { useNavigate } from "react-router-dom";
 
 export const PendingTask = () => {
+  const navigate = useNavigate();
   let snCounter = 1;
   const { data: pendingTask ,isLoading:loadingpendingTask} = useGetTaskLoggedInUser();
   const { data: ProjectName ,isLoading:lodingprojectName} = useGetProject();
@@ -54,6 +56,7 @@ export const PendingTask = () => {
                 fontWeight: "bold",
                 textAlign: "center",
               }}
+              onClick={()=>navigate(`/employee/project`)}
             >
               CLICK HERE TO SHOW ALL TASK
             </TableCell>
