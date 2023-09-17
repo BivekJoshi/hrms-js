@@ -34,7 +34,6 @@ const useFamilyForm = ({ data, isLoadingFamily: isLoading }) => {
       console.log({"values": values})
 
       if (values.family.some((member) => !member.id)) {
-        // If any family member has an id, call the PUT request (edit)
         handleAddRequest(values);
       } else {
         handledEditRequest(values);
