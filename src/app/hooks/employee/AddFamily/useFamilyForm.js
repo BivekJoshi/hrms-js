@@ -31,15 +31,18 @@ const useFamilyForm = ({ data, isLoadingFamily: isLoading }) => {
     enableReinitialize: true,
     validationSchema: FamilySchema,
     onSubmit: (values) => {
-      if (!values?.id || values?.id === "") {
-        handleRequest(values);        
+      console.log({"values": values})
+
+      if (values.family.some((member) => !member.id)) {
+        // If any family member has an id, call the PUT request (edit)
+        handleAddRequest(values);
       } else {
         handledEditRequest(values);
       }
     },
   });
 
-  const handleRequest = (values) => {
+  const handleAddRequest = (values) => {
     values = { ...values };
     addMutate(values, formik);
   };
@@ -51,5 +54,7 @@ const useFamilyForm = ({ data, isLoadingFamily: isLoading }) => {
 
   return { formik }
 };
+
+
 
 export default useFamilyForm;

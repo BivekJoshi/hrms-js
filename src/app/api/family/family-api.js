@@ -32,7 +32,10 @@ export const getFamilyById = (id) => {
 
 {/*________________________EDIT_____________________________________*/ }
 export const editFamily = async (formData, id) => {
-  const data = await axiosInstance.put(`/family-member/update/${id}`, formData?.family);
+  const newData = formData?.family;
+  const memberIds = newData && newData.map((member) => member?.id);
+  const queryString = memberIds.map((memberId) => `memberIds=${memberId}`).join('&');
+  const data = await axiosInstance.put(`/family-member/update/${id}?${queryString}`, formData?.family);
   return data;
 };
 
