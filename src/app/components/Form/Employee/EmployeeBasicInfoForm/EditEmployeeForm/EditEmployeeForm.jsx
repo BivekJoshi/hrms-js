@@ -10,7 +10,6 @@ import EmployeeQualificationDetailForm from "../../EmployeeQualificationDetailFo
 import EmployeeBasicInfoForm from "../EmployeeBasicInfoForm";
 import EmployeeHistoryDetailForm from "../../EmployeeHistoryDetailForm/EmployeeHistoryDetailForm";
 
-
 import useQualificationForm from "../../../../../hooks/employee/AddQualification/useQualificationForm";
 import useFamilyForm from "../../../../../hooks/employee/AddFamily/useFamilyForm";
 import useEditEmployeeForm from "../../../../../hooks/employee/EditEmployee/useEditEmployeeForm";
@@ -20,46 +19,62 @@ import { useGetEmployeeById } from "../../../../../hooks/employee/useEmployee";
 import useEmployeeHistoryForm from "../../../../../hooks/employee/AddEmployeeHistory/useEmployeeHistoryForm";
 import { useAddDocumentForm } from "../../../../../hooks/employee/AddDocument/useAddDocumentForm";
 
-
 const EditEmployeeForm = () => {
   const { id } = useParams();
 
   const steps = [
-    'Basic Details',
-    'Address Details',
-    'Family Details',
-    'Educational Details',
-    'Bank Details',
-    'Employee History',
-    'Document Details',
+    "Basic Details",
+    "Address Details",
+    "Family Details",
+    "Educational Details",
+    "Bank Details",
+    "Employee History",
+    "Document Details",
     // 'Other Details',
   ];
 
-  const { data, isLoading: employeeLoading } = useGetEmployeeById(id);
+  const { isEmployee } = useAuth();
+  const { data: loggedInUserData, isLoading: isLoadingUserData } = isEmployee
+    ? useGetLoggedInUserInfo()
+    : {};
 
-  const { formik: qualificationFormik, isLoading: isLoadingQualification } = useQualificationForm({ data, employeeLoading });
+  const { data, isLoading: employeeLoading } = !isEmployee
+    ? useGetEmployeeById(id)
+    : useGetEmployeeById(loggedInUserData?.id);
 
-  const { formik: familyFormik, isLoading: isLoadingFamily } = useFamilyForm({ data, employeeLoading, });
+  const {
+    formik: qualificationFormik,
+    isLoading: isLoadingQualification,
+  } = useQualificationForm({ data, employeeLoading });
+
+  const { formik: familyFormik, isLoading: isLoadingFamily } = useFamilyForm({
+    data,
+    employeeLoading,
+  });
 
   const { formik, isLoading } = useEditEmployeeForm({ data, employeeLoading });
 
-  const { formik: permanentFormik, isLoading: addressLoading } = usePermanentAddressForm({ data, employeeLoading });
+  const {
+    formik: permanentFormik,
+    isLoading: addressLoading,
+  } = usePermanentAddressForm({ data, employeeLoading });
 
   const { formik: bankFormik } = useAddBankForm({ data, employeeLoading });
 
-  const { formik: documentFormik } = useAddDocumentForm({ data, employeeLoading, });
+  const { formik: documentFormik } = useAddDocumentForm({
+    data,
+    employeeLoading,
+  });
 
-  const { formik: employeeHistoryFormik } = useEmployeeHistoryForm({ data, employeeLoading, });
+  const { formik: employeeHistoryFormik } = useEmployeeHistoryForm({
+    data,
+    employeeLoading,
+  });
 
   const getStepContent = (step) => {
     switch (step) {
       case 0:
-        return (
-          <EmployeeBasicInfoForm
-            formik={formik}
-            isLoading={isLoading}
-          />
-        );
+        return <EmployeeBasicInfoForm formik={formik} isLoading={isLoading} />;
 
       case 1:
         return (
@@ -87,26 +102,13 @@ const EditEmployeeForm = () => {
         );
 
       case 4:
-        return (
-          <EmployeeBankDetailForm
-            formik={bankFormik}
-          />
-        );
-
+        return <EmployeeBankDetailForm formik={bankFormik} />;
 
       case 5:
-        return (
-          <EmployeeHistoryDetailForm
-            formik={employeeHistoryFormik}
-          />
-        );
+        return <EmployeeHistoryDetailForm formik={employeeHistoryFormik} />;
 
       case 6:
-        return (
-          <EmployeeDocumentDetailForm
-            formik={documentFormik}
-          />
-        );
+        return <EmployeeDocumentDetailForm formik={documentFormik} />;
 
       // case 7:
       //   return <p>Hello World</p>;
@@ -117,13 +119,9 @@ const EditEmployeeForm = () => {
       default:
         throw new Error("Unknown Step");
     }
-  }
+  };
 
-
-  const handleNext = ({
-    activeStep,
-    setActiveStep
-  }) => {
+  const handleNext = ({ activeStep, setActiveStep }) => {
     switch (activeStep) {
       case 0:
         formik.setFieldTouched("");
@@ -189,7 +187,7 @@ const EditEmployeeForm = () => {
         break;
 
       case 6:
-        documentFormik.setFieldTouched('');
+        documentFormik.setFieldTouched("");
         if (documentFormik.dirty) {
           documentFormik.handleSubmit();
         }
@@ -199,7 +197,7 @@ const EditEmployeeForm = () => {
     }
     setActiveStep(activeStep + 1);
   };
-  return { getStepContent, handleNext, steps }
+  return { getStepContent, handleNext, steps };
 };
 
 export default EditEmployeeForm;

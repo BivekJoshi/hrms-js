@@ -7,26 +7,26 @@ import { useGetCompany } from "../../../hooks/company/useCompany";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
 
 const projectOptions = [
-  {
-    value: "WORK_IN_PROGRESS",
-    label: "Work in progress",
-    id: 1,
-  },
+  // {
+  //   value: "WORK_IN_PROGRESS",
+  //   label: "Work in progress",
+  //   id: 1,
+  // },
   {
     value: "COMPLETED",
     label: "Completed",
     id: 2,
   },
-  {
-    value: "DELAYED",
-    label: "Delayed",
-    id: 3,
-  },
-  {
-    value: "PENDING",
-    label: "Pending",
-    id: 4,
-  },
+  // {
+  //   value: "DELAYED",
+  //   label: "Delayed",
+  //   id: 3,
+  // },
+  // {
+  //   value: "PENDING",
+  //   label: "Pending",
+  //   id: 4,
+  // },
 ];
 
 const AddprojectFields = ({ onClose, isLoading }) => {
