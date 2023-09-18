@@ -37,11 +37,11 @@ export const useGetProjectTaskByTaskId = ({id}) => {
 };
 
 /*________________________ADD-REMOVE PROJECT EMPLOYEE PROJECT TASK_____________________________________*/
-export const useEditProjectTaskAssign = ({ onSuccess, id }) => {
+export const useEditProjectTaskAssign = ({ onSuccess}) => {
   const queryClient = useQueryClient();
   return useMutation(
     ["editAssignTaskToEmployee"],
-    (formData) => editAssignTaskToEmployee(formData, id),
+    (formData) => editAssignTaskToEmployee(formData),
     {
       onSuccess: (data, variables, context) => {
         toast.success("Successfully edited Company");

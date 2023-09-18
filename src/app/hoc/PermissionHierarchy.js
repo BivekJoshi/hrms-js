@@ -55,7 +55,6 @@ const PermissionHierarchy = {
   company: commonPermissions,
   // designation: { ...commonPermissions, hrAdmin: allPermissions },
   designation:commonPermissions ,
-
   department: commonPermissions,
   project: commonPermissions,
   users: commonPermissions,

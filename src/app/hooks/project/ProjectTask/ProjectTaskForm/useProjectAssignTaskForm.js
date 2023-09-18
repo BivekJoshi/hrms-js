@@ -10,7 +10,7 @@ const useProjectAssignTaskForm = ({data}) => {
       projectEmployeeId: "",
     },
     // validationSchema: ProjectTaskSchema,
-    enableReinitialize: "true",
+    enableReinitialize: true,
 
     onSubmit: (values) => {
       handleRequest(values);

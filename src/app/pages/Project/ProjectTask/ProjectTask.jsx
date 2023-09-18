@@ -20,21 +20,21 @@ const ProjectTask = () => {
     data: ProjectTask,
     isLoading,
     refetch,
-    isRefetching
+    isRefetching,
   } = useGetProjectTaskByProjectId();
-console.log(ProjectTask);
+  // console.log(ProjectTask);
   const [state, setState] = useState({ right: false });
   const [editedTask, setEditedTask] = useState({});
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [deletedTask, setDeletedTask] = useState({});
-  const {data:employeeData}=useGetEmployee();
-  console.log(employeeData);
+  const { data: employeeData } = useGetEmployee();
+  // console.log(employeeData);
 
   const [tableData, setTableData] = useState(ProjectTask);
 
-useEffect(() => {
-  setTableData(ProjectTask);
-}, [isRefetching,ProjectTask]);
+  useEffect(() => {
+    setTableData(ProjectTask);
+  }, [isRefetching, ProjectTask]);
   const handleCloseDeleteModal = () => setOpenDeleteModal(false);
 
   const deleteTaskMutation = useDeleteProjectTask({});
@@ -113,27 +113,28 @@ useEffect(() => {
       field: "projectEmployees",
       emptyValue: "-",
       width: "80",
-    //   render: (rowData) => {
-    //     const employeeIds = rowData.projectEmployees.map(
-    //       (employee) => employee.id
-    //     );
-    //     return employeeIds.join(", ");
-    //   },
-    // },
-    render: (rowData) => {
-      const employeeIds = rowData.projectEmployees.map(
-        (employee) => employee.id
-      );
-      console.log(employeeIds);
-      const matchedEmployees = employeeData.filter((employee) =>
-        employeeIds.includes(employee.id)
-      );
-      const matchedEmployeeNames = matchedEmployees.map((employee) =>
-        `${employee.firstName} ${employee.middleName} ${employee.lastName}`
-      );
-      return matchedEmployeeNames.join(", ");
+      //   render: (rowData) => {
+      //     const employeeIds = rowData.projectEmployees.map(
+      //       (employee) => employee.id
+      //     );
+      //     return employeeIds.join(", ");
+      //   },
+      // },
+      render: (rowData) => {
+        const employeeIds = rowData.projectEmployees.map(
+          (employee) => employee.empId
+        );
+        // console.log(employeeIds);
+        const matchedEmployees = employeeData.filter((employee) =>
+          employeeIds.includes(employee.id)
+        );
+        const matchedEmployeeNames = matchedEmployees.map(
+          (employee) =>
+            `${employee.firstName} ${employee.middleName} ${employee.lastName}`
+        );
+        return matchedEmployeeNames.join(", ");
+      },
     },
-  },
   ];
 
   return (
@@ -156,7 +157,10 @@ useEffect(() => {
                 //   onClick={toggleDrawer(anchor, false)}
                 //   onKeyDown={toggleDrawer(anchor, false)}
               >
-                <ProjectTaskField data={editedTask} onClose={()=>setState({right:false})}/>
+                <ProjectTaskField
+                  data={editedTask}
+                  onClose={() => setState({ right: false })}
+                />
               </Box>
             </SwipeableDrawer>
           </React.Fragment>
@@ -191,17 +195,17 @@ useEffect(() => {
         }}
         actions={[
           {
-            icon: () => <ModeEditOutlineIcon />,
+            icon: () => <ModeEditOutlineIcon sx={{ color: "#01579b" }} />,
             tooltip: "Edit Project TaskDetails",
             onClick: (event, rowData) => handleEditRowData(rowData),
           },
           {
-            icon: () => <SaveIcon />,
+            icon: () => <SaveIcon sx={{ color: "#01579b" }} />,
             tooltip: "Save User",
             onClick: (event, rowData) => handleAssignTask(rowData),
           },
           {
-            icon: () => <DeleteIcon />,
+            icon: () => <DeleteIcon sx={{ color: "#01579b" }} />,
             tooltip: "Delete Task",
             onClick: (event, rowData) => handleDeleteTask(rowData),
           },

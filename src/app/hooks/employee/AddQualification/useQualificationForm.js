@@ -36,10 +36,11 @@ const useQualificationForm = ({ data, isLoadingQualification: isLoading }) => {
     enableReinitialize: "true",
     validationSchema: QualificationSchema,
     onSubmit: (values) => {
-      if (qualificationDetails.length > 0) {
-        handledEditRequest(values);
-      } else {
+
+      if (values.education.some((edu)=>!edu.id)) {
         handleRequest(values);
+      } else {
+        handledEditRequest(values);
       }
     },
   });

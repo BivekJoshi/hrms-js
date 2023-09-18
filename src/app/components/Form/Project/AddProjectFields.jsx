@@ -94,7 +94,6 @@ const AddprojectFields = ({ onClose, isLoading }) => {
             label="Deadline Date"
             type="date"
             fullWidth
-            required
             value={formik.values.endDate}
             onChange={formik.handleChange}
             error={formik.touched.endDate && Boolean(formik.errors.endDate)}
@@ -105,7 +104,7 @@ const AddprojectFields = ({ onClose, isLoading }) => {
           />
         </Grid>
 
-        <Grid item xs={12} sm={6}>
+        {/* <Grid item xs={12} sm={6}>
           <TextField
             name="taskStatus"
             label="Project Status"
@@ -132,9 +131,9 @@ const AddprojectFields = ({ onClose, isLoading }) => {
               </MenuItem>
             ))}
           </TextField>
-        </Grid>
+        </Grid> */}
 
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={12}>
           {/* <TextField
             id="projectLeadId"
             name="projectLeadId"

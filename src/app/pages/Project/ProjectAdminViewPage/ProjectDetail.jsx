@@ -22,7 +22,6 @@ const ProjectDetail = () => {
   const { data: projectEmployeeData, isLoading } = useGetProjectEmployeeById(
     id
   );
-  console.log(projectEmployeeData, "projectEmployeeData");
 
   const { data: employeeData } = useGetEmployee();
   const { data: projectData } = useGetProject();
