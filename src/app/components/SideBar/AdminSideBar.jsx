@@ -368,8 +368,9 @@ export default function AdminSidebar() {
             alignItems: "center",
             padding: "10px",
             flexDirection: "column",
-            position: "fixed",
-            bottom: "0",  
+            // position: "fixed",
+            // bottom: "0", 
+            // marginTop:"5" 
           }}
         >
           {/* <Button

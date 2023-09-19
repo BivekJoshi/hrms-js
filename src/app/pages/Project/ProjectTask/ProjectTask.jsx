@@ -9,7 +9,7 @@ import SaveIcon from "@material-ui/icons/Save";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import { useState } from "react";
 import { EditProjectTaskModal } from "../ProjectModal/ProjectModal";
-import { Box, Button, SwipeableDrawer } from "@mui/material";
+import { Box, Button, Chip, SwipeableDrawer } from "@mui/material";
 import ProjectTaskField from "../../../components/Form/Project/ProjectTask/ProjectTaskFields";
 import DeleteIcon from "@mui/icons-material/Delete";
 import DeleteConfirmationModal from "../../../components/Modal/DeleteConfirmationModal";
@@ -100,13 +100,82 @@ const ProjectTask = () => {
       title: "Priority",
       field: "priority",
       emptyValue: "-",
-      width: "80",
+      width: "180px",
+      cellStyle: {
+        whiteSpace: "nowrap",
+      },
+      sorting: false,
+      render: (rowData) => {
+        const priority = rowData.priority;
+        let chipColor = "";
+        let label="";
+
+        if (priority === "HIGH") {
+          chipColor = "red";
+          label="High";
+        } else if (priority === "MEDIUM") {
+          chipColor = "#b042ff";
+          label="Medium";
+        } else if (priority === "LOW") {
+          chipColor = "orange";
+          label="Low"
+        }
+
+        return (
+          <Chip
+            label={label}
+            style={{
+              backgroundColor: chipColor,
+              color: "white",
+              padding:"0px",
+              width:"7rem"
+
+            }}
+          />
+        );
+      },
     },
     {
       title: "Status",
       field: "status",
       emptyValue: "-",
-      width: "80",
+      width: "180px",
+      cellStyle: {
+        whiteSpace: "nowrap",
+      },
+      sorting: false,
+      render: (rowData) => {
+        const status = rowData.status;
+        let chipColor = "";
+        let label="";
+
+        if (status === "WORK_IN_PROGRESS") {
+          chipColor = "#efaf67";
+          label="WIP";
+        } else if (status === "COMPLETED") {
+          chipColor = "#9bedff";
+          label="Completed";
+        } else if (status === "DELAYED") {
+          chipColor = "#f9aeae";
+          label="Delayed"
+        }else {
+          chipColor = "#83f28f";
+          label="Pending"
+        }
+
+        return (
+          <Chip
+            label={label}
+            style={{
+              backgroundColor: chipColor,
+              color: "#000",
+              padding:"0px",
+              margin:"0px",
+              width:"7rem"
+            }}
+          />
+        );
+      },
     },
     {
       title: "Assign To",
