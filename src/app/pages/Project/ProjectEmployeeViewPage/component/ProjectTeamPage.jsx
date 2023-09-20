@@ -2,9 +2,10 @@ import React from "react";
 import EmployeeCard from "../../../../components/cards/Employee/EmployeeCard";
 import { Box, Grid } from "@mui/material";
 import { useGetTaskLoggedInUser } from "../../../../hooks/project/ProjectTask/useProjectTask";
+import { useGetProjectEmployeeByLoggedInUser } from "../../../../hooks/project/projectEmployee/useProjectEmployee";
 
 function ProjectTeamPage() {
-  const { data: logInUserData } = useGetTaskLoggedInUser();
+  const { data: logInUserData } = useGetProjectEmployeeByLoggedInUser();
   const employeeData = [
     {
       isActive: true,
@@ -53,7 +54,7 @@ function ProjectTeamPage() {
               {project?.projectEmployees?.map((employ) => (
                 <Box key={employ.empId}>
                   {employ.assignedOn}
-                  <Grid
+                  {/* <Grid
                     container
                     item
                     gap={1}
@@ -83,7 +84,7 @@ function ProjectTeamPage() {
                         // employeePhoto={employee?.employeePhotoPath}
                       />
                     ))}
-                  </Grid>
+                  </Grid> */}
                 </Box>
               ))}
             </Box>
