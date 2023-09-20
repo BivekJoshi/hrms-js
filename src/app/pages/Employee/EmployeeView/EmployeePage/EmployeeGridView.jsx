@@ -1,4 +1,4 @@
-import { Grid, Box, Pagination, Stack } from "@mui/material";
+import { Box, Grid, Pagination, Stack } from "@mui/material";
 import React, { useState } from "react";
 import EmployeeCard from "../../../../components/cards/Employee/EmployeeCard";
 import { useGetEmployeeData } from "../../../../hooks/employee/useEmployee";
@@ -10,7 +10,6 @@ const EmployeeGridView = ({ employeeData }) => {
 
   const pageSize = employeePageData?.pageSize || 10;
   const totalPages = employeePageData?.totalPages || 0;
-
   const startIndex = (currentPage - 1) * pageSize;
   const endIndex = startIndex + pageSize;
 
@@ -51,7 +50,7 @@ const EmployeeGridView = ({ employeeData }) => {
         ))}
       </Grid>
 
-      <Stack padding="2rem" display="grid" justifyContent={"center"}>
+      <Box padding="2rem" display="grid" justifyContent={"center"}>
         <Pagination
           count={totalPages}
           page={currentPage}
@@ -59,9 +58,8 @@ const EmployeeGridView = ({ employeeData }) => {
           boundaryCount={3}
           size="large"
           color="primary"
-          
         />
-      </Stack>
+      </Box>
     </>
   );
 };
