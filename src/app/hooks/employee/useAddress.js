@@ -7,6 +7,15 @@ import {
 } from '../../api/address/address-api';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { getEmployeeById } from '../../api/employee/employee-api';
+
+export const useGetEmployeeById = () => {
+  const {id}=useParams();
+  return useQuery(['getEmployeeById', id], () => getEmployeeById(id), {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
+};
 
 export const usePermanentAddAddress = ({ onSuccess }) => {
   const queryClient = useQueryClient();
@@ -18,7 +27,7 @@ export const usePermanentAddAddress = ({ onSuccess }) => {
       onSuccess: (data, variables, context) => {
         toast.success('Permanent address added successfully');
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries('getAddressById');
+        queryClient.invalidateQueries('getEmployeeById');
       },
       onError: (err, _variables, _context) => {
         toast.error(`error: ${err.message}`);
@@ -72,7 +81,7 @@ export const useEditAddress = ({ onSuccess }) => {
       onSuccess: (data, variables, context) => {
         toast.success('Address edited successfully');
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries('getAddressById');
+        queryClient.invalidateQueries('getEmployeeById');
       },
       onError: (err, _variables, _context) => {
         toast.error(`error: ${err.message}`);

@@ -1,91 +1,65 @@
 import React from "react";
 import EmployeeCard from "../../../../components/cards/Employee/EmployeeCard";
 import { Box, Grid } from "@mui/material";
-import { useGetTaskLoggedInUser } from "../../../../hooks/project/ProjectTask/useProjectTask";
 
-function ProjectTeamPage() {
-  const { data: logInUserData } = useGetTaskLoggedInUser();
-  const employeeData = [
-    {
-      isActive: true,
-      id: 1,
-      firstName: "Sujana",
-      lastName: "Amgain",
-      officeEmail: "sujana@dghub.io",
-      mobileNumber: "0987654321",
-      gender: "Male",
-    },
-    {
-      isActive: true,
-      id: 1,
-      firstName: "Sujana",
-      lastName: "Amgain",
-      officeEmail: "sujana@dghub.io",
-      mobileNumber: "0987654321",
-      gender: "Male",
-    },
-    {
-      isActive: true,
-      id: 1,
-      firstName: "Sujana",
-      lastName: "Amgain",
-      officeEmail: "sujana@dghub.io",
-      mobileNumber: "0987654321",
-      gender: "Male",
-    },
-    {
-      isActive: true,
-      id: 1,
-      firstName: "Sujana",
-      lastName: "Amgain",
-      officeEmail: "sujana@dghub.io",
-      mobileNumber: "0987654321",
-      gender: "Male",
-    },
-  ];
+function ProjectTeamPage({
+  projectWiseEmployeeData,
+  employeeData,
+  projectData,
+}) {
+  const getProjectName = (projectId) => {
+    const project = projectData.find((project) => project.id === projectId);
+    if (project) {
+      return project.projectName;
+    }
+    return "Project Not Found";
+  };
+
   return (
     <Box>
-      {logInUserData ? (
-        logInUserData.map((project, index) => (
-          <Box key={index}>
-            <h3 style={{ padding: " 0 0 1rem 0 " }}>{project.name}</h3>
-            <Box>
-              {project?.projectEmployees?.map((employ) => (
-                <Box key={employ.empId}>
-                  {employ.assignedOn}
-                  <Grid
-                    container
-                    item
-                    gap={1}
-                    className="project-card-control"
-                    sx={{
-                      display: "grid",
-                      gridTemplateColumns:
-                        "repeat(auto-fit, minmax(250px, 1fr))",
-                      gap: "1rem",
-                    }}
-                  >
-                    {employeeData?.map((employee, index) => (
+      {projectWiseEmployeeData ? (
+        projectWiseEmployeeData.map((project, index) => (
+          <Box key={index} sx={{ marginTop: "3rem" }}>
+            <h3 style={{ padding: " 0 0 1rem 0 " }}>
+              Project : {getProjectName(project?.projectId)}
+            </h3>
+            <Box key={project?.projecctId}>
+              <Grid
+                container
+                item
+                gap={1}
+                className="project-card-control"
+                sx={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+                  gap: "1rem",
+                }}
+              >
+                {project?.employeeIds?.map((employeeId, index) => {
+                  const employee = employeeData.find(
+                    (emp) => emp.id === employeeId
+                  );
+                  if (employee) {
+                    return (
                       <EmployeeCard
                         key={index}
-                        IsActive={employee?.isActive || ""}
                         EmployeeId={employee?.id || ""}
                         EFirstName={employee?.firstName || ""}
                         EMiddleName={employee?.middleName || ""}
                         ELastName={employee?.lastName || ""}
                         OfficeEmail={employee?.officeEmail || ""}
                         MobileNumber={employee?.mobileNumber || ""}
-                        // PositionName={employee?.position?.positionName || ""}
-                        // PositionLevel={employee?.position?.positionLevel || ""}
                         EGender={employee?.gender || ""}
-                        // EmployeeData={employeeData}
-                        // ProgressBarRes={employee?.progressBarRes || ""}
-                        // employeePhoto={employee?.employeePhotoPath}
+                        PositionName={employee?.position?.positionName || ""}
+                        PositionLevel={employee?.position?.positionLevel || ""}
+                        employeePhoto={employee?.employeePhotoPath}
                       />
-                    ))}
-                  </Grid>
-                </Box>
-              ))}
+                    );
+                  } else {
+                    return null;
+                  }
+                })}
+              </Grid>
             </Box>
           </Box>
         ))

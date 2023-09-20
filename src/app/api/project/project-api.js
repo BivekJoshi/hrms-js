@@ -29,6 +29,12 @@ export const getDeactivatedProject = async () => {
     return data;
 };
 
+{/*________________________GET-PROJECT_WISE_EMPLOYEE_____________________________________*/ }
+export const getProjectWiseEmployee = async (employeeId) => {
+    const data = await axiosInstance.get(`/project/project-wise-employees/${employeeId}`);
+    return data;
+};
+
 {/*________________________EDIT-TO-ACTIVATE-PROJECT_____________________________________*/ }
 export const addActiveProject = async (formData) => {
     const { projectId } = formData;

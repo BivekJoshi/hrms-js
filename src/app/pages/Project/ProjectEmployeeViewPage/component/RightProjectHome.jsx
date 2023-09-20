@@ -8,7 +8,6 @@ export const RightProjectHome = (props) => {
   const {data:loggedInUserData}=useGetLoggedInUser();
   const employeeId=loggedInUserData?.employeeId;
   const {data:employeeInvolvedProject}=useGetProjectByEmployeeIdInvolved(employeeId);
-  // console.log(employeeInvolvedProject,"Data hai ma chai ");
   
   const progress = 5 * 100;
 
@@ -16,7 +15,7 @@ export const RightProjectHome = (props) => {
     <Box display="grid" gap="1rem">
       <h3>Your Projects</h3>
 
-      {employeeInvolvedProject?.map((data, index) => (
+      {employeeInvolvedProject?.slice(0, 4).map((data, index) => (
         <Box bgcolor="#ededed66" padding="1rem" boxShadow="5">
           <Box
             display="flex"
@@ -33,9 +32,9 @@ export const RightProjectHome = (props) => {
           <Typography fontSize=".8rem">Team Size: {data.TeamSize}</Typography>
           <Box display="flex" flexDirection="row" gap="1rem">
             <Typography fontSize=".8rem">
-              Start Data :{data.startDate}{" "}
+              Start Date :{data.startDate}{" "}
             </Typography>
-            <Typography fontSize=".8rem">End Data :{data.endDate} </Typography>
+            <Typography fontSize=".8rem">End Date :{data.endDate} </Typography>
           </Box>
           <Typography fontSize=".8rem">{data.projectInfo}</Typography>
           <LinearProgress variant="determinate" value={progress} />

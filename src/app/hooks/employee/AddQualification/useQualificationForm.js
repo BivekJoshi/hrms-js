@@ -37,6 +37,7 @@ const useQualificationForm = ({ data, isLoadingQualification: isLoading }) => {
     validationSchema: QualificationSchema,
     onSubmit: (values) => {
 
+      console.log({"values": values})
       if (values.education.some((edu)=>!edu.id)) {
         handleRequest(values);
       } else {

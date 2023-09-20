@@ -24,8 +24,8 @@ export const addQualification = async (formData, id) => {
 /*________________________EDIT_____________________________________*/
 export const editQualification = async (formData, id) => {
   const newData = formData?.education;
-  const qIds = newData && newData.map((edu = edu?.id));
-  const queryString = qIds.map((eduId) => `qIds=${eduId}`).join("&");
+  const qIds = newData && newData.map((education) => education?.id);
+  const queryString = qIds.map((qId) => `qIds=${qId}`).join("&");
   const data = await axiosInstance.put(
     `/qualification/update/${id}?${queryString}`,
     formData?.education

@@ -2,7 +2,16 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
 import { addfamily, deleteFamily, editFamily, getFamilyById } from '../../api/family/family-api';
 import { useParams } from 'react-router-dom';
+import { getEmployeeById } from '../../api/employee/employee-api';
 
+
+export const useGetEmployeeById = () => {
+    const {id}=useParams();
+    return useQuery(['getEmployeeById', id], () => getEmployeeById(id), {
+      refetchInterval: false,
+      refetchOnWindowFocus: false,
+    });
+  };
 
 {/*________________________POST_____________________________________*/ }
 export const useAddFamily = ({ onSuccess }) => {
@@ -14,7 +23,7 @@ export const useAddFamily = ({ onSuccess }) => {
             onSuccess: (data, variables, context) => {
                 toast.success(`Successfully added family member`);
                 onSuccess && onSuccess(data, variables, context);
-                queryClient.invalidateQueries('getFamilyById');
+                queryClient.invalidateQueries('getEmployeeById');
             },
             onError: (err, _variables, _context) => {
                 toast.error(`error: ${err.message}`);
@@ -41,7 +50,7 @@ export const useEditFamily = ({ onSuccess }) => {
             onSuccess: (data, variables, context) => {
                 toast.success('Family edited sucessfully');
                 onSuccess && onSuccess(data, variables, context);
-                queryClient.invalidateQueries('getFamilyById');
+                queryClient.invalidateQueries('getEmployeeById');
             },
             onError: (err, _variables, _context) => {
                 toast.error(`error: ${err.message}`);
@@ -59,7 +68,7 @@ export const useDeleteFamily = ({ onSuccess }) => {
             onSuccess: (data, variables, context) => {
                 toast.success('Family member deleted successfully');
                 onSuccess && onSuccess(data, variables, context);
-                queryClient.invalidateQueries('getFamilyById');
+                queryClient.invalidateQueries('getEmployeeById');
             },
             onError: (err, _variables, _context) => {
                 toast.error(`Error: ${err.message}`);

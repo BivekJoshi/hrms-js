@@ -1,15 +1,53 @@
-import { Avatar, Box, Chip, Divider, Stack, Typography } from "@mui/material";
-import React from "react";
+import { Avatar, Box, Button, Chip, Divider, Stack, SwipeableDrawer, Typography } from "@mui/material";
+import React, { useState } from "react";
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 import Male from "../../../../../assets/male.png";
 import { useGetTaskLoggedInUser } from "../../../../hooks/project/ProjectTask/useProjectTask";
+import ProjectTaskField from "../../../../components/Form/Project/ProjectTask/ProjectTaskFields";
 
-export const MyTask = (props) => {
+export const MyTask = () => {
   const {data: loginUsertask}=useGetTaskLoggedInUser();
+  const [state, setState] = useState({ right: false });
+
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (
+      event?.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+    setState({ ...state, [anchor]: open });
+  };
 
   return (
     <Box padding="2rem 0 0 0">
+      <div style={{display:"flex",justifyContent:"space-between"}}>
       <h3>My Task</h3>
+      <div>
+        {["right"].map((anchor) => (
+          <React.Fragment key={anchor}>
+            <Button onClick={toggleDrawer(anchor, true)} variant="contained">
+              +
+            </Button>
+            <SwipeableDrawer
+              anchor={anchor}
+              open={state[anchor]}
+              onClose={toggleDrawer(anchor, false)}
+              onOpen={toggleDrawer(anchor, true)}
+            >
+              <Box
+                sx={{ width: 350, padding: 5 }}
+                role="presentation"
+                //   onClick={toggleDrawer(anchor, false)}
+                //   onKeyDown={toggleDrawer(anchor, false)}
+              >
+                <ProjectTaskField  onClose={() => setState({ right: false })}/>
+              </Box>
+            </SwipeableDrawer>
+          </React.Fragment>
+        ))}
+      </div>
+      </div>
       <Box
         display="grid"
         gridTemplateColumns="repeat(auto-fit, minmax(300px, 1fr))"
