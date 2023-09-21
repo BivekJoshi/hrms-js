@@ -64,7 +64,7 @@ const DeactivatedOfficeResource = () => {
         exportButton: true,
         padding: "dense",
         margin: 50,
-        pageSize: 20,
+        pageSize: 5,
         emptyRowsWhenPaging: false,
         headerStyle: {
           backgroundColor: "#01579b",
