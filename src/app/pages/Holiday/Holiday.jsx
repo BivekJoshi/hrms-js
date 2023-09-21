@@ -17,9 +17,10 @@ import FormModal from "../../components/Modal/FormModal";
 import HolidayFields from "../../components/Form/Holiday/HolidayFields";
 import EmailForHoliday from "../Email/EmailForHoliday";
 import useAuth from "../../../auth/hooks/component/login/useAuth";
+import { OpenHoliday } from "./HolidayModal/HolidayModal";
 
 const Holiday = ({ permissions }) => {
-  const { isEmployee,isHrClerk } = useAuth();
+  const { isEmployee, isHrClerk } = useAuth();
   const calendarRef = useRef(null);
   const [events, setEvents] = useState([]);
 
@@ -192,14 +193,10 @@ const Holiday = ({ permissions }) => {
       )} */}
 
       {openModal && (
-        <FormModal
+        <OpenHoliday
+          id={getEventID}
           open={openModal}
-          onClose={() => setOpenSubmitModal(false)}
-          formComponent={
-            <div>
-              <p>hello</p>
-            </div>
-          }
+          handleCloseModal={() => setOpenModal(false)}
         />
       )}
     </>

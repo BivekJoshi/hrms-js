@@ -50,18 +50,18 @@ const CompanyTableView = ({
 
   const actions = [
     {
-      icon: () => (
-        <HocButton
-          permissions={permissions?.canEdit}
-          icon={<ModeEditOutlineIcon />}
-        />
+      icon: () => (<ModeEditOutlineIcon />
+        // <HocButton
+        //   permissions={permissions?.canEdit}
+        //   icon={<ModeEditOutlineIcon />}
+        // />
       ),
       tooltip: "Edit Company",
       onClick: (event, rowData) => handleEditCompany(rowData),
     },
     {
-      icon: () => (
-        <HocButton permissions={permissions?.canDelete} icon={<DeleteIcon />} />
+      icon: () => (<DeleteIcon />
+        // <HocButton permissions={permissions?.canDelete} icon={<DeleteIcon />} />
       ),
       tooltip: "Delete Company",
       onClick: (event, rowData) => handleDeleteCompany(rowData),

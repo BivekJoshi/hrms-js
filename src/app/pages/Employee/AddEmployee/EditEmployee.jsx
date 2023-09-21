@@ -38,7 +38,7 @@ const EditEmployee = () => {
     <Container component="main" maxWidth="xlg" sx={{ mt: 5 }}>
       <Paper variant="plain" sx={{ my: { xs: 0, md: 6 }, p: { xs: 0, md: 3 } }}>
         <Typography component="h1" variant="h4" align="center">
-          Edit Employee
+          Edit Details
         </Typography>
         <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }} alternativeLabel>
           {steps.map((label) => (
