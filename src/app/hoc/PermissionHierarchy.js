@@ -53,13 +53,18 @@ const commonPermissions = {
 
 const PermissionHierarchy = {
   company: commonPermissions,
-  designation: { ...commonPermissions, hrAdmin: allPermissions },
+  // designation: { ...commonPermissions, hrAdmin: allPermissions },
+  designation:commonPermissions ,
   department: commonPermissions,
   project: commonPermissions,
   users: commonPermissions,
   event: commonPermissions,
   todo: allPermissions,
   leaveType:commonPermissions,
+  resourceDeactivated:commonPermissions,
+  officeResource:commonPermissions,
+  employeeResource:commonPermissions,
+  holiday:commonPermissions,
 };
 
 export default PermissionHierarchy;

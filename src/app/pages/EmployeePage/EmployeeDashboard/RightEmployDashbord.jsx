@@ -5,9 +5,24 @@ import { ButtonComponent } from "../../../components/Button/ButtonComponent";
 import { Divider, Typography } from "@mui/material";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
 import { useNavigate } from "react-router-dom";
+import { useGetLoggedInUserLeaveBalance } from "../../../hooks/leave/useLeave";
 
 export const RightEmployDashbord = (props) => {
   const navigate = useNavigate();
+  const { data: leavebalance, isLoading } = useGetLoggedInUserLeaveBalance();
+
+  // const sumOfLeaveTaken = leavebalance?.reduce((accumulator, currentValue) => {
+  //   return accumulator + currentValue?.leaveTaken;
+  // }, 0);
+
+  // const sumOfLeaveBalance = leavebalance.reduce((accumulator, currentValue) => {
+  //   return accumulator + currentValue.leaveBalance;
+  // }, 0);
+  // const avegLeaveBalance=sumOfLeaveBalance/leavebalance.length;
+  const sumOfLeaveTaken=0;
+  const avegLeaveBalance=0;
+
+
   const { mode } = useContext(ThemeModeContext);
   return (
     <Box>
@@ -69,11 +84,11 @@ export const RightEmployDashbord = (props) => {
             justifyContent="space-between"
           >
             <Box>
-              6<Typography>LEAVE TAKEN</Typography>
+            <Typography>{sumOfLeaveTaken}</Typography>LEAVE TAKEN
             </Box>
             <Divider sx={{ border: "1px solid black" }} />
             <Box alignSelf="center">
-              <Typography>6</Typography> REMAINING
+              <Typography>{avegLeaveBalance}</Typography> REMAINING
             </Box>
           </Box>
           <Box alignSelf="center" paddingTop="2rem">

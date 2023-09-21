@@ -25,7 +25,7 @@ export const useAddQualification = ({ onSuccess }) => {
     (formData) => addQualification(formData, id),
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Qualification added successfully');
+        toast.success('Qualification added Successfully');
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries('getQualificationById');
       },
@@ -45,7 +45,7 @@ export const useEditQualification = ({onSuccess}) => {
   },
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Qualification edited sucessfully');
+        toast.success('Qualification edited Sucessfully');
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries('getQualificationById');
       },

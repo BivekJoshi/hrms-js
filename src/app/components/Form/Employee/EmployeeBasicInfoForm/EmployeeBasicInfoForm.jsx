@@ -1,4 +1,4 @@
-import { Grid, MenuItem, TextField } from "@mui/material";
+import { Autocomplete, Grid, MenuItem, TextField } from "@mui/material";
 import React, { useContext } from "react";
 import { useGetCompany } from "../../../../hooks/company/useCompany";
 import { useGetDesignation } from "../../../../hooks/designation/useDesignation";
@@ -347,6 +347,33 @@ const EmployeeBasicInfoForm = ({ formik, isLoading }) => {
                 </MenuItem>
               ))}
           </TextField>
+          {/* <Autocomplete
+            id="positionId"
+            name="positionId"
+            options={designationData}
+            getOptionLabel={(option) => `${option?.positionName} (${option?.positionLevel})`}
+            value={formik.values.positionId || null}
+            onChange={(event, value) =>
+              formik.setFieldValue("positionId", value)
+            }
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Designation Name"
+                fullWidth
+                required
+                error={
+                  formik.touched.positionId && Boolean(formik.errors.positionId)
+                }
+                helperText={
+                  formik.touched.positionId && formik.errors.positionId
+                }
+                variant="outlined"
+                autoFocus
+                InputLabelProps={{ shrink: true }}
+              />
+            )}
+          /> */}
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
           <TextField

@@ -14,6 +14,7 @@ import ProgressbyAll from "../../../pages/Employee/ProgressEmployeeData/Progress
 import PopOver from "../../../../theme/overrides/PopOver";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
 import { DOC_URL } from "../../../../auth/axiosInterceptor";
+import useAuth from "../../../../auth/hooks/component/login/useAuth";
 
 const EmployeeCard = ({
   IsActive,
@@ -29,6 +30,7 @@ const EmployeeCard = ({
   ProgressBarRes,
   employeePhoto,
 }) => {
+  const { isEmployee } = useAuth();
   const [open, setOpen] = useState(false);
   const [openEmailForm, setOpenEmailForm] = useState(false);
   const { mode } = useContext(ThemeModeContext); // Accessing mode from context
@@ -89,89 +91,95 @@ const EmployeeCard = ({
           }}
         >
           <Box display="flex" justifyContent={"end"}>
-            <PopOver
-              triggerContent={
-                <Button
-                  style={{
-                    marginTop: "5px",
-                    fontSize: ".7rem",
-                    padding: "1px 5px",
-                  }}
-                  onClick={handleClick}
-                  variant="outlined"
-                  color={(IsActive = true ? "success" : "warning")}
-                >
-                  {(IsActive = true ? "Active" : "InActive")}
-                </Button>
-              }
-              popoverContent={
-                <Typography sx={{ p: 1 }}>Inactive Employee</Typography>
-              }
-            />
+            {isEmployee ? (
+              ""
+            ) : (
+              <>
+                <PopOver
+                  triggerContent={
+                    <Button
+                      style={{
+                        marginTop: "5px",
+                        fontSize: ".7rem",
+                        padding: "1px 5px",
+                      }}
+                      onClick={handleClick}
+                      variant="outlined"
+                      color={(IsActive = true ? "success" : "warning")}
+                    >
+                      {(IsActive = true ? "Active" : "InActive")}
+                    </Button>
+                  }
+                  popoverContent={
+                    <Typography sx={{ p: 1 }}>Inactive Employee</Typography>
+                  }
+                />
 
-            <Box>
-              <Button
-                ref={anchorRef}
-                id="composition-button"
-                aria-controls={open ? "composition-menu" : undefined}
-                aria-expanded={open ? "true" : undefined}
-                aria-haspopup="true"
-                onClick={handleToggle}
-              >
-                <MoreHorizIcon />
-              </Button>
-              <Popper
-                open={open}
-                anchorEl={anchorRef.current}
-                role={undefined}
-                placement="bottom-start"
-                transition
-                disablePortal
-              >
-                {({ TransitionProps, placement }) => (
-                  <Grow
-                    {...TransitionProps}
-                    style={{
-                      transformOrigin:
-                        placement === "bottom-start"
-                          ? "left top"
-                          : "left bottom",
-                    }}
+                <Box>
+                  <Button
+                    ref={anchorRef}
+                    id="composition-button"
+                    aria-controls={open ? "composition-menu" : undefined}
+                    aria-expanded={open ? "true" : undefined}
+                    aria-haspopup="true"
+                    onClick={handleToggle}
                   >
-                    <Paper>
-                      <ClickAwayListener onClickAway={handleClose}>
-                        <MenuList
-                          autoFocusItem={open}
-                          id="composition-menu"
-                          aria-labelledby="composition-button"
-                          onKeyDown={handleListKeyDown}
-                          style={{ fontSize: ".8rem" }}
-                        >
-                          <MenuItem
-                            onClick={() => {
-                              navigate(`edit/${EmployeeId}`);
-                              handleClose();
-                            }}
-                            style={{ fontSize: ".8rem" }}
-                          >
-                            Edit
-                          </MenuItem>
-                          <MenuItem
-                            onClick={() => {
-                              navigate(`${EmployeeId}`);
-                              handleClose();
-                            }}
-                            style={{ fontSize: ".8rem" }}
-                          >
-                            View Profile
-                          </MenuItem>
-                        </MenuList>
-                      </ClickAwayListener>
-                    </Paper>
-                  </Grow>
-                )}
-              </Popper>
-            </Box>
+                    <MoreHorizIcon />
+                  </Button>
+                  <Popper
+                    open={open}
+                    anchorEl={anchorRef.current}
+                    role={undefined}
+                    placement="bottom-start"
+                    transition
+                    disablePortal
+                  >
+                    {({ TransitionProps, placement }) => (
+                      <Grow
+                        {...TransitionProps}
+                        style={{
+                          transformOrigin:
+                            placement === "bottom-start"
+                              ? "left top"
+                              : "left bottom",
+                        }}
+                      >
+                        <Paper>
+                          <ClickAwayListener onClickAway={handleClose}>
+                            <MenuList
+                              autoFocusItem={open}
+                              id="composition-menu"
+                              aria-labelledby="composition-button"
+                              onKeyDown={handleListKeyDown}
+                              style={{ fontSize: ".8rem" }}
+                            >
+                              <MenuItem
+                                onClick={() => {
+                                  navigate(`edit/${EmployeeId}`);
+                                  handleClose();
+                                }}
+                                style={{ fontSize: ".8rem" }}
+                              >
+                                Edit
+                              </MenuItem>
+                              <MenuItem
+                                onClick={() => {
+                                  navigate(`${EmployeeId}`);
+                                  handleClose();
+                                }}
+                                style={{ fontSize: ".8rem" }}
+                              >
+                                View Profile
+                              </MenuItem>
+                            </MenuList>
+                          </ClickAwayListener>
+                        </Paper>
+                      </Grow>
+                    )}
+                  </Popper>
+                </Box>
+              </>
+            )}
           </Box>
           <Stack
             style={{
@@ -222,7 +230,6 @@ const EmployeeCard = ({
                   </h3>
                 }
               />
-              {/* {EFirstName} {EMiddleName} {ELastName} */}
             </Typography>
             <Box padding={"0 1rem"}>
               <Typography variant="body2" gutterBottom>
@@ -242,55 +249,59 @@ const EmployeeCard = ({
               </Typography>
             </Box>
           </Stack>
-          <Stack
-            style={{
-              fontSize: ".9rem",
-            }}
-          >
-            <Box
-              backgroundColor={mode === "light" ? "#f5f5f5" : "#4d4c4c"}
-              padding=".5rem"
-              borderRadius=".5rem"
+          {isEmployee ? (
+            ""
+          ) : (
+            <Stack
+              style={{
+                fontSize: ".9rem",
+              }}
             >
-              <PopOver
-                triggerContent={
-                  <Stack
-                    onClick={handleOpenEmailform}
-                    spacing={{ xs: 1 }}
-                    direction="row"
-                    useFlexGap
-                    flexWrap="wrap"
-                    alignItems="center"
-                  >
-                    <Email />
-                    <Typography variant="p" style={{ margin: "10px 0" }}>
-                      {OfficeEmail || ""}
-                    </Typography>
-                  </Stack>
-                }
-                popoverContent={
-                  <Typography sx={{ p: 1 }}>
-                    Send Email To {EFirstName || ""} {EMiddleName || ""}{" "}
-                    {ELastName || ""}
-                  </Typography>
-                }
-              />
-
-              <Stack
-                spacing={{ xs: 1 }}
-                direction="row"
-                useFlexGap
-                flexWrap="wrap"
-                alignItems="center"
+              <Box
+                backgroundColor={mode === "light" ? "#f5f5f5" : "#4d4c4c"}
+                padding=".5rem"
+                borderRadius=".5rem"
               >
-                <LocalPhone />
-                <Typography variant="p" style={{ margin: "10px 0" }}>
-                  {" "}
-                  {MobileNumber || ""}{" "}
-                </Typography>
-              </Stack>
-            </Box>
-          </Stack>
+                <PopOver
+                  triggerContent={
+                    <Stack
+                      onClick={handleOpenEmailform}
+                      spacing={{ xs: 1 }}
+                      direction="row"
+                      useFlexGap
+                      flexWrap="wrap"
+                      alignItems="center"
+                    >
+                      <Email />
+                      <Typography variant="p" style={{ margin: "10px 0" }}>
+                        {OfficeEmail || ""}
+                      </Typography>
+                    </Stack>
+                  }
+                  popoverContent={
+                    <Typography sx={{ p: 1 }}>
+                      Send Email To {EFirstName || ""} {EMiddleName || ""}{" "}
+                      {ELastName || ""}
+                    </Typography>
+                  }
+                />
+
+                <Stack
+                  spacing={{ xs: 1 }}
+                  direction="row"
+                  useFlexGap
+                  flexWrap="wrap"
+                  alignItems="center"
+                >
+                  <LocalPhone />
+                  <Typography variant="p" style={{ margin: "10px 0" }}>
+                    {" "}
+                    {MobileNumber || ""}{" "}
+                  </Typography>
+                </Stack>
+              </Box>
+            </Stack>
+          )}
         </MainCard>
         {openEmailForm && (
           <EmailModal

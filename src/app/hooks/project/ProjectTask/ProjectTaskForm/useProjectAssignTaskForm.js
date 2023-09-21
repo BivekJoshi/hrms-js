@@ -1,16 +1,16 @@
 import { useFormik } from "formik";
 import { useEditProjectTaskAssign } from "../useProjectTask";
 
-const useProjectAssignTaskForm = ({id}) => {
-  const { mutate: projectCreateTask } = useEditProjectTaskAssign({id});
+const useProjectAssignTaskForm = ({data}) => {
+  const { mutate: projectCreateTask } = useEditProjectTaskAssign({});
 
   const formik = useFormik({
     initialValues: {
-      projectTaskId: "",
+      projectTaskId: data?.id||"",
       projectEmployeeId: "",
     },
     // validationSchema: ProjectTaskSchema,
-    enableReinitialize: "true",
+    enableReinitialize: true,
 
     onSubmit: (values) => {
       handleRequest(values);

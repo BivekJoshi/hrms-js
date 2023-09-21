@@ -229,6 +229,7 @@ const ResetPassword = ({ isLoading }) => {
               variant="outlined"
               autoFocus
               type={showConfirmPassword ? "text" : "password"}
+              InputLabelProps={{ shrink: true }}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">

@@ -7,26 +7,26 @@ import { useGetCompany } from "../../../hooks/company/useCompany";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
 
 const projectOptions = [
-  {
-    value: "WORK_IN_PROGRESS",
-    label: "Work in progress",
-    id: 1,
-  },
+  // {
+  //   value: "WORK_IN_PROGRESS",
+  //   label: "Work in progress",
+  //   id: 1,
+  // },
   {
     value: "COMPLETED",
     label: "Completed",
     id: 2,
   },
-  {
-    value: "DELAYED",
-    label: "Delayed",
-    id: 3,
-  },
-  {
-    value: "PENDING",
-    label: "Pending",
-    id: 4,
-  },
+  // {
+  //   value: "DELAYED",
+  //   label: "Delayed",
+  //   id: 3,
+  // },
+  // {
+  //   value: "PENDING",
+  //   label: "Pending",
+  //   id: 4,
+  // },
 ];
 
 const AddprojectFields = ({ onClose, isLoading }) => {
@@ -94,7 +94,6 @@ const AddprojectFields = ({ onClose, isLoading }) => {
             label="Deadline Date"
             type="date"
             fullWidth
-            required
             value={formik.values.endDate}
             onChange={formik.handleChange}
             error={formik.touched.endDate && Boolean(formik.errors.endDate)}
@@ -105,7 +104,7 @@ const AddprojectFields = ({ onClose, isLoading }) => {
           />
         </Grid>
 
-        <Grid item xs={12} sm={6}>
+        {/* <Grid item xs={12} sm={6}>
           <TextField
             name="taskStatus"
             label="Project Status"
@@ -132,10 +131,10 @@ const AddprojectFields = ({ onClose, isLoading }) => {
               </MenuItem>
             ))}
           </TextField>
-        </Grid>
+        </Grid> */}
 
-        <Grid item xs={12} sm={6}>
-          <TextField
+        <Grid item xs={12} sm={12}>
+          {/* <TextField
             id="projectLeadId"
             name="projectLeadId"
             select
@@ -166,6 +165,41 @@ const AddprojectFields = ({ onClose, isLoading }) => {
                 </MenuItem>
               ))}
           </TextField>
+           */}
+          <Autocomplete
+            id="projectLeadId"
+            name="projectLeadId"
+            options={employeeData || []}
+            getOptionLabel={(employee) =>
+              `${employee?.firstName} ${employee?.middleName} ${employee?.lastName}`
+            }
+            value={employeeData?.find(
+              (employee) => employee?.id === formik.values?.employeeId
+            )}
+            onChange={(event, selectedEmployee) => {
+              if (selectedEmployee) {
+                formik.setFieldValue("projectLeadId", selectedEmployee.id);
+              }
+            }}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="User Name"
+                placeholder="Enter User name..."
+                fullWidth
+                required
+                variant="outlined"
+                autoFocus
+                InputLabelProps={{ shrink: true }}
+                error={
+                  formik.touched.employeeId && Boolean(formik.errors.employeeId)
+                }
+                helperText={
+                  formik.touched.employeeId && formik.errors.employeeId
+                }
+              />
+            )}
+          />
         </Grid>
 
         <Grid item xs={12} sm={12}>
