@@ -10,8 +10,8 @@ export const PieChartDiagram = ({ data }) => {
       value: data?.allEmployees,
     },
     {
-      name: "All Projects",
-      value: data?.allProjects,
+      name: "New Employees",
+      value: data?.newEmployees,
     },
     {
       name: "Female Employees",
@@ -22,8 +22,9 @@ export const PieChartDiagram = ({ data }) => {
       value: data?.maleEmployees,
     },
     {
-      name: "New Employees",
-      value: data?.newEmployees,
+      name: "All Projects",
+      value: data?.allProjects,
+     
     },
   ];
 

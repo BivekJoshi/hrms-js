@@ -55,7 +55,7 @@ const EmployeeGridView = ({ employeeData }) => {
           CurrentPage={currentPage}
           Paginate={paginate}
         />
-      </Stack>
+      </Box>
     </>
   );
 };

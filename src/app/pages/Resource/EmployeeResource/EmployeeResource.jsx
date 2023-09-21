@@ -144,20 +144,20 @@ const EmployeeResource = ({ permissions }) => {
           onClick={() => {
             navigate(`/admin/resource/office`);
           }}
-          buttonName={"Resources"}
+          buttonName={"Logistics"}
         />
         <HocButton
           permissions={permissions}
           color= {"primary"}
           variant={"contained"}
           onClick={handleAddOpenModal}
-          buttonName={"+Provide Resource to Employee"}
+          buttonName={"+Provide Logistics to Employee"}
         />
       </Box>
 
       <MaterialTable
         icons={tableIcons}
-        title="Employee Resource"
+        title="Employee Logistics"
         columns={columns}
         data={employeeResourceData}
         isLoading={isLoading}

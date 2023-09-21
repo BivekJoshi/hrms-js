@@ -213,7 +213,7 @@ const adminRoutes = [
   },
   {
     path: "resource/employee",
-    name: "Employee Resource",
+    name: "Employee Logistics",
     id: nanoid(),
     component: <EmployeeResource />,
   },
