@@ -54,7 +54,7 @@ export const MyTask = (props) => {
         gap="1rem"
         padding="1rem 0"
       >
-        {/* {projectData.map((data, index) => ( */}
+        {projectData.map((data, index) => (
           <Box
             bgcolor="#ededed66"
             padding="1rem"
@@ -117,7 +117,7 @@ export const MyTask = (props) => {
               />
             </Stack>
           </Box>
-        {/* ))} */}
+         ))}
       </Box>
     </Box>
   );
