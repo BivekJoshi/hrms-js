@@ -1,54 +1,19 @@
 import React from "react";
-import { Grid, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
-import AirlineSeatFlatOutlinedIcon from "@mui/icons-material/AirlineSeatFlatOutlined";
+import "../../Style/Style.css"
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
-
-const item = [
-  {
-    leaveName:"Casual Leave",
-    total: 30,
-    available: 12,
-  },
-  {
-    leaveName:"Sick Leave",
-    total: 40,
-    available: 142,
-  },
-  {
-    leaveName:"Festival Leave",
-    total: 340,
-    available: 152,
-  },
-  {
-    leaveName:"Unpaid Leave",
-    total: 30,
-    available: 162,
-  },
-  {
-    leaveName:"	Annual Leave",
-    total: 360,
-    available: 12,
-  },
-  {
-    leaveName:"	Paternity Leave",
-    total: 307,
-    available: 12,
-  },
-  {
-    leaveName:"Maternity Leave",
-    total: 307,
-    available: 12,
-  },
-  {
-    leaveName:"Maternity_additional Leave",
-    total: 307,
-    available: 12,
-  },
-];
+import { useGetLoggedInUserLeaveBalance } from "../../../hooks/leave/useLeave";
+import { useGetLeaveType } from "../../../hooks/leaveType/useLeaveType";
+import { GiFireworkRocket } from "react-icons/gi";
+import { MdPregnantWoman, MdOutlineFlightTakeoff } from "react-icons/md";
+import {FaBaby} from "react-icons/fa";
+import {GiBigDiamondRing} from "react-icons/gi";
+import KitesurfingIcon from "@mui/icons-material/Kitesurfing";
+import BabyChangingStationIcon from "@mui/icons-material/BabyChangingStation";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -57,8 +22,8 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: "center",
   minHeight: 290,
   maxHeight: 310,
-  padding: 30,
-  margin: 8,
+  // padding: 30,
+  // margin: 8,
 }));
 
 const CustomArrow = ({ onClick, direction }) => {
@@ -86,25 +51,79 @@ const CustomArrow = ({ onClick, direction }) => {
 };
 
 const ApplyLeave = () => {
-  const boxes = item.map((data, index) => (
-    <div key={index}>
-      <Item>
-        <Typography variant="h5">
-          <b>{data.leaveName}</b>
+  const { data: leavebalance, isLoading } = useGetLoggedInUserLeaveBalance();
+  const { data: leaveTypeData } = useGetLeaveType();
+
+  if (isLoading || !leavebalance || !leaveTypeData) {
+    return <div>Loading...</div>;
+  }
+
+  const leaveIcon = [
+    {
+      id: 4,
+      leaveType: "FESTIVAL ",
+      icon: <GiFireworkRocket style={{width:"3rem"}}/>,
+    },
+    {
+      id: 5,
+      leaveType: "MATERNITY ",
+      icon: <MdPregnantWoman style={{width:"3rem"}}/>,
+    },
+    {
+      id: 3,
+      leaveType: "ANNUAL ",
+      icon: <MdOutlineFlightTakeoff style={{width:"3rem"}}/>,
+    },
+    {
+      id: 6,
+      leaveType: "PATERNITY ",
+      icon: <FaBaby style={{width:"2rem"}}/>,
+    },
+    {
+      id: 7,
+      leaveType: "MARRIAGE ",
+      icon: <GiBigDiamondRing style={{width:"3rem", height:"3rem"}}/>,
+    },
+    {
+      id: 1,
+      leaveType: "CASUAL ",
+      icon: <KitesurfingIcon style={{width:"3rem", height:"3rem"}}/>,
+    },
+    {
+      id: 8,
+      leaveType: "MATERNITY ADDITIONAL ",
+      icon: <BabyChangingStationIcon style={{width:"3rem", height:"3rem"}}/>,
+    },
+  ];
+  if (isLoading || !leavebalance || !leaveTypeData) {
+    return <div>Loading...</div>;
+  }
+
+  const leaveTypeMap = new Map();
+  leaveIcon.forEach((leaveType) => {
+    leaveTypeMap.set(leaveType.id, leaveType.leaveType);
+  });
+  const leaveIconMap = new Map();
+  leaveIcon.forEach((leaveIcon) => {
+    leaveIconMap.set(leaveIcon.id, leaveIcon.icon);
+  });
+
+  const boxes = leavebalance.map((data, index) => (
+    <Box key={index} boxShadow="7" borderRadius="1.5rem" minHeight="200px" >
+        <Typography fontSize="1.2rem" fontWeight="600" marginTop="1rem">
+          {leaveTypeMap.get(data?.leaveTypeId)}
         </Typography>
         <Typography variant="h2" color="#3e019b" style={{ marginTop: 25 }}>
-          <AirlineSeatFlatOutlinedIcon fontSize="300px" />
+          {leaveIconMap.get(data?.leaveTypeId)}
+
         </Typography>
-        <div style={{ marginTop: 45 }}>
-          <Typography variant="h6">
-            <b>Available Leave:</b> {data.available}
+          <Typography fontSize="1rem">
+            <b>Available Leave: {data.leaveBalance}</b>
           </Typography>
-          <Typography variant="h6">
-            <b>Total Leave:</b> {data.total}
+          <Typography fontSize="1rem">
+            <b>Total Leave: {data.leaveTaken}</b>
           </Typography>
-        </div>
-      </Item>
-    </div>
+    </Box>
   ));
 
   const chunkedBoxes = [];
@@ -113,7 +132,8 @@ const ApplyLeave = () => {
   }
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1 }} paddingBottom="2rem">
+      <h2>Taken Leave</h2>
       <Carousel
         showThumbs={false}
         showArrows={false}
@@ -126,7 +146,15 @@ const ApplyLeave = () => {
         )}
       >
         {chunkedBoxes.map((chunk, index) => (
-          <Box style={{ display: "flex", padding: 0, margin: 0 }} key={index}>
+          <Box
+            style={{ padding:" 0 0 1rem", margin: "1rem .5rem" }}
+            display="grid"
+            gridTemplateColumns="repeat(auto-fit, minmax(200px, 1fr))"
+            gap="1rem"
+            key={index}
+            // boxShadow="7"
+            // maxWidth="250px"
+          >
             {chunk}
           </Box>
         ))}

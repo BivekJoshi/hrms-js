@@ -5,6 +5,10 @@ import { Breadcrumbs, Typography } from "@mui/material";
 import { Link, useLocation } from "react-router-dom";
 import ThemeModeContext from "../theme/ThemeModeContext";
 import EmployeeProfile from "../app/pages/Employee/EmployeeViewPage/EmployProfile/EmployeeProfile";
+import AttendenceInfo from "../app/pages/Employee/EmployeeViewPage/InfoTabs/AttendenceInfoTab/AttendenceInfo";
+import ProjectEmpPage from "../app/pages/Project/ProjectEmployeeViewPage/ProjectEmppage";
+import EditEmployee from "../app/pages/Employee/AddEmployee/EditEmployee";
+import ProfileDetail from "../app/pages/Auth/Profile/ProfileDetail";
 
 const ResetPassword = Loadable(
   lazy(() => import("../app/pages/Auth/ResetPassword/ResetPassword"))
@@ -31,7 +35,9 @@ const LeaveType = Loadable(
 );
 const Event = Loadable(lazy(() => import("../app/pages/Event/Event")));
 const Holiday = Loadable(lazy(() => import("../app/pages/Holiday/Holiday")));
-const Project = Loadable(lazy(() => import("../app/pages/Project/Project")));
+const Project = Loadable(
+  lazy(() => import("../app/pages/Project/ProjectAdminViewPage/Project"))
+);
 const TodoList = Loadable(lazy(() => import("../app/pages/TodoList/TodoList")));
 const Company = Loadable(lazy(() => import("../app/pages/Company/Company")));
 
@@ -55,10 +61,22 @@ const employeeRoutes = [
     component: <EmployeeProfile />,
   },
   {
+    path: "employee/edit/:id",
+    name: "Edit My Profile",
+    id: nanoid(),
+    component: <EditEmployee />,
+  },
+  {
+    path: "attendance",
+    name: "My Attendance",
+    id: nanoid(),
+    component: <AttendenceInfo />,
+  },
+  {
     path: "leavetype",
     name: "Leave Type",
     id: nanoid(),
-    component: <LeaveType />,
+    component: <LeaveType component="leaveType"/>,
   },
   {
     path: "applyleave",
@@ -76,37 +94,37 @@ const employeeRoutes = [
     path: "designation",
     name: "Designation",
     id: nanoid(),
-    component: <Designation />,
+    component: <Designation component="designation"/>,
   },
   {
     path: "company",
     name: "Company",
     id: nanoid(),
-    component: <Company />,
+    component: <Company component="company"/>,
   },
   {
     path: "department",
     name: "Department",
     id: nanoid(),
-    component: <Department />,
+    component: <Department component="department"/>,
   },
   {
     path: "todolist",
     name: "To Do List",
     id: nanoid(),
-    component: <TodoList />,
+    component: <TodoList component="todo"/>,
   },
   {
     path: "project",
     name: "Project",
     id: nanoid(),
-    component: <Project />,
+    component: <ProjectEmpPage component="project"/>,
   },
   {
     path: "event",
     name: "Event",
     id: nanoid(),
-    component: <Event />,
+    component: <Event component="event"/>,
   },
   {
     path: "holiday",
@@ -119,6 +137,12 @@ const employeeRoutes = [
     name: "Reset Password",
     id: nanoid(),
     component: <ResetPassword />,
+  },
+  {
+    path: "profile",
+    name: "Profile",
+    id: nanoid(),
+    component: <ProfileDetail />,
   },
 ];
 
@@ -156,7 +180,7 @@ export default function BreadCrumbs() {
             <Link
               underline="hover"
               style={{ color: mode === "light" ? "inherit" : "white" }}
-              to="/admin/dashboard"
+              to="/employee/dashboard"
             >
               Dashboard
             </Link>

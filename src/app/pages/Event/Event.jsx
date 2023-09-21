@@ -29,8 +29,6 @@ const Event = ({ permissions }) => {
 
   const [getEventID, setEventGetID] = useState({});
 
-  // console.log("🚀 ~ file: Event.jsx:38 ~ Event ~ openAddModal:", openAddModal);
-
   const { data: eventData, isLoading } = useGetEvent();
 
   useEffect(() => {
@@ -69,7 +67,7 @@ const Event = ({ permissions }) => {
     <>
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
         <HocButton
-          permissions={permissions?.canAdd}
+          permissions={permissions}
           color={"primary"}
           variant={"contained"}
           onClick={() => setOpenAddModal(true)}

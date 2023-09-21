@@ -4,6 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Breadcrumbs, Typography } from "@mui/material";
 import Loadable from "../app/components/Header/Loader/Loadable";
 import ThemeModeContext from "../theme/ThemeModeContext";
+import ProjectAddViewEmployeePage from "../app/pages/Project/ProjectEmployeeViewPage/ProjectAddViewEmployeePage";
 
 const ProfileDetail = Loadable(
   lazy(() => import("../app/pages/Auth/Profile/ProfileDetail"))
@@ -37,9 +38,11 @@ const Birthdaylist = Loadable(
 const Attendance = Loadable(
   lazy(() => import("../app/pages/Attendance/Attendance"))
 );
-const Project = Loadable(lazy(() => import("../app/pages/Project/Project")));
+const Project = Loadable(
+  lazy(() => import("../app/pages/Project/ProjectAdminViewPage/Project"))
+);
 const ProjectDetail = Loadable(
-  lazy(() => import("../app/pages/Project/ProjectDetail/ProjectDetail"))
+  lazy(() => import("../app/pages/Project/ProjectAdminViewPage/ProjectDetail"))
 );
 const DeactivatedProject = Loadable(
   lazy(() =>
@@ -110,7 +113,7 @@ const adminRoutes = [
     path: "leavetype",
     name: "Leave Type",
     id: nanoid(),
-    component: <LeaveType component="leaveType"/>,
+    component: <LeaveType component="leaveType" />,
   },
   {
     path: "leave",
@@ -152,7 +155,7 @@ const adminRoutes = [
     path: "todolist",
     name: "To Do List",
     id: nanoid(),
-    component: <TodoList component="todo"/>,
+    component: <TodoList component="todo" />,
   },
   {
     path: "project",
@@ -164,7 +167,7 @@ const adminRoutes = [
     path: "project/:id",
     name: "Project Detail",
     id: nanoid(),
-    component: <ProjectDetail />,
+    component: <ProjectAddViewEmployeePage />,
   },
   {
     path: "project/get-deactivated-projects",
@@ -176,7 +179,7 @@ const adminRoutes = [
     path: "event",
     name: "Event",
     id: nanoid(),
-    component: <Event component="event"/>,
+    component: <Event component="event" />,
   },
   {
     path: "holiday",

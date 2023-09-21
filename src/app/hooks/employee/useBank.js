@@ -10,8 +10,9 @@ import { toast } from 'react-toastify';
 import { useParams } from 'react-router';
 
 {/*____________________________GETBANKDETAILSBYID____________________________________________*/}
-export const useGetBankByEmployeeId = (id) => {
-  return useQuery(['getBankById'], () => getBankDetailById(id), {
+export const useGetBankByEmployeeId = () => {
+  const { id } = useParams();
+  return useQuery(['getBankDetailById'], () => getBankDetailById(id), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
@@ -41,7 +42,7 @@ export const useAddBank = ({ onSuccess }) => {
     onSuccess: (data, variables, context) => {
       toast.success('Bank details added successfully');
       onSuccess && onSuccess(data, variables, context);
-      queryClient.invalidateQueries('getBankById');
+      queryClient.invalidateQueries('getBankDetailById');
     },
     onError: (err, _variables, _context) => {
       toast.error(`error: ${err.message}`);
@@ -61,7 +62,7 @@ export const useEditBank = ({ onSuccess }) => {
       onSuccess: (data, variable, context) => {
         toast.success('Bank edited successfully');
         onSuccess && onSuccess(data, variable, context);
-        queryClient.invalidateQueries('getBankById');
+        queryClient.invalidateQueries('getBankDetailById');
       },
       onError: (err, _variables, _context) => {
         toast.error(`error: ${err.message}`);

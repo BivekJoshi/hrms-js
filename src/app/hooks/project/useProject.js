@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import {
   getProject,
+  getProjectPageWise,
   addProject,
   getProjectById,
   addActiveProject,
@@ -13,6 +14,12 @@ import { toast } from "react-toastify";
 /*________________________GET_____________________________________*/
 export const useGetProject = () => {
   return useQuery(["getProject"], () => getProject(), {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
+};
+export const useGetProjectPageWise = (pageNumber) => {
+  return useQuery(["getProjectPageWise"], () => getProjectPageWise(pageNumber), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });

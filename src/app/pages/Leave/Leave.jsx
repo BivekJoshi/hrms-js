@@ -150,6 +150,13 @@ const Leave = ({ isLoading }) => {
       sorting: false,
     },
     {
+      title: "Leave Reason",
+      field: "leaveReason",
+      emptyValue: "-",
+      width: 100,
+      sorting: false,
+    },
+    {
       title: "Remark",
       field: "leaveRemarks",
       emptyValue: "-",

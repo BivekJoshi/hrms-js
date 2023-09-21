@@ -5,6 +5,13 @@ import EditProjectFields from '../../../components/Form/Project/EditProjectField
 import { useGetProjectById } from '../../../hooks/project/useProject';
 import { EditProjectDeactivateFields, EditProjectActivateFields } from '../../../components/Form/Project/EditProjectDeactivateFields';
 
+
+import { AddprojectEmployeeFields, EditProjectEmployeeFields } from '../../../components/Form/Project/projectEmployee/AddProjectEmployeeFields';
+import { useGetProjectEmployeeById } from '../../../hooks/project/projectEmployee/useProjectEmployee';
+import ProjectAssignTaskField from '../../../components/Form/Project/ProjectTask/ProjectAssignTaskField';
+
+
+
 export const AddProjectModal = ({ open, handleCloseModal }) => {
     return (
         <FormModal
@@ -50,3 +57,48 @@ export const DeactivateProjectModal = ({ open, handleCloseModal, id }) => {
         </div>
     )
 }
+
+
+
+/*____________________________________________Project Employee Modal_________________________________________________________________*/
+
+export const AddProjectEmployeeModal = ({open, handleCloseModal}) => {
+    return(
+        <FormModal
+            open={open}
+            onClose={handleCloseModal}
+            formComponent={<AddprojectEmployeeFields onClose={handleCloseModal} />}
+        />
+    )
+}
+
+export const EditProjectEmployeeModal = ({ open, handleCloseModal, id }) => {
+    const { data } = useGetProjectEmployeeById(id);
+    return (
+      <div>
+        <FormModal
+          open={open}
+          onClose={handleCloseModal}
+          formComponent={
+            <EditProjectEmployeeFields onClose={handleCloseModal} data={data} />
+          }
+        />
+      </div>
+    );
+  };
+
+
+/*____________________________________________Project Employee Task  Modal_________________________________________________________________*/
+export const EditProjectTaskModal = ({ open, handleCloseModal, id ,data}) => {
+    return (
+      <div>
+        <FormModal
+          open={open}
+          onClose={handleCloseModal}
+          formComponent={
+            <ProjectAssignTaskField onClose={handleCloseModal} id={id} data={data}/>
+          }
+        />
+      </div>
+    );
+  };

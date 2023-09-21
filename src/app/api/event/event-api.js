@@ -18,6 +18,12 @@ export const getEventById = async (id) => {
   return data;
 };
 
+{/*________________________GET BY MONTH DATA____________________________________*/ }
+export const getEventByMonth = async (monthAd) => {
+  const data = await axiosInstance.get(`/event/this-month?monthAd=${monthAd}`);
+  return data;
+};
+
 {/*________________________POST_____________________________________*/ }
 export const addEvent = async (formData) => {
   const data = await axiosInstance.post('/event/create', formData);

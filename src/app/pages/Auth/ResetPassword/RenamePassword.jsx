@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Grid,
   Button,
@@ -20,6 +20,7 @@ import useAddRenamePasswordForm from "../../../hooks/auth/resetPassword/useAddRe
 import { toast } from "react-toastify";
 import { useLocation, useNavigate } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import InitialPage from "../InitialPage/InitialPage";
 
 function ValidationItem(props) {
   return (
@@ -48,14 +49,16 @@ function ValidationItem(props) {
 }
 
 const RenamePassword = ({ isLoading }) => {
-    const navigate = useNavigate();
-    const location = useLocation();
-    const newId = location?.search;
-    const id = newId?.substring(6)
-    
-    const handleCancel = () => {
-        navigate("/");
-      };
+  const navigate = useNavigate();
+  const location = useLocation();
+  const newId = location?.search;
+  const id = newId?.substring(6);
+
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const handleCancel = () => {
+    navigate("/");
+  };
 
   const {
     formik,
@@ -63,7 +66,7 @@ const RenamePassword = ({ isLoading }) => {
     handleClickShowPassword,
     loading,
     handleMouseDownPassword,
-  } = useAddRenamePasswordForm({id});
+  } = useAddRenamePasswordForm({ id });
 
   const {
     lowerValidated,
@@ -91,155 +94,170 @@ const RenamePassword = ({ isLoading }) => {
     display: "grid",
     marginRight: "4rem",
     marginLeft: "4rem",
-    gap: "1rem",
+    gap: ".5rem",
   };
 
   return (
     !isLoading && (
-      <Grid
-        container
-        sx={{
-          display: "grid",
-          gridTemplateColumns: { lg: "1fr 1fr", xs: "1fr" },
-          marginTop: "5rem",
-          gap: { xs: "1rem", lg: 0 },
-        }}
-      >
-        <Stack>
-          <div style={{ display: "grid", justifyContent: "center" }}>
-            <Typography variant="h4" component="h2">
-              Change Password <LockPersonIcon sx={{ fontSize: "2rem" }} />
-            </Typography>
-            <br />
-            <p>Password must contain :</p>
-            <ValidationItem
-              validated={lowerValidated}
-              message=" At least one lowercase letter"
-            />
-            <ValidationItem
-              validated={upperValidated}
-              message=" At least one uppercase letter"
-            />
-            <ValidationItem
-              validated={numberValidated}
-              message=" At least one number"
-            />
-            <ValidationItem
-              validated={specialValidated}
-              message=" At least one special character"
-            />
-            <ValidationItem
-              validated={lengthValidated}
-              message=" At least 8 characters"
-            />
-          </div>
-        </Stack>
-        <Divider
+      <>
+        <InitialPage />
+        <Grid
+          container
           sx={{
-            display: { lg: "none", xs: "block" },
-            backgroundColor: "GrayText",
+            display: "grid",
+            gridTemplateColumns: { lg: "1fr 1fr", xs: "1fr" },
+            marginTop: "5rem",
+            gap: { xs: "1rem", lg: 0 },
+            border: ".5px solid grey",
+            padding: 5,
           }}
-        />
-        <Stack style={style}>
-          <Grid item>
-            <TextField
-              id="password"
-              name="password"
-              label="New Password"
-              placeholder="Enter your new password..."
-              fullWidth
-              required
-              value={formik.values.password}
-              onChange={(e) => {
-                formik.handleChange(e);
-                handleChangeValidation(e.target.value);
-              }}
-              error={formik.touched.password && Boolean(formik.errors.password)}
-              helperText={formik.touched.password && formik.errors.password}
-              variant="outlined"
-              autoFocus
-              type={showValues.showPassword ? "text" : "password"}
-              InputLabelProps={{ shrink: true }}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <Tooltip title="Show Password">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                        edge="end"
+        >
+          <Stack>
+            <div style={{ display: "grid", justifyContent: "center" }}>
+              <Typography variant="h4" component="h2">
+                Create Password <LockPersonIcon sx={{ fontSize: "2rem" }} />
+              </Typography>
+              <br />
+              <p>Password must contain :</p>
+              <ValidationItem
+                validated={lowerValidated}
+                message=" At least one lowercase letter"
+              />
+              <ValidationItem
+                validated={upperValidated}
+                message=" At least one uppercase letter"
+              />
+              <ValidationItem
+                validated={numberValidated}
+                message=" At least one number"
+              />
+              <ValidationItem
+                validated={specialValidated}
+                message=" At least one special character"
+              />
+              <ValidationItem
+                validated={lengthValidated}
+                message=" At least 8 characters"
+              />
+            </div>
+          </Stack>
+          <Divider
+            sx={{
+              display: { lg: "none", xs: "block" },
+              backgroundColor: "GrayText",
+            }}
+          />
+          <Stack style={style}>
+            <Grid item>
+              <TextField
+                id="password"
+                name="password"
+                label="New Password"
+                placeholder="Enter your new password..."
+                fullWidth
+                required
+                value={formik.values.password}
+                onChange={(e) => {
+                  formik.handleChange(e);
+                  handleChangeValidation(e.target.value);
+                }}
+                error={
+                  formik.touched.password && Boolean(formik.errors.password)
+                }
+                helperText={formik.touched.password && formik.errors.password}
+                variant="outlined"
+                autoFocus
+                type={showValues.showPassword ? "text" : "password"}
+                InputLabelProps={{ shrink: true }}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <Tooltip title="Show Password">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                        >
+                          {showValues.showPassword ? (
+                            <VisibilityOff />
+                          ) : (
+                            <Visibility />
+                          )}
+                        </IconButton>
+                      </Tooltip>
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            </Grid>
+            <Grid item>
+              <TextField
+                id="confirmPassword"
+                name="confirmPassword"
+                label="Confirm New Password"
+                placeholder="Confirm your new password..."
+                fullWidth
+                required
+                value={formik.values.confirmPassword}
+                onChange={formik.handleChange}
+                error={
+                  formik.touched.confirmPassword &&
+                  Boolean(formik.errors.confirmPassword)
+                }
+                helperText={
+                  formik.touched.confirmPassword &&
+                  formik.errors.confirmPassword
+                }
+                variant="outlined"
+                autoFocus
+                type={showConfirmPassword ? "text" : "password"}
+                InputLabelProps={{ shrink: true }}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <Tooltip
+                        title={`Show ${
+                          showConfirmPassword ? "Hidden" : "Visible"
+                        } Confirm Password`}
                       >
-                        {showValues.showPassword ? (
-                          <VisibilityOff />
-                        ) : (
-                          <Visibility />
-                        )}
-                      </IconButton>
-                    </Tooltip>
-                  </InputAdornment>
-                ),
-              }}
-            />
-          </Grid>
-          <Grid item>
-            <TextField
-              id="confirmPassword"
-              name="confirmPassword"
-              label="Confirm New Password"
-              placeholder="Confirm your new password..."
-              fullWidth
-              required
-              value={formik.values.confirmPassword}
-              onChange={formik.handleChange}
-              error={
-                formik.touched.confirmPassword &&
-                Boolean(formik.errors.confirmPassword)
-              }
-              helperText={
-                formik.touched.confirmPassword && formik.errors.confirmPassword
-              }
-              variant="outlined"
-              autoFocus
-              type={showValues.showPassword ? "text" : "password"}
-              InputLabelProps={{ shrink: true }}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <Tooltip title="Show Password">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                        edge="end"
-                      >
-                        {showValues.showPassword ? (
-                          <VisibilityOff />
-                        ) : (
-                          <Visibility />
-                        )}
-                      </IconButton>
-                    </Tooltip>
-                  </InputAdornment>
-                ),
-              }}
-            />
-          </Grid>
-          <Grid container direction="row" justifyContent="space-between">
-          <Button onClick={handleCancel} sx={{ mt: 3, ml: 1 }}>
-              <ArrowBackIcon />
-              Back to your login page
-            </Button>
-            <Button
-              onClick={handleFormSubmit}
-              variant="contained"
-              sx={{ mt: 3, ml: 1 }}
-            >
-              Create Password
-            </Button>
-          </Grid>
-        </Stack>
-      </Grid>
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={() =>
+                            setShowConfirmPassword(!showConfirmPassword)
+                          }
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                        >
+                          {showConfirmPassword ? (
+                            <VisibilityOff />
+                          ) : (
+                            <Visibility />
+                          )}
+                        </IconButton>
+                      </Tooltip>
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            </Grid>
+            <Grid item>
+              <Button
+                onClick={handleFormSubmit}
+                variant="contained"
+                // sx={{ mt: 5, ml: 1 }}
+                fullWidth
+              >
+                Create Password
+              </Button>
+              <Button onClick={handleCancel} sx={{ mt: 3, ml: 1 }}>
+                <ArrowBackIcon />
+                Back to your login page
+              </Button>
+            </Grid>
+          </Stack>
+        </Grid>
+      </>
     )
   );
 };

@@ -40,10 +40,31 @@ const roleType = [
 ];
 
 const columns = [
-  { title: "SN", field: "id", emptyValue: "-", width: "80" },
-  { title: "Name", field: "name", emptyValue: "-", width: "80" },
-  { title: "Mobile Number", field: "mobileNo", emptyValue: "-", width: "80" },
-  { title: "Email", field: "email", emptyValue: "-", width: "120" },
+  {
+    title: "SN",
+    render: (rowData) => rowData.tableData.index + 1,
+    width: "3%",
+    sortable: false,
+    sorting: false,
+  },
+  {
+    title: "Name",
+    field: "name",
+    emptyValue: "-",
+    width: "80",
+  },
+  {
+    title: "Mobile Number",
+    field: "mobileNo",
+    emptyValue: "-",
+    width: "80",
+  },
+  {
+    title: "Email",
+    field: "email",
+    emptyValue: "-",
+    width: "120",
+  },
   {
     title: "Role",
     render: (rowData) => getRoleLabel(rowData?.roles?.[0]?.name),

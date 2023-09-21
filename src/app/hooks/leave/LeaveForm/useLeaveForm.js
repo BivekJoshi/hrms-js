@@ -1,10 +1,10 @@
 import { useFormik } from "formik";
-import { useAddLeave, useAddLeaveByAdmin, useEditLeave } from "../useLeave";
+import { useAddLeave, useAddLeaveByAdmin, useEditLeave, useEditLeaveByAdmin } from "../useLeave";
 import { LeaveSchema } from "../Validation/LeaveSchema";
 
 const useLeaveForm = (data) => {
   const { mutate: addLeave } = useAddLeaveByAdmin({});
-  const { mutate: editLeave } = useEditLeave({});
+  const { mutate: editLeave } = useEditLeaveByAdmin({});
 
   const formik = useFormik({
     initialValues: {
@@ -13,12 +13,10 @@ const useLeaveForm = (data) => {
       leaveReason: data?.leaveReason || "",
       fromDate: data?.fromDate || "",
       toDate: data?.toDate || "",
-      applyLeaveDays: data?.applyLeaveDays || "",
-      leaveBalance: data?.leaveBalance || "",
-      leaveStatus: data?.leaveStatus || "",
-      confirmById: data?.confirmById || "",
+      leaveStatus: data?.leaveStatus || "PENDING",
       leaveRemarks: data?.leaveRemarks || "",
-      halfDay: data?.halfDay || "",
+      isHalfDay: data?.isHalfDay || false,
+      applyLeaveDays:data?.applyLeaveDays||"",
       id: data?.id,
     },
     validationSchema: LeaveSchema,

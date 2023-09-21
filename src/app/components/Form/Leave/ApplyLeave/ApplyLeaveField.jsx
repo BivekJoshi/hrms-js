@@ -11,10 +11,17 @@ import { useGetLeaveType } from "../../../../hooks/leaveType/useLeaveType";
 import useApplyLeaveForm from "../../../../hooks/leave/LeaveForm/useApplyLeaveForm";
 import { toast } from "react-toastify";
 import { useGetLeaveById } from "../../../../hooks/leave/useLeave";
+import { useLocation } from "react-router-dom";
 
-const ApplyLeaveField = ({ id}) => {
+const ApplyLeaveField = () => {
+  const location = useLocation();
+  const rowData = location?.state?.rowData || {};
+
+  const id = rowData ? rowData.id : "";
+
   const { data } = useGetLeaveById(id);
   const { data: leaveTypeData } = useGetLeaveType();
+
   const { formik } = useApplyLeaveForm(data);
 
   const handleFormSubmit = () => {
@@ -45,36 +52,59 @@ const ApplyLeaveField = ({ id}) => {
         <Grid item xs={12} sm={6}>
           Leave Type
         </Grid>
-        <Grid item xs={12} sm={12} md={12}>
-          <Autocomplete
-            id="leaveTypeId"
-            name="leaveTypeId"
-            options={leaveTypeData}
-            getOptionLabel={(option) => `${capitalize(option.leaveName)} Leave`}
-            value={formik.values.leaveTypeId || null}
-            onChange={(event, value) =>
-              formik.setFieldValue("leaveTypeId", value)
-            }
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                // label="Leave Name"
-                fullWidth
-                required
-                error={
-                  formik.touched.leaveTypeId &&
-                  Boolean(formik.errors.leaveTypeId)
-                }
-                helperText={
-                  formik.touched.leaveTypeId && formik.errors.leaveTypeId
-                }
-                variant="outlined"
-                autoFocus
-                InputLabelProps={{ shrink: true }}
-              />
-            )}
-          />
-        </Grid>
+        {data ? (
+          <Grid item xs={12} sm={12}>
+            <TextField
+              name="leaveTypeId"
+              required
+              InputLabelProps={{ shrink: true }}
+              fullWidth
+              value={getLeaveTypeName(formik.values.leaveTypeId)}
+              // onChange={(event) => {
+              //   formik.handleChange(event);
+              //   formik.setFieldValue("leaveTypeId", event.target.value);
+              // }}
+              error={
+                formik.touched.leaveTypeId && Boolean(formik.errors.leaveTypeId)
+              }
+              helperText={
+                formik.touched.leaveTypeId && formik.errors.leaveTypeId
+              }
+            />
+          </Grid>
+        ) : (
+          <Grid item xs={12} sm={12}>
+            <Autocomplete
+              id="leaveTypeId"
+              name="leaveTypeId"
+              options={leaveTypeData}
+              getOptionLabel={(option) =>
+                `${capitalize(option.leaveName)} Leave`
+              }
+              value={formik.values.leaveTypeId || null}
+              onChange={(event, value) =>
+                formik.setFieldValue("leaveTypeId", value)
+              }
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  fullWidth
+                  required
+                  error={
+                    formik.touched.leaveTypeId &&
+                    Boolean(formik.errors.leaveTypeId)
+                  }
+                  helperText={
+                    formik.touched.leaveTypeId && formik.errors.leaveTypeId
+                  }
+                  variant="outlined"
+                  autoFocus
+                  InputLabelProps={{ shrink: true }}
+                />
+              )}
+            />
+          </Grid>
+        )}
         <Grid item xs={12} sm={6}>
           Leave Reason
         </Grid>

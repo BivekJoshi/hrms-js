@@ -18,6 +18,12 @@ export const getLoggedInUserLeave = async () => {
   return data;
 };
 
+/*________________________GET LEAVE OF LOGGED IN USER LEAVE BALANCE_____________________________________*/
+export const getLoggedInUserLeaveBalance = async () => {
+  const data = await axiosInstance.get(`/leave/logged-in-user/leave-balance-order-by/leave-type`);
+  return data;
+};
+
 /*________________________GETEMPLOYEELEAVEBYID_____________________________________*/
 export const getEmployeeLeaveById = async (id) => {
   if (id) {
@@ -51,21 +57,21 @@ export const addLeaveByAdmin = async (formData) => {
     employeeId: formData.employeeId?.id,
     leaveTypeId: formData.leaveTypeId?.id,
   }
-  const data = await axiosInstance.post(`/leave/create/${submitedData?.employeeId}`, submitedData);
+  const data = await axiosInstance.post('/leave/create', submitedData);
   return data;
 };
-
-/*________________________EDIT_____________________________________*/
-// export const editLeave = async (formData) => {
-//   const { id } = formData;
-//   const data = await axiosInstance.put(`/leave/update/${id}`, formData);
-//   return data;
-// };
 
 /*________________________EDIT BY USER_____________________________________*/
 export const editLeave = async (formData) => {
   const { id } = formData;
   const data = await axiosInstance.put(`/leave/logged-in-user/update?leaveId=${id}`, formData);
+  return data;
+};
+
+/*________________________EDIT BY OTHER_____________________________________*/
+export const editLeaveByAdmin = async (formData) => {
+  const { id } = formData;
+  const data = await axiosInstance.put(`/leave/update/${id}`, formData);
   return data;
 };
 

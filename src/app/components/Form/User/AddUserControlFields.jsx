@@ -1,27 +1,17 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Grid, TextField, Button, MenuItem, Autocomplete } from "@mui/material";
+import React, { useContext } from "react";
+import { Grid, Button, MenuItem, TextField } from "@mui/material";
+import { Autocomplete } from "@mui/material"; 
 import { useGetEmployee } from "../../../hooks/employee/useEmployee";
-import { useGetUserRole } from "../../../hooks/auth/userControl/useUserControl";
-import { useAddUserControlForm } from "../../../pages/Auth/UserControl/Users/useAddUserControlForm";
+import {
+  useAddUserControlForm,
+} from "../../../pages/Auth/UserControl/Users/useAddUserControlForm";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
+import { toast } from "react-toastify";
 
 export const AddUserControlFields = ({ onClose }) => {
   const { data: employeeData } = useGetEmployee();
   const { formik } = useAddUserControlForm();
   const { mode } = useContext(ThemeModeContext);
-
-  const handleUserNameChange = (event) => {
-    if (selectedEmployee) {}
-    const selectedUserId = event.target.value;
-    const selectedEmployee = employeeData.find(
-      (employee) => employee?.id === selectedUserId
-    );
-    const selectedEmployeeEmail = selectedEmployee
-      ? selectedEmployee?.officeEmail
-      : "";
-    formik.setFieldValue("employeeId", selectedUserId);
-    formik.setFieldValue("email", selectedEmployeeEmail);
-  };
 
   const handleFormSubmit = async () => {
     const isValid = await formik.validateForm();
@@ -29,9 +19,16 @@ export const AddUserControlFields = ({ onClose }) => {
       formik.handleSubmit();
       if (formik.isValid) {
         onClose();
-      } else {
-        toast.error("Please make sure you have filled the form correctly");
       }
+    } else {
+      toast.error("Please make sure you have filled the form correctly");
+    }
+  };
+
+  const handleUserNameChange = (event, selectedEmployee) => {
+    if (selectedEmployee) {
+      formik.setFieldValue("employeeId", selectedEmployee.id);
+      formik.setFieldValue("email", selectedEmployee.officeEmail);
     }
   };
 
@@ -39,54 +36,31 @@ export const AddUserControlFields = ({ onClose }) => {
     <Grid container spacing={3}>
       <Grid item xs={12} sm={12}>
         <Autocomplete
-        options={employeeData}
-        onChange={handleUserNameChange}
-        autoHighlight
-        getOptionLabel={(option) => `${option?.firstName} ${option?.middleName} ${option?.lastName}`}
-        
-        renderInput={(params) => (
-          <TextField
-          {...params}
-          label="Select Employee"
-          inputProps={{
-            ...params.inputProps,
-            autoComplete: "new-password",
-            
-          }}
-          
-          />
-          
-
-        )}
-        />
-
-        {/* <TextField
           id="employeeId"
           name="employeeId"
-          label="User Name"
-          placeholder="Enter User name..."
-          fullWidth
-          required
-          select
-          value={formik.values.employeeId}
+          options={employeeData || []}
+          getOptionLabel={(employee) =>
+            `${employee?.firstName} ${employee?.middleName} ${employee?.lastName}`
+          }
+          value={employeeData.find(
+            (employee) => employee?.id === formik.values.employeeId
+          )}
           onChange={handleUserNameChange}
-          error={formik.touched.employeeId && Boolean(formik.errors.employeeId)}
-          helperText={formik.touched.employeeId && formik.errors.employeeId}
-          variant="outlined"
-          autoFocus
-          InputLabelProps={{ shrink: true }}
-        >
-          {employeeData &&
-            employeeData.map((employee) => (
-              <MenuItem
-                key={employee?.id}
-                value={employee?.id}
-                sx={{ bgcolor: mode === "light" ? "" : "#413e3e" }}
-              >
-                {`${employee?.firstName} ${employee?.middleName} ${employee?.lastName}`}
-              </MenuItem>
-            ))}
-        </TextField> */}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label="User Name"
+              placeholder="Enter User name..."
+              fullWidth
+              required
+              variant="outlined"
+              autoFocus
+              InputLabelProps={{ shrink: true }}
+              error={formik.touched.employeeId && Boolean(formik.errors.employeeId)}
+              helperText={formik.touched.employeeId && formik.errors.employeeId}
+            />
+          )}
+        />
       </Grid>
 
       <Grid item xs={12} sm={12}>
