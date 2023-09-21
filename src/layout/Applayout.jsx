@@ -12,7 +12,7 @@ const Applayout = () => {
         className="appBoxLayout"
         sx={mode === "light" ? { backgroundColor: "white" } : { backgroundColor: "#292929" }}
       >
-        <Container maxWidth="xl">
+        <Container maxWidth="xxl">
           <Outlet />
         </Container>
       </Box>

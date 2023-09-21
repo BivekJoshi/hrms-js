@@ -7,8 +7,14 @@ import { AddTrainingInfo, EditTrainingInfo } from "./TrainingModal";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import DeleteConfirmationModal from "../../../../../components/Modal/DeleteConfirmationModal";
+import useAuth from "../../../../../../auth/hooks/component/login/useAuth";
+import { useGetLoggedInUserInfo } from "../../../../../hooks/employee/useEmployee";
 
 const TrainingInfo = ({ data }) => {
+  const { isEmployee } = useAuth();
+  const { data: loggedInUserData, isLoading: isLoadingUserData } = isEmployee
+    ? useGetLoggedInUserInfo()
+    : {};
   const { id } = useParams();
 
   const [openAddModal, setOpenAddModal] = useState(false);
@@ -147,14 +153,22 @@ const TrainingInfo = ({ data }) => {
         />
       )}
 
-      {openEditModal && (
+      {(openEditModal && !isEmployee && (
         <EditTrainingInfo
           empId={id}
           id={editedTraining?.id}
           open={openEditModal}
           handleCloseModal={handleCloseEditModal}
         />
-      )}
+      )) ||
+        (
+          <EditTrainingInfo
+            empId={loggedInUserData?.id}
+            id={editedTraining?.id}
+            open={openEditModal}
+            handleCloseModal={handleCloseEditModal}
+          />
+        )}
     </Box>
   );
 };

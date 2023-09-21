@@ -84,6 +84,10 @@ const EmployeeResource = ({ permissions }) => {
       render: (rowData) => {
         return <p>{getEmployeeName(rowData)} </p>;
       },
+      customFilterAndSearch: (searchValue, rowData) => {
+        const employeeName = getEmployeeName(rowData);
+        return employeeName.toLowerCase().includes(searchValue.toLowerCase());
+      },
       width: 120,
       sorting: false,
     },
@@ -92,6 +96,10 @@ const EmployeeResource = ({ permissions }) => {
       render: (rowData) => {
         return <p>{getResourceName(rowData)}</p>;
       },
+      // customFilterAndSearch: (searchValue, rowData) => {
+      //   const resourceName = getResourceName(rowData);
+      //   return resourceName.toLowerCase().includes(searchValue.toLowerCase());
+      // },
       width: "20vh",
       sorting: false,
     },

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Box, SwipeableDrawer, Grid, Paper, List } from "@mui/material";
 import { ListItem, ListItemAvatar, Avatar, ListItemText } from "@mui/material";
 import { Divider, Typography, Button } from "@mui/material";
-import ProjectTaskField from "../../../components/Form/Project/ProjectTask/ProjectTaskFields";
 import { styled } from "@mui/material/styles";
 import { RightProjectHome } from "./component/RightProjectHome";
 import { MyTask } from "./component/MyTask";
@@ -15,8 +14,21 @@ const Item = styled(Paper)(({ theme }) => ({
   margin: 3,
 }));
 
-export default function ProjectHomePage({ data }) {
+export default function ProjectHomePage({
+  projectWiseEmployeeData,
+  employeeData,
+  projectData,
+}) {
   const [state, setState] = useState({ right: false });
+
+  const getProjectName = (projectId) => {
+    const project =
+      projectData && projectData?.find((project) => project?.id === projectId);
+    if (project) {
+      return project?.projectName;
+    }
+    return "Project Not Found";
+  };
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -27,26 +39,6 @@ export default function ProjectHomePage({ data }) {
     }
     setState({ ...state, [anchor]: open });
   };
-  const teamsData = [
-    {
-      img: "/static/images/avatar/1.jpg",
-      info: "Brunch this weekend?",
-      name: " Ali Connors",
-      desc: " — I'll be in your neighborhood doing errands this…",
-    },
-    {
-      img: "/static/images/avatar/1.jpg",
-      info: "Brunch this weekend?",
-      name: " Ali Connors",
-      desc: " — I'll be in your neighborhood doing errands this…",
-    },
-    {
-      img: "/static/images/avatar/1.jpg",
-      info: "Brunch this weekend?",
-      name: " Ali Connors",
-      desc: " — I'll be in your neighborhood doing errands this…",
-    },
-  ];
 
   return (
     <>
@@ -56,49 +48,83 @@ export default function ProjectHomePage({ data }) {
         </Grid>
 
         <Grid item xs={4}>
-          <p>Teams</p>
-          <Item>
-            <List
-              sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
-            >
-              {teamsData.map((team, index) => (
-                <Box>
-                  <ListItem alignItems="flex-start" key={index}>
-                    <ListItemAvatar>
-                      <Avatar alt="Remy Sharp" src={team.img} />
-                    </ListItemAvatar>
-                    <ListItemText
-                      primary={team.info}
-                      secondary={
-                        <React.Fragment>
-                          <Typography
-                            sx={{ display: "inline" }}
-                            component="span"
-                            variant="body2"
-                            color="text.primary"
-                          >
-                            {team.name}
-                          </Typography>
-                          {team.desc}
-                        </React.Fragment>
+          <Box sx={{ maxHeight: "530px", overfloY: "auto" }}>
+            <p>Teams</p>
+            {projectWiseEmployeeData ? (
+              projectWiseEmployeeData.slice(0, 3).map((project, index) => (
+                <Item key={index}>
+                  <List
+                    sx={{
+                      width: "100%",
+                      bgcolor: "background.paper",
+                      maxHeight: "140px",
+                      overflowY: "auto",
+                    }}
+                  >
+                    <p>
+                      Project : <b>{getProjectName(project?.projectId)}</b>
+                    </p>
+                    {project?.employeeIds?.map((employeeId, index) => {
+                      const employee =
+                        employeeData &&
+                        employeeData.find((emp) => emp.id === employeeId);
+                      if (employee) {
+                        return (
+                          <Box key={index}>
+                            <ListItem alignItems="flex-start">
+                              <ListItemAvatar>
+                                <Avatar
+                                  alt="Photo"
+                                  src={employee?.employeePhotoPath}
+                                />
+                              </ListItemAvatar>
+                              <ListItemText
+                                primary={project?.projecctId}
+                                secondary={
+                                  <React.Fragment>
+                                    <Typography
+                                      sx={{ display: "inline" }}
+                                      component="span"
+                                      variant="body2"
+                                      color="text.primary"
+                                    >
+                                      {employee?.firstName}{" "}
+                                      {employee?.middleName}{" "}
+                                      {employee?.lastName}
+                                    </Typography>
+                                    <p>{employee?.position?.positionName}</p>
+                                  </React.Fragment>
+                                }
+                              />
+                            </ListItem>
+                            <Divider
+                              variant="inset"
+                              component="li"
+                              sx={{ margin: "0 1rem" }}
+                            />
+                          </Box>
+                        );
+                      } else {
+                        return null;
                       }
-                    />
-                  </ListItem>
-                  <Divider variant="inset" component="li" sx={{margin:"0 1rem"}} />
-                </Box>
-              ))}
-            </List>
-          </Item>
-        </Grid>     
+                    })}
+                  </List>
+                </Item>
+              ))
+            ) : (
+              <p>Loading or no data available</p>
+            )}
+          </Box>
+        </Grid>
       </Grid>
 
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <MyTask data={data} />
+          <MyTask />
         </Grid>
       </Grid>
 
-      <div>
+      {/* <div>
         {["right"].map((anchor) => (
           <React.Fragment key={anchor}>
             <Button onClick={toggleDrawer(anchor, true)} variant="contained">
@@ -121,7 +147,7 @@ export default function ProjectHomePage({ data }) {
             </SwipeableDrawer>
           </React.Fragment>
         ))}
-      </div>
+      </div> */}
     </>
   );
 }

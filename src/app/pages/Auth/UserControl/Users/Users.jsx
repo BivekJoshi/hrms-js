@@ -4,7 +4,6 @@ import MaterialTable from "@material-table/core";
 import UserControlAction from "../../../../pages/Auth/UserControl/UserControlAction";
 import { AddUserControlModal } from "./AddUserControlModal";
 import { useGetUserControl } from "../../../../hooks/auth/userControl/useUserControl";
-import PermissionHoc from "../../../../hoc/permissionHoc";
 
 const roleType = [
   {
@@ -67,7 +66,7 @@ const columns = [
   },
   {
     title: "Role",
-    render: (rowData) => getRoleLabel(rowData?.roles?.[0]?.name),
+    render: (rowData) => getRoleLabel(rowData?.role?.name),
     width: "80",
   },
   {
@@ -88,6 +87,7 @@ const Users = ({ permissions }) => {
   const handleCloseAddModal = () => setOpenAddModal(false);
 
   const { data: userControlData, isLoading } = useGetUserControl();
+
   if (permissions?.canView) {
     return (
       <>

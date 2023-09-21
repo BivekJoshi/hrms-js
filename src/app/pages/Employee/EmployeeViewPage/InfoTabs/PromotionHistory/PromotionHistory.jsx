@@ -11,8 +11,14 @@ import useAuth from "../../../../../../auth/hooks/component/login/useAuth";
 import { useGetLoggedInUserInfo } from "../../../../../hooks/employee/useEmployee";
 
 const PromotionHistory = () => {
-  const { isSuperAdmin, isAdmin, isHr, isEmployee, isHrAdmin, isManager } =
-    useAuth();
+  const {
+    isSuperAdmin,
+    isAdmin,
+    isHr,
+    isEmployee,
+    isHrAdmin,
+    isManager,
+  } = useAuth();
   const { data: loggedInUserData, isLoading: isLoadingUserData } = isEmployee
     ? useGetLoggedInUserInfo()
     : {};
@@ -21,9 +27,11 @@ const PromotionHistory = () => {
     isSuperAdmin || isAdmin || isHr || isHrAdmin || isManager
       ? useGetPromotionHistory(id)
       : useGetPromotionHistory(loggedInUserData?.id);
-      
-  const { data: designationData, isLoading: loadingDesignation } =
-    useGetDesignation();
+
+  const {
+    data: designationData,
+    isLoading: loadingDesignation,
+  } = useGetDesignation();
 
   const [openAddModal, setOpenAddModal] = useState(false);
 
@@ -100,20 +108,24 @@ const PromotionHistory = () => {
           paddingBottom: "10px",
         }}
       >
-        <Button
-          variant="contained"
-          sx={{ mt: 3, ml: 1 }}
-          onClick={handleAddOpenModal}
-        >
-          +Add Promotion
-        </Button>
+        {!isEmployee ? (
+          <Button
+            variant="contained"
+            sx={{ mt: 3, ml: 1 }}
+            onClick={handleAddOpenModal}
+          >
+            +Add Promotion
+          </Button>
+        ) : (
+          ""
+        )}
       </Box>
 
       <MaterialTable
         style={{ padding: "1rem" }}
         columns={columns}
         data={mappedPromotionHistory}
-        title=""
+        title="Promotion History"
         isLoading={isLoading || loadingDesignation} // Consider both loading states
         options={{
           padding: "dense",

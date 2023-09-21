@@ -47,14 +47,15 @@ const DeactivatedProject = () => {
     {
       title: "SN",
       render: (rowData) => rowData.tableData.index + 1,
-      width: 120,
+      width: "2%",
       sortable: false,
+      sorting: false,
     },
     {
       title: "Project Name",
       field: "projectName",
       emptyValue: "-",
-      width: 120,
+      width: "7%",
     },
     {
       title: "Project Leader Name",

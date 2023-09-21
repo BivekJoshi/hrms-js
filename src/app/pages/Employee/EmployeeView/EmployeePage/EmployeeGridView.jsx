@@ -1,19 +1,30 @@
-import { Grid, Box } from "@mui/material";
+import { Box, Grid, Pagination, Stack } from "@mui/material";
 import React, { useState } from "react";
 import EmployeeCard from "../../../../components/cards/Employee/EmployeeCard";
 import { useGetEmployeeData } from "../../../../hooks/employee/useEmployee";
 
-const EmployeeGridView = ({ employeeData }) => {
+const EmployeeGridView = ({ employeeData, isLoading }) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(12);
+  const pageNumber = 12;
+  const { data: employeePageData } = useGetEmployeeData(pageNumber);
 
-  const employeArray = Array.isArray(employeeData) ? employeeData : employeeData ? Object.values(employeeData) : [];
+  const pageSize = employeePageData?.pageSize || 10;
+  const totalPages = employeePageData?.totalPages || 0;
+  const startIndex = (currentPage - 1) * pageSize;
+  const endIndex = startIndex + pageSize;
 
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = employeArray.slice(indexOfFirstPost, indexOfLastPost);
+  const handlePageChange = (event, newPage) => {
+    setCurrentPage(newPage);
+  };
 
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  if (isLoading)
+    return (
+      <>
+        <Skeleton />
+        <Skeleton animation="wave" />
+        <Skeleton animation={false} />
+      </>
+    );
 
   return (
     <>
@@ -49,11 +60,13 @@ const EmployeeGridView = ({ employeeData }) => {
       </Grid>
 
       <Box padding="2rem" display="grid" justifyContent={"center"}>
-        <PagePagination
-          PostsPerPage={postsPerPage}
-          TotalPosts={employeArray.length}
-          CurrentPage={currentPage}
-          Paginate={paginate}
+        <Pagination
+          count={totalPages}
+          page={currentPage}
+          onChange={handlePageChange}
+          boundaryCount={3}
+          size="large"
+          color="primary"
         />
       </Box>
     </>

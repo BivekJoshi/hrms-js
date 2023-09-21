@@ -9,14 +9,20 @@ import MaterialTable from "@material-table/core";
 import { useGetEmployee } from "../../../hooks/employee/useEmployee";
 import { Box, Button, Grid, Stack } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 import DeleteConfirmationModal from "../../../components/Modal/DeleteConfirmationModal";
 import { useGetProject } from "../../../hooks/project/useProject";
-import { AddProjectEmployeeModal, EditProjectEmployeeModal } from "../ProjectModal/ProjectModal";
+import {
+  AddProjectEmployeeModal,
+  EditProjectEmployeeModal,
+} from "../ProjectModal/ProjectModal";
 
 const ProjectDetail = () => {
   const { id } = useParams();
-  const { data: projectEmployeeData, isLoading } =
-    useGetProjectEmployeeById(id);
+  const { data: projectEmployeeData, isLoading } = useGetProjectEmployeeById(
+    id
+  );
+
   const { data: employeeData } = useGetEmployee();
   const { data: projectData } = useGetProject();
 
@@ -31,14 +37,14 @@ const ProjectDetail = () => {
   const [deletedProjectEmployee, setDeletedProjectEmployee] = useState({});
 
   const getEmployeeName = (rowData) => {
-    const employeeId = rowData.employeeId;
+    const employeeId = rowData.empId;
     const employee = employeeData?.find((emp) => emp.id == employeeId);
     const name = `${employee?.firstName} ${employee?.lastName}`;
     return name;
   };
 
   const getLeaderName = (rowData) => {
-    const projectId = rowData.projectId;
+    const projectId = rowData.projId;
     const project = projectData?.find((prj) => prj.id == projectId);
     const name = `${project?.projectName}`;
     return name;
@@ -92,29 +98,55 @@ const ProjectDetail = () => {
       width: 80,
       sorting: false,
     },
+    // {
+    //   title: "On Project",
+    //   field: "onProject",
+    //   emptyValue: "-",
+    //   width: 80,
+    //   sorting: false,
+    // },
     {
-      title: "Project Status",
+      title: "On Project",
       field: "onProject",
       emptyValue: "-",
-      width: 80,
-      sorting: false,
-    },
-    {
-      title: "Project Name",
-      field: "projectId",
+      width: 50,
       render: (rowData) => {
-        return <p>{getLeaderName(rowData)}</p>;
+        return (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            {rowData.onProject ? (
+              <span style={{ color: "green" }}>✔</span>
+            ) : (
+              <span style={{ color: "red" }}>✕</span>
+            )}
+          </div>
+        );
       },
-      width: 80,
-      sorting: false,
     },
+    // {
+    //   title: "Project Name",
+    //   field: "projectId",
+    //   render: (rowData) => {
+    //     return <p>{getLeaderName(rowData)}</p>;
+    //   },
+    //   width: 80,
+    //   sorting: false,
+    // },
     {
       title: "Actions",
       render: (rowData) => (
         <Stack direction="row" spacing={0}>
-          {/* <Button color="primary" onClick={() => handleEditProjectEmployee(rowData)}>
+          <Button
+            color="primary"
+            onClick={() => handleEditProjectEmployee(rowData)}
+          >
             <EditIcon />
-          </Button> */}
+          </Button>
           <Button
             color="primary"
             onClick={() => handleDeleteProjectEmployee(rowData)}
@@ -141,7 +173,7 @@ const ProjectDetail = () => {
             marginBottom: "1.2rem",
           }}
         >
-          Assign Projects
+          <p>Employee Involved</p>
           <Button variant="contained" onClick={handleAddOpenModal}>
             +Add Employee
           </Button>
@@ -176,10 +208,10 @@ const ProjectDetail = () => {
           handleCloseModal={handleCloseAddModal}
         />
       )}
-      
+
       {openEditModal && (
         <EditProjectEmployeeModal
-          id={editedEmployee?.id}
+          projectTd={editedEmployee?.id}
           open={openEditModal}
           handleCloseModal={handleCloseEditModal}
         />

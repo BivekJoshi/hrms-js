@@ -7,6 +7,15 @@ import {
 } from '../../api/address/address-api';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { getEmployeeById } from '../../api/employee/employee-api';
+
+export const useGetEmployeeById = () => {
+  const {id}=useParams();
+  return useQuery(['getEmployeeById', id], () => getEmployeeById(id), {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
+};
 
 export const usePermanentAddAddress = ({ onSuccess }) => {
   const queryClient = useQueryClient();
@@ -18,7 +27,7 @@ export const usePermanentAddAddress = ({ onSuccess }) => {
       onSuccess: (data, variables, context) => {
         toast.success('Permanent address added successfully');
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries('getAddressById');
+        queryClient.invalidateQueries('getEmployeeById');
       },
       onError: (err, _variables, _context) => {
         toast.error(`error: ${err.message}`);
@@ -29,12 +38,20 @@ export const usePermanentAddAddress = ({ onSuccess }) => {
 
 export const useTemporaryAddress = ({ onSuccess }) => {
   const { id } = useParams();
+
+  const addTemporaryAddressMutation = (formData) => {
+    if (formData) {
+      return addTemporaryAddress(formData, id);
+    }
+    return Promise.resolve();
+  };
+
   return useMutation(
     ['temporaryAddress'],
-    (formData) => addTemporaryAddress(formData, id),
+    addTemporaryAddressMutation,
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Temporary address added successfully');
+        // toast.success('Temporary address added successfully');
         onSuccess && onSuccess(data, variables, context);
       },
       onError: (err, _variables, _context) => {
@@ -43,6 +60,7 @@ export const useTemporaryAddress = ({ onSuccess }) => {
     }
   );
 };
+
 
 export const useGetAddressById = (id) => {
   return useQuery(['getAddressById', id], () => getAddressById(id), {
@@ -63,7 +81,7 @@ export const useEditAddress = ({ onSuccess }) => {
       onSuccess: (data, variables, context) => {
         toast.success('Address edited successfully');
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries('getAddressById');
+        queryClient.invalidateQueries('getEmployeeById');
       },
       onError: (err, _variables, _context) => {
         toast.error(`error: ${err.message}`);

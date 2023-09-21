@@ -185,7 +185,7 @@ const adminRoutes = [
     path: "holiday",
     name: "Holiday",
     id: nanoid(),
-    component: <Holiday />,
+    component: <Holiday component="holiday"/>,
   },
   {
     path: "reset-password",
@@ -203,19 +203,19 @@ const adminRoutes = [
     path: "resource/Office/Deactivated",
     name: "Office Resource Deactivated",
     id: nanoid(),
-    component: <DeactivatedOfficeResource />,
+    component: <DeactivatedOfficeResource component="resourceDeactivated"/>,
   },
   {
     path: "resource/office",
     name: "Office Resource",
     id: nanoid(),
-    component: <OfficeResource />,
+    component: <OfficeResource component="officeResource"/>,
   },
   {
     path: "resource/employee",
     name: "Employee Logistics",
     id: nanoid(),
-    component: <EmployeeResource />,
+    component: <EmployeeResource component="employeeResource"/>,
   },
   {
     path: "users",

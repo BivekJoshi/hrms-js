@@ -1,10 +1,12 @@
 import * as React from "react";
-import MaterialTable from "@material-table/core";
+import MaterialTable from "material-table";
 import { Button, Stack } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
+import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import HocButton from "../../../hoc/hocButton";
 import PermissionHoc from "../../../hoc/permissionHoc";
+import tableIcons from "../../../../theme/overrides/TableIcon";
+import useAuth from "../../../../auth/hooks/component/login/useAuth";
 
 const CompanyTableView = ({
   permissions,
@@ -13,12 +15,13 @@ const CompanyTableView = ({
   handleEditCompany,
   handleDeleteCompany,
 }) => {
-  console.log({"permissions" : permissions})
+  const {isEmployee}=useAuth();
+
   const columns = [
     {
       title: "SN",
-      render: (rowData) => rowData.tableData.index + 1,
-      width: 80,
+      render: (rowData) => rowData.tableData.id + 1,
+      width: "3%",
       sortable: false,
       sorting: false,
     },
@@ -26,14 +29,14 @@ const CompanyTableView = ({
       title: "Company Name",
       field: "companyName",
       emptyValue: "-",
-      width: 180,
+      width: "20vh",
       sorting: false,
     },
     {
       title: "Company Type",
       field: "companyType",
       emptyValue: "-",
-      width: 170,
+      width: "20vh",
       sorting: false,
     },
     {
@@ -43,41 +46,48 @@ const CompanyTableView = ({
       width: 400,
       sorting: false,
     },
+  ];
+
+  const actions = [
     {
-      title: "Actions",
-      render: (rowData) => (
-        <Stack direction="row" spacing={0}>
-          <HocButton
-            permissions={permissions?.canEdit}
-            onClick={() => handleEditCompany(rowData)}
-            icon={<EditIcon />}
-          />
-
-          <HocButton
-            permissions={permissions?.canDelete}
-            onClick={() => handleDeleteCompany(rowData)}
-            icon={<DeleteIcon />}
-          />
-        </Stack>
+      icon: () => (<ModeEditOutlineIcon />
+        // <HocButton
+        //   permissions={permissions?.canEdit}
+        //   icon={<ModeEditOutlineIcon />}
+        // />
       ),
-      sorting: false,
-
-      width: 120,
+      tooltip: "Edit Company",
+      onClick: (event, rowData) => handleEditCompany(rowData),
+    },
+    {
+      icon: () => (<DeleteIcon />
+        // <HocButton permissions={permissions?.canDelete} icon={<DeleteIcon />} />
+      ),
+      tooltip: "Delete Company",
+      onClick: (event, rowData) => handleDeleteCompany(rowData),
     },
   ];
 
+  if (isEmployee) {
+    actions.length = 0;
+  }
+
+  if (isLoading) return <>Loading</>;
   return (
     <>
       <MaterialTable
+        icons={tableIcons}
         columns={columns}
         data={companyData}
         title="Company List"
         isLoading={isLoading}
         options={{
+          exportButton: true,
           padding: "dense",
           margin: 50,
           pageSize: 10,
           emptyRowsWhenPaging: false,
+          actionsColumnIndex: -1,
           headerStyle: {
             backgroundColor: "#01579b",
             color: "#FFF",
@@ -93,9 +103,10 @@ const CompanyTableView = ({
             fontSize: ".8rem",
           },
         }}
+        actions={actions}
       />
     </>
   );
 };
 
-export default CompanyTableView;
+export default PermissionHoc(CompanyTableView);

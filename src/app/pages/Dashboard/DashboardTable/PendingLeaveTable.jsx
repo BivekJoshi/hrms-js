@@ -13,7 +13,7 @@ const PendingLeaveTable = ({ pendingLeaveData, loading }) => {
 
   const getEmployeeName = (rowData) => {
     const employeeId = rowData.employeeId;
-    const employee = employeeData?.find((emp) => emp.id === employeeId);
+    const employee = employeeData && employeeData?.find((emp) => emp.id === employeeId);
     const name = `${employee?.firstName} ${employee?.middleName || ""} ${
       employee?.lastName
     }`;

@@ -73,66 +73,59 @@ const EmployeeDocumentDetailForm = () => {
   return (
     <div>
       <Grid container>
-        <Grid item xs={12} sm={6}>
-          <Box
-            sx={{
-              display: "grid",
-              gridTemplateColumns: {xs:"1fr 1fr", sm:"1fr", lg:"1fr 1fr"},
-              gap:{xs:"1rem",lg: "0.6rem"},
-              alignItems: "center",
-              padding: {xs:"0 0 2rem", sm:"0 1rem 0"},
-
-            }}
+      <Grid item xs={12} sm={6} md={6}>
+  {documentPhoto &&
+    documentPhoto.map((document) => (
+      <Stack
+        key={document?.id}
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "1rem",
+          marginLeft: "15vh",
+          position: "relative", 
+        }}
+      >
+        <Box>
+          <img
+            src={`${url}${document?.path}`}
+            alt="Document"
+            width={240}
+            height={140}
+            style={{ objectFit: "cover", width: "80%", height: "100%" }}
+          />
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "flex-end",
+            gap: ".5rem",
+            position: "absolute",
+            bottom: "10px",
+            right: "14vh",
+          }}
+        >
+          <Button
+            sx={{ width: "fit-content" }}
+            variant="contained"
+            color="primary"
+            onClick={() => handleEditFormSubmit(document)}
           >
-            {documentPhoto &&
-              documentPhoto.map((document) => (
-                <Stack
-                  key={document?.id}
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "1rem",
-                  }}
-                >
-                  <Box>
-                    <img
-                      src={`${url}${document?.path}`}
-                      alt="Document"
-                      width={240}
-                      height={140}
-                      style={{objectFit:"contain", width:"100%", height:"40vh"}}
-                    />
-                  </Box>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: "center",
-                      gap: "1rem",
-                    }}
-                  >
-                    <Button
-                      sx={{ width: "fit-content" }}
-                      type="button"
-                      variant="contained"
-                      color="primary"
-                      onClick={() => handleEditFormSubmit(document)}
-                    >
-                      Update
-                    </Button>
-                    <Button
-                      sx={{ width: "fit-content" }}
-                      type="button"
-                      variant="contained"
-                      color="error"
-                      onClick={() => handleDelete(document)}
-                    >
-                      Delete
-                    </Button>
-                  </Box>
-                </Stack>
-              ))}
-          </Box>
-        </Grid>
+            Update
+          </Button>
+          <Button
+            sx={{ width: "fit-content" }}
+            variant="contained"
+            color="error"
+            onClick={() => handleDelete(document)}
+          >
+            Delete
+          </Button>
+        </Box>
+      </Stack>
+    ))}
+</Grid>
+
         <Grid item xs={12} sm={6}>
           {documentType &&
             documentType.map((document) => (

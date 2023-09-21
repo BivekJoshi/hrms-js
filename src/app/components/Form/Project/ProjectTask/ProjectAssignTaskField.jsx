@@ -1,10 +1,30 @@
-import React from "react";
+import React, { useContext } from "react";
 import useProjectAssignTaskForm from "../../../../hooks/project/ProjectTask/ProjectTaskForm/useProjectAssignTaskForm";
 import { Button, Grid, MenuItem, TextField } from "@mui/material";
+import { useGetProjectEmployeeById } from "../../../../hooks/project/projectEmployee/useProjectEmployee";
+import { useParams } from "react-router-dom";
+import { useGetEmployee } from "../../../../hooks/employee/useEmployee";
+import ThemeModeContext from "../../../../../theme/ThemeModeContext";
 
-const ProjectAssignTaskField = ({ onClose, id, data }) => {
-  console.log(data);
-  const { formik } = useProjectAssignTaskForm({ id });
+const ProjectAssignTaskField = ({ onClose, data }) => {
+  const { mode } = useContext(ThemeModeContext);
+
+  const { formik } = useProjectAssignTaskForm({ data });
+  const { id: projectTd } = useParams();
+
+  const {
+    data: projectData,
+    isLoading: LoadingProjectEmployeeData,
+  } = useGetProjectEmployeeById(projectTd);
+  const { data: employeeData, isLoading: loadingEmployee } = useGetEmployee();
+
+  const getEmployeeNameById = (employeeId) => {
+    const employee = employeeData?.find((emp) => emp?.id === employeeId);
+    const name = `${employee?.firstName} ${employee?.middleName || ""} ${
+      employee?.lastName
+    }`;
+    return name;
+  };
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
@@ -15,11 +35,6 @@ const ProjectAssignTaskField = ({ onClose, id, data }) => {
     }
   };
 
-  const {
-    data: employeeData,
-    isLoading: loadingEmployee,
-  } = useGetDepartment();
-
   return (
     <Grid container spacing={3}>
       <Grid item>
@@ -28,42 +43,43 @@ const ProjectAssignTaskField = ({ onClose, id, data }) => {
 
         <b>Details</b>
         <p>{data?.detail}</p>
-        <Grid item xs={12} sm={12}>
-          <TextField
-            id="projectEmployeeId"
-            name="projectEmployeeId"
-            select
-            label="Assign To"
-            placeholder="Select employee"
-            fullWidth
-            required
-            value={!loadingEmployee && formik.values.projectEmployeeId}
-            onChange={formik.handleChange}
-            error={
-              formik.touched.projectEmployeeId &&
-              Boolean(formik.errors.projectEmployeeId)
-            }
-            helperText={
-              formik.touched.projectEmployeeId &&
-              formik.errors.projectEmployeeId
-            }
-            variant="outlined"
-            autoFocus
-            InputLabelProps={{ shrink: true }}
-          >
-            {!loadingEmployee &&
-              employeeData.map((option) => (
+      </Grid>
+      <Grid item xs={12} sm={12}>
+        <TextField
+          id="projectEmployeeId "
+          name="projectEmployeeId "
+          select
+          label="Assign Task To"
+          placeholder="Select Employee"
+          fullWidth
+          required
+          value={!LoadingProjectEmployeeData && formik.values.projectEmployeeId}
+          onChange={formik.handleChange}
+          error={
+            formik.touched.projectEmployeeId &&
+            Boolean(formik.errors.projectEmployeeId)
+          }
+          helperText={
+            formik.touched.projectEmployeeId && formik.errors.projectEmployeeId
+          }
+          variant="outlined"
+          autoFocus
+          InputLabelProps={{ shrink: true }}
+        >
+          {!LoadingProjectEmployeeData &&
+            (!loadingEmployee &&
+              projectData.map((option) => (
                 <MenuItem
                   key={option.id}
                   value={option.id}
                   sx={{ bgcolor: mode === "light" ? "" : "#413e3e" }}
                 >
-                  {option.employeename}
+                  {getEmployeeNameById(option.empId)}
                 </MenuItem>
-              ))}
-          </TextField>
-        </Grid>
+              )))}
+        </TextField>
       </Grid>
+
       <Grid
         container
         direction="row"
