@@ -5,10 +5,9 @@ import {
   useGetDeactivatedProject,
 } from "../../../hooks/project/useProject";
 import { useGetEmployee } from "../../../hooks/employee/useEmployee";
-import { useGetProjectEmployeeById } from "../../../hooks/project/projectEmployee/useProjectEmployee";
-import { Box, Button, Grid, Stack } from "@mui/material";
-import ActiveConfirmationModal from "../../../components/Modal/ActivateConfirmationModal";
+import { Button, Stack } from "@mui/material";
 import { AddProjectActiveModal } from "../ProjectModal/ProjectModal";
+import RestoreFromTrashOutlinedIcon from '@mui/icons-material/RestoreFromTrashOutlined';
 
 
 const DeactivatedProject = () => {
@@ -27,16 +26,6 @@ const DeactivatedProject = () => {
     return name;
   };
 
-  const ActiveProjectEmployeeMutation = useAddActivateProject({});
-  const handleActiveProject = (rowData) => {
-    setActiveProject(rowData);
-    setOpenActiveModal(true);
-  };
-
-  const handleConfirmActive = () => {
-    ActiveProjectEmployeeMutation.mutate(activeProject.id);
-    setOpenActiveModal(false);
-  };
 
   const handleActivateProject = (rowData) => {
     setActivateProject(rowData);
@@ -55,30 +44,20 @@ const DeactivatedProject = () => {
       title: "Project Name",
       field: "projectName",
       emptyValue: "-",
-      width: "7%",
     },
     {
       title: "Project Leader Name",
       render: (rowData) => {
         return <p>{getLeaderName(rowData)}</p>;
       },
-      width: 120,
     },
+  ];
+
+  const actions = [
     {
-      title: "Action",
-      render: (rowData) => (
-        <Stack direction="row" spacing={0}>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={() => handleActivateProject(rowData)}
-          >
-            Activate Project
-          </Button>
-        </Stack>
-      ),
-      sorting: false,
-      width: 120,
+      icon: () => <RestoreFromTrashOutlinedIcon sx={{ color: "#01579B" }} />,
+      tooltip: "Activate Project",
+      onClick: (event, rowData) => handleActivateProject(rowData),
     },
   ];
 
@@ -95,8 +74,9 @@ const DeactivatedProject = () => {
         options={{
           padding: "dense",
           margin: 50,
-          pageSize: 10,
+          pageSize: 5,
           emptyRowsWhenPaging: false,
+          actionsColumnIndex: -1,
           headerStyle: {
             backgroundColor: "#1c7ed6",
             color: "#FFF",
@@ -108,6 +88,7 @@ const DeactivatedProject = () => {
             fontSize: ".8rem",
           },
         }}
+        actions={actions}
       />
 
       {openActivateModal && (
