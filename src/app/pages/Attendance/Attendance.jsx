@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useContext } from "react";
-import { TextField, Button, Box, MenuItem, Paper } from "@mui/material";
+import { TextField, Button, Box, MenuItem, Paper, Skeleton } from "@mui/material";
 import { Table, TableBody, TableRow, TableContainer } from "@mui/material";
 import { TableCell, TableHead } from "@mui/material";
 import { useGetAttendance } from "../../hooks/attendance/useAttendance";
@@ -149,6 +149,16 @@ const Attendance = () => {
 
     return filtered;
   }, [attendanceData, searchEmployee, searchMonth, searchYear]);
+
+  if (isLoading)
+  return (
+    <>
+      <Skeleton />
+      <Skeleton animation="wave" />
+      <Skeleton animation={false} />
+      <Skeleton sx={{ height: 300 }} animation="wave" variant="rectangular" />
+    </>
+  );
 
   return (
     <div className="main">

@@ -19,9 +19,23 @@ export const getProjectById = async (id) => {
     }
 };
 
+{/*________________________GET PROJECT INVOLVEMENT BY EMPLOYEE ID_____________________________________*/ }
+export const getProjectByEmployeeIdInvolved = async (employeeId) => {
+    if (employeeId) {
+      const data = await axiosInstance.get(`/project/employee-id/${employeeId}`);
+      return data;
+    }
+};
+
 {/*________________________GET-DEACTIVATE-PROJECT_____________________________________*/ }
 export const getDeactivatedProject = async () => {
     const data = await axiosInstance.get(`/project/get-deactivated`);
+    return data;
+};
+
+{/*________________________GET-PROJECT_WISE_EMPLOYEE_____________________________________*/ }
+export const getProjectWiseEmployee = async (employeeId) => {
+    const data = await axiosInstance.get(`/project/project-wise-employees/${employeeId}`);
     return data;
 };
 

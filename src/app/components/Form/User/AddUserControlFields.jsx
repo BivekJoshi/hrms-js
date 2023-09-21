@@ -42,8 +42,8 @@ export const AddUserControlFields = ({ onClose }) => {
           getOptionLabel={(employee) =>
             `${employee?.firstName} ${employee?.middleName} ${employee?.lastName}`
           }
-          value={employeeData.find(
-            (employee) => employee?.id === formik.values.employeeId
+          value={employeeData?.find(
+            (employee) => employee?.id === formik.values?.employeeId
           )}
           onChange={handleUserNameChange}
           renderInput={(params) => (

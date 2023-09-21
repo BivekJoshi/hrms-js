@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import DashboardCard from "../../components/cards/Dashboard/DashboardCard";
-import { Box, Grid, Stack, Typography } from "@mui/material";
+import { Box, CardMedia, Grid, Stack, Typography } from "@mui/material";
 import { AiFillHome } from "react-icons/ai";
 
 import { useGetDashboard } from "../../hooks/dashboard/useDashboard";
@@ -20,8 +20,11 @@ import { useGetEvent } from "../../hooks/event/useEvent";
 import { useGetHoliday } from "../../hooks/holiday/useHoliday";
 import { useGetUserRole } from "../../hooks/auth/userControl/useUserControl";
 import { getUser } from "../../utils/cookieHelper";
-
+import ThemeModeContext from "../../../theme/ThemeModeContext";
+import Male from "../../../assets/male.png";
+import { useGetLoggedInUser } from "../../hooks/auth/usePassword";
 const Dashboard = () => {
+  const { mode } = useContext(ThemeModeContext);
   const { data: dashboardData } = useGetDashboard();
   const { data: projectDataCount } = useGetProjectCount();
   const { data: projectData } = useGetProject();
@@ -31,9 +34,48 @@ const Dashboard = () => {
   const { data: eventData } = useGetEvent();
   const { data: holidayData } = useGetHoliday();
   const { data: userRoleData } = useGetUserRole();
+  const { data: myData } = useGetLoggedInUser();
+
+  const today = new Date();
+  const options = {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  };
+  const formattedDate = today.toLocaleDateString(undefined, options);
 //   const {data}=getUser();
 // console.log(data);
   return (
+    <>
+          <Box
+        display="flex"
+        flexDirection="row"
+        padding="1rem"
+        className={
+          mode === "light" ? "employeeDeshbordBG" : "employeeDeshbordBGDark"
+        }
+      >
+        <CardMedia
+          src={Male}
+          component="img"
+          // src={
+          //   employData?.userPhotoPath
+          //     ? img :
+          //     // EGender === "MALE" ?
+          //      Male
+          //     // : ""
+          //     // ? Female
+          //     // : Female
+          // }
+          alt="Paella dish"
+          sx={{ width: 66, height: 66, borderRadius: "2rem" }}
+        />
+        <Box alignSelf="center">
+          <h3>Welcome , {myData?.name}</h3>
+          <h3>{formattedDate}</h3>
+        </Box>
+      </Box>
     <Box sx={{ display: "grid", gridTemplateRows: "1fr", rowGap: "3rem" }}>
       <Grid
         style={{ marginTop: "10px" }}
@@ -131,6 +173,7 @@ const Dashboard = () => {
         </Grid>
       </Box>
     </Box>
+    </>
   );
 };
 

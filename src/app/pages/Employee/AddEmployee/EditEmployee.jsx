@@ -2,10 +2,16 @@ import { Box, Button, Container, Paper, Step } from "@mui/material";
 import { StepLabel, Stepper, Typography } from "@mui/material";
 import React, { useState } from "react";
 import EditEmployeeForm from "../../../components/Form/Employee/EmployeeBasicInfoForm/EditEmployeeForm/EditEmployeeForm";
+import { useNavigate, useParams } from "react-router-dom";
+import useAuth from "../../../../auth/hooks/component/login/useAuth";
 
 const EditEmployee = () => {
   const { getStepContent, handleNext, steps } = EditEmployeeForm();
   const [activeStep, setActiveStep] = useState(0);
+  const navigate = useNavigate();
+  const {id}=useParams();
+  const { isEmployee } = useAuth();
+
 
   const handleBack = () => {
     setActiveStep(activeStep - 1);
@@ -24,11 +30,15 @@ const EditEmployee = () => {
     setActiveStep(stepIndex);
   };
 
+  const targetRoute = isEmployee
+    ? `/employee/viewprofile`
+    : `/admin/employee/${id}`;
+
   return (
     <Container component="main" maxWidth="xlg" sx={{ mt: 5 }}>
       <Paper variant="plain" sx={{ my: { xs: 0, md: 6 }, p: { xs: 0, md: 3 } }}>
         <Typography component="h1" variant="h4" align="center">
-          Edit Employee
+          Edit Details
         </Typography>
         <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }} alternativeLabel>
           {steps.map((label) => (
@@ -73,9 +83,7 @@ const EditEmployee = () => {
                 {activeStep === steps.length - 1 ? (
                   <Button
                     variant="contained"
-                    onClick={() => {
-                      formik.handleSubmit();
-                    }}
+                    onClick={()=>navigate(targetRoute)}
                     sx={{ mt: 3, ml: 1 }}
                   >
                     Add Changes

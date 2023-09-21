@@ -18,10 +18,11 @@ import { useGetUserControl } from "../../hooks/auth/userControl/useUserControl";
 const Leave = ({ isLoading }) => {
   const { data: leaveData, isLoading: loadingleave } = useGetLeave();
   const { data: employeeData, isLoading: loadingemployee } = useGetEmployee();
-  const { data: leaveTypeData, isLoading: loadingleaveType } =
-    useGetLeaveType();
+  const {
+    data: leaveTypeData,
+    isLoading: loadingleaveType,
+  } = useGetLeaveType();
   const { data: UserData, isLoading: loadingUser } = useGetUserControl();
-
 
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
@@ -70,13 +71,12 @@ const Leave = ({ isLoading }) => {
     const name = `${capitalizeFirstLetter(leaveType.leaveName)} Leave`;
     return name;
   };
-  const getUserName = ( rowData) => {
-    const confirmById = rowData?.confirmById;  
+  const getUserName = (rowData) => {
+    const confirmById = rowData?.confirmById;
     const user = UserData?.find((confirmBy) => confirmBy.id === confirmById);
     const name = `${user?.name || "-"}`;
     return name;
   };
-
 
   const columns = [
     {
@@ -91,6 +91,10 @@ const Leave = ({ isLoading }) => {
       render: (rowData) => {
         return <p>{getEmployeeName(rowData)} </p>;
       },
+      customFilterAndSearch: (searchValue, rowData) => {
+        const employeeName = getEmployeeName(rowData);
+        return employeeName.toLowerCase().includes(searchValue.toLowerCase());
+      },
       width: 120,
       sorting: false,
     },
@@ -98,6 +102,10 @@ const Leave = ({ isLoading }) => {
       title: "Leave Type",
       render: (rowData) => {
         return <p>{getLeaveTypeName(rowData)}</p>;
+      },
+      customFilterAndSearch: (searchValue, rowData) => {
+        const leaveTypeName = getLeaveTypeName(rowData);
+        return leaveTypeName.toLowerCase().includes(searchValue.toLowerCase());
       },
       width: 150,
       sorting: false,
@@ -126,14 +134,14 @@ const Leave = ({ isLoading }) => {
       },
       render: (rowData) => {
         const status = rowData.leaveStatus;
-        let chipColor = '';
+        let chipColor = "";
 
-        if (status === 'APPROVED') {
-          chipColor = 'green';
-        } else if (status === 'REJECTED') {
-          chipColor = 'red';
-        } else if (status === 'PENDING') {
-          chipColor = 'orange';
+        if (status === "APPROVED") {
+          chipColor = "green";
+        } else if (status === "REJECTED") {
+          chipColor = "red";
+        } else if (status === "PENDING") {
+          chipColor = "orange";
         }
 
         return (
@@ -163,11 +171,15 @@ const Leave = ({ isLoading }) => {
       width: 100,
       sorting: false,
     },
- 
+
     {
       title: "Approved By",
       render: (rowData) => {
         return <p>{getUserName(rowData)} </p>;
+      },
+      customFilterAndSearch: (searchValue, rowData) => {
+        const ApprovedBy = getUserName(rowData);
+        return ApprovedBy.toLowerCase().includes(searchValue.toLowerCase());
       },
       width: 120,
       sorting: false,
@@ -217,7 +229,7 @@ const Leave = ({ isLoading }) => {
         icons={tableIcons}
         columns={columns}
         data={leaveData}
-        title='Leave Data'
+        title="Leave Data"
         isLoading={loadingleave}
         options={{
           padding: "dense",
@@ -225,18 +237,18 @@ const Leave = ({ isLoading }) => {
           pageSize: 10,
           emptyRowsWhenPaging: false,
           headerStyle: {
-            backgroundColor: '#01579b',
-            color: '#FFF',
-            fontSize: '1rem',
-            padding: 'dense',
+            backgroundColor: "#01579b",
+            color: "#FFF",
+            fontSize: "1rem",
+            padding: "dense",
             height: 50,
-            textAlign: 'center',
-            border: '2px solid #fff',
-            minHeight: '10px',
-            textTransform: 'capitalize',
+            textAlign: "center",
+            border: "2px solid #fff",
+            minHeight: "10px",
+            textTransform: "capitalize",
           },
           rowStyle: {
-            fontSize: '.8rem',
+            fontSize: ".8rem",
           },
         }}
       />
@@ -258,7 +270,7 @@ const Leave = ({ isLoading }) => {
           open={openDeleteModal}
           handleCloseModal={handleCloseDeleteModal}
           handleConfirmDelete={handleConfirmDelete}
-          message={'Leave'}
+          message={"Leave"}
         />
       )}
     </>

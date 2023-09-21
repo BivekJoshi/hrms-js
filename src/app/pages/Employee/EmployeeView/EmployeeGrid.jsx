@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useGetEmployee } from "../../../hooks/employee/useEmployee";
 import EmployeeGridView from "./EmployeePage/EmployeeGridView";
-import { Box, Container, Stack, TextField, Grid, Card, Typography } from "@mui/material";
+import { Box, Container, Stack, TextField, Grid, Card, Typography, Skeleton } from "@mui/material";
 import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 
 const EmployeeGrid = () => {
 
-  const { data: employeeData } = useGetEmployee();
+  const { data: employeeData ,isLoading } = useGetEmployee();
   const [nameFilter, setNameFilter] = useState("");
   const [positionFilter, setPositionFilter] = useState("");
   const [phoneFilter, setPhoneFilter] = useState("");
@@ -28,6 +28,9 @@ const EmployeeGrid = () => {
     setIsContainerVisible(!isContainerVisible);
   };
 
+  if (isLoading) {
+    return <Skeleton sx={{ height: 190 }} animation="wave" variant="rectangular" />;
+  }
   return (
     <>
       <Stack sx={{ display: "flex", flexDirection: "row-reverse" }}>
@@ -69,7 +72,7 @@ const EmployeeGrid = () => {
         )}
       </Stack>
       <br />
-      <EmployeeGridView employeeData={filteredEmployees} />
+      <EmployeeGridView employeeData={filteredEmployees} isLoading={isLoading}/>
     </>
   );
 };

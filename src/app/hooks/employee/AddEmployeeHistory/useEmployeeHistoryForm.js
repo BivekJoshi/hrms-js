@@ -2,7 +2,7 @@ import { useFormik } from 'formik';
 import { useAddEmployeeHistory, useEditEmployeeHistory } from '../useEmployeeHistory';
 
 const useEmployeeHistoryForm = ({ data, isLoadingHistory: isLoading }) => {
-    const { mutate } = useAddEmployeeHistory({});
+    const { mutate: addMutate } = useAddEmployeeHistory({});
     const { mutate: editMutate } = useEditEmployeeHistory({});
 
     const historyDetails =
@@ -36,17 +36,17 @@ const useEmployeeHistoryForm = ({ data, isLoadingHistory: isLoading }) => {
         },
         enableReinitialize: "true",
         onSubmit: (values) => {
-            if (historyDetails.length > 0) {
-                handleEditRequest(values);
-            } else {
+            if (values.history.some((history)=>!history.id)) {
                 handleRequest(values);
+            } else {
+                handleEditRequest(values);
             }
         },
     });
 
     const handleRequest = (values) => {
         values = { ...values };
-        mutate(values, formik);
+        addMutate(values, formik);
     }
 
     const handleEditRequest = (values) => {

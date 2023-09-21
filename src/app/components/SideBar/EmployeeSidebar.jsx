@@ -27,6 +27,10 @@ import HolidayVillageIcon from "@mui/icons-material/HolidayVillage";
 import LaptopIcon from "@mui/icons-material/Laptop";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import BreadCrumbs from "../../../routes/employeeRoutes";
+import logo from "../../../assets/logo.png";
+import CoPresentIcon from '@mui/icons-material/CoPresent';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import ApprovalOutlinedIcon from '@mui/icons-material/ApprovalOutlined';
 
 const drawerWidth = 250;
 
@@ -80,7 +84,7 @@ export default function EmployeeSidebar() {
       name: "Dashboard",
       icon: (
         <DashboardIcon
-          sx={mode === "light" ? { color: "black" } : { color: "white" }}
+          sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
         />
       ),
       path: "dashboard",
@@ -89,8 +93,8 @@ export default function EmployeeSidebar() {
     {
       name: "My Profile",
       icon: (
-        <DashboardIcon
-          sx={mode === "light" ? { color: "black" } : { color: "white" }}
+        <AccountCircleOutlinedIcon
+          sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
         />
       ),
       path: "viewprofile",
@@ -100,8 +104,8 @@ export default function EmployeeSidebar() {
       name: "My Attendence",
       path: "attendance",
       icon: (
-        <MailIcon
-          sx={mode === "light" ? { color: "black" } : { color: "white" }}
+        <CoPresentIcon
+          sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
         />
       ),
       subMenus: [],
@@ -110,8 +114,8 @@ export default function EmployeeSidebar() {
       name: "Apply Leave",
       path: "applyleave",
       icon: (
-        <MailIcon
-          sx={mode === "light" ? { color: "black" } : { color: "white" }}
+        <ApprovalOutlinedIcon
+          sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
         />
       ),
       subMenus: [],
@@ -121,7 +125,7 @@ export default function EmployeeSidebar() {
       path: "leavetype",
       icon: (
         <MailIcon
-          sx={mode === "light" ? { color: "black" } : { color: "white" }}
+          sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
         />
       ),
       subMenus: [],
@@ -130,7 +134,7 @@ export default function EmployeeSidebar() {
       name: "Department",
       icon: (
         <WorkspacesIcon
-          sx={mode === "light" ? { color: "black" } : { color: "white" }}
+          sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
         />
       ),
       path: "department",
@@ -140,7 +144,7 @@ export default function EmployeeSidebar() {
       name: "Designation",
       icon: (
         <AssignmentIndIcon
-          sx={mode === "light" ? { color: "black" } : { color: "white" }}
+          sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
         />
       ),
       path: "designation",
@@ -150,7 +154,7 @@ export default function EmployeeSidebar() {
       name: "Company",
       icon: (
         <BusinessIcon
-          sx={mode === "light" ? { color: "black" } : { color: "white" }}
+          sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
         />
       ),
       path: "company",
@@ -160,7 +164,7 @@ export default function EmployeeSidebar() {
       name: "Project",
       icon: (
         <AddchartIcon
-          sx={mode === "light" ? { color: "black" } : { color: "white" }}
+          sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
         />
       ),
       path: "project",
@@ -170,7 +174,7 @@ export default function EmployeeSidebar() {
       name: "Event",
       icon: (
         <EventIcon
-          sx={mode === "light" ? { color: "black" } : { color: "white" }}
+          sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
         />
       ),
       path: "event",
@@ -180,7 +184,7 @@ export default function EmployeeSidebar() {
       name: "Holiday",
       icon: (
         <HolidayVillageIcon
-          sx={mode === "light" ? { color: "black" } : { color: "white" }}
+          sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
         />
       ),
       path: "holiday",
@@ -190,7 +194,7 @@ export default function EmployeeSidebar() {
       name: "Todo",
       icon: (
         <PlaylistAddCheckIcon
-          sx={mode === "light" ? { color: "black" } : { color: "white" }}
+          sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
         />
       ),
       path: "todolist",
@@ -234,6 +238,7 @@ export default function EmployeeSidebar() {
       >
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
+            <img src={logo} alt="logo" />
             <ChevronLeftIcon />
           </IconButton>
         </DrawerHeader>
@@ -325,9 +330,11 @@ export default function EmployeeSidebar() {
             alignItems: "center",
             padding: "10px",
             flexDirection: "column",
+            position:"fixed",
+            bottom :"0",
           }}
         >
-          <Button
+          {/* <Button
             variant="contained"
             sx={{ backgroundColor: "#1c7ed6" }}
             onClick={() => {
@@ -336,14 +343,14 @@ export default function EmployeeSidebar() {
             }}
           >
             Logout
-          </Button>
+          </Button> */}
           <Typography
             variant="body2"
             sx={{ marginRight: "8px", marginTop: "1rem" }}
           >
-            {mode === "light" ? "Light" : "Dark"} Mode
+            {mode === "light" ? "Dark" : "Light"} Mode
+            <Switch checked={mode === "dark"} onChange={toggleMode} />
           </Typography>
-          <Switch checked={mode === "dark"} onChange={toggleMode} />
         </Box>
       </Drawer>
 
@@ -370,18 +377,18 @@ export default function EmployeeSidebar() {
             alignItems="center"
           >
             {location.pathname !== "/employee/dashboard" && (
-                <Fab
-                  color="primary"
-                  sx={{ height: "auto", padding: ".3rem 0" }}
-                  aria-label="add"
-                  variant="extended"
-                  onClick={() => {
-                    navigate(-1);
-                  }}
-                >
-                  <ArrowBackIcon />
-                </Fab>
-              )}
+              <Fab
+                color="primary"
+                sx={{ height: "auto", padding: ".3rem 0" }}
+                aria-label="add"
+                variant="extended"
+                onClick={() => {
+                  navigate(-1);
+                }}
+              >
+                <ArrowBackIcon />
+              </Fab>
+            )}
             <BreadCrumbs />
           </Box>
           <Outlet />
