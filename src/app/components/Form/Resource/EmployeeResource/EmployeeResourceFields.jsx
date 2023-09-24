@@ -59,8 +59,8 @@ const EmployeeResourceFields = ({ onClose, isLoading, data }) => {
           <TextField
             id="officeResourceId"
             name="officeResourceId"
-            label="Office Resource"
-            placeholder="Select Resource"
+            label="Office Logistics"
+            placeholder="Select Logistics"
             fullWidth
             required
             select

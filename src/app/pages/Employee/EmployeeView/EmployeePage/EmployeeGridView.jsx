@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import EmployeeCard from "../../../../components/cards/Employee/EmployeeCard";
 import { useGetEmployeeData } from "../../../../hooks/employee/useEmployee";
 
-const EmployeeGridView = ({ employeeData ,isLoading}) => {
+const EmployeeGridView = ({ employeeData, isLoading }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const pageNumber = 12;
   const { data: employeePageData } = useGetEmployeeData(pageNumber);
@@ -16,6 +16,7 @@ const EmployeeGridView = ({ employeeData ,isLoading}) => {
   const handlePageChange = (event, newPage) => {
     setCurrentPage(newPage);
   };
+
   if (isLoading)
     return (
       <>
@@ -24,6 +25,7 @@ const EmployeeGridView = ({ employeeData ,isLoading}) => {
         <Skeleton animation={false} />
       </>
     );
+
   return (
     <>
       <Grid

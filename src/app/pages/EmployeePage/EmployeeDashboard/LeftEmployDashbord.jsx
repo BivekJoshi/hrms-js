@@ -53,10 +53,11 @@ export const LeftEmployDashbord = ({}) => {
                     display="flex"
                     flexDirection="row"
                     justifyContent="space-between"
-                    border="1px solid blue"
+                    border="1px solid #d0d0d5"
                     borderRadius=".5rem"
                     padding="0 1rem"
                     alignItems="center"
+                    boxShadow={2}
                   >
                     {notify.eventName}
                     <Box>
@@ -97,10 +98,11 @@ export const LeftEmployDashbord = ({}) => {
                     display="flex"
                     flexDirection="row"
                     justifyContent="space-between"
-                    border="1px solid blue"
+                    border="1px solid #d0d0d5"
                     borderRadius=".5rem"
                     padding="0 1rem"
                     alignItems="center"
+                    boxShadow={2}
                   >
                     {notify?.holidayName} : {notify?.holidayDate}
                     <Box>
