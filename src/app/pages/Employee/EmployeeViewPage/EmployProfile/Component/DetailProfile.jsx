@@ -78,7 +78,7 @@ export const DetailProfile = ({ data }) => {
                 />
                 <Tab
                   label="Documents"
-                  value="7"
+                  value="6"
                   style={{
                     fontSize: "1rem",
                     color: primaryColor,

@@ -15,9 +15,7 @@ import { useGetTaskLoggedInUser } from "../../../hooks/project/ProjectTask/usePr
 
 export default function ProjectEmpPage() {
   const { data: logInUserData } = useGetLoggedInUser();
-
   const {data:taskData}=useGetTaskLoggedInUser();
-
   const { data: projectWiseEmployeeData } = useGetProjectWiseEmployee(
     logInUserData?.employeeId
   );
@@ -25,7 +23,6 @@ export default function ProjectEmpPage() {
   const { data: projectData } = useGetProject();
 
   const [value, setValue] = React.useState("1");
-
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
