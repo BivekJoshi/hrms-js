@@ -8,7 +8,7 @@ const useLeaveForm = (data) => {
 
   const formik = useFormik({
     initialValues: {
-      employeeId: data?.employeeId || "",
+      // employeeId: data?.employeeId || "",
       leaveTypeId: data?.leaveTypeId || "",
       leaveReason: data?.leaveReason || "",
       fromDate: data?.fromDate || "",

@@ -149,7 +149,7 @@ export default function AdminSidebar() {
       ],
     },
     {
-      name: "Resource",
+      name: 'Logistics',
       icon: (
         <LaptopIcon
           sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
