@@ -3,16 +3,16 @@ import Timeline from "@mui/lab/Timeline";
 import { timelineItemClasses } from "@mui/lab/TimelineItem";
 import { Box } from "@mui/material";
 import AcademicsComponents from "./AcademicsComponents";
-import "../../EmployProfile/Style/Style.css"
+import "../../EmployProfile/Style/Style.css";
 import ThemeModeContext from "../../../../../../theme/ThemeModeContext";
 
 const AcademicsInfo = ({ data }) => {
-  const{mode} =useContext(ThemeModeContext)
+  const { mode } = useContext(ThemeModeContext);
   return (
     <Box
       className="profileBasic"
       sx={{
-        bgcolor: mode === "light" ? "#ededed":"#454546",
+        bgcolor: mode === "light" ? "#ededed" : "#454546",
       }}
     >
       <Timeline
@@ -21,15 +21,16 @@ const AcademicsInfo = ({ data }) => {
             flex: 0,
             padding: 0,
           },
-          marginTop:"0rem"
-
+          marginTop: "0rem",
         }}
       >
-        {data.qualifications
-          .sort((a, b) => b.passedYear - a.passedYear)
-          .map((item, index) => (
-            <AcademicsComponents key={index} data={item} />
-          ))}
+        {data
+          ? data.qualifications
+              .sort((a, b) => b.passedYear - a.passedYear)
+              .map((item, index) => (
+                <AcademicsComponents key={index} data={item} />
+              ))
+          : ""}
       </Timeline>
     </Box>
   );

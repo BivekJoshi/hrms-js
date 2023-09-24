@@ -14,8 +14,14 @@ const primaryColor = "#1c7ed6";
 export const PersonalProfile = ({ data }) => {
   const { mode } = useContext(ThemeModeContext);
   const photo = data?.uploadFiles;
-  const employeePhoto = photo.find(file => file?.documentType === "EMPLOYEE_PHOTO");
-  const filePath = employeePhoto ? DOC_URL + employeePhoto.path : (data?.gender === "MALE" ? Male : Female);
+  const employeePhoto = photo
+    ? photo.find((file) => file?.documentType === "EMPLOYEE_PHOTO")
+    : "";
+  const filePath = employeePhoto
+    ? DOC_URL + employeePhoto.path
+    : data?.gender === "MALE"
+    ? Male
+    : Female;
 
   return (
     <>
@@ -30,8 +36,10 @@ export const PersonalProfile = ({ data }) => {
           gap: "1rem",
         }}
       >
-        <Box className="profileInfo" bgcolor={mode === "light" ?"" :"#3f413f"}>
-         
+        <Box
+          className="profileInfo"
+          bgcolor={mode === "light" ? "" : "#3f413f"}
+        >
           <Avatar
             sx={{
               width: 190,
