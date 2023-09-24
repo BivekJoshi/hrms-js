@@ -118,7 +118,7 @@ const Project = ({ permissions }) => {
         className="project-card-control"
         sx={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))",
+          gridTemplateColumns: "repeat(auto-fit, minmax(290px, 1fr))",
         }}
       >
         {filteredProject.map((item, index) => (

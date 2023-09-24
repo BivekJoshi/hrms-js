@@ -12,7 +12,7 @@ export const RightProjectHome = (props) => {
   const progress = 5 * 100;
 
   return (
-    <Box display="grid" gap="1rem">
+    <Box display="grid" gap="1rem"  minHeight="10rem">
       <h3>Your Projects</h3>
 
       {employeeInvolvedProject?.slice(0, 4).map((data, index) => (
