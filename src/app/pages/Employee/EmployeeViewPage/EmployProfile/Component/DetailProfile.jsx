@@ -77,15 +77,6 @@ export const DetailProfile = ({ data }) => {
                   }}
                 />
                 <Tab
-                  label="Training"
-                  value="6"
-                  style={{
-                    fontSize: "1rem",
-                    color: primaryColor,
-                    fontWeight: "bolder",
-                  }}
-                />
-                <Tab
                   label="Documents"
                   value="7"
                   style={{
@@ -115,9 +106,6 @@ export const DetailProfile = ({ data }) => {
             <TrainingInfo data={data}/>
           </TabPanel>
           <TabPanel value="6" style={{ padding: 10 }}>
-            <TrainingInfo data={data}/>
-          </TabPanel>
-          <TabPanel value="7" style={{ padding: 10 }}>
             <DocumentInfo />
           </TabPanel>
         </Box>

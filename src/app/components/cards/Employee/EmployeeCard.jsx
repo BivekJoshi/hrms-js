@@ -236,8 +236,8 @@ const EmployeeCard = ({
                 <PopOver
                   triggerContent={
                     <Chip
-                      label={`${PositionName || ""} (${PositionLevel || ""})`}
                       style={{ width: 230 }}
+                      label={<p style={{textOverflow:"ellipsis", overflow:"hidden"}}>{`${PositionName || ""} (${PositionLevel || ""})`}</p>}
                     />
                   }
                   popoverContent={
@@ -272,10 +272,27 @@ const EmployeeCard = ({
                       flexWrap="wrap"
                       alignItems="center"
                     >
-                      <Email />
-                      <Typography variant="p" style={{ margin: "10px 0" }}>
-                        {OfficeEmail || ""}
-                      </Typography>
+                      <Email sx={{ fontSize: "1.2rem" }} />
+                      <Chip
+                        sx={{
+                          bgcolor: mode === "light" ? "#f5f5f5" : "#4d4c4c",
+                          fontSize: "1rem",
+                          width: "80%",
+                          justifyContent: "flex-start",
+                          padding:"0"
+                        }}
+                        label={
+                          <Typography
+                            variant="p"
+                            style={{
+                              margin: "10px 0 0 -12px",
+                              fontSize: ".85rem",
+                            }}
+                          >
+                            {OfficeEmail || ""}
+                          </Typography>
+                        }
+                      />
                     </Stack>
                   }
                   popoverContent={
@@ -293,10 +310,12 @@ const EmployeeCard = ({
                   flexWrap="wrap"
                   alignItems="center"
                 >
-                  <LocalPhone />
-                  <Typography variant="p" style={{ margin: "10px 0" }}>
-                    {" "}
-                    {MobileNumber || ""}{" "}
+                  <LocalPhone sx={{ fontSize: "1.2rem" }} />
+                  <Typography
+                    variant="p"
+                    style={{ margin: "10px 0", fontSize: ".85rem" }}
+                  >
+                    {MobileNumber || ""}
                   </Typography>
                 </Stack>
               </Box>
