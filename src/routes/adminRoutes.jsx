@@ -9,11 +9,11 @@ import ProjectAddViewEmployeePage from "../app/pages/Project/ProjectEmployeeView
 const ProfileDetail = Loadable(
   lazy(() => import("../app/pages/Auth/Profile/ProfileDetail"))
 );
-// const DeactivatedOfficeResource = Loadable(
-//   lazy(() =>
-//     import("../app/pages/Resource/OfficeResource/DeactivatedOfficeResource")
-//   )
-// );
+const DeactivatedOfficeResource = Loadable(
+  lazy(() =>
+    import("../app/pages/Resource/OfficeResource/DeactivatedOfficeResource")
+  )
+);
 const OfficeResource = Loadable(
   lazy(() => import("../app/pages/Resource/OfficeResource/OfficeResource"))
 );

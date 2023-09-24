@@ -51,42 +51,44 @@ const TrainingInfo = ({ data }) => {
       title: "Training Name",
       field: "trainingName",
       emptyValue: "-",
-      width: 300,
+      width: 100,
     },
     {
       title: "Training Level",
       field: "trainingLevel",
       emptyValue: "-",
-      width: 200,
+      width: 100,
     },
     {
       title: "Institude",
       field: "trainingInstitute",
       emptyValue: "-",
-      width: 200,
+      width: 100,
     },
     {
       title: "Category",
       field: "category",
       emptyValue: "-",
-      width: 200,
+      width: 90,
     },
     {
       title: "Start Date",
       field: "startDate",
       emptyValue: "-",
-      width: 200,
+      width: 85,
     },
     {
       title: "End Date",
+      width: 75,
+
       field: "endDate",
       emptyValue: "-",
-      width: 200,
     },
     {
       title: "Actions",
+      width: 75,
       render: (rowData) => (
-        <Stack direction="row" spacing={0}>
+        <Stack direction="row" justifyContent={"space-evenly"}>
           <Button color="primary" onClick={() => handleEditTraining(rowData)}>
             <ModeEditOutlineIcon />
           </Button>
@@ -124,11 +126,12 @@ const TrainingInfo = ({ data }) => {
           padding: "dense",
           margin: 50,
           pageSize: 10,
+          tableLayout: "fixed",
           emptyRowsWhenPaging: false,
           headerStyle: {
             backgroundColor: "#01579b",
             color: "#FFF",
-            fontSize: "1rem",
+            fontSize: ".9rem",
             padding: "dense",
             height: 50,
           },
@@ -160,15 +163,14 @@ const TrainingInfo = ({ data }) => {
           open={openEditModal}
           handleCloseModal={handleCloseEditModal}
         />
-      )) ||
-        (
-          <EditTrainingInfo
-            empId={loggedInUserData?.id}
-            id={editedTraining?.id}
-            open={openEditModal}
-            handleCloseModal={handleCloseEditModal}
-          />
-        )}
+      )) || (
+        <EditTrainingInfo
+          empId={loggedInUserData?.id}
+          id={editedTraining?.id}
+          open={openEditModal}
+          handleCloseModal={handleCloseEditModal}
+        />
+      )}
     </Box>
   );
 };
