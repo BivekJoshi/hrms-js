@@ -26,7 +26,7 @@ export const RightEmployDashbord = (props) => {
   const { mode } = useContext(ThemeModeContext);
   return (
     <Box>
-      <Box>
+      {/* <Box>
         <h3>Project</h3>
         <Box
           className={
@@ -64,8 +64,8 @@ export const RightEmployDashbord = (props) => {
             <Typography textAlign="center">6</Typography>
           </Box>
         </Box>
-      </Box>
-      <Box marginTop="1rem">
+      </Box> */}
+      <Box >
         <h3>Your Leaves</h3>
         <Box
           className={
@@ -74,6 +74,7 @@ export const RightEmployDashbord = (props) => {
               : "employeeDeshbordBGDark employeeDeshbord"
           }
           display="flex"
+          marginTop="1rem"
           flexDirection="column"
           justifyContent="center"
           padding="1rem"

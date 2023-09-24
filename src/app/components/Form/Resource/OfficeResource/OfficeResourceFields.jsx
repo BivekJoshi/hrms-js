@@ -88,7 +88,7 @@ const OfficeResourceFields = ({ onClose, isLoading, data }) => {
                   name="isActive"
                 />
               }
-              label="If you want to deactive the office resource set switch to false"
+              label="If you want to deactive the office Logistics set switch to false"
             />
           </Grid>
         <Grid

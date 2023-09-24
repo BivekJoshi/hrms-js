@@ -56,7 +56,7 @@ const DeactivatedOfficeResource = () => {
   return (
     <MaterialTable
       icons={tableIcons}
-      title="Deactivated Office Resource"
+      title="Deactivated Office Logistics"
       columns={columns}
       data={data}
       isLoading={isLoading}

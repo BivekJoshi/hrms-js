@@ -40,7 +40,7 @@ export const useAddOfficeResource = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(['addofficeResource'], (formData) => addofficeResource(formData), {
     onSuccess: (data, variables, context) => {
-      toast.success('Succesfully added Office Resource');
+      toast.success('Succesfully added Office Logistics');
       onSuccess && onSuccess(data, variables, context);
       queryClient.invalidateQueries('getofficeResource');
     },
@@ -57,7 +57,7 @@ export const useEditOfficeResource = ({ onSuccess }) => {
     (formData) => editofficeResource(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Successfully edited office Resource');
+        toast.success('Successfully edited office Logistics');
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries('getofficeResource');
       },
@@ -74,7 +74,7 @@ export const useEditActiveInactiveOfficeResource = ({ onSuccess }) => {
     (formData) => editofficeResourceActiveInactive(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Successfully edited status of office Resource');
+        toast.success('Successfully edited status of office Logistics');
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries('getofficeResource');
       },
@@ -91,7 +91,7 @@ export const useEditInactiveOfficeResource = ({ onSuccess }) => {
     (formData) => editofficeResourceInactive(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Successfully edited status of office Resource');
+        toast.success('Successfully edited status of office Logistics');
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries('getofficeResource');
       },

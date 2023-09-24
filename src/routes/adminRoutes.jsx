@@ -201,13 +201,13 @@ const adminRoutes = [
   },
   {
     path: "resource/Office/Deactivated",
-    name: "Office Resource Deactivated",
+    name: "Office Logistics Deactivated",
     id: nanoid(),
     component: <DeactivatedOfficeResource component="resourceDeactivated"/>,
   },
   {
     path: "resource/office",
-    name: "Office Resource",
+    name: "Office Logistics",
     id: nanoid(),
     component: <OfficeResource component="officeResource"/>,
   },
