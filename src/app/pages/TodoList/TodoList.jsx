@@ -44,7 +44,7 @@ const TodoList = ({ permissions }) => {
     {
       title: "SN",
       render: (rowData) => rowData.tableData.id + 1,
-      width: "50px",
+      maxWidth: "1px",
       sortable: false,
       sorting: false,
     },
@@ -94,23 +94,18 @@ const TodoList = ({ permissions }) => {
         );
       },
     },
+  ];
+
+  const actions = [
     {
-      title: "Actions",
-      render: (rowData) => (
-        <Stack direction="row" spacing={0}>
-          <Button color="primary" onClick={() => handleEditTodoList(rowData)}>
-            <ModeEditOutlineIcon />
-          </Button>
-          <Button
-            color="primary"
-            onClick={() => handleDeleteTodoList(rowData.id)}
-          >
-            <DeleteIcon />
-          </Button>
-        </Stack>
-      ),
-      sorting: false,
-      width: "3",
+      icon: () => (<ModeEditOutlineIcon sx={{color:"#01579B"}}/>),
+      tooltip: "Edit To Do",
+      onClick: (event, rowData) => handleEditTodoList(rowData),
+    },
+    {
+      icon: () => (<DeleteIcon sx={{color:"#01579B"}}/>),
+      tooltip: "Delete List",
+      onClick: (event, rowData) => handleDeleteTodoList(rowData.id),
     },
   ];
 
@@ -143,6 +138,7 @@ const TodoList = ({ permissions }) => {
           margin: 50,
           pageSize: 10,
           emptyRowsWhenPaging: false,
+          actionsColumnIndex: -1,
           headerStyle: {
             backgroundColor: "#01579b",
             color: "#FFF",
@@ -159,6 +155,7 @@ const TodoList = ({ permissions }) => {
           },
         }}
         onRowDoubleClick={(_event, rowData) => handleDoubleClickRow(rowData)}
+        actions={actions}
       />
 
       {openEditModal && (

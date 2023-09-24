@@ -9,11 +9,11 @@ import ProjectAddViewEmployeePage from "../app/pages/Project/ProjectEmployeeView
 const ProfileDetail = Loadable(
   lazy(() => import("../app/pages/Auth/Profile/ProfileDetail"))
 );
-const DeactivatedOfficeResource = Loadable(
-  lazy(() =>
-    import("../app/pages/Resource/OfficeResource/DeactivatedOfficeResource")
-  )
-);
+// const DeactivatedOfficeResource = Loadable(
+//   lazy(() =>
+//     import("../app/pages/Resource/OfficeResource/DeactivatedOfficeResource")
+//   )
+// );
 const OfficeResource = Loadable(
   lazy(() => import("../app/pages/Resource/OfficeResource/OfficeResource"))
 );
@@ -169,12 +169,12 @@ const adminRoutes = [
     id: nanoid(),
     component: <ProjectAddViewEmployeePage />,
   },
-  {
-    path: "project/get-deactivated-projects",
-    name: "Inactive Project",
-    id: nanoid(),
-    component: <DeactivatedProject component="deactivate-project" />,
-  },
+  // {
+  //   path: "project/get-deactivated-projects",
+  //   name: "Inactive Project",
+  //   id: nanoid(),
+  //   component: <DeactivatedProject component="deactivate-project" />,
+  // },
   {
     path: "event",
     name: "Event",

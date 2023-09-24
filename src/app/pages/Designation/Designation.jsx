@@ -55,7 +55,7 @@ const Designation = ({ permissions }) => {
     {
       title: "SN",
       render: (rowData) => rowData.tableData.index + 1,
-      width: 50,
+      maxWidth: "1px",
       sortable: false,
       sorting: false,
     },

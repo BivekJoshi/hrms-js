@@ -8,24 +8,6 @@ import useEditHolidayForm from "../../../hooks/holiday/HolidayForm/useEditHolida
 const EditHolidayFields = ({ onClose, isLoading, data, permissions }) => {
   const { formik } = useEditHolidayForm(data);
 
-//   const handleFormSubmit = async () => {
-//     const isValid = await formik.validateForm();
-//     if (isValid) {
-//       formik.handleSubmit();
-
-//       if (formik.isValid) {
-//         formik.setTouched({
-//           holidayName: false,
-//           holidayDate: false,
-//           holidayDescription: false,
-//         });
-//         onClose();
-//       } else {
-//         toast.error("Please make sure you have filled the form correctly");
-//       }
-//     }
-//   };
-
   const handleFormSubmit = async () => {
     const isValid = await formik.validateForm();
 
@@ -33,7 +15,7 @@ const EditHolidayFields = ({ onClose, isLoading, data, permissions }) => {
       formik.handleSubmit();
 
       if (formik.isValid) {
-        // onClose();
+        onClose();
         // setOpenSubmitModal(false);
       } else {
         toast.error("Please make sure you have filled the form correctly");
