@@ -5,9 +5,8 @@ import { ListItemIcon } from "@mui/material";
 import { ListItemText, Collapse, IconButton } from "@mui/material/";
 import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
-import { Button, Card, Fab, Switch, Typography } from "@mui/material";
+import { Card, Fab, Switch, Typography } from "@mui/material";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import { removeUser } from "../../utils/cookieHelper";
 import { ThemeModeContext } from "../../../theme/ThemeModeContext";
 import AdminHeader from "../Header/AdminHeader";
 import BreadCrumbs from "../../../routes/adminRoutes";
@@ -28,6 +27,7 @@ import HolidayVillageIcon from "@mui/icons-material/HolidayVillage";
 import LaptopIcon from "@mui/icons-material/Laptop";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import logo from "../../../assets/logo.png";
+import "./Style/Style.css"
 
 const drawerWidth = 250;
 
@@ -368,10 +368,11 @@ export default function AdminSidebar() {
             alignItems: "center",
             padding: "10px",
             flexDirection: "column",
-            // position: "fixed",
-            // bottom: "0", 
-            // marginTop:"5" 
+            position:"sticky",
+            bottom :"0",
           }}
+          bgcolor={mode ==="light" ? "black" :"White"}
+
         >
           {/* <Button
             variant='contained'
@@ -386,6 +387,8 @@ export default function AdminSidebar() {
           <Typography
             variant="body2"
             sx={{ marginRight: "8px", marginTop: "1rem" }}
+            color={mode ==="light" ? "White" :"black"}
+
           >
             {mode === "light" ? "Dark" : "Light"} Mode
             <Switch checked={mode === "dark"} onChange={toggleMode} />
