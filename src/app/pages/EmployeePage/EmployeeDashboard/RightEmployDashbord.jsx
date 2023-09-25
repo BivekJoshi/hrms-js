@@ -105,7 +105,7 @@ export const RightEmployDashbord = (props) => {
         </Box>
       </Box>
       <Box margin="1rem 0">
-        <h3 style={{margin:"1rem 0"}}>UPCOMMING HOLIDAY</h3>
+        <h3 style={{margin:"1rem 0"}}>Logistic Used</h3>
         <Box
           className={
             mode === "light"
@@ -115,7 +115,7 @@ export const RightEmployDashbord = (props) => {
           padding="1rem"
         >
           <Typography fontWeight="600" textAlign="center">
-            MONDAY 10 JULY, 2023
+          Office Laptop: 314
           </Typography>
         </Box>
       </Box>
