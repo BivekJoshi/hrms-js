@@ -20,13 +20,16 @@ const EmployeeDashbord = (props) => {
   const { data: projectWiseEmployeeData } = useGetProjectWiseEmployee(
     employData?.employeeId
   );
-  const taskPendingData = loginUsertask?.filter(
-    (status) =>
-      status.status === "WORK_IN_PROGRESS" || status.status === "PENDING"
-  );
-  const taskCompleteData = loginUsertask?.filter(
-    (status) => status.status === "COMPLETED"
-  );
+  const taskPendingData = Array.isArray(loginUsertask)
+    ? loginUsertask?.filter(
+        (status) =>
+          status.status === "WORK_IN_PROGRESS" || status.status === "PENDING"
+      )
+    : "";
+
+  const taskCompleteData = Array.isArray(loginUsertask)
+    ? loginUsertask?.filter((status) => status.status === "COMPLETED")
+    : "";
   const task = [
     {
       nameOfTask: "Total Project",
