@@ -1,4 +1,4 @@
-import { Box } from "@mui/system";
+import { Box, CardMedia } from "@mui/material";
 import React, { useContext } from "react";
 import Male from "../../../../assets/male.png";
 import "../../Style/Style.css";
@@ -6,12 +6,12 @@ import { LeftEmployDashbord } from "./LeftEmployDashbord";
 import { RightEmployDashbord } from "./RightEmployDashbord";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
 import { useGetLoggedInUser } from "../../../hooks/auth/usePassword";
-import { CardMedia, Typography } from "@mui/material";
 import { EmployTaskCard } from "../Component/EmployTaskCard";
 import { EmployPichart } from "../Component/EmployPichart";
 import { MiddleEmployDashbord } from "./MiddleEmployDashbord";
 import { useGetTaskLoggedInUser } from "../../../hooks/project/ProjectTask/useProjectTask";
 import { useGetProjectWiseEmployee } from "../../../hooks/project/useProject";
+import { DOC_URL } from "../../../../auth/axiosInterceptor";
 
 const EmployeeDashbord = (props) => {
   const { data: employData } = useGetLoggedInUser();
@@ -20,6 +20,7 @@ const EmployeeDashbord = (props) => {
   const { data: projectWiseEmployeeData } = useGetProjectWiseEmployee(
     employData?.employeeId
   );
+  console.log(employData);
   const taskPendingData = Array.isArray(loginUsertask)
     ? loginUsertask?.filter(
         (status) =>
@@ -30,6 +31,9 @@ const EmployeeDashbord = (props) => {
   const taskCompleteData = Array.isArray(loginUsertask)
     ? loginUsertask?.filter((status) => status.status === "COMPLETED")
     : "";
+  const photo = employData?.userPhotoPath;
+  const filePath = photo ? DOC_URL + photo : "";
+
   const task = [
     {
       nameOfTask: "Total Project",
@@ -70,21 +74,12 @@ const EmployeeDashbord = (props) => {
         }
       >
         <CardMedia
-          src={Male}
           component="img"
-          // src={
-          //   employData?.userPhotoPath
-          //     ? img :
-          //     // EGender === "MALE" ?
-          //      Male
-          //     // : ""
-          //     // ? Female
-          //     // : Female
-          // }
+          src={filePath ? filePath : Male}
           alt="Paella dish"
           sx={{ width: 66, height: 66, borderRadius: "2rem" }}
         />
-        <Box alignSelf="center">
+        <Box alignSelf="center" paddingLeft="1rem">
           <h3>Welcome , {employData?.name}</h3>
           <h3>{formattedDate}</h3>
         </Box>
@@ -102,7 +97,7 @@ const EmployeeDashbord = (props) => {
             numberOfTask={taskDetail.numberOfTask}
           />
         ))}
-        <EmployPichart />
+        {/* <EmployPichart /> */}
       </Box>
       <MiddleEmployDashbord />
       <Box display="grid" gridTemplateColumns="3fr 2fr" gap="3rem">
