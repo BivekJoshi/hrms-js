@@ -85,10 +85,8 @@ const OfficeResource = () => {
         }}
       >
         <ButtonComponent
-          OnClick={() => {
-            navigate(`Deactivated`);
-          }}
-          buttonName={"Deactivated Office Logistics"}
+          OnClick={handleOpenModal}
+          buttonName={"Deactivated Office Resource"}
           BGColor="white"
           TextColor="black"
         />
