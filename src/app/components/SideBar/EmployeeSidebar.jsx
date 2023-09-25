@@ -5,18 +5,12 @@ import { ListItemIcon } from "@mui/material";
 import { ListItemText, Collapse, IconButton } from "@mui/material/";
 import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
-import { Button, Card, Fab, Switch, Typography } from "@mui/material";
+import { Card, Fab, Switch, Typography } from "@mui/material";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import { removeUser } from "../../utils/cookieHelper";
 import { ThemeModeContext } from "../../../theme/ThemeModeContext";
 import AdminHeader from "../Header/AdminHeader";
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
-import PersonIcon from "@mui/icons-material/Person";
-import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import MailIcon from "@mui/icons-material/Mail";
-import CakeIcon from "@mui/icons-material/Cake";
-import HowToRegIcon from "@mui/icons-material/HowToReg";
 import WorkspacesIcon from "@mui/icons-material/Workspaces";
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
 import BusinessIcon from "@mui/icons-material/Business";
@@ -24,13 +18,14 @@ import PlaylistAddCheckIcon from "@mui/icons-material/PlaylistAddCheck";
 import AddchartIcon from "@mui/icons-material/Addchart";
 import EventIcon from "@mui/icons-material/Event";
 import HolidayVillageIcon from "@mui/icons-material/HolidayVillage";
-import LaptopIcon from "@mui/icons-material/Laptop";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import BreadCrumbs from "../../../routes/employeeRoutes";
 import logo from "../../../assets/logo.png";
 import CoPresentIcon from '@mui/icons-material/CoPresent';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import ApprovalOutlinedIcon from '@mui/icons-material/ApprovalOutlined';
+import "./Style/Style.css"
+
 
 const drawerWidth = 250;
 
@@ -330,9 +325,10 @@ export default function EmployeeSidebar() {
             alignItems: "center",
             padding: "10px",
             flexDirection: "column",
-            position:"fixed",
+            position:"sticky",
             bottom :"0",
           }}
+          bgcolor={mode ==="light" ? "black" :"White"}
         >
           {/* <Button
             variant="contained"
@@ -347,6 +343,7 @@ export default function EmployeeSidebar() {
           <Typography
             variant="body2"
             sx={{ marginRight: "8px", marginTop: "1rem" }}
+            color={mode ==="light" ? "White" :"black"}
           >
             {mode === "light" ? "Dark" : "Light"} Mode
             <Switch checked={mode === "dark"} onChange={toggleMode} />

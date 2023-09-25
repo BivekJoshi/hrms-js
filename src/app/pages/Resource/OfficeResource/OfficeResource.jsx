@@ -92,14 +92,14 @@ const OfficeResource = () => {
         />
         <ButtonComponent
           OnClick={handleAddOpenModal}
-          buttonName={"+Add Office Resource"}
+          buttonName={"+Add Office Logistics"}
         />
       </Box>
       <br />
       <br />
       <MaterialTable
         icons={tableIcons}
-        title="Office Resource"
+        title="Office Logistics"
         columns={columns}
         data={officeResourceData}
         isLoading={isLoading}

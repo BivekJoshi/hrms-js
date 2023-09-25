@@ -3,8 +3,6 @@ import { toast } from "react-toastify";
 import { getUser } from "../app/utils/cookieHelper";
 import { getBaseUrl } from "./getBaseUrl";
 
-// const baseUrl = getBaseUrl();
-// console.log(baseUrl);
 export const baseURL = "https://103.94.159.144:8083/hrms/api/";
 export const DOC_URL = "https://103.94.159.144/";
 export const axiosInstance = Axios.create({

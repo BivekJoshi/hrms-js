@@ -104,7 +104,6 @@ const ProjectCard = ({
 
   return (
     <>
-      <Box maxWidth="450px">
         <MainCard
           grow={true}
           style={{
@@ -310,7 +309,6 @@ const ProjectCard = ({
             </Stack>
           </Box>
         </MainCard>
-      </Box>
       {openEditModal && (
         <EditProjectModal
           id={editedProject?.id}

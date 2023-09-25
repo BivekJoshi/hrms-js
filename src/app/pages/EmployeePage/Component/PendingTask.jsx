@@ -1,4 +1,5 @@
 import {
+  Chip,
   Paper,
   Table,
   TableBody,
@@ -15,8 +16,9 @@ import { useNavigate } from "react-router-dom";
 export const PendingTask = () => {
   const navigate = useNavigate();
   let snCounter = 1;
-  const { data: pendingTask ,isLoading:loadingpendingTask} = useGetTaskLoggedInUser();
-  const { data: ProjectName ,isLoading:lodingprojectName} = useGetProject();
+  const { data: pendingTask, isLoading: loadingpendingTask } =
+    useGetTaskLoggedInUser();
+  const { data: ProjectName, isLoading: lodingprojectName } = useGetProject();
 
   const getProjectNameByProjId = (projId) => {
     const project = ProjectName?.find((p) => p?.id === projId);
@@ -25,38 +27,83 @@ export const PendingTask = () => {
 
   return (
     // !loadingpendingTask || !lodingprojectName&&(
-      <TableContainer component={Paper}>
+    <TableContainer component={Paper}>
       <Table sx={{ minWidth: 400 }} size="small" aria-label="a dense table">
         <TableHead>
           <TableRow>
-            <TableCell>SN</TableCell>
-            <TableCell align="right">Task</TableCell>
-            <TableCell align="right">Project</TableCell>
-            <TableCell align="right">Priority</TableCell>
+            <TableCell sx={{ fontSize: ".75rem" }}>SN</TableCell>
+            <TableCell align="right" sx={{ fontSize: ".75rem" }}>
+              Task
+            </TableCell>
+            <TableCell align="right" sx={{ fontSize: ".75rem" }}>
+              Project
+            </TableCell>
+            <TableCell align="right" sx={{ fontSize: ".75rem" }}>
+              Priority
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {pendingTask?.slice(0, 7)?.map((row) => (
-            <TableRow key={row?.id}>
-              <TableCell component="th" scope="row">
-                {snCounter++}
-              </TableCell>
-              <TableCell align="right">{row?.name}</TableCell>
-              <TableCell align="right">
-                {getProjectNameByProjId(row?.projId)}
-              </TableCell>
-              <TableCell align="right">{row?.priority}</TableCell>
-            </TableRow>
-          ))}
-          <TableRow>
+          {pendingTask
+            ? pendingTask?.slice(0, 4)?.map((row) => (
+                <TableRow key={row?.id}>
+                  <TableCell
+                    component="th"
+                    scope="row"
+                    sx={{ fontSize: ".75rem" }}
+                  >
+                    {snCounter++}
+                  </TableCell>
+                  <TableCell align="right" sx={{ fontSize: ".75rem" }}>
+                    {row?.name}
+                  </TableCell>
+                  <TableCell align="right" sx={{ fontSize: ".75rem" }}>
+                    {getProjectNameByProjId(row?.projId)}
+                  </TableCell>
+
+                  <TableCell align="right">
+                    {row?.priority === "HIGH" ? (
+                      <Chip
+                        label={row?.priority}
+                        sx={{
+                          bgcolor: "red",
+                          fontSize: ".7rem",
+                          height: "22px",
+                        }}
+                      />
+                    ) : row?.priority === "MEDIUM" ? (
+                      <Chip
+                        label={row?.priority}
+                        sx={{
+                          bgcolor: "yellow",
+                          fontSize: ".7rem",
+                          height: "22px",
+                        }}
+                      />
+                    ) : (
+                      <Chip
+                        label={row?.priority}
+                        sx={{
+                          bgcolor: "green",
+                          fontSize: ".7rem",
+                          height: "22px",
+                        }}
+                      />
+                    )}
+                  </TableCell>
+                </TableRow>
+              ))
+            : ""}
+          <TableRow sx={{ marginTop: "1rem" }}>
             <TableCell
               colSpan={4}
               style={{
                 cursor: "pointer",
-                fontWeight: "bold",
+                fontWeight: "800",
                 textAlign: "center",
+                fontSize: ".75rem",
               }}
-              onClick={()=>navigate(`/employee/project`)}
+              onClick={() => navigate(`/employee/project`)}
             >
               CLICK HERE TO SHOW ALL TASK
             </TableCell>
@@ -65,6 +112,5 @@ export const PendingTask = () => {
       </Table>
     </TableContainer>
     // )
-
   );
 };

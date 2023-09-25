@@ -1,33 +1,54 @@
 import { Box } from "@mui/system";
 import React, { useContext } from "react";
 import Male from "../../../../assets/male.png";
-import Female from "../../../../assets/female.png";
 import "../../Style/Style.css";
 import { LeftEmployDashbord } from "./LeftEmployDashbord";
 import { RightEmployDashbord } from "./RightEmployDashbord";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
 import { useGetLoggedInUser } from "../../../hooks/auth/usePassword";
-import { DOC_URL } from "../../../../auth/axiosInterceptor";
-import { CardMedia } from "@mui/material";
+import { CardMedia, Typography } from "@mui/material";
 import { EmployTaskCard } from "../Component/EmployTaskCard";
 import { EmployPichart } from "../Component/EmployPichart";
-import { EmployLineChart } from "../Component/EmployLineChart";
 import { MiddleEmployDashbord } from "./MiddleEmployDashbord";
-import { getBaseUrl } from "../../../../auth/getBaseUrl";
-import contextPath from "../../../../auth/contextPath";
+import { useGetTaskLoggedInUser } from "../../../hooks/project/ProjectTask/useProjectTask";
+import { useGetProjectWiseEmployee } from "../../../hooks/project/useProject";
 
 const EmployeeDashbord = (props) => {
-  const baseUrl = getBaseUrl();
-  const path = contextPath();
-  console.log({"baseUrl": baseUrl, "path": path})
   const { data: employData } = useGetLoggedInUser();
   const { mode } = useContext(ThemeModeContext);
-  // const img = DOC_URL + employData.userPhotoPath;
+  const { data: loginUsertask } = useGetTaskLoggedInUser();
+  const { data: projectWiseEmployeeData } = useGetProjectWiseEmployee(
+    employData?.employeeId
+  );
+  const taskPendingData = Array.isArray(loginUsertask)
+    ? loginUsertask?.filter(
+        (status) =>
+          status.status === "WORK_IN_PROGRESS" || status.status === "PENDING"
+      )
+    : "";
+
+  const taskCompleteData = Array.isArray(loginUsertask)
+    ? loginUsertask?.filter((status) => status.status === "COMPLETED")
+    : "";
   const task = [
-    { nameOfTask: "Total Project", numberOfTask: "-" },
-    { nameOfTask: "Total Task", numberOfTask: "-" },
-    { nameOfTask: "Task Pending", numberOfTask: "-" },
-    { nameOfTask: "Task Complete", numberOfTask: "-" },
+    {
+      nameOfTask: "Total Project",
+      numberOfTask: projectWiseEmployeeData
+        ? projectWiseEmployeeData.length
+        : 0,
+    },
+    {
+      nameOfTask: "Total Task",
+      numberOfTask: loginUsertask ? loginUsertask.length : 0,
+    },
+    {
+      nameOfTask: "Task Pending",
+      numberOfTask: taskPendingData ? taskPendingData.length : 0,
+    },
+    {
+      nameOfTask: "Task Complete",
+      numberOfTask: taskCompleteData ? taskCompleteData.length : 0,
+    },
   ];
   const today = new Date();
   const options = {

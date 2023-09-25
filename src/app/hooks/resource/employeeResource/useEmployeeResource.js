@@ -44,7 +44,7 @@ export const useDeleteEmployeeResource = ({ onSuccess }) => {
   const queryClient = useQueryClient();getemployeeResource
   return useMutation(['deleteemployeeResource'], (leaveId) => deleteemployeeResource(leaveId), {
     onSuccess: (data, variables, context) => {
-      toast.success('Successfully deleted Employee with office Resource');
+      toast.success('Successfully deleted Employee with office Logistics');
       onSuccess && onSuccess(data, variables, context);
       queryClient.invalidateQueries('getemployeeResource');
     },
@@ -61,7 +61,7 @@ export const useEditEmployeeResource = ({ onSuccess }) => {
     (formData) => editemployeeResource(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Successfully edited Employee with office Resource');
+        toast.success('Successfully edited Employee with office Logistics');
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries('getemployeeResource');
       },
