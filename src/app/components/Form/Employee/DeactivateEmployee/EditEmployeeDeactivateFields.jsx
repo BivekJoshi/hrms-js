@@ -19,7 +19,7 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
     if (formik.isValid) {
       formik.setTouched({
         employeeId: true,
-        setActivation: true,
+        terminationType: true,
         effectiveDate: true,
       });
       onClose();
@@ -72,7 +72,7 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
         </Grid>
         <Grid item xs={12} sm={12} md={12}>
           <Typography variant="h6" component="h6">
-            Do you really want to deactivate employee
+            Do you really want to Terminate employee
             <b> {getEmployeeName(formik.values.employeeId)}</b>
           </Typography>
         </Grid>
@@ -108,6 +108,28 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
             label="Effective From Date"
             placeholder="Effective Date"
             type="date"
+            fullWidth
+            required
+            value={formik.values.effectiveDate}
+            onChange={formik.handleChange}
+            error={
+              formik.touched.effectiveDate &&
+              Boolean(formik.errors.effectiveDate)
+            }
+            helperText={
+              formik.touched.effectiveDate && formik.errors.effectiveDate
+            }
+            variant="outlined"
+            InputLabelProps={{ shrink: true }}
+          />
+        </Grid>
+        <Grid item xs={12} sm={12} md={12}>
+          <TextField
+            id="terminationType"
+            name="terminationType"
+            label="Termanation Type"
+            placeholder="Effective Date"
+            type="text"
             fullWidth
             required
             value={formik.values.effectiveDate}

@@ -12,15 +12,18 @@ import { MiddleEmployDashbord } from "./MiddleEmployDashbord";
 import { useGetTaskLoggedInUser } from "../../../hooks/project/ProjectTask/useProjectTask";
 import { useGetProjectWiseEmployee } from "../../../hooks/project/useProject";
 import { DOC_URL } from "../../../../auth/axiosInterceptor";
+import TaskIcon from "@mui/icons-material/Task";
+import AccountTreeIcon from '@mui/icons-material/AccountTree';
+import PendingIcon from '@mui/icons-material/Pending';
+import BallotIcon from "@mui/icons-material/Ballot";
 
-const EmployeeDashbord = (props) => {
+const EmployeeDashbord = ({}) => {
   const { data: employData } = useGetLoggedInUser();
   const { mode } = useContext(ThemeModeContext);
   const { data: loginUsertask } = useGetTaskLoggedInUser();
   const { data: projectWiseEmployeeData } = useGetProjectWiseEmployee(
     employData?.employeeId
   );
-  console.log(employData);
   const taskPendingData = Array.isArray(loginUsertask)
     ? loginUsertask?.filter(
         (status) =>
@@ -40,18 +43,22 @@ const EmployeeDashbord = (props) => {
       numberOfTask: projectWiseEmployeeData
         ? projectWiseEmployeeData.length
         : 0,
+      taskIcon: <AccountTreeIcon sx={{ width: "2rem", height: "2rem" }} />,
     },
     {
       nameOfTask: "Total Task",
       numberOfTask: loginUsertask ? loginUsertask.length : 0,
+      taskIcon: <BallotIcon sx={{ width: "2rem", height: "2rem" }} />,
     },
     {
       nameOfTask: "Task Pending",
       numberOfTask: taskPendingData ? taskPendingData.length : 0,
+      taskIcon: <PendingIcon sx={{ width: "2rem", height: "2rem" }} />,
     },
     {
       nameOfTask: "Task Complete",
       numberOfTask: taskCompleteData ? taskCompleteData.length : 0,
+      taskIcon: <TaskIcon sx={{ width: "2rem", height: "2rem" }} />,
     },
   ];
   const today = new Date();
@@ -93,13 +100,15 @@ const EmployeeDashbord = (props) => {
       >
         {task.map((taskDetail, index) => (
           <EmployTaskCard
+            key={index}
             nameOfTask={taskDetail.nameOfTask}
             numberOfTask={taskDetail.numberOfTask}
+            taskIcon={taskDetail.taskIcon}
           />
         ))}
-        {/* <EmployPichart /> */}
+        <EmployPichart task={task}/>
       </Box>
-      <MiddleEmployDashbord />
+      <MiddleEmployDashbord employData={employData}/>
       <Box display="grid" gridTemplateColumns="3fr 2fr" gap="3rem">
         <LeftEmployDashbord />
         <RightEmployDashbord />

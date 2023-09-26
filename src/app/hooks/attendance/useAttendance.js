@@ -1,5 +1,5 @@
 import { useQuery } from 'react-query';
-import { getAttendance, getEmployeeAttendanceById } from '../../api/attendance/attendance-api';
+import { getAttendance, getEmployeeAttendanceById, getEmployeeAttendanceMonthWise } from '../../api/attendance/attendance-api';
 
 export const useGetAttendance = () => {
   return useQuery(['getAttendance'], () => getAttendance(), {
@@ -11,6 +11,13 @@ export const useGetAttendance = () => {
 {/*________________________GETEMPLOYEEATTENDANCEBYID_____________________________________*/ }
 export const useGetEmployeeAttendanceById = (id) => {
   return useQuery(['getEmployeeAttendanceById', id], () => getEmployeeAttendanceById(id), {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
+};
+{/*________________________GETEMPLOYEEATTENDANCEMonthWise_____________________________________*/ }
+export const useGetEmployeeAttendanceMonthWise = (id,date) => {
+  return useQuery(['getEmployeeAttendanceMonthWise', id, date], () => getEmployeeAttendanceMonthWise(id, date), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });

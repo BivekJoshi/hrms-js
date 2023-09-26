@@ -1,10 +1,18 @@
 import { Box, Stack, Typography } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { EmployLineChart } from "../Component/EmployLineChart";
 import GaugeChart from "react-gauge-chart";
 import { PendingTask } from "../Component/PendingTask";
+import { useGetEmployeeAttendanceMonthWise } from "../../../hooks/attendance/useAttendance";
 
-export const MiddleEmployDashbord = (props) => {
+export const MiddleEmployDashbord = ({ employData }) => {
+  const [thisYear, setThisYear] = useState()
+  const { data: attendanceData } = useGetEmployeeAttendanceMonthWise(
+    employData.employeeId,
+    2080
+  );
+
+
   return (
     <Box
       display="grid"
@@ -15,7 +23,7 @@ export const MiddleEmployDashbord = (props) => {
       <Box>
         <h3>Employee overal Attendance</h3>
         <Box marginTop="-2.5rem" height="100%">
-          <EmployLineChart />
+          <EmployLineChart attendanceData={attendanceData} />
         </Box>
       </Box>
       <Box>
@@ -29,12 +37,12 @@ export const MiddleEmployDashbord = (props) => {
           </Stack>
         </Box>
       </Box>
-      <Box className="taskTable">
+      {/* <Box className="taskTable">
         <h3>Pending Task</h3>
         <Box marginTop="2rem">
           <PendingTask />
         </Box>
-      </Box>
+      </Box> */}
     </Box>
   );
 };

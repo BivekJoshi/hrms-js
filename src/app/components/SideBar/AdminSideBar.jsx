@@ -27,7 +27,7 @@ import HolidayVillageIcon from "@mui/icons-material/HolidayVillage";
 import LaptopIcon from "@mui/icons-material/Laptop";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import logo from "../../../assets/logo.png";
-import "./Style/Style.css"
+import "./Style/Style.css";
 
 const drawerWidth = 250;
 
@@ -149,7 +149,7 @@ export default function AdminSidebar() {
       ],
     },
     {
-      name: 'Logistics',
+      name: "Logistics",
       icon: (
         <LaptopIcon
           sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
@@ -276,7 +276,7 @@ export default function AdminSidebar() {
       >
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
-            <img src={logo} alt="logo"/>
+            <img src={logo} alt="logo" />
             <ChevronLeftIcon />
           </IconButton>
         </DrawerHeader>
@@ -368,11 +368,10 @@ export default function AdminSidebar() {
             alignItems: "center",
             padding: "10px",
             flexDirection: "column",
-            position:"sticky",
-            bottom :"0",
+            position: "sticky",
+            bottom: "0",
           }}
-          bgcolor={mode ==="light" ? "black" :"White"}
-
+          bgcolor={mode === "light" ? "black" : "White"}
         >
           {/* <Button
             variant='contained'
@@ -387,8 +386,7 @@ export default function AdminSidebar() {
           <Typography
             variant="body2"
             sx={{ marginRight: "8px", marginTop: "1rem" }}
-            color={mode ==="light" ? "White" :"black"}
-
+            color={mode === "light" ? "White" : "black"}
           >
             {mode === "light" ? "Dark" : "Light"} Mode
             <Switch checked={mode === "dark"} onChange={toggleMode} />

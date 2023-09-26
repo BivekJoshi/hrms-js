@@ -1,8 +1,8 @@
 import MaterialTable from "@material-table/core";
 import React, { useState } from "react";
 import tableIcons from "../../../../theme/overrides/TableIcon";
-import { useGetOfficeResource } from "../../../hooks/resource/officeResource/useOfficeResource";
-import { Box, Button, Grid, Modal, Stack, Typography } from "@mui/material";
+import { useGetUsedOfficeResource } from "../../../hooks/resource/officeResource/useOfficeResource";
+import { Box } from "@mui/material";
 import {
   AddOfficeResourceModal,
   EditOfficeResourceModal,
@@ -10,18 +10,22 @@ import {
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import { ButtonComponent } from "../../../components/Button/ButtonComponent";
 import DeactivatedOfficeResource from "./DeactivatedOfficeResource";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import { AvailableOfficeLogistic } from "./AvailableOfficeLogistic";
+import { OpenCLoseModel } from "./OpenCLoseModel";
+import { useGetEmployee } from "../../../hooks/employee/useEmployee";
 
 const OfficeResource = () => {
-  const { data: officeResourceData, isLoading } = useGetOfficeResource();
+  const { data: officeResourceData, isLoading } = useGetUsedOfficeResource();
+  const { data: employeeData, isLoading: loadingemployee } = useGetEmployee();
   const [openModal, setOpenModal] = useState(false);
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
-
+  const [openNotUseModal, setOpenNotUseModal] = useState(false);
   const [editedRowData, setEditedRowData] = useState({});
 
   const handleAddOpenModal = () => setOpenAddModal(true);
   const handleCloseAddModal = () => setOpenAddModal(false);
-
   const handleCloseEditModal = () => setOpenEditModal(false);
 
   const handleEditRowData = (rowData) => {
@@ -29,20 +33,35 @@ const OfficeResource = () => {
     setOpenEditModal(true);
   };
 
-  const handleOpenModal = () => {
-    setOpenModal(true);
-  };
+  const handleOpenModal = () => setOpenModal(true);
+  const handleCloseModal = () => setOpenModal(false);
+  const handleOpenAvailableModal = () => setOpenNotUseModal(true);
+  const handleCloseAvailableModal = () => setOpenNotUseModal(false);
 
-  const handleCloseModal = () => {
-    setOpenModal(false);
+  const getEmployeeName = (rowData) => {
+    const employeeId = rowData?.employeeId;
+    const employee = employeeData?.find((emp) => emp?.id === employeeId);
+    const name = `${employee?.firstName} ${employee?.middleName || ""} ${
+      employee?.lastName
+    }`;
+    return name;
   };
-
+console.log(employeeData);
   const columns = [
     {
       title: "SN",
       render: (rowData) => rowData?.tableData?.index + 1,
       width: "3.125rem",
       sortable: false,
+      sorting: false,
+    },
+    {
+      title: "Emloyee Name",
+     render: (rowData) => {
+        return <p>{getEmployeeName(rowData)} </p>;
+      },
+      // emptyValue: "-",
+      width: "18.75rem",
       sorting: false,
     },
     {
@@ -86,7 +105,15 @@ const OfficeResource = () => {
       >
         <ButtonComponent
           OnClick={handleOpenModal}
-          buttonName={"Deactivated Office Resource"}
+          buttonName={
+            <DeleteForeverIcon sx={{ width: "1rem", height: "1rem" }} />
+          }
+          BGColor="white"
+          TextColor="black"
+        />
+        <ButtonComponent
+          OnClick={handleOpenAvailableModal}
+          buttonName={"Available Logistics"}
           BGColor="white"
           TextColor="black"
         />
@@ -99,7 +126,7 @@ const OfficeResource = () => {
       <br />
       <MaterialTable
         icons={tableIcons}
-        title="Office Logistics"
+        title="Used Logistics"
         columns={columns}
         data={officeResourceData}
         isLoading={isLoading}
@@ -140,43 +167,18 @@ const OfficeResource = () => {
           handleCloseModal={handleCloseEditModal}
         />
       )}
-
-      <Modal
-        open={openModal}
-        onClose={handleCloseModal}
-        aria-labelledby="modal-title"
-        aria-describedby="modal-description"
-      >
-        <Box
-          sx={{
-            position: "absolute",
-            top: "40%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            // width: 400,
-            bgcolor: "background.paper",
-            boxShadow: 24,
-            p: 4,
-          }}
-        >
-          <DeactivatedOfficeResource />
-          <br/>
-          <Grid
-            container
-            direction="row"
-            justifyContent="flex-end"
-            alignItems="flex-end"
-          >
-            <Button
-              onClick={() => setOpenModal(false)}
-              color="error"
-              variant="contained"
-            >
-              Close
-            </Button>
-          </Grid>
-        </Box>
-      </Modal>
+      <OpenCLoseModel
+        openModal={openModal}
+        handleCloseModal={handleCloseModal}
+        modelName={<DeactivatedOfficeResource />}
+        setOpenModal={setOpenModal}
+      />
+      <OpenCLoseModel
+        openModal={openNotUseModal}
+        handleCloseModal={handleCloseAvailableModal}
+        modelName={<AvailableOfficeLogistic />}
+        setOpenModal={setOpenNotUseModal}
+      />
     </>
   );
 };
