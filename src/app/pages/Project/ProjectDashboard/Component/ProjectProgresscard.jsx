@@ -2,7 +2,11 @@ import { Box, Chip, Stack, Typography } from "@mui/material";
 import React from "react";
 import BallotIcon from "@mui/icons-material/Ballot";
 
-export const EmployTaskCard = ({ numberOfTask, nameOfTask, taskIcon }) => {
+export default function ProjectProgresscard({
+  numberOfTask,
+  nameOfTask,
+  icon,
+}) {
   return (
     <Box
       // border="1px solid black"
@@ -17,7 +21,7 @@ export const EmployTaskCard = ({ numberOfTask, nameOfTask, taskIcon }) => {
         alignItems="center"
         gap="1rem"
       >
-        {taskIcon}
+        {icon}
         <Typography fontSize="1rem" fontWeight="600">
           {nameOfTask}
         </Typography>
@@ -25,9 +29,9 @@ export const EmployTaskCard = ({ numberOfTask, nameOfTask, taskIcon }) => {
       <Chip
         sx={{
           borderRadius: "2rem",
-          border: "5px solid black",
-          fontSize: "1.5rem",
-          padding: "19px 0",
+          border: "3px solid black",
+          fontSize: ".9rem",
+        //   padding: "19px 0",
           marginTop: ".5rem",
         }}
         label={numberOfTask}
@@ -35,4 +39,4 @@ export const EmployTaskCard = ({ numberOfTask, nameOfTask, taskIcon }) => {
       />
     </Box>
   );
-};
+}

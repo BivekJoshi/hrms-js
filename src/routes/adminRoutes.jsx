@@ -5,6 +5,7 @@ import { Breadcrumbs, Typography } from "@mui/material";
 import Loadable from "../app/components/Header/Loader/Loadable";
 import ThemeModeContext from "../theme/ThemeModeContext";
 import ProjectAddViewEmployeePage from "../app/pages/Project/ProjectEmployeeViewPage/ProjectAddViewEmployeePage";
+import { ProjectDashboard } from "../app/pages/Project/ProjectDashboard/ProjectDashboard";
 
 const ProfileDetail = Loadable(
   lazy(() => import("../app/pages/Auth/Profile/ProfileDetail"))
@@ -77,6 +78,9 @@ const ResetPassword = Loadable(
 const UserController = Loadable(
   lazy(() => import("../app/pages/Auth/UserControl/UserController"))
 );
+// const ProjectDashboard = Loadable(
+//   lazy(() => import("../app/pages/Project/ProjectDashboard/ProjectDashboard"))
+// );
 
 const adminRoutes = [
   {
@@ -84,6 +88,12 @@ const adminRoutes = [
     name: "Dashboard",
     id: nanoid(),
     component: <Dashboard />,
+  },
+  {
+    path: "project/dashboard",
+    name: "Project Dashboard",
+    id: nanoid(),
+    component: <ProjectDashboard />,
   },
   {
     path: "employee",

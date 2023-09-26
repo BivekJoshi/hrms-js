@@ -5,6 +5,8 @@ import {
     editofficeResource,
     editofficeResourceActiveInactive,
     editofficeResourceInactive,
+    getAvailableOfficeResource,
+    getUsedOfficeResource,
     getdeactivaedofficeResource,
     getofficeResource, 
     getofficeResourceById, 
@@ -14,6 +16,20 @@ import {
 {/*________________________GET ALL OFFICE RESOURCE_____________________________________*/ }
 export const useGetOfficeResource = () => {
   return useQuery(['getofficeResource'], () => getofficeResource(), {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
+};
+{/*________________________GET used OFFICE RESOURCE_____________________________________*/ }
+export const useGetUsedOfficeResource = () => {
+  return useQuery(['getUsedOfficeResource'], () => getUsedOfficeResource(), {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
+};
+{/*________________________GET not used OFFICE RESOURCE_____________________________________*/ }
+export const useGetAvailableOfficeResource = () => {
+  return useQuery(['getAvailableOfficeResource'], () => getAvailableOfficeResource(), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });

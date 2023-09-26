@@ -107,11 +107,11 @@ const EmployeeCard = ({
                       variant="outlined"
                       color={(IsActive = true ? "success" : "warning")}
                     >
-                      {(IsActive = true ? "Active" : "InActive")}
+                      {(IsActive = true ? "Terminate" : "Active")}
                     </Button>
                   }
                   popoverContent={
-                    <Typography sx={{ p: 1 }}>Inactive Employee</Typography>
+                    <Typography sx={{ p: 1 }}>Terminate Employee</Typography>
                   }
                 />
 

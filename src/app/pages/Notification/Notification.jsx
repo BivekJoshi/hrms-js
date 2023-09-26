@@ -25,7 +25,6 @@ const Notification = ({ data }) => {
   const pendingLeaveData = leaveData?.filter(
     (leave) => leave.leaveStatus === "PENDING"
   );
-  console.log(pendingLeaveData);
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
 

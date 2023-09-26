@@ -12,3 +12,10 @@ export const getEmployeeAttendanceById = async (id) => {
     return data;
   }
 };
+{/*________________________GETEMPLOYEEATTENDANCEMONTHWISE_____________________________________*/ }
+export const getEmployeeAttendanceMonthWise = async (id, date) => {
+  if (id, date) {
+    const data = await axiosInstance.get(`/attendance/count-month-wise/${id}?yearInBS=${date}`);
+    return data;
+  }
+}
