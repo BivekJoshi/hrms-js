@@ -15,7 +15,7 @@ export const useRemoveDeactiveEmployeeForm = (data) => {
     const formik = useFormik({
         initialValues: {
             employeeId: data?.id || "",
-            terminationType: data.terminationType || "",
+            terminationType: data?.terminationType || "",
             effectiveDate: data?.effectiveDate || "",
         },
         enableReinitialize: "true",

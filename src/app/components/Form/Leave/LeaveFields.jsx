@@ -67,8 +67,9 @@ const LeaveFields = ({ onClose, isLoading, data }) => {
       toast.error("Please make sure you have filled the form correctly");
     }
   };
-
+ 
   const submitButtonText = data ? "Update Leave" : "Add Leave";
+
   if (isManager) {
     return (
       !isLoading && (
@@ -125,7 +126,8 @@ const LeaveFields = ({ onClose, isLoading, data }) => {
               value={formik.values.leaveRemarks}
               onChange={formik.handleChange}
               error={
-                formik.touched.leaveRemarks && Boolean(formik.errors.leaveRemarks)
+                formik.touched.leaveRemarks &&
+                Boolean(formik.errors.leaveRemarks)
               }
               helperText={
                 formik.touched.leaveRemarks && formik.errors.leaveRemarks
@@ -276,6 +278,8 @@ const LeaveFields = ({ onClose, isLoading, data }) => {
               />
             </Grid>
           )}
+
+         
 
           <Grid item xs={12} sm={6}>
             <TextField
