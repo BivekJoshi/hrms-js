@@ -46,7 +46,6 @@ const OfficeResource = () => {
     }`;
     return name;
   };
-console.log(employeeData);
   const columns = [
     {
       title: "SN",

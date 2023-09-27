@@ -22,13 +22,11 @@ const ProjectTask = () => {
     refetch,
     isRefetching,
   } = useGetProjectTaskByProjectId();
-  // console.log(ProjectTask);
   const [state, setState] = useState({ right: false });
   const [editedTask, setEditedTask] = useState({});
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [deletedTask, setDeletedTask] = useState({});
   const { data: employeeData } = useGetEmployee();
-  // console.log(employeeData);
 
   const [tableData, setTableData] = useState(ProjectTask);
 
@@ -193,7 +191,6 @@ const ProjectTask = () => {
         const employeeIds = rowData.projectEmployees.map(
           (employee) => employee.empId
         );
-        // console.log(employeeIds);
         const matchedEmployees = employeeData.filter((employee) =>
           employeeIds.includes(employee.id)
         );

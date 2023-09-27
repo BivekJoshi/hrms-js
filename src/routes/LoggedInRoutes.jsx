@@ -10,7 +10,6 @@ const LoggedInRoutes = ({ redirectTo, isRole }) => {
     const user = getUser();
     const decode = jwtDecode(user);
     const userRole = decode?.userRole;
-    console.log("🚀 ~ file: LoggedInRoutes.jsx:13 ~ LoggedInRoutes ~ userRole:", userRole)
     useEffect(() => {
         if (!user) {
           removeUser();

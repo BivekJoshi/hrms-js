@@ -4,9 +4,7 @@ import tableIcons from "../../../../theme/overrides/TableIcon";
 import { useGetAvailableOfficeResource } from "../../../hooks/resource/officeResource/useOfficeResource";
 
 export const AvailableOfficeLogistic = (props) => {
-  const { data, isLoading} = useGetAvailableOfficeResource();
-  console.log(data);
- 
+  const { data, isLoading} = useGetAvailableOfficeResource(); 
   const columns = [
     {
       title: "SN",
