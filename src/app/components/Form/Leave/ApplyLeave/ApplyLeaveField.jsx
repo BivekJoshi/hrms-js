@@ -21,18 +21,16 @@ import { TabContext, TabList, TabPanel } from "@mui/lab";
 const ApplyLeaveField = () => {
   const [value, setValue] = useState("1");
   const location = useLocation();
-  const rowData = location?.state?.rowData || {};
 
+  const rowData = location?.state?.rowData || {};
   const id = rowData ? rowData.id : "";
 
   const { data } = useGetLeaveById(id);
   const { data: leaveTypeData } = useGetLeaveType();
-
   const { formik } = useApplyLeaveForm(data);
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
-
     if (formik.isValid) {
     } else {
       toast.error("Please make sure you have filled the form correctly");
@@ -70,10 +68,6 @@ const ApplyLeaveField = () => {
               InputLabelProps={{ shrink: true }}
               fullWidth
               value={getLeaveTypeName(formik.values.leaveTypeId)}
-              // onChange={(event) => {
-              //   formik.handleChange(event);
-              //   formik.setFieldValue("leaveTypeId", event.target.value);
-              // }}
               error={
                 formik.touched.leaveTypeId && Boolean(formik.errors.leaveTypeId)
               }
@@ -203,96 +197,48 @@ const ApplyLeaveField = () => {
   );
 };
 
-const HalfDay = ({ formik }) => {
+const DateInput = ({ formik, isHalfDay = false , isMultipleDays= false }) => {
+  const [halfType, setHalfType] = useState("");
+  console.log(halfType)
+
+  const handleFromDateChange = (e) => {
+    const fromDateValue = e.target.value;
+    formik.handleChange(e);
+    formik.setFieldValue("toDate", fromDateValue);
+    if (isHalfDay) {
+      formik.setFieldValue("isHalfDay", true);
+      formik.setFieldValue("halfLeaveType", halfType);      
+    }
+  };
+
+  const handleHalfType = (e) => {
+    setHalfType(e.target.value);
+  }
+
   return (
     <>
+      <div style={{ display: "flex", gap: "0.5rem"}}>
       <Grid item xs={12} sm={6}>
         <TextField
           name="fromDate"
-          // label="From"
+          label="Select Date"
           type="date"
           required
           InputLabelProps={{ shrink: true }}
           fullWidth
           value={formik.values.fromDate}
-          onChange={formik.handleChange}
+          onChange={handleFromDateChange}
           error={formik.touched.fromDate && Boolean(formik.errors.fromDate)}
           helperText={formik.touched.fromDate && formik.errors.fromDate}
         />
       </Grid>
-      <Grid item xs={12} sm={12}>
-        <RadioGroup
-          row
-          aria-labelledby="demo-row-radio-buttons-group-label"
-          name="row-radio-buttons-group"
-          style={{ display: "flex", marginTop: "0.6rem" }}
-        >
-          <FormControlLabel
-            value="FIRST_HALF"
-            control={<Radio />}
-            label="First Half"
-          />
-          <FormControlLabel
-            value="SECOND_HALF"
-            control={<Radio />}
-            label="Second Half"
-          />
-        </RadioGroup>
-      </Grid>
-    </>
-  );
-};
-
-const OneDay = ({ formik }) => {
-  return (
-    <>
-      <Grid item xs={12} sm={6}>
-        <TextField
-          name="fromDate"
-          // label="From"
-          type="date"
-          required
-          InputLabelProps={{ shrink: true }}
-          fullWidth
-          value={formik.values.fromDate}
-          onChange={formik.handleChange}
-          error={formik.touched.fromDate && Boolean(formik.errors.fromDate)}
-          helperText={formik.touched.fromDate && formik.errors.fromDate}
-        />
-      </Grid>
-    </>
-  );
-};
-
-const MultipleDays = ({ formik }) => {
-  return (
-    <>
-      <Grid
-        item
-        container
-        xs={12}
-        sm={12}
-        style={{ display: "flex", justifyContent: "space-between" }}
-      >
+      {isMultipleDays && (
         <Grid item xs={12} sm={6}>
-          <Typography variant="subtitle1">From Date:</Typography>
-          <TextField
-            name="fromDate"
-            type="date"
-            required
-            InputLabelProps={{ shrink: true }}
-            fullWidth
-            value={formik.values.fromDate}
-            onChange={formik.handleChange}
-            error={formik.touched.fromDate && Boolean(formik.errors.fromDate)}
-            helperText={formik.touched.fromDate && formik.errors.fromDate}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6} style={{ paddingLeft: "1.2rem" }}>
-          <Typography variant="subtitle1">To Date:</Typography>
           <TextField
             name="toDate"
+            label="Select To Date"
             type="date"
+            required
             InputLabelProps={{ shrink: true }}
             fullWidth
             value={formik.values.toDate}
@@ -301,9 +247,43 @@ const MultipleDays = ({ formik }) => {
             helperText={formik.touched.toDate && formik.errors.toDate}
           />
         </Grid>
-      </Grid>
+      )}
+      </div>
+      {isHalfDay && (
+        <Grid item xs={12} sm={12}>
+          <RadioGroup
+            row
+            aria-labelledby="demo-row-radio-buttons-group-label"
+            name="halfLeaveType"
+            value={formik.values.halfType}
+            onChange={handleHalfType}
+            style={{ display: "flex", marginTop: "0.6rem" }}
+          >
+            <FormControlLabel
+              value="FIRST_HALF"
+              control={<Radio />}
+              label="First Half"
+            />
+            <FormControlLabel
+              value="SECOND_HALF"
+              control={<Radio />}
+              label="Second Half"
+            />
+          </RadioGroup>
+        </Grid>
+      )}
     </>
   );
 };
+
+const HalfDay = ({ formik }) => (
+  <DateInput formik={formik} isHalfDay={true} />
+);
+
+const OneDay = ({ formik }) => <DateInput formik={formik} />;
+
+const MultipleDays = ({ formik }) => (
+  <DateInput formik={formik} isMultipleDays={true} />
+);
 
 export default ApplyLeaveField;

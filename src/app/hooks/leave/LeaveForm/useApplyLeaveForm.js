@@ -6,16 +6,19 @@ import { useGetLoggedInUser } from "../../auth/usePassword";
 const useApplyLeaveForm = (data) => {
   const { mutate: addLeave } = useAddLeave({});
   const { mutate: editLeave } = useEditLeave({});
-  const {data:userData} = useGetLoggedInUser();
+  const {data: userData} = useGetLoggedInUser();
+
+  console.log({"userData": userData})
 
   const formik = useFormik({
     initialValues: {
-      employeeId: userData?.employeeId||"",
+      employeeId: userData?.id||"",
       leaveTypeId: data?.leaveTypeId || "",
       leaveReason: data?.leaveReason || "",
       fromDate: data?.fromDate || "",
       toDate: data?.toDate || "",
       isHalfDay: data?.isHalfDay || false,
+      halfLeaveType: data?.halfLeaveType || null,
       leaveStatus: data?.leaveStatus || "PENDING",
       leaveRemarks: data?.leaveRemarks || "",
     },
