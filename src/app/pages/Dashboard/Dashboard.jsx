@@ -44,8 +44,6 @@ const Dashboard = () => {
     year: "numeric",
   };
   const formattedDate = today.toLocaleDateString(undefined, options);
-  //   const {data}=getUser();
-  // console.log(data);
   return (
     <>
       <Box

@@ -84,12 +84,12 @@ export const getEmployeeProgress = async (id) => {
 {/*________________________EDIT-TO-DE-Terminate-EMPLOYEE_____________________________________*/ }
 export const terminateEmployee = async (formData) => {
   const { employeeId, terminationType, effectiveDate } = formData;
-  const data = await axiosInstance.put(`/employee/edit-activation/${employeeId}?terminationType=${terminationType}&effectiveDate=${effectiveDate}`);
+  const data = await axiosInstance.put(`/employee/edit-termination/${employeeId}?terminationType=${terminationType}&effectiveDate=${effectiveDate}`);
   return data;
 };
 {/*________________________EDIT-TO-DE-Terminate-EMPLOYEE_____________________________________*/ }
 export const activeEmployee = async (formData) => {
   const { employeeId, terminationType, effectiveDate } = formData;
-  const data = await axiosInstance.put(`/employee/edit-activation/${employeeId}?terminationType=${terminationType}&effectiveDate=${effectiveDate}`);
+  const data = await axiosInstance.put(`/employee/edit-termination/${employeeId}?terminationType=${terminationType}&effectiveDate=${effectiveDate}`);
   return data;
 };

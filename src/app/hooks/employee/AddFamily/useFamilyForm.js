@@ -31,8 +31,6 @@ const useFamilyForm = ({ data, isLoadingFamily: isLoading }) => {
     enableReinitialize: true,
     validationSchema: FamilySchema,
     onSubmit: (values) => {
-      // console.log({"values": values})
-
       if (values.family.some((member) => !member.id)) {
         handleAddRequest(values);
       } else {

@@ -21,7 +21,6 @@ const useAuth = () => {
 
   if (token) {
     const decoded = jwtDecode(token);
-    // console.log(decoded,"decoded token");
     const { userRole } = decoded;
 
     isSuperAdmin = userRole.includes("ROLE_SUPER_ADMIN");
