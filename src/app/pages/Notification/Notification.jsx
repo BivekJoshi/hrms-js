@@ -21,10 +21,12 @@ const Notification = ({ data }) => {
   const eventCount = isManager
     ? leaveData?.length + data?.eventCount || 0
     : data?.eventCount || 0;
+
   const displayCount = eventCount > 0 ? eventCount : null;
-  const pendingLeaveData = leaveData?.filter(
+  const pendingLeaveData = isManager
+  ?  leaveData?.filter(
     (leave) => leave.leaveStatus === "PENDING"
-  );
+  ):"";
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
 

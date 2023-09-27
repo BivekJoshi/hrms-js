@@ -90,6 +90,13 @@ const ApplyLeave = () => {
       icon: <KitesurfingIcon style={{ width: "3rem", height: "3rem" }} />,
     },
     {
+      id: 9,
+      leaveType: "SICK ",
+      icon: (
+        <BabyChangingStationIcon style={{ width: "3rem", height: "3rem" }} />
+      ),
+    },
+    {
       id: 8,
       leaveType: "MATERNITY ADDITIONAL ",
       icon: (
