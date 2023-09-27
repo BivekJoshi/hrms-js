@@ -20,6 +20,7 @@ import Male from "../../../assets/male.png";
 import { useGetLoggedInUser } from "../../hooks/auth/usePassword";
 import { useGetPendingLeave } from "../../hooks/leave/useLeave";
 import { DOC_URL } from "../../../auth/axiosInterceptor";
+
 const Dashboard = () => {
   const { mode } = useContext(ThemeModeContext);
   const { data: dashboardData } = useGetDashboard();

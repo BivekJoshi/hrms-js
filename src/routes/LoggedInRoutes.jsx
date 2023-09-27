@@ -4,12 +4,13 @@ import { getUser, removeUser } from '../app/utils/cookieHelper';
 import { toast } from 'react-toastify';
 import jwtDecode from 'jwt-decode';
 
-const LoggedInRoutes = ({ redirectTo, isRole }) => {    
-    
+const LoggedInRoutes = ({ redirectTo, allowedRoles }) => {    
     const navigate = useNavigate();
     const user = getUser();
     const decode = jwtDecode(user);
     const userRole = decode?.userRole;
+    console.log("🚀 ~ file: LoggedInRoutes.jsx:13 ~ LoggedInRoutes ~ userRole:", userRole , allowedRoles)
+    
     useEffect(() => {
         if (!user) {
           removeUser();
@@ -18,7 +19,8 @@ const LoggedInRoutes = ({ redirectTo, isRole }) => {
         } 
         // eslint-disable-next-line
       }, []);
-      if (isRole !== userRole) return <Navigate exact to={redirectTo} />;
+
+      if (!allowedRoles.includes(userRole)) return <Navigate exact to={redirectTo} />;
       return <Outlet />;
 }
 

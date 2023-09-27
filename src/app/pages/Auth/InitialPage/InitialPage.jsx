@@ -1,7 +1,6 @@
 import { Box, Grid, Stack, Typography } from "@mui/material";
 import React from "react";
 import main from "../../../../assets/main.png";
-import hrmslogo from "../../../../assets/hrmslogo.png";
 
 const InitialPage = () => {
   return (

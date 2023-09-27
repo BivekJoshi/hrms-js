@@ -8,7 +8,7 @@ import { useGetEmployeeAttendanceMonthWise } from "../../../hooks/attendance/use
 export const MiddleEmployDashbord = ({ employData }) => {
   const [thisYear, setThisYear] = useState()
   const { data: attendanceData } = useGetEmployeeAttendanceMonthWise(
-    employData.employeeId,
+    employData?.employeeId,
     2080
   );
 
