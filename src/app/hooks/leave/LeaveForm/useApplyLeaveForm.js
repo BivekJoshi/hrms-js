@@ -8,11 +8,12 @@ const useApplyLeaveForm = (data) => {
   const { mutate: editLeave } = useEditLeave({});
   const {data: userData} = useGetLoggedInUser();
 
-  console.log({"userData": userData})
+  console.log({"userData": data})
 
   const formik = useFormik({
     initialValues: {
-      employeeId: userData?.id||"",
+      id: data?.id,
+      employeeId: userData?.employeeId ||"",
       leaveTypeId: data?.leaveTypeId || "",
       leaveReason: data?.leaveReason || "",
       fromDate: data?.fromDate || "",

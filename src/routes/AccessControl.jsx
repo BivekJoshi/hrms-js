@@ -12,7 +12,6 @@ export const AccessControl = ({ Component }) => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const user = getUser();
-  console.log("🚀 ~ file: AccessControl.jsx:15 ~ AccessControl ~ user:", user)
   const decode = jwtDecode(user);
   const userRole = decode?.userRole;
 
@@ -25,7 +24,7 @@ export const AccessControl = ({ Component }) => {
       userRole === "ROLE_ADMIN" ||
       userRole === "ROLE_MANAGER" ||
       userRole === "ROLE_HR_ADMIN" ||
-      userRole === "ROLE_HR_CLERK"
+      userRole ==="ROLE_HR_CLERK" 
     ) {
       navigate("/admin/dashboard");
     } else if (userRole === "ROLE_EMPLOYEE") {

@@ -26,7 +26,6 @@ import EventIcon from "@mui/icons-material/Event";
 import HolidayVillageIcon from "@mui/icons-material/HolidayVillage";
 import LaptopIcon from "@mui/icons-material/Laptop";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import logo from "../../../assets/logo.png";
 import "./Style/Style.css";
 
 const drawerWidth = 250;
@@ -274,9 +273,9 @@ export default function AdminSidebar() {
         anchor="left"
         open={open}
       >
-        <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
-            <img src={logo} alt="logo" />
+        <DrawerHeader>          
+            <Typography style={{ fontSize: "2rem", fontWeight: "900", color: "#01579b", letterSpacing: "0.1rem" }} variant="h6">DGHUB</Typography>
+            <IconButton onClick={handleDrawerClose}>
             <ChevronLeftIcon />
           </IconButton>
         </DrawerHeader>

@@ -50,6 +50,10 @@ const ApplyLeaveField = () => {
     setValue(newValue);
   };
 
+  function getDayName(date = new Date(), locale = 'en-US') {
+    return date.toLocaleDateString(locale, {weekday: 'long'});
+  }
+ //  console.log(getDayName())
   return (
     <>
       <Typography variant="h6">

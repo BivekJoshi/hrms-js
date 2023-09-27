@@ -79,6 +79,7 @@ const LeaveUserView = () => {
   const handleEditLeave = (rowData) => {
     navigate(`/employee/applyleavefield`, { state: { rowData } });
   };
+
   const columns = [
     {
       title: "SN",
@@ -164,7 +165,7 @@ const LeaveUserView = () => {
       },
       render: (rowData) => {
         return (
-          <Tooltip style={{ fontSize: "12rem" }} title={rowData?.leaveReason} placement="top-start" arrow>
+          <Tooltip title={rowData?.leaveReason} placement="top-start" arrow>
             <span
               style={{
                 cursor: "pointer",
@@ -205,6 +206,7 @@ const LeaveUserView = () => {
       width: 120,
     },
   ];
+  
   return (
     <>
       <MaterialTable

@@ -16,33 +16,76 @@ import EmployeeDashbord from "../app/pages/EmployeePage/EmployeeDashboard/Employ
 import LoggedInRoutes from "./LoggedInRoutes";
 
 const AppRoutes = () => {
- 
+  const isRole = [];
   return (
     <>
-    <HashRouter>
-      <ScrollToTop>
-        <Routes>
-          <Route exact path="/" element={<Applayout />}>
-            <Route exact path="/" element={<Login />} />
-            <Route exact path="/forgot-password" element={<ForgotPassword />} />
-            <Route exact path="/hrms/user-activation" element={<RenamePassword />} />
-       <Route element={<ProtectedRoute redirectTo="/"/>}>
-       <Route path="/admin" element={<AdminLayout />}>
-       <Route  element={<LoggedInRoutes redirectTo='/404' isRole='ROLE_ADMIN' />}>
-         
-              <Route exact index element={<Dashboard />} />
-                {adminRoutes.map((route) => (
+      <HashRouter>
+        <ScrollToTop>
+          <Routes>
+            <Route exact path="/" element={<Applayout />}>
+              <Route exact path="/" element={<Login />} />
+              <Route
+                exact
+                path="/forgot-password"
+                element={<ForgotPassword />}
+              />
+              <Route
+                exact
+                path="/hrms/user-activation"
+                element={<RenamePassword />}
+              />
+
+              <Route element={<ProtectedRoute redirectTo="/" />}>
+                <Route path="/admin" element={<AdminLayout />}>
                   <Route
-                    key={route.id}
-                    path={route.path}
-                    exact
-                    element={route.component}
-                  />
-                ))}
-              </Route>
-              </Route>
+                    element={
+                      <LoggedInRoutes
+                        redirectTo="/404"
+                        allowedRoles={[
+                          "ROLE_SUPER_ADMIN",
+                          "ROLE_ADMIN",
+                          "ROLE_MANAGER",
+                          "ROLE_HR_ADMIN",
+                          "ROLE_HR_CLERK",
+                        ]}
+                      />
+                    }
+                  >
+                    <Route exact index element={<Dashboard />} />
+                    {adminRoutes.map((route) => (
+                      <Route
+                        key={route.id}
+                        path={route.path}
+                        exact
+                        element={route.component}
+                      />
+                    ))}
+                  </Route>
+                </Route>
+
+                <Route path="/employee" element={<EmployeeLayout />}>
+                  <Route
+                    element={
+                      <LoggedInRoutes
+                        redirectTo="/404"
+                        allowedRoles={["ROLE_EMPLOYEE"]}
+                      />
+                    }
+                  >
+                    <Route index element={<EmployeeDashbord />} />
+                    {employeeRoutes.map((route) => (
+                      <Route
+                        key={route.id}
+                        path={route.path}
+                        exact
+                        element={route.component}
+                      />
+                    ))}
+                  </Route>
+                </Route>
               </Route>
 
+              {/* <Route path="/employee" element={<LoggedInRoutes redirectTo='/404' isRole='ROLE_EMPLOYEE' />}>
               <Route path="/employee" element={<LoggedInRoutes redirectTo='/404' isRole='ROLE_EMPLOYEE' />}>
                 <Route exact index element={<EmployeeDashbord />} />
                   {
@@ -56,10 +99,8 @@ const AppRoutes = () => {
                     ))
                   }
                 </Route>
-
-                </Route>
-
-          
+                </Route> */}
+            </Route>
           </Routes>
         </ScrollToTop>
       </HashRouter>
