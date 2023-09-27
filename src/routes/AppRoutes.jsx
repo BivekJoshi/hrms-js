@@ -13,6 +13,7 @@ import EmployeeLayout from "../layout/EmployeeLayout";
 import { AccessControl } from "./AccessControl";
 import Dashboard from "../app/pages/Dashboard/Dashboard";
 import EmployeeDashbord from "../app/pages/EmployeePage/EmployeeDashboard/EmployeeDashbord";
+import LoggedInRoutes from "./LoggedInRoutes";
 
 const AppRoutes = () => {
  
@@ -25,8 +26,10 @@ const AppRoutes = () => {
             <Route exact path="/" element={<Login />} />
             <Route exact path="/forgot-password" element={<ForgotPassword />} />
             <Route exact path="/hrms/user-activation" element={<RenamePassword />} />
-       
-            <Route exact path="/admin" element={<AccessControl Component={<AdminLayout />} /> }>
+       <Route element={<ProtectedRoute redirectTo="/"/>}>
+       <Route path="/admin" element={<AdminLayout />}>
+       <Route  element={<LoggedInRoutes redirectTo='/404' isRole='ROLE_ADMIN' />}>
+         
               <Route exact index element={<Dashboard />} />
                 {adminRoutes.map((route) => (
                   <Route
@@ -37,8 +40,10 @@ const AppRoutes = () => {
                   />
                 ))}
               </Route>
+              </Route>
+              </Route>
 
-            <Route exact path="/employee" element={<AccessControl Component={<EmployeeLayout />} /> }>
+              <Route path="/employee" element={<LoggedInRoutes redirectTo='/404' isRole='ROLE_EMPLOYEE' />}>
                 <Route exact index element={<EmployeeDashbord />} />
                   {
                     employeeRoutes.map((route) => (
@@ -52,8 +57,9 @@ const AppRoutes = () => {
                   }
                 </Route>
 
+                </Route>
 
-            </Route>
+          
           </Routes>
         </ScrollToTop>
       </HashRouter>
