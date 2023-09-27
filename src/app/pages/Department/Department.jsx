@@ -47,7 +47,6 @@ const Department = ({ permissions }) => {
   };
 
   const handleEditDepartment = (rowData) => {
-    console.log(rowData,"roes lslk");
     setEditedDepartment(rowData);
     setOpenEditModal(true);
   };

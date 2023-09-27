@@ -12,7 +12,6 @@ export const AccessControl = ({ Component }) => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const user = getUser();
-  console.log("🚀 ~ file: AccessControl.jsx:15 ~ AccessControl ~ user:", user)
   const decode = jwtDecode(user);
   const userRole = decode?.userRole;
 

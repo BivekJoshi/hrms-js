@@ -66,7 +66,6 @@ export const LeaveNotification = ({
   const getEmployeeName = (employeeId) => {
     // const employeeId = data.employeeId;
     const employee = employeeData?.find((emp) => emp.id === employeeId);
-    console.log(employee);
 
     const name = `${employee?.firstName} ${employee?.middleName || ""} ${
       employee?.lastName || ""
