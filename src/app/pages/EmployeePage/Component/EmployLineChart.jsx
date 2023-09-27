@@ -3,10 +3,6 @@ import { Area, AreaChart, CartesianGrid, ReferenceLine } from "recharts";
 import { ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
 export const EmployLineChart = ({ attendanceData }) => {
-  const workDays =attendanceData ? attendanceData?.map(
-    (data) => data?.attendanceCountRes?.presentDays
-  ):"";
-
   return (
     <ResponsiveContainer width="100%" height="80%">
       <AreaChart
@@ -21,7 +17,7 @@ export const EmployLineChart = ({ attendanceData }) => {
         <ReferenceLine y={32} label="Max" stroke="red" strokeDasharray="3 3" />
         <Area
           type="monotone"
-          dataKey={workDays}
+          dataKey="attendanceCountRes.presentDays"
           stroke="#8884d8"
           fill="#8884d8"
         />

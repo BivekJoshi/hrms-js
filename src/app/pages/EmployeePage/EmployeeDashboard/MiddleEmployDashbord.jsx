@@ -3,16 +3,16 @@ import React, { useState } from "react";
 import { EmployLineChart } from "../Component/EmployLineChart";
 import GaugeChart from "react-gauge-chart";
 import { PendingTask } from "../Component/PendingTask";
-import { useGetEmployeeAttendanceMonthWise } from "../../../hooks/attendance/useAttendance";
+import {
+  useGetEmployeeAttendanceMonthWise,
+  useGetEmployeeAverageWork,
+} from "../../../hooks/attendance/useAttendance";
 
-export const MiddleEmployDashbord = ({ employData }) => {
-  const [thisYear, setThisYear] = useState()
-  const { data: attendanceData } = useGetEmployeeAttendanceMonthWise(
-    employData?.employeeId,
-    2080
-  );
-
-
+export const MiddleEmployDashbord = ({}) => {
+  const { data: attendanceData } = useGetEmployeeAttendanceMonthWise(2080);
+  const { data } = useGetEmployeeAverageWork();
+  const averageWork = ((data / 9) * 100) / 100;
+  console.log(averageWork);
   return (
     <Box
       display="grid"
@@ -29,20 +29,24 @@ export const MiddleEmployDashbord = ({ employData }) => {
       <Box>
         <h3>Average working Hour</h3>
         <Box marginTop="3rem">
-          <GaugeChart id="gauge-chart2" nrOfLevels={20} percent={0.86} />
+          <GaugeChart
+            id="gauge-chart2"
+            nrOfLevels={9}
+            percent={averageWork === 1 ? 1 : averageWork}
+          />
           <Stack flexDirection="row" justifyContent="space-evenly">
             <Typography>1 Hour</Typography>
-            <Typography>80%</Typography>
-            <Typography>8 hour</Typography>
+            <Typography>{data} Hour</Typography>
+            <Typography>9 hour</Typography>
           </Stack>
         </Box>
       </Box>
-      {/* <Box className="taskTable">
+      <Box className="taskTable">
         <h3>Pending Task</h3>
         <Box marginTop="2rem">
           <PendingTask />
         </Box>
-      </Box> */}
+      </Box>
     </Box>
   );
 };

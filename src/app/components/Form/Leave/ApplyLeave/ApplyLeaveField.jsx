@@ -203,7 +203,6 @@ const ApplyLeaveField = () => {
 
 const DateInput = ({ formik, isHalfDay = false , isMultipleDays= false }) => {
   const [halfType, setHalfType] = useState("");
-  console.log(halfType)
 
   const handleFromDateChange = (e) => {
     const fromDateValue = e.target.value;
