@@ -13,13 +13,12 @@ export const MiddleEmployDashbord = ({}) => {
   const { data: attendanceData } = useGetEmployeeAttendanceMonthWise(2080);
   const { mode } = useContext(ThemeModeContext);
   const { data } = useGetEmployeeAverageWork();
-  const averageWork = data / 9;
+  const averageWork = data / 9.5;
 
   return (
     <Box
       display="grid"
-      gridTemplateColumns="3fr 2fr"
-      // gridTemplateColumns="repeat(auto-fit, minmax(250px, 1fr))"
+      gridTemplateColumns="repeat(auto-fit, minmax(250px, 1fr))"
       padding="2rem 0 3rem"
       gap="1rem"
     >
@@ -36,7 +35,7 @@ export const MiddleEmployDashbord = ({}) => {
             id="gauge-chart2"
             nrOfLevels={10}
             textColor={mode === "light" ? "white" : "#3838388a"}
-            percent={averageWork === 1 ? 1 : averageWork}
+            percent={averageWork}            
           />
           <Stack flexDirection="row" justifyContent="space-evenly">
             <Typography>1 Hour</Typography>
