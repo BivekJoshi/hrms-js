@@ -1,9 +1,13 @@
 import { axiosInstance } from "../../../auth/axiosInterceptor";
+import useAuth from "../../../auth/hooks/component/login/useAuth";
 
 /*________________________GET ALL_____________________________________*/
 export const getleave = async () => {
-  const data = await axiosInstance.get(`/leave/get-all`);
-  return data;
+  const { isEmployee } = useAuth();
+  if (!isEmployee) {
+    const data = await axiosInstance.get(`/leave/get-all`);
+    return data;
+  }
 };
 
 /*________________________GET PENDING LEAVE_____________________________________*/
@@ -20,7 +24,9 @@ export const getLoggedInUserLeave = async () => {
 
 /*________________________GET LEAVE OF LOGGED IN USER LEAVE BALANCE_____________________________________*/
 export const getLoggedInUserLeaveBalance = async () => {
-  const data = await axiosInstance.get(`/leave/logged-in-user/leave-balance-order-by/leave-type`);
+  const data = await axiosInstance.get(
+    `/leave/logged-in-user/leave-balance-order-by/leave-type`
+  );
   return data;
 };
 
@@ -47,7 +53,10 @@ export const addleave = async (formData) => {
     ...formData,
     leaveTypeId: formData.leaveTypeId?.id,
   };
-  const data = await axiosInstance.post(`/leave/logged-in-user/create`, submitedData);
+  const data = await axiosInstance.post(
+    `/leave/logged-in-user/create`,
+    submitedData
+  );
   return data;
 };
 
@@ -57,16 +66,19 @@ export const addLeaveByAdmin = async (formData) => {
     ...formData,
     employeeId: formData.employeeId?.id,
     leaveTypeId: formData.leaveTypeId?.id,
-  }
-  const data = await axiosInstance.post('/leave/create', submitedData);
+  };
+  const data = await axiosInstance.post("/leave/create", submitedData);
   return data;
 };
 
 /*________________________EDIT BY USER_____________________________________*/
 export const editLeave = async (formData) => {
-  console.log({"formData": formData})
+  console.log({ formData: formData });
   const { id } = formData;
-  const data = await axiosInstance.put(`/leave/logged-in-user/update?leaveId=${id}`, formData);
+  const data = await axiosInstance.put(
+    `/leave/logged-in-user/update?leaveId=${id}`,
+    formData
+  );
   return data;
 };
 
