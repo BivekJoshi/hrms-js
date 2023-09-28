@@ -1,5 +1,5 @@
 import { Box, Stack, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import { EmployLineChart } from "../Component/EmployLineChart";
 import GaugeChart from "react-gauge-chart";
 import { PendingTask } from "../Component/PendingTask";
@@ -7,12 +7,14 @@ import {
   useGetEmployeeAttendanceMonthWise,
   useGetEmployeeAverageWork,
 } from "../../../hooks/attendance/useAttendance";
+import ThemeModeContext from "../../../../theme/ThemeModeContext";
 
 export const MiddleEmployDashbord = ({}) => {
   const { data: attendanceData } = useGetEmployeeAttendanceMonthWise(2080);
+  const { mode } = useContext(ThemeModeContext);
   const { data } = useGetEmployeeAverageWork();
-  const averageWork = ((data / 9) * 100) / 100;
- 
+  const averageWork = data / 9;
+  
   return (
     <Box
       display="grid"
@@ -22,7 +24,7 @@ export const MiddleEmployDashbord = ({}) => {
     >
       <Box>
         <h3>Employee overal Attendance</h3>
-        <Box marginTop="-2.5rem" height="100%">
+        <Box marginTop="0" height="100%">
           <EmployLineChart attendanceData={attendanceData} />
         </Box>
       </Box>
@@ -32,6 +34,8 @@ export const MiddleEmployDashbord = ({}) => {
           <GaugeChart
             id="gauge-chart2"
             nrOfLevels={9}
+            // style={{width:"80%"}}
+            textColor={mode === "light" ? "white" : "#3838388a"}
             percent={averageWork === 1 ? 1 : averageWork}
           />
           <Stack flexDirection="row" justifyContent="space-evenly">
@@ -41,12 +45,7 @@ export const MiddleEmployDashbord = ({}) => {
           </Stack>
         </Box>
       </Box>
-      <Box className="taskTable">
-        <h3>Pending Task</h3>
-        <Box marginTop="2rem">
-          <PendingTask />
-        </Box>
-      </Box>
+      
     </Box>
   );
 };

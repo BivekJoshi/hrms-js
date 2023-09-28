@@ -106,12 +106,12 @@ const EmployeeDashbord = ({}) => {
             taskIcon={taskDetail.taskIcon}
           />
         ))}
-        <EmployPichart task={task}/>
+        {/* <EmployPichart task={task}/> */}
       </Box>
       <MiddleEmployDashbord employData={employData}/>
       <Box display="grid" gridTemplateColumns="3fr 2fr" gap="3rem">
         <LeftEmployDashbord />
-        <RightEmployDashbord />
+        <RightEmployDashbord employData={employData}/>
       </Box>
     </Box>
   );

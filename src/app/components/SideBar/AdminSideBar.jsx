@@ -26,7 +26,6 @@ import EventIcon from "@mui/icons-material/Event";
 import HolidayVillageIcon from "@mui/icons-material/HolidayVillage";
 import LaptopIcon from "@mui/icons-material/Laptop";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import "./Style/Style.css";
 
 const drawerWidth = 250;
 
@@ -273,9 +272,19 @@ export default function AdminSidebar() {
         anchor="left"
         open={open}
       >
-        <DrawerHeader>          
-            <Typography style={{ fontSize: "2rem", fontWeight: "900", color: "#01579b", letterSpacing: "0.1rem" }} variant="h6">DGHUB</Typography>
-            <IconButton onClick={handleDrawerClose}>
+        <DrawerHeader>
+          <Typography
+            style={{
+              fontSize: "2rem",
+              fontWeight: "900",
+              color: "#01579b",
+              letterSpacing: "0.1rem",
+            }}
+            variant="h6"
+          >
+            DGHUB
+          </Typography>
+          <IconButton onClick={handleDrawerClose}>
             <ChevronLeftIcon />
           </IconButton>
         </DrawerHeader>
@@ -367,9 +376,8 @@ export default function AdminSidebar() {
             alignItems: "center",
             padding: "10px",
             flexDirection: "column",
-            bottom: "0",
           }}
-          // bgcolor={mode === "light" ? "black" : "White"}
+          
         >
           <Button
             variant='contained'
@@ -384,7 +392,6 @@ export default function AdminSidebar() {
           <Typography
             variant="body2"
             sx={{ marginRight: "8px", marginTop: "1rem" }}
-            color={mode ==="light" ? "black" :"white"}
           >
             {mode === "light" ? "Dark" : "Light"} Mode
             <Switch checked={mode === "dark"} onChange={toggleMode} />

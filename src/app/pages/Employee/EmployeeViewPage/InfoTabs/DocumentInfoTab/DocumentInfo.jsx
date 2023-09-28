@@ -100,7 +100,8 @@ const DocumentInfo = () => {
             <TabPanel
               key={documentType}
               value={documentType}
-              sx={{
+              sx={{ 
+                padding:"0px",
                 display: "grid",
                 gridTemplateColumns: "repeat(2, 1fr)",
                 gap: "1rem",

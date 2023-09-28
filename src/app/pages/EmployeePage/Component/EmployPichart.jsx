@@ -3,14 +3,7 @@ import { PieChart, Pie, Cell, Legend, ResponsiveContainer } from "recharts";
 import { Box } from "@mui/material";
 import "../Style/Style.css";
 
-export const EmployPichart = ({}) => {
-  const task = [
-    { nameOfTask: "Total Project", numberOfTask: 4 },
-    { nameOfTask: "Total Task", numberOfTask: 4 },
-    { nameOfTask: "Task Pending", numberOfTask: 7 },
-    { nameOfTask: "Task Complete", numberOfTask: 8 },
-  ];
-
+export const EmployPichart = ({ task }) => {
   const COLORS = ["#F65E3C", "#A1E000", "#9137B8", "#D93084"];
 
   const Bullet = ({ backgroundColor, size }) => {
@@ -27,7 +20,7 @@ export const EmployPichart = ({}) => {
   };
 
   return (
-    <Box className="pichartStyle" >
+    <Box className="pichartStyle">
       <ResponsiveContainer width="100%" height={250}>
         <PieChart
           width={300}
