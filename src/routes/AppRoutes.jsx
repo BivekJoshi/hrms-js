@@ -14,9 +14,10 @@ import { AccessControl } from "./AccessControl";
 import Dashboard from "../app/pages/Dashboard/Dashboard";
 import EmployeeDashbord from "../app/pages/EmployeePage/EmployeeDashboard/EmployeeDashbord";
 import LoggedInRoutes from "./LoggedInRoutes";
+import ErrorPage from "./ErrorPage";
 
 const AppRoutes = () => {
-  const isRole = [];
+  
   return (
     <>
       <HashRouter>
@@ -24,6 +25,7 @@ const AppRoutes = () => {
           <Routes>
             <Route exact path="/" element={<Applayout />}>
               <Route exact path="/" element={<Login />} />
+              <Route exact path="*" element={<ErrorPage />} />
               <Route
                 exact
                 path="/forgot-password"
@@ -84,22 +86,6 @@ const AppRoutes = () => {
                   </Route>
                 </Route>
               </Route>
-
-              {/* <Route path="/employee" element={<LoggedInRoutes redirectTo='/404' isRole='ROLE_EMPLOYEE' />}>
-              <Route path="/employee" element={<LoggedInRoutes redirectTo='/404' isRole='ROLE_EMPLOYEE' />}>
-                <Route exact index element={<EmployeeDashbord />} />
-                  {
-                    employeeRoutes.map((route) => (
-                      <Route
-                        key={route.id}
-                        path={route.path}
-                        exact
-                        element={route.component}
-                      />
-                    ))
-                  }
-                </Route>
-                </Route> */}
             </Route>
           </Routes>
         </ScrollToTop>

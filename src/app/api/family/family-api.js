@@ -17,7 +17,7 @@ export const addfamily = async (formData, id) => {
 // export const addfamily = async (formData, id) => {
 //   const newFam = formData?.family;
 //   const dataToPost = newFam.filter(item => item.id === undefined || item.id === "");
-//   console.log({"postdata": dataToPost, "id": id})
+//   
 //   if (dataToPost.length > 0) {
 //     const data = await axiosInstance.post(`/family-member/create/${id}`, dataToPost);
 //     return data;

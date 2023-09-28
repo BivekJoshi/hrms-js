@@ -72,7 +72,6 @@ export const addLeaveByAdmin = async (formData) => {
 
 /*________________________EDIT BY USER_____________________________________*/
 export const editLeave = async (formData) => {
-  console.log({ formData: formData });
   const { id } = formData;
   const data = await axiosInstance.put(
     `/leave/logged-in-user/update?leaveId=${id}`,
