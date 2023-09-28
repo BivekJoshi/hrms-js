@@ -11,6 +11,48 @@ import { groupBy } from "lodash";
 import useAuth from "../../../../../../auth/hooks/component/login/useAuth";
 import { useGetLoggedInUserInfo } from "../../../../../hooks/employee/useEmployee";
 
+const documentName = [
+  {
+    id: 1,
+    label: "Profile",
+    value: "EMPLOYEE_PHOTO",
+  },
+  {
+    id: 2,
+    label: "Citizenship",
+    value: "CITIZENSHIP",
+  },
+  {
+    id: 1,
+    label: "Pan Card",
+    value: "PAN_CARD",
+  },
+  {
+    id: 1,
+    label: "Academic Document",
+    value: "ACADEMIC_DOCUMENT",
+  },
+  {
+    id: 1,
+    label: "Training Certificate",
+    value: "TRAINING_CERTIFICATE",
+  },
+  {
+    id: 1,
+    label: "Certification",
+    value: "CERTIFICATION",
+  },
+  {
+    id: 1,
+    label: "Experience Letter",
+    value: "EXPERIENCE_LETTER",
+  },
+  {
+    id: 1,
+    label: "Awards and Acheivements",
+    value: "AWARD_AND_ACHIEVEMENT",
+  },
+]
 const DocumentInfo = () => {
   const { isSuperAdmin, isAdmin, isHr, isEmployee, isHrAdmin, isManager } =
     useAuth();
@@ -33,18 +75,20 @@ const DocumentInfo = () => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  
+
   return (
-    // {data?():()}
     <Box>
       <TabContext value={value}>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <TabList onChange={handleChange} aria-label="lab API tabs example">
             {isLoading ? (
-              <p>Loding..</p>
+              <p>Loading..</p>
             ) : (
               Object.keys(groupedDocuments).map((documentType, index) => (
-                <Tab key={index} label={documentType} value={documentType} />
+                <Tab 
+                key={index} 
+                label={documentName?.find((doc) => doc?.value === documentType)?.label}
+                value={documentType} />
               ))
             )}
           </TabList>
@@ -63,13 +107,25 @@ const DocumentInfo = () => {
               }}
             >
               {groupedDocuments[documentType].map((document) => (
-                <img
-                  key={document.id}
-                  src={`${url}${document?.path}`}
-                  alt="Document"
-                  width="100%"
-                  // height="340"
-                />
+                <div key={document?.id}>
+                  {document?.path.toLowerCase().endsWith(".pdf") ? (
+                    <div key={document.id}>
+                      <iframe
+                        title="PDF Document"
+                        src={`${url}${document?.path}`}
+                        width="500px"
+                        height="450px"
+                      />
+                    </div>
+                  ) : (
+                    <img
+                      key={document.id}
+                      src={`${url}${document?.path}`}
+                      alt="Document"
+                      width="100%"
+                    />
+                  )}
+                </div>
               ))}
             </TabPanel>
           ))

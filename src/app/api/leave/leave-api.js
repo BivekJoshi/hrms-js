@@ -42,6 +42,7 @@ export const getLeaveById = async (id) => {
 
 /*________________________POST BY USER_____________________________________*/
 export const addleave = async (formData) => {
+  console.log({"formData": formData})
   const submitedData = {
     ...formData,
     leaveTypeId: formData.leaveTypeId?.id,
