@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { styled } from "@mui/material/styles";
-import { Box, Drawer, Divider, List, ListItemButton } from "@mui/material";
+import { Box, Drawer, Divider, List, ListItemButton, Button } from "@mui/material";
 import { ListItemIcon } from "@mui/material";
 import { ListItemText, Collapse, IconButton } from "@mui/material/";
 import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
@@ -367,12 +367,11 @@ export default function AdminSidebar() {
             alignItems: "center",
             padding: "10px",
             flexDirection: "column",
-            position: "sticky",
             bottom: "0",
           }}
-          bgcolor={mode === "light" ? "black" : "White"}
+          // bgcolor={mode === "light" ? "black" : "White"}
         >
-          {/* <Button
+          <Button
             variant='contained'
             sx={{ backgroundColor: '#1c7ed6' }}
             onClick={() => {
@@ -381,11 +380,11 @@ export default function AdminSidebar() {
             }}
           >
             Logout
-          </Button> */}
+          </Button>
           <Typography
             variant="body2"
             sx={{ marginRight: "8px", marginTop: "1rem" }}
-            color={mode === "light" ? "White" : "black"}
+            color={mode ==="light" ? "black" :"white"}
           >
             {mode === "light" ? "Dark" : "Light"} Mode
             <Switch checked={mode === "dark"} onChange={toggleMode} />

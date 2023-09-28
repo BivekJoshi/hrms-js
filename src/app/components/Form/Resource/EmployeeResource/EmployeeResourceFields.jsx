@@ -1,12 +1,13 @@
 import { Button, Grid, MenuItem, TextField } from "@mui/material";
 import React, { useContext } from "react";
 import useEmployeeResourceForm from "../../../../hooks/resource/employeeResource/EmployeeResourceForm/useEmployeeResourceForm";
-import { useGetOfficeResource } from "../../../../hooks/resource/officeResource/useOfficeResource";
+import { useGetAvailableOfficeResource, useGetOfficeResource } from "../../../../hooks/resource/officeResource/useOfficeResource";
 import { useGetEmployee } from "../../../../hooks/employee/useEmployee";
 import ThemeModeContext from "../../../../../theme/ThemeModeContext";
 
 const EmployeeResourceFields = ({ onClose, isLoading, data }) => {
   const { data: officeResourceData } = useGetOfficeResource();
+  const { data: availableOfficeResource } = useGetAvailableOfficeResource();
   const { data: employeeData } = useGetEmployee();
   const { mode } = useContext(ThemeModeContext);
 
@@ -21,6 +22,7 @@ const EmployeeResourceFields = ({ onClose, isLoading, data }) => {
     }
   };
   const submitButtonText = data ? "Update Resource" : " Add Resource";
+
   return (
     !isLoading && (
       <Grid container spacing={3}>
@@ -77,8 +79,8 @@ const EmployeeResourceFields = ({ onClose, isLoading, data }) => {
             autoFocus
             InputLabelProps={{ shrink: true }}
           >
-            {officeResourceData &&
-              officeResourceData.map((option) => (
+            {availableOfficeResource &&
+              availableOfficeResource.map((option) => (
                 <MenuItem
                   key={option?.id}
                   value={option?.id}

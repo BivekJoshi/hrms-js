@@ -48,7 +48,6 @@ export const getLeaveById = async (id) => {
 
 /*________________________POST BY USER_____________________________________*/
 export const addleave = async (formData) => {
-  console.log({"formData": formData})
   const submitedData = {
     ...formData,
     leaveTypeId: formData.leaveTypeId?.id,
@@ -73,7 +72,6 @@ export const addLeaveByAdmin = async (formData) => {
 
 /*________________________EDIT BY USER_____________________________________*/
 export const editLeave = async (formData) => {
-  console.log({ formData: formData });
   const { id } = formData;
   const data = await axiosInstance.put(
     `/leave/logged-in-user/update?leaveId=${id}`,

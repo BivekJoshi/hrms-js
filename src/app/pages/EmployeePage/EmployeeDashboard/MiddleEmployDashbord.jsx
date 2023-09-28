@@ -12,7 +12,7 @@ export const MiddleEmployDashbord = ({}) => {
   const { data: attendanceData } = useGetEmployeeAttendanceMonthWise(2080);
   const { data } = useGetEmployeeAverageWork();
   const averageWork = ((data / 9) * 100) / 100;
-  console.log(averageWork);
+ 
   return (
     <Box
       display="grid"
