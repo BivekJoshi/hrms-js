@@ -57,8 +57,7 @@ export const editofficeResource = async (formData) => {
 };
 
 {
-  /*________________________EDIT OFFICE RESOURCE ACTIVE-INACTIVE_____________________________________*/
-}
+  /*________________________EDIT OFFICE RESOURCE ACTIVE-INACTIVE_____________________________________*/}
 export const editofficeResourceActiveInactive = async (formData) => {
   const { id, isActive } = formData;
   const data = await axiosInstance.put(

@@ -48,7 +48,7 @@ const useEventForm = (setOpenSubmitModal, handleCloseModal) => {
     values = { ...values };
     addEvent(values, {
       onSuccess: (data) => {
-        console.log("pk");
+        
       },
     });
   };

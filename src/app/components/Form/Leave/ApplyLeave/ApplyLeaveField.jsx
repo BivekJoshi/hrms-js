@@ -15,12 +15,13 @@ import { useGetLeaveType } from "../../../../hooks/leaveType/useLeaveType";
 import useApplyLeaveForm from "../../../../hooks/leave/LeaveForm/useApplyLeaveForm";
 import { toast } from "react-toastify";
 import { useGetLeaveById } from "../../../../hooks/leave/useLeave";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 
 const ApplyLeaveField = () => {
   const [value, setValue] = useState("1");
   const location = useLocation();
+  const navigate = useNavigate();
 
   const rowData = location?.state?.rowData || {};
   const id = rowData ? rowData.id : "";
@@ -32,6 +33,7 @@ const ApplyLeaveField = () => {
   const handleFormSubmit = () => {
     formik.handleSubmit();
     if (formik.isValid) {
+      navigate("/employee/applyleave")
     } else {
       toast.error("Please make sure you have filled the form correctly");
     }
@@ -50,10 +52,11 @@ const ApplyLeaveField = () => {
     setValue(newValue);
   };
 
-  function getDayName(date = new Date(), locale = 'en-US') {
-    return date.toLocaleDateString(locale, {weekday: 'long'});
-  }
- //  console.log(getDayName())
+  // to get days
+  // function getDayName(date = new Date(), locale = 'en-US') {
+  //   return date.toLocaleDateString(locale, {weekday: 'long'});
+  // }
+  //  alert(getDayName())
   return (
     <>
       <Typography variant="h6">
@@ -201,13 +204,14 @@ const ApplyLeaveField = () => {
   );
 };
 
-const DateInput = ({ formik, isHalfDay = false , isMultipleDays= false }) => {
+const DateInput = ({ formik, isHalfDay , isMultipleDays }) => {
   const [halfType, setHalfType] = useState("");
 
   const handleFromDateChange = (e) => {
     const fromDateValue = e.target.value;
     formik.handleChange(e);
     formik.setFieldValue("toDate", fromDateValue);
+    formik.setFieldValue("halfLeaveType", null);
     if (isHalfDay) {
       formik.setFieldValue("isHalfDay", true);
       formik.setFieldValue("halfLeaveType", halfType);      
@@ -258,8 +262,8 @@ const DateInput = ({ formik, isHalfDay = false , isMultipleDays= false }) => {
             row
             aria-labelledby="demo-row-radio-buttons-group-label"
             name="halfLeaveType"
-            value={formik.values.halfType}
-            onChange={handleHalfType}
+            value={formik.values.halfLeaveType}
+            onChange={formik.handleChange}
             style={{ display: "flex", marginTop: "0.6rem" }}
           >
             <FormControlLabel

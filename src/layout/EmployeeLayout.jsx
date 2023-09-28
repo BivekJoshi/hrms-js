@@ -79,7 +79,7 @@
 
 import React from 'react';
 import { Box } from '@mui/material';
-import EmployeeSidebar from '../app/components/SideBar/EmployeeSideBar';
+import EmployeeSidebar from '../app/components/SideBar/EmployeeSidebar';
 
 const EmployeeLayout = () => {
   return (
