@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { styled } from "@mui/material/styles";
-import { Box, Drawer, Divider, List, ListItemButton } from "@mui/material";
+import { Box, Drawer, Divider, List, ListItemButton, Button } from "@mui/material";
 import { ListItemIcon } from "@mui/material";
 import { ListItemText, Collapse, IconButton } from "@mui/material/";
 import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
@@ -26,7 +26,6 @@ import EventIcon from "@mui/icons-material/Event";
 import HolidayVillageIcon from "@mui/icons-material/HolidayVillage";
 import LaptopIcon from "@mui/icons-material/Laptop";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import "./Style/Style.css";
 
 const drawerWidth = 250;
 
@@ -273,9 +272,19 @@ export default function AdminSidebar() {
         anchor="left"
         open={open}
       >
-        <DrawerHeader>          
-            <Typography style={{ fontSize: "2rem", fontWeight: "900", color: "#01579b", letterSpacing: "0.1rem" }} variant="h6">DGHUB</Typography>
-            <IconButton onClick={handleDrawerClose}>
+        <DrawerHeader>
+          <Typography
+            style={{
+              fontSize: "2rem",
+              fontWeight: "900",
+              color: "#01579b",
+              letterSpacing: "0.1rem",
+            }}
+            variant="h6"
+          >
+            DGHUB
+          </Typography>
+          <IconButton onClick={handleDrawerClose}>
             <ChevronLeftIcon />
           </IconButton>
         </DrawerHeader>
@@ -367,12 +376,10 @@ export default function AdminSidebar() {
             alignItems: "center",
             padding: "10px",
             flexDirection: "column",
-            position: "sticky",
-            bottom: "0",
           }}
-          bgcolor={mode === "light" ? "black" : "White"}
+          
         >
-          {/* <Button
+          <Button
             variant='contained'
             sx={{ backgroundColor: '#1c7ed6' }}
             onClick={() => {
@@ -381,11 +388,10 @@ export default function AdminSidebar() {
             }}
           >
             Logout
-          </Button> */}
+          </Button>
           <Typography
             variant="body2"
             sx={{ marginRight: "8px", marginTop: "1rem" }}
-            color={mode === "light" ? "White" : "black"}
           >
             {mode === "light" ? "Dark" : "Light"} Mode
             <Switch checked={mode === "dark"} onChange={toggleMode} />

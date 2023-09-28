@@ -15,17 +15,16 @@ import { GiBigDiamondRing } from "react-icons/gi";
 import KitesurfingIcon from "@mui/icons-material/Kitesurfing";
 import BabyChangingStationIcon from "@mui/icons-material/BabyChangingStation";
 
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: "center",
-  minHeight: 290,
-  maxHeight: 310,
-  // padding: 30,
-  // margin: 8,
-}));
-
+// const Item = styled(Paper)(({ theme }) => ({
+//   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+//   ...theme.typography.body2,
+//   padding: theme.spacing(1),
+//   textAlign: "center",
+//   minHeight: 290,
+//   maxHeight: 310,
+//   // padding: 30,
+//   // margin: 8,
+// }));
 const CustomArrow = ({ onClick, direction }) => {
   const arrowStyles = {
     fontSize: 30,
@@ -174,7 +173,7 @@ const ApplyLeave = () => {
           <Box
             style={{ padding: " 0 0 1rem", margin: "1rem .5rem" }}
             display="grid"
-            gridTemplateColumns="repeat(auto-fit, minmax(150px, 1fr))"
+            gridTemplateColumns="repeat(auto-fit, minmax(0, 1fr))"
             gap="1rem"
             key={index}
           >
