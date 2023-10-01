@@ -9,8 +9,8 @@ const EmployeeResourceFields = ({ onClose, isLoading, data }) => {
   const { data: availableOfficeResource } = useGetAvailableOfficeResource();
   const { data: employeeData } = useGetEmployee();
   const { mode } = useContext(ThemeModeContext);
-
   const { formik } = useEmployeeResourceForm(data);
+  
   const handleFormSubmit = () => {
     formik.handleSubmit();
 
@@ -31,7 +31,7 @@ const EmployeeResourceFields = ({ onClose, isLoading, data }) => {
             name="employeeId"
             options={employeeData}
             getOptionLabel={(option) =>
-              `${option.firstName} ${option.middleName} ${option.lastName}`
+              `${option?.firstName} ${option?.middleName} ${option?.lastName}`
             }
             value={formik.values.employeeId || null}
             onChange={(event, value) =>

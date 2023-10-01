@@ -28,6 +28,8 @@ export const logInRemployeeResource = async (id) => {
   /*________________________POST EMPLOYEE RESOURCE_____________________________________*/
 }
 export const addemployeeResource = async (formData) => {
+  const employeeId = formData?.employeeId?.id;
+  formData.employeeId = employeeId;
   const data = await axiosInstance.post(`/employee-resource/create`, formData);
   return data;
 };
