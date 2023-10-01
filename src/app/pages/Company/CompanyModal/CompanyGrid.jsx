@@ -7,7 +7,6 @@ import CompanyGridView from '../CompanyView/CompanyGridView';
 
 const CompanyGrid = ({ permissions }) => {
     const { data: companyData, isLoading } = useGetCompany();
-
     const [openEditModal, setOpenEditModal] = useState(false);
     const [openDeleteModal, setOpenDeleteModal] = useState(false);
     const [editedCompany, setEditedCompany] = useState({});

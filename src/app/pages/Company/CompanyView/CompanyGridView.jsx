@@ -20,6 +20,9 @@ const CompanyGridView = ({
   handleEditCompany,
   handleDeleteCompany,
 }) => {
+  console.log({"permissions": permissions})
+  if (isLoading) return <>Loading</>;
+  
   return (
     <>
       <Grid

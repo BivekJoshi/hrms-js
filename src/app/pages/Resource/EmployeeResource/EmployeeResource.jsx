@@ -126,6 +126,7 @@ const EmployeeResource = ({ permissions }) => {
       onClick: (event, rowData) => handleDeleteRowData(rowData),
     },
   ];
+  
   return (
     <>
       <Box

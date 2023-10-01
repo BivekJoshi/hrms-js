@@ -13,7 +13,6 @@ import HocButton from "../../hoc/hocButton";
 
 const Company = ({ permissions }) => {
   const [value, setValue] = React.useState("1");
-
   const [openAddModal, setOpenAddModal] = useState(false);
   const handleAddOpenModal = () => setOpenAddModal(true);
   const handleCloseAddModal = () => setOpenAddModal(false);
@@ -41,7 +40,7 @@ const Company = ({ permissions }) => {
             </TabList>
 
             <HocButton
-              permissions={permissions.canAdd}
+              permissions={permissions?.canAdd}
               color={"primary"}
               variant={"contained"}
               onClick={handleAddOpenModal}

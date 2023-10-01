@@ -104,7 +104,6 @@ const Designation = ({ permissions }) => {
         </Stack>
       ),
       sorting: false,
-
       width: 80,
     },
   ].filter(Boolean);
