@@ -12,6 +12,7 @@ const HocButton = ({
   icon,
   disabledIcon,
   color,
+  hoverBg,
 }) => {
   const isDisabled = !permissions;
   const disabledBg = "";
@@ -30,7 +31,11 @@ const HocButton = ({
         cursor: isDisabled ? "not-allowed" : "pointer",
         minWidth: isIcon ? "0px" : "auto",
         padding: isIcon ? "0px" : "auto",
+        '&:hover':{
+          backgroundColor: isDisabled ? "" : hoverBg,
+        }
       }}
+      
       variant={variant}
       onClick={isDisabled ? null : onClick}
     >
