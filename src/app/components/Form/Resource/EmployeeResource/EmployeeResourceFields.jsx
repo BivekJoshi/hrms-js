@@ -1,7 +1,10 @@
-import { Button, Grid, MenuItem, TextField } from "@mui/material";
+import { Autocomplete, Button, Grid, MenuItem, TextField } from "@mui/material";
 import React, { useContext } from "react";
 import useEmployeeResourceForm from "../../../../hooks/resource/employeeResource/EmployeeResourceForm/useEmployeeResourceForm";
-import { useGetAvailableOfficeResource, useGetOfficeResource } from "../../../../hooks/resource/officeResource/useOfficeResource";
+import {
+  useGetAvailableOfficeResource,
+  useGetOfficeResource,
+} from "../../../../hooks/resource/officeResource/useOfficeResource";
 import { useGetEmployee } from "../../../../hooks/employee/useEmployee";
 import ThemeModeContext from "../../../../../theme/ThemeModeContext";
 
@@ -27,35 +30,36 @@ const EmployeeResourceFields = ({ onClose, isLoading, data }) => {
     !isLoading && (
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
-          <TextField
-            select
+          <Autocomplete
             id="employeeId"
             name="employeeId"
-            label="Employee Name"
-            placeholder="Select employee name"
-            fullWidth
-            required
-            value={formik.values.employeeId}
-            onChange={formik.handleChange}
-            error={
-              formik.touched.employeeId && Boolean(formik.errors.employeeId)
+            options={employeeData}
+            getOptionLabel={(option) =>
+              `${option.firstName} ${option.middleName} ${option.lastName}`
             }
-            helperText={formik.touched.employeeId && formik.errors.employeeId}
-            variant="outlined"
-            autoFocus
-            InputLabelProps={{ shrink: true }}
-          >
-            {employeeData &&
-              employeeData.map((option) => (
-                <MenuItem
-                  key={option?.id}
-                  value={option?.id}
-                  sx={{ bgcolor: mode === "light" ? "" : "#413e3e" }}
-                >
-                  {option?.firstName} {option?.middleName} {option?.lastName}
-                </MenuItem>
-              ))}
-          </TextField>
+            value={formik.values.employeeId || null}
+            onChange={(event, value) =>
+              formik.setFieldValue("employeeId", value)
+            }
+            renderInput={(params) => (
+              <TextField
+                bgcolor="black"
+                {...params}
+                label="Employee Name"
+                fullWidth
+                requireds
+                error={
+                  formik.touched.employeeId && Boolean(formik.errors.employeeId)
+                }
+                helperText={
+                  formik.touched.employeeId && formik.errors.employeeId
+                }
+                variant="outlined"
+                autoFocus
+                InputLabelProps={{ shrink: true }}
+              />
+            )}
+          />
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
