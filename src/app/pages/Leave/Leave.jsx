@@ -88,7 +88,7 @@ const Leave = ({ isLoading }) => {
     },
     {
       title: "Employee Name",
-      width:" 10%",
+      width: " 10%",
       render: (rowData) => {
         return <p>{getEmployeeName(rowData)} </p>;
       },
@@ -107,28 +107,25 @@ const Leave = ({ isLoading }) => {
         const leaveTypeName = getLeaveTypeName(rowData);
         return leaveTypeName.toLowerCase().includes(searchValue.toLowerCase());
       },
-      width: 150,
+      width: " 10%",
       sorting: false,
     },
     {
       title: "From",
       field: "fromDate",
       emptyValue: "-",
-      width: 100,
       sorting: false,
     },
     {
       title: "To",
       field: "toDate",
       emptyValue: "-",
-      width: 100,
       sorting: false,
     },
     {
       title: "Status",
       field: "leaveStatus",
       emptyValue: "-",
-      width: 100,
       cellStyle: {
         whiteSpace: "nowrap",
       },
@@ -161,14 +158,13 @@ const Leave = ({ isLoading }) => {
       title: "Leave Reason",
       field: "leaveReason",
       emptyValue: "-",
-      width: 100,
       render: (rowData) => {
         return (
           <Tooltip title={rowData?.leaveReason} placement="top-start" arrow>
             <Chip
               style={{
                 cursor: "pointer",
-                width: "200px",
+                width: "170px",
                 height: "50px",
                 display: "block",
                 background: mode === "light" ? "white" : "#434343",
@@ -189,14 +185,13 @@ const Leave = ({ isLoading }) => {
       title: "Remark",
       field: "leaveRemarks",
       emptyValue: "-",
-      width: 100,
       render: (rowData) => {
         return (
           <Tooltip title={rowData?.leaveReason} placement="top-start" arrow>
             <Chip
               style={{
                 cursor: "pointer",
-                width: "200px",
+                width: "170px",
                 height: "50px",
                 display: "block",
                 background: mode === "light" ? "white" : "#434343",
@@ -249,7 +244,6 @@ const Leave = ({ isLoading }) => {
         );
       },
       sorting: false,
-      width: 120,
     },
   ];
 

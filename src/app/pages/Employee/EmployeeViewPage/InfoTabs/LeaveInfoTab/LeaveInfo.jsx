@@ -92,7 +92,7 @@ const LeaveInfo = ({ isLoading ,data}) => {
             style={{
               backgroundColor: chipColor,
               color: "white",
-              width: " 9rem",
+              // width: " 9rem",
             }}
           />
         );
