@@ -10,7 +10,7 @@ const EmployeeResourceFields = ({ onClose, isLoading, data }) => {
   const { data: employeeData } = useGetEmployee();
   const { mode } = useContext(ThemeModeContext);
 
-  const { formik } = useEmployeeResourceForm(data);
+  const { formik } = useEmployeeResourceForm(data ? data : "");
   const handleFormSubmit = () => {
     formik.handleSubmit();
 
@@ -33,17 +33,21 @@ const EmployeeResourceFields = ({ onClose, isLoading, data }) => {
             getOptionLabel={(option) =>
               `${option.firstName} ${option.middleName} ${option.lastName}`
             }
-            value={formik.values.employeeId || null}
-            onChange={(event, value) =>
-              formik.setFieldValue("employeeId", value)
-            }
+            value={employeeData?.find(
+              (employee) => employee?.id === formik.values?.employeeId
+            )}
+            onChange={(event, selectedEmployee) => {
+              if (selectedEmployee) {
+                formik.setFieldValue("employeeId", selectedEmployee.id);
+              }
+            }}
             renderInput={(params) => (
               <TextField
                 bgcolor="black"
                 {...params}
                 label="Employee Name"
                 fullWidth
-                requireds
+                required
                 error={
                   formik.touched.employeeId && Boolean(formik.errors.employeeId)
                 }
