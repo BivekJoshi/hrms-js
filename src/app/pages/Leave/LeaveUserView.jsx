@@ -1,17 +1,18 @@
 import MaterialTable from "@material-table/core";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   useDeleteLeave,
   useGetLoggedInUserLeave,
 } from "../../hooks/leave/useLeave";
 import { useGetLeaveType } from "../../hooks/leaveType/useLeaveType";
-import { Button, Chip, Stack, Tooltip } from "@mui/material";
+import { Button, Chip, Stack, Tooltip, Typography } from "@mui/material";
 import { useGetUserControl } from "../../hooks/auth/userControl/useUserControl";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import { useNavigate } from "react-router-dom";
 import ApplyLeaveField from "../../components/Form/Leave/ApplyLeave/ApplyLeaveField";
 import DeleteConfirmationModal from "../../components/Modal/DeleteConfirmationModal";
+import ThemeModeContext from "../../../theme/ThemeModeContext";
 
 const halfLeaveType = [
   {
@@ -32,7 +33,7 @@ const LeaveUserView = () => {
     useGetLeaveType();
   const [deletedLeave, setDeletedLeave] = useState({});
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
-
+  const { mode } = useContext(ThemeModeContext);
   const deleteLeaveMutation = useDeleteLeave({});
   const handleDeleteLeave = (rowData) => {
     setDeletedLeave(rowData);
@@ -166,16 +167,22 @@ const LeaveUserView = () => {
       render: (rowData) => {
         return (
           <Tooltip title={rowData?.leaveReason} placement="top-start" arrow>
-            <span
+            <Chip
               style={{
                 cursor: "pointer",
                 width: "200px",
                 height: "50px",
                 display: "block",
+                background: mode === "light" ? "white" : "#434343",
               }}
-            >
-              {rowData?.leaveReason}
-            </span>
+              label={
+                <Typography
+                  style={{ overflow: "hidden", textOverflow: "ellipsis" }}
+                >
+                  {rowData?.leaveReason}
+                </Typography>
+              }
+            />
           </Tooltip>
         );
       },
@@ -206,7 +213,7 @@ const LeaveUserView = () => {
       width: 120,
     },
   ];
-  
+
   return (
     <>
       <MaterialTable

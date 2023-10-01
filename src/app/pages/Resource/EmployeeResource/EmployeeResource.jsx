@@ -139,7 +139,7 @@ const EmployeeResource = ({ permissions }) => {
       >
         <HocButton
           permissions={permissions}
-          color= {"primary"}
+          color={"primary"}
           variant={"outlined"}
           onClick={() => {
             navigate(`/admin/resource/office`);
@@ -148,7 +148,7 @@ const EmployeeResource = ({ permissions }) => {
         />
         <HocButton
           permissions={permissions}
-          color= {"primary"}
+          color={"primary"}
           variant={"contained"}
           onClick={handleAddOpenModal}
           buttonName={"+Provide Logistics to Employee"}
