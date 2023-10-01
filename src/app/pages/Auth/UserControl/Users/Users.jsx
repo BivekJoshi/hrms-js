@@ -85,7 +85,6 @@ const Users = ({ permissions }) => {
   const [openAddModal, setOpenAddModal] = useState(false);
   const handleAddOpenModal = () => setOpenAddModal(true);
   const handleCloseAddModal = () => setOpenAddModal(false);
-
   const { data: userControlData, isLoading } = useGetUserControl();
 
   if (permissions?.canView) {

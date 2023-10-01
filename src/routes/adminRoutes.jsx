@@ -232,7 +232,7 @@ const adminRoutes = [
     name: "Users",
     id: nanoid(),
     component: <UserController component="users" />,
-    requiresSuperAdmin: true,
+    // requiresSuperAdmin: true,
   },
 ];
 

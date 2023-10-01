@@ -82,7 +82,7 @@ export const RightEmployDashbord = ({ employData }) => {
             <ButtonComponent
               buttonName={"APPLY Leave"}
               OnClick={() => {
-                navigate("/employee/applyleave");
+                navigate("/employee/applyleavefield");
               }}
               BGColor={"orange"}
               TextColor={"black"}
