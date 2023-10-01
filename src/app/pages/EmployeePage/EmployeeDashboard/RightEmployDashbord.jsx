@@ -14,16 +14,14 @@ export const RightEmployDashbord = ({ employData }) => {
   const navigate = useNavigate();
   const { data: leavebalance, isLoading } = useGetLoggedInUserLeaveBalance();
   const { data: resourceLogInUser } = uselogInEemployeeResource(
-    employData.employeeId
+    employData?.employeeId
   );
   const { data: officeresource } = useGetOfficeResource();
 
   const getResourceName = () => {
     const resourceId = resourceLogInUser?.map((res) => res.officeResourceId);
     const resourceName = officeresource?.find(
-      Array.isArray(resourceId)
-        ? (resource) => resource?.id === resourceId[0]
-        : ""
+      (resource) => resource?.id === resourceId[0]
     );
     return resourceName?.name;
   };
