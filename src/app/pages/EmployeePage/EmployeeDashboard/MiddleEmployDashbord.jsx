@@ -9,10 +9,8 @@ import {
 
 export const MiddleEmployDashbord = ({}) => {
   const { data: attendanceData } = useGetEmployeeAttendanceMonthWise(2080);
-  const { data : averageWorkData } = useGetEmployeeAverageWork();
-  const parsedData = parseFloat(averageWorkData);
-  const averageWork = isNaN(parsedData) ? 0 : ((parsedData / 9) * 100) / 100;
-
+  const { data } = useGetEmployeeAverageWork();
+  const averageWork = data !== "NaN" ? ((data / 9) * 100) / 100 : 0;
   return (
     <Box
       display="grid"
@@ -35,8 +33,8 @@ export const MiddleEmployDashbord = ({}) => {
             percent={averageWork === 1 ? 1 : averageWork}
           />
           <Stack flexDirection="row" justifyContent="space-evenly">
-            <Typography>0 Hour</Typography>
-            <Typography>{averageWork} Hour</Typography>
+            <Typography>1 Hour</Typography>
+            <Typography>{data !== "NaN" ? data : "0"} Hour</Typography>
             <Typography>9 hour</Typography>
           </Stack>
         </Box>

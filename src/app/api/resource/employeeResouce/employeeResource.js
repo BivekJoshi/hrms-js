@@ -13,6 +13,7 @@ export const getemployeeResource = async () => {
 }
 export const getemployeeResourceById = async (id) => {
   const data = await axiosInstance.get(`/employee-resource/emp-res-id/${id}`);
+  console.log(data);
   return data;
 };
 {

@@ -12,15 +12,13 @@ import { PendingTask } from "../Component/PendingTask";
 
 export const RightEmployDashbord = ({ employData }) => {
   const navigate = useNavigate();
-  const { data: leavebalance, isLoading } = useGetLoggedInUserLeaveBalance();
+  const { data: leavebalance } = useGetLoggedInUserLeaveBalance();
   const { data: resourceLogInUser } = uselogInEemployeeResource(employData?.employeeId);
   const { data: officeresource } = useGetOfficeResource();
 
-  // console.log({"resourceLogInUser" : resourceLogInUser, "officeresource": officeresource})
-  const getResourceName = () => {
-    const resourceId = resourceLogInUser?.map((res) => res?.officeResourceId);
+  const getResourceName = (logistic) => {
     const resourceName = officeresource?.find(
-      (resource) => resource?.id === resourceId[0]
+      (resource) => resource?.id === logistic
     );
     return resourceName?.name;
   };
@@ -98,9 +96,17 @@ export const RightEmployDashbord = ({ employData }) => {
           }
           padding="1rem"
         >
-          <Typography fontWeight="600" textAlign="center">
-            {getResourceName()}
-          </Typography>
+          {Array.isArray(resourceLogInUser)
+            ? resourceLogInUser.map((logistic) => (
+                <Typography
+                  fontWeight="600"
+                  textAlign="center"
+                  key={logistic.id}
+                >
+                  {getResourceName(logistic?.officeResourceId)}
+                </Typography>
+              ))
+            : ""}
         </Box>
       </Box>
     </Box>
