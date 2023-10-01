@@ -1,15 +1,11 @@
 import { Autocomplete, Button, Grid, MenuItem, TextField } from "@mui/material";
 import React, { useContext } from "react";
 import useEmployeeResourceForm from "../../../../hooks/resource/employeeResource/EmployeeResourceForm/useEmployeeResourceForm";
-import {
-  useGetAvailableOfficeResource,
-  useGetOfficeResource,
-} from "../../../../hooks/resource/officeResource/useOfficeResource";
+import { useGetAvailableOfficeResource } from "../../../../hooks/resource/officeResource/useOfficeResource";
 import { useGetEmployee } from "../../../../hooks/employee/useEmployee";
 import ThemeModeContext from "../../../../../theme/ThemeModeContext";
 
 const EmployeeResourceFields = ({ onClose, isLoading, data }) => {
-  const { data: officeResourceData } = useGetOfficeResource();
   const { data: availableOfficeResource } = useGetAvailableOfficeResource();
   const { data: employeeData } = useGetEmployee();
   const { mode } = useContext(ThemeModeContext);
