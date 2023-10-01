@@ -28,8 +28,8 @@ const CompanyTable = ({ permissions }) => {
     const handleEditCompany = (rowData) => {
         setEditedCompany(rowData);
         setOpenEditModal(true);
-    };   
-    console.log({"permissions": permissions})
+    };
+
     return (
         <>
             <CompanyTableView

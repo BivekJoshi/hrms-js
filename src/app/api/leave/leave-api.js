@@ -61,12 +61,12 @@ export const addleave = async (formData) => {
 
 /*________________________POST BY OTHER_____________________________________*/
 export const addLeaveByAdmin = async (formData) => {
+  const employeeId = formData?.employeeId?.id;
   const submitedData = {
     ...formData,
-    employeeId: formData.employeeId?.id,
-    leaveTypeId: formData.leaveTypeId?.id,
+    leaveTypeId: formData?.leaveTypeId?.id,
   };
-  const data = await axiosInstance.post("/leave/create", submitedData);
+  const data = await axiosInstance.post(`/leave/create/${employeeId}`, submitedData);
   return data;
 };
 

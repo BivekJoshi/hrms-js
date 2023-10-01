@@ -13,18 +13,18 @@ import { PendingTask } from "../Component/PendingTask";
 export const RightEmployDashbord = ({ employData }) => {
   const navigate = useNavigate();
   const { data: leavebalance, isLoading } = useGetLoggedInUserLeaveBalance();
-  const { data: resourceLogInUser } = uselogInEemployeeResource(
-    employData?.employeeId
-  );
+  const { data: resourceLogInUser } = uselogInEemployeeResource(employData?.employeeId);
   const { data: officeresource } = useGetOfficeResource();
 
+  // console.log({"resourceLogInUser" : resourceLogInUser, "officeresource": officeresource})
   const getResourceName = () => {
-    const resourceId = resourceLogInUser?.map((res) => res.officeResourceId);
+    const resourceId = resourceLogInUser?.map((res) => res?.officeResourceId);
     const resourceName = officeresource?.find(
       (resource) => resource?.id === resourceId[0]
     );
     return resourceName?.name;
   };
+  
   const sumOfLeaveTaken = Array.isArray(leavebalance)
     ? leavebalance?.reduce((accumulator, currentValue) => {
         return accumulator + currentValue?.leaveTaken;

@@ -27,7 +27,8 @@ const leaveStatus = [
     label: "Rejected",
   },
 ];
-const LeaveFields = ({ onClose, isLoading, data }) => {
+
+export const EditLeaveFields = ({ onClose, isLoading, data }) => {
   const { isManager } = useAuth();
   const { data: employeeData } = useGetEmployee();
   const { data: leaveTypeData } = useGetLeaveType();
@@ -69,7 +70,7 @@ const LeaveFields = ({ onClose, isLoading, data }) => {
       toast.error("Please make sure you have filled the form correctly");
     }
   };
- 
+
   const submitButtonText = data ? "Update Leave" : "Add Leave";
 
   if (isManager) {
@@ -164,7 +165,54 @@ const LeaveFields = ({ onClose, isLoading, data }) => {
         </Grid>
       )
     );
-  } else {
+  }
+};
+
+export const LeaveFields = ({ onClose, isLoading, data }) => {
+  const { isManager } = useAuth();
+  const { data: employeeData } = useGetEmployee();
+  const { data: leaveTypeData } = useGetLeaveType();
+  const { formik } = useLeaveForm(data);
+  const { mode } = useContext(ThemeModeContext);
+  const employeeId = data?.employeeId;
+
+  const capitalize = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+  };
+
+  const getLeaveTypeName = (leaveTypeId) => {
+    const leaveType = leaveTypeData?.find((type) => type.id === leaveTypeId);
+    return leaveType ? leaveType.leaveName : "";
+  };
+
+  const getEmployeeFullName = () => {
+    const employee = employeeData?.find((emp) => emp.id === employeeId);
+    if (employee) {
+      const { firstName, middleName, lastName } = employee;
+      return (
+        <Box sx={{ bgcolor: mode === "light" ? "" : "#413e3e" }}>
+          {firstName || ""} {middleName || ""} {lastName || ""}
+        </Box>
+      );
+    }
+    return "";
+  };
+
+  const handleFormSubmit = () => {
+    formik.handleSubmit();
+
+    if (formik.isValid) {
+      formik.resetForm({
+        isHalfDay: false,
+      });
+      onClose();
+    } else {
+      toast.error("Please make sure you have filled the form correctly");
+    }
+  };
+
+  const submitButtonText = data ? "Update Leave" : "Add Leave";
+
     return (
       !isLoading && (
         <Grid container spacing={3}>
@@ -195,7 +243,7 @@ const LeaveFields = ({ onClose, isLoading, data }) => {
                 name="employeeId"
                 options={employeeData}
                 getOptionLabel={(option) =>
-                  `${option.firstName} ${option.middleName} ${option.lastName}`
+                  `${option?.firstName} ${option?.middleName} ${option?.lastName}`
                 }
                 value={formik.values.employeeId || null}
                 onChange={(event, value) =>
@@ -280,8 +328,6 @@ const LeaveFields = ({ onClose, isLoading, data }) => {
               />
             </Grid>
           )}
-
-         
 
           <Grid item xs={12} sm={6}>
             <TextField
@@ -400,7 +446,4 @@ const LeaveFields = ({ onClose, isLoading, data }) => {
         </Grid>
       )
     );
-  }
 };
-
-export default LeaveFields;

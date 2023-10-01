@@ -33,7 +33,7 @@ export const MiddleEmployDashbord = ({}) => {
             percent={averageWork === 1 ? 1 : averageWork}
           />
           <Stack flexDirection="row" justifyContent="space-evenly">
-            <Typography>1 Hour</Typography>
+            <Typography>0 Hour</Typography>
             <Typography>{data} Hour</Typography>
             <Typography>9 hour</Typography>
           </Stack>
