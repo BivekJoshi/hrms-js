@@ -83,6 +83,7 @@ const CompanyGridView = ({
                   color={"white"}
                   bg={"#d32f2f"}
                   buttonName={"Delete"}
+                  hoverBg={"#f20a0a"}
                 />
                 <HocButton
                   permissions={permissions?.canEdit}

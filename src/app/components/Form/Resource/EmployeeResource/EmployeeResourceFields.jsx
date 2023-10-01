@@ -60,35 +60,6 @@ const EmployeeResourceFields = ({ onClose, isLoading, data }) => {
               />
             )}
           />
-          {/* <TextField
-            select
-            id="employeeId"
-            name="employeeId"
-            label="Employee Name"
-            placeholder="Select employee name"
-            fullWidth
-            required
-            value={formik.values.employeeId}
-            onChange={formik.handleChange}
-            error={
-              formik.touched.employeeId && Boolean(formik.errors.employeeId)
-            }
-            helperText={formik.touched.employeeId && formik.errors.employeeId}
-            variant="outlined"
-            autoFocus
-            InputLabelProps={{ shrink: true }}
-          >
-            {employeeData &&
-              employeeData.map((option) => (
-                <MenuItem
-                  key={option?.id}
-                  value={option?.id}
-                  sx={{ bgcolor: mode === "light" ? "" : "#413e3e" }}
-                >
-                  {option?.firstName} {option?.middleName} {option?.lastName}
-                </MenuItem>
-              ))}
-          </TextField> */}
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
