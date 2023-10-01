@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useState } from "react";
 import MaterialTable from "material-table";
-import { Box, Button, Chip, Stack } from "@mui/material";
+import { Box, Button, Chip, Stack, Tooltip, Typography } from "@mui/material";
 import { useGetLeaveType } from "../../hooks/leaveType/useLeaveType";
 
 import { useDeleteLeave, useGetLeave } from "../../hooks/leave/useLeave";
@@ -14,15 +14,15 @@ import DeleteConfirmationModal from "../../components/Modal/DeleteConfirmationMo
 import tableIcons from "../../../theme/overrides/TableIcon";
 import { ButtonComponent } from "../../components/Button/ButtonComponent";
 import { useGetUserControl } from "../../hooks/auth/userControl/useUserControl";
+import ThemeModeContext from "../../../theme/ThemeModeContext";
 
 const Leave = ({ isLoading }) => {
   const { data: leaveData, isLoading: loadingleave } = useGetLeave();
   const { data: employeeData, isLoading: loadingemployee } = useGetEmployee();
-  const {
-    data: leaveTypeData,
-    isLoading: loadingleaveType,
-  } = useGetLeaveType();
+  const { data: leaveTypeData, isLoading: loadingleaveType } =
+    useGetLeaveType();
   const { data: UserData, isLoading: loadingUser } = useGetUserControl();
+  const { mode } = React.useContext(ThemeModeContext);
 
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
@@ -88,6 +88,7 @@ const Leave = ({ isLoading }) => {
     },
     {
       title: "Employee Name",
+      width:" 10%",
       render: (rowData) => {
         return <p>{getEmployeeName(rowData)} </p>;
       },
@@ -95,7 +96,6 @@ const Leave = ({ isLoading }) => {
         const employeeName = getEmployeeName(rowData);
         return employeeName.toLowerCase().includes(searchValue.toLowerCase());
       },
-      width: 120,
       sorting: false,
     },
     {
@@ -162,14 +162,56 @@ const Leave = ({ isLoading }) => {
       field: "leaveReason",
       emptyValue: "-",
       width: 100,
-      sorting: false,
+      render: (rowData) => {
+        return (
+          <Tooltip title={rowData?.leaveReason} placement="top-start" arrow>
+            <Chip
+              style={{
+                cursor: "pointer",
+                width: "200px",
+                height: "50px",
+                display: "block",
+                background: mode === "light" ? "white" : "#434343",
+              }}
+              label={
+                <Typography
+                  style={{ overflow: "hidden", textOverflow: "ellipsis" }}
+                >
+                  {rowData?.leaveReason}
+                </Typography>
+              }
+            />
+          </Tooltip>
+        );
+      },
     },
     {
       title: "Remark",
       field: "leaveRemarks",
       emptyValue: "-",
       width: 100,
-      sorting: false,
+      render: (rowData) => {
+        return (
+          <Tooltip title={rowData?.leaveReason} placement="top-start" arrow>
+            <Chip
+              style={{
+                cursor: "pointer",
+                width: "200px",
+                height: "50px",
+                display: "block",
+                background: mode === "light" ? "white" : "#434343",
+              }}
+              label={
+                <Typography
+                  style={{ overflow: "hidden", textOverflow: "ellipsis" }}
+                >
+                  {rowData?.leaveRemarks}
+                </Typography>
+              }
+            />
+          </Tooltip>
+        );
+      },
     },
 
     {
