@@ -6,6 +6,7 @@ import Loadable from "../app/components/Header/Loader/Loadable";
 import ThemeModeContext from "../theme/ThemeModeContext";
 import ProjectAddViewEmployeePage from "../app/pages/Project/ProjectEmployeeViewPage/ProjectAddViewEmployeePage";
 import { ProjectDashboard } from "../app/pages/Project/ProjectDashboard/ProjectDashboard";
+// import EmailSending from "../app/components/Email/EmailSending";
 
 const ProfileDetail = Loadable(
   lazy(() => import("../app/pages/Auth/Profile/ProfileDetail"))
@@ -234,6 +235,12 @@ const adminRoutes = [
     component: <UserController component="users" />,
     // requiresSuperAdmin: true,
   },
+  // {
+  //   path: "emailsend", // testing purpose only
+  //   name: "emailsend",
+  //   id: nanoid(),
+  //   component: <EmailSending />,
+  // },
 ];
 
 export { adminRoutes };
