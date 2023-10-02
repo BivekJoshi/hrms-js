@@ -41,12 +41,12 @@ export const RightEmployDashbord = ({ employData }) => {
   const { mode } = useContext(ThemeModeContext);
   return (
     <Box>
-      <Box className="taskTable">
+      {/* <Box className="taskTable">
         <h3>Pending Task</h3>
         <Box margin="1rem 0">
           <PendingTask />
         </Box>
-      </Box>
+      </Box> */}
       <Box>
         <h3>Your Leaves</h3>
         <Box
@@ -86,29 +86,33 @@ export const RightEmployDashbord = ({ employData }) => {
           </Box>
         </Box>
       </Box>
-      <Box margin="1rem 0">
-        <h3 style={{ margin: "1rem 0" }}>Logistic Used</h3>
-        <Box
-          className={
-            mode === "light"
-              ? "employeeDeshbordBG employeeDeshbord"
-              : "employeeDeshbordBGDark employeeDeshbord"
-          }
-          padding="1rem"
-        >
-          {Array.isArray(resourceLogInUser)
-            ? resourceLogInUser.map((logistic) => (
-                <Typography
-                  fontWeight="600"
-                  textAlign="center"
-                  key={logistic.id}
-                >
-                  {getResourceName(logistic?.officeResourceId)}
-                </Typography>
-              ))
-            : ""}
+      {resourceLogInUser && (
+        <Box margin="1rem 0">
+          <h3 style={{ margin: "1rem 0" }}>Logistic Used</h3>
+          <Box
+            className={
+              mode === "light"
+                ? "employeeDeshbordBG employeeDeshbord"
+                : "employeeDeshbordBGDark employeeDeshbord"
+            }
+            padding="1rem"
+            maxHeight="8rem"
+            overflow="scroll"
+          >
+            {Array.isArray(resourceLogInUser)
+              ? resourceLogInUser.map((logistic) => (
+                  <Typography
+                    fontWeight="600"
+                    textAlign="center"
+                    key={logistic.id}
+                  >
+                    {getResourceName(logistic?.officeResourceId)}
+                  </Typography>
+                ))
+              : ""}
+          </Box>
         </Box>
-      </Box>
+      )}
     </Box>
   );
 };
