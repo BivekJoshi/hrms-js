@@ -187,7 +187,7 @@ const Leave = ({ isLoading }) => {
       emptyValue: "-",
       render: (rowData) => {
         return (
-          <Tooltip title={rowData?.leaveReason} placement="top-start" arrow>
+          <Tooltip title={rowData?.leaveRemarks} placement="top-start" arrow>
             <Chip
               style={{
                 cursor: "pointer",
