@@ -12,7 +12,7 @@ import {
 
 const EmailToAll = ({ getEventID, onClose }) => {
   const { data: employeeData } = useGetEmployee();
-  const [employeeId, setEmployeeId] = useState([]);
+  const [employeeId, setEmployeeId] = useState();
   const [emailData, setEmailData] = useState();
 
   const maleEmployeeData = getMaleEmployeeById();
