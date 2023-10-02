@@ -82,7 +82,6 @@ export const editLeave = async (formData) => {
 
 /*________________________EDIT BY OTHER_____________________________________*/
 export const editLeaveByAdmin = async (formData) => {
-  // console.log(formData)
   const { id, employeeId } = formData;
   const data = await axiosInstance.put(`/leave/update/${id}?employeeId=${employeeId}`, formData);
   return data;

@@ -26,7 +26,6 @@ const EmployeeDashbord = ({}) => {
   const { data: projectWiseEmployeeData } = useGetProjectWiseEmployee(
     employData?.employeeId
   );
-  console.log("data", userDetailsData?.dateOfJoin);
   const taskPendingData = Array.isArray(loginUsertask)
     ? loginUsertask?.filter(
         (status) =>

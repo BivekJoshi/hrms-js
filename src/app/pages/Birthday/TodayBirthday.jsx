@@ -4,13 +4,14 @@ import { ClickAwayListener, MenuList, Typography } from "@mui/material";
 import CakeIcon from "@mui/icons-material/Cake";
 import "../Style/Style.css";
 import ThemeModeContext from "../../../theme/ThemeModeContext";
+import { useNavigate } from "react-router-dom";
 
 const TodayBirthday = ({ data }) => {
   const birthdayEmployeeName = data?.birthdayEmployees;
   const birthdayEmployeeCount = data?.birthdayEmployeeCount || 0;
   const displayCount = birthdayEmployeeCount > 0 ? birthdayEmployeeCount : null;
   const { mode } = useContext(ThemeModeContext);
-
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
 
@@ -18,11 +19,14 @@ const TodayBirthday = ({ data }) => {
     setOpen((prevOpen) => !prevOpen);
   };
 
+  const employeeId =
+    birthdayEmployeeName && birthdayEmployeeName.map((name) => name?.id);
+ 
   const handleClose = (event) => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
     }
-
+    navigate(`/admin/employee/${employeeId}`);
     setOpen(false);
   };
 

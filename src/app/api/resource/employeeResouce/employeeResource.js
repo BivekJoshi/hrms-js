@@ -13,7 +13,6 @@ export const getemployeeResource = async () => {
 }
 export const getemployeeResourceById = async (id) => {
   const data = await axiosInstance.get(`/employee-resource/emp-res-id/${id}`);
-  console.log(data);
   return data;
 };
 {
@@ -29,8 +28,6 @@ export const logInRemployeeResource = async (id) => {
   /*________________________POST EMPLOYEE RESOURCE_____________________________________*/
 }
 export const addemployeeResource = async (formData) => {
-  const employeeId = formData?.employeeId?.id;
-  formData.employeeId = employeeId;
   const data = await axiosInstance.post(`/employee-resource/create`, formData);
   return data;
 };
