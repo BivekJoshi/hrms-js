@@ -163,7 +163,6 @@ const Attendance = () => {
   return (
     <div className="main">
       <h2>Attendance</h2>
-
       <div className="Search">
         <Box
           style={{ display: "flex", justifyContent: "space-around" }}
