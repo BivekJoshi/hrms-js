@@ -10,7 +10,6 @@ import ThemeModeContext from "../../../../../theme/ThemeModeContext";
 
 export const AddprojectEmployeeFields = ({ onClose, isLoading }) => {
   const { data: employeeData, isLoading: loadingEmployee } = useGetEmployee();
-  console.log(employeeData);
 
   const { mode } = useContext(ThemeModeContext);
   const { formik } = useAddProjectEmployeeForm();

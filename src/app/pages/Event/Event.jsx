@@ -17,8 +17,11 @@ import PermissionHoc from "../../hoc/permissionHoc";
 
 import FormModal from "../../components/Modal/FormModal";
 import AddEventFields from "../../components/Form/Event/AddEventFields";
+import useAuth from "../../../auth/hooks/component/login/useAuth";
 
 const Event = ({ permissions }) => {
+  const { isEmployee,isHrClerk } = useAuth();
+
   const calendarRef = useRef(null);
   const [events, setEvents] = useState([]);
 
@@ -65,6 +68,7 @@ const Event = ({ permissions }) => {
 
   return (
     <>
+    {isEmployee || isHrClerk ? null : (
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
         <HocButton
           permissions={permissions}
@@ -74,6 +78,7 @@ const Event = ({ permissions }) => {
           buttonName={"+Add Event"}
         />
       </Box>
+      )}
       <br />
 
       {openAddModal && (
@@ -172,7 +177,7 @@ const Event = ({ permissions }) => {
         <OpenEvent
           id={getEventID}
           open={openModal}
-          handleCloseModal={handleCloseModal}
+          handleCloseModal={()=>setOpenModal(false)}
         />
       )}
     </>

@@ -1,15 +1,34 @@
 import React, { useState, useRef, useContext } from "react";
-import { MenuItem, Typography, Popper, Grow } from "@mui/material";
+import { Typography, Popper, Grow } from "@mui/material";
 import { Paper, Button, Box, ClickAwayListener, MenuList } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/NotificationsNone";
 import ThemeModeContext from "../../../theme/ThemeModeContext";
+import {
+  EventNotification,
+  LeaveNotification,
+} from "./Component/EventNotification";
+import { useGetLeave } from "../../hooks/leave/useLeave";
+import useAuth from "../../../auth/hooks/component/login/useAuth";
 
 const Notification = ({ data }) => {
   const [status, setStatus] = useState();
   const { mode } = useContext(ThemeModeContext);
+  //isManager
+  const { isManager } = useAuth();
+  const { data: leaveData } = useGetLeave();
 
   const eventName = data?.events;
-  const eventCount = data?.eventCount || 0;
+
+//leave notification
+  const pendingLeaveData = isManager
+  ?  leaveData?.filter(
+    (leave) => leave.leaveStatus === "PENDING"
+  ):"";
+
+  const eventCount = isManager
+  ? pendingLeaveData?.length + data?.eventCount || 0
+  : data?.eventCount || 0;
+
   const displayCount = eventCount > 0 ? eventCount : null;
 
   const [open, setOpen] = useState(false);
@@ -87,46 +106,36 @@ const Notification = ({ data }) => {
               >
                 <Paper>
                   <ClickAwayListener onClickAway={handleClose}>
-                    <MenuList
-                      autoFocusItem={open}
-                      id="composition-menu"
-                      aria-labelledby="composition-button"
-                      onKeyDown={handleListKeyDown}
-                      sx={{
-                        textAlign: "center",
-                        padding: "0.5rem 1rem",
-                      }}
-                    >
-                      <Typography variant="h6" color="primary" fontWeight={400}>
-                        Today's Events
-                      </Typography>
-                      {eventName &&
-                        eventName.map((ename, index) => (
-                          <MenuItem
-                            key={index}
-                            onClick={handleClose}
-                            sx={{
-                              display: "flex",
-                              gap: "1rem",
-                              alignItems: "center",
-                            }}
-                          >
-                            <Typography variant="h6">
-                              {ename?.eventName}
-                            </Typography>
-                            <Box
-                              sx={{
-                                display: "flex",
-                                flexDirection: "start",
-                                color: "gray",
-                              }}
-                            >
-                              <Typography>{ename?.eventTime}</Typography> &nbsp;
-                              <Typography>{ename?.eventLocation}</Typography>
-                            </Box>
-                          </MenuItem>
-                        ))}
-                    </MenuList>
+                    {isManager ? (
+                      <>
+                        { pendingLeaveData.length > 0 ? (
+                          <LeaveNotification
+                            Eventname={"Leave Request"}
+                            data={pendingLeaveData}
+                            open={open}
+                            handleClose={handleClose}
+                            handleListKeyDown={handleListKeyDown}
+                          />
+                        ) : null}
+                        {data.eventCount !== 0 && (
+                          <EventNotification
+                            Eventname={"Today's Event"}
+                            data={eventName}
+                            open={open}
+                            handleClose={handleClose}
+                            handleListKeyDown={handleListKeyDown}
+                          />
+                        )}
+                      </>
+                    ) : (
+                      <EventNotification
+                        Eventname={"Today's Event"}
+                        data={eventName}
+                        open={open}
+                        handleClose={handleClose}
+                        handleListKeyDown={handleListKeyDown}
+                      />
+                    )}
                   </ClickAwayListener>
                 </Paper>
               </Grow>

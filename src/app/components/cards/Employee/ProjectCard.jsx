@@ -104,7 +104,6 @@ const ProjectCard = ({
 
   return (
     <>
-      <Box maxWidth="450px">
         <MainCard
           grow={true}
           style={{
@@ -260,7 +259,9 @@ const ProjectCard = ({
                         ? "Completed"
                         : TaskStatus === "WORK_IN_PROGRESS"
                         ? "Work in progress"
-                        : "DELAYED"
+                        : TaskStatus === "PENDING"
+                        ? "Pending"
+                        : "Delayed"
                     }
                     style={{
                       width: 230,
@@ -269,6 +270,8 @@ const ProjectCard = ({
                           ? "green"
                           : TaskStatus === "WORK_IN_PROGRESS"
                           ? "orange"
+                          : TaskStatus === "PENDING"
+                          ? "blue"
                           : "red",
                       color: "#fff",
                     }}
@@ -306,7 +309,6 @@ const ProjectCard = ({
             </Stack>
           </Box>
         </MainCard>
-      </Box>
       {openEditModal && (
         <EditProjectModal
           id={editedProject?.id}

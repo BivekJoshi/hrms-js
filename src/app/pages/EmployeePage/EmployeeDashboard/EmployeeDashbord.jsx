@@ -1,28 +1,65 @@
-import { Box } from "@mui/system";
+import { Box, CardMedia } from "@mui/material";
 import React, { useContext } from "react";
 import Male from "../../../../assets/male.png";
-import Female from "../../../../assets/female.png";
 import "../../Style/Style.css";
 import { LeftEmployDashbord } from "./LeftEmployDashbord";
 import { RightEmployDashbord } from "./RightEmployDashbord";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
 import { useGetLoggedInUser } from "../../../hooks/auth/usePassword";
-import { DOC_URL } from "../../../../auth/axiosInterceptor";
-import { CardMedia } from "@mui/material";
 import { EmployTaskCard } from "../Component/EmployTaskCard";
 import { EmployPichart } from "../Component/EmployPichart";
-import { EmployLineChart } from "../Component/EmployLineChart";
 import { MiddleEmployDashbord } from "./MiddleEmployDashbord";
+import { useGetTaskLoggedInUser } from "../../../hooks/project/ProjectTask/useProjectTask";
+import { useGetProjectWiseEmployee } from "../../../hooks/project/useProject";
+import { DOC_URL } from "../../../../auth/axiosInterceptor";
+import TaskIcon from "@mui/icons-material/Task";
+import AccountTreeIcon from '@mui/icons-material/AccountTree';
+import PendingIcon from '@mui/icons-material/Pending';
+import BallotIcon from "@mui/icons-material/Ballot";
 
-const EmployeeDashbord = (props) => {
+const EmployeeDashbord = ({}) => {
   const { data: employData } = useGetLoggedInUser();
   const { mode } = useContext(ThemeModeContext);
-  // const img = DOC_URL + employData.userPhotoPath;
+  const { data: loginUsertask } = useGetTaskLoggedInUser();
+  const { data: projectWiseEmployeeData } = useGetProjectWiseEmployee(
+    employData?.employeeId
+  );
+  const taskPendingData = Array.isArray(loginUsertask)
+    ? loginUsertask?.filter(
+        (status) =>
+          status.status === "WORK_IN_PROGRESS" || status.status === "PENDING"
+      )
+    : "";
+
+  const taskCompleteData = Array.isArray(loginUsertask)
+    ? loginUsertask?.filter((status) => status.status === "COMPLETED")
+    : "";
+  const photo = employData?.userPhotoPath;
+  const filePath = photo ? DOC_URL + photo : "";
+
   const task = [
-    { nameOfTask: "Total Project", numberOfTask: "4" },
-    { nameOfTask: "Total Task", numberOfTask: "4" },
-    { nameOfTask: "Task Pending", numberOfTask: "4" },
-    { nameOfTask: "Task Complete", numberOfTask: "4" },
+    {
+      nameOfTask: "Total Project",
+      numberOfTask: projectWiseEmployeeData
+        ? projectWiseEmployeeData.length
+        : 0,
+      taskIcon: <AccountTreeIcon sx={{ width: "2rem", height: "2rem" }} />,
+    },
+    {
+      nameOfTask: "Total Task",
+      numberOfTask: loginUsertask ? loginUsertask.length : 0,
+      taskIcon: <BallotIcon sx={{ width: "2rem", height: "2rem" }} />,
+    },
+    {
+      nameOfTask: "Task Pending",
+      numberOfTask: taskPendingData ? taskPendingData.length : 0,
+      taskIcon: <PendingIcon sx={{ width: "2rem", height: "2rem" }} />,
+    },
+    {
+      nameOfTask: "Task Complete",
+      numberOfTask: taskCompleteData ? taskCompleteData.length : 0,
+      taskIcon: <TaskIcon sx={{ width: "2rem", height: "2rem" }} />,
+    },
   ];
   const today = new Date();
   const options = {
@@ -44,21 +81,12 @@ const EmployeeDashbord = (props) => {
         }
       >
         <CardMedia
-          src={Male}
           component="img"
-          // src={
-          //   employData?.userPhotoPath
-          //     ? img :
-          //     // EGender === "MALE" ?
-          //      Male
-          //     // : ""
-          //     // ? Female
-          //     // : Female
-          // }
+          src={filePath ? filePath : Male}
           alt="Paella dish"
           sx={{ width: 66, height: 66, borderRadius: "2rem" }}
         />
-        <Box alignSelf="center">
+        <Box alignSelf="center" paddingLeft="1rem">
           <h3>Welcome , {employData?.name}</h3>
           <h3>{formattedDate}</h3>
         </Box>
@@ -72,16 +100,18 @@ const EmployeeDashbord = (props) => {
       >
         {task.map((taskDetail, index) => (
           <EmployTaskCard
+            key={index}
             nameOfTask={taskDetail.nameOfTask}
             numberOfTask={taskDetail.numberOfTask}
+            taskIcon={taskDetail.taskIcon}
           />
         ))}
-        <EmployPichart />
+        {/* <EmployPichart task={task}/> */}
       </Box>
-      <MiddleEmployDashbord />
+      <MiddleEmployDashbord employData={employData}/>
       <Box display="grid" gridTemplateColumns="3fr 2fr" gap="3rem">
         <LeftEmployDashbord />
-        <RightEmployDashbord />
+        <RightEmployDashbord employData={employData}/>
       </Box>
     </Box>
   );

@@ -90,7 +90,7 @@ const useHolidayForm = (setOpenSubmitModal, handleCloseModal) => {
     values = { ...values };
     addEvent(values, {
       onSuccess: (data) => {
-        console.log("pk");
+       
       },
     });
   };

@@ -16,7 +16,6 @@ import {
   EditEmployeeResourceModal,
 } from "./EmployeeResourceModal";
 import { useGetOfficeResource } from "../../../hooks/resource/officeResource/useOfficeResource";
-import { ButtonComponent } from "../../../components/Button/ButtonComponent";
 import PermissionHoc from "../../../hoc/permissionHoc";
 import HocButton from "../../../hoc/hocButton";
 
@@ -76,6 +75,7 @@ const EmployeeResource = ({ permissions }) => {
       title: "SN",
       render: (rowData) => rowData.tableData.id + 1,
       width: "3%",
+      maxWidth: "40px",
       sortable: false,
       sorting: false,
     },
@@ -84,7 +84,10 @@ const EmployeeResource = ({ permissions }) => {
       render: (rowData) => {
         return <p>{getEmployeeName(rowData)} </p>;
       },
-      width: 120,
+      customFilterAndSearch: (searchValue, rowData) => {
+        const employeeName = getEmployeeName(rowData);
+        return employeeName.toLowerCase().includes(searchValue.toLowerCase());
+      },
       sorting: false,
     },
     {
@@ -92,7 +95,10 @@ const EmployeeResource = ({ permissions }) => {
       render: (rowData) => {
         return <p>{getResourceName(rowData)}</p>;
       },
-      width: "20vh",
+      // customFilterAndSearch: (searchValue, rowData) => {
+      //   const resourceName = getResourceName(rowData);
+      //   return resourceName.toLowerCase().includes(searchValue.toLowerCase());
+      // },
       sorting: false,
     },
     {
@@ -107,24 +113,17 @@ const EmployeeResource = ({ permissions }) => {
       emptyValue: "-",
       sorting: false,
     },
+  ];
+  const actions = [
     {
-      title: "Actions",
-      render: (rowData) => (
-        <Stack direction="row" spacing={0}>
-          <HocButton
-            permissions={permissions}
-            onClick={() => handleEditRowData(rowData)}
-            icon={<ModeEditOutlineIcon />}
-          />
-          <HocButton
-            permissions={permissions}
-            onClick={() =>handleDeleteRowData(rowData)}
-            icon={<DeleteIcon />}
-          />
-        </Stack>
-      ),
-      sorting: false,
-      width: 120,
+      icon: () => <ModeEditOutlineIcon sx={{ color: "#01579B" }} />,
+      tooltip: "Edit Logistics",
+      onClick: (event, rowData) => handleEditRowData(rowData),
+    },
+    {
+      icon: () => <DeleteIcon sx={{ color: "#01579B" }} />,
+      tooltip: "Remove Logistics",
+      onClick: (event, rowData) => handleDeleteRowData(rowData),
     },
   ];
   return (
@@ -139,25 +138,25 @@ const EmployeeResource = ({ permissions }) => {
       >
         <HocButton
           permissions={permissions}
-          color= {"primary"}
+          color={"primary"}
           variant={"outlined"}
           onClick={() => {
             navigate(`/admin/resource/office`);
           }}
-          buttonName={"Resources"}
+          buttonName={"Logistics"}
         />
         <HocButton
           permissions={permissions}
-          color= {"primary"}
+          color={"primary"}
           variant={"contained"}
           onClick={handleAddOpenModal}
-          buttonName={"+Provide Resource to Employee"}
+          buttonName={"+Provide Logistics to Employee"}
         />
       </Box>
 
       <MaterialTable
         icons={tableIcons}
-        title="Employee Resource"
+        title="Employee Logistics"
         columns={columns}
         data={employeeResourceData}
         isLoading={isLoading}
@@ -167,6 +166,7 @@ const EmployeeResource = ({ permissions }) => {
           margin: 50,
           pageSize: 20,
           emptyRowsWhenPaging: false,
+          actionsColumnIndex: -1,
           headerStyle: {
             backgroundColor: "#01579b",
             color: "#FFF",
@@ -182,6 +182,7 @@ const EmployeeResource = ({ permissions }) => {
             fontSize: ".8rem",
           },
         }}
+        actions={actions}
       />
       {openDeleteModal && (
         <DeleteConfirmationModal
@@ -193,6 +194,7 @@ const EmployeeResource = ({ permissions }) => {
       )}
       {openAddModal && (
         <AddEmployeeResourceModal
+        id={editedEmployeeResouce?.id}
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
         />

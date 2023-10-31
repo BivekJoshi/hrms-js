@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import EmployeeCard from "../../../../components/cards/Employee/EmployeeCard";
 import { useGetEmployeeData } from "../../../../hooks/employee/useEmployee";
 
-const EmployeeGridView = ({ employeeData }) => {
+const EmployeeGridView = ({ employeeData, isLoading }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const pageNumber = 12;
   const { data: employeePageData } = useGetEmployeeData(pageNumber);
@@ -17,6 +17,15 @@ const EmployeeGridView = ({ employeeData }) => {
     setCurrentPage(newPage);
   };
 
+  if (isLoading)
+    return (
+      <>
+        <Skeleton />
+        <Skeleton animation="wave" />
+        <Skeleton animation={false} />
+      </>
+    );
+
   return (
     <>
       <Grid
@@ -26,7 +35,7 @@ const EmployeeGridView = ({ employeeData }) => {
         className="project-card-control"
         sx={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+          gridTemplateColumns: "repeat(auto-fit, minmax(285px, 1fr))",
           gap: "1rem",
         }}
       >

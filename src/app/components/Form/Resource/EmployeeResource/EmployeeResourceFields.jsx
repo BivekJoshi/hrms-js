@@ -1,16 +1,16 @@
-import { Button, Grid, MenuItem, TextField } from "@mui/material";
+import { Autocomplete, Button, Grid, MenuItem, TextField } from "@mui/material";
 import React, { useContext } from "react";
 import useEmployeeResourceForm from "../../../../hooks/resource/employeeResource/EmployeeResourceForm/useEmployeeResourceForm";
-import { useGetOfficeResource } from "../../../../hooks/resource/officeResource/useOfficeResource";
+import { useGetAvailableOfficeResource } from "../../../../hooks/resource/officeResource/useOfficeResource";
 import { useGetEmployee } from "../../../../hooks/employee/useEmployee";
 import ThemeModeContext from "../../../../../theme/ThemeModeContext";
 
 const EmployeeResourceFields = ({ onClose, isLoading, data }) => {
-  const { data: officeResourceData } = useGetOfficeResource();
+  const { data: availableOfficeResource } = useGetAvailableOfficeResource();
   const { data: employeeData } = useGetEmployee();
   const { mode } = useContext(ThemeModeContext);
 
-  const { formik } = useEmployeeResourceForm(data);
+  const { formik } = useEmployeeResourceForm(data ? data : "");
   const handleFormSubmit = () => {
     formik.handleSubmit();
 
@@ -21,46 +21,52 @@ const EmployeeResourceFields = ({ onClose, isLoading, data }) => {
     }
   };
   const submitButtonText = data ? "Update Resource" : " Add Resource";
+
   return (
     !isLoading && (
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
-          <TextField
-            select
+          <Autocomplete
             id="employeeId"
             name="employeeId"
-            label="Employee Name"
-            placeholder="Select employee name"
-            fullWidth
-            required
-            value={formik.values.employeeId}
-            onChange={formik.handleChange}
-            error={
-              formik.touched.employeeId && Boolean(formik.errors.employeeId)
+            options={employeeData}
+            getOptionLabel={(option) =>
+              `${option.firstName} ${option.middleName} ${option.lastName}`
             }
-            helperText={formik.touched.employeeId && formik.errors.employeeId}
-            variant="outlined"
-            autoFocus
-            InputLabelProps={{ shrink: true }}
-          >
-            {employeeData &&
-              employeeData.map((option) => (
-                <MenuItem
-                  key={option?.id}
-                  value={option?.id}
-                  sx={{ bgcolor: mode === "light" ? "" : "#413e3e" }}
-                >
-                  {option?.firstName} {option?.middleName} {option?.lastName}
-                </MenuItem>
-              ))}
-          </TextField>
+            value={employeeData?.find(
+              (employee) => employee?.id === formik.values?.employeeId
+            )}
+            onChange={(event, selectedEmployee) => {
+              if (selectedEmployee) {
+                formik.setFieldValue("employeeId", selectedEmployee.id);
+              }
+            }}
+            renderInput={(params) => (
+              <TextField
+                bgcolor="black"
+                {...params}
+                label="Employee Name"
+                fullWidth
+                required
+                error={
+                  formik.touched.employeeId && Boolean(formik.errors.employeeId)
+                }
+                helperText={
+                  formik.touched.employeeId && formik.errors.employeeId
+                }
+                variant="outlined"
+                autoFocus
+                InputLabelProps={{ shrink: true }}
+              />
+            )}
+          />
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
             id="officeResourceId"
             name="officeResourceId"
-            label="Office Resource"
-            placeholder="Select Resource"
+            label="Office Logistics"
+            placeholder="Select Logistics"
             fullWidth
             required
             select
@@ -77,8 +83,8 @@ const EmployeeResourceFields = ({ onClose, isLoading, data }) => {
             autoFocus
             InputLabelProps={{ shrink: true }}
           >
-            {officeResourceData &&
-              officeResourceData.map((option) => (
+            {availableOfficeResource &&
+              availableOfficeResource.map((option) => (
                 <MenuItem
                   key={option?.id}
                   value={option?.id}

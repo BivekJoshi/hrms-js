@@ -2,30 +2,37 @@ import React, { useState } from "react";
 import Typography from "@mui/material/Typography";
 import {
   Box,
+  Button,
   Card,
   Container,
   Grid,
+  Modal,
   Pagination,
   Stack,
   TextField,
 } from "@mui/material";
 import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
-import { useGetProject, useGetProjectPageWise } from "../../../hooks/project/useProject";
+import {
+  useGetProject,
+  useGetProjectPageWise,
+} from "../../../hooks/project/useProject";
 import { AddProjectModal } from "../ProjectModal/ProjectModal";
-import { useNavigate } from "react-router-dom";
 
 import ProjectCard from "../../../components/cards/Employee/ProjectCard";
 import HocButton from "../../../hoc/hocButton";
 import PermissionHoc from "../../../hoc/permissionHoc";
+import useAuth from "../../../../auth/hooks/component/login/useAuth";
+import DeactivatedProject from "../DeactivatedProject/DeactivatedProject";
 
 const Project = ({ permissions }) => {
-  const navigate = useNavigate();
+  const { isEmployee } = useAuth();
+
+  const [openModal, setOpenModal] = useState(false);
   const { data: projectData, isLoading } = useGetProject();
 
-  //pagination
   const [currentPage, setCurrentPage] = useState(1);
   const pageNumber = 12;
-  const{data:projectDataCount}=useGetProjectPageWise(pageNumber);
+  const { data: projectDataCount } = useGetProjectPageWise(pageNumber);
 
   const pageSize = projectDataCount?.pageSize || 5;
   const totalPages = projectDataCount?.totalPages || 0;
@@ -54,6 +61,14 @@ const Project = ({ permissions }) => {
     ? Object.values(projectData)
     : [];
 
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
+
   const filteredProject = projectData?.filter((project) =>
     project?.projectName.toLowerCase().includes(nameFilter.toLowerCase())
   );
@@ -74,24 +89,24 @@ const Project = ({ permissions }) => {
           }}
         >
           On-Going Projects
-          <Box display="flex" gap={".5rem"}>
-            <HocButton
-              permissions={permissions}
-              color={"primary"}
-              variant={"outlined"}
-              onClick={() => {
-                navigate(`get-deactivated-projects`);
-              }}
-              buttonName={"Terminated Project"}
-            />
-            <HocButton
-              permissions={permissions}
-              color={"primary"}
-              variant={"contained"}
-              onClick={handleAddOpenModal}
-              buttonName={"+Add Project"}
-            />
-          </Box>
+          {isEmployee ? null : (
+            <Box display="flex" gap={".5rem"}>
+              <HocButton
+                permissions={permissions}
+                color={"primary"}
+                variant={"outlined"}
+                onClick={handleOpenModal}
+                buttonName={"Terminated Project"}
+              />
+              <HocButton
+                permissions={permissions}
+                color={"primary"}
+                variant={"contained"}
+                onClick={handleAddOpenModal}
+                buttonName={"+Add Project"}
+              />
+            </Box>
+          )}
         </Typography>
       </Box>
 
@@ -171,6 +186,43 @@ const Project = ({ permissions }) => {
           handleCloseModal={handleCloseAddModal}
         />
       )}
+
+      <Modal
+        open={openModal}
+        onClose={handleCloseModal}
+        aria-labelledby="modal-title"
+        aria-describedby="modal-description"
+      >
+        <Box
+          sx={{
+            position: "absolute",
+            top: "40%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            // width: 400,
+            bgcolor: "background.paper",
+            boxShadow: 24,
+            p: 4,
+          }}
+        >
+          <DeactivatedProject />
+          <br />
+          <Grid
+            container
+            direction="row"
+            justifyContent="flex-end"
+            alignItems="flex-end"
+          >
+            <Button
+              onClick={() => setOpenModal(false)}
+              color="error"
+              variant="contained"
+            >
+              Close
+            </Button>
+          </Grid>
+        </Box>
+      </Modal>
     </>
   );
 };

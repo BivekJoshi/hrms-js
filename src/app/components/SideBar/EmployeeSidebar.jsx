@@ -1,22 +1,16 @@
 import React, { useContext, useState } from "react";
 import { styled } from "@mui/material/styles";
-import { Box, Drawer, Divider, List, ListItemButton } from "@mui/material";
+import { Box, Drawer, Divider, List, ListItemButton, Button } from "@mui/material";
 import { ListItemIcon } from "@mui/material";
 import { ListItemText, Collapse, IconButton } from "@mui/material/";
 import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
-import { Button, Card, Fab, Switch, Typography } from "@mui/material";
+import { Card, Fab, Switch, Typography } from "@mui/material";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import { removeUser } from "../../utils/cookieHelper";
 import { ThemeModeContext } from "../../../theme/ThemeModeContext";
 import AdminHeader from "../Header/AdminHeader";
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
-import PersonIcon from "@mui/icons-material/Person";
-import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import MailIcon from "@mui/icons-material/Mail";
-import CakeIcon from "@mui/icons-material/Cake";
-import HowToRegIcon from "@mui/icons-material/HowToReg";
 import WorkspacesIcon from "@mui/icons-material/Workspaces";
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
 import BusinessIcon from "@mui/icons-material/Business";
@@ -24,9 +18,11 @@ import PlaylistAddCheckIcon from "@mui/icons-material/PlaylistAddCheck";
 import AddchartIcon from "@mui/icons-material/Addchart";
 import EventIcon from "@mui/icons-material/Event";
 import HolidayVillageIcon from "@mui/icons-material/HolidayVillage";
-import LaptopIcon from "@mui/icons-material/Laptop";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import BreadCrumbs from "../../../routes/employeeRoutes";
+import CoPresentIcon from "@mui/icons-material/CoPresent";
+import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import ApprovalOutlinedIcon from "@mui/icons-material/ApprovalOutlined";
 
 const drawerWidth = 250;
 
@@ -75,12 +71,12 @@ export default function EmployeeSidebar() {
   const { toggleMode, mode } = useContext(ThemeModeContext);
   const [subMenuOpen, setSubMenuOpen] = useState({});
 
-  const drawerMenus = [
+  const employeeDrawerMenus = [
     {
       name: "Dashboard",
       icon: (
         <DashboardIcon
-          sx={mode === "light" ? { color: "black" } : { color: "white" }}
+          sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
         />
       ),
       path: "dashboard",
@@ -89,8 +85,8 @@ export default function EmployeeSidebar() {
     {
       name: "My Profile",
       icon: (
-        <DashboardIcon
-          sx={mode === "light" ? { color: "black" } : { color: "white" }}
+        <AccountCircleOutlinedIcon
+          sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
         />
       ),
       path: "viewprofile",
@@ -100,8 +96,8 @@ export default function EmployeeSidebar() {
       name: "My Attendence",
       path: "attendance",
       icon: (
-        <MailIcon
-          sx={mode === "light" ? { color: "black" } : { color: "white" }}
+        <CoPresentIcon
+          sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
         />
       ),
       subMenus: [],
@@ -110,8 +106,8 @@ export default function EmployeeSidebar() {
       name: "Apply Leave",
       path: "applyleave",
       icon: (
-        <MailIcon
-          sx={mode === "light" ? { color: "black" } : { color: "white" }}
+        <ApprovalOutlinedIcon
+          sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
         />
       ),
       subMenus: [],
@@ -121,7 +117,7 @@ export default function EmployeeSidebar() {
       path: "leavetype",
       icon: (
         <MailIcon
-          sx={mode === "light" ? { color: "black" } : { color: "white" }}
+          sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
         />
       ),
       subMenus: [],
@@ -130,7 +126,7 @@ export default function EmployeeSidebar() {
       name: "Department",
       icon: (
         <WorkspacesIcon
-          sx={mode === "light" ? { color: "black" } : { color: "white" }}
+          sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
         />
       ),
       path: "department",
@@ -140,7 +136,7 @@ export default function EmployeeSidebar() {
       name: "Designation",
       icon: (
         <AssignmentIndIcon
-          sx={mode === "light" ? { color: "black" } : { color: "white" }}
+          sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
         />
       ),
       path: "designation",
@@ -150,7 +146,7 @@ export default function EmployeeSidebar() {
       name: "Company",
       icon: (
         <BusinessIcon
-          sx={mode === "light" ? { color: "black" } : { color: "white" }}
+          sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
         />
       ),
       path: "company",
@@ -160,7 +156,7 @@ export default function EmployeeSidebar() {
       name: "Project",
       icon: (
         <AddchartIcon
-          sx={mode === "light" ? { color: "black" } : { color: "white" }}
+          sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
         />
       ),
       path: "project",
@@ -170,7 +166,7 @@ export default function EmployeeSidebar() {
       name: "Event",
       icon: (
         <EventIcon
-          sx={mode === "light" ? { color: "black" } : { color: "white" }}
+          sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
         />
       ),
       path: "event",
@@ -180,7 +176,7 @@ export default function EmployeeSidebar() {
       name: "Holiday",
       icon: (
         <HolidayVillageIcon
-          sx={mode === "light" ? { color: "black" } : { color: "white" }}
+          sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
         />
       ),
       path: "holiday",
@@ -190,7 +186,7 @@ export default function EmployeeSidebar() {
       name: "Todo",
       icon: (
         <PlaylistAddCheckIcon
-          sx={mode === "light" ? { color: "black" } : { color: "white" }}
+          sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
         />
       ),
       path: "todolist",
@@ -233,13 +229,24 @@ export default function EmployeeSidebar() {
         open={open}
       >
         <DrawerHeader>
+          <Typography
+            style={{
+              fontSize: "2rem",
+              fontWeight: "900",
+              color: "#01579b",
+              letterSpacing: "0.1rem",
+            }}
+            variant="h6"
+          >
+            DGHUB
+          </Typography>
           <IconButton onClick={handleDrawerClose}>
             <ChevronLeftIcon />
           </IconButton>
         </DrawerHeader>
         <Divider />
         <List>
-          {drawerMenus.map((menu, index) => (
+          {employeeDrawerMenus.map((menu, index) => (
             <React.Fragment key={index}>
               <StyledNavLink key={index} to={menu.path}>
                 <ListItemButton onClick={() => handleSubMenuToggle(index)}>
@@ -341,9 +348,9 @@ export default function EmployeeSidebar() {
             variant="body2"
             sx={{ marginRight: "8px", marginTop: "1rem" }}
           >
-            {mode === "light" ? "Light" : "Dark"} Mode
+            {mode === "light" ? "Dark" : "Light"} Mode
+            <Switch checked={mode === "dark"} onChange={toggleMode} />
           </Typography>
-          <Switch checked={mode === "dark"} onChange={toggleMode} />
         </Box>
       </Drawer>
 
@@ -370,18 +377,18 @@ export default function EmployeeSidebar() {
             alignItems="center"
           >
             {location.pathname !== "/employee/dashboard" && (
-                <Fab
-                  color="primary"
-                  sx={{ height: "auto", padding: ".3rem 0" }}
-                  aria-label="add"
-                  variant="extended"
-                  onClick={() => {
-                    navigate(-1);
-                  }}
-                >
-                  <ArrowBackIcon />
-                </Fab>
-              )}
+              <Fab
+                color="primary"
+                sx={{ height: "auto", padding: ".3rem 0" }}
+                aria-label="add"
+                variant="extended"
+                onClick={() => {
+                  navigate(-1);
+                }}
+              >
+                <ArrowBackIcon />
+              </Fab>
+            )}
             <BreadCrumbs />
           </Box>
           <Outlet />

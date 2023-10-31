@@ -5,52 +5,50 @@ import { ButtonComponent } from "../../../components/Button/ButtonComponent";
 import { Divider, Typography } from "@mui/material";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
 import { useNavigate } from "react-router-dom";
+import { useGetLoggedInUserLeaveBalance } from "../../../hooks/leave/useLeave";
+import { uselogInEemployeeResource } from "../../../hooks/resource/employeeResource/useEmployeeResource";
+import { useGetOfficeResource } from "../../../hooks/resource/officeResource/useOfficeResource";
+import { PendingTask } from "../Component/PendingTask";
 
-export const RightEmployDashbord = (props) => {
+export const RightEmployDashbord = ({ employData }) => {
   const navigate = useNavigate();
+  const { data: leavebalance } = useGetLoggedInUserLeaveBalance();
+  const { data: resourceLogInUser } = uselogInEemployeeResource(
+    employData?.employeeId
+  );
+  const { data: officeresource } = useGetOfficeResource();
+
+  const getResourceName = (logistic) => {
+    const resourceName = officeresource?.find(
+      (resource) => resource?.id === logistic
+    );
+    return resourceName?.name;
+  };
+  const sumOfLeaveTaken = Array.isArray(leavebalance)
+    ? leavebalance?.reduce((accumulator, currentValue) => {
+        return accumulator + currentValue?.leaveTaken;
+      }, 0)
+    : "";
+
+  const sumOfLeaveBalance = Array.isArray(leavebalance)
+    ? leavebalance.reduce((accumulator, currentValue) => {
+        return accumulator + currentValue.leaveBalance;
+      }, 0)
+    : "";
+  const avegLeaveBalance = Array.isArray(leavebalance)
+    ? sumOfLeaveBalance / leavebalance.length
+    : "";
+
   const { mode } = useContext(ThemeModeContext);
   return (
     <Box>
-      <Box>
-        <h3>Project</h3>
-        <Box
-          className={
-            mode === "light"
-              ? "employeeDeshbordBG employeeDeshbord"
-              : "employeeDeshbordBGDark employeeDeshbord"
-          }
-          display="flex"
-          flexDirection="column"
-          justifyContent="center"
-          padding="1rem"
-        >
-          <Box
-            className={
-              mode === "light"
-                ? "employeeDeshbordBG employeeDeshbord"
-                : "employeeDeshbordBGDark employeeDeshbord"
-            }
-            display="flex"
-            flexDirection="row"
-            justifyContent="space-between"
-          >
-            <Box>
-              <h4>WORKING ON</h4>
-              HRMS
-            </Box>
-            <Divider sx={{ border: "1px solid black" }} />
-            <Box>
-              <h4>OTHER PROJECT</h4>
-              HRMS
-            </Box>
-          </Box>
-          <Box alignSelf="center" paddingTop="2rem">
-            <h4> Total Project</h4>
-            <Typography textAlign="center">6</Typography>
-          </Box>
+      {/* <Box className="taskTable">
+        <h3>Pending Task</h3>
+        <Box margin="1rem 0">
+          <PendingTask />
         </Box>
-      </Box>
-      <Box marginTop="1rem">
+      </Box> */}
+      <Box>
         <h3>Your Leaves</h3>
         <Box
           className={
@@ -59,9 +57,10 @@ export const RightEmployDashbord = (props) => {
               : "employeeDeshbordBGDark employeeDeshbord"
           }
           display="flex"
+          marginTop="1rem"
           flexDirection="column"
           justifyContent="center"
-          padding="1rem"
+          padding="0.5rem 1rem"
         >
           <Box
             display="flex"
@@ -69,11 +68,11 @@ export const RightEmployDashbord = (props) => {
             justifyContent="space-between"
           >
             <Box>
-              6<Typography>LEAVE TAKEN</Typography>
+              <Typography>{sumOfLeaveTaken}</Typography>LEAVE TAKEN
             </Box>
             <Divider sx={{ border: "1px solid black" }} />
             <Box alignSelf="center">
-              <Typography>6</Typography> REMAINING
+              <Typography>{avegLeaveBalance}</Typography> REMAINING
             </Box>
           </Box>
           <Box alignSelf="center" paddingTop="2rem">
@@ -88,21 +87,33 @@ export const RightEmployDashbord = (props) => {
           </Box>
         </Box>
       </Box>
-      <Box margin="1rem 0">
-        <h3 style={{margin:"1rem 0"}}>UPCOMMING HOLIDAY</h3>
-        <Box
-          className={
-            mode === "light"
-              ? "employeeDeshbordBG employeeDeshbord"
-              : "employeeDeshbordBGDark employeeDeshbord"
-          }
-          padding="1rem"
-        >
-          <Typography fontWeight="600" textAlign="center">
-            MONDAY 10 JULY, 2023
-          </Typography>
+      {resourceLogInUser && (
+        <Box margin="1rem 0">
+          <h3 style={{ margin: "1rem 0" }}>Logistic Used</h3>
+          <Box
+            className={
+              mode === "light"
+                ? "employeeDeshbordBG employeeDeshbord"
+                : "employeeDeshbordBGDark employeeDeshbord"
+            }
+            padding="1rem"
+            maxHeight="8rem"
+            overflow="scroll"
+          >
+            {Array.isArray(resourceLogInUser)
+              ? resourceLogInUser.map((logistic) => (
+                  <Typography
+                    fontWeight="600"
+                    textAlign="center"
+                    key={logistic.id}
+                  >
+                    {getResourceName(logistic?.officeResourceId)}
+                  </Typography>
+                ))
+              : ""}
+          </Box>
         </Box>
-      </Box>
+      )}
     </Box>
   );
 };

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useState } from "react";
 import MaterialTable from "material-table";
-import { Box, Button, Chip, Stack } from "@mui/material";
+import { Box, Button, Chip, Stack, Tooltip, Typography } from "@mui/material";
 import { useGetLeaveType } from "../../hooks/leaveType/useLeaveType";
 
 import { useDeleteLeave, useGetLeave } from "../../hooks/leave/useLeave";
@@ -14,6 +14,7 @@ import DeleteConfirmationModal from "../../components/Modal/DeleteConfirmationMo
 import tableIcons from "../../../theme/overrides/TableIcon";
 import { ButtonComponent } from "../../components/Button/ButtonComponent";
 import { useGetUserControl } from "../../hooks/auth/userControl/useUserControl";
+import ThemeModeContext from "../../../theme/ThemeModeContext";
 
 const Leave = ({ isLoading }) => {
   const { data: leaveData, isLoading: loadingleave } = useGetLeave();
@@ -21,7 +22,7 @@ const Leave = ({ isLoading }) => {
   const { data: leaveTypeData, isLoading: loadingleaveType } =
     useGetLeaveType();
   const { data: UserData, isLoading: loadingUser } = useGetUserControl();
-
+  const { mode } = React.useContext(ThemeModeContext);
 
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
@@ -70,13 +71,12 @@ const Leave = ({ isLoading }) => {
     const name = `${capitalizeFirstLetter(leaveType.leaveName)} Leave`;
     return name;
   };
-  const getUserName = ( rowData) => {
-    const confirmById = rowData?.confirmById;  
+  const getUserName = (rowData) => {
+    const confirmById = rowData?.confirmById;
     const user = UserData?.find((confirmBy) => confirmBy.id === confirmById);
     const name = `${user?.name || "-"}`;
     return name;
   };
-
 
   const columns = [
     {
@@ -88,10 +88,14 @@ const Leave = ({ isLoading }) => {
     },
     {
       title: "Employee Name",
+      width: " 10%",
       render: (rowData) => {
         return <p>{getEmployeeName(rowData)} </p>;
       },
-      width: 120,
+      customFilterAndSearch: (searchValue, rowData) => {
+        const employeeName = getEmployeeName(rowData);
+        return employeeName.toLowerCase().includes(searchValue.toLowerCase());
+      },
       sorting: false,
     },
     {
@@ -99,41 +103,42 @@ const Leave = ({ isLoading }) => {
       render: (rowData) => {
         return <p>{getLeaveTypeName(rowData)}</p>;
       },
-      width: 150,
+      customFilterAndSearch: (searchValue, rowData) => {
+        const leaveTypeName = getLeaveTypeName(rowData);
+        return leaveTypeName.toLowerCase().includes(searchValue.toLowerCase());
+      },
+      width: " 10%",
       sorting: false,
     },
     {
       title: "From",
       field: "fromDate",
       emptyValue: "-",
-      width: 100,
       sorting: false,
     },
     {
       title: "To",
       field: "toDate",
       emptyValue: "-",
-      width: 100,
       sorting: false,
     },
     {
       title: "Status",
       field: "leaveStatus",
       emptyValue: "-",
-      width: 100,
       cellStyle: {
         whiteSpace: "nowrap",
       },
       render: (rowData) => {
         const status = rowData.leaveStatus;
-        let chipColor = '';
+        let chipColor = "";
 
-        if (status === 'APPROVED') {
-          chipColor = 'green';
-        } else if (status === 'REJECTED') {
-          chipColor = 'red';
-        } else if (status === 'PENDING') {
-          chipColor = 'orange';
+        if (status === "APPROVED") {
+          chipColor = "green";
+        } else if (status === "REJECTED") {
+          chipColor = "red";
+        } else if (status === "PENDING") {
+          chipColor = "orange";
         }
 
         return (
@@ -153,21 +158,65 @@ const Leave = ({ isLoading }) => {
       title: "Leave Reason",
       field: "leaveReason",
       emptyValue: "-",
-      width: 100,
-      sorting: false,
+      render: (rowData) => {
+        return (
+          <Tooltip title={rowData?.leaveReason} placement="top-start" arrow>
+            <Chip
+              style={{
+                cursor: "pointer",
+                width: "170px",
+                height: "50px",
+                display: "block",
+                background: mode === "light" ? "white" : "#434343",
+              }}
+              label={
+                <Typography
+                  style={{ overflow: "hidden", textOverflow: "ellipsis" }}
+                >
+                  {rowData?.leaveReason}
+                </Typography>
+              }
+            />
+          </Tooltip>
+        );
+      },
     },
     {
       title: "Remark",
       field: "leaveRemarks",
       emptyValue: "-",
-      width: 100,
-      sorting: false,
+      render: (rowData) => {
+        return (
+          <Tooltip title={rowData?.leaveRemarks} placement="top-start" arrow>
+            <Chip
+              style={{
+                cursor: "pointer",
+                width: "170px",
+                height: "50px",
+                display: "block",
+                background: mode === "light" ? "white" : "#434343",
+              }}
+              label={
+                <Typography
+                  style={{ overflow: "hidden", textOverflow: "ellipsis" }}
+                >
+                  {rowData?.leaveRemarks}
+                </Typography>
+              }
+            />
+          </Tooltip>
+        );
+      },
     },
- 
+
     {
       title: "Approved By",
       render: (rowData) => {
         return <p>{getUserName(rowData)} </p>;
+      },
+      customFilterAndSearch: (searchValue, rowData) => {
+        const ApprovedBy = getUserName(rowData);
+        return ApprovedBy.toLowerCase().includes(searchValue.toLowerCase());
       },
       width: 120,
       sorting: false,
@@ -195,7 +244,6 @@ const Leave = ({ isLoading }) => {
         );
       },
       sorting: false,
-      width: 120,
     },
   ];
 
@@ -217,7 +265,7 @@ const Leave = ({ isLoading }) => {
         icons={tableIcons}
         columns={columns}
         data={leaveData}
-        title='Leave Data'
+        title="Leave Data"
         isLoading={loadingleave}
         options={{
           padding: "dense",
@@ -225,18 +273,18 @@ const Leave = ({ isLoading }) => {
           pageSize: 10,
           emptyRowsWhenPaging: false,
           headerStyle: {
-            backgroundColor: '#01579b',
-            color: '#FFF',
-            fontSize: '1rem',
-            padding: 'dense',
+            backgroundColor: "#01579b",
+            color: "#FFF",
+            fontSize: "1rem",
+            padding: "dense",
             height: 50,
-            textAlign: 'center',
-            border: '2px solid #fff',
-            minHeight: '10px',
-            textTransform: 'capitalize',
+            textAlign: "center",
+            border: "2px solid #fff",
+            minHeight: "10px",
+            textTransform: "capitalize",
           },
           rowStyle: {
-            fontSize: '.8rem',
+            fontSize: ".8rem",
           },
         }}
       />
@@ -258,7 +306,7 @@ const Leave = ({ isLoading }) => {
           open={openDeleteModal}
           handleCloseModal={handleCloseDeleteModal}
           handleConfirmDelete={handleConfirmDelete}
-          message={'Leave'}
+          message={"Leave"}
         />
       )}
     </>

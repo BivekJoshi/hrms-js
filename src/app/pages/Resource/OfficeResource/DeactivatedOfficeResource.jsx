@@ -1,16 +1,19 @@
 import MaterialTable from "material-table";
-import React from "react";
+import React, { useState } from "react";
 import tableIcons from "../../../../theme/overrides/TableIcon";
-import {  useGetDeactivatedOfficeResource } from "../../../hooks/resource/officeResource/useOfficeResource";
+import { useGetDeactivatedOfficeResource } from "../../../hooks/resource/officeResource/useOfficeResource";
 import { Button, Stack } from "@mui/material";
-import useOfficeResourceInactiveForm from "../../../hooks/resource/officeResource/OfficeResourceForm/useOfficeResourceInactiveForm";
+import { OfficeResourceLogisticsModal } from "./OfficeResourceModal";
 
 const DeactivatedOfficeResource = () => {
   const { data, isLoading } = useGetDeactivatedOfficeResource();
+  const [openModal, setopenModal] = useState(false);
+  const [activateOfficeResource, setActivateOfficeResource] = useState({});
+  const handleCloseActivatedModal = () => setopenModal(false);
 
-  const { formik } = useOfficeResourceInactiveForm(data);
   const handleActivate = (rowData) => {
-    const id = rowData.id;
+    setActivateOfficeResource(rowData);
+    setopenModal(true);
   };
 
   const columns = [
@@ -54,34 +57,44 @@ const DeactivatedOfficeResource = () => {
     },
   ];
   return (
-    <MaterialTable
-      icons={tableIcons}
-      title="Deactivated Office Resource"
-      columns={columns}
-      data={data}
-      isLoading={isLoading}
-      options={{
-        exportButton: true,
-        padding: "dense",
-        margin: 50,
-        pageSize: 20,
-        emptyRowsWhenPaging: false,
-        headerStyle: {
-          backgroundColor: "#01579b",
-          color: "#FFF",
-          fontSize: "1rem",
+    <>
+      <MaterialTable
+        icons={tableIcons}
+        title="Deactivated Office Logistics"
+        columns={columns}
+        data={data}
+        isLoading={isLoading}
+        options={{
+          exportButton: true,
           padding: "dense",
-          height: 50,
-          textAlign: "center",
-          border: "2px solid #fff",
-          minHeight: "10px",
-          textTransform: "capitilize",
-        },
-        rowStyle: {
-          fontSize: ".8rem",
-        },
-      }}
-    />
+          margin: 50,
+          pageSize: 5,
+          emptyRowsWhenPaging: false,
+          headerStyle: {
+            backgroundColor: "#01579b",
+            color: "#FFF",
+            fontSize: "1rem",
+            padding: "dense",
+            height: 50,
+            textAlign: "center",
+            border: "2px solid #fff",
+            minHeight: "10px",
+            textTransform: "capitilize",
+          },
+          rowStyle: {
+            fontSize: ".8rem",
+          },
+        }}
+      />
+
+      {openModal && (
+        <OfficeResourceLogisticsModal
+          id={activateOfficeResource?.id}
+          open={openModal}
+          handleCloseModal={handleCloseActivatedModal}
+        />
+      )}
+    </>
   );
 };
 

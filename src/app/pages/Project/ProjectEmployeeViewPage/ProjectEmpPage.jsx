@@ -5,12 +5,24 @@ import ProjectHomePage from "./ProjectHomePage";
 import ProjectTeamPage from "./component/ProjectTeamPage";
 import Project from "../ProjectAdminViewPage/Project";
 import ProjectMyTask from "../ProjectTask/ProjectMyTask";
-import { useGetProjectTaskByProjectId } from "../../../hooks/project/ProjectTask/useProjectTask";
+import { useGetLoggedInUser } from "../../../hooks/auth/usePassword";
+import {
+  useGetProject,
+  useGetProjectWiseEmployee,
+} from "../../../hooks/project/useProject";
+import { useGetEmployee } from "../../../hooks/employee/useEmployee";
+import { useGetTaskLoggedInUser } from "../../../hooks/project/ProjectTask/useProjectTask";
 
 export default function ProjectEmpPage() {
-  const [value, setValue] = React.useState("1");
-  const { data: employeeTask } = useGetProjectTaskByProjectId(1);
+  const { data: logInUserData } = useGetLoggedInUser();
+  const {data:taskData}=useGetTaskLoggedInUser();
+  const { data: projectWiseEmployeeData } = useGetProjectWiseEmployee(
+    logInUserData?.employeeId
+  );
+  const { data: employeeData } = useGetEmployee();
+  const { data: projectData } = useGetProject();
 
+  const [value, setValue] = React.useState("1");
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -27,16 +39,24 @@ export default function ProjectEmpPage() {
           </TabList>
         </Box>
         <TabPanel value="1">
-          <ProjectHomePage data={employeeTask} />
+          <ProjectHomePage
+            projectWiseEmployeeData={projectWiseEmployeeData}
+            employeeData={employeeData}
+            projectData={projectData}
+          />
         </TabPanel>
         <TabPanel value="2">
           <Project />
         </TabPanel>
         <TabPanel value="3">
-          <ProjectTeamPage data={employeeTask} />
+          <ProjectTeamPage
+            projectWiseEmployeeData={projectWiseEmployeeData}
+            employeeData={employeeData}
+            projectData={projectData}
+          />
         </TabPanel>
         <TabPanel value="4">
-          <ProjectMyTask data={employeeTask} />
+          <ProjectMyTask taskData={taskData}/>
         </TabPanel>
       </TabContext>
     </Box>

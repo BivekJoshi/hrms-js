@@ -5,33 +5,6 @@ import CloseIcon from '@mui/icons-material/Close';
 import AddIcon from '@mui/icons-material/Add';
 import { useDeleteQualification } from '../../../../hooks/employee/useQualification';
 
-const grade = [
-  {
-    value: 'FIRST',
-    label: 'First',
-    id: 1,
-  },
-  {
-    value: 'SECOND',
-    label: 'Second',
-    id: 2,
-  },
-  {
-    value: 'PASS',
-    label: 'Pass',
-    id: 3,
-  },
-  {
-    value: 'DISTINCTION',
-    label: 'Distinction',
-    id: 4,
-  },
-  {
-    value: 'FAIL ',
-    label: 'Fail',
-    id: 5,
-  },
-]
 const EmployeeQualificationDetailForm = ({ formik, isLoading }) => {
   const { values, handleChange } = formik;
 
@@ -123,7 +96,6 @@ const EmployeeQualificationDetailForm = ({ formik, isLoading }) => {
                       <TextField
                         id={`education[${index}].grade`}
                         name={`education[${index}].grade`}
-                        select
                         label="Grade"
                         placeholder="Enter your grade"
                         fullWidth
@@ -134,13 +106,7 @@ const EmployeeQualificationDetailForm = ({ formik, isLoading }) => {
                         variant="outlined"
                         onBlur={formik.handleBlur}
                         InputLabelProps={{ shrink: true }}
-                      >
-                        {grade.map((option) => (
-                          <MenuItem key={option?.id} value={option?.value}>
-                            {option.label}
-                          </MenuItem>
-                        ))}
-                      </TextField>
+                      />
                     </Grid>
 
                     <Grid

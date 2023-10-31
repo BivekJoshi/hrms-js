@@ -7,6 +7,18 @@ export const getofficeResource = async () => {
   const data = await axiosInstance.get(`/office-resource/get-all`);
   return data;
 };
+  /*________________________GET used OFFICE RESOURCE_____________________________________*/
+
+export const getUsedOfficeResource = async () => {
+  const data = await axiosInstance.get(`/office-resource/in-use`);
+  return data;
+};
+  /*________________________GET not used OFFICE RESOURCE_____________________________________*/
+
+export const getAvailableOfficeResource = async () => {
+  const data = await axiosInstance.get(`/office-resource/not/in-use`);
+  return data;
+};
 
 {
   /*________________________GET OFFICE RESOURCE BY OFFICE RESOURCE ID_____________________________________*/
@@ -45,8 +57,7 @@ export const editofficeResource = async (formData) => {
 };
 
 {
-  /*________________________EDIT OFFICE RESOURCE ACTIVE-INACTIVE_____________________________________*/
-}
+  /*________________________EDIT OFFICE RESOURCE ACTIVE-INACTIVE_____________________________________*/}
 export const editofficeResourceActiveInactive = async (formData) => {
   const { id, isActive } = formData;
   const data = await axiosInstance.put(

@@ -1,5 +1,6 @@
 import { Button } from "@mui/material";
 import React from "react";
+import useAuth from "../../auth/hooks/component/login/useAuth";
 
 const HocButton = ({
   buttonName,
@@ -11,23 +12,34 @@ const HocButton = ({
   icon,
   disabledIcon,
   color,
+  hoverBg,
 }) => {
-  const isDiabled = !permissions;
+  const isDisabled = !permissions;
   const disabledBg = "";
   const disabledColor = "";
 
-  return (
+  const { isEmployee } = useAuth();
+  const isIcon = typeof buttonName === "string" && buttonName.trim() === "";
+  return isEmployee ? (
+    ""
+  ) : (
     <Button
       sx={{
         ...sx,
-        backgroundColor:isDiabled ? disabledBg : bg,
-        color: isDiabled ? disabledColor : color,
-        cursor: isDiabled ? "not-allowed" : "pointer",
+        backgroundColor: isDisabled ? disabledBg : bg,
+        color: isDisabled ? disabledColor : color,
+        cursor: isDisabled ? "not-allowed" : "pointer",
+        minWidth: isIcon ? "0px" : "auto",
+        padding: isIcon ? "0px" : "auto",
+        '&:hover':{
+          backgroundColor: isDisabled ? "" : hoverBg,
+        }
       }}
+      
       variant={variant}
-      onClick={isDiabled ? null : onClick}
+      onClick={isDisabled ? null : onClick}
     >
-      {isDiabled ? (disabledIcon || icon || buttonName) : icon || buttonName}
+      {isDisabled ? disabledIcon || icon || buttonName : icon || buttonName}
     </Button>
   );
 };

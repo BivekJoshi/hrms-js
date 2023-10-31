@@ -41,7 +41,7 @@ const Company = ({ permissions }) => {
             </TabList>
 
             <HocButton
-              permissions={permissions}
+              permissions={permissions.canAdd}
               color={"primary"}
               variant={"contained"}
               onClick={handleAddOpenModal}

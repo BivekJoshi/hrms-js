@@ -16,8 +16,10 @@ import DeleteConfirmationModal from "../../components/Modal/DeleteConfirmationMo
 import tableIcons from "../../../theme/overrides/TableIcon";
 import PermissionHoc from "../../hoc/permissionHoc";
 import HocButton from "../../hoc/hocButton";
+import useAuth from "../../../auth/hooks/component/login/useAuth";
 
 const Department = ({ permissions }) => {
+  const {isEmployee}=useAuth();
   const { data: departmentData, isLoading } = useGetDepartment();
 
   const [openAddModal, setOpenAddModal] = useState(false);
@@ -77,25 +79,34 @@ const Department = ({ permissions }) => {
       emptyValue: "-",
       sorting: false,
     },
-    {
-      title: "Actions",
-      render: (rowData) => (
-        <Stack direction="row" spacing={0}>
-          <HocButton
-            permissions={permissions}
-            onClick={() =>handleEditDepartment(rowData)}
-            icon={<ModeEditOutlineIcon />}
-          />
-          <HocButton
-            permissions={permissions}
-            onClick={() =>handleDeleteDepartment(rowData)}
-            icon={<DeleteIcon />}
-          />
-        </Stack>
-      ),
-      sorting: false,
-    },
   ].filter(Boolean);
+
+  const actions = [
+    {
+      icon: () => (
+        <HocButton
+          permissions={permissions.canEdit}
+          icon={<ModeEditOutlineIcon />}
+        />
+      ),
+      tooltip: "Edit Department",
+      onClick: (event, rowData) => handleEditDepartment(rowData),
+    },
+    {
+      icon: () => (
+        <HocButton
+          permissions={permissions.canDelete}
+          icon={<DeleteIcon />}
+        />
+      ),
+      tooltip: "Delete Department",
+      onClick: (event, rowData) => handleDeleteDepartment(rowData),
+    },
+  ];
+  
+  if (isEmployee) {
+    actions.length = 0;
+  }
 
   if (isLoading) return <>Loading</>;
 
@@ -104,7 +115,7 @@ const Department = ({ permissions }) => {
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
         <HocButton
           permissions={permissions}
-          color= {"primary"}
+          color={"primary"}
           variant={"contained"}
           onClick={handleAddOpenModal}
           buttonName={"+ Add Department"}
@@ -126,6 +137,7 @@ const Department = ({ permissions }) => {
           pageSize: 10,
           tableLayout: "auto",
           emptyRowsWhenPaging: false,
+          actionsColumnIndex: -1,
           headerStyle: {
             backgroundColor: "#01579b",
             color: "#FFF",
@@ -141,6 +153,7 @@ const Department = ({ permissions }) => {
             fontSize: ".8rem",
           },
         }}
+        actions={actions}
       />
 
       {openEditModal && (

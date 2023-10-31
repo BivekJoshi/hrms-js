@@ -5,15 +5,16 @@ import { Breadcrumbs, Typography } from "@mui/material";
 import Loadable from "../app/components/Header/Loader/Loadable";
 import ThemeModeContext from "../theme/ThemeModeContext";
 import ProjectAddViewEmployeePage from "../app/pages/Project/ProjectEmployeeViewPage/ProjectAddViewEmployeePage";
+import { ProjectDashboard } from "../app/pages/Project/ProjectDashboard/ProjectDashboard";
 
 const ProfileDetail = Loadable(
   lazy(() => import("../app/pages/Auth/Profile/ProfileDetail"))
 );
-const DeactivatedOfficeResource = Loadable(
-  lazy(() =>
-    import("../app/pages/Resource/OfficeResource/DeactivatedOfficeResource")
-  )
-);
+// const DeactivatedOfficeResource = Loadable(
+//   lazy(() =>
+//     import("../app/pages/Resource/OfficeResource/DeactivatedOfficeResource")
+//   )
+// );
 const OfficeResource = Loadable(
   lazy(() => import("../app/pages/Resource/OfficeResource/OfficeResource"))
 );
@@ -77,6 +78,9 @@ const ResetPassword = Loadable(
 const UserController = Loadable(
   lazy(() => import("../app/pages/Auth/UserControl/UserController"))
 );
+// const ProjectDashboard = Loadable(
+//   lazy(() => import("../app/pages/Project/ProjectDashboard/ProjectDashboard"))
+// );
 
 const adminRoutes = [
   {
@@ -84,6 +88,12 @@ const adminRoutes = [
     name: "Dashboard",
     id: nanoid(),
     component: <Dashboard />,
+  },
+  {
+    path: "project/dashboard",
+    name: "Project Dashboard",
+    id: nanoid(),
+    component: <ProjectDashboard />,
   },
   {
     path: "employee",
@@ -169,12 +179,12 @@ const adminRoutes = [
     id: nanoid(),
     component: <ProjectAddViewEmployeePage />,
   },
-  {
-    path: "project/get-deactivated-projects",
-    name: "Inactive Project",
-    id: nanoid(),
-    component: <DeactivatedProject component="deactivate-project" />,
-  },
+  // {
+  //   path: "project/get-deactivated-projects",
+  //   name: "Inactive Project",
+  //   id: nanoid(),
+  //   component: <DeactivatedProject component="deactivate-project" />,
+  // },
   {
     path: "event",
     name: "Event",
@@ -185,7 +195,7 @@ const adminRoutes = [
     path: "holiday",
     name: "Holiday",
     id: nanoid(),
-    component: <Holiday />,
+    component: <Holiday component="holiday"/>,
   },
   {
     path: "reset-password",
@@ -199,23 +209,23 @@ const adminRoutes = [
     id: nanoid(),
     component: <ProfileDetail />,
   },
-  {
-    path: "resource/Office/Deactivated",
-    name: "Office Resource Deactivated",
-    id: nanoid(),
-    component: <DeactivatedOfficeResource />,
-  },
+  // {
+  //   path: "resource/Office/Deactivated",
+  //   name: "Office Resource Deactivated",
+  //   id: nanoid(),
+  //   component: <DeactivatedOfficeResource component="resourceDeactivated"/>,
+  // },
   {
     path: "resource/office",
-    name: "Office Resource",
+    name: "Office Logistics",
     id: nanoid(),
-    component: <OfficeResource />,
+    component: <OfficeResource component="officeResource"/>,
   },
   {
     path: "resource/employee",
-    name: "Employee Resource",
+    name: "Employee Logistics",
     id: nanoid(),
-    component: <EmployeeResource />,
+    component: <EmployeeResource component="employeeResource"/>,
   },
   {
     path: "users",

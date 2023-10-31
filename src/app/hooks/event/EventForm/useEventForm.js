@@ -4,7 +4,6 @@ import { EventSchema } from "../Validation/EventSchema";
 
 const useEventForm = (setOpenSubmitModal, handleCloseModal) => {
   const { mutate: addEvent, data } = useAddEvent({});
-  // console.log(data,"data hai ma ");
   const { mutate: editEvent } = useEditEvent({});
 
   const formik = useFormik({
@@ -49,7 +48,7 @@ const useEventForm = (setOpenSubmitModal, handleCloseModal) => {
     values = { ...values };
     addEvent(values, {
       onSuccess: (data) => {
-        console.log("pk");
+        
       },
     });
   };
