@@ -52,7 +52,7 @@ export default function AdminHeader({ open, handleDrawerOpen }) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant='h6' noWrap>
+          <Typography variant='h6' noWrap color={'#fff'}>
             Human Resource Management System
           </Typography>
         </Box>
