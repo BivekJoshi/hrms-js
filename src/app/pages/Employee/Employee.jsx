@@ -1,40 +1,39 @@
-import * as React from "react";
-import { useState } from "react";
-import { Box, Button, ButtonGroup, Modal } from "@mui/material";
-import Tab from "@mui/material/Tab";
-import TabContext from "@mui/lab/TabContext";
-import TabList from "@mui/lab/TabList";
-import TabPanel from "@mui/lab/TabPanel";
+import * as React from 'react';
+import { useState } from 'react';
+import { Box, Button, ButtonGroup, Modal } from '@mui/material';
+import Tab from '@mui/material/Tab';
+import TabContext from '@mui/lab/TabContext';
+import TabList from '@mui/lab/TabList';
+import TabPanel from '@mui/lab/TabPanel';
 
-import EmployeeTable from "./EmployeeView/EmployeeTable";
-import EmployeeBasicInfoForm from "../../components/Form/Employee/EmployeeBasicInfoForm/EmployeeBasicInfoForm";
-import useAddEmployeeForm from "../../hooks/employee/AddEmployee/useAddEmployeeForm";
-import EmployeeGrid from "./EmployeeView/EmployeeGrid";
-import { useNavigate } from "react-router-dom";
-import { ButtonComponent } from "../../components/Button/ButtonComponent";
-import "./Style/Style.css";
-import ThemeModeContext from "../../../theme/ThemeModeContext";
-import { toast } from "react-toastify";
+import EmployeeTable from './EmployeeView/EmployeeTable';
+import EmployeeBasicInfoForm from '../../components/Form/Employee/EmployeeBasicInfoForm/EmployeeBasicInfoForm';
+import useAddEmployeeForm from '../../hooks/employee/AddEmployee/useAddEmployeeForm';
+import EmployeeGrid from './EmployeeView/EmployeeGrid';
+import { useNavigate } from 'react-router-dom';
+import { ButtonComponent } from '../../components/Button/ButtonComponent';
+import './Style/Style.css';
+import ThemeModeContext from '../../../theme/ThemeModeContext';
 
 const Employee = () => {
   const { mode } = React.useContext(ThemeModeContext);
 
   const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    bgcolor: "background.paper",
-    border: "1px solid #808080",
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    bgcolor: 'background.paper',
+    border: '1px solid #808080',
     borderRadius: 2,
     boxShadow: 24,
     p: 4,
-    background: mode === "light" ? "" : "#413e3e",
+    background: mode === 'light' ? '' : '#413e3e',
   };
 
   const navigate = useNavigate();
 
-  const [value, setValue] = React.useState("1");
+  const [value, setValue] = React.useState('1');
 
   const [openAddModal, setOpenAddModal] = useState(false);
   const handleAddOpenModal = () => setOpenAddModal(true);
@@ -50,53 +49,48 @@ const Employee = () => {
 
   const handleSubmit = () => {
     formik.handleSubmit();
-    if (formik.isValid) {
-      setOpenAddModal(false);
-    } else {
-      toast.error("Please make sure you have filled the form correctly");
-    }
   };
 
   return (
     <>
       <TabContext value={value}>
-        <Box sx={{ width: "100%" }}>
+        <Box sx={{ width: '100%' }}>
           <Box
             sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
               borderTop: 1,
-              borderColor: "divider",
+              borderColor: 'divider',
             }}
           >
-            <TabList onChange={handleChange} aria-label="lab API tabs example">
-              <Tab label="Grid View" value="1" />
-              <Tab label="Table View" value="2" />
+            <TabList onChange={handleChange} aria-label='lab API tabs example'>
+              <Tab label='Grid View' value='1' />
+              <Tab label='Table View' value='2' />
             </TabList>
             <ButtonGroup
-              variant="contained"
-              sx={{ gap: "12px", textDecoration: "none", boxShadow: "0" }}
+              variant='contained'
+              sx={{ gap: '12px', textDecoration: 'none', boxShadow: '0' }}
             >
-                <ButtonComponent
-                  NameClass="buttonGroup"
-                  OnClick={() => {
-                    navigate("deactivated");
-                  }}
-                  buttonName="Inactive Employee"
-                  BGColor="white"
-                  TextColor="black"
-                />
-                <ButtonComponent
-                  OnClick={handleAddOpenModal}
-                  buttonName="+Add Employee"
-                />
+              <ButtonComponent
+                NameClass='buttonGroup'
+                OnClick={() => {
+                  navigate('deactivated');
+                }}
+                buttonName='Inactive Employee'
+                BGColor='white'
+                TextColor='black'
+              />
+              <ButtonComponent
+                OnClick={handleAddOpenModal}
+                buttonName='+Add Employee'
+              />
             </ButtonGroup>
           </Box>
-          <TabPanel value="1">
+          <TabPanel value='1'>
             <EmployeeGrid />
           </TabPanel>
-          <TabPanel value="2">
+          <TabPanel value='2'>
             <EmployeeTable />
           </TabPanel>
         </Box>
@@ -105,22 +99,22 @@ const Employee = () => {
       <Modal
         open={openAddModal}
         onClose={() => setOpenAddModal(false)}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        aria-labelledby='modal-modal-title'
+        aria-describedby='modal-modal-description'
       >
         <div>
           <Box sx={style}>
             <EmployeeBasicInfoForm formik={formik} />
             <Box
-              sx={{ display: "flex", justifyContent: "flex-end", gap: "1rem" }}
+              sx={{ display: 'flex', justifyContent: 'flex-end', gap: '1rem' }}
             >
-              <ButtonComponent buttonName={"submit"} OnClick={handleSubmit} />
+              <ButtonComponent buttonName={'submit'} OnClick={handleSubmit} />
               <ButtonComponent
-                buttonName={"Cancel"}
+                buttonName={'Cancel'}
                 OnClick={() => {
                   setOpenAddModal(false);
                 }}
-                BGColor="red"
+                BGColor='red'
               />
             </Box>
           </Box>
@@ -130,16 +124,16 @@ const Employee = () => {
       <Modal
         open={openSubmitModal}
         onClose={() => setOpenSubmitModal(false)}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        aria-labelledby='modal-modal-title'
+        aria-describedby='modal-modal-description'
       >
         <div>
           <Box sx={style}>
             <h3>Do you like to add more Details of this Employee??</h3>
-            <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+            <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
               <Button
-                variant="contained"
-                style={{ marginTop: "10px" }}
+                variant='contained'
+                style={{ marginTop: '10px' }}
                 sx={{ mt: 3, ml: 1 }}
                 onClick={() => {
                   navigate(`edit/${data?.id}`);
@@ -148,13 +142,13 @@ const Employee = () => {
                 Yes
               </Button>
               <Button
-                variant="contained"
-                style={{ marginTop: "10px" }}
+                variant='contained'
+                style={{ marginTop: '10px' }}
                 onClick={() => {
                   setOpenSubmitModal(false);
                 }}
                 sx={{ mt: 3, ml: 1 }}
-                color="error"
+                color='error'
               >
                 No
               </Button>
