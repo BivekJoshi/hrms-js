@@ -1,10 +1,10 @@
-import React from "react";
-import { Chart as ChartJS, CategoryScale, LinearScale } from "chart.js";
-import { BarElement, Title, Tooltip, Legend } from "chart.js";
-import { Bar } from "react-chartjs-2";
-import { ArcElement } from "chart.js";
-import { Box, Card } from "@mui/material";
-import "./Style/Style.css";
+import React from 'react';
+import { Chart as ChartJS, CategoryScale, LinearScale } from 'chart.js';
+import { BarElement, Title, Tooltip, Legend } from 'chart.js';
+import { Bar } from 'react-chartjs-2';
+import { ArcElement } from 'chart.js';
+import { Box, Card } from '@mui/material';
+import './Style/Style.css';
 
 ChartJS.register(
   CategoryScale,
@@ -21,28 +21,28 @@ export const BarChatDiagram = ({ data }) => {
     responsive: true,
     plugins: {
       legend: {
-        position: "top",
+        position: 'top',
       },
       title: {
         display: true,
-        text: "Dashboard Bar Chart",
+        text: 'Employee Statistics',
       },
     },
   };
 
   const labels = [
-    "All Employees",
-    "New Employees",
-    "Male Employees",
-    "Female Employees",
-    "All Projects",
+    'All Employees',
+    'New Employees',
+    'Male Employees',
+    'Female Employees',
+    'Total Projects',
   ];
 
   const barChartData = {
     labels,
     datasets: [
       {
-        label: "Dataset 1",
+        label: 'Employee Count',
         data: [
           `${data?.allEmployees}`,
           `${data?.newEmployees}`,
@@ -51,22 +51,26 @@ export const BarChatDiagram = ({ data }) => {
           `${data?.allProjects}`,
         ],
         backgroundColor: [
-          "#F65E3C",
-          "#A1E000",
-          "#9137B8",
-          "#D93084",
-          "#B6D0D9",
+          '#4CAF50',
+          '#2196F3',
+          '#9E9E9E',
+          '#FFC107',
+          '#FF5722',
         ],
-        color:"white"
+        color: 'white',
       },
     ],
   };
- 
+
   return (
-    <Box alignSelf="self-start" marginTop="-1rem">
+    <div style={{ width: '50%' }}>
       <Card>
-        <Bar options={barChartOptions} data={barChartData} style={{color:"white" , display:"inline-block"}} />
+        <Bar
+          options={barChartOptions}
+          data={barChartData}
+          style={{ color: 'white', display: 'inline-block' }}
+        />
       </Card>
-    </Box>
+    </div>
   );
 };

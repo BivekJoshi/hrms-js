@@ -77,12 +77,15 @@ const Dashboard = () => {
           <h3 style={{ maxWidth: '200px' }}>{formattedDate}</h3>
         </div>
       </Box>
+      <Typography variant='h5' marginTop={'16px'}>
+        Summary
+      </Typography>
+
       <Box sx={{ display: 'grid', gridTemplateRows: '1fr', rowGap: '2rem' }}>
         <Grid
-          style={{ marginTop: '10px' }}
+          style={{ marginTop: '10px', width: '100%' }}
           container
-          rowSpacing={2}
-          justifyContent='space-around'
+          rowSpacing={1}
           gap={{ sm: '12px', lg: '32px' }}
         >
           <DashboardCard
@@ -122,16 +125,17 @@ const Dashboard = () => {
           />
         </Grid>
 
-        <Box
-          sx={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))',
-            gap: '2rem',
+        <Typography variant='h5'>Employee Information</Typography>
+
+        <div
+          style={{
+            display: 'flex',
+            gap: '16px',
           }}
         >
           <BarChatDiagram data={dashboardData} />
           <PieChartDiagram data={dashboardData} />
-        </Box>
+        </div>
 
         <Box
           style={{
@@ -141,22 +145,17 @@ const Dashboard = () => {
           }}
         >
           <Box>
-            <Box
+            <Typography variant='h5'>Project Information</Typography>
+            <Typography
               display='flex'
               flexDirection='row'
               justifyContent='space-between'
-            >
-              <h3>Project Information</h3>
-              <Typography
-                display='flex'
-                flexDirection='row'
-                justifyContent='space-between'
-              >
-                <h3 style={{ fontWeight: '800' }}>
-                  Total Project : {projectDataCount?.total}
-                </h3>
-              </Typography>
-            </Box>
+              alignItems='center'
+            ></Typography>
+
+            <Typography variant='v6'>
+              Total Project : {projectDataCount?.total}
+            </Typography>
             <ProjectProgressCard projectDataCount={projectDataCount} />
           </Box>
 
