@@ -21,11 +21,10 @@ import HolidayVillageIcon from "@mui/icons-material/HolidayVillage";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import BreadCrumbs from "../../../routes/employeeRoutes";
 import logo from "../../../assets/logo.png";
-import CoPresentIcon from '@mui/icons-material/CoPresent';
-import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import ApprovalOutlinedIcon from '@mui/icons-material/ApprovalOutlined';
-import "./Style/Style.css"
-
+import CoPresentIcon from "@mui/icons-material/CoPresent";
+import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import ApprovalOutlinedIcon from "@mui/icons-material/ApprovalOutlined";
+import "./Style/Style.css";
 
 const drawerWidth = 250;
 
@@ -123,36 +122,6 @@ export default function EmployeeSidebar() {
           sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
         />
       ),
-      subMenus: [],
-    },
-    {
-      name: "Department",
-      icon: (
-        <WorkspacesIcon
-          sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
-        />
-      ),
-      path: "department",
-      subMenus: [],
-    },
-    {
-      name: "Designation",
-      icon: (
-        <AssignmentIndIcon
-          sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
-        />
-      ),
-      path: "designation",
-      subMenus: [],
-    },
-    {
-      name: "Company",
-      icon: (
-        <BusinessIcon
-          sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
-        />
-      ),
-      path: "company",
       subMenus: [],
     },
     {
@@ -325,10 +294,10 @@ export default function EmployeeSidebar() {
             alignItems: "center",
             padding: "10px",
             flexDirection: "column",
-            position:"sticky",
-            bottom :"0",
+            position: "sticky",
+            bottom: "0",
           }}
-          bgcolor={mode ==="light" ? "black" :"White"}
+          bgcolor={mode === "light" ? "black" : "White"}
         >
           {/* <Button
             variant="contained"
@@ -343,7 +312,7 @@ export default function EmployeeSidebar() {
           <Typography
             variant="body2"
             sx={{ marginRight: "8px", marginTop: "1rem" }}
-            color={mode ==="light" ? "White" :"black"}
+            color={mode === "light" ? "White" : "black"}
           >
             {mode === "light" ? "Dark" : "Light"} Mode
             <Switch checked={mode === "dark"} onChange={toggleMode} />

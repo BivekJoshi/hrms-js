@@ -90,24 +90,24 @@ const employeeRoutes = [
     id: nanoid(),
     component: <ApplyLeaveField />,
   },
-  {
-    path: "designation",
-    name: "Designation",
-    id: nanoid(),
-    component: <Designation component="designation"/>,
-  },
-  {
-    path: "company",
-    name: "Company",
-    id: nanoid(),
-    component: <Company component="company"/>,
-  },
-  {
-    path: "department",
-    name: "Department",
-    id: nanoid(),
-    component: <Department component="department"/>,
-  },
+  // {
+  //   path: "designation",
+  //   name: "Designation",
+  //   id: nanoid(),
+  //   component: <Designation component="designation"/>,
+  // },
+  // {
+  //   path: "company",
+  //   name: "Company",
+  //   id: nanoid(),
+  //   component: <Company component="company"/>,
+  // },
+  // {
+  //   path: "department",
+  //   name: "Department",
+  //   id: nanoid(),
+  //   component: <Department component="department"/>,
+  // },
   {
     path: "todolist",
     name: "To Do List",
