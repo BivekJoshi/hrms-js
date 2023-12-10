@@ -123,36 +123,6 @@ export default function EmployeeSidebar() {
       subMenus: [],
     },
     {
-      name: "Department",
-      icon: (
-        <WorkspacesIcon
-          sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
-        />
-      ),
-      path: "department",
-      subMenus: [],
-    },
-    {
-      name: "Designation",
-      icon: (
-        <AssignmentIndIcon
-          sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
-        />
-      ),
-      path: "designation",
-      subMenus: [],
-    },
-    {
-      name: "Company",
-      icon: (
-        <BusinessIcon
-          sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
-        />
-      ),
-      path: "company",
-      subMenus: [],
-    },
-    {
       name: "Project",
       icon: (
         <AddchartIcon
