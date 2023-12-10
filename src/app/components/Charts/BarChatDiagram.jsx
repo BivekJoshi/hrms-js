@@ -1,72 +1,117 @@
-import React from "react";
-import { Chart as ChartJS, CategoryScale, LinearScale } from "chart.js";
-import { BarElement, Title, Tooltip, Legend } from "chart.js";
-import { Bar } from "react-chartjs-2";
-import { ArcElement } from "chart.js";
-import { Box, Card } from "@mui/material";
-import "./Style/Style.css";
+import React, { useContext } from "react";
+import ReactApexChart from "react-apexcharts";
+import { Box } from "@mui/material";
+import ThemeModeContext from "../../../theme/ThemeModeContext";
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-  ArcElement
-);
+const BarChatDiagram = ({ dashboardData }) => {
+  const { mode } = useContext(ThemeModeContext);
+  console.log(dashboardData);
 
-export const BarChatDiagram = ({ data }) => {
-  const barChartOptions = {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: "top",
-      },
-      title: {
-        display: true,
-        text: "Dashboard Bar Chart",
-      },
-    },
-  };
-
-  const labels = [
+  const names = [
     "All Employees",
     "New Employees",
     "Male Employees",
     "Female Employees",
     "All Projects",
   ];
-
-  const barChartData = {
-    labels,
-    datasets: [
+  const Data = [
+    `${dashboardData?.allEmployees}`,
+    `${dashboardData?.newEmployees}`,
+    `${dashboardData?.maleEmployees}`,
+    `${dashboardData?.femaleEmployees}`,
+    `${dashboardData?.allProjects}`,
+  ];
+  
+  const chartOptions = {
+    chart: {
+      type: "bar",
+      height: 430,
+    },
+    plotOptions: {
+      bar: {
+        horizontal: false, // Swap to false to make it vertical
+        dataLabels: {
+          position: "top",
+        },
+      },
+    },
+    dataLabels: {
+      enabled: true,
+      style: {
+        fontSize: "12px",
+        colors: ["#fff"],
+      },
+    },
+    stroke: {
+      show: true,
+      width: 0,
+      colors: ["#fff"],
+    },
+    tooltip: {
+      shared: true,
+      intersect: false,
+    },
+    xaxis: {
+      categories: names,
+      labels: {
+        style: {
+          colors: [
+            mode === "dark" ? "white" : "black",
+            mode === "dark" ? "white" : "black",
+            mode === "dark" ? "white" : "black",
+            mode === "dark" ? "white" : "black",
+            mode === "dark" ? "white" : "black",
+            mode === "dark" ? "white" : "black",
+            mode === "dark" ? "white" : "black",
+            mode === "dark" ? "white" : "black",
+            mode === "dark" ? "white" : "black",
+          ],
+        },
+      },
+    },
+    yaxis: {
+      categories: names, // Swap with xaxis
+      labels: {
+        style: {
+          colors: [mode === "dark" ? "white" : "black"],
+        },
+      },
+    },
+    legend: {
+      labels: {
+        colors: [
+          mode === "dark" ? "white" : "black",
+          mode === "dark" ? "white" : "black",
+        ],
+      },
+    },
+  };
+  const chartData = {
+    series: [
       {
-        label: "Dataset 1",
-        data: [
-          `${data?.allEmployees}`,
-          `${data?.newEmployees}`,
-          `${data?.maleEmployees}`,
-          `${data?.femaleEmployees}`,
-          `${data?.allProjects}`,
-        ],
-        backgroundColor: [
-          "#F65E3C",
-          "#A1E000",
-          "#9137B8",
-          "#D93084",
-          "#B6D0D9",
-        ],
-        color:"white"
+        name: names, // Array of names
+        data: Data.map(value => parseFloat(value)),
       },
     ],
+    options: chartOptions,
   };
- 
   return (
-    <Box alignSelf="self-start" marginTop="-1rem">
-      <Card>
-        <Bar options={barChartOptions} data={barChartData} style={{color:"white" , display:"inline-block"}} />
-      </Card>
+    <Box
+      padding={2}
+      borderRadius={"6px"}
+      color={"white"}
+      // bgcolor={theme.palette.background.alt}
+      id="chart"
+    >
+      <ReactApexChart
+        options={chartOptions}
+        series={chartData.series}
+        type="bar"
+        height={250}
+      />
+      hi
     </Box>
   );
 };
+
+export default BarChatDiagram;

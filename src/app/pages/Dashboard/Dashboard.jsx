@@ -5,7 +5,6 @@ import { useGetDashboard } from "../../hooks/dashboard/useDashboard";
 import { useGetProjectCount } from "../../hooks/dashboard/useDashboard";
 import { useGetProject } from "../../hooks/project/useProject";
 import { PieChartDiagram } from "../../components/Charts/PieChartDiagram";
-import { BarChatDiagram } from "../../components/Charts/BarChatDiagram";
 import { ProjectProgressCard } from "../../components/cards/ProjectProgress/ProjectProgressCard";
 import { ProjectTable } from "./DashboardTable/ProjectTable";
 import { FaPeopleGroup, FaGifts, FaUsers } from "react-icons/fa6";
@@ -20,6 +19,7 @@ import Male from "../../../assets/male.png";
 import { useGetLoggedInUser } from "../../hooks/auth/usePassword";
 import { useGetPendingLeave } from "../../hooks/leave/useLeave";
 import { DOC_URL } from "../../../auth/axiosInterceptor";
+import BarChatDiagram from "../../components/Charts/BarChatDiagram";
 
 const Dashboard = () => {
   const { mode } = useContext(ThemeModeContext);
@@ -117,10 +117,9 @@ const Dashboard = () => {
             gap: "2rem",
           }}
         >
-          <BarChatDiagram data={dashboardData} />
+          <BarChatDiagram dashboardData={dashboardData} />
           <PieChartDiagram data={dashboardData} />
         </Box>
-
         <Box
           style={{
             display: "grid",
