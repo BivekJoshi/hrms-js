@@ -1,25 +1,22 @@
-import React, { useEffect } from "react";
+import  { useEffect } from "react";
 import { Navigate, Outlet, useNavigate } from "react-router-dom";
 import { getUser, removeUser } from "../app/utils/cookieHelper";
-import { Box, Container } from "@mui/material";
-import jwtDecode from "jwt-decode";
+import { Box } from "@mui/material";
 
-const ProtectedRoute = ({ redirectTo , allowedRole }) => {
+const ProtectedRoute = ({ redirectTo }) => {
   const navigate = useNavigate();
   const user = getUser();
-  const decode = jwtDecode(user);
-  const userRole = decode?.userRole;
+
  
   useEffect(() => {
-    if (!userRole) {
+    if (!user) {
       removeUser();
       navigate("/");
-    } else if ( userRole !== allowedRole ) {
-      navigate("/")
     }
+    // eslint-disable-next-line
   }, []);
 
-  if (!userRole) return <Navigate to={redirectTo} replace />;
+  if (!user) return <Navigate exact to={redirectTo} />;
 
   return (
     <Box>

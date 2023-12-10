@@ -74,7 +74,6 @@ export const AddProjectEmployeeModal = ({open, handleCloseModal}) => {
 
 export const EditProjectEmployeeModal = ({ open, handleCloseModal, projectTd }) => {
     const { data } = useGetProjectEmployeeById(projectTd);
-    // console.log(data,"Datashubshcbiasbcij");
     return (
       <div>
         <FormModal

@@ -14,7 +14,7 @@ export const LeftEmployDashbord = ({}) => {
   const navigate = useNavigate();
   const { mode } = useContext(ThemeModeContext);
 
-  const monthAd = new Date().toLocaleString('en-US', { month: '2-digit' });
+  const monthAd = new Date().toLocaleString("en-US", { month: "2-digit" });
 
   const { data: employAllNotiData } = useGetEventByMonth(monthAd);
   const { data: currentHoliday } = useGetHolidaybyMonth(monthAd);
@@ -69,7 +69,10 @@ export const LeftEmployDashbord = ({}) => {
                     </Box>
                   </Box>
                   {openItemIndex === index && (
-                    <Box className="notification">
+                    <Box
+                      className="notification"
+                      bgcolor={mode === "light" ? "#e7e2e2" : "#565454"}
+                    >
                       <Typography>At {notify.eventLocation}</Typography>
                       <Typography>Time: {notify.eventTime}</Typography>
                       <Typography>{notify.eventName}</Typography>
@@ -114,7 +117,10 @@ export const LeftEmployDashbord = ({}) => {
                     </Box>
                   </Box>
                   {openHolidayIndex === index && (
-                    <Box className="notification">
+                    <Box
+                      className="notification"
+                      bgcolor={mode === "light" ? "#e7e2e2" : "#565454"}
+                    >
                       <Typography>{notify?.holidayDescription}</Typography>
                     </Box>
                   )}

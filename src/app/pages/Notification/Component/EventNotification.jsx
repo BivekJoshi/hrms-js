@@ -2,6 +2,7 @@ import { Box, ClickAwayListener, Grow, MenuItem } from "@mui/material";
 import { MenuList, Paper, Popper, Typography } from "@mui/material";
 import React from "react";
 import { useGetEmployee } from "../../../hooks/employee/useEmployee";
+import { Link } from "react-router-dom";
 
 export const EventNotification = ({
   Eventname,
@@ -10,7 +11,6 @@ export const EventNotification = ({
   handleClose,
   handleListKeyDown,
 }) => {
-  
   return (
     <>
       <MenuList
@@ -61,12 +61,10 @@ export const LeaveNotification = ({
   handleClose,
   handleListKeyDown,
 }) => {
-  const { data: employeeData, } = useGetEmployee();
+  const { data: employeeData } = useGetEmployee();
 
   const getEmployeeName = (employeeId) => {
-    // const employeeId = data.employeeId;
     const employee = employeeData?.find((emp) => emp.id === employeeId);
-    console.log(employee);
 
     const name = `${employee?.firstName} ${employee?.middleName || ""} ${
       employee?.lastName || ""
@@ -100,8 +98,12 @@ export const LeaveNotification = ({
                 alignItems: "center",
               }}
             >
-              <Typography fontSize="1rem">{getEmployeeName(ename.employeeId)}</Typography>
-             
+              <Link
+                to="/admin/leave"
+                style={{ textDecoration: "none", fontSize: "1rem" }}
+              >
+                {getEmployeeName(ename.employeeId)}
+              </Link>
             </MenuItem>
           ))}
       </MenuList>

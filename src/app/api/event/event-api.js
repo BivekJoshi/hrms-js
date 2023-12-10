@@ -20,7 +20,7 @@ export const getEventById = async (id) => {
 
 {/*________________________GET BY MONTH DATA____________________________________*/ }
 export const getEventByMonth = async (monthAd) => {
-  const data = await axiosInstance.get(`/event/this-month?monthAd=${monthAd}`);
+  const data = await axiosInstance.get(`/event/this-year/month?monthAd=${monthAd}`);
   return data;
 };
 

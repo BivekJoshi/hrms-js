@@ -6,6 +6,7 @@ import {
   Autocomplete,
   Box,
   FormControlLabel,
+  Typography,
 } from "@mui/material";
 import React, { useContext } from "react";
 import { toast } from "react-toastify";
@@ -32,6 +33,7 @@ const LeaveFields = ({ onClose, isLoading, data }) => {
   const { data: leaveTypeData } = useGetLeaveType();
   const { formik } = useLeaveForm(data);
   const { mode } = useContext(ThemeModeContext);
+  const employeeId = data?.employeeId;
 
   const capitalize = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
@@ -42,7 +44,7 @@ const LeaveFields = ({ onClose, isLoading, data }) => {
     return leaveType ? leaveType.leaveName : "";
   };
 
-  const getEmployeeFullName = (employeeId) => {
+  const getEmployeeFullName = () => {
     const employee = employeeData?.find((emp) => emp.id === employeeId);
     if (employee) {
       const { firstName, middleName, lastName } = employee;
@@ -67,19 +69,20 @@ const LeaveFields = ({ onClose, isLoading, data }) => {
       toast.error("Please make sure you have filled the form correctly");
     }
   };
-
+ 
   const submitButtonText = data ? "Update Leave" : "Add Leave";
+
   if (isManager) {
     return (
       !isLoading && (
         <Grid container spacing={3}>
           <Grid item xs={12} sm={12}>
-            <p>
+            <Typography variant="p">
               {getEmployeeFullName(formik.values.employeeId)} wants to take a{" "}
               {getLeaveTypeName(formik.values.leaveTypeId)} Leave From Date{" "}
               {formik.values.fromDate} To Date {formik.values.toDate}. Total of{" "}
               {formik.values.applyLeaveDays} Days
-            </p>
+            </Typography>
           </Grid>
           <Grid item xs={12} sm={12}>
             <TextField
@@ -125,7 +128,8 @@ const LeaveFields = ({ onClose, isLoading, data }) => {
               value={formik.values.leaveRemarks}
               onChange={formik.handleChange}
               error={
-                formik.touched.leaveRemarks && Boolean(formik.errors.leaveRemarks)
+                formik.touched.leaveRemarks &&
+                Boolean(formik.errors.leaveRemarks)
               }
               helperText={
                 formik.touched.leaveRemarks && formik.errors.leaveRemarks
@@ -276,6 +280,8 @@ const LeaveFields = ({ onClose, isLoading, data }) => {
               />
             </Grid>
           )}
+
+         
 
           <Grid item xs={12} sm={6}>
             <TextField

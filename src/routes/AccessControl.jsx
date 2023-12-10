@@ -24,7 +24,7 @@ export const AccessControl = ({ Component }) => {
       userRole === "ROLE_ADMIN" ||
       userRole === "ROLE_MANAGER" ||
       userRole === "ROLE_HR_ADMIN" ||
-      userRole === "ROLE_HR_CLERK"
+      userRole ==="ROLE_HR_CLERK" 
     ) {
       navigate("/admin/dashboard");
     } else if (userRole === "ROLE_EMPLOYEE") {

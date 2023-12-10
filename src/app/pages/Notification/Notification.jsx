@@ -18,14 +18,19 @@ const Notification = ({ data }) => {
   const { data: leaveData } = useGetLeave();
 
   const eventName = data?.events;
-  const eventCount = isManager
-    ? leaveData?.length + data?.eventCount || 0
-    : data?.eventCount || 0;
-  const displayCount = eventCount > 0 ? eventCount : null;
-  const pendingLeaveData = leaveData?.filter(
+
+//leave notification
+  const pendingLeaveData = isManager
+  ?  leaveData?.filter(
     (leave) => leave.leaveStatus === "PENDING"
-  );
-  console.log(pendingLeaveData);
+  ):"";
+
+  const eventCount = isManager
+  ? pendingLeaveData?.length + data?.eventCount || 0
+  : data?.eventCount || 0;
+
+  const displayCount = eventCount > 0 ? eventCount : null;
+
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
 

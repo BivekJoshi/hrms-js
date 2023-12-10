@@ -4,8 +4,7 @@ import { useGetEmployeeById } from "../../../hooks/employee/useEmployee";
 import FormModal from "../../../components/Modal/FormModal";
 
 export const EditDeactivationEmployeeModal = ({ open, handleCloseModal, id }) => {
-    const { data } = useGetEmployeeById(id);
-    
+    const { data } = useGetEmployeeById(id);    
     return (
         <div>
             <FormModal
@@ -22,7 +21,7 @@ export const EditActivationEmployeeModal = ({ open, handleCloseModal, id }) => {
             <FormModal
                 open={open}
                 onClose={handleCloseModal}
-                formComponent={<EditEmployeeActivateFields onClose={handleCloseModal} id={id} />} />
+                formComponent={<EditEmployeeActivateFields onClose={handleCloseModal} id={id}/>} />
         </div>
     )
 }

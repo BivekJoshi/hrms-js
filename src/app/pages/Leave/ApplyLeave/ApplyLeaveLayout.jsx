@@ -8,6 +8,7 @@ import { Chip, Fab, Typography } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from "react-router-dom";
 import LeaveUserView from "../LeaveUserView";
+import ThemeModeContext from "../../../../theme/ThemeModeContext";
 
 const fabStyle = {
   position: "fixed",
@@ -61,6 +62,8 @@ const formattedDate = `${dayWithOrdinal(today.getDate())} ${
 const ApplyLeaveLayout = () => {
   const navigate = useNavigate();
 
+  const{mode} =React.useContext(ThemeModeContext)
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
@@ -75,11 +78,9 @@ const ApplyLeaveLayout = () => {
         <Grid item xs={12}>
           <Item>
             <Box
-              style={{
-                borderLeft: "6px solid green",
-                paddingLeft: 10,
-                backgroundColor: "#efeeeb",
-              }}
+              borderLeft="6px solid green"
+              paddingLeft="10"
+              backgroundColor={mode === "light" ? "#efeeeb" : "#4f4e4c"}
               padding=".5rem"
             >
               <Typography fontSize="1.2rem">
@@ -105,7 +106,7 @@ const ApplyLeaveLayout = () => {
                   </Typography>
                 </Grid>
                 <Grid item xs={2}>
-                  <Chip label="Rejected" sx={{fontSize:".7rem"}}/>
+                  <Chip label="Rejected" sx={{ fontSize: ".7rem" }} />
                 </Grid>
               </Grid>
             </Box>

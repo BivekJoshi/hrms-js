@@ -103,7 +103,7 @@ export const useDeleteLeave = ({ onSuccess }) => {
     onSuccess: (data, variables, context) => {
       toast.success("Successfully deleted Leave");
       onSuccess && onSuccess(data, variables, context);
-      queryClient.invalidateQueries("useGetLoggedInUserLeave");
+      queryClient.invalidateQueries("getLoggedInUserLeave");
     },
     onError: (err, _variables, _context) => {
       toast.error(`Error: ${err.message}`);

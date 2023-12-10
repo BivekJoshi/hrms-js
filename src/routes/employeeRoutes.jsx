@@ -9,6 +9,7 @@ import AttendenceInfo from "../app/pages/Employee/EmployeeViewPage/InfoTabs/Atte
 import ProjectEmpPage from "../app/pages/Project/ProjectEmployeeViewPage/ProjectEmppage";
 import EditEmployee from "../app/pages/Employee/AddEmployee/EditEmployee";
 import ProfileDetail from "../app/pages/Auth/Profile/ProfileDetail";
+import { ProjectDashboard } from "../app/pages/Project/ProjectDashboard/ProjectDashboard";
 
 const ResetPassword = Loadable(
   lazy(() => import("../app/pages/Auth/ResetPassword/ResetPassword"))
@@ -47,6 +48,12 @@ const employeeRoutes = [
     name: "Employee Dashboard",
     id: nanoid(),
     component: <EmployeeDashboard />,
+  },
+  {
+    path: "project/dashboard",
+    name: "Project Dashboard",
+    id: nanoid(),
+    component: <ProjectDashboard />,
   },
   // {
   //   path: `viewprofile/${loggedUserData?.id}`,

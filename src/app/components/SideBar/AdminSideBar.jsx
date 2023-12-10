@@ -1,47 +1,52 @@
-import React, { useContext, useState } from "react";
-import { styled } from "@mui/material/styles";
-import { Box, Drawer, Divider, List, ListItemButton } from "@mui/material";
-import { ListItemIcon } from "@mui/material";
-import { ListItemText, Collapse, IconButton } from "@mui/material/";
-import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
-import { ExpandLess, ExpandMore } from "@mui/icons-material";
-import { Card, Fab, Switch, Typography } from "@mui/material";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import { ThemeModeContext } from "../../../theme/ThemeModeContext";
-import AdminHeader from "../Header/AdminHeader";
-import BreadCrumbs from "../../../routes/adminRoutes";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
-import PersonIcon from "@mui/icons-material/Person";
-import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import MailIcon from "@mui/icons-material/Mail";
-import CakeIcon from "@mui/icons-material/Cake";
-import HowToRegIcon from "@mui/icons-material/HowToReg";
-import WorkspacesIcon from "@mui/icons-material/Workspaces";
-import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
-import BusinessIcon from "@mui/icons-material/Business";
-import PlaylistAddCheckIcon from "@mui/icons-material/PlaylistAddCheck";
-import AddchartIcon from "@mui/icons-material/Addchart";
-import EventIcon from "@mui/icons-material/Event";
-import HolidayVillageIcon from "@mui/icons-material/HolidayVillage";
-import LaptopIcon from "@mui/icons-material/Laptop";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import logo from "../../../assets/logo.png";
-import "./Style/Style.css"
+import React, { useContext, useState } from 'react';
+import { styled } from '@mui/material/styles';
+import {
+  Box,
+  Drawer,
+  Divider,
+  List,
+  ListItemButton,
+  Button,
+} from '@mui/material';
+import { ListItemIcon } from '@mui/material';
+import { ListItemText, Collapse, IconButton } from '@mui/material/';
+import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { ExpandLess, ExpandMore } from '@mui/icons-material';
+import { Card, Fab, Switch, Typography } from '@mui/material';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import { ThemeModeContext } from '../../../theme/ThemeModeContext';
+import AdminHeader from '../Header/AdminHeader';
+import BreadCrumbs from '../../../routes/adminRoutes';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
+import PersonIcon from '@mui/icons-material/Person';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import MailIcon from '@mui/icons-material/Mail';
+import CakeIcon from '@mui/icons-material/Cake';
+import HowToRegIcon from '@mui/icons-material/HowToReg';
+import WorkspacesIcon from '@mui/icons-material/Workspaces';
+import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
+import BusinessIcon from '@mui/icons-material/Business';
+import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck';
+import AddchartIcon from '@mui/icons-material/Addchart';
+import EventIcon from '@mui/icons-material/Event';
+import HolidayVillageIcon from '@mui/icons-material/HolidayVillage';
+import LaptopIcon from '@mui/icons-material/Laptop';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const drawerWidth = 250;
 
-const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
+const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
     flexGrow: 1,
-    padding: theme.spacing(3),
-    transition: theme.transitions.create("margin", {
+    padding: 0,
+    transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
     marginLeft: `-${drawerWidth}px`,
     ...(open && {
-      transition: theme.transitions.create("margin", {
+      transition: theme.transitions.create('margin', {
         easing: theme.transitions.easing.easeOut,
         duration: theme.transitions.duration.enteringScreen,
       }),
@@ -61,12 +66,12 @@ const StyledNavLink = styled(NavLink)`
   }
 `;
 
-const DrawerHeader = styled("div")(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
+const DrawerHeader = styled('div')(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
   padding: theme.spacing(0, 1),
   ...theme.mixins.toolbar,
-  justifyContent: "flex-end",
+  justifyContent: 'flex-end',
 }));
 
 export default function AdminSidebar() {
@@ -78,23 +83,23 @@ export default function AdminSidebar() {
 
   const drawerMenus = [
     {
-      name: "Dashboard",
+      name: 'Dashboard',
       icon: (
         <DashboardIcon
-          sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
+          sx={mode === 'light' ? { color: '#01579b' } : { color: 'white' }}
         />
       ),
-      path: "dashboard",
+      path: 'dashboard',
       subMenus: [],
     },
     {
-      name: "Employee",
+      name: 'Employee',
       icon: (
         <PeopleAltIcon
-          sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
+          sx={mode === 'light' ? { color: '#01579b' } : { color: 'white' }}
         />
       ),
-      path: "employee",
+      path: 'employee',
       subMenus: [
         // {
         //   name: 'Add Employee',
@@ -102,47 +107,47 @@ export default function AdminSidebar() {
         //   icon: <PersonAddIcon style={{ color: primaryColor }} />,
         // },
         {
-          name: "Employee",
-          path: "employee",
+          name: 'Employee',
+          path: 'employee',
           icon: (
             <PersonIcon
-              sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
+              sx={mode === 'light' ? { color: '#01579b' } : { color: 'white' }}
             />
           ),
         },
         {
-          name: "Leave",
-          path: "leave",
+          name: 'Leave',
+          path: 'leave',
           icon: (
             <MailIcon
-              sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
+              sx={mode === 'light' ? { color: '#01579b' } : { color: 'white' }}
             />
           ),
         },
         {
-          name: "Leave Type",
-          path: "leavetype",
+          name: 'Leave Type',
+          path: 'leavetype',
           icon: (
             <MailIcon
-              sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
+              sx={mode === 'light' ? { color: '#01579b' } : { color: 'white' }}
             />
           ),
         },
         {
-          name: "Attendance",
-          path: "attendance",
+          name: 'Attendance',
+          path: 'attendance',
           icon: (
             <HowToRegIcon
-              sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
+              sx={mode === 'light' ? { color: '#01579b' } : { color: 'white' }}
             />
           ),
         },
         {
-          name: "Birthday",
-          path: "birthday",
+          name: 'Birthday',
+          path: 'birthday',
           icon: (
             <CakeIcon
-              sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
+              sx={mode === 'light' ? { color: '#01579b' } : { color: 'white' }}
             />
           ),
         },
@@ -152,90 +157,90 @@ export default function AdminSidebar() {
       name: 'Logistics',
       icon: (
         <LaptopIcon
-          sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
+          sx={mode === 'light' ? { color: '#01579b' } : { color: 'white' }}
         />
       ),
-      path: "resource/employee",
+      path: 'resource/employee',
       subMenus: [],
     },
     {
-      name: "Department",
+      name: 'Department',
       icon: (
         <WorkspacesIcon
-          sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
+          sx={mode === 'light' ? { color: '#01579b' } : { color: 'white' }}
         />
       ),
-      path: "department",
+      path: 'department',
       subMenus: [],
     },
     {
-      name: "Designation",
+      name: 'Designation',
       icon: (
         <AssignmentIndIcon
-          sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
+          sx={mode === 'light' ? { color: '#01579b' } : { color: 'white' }}
         />
       ),
-      path: "designation",
+      path: 'designation',
       subMenus: [],
     },
     {
-      name: "Company",
+      name: 'Company',
       icon: (
         <BusinessIcon
-          sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
+          sx={mode === 'light' ? { color: '#01579b' } : { color: 'white' }}
         />
       ),
-      path: "company",
+      path: 'company',
       subMenus: [],
     },
     {
-      name: "Project",
+      name: 'Project',
       icon: (
         <AddchartIcon
-          sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
+          sx={mode === 'light' ? { color: '#01579b' } : { color: 'white' }}
         />
       ),
-      path: "project",
+      path: 'project',
       subMenus: [],
     },
     {
-      name: "Event",
+      name: 'Event',
       icon: (
         <EventIcon
-          sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
+          sx={mode === 'light' ? { color: '#01579b' } : { color: 'white' }}
         />
       ),
-      path: "event",
+      path: 'event',
       subMenus: [],
     },
     {
-      name: "Holiday",
+      name: 'Holiday',
       icon: (
         <HolidayVillageIcon
-          sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
+          sx={mode === 'light' ? { color: '#01579b' } : { color: 'white' }}
         />
       ),
-      path: "holiday",
+      path: 'holiday',
       subMenus: [],
     },
     {
-      name: "Todo",
+      name: 'Todo',
       icon: (
         <PlaylistAddCheckIcon
-          sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
+          sx={mode === 'light' ? { color: '#01579b' } : { color: 'white' }}
         />
       ),
-      path: "todolist",
+      path: 'todolist',
       subMenus: [],
     },
     {
-      name: "Users",
+      name: 'Users',
       icon: (
         <PersonAddIcon
-          sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
+          sx={mode === 'light' ? { color: '#01579b' } : { color: 'white' }}
         />
       ),
-      path: "users",
+      path: 'users',
       subMenus: [],
     },
   ];
@@ -255,7 +260,7 @@ export default function AdminSidebar() {
   };
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: 'flex' }}>
       <AdminHeader
         open={open}
         handleDrawerOpen={handleDrawerOpen}
@@ -265,18 +270,28 @@ export default function AdminSidebar() {
         sx={{
           width: drawerWidth,
           flexShrink: 0,
-          "& .MuiDrawer-paper": {
+          '& .MuiDrawer-paper': {
             width: drawerWidth,
-            boxSizing: "border-box",
+            boxSizing: 'border-box',
           },
         }}
-        variant="persistent"
-        anchor="left"
+        variant='persistent'
+        anchor='left'
         open={open}
       >
         <DrawerHeader>
+          <Typography
+            style={{
+              fontSize: '2rem',
+              fontWeight: '900',
+              color: '#01579b',
+              letterSpacing: '0.1rem',
+            }}
+            variant='h6'
+          >
+            DGHUB
+          </Typography>
           <IconButton onClick={handleDrawerClose}>
-            <img src={logo} alt="logo"/>
             <ChevronLeftIcon />
           </IconButton>
         </DrawerHeader>
@@ -288,7 +303,7 @@ export default function AdminSidebar() {
                 <ListItemButton onClick={() => handleSubMenuToggle(index)}>
                   <ListItemIcon
                     sx={
-                      mode === "light" ? { color: "Light" } : { color: "White" }
+                      mode === 'light' ? { color: 'Light' } : { color: 'White' }
                     }
                   >
                     {menu.icon}
@@ -296,24 +311,24 @@ export default function AdminSidebar() {
                   <ListItemText
                     primary={menu.name}
                     sx={
-                      mode === "light" ? { color: "black" } : { color: "white" }
+                      mode === 'light' ? { color: 'black' } : { color: 'white' }
                     }
                   />
                   {menu.subMenus.length > 0 ? (
                     subMenuOpen[index] ? (
                       <ExpandLess
                         sx={
-                          mode === "light"
-                            ? { color: "black" }
-                            : { color: "white" }
+                          mode === 'light'
+                            ? { color: 'black' }
+                            : { color: 'white' }
                         }
                       />
                     ) : (
                       <ExpandMore
                         sx={
-                          mode === "light"
-                            ? { color: "black" }
-                            : { color: "white" }
+                          mode === 'light'
+                            ? { color: 'black' }
+                            : { color: 'white' }
                         }
                       />
                     )
@@ -321,24 +336,24 @@ export default function AdminSidebar() {
                 </ListItemButton>
               </StyledNavLink>
               {menu.subMenus.length > 0 && (
-                <Collapse in={subMenuOpen[index]} timeout="auto" unmountOnExit>
-                  <List component="div" disablePadding>
+                <Collapse in={subMenuOpen[index]} timeout='auto' unmountOnExit>
+                  <List component='div' disablePadding>
                     {menu.subMenus.map((subMenu, subIndex) => (
                       <StyledNavLink
                         key={subIndex}
                         to={subMenu.path}
                         sx={
-                          mode === "light"
-                            ? { color: "black" }
-                            : { color: "white" }
+                          mode === 'light'
+                            ? { color: 'black' }
+                            : { color: 'white' }
                         }
                       >
                         <ListItemButton sx={{ pl: 4 }}>
                           <ListItemIcon
                             sx={
-                              mode === "light"
-                                ? { color: "black" }
-                                : { color: "white" }
+                              mode === 'light'
+                                ? { color: 'black' }
+                                : { color: 'white' }
                             }
                           >
                             {subMenu.icon}
@@ -346,9 +361,9 @@ export default function AdminSidebar() {
                           <ListItemText
                             primary={subMenu.name}
                             sx={
-                              mode === "light"
-                                ? { color: "black" }
-                                : { color: "white" }
+                              mode === 'light'
+                                ? { color: 'black' }
+                                : { color: 'white' }
                             }
                           />
                         </ListItemButton>
@@ -363,18 +378,14 @@ export default function AdminSidebar() {
         <Divider />
         <Box
           sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            padding: "10px",
-            flexDirection: "column",
-            position:"sticky",
-            bottom :"0",
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            padding: '10px',
+            flexDirection: 'column',
           }}
-          bgcolor={mode ==="light" ? "black" :"White"}
-
         >
-          {/* <Button
+          <Button
             variant='contained'
             sx={{ backgroundColor: '#1c7ed6' }}
             onClick={() => {
@@ -383,15 +394,13 @@ export default function AdminSidebar() {
             }}
           >
             Logout
-          </Button> */}
+          </Button>
           <Typography
-            variant="body2"
-            sx={{ marginRight: "8px", marginTop: "1rem" }}
-            color={mode ==="light" ? "White" :"black"}
-
+            variant='body2'
+            sx={{ marginRight: '8px', marginTop: '1rem' }}
           >
-            {mode === "light" ? "Dark" : "Light"} Mode
-            <Switch checked={mode === "dark"} onChange={toggleMode} />
+            {mode === 'light' ? 'Dark' : 'Light'} Mode
+            <Switch checked={mode === 'dark'} onChange={toggleMode} />
           </Typography>
         </Box>
       </Drawer>
@@ -401,29 +410,29 @@ export default function AdminSidebar() {
         <br />
 
         <Card
-          variant="outlined"
+          variant='outlined'
           sx={{
-            maxWidth: "100%",
-            padding: "20px",
-            boxSizing: "border-box",
-            "@media (min-width: 600px)": {
-              maxWidth: open ? "calc(100% - drawerWidth)" : "100%",
+            maxWidth: '100%',
+            padding: '20px',
+            boxSizing: 'border-box',
+            '@media (min-width: 600px)': {
+              maxWidth: open ? 'calc(100% - drawerWidth)' : '100%',
             },
           }}
         >
           <Box
-            display="flex"
-            justifyContent="flex-start"
-            padding=" 0 0 1rem"
-            gap="1rem"
-            alignItems="center"
+            display='flex'
+            justifyContent='flex-start'
+            paddingBottom='8px'
+            gap='1rem'
+            alignItems='center'
           >
-            {location.pathname !== "/admin/dashboard" && (
+            {location.pathname !== '/admin/dashboard' && (
               <Fab
-                color="primary"
-                sx={{ height: "auto", padding: ".3rem 0" }}
-                aria-label="add"
-                variant="extended"
+                color='primary'
+                sx={{ height: 'auto', padding: '.3rem 0' }}
+                aria-label='add'
+                variant='extended'
                 onClick={() => {
                   navigate(-1);
                 }}

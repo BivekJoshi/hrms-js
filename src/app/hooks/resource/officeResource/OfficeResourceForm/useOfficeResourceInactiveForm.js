@@ -1,8 +1,8 @@
 import { useFormik } from "formik";
-import { useEditInactiveOfficeResource } from "../useOfficeResource";
+import { useEditActiveInactiveOfficeResource } from "../useOfficeResource";
 
 const useOfficeResourceInactiveForm = (id) => {
-  const { mutate } = useEditInactiveOfficeResource({});
+  const { mutate } = useEditActiveInactiveOfficeResource({});
 
   const handleSubmit = (values) => {
     values = { ...values };

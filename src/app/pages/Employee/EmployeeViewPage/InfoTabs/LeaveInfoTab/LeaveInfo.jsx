@@ -1,7 +1,7 @@
 import MaterialTable from "@material-table/core";
 import React from "react";
 import { useParams } from "react-router-dom";
-import { Box, Card, CardContent, Chip, Grid, Typography } from "@mui/material";
+import { Chip, } from "@mui/material";
 import { useGetEmployeeLeaveById } from "../../../../../hooks/leave/useLeave";
 import { useGetLeaveType } from "../../../../../hooks/leaveType/useLeaveType";
 import "../../EmployProfile/Style/Style.css";
@@ -92,7 +92,7 @@ const LeaveInfo = ({ isLoading ,data}) => {
             style={{
               backgroundColor: chipColor,
               color: "white",
-              width: " 9rem",
+              // width: " 9rem",
             }}
           />
         );
