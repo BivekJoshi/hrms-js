@@ -82,6 +82,7 @@ const Employee = () => {
                 TextColor='black'
               />
               <ButtonComponent
+                color='white'
                 OnClick={handleAddOpenModal}
                 buttonName='+Add Employee'
               />

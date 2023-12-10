@@ -1,6 +1,6 @@
-import { Button } from "@mui/material";
-import React from "react";
-import "../Style/Style.css";
+import { Button } from '@mui/material';
+import React from 'react';
+import '../Style/Style.css';
 
 export const ButtonComponent = ({
   buttonName,
@@ -8,18 +8,20 @@ export const ButtonComponent = ({
   BGColor,
   TextColor,
   NameClass,
+  color,
   Border,
   disabled,
 }) => {
   return (
     <Button
-      className={NameClass ? NameClass : "buttonHover"}
-      variant="contained"
-      onClick={OnClick ? OnClick : ""}
+      className={NameClass ? NameClass : 'buttonHover'}
+      variant='contained'
+      style={{ color: color }}
+      onClick={OnClick ? OnClick : ''}
       sx={{
-        background: BGColor ? BGColor : "",
-        color: TextColor ? TextColor : "",
-        border: Border ? Border : "",
+        background: BGColor ? BGColor : '',
+        color: TextColor ? TextColor : '',
+        border: Border ? Border : '',
       }}
       disabled={disabled ? disabled : false}
     >
