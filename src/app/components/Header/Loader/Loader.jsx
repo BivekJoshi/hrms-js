@@ -1,6 +1,6 @@
 import React from 'react';
 import { styled } from '@mui/material/styles';
-import { CircularProgress } from '@mui/material';
+import './loading.css';
 
 const LoaderWrapper = styled('div')(({ theme }) => ({
   position: 'fixed',
@@ -9,13 +9,13 @@ const LoaderWrapper = styled('div')(({ theme }) => ({
   zIndex: 2001,
   width: '100%',
   '& > * + *': {
-    marginTop: theme.spacing(2)
-  }
+    marginTop: theme.spacing(2),
+  },
 }));
 
 const Loader = () => (
   <LoaderWrapper>
-    <CircularProgress color="primary"/>
+    <span className='loader'></span>
   </LoaderWrapper>
 );
 
