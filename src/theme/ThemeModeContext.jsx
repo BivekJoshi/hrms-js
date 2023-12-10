@@ -1,22 +1,51 @@
-import { responsiveFontSizes, ThemeProvider, createTheme } from "@mui/material";
 import React, {
   createContext,
   useCallback,
   useEffect,
   useMemo,
   useState,
-} from "react";
+} from 'react';
+import { responsiveFontSizes, ThemeProvider, createTheme } from '@mui/material';
 
 export const ThemeModeContext = createContext({
   toggleMode: () => {},
-  mode: "light",
-  isMobile: "false",
+  mode: 'light',
+  isMobile: false,
   toggleMobile: () => {},
+  palette: {}, // Empty palette initially
 });
+
+// Define getPalette outside the ThemeContextProvider
+const getPalette = (darkMode) => {
+  return {
+    mode: darkMode ? 'dark' : 'light',
+    primary: {
+      main: darkMode ? '#6DAB23' : '#6DAB23',
+      light: darkMode ? '#f0ca92' : '#6DAB23',
+      dark: darkMode ? '#cd7539' : '#cd7539',
+    },
+    secondary: {
+      main: darkMode ? '#418fdd' : '#75baf0',
+      light: darkMode ? '#75baf0' : '#418fdd',
+      dark: darkMode ? '#336cb8' : '#336cb8',
+    },
+    background: {
+      default: darkMode ? '#303030' : '#f8f8f8',
+      paper: darkMode ? '#3838388a' : '#fff',
+      imageCaption: darkMode ? '#c5c7cb' : '#616161',
+    },
+    text: {
+      primary: darkMode ? '#FFFFFF' : '#000',
+      secondary: darkMode ? '#fff' : '#616161',
+      white: '#000',
+    },
+    divider: darkMode ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.12)',
+  };
+};
 
 export const ThemeContextProvider = ({ children }) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const [mode, setMode] = useState("light");
+  const [mode, setMode] = useState('light');
   const [width, setWidth] = useState(window.innerWidth);
   const [isMobile, setIsMobile] = useState(width <= 768);
 
@@ -26,14 +55,14 @@ export const ThemeContextProvider = ({ children }) => {
   }, [width]);
 
   useEffect(() => {
-    window.addEventListener("resize", handleWindowSizeChange);
+    window.addEventListener('resize', handleWindowSizeChange);
     return () => {
-      window.removeEventListener("resize", handleWindowSizeChange);
+      window.removeEventListener('resize', handleWindowSizeChange);
     };
   }, [handleWindowSizeChange]);
 
   const toggleMode = useCallback(() => {
-    setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
+    setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
     setIsDarkMode((prevMode) => !prevMode);
   }, []);
 
@@ -43,42 +72,20 @@ export const ThemeContextProvider = ({ children }) => {
       mode,
       isDarkMode,
       isMobile,
+      palette: getPalette(isDarkMode),
     }),
     [mode, isDarkMode, isMobile, toggleMode]
   );
 
   let theme = createTheme({
-    palette: {
-      mode: isDarkMode ? "dark" : "light",
-      primary: {
-        main: "#01579b",
-        light: "#f0ca92",
-        dark: "#cd7539",
-      },
-      secondary: {
-        main: "#418fdd",
-        light: "#75baf0",
-        dark: "#336cb8",
-      },
-      background: {
-        default: isDarkMode ? "#303030" : "#f8f8f8",
-        paper: isDarkMode ? "#3838388a" : "#fff",
-        imageCaption: isDarkMode ? "#c5c7cb" : "#616161",
-      },
-      text: {
-        primary: isDarkMode ? "#FFFFFF " : "#000",
-        secondary: isDarkMode ? "#fff" : "#616161",
-        white: "#000",
-      },
-      divider: isDarkMode ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.12)",
-    },
+    palette: getPalette(isDarkMode),
   });
 
   theme = responsiveFontSizes(theme);
 
   return (
     <ThemeModeContext.Provider value={colorMode}>
-      <ThemeProvider theme={theme} >{children}</ThemeProvider>
+      <ThemeProvider theme={theme}>{children}</ThemeProvider>
     </ThemeModeContext.Provider>
   );
 };

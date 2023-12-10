@@ -38,7 +38,6 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
             }
             helperText={formik.touched.companyName && formik.errors.companyName}
             variant="outlined"
-            autoFocus
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
@@ -57,7 +56,6 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
             }
             helperText={formik.touched.companyType && formik.errors.companyType}
             variant="outlined"
-            autoFocus
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
@@ -81,7 +79,6 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
               formik.errors.companyDescription
             }
             variant="outlined"
-            autoFocus
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
