@@ -35,7 +35,7 @@ import LaptopIcon from '@mui/icons-material/Laptop';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { removeUser } from '../../utils/cookieHelper';
 
-const drawerWidth = 250;
+const drawerWidth = 230;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
@@ -79,9 +79,9 @@ export default function AdminSidebar() {
   const navigate = useNavigate();
   const location = useLocation();
   const [open, setOpen] = useState(false);
-  const { toggleMode, mode } = useContext(ThemeModeContext);
+  const { toggleMode, mode, palette } = useContext(ThemeModeContext);
   const [subMenuOpen, setSubMenuOpen] = useState({});
-
+  const { pathname } = useLocation();
 
   const drawerMenus = [
     {
@@ -302,10 +302,18 @@ export default function AdminSidebar() {
           {drawerMenus.map((menu, index) => (
             <React.Fragment key={index}>
               <StyledNavLink key={index} to={menu.path}>
-                <ListItemButton onClick={() => handleSubMenuToggle(index)}>
+                <ListItemButton
+                  onClick={() => handleSubMenuToggle(index)}
+                  sx={{
+                    backgroundColor:
+                      pathname.includes(menu.path) && '#ace8639e',
+                  }}
+                >
                   <ListItemIcon
                     sx={
-                      mode === 'light' ? { color: 'Light' } : { color: 'White' }
+                      mode === 'light'
+                        ? { color: 'Light', minWidth: '40px' }
+                        : { color: 'White' }
                     }
                   >
                     {menu.icon}
@@ -350,12 +358,18 @@ export default function AdminSidebar() {
                             : { color: 'white' }
                         }
                       >
-                        <ListItemButton sx={{ pl: 4 }}>
+                        <ListItemButton
+                          sx={{
+                            pl: 2,
+                            backgroundColor:
+                              mode === 'light' ? '#edffea' : '#413e3e',
+                          }}
+                        >
                           <ListItemIcon
                             sx={
                               mode === 'light'
-                                ? { color: 'black' }
-                                : { color: 'white' }
+                                ? { color: 'black', minWidth: '40px' }
+                                : { color: 'white', minWidth: '40px' }
                             }
                           >
                             {subMenu.icon}
