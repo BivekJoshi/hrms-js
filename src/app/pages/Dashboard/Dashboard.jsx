@@ -85,82 +85,64 @@ const Dashboard = () => {
         <Grid
           style={{ marginTop: '10px', width: '100%' }}
           container
-          rowSpacing={1}
+          // rowSpacing={1}
           gap={{ sm: '12px', lg: '32px' }}
         >
           <DashboardCard
             title='Users'
             icon={<FaUsers fontSize='3rem' />}
-            value={42}
             count={userRoleData?.length ? userRoleData?.length : '0'}
             linkTo='/admin/users'
           />
           <DashboardCard
             title='Employees'
             icon={<FaPeopleGroup fontSize='3rem' />}
-            value={28}
             count={employeeData?.length ? employeeData.length : '0'}
             linkTo='/admin/employee'
           />
           <DashboardCard
             title='Events'
             icon={<BiSolidCalendarEvent fontSize='3rem' />}
-            value={24}
             count={eventData ? eventData?.length : '0'}
             linkTo='/admin/event'
           />
           <DashboardCard
             title='Holiday'
             icon={<FaGifts fontSize='3rem' />}
-            value={32}
             count={holidayData ? holidayData?.length : '0'}
             linkTo='/admin/holiday'
           />
           <DashboardCard
             title='Project'
             icon={<AiFillProject fontSize='3rem' />}
-            value={6}
             count={projectDataCount?.total ? projectDataCount?.total : '0'}
             linkTo='/admin/project'
           />
         </Grid>
 
-        <Typography variant='h5'>Employee Information</Typography>
-
-        <div
-          style={{
-            display: 'flex',
-            gap: '16px',
-          }}
-        >
-          <BarChatDiagram data={dashboardData} />
-          <PieChartDiagram data={dashboardData} />
-        </div>
-
-        <Box
-          style={{
-            display: 'grid',
-            gridTemplateRows: '1fr',
-            rowGap: '3rem',
-          }}
-        >
-          <Box>
-            <Typography variant='h5'>Project Information</Typography>
-            <Typography
-              display='flex'
-              flexDirection='row'
-              justifyContent='space-between'
-              alignItems='center'
-            ></Typography>
-
-            <Typography variant='v6'>
-              Total Project : {projectDataCount?.total}
+        <Grid container spacing={3}>
+          <Grid item xs={6}>
+            <Typography variant='h5' sx={{ marginBottom: '16px' }}>
+              Employee Information
             </Typography>
-            <ProjectProgressCard projectDataCount={projectDataCount} />
-          </Box>
+            <BarChatDiagram data={dashboardData} />
+            <PieChartDiagram data={dashboardData} />
+          </Grid>
+          <Grid item xs={6}>
+            <div>
+              <Typography variant='h5' sx={{ marginBottom: '16px' }}>
+                Project Information
+              </Typography>
 
-          <Grid container spacing={3}>
-            <Grid item xs={12} sm={6} style={{ paddingTop: '0px' }}>
+              <Typography variant='v6'>
+                Total Project : {projectDataCount?.total}
+              </Typography>
+              <div style={{ marginTop: '16px' }}>
+                <ProjectProgressCard projectDataCount={projectDataCount} />
+              </div>
+            </div>
+
+            <Grid sx={{ mt: '32px' }}>
               <ProjectTable projectData={projectData} />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -170,7 +152,7 @@ const Dashboard = () => {
             /> */}
             </Grid>
           </Grid>
-        </Box>
+        </Grid>
       </Box>
     </>
   );

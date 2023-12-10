@@ -63,7 +63,7 @@ export const BarChatDiagram = ({ data }) => {
   };
 
   return (
-    <div style={{ width: '50%' }}>
+    <div style={{ width: '100%' }}>
       <Card>
         <Bar
           options={barChartOptions}

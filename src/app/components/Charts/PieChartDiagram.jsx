@@ -43,7 +43,7 @@ export const PieChartDiagram = ({ data }) => {
   };
 
   return (
-    <div style={{ width: '50%', position: 'relative' }}>
+    <div style={{ width: '100%', position: 'relative' }}>
       <ResponsiveContainer width='100%' height={300}>
         <PieChart
           width={650}

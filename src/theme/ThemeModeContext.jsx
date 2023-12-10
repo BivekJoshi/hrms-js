@@ -72,26 +72,6 @@ export const ThemeContextProvider = ({ children }) => {
       },
       divider: isDarkMode ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.12)',
     },
-    components: {
-      MuiTabs: {
-        styleOverrides: {
-          root: {
-            backgroundColor: '#your-tab-background-color',
-          },
-        },
-      },
-      MuiTab: {
-        styleOverrides: {
-          root: {
-            color: '#000',
-            '&.Mui-selected': {
-              // Change the color of the selected tab
-              color: '#6DAB23',
-            },
-          },
-        },
-      },
-    },
   });
 
   theme = responsiveFontSizes(theme);
