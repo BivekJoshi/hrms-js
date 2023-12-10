@@ -1,13 +1,6 @@
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Button,
-  Grid,
-  Typography,
-  Stack,
-  Box,
-} from "@mui/material";
+import { Accordion, AccordionDetails } from "@mui/material";
+import { AccordionSummary, Button } from "@mui/material";
+import { Grid, Typography, Stack, Box } from "@mui/material";
 import React, { useRef, useState } from "react";
 import {
   useDeleteDocument,
@@ -37,18 +30,18 @@ const EmployeeDocumentDetailForm = () => {
 
   const { data: documentPhoto } = useGetDocumentByDocumentType(
     id,
-    selectedDocument
+    selectedDocument || documentType[0]?.input 
   );
+  console.log(documentType);
   const url = DOC_URL;
 
   const handleFormSubmit = (documentType) => {
-    if(document) {
+    if (document) {
       formik.setFieldValue("documentType", documentType);
       formik.handleSubmit(documentType);
     } else {
       toast.warning("Please select a document to upload");
     }
-    
   };
 
   const handleChange = (panel, doc) => (_, isExpanded) => {
@@ -73,58 +66,60 @@ const EmployeeDocumentDetailForm = () => {
   return (
     <div>
       <Grid container>
-      <Grid item xs={12} sm={6} md={6}>
-  {documentPhoto &&
-    documentPhoto.map((document) => (
-      <Stack
-        key={document?.id}
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "1rem",
-          marginLeft: "15vh",
-          position: "relative", 
-        }}
-      >
-        <Box>
-          <img
-            src={`${url}${document?.path}`}
-            alt="Document"
-            width={240}
-            height={140}
-            style={{ objectFit: "cover", width: "80%", height: "100%" }}
-          />
-        </Box>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "flex-end",
-            gap: ".5rem",
-            position: "absolute",
-            bottom: "10px",
-            right: "14vh",
-          }}
-        >
-          <Button
-            sx={{ width: "fit-content" }}
-            variant="contained"
-            color="primary"
-            onClick={() => handleEditFormSubmit(document)}
-          >
-            Update
-          </Button>
-          <Button
-            sx={{ width: "fit-content" }}
-            variant="contained"
-            color="error"
-            onClick={() => handleDelete(document)}
-          >
-            Delete
-          </Button>
-        </Box>
-      </Stack>
-    ))}
-</Grid>
+        <Grid item xs={12} sm={6} md={6}>
+          {documentPhoto &&
+            documentPhoto.map((document) => (
+              <Grid
+                key={document?.id}
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "1rem",
+                  marginLeft: "15vh",
+                  position: "relative",
+                  paddingRight:"2rem"
+                }}
+              >
+                <Box>
+                  <img
+                    src={`${url}${document?.path}`}
+                    alt="Document"
+                    width={240}
+                    height={140}
+                    style={{ objectFit: "cover", width: "100%", height: "100%" }}
+                  />
+                </Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    gap: ".5rem",
+                    position: "absolute",
+                    bottom: "10px",
+                    left: "20vh",
+                    textAlign:"center"
+                  }}
+                >
+                  <Button
+                    sx={{ width: "fit-content" }}
+                    variant="contained"
+                    color="primary"
+                    onClick={() => handleEditFormSubmit(document)}
+                  >
+                    Update
+                  </Button>
+                  <Button
+                    sx={{ width: "fit-content" }}
+                    variant="contained"
+                    color="error"
+                    onClick={() => handleDelete(document)}
+                  >
+                    Delete
+                  </Button>
+                </Box>
+              </Grid>
+            ))}
+        </Grid>
 
         <Grid item xs={12} sm={6}>
           {documentType &&

@@ -20,7 +20,7 @@ const MainCard = ({
 }) => {
   return (
     <Grow in={grow}>
-      <Paper elevation={3} sx={{ cursor: "pointer",}}>
+      <Paper elevation={3} sx={{ cursor: "pointer",borderRadius:"10px"}}>
         <div
           className={`main-card ${border ? '1rem' : 'no-border'}`}
           {...others}

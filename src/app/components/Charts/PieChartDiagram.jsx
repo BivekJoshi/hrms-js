@@ -1,111 +1,89 @@
-import React from 'react';
-import { PieChart, Pie, Cell, Legend, ResponsiveContainer } from 'recharts';
-import { Box } from '@mui/material';
-import './Style/Style.css';
+import React, { useContext } from "react";
+import Chart from "react-apexcharts";
+import { Box, Grid } from "@mui/material";
+import "./Style/Style.css";
+import ThemeModeContext from "../../../theme/ThemeModeContext";
 
 export const PieChartDiagram = ({ data }) => {
+  const { mode } = useContext(ThemeModeContext);
+
   const piedata = [
     {
-      name: 'All Employees',
-      value: data?.allEmployees,
+      name: "All Employees",
+      data: data?.allEmployees,
     },
     {
-      name: 'New Employees',
-      value: data?.newEmployees,
+      name: "New Employees",
+      data: data?.newEmployees,
     },
     {
-      name: 'Female Employees',
-      value: data?.femaleEmployees,
+      name: "Female Employees",
+      data: data?.femaleEmployees,
     },
     {
-      name: 'Male Employees',
-      value: data?.maleEmployees,
+      name: "Male Employees",
+      data: data?.maleEmployees,
     },
     {
-      name: 'All Projects',
-      value: data?.allProjects,
+      name: "All Projects",
+      data: data?.allProjects,
     },
   ];
 
-  const COLORS = ['#F65E3C', '#A1E000', '#9137B8', '#D93084', '#B6D0D9'];
+  const COLORS = ["#F65E3C", "#A1E000", "#9137B8", "#D93084", "#B6D0D9"];
 
-  const Bullet = ({ backgroundColor, size }) => {
-    return (
-      <div
-        className='CirecleBullet'
-        style={{
-          backgroundColor,
-          width: size,
-          height: size,
-        }}
-      ></div>
-    );
+  const options = {
+    chart: {
+      width: 380,
+      type: "donut",
+      background: "transparent",
+    },
+    labels: piedata.map((entry) => entry.name),
+    colors: COLORS,
+    legend: {
+      position: "right",
+    },
+    responsive: [
+      {
+        breakpoint: 480,
+        options: {
+          chart: {
+            width: 200,
+          },
+          legend: {
+            position: "bottom",
+          },
+        },
+      },
+    ],
+    theme: {
+      mode: mode === "light" ? "light" : "dark",
+    },
+    plotOptions: {
+      pie: {
+        donut: {
+          size: "10%", // Set the size to 0% for a full pie chart
+        },
+      },
+    },
   };
 
+  const series = piedata.map((entry) => entry.data);
+
   return (
-    <div style={{ width: '100%', position: 'relative' }}>
-      <ResponsiveContainer width='100%' height={300}>
-        <PieChart
-          width={650}
-          height={300}
-          style={{ position: 'inherit', paddingLeft: '3rem' }}
-        >
-          <Pie
-            data={piedata}
-            dataKey='value'
-            nameKey='name'
-            cx='65%'
-            cy='65%'
-            outerRadius={70}
-            fill='#8884d8'
-          >
-            {piedata.map((entry, index) => (
-              <Cell
-                key={`cell-${index}`}
-                fill={COLORS[index % COLORS.length]}
-              />
-            ))}
-          </Pie>
-          <Pie
-            style={{ background: 'black' }}
-            data={piedata}
-            dataKey='value'
-            nameKey='name'
-            cx='65%'
-            cy='65%'
-            innerRadius={80}
-            outerRadius={100}
-            fill='#82ca9d'
-            label
-          >
-            {piedata.map((entry, index) => (
-              <Cell
-                key={`cell-${index}`}
-                fill={COLORS[index % COLORS.length]}
-              />
-            ))}
-          </Pie>
-        </PieChart>
-      </ResponsiveContainer>
-      <Legend
-        style={{ width: 'fit-content' }}
-        content={
-          <ul className='Legend'>
-            {piedata.map((entry, index) => (
-              <Box key={`item-${index}`}>
-                <div className='BulletLabel'>
-                  <Bullet
-                    backgroundColor={COLORS[index % COLORS.length]}
-                    size='10px'
-                  />
-                  <div className='BulletLabelText'>{entry.name}</div>
-                  <div style={{ marginLeft: '20px' }}>{entry.value}</div>
-                </div>
-              </Box>
-            ))}
-          </ul>
-        }
+    <Grid
+      borderRadius={"6px"}
+      style={{ width: "100%", position: "relative", paddingTop: "10px" }}
+      bgcolor={mode === "light" ? "white" : "#3f413f"}
+      boxShadow="0 4px 8px 3px rgba(0,0,0,.15), 0 1px 3px rgba(0,0,0,.3)"
+    >
+      <Chart
+        options={options}
+        series={series}
+        type="donut"
+        width="100%"
+        height={250}
       />
-    </div>
+    </Grid>
   );
 };

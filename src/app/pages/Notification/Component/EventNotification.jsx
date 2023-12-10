@@ -1,8 +1,8 @@
-import { Box, ClickAwayListener, Grow, MenuItem } from "@mui/material";
-import { MenuList, Paper, Popper, Typography } from "@mui/material";
-import React from "react";
-import { useGetEmployee } from "../../../hooks/employee/useEmployee";
-import { Link } from "react-router-dom";
+import { Box, ClickAwayListener, Grow, MenuItem } from '@mui/material';
+import { MenuList, Paper, Popper, Typography } from '@mui/material';
+import React from 'react';
+import { useGetEmployee } from '../../../hooks/employee/useEmployee';
+import { Link } from 'react-router-dom';
 
 export const EventNotification = ({
   Eventname,
@@ -15,15 +15,15 @@ export const EventNotification = ({
     <>
       <MenuList
         autoFocusItem={open}
-        id="composition-menu"
-        aria-labelledby="composition-button"
+        id='composition-menu'
+        aria-labelledby='composition-button'
         onKeyDown={handleListKeyDown}
         sx={{
-          textAlign: "center",
-          padding: "0.5rem 1rem",
+          textAlign: 'center',
+          padding: '0.5rem 1rem',
         }}
       >
-        <Typography variant="h6" color="primary" fontWeight={400}>
+        <Typography variant='h7' color='primary' fontWeight={400}>
           {Eventname}
         </Typography>
         {data &&
@@ -32,17 +32,17 @@ export const EventNotification = ({
               key={index}
               onClick={handleClose}
               sx={{
-                display: "flex",
-                gap: "1rem",
-                alignItems: "center",
+                display: 'flex',
+                gap: '1rem',
+                alignItems: 'center',
               }}
             >
-              <Typography variant="h6">{ename?.eventName}</Typography>
+              <Typography variant='h7'>{ename?.eventName}</Typography>
               <Box
                 sx={{
-                  display: "flex",
-                  flexDirection: "start",
-                  color: "gray",
+                  display: 'flex',
+                  flexDirection: 'start',
+                  color: 'gray',
                 }}
               >
                 <Typography>{ename?.eventTime}</Typography> &nbsp;
@@ -66,8 +66,8 @@ export const LeaveNotification = ({
   const getEmployeeName = (employeeId) => {
     const employee = employeeData?.find((emp) => emp.id === employeeId);
 
-    const name = `${employee?.firstName} ${employee?.middleName || ""} ${
-      employee?.lastName || ""
+    const name = `${employee?.firstName} ${employee?.middleName || ''} ${
+      employee?.lastName || ''
     }`;
     return name;
   };
@@ -76,15 +76,15 @@ export const LeaveNotification = ({
     <>
       <MenuList
         autoFocusItem={open}
-        id="composition-menu"
-        aria-labelledby="composition-button"
+        id='composition-menu'
+        aria-labelledby='composition-button'
         onKeyDown={handleListKeyDown}
         sx={{
-          textAlign: "center",
-          padding: "0.5rem 1rem",
+          textAlign: 'center',
+          padding: '0.5rem 1rem',
         }}
       >
-        <Typography variant="h6" color="primary" fontWeight={400}>
+        <Typography variant='h6' color='primary' fontWeight={400}>
           {Eventname}
         </Typography>
         {data &&
@@ -93,14 +93,14 @@ export const LeaveNotification = ({
               key={index}
               onClick={handleClose}
               sx={{
-                display: "flex",
-                gap: "1rem",
-                alignItems: "center",
+                display: 'flex',
+                gap: '1rem',
+                alignItems: 'center',
               }}
             >
               <Link
-                to="/admin/leave"
-                style={{ textDecoration: "none", fontSize: "1rem" }}
+                to='/admin/leave'
+                style={{ textDecoration: 'none', fontSize: '1rem' }}
               >
                 {getEmployeeName(ename.employeeId)}
               </Link>

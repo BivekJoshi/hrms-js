@@ -56,7 +56,7 @@ const EmployeeResource = ({ permissions }) => {
   const getEmployeeName = (rowData) => {
     const employeeId = rowData?.id;
     const employee = employeeData?.find((emp) => emp?.id === employeeId);
-    const name = `${employee?.firstName} ${employee?.middleName || ""} ${
+    const name = `${employee?.firstName} ${employee?.middleName || ''} ${
       employee?.lastName
     }`;
     return name;
@@ -71,15 +71,15 @@ const EmployeeResource = ({ permissions }) => {
 
   const columns = [
     {
-      title: "SN",
+      title: 'SN',
       render: (rowData) => rowData.tableData.id + 1,
-      width: "3%",
-      maxWidth: "40px",
+      width: '3%',
+      maxWidth: '40px',
       sortable: false,
       sorting: false,
     },
     {
-      title: "Employee Name",
+      title: 'Employee Name',
       render: (rowData) => {
         return <p>{getEmployeeName(rowData)} </p>;
       },
@@ -90,7 +90,7 @@ const EmployeeResource = ({ permissions }) => {
       sorting: false,
     },
     {
-      title: "Resource",
+      title: 'Resource',
       render: (rowData) => {
         return <p>{getResourceName(rowData)}</p>;
       },
@@ -101,27 +101,27 @@ const EmployeeResource = ({ permissions }) => {
       sorting: false,
     },
     {
-      title: "Received Date",
-      field: "receiveDate",
-      emptyValue: "-",
+      title: 'Received Date',
+      field: 'receiveDate',
+      emptyValue: '-',
       sorting: false,
     },
     {
-      title: "Returned Date",
-      field: "returnDate",
-      emptyValue: "-",
+      title: 'Returned Date',
+      field: 'returnDate',
+      emptyValue: '-',
       sorting: false,
     },
   ];
   const actions = [
     {
-      icon: () => <ModeEditOutlineIcon sx={{ color: "#01579B" }} />,
-      tooltip: "Edit Logistics",
+      icon: () => <ModeEditOutlineIcon sx={{ color: '#01579B' }} />,
+      tooltip: 'Edit Logistics',
       onClick: (event, rowData) => handleEditRowData(rowData),
     },
     {
-      icon: () => <DeleteIcon sx={{ color: "#01579B" }} />,
-      tooltip: "Remove Logistics",
+      icon: () => <DeleteIcon sx={{ color: '#01579B' }} />,
+      tooltip: 'Remove Logistics',
       onClick: (event, rowData) => handleDeleteRowData(rowData),
     },
   ];
@@ -129,27 +129,27 @@ const EmployeeResource = ({ permissions }) => {
     <>
       <Box
         sx={{
-          display: "flex",
-          justifyContent: "flex-end",
-          gap: "1rem",
-          padding: ".5rem 0",
+          display: 'flex',
+          justifyContent: 'flex-end',
+          gap: '1rem',
+          padding: '.5rem 0',
         }}
       >
         <HocButton
           permissions={permissions}
-          color={"primary"}
-          variant={"outlined"}
+          color={'primary'}
+          variant={'outlined'}
           onClick={() => {
             navigate(`/admin/resource/office`);
           }}
-          buttonName={"Logistics"}
+          buttonName={'Logistics'}
         />
         <HocButton
           permissions={permissions}
-          color={"primary"}
-          variant={"contained"}
+          color={'white'}
+          variant={'contained'}
           onClick={handleAddOpenModal}
-          buttonName={"+Provide Logistics to Employee"}
+          buttonName={'+Provide Logistics to Employee'}
         />
       </Box>
 
@@ -166,7 +166,7 @@ const EmployeeResource = ({ permissions }) => {
           open={openDeleteModal}
           handleCloseModal={handleCloseDeleteModal}
           handleConfirmDelete={handleConfirmDelete}
-          message={"Employee with Resource"}
+          message={'Employee with Resource'}
         />
       )}
       {openAddModal && (
