@@ -21,13 +21,7 @@ const BarChatDiagram = ({ dashboardData }) => {
     `${dashboardData?.femaleEmployees}`,
     `${dashboardData?.allProjects}`,
   ];
-const barColors = [
-    "#FF5733",
-    "#33FF57",
-    "#3366FF",
-    "#FF33A1",
-    "#FFFF33",
-  ];
+  const barColors = ["#FF5733", "#33FF57", "#3366FF", "#FF33A1", "#FFFF33"];
   const chartOptions = {
     chart: {
       type: "bar",
@@ -103,17 +97,18 @@ const barColors = [
   };
   return (
     <Box
-      padding={2}
       borderRadius={"6px"}
       color={"white"}
-      // bgcolor={theme.palette.background.alt}
+      bgcolor={mode === "light" ? "white" : "#3f413f"}
       id="chart"
+      marginBottom="2rem"
+      boxShadow="0 4px 8px 3px rgba(0,0,0,.15), 0 1px 3px rgba(0,0,0,.3)"
     >
       <ReactApexChart
         options={chartOptions}
         series={chartData.series}
         type="bar"
-        height={350}
+        height={300}
       />
     </Box>
   );
