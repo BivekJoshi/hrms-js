@@ -1,10 +1,8 @@
 import React, { useEffect } from "react";
-import MaterialTable from "@material-table/core";
 import {
   useDeleteProjectTask,
   useGetProjectTaskByProjectId,
 } from "../../../hooks/project/ProjectTask/useProjectTask";
-import tableIcons from "../../../../theme/overrides/TableIcon";
 import SaveIcon from "@material-ui/icons/Save";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import { useState } from "react";
@@ -14,6 +12,7 @@ import ProjectTaskField from "../../../components/Form/Project/ProjectTask/Proje
 import DeleteIcon from "@mui/icons-material/Delete";
 import DeleteConfirmationModal from "../../../components/Modal/DeleteConfirmationModal";
 import { useGetEmployee } from "../../../hooks/employee/useEmployee";
+import CustomTable from "../../../components/CustomTable/CustomTable";
 
 const ProjectTask = () => {
   const {
@@ -71,7 +70,7 @@ const ProjectTask = () => {
   const columns = [
     {
       title: "SN",
-      render: (rowData) => rowData.tableData.index + 1,
+      render: (rowData) => rowData.tableData.id + 1,
       width: "3%",
       sortable: false,
       sorting: false,
@@ -106,17 +105,17 @@ const ProjectTask = () => {
       render: (rowData) => {
         const priority = rowData.priority;
         let chipColor = "";
-        let label="";
+        let label = "";
 
         if (priority === "HIGH") {
           chipColor = "red";
-          label="High";
+          label = "High";
         } else if (priority === "MEDIUM") {
           chipColor = "#b042ff";
-          label="Medium";
+          label = "Medium";
         } else if (priority === "LOW") {
           chipColor = "orange";
-          label="Low"
+          label = "Low";
         }
 
         return (
@@ -125,9 +124,8 @@ const ProjectTask = () => {
             style={{
               backgroundColor: chipColor,
               color: "white",
-              padding:"0px",
-              width:"7rem"
-
+              padding: "0px",
+              width: "7rem",
             }}
           />
         );
@@ -145,20 +143,20 @@ const ProjectTask = () => {
       render: (rowData) => {
         const status = rowData.status;
         let chipColor = "";
-        let label="";
+        let label = "";
 
         if (status === "WORK_IN_PROGRESS") {
           chipColor = "#efaf67";
-          label="WIP";
+          label = "WIP";
         } else if (status === "COMPLETED") {
           chipColor = "#9bedff";
-          label="Completed";
+          label = "Completed";
         } else if (status === "DELAYED") {
           chipColor = "#f9aeae";
-          label="Delayed"
-        }else {
+          label = "Delayed";
+        } else {
           chipColor = "#83f28f";
-          label="Pending"
+          label = "Pending";
         }
 
         return (
@@ -167,9 +165,9 @@ const ProjectTask = () => {
             style={{
               backgroundColor: chipColor,
               color: "#000",
-              padding:"0px",
-              margin:"0px",
-              width:"7rem"
+              padding: "0px",
+              margin: "0px",
+              width: "7rem",
             }}
           />
         );
@@ -233,32 +231,11 @@ const ProjectTask = () => {
         ))}
       </div>
       <br />
-      <MaterialTable
-        icons={tableIcons}
+      <CustomTable
         columns={columns}
         data={tableData}
         title="Project Task"
         isLoading={isLoading}
-        options={{
-          padding: "dense",
-          margin: 50,
-          pageSize: 10,
-          emptyRowsWhenPaging: false,
-          headerStyle: {
-            backgroundColor: "#01579b",
-            color: "#FFF",
-            fontSize: "1rem",
-            padding: "dense",
-            height: 50,
-            textAlign: "center",
-            border: "2px solid #fff",
-            minHeight: "10px",
-            textTransform: "capitilize",
-          },
-          rowStyle: {
-            fontSize: ".8rem",
-          },
-        }}
         actions={[
           {
             icon: () => <ModeEditOutlineIcon sx={{ color: "#01579b" }} />,

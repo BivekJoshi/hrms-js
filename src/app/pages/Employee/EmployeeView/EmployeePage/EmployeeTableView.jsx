@@ -1,9 +1,8 @@
 import * as React from "react";
-import MaterialTable from "material-table";
 import EditIcon from "@mui/icons-material/Edit";
 import { useNavigate } from "react-router-dom";
-import tableIcons from "../../../../../theme/overrides/TableIcon";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
+import CustomTable from "../../../../components/CustomTable/CustomTable";
 
 const EmployeeTableView = ({ employeeData, isLoading }) => {
   const navigate = useNavigate();
@@ -60,51 +59,26 @@ const EmployeeTableView = ({ employeeData, isLoading }) => {
 
   const actions = [
     {
-      icon: () => <EditIcon sx={{ color: "#01579B" }} />,
+      icon: () => <EditIcon/>,
       tooltip: "Edit Detail",
       onClick: (event, rowData) => handleEditEmployee(rowData),
     },
     {
-      icon: () => <RemoveRedEyeOutlinedIcon sx={{ color: "#01579B" }} />,
+      icon: () => <RemoveRedEyeOutlinedIcon />,
       tooltip: "View Details",
       onClick: (event, rowData) => handleViewEmployee(rowData),
     },
   ];
 
   return (
-    <>
-      <MaterialTable
-        icons={tableIcons}
-        columns={columns}
-        data={employeeData}
-        title="Employees"
-        isLoading={isLoading}
-        options={{
-          toolbar: true,
-          exportButton: true,
-          padding: "dense",
-          margin: 50,
-          pageSize: 20,
-          emptyRowsWhenPaging: false,
-          actionsColumnIndex: -1,
-          headerStyle: {
-            backgroundColor: "#01579b",
-            color: "#FFF",
-            fontSize: "1rem",
-            padding: "dense",
-            height: 50,
-            textAlign: "center",
-            border: "2px solid #fff",
-            minHeight: "10px",
-            textTransform: "capitilize",
-          },
-          rowStyle: {
-            fontSize: ".8rem",
-          },
-        }}
-        actions={actions}
-      />
-    </>
+    <CustomTable
+      columns={columns}
+      data={employeeData}
+      title="Employees"
+      isLoading={isLoading}
+      actions={actions}
+      exportButton={true}
+    />
   );
 };
 

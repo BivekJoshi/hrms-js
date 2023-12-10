@@ -1,15 +1,17 @@
-import MaterialTable from "@material-table/core";
 import React from "react";
 import { useParams } from "react-router-dom";
-import { Chip, } from "@mui/material";
+import { Chip } from "@mui/material";
 import { useGetEmployeeLeaveById } from "../../../../../hooks/leave/useLeave";
 import { useGetLeaveType } from "../../../../../hooks/leaveType/useLeaveType";
 import "../../EmployProfile/Style/Style.css";
 import { useGetUserControl } from "../../../../../hooks/auth/userControl/useUserControl";
+import CustomTable from "../../../../../components/CustomTable/CustomTable";
 
-const LeaveInfo = ({ isLoading ,data}) => {
-  const fullname=`${data?.firstName} ${data?.middleNam||""}${data?.lastName}`;
-  
+const LeaveInfo = ({ isLoading, data }) => {
+  const fullname = `${data?.firstName} ${data?.middleNam || ""}${
+    data?.lastName
+  }`;
+
   const { id } = useParams();
   const { data: leaveData, isLoading: loadingLeave } = useGetEmployeeLeaveById(
     id
@@ -20,30 +22,29 @@ const LeaveInfo = ({ isLoading ,data}) => {
   } = useGetLeaveType();
   const { data: UserData, isLoading: loadingUser } = useGetUserControl();
 
-
   const getLeaveTypeName = (rowData) => {
     const leaveTypeId = rowData.leaveTypeId;
     const leaveType = leaveTypeData.find((leave) => leave.id === leaveTypeId);
     const name = `${leaveType.leaveName}`;
     return name;
   };
-  const getUserName = ( rowData) => {
-    const confirmById = rowData?.confirmById;  
+  const getUserName = (rowData) => {
+    const confirmById = rowData?.confirmById;
     const user = UserData?.find((confirmBy) => confirmBy.id === confirmById);
     const name = `${user?.name || "-"}`;
     return name;
   };
 
   if (leaveData) {
-    const pendingLeaves = leaveData.filter((item) => item.leaveStatus === 'PENDING');
+    const pendingLeaves = leaveData.filter(
+      (item) => item.leaveStatus === "PENDING"
+    );
   }
 
-
-  
   const columns = [
     {
       title: "SN",
-      render: (rowData) => rowData.tableData.index + 1,
+      render: (rowData) => rowData.tableData.id + 1,
       width: 80,
       sortable: false,
     },
@@ -145,29 +146,11 @@ const LeaveInfo = ({ isLoading ,data}) => {
           </Card>
         </Grid>
       </Grid> */}
-      <MaterialTable
-        style={{ padding: "1rem" }}
+      <CustomTable
         columns={columns}
         data={leaveData}
         title={"Leave Data of " + fullname}
         isLoading={loadingLeave}
-        options={{
-          padding: "dense",
-          margin: 50,
-          pageSize: 10,
-          emptyRowsWhenPaging: false,
-          headerStyle: {
-            backgroundColor: "#1c7ed6",
-            color: "#FFF",
-            fontSize: "1rem",
-            padding: "dense",
-            height: 50,
-            width: "150px",
-          },
-          rowStyle: {
-            fontSize: ".8rem",
-          },
-        }}
       />
     </>
   );

@@ -1,11 +1,9 @@
 import { Box, Button, Stack } from "@mui/material";
-import MaterialTable from "material-table";
 import React, { useState } from "react";
 import {
   useDeleteEmployeeResource,
   useGetEmployeeResource,
 } from "../../../hooks/resource/employeeResource/useEmployeeResource";
-import tableIcons from "../../../../theme/overrides/TableIcon";
 import { useGetEmployee } from "../../../hooks/employee/useEmployee";
 import { useNavigate } from "react-router-dom";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -18,6 +16,7 @@ import {
 import { useGetOfficeResource } from "../../../hooks/resource/officeResource/useOfficeResource";
 import PermissionHoc from "../../../hoc/permissionHoc";
 import HocButton from "../../../hoc/hocButton";
+import CustomTable from "../../../components/CustomTable/CustomTable";
 
 const EmployeeResource = ({ permissions }) => {
   const navigate = useNavigate();
@@ -154,35 +153,13 @@ const EmployeeResource = ({ permissions }) => {
         />
       </Box>
 
-      <MaterialTable
-        icons={tableIcons}
-        title="Employee Logistics"
+      <CustomTable
         columns={columns}
         data={employeeResourceData}
+        title="Employee Logistics"
         isLoading={isLoading}
-        options={{
-          exportButton: true,
-          padding: "dense",
-          margin: 50,
-          pageSize: 20,
-          emptyRowsWhenPaging: false,
-          actionsColumnIndex: -1,
-          headerStyle: {
-            backgroundColor: "#01579b",
-            color: "#FFF",
-            fontSize: "1rem",
-            padding: "dense",
-            height: 50,
-            textAlign: "center",
-            border: "2px solid #fff",
-            minHeight: "10px",
-            textTransform: "capitilize",
-          },
-          rowStyle: {
-            fontSize: ".8rem",
-          },
-        }}
         actions={actions}
+        exportButton={true}
       />
       {openDeleteModal && (
         <DeleteConfirmationModal
@@ -194,7 +171,7 @@ const EmployeeResource = ({ permissions }) => {
       )}
       {openAddModal && (
         <AddEmployeeResourceModal
-        id={editedEmployeeResouce?.id}
+          id={editedEmployeeResouce?.id}
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
         />

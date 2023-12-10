@@ -1,7 +1,6 @@
 import * as React from "react";
 import { useState } from "react";
-import MaterialTable from "material-table";
-import { Box, Button, Stack } from "@mui/material";
+import { Box} from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import {
@@ -13,13 +12,13 @@ import {
   EditDepartmentModal,
 } from "./DepartmentModal/DepartmentModal";
 import DeleteConfirmationModal from "../../components/Modal/DeleteConfirmationModal";
-import tableIcons from "../../../theme/overrides/TableIcon";
 import PermissionHoc from "../../hoc/permissionHoc";
 import HocButton from "../../hoc/hocButton";
 import useAuth from "../../../auth/hooks/component/login/useAuth";
+import CustomTable from "../../components/CustomTable/CustomTable";
 
 const Department = ({ permissions }) => {
-  const {isEmployee}=useAuth();
+  const { isEmployee } = useAuth();
   const { data: departmentData, isLoading } = useGetDepartment();
 
   const [openAddModal, setOpenAddModal] = useState(false);
@@ -94,16 +93,13 @@ const Department = ({ permissions }) => {
     },
     {
       icon: () => (
-        <HocButton
-          permissions={permissions.canDelete}
-          icon={<DeleteIcon />}
-        />
+        <HocButton permissions={permissions.canDelete} icon={<DeleteIcon />} />
       ),
       tooltip: "Delete Department",
       onClick: (event, rowData) => handleDeleteDepartment(rowData),
     },
   ];
-  
+
   if (isEmployee) {
     actions.length = 0;
   }
@@ -124,35 +120,12 @@ const Department = ({ permissions }) => {
 
       <br></br>
 
-      <MaterialTable
-        icons={tableIcons}
-        title="Department Data"
+      <CustomTable
         columns={columns}
         data={departmentData}
+        title="Department Data"
         isLoading={isLoading}
-        options={{
-          exportButton: true,
-          padding: "dense",
-          margin: 50,
-          pageSize: 10,
-          tableLayout: "auto",
-          emptyRowsWhenPaging: false,
-          actionsColumnIndex: -1,
-          headerStyle: {
-            backgroundColor: "#01579b",
-            color: "#FFF",
-            fontSize: "1rem",
-            padding: "dense",
-            height: 50,
-            textAlign: "center",
-            border: "2px solid #fff",
-            minHeight: "10px",
-            textTransform: "capitilize",
-          },
-          rowStyle: {
-            fontSize: ".8rem",
-          },
-        }}
+        exportButton={true}
         actions={actions}
       />
 

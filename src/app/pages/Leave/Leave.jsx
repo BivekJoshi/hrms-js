@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useState } from 'react';
-import MaterialTable from 'material-table';
 import { Box, Button, Chip, Stack, Tooltip, Typography } from '@mui/material';
 import { useGetLeaveType } from '../../hooks/leaveType/useLeaveType';
 
@@ -11,7 +10,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import { AddLeaveModal, EditLeaveModal } from './LeaveModal/LeaveModal';
 import DeleteConfirmationModal from '../../components/Modal/DeleteConfirmationModal';
-import tableIcons from '../../../theme/overrides/TableIcon';
 import { ButtonComponent } from '../../components/Button/ButtonComponent';
 import { useGetUserControl } from '../../hooks/auth/userControl/useUserControl';
 import ThemeModeContext from '../../../theme/ThemeModeContext';
@@ -267,31 +265,10 @@ const Leave = ({ isLoading }) => {
       </Box>
 
       <CustomTable
-        icons={tableIcons}
         columns={columns}
         data={leaveData}
         title='Leave Data'
         isLoading={loadingleave}
-        options={{
-          padding: 'dense',
-          margin: 50,
-          pageSize: 10,
-          emptyRowsWhenPaging: false,
-          headerStyle: {
-            backgroundColor: '#01579b',
-            color: '#FFF',
-            fontSize: '1rem',
-            padding: 'dense',
-            height: 50,
-            textAlign: 'center',
-            border: '2px solid #fff',
-            minHeight: '10px',
-            textTransform: 'capitalize',
-          },
-          rowStyle: {
-            fontSize: '.8rem',
-          },
-        }}
       />
       {openEditModal && (
         <EditLeaveModal

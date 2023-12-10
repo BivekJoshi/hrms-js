@@ -71,7 +71,7 @@ const ProjectDetail = () => {
   const columns = [
     {
       title: "SN",
-      render: (rowData) => rowData.tableData.index + 1,
+      render: (rowData) => rowData.tableData.id + 1,
       width: 80,
       sortable: false,
       sorting: false,

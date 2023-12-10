@@ -1,12 +1,9 @@
 import * as React from "react";
-import MaterialTable from "material-table";
-import { Button, Stack } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
-import HocButton from "../../../hoc/hocButton";
 import PermissionHoc from "../../../hoc/permissionHoc";
-import tableIcons from "../../../../theme/overrides/TableIcon";
 import useAuth from "../../../../auth/hooks/component/login/useAuth";
+import CustomTable from "../../../components/CustomTable/CustomTable";
 
 const CompanyTableView = ({
   permissions,
@@ -15,7 +12,7 @@ const CompanyTableView = ({
   handleEditCompany,
   handleDeleteCompany,
 }) => {
-  const {isEmployee}=useAuth();
+  const { isEmployee } = useAuth();
 
   const columns = [
     {
@@ -50,7 +47,8 @@ const CompanyTableView = ({
 
   const actions = [
     {
-      icon: () => (<ModeEditOutlineIcon />
+      icon: () => (
+        <ModeEditOutlineIcon />
         // <HocButton
         //   permissions={permissions?.canEdit}
         //   icon={<ModeEditOutlineIcon />}
@@ -60,7 +58,8 @@ const CompanyTableView = ({
       onClick: (event, rowData) => handleEditCompany(rowData),
     },
     {
-      icon: () => (<DeleteIcon />
+      icon: () => (
+        <DeleteIcon />
         // <HocButton permissions={permissions?.canDelete} icon={<DeleteIcon />} />
       ),
       tooltip: "Delete Company",
@@ -73,36 +72,15 @@ const CompanyTableView = ({
   }
 
   if (isLoading) return <>Loading</>;
+  
   return (
     <>
-      <MaterialTable
-        icons={tableIcons}
+      <CustomTable
         columns={columns}
         data={companyData}
         title="Company List"
         isLoading={isLoading}
-        options={{
-          exportButton: true,
-          padding: "dense",
-          margin: 50,
-          pageSize: 10,
-          emptyRowsWhenPaging: false,
-          actionsColumnIndex: -1,
-          headerStyle: {
-            backgroundColor: "#01579b",
-            color: "#FFF",
-            fontSize: "1rem",
-            padding: "dense",
-            height: 50,
-            textAlign: "center",
-            border: "2px solid #fff",
-            minHeight: "10px",
-            textTransform: "capitilize",
-          },
-          rowStyle: {
-            fontSize: ".8rem",
-          },
-        }}
+        exportButton={true}
         actions={actions}
       />
     </>
