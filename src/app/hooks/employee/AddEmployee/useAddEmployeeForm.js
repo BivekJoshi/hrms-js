@@ -26,7 +26,7 @@ const useAddEmployeeForm = (handleOpenSubmitModal) => {
     validationSchema: AddEmployeeSchema,
     onSubmit: (values) => {
       handleRequest(values);
-      handleOpenSubmitModal();
+      // handleOpenSubmitModal();
       formik.resetForm();
     },
   });

@@ -1,20 +1,21 @@
-import * as React from "react";
-import { useState } from "react";
-import MaterialTable from "material-table";
-import { Box, Button, Chip, Stack, Tooltip, Typography } from "@mui/material";
-import { useGetLeaveType } from "../../hooks/leaveType/useLeaveType";
+import * as React from 'react';
+import { useState } from 'react';
+import MaterialTable from 'material-table';
+import { Box, Button, Chip, Stack, Tooltip, Typography } from '@mui/material';
+import { useGetLeaveType } from '../../hooks/leaveType/useLeaveType';
 
-import { useDeleteLeave, useGetLeave } from "../../hooks/leave/useLeave";
-import { useGetEmployee } from "../../hooks/employee/useEmployee";
+import { useDeleteLeave, useGetLeave } from '../../hooks/leave/useLeave';
+import { useGetEmployee } from '../../hooks/employee/useEmployee';
 
-import DeleteIcon from "@mui/icons-material/Delete";
-import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
-import { AddLeaveModal, EditLeaveModal } from "./LeaveModal/LeaveModal";
-import DeleteConfirmationModal from "../../components/Modal/DeleteConfirmationModal";
-import tableIcons from "../../../theme/overrides/TableIcon";
-import { ButtonComponent } from "../../components/Button/ButtonComponent";
-import { useGetUserControl } from "../../hooks/auth/userControl/useUserControl";
-import ThemeModeContext from "../../../theme/ThemeModeContext";
+import DeleteIcon from '@mui/icons-material/Delete';
+import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
+import { AddLeaveModal, EditLeaveModal } from './LeaveModal/LeaveModal';
+import DeleteConfirmationModal from '../../components/Modal/DeleteConfirmationModal';
+import tableIcons from '../../../theme/overrides/TableIcon';
+import { ButtonComponent } from '../../components/Button/ButtonComponent';
+import { useGetUserControl } from '../../hooks/auth/userControl/useUserControl';
+import ThemeModeContext from '../../../theme/ThemeModeContext';
+import CustomTable from '../../components/CustomTable/CustomTable';
 
 const Leave = ({ isLoading }) => {
   const { data: leaveData, isLoading: loadingleave } = useGetLeave();
@@ -56,7 +57,7 @@ const Leave = ({ isLoading }) => {
   const getEmployeeName = (rowData) => {
     const employeeId = rowData.employeeId;
     const employee = employeeData?.find((emp) => emp.id === employeeId);
-    const name = `${employee?.firstName} ${employee?.middleName || ""} ${
+    const name = `${employee?.firstName} ${employee?.middleName || ''} ${
       employee?.lastName
     }`;
     return name;
@@ -74,21 +75,21 @@ const Leave = ({ isLoading }) => {
   const getUserName = (rowData) => {
     const confirmById = rowData?.confirmById;
     const user = UserData?.find((confirmBy) => confirmBy.id === confirmById);
-    const name = `${user?.name || "-"}`;
+    const name = `${user?.name || '-'}`;
     return name;
   };
 
   const columns = [
     {
-      title: "SN",
+      title: 'SN',
       render: (rowData) => rowData.tableData.id + 1,
       width: 80,
       sortable: false,
       sorting: false,
     },
     {
-      title: "Employee Name",
-      width: " 10%",
+      title: 'Employee Name',
+      width: ' 10%',
       render: (rowData) => {
         return <p>{getEmployeeName(rowData)} </p>;
       },
@@ -99,7 +100,7 @@ const Leave = ({ isLoading }) => {
       sorting: false,
     },
     {
-      title: "Leave Type",
+      title: 'Leave Type',
       render: (rowData) => {
         return <p>{getLeaveTypeName(rowData)}</p>;
       },
@@ -107,38 +108,38 @@ const Leave = ({ isLoading }) => {
         const leaveTypeName = getLeaveTypeName(rowData);
         return leaveTypeName.toLowerCase().includes(searchValue.toLowerCase());
       },
-      width: " 10%",
+      width: ' 10%',
       sorting: false,
     },
     {
-      title: "From",
-      field: "fromDate",
-      emptyValue: "-",
+      title: 'From',
+      field: 'fromDate',
+      emptyValue: '-',
       sorting: false,
     },
     {
-      title: "To",
-      field: "toDate",
-      emptyValue: "-",
+      title: 'To',
+      field: 'toDate',
+      emptyValue: '-',
       sorting: false,
     },
     {
-      title: "Status",
-      field: "leaveStatus",
-      emptyValue: "-",
+      title: 'Status',
+      field: 'leaveStatus',
+      emptyValue: '-',
       cellStyle: {
-        whiteSpace: "nowrap",
+        whiteSpace: 'nowrap',
       },
       render: (rowData) => {
         const status = rowData.leaveStatus;
-        let chipColor = "";
+        let chipColor = '';
 
-        if (status === "APPROVED") {
-          chipColor = "green";
-        } else if (status === "REJECTED") {
-          chipColor = "red";
-        } else if (status === "PENDING") {
-          chipColor = "orange";
+        if (status === 'APPROVED') {
+          chipColor = 'green';
+        } else if (status === 'REJECTED') {
+          chipColor = 'red';
+        } else if (status === 'PENDING') {
+          chipColor = 'orange';
         }
 
         return (
@@ -146,8 +147,8 @@ const Leave = ({ isLoading }) => {
             label={status}
             style={{
               backgroundColor: chipColor,
-              color: "white",
-              width: " 9rem",
+              color: 'white',
+              width: ' 9rem',
             }}
           />
         );
@@ -155,23 +156,23 @@ const Leave = ({ isLoading }) => {
       sorting: false,
     },
     {
-      title: "Leave Reason",
-      field: "leaveReason",
-      emptyValue: "-",
+      title: 'Leave Reason',
+      field: 'leaveReason',
+      emptyValue: '-',
       render: (rowData) => {
         return (
-          <Tooltip title={rowData?.leaveReason} placement="top-start" arrow>
+          <Tooltip title={rowData?.leaveReason} placement='top-start' arrow>
             <Chip
               style={{
-                cursor: "pointer",
-                width: "170px",
-                height: "50px",
-                display: "block",
-                background: mode === "light" ? "white" : "#434343",
+                cursor: 'pointer',
+                width: '170px',
+                height: '50px',
+                display: 'block',
+                background: mode === 'light' ? 'white' : '#434343',
               }}
               label={
                 <Typography
-                  style={{ overflow: "hidden", textOverflow: "ellipsis" }}
+                  style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}
                 >
                   {rowData?.leaveReason}
                 </Typography>
@@ -182,23 +183,23 @@ const Leave = ({ isLoading }) => {
       },
     },
     {
-      title: "Remark",
-      field: "leaveRemarks",
-      emptyValue: "-",
+      title: 'Remark',
+      field: 'leaveRemarks',
+      emptyValue: '-',
       render: (rowData) => {
         return (
-          <Tooltip title={rowData?.leaveRemarks} placement="top-start" arrow>
+          <Tooltip title={rowData?.leaveRemarks} placement='top-start' arrow>
             <Chip
               style={{
-                cursor: "pointer",
-                width: "170px",
-                height: "50px",
-                display: "block",
-                background: mode === "light" ? "white" : "#434343",
+                cursor: 'pointer',
+                width: '170px',
+                height: '50px',
+                display: 'block',
+                background: mode === 'light' ? 'white' : '#434343',
               }}
               label={
                 <Typography
-                  style={{ overflow: "hidden", textOverflow: "ellipsis" }}
+                  style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}
                 >
                   {rowData?.leaveRemarks}
                 </Typography>
@@ -210,7 +211,7 @@ const Leave = ({ isLoading }) => {
     },
 
     {
-      title: "Approved By",
+      title: 'Approved By',
       render: (rowData) => {
         return <p>{getUserName(rowData)} </p>;
       },
@@ -222,22 +223,22 @@ const Leave = ({ isLoading }) => {
       sorting: false,
     },
     {
-      title: "Actions",
+      title: 'Actions',
       render: (rowData) => {
-        const isApprovedOrRejected = ["APPROVED", "REJECTED"].includes(
+        const isApprovedOrRejected = ['APPROVED', 'REJECTED'].includes(
           rowData.leaveStatus
         );
 
         return (
-          <Stack direction="row" spacing={0}>
+          <Stack direction='row' spacing={0}>
             <Button
-              color="primary"
+              color='primary'
               onClick={() => handleEditLeave(rowData)}
               disabled={isApprovedOrRejected}
             >
               <ModeEditOutlineIcon />
             </Button>
-            <Button color="primary" onClick={() => handleDeleteLeave(rowData)}>
+            <Button color='primary' onClick={() => handleDeleteLeave(rowData)}>
               <DeleteIcon />
             </Button>
           </Stack>
@@ -251,40 +252,44 @@ const Leave = ({ isLoading }) => {
 
   return (
     <>
-      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'flex-end',
+          marginBottom: '16px',
+        }}
+      >
         <ButtonComponent
           OnClick={handleAddOpenModal}
-          Border="none"
-          buttonName={"+ Add Leave"}
+          Border='none'
+          buttonName={'+ Add Leave'}
         />
       </Box>
-      <br />
-      <br />
 
-      <MaterialTable
+      <CustomTable
         icons={tableIcons}
         columns={columns}
         data={leaveData}
-        title="Leave Data"
+        title='Leave Data'
         isLoading={loadingleave}
         options={{
-          padding: "dense",
+          padding: 'dense',
           margin: 50,
           pageSize: 10,
           emptyRowsWhenPaging: false,
           headerStyle: {
-            backgroundColor: "#01579b",
-            color: "#FFF",
-            fontSize: "1rem",
-            padding: "dense",
+            backgroundColor: '#01579b',
+            color: '#FFF',
+            fontSize: '1rem',
+            padding: 'dense',
             height: 50,
-            textAlign: "center",
-            border: "2px solid #fff",
-            minHeight: "10px",
-            textTransform: "capitalize",
+            textAlign: 'center',
+            border: '2px solid #fff',
+            minHeight: '10px',
+            textTransform: 'capitalize',
           },
           rowStyle: {
-            fontSize: ".8rem",
+            fontSize: '.8rem',
           },
         }}
       />
@@ -306,7 +311,7 @@ const Leave = ({ isLoading }) => {
           open={openDeleteModal}
           handleCloseModal={handleCloseDeleteModal}
           handleConfirmDelete={handleConfirmDelete}
-          message={"Leave"}
+          message={'Leave'}
         />
       )}
     </>
