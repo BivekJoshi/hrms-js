@@ -37,7 +37,6 @@ const DepartmentFields = ({ onClose, isLoading, data }) => {
               formik.touched.departmentName && formik.errors.departmentName
             }
             variant="outlined"
-            autoFocus
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
@@ -59,7 +58,6 @@ const DepartmentFields = ({ onClose, isLoading, data }) => {
               formik.touched.departmentType && formik.errors.departmentType
             }
             variant="outlined"
-            autoFocus
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
@@ -83,7 +81,6 @@ const DepartmentFields = ({ onClose, isLoading, data }) => {
               formik.errors.departmentDescription
             }
             variant="outlined"
-            autoFocus
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
