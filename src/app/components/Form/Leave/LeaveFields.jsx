@@ -16,6 +16,7 @@ import useLeaveForm from "../../../hooks/leave/LeaveForm/useLeaveForm";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
 import { ThemeSwitch } from "../../../../theme/ThemeSwitch";
 import useAuth from "../../../../auth/hooks/component/login/useAuth";
+import { ButtonComponent } from '../../Button/ButtonComponent';
 
 const leaveStatus = [
   {
@@ -213,8 +214,9 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
 
   const submitButtonText = data ? "Update Leave" : "Add Leave";
 
-    return (
-      !isLoading && (
+  return (
+    !isLoading && (
+      <>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={12}>
             {data ? (
@@ -427,12 +429,17 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
             justifyContent="flex-end"
             alignItems="flex-end"
           >
+            <ButtonComponent
+            variant="contained"
+            buttonName={submitButtonText}
+            color={"#fff"}
+            />
             <Button
               variant="contained"
               onClick={handleFormSubmit}
               sx={{ mt: 3, ml: 1 }}
             >
-              {submitButtonText}
+              
             </Button>
             <Button
               variant="contained"
@@ -444,6 +451,7 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
             </Button>
           </Grid>
         </Grid>
-      )
-    );
+      </>
+    )
+  );
 };

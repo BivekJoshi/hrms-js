@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
-import { Grid, Button, MenuItem, TextField } from "@mui/material";
+import { Grid, Button, MenuItem, TextField, Typography } from "@mui/material";
 import { Autocomplete } from "@mui/material";
 import { useGetEmployee } from "../../../hooks/employee/useEmployee";
 import { useAddUserControlForm } from "../../../pages/Auth/UserControl/Users/useAddUserControlForm";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
 import { toast } from "react-toastify";
+import CloseIcon from "@mui/icons-material/Close";
 
 export const AddUserControlFields = ({ onClose }) => {
   const { data: employeeData } = useGetEmployee();
@@ -31,6 +32,7 @@ export const AddUserControlFields = ({ onClose }) => {
   };
 
   return (
+    <>
     <Grid container spacing={3}>
       <Grid item xs={12} sm={12}>
         <Autocomplete
@@ -91,7 +93,8 @@ export const AddUserControlFields = ({ onClose }) => {
         <Button
           variant="contained"
           onClick={handleFormSubmit}
-          sx={{ mt: 3, ml: 1 }}
+          sx={{ mt: 3, ml: 1, color: "#fff" }}
+          
         >
           Add User
         </Button>
@@ -105,5 +108,7 @@ export const AddUserControlFields = ({ onClose }) => {
         </Button>
       </Grid>
     </Grid>
+    </>
+    
   );
 };

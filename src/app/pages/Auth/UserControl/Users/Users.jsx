@@ -107,7 +107,7 @@ const Users = ({ permissions }) => {
             <Button
               type="button"
               variant="contained"
-              sx={{ maxWidth: "fit-content" }}
+              sx={{ maxWidth: "fit-content", color: "#fff" }}
               onClick={handleAddOpenModal}
             >
               + Add User
@@ -145,6 +145,7 @@ const Users = ({ permissions }) => {
 
         {openAddModal && (
           <AddUserControlModal
+          title={"Add User"}
             open={openAddModal}
             handleCloseModal={handleCloseAddModal}
           />

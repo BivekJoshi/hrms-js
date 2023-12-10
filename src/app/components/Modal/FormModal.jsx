@@ -1,9 +1,10 @@
 import React from "react";
-import { Box, Modal } from "@mui/material";
+import { Box, Divider, Grid, IconButton, Modal, Typography } from "@mui/material";
 import ThemeModeContext from "../../../theme/ThemeModeContext";
 import { useContext } from "react";
+import CloseIcon from "@mui/icons-material/Close";
 
-const FormModal = ({ open, onClose, formComponent, sx }) => {
+const FormModal = ({ open, onClose, formComponent, sx, title }) => {
   const { mode } = useContext(ThemeModeContext);
   const style = {
     position: "absolute",
@@ -17,19 +18,41 @@ const FormModal = ({ open, onClose, formComponent, sx }) => {
     boxShadow: 24,
     p: 4,
     background: mode === "light" ? "" : "#413e3e",
-    color: mode === "light" ? "" :'white'
+    color: mode === "light" ? "" : "white",
   };
 
   return (
-    <Modal
-      open={open}
-      onClose={onClose}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
-      // sx={sx}
-    >
-      <Box sx={style}>{formComponent}</Box>
-    </Modal>
+    <>
+      <Modal
+        open={open}
+        onClose={onClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+        // sx={sx}
+      >
+        <Box sx={style}>
+         
+          <Grid sx={{display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "1rem", position: "relative"}}>
+          <Typography variant='h6'>{title ?? title}</Typography>
+          <div
+        style={{
+          width: '100%',
+          height: '1px',
+          backgroundColor: '#e0e0e0',
+          position: 'absolute',
+          bottom: '0',
+        }}
+      />
+          <IconButton
+            onClick={onClose}
+          >
+            <CloseIcon />
+          </IconButton>
+          </Grid>
+          {formComponent}
+        </Box>
+      </Modal>
+    </>
   );
 };
 

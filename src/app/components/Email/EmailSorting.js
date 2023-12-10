@@ -5,10 +5,10 @@ import { useGetProjectEmployee } from "../../hooks/project/projectEmployee/usePr
 // export const EmailSorting = () => {
 //   const { data : employeeProjectData } = useGetProjectEmployee();
 //   const { data : employeeData } = useGetProjectEmployee();
-// // console.log(employeeProjectData)
+
 //   if (employeeProjectData) {
 //     const filteredProject = employeeProjectData.filter((project) => project?.id);
-//     console.log(filteredProject)
+
 //   }
 // }
 

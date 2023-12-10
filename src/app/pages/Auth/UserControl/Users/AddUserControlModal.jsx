@@ -4,9 +4,10 @@ import { AddUserControlFields } from '../../../../components/Form/User/AddUserCo
 import { EditUserControlFieldsRole } from '../../../../components/Form/User/EditUserControlFieldsRole';
 
 
-export const AddUserControlModal = ({ open, handleCloseModal }) => {
+export const AddUserControlModal = ({ open, handleCloseModal, title }) => {
     return (
         <FormModal
+        title={title}
             open={open}
             onClose={handleCloseModal}
             formComponent={<AddUserControlFields onClose={handleCloseModal} />}

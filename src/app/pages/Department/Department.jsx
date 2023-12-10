@@ -19,7 +19,7 @@ import HocButton from "../../hoc/hocButton";
 import useAuth from "../../../auth/hooks/component/login/useAuth";
 
 const Department = ({ permissions }) => {
-  const {isEmployee}=useAuth();
+  const { isEmployee } = useAuth();
   const { data: departmentData, isLoading } = useGetDepartment();
 
   const [openAddModal, setOpenAddModal] = useState(false);
@@ -94,16 +94,13 @@ const Department = ({ permissions }) => {
     },
     {
       icon: () => (
-        <HocButton
-          permissions={permissions.canDelete}
-          icon={<DeleteIcon />}
-        />
+        <HocButton permissions={permissions.canDelete} icon={<DeleteIcon />} />
       ),
       tooltip: "Delete Department",
       onClick: (event, rowData) => handleDeleteDepartment(rowData),
     },
   ];
-  
+
   if (isEmployee) {
     actions.length = 0;
   }
@@ -158,6 +155,7 @@ const Department = ({ permissions }) => {
 
       {openEditModal && (
         <EditDepartmentModal
+          title={"Edit Department"}
           id={editedDepartment?.id}
           open={openEditModal}
           handleCloseModal={handleCloseEditModal}
@@ -165,6 +163,7 @@ const Department = ({ permissions }) => {
       )}
       {openAddModal && (
         <AddDepartmentModal
+          title={"Add Department"}
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
         />

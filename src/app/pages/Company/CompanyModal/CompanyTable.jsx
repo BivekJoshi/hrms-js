@@ -41,6 +41,7 @@ const CompanyTable = ({ permissions }) => {
             />
             {openEditModal && (
                 <EditCompanyModal
+                title={"Edit Company"}
                     id={editedCompany?.id}
                     open={openEditModal}
                     handleCloseModal={handleCloseEditModal}

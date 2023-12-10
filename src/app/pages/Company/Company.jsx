@@ -59,6 +59,7 @@ const Company = ({ permissions }) => {
       </TabContext>
       {openAddModal && (
         <AddCompanyModal
+        title={"Add Company"}
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
         />

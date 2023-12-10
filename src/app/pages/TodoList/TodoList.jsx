@@ -124,6 +124,7 @@ const TodoList = ({ permissions }) => {
         <ButtonComponent
           OnClick={handleAddOpenModal}
           buttonName={"+ Add Todo"}
+          color= "#fff"
         />
       </Box>
       <br />
@@ -160,6 +161,7 @@ const TodoList = ({ permissions }) => {
 
       {openEditModal && (
         <EditTodoListModal
+        title={"Edit Todo List"}
           id={editedTodo?.id}
           open={openEditModal}
           handleCloseModal={handleCloseEditModal}
@@ -170,6 +172,7 @@ const TodoList = ({ permissions }) => {
         <AddTodoListModal
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
+          title={"Add Todo List"}
         />
       )}
     </>

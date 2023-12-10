@@ -152,6 +152,7 @@ const Designation = ({ permissions }) => {
 
       {openEditModal && (
         <EditDesignationModal
+          title={"Edit Designation"}
           id={editedDesignation?.id}
           open={openEditModal}
           handleCloseModal={handleCloseEditModal}
@@ -159,6 +160,7 @@ const Designation = ({ permissions }) => {
       )}
       {openAddModal && (
         <AddDesignationModal
+          title={"Add Designation"}
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
         />

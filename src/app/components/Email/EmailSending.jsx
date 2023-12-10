@@ -4,7 +4,6 @@ import { getMaleEmployeeById } from './EmailSorting';
 const EmailSending = () => {
     const  maleData = getMaleEmployeeById();
 
-console.log(maleData)
     return (
         <div>
         hello    

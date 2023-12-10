@@ -56,7 +56,7 @@ const OfficeResource = () => {
     },
     {
       title: "Emloyee Name",
-     render: (rowData) => {
+      render: (rowData) => {
         return <p>{getEmployeeName(rowData)} </p>;
       },
       // emptyValue: "-",
@@ -155,6 +155,7 @@ const OfficeResource = () => {
       />
       {openAddModal && (
         <AddOfficeResourceModal
+          title={"Add Logistics"}
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
         />

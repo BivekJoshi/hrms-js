@@ -262,6 +262,7 @@ const Leave = ({ isLoading }) => {
         <ButtonComponent
           OnClick={handleAddOpenModal}
           Border='none'
+          color={"#fff"}
           buttonName={'+ Add Leave'}
         />
       </Box>
@@ -298,12 +299,14 @@ const Leave = ({ isLoading }) => {
           id={editedLeave?.id}
           open={openEditModal}
           handleCloseModal={handleCloseEditModal}
+          title={"Edit Leave"}
         />
       )}
       {openAddModal && (
         <AddLeaveModal
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
+          title={"Apply Leave"}
         />
       )}
       {openDeleteModal && (

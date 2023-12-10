@@ -195,6 +195,7 @@ const EmployeeResource = ({ permissions }) => {
       )}
       {openAddModal && (
         <AddEmployeeResourceModal
+        title={"Add Logistics"}
         id={editedEmployeeResouce?.id}
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
@@ -202,6 +203,7 @@ const EmployeeResource = ({ permissions }) => {
       )}
       {openEditModal && (
         <EditEmployeeResourceModal
+        title={"Edit Logistics"}
           id={editedEmployeeResouce?.id}
           open={openEditModal}
           handleCloseModal={handleCloseEditModal}

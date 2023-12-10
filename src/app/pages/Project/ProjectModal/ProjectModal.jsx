@@ -12,9 +12,10 @@ import ProjectAssignTaskField from '../../../components/Form/Project/ProjectTask
 
 
 
-export const AddProjectModal = ({ open, handleCloseModal }) => {
+export const AddProjectModal = ({ open, handleCloseModal, title }) => {
     return (
         <FormModal
+        title={title}
             open={open}
             onClose={handleCloseModal}
             formComponent={<AddProjectFields onClose={handleCloseModal} />}
@@ -23,11 +24,12 @@ export const AddProjectModal = ({ open, handleCloseModal }) => {
 }
 
 
-export const EditProjectModal = ({ open, handleCloseModal, id }) => {
+export const EditProjectModal = ({ open, handleCloseModal, id, title }) => {
     const { data } = useGetProjectById(id);
     return (
         <div>
             <FormModal
+                    title={title}
                 open={open}
                 onClose={handleCloseModal}
                 formComponent={<EditProjectFields onClose={handleCloseModal} data={data} />} />
@@ -46,11 +48,12 @@ export const AddProjectActiveModal = ({ open, handleCloseModal, id }) => {
     )
 }
 
-export const DeactivateProjectModal = ({ open, handleCloseModal, id }) => {
+export const DeactivateProjectModal = ({ open, handleCloseModal, id, title }) => {
     const { data } = useGetProjectById(id);
     return (
         <div>
             <FormModal
+            title={title}
                 open={open}
                 onClose={handleCloseModal}
                 formComponent={<EditProjectDeactivateFields onClose={handleCloseModal} data={data} />} />
