@@ -113,16 +113,6 @@ export default function EmployeeSidebar() {
       subMenus: [],
     },
     {
-      name: "Leave Type",
-      path: "leavetype",
-      icon: (
-        <MailIcon
-          sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
-        />
-      ),
-      subMenus: [],
-    },
-    {
       name: "Project",
       icon: (
         <AddchartIcon

@@ -32,11 +32,11 @@ const ApplyLeaveField = () => {
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
-    if (formik.isValid) {
+    // if (formik.isValid) {
       navigate("/employee/applyleave")
-    } else {
-      toast.error("Please make sure you have filled the form correctly");
-    }
+    // } else {
+    //   toast.error("Please make sure you have filled the form correctly");
+    // }
   };
 
   const capitalize = (str) => {
@@ -262,7 +262,7 @@ const DateInput = ({ formik, isHalfDay , isMultipleDays }) => {
             row
             aria-labelledby="demo-row-radio-buttons-group-label"
             name="halfLeaveType"
-            value={formik.values.halfLeaveType}
+            value={formik.values.halfLeaveType || "FIRST_HALF"}
             onChange={formik.handleChange}
             style={{ display: "flex", marginTop: "0.6rem" }}
           >
