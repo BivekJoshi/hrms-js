@@ -21,11 +21,17 @@ const BarChatDiagram = ({ dashboardData }) => {
     `${dashboardData?.femaleEmployees}`,
     `${dashboardData?.allProjects}`,
   ];
-  
+const barColors = [
+    "#FF5733",
+    "#33FF57",
+    "#3366FF",
+    "#FF33A1",
+    "#FFFF33",
+  ];
   const chartOptions = {
     chart: {
       type: "bar",
-      height: 430,
+      height: 390,
     },
     plotOptions: {
       bar: {
@@ -35,6 +41,7 @@ const BarChatDiagram = ({ dashboardData }) => {
         },
       },
     },
+    colors: barColors,
     dataLabels: {
       enabled: true,
       style: {
@@ -61,17 +68,16 @@ const BarChatDiagram = ({ dashboardData }) => {
             mode === "dark" ? "white" : "black",
             mode === "dark" ? "white" : "black",
             mode === "dark" ? "white" : "black",
-            mode === "dark" ? "white" : "black",
-            mode === "dark" ? "white" : "black",
-            mode === "dark" ? "white" : "black",
-            mode === "dark" ? "white" : "black",
           ],
         },
       },
     },
     yaxis: {
-      categories: names, // Swap with xaxis
+      categories: names,
       labels: {
+        // formatter: function (value) {
+        //   return value + "%";
+        // },
         style: {
           colors: [mode === "dark" ? "white" : "black"],
         },
@@ -89,8 +95,8 @@ const BarChatDiagram = ({ dashboardData }) => {
   const chartData = {
     series: [
       {
-        name: names, // Array of names
-        data: Data.map(value => parseFloat(value)),
+        name: "Total ", // Array of names
+        data: Data,
       },
     ],
     options: chartOptions,
@@ -107,9 +113,8 @@ const BarChatDiagram = ({ dashboardData }) => {
         options={chartOptions}
         series={chartData.series}
         type="bar"
-        height={250}
+        height={350}
       />
-      hi
     </Box>
   );
 };
