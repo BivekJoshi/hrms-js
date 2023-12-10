@@ -1,6 +1,5 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-import MaterialTable from "material-table";
 import { Box, Button, Stack } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
@@ -14,16 +13,14 @@ import {
   EditLeaveTypeModal,
 } from "./LeaveTypeModal/LeaveTypeModal";
 import DeleteConfirmationModal from "../../components/Modal/DeleteConfirmationModal";
-import tableIcons from "../../../theme/overrides/TableIcon";
-import { ButtonComponent } from "../../components/Button/ButtonComponent";
 import PermissionHoc from "../../hoc/permissionHoc";
 import HocButton from "../../hoc/hocButton";
 import useAuth from "../../../auth/hooks/component/login/useAuth";
+import CustomTable from "../../components/CustomTable/CustomTable";
 
 const LeaveType = ({ permissions }) => {
   const { data: leaveTypeData, isLoading } = useGetLeaveType();
   const { isSuperAdmin, isEmployee } = useAuth();
-
 
   const [existingLeaveTypes, setExistingLeaveTypes] = useState([]);
 
@@ -108,7 +105,7 @@ const LeaveType = ({ permissions }) => {
       sorting: false,
       emptyValue: "-",
     },
-    
+
     {
       title: "Actions",
       render: (rowData) => (
@@ -145,32 +142,11 @@ const LeaveType = ({ permissions }) => {
         />
       </Box>
       <br></br>
-      <MaterialTable
-        icons={tableIcons}
+      <CustomTable
         columns={columns}
         data={leaveTypeData}
         title="Leave Type"
         isLoading={isLoading}
-        options={{
-          padding: "dense",
-          margin: 50,
-          pageSize: 10,
-          emptyRowsWhenPaging: false,
-          headerStyle: {
-            backgroundColor: "#01579b",
-            color: "#FFF",
-            fontSize: "1rem",
-            padding: "dense",
-            height: 50,
-            textAlign: "center",
-            border: "2px solid #fff",
-            minHeight: "10px",
-            textTransform: "capitalize",
-          },
-          rowStyle: {
-            fontSize: ".8rem",
-          },
-        }}
       />
       {openEditModal && (
         <EditLeaveTypeModal

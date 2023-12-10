@@ -82,9 +82,8 @@
 //   );
 // }
 
-import MaterialTable from "material-table";
 import React from "react";
-import tableIcons from "../../../../theme/overrides/TableIcon";
+import CustomTable from "../../../components/CustomTable/CustomTable";
 
 const columns = [
   {
@@ -124,36 +123,10 @@ const columns = [
   },
 ].filter(Boolean);
 
-const ProjectMyTask = ({taskData}) => {
+const ProjectMyTask = ({ taskData }) => {
   return (
     <>
-      <MaterialTable
-        columns={columns}
-        data={taskData}
-        title="My Task"
-        // isLoading={isLoading}
-        icons={tableIcons}
-        options={{
-          padding: "dense",
-          margin: 50,
-          pageSize: 10,
-          emptyRowsWhenPaging: false,
-          headerStyle: {
-            backgroundColor: "#01579b",
-            color: "#FFF",
-            fontSize: "1rem",
-            padding: "dense",
-            height: 50,
-            textAlign: "center",
-            border: "2px solid #fff",
-            minHeight: "10px",
-            textTransform: "capitilize",
-          },
-          rowStyle: {
-            fontSize: ".8rem",
-          },
-        }}
-      />
+      <CustomTable columns={columns} data={taskData} title="My Task" />
     </>
   );
 };

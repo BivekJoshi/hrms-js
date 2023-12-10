@@ -1,9 +1,8 @@
-import MaterialTable from "@material-table/core";
 import React, { useState } from "react";
-import { Button, Stack } from "@mui/material";
 import { useGetDeactivatedEmployee } from "../../../hooks/employee/DeactivateEmploye/useEmployee";
 import { EditActivationEmployeeModal } from "../EmployeeDeactivationModal/EditDeactivationEmployeeModal";
-import RestoreFromTrashOutlinedIcon from '@mui/icons-material/RestoreFromTrashOutlined';
+import RestoreFromTrashOutlinedIcon from "@mui/icons-material/RestoreFromTrashOutlined";
+import CustomTable from "../../../components/CustomTable/CustomTable";
 
 const DeactivatedEmployee = () => {
   const { data: deactivateEmployee, isLoading } = useGetDeactivatedEmployee();
@@ -20,7 +19,7 @@ const DeactivatedEmployee = () => {
   const columns = [
     {
       title: "SN",
-      render: (rowData) => rowData.tableData.index + 1,
+      render: (rowData) => rowData.tableData.id + 1,
       width: "3%",
       maxWidth: "50px",
       sortable: false,
@@ -66,7 +65,7 @@ const DeactivatedEmployee = () => {
 
   const actions = [
     {
-      icon: () => (<RestoreFromTrashOutlinedIcon/>),
+      icon: () => <RestoreFromTrashOutlinedIcon />,
       tooltip: "Activate Employee",
       onClick: (event, rowData) => handleDeactivatedEmployee(rowData),
     },
@@ -76,28 +75,11 @@ const DeactivatedEmployee = () => {
 
   return (
     <>
-      <MaterialTable
+      <CustomTable
         columns={columns}
         data={deactivateEmployee}
         title="In Active Employee"
         isLoading={isLoading}
-        options={{
-          padding: "dense",
-          margin: 50,
-          pageSize: 10,
-          emptyRowsWhenPaging: false,
-          actionsColumnIndex: -1,
-          headerStyle: {
-            backgroundColor: "#01579b",
-            color: "#FFF",
-            fontSize: "1rem",
-            padding: "dense",
-            height: 50,
-          },
-          rowStyle: {
-            fontSize: ".8rem",
-          },
-        }}
         actions={actions}
       />
 

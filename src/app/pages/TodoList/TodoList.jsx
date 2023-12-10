@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import MaterialTable from "material-table";
 import { Box, Button, Chip, Stack } from "@mui/material";
 import Skeleton from "@mui/material/Skeleton";
 
@@ -11,10 +10,10 @@ import { AddTodoListModal, EditTodoListModal } from "./TodoModal/TodoModal";
 
 import DeleteIcon from "@mui/icons-material/Delete";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
-import tableIcons from "../../../theme/overrides/TableIcon";
 import { ButtonComponent } from "../../components/Button/ButtonComponent";
 import PermissionHoc from "../../hoc/permissionHoc";
 import HocButton from "../../hoc/hocButton";
+import CustomTable from "../../components/CustomTable/CustomTable";
 
 const TodoList = ({ permissions }) => {
   const { data: todoListData, isLoading } = useGetTodoList();
@@ -98,12 +97,12 @@ const TodoList = ({ permissions }) => {
 
   const actions = [
     {
-      icon: () => (<ModeEditOutlineIcon sx={{color:"#01579B"}}/>),
+      icon: () => <ModeEditOutlineIcon sx={{ color: "#01579B" }} />,
       tooltip: "Edit To Do",
       onClick: (event, rowData) => handleEditTodoList(rowData),
     },
     {
-      icon: () => (<DeleteIcon sx={{color:"#01579B"}}/>),
+      icon: () => <DeleteIcon sx={{ color: "#01579B" }} />,
       tooltip: "Delete List",
       onClick: (event, rowData) => handleDeleteTodoList(rowData.id),
     },
@@ -127,34 +126,11 @@ const TodoList = ({ permissions }) => {
         />
       </Box>
       <br />
-      <MaterialTable
-        icons={tableIcons}
+      <CustomTable
         columns={columns}
         data={todoListData}
         title="Todo List"
         isLoading={isLoading}
-        options={{
-          padding: "dense",
-          margin: 50,
-          pageSize: 10,
-          emptyRowsWhenPaging: false,
-          actionsColumnIndex: -1,
-          headerStyle: {
-            backgroundColor: "#01579b",
-            color: "#FFF",
-            fontSize: "1rem",
-            padding: "dense",
-            height: 50,
-            textAlign: "center",
-            border: "2px solid #fff",
-            minHeight: "10px",
-            textTransform: "capitilize",
-          },
-          rowStyle: {
-            fontSize: ".8rem",
-          },
-        }}
-        onRowDoubleClick={(_event, rowData) => handleDoubleClickRow(rowData)}
         actions={actions}
       />
 

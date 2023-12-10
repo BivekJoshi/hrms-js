@@ -4,11 +4,11 @@ import { useParams } from "react-router-dom";
 import { Box, Button } from "@mui/material";
 import { AddPromotionHistory } from "./PromotionHistoryModal";
 import { useState } from "react";
-import MaterialTable from "@material-table/core";
 import "../../EmployProfile/Style/Style.css";
 import { useGetDesignation } from "../../../../../hooks/designation/useDesignation";
 import useAuth from "../../../../../../auth/hooks/component/login/useAuth";
 import { useGetLoggedInUserInfo } from "../../../../../hooks/employee/useEmployee";
+import CustomTable from "../../../../../components/CustomTable/CustomTable";
 
 const PromotionHistory = () => {
   const {
@@ -121,28 +121,11 @@ const PromotionHistory = () => {
         )}
       </Box>
 
-      <MaterialTable
-        style={{ padding: "1rem" }}
+      <CustomTable
         columns={columns}
         data={mappedPromotionHistory}
-        title="Promotion History"
-        isLoading={isLoading || loadingDesignation} // Consider both loading states
-        options={{
-          padding: "dense",
-          margin: 50,
-          pageSize: 10,
-          emptyRowsWhenPaging: false,
-          headerStyle: {
-            backgroundColor: "#01579b",
-            color: "#FFF",
-            fontSize: "1rem",
-            padding: "dense",
-            height: 50,
-          },
-          rowStyle: {
-            fontSize: 13,
-          },
-        }}
+        title="Designation List"
+        isLoading={isLoading || loadingDesignation}
       />
 
       {openAddModal && (

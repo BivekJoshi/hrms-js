@@ -35,7 +35,7 @@ const DeactivatedProject = () => {
   const columns = [
     {
       title: "SN",
-      render: (rowData) => rowData.tableData.index + 1,
+      render: (rowData) => rowData.tableData.id + 1,
       width: "2%",
       sortable: false,
       sorting: false,

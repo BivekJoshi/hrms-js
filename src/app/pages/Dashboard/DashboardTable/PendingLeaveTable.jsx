@@ -1,8 +1,7 @@
-import MaterialTable from "material-table";
 import React from "react";
-import tableIcons from "../../../../theme/overrides/TableIcon";
 import { useGetLeaveType } from "../../../hooks/leaveType/useLeaveType";
 import { useGetEmployee } from "../../../hooks/employee/useEmployee";
+import CustomTable from "../../../components/CustomTable/CustomTable";
 
 const PendingLeaveTable = ({ pendingLeaveData, loading }) => {
   const { data: employeeData, isLoading: loadingemployee } = useGetEmployee();
@@ -13,7 +12,8 @@ const PendingLeaveTable = ({ pendingLeaveData, loading }) => {
 
   const getEmployeeName = (rowData) => {
     const employeeId = rowData.employeeId;
-    const employee = employeeData && employeeData?.find((emp) => emp.id === employeeId);
+    const employee =
+      employeeData && employeeData?.find((emp) => emp.id === employeeId);
     const name = `${employee?.firstName} ${employee?.middleName || ""} ${
       employee?.lastName
     }`;
@@ -53,35 +53,15 @@ const PendingLeaveTable = ({ pendingLeaveData, loading }) => {
     },
   ];
   return (
-    !loading &&(
-    <MaterialTable
-    icons={tableIcons}
-    columns={columns}
-    data={pendingLeaveData}
-    title="Pending Leave Request"
-    isLoading={loading}
-    options={{
-      search:false,
-      padding: "dense",
-      margin: 50,
-      pageSize: 5,
-      // emptyRowsWhenPaging: false,
-      headerStyle: {
-        backgroundColor: "#01579b",
-        color: "#FFF",
-        fontSize: "1rem",
-        padding: "dense",
-        height: 50,
-        textAlign: "center",
-        minHeight: "10px",
-        textTransform: "capitilize",
-      },
-      rowStyle: {
-        fontSize: ".8rem",
-      },
-    }}
-  />
-   )
+    !loading && (
+      <CustomTable
+        columns={columns}
+        data={pendingLeaveData}
+        title="Pending Leave Request"
+        isLoading={loading}
+        search={false}
+      />
+    )
   );
 };
 

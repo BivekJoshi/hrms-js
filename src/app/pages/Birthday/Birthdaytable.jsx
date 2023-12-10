@@ -1,7 +1,7 @@
 import React from "react";
 import { format, addMonths } from "date-fns";
 import { enUS } from "date-fns/locale";
-import MaterialTable from "@material-table/core";
+import CustomTable from "../../components/CustomTable/CustomTable";
 
 const Age = (dateOfBirth) => {
   const year = new Date(dateOfBirth).getFullYear();
@@ -46,8 +46,7 @@ const Birthdaytable = ({ data, isloading, currMonth }) => {
       }
     });
   return (
-    <MaterialTable
-      title={currMonth}
+    <CustomTable
       columns={[
         { title: "Name", field: "fullName", sorting: false },
         { title: "Position", field: "position", sorting: false },
@@ -57,28 +56,12 @@ const Birthdaytable = ({ data, isloading, currMonth }) => {
         { title: "Gender", field: "gender", sorting: false },
       ]}
       data={Data}
-      options={{
-        padding: "dense",
-        margin: 50,
-        pageSize: 5,
-        emptyRowsWhenPaging: false,
-        headerStyle: {
-          backgroundColor: "#01579b",
-          color: "#FFF",
-          fontSize: "1rem",
-          padding: "dense",
-          height: 50,
-          textAlign: "center",
-          border: "2px solid #fff",
-          minHeight: "10px",
-          textTransform: "capitilize",
-        },
-        rowStyle: (rowData) => ({
-          backgroundColor: rowData.isTodayBirthday === true ? "green" : "",
-          color: rowData.isTodayBirthday ? "white" : "",
-          fontSize: ".8rem",
-        }),
-      }}
+      title={currMonth}
+      rowStyle={(rowData) => ({
+        backgroundColor: rowData.isTodayBirthday === true ? "red" : "",
+        color: rowData.isTodayBirthday ? "white" : "",
+        fontSize: ".8rem",
+      })}
     />
   );
 };
