@@ -26,9 +26,12 @@ const TodayBirthday = ({ data }) => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
     }
-    navigate(`/admin/employee/${employeeId}`);
     setOpen(false);
   };
+  const handleClick = () => {
+    navigate(`/admin/employee/${employeeId}`);
+    setOpen(false);
+  }
 
   function handleListKeyDown(event) {
     if (event.key === 'Tab') {
@@ -108,7 +111,7 @@ const TodayBirthday = ({ data }) => {
                       birthdayEmployeeName.map((bname, index) => (
                         <MenuItem
                           key={index}
-                          onClick={handleClose}
+                          onClick={handleClick}
                           sx={{ justifyContent: 'center' }}
                         >
                           {bname.fullName}

@@ -23,7 +23,7 @@ const useEditEmployeeForm = ({ data, isLoading }) => {
       departmentId: data?.department?.id,
     },
     validationSchema: EditEmployeeSchema,
-    enableReinitialize: 'true',
+    enableReinitialize: true,
     onSubmit: (values) => {
       handleRequest(values);
     },

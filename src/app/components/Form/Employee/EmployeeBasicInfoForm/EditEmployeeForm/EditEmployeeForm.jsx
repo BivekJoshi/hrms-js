@@ -17,6 +17,7 @@ import useAddBankForm from '../../../../../hooks/employee/AddBankForm/useAddBank
 import { useGetEmployeeById } from '../../../../../hooks/employee/useEmployee';
 import useEmployeeHistoryForm from '../../../../../hooks/employee/AddEmployeeHistory/useEmployeeHistoryForm';
 import { useAddDocumentForm } from '../../../../../hooks/employee/AddDocument/useAddDocumentForm';
+import { toast } from 'react-toastify';
 
 const EditEmployeeForm = () => {
   const { id } = useParams();
@@ -115,6 +116,7 @@ const EditEmployeeForm = () => {
         formik.setFieldTouched('');
         if (formik.dirty) {
           if (!formik.isValid) {
+            toast.warning(err)
             return;
           }
           formik.handleSubmit();
