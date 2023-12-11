@@ -71,7 +71,7 @@ const Holiday = ({ permissions }) => {
             color={"#fff"}
             variant={"contained"}
             onClick={() => setOpenAddModal(true)}
-            buttonName={"+Add Holiday"}
+            buttonName={"+ Add Holiday"}
           />
         </Box>
       )}

@@ -274,6 +274,7 @@ const Leave = ({ isLoading }) => {
       <CustomTable
         columns={columns}
         data={leaveData}
+        tableLayout='fixed'
         title='Leave Data'
         isLoading={loadingleave}
       />
