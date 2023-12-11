@@ -97,7 +97,7 @@ export const useEditProject = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(["editProject"], (formData) => editProject(formData), {
     onSuccess: (data, variables, context) => {
-      toast.success("successfully edited project");
+      toast.success("Successfully edited project");
       onSuccess && onSuccess(data, variables, context);
       queryClient.invalidateQueries("getProject");
     },
@@ -113,7 +113,7 @@ export const useDeleteProject = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(["removeProject"], (formData) => removeActiveProject(formData), {
     onSuccess: (data, variables, context) => {
-      toast.success("successfully removed project");
+      toast.success("Successfully removed project");
       onSuccess && onSuccess(data, variables, context);
       queryClient.invalidateQueries("getProject");
     },
@@ -128,7 +128,7 @@ export const useActiveProject = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(["activeProject"], (formData) => addActiveProject(formData), {
     onSuccess: (data, variables, context) => {
-      toast.success("successfully added project");
+      toast.success("Successfully added project");
       onSuccess && onSuccess(data, variables, context);
       queryClient.invalidateQueries("getDeactivatedProject");
     },

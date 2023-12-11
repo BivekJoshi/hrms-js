@@ -22,7 +22,7 @@ const CustomTable = (props) => {
           emptyRowsWhenPaging: props?.emptyRowsWhenPaging || false,
           exportButton: props?.exportButton || false,
           headerStyle: {
-            backgroundColor: palette?.primary?.main,
+            backgroundColor: palette?.secondary?.main,
             color: '#FFF',
             fontSize: '.8rem',
             fontWeight: 'bold',

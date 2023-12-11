@@ -131,7 +131,8 @@ const EditEmployeeForm = () => {
         }
         break;
       case 2:
-        familyFormik.setFieldTouched("");
+        familyFormik.setFieldTouched('');
+
         if (familyFormik.dirty) {
           familyFormik.handleSubmit();
         }
@@ -139,6 +140,7 @@ const EditEmployeeForm = () => {
           setActiveStep(activeStep + 1);
         }
         break;
+
       case 3:
         qualificationFormik.setFieldTouched("");
         if (qualificationFormik.dirty) {

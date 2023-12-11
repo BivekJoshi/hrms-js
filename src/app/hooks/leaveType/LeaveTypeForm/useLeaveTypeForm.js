@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 import { useAddLeaveType, useEditLeaveType } from "../useLeaveType";
 import { LeaveTypeSchema } from "../Validation/LeaveTypeScheme";
 
-const useLeaveTypeForm = (data) => {
+const useLeaveTypeForm = (data, onClose) => {
   const { mutate: addLeaveType } = useAddLeaveType({});
   const { mutate: editLeaveType } = useEditLeaveType({});
 
@@ -27,12 +27,21 @@ const useLeaveTypeForm = (data) => {
 
   const handleRequest = (values) => {
     values = { ...values };
-    addLeaveType(values, formik);
+    addLeaveType(values, {
+      onSuccess: () => {
+        onClose();
+        formik.resetForm();
+      },
+    });
   };
 
   const handledEditRequest = (values) => {
     values = { ...values };
-    editLeaveType(values, formik);
+    editLeaveType(values, {
+      onSuccess: () => {
+        onClose();
+      },
+    });
   };
   return { formik };
 };

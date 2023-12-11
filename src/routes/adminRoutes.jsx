@@ -120,7 +120,7 @@ const adminRoutes = [
     component: <EditEmployee />,
   },
   {
-    path: 'leavetype',
+    path: 'typeleav',
     name: 'Leave Type',
     id: nanoid(),
     component: <LeaveType component='leaveType' />,
@@ -222,7 +222,7 @@ const adminRoutes = [
     component: <OfficeResource component='officeResource' />,
   },
   {
-    path: 'resource/employee',
+    path: 'resource',
     name: 'Employee Logistics',
     id: nanoid(),
     component: <EmployeeResource component='employeeResource' />,
@@ -244,7 +244,7 @@ const adminRoutes = [
 
 export { adminRoutes };
 
-<Breadcrumbs aria-label='breadcrumb'>
+{/* <Breadcrumbs aria-label='breadcrumb'>
   <Link underline='hover' color='inherit' href='/'>
     MUI
   </Link>
@@ -256,7 +256,7 @@ export { adminRoutes };
     Core
   </Link>
   <Typography color='text.primary'>Breadcrumbs</Typography>
-</Breadcrumbs>;
+</Breadcrumbs>; */}
 
 export default function BreadCrumbs() {
   const { mode } = useContext(ThemeModeContext);
