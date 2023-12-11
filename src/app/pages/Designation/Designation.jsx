@@ -1,10 +1,9 @@
 import * as React from "react";
 import { useState } from "react";
-import MaterialTable from "@material-table/core";
 import { Box, Button, Stack } from "@mui/material";
 
 import DeleteIcon from "@mui/icons-material/Delete";
-import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
+import EditIcon from "@mui/icons-material/Edit";
 
 import {
   useDeleteDesignation,
@@ -15,9 +14,9 @@ import {
   EditDesignationModal,
 } from "./DesignationModal/DesignationModal";
 import DeleteConfirmationModal from "../../components/Modal/DeleteConfirmationModal";
-import { ButtonComponent } from "../../components/Button/ButtonComponent";
 import PermissionHoc from "../../hoc/permissionHoc";
 import HocButton from "../../hoc/hocButton";
+import CustomTable from "../../components/CustomTable/CustomTable";
 
 const Designation = ({ permissions }) => {
   const { data: designationData, isLoading } = useGetDesignation();
@@ -54,7 +53,7 @@ const Designation = ({ permissions }) => {
   const columns = [
     {
       title: "SN",
-      render: (rowData) => rowData.tableData.index + 1,
+      render: (rowData) => rowData.tableData.id + 1,
       maxWidth: "1px",
       sortable: false,
       sorting: false,
@@ -84,30 +83,22 @@ const Designation = ({ permissions }) => {
       title: "Details",
       field: "positionDetails",
       emptyValue: "-",
-      width: 80,
       sorting: false,
-    },
-    {
-      title: "Actions",
-      render: (rowData) => (
-        <Stack direction="row" spacing={0}>
-          <HocButton
-            permissions={permissions?.canEdit}
-            onClick={() => handleEditDesignation(rowData)}
-            icon={<ModeEditOutlineIcon />}
-          />
-          <HocButton
-            permissions={permissions?.canDelete}
-            onClick={() => handleDeleteDesignation(rowData)}
-            icon={<DeleteIcon />}
-          />
-        </Stack>
-      ),
-      sorting: false,
-      width: 80,
     },
   ].filter(Boolean);
 
+  const actions=[
+    {
+      icon:()=><EditIcon/>,
+      tooltip: "Edit Detail",
+      onClick: (event, rowData) => handleEditDesignation(rowData),
+    },
+    {
+      icon:()=><DeleteIcon/>,
+      tooltip: "Delete",
+      onClick: (event, rowData) => handleDeleteDesignation(rowData),
+    }
+  ];
   if (isLoading) return <>Loading</>;
 
   return (
@@ -122,32 +113,12 @@ const Designation = ({ permissions }) => {
         />
       </Box>
       <br />
-
-      <MaterialTable
+      <CustomTable
         columns={columns}
         data={designationData}
         title="Designation List"
         isLoading={isLoading}
-        options={{
-          padding: "dense",
-          margin: 50,
-          pageSize: 10,
-          emptyRowsWhenPaging: false,
-          headerStyle: {
-            backgroundColor: "#01579b",
-            color: "#FFF",
-            fontSize: "1rem",
-            padding: "dense",
-            height: 50,
-            textAlign: "center",
-            border: "2px solid #fff",
-            minHeight: "10px",
-            textTransform: "capitilize",
-          },
-          rowStyle: {
-            fontSize: ".8rem",
-          },
-        }}
+        actions={actions}
       />
 
       {openEditModal && (

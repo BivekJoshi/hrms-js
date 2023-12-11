@@ -31,10 +31,10 @@ const TodayBirthday = ({ data }) => {
   };
 
   function handleListKeyDown(event) {
-    if (event.key === "Tab") {
+    if (event.key === 'Tab') {
       event.preventDefault();
       setOpen(false);
-    } else if (event.key === "Escape") {
+    } else if (event.key === 'Escape') {
       setOpen(false);
     }
   }
@@ -49,57 +49,57 @@ const TodayBirthday = ({ data }) => {
   }, [open]);
 
   const btnStyle = {
-    color: "#fff",
+    color: '#fff',
   };
 
   return (
     <Box>
       <Button
         ref={anchorRef}
-        id="composition-button"
-        aria-controls={open ? "composition-menu" : undefined}
-        aria-expanded={open ? "true" : undefined}
-        aria-haspopup="true"
+        id='composition-button'
+        aria-controls={open ? 'composition-menu' : undefined}
+        aria-expanded={open ? 'true' : undefined}
+        aria-haspopup='true'
         onClick={handleToggle}
         style={btnStyle}
       >
         <CakeIcon />
-        {data?.isChecked ? "" : displayCount}
+        {data?.isChecked ? '' : displayCount}
       </Button>
       {birthdayEmployeeCount !== 0 ? (
         <Popper
           open={open}
           anchorEl={anchorRef.current}
           role={undefined}
-          placement="bottom-start"
+          placement='bottom-start'
           transition
           disablePortal
-          style={{ marginLeft: "-4rem" }}
+          style={{ marginLeft: '-4rem' }}
         >
           {({ TransitionProps, placement }) => (
             <Grow
               {...TransitionProps}
               style={{
-                background: mode === "light" ? "" : "#4d4c4c",
+                background: mode === 'light' ? '' : '#4d4c4c',
                 transformOrigin:
-                  placement === "bottom-start" ? "left top" : "left bottom",
+                  placement === 'bottom-start' ? 'left top' : 'left bottom',
               }}
             >
               <Paper>
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList
                     autoFocusItem={open}
-                    id="composition-menu"
-                    aria-labelledby="composition-button"
+                    id='composition-menu'
+                    aria-labelledby='composition-button'
                     onKeyDown={handleListKeyDown}
                     sx={{
-                      textAlign: "center",
-                      padding: "0.5rem 1rem",
+                      textAlign: 'center',
+                      padding: '0.5rem 1rem',
                     }}
                   >
                     <Typography
-                      variant="h6"
-                      color={mode === "light" ? "primary" : "white"}
+                      variant='h6'
+                      color={mode === 'light' ? 'primary' : 'white'}
                       fontWeight={400}
                     >
                       Today's Birthday
@@ -109,7 +109,7 @@ const TodayBirthday = ({ data }) => {
                         <MenuItem
                           key={index}
                           onClick={handleClose}
-                          sx={{ justifyContent: "center" }}
+                          sx={{ justifyContent: 'center' }}
                         >
                           {bname.fullName}
                         </MenuItem>
@@ -125,37 +125,36 @@ const TodayBirthday = ({ data }) => {
           open={open}
           anchorEl={anchorRef.current}
           role={undefined}
-          placement="bottom-start"
+          placement='bottom-start'
           transition
           disablePortal
-          style={{ width: { xs: "30%", lg: "15%" }, marginLeft: "-4rem" }}
+          style={{ width: { xs: '30%', lg: '15%' }, marginLeft: '-4rem' }}
         >
           {({ TransitionProps, placement }) => (
             <Grow
               {...TransitionProps}
               style={{
-                background: mode === "light" ? "" : "#4d4c4c",
+                background: mode === 'light' ? '' : '#4d4c4c',
                 transformOrigin:
-                  placement === "bottom-start" ? "left top" : "left bottom",
+                  placement === 'bottom-start' ? 'left top' : 'left bottom',
               }}
             >
               <Paper>
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList
                     autoFocusItem={open}
-                    id="composition-menu"
-                    aria-labelledby="composition-button"
+                    id='composition-menu'
+                    aria-labelledby='composition-button'
                     onKeyDown={handleListKeyDown}
                     sx={{
-                      textAlign: "center",
-                      width: "100%",
-                      padding: "1rem 2rem",
+                      textAlign: 'center',
+                      width: '100%',
+                      padding: '1rem 2rem',
                     }}
                   >
                     <Typography
-                      variant="h6"
-                      color={mode === "light" ? "primary" : "white"}
-                      fontWeight={400}
+                      variant='h7'
+                      color={mode === 'light' ? 'primary' : 'white'}
                     >
                       No One Birthday !
                     </Typography>

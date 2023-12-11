@@ -1,85 +1,94 @@
-import React, { useState, useMemo, useContext } from "react";
-import { TextField, Button, Box, MenuItem, Paper, Skeleton } from "@mui/material";
-import { Table, TableBody, TableRow, TableContainer } from "@mui/material";
-import { TableCell, TableHead } from "@mui/material";
-import { useGetAttendance } from "../../hooks/attendance/useAttendance";
-import "./Attendance.css";
-import CheckIcon from "@mui/icons-material/Check";
-import CloseIcon from "@mui/icons-material/Close";
-import { ButtonComponent } from "../../components/Button/ButtonComponent";
-import ThemeModeContext from "../../../theme/ThemeModeContext";
+import React, { useState, useMemo, useContext } from 'react';
+import {
+  TextField,
+  Button,
+  Box,
+  MenuItem,
+  Paper,
+  Skeleton,
+  Grid,
+  Typography,
+} from '@mui/material';
+import { Table, TableBody, TableRow, TableContainer } from '@mui/material';
+import { TableCell, TableHead } from '@mui/material';
+import { useGetAttendance } from '../../hooks/attendance/useAttendance';
+import './Attendance.css';
+import CheckIcon from '@mui/icons-material/Check';
+import CloseIcon from '@mui/icons-material/Close';
+import { ButtonComponent } from '../../components/Button/ButtonComponent';
+import ThemeModeContext from '../../../theme/ThemeModeContext';
 
 let cMonth;
 
 const month = [
   {
-    label: "January",
+    label: 'January',
     value: 1,
   },
   {
-    label: "February",
+    label: 'February',
     value: 2,
   },
   {
-    label: "March",
+    label: 'March',
     value: 3,
   },
   {
-    label: "April",
+    label: 'April',
     value: 4,
   },
   {
-    label: "May",
+    label: 'May',
     value: 5,
   },
   {
-    label: "June",
+    label: 'June',
     value: 6,
   },
   {
-    label: "July",
+    label: 'July',
     value: 7,
   },
   {
-    label: "August",
+    label: 'August',
     value: 8,
   },
   {
-    label: "September",
+    label: 'September',
     value: 9,
   },
   {
-    label: "October",
+    label: 'October',
     value: 10,
   },
   {
-    label: "November",
+    label: 'November',
     value: 11,
   },
   {
-    label: "December",
+    label: 'December',
     value: 12,
   },
 ];
 const year0 = [
   {
-    label: "2019",
+    label: '2019',
     value: 2019,
   },
   {
-    label: "2020",
+    label: '2020',
     value: 2020,
   },
   {
-    label: "2021",
+    label: '2021',
     value: 2021,
   },
   {
-    label: "2022",
+    label: '2022',
     value: 2022,
   },
   {
-    label: "2023",
+    label: '2023',
     value: 2023,
   },
 ];
@@ -94,7 +103,7 @@ const Attendance = () => {
   const [cMonth, setCMonth] = useState(date.getMonth() + 1);
   date.setMonth(cMonth - 1);
 
-  const monthName = date.toLocaleString("default", { month: "long" });
+  const monthName = date.toLocaleString('default', { month: 'long' });
 
   const daysInMonth = new Date(year, cMonth, 0).getDate();
 
@@ -110,10 +119,12 @@ const Attendance = () => {
   function Previous() {
     setCMonth(cMonth - 1);
   }
+  const { palette } = useContext(ThemeModeContext);
+  console.log('🚀 ~ file: Attendance.jsx:122 ~ Attendance ~ palette:', palette);
 
-  const [searchEmployee, setSearchEmployee] = useState("");
-  const [searchMonth, setSearchMonth] = useState("");
-  const [searchYear, setSearchYear] = useState("");
+  const [searchEmployee, setSearchEmployee] = useState('');
+  const [searchMonth, setSearchMonth] = useState('');
+  const [searchYear, setSearchYear] = useState('');
 
   const filteredData = useMemo(() => {
     let filtered = attendanceData || [];
@@ -151,109 +162,124 @@ const Attendance = () => {
   }, [attendanceData, searchEmployee, searchMonth, searchYear]);
 
   if (isLoading)
-  return (
-    <>
-      <Skeleton />
-      <Skeleton animation="wave" />
-      <Skeleton animation={false} />
-      <Skeleton sx={{ height: 300 }} animation="wave" variant="rectangular" />
-    </>
-  );
+    return (
+      <>
+        <Skeleton />
+        <Skeleton animation='wave' />
+        <Skeleton animation={false} />
+        <Skeleton sx={{ height: 300 }} animation='wave' variant='rectangular' />
+      </>
+    );
 
   return (
     <div className="main">
       <h2>Attendance</h2>
       <div className="Search">
         <Box
-          style={{ display: "flex", justifyContent: "space-around" }}
-          component="form"
-          sx={{
-            "& .MuiTextField-root": { m: 1, width: "25ch" },
-          }}
+          component='form'
           noValidate
-          autoComplete="on"
+          autoComplete='on'
+          padding='16px'
+          bgcolor={palette?.background?.default}
         >
-          <TextField
-            id="standard-basic"
-            label="Search Employee"
-            variant="outlined"
-            value={searchEmployee}
-            onChange={(e) => setSearchEmployee(e.target.value)}
-          />
-
-          <TextField
-            select
-            label="Select Month"
-            defaultValue={monthName}
-            value={searchMonth}
-            onChange={(e) => setSearchMonth(e.target.value)}
-          >
-            {month.map((option) => (
-              <MenuItem
-                key={option.value}
-                value={option.value}
-                sx={{ bgcolor: mode === "light" ? "" : "#413e3e" }}
+          <Grid>
+            <Typography variant='h7' fontWeight={500}>
+              Filter By:
+            </Typography>
+          </Grid>
+          <Grid container spacing={4}>
+            <Grid item xs={4}>
+              <TextField
+                id='standard-basic'
+                fullWidth
+                label='Search Employee'
+                variant='outlined'
+                value={searchEmployee}
+                onChange={(e) => setSearchEmployee(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <TextField
+                select
+                label='Select Month'
+                fullWidth
+                defaultValue={monthName}
+                value={searchMonth}
+                onChange={(e) => setSearchMonth(e.target.value)}
               >
-                {option.label}
-              </MenuItem>
-            ))}
-          </TextField>
-
-          <TextField
-            select
-            label="Select Year"
-            defaultValue={year}
-            value={searchYear}
-            onChange={(e) => setSearchYear(e.target.value)}
-          >
-            {year0.map((option) => (
-              <MenuItem
-                key={option.value}
-                value={option.value}
-                sx={{ bgcolor: mode === "light" ? "" : "#413e3e" }}
+                {month.map((option) => (
+                  <MenuItem
+                    key={option.value}
+                    value={option.value}
+                    sx={{ bgcolor: mode === 'light' ? '' : '#413e3e' }}
+                  >
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </TextField>
+            </Grid>
+            <Grid item xs={4}>
+              <TextField
+                select
+                fullWidth
+                label='Select Year'
+                defaultValue={year}
+                value={searchYear}
+                onChange={(e) => setSearchYear(e.target.value)}
               >
-                {option.label}
-              </MenuItem>
-            ))}
-          </TextField>
+                {year0.map((option) => (
+                  <MenuItem
+                    key={option.value}
+                    value={option.value}
+                    sx={{ bgcolor: mode === 'light' ? '' : '#413e3e' }}
+                  >
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </TextField>
+            </Grid>
+          </Grid>
         </Box>
       </div>
 
-      <h4 style={{ marginLeft: "10px" }}>
+      <Typography
+        variant='h6'
+        style={{ marginLeft: '10px', marginTop: '16px' }}
+      >
         {monthName}, {year}
-      </h4>
+      </Typography>
 
-      <div className="table-wrapper">
-        <TableContainer className="cntnr" component={Paper}>
-          <Table aria-label="simple table" className="table">
-            <TableHead className="heading">
+      <div className='table-wrapper'>
+        <TableContainer className='cntnr' component={Paper}>
+          <Table aria-label='simple table' className='table'>
+            <TableHead className='heading'>
               <TableRow>
-                <TableCell className="sn">Sn No.</TableCell>
+                <TableCell className='sn'>Sn No.</TableCell>
 
                 {daysArray.map((d, i) => {
                   const dayName = new Date(year, cMonth - 1, d).toLocaleString(
-                    "default",
-                    { weekday: "short" }
+                    'default',
+                    { weekday: 'short' }
                   );
 
                   return (
                     <>
-                      {" "}
+                      {' '}
                       {i === 0 && (
                         <TableCell
                           style={{
-                            width: "140px",
-                            fontWeight: "bold",
-                            fontSize: "20px",
+                            width: '140px',
+                            fontWeight: 'bold',
+                            fontSize: '20px',
                           }}
-                          className="emp"
+                          className='emp'
                         >
                           Employee
                         </TableCell>
                       )}
-                      <TableCell style={{ textAlign: "center" }} key={d}>
-                        <Box color="white">{d}</Box>
-                        <Box color="white">{dayName}</Box>
+                      <TableCell style={{ textAlign: 'center' }} key={d}>
+                        <Box color='white'>{d}</Box>
+                        <Box color='white'>{dayName}</Box>
                       </TableCell>
                     </>
                   );
@@ -266,9 +292,9 @@ const Attendance = () => {
                 {filteredData.map((employee, i) => {
                   const serialNumber = i + 1;
                   return (
-                    <TableRow className="trhighlight" key={i}>
-                      <TableCell className="snNo">{serialNumber}</TableCell>
-                      <TableCell className="empname">
+                    <TableRow className='trhighlight' key={i}>
+                      <TableCell className='snNo'>{serialNumber}</TableCell>
+                      <TableCell className='empname'>
                         {employee.employeeName}
                       </TableCell>
                       {daysArray.map((d) => {
@@ -298,16 +324,16 @@ const Attendance = () => {
                           );
                           const isPresent = !!attendanceEntry;
                           return (
-                            <TableCell style={{ textAlign: "center" }} key={d}>
+                            <TableCell style={{ textAlign: 'center' }} key={d}>
                               {isPresent ? (
                                 <>
                                   <div>
-                                    <CheckIcon color="success" />
+                                    <CheckIcon color='success' />
                                   </div>
                                   <div>{attendanceEntry.timeIn}</div>
                                 </>
                               ) : (
-                                <CloseIcon color="warning" />
+                                <CloseIcon color='warning' />
                               )}
                             </TableCell>
                           );
@@ -333,15 +359,15 @@ const Attendance = () => {
           </Table>
         </TableContainer>
       </div>
-      <div className="button" style={{ maxWidth: "1480px" }}>
+      <div className='button' style={{ maxWidth: '1480px' }}>
         <ButtonComponent
           OnClick={Previous}
-          buttonName={"Previous"}
-          BGColor="white"
-          TextColor="black"
+          buttonName={'Previous'}
+          BGColor='white'
+          TextColor='black'
           disabled={false}
         />
-        <ButtonComponent OnClick={Next} buttonName={"Next"} BGColor />
+        <ButtonComponent OnClick={Next} buttonName={'Next'} BGColor />
       </div>
     </div>
   );

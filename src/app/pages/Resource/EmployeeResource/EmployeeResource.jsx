@@ -1,11 +1,9 @@
 import { Box, Button, Stack } from "@mui/material";
-import MaterialTable from "material-table";
 import React, { useState } from "react";
 import {
   useDeleteEmployeeResource,
   useGetEmployeeResource,
 } from "../../../hooks/resource/employeeResource/useEmployeeResource";
-import tableIcons from "../../../../theme/overrides/TableIcon";
 import { useGetEmployee } from "../../../hooks/employee/useEmployee";
 import { useNavigate } from "react-router-dom";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -18,6 +16,7 @@ import {
 import { useGetOfficeResource } from "../../../hooks/resource/officeResource/useOfficeResource";
 import PermissionHoc from "../../../hoc/permissionHoc";
 import HocButton from "../../../hoc/hocButton";
+import CustomTable from "../../../components/CustomTable/CustomTable";
 
 const EmployeeResource = ({ permissions }) => {
   const navigate = useNavigate();
@@ -57,7 +56,7 @@ const EmployeeResource = ({ permissions }) => {
   const getEmployeeName = (rowData) => {
     const employeeId = rowData?.id;
     const employee = employeeData?.find((emp) => emp?.id === employeeId);
-    const name = `${employee?.firstName} ${employee?.middleName || ""} ${
+    const name = `${employee?.firstName} ${employee?.middleName || ''} ${
       employee?.lastName
     }`;
     return name;
@@ -72,15 +71,15 @@ const EmployeeResource = ({ permissions }) => {
 
   const columns = [
     {
-      title: "SN",
+      title: 'SN',
       render: (rowData) => rowData.tableData.id + 1,
-      width: "3%",
-      maxWidth: "40px",
+      width: '3%',
+      maxWidth: '40px',
       sortable: false,
       sorting: false,
     },
     {
-      title: "Employee Name",
+      title: 'Employee Name',
       render: (rowData) => {
         return <p>{getEmployeeName(rowData)} </p>;
       },
@@ -91,7 +90,7 @@ const EmployeeResource = ({ permissions }) => {
       sorting: false,
     },
     {
-      title: "Resource",
+      title: 'Resource',
       render: (rowData) => {
         return <p>{getResourceName(rowData)}</p>;
       },
@@ -102,27 +101,27 @@ const EmployeeResource = ({ permissions }) => {
       sorting: false,
     },
     {
-      title: "Received Date",
-      field: "receiveDate",
-      emptyValue: "-",
+      title: 'Received Date',
+      field: 'receiveDate',
+      emptyValue: '-',
       sorting: false,
     },
     {
-      title: "Returned Date",
-      field: "returnDate",
-      emptyValue: "-",
+      title: 'Returned Date',
+      field: 'returnDate',
+      emptyValue: '-',
       sorting: false,
     },
   ];
   const actions = [
     {
-      icon: () => <ModeEditOutlineIcon sx={{ color: "#01579B" }} />,
-      tooltip: "Edit Logistics",
+      icon: () => <ModeEditOutlineIcon sx={{ color: '#01579B' }} />,
+      tooltip: 'Edit Logistics',
       onClick: (event, rowData) => handleEditRowData(rowData),
     },
     {
-      icon: () => <DeleteIcon sx={{ color: "#01579B" }} />,
-      tooltip: "Remove Logistics",
+      icon: () => <DeleteIcon sx={{ color: '#01579B' }} />,
+      tooltip: 'Remove Logistics',
       onClick: (event, rowData) => handleDeleteRowData(rowData),
     },
   ];
@@ -131,66 +130,44 @@ const EmployeeResource = ({ permissions }) => {
     <>
       <Box
         sx={{
-          display: "flex",
-          justifyContent: "flex-end",
-          gap: "1rem",
-          padding: ".5rem 0",
+          display: 'flex',
+          justifyContent: 'flex-end',
+          gap: '1rem',
+          padding: '.5rem 0',
         }}
       >
         <HocButton
           permissions={permissions}
-          color={"primary"}
-          variant={"outlined"}
+          color={'primary'}
+          variant={'outlined'}
           onClick={() => {
             navigate(`/admin/resource/office`);
           }}
-          buttonName={"Logistics"}
+          buttonName={'Logistics'}
         />
         <HocButton
           permissions={permissions}
-          color={"primary"}
-          variant={"contained"}
+          color={'white'}
+          variant={'contained'}
           onClick={handleAddOpenModal}
-          buttonName={"+Provide Logistics to Employee"}
+          buttonName={'+Provide Logistics to Employee'}
         />
       </Box>
 
-      <MaterialTable
-        icons={tableIcons}
-        title="Employee Logistics"
+      <CustomTable
         columns={columns}
         data={employeeResourceData}
+        title="Employee Logistics"
         isLoading={isLoading}
-        options={{
-          exportButton: true,
-          padding: "dense",
-          margin: 50,
-          pageSize: 20,
-          emptyRowsWhenPaging: false,
-          actionsColumnIndex: -1,
-          headerStyle: {
-            backgroundColor: "#01579b",
-            color: "#FFF",
-            fontSize: "1rem",
-            padding: "dense",
-            height: 50,
-            textAlign: "center",
-            border: "2px solid #fff",
-            minHeight: "10px",
-            textTransform: "capitilize",
-          },
-          rowStyle: {
-            fontSize: ".8rem",
-          },
-        }}
         actions={actions}
+        exportButton={true}
       />
       {openDeleteModal && (
         <DeleteConfirmationModal
           open={openDeleteModal}
           handleCloseModal={handleCloseDeleteModal}
           handleConfirmDelete={handleConfirmDelete}
-          message={"Employee with Resource"}
+          message={'Employee with Resource'}
         />
       )}
       {openAddModal && (

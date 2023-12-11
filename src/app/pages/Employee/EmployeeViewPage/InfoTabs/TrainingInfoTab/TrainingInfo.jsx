@@ -1,5 +1,4 @@
 import { Box, Button, Stack } from "@mui/material";
-import MaterialTable from "@material-table/core";
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDeleteTraining } from "../../../../../hooks/training/useTraining";
@@ -9,6 +8,7 @@ import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import DeleteConfirmationModal from "../../../../../components/Modal/DeleteConfirmationModal";
 import useAuth from "../../../../../../auth/hooks/component/login/useAuth";
 import { useGetLoggedInUserInfo } from "../../../../../hooks/employee/useEmployee";
+import CustomTable from "../../../../../components/CustomTable/CustomTable";
 
 const TrainingInfo = ({ data }) => {
   const { isEmployee } = useAuth();
@@ -116,29 +116,12 @@ const TrainingInfo = ({ data }) => {
           +Add Training
         </Button>
       </Box>
-      <MaterialTable
-        style={{ padding: "1rem" }}
+
+      <CustomTable
         columns={columns}
         data={Array.isArray(data?.trainings) ? data?.trainings : []}
         title="Training History"
-        // isLoading={isLoading}
-        options={{
-          padding: "dense",
-          margin: 50,
-          pageSize: 10,
-          tableLayout: "fixed",
-          emptyRowsWhenPaging: false,
-          headerStyle: {
-            backgroundColor: "#01579b",
-            color: "#FFF",
-            fontSize: ".9rem",
-            padding: "dense",
-            height: 50,
-          },
-          rowStyle: {
-            fontSize: 13,
-          },
-        }}
+        isLoading={isLoading}
       />
 
       {openAddModal && (

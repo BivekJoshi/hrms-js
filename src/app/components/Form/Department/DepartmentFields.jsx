@@ -12,16 +12,16 @@ const DepartmentFields = ({ onClose, isLoading, data }) => {
       onClose();
     }
   };
-  const submitButtonText = data ? "Update Department" : "Add Department";
+  const submitButtonText = data ? 'Update Department' : 'Add Department';
   return (
     !isLoading && (
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
           <TextField
-            id="departmentName"
-            name="departmentName"
-            label="Department Name"
-            placeholder="Enter department name"
+            id='departmentName'
+            name='departmentName'
+            label='Department Name'
+            placeholder='Enter department name'
             fullWidth
             required
             value={formik.values.departmentName}
@@ -33,16 +33,16 @@ const DepartmentFields = ({ onClose, isLoading, data }) => {
             helperText={
               formik.touched.departmentName && formik.errors.departmentName
             }
-            variant="outlined"
+            variant='outlined'
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
-            id="departmentType"
-            name="departmentType"
-            label="Department Type"
-            placeholder="Enter department type"
+            id='departmentType'
+            name='departmentType'
+            label='Department Type'
+            placeholder='Enter department type'
             fullWidth
             required
             value={formik.values.departmentType}
@@ -54,16 +54,16 @@ const DepartmentFields = ({ onClose, isLoading, data }) => {
             helperText={
               formik.touched.departmentType && formik.errors.departmentType
             }
-            variant="outlined"
+            variant='outlined'
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
-            id="departmentDescription"
-            name="departmentDescription"
-            label="Description"
-            placeholder="Enter department description"
+            id='departmentDescription'
+            name='departmentDescription'
+            label='Description'
+            placeholder='Enter department description'
             fullWidth
             multiline
             rows={3}
@@ -77,29 +77,29 @@ const DepartmentFields = ({ onClose, isLoading, data }) => {
               formik.touched.departmentDescription &&
               formik.errors.departmentDescription
             }
-            variant="outlined"
+            variant='outlined'
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
 
         <Grid
           container
-          direction="row"
-          justifyContent="flex-end"
-          alignItems="flex-end"
+          direction='row'
+          justifyContent='flex-end'
+          alignItems='flex-end'
         >
           <Button
-            variant="contained"
+            variant='contained'
             onClick={handleFormSubmit}
             sx={{ mt: 3, ml: 1 }}
           >
             {submitButtonText}
           </Button>
           <Button
-            variant="contained"
+            variant='contained'
             onClick={onClose}
             sx={{ mt: 3, ml: 1 }}
-            color="error"
+            color='error'
           >
             Cancel
           </Button>

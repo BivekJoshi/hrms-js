@@ -33,8 +33,9 @@ import EventIcon from '@mui/icons-material/Event';
 import HolidayVillageIcon from '@mui/icons-material/HolidayVillage';
 import LaptopIcon from '@mui/icons-material/Laptop';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { removeUser } from '../../utils/cookieHelper';
 
-const drawerWidth = 250;
+const drawerWidth = 230;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
@@ -78,15 +79,16 @@ export default function AdminSidebar() {
   const navigate = useNavigate();
   const location = useLocation();
   const [open, setOpen] = useState(false);
-  const { toggleMode, mode } = useContext(ThemeModeContext);
+  const { toggleMode, mode, palette } = useContext(ThemeModeContext);
   const [subMenuOpen, setSubMenuOpen] = useState({});
+  const { pathname } = useLocation();
 
   const drawerMenus = [
     {
       name: 'Dashboard',
       icon: (
         <DashboardIcon
-          sx={mode === 'light' ? { color: '#01579b' } : { color: 'white' }}
+          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
         />
       ),
       path: 'dashboard',
@@ -96,7 +98,7 @@ export default function AdminSidebar() {
       name: 'Employee',
       icon: (
         <PeopleAltIcon
-          sx={mode === 'light' ? { color: '#01579b' } : { color: 'white' }}
+          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
         />
       ),
       path: 'employee',
@@ -111,7 +113,7 @@ export default function AdminSidebar() {
           path: 'employee',
           icon: (
             <PersonIcon
-              sx={mode === 'light' ? { color: '#01579b' } : { color: 'white' }}
+              sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
             />
           ),
         },
@@ -120,7 +122,7 @@ export default function AdminSidebar() {
           path: 'leave',
           icon: (
             <MailIcon
-              sx={mode === 'light' ? { color: '#01579b' } : { color: 'white' }}
+              sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
             />
           ),
         },
@@ -129,7 +131,7 @@ export default function AdminSidebar() {
           path: 'leavetype',
           icon: (
             <MailIcon
-              sx={mode === 'light' ? { color: '#01579b' } : { color: 'white' }}
+              sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
             />
           ),
         },
@@ -138,7 +140,7 @@ export default function AdminSidebar() {
           path: 'attendance',
           icon: (
             <HowToRegIcon
-              sx={mode === 'light' ? { color: '#01579b' } : { color: 'white' }}
+              sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
             />
           ),
         },
@@ -147,7 +149,7 @@ export default function AdminSidebar() {
           path: 'birthday',
           icon: (
             <CakeIcon
-              sx={mode === 'light' ? { color: '#01579b' } : { color: 'white' }}
+              sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
             />
           ),
         },
@@ -157,7 +159,7 @@ export default function AdminSidebar() {
       name: 'Logistics',
       icon: (
         <LaptopIcon
-          sx={mode === 'light' ? { color: '#01579b' } : { color: 'white' }}
+          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
         />
       ),
       path: 'resource/employee',
@@ -167,7 +169,7 @@ export default function AdminSidebar() {
       name: 'Department',
       icon: (
         <WorkspacesIcon
-          sx={mode === 'light' ? { color: '#01579b' } : { color: 'white' }}
+          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
         />
       ),
       path: 'department',
@@ -177,7 +179,7 @@ export default function AdminSidebar() {
       name: 'Designation',
       icon: (
         <AssignmentIndIcon
-          sx={mode === 'light' ? { color: '#01579b' } : { color: 'white' }}
+          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
         />
       ),
       path: 'designation',
@@ -187,7 +189,7 @@ export default function AdminSidebar() {
       name: 'Company',
       icon: (
         <BusinessIcon
-          sx={mode === 'light' ? { color: '#01579b' } : { color: 'white' }}
+          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
         />
       ),
       path: 'company',
@@ -197,7 +199,7 @@ export default function AdminSidebar() {
       name: 'Project',
       icon: (
         <AddchartIcon
-          sx={mode === 'light' ? { color: '#01579b' } : { color: 'white' }}
+          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
         />
       ),
       path: 'project',
@@ -207,7 +209,7 @@ export default function AdminSidebar() {
       name: 'Event',
       icon: (
         <EventIcon
-          sx={mode === 'light' ? { color: '#01579b' } : { color: 'white' }}
+          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
         />
       ),
       path: 'event',
@@ -217,7 +219,7 @@ export default function AdminSidebar() {
       name: 'Holiday',
       icon: (
         <HolidayVillageIcon
-          sx={mode === 'light' ? { color: '#01579b' } : { color: 'white' }}
+          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
         />
       ),
       path: 'holiday',
@@ -227,7 +229,7 @@ export default function AdminSidebar() {
       name: 'Todo',
       icon: (
         <PlaylistAddCheckIcon
-          sx={mode === 'light' ? { color: '#01579b' } : { color: 'white' }}
+          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
         />
       ),
       path: 'todolist',
@@ -237,7 +239,7 @@ export default function AdminSidebar() {
       name: 'Users',
       icon: (
         <PersonAddIcon
-          sx={mode === 'light' ? { color: '#01579b' } : { color: 'white' }}
+          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
         />
       ),
       path: 'users',
@@ -300,10 +302,18 @@ export default function AdminSidebar() {
           {drawerMenus.map((menu, index) => (
             <React.Fragment key={index}>
               <StyledNavLink key={index} to={menu.path}>
-                <ListItemButton onClick={() => handleSubMenuToggle(index)}>
+                <ListItemButton
+                  onClick={() => handleSubMenuToggle(index)}
+                  sx={{
+                    backgroundColor:
+                      pathname.includes(menu.path) && '#ace8639e',
+                  }}
+                >
                   <ListItemIcon
                     sx={
-                      mode === 'light' ? { color: 'Light' } : { color: 'White' }
+                      mode === 'light'
+                        ? { color: 'Light', minWidth: '40px' }
+                        : { color: 'White' }
                     }
                   >
                     {menu.icon}
@@ -348,12 +358,18 @@ export default function AdminSidebar() {
                             : { color: 'white' }
                         }
                       >
-                        <ListItemButton sx={{ pl: 4 }}>
+                        <ListItemButton
+                          sx={{
+                            pl: 2,
+                            backgroundColor:
+                              mode === 'light' ? '#edffea' : '#413e3e',
+                          }}
+                        >
                           <ListItemIcon
                             sx={
                               mode === 'light'
-                                ? { color: 'black' }
-                                : { color: 'white' }
+                                ? { color: 'black', minWidth: '40px' }
+                                : { color: 'white', minWidth: '40px' }
                             }
                           >
                             {subMenu.icon}
@@ -387,7 +403,7 @@ export default function AdminSidebar() {
         >
           <Button
             variant='contained'
-            sx={{ backgroundColor: '#1c7ed6' }}
+            sx={{ backgroundColor: '#6DAB23' }}
             onClick={() => {
               removeUser();
               navigate('/');

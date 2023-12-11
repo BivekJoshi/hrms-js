@@ -1,4 +1,3 @@
-import MaterialTable from "@material-table/core";
 import React, { useContext, useState } from "react";
 import {
   useDeleteLeave,
@@ -13,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import ApplyLeaveField from "../../components/Form/Leave/ApplyLeave/ApplyLeaveField";
 import DeleteConfirmationModal from "../../components/Modal/DeleteConfirmationModal";
 import ThemeModeContext from "../../../theme/ThemeModeContext";
+import CustomTable from "../../components/CustomTable/CustomTable";
 
 const halfLeaveType = [
   {
@@ -29,8 +29,10 @@ const halfLeaveType = [
 const LeaveUserView = () => {
   const navigate = useNavigate();
   const { data: leaveData, isLoading } = useGetLoggedInUserLeave();
-  const { data: leaveTypeData, isLoading: loadingLeaveType } =
-    useGetLeaveType();
+  const {
+    data: leaveTypeData,
+    isLoading: loadingLeaveType,
+  } = useGetLeaveType();
   const [deletedLeave, setDeletedLeave] = useState({});
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const { mode } = useContext(ThemeModeContext);
@@ -84,7 +86,7 @@ const LeaveUserView = () => {
   const columns = [
     {
       title: "SN",
-      render: (rowData) => rowData.tableData.index + 1,
+      render: (rowData) => rowData.tableData.id + 1,
       width: 20,
       sortable: false,
     },
@@ -216,29 +218,11 @@ const LeaveUserView = () => {
 
   return (
     <>
-      <MaterialTable
-        style={{ padding: "1rem" }}
+      <CustomTable
         columns={columns}
         data={leaveData}
-        title={"Leave History"}
-        //   isLoading={loadingLeave}
-        options={{
-          padding: "dense",
-          margin: 50,
-          pageSize: 10,
-          emptyRowsWhenPaging: false,
-          headerStyle: {
-            backgroundColor: "#1c7ed6",
-            color: "#FFF",
-            fontSize: "1rem",
-            padding: "dense",
-            height: 50,
-            width: "150px",
-          },
-          rowStyle: {
-            fontSize: ".8rem",
-          },
-        }}
+        title="Leave History"
+        isLoading={loadingLeaveType}
       />
       {openDeleteModal && (
         <DeleteConfirmationModal

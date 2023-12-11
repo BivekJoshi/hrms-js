@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useState } from 'react';
-import MaterialTable from 'material-table';
 import { Box, Button, Chip, Stack, Tooltip, Typography } from '@mui/material';
 import { useGetLeaveType } from '../../hooks/leaveType/useLeaveType';
 
@@ -11,7 +10,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import { AddLeaveModal, EditLeaveModal } from './LeaveModal/LeaveModal';
 import DeleteConfirmationModal from '../../components/Modal/DeleteConfirmationModal';
-import tableIcons from '../../../theme/overrides/TableIcon';
 import { ButtonComponent } from '../../components/Button/ButtonComponent';
 import { useGetUserControl } from '../../hooks/auth/userControl/useUserControl';
 import ThemeModeContext from '../../../theme/ThemeModeContext';
@@ -82,14 +80,15 @@ const Leave = ({ isLoading }) => {
   const columns = [
     {
       title: 'SN',
-      render: (rowData) => rowData.tableData.id + 1,
-      width: 80,
+      field: 'id',
       sortable: false,
+
       sorting: false,
+      render: (rowData) => rowData.tableData.id + 1,
     },
     {
       title: 'Employee Name',
-      width: ' 10%',
+      width: '300px',
       render: (rowData) => {
         return <p>{getEmployeeName(rowData)} </p>;
       },
@@ -108,18 +107,19 @@ const Leave = ({ isLoading }) => {
         const leaveTypeName = getLeaveTypeName(rowData);
         return leaveTypeName.toLowerCase().includes(searchValue.toLowerCase());
       },
-      width: ' 10%',
       sorting: false,
     },
     {
       title: 'From',
       field: 'fromDate',
+
       emptyValue: '-',
       sorting: false,
     },
     {
       title: 'To',
       field: 'toDate',
+
       emptyValue: '-',
       sorting: false,
     },
@@ -127,6 +127,7 @@ const Leave = ({ isLoading }) => {
       title: 'Status',
       field: 'leaveStatus',
       emptyValue: '-',
+
       cellStyle: {
         whiteSpace: 'nowrap',
       },
@@ -148,7 +149,7 @@ const Leave = ({ isLoading }) => {
             style={{
               backgroundColor: chipColor,
               color: 'white',
-              width: ' 9rem',
+              width: '5rem',
             }}
           />
         );
@@ -158,6 +159,7 @@ const Leave = ({ isLoading }) => {
     {
       title: 'Leave Reason',
       field: 'leaveReason',
+
       emptyValue: '-',
       render: (rowData) => {
         return (
@@ -185,6 +187,7 @@ const Leave = ({ isLoading }) => {
     {
       title: 'Remark',
       field: 'leaveRemarks',
+
       emptyValue: '-',
       render: (rowData) => {
         return (
@@ -212,6 +215,7 @@ const Leave = ({ isLoading }) => {
 
     {
       title: 'Approved By',
+
       render: (rowData) => {
         return <p>{getUserName(rowData)} </p>;
       },
@@ -219,7 +223,6 @@ const Leave = ({ isLoading }) => {
         const ApprovedBy = getUserName(rowData);
         return ApprovedBy.toLowerCase().includes(searchValue.toLowerCase());
       },
-      width: 120,
       sorting: false,
     },
     {
@@ -268,31 +271,10 @@ const Leave = ({ isLoading }) => {
       </Box>
 
       <CustomTable
-        icons={tableIcons}
         columns={columns}
         data={leaveData}
         title='Leave Data'
         isLoading={loadingleave}
-        options={{
-          padding: 'dense',
-          margin: 50,
-          pageSize: 10,
-          emptyRowsWhenPaging: false,
-          headerStyle: {
-            backgroundColor: '#01579b',
-            color: '#FFF',
-            fontSize: '1rem',
-            padding: 'dense',
-            height: 50,
-            textAlign: 'center',
-            border: '2px solid #fff',
-            minHeight: '10px',
-            textTransform: 'capitalize',
-          },
-          rowStyle: {
-            fontSize: '.8rem',
-          },
-        }}
       />
       {openEditModal && (
         <EditLeaveModal

@@ -1,15 +1,18 @@
 import * as React from "react";
-import MaterialTable from "material-table";
-import { Button, Stack } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
-import HocButton from "../../../hoc/hocButton";
-import tableIcons from "../../../../theme/overrides/TableIcon";
+import PermissionHoc from "../../../hoc/permissionHoc";
+import useAuth from "../../../../auth/hooks/component/login/useAuth";
+import CustomTable from "../../../components/CustomTable/CustomTable";
 
-const CompanyTableView = ({ permissions, companyData, isLoading,
+const CompanyTableView = ({
+  permissions,
+  companyData,
+  isLoading,
   handleEditCompany,
   handleDeleteCompany,
 }) => {
+  const { isEmployee } = useAuth();
 
   const columns = [
     {
@@ -40,63 +43,48 @@ const CompanyTableView = ({ permissions, companyData, isLoading,
       width: 400,
       sorting: false,
     },
+  ];
+
+  const actions = [
     {
-      title: "Actions",
-      render: (rowData) => (
-        <Stack direction="row" spacing={0}>
-           <HocButton
-            permissions={permissions?.canEdit}
-            onClick={() => handleEditCompany(rowData)}
-            icon={<ModeEditOutlineIcon />}
-          />
-          <HocButton
-            permissions={permissions?.canDelete}
-            onClick={() => handleDeleteCompany(rowData)}
-            icon={<DeleteIcon />}
-          />
-        </Stack>
+      icon: () => (
+        <ModeEditOutlineIcon />
+        // <HocButton
+        //   permissions={permissions?.canEdit}
+        //   icon={<ModeEditOutlineIcon />}
+        // />
       ),
-      sorting: false,
-      width: 80,
+      tooltip: "Edit Company",
+      onClick: (event, rowData) => handleEditCompany(rowData),
     },
-  ].filter(Boolean);
+    {
+      icon: () => (
+        <DeleteIcon />
+        // <HocButton permissions={permissions?.canDelete} icon={<DeleteIcon />} />
+      ),
+      tooltip: "Delete Company",
+      onClick: (event, rowData) => handleDeleteCompany(rowData),
+    },
+  ];
+
+  if (isEmployee) {
+    actions.length = 0;
+  }
 
   if (isLoading) return <>Loading</>;
-
+  
   return (
     <>
-      <MaterialTable
-        icons={tableIcons}
+      <CustomTable
         columns={columns}
         data={companyData}
         title="Company List"
         isLoading={isLoading}
-        options={{
-          exportButton: true,
-          padding: "dense",
-          margin: 50,
-          pageSize: 10,
-          emptyRowsWhenPaging: false,
-          actionsColumnIndex: -1,
-          headerStyle: {
-            backgroundColor: "#01579b",
-            color: "#FFF",
-            fontSize: "1rem",
-            padding: "dense",
-            height: 50,
-            textAlign: "center",
-            border: "2px solid #fff",
-            minHeight: "10px",
-            textTransform: "capitilize",
-          },
-          rowStyle: {
-            fontSize: ".8rem",
-          },
-        }}
-        // actions={actions}
+        exportButton={true}
+        actions={actions}
       />
     </>
   );
 };
 
-export default CompanyTableView;
+export default PermissionHoc(CompanyTableView);

@@ -9,11 +9,11 @@ import PermissionHoc from "../../../hoc/permissionHoc";
 const EditEventFields = ({ onClose, isLoading, data, permissions }) => {
   const { formik } = useEditEventForm(data);
 
-  const handleFormSubmit = async () => {
-    const isValid = await formik.validateForm();
-
-    if (isValid) {
-      formik.handleSubmit();
+    const handleFormSubmit = async () => {
+      const isValid = await formik.validateForm();
+  
+      if (isValid) {
+        formik.handleSubmit();
 
       if (formik.isValid) {
         formik.setTouched({
@@ -36,60 +36,60 @@ const EditEventFields = ({ onClose, isLoading, data, permissions }) => {
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
           <TextField
-            id="eventName"
-            name="eventName"
-            label="Event"
-            placeholder="Enter event name"
+            id='eventName'
+            name='eventName'
+            label='Event'
+            placeholder='Enter event name'
             fullWidth
             value={formik.values.eventName}
             onChange={formik.handleChange}
             error={formik.touched.eventName && Boolean(formik.errors.eventName)}
             helperText={formik.touched.eventName && formik.errors.eventName}
-            variant="outlined"
+            variant='outlined'
             autoFocus
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
-            id="eventDate"
-            name="eventDate"
-            type="date"
+            id='eventDate'
+            name='eventDate'
+            type='date'
             required
-            label="Date of Event"
+            label='Date of Event'
             fullWidth
             value={formik.values.eventDate}
             onChange={formik.handleChange}
             error={formik.touched.eventDate && Boolean(formik.errors.eventDate)}
             helperText={formik.touched.eventDate && formik.errors.eventDate}
-            variant="outlined"
+            variant='outlined'
             autoFocus
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
-            id="eventTime"
-            name="eventTime"
-            type="time"
+            id='eventTime'
+            name='eventTime'
+            type='time'
             required
-            label="Time of Event"
+            label='Time of Event'
             fullWidth
             value={formik.values.eventTime}
             onChange={formik.handleChange}
             error={formik.touched.eventTime && Boolean(formik.errors.eventTime)}
             helperText={formik.touched.eventTime && formik.errors.eventTime}
-            variant="outlined"
+            variant='outlined'
             autoFocus
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
-            id="eventDescription"
-            name="eventDescription"
-            label="Description"
-            placeholder="Enter your Event Description"
+            id='eventDescription'
+            name='eventDescription'
+            label='Description'
+            placeholder='Enter your Event Description'
             fullWidth
             value={formik.values.eventDescription}
             onChange={formik.handleChange}
@@ -100,17 +100,17 @@ const EditEventFields = ({ onClose, isLoading, data, permissions }) => {
             helperText={
               formik.touched.eventDescription && formik.errors.eventDescription
             }
-            variant="outlined"
+            variant='outlined'
             autoFocus
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
-            id="eventLocation"
-            name="eventLocation"
-            label="Event Location"
-            placeholder="Enter your Event Location"
+            id='eventLocation'
+            name='eventLocation'
+            label='Event Location'
+            placeholder='Enter your Event Location'
             fullWidth
             value={formik.values.eventLocation}
             onChange={formik.handleChange}
@@ -121,37 +121,37 @@ const EditEventFields = ({ onClose, isLoading, data, permissions }) => {
             helperText={
               formik.touched.eventLocation && formik.errors.eventLocation
             }
-            variant="outlined"
+            variant='outlined'
             autoFocus
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
         <Grid
           container
-          direction="row"
-          justifyContent="flex-end"
-          alignItems="flex-end"
+          direction='row'
+          justifyContent='flex-end'
+          alignItems='flex-end'
         >
           <Button
-            variant="contained"
+            variant='contained'
             onClick={handleDeleteEvent}
             sx={{ mt: 3, ml: 1 }}
-            color="error"
+            color='error'
           >
             Delete
           </Button>
           <Button
-            variant="contained"
+            variant='contained'
             onClick={handleFormSubmit}
             sx={{ mt: 3, ml: 1 }}
           >
             Update Event
           </Button>
           <Button
-            variant="contained"
+            variant='contained'
             onClick={onClose}
             sx={{ mt: 3, ml: 1 }}
-            color="error"
+            color='error'
           >
             Cancel
           </Button>

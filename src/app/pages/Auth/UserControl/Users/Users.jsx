@@ -1,9 +1,9 @@
 import { Stack, Button } from "@mui/material";
 import React, { useState } from "react";
-import MaterialTable from "@material-table/core";
 import UserControlAction from "../../../../pages/Auth/UserControl/UserControlAction";
 import { AddUserControlModal } from "./AddUserControlModal";
 import { useGetUserControl } from "../../../../hooks/auth/userControl/useUserControl";
+import CustomTable from "../../../../components/CustomTable/CustomTable";
 
 const roleType = [
   {
@@ -41,7 +41,7 @@ const roleType = [
 const columns = [
   {
     title: "SN",
-    render: (rowData) => rowData.tableData.index + 1,
+    render: (rowData) => rowData.tableData.id + 1,
     width: "3%",
     sortable: false,
     sorting: false,
@@ -72,7 +72,7 @@ const columns = [
   {
     title: "Action",
     render: (rowData) => <UserControlAction rowData={rowData} />,
-    width: "80",
+    width: "1rem",
   },
 ];
 
@@ -114,31 +114,11 @@ const Users = ({ permissions }) => {
             </Button>
           </Stack>
           <Stack>
-            <MaterialTable
+            <CustomTable
               columns={columns}
               data={userControlData}
               title="User List"
               isLoading={isLoading}
-              options={{
-                padding: "dense",
-                margin: 50,
-                pageSize: 10,
-                emptyRowsWhenPaging: false,
-                headerStyle: {
-                  backgroundColor: "#01579b",
-                  color: "#FFF",
-                  fontSize: "1rem",
-                  padding: "dense",
-                  height: 50,
-                  textAlign: "center",
-                  border: "2px solid #fff",
-                  minHeight: "10px",
-                  textTransform: "capitilize",
-                },
-                rowStyle: {
-                  fontSize: ".8rem",
-                },
-              }}
             />
           </Stack>
         </Stack>
