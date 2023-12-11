@@ -34,7 +34,7 @@ const Notification = ({ data }) => {
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
 
-  const checkStatus = data?.isChecked ?? true;
+  const checkStatus = data?.isChecked ? true : false;
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -94,7 +94,7 @@ const Notification = ({ data }) => {
             placement="bottom-start"
             transition
             disablePortal
-            style={{ marginLeft: "-4rem" }}
+            style={{ marginLeft: "4rem" }}
           >
             {({ TransitionProps, placement }) => (
               <Grow

@@ -80,14 +80,15 @@ const Leave = ({ isLoading }) => {
   const columns = [
     {
       title: 'SN',
-      render: (rowData) => rowData.tableData.id + 1,
-      width: 80,
+      field: 'id',
       sortable: false,
+
       sorting: false,
+      render: (rowData) => rowData.tableData.id + 1,
     },
     {
       title: 'Employee Name',
-      width: ' 10%',
+      width: '300px',
       render: (rowData) => {
         return <p>{getEmployeeName(rowData)} </p>;
       },
@@ -106,18 +107,19 @@ const Leave = ({ isLoading }) => {
         const leaveTypeName = getLeaveTypeName(rowData);
         return leaveTypeName.toLowerCase().includes(searchValue.toLowerCase());
       },
-      width: ' 10%',
       sorting: false,
     },
     {
       title: 'From',
       field: 'fromDate',
+
       emptyValue: '-',
       sorting: false,
     },
     {
       title: 'To',
       field: 'toDate',
+
       emptyValue: '-',
       sorting: false,
     },
@@ -125,6 +127,7 @@ const Leave = ({ isLoading }) => {
       title: 'Status',
       field: 'leaveStatus',
       emptyValue: '-',
+
       cellStyle: {
         whiteSpace: 'nowrap',
       },
@@ -146,7 +149,7 @@ const Leave = ({ isLoading }) => {
             style={{
               backgroundColor: chipColor,
               color: 'white',
-              width: ' 9rem',
+              width: '5rem',
             }}
           />
         );
@@ -156,6 +159,7 @@ const Leave = ({ isLoading }) => {
     {
       title: 'Leave Reason',
       field: 'leaveReason',
+
       emptyValue: '-',
       render: (rowData) => {
         return (
@@ -183,6 +187,7 @@ const Leave = ({ isLoading }) => {
     {
       title: 'Remark',
       field: 'leaveRemarks',
+
       emptyValue: '-',
       render: (rowData) => {
         return (
@@ -210,6 +215,7 @@ const Leave = ({ isLoading }) => {
 
     {
       title: 'Approved By',
+
       render: (rowData) => {
         return <p>{getUserName(rowData)} </p>;
       },
@@ -217,7 +223,6 @@ const Leave = ({ isLoading }) => {
         const ApprovedBy = getUserName(rowData);
         return ApprovedBy.toLowerCase().includes(searchValue.toLowerCase());
       },
-      width: 120,
       sorting: false,
     },
     {
@@ -260,6 +265,7 @@ const Leave = ({ isLoading }) => {
         <ButtonComponent
           OnClick={handleAddOpenModal}
           Border='none'
+          color='white'
           buttonName={'+ Add Leave'}
         />
       </Box>
@@ -267,6 +273,7 @@ const Leave = ({ isLoading }) => {
       <CustomTable
         columns={columns}
         data={leaveData}
+        tableLayout='fixed'
         title='Leave Data'
         isLoading={loadingleave}
       />

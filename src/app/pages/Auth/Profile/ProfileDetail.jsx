@@ -3,6 +3,7 @@ import { useGetLoggedInUser } from "../../../hooks/auth/usePassword";
 import { Box, List, ListItem, Stack, Typography } from "@mui/material";
 import "../Style/Style.css";
 import { DOC_URL } from "../../../../auth/axiosInterceptor";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 const ProfileDetail = () => {
   const { data: loggedUserData } = useGetLoggedInUser();
@@ -19,11 +20,15 @@ const ProfileDetail = () => {
       textAlign="center"
     >
       <Stack alignItems="center">
-        <img
-          src={filePath}
-          alt="image"
-          style={{ borderRadius: "15rem", width: "25%" }}
-        />
+        {loggedUserData?.userPhotoPath !== null ? (
+          <img
+            src={filePath}
+            alt="image"
+            style={{ borderRadius: "15rem", width: "25%" }}
+          />
+        ) : (
+          <AccountCircleIcon sx={{ width: "9rem", height: "9rem" }} />
+        )}
       </Stack>
 
       <Typography variant="h4">User Information</Typography>

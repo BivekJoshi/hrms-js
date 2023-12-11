@@ -63,7 +63,7 @@ const ResetPassword = ({ isLoading }) => {
       if (formik.values.password === formik.values.confirmPassword) {
         formik.handleSubmit();
       } else {
-        toast.error("Password and confirm password do not match!");
+        toast.error("New password and confirm password do not match!");
       }
     } else {
       toast.error("Please make sure you have filled the form correctly!");

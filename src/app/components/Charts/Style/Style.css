@@ -19,7 +19,7 @@ ul {
   align-self: self-start;
   margin-top: -6rem;
 }
-.recharts-surface{
+.recharts-surface {
   height: 400px;
 }
 /* @media (max-width: 1025px) {
@@ -27,6 +27,8 @@ ul {
     justify-self: center !important;
   }
 } */
-.css-1o7m6xb{
+.css-1o7m6xb,
+.css-yynxjn,
+.css-1pj74oe {
   color: black !important;
 }
