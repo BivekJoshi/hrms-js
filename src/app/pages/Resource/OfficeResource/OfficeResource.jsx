@@ -1,19 +1,18 @@
-import MaterialTable from '@material-table/core';
-import React, { useState } from 'react';
-import tableIcons from '../../../../theme/overrides/TableIcon';
-import { useGetUsedOfficeResource } from '../../../hooks/resource/officeResource/useOfficeResource';
-import { Box } from '@mui/material';
+import React, { useState } from "react";
+import { useGetUsedOfficeResource } from "../../../hooks/resource/officeResource/useOfficeResource";
+import { Box } from "@mui/material";
 import {
   AddOfficeResourceModal,
   EditOfficeResourceModal,
-} from './OfficeResourceModal';
-import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
-import { ButtonComponent } from '../../../components/Button/ButtonComponent';
-import DeactivatedOfficeResource from './DeactivatedOfficeResource';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import { AvailableOfficeLogistic } from './AvailableOfficeLogistic';
-import { OpenCLoseModel } from './OpenCLoseModel';
-import { useGetEmployee } from '../../../hooks/employee/useEmployee';
+} from "./OfficeResourceModal";
+import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
+import { ButtonComponent } from "../../../components/Button/ButtonComponent";
+import DeactivatedOfficeResource from "./DeactivatedOfficeResource";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import { AvailableOfficeLogistic } from "./AvailableOfficeLogistic";
+import { OpenCLoseModel } from "./OpenCLoseModel";
+import { useGetEmployee } from "../../../hooks/employee/useEmployee";
+import CustomTable from "../../../components/CustomTable/CustomTable";
 
 const OfficeResource = () => {
   const { data: officeResourceData, isLoading } = useGetUsedOfficeResource();
@@ -124,34 +123,12 @@ const OfficeResource = () => {
       </Box>
       <br />
       <br />
-      <MaterialTable
-        icons={tableIcons}
-        title='Used Logistics'
+      <CustomTable
         columns={columns}
         data={officeResourceData}
+        title="Used Logistics"
         isLoading={isLoading}
-        options={{
-          exportButton: true,
-          padding: 'dense',
-          margin: 50,
-          pageSize: 20,
-          emptyRowsWhenPaging: false,
-          actionsColumnIndex: -1,
-          headerStyle: {
-            backgroundColor: '#01579b',
-            color: '#FFF',
-            fontSize: '1rem',
-            padding: 'dense',
-            height: 50,
-            textAlign: 'center',
-            border: '2px solid #fff',
-            minHeight: '10px',
-            textTransform: 'capitilize',
-          },
-          rowStyle: {
-            fontSize: '.8rem',
-          },
-        }}
+        exportButton={true}
         actions={actions}
       />
       {openAddModal && (

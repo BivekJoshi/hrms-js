@@ -1,9 +1,8 @@
-import MaterialTable from "material-table";
 import React, { useState } from "react";
-import tableIcons from "../../../../theme/overrides/TableIcon";
 import { useGetDeactivatedOfficeResource } from "../../../hooks/resource/officeResource/useOfficeResource";
 import { Button, Stack } from "@mui/material";
 import { OfficeResourceLogisticsModal } from "./OfficeResourceModal";
+import CustomTable from "../../../components/CustomTable/CustomTable";
 
 const DeactivatedOfficeResource = () => {
   const { data, isLoading } = useGetDeactivatedOfficeResource();
@@ -58,33 +57,12 @@ const DeactivatedOfficeResource = () => {
   ];
   return (
     <>
-      <MaterialTable
-        icons={tableIcons}
-        title="Deactivated Office Logistics"
+      <CustomTable
         columns={columns}
         data={data}
+        title="Deactivated Office Logistics"
         isLoading={isLoading}
-        options={{
-          exportButton: true,
-          padding: "dense",
-          margin: 50,
-          pageSize: 5,
-          emptyRowsWhenPaging: false,
-          headerStyle: {
-            backgroundColor: "#01579b",
-            color: "#FFF",
-            fontSize: "1rem",
-            padding: "dense",
-            height: 50,
-            textAlign: "center",
-            border: "2px solid #fff",
-            minHeight: "10px",
-            textTransform: "capitilize",
-          },
-          rowStyle: {
-            fontSize: ".8rem",
-          },
-        }}
+        exportButton={true}
       />
 
       {openModal && (
