@@ -11,9 +11,6 @@ import { ThemeModeContext } from "../../../theme/ThemeModeContext";
 import AdminHeader from "../Header/AdminHeader";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import MailIcon from "@mui/icons-material/Mail";
-import WorkspacesIcon from "@mui/icons-material/Workspaces";
-import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
-import BusinessIcon from "@mui/icons-material/Business";
 import PlaylistAddCheckIcon from "@mui/icons-material/PlaylistAddCheck";
 import AddchartIcon from "@mui/icons-material/Addchart";
 import EventIcon from "@mui/icons-material/Event";
@@ -76,7 +73,7 @@ export default function EmployeeSidebar() {
       name: "Dashboard",
       icon: (
         <DashboardIcon
-          sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
+          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
         />
       ),
       path: "dashboard",
@@ -86,7 +83,7 @@ export default function EmployeeSidebar() {
       name: "My Profile",
       icon: (
         <AccountCircleOutlinedIcon
-          sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
+          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
         />
       ),
       path: "viewprofile",
@@ -97,7 +94,7 @@ export default function EmployeeSidebar() {
       path: "attendance",
       icon: (
         <CoPresentIcon
-          sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
+          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
         />
       ),
       subMenus: [],
@@ -107,7 +104,7 @@ export default function EmployeeSidebar() {
       path: "applyleave",
       icon: (
         <ApprovalOutlinedIcon
-          sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
+          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
         />
       ),
       subMenus: [],
@@ -117,7 +114,7 @@ export default function EmployeeSidebar() {
       path: "leavetype",
       icon: (
         <MailIcon
-          sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
+          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
         />
       ),
       subMenus: [],
@@ -126,7 +123,7 @@ export default function EmployeeSidebar() {
       name: "Project",
       icon: (
         <AddchartIcon
-          sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
+          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
         />
       ),
       path: "project",
@@ -136,7 +133,7 @@ export default function EmployeeSidebar() {
       name: "Event",
       icon: (
         <EventIcon
-          sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
+          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
         />
       ),
       path: "event",
@@ -146,7 +143,7 @@ export default function EmployeeSidebar() {
       name: "Holiday",
       icon: (
         <HolidayVillageIcon
-          sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
+          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
         />
       ),
       path: "holiday",
@@ -156,7 +153,7 @@ export default function EmployeeSidebar() {
       name: "Todo",
       icon: (
         <PlaylistAddCheckIcon
-          sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
+          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
         />
       ),
       path: "todolist",
@@ -306,7 +303,7 @@ export default function EmployeeSidebar() {
         >
           <Button
             variant="contained"
-            sx={{ backgroundColor: "#1c7ed6" }}
+            sx={{ backgroundColor: "#6DAB23" }}
             onClick={() => {
               removeUser();
               navigate("/");

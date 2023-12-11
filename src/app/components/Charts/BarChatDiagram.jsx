@@ -21,7 +21,7 @@ const BarChatDiagram = ({ dashboardData }) => {
     `${dashboardData?.femaleEmployees}`,
     `${dashboardData?.allProjects}`,
   ];
-  const barColors = ["#FF5733", "#33FF57", "#3366FF", "#FF33A1", "#FFFF33"];
+  const barColors = ["#33FF57", "#3366FF", "#FF33A1", "#FFFF33"];
   const chartOptions = {
     chart: {
       type: "bar",
