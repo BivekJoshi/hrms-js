@@ -34,7 +34,7 @@ const EditEmployee = () => {
     : `/admin/employee/${id}`;
 
   return (
-    <Container component='main' maxWidth='xlg' sx={{ mt: 5 }}>
+    <Container component='main' maxWidth='xlg'>
       <Paper variant='plain' sx={{ my: { xs: 0, md: 6 }, p: { xs: 0, md: 3 } }}>
         <Typography component='h1' variant='h4' align='center'>
           Edit Details
