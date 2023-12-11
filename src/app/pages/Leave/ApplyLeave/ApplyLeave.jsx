@@ -183,7 +183,7 @@ const ApplyLeave = () => {
           minHeight="200px"
           bgcolor={mode === "light" ? "" : "#4f4e4c"}
         >
-          <Typography fontSize="1.2rem" fontWeight="600" marginTop="1rem">
+          <Typography variant="h6" marginTop="1rem">
             {leaveTypeMap.get(data ? data?.leaveTypeId : "")}
           </Typography>
           <Typography variant="h2" color="#3e019b" style={{ marginTop: 25 }}>
@@ -205,7 +205,7 @@ const ApplyLeave = () => {
           minHeight="200px"
           bgcolor={mode === "light" ? "" : "#4f4e4c"}
         >
-          <Typography fontSize="1.2rem" fontWeight="600" marginTop="1rem">
+          <Typography variant="h6" marginTop="1rem">
             {leave.leaveType}
           </Typography>
           <Typography variant="h2" color="#3e019b" style={{ marginTop: 25 }}>
@@ -227,7 +227,7 @@ const ApplyLeave = () => {
 
   return (
     <Box sx={{ flexGrow: 1 }} paddingBottom="2rem">
-      <h2>Taken Leave</h2>
+      <Typography variant="h4">Taken Leave</Typography>
       <Carousel
         showThumbs={false}
         showArrows={false}

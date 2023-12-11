@@ -402,7 +402,7 @@ export default function AdminSidebar() {
           }}
         >
           <Button
-            variant='contained'
+            variant='contained'v
             sx={{ backgroundColor: '#6DAB23' }}
             onClick={() => {
               removeUser();

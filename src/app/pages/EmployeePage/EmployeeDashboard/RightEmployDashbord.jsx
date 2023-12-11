@@ -43,7 +43,7 @@ export const RightEmployDashbord = ({ employData }) => {
   return (
     <Box>
       {/* <Box className="taskTable">
-        <h3>Pending Task</h3>
+        <Typography variant="h6">Pending Task</Typography>
         <Box margin="1rem 0">
           <PendingTask />
         </Box>

@@ -6,6 +6,7 @@ import {
   MenuItem,
   OutlinedInput,
   Select,
+  Typography,
 } from "@mui/material";
 import { useGetEmployee } from "../../hooks/employee/useEmployee";
 
@@ -42,7 +43,7 @@ const EmailToAll = ({ getEventID, onClose }) => {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <h2>Email</h2>
+        <Typography variant="h4"h2>Email</Typography>
         <Grid container spacing={2}>
           <Grid
             item

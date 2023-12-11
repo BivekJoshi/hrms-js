@@ -13,16 +13,16 @@ export const RightProjectHome = (props) => {
 
   return (
     <Box display="grid" gap="1rem"  minHeight="10rem">
-      <h3>Your Projects</h3>
+      <Typography variant="h6">Your Projects</Typography>
 
       {employeeInvolvedProject?.slice(0, 4).map((data, index) => (
-        <Box bgcolor="#ededed66" padding="1rem" boxShadow="5">
+        <Box bgcolor="#ededed66" padding="1rem" boxShadow="5" key={index}>
           <Box
             display="flex"
             flexDirection="row"
             justifyContent="space-between"
           >
-            <h4 style={{color:"#01579b", fontSize:".95rem"}}>{data.projectName}</h4>
+            <Typography variant='h5' style={{color:"#01579b", fontSize:".95rem"}}>{data.projectName}</Typography>
             <Chip
               label={data.taskStatus}
               sx={{ height: "16px", fontSize: ".7rem" }}

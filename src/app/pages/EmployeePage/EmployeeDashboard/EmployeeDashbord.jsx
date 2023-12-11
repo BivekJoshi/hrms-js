@@ -1,4 +1,4 @@
-import { Box, CardMedia } from "@mui/material";
+import { Box, CardMedia, Typography } from "@mui/material";
 import React, { useContext } from "react";
 import Male from "../../../../assets/male.png";
 import "../../Style/Style.css";
@@ -96,11 +96,11 @@ const EmployeeDashbord = ({}) => {
             width: "100%",
           }}
         >
-          <h3>
+          <Typography variant="h6" paddingLeft="1rem">
             Welcome , <br></br>
             {employData?.name}
-          </h3>
-          <h3  style={{ maxWidth: "200px" }}>{formattedDate}</h3>
+          </Typography>
+          <Typography variant="h6"  style={{ maxWidth: "200px" }}>{formattedDate}</Typography>
         </Box>
       </Box>
       <Box
