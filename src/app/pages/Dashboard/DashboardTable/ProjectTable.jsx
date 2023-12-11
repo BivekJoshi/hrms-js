@@ -10,7 +10,7 @@ export const ProjectTable = ({ projectData }) => {
     {
       title: "SN",
       render: (rowData) => rowData.tableData.id + 1,
-      width: 60,
+      width: "10px",
       sortable: false,
       sorting: false,
     },

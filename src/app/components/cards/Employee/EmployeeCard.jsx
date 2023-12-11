@@ -335,6 +335,7 @@ const EmployeeCard = ({
 
       {openDeactivateModal && (
         <EditDeactivationEmployeeModal
+        title={"Terminate Employee"}
           id={EmployeeId}
           open={openDeactivateModal}
           handleCloseModal={handleCloseDeactivateModal}
