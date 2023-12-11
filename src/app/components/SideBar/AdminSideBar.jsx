@@ -79,7 +79,7 @@ export default function AdminSidebar() {
   const navigate = useNavigate();
   const location = useLocation();
   const [open, setOpen] = useState(false);
-  const { mode, palette } = useContext(ThemeModeContext);
+  const { toggleMode, mode } = useContext(ThemeModeContext);
   const [subMenuOpen, setSubMenuOpen] = useState({});
   const { pathname } = useLocation();
 
@@ -403,7 +403,7 @@ export default function AdminSidebar() {
         >
           <Button
             variant='contained'
-            sx={{ backgroundColor: '#6DAB23', color: 'white' }}
+            sx={{ backgroundColor: '#6DAB23' }}
             onClick={() => {
               removeUser();
               navigate('/');
@@ -411,6 +411,13 @@ export default function AdminSidebar() {
           >
             Logout
           </Button>
+          <Typography
+            variant='body2'
+            sx={{ marginRight: '8px', marginTop: '1rem' }}
+          >
+            {mode === 'light' ? 'Dark' : 'Light'} Mode
+            <Switch checked={mode === 'dark'} onChange={toggleMode} />
+          </Typography>
         </Box>
       </Drawer>
 
