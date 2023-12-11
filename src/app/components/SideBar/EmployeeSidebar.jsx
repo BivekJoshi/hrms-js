@@ -1,6 +1,13 @@
 import React, { useContext, useState } from "react";
 import { styled } from "@mui/material/styles";
-import { Box, Drawer, Divider, List, ListItemButton, Button } from "@mui/material";
+import {
+  Box,
+  Drawer,
+  Divider,
+  List,
+  ListItemButton,
+  Button,
+} from "@mui/material";
 import { ListItemIcon } from "@mui/material";
 import { ListItemText, Collapse, IconButton } from "@mui/material/";
 import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
@@ -64,6 +71,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 export default function EmployeeSidebar() {
   const navigate = useNavigate();
   const location = useLocation();
+  const currentPath = location.pathname;
   const [open, setOpen] = useState(false);
   const { toggleMode, mode } = useContext(ThemeModeContext);
   const [subMenuOpen, setSubMenuOpen] = useState({});
@@ -73,7 +81,7 @@ export default function EmployeeSidebar() {
       name: "Dashboard",
       icon: (
         <DashboardIcon
-          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
+          sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
         />
       ),
       path: "dashboard",
@@ -83,7 +91,7 @@ export default function EmployeeSidebar() {
       name: "My Profile",
       icon: (
         <AccountCircleOutlinedIcon
-          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
+          sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
         />
       ),
       path: "viewprofile",
@@ -94,7 +102,7 @@ export default function EmployeeSidebar() {
       path: "attendance",
       icon: (
         <CoPresentIcon
-          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
+          sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
         />
       ),
       subMenus: [],
@@ -113,7 +121,7 @@ export default function EmployeeSidebar() {
       name: "Project",
       icon: (
         <AddchartIcon
-          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
+          sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
         />
       ),
       path: "project",
@@ -123,7 +131,7 @@ export default function EmployeeSidebar() {
       name: "Event",
       icon: (
         <EventIcon
-          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
+          sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
         />
       ),
       path: "event",
@@ -133,7 +141,7 @@ export default function EmployeeSidebar() {
       name: "Holiday",
       icon: (
         <HolidayVillageIcon
-          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
+          sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
         />
       ),
       path: "holiday",
@@ -143,7 +151,7 @@ export default function EmployeeSidebar() {
       name: "Todo",
       icon: (
         <PlaylistAddCheckIcon
-          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
+          sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
         />
       ),
       path: "todolist",
@@ -206,7 +214,13 @@ export default function EmployeeSidebar() {
           {employeeDrawerMenus.map((menu, index) => (
             <React.Fragment key={index}>
               <StyledNavLink key={index} to={menu.path}>
-                <ListItemButton onClick={() => handleSubMenuToggle(index)}>
+                <ListItemButton
+                  onClick={() => handleSubMenuToggle(index)}
+                  sx={{
+                    backgroundColor:
+                    currentPath.includes(menu.path) && "#ace8639e",
+                  }}
+                >
                   <ListItemIcon
                     sx={
                       mode === "light" ? { color: "Light" } : { color: "White" }
