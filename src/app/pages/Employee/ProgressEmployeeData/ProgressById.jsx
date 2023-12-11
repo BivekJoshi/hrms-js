@@ -1,27 +1,19 @@
-import React from "react";
-import { useParams } from "react-router-dom";
-import { useGetEmployeeProgress} from "../../../hooks/employee/useEmployee";
-import { LinearProgress, Typography } from "@mui/material";
-import useAuth from "../../../../auth/hooks/component/login/useAuth";
-import { useGetLoggedInUser } from "../../../hooks/auth/usePassword";
+import React from 'react';
+import { useParams } from 'react-router-dom';
+import { useGetEmployeeProgress } from '../../../hooks/employee/useEmployee';
+import { LinearProgress, Typography } from '@mui/material';
+import useAuth from '../../../../auth/hooks/component/login/useAuth';
+import { useGetLoggedInUser } from '../../../hooks/auth/usePassword';
 
 const ProgressById = () => {
-  const {
-    isSuperAdmin,
-    isAdmin,
-    isHr,
-    isEmployee,
-    isHrAdmin,
-    isManager,
-  } = useAuth();
+  const { isSuperAdmin, isAdmin, isHr, isEmployee, isHrAdmin, isManager } =
+    useAuth();
 
   const { id } = useParams();
 
-  const { data: loggedInUserData} = isEmployee
-    ? useGetLoggedInUser()
-    : {};
+  const { data: loggedInUserData } = isEmployee ? useGetLoggedInUser() : {};
 
-    const { data, isLoading } =
+  const { data, isLoading } =
     isSuperAdmin || isAdmin || isHr || isHrAdmin || isManager
       ? useGetEmployeeProgress(id)
       : useGetEmployeeProgress(loggedInUserData?.employeeId);
@@ -66,9 +58,9 @@ const ProgressById = () => {
 
   return (
     <>
-      <h2>Profile Completed</h2>
-      <LinearProgress variant="determinate" value={progress} />
-      <Typography textAlign={"end"} marginBottom={"1rem"}>
+      <Typography variant='h5'>Profile Completed</Typography>
+      <LinearProgress variant='determinate' value={progress} />
+      <Typography textAlign={'end'} marginBottom={'1rem'}>
         {progress}% Complete
       </Typography>
     </>
