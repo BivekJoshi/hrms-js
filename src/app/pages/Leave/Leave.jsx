@@ -265,6 +265,7 @@ const Leave = ({ isLoading }) => {
         <ButtonComponent
           OnClick={handleAddOpenModal}
           Border='none'
+          color='white'
           buttonName={'+ Add Leave'}
         />
       </Box>

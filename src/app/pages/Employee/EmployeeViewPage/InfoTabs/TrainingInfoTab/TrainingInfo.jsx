@@ -113,7 +113,7 @@ const TrainingInfo = ({ data }) => {
           sx={{ mt: 3, ml: 1 }}
           onClick={handleAddOpenModal}
         >
-          +Add Training
+          + Add Training
         </Button>
       </Box>
 

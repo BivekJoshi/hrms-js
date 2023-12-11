@@ -1,22 +1,22 @@
-import * as React from "react";
-import { useState, useEffect } from "react";
-import { Box, Button, Stack } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
-import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
+import * as React from 'react';
+import { useState, useEffect } from 'react';
+import { Box, Button, Stack } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 
 import {
   useDeleteLeaveType,
   useGetLeaveType,
-} from "../../hooks/leaveType/useLeaveType";
+} from '../../hooks/leaveType/useLeaveType';
 import {
   AddLeaveTypeModal,
   EditLeaveTypeModal,
-} from "./LeaveTypeModal/LeaveTypeModal";
-import DeleteConfirmationModal from "../../components/Modal/DeleteConfirmationModal";
-import PermissionHoc from "../../hoc/permissionHoc";
-import HocButton from "../../hoc/hocButton";
-import useAuth from "../../../auth/hooks/component/login/useAuth";
-import CustomTable from "../../components/CustomTable/CustomTable";
+} from './LeaveTypeModal/LeaveTypeModal';
+import DeleteConfirmationModal from '../../components/Modal/DeleteConfirmationModal';
+import PermissionHoc from '../../hoc/permissionHoc';
+import HocButton from '../../hoc/hocButton';
+import useAuth from '../../../auth/hooks/component/login/useAuth';
+import CustomTable from '../../components/CustomTable/CustomTable';
 
 const LeaveType = ({ permissions }) => {
   const { data: leaveTypeData, isLoading } = useGetLeaveType();
@@ -62,63 +62,63 @@ const LeaveType = ({ permissions }) => {
 
   const columns = [
     {
-      title: "SN",
+      title: 'SN',
       render: (rowData) => rowData.tableData.id + 1,
-      width: "1%",
+      width: '1%',
       sortable: false,
       sorting: false,
     },
     {
-      title: "Leave Name",
-      field: "leaveName",
+      title: 'Leave Name',
+      field: 'leaveName',
       render: (rowData) => {
         const formattedLeaveName =
           rowData.leaveName.charAt(0).toUpperCase() +
           rowData.leaveName.slice(1).toLowerCase();
         return `${formattedLeaveName} Leave`;
       },
-      width: "10%",
+      width: '10%',
       sortable: false,
       sorting: false,
     },
     {
-      title: "Leave Days",
-      field: "leaveTotal",
-      emptyValue: "-",
+      title: 'Leave Days',
+      field: 'leaveTotal',
+      emptyValue: '-',
       // width: 15,
       sortable: false,
       sorting: false,
     },
     {
-      title: "Carry Forward",
-      field: "isCarryForward",
-      emptyValue: "-",
+      title: 'Carry Forward',
+      field: 'isCarryForward',
+      emptyValue: '-',
       // width: 10,
-      render: (rowData) => (rowData.isCarryForward ? "Yes" : "No"),
+      render: (rowData) => (rowData.isCarryForward ? 'Yes' : 'No'),
       sortable: false,
       sorting: false,
     },
     {
-      title: "Description",
-      field: "leaveDescription",
+      title: 'Description',
+      field: 'leaveDescription',
       sortable: false,
       sorting: false,
-      emptyValue: "-",
+      emptyValue: '-',
     },
 
     {
-      title: "Actions",
+      title: 'Actions',
       render: (rowData) => (
-        <Stack direction="row" spacing={0}>
+        <Stack direction='row' spacing={0}>
           <HocButton
             permissions={permissions}
-            color={"primary"}
+            color={'primary'}
             onClick={() => handleEditLeaveType(rowData)}
             icon={<ModeEditOutlineIcon />}
           />
           <HocButton
             permissions={permissions}
-            color={"primary"}
+            color={'primary'}
             onClick={() => handleDeleteLeaveType(rowData)}
             icon={<DeleteIcon />}
           />
@@ -132,20 +132,20 @@ const LeaveType = ({ permissions }) => {
   if (isLoading) return <>Loading</>;
   return (
     <>
-      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+      <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
         <HocButton
           permissions={permissions}
-          color={"primary"}
-          variant={"contained"}
+          color='white'
+          variant={'contained'}
           onClick={handleAddOpenModal}
-          buttonName={"+Add Leave Type"}
+          buttonName={'+ Add Leave Type'}
         />
       </Box>
       <br></br>
       <CustomTable
         columns={columns}
         data={leaveTypeData}
-        title="Leave Type"
+        title='Leave Type'
         isLoading={isLoading}
       />
       {openEditModal && (
@@ -167,7 +167,7 @@ const LeaveType = ({ permissions }) => {
           open={openDeleteModal}
           handleCloseModal={handleCloseDeleteModal}
           handleConfirmDelete={handleConfirmDelete}
-          message={"Leave Type"}
+          message={'Leave Type'}
         />
       )}
     </>
