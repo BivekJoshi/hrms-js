@@ -32,7 +32,7 @@ const CompanyGridView = ({
             <Card>
               <Box
                 sx={{
-                  backgroundColor: '#6123AB',
+                  backgroundColor: palette.secondary.main,
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
