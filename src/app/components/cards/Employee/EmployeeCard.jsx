@@ -226,11 +226,9 @@ const EmployeeCard = ({
                 }}
                 label={
                   <Typography
-                    variant='h6'
                     style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}
                   >
-                    {EFirstName || ''} {EMiddleName || ''} <br></br>
-                    {ELastName || ''}
+                    {EFirstName || ''} {EMiddleName || ''} {ELastName || ''}
                   </Typography>
                 }
               />
