@@ -1,7 +1,6 @@
 import { nanoid } from "nanoid";
 import { Grid, TextField, Button, MenuItem } from "@mui/material";
 import React from "react";
-import { toast } from "react-toastify";
 import useDesignationForm from "../../../hooks/designation/DesignationForm/useDesignationForm";
 
 const DesignationFields = ({ onClose, isLoading, data }) => {
@@ -12,8 +11,6 @@ const DesignationFields = ({ onClose, isLoading, data }) => {
 
     if (formik.isValid) {
       onClose();
-    } else {
-      toast.error("Please make sure you have filled the form correctly");
     }
   };
 

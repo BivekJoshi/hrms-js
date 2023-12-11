@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Box, Button, Grid } from "@mui/material";
-import { toast } from "react-toastify";
 
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
@@ -52,8 +51,6 @@ const Event = ({ permissions }) => {
   const handleFormSubmit = async () => {
     formik.handleSubmit();
     if (!formik.isValidating && formik.isValid) {
-    } else {
-      toast.error("Please make sure you have filled the form correctly");
     }
   };
   const handleOpenModal = (e) => {

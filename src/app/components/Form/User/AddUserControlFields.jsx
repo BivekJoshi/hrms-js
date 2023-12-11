@@ -4,8 +4,6 @@ import { Autocomplete } from "@mui/material";
 import { useGetEmployee } from "../../../hooks/employee/useEmployee";
 import { useAddUserControlForm } from "../../../pages/Auth/UserControl/Users/useAddUserControlForm";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
-import { toast } from "react-toastify";
-import CloseIcon from "@mui/icons-material/Close";
 
 export const AddUserControlFields = ({ onClose }) => {
   const { data: employeeData } = useGetEmployee();
@@ -19,8 +17,6 @@ export const AddUserControlFields = ({ onClose }) => {
       if (formik.isValid) {
         onClose();
       }
-    } else {
-      toast.error("Please make sure you have filled the form correctly");
     }
   };
 

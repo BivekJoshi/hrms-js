@@ -1,6 +1,5 @@
 import { Grid, TextField, Button } from "@mui/material";
 import React from "react";
-import { toast } from "react-toastify";
 import useDepartmentForm from "../../../hooks/department/DepartmentForm/useDepartmentForm";
 
 const DepartmentFields = ({ onClose, isLoading, data }) => {
@@ -11,8 +10,6 @@ const DepartmentFields = ({ onClose, isLoading, data }) => {
 
     if (formik.isValid) {
       onClose();
-    } else {
-      toast.error("Please make sure you have filled the form correctly");
     }
   };
   const submitButtonText = data ? "Update Department" : "Add Department";

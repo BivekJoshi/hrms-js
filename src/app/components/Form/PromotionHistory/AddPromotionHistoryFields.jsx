@@ -1,6 +1,5 @@
 import React from 'react';
 import { Grid, TextField, Button, Autocomplete } from '@mui/material';
-import { toast } from 'react-toastify';
 import useAddPromotionHistoryForm from '../../../hooks/promotionHistory/addPromotionHistory.jsx/useAddPromotionForm';
 import { useGetDesignation } from '../../../hooks/designation/useDesignation';
 
@@ -22,8 +21,6 @@ const AddPromotionHistoryFields = ({ onClose, isLoading }) => {
                     remarks: false,
                 });
                 onClose();
-            } else {
-                toast.error('Please make sure you have filled the form correctly');
             }
         }
     };

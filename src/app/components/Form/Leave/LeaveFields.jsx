@@ -9,7 +9,6 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useContext } from "react";
-import { toast } from "react-toastify";
 import { useGetEmployee } from "../../../hooks/employee/useEmployee";
 import { useGetLeaveType } from "../../../hooks/leaveType/useLeaveType";
 import useLeaveForm from "../../../hooks/leave/LeaveForm/useLeaveForm";
@@ -67,8 +66,6 @@ export const EditLeaveFields = ({ onClose, isLoading, data }) => {
         isHalfDay: false,
       });
       onClose();
-    } else {
-      toast.error("Please make sure you have filled the form correctly");
     }
   };
 
@@ -150,7 +147,7 @@ export const EditLeaveFields = ({ onClose, isLoading, data }) => {
             <Button
               variant="contained"
               onClick={handleFormSubmit}
-              sx={{ mt: 3, ml: 1 }}
+              sx={{ mt: 3, ml: 1, color: "#fff" }}
             >
               Submit
             </Button>
@@ -207,8 +204,6 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
         isHalfDay: false,
       });
       onClose();
-    } else {
-      toast.error("Please make sure you have filled the form correctly");
     }
   };
 
@@ -429,17 +424,12 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
             justifyContent="flex-end"
             alignItems="flex-end"
           >
-            <ButtonComponent
-            variant="contained"
-            buttonName={submitButtonText}
-            color={"#fff"}
-            />
             <Button
               variant="contained"
               onClick={handleFormSubmit}
-              sx={{ mt: 3, ml: 1 }}
+              sx={{ mt: 3, ml: 1, color: "#fff" }}
             >
-              
+              {submitButtonText}
             </Button>
             <Button
               variant="contained"

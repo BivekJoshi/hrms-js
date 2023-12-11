@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Grid, TextField, Button, Modal, Box } from "@mui/material";
-import { toast } from "react-toastify";
 import useEventForm from "../../../hooks/event/EventForm/useEventForm";
 
 
@@ -23,8 +22,6 @@ const AddEventFields = ({ formik}) => {
   //   if (!formik.isValidating && formik.isValid) {
   //     setOpenSubmitModal(true);
   //     // onClose();
-  //   } else {
-  //     toast.error("Please make sure you have filled the form correctly");
   //   }
   // };
 

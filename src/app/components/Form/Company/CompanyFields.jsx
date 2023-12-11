@@ -1,6 +1,5 @@
 import { Grid, TextField, Button } from "@mui/material";
 import React from "react";
-import { toast } from "react-toastify";
 import useCompanyForm from "../../../hooks/company/CompanyForm/useCompanyForm";
 
 const CompanyFields = ({ onClose, isLoading, data }) => {
@@ -15,8 +14,6 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
         companyDescription: true,
       });
       onClose();
-    } else {
-      toast.error("Please make sure you have filled the form correctly");
     }
   };
   const submitButtonText = data ? "Update Company" : "Add Company";

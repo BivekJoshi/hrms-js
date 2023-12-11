@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Grid, TextField, Button } from "@mui/material";
-import { toast } from "react-toastify";
 import { useDeleteHoliday } from "../../../hooks/holiday/useHoliday";
 import PermissionHoc from "../../../hoc/permissionHoc";
 
@@ -24,8 +23,6 @@ const HolidayFields = ({ formik }) => {
   //     if (formik.isValid) {
   //       // onClose();
   //       // setOpenSubmitModal(false);
-  //     } else {
-  //       toast.error("Please make sure you have filled the form correctly");
   //     }
   //   }
   // };

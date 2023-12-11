@@ -1,6 +1,5 @@
 import { Grid, Button, TextField, MenuItem, Typography } from "@mui/material";
 import React from "react";
-import { toast } from "react-toastify";
 import {
   useAddActiveEmployeeForm,
   useRemoveDeactiveEmployeeForm,
@@ -23,8 +22,6 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
         effectiveDate: true,
       });
       onClose();
-    } else {
-      toast.error("please fill all the required fields");
     }
   };
 
@@ -164,8 +161,6 @@ export const EditEmployeeActivateFields = ({ onClose, isLoading, id}) => {
         effectiveDate: true,
       });
       onClose();
-    } else {
-      toast.error("please fill all the required fields");
     }
   };
 

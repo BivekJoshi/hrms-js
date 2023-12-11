@@ -1,6 +1,5 @@
 import { Grid, Button, TextField, MenuItem, Autocomplete } from "@mui/material";
 import React, { useContext } from "react";
-import { toast } from "react-toastify";
 import useAddProjectForm from "../../../hooks/project/addProject/useAddProjectForm";
 import { useGetEmployee } from "../../../hooks/employee/useEmployee";
 import { useGetCompany } from "../../../hooks/company/useCompany";
@@ -42,8 +41,6 @@ const AddprojectFields = ({ onClose, isLoading }) => {
       formik.handleSubmit();
       if (formik.isValid) {
         onClose();
-      } else {
-        toast.error("Please make sure you have filled the form correctly");
       }
     }
   };

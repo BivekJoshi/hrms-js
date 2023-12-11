@@ -13,7 +13,6 @@ import {
 import React, { useState } from "react";
 import { useGetLeaveType } from "../../../../hooks/leaveType/useLeaveType";
 import useApplyLeaveForm from "../../../../hooks/leave/LeaveForm/useApplyLeaveForm";
-import { toast } from "react-toastify";
 import { useGetLeaveById } from "../../../../hooks/leave/useLeave";
 import { useLocation, useNavigate } from "react-router-dom";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
@@ -34,8 +33,6 @@ const ApplyLeaveField = () => {
     formik.handleSubmit();
     if (formik.isValid) {
       navigate("/employee/applyleave")
-    } else {
-      toast.error("Please make sure you have filled the form correctly");
     }
   };
 

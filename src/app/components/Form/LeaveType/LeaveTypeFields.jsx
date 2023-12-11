@@ -6,7 +6,6 @@ import {
   MenuItem,
 } from "@mui/material";
 import React from "react";
-import { toast } from "react-toastify";
 import { ThemeSwitch } from "../../../../theme/ThemeSwitch";
 import useLeaveTypeForm from "../../../hooks/leaveType/LeaveTypeForm/useLeaveTypeForm";
 import { useContext } from "react";
@@ -70,9 +69,7 @@ const LeaveTypeFields = ({ onClose, isLoading, data, existingLeaveTypes }) => {
         isCarryForward: false,
       });
       onClose();
-    } else {
-      toast.error("Please make sure you have filled the form correctly");
-    }
+    }     
   };
 
   const filteredLeaveNames = existingLeaveTypes

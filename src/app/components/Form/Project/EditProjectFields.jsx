@@ -1,6 +1,5 @@
 import { Grid, TextField, Button, MenuItem, Autocomplete } from "@mui/material";
 import React, { useContext } from "react";
-import { toast } from "react-toastify";
 import useEditProjectForm from "../../../hooks/project/editProject/useEditProjectForm";
 import { useGetCompany } from "../../../hooks/company/useCompany";
 import { useGetEmployee } from "../../../hooks/employee/useEmployee";
@@ -25,8 +24,6 @@ const EditProjectFields = ({ onClose, isLoading, data }) => {
         companyId: true,
       });
       onClose();
-    } else {
-      toast.error("please fill all the required fields");
     }
   };
 

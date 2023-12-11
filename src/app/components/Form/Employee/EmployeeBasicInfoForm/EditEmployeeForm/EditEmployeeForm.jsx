@@ -1,6 +1,5 @@
 import React from "react";
 import { useParams } from "react-router";
-import { toast } from "react-toastify";
 
 import EmployeeAddressDetailForm from "../../EmployeeAddressDetailForm/EmployeeAddressDetailForm";
 import EmployeeBankDetailForm from "../../EmployeeBankDetailForm/EmployeeBankDetailForm";
@@ -129,7 +128,6 @@ const EditEmployeeForm = () => {
         formik.setFieldTouched("");
         if (formik.dirty) {
           if (!formik.isValid) {
-            toast.error("Please make sure you have filled the form correctly");
             return;
           }
           formik.handleSubmit();
@@ -141,7 +139,6 @@ const EditEmployeeForm = () => {
 
         if (permanentFormik.dirty) {
           if (!permanentFormik.isValid) {
-            toast.error("Please make sure you have filled the form correctly");
             return;
           }
           permanentFormik.handleSubmit();
@@ -151,7 +148,6 @@ const EditEmployeeForm = () => {
         familyFormik.setFieldTouched("");
         if (familyFormik.dirty) {
           if (!familyFormik.isValid) {
-            toast.error("Please make sure you have filled the form correctly");
             return;
           }
           familyFormik.handleSubmit();
@@ -161,7 +157,6 @@ const EditEmployeeForm = () => {
         qualificationFormik.setFieldTouched("");
         if (qualificationFormik.dirty) {
           if (!qualificationFormik.isValid) {
-            toast.error("Please make sure you have filled the form correctly");
             return;
           }
           qualificationFormik.handleSubmit();
@@ -171,7 +166,6 @@ const EditEmployeeForm = () => {
         bankFormik.setFieldTouched("");
         if (bankFormik.dirty) {
           if (!bankFormik.isValid) {
-            toast.error("Please make sure you have filled the form correctly");
             return;
           }
           bankFormik.handleSubmit();
@@ -181,7 +175,6 @@ const EditEmployeeForm = () => {
         employeeHistoryFormik.setFieldTouched("");
         if (employeeHistoryFormik.dirty) {
           if (!employeeHistoryFormik.isValid) {
-            toast.error("Please make sure you have filled the form correctly");
             return;
           }
           employeeHistoryFormik.handleSubmit();

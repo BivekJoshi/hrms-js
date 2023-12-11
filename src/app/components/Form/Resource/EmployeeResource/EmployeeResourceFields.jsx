@@ -17,22 +17,23 @@ const EmployeeResourceFields = ({ onClose, isLoading, data }) => {
   const { data: employeeData } = useGetEmployee();
   const { mode } = useContext(ThemeModeContext);
   const { formik } = useEmployeeResourceForm(data);
-  const employeeId = data?.id;
+
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
     if (formik.isValid) {
       onClose();
-    } else {
-      toast.error("Please make sure you have filled the form correctly");
     }
   };
   const submitButtonText = data ? "Update Resource" : " Add Resource";
 
-  const getEmployeeName = () => {
-    const employee = employeeData?.find((emp) => emp.id === employeeId);
-    const { firstName, middleName, lastName } = employee;
-    return firstName;
+  const getEmployeeName = (employeeId) => {
+    if(employeeId !== ""){
+
+      const employee = data && employeeData?.find((emp) => emp.id === employeeId);
+      const { firstName, middleName, lastName } = employee;
+      return firstName;
+    }
   };
 
   return (
@@ -40,20 +41,20 @@ const EmployeeResourceFields = ({ onClose, isLoading, data }) => {
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
           <TextField
-            id="employeeId"
-            name="employeeId"
+            id="id"
+            name="id"
             label="Employee Name"
             placeholder="Enter Employee name"
             fullWidth
-            value={getEmployeeName(formik.values.employeeId)}
+            value={getEmployeeName(formik.values.id)}
             onChange={(event) => {
               formik.handleChange(event);
-              formik.setFieldValue("employeeId", event.target.value);
+              formik.setFieldValue("id", event.target.value);
             }}
             error={
-              formik.touched.employeeId && Boolean(formik.errors.employeeId)
+              formik.touched.id && Boolean(formik.errors.id)
             }
-            helperText={formik.touched.employeeId && formik.errors.employeeId}
+            helperText={formik.touched.id && formik.errors.id}
             variant="outlined"
             autoFocus
             InputLabelProps={{ shrink: true }}

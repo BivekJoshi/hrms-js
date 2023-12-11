@@ -55,8 +55,6 @@ export const EditUserControlFieldsRole = ({ onClose ,rowData}) => {
       formik.handleSubmit();
       if (formik.isValid) {
         onClose();
-      } else {
-        toast.error("Please make sure you have filled the form correctly");
       }
     }
   };
