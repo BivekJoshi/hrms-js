@@ -1,5 +1,5 @@
-import React, { useContext, useState } from "react";
-import { styled } from "@mui/material/styles";
+import React, { useContext, useState } from 'react';
+import { styled } from '@mui/material/styles';
 import {
   Box,
   Drawer,
@@ -7,44 +7,46 @@ import {
   List,
   ListItemButton,
   Button,
-} from "@mui/material";
-import { ListItemIcon } from "@mui/material";
-import { ListItemText, Collapse, IconButton } from "@mui/material/";
-import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
-import { ExpandLess, ExpandMore } from "@mui/icons-material";
-import { Card, Fab, Switch, Typography } from "@mui/material";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import { ThemeModeContext } from "../../../theme/ThemeModeContext";
-import AdminHeader from "../Header/AdminHeader";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import MailIcon from "@mui/icons-material/Mail";
-import PlaylistAddCheckIcon from "@mui/icons-material/PlaylistAddCheck";
-import AddchartIcon from "@mui/icons-material/Addchart";
-import EventIcon from "@mui/icons-material/Event";
-import HolidayVillageIcon from "@mui/icons-material/HolidayVillage";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import BreadCrumbs from "../../../routes/employeeRoutes";
-import CoPresentIcon from "@mui/icons-material/CoPresent";
-import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-import ApprovalOutlinedIcon from "@mui/icons-material/ApprovalOutlined";
+} from '@mui/material';
+import { ListItemIcon } from '@mui/material';
+import { ListItemText, Collapse, IconButton } from '@mui/material/';
+import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { ExpandLess, ExpandMore } from '@mui/icons-material';
+import { Card, Fab, Switch, Typography } from '@mui/material';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import { ThemeModeContext } from '../../../theme/ThemeModeContext';
+import AdminHeader from '../Header/AdminHeader';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import MailIcon from '@mui/icons-material/Mail';
+import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck';
+import AddchartIcon from '@mui/icons-material/Addchart';
+import EventIcon from '@mui/icons-material/Event';
+import HolidayVillageIcon from '@mui/icons-material/HolidayVillage';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import BreadCrumbs from '../../../routes/employeeRoutes';
+import CoPresentIcon from '@mui/icons-material/CoPresent';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import ApprovalOutlinedIcon from '@mui/icons-material/ApprovalOutlined';
+import Footer from '../footer/Footer';
+import { removeUser } from '../../utils/cookieHelper';
 
-const drawerWidth = 250;
+const drawerWidth = 260;
 
-const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
+const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
     flexGrow: 1,
-    padding: theme.spacing(3),
-    transition: theme.transitions.create("margin", {
+    padding: 0,
+    transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    marginLeft: `-${drawerWidth}px`,
+    marginLeft: `-${drawerWidth + 24}px`,
     ...(open && {
-      transition: theme.transitions.create("margin", {
+      transition: theme.transitions.create('margin', {
         easing: theme.transitions.easing.easeOut,
         duration: theme.transitions.duration.enteringScreen,
       }),
-      marginLeft: 0,
+      marginLeft: '-24px',
     }),
   })
 );
@@ -60,12 +62,12 @@ const StyledNavLink = styled(NavLink)`
   }
 `;
 
-const DrawerHeader = styled("div")(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
+const DrawerHeader = styled('div')(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
   padding: theme.spacing(0, 1),
   ...theme.mixins.toolbar,
-  justifyContent: "flex-end",
+  justifyContent: 'flex-end',
 }));
 
 export default function EmployeeSidebar() {
@@ -78,83 +80,83 @@ export default function EmployeeSidebar() {
 
   const employeeDrawerMenus = [
     {
-      name: "Dashboard",
+      name: 'Dashboard',
       icon: (
         <DashboardIcon
-          sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
+          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
         />
       ),
-      path: "dashboard",
+      path: 'dashboard',
       subMenus: [],
     },
     {
-      name: "My Profile",
+      name: 'My Profile',
       icon: (
         <AccountCircleOutlinedIcon
-          sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
+          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
         />
       ),
-      path: "viewprofile",
+      path: 'viewprofile',
       subMenus: [],
     },
     {
-      name: "My Attendence",
-      path: "attendance",
+      name: 'My Attendence',
+      path: 'attendance',
       icon: (
         <CoPresentIcon
-          sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
+          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
         />
       ),
       subMenus: [],
     },
     {
-      name: "Apply Leave",
-      path: "applyleave",
+      name: 'Apply Leave',
+      path: 'applyleave',
       icon: (
         <ApprovalOutlinedIcon
-          sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
+          sx={mode === 'light' ? { color: '#01579b' } : { color: 'white' }}
         />
       ),
       subMenus: [],
     },
     {
-      name: "Project",
+      name: 'Project',
       icon: (
         <AddchartIcon
-          sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
+          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
         />
       ),
-      path: "project",
+      path: 'project',
       subMenus: [],
     },
     {
-      name: "Event",
+      name: 'Event',
       icon: (
         <EventIcon
-          sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
+          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
         />
       ),
-      path: "event",
+      path: 'event',
       subMenus: [],
     },
     {
-      name: "Holiday",
+      name: 'Holiday',
       icon: (
         <HolidayVillageIcon
-          sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
+          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
         />
       ),
-      path: "holiday",
+      path: 'holiday',
       subMenus: [],
     },
     {
-      name: "Todo",
+      name: 'Todo',
       icon: (
         <PlaylistAddCheckIcon
-          sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
+          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
         />
       ),
-      path: "todolist",
+      path: 'todolist',
       subMenus: [],
     },
   ];
@@ -174,7 +176,7 @@ export default function EmployeeSidebar() {
   };
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: 'flex' }}>
       <AdminHeader
         open={open}
         handleDrawerOpen={handleDrawerOpen}
@@ -184,24 +186,24 @@ export default function EmployeeSidebar() {
         sx={{
           width: drawerWidth,
           flexShrink: 0,
-          "& .MuiDrawer-paper": {
+          '& .MuiDrawer-paper': {
             width: drawerWidth,
-            boxSizing: "border-box",
+            boxSizing: 'border-box',
           },
         }}
-        variant="persistent"
-        anchor="left"
+        variant='persistent'
+        anchor='left'
         open={open}
       >
         <DrawerHeader>
           <Typography
             style={{
-              fontSize: "2rem",
-              fontWeight: "900",
-              color: "#01579b",
-              letterSpacing: "0.1rem",
+              fontSize: '2rem',
+              fontWeight: '900',
+              color: '#01579b',
+              letterSpacing: '0.1rem',
             }}
-            variant="h6"
+            variant='h6'
           >
             DGHUB
           </Typography>
@@ -218,12 +220,12 @@ export default function EmployeeSidebar() {
                   onClick={() => handleSubMenuToggle(index)}
                   sx={{
                     backgroundColor:
-                    currentPath.includes(menu.path) && "#ace8639e",
+                      currentPath.includes(menu.path) && '#ace8639e',
                   }}
                 >
                   <ListItemIcon
                     sx={
-                      mode === "light" ? { color: "Light" } : { color: "White" }
+                      mode === 'light' ? { color: 'Light' } : { color: 'White' }
                     }
                   >
                     {menu.icon}
@@ -231,24 +233,24 @@ export default function EmployeeSidebar() {
                   <ListItemText
                     primary={menu.name}
                     sx={
-                      mode === "light" ? { color: "black" } : { color: "white" }
+                      mode === 'light' ? { color: 'black' } : { color: 'white' }
                     }
                   />
                   {menu.subMenus.length > 0 ? (
                     subMenuOpen[index] ? (
                       <ExpandLess
                         sx={
-                          mode === "light"
-                            ? { color: "black" }
-                            : { color: "white" }
+                          mode === 'light'
+                            ? { color: 'black' }
+                            : { color: 'white' }
                         }
                       />
                     ) : (
                       <ExpandMore
                         sx={
-                          mode === "light"
-                            ? { color: "black" }
-                            : { color: "white" }
+                          mode === 'light'
+                            ? { color: 'black' }
+                            : { color: 'white' }
                         }
                       />
                     )
@@ -256,24 +258,24 @@ export default function EmployeeSidebar() {
                 </ListItemButton>
               </StyledNavLink>
               {menu.subMenus.length > 0 && (
-                <Collapse in={subMenuOpen[index]} timeout="auto" unmountOnExit>
-                  <List component="div" disablePadding>
+                <Collapse in={subMenuOpen[index]} timeout='auto' unmountOnExit>
+                  <List component='div' disablePadding>
                     {menu.subMenus.map((subMenu, subIndex) => (
                       <StyledNavLink
                         key={subIndex}
                         to={subMenu.path}
                         sx={
-                          mode === "light"
-                            ? { color: "black" }
-                            : { color: "white" }
+                          mode === 'light'
+                            ? { color: 'black' }
+                            : { color: 'white' }
                         }
                       >
                         <ListItemButton sx={{ pl: 4 }}>
                           <ListItemIcon
                             sx={
-                              mode === "light"
-                                ? { color: "black" }
-                                : { color: "white" }
+                              mode === 'light'
+                                ? { color: 'black' }
+                                : { color: 'white' }
                             }
                           >
                             {subMenu.icon}
@@ -281,9 +283,9 @@ export default function EmployeeSidebar() {
                           <ListItemText
                             primary={subMenu.name}
                             sx={
-                              mode === "light"
-                                ? { color: "black" }
-                                : { color: "white" }
+                              mode === 'light'
+                                ? { color: 'black' }
+                                : { color: 'white' }
                             }
                           />
                         </ListItemButton>
@@ -298,29 +300,29 @@ export default function EmployeeSidebar() {
         <Divider />
         <Box
           sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            padding: "10px",
-            flexDirection: "column",
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            padding: '10px',
+            flexDirection: 'column',
           }}
         >
           <Button
-            variant="contained"
-            sx={{ backgroundColor: "#6DAB23" }}
+            variant='contained'
+            sx={{ backgroundColor: '#6DAB23' }}
             onClick={() => {
               removeUser();
-              navigate("/");
+              navigate('/');
             }}
           >
             Logout
           </Button>
           <Typography
-            variant="body2"
-            sx={{ marginRight: "8px", marginTop: "1rem" }}
+            variant='body2'
+            sx={{ marginRight: '8px', marginTop: '1rem' }}
           >
-            {mode === "light" ? "Dark" : "Light"} Mode
-            <Switch checked={mode === "dark"} onChange={toggleMode} />
+            {mode === 'light' ? 'Dark' : 'Light'} Mode
+            <Switch checked={mode === 'dark'} onChange={toggleMode} />
           </Typography>
         </Box>
       </Drawer>
@@ -330,29 +332,29 @@ export default function EmployeeSidebar() {
         <br />
 
         <Card
-          variant="outlined"
+          variant='outlined'
           sx={{
-            maxWidth: "100%",
-            padding: "20px",
-            boxSizing: "border-box",
-            "@media (min-width: 600px)": {
-              maxWidth: open ? "calc(100% - drawerWidth)" : "100%",
+            maxWidth: '100%',
+            padding: '20px',
+            boxSizing: 'border-box',
+            '@media (min-width: 600px)': {
+              maxWidth: open ? 'calc(100% - drawerWidth)' : '100%',
             },
           }}
         >
           <Box
-            display="flex"
-            justifyContent="flex-start"
-            padding=" 0 0 1rem"
-            gap="1rem"
-            alignItems="center"
+            display='flex'
+            justifyContent='flex-start'
+            padding=' 0 0 1rem'
+            gap='1rem'
+            alignItems='center'
           >
-            {location.pathname !== "/employee/dashboard" && (
+            {location.pathname !== '/employee/dashboard' && (
               <Fab
-                color="primary"
-                sx={{ height: "auto", padding: ".3rem 0" }}
-                aria-label="add"
-                variant="extended"
+                color='primary'
+                sx={{ height: 'auto', padding: '.3rem 0' }}
+                aria-label='add'
+                variant='extended'
                 onClick={() => {
                   navigate(-1);
                 }}
@@ -364,6 +366,7 @@ export default function EmployeeSidebar() {
           </Box>
           <Outlet />
         </Card>
+        <Footer />
       </Main>
     </Box>
   );
