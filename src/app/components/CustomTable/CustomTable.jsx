@@ -15,7 +15,7 @@ const CustomTable = (props) => {
         isLoading={props?.isLoading}
         options={{
           search: props?.search || true,
-          tableLayout: 'fixed',
+          tableLayout: props?.tableLayout,
           padding: 'dense',
 
           pageSize: props?.pageSize || 10,
