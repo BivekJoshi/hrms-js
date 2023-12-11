@@ -7,35 +7,36 @@ import {
   List,
   ListItemButton,
   Button,
-} from "@mui/material";
-import { ListItemIcon } from "@mui/material";
-import { ListItemText, Collapse, IconButton } from "@mui/material/";
-import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
-import { ExpandLess, ExpandMore } from "@mui/icons-material";
-import { Card, Fab, Switch, Typography } from "@mui/material";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import { ThemeModeContext } from "../../../theme/ThemeModeContext";
-import AdminHeader from "../Header/AdminHeader";
-import BreadCrumbs from "../../../routes/adminRoutes";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
-import PersonIcon from "@mui/icons-material/Person";
-import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import MailIcon from "@mui/icons-material/Mail";
-import CakeIcon from "@mui/icons-material/Cake";
-import HowToRegIcon from "@mui/icons-material/HowToReg";
-import WorkspacesIcon from "@mui/icons-material/Workspaces";
-import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
-import BusinessIcon from "@mui/icons-material/Business";
-import PlaylistAddCheckIcon from "@mui/icons-material/PlaylistAddCheck";
-import AddchartIcon from "@mui/icons-material/Addchart";
-import EventIcon from "@mui/icons-material/Event";
-import HolidayVillageIcon from "@mui/icons-material/HolidayVillage";
-import LaptopIcon from "@mui/icons-material/Laptop";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { removeUser } from "../../utils/cookieHelper";
+} from '@mui/material';
+import { ListItemIcon } from '@mui/material';
+import { ListItemText, Collapse, IconButton } from '@mui/material/';
+import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { ExpandLess, ExpandMore } from '@mui/icons-material';
+import { Card, Fab, Switch, Typography } from '@mui/material';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import { ThemeModeContext } from '../../../theme/ThemeModeContext';
+import AdminHeader from '../Header/AdminHeader';
+import BreadCrumbs from '../../../routes/adminRoutes';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
+import PersonIcon from '@mui/icons-material/Person';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import MailIcon from '@mui/icons-material/Mail';
+import CakeIcon from '@mui/icons-material/Cake';
+import HowToRegIcon from '@mui/icons-material/HowToReg';
+import WorkspacesIcon from '@mui/icons-material/Workspaces';
+import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
+import BusinessIcon from '@mui/icons-material/Business';
+import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck';
+import AddchartIcon from '@mui/icons-material/Addchart';
+import EventIcon from '@mui/icons-material/Event';
+import HolidayVillageIcon from '@mui/icons-material/HolidayVillage';
+import LaptopIcon from '@mui/icons-material/Laptop';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { removeUser } from '../../utils/cookieHelper';
+import Footer from '../footer/Footer';
 
-const drawerWidth = 230;
+const drawerWidth = 260;
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
   ({ theme, open }) => ({
@@ -45,13 +46,13 @@ const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    marginLeft: `-${drawerWidth}px`,
+    marginLeft: `-${drawerWidth + 24}px`,
     ...(open && {
       transition: theme.transitions.create("margin", {
         easing: theme.transitions.easing.easeOut,
         duration: theme.transitions.duration.enteringScreen,
       }),
-      marginLeft: 0,
+      marginLeft: '-24px',
     }),
   })
 );
@@ -402,7 +403,7 @@ export default function AdminSidebar() {
         <br />
 
         <Card
-          variant="outlined"
+          variant='elevation'
           sx={{
             maxWidth: "100%",
             padding: "20px",
@@ -436,6 +437,7 @@ export default function AdminSidebar() {
           </Box>
           <Outlet />
         </Card>
+        <Footer />
       </Main>
     </Box>
   );

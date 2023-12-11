@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext } from 'react';
 import {
   Box,
   Button,
@@ -28,16 +28,16 @@ const CompanyGridView = ({
             <Card>
               <Box
                 sx={{
-                  backgroundColor: palette?.primary?.main,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  position: "relative",
+                  backgroundColor: '#6123AB',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  position: 'relative',
                 }}
               >
                 <img
                   src={CompanyGrid}
-                  style={{ position: "absolute", right: 0 }}
+                  style={{ position: 'absolute', right: 0 }}
                 />
 
                 <PopOver
@@ -100,8 +100,8 @@ const CompanyGridView = ({
                   }}
                 >
                   <Button
-                    variant="contained"
-                    color="success"
+                    variant='contained'
+                    color='success'
                     onClick={() => handleEditCompany(item)}
                     sx={{ textTransform: "none" }}
                   >
