@@ -58,10 +58,8 @@ const ResetPassword = ({ isLoading }) => {
 
   const handleFormSubmit = async () => {
     const isValid = await formik.validateForm();
-    if (isValid) {
-      if (formik.values.password === formik.values.confirmPassword) {
-        formik.handleSubmit();
-      }
+    if(isValid){
+      formik.handleSubmit();
     }
   };
 

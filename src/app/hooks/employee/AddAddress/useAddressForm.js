@@ -7,6 +7,7 @@ export const usePermanentAddressForm = ({ data, employeeLoading: isLoading }) =>
   const { mutate: temporaryMutate } = useTemporaryAddress({});
   const { mutate: editMutate } = useEditAddress({});
   const addressDetails = !isLoading && data?.addresses;
+  
   const formik = useFormik({
     initialValues: {
       addresses: [

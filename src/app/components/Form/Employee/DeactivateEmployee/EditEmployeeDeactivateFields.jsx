@@ -12,10 +12,9 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
   const { data: employeeData } = useGetEmployee();
   const { formik } = useRemoveDeactiveEmployeeForm(data, onClose);
 
-  const handleFormSubmit = () => {
-    formik.handleSubmit();
+  const handleFormSubmit = () => {    
     if (formik.isValid) {
-      onClose();
+      formik.handleSubmit();
     }
   };
 

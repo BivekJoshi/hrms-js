@@ -28,8 +28,8 @@ const TodayBirthday = ({ data }) => {
     }
     setOpen(false);
   };
-  const handleClick = () => {
-    navigate(`/admin/employee/${employeeId}`);
+  const handleClick = (bname) => {
+    navigate(`/admin/employee/${bname?.id}`);
     setOpen(false);
   }
 
@@ -109,7 +109,7 @@ const TodayBirthday = ({ data }) => {
                       birthdayEmployeeName.map((bname, index) => (
                         <MenuItem
                           key={index}
-                          onClick={handleClick}
+                          onClick={() => handleClick(bname)}
                           sx={{ justifyContent: 'center' }}
                         >
                           {bname.fullName}

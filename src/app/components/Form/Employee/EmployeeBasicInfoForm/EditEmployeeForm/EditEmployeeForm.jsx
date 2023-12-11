@@ -1,35 +1,35 @@
 import React from "react";
 import { useParams } from "react-router";
 
-import EmployeeAddressDetailForm from '../../EmployeeAddressDetailForm/EmployeeAddressDetailForm';
-import EmployeeBankDetailForm from '../../EmployeeBankDetailForm/EmployeeBankDetailForm';
-import EmployeeDocumentDetailForm from '../../EmployeeDocumentDetailForm/EmployeeDocumentDetailForm';
-import EmployeeFamilyDetailForm from '../../EmployeeFamilyDetailForm/EmployeeFamilyDetailForm';
-import EmployeeQualificationDetailForm from '../../EmployeeQualificationDetailForm/EmployeeQualificationDetailForm';
-import EmployeeBasicInfoForm from '../EmployeeBasicInfoForm';
-import EmployeeHistoryDetailForm from '../../EmployeeHistoryDetailForm/EmployeeHistoryDetailForm';
+import EmployeeAddressDetailForm from "../../EmployeeAddressDetailForm/EmployeeAddressDetailForm";
+import EmployeeBankDetailForm from "../../EmployeeBankDetailForm/EmployeeBankDetailForm";
+import EmployeeDocumentDetailForm from "../../EmployeeDocumentDetailForm/EmployeeDocumentDetailForm";
+import EmployeeFamilyDetailForm from "../../EmployeeFamilyDetailForm/EmployeeFamilyDetailForm";
+import EmployeeQualificationDetailForm from "../../EmployeeQualificationDetailForm/EmployeeQualificationDetailForm";
+import EmployeeBasicInfoForm from "../EmployeeBasicInfoForm";
+import EmployeeHistoryDetailForm from "../../EmployeeHistoryDetailForm/EmployeeHistoryDetailForm";
 
-import useQualificationForm from '../../../../../hooks/employee/AddQualification/useQualificationForm';
-import useFamilyForm from '../../../../../hooks/employee/AddFamily/useFamilyForm';
-import useEditEmployeeForm from '../../../../../hooks/employee/EditEmployee/useEditEmployeeForm';
-import { usePermanentAddressForm } from '../../../../../hooks/employee/AddAddress/useAddressForm';
-import useAddBankForm from '../../../../../hooks/employee/AddBankForm/useAddBankForm';
-import { useGetEmployeeById } from '../../../../../hooks/employee/useEmployee';
-import useEmployeeHistoryForm from '../../../../../hooks/employee/AddEmployeeHistory/useEmployeeHistoryForm';
-import { useAddDocumentForm } from '../../../../../hooks/employee/AddDocument/useAddDocumentForm';
-import { toast } from 'react-toastify';
+import useQualificationForm from "../../../../../hooks/employee/AddQualification/useQualificationForm";
+import useFamilyForm from "../../../../../hooks/employee/AddFamily/useFamilyForm";
+import useEditEmployeeForm from "../../../../../hooks/employee/EditEmployee/useEditEmployeeForm";
+import { usePermanentAddressForm } from "../../../../../hooks/employee/AddAddress/useAddressForm";
+import useAddBankForm from "../../../../../hooks/employee/AddBankForm/useAddBankForm";
+import { useGetEmployeeById } from "../../../../../hooks/employee/useEmployee";
+import useEmployeeHistoryForm from "../../../../../hooks/employee/AddEmployeeHistory/useEmployeeHistoryForm";
+import { useAddDocumentForm } from "../../../../../hooks/employee/AddDocument/useAddDocumentForm";
+import { toast } from "react-toastify";
 
 const EditEmployeeForm = () => {
   const { id } = useParams();
 
   const steps = [
-    'Basic Details',
-    'Address Details',
-    'Family Details',
-    'Educational Details',
-    'Bank Details',
-    'Employee History',
-    'Document Details',
+    "Basic Details",
+    "Address Details",
+    "Family Details",
+    "Educational Details",
+    "Bank Details",
+    "Employee History",
+    "Document Details",
     // 'Other Details',
   ];
 
@@ -106,19 +106,15 @@ const EditEmployeeForm = () => {
       //   return <p>Other Details</p>;
 
       default:
-        throw new Error('Unknown Step');
+        throw new Error("Unknown Step");
     }
   };
 
   const handleNext = ({ activeStep, setActiveStep }) => {
     switch (activeStep) {
       case 0:
-        formik.setFieldTouched('');
+        formik.setFieldTouched("");
         if (formik.dirty) {
-          if (!formik.isValid) {
-            toast.warning(err)
-            return;
-          }
           formik.handleSubmit();
         }
         if (formik.isValid) {
@@ -126,54 +122,53 @@ const EditEmployeeForm = () => {
         }
         break;
       case 1:
-        permanentFormik.setFieldTouched('');
-
+        permanentFormik.setFieldTouched("");
         if (permanentFormik.dirty) {
-          if (!permanentFormik.isValid) {
-            return;
-          }
           permanentFormik.handleSubmit();
+        }
+        if (permanentFormik.isValid) {
+          setActiveStep(activeStep + 1);
         }
         break;
       case 2:
-        familyFormik.setFieldTouched('');
+        familyFormik.setFieldTouched("");
         if (familyFormik.dirty) {
-          if (!familyFormik.isValid) {
-            return;
-          }
           familyFormik.handleSubmit();
+        }
+        if (familyFormik.isValid) {
+          setActiveStep(activeStep + 1);
         }
         break;
       case 3:
-        qualificationFormik.setFieldTouched('');
+        qualificationFormik.setFieldTouched("");
         if (qualificationFormik.dirty) {
-          if (!qualificationFormik.isValid) {
-            return;
-          }
           qualificationFormik.handleSubmit();
+        }
+        if (qualificationFormik.isValid) {
+          setActiveStep(activeStep + 1);
         }
         break;
       case 4:
-        bankFormik.setFieldTouched('');
+        bankFormik.setFieldTouched("");
         if (bankFormik.dirty) {
-          if (!bankFormik.isValid) {
-            return;
-          }
           bankFormik.handleSubmit();
+        }
+        if (bankFormik.isValid) {
+          setActiveStep(activeStep + 1);
         }
         break;
       case 5:
-        employeeHistoryFormik.setFieldTouched('');
+        employeeHistoryFormik.setFieldTouched("");
         if (employeeHistoryFormik.dirty) {
-          if (!employeeHistoryFormik.isValid) {
-            return;
-          }
           employeeHistoryFormik.handleSubmit();
+        }
+        if (employeeHistoryFormik.isValid) {
+          setActiveStep(activeStep + 1);
         }
         break;
 
       case 6:
-        documentFormik.setFieldTouched('');
+        documentFormik.setFieldTouched("");
         if (documentFormik.dirty) {
           documentFormik.handleSubmit();
         }
