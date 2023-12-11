@@ -311,13 +311,13 @@ export default function EmployeeSidebar() {
           >
             Logout
           </Button>
-          <Typography
+          {/* <Typography
             variant="body2"
             sx={{ marginRight: "8px", marginTop: "1rem" }}
           >
             {mode === "light" ? "Dark" : "Light"} Mode
             <Switch checked={mode === "dark"} onChange={toggleMode} />
-          </Typography>
+          </Typography> */}
         </Box>
       </Drawer>
 

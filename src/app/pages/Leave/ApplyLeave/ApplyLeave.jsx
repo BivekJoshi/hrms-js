@@ -176,7 +176,13 @@ const ApplyLeave = () => {
 
   const boxes = leavebalance
     ? leavebalance.map((data, index) => (
-        <Box key={index} boxShadow="7" borderRadius="1.5rem" minHeight="200px">
+        <Box
+          key={index}
+          boxShadow="7"
+          borderRadius="1.5rem"
+          minHeight="200px"
+          bgcolor={mode === "light" ? "" : "#4f4e4c"}
+        >
           <Typography fontSize="1.2rem" fontWeight="600" marginTop="1rem">
             {leaveTypeMap.get(data ? data?.leaveTypeId : "")}
           </Typography>
@@ -192,7 +198,13 @@ const ApplyLeave = () => {
         </Box>
       ))
     : leaveIcon.map((leave, index) => (
-        <Box key={index} boxShadow="7" borderRadius="1.5rem" minHeight="200px">
+        <Box
+          key={index}
+          boxShadow="7"
+          borderRadius="1.5rem"
+          minHeight="200px"
+          bgcolor={mode === "light" ? "" : "#4f4e4c"}
+        >
           <Typography fontSize="1.2rem" fontWeight="600" marginTop="1rem">
             {leave.leaveType}
           </Typography>
