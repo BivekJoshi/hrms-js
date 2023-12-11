@@ -2,13 +2,22 @@ import React, { useContext, useEffect, useState } from 'react';
 import { styled } from '@mui/material/styles';
 import MuiAppBar from '@mui/material/AppBar';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Box, IconButton, Stack, Toolbar, Typography } from '@mui/material';
+import {
+  Box,
+  IconButton,
+  Stack,
+  Switch,
+  Toolbar,
+  Tooltip,
+  Typography,
+} from '@mui/material';
 import { useGetTodayBirthday } from '../../hooks/birthday/useBirthday';
 import Notification from '../../pages/Notification/Notification';
 import Profile from '../../pages/Auth/Profile/Profile';
 import TodayBirthday from '../../pages/Birthday/TodayBirthday';
 import { useGetEventNotification } from '../../hooks/event/useEvent';
 import ThemeModeContext from '../../../theme/ThemeModeContext';
+import { DarkModeOutlined, LightModeOutlined } from '@mui/icons-material';
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
@@ -30,7 +39,7 @@ const AppBar = styled(MuiAppBar, {
 export default function AdminHeader({ open, handleDrawerOpen }) {
   const { data: birthdayData } = useGetTodayBirthday();
   const { data: eventData } = useGetEventNotification();
-  const { mode } = useContext(ThemeModeContext);
+  const { mode, toggleMode, palette } = useContext(ThemeModeContext);
 
   return (
     <AppBar position='fixed' open={open}>
@@ -39,7 +48,6 @@ export default function AdminHeader({ open, handleDrawerOpen }) {
           display: 'flex',
           flexDirection: 'row',
           justifyContent: 'space-between',
-          bgcolor: mode === 'light' ? '' : '#413e3e',
         }}
       >
         <Box display='flex' flexDirection='row' alignItems='center'>
@@ -50,7 +58,7 @@ export default function AdminHeader({ open, handleDrawerOpen }) {
             edge='start'
             sx={{ mr: 2, ...(open && { display: 'none' }) }}
           >
-            <MenuIcon />
+            <MenuIcon style={{ color: 'white' }} />
           </IconButton>
           <Typography variant='h6' noWrap color={'#fff'}>
             Human Resource Management System
@@ -58,6 +66,21 @@ export default function AdminHeader({ open, handleDrawerOpen }) {
         </Box>
 
         <Stack flexDirection='row'>
+          <IconButton onClick={toggleMode}>
+            {palette.mode === 'dark' ? (
+              <Tooltip title='Switch Light Mode'>
+                <DarkModeOutlined sx={{ fontSize: '25px' }} />
+              </Tooltip>
+            ) : (
+              <Tooltip title='Switch Dark Mode'>
+                <LightModeOutlined
+                  style={{ color: 'white' }}
+                  sx={{ fontSize: '25px' }}
+                />
+              </Tooltip>
+            )}
+          </IconButton>
+
           <TodayBirthday data={birthdayData} />
           <Notification data={eventData} />
           <Profile />
