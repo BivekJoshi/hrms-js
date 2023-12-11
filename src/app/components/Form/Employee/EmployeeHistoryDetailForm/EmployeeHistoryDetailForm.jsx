@@ -1,4 +1,4 @@
-import { Button, Grid, TextField, Typography } from "@mui/material";
+import { Button, Divider, Grid, TextField, Typography } from "@mui/material";
 import { FieldArray, FormikProvider } from "formik";
 import React from "react";
 import { useDeleteHistory } from "../../../../hooks/employee/useEmployeeHistory";
@@ -24,9 +24,7 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                 {formik.values.history.map((employeeHistory, index) => (
                   <React.Fragment key={index}>
                     <br />
-                    <Typography varient="button" display="block" glutterBottom>
-                      Add Employee History
-                    </Typography>
+                    <Divider> Add Employee History</Divider>
                     <br />
                     <Grid container spacing={3}>
                       <Grid item xs={12} sm={6} md={4}>

@@ -121,7 +121,9 @@ const EditEmployeeForm = () => {
           }
           formik.handleSubmit();
         }
-
+        if (formik.isValid) {
+          setActiveStep(activeStep + 1);
+        }
         break;
       case 1:
         permanentFormik.setFieldTouched('');
@@ -175,11 +177,9 @@ const EditEmployeeForm = () => {
         if (documentFormik.dirty) {
           documentFormik.handleSubmit();
         }
-
       default:
         break;
     }
-    setActiveStep(activeStep + 1);
   };
   return { getStepContent, handleNext, steps };
 };

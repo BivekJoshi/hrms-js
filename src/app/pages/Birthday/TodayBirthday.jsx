@@ -1,10 +1,10 @@
 import React, { useState, useRef, useContext } from "react";
-import { Button, Box, Popper, Grow, Paper, MenuItem } from "@mui/material";
-import { ClickAwayListener, MenuList, Typography } from "@mui/material";
+import { Button, Box, Popper, Grow, Paper, MenuItem, Badge, IconButton, Tooltip, ClickAwayListener, MenuList, Typography } from "@mui/material";
 import CakeIcon from "@mui/icons-material/Cake";
 import "../Style/Style.css";
 import ThemeModeContext from "../../../theme/ThemeModeContext";
 import { useNavigate } from "react-router-dom";
+import '../Style/Style.css';
 
 const TodayBirthday = ({ data }) => {
   const birthdayEmployeeName = data?.birthdayEmployees;
@@ -57,18 +57,16 @@ const TodayBirthday = ({ data }) => {
 
   return (
     <Box>
-      <Button
-        ref={anchorRef}
-        id='composition-button'
-        aria-controls={open ? 'composition-menu' : undefined}
-        aria-expanded={open ? 'true' : undefined}
-        aria-haspopup='true'
-        onClick={handleToggle}
-        style={btnStyle}
-      >
-        <CakeIcon />
-        {data?.isChecked ? '' : displayCount}
-      </Button>
+      <IconButton ref={anchorRef} onClick={handleToggle} style={btnStyle}>
+        <Tooltip title='Birthday Notification'>
+          <Badge
+            badgeContent={data?.isChecked ? '' : displayCount}
+            color='secondary'
+          >
+            <CakeIcon />
+          </Badge>
+        </Tooltip>
+      </IconButton>
       {birthdayEmployeeCount !== 0 ? (
         <Popper
           open={open}

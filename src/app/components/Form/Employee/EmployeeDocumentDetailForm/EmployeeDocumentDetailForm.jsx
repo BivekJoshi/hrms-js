@@ -8,7 +8,6 @@ import {
 } from "../../../../hooks/employee/useDocument";
 import { useParams } from "react-router-dom";
 import { DOC_URL } from "../../../../../auth/axiosInterceptor";
-// import { documentType } from "./documentType";
 import { documentType } from "./documentType";
 import { useAddDocumentForm } from "../../../../hooks/employee/AddDocument/useAddDocumentForm";
 import { EditDocumentModal } from "./EditDocumentModal";
