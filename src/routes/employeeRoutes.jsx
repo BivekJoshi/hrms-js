@@ -31,9 +31,9 @@ const Designation = Loadable(
 const Department = Loadable(
   lazy(() => import("../app/pages/Department/Department"))
 );
-const LeaveType = Loadable(
-  lazy(() => import("../app/pages/LeaveType/LeaveType"))
-);
+// const LeaveType = Loadable(
+//   lazy(() => import("../app/pages/LeaveType/LeaveType"))
+// );
 const Event = Loadable(lazy(() => import("../app/pages/Event/Event")));
 const Holiday = Loadable(lazy(() => import("../app/pages/Holiday/Holiday")));
 const Project = Loadable(
@@ -79,12 +79,12 @@ const employeeRoutes = [
     id: nanoid(),
     component: <AttendenceInfo />,
   },
-  {
-    path: "leavetype",
-    name: "Leave Type",
-    id: nanoid(),
-    component: <LeaveType component="leaveType"/>,
-  },
+  // {
+  //   path: "leavetype",
+  //   name: "Leave Type",
+  //   id: nanoid(),
+  //   component: <LeaveType component="leaveType"/>,
+  // },
   {
     path: "applyleave",
     name: "Apply Leave",

@@ -104,17 +104,7 @@ export default function EmployeeSidebar() {
       path: "applyleave",
       icon: (
         <ApprovalOutlinedIcon
-          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
-        />
-      ),
-      subMenus: [],
-    },
-    {
-      name: "Leave Type",
-      path: "leavetype",
-      icon: (
-        <MailIcon
-          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
+          sx={mode === "light" ? { color: "#01579b" } : { color: "white" }}
         />
       ),
       subMenus: [],

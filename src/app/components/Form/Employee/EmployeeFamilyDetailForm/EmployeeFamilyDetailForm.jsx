@@ -1,9 +1,9 @@
-import { Grid, TextField, Button, Typography } from '@mui/material';
-import React from 'react';
-import { FieldArray, FormikProvider } from 'formik';
-import CloseIcon from '@mui/icons-material/Close';
-import AddIcon from '@mui/icons-material/Add';
-import { useDeleteFamily } from '../../../../hooks/employee/useFamily';
+import { Grid, TextField, Button, Typography, Divider } from "@mui/material";
+import React from "react";
+import { FieldArray, FormikProvider } from "formik";
+import CloseIcon from "@mui/icons-material/Close";
+import AddIcon from "@mui/icons-material/Add";
+import { useDeleteFamily } from "../../../../hooks/employee/useFamily";
 
 const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
   const { values, handleChange } = formik;
@@ -26,9 +26,7 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
                 {formik.values.family.map((familyMember, index) => (
                   <React.Fragment key={index}>
                     <br />
-                    <Typography variant="button" display="block" gutterBottom>
-                      Add Family Detail
-                    </Typography>
+                    <Divider>Add Family Detail</Divider>
                     <br />
                     <Grid container spacing={3}>
                       <Grid item xs={12} sm={3}>
@@ -41,8 +39,14 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
                           required
                           value={familyMember.name}
                           onChange={handleChange}
-                          error={Boolean(formik.touched.family?.[index]?.name && formik.errors.family?.[index]?.name)}
-                          helperText={formik.touched.family?.[index]?.name && formik.errors.family?.[index]?.name}
+                          error={Boolean(
+                            formik.touched.family?.[index]?.name &&
+                              formik.errors.family?.[index]?.name
+                          )}
+                          helperText={
+                            formik.touched.family?.[index]?.name &&
+                            formik.errors.family?.[index]?.name
+                          }
                           variant="outlined"
                           autoFocus
                           InputLabelProps={{ shrink: true }}
@@ -57,8 +61,14 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
                           fullWidth
                           value={familyMember.relation}
                           onChange={handleChange}
-                          error={Boolean(formik.touched.family?.[index]?.relation && formik.errors.family?.[index]?.relation)}
-                          helperText={formik.touched.family?.[index]?.relation && formik.errors.family?.[index]?.relation}
+                          error={Boolean(
+                            formik.touched.family?.[index]?.relation &&
+                              formik.errors.family?.[index]?.relation
+                          )}
+                          helperText={
+                            formik.touched.family?.[index]?.relation &&
+                            formik.errors.family?.[index]?.relation
+                          }
                           variant="outlined"
                           autoFocus
                           InputLabelProps={{ shrink: true }}
@@ -73,8 +83,14 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
                           fullWidth
                           value={familyMember.mobileNumber}
                           onChange={handleChange}
-                          error={Boolean(formik.touched.family?.[index]?.mobileNumber && formik.errors.family?.[index]?.mobileNumber)}
-                          helperText={formik.touched.family?.[index]?.mobileNumber && formik.errors.family?.[index]?.mobileNumber}
+                          error={Boolean(
+                            formik.touched.family?.[index]?.mobileNumber &&
+                              formik.errors.family?.[index]?.mobileNumber
+                          )}
+                          helperText={
+                            formik.touched.family?.[index]?.mobileNumber &&
+                            formik.errors.family?.[index]?.mobileNumber
+                          }
                           variant="outlined"
                           autoFocus
                           InputLabelProps={{ shrink: true }}
@@ -82,7 +98,8 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
                       </Grid>
 
                       <Grid
-                        item xs={12}
+                        item
+                        xs={12}
                         sm={1}
                         container
                         direction="row"
@@ -108,7 +125,13 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
                 <br />
                 <Button
                   variant="contained"
-                  onClick={() => arrayHelpers.push({ name: "", relation: "", mobileNumber: "" })}
+                  onClick={() =>
+                    arrayHelpers.push({
+                      name: "",
+                      relation: "",
+                      mobileNumber: "",
+                    })
+                  }
                 >
                   Add
                 </Button>

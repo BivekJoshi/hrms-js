@@ -17,7 +17,7 @@ const useApplyLeaveForm = (data) => {
       leaveReason: data?.leaveReason || "",
       fromDate: data?.fromDate || "",
       toDate: data?.toDate || "",
-      halfLeaveType: data?.halfLeaveType || "",
+      halfLeaveType: data?.halfLeaveType || "NONE",
       leaveStatus: data?.leaveStatus || "PENDING",
       leaveRemarks: data?.leaveRemarks || "",
     },

@@ -1,17 +1,14 @@
-import React from "react";
-import { useGetCompany } from "../../../hooks/company/useCompany";
-import { TabScrollButton } from "@mui/material";
+import React, { useContext } from "react";
 import {
   Box,
   Button,
   Card,
-  CardActions,
   CardContent,
-  CardHeader,
   Grid,
   Typography,
 } from "@mui/material";
-import HocButton from "../../../hoc/hocButton";
+import ThemeModeContext from "../../../../theme/ThemeModeContext";
+import CompanyGrid from "../../../../assets/companyGrid.png";
 
 const CompanyGridView = ({
   permissions,
@@ -20,79 +17,74 @@ const CompanyGridView = ({
   handleEditCompany,
   handleDeleteCompany,
 }) => {
+  const { palette } = useContext(ThemeModeContext); // Accessing mode from context
+
   return (
     <>
-      <Grid
-        container
-        item
-        gap={2}
-        sx={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))",
-        }}
-      >
+      <Grid container spacing={2}>
         {companyData.map((item, index) => (
-          <Card
-            dis
-            key={index}
-            sx={{
-              border: "1px solid black",
-              borderRadius: "1rem",
-              padding: "1rem",
-              textAlignLast: "center",
-              display: "grid",
-              gridTemplateColumns: "1fr",
-              gap: "1rem",
-            }}
-          >
-            <CardHeader
-              sx={{
-                fontSize: "1.4rem",
-                fontWeight: "600",
-                padding: "0",
-              }}
-              title={item?.companyName}
-            />
-            <Typography fontSize="1.2rem" fontWeight="600">
-              {item?.companyType || null}
-            </Typography>
-            <Typography fontSize="1rem">
-              {item?.companyDescription || null}
-            </Typography>
-            <CardActions
-              sx={{
-                display: "flex",
-                justifyContent: "space-around",
-                marginTop: "0.4rem",
-              }}
-            >
-              <Grid
-                container
-                direction="row"
-                justifyContent="flex-end"
-                alignItems="flex-end"
+          <Grid item xs={4} sx={{ maxHeight: "400px", minWidth: "400px" }}>
+            <Card>
+              <Box
+                sx={{
+                  backgroundColor: palette?.primary?.main,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  position: "relative",
+                }}
               >
-                <HocButton
-                  permissions={permissions?.canDelete}
-                  variant={"outlined"}
-                  onClick={() => handleDeleteCompany(item)}
-                  sx={{ mt: 3, ml: 1 }}
-                  color={"white"}
-                  bg={"#d32f2f"}
-                  buttonName={"Delete"}
-                  hoverBg={"#f20a0a"}
+                <img
+                  src={CompanyGrid}
+                  style={{ position: "absolute", right: 0 }}
                 />
-                <HocButton
-                  permissions={permissions?.canEdit}
-                  variant={"contained"}
-                  color={"primary"}
-                  onClick={() => handleEditCompany(item)}
-                  sx={{ mt: 3, ml: 1 }}
-                  buttonName={"Edit"}
-                />
-              </Grid>
-            </CardActions>
-          </Card>
+                <Typography
+                  variant="h5"
+                  sx={{ color: "#fff", fontWeight: "700px", padding: "15px" }}
+                >
+                  {item?.companyName}
+                </Typography>
+              </Box>
+              <CardContent sx={{ overflowY: "scroll", maxHeight: "260px" }}>
+                <Typography
+                  variant="h6"
+                  sx={{ display: "flex", justifyContent: "center" }}
+                >
+                  {item?.companyType || null}
+                </Typography>
+                <br />
+                <Typography
+                  variant="p"
+                  sx={{ display: "flex", justifyContent: "center" }}
+                >
+                  {item?.companyDescription || null}
+                </Typography>
+                <br />
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    gap: "0.5rem",
+                  }}
+                >
+                  <Button
+                    variant="contained"
+                    color="success"
+                    onClick={() => handleEditCompany(item)}
+                  >
+                    Edit
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="error"
+                    onClick={() => handleDeleteCompany(item)}
+                  >
+                    Delete
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </Grid>
         ))}
       </Grid>
     </>
