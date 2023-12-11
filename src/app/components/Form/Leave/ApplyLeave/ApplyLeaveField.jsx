@@ -32,10 +32,9 @@ const ApplyLeaveField = () => {
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
+
     if (formik.isValid) {
-      navigate("/employee/applyleave")
-    } else {
-      toast.error("Please make sure you have filled the form correctly");
+      navigate("/employee/applyleave");
     }
   };
 
@@ -51,12 +50,6 @@ const ApplyLeaveField = () => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
-  // to get days
-  // function getDayName(date = new Date(), locale = 'en-US') {
-  //   return date.toLocaleDateString(locale, {weekday: 'long'});
-  // }
-  //  alert(getDayName())
   return (
     <>
       <Typography variant="h6">
@@ -204,8 +197,8 @@ const ApplyLeaveField = () => {
   );
 };
 
-const DateInput = ({ formik, isHalfDay , isMultipleDays }) => {
-  const [halfType, setHalfType] = useState("");
+const DateInput = ({ formik, isHalfDay, isMultipleDays }) => {
+  const [halfType, setHalfType] = useState("FIRST_HALF");
 
   const handleFromDateChange = (e) => {
     const fromDateValue = e.target.value;
@@ -214,47 +207,43 @@ const DateInput = ({ formik, isHalfDay , isMultipleDays }) => {
     formik.setFieldValue("halfLeaveType", null);
     if (isHalfDay) {
       formik.setFieldValue("isHalfDay", true);
-      formik.setFieldValue("halfLeaveType", halfType);      
+      formik.setFieldValue("halfLeaveType", halfType);
     }
   };
 
-  const handleHalfType = (e) => {
-    setHalfType(e.target.value);
-  }
-
   return (
     <>
-      <div style={{ display: "flex", gap: "0.5rem"}}>
-      <Grid item xs={12} sm={6}>
-        <TextField
-          name="fromDate"
-          label="Select Date"
-          type="date"
-          required
-          InputLabelProps={{ shrink: true }}
-          fullWidth
-          value={formik.values.fromDate}
-          onChange={handleFromDateChange}
-          error={formik.touched.fromDate && Boolean(formik.errors.fromDate)}
-          helperText={formik.touched.fromDate && formik.errors.fromDate}
-        />
-      </Grid>
-      {isMultipleDays && (
+      <div style={{ display: "flex", gap: "0.5rem" }}>
         <Grid item xs={12} sm={6}>
           <TextField
-            name="toDate"
-            label="Select To Date"
+            name="fromDate"
+            label="Select Date"
             type="date"
             required
             InputLabelProps={{ shrink: true }}
             fullWidth
-            value={formik.values.toDate}
-            onChange={formik.handleChange}
-            error={formik.touched.toDate && Boolean(formik.errors.toDate)}
-            helperText={formik.touched.toDate && formik.errors.toDate}
+            value={formik.values.fromDate}
+            onChange={handleFromDateChange}
+            error={formik.touched.fromDate && Boolean(formik.errors.fromDate)}
+            helperText={formik.touched.fromDate && formik.errors.fromDate}
           />
         </Grid>
-      )}
+        {isMultipleDays && (
+          <Grid item xs={12} sm={6}>
+            <TextField
+              name="toDate"
+              label="Select To Date"
+              type="date"
+              required
+              InputLabelProps={{ shrink: true }}
+              fullWidth
+              value={formik.values.toDate}
+              onChange={formik.handleChange}
+              error={formik.touched.toDate && Boolean(formik.errors.toDate)}
+              helperText={formik.touched.toDate && formik.errors.toDate}
+            />
+          </Grid>
+        )}
       </div>
       {isHalfDay && (
         <Grid item xs={12} sm={12}>
@@ -262,7 +251,7 @@ const DateInput = ({ formik, isHalfDay , isMultipleDays }) => {
             row
             aria-labelledby="demo-row-radio-buttons-group-label"
             name="halfLeaveType"
-            value={formik.values.halfLeaveType}
+            value={formik.values.halfLeaveType || "FIRST_HALF"}
             onChange={formik.handleChange}
             style={{ display: "flex", marginTop: "0.6rem" }}
           >
@@ -283,9 +272,7 @@ const DateInput = ({ formik, isHalfDay , isMultipleDays }) => {
   );
 };
 
-const HalfDay = ({ formik }) => (
-  <DateInput formik={formik} isHalfDay={true} />
-);
+const HalfDay = ({ formik }) => <DateInput formik={formik} isHalfDay={true} />;
 
 const OneDay = ({ formik }) => <DateInput formik={formik} />;
 

@@ -1,9 +1,16 @@
-import { Grid, TextField, Button, Typography, Divider, MenuItem } from '@mui/material';
-import { FieldArray, FormikProvider } from 'formik';
-import React from 'react';
-import CloseIcon from '@mui/icons-material/Close';
-import AddIcon from '@mui/icons-material/Add';
-import { useDeleteQualification } from '../../../../hooks/employee/useQualification';
+import {
+  Grid,
+  TextField,
+  Button,
+  Typography,
+  Divider,
+  MenuItem,
+} from "@mui/material";
+import { FieldArray, FormikProvider } from "formik";
+import React from "react";
+import CloseIcon from "@mui/icons-material/Close";
+import AddIcon from "@mui/icons-material/Add";
+import { useDeleteQualification } from "../../../../hooks/employee/useQualification";
 
 const EmployeeQualificationDetailForm = ({ formik, isLoading }) => {
   const { values, handleChange } = formik;
@@ -24,6 +31,7 @@ const EmployeeQualificationDetailForm = ({ formik, isLoading }) => {
             <>
               {formik.values.education.map((study, index) => (
                 <>
+                  <br />
                   <Divider>Add Education</Divider>
                   <br />
                   <Grid container spacing={3} key={index}>
@@ -36,8 +44,14 @@ const EmployeeQualificationDetailForm = ({ formik, isLoading }) => {
                         fullWidth
                         value={study.passedLevel}
                         onChange={handleChange}
-                        error={Boolean(formik.touched.education?.[index]?.passedLevel && formik.errors.education?.[index]?.passedLevel)}
-                        helperText={formik.touched.education?.[index]?.passedLevel && formik.errors.education?.[index]?.passedLevel}
+                        error={Boolean(
+                          formik.touched.education?.[index]?.passedLevel &&
+                            formik.errors.education?.[index]?.passedLevel
+                        )}
+                        helperText={
+                          formik.touched.education?.[index]?.passedLevel &&
+                          formik.errors.education?.[index]?.passedLevel
+                        }
                         variant="outlined"
                         autoFocus
                         InputLabelProps={{ shrink: true }}
@@ -52,8 +66,14 @@ const EmployeeQualificationDetailForm = ({ formik, isLoading }) => {
                         fullWidth
                         value={study.board}
                         onChange={handleChange}
-                        error={Boolean(formik.touched.education?.[index]?.board && formik.errors.education?.[index]?.board)}
-                        helperText={formik.touched.education?.[index]?.board && formik.errors.education?.[index]?.board}
+                        error={Boolean(
+                          formik.touched.education?.[index]?.board &&
+                            formik.errors.education?.[index]?.board
+                        )}
+                        helperText={
+                          formik.touched.education?.[index]?.board &&
+                          formik.errors.education?.[index]?.board
+                        }
                         variant="outlined"
                         autoFocus
                         InputLabelProps={{ shrink: true }}
@@ -68,8 +88,14 @@ const EmployeeQualificationDetailForm = ({ formik, isLoading }) => {
                         fullWidth
                         value={study.institute}
                         onChange={handleChange}
-                        error={Boolean(formik.touched.education?.[index]?.institute && formik.errors.education?.[index]?.institude)}
-                        helperText={formik.touched.education?.[index]?.institute && formik.errors.education?.[index]?.institute}
+                        error={Boolean(
+                          formik.touched.education?.[index]?.institute &&
+                            formik.errors.education?.[index]?.institude
+                        )}
+                        helperText={
+                          formik.touched.education?.[index]?.institute &&
+                          formik.errors.education?.[index]?.institute
+                        }
                         variant="outlined"
                         autoFocus
                         InputLabelProps={{ shrink: true }}
@@ -85,8 +111,14 @@ const EmployeeQualificationDetailForm = ({ formik, isLoading }) => {
                         fullWidth
                         value={study.passedYear}
                         onChange={handleChange}
-                        error={Boolean(formik.touched.education?.[index]?.passedYear && formik.errors.education?.[index]?.passedYear)}
-                        helperText={formik.touched.education?.[index]?.passedYear && formik.errors.education?.[index]?.passedYear}
+                        error={Boolean(
+                          formik.touched.education?.[index]?.passedYear &&
+                            formik.errors.education?.[index]?.passedYear
+                        )}
+                        helperText={
+                          formik.touched.education?.[index]?.passedYear &&
+                          formik.errors.education?.[index]?.passedYear
+                        }
                         variant="outlined"
                         autoFocus
                         InputLabelProps={{ shrink: true }}
@@ -101,8 +133,14 @@ const EmployeeQualificationDetailForm = ({ formik, isLoading }) => {
                         fullWidth
                         value={study.grade}
                         onChange={handleChange}
-                        error={Boolean(formik.touched.education?.[index]?.grade && formik.errors.education?.[index]?.grade)}
-                        helperText={formik.touched.education?.[index]?.grade && formik.errors.education?.[index]?.grade}
+                        error={Boolean(
+                          formik.touched.education?.[index]?.grade &&
+                            formik.errors.education?.[index]?.grade
+                        )}
+                        helperText={
+                          formik.touched.education?.[index]?.grade &&
+                          formik.errors.education?.[index]?.grade
+                        }
                         variant="outlined"
                         onBlur={formik.handleBlur}
                         InputLabelProps={{ shrink: true }}
@@ -110,7 +148,8 @@ const EmployeeQualificationDetailForm = ({ formik, isLoading }) => {
                     </Grid>
 
                     <Grid
-                      item xs={12}
+                      item
+                      xs={12}
                       sm={4}
                       container
                       direction="row"
@@ -118,14 +157,16 @@ const EmployeeQualificationDetailForm = ({ formik, isLoading }) => {
                       alignItems="center"
                     >
                       {values.education.length > 1 && (
-                        <Button variant='contained'
+                        <Button
+                          variant="contained"
                           onClick={() => {
                             arrayHelpers.remove(index);
-                            handleDeleteQualification(study)
+                            handleDeleteQualification(study);
                           }}
-                          color='error'
+                          color="error"
                         >
-                          <CloseIcon />
+                          {/* <CloseIcon /> */}
+                          Delete
                         </Button>
                       )}
                     </Grid>
@@ -133,10 +174,20 @@ const EmployeeQualificationDetailForm = ({ formik, isLoading }) => {
                 </>
               ))}
               <br />
-              <Button variant='contained'
-                onClick={() => arrayHelpers.push({ board: "", institute: "", passedLevel: "", passedYear: "", grade: "" })}
+              <Button
+                variant="contained"
+                onClick={() =>
+                  arrayHelpers.push({
+                    board: "",
+                    institute: "",
+                    passedLevel: "",
+                    passedYear: "",
+                    grade: "",
+                  })
+                }
               >
-                <AddIcon />
+                {/* <AddIcon /> */}
+                Add
               </Button>
             </>
           )}
