@@ -4,17 +4,12 @@ import { toast } from 'react-toastify';
 import useCompanyForm from '../../../hooks/company/CompanyForm/useCompanyForm';
 
 const CompanyFields = ({ onClose, isLoading, data }) => {
-  const { formik } = useCompanyForm(data);
+  const { formik } = useCompanyForm(data,onClose);
+
   const handleFormSubmit = () => {
     formik.handleSubmit();
-
-    formik.setTouched({
-      companyName: true,
-      companyType: true,
-      companyDescription: true,
-    });
-    onClose();
   };
+  
   const submitButtonText = data ? 'Update Company' : 'Add Company';
   return (
     !isLoading && (
@@ -76,6 +71,7 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
             }
             variant='outlined'
             InputLabelProps={{ shrink: true }}
+            inputProps={{ maxLength: 250 }}
           />
         </Grid>
         <Grid

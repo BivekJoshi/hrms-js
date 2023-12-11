@@ -17,7 +17,7 @@ export const useDeleteEmployee = ({ onSuccess }) => {
     const queryClient = useQueryClient();
     return useMutation(["removeEmployee"], (formData) => removeActiveEmployee(formData), {
       onSuccess: (data, variables, context) => {
-        toast.success("successfully removed Employee");
+        toast.success("Successfully removed Employee");
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries("getEmployee");
       },
@@ -32,7 +32,7 @@ export const useDeleteEmployee = ({ onSuccess }) => {
     const queryClient = useQueryClient();
     return useMutation(["activeEmployee"], (formData) => addActiveEmployee(formData), {
       onSuccess: (data, variables, context) => {
-        toast.success("successfully activated Employee");
+        toast.success("Successfully activated Employee");
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries("getDeactivateEmployee");
       },
@@ -47,7 +47,7 @@ export const useTerminateEmployee = ({ onSuccess }) => {
     const queryClient = useQueryClient();
     return useMutation(["terminateEmployee"], (formData) => terminateEmployee(formData), {
       onSuccess: (data, variables, context) => {
-        toast.success("successfully removed Employee");
+        toast.success("Successfully removed Employee");
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries("getEmployee");
       },
@@ -62,7 +62,7 @@ export const useTerminateEmployee = ({ onSuccess }) => {
     const queryClient = useQueryClient();
     return useMutation(["activeEmployee"], (formData) => activeEmployee(formData), {
       onSuccess: (data, variables, context) => {
-        toast.success("successfully activated Employee");
+        toast.success("Successfully activated Employee");
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries("getEmployee");
       },
