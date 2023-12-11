@@ -127,13 +127,21 @@ const EditEmployeeForm = () => {
         if (permanentFormik.dirty) {
           permanentFormik.handleSubmit();
         }
+        if (permanentFormik.isValid) {
+          setActiveStep(activeStep + 1);
+        }
         break;
       case 2:
         familyFormik.setFieldTouched('');
+
         if (familyFormik.dirty) {
           familyFormik.handleSubmit();
         }
+        if (familyFormik.isValid) {
+          setActiveStep(activeStep + 1);
+        }
         break;
+
       case 3:
         qualificationFormik.setFieldTouched('');
         if (qualificationFormik.dirty) {

@@ -1,6 +1,6 @@
 import Axios from 'axios';
 import { toast } from 'react-toastify';
-import { getUser } from '../app/utils/cookieHelper';
+import { getUser, removeUser } from '../app/utils/cookieHelper';
 
 export const baseURL = 'https://103.94.159.144:8083/hrms/api/';
 export const DOC_URL = 'https://103.94.159.144/';
@@ -26,6 +26,10 @@ axiosInstance.interceptors.response.use(
   function (error) {
     if (error.response) {
       const errorMessage = error?.response?.data?.message;
+      console.log(
+        '🚀 ~ file: axiosInterceptor.js:29 ~ errorMessage:',
+        errorMessage
+      );
       if (
         errorMessage === 'invalid_or_missing_token' ||
         errorMessage === 'user_disabled'
@@ -33,6 +37,11 @@ axiosInstance.interceptors.response.use(
         removeUser();
         window.location.replace('/login');
         return Promise.reject(error);
+      } else if (
+        errorMessage ===
+        'Company delete error: could not execute batch; SQL [delete from associate_company where id=?]; constraint [fkgs9c8ufts6dmvhvg4ptxshl0s]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute batch'
+      ) {
+        toast.error('Cannot delete company. Please contact admin.');
       } else if (errorMessage === 'access_denied_no_permission') {
         window.location.replace('/not-found');
       } else if (errorMessage) {
