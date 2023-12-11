@@ -13,8 +13,8 @@ import { useGetTaskLoggedInUser } from "../../../hooks/project/ProjectTask/usePr
 import { useGetProjectWiseEmployee } from "../../../hooks/project/useProject";
 import { DOC_URL } from "../../../../auth/axiosInterceptor";
 import TaskIcon from "@mui/icons-material/Task";
-import AccountTreeIcon from '@mui/icons-material/AccountTree';
-import PendingIcon from '@mui/icons-material/Pending';
+import AccountTreeIcon from "@mui/icons-material/AccountTree";
+import PendingIcon from "@mui/icons-material/Pending";
 import BallotIcon from "@mui/icons-material/Ballot";
 
 const EmployeeDashbord = ({}) => {
@@ -79,6 +79,8 @@ const EmployeeDashbord = ({}) => {
         className={
           mode === "light" ? "employeeDeshbordBG" : "employeeDeshbordBGDark"
         }
+        boxShadow="7"
+        borderRadius="10px"
       >
         <CardMedia
           component="img"
@@ -86,9 +88,19 @@ const EmployeeDashbord = ({}) => {
           alt="Paella dish"
           sx={{ width: 66, height: 66, borderRadius: "2rem" }}
         />
-        <Box alignSelf="center" paddingLeft="1rem">
-          <h3>Welcome , {employData?.name}</h3>
-          <h3>{formattedDate}</h3>
+        <Box
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            width: "100%",
+          }}
+        >
+          <h3>
+            Welcome , <br></br>
+            {employData?.name}
+          </h3>
+          <h3  style={{ maxWidth: "200px" }}>{formattedDate}</h3>
         </Box>
       </Box>
       <Box
@@ -108,10 +120,10 @@ const EmployeeDashbord = ({}) => {
         ))}
         {/* <EmployPichart task={task}/> */}
       </Box>
-      <MiddleEmployDashbord employData={employData}/>
+      <MiddleEmployDashbord employData={employData} />
       <Box display="grid" gridTemplateColumns="3fr 2fr" gap="3rem">
         <LeftEmployDashbord />
-        <RightEmployDashbord employData={employData}/>
+        <RightEmployDashbord employData={employData} />
       </Box>
     </Box>
   );

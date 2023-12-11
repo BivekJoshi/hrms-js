@@ -49,7 +49,7 @@ export const RightEmployDashbord = ({ employData }) => {
         </Box>
       </Box> */}
       <Box>
-        <h3>Your Leaves</h3>
+        <Typography variant="h5">Your Leaves</Typography>
         <Box
           className={
             mode === "light"
@@ -60,7 +60,9 @@ export const RightEmployDashbord = ({ employData }) => {
           marginTop="1rem"
           flexDirection="column"
           justifyContent="center"
-          padding="0.5rem 1rem"
+          padding=" 1rem"
+          boxShadow="7"
+          borderRadius="10px"
         >
           <Box
             display="flex"
@@ -81,15 +83,13 @@ export const RightEmployDashbord = ({ employData }) => {
               OnClick={() => {
                 navigate("/employee/applyleave");
               }}
-              BGColor={"orange"}
-              TextColor={"black"}
             />
           </Box>
         </Box>
       </Box>
       {resourceLogInUser && (
         <Box margin="1rem 0">
-          <h3 style={{ margin: "1rem 0" }}>Logistic Used</h3>
+          <Typography variant="h5" style={{ margin: "1rem 0" }}>Logistic Used</Typography>
           <Box
             className={
               mode === "light"
@@ -97,8 +97,10 @@ export const RightEmployDashbord = ({ employData }) => {
                 : "employeeDeshbordBGDark employeeDeshbord"
             }
             padding="1rem"
-            maxHeight="8rem"
-            overflow="scroll"
+            maxHeight="10rem"
+            overflow="auto"
+            boxShadow="7"
+            borderRadius="10px"
           >
             {Array.isArray(resourceLogInUser)
               ? resourceLogInUser.map((logistic) => (

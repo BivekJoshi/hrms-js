@@ -60,7 +60,7 @@ const Dashboard = () => {
           component="img"
           src={filePath ? filePath : Male}
           alt="Img"
-          sx={{ width: 66, height: 66, borderRadius: "2rem" }}
+          sx={{ width: 66, height: 66, borderRadius: "2rem"}}
         />
         <div
           style={{
@@ -68,6 +68,7 @@ const Dashboard = () => {
             justifyContent: "space-between",
             alignItems: "center",
             width: "100%",
+            marginRight:"1rem"
           }}
         >
           <h3>
