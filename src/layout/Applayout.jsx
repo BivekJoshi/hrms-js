@@ -1,7 +1,8 @@
-import { Box, Container } from "@mui/material";
-import React, { useContext } from "react";
-import { Outlet } from "react-router-dom";
-import ThemeModeContext from "../theme/ThemeModeContext";
+import { Box, Container } from '@mui/material';
+import React, { useContext } from 'react';
+import { Outlet } from 'react-router-dom';
+import ThemeModeContext from '../theme/ThemeModeContext';
+import Footer from '../app/components/footer/Footer';
 
 const Applayout = () => {
   const { mode } = useContext(ThemeModeContext); // Accessing mode from context
@@ -9,13 +10,19 @@ const Applayout = () => {
   return (
     <>
       <Box
-        className="appBoxLayout"
-        sx={mode === "light" ? { backgroundColor: "white" } : { backgroundColor: "#292929" }}
+        className='appBoxLayout'
+        sx={
+          mode === 'light'
+            ? { backgroundColor: 'white' }
+            : { backgroundColor: '#292929' }
+        }
+        marginBottom='16px'
       >
-        <Container maxWidth="xxl">
+        <Container maxWidth='xxl'>
           <Outlet />
         </Container>
       </Box>
+      <Footer />
     </>
   );
 };
