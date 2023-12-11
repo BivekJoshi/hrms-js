@@ -9,13 +9,16 @@ const Footer = () => {
     <Grid
       display='flex'
       p='0px 48px'
-      height='62px'
+      width='100%'
+      height='44px'
       gap='22px'
-      marginLeft='230px'
+      bottom='0px'
+      //   marginLeft='230px'
       alignItems='center'
       justifyContent='space-between'
       bgcolor={palette.primary.main}
-      position='relative'
+      position='fixed'
+      zIndex='99999'
     >
       <Typography variant='h7' color='white'>
         DG TRADE © DIGIHUB

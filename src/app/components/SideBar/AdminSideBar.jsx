@@ -34,8 +34,9 @@ import HolidayVillageIcon from '@mui/icons-material/HolidayVillage';
 import LaptopIcon from '@mui/icons-material/Laptop';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { removeUser } from '../../utils/cookieHelper';
+import Footer from '../footer/Footer';
 
-const drawerWidth = 230;
+const drawerWidth = 260;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
@@ -45,13 +46,13 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    marginLeft: `-${drawerWidth}px`,
+    marginLeft: `-${drawerWidth + 24}px`,
     ...(open && {
       transition: theme.transitions.create('margin', {
         easing: theme.transitions.easing.easeOut,
         duration: theme.transitions.duration.enteringScreen,
       }),
-      marginLeft: 0,
+      marginLeft: '-24px',
     }),
   })
 );
@@ -419,7 +420,7 @@ export default function AdminSidebar() {
         <br />
 
         <Card
-          variant='outlined'
+          variant='elevation'
           sx={{
             maxWidth: '100%',
             padding: '20px',
@@ -453,6 +454,7 @@ export default function AdminSidebar() {
           </Box>
           <Outlet />
         </Card>
+        <Footer />
       </Main>
     </Box>
   );
