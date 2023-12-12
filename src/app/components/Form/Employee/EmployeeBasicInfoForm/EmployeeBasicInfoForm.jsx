@@ -50,7 +50,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
   const { data: departmentData, isLoading: loadingDepartment } =
     useGetDepartment();
   const { mode } = useContext(ThemeModeContext);
-
+  console.log(formik.values);
   return (
     <Grid container spacing={3}>
       <Grid item xs={12} sm={6} md={4}>
@@ -67,6 +67,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           helperText={formik.touched.firstName && formik.errors.firstName}
           variant='outlined'
           autoFocus
+          InputLabelProps={{ shrink: Boolean(formik.values.firstName) }}
         />
       </Grid>
       <Grid item xs={12} sm={6} md={4}>
@@ -81,6 +82,9 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           error={formik.touched.middleName && Boolean(formik.errors.middleName)}
           helperText={formik.touched.middleName && formik.errors.middleName}
           variant='outlined'
+          InputLabelProps={{
+            shrink: Boolean(formik.values.middleName),
+          }}
         />
       </Grid>
       <Grid item xs={12} sm={6} md={4}>
@@ -96,6 +100,9 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           error={formik.touched.lastName && Boolean(formik.errors.lastName)}
           helperText={formik.touched.lastName && formik.errors.lastName}
           variant='outlined'
+          InputLabelProps={{
+            shrink: Boolean(formik.values.lastName),
+          }}
         />
       </Grid>
       <Grid item xs={12} sm={6} md={4}>
@@ -170,6 +177,9 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           }
           helperText={formik.touched.mobileNumber && formik.errors.mobileNumber}
           variant='outlined'
+          InputLabelProps={{
+            shrink: Boolean(formik.values.mobileNumber),
+          }}
         />
       </Grid>
       <Grid item xs={12} sm={6} md={4}>
@@ -190,6 +200,9 @@ const EmployeeBasicInfoForm = ({ formik }) => {
             formik.touched.citizenshipNumber && formik.errors.citizenshipNumber
           }
           variant='outlined'
+          InputLabelProps={{
+            shrink: Boolean(formik.values.citizenshipNumber),
+          }}
         />
       </Grid>
       <Grid item xs={12} sm={6} md={4}>
@@ -204,6 +217,9 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           error={formik.touched.panNumber && Boolean(formik.errors.panNumber)}
           helperText={formik.touched.panNumber && formik.errors.panNumber}
           variant='outlined'
+          InputLabelProps={{
+            shrink: Boolean(formik.values.panNumber),
+          }}
         />
       </Grid>
       <Grid item xs={12} sm={6} md={4}>
@@ -221,6 +237,9 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           }
           helperText={formik.touched.officeEmail && formik.errors.officeEmail}
           variant='outlined'
+          InputLabelProps={{
+            shrink: Boolean(formik.values.officeEmail),
+          }}
         />
       </Grid>
       <Grid item xs={12} sm={6} md={4}>

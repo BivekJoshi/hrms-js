@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { useGetDeactivatedEmployee } from "../../../hooks/employee/DeactivateEmploye/useEmployee";
-import { EditActivationEmployeeModal } from "../EmployeeDeactivationModal/EditDeactivationEmployeeModal";
-import RestoreFromTrashOutlinedIcon from "@mui/icons-material/RestoreFromTrashOutlined";
-import CustomTable from "../../../components/CustomTable/CustomTable";
+import React, { useState } from 'react';
+import { useGetDeactivatedEmployee } from '../../../hooks/employee/DeactivateEmploye/useEmployee';
+import { EditActivationEmployeeModal } from '../EmployeeDeactivationModal/EditDeactivationEmployeeModal';
+import RestoreFromTrashOutlinedIcon from '@mui/icons-material/RestoreFromTrashOutlined';
+import CustomTable from '../../../components/CustomTable/CustomTable';
 
 const DeactivatedEmployee = () => {
   const { data: deactivateEmployee, isLoading } = useGetDeactivatedEmployee();
@@ -18,44 +18,44 @@ const DeactivatedEmployee = () => {
 
   const columns = [
     {
-      title: "SN",
+      title: 'SN',
       render: (rowData) => rowData.tableData.id + 1,
-      width: "3%",
-      maxWidth: "50px",
+      width: '3%',
+      maxWidth: '50px',
       sortable: false,
       sorting: false,
     },
     {
-      title: "Name",
+      title: 'Name',
       render: (rowData) => {
         const name = `${rowData?.firstName} ${rowData?.lastName}`;
-        return name || "-";
+        return name || '-';
       },
       // width: 120,
       sortable: false,
       sorting: false,
     },
     {
-      title: "Email",
-      field: "officeEmail",
-      emptyValue: "-",
+      title: 'Email',
+      field: 'officeEmail',
+      emptyValue: '-',
       // width: 120,
       sortable: false,
       sorting: false,
     },
     {
-      title: "Phone Number",
-      field: "mobileNumber",
-      emptyValue: "-",
+      title: 'Phone Number',
+      field: 'mobileNumber',
+      emptyValue: '-',
       // width: 120,
       sortable: false,
       sorting: false,
     },
     {
-      title: "Position",
+      title: 'Position',
       render: (rowData) => {
         const position = rowData?.position?.positionName;
-        return position ? position : "-";
+        return position ? position : '-';
       },
       // width: 120,
       sortable: false,
@@ -66,7 +66,7 @@ const DeactivatedEmployee = () => {
   const actions = [
     {
       icon: () => <RestoreFromTrashOutlinedIcon />,
-      tooltip: "Activate Employee",
+      tooltip: 'Activate Employee',
       onClick: (event, rowData) => handleDeactivatedEmployee(rowData),
     },
   ];
@@ -78,7 +78,7 @@ const DeactivatedEmployee = () => {
       <CustomTable
         columns={columns}
         data={deactivateEmployee}
-        title="In Active Employee"
+        title='Inactive Employee'
         isLoading={isLoading}
         actions={actions}
       />

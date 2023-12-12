@@ -15,7 +15,6 @@ const Applayout = () => {
             ? { backgroundColor: 'white' }
             : { backgroundColor: '#292929' }
         }
-        marginBottom='16px'
       >
         <Container maxWidth='xxl'>
           <Outlet />

@@ -1,40 +1,48 @@
 import { useFormik } from 'formik';
 import { AddressSchema } from './AddressSchema';
-import { useEditAddress, usePermanentAddAddress, useTemporaryAddress } from '../useAddress';
+import {
+  useEditAddress,
+  usePermanentAddAddress,
+  useTemporaryAddress,
+} from '../useAddress';
 
-export const usePermanentAddressForm = ({ data, employeeLoading: isLoading }) => {
+export const usePermanentAddressForm = ({
+  data,
+  employeeLoading: isLoading,
+}) => {
   const { mutate: permanentMutate } = usePermanentAddAddress({});
   const { mutate: temporaryMutate } = useTemporaryAddress({});
   const { mutate: editMutate } = useEditAddress({});
+
   const addressDetails = !isLoading && data?.addresses;
-  
+
+  const mapAddress = (index) => {
+    const address = addressDetails[index] || {};
+    return {
+      addressType: index === 0 ? 'PERMANENT' : 'TEMPORARY',
+      id: address.id || '',
+      country: address.country || '',
+      province: address.province || '',
+      district: address.district || '',
+      wardNumber: address.wardNumber || '',
+      city: address.city || '',
+      street: address.street || '',
+    };
+  };
+
+  const filteredAddresses = [
+    mapAddress(0), // Permanent Address
+    mapAddress(1), // Temporary Address
+  ].filter((address) => address.province !== ''); // Exclude addresses with empty province
+
+  const initialValues = {
+    addresses: filteredAddresses,
+  };
+
   const formik = useFormik({
-    initialValues: {
-      addresses: [
-        {
-          addressType:'PERMANENT',
-          id: addressDetails[0]?.id || '',
-          country: addressDetails[0]?.country || '',
-          province: addressDetails[0]?.province || '',
-          district: addressDetails[0]?.district || '',
-          wardNumber: addressDetails[0]?.wardNumber || '',
-          city: addressDetails[0]?.city || '',
-          street: addressDetails[0]?.street || '',
-        },
-        {
-          addressType:'TEMPORARY',
-          id: addressDetails[1]?.id || '',
-          country: addressDetails[1]?.country || '',
-          province: addressDetails[1]?.province || '',
-          district: addressDetails[1]?.district || '',
-          wardNumber: addressDetails[1]?.wardNumber || '',
-          city: addressDetails[1]?.city || '',
-          street: addressDetails[1]?.street || '',
-        },
-      ],
-    },
+    initialValues,
     validationSchema: AddressSchema,
-    enableReinitialize: 'true',
+    enableReinitialize: true,
     onSubmit: (values) => {
       if (data?.addresses.length > 0) {
         handleEditRequest(values);
@@ -45,14 +53,13 @@ export const usePermanentAddressForm = ({ data, employeeLoading: isLoading }) =>
   });
 
   const handleRequest = (values) => {
-    values = { ...values };
     permanentMutate(values);
     temporaryMutate(values);
   };
 
   const handleEditRequest = (values) => {
-    values = { ...values };
     editMutate(values);
   };
+
   return { formik };
 };

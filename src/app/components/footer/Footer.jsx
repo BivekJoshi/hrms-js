@@ -17,7 +17,6 @@ const Footer = () => {
       alignItems='center'
       justifyContent='space-between'
       bgcolor={palette.primary.main}
-      position='fixed'
       zIndex='99999'
     >
       <Typography variant='h7' color='white'>
