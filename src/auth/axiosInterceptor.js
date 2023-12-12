@@ -2,8 +2,8 @@ import Axios from 'axios';
 import { toast } from 'react-toastify';
 import { getUser, removeUser } from '../app/utils/cookieHelper';
 
-export const baseURL = 'https://103.94.159.144:8083/hrms/api/';
-export const DOC_URL = 'https://103.94.159.144/';
+export const baseURL = 'http://172.16.16.8:6523/hrms/api/';
+export const DOC_URL = 'http://172.16.16.8/';
 export const axiosInstance = Axios.create({
   baseURL: baseURL,
   timeout: 20000,
@@ -26,10 +26,6 @@ axiosInstance.interceptors.response.use(
   function (error) {
     if (error.response) {
       const errorMessage = error?.response?.data?.message;
-      console.log(
-        '🚀 ~ file: axiosInterceptor.js:29 ~ errorMessage:',
-        errorMessage
-      );
       if (
         errorMessage === 'invalid_or_missing_token' ||
         errorMessage === 'user_disabled'

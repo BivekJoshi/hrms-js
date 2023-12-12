@@ -140,7 +140,7 @@ const EmployeeResource = ({ permissions }) => {
           color={'primary'}
           variant={'outlined'}
           onClick={() => {
-            navigate(`/admin/resource/office`);
+            navigate(`/admin/logistics/office`);
           }}
           buttonName={'Logistics'}
         />

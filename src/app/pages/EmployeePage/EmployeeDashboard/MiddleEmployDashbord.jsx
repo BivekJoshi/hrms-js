@@ -7,6 +7,7 @@ import {
   useGetEmployeeAverageWork,
 } from "../../../hooks/attendance/useAttendance";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
+import RadialBar from "./radialBar";
 
 export const MiddleEmployDashbord = ({}) => {
   const { data: attendanceData } = useGetEmployeeAttendanceMonthWise(2080);
@@ -37,24 +38,7 @@ export const MiddleEmployDashbord = ({}) => {
       <Box>
         <Typography variant="h5">Average working Hour</Typography>
 
-        <Box
-          boxShadow="7"
-          borderRadius="10px"
-          bgcolor={mode === "light" ? "" : "#3f413f"}
-          padding="2rem"
-        >
-          <GaugeChart
-            id="gauge-chart2"
-            nrOfLevels={9}
-            percent={averageWork === 1 ? 1 : averageWork}
-            style={{ textAlign: "center", width: m ? "80%" : "100%" }}
-          />
-          <Stack flexDirection="row" justifyContent="space-evenly">
-            <Typography>1 Hour</Typography>
-            <Typography>{data !== "NaN" ? data : "0"} Hour</Typography>
-            <Typography>9 hour</Typography>
-          </Stack>
-        </Box>
+        {/* <RadialBar averageWork={averageWork} m={m} data={data}/> */}
       </Box>
     </Box>
   );

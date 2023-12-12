@@ -6,7 +6,6 @@ import { LeftEmployDashbord } from "./LeftEmployDashbord";
 import { RightEmployDashbord } from "./RightEmployDashbord";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
 import { useGetLoggedInUser } from "../../../hooks/auth/usePassword";
-import { EmployTaskCard } from "../Component/EmployTaskCard";
 import { EmployPichart } from "../Component/EmployPichart";
 import { MiddleEmployDashbord } from "./MiddleEmployDashbord";
 import { useGetTaskLoggedInUser } from "../../../hooks/project/ProjectTask/useProjectTask";
@@ -16,6 +15,11 @@ import TaskIcon from "@mui/icons-material/Task";
 import AccountTreeIcon from "@mui/icons-material/AccountTree";
 import PendingIcon from "@mui/icons-material/Pending";
 import BallotIcon from "@mui/icons-material/Ballot";
+import Project from "../../../../assets/eproject.png";
+import Task from "../../../../assets/etask.png";
+import Pending from "../../../../assets/pending.png";
+import Complet from "../../../../assets/ecomplet.png";
+import EmployTaskCard from "../Component/EmployTaskCard";
 
 const EmployeeDashbord = ({}) => {
   const { data: employData } = useGetLoggedInUser();
@@ -39,26 +43,34 @@ const EmployeeDashbord = ({}) => {
 
   const task = [
     {
-      nameOfTask: "Total Project",
+      title: "Total Project",
+      taskIcon: Project,
       numberOfTask: projectWiseEmployeeData
         ? projectWiseEmployeeData.length
         : 0,
-      taskIcon: <AccountTreeIcon sx={{ width: "2rem", height: "2rem" }} />,
+      linkTo: "/employee/project",
+      borderColor: "#3399FF",
     },
     {
-      nameOfTask: "Total Task",
+      title: "Total Task",
       numberOfTask: loginUsertask ? loginUsertask.length : 0,
-      taskIcon: <BallotIcon sx={{ width: "2rem", height: "2rem" }} />,
+      taskIcon: Task,
+      linkTo: "/employee/project",
+      borderColor: "#FF8A7B",
     },
     {
-      nameOfTask: "Task Pending",
+      title: "Task Pending",
       numberOfTask: taskPendingData ? taskPendingData.length : 0,
-      taskIcon: <PendingIcon sx={{ width: "2rem", height: "2rem" }} />,
+      taskIcon: Pending,
+      linkTo: "/employee/project",
+      borderColor: "#F8B114",
     },
     {
-      nameOfTask: "Task Complete",
+      title: "Task Complete",
       numberOfTask: taskCompleteData ? taskCompleteData.length : 0,
-      taskIcon: <TaskIcon sx={{ width: "2rem", height: "2rem" }} />,
+      taskIcon: Complet,
+      linkTo: "/employee/project",
+      borderColor: "#108A23",
     },
   ];
   const today = new Date();
@@ -100,7 +112,9 @@ const EmployeeDashbord = ({}) => {
             Welcome , <br></br>
             {employData?.name}
           </Typography>
-          <Typography variant="h6"  style={{ maxWidth: "200px" }}>{formattedDate}</Typography>
+          <Typography variant="h6" style={{ maxWidth: "200px" }}>
+            {formattedDate}
+          </Typography>
         </Box>
       </Box>
       <Box
@@ -113,9 +127,11 @@ const EmployeeDashbord = ({}) => {
         {task.map((taskDetail, index) => (
           <EmployTaskCard
             key={index}
-            nameOfTask={taskDetail.nameOfTask}
+            title={taskDetail.title}
             numberOfTask={taskDetail.numberOfTask}
             taskIcon={taskDetail.taskIcon}
+            borderColor={taskDetail.borderColor}
+            linkTo={taskDetail.linkTo}
           />
         ))}
         {/* <EmployPichart task={task}/> */}

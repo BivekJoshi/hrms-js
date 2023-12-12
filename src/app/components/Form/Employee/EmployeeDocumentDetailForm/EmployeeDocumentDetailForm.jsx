@@ -31,7 +31,6 @@ const EmployeeDocumentDetailForm = () => {
     id,
     selectedDocument || documentType[0]?.input 
   );
-  console.log(documentType);
   const url = DOC_URL;
 
   const handleFormSubmit = (documentType) => {

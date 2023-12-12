@@ -119,7 +119,7 @@ export default function AdminSidebar() {
         },
         {
           name: 'Leave',
-          path: 'leave',
+          path: 'employee/leave',
           icon: (
             <MailIcon
               sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
@@ -128,7 +128,7 @@ export default function AdminSidebar() {
         },
         {
           name: 'Leave Type',
-          path: 'leavetype',
+          path: 'employee/leavetype',
           icon: (
             <MailIcon
               sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
@@ -137,7 +137,7 @@ export default function AdminSidebar() {
         },
         {
           name: 'Attendance',
-          path: 'attendance',
+          path: 'employee/attendance',
           icon: (
             <HowToRegIcon
               sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
@@ -146,7 +146,7 @@ export default function AdminSidebar() {
         },
         {
           name: 'Birthday',
-          path: 'birthday',
+          path: 'employee/birthday',
           icon: (
             <CakeIcon
               sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
@@ -162,7 +162,7 @@ export default function AdminSidebar() {
           sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
         />
       ),
-      path: 'resource/employee',
+      path: 'logistics',
       subMenus: [],
     },
     {

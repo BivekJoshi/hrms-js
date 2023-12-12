@@ -64,8 +64,8 @@ export const MyTask = () => {
         gridTemplateColumns="repeat(auto-fit, minmax(300px, 1fr))"
         gap="1rem"
         padding="1rem 0"
-      >
-        {loginUsertask?.map((data, index) => (
+      >{loginUsertask ?
+        loginUsertask?.map((data, index) => (
           <Box
             key={index}
             bgcolor="#ededed66"
@@ -129,7 +129,7 @@ export const MyTask = () => {
               />
             </Stack>
           </Box>
-        ))}
+        )): ""}
       </Box>
     </Box>
   );
