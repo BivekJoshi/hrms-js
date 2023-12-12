@@ -17,8 +17,6 @@ const TrainingField = ({ onClose, isLoading, data ,empId}) => {
         endDate: true,
       });
       onClose();
-    } else {
-      toast.error("Please make sure you have filled the form correctly");
     }
   };
   const submitButtonText = data ? "Update" : "Add";

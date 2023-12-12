@@ -7,6 +7,7 @@ const usePasswordValidation = () => {
   const [numberValidated, setNumberValidated] = useState(false);
   const [specialValidated, setSpecialValidated] = useState(false);
   const [lengthValidated, setLengthValidated] = useState(false);
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   const handleChangeValidation = (value) => {
     const lower = new RegExp("(?=.*[a-z])");
@@ -22,13 +23,21 @@ const usePasswordValidation = () => {
     setLengthValidated(length.test(value));
   };
 
+  const handleConfirmPasswordChange = (value) => {
+    setConfirmPassword(value);
+  };
+
+  const doPasswordsMatch = value => value === confirmPassword;
+
   return {
     lowerValidated,
     upperValidated,
     numberValidated,
     specialValidated,
     lengthValidated,
+    doPasswordsMatch,
     handleChangeValidation,
+    handleConfirmPasswordChange,
   };
 };
 

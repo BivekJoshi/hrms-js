@@ -3,11 +3,12 @@ import { EditEmployeeActivateFields, EditEmployeeDeactivateFields } from "../../
 import { useGetEmployeeById } from "../../../hooks/employee/useEmployee";
 import FormModal from "../../../components/Modal/FormModal";
 
-export const EditDeactivationEmployeeModal = ({ open, handleCloseModal, id }) => {
+export const EditDeactivationEmployeeModal = ({ open, handleCloseModal, id, title }) => {
     const { data } = useGetEmployeeById(id);    
     return (
         <div>
             <FormModal
+            title={title}
                 open={open}
                 onClose={handleCloseModal}
                 formComponent={<EditEmployeeDeactivateFields onClose={handleCloseModal} data={data} />} />

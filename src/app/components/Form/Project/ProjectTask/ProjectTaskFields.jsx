@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { Grid, TextField, Button, MenuItem } from "@mui/material";
-import { toast } from "react-toastify";
 import useProjectTaskForm from "../../../../hooks/project/ProjectTask/ProjectTaskForm/useProjectTaskForm";
 import ThemeModeContext from "../../../../../theme/ThemeModeContext";
 import { useGetProject } from "../../../../hooks/project/useProject";
@@ -48,8 +47,6 @@ const ProjectTaskField = ({ onClose, isLoading, data }) => {
 
     if (formik.isValid) {
       onClose();
-    } else {
-      toast.error("Please make sure you have filled the form correctly");
     }
   };
 

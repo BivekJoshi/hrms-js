@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 
-import { Box, Chip, Grid } from "@mui/material";
+import { Box, Button, Chip, Grid } from "@mui/material";
 import { Typography, Avatar } from "@mui/material";
 
 import Male from "../../../../../../assets/male.png";
@@ -8,11 +8,20 @@ import Female from "../../../../../../assets/female.png";
 import BasicInfo from "./BasicInfo";
 import ThemeModeContext from "../../../../../../theme/ThemeModeContext";
 import { DOC_URL } from "../../../../../../auth/axiosInterceptor";
+import EmailModal from "../../../../Email/EmailModal";
 
 const primaryColor = "#1c7ed6";
 
 export const PersonalProfile = ({ data }) => {
+  const [openEmailForm, setOpenEmailForm] = useState(false);
+  const handleOpenEmailform = () => {
+    setOpenEmailForm(true);
+  };
+  const handleCloseEmailform = () => {
+    setOpenEmailForm(false);
+  };
   const { mode } = useContext(ThemeModeContext);
+
   const photo = data?.uploadFiles;
   const employeePhoto = photo
     ? photo.find((file) => file?.documentType === "EMPLOYEE_PHOTO")
@@ -64,7 +73,13 @@ export const PersonalProfile = ({ data }) => {
             sx={{ bgcolor: primaryColor, color: "white", width: " 9rem" }}
           />
           <Typography
-            sx={{ color: primaryColor, fontSize: "1rem", fontWeight: "600" }}
+            onClick={handleOpenEmailform}
+            sx={{
+              color: primaryColor,
+              fontSize: "1rem",
+              fontWeight: "600",
+              cursor: "pointer",
+            }}
           >
             {data?.officeEmail}
           </Typography>
@@ -83,6 +98,16 @@ export const PersonalProfile = ({ data }) => {
         </Box>
         <BasicInfo data={data} mode={mode} />
       </Grid>
+
+      {openEmailForm && (
+        <EmailModal
+          officeEmail={data?.officeEmail || ""}
+          employeeId={data?.id}
+          open={openEmailForm}
+          onClose={handleCloseEmailform}
+          handleOpenEmailform={handleOpenEmailform}
+        />
+      )}
     </>
   );
 };

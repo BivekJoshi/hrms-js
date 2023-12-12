@@ -103,9 +103,9 @@ const ApplyLeave = () => {
       ),
     },
   ];
-  if (isLoading || !leavebalance || !leaveTypeData) {
-    return <div>Loading...</div>;
-  }
+  // if (isLoading || !leavebalance || !leaveTypeData) {
+  //   return <div>Loading...</div>;
+  // }
 
   const leaveTypeMap = new Map();
   leaveIcon.forEach((leaveType) => {

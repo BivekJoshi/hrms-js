@@ -1,6 +1,5 @@
 import { Grid, TextField, Button, MenuItem, selectClasses } from "@mui/material";
 import React, { useState } from "react";
-import { toast } from "react-toastify";
 import useEditDocumentForm from "./useEditDocumentForm";
 
 const EditDocumentFields = ({ onClose, isLoading, id }) => {
@@ -20,8 +19,6 @@ const [selectedDocument, setSelectedDocument] = useState();
         document: selectedDocument || "",
       });
       onClose();
-    } else {
-      toast.error("please fill all the required fields");
     }
   };
 

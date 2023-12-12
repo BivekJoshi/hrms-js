@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { toast } from "react-toastify";
 import forget from "../../../../assets/forget.avif";
 import useAddForgotPasswordForm from "../../../hooks/auth/forgotPassword/useAddForgotPasswordForm";
 import { Grid, Button, TextField, Stack, Typography } from "@mui/material";
@@ -17,8 +16,6 @@ const ForgotPassword = ({ onClose, isLoading }) => {
     if (isValid) {
       formik.handleSubmit();
       if (formik.isValid) {
-      } else {
-        toast.error("Please make sure you have filled the form correctly");
       }
     }
   };

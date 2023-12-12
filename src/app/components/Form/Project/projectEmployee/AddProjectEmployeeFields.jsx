@@ -1,6 +1,5 @@
 import { Grid, Button, TextField, MenuItem, Autocomplete } from "@mui/material";
 import React, { useContext } from "react";
-import { toast } from "react-toastify";
 import { useGetEmployee } from "../../../../hooks/employee/useEmployee";
 import {
   useAddProjectEmployeeForm,
@@ -25,8 +24,6 @@ export const AddprojectEmployeeFields = ({ onClose, isLoading }) => {
         projectId: true,
       });
       onClose();
-    } else {
-      toast.error("Please make sure you have filled the form correctly");
     }
   };
 
@@ -169,8 +166,6 @@ export const EditProjectEmployeeFields = ({ data, onClose, isLoading }) => {
         projectId: true,
       });
       onClose();
-    } else {
-      toast.error("Please make sure you have filled the form correctly");
     }
   };
   return (

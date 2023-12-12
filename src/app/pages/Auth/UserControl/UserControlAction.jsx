@@ -72,6 +72,7 @@ const UserControlAction = ({ rowData }) => {
 
       {isEditModalOpen && (
         <EditUserControlModal
+        title={"Edit Role"}
           rowData={rowData}
           open={isEditModalOpen}
           handleCloseModal={handleCloseEditModal}

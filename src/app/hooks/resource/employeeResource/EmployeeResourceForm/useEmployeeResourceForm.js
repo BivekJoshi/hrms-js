@@ -12,7 +12,7 @@ const useEmployeeResourceForm = (data) => {
   const formik = useFormik({
     initialValues: {
       officeResourceId: data?.officeResourceId || "",
-      employeeId: data?.employeeId || "",
+      employeeId: data?.empId || "",
       receiveDate: data?.receiveDate || "",
       returnDate: data?.returnDate || "",
       id: data?.id || "",

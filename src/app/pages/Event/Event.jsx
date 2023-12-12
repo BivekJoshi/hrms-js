@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Box, Button, Grid } from "@mui/material";
-import { toast } from "react-toastify";
 
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
@@ -20,7 +19,7 @@ import AddEventFields from "../../components/Form/Event/AddEventFields";
 import useAuth from "../../../auth/hooks/component/login/useAuth";
 
 const Event = ({ permissions }) => {
-  const { isEmployee,isHrClerk } = useAuth();
+  const { isEmployee, isHrClerk } = useAuth();
 
   const calendarRef = useRef(null);
   const [events, setEvents] = useState([]);
@@ -47,13 +46,11 @@ const Event = ({ permissions }) => {
   }, [eventData]);
 
   const handleCloseModal = () => setOpenAddModal(false);
-  const { formik ,data} = useEventForm(setOpenSubmitModal, handleCloseModal);
+  const { formik, data } = useEventForm(setOpenSubmitModal, handleCloseModal);
 
   const handleFormSubmit = async () => {
     formik.handleSubmit();
     if (!formik.isValidating && formik.isValid) {
-    } else {
-      toast.error("Please make sure you have filled the form correctly");
     }
   };
   const handleOpenModal = (e) => {
@@ -68,21 +65,22 @@ const Event = ({ permissions }) => {
 
   return (
     <>
-    {isEmployee || isHrClerk ? null : (
-      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-        <HocButton
-          permissions={permissions}
-          color={"primary"}
-          variant={"contained"}
-          onClick={() => setOpenAddModal(true)}
-          buttonName={"+Add Event"}
-        />
-      </Box>
+      {isEmployee || isHrClerk ? null : (
+        <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+          <HocButton
+            permissions={permissions}
+            color={"#fff"}
+            variant={"contained"}
+            onClick={() => setOpenAddModal(true)}
+            buttonName={"+Add Event"}
+          />
+        </Box>
       )}
       <br />
 
       {openAddModal && (
         <FormModal
+          title={"Add Event"}
           open={openAddModal}
           onClose={() => setOpenAddModal(false)}
           formComponent={
@@ -98,7 +96,7 @@ const Event = ({ permissions }) => {
                 <Button
                   variant="contained"
                   onClick={handleFormSubmit}
-                  sx={{ mt: 3, ml: 1 }}
+                  sx={{ mt: 3, ml: 1, color: "#fff" }}
                 >
                   Add Event
                 </Button>
@@ -153,7 +151,10 @@ const Event = ({ permissions }) => {
           onClose={() => setOpenEmailModal(false)}
           formComponent={
             <div>
-              <EmailToAll getEventID={data?.id} onClose={()=>setOpenEmailModal(false)}/>
+              <EmailToAll
+                getEventID={data?.id}
+                onClose={() => setOpenEmailModal(false)}
+              />
             </div>
           }
         />
@@ -175,9 +176,10 @@ const Event = ({ permissions }) => {
 
       {openModal && (
         <OpenEvent
+        title={"Edit Event"}
           id={getEventID}
           open={openModal}
-          handleCloseModal={()=>setOpenModal(false)}
+          handleCloseModal={() => setOpenModal(false)}
         />
       )}
     </>

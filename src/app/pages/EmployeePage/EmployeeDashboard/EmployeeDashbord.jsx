@@ -13,12 +13,14 @@ import { useGetTaskLoggedInUser } from "../../../hooks/project/ProjectTask/usePr
 import { useGetProjectWiseEmployee } from "../../../hooks/project/useProject";
 import { DOC_URL } from "../../../../auth/axiosInterceptor";
 import TaskIcon from "@mui/icons-material/Task";
-import AccountTreeIcon from '@mui/icons-material/AccountTree';
-import PendingIcon from '@mui/icons-material/Pending';
+import AccountTreeIcon from "@mui/icons-material/AccountTree";
+import PendingIcon from "@mui/icons-material/Pending";
 import BallotIcon from "@mui/icons-material/Ballot";
+import { useGetLoggedInUserInfo } from "../../../hooks/employee/useEmployee";
 
 const EmployeeDashbord = ({}) => {
   const { data: employData } = useGetLoggedInUser();
+  const { data: userDetailsData } = useGetLoggedInUserInfo();
   const { mode } = useContext(ThemeModeContext);
   const { data: loginUsertask } = useGetTaskLoggedInUser();
   const { data: projectWiseEmployeeData } = useGetProjectWiseEmployee(
@@ -74,23 +76,30 @@ const EmployeeDashbord = ({}) => {
     <Box display="grid" gridTemplateRows="1fr" gap="1rem">
       <Box
         display="flex"
-        flexDirection="row"
+        justifyContent="space-between"
         padding="1rem"
         className={
           mode === "light" ? "employeeDeshbordBG" : "employeeDeshbordBGDark"
         }
       >
-        <CardMedia
-          component="img"
-          src={filePath ? filePath : Male}
-          alt="Paella dish"
-          sx={{ width: 66, height: 66, borderRadius: "2rem" }}
-        />
-        <Box alignSelf="center" paddingLeft="1rem">
-          <h3>Welcome , {employData?.name}</h3>
-          <h3>{formattedDate}</h3>
-        </Box>
+        <div style={{ display: "flex", alignItems: "center" }} padding="1rem">
+          <CardMedia
+            component="img"
+            src={filePath ? filePath : Male}
+            alt="Paella dish"
+            sx={{ width: 66, height: 66, borderRadius: "2rem" }}
+          />
+          <Box alignSelf="center" paddingLeft="1rem">
+            <h3>Welcome , {employData?.name}</h3>
+            <h3>Since: {userDetailsData?.dateOfJoin}</h3>
+          </Box>
+        </div>
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <h2>Today Date: </h2>
+          <h3> {formattedDate}</h3>
+        </div>
       </Box>
+
       <Box
         display="grid"
         grid
@@ -108,10 +117,10 @@ const EmployeeDashbord = ({}) => {
         ))}
         {/* <EmployPichart task={task}/> */}
       </Box>
-      <MiddleEmployDashbord employData={employData}/>
+      <MiddleEmployDashbord employData={employData} />
       <Box display="grid" gridTemplateColumns="3fr 2fr" gap="3rem">
         <LeftEmployDashbord />
-        <RightEmployDashbord employData={employData}/>
+        <RightEmployDashbord employData={employData} />
       </Box>
     </Box>
   );

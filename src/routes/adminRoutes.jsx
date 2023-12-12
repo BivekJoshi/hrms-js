@@ -234,6 +234,12 @@ const adminRoutes = [
     component: <UserController component='users' />,
     requiresSuperAdmin: true,
   },
+  // {
+  //   path: "emailsend", // testing purpose only
+  //   name: "emailsend",
+  //   id: nanoid(),
+  //   component: <EmailSending />,
+  // },
 ];
 
 export { adminRoutes };

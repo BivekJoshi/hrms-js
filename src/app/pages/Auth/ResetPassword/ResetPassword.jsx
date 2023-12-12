@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { toast } from "react-toastify";
 import useAddResetPasswordForm from "../../../hooks/auth/resetPassword/useAddResetPasswordForm";
 import { Grid, TextField, Stack, Typography } from "@mui/material";
 import { InputAdornment, Tooltip, IconButton, Divider } from "@mui/material";
@@ -59,14 +58,8 @@ const ResetPassword = ({ isLoading }) => {
 
   const handleFormSubmit = async () => {
     const isValid = await formik.validateForm();
-    if (isValid) {
-      if (formik.values.password === formik.values.confirmPassword) {
-        formik.handleSubmit();
-      } else {
-        toast.error("New password and confirm password do not match!");
-      }
-    } else {
-      toast.error("Please make sure you have filled the form correctly!");
+    if(isValid){
+      formik.handleSubmit();
     }
   };
 
