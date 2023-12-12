@@ -2,7 +2,6 @@ import { Button, Grid, Typography } from "@mui/material";
 import React from "react";
 import { useGetDeactivatedOfficeResource } from "../../../../hooks/resource/officeResource/useOfficeResource";
 import { useAddActiveEmployeeForm } from "../../../../hooks/resource/officeResource/activateOfficeResource/useActivateOfficeResourceForm";
-import { toast } from "react-toastify";
 
 const EditOfficeResourceActivationFields = ({ onClose, isLoading, id }) => {
   const newId = id;
@@ -20,8 +19,6 @@ const EditOfficeResourceActivationFields = ({ onClose, isLoading, id }) => {
         officeResourceId: true,
       });
       onClose();
-    } else {
-      toast.error("please fill all the required fields");
     }
   };
 

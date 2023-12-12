@@ -120,7 +120,6 @@ const Attendance = () => {
     setCMonth(cMonth - 1);
   }
   const { palette } = useContext(ThemeModeContext);
-  console.log('🚀 ~ file: Attendance.jsx:122 ~ Attendance ~ palette:', palette);
 
   const [searchEmployee, setSearchEmployee] = useState('');
   const [searchMonth, setSearchMonth] = useState('');
@@ -172,8 +171,9 @@ const Attendance = () => {
     );
 
   return (
-    <div className='main'>
-      <div className='Search'>
+    <div className="main">
+      <h2>Attendance</h2>
+      <div className="Search">
         <Box
           component='form'
           noValidate

@@ -7,15 +7,15 @@ import {
   Box,
   FormControlLabel,
   Typography,
-} from '@mui/material';
-import React, { useContext } from 'react';
-import { toast } from 'react-toastify';
-import { useGetEmployee } from '../../../hooks/employee/useEmployee';
-import { useGetLeaveType } from '../../../hooks/leaveType/useLeaveType';
-import useLeaveForm from '../../../hooks/leave/LeaveForm/useLeaveForm';
-import ThemeModeContext from '../../../../theme/ThemeModeContext';
-import { ThemeSwitch } from '../../../../theme/ThemeSwitch';
-import useAuth from '../../../../auth/hooks/component/login/useAuth';
+} from "@mui/material";
+import React, { useContext } from "react";
+import { useGetEmployee } from "../../../hooks/employee/useEmployee";
+import { useGetLeaveType } from "../../../hooks/leaveType/useLeaveType";
+import useLeaveForm from "../../../hooks/leave/LeaveForm/useLeaveForm";
+import ThemeModeContext from "../../../../theme/ThemeModeContext";
+import { ThemeSwitch } from "../../../../theme/ThemeSwitch";
+import useAuth from "../../../../auth/hooks/component/login/useAuth";
+import { ButtonComponent } from '../../Button/ButtonComponent';
 
 const leaveStatus = [
   {
@@ -27,7 +27,8 @@ const leaveStatus = [
     label: 'Rejected',
   },
 ];
-const LeaveFields = ({ onClose, isLoading, data }) => {
+
+export const EditLeaveFields = ({ onClose, isLoading, data }) => {
   const { isManager } = useAuth();
   const { data: employeeData } = useGetEmployee();
   const { data: leaveTypeData } = useGetLeaveType();
@@ -60,13 +61,15 @@ const LeaveFields = ({ onClose, isLoading, data }) => {
   const handleFormSubmit = () => {
     formik.handleSubmit();
 
-    formik.resetForm({
-      isHalfDay: false,
-    });
-    onClose();
+    if (formik.isValid) {
+      formik.resetForm({
+        isHalfDay: false,
+      });
+      onClose();
+    }
   };
 
-  const submitButtonText = data ? 'Update Leave' : 'Add Leave';
+  const submitButtonText = data ? "Update Leave" : "Add Leave";
 
   if (isManager) {
     return (
@@ -144,7 +147,7 @@ const LeaveFields = ({ onClose, isLoading, data }) => {
             <Button
               variant='contained'
               onClick={handleFormSubmit}
-              sx={{ mt: 3, ml: 1 }}
+              sx={{ mt: 3, ml: 1, color: "#fff" }}
             >
               Submit
             </Button>
@@ -160,9 +163,55 @@ const LeaveFields = ({ onClose, isLoading, data }) => {
         </Grid>
       )
     );
-  } else {
-    return (
-      !isLoading && (
+  }
+};
+
+export const LeaveFields = ({ onClose, isLoading, data }) => {
+  const { isManager } = useAuth();
+  const { data: employeeData } = useGetEmployee();
+  const { data: leaveTypeData } = useGetLeaveType();
+  const { formik } = useLeaveForm(data);
+  const { mode } = useContext(ThemeModeContext);
+  const employeeId = data?.employeeId;
+
+  const capitalize = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+  };
+
+  const getLeaveTypeName = (leaveTypeId) => {
+    const leaveType = leaveTypeData?.find((type) => type.id === leaveTypeId);
+    return leaveType ? leaveType.leaveName : "";
+  };
+
+  const getEmployeeFullName = () => {
+    const employee = employeeData?.find((emp) => emp.id === employeeId);
+    if (employee) {
+      const { firstName, middleName, lastName } = employee;
+      return (
+        <Box sx={{ bgcolor: mode === "light" ? "" : "#413e3e" }}>
+          {firstName || ""} {middleName || ""} {lastName || ""}
+        </Box>
+      );
+    }
+    return "";
+  };
+
+  const handleFormSubmit = () => {
+    formik.handleSubmit();
+
+    if (formik.isValid) {
+      formik.resetForm({
+        isHalfDay: false,
+      });
+      onClose();
+    }
+  };
+
+  const submitButtonText = data ? "Update Leave" : "Add Leave";
+
+  return (
+    !isLoading && (
+      <>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={12}>
             {data ? (
@@ -191,7 +240,7 @@ const LeaveFields = ({ onClose, isLoading, data }) => {
                 name='employeeId'
                 options={employeeData}
                 getOptionLabel={(option) =>
-                  `${option.firstName} ${option.middleName} ${option.lastName}`
+                  `${option?.firstName} ${option?.middleName} ${option?.lastName}`
                 }
                 value={formik.values.employeeId || null}
                 onChange={(event, value) =>
@@ -378,7 +427,7 @@ const LeaveFields = ({ onClose, isLoading, data }) => {
             <Button
               variant='contained'
               onClick={handleFormSubmit}
-              sx={{ mt: 3, ml: 1 }}
+              sx={{ mt: 3, ml: 1, color: "#fff" }}
             >
               {submitButtonText}
             </Button>
@@ -392,9 +441,7 @@ const LeaveFields = ({ onClose, isLoading, data }) => {
             </Button>
           </Grid>
         </Grid>
-      )
-    );
-  }
+      </>
+    )
+  );
 };
-
-export default LeaveFields;

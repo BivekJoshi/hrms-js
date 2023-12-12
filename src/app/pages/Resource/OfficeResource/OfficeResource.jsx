@@ -133,6 +133,7 @@ const OfficeResource = () => {
       />
       {openAddModal && (
         <AddOfficeResourceModal
+          title={"Add Logistics"}
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
         />

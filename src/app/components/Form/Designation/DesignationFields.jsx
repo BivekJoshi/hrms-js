@@ -1,8 +1,7 @@
-import { nanoid } from 'nanoid';
-import { Grid, TextField, Button, MenuItem } from '@mui/material';
-import React from 'react';
-import { toast } from 'react-toastify';
-import useDesignationForm from '../../../hooks/designation/DesignationForm/useDesignationForm';
+import { nanoid } from "nanoid";
+import { Grid, TextField, Button, MenuItem } from "@mui/material";
+import React from "react";
+import useDesignationForm from "../../../hooks/designation/DesignationForm/useDesignationForm";
 
 const DesignationFields = ({ onClose, isLoading, data }) => {
   const { formik } = useDesignationForm(data);
@@ -10,7 +9,9 @@ const DesignationFields = ({ onClose, isLoading, data }) => {
   const handleFormSubmit = () => {
     formik.handleSubmit();
 
-    onClose();
+    if (formik.isValid) {
+      onClose();
+    }
   };
 
   const submitButtonText = data ? 'Update Designation' : 'Add Designation';

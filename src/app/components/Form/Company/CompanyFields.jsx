@@ -1,7 +1,6 @@
-import { Grid, TextField, Button } from '@mui/material';
-import React from 'react';
-import { toast } from 'react-toastify';
-import useCompanyForm from '../../../hooks/company/CompanyForm/useCompanyForm';
+import { Grid, TextField, Button } from "@mui/material";
+import React from "react";
+import useCompanyForm from "../../../hooks/company/CompanyForm/useCompanyForm";
 
 const CompanyFields = ({ onClose, isLoading, data }) => {
   const { formik } = useCompanyForm(data,onClose);

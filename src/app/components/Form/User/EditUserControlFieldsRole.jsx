@@ -4,13 +4,50 @@ import ThemeModeContext from "../../../../theme/ThemeModeContext";
 import { useEditUserControlForm } from "../../../pages/Auth/UserControl/Users/useEditUserControlForm";
 import { useGetUserControl, useGetUserRole } from "../../../hooks/auth/userControl/useUserControl";
 
+const roleType = [
+  {
+    name: "ROLE_SUPER_ADMIN",
+    label: "Super Admin",
+    id: 1,
+  },
+  {
+    name: "ROLE_ADMIN",
+    label: "Admin",
+    id: 2,
+  },
+  {
+    name: "ROLE_MANAGER",
+    label: "Manager",
+    id: 3,
+  },
+  {
+    name: "ROLE_HR_ADMIN",
+    label: "HR Admin",
+    id: 4,
+  },
+  {
+    name: "ROLE_HR_CLERK",
+    label: "HR Clerk",
+    id: 5,
+  },
+  {
+    name: "ROLE_EMPLOYEE",
+    label: "Employee",
+    id: 6,
+  },
+];
+
 export const EditUserControlFieldsRole = ({ onClose ,rowData}) => {
   const { data: userData } = useGetUserControl();
-
   const { data: userRoleData } = useGetUserRole();
 
   const { formik } = useEditUserControlForm({rowData});
   const { mode } = useContext(ThemeModeContext);
+
+  const getRoleLabel = (roleId) => {
+    const role = roleType?.find((r) => r?.id === roleId);
+    return role ? role?.label : "";
+  };
 
   const handleFormSubmit = async () => {
     const isValid = await formik.validateForm();
@@ -18,8 +55,6 @@ export const EditUserControlFieldsRole = ({ onClose ,rowData}) => {
       formik.handleSubmit();
       if (formik.isValid) {
         onClose();
-      } else {
-        toast.error("Please make sure you have filled the form correctly");
       }
     }
   };
@@ -71,7 +106,7 @@ export const EditUserControlFieldsRole = ({ onClose ,rowData}) => {
                 value={role?.id}
                 sx={{ bgcolor: mode === "light" ? "" : "#413e3e" }}
               >
-                {role?.name}
+                {getRoleLabel(role?.id)}
               </MenuItem>
             ))}
         </TextField>

@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { Grid, TextField, Button, MenuItem } from "@mui/material";
-import { toast } from "react-toastify";
 import useTodoListForm from "../../../hooks/todoList/TodoListForm/useTodoListForm";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
 
@@ -45,8 +44,6 @@ const TodoListFields = ({ onClose, isLoading, data }) => {
 
     if (formik.isValid) {
       onClose();
-    } else {
-      toast.error("Please make sure you have filled the form correctly");
     }
   };
 
@@ -126,7 +123,7 @@ const TodoListFields = ({ onClose, isLoading, data }) => {
           <Button
             variant="contained"
             onClick={handleFormSubmit}
-            sx={{ mt: 3, ml: 1 }}
+            sx={{ mt: 3, ml: 1, color: "#fff" }}
           >
             {submitButtonText}
           </Button>

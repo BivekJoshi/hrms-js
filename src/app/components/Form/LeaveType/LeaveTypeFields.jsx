@@ -6,7 +6,6 @@ import {
   MenuItem,
 } from "@mui/material";
 import React from "react";
-import { toast } from "react-toastify";
 import { ThemeSwitch } from "../../../../theme/ThemeSwitch";
 import useLeaveTypeForm from "../../../hooks/leaveType/LeaveTypeForm/useLeaveTypeForm";
 import { useContext } from "react";

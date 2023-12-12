@@ -1,6 +1,5 @@
-import { Grid, Button, TextField, MenuItem, Typography } from '@mui/material';
-import React from 'react';
-import { toast } from 'react-toastify';
+import { Grid, Button, TextField, MenuItem, Typography } from "@mui/material";
+import React from "react";
 import {
   useAddActiveEmployeeForm,
   useRemoveDeactiveEmployeeForm,
@@ -13,10 +12,9 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
   const { data: employeeData } = useGetEmployee();
   const { formik } = useRemoveDeactiveEmployeeForm(data, onClose);
 
-  const handleFormSubmit = () => {
-    formik.handleSubmit();
+  const handleFormSubmit = () => {  
     if (formik.isValid) {
-      onClose();
+      formik.handleSubmit();
     }
   };
 
@@ -29,7 +27,6 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
       const { firstName, middleName, lastName } = employee;
       return `${firstName} ${middleName || ''} ${lastName || ''}`.trim();
     }
-
     return employeeId;
   };
 
@@ -156,8 +153,6 @@ export const EditEmployeeActivateFields = ({ onClose, isLoading, id }) => {
         effectiveDate: true,
       });
       onClose();
-    } else {
-      toast.error('please fill all the required fields');
     }
   };
 

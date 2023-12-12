@@ -12,7 +12,7 @@ import CustomTable from '../../../../../components/CustomTable/CustomTable';
 
 const TrainingInfo = ({ data }) => {
   const { isEmployee } = useAuth();
-  const { data: loggedInUserData, isLoading: isLoadingUserData } = isEmployee
+  const { data: loggedInUserData, isLoading: isLoading } = isEmployee
     ? useGetLoggedInUserInfo()
     : {};
   const { id } = useParams();

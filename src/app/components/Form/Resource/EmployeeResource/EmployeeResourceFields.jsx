@@ -1,4 +1,11 @@
-import { Autocomplete, Button, Grid, MenuItem, TextField } from "@mui/material";
+import {
+  Autocomplete,
+  Box,
+  Button,
+  Grid,
+  MenuItem,
+  TextField,
+} from "@mui/material";
 import React, { useContext } from "react";
 import useEmployeeResourceForm from "../../../../hooks/resource/employeeResource/EmployeeResourceForm/useEmployeeResourceForm";
 import { useGetAvailableOfficeResource } from "../../../../hooks/resource/officeResource/useOfficeResource";
@@ -9,58 +16,52 @@ const EmployeeResourceFields = ({ onClose, isLoading, data }) => {
   const { data: availableOfficeResource } = useGetAvailableOfficeResource();
   const { data: employeeData } = useGetEmployee();
   const { mode } = useContext(ThemeModeContext);
+  const { formik } = useEmployeeResourceForm(data);
 
-  const { formik } = useEmployeeResourceForm(data ? data : "");
+
   const handleFormSubmit = () => {
     formik.handleSubmit();
-
     if (formik.isValid) {
       onClose();
-    } else {
-      toast.error("Please make sure you have filled the form correctly");
     }
   };
   const submitButtonText = data ? "Update Resource" : " Add Resource";
+
+  const getEmployeeName = (employeeId) => {
+    if(employeeId !== ""){
+
+      const employee = data && employeeData?.find((emp) => emp.id === employeeId);
+      const { firstName, middleName, lastName } = employee;
+      return firstName;
+    }
+  };
 
   return (
     !isLoading && (
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
-          <Autocomplete
-            id="employeeId"
-            name="employeeId"
-            options={employeeData}
-            getOptionLabel={(option) =>
-              `${option.firstName} ${option.middleName} ${option.lastName}`
-            }
-            value={employeeData?.find(
-              (employee) => employee?.id === formik.values?.employeeId
-            )}
-            onChange={(event, selectedEmployee) => {
-              if (selectedEmployee) {
-                formik.setFieldValue("employeeId", selectedEmployee.id);
-              }
+          <TextField
+            id="id"
+            name="id"
+            label="Employee Name"
+            placeholder="Enter Employee name"
+            fullWidth
+            value={getEmployeeName(formik.values.id)}
+            onChange={(event) => {
+              formik.handleChange(event);
+              formik.setFieldValue("id", event.target.value);
             }}
-            renderInput={(params) => (
-              <TextField
-                bgcolor="black"
-                {...params}
-                label="Employee Name"
-                fullWidth
-                required
-                error={
-                  formik.touched.employeeId && Boolean(formik.errors.employeeId)
-                }
-                helperText={
-                  formik.touched.employeeId && formik.errors.employeeId
-                }
-                variant="outlined"
-                autoFocus
-                InputLabelProps={{ shrink: true }}
-              />
-            )}
+            error={
+              formik.touched.id && Boolean(formik.errors.id)
+            }
+            helperText={formik.touched.id && formik.errors.id}
+            variant="outlined"
+            autoFocus
+            InputLabelProps={{ shrink: true }}
+            disabled={formik.values.employeeId}
           />
         </Grid>
+
         <Grid item xs={12} sm={12}>
           <TextField
             id="officeResourceId"

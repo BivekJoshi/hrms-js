@@ -1,7 +1,6 @@
-import { Grid, TextField, Button } from '@mui/material';
-import React from 'react';
-import { toast } from 'react-toastify';
-import useDepartmentForm from '../../../hooks/department/DepartmentForm/useDepartmentForm';
+import { Grid, TextField, Button } from "@mui/material";
+import React from "react";
+import useDepartmentForm from "../../../hooks/department/DepartmentForm/useDepartmentForm";
 
 const DepartmentFields = ({ onClose, isLoading, data }) => {
   const { formik } = useDepartmentForm(data);
@@ -9,7 +8,9 @@ const DepartmentFields = ({ onClose, isLoading, data }) => {
   const handleFormSubmit = () => {
     formik.handleSubmit();
 
-    onClose();
+    if (formik.isValid) {
+      onClose();
+    }
   };
   const submitButtonText = data ? 'Update Department' : 'Add Department';
   return (

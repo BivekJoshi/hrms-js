@@ -125,6 +125,7 @@ const EmployeeResource = ({ permissions }) => {
       onClick: (event, rowData) => handleDeleteRowData(rowData),
     },
   ];
+  
   return (
     <>
       <Box
@@ -171,13 +172,15 @@ const EmployeeResource = ({ permissions }) => {
       )}
       {openAddModal && (
         <AddEmployeeResourceModal
-          id={editedEmployeeResouce?.id}
+        title={"Add Logistics"}
+        id={editedEmployeeResouce?.id}
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
         />
       )}
       {openEditModal && (
         <EditEmployeeResourceModal
+        title={"Edit Logistics"}
           id={editedEmployeeResouce?.id}
           open={openEditModal}
           handleCloseModal={handleCloseEditModal}

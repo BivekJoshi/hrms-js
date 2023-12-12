@@ -1,25 +1,30 @@
-import React from 'react';
-import { Grid, TextField, Button } from '@mui/material';
-import { toast } from 'react-toastify';
-import { useDeleteEvent } from '../../../hooks/event/useEvent';
-import useEventForm from '../../../hooks/event/EventForm/useEventForm';
-import useEditEventForm from '../../../hooks/event/editEvent/useEditEventForm';
-import HocButton from '../../../hoc/hocButton';
-import PermissionHoc from '../../../hoc/permissionHoc';
+import React from "react";
+import { Grid, TextField, Button } from "@mui/material";
+import { useDeleteEvent } from "../../../hooks/event/useEvent";
+import useEventForm from "../../../hooks/event/EventForm/useEventForm";
+import useEditEventForm from "../../../hooks/event/editEvent/useEditEventForm";
+import HocButton from "../../../hoc/hocButton";
+import PermissionHoc from "../../../hoc/permissionHoc";
 
 const EditEventFields = ({ onClose, isLoading, data, permissions }) => {
   const { formik } = useEditEventForm(data);
 
-  const handleFormSubmit = () => {
-    formik.handleSubmit();
+    const handleFormSubmit = async () => {
+      const isValid = await formik.validateForm();
+  
+      if (isValid) {
+        formik.handleSubmit();
 
-    formik.setTouched({
-      eventName: false,
-      eventDate: false,
-      eventTime: false,
-      eventDescription: false,
-    });
-    onClose();
+      if (formik.isValid) {
+        formik.setTouched({
+          eventName: false,
+          eventDate: false,
+          eventTime: false,
+          eventDescription: false,
+        });
+        onClose();
+      }
+    }
   };
   const deleteEventMutation = useDeleteEvent({});
   const handleDeleteEvent = () => {
