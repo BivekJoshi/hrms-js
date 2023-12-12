@@ -436,7 +436,9 @@ export default function AdminSidebar() {
             )}
             <BreadCrumbs />
           </Box>
-          <Outlet />
+          <div style={{ minHeight: '90vh' }}>
+            <Outlet />
+          </div>
         </Card>
         <Footer />
       </Main>
