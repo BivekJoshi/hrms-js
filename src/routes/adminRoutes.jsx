@@ -278,7 +278,7 @@ export default function BreadCrumbs() {
           <Link
             underline="hover"
             style={{ color: mode === "light" ? "inherit" : "white" }}
-            to="/dashboard"
+            to="/admin/dashboard"
           >
             <HomeIcon
               sx={{
@@ -292,7 +292,7 @@ export default function BreadCrumbs() {
           {pathSegments.map((segment, index) => {
             const partialPath = `/${pathSegments
               .slice(0, index + 1)
-              .join("/")}`;
+              .join("/dashboard")}`;
             const route = findRoute(partialPath);
             return (
               <Link
