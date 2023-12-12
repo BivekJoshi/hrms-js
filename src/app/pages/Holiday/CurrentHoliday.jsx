@@ -20,7 +20,7 @@ const CurrentHoliday = () => {
         color: "#fff",
       }}
     >
-      <Box sx={{textAlign: "center"}}><h1> {currentMonth}</h1></Box>
+      <Box sx={{textAlign: "center"}}><Typography variant='h3'> {currentMonth}</Typography></Box>
       {currentData &&
         currentData.map((item) => (
           <Timeline

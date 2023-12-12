@@ -1,14 +1,6 @@
 import * as React from 'react';
 import { useState } from 'react';
-import {
-  Box,
-  Button,
-  ButtonGroup,
-  Grid,
-  IconButton,
-  Modal,
-  Typography,
-} from '@mui/material';
+import { Box, Button, ButtonGroup, Grid, IconButton, Modal, Typography } from '@mui/material';
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
@@ -162,7 +154,7 @@ const Employee = () => {
       >
         <div>
           <Box sx={style}>
-            <h3>Do you like to add more Details of this Employee??</h3>
+            <Typography variant="h6">Do you like to add more Details of this Employee??</Typography>
             <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
               <Button
                 variant='contained'

@@ -6,6 +6,7 @@ import {
   MenuItem,
   OutlinedInput,
   Select,
+  Typography,
 } from "@mui/material";
 import { useGetEmployee } from "../../hooks/employee/useEmployee";
 import { getBusinessAEmployeeById, getBusinessBEmployeeById, getFemaleEmployeeById, getMaleEmployeeById, getTechnicalEmployeeById } from "../../components/Email/EmailSorting";
@@ -63,7 +64,7 @@ const EmailForHoliday = ({ getEventID, onClose }) => {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <h2>Email</h2>
+        <Typography variant="h4">Email</Typography>
         <Grid container spacing={2}>
           <Grid
             item

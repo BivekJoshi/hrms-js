@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -14,6 +14,7 @@ import { FaBaby } from "react-icons/fa";
 import { GiBigDiamondRing } from "react-icons/gi";
 import KitesurfingIcon from "@mui/icons-material/Kitesurfing";
 import BabyChangingStationIcon from "@mui/icons-material/BabyChangingStation";
+import ThemeModeContext from "../../../../theme/ThemeModeContext";
 
 // const Item = styled(Paper)(({ theme }) => ({
 //   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -52,6 +53,7 @@ const CustomArrow = ({ onClick, direction }) => {
 const ApplyLeave = () => {
   const { data: leavebalance, isLoading } = useGetLoggedInUserLeaveBalance();
   const { data: leaveTypeData } = useGetLeaveType();
+  const { mode } = useContext(ThemeModeContext);
 
   if (isLoading || !leavebalance || !leaveTypeData) {
     return <div>Loading...</div>;
@@ -61,45 +63,101 @@ const ApplyLeave = () => {
     {
       id: 4,
       leaveType: "FESTIVAL ",
-      icon: <GiFireworkRocket style={{ width: "3rem" }} />,
+      icon: (
+        <GiFireworkRocket
+          style={{
+            width: "3rem",
+            color: mode === "light" ? "#6DAB23" : "white",
+          }}
+        />
+      ),
     },
     {
       id: 5,
       leaveType: "MATERNITY ",
-      icon: <MdPregnantWoman style={{ width: "3rem" }} />,
+      icon: (
+        <MdPregnantWoman
+          style={{
+            width: "3rem",
+            color: mode === "light" ? "#6DAB23" : "white",
+          }}
+        />
+      ),
     },
     {
       id: 3,
       leaveType: "ANNUAL ",
-      icon: <MdOutlineFlightTakeoff style={{ width: "3rem" }} />,
+      icon: (
+        <MdOutlineFlightTakeoff
+          style={{
+            width: "3rem",
+            color: mode === "light" ? "#6DAB23" : "white",
+          }}
+        />
+      ),
     },
     {
       id: 6,
       leaveType: "PATERNITY ",
-      icon: <FaBaby style={{ width: "2rem" }} />,
+      icon: (
+        <FaBaby
+          style={{
+            width: "2rem",
+            color: mode === "light" ? "#6DAB23" : "white",
+          }}
+        />
+      ),
     },
     {
       id: 7,
       leaveType: "MARRIAGE ",
-      icon: <GiBigDiamondRing style={{ width: "3rem", height: "3rem" }} />,
+      icon: (
+        <GiBigDiamondRing
+          style={{
+            width: "3rem",
+            height: "3rem",
+            color: mode === "light" ? "#6DAB23" : "white",
+          }}
+        />
+      ),
     },
     {
       id: 1,
       leaveType: "CASUAL ",
-      icon: <KitesurfingIcon style={{ width: "3rem", height: "3rem" }} />,
+      icon: (
+        <KitesurfingIcon
+          style={{
+            width: "3rem",
+            height: "3rem",
+            color: mode === "light" ? "#6DAB23" : "white",
+          }}
+        />
+      ),
     },
     {
       id: 9,
       leaveType: "SICK ",
       icon: (
-        <BabyChangingStationIcon style={{ width: "3rem", height: "3rem" }} />
+        <BabyChangingStationIcon
+          style={{
+            width: "3rem",
+            height: "3rem",
+            color: mode === "light" ? "#6DAB23" : "white",
+          }}
+        />
       ),
     },
     {
       id: 8,
       leaveType: "MATERNITY ADDITIONAL ",
       icon: (
-        <BabyChangingStationIcon style={{ width: "3rem", height: "3rem" }} />
+        <BabyChangingStationIcon
+          style={{
+            width: "3rem",
+            height: "3rem",
+            color: mode === "light" ? "#6DAB23" : "white",
+          }}
+        />
       ),
     },
   ];
@@ -118,8 +176,14 @@ const ApplyLeave = () => {
 
   const boxes = leavebalance
     ? leavebalance.map((data, index) => (
-        <Box key={index} boxShadow="7" borderRadius="1.5rem" minHeight="200px">
-          <Typography fontSize="1.2rem" fontWeight="600" marginTop="1rem">
+        <Box
+          key={index}
+          boxShadow="7"
+          borderRadius="1.5rem"
+          minHeight="200px"
+          bgcolor={mode === "light" ? "" : "#4f4e4c"}
+        >
+          <Typography variant="h6" marginTop="1rem">
             {leaveTypeMap.get(data ? data?.leaveTypeId : "")}
           </Typography>
           <Typography variant="h2" color="#3e019b" style={{ marginTop: 25 }}>
@@ -134,8 +198,14 @@ const ApplyLeave = () => {
         </Box>
       ))
     : leaveIcon.map((leave, index) => (
-        <Box key={index} boxShadow="7" borderRadius="1.5rem" minHeight="200px">
-          <Typography fontSize="1.2rem" fontWeight="600" marginTop="1rem">
+        <Box
+          key={index}
+          boxShadow="7"
+          borderRadius="1.5rem"
+          minHeight="200px"
+          bgcolor={mode === "light" ? "" : "#4f4e4c"}
+        >
+          <Typography variant="h6" marginTop="1rem">
             {leave.leaveType}
           </Typography>
           <Typography variant="h2" color="#3e019b" style={{ marginTop: 25 }}>
@@ -157,7 +227,7 @@ const ApplyLeave = () => {
 
   return (
     <Box sx={{ flexGrow: 1 }} paddingBottom="2rem">
-      <h2>Taken Leave</h2>
+      <Typography variant="h4">Taken Leave</Typography>
       <Carousel
         showThumbs={false}
         showArrows={false}

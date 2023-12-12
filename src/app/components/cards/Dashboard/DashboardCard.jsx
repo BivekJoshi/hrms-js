@@ -1,10 +1,17 @@
 import React, { useContext } from "react";
-import { Box, Grid, Stack, Typography } from "@mui/material";
+import { Box, Divider, Grid, Stack, Typography } from "@mui/material";
 import MainCard from "../MainCard";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
 import { useNavigate } from "react-router-dom";
 
-const DashboardCard = ({ title, icon, count, linkTo }) => {
+const DashboardCard = ({
+  title,
+  icon,
+  count,
+  linkTo,
+  borderLeft,
+  borderColor,
+}) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -14,50 +21,53 @@ const DashboardCard = ({ title, icon, count, linkTo }) => {
   const { mode } = useContext(ThemeModeContext);
 
   return (
-    <Grid
-      item
-      xs={12}
-      sm={6}
-      md={3}
-      lg={2}
+    <Stack
+      flexDirection="row"
+      justifyContent="space-between"
+      alignItems="center"
+      Width="232px"
+      Height="80px"
+      borderRadius="0px 8px 8px 0px"
+      borderLeft={`6px solid ${borderColor}`}
+      padding="8px 20px 8px 20px"
+      boxShadow={7}
       onClick={handleClick}
-      style={{ flex: 1, width: "100%" }}
-      borderRadius="10px"
     >
-      <MainCard grow={true}>
-        <Stack
-          spacing={0.5}
-          padding="1rem"
-          flexDirection="row"
-          justifyContent="space-between"
-          alignItems="center"
-          bgcolor={mode === "light" ? "white" : "#3f413f"}
-          borderRadius="10px"
+      <Grid>
+        <Typography
+          align="center"
+          color={mode === "light" ? `${borderColor}` : "white"}
+          fontSize="14px"
+          fontWeight={"500"}
+          Lineheight="20px"
         >
-          <Typography
-            variant="h4"
-            sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
-            align="center"
-          >
-            {icon}
-          </Typography>
-          <Box>
-            <Typography
-              variant="h6"
-              // color="black"
-              align="center"
-              fontWeight={600}
-              color={mode === "light" ? "" : "white"}
-            >
-              {count}
-            </Typography>
-            <Typography align="center" color={mode === "light" ? "" : "white"}>
-              {title}
-            </Typography>
-          </Box>
-        </Stack>
-      </MainCard>
-    </Grid>
+          {title}
+        </Typography>
+        <Divider
+          sx={{
+            border: `1px solid ${borderColor}`,
+            height: "3px",
+            width:"42px",
+            background: ` ${borderColor}`,
+          }}
+        />
+      </Grid>
+
+      <Divider orientation="vertical" flexItem />
+      <Stack
+      flexDirection="column">
+        <img src={icon} alt="" />
+        <Typography
+          variant="h7"
+          // color="black"
+          align="center"
+          fontWeight={500}
+          color={mode === "light" ? "" : "white"}
+        >
+          {count}
+        </Typography>
+      </Stack>
+    </Stack>
   );
 };
 

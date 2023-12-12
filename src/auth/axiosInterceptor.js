@@ -27,10 +27,6 @@ axiosInstance.interceptors.response.use(
   function (error) {
     if (error.response) {
       const errorMessage = error?.response?.data?.message;
-      console.log(
-        '🚀 ~ file: axiosInterceptor.js:29 ~ errorMessage:',
-        errorMessage
-      );
       if (
         errorMessage === 'invalid_or_missing_token' ||
         errorMessage === 'user_disabled'

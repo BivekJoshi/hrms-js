@@ -10,6 +10,7 @@ import ProjectEmpPage from "../app/pages/Project/ProjectEmployeeViewPage/Project
 import EditEmployee from "../app/pages/Employee/AddEmployee/EditEmployee";
 import ProfileDetail from "../app/pages/Auth/Profile/ProfileDetail";
 import { ProjectDashboard } from "../app/pages/Project/ProjectDashboard/ProjectDashboard";
+import HomeIcon from "@mui/icons-material/Home";
 
 const ResetPassword = Loadable(
   lazy(() => import("../app/pages/Auth/ResetPassword/ResetPassword"))
@@ -45,7 +46,7 @@ const Company = Loadable(lazy(() => import("../app/pages/Company/Company")));
 const employeeRoutes = [
   {
     path: "dashboard",
-    name: "Employee Dashboard",
+    // name: "Employee Dashboard",
     id: nanoid(),
     component: <EmployeeDashboard />,
   },
@@ -173,27 +174,61 @@ export default function BreadCrumbs() {
   const { mode } = useContext(ThemeModeContext);
   const location = useLocation();
   const currentPath = location.pathname;
-  const currentRoute = employeeRoutes.find(
-    (route) => "/employee/" + route?.path === currentPath
-  );
-
+  const findRoute = (path) => employeeRoutes.find((route) => route.path === path);
+  const breadcrumbPath = currentPath.slice(10);
+  const pathSegments = breadcrumbPath.split("/").filter(Boolean);
   return (
     <>
-      {currentRoute &&
-        (currentRoute.path === "dashboard" ? (
-          <Typography color="text.primary">{currentRoute?.name}</Typography>
-        ) : (
-          <Breadcrumbs>
+    {pathSegments.length > 0 && (
+      <Breadcrumbs>
+        <Link
+          underline="hover"
+          style={{ color: mode === "light" ? "inherit" : "white" }}
+          to="/"
+        >
+          <HomeIcon
+            sx={{
+              width: "2rem",
+              "&:hover": {
+                color: "#6dab23",
+              },
+            }}
+          />{" "}
+        </Link>
+        {pathSegments.map((segment, index) => {
+          const partialPath = `/${pathSegments
+            .slice(0, index + 1)
+            .join("/")}`;
+          const route = findRoute(partialPath);
+          return (
             <Link
+              key={index}
               underline="hover"
               style={{ color: mode === "light" ? "inherit" : "white" }}
-              to="/employee/dashboard"
+              to={`/employee${partialPath}`}
             >
-              Dashboard
+              <Typography
+                key={index}
+                color="text.primary"
+                textTransform="capitalize"
+                padding="5px"
+                sx={{
+                  "&:hover": {
+                    bgcolor: "#6DAB2345",
+                    padding: "5px",
+                    textDecoration: "underline",
+                    borderRadius: "5px",
+                    color:"#6dab23"
+                  },
+                }}
+              >
+                {route ? route.name : segment}
+              </Typography>
             </Link>
-            <Typography color="text.primary">{currentRoute?.name}</Typography>
-          </Breadcrumbs>
-        ))}
-    </>
+          );
+        })}
+      </Breadcrumbs>
+    )}
+  </>
   );
 }

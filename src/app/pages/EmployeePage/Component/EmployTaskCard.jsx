@@ -1,38 +1,72 @@
-import { Box, Chip, Stack, Typography } from "@mui/material";
-import React from "react";
-import BallotIcon from "@mui/icons-material/Ballot";
+import React, { useContext } from "react";
+import { Box, Divider, Grid, Stack, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import ThemeModeContext from "../../../../theme/ThemeModeContext";
 
-export const EmployTaskCard = ({ numberOfTask, nameOfTask, taskIcon }) => {
+const EmployTaskCard = ({
+  title,
+  taskIcon,
+  numberOfTask,
+  linkTo,
+  borderColor,
+}) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(linkTo);
+  };
+
+  const { mode } = useContext(ThemeModeContext);
+
   return (
-    <Box
-      // border="1px solid black"
-      borderRadius="2rem"
-      boxShadow="7"
-      textAlign="center"
-      padding="1rem"
+    <Stack
+      flexDirection="row"
+      justifyContent="space-between"
+      alignItems="center"
+      Width="232px"
+      Height="80px"
+      borderRadius="0px 8px 8px 0px"
+      borderLeft={`6px solid ${borderColor}`}
+      padding="8px 20px 8px 20px"
+      boxShadow={7}
+      onClick={handleClick}
     >
+      <Grid>
+        <Typography
+          align="center"
+          color={mode === "light" ? `${borderColor}` : "white"}
+          fontSize="14px"
+          fontWeight={"500"}
+          Lineheight="20px"
+        >
+          {title}
+        </Typography>
+        <Divider
+          sx={{
+            border: `1px solid ${borderColor}`,
+            height: "3px",
+            width:"42px",
+            background: ` ${borderColor}`,
+          }}
+        />
+      </Grid>
+
+      <Divider orientation="vertical" flexItem />
       <Stack
-        flexDirection="row"
-        justifyContent="center"
-        alignItems="center"
-        gap="1rem"
-      >
-        {taskIcon}
-        <Typography fontSize="1rem" fontWeight="600">
-          {nameOfTask}
+      flexDirection="column">
+        <img src={taskIcon} alt="" />
+        <Typography
+          variant="h7"
+          // color="black"
+          align="center"
+          fontWeight={500}
+          color={mode === "light" ? "" : "white"}
+        >
+          {numberOfTask}
         </Typography>
       </Stack>
-      <Chip
-        sx={{
-          borderRadius: "2rem",
-          border: "5px solid black",
-          fontSize: "1.5rem",
-          padding: "19px 0",
-          marginTop: ".5rem",
-        }}
-        label={numberOfTask}
-        variant="outlined"
-      />
-    </Box>
+    </Stack>
   );
 };
+
+export default EmployTaskCard;

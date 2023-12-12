@@ -114,7 +114,7 @@ export default function EmployeeSidebar() {
       path: 'applyleave',
       icon: (
         <ApprovalOutlinedIcon
-          sx={mode === 'light' ? { color: '#01579b' } : { color: 'white' }}
+          sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
         />
       ),
       subMenus: [],
@@ -317,13 +317,13 @@ export default function EmployeeSidebar() {
           >
             Logout
           </Button>
-          <Typography
-            variant='body2'
-            sx={{ marginRight: '8px', marginTop: '1rem' }}
+          {/* <Typography
+            variant="body2"
+            sx={{ marginRight: "8px", marginTop: "1rem" }}
           >
-            {mode === 'light' ? 'Dark' : 'Light'} Mode
-            <Switch checked={mode === 'dark'} onChange={toggleMode} />
-          </Typography>
+            {mode === "light" ? "Dark" : "Light"} Mode
+            <Switch checked={mode === "dark"} onChange={toggleMode} />
+          </Typography> */}
         </Box>
       </Drawer>
 
@@ -349,19 +349,7 @@ export default function EmployeeSidebar() {
             gap='1rem'
             alignItems='center'
           >
-            {location.pathname !== '/employee/dashboard' && (
-              <Fab
-                color='primary'
-                sx={{ height: 'auto', padding: '.3rem 0' }}
-                aria-label='add'
-                variant='extended'
-                onClick={() => {
-                  navigate(-1);
-                }}
-              >
-                <ArrowBackIcon />
-              </Fab>
-            )}
+          
             <BreadCrumbs />
           </Box>
           <div style={{ minHeight: '90vh' }}>
