@@ -4,21 +4,19 @@ import { Box } from '@mui/material';
 import ThemeModeContext from '../../../theme/ThemeModeContext';
 
 const BarChatDiagram = ({ dashboardData }) => {
-  const { mode } = useContext(ThemeModeContext);
+  const { mode, palette } = useContext(ThemeModeContext);
 
   const names = [
     'All Employees',
     'New Employees',
     'Male Employees',
     'Female Employees',
-    'All Projects',
   ];
   const Data = [
     `${dashboardData?.allEmployees}`,
     `${dashboardData?.newEmployees}`,
     `${dashboardData?.maleEmployees}`,
     `${dashboardData?.femaleEmployees}`,
-    `${dashboardData?.allProjects}`,
   ];
   const barColors = palette.secondary.main;
   const chartOptions = {

@@ -349,19 +349,7 @@ export default function EmployeeSidebar() {
             gap='1rem'
             alignItems='center'
           >
-            {location.pathname !== '/employee/dashboard' && (
-              <Fab
-                color='primary'
-                sx={{ height: 'auto', padding: '.3rem 0' }}
-                aria-label='add'
-                variant='extended'
-                onClick={() => {
-                  navigate(-1);
-                }}
-              >
-                <ArrowBackIcon />
-              </Fab>
-            )}
+          
             <BreadCrumbs />
           </Box>
           <Outlet />

@@ -27,7 +27,7 @@ import Holiday from "../../../assets/holiday.png";
 import Project from "../../../assets/project.png";
 
 const Dashboard = () => {
-  const { mode } = useContext(ThemeModeContext);
+  const { mode,  palette } = useContext(ThemeModeContext);
   const { data: dashboardData } = useGetDashboard();
   const { data: projectDataCount } = useGetProjectCount();
   const { data: projectData } = useGetProject();
