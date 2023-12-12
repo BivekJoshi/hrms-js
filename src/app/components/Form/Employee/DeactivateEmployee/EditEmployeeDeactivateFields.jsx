@@ -12,7 +12,7 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
   const { data: employeeData } = useGetEmployee();
   const { formik } = useRemoveDeactiveEmployeeForm(data, onClose);
 
-  const handleFormSubmit = () => {    
+  const handleFormSubmit = () => {  
     if (formik.isValid) {
       formik.handleSubmit();
     }
@@ -27,7 +27,6 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
       const { firstName, middleName, lastName } = employee;
       return `${firstName} ${middleName || ''} ${lastName || ''}`.trim();
     }
-
     return employeeId;
   };
 
