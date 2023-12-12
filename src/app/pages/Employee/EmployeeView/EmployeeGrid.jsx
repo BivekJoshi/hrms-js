@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useGetEmployee } from '../../../hooks/employee/useEmployee';
 import EmployeeGridView from './EmployeePage/EmployeeGridView';
 import {
@@ -10,17 +10,16 @@ import {
   Card,
   Typography,
   Skeleton,
+  Tooltip,
 } from '@mui/material';
-import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
+import ThemeModeContext from '../../../../theme/ThemeModeContext';
 
 const EmployeeGrid = () => {
   const { data: employeeData, isLoading } = useGetEmployee();
   const [nameFilter, setNameFilter] = useState('');
   const [positionFilter, setPositionFilter] = useState('');
   const [phoneFilter, setPhoneFilter] = useState('');
-
-  const [isContainerVisible, setIsContainerVisible] = useState(false);
-
+  const { palette } = useContext(ThemeModeContext);
   const filteredEmployees = employeeData?.filter(
     (employee) =>
       `${employee.firstName} ${employee.lastName}`
@@ -32,10 +31,6 @@ const EmployeeGrid = () => {
       employee?.mobileNumber.toString().includes(phoneFilter)
   );
 
-  const handleFilterIconClick = () => {
-    setIsContainerVisible(!isContainerVisible);
-  };
-
   if (isLoading) {
     return (
       <Skeleton sx={{ height: 190 }} animation='wave' variant='rectangular' />
@@ -43,47 +38,49 @@ const EmployeeGrid = () => {
   }
   return (
     <>
-      <Stack sx={{ display: 'flex', flexDirection: 'row-reverse' }}>
-        <FilterAltOutlinedIcon
-          onClick={handleFilterIconClick}
-          style={{ fontSize: '32px' }}
-        />
-        {isContainerVisible && (
-          <Container maxWidth='100vh'>
-            <Card sx={{ padding: 1 }}>
-              <Typography variant='h6' gutterBottom>
-                Search Employee
-              </Typography>
-              <Grid container spacing={3}>
-                <Grid item xs={12} sm={12} md={4}>
-                  <TextField
-                    label='Filter by Name'
-                    value={nameFilter}
-                    onChange={(e) => setNameFilter(e.target.value)}
-                    fullWidth
-                  />
-                </Grid>
-                <Grid item xs={12} sm={12} md={4}>
-                  <TextField
-                    label='Filter by Position'
-                    value={positionFilter}
-                    onChange={(e) => setPositionFilter(e.target.value)}
-                    fullWidth
-                  />
-                </Grid>
-                <Grid item xs={12} sm={12} md={4}>
-                  <TextField
-                    label='Filter by Phone Number'
-                    value={phoneFilter}
-                    onChange={(e) => setPhoneFilter(e.target.value)}
-                    fullWidth
-                  />
-                </Grid>
-              </Grid>
-            </Card>
-          </Container>
-        )}
-      </Stack>
+      <Grid
+        container
+        sx={{
+          display: 'flex',
+          padding: '16px',
+          borderRadius: '6px',
+          marginBottom: '16px',
+          backgroundColor: palette?.background?.default,
+        }}
+      >
+        <Typography variant='h7' fontWeight={500}>
+          Filter By:
+        </Typography>
+        <Grid container spacing={4}>
+          <Grid item xs={4}>
+            {' '}
+            <TextField
+              label='Filter by Name'
+              value={nameFilter}
+              onChange={(e) => setNameFilter(e.target.value)}
+              fullWidth
+            />
+          </Grid>
+          <Grid item xs={4}>
+            {' '}
+            <TextField
+              label='Filter by Position'
+              value={positionFilter}
+              onChange={(e) => setPositionFilter(e.target.value)}
+              fullWidth
+            />
+          </Grid>
+          <Grid item xs={4}>
+            {' '}
+            <TextField
+              label='Filter by Phone Number'
+              value={phoneFilter}
+              onChange={(e) => setPhoneFilter(e.target.value)}
+              fullWidth
+            />
+          </Grid>
+        </Grid>
+      </Grid>
 
       <EmployeeGridView
         employeeData={filteredEmployees}

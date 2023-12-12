@@ -1,5 +1,5 @@
-import { Grid, Button, TextField, MenuItem, Typography } from "@mui/material";
-import React from "react";
+import { Grid, Button, TextField, MenuItem, Typography } from '@mui/material';
+import React from 'react';
 import {
   useAddActiveEmployeeForm,
   useRemoveDeactiveEmployeeForm,
@@ -12,10 +12,8 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
   const { data: employeeData } = useGetEmployee();
   const { formik } = useRemoveDeactiveEmployeeForm(data, onClose);
 
-  const handleFormSubmit = () => {  
-    if (formik.isValid) {
-      formik.handleSubmit();
-    }
+  const handleFormSubmit = () => {
+    formik.handleSubmit();
   };
 
   const getEmployeeName = (employeeId) => {

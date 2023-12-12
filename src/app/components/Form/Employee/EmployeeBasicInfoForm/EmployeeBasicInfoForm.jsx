@@ -66,8 +66,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           error={formik.touched.firstName && Boolean(formik.errors.firstName)}
           helperText={formik.touched.firstName && formik.errors.firstName}
           variant='outlined'
-          
-          InputLabelProps={{ shrink: true }}
+          autoFocus
         />
       </Grid>
       <Grid item xs={12} sm={6} md={4}>
@@ -82,8 +81,6 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           error={formik.touched.middleName && Boolean(formik.errors.middleName)}
           helperText={formik.touched.middleName && formik.errors.middleName}
           variant='outlined'
-          
-          InputLabelProps={{ shrink: true }}
         />
       </Grid>
       <Grid item xs={12} sm={6} md={4}>
@@ -99,8 +96,6 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           error={formik.touched.lastName && Boolean(formik.errors.lastName)}
           helperText={formik.touched.lastName && formik.errors.lastName}
           variant='outlined'
-          
-          InputLabelProps={{ shrink: true }}
         />
       </Grid>
       <Grid item xs={12} sm={6} md={4}>
@@ -118,7 +113,6 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           helperText={formik.touched.gender && formik.errors.gender}
           variant='outlined'
           onBlur={formik.handleBlur}
-          InputLabelProps={{ shrink: true }}
         >
           {genderOptions?.map((option) => (
             <MenuItem
@@ -145,9 +139,6 @@ const EmployeeBasicInfoForm = ({ formik }) => {
             formik.touched.dateOfBirth && Boolean(formik.errors.dateOfBirth)
           }
           helperText={formik.touched.dateOfBirth && formik.errors.dateOfBirth}
-          inputProps={{
-            max: minAge,
-          }}
         />
       </Grid>
       <Grid item xs={12} sm={6} md={4}>
@@ -156,15 +147,12 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           label='Date of Join'
           type='date'
           required
-          InputLabelProps={{ shrink: true }}
           fullWidth
+          InputLabelProps={{ shrink: true }}
           value={formik.values.dateOfJoin}
           onChange={formik.handleChange}
           error={formik.touched.dateOfJoin && Boolean(formik.errors.dateOfJoin)}
           helperText={formik.touched.dateOfJoin && formik.errors.dateOfJoin}
-          inputProps={{
-            max: today,
-          }}
         />
       </Grid>
       <Grid item xs={12} sm={6} md={4}>
@@ -182,8 +170,6 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           }
           helperText={formik.touched.mobileNumber && formik.errors.mobileNumber}
           variant='outlined'
-          
-          InputLabelProps={{ shrink: true }}
         />
       </Grid>
       <Grid item xs={12} sm={6} md={4}>
@@ -204,8 +190,6 @@ const EmployeeBasicInfoForm = ({ formik }) => {
             formik.touched.citizenshipNumber && formik.errors.citizenshipNumber
           }
           variant='outlined'
-          
-          InputLabelProps={{ shrink: true }}
         />
       </Grid>
       <Grid item xs={12} sm={6} md={4}>
@@ -220,8 +204,6 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           error={formik.touched.panNumber && Boolean(formik.errors.panNumber)}
           helperText={formik.touched.panNumber && formik.errors.panNumber}
           variant='outlined'
-          
-          InputLabelProps={{ shrink: true }}
         />
       </Grid>
       <Grid item xs={12} sm={6} md={4}>
@@ -239,8 +221,6 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           }
           helperText={formik.touched.officeEmail && formik.errors.officeEmail}
           variant='outlined'
-          
-          InputLabelProps={{ shrink: true }}
         />
       </Grid>
       <Grid item xs={12} sm={6} md={4}>
@@ -261,8 +241,6 @@ const EmployeeBasicInfoForm = ({ formik }) => {
             formik.touched.maritalStatus && formik.errors.maritalStatus
           }
           variant='outlined'
-          
-          InputLabelProps={{ shrink: true }}
         >
           {maritalStatus.map((option) => (
             <MenuItem
@@ -289,8 +267,6 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           error={formik.touched.companyId && Boolean(formik.errors.companyId)}
           helperText={formik.touched.companyId && formik.errors.companyId}
           variant='outlined'
-          
-          InputLabelProps={{ shrink: true }}
         >
           {!loadingCompany &&
             companyData.map((option) => (
@@ -318,8 +294,6 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           error={formik.touched.positionId && Boolean(formik.errors.positionId)}
           helperText={formik.touched.positionId && formik.errors.positionId}
           variant='outlined'
-          
-          InputLabelProps={{ shrink: true }}
         >
           {!loadingDesignation &&
             designationData.map((option) => (
@@ -354,9 +328,8 @@ const EmployeeBasicInfoForm = ({ formik }) => {
                   formik.touched.positionId && formik.errors.positionId
                 }
                 variant="outlined"
-                
-                InputLabelProps={{ shrink: true }}
-              />
+              
+                    />
             )}
           /> */}
       </Grid>
@@ -376,8 +349,6 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           }
           helperText={formik.touched.departmentId && formik.errors.departmentId}
           variant='outlined'
-          
-          InputLabelProps={{ shrink: true }}
         >
           {!loadingDepartment &&
             departmentData.map((option) => (

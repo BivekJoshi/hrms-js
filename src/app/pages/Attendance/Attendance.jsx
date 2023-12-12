@@ -178,6 +178,7 @@ const Attendance = () => {
           component='form'
           noValidate
           autoComplete='on'
+          borderRadius='6px'
           padding='16px'
           bgcolor={palette?.background?.default}
         >

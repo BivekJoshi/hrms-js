@@ -1,10 +1,19 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { Box, Button, ButtonGroup, Modal } from '@mui/material';
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  Grid,
+  IconButton,
+  Modal,
+  Typography,
+} from '@mui/material';
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
+import CloseIcon from '@mui/icons-material/Close';
 
 import EmployeeTable from './EmployeeView/EmployeeTable';
 import EmployeeBasicInfoForm from '../../components/Form/Employee/EmployeeBasicInfoForm/EmployeeBasicInfoForm';
@@ -105,6 +114,29 @@ const Employee = () => {
       >
         <div>
           <Box sx={style}>
+            <Grid
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                marginBottom: '1rem',
+                position: 'relative',
+              }}
+            >
+              <Typography variant='h6'>Add Employee</Typography>
+              <div
+                style={{
+                  width: '100%',
+                  height: '1px',
+                  backgroundColor: '#e0e0e0',
+                  position: 'absolute',
+                  bottom: '0',
+                }}
+              />
+              <IconButton onClick={() => setOpenAddModal(false)}>
+                <CloseIcon />
+              </IconButton>
+            </Grid>
             <EmployeeBasicInfoForm formik={formik} />
             <Box
               sx={{ display: 'flex', justifyContent: 'flex-end', gap: '1rem' }}
