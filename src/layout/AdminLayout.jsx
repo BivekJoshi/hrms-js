@@ -4,7 +4,7 @@ import AdminSidebar from '../app/components/SideBar/AdminSideBar';
 
 const AdminLayout = () => {
   return (
-    <Box minHeight="100vh">
+    <Box minHeight='100vh'>
       <AdminSidebar />
     </Box>
   );

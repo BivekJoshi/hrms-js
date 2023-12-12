@@ -182,6 +182,7 @@ const Project = ({ permissions }) => {
 
       {openAddModal && (
         <AddProjectModal
+          title={"Add Project"}
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
         />

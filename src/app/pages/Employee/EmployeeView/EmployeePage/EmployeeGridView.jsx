@@ -4,7 +4,6 @@ import EmployeeCard from '../../../../components/cards/Employee/EmployeeCard';
 import { useGetEmployeeData } from '../../../../hooks/employee/useEmployee';
 
 const EmployeeGridView = ({ employeeData, isLoading }) => {
-  
   const [currentPage, setCurrentPage] = useState(1);
   const pageNumber = 12;
   const { data: employeePageData } = useGetEmployeeData(pageNumber);

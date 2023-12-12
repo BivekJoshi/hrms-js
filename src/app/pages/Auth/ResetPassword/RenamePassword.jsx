@@ -17,7 +17,6 @@ import LockPersonIcon from "@mui/icons-material/LockPerson";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { LoadingButton } from "@mui/lab";
 import useAddRenamePasswordForm from "../../../hooks/auth/resetPassword/useAddRenamePasswordForm";
-import { toast } from "react-toastify";
 import { useLocation, useNavigate } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import InitialPage from "../InitialPage/InitialPage";
@@ -82,11 +81,7 @@ const RenamePassword = ({ isLoading }) => {
     if (isValid) {
       if (formik.values.password === formik.values.confirmPassword) {
         formik.handleSubmit();
-      } else {
-        toast.error("New password and confirm password does not match!");
       }
-    } else {
-      toast.error("Please make sure you have filled the form correctly!");
     }
   };
 

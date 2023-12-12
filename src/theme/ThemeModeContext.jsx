@@ -25,7 +25,7 @@ const getPalette = (darkMode) => {
       dark: darkMode ? '#cd7539' : '#cd7539',
     },
     secondary: {
-      main: darkMode ? '#418fdd' : '#75baf0',
+      main: darkMode ? '#236dab' : '#236dab',
       light: darkMode ? '#75baf0' : '#418fdd',
       dark: darkMode ? '#336cb8' : '#336cb8',
     },

@@ -1,26 +1,17 @@
-import React, { useState, useRef, useContext } from 'react';
-import {
-  Button,
-  Box,
-  Popper,
-  Grow,
-  Paper,
-  MenuItem,
-  Badge,
-  IconButton,
-  Tooltip,
-} from '@mui/material';
-import { ClickAwayListener, MenuList, Typography } from '@mui/material';
-import CakeIcon from '@mui/icons-material/Cake';
+import React, { useState, useRef, useContext } from "react";
+import { Button, Box, Popper, Grow, Paper, MenuItem, Badge, IconButton, Tooltip, ClickAwayListener, MenuList, Typography } from "@mui/material";
+import CakeIcon from "@mui/icons-material/Cake";
+import "../Style/Style.css";
+import ThemeModeContext from "../../../theme/ThemeModeContext";
+import { useNavigate } from "react-router-dom";
 import '../Style/Style.css';
-import ThemeModeContext from '../../../theme/ThemeModeContext';
 
 const TodayBirthday = ({ data }) => {
   const birthdayEmployeeName = data?.birthdayEmployees;
   const birthdayEmployeeCount = data?.birthdayEmployeeCount || 0;
   const displayCount = birthdayEmployeeCount > 0 ? birthdayEmployeeCount : null;
   const { mode } = useContext(ThemeModeContext);
-
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
 
@@ -28,13 +19,19 @@ const TodayBirthday = ({ data }) => {
     setOpen((prevOpen) => !prevOpen);
   };
 
+  const employeeId =
+    birthdayEmployeeName && birthdayEmployeeName.map((name) => name?.id);
+ 
   const handleClose = (event) => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
     }
-
     setOpen(false);
   };
+  const handleClick = (bname) => {
+    navigate(`/admin/employee/${bname?.id}`);
+    setOpen(false);
+  }
 
   function handleListKeyDown(event) {
     if (event.key === 'Tab') {
@@ -112,7 +109,7 @@ const TodayBirthday = ({ data }) => {
                       birthdayEmployeeName.map((bname, index) => (
                         <MenuItem
                           key={index}
-                          onClick={handleClose}
+                          onClick={() => handleClick(bname)}
                           sx={{ justifyContent: 'center' }}
                         >
                           {bname.fullName}

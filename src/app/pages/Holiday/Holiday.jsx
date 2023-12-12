@@ -51,8 +51,6 @@ const Holiday = ({ permissions }) => {
   const handleFormSubmit = async () => {
     formik.handleSubmit();
     if (!formik.isValidating && formik.isValid) {
-    } else {
-      toast.error("Please make sure you have filled the form correctly");
     }
   };
   const handleOpenModal = (e) => {
@@ -71,7 +69,7 @@ const Holiday = ({ permissions }) => {
         <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
           <HocButton
             permissions={permissions}
-            color={"primary"}
+            color={"#fff"}
             variant={"contained"}
             onClick={() => setOpenAddModal(true)}
             buttonName={"+ Add Holiday"}
@@ -82,6 +80,7 @@ const Holiday = ({ permissions }) => {
 
       {openAddModal && (
         <FormModal
+        title={"Add Holiday"}
           open={openAddModal}
           onClose={() => setOpenAddModal(false)}
           formComponent={
@@ -97,7 +96,7 @@ const Holiday = ({ permissions }) => {
                 <Button
                   variant="contained"
                   onClick={handleFormSubmit}
-                  sx={{ mt: 3, ml: 1 }}
+                  sx={{ mt: 3, ml: 1, color: "#fff" }}
                 >
                   Add Holiday
                 </Button>
@@ -194,6 +193,7 @@ const Holiday = ({ permissions }) => {
 
       {openModal && (
         <OpenHoliday
+          title={"Edit Holiday"}
           id={getEventID}
           open={openModal}
           handleCloseModal={() => setOpenModal(false)}

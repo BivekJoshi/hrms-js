@@ -11,7 +11,6 @@ import { DOC_URL } from "../../../../../auth/axiosInterceptor";
 import { documentType } from "./documentType";
 import { useAddDocumentForm } from "../../../../hooks/employee/AddDocument/useAddDocumentForm";
 import { EditDocumentModal } from "./EditDocumentModal";
-import { toast } from "react-toastify";
 
 const EmployeeDocumentDetailForm = () => {
   const { id } = useParams();
@@ -37,8 +36,6 @@ const EmployeeDocumentDetailForm = () => {
     if (document) {
       formik.setFieldValue("documentType", documentType);
       formik.handleSubmit(documentType);
-    } else {
-      toast.warning("Please select a document to upload");
     }
   };
 

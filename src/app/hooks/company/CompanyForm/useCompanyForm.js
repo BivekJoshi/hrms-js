@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 import { useAddCompany, useEditCompany } from "../useCompany";
 import { CompanySchema } from "../Validation/CompanySchema";
 
-const useCompanyForm = (data) => {
+const useCompanyForm = (data, onClose) => {
   const { mutate: addCompany } = useAddCompany({});
   const { mutate: editCompany } = useEditCompany({});
 
@@ -26,12 +26,21 @@ const useCompanyForm = (data) => {
 
   const handleRequest = (values) => {
     values = { ...values };
-    addCompany(values, formik);
+    addCompany(values, {
+      onSuccess: () => {
+        onClose();
+        formik.resetForm();
+      },
+    });
   };
 
   const handledEditRequest = (values) => {
     values = { ...values };
-    editCompany(values, formik);
+    editCompany(values, {
+      onSuccess: () => {
+        onClose();
+      },
+    });
   };
   return { formik };
 };

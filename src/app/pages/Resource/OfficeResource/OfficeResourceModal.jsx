@@ -4,10 +4,11 @@ import OfficeResourceFields from "../../../components/Form/Resource/OfficeResour
 import { useGetOfficeResourceById } from "../../../hooks/resource/officeResource/useOfficeResource";
 import EditOfficeResourceActivationFields from "../../../components/Form/Resource/OfficeResource/EditOfficeResourceActivationFields";
 
-export const AddOfficeResourceModal = ({ open, handleCloseModal }) => {
+export const AddOfficeResourceModal = ({ open, handleCloseModal, title }) => {
   return (
     <div>
       <FormModal
+        title={title}
         open={open}
         onClose={handleCloseModal}
         formComponent={<OfficeResourceFields onClose={handleCloseModal} />}
@@ -16,7 +17,11 @@ export const AddOfficeResourceModal = ({ open, handleCloseModal }) => {
   );
 };
 
-export const EditOfficeResourceModal = ({ open, handleCloseModal, id }) => {
+export const EditOfficeResourceModal = ({
+  open,
+  handleCloseModal,
+  id,
+}) => {
   const { data } = useGetOfficeResourceById(id);
   return (
     <div>
@@ -31,7 +36,11 @@ export const EditOfficeResourceModal = ({ open, handleCloseModal, id }) => {
   );
 };
 
-export const OfficeResourceLogisticsModal = ({ open, handleCloseModal, id }) => {
+export const OfficeResourceLogisticsModal = ({
+  open,
+  handleCloseModal,
+  id,
+}) => {
   return (
     <div>
       <FormModal

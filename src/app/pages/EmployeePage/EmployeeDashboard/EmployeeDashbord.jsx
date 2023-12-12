@@ -6,15 +6,10 @@ import { LeftEmployDashbord } from "./LeftEmployDashbord";
 import { RightEmployDashbord } from "./RightEmployDashbord";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
 import { useGetLoggedInUser } from "../../../hooks/auth/usePassword";
-import { EmployPichart } from "../Component/EmployPichart";
 import { MiddleEmployDashbord } from "./MiddleEmployDashbord";
 import { useGetTaskLoggedInUser } from "../../../hooks/project/ProjectTask/useProjectTask";
 import { useGetProjectWiseEmployee } from "../../../hooks/project/useProject";
 import { DOC_URL } from "../../../../auth/axiosInterceptor";
-import TaskIcon from "@mui/icons-material/Task";
-import AccountTreeIcon from "@mui/icons-material/AccountTree";
-import PendingIcon from "@mui/icons-material/Pending";
-import BallotIcon from "@mui/icons-material/Ballot";
 import Project from "../../../../assets/eproject.png";
 import Task from "../../../../assets/etask.png";
 import Pending from "../../../../assets/pending.png";
@@ -86,7 +81,7 @@ const EmployeeDashbord = ({}) => {
     <Box display="grid" gridTemplateRows="1fr" gap="1rem">
       <Box
         display="flex"
-        flexDirection="row"
+        justifyContent="space-between"
         padding="1rem"
         className={
           mode === "light" ? "employeeDeshbordBG" : "employeeDeshbordBGDark"
@@ -117,6 +112,7 @@ const EmployeeDashbord = ({}) => {
           </Typography>
         </Box>
       </Box>
+
       <Box
         display="grid"
         grid

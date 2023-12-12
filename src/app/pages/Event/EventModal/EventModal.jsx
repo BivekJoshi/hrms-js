@@ -5,11 +5,12 @@ import { useGetEventById } from "../../../hooks/event/useEvent";
 import EditEventFields from "../../../components/Form/Event/EditEventFields";
 
 
-export const OpenEvent = ({ open, handleCloseModal, id }) => {
+export const OpenEvent = ({ open, handleCloseModal, id, title }) => {
   const { data } = useGetEventById(id);
   return (
     <div>
       <FormModal
+      title={title}
         open={open}
         onClose={handleCloseModal}
         formComponent={

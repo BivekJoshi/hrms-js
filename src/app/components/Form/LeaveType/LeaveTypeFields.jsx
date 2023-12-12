@@ -6,7 +6,6 @@ import {
   MenuItem,
 } from "@mui/material";
 import React from "react";
-import { toast } from "react-toastify";
 import { ThemeSwitch } from "../../../../theme/ThemeSwitch";
 import useLeaveTypeForm from "../../../hooks/leaveType/LeaveTypeForm/useLeaveTypeForm";
 import { useContext } from "react";
@@ -56,23 +55,11 @@ const LEAVENAME = [
 ];
 
 const LeaveTypeFields = ({ onClose, isLoading, data, existingLeaveTypes }) => {
-  const { formik } = useLeaveTypeForm(data);
+  const { formik } = useLeaveTypeForm(data,onClose);
   const {mode} = useContext(ThemeModeContext);
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
-
-    if (formik.isValid) {
-      formik.resetForm({
-        leaveName: "",
-        leaveTotal: "",
-        leaveDescription: "",
-        isCarryForward: false,
-      });
-      onClose();
-    } else {
-      toast.error("Please make sure you have filled the form correctly");
-    }
   };
 
   const filteredLeaveNames = existingLeaveTypes

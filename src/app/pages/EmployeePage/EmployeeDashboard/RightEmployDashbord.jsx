@@ -13,9 +13,7 @@ import { PendingTask } from "../Component/PendingTask";
 export const RightEmployDashbord = ({ employData }) => {
   const navigate = useNavigate();
   const { data: leavebalance } = useGetLoggedInUserLeaveBalance();
-  const { data: resourceLogInUser } = uselogInEemployeeResource(
-    employData?.employeeId
-  );
+  const { data: resourceLogInUser } = uselogInEemployeeResource(employData?.employeeId);
   const { data: officeresource } = useGetOfficeResource();
 
   const getResourceName = (logistic) => {
@@ -24,6 +22,7 @@ export const RightEmployDashbord = ({ employData }) => {
     );
     return resourceName?.name;
   };
+  
   const sumOfLeaveTaken = Array.isArray(leavebalance)
     ? leavebalance?.reduce((accumulator, currentValue) => {
         return accumulator + currentValue?.leaveTaken;
@@ -81,7 +80,7 @@ export const RightEmployDashbord = ({ employData }) => {
             <ButtonComponent
               buttonName={"APPLY Leave"}
               OnClick={() => {
-                navigate("/employee/applyleave");
+                navigate("/employee/applyleavefield");
               }}
             />
           </Box>

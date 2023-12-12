@@ -82,13 +82,13 @@ const Leave = ({ isLoading }) => {
       title: 'SN',
       field: 'id',
       sortable: false,
-
+      width: '10px',
       sorting: false,
       render: (rowData) => rowData.tableData.id + 1,
     },
     {
       title: 'Employee Name',
-      width: '300px',
+      width: '100px',
       render: (rowData) => {
         return <p>{getEmployeeName(rowData)} </p>;
       },
@@ -100,6 +100,7 @@ const Leave = ({ isLoading }) => {
     },
     {
       title: 'Leave Type',
+      width: '100px',
       render: (rowData) => {
         return <p>{getLeaveTypeName(rowData)}</p>;
       },
@@ -112,14 +113,14 @@ const Leave = ({ isLoading }) => {
     {
       title: 'From',
       field: 'fromDate',
-
+      width: '60px',
       emptyValue: '-',
       sorting: false,
     },
     {
       title: 'To',
       field: 'toDate',
-
+      width: '60px',
       emptyValue: '-',
       sorting: false,
     },
@@ -127,7 +128,7 @@ const Leave = ({ isLoading }) => {
       title: 'Status',
       field: 'leaveStatus',
       emptyValue: '-',
-
+      width: '100px',
       cellStyle: {
         whiteSpace: 'nowrap',
       },
@@ -149,7 +150,7 @@ const Leave = ({ isLoading }) => {
             style={{
               backgroundColor: chipColor,
               color: 'white',
-              width: '5rem',
+              width: '6rem',
             }}
           />
         );
@@ -159,16 +160,16 @@ const Leave = ({ isLoading }) => {
     {
       title: 'Leave Reason',
       field: 'leaveReason',
-
+      width: '240px',
       emptyValue: '-',
       render: (rowData) => {
         return (
-          <Tooltip title={rowData?.leaveReason} placement='top-start' arrow>
+          <Tooltip title={<div style={{ maxHeight: '100px', overflowY: 'auto' }}>{rowData?.leaveReason}</div>} placement='top-start' arrow>
             <Chip
               style={{
                 cursor: 'pointer',
-                width: '170px',
-                height: '50px',
+                width: '240px',
+                // height: '40px',
                 display: 'block',
                 background: mode === 'light' ? 'white' : '#434343',
               }}
@@ -187,7 +188,7 @@ const Leave = ({ isLoading }) => {
     {
       title: 'Remark',
       field: 'leaveRemarks',
-
+      width: '240px',
       emptyValue: '-',
       render: (rowData) => {
         return (
@@ -195,8 +196,7 @@ const Leave = ({ isLoading }) => {
             <Chip
               style={{
                 cursor: 'pointer',
-                width: '170px',
-                height: '50px',
+                width: '240px',
                 display: 'block',
                 background: mode === 'light' ? 'white' : '#434343',
               }}
@@ -215,7 +215,7 @@ const Leave = ({ isLoading }) => {
 
     {
       title: 'Approved By',
-
+      width: '80px',
       render: (rowData) => {
         return <p>{getUserName(rowData)} </p>;
       },
@@ -227,6 +227,7 @@ const Leave = ({ isLoading }) => {
     },
     {
       title: 'Actions',
+      width: '10px',
       render: (rowData) => {
         const isApprovedOrRejected = ['APPROVED', 'REJECTED'].includes(
           rowData.leaveStatus
@@ -265,7 +266,7 @@ const Leave = ({ isLoading }) => {
         <ButtonComponent
           OnClick={handleAddOpenModal}
           Border='none'
-          color='white'
+          color={"#fff"}
           buttonName={'+ Add Leave'}
         />
       </Box>
@@ -282,12 +283,14 @@ const Leave = ({ isLoading }) => {
           id={editedLeave?.id}
           open={openEditModal}
           handleCloseModal={handleCloseEditModal}
+          title={"Edit Leave"}
         />
       )}
       {openAddModal && (
         <AddLeaveModal
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
+          title={"Apply Leave"}
         />
       )}
       {openDeleteModal && (

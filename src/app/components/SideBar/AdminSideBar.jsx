@@ -12,7 +12,7 @@ import { ListItemIcon } from '@mui/material';
 import { ListItemText, Collapse, IconButton } from '@mui/material/';
 import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
-import { Card, Fab, Switch, Typography } from '@mui/material';
+import { Card, Fab, Typography } from '@mui/material';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { ThemeModeContext } from '../../../theme/ThemeModeContext';
 import AdminHeader from '../Header/AdminHeader';
@@ -34,8 +34,9 @@ import HolidayVillageIcon from '@mui/icons-material/HolidayVillage';
 import LaptopIcon from '@mui/icons-material/Laptop';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { removeUser } from '../../utils/cookieHelper';
+import Footer from '../footer/Footer';
 
-const drawerWidth = 230;
+const drawerWidth = 260;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
@@ -45,13 +46,13 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    marginLeft: `-${drawerWidth}px`,
+    marginLeft: `-${drawerWidth + 24}px`,
     ...(open && {
       transition: theme.transitions.create('margin', {
         easing: theme.transitions.easing.easeOut,
         duration: theme.transitions.duration.enteringScreen,
       }),
-      marginLeft: 0,
+      marginLeft: '-24px',
     }),
   })
 );
@@ -79,7 +80,7 @@ export default function AdminSidebar() {
   const navigate = useNavigate();
   const location = useLocation();
   const [open, setOpen] = useState(false);
-  const { toggleMode, mode } = useContext(ThemeModeContext);
+  const { mode } = useContext(ThemeModeContext);
   const [subMenuOpen, setSubMenuOpen] = useState({});
   const { pathname } = useLocation();
 
@@ -349,39 +350,15 @@ export default function AdminSidebar() {
                 <Collapse in={subMenuOpen[index]} timeout='auto' unmountOnExit>
                   <List component='div' disablePadding>
                     {menu.subMenus.map((subMenu, subIndex) => (
-                      <StyledNavLink
-                        key={subIndex}
-                        to={subMenu.path}
-                        sx={
-                          mode === 'light'
-                            ? { color: 'black' }
-                            : { color: 'white' }
-                        }
-                      >
+                      <StyledNavLink key={subIndex} to={subMenu.path}>
                         <ListItemButton
                           sx={{
-                            pl: 2,
                             backgroundColor:
-                              mode === 'light' ? '#edffea' : '#413e3e',
+                              pathname.includes(subMenu.path) && '#ace8639e',
                           }}
                         >
-                          <ListItemIcon
-                            sx={
-                              mode === 'light'
-                                ? { color: 'black', minWidth: '40px' }
-                                : { color: 'white', minWidth: '40px' }
-                            }
-                          >
-                            {subMenu.icon}
-                          </ListItemIcon>
-                          <ListItemText
-                            primary={subMenu.name}
-                            sx={
-                              mode === 'light'
-                                ? { color: 'black' }
-                                : { color: 'white' }
-                            }
-                          />
+                          <ListItemIcon>{subMenu.icon}</ListItemIcon>
+                          <ListItemText primary={subMenu.name} />
                         </ListItemButton>
                       </StyledNavLink>
                     ))}
@@ -402,7 +379,7 @@ export default function AdminSidebar() {
           }}
         >
           <Button
-            variant='contained'v
+            variant='contained'
             sx={{ backgroundColor: '#6DAB23' }}
             onClick={() => {
               removeUser();
@@ -426,9 +403,10 @@ export default function AdminSidebar() {
         <br />
 
         <Card
-          variant='outlined'
+          variant='elevation'
           sx={{
             maxWidth: '100%',
+            marginLeft: '24px',
             padding: '20px',
             boxSizing: 'border-box',
             '@media (min-width: 600px)': {
@@ -460,6 +438,7 @@ export default function AdminSidebar() {
           </Box>
           <Outlet />
         </Card>
+        <Footer />
       </Main>
     </Box>
   );

@@ -47,7 +47,7 @@ export const LeftEmployDashbord = ({}) => {
             <Typography variant="h6">Event this month </Typography>
 
             <Box display="grid" gap="1rem">
-              {employAllNotiData?.slice(0, 3).map((notify, index) => (
+              {employAllNotiData && employAllNotiData?.slice(0, 3).map((notify, index) => (
                 <Box key={index}>
                   <Box
                     onClick={() => toggleDropdown(index)}
@@ -60,7 +60,7 @@ export const LeftEmployDashbord = ({}) => {
                     alignItems="center"
                     boxShadow={2}
                   >
-                    {notify.eventName}
+                    {notify?.eventName}
                     <Box>
                       {openItemIndex === index ? (
                         <KeyboardArrowUpIcon />
@@ -74,9 +74,9 @@ export const LeftEmployDashbord = ({}) => {
                       className="notification"
                       bgcolor={mode === "light" ? "#e7e2e2" : "#565454"}
                     >
-                      <Typography>At {notify.eventLocation}</Typography>
-                      <Typography>Time: {notify.eventTime}</Typography>
-                      <Typography>{notify.eventName}</Typography>
+                      <Typography>At {notify?.eventLocation}</Typography>
+                      <Typography>Time: {notify?.eventTime}</Typography>
+                      <Typography>{notify?.eventName}</Typography>
                     </Box>
                   )}
                 </Box>

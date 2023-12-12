@@ -1,7 +1,6 @@
 import { Grid, Button, TextField } from "@mui/material";
 import React from "react";
 import { useRemoveActiveProject, useAddActiveProject } from "../../../hooks/project/addProject/useAddProjectActiveForm";
-import { toast } from "react-toastify";
 import { useGetDeactivatedProject } from "../../../hooks/project/useProject";
 
 export const EditProjectDeactivateFields = ({ onClose, isLoading, data }) => {
@@ -16,8 +15,6 @@ export const EditProjectDeactivateFields = ({ onClose, isLoading, data }) => {
         projectId: true,
       });
       onClose();
-    } else {
-      toast.error("please fill all the required fields");
     }
   };
 
@@ -85,8 +82,6 @@ export const EditProjectActivateFields = ({ onClose, isLoading, data }) => {
         projectId: true,
       });
       onClose();
-    } else {
-      toast.error("please fill all the required fields");
     }
   };
 

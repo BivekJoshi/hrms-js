@@ -4,8 +4,8 @@ import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
-import Users from "./Users/Users";
 import Roles from "./Roles/Roles";
+import Users from "./Users/Users";
 import PermissionHoc from '../../../hoc/permissionHoc';
 
 const UserController = ({ permissions }) => {

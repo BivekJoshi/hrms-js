@@ -85,7 +85,6 @@ const Users = ({ permissions }) => {
   const [openAddModal, setOpenAddModal] = useState(false);
   const handleAddOpenModal = () => setOpenAddModal(true);
   const handleCloseAddModal = () => setOpenAddModal(false);
-
   const { data: userControlData, isLoading } = useGetUserControl();
 
   if (permissions?.canView) {
@@ -108,7 +107,7 @@ const Users = ({ permissions }) => {
             <Button
               type="button"
               variant="contained"
-              sx={{ maxWidth: "fit-content" }}
+              sx={{ maxWidth: "fit-content", color: "#fff" }}
               onClick={handleAddOpenModal}
             >
               + Add User
@@ -126,6 +125,7 @@ const Users = ({ permissions }) => {
 
         {openAddModal && (
           <AddUserControlModal
+          title={"Add User"}
             open={openAddModal}
             handleCloseModal={handleCloseAddModal}
           />

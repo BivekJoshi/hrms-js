@@ -311,6 +311,7 @@ const ProjectCard = ({
         </MainCard>
       {openEditModal && (
         <EditProjectModal
+        title={"Edit Project"}
           id={editedProject?.id}
           open={openEditModal}
           handleCloseModal={handleCloseEditModal}
@@ -318,6 +319,7 @@ const ProjectCard = ({
       )}
       {openDeactivateModal && (
         <DeactivateProjectModal
+        title={"Terminate Project"}
           id={deactivateProject?.id}
           open={openDeactivateModal}
           handleCloseModal={handleCloseDeactivateModal}

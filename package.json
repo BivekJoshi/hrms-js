@@ -6,7 +6,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "vite",
+    "dev": "vite  --host --port 5005",
     "build": "vite build",
     "preview": "vite preview",
     "host": "vite --host"
