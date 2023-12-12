@@ -39,7 +39,7 @@ const Login = () => {
       ) {
         navigate('/admin/dashboard');
       } else if (userRole === 'ROLE_EMPLOYEE') {
-        navigate('/employee/dashboard');
+        navigate('/employee/empdashboard');
       } else {
         navigate('/');
       }

@@ -40,18 +40,18 @@ const AppRoutes = () => {
               <Route element={<ProtectedRoute redirectTo="/" />}>
                 <Route path="/admin" element={<AdminLayout />}>
                   <Route
-                    element={
-                      <LoggedInRoutes
-                        redirectTo="/404"
-                        allowedRoles={[
-                          "ROLE_SUPER_ADMIN",
-                          "ROLE_ADMIN",
-                          "ROLE_MANAGER",
-                          "ROLE_HR_ADMIN",
-                          "ROLE_HR_CLERK",
-                        ]}
-                      />
-                    }
+                    // element={
+                    //   <LoggedInRoutes
+                    //     redirectTo="/404"
+                    //     allowedRoles={[
+                    //       "ROLE_SUPER_ADMIN",
+                    //       "ROLE_ADMIN",
+                    //       "ROLE_MANAGER",
+                    //       "ROLE_HR_ADMIN",
+                    //       "ROLE_HR_CLERK",
+                    //     ]}
+                    //   />
+                    // }
                   >
                     <Route exact index element={<Dashboard />} />
                     {adminRoutes.map((route) => (

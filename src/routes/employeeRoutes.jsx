@@ -25,32 +25,22 @@ const ApplyLeaveLayout = Loadable(
 const ApplyLeaveField = Loadable(
   lazy(() => import("../app/components/Form/Leave/ApplyLeave/ApplyLeaveField"))
 );
-const Designation = Loadable(
-  lazy(() => import("../app/pages/Designation/Designation"))
-);
-const Department = Loadable(
-  lazy(() => import("../app/pages/Department/Department"))
-);
-// const LeaveType = Loadable(
-//   lazy(() => import("../app/pages/LeaveType/LeaveType"))
-// );
 const Event = Loadable(lazy(() => import("../app/pages/Event/Event")));
 const Holiday = Loadable(lazy(() => import("../app/pages/Holiday/Holiday")));
 const Project = Loadable(
   lazy(() => import("../app/pages/Project/ProjectAdminViewPage/Project"))
 );
 const TodoList = Loadable(lazy(() => import("../app/pages/TodoList/TodoList")));
-const Company = Loadable(lazy(() => import("../app/pages/Company/Company")));
 
 const employeeRoutes = [
   {
-    path: "dashboard",
+    path: "empdashboard",
     name: "Employee Dashboard",
     id: nanoid(),
     component: <EmployeeDashboard />,
   },
   {
-    path: "project/dashboard",
+    path: "emp/project/dashboard",
     name: "Project Dashboard",
     id: nanoid(),
     component: <ProjectDashboard />,
@@ -62,7 +52,7 @@ const employeeRoutes = [
   //   component: <EmployeeProfile />,
   // },
   {
-    path: "viewprofile",
+    path: "empviewprofile",
     name: "My Profile",
     id: nanoid(),
     component: <EmployeeProfile />,
@@ -74,7 +64,7 @@ const employeeRoutes = [
     component: <EditEmployee />,
   },
   {
-    path: "attendance",
+    path: "empattendance",
     name: "My Attendance",
     id: nanoid(),
     component: <AttendenceInfo />,
@@ -86,7 +76,7 @@ const employeeRoutes = [
   //   component: <LeaveType component="leaveType"/>,
   // },
   {
-    path: "applyleave",
+    path: "empapplyleave",
     name: "Apply Leave",
     id: nanoid(),
     component: <ApplyLeaveLayout />,
@@ -97,44 +87,26 @@ const employeeRoutes = [
     id: nanoid(),
     component: <ApplyLeaveField />,
   },
-  // {
-  //   path: "designation",
-  //   name: "Designation",
-  //   id: nanoid(),
-  //   component: <Designation component="designation"/>,
-  // },
-  // {
-  //   path: "company",
-  //   name: "Company",
-  //   id: nanoid(),
-  //   component: <Company component="company"/>,
-  // },
-  // {
-  //   path: "department",
-  //   name: "Department",
-  //   id: nanoid(),
-  //   component: <Department component="department"/>,
-  // },
   {
-    path: "todolist",
+    path: "emptodolist",
     name: "To Do List",
     id: nanoid(),
     component: <TodoList component="todo"/>,
   },
   {
-    path: "project",
+    path: "empproject",
     name: "Project",
     id: nanoid(),
     component: <ProjectEmpPage component="project"/>,
   },
   {
-    path: "event",
+    path: "empevent",
     name: "Event",
     id: nanoid(),
     component: <Event component="event"/>,
   },
   {
-    path: "holiday",
+    path: "empholiday",
     name: "Holiday",
     id: nanoid(),
     component: <Holiday />,
