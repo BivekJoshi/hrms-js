@@ -68,7 +68,7 @@ const ProjectTaskField = ({ onClose, isLoading, data }) => {
         error={formik.touched.projectId && Boolean(formik.errors.projectId)}
         helperText={formik.touched.projectId && formik.errors.projectId}
         variant="standard"
-        autoFocus
+        
         InputLabelProps={{ shrink: true }}
       >
         {!loadingProject &&
@@ -119,7 +119,7 @@ const ProjectTaskField = ({ onClose, isLoading, data }) => {
             error={formik.touched.detail && Boolean(formik.errors.detail)}
             helperText={formik.touched.detail && formik.errors.detail}
             variant="standard"
-            autoFocus
+            
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
@@ -137,7 +137,7 @@ const ProjectTaskField = ({ onClose, isLoading, data }) => {
             error={formik.touched.priority && Boolean(formik.errors.priority)}
             helperText={formik.touched.priority && formik.errors.priority}
             variant="standard"
-            autoFocus
+            
             InputLabelProps={{ shrink: true }}
           >
             {priority.map((option) => (
@@ -165,7 +165,7 @@ const ProjectTaskField = ({ onClose, isLoading, data }) => {
             error={formik.touched.status && Boolean(formik.errors.status)}
             helperText={formik.touched.status && formik.errors.status}
             variant="standard"
-            autoFocus
+            
             InputLabelProps={{ shrink: true }}
           >
             {status.map((option) => (

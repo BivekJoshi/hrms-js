@@ -66,7 +66,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           error={formik.touched.firstName && Boolean(formik.errors.firstName)}
           helperText={formik.touched.firstName && formik.errors.firstName}
           variant='outlined'
-          autoFocus
+          
           InputLabelProps={{ shrink: true }}
         />
       </Grid>
@@ -82,7 +82,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           error={formik.touched.middleName && Boolean(formik.errors.middleName)}
           helperText={formik.touched.middleName && formik.errors.middleName}
           variant='outlined'
-          autoFocus
+          
           InputLabelProps={{ shrink: true }}
         />
       </Grid>
@@ -99,7 +99,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           error={formik.touched.lastName && Boolean(formik.errors.lastName)}
           helperText={formik.touched.lastName && formik.errors.lastName}
           variant='outlined'
-          autoFocus
+          
           InputLabelProps={{ shrink: true }}
         />
       </Grid>
@@ -182,7 +182,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           }
           helperText={formik.touched.mobileNumber && formik.errors.mobileNumber}
           variant='outlined'
-          autoFocus
+          
           InputLabelProps={{ shrink: true }}
         />
       </Grid>
@@ -204,7 +204,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
             formik.touched.citizenshipNumber && formik.errors.citizenshipNumber
           }
           variant='outlined'
-          autoFocus
+          
           InputLabelProps={{ shrink: true }}
         />
       </Grid>
@@ -220,7 +220,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           error={formik.touched.panNumber && Boolean(formik.errors.panNumber)}
           helperText={formik.touched.panNumber && formik.errors.panNumber}
           variant='outlined'
-          autoFocus
+          
           InputLabelProps={{ shrink: true }}
         />
       </Grid>
@@ -239,7 +239,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           }
           helperText={formik.touched.officeEmail && formik.errors.officeEmail}
           variant='outlined'
-          autoFocus
+          
           InputLabelProps={{ shrink: true }}
         />
       </Grid>
@@ -261,7 +261,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
             formik.touched.maritalStatus && formik.errors.maritalStatus
           }
           variant='outlined'
-          autoFocus
+          
           InputLabelProps={{ shrink: true }}
         >
           {maritalStatus.map((option) => (
@@ -289,7 +289,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           error={formik.touched.companyId && Boolean(formik.errors.companyId)}
           helperText={formik.touched.companyId && formik.errors.companyId}
           variant='outlined'
-          autoFocus
+          
           InputLabelProps={{ shrink: true }}
         >
           {!loadingCompany &&
@@ -318,7 +318,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           error={formik.touched.positionId && Boolean(formik.errors.positionId)}
           helperText={formik.touched.positionId && formik.errors.positionId}
           variant='outlined'
-          autoFocus
+          
           InputLabelProps={{ shrink: true }}
         >
           {!loadingDesignation &&
@@ -354,7 +354,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
                   formik.touched.positionId && formik.errors.positionId
                 }
                 variant="outlined"
-                autoFocus
+                
                 InputLabelProps={{ shrink: true }}
               />
             )}
@@ -376,7 +376,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           }
           helperText={formik.touched.departmentId && formik.errors.departmentId}
           variant='outlined'
-          autoFocus
+          
           InputLabelProps={{ shrink: true }}
         >
           {!loadingDepartment &&

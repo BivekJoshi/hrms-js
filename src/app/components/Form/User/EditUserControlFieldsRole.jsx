@@ -96,7 +96,7 @@ export const EditUserControlFieldsRole = ({ onClose ,rowData}) => {
           error={formik.touched.roleId && Boolean(formik.errors.roleId)}
           helperText={formik.touched.roleId && formik.errors.roleId}
           variant="outlined"
-          autoFocus
+          
           InputLabelProps={{ shrink: true }}
         >
           {userRoleData &&

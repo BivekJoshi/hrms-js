@@ -177,7 +177,7 @@ const ResetPassword = ({ isLoading }) => {
               error={formik.touched.password && Boolean(formik.errors.password)}
               helperText={formik.touched.password && formik.errors.password}
               variant="outlined"
-              autoFocus
+              
               type={showValues.showPassword ? "text" : "password"}
               InputLabelProps={{ shrink: true }}
               InputProps={{
@@ -220,7 +220,7 @@ const ResetPassword = ({ isLoading }) => {
                 formik.touched.confirmPassword && formik.errors.confirmPassword
               }
               variant="outlined"
-              autoFocus
+              
               type={showConfirmPassword ? "text" : "password"}
               InputLabelProps={{ shrink: true }}
               InputProps={{

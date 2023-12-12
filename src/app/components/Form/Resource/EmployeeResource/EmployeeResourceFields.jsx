@@ -81,7 +81,7 @@ const EmployeeResourceFields = ({ onClose, isLoading, data }) => {
               formik.touched.officeResourceId && formik.errors.officeResourceId
             }
             variant="outlined"
-            autoFocus
+            
             InputLabelProps={{ shrink: true }}
           >
             {availableOfficeResource &&
@@ -113,7 +113,7 @@ const EmployeeResourceFields = ({ onClose, isLoading, data }) => {
             }
             helperText={formik.touched.receiveDate && formik.errors.receiveDate}
             variant="outlined"
-            autoFocus
+            
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
@@ -132,7 +132,7 @@ const EmployeeResourceFields = ({ onClose, isLoading, data }) => {
             }
             helperText={formik.touched.returnDate && formik.errors.returnDate}
             variant="outlined"
-            autoFocus
+            
             InputLabelProps={{ shrink: true }}
           />
         </Grid>

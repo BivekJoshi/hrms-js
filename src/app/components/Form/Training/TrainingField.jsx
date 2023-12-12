@@ -62,7 +62,7 @@ const TrainingField = ({ onClose, isLoading, data ,empId}) => {
               formik.touched.trainingLevel && formik.errors.trainingLevel
             }
             variant="outlined"
-            autoFocus
+            
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
@@ -85,7 +85,7 @@ const TrainingField = ({ onClose, isLoading, data ,empId}) => {
               formik.errors.trainingInstitute
             }
             variant="outlined"
-            autoFocus
+            
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
@@ -102,7 +102,7 @@ const TrainingField = ({ onClose, isLoading, data ,empId}) => {
             error={formik.touched.category && Boolean(formik.errors.category)}
             helperText={formik.touched.category && formik.errors.category}
             variant="outlined"
-            autoFocus
+            
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
@@ -120,7 +120,7 @@ const TrainingField = ({ onClose, isLoading, data ,empId}) => {
             error={formik.touched.startDate && Boolean(formik.errors.startDate)}
             helperText={formik.touched.startDate && formik.errors.startDate}
             variant="outlined"
-            autoFocus
+            
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
@@ -138,7 +138,7 @@ const TrainingField = ({ onClose, isLoading, data ,empId}) => {
             error={formik.touched.endDate && Boolean(formik.errors.endDate)}
             helperText={formik.touched.endDate && formik.errors.endDate}
             variant="outlined"
-            autoFocus
+            
             InputLabelProps={{ shrink: true }}
           />
         </Grid>

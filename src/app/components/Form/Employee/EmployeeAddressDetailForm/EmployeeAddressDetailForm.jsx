@@ -87,7 +87,7 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                               formik.errors.addresses?.[index]?.country
                             }
                             variant="outlined"
-                            autoFocus
+                            
                             InputLabelProps={{ shrink: true }}
                           >
                             <MenuItem key="Nepal" value="Nepal">
@@ -116,7 +116,7 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                               formik.errors.addresses?.[index]?.province
                             }
                             variant="outlined"
-                            autoFocus
+                            
                             InputLabelProps={{ shrink: true }}
                           >
                             {province?.map((option) => (
@@ -146,7 +146,7 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                               formik.errors.addresses?.[index]?.district
                             }
                             variant="outlined"
-                            autoFocus
+                            
                             InputLabelProps={{ shrink: true }}
                           />
                         </Grid>
@@ -170,7 +170,7 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                               formik.errors.addresses?.[index]?.wardNumber
                             }
                             variant="outlined"
-                            autoFocus
+                            
                             InputLabelProps={{ shrink: true }}
                           />
                         </Grid>
@@ -192,7 +192,7 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                               formik.errors.addresses?.[index]?.city
                             }
                             variant="outlined"
-                            autoFocus
+                            
                             InputLabelProps={{ shrink: true }}
                           />
                         </Grid>
@@ -214,7 +214,7 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                               formik.errors.addresses?.[index]?.street
                             }
                             variant="outlined"
-                            autoFocus
+                            
                             InputLabelProps={{ shrink: true }}
                           />
                         </Grid>
@@ -253,7 +253,7 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                                 formik.errors.addresses?.[index]?.country
                               }
                               variant="outlined"
-                              autoFocus
+                              
                               InputLabelProps={{ shrink: true }}
                             >
                               <MenuItem key="Nepal" value="Nepal">
@@ -282,7 +282,7 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                                 formik.errors.addresses?.[index]?.province
                               }
                               variant="outlined"
-                              autoFocus
+                              
                               InputLabelProps={{ shrink: true }}
                             >
                               {province?.map((option) => (
@@ -315,7 +315,7 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                                 formik.errors.addresses?.[index]?.district
                               }
                               variant="outlined"
-                              autoFocus
+                              
                               InputLabelProps={{ shrink: true }}
                             />
                           </Grid>
@@ -339,7 +339,7 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                                 formik.errors.addresses?.[index]?.wardNumber
                               }
                               variant="outlined"
-                              autoFocus
+                              
                               InputLabelProps={{ shrink: true }}
                             />
                           </Grid>
@@ -361,7 +361,7 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                                 formik.errors.addresses?.[index]?.city
                               }
                               variant="outlined"
-                              autoFocus
+                              
                               InputLabelProps={{ shrink: true }}
                             />
                           </Grid>
@@ -385,7 +385,7 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                                 formik.errors.addresses?.[index]?.street
                               }
                               variant="outlined"
-                              autoFocus
+                              
                               InputLabelProps={{ shrink: true }}
                             />
                           </Grid>
@@ -469,7 +469,7 @@ export default EmployeeAddressDetailForm;
 //         formik.errors.addresses?.[index]?.[fieldName]
 //       }
 //       variant="outlined"
-//       autoFocus
+//       
 //       InputLabelProps={{ shrink: true }}
 //     >
 //       {fieldName === "country" && (

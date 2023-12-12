@@ -21,7 +21,7 @@ const TaskDetail = () => {
                      error={formik.touched.name && Boolean(formik.errors.name)}
                      helperText={formik.touched.name && formik.errors.name}
                      variant="outlined"
-                     autoFocus
+                     
                      InputLabelProps={{ shrink: true }}
                     ></TextField>
                 </Grid>
@@ -38,7 +38,7 @@ const TaskDetail = () => {
                      error={formik.touched.detail && Boolean(formik.errors.detail)}
                      helperText={formik.touched.detail && formik.errors.detail}
                      variant="outlined"
-                     autoFocus
+                     
                      InputLabelProps={{ shrink: true }}
                     ></TextField>
                 </Grid>
@@ -55,7 +55,7 @@ const TaskDetail = () => {
                      error={formik.touched.status && Boolean(formik.errors.status)}
                      helperText={formik.touched.status && formik.errors.status}
                      variant="outlined"
-                     autoFocus
+                     
                      InputLabelProps={{ shrink: true }}
                     ></TextField>
                 </Grid>

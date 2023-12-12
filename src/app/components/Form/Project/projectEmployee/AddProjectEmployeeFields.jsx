@@ -74,7 +74,7 @@ export const AddprojectEmployeeFields = ({ onClose, isLoading }) => {
             error={formik.touched.projectId && Boolean(formik.errors.projectId)}
             helperText={formik.touched.projectId && formik.errors.projectId}
             variant="outlined"
-            autoFocus
+            
             InputLabelProps={{ shrink: true }}
           >
             {
@@ -98,7 +98,7 @@ export const AddprojectEmployeeFields = ({ onClose, isLoading }) => {
             }
             helperText={formik.touched.assignedOn && formik.errors.assignedOn}
             variant="outlined"
-            autoFocus
+            
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
@@ -119,7 +119,7 @@ export const AddprojectEmployeeFields = ({ onClose, isLoading }) => {
               formik.touched.deAssignedOn && formik.errors.deAssignedOn
             }
             variant="outlined"
-            autoFocus
+            
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
@@ -186,7 +186,7 @@ export const EditProjectEmployeeFields = ({ data, onClose, isLoading }) => {
             }
             helperText={formik.touched.employeeId && formik.errors.employeeId}
             variant="outlined"
-            autoFocus
+            
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
@@ -204,7 +204,7 @@ export const EditProjectEmployeeFields = ({ data, onClose, isLoading }) => {
             error={formik.touched.projectId && Boolean(formik.errors.projectId)}
             helperText={formik.touched.projectId && formik.errors.projectId}
             variant="outlined"
-            autoFocus
+            
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
@@ -243,7 +243,7 @@ export const EditProjectEmployeeFields = ({ data, onClose, isLoading }) => {
               formik.touched.deAssignedOn && formik.errors.deAssignedOn
             }
             variant="outlined"
-            autoFocus
+            
             InputLabelProps={{ shrink: true }}
           />
         </Grid>

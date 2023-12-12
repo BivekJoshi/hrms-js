@@ -75,7 +75,7 @@ export const AddUserControlFields = ({ onClose }) => {
           error={formik.touched.email && Boolean(formik.errors.email)}
           helperText={formik.touched.email && formik.errors.email}
           variant="outlined"
-          autoFocus
+          
           InputLabelProps={{ shrink: true }}
         />
       </Grid>

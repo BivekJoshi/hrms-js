@@ -52,7 +52,7 @@ const OfficeResourceFields = ({ onClose, isLoading, data }) => {
               formik.touched.uniqueNumber && formik.errors.uniqueNumber
             }
             variant="outlined"
-            autoFocus
+            
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
@@ -72,7 +72,7 @@ const OfficeResourceFields = ({ onClose, isLoading, data }) => {
             }
             helperText={formik.touched.description && formik.errors.description}
             variant="outlined"
-            autoFocus
+            
             InputLabelProps={{ shrink: true }}
           />
         </Grid>

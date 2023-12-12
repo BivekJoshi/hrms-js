@@ -205,7 +205,7 @@ const RenamePassword = ({ isLoading }) => {
                   formik.errors.confirmPassword
                 }
                 variant="outlined"
-                autoFocus
+                
                 type={showConfirmPassword ? "text" : "password"}
                 InputLabelProps={{ shrink: true }}
                 InputProps={{
