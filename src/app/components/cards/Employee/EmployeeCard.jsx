@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { Email, LocalPhone } from '@mui/icons-material';
-import { Box, Button, CardMedia } from '@mui/material';
+import { Box, Button, CardMedia, Tooltip } from '@mui/material';
 import { Chip, ClickAwayListener, Grow, Stack } from '@mui/material';
 import { MenuItem, MenuList, Paper, Popper, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
@@ -95,25 +95,18 @@ const EmployeeCard = ({
               ''
             ) : (
               <>
-                <PopOver
-                  triggerContent={
-                    <Button
-                      style={{
-                        marginTop: '5px',
-                        fontSize: '.7rem',
-                        padding: '1px 5px',
-                      }}
-                      onClick={handleClick}
-                      variant='outlined'
-                      color={(IsActive = true ? 'success' : 'warning')}
-                    >
-                      {(IsActive = true ? 'Terminate' : 'Active')}
-                    </Button>
-                  }
-                  popoverContent={
-                    <Typography sx={{ p: 1 }}>Terminate Employee</Typography>
-                  }
-                />
+                <Button
+                  style={{
+                    marginTop: '5px',
+                    fontSize: '.7rem',
+                    padding: '1px 5px',
+                  }}
+                  onClick={handleClick}
+                  variant='outlined'
+                  color={IsActive ? 'success' : 'warning'}
+                >
+                  {IsActive ? 'Terminate' : 'Active'}
+                </Button>
 
                 <Box>
                   <Button
@@ -203,16 +196,9 @@ const EmployeeCard = ({
               sx={{ width: 66, height: 66, borderRadius: '2rem' }}
             />
           </Stack>
-          {ProgressBarRes ? (
-            <PopOver
-              triggerContent={<ProgressbyAll ProgressbyAll={ProgressBarRes} />}
-              popoverContent={
-                <Typography sx={{ p: 1 }}>Information Progress Data</Typography>
-              }
-            />
-          ) : (
-            ''
-          )}
+          <div style={{ paddingTop: '16px' }}>
+            {ProgressBarRes && <ProgressbyAll ProgressbyAll={ProgressBarRes} />}
+          </div>
 
           <Stack>
             <Typography
@@ -235,26 +221,19 @@ const EmployeeCard = ({
             </Typography>
             <Box padding={'0 1rem'}>
               <Typography variant='body2' gutterBottom>
-                <PopOver
-                  triggerContent={
-                    <Chip
-                      style={{ width: 230 }}
-                      label={
-                        <p
-                          style={{
-                            textOverflow: 'ellipsis',
-                            overflow: 'hidden',
-                          }}
-                        >{`${PositionName || ''} (${PositionLevel || ''})`}</p>
-                      }
-                    />
-                  }
-                  popoverContent={
-                    <Typography sx={{ p: 1 }}>{`${PositionName || ''} (${
-                      PositionLevel || ''
-                    })`}</Typography>
-                  }
-                />
+                <Tooltip title={PositionLevel || ''}>
+                  <Chip
+                    style={{ width: 230 }}
+                    label={
+                      <p
+                        style={{
+                          textOverflow: 'ellipsis',
+                          overflow: 'hidden',
+                        }}
+                      >{`${PositionName || ''} (${PositionLevel || ''})`}</p>
+                    }
+                  />
+                </Tooltip>
               </Typography>
             </Box>
           </Stack>
@@ -271,46 +250,42 @@ const EmployeeCard = ({
                 padding='.5rem'
                 borderRadius='.5rem'
               >
-                <PopOver
-                  triggerContent={
-                    <Stack
-                      onClick={handleOpenEmailform}
-                      spacing={{ xs: 1 }}
-                      direction='row'
-                      useFlexGap
-                      flexWrap='wrap'
-                      alignItems='center'
-                    >
-                      <Email sx={{ fontSize: '1.2rem' }} />
-                      <Chip
-                        sx={{
-                          bgcolor: mode === 'light' ? '#f5f5f5' : '#4d4c4c',
-                          fontSize: '1rem',
-                          width: '80%',
-                          justifyContent: 'flex-start',
-                          padding: '0',
-                        }}
-                        label={
-                          <Typography
-                            variant='p'
-                            style={{
-                              margin: '10px 0 0 -12px',
-                              fontSize: '.85rem',
-                            }}
-                          >
-                            {OfficeEmail || ''}
-                          </Typography>
-                        }
-                      />
-                    </Stack>
-                  }
-                  popoverContent={
-                    <Typography sx={{ p: 1 }}>
-                      Send Email To {EFirstName || ''} {EMiddleName || ''}{' '}
-                      {ELastName || ''}
-                    </Typography>
-                  }
-                />
+                <Tooltip
+                  title={`Send Email To ${EFirstName || ''} ${
+                    EMiddleName || ''
+                  } ${ELastName || ''}`}
+                >
+                  <Stack
+                    onClick={handleOpenEmailform}
+                    spacing={{ xs: 1 }}
+                    direction='row'
+                    useFlexGap
+                    flexWrap='wrap'
+                    alignItems='center'
+                  >
+                    <Email sx={{ fontSize: '1.2rem' }} />
+                    <Chip
+                      sx={{
+                        bgcolor: mode === 'light' ? '#f5f5f5' : '#4d4c4c',
+                        fontSize: '1rem',
+                        width: '80%',
+                        justifyContent: 'flex-start',
+                        padding: '0',
+                      }}
+                      label={
+                        <Typography
+                          variant='p'
+                          style={{
+                            margin: '10px 0 0 -12px',
+                            fontSize: '.85rem',
+                          }}
+                        >
+                          {OfficeEmail || ''}
+                        </Typography>
+                      }
+                    />
+                  </Stack>
+                </Tooltip>
 
                 <Stack
                   spacing={{ xs: 1 }}
@@ -344,7 +319,7 @@ const EmployeeCard = ({
 
       {openDeactivateModal && (
         <EditDeactivationEmployeeModal
-        title={"Terminate Employee"}
+          title={'Terminate Employee'}
           id={EmployeeId}
           open={openDeactivateModal}
           handleCloseModal={handleCloseDeactivateModal}
