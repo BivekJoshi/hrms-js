@@ -6,15 +6,14 @@ import Loadable from '../app/components/Header/Loader/Loadable';
 import ThemeModeContext from '../theme/ThemeModeContext';
 import ProjectAddViewEmployeePage from '../app/pages/Project/ProjectEmployeeViewPage/ProjectAddViewEmployeePage';
 import { ProjectDashboard } from '../app/pages/Project/ProjectDashboard/ProjectDashboard';
+import AttendenceInfo from '../app/pages/Employee/EmployeeViewPage/InfoTabs/AttendenceInfoTab/AttendenceInfo';
+import ApplyLeaveLayout from '../app/pages/Leave/ApplyLeave/ApplyLeaveLayout';
+import ApplyLeaveField from '../app/components/Form/Leave/ApplyLeave/ApplyLeaveField';
+import ProjectEmpPage from '../app/pages/Project/ProjectEmployeeViewPage/ProjectEmppage';
 
 const ProfileDetail = Loadable(
   lazy(() => import('../app/pages/Auth/Profile/ProfileDetail'))
 );
-// const DeactivatedOfficeResource = Loadable(
-//   lazy(() =>
-//     import("../app/pages/Resource/OfficeResource/DeactivatedOfficeResource")
-//   )
-// );
 const OfficeResource = Loadable(
   lazy(() => import('../app/pages/Resource/OfficeResource/OfficeResource'))
 );
@@ -78,11 +77,14 @@ const ResetPassword = Loadable(
 const UserController = Loadable(
   lazy(() => import('../app/pages/Auth/UserControl/UserController'))
 );
-// const ProjectDashboard = Loadable(
-//   lazy(() => import("../app/pages/Project/ProjectDashboard/ProjectDashboard"))
-// );
 
-const adminRoutes = [
+const EmployeeDashboard = Loadable(
+    lazy(() =>
+      import("../app/pages/EmployeePage/EmployeeDashboard/EmployeeDashbord")
+    )
+  );
+
+const routes = [
   {
     path: 'dashboard',
     name: 'Dashboard',
@@ -90,10 +92,28 @@ const adminRoutes = [
     component: <Dashboard />,
   },
   {
+    path: "empdashboard",
+    name: "Employee Dashboard",
+    id: nanoid(),
+    component: <EmployeeDashboard />,
+  },
+  {
     path: 'project/dashboard',
     name: 'Project Dashboard',
     id: nanoid(),
     component: <ProjectDashboard />,
+  },
+  {
+    path: "emp/project/dashboard",
+    name: "Project Dashboard",
+    id: nanoid(),
+    component: <ProjectDashboard />,
+  },
+  {
+    path: "empviewprofile",
+    name: "My Profile",
+    id: nanoid(),
+    component: <EmployeeProfile />,
   },
   {
     path: 'employee',
@@ -162,10 +182,28 @@ const adminRoutes = [
     component: <Attendance />,
   },
   {
+    path: "empattendance",
+    name: "My Attendance",
+    id: nanoid(),
+    component: <AttendenceInfo />,
+  },
+  {
     path: 'todolist',
     name: 'To Do List',
     id: nanoid(),
     component: <TodoList component='todo' />,
+  },
+  {
+    path: "empapplyleave",
+    name: "Apply Leave",
+    id: nanoid(),
+    component: <ApplyLeaveLayout />,
+  },
+  {
+    path: "applyleavefield",
+    name: "Apply Leave",
+    id: nanoid(),
+    component: <ApplyLeaveField />,
   },
   {
     path: 'project',
@@ -197,18 +235,6 @@ const adminRoutes = [
     id: nanoid(),
     component: <Holiday component='holiday' />,
   },
-  {
-    path: 'reset-password',
-    name: 'Reset Password',
-    id: nanoid(),
-    component: <ResetPassword />,
-  },
-  {
-    path: 'profile',
-    name: 'Profile',
-    id: nanoid(),
-    component: <ProfileDetail />,
-  },
   // {
   //   path: "resource/Office/Deactivated",
   //   name: "Office Resource Deactivated",
@@ -234,36 +260,35 @@ const adminRoutes = [
     component: <UserController component='users' />,
     requiresSuperAdmin: true,
   },
-  // {
-  //   path: "emailsend", // testing purpose only
-  //   name: "emailsend",
-  //   id: nanoid(),
-  //   component: <EmailSending />,
-  // },
+  {
+    path: "empproject",
+    name: "Project",
+    id: nanoid(),
+    component: <ProjectEmpPage component="project"/>,
+  },
+  {
+    path: "reset-password",
+    name: "Reset Password",
+    id: nanoid(),
+    component: <ResetPassword />,
+  },
+  {
+    path: "profile",
+    name: "Profile",
+    id: nanoid(),
+    component: <ProfileDetail />,
+  },
 ];
 
-export { adminRoutes };
+export { routes };
 
-{/* <Breadcrumbs aria-label='breadcrumb'>
-  <Link underline='hover' color='inherit' href='/'>
-    MUI
-  </Link>
-  <Link
-    underline='hover'
-    color='inherit'
-    to='/material-ui/getting-started/installation/'
-  >
-    Core
-  </Link>
-  <Typography color='text.primary'>Breadcrumbs</Typography>
-</Breadcrumbs>; */}
 
 export default function BreadCrumbs() {
   const { mode } = useContext(ThemeModeContext);
   const location = useLocation();
   let currentPath = location.pathname;
 
-  const currentRoute = adminRoutes.find(
+  const currentRoute = routes.find(
     (route) => '/admin/' + route?.path === currentPath
   );
 

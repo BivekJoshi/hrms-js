@@ -1,24 +1,9 @@
 import React, { useContext, useState } from "react";
-import { styled } from "@mui/material/styles";
-import {
-  Box,
-  Drawer,
-  Divider,
-  List,
-  ListItemButton,
-  Button,
-} from "@mui/material";
-import { ListItemIcon } from "@mui/material";
-import { ListItemText, Collapse, IconButton } from "@mui/material/";
-import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
-import { ExpandLess, ExpandMore } from "@mui/icons-material";
-import { Card, Fab, Switch, Typography } from "@mui/material";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import { ThemeModeContext } from "../../../theme/ThemeModeContext";
-import AdminHeader from "../Header/AdminHeader";
-import BreadCrumbs from "../../../routes/adminRoutes";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import CoPresentOutlinedIcon from '@mui/icons-material/CoPresentOutlined';
+import ApprovalOutlinedIcon from '@mui/icons-material/ApprovalOutlined';
+import LaptopIcon from "@mui/icons-material/Laptop";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import PersonIcon from "@mui/icons-material/Person";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import MailIcon from "@mui/icons-material/Mail";
@@ -31,11 +16,31 @@ import PlaylistAddCheckIcon from "@mui/icons-material/PlaylistAddCheck";
 import AddchartIcon from "@mui/icons-material/Addchart";
 import EventIcon from "@mui/icons-material/Event";
 import HolidayVillageIcon from "@mui/icons-material/HolidayVillage";
-import LaptopIcon from "@mui/icons-material/Laptop";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
+import { ListItemIcon } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import {
+  Box,
+  Drawer,
+  Divider,
+  List,
+  ListItemButton,
+  Button,
+} from "@mui/material";
+import { ListItemText, Collapse, IconButton } from "@mui/material/";
+import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
+import { ExpandLess, ExpandMore } from "@mui/icons-material";
+import { Card, Fab, Switch, Typography } from "@mui/material";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import { ThemeModeContext } from "../../../theme/ThemeModeContext";
+import AdminHeader from "../Header/AdminHeader";
 import { getUser, removeUser } from "../../utils/cookieHelper";
 import Footer from "../footer/Footer";
 import jwtDecode from "jwt-decode";
+import BreadCrumbs from "../../../routes/routes";
+
+
 
 const drawerWidth = 260;
 
@@ -87,8 +92,6 @@ export default function AdminSidebar() {
   const user = getUser();
   const decode = jwtDecode(user);
   const userRole = decode?.userRole;
-
-  console.log(userRole, "UserRole ma ");
 
   const drawerMenusForAdmin = [
     {
@@ -264,76 +267,76 @@ export default function AdminSidebar() {
       path: "empdashboard",
       subMenus: [],
     },
-    // {
-    //   name: 'My Profile',
-    //   icon: (
-    //     <AccountCircleOutlinedIcon
-    //       sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
-    //     />
-    //   ),
-    //   path: 'empviewprofile',
-    //   subMenus: [],
-    // },
-    // {
-    //   name: 'My Attendence',
-    //   path: 'empattendance',
-    //   icon: (
-    //     <CoPresentIcon
-    //       sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
-    //     />
-    //   ),
-    //   subMenus: [],
-    // },
-    // {
-    //   name: 'Apply Leave',
-    //   path: 'empapplyleave',
-    //   icon: (
-    //     <ApprovalOutlinedIcon
-    //       sx={mode === 'light' ? { color: '#01579b' } : { color: 'white' }}
-    //     />
-    //   ),
-    //   subMenus: [],
-    // },
-    // {
-    //   name: 'Project',
-    //   icon: (
-    //     <AddchartIcon
-    //       sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
-    //     />
-    //   ),
-    //   path: 'empproject',
-    //   subMenus: [],
-    // },
-    // {
-    //   name: 'Event',
-    //   icon: (
-    //     <EventIcon
-    //       sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
-    //     />
-    //   ),
-    //   path: 'empevent',
-    //   subMenus: [],
-    // },
-    // {
-    //   name: 'Holiday',
-    //   icon: (
-    //     <HolidayVillageIcon
-    //       sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
-    //     />
-    //   ),
-    //   path: 'empholiday',
-    //   subMenus: [],
-    // },
-    // {
-    //   name: 'Todo',
-    //   icon: (
-    //     <PlaylistAddCheckIcon
-    //       sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
-    //     />
-    //   ),
-    //   path: 'emptodolist',
-    //   subMenus: [],
-    // },
+    {
+      name: 'My Profile',
+      icon: (
+        <AccountCircleOutlinedIcon
+          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
+        />
+      ),
+      path: 'empviewprofile',
+      subMenus: [],
+    },
+    {
+      name: 'My Attendence',
+      path: 'empattendance',
+      icon: (
+        <CoPresentOutlinedIcon
+          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
+        />
+      ),
+      subMenus: [],
+    },
+    {
+      name: 'Apply Leave',
+      path: 'empapplyleave',
+      icon: (
+        <ApprovalOutlinedIcon
+          sx={mode === 'light' ? { color: '#01579b' } : { color: 'white' }}
+        />
+      ),
+      subMenus: [],
+    },
+    {
+      name: 'Project',
+      icon: (
+        <AddchartIcon
+          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
+        />
+      ),
+      path: 'empproject',
+      subMenus: [],
+    },
+    {
+      name: 'Event',
+      icon: (
+        <EventIcon
+          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
+        />
+      ),
+      path: 'event',
+      subMenus: [],
+    },
+    {
+      name: 'Holiday',
+      icon: (
+        <HolidayVillageIcon
+          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
+        />
+      ),
+      path: 'holiday',
+      subMenus: [],
+    },
+    {
+      name: 'Todo',
+      icon: (
+        <PlaylistAddCheckIcon
+          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
+        />
+      ),
+      path: 'todolist',
+      subMenus: [],
+    },
   ];
 
   const drawerMenus = userRole === "ROLE_ADMIN" ? drawerMenusForAdmin : drawerMenusForEmployee;
