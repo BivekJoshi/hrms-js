@@ -115,18 +115,18 @@ export default function AdminSidebar() {
         //   path: 'employee/add',
         //   icon: <PersonAddIcon style={{ color: primaryColor }} />,
         // },
-        {
-          name: "Employee",
-          path: "employee",
-          icon: (
-            <PersonIcon
-              sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
-            />
-          ),
-        },
+        // {
+        //   name: "Employee",
+        //   path: "employee",
+        //   icon: (
+        //     <PersonIcon
+        //       sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
+        //     />
+        //   ),
+        // },
         {
           name: "Leave",
-          path: "leaves",
+          path: "employee/leaves",
           icon: (
             <MailIcon
               sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
@@ -398,7 +398,9 @@ export default function AdminSidebar() {
                   onClick={() => handleSubMenuToggle(index)}
                   sx={{
                     backgroundColor:
-                      pathname.includes(menu.path) && "#ace8639e",
+                      pathname.includes(menu.path) &&
+                      menu.item == "employee" &&
+                      "#ace8639e",
                   }}
                 >
                   <ListItemIcon
@@ -441,21 +443,21 @@ export default function AdminSidebar() {
                 <Collapse in={subMenuOpen[index]} timeout="auto" unmountOnExit>
                   <List component="div" disablePadding>
                     {menu.subMenus.map((subMenu, subIndex) => {
-                      return(
-                      <StyledNavLink key={subIndex} to={subMenu.path}>
-                        
-                        <ListItemButton
-                          sx={{
-                            backgroundColor:
-                              pathname.includes(subMenu.name.toLowerCase()) &&
-                              "#ace8639e",
-                          }}
-                        >
-                          <ListItemIcon>{subMenu.icon}</ListItemIcon>
-                          <ListItemText primary={subMenu.name} />
-                        </ListItemButton>
-                      </StyledNavLink>
-                    )})}
+                      console.log(subMenu.path, "menu");
+                      return (
+                        <StyledNavLink key={subIndex} to={subMenu.path}>
+                          <ListItemButton
+                            sx={{
+                              backgroundColor:
+                                pathname.includes(subMenu.path) && "#ace8639e",
+                            }}
+                          >
+                            <ListItemIcon>{subMenu.icon}</ListItemIcon>
+                            <ListItemText primary={subMenu.name} />
+                          </ListItemButton>
+                        </StyledNavLink>
+                      );
+                    })}
                   </List>
                 </Collapse>
               )}

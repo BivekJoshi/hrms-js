@@ -125,7 +125,7 @@ const routes = [
   },
   //under employee
   {
-    path: "leaves",
+    path: "employee/leaves",
     name: "Leave",
     id: nanoid(),
     component: <Leave />,
@@ -301,10 +301,113 @@ export { routes };
   <Typography color="text.primary">Breadcrumbs</Typography>
 </Breadcrumbs>;
 
+// export default function BreadCrumbs() {
+//   const { mode } = useContext(ThemeModeContext);
+//   const location = useLocation();
+//   let currentPath = location.pathname;
+//   const findRoute = (path) => routes.find((route) => route.path === path);
+//   const {
+//     isSuperAdmin,
+//     isAdmin,
+//     isHr,
+//     isManager,
+//     isEmployee,
+//     isHrClerk,
+//   } = useAuth();
+
+//   const getDashboardLink = () => {
+//     if (isEmployee) {
+//       return "/employee/home";
+//     } else {
+//       return "/admin/dashboard";
+//     }
+//   };
+//   const pathBreadCrump = () => {
+//     if (isEmployee) {
+//       return currentPath.slice(9);
+//     } else {
+//       return currentPath.slice(7);
+//     }
+//   };
+//   const pathSegments = pathBreadCrump().split("/").filter(Boolean);
+
+//   return (
+//     <>
+//       {pathSegments.length > 0 && (
+//         <Breadcrumbs>
+//           <Link
+//             underline="hover"
+//             style={{ color: mode === "light" ? "inherit" : "white" }}
+//             to={getDashboardLink()}
+//           >
+//             <HomeIcon
+//               sx={{
+//                 width: "2rem",
+//                 "&:hover": {
+//                   color: "#6dab23",
+//                 },
+//               }}
+//             />{" "}
+//           </Link>
+//           {pathSegments.map((segment, index) => {
+//             const partialPath = `/${pathSegments
+//               .slice(0, index + 1)
+//               .join("/")}`;
+
+//             // const linkto = () => {
+//             //   if (isEmployee) {
+//             //     return `/employee${partialPath}`;
+//             //   } else {
+//             //     return `/admin${partialPath}`;
+//             //   }
+//             // };
+
+//             const route = findRoute(partialPath);
+
+//             return (
+//               <Link
+//                 key={index}
+//                 underline="hover"
+//                 style={{
+//                   color: mode === "light" ? "inherit" : "white",
+//                   textDecoration: "none",
+//                 }}
+//                 // to={linkto}
+//               >
+//                 <Typography
+//                   key={index}
+//                   color="text.primary"
+//                   textTransform="capitalize"
+//                   padding="5px"
+//                   textDecoration="none"
+//                   sx={{
+//                     "&:hover": {
+//                       bgcolor: "#6DAB2345",
+//                       padding: "5px",
+//                       textDecoration: "underline",
+//                       borderRadius: "5px",
+//                       color: "#6dab23",
+//                     },
+//                   }}
+//                 >
+//                   {route ? route.name : segment}
+//                 </Typography>
+//               </Link>
+//             );
+//           })}
+//         </Breadcrumbs>
+//       )}
+//     </>
+//   );
+// }
 export default function BreadCrumbs() {
   const { mode } = useContext(ThemeModeContext);
   const location = useLocation();
   let currentPath = location.pathname;
+  const findRoute = (path) => routes.find((route) => route.path === path);
+  // const breadcrumbPath = currentPath.slice(7);
+  // const pathSegments = breadcrumbPath.split("/").filter(Boolean);
+
   const {
     isSuperAdmin,
     isAdmin,
@@ -313,7 +416,6 @@ export default function BreadCrumbs() {
     isEmployee,
     isHrClerk,
   } = useAuth();
-
   const getDashboardLink = () => {
     if (isEmployee) {
       return "/employee/home";
@@ -352,15 +454,7 @@ export default function BreadCrumbs() {
             const partialPath = `/${pathSegments
               .slice(0, index + 1)
               .join("/")}`;
-
-            const linkto = () => {
-              if (isEmployee) {
-                return `/employee${partialPath}`;
-              } else {
-                return `/admin${partialPath}`;
-              }
-            };
-
+            const route = findRoute(partialPath);
             return (
               <Link
                 key={index}
@@ -369,7 +463,7 @@ export default function BreadCrumbs() {
                   color: mode === "light" ? "inherit" : "white",
                   textDecoration: "none",
                 }}
-                to={linkto}
+                to={`/admin${partialPath}`}
               >
                 <Typography
                   key={index}
@@ -387,7 +481,7 @@ export default function BreadCrumbs() {
                     },
                   }}
                 >
-                  {segment}
+                  {route ? route.name : segment}
                 </Typography>
               </Link>
             );
