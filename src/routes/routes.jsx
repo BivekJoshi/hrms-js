@@ -125,7 +125,7 @@ const routes = [
   },
   //under employee
   {
-    path: "leaves",
+    path: "employee/leaves",
     name: "Leave",
     id: nanoid(),
     component: <Leave />,

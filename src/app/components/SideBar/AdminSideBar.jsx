@@ -126,7 +126,7 @@ export default function AdminSidebar() {
         },
         {
           name: "Leave",
-          path: "leaves",
+          path: "employee/leaves",
           icon: (
             <MailIcon
               sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}

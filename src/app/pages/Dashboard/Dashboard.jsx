@@ -24,7 +24,7 @@ import Holiday from "../../../assets/holiday.png";
 import Project from "../../../assets/project.png";
 
 const Dashboard = () => {
-  const { mode,  palette } = useContext(ThemeModeContext);
+  const { mode, palette } = useContext(ThemeModeContext);
   const { data: dashboardData } = useGetDashboard();
   const { data: projectDataCount } = useGetProjectCount();
   const { data: projectData } = useGetProject();
@@ -92,67 +92,69 @@ const Dashboard = () => {
           </div>
         </div>
       </Box>
-      <Typography variant="h5" marginTop={"16px"}>
-        Summary
-      </Typography>
 
       <Box sx={{ display: "grid", gridTemplateRows: "1fr", rowGap: "2rem" }}>
-        <Grid
-          style={{
-            marginTop: "10px",
-            width: "100%",
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(232px, 1fr))",
-          }}
-          // rowSpacing={1}
-          gap={{ sm: "12px", lg: "32px" }}
-        >
-          <DashboardCard
-            title="Users"
-            icon={User}
-            count={userRoleData?.length ? userRoleData?.length : "0"}
-            linkTo="/admin/users"
-            borderColor="#3399FF"
-          />
-          <DashboardCard
-            title="Employees"
-            icon={Employee}
-            count={employeeData?.length ? employeeData.length : "0"}
-            linkTo="/admin/employee"
-            borderColor="#F8B114"
-          />
-          <DashboardCard
-            title="Events"
-            icon={Event}
-            count={eventData ? eventData?.length : "0"}
-            linkTo="/admin/event"
-            borderColor="#108A23"
-          />
-          <DashboardCard
-            title="Holiday"
-            icon={Holiday}
-            count={holidayData ? holidayData?.length : "0"}
-            linkTo="/admin/holiday"
-            borderColor="#FF8A7B"
-          />
-          <DashboardCard
-            title="Project"
-            icon={Project}
-            count={projectDataCount?.total ? projectDataCount?.total : "0"}
-            linkTo="/admin/project"
-            borderColor="#875923 "
-          />
-        </Grid>
+        <div>
+          <Typography variant="h5" margin={"26px 0 16px"}>
+            Summary
+          </Typography>
+          <Grid
+            style={{
+              // marginTop: "10px",
+              width: "100%",
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(232px, 1fr))",
+            }}
+            // rowSpacing={1}
+            gap={{ sm: "12px", lg: "32px" }}
+          >
+            <DashboardCard
+              title="Users"
+              icon={User}
+              count={userRoleData?.length ? userRoleData?.length : "0"}
+              linkTo="/admin/users"
+              borderColor="#3399FF"
+            />
+            <DashboardCard
+              title="Employees"
+              icon={Employee}
+              count={employeeData?.length ? employeeData.length : "0"}
+              linkTo="/admin/employee"
+              borderColor="#F8B114"
+            />
+            <DashboardCard
+              title="Events"
+              icon={Event}
+              count={eventData ? eventData?.length : "0"}
+              linkTo="/admin/event"
+              borderColor="#108A23"
+            />
+            <DashboardCard
+              title="Holiday"
+              icon={Holiday}
+              count={holidayData ? holidayData?.length : "0"}
+              linkTo="/admin/holiday"
+              borderColor="#FF8A7B"
+            />
+            <DashboardCard
+              title="Project"
+              icon={Project}
+              count={projectDataCount?.total ? projectDataCount?.total : "0"}
+              linkTo="/admin/project"
+              borderColor="#875923 "
+            />
+          </Grid>
+        </div>
 
         <Grid container spacing={3}>
-          <Grid item xs={6}>
+          <Grid item md={6} xs={12}>
             <Typography variant="h5" sx={{ marginBottom: "16px" }}>
               Employee Information
             </Typography>
             <BarChatDiagram dashboardData={dashboardData} />
             <PieChartDiagram dashboardData={dashboardData} />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item md={6} xs={12}>
             <div>
               <Typography variant="h5" sx={{ marginBottom: "16px" }}>
                 Project Information
