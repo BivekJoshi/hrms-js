@@ -4,29 +4,29 @@ import { Box, Grid } from "@mui/material";
 import "./Style/Style.css";
 import ThemeModeContext from "../../../theme/ThemeModeContext";
 
-export const PieChartDiagram = ({ data }) => {
+export const PieChartDiagram = ({ dashboardData }) => {
   const { mode } = useContext(ThemeModeContext);
 
   const piedata = [
     {
       name: "All Employees",
-      data: data?.allEmployees,
+      data: dashboardData?.allEmployees,
     },
     {
       name: "New Employees",
-      data: data?.newEmployees,
+      data: dashboardData?.newEmployees,
     },
     {
       name: "Female Employees",
-      data: data?.femaleEmployees,
+      data: dashboardData?.femaleEmployees,
     },
     {
       name: "Male Employees",
-      data: data?.maleEmployees,
+      data: dashboardData?.maleEmployees,
     },
     {
       name: "All Projects",
-      data: data?.allProjects,
+      data: dashboardData?.allProjects,
     },
   ];
 

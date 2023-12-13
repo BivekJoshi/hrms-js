@@ -276,7 +276,7 @@ export default function AdminSidebar() {
     },
     {
       name: "My Attendence",
-      path: "empattendance",
+      path: "presence",
       icon: (
         <CoPresentOutlinedIcon
           sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
@@ -482,13 +482,6 @@ export default function AdminSidebar() {
           >
             Logout
           </Button>
-          <Typography
-            variant="body2"
-            sx={{ marginRight: "8px", marginTop: "1rem" }}
-          >
-            {mode === "light" ? "Dark" : "Light"} Mode
-            {/* <Switch checked={mode === "dark"} onChange={toggleMode} /> */}
-          </Typography>
         </Box>
       </Drawer>
 

@@ -14,7 +14,6 @@ export const MiddleEmployDashbord = ({}) => {
   const { data } = useGetEmployeeAverageWork();
   const averageWork = data !== "NaN" ? ((data / 9) * 100) / 100 : 0;
   const { mode } = useContext(ThemeModeContext);
-  const m = useMediaQuery("(min-width:9000px)");
   return (
     <Box
       display="grid"
@@ -23,10 +22,10 @@ export const MiddleEmployDashbord = ({}) => {
       gap="1rem"
     >
       <Box>
-        <Typography variant="h5">Employee overal Attendance</Typography>
+        <Typography variant="h5" marginBottom="1rem">Employee Overal Attendance</Typography>
         <Box
           marginTop="0"
-          height="100%"
+          height="89%"
           boxShadow="7"
           paddingRight="2rem"
           borderRadius="10px"
@@ -36,9 +35,9 @@ export const MiddleEmployDashbord = ({}) => {
         </Box>
       </Box>
       <Box>
-        <Typography variant="h5">Average working Hour</Typography>
+        <Typography variant="h5" marginBottom="1rem">Average Working Hour</Typography>
 
-        {/* <RadialBar averageWork={averageWork} m={m} data={data}/> */}
+        <RadialBar averageWork={averageWork} data={data}/>
       </Box>
     </Box>
   );

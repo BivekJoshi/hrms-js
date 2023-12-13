@@ -18,19 +18,18 @@ const EmployeeResourceFields = ({ onClose, isLoading, data }) => {
   const { mode } = useContext(ThemeModeContext);
   const { formik } = useEmployeeResourceForm(data);
 
-
   const handleFormSubmit = () => {
     formik.handleSubmit();
     if (formik.isValid) {
       onClose();
     }
   };
-  const submitButtonText = data ? "Update Resource" : " Add Resource";
+  const submitButtonText = data ? "Update Resource" : " Provide Resource";
 
   const getEmployeeName = (employeeId) => {
-    if(employeeId !== ""){
-
-      const employee = data && employeeData?.find((emp) => emp.id === employeeId);
+    if (employeeId !== "") {
+      const employee =
+        data && employeeData?.find((emp) => emp.id === employeeId);
       const { firstName, middleName, lastName } = employee;
       return firstName;
     }
@@ -40,25 +39,38 @@ const EmployeeResourceFields = ({ onClose, isLoading, data }) => {
     !isLoading && (
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
-          <TextField
-            id="id"
-            name="id"
-            label="Employee Name"
-            placeholder="Enter Employee name"
-            fullWidth
-            value={getEmployeeName(formik.values.id)}
-            onChange={(event) => {
-              formik.handleChange(event);
-              formik.setFieldValue("id", event.target.value);
-            }}
-            error={
-              formik.touched.id && Boolean(formik.errors.id)
+        <Autocomplete
+            id="employeeId"
+            name="employeeId"
+            options={employeeData || []}
+            getOptionLabel={(employee) =>
+              `${employee?.firstName} ${employee?.middleName} ${employee?.lastName}`
             }
-            helperText={formik.touched.id && formik.errors.id}
-            variant="outlined"
-            autoFocus
-            InputLabelProps={{ shrink: true }}
-            disabled={formik.values.employeeId}
+            value={employeeData?.find(
+              (employee) => employee?.id === formik.values?.employeeId
+            )}
+            onChange={(event, newValue) => {
+              // newValue will be the selected employee object
+              formik.setFieldValue("employeeId", newValue?.id || ""); // Set the id in formik
+            }}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="User Name"
+                placeholder="Enter User name..."
+                fullWidth
+                required
+                variant="outlined"
+                autoFocus
+                InputLabelProps={{ shrink: true }}
+                error={
+                  formik.touched.employeeId && Boolean(formik.errors.employeeId)
+                }
+                helperText={
+                  formik.touched.employeeId && formik.errors.employeeId
+                }
+              />
+            )}
           />
         </Grid>
 

@@ -187,7 +187,7 @@ const routes = [
   },
 
   {
-    path: "employee/attendance",
+    path: "presence",
     name: "My Attendance",
     id: nanoid(),
     component: <AttendenceInfo />,
@@ -352,7 +352,6 @@ export default function BreadCrumbs() {
             const partialPath = `/${pathSegments
               .slice(0, index + 1)
               .join("/")}`;
-            console.log(segment);
 
             const linkto = () => {
               if (isEmployee) {

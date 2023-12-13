@@ -45,7 +45,7 @@ export const AvailableOfficeLogistic = (props) => {
       <CustomTable
         columns={columns}
         data={data}
-        title="Deactivated Office Logistics"
+        title="Activated Office Logistics"
         isLoading={isLoading}
         exportButton={true}
       />

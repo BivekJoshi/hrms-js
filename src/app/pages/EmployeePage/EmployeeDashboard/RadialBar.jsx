@@ -1,42 +1,68 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Box, Typography, Stack } from "@mui/material";
 import ReactApexChart from "react-apexcharts";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
 
-const RadialBar = ({ averageWork, m, data }) => {
+const RadialBar = ({ averageWork, data }) => {
   const { mode } = useContext(ThemeModeContext);
+  const [work, setWork] = useState(averageWork);
+
+  useEffect(() => {
+    // If you want to update the state based on some condition, you can do it here
+    // For example, update the state when averageWork changes
+    setWork(averageWork);
+  }, [averageWork]);
+
   const options = {
     chart: {
       height: 280,
       type: "radialBar",
     },
-    series: [67],
+    series: [averageWork === 0 ? 0 : averageWork],
+    colors: ["#20E647"],
     plotOptions: {
       radialBar: {
         hollow: {
-          margin: 15,
+          margin: 0,
           size: "70%",
+          background: "#293450",
+        },
+        track: {
+          dropShadow: {
+            enabled: true,
+            top: 2,
+            left: 0,
+            blur: 4,
+            opacity: 0.15,
+          },
         },
         dataLabels: {
-          showOn: "always",
           name: {
             offsetY: -10,
-            show: true,
-            color: "#888",
+            color: "#fff",
             fontSize: "13px",
           },
           value: {
-            color: "#111",
+            color: "#fff",
             fontSize: "30px",
             show: true,
           },
         },
       },
     },
+    fill: {
+      type: "gradient",
+      gradient: {
+        shade: "dark",
+        type: "vertical",
+        gradientToColors: ["#87D4F9"],
+        stops: [0, 100],
+      },
+    },
     stroke: {
       lineCap: "round",
     },
-    labels: ["Progress"],
+    labels: ["Average"],
   };
   return (
     <Box
@@ -46,7 +72,12 @@ const RadialBar = ({ averageWork, m, data }) => {
       padding="2rem"
     >
       {/* ApexChart */}
-      <ReactApexChart options={options} series={options.series} type="radialBar" height={280} />
+      <ReactApexChart
+        options={options}
+        series={options.series}
+        type="radialBar"
+        height={280}
+      />
 
       {/* Additional Information */}
       <Stack flexDirection="row" justifyContent="space-evenly">

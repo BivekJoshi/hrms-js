@@ -72,7 +72,7 @@ export const LeftEmployDashbord = ({}) => {
                   {openItemIndex === index && (
                     <Box
                       className="notification"
-                      bgcolor={mode === "light" ? "#e7e2e2" : "#565454"}
+                      bgcolor={mode === "light" ? "#e1dfdf" : "#313131"}
                     >
                       <Typography>At {notify?.eventLocation}</Typography>
                       <Typography>Time: {notify?.eventTime}</Typography>

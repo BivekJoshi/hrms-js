@@ -37,14 +37,18 @@
   margin-bottom: 1rem;
   border: 1px solid white;
   text-align: center;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   padding: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 16px;
 }
 
-.carousel .control-dots{
+.carousel .control-dots {
   bottom: -10px !important;
 }
 
-.carousel .control-dots .dot{
+.carousel .control-dots .dot {
   background-color: blue !important;
 }

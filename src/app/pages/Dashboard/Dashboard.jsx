@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import DashboardCard from "../../components/cards/Dashboard/DashboardCard";
-import { Box, CardMedia, Grid, Stack, Typography } from "@mui/material";
+import { Box, CardMedia, Grid, Typography } from "@mui/material";
 import { useGetDashboard } from "../../hooks/dashboard/useDashboard";
 import { useGetProjectCount } from "../../hooks/dashboard/useDashboard";
 import { useGetProject } from "../../hooks/project/useProject";
@@ -8,9 +8,6 @@ import { PieChartDiagram } from "../../components/Charts/PieChartDiagram";
 import BarChatDiagram from "../../components/Charts/BarChatDiagram";
 import { ProjectProgressCard } from "../../components/cards/ProjectProgress/ProjectProgressCard";
 import { ProjectTable } from "./DashboardTable/ProjectTable";
-import { FaPeopleGroup, FaGifts, FaUsers } from "react-icons/fa6";
-import { BiSolidCalendarEvent } from "react-icons/bi";
-import { AiFillProject } from "react-icons/ai";
 import { useGetEmployee } from "../../hooks/employee/useEmployee";
 import { useGetEvent } from "../../hooks/event/useEvent";
 import { useGetHoliday } from "../../hooks/holiday/useHoliday";
@@ -61,6 +58,7 @@ const Dashboard = () => {
         className={
           mode === "light" ? "employeeDeshbordBG" : "employeeDeshbordBGDark"
         }
+        boxShadow={7}
       >
         <CardMedia
           component="img"
@@ -152,7 +150,7 @@ const Dashboard = () => {
               Employee Information
             </Typography>
             <BarChatDiagram dashboardData={dashboardData} />
-            <PieChartDiagram data={dashboardData} />
+            <PieChartDiagram dashboardData={dashboardData} />
           </Grid>
           <Grid item xs={6}>
             <div>
