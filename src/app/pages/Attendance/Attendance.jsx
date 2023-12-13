@@ -12,13 +12,11 @@ import {
 import { Table, TableBody, TableRow, TableContainer } from '@mui/material';
 import { TableCell, TableHead } from '@mui/material';
 import { useGetAttendance } from '../../hooks/attendance/useAttendance';
-import './Attendance.css';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import { ButtonComponent } from '../../components/Button/ButtonComponent';
 import ThemeModeContext from '../../../theme/ThemeModeContext';
-
-let cMonth;
+import useWindowWidth from '../../hooks/windowwidth/useWindowWidth';
 
 const month = [
   {
@@ -99,26 +97,17 @@ const Attendance = () => {
 
   const date = new Date();
   const year = date.getFullYear();
+  const windowWidth = useWindowWidth();
 
-  const [cMonth, setCMonth] = useState(date.getMonth() + 1);
-  date.setMonth(cMonth - 1);
-
+  const cMonth = date.getMonth() + 1;
   const monthName = date.toLocaleString('default', { month: 'long' });
 
   const daysInMonth = new Date(year, cMonth, 0).getDate();
-
   const daysArray = Array.from(
     { length: daysInMonth },
     (_, index) => index + 1
   );
 
-  function Next() {
-    setCMonth(cMonth + 1);
-  }
-
-  function Previous() {
-    setCMonth(cMonth - 1);
-  }
   const { palette } = useContext(ThemeModeContext);
 
   const [searchEmployee, setSearchEmployee] = useState('');
@@ -160,6 +149,43 @@ const Attendance = () => {
     return filtered;
   }, [attendanceData, searchEmployee, searchMonth, searchYear]);
 
+  function renderAttendanceCell(employee, day) {
+    const currentDate = new Date();
+    const isPast =
+      year < currentDate.getFullYear() ||
+      (year === currentDate.getFullYear() &&
+        cMonth < currentDate.getMonth() + 1) ||
+      (year === currentDate.getFullYear() &&
+        cMonth === currentDate.getMonth() + 1 &&
+        day < currentDate.getDate() + 1);
+
+    if (isPast) {
+      const attendanceEntry = employee.attendanceList.find((entry) => {
+        const entryDate = new Date(entry.attendanceDate);
+        return (
+          entryDate.getFullYear() === year &&
+          entryDate.getMonth() + 1 === cMonth &&
+          entryDate.getDate() === day
+        );
+      });
+      const isPresent = !!attendanceEntry;
+
+      return (
+        <div>
+          {isPresent ? (
+            <>
+              <CheckIcon color='success' />
+              <div>{attendanceEntry.timeIn}</div>
+            </>
+          ) : (
+            <CloseIcon color='warning' />
+          )}
+        </div>
+      );
+    } else {
+      return null;
+    }
+  }
   if (isLoading)
     return (
       <>
@@ -247,126 +273,47 @@ const Attendance = () => {
       >
         {monthName}, {year}
       </Typography>
-
-      <div className='table-wrapper'>
-        <TableContainer className='cntnr' component={Paper}>
-          <Table aria-label='simple table' className='table'>
-            <TableHead className='heading'>
-              <TableRow>
-                <TableCell className='sn'>Sn No.</TableCell>
-
-                {daysArray.map((d, i) => {
-                  const dayName = new Date(year, cMonth - 1, d).toLocaleString(
-                    'default',
-                    { weekday: 'short' }
-                  );
-
-                  return (
-                    <>
-                      {' '}
-                      {i === 0 && (
-                        <TableCell
-                          style={{
-                            width: '140px',
-                            fontWeight: 'bold',
-                            fontSize: '20px',
-                          }}
-                          className='emp'
-                        >
-                          Employee
-                        </TableCell>
-                      )}
-                      <TableCell style={{ textAlign: 'center' }} key={d}>
-                        <Box color='white'>{d}</Box>
-                        <Box color='white'>{dayName}</Box>
-                      </TableCell>
-                    </>
-                  );
-                })}
-              </TableRow>
-            </TableHead>
-
-            {filteredData.length > 0 ? (
-              <TableBody>
-                {filteredData.map((employee, i) => {
-                  const serialNumber = i + 1;
-                  return (
-                    <TableRow className='trhighlight' key={i}>
-                      <TableCell className='snNo'>{serialNumber}</TableCell>
-                      <TableCell className='empname'>
-                        {employee.employeeName}
-                      </TableCell>
-                      {daysArray.map((d) => {
-                        const currentDate = new Date();
-
-                        const isPast =
-                          year < currentDate.getFullYear() ||
-                          (year === currentDate.getFullYear() &&
-                            cMonth < currentDate.getMonth() + 1) ||
-                          (year === currentDate.getFullYear() &&
-                            cMonth === currentDate.getMonth() + 1 &&
-                            d < currentDate.getDate() + 1);
-
-                        if (isPast) {
-                          const attendanceEntry = employee.attendanceList.find(
-                            (entry) => {
-                              const entryDate = new Date(entry.attendanceDate);
-                              const entryYear = entryDate.getFullYear();
-                              const entryMonth = entryDate.getMonth() + 1;
-                              const entryDay = entryDate.getDate();
-                              return (
-                                entryYear === year &&
-                                entryMonth === cMonth &&
-                                entryDay === d
-                              );
-                            }
-                          );
-                          const isPresent = !!attendanceEntry;
-                          return (
-                            <TableCell style={{ textAlign: 'center' }} key={d}>
-                              {isPresent ? (
-                                <>
-                                  <div>
-                                    <CheckIcon color='success' />
-                                  </div>
-                                  <div>{attendanceEntry.timeIn}</div>
-                                </>
-                              ) : (
-                                <CloseIcon color='warning' />
-                              )}
-                            </TableCell>
-                          );
-                          {
-                          }
-                        } else {
-                          return <TableCell key={d}></TableCell>;
-                        }
-                      })}
-                    </TableRow>
-                  );
-                })}
-              </TableBody>
-            ) : (
-              <TableBody>
-                <TableRow>
-                  <TableCell colSpan={daysArray.length + 2}>
-                    No matching records found.
-                  </TableCell>
+      <div style={{ overflowX: 'auto', maxWidth: `${windowWidth - 350}px` }}>
+        {' '}
+        <div>
+          {/* Table Container */}
+          <TableContainer component={Paper}>
+            {/* Table Header */}
+            <Table>
+              <TableHead>
+                <TableRow style={{ backgroundColor: palette.secondary.main }}>
+                  <TableCell style={{ color: 'white' }}>Sn No.</TableCell>
+                  {daysArray.map((d) => (
+                    <TableCell key={d} style={{ textAlign: 'center' }}>
+                      <Box color='white'>{d}</Box>
+                      <Box color='white'>
+                        {new Date(year, cMonth - 1, d).toLocaleDateString(
+                          'default',
+                          { weekday: 'short' }
+                        )}
+                      </Box>
+                    </TableCell>
+                  ))}
                 </TableRow>
+              </TableHead>
+
+              {/* Table Body */}
+              <TableBody>
+                {filteredData.map((employee, i) => (
+                  <TableRow key={i}>
+                    <TableCell>{i + 1}</TableCell>
+                    <TableCell>{employee.employeeName}</TableCell>
+                    {daysArray.map((d) => (
+                      <TableCell key={d} style={{ textAlign: 'center' }}>
+                        {renderAttendanceCell(employee, d)}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))}
               </TableBody>
-            )}
-          </Table>
-        </TableContainer>
-      </div>
-      <div className='button' style={{ maxWidth: '1480px' }}>
-        <ButtonComponent
-          OnClick={Previous}
-          buttonName={'Previous'}
-          BGColor='white'
-          TextColor='black'
-          disabled={false}
-        />
-        <ButtonComponent OnClick={Next} buttonName={'Next'} BGColor />
+            </Table>
+          </TableContainer>
+        </div>
       </div>
     </div>
   );
