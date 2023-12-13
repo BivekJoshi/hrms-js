@@ -50,7 +50,6 @@ const EmployeeBasicInfoForm = ({ formik }) => {
   const { data: departmentData, isLoading: loadingDepartment } =
     useGetDepartment();
   const { mode } = useContext(ThemeModeContext);
-  console.log(formik.values);
   return (
     <Grid container spacing={3}>
       <Grid item xs={12} sm={6} md={4}>
