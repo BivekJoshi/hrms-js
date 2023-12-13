@@ -32,6 +32,7 @@ const DashboardCard = ({
       padding="8px 20px 8px 20px"
       boxShadow={7}
       onClick={handleClick}
+      bgcolor={mode === "light" ? "" : "#3f413f"}
     >
       <Grid>
         <Typography
@@ -47,15 +48,14 @@ const DashboardCard = ({
           sx={{
             border: `1px solid ${borderColor}`,
             height: "3px",
-            width:"42px",
+            width: "42px",
             background: ` ${borderColor}`,
           }}
         />
       </Grid>
 
-      <Divider orientation="vertical" flexItem />
-      <Stack
-      flexDirection="column">
+      <Divider orientation="vertical" flexItem sx={{width:"1rem"}}/>
+      <Stack flexDirection="column">
         <img src={icon} alt="" />
         <Typography
           variant="h7"

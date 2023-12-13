@@ -61,6 +61,7 @@ const Dashboard = () => {
         className={
           mode === "light" ? "employeeDeshbordBG" : "employeeDeshbordBGDark"
         }
+        boxShadow={7}
       >
         <CardMedia
           component="img"
@@ -152,7 +153,7 @@ const Dashboard = () => {
               Employee Information
             </Typography>
             <BarChatDiagram dashboardData={dashboardData} />
-            <PieChartDiagram data={dashboardData} />
+            <PieChartDiagram dashboardData={dashboardData} />
           </Grid>
           <Grid item xs={6}>
             <div>

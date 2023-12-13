@@ -96,6 +96,7 @@ export const RightEmployDashbord = ({ employData }) => {
                 : "employeeDeshbordBGDark employeeDeshbord"
             }
             padding="1rem"
+            height="5rem"
             maxHeight="10rem"
             overflow="auto"
             boxShadow="7"

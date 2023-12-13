@@ -30,6 +30,7 @@ const EmployTaskCard = ({
       padding="8px 20px 8px 20px"
       boxShadow={7}
       onClick={handleClick}
+      bgcolor={mode === "light" ? "" : "#3f413f"}
     >
       <Grid>
         <Typography
