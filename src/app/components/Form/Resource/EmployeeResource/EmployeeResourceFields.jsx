@@ -56,7 +56,7 @@ const EmployeeResourceFields = ({ onClose, isLoading, data }) => {
             }
             helperText={formik.touched.id && formik.errors.id}
             variant="outlined"
-            autoFocus
+            
             InputLabelProps={{ shrink: true }}
             disabled={formik.values.employeeId}
           />

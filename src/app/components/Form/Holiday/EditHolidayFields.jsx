@@ -3,6 +3,7 @@ import { Grid, TextField, Button } from "@mui/material";
 import { useDeleteHoliday } from "../../../hooks/holiday/useHoliday";
 import PermissionHoc from "../../../hoc/permissionHoc";
 import useEditHolidayForm from "../../../hooks/holiday/HolidayForm/useEditHolidayForm";
+import { ButtonComponent } from "../../Button/ButtonComponent";
 
 const EditHolidayFields = ({ onClose, isLoading, data, permissions }) => {
   const { formik } = useEditHolidayForm(data);
@@ -44,7 +45,6 @@ const EditHolidayFields = ({ onClose, isLoading, data, permissions }) => {
             }
             helperText={formik.touched.holidayName && formik.errors.holidayName}
             variant="outlined"
-            autoFocus
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
@@ -63,7 +63,6 @@ const EditHolidayFields = ({ onClose, isLoading, data, permissions }) => {
             }
             helperText={formik.touched.holidayDate && formik.errors.holidayDate}
             variant="outlined"
-            autoFocus
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
@@ -87,7 +86,6 @@ const EditHolidayFields = ({ onClose, isLoading, data, permissions }) => {
               formik.errors.holidayDescription
             }
             variant="outlined"
-            autoFocus
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
@@ -96,38 +94,36 @@ const EditHolidayFields = ({ onClose, isLoading, data, permissions }) => {
           direction="row"
           justifyContent="flex-end"
           alignItems="flex-end"
+          gap={1}
+          mt={2}
         >
+          <ButtonComponent
+            variant="contained"
+            OnClick={handleFormSubmit}
+            sx={{ mt: 3, ml: 1 }}
+            buttonName={"Update"}
+          />
           <>
             {data ? (
-              <Button
+              <ButtonComponent
                 variant="contained"
-                onClick={handleDeleteHoliday}
+                OnClick={handleDeleteHoliday}
                 sx={{ mt: 3, ml: 1 }}
-                color="error"
-              >
-                Delete
-              </Button>
+                BGColor={"#d32f2f"}
+                buttonName={"Delete"}
+              />
             ) : (
               ""
             )}
           </>
 
-          <Button
+          <ButtonComponent
             variant="contained"
-            onClick={handleFormSubmit}
+            OnClick={onClose}
             sx={{ mt: 3, ml: 1 }}
-          >
-            Update
-          </Button>
-
-          <Button
-            variant="contained"
-            onClick={onClose}
-            sx={{ mt: 3, ml: 1 }}
-            color="error"
-          >
-            Cancel
-          </Button>
+            BGColor={"#d32f2f"}
+            buttonName={"Cancel"}
+          />
         </Grid>
       </Grid>
     </>

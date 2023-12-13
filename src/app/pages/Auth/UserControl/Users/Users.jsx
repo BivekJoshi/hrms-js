@@ -95,7 +95,6 @@ const Users = ({ permissions }) => {
             display: "flex",
             flexDirection: "column",
             gap: "1rem",
-            margin: "2rem 0",
           }}
         >
           <Stack

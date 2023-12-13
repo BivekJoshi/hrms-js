@@ -4,6 +4,7 @@ import useAddProjectForm from "../../../hooks/project/addProject/useAddProjectFo
 import { useGetEmployee } from "../../../hooks/employee/useEmployee";
 import { useGetCompany } from "../../../hooks/company/useCompany";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
+import { ButtonComponent } from '../../Button/ButtonComponent';
 
 const projectOptions = [
   // {
@@ -63,7 +64,7 @@ const AddprojectFields = ({ onClose, isLoading }) => {
             }
             helperText={formik.touched.projectName && formik.errors.projectName}
             variant="outlined"
-            autoFocus
+            
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
@@ -80,7 +81,7 @@ const AddprojectFields = ({ onClose, isLoading }) => {
             error={formik.touched.startDate && Boolean(formik.errors.startDate)}
             helperText={formik.touched.startDate && formik.errors.startDate}
             variant="outlined"
-            autoFocus
+            
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
@@ -96,7 +97,7 @@ const AddprojectFields = ({ onClose, isLoading }) => {
             error={formik.touched.endDate && Boolean(formik.errors.endDate)}
             helperText={formik.touched.endDate && formik.errors.endDate}
             variant="outlined"
-            autoFocus
+            
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
@@ -115,7 +116,7 @@ const AddprojectFields = ({ onClose, isLoading }) => {
             }
             helperText={formik.touched.taskStatus && formik.errors.taskStatus}
             variant="outlined"
-            autoFocus
+            
             InputLabelProps={{ shrink: true }}
           >
             {projectOptions?.map((option) => (
@@ -186,7 +187,7 @@ const AddprojectFields = ({ onClose, isLoading }) => {
                 fullWidth
                 required
                 variant="outlined"
-                autoFocus
+                
                 InputLabelProps={{ shrink: true }}
                 error={
                   formik.touched.employeeId && Boolean(formik.errors.employeeId)
@@ -213,7 +214,7 @@ const AddprojectFields = ({ onClose, isLoading }) => {
             error={formik.touched.companyId && Boolean(formik.errors.companyId)}
             helperText={formik.touched.companyId && formik.errors.companyId}
             variant="outlined"
-            autoFocus
+            
             InputLabelProps={{ shrink: true }}
           >
             {!loadingCompany &&
@@ -235,13 +236,13 @@ const AddprojectFields = ({ onClose, isLoading }) => {
           justifyContent="flex-end"
           alignItems="flex-end"
         >
-          <Button
+          <ButtonComponent
             variant="contained"
-            onClick={handleFormSubmit}
+            OnClick={handleFormSubmit}
+            TextColor={"#fff"}
             sx={{ mt: 3, ml: 1 }}
-          >
-            Add Project
-          </Button>
+            buttonName={"Add Project"}
+          />
           <Button
             variant="contained"
             onClick={onClose}

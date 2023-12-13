@@ -42,7 +42,7 @@ const AddEventFields = ({ formik}) => {
               }
               helperText={formik.touched.eventName && formik.errors.eventName}
               variant="outlined"
-              autoFocus
+              
               InputLabelProps={{ shrink: true }}
             />
           </Grid>
@@ -61,7 +61,7 @@ const AddEventFields = ({ formik}) => {
               }
               helperText={formik.touched.eventDate && formik.errors.eventDate}
               variant="outlined"
-              autoFocus
+              
               InputLabelProps={{ shrink: true }}
             />
           </Grid>
@@ -80,7 +80,7 @@ const AddEventFields = ({ formik}) => {
               }
               helperText={formik.touched.eventTime && formik.errors.eventTime}
               variant="outlined"
-              autoFocus
+              
               InputLabelProps={{ shrink: true }}
             />
           </Grid>
@@ -102,7 +102,7 @@ const AddEventFields = ({ formik}) => {
                 formik.errors.eventDescription
               }
               variant="outlined"
-              autoFocus
+              
               InputLabelProps={{ shrink: true }}
             />
           </Grid>
@@ -123,7 +123,7 @@ const AddEventFields = ({ formik}) => {
                 formik.touched.eventLocation && formik.errors.eventLocation
               }
               variant="outlined"
-              autoFocus
+              
               InputLabelProps={{ shrink: true }}
             />
           </Grid>

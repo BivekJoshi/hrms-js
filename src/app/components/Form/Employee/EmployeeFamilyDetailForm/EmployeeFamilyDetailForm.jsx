@@ -48,7 +48,7 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
                             formik.errors.family?.[index]?.name
                           }
                           variant="outlined"
-                          autoFocus
+                          
                           InputLabelProps={{ shrink: true }}
                         />
                       </Grid>
@@ -70,7 +70,7 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
                             formik.errors.family?.[index]?.relation
                           }
                           variant="outlined"
-                          autoFocus
+                          
                           InputLabelProps={{ shrink: true }}
                         />
                       </Grid>
@@ -92,7 +92,7 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
                             formik.errors.family?.[index]?.mobileNumber
                           }
                           variant="outlined"
-                          autoFocus
+                          
                           InputLabelProps={{ shrink: true }}
                         />
                       </Grid>

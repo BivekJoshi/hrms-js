@@ -41,7 +41,7 @@ const Company = ({ permissions }) => {
 
             <HocButton
               permissions={permissions?.canAdd}
-              color={"primary"}
+              color={"#fff"}
               variant={"contained"}
               onClick={handleAddOpenModal}
               buttonName={"+ Add Company"}

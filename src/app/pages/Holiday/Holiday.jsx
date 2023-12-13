@@ -17,6 +17,7 @@ import HolidayFields from "../../components/Form/Holiday/HolidayFields";
 import EmailForHoliday from "../Email/EmailForHoliday";
 import useAuth from "../../../auth/hooks/component/login/useAuth";
 import { OpenHoliday } from "./HolidayModal/HolidayModal";
+import { ButtonComponent } from "../../components/Button/ButtonComponent";
 
 const Holiday = ({ permissions }) => {
   const { isEmployee, isHrClerk } = useAuth();
@@ -79,7 +80,7 @@ const Holiday = ({ permissions }) => {
 
       {openAddModal && (
         <FormModal
-        title={"Add Holiday"}
+          title={"Add Holiday"}
           open={openAddModal}
           onClose={() => setOpenAddModal(false)}
           formComponent={
@@ -91,22 +92,22 @@ const Holiday = ({ permissions }) => {
                 direction="row"
                 justifyContent="flex-end"
                 alignItems="flex-end"
+                gap={1}
+                mt={2}
               >
-                <Button
+                <ButtonComponent
                   variant="contained"
-                  onClick={handleFormSubmit}
+                  OnClick={handleFormSubmit}
                   sx={{ mt: 3, ml: 1, color: "#fff" }}
-                >
-                  Add Holiday
-                </Button>
-                <Button
+                  buttonName={"Add Holiday"}
+                />
+                <ButtonComponent
                   variant="contained"
                   onClick={handleCloseModal}
                   sx={{ mt: 3, ml: 1 }}
-                  color="error"
-                >
-                  Cancel
-                </Button>
+                  BGColor={"#d32f2f"}
+                  buttonName={"Cancel"}
+                />
               </Grid>
             </>
           }
@@ -115,6 +116,7 @@ const Holiday = ({ permissions }) => {
 
       {openSubmitModal && (
         <FormModal
+          title={"Holiday"}
           open={openSubmitModal}
           onClose={() => setOpenSubmitModal(false)}
           formComponent={
@@ -122,10 +124,26 @@ const Holiday = ({ permissions }) => {
               <h2>Holiday Added Successfully!</h2>
               <p>Do you like to Email this holiday to Employee.</p>
               <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+                {/* <ButtonComponent
+                 variant="contained"
+                 sx={{ mt: 3, ml: 1 }}
+                 OnClick={handleEmailButtonClick}
+                 buttonName={"Yes"}
+                />
+                <ButtonComponent
+                 variant="contained"
+                 sx={{ mt: 3, ml: 1 }}
+                 OnClick={() => {
+                  setOpenSubmitModal(false);
+                }}
+                 buttonName={"No"}
+                 BGColor={"#d32f2f"}
+                /> */}
                 <Button
                   variant="contained"
-                  sx={{ mt: 3, ml: 1 }}
+                  sx={{ mt: 3, ml: 1, color: "#fff" }}
                   onClick={handleEmailButtonClick}
+                  
                 >
                   Yes
                 </Button>
@@ -147,6 +165,7 @@ const Holiday = ({ permissions }) => {
 
       {openEmailModal && (
         <FormModal
+        title={"Send Email"}
           open={openEmailModal}
           onClose={() => setOpenEmailModal(false)}
           formComponent={

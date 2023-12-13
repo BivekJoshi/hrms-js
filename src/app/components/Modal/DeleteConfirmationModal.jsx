@@ -32,6 +32,7 @@ const DeleteConfirmationModal = ({
             onClick={handleConfirmDelete}
             disabled={isLoading}
             startIcon={isLoading ? <CircularProgress size={20} /> : null}
+            color="#fff"
           >
             {isLoading ? "Deleting..." : "Confirm"}
           </Button>

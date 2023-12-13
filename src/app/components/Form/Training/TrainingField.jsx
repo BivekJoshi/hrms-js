@@ -40,7 +40,7 @@ const TrainingField = ({ onClose, isLoading, data ,empId}) => {
               formik.touched.trainingName && formik.errors.trainingName
             }
             variant="outlined"
-            autoFocus
+            
             InputLabelProps={{ shrink: true }}
           />
         </Grid>

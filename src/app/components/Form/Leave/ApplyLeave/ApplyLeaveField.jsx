@@ -101,7 +101,7 @@ const ApplyLeaveField = () => {
                     formik.touched.leaveTypeId && formik.errors.leaveTypeId
                   }
                   variant="outlined"
-                  autoFocus
+                  
                   InputLabelProps={{ shrink: true }}
                 />
               )}
@@ -127,7 +127,7 @@ const ApplyLeaveField = () => {
             }
             helperText={formik.touched.leaveReason && formik.errors.leaveReason}
             variant="outlined"
-            autoFocus
+            
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
@@ -173,7 +173,7 @@ const ApplyLeaveField = () => {
               formik.touched.leaveRemarks && formik.errors.leaveRemarks
             }
             variant="outlined"
-            autoFocus
+            
             InputLabelProps={{ shrink: true }}
           />
         </Grid>

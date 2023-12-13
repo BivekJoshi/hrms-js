@@ -161,7 +161,7 @@ const RenamePassword = ({ isLoading }) => {
                 }
                 helperText={formik.touched.password && formik.errors.password}
                 variant="outlined"
-                autoFocus
+                
                 type={showValues.showPassword ? "text" : "password"}
                 InputLabelProps={{ shrink: true }}
                 InputProps={{

@@ -53,7 +53,7 @@ const EmployeeQualificationDetailForm = ({ formik, isLoading }) => {
                           formik.errors.education?.[index]?.passedLevel
                         }
                         variant="outlined"
-                        autoFocus
+                        
                         InputLabelProps={{ shrink: true }}
                       />
                     </Grid>
@@ -75,7 +75,7 @@ const EmployeeQualificationDetailForm = ({ formik, isLoading }) => {
                           formik.errors.education?.[index]?.board
                         }
                         variant="outlined"
-                        autoFocus
+                        
                         InputLabelProps={{ shrink: true }}
                       />
                     </Grid>
@@ -97,7 +97,7 @@ const EmployeeQualificationDetailForm = ({ formik, isLoading }) => {
                           formik.errors.education?.[index]?.institute
                         }
                         variant="outlined"
-                        autoFocus
+                        
                         InputLabelProps={{ shrink: true }}
                       />
                     </Grid>
@@ -120,7 +120,7 @@ const EmployeeQualificationDetailForm = ({ formik, isLoading }) => {
                           formik.errors.education?.[index]?.passedYear
                         }
                         variant="outlined"
-                        autoFocus
+                        
                         InputLabelProps={{ shrink: true }}
                       />
                     </Grid>

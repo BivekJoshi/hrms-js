@@ -63,7 +63,7 @@ const HolidayFields = ({ formik }) => {
             }
             helperText={formik.touched.holidayName && formik.errors.holidayName}
             variant="outlined"
-            autoFocus
+            
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
@@ -82,7 +82,7 @@ const HolidayFields = ({ formik }) => {
             }
             helperText={formik.touched.holidayDate && formik.errors.holidayDate}
             variant="outlined"
-            autoFocus
+            
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
@@ -106,7 +106,7 @@ const HolidayFields = ({ formik }) => {
               formik.errors.holidayDescription
             }
             variant="outlined"
-            autoFocus
+            
             InputLabelProps={{ shrink: true }}
           />
         </Grid>

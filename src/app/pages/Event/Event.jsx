@@ -17,6 +17,7 @@ import PermissionHoc from "../../hoc/permissionHoc";
 import FormModal from "../../components/Modal/FormModal";
 import AddEventFields from "../../components/Form/Event/AddEventFields";
 import useAuth from "../../../auth/hooks/component/login/useAuth";
+import { ButtonComponent } from '../../components/Button/ButtonComponent';
 
 const Event = ({ permissions }) => {
   const { isEmployee, isHrClerk } = useAuth();
@@ -92,22 +93,22 @@ const Event = ({ permissions }) => {
                 direction="row"
                 justifyContent="flex-end"
                 alignItems="flex-end"
+                gap={1}
+                mt={2}
               >
-                <Button
+                <ButtonComponent
+                variant="contained"
+                OnClick={handleFormSubmit}
+                // sx={{ mt: 3, ml: 1 }}
+                buttonName={"Add Event"}
+                />
+                <ButtonComponent
                   variant="contained"
-                  onClick={handleFormSubmit}
-                  sx={{ mt: 3, ml: 1, color: "#fff" }}
-                >
-                  Add Event
-                </Button>
-                <Button
-                  variant="contained"
-                  onClick={handleCloseModal}
-                  sx={{ mt: 3, ml: 1 }}
-                  color="error"
-                >
-                  Cancel
-                </Button>
+                  OnClick={handleCloseModal}
+                  // sx={{ mt: 3, ml: 1 }}
+                  BGColor={"#d32f2f"}
+                  buttonName={"Cancel"}
+                />
               </Grid>
             </>
           }
@@ -115,30 +116,30 @@ const Event = ({ permissions }) => {
       )}
       {openSubmitModal && (
         <FormModal
+        title={"Event"}
           open={openSubmitModal}
           onClose={() => setOpenSubmitModal(false)}
           formComponent={
             <div>
-              <h2>Event Added Successfully!</h2>
+              <h3>Event Added Successfully!</h3>
               <p>Do you like to Email this event to Employee.</p>
-              <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-                <Button
+              <Box sx={{ display: "flex", justifyContent: "flex-end", gap: "1rem", marginTop: "1rem" }}>
+                <ButtonComponent
                   variant="contained"
                   sx={{ mt: 3, ml: 1 }}
-                  onClick={handleEmailButtonClick}
-                >
-                  Yes
-                </Button>
-                <Button
+                  OnClick={handleEmailButtonClick}
+                 buttonName={"Yes"} 
+                />
+                <ButtonComponent
                   variant="contained"
-                  onClick={() => {
+                  OnClick={() => {
                     setOpenSubmitModal(false);
                   }}
                   sx={{ mt: 3, ml: 1 }}
-                  color="error"
-                >
-                  No
-                </Button>
+                  BGColor={"#d32f2f"}
+                  color="#fff"
+                  buttonName={"No"}
+                />
               </Box>
             </div>
           }
@@ -147,6 +148,7 @@ const Event = ({ permissions }) => {
 
       {openEmailModal && (
         <FormModal
+        title={"Send Email"}
           open={openEmailModal}
           onClose={() => setOpenEmailModal(false)}
           formComponent={

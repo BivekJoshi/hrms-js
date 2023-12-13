@@ -102,7 +102,7 @@ const ProjectTaskField = ({ onClose, isLoading, data }) => {
             error={formik.touched.name && Boolean(formik.errors.name)}
             helperText={formik.touched.name && formik.errors.name}
             variant="standard"
-            autoFocus
+            
             InputLabelProps={{ shrink: true }}
           />
         </Grid>

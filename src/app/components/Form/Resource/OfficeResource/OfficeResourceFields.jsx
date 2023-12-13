@@ -31,7 +31,7 @@ const OfficeResourceFields = ({ onClose, isLoading, data }) => {
             error={formik.touched.name && Boolean(formik.errors.name)}
             helperText={formik.touched.name && formik.errors.name}
             variant="outlined"
-            autoFocus
+            
             InputLabelProps={{ shrink: true }}
           />
         </Grid>

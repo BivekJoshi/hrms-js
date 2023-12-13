@@ -5,15 +5,16 @@ import useEventForm from "../../../hooks/event/EventForm/useEventForm";
 import useEditEventForm from "../../../hooks/event/editEvent/useEditEventForm";
 import HocButton from "../../../hoc/hocButton";
 import PermissionHoc from "../../../hoc/permissionHoc";
+import { ButtonComponent } from "../../Button/ButtonComponent";
 
 const EditEventFields = ({ onClose, isLoading, data, permissions }) => {
   const { formik } = useEditEventForm(data);
 
-    const handleFormSubmit = async () => {
-      const isValid = await formik.validateForm();
-  
-      if (isValid) {
-        formik.handleSubmit();
+  const handleFormSubmit = async () => {
+    const isValid = await formik.validateForm();
+
+    if (isValid) {
+      formik.handleSubmit();
 
       if (formik.isValid) {
         formik.setTouched({
@@ -36,60 +37,57 @@ const EditEventFields = ({ onClose, isLoading, data, permissions }) => {
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
           <TextField
-            id='eventName'
-            name='eventName'
-            label='Event'
-            placeholder='Enter event name'
+            id="eventName"
+            name="eventName"
+            label="Event"
+            placeholder="Enter event name"
             fullWidth
             value={formik.values.eventName}
             onChange={formik.handleChange}
             error={formik.touched.eventName && Boolean(formik.errors.eventName)}
             helperText={formik.touched.eventName && formik.errors.eventName}
-            variant='outlined'
-            autoFocus
+            variant="outlined"
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
-            id='eventDate'
-            name='eventDate'
-            type='date'
+            id="eventDate"
+            name="eventDate"
+            type="date"
             required
-            label='Date of Event'
+            label="Date of Event"
             fullWidth
             value={formik.values.eventDate}
             onChange={formik.handleChange}
             error={formik.touched.eventDate && Boolean(formik.errors.eventDate)}
             helperText={formik.touched.eventDate && formik.errors.eventDate}
-            variant='outlined'
-            autoFocus
+            variant="outlined"
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
-            id='eventTime'
-            name='eventTime'
-            type='time'
+            id="eventTime"
+            name="eventTime"
+            type="time"
             required
-            label='Time of Event'
+            label="Time of Event"
             fullWidth
             value={formik.values.eventTime}
             onChange={formik.handleChange}
             error={formik.touched.eventTime && Boolean(formik.errors.eventTime)}
             helperText={formik.touched.eventTime && formik.errors.eventTime}
-            variant='outlined'
-            autoFocus
+            variant="outlined"
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
-            id='eventDescription'
-            name='eventDescription'
-            label='Description'
-            placeholder='Enter your Event Description'
+            id="eventDescription"
+            name="eventDescription"
+            label="Description"
+            placeholder="Enter your Event Description"
             fullWidth
             value={formik.values.eventDescription}
             onChange={formik.handleChange}
@@ -100,17 +98,16 @@ const EditEventFields = ({ onClose, isLoading, data, permissions }) => {
             helperText={
               formik.touched.eventDescription && formik.errors.eventDescription
             }
-            variant='outlined'
-            autoFocus
+            variant="outlined"
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
-            id='eventLocation'
-            name='eventLocation'
-            label='Event Location'
-            placeholder='Enter your Event Location'
+            id="eventLocation"
+            name="eventLocation"
+            label="Event Location"
+            placeholder="Enter your Event Location"
             fullWidth
             value={formik.values.eventLocation}
             onChange={formik.handleChange}
@@ -121,40 +118,39 @@ const EditEventFields = ({ onClose, isLoading, data, permissions }) => {
             helperText={
               formik.touched.eventLocation && formik.errors.eventLocation
             }
-            variant='outlined'
-            autoFocus
+            variant="outlined"
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
         <Grid
           container
-          direction='row'
-          justifyContent='flex-end'
-          alignItems='flex-end'
-        >
-          <Button
-            variant='contained'
-            onClick={handleDeleteEvent}
-            sx={{ mt: 3, ml: 1 }}
-            color='error'
-          >
-            Delete
-          </Button>
-          <Button
-            variant='contained'
-            onClick={handleFormSubmit}
-            sx={{ mt: 3, ml: 1 }}
-          >
-            Update Event
-          </Button>
-          <Button
-            variant='contained'
-            onClick={onClose}
-            sx={{ mt: 3, ml: 1 }}
-            color='error'
-          >
-            Cancel
-          </Button>
+          direction="row"
+          justifyContent="flex-end"
+          alignItems="flex-end"
+          gap={1}
+          mt={2}
+        >        
+         
+          <ButtonComponent
+            variant="contained"
+            OnClick={handleFormSubmit}
+            // sx={{ mt: 3, ml: 1 }}
+            buttonName={"Update Event"}
+          />
+          <ButtonComponent
+            variant="contained"
+            OnClick={handleDeleteEvent}
+            // sx={{ mt: 3, ml: 1 }}
+            BGColor={"#d32f2f"}
+            buttonName={"Delete"}
+          />
+          <ButtonComponent
+            variant="contained"
+            OnClick={onClose}
+            // sx={{ mt: 3, ml: 1 }}
+            BGColor={"#d32f2f"}
+            buttonName={"Cancel"}
+          />
         </Grid>
       </Grid>
     )

@@ -90,7 +90,7 @@ const Login = () => {
                 name='email'
                 type='email'
                 variant='outlined'
-                autoFocus
+                
                 autoComplete='username'
                 InputLabelProps={{ shrink: true }}
               />

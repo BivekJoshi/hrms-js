@@ -46,7 +46,7 @@ const AddPromotionHistoryFields = ({ onClose, isLoading }) => {
                                 error={formik.touched.positionId && Boolean(formik.errors.positionId)}
                                 helperText={formik.touched.positionId && formik.errors.positionId}
                                 variant='outlined'
-                                autoFocus
+                                
                                 InputLabelProps={{ shrink: true }}
                             />
                         )}

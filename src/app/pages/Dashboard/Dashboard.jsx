@@ -26,7 +26,7 @@ const Dashboard = () => {
   const { data: dashboardData } = useGetDashboard();
   const { data: projectDataCount } = useGetProjectCount();
   const { data: projectData } = useGetProject();
-  useGetPendingLeave();
+  // useGetPendingLeave();
   const { data: employeeData } = useGetEmployee();
   const { data: eventData } = useGetEvent();
   const { data: holidayData } = useGetHoliday();

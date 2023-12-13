@@ -101,7 +101,7 @@ export const EditLeaveFields = ({ onClose, isLoading, data }) => {
                 formik.touched.leaveStatus && formik.errors.leaveStatus
               }
               variant='standard'
-              // autoFocus
+              
               // InputLabelProps={{ shrink: true }}
             >
               {leaveStatus.map((option) => (
@@ -134,7 +134,7 @@ export const EditLeaveFields = ({ onClose, isLoading, data }) => {
                 formik.touched.leaveRemarks && formik.errors.leaveRemarks
               }
               variant='outlined'
-              autoFocus
+              
               InputLabelProps={{ shrink: true }}
             />
           </Grid>
@@ -261,7 +261,7 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
                       formik.touched.employeeId && formik.errors.employeeId
                     }
                     variant='outlined'
-                    autoFocus
+                    
                     InputLabelProps={{ shrink: true }}
                   />
                 )}
@@ -318,7 +318,7 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
                       formik.touched.leaveTypeId && formik.errors.leaveTypeId
                     }
                     variant='outlined'
-                    autoFocus
+                    
                     InputLabelProps={{ shrink: true }}
                   />
                 )}
@@ -371,7 +371,7 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
                 formik.touched.leaveReason && formik.errors.leaveReason
               }
               variant='outlined'
-              autoFocus
+              
               InputLabelProps={{ shrink: true }}
             />
           </Grid>
@@ -391,7 +391,7 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
               }
               helperText={formik.touched.leaveStatus && formik.errors.leaveStatus}
               variant="outlined"
-              autoFocus
+              
               InputLabelProps={{ shrink: true }}
             >
               {leaveStatus.map((option) => (

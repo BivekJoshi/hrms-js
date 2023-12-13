@@ -87,7 +87,7 @@ const LeaveTypeFields = ({ onClose, isLoading, data, existingLeaveTypes }) => {
               }
               helperText={formik.touched.leaveName && formik.errors.leaveName}
               variant="outlined"
-              autoFocus
+              
               InputLabelProps={{ shrink: true }}
             />
           </Grid>
@@ -108,7 +108,7 @@ const LeaveTypeFields = ({ onClose, isLoading, data, existingLeaveTypes }) => {
               }
               helperText={formik.touched.leaveName && formik.errors.leaveName}
               variant="outlined"
-              autoFocus
+              
               InputLabelProps={{ shrink: true }}
             >
               {filteredLeaveNames.map((option) => (
@@ -140,7 +140,7 @@ const LeaveTypeFields = ({ onClose, isLoading, data, existingLeaveTypes }) => {
             }
             helperText={formik.touched.leaveTotal && formik.errors.leaveTotal}
             variant="outlined"
-            autoFocus
+            
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
@@ -163,7 +163,7 @@ const LeaveTypeFields = ({ onClose, isLoading, data, existingLeaveTypes }) => {
               formik.touched.leaveDescription && formik.errors.leaveDescription
             }
             variant="outlined"
-            autoFocus
+            
             InputLabelProps={{ shrink: true }}
           />
         </Grid>

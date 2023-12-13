@@ -63,7 +63,7 @@ const EmailForHoliday = ({ getEventID, onClose }) => {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <h2>Email</h2>
+        <h3>Email</h3>
         <Grid container spacing={2}>
           <Grid
             item
@@ -79,6 +79,7 @@ const EmailForHoliday = ({ getEventID, onClose }) => {
               value={employeeId}
               onChange={handleChange}
               input={<OutlinedInput label="To" />}
+              inputLabelProps={{shrink: true, color: "red"}}
             >
               <MenuItem value="all">All Employees</MenuItem>
               <MenuItem value="male">Male Employees</MenuItem>
@@ -96,7 +97,7 @@ const EmailForHoliday = ({ getEventID, onClose }) => {
           justifyContent="flex-end"
           alignItems="flex-end"
         >
-          <Button type="submit" variant="contained" color="primary">
+          <Button type="submit" variant="contained" color="primary" sx={{color: "#fff"}}>
             Send
           </Button>
           <Button

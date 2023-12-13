@@ -45,7 +45,7 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                             formik.errors.history?.[index]?.employerName
                           }
                           variant="outlined"
-                          autoFocus
+                          
                           InputLabelProps={{ shrink: true }}
                         />
                       </Grid>
@@ -68,7 +68,7 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                             formik.errors.history?.[index]?.employerAddress
                           }
                           variant="outlined"
-                          autoFocus
+                          
                           InputLabelProps={{ shrink: true }}
                         />
                       </Grid>
@@ -90,7 +90,7 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                             formik.errors.history?.[index]?.pastPosition
                           }
                           variant="outlined"
-                          autoFocus
+                          
                           InputLabelProps={{ shrink: true }}
                         />
                       </Grid>
@@ -113,7 +113,7 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                             formik.errors.history?.[index]?.fromDate
                           }
                           variant="outlined"
-                          autoFocus
+                          
                           InputLabelProps={{ shrink: true }}
                         />
                       </Grid>
@@ -136,7 +136,7 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                             formik.errors.history?.[index]?.toDate
                           }
                           variant="outlined"
-                          autoFocus
+                          
                           InputLabelProps={{ shrink: true }}
                         />
                       </Grid>
@@ -158,7 +158,7 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                             formik.errors.history?.[index]?.description
                           }
                           variant="outlined"
-                          autoFocus
+                          
                           InputLabelProps={{ shrink: true }}
                         />
                       </Grid>
@@ -180,7 +180,7 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                             formik.errors.history?.[index]?.remarks
                           }
                           variant="outlined"
-                          autoFocus
+                          
                           InputLabelProps={{ shrink: true }}
                         />
                       </Grid>

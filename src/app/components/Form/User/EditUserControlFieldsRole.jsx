@@ -3,6 +3,7 @@ import { Grid, TextField, Button, MenuItem } from "@mui/material";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
 import { useEditUserControlForm } from "../../../pages/Auth/UserControl/Users/useEditUserControlForm";
 import { useGetUserControl, useGetUserRole } from "../../../hooks/auth/userControl/useUserControl";
+import { ButtonComponent } from "../../Button/ButtonComponent";
 
 const roleType = [
   {
@@ -75,7 +76,7 @@ export const EditUserControlFieldsRole = ({ onClose ,rowData}) => {
           error={formik.touched.userId && Boolean(formik.errors.userId)}
           helperText={formik.touched.userId && formik.errors.userId}
           variant="outlined"
-          autoFocus
+          
           InputLabelProps={{ shrink: true }}
         >
         </TextField> */}
@@ -117,22 +118,22 @@ export const EditUserControlFieldsRole = ({ onClose ,rowData}) => {
         direction="row"
         justifyContent="flex-end"
         alignItems="flex-end"
+        gap={1}
+        mt={2}
       >
-        <Button
+        <ButtonComponent
           variant="contained"
-          onClick={handleFormSubmit}
+          OnClick={handleFormSubmit}
           sx={{ mt: 3, ml: 1 }}
-        >
-          Update
-        </Button>
-        <Button
+          buttonName={"Update"}
+        />
+        <ButtonComponent
           variant="contained"
-          onClick={onClose}
+          OnClick={onClose}
           sx={{ mt: 3, ml: 1 }}
-          color="error"
-        >
-          Cancel
-        </Button>
+          BGColor={"#d32f2f"}
+          buttonName={"Cancel"}
+        />
       </Grid>
     </Grid>
   );

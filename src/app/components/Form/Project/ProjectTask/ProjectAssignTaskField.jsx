@@ -61,7 +61,7 @@ const ProjectAssignTaskField = ({ onClose, data }) => {
             formik.touched.projectEmployeeId && formik.errors.projectEmployeeId
           }
           variant="outlined"
-          autoFocus
+          
           InputLabelProps={{ shrink: true }}
         >
           {!LoadingProjectEmployeeData &&

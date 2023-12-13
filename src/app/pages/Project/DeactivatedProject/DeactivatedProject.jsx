@@ -7,8 +7,7 @@ import {
 import { useGetEmployee } from "../../../hooks/employee/useEmployee";
 import { Button, Stack } from "@mui/material";
 import { AddProjectActiveModal } from "../ProjectModal/ProjectModal";
-import RestoreFromTrashOutlinedIcon from '@mui/icons-material/RestoreFromTrashOutlined';
-
+import RestoreFromTrashOutlinedIcon from "@mui/icons-material/RestoreFromTrashOutlined";
 
 const DeactivatedProject = () => {
   const { data: deactivatedProject, isLoading } = useGetDeactivatedProject();
@@ -17,7 +16,6 @@ const DeactivatedProject = () => {
   const [openActivateModal, setOpenActivateModal] = useState(false);
   const [activateProject, setActivateProject] = useState({});
   const handleCloseActivateModal = () => setOpenActivateModal(false);
-  
 
   const getLeaderName = (rowData) => {
     const projectId = rowData.projectLeaderId;
@@ -25,7 +23,6 @@ const DeactivatedProject = () => {
     const name = `${employee?.firstName} ${employee?.middleName} ${employee?.lastName}`;
     return name;
   };
-
 
   const handleActivateProject = (rowData) => {
     setActivateProject(rowData);
@@ -65,7 +62,7 @@ const DeactivatedProject = () => {
 
   return (
     <>
-      <br/>
+      <br />
       <MaterialTable
         columns={columns}
         data={deactivatedProject}
@@ -93,6 +90,7 @@ const DeactivatedProject = () => {
 
       {openActivateModal && (
         <AddProjectActiveModal
+          title={"Activate project"}
           id={activateProject?.id}
           open={openActivateModal}
           handleCloseModal={handleCloseActivateModal}

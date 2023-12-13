@@ -16,12 +16,12 @@ import {
   AddProjectEmployeeModal,
   EditProjectEmployeeModal,
 } from "../ProjectModal/ProjectModal";
+import { ButtonComponent } from "../../../components/Button/ButtonComponent";
 
 const ProjectDetail = () => {
   const { id } = useParams();
-  const { data: projectEmployeeData, isLoading } = useGetProjectEmployeeById(
-    id
-  );
+  const { data: projectEmployeeData, isLoading } =
+    useGetProjectEmployeeById(id);
 
   const { data: employeeData } = useGetEmployee();
   const { data: projectData } = useGetProject();
@@ -174,9 +174,11 @@ const ProjectDetail = () => {
           }}
         >
           <p>Employee Involved</p>
-          <Button variant="contained" onClick={handleAddOpenModal}>
-            +Add Employee
-          </Button>
+          <ButtonComponent
+            variant="contained"
+            OnClick={handleAddOpenModal}
+            buttonName={"+ Add Employee"}
+          />
         </Typography>
       </Box>
       <br />
@@ -204,6 +206,7 @@ const ProjectDetail = () => {
       />
       {openAddModal && (
         <AddProjectEmployeeModal
+          title="Add Project Employee"
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
         />
@@ -211,6 +214,7 @@ const ProjectDetail = () => {
 
       {openEditModal && (
         <EditProjectEmployeeModal
+          title={"Edit Project Employee"}
           projectTd={editedEmployee?.id}
           open={openEditModal}
           handleCloseModal={handleCloseEditModal}

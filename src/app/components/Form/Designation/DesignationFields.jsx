@@ -26,7 +26,7 @@ const DesignationFields = ({ onClose, isLoading, data }) => {
             label="Designation Name"
             placeholder="Enter Designation name"
             fullWidth
-            autoFocus
+            
             required
             value={formik.values.positionName}
             onChange={formik.handleChange}
