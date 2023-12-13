@@ -292,7 +292,7 @@ export default function BreadCrumbs() {
           {pathSegments.map((segment, index) => {
             const partialPath = `/${pathSegments
               .slice(0, index + 1)
-              .join("/dashboard")}`;
+              .join("/")}`;
             const route = findRoute(partialPath);
             return (
               <Link
