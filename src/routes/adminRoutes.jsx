@@ -6,6 +6,7 @@ import Loadable from '../app/components/Header/Loader/Loadable';
 import ThemeModeContext from '../theme/ThemeModeContext';
 import ProjectAddViewEmployeePage from '../app/pages/Project/ProjectEmployeeViewPage/ProjectAddViewEmployeePage';
 import { ProjectDashboard } from '../app/pages/Project/ProjectDashboard/ProjectDashboard';
+import HomeIcon from '@mui/icons-material/Home';
 
 const ProfileDetail = Loadable(
   lazy(() => import('../app/pages/Auth/Profile/ProfileDetail'))
@@ -101,6 +102,32 @@ const adminRoutes = [
     id: nanoid(),
     component: <Employee component='employee' />,
   },
+  //under employee
+  {
+    path: 'employee/leave',
+    name: 'Leave',
+    id: nanoid(),
+    component: <Leave />,
+  },
+  {
+    path: 'employee/leavetype',
+    name: 'Leave Type',
+    id: nanoid(),
+    component: <LeaveType component='leaveType' />,
+  },
+  {
+    path: 'employee/attendance',
+    name: 'Attendance',
+    id: nanoid(),
+    component: <Attendance />,
+  },
+  {
+    path: 'employee/birthday',
+    name: 'Birthday',
+    id: nanoid(),
+    component: <Birthdaylist />,
+  },
+  // finish
   {
     path: 'employee/deactivated',
     name: 'Deactivate',
@@ -119,18 +146,7 @@ const adminRoutes = [
     id: nanoid(),
     component: <EditEmployee />,
   },
-  {
-    path: 'leavetype',
-    name: 'Leave Type',
-    id: nanoid(),
-    component: <LeaveType component='leaveType' />,
-  },
-  {
-    path: 'leave',
-    name: 'Leave',
-    id: nanoid(),
-    component: <Leave />,
-  },
+
   {
     path: 'designation',
     name: 'Designation',
@@ -149,18 +165,7 @@ const adminRoutes = [
     id: nanoid(),
     component: <Department component='department' />,
   },
-  {
-    path: 'birthday',
-    name: 'Birthday',
-    id: nanoid(),
-    component: <Birthdaylist />,
-  },
-  {
-    path: 'attendance',
-    name: 'Attendance',
-    id: nanoid(),
-    component: <Attendance />,
-  },
+
   {
     path: 'todolist',
     name: 'To Do List',
@@ -216,13 +221,13 @@ const adminRoutes = [
   //   component: <DeactivatedOfficeResource component="resourceDeactivated"/>,
   // },
   {
-    path: 'logistics',
+    path: 'logistics/office',
     name: 'Office Logistics',
     id: nanoid(),
     component: <OfficeResource component='officeResource' />,
   },
   {
-    path: 'resource/employee',
+    path: 'logistics',
     name: 'Employee Logistics',
     id: nanoid(),
     component: <EmployeeResource component='employeeResource' />,
@@ -234,6 +239,12 @@ const adminRoutes = [
     component: <UserController component='users' />,
     requiresSuperAdmin: true,
   },
+  // {
+  //   path: "emailsend", // testing purpose only
+  //   name: "emailsend",
+  //   id: nanoid(),
+  //   component: <EmailSending />,
+  // },
 ];
 
 export { adminRoutes };
@@ -256,10 +267,9 @@ export default function BreadCrumbs() {
   const { mode } = useContext(ThemeModeContext);
   const location = useLocation();
   let currentPath = location.pathname;
-
-  const currentRoute = adminRoutes.find(
-    (route) => '/admin/' + route?.path === currentPath
-  );
+  const findRoute = (path) => adminRoutes.find((route) => route.path === path);
+  const breadcrumbPath = currentPath.slice(7);
+  const pathSegments = breadcrumbPath.split('/').filter(Boolean);
 
   return (
     <>
