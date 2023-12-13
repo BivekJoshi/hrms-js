@@ -43,7 +43,7 @@ const province = [
 
 const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
   const [showTemporaryAddress, setShowTemporaryAddress] = useState(
-    data?.addresses[1]?.id
+    Boolean(data?.addresses[1]?.id)
   );
 
   useEffect(() => {

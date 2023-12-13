@@ -10,7 +10,7 @@ import { toast } from 'react-toastify';
 import { getEmployeeById } from '../../api/employee/employee-api';
 
 export const useGetEmployeeById = () => {
-  const {id}=useParams();
+  const { id } = useParams();
   return useQuery(['getEmployeeById', id], () => getEmployeeById(id), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
@@ -46,21 +46,16 @@ export const useTemporaryAddress = ({ onSuccess }) => {
     return Promise.resolve();
   };
 
-  return useMutation(
-    ['temporaryAddress'],
-    addTemporaryAddressMutation,
-    {
-      onSuccess: (data, variables, context) => {
-        // toast.success('Temporary address added successfully');
-        onSuccess && onSuccess(data, variables, context);
-      },
-      onError: (err, _variables, _context) => {
-        toast.error(`error: ${err.message}`);
-      },
-    }
-  );
+  return useMutation(['temporaryAddress'], addTemporaryAddressMutation, {
+    onSuccess: (data, variables, context) => {
+      // toast.success('Temporary address added successfully');
+      onSuccess && onSuccess(data, variables, context);
+    },
+    onError: (err, _variables, _context) => {
+      toast.error(`error: ${err.message}`);
+    },
+  });
 };
-
 
 export const useGetAddressById = (id) => {
   return useQuery(['getAddressById', id], () => getAddressById(id), {
@@ -79,12 +74,8 @@ export const useEditAddress = ({ onSuccess }) => {
     },
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Address edited successfully');
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries('getEmployeeById');
-      },
-      onError: (err, _variables, _context) => {
-        toast.error(`error: ${err.message}`);
       },
     }
   );
