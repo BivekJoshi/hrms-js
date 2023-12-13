@@ -12,7 +12,7 @@ import { ListItemIcon } from '@mui/material';
 import { ListItemText, Collapse, IconButton } from '@mui/material/';
 import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
-import { Card, Fab, Switch, Typography } from '@mui/material';
+import { Card, Fab, Typography } from '@mui/material';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { ThemeModeContext } from '../../../theme/ThemeModeContext';
 import AdminHeader from '../Header/AdminHeader';
@@ -80,7 +80,7 @@ export default function AdminSidebar() {
   const navigate = useNavigate();
   const location = useLocation();
   const [open, setOpen] = useState(false);
-  const { toggleMode, mode, palette } = useContext(ThemeModeContext);
+  const { mode } = useContext(ThemeModeContext);
   const [subMenuOpen, setSubMenuOpen] = useState({});
   const { pathname } = useLocation();
 
@@ -120,7 +120,7 @@ export default function AdminSidebar() {
         },
         {
           name: 'Leave',
-          path: 'leave',
+          path: 'employee/leave',
           icon: (
             <MailIcon
               sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
@@ -129,7 +129,7 @@ export default function AdminSidebar() {
         },
         {
           name: 'Leave Type',
-          path: 'typeleav',
+          path: 'employee/leavetype',
           icon: (
             <MailIcon
               sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
@@ -138,7 +138,7 @@ export default function AdminSidebar() {
         },
         {
           name: 'Attendance',
-          path: 'attendance',
+          path: 'employee/attendance',
           icon: (
             <HowToRegIcon
               sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
@@ -147,7 +147,7 @@ export default function AdminSidebar() {
         },
         {
           name: 'Birthday',
-          path: 'birthday',
+          path: 'employee/birthday',
           icon: (
             <CakeIcon
               sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
@@ -163,7 +163,7 @@ export default function AdminSidebar() {
           sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
         />
       ),
-      path: 'resource',
+      path: 'logistics',
       subMenus: [],
     },
     {
@@ -421,22 +421,12 @@ export default function AdminSidebar() {
             gap='1rem'
             alignItems='center'
           >
-            {location.pathname !== '/admin/dashboard' && (
-              <Fab
-                color='primary'
-                sx={{ height: 'auto', padding: '.3rem 0' }}
-                aria-label='add'
-                variant='extended'
-                onClick={() => {
-                  navigate(-1);
-                }}
-              >
-                <ArrowBackIcon />
-              </Fab>
-            )}
+           
             <BreadCrumbs />
           </Box>
-          <Outlet />
+          <div style={{ minHeight: '90vh' }}>
+            <Outlet />
+          </div>
         </Card>
         <Footer />
       </Main>

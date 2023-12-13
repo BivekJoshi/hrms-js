@@ -54,7 +54,7 @@ export const AddprojectEmployeeFields = ({ onClose, isLoading }) => {
                 <MenuItem
                   key={option?.id}
                   value={option?.id}
-                  sx={mode === "light" ? "" : { bgcolor: "#413e3e" }}
+                  style={{ background: mode === "light" ? "" : "#413e3e" }}
                 >
                   {option?.firstName} {option?.middleName} {option?.lastName}
                 </MenuItem>

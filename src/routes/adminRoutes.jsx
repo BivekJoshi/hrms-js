@@ -6,6 +6,7 @@ import Loadable from '../app/components/Header/Loader/Loadable';
 import ThemeModeContext from '../theme/ThemeModeContext';
 import ProjectAddViewEmployeePage from '../app/pages/Project/ProjectEmployeeViewPage/ProjectAddViewEmployeePage';
 import { ProjectDashboard } from '../app/pages/Project/ProjectDashboard/ProjectDashboard';
+import HomeIcon from '@mui/icons-material/Home';
 
 const ProfileDetail = Loadable(
   lazy(() => import('../app/pages/Auth/Profile/ProfileDetail'))
@@ -101,6 +102,32 @@ const adminRoutes = [
     id: nanoid(),
     component: <Employee component='employee' />,
   },
+  //under employee
+  {
+    path: 'employee/leave',
+    name: 'Leave',
+    id: nanoid(),
+    component: <Leave />,
+  },
+  {
+    path: 'employee/leavetype',
+    name: 'Leave Type',
+    id: nanoid(),
+    component: <LeaveType component='leaveType' />,
+  },
+  {
+    path: 'employee/attendance',
+    name: 'Attendance',
+    id: nanoid(),
+    component: <Attendance />,
+  },
+  {
+    path: 'employee/birthday',
+    name: 'Birthday',
+    id: nanoid(),
+    component: <Birthdaylist />,
+  },
+  // finish
   {
     path: 'employee/deactivated',
     name: 'Deactivate',
@@ -119,18 +146,7 @@ const adminRoutes = [
     id: nanoid(),
     component: <EditEmployee />,
   },
-  {
-    path: 'typeleav',
-    name: 'Leave Type',
-    id: nanoid(),
-    component: <LeaveType component='leaveType' />,
-  },
-  {
-    path: 'leave',
-    name: 'Leave',
-    id: nanoid(),
-    component: <Leave />,
-  },
+
   {
     path: 'designation',
     name: 'Designation',
@@ -149,18 +165,7 @@ const adminRoutes = [
     id: nanoid(),
     component: <Department component='department' />,
   },
-  {
-    path: 'birthday',
-    name: 'Birthday',
-    id: nanoid(),
-    component: <Birthdaylist />,
-  },
-  {
-    path: 'attendance',
-    name: 'Attendance',
-    id: nanoid(),
-    component: <Attendance />,
-  },
+
   {
     path: 'todolist',
     name: 'To Do List',
@@ -216,13 +221,13 @@ const adminRoutes = [
   //   component: <DeactivatedOfficeResource component="resourceDeactivated"/>,
   // },
   {
-    path: 'resource/office',
+    path: 'logistics/office',
     name: 'Office Logistics',
     id: nanoid(),
     component: <OfficeResource component='officeResource' />,
   },
   {
-    path: 'resource',
+    path: 'logistics',
     name: 'Employee Logistics',
     id: nanoid(),
     component: <EmployeeResource component='employeeResource' />,
@@ -244,7 +249,7 @@ const adminRoutes = [
 
 export { adminRoutes };
 
-{/* <Breadcrumbs aria-label='breadcrumb'>
+<Breadcrumbs aria-label='breadcrumb'>
   <Link underline='hover' color='inherit' href='/'>
     MUI
   </Link>
@@ -256,32 +261,72 @@ export { adminRoutes };
     Core
   </Link>
   <Typography color='text.primary'>Breadcrumbs</Typography>
-</Breadcrumbs>; */}
+</Breadcrumbs>;
 
 export default function BreadCrumbs() {
   const { mode } = useContext(ThemeModeContext);
   const location = useLocation();
   let currentPath = location.pathname;
-
-  const currentRoute = adminRoutes.find(
-    (route) => '/admin/' + route?.path === currentPath
-  );
+  const findRoute = (path) => adminRoutes.find((route) => route.path === path);
+  const breadcrumbPath = currentPath.slice(7);
+  const pathSegments = breadcrumbPath.split('/').filter(Boolean);
 
   return (
     <>
-      {currentRoute &&
-        (currentRoute.path === 'dashboard' ? null : (
-          <Breadcrumbs>
-            <Link
-              underline='hover'
-              style={{ color: mode === 'light' ? 'inherit' : 'white' }}
-              to='/admin/dashboard'
-            >
-              Dashboard
-            </Link>
-            <Typography color='text.primary'>{currentRoute?.name}</Typography>
-          </Breadcrumbs>
-        ))}
+      {pathSegments.length > 0 && (
+        <Breadcrumbs>
+          <Link
+            underline='hover'
+            style={{ color: mode === 'light' ? 'inherit' : 'white' }}
+            to='/admin/dashboard'
+          >
+            <HomeIcon
+              sx={{
+                width: '2rem',
+                '&:hover': {
+                  color: '#6dab23',
+                },
+              }}
+            />{' '}
+          </Link>
+          {pathSegments.map((segment, index) => {
+            const partialPath = `/${pathSegments
+              .slice(0, index + 1)
+              .join('/')}`;
+            const route = findRoute(partialPath);
+            return (
+              <Link
+                key={index}
+                underline='hover'
+                style={{
+                  color: mode === 'light' ? 'inherit' : 'white',
+                  textDecoration: 'none',
+                }}
+                to={`/admin${partialPath}`}
+              >
+                <Typography
+                  key={index}
+                  color='text.primary'
+                  textTransform='capitalize'
+                  padding='5px'
+                  textDecoration='none'
+                  sx={{
+                    '&:hover': {
+                      bgcolor: '#6DAB2345',
+                      padding: '5px',
+                      textDecoration: 'underline',
+                      borderRadius: '5px',
+                      color: '#6dab23',
+                    },
+                  }}
+                >
+                  {route ? route.name : segment}
+                </Typography>
+              </Link>
+            );
+          })}
+        </Breadcrumbs>
+      )}
     </>
   );
 }

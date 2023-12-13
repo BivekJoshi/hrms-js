@@ -69,7 +69,7 @@ const ApplyLeaveLayout = () => {
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <Item style={{ textAlign: "center" }}>
-            <h2>{formattedDate}</h2>
+            <Typography variant="h5">{formattedDate}</Typography>
           </Item>
         </Grid>
         <Grid item xs={12}>

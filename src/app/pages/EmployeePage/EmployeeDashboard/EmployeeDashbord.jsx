@@ -1,4 +1,4 @@
-import { Box, CardMedia } from "@mui/material";
+import { Box, CardMedia, Typography } from "@mui/material";
 import React, { useContext } from "react";
 import Male from "../../../../assets/male.png";
 import "../../Style/Style.css";
@@ -6,21 +6,18 @@ import { LeftEmployDashbord } from "./LeftEmployDashbord";
 import { RightEmployDashbord } from "./RightEmployDashbord";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
 import { useGetLoggedInUser } from "../../../hooks/auth/usePassword";
-import { EmployTaskCard } from "../Component/EmployTaskCard";
-import { EmployPichart } from "../Component/EmployPichart";
 import { MiddleEmployDashbord } from "./MiddleEmployDashbord";
 import { useGetTaskLoggedInUser } from "../../../hooks/project/ProjectTask/useProjectTask";
 import { useGetProjectWiseEmployee } from "../../../hooks/project/useProject";
 import { DOC_URL } from "../../../../auth/axiosInterceptor";
-import TaskIcon from "@mui/icons-material/Task";
-import AccountTreeIcon from "@mui/icons-material/AccountTree";
-import PendingIcon from "@mui/icons-material/Pending";
-import BallotIcon from "@mui/icons-material/Ballot";
-import { useGetLoggedInUserInfo } from "../../../hooks/employee/useEmployee";
+import Project from "../../../../assets/eproject.png";
+import Task from "../../../../assets/etask.png";
+import Pending from "../../../../assets/pending.png";
+import Complet from "../../../../assets/ecomplet.png";
+import EmployTaskCard from "../Component/EmployTaskCard";
 
 const EmployeeDashbord = ({}) => {
   const { data: employData } = useGetLoggedInUser();
-  const { data: userDetailsData } = useGetLoggedInUserInfo();
   const { mode } = useContext(ThemeModeContext);
   const { data: loginUsertask } = useGetTaskLoggedInUser();
   const { data: projectWiseEmployeeData } = useGetProjectWiseEmployee(
@@ -41,26 +38,34 @@ const EmployeeDashbord = ({}) => {
 
   const task = [
     {
-      nameOfTask: "Total Project",
+      title: "Total Project",
+      taskIcon: Project,
       numberOfTask: projectWiseEmployeeData
         ? projectWiseEmployeeData.length
         : 0,
-      taskIcon: <AccountTreeIcon sx={{ width: "2rem", height: "2rem" }} />,
+      linkTo: "/employee/project",
+      borderColor: "#3399FF",
     },
     {
-      nameOfTask: "Total Task",
+      title: "Total Task",
       numberOfTask: loginUsertask ? loginUsertask.length : 0,
-      taskIcon: <BallotIcon sx={{ width: "2rem", height: "2rem" }} />,
+      taskIcon: Task,
+      linkTo: "/employee/project",
+      borderColor: "#FF8A7B",
     },
     {
-      nameOfTask: "Task Pending",
+      title: "Task Pending",
       numberOfTask: taskPendingData ? taskPendingData.length : 0,
-      taskIcon: <PendingIcon sx={{ width: "2rem", height: "2rem" }} />,
+      taskIcon: Pending,
+      linkTo: "/employee/project",
+      borderColor: "#F8B114",
     },
     {
-      nameOfTask: "Task Complete",
+      title: "Task Complete",
       numberOfTask: taskCompleteData ? taskCompleteData.length : 0,
-      taskIcon: <TaskIcon sx={{ width: "2rem", height: "2rem" }} />,
+      taskIcon: Complet,
+      linkTo: "/employee/project",
+      borderColor: "#108A23",
     },
   ];
   const today = new Date();
@@ -81,23 +86,31 @@ const EmployeeDashbord = ({}) => {
         className={
           mode === "light" ? "employeeDeshbordBG" : "employeeDeshbordBGDark"
         }
+        boxShadow="7"
+        borderRadius="10px"
       >
-        <div style={{ display: "flex", alignItems: "center" }} padding="1rem">
-          <CardMedia
-            component="img"
-            src={filePath ? filePath : Male}
-            alt="Paella dish"
-            sx={{ width: 66, height: 66, borderRadius: "2rem" }}
-          />
-          <Box alignSelf="center" paddingLeft="1rem">
-            <h3>Welcome , {employData?.name}</h3>
-            <h3>Since: {userDetailsData?.dateOfJoin}</h3>
-          </Box>
-        </div>
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <h2>Today Date: </h2>
-          <h3> {formattedDate}</h3>
-        </div>
+        <CardMedia
+          component="img"
+          src={filePath ? filePath : Male}
+          alt="Paella dish"
+          sx={{ width: 66, height: 66, borderRadius: "2rem" }}
+        />
+        <Box
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            width: "100%",
+          }}
+        >
+          <Typography variant="h6" paddingLeft="1rem">
+            Welcome , <br></br>
+            {employData?.name}
+          </Typography>
+          <Typography variant="h6" style={{ maxWidth: "200px" }}>
+            {formattedDate}
+          </Typography>
+        </Box>
       </Box>
 
       <Box
@@ -110,9 +123,11 @@ const EmployeeDashbord = ({}) => {
         {task.map((taskDetail, index) => (
           <EmployTaskCard
             key={index}
-            nameOfTask={taskDetail.nameOfTask}
+            title={taskDetail.title}
             numberOfTask={taskDetail.numberOfTask}
             taskIcon={taskDetail.taskIcon}
+            borderColor={taskDetail.borderColor}
+            linkTo={taskDetail.linkTo}
           />
         ))}
         {/* <EmployPichart task={task}/> */}

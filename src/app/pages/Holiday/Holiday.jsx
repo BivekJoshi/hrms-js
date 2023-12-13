@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Box, Button, Grid } from "@mui/material";
+import { Box, Button, Grid, Typography } from "@mui/material";
+import { toast } from "react-toastify";
 
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
@@ -121,7 +122,7 @@ const Holiday = ({ permissions }) => {
           onClose={() => setOpenSubmitModal(false)}
           formComponent={
             <div>
-              <h2>Holiday Added Successfully!</h2>
+              <Typography variant="h4">Holiday Added Successfully!</Typography>
               <p>Do you like to Email this holiday to Employee.</p>
               <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
                 {/* <ButtonComponent

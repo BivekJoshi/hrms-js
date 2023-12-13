@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSendEmailToAll } from "../../hooks/email/useEmail";
-import { Button, Grid, MenuItem, OutlinedInput, Select } from "@mui/material";
+import { Button, Grid, MenuItem, OutlinedInput, Select, Typography } from "@mui/material";
 import { useGetEmployee } from "../../hooks/employee/useEmployee";
 import {
   getBusinessAEmployeeById,
@@ -63,7 +63,7 @@ const EmailToAll = ({ getEventID, onClose }) => {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <h2>Email</h2>
+        <Typography variant="h4"h2>Email</Typography>
         <Grid container spacing={2}>
           <Grid
             item
