@@ -30,7 +30,7 @@ export const useLogin = () => {
         ) {
           navigate('/admin/dashboard');
         } else if (userRole === 'ROLE_EMPLOYEE') {
-          navigate('/employee/empdashboard');
+          navigate('/employee/home');
         } else {
           navigate('/');
         }

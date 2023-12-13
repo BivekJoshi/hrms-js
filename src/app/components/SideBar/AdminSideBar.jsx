@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
-import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import CoPresentOutlinedIcon from '@mui/icons-material/CoPresentOutlined';
-import ApprovalOutlinedIcon from '@mui/icons-material/ApprovalOutlined';
+import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import CoPresentOutlinedIcon from "@mui/icons-material/CoPresentOutlined";
+import ApprovalOutlinedIcon from "@mui/icons-material/ApprovalOutlined";
 import LaptopIcon from "@mui/icons-material/Laptop";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import PersonIcon from "@mui/icons-material/Person";
@@ -39,8 +39,6 @@ import { getUser, removeUser } from "../../utils/cookieHelper";
 import Footer from "../footer/Footer";
 import jwtDecode from "jwt-decode";
 import BreadCrumbs from "../../../routes/routes";
-
-
 
 const drawerWidth = 260;
 
@@ -84,7 +82,6 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 
 export default function AdminSidebar() {
   const navigate = useNavigate();
-  const location = useLocation();
   const [open, setOpen] = useState(false);
   const { mode } = useContext(ThemeModeContext);
   const [subMenuOpen, setSubMenuOpen] = useState({});
@@ -129,7 +126,7 @@ export default function AdminSidebar() {
         },
         {
           name: "Leave",
-          path: "employee/leave",
+          path: "leaves",
           icon: (
             <MailIcon
               sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
@@ -212,7 +209,7 @@ export default function AdminSidebar() {
           sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
         />
       ),
-      path: "project",
+      path: "projects",
       subMenus: [],
     },
     {
@@ -268,78 +265,79 @@ export default function AdminSidebar() {
       subMenus: [],
     },
     {
-      name: 'My Profile',
+      name: "My Profile",
       icon: (
         <AccountCircleOutlinedIcon
-          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
+          sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
         />
       ),
-      path: 'empviewprofile',
+      path: "profile",
       subMenus: [],
     },
     {
-      name: 'My Attendence',
-      path: 'empattendance',
+      name: "My Attendence",
+      path: "empattendance",
       icon: (
         <CoPresentOutlinedIcon
-          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
+          sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
         />
       ),
       subMenus: [],
     },
     {
-      name: 'Apply Leave',
-      path: 'empapplyleave',
+      name: "Apply Leave",
+      path: "leave",
       icon: (
         <ApprovalOutlinedIcon
-          sx={mode === 'light' ? { color: '#01579b' } : { color: 'white' }}
+          sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
         />
       ),
       subMenus: [],
     },
     {
-      name: 'Project',
+      name: "Project",
       icon: (
         <AddchartIcon
-          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
+          sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
         />
       ),
-      path: 'empproject',
+      path: "project",
       subMenus: [],
     },
     {
-      name: 'Event',
+      name: "Event",
       icon: (
         <EventIcon
-          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
+          sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
         />
       ),
-      path: 'event',
+      path: "event",
       subMenus: [],
     },
     {
-      name: 'Holiday',
+      name: "Holiday",
       icon: (
         <HolidayVillageIcon
-          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
+          sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
         />
       ),
-      path: 'holiday',
+      path: "holiday",
       subMenus: [],
     },
     {
-      name: 'Todo',
+      name: "Todo",
       icon: (
         <PlaylistAddCheckIcon
-          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
+          sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
         />
       ),
-      path: 'todolist',
+      path: "todolist",
       subMenus: [],
     },
   ];
 
-  const drawerMenus = userRole === "ROLE_ADMIN" ? drawerMenusForAdmin : drawerMenusForEmployee;
+  const drawerMenus =
+    userRole === "ROLE_ADMIN" ? drawerMenusForAdmin : drawerMenusForEmployee;
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -393,80 +391,76 @@ export default function AdminSidebar() {
         </DrawerHeader>
         <Divider />
         <List>
-          { drawerMenus.map((menu, index) => (
-                <React.Fragment key={index}>
-                  <StyledNavLink key={index} to={menu.path}>
-                    <ListItemButton
-                      onClick={() => handleSubMenuToggle(index)}
-                      sx={{
-                        backgroundColor:
-                          pathname.includes(menu.path) && "#ace8639e",
-                      }}
-                    >
-                      <ListItemIcon
-                        sx={
-                          mode === "light"
-                            ? { color: "Light", minWidth: "40px" }
-                            : { color: "White" }
-                        }
-                      >
-                        {menu.icon}
-                      </ListItemIcon>
-                      <ListItemText
-                        primary={menu.name}
+          {drawerMenus.map((menu, index) => (
+            <React.Fragment key={index}>
+              <StyledNavLink key={index} to={menu.path}>
+                <ListItemButton
+                  onClick={() => handleSubMenuToggle(index)}
+                  sx={{
+                    backgroundColor:
+                      pathname.includes(menu.path) && "#ace8639e",
+                  }}
+                >
+                  <ListItemIcon
+                    sx={
+                      mode === "light"
+                        ? { color: "Light", minWidth: "40px" }
+                        : { color: "White" }
+                    }
+                  >
+                    {menu.icon}
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={menu.name}
+                    sx={
+                      mode === "light" ? { color: "black" } : { color: "white" }
+                    }
+                  />
+                  {menu.subMenus.length > 0 ? (
+                    subMenuOpen[index] ? (
+                      <ExpandLess
                         sx={
                           mode === "light"
                             ? { color: "black" }
                             : { color: "white" }
                         }
                       />
-                      {menu.subMenus.length > 0 ? (
-                        subMenuOpen[index] ? (
-                          <ExpandLess
-                            sx={
-                              mode === "light"
-                                ? { color: "black" }
-                                : { color: "white" }
-                            }
-                          />
-                        ) : (
-                          <ExpandMore
-                            sx={
-                              mode === "light"
-                                ? { color: "black" }
-                                : { color: "white" }
-                            }
-                          />
-                        )
-                      ) : null}
-                    </ListItemButton>
-                  </StyledNavLink>
-                  {menu.subMenus.length > 0 && (
-                    <Collapse
-                      in={subMenuOpen[index]}
-                      timeout="auto"
-                      unmountOnExit
-                    >
-                      <List component="div" disablePadding>
-                        {menu.subMenus.map((subMenu, subIndex) => (
-                          <StyledNavLink key={subIndex} to={subMenu.path}>
-                            <ListItemButton
-                              sx={{
-                                backgroundColor:
-                                  pathname.includes(subMenu.path) &&
-                                  "#ace8639e",
-                              }}
-                            >
-                              <ListItemIcon>{subMenu.icon}</ListItemIcon>
-                              <ListItemText primary={subMenu.name} />
-                            </ListItemButton>
-                          </StyledNavLink>
-                        ))}
-                      </List>
-                    </Collapse>
-                  )}
-                </React.Fragment>
-              ))}
+                    ) : (
+                      <ExpandMore
+                        sx={
+                          mode === "light"
+                            ? { color: "black" }
+                            : { color: "white" }
+                        }
+                      />
+                    )
+                  ) : null}
+                </ListItemButton>
+              </StyledNavLink>
+              {menu.subMenus.length > 0 && (
+                <Collapse in={subMenuOpen[index]} timeout="auto" unmountOnExit>
+                  <List component="div" disablePadding>
+                    {menu.subMenus.map((subMenu, subIndex) => {
+                      return(
+                      <StyledNavLink key={subIndex} to={subMenu.path}>
+                        
+                        <ListItemButton
+                          sx={{
+                            backgroundColor:
+                              pathname.includes(subMenu.name.toLowerCase()) &&
+                              "#ace8639e",
+                          }}
+                        >
+                          <ListItemIcon>{subMenu.icon}</ListItemIcon>
+                          <ListItemText primary={subMenu.name} />
+                        </ListItemButton>
+                      </StyledNavLink>
+                    )})}
+                  </List>
+                </Collapse>
+              )}
+            </React.Fragment>
+          ))}
         </List>
         <Divider />
         <Box
@@ -523,7 +517,7 @@ export default function AdminSidebar() {
           >
             <BreadCrumbs />
           </Box>
-          <div style={{ minHeight: '90vh' }}>
+          <div style={{ minHeight: "90vh" }}>
             <Outlet />
           </div>
         </Card>
