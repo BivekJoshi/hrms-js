@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
-import { Box, Divider, Grid, Stack, Typography } from "@mui/material";
-import MainCard from "../MainCard";
+import { Divider, Grid, Stack, Typography } from "@mui/material";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
 import { useNavigate } from "react-router-dom";
 
@@ -9,7 +8,6 @@ const DashboardCard = ({
   icon,
   count,
   linkTo,
-  borderLeft,
   borderColor,
 }) => {
   const navigate = useNavigate();
@@ -54,7 +52,7 @@ const DashboardCard = ({
         />
       </Grid>
 
-      <Divider orientation="vertical" flexItem sx={{width:"1rem"}}/>
+      <Divider orientation="vertical" flexItem />
       <Stack flexDirection="column">
         <img src={icon} alt="" />
         <Typography

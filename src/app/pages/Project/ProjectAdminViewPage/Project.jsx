@@ -23,6 +23,7 @@ import HocButton from "../../../hoc/hocButton";
 import PermissionHoc from "../../../hoc/permissionHoc";
 import useAuth from "../../../../auth/hooks/component/login/useAuth";
 import DeactivatedProject from "../DeactivatedProject/DeactivatedProject";
+import { ButtonComponent } from "../../../components/Button/ButtonComponent";
 
 const Project = ({ permissions }) => {
   const { isEmployee } = useAuth();
@@ -88,22 +89,19 @@ const Project = ({ permissions }) => {
             marginBottom: "1.2rem",
           }}
         >
-          On-Going Projects
+          On-Going Projectssss
           {isEmployee ? null : (
             <Box display="flex" gap={".5rem"}>
-              <HocButton
-                permissions={permissions}
-                color={"primary"}
-                variant={"outlined"}
+              <ButtonComponent
+                BGColor="white"
+                TextColor="black"
                 onClick={handleOpenModal}
                 buttonName={"Terminated Project"}
               />
-              <HocButton
-                permissions={permissions}
-                color={"primary"}
-                variant={"contained"}
-                onClick={handleAddOpenModal}
-                buttonName={"+Add Project"}
+              <ButtonComponent
+                color="white"
+                OnClick={handleAddOpenModal}
+                buttonName="+Add Employee"
               />
             </Box>
           )}
