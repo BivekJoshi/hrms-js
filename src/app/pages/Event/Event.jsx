@@ -119,7 +119,7 @@ const Event = ({ permissions }) => {
           onClose={() => setOpenSubmitModal(false)}
           formComponent={
             <div>
-              <h2>Event Added Successfully!</h2>
+              <Typography variant="h4">Event Added Successfully!</Typography>
               <p>Do you like to Email this event to Employee.</p>
               <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
                 <Button

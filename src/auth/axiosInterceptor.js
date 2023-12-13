@@ -1,11 +1,33 @@
 import Axios from 'axios';
 import { toast } from 'react-toastify';
 import { getUser, removeUser } from '../app/utils/cookieHelper';
+import jwtDecode from 'jwt-decode';
 
-export const baseURL = 'https://103.94.159.144:8083/hrms/api/';
-export const DOC_URL = 'https://103.94.159.144/';
-// export const baseURL = 'http://172.16.16.8:6523/hrms/api/';
-// export const DOC_URL = 'http://172.16.16.8:6523/';
+// export const baseURL = 'https://103.94.159.144:8083/hrms/api/';
+// export const DOC_URL = 'https://103.94.159.144/';
+export const baseURL = 'http://172.16.16.8:6523/hrms/api/';
+export const DOC_URL = 'http://172.16.16.8/';
+
+// returns true if exipred && false is not
+const checkIfExpired = (token) => {
+  if (token) {
+    const decode = jwtDecode(token);
+    const exp = decode.exp;
+
+    const iat = decode.iat;
+    const now = new Date();
+    if (now.getTime() > exp * 1000) {
+      return true;
+    }
+    if (now.getTime() < iat * 10 - 60000) {
+      alert('Wrong System Time \n Please correct your system time');
+      return true;
+    }
+    return false;
+  }
+  return true;
+};
+
 export const axiosInstance = Axios.create({
   baseURL: baseURL,
   timeout: 20000,
@@ -15,7 +37,11 @@ axiosInstance.interceptors.request.use(function (config) {
   const data = getUser();
   config.withCredentials = false;
   if (data !== null) {
-    config.headers['Authorization'] = 'Bearer ' + data;
+    if (!checkIfExpired(data)) {
+      config.headers['Authorization'] = 'Bearer ' + data;
+    } else {
+      removeUser();
+    }
   }
 
   return config;
@@ -28,10 +54,6 @@ axiosInstance.interceptors.response.use(
   function (error) {
     if (error.response) {
       const errorMessage = error?.response?.data?.message;
-      console.log(
-        '🚀 ~ file: axiosInterceptor.js:29 ~ errorMessage:',
-        errorMessage
-      );
       if (
         errorMessage === 'invalid_or_missing_token' ||
         errorMessage === 'user_disabled'

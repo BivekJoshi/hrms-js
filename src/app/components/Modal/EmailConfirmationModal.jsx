@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, Box, Button } from "@mui/material";
+import { Modal, Box, Button, Typography } from "@mui/material";
 
 const EmailConfirmationModal = ({ open, onClose, onConfirm }) => {
   return (
@@ -11,7 +11,7 @@ const EmailConfirmationModal = ({ open, onClose, onConfirm }) => {
     >
       <div>
         <Box>
-          <h3>Do you want to Email this event to Employees?</h3>
+          <Typography variant="h5">Do you want to Email this event to Employees?</Typography>
           <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
             <Button variant="contained" sx={{ mt: 3, ml: 1 }} onClick={onConfirm}>
               Yes

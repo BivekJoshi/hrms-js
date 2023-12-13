@@ -32,18 +32,19 @@ export const LeftEmployDashbord = ({}) => {
   return (
     <Box className="employeeDeshbord">
       <Box>
-        <h3 style={{ marginBottom: "1rem" }}>Event & Holiday</h3>
+        <Typography variant="h5" style={{ marginBottom: "1rem" }}>Event & Holiday</Typography>
         <Box
           className={
             mode === "light"
               ? " employeeDeshbord"
               : "employeeDeshbordBGDark employeeDeshbord"
           }
-          boxShadow="2"
+          boxShadow="7"
           padding=".5rem"
+          borderRadius="10px"
         >
           <Box className="employeeDeshbord" padding="1rem 2rem 0">
-            <h4>Event this month </h4>
+            <Typography variant="h6">Event this month </Typography>
 
             <Box display="grid" gap="1rem">
               {employAllNotiData && employAllNotiData?.slice(0, 3).map((notify, index) => (
@@ -91,7 +92,7 @@ export const LeftEmployDashbord = ({}) => {
             </Box>
           </Box>
           <Box className="employeeDeshbord" padding="1rem 2rem 1rem">
-            <h4>Holiday this month</h4>
+            <Typography variant="h6">Holiday this month</Typography>
 
             <Box display="grid" gap="1rem">
               {currentHoliday?.slice(0, 3).map((notify, index) => (
@@ -138,19 +139,6 @@ export const LeftEmployDashbord = ({}) => {
           </Box>
         </Box>
       </Box>
-
-      {/* <Box className="employeeDeshbord ">
-        <h3>Check Mail</h3>
-        <Box
-          className={
-            mode === "light" ? "employeeDeshbordBG" : "employeeDeshbordBGDark"
-          }
-        >
-          <Typography padding="1rem 2rem">
-            please check birthday mail
-          </Typography>
-        </Box>
-      </Box> */}
     </Box>
   );
 };

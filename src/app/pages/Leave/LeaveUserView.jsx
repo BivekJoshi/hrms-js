@@ -29,10 +29,8 @@ const halfLeaveType = [
 const LeaveUserView = () => {
   const navigate = useNavigate();
   const { data: leaveData, isLoading } = useGetLoggedInUserLeave();
-  const {
-    data: leaveTypeData,
-    isLoading: loadingLeaveType,
-  } = useGetLeaveType();
+  const { data: leaveTypeData, isLoading: loadingLeaveType } =
+    useGetLeaveType();
   const [deletedLeave, setDeletedLeave] = useState({});
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const { mode } = useContext(ThemeModeContext);
@@ -205,7 +203,11 @@ const LeaveUserView = () => {
             >
               <ModeEditOutlineIcon />
             </Button>
-            <Button color="primary" onClick={() => handleDeleteLeave(rowData)}>
+            <Button
+              color="primary"
+              onClick={() => handleDeleteLeave(rowData)}
+              disabled={isApprovedOrRejected}
+            >
               <DeleteIcon />
             </Button>
           </Stack>

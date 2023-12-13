@@ -1,27 +1,58 @@
-import React from "react";
-import { Area, AreaChart, CartesianGrid, ReferenceLine } from "recharts";
-import { ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import React, { useContext } from "react";
+import Chart from "react-apexcharts";
+import ThemeModeContext from "../../../../theme/ThemeModeContext";
 
 export const EmployLineChart = ({ attendanceData }) => {
+  const { mode } = useContext(ThemeModeContext);
+
+  const chartOptions = {
+    chart: {
+      id: "employee-attendance-chart",
+      toolbar: {
+        show: false,
+      },
+    },
+    dataLabels: {
+      enabled: false,
+    },
+    xaxis: {
+      categories: attendanceData?.map((item) => item.monthBS),
+      labels: {
+        style: {
+          colors: Array(12).fill(mode === "light" ? "black" : "white"),
+        },
+      },
+    },
+    yaxis: {},
+    grid: {
+      borderColor: "#f1f1f1",
+    },
+    tooltip: {
+      enabled: true,
+    },
+    stroke: {
+      curve: "smooth",
+    },
+    markers: {
+      size: 3,
+      strokeWidth: 0,
+    },
+  };
+
+  const series = [
+    {
+      name: "Present Days",
+      data: attendanceData?.map((item) => item.attendanceCountRes.presentDays),
+    },
+  ];
+
   return (
-    <ResponsiveContainer width="100%" height="90%">
-      <AreaChart
-        data={attendanceData}
-       // margin={{ top: 20, right: 30, left: 0, bottom: 0 }}
-      >
-        <XAxis dataKey="monthBS" />
-        <YAxis />
-        <CartesianGrid strokeDasharray="3 3" />
-        <Tooltip />
-        <ReferenceLine x="Page C" stroke="green" label="Min PAGE" />
-        <ReferenceLine y={32} label="Max" stroke="red" strokeDasharray="3 3" />
-        <Area
-          type="monotone"
-          dataKey="attendanceCountRes.presentDays"
-          stroke="#8884d8"
-          fill="#8884d8"
-        />
-      </AreaChart>
-    </ResponsiveContainer>
+    <Chart
+      options={chartOptions}
+      series={series}
+      type="area"
+      height="80%"
+      width="100%"
+    />
   );
 };

@@ -216,11 +216,11 @@ const ProjectCard = ({
                     width: "80%",
                   }}
                   label={
-                    <h3
-                      style={{ overflow: "hidden", textOverflow: "ellipsis" }}
+                    <Typography variant='h5'
+                      style={{ overflow: "hidden", textOverflow: "ellipsis", textTransform:"capitalize" }}
                     >
                       {ProjectName}
-                    </h3>
+                    </Typography>
                   }
                 />
               </Typography>

@@ -1,14 +1,13 @@
-import MaterialTable from "@material-table/core";
-import React, { useState } from "react";
+import MaterialTable from '@material-table/core';
+import React, { useState } from 'react';
 import {
   useAddActivateProject,
   useGetDeactivatedProject,
-} from "../../../hooks/project/useProject";
-import { useGetEmployee } from "../../../hooks/employee/useEmployee";
-import { Button, Stack } from "@mui/material";
-import { AddProjectActiveModal } from "../ProjectModal/ProjectModal";
+} from '../../../hooks/project/useProject';
+import { useGetEmployee } from '../../../hooks/employee/useEmployee';
+import { Button, Stack } from '@mui/material';
+import { AddProjectActiveModal } from '../ProjectModal/ProjectModal';
 import RestoreFromTrashOutlinedIcon from '@mui/icons-material/RestoreFromTrashOutlined';
-
 
 const DeactivatedProject = () => {
   const { data: deactivatedProject, isLoading } = useGetDeactivatedProject();
@@ -17,7 +16,6 @@ const DeactivatedProject = () => {
   const [openActivateModal, setOpenActivateModal] = useState(false);
   const [activateProject, setActivateProject] = useState({});
   const handleCloseActivateModal = () => setOpenActivateModal(false);
-  
 
   const getLeaderName = (rowData) => {
     const projectId = rowData.projectLeaderId;
@@ -26,7 +24,6 @@ const DeactivatedProject = () => {
     return name;
   };
 
-
   const handleActivateProject = (rowData) => {
     setActivateProject(rowData);
     setOpenActivateModal(true);
@@ -34,19 +31,19 @@ const DeactivatedProject = () => {
 
   const columns = [
     {
-      title: "SN",
+      title: 'SN',
       render: (rowData) => rowData.tableData.id + 1,
-      width: "2%",
+      width: '2%',
       sortable: false,
       sorting: false,
     },
     {
-      title: "Project Name",
-      field: "projectName",
-      emptyValue: "-",
+      title: 'Project Name',
+      field: 'projectName',
+      emptyValue: '-',
     },
     {
-      title: "Project Leader Name",
+      title: 'Project Leader Name',
       render: (rowData) => {
         return <p>{getLeaderName(rowData)}</p>;
       },
@@ -55,8 +52,8 @@ const DeactivatedProject = () => {
 
   const actions = [
     {
-      icon: () => <RestoreFromTrashOutlinedIcon sx={{ color: "#01579B" }} />,
-      tooltip: "Activate Project",
+      icon: () => <RestoreFromTrashOutlinedIcon sx={{ color: '#01579B' }} />,
+      tooltip: 'Activate Project',
       onClick: (event, rowData) => handleActivateProject(rowData),
     },
   ];
@@ -65,27 +62,27 @@ const DeactivatedProject = () => {
 
   return (
     <>
-      <br/>
+      <br />
       <MaterialTable
         columns={columns}
         data={deactivatedProject}
-        title="In Active Projects"
+        title='Inactive Projects'
         isLoading={isLoading}
         options={{
-          padding: "dense",
+          padding: 'dense',
           margin: 50,
           pageSize: 5,
           emptyRowsWhenPaging: false,
           actionsColumnIndex: -1,
           headerStyle: {
-            backgroundColor: "#1c7ed6",
-            color: "#FFF",
-            fontSize: "1rem",
-            padding: "dense",
+            backgroundColor: '#1c7ed6',
+            color: '#FFF',
+            fontSize: '1rem',
+            padding: 'dense',
             height: 50,
           },
           rowStyle: {
-            fontSize: ".8rem",
+            fontSize: '.8rem',
           },
         }}
         actions={actions}

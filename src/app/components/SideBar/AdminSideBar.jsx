@@ -86,7 +86,7 @@ export default function AdminSidebar() {
   const navigate = useNavigate();
   const location = useLocation();
   const [open, setOpen] = useState(false);
-  const { toggleMode, mode, palette } = useContext(ThemeModeContext);
+  const { mode } = useContext(ThemeModeContext);
   const [subMenuOpen, setSubMenuOpen] = useState({});
   const { pathname } = useLocation();
   const user = getUser();
@@ -129,7 +129,7 @@ export default function AdminSidebar() {
         },
         {
           name: "Leave",
-          path: "leave",
+          path: "employee/leave",
           icon: (
             <MailIcon
               sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
@@ -138,7 +138,7 @@ export default function AdminSidebar() {
         },
         {
           name: "Leave Type",
-          path: "typeleav",
+          path: "employee/leaveType",
           icon: (
             <MailIcon
               sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
@@ -147,7 +147,7 @@ export default function AdminSidebar() {
         },
         {
           name: "Attendance",
-          path: "attendance",
+          path: "employee/attendance",
           icon: (
             <HowToRegIcon
               sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
@@ -156,7 +156,7 @@ export default function AdminSidebar() {
         },
         {
           name: "Birthday",
-          path: "birthday",
+          path: "employee/birthday",
           icon: (
             <CakeIcon
               sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
@@ -172,7 +172,7 @@ export default function AdminSidebar() {
           sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
         />
       ),
-      path: "resource",
+      path: "logistics/office",
       subMenus: [],
     },
     {
@@ -264,7 +264,7 @@ export default function AdminSidebar() {
           sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
         />
       ),
-      path: "empdashboard",
+      path: "home",
       subMenus: [],
     },
     {
@@ -493,7 +493,7 @@ export default function AdminSidebar() {
             sx={{ marginRight: "8px", marginTop: "1rem" }}
           >
             {mode === "light" ? "Dark" : "Light"} Mode
-            <Switch checked={mode === "dark"} onChange={toggleMode} />
+            {/* <Switch checked={mode === "dark"} onChange={toggleMode} /> */}
           </Typography>
         </Box>
       </Drawer>
@@ -521,22 +521,11 @@ export default function AdminSidebar() {
             gap="1rem"
             alignItems="center"
           >
-            {location.pathname !== "/admin/dashboard" && (
-              <Fab
-                color="primary"
-                sx={{ height: "auto", padding: ".3rem 0" }}
-                aria-label="add"
-                variant="extended"
-                onClick={() => {
-                  navigate(-1);
-                }}
-              >
-                <ArrowBackIcon />
-              </Fab>
-            )}
             <BreadCrumbs />
           </Box>
-          <Outlet />
+          <div style={{ minHeight: '90vh' }}>
+            <Outlet />
+          </div>
         </Card>
         <Footer />
       </Main>

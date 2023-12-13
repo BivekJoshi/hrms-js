@@ -84,6 +84,7 @@
 
 import React from "react";
 import CustomTable from "../../../components/CustomTable/CustomTable";
+import { Typography } from "@mui/material";
 
 const columns = [
   {
@@ -124,10 +125,10 @@ const columns = [
 ].filter(Boolean);
 
 const ProjectMyTask = ({ taskData }) => {
-  return (
-    <>
-      <CustomTable columns={columns} data={taskData} title="My Task" />
-    </>
+  return taskData ? (
+    <CustomTable columns={columns} data={taskData} title="My Task" />
+  ) : (
+    <Typography textAlign="center">Task is not assign</Typography>
   );
 };
 

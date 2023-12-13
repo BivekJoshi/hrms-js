@@ -11,14 +11,12 @@ const BarChatDiagram = ({ dashboardData }) => {
     'New Employees',
     'Male Employees',
     'Female Employees',
-    'All Projects',
   ];
   const Data = [
     `${dashboardData?.allEmployees}`,
     `${dashboardData?.newEmployees}`,
     `${dashboardData?.maleEmployees}`,
     `${dashboardData?.femaleEmployees}`,
-    `${dashboardData?.allProjects}`,
   ];
   const barColors = palette.secondary.main;
   const chartOptions = {

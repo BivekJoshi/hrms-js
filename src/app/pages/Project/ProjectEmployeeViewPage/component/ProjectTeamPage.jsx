@@ -1,6 +1,6 @@
 import React from "react";
 import EmployeeCard from "../../../../components/cards/Employee/EmployeeCard";
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 
 function ProjectTeamPage({
   projectWiseEmployeeData,
@@ -20,9 +20,9 @@ function ProjectTeamPage({
       {projectWiseEmployeeData ? (
         projectWiseEmployeeData.map((project, index) => (
           <Box key={index} sx={{ marginTop: "3rem" }}>
-            <h3 style={{ padding: " 0 0 1rem 0 " }}>
+            <Typography variant='h4' style={{ padding: " 0 0 1rem 0 " }}>
               Project : {getProjectName(project?.projectId)}
-            </h3>
+            </Typography>
             <Box key={project?.projecctId}>
               <Grid
                 container

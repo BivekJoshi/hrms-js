@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import React from "react";
 import ProjectProgresscard from "./Component/ProjectProgresscard";
 import PsychologyAltIcon from "@mui/icons-material/PsychologyAlt";
@@ -48,7 +48,7 @@ export const ProjectDashboard = (props) => {
 
   return (
     <Box>
-      <h3 style={{ marginTop: ".5rem" }}>HRMS</h3>
+      <Typography variant='h3' style={{ marginTop: ".5rem" }}>HRMS</Typography>
       <Box
         display="grid"
         grid
@@ -72,15 +72,15 @@ export const ProjectDashboard = (props) => {
         paddingTop="4rem"
       >
         <Box>
-          <h4>Task Status</h4>
+          <Typography variant="h7">Task Status</Typography>
           <ProjectPiChart task={taskStatus} COLORS={taskStatusColors}/>
         </Box>
         <Box>
-          <h4>Task Priority</h4>
+          <Typography variant="h7">Task Priority</Typography>
           <ProjectPiChart task={taskPriority} COLORS={taskPriorityColors}/>
         </Box>
         <Box  height="100%" >
-          <h4 style={{margin:"0 0 -100px 0px"}}>Employee Progress</h4>
+          <Typography variant="h7" style={{margin:"0 0 -100px 0px"}}>Employee Progress</Typography>
           <EmploytaskBarGraph />
         </Box>
       </Box>

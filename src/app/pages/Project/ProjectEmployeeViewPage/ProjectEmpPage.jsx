@@ -15,7 +15,7 @@ import { useGetTaskLoggedInUser } from "../../../hooks/project/ProjectTask/usePr
 
 export default function ProjectEmpPage() {
   const { data: logInUserData } = useGetLoggedInUser();
-  const {data:taskData}=useGetTaskLoggedInUser();
+  const { data: taskData } = useGetTaskLoggedInUser();
   const { data: projectWiseEmployeeData } = useGetProjectWiseEmployee(
     logInUserData?.employeeId
   );
@@ -26,8 +26,7 @@ export default function ProjectEmpPage() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
-  return (
+  return projectData ? (
     <Box sx={{ width: "100%", typography: "body1" }}>
       <TabContext value={value}>
         <Box sx={{ border: 2, borderColor: "divider" }}>
@@ -56,9 +55,11 @@ export default function ProjectEmpPage() {
           />
         </TabPanel>
         <TabPanel value="4">
-          <ProjectMyTask taskData={taskData}/>
+          <ProjectMyTask taskData={taskData} />
         </TabPanel>
       </TabContext>
     </Box>
+  ) : (
+    "hellow"
   );
 }
