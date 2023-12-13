@@ -5,6 +5,7 @@ import {
   usePermanentAddAddress,
   useTemporaryAddress,
 } from '../useAddress';
+import { toast } from 'react-toastify';
 
 export const usePermanentAddressForm = ({
   data,
@@ -16,50 +17,69 @@ export const usePermanentAddressForm = ({
 
   const addressDetails = !isLoading && data?.addresses;
 
-  const mapAddress = (index) => {
-    const address = addressDetails[index] || {};
-    return {
-      addressType: index === 0 ? 'PERMANENT' : 'TEMPORARY',
-      id: address.id || '',
-      country: address.country || '',
-      province: address.province || '',
-      district: address.district || '',
-      wardNumber: address.wardNumber || '',
-      city: address.city || '',
-      street: address.street || '',
-    };
-  };
-
-  const filteredAddresses = [
-    mapAddress(0), // Permanent Address
-    mapAddress(1), // Temporary Address
-  ].filter((address) => address.province !== ''); // Exclude addresses with empty province
-
   const initialValues = {
-    addresses: filteredAddresses,
+    addresses: [
+      createAddressObject(addressDetails[0]),
+      createAddressObject(addressDetails[1], 'TEMPORARY'),
+    ],
   };
 
   const formik = useFormik({
     initialValues,
     validationSchema: AddressSchema,
     enableReinitialize: true,
-    onSubmit: (values) => {
-      if (data?.addresses.length > 0) {
-        handleEditRequest(values);
-      } else {
-        handleRequest(values);
-      }
-    },
+    onSubmit: handleSubmit,
   });
 
-  const handleRequest = (values) => {
-    permanentMutate(values);
-    temporaryMutate(values);
-  };
+  function createAddressObject(details, type = 'PERMANENT') {
+    return {
+      addressType: type,
+      id: details?.id || '',
+      country: details?.country || '',
+      province: details?.province || '',
+      district: details?.district || '',
+      wardNumber: details?.wardNumber || '',
+      city: details?.city || '',
+      street: details?.street || '',
+    };
+  }
 
-  const handleEditRequest = (values) => {
-    editMutate(values);
-  };
+  function handleSubmit(values) {
+    const hasAddresses = addressDetails?.length > 0;
+
+    if (hasAddresses) {
+      handleEditRequest(values);
+    } else {
+      handleRequest(values);
+    }
+  }
+
+  function handleRequest(values) {
+    permanentMutate(values.addresses[0]);
+    temporaryMutate(values.addresses[1]);
+  }
+
+  function handleEditRequest(values) {
+    const [permanent, temporary] = values.addresses;
+
+    const handleEditMutate = (address, onSuccessMessage) => {
+      editMutate(address, {
+        onSuccess: () => {
+          toast.success(onSuccessMessage);
+        },
+        onError: (err) => {
+          toast.error(err);
+        },
+      });
+    };
+
+    if (temporary) {
+      handleEditMutate(permanent, 'Permanent address edited successfully');
+      handleEditMutate(temporary, 'Temporary address edited successfully');
+    } else {
+      handleEditMutate(permanent, 'Address edited successfully');
+    }
+  }
 
   return { formik };
 };

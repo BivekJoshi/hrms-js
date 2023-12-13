@@ -1,8 +1,8 @@
-import { axiosInstance } from "../../../auth/axiosInterceptor";
+import { axiosInstance } from '../../../auth/axiosInterceptor';
 
 export const addPermanentAddress = async (formData, id) => {
   const permanentAddress = formData.addresses.find(
-    (address) => address.addressType === "PERMANENT"
+    (address) => address.addressType === 'PERMANENT'
   );
   if (permanentAddress) {
     const data = await axiosInstance.post(`/address/create/${id}`, [
@@ -16,9 +16,9 @@ export const addPermanentAddress = async (formData, id) => {
 
 export const addTemporaryAddress = async (formData, id) => {
   const temporaryAddress = formData.addresses.find(
-    (address) => address.addressType === "TEMPORARY"
+    (address) => address.addressType === 'TEMPORARY'
   );
-  const requiredFields = ["street", "city"];
+  const requiredFields = ['street', 'city'];
   const allRequiredFieldsFilled = requiredFields.every(
     (field) => temporaryAddress[field]
   );
@@ -30,7 +30,7 @@ export const addTemporaryAddress = async (formData, id) => {
       ]);
       return response.data;
     } catch (error) {
-      console.error("Error adding temporary address:", error);
+      console.error('Error adding temporary address:', error);
       throw error;
     }
   } else {
@@ -46,29 +46,32 @@ export const getAddressById = (id) => {
 };
 
 export const editAddress = async (formData, id) => {
-  let addressId = [];
-  if (formData?.addresses.length > 0) {
-    addressId.push(formData?.addresses[0]?.id);
-    addressId.push(formData?.addresses[1]?.id);
-    if (addressId[1]) {
-      const data = await axiosInstance.put(
-        `/address/edit/${id}?aIds=${addressId[0]}&aIds=${addressId[1]}`,
-        formData.addresses
-      );
-      return data;
-    } else {
-      const data = await axiosInstance.put(
-        `/address/edit/${id}?aIds=${addressId[0]}`,
-        formData.addresses
-      );
-      return data;
-    }
-  } else if (formData?.addresses.length === 1) {
-    addressId.push(formData?.addresses[0]?.id);
-    const data = await axiosInstance.put(
-      `/address/edit/${id}?aIds=${addressId[0]}`,
-      formData.addresses
-    );
+  if (id) {
+    const data = axiosInstance.put(`/address/edit/${formData?.id}`, formData);
     return data;
   }
+  // let addressId = [];
+  // if (formData?.addresses.length > 0) {
+  //   addressId.push(formData?.addresses[0]?.id);
+  //   addressId.push(formData?.addresses[1]?.id);
+  //   if (addressId[1]) {
+  //     const data = await axiosInstance.put(
+  //       `/address/edit/${id}?aIds=${addressId[0]}&aIds=${addressId[1]}`,
+  //       formData.addresses
+  //     );
+  //     return data;
+  //   } else {
+  //     const data = await axiosInstance.put(
+  //       `/address/edit/${id}?aIds=${addressId[0]}`,
+  //       formData.addresses
+  //     );
+  //     return data;
+  //   }
+  // } else if (formData?.addresses.length === 1) {
+  //   addressId.push(formData?.addresses[0]?.id);
+  //   const data = await axiosInstance.put(
+  //     `/address/edit/${id}?aIds=${addressId[0]}`,
+  //     formData.addresses
+  //   );
+  //   return data;
 };
