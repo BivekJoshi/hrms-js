@@ -2,19 +2,16 @@ import React, { lazy } from "react";
 import ScrollToTop from "../app/utils/ScrolltoTop";
 import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
 import Applayout from "../layout/Applayout";
-import AdminLayout from "../layout/AdminLayout";
 import ProtectedRoute from "./ProtectedRoute";
-import { adminRoutes } from "./adminRoutes";
-import { employeeRoutes } from "./employeeRoutes";
 import ForgotPassword from "../app/pages/Auth/FogotPassword/ForgotPassword";
 import Login from "../app/pages/Auth/Login/Login";
 import RenamePassword from "../app/pages/Auth/ResetPassword/RenamePassword";
-import EmployeeLayout from "../layout/EmployeeLayout";
-import { AccessControl } from "./AccessControl";
 import Dashboard from "../app/pages/Dashboard/Dashboard";
 import EmployeeDashbord from "../app/pages/EmployeePage/EmployeeDashboard/EmployeeDashbord";
 import LoggedInRoutes from "./LoggedInRoutes";
 import ErrorPage from "./ErrorPage";
+import AdminSidebar from "../app/components/SideBar/AdminSideBar";
+import { routes } from "./routes";
 
 const AppRoutes = () => {
   
@@ -38,23 +35,23 @@ const AppRoutes = () => {
               />
 
               <Route element={<ProtectedRoute redirectTo="/" />}>
-                <Route path="/admin" element={<AdminLayout />}>
+                <Route path="/admin" element={<AdminSidebar />}>
                   <Route
-                    element={
-                      <LoggedInRoutes
-                        redirectTo="/404"
-                        allowedRoles={[
-                          "ROLE_SUPER_ADMIN",
-                          "ROLE_ADMIN",
-                          "ROLE_MANAGER",
-                          "ROLE_HR_ADMIN",
-                          "ROLE_HR_CLERK",
-                        ]}
-                      />
-                    }
+                    // element={
+                    //   <LoggedInRoutes
+                    //     redirectTo="/404"
+                    //     allowedRoles={[
+                    //       "ROLE_SUPER_ADMIN",
+                    //       "ROLE_ADMIN",
+                    //       "ROLE_MANAGER",
+                    //       "ROLE_HR_ADMIN",
+                    //       "ROLE_HR_CLERK",
+                    //     ]}
+                    //   />
+                    // }
                   >
                     <Route exact index element={<Dashboard />} />
-                    {adminRoutes.map((route) => (
+                    {routes.map((route) => (
                       <Route
                         key={route.id}
                         path={route.path}
@@ -65,7 +62,7 @@ const AppRoutes = () => {
                   </Route>
                 </Route>
 
-                <Route path="/employee" element={<EmployeeLayout />}>
+                <Route path="/employee" element={<AdminSidebar/>}>
                   <Route
                     element={
                       <LoggedInRoutes
@@ -75,7 +72,7 @@ const AppRoutes = () => {
                     }
                   >
                     <Route index element={<EmployeeDashbord />} />
-                    {employeeRoutes.map((route) => (
+                    {routes.map((route) => (
                       <Route
                         key={route.id}
                         path={route.path}

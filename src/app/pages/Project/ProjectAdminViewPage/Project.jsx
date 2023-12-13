@@ -152,7 +152,7 @@ const Project = ({ permissions }) => {
           gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))",
         }}
       >
-        {filteredProject.slice(startIndex, endIndex).map((item, index) => (
+        {filteredProject?.slice(startIndex, endIndex).map((item, index) => (
           <ProjectCard
             item={item}
             Id={item.id}
