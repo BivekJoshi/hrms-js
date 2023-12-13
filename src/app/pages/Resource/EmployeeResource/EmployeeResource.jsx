@@ -17,7 +17,6 @@ import { useGetOfficeResource } from "../../../hooks/resource/officeResource/use
 import PermissionHoc from "../../../hoc/permissionHoc";
 import HocButton from "../../../hoc/hocButton";
 import CustomTable from "../../../components/CustomTable/CustomTable";
-import { ButtonComponent } from "../../../components/Button/ButtonComponent";
 
 const EmployeeResource = ({ permissions }) => {
   const navigate = useNavigate();
@@ -137,15 +136,15 @@ const EmployeeResource = ({ permissions }) => {
           padding: ".5rem 0",
         }}
       >
-        <ButtonComponent
-          color={"primary"}
+        <HocButton
+          permissions={permissions}
           variant={"outlined"}
           onClick={() => {
             navigate(`/admin/logistics/office`);
           }}
           buttonName={"Logistics"}
-          BGColor="white"
-          TextColor="black"
+          color="black"
+          bg="white"
         />
         <HocButton
           permissions={permissions}
@@ -174,7 +173,7 @@ const EmployeeResource = ({ permissions }) => {
       )}
       {openAddModal && (
         <AddEmployeeResourceModal
-          title={"Add Logistics"}
+          title={"Provide Logistics to Employee"}
           id={editedEmployeeResouce?.id}
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
