@@ -12,7 +12,6 @@ import {
 import { Table, TableBody, TableRow, TableContainer } from '@mui/material';
 import { TableCell, TableHead } from '@mui/material';
 import { useGetAttendance } from '../../hooks/attendance/useAttendance';
-import './Attendance.css';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import { ButtonComponent } from '../../components/Button/ButtonComponent';
