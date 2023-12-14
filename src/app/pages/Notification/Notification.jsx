@@ -1,5 +1,5 @@
 import React, { useState, useRef, useContext } from 'react';
-import { Typography, Popper, Grow, IconButton, Tooltip } from '@mui/material';
+import { Typography, Popper, Grow, IconButton, Tooltip, Badge } from '@mui/material';
 import { Paper, Button, Box, ClickAwayListener, MenuList } from '@mui/material';
 import NotificationsIcon from '@mui/icons-material/NotificationsNone';
 import ThemeModeContext from '../../../theme/ThemeModeContext';
@@ -75,9 +75,14 @@ const Notification = ({ data }) => {
       <Box>
         <IconButton ref={anchorRef} onClick={handleToggle} style={btnStyle}>
           <Tooltip title='Notifications'>
+          <Badge
+            badgeContent=          {status ? ' ' : displayCount}
+
+            color='secondary'
+          >
             <NotificationsIcon />
+            </Badge>
           </Tooltip>
-          {status ? ' ' : displayCount}
         </IconButton>
         {eventCount !== 0 ? (
           <Popper
