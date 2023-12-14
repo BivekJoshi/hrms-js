@@ -36,15 +36,11 @@ const status = [
   },
 ];
 const TodoListFields = ({ onClose, isLoading, data }) => {
-  const { formik } = useTodoListForm(data);
+  const { formik } = useTodoListForm(data,onClose);
   const { mode } = useContext(ThemeModeContext);
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
-
-    if (formik.isValid) {
-      onClose();
-    }
   };
 
   const submitButtonText = data ? "Update Message" : "Add Message";

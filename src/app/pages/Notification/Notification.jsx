@@ -1,14 +1,21 @@
-import React, { useState, useRef, useContext } from 'react';
-import { Typography, Popper, Grow, IconButton, Tooltip, Badge } from '@mui/material';
-import { Paper, Button, Box, ClickAwayListener, MenuList } from '@mui/material';
-import NotificationsIcon from '@mui/icons-material/NotificationsNone';
-import ThemeModeContext from '../../../theme/ThemeModeContext';
+import React, { useState, useRef, useContext } from "react";
+import {
+  Typography,
+  Popper,
+  Grow,
+  IconButton,
+  Tooltip,
+  Badge,
+} from "@mui/material";
+import { Paper, Button, Box, ClickAwayListener, MenuList } from "@mui/material";
+import NotificationsIcon from "@mui/icons-material/NotificationsNone";
+import ThemeModeContext from "../../../theme/ThemeModeContext";
 import {
   EventNotification,
   LeaveNotification,
-} from './Component/EventNotification';
-import { useGetLeave } from '../../hooks/leave/useLeave';
-import useAuth from '../../../auth/hooks/component/login/useAuth';
+} from "./Component/EventNotification";
+import { useGetLeave } from "../../hooks/leave/useLeave";
+import useAuth from "../../../auth/hooks/component/login/useAuth";
 
 const Notification = ({ data }) => {
   const [status, setStatus] = useState();
@@ -21,8 +28,8 @@ const Notification = ({ data }) => {
 
   //leave notification
   const pendingLeaveData = isManager
-    ? leaveData?.filter((leave) => leave.leaveStatus === 'PENDING')
-    : '';
+    ? leaveData?.filter((leave) => leave.leaveStatus === "PENDING")
+    : "";
 
   const eventCount = isManager
     ? pendingLeaveData?.length + data?.eventCount || 0
@@ -49,10 +56,10 @@ const Notification = ({ data }) => {
   };
 
   function handleListKeyDown(event) {
-    if (event.key === 'Tab') {
+    if (event.key === "Tab") {
       event.preventDefault();
       setOpen(false);
-    } else if (event.key === 'Escape') {
+    } else if (event.key === "Escape") {
       setOpen(false);
     }
   }
@@ -67,20 +74,19 @@ const Notification = ({ data }) => {
   }, [open]);
 
   const btnStyle = {
-    color: '#fff',
+    color: "#fff",
   };
 
   return (
     <>
       <Box>
         <IconButton ref={anchorRef} onClick={handleToggle} style={btnStyle}>
-          <Tooltip title='Notifications'>
-          <Badge
-            badgeContent=          {status ? ' ' : displayCount}
-
-            color='secondary'
-          >
-            <NotificationsIcon />
+          <Tooltip title="Notifications">
+            <Badge
+              badgeContent={data?.isChecked ? "" : displayCount}
+              color="secondary"
+            >
+              <NotificationsIcon />
             </Badge>
           </Tooltip>
         </IconButton>
@@ -89,17 +95,17 @@ const Notification = ({ data }) => {
             open={open}
             anchorEl={anchorRef.current}
             role={undefined}
-            placement='bottom-start'
+            placement="bottom-start"
             transition
             disablePortal
-            style={{ marginLeft: '4rem' }}
+            style={{ marginLeft: "4rem" }}
           >
             {({ TransitionProps, placement }) => (
               <Grow
                 {...TransitionProps}
                 style={{
                   transformOrigin:
-                    placement === 'bottom-start' ? 'left top' : 'left bottom',
+                    placement === "bottom-start" ? "left top" : "left bottom",
                 }}
               >
                 <Paper>
@@ -108,7 +114,7 @@ const Notification = ({ data }) => {
                       <>
                         {pendingLeaveData.length > 0 ? (
                           <LeaveNotification
-                            Eventname={'Leave Request'}
+                            Eventname={"Leave Request"}
                             data={pendingLeaveData}
                             open={open}
                             handleClose={handleClose}
@@ -144,36 +150,36 @@ const Notification = ({ data }) => {
             open={open}
             anchorEl={anchorRef.current}
             role={undefined}
-            placement='bottom-start'
+            placement="bottom-start"
             transition
             disablePortal
-            style={{ width: { xs: '30%', lg: '15%' }, marginLeft: '-4rem' }}
+            style={{ width: { xs: "30%", lg: "15%" }, marginLeft: "-4rem" }}
           >
             {({ TransitionProps, placement }) => (
               <Grow
                 {...TransitionProps}
                 style={{
-                  background: mode === 'light' ? '' : '#4d4c4c',
+                  background: mode === "light" ? "" : "#4d4c4c",
                   transformOrigin:
-                    placement === 'bottom-start' ? 'left top' : 'left bottom',
+                    placement === "bottom-start" ? "left top" : "left bottom",
                 }}
               >
                 <Paper>
                   <ClickAwayListener onClickAway={handleClose}>
                     <MenuList
                       autoFocusItem={open}
-                      id='composition-menu'
-                      aria-labelledby='composition-button'
+                      id="composition-menu"
+                      aria-labelledby="composition-button"
                       onKeyDown={handleListKeyDown}
                       sx={{
-                        textAlign: 'center',
-                        width: '100%',
-                        padding: '1rem 2rem',
+                        textAlign: "center",
+                        width: "100%",
+                        padding: "1rem 2rem",
                       }}
                     >
                       <Typography
-                        variant='h7'
-                        color={mode === 'light' ? 'primary' : 'white'}
+                        variant="h7"
+                        color={mode === "light" ? "primary" : "white"}
                       >
                         No Events For Today !
                       </Typography>

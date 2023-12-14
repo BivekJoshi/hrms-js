@@ -18,6 +18,9 @@ const Company = ({ permissions }) => {
   const handleAddOpenModal = () => setOpenAddModal(true);
   const handleCloseAddModal = () => setOpenAddModal(false);
 
+  const { data: companyData, isLoading } = useGetCompany();
+
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -51,11 +54,11 @@ const Company = ({ permissions }) => {
           </Box>
           <TabPanel value='1' sx={{ padding: '0' }}>
             <br />
-            <CompanyTable permissions={permissions} />
+            <CompanyTable permissions={permissions} companyData={companyData} isLoading={isLoading}/>
           </TabPanel>
           <TabPanel value='2'>
             <br />
-            <CompanyGrid permissions={permissions} />
+            <CompanyGrid permissions={permissions} companyData={companyData} isLoading={isLoading}/>
           </TabPanel>
         </Box>
       </TabContext>

@@ -4,14 +4,10 @@ import React from 'react';
 import useDesignationForm from '../../../hooks/designation/DesignationForm/useDesignationForm';
 
 const DesignationFields = ({ onClose, isLoading, data }) => {
-  const { formik } = useDesignationForm(data);
+  const { formik } = useDesignationForm(data,onClose);
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
-
-    if (formik.isValid) {
-      onClose();
-    }
   };
 
   const submitButtonText = data ? 'Update Designation' : 'Add Designation';

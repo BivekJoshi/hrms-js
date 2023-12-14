@@ -39,9 +39,9 @@ const Profile = () => {
   };
   const handleProfile = () => {
     if (isAdmin || isManager || isSuperAdmin || isHrClerk || isHr) {
-    navigate("/admin/profile");
+    navigate("/admin/myprofile");
     }else{
-      navigate("/employee/profile");
+      navigate("/employee/myprofile");
     }
     handleClose();
   };
