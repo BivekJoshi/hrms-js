@@ -2,11 +2,14 @@ import Axios from 'axios';
 import { toast } from 'react-toastify';
 import { getUser, removeUser } from '../app/utils/cookieHelper';
 import jwtDecode from 'jwt-decode';
-// import { baseURL } from './axiosInterceptor';
+import { getBaseUrl } from './getBaseUrl';
 
-export const baseURL = 'https://103.94.159.144:8083/hrms/api/';
+// export const baseURL = 'https://103.94.159.144:8083/hrms/api/';
 // export const baseURL = 'https://172.16.16.94:6523/hrms/api/';
-export const DOC_URL = 'https://103.94.159.144/';
+const baseURL = getBaseUrl();
+console.log('🚀 ~ file: axiosInterceptor.js:11 ~ baseURL:', baseURL);
+
+export const DOC_URL = 'https://dgtrade36.ssl.com.np/';
 
 // returns true if exipred && false is not
 const checkIfExpired = (token) => {

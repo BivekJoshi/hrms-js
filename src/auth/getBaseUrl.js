@@ -8,10 +8,16 @@ export const contextPath = () => {
 
 export const getBaseUrl = () => {
   if (envType === 'development') {
-    return 'http://103.94.159.144:8085/pms/api';
+    return 'https://103.94.159.144:8083/hrms/api/';
   } else if (envType === 'production') {
-    let path = window.localStorage.getItem('bom-path');
-    path = path ? path + '/api' : null;
-    return path || contextPath() + '/api';
+    return contextPath() + '/api';
+  }
+};
+
+export const getDocUrl = () => {
+  if (envType === 'development') {
+    return 'https://103.94.159.144/';
+  } else if (envType === 'production') {
+    return contextPath() + '/api';
   }
 };
