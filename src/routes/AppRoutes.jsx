@@ -4,7 +4,6 @@ import { HashRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Applayout from '../layout/Applayout';
 import ProtectedRoute from './ProtectedRoute';
 import ForgotPassword from '../app/pages/Auth/FogotPassword/ForgotPassword';
-import Login from '../app/pages/Auth/Login/Login';
 import RenamePassword from '../app/pages/Auth/ResetPassword/RenamePassword';
 import Dashboard from '../app/pages/Dashboard/Dashboard';
 import EmployeeDashbord from '../app/pages/EmployeePage/EmployeeDashboard/EmployeeDashbord';

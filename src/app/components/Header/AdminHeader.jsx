@@ -39,7 +39,7 @@ const AppBar = styled(MuiAppBar, {
 export default function AdminHeader({ open, handleDrawerOpen }) {
   const { data: birthdayData } = useGetTodayBirthday();
   const { data: eventData } = useGetEventNotification();
-  const { mode, toggleMode, palette } = useContext(ThemeModeContext);
+  const { toggleMode, palette } = useContext(ThemeModeContext);
 
   return (
     <AppBar position='fixed' open={open}>

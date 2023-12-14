@@ -70,7 +70,6 @@ export const EditLeaveFields = ({ onClose, isLoading, data }) => {
   };
 
   const submitButtonText = data ? 'Update Leave' : 'Add Leave';
-
   if (isManager) {
     return (
       !isLoading && (
@@ -166,7 +165,6 @@ export const EditLeaveFields = ({ onClose, isLoading, data }) => {
 };
 
 export const LeaveFields = ({ onClose, isLoading, data }) => {
-  const { isManager } = useAuth();
   const { data: employeeData } = useGetEmployee();
   const { data: leaveTypeData } = useGetLeaveType();
   const { formik } = useLeaveForm(data);
@@ -206,8 +204,16 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
     }
   };
 
-  const submitButtonText = data ? 'Update Leave' : 'Add Leave';
+  const isMoreThanOneDayDifference = () => {
+    const fromDate = new Date(formik.values.fromDate);
+    const toDate = new Date(formik.values.toDate);
+    const oneDayInMilliseconds = 24 * 60 * 60 * 1000; // Number of milliseconds in one day
 
+    return toDate - fromDate > oneDayInMilliseconds;
+  };
+
+  const submitButtonText = data ? 'Update Leave' : 'Add Leave';
+  const currentDate = new Date().toISOString().split('T')[0];
   return (
     !isLoading && (
       <>
@@ -328,6 +334,9 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
               name='fromDate'
               label='From'
               type='date'
+              inputProps={{
+                min: currentDate, // Disable past date selections
+              }}
               required
               InputLabelProps={{ shrink: true }}
               fullWidth
@@ -342,6 +351,9 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
               name='toDate'
               label='To'
               type='date'
+              inputProps={{
+                min: formik.values.fromDate || currentDate,
+              }}
               InputLabelProps={{ shrink: true }}
               fullWidth
               value={formik.values.toDate}
@@ -408,6 +420,7 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
                   checked={formik.values.isHalfDay}
                   onChange={formik.handleChange}
                   name='isHalfDay'
+                  disabled={isMoreThanOneDayDifference()}
                 />
               }
               label='Is Half Day Leave'
