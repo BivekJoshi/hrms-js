@@ -337,7 +337,9 @@ export default function AdminSidebar() {
   ];
 
   const drawerMenus =
-    userRole === "ROLE_ADMIN" ? drawerMenusForAdmin : drawerMenusForEmployee;
+    userRole === "ROLE_ADMIN" || userRole === "ROLE_SUPER_ADMIN"
+      ? drawerMenusForAdmin
+      : drawerMenusForEmployee;
 
   const handleDrawerOpen = () => {
     setOpen(true);
