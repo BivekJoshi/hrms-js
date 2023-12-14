@@ -46,7 +46,7 @@ const AddPromotionHistoryFields = ({ onClose, isLoading }) => {
                                 error={formik.touched.positionId && Boolean(formik.errors.positionId)}
                                 helperText={formik.touched.positionId && formik.errors.positionId}
                                 variant='outlined'
-                                autoFocus
+                                
                                 InputLabelProps={{ shrink: true }}
                             />
                         )}
@@ -70,7 +70,7 @@ const AddPromotionHistoryFields = ({ onClose, isLoading }) => {
                             formik.touched.effectiveFromDate && formik.errors.effectiveFromDate
                         }
                         variant="outlined"
-                        autoFocus
+                        
                         InputLabelProps={{ shrink: true }}
                     />
                 </Grid>
@@ -86,7 +86,7 @@ const AddPromotionHistoryFields = ({ onClose, isLoading }) => {
                         error={formik.touched.remarks && Boolean(formik.errors.remarks)}
                         helperText={formik.touched.remarks && formik.errors.remarks}
                         variant="outlined"
-                        autoFocus
+                        
                         InputLabelProps={{ shrink: true }}
                     />
                 </Grid>

@@ -1,5 +1,5 @@
 import { Box, Container } from '@mui/material';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import ThemeModeContext from '../theme/ThemeModeContext';
 

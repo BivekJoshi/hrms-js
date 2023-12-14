@@ -18,7 +18,6 @@ export const useGetEmployeeById = () => {
 };
 
 export const usePermanentAddAddress = ({ onSuccess }) => {
-  const queryClient = useQueryClient();
   const { id } = useParams();
   return useMutation(
     ['addAddress'],
@@ -27,7 +26,6 @@ export const usePermanentAddAddress = ({ onSuccess }) => {
       onSuccess: (data, variables, context) => {
         toast.success('Permanent address added successfully');
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries('getEmployeeById');
       },
       onError: (err, _variables, _context) => {
         toast.error(`error: ${err.message}`);

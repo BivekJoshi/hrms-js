@@ -65,7 +65,7 @@ const TodoListFields = ({ onClose, isLoading, data }) => {
             error={formik.touched.message && Boolean(formik.errors.message)}
             helperText={formik.touched.message && formik.errors.message}
             variant="outlined"
-            autoFocus
+            
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
@@ -99,7 +99,7 @@ const TodoListFields = ({ onClose, isLoading, data }) => {
             error={formik.touched.priority && Boolean(formik.errors.priority)}
             helperText={formik.touched.priority && formik.errors.priority}
             variant="outlined"
-            autoFocus
+            
             InputLabelProps={{ shrink: true }}
           >
             {priority.map((option) => (
