@@ -340,10 +340,6 @@ export default function AdminSidebar() {
     userRole === 'ROLE_ADMIN' || userRole === 'ROLE_SUPER_ADMIN'
       ? drawerMenusForAdmin
       : drawerMenusForEmployee;
-  console.log(
-    '🚀 ~ file: AdminSideBar.jsx:341 ~ AdminSidebar ~ userRole:',
-    userRole
-  );
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -456,6 +452,7 @@ export default function AdminSidebar() {
                             sx={{
                               backgroundColor:
                                 pathname.includes(subMenu.path) && '#ace8639e',
+                              color: mode === 'dark' && 'white',
                             }}
                           >
                             <ListItemIcon>{subMenu.icon}</ListItemIcon>
