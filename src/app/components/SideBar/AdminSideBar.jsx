@@ -193,7 +193,7 @@ export default function AdminSidebar() {
       subMenus: [],
     },
     {
-      name: 'Company',
+      name: 'Branch',
       icon: (
         <BusinessIcon
           sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}

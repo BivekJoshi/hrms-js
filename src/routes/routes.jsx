@@ -175,7 +175,7 @@ const routes = [
   },
   {
     path: 'company',
-    name: 'Company',
+    name: 'Branch',
     id: nanoid(),
     component: <Company component='company' />,
   },
@@ -405,11 +405,11 @@ export default function BreadCrumbs() {
   const { mode } = useContext(ThemeModeContext);
   const location = useLocation();
   let currentPath = location.pathname;
- 
+
   const currentRoute = routes.find(
     (route) => '/admin/' + route?.path === currentPath
   );
- 
+
   return (
     <>
       {currentRoute &&
