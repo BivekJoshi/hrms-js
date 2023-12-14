@@ -16,7 +16,7 @@ export const ButtonComponent = ({
     <Button
       className={NameClass ? NameClass : 'buttonHover'}
       variant='contained'
-      style={{ color: color || 'white' }}
+      style={{ color: color }}
       onClick={OnClick ? OnClick : ''}
       sx={{
         background: BGColor ? BGColor : '',
