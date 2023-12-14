@@ -33,7 +33,7 @@ const ApplyLeaveField = () => {
     formik.handleSubmit();
 
     if (formik.isValid) {
-      navigate('/employee/applyleave');
+      navigate('/employee/leave');
     }
   };
 
@@ -52,7 +52,7 @@ const ApplyLeaveField = () => {
   return (
     <>
       <Typography variant='h6'>
-        <b>Leave</b>
+        <b>Leave Type</b>
       </Typography>
       <Divider />
       <Grid container spacing={1}>
