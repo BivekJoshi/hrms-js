@@ -55,6 +55,24 @@ export const usePermanentAddressForm = ({
   }
 
   function handleRequest(values) {
+    if (values?.addresses[1]?.province === '') {
+      console.log(
+        '🚀 ~ file: useAddressForm.js:62 ~ handleRequest ~ values:',
+        values
+      );
+      permanentMutate({ ...values.addresses[0], addressType: 'PERMANENT' });
+    } else {
+      permanentMutate({
+        ...values.addresses[0],
+        addressType: 'PERMANENT',
+      });
+      temporaryMutate({
+        ...values.addresses[1],
+
+        addressType: 'TEMPORARY',
+      });
+    }
+
     permanentMutate(values.addresses[0]);
     temporaryMutate(values.addresses[1]);
   }
