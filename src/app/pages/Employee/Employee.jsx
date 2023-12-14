@@ -89,7 +89,7 @@ const Employee = () => {
                 }}
                 buttonName='Inactive Employee'
                 BGColor='white'
-                TextColor='black'
+                color='black'
               />
               <ButtonComponent
                 color='white'
