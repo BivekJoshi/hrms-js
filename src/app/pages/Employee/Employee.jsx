@@ -16,7 +16,6 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import CloseIcon from '@mui/icons-material/Close';
 
-import EmployeeTable from './EmployeeView/EmployeeTable';
 import EmployeeBasicInfoForm from '../../components/Form/Employee/EmployeeBasicInfoForm/EmployeeBasicInfoForm';
 import useAddEmployeeForm from '../../hooks/employee/AddEmployee/useAddEmployeeForm';
 import EmployeeGrid from './EmployeeView/EmployeeGrid';
@@ -24,9 +23,12 @@ import { useNavigate } from 'react-router-dom';
 import { ButtonComponent } from '../../components/Button/ButtonComponent';
 import './Style/Style.css';
 import ThemeModeContext from '../../../theme/ThemeModeContext';
+import { useGetEmployee } from '../../hooks/employee/useEmployee';
+import EmployeeTableView from './EmployeeView/EmployeePage/EmployeeTableView';
 
 const Employee = () => {
   const { mode } = React.useContext(ThemeModeContext);
+  const { data: employeeData, isLoading } = useGetEmployee();
 
   const style = {
     position: 'absolute',
@@ -99,10 +101,11 @@ const Employee = () => {
             </ButtonGroup>
           </Box>
           <TabPanel value='1'>
-            <EmployeeGrid />
+            <EmployeeGrid employeeData={employeeData} isLoading={isLoading}/>
           </TabPanel>
           <TabPanel value='2'>
-            <EmployeeTable />
+            {/* <EmployeeTable /> */}
+            <EmployeeTableView employeeData={employeeData} isLoading={isLoading}/>
           </TabPanel>
         </Box>
       </TabContext>

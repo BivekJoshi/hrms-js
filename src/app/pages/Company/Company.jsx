@@ -10,12 +10,16 @@ import CompanyTable from "./CompanyModal/CompanyTable";
 import CompanyGrid from "./CompanyModal/CompanyGrid";
 import PermissionHoc from "../../hoc/permissionHoc";
 import HocButton from "../../hoc/hocButton";
+import { useGetCompany } from "../../hooks/company/useCompany";
 
 const Company = ({ permissions }) => {
   const [value, setValue] = React.useState("1");
   const [openAddModal, setOpenAddModal] = useState(false);
   const handleAddOpenModal = () => setOpenAddModal(true);
   const handleCloseAddModal = () => setOpenAddModal(false);
+
+  const { data: companyData, isLoading } = useGetCompany();
+
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -49,11 +53,11 @@ const Company = ({ permissions }) => {
           </Box>
           <TabPanel value="1" sx={{ padding: "0" }}>
             <br />
-            <CompanyTable permissions={permissions} />
+            <CompanyTable permissions={permissions} companyData={companyData} isLoading={isLoading}/>
           </TabPanel>
           <TabPanel value="2">
             <br />
-            <CompanyGrid permissions={permissions} />
+            <CompanyGrid permissions={permissions} companyData={companyData} isLoading={isLoading}/>
           </TabPanel>
         </Box>
       </TabContext>

@@ -7,16 +7,13 @@ import ThemeModeContext from "../../../../theme/ThemeModeContext";
 
 export const AddUserControlFields = ({ onClose }) => {
   const { data: employeeData } = useGetEmployee();
-  const { formik } = useAddUserControlForm();
+  const { formik } = useAddUserControlForm(onClose);
   const { mode } = useContext(ThemeModeContext);
 
   const handleFormSubmit = async () => {
     const isValid = await formik.validateForm();
     if (isValid) {
       formik.handleSubmit();
-      if (formik.isValid) {
-        onClose();
-      }
     }
   };
 
