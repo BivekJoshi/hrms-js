@@ -4,19 +4,6 @@ import EmployeeCard from '../../../../components/cards/Employee/EmployeeCard';
 import { useGetEmployeeData } from '../../../../hooks/employee/useEmployee';
 
 const EmployeeGridView = ({ employeeData, isLoading }) => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const pageNumber = 12;
-  const { data: employeePageData } = useGetEmployeeData(pageNumber);
-
-  const pageSize = employeePageData?.pageSize || 10;
-  const totalPages = employeePageData?.totalPages || 0;
-  const startIndex = (currentPage - 1) * pageSize;
-  const endIndex = startIndex + pageSize;
-
-  const handlePageChange = (event, newPage) => {
-    setCurrentPage(newPage);
-  };
-
   if (isLoading)
     return (
       <>
@@ -59,7 +46,7 @@ const EmployeeGridView = ({ employeeData, isLoading }) => {
         ))}
       </Grid>
 
-      <Box padding='2rem' display='grid' justifyContent={'center'}>
+      {/* <Box padding='2rem' display='grid' justifyContent={'center'}>
         <Pagination
           count={totalPages}
           page={currentPage}
@@ -68,7 +55,7 @@ const EmployeeGridView = ({ employeeData, isLoading }) => {
           size='large'
           color='primary'
         />
-      </Box>
+      </Box> */}
     </>
   );
 };

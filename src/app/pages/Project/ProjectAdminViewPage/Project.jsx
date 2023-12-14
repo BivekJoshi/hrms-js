@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import Typography from "@mui/material/Typography";
+import React, { useState } from 'react';
+import Typography from '@mui/material/Typography';
 import {
   Box,
   Button,
@@ -10,20 +10,20 @@ import {
   Pagination,
   Stack,
   TextField,
-} from "@mui/material";
-import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
+} from '@mui/material';
+import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 import {
   useGetProject,
   useGetProjectPageWise,
-} from "../../../hooks/project/useProject";
-import { AddProjectModal } from "../ProjectModal/ProjectModal";
+} from '../../../hooks/project/useProject';
+import { AddProjectModal } from '../ProjectModal/ProjectModal';
 
-import ProjectCard from "../../../components/cards/Employee/ProjectCard";
-import HocButton from "../../../hoc/hocButton";
-import PermissionHoc from "../../../hoc/permissionHoc";
-import useAuth from "../../../../auth/hooks/component/login/useAuth";
-import DeactivatedProject from "../DeactivatedProject/DeactivatedProject";
-import { ButtonComponent } from "../../../components/Button/ButtonComponent";
+import ProjectCard from '../../../components/cards/Employee/ProjectCard';
+import HocButton from '../../../hoc/hocButton';
+import PermissionHoc from '../../../hoc/permissionHoc';
+import useAuth from '../../../../auth/hooks/component/login/useAuth';
+import DeactivatedProject from '../DeactivatedProject/DeactivatedProject';
+import { ButtonComponent } from '../../../components/Button/ButtonComponent';
 
 const Project = ({ permissions }) => {
   const { isEmployee } = useAuth();
@@ -31,21 +31,8 @@ const Project = ({ permissions }) => {
   const [openModal, setOpenModal] = useState(false);
   const { data: projectData, isLoading } = useGetProject();
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const pageNumber = 12;
-  const { data: projectDataCount } = useGetProjectPageWise(pageNumber);
-
-  const pageSize = projectDataCount?.pageSize || 5;
-  const totalPages = projectDataCount?.totalPages || 0;
-  const startIndex = (currentPage - 1) * pageSize;
-  const endIndex = startIndex + pageSize;
-
-  const handlePageChange = (event, newPage) => {
-    setCurrentPage(newPage);
-  };
-
-  const [nameFilter, setNameFilter] = useState("");
-  const [companyFilter, setCompanyFilter] = useState("");
+  const [nameFilter, setNameFilter] = useState('');
+  const [companyFilter, setCompanyFilter] = useState('');
   const [isContainerVisible, setIsContainerVisible] = useState(false);
   const [openAddModal, setOpenAddModal] = useState(false);
 
@@ -55,12 +42,6 @@ const Project = ({ permissions }) => {
 
   const handleAddOpenModal = () => setOpenAddModal(true);
   const handleCloseAddModal = () => setOpenAddModal(false);
-
-  const projectArray = Array.isArray(projectData)
-    ? projectData
-    : projectData
-    ? Object.values(projectData)
-    : [];
 
   const handleOpenModal = () => {
     setOpenModal(true);
@@ -74,55 +55,54 @@ const Project = ({ permissions }) => {
     project?.projectName.toLowerCase().includes(nameFilter.toLowerCase())
   );
 
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
   if (isLoading) return <>Loading</>;
 
   return (
     <>
       <Box>
         <Typography
-          className="project-button"
-          variant="h5"
+          className='project-button'
+          variant='h5'
           sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            marginBottom: "1.2rem",
+            display: 'flex',
+            justifyContent: 'space-between',
+            marginBottom: '1.2rem',
           }}
         >
-          On-Going Projectssss
+          On-Going Projects
           {isEmployee ? null : (
-            <Box display="flex" gap={".5rem"}>
+            <Box display='flex' gap={'.5rem'}>
               <ButtonComponent
-                BGColor="white"
-                TextColor="black"
+                BGColor='white'
+                TextColor='black'
                 onClick={handleOpenModal}
-                buttonName={"Terminated Project"}
+                buttonName={'Terminated Project'}
               />
               <ButtonComponent
-                color="white"
+                color='white'
                 OnClick={handleAddOpenModal}
-                buttonName="+Add Employee"
+                buttonName='+ Add Project'
               />
             </Box>
           )}
         </Typography>
       </Box>
 
-      <Stack sx={{ display: "flex", flexDirection: "row-reverse" }}>
+      <Stack sx={{ display: 'flex', flexDirection: 'row-reverse' }}>
         <FilterAltOutlinedIcon
           onClick={handleFilterIconClick}
-          style={{ fontSize: "32px" }}
+          style={{ fontSize: '32px' }}
         />
         {isContainerVisible && (
-          <Container maxWidth="100vh">
+          <Container maxWidth='100vh'>
             <Card sx={{ padding: 1 }}>
-              <Typography variant="h6" gutterBottom>
+              <Typography variant='h6' gutterBottom>
                 Search Project
               </Typography>
               <Grid container spacing={3}>
                 <Grid item xs={12} sm={12} md={6}>
                   <TextField
-                    label="Filter by Name"
+                    label='Filter by Name'
                     value={nameFilter}
                     onChange={(e) => setNameFilter(e.target.value)}
                     fullWidth
@@ -130,7 +110,7 @@ const Project = ({ permissions }) => {
                 </Grid>
                 <Grid item xs={12} sm={12} md={6}>
                   <TextField
-                    label="Filter by Company"
+                    label='Filter by Company'
                     value={companyFilter}
                     onChange={(e) => setCompanyFilter(e.target.value)}
                     fullWidth
@@ -146,13 +126,13 @@ const Project = ({ permissions }) => {
         container
         item
         gap={3}
-        className="project-card-control"
+        className='project-card-control'
         sx={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))",
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
         }}
       >
-        {filteredProject?.slice(startIndex, endIndex).map((item, index) => (
+        {filteredProject?.map((item, index) => (
           <ProjectCard
             item={item}
             Id={item.id}
@@ -167,7 +147,7 @@ const Project = ({ permissions }) => {
         ))}
       </Grid>
 
-      <Box padding="2rem" display="grid" justifyContent={"center"}>
+      {/* <Box padding="2rem" display="grid" justifyContent={"center"}>
         <Pagination
           count={totalPages}
           page={currentPage}
@@ -176,11 +156,11 @@ const Project = ({ permissions }) => {
           size="large"
           color="primary"
         />
-      </Box>
+      </Box> */}
 
       {openAddModal && (
         <AddProjectModal
-          title={"Add Project"}
+          title={'Add Project'}
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
         />
@@ -189,17 +169,17 @@ const Project = ({ permissions }) => {
       <Modal
         open={openModal}
         onClose={handleCloseModal}
-        aria-labelledby="modal-title"
-        aria-describedby="modal-description"
+        aria-labelledby='modal-title'
+        aria-describedby='modal-description'
       >
         <Box
           sx={{
-            position: "absolute",
-            top: "40%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
+            position: 'absolute',
+            top: '40%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
             // width: 400,
-            bgcolor: "background.paper",
+            bgcolor: 'background.paper',
             boxShadow: 24,
             p: 4,
           }}
@@ -208,14 +188,14 @@ const Project = ({ permissions }) => {
           <br />
           <Grid
             container
-            direction="row"
-            justifyContent="flex-end"
-            alignItems="flex-end"
+            direction='row'
+            justifyContent='flex-end'
+            alignItems='flex-end'
           >
             <Button
               onClick={() => setOpenModal(false)}
-              color="error"
-              variant="contained"
+              color='error'
+              variant='contained'
             >
               Close
             </Button>
