@@ -20,7 +20,7 @@ export const usePermanentAddressForm = ({
   const initialValues = {
     addresses: [
       createAddressObject(addressDetails[0]),
-      createAddressObject(addressDetails[1], 'TEMPORARY'),
+      createAddressObject(addressDetails[1]),
     ],
   };
 
@@ -31,9 +31,9 @@ export const usePermanentAddressForm = ({
     onSubmit: handleSubmit,
   });
 
-  function createAddressObject(details, type = 'PERMANENT') {
+  function createAddressObject(details) {
     return {
-      addressType: type,
+      addressType: details?.addressType,
       id: details?.id || '',
       country: details?.country || '',
       province: details?.province || '',
@@ -73,7 +73,7 @@ export const usePermanentAddressForm = ({
       });
     };
 
-    if (temporary) {
+    if (temporary?.addressType) {
       handleEditMutate(permanent, 'Permanent address edited successfully');
       handleEditMutate(temporary, 'Temporary address edited successfully');
     } else {
