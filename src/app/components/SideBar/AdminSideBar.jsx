@@ -162,16 +162,16 @@ export default function AdminSidebar() {
         },
       ],
     },
-    {
-      name: 'Logistics',
-      icon: (
-        <LaptopIcon
-          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
-        />
-      ),
-      path: 'logistics/office',
-      subMenus: [],
-    },
+    // {
+    //   name: 'Logistics',
+    //   icon: (
+    //     <LaptopIcon
+    //       sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
+    //     />
+    //   ),
+    //   path: 'logistics/office',
+    //   subMenus: [],
+    // },
     {
       name: 'Department',
       icon: (

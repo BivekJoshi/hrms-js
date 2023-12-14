@@ -40,7 +40,7 @@ export default function ListUserDetails({ cardTitle, data, mode }) {
     if (isAdmin || isSuperAdmin || isHr || isManager || isHrAdmin) {
       navigate(`/admin/employee/edit/${id}`);
     } else {
-      navigate(`/employee/employee/edit/${loggedInUserData?.employeeId}`)
+      navigate(`/employee/employee/edit/${loggedInUserData?.employeeId}`);
     }
   };
   return (
@@ -50,11 +50,15 @@ export default function ListUserDetails({ cardTitle, data, mode }) {
           {cardTitle}
         </Typography>
         <Stack sx={{ display: "flex", alignItems: "center" }}>
-          <BorderColorIcon
-            onClick={handleOnClick}
-            fontSize="large"
-            sx={{ color: "rgb(28, 126, 214)", paddingRight: "1rem" }}
-          />
+          {isEmployee ? (
+            ""
+          ) : (
+            <BorderColorIcon
+              onClick={handleOnClick}
+              fontSize="large"
+              sx={{ color: "rgb(28, 126, 214)", paddingRight: "1rem" }}
+            />
+          )}
         </Stack>
         {/* 
         <Modal open={open} onClose={handleClose}>
