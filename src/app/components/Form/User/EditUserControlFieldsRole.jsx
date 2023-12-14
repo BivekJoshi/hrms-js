@@ -1,52 +1,55 @@
-import React, { useContext } from "react";
-import { Grid, TextField, Button, MenuItem } from "@mui/material";
-import ThemeModeContext from "../../../../theme/ThemeModeContext";
-import { useEditUserControlForm } from "../../../pages/Auth/UserControl/Users/useEditUserControlForm";
-import { useGetUserControl, useGetUserRole } from "../../../hooks/auth/userControl/useUserControl";
+import React, { useContext } from 'react';
+import { Grid, TextField, Button, MenuItem } from '@mui/material';
+import ThemeModeContext from '../../../../theme/ThemeModeContext';
+import { useEditUserControlForm } from '../../../pages/Auth/UserControl/Users/useEditUserControlForm';
+import {
+  useGetUserControl,
+  useGetUserRole,
+} from '../../../hooks/auth/userControl/useUserControl';
 
 const roleType = [
   {
-    name: "ROLE_SUPER_ADMIN",
-    label: "Super Admin",
+    name: 'ROLE_SUPER_ADMIN',
+    label: 'Super Admin',
     id: 1,
   },
   {
-    name: "ROLE_ADMIN",
-    label: "Admin",
+    name: 'ROLE_ADMIN',
+    label: 'Admin',
     id: 2,
   },
   {
-    name: "ROLE_MANAGER",
-    label: "Manager",
+    name: 'ROLE_MANAGER',
+    label: 'Manager',
     id: 3,
   },
   {
-    name: "ROLE_HR_ADMIN",
-    label: "HR Admin",
+    name: 'ROLE_HR_ADMIN',
+    label: 'HR Admin',
     id: 4,
   },
   {
-    name: "ROLE_HR_CLERK",
-    label: "HR Clerk",
+    name: 'ROLE_HR_CLERK',
+    label: 'HR Clerk',
     id: 5,
   },
   {
-    name: "ROLE_EMPLOYEE",
-    label: "Employee",
+    name: 'ROLE_EMPLOYEE',
+    label: 'Employee',
     id: 6,
   },
 ];
 
-export const EditUserControlFieldsRole = ({ onClose ,rowData}) => {
+export const EditUserControlFieldsRole = ({ onClose, rowData }) => {
   const { data: userData } = useGetUserControl();
   const { data: userRoleData } = useGetUserRole();
 
-  const { formik } = useEditUserControlForm({rowData});
+  const { formik } = useEditUserControlForm({ rowData });
   const { mode } = useContext(ThemeModeContext);
 
   const getRoleLabel = (roleId) => {
     const role = roleType?.find((r) => r?.id === roleId);
-    return role ? role?.label : "";
+    return role ? role?.label : '';
   };
 
   const handleFormSubmit = async () => {
@@ -84,10 +87,10 @@ export const EditUserControlFieldsRole = ({ onClose ,rowData}) => {
 
       <Grid item xs={12} sm={12}>
         <TextField
-          id="roleId"
-          name="roleId"
-          label="Role"
-          placeholder="Enter role..."
+          id='roleId'
+          name='roleId'
+          label='Role'
+          placeholder='Enter role...'
           fullWidth
           select
           required
@@ -95,8 +98,7 @@ export const EditUserControlFieldsRole = ({ onClose ,rowData}) => {
           onChange={formik.handleChange}
           error={formik.touched.roleId && Boolean(formik.errors.roleId)}
           helperText={formik.touched.roleId && formik.errors.roleId}
-          variant="outlined"
-          autoFocus
+          variant='outlined'
           InputLabelProps={{ shrink: true }}
         >
           {userRoleData &&
@@ -104,7 +106,7 @@ export const EditUserControlFieldsRole = ({ onClose ,rowData}) => {
               <MenuItem
                 key={role?.id}
                 value={role?.id}
-                sx={{ bgcolor: mode === "light" ? "" : "#413e3e" }}
+                sx={{ bgcolor: mode === 'light' ? '' : '#413e3e' }}
               >
                 {getRoleLabel(role?.id)}
               </MenuItem>
@@ -114,22 +116,22 @@ export const EditUserControlFieldsRole = ({ onClose ,rowData}) => {
 
       <Grid
         container
-        direction="row"
-        justifyContent="flex-end"
-        alignItems="flex-end"
+        direction='row'
+        justifyContent='flex-end'
+        alignItems='flex-end'
       >
         <Button
-          variant="contained"
+          variant='contained'
           onClick={handleFormSubmit}
           sx={{ mt: 3, ml: 1 }}
         >
           Update
         </Button>
         <Button
-          variant="contained"
+          variant='contained'
           onClick={onClose}
           sx={{ mt: 3, ml: 1 }}
-          color="error"
+          color='error'
         >
           Cancel
         </Button>

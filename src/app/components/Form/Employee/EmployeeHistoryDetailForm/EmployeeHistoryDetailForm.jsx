@@ -1,7 +1,7 @@
-import { Button, Divider, Grid, TextField, Typography } from "@mui/material";
-import { FieldArray, FormikProvider } from "formik";
-import React from "react";
-import { useDeleteHistory } from "../../../../hooks/employee/useEmployeeHistory";
+import { Button, Divider, Grid, TextField, Typography } from '@mui/material';
+import { FieldArray, FormikProvider } from 'formik';
+import React from 'react';
+import { useDeleteHistory } from '../../../../hooks/employee/useEmployeeHistory';
 
 const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
   const { values, handleChange } = formik;
@@ -18,7 +18,7 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
       <div>
         <FormikProvider value={formik}>
           <FieldArray
-            name="history"
+            name='history'
             render={(arrayHelpers) => (
               <>
                 {formik.values.history.map((employeeHistory, index) => (
@@ -31,8 +31,8 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                         <TextField
                           id={`history[${index}].employerName`}
                           name={`history[${index}].employerName`}
-                          label="Company Name"
-                          placeholder="Enter the company name you worked last time"
+                          label='Company Name'
+                          placeholder='Enter the company name you worked last time'
                           fullWidth
                           value={employeeHistory.employerName}
                           onChange={formik.handleChange}
@@ -44,8 +44,7 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                             formik.touched.history?.[index]?.employerName &&
                             formik.errors.history?.[index]?.employerName
                           }
-                          variant="outlined"
-                          autoFocus
+                          variant='outlined'
                           InputLabelProps={{ shrink: true }}
                         />
                       </Grid>
@@ -54,8 +53,8 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                         <TextField
                           id={`history[${index}].employerAddress`}
                           name={`history[${index}].employerAddress`}
-                          label="Company Address"
-                          placeholder="Enter the company address you worked last time"
+                          label='Company Address'
+                          placeholder='Enter the company address you worked last time'
                           fullWidth
                           value={employeeHistory.employerAddress}
                           onChange={formik.handleChange}
@@ -67,8 +66,7 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                             formik.touched.history?.[index]?.employerAddress &&
                             formik.errors.history?.[index]?.employerAddress
                           }
-                          variant="outlined"
-                          autoFocus
+                          variant='outlined'
                           InputLabelProps={{ shrink: true }}
                         />
                       </Grid>
@@ -76,8 +74,8 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                         <TextField
                           id={`history[${index}].pastPosition`}
                           name={`history[${index}].pastPosition`}
-                          label="Past Position"
-                          placeholder="Enter your past position"
+                          label='Past Position'
+                          placeholder='Enter your past position'
                           fullWidth
                           value={employeeHistory.pastPosition}
                           onChange={handleChange}
@@ -89,8 +87,7 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                             formik.touched.history?.[index]?.pastPosition &&
                             formik.errors.history?.[index]?.pastPosition
                           }
-                          variant="outlined"
-                          autoFocus
+                          variant='outlined'
                           InputLabelProps={{ shrink: true }}
                         />
                       </Grid>
@@ -98,10 +95,10 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                         <TextField
                           id={`history[${index}].fromDate`}
                           name={`history[${index}].fromDate`}
-                          label="Join Date"
-                          placeholder="Enter Your Join date"
+                          label='Join Date'
+                          placeholder='Enter Your Join date'
                           fullWidth
-                          type="date"
+                          type='date'
                           value={employeeHistory.fromDate}
                           onChange={handleChange}
                           error={Boolean(
@@ -112,8 +109,7 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                             formik.touched.history?.[index]?.fromDate &&
                             formik.errors.history?.[index]?.fromDate
                           }
-                          variant="outlined"
-                          autoFocus
+                          variant='outlined'
                           InputLabelProps={{ shrink: true }}
                         />
                       </Grid>
@@ -121,10 +117,10 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                         <TextField
                           id={`history[${index}].toDate`}
                           name={`history[${index}].toDate`}
-                          label="To Date"
-                          placeholder="Enter Date"
+                          label='To Date'
+                          placeholder='Enter Date'
                           fullWidth
-                          type="date"
+                          type='date'
                           value={employeeHistory.toDate}
                           onChange={handleChange}
                           error={Boolean(
@@ -135,8 +131,7 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                             formik.touched.history?.[index]?.toDate &&
                             formik.errors.history?.[index]?.toDate
                           }
-                          variant="outlined"
-                          autoFocus
+                          variant='outlined'
                           InputLabelProps={{ shrink: true }}
                         />
                       </Grid>
@@ -144,8 +139,8 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                         <TextField
                           id={`history[${index}].description`}
                           name={`history[${index}].description`}
-                          label="Description"
-                          placeholder="Say somthing about last caompany"
+                          label='Description'
+                          placeholder='Say somthing about last caompany'
                           fullWidth
                           value={employeeHistory.description}
                           onChange={handleChange}
@@ -157,8 +152,7 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                             formik.touched.history?.[index]?.description &&
                             formik.errors.history?.[index]?.description
                           }
-                          variant="outlined"
-                          autoFocus
+                          variant='outlined'
                           InputLabelProps={{ shrink: true }}
                         />
                       </Grid>
@@ -166,8 +160,8 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                         <TextField
                           id={`history[${index}].remarks`}
                           name={`history[${index}].remarks`}
-                          label="Remarks"
-                          placeholder="Remarks"
+                          label='Remarks'
+                          placeholder='Remarks'
                           fullWidth
                           value={employeeHistory.remarks}
                           onChange={handleChange}
@@ -179,8 +173,7 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                             formik.touched.history?.[index]?.remarks &&
                             formik.errors.history?.[index]?.remarks
                           }
-                          variant="outlined"
-                          autoFocus
+                          variant='outlined'
                           InputLabelProps={{ shrink: true }}
                         />
                       </Grid>
@@ -189,18 +182,18 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                         xs={12}
                         sm={1}
                         container
-                        direction="row"
-                        justifyContent="flex-end"
-                        alignItems="center"
+                        direction='row'
+                        justifyContent='flex-end'
+                        alignItems='center'
                       >
                         {values.history.length > 1 && (
                           <Button
-                            variant="contained"
+                            variant='contained'
                             onClick={() => {
                               arrayHelpers.remove(index);
                               handleDeleteHistory(employeeHistory);
                             }}
-                            color="error"
+                            color='error'
                           >
                             Delete
                           </Button>
@@ -211,16 +204,16 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                 ))}
                 <br />
                 <Button
-                  variant="contained"
+                  variant='contained'
                   onClick={() =>
                     arrayHelpers.push({
-                      employerName: "",
-                      employerAddress: "",
-                      pastPosition: "",
-                      fromDate: "",
-                      toDate: "",
-                      description: "",
-                      remarks: "",
+                      employerName: '',
+                      employerAddress: '',
+                      pastPosition: '',
+                      fromDate: '',
+                      toDate: '',
+                      description: '',
+                      remarks: '',
                     })
                   }
                 >

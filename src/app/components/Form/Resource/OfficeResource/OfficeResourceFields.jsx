@@ -1,7 +1,7 @@
-import { Button, FormControlLabel, Grid, TextField } from "@mui/material";
-import React from "react";
-import useOfficeResourceForm from "../../../../hooks/resource/officeResource/OfficeResourceForm/useOfficeResourceForm";
-import { ThemeSwitch } from "../../../../../theme/ThemeSwitch";
+import { Button, FormControlLabel, Grid, TextField } from '@mui/material';
+import React from 'react';
+import useOfficeResourceForm from '../../../../hooks/resource/officeResource/OfficeResourceForm/useOfficeResourceForm';
+import { ThemeSwitch } from '../../../../../theme/ThemeSwitch';
 
 const OfficeResourceFields = ({ onClose, isLoading, data }) => {
   const { formik } = useOfficeResourceForm(data);
@@ -13,34 +13,33 @@ const OfficeResourceFields = ({ onClose, isLoading, data }) => {
       onClose();
     }
   };
-  const submitButtonText = data ? "Update " : "Add ";
+  const submitButtonText = data ? 'Update ' : 'Add ';
 
   return (
     !isLoading && (
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
           <TextField
-            id="name"
-            name="name"
-            label="Resource Name"
-            placeholder="Enter resource name"
+            id='name'
+            name='name'
+            label='Resource Name'
+            placeholder='Enter resource name'
             fullWidth
             required
             value={formik.values.name}
             onChange={formik.handleChange}
             error={formik.touched.name && Boolean(formik.errors.name)}
             helperText={formik.touched.name && formik.errors.name}
-            variant="outlined"
-            autoFocus
+            variant='outlined'
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
-            id="uniqueNumber"
-            name="uniqueNumber"
-            label=" Unique Number"
-            placeholder="Enter unique number of resource"
+            id='uniqueNumber'
+            name='uniqueNumber'
+            label=' Unique Number'
+            placeholder='Enter unique number of resource'
             fullWidth
             required
             value={formik.values.uniqueNumber}
@@ -51,17 +50,16 @@ const OfficeResourceFields = ({ onClose, isLoading, data }) => {
             helperText={
               formik.touched.uniqueNumber && formik.errors.uniqueNumber
             }
-            variant="outlined"
-            autoFocus
+            variant='outlined'
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
-            id="description"
-            name="description"
-            label=" Description"
-            placeholder="Enter description of resource"
+            id='description'
+            name='description'
+            label=' Description'
+            placeholder='Enter description of resource'
             fullWidth
             multiline
             rows={3}
@@ -71,31 +69,30 @@ const OfficeResourceFields = ({ onClose, isLoading, data }) => {
               formik.touched.description && Boolean(formik.errors.description)
             }
             helperText={formik.touched.description && formik.errors.description}
-            variant="outlined"
-            autoFocus
+            variant='outlined'
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
         <Grid item xs={12} sm={12}>
-            <FormControlLabel
-              control={
-                <ThemeSwitch
-                  checked={formik.values.isActive}
-                  onChange={formik.handleChange}
-                  name="isActive"
-                />
-              }
-              label="If you want to deactive the office Logistics set switch to false"
-            />
-          </Grid>
+          <FormControlLabel
+            control={
+              <ThemeSwitch
+                checked={formik.values.isActive}
+                onChange={formik.handleChange}
+                name='isActive'
+              />
+            }
+            label='If you want to deactive the office Logistics set switch to false'
+          />
+        </Grid>
         <Grid
           container
-          direction="row"
-          justifyContent="flex-end"
-          alignItems="flex-end"
+          direction='row'
+          justifyContent='flex-end'
+          alignItems='flex-end'
         >
           <Button
-            variant="contained"
+            variant='contained'
             onClick={handleFormSubmit}
             sx={{ mt: 3, ml: 1 }}
             onClose={onClose}
@@ -103,10 +100,10 @@ const OfficeResourceFields = ({ onClose, isLoading, data }) => {
             {submitButtonText}
           </Button>
           <Button
-            variant="contained"
+            variant='contained'
             onClick={onClose}
             sx={{ mt: 3, ml: 1 }}
-            color="error"
+            color='error'
           >
             Cancel
           </Button>
