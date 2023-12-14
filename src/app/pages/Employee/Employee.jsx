@@ -1,6 +1,15 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { Box, Button, ButtonGroup, Grid, IconButton, Modal, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  Divider,
+  Grid,
+  IconButton,
+  Modal,
+  Typography,
+} from '@mui/material';
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
@@ -80,7 +89,7 @@ const Employee = () => {
                 }}
                 buttonName='Inactive Employee'
                 BGColor='white'
-                TextColor='black'
+                color='black'
               />
               <ButtonComponent
                 color='white'
@@ -98,12 +107,7 @@ const Employee = () => {
         </Box>
       </TabContext>
 
-      <Modal
-        open={openAddModal}
-        onClose={() => setOpenAddModal(false)}
-        aria-labelledby='modal-modal-title'
-        aria-describedby='modal-modal-description'
-      >
+      <Modal open={openAddModal} onClose={() => setOpenAddModal(false)}>
         <div>
           <Box sx={style}>
             <Grid
@@ -130,8 +134,14 @@ const Employee = () => {
               </IconButton>
             </Grid>
             <EmployeeBasicInfoForm formik={formik} />
+            <Divider style={{ paddingTop: '16px' }} />
             <Box
-              sx={{ display: 'flex', justifyContent: 'flex-end', gap: '1rem' }}
+              sx={{
+                display: 'flex',
+                justifyContent: 'flex-end',
+                gap: '1rem',
+                paddingTop: '16px',
+              }}
             >
               <ButtonComponent buttonName={'submit'} OnClick={handleSubmit} />
               <ButtonComponent
@@ -154,7 +164,9 @@ const Employee = () => {
       >
         <div>
           <Box sx={style}>
-            <Typography variant="h6">Do you like to add more Details of this Employee??</Typography>
+            <Typography variant='h6'>
+              Do you like to add more Details of this Employee??
+            </Typography>
             <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
               <Button
                 variant='contained'
