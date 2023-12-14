@@ -55,26 +55,24 @@ export const usePermanentAddressForm = ({
   }
 
   function handleRequest(values) {
-    if (values?.addresses[1]?.province === '') {
-      console.log(
-        '🚀 ~ file: useAddressForm.js:62 ~ handleRequest ~ values:',
-        values
-      );
-      permanentMutate({ ...values.addresses[0], addressType: 'PERMANENT' });
+    const { addresses } = values;
+
+    // Check if the temporary address is empty (province is empty)
+    if (addresses[1]?.province === '') {
+      // If temporary address is empty, only update the permanent address
+      permanentMutate({ ...addresses[0], addressType: 'PERMANENT' });
     } else {
+      // If temporary address is not empty, update both permanent and temporary addresses
       permanentMutate({
-        ...values.addresses[0],
+        ...addresses[0],
         addressType: 'PERMANENT',
       });
-      temporaryMutate({
-        ...values.addresses[1],
 
+      temporaryMutate({
+        ...addresses[1],
         addressType: 'TEMPORARY',
       });
     }
-
-    permanentMutate(values.addresses[0]);
-    temporaryMutate(values.addresses[1]);
   }
 
   function handleEditRequest(values) {
