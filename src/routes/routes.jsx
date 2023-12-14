@@ -400,106 +400,31 @@ export { routes };
 //     </>
 //   );
 // }
+
 export default function BreadCrumbs() {
   const { mode } = useContext(ThemeModeContext);
   const location = useLocation();
   let currentPath = location.pathname;
-  const findRoute = (path) => routes.find((route) => route.path === path);
-  // const breadcrumbPath = currentPath.slice(7);
-  // const pathSegments = breadcrumbPath.split("/").filter(Boolean);
-
-  const { isSuperAdmin, isAdmin, isHr, isManager, isEmployee, isHrClerk } =
-    useAuth();
-  const getDashboardLink = () => {
-    if (isEmployee) {
-      return '/employee/home';
-    } else {
-      return '/admin/dashboard';
-    }
-  };
-  const pathBreadCrump = () => {
-    if (isEmployee) {
-      return currentPath.slice(9);
-    } else {
-      return currentPath.slice(7);
-    }
-  };
-  const pathSegments = pathBreadCrump().split('/').filter(Boolean);
-
+ 
+  const currentRoute = routes.find(
+    (route) => '/admin/' + route?.path === currentPath
+  );
+ 
   return (
     <>
-      {pathSegments.length > 0 && (
-        <Breadcrumbs>
-          <Link
-            underline='hover'
-            style={{ color: mode === 'light' ? 'inherit' : 'white' }}
-            to={getDashboardLink()}
-          >
-            <HomeIcon
-              sx={{
-                width: '2rem',
-                '&:hover': {
-                  color: '#6dab23',
-                },
-              }}
-            />{' '}
-          </Link>
-          {pathSegments.map((segment, index) => {
-            console.log(
-              '🚀 ~ file: routes.jsx:448 ~ {pathSegments.map ~ segment:',
-              segment
-            );
-            const partialPath = `/${pathSegments
-              .slice(0, index + 1)
-              .join('/')}`;
-            const route = findRoute(partialPath);
-
-            // Check if the segment is not a number (isNaN returns true for non-numeric values)
-            if (isNaN(segment)) {
-              if (segment === 'edit') {
-                return null;
-              }
-              return (
-                <Link
-                  key={index}
-                  underline='hover'
-                  style={{
-                    color: mode === 'light' ? 'inherit' : 'white',
-                    textDecoration: 'none',
-                  }}
-                  to={`/admin${partialPath}`}
-                >
-                  <Typography
-                    key={index}
-                    color='text.primary'
-                    textTransform='capitalize'
-                    padding='5px'
-                    textDecoration='none'
-                    sx={{
-                      '&:hover': {
-                        bgcolor: '#6DAB2345',
-                        padding: '5px',
-                        textDecoration: 'underline',
-                        borderRadius: '5px',
-                        color: '#6dab23',
-                      },
-                    }}
-                  >
-                    {route
-                      ? route.name
-                      : segment === 'leaveType'
-                      ? 'Leave Type'
-                      : segment}
-                  </Typography>
-                </Link>
-              );
-            }
-
-            // If the segment is a number, exclude it from rendering
-            return null;
-          })}
-        </Breadcrumbs>
-      )}
+      {currentRoute &&
+        (currentRoute.path === 'dashboard' ? null : (
+          <Breadcrumbs>
+            <Link
+              underline='hover'
+              style={{ color: mode === 'light' ? 'inherit' : 'white' }}
+              to='/admin/dashboard'
+            >
+              Dashboard
+            </Link>
+            <Typography color='text.primary'>{currentRoute?.name}</Typography>
+          </Breadcrumbs>
+        ))}
     </>
   );
 }

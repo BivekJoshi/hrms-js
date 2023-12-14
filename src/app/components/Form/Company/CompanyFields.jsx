@@ -1,15 +1,15 @@
-import { Grid, TextField, Button } from "@mui/material";
-import React from "react";
-import useCompanyForm from "../../../hooks/company/CompanyForm/useCompanyForm";
+import { Grid, TextField, Button } from '@mui/material';
+import React from 'react';
+import useCompanyForm from '../../../hooks/company/CompanyForm/useCompanyForm';
 
 const CompanyFields = ({ onClose, isLoading, data }) => {
-  const { formik } = useCompanyForm(data,onClose);
+  const { formik } = useCompanyForm(data, onClose);
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
   };
-  
-  const submitButtonText = data ? 'Update Company' : 'Add Company';
+
+  const submitButtonText = data ? 'Update Branch' : 'Add Branch';
   return (
     !isLoading && (
       <Grid container spacing={3}>
@@ -17,8 +17,8 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
           <TextField
             id='companyName'
             name='companyName'
-            label='Company Name'
-            placeholder='Enter company name'
+            label='Branch Name'
+            placeholder='Enter branch name'
             fullWidth
             required
             value={formik.values.companyName}
@@ -35,8 +35,8 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
           <TextField
             id='companyType'
             name='companyType'
-            label='Company Type'
-            placeholder='Enter company type'
+            label='Branch Type'
+            placeholder='Enter branch type'
             fullWidth
             required
             value={formik.values.companyType}
@@ -54,7 +54,7 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
             id='companyDescription'
             name='companyDescription'
             label='Description'
-            placeholder='Enter your Company Description'
+            placeholder='Enter your Branch Description'
             fullWidth
             multiline
             rows={3}

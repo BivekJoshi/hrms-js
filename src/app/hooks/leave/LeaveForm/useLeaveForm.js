@@ -1,6 +1,11 @@
-import { useFormik } from "formik";
-import { useAddLeave, useAddLeaveByAdmin, useEditLeave, useEditLeaveByAdmin } from "../useLeave";
-import { LeaveSchema } from "../Validation/LeaveSchema";
+import { useFormik } from 'formik';
+import {
+  useAddLeave,
+  useAddLeaveByAdmin,
+  useEditLeave,
+  useEditLeaveByAdmin,
+} from '../useLeave';
+import { LeaveSchema } from '../Validation/LeaveSchema';
 
 const useLeaveForm = (data) => {
   const { mutate: addLeave } = useAddLeaveByAdmin({});
@@ -8,20 +13,24 @@ const useLeaveForm = (data) => {
 
   const formik = useFormik({
     initialValues: {
-      employeeId: data?.employeeId || "",
-      leaveTypeId: data?.leaveTypeId || "",
-      leaveReason: data?.leaveReason || "",
-      fromDate: data?.fromDate || "",
-      toDate: data?.toDate || "",
-      leaveStatus: data?.leaveStatus || "PENDING",
-      leaveRemarks: data?.leaveRemarks || "",
+      employeeId: data?.employeeId || '',
+      leaveTypeId: data?.leaveTypeId || '',
+      leaveReason: data?.leaveReason || '',
+      fromDate: data?.fromDate || '',
+      toDate: data?.toDate || '',
+      leaveStatus: data?.leaveStatus || 'PENDING',
+      leaveRemarks: data?.leaveRemarks || '',
       isHalfDay: data?.isHalfDay || false,
-      applyLeaveDays:data?.applyLeaveDays||"",
+      applyLeaveDays: data?.applyLeaveDays || '',
       id: data?.id,
     },
     validationSchema: LeaveSchema,
-    enableReinitialize: "true",
+    enableReinitialize: 'true',
     onSubmit: (values) => {
+      console.log(
+        '🚀 ~ file: useLeaveForm.js:32 ~ useLeaveForm ~ values:',
+        values
+      );
       if (data?.id) {
         handledEditRequest(values);
       } else {
