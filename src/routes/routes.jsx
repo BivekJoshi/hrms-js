@@ -278,7 +278,7 @@ const routes = [
     component: <ResetPassword />,
   },
   {
-    path: 'profile',
+    path: 'myprofile',
     name: 'Profile',
     id: nanoid(),
     component: <ProfileDetail />,
