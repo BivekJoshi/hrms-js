@@ -17,7 +17,7 @@ const genderOptions = [
     id: 2,
   },
   {
-    value: 'OTHERS',
+    value: 'OTHER',
     label: 'Others',
     id: 3,
   },
