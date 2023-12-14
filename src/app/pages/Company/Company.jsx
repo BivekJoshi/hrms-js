@@ -11,6 +11,7 @@ import CompanyGrid from './CompanyModal/CompanyGrid';
 import PermissionHoc from '../../hoc/permissionHoc';
 import HocButton from '../../hoc/hocButton';
 import { useGetUserRole } from '../../hooks/auth/userControl/useUserControl';
+import { useGetCompany } from '../../hooks/company/useCompany';
 
 const Company = ({ permissions }) => {
   const [value, setValue] = React.useState('1');

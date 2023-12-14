@@ -95,7 +95,7 @@ const RenamePassword = ({ isLoading }) => {
   return (
     !isLoading && (
       <>
-        <InitialPage />
+        {/* <InitialPage /> */}
         <Grid
           container
           sx={{
