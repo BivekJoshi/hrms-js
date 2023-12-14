@@ -1,4 +1,4 @@
-import { Stack, Button } from "@mui/material";
+import { Stack, Button, Typography } from "@mui/material";
 import React, { useState } from "react";
 import UserControlAction from "../../../../pages/Auth/UserControl/UserControlAction";
 import { AddUserControlModal } from "./AddUserControlModal";
