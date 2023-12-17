@@ -1,10 +1,24 @@
-import React, { useState, useRef, useContext } from "react";
-import { Button, Box, Popper, Grow, Paper, MenuItem, Badge, IconButton, Tooltip, ClickAwayListener, MenuList, Typography } from "@mui/material";
-import CakeIcon from "@mui/icons-material/Cake";
-import "../Style/Style.css";
-import ThemeModeContext from "../../../theme/ThemeModeContext";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useRef, useContext } from 'react';
+import {
+  Button,
+  Box,
+  Popper,
+  Grow,
+  Paper,
+  MenuItem,
+  Badge,
+  IconButton,
+  Tooltip,
+  ClickAwayListener,
+  MenuList,
+  Typography,
+} from '@mui/material';
+import CakeIcon from '@mui/icons-material/Cake';
 import '../Style/Style.css';
+import ThemeModeContext from '../../../theme/ThemeModeContext';
+import { useNavigate } from 'react-router-dom';
+import '../Style/Style.css';
+import Birthdaylist from './Birthdaylist';
 
 const TodayBirthday = ({ data }) => {
   const birthdayEmployeeName = data?.birthdayEmployees;
@@ -21,7 +35,7 @@ const TodayBirthday = ({ data }) => {
 
   const employeeId =
     birthdayEmployeeName && birthdayEmployeeName.map((name) => name?.id);
- 
+
   const handleClose = (event) => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
@@ -31,7 +45,7 @@ const TodayBirthday = ({ data }) => {
   const handleClick = (bname) => {
     navigate(`/admin/employee/${bname?.id}`);
     setOpen(false);
-  }
+  };
 
   function handleListKeyDown(event) {
     if (event.key === 'Tab') {
@@ -157,7 +171,7 @@ const TodayBirthday = ({ data }) => {
                       variant='h7'
                       color={mode === 'light' ? 'primary' : 'white'}
                     >
-                      No One Birthday !
+                      No one is celebrating a birthday today.
                     </Typography>
                   </MenuList>
                 </ClickAwayListener>
