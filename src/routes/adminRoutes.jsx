@@ -254,7 +254,7 @@ export { adminRoutes };
     MUI
   </Link>
   <Link
-    underline='hover'
+    underline='hover' 
     color='inherit'
     to='/material-ui/getting-started/installation/'
   >
@@ -266,57 +266,58 @@ export { adminRoutes };
 export default function BreadCrumbs() {
   const { mode } = useContext(ThemeModeContext);
   const location = useLocation();
-  let currentPath = location.pathname;
+  const currentPath = location.pathname;
+
   const findRoute = (path) => adminRoutes.find((route) => route.path === path);
   const breadcrumbPath = currentPath.slice(7);
-  const pathSegments = breadcrumbPath.split('/').filter(Boolean);
+  const pathSegments = breadcrumbPath.split("/").filter(Boolean);
 
   return (
     <>
       {pathSegments.length > 0 && (
         <Breadcrumbs>
           <Link
-            underline='hover'
-            style={{ color: mode === 'light' ? 'inherit' : 'white' }}
-            to='/admin/dashboard'
+            underline="hover"
+            style={{ color: mode === "light" ? "inherit" : "white" }}
+            to="/admin/dashboard"
           >
             <HomeIcon
               sx={{
-                width: '2rem',
-                '&:hover': {
-                  color: '#6dab23',
+                width: "2rem",
+                "&:hover": {
+                  color: "#6dab23",
                 },
               }}
-            />{' '}
+            />{" "}
           </Link>
           {pathSegments.map((segment, index) => {
             const partialPath = `/${pathSegments
               .slice(0, index + 1)
-              .join('/')}`;
+              .join("/")}`;
             const route = findRoute(partialPath);
             return (
               <Link
                 key={index}
-                underline='hover'
+                underline="hover"
                 style={{
-                  color: mode === 'light' ? 'inherit' : 'white',
-                  textDecoration: 'none',
+                  color: mode === "light" ? "inherit" : "white",
+                  textDecoration: "none",
                 }}
                 to={`/admin${partialPath}`}
               >
                 <Typography
                   key={index}
-                  color='text.primary'
-                  textTransform='capitalize'
-                  padding='5px'
-                  textDecoration='none'
+                  color="text.primary"
+                  textTransform="capitalize"
+                  padding="5px"
+                  textDecoration="none"
                   sx={{
-                    '&:hover': {
-                      bgcolor: '#6DAB2345',
-                      padding: '5px',
-                      textDecoration: 'underline',
-                      borderRadius: '5px',
-                      color: '#6dab23',
+                    "&:hover": {
+                      bgcolor: "#6DAB2345",
+                      padding: "5px",
+                      textDecoration: "underline",
+                      borderRadius: "5px",
+                      color: "#6dab23",
                     },
                   }}
                 >

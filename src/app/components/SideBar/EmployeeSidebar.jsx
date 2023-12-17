@@ -352,9 +352,7 @@ export default function EmployeeSidebar() {
           
             <BreadCrumbs />
           </Box>
-          <div style={{ minHeight: '90vh' }}>
-            <Outlet />
-          </div>
+          <Outlet />
         </Card>
         <Footer />
       </Main>

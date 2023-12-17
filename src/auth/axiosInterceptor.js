@@ -4,9 +4,9 @@ import { getUser, removeUser } from '../app/utils/cookieHelper';
 import jwtDecode from 'jwt-decode';
 // import { baseURL } from './axiosInterceptor';
 
-export const baseURL = 'https://103.94.159.144:8083/hrms/api/';
+export const baseURL = 'http://103.94.159.144:8083/hrms/api/';
 // export const baseURL = 'https://172.16.16.94:6523/hrms/api/';
-export const DOC_URL = 'https://103.94.159.144/';
+export const DOC_URL = 'http://103.94.159.144/';
 
 // returns true if exipred && false is not
 const checkIfExpired = (token) => {
