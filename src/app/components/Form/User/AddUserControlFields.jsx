@@ -28,7 +28,7 @@ export const AddUserControlFields = ({ onClose }) => {
     <>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
-          <Typography color="error">
+          <Typography sx={{color:'orange'}}>
             To add an employee as a user its address detail must be Filled
           </Typography>
           <br />

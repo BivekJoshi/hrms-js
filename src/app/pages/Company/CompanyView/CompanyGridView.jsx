@@ -46,14 +46,14 @@ const CompanyGridView = ({
                       variant="h5"
                       sx={{ color: "#fff", fontWeight: "700", padding: "15px" }}
                     >
-                      {item?.companyName && item.companyName.length > 27
-                        ? item.companyName.slice(0, 27) + "..."
-                        : item.companyName}
+                      {item?.branchName && item.branchName.length > 27
+                        ? item.branchName.slice(0, 27) + "..."
+                        : item.branchName}
                     </Typography>
                   }
                   popoverContent={
-                    item.companyName.length > 27 ? (
-                      <Typography sx={{ p: 1 }}>{item.companyName}</Typography>
+                    item.branchName.length > 27 ? (
+                      <Typography sx={{ p: 1 }}>{item.branchName}</Typography>
                     ) : (
                       ""
                     )
@@ -74,14 +74,14 @@ const CompanyGridView = ({
                       variant="h6"
                       sx={{ display: "flex", justifyContent: "center" }}
                     >
-                      {item?.companyType && item.companyType.length > 30
-                        ? item.companyType.slice(0, 30) + "..."
-                        : item.companyType}
+                      {item?.branchAddress && item.branchAddress.length > 30
+                        ? item.branchAddress.slice(0, 30) + "..."
+                        : item.branchAddress}
                     </Typography>
                   }
                   popoverContent={
-                    item.companyType.length > 30 ? (
-                      <Typography sx={{ p: 1 }}>{item.companyType}</Typography>
+                    item.branchAddress.length > 30 ? (
+                      <Typography sx={{ p: 1 }}>{item.branchAddress}</Typography>
                     ) : (
                       ""
                     )
@@ -89,7 +89,7 @@ const CompanyGridView = ({
                 />
                 <br />
                 <Typography variant="p" sx={{ textAlign: "center" }}>
-                  {item?.companyDescription || null}
+                  {item?.branchDescription || null}
                 </Typography>
                 <br />
                 <div

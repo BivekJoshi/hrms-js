@@ -218,7 +218,7 @@ const AddprojectFields = ({ onClose, isLoading }) => {
                   value={option?.id}
                   sx={{ bgcolor: mode === 'light' ? '' : '#413e3e' }}
                 >
-                  {option?.companyName}
+                  {option?.branchName}
                 </MenuItem>
               ))}
           </TextField>

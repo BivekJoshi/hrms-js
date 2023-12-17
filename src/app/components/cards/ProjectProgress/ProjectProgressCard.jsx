@@ -5,6 +5,7 @@ import '../Style/ProjectProgressStyle.css';
 import React from 'react';
 
 export const ProjectProgressCard = ({ projectDataCount }) => {
+  console.log(projectDataCount,"count");
   const BorderLinearProgress = ({ color, ...props }) => {
     return (
       <LinearProgress
@@ -38,10 +39,10 @@ export const ProjectProgressCard = ({ projectDataCount }) => {
               flexDirection='row'
               marginTop='1rem'
             >
-              <Typography> {projectDataCount?.completed}</Typography>
+              <Typography> {projectDataCount?.projectInfo?.completed}</Typography>
               <Typography>
                 {Math.ceil(
-                  (projectDataCount?.completed / projectDataCount?.total) * 100
+                  (projectDataCount?.projectInfo?.completed / projectDataCount?.projectInfo?.total) * 100
                 )}
                 %
               </Typography>
@@ -49,7 +50,7 @@ export const ProjectProgressCard = ({ projectDataCount }) => {
             <BorderLinearProgress
               variant='determinate'
               value={
-                (projectDataCount?.completed / projectDataCount?.total) * 100
+                (projectDataCount?.projectInfo?.completed / projectDataCount?.projectInfo?.total) * 100
               }
             />
           </Box>
@@ -62,19 +63,19 @@ export const ProjectProgressCard = ({ projectDataCount }) => {
               flexDirection='row'
               marginTop='1rem'
             >
-              <Typography> {projectDataCount?.pending}</Typography>
+              <Typography> {projectDataCount?.projectInfo?.pending}</Typography>
               <Typography>
                 {Math.ceil(
-                  (projectDataCount?.pending / projectDataCount?.total) * 100
+                  // (projectDataCount?.pending / projectDataCount?.total) * 100
                 )}
                 %
               </Typography>
             </Stack>
             <BorderLinearProgress
               variant='determinate'
-              value={
-                (projectDataCount?.pending / projectDataCount?.total) * 100
-              }
+              // value={
+              //   // (projectDataCount?.pending / projectDataCount?.total) * 100
+              // }
             />
           </Box>
         </div>
@@ -88,10 +89,10 @@ export const ProjectProgressCard = ({ projectDataCount }) => {
               flexDirection='row'
               marginTop='1rem'
             >
-              <Typography> {projectDataCount?.workInProgress}</Typography>
+              {/* <Typography> {projectDataCount?.workInProgress}</Typography> */}
               <Typography>
                 {Math.ceil(
-                  (projectDataCount?.workInProgress / projectDataCount?.total) *
+                  // (projectDataCount?.workInProgress / projectDataCount?.total) *
                     100
                 )}
                 %
@@ -100,7 +101,7 @@ export const ProjectProgressCard = ({ projectDataCount }) => {
             <BorderLinearProgress
               variant='determinate'
               value={
-                (projectDataCount?.workInProgress / projectDataCount?.total) *
+                // (projectDataCount?.workInProgress / projectDataCount?.total) *
                 100
               }
             />
@@ -115,19 +116,19 @@ export const ProjectProgressCard = ({ projectDataCount }) => {
               flexDirection='row'
               marginTop='1rem'
             >
-              <Typography>{projectDataCount?.delayed}</Typography>
+              {/* <Typography>{projectDataCount?.delayed}</Typography> */}
               <Typography>
                 {Math.ceil(
-                  (projectDataCount?.delayed / projectDataCount?.total) * 100
+                  // (projectDataCount?.delayed / projectDataCount?.total) * 100
                 )}
                 %
               </Typography>
             </Stack>
             <BorderLinearProgress
               variant='determinate'
-              value={
-                (projectDataCount?.delayed / projectDataCount?.total) * 100
-              }
+              // value={
+              //   // (projectDataCount?.delayed / projectDataCount?.total) * 100
+              // }
             />
           </Box>
         </div>

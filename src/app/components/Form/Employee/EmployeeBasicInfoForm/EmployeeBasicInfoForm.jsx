@@ -144,6 +144,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           error={
             formik.touched.dateOfBirth && Boolean(formik.errors.dateOfBirth)
           }
+          inputProps={{ max: minAge }}
           helperText={formik.touched.dateOfBirth && formik.errors.dateOfBirth}
         />
       </Grid>
@@ -159,6 +160,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           onChange={formik.handleChange}
           error={formik.touched.dateOfJoin && Boolean(formik.errors.dateOfJoin)}
           helperText={formik.touched.dateOfJoin && formik.errors.dateOfJoin}
+          inputProps={{ max: today }}
         />
       </Grid>
       <Grid item xs={12} sm={6} md={4}>
@@ -293,7 +295,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
                 value={option?.id}
                 sx={{ bgcolor: mode === 'light' ? '' : '#413e3e' }}
               >
-                {option?.companyName}
+                {option?.branchName}
               </MenuItem>
             ))}
         </TextField>

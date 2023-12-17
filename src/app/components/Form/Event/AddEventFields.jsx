@@ -39,6 +39,7 @@ const AddEventFields = ({ formik }) => {
             helperText={formik.touched.eventName && formik.errors.eventName}
             variant='outlined'
             InputLabelProps={{ shrink: true }}
+            size='small'
           />
         </Grid>
         <Grid item xs={12} sm={12}>
@@ -55,6 +56,7 @@ const AddEventFields = ({ formik }) => {
             helperText={formik.touched.eventDate && formik.errors.eventDate}
             variant='outlined'
             InputLabelProps={{ shrink: true }}
+            size='small'
           />
         </Grid>
         <Grid item xs={12} sm={12}>
@@ -71,6 +73,7 @@ const AddEventFields = ({ formik }) => {
             helperText={formik.touched.eventTime && formik.errors.eventTime}
             variant='outlined'
             InputLabelProps={{ shrink: true }}
+            size='small'
           />
         </Grid>
         <Grid item xs={12} sm={12}>
@@ -111,6 +114,7 @@ const AddEventFields = ({ formik }) => {
             }
             variant='outlined'
             InputLabelProps={{ shrink: true }}
+            size='small'
           />
         </Grid>
       </Grid>
