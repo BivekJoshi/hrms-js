@@ -1,9 +1,24 @@
 import React, { useContext, useState } from "react";
-import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-import CoPresentOutlinedIcon from "@mui/icons-material/CoPresentOutlined";
-import ApprovalOutlinedIcon from "@mui/icons-material/ApprovalOutlined";
-import LaptopIcon from "@mui/icons-material/Laptop";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { styled } from "@mui/material/styles";
+import {
+  Box,
+  Drawer,
+  Divider,
+  List,
+  ListItemButton,
+  Button,
+} from "@mui/material";
+import { ListItemIcon } from "@mui/material";
+import { ListItemText, Collapse, IconButton } from "@mui/material/";
+import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
+import { ExpandLess, ExpandMore } from "@mui/icons-material";
+import { Card, Fab, Typography } from "@mui/material";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import { ThemeModeContext } from "../../../theme/ThemeModeContext";
+import AdminHeader from "../Header/AdminHeader";
+import BreadCrumbs from "../../../routes/adminRoutes";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import PersonIcon from "@mui/icons-material/Person";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import MailIcon from "@mui/icons-material/Mail";
@@ -16,29 +31,10 @@ import PlaylistAddCheckIcon from "@mui/icons-material/PlaylistAddCheck";
 import AddchartIcon from "@mui/icons-material/Addchart";
 import EventIcon from "@mui/icons-material/Event";
 import HolidayVillageIcon from "@mui/icons-material/HolidayVillage";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
-import { ListItemIcon } from "@mui/material";
-import { styled } from "@mui/material/styles";
-import {
-  Box,
-  Drawer,
-  Divider,
-  List,
-  ListItemButton,
-  Button,
-} from "@mui/material";
-import { ListItemText, Collapse, IconButton } from "@mui/material/";
-import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
-import { ExpandLess, ExpandMore } from "@mui/icons-material";
-import { Card, Fab, Switch, Typography } from "@mui/material";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import { ThemeModeContext } from "../../../theme/ThemeModeContext";
-import AdminHeader from "../Header/AdminHeader";
-import { getUser, removeUser } from "../../utils/cookieHelper";
+import LaptopIcon from "@mui/icons-material/Laptop";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { removeUser } from "../../utils/cookieHelper";
 import Footer from "../footer/Footer";
-import jwtDecode from "jwt-decode";
-import BreadCrumbs from "../../../routes/routes";
 
 const drawerWidth = 260;
 
@@ -82,15 +78,13 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 
 export default function AdminSidebar() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [open, setOpen] = useState(false);
   const { mode } = useContext(ThemeModeContext);
   const [subMenuOpen, setSubMenuOpen] = useState({});
   const { pathname } = useLocation();
-  const user = getUser();
-  const decode = jwtDecode(user);
-  const userRole = decode?.userRole;
 
-  const drawerMenusForAdmin = [
+  const drawerMenus = [
     {
       name: "Dashboard",
       icon: (
@@ -135,7 +129,7 @@ export default function AdminSidebar() {
         },
         {
           name: "Leave Type",
-          path: "employee/leaveType",
+          path: "employee/leavetype",
           icon: (
             <MailIcon
               sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
@@ -169,7 +163,7 @@ export default function AdminSidebar() {
           sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
         />
       ),
-      path: "logistics/office",
+      path: "logistics",
       subMenus: [],
     },
     {
@@ -209,7 +203,7 @@ export default function AdminSidebar() {
           sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
         />
       ),
-      path: "projects",
+      path: "project",
       subMenus: [],
     },
     {
@@ -253,91 +247,6 @@ export default function AdminSidebar() {
       subMenus: [],
     },
   ];
-  const drawerMenusForEmployee = [
-    {
-      name: "Dashboard",
-      icon: (
-        <DashboardIcon
-          sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
-        />
-      ),
-      path: "home",
-      subMenus: [],
-    },
-    {
-      name: "My Profile",
-      icon: (
-        <AccountCircleOutlinedIcon
-          sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
-        />
-      ),
-      path: "profile",
-      subMenus: [],
-    },
-    {
-      name: "My Attendence",
-      path: "presence",
-      icon: (
-        <CoPresentOutlinedIcon
-          sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
-        />
-      ),
-      subMenus: [],
-    },
-    {
-      name: "Apply Leave",
-      path: "leave",
-      icon: (
-        <ApprovalOutlinedIcon
-          sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
-        />
-      ),
-      subMenus: [],
-    },
-    {
-      name: "Project",
-      icon: (
-        <AddchartIcon
-          sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
-        />
-      ),
-      path: "project",
-      subMenus: [],
-    },
-    {
-      name: "Event",
-      icon: (
-        <EventIcon
-          sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
-        />
-      ),
-      path: "event",
-      subMenus: [],
-    },
-    {
-      name: "Holiday",
-      icon: (
-        <HolidayVillageIcon
-          sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
-        />
-      ),
-      path: "holiday",
-      subMenus: [],
-    },
-    {
-      name: "Todo",
-      icon: (
-        <PlaylistAddCheckIcon
-          sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
-        />
-      ),
-      path: "todolist",
-      subMenus: [],
-    },
-  ];
-
-  const drawerMenus =
-    userRole === "ROLE_ADMIN" ? drawerMenusForAdmin : drawerMenusForEmployee;
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -440,22 +349,20 @@ export default function AdminSidebar() {
               {menu.subMenus.length > 0 && (
                 <Collapse in={subMenuOpen[index]} timeout="auto" unmountOnExit>
                   <List component="div" disablePadding>
-                    {menu.subMenus.map((subMenu, subIndex) => {
-                      return(
+                    {menu.subMenus.map((subMenu, subIndex) => (
                       <StyledNavLink key={subIndex} to={subMenu.path}>
-                        
                         <ListItemButton
                           sx={{
                             backgroundColor:
-                              pathname.includes(subMenu.name.toLowerCase()) &&
-                              "#ace8639e",
+                              pathname.includes(subMenu.path) && "#ace8639e",
+                            color: mode === "light" ? "black" : "white",
                           }}
                         >
                           <ListItemIcon>{subMenu.icon}</ListItemIcon>
                           <ListItemText primary={subMenu.name} />
                         </ListItemButton>
                       </StyledNavLink>
-                    )})}
+                    ))}
                   </List>
                 </Collapse>
               )}
@@ -482,6 +389,13 @@ export default function AdminSidebar() {
           >
             Logout
           </Button>
+          {/* <Typography
+            variant='body2'
+            sx={{ marginRight: '8px', marginTop: '1rem' }}
+          >
+            {mode === 'light' ? 'Dark' : 'Light'} Mode
+            <Switch checked={mode === 'dark'} onChange={toggleMode} />
+          </Typography> */}
         </Box>
       </Drawer>
 
