@@ -221,14 +221,14 @@ const NewLogin = () => {
             <Box
               className="side-box"
               position="absolute"
-              top="4%"
-              left={{ lg: "34%", md: "15%", sm: "30%", xs: "20%" }}
+              top="5.5%"
+              left={{ lg: "30%", md: "15%", sm: "30%", xs: "20%" }}
             >
               <img
                 src={groupImg}
                 alt="img"
-                width="336px"
-                height="375px"
+                width="375px"
+                height="336px"
                 style={{ position: "relative", zIndex: 2 }}
                 className="imggroup"
               />
