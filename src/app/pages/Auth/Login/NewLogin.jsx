@@ -9,7 +9,6 @@ import {
 } from "@mui/material";
 import React, { useContext } from "react";
 import "./Style/Login.css";
-import bg1 from "../../../../assets/login-bg.png";
 import groupImg from "../../../../assets/group.png";
 
 import poweredBy from "../../../../assets/poweredBy.jpg";
@@ -18,6 +17,9 @@ import { Link } from "react-router-dom";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
 import { useLoginForm } from "../../../../auth/hooks/component/login/useLoginForm";
+import P1 from "../../../../assets/Polygon1.png";
+import P2 from "../../../../assets/Polygon2.png";
+
 const NewLogin = () => {
   const { mode } = useContext(ThemeModeContext);
   const {
@@ -29,36 +31,93 @@ const NewLogin = () => {
   } = useLoginForm({});
   return (
     <div style={{ height: "100vh" }}>
-      <div className="login-bgg" style={{ backgroundImage: `url(${bg1})` }}>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            height: "100%",
-            justifyContent: "space-around",
-          }}
-          className="login-bg-design"
-        >
-          <Box className="input-section">
-            <Typography fontSize="40px" color="primary" fontWeight="600">
-              Log In
-            </Typography>
-            <Typography
-              variant="p"
-              color="#6C49B4"
-              sx={{ fontWeight: "500", paddingTop: "0" }}
+      <div className="login-bgg">
+        <Grid className="login-bg-design">
+          <Box display="flex" justifyContent="center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="72"
+              height="112"
+              viewBox="0 0 72 112"
+              fill="none"
+              style={{ top: "0", left: "1px", position: "absolute" }}
             >
-              your account to continue
-            </Typography>
-            <div
+              <ellipse
+                opacity="0.2"
+                cx="14.5691"
+                cy="12.8671"
+                rx="14.5691"
+                ry="12.8671"
+                transform="matrix(1 0 0 -1 35.5117 78.6409)"
+                fill="#6DAB23"
+              />
+              <ellipse
+                opacity="0.2"
+                cx="6.82926"
+                cy="5.71871"
+                rx="6.82926"
+                ry="5.71871"
+                transform="matrix(1 0 0 -1 44.6172 44.3286)"
+                fill="#6DAB23"
+              />
+              <ellipse
+                opacity="0.2"
+                cx="13.1448"
+                cy="11.4099"
+                rx="13.1448"
+                ry="11.4099"
+                transform="matrix(1 0 0 -1 8 34.3337)"
+                fill="#6C49B4"
+              />
+              <ellipse
+                opacity="0.2"
+                cx="9.63951"
+                cy="8.36728"
+                rx="9.63951"
+                ry="8.36728"
+                transform="matrix(1 0 0 -1 35 16.7346)"
+                fill="#6C49B4"
+              />
+              <ellipse
+                opacity="0.2"
+                cx="6.37398"
+                cy="5.71871"
+                rx="6.37398"
+                ry="5.71871"
+                transform="matrix(1 0 0 -1 59 19.8113)"
+                fill="#6C49B4"
+              />
+              <ellipse
+                opacity="0.2"
+                cx="21.3984"
+                cy="18.5858"
+                rx="21.3984"
+                ry="18.5858"
+                transform="matrix(1 0 0 -1 0 112)"
+                fill="#6DAB23"
+              />
+            </svg>
+            <Grid
               style={{
                 display: "flex",
                 flexDirection: "column",
                 gap: "22px",
-                padding: "1rem 0rem",
+                padding: "1rem ",
                 minWidth: "30rem",
+                alignItems: "center",
+                justifyContent: "center",
               }}
             >
+              <Typography fontSize="40px" color="primary" fontWeight="600">
+                Log In
+              </Typography>
+              <Typography
+                variant="p"
+                color="#6C49B4"
+                sx={{ fontWeight: "500", paddingTop: "0" }}
+              >
+                your account to continue
+              </Typography>
               <TextField
                 required
                 fullWidth
@@ -141,75 +200,90 @@ const NewLogin = () => {
                 variant="contained"
                 loading={loading}
                 sx={{
-                  textTransform:"none",
-                  color:"#fff",
-                  fontWeight:"bold"
+                  textTransform: "none",
+                  color: "#fff",
+                  fontWeight: "bold",
                 }}
               >
                 Login
               </LoadingButton>
-            </div>
+            </Grid>
           </Box>
-          <Box className="side-box">
+          <Grid position="relative" className="topAt920" height="100vh">
             <img
-              src={groupImg}
-              alt="img"
-              width="336px"
-              height="375px"
-              style={{ position: "relative", zIndex: 2 }}
-              className="imggroup"
+              src={P1}
+              alt=""
+              width="100%"
+              height="99%"
+              style={{ position: "absolute" }}
             />
-            <span className="login-lines">
-              <svg
-                width="400"
-                height="278"
-                viewBox="0 0 400 278"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <g opacity="0.1">
-                  <path
-                    d="M2 14.1788C6.40977 11.2027 17.3663 12.0172 25.9145 39.0837C36.5997 72.9168 34.5644 99.3249 58.479 118.121C83.9199 138.117 93.223 131.758 139.636 131.758C181.868 131.758 201.14 141.842 230.206 177.236C253.102 205.117 265.314 271.686 303.984 275.446C311.956 276.855 330.087 271.78 338.839 240.203C347.59 208.625 366.569 210.442 374.965 215.298"
-                    stroke="#6DAB23"
-                    stroke-width="3"
-                  />
-                  <path
-                    d="M0 1.90858C3.05292 0.185599 10.7361 -1.38075 17.0455 6.13772C24.9322 15.5358 25.441 14.1261 34.3453 31.0427C41.6723 43.4482 54.5285 72.5509 60.0407 85.5516C64.4505 96.0461 80.1391 118.445 107.615 124.084C141.961 131.132 127.205 188.129 204.545 174.833C215.994 175.617 245.963 185.547 274.254 219.004C302.544 252.462 327.595 230.752 336.584 215.715C342.096 206.317 357.497 190.152 375 200.678"
-                    stroke="#6DAB23"
-                    stroke-width="3"
-                  />
-                </g>
-              </svg>
-            </span>
-            <div className="login-hrms">
-              <Typography
-                variant="h4"
-                color="#401686"
-                textAlign="center"
-                fontFamily="Poppins"
-                fontWeight="bold"
-                className="typo"
-              >
-                Welcome to HRMS
-              </Typography>
-              <Typography
-                variant="p"
-                color="#401686"
-                textAlign="center"
-                fontFamily="Poppins"
-                fontStyle="italic"
-              >
-                "Leading people, Leading Organizations"
-              </Typography>
-            </div>
-            <div>
-              <img src={poweredBy} alt="cp" width="118px" height="15px" />
-              <Typography fontSize="11px" color="#7A757F" textAlign="center">
-                Version 1.0
-              </Typography>
-            </div>
-          </Box>
-        </div>
+            <img src={P2} alt="" width="100%" height="99.8%" />
+            <Box
+              className="side-box"
+              position="absolute"
+              top="5.5%"
+              left={{ lg: "30%", md: "15%", sm: "30%", xs: "20%" }}
+            >
+              <img
+                src={groupImg}
+                alt="img"
+                width="375px"
+                height="336px"
+                style={{ position: "relative", zIndex: 2 }}
+                className="imggroup"
+              />
+              <span className="login-lines">
+                <svg
+                  width="400"
+                  height="278"
+                  viewBox="0 0 400 278"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g opacity="0.1">
+                    <path
+                      d="M2 14.1788C6.40977 11.2027 17.3663 12.0172 25.9145 39.0837C36.5997 72.9168 34.5644 99.3249 58.479 118.121C83.9199 138.117 93.223 131.758 139.636 131.758C181.868 131.758 201.14 141.842 230.206 177.236C253.102 205.117 265.314 271.686 303.984 275.446C311.956 276.855 330.087 271.78 338.839 240.203C347.59 208.625 366.569 210.442 374.965 215.298"
+                      stroke="#6DAB23"
+                      stroke-width="3"
+                    />
+                    <path
+                      d="M0 1.90858C3.05292 0.185599 10.7361 -1.38075 17.0455 6.13772C24.9322 15.5358 25.441 14.1261 34.3453 31.0427C41.6723 43.4482 54.5285 72.5509 60.0407 85.5516C64.4505 96.0461 80.1391 118.445 107.615 124.084C141.961 131.132 127.205 188.129 204.545 174.833C215.994 175.617 245.963 185.547 274.254 219.004C302.544 252.462 327.595 230.752 336.584 215.715C342.096 206.317 357.497 190.152 375 200.678"
+                      stroke="#6DAB23"
+                      stroke-width="3"
+                    />
+                  </g>
+                </svg>
+              </span>
+              <div className="login-hrms">
+                <Typography
+                  variant="h4"
+                  color="#401686"
+                  textAlign="center"
+                  fontFamily="Poppins"
+                  fontWeight="bold"
+                  className="typo"
+                >
+                  Welcome to HRMS
+                </Typography>
+                <Typography
+                  variant="p"
+                  color="#401686"
+                  textAlign="center"
+                  fontFamily="Poppins"
+                  fontStyle="italic"
+                >
+                  "Leading people, Leading Organizations"
+                </Typography>
+              </div>
+              <div>
+                <img src={poweredBy} alt="cp" width="118px" height="15px" />
+                <Typography fontSize="11px" color="#7A757F" textAlign="center">
+                  Version 1.0
+                </Typography>
+              </div>
+            </Box>
+          </Grid>
+        </Grid>
       </div>
     </div>
   );

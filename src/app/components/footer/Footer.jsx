@@ -24,7 +24,7 @@ const Footer = () => {
       zIndex='99999'
     >
       <Typography variant='h7' color='white'>
-        DG TRADE © DIGIHUB
+      Secured Securities Limited
       </Typography>
       <Chip
         label='Version : 1.0'

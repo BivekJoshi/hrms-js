@@ -18,6 +18,7 @@ const EmployeeResourceFields = ({ onClose, isLoading, data }) => {
   const { mode } = useContext(ThemeModeContext);
   const { formik } = useEmployeeResourceForm(data);
 
+
   const handleFormSubmit = () => {
     formik.handleSubmit();
     if (formik.isValid) {

@@ -1,39 +1,41 @@
-import { useAddEmployee } from '../useEmployee';
-import { useFormik } from 'formik';
-import { AddEmployeeSchema } from './addEmployeeSchema';
+import { useAddEmployee } from "../useEmployee";
+import { useFormik } from "formik";
+import { AddEmployeeSchema } from "./addEmployeeSchema";
 
-const useAddEmployeeForm = () => {
-  const { mutate, data, isLoading } = useAddEmployee();
+const useAddEmployeeForm = (onClose) => {
+  const { mutate: addEmployee, data, isLoading } = useAddEmployee();
 
   const formik = useFormik({
     initialValues: {
-      firstName: '',
-      middleName: '',
-      lastName: '',
-      gender: '',
-      dateOfBirth: '',
-      dateOfJoin: '',
-      mobileNumber: '',
-      citizenshipNumber: '',
-      panNumber: '',
-      officeEmail: '',
-      maritalStatus: '',
-      companyId: '',
-      positionId: '',
-      departmentId: '',
+      firstName: "",
+      middleName: "",
+      lastName: "",
+      gender: "",
+      dateOfBirth: "",
+      dateOfJoin: "",
+      mobileNumber: "",
+      citizenshipNumber: "",
+      panNumber: "",
+      officeEmail: "",
+      maritalStatus: "",
+      companyId: "",
+      positionId: "",
+      departmentId: "",
     },
     validationSchema: AddEmployeeSchema,
     onSubmit: (values) => {
       handleRequest(values);
-      formik.resetForm();
     },
   });
 
   const handleRequest = (values) => {
-    values = {
-      ...values,
-    };
-    mutate(values, formik);
+    values = { ...values };
+    addEmployee(values, {
+      onSuccess: () => {
+        onClose();
+        formik.resetForm();
+      },
+    });
   };
   return { formik, data, isLoading };
 };
