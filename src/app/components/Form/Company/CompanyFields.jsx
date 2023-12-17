@@ -29,6 +29,7 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
             helperText={formik.touched.branchName && formik.errors.branchName}
             variant='outlined'
             InputLabelProps={{ shrink: true }}
+            size='small'
           />
         </Grid>
         <Grid item xs={12} sm={12}>
@@ -47,6 +48,7 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
             helperText={formik.touched.branchAddress && formik.errors.branchAddress}
             variant='outlined'
             InputLabelProps={{ shrink: true }}
+            size='small'
           />
         </Grid>
         <Grid item xs={12} sm={12}>
@@ -65,6 +67,7 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
             helperText={formik.touched.branchContact && formik.errors.branchContact}
             variant='outlined'
             InputLabelProps={{ shrink: true }}
+            size='small'
           />
         </Grid>
         <Grid item xs={12} sm={12}>
@@ -83,6 +86,7 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
             helperText={formik.touched.branchEmail && formik.errors.branchEmail}
             variant='outlined'
             InputLabelProps={{ shrink: true }}
+            size='small'
           />
         </Grid>
         <Grid item xs={12} sm={12}>
@@ -107,6 +111,7 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
             variant='outlined'
             InputLabelProps={{ shrink: true }}
             inputProps={{ maxLength: 250 }}
+            size='small'
           />
         </Grid>
         <Grid

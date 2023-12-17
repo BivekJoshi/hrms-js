@@ -180,10 +180,10 @@ const Dashboard = () => {
                 boxShadow="0 4px 8px 3px rgba(0,0,0,.15), 0 1px 3px rgba(0,0,0,.3)"
               >
                 <Typography variant="v6">
-                  Total Project : {projectDataCount?.total}
+                  Total Project : {data?.projectInfo?.total}
                 </Typography>
                 <div style={{ marginTop: "16px" }}>
-                  <ProjectProgressCard projectDataCount={projectDataCount} />
+                  <ProjectProgressCard projectDataCount={data} />
                 </div>
               </Grid>
             </div>

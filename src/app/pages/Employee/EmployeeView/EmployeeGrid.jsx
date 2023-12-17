@@ -58,6 +58,7 @@ const EmployeeGrid = ({ employeeData, isLoading }) => {
               value={nameFilter}
               onChange={(e) => setNameFilter(e.target.value)}
               fullWidth
+              size="small"
             />
           </Grid>
           <Grid item xs={4}>
@@ -67,6 +68,7 @@ const EmployeeGrid = ({ employeeData, isLoading }) => {
               value={positionFilter}
               onChange={(e) => setPositionFilter(e.target.value)}
               fullWidth
+              size="small"
             />
           </Grid>
           <Grid item xs={4}>
@@ -76,6 +78,7 @@ const EmployeeGrid = ({ employeeData, isLoading }) => {
               value={phoneFilter}
               onChange={(e) => setPhoneFilter(e.target.value)}
               fullWidth
+              size="small"
             />
           </Grid>
         </Grid>
