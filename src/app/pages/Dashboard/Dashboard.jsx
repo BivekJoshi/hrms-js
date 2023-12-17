@@ -34,8 +34,6 @@ const Dashboard = () => {
   const { data: projectData } = useGetProject();
   useGetPendingLeave();
   const { data: employeeData } = useGetEmployee();
-  const { data: eventData } = useGetEvent();
-  const { data: holidayData } = useGetHoliday();
   const { data: userRoleData } = useGetUserRole();
   const { data: myData } = useGetLoggedInUser();
 
@@ -62,7 +60,7 @@ const Dashboard = () => {
   const formattedDate = today.toLocaleDateString(undefined, options);
 
 
-  console.log(data,"data fo dashboard")
+  console.log(data,"data fo das")
   return (
     <>
       <Box
@@ -134,21 +132,21 @@ const Dashboard = () => {
             <DashboardCard
               title="Employees"
               icon={Employee}
-              count={employeeData?.length ? employeeData.length : "0"}
+              count={data?.totalEmployee}
               linkTo="/admin/employee"
               borderColor="#F8B114"
             />
             <DashboardCard
               title="Events"
               icon={Event}
-              count={eventData ? eventData?.length : "0"}
+              count={data?.events}
               linkTo="/admin/event"
               borderColor="#108A23"
             />
             <DashboardCard
               title="Holiday"
               icon={Holiday}
-              count={holidayData ? holidayData?.length : "0"}
+              count={data?.holidays}
               linkTo="/admin/holiday"
               borderColor="#FF8A7B"
             />

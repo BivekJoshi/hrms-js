@@ -1,4 +1,4 @@
-import { axiosInstance } from "../../../auth/axiosInterceptor";
+import { axiosInstance } from '../../../auth/axiosInterceptor';
 
 {
   /*________________________GET_____________________________________*/
@@ -23,7 +23,7 @@ export const getDepartmentById = async (id) => {
   /*________________________POST_____________________________________*/
 }
 export const addDepartment = async (formData) => {
-  const data = await axiosInstance.post("/department/create", formData);
+  const data = await axiosInstance.post('/department/create', formData);
   return data;
 };
 
@@ -31,7 +31,7 @@ export const addDepartment = async (formData) => {
   /*________________________EDIT_____________________________________*/
 }
 export const editDepartment = async (formData) => {
-  const {id} = formData;
+  const { id } = formData;
   const data = await axiosInstance.put(`/department/update/${id}`, formData);
   return data;
 };
@@ -40,6 +40,10 @@ export const editDepartment = async (formData) => {
   /*________________________DELETE_____________________________________*/
 }
 export const deleteDepartment = async (departmentId) => {
-  const response = await axiosInstance.delete(`/department/delete/${departmentId}`);
-  return response.data;
+  if (departmentId) {
+    const response = await axiosInstance.delete(
+      `/department/delete/${departmentId}`
+    );
+    return response.data;
+  }
 };

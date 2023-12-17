@@ -6,10 +6,12 @@ export const addPermanentAddress = async (formData, id) => {
 };
 
 export const addTemporaryAddress = async (formData, id) => {
-  const response = await axiosInstance.post(`/address/create/${id}`, [
-    formData,
-  ]);
-  return response;
+  if (id) {
+    const response = await axiosInstance.post(`/address/create/${id}`, [
+      formData,
+    ]);
+    return response;
+  }
 };
 
 export const getAddressById = (id) => {

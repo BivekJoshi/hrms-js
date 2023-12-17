@@ -1,4 +1,4 @@
-import { axiosInstance } from "../../../auth/axiosInterceptor";
+import { axiosInstance } from '../../../auth/axiosInterceptor';
 
 {
   /*________________________GET_____________________________________*/
@@ -22,7 +22,7 @@ export const getDesignationById = async (id) => {
   /*________________________POST_____________________________________*/
 }
 export const addDesignation = async (formData) => {
-  const data = await axiosInstance.post("/position/create", formData);
+  const data = await axiosInstance.post('/position/create', formData);
   return data;
 };
 
@@ -39,6 +39,8 @@ export const editDesignation = async (formData) => {
   /*________________________DELETE_____________________________________*/
 }
 export const deleteDesignation = async (designationId) => {
-  const response = await axiosInstance.delete(`/position/${designationId}`);
-  return response.data;
+  if (designationId) {
+    const response = await axiosInstance.delete(`/position/${designationId}`);
+    return response.data;
+  }
 };
