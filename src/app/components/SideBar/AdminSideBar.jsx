@@ -36,6 +36,8 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { removeUser } from "../../utils/cookieHelper";
 import Footer from "../footer/Footer";
 
+
+
 const drawerWidth = 260;
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
@@ -300,34 +302,27 @@ export default function AdminSidebar() {
         </DrawerHeader>
         <Divider />
         <List>
-          {drawerMenus.map((menu, index) => (
-            <React.Fragment key={index}>
-              <StyledNavLink key={index} to={menu.path}>
-                <ListItemButton
-                  onClick={() => handleSubMenuToggle(index)}
-                  sx={{
-                    backgroundColor:
-                      pathname.includes(menu.path) && "#ace8639e",
-                  }}
-                >
-                  <ListItemIcon
-                    sx={
-                      mode === "light"
-                        ? { color: "Light", minWidth: "40px" }
-                        : { color: "White" }
-                    }
-                  >
-                    {menu.icon}
-                  </ListItemIcon>
-                  <ListItemText
-                    primary={menu.name}
-                    sx={
-                      mode === "light" ? { color: "black" } : { color: "white" }
-                    }
-                  />
-                  {menu.subMenus.length > 0 ? (
-                    subMenuOpen[index] ? (
-                      <ExpandLess
+          { drawerMenus.map((menu, index) => (
+                <React.Fragment key={index}>
+                  <StyledNavLink key={index} to={menu.path}>
+                    <ListItemButton
+                      onClick={() => handleSubMenuToggle(index)}
+                      sx={{
+                        backgroundColor:
+                          pathname.includes(menu.path) && "#ace8639e",
+                      }}
+                    >
+                      <ListItemIcon
+                        sx={
+                          mode === "light"
+                            ? { color: "Light", minWidth: "40px" }
+                            : { color: "White" }
+                        }
+                      >
+                        {menu.icon}
+                      </ListItemIcon>
+                      <ListItemText
+                        primary={menu.name}
                         sx={
                           mode === "light"
                             ? { color: "black" }
@@ -424,7 +419,7 @@ export default function AdminSidebar() {
           >
             <BreadCrumbs />
           </Box>
-          <div style={{ minHeight: "90vh" }}>
+          <div style={{ minHeight: '90vh' }}>
             <Outlet />
           </div>
         </Card>
