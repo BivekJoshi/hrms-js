@@ -4,9 +4,9 @@ import { getUser, removeUser } from '../app/utils/cookieHelper';
 import jwtDecode from 'jwt-decode';
 import { getBaseUrl } from './getBaseUrl';
 
-export const baseURL = 'https://103.94.159.144:8083/hrms/api/';
+// export const baseURL = 'https://103.94.159.144:8083/hrms/api/';
 // export const baseURL = 'https://172.16.16.94:6523/hrms/api/';
-// const baseURL = getBaseUrl();
+const baseURL = getBaseUrl();
 
 export const DOC_URL = 'https://dgtrade36.ssl.com.np/';
 
