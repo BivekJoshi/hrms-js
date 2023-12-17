@@ -8,9 +8,11 @@ const useCompanyForm = (data, onClose) => {
 
   const formik = useFormik({
     initialValues: {
-      companyName: data?.companyName || "",
-      companyType: data?.companyType || "",
-      companyDescription: data?.companyDescription || "",
+      branchName: data?.branchName || "",
+      branchEmail: data?.branchEmail || "",
+      branchContact: data?.branchContact || "",
+      branchAddress: data?.branchAddress||"",
+      branchDescription: data?.branchDescription || "",
       id: data?.id,
     },
     validationSchema: CompanySchema,

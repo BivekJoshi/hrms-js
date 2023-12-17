@@ -4,7 +4,7 @@ import { axiosInstance } from '../../../auth/axiosInterceptor';
   /*________________________GET_____________________________________*/
 }
 export const getCompany = async () => {
-  const data = await axiosInstance.get(`/company/get-all`);
+  const data = await axiosInstance.get(`/branch/get-all`);
   return data;
 };
 
@@ -13,7 +13,7 @@ export const getCompany = async () => {
 }
 export const getCompanyById = async (id) => {
   if (id) {
-    const data = await axiosInstance.get(`/company/company-id/${id}`);
+    const data = await axiosInstance.get(`/branch/branch-id/${id}`);
     return data;
   }
 };
@@ -22,7 +22,7 @@ export const getCompanyById = async (id) => {
   /*________________________POST_____________________________________*/
 }
 export const addCompany = async (formData) => {
-  const data = await axiosInstance.post('/company/create', formData);
+  const data = await axiosInstance.post('/branch/create', formData);
   return data;
 };
 
@@ -31,7 +31,7 @@ export const addCompany = async (formData) => {
 }
 export const editCompany = async (formData) => {
   const { id } = formData;
-  const data = await axiosInstance.put(`/company/update/${id}`, formData);
+  const data = await axiosInstance.put(`/branch/update/${id}`, formData);
   return data;
 };
 
@@ -40,7 +40,7 @@ export const editCompany = async (formData) => {
 }
 export const deleteCompany = async (companyId) => {
   if (companyId) {
-    const response = await axiosInstance.delete(`/company/delete/${companyId}`);
+    const response = await axiosInstance.delete(`/branch/delete/${companyId}`);
     return response.data;
   }
 };

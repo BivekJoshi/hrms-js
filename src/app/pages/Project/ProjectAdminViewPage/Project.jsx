@@ -141,7 +141,7 @@ const Project = ({ permissions }) => {
             StartDate={item.startDate}
             EndDate={item.endDate}
             ProjectLeaderId={item.projectLeaderId}
-            AssociateCompanies={item.associateCompanies[0].companyName}
+            // AssociateCompanies={item.associateCompanies[0].branchName}
             TaskStatus={item.taskStatus}
           />
         ))}

@@ -125,7 +125,7 @@ const Dashboard = () => {
             <DashboardCard
               title="Users"
               icon={User}
-              count={userRoleData?.length ? userRoleData?.length : "0"}
+              count={data?.totalUser}
               linkTo="/admin/users"
               borderColor="#3399FF"
             />
@@ -146,14 +146,14 @@ const Dashboard = () => {
             <DashboardCard
               title="Holiday"
               icon={Holiday}
-              count={data?.holidays}
+              count={data?.holiday}
               linkTo="/admin/holiday"
               borderColor="#FF8A7B"
             />
             <DashboardCard
               title="Project"
               icon={Project}
-              count={projectDataCount?.total ? projectDataCount?.total : "0"}
+              count={data?.project}
               linkTo="/admin/project"
               borderColor="#875923 "
             />

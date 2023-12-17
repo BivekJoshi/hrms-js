@@ -15,58 +15,94 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
           <TextField
-            id='companyName'
-            name='companyName'
+            id='branchName'
+            name='branchName'
             label='Branch Name'
             placeholder='Enter branch name'
             fullWidth
             required
-            value={formik.values.companyName}
+            value={formik.values.branchName}
             onChange={formik.handleChange}
             error={
-              formik.touched.companyName && Boolean(formik.errors.companyName)
+              formik.touched.branchName && Boolean(formik.errors.branchName)
             }
-            helperText={formik.touched.companyName && formik.errors.companyName}
+            helperText={formik.touched.branchName && formik.errors.branchName}
             variant='outlined'
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
-            id='companyType'
-            name='companyType'
-            label='Branch Type'
-            placeholder='Enter branch type'
+            id='branchAddress'
+            name='branchAddress'
+            label='Address'
+            placeholder='Enter branch address'
             fullWidth
             required
-            value={formik.values.companyType}
+            value={formik.values.branchAddress}
             onChange={formik.handleChange}
             error={
-              formik.touched.companyType && Boolean(formik.errors.companyType)
+              formik.touched.branchAddress && Boolean(formik.errors.branchAddress)
             }
-            helperText={formik.touched.companyType && formik.errors.companyType}
+            helperText={formik.touched.branchAddress && formik.errors.branchAddress}
             variant='outlined'
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
-            id='companyDescription'
-            name='companyDescription'
+            id='branchContact'
+            name='branchContact'
+            label='Contact'
+            placeholder='Enter branch contact'
+            fullWidth
+            required
+            value={formik.values.branchContact}
+            onChange={formik.handleChange}
+            error={
+              formik.touched.branchContact && Boolean(formik.errors.branchContact)
+            }
+            helperText={formik.touched.branchContact && formik.errors.branchContact}
+            variant='outlined'
+            InputLabelProps={{ shrink: true }}
+          />
+        </Grid>
+        <Grid item xs={12} sm={12}>
+          <TextField
+            id='branchEmail'
+            name='branchEmail'
+            label='Email'
+            placeholder='Enter branch email'
+            fullWidth
+            required
+            value={formik.values.branchEmail}
+            onChange={formik.handleChange}
+            error={
+              formik.touched.branchEmail && Boolean(formik.errors.branchEmail)
+            }
+            helperText={formik.touched.branchEmail && formik.errors.branchEmail}
+            variant='outlined'
+            InputLabelProps={{ shrink: true }}
+          />
+        </Grid>
+        <Grid item xs={12} sm={12}>
+          <TextField
+            id='branchDescription'
+            name='branchDescription'
             label='Description'
             placeholder='Enter your Branch Description'
             fullWidth
             multiline
             rows={3}
-            value={formik.values.companyDescription}
+            value={formik.values.branchDescription}
             onChange={formik.handleChange}
             error={
-              formik.touched.companyDescription &&
-              Boolean(formik.errors.companyDescription)
+              formik.touched.branchDescription &&
+              Boolean(formik.errors.branchDescription)
             }
             helperText={
-              formik.touched.companyDescription &&
-              formik.errors.companyDescription
+              formik.touched.branchDescription &&
+              formik.errors.branchDescription
             }
             variant='outlined'
             InputLabelProps={{ shrink: true }}

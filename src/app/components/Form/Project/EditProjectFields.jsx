@@ -38,12 +38,12 @@ const EditProjectFields = ({ onClose, isLoading, data }) => {
     return projectLeadId;
   };
 
-  const getCompanyName = (associateCompanies) => {
-    return (
-      companyData?.find((company) => company.id == associateCompanies)
-        ?.companyName || associateCompanies
-    );
-  };
+  // const getCompanyName = (associateCompanies) => {
+  //   return (
+  //     companyData?.find((company) => company.id == associateCompanies)
+  //       ?.branchName || associateCompanies
+  //   );
+  // };
 
   const projectOptions = [
     // {
@@ -213,10 +213,10 @@ const EditProjectFields = ({ onClose, isLoading, data }) => {
             placeholder='Enter branch'
             disabled
             fullWidth
-            value={getCompanyName(formik.values.companyId)}
+            // value={getCompanyName(formik.values.companyId)}
             onChange={formik.handleChange}
-            error={formik.touched.companyId && Boolean(formik.errors.companyId)}
-            helperText={formik.touched.companyId && formik.errors.companyId}
+            // error={formik.touched.companyId && Boolean(formik.errors.companyId)}
+            // helperText={formik.touched.companyId && formik.errors.companyId}
             variant='outlined'
             InputLabelProps={{ shrink: true }}
           />

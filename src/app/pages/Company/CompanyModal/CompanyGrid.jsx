@@ -44,7 +44,7 @@ const CompanyGrid = ({ permissions ,companyData,isLoading}) => {
       />
       {openEditModal && (
         <EditCompanyModal
-          title={"Edit Company"}
+          title={"Edit Branch"}
           id={editedCompany?.id}
           open={openEditModal}
           handleCloseModal={handleCloseEditModal}
@@ -55,7 +55,7 @@ const CompanyGrid = ({ permissions ,companyData,isLoading}) => {
           open={openDeleteModal}
           handleCloseModal={handleCloseDeleteModal}
           handleConfirmDelete={handleConfirmDelete}
-          message={"Company"}
+          message={"Branch"}
         />
       )}
     </>
