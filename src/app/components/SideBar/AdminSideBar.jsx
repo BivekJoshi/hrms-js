@@ -462,7 +462,7 @@ export default function AdminSidebar() {
             </React.Fragment>
           ))}
         </List>
-        <Divir />
+        <Divider />
         <Box
           sx={{
             display: 'flex',
