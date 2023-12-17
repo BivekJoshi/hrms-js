@@ -28,7 +28,7 @@ const CustomTable = (props) => {
             fontWeight: 'bold',
 
             textAlign: 'center',
-            border: '1px solid #fff',
+            border: `1px solid ${palette?.divider}`,
 
             textTransform: 'capitalize',
           },
@@ -45,4 +45,3 @@ const CustomTable = (props) => {
 };
 
 export default CustomTable;
-
