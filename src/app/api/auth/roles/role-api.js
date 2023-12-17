@@ -1,4 +1,4 @@
-import { axiosInstance } from "../../../../auth/axiosInterceptor";
+import { axiosInstance } from '../../../../auth/axiosInterceptor';
 
 /*____________________________GET-ROLE____________________________________________*/
 export const getRole = async () => {
@@ -16,7 +16,7 @@ export const getRoleById = async (id) => {
 
 /*________________________POST_____________________________________*/
 export const addRole = async (formData) => {
-  const data = await axiosInstance.post("/role/create", formData);
+  const data = await axiosInstance.post('/role/create', formData);
   return data;
 };
 
@@ -30,14 +30,17 @@ export const editRole = async (formData) => {
 /*____________________________EDIT-ROLE-PERMISSION____________________________________________*/
 export const editPermissionRole = async (formData) => {
   const { roleId, permissionId } = formData;
-  
-  const data = await axiosInstance.put(
-    `/role/add-permission/${roleId}`, { permissionId });
+
+  const data = await axiosInstance.put(`/role/add-permission/${roleId}`, {
+    permissionId,
+  });
   return data;
 };
 
 /*________________________DELETE_____________________________________*/
 export const deleteRole = async (id) => {
-  const response = await axiosInstance.delete(`/role/delete/${id}`);
-  return response.data;
+  if (id) {
+    const response = await axiosInstance.delete(`/role/delete/${id}`);
+    return response.data;
+  }
 };

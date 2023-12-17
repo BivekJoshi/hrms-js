@@ -1,11 +1,11 @@
-import { useParams } from "react-router-dom";
-import { axiosInstance } from "../../../auth/axiosInterceptor";
+import { useParams } from 'react-router-dom';
+import { axiosInstance } from '../../../auth/axiosInterceptor';
 
 /*________________________POST_____________________________________*/
 export const addfamily = async (formData, id) => {
   const newFam = formData?.family;
   const dataToPost = newFam.filter(
-    (item) => item.id === undefined || item.id === ""
+    (item) => item.id === undefined || item.id === ''
   );
   const data = await axiosInstance.post(
     `/family-member/create/${id}`,
@@ -17,7 +17,7 @@ export const addfamily = async (formData, id) => {
 // export const addfamily = async (formData, id) => {
 //   const newFam = formData?.family;
 //   const dataToPost = newFam.filter(item => item.id === undefined || item.id === "");
-//   
+//
 //   if (dataToPost.length > 0) {
 //     const data = await axiosInstance.post(`/family-member/create/${id}`, dataToPost);
 //     return data;
@@ -41,7 +41,7 @@ export const editFamily = async (formData, id) => {
   const memberIds = newData && newData.map((member) => member?.id);
   const queryString = memberIds
     .map((memberId) => `memberIds=${memberId}`)
-    .join("&");
+    .join('&');
   const data = await axiosInstance.put(
     `/family-member/update/${id}?${queryString}`,
     formData?.family
@@ -51,6 +51,10 @@ export const editFamily = async (formData, id) => {
 
 /*________________________DELETE_____________________________________*/
 export const deleteFamily = async (memberId) => {
-  const data = await axiosInstance.delete(`/family-member/delete/${memberId}`);
-  return data;
+  if (memberId) {
+    const data = await axiosInstance.delete(
+      `/family-member/delete/${memberId}`
+    );
+    return data;
+  }
 };
