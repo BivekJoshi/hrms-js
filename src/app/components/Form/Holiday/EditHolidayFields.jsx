@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { Grid, TextField, Button } from "@mui/material";
-import { useDeleteHoliday } from "../../../hooks/holiday/useHoliday";
-import PermissionHoc from "../../../hoc/permissionHoc";
-import useEditHolidayForm from "../../../hooks/holiday/HolidayForm/useEditHolidayForm";
+import React, { useState } from 'react';
+import { Grid, TextField, Button } from '@mui/material';
+import { useDeleteHoliday } from '../../../hooks/holiday/useHoliday';
+import PermissionHoc from '../../../hoc/permissionHoc';
+import useEditHolidayForm from '../../../hooks/holiday/HolidayForm/useEditHolidayForm';
 
 const EditHolidayFields = ({ onClose, isLoading, data, permissions }) => {
   const { formik } = useEditHolidayForm(data);
@@ -31,10 +31,10 @@ const EditHolidayFields = ({ onClose, isLoading, data, permissions }) => {
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
           <TextField
-            id="holidayName"
-            name="holidayName"
-            label="Holiday"
-            placeholder="Enter holiday name"
+            id='holidayName'
+            name='holidayName'
+            label='Holiday'
+            placeholder='Enter holiday name'
             fullWidth
             required
             value={formik.values.holidayName}
@@ -43,17 +43,16 @@ const EditHolidayFields = ({ onClose, isLoading, data, permissions }) => {
               formik.touched.holidayName && Boolean(formik.errors.holidayName)
             }
             helperText={formik.touched.holidayName && formik.errors.holidayName}
-            variant="outlined"
-            autoFocus
+            variant='outlined'
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
-            id="holidayDate"
-            name="holidayDate"
-            type="date"
-            label="Date of Holiday"
+            id='holidayDate'
+            name='holidayDate'
+            type='date'
+            label='Date of Holiday'
             fullWidth
             required
             value={formik.values.holidayDate}
@@ -62,17 +61,16 @@ const EditHolidayFields = ({ onClose, isLoading, data, permissions }) => {
               formik.touched.holidayDate && Boolean(formik.errors.holidayDate)
             }
             helperText={formik.touched.holidayDate && formik.errors.holidayDate}
-            variant="outlined"
-            autoFocus
+            variant='outlined'
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
-            id="holidayDescription"
-            name="holidayDescription"
-            label="Description"
-            placeholder="Enter your Holiday Description"
+            id='holidayDescription'
+            name='holidayDescription'
+            label='Description'
+            placeholder='Enter your Holiday Description'
             fullWidth
             multiline
             rows={3}
@@ -86,34 +84,33 @@ const EditHolidayFields = ({ onClose, isLoading, data, permissions }) => {
               formik.touched.holidayDescription &&
               formik.errors.holidayDescription
             }
-            variant="outlined"
-            autoFocus
+            variant='outlined'
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
         <Grid
           container
-          direction="row"
-          justifyContent="flex-end"
-          alignItems="flex-end"
+          direction='row'
+          justifyContent='flex-end'
+          alignItems='flex-end'
         >
           <>
             {data ? (
               <Button
-                variant="contained"
+                variant='contained'
                 onClick={handleDeleteHoliday}
                 sx={{ mt: 3, ml: 1 }}
-                color="error"
+                color='error'
               >
                 Delete
               </Button>
             ) : (
-              ""
+              ''
             )}
           </>
 
           <Button
-            variant="contained"
+            variant='contained'
             onClick={handleFormSubmit}
             sx={{ mt: 3, ml: 1 }}
           >
@@ -121,10 +118,10 @@ const EditHolidayFields = ({ onClose, isLoading, data, permissions }) => {
           </Button>
 
           <Button
-            variant="contained"
+            variant='contained'
             onClick={onClose}
             sx={{ mt: 3, ml: 1 }}
-            color="error"
+            color='error'
           >
             Cancel
           </Button>

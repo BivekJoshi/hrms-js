@@ -2,7 +2,7 @@ import Axios from 'axios';
 import { toast } from 'react-toastify';
 import { getUser, removeUser } from '../app/utils/cookieHelper';
 import jwtDecode from 'jwt-decode';
-// import { baseURL } from './axiosInterceptor';
+import { getBaseUrl } from './getBaseUrl';
 
 export const baseURL = 'http://103.94.159.144:8083/hrms/api/';
 // export const baseURL = 'https://172.16.16.94:6523/hrms/api/';

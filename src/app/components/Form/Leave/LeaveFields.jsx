@@ -7,14 +7,14 @@ import {
   Box,
   FormControlLabel,
   Typography,
-} from "@mui/material";
-import React, { useContext } from "react";
-import { useGetEmployee } from "../../../hooks/employee/useEmployee";
-import { useGetLeaveType } from "../../../hooks/leaveType/useLeaveType";
-import useLeaveForm from "../../../hooks/leave/LeaveForm/useLeaveForm";
-import ThemeModeContext from "../../../../theme/ThemeModeContext";
-import { ThemeSwitch } from "../../../../theme/ThemeSwitch";
-import useAuth from "../../../../auth/hooks/component/login/useAuth";
+} from '@mui/material';
+import React, { useContext } from 'react';
+import { useGetEmployee } from '../../../hooks/employee/useEmployee';
+import { useGetLeaveType } from '../../../hooks/leaveType/useLeaveType';
+import useLeaveForm from '../../../hooks/leave/LeaveForm/useLeaveForm';
+import ThemeModeContext from '../../../../theme/ThemeModeContext';
+import { ThemeSwitch } from '../../../../theme/ThemeSwitch';
+import useAuth from '../../../../auth/hooks/component/login/useAuth';
 import { ButtonComponent } from '../../Button/ButtonComponent';
 
 const leaveStatus = [
@@ -69,8 +69,7 @@ export const EditLeaveFields = ({ onClose, isLoading, data }) => {
     }
   };
 
-  const submitButtonText = data ? "Update Leave" : "Add Leave";
-
+  const submitButtonText = data ? 'Update Leave' : 'Add Leave';
   if (isManager) {
     return (
       !isLoading && (
@@ -101,7 +100,7 @@ export const EditLeaveFields = ({ onClose, isLoading, data }) => {
                 formik.touched.leaveStatus && formik.errors.leaveStatus
               }
               variant='standard'
-              // autoFocus
+              //
               // InputLabelProps={{ shrink: true }}
             >
               {leaveStatus.map((option) => (
@@ -134,7 +133,6 @@ export const EditLeaveFields = ({ onClose, isLoading, data }) => {
                 formik.touched.leaveRemarks && formik.errors.leaveRemarks
               }
               variant='outlined'
-              autoFocus
               InputLabelProps={{ shrink: true }}
             />
           </Grid>
@@ -147,7 +145,7 @@ export const EditLeaveFields = ({ onClose, isLoading, data }) => {
             <Button
               variant='contained'
               onClick={handleFormSubmit}
-              sx={{ mt: 3, ml: 1, color: "#fff" }}
+              sx={{ mt: 3, ml: 1, color: '#fff' }}
             >
               Submit
             </Button>
@@ -167,7 +165,6 @@ export const EditLeaveFields = ({ onClose, isLoading, data }) => {
 };
 
 export const LeaveFields = ({ onClose, isLoading, data }) => {
-  const { isManager } = useAuth();
   const { data: employeeData } = useGetEmployee();
   const { data: leaveTypeData } = useGetLeaveType();
   const { formik } = useLeaveForm(data);
@@ -180,7 +177,7 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
 
   const getLeaveTypeName = (leaveTypeId) => {
     const leaveType = leaveTypeData?.find((type) => type.id === leaveTypeId);
-    return leaveType ? leaveType.leaveName : "";
+    return leaveType ? leaveType.leaveName : '';
   };
 
   const getEmployeeFullName = () => {
@@ -188,12 +185,12 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
     if (employee) {
       const { firstName, middleName, lastName } = employee;
       return (
-        <Box sx={{ bgcolor: mode === "light" ? "" : "#413e3e" }}>
-          {firstName || ""} {middleName || ""} {lastName || ""}
+        <Box sx={{ bgcolor: mode === 'light' ? '' : '#413e3e' }}>
+          {firstName || ''} {middleName || ''} {lastName || ''}
         </Box>
       );
     }
-    return "";
+    return '';
   };
 
   const handleFormSubmit = () => {
@@ -207,8 +204,16 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
     }
   };
 
-  const submitButtonText = data ? "Update Leave" : "Add Leave";
+  const isMoreThanOneDayDifference = () => {
+    const fromDate = new Date(formik.values.fromDate);
+    const toDate = new Date(formik.values.toDate);
+    const oneDayInMilliseconds = 24 * 60 * 60 * 1000; // Number of milliseconds in one day
 
+    return toDate - fromDate > oneDayInMilliseconds;
+  };
+
+  const submitButtonText = data ? 'Update Leave' : 'Add Leave';
+  const currentDate = new Date().toISOString().split('T')[0];
   return (
     !isLoading && (
       <>
@@ -261,7 +266,6 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
                       formik.touched.employeeId && formik.errors.employeeId
                     }
                     variant='outlined'
-                    autoFocus
                     InputLabelProps={{ shrink: true }}
                   />
                 )}
@@ -318,7 +322,6 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
                       formik.touched.leaveTypeId && formik.errors.leaveTypeId
                     }
                     variant='outlined'
-                    autoFocus
                     InputLabelProps={{ shrink: true }}
                   />
                 )}
@@ -331,6 +334,9 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
               name='fromDate'
               label='From'
               type='date'
+              inputProps={{
+                min: currentDate, // Disable past date selections
+              }}
               required
               InputLabelProps={{ shrink: true }}
               fullWidth
@@ -345,6 +351,9 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
               name='toDate'
               label='To'
               type='date'
+              inputProps={{
+                min: formik.values.fromDate || currentDate,
+              }}
               InputLabelProps={{ shrink: true }}
               fullWidth
               value={formik.values.toDate}
@@ -371,7 +380,6 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
                 formik.touched.leaveReason && formik.errors.leaveReason
               }
               variant='outlined'
-              autoFocus
               InputLabelProps={{ shrink: true }}
             />
           </Grid>
@@ -391,7 +399,7 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
               }
               helperText={formik.touched.leaveStatus && formik.errors.leaveStatus}
               variant="outlined"
-              autoFocus
+              
               InputLabelProps={{ shrink: true }}
             >
               {leaveStatus.map((option) => (
@@ -412,6 +420,7 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
                   checked={formik.values.isHalfDay}
                   onChange={formik.handleChange}
                   name='isHalfDay'
+                  disabled={isMoreThanOneDayDifference()}
                 />
               }
               label='Is Half Day Leave'
@@ -427,7 +436,7 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
             <Button
               variant='contained'
               onClick={handleFormSubmit}
-              sx={{ mt: 3, ml: 1, color: "#fff" }}
+              sx={{ mt: 3, ml: 1, color: '#fff' }}
             >
               {submitButtonText}
             </Button>

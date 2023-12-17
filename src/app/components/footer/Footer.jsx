@@ -16,7 +16,11 @@ const Footer = () => {
       //   marginLeft='230px'
       alignItems='center'
       justifyContent='space-between'
-      bgcolor={palette.primary.main}
+      bgcolor={
+        palette?.mode === 'light'
+          ? palette.primary.main
+          : palette.background.default
+      }
       zIndex='99999'
     >
       <Typography variant='h7' color='white'>

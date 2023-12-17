@@ -20,7 +20,7 @@ export const usePermanentAddressForm = ({
   const initialValues = {
     addresses: [
       createAddressObject(addressDetails[0]),
-      createAddressObject(addressDetails[1], 'TEMPORARY'),
+      createAddressObject(addressDetails[1]),
     ],
   };
 
@@ -31,9 +31,9 @@ export const usePermanentAddressForm = ({
     onSubmit: handleSubmit,
   });
 
-  function createAddressObject(details, type = 'PERMANENT') {
+  function createAddressObject(details) {
     return {
-      addressType: type,
+      addressType: details?.addressType,
       id: details?.id || '',
       country: details?.country || '',
       province: details?.province || '',
@@ -55,8 +55,24 @@ export const usePermanentAddressForm = ({
   }
 
   function handleRequest(values) {
-    permanentMutate(values.addresses[0]);
-    temporaryMutate(values.addresses[1]);
+    const { addresses } = values;
+
+    // Check if the temporary address is empty (province is empty)
+    if (addresses[1]?.province === '') {
+      // If temporary address is empty, only update the permanent address
+      permanentMutate({ ...addresses[0], addressType: 'PERMANENT' });
+    } else {
+      // If temporary address is not empty, update both permanent and temporary addresses
+      permanentMutate({
+        ...addresses[0],
+        addressType: 'PERMANENT',
+      });
+
+      temporaryMutate({
+        ...addresses[1],
+        addressType: 'TEMPORARY',
+      });
+    }
   }
 
   function handleEditRequest(values) {
@@ -73,7 +89,7 @@ export const usePermanentAddressForm = ({
       });
     };
 
-    if (temporary) {
+    if (temporary?.addressType) {
       handleEditMutate(permanent, 'Permanent address edited successfully');
       handleEditMutate(temporary, 'Temporary address edited successfully');
     } else {

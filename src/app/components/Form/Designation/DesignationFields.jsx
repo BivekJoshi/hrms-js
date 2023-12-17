@@ -1,17 +1,13 @@
-import { nanoid } from "nanoid";
-import { Grid, TextField, Button, MenuItem } from "@mui/material";
-import React from "react";
-import useDesignationForm from "../../../hooks/designation/DesignationForm/useDesignationForm";
+import { nanoid } from 'nanoid';
+import { Grid, TextField, Button, MenuItem } from '@mui/material';
+import React from 'react';
+import useDesignationForm from '../../../hooks/designation/DesignationForm/useDesignationForm';
 
 const DesignationFields = ({ onClose, isLoading, data }) => {
-  const { formik } = useDesignationForm(data);
+  const { formik } = useDesignationForm(data,onClose);
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
-
-    if (formik.isValid) {
-      onClose();
-    }
   };
 
   const submitButtonText = data ? 'Update Designation' : 'Add Designation';
@@ -36,7 +32,6 @@ const DesignationFields = ({ onClose, isLoading, data }) => {
               formik.touched.positionName && formik.errors.positionName
             }
             variant='outlined'
-            autoFocus
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
@@ -58,7 +53,6 @@ const DesignationFields = ({ onClose, isLoading, data }) => {
               formik.touched.positionLevel && formik.errors.positionLevel
             }
             variant='outlined'
-            autoFocus
             InputLabelProps={{ shrink: true }}
           ></TextField>
         </Grid>
@@ -76,7 +70,6 @@ const DesignationFields = ({ onClose, isLoading, data }) => {
             error={formik.touched.salary && Boolean(formik.errors.salary)}
             helperText={formik.touched.salary && formik.errors.salary}
             variant='outlined'
-            autoFocus
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
@@ -99,7 +92,6 @@ const DesignationFields = ({ onClose, isLoading, data }) => {
               formik.touched.positionDetails && formik.errors.positionDetails
             }
             variant='outlined'
-            autoFocus
             InputLabelProps={{ shrink: true }}
           />
         </Grid>

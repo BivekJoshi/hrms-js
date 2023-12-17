@@ -1,44 +1,68 @@
-import { axiosInstance } from "../../../auth/axiosInterceptor";
+import { axiosInstance } from '../../../auth/axiosInterceptor';
 
-{/*________________________GET_____________________________________*/ }
+{
+  /*________________________GET_____________________________________*/
+}
 export const getEvent = async () => {
   const data = await axiosInstance.get(`/event/get-all`);
   return data;
 };
 
-{/*________________________GET-NOTIFICATION_____________________________________*/ }
+{
+  /*________________________GET-NOTIFICATION_____________________________________*/
+}
 export const getEventNotification = async () => {
   const data = await axiosInstance.get(`/event/get-notification`);
   return data;
 };
 
-{/*________________________GETBYID_____________________________________*/ }
+{
+  /*________________________GETBYID_____________________________________*/
+}
 export const getEventById = async (id) => {
-  const data = await axiosInstance.get(`/event/event-id/${id}`);
-  return data;
+  if (id) {
+    const data = await axiosInstance.get(`/event/event-id/${id}`);
+    return data;
+  }
 };
 
-{/*________________________GET BY MONTH DATA____________________________________*/ }
+{
+  /*________________________GET BY MONTH DATA____________________________________*/
+}
 export const getEventByMonth = async (monthAd) => {
-  const data = await axiosInstance.get(`/event/this-year/month?monthAd=${monthAd}`);
-  return data;
+  if (monthAd) {
+    const data = await axiosInstance.get(
+      `/event/this-year/month?monthAd=${monthAd}`
+    );
+    return data;
+  }
 };
 
-{/*________________________POST_____________________________________*/ }
+{
+  /*________________________POST_____________________________________*/
+}
 export const addEvent = async (formData) => {
   const data = await axiosInstance.post('/event/create', formData);
   return data;
 };
 
-{/*________________________DELETE_____________________________________*/ }
+{
+  /*________________________DELETE_____________________________________*/
+}
 export const deleteEvent = async (eventId) => {
-  const response = await axiosInstance.delete(`/event/delete/${eventId}`);
-  return response.data;
+  if (eventId) {
+    const response = await axiosInstance.delete(`/event/delete/${eventId}`);
+    return response.data;
+  }
 };
 
-{/*________________________EDIT_____________________________________*/ }
+{
+  /*________________________EDIT_____________________________________*/
+}
 export const editEvent = async (formData) => {
-  const {id} = formData;
-  const data = await axiosInstance.put(`/event/${id}`, formData);
-  return data;
+  const { id } = formData;
+  if (id) {
+    const data = await axiosInstance.put(`/event/${id}`, formData);
+    return data;
+  }
 };

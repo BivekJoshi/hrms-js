@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 import { useAddDesignation, useEditDesignation } from "../useDesignation";
 import { DesignationSchema } from "../Validation/DesignationSchema";
 
-const useDesignationForm = (data) => {
+const useDesignationForm = (data, onClose) => {
   const { mutate: addDesignation } = useAddDesignation({});
   const { mutate: editDesignation } = useEditDesignation({});
 
@@ -27,12 +27,21 @@ const useDesignationForm = (data) => {
 
   const handleRequest = (values) => {
     values = { ...values };
-    addDesignation(values, formik);
+    addDesignation(values, {
+      onSuccess: () => {
+        onClose();
+        formik.resetForm();
+      },
+    });
   };
 
   const handledEditRequest = (values) => {
     values = { ...values };
-    editDesignation(values, formik);
+    editDesignation(values, {
+      onSuccess: () => {
+        onClose();
+      },
+    });
   };
 
   return { formik };

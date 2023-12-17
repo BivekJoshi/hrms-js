@@ -1,19 +1,19 @@
-import React from "react";
-import { Grid, TextField, Button } from "@mui/material";
-import { useDeleteEvent } from "../../../hooks/event/useEvent";
-import useEventForm from "../../../hooks/event/EventForm/useEventForm";
-import useEditEventForm from "../../../hooks/event/editEvent/useEditEventForm";
-import HocButton from "../../../hoc/hocButton";
-import PermissionHoc from "../../../hoc/permissionHoc";
+import React from 'react';
+import { Grid, TextField, Button } from '@mui/material';
+import { useDeleteEvent } from '../../../hooks/event/useEvent';
+import useEventForm from '../../../hooks/event/EventForm/useEventForm';
+import useEditEventForm from '../../../hooks/event/editEvent/useEditEventForm';
+import HocButton from '../../../hoc/hocButton';
+import PermissionHoc from '../../../hoc/permissionHoc';
 
 const EditEventFields = ({ onClose, isLoading, data, permissions }) => {
   const { formik } = useEditEventForm(data);
 
-    const handleFormSubmit = async () => {
-      const isValid = await formik.validateForm();
-  
-      if (isValid) {
-        formik.handleSubmit();
+  const handleFormSubmit = async () => {
+    const isValid = await formik.validateForm();
+
+    if (isValid) {
+      formik.handleSubmit();
 
       if (formik.isValid) {
         formik.setTouched({
@@ -46,7 +46,6 @@ const EditEventFields = ({ onClose, isLoading, data, permissions }) => {
             error={formik.touched.eventName && Boolean(formik.errors.eventName)}
             helperText={formik.touched.eventName && formik.errors.eventName}
             variant='outlined'
-            autoFocus
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
@@ -63,7 +62,6 @@ const EditEventFields = ({ onClose, isLoading, data, permissions }) => {
             error={formik.touched.eventDate && Boolean(formik.errors.eventDate)}
             helperText={formik.touched.eventDate && formik.errors.eventDate}
             variant='outlined'
-            autoFocus
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
@@ -80,7 +78,6 @@ const EditEventFields = ({ onClose, isLoading, data, permissions }) => {
             error={formik.touched.eventTime && Boolean(formik.errors.eventTime)}
             helperText={formik.touched.eventTime && formik.errors.eventTime}
             variant='outlined'
-            autoFocus
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
@@ -101,7 +98,6 @@ const EditEventFields = ({ onClose, isLoading, data, permissions }) => {
               formik.touched.eventDescription && formik.errors.eventDescription
             }
             variant='outlined'
-            autoFocus
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
@@ -122,7 +118,6 @@ const EditEventFields = ({ onClose, isLoading, data, permissions }) => {
               formik.touched.eventLocation && formik.errors.eventLocation
             }
             variant='outlined'
-            autoFocus
             InputLabelProps={{ shrink: true }}
           />
         </Grid>

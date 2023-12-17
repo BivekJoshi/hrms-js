@@ -1,20 +1,22 @@
-import { axiosInstance } from "../../../auth/axiosInterceptor";
+import { axiosInstance } from '../../../auth/axiosInterceptor';
 
 /*___________________SEND EMAIL FOR PERTICULAR EMPLOYEE ON BASIS OF ID______________________________________*/
 export const sendEmail = async ({ formData, employeeId }) => {
-  const data = await axiosInstance.post(
-    `/email/employee-id/${employeeId}`,
-    formData
-  );
+  if (employeeId) {
+    const data = await axiosInstance.post(
+      `/email/employee-id/${employeeId}`,
+      formData
+    );
 
-  return data;
+    return data;
+  }
 };
 
 /*___________________SEND EMAIL FOR MULTIPLE EMPLOYEE ON BASIS OF ID______________________________________*/
 export const sendEmailToMultipleEmployee = async ({ formData, employeeId }) => {
   const employeeIdParams = employeeId
     .map((id) => `employeeIds=${id}`)
-    .join("&");
+    .join('&');
   const url = `/email/employee-ids?employeeIds=${employeeIdParams}`;
   const res = await axiosInstance.post(url, formData);
   return res;
@@ -24,7 +26,7 @@ export const sendEmailToMultipleEmployee = async ({ formData, employeeId }) => {
 export const sendEmailToAll = async ({ formData, employeeId, eventId }) => {
   const employeeIdParams = employeeId
     .map((id) => `employeeIds=${id}`)
-    .join("&");
+    .join('&');
   const url = `/email/employee-ids/event?${employeeIdParams}&eventId=${eventId}`;
   const res = await axiosInstance.post(url, formData);
   return res;
@@ -38,7 +40,7 @@ export const sendEmailForHoliday = async ({
 }) => {
   const employeeIdParams = employeeId
     .map((id) => `employeeIds=${id}`)
-    .join("&");
+    .join('&');
   const url = `/email/employees/holiday?${employeeIdParams}&holidayId=${holidayId}`;
   const res = await axiosInstance.post(url, formData);
   return res;

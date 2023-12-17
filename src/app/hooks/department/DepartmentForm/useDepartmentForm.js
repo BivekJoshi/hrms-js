@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 import { DepartmentSchema } from "../Validation/DepartmentSchema";
 import { useAddDepartment, useEditDepartment } from "../useDepartment";
 
-const useDepartmentForm = (data) => {
+const useDepartmentForm = (data, onClose) => {
   const { mutate: addDepartment } = useAddDepartment({});
   const { mutate: editDepartment } = useEditDepartment({});
 
@@ -26,12 +26,21 @@ const useDepartmentForm = (data) => {
 
   const handleRequest = (values) => {
     values = { ...values };
-    addDepartment(values, formik);
+    addDepartment(values, {
+      onSuccess:()=>{
+        onClose();
+        formik.resetForm();
+      }
+    });
   };
 
   const handledEditRequest = (values) => {
     values = { ...values };
-    editDepartment(values, formik);
+    editDepartment(values, {
+      onSuccess:()=>{
+        onClose();
+      }
+    });
   };
 
   return { formik };

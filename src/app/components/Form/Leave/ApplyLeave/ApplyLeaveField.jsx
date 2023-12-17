@@ -9,21 +9,21 @@ import {
   RadioGroup,
   FormControlLabel,
   Radio,
-} from "@mui/material";
-import React, { useState } from "react";
-import { useGetLeaveType } from "../../../../hooks/leaveType/useLeaveType";
-import useApplyLeaveForm from "../../../../hooks/leave/LeaveForm/useApplyLeaveForm";
-import { useGetLeaveById } from "../../../../hooks/leave/useLeave";
-import { useLocation, useNavigate } from "react-router-dom";
-import { TabContext, TabList, TabPanel } from "@mui/lab";
+} from '@mui/material';
+import React, { useState } from 'react';
+import { useGetLeaveType } from '../../../../hooks/leaveType/useLeaveType';
+import useApplyLeaveForm from '../../../../hooks/leave/LeaveForm/useApplyLeaveForm';
+import { useGetLeaveById } from '../../../../hooks/leave/useLeave';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { TabContext, TabList, TabPanel } from '@mui/lab';
 
 const ApplyLeaveField = () => {
-  const [value, setValue] = useState("1");
+  const [value, setValue] = useState('1');
   const location = useLocation();
   const navigate = useNavigate();
 
   const rowData = location?.state?.rowData || {};
-  const id = rowData ? rowData.id : "";
+  const id = rowData ? rowData.id : '';
 
   const { data } = useGetLeaveById(id);
   const { data: leaveTypeData } = useGetLeaveType();
@@ -33,7 +33,7 @@ const ApplyLeaveField = () => {
     formik.handleSubmit();
 
     if (formik.isValid) {
-      navigate("/employee/applyleave");
+      navigate('/employee/leave');
     }
   };
 
@@ -43,7 +43,7 @@ const ApplyLeaveField = () => {
 
   const getLeaveTypeName = (leaveTypeId) => {
     const leaveType = leaveTypeData?.find((type) => type.id === leaveTypeId);
-    return leaveType ? leaveType.leaveName : "";
+    return leaveType ? leaveType.leaveName : '';
   };
 
   const handleChange = (event, newValue) => {
@@ -51,8 +51,8 @@ const ApplyLeaveField = () => {
   };
   return (
     <>
-      <Typography variant="h6">
-        <b>Leave</b>
+      <Typography variant='h6'>
+        <b>Leave Type</b>
       </Typography>
       <Divider />
       <Grid container spacing={1}>
@@ -62,7 +62,7 @@ const ApplyLeaveField = () => {
         {data ? (
           <Grid item xs={12} sm={12}>
             <TextField
-              name="leaveTypeId"
+              name='leaveTypeId'
               required
               InputLabelProps={{ shrink: true }}
               fullWidth
@@ -78,15 +78,15 @@ const ApplyLeaveField = () => {
         ) : (
           <Grid item xs={12} sm={12}>
             <Autocomplete
-              id="leaveTypeId"
-              name="leaveTypeId"
+              id='leaveTypeId'
+              name='leaveTypeId'
               options={leaveTypeData}
               getOptionLabel={(option) =>
                 `${capitalize(option.leaveName)} Leave`
               }
               value={formik.values.leaveTypeId || null}
               onChange={(event, value) =>
-                formik.setFieldValue("leaveTypeId", value)
+                formik.setFieldValue('leaveTypeId', value)
               }
               renderInput={(params) => (
                 <TextField
@@ -100,8 +100,7 @@ const ApplyLeaveField = () => {
                   helperText={
                     formik.touched.leaveTypeId && formik.errors.leaveTypeId
                   }
-                  variant="outlined"
-                  autoFocus
+                  variant='outlined'
                   InputLabelProps={{ shrink: true }}
                 />
               )}
@@ -113,10 +112,10 @@ const ApplyLeaveField = () => {
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
-            id="leaveReason"
-            name="leaveReason"
+            id='leaveReason'
+            name='leaveReason'
             // label="Leave Reason"
-            placeholder="Enter leave Reason"
+            placeholder='Enter leave Reason'
             fullWidth
             multiline
             rows={3}
@@ -126,8 +125,7 @@ const ApplyLeaveField = () => {
               formik.touched.leaveReason && Boolean(formik.errors.leaveReason)
             }
             helperText={formik.touched.leaveReason && formik.errors.leaveReason}
-            variant="outlined"
-            autoFocus
+            variant='outlined'
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
@@ -136,20 +134,20 @@ const ApplyLeaveField = () => {
           <TabContext value={value}>
             <TabList
               onChange={handleChange}
-              aria-label="lab API tabs example"
-              variant="fullWidth"
+              aria-label='lab API tabs example'
+              variant='fullWidth'
             >
-              <Tab label="Half Day" value="1" />
-              <Tab label="One Day" value="2" />
-              <Tab label="Multiple Days" value="3" />
+              <Tab label='Half Day' value='1' />
+              <Tab label='One Day' value='2' />
+              <Tab label='Multiple Days' value='3' />
             </TabList>
-            <TabPanel value="1">
+            <TabPanel value='1'>
               <HalfDay formik={formik} />
             </TabPanel>
-            <TabPanel value="2">
+            <TabPanel value='2'>
               <OneDay formik={formik} />
             </TabPanel>
-            <TabPanel value="3">
+            <TabPanel value='3'>
               <MultipleDays formik={formik} />
             </TabPanel>
           </TabContext>
@@ -160,9 +158,9 @@ const ApplyLeaveField = () => {
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
-            id="leaveRemarks"
-            name="leaveRemarks"
-            placeholder="Any additional Details to add"
+            id='leaveRemarks'
+            name='leaveRemarks'
+            placeholder='Any additional Details to add'
             fullWidth
             value={formik.values.leaveRemarks}
             onChange={formik.handleChange}
@@ -172,19 +170,18 @@ const ApplyLeaveField = () => {
             helperText={
               formik.touched.leaveRemarks && formik.errors.leaveRemarks
             }
-            variant="outlined"
-            autoFocus
+            variant='outlined'
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
         <Grid
           container
-          direction="row"
-          justifyContent="flex-end"
-          alignItems="flex-end"
+          direction='row'
+          justifyContent='flex-end'
+          alignItems='flex-end'
         >
           <Button
-            variant="contained"
+            variant='contained'
             onClick={handleFormSubmit}
             sx={{ mt: 3, ml: 1 }}
           >
@@ -197,27 +194,27 @@ const ApplyLeaveField = () => {
 };
 
 const DateInput = ({ formik, isHalfDay, isMultipleDays }) => {
-  const [halfType, setHalfType] = useState("FIRST_HALF");
+  const [halfType, setHalfType] = useState('FIRST_HALF');
 
   const handleFromDateChange = (e) => {
     const fromDateValue = e.target.value;
     formik.handleChange(e);
-    formik.setFieldValue("toDate", fromDateValue);
-    formik.setFieldValue("halfLeaveType", null);
+    formik.setFieldValue('toDate', fromDateValue);
+    formik.setFieldValue('halfLeaveType', null);
     if (isHalfDay) {
-      formik.setFieldValue("isHalfDay", true);
-      formik.setFieldValue("halfLeaveType", halfType);
+      formik.setFieldValue('isHalfDay', true);
+      formik.setFieldValue('halfLeaveType', halfType);
     }
   };
 
   return (
     <>
-      <div style={{ display: "flex", gap: "0.5rem" }}>
+      <div style={{ display: 'flex', gap: '0.5rem' }}>
         <Grid item xs={12} sm={6}>
           <TextField
-            name="fromDate"
-            label="Select Date"
-            type="date"
+            name='fromDate'
+            label='Select Date'
+            type='date'
             required
             InputLabelProps={{ shrink: true }}
             fullWidth
@@ -230,9 +227,9 @@ const DateInput = ({ formik, isHalfDay, isMultipleDays }) => {
         {isMultipleDays && (
           <Grid item xs={12} sm={6}>
             <TextField
-              name="toDate"
-              label="Select To Date"
-              type="date"
+              name='toDate'
+              label='Select To Date'
+              type='date'
               required
               InputLabelProps={{ shrink: true }}
               fullWidth
@@ -248,21 +245,21 @@ const DateInput = ({ formik, isHalfDay, isMultipleDays }) => {
         <Grid item xs={12} sm={12}>
           <RadioGroup
             row
-            aria-labelledby="demo-row-radio-buttons-group-label"
-            name="halfLeaveType"
-            value={formik.values.halfLeaveType || "FIRST_HALF"}
+            aria-labelledby='demo-row-radio-buttons-group-label'
+            name='halfLeaveType'
+            value={formik.values.halfLeaveType || 'FIRST_HALF'}
             onChange={formik.handleChange}
-            style={{ display: "flex", marginTop: "0.6rem" }}
+            style={{ display: 'flex', marginTop: '0.6rem' }}
           >
             <FormControlLabel
-              value="FIRST_HALF"
+              value='FIRST_HALF'
               control={<Radio />}
-              label="First Half"
+              label='First Half'
             />
             <FormControlLabel
-              value="SECOND_HALF"
+              value='SECOND_HALF'
               control={<Radio />}
-              label="Second Half"
+              label='Second Half'
             />
           </RadioGroup>
         </Grid>

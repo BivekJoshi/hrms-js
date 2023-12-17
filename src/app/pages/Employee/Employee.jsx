@@ -1,13 +1,21 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { Box, Button, ButtonGroup, Grid, IconButton, Modal, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  Divider,
+  Grid,
+  IconButton,
+  Modal,
+  Typography,
+} from '@mui/material';
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import CloseIcon from '@mui/icons-material/Close';
 
-import EmployeeTable from './EmployeeView/EmployeeTable';
 import EmployeeBasicInfoForm from '../../components/Form/Employee/EmployeeBasicInfoForm/EmployeeBasicInfoForm';
 import useAddEmployeeForm from '../../hooks/employee/AddEmployee/useAddEmployeeForm';
 import EmployeeGrid from './EmployeeView/EmployeeGrid';
@@ -15,9 +23,12 @@ import { useNavigate } from 'react-router-dom';
 import { ButtonComponent } from '../../components/Button/ButtonComponent';
 import './Style/Style.css';
 import ThemeModeContext from '../../../theme/ThemeModeContext';
+import { useGetEmployee } from '../../hooks/employee/useEmployee';
+import EmployeeTableView from './EmployeeView/EmployeePage/EmployeeTableView';
 
 const Employee = () => {
   const { mode } = React.useContext(ThemeModeContext);
+  const { data: employeeData, isLoading } = useGetEmployee();
 
   const style = {
     position: 'absolute',
@@ -80,7 +91,7 @@ const Employee = () => {
                 }}
                 buttonName='Inactive Employee'
                 BGColor='white'
-                TextColor='black'
+                color='black'
               />
               <ButtonComponent
                 color='white'
@@ -90,20 +101,16 @@ const Employee = () => {
             </ButtonGroup>
           </Box>
           <TabPanel value='1'>
-            <EmployeeGrid />
+            <EmployeeGrid employeeData={employeeData} isLoading={isLoading}/>
           </TabPanel>
           <TabPanel value='2'>
-            <EmployeeTable />
+            {/* <EmployeeTable /> */}
+            <EmployeeTableView employeeData={employeeData} isLoading={isLoading}/>
           </TabPanel>
         </Box>
       </TabContext>
 
-      <Modal
-        open={openAddModal}
-        onClose={() => setOpenAddModal(false)}
-        aria-labelledby='modal-modal-title'
-        aria-describedby='modal-modal-description'
-      >
+      <Modal open={openAddModal} onClose={() => setOpenAddModal(false)}>
         <div>
           <Box sx={style}>
             <Grid
@@ -130,8 +137,14 @@ const Employee = () => {
               </IconButton>
             </Grid>
             <EmployeeBasicInfoForm formik={formik} />
+            <Divider style={{ paddingTop: '16px' }} />
             <Box
-              sx={{ display: 'flex', justifyContent: 'flex-end', gap: '1rem' }}
+              sx={{
+                display: 'flex',
+                justifyContent: 'flex-end',
+                gap: '1rem',
+                paddingTop: '16px',
+              }}
             >
               <ButtonComponent buttonName={'submit'} OnClick={handleSubmit} />
               <ButtonComponent
@@ -154,7 +167,9 @@ const Employee = () => {
       >
         <div>
           <Box sx={style}>
-            <Typography variant="h6">Do you like to add more Details of this Employee??</Typography>
+            <Typography variant='h6'>
+              Do you like to add more Details of this Employee??
+            </Typography>
             <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
               <Button
                 variant='contained'

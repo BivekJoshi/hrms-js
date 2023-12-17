@@ -8,8 +8,7 @@ import {
 import DeleteConfirmationModal from "../../../components/Modal/DeleteConfirmationModal";
 import CompanyGridView from "../CompanyView/CompanyGridView";
 
-const CompanyGrid = ({ permissions }) => {
-  const { data: companyData, isLoading } = useGetCompany();
+const CompanyGrid = ({ permissions ,companyData,isLoading}) => {
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [editedCompany, setEditedCompany] = useState({});
