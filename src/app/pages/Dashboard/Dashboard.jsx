@@ -62,7 +62,7 @@ const Dashboard = () => {
   const formattedDate = today.toLocaleDateString(undefined, options);
 
 
-  console.log(data)
+  console.log(data,"data fo dashboard")
   return (
     <>
       <Box
