@@ -1,0 +1,10 @@
+@media (min-width: 900px) {
+  .profileNavBar {
+    display: block;
+  }
+}
+@media (max-width: 899px) {
+  .profileNavBar {
+    display: block;
+  }
+}
