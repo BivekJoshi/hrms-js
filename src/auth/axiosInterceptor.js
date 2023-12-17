@@ -1,10 +1,11 @@
 import Axios from 'axios';
+import jwtDecode from 'jwt-decode';
 import { toast } from 'react-toastify';
 import { getUser, removeUser } from '../app/utils/cookieHelper';
-import jwtDecode from 'jwt-decode';
-import { getBaseUrl } from './getBaseUrl';
 
-export const baseURL = 'https://103.94.159.144:8083/hrms/api/';
+// export const baseURL = 'https://103.94.159.144:8083/hrms/api/';
+export const baseURL = 'http://localhost:8086/hrms/api/';
+
 // export const baseURL = 'https://172.16.16.94:6523/hrms/api/';
 // const baseURL = getBaseUrl();
 

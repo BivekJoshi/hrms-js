@@ -1,30 +1,34 @@
-import React, { useContext } from "react";
-import DashboardCard from "../../components/cards/Dashboard/DashboardCard";
 import { Box, CardMedia, Grid, Typography } from "@mui/material";
-import { useGetDashboard } from "../../hooks/dashboard/useDashboard";
-import { useGetProjectCount } from "../../hooks/dashboard/useDashboard";
-import { useGetProject } from "../../hooks/project/useProject";
-import { PieChartDiagram } from "../../components/Charts/PieChartDiagram";
-import BarChatDiagram from "../../components/Charts/BarChatDiagram";
-import { ProjectProgressCard } from "../../components/cards/ProjectProgress/ProjectProgressCard";
-import { ProjectTable } from "./DashboardTable/ProjectTable";
-import { useGetEmployee } from "../../hooks/employee/useEmployee";
-import { useGetEvent } from "../../hooks/event/useEvent";
-import { useGetHoliday } from "../../hooks/holiday/useHoliday";
-import { useGetUserRole } from "../../hooks/auth/userControl/useUserControl";
-import ThemeModeContext from "../../../theme/ThemeModeContext";
-import Male from "../../../assets/male.png";
-import { useGetLoggedInUser } from "../../hooks/auth/usePassword";
-import { useGetPendingLeave } from "../../hooks/leave/useLeave";
-import { DOC_URL } from "../../../auth/axiosInterceptor";
-import User from "../../../assets/user.png";
+import { useContext } from "react";
 import Employee from "../../../assets/employee.png";
 import Event from "../../../assets/event.png";
 import Holiday from "../../../assets/holiday.png";
+import Male from "../../../assets/male.png";
 import Project from "../../../assets/project.png";
+import User from "../../../assets/user.png";
+import { DOC_URL } from "../../../auth/axiosInterceptor";
+import ThemeModeContext from "../../../theme/ThemeModeContext";
+import BarChatDiagram from "../../components/Charts/BarChatDiagram";
+import { PieChartDiagram } from "../../components/Charts/PieChartDiagram";
+import DashboardCard from "../../components/cards/Dashboard/DashboardCard";
+import { ProjectProgressCard } from "../../components/cards/ProjectProgress/ProjectProgressCard";
+import { useGetLoggedInUser } from "../../hooks/auth/usePassword";
+import { useGetUserRole } from "../../hooks/auth/userControl/useUserControl";
+import {
+  useGetDashboard,
+  useGetProjectCount,
+} from "../../hooks/dashboard/useDashboard";
+import { useGetEmployee } from "../../hooks/employee/useEmployee";
+import { useGetEvent } from "../../hooks/event/useEvent";
+import { useGetHoliday } from "../../hooks/holiday/useHoliday";
+import { useGetPendingLeave } from "../../hooks/leave/useLeave";
+import { useGetProject } from "../../hooks/project/useProject";
+import { ProjectTable } from "./DashboardTable/ProjectTable";
+import { useDashBoardSearch } from "./api/dashboardApi";
 
 const Dashboard = () => {
-  const { mode, palette } = useContext(ThemeModeContext);
+  const { mode } = useContext(ThemeModeContext);
+
   const { data: dashboardData } = useGetDashboard();
   const { data: projectDataCount } = useGetProjectCount();
   const { data: projectData } = useGetProject();
@@ -34,6 +38,15 @@ const Dashboard = () => {
   const { data: holidayData } = useGetHoliday();
   const { data: userRoleData } = useGetUserRole();
   const { data: myData } = useGetLoggedInUser();
+
+  const { data, isLoading } = useDashBoardSearch(
+    () => {
+      console.log("Success");
+    },
+    () => {
+      console.log("Error");
+    }
+  );
 
   const photo = employeeData?.userPhotoPath;
   const filePath = photo ? DOC_URL + photo : "";
@@ -47,6 +60,9 @@ const Dashboard = () => {
     year: "numeric",
   };
   const formattedDate = today.toLocaleDateString(undefined, options);
+
+
+  console.log(data)
   return (
     <>
       <Box
