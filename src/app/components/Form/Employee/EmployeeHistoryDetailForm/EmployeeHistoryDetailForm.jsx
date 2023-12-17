@@ -31,8 +31,8 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                         <TextField
                           id={`history[${index}].employerName`}
                           name={`history[${index}].employerName`}
-                          label='Company Name'
-                          placeholder='Enter the company name you worked last time'
+                          label='Branch Name'
+                          placeholder='Enter the branch name you worked last time'
                           fullWidth
                           value={employeeHistory.employerName}
                           onChange={formik.handleChange}

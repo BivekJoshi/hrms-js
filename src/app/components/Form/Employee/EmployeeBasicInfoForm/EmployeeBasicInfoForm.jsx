@@ -276,8 +276,8 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           id='companyId'
           name='companyId'
           select
-          label='Company Name'
-          placeholder='Select your company'
+          label='Branch Name'
+          placeholder='Select your branch'
           fullWidth
           required
           value={!loadingCompany && formik.values.companyId}
