@@ -262,7 +262,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           }
           variant='outlined'
         >
-          {maritalStatus.map((option) => (
+          {maritalStatus?.map((option) => (
             <MenuItem
               key={option.value}
               value={option.value}
@@ -289,7 +289,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           variant='outlined'
         >
           {!loadingCompany &&
-            companyData.map((option) => (
+            companyData?.map((option) => (
               <MenuItem
                 key={option?.id}
                 value={option?.id}
@@ -316,7 +316,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           variant='outlined'
         >
           {!loadingDesignation &&
-            designationData.map((option) => (
+            designationData?.map((option) => (
               <MenuItem
                 key={option.id}
                 value={option.id}
@@ -371,7 +371,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           variant='outlined'
         >
           {!loadingDepartment &&
-            departmentData.map((option) => (
+            departmentData?.map((option) => (
               <MenuItem
                 key={option.id}
                 value={option.id}

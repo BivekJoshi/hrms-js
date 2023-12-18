@@ -20,12 +20,12 @@ const getPalette = (darkMode) => {
   return {
     mode: darkMode ? 'dark' : 'light',
     primary: {
-      main: darkMode ? '#6DAB23' : '#6DAB23',
+      main: darkMode ? '#81C784' : '#388E3C',
       light: darkMode ? '#f0ca92' : '#6DAB23',
       dark: darkMode ? '#cd7539' : '#cd7539',
     },
     secondary: {
-      main: darkMode ? '#236dab' : '#236dab',
+      main: darkMode ? '#10598E' : '#98D8F1',
       light: darkMode ? '#75baf0' : '#418fdd',
       dark: darkMode ? '#336cb8' : '#336cb8',
     },
@@ -33,11 +33,14 @@ const getPalette = (darkMode) => {
       default: darkMode ? '#303030' : '#f8f8f8',
       paper: darkMode ? '#3838388a' : '#fff',
       imageCaption: darkMode ? '#c5c7cb' : '#616161',
+      tabbg: darkMode ? '#3D4852' : '#E8F5E9',
+      activetabBg: darkMode ? '#25262E' : '#C8E6C9',
     },
     text: {
       primary: darkMode ? '#FFFFFF' : '#000',
       secondary: darkMode ? '#fff' : '#616161',
       white: '#000',
+      tableHead: darkMode ? '#fff' : '#25262E',
     },
     divider: darkMode ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.12)',
   };

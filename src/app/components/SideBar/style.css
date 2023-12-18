@@ -1,0 +1,16 @@
+@media (min-width: 900px) {
+  .profilBigeNavBar {
+    display: block;
+  }
+  .profileNavBar {
+    display: none;
+  }
+}
+@media (max-width: 899px) {
+  .profilBigeNavBar {
+    display: none;
+  }
+  .profileNavBar {
+    display: block;
+  }
+}
