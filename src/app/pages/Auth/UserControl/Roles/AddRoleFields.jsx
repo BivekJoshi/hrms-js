@@ -88,19 +88,17 @@ export const AddRoleFields = ({ onClose,isLoading,data }) => {
         >
           <ButtonComponent
             variant="contained"
-            onClick={handleFormSubmit}
-            sx={{ mt: 3, ml: 1 }}
+            OnClick={handleFormSubmit}
+            // sx={{ mt: 3, ml: 1 }}
             buttonName={submitButtonText}
           />
           <ButtonComponent
             variant="contained"
             OnClick={onClose}
-            sx={{ mt: 3, ml: 1 }}
+            // sx={{ mt: 3, ml: 1 }}
             BGColor={"#d32f2f"}
             buttonName={"Cancel"}
-          >
-            Cancel
-          </ButtonComponent>
+          />
         </Grid>
       </Grid>
     )

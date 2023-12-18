@@ -127,8 +127,7 @@ const EditEventFields = ({ onClose, isLoading, data, permissions }) => {
           direction="row"
           justifyContent="flex-end"
           alignItems="flex-end"
-          gap={1}
-          mt={2}
+          
         >        
          
           <ButtonComponent

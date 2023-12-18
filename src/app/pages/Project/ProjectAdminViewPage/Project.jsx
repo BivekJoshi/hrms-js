@@ -71,7 +71,7 @@ const Project = ({ permissions }) => {
         >
           On-Going Projects
           {isEmployee ? null : (
-            <Box display='flex' gap={'.5rem'}>
+            <Box display='flex'>
               <ButtonComponent
                 BGColor='white'
                 TextColor='#000'
@@ -132,7 +132,7 @@ const Project = ({ permissions }) => {
           gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
         }}
       >
-        {filteredProject?.map((item, index) => (
+        {filteredProject && filteredProject?.map((item, index) => (
           <ProjectCard
             item={item}
             Id={item.id}

@@ -18,7 +18,7 @@ const useAddEmployeeForm = (onClose) => {
       panNumber: "",
       officeEmail: "",
       maritalStatus: "",
-      companyId: "",
+      branchId: "",
       positionId: "",
       departmentId: "",
     },

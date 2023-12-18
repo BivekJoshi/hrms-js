@@ -91,7 +91,7 @@ const Employee = () => {
               </Button>
               <Button
                 variant="contained"
-                onClick={() => handleAddOpenModal()}
+                onClick={handleAddOpenModal}
                 sx={{ textTransform: "none" ,color:"#fff"}}
               >
                 +Add Employee
@@ -147,12 +147,8 @@ const Employee = () => {
                 paddingTop: "16px",
               }}
             >
-              <Button variant="contained" color="success" onClick={handleSubmit} sx={{textTransform:'none'}}>
-                Submit
-              </Button>
-              <Button variant="contained" color="error" onClick={() => {setOpenAddModal(false)}} sx={{textTransform:'none'}}>
-                Cancel
-              </Button>
+              <ButtonComponent variant="contained" OnClick={handleSubmit} sx={{textTransform:'none'}} buttonName={"Submit"} />
+              <ButtonComponent variant="contained" color="error" OnClick={() => {setOpenAddModal(false)}} sx={{textTransform:'none'}} buttonName={"Cancel"} />
             </Box>
           </Box>
         </div>

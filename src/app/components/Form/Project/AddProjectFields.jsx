@@ -238,14 +238,13 @@ const AddprojectFields = ({ onClose, isLoading }) => {
             sx={{ mt: 3, ml: 1 }}
             buttonName={"Add Project"}
           />
-          <Button
+          <ButtonComponent
             variant='contained'
-            onClick={onClose}
+            OnClick={onClose}
             sx={{ mt: 3, ml: 1 }}
-            color='error'
-          >
-            Cancel
-          </Button>
+            BGColor={"#d32f2f"}
+            buttonName={"Cancel"}
+          />
         </Grid>
       </Grid>
     )

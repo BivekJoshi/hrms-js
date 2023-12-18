@@ -24,7 +24,7 @@ const Company = ({ permissions }) => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  const { data: userRoleData } = useGetUserRole();
+  // const { data: userRoleData } = useGetUserRole();
 
   return (
     <>

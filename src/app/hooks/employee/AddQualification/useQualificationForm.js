@@ -9,7 +9,7 @@ const useQualificationForm = ({ data, isLoadingQualification: isLoading }) => {
 
   const qualificationDetails =
     !isLoading &&
-    data?.qualifications.map((education) => ({
+    data?.qualifications?.map((education) => ({
       id: education?.id || "",
       board: education.board || "",
       institute: education.institute || "",

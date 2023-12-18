@@ -20,7 +20,7 @@ const AddEmployeeSchema = Yup.object().shape({
       "Invalid email format"
     ),
   maritalStatus: Yup.string().required("Marital status is required"),
-  companyId: Yup.string().required("Company name is required"),
+  branchId: Yup.string().required("Company name is required"),
   positionId: Yup.string().required("Position is required"),
   departmentId: Yup.string().required("Department is required"),
 });

@@ -118,6 +118,7 @@ const Users = ({ permissions }) => {
               data={userControlData}
               title="User List"
               isLoading={isLoading}
+              // actions={actions}
             />
           </Stack>
         </Stack>

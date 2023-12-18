@@ -16,16 +16,17 @@ export const usePermanentAddressForm = ({
   const { mutate: editMutate } = useEditAddress({});
 
   const addressDetails = !isLoading && data?.addresses;
+  console.log({"addressDetails": addressDetails, "data": data})
 
-  const initialValues = {
-    addresses: [
-      createAddressObject(addressDetails[0]),
-      createAddressObject(addressDetails[1]),
-    ],
-  };
+  // const initialValues = {
+  //   addresses: [
+  //     createAddressObject(addressDetails[0]),
+  //     createAddressObject(addressDetails[1]),
+  //   ],
+  // };
 
   const formik = useFormik({
-    initialValues,
+    // initialValues,
     validationSchema: AddressSchema,
     enableReinitialize: true,
     onSubmit: handleSubmit,
