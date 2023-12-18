@@ -11,17 +11,12 @@ import BarChatDiagram from "../../components/Charts/BarChatDiagram";
 import { PieChartDiagram } from "../../components/Charts/PieChartDiagram";
 import DashboardCard from "../../components/cards/Dashboard/DashboardCard";
 import { ProjectProgressCard } from "../../components/cards/ProjectProgress/ProjectProgressCard";
-import {
-  useGetDashboard,
-} from "../../hooks/dashboard/useDashboard";
 import { ProjectTable } from "./DashboardTable/ProjectTable";
 import { useDashBoardSearch } from "./api/dashboardApi";
 import { toast } from "react-toastify";
 
 const Dashboard = () => {
   const { mode } = useContext(ThemeModeContext);
-
-
   const { data, isLoading } = useDashBoardSearch(
     () => {
       console.log("Success");
@@ -32,6 +27,7 @@ const Dashboard = () => {
     }
   );
 
+  console.log(data,"data ma");
   const today = new Date();
   const day = new Date().toLocaleDateString("en-us", { weekday: "long" });
 
@@ -146,8 +142,8 @@ const Dashboard = () => {
             <Typography variant="h5" sx={{ marginBottom: "16px" }}>
               Employee Information
             </Typography>
-            {/* <BarChatDiagram dashboardData={dashboardData} />
-            <PieChartDiagram dashboardData={dashboardData} /> */}
+            <BarChatDiagram dashboardData={data} />
+            {/* <PieChartDiagram dashboardData={dashboardData} /> */}
           </Grid>
           <Grid item md={6} xs={12}>
             <div>
@@ -169,9 +165,9 @@ const Dashboard = () => {
               </Grid>
             </div>
 
-            <Grid sx={{ mt: "32px" }}>
+            {/* <Grid sx={{ mt: "32px" }}>
               <ProjectTable projectData={data} />
-            </Grid>
+            </Grid> */}
             <Grid item xs={12} sm={6}>
               {/* <PendingLeaveTable
               pendingLeaveData={pendingLeaveData}

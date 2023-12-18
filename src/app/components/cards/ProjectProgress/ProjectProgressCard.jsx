@@ -90,13 +90,13 @@ export const ProjectProgressCard = ({ projectDataCount }) => {
               marginTop='1rem'
             >
               <Typography> {projectDataCount?.projectInfo?.workInProgress}</Typography>
-              <Typography>
+              {/* <Typography>
                 {Math.ceil(
                   // (projectDataCount?.workInProgress / projectDataCount?.total) *
                     100
                 )}
                 %
-              </Typography>
+              </Typography> */}
             </Stack>
             <BorderLinearProgress
               variant='determinate'
@@ -117,12 +117,12 @@ export const ProjectProgressCard = ({ projectDataCount }) => {
               marginTop='1rem'
             >
               <Typography>{projectDataCount?.projectInfo?.delayed}</Typography>
-              <Typography>
+              {/* <Typography>
                 {Math.ceil(
                   // (projectDataCount?.delayed / projectDataCount?.total) * 100
                 )}
                 %
-              </Typography>
+              </Typography> */}
             </Stack>
             <BorderLinearProgress
               variant='determinate'

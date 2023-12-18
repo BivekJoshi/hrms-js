@@ -23,15 +23,18 @@ const testData={
 }
 
 const fetchDashBoard = () => {
-  return axiosInstance.get("project/get-all");
+  return axiosInstance.get("dashboard");
 };
 
 export const useDashBoardSearch = (onSuccess, onError) => {
   return useQuery(["dash-information"], () => fetchDashBoard(), {
     onSuccess,
     onError,
-    // select: (response) => response.data,
-    select: (response) => testData,
+    select: (response) => {
+      console.log(response,"admin");
+      return response
+    }
+    // select: (response) => testData,
 
   });
 };
