@@ -39,7 +39,8 @@ import { getUser, removeUser } from '../../utils/cookieHelper';
 import Footer from '../footer/Footer';
 import jwtDecode from 'jwt-decode';
 // import BreadCrumbs from '../../../routes/routes';
-import Logo from '../../../assets/logo.jpg';
+import Logo from '../../../assets/logo.png';
+import SmallLogo from '../../../assets/smallLogo.png';
 
 const drawerWidth = 260;
 
@@ -84,7 +85,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 export default function AdminSidebar() {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
-  const { mode } = useContext(ThemeModeContext);
+  const { mode, palette } = useContext(ThemeModeContext);
   const [subMenuOpen, setSubMenuOpen] = useState({});
   const { pathname } = useLocation();
   const user = getUser();
@@ -381,8 +382,13 @@ export default function AdminSidebar() {
         open={open}
       >
         <DrawerHeader>
-          <img src={Logo} alt='Logo' width='70%' />
-          <IconButton onClick={handleDrawerClose} sx={{ paddingLeft: '2rem' }}>
+          <img
+            src={mode === 'dark' ? SmallLogo : Logo}
+            alt='Logo'
+            width={mode === 'dark' ? '25%' : '70%'}
+          />
+          {mode === 'dark' && <div>Secured Securities Ltd</div>}
+          <IconButton onClick={handleDrawerClose} sx={{ marginLeft: '2rem' }}>
             <ChevronLeftIcon />
           </IconButton>
         </DrawerHeader>
@@ -397,7 +403,7 @@ export default function AdminSidebar() {
                     backgroundColor:
                       pathname.includes(menu.path) &&
                       // menu.item == "employee" &&
-                      '#ace8639e',
+                      palette?.background?.activetabBg,
                   }}
                 >
                   <ListItemIcon
@@ -445,7 +451,8 @@ export default function AdminSidebar() {
                           <ListItemButton
                             sx={{
                               backgroundColor:
-                                pathname.includes(subMenu.path) && '#ace8639e',
+                                pathname.includes(subMenu.path) &&
+                                palette?.background?.tabbg,
                               color: mode === 'dark' && 'white',
                             }}
                           >
@@ -472,8 +479,7 @@ export default function AdminSidebar() {
           }}
         >
           <Button
-            variant='contained'
-            sx={{ backgroundColor: '#6DAB23' }}
+            variant='outlined'
             onClick={() => {
               removeUser();
               navigate('/');

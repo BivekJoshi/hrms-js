@@ -35,8 +35,6 @@ const Company = ({ permissions }) => {
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center',
-              borderTop: 1,
-              borderColor: 'divider',
             }}
           >
             <TabList onChange={handleChange} aria-label='lab API tabs example'>

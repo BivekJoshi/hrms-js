@@ -23,7 +23,7 @@ const CustomTable = (props) => {
           exportButton: props?.exportButton || false,
           headerStyle: {
             backgroundColor: palette?.secondary?.main,
-            color: '#FFF',
+            color: palette?.text?.tableHead,
             fontSize: '.8rem',
             fontWeight: 'bold',
 
