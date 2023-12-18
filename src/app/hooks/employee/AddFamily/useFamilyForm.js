@@ -1,32 +1,36 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import { FamilySchema } from './FamilySchema';
-import { useAddFamily, useEditFamily } from '../useFamily';
+import { useAddFamily, useEditFamily, useGetFammilyById } from '../useFamily';
+import { useParams } from 'react-router-dom';
 
-const useFamilyForm = ({ data, isLoadingFamily: isLoading }) => {
+const useFamilyForm = () => {
+  const { id } = useParams();
   const { mutate: addMutate } = useAddFamily({});
   const { mutate: editMutate } = useEditFamily({});
+  const { data, isLoading } = useGetFammilyById(id);
 
-  const familyDetails = 
-  !isLoading &&
-   data?.familyMembers.map((familyMember) => ({
-    id:familyMember.id ||'',
-    name: familyMember.name || '',
-    relation: familyMember.relation || '',
-    mobileNumber: familyMember.mobileNumber || '',
-  }));
+  const familyDetails =
+    !isLoading &&
+    data?.map((familyMember) => ({
+      id: familyMember.id || '',
+      name: familyMember.name || '',
+      relation: familyMember.relation || '',
+      mobileNumber: familyMember.mobileNumber || '',
+    }));
 
   const formik = useFormik({
     initialValues: {
-      family: familyDetails && familyDetails.length > 0 
-      ? familyDetails :
-        [
-          {
-            name: '',
-            relation: '',
-            mobileNumber: ''
-          }
-        ],
+      family:
+        familyDetails && familyDetails.length > 0
+          ? familyDetails
+          : [
+              {
+                name: '',
+                relation: '',
+                mobileNumber: '',
+              },
+            ],
     },
     enableReinitialize: true,
     validationSchema: FamilySchema,
@@ -49,9 +53,7 @@ const useFamilyForm = ({ data, isLoadingFamily: isLoading }) => {
     editMutate(values, formik);
   };
 
-  return { formik }
+  return { formik };
 };
-
-
 
 export default useFamilyForm;

@@ -2,20 +2,19 @@ import { useFormik } from 'formik';
 import { AddressSchema } from './AddressSchema';
 import {
   useEditAddress,
+  useGetAddressById,
   usePermanentAddAddress,
   useTemporaryAddress,
 } from '../useAddress';
 import { toast } from 'react-toastify';
+import { useParams } from 'react-router-dom';
 
-export const usePermanentAddressForm = ({
-  data,
-  employeeLoading: isLoading,
-}) => {
+export const usePermanentAddressForm = (isLoading, data) => {
   const { mutate: permanentMutate } = usePermanentAddAddress({});
   const { mutate: temporaryMutate } = useTemporaryAddress({});
   const { mutate: editMutate } = useEditAddress({});
 
-  const addressDetails = !isLoading && data?.addresses;
+  const addressDetails = !isLoading && data;
 
   const initialValues = {
     addresses: [

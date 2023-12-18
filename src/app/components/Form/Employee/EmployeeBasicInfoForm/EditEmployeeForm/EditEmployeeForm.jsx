@@ -1,52 +1,52 @@
-import React from "react";
-import { useParams } from "react-router";
+import React from 'react';
+import { useParams } from 'react-router';
 
-import EmployeeAddressDetailForm from "../../EmployeeAddressDetailForm/EmployeeAddressDetailForm";
-import EmployeeBankDetailForm from "../../EmployeeBankDetailForm/EmployeeBankDetailForm";
-import EmployeeDocumentDetailForm from "../../EmployeeDocumentDetailForm/EmployeeDocumentDetailForm";
-import EmployeeFamilyDetailForm from "../../EmployeeFamilyDetailForm/EmployeeFamilyDetailForm";
-import EmployeeQualificationDetailForm from "../../EmployeeQualificationDetailForm/EmployeeQualificationDetailForm";
-import EmployeeBasicInfoForm from "../EmployeeBasicInfoForm";
-import EmployeeHistoryDetailForm from "../../EmployeeHistoryDetailForm/EmployeeHistoryDetailForm";
+import EmployeeAddressDetailForm from '../../EmployeeAddressDetailForm/EmployeeAddressDetailForm';
+import EmployeeBankDetailForm from '../../EmployeeBankDetailForm/EmployeeBankDetailForm';
+import EmployeeDocumentDetailForm from '../../EmployeeDocumentDetailForm/EmployeeDocumentDetailForm';
+import EmployeeFamilyDetailForm from '../../EmployeeFamilyDetailForm/EmployeeFamilyDetailForm';
+import EmployeeQualificationDetailForm from '../../EmployeeQualificationDetailForm/EmployeeQualificationDetailForm';
+import EmployeeBasicInfoForm from '../EmployeeBasicInfoForm';
+import EmployeeHistoryDetailForm from '../../EmployeeHistoryDetailForm/EmployeeHistoryDetailForm';
 
-import useQualificationForm from "../../../../../hooks/employee/AddQualification/useQualificationForm";
-import useFamilyForm from "../../../../../hooks/employee/AddFamily/useFamilyForm";
-import useEditEmployeeForm from "../../../../../hooks/employee/EditEmployee/useEditEmployeeForm";
-import { usePermanentAddressForm } from "../../../../../hooks/employee/AddAddress/useAddressForm";
-import useAddBankForm from "../../../../../hooks/employee/AddBankForm/useAddBankForm";
-import { useGetEmployeeById } from "../../../../../hooks/employee/useEmployee";
-import useEmployeeHistoryForm from "../../../../../hooks/employee/AddEmployeeHistory/useEmployeeHistoryForm";
-import { useAddDocumentForm } from "../../../../../hooks/employee/AddDocument/useAddDocumentForm";
-import { toast } from "react-toastify";
+import useQualificationForm from '../../../../../hooks/employee/AddQualification/useQualificationForm';
+import useFamilyForm from '../../../../../hooks/employee/AddFamily/useFamilyForm';
+import useEditEmployeeForm from '../../../../../hooks/employee/EditEmployee/useEditEmployeeForm';
+import { usePermanentAddressForm } from '../../../../../hooks/employee/AddAddress/useAddressForm';
+import useAddBankForm from '../../../../../hooks/employee/AddBankForm/useAddBankForm';
+import { useGetEmployeeById } from '../../../../../hooks/employee/useEmployee';
+import useEmployeeHistoryForm from '../../../../../hooks/employee/AddEmployeeHistory/useEmployeeHistoryForm';
+import { useAddDocumentForm } from '../../../../../hooks/employee/AddDocument/useAddDocumentForm';
+import { toast } from 'react-toastify';
+import { useGetAddressById } from '../../../../../hooks/employee/useAddress';
 
 const EditEmployeeForm = () => {
   const { id } = useParams();
 
   const steps = [
-    "Basic Details",
-    "Address Details",
-    "Family Details",
-    "Educational Details",
-    "Bank Details",
-    "Employee History",
-    "Document Details",
+    'Basic Details',
+    'Address Details',
+    'Family Details',
+    'Educational Details',
+    'Bank Details',
+    'Employee History',
+    'Document Details',
     // 'Other Details',
   ];
 
   const { data, isLoading: employeeLoading } = useGetEmployeeById(id);
+  const { data: addressData, isLoading: getaddressLoading } =
+    useGetAddressById(id);
 
   const { formik: qualificationFormik, isLoading: isLoadingQualification } =
-    useQualificationForm({ data, employeeLoading });
+    useQualificationForm();
 
-  const { formik: familyFormik, isLoading: isLoadingFamily } = useFamilyForm({
-    data,
-    employeeLoading,
-  });
+  const { formik: familyFormik, isLoading: isLoadingFamily } = useFamilyForm();
 
   const { formik, isLoading } = useEditEmployeeForm({ data, employeeLoading });
 
   const { formik: permanentFormik, isLoading: addressLoading } =
-    usePermanentAddressForm({ data, employeeLoading });
+    usePermanentAddressForm(addressData, getaddressLoading);
 
   const { formik: bankFormik } = useAddBankForm({ data, employeeLoading });
 
@@ -55,10 +55,7 @@ const EditEmployeeForm = () => {
     employeeLoading,
   });
 
-  const { formik: employeeHistoryFormik } = useEmployeeHistoryForm({
-    data,
-    employeeLoading,
-  });
+  const { formik: employeeHistoryFormik } = useEmployeeHistoryForm();
 
   const getStepContent = (step) => {
     switch (step) {
@@ -70,7 +67,7 @@ const EditEmployeeForm = () => {
           <EmployeeAddressDetailForm
             formik={permanentFormik}
             isLoading={addressLoading}
-            data={data}
+            data={addressData}
           />
         );
 
@@ -106,14 +103,14 @@ const EditEmployeeForm = () => {
       //   return <p>Other Details</p>;
 
       default:
-        throw new Error("Unknown Step");
+        throw new Error('Unknown Step');
     }
   };
 
   const handleNext = ({ activeStep, setActiveStep }) => {
     switch (activeStep) {
       case 0:
-        formik.setFieldTouched("");
+        formik.setFieldTouched('');
         if (formik.dirty) {
           formik.handleSubmit();
         }
@@ -122,7 +119,7 @@ const EditEmployeeForm = () => {
         }
         break;
       case 1:
-        permanentFormik.setFieldTouched("");
+        permanentFormik.setFieldTouched('');
         if (permanentFormik.dirty) {
           permanentFormik.handleSubmit();
         }
@@ -142,7 +139,7 @@ const EditEmployeeForm = () => {
         break;
 
       case 3:
-        qualificationFormik.setFieldTouched("");
+        qualificationFormik.setFieldTouched('');
         if (qualificationFormik.dirty) {
           qualificationFormik.handleSubmit();
         }
@@ -151,7 +148,7 @@ const EditEmployeeForm = () => {
         }
         break;
       case 4:
-        bankFormik.setFieldTouched("");
+        bankFormik.setFieldTouched('');
         if (bankFormik.dirty) {
           bankFormik.handleSubmit();
         }
@@ -160,7 +157,7 @@ const EditEmployeeForm = () => {
         }
         break;
       case 5:
-        employeeHistoryFormik.setFieldTouched("");
+        employeeHistoryFormik.setFieldTouched('');
         if (employeeHistoryFormik.dirty) {
           employeeHistoryFormik.handleSubmit();
         }
@@ -170,7 +167,7 @@ const EditEmployeeForm = () => {
         break;
 
       case 6:
-        documentFormik.setFieldTouched("");
+        documentFormik.setFieldTouched('');
         if (documentFormik.dirty) {
           documentFormik.handleSubmit();
         }
