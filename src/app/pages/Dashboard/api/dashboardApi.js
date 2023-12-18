@@ -2,24 +2,24 @@ import { useQuery } from "react-query";
 import { axiosInstance } from "../../../../auth/axiosInterceptor";
 
 const testData={
-    totalUser:1,
-    totalEmployee:1,
-    events:1,
-    holiday:1,
-    project:1,
-    employeeInfo:{
-      all:1,
-      new:1,
-      mal:2,
-      female:2
-    },
-    projectInfo:{
-      total:1,
-      completed:1,
-      pending:2,
-      progress:3,
-      delayed:3
-    }
+  "totalUser": 4,
+  "totalEmployee": 14,
+  "totalEvents": 2,
+  "totalEvents": 4,
+  "totalProjects": 2,
+  "employeeInfo": {
+      "allEmployee": 14,
+      "newEmployee": 11,
+      "maleEmployee": 12,
+      "femaleEmployee": 2
+  },
+  "projectInfo": {
+      "completed": 0,
+      "pending": 1,
+      "workInProgress": 0,
+      "delayed": 1,
+      "terminated": 0
+  }
 }
 
 const fetchDashBoard = () => {
