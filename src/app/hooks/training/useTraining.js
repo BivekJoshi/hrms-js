@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import {
   addTrainingDetail,
   deleteTraining,
@@ -6,13 +6,13 @@ import {
   getEmployeeById,
   getTrainingById,
   getTrainingDetail,
-} from "../../api/training/training-api";
-import { useParams } from "react-router-dom";
-import { toast } from "react-toastify";
+} from '../../api/training/training-api';
+import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 /*________________________GET_____________________________________*/
 export const useGetTraining = () => {
-  return useQuery(["getTrainingDetail"], () => getTrainingDetail(), {
+  return useQuery(['getTrainingDetail'], () => getTrainingDetail(), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
@@ -20,7 +20,7 @@ export const useGetTraining = () => {
 
 /*________________________GET BY TRAINING ID_____________________________________*/
 export const useGetTrainingById = (id) => {
-  return useQuery(["getTrainingById", id], () => getTrainingById(id), {
+  return useQuery(['getTrainingById', id], () => getTrainingById(id), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
@@ -28,7 +28,7 @@ export const useGetTrainingById = (id) => {
 
 /*________________________GET BY EMPLOYEE ID_____________________________________*/
 export const useGetEmployeeById = (id) => {
-  return useQuery(["getEmployeeById", id], () => getEmployeeById(id), {
+  return useQuery(['getEmployeeById', id], () => getEmployeeById(id), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
@@ -39,13 +39,13 @@ export const useAddTrainingDetail = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   const { id } = useParams();
   return useMutation(
-    ["addTrainingDetail"],
-    (formData) => addTrainingDetail(formData,id),
+    ['addTrainingDetail'],
+    (formData) => addTrainingDetail(formData, id),
     {
       onSuccess: (data, variables, context) => {
-        toast.success("Succesfully added Employee Training");
+        toast.success('Succesfully added Employee Training');
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries("getEmployeeById");
+        queryClient.invalidateQueries('getEmployeeById');
       },
       onError: (err, _variables, _context) => {
         toast.error(`error: ${err.message}`);
@@ -58,13 +58,13 @@ export const useAddTrainingDetail = ({ onSuccess }) => {
 export const useDeleteTraining = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(
-    ["deleteTraining"],
-    (companyId) => deleteTraining(companyId),
+    ['deleteTraining'],
+    (branchId) => deleteTraining(branchId),
     {
       onSuccess: (data, variables, context) => {
-        toast.success("Successfully deleted Employee Training");
+        toast.success('Successfully deleted Employee Training');
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries("getEmployeeById");
+        queryClient.invalidateQueries('getEmployeeById');
       },
       onError: (err, _variables, _context) => {
         toast.error(`Error: ${err.message}`);
@@ -74,16 +74,20 @@ export const useDeleteTraining = ({ onSuccess }) => {
 };
 
 /*________________________EDIT_____________________________________*/
-export const useEditTraining = ({ onSuccess,empId }) => {
+export const useEditTraining = ({ onSuccess, empId }) => {
   const queryClient = useQueryClient();
-  return useMutation(["editTraining"], (formData) => editTraining(formData,empId), {
-    onSuccess: (data, variables, context) => {
-      toast.success("Successfully edited Employee Training");
-      onSuccess && onSuccess(data, variables, context);
-      queryClient.invalidateQueries("getEmployeeById");
-    },
-    onError: (err, _variables, _context) => {
-      toast.error(`Error: ${err.message}`);
-    },
-  });
+  return useMutation(
+    ['editTraining'],
+    (formData) => editTraining(formData, empId),
+    {
+      onSuccess: (data, variables, context) => {
+        toast.success('Successfully edited Employee Training');
+        onSuccess && onSuccess(data, variables, context);
+        queryClient.invalidateQueries('getEmployeeById');
+      },
+      onError: (err, _variables, _context) => {
+        toast.error(`Error: ${err.message}`);
+      },
+    }
+  );
 };

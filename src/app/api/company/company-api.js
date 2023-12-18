@@ -38,9 +38,9 @@ export const editCompany = async (formData) => {
 {
   /*________________________DELETE_____________________________________*/
 }
-export const deleteCompany = async (companyId) => {
-  if (companyId) {
-    const response = await axiosInstance.delete(`/branch/delete/${companyId}`);
+export const deleteCompany = async (branchId) => {
+  if (branchId) {
+    const response = await axiosInstance.delete(`/branch/delete/${branchId}`);
     return response.data;
   }
 };
