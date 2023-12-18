@@ -15,10 +15,8 @@ export const getBaseUrl = () => {
   }
 };
 
-export const getDocUrl = () => {
-  if (envType === 'development') {
-    return 'https://103.94.159.144/';
-  } else if (envType === 'production') {
-    return contextPath() + '/api';
-  }
+export const docContextPath = () => {
+  const protocolAndHost = `${window.location.protocol}//${window.location.hostname}`;
+
+  return protocolAndHost;
 };
