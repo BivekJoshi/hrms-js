@@ -10,8 +10,8 @@ export const useLeaveDataSearch = (onSuccess, onError) => {
     onSuccess,
     onError,
     select: (response) => {
-      console.log(response.data,"response");
-      return response.data;
+      console.log(response);
+      return response;
     },
   });
 };

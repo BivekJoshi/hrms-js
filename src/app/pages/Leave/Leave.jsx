@@ -1,28 +1,20 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { Box, Button, Chip, Stack, Tooltip, Typography } from '@mui/material';
-import { useGetLeaveType } from '../../hooks/leaveType/useLeaveType';
 
-import { useDeleteLeave, useGetLeave } from '../../hooks/leave/useLeave';
-import { useGetEmployee } from '../../hooks/employee/useEmployee';
+import { useDeleteLeave } from '../../hooks/leave/useLeave';
 
 import DeleteIcon from '@mui/icons-material/Delete';
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import { AddLeaveModal, EditLeaveModal } from './LeaveModal/LeaveModal';
 import DeleteConfirmationModal from '../../components/Modal/DeleteConfirmationModal';
 import { ButtonComponent } from '../../components/Button/ButtonComponent';
-import { useGetUserControl } from '../../hooks/auth/userControl/useUserControl';
 import ThemeModeContext from '../../../theme/ThemeModeContext';
 import CustomTable from '../../components/CustomTable/CustomTable';
 import { toast } from 'react-toastify';
 import { useLeaveDataSearch } from './Api/LeaveApi';
 
-const Leave = ({ isLoading }) => {
-  const { data: leaveData, isLoading: loadingleave } = useGetLeave();
-  const { data: employeeData, isLoading: loadingemployee } = useGetEmployee();
-  const { data: leaveTypeData, isLoading: loadingleaveType } =
-    useGetLeaveType();
-  const { data: UserData, isLoading: loadingUser } = useGetUserControl();
+const Leave = () => {
   const { mode } = React.useContext(ThemeModeContext);
 
   const [openAddModal, setOpenAddModal] = useState(false);
@@ -54,41 +46,15 @@ const Leave = ({ isLoading }) => {
     setOpenEditModal(true);
   };
 
-  const getEmployeeName = (rowData) => {
-    const employeeId = rowData.employeeId;
-    const employee = employeeData?.find((emp) => emp.id === employeeId);
-    const name = `${employee?.firstName} ${employee?.middleName || ''} ${
-      employee?.lastName
-    }`;
-    return name;
-  };
-
-  const capitalizeFirstLetter = (str) => {
-    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
-  };
-  const getLeaveTypeName = (rowData) => {
-    const leaveTypeId = rowData.leaveTypeId;
-    const leaveType = leaveTypeData.find((leave) => leave.id === leaveTypeId);
-    const name = `${capitalizeFirstLetter(leaveType.leaveName)} Leave`;
-    return name;
-  };
-  const getUserName = (rowData) => {
-    const confirmById = rowData?.confirmById;
-    const user = UserData?.find((confirmBy) => confirmBy.id === confirmById);
-    const name = `${user?.name || '-'}`;
-    return name;
-  };
-
-  const { data1, isLoading:loadingg } = useLeaveDataSearch(
+  const { data, isLoading:loadingg } = useLeaveDataSearch(
     () => {
       console.log("Success");
-      toast.success("Successfully Fetch data")
+      toast.success("Successfully Fetch data1111")
     },
     () => {
       console.log("Error");
     }
   );
-  console.log(data1,"dataa");
 
   const columns = [
     {
@@ -101,26 +67,14 @@ const Leave = ({ isLoading }) => {
     },
     {
       title: 'Employee Name',
+      field: 'employeeName',
       width: '100px',
-      render: (rowData) => {
-        return <p>{getEmployeeName(rowData)} </p>;
-      },
-      customFilterAndSearch: (searchValue, rowData) => {
-        const employeeName = getEmployeeName(rowData);
-        return employeeName.toLowerCase().includes(searchValue.toLowerCase());
-      },
       sorting: false,
     },
     {
       title: 'Leave Type',
+      field:'leaveType',
       width: '100px',
-      render: (rowData) => {
-        return <p>{getLeaveTypeName(rowData)}</p>;
-      },
-      customFilterAndSearch: (searchValue, rowData) => {
-        const leaveTypeName = getLeaveTypeName(rowData);
-        return leaveTypeName.toLowerCase().includes(searchValue.toLowerCase());
-      },
       sorting: false,
     },
     {
@@ -229,14 +183,8 @@ const Leave = ({ isLoading }) => {
     {
       title: 'Approved By',
       width: '80px',
-      render: (rowData) => {
-        return <p>{getUserName(rowData)} </p>;
-      },
-      customFilterAndSearch: (searchValue, rowData) => {
-        const ApprovedBy = getUserName(rowData);
-        return ApprovedBy.toLowerCase().includes(searchValue.toLowerCase());
-      },
       sorting: false,
+      field:'approvedBy',
     },
     {
       title: 'Actions',
@@ -265,7 +213,7 @@ const Leave = ({ isLoading }) => {
     },
   ];
 
-  if (isLoading || loadingemployee || loadingleaveType) return <>Loading</>;
+  // if (isLoading || loadingemployee || loadingleaveType) return <>Loading</>;
 
   return (
     <>
@@ -286,10 +234,10 @@ const Leave = ({ isLoading }) => {
 
       <CustomTable
         columns={columns}
-        data={leaveData}
+        data={data}
         tableLayout='fixed'
         title='Leave Data'
-        isLoading={loadingleave}
+        // isLoading={loadingleave}
       />
       {openEditModal && (
         <EditLeaveModal
