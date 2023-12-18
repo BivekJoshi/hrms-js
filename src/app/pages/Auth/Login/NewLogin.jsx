@@ -221,14 +221,14 @@ const NewLogin = () => {
             <Box
               className="side-box"
               position="absolute"
-              top="5.5%"
+              top="15.5%"
               left={{ lg: "30%", md: "15%", sm: "30%", xs: "20%" }}
             >
               <img
                 src={groupImg}
                 alt="img"
-                width="375px"
-                height="336px"
+                width="295px"
+                height="250px"
                 style={{ position: "relative", zIndex: 2 }}
                 className="imggroup"
               />
@@ -256,7 +256,7 @@ const NewLogin = () => {
               </span>
               <div className="login-hrms">
                 <Typography
-                  variant="h4"
+                  variant="h5"
                   color="#401686"
                   textAlign="center"
                   fontFamily="Poppins"
@@ -266,7 +266,7 @@ const NewLogin = () => {
                   Welcome to HRMS
                 </Typography>
                 <Typography
-                  variant="p"
+                  fontSize="13px"
                   color="#401686"
                   textAlign="center"
                   fontFamily="Poppins"
