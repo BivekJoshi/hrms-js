@@ -294,14 +294,14 @@ const NewLogin = () => {
                 label='Email Address'
                 name='email'
                 type='email'
-                variant='outlined'
+                variant='filled'
                 autoFocus
                 autoComplete='username'
-                InputLabelProps={{ shrink: true }}
+                InputLabelProps={{ shrink: Boolean(formik.values.email) }}
                 size='small'
               />
               <TextField
-                variant='outlined'
+                variant='filled'
                 required
                 label='Password'
                 name='password'
