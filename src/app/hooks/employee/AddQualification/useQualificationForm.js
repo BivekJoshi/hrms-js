@@ -8,15 +8,15 @@ const useQualificationForm = ({ data, isLoadingQualification: isLoading }) => {
   const { mutate: editMutate } = useEditQualification({});
 
   const qualificationDetails =
-    // !isLoading &&
-    // data?.qualifications.map((education) => ({
-    //   id: education?.id || "",
-    //   board: education.board || "",
-    //   institute: education.institute || "",
-    //   passedLevel: education.passedLevel || "",
-    //   passedYear: education.passedYear || "",
-    //   grade: education.grade || "",
-    // }));
+    !isLoading &&
+    data?.qualifications.map((education) => ({
+      id: education?.id || "",
+      board: education.board || "",
+      institute: education.institute || "",
+      passedLevel: education.passedLevel || "",
+      passedYear: education.passedYear || "",
+      grade: education.grade || "",
+    }));
 
   const formik = useFormik({
     initialValues: {
