@@ -165,18 +165,23 @@ const Event = ({ permissions }) => {
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
         initialView="dayGridMonth"
         headerToolbar={{
-          start: "today prev,next",
+          start: "customTodayButton prev,next",
           center: "title",
           end: "dayGridMonth,timeGridWeek,timeGridDay",
         }}
         height={"90vh"}
         events={events}
         eventClick={handleOpenModal}
+        customButtons={{
+          customTodayButton: {
+            text: "Today",
+          },
+        }}
       />
 
       {openModal && (
         <OpenEvent
-        title={"Edit Event"}
+          title={"Edit Event"}
           id={getEventID}
           open={openModal}
           handleCloseModal={() => setOpenModal(false)}
