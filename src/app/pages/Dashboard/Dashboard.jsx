@@ -60,7 +60,6 @@ const Dashboard = () => {
   const formattedDate = today.toLocaleDateString(undefined, options);
 
 
-  console.log(data,"data fo das")
   return (
     <>
       <Box

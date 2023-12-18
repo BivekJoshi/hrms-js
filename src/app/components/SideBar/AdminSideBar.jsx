@@ -440,7 +440,6 @@ export default function AdminSidebar() {
                 <Collapse in={subMenuOpen[index]} timeout='auto' unmountOnExit>
                   <List component='div' disablePadding>
                     {menu.subMenus.map((subMenu, subIndex) => {
-                      console.log(subMenu.path, 'menu');
                       return (
                         <StyledNavLink key={subIndex} to={subMenu.path}>
                           <ListItemButton

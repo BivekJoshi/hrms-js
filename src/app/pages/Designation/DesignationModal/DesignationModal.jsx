@@ -16,8 +16,8 @@ export const AddDesignationModal = ({ open, handleCloseModal, title }) => {
   );
 };
 
-export const EditDesignationModal = ({ open, handleCloseModal, id, title }) => {
-  const { data } = useGetDesignationById(id);
+export const EditDesignationModal = ({ open, handleCloseModal, data, title }) => {
+  // const { data } = useGetDesignationById(id);
   return (
     <div>
       <FormModal

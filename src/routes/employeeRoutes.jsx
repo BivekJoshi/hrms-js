@@ -177,7 +177,7 @@ export default function BreadCrumbs() {
   const findRoute = (path) => employeeRoutes.find((route) => route.path === path);
   const breadcrumbPath = currentPath.slice(10);
   const pathSegments = breadcrumbPath.split("/").filter(Boolean);
-  console.log(currentPath);
+  
   return (
     <>
     {pathSegments.length > 0 && (

@@ -13,7 +13,7 @@ const  useEditProjectForm = (data) => {
       endDate: data?.endDate || "",
       taskStatus: data?.taskStatus || "",
       projectLeadId: data?.projectLeaderId || "",
-      companyId: data?.associateCompanies[0].id || "",
+      companyId: data?.associateCompanies[0]?.id || "",
       id: data?.id,
     },
     validationSchema: ProjectSchema,

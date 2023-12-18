@@ -74,8 +74,8 @@ const Project = ({ permissions }) => {
             <Box display='flex' gap={'.5rem'}>
               <ButtonComponent
                 BGColor='white'
-                TextColor='black'
-                onClick={handleOpenModal}
+                TextColor='#000'
+                OnClick={handleOpenModal}
                 buttonName={'Terminated Project'}
               />
               <ButtonComponent

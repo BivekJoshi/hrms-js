@@ -40,10 +40,6 @@ export default function AdminHeader({ open, handleDrawerOpen }) {
   const { data: birthdayData } = useGetTodayBirthday();
   const { data: eventData } = useGetEventNotification();
   const { toggleMode, palette } = useContext(ThemeModeContext);
-  console.log(
-    '🚀 ~ file: AdminHeader.jsx:43 ~ AdminHeader ~ palette:',
-    palette
-  );
 
   return (
     <AppBar

@@ -124,7 +124,8 @@ const Designation = ({ permissions }) => {
       {openEditModal && (
         <EditDesignationModal
           title={"Edit Designation"}
-          id={editedDesignation?.id}
+          // id={editedDesignation?.id}
+          data={editedDesignation}
           open={openEditModal}
           handleCloseModal={handleCloseEditModal}
         />
