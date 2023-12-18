@@ -197,8 +197,9 @@ const Attendance = () => {
     );
 
   return (
-    <div className='main'>
-      <div className='Search'>
+    <div className="main">
+      <h2>Attendance</h2>
+      <div className="Search">
         <Box
           component='form'
           noValidate

@@ -9,7 +9,7 @@ const useFamilyForm = ({ data, isLoadingFamily: isLoading }) => {
 
   const familyDetails = 
   !isLoading &&
-   data?.familyMembers.map((familyMember) => ({
+   data?.familyMembers?.map((familyMember) => ({
     id:familyMember.id ||'',
     name: familyMember.name || '',
     relation: familyMember.relation || '',

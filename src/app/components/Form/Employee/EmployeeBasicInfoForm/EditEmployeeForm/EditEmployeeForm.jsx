@@ -18,6 +18,10 @@ import { useGetEmployeeById } from "../../../../../hooks/employee/useEmployee";
 import useEmployeeHistoryForm from "../../../../../hooks/employee/AddEmployeeHistory/useEmployeeHistoryForm";
 import { useAddDocumentForm } from "../../../../../hooks/employee/AddDocument/useAddDocumentForm";
 import { toast } from "react-toastify";
+import { useGetBankByEmployeeId } from '../../../../../hooks/employee/useBank';
+import { useGetEmployeeHistoryById } from '../../../../../hooks/employee/useEmployeeHistory';
+import { useGetAddressById } from '../../../../../hooks/employee/useAddress';
+import { useGetFammilyById } from '../../../../../hooks/employee/useFamily';
 
 const EditEmployeeForm = () => {
   const { id } = useParams();
@@ -33,32 +37,38 @@ const EditEmployeeForm = () => {
     // 'Other Details',
   ];
 
-  const { data, isLoading: employeeLoading } = useGetEmployeeById(id);
+  const { data: employeeData, isLoading: employeeLoading } = useGetEmployeeById(id);
+  const { data: bankData, isLoading: bankLoading } = useGetBankByEmployeeId(id);
+  const { data: historyData, isLoading: historyLoading } = useGetEmployeeHistoryById(id);
+  const { data: addressData, isLoading: addressLoading } = useGetAddressById(id);
+  const { data: familyData, isLoading: familyLoading } = useGetFammilyById(id);
+  
+  const data = employeeData;
+  console.log(data)
 
-  const { formik: qualificationFormik, isLoading: isLoadingQualification } =
-    useQualificationForm({ data, employeeLoading });
+  // const { formik: qualificationFormik, isLoading: isLoadingQualification } =
+  //   useQualificationForm({ data, employeeLoading });
 
   const { formik: familyFormik, isLoading: isLoadingFamily } = useFamilyForm({
-    data,
+    familyData,
     employeeLoading,
   });
 
-  const { formik, isLoading } = useEditEmployeeForm({ data, employeeLoading });
+  const { formik } = useEditEmployeeForm({ data, employeeLoading });
 
-  const { formik: permanentFormik, isLoading: addressLoading } =
-    usePermanentAddressForm({ data, employeeLoading });
+  const { formik: permanentFormik, isLoading } =  usePermanentAddressForm({ addressData, addressLoading });
 
-  const { formik: bankFormik } = useAddBankForm({ data, employeeLoading });
+  const { formik: bankFormik } = useAddBankForm({ bankData, bankLoading });
 
-  const { formik: documentFormik } = useAddDocumentForm({
-    data,
-    employeeLoading,
-  });
+  // const { formik: documentFormik } = useAddDocumentForm({
+  //   data,
+  //   employeeLoading,
+  // });
 
-  const { formik: employeeHistoryFormik } = useEmployeeHistoryForm({
-    data,
-    employeeLoading,
-  });
+  // const { formik: employeeHistoryFormik } = useEmployeeHistoryForm({
+  //   historyData,
+  //   historyLoading,
+  // });
 
   const getStepContent = (step) => {
     switch (step) {
@@ -70,7 +80,7 @@ const EditEmployeeForm = () => {
           <EmployeeAddressDetailForm
             formik={permanentFormik}
             isLoading={addressLoading}
-            data={data}
+            data={addressData}
           />
         );
 
@@ -82,22 +92,22 @@ const EditEmployeeForm = () => {
           />
         );
 
-      case 3:
-        return (
-          <EmployeeQualificationDetailForm
-            formik={qualificationFormik}
-            isLoading={isLoadingQualification}
-          />
-        );
+      // case 3:
+      //   return (
+      //     <EmployeeQualificationDetailForm
+      //       formik={qualificationFormik}
+      //       isLoading={isLoadingQualification}
+      //     />
+      //   );
 
       case 4:
         return <EmployeeBankDetailForm formik={bankFormik} />;
 
-      case 5:
-        return <EmployeeHistoryDetailForm formik={employeeHistoryFormik} />;
+      // case 5:
+      //   return <EmployeeHistoryDetailForm formik={employeeHistoryFormik} />;
 
-      case 6:
-        return <EmployeeDocumentDetailForm formik={documentFormik} />;
+      // case 6:
+      //   return <EmployeeDocumentDetailForm formik={documentFormik} />;
 
       // case 7:
       //   return <p>Hello World</p>;

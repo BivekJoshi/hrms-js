@@ -51,7 +51,7 @@ const AddprojectFields = ({ onClose, isLoading }) => {
           alignItems="flex-end"
         >
           <Button
-            variant="container"
+            variant="contained"
             onClick={onClose}
             sx={{ mt: 3, ml: 1 }}
             color="error"

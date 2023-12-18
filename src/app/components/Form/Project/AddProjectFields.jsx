@@ -1,9 +1,10 @@
-import { Grid, Button, TextField, MenuItem, Autocomplete } from '@mui/material';
-import React, { useContext } from 'react';
-import useAddProjectForm from '../../../hooks/project/addProject/useAddProjectForm';
-import { useGetEmployee } from '../../../hooks/employee/useEmployee';
-import { useGetCompany } from '../../../hooks/company/useCompany';
-import ThemeModeContext from '../../../../theme/ThemeModeContext';
+import { Grid, Button, TextField, MenuItem, Autocomplete } from "@mui/material";
+import React, { useContext } from "react";
+import useAddProjectForm from "../../../hooks/project/addProject/useAddProjectForm";
+import { useGetEmployee } from "../../../hooks/employee/useEmployee";
+import { useGetCompany } from "../../../hooks/company/useCompany";
+import ThemeModeContext from "../../../../theme/ThemeModeContext";
+import { ButtonComponent } from '../../Button/ButtonComponent';
 
 const projectOptions = [
   // {
@@ -230,21 +231,20 @@ const AddprojectFields = ({ onClose, isLoading }) => {
           justifyContent='flex-end'
           alignItems='flex-end'
         >
-          <Button
-            variant='contained'
-            onClick={handleFormSubmit}
+          <ButtonComponent
+            variant="contained"
+            OnClick={handleFormSubmit}
+            TextColor={"#fff"}
             sx={{ mt: 3, ml: 1 }}
-          >
-            Add Project
-          </Button>
-          <Button
+            buttonName={"Add Project"}
+          />
+          <ButtonComponent
             variant='contained'
-            onClick={onClose}
+            OnClick={onClose}
             sx={{ mt: 3, ml: 1 }}
-            color='error'
-          >
-            Cancel
-          </Button>
+            BGColor={"#d32f2f"}
+            buttonName={"Cancel"}
+          />
         </Grid>
       </Grid>
     )

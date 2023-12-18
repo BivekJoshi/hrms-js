@@ -24,7 +24,7 @@ const HocButton = ({
   const buttonSx = {
     ...sx,
         backgroundColor: isDisabled ? "" : bg,
-        color: isDisabled ? "" : color,
+        color: isDisabled ? "#fff" : color,
         cursor: isDisabled ? "not-allowed" : "pointer",
         '&:hover':{
           backgroundColor: isDisabled ? "" : hoverBg,

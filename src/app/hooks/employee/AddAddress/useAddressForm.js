@@ -8,19 +8,21 @@ import {
 import { toast } from 'react-toastify';
 
 export const usePermanentAddressForm = ({
-  data,
-  employeeLoading: isLoading,
+  addressData,
+  addressLoading,
 }) => {
   const { mutate: permanentMutate } = usePermanentAddAddress({});
   const { mutate: temporaryMutate } = useTemporaryAddress({});
   const { mutate: editMutate } = useEditAddress({});
 
-  const addressDetails = !isLoading && data?.addresses;
+  const addressDetails = !addressLoading && addressData?.addresses;
+
+  console.log({"addressDetails": addressDetails})
 
   const initialValues = {
     addresses: [
-      createAddressObject(addressDetails[0]),
-      createAddressObject(addressDetails[1]),
+      createAddressObject(addressDetails?.[0]),
+      createAddressObject(addressDetails?.[1]),
     ],
   };
 

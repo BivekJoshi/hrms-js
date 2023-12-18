@@ -42,12 +42,13 @@ const province = [
 ];
 
 const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
+  console.log({"data": data})
   const [showTemporaryAddress, setShowTemporaryAddress] = useState(
-    Boolean(data?.addresses[1]?.id)
+    Boolean(data?.addresses?.[1]?.id)
   );
 
   useEffect(() => {
-    setShowTemporaryAddress(data?.addresses[1]?.id);
+    setShowTemporaryAddress(data?.addresses?.[1]?.id);
   }, [data]);
 
   const handleTemporaryButtonClick = (index) => {
@@ -458,7 +459,7 @@ export default EmployeeAddressDetailForm;
 //         formik.errors.addresses?.[index]?.[fieldName]
 //       }
 //       variant="outlined"
-//       autoFocus
+//       
 //       InputLabelProps={{ shrink: true }}
 //     >
 //       {fieldName === "country" && (

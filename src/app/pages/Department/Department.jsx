@@ -132,7 +132,8 @@ const Department = ({ permissions }) => {
       {openEditModal && (
         <EditDepartmentModal
           title={"Edit Department"}
-          id={editedDepartment?.id}
+          // id={editedDepartment?.id}
+          data={editedDepartment}
           open={openEditModal}
           handleCloseModal={handleCloseEditModal}
         />

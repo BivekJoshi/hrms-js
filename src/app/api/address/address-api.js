@@ -16,7 +16,7 @@ export const addTemporaryAddress = async (formData, id) => {
 
 export const getAddressById = (id) => {
   if (id) {
-    const data = axiosInstance.get(`/address/employee/${id}`);
+    const data = axiosInstance.get(`/address/employee-id/${id}`);
     return data;
   }
 };

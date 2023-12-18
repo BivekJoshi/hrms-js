@@ -6,6 +6,7 @@ import {
   useEditProjectEmployeeForm,
 } from "../../../../hooks/project/projectEmployee/addProjectEmployee/useAddProjectEmployeeForm";
 import ThemeModeContext from "../../../../../theme/ThemeModeContext";
+import { ButtonComponent } from '../../../Button/ButtonComponent';
 
 export const AddprojectEmployeeFields = ({ onClose, isLoading }) => {
   const { data: employeeData, isLoading: loadingEmployee } = useGetEmployee();
@@ -53,7 +54,7 @@ export const AddprojectEmployeeFields = ({ onClose, isLoading }) => {
                 <MenuItem
                   key={option?.id}
                   value={option?.id}
-                  sx={mode === "light" ? "" : { bgcolor: "#413e3e" }}
+                  style={{ background: mode === "light" ? "" : "#413e3e" }}
                 >
                   {option?.firstName} {option?.middleName} {option?.lastName}
                 </MenuItem>
@@ -129,23 +130,23 @@ export const AddprojectEmployeeFields = ({ onClose, isLoading }) => {
           direction="row"
           justifyContent="flex-end"
           alignItems="flex-end"
-        >
-          
-          <Button
+          gap={1}
+          mt={2}
+        >          
+          <ButtonComponent
             variant="contained"
-            onClick={handleFormSubmit}
+            OnClick={handleFormSubmit}
             sx={{ mt: 3, ml: 1 }}
-          >
-            Add Employee
-          </Button>
-          <Button
-            variant="container"
-            onClick={onClose}
+            buttonName={"Add Employee"}
+          />
+
+          <ButtonComponent
+            variant="contained"
+            OnClick={onClose}
             sx={{ mt: 3, ml: 1 , bgcolor:"red"}}
-            color="error"
-          >
-            Cancel
-          </Button>
+            BGColor={"#d32f2f"}
+            buttonName={"Cancel"}
+          />
         </Grid>
       </Grid>
     )
@@ -258,15 +259,15 @@ export const EditProjectEmployeeFields = ({ data, onClose, isLoading }) => {
           <Button
             variant="contained"
             onClick={handleFormSubmit}
-            sx={{ mt: 3, ml: 1 }}
+            sx={{ mt: 3, ml: 1, color: "#fff" }}
           >
             Edit Project
           </Button>
           <Button
-            variant="container"
+            variant="contained"
             onClick={onClose}
-            sx={{ mt: 3, ml: 1 }}
-            color="error"
+            sx={{ mt: 3, ml: 1}}
+            color= "error"         
           >
             Cancel
           </Button>

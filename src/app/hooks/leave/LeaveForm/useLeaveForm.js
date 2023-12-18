@@ -27,10 +27,6 @@ const useLeaveForm = (data) => {
     validationSchema: LeaveSchema,
     enableReinitialize: 'true',
     onSubmit: (values) => {
-      console.log(
-        '🚀 ~ file: useLeaveForm.js:32 ~ useLeaveForm ~ values:',
-        values
-      );
       if (data?.id) {
         handledEditRequest(values);
       } else {
