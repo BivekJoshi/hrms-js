@@ -20,7 +20,8 @@ const EmployeeBankDetailForm = ({ formik }) => {
           onChange={formik.handleChange}
           error={formik.touched.bankName && Boolean(formik.errors.bankName)}
           helperText={formik.touched.bankName && formik.errors.bankName}
-          variant='outlined'
+          variant="outlined"
+          
           InputLabelProps={{ shrink: true }}
         />
       </Grid>
@@ -40,7 +41,8 @@ const EmployeeBankDetailForm = ({ formik }) => {
           helperText={
             formik.touched.bankAccountNumber && formik.errors.bankAccountNumber
           }
-          variant='outlined'
+          variant="outlined"
+          
           InputLabelProps={{ shrink: true }}
         />
       </Grid>
@@ -57,7 +59,8 @@ const EmployeeBankDetailForm = ({ formik }) => {
             formik.touched.bankAddress && Boolean(formik.errors.bankAddress)
           }
           helperText={formik.touched.bankAddress && formik.errors.bankAddress}
-          variant='outlined'
+          variant="outlined"
+          
           InputLabelProps={{ shrink: true }}
         />
       </Grid>

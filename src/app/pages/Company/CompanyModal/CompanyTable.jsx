@@ -32,6 +32,7 @@ const CompanyTable = ({ permissions, companyData, isLoading }) => {
     setOpenEditModal(true);
   };
 
+
   return (
     <>
       <CompanyTableView

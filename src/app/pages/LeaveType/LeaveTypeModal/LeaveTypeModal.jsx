@@ -4,11 +4,12 @@ import { useGetLeaveTypeById } from '../../../hooks/leaveType/useLeaveType';
 import LeaveTypeFields from '../../../components/Form/LeaveType/LeaveTypeFields';
 import { Box } from '@mui/material';
 
-export const AddLeaveTypeModal = ({ open, handleCloseModal, existingLeaveTypes }) => {
+export const AddLeaveTypeModal = ({ open, handleCloseModal, existingLeaveTypes, title }) => {
   return (
     <Box>
       <FormModal
         open={open}
+        title={title}
         onClose={handleCloseModal}
         formComponent={
           <LeaveTypeFields

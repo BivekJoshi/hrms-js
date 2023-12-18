@@ -18,12 +18,12 @@ const EmployeeGridView = ({ employeeData, isLoading }) => {
       <Grid
         container
         item
-        gap={1}
+        mt={2}
         className='project-card-control'
         sx={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(285px, 1fr))',
-          gap: '1rem',
+          gap: '1.2rem',
         }}
       >
         {employeeData?.map((employee, index) => (

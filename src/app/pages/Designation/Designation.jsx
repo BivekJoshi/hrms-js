@@ -87,17 +87,21 @@ const Designation = ({ permissions }) => {
     },
   ].filter(Boolean);
 
-  const actions=[
+  const actions = [
     {
-      icon:()=><EditIcon/>,
+      icon: () => (
+        <HocButton permissions={permissions?.canEdit} icon={<EditIcon />} />
+      ),
       tooltip: "Edit Detail",
       onClick: (event, rowData) => handleEditDesignation(rowData),
     },
     {
-      icon:()=><DeleteIcon/>,
+      icon: () => (
+        <HocButton permissions={permissions?.canDelete} icon={<DeleteIcon />} />
+      ),
       tooltip: "Delete",
       onClick: (event, rowData) => handleDeleteDesignation(rowData),
-    }
+    },
   ];
   if (isLoading) return <>Loading</>;
 

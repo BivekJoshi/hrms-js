@@ -83,7 +83,7 @@ export const EditUserControlFieldsRole = ({ onClose, rowData }) => {
           error={formik.touched.userId && Boolean(formik.errors.userId)}
           helperText={formik.touched.userId && formik.errors.userId}
           variant="outlined"
-          autoFocus
+          
           InputLabelProps={{ shrink: true }}
         >
         </TextField> */}
@@ -153,6 +153,8 @@ export const EditUserControlFieldsRole = ({ onClose, rowData }) => {
         direction="row"
         justifyContent="flex-end"
         alignItems="flex-end"
+        gap={1}
+        mt={2}
       >
         <ButtonComponent
           variant="contained"

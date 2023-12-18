@@ -21,7 +21,7 @@ const DeleteConfirmationModal = ({
 
   return (
     <Dialog open={open} onClose={handleCloseModal}>
-      <Box sx={{ bgcolor: mode === "light" ? "" : "#413e3e" }}>
+      <Box sx={{ background: mode === "light" ? "" : "#413e3e" }}>
         <DialogTitle>Confirm Delete</DialogTitle>
         <DialogContent>
           Are you sure you want to delete this {message}?
@@ -32,6 +32,7 @@ const DeleteConfirmationModal = ({
             onClick={handleConfirmDelete}
             disabled={isLoading}
             startIcon={isLoading ? <CircularProgress size={20} /> : null}
+            color="#fff"
           >
             {isLoading ? "Deleting..." : "Confirm"}
           </Button>

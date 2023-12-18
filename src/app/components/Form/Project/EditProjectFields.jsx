@@ -1,9 +1,10 @@
-import { Grid, TextField, Button, MenuItem, Autocomplete } from '@mui/material';
-import React, { useContext } from 'react';
-import useEditProjectForm from '../../../hooks/project/editProject/useEditProjectForm';
-import { useGetCompany } from '../../../hooks/company/useCompany';
-import { useGetEmployee } from '../../../hooks/employee/useEmployee';
-import ThemeModeContext from '../../../../theme/ThemeModeContext';
+import { Grid, TextField, Button, MenuItem, Autocomplete } from "@mui/material";
+import React, { useContext } from "react";
+import useEditProjectForm from "../../../hooks/project/editProject/useEditProjectForm";
+import { useGetCompany } from "../../../hooks/company/useCompany";
+import { useGetEmployee } from "../../../hooks/employee/useEmployee";
+import ThemeModeContext from "../../../../theme/ThemeModeContext";
+import { ButtonComponent } from '../../Button/ButtonComponent';
 
 const EditProjectFields = ({ onClose, isLoading, data }) => {
   const { formik } = useEditProjectForm(data);
@@ -193,7 +194,7 @@ const EditProjectFields = ({ onClose, isLoading, data }) => {
                 fullWidth
                 required
                 variant="outlined"
-                autoFocus
+                
                 InputLabelProps={{ shrink: true }}
                 error={
                   formik.touched.employeeId && Boolean(formik.errors.employeeId)
@@ -228,13 +229,12 @@ const EditProjectFields = ({ onClose, isLoading, data }) => {
           justifyContent='flex-end'
           alignItems='flex-end'
         >
-          <Button
-            variant='contained'
+          <ButtonComponent
+            variant="contained"
             onClick={handleFormSubmit}
             sx={{ mt: 3, ml: 1 }}
-          >
-            Update Project
-          </Button>
+            buttonName={"Update Project"}
+          />
           <Button
             variant='contained'
             onClick={onClose}

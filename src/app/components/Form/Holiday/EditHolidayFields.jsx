@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import { Grid, TextField, Button } from '@mui/material';
-import { useDeleteHoliday } from '../../../hooks/holiday/useHoliday';
-import PermissionHoc from '../../../hoc/permissionHoc';
-import useEditHolidayForm from '../../../hooks/holiday/HolidayForm/useEditHolidayForm';
+import React, { useState } from "react";
+import { Grid, TextField, Button } from "@mui/material";
+import { useDeleteHoliday } from "../../../hooks/holiday/useHoliday";
+import PermissionHoc from "../../../hoc/permissionHoc";
+import useEditHolidayForm from "../../../hooks/holiday/HolidayForm/useEditHolidayForm";
+import { ButtonComponent } from "../../Button/ButtonComponent";
 
 const EditHolidayFields = ({ onClose, isLoading, data, permissions }) => {
   const { formik } = useEditHolidayForm(data);
@@ -94,37 +95,33 @@ const EditHolidayFields = ({ onClose, isLoading, data, permissions }) => {
           justifyContent='flex-end'
           alignItems='flex-end'
         >
+          <ButtonComponent
+            variant="contained"
+            OnClick={handleFormSubmit}
+            sx={{ mt: 3, ml: 1 }}
+            buttonName={"Update"}
+          />
           <>
             {data ? (
-              <Button
-                variant='contained'
-                onClick={handleDeleteHoliday}
+              <ButtonComponent
+                variant="contained"
+                OnClick={handleDeleteHoliday}
                 sx={{ mt: 3, ml: 1 }}
-                color='error'
-              >
-                Delete
-              </Button>
+                BGColor={"#d32f2f"}
+                buttonName={"Delete"}
+              />
             ) : (
               ''
             )}
           </>
 
-          <Button
-            variant='contained'
-            onClick={handleFormSubmit}
+          <ButtonComponent
+            variant="contained"
+            OnClick={onClose}
             sx={{ mt: 3, ml: 1 }}
-          >
-            Update
-          </Button>
-
-          <Button
-            variant='contained'
-            onClick={onClose}
-            sx={{ mt: 3, ml: 1 }}
-            color='error'
-          >
-            Cancel
-          </Button>
+            BGColor={"#d32f2f"}
+            buttonName={"Cancel"}
+          />
         </Grid>
       </Grid>
     </>
