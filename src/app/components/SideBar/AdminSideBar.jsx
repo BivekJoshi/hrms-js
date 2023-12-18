@@ -39,7 +39,8 @@ import { getUser, removeUser } from '../../utils/cookieHelper';
 import Footer from '../footer/Footer';
 import jwtDecode from 'jwt-decode';
 // import BreadCrumbs from '../../../routes/routes';
-import Logo from '../../../assets/logo.jpg';
+import Logo from '../../../assets/logo.png';
+import SmallLogo from '../../../assets/smallLogo.png';
 
 const drawerWidth = 260;
 
@@ -84,7 +85,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 export default function AdminSidebar() {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
-  const { mode } = useContext(ThemeModeContext);
+  const { mode, palette } = useContext(ThemeModeContext);
   const [subMenuOpen, setSubMenuOpen] = useState({});
   const { pathname } = useLocation();
   const user = getUser();
@@ -381,7 +382,12 @@ export default function AdminSidebar() {
         open={open}
       >
         <DrawerHeader>
-          <img src={Logo} alt='Logo' width='70%' />
+          <img
+            src={mode === 'dark' ? SmallLogo : Logo}
+            alt='Logo'
+            width={mode === 'dark' ? '25%' : '70%'}
+          />
+          {mode === 'dark' && <div>Secured Securities Ltd</div>}
           <IconButton onClick={handleDrawerClose} sx={{ marginLeft: '2rem' }}>
             <ChevronLeftIcon />
           </IconButton>
@@ -397,7 +403,7 @@ export default function AdminSidebar() {
                     backgroundColor:
                       pathname.includes(menu.path) &&
                       // menu.item == "employee" &&
-                      '#C8E6C9',
+                      palette?.background?.activetabBg,
                   }}
                 >
                   <ListItemIcon
@@ -445,7 +451,8 @@ export default function AdminSidebar() {
                           <ListItemButton
                             sx={{
                               backgroundColor:
-                                pathname.includes(subMenu.path) && '#E8F5E9',
+                                pathname.includes(subMenu.path) &&
+                                palette?.background?.tabbg,
                               color: mode === 'dark' && 'white',
                             }}
                           >
