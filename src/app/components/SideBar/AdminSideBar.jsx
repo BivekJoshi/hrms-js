@@ -382,7 +382,7 @@ export default function AdminSidebar() {
       >
         <DrawerHeader>
           <img src={Logo} alt='Logo' width='70%' />
-          <IconButton onClick={handleDrawerClose} sx={{ paddingLeft: '2rem' }}>
+          <IconButton onClick={handleDrawerClose} sx={{ marginLeft: '2rem' }}>
             <ChevronLeftIcon />
           </IconButton>
         </DrawerHeader>
@@ -440,7 +440,6 @@ export default function AdminSidebar() {
                 <Collapse in={subMenuOpen[index]} timeout='auto' unmountOnExit>
                   <List component='div' disablePadding>
                     {menu.subMenus.map((subMenu, subIndex) => {
-                      console.log(subMenu.path, 'menu');
                       return (
                         <StyledNavLink key={subIndex} to={subMenu.path}>
                           <ListItemButton
