@@ -14,6 +14,8 @@ import { ButtonComponent } from '../../components/Button/ButtonComponent';
 import { useGetUserControl } from '../../hooks/auth/userControl/useUserControl';
 import ThemeModeContext from '../../../theme/ThemeModeContext';
 import CustomTable from '../../components/CustomTable/CustomTable';
+import { toast } from 'react-toastify';
+import { useLeaveDataSearch } from './Api/LeaveApi';
 
 const Leave = ({ isLoading }) => {
   const { data: leaveData, isLoading: loadingleave } = useGetLeave();
@@ -76,6 +78,17 @@ const Leave = ({ isLoading }) => {
     const name = `${user?.name || '-'}`;
     return name;
   };
+
+  const { data1, isLoading:loadingg } = useLeaveDataSearch(
+    () => {
+      console.log("Success");
+      toast.success("Successfully Fetch data")
+    },
+    () => {
+      console.log("Error");
+    }
+  );
+  console.log(data1,"dataa");
 
   const columns = [
     {

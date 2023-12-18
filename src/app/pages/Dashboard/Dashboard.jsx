@@ -6,49 +6,28 @@ import Holiday from "../../../assets/holiday.png";
 import Male from "../../../assets/male.png";
 import Project from "../../../assets/project.png";
 import User from "../../../assets/user.png";
-import { DOC_URL } from "../../../auth/axiosInterceptor";
 import ThemeModeContext from "../../../theme/ThemeModeContext";
 import BarChatDiagram from "../../components/Charts/BarChatDiagram";
 import { PieChartDiagram } from "../../components/Charts/PieChartDiagram";
 import DashboardCard from "../../components/cards/Dashboard/DashboardCard";
 import { ProjectProgressCard } from "../../components/cards/ProjectProgress/ProjectProgressCard";
-import { useGetLoggedInUser } from "../../hooks/auth/usePassword";
-import { useGetUserRole } from "../../hooks/auth/userControl/useUserControl";
-import {
-  useGetDashboard,
-  useGetProjectCount,
-} from "../../hooks/dashboard/useDashboard";
-import { useGetEmployee } from "../../hooks/employee/useEmployee";
-import { useGetEvent } from "../../hooks/event/useEvent";
-import { useGetHoliday } from "../../hooks/holiday/useHoliday";
-import { useGetPendingLeave } from "../../hooks/leave/useLeave";
-import { useGetProject } from "../../hooks/project/useProject";
 import { ProjectTable } from "./DashboardTable/ProjectTable";
 import { useDashBoardSearch } from "./api/dashboardApi";
+import { toast } from "react-toastify";
 
 const Dashboard = () => {
   const { mode } = useContext(ThemeModeContext);
-
-  const { data: dashboardData } = useGetDashboard();
-  const { data: projectDataCount } = useGetProjectCount();
-  const { data: projectData } = useGetProject();
-  useGetPendingLeave();
-  const { data: employeeData } = useGetEmployee();
-  const { data: userRoleData } = useGetUserRole();
-  const { data: myData } = useGetLoggedInUser();
-
   const { data, isLoading } = useDashBoardSearch(
     () => {
       console.log("Success");
+      toast.success("Successfully Fetch data")
     },
     () => {
       console.log("Error");
     }
   );
 
-  const photo = employeeData?.userPhotoPath;
-  const filePath = photo ? DOC_URL + photo : "";
-
+  console.log(data,"data ma");
   const today = new Date();
   const day = new Date().toLocaleDateString("en-us", { weekday: "long" });
 
@@ -59,8 +38,6 @@ const Dashboard = () => {
   };
   const formattedDate = today.toLocaleDateString(undefined, options);
 
-
-  console.log(data,"data fo das")
   return (
     <>
       <Box
@@ -76,7 +53,7 @@ const Dashboard = () => {
       >
         <CardMedia
           component="img"
-          src={filePath ? filePath : Male}
+          src={Male}
           alt="Img"
           sx={{ width: 66, height: 66, borderRadius: "2rem" }}
         />
@@ -94,7 +71,7 @@ const Dashboard = () => {
               Welcome
             </Typography>
 
-            <Typography variant="h6">{myData?.name}</Typography>
+            <Typography variant="h6">ADMIN</Typography>
           </div>
           <div>
             <Typography variant="h6" textAlign="end" fontWeight={600}>
@@ -139,21 +116,21 @@ const Dashboard = () => {
             <DashboardCard
               title="Events"
               icon={Event}
-              count={data?.events}
+              count={data?.totalEvents}
               linkTo="/admin/event"
               borderColor="#108A23"
             />
             <DashboardCard
               title="Holiday"
               icon={Holiday}
-              count={data?.holiday}
+              count={data?.totalEvents}
               linkTo="/admin/holiday"
               borderColor="#FF8A7B"
             />
             <DashboardCard
               title="Project"
               icon={Project}
-              count={data?.project}
+              count={data?.totalProjects}
               linkTo="/admin/project"
               borderColor="#875923 "
             />
@@ -165,8 +142,8 @@ const Dashboard = () => {
             <Typography variant="h5" sx={{ marginBottom: "16px" }}>
               Employee Information
             </Typography>
-            <BarChatDiagram dashboardData={dashboardData} />
-            <PieChartDiagram dashboardData={dashboardData} />
+            <BarChatDiagram dashboardData={data} />
+            {/* <PieChartDiagram dashboardData={dashboardData} /> */}
           </Grid>
           <Grid item md={6} xs={12}>
             <div>
@@ -188,9 +165,9 @@ const Dashboard = () => {
               </Grid>
             </div>
 
-            <Grid sx={{ mt: "32px" }}>
-              <ProjectTable projectData={projectData} />
-            </Grid>
+            {/* <Grid sx={{ mt: "32px" }}>
+              <ProjectTable projectData={data} />
+            </Grid> */}
             <Grid item xs={12} sm={6}>
               {/* <PendingLeaveTable
               pendingLeaveData={pendingLeaveData}
