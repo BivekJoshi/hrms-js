@@ -24,17 +24,18 @@ const EmployeeGrid = ({ employeeData, isLoading }) => {
       `${employee.firstName} ${employee.lastName}`
         .toLowerCase()
         .includes(nameFilter.toLowerCase()) &&
-      employee?.position?.positionName
-        .toLowerCase()
-        .includes(positionFilter.toLowerCase()) &&
+      employee?.positionId
+        // .toLowerCase()
+        // .includes(positionFilter.toLowerCase()) 
+        &&
       employee?.mobileNumber.toString().includes(phoneFilter)
   );
-
   if (isLoading) {
     return (
       <Skeleton sx={{ height: 190 }} animation="wave" variant="rectangular" />
     );
   }
+  console.log(employeeData);
   return (
     <>
       <Grid

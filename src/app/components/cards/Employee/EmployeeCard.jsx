@@ -228,7 +228,7 @@ const EmployeeCard = ({
                           textOverflow: 'ellipsis',
                           overflow: 'hidden',
                         }}
-                      >{`${PositionName || ''} (${PositionLevel || ''})`}</p>
+                      >{`${PositionName || ''} `}</p>
                     }
                   />
                 </Tooltip>

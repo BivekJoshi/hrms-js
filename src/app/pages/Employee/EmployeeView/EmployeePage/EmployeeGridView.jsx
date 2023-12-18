@@ -12,7 +12,7 @@ const EmployeeGridView = ({ employeeData, isLoading }) => {
         <Skeleton animation={false} />
       </>
     );
-
+console.log(employeeData);
   return (
     <>
       <Grid
@@ -36,7 +36,7 @@ const EmployeeGridView = ({ employeeData, isLoading }) => {
             ELastName={employee?.lastName || ''}
             OfficeEmail={employee?.officeEmail || ''}
             MobileNumber={employee?.mobileNumber || ''}
-            PositionName={employee?.position?.positionName || ''}
+            PositionName={employee?.positionId || ''}
             PositionLevel={employee?.position?.positionLevel || ''}
             EGender={employee?.gender || ''}
             EmployeeData={employeeData}
