@@ -17,8 +17,7 @@ import { Link } from "react-router-dom";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
 import { useLoginForm } from "../../../../auth/hooks/component/login/useLoginForm";
-import P1 from "../../../../assets/Polygon1.png";
-import P2 from "../../../../assets/Polygon2.png";
+import Bg from "../../../../assets/bg.png";
 
 const NewLogin = () => {
   const { mode } = useContext(ThemeModeContext);
@@ -30,10 +29,10 @@ const NewLogin = () => {
     handleMouseDownPassword,
   } = useLoginForm({});
   return (
-    <div style={{ height: "100vh" }}>
+    <div style={{ height: "100dvh" }}>
       <div className="login-bgg">
         <Grid className="login-bg-design">
-          <Box display="flex" justifyContent="center">
+          <Box display="flex" justifyContent="center" height="100vh">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="72"
@@ -97,17 +96,7 @@ const NewLogin = () => {
                 fill="#6DAB23"
               />
             </svg>
-            <Grid
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "22px",
-                padding: "1rem ",
-                minWidth: "30rem",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
+            <Grid className="largDesign" width={{lg:"30rem"}}>
               <Typography fontSize="40px" color="primary" fontWeight="600">
                 Log In
               </Typography>
@@ -209,21 +198,17 @@ const NewLogin = () => {
               </LoadingButton>
             </Grid>
           </Box>
-          <Grid position="relative" className="topAt920" height="100vh">
-            <img
-              src={P1}
-              alt=""
-              width="100%"
-              height="99%"
-              style={{ position: "absolute" }}
-            />
-            <img src={P2} alt="" width="100%" height="99.8%" />
-            <Box
-              className="side-box"
-              position="absolute"
-              top="15.5%"
-              left={{ lg: "30%", md: "15%", sm: "30%", xs: "20%" }}
-            >
+          <Grid
+            position="relative"
+            className="topAt920"
+            height="100vh"
+            style={{
+              backgroundImage: `url(${Bg})`,
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "cover",
+            }}
+          >
+            <Box className="side-box" left={{ sm: "30%", xs: "20%" }}>
               <img
                 src={groupImg}
                 alt="img"
@@ -282,6 +267,116 @@ const NewLogin = () => {
                 </Typography>
               </div>
             </Box>
+            <Grid
+              className="smallDesign"
+              position="absolute"
+              top="35%"
+              left={{ sm: "30%", xs: "20%" }}
+            >
+              <Typography fontSize="40px" color="white" fontWeight="600">
+                Log In
+              </Typography>
+              <Typography
+                variant="p"
+                color="white"
+                sx={{ fontWeight: "500", paddingTop: "0" }}
+              >
+                your account to continue
+              </Typography>
+              <TextField
+                required
+                fullWidth
+                value={formik.values.email}
+                onChange={formik.handleChange}
+                error={formik.touched.email && Boolean(formik.errors.email)}
+                helperText={formik.touched.email && formik.errors.email}
+                id="email"
+                label="Email Address"
+                name="email"
+                type="email"
+                variant="outlined"
+                autoFocus
+                autoComplete="username"
+                InputLabelProps={{ shrink: true }}
+                size="small"
+              />
+              <TextField
+                variant="outlined"
+                required
+                label="Password"
+                name="password"
+                autoComplete="current-password"
+                fullWidth
+                size="small"
+                onKeyPress={(ev) => {
+                  if (ev.key === "Enter") {
+                    formik.handleSubmit();
+                    ev.preventDefault();
+                  }
+                }}
+                value={formik.values.password}
+                onChange={formik.handleChange}
+                error={
+                  formik.touched.password && Boolean(formik.errors.password)
+                }
+                helperText={formik.touched.password && formik.errors.password}
+                type={showValues.showPassword ? "text" : "password"}
+                sx={{ minWidth: "10vw", mt: 1 }}
+                InputLabelProps={{ shrink: true }}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <Tooltip title="Show Password">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                        >
+                          {showValues.showPassword ? (
+                            <VisibilityOff />
+                          ) : (
+                            <Visibility />
+                          )}
+                        </IconButton>
+                      </Tooltip>
+                    </InputAdornment>
+                  ),
+                }}
+              />
+              <Grid
+                container
+                direction="row"
+                justifyContent="flex-end"
+                alignItems="center"
+              >
+                <Link
+                  // className="forgot-password"
+                  to="forgot-password"
+                  style={{ color: "#6DAB23", textDecoration: "none" }}
+                >
+                  <Typography variant="p" color="#402c8a">
+                    Forget password?
+                  </Typography>
+                </Link>
+              </Grid>
+
+              <LoadingButton
+                fullWidth
+                onClick={() => formik.submitForm()}
+                variant="contained"
+                loading={loading}
+                sx={{
+                  textTransform: "none",
+                  color: "white",
+                  bgcolor: "#402c8a",
+
+                  fontWeight: "bold",
+                }}
+              >
+                Login
+              </LoadingButton>
+            </Grid>
           </Grid>
         </Grid>
       </div>
