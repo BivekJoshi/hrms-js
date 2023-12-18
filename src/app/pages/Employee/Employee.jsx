@@ -148,7 +148,7 @@ const Employee = () => {
               }}
             >
               <ButtonComponent variant="contained" OnClick={handleSubmit} sx={{textTransform:'none'}} buttonName={"Submit"} />
-              <ButtonComponent variant="contained" color="error" OnClick={() => {setOpenAddModal(false)}} sx={{textTransform:'none'}} buttonName={"Cancel"} />
+              <ButtonComponent variant="contained" BGColor={"#d32f2f"} OnClick={() => {setOpenAddModal(false)}} sx={{textTransform:'none'}} buttonName={"Cancel"} />
             </Box>
           </Box>
         </div>

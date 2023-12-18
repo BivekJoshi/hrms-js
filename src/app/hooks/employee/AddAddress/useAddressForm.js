@@ -8,25 +8,26 @@ import {
 import { toast } from 'react-toastify';
 
 export const usePermanentAddressForm = ({
-  data,
-  employeeLoading: isLoading,
+  addressData,
+  addressLoading,
 }) => {
   const { mutate: permanentMutate } = usePermanentAddAddress({});
   const { mutate: temporaryMutate } = useTemporaryAddress({});
   const { mutate: editMutate } = useEditAddress({});
 
-  const addressDetails = !isLoading && data?.addresses;
-  console.log({"addressDetails": addressDetails, "data": data})
+  const addressDetails = !addressLoading && addressData?.addresses;
 
-  // const initialValues = {
-  //   addresses: [
-  //     createAddressObject(addressDetails[0]),
-  //     createAddressObject(addressDetails[1]),
-  //   ],
-  // };
+  console.log({"addressDetails": addressDetails})
+
+  const initialValues = {
+    addresses: [
+      createAddressObject(addressDetails?.[0]),
+      createAddressObject(addressDetails?.[1]),
+    ],
+  };
 
   const formik = useFormik({
-    // initialValues,
+    initialValues,
     validationSchema: AddressSchema,
     enableReinitialize: true,
     onSubmit: handleSubmit,
