@@ -38,7 +38,9 @@ import AdminHeader from '../Header/AdminHeader';
 import { getUser, removeUser } from '../../utils/cookieHelper';
 import Footer from '../footer/Footer';
 import jwtDecode from 'jwt-decode';
-import BreadCrumbs from '../../../routes/routes';
+// import BreadCrumbs from '../../../routes/routes';
+import Logo from '../../../assets/logo.png';
+import SmallLogo from '../../../assets/smallLogo.png';
 
 const drawerWidth = 260;
 
@@ -83,7 +85,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 export default function AdminSidebar() {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
-  const { mode } = useContext(ThemeModeContext);
+  const { mode, palette } = useContext(ThemeModeContext);
   const [subMenuOpen, setSubMenuOpen] = useState({});
   const { pathname } = useLocation();
   const user = getUser();
@@ -337,7 +339,11 @@ export default function AdminSidebar() {
   ];
 
   const drawerMenus =
-    userRole === 'ROLE_ADMIN' || userRole === 'ROLE_SUPER_ADMIN' || userRole === 'ROLE_MANAGER' 
+    userRole === 'ROLE_ADMIN' ||
+    userRole === 'ROLE_SUPER_ADMIN' ||
+    userRole === 'ROLE_MANAGER' ||
+    userRole === 'ROLE_HR' ||
+    userRole === 'ROLE_HR_CLERK'
       ? drawerMenusForAdmin
       : drawerMenusForEmployee;
 
@@ -376,18 +382,13 @@ export default function AdminSidebar() {
         open={open}
       >
         <DrawerHeader>
-          <Typography
-            style={{
-              fontSize: '2rem',
-              fontWeight: '900',
-              color: '#01579b',
-              letterSpacing: '0.1rem',
-            }}
-            variant='h6'
-          >
-            DGHUB
-          </Typography>
-          <IconButton onClick={handleDrawerClose}>
+          <img
+            src={mode === 'dark' ? SmallLogo : Logo}
+            alt='Logo'
+            width={mode === 'dark' ? '25%' : '70%'}
+          />
+          {mode === 'dark' && <div>Secured Securities Ltd</div>}
+          <IconButton onClick={handleDrawerClose} sx={{ marginLeft: '2rem' }}>
             <ChevronLeftIcon />
           </IconButton>
         </DrawerHeader>
@@ -401,8 +402,8 @@ export default function AdminSidebar() {
                   sx={{
                     backgroundColor:
                       pathname.includes(menu.path) &&
-                      menu.item == 'employee' &&
-                      '#ace8639e',
+                      // menu.item == "employee" &&
+                      palette?.background?.activetabBg,
                   }}
                 >
                   <ListItemIcon
@@ -450,7 +451,8 @@ export default function AdminSidebar() {
                           <ListItemButton
                             sx={{
                               backgroundColor:
-                                pathname.includes(subMenu.path) && '#ace8639e',
+                                pathname.includes(subMenu.path) &&
+                                palette?.background?.tabbg,
                               color: mode === 'dark' && 'white',
                             }}
                           >
@@ -477,8 +479,7 @@ export default function AdminSidebar() {
           }}
         >
           <Button
-            variant='contained'
-            sx={{ backgroundColor: '#6DAB23' }}
+            variant='outlined'
             onClick={() => {
               removeUser();
               navigate('/');
@@ -486,6 +487,13 @@ export default function AdminSidebar() {
           >
             Logout
           </Button>
+          {/* <Typography
+            variant='body2'
+            sx={{ marginRight: '8px', marginTop: '1rem' }}
+          >
+            {mode === 'light' ? 'Dark' : 'Light'} Mode
+            <Switch checked={mode === 'dark'} onChange={toggleMode} />
+          </Typography> */}
         </Box>
       </Drawer>
 
@@ -512,7 +520,7 @@ export default function AdminSidebar() {
             gap='1rem'
             alignItems='center'
           >
-            {/* <BreadCrumbs /> */}
+            {/* <BreadCrumb /> */}
           </Box>
           <div style={{ minHeight: '90vh' }}>
             <Outlet />

@@ -21,7 +21,7 @@ const EditProjectFields = ({ onClose, isLoading, data }) => {
         endDate: true,
         taskStatus: true,
         projectLeadId: true,
-        companyId: true,
+        branchId: true,
       });
       onClose();
     }
@@ -38,12 +38,12 @@ const EditProjectFields = ({ onClose, isLoading, data }) => {
     return projectLeadId;
   };
 
-  const getCompanyName = (associateCompanies) => {
-    return (
-      companyData?.find((company) => company.id == associateCompanies)
-        ?.companyName || associateCompanies
-    );
-  };
+  // const getCompanyName = (associateCompanies) => {
+  //   return (
+  //     companyData?.find((company) => company.id == associateCompanies)
+  //       ?.branchName || associateCompanies
+  //   );
+  // };
 
   const projectOptions = [
     // {
@@ -207,16 +207,16 @@ const EditProjectFields = ({ onClose, isLoading, data }) => {
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
-            id='companyId'
-            name='companyId'
+            id='branchId'
+            name='branchId'
             label='Branch Name'
             placeholder='Enter branch'
             disabled
             fullWidth
-            value={getCompanyName(formik.values.companyId)}
+            // value={getCompanyName(formik.values.branchId)}
             onChange={formik.handleChange}
-            error={formik.touched.companyId && Boolean(formik.errors.companyId)}
-            helperText={formik.touched.companyId && formik.errors.companyId}
+            // error={formik.touched.branchId && Boolean(formik.errors.branchId)}
+            // helperText={formik.touched.branchId && formik.errors.branchId}
             variant='outlined'
             InputLabelProps={{ shrink: true }}
           />

@@ -58,7 +58,7 @@ export const editEmployee = async (formData, id) => {
   /*________________________GETBYCOMPANY_____________________________________*/
 }
 export const getEmployeeByCompany = async () => {
-  const data = await axiosInstance.get(`/employee/company-id/{companyId}`);
+  const data = await axiosInstance.get(`/employee/company-id/{branchId}`);
   return data;
 };
 

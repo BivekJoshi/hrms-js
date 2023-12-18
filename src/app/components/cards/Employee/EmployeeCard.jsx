@@ -181,7 +181,7 @@ const EmployeeCard = ({
               alignItems: 'center',
             }}
           >
-            <CardMedia
+            {/* <CardMedia
               component='img'
               src={
                 employeePhoto
@@ -194,7 +194,7 @@ const EmployeeCard = ({
               }
               alt='IMG'
               sx={{ width: 66, height: 66, borderRadius: '2rem' }}
-            />
+            /> */}
           </Stack>
           <div style={{ paddingTop: '16px' }}>
             {ProgressBarRes && <ProgressbyAll ProgressbyAll={ProgressBarRes} />}

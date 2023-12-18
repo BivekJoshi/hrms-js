@@ -24,21 +24,28 @@ const CompanyTableView = ({
     },
     {
       title: 'Branch Name',
-      field: 'companyName',
+      field: 'branchName',
       emptyValue: '-',
       width: '20vh',
       sorting: false,
     },
     {
-      title: 'Branch Type',
-      field: 'companyType',
+      title: 'Branch Address',
+      field: 'branchAddress',
       emptyValue: '-',
-      width: '20vh',
+      width: '10vh',
+      sorting: false,
+    },
+    {
+      title: 'Contact',
+      field: 'branchContact',
+      emptyValue: '-',
+      width: '10vh',
       sorting: false,
     },
     {
       title: 'Description',
-      field: 'companyDescription',
+      field: 'branchDescription',
       emptyValue: '-',
       width: 400,
       sorting: false,
@@ -54,7 +61,7 @@ const CompanyTableView = ({
         //   icon={<ModeEditOutlineIcon />}
         // />
       ),
-      tooltip: 'Edit Company',
+      tooltip: 'Edit Branch',
       onClick: (event, rowData) => handleEditCompany(rowData),
     },
     {
@@ -62,7 +69,7 @@ const CompanyTableView = ({
         <DeleteIcon />
         // <HocButton permissions={permissions?.canDelete} icon={<DeleteIcon />} />
       ),
-      tooltip: 'Delete Company',
+      tooltip: 'Delete Branch',
       onClick: (event, rowData) => handleDeleteCompany(rowData),
     },
   ];

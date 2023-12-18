@@ -4,31 +4,31 @@ import { ProjectSchema } from '../validation/ProjectSchema';
 import { useAddProject } from '../useProject';
 
 const useAddProjectForm = () => {
-    const { mutate } = useAddProject({});
+  const { mutate } = useAddProject({});
 
-    const formik = useFormik({
-        initialValues: {
-            projectName: "",
-            startDate: "",
-            endDate: "",
-            taskStatus: "PENDING",
-            projectLeadId: "",
-            companyId: "",
-        },
-        validationSchema: ProjectSchema,
-        onSubmit: (values) => {
-            handleRequest(values);
-        },
-    });
+  const formik = useFormik({
+    initialValues: {
+      projectName: '',
+      startDate: '',
+      endDate: '',
+      taskStatus: 'PENDING',
+      projectLeadId: '',
+      branchId: '',
+    },
+    validationSchema: ProjectSchema,
+    onSubmit: (values) => {
+      handleRequest(values);
+    },
+  });
 
-    const handleRequest = (values) => {
-        values = {
-            ...values,
-        };
-        mutate(values, formik, { onSuccess: () => formik.handleReset() });
+  const handleRequest = (values) => {
+    values = {
+      ...values,
     };
+    mutate(values, formik, { onSuccess: () => formik.handleReset() });
+  };
 
-    return { formik };
+  return { formik };
 };
 
 export default useAddProjectForm;

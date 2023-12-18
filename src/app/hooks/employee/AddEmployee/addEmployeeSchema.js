@@ -1,10 +1,13 @@
 import * as Yup from 'yup';
+import { sub } from 'date-fns/fp';
 
 const AddEmployeeSchema = Yup.object().shape({
   firstName: Yup.string().required('First name is required'),
   lastName: Yup.string().required('Last name is required'),
   gender: Yup.string().required('Gender is required'),
-  dateOfBirth: Yup.string().required('Date of birth is required'),
+  dateOfBirth: Yup.date()
+    .required()
+    .max(sub({ years: 18 }, new Date()), 'Employee must be over 18 years old'),
   dateOfJoin: Yup.string().required('Date of join is required'),
   mobileNumber: Yup.string()
     .required('Mobile number is required')
@@ -17,7 +20,7 @@ const AddEmployeeSchema = Yup.object().shape({
       'Invalid email format'
     ),
   maritalStatus: Yup.string().required('Marital status is required'),
-  companyId: Yup.string().required('Company name is required'),
+  branchId: Yup.string().required('Company name is required'),
   positionId: Yup.string().required('Position is required'),
   departmentId: Yup.string().required('Department is required'),
 });

@@ -1,43 +1,33 @@
-import React, { useContext } from "react";
-import DashboardCard from "../../components/cards/Dashboard/DashboardCard";
 import { Box, CardMedia, Grid, Typography } from "@mui/material";
-import { useGetDashboard } from "../../hooks/dashboard/useDashboard";
-import { useGetProjectCount } from "../../hooks/dashboard/useDashboard";
-import { useGetProject } from "../../hooks/project/useProject";
-import { PieChartDiagram } from "../../components/Charts/PieChartDiagram";
-import BarChatDiagram from "../../components/Charts/BarChatDiagram";
-import { ProjectProgressCard } from "../../components/cards/ProjectProgress/ProjectProgressCard";
-import { ProjectTable } from "./DashboardTable/ProjectTable";
-import { useGetEmployee } from "../../hooks/employee/useEmployee";
-import { useGetEvent } from "../../hooks/event/useEvent";
-import { useGetHoliday } from "../../hooks/holiday/useHoliday";
-import { useGetUserRole } from "../../hooks/auth/userControl/useUserControl";
-import ThemeModeContext from "../../../theme/ThemeModeContext";
-import Male from "../../../assets/male.png";
-import { useGetLoggedInUser } from "../../hooks/auth/usePassword";
-import { useGetPendingLeave } from "../../hooks/leave/useLeave";
-import { DOC_URL } from "../../../auth/axiosInterceptor";
-import User from "../../../assets/user.png";
+import { useContext } from "react";
 import Employee from "../../../assets/employee.png";
 import Event from "../../../assets/event.png";
 import Holiday from "../../../assets/holiday.png";
+import Male from "../../../assets/male.png";
 import Project from "../../../assets/project.png";
+import User from "../../../assets/user.png";
+import ThemeModeContext from "../../../theme/ThemeModeContext";
+import BarChatDiagram from "../../components/Charts/BarChatDiagram";
+import { PieChartDiagram } from "../../components/Charts/PieChartDiagram";
+import DashboardCard from "../../components/cards/Dashboard/DashboardCard";
+import { ProjectProgressCard } from "../../components/cards/ProjectProgress/ProjectProgressCard";
+import { ProjectTable } from "./DashboardTable/ProjectTable";
+import { useDashBoardSearch } from "./api/dashboardApi";
+import { toast } from "react-toastify";
 
 const Dashboard = () => {
-  const { mode, palette } = useContext(ThemeModeContext);
-  const { data: dashboardData } = useGetDashboard();
-  const { data: projectDataCount } = useGetProjectCount();
-  const { data: projectData } = useGetProject();
-  useGetPendingLeave();
-  const { data: employeeData } = useGetEmployee();
-  const { data: eventData } = useGetEvent();
-  const { data: holidayData } = useGetHoliday();
-  const { data: userRoleData } = useGetUserRole();
-  const { data: myData } = useGetLoggedInUser();
+  const { mode } = useContext(ThemeModeContext);
+  const { data, isLoading } = useDashBoardSearch(
+    () => {
+      console.log("Success");
+      toast.success("Successfully Fetch data")
+    },
+    () => {
+      console.log("Error");
+    }
+  );
 
-  const photo = employeeData?.userPhotoPath;
-  const filePath = photo ? DOC_URL + photo : "";
-
+  console.log(data,"data ma");
   const today = new Date();
   const day = new Date().toLocaleDateString("en-us", { weekday: "long" });
 
@@ -47,6 +37,7 @@ const Dashboard = () => {
     year: "numeric",
   };
   const formattedDate = today.toLocaleDateString(undefined, options);
+
   return (
     <>
       <Box
@@ -62,7 +53,7 @@ const Dashboard = () => {
       >
         <CardMedia
           component="img"
-          src={filePath ? filePath : Male}
+          src={Male}
           alt="Img"
           sx={{ width: 66, height: 66, borderRadius: "2rem" }}
         />
@@ -80,7 +71,7 @@ const Dashboard = () => {
               Welcome
             </Typography>
 
-            <Typography variant="h6">{myData?.name}</Typography>
+            <Typography variant="h6">ADMIN</Typography>
           </div>
           <div>
             <Typography variant="h6" textAlign="end" fontWeight={600}>
@@ -111,35 +102,35 @@ const Dashboard = () => {
             <DashboardCard
               title="Users"
               icon={User}
-              count={userRoleData?.length ? userRoleData?.length : "0"}
+              count={data?.totalUser}
               linkTo="/admin/users"
               borderColor="#3399FF"
             />
             <DashboardCard
               title="Employees"
               icon={Employee}
-              count={employeeData?.length ? employeeData.length : "0"}
+              count={data?.totalEmployee}
               linkTo="/admin/employee"
               borderColor="#F8B114"
             />
             <DashboardCard
               title="Events"
               icon={Event}
-              count={eventData ? eventData?.length : "0"}
+              count={data?.totalEvents}
               linkTo="/admin/event"
               borderColor="#108A23"
             />
             <DashboardCard
               title="Holiday"
               icon={Holiday}
-              count={holidayData ? holidayData?.length : "0"}
+              count={data?.totalEvents}
               linkTo="/admin/holiday"
               borderColor="#FF8A7B"
             />
             <DashboardCard
               title="Project"
               icon={Project}
-              count={projectDataCount?.total ? projectDataCount?.total : "0"}
+              count={data?.totalProjects}
               linkTo="/admin/project"
               borderColor="#875923 "
             />
@@ -151,8 +142,8 @@ const Dashboard = () => {
             <Typography variant="h5" sx={{ marginBottom: "16px" }}>
               Employee Information
             </Typography>
-            <BarChatDiagram dashboardData={dashboardData} />
-            <PieChartDiagram dashboardData={dashboardData} />
+            <BarChatDiagram dashboardData={data} />
+            {/* <PieChartDiagram dashboardData={dashboardData} /> */}
           </Grid>
           <Grid item md={6} xs={12}>
             <div>
@@ -166,17 +157,17 @@ const Dashboard = () => {
                 boxShadow="0 4px 8px 3px rgba(0,0,0,.15), 0 1px 3px rgba(0,0,0,.3)"
               >
                 <Typography variant="v6">
-                  Total Project : {projectDataCount?.total}
+                  Total Project : {data?.projectInfo?.total}
                 </Typography>
                 <div style={{ marginTop: "16px" }}>
-                  <ProjectProgressCard projectDataCount={projectDataCount} />
+                  <ProjectProgressCard projectDataCount={data} />
                 </div>
               </Grid>
             </div>
 
-            <Grid sx={{ mt: "32px" }}>
-              <ProjectTable projectData={projectData} />
-            </Grid>
+            {/* <Grid sx={{ mt: "32px" }}>
+              <ProjectTable projectData={data} />
+            </Grid> */}
             <Grid item xs={12} sm={6}>
               {/* <PendingLeaveTable
               pendingLeaveData={pendingLeaveData}
