@@ -397,7 +397,7 @@ export default function AdminSidebar() {
                     backgroundColor:
                       pathname.includes(menu.path) &&
                       // menu.item == "employee" &&
-                      '#ace8639e',
+                      '#C8E6C9',
                   }}
                 >
                   <ListItemIcon
@@ -446,7 +446,7 @@ export default function AdminSidebar() {
                           <ListItemButton
                             sx={{
                               backgroundColor:
-                                pathname.includes(subMenu.path) && '#ace8639e',
+                                pathname.includes(subMenu.path) && '#E8F5E9',
                               color: mode === 'dark' && 'white',
                             }}
                           >
@@ -473,8 +473,7 @@ export default function AdminSidebar() {
           }}
         >
           <Button
-            variant='contained'
-            sx={{ backgroundColor: '#6DAB23' }}
+            variant='outlined'
             onClick={() => {
               removeUser();
               navigate('/');
