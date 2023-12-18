@@ -275,17 +275,17 @@ const EmployeeBasicInfoForm = ({ formik }) => {
       </Grid>
       <Grid item xs={12} sm={6} md={4}>
         <TextField
-          id='companyId'
-          name='companyId'
+          id='branchId'
+          name='branchId'
           select
           label='Branch Name'
           placeholder='Select your branch'
           fullWidth
           required
-          value={!loadingCompany && formik.values.companyId}
+          value={!loadingCompany && formik.values.branchId}
           onChange={formik.handleChange}
-          error={formik.touched.companyId && Boolean(formik.errors.companyId)}
-          helperText={formik.touched.companyId && formik.errors.companyId}
+          error={formik.touched.branchId && Boolean(formik.errors.branchId)}
+          helperText={formik.touched.branchId && formik.errors.branchId}
           variant='outlined'
         >
           {!loadingCompany &&
