@@ -39,12 +39,12 @@ export const ProjectProgressCard = ({ projectDataCount }) => {
               marginTop='1rem'
             >
               <Typography> {projectDataCount?.projectInfo?.completed}</Typography>
-              <Typography>
+              {/* <Typography>
                 {Math.ceil(
                   (projectDataCount?.projectInfo?.completed / projectDataCount?.projectInfo?.total) * 100
                 )}
                 %
-              </Typography>
+              </Typography> */}
             </Stack>
             <BorderLinearProgress
               variant='determinate'
@@ -63,12 +63,12 @@ export const ProjectProgressCard = ({ projectDataCount }) => {
               marginTop='1rem'
             >
               <Typography> {projectDataCount?.projectInfo?.pending}</Typography>
-              <Typography>
+              {/* <Typography>
                 {Math.ceil(
                   // (projectDataCount?.pending / projectDataCount?.total) * 100
                 )}
                 %
-              </Typography>
+              </Typography> */}
             </Stack>
             <BorderLinearProgress
               variant='determinate'
@@ -88,14 +88,14 @@ export const ProjectProgressCard = ({ projectDataCount }) => {
               flexDirection='row'
               marginTop='1rem'
             >
-              {/* <Typography> {projectDataCount?.workInProgress}</Typography> */}
-              <Typography>
+              <Typography> {projectDataCount?.projectInfo?.workInProgress}</Typography>
+              {/* <Typography>
                 {Math.ceil(
                   // (projectDataCount?.workInProgress / projectDataCount?.total) *
                     100
                 )}
                 %
-              </Typography>
+              </Typography> */}
             </Stack>
             <BorderLinearProgress
               variant='determinate'
@@ -115,13 +115,13 @@ export const ProjectProgressCard = ({ projectDataCount }) => {
               flexDirection='row'
               marginTop='1rem'
             >
-              {/* <Typography>{projectDataCount?.delayed}</Typography> */}
-              <Typography>
+              <Typography>{projectDataCount?.projectInfo?.delayed}</Typography>
+              {/* <Typography>
                 {Math.ceil(
                   // (projectDataCount?.delayed / projectDataCount?.total) * 100
                 )}
                 %
-              </Typography>
+              </Typography> */}
             </Stack>
             <BorderLinearProgress
               variant='determinate'

@@ -31,37 +31,74 @@
   box-shadow: 8px 8px 30px 0px rgba(0, 0, 0, 0.25),
     4px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
+@media (min-width: 921px) {
+  .login-bg-design {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .largDesign {
+    display: flex !important;
+    flex-direction: column !important;
+    padding: 1rem !important;
+    gap: 22px;
+    align-items: center;
+    justify-content: center;
+  }
+  .smallDesign {
+    display: none !important;
+  }
+  .side-box {
+    position: absolute !important;
+    top:15.5% !important
+  }
+}
+
+@media (min-height: 900px) {
+  .side-box {
+    top: 25.5% !important;
+  }
+}
 
 @media (max-width: 920px) {
   .login-bg-design {
     display: grid;
-    grid-template-columns:  1fr;  
-    grid-template-rows: 1fr ;
+    grid-template-columns: 1fr;
   }
-  .topAt920{
+  .topAt920 {
     grid-row: 1;
   }
   .side-box {
-    height: "34px";
-    padding: "5rem";
-  }
-  .login-hrms {
-    font-size: small;
+    position: absolute !important;
+    top:7.5% !important;
+    margin-right: 2rem !important;
+
   }
   .login-hrms {
     font-size: small;
   }
   .imggroup {
-    width: "130px";
-    height: "130px";
+    display: none;
+  }
+  .largDesign {
+    display: none !important;
+  }
+  .smallDesign {
+    display: flex !important;
+    flex-direction: column !important;
+    padding: 1rem !important;
+    gap: 22px;
+    align-items: center;
+    justify-content: center;
+    padding-right: 2rem !important;
+  }
+  .login-lines{
+    display: none !important;
+  }
+  .css-lmdotc{
+    display: none !important;
   }
 }
 .css-oqchhx-MuiContainer-root {
   padding: 0 !important;
 }
-@media (min-width: 921px) {
-.login-bg-design {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-}
+
