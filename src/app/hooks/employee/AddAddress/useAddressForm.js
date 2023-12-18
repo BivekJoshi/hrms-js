@@ -1,11 +1,11 @@
-import { useFormik } from 'formik';
-import { AddressSchema } from './AddressSchema';
+import { useFormik } from "formik";
+import { AddressSchema } from "./AddressSchema";
 import {
   useEditAddress,
   usePermanentAddAddress,
   useTemporaryAddress,
-} from '../useAddress';
-import { toast } from 'react-toastify';
+} from "../useAddress";
+import { toast } from "react-toastify";
 
 export const usePermanentAddressForm = ({
   data,
@@ -16,11 +16,10 @@ export const usePermanentAddressForm = ({
   const { mutate: editMutate } = useEditAddress({});
 
   const addressDetails = !isLoading && data?.addresses;
-
   const initialValues = {
     addresses: [
-      createAddressObject(addressDetails[0]),
-      createAddressObject(addressDetails[1]),
+      createAddressObject(addressDetails),
+      createAddressObject(addressDetails),
     ],
   };
 
@@ -34,18 +33,18 @@ export const usePermanentAddressForm = ({
   function createAddressObject(details) {
     return {
       addressType: details?.addressType,
-      id: details?.id || '',
-      country: details?.country || '',
-      province: details?.province || '',
-      district: details?.district || '',
-      wardNumber: details?.wardNumber || '',
-      city: details?.city || '',
-      street: details?.street || '',
+      id: details?.id || "",
+      country: details?.country || "",
+      province: details?.province || "",
+      district: details?.district || "",
+      wardNumber: details?.wardNumber || "",
+      city: details?.city || "",
+      street: details?.street || "",
     };
   }
 
   function handleSubmit(values) {
-    const hasAddresses = addressDetails?.length > 0;
+    const hasAddresses = addressDetails ? addressDetails?.length > 0 : "";
 
     if (hasAddresses) {
       handleEditRequest(values);
@@ -58,19 +57,19 @@ export const usePermanentAddressForm = ({
     const { addresses } = values;
 
     // Check if the temporary address is empty (province is empty)
-    if (addresses[1]?.province === '') {
+    if (addresses[1]?.province === "") {
       // If temporary address is empty, only update the permanent address
-      permanentMutate({ ...addresses[0], addressType: 'PERMANENT' });
+      permanentMutate({ ...addresses[0], addressType: "PERMANENT" });
     } else {
       // If temporary address is not empty, update both permanent and temporary addresses
       permanentMutate({
-        ...addresses[0],
-        addressType: 'PERMANENT',
+        ...addresses,
+        addressType: "PERMANENT",
       });
 
       temporaryMutate({
-        ...addresses[1],
-        addressType: 'TEMPORARY',
+        ...addresses,
+        addressType: "TEMPORARY",
       });
     }
   }
@@ -90,10 +89,10 @@ export const usePermanentAddressForm = ({
     };
 
     if (temporary?.addressType) {
-      handleEditMutate(permanent, 'Permanent address edited successfully');
-      handleEditMutate(temporary, 'Temporary address edited successfully');
+      handleEditMutate(permanent, "Permanent address edited successfully");
+      handleEditMutate(temporary, "Temporary address edited successfully");
     } else {
-      handleEditMutate(permanent, 'Address edited successfully');
+      handleEditMutate(permanent, "Address edited successfully");
     }
   }
 

@@ -3,7 +3,7 @@ import AddBankSchema from './BankSchema';
 import { useAddBank, useEditBank } from '../useBank';
 
 const useAddBankForm = ({ data, employeeLoading: isLoading }) => {
-  const bankDetails = !isLoading && data?.bankDetailSet[0];
+  const bankDetails = !isLoading && data?.bankDetailSet;
   const { mutate } = useAddBank({});
   const { mutate: editMutate } = useEditBank({});
 
