@@ -1,6 +1,14 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { Box, Button, Chip, Grid, Stack, Tooltip, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  Chip,
+  Grid,
+  Stack,
+  Tooltip,
+  Typography,
+} from '@mui/material';
 
 import { useDeleteLeave } from '../../hooks/leave/useLeave';
 
@@ -55,38 +63,34 @@ const Leave = () => {
     }
   );
 
+  console.log('🚀 ~ file: Leave.jsx:57 ~ Leave ~ data:', data);
   const columns = [
     {
       title: 'SN',
       field: 'id',
       sortable: false,
-      width: '10px',
       sorting: false,
       render: (rowData) => rowData.tableData.id + 1,
     },
     {
       title: 'Employee Name',
       field: 'employeeName',
-      width: '100px',
       sorting: false,
     },
     {
       title: 'Leave Type',
       field: 'leaveType',
-      width: '100px',
       sorting: false,
     },
     {
       title: 'From',
       field: 'fromDate',
-      width: '60px',
       emptyValue: '-',
       sorting: false,
     },
     {
       title: 'To',
       field: 'toDate',
-      width: '60px',
       emptyValue: '-',
       sorting: false,
     },
@@ -94,7 +98,6 @@ const Leave = () => {
       title: 'Status',
       field: 'leaveStatus',
       emptyValue: '-',
-      width: '100px',
       cellStyle: {
         whiteSpace: 'nowrap',
       },
@@ -126,16 +129,11 @@ const Leave = () => {
     {
       title: 'Leave Reason',
       field: 'leaveReason',
-      width: '240px',
       emptyValue: '-',
       render: (rowData) => {
         return (
           <Tooltip
-            title={
-              <div style={{ maxHeight: '100px', overflowY: 'auto' }}>
-                {rowData?.leaveReason}
-              </div>
-            }
+            title={<div>{rowData?.leaveReason}</div>}
             placement='top-start'
             arrow
           >
@@ -202,12 +200,17 @@ const Leave = () => {
         );
 
         return (
-          <Grid display="flex" flexDirection='row' gap={0} justifyContent="center">
+          <Grid
+            display='flex'
+            flexDirection='row'
+            gap={0}
+            justifyContent='center'
+          >
             <Button
               color='primary'
               onClick={() => handleEditLeave(rowData)}
               disabled={isApprovedOrRejected}
-              sx={{padding:"0"}}
+              sx={{ padding: '0' }}
             >
               <ModeEditOutlineIcon />
             </Button>
@@ -243,7 +246,6 @@ const Leave = () => {
       <CustomTable
         columns={columns}
         data={data}
-        tableLayout='fixed'
         title='Leave Data'
         isLoading={loading}
       />

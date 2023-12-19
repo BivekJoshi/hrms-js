@@ -6,7 +6,7 @@ import tableIcons from '../../../theme/overrides/TableIcon';
 const CustomTable = (props) => {
   const { palette } = useContext(ThemeModeContext); // Accessing mode from context
   return (
-    <div>
+    <div style={{ height: '100%' }}>
       <MaterialTable
         icons={tableIcons}
         columns={props?.columns}
@@ -17,7 +17,6 @@ const CustomTable = (props) => {
           search: props?.search || true,
           tableLayout: props?.tableLayout,
           padding: 'dense',
-
           pageSize: props?.pageSize || 10,
           emptyRowsWhenPaging: props?.emptyRowsWhenPaging || false,
           exportButton: props?.exportButton || false,
