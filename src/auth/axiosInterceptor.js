@@ -59,7 +59,7 @@ axiosInstance.interceptors.response.use(
         errorMessage === 'user_disabled'
       ) {
         removeUser();
-        window.location.replace('/login');
+        window.location.replace('/');
         return Promise.reject(error);
       } else if (
         errorMessage ===
