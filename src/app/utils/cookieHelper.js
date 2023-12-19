@@ -11,5 +11,6 @@ export const getUser = () => {
 export const removeUser = () => {
   localStorage.removeItem(STORAGE_KEY);
   localStorage.clear();
+  window.location.replace('/');
 };
 // window.addEventListener("beforeunload", removeUser);

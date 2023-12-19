@@ -61,81 +61,7 @@ const ApplyLeave = () => {
 
   const leaveIcon = [
     {
-      id: 4,
-      leaveType: "FESTIVAL ",
-      icon: (
-        <GiFireworkRocket
-          style={{
-            width: "3rem",
-            color: mode === "light" ? "#6DAB23" : "white",
-          }}
-        />
-      ),
-    },
-    {
-      id: 5,
-      leaveType: "MATERNITY ",
-      icon: (
-        <MdPregnantWoman
-          style={{
-            width: "3rem",
-            color: mode === "light" ? "#6DAB23" : "white",
-          }}
-        />
-      ),
-    },
-    {
-      id: 3,
-      leaveType: "ANNUAL ",
-      icon: (
-        <MdOutlineFlightTakeoff
-          style={{
-            width: "3rem",
-            color: mode === "light" ? "#6DAB23" : "white",
-          }}
-        />
-      ),
-    },
-    {
-      id: 6,
-      leaveType: "PATERNITY ",
-      icon: (
-        <FaBaby
-          style={{
-            width: "2rem",
-            color: mode === "light" ? "#6DAB23" : "white",
-          }}
-        />
-      ),
-    },
-    {
-      id: 7,
-      leaveType: "MARRIAGE ",
-      icon: (
-        <GiBigDiamondRing
-          style={{
-            width: "3rem",
-            height: "3rem",
-            color: mode === "light" ? "#6DAB23" : "white",
-          }}
-        />
-      ),
-    },
-    {
       id: 1,
-      leaveType: "CASUAL ",
-      icon: (
-        <KitesurfingIcon
-          style={{
-            width: "3rem",
-            height: "3rem",
-            color: mode === "light" ? "#6DAB23" : "white",
-          }}
-        />
-      ),
-    },
-    {
-      id: 9,
       leaveType: "SICK ",
       icon: (
         <BabyChangingStationIcon
@@ -148,10 +74,47 @@ const ApplyLeave = () => {
       ),
     },
     {
-      id: 8,
-      leaveType: "MATERNITY ADDITIONAL ",
+      id: 2,
+      leaveType: "ANNUAL ",
       icon: (
-        <BabyChangingStationIcon
+        <MdOutlineFlightTakeoff
+          style={{
+            width: "3rem",
+            color: mode === "light" ? "#6DAB23" : "white",
+          }}
+        />
+      ),
+    },
+    {
+      id: 3,
+      leaveType: "MATERNITY ",
+      icon: (
+        <MdPregnantWoman
+          style={{
+            width: "3rem",
+            color: mode === "light" ? "#6DAB23" : "white",
+          }}
+        />
+      ),
+    },
+
+    {
+      id: 4,
+      leaveType: "PATERNITY ",
+      icon: (
+        <FaBaby
+          style={{
+            width: "2rem",
+            color: mode === "light" ? "#6DAB23" : "white",
+          }}
+        />
+      ),
+    },
+    {
+      id: 5,
+      leaveType: "UNPAID ",
+      icon: (
+        <KitesurfingIcon
           style={{
             width: "3rem",
             height: "3rem",
