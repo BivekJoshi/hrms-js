@@ -20,6 +20,12 @@ export const getAddressById = (id) => {
     return data;
   }
 };
+export const getEmployeeAddressById = (id) => {
+  if (id) {
+    const data = axiosInstance.get(`/address/employee-id/${id}`);
+    return data;
+  }
+};
 
 export const editAddress = async (formData, id) => {
   if (id) {

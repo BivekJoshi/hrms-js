@@ -18,7 +18,7 @@ const EmployeeQualificationDetailForm = ({ formik, isLoading }) => {
   const deleteQualificationMutation = useDeleteQualification({});
   const handleDeleteQualification = (study) => {
     if (study.id) {
-      deleteQualificationMutation.mutate(study.id);
+      deleteQualificationMutation?.mutate(study.id);
     }
   };
 

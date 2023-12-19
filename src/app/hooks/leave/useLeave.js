@@ -11,8 +11,17 @@ import {
   getLoggedInUserLeave,
   getLoggedInUserLeaveBalance,
   getleave,
+  getleaveOfUser,
   getpendingleave,
 } from "../../api/leave/leave-api";
+
+/*________________________GET ALL_____________________________________*/
+export const useGetleaveOfUser = () => {
+  return useQuery(["getleaveOfUser"], () => getleaveOfUser(), {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
+};
 
 /*________________________GET ALL_____________________________________*/
 export const useGetLeave = () => {

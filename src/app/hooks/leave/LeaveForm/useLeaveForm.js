@@ -22,7 +22,7 @@ const useLeaveForm = (data) => {
       leaveRemarks: data?.leaveRemarks || '',
       isHalfDay: data?.isHalfDay || false,
       applyLeaveDays: data?.applyLeaveDays || '',
-      id: data?.id,
+      id: data?.leaveId || '',
     },
     validationSchema: LeaveSchema,
     enableReinitialize: 'true',

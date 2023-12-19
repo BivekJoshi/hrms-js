@@ -28,10 +28,6 @@ import EmployeeTableView from './EmployeeView/EmployeePage/EmployeeTableView';
 const Employee = () => {
   const { mode } = React.useContext(ThemeModeContext);
   const { data: employeeData, isLoading } = useGetEmployee();
-  console.log(
-    '🚀 ~ file: Employee.jsx:31 ~ Employee ~ employeeData:',
-    employeeData
-  );
 
   const style = {
     position: 'absolute',

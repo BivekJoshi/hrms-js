@@ -1,19 +1,21 @@
-import { Box } from "@mui/system";
-import React, { useContext } from "react";
-import "../../Style/Style.css";
-import { ButtonComponent } from "../../../components/Button/ButtonComponent";
-import { Divider, Typography } from "@mui/material";
-import ThemeModeContext from "../../../../theme/ThemeModeContext";
-import { useNavigate } from "react-router-dom";
-import { useGetLoggedInUserLeaveBalance } from "../../../hooks/leave/useLeave";
-import { uselogInEemployeeResource } from "../../../hooks/resource/employeeResource/useEmployeeResource";
-import { useGetOfficeResource } from "../../../hooks/resource/officeResource/useOfficeResource";
-import { PendingTask } from "../Component/PendingTask";
+import { Box } from '@mui/system';
+import React, { useContext } from 'react';
+import '../../Style/Style.css';
+import { ButtonComponent } from '../../../components/Button/ButtonComponent';
+import { Divider, Typography } from '@mui/material';
+import ThemeModeContext from '../../../../theme/ThemeModeContext';
+import { useNavigate } from 'react-router-dom';
+import { useGetLoggedInUserLeaveBalance } from '../../../hooks/leave/useLeave';
+import { uselogInEemployeeResource } from '../../../hooks/resource/employeeResource/useEmployeeResource';
+import { useGetOfficeResource } from '../../../hooks/resource/officeResource/useOfficeResource';
+import { PendingTask } from '../Component/PendingTask';
 
 export const RightEmployDashbord = ({ employData }) => {
   const navigate = useNavigate();
   const { data: leavebalance } = useGetLoggedInUserLeaveBalance();
-  const { data: resourceLogInUser } = uselogInEemployeeResource(employData?.employeeId);
+  // const { data: resourceLogInUser } = uselogInEemployeeResource(
+  //   employData?.employeeId
+  // );
   const { data: officeresource } = useGetOfficeResource();
 
   const getResourceName = (logistic) => {
@@ -22,21 +24,21 @@ export const RightEmployDashbord = ({ employData }) => {
     );
     return resourceName?.name;
   };
-  
+
   const sumOfLeaveTaken = Array.isArray(leavebalance)
     ? leavebalance?.reduce((accumulator, currentValue) => {
         return accumulator + currentValue?.leaveTaken;
       }, 0)
-    : "";
+    : '';
 
   const sumOfLeaveBalance = Array.isArray(leavebalance)
     ? leavebalance.reduce((accumulator, currentValue) => {
         return accumulator + currentValue.leaveBalance;
       }, 0)
-    : "";
+    : '';
   const avegLeaveBalance = Array.isArray(leavebalance)
     ? sumOfLeaveBalance / leavebalance.length
-    : "";
+    : '';
 
   const { mode } = useContext(ThemeModeContext);
   return (
@@ -48,45 +50,45 @@ export const RightEmployDashbord = ({ employData }) => {
         </Box>
       </Box> */}
       <Box>
-        <Typography variant="h5">Your Leaves</Typography>
+        <Typography variant='h5'>Your Leaves</Typography>
         <Box
           className={
-            mode === "light"
-              ? "employeeDeshbordBG employeeDeshbord"
-              : "employeeDeshbordBGDark employeeDeshbord"
+            mode === 'light'
+              ? 'employeeDeshbordBG employeeDeshbord'
+              : 'employeeDeshbordBGDark employeeDeshbord'
           }
-          display="flex"
-          marginTop="1rem"
-          flexDirection="column"
-          justifyContent="center"
-          padding=" 1rem"
-          boxShadow="7"
-          borderRadius="10px"
+          display='flex'
+          marginTop='1rem'
+          flexDirection='column'
+          justifyContent='center'
+          padding=' 1rem'
+          boxShadow='7'
+          borderRadius='10px'
         >
           <Box
-            display="flex"
-            flexDirection="row"
-            justifyContent="space-between"
+            display='flex'
+            flexDirection='row'
+            justifyContent='space-between'
           >
             <Box>
               <Typography>{sumOfLeaveTaken}</Typography>LEAVE TAKEN
             </Box>
-            <Divider sx={{ border: "1px solid black" }} />
-            <Box alignSelf="center">
+            <Divider sx={{ border: '1px solid black' }} />
+            <Box alignSelf='center'>
               <Typography>{avegLeaveBalance}</Typography> REMAINING
             </Box>
           </Box>
-          <Box alignSelf="center" paddingTop="2rem">
+          <Box alignSelf='center' paddingTop='2rem'>
             <ButtonComponent
-              buttonName={"APPLY Leave"}
+              buttonName={'APPLY Leave'}
               OnClick={() => {
-                navigate("/employee/applyleavefield");
+                navigate('/employee/applyleavefield');
               }}
             />
           </Box>
         </Box>
       </Box>
-      {resourceLogInUser && (
+      {/* {resourceLogInUser && (
         <Box margin="1rem 0">
           <Typography variant="h5" style={{ margin: "1rem 0" }}>Logistic Used</Typography>
           <Box
@@ -115,7 +117,7 @@ export const RightEmployDashbord = ({ employData }) => {
               : ""}
           </Box>
         </Box>
-      )}
+      )} */}
     </Box>
   );
 };

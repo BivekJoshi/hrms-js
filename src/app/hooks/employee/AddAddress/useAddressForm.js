@@ -2,24 +2,26 @@ import { useFormik } from 'formik';
 import { AddressSchema } from './AddressSchema';
 import {
   useEditAddress,
-  useGetAddressById,
   usePermanentAddAddress,
   useTemporaryAddress,
 } from '../useAddress';
 import { toast } from 'react-toastify';
-import { useParams } from 'react-router-dom';
 
-export const usePermanentAddressForm = (addressData) => {
+export const usePermanentAddressForm = (data, isLoading) => {
   const { mutate: permanentMutate } = usePermanentAddAddress({});
   const { mutate: temporaryMutate } = useTemporaryAddress({});
   const { mutate: editMutate } = useEditAddress({});
 
-  const addressDetails = addressData;
+  const addressDetails = !isLoading && data;
+  console.log(
+    '🚀 ~ file: useAddressForm.js:16 ~ usePermanentAddressForm ~ addressDetails:',
+    addressDetails
+  );
 
   const initialValues = {
     addresses: [
-      createAddressObject(addressDetails?.[0]),
-      createAddressObject(addressDetails?.[1]),
+      createAddressObject(addressDetails),
+      createAddressObject(addressDetails),
     ],
   };
   console.log('Data:', addressData);
@@ -47,7 +49,7 @@ console.log('Initial Values:', initialValues);
   }
 
   function handleSubmit(values) {
-    const hasAddresses = addressDetails?.length > 0;
+    const hasAddresses = addressDetails ? addressDetails?.length > 0 : '';
 
     if (hasAddresses) {
       handleEditRequest(values);
@@ -66,12 +68,12 @@ console.log('Initial Values:', initialValues);
     } else {
       // If temporary address is not empty, update both permanent and temporary addresses
       permanentMutate({
-        ...addresses[0],
+        ...addresses,
         addressType: 'PERMANENT',
       });
 
       temporaryMutate({
-        ...addresses[1],
+        ...addresses,
         addressType: 'TEMPORARY',
       });
     }
