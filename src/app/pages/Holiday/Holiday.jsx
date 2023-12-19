@@ -55,8 +55,12 @@ const Holiday = ({ permissions }) => {
     }
   };
   const handleOpenModal = (e) => {
-    setEventGetID(e?.event?._def?.publicId);
-    setOpenModal(true);
+    const hasPermission = permissions?.canEdit;
+    // console.log({"hasPermission": hasPermission})
+    if(hasPermission) {
+      setEventGetID(e?.event?._def?.publicId);
+      setOpenModal(true);
+    }
   };
 
   const handleEmailButtonClick = () => {

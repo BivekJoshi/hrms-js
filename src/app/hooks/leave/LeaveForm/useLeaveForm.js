@@ -25,10 +25,10 @@ const useLeaveForm = (data) => {
       applyLeaveDays: data?.applyLeaveDays || '',
       id: data?.leaveId || '',
     },
-    validationSchema: LeaveSchema,
+    // validationSchema: LeaveSchema,
     enableReinitialize: true,
     onSubmit: (values) => {
-      if (data?.id) {
+      if (data?.leaveId) {
         handledEditRequest(values);
       } else {
         handleRequest(values);

@@ -55,28 +55,32 @@ const Event = ({ permissions }) => {
     }
   };
   const handleOpenModal = (e) => {
-    setEventGetID(e?.event?._def?.publicId);
-    setOpenModal(true);
+    const hasPermission = permissions?.canEdit;
+    // console.log({"hasPermission": hasPermission})
+    if(hasPermission) {
+      setEventGetID(e?.event?._def?.publicId);
+      setOpenModal(true);
+    }
   };
 
   const handleEmailButtonClick = () => {
     setOpenEmailModal(true);
     setOpenSubmitModal(false);
   };
-
+// console.log({"per": permissions?.canAdd})
   return (
     <>
-      {isEmployee || isHrClerk ? null : (
+     
         <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
           <HocButton
-            permissions={permissions}
+            permissions={permissions?.canAdd}
             color={"#fff"}
             variant={"contained"}
             onClick={() => setOpenAddModal(true)}
             buttonName={"+Add Event"}
           />
         </Box>
-      )}
+    
       <br />
 
       {openAddModal && (

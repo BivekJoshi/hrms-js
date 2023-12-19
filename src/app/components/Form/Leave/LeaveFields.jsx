@@ -30,6 +30,7 @@ const leaveStatus = [
 
 export const EditLeaveFields = ({ onClose, isLoading, data }) => {
   const { isManager, isSuperAdmin } = useAuth();
+ 
   // const { data: employeeData } = useGetEmployee();
   // const { data: leaveTypeData } = useGetLeaveType();
   const { formik } = useLeaveForm(data);
@@ -165,7 +166,6 @@ export const EditLeaveFields = ({ onClose, isLoading, data }) => {
 };
 
 export const LeaveFields = ({ onClose, isLoading, data }) => {
-  console.log('🚀 ~ file: LeaveFields.jsx:168 ~ LeaveFields ~ data:', data);
   const { data: employeeData } = useGetEmployee();
   const { data: leaveTypeData } = useGetLeaveType();
   const { formik } = useLeaveForm(data);

@@ -10,7 +10,7 @@ import {
   Typography,
 } from '@mui/material';
 
-import { useDeleteLeave } from '../../hooks/leave/useLeave';
+import { useDeleteLeave, useGetLeave, useGetleaveOfUser } from '../../hooks/leave/useLeave';
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import DeleteIcon from '@mui/icons-material/Delete';
 import { AddLeaveModal, EditLeaveModal } from './LeaveModal/LeaveModal';
@@ -45,7 +45,7 @@ const Leave = ({ permissions }) => {
   };
 
   const handleConfirmDelete = () => {
-    deleteLeaveMutation.mutate(deletedLeave.id);
+    deleteLeaveMutation.mutate(deletedLeave?.leaveId);
     setOpenDeleteModal(false);
   };
 
@@ -54,17 +54,8 @@ const Leave = ({ permissions }) => {
     setOpenEditModal(true);
   };
 
-  const { data, isLoading: loading } = useLeaveDataSearch(
-    () => {
-      console.log('Success');
-      toast.success('Successfully Fetch');
-    },
-    () => {
-      console.log('Error');
-    }
-  );
+  const { data, isLoading: loading } = useGetleaveOfUser ();
 
-  console.log('🚀 ~ file: Leave.jsx:57 ~ Leave ~ data:', data);
   const columns = [
     {
       title: 'SN',
