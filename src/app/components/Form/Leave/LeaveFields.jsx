@@ -29,7 +29,8 @@ const leaveStatus = [
 ];
 
 export const EditLeaveFields = ({ onClose, isLoading, data }) => {
-  const { isManager } = useAuth();
+  const { isManager, isSuperAdmin } = useAuth();
+  console.log({"useAuth": isSuperAdmin})
   const { data: employeeData } = useGetEmployee();
   const { data: leaveTypeData } = useGetLeaveType();
   const { formik } = useLeaveForm(data);
@@ -70,7 +71,7 @@ export const EditLeaveFields = ({ onClose, isLoading, data }) => {
   };
 
   const submitButtonText = data ? 'Update Leave' : 'Add Leave';
-  if (isManager) {
+  if (isManager || isSuperAdmin) {
     return (
       !isLoading && (
         <Grid container spacing={3}>
@@ -170,6 +171,8 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
   const { formik } = useLeaveForm(data);
   const { mode } = useContext(ThemeModeContext);
   const employeeId = data?.employeeId;
+
+  console.log({"data": data})
 
   const capitalize = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();

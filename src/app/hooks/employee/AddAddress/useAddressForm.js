@@ -9,12 +9,12 @@ import {
 import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
 
-export const usePermanentAddressForm = (isLoading, data) => {
+export const usePermanentAddressForm = (addressData) => {
   const { mutate: permanentMutate } = usePermanentAddAddress({});
   const { mutate: temporaryMutate } = useTemporaryAddress({});
   const { mutate: editMutate } = useEditAddress({});
 
-  const addressDetails = !isLoading && data;
+  const addressDetails = addressData;
 
   const initialValues = {
     addresses: [
@@ -22,6 +22,9 @@ export const usePermanentAddressForm = (isLoading, data) => {
       createAddressObject(addressDetails?.[1]),
     ],
   };
+  console.log('Data:', addressData);
+console.log('Initial Values:', initialValues);
+
 
   const formik = useFormik({
     initialValues,

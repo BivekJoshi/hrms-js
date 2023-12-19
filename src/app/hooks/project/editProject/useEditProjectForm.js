@@ -5,6 +5,7 @@ import { ProjectSchema } from '../validation/ProjectSchema';
 
 const useEditProjectForm = (data) => {
   const { mutate } = useEditProject({});
+  console.log({"data": data})
 
   const formik = useFormik({
     initialValues: {
@@ -12,8 +13,8 @@ const useEditProjectForm = (data) => {
       startDate: data?.startDate || '',
       endDate: data?.endDate || '',
       taskStatus: data?.taskStatus || '',
-      projectLeadId: data?.projectLeaderId || '',
-      branchId: data?.associateCompanies[0].id || '',
+      projectLeadId: data?.projectLeadId || '',
+      branchId: data?.branches?.[0]?.id || '',
       id: data?.id,
     },
     validationSchema: ProjectSchema,

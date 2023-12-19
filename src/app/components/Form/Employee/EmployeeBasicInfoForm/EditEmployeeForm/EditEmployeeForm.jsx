@@ -37,6 +37,7 @@ const EditEmployeeForm = () => {
   const { data, isLoading: employeeLoading } = useGetEmployeeById(id);
   const { data: addressData, isLoading: getaddressLoading } =
     useGetAddressById(id);
+    console.log({"addressData": addressData})
 
   const { formik: qualificationFormik, isLoading: isLoadingQualification } =
     useQualificationForm();
@@ -46,7 +47,7 @@ const EditEmployeeForm = () => {
   const { formik, isLoading } = useEditEmployeeForm({ data, employeeLoading });
 
   const { formik: permanentFormik, isLoading: addressLoading } =
-    usePermanentAddressForm(addressData, getaddressLoading);
+    usePermanentAddressForm(addressData);
 
   const { formik: bankFormik } = useAddBankForm({ data, employeeLoading });
 

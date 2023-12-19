@@ -70,7 +70,7 @@ const Leave = ({ isLoading }) => {
   };
   const getLeaveTypeName = (rowData) => {
     const leaveTypeId = rowData.leaveTypeId;
-    const leaveType = leaveTypeData.find((leave) => leave.id === leaveTypeId);
+    const leaveType = leaveTypeData && leaveTypeData.find((leave) => leave.id === leaveTypeId);
     const name = `${capitalizeFirstLetter(leaveType?.leaveName)} Leave`;
     return name;
   };
@@ -295,7 +295,7 @@ const Leave = ({ isLoading }) => {
       />
       {openEditModal && (
         <EditLeaveModal
-          id={editedLeave?.id}
+          data={editedLeave}
           open={openEditModal}
           handleCloseModal={handleCloseEditModal}
           title={"Edit Leave"}
