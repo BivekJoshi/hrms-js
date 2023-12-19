@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   useDeleteRole,
   useGetRole,
-} from '../../../../hooks/auth/roles/useRole';
-import { Box, Button, Typography, Stack } from '@mui/material';
-import { AddRoleModal, EditRoleModal } from './AddRoleModal';
-import DeleteConfirmationModal from '../../../../components/Modal/DeleteConfirmationModal';
+} from "../../../../hooks/auth/roles/useRole";
+import { Box, Button, Typography, Stack } from "@mui/material";
+import { AddRoleModal, EditRoleModal } from "./AddRoleModal";
+import DeleteConfirmationModal from "../../../../components/Modal/DeleteConfirmationModal";
+import { ButtonComponent } from '../../../../components/Button/ButtonComponent';
 
 const Roles = () => {
   const { data: roleData } = useGetRole();
@@ -24,20 +25,20 @@ const Roles = () => {
 
   const getRoleStyle = (roleName) => {
     switch (roleName) {
-      case 'ROLE_SUPER_ADMIN':
-        return { name: 'Super Admin' };
-      case 'ROLE_MANAGER':
-        return { name: 'Manager' };
-      case 'ROLE_ADMIN':
-        return { name: 'Admin' };
-      case 'ROLE_HR_ADMIN':
-        return { name: 'HR Admin' };
-      case 'ROLE_HR_CLERK':
-        return { name: 'HR Clerk' };
-      case 'ROLE_EMPLOYEE':
-        return { name: 'Employee' };
-      case 'CLIENT':
-        return { name: 'Client' };
+      case "ROLE_SUPER_ADMIN":
+        return { name: "Super Admin" };
+      case "ROLE_MANAGER":
+        return { name: "Manager" };
+      case "ROLE_ADMIN":
+        return { name: "Admin" };
+      case "ROLE_HR_ADMIN":
+        return { name: "HR Admin" };
+      case "ROLE_HR_CLERK":
+        return { name: "HR Clerk" };
+      case "ROLE_EMPLOYEE":
+        return { name: "Employee" };
+      case "CLIENT":
+        return { name: "Client" };
       default:
         return { name: roleName };
     }
@@ -63,21 +64,20 @@ const Roles = () => {
     <>
       <Box
         sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '1rem',
-          marginY: '1rem',
+          display: "flex",
+          flexDirection: "column",
+          gap: "1rem",
+          marginY: "1rem",
         }}
       >
-        <Stack sx={{ display: 'flex', flexDirection: 'row-reverse' }}>
-          {/* <Button
-            color="primary"
+        <Stack sx={{ display: "flex", flexDirection: "row-reverse" }}>
+          <ButtonComponent
+            color="#fff"
             variant="contained"
             sx={{ maxWidth: "fit-content" }}
-            onClick={handleAddOpenModal}
-          >
-            Add
-          </Button> */}
+            OnClick={handleAddOpenModal}
+            buttonName={"+ Add Role"}
+          />
         </Stack>
         {roleData &&
           roleData.map((role, index) => {
@@ -86,28 +86,28 @@ const Roles = () => {
               <Stack
                 key={index}
                 sx={{
-                  alignItems: 'center',
-                  borderBottom: '1px solid gray',
-                  display: 'flex',
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                  padding: '1rem',
-                  backgroundColor: '#393939',
+                  alignItems: "center",
+                  borderBottom: "1px solid gray",
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  padding: "1rem",
+                  backgroundColor: "#393939",
                 }}
               >
-                <div style={{ display: 'flex', gap: '16px' }}>
+                <div style={{ display: "flex", gap: "16px" }}>
                   <Typography
                     sx={{
-                      color: 'white',
-                      fontWeight: 'bold',
+                      color: "white",
+                      fontWeight: "bold",
                     }}
                   >
                     {index + 1}
                   </Typography>
                   <Typography
                     sx={{
-                      color: 'white',
-                      fontWeight: 'bold',
+                      color: "white",
+                      fontWeight: "bold",
                     }}
                   >
                     {name}
@@ -116,22 +116,22 @@ const Roles = () => {
 
                 <Stack
                   sx={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                    gap: '0.7rem',
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    gap: "0.7rem",
                   }}
                 >
                   <Button
-                    color='secondary'
-                    variant='contained'
+                    color="secondary"
+                    variant="contained"
                     onClick={() => handleEditRole(role?.id)}
                   >
                     Edit
                   </Button>
                   <Button
-                    color='error'
-                    variant='contained'
+                    color="error"
+                    variant="contained"
                     onClick={() => handleDeleteRole(role?.id)}
                   >
                     Delete
@@ -143,6 +143,7 @@ const Roles = () => {
       </Box>
       {openAddModal && (
         <AddRoleModal
+          title={"Add Role"}
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
         />
@@ -151,6 +152,7 @@ const Roles = () => {
         <EditRoleModal
           id={editedRole}
           open={openEditModal}
+          title={"Edit Role"}
           handleCloseModal={handleCloseEditModal}
         />
       )}
@@ -159,7 +161,7 @@ const Roles = () => {
           open={openDeleteModal}
           handleCloseModal={handleCloseDeleteModal}
           handleConfirmDelete={handleConfirmDelete}
-          message={'Role'}
+          message={"Role"}
         />
       )}
     </>

@@ -16,12 +16,14 @@ export const ButtonComponent = ({
     <Button
       className={NameClass ? NameClass : 'buttonHover'}
       variant='contained'
-      style={{ color: color }}
+      mt={2}
+      style={{ color: color ? color : ''}}
       onClick={OnClick ? OnClick : ''}
       sx={{
         background: BGColor ? BGColor : '',
-        color: TextColor ? TextColor : '',
+        color: TextColor ? TextColor : '#fff',
         border: Border ? Border : '',
+        margin: '1rem 0rem 0.5rem 0.5rem'
       }}
       disabled={disabled ? disabled : false}
     >

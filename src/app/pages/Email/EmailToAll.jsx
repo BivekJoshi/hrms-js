@@ -95,8 +95,9 @@ const EmailToAll = ({ getEventID, onClose }) => {
           direction="row"
           justifyContent="flex-end"
           alignItems="flex-end"
+          mt={2}
         >
-          <Button type="submit" variant="contained" color="primary">
+          <Button type="submit" variant="contained" sx={{color: "#fff"}}>
             Send
           </Button>
           <Button

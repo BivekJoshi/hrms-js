@@ -158,6 +158,7 @@ const LeaveType = ({ permissions }) => {
       {openAddModal && (
         <AddLeaveTypeModal
           open={openAddModal}
+          title={"Add Leave Type"}
           handleCloseModal={handleCloseAddModal}
           existingLeaveTypes={existingLeaveTypes}
         />

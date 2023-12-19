@@ -24,8 +24,8 @@ export const AddProjectModal = ({ open, handleCloseModal, title }) => {
 }
 
 
-export const EditProjectModal = ({ open, handleCloseModal, id, title }) => {
-    const { data } = useGetProjectById(id);
+export const EditProjectModal = ({ open, handleCloseModal, data, title }) => {
+    // const { data } = useGetProjectById(id);
     return (
         <div>
             <FormModal

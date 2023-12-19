@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Popover from '@mui/material/Popover';
 import { Box } from '@mui/material';
+import ThemeModeContext from '../ThemeModeContext';
 
 const PopOver = ({ triggerContent, popoverContent }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const { mode } = useContext(ThemeModeContext);
 
   const handlePopoverOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -37,6 +39,12 @@ const PopOver = ({ triggerContent, popoverContent }) => {
         }}
         onClose={handlePopoverClose}
         disableRestoreFocus
+        PaperProps={{
+          sx: {
+            backgroundColor: mode === 'light' ? '#fff' : '#140505',
+            color: mode === 'light' ? '#000' : '#fff',
+          },
+        }}
       >
         {popoverContent}
       </Popover>

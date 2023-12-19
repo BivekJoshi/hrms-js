@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Grid, TextField, Button, MenuItem } from "@mui/material";
 import useTodoListForm from "../../../hooks/todoList/TodoListForm/useTodoListForm";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
+import { ButtonComponent } from "../../Button/ButtonComponent";
 
 const priority = [
   {
@@ -61,7 +62,6 @@ const TodoListFields = ({ onClose, isLoading, data }) => {
             error={formik.touched.message && Boolean(formik.errors.message)}
             helperText={formik.touched.message && formik.errors.message}
             variant="outlined"
-            
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
@@ -95,7 +95,6 @@ const TodoListFields = ({ onClose, isLoading, data }) => {
             error={formik.touched.priority && Boolean(formik.errors.priority)}
             helperText={formik.touched.priority && formik.errors.priority}
             variant="outlined"
-            
             InputLabelProps={{ shrink: true }}
           >
             {priority.map((option) => (
@@ -115,22 +114,22 @@ const TodoListFields = ({ onClose, isLoading, data }) => {
           direction="row"
           justifyContent="flex-end"
           alignItems="flex-end"
+          gap={1}
+          mt={2}
         >
-          <Button
+          <ButtonComponent
             variant="contained"
-            onClick={handleFormSubmit}
+            OnClick={handleFormSubmit}
             sx={{ mt: 3, ml: 1, color: "#fff" }}
-          >
-            {submitButtonText}
-          </Button>
-          <Button
+            buttonName={submitButtonText}
+          />
+          <ButtonComponent
             variant="contained"
-            onClick={onClose}
+            OnClick={onClose}
             sx={{ mt: 3, ml: 1 }}
-            color="error"
-          >
-            Cancel
-          </Button>
+            BGColor={"#d32f2f"}
+            buttonName={"Cancel"}
+          />
         </Grid>
       </Grid>
     )

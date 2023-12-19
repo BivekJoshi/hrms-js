@@ -2,6 +2,7 @@ import { Grid, Button, TextField } from "@mui/material";
 import React from "react";
 import { useRemoveActiveProject, useAddActiveProject } from "../../../hooks/project/addProject/useAddProjectActiveForm";
 import { useGetDeactivatedProject } from "../../../hooks/project/useProject";
+import { ButtonComponent } from '../../Button/ButtonComponent';
 
 export const EditProjectDeactivateFields = ({ onClose, isLoading, data }) => {
 
@@ -49,13 +50,12 @@ export const EditProjectDeactivateFields = ({ onClose, isLoading, data }) => {
           justifyContent="flex-end"
           alignItems="flex-end"
         >
-          <Button
+          <ButtonComponent
             variant="contained"
-            onClick={handleFormSubmit}
+            OnClick={handleFormSubmit}
             sx={{ mt: 3, ml: 1 }}
-          >
-            Terminate Project
-          </Button>
+            buttonName={"Terminate Project"}
+          />
           <Button
             variant="contained"
             onClick={onClose}
@@ -117,13 +117,12 @@ export const EditProjectActivateFields = ({ onClose, isLoading, data }) => {
           justifyContent="flex-end"
           alignItems="flex-end"
         >
-          <Button
-            variant="contained"
-            onClick={handleFormSubmit}
-            sx={{ mt: 3, ml: 1 }}
-          >
-            Activate Project
-          </Button>
+          <ButtonComponent
+          variant="contained"
+          OnClick={handleFormSubmit}
+          sx={{ mt: 3, ml: 1 }}
+          buttonName={"Activate Project"}
+          />
           <Button
             variant="contained"
             onClick={onClose}
