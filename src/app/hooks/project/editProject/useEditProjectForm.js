@@ -5,7 +5,6 @@ import { ProjectSchema } from '../validation/ProjectSchema';
 
 const useEditProjectForm = (data) => {
   const { mutate } = useEditProject({});
-  console.log({"data": data})
 
   const formik = useFormik({
     initialValues: {

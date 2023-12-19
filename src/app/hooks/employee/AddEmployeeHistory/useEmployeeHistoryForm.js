@@ -12,19 +12,7 @@ const useEmployeeHistoryForm = () => {
   const { mutate: addMutate } = useAddEmployeeHistory({});
   const { mutate: editMutate } = useEditEmployeeHistory({});
   const { data: empHistoryData, isLoading: empHistoryLoading } = useGetEmployeeHistoryById(id);
-console.log({"empHistoryData": empHistoryData})
-  // const historyDetails =
-  //   !empHistoryLoading && 
-  //   empHistoryData.map((empHistory) => ({
-  //     id: empHistory?.id || '',
-  //     employerName: empHistory?.employerName || '',
-  //     employerAddress: empHistory?.employerAddress || '',
-  //     pastPosition: empHistory?.pastPosition || '',
-  //     fromDate: empHistory?.fromDate || '',
-  //     toDate: empHistory?.toDate || '',
-  //     description: empHistory?.description || '',
-  //     remarks: empHistory?.remarks || '',
-  //   }));
+
   const historyDetails =
     !empHistoryLoading && Array.isArray(empHistoryData)
       ? empHistoryData.map((empHistory) => ({

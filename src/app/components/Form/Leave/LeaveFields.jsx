@@ -30,44 +30,43 @@ const leaveStatus = [
 
 export const EditLeaveFields = ({ onClose, isLoading, data }) => {
   const { isManager, isSuperAdmin } = useAuth();
-  console.log({"useAuth": isSuperAdmin})
-  const { data: employeeData } = useGetEmployee();
-  const { data: leaveTypeData } = useGetLeaveType();
+  // const { data: employeeData } = useGetEmployee();
+  // const { data: leaveTypeData } = useGetLeaveType();
   const { formik } = useLeaveForm(data);
   const { mode } = useContext(ThemeModeContext);
-  const employeeId = data?.employeeId;
+  // const employeeId = data?.employeeId;
 
-  const capitalize = (str) => {
-    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
-  };
+  // const capitalize = (str) => {
+  //   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+  // };
 
-  const getLeaveTypeName = (leaveTypeId) => {
-    const leaveType = leaveTypeData?.find((type) => type.id === leaveTypeId);
-    return leaveType ? leaveType.leaveName : '';
-  };
+  // const getLeaveTypeName = (leaveTypeId) => {
+  //   const leaveType = leaveTypeData?.find((type) => type.id === leaveTypeId);
+  //   return leaveType ? leaveType.leaveName : '';
+  // };
 
-  const getEmployeeFullName = () => {
-    const employee = employeeData?.find((emp) => emp.id === employeeId);
-    if (employee) {
-      const { firstName, middleName, lastName } = employee;
-      return (
-        <Box sx={{ bgcolor: mode === 'light' ? '' : '#413e3e' }}>
-          {firstName || ''} {middleName || ''} {lastName || ''}
-        </Box>
-      );
-    }
-    return '';
-  };
+  // const getEmployeeFullName = () => {
+  //   const employee = employeeData?.find((emp) => emp.id === employeeId);
+  //   if (employee) {
+  //     const { firstName, middleName, lastName } = employee;
+  //     return (
+  //       <Box sx={{ bgcolor: mode === 'light' ? '' : '#413e3e' }}>
+  //         {firstName || ''} {middleName || ''} {lastName || ''}
+  //       </Box>
+  //     );
+  //   }
+  //   return '';
+  // };
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
 
-    if (formik.isValid) {
-      formik.resetForm({
-        isHalfDay: false,
-      });
-      onClose();
-    }
+    // if (formik.isValid) {
+    //   formik.resetForm({
+    //     isHalfDay: false,
+    //   });
+    //   onClose();
+    // }
   };
 
   const submitButtonText = data ? 'Update Leave' : 'Add Leave';
@@ -77,9 +76,9 @@ export const EditLeaveFields = ({ onClose, isLoading, data }) => {
         <Grid container spacing={3}>
           <Grid item xs={12} sm={12}>
             <Typography variant='p'>
-              {getEmployeeFullName(formik.values.employeeId)} wants to take a{' '}
-              {getLeaveTypeName(formik.values.leaveTypeId)} Leave From Date{' '}
-              {formik.values.fromDate} To Date {formik.values.toDate}. Total of{' '}
+              {data?.employeeName} wants to take a{' '}
+              {data?.leaveType} Leave From Date{' '}
+              {data?.fromDate} To Date {data?.toDate}. Total of{' '}
               {formik.values.applyLeaveDays} Days
             </Typography>
           </Grid>
@@ -172,8 +171,6 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
   const { formik } = useLeaveForm(data);
   const { mode } = useContext(ThemeModeContext);
   const employeeId = data?.employeeId;
-
-  console.log({"data": data})
 
   const capitalize = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();

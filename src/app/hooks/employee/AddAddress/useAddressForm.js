@@ -13,10 +13,6 @@ export const usePermanentAddressForm = (data, isLoading) => {
   const { mutate: editMutate } = useEditAddress({});
 
   const addressDetails = !isLoading && data;
-  console.log(
-    '🚀 ~ file: useAddressForm.js:16 ~ usePermanentAddressForm ~ addressDetails:',
-    addressDetails
-  );
 
   const initialValues = {
     addresses: [
@@ -24,9 +20,6 @@ export const usePermanentAddressForm = (data, isLoading) => {
       createAddressObject(addressDetails),
     ],
   };
-  console.log('Data:', addressData);
-console.log('Initial Values:', initialValues);
-
 
   const formik = useFormik({
     initialValues,

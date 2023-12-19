@@ -3,9 +3,8 @@ import { useState } from 'react';
 import { Box, Button, Chip, Stack, Tooltip, Typography } from '@mui/material';
 
 import { useDeleteLeave } from '../../hooks/leave/useLeave';
-
+import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import DeleteIcon from '@mui/icons-material/Delete';
-import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import { AddLeaveModal, EditLeaveModal } from './LeaveModal/LeaveModal';
 import DeleteConfirmationModal from '../../components/Modal/DeleteConfirmationModal';
 import { ButtonComponent } from '../../components/Button/ButtonComponent';
@@ -13,8 +12,10 @@ import ThemeModeContext from '../../../theme/ThemeModeContext';
 import CustomTable from '../../components/CustomTable/CustomTable';
 import { toast } from 'react-toastify';
 import { useLeaveDataSearch } from './Api/LeaveApi';
+import HocButton from '../../hoc/hocButton';
+import PermissionHoc from '../../hoc/permissionHoc';
 
-const Leave = () => {
+const Leave = ({ permissions }) => {
   const { mode } = React.useContext(ThemeModeContext);
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
@@ -193,32 +194,52 @@ const Leave = () => {
       sorting: false,
       field: 'approvedBy',
     },
-    {
-      title: 'Actions',
-      width: '10px',
-      render: (rowData) => {
-        const isApprovedOrRejected = ['APPROVED', 'REJECTED'].includes(
-          rowData.leaveStatus
-        );
+    // {
+    //   title: 'Actions',
+    //   width: '10px',
+    //   render: (rowData) => {
+    //     const isApprovedOrRejected = ['APPROVED', 'REJECTED'].includes(
+    //       rowData.leaveStatus
+    //     );
 
-        return (
-          <Stack direction='row' spacing={0}>
-            <Button
-              color='primary'
-              onClick={() => handleEditLeave(rowData)}
-              disabled={isApprovedOrRejected}
-            >
-              <ModeEditOutlineIcon />
-            </Button>
-            <Button color='primary' onClick={() => handleDeleteLeave(rowData)}>
-              <DeleteIcon />
-            </Button>
-          </Stack>
-        );
-      },
-      sorting: false,
+    //     return (
+    //       <Stack direction='row' spacing={0}>
+    //         <Button
+    //           color='primary'
+    //           onClick={() => handleEditLeave(rowData)}
+    //           disabled={isApprovedOrRejected}
+    //         >
+    //           <ModeEditOutlineIcon />
+    //         </Button>
+    //         <Button color='primary' onClick={() => handleDeleteLeave(rowData)}>
+    //           <DeleteIcon />
+    //         </Button>
+    //       </Stack>
+    //     );
+    //   },
+    //   sorting: false,
+    // },
+  ].filter(Boolean);
+
+  const actions = [
+    {
+      icon: () => (
+        <HocButton
+          permissions={permissions?.canEdit}
+          icon={<ModeEditOutlineIcon />}
+        />
+      ),
+      tooltip: "Edit Leave",
+      onClick: (event, rowData) => handleEditLeave(rowData),
     },
-  ];
+    {
+      icon: () => (
+        <HocButton permissions={permissions?.canDelete} icon={<DeleteIcon />} />
+      ),
+      tooltip: "Delete Leave",
+      onClick: (event, rowData) => handleDeleteLeave(rowData),
+    },
+  ]
 
   // if (isLoading || loadingemployee || loadingleaveType) return <>Loading</>;
 
@@ -245,6 +266,7 @@ const Leave = () => {
         tableLayout='fixed'
         title='Leave Data'
         // isLoading={loadingleave}
+        actions={actions}
       />
       {openEditModal && (
         <EditLeaveModal
@@ -252,6 +274,7 @@ const Leave = () => {
           open={openEditModal}
           handleCloseModal={handleCloseEditModal}
           title={'Edit Leave'}
+          
         />
       )}
       {openAddModal && (
@@ -273,4 +296,4 @@ const Leave = () => {
   );
 };
 
-export default Leave;
+export default PermissionHoc(Leave);
