@@ -113,7 +113,7 @@ const EmployeeDashbord = ({}) => {
           }}
         >
           <Typography variant='h6' paddingLeft='1rem'>
-            Welcome , <br></br>
+            Welcome, <br></br>
             {employData?.name}
           </Typography>
           <Typography variant='h6' style={{ maxWidth: '200px' }}>
