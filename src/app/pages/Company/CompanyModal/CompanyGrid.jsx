@@ -45,7 +45,7 @@ const CompanyGrid = ({ permissions ,companyData,isLoading}) => {
       {openEditModal && (
         <EditCompanyModal
           title={"Edit Branch"}
-          id={editedCompany?.id}
+          data={companyData[0]}
           open={openEditModal}
           handleCloseModal={handleCloseEditModal}
         />
