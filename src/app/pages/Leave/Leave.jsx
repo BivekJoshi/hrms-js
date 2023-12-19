@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { Box, Button, Chip, Stack, Tooltip, Typography } from '@mui/material';
+import { Box, Button, Chip, Grid, Stack, Tooltip, Typography } from '@mui/material';
 
 import { useDeleteLeave } from '../../hooks/leave/useLeave';
 
@@ -45,7 +45,7 @@ const Leave = () => {
     setOpenEditModal(true);
   };
 
-  const { data, isLoading: loadingg } = useLeaveDataSearch(
+  const { data, isLoading: loading } = useLeaveDataSearch(
     () => {
       console.log('Success');
       toast.success('Successfully Fetch');
@@ -195,25 +195,26 @@ const Leave = () => {
     },
     {
       title: 'Actions',
-      width: '10px',
+      width: '150px',
       render: (rowData) => {
         const isApprovedOrRejected = ['APPROVED', 'REJECTED'].includes(
           rowData.leaveStatus
         );
 
         return (
-          <Stack direction='row' spacing={0}>
+          <Grid display="flex" flexDirection='row' gap={0} justifyContent="center">
             <Button
               color='primary'
               onClick={() => handleEditLeave(rowData)}
               disabled={isApprovedOrRejected}
+              sx={{padding:"0"}}
             >
               <ModeEditOutlineIcon />
             </Button>
             <Button color='primary' onClick={() => handleDeleteLeave(rowData)}>
               <DeleteIcon />
             </Button>
-          </Stack>
+          </Grid>
         );
       },
       sorting: false,
@@ -244,7 +245,7 @@ const Leave = () => {
         data={data}
         tableLayout='fixed'
         title='Leave Data'
-        // isLoading={loadingleave}
+        isLoading={loading}
       />
       {openEditModal && (
         <EditLeaveModal

@@ -26,13 +26,10 @@ const CustomTable = (props) => {
             color: palette?.text?.tableHead,
             fontSize: '.8rem',
             fontWeight: 'bold',
-
             textAlign: 'center',
             border: `1px solid ${palette?.divider}`,
-
             textTransform: 'capitalize',
           },
-
           actionsColumnIndex: -1,
           rowStyle: props?.rowStyle || {
             fontSize: '.8rem',

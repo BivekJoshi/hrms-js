@@ -20,14 +20,15 @@ export const AddLeaveModal = ({ open, handleCloseModal, title }) => {
 };
 
 export const EditLeaveModal = ({ open, handleCloseModal, data, title }) => {
-  return (
-    <div>
-      <FormModal
-        open={open}
-        onClose={handleCloseModal}
-        title={title}
-        formComponent={<LeaveFields onClose={handleCloseModal} data={data} />}
-      />
-    </div>
-  );
-};
+    // const { data } = useGetLeaveById(id);
+    return (
+      <div>
+        <FormModal
+          open={open}
+          onClose={handleCloseModal}
+          title={title}
+          formComponent={<EditLeaveFields onClose={handleCloseModal} data={data} />}
+        />
+      </div>
+    )
+  }
