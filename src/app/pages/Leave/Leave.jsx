@@ -36,7 +36,7 @@ const Leave = () => {
   };
 
   const handleConfirmDelete = () => {
-    deleteLeaveMutation.mutate(deletedLeave.id);
+    deleteLeaveMutation.mutate(deletedLeave.leaveId);
     setOpenDeleteModal(false);
   };
 
