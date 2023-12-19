@@ -85,20 +85,21 @@ const EmployeeDashboard = Loadable(
     import("../app/pages/EmployeePage/EmployeeDashboard/EmployeeDashbord")
   )
 );
-
+const { isSuperAdmin, isAdmin, isHr, isManager, isEmployee, isHrClerk } =
+  useAuth();
 const routes = [
   {
     path: "dashboard",
     name: "Dashboard",
     id: nanoid(),
-    component: <Dashboard />,
+    component: !isEmployee ? <Dashboard /> : <EmployeeDashboard />,
   },
-  {
-    path: "home",
-    name: "Employee Dashboard",
-    id: nanoid(),
-    component: <EmployeeDashboard />,
-  },
+  // {
+  //   path: "home",
+  //   name: "Employee Dashboard",
+  //   id: nanoid(),
+  //   component: <EmployeeDashboard />,
+  // },
   {
     path: "project/dashboard",
     name: "Project Dashboard",
@@ -305,18 +306,12 @@ export default function BreadCrumbs() {
   const { mode } = useContext(ThemeModeContext);
   const location = useLocation();
   let currentPath = location.pathname;
-  const {
-    isSuperAdmin,
-    isAdmin,
-    isHr,
-    isManager,
-    isEmployee,
-    isHrClerk,
-  } = useAuth();
+  const { isSuperAdmin, isAdmin, isHr, isManager, isEmployee, isHrClerk } =
+    useAuth();
 
   const getDashboardLink = () => {
     if (isEmployee) {
-      return "/employee/home";
+      return "/employee/dashboard";
     } else {
       return "/admin/dashboard";
     }

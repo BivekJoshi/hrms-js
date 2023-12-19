@@ -25,8 +25,7 @@ const AcademicsInfo = ({ data }) => {
         }}
       >
         {data
-          ? data.qualifications
-              .sort((a, b) => b.passedYear - a.passedYear)
+          ? data?.qualifications?.sort((a, b) => b.passedYear - a.passedYear)
               .map((item, index) => (
                 <AcademicsComponents key={index} data={item} />
               ))
