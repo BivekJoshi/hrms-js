@@ -1,24 +1,28 @@
-import { useFormik } from "formik";
+import { useFormik } from 'formik';
 import {
   useAddEmployeeHistory,
   useEditEmployeeHistory,
-} from "../useEmployeeHistory";
+  useGetEmployeeHistoryById,
+} from '../useEmployeeHistory';
+import { useParams } from 'react-router-dom';
 
-const useEmployeeHistoryForm = ({ data, isLoadingHistory: isLoading }) => {
+const useEmployeeHistoryForm = () => {
+  const { id } = useParams();
   const { mutate: addMutate } = useAddEmployeeHistory({});
   const { mutate: editMutate } = useEditEmployeeHistory({});
+  const { data, isLoading } = useGetEmployeeHistoryById(id);
 
   const historyDetails =
     !isLoading &&
-    data?.employmentHistories?.map((empHistory) => ({
-      id: empHistory?.id || "",
-      employerName: empHistory?.employerName || "",
-      employerAddress: empHistory?.employerAddress || "",
-      pastPosition: empHistory?.pastPosition || "",
-      fromDate: empHistory?.fromDate || "",
-      toDate: empHistory?.toDate || "",
-      description: empHistory?.description || "",
-      remarks: empHistory?.remarks || "",
+    data?.map((empHistory) => ({
+      id: empHistory?.id || '',
+      employerName: empHistory?.employerName || '',
+      employerAddress: empHistory?.employerAddress || '',
+      pastPosition: empHistory?.pastPosition || '',
+      fromDate: empHistory?.fromDate || '',
+      toDate: empHistory?.toDate || '',
+      description: empHistory?.description || '',
+      remarks: empHistory?.remarks || '',
     }));
   const formik = useFormik({
     initialValues: {
@@ -27,17 +31,17 @@ const useEmployeeHistoryForm = ({ data, isLoadingHistory: isLoading }) => {
           ? historyDetails
           : [
               {
-                employerName: "",
-                employerAddress: "",
-                pastPosition: "",
-                fromDate: "",
-                toDate: "",
-                description: "",
-                remarks: "",
+                employerName: '',
+                employerAddress: '',
+                pastPosition: '',
+                fromDate: '',
+                toDate: '',
+                description: '',
+                remarks: '',
               },
             ],
     },
-    enableReinitialize: "true",
+    enableReinitialize: 'true',
     onSubmit: (values) => {
       if (values.history.some((history) => !history.id)) {
         handleRequest(values);

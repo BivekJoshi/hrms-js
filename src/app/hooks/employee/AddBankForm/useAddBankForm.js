@@ -1,9 +1,15 @@
 import { useFormik } from 'formik';
 import AddBankSchema from './BankSchema';
-import { useAddBank, useEditBank } from '../useBank';
+import {
+  useAddBank,
+  useEditBank,
+  useGetBankByEmployeeId,
+  useGetBankById,
+} from '../useBank';
 
-const useAddBankForm = ({ data, employeeLoading: isLoading }) => {
-  const bankDetails = !isLoading && data?.bankDetailSet;
+const useAddBankForm = () => {
+  const { data, isLoading } = useGetBankByEmployeeId();
+  const bankDetails = !isLoading && data[0];
   const { mutate } = useAddBank({});
   const { mutate: editMutate } = useEditBank({});
 
