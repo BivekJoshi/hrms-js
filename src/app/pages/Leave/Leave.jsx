@@ -63,7 +63,6 @@ const Leave = () => {
     }
   );
 
-  console.log('🚀 ~ file: Leave.jsx:57 ~ Leave ~ data:', data);
   const columns = [
     {
       title: 'SN',

@@ -206,7 +206,7 @@ const DateInput = ({ formik, isHalfDay, isMultipleDays }) => {
       formik.setFieldValue('halfLeaveType', halfType);
     }
   };
-
+  const currentDate = new Date().toISOString().split('T')[0];
   return (
     <>
       <div style={{ display: 'flex', gap: '0.5rem' }}>
@@ -215,6 +215,9 @@ const DateInput = ({ formik, isHalfDay, isMultipleDays }) => {
             name='fromDate'
             label='Select Date'
             type='date'
+            inputProps={{
+              min: currentDate, // Disable past date selections
+            }}
             required
             InputLabelProps={{ shrink: true }}
             fullWidth
@@ -230,6 +233,9 @@ const DateInput = ({ formik, isHalfDay, isMultipleDays }) => {
               name='toDate'
               label='Select To Date'
               type='date'
+              inputProps={{
+                min: currentDate, // Disable past date selections
+              }}
               required
               InputLabelProps={{ shrink: true }}
               fullWidth
