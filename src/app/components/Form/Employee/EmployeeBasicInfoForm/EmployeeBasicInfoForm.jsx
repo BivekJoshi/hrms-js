@@ -49,6 +49,10 @@ const EmployeeBasicInfoForm = ({ formik }) => {
     useGetDesignation();
   const { data: departmentData, isLoading: loadingDepartment } =
     useGetDepartment();
+  console.log(
+    '🚀 ~ file: EmployeeBasicInfoForm.jsx:51 ~ EmployeeBasicInfoForm ~ departmentData:',
+    departmentData
+  );
   const { mode } = useContext(ThemeModeContext);
   return (
     <Grid container spacing={3}>

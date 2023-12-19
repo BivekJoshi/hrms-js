@@ -2,7 +2,7 @@ import { useFormik } from 'formik';
 import {
   useAddEmployeeHistory,
   useEditEmployeeHistory,
-  useGetEmployeeHistoryById,
+  useGetEmployeeHistory,
 } from '../useEmployeeHistory';
 import { useParams } from 'react-router-dom';
 
@@ -10,7 +10,7 @@ const useEmployeeHistoryForm = () => {
   const { id } = useParams();
   const { mutate: addMutate } = useAddEmployeeHistory({});
   const { mutate: editMutate } = useEditEmployeeHistory({});
-  const { data, isLoading } = useGetEmployeeHistoryById(id);
+  const { data, isLoading } = useGetEmployeeHistory(id);
 
   const historyDetails =
     !isLoading &&
