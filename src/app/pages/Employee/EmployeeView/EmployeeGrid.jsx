@@ -35,7 +35,6 @@ const EmployeeGrid = ({ employeeData, isLoading }) => {
       <Skeleton sx={{ height: 190 }} animation='wave' variant='rectangular' />
     );
   }
-  console.log(employeeData);
   return (
     <>
       <Grid
@@ -73,7 +72,6 @@ const EmployeeGrid = ({ employeeData, isLoading }) => {
             />
           </Grid>
           <Grid item xs={4}>
-            {' '}
             <TextField
               label='Filter by Phone Number'
               value={phoneFilter}

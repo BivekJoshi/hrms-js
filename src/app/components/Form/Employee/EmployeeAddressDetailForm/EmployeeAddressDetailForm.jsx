@@ -1,51 +1,47 @@
-import { Grid, TextField, MenuItem, Typography, Button } from '@mui/material';
-import { FieldArray, FormikProvider } from 'formik';
-import React, { useEffect, useState } from 'react';
-import { ThemeSwitch } from '../../../../../theme/ThemeSwitch';
+import { Grid, TextField, MenuItem, Typography, Button } from "@mui/material";
+import { FieldArray, FormikProvider } from "formik";
+import React, { useEffect, useState } from "react";
+import { ThemeSwitch } from "../../../../../theme/ThemeSwitch";
 
 const province = [
   {
-    value: 'KOSHI',
-    label: 'Koshi Pradesh',
+    value: "KOSHI",
+    label: "Koshi Pradesh",
     id: 1,
   },
   {
-    value: 'MADHESH',
-    label: 'Madhesh Pradesh',
+    value: "MADHESH",
+    label: "Madhesh Pradesh",
     id: 2,
   },
   {
-    value: 'BAGMATI',
-    label: 'Bagmati Pradesh',
+    value: "BAGMATI",
+    label: "Bagmati Pradesh",
     id: 3,
   },
   {
-    value: 'GANDAKI',
-    label: 'Gandaki Pradesh',
+    value: "GANDAKI",
+    label: "Gandaki Pradesh",
     id: 4,
   },
   {
-    value: 'LUMBINI',
-    label: 'Lumbini Pradesh',
+    value: "LUMBINI",
+    label: "Lumbini Pradesh",
     id: 5,
   },
   {
-    value: 'KARNALI',
-    label: 'Karnali Pradesh',
+    value: "KARNALI",
+    label: "Karnali Pradesh",
     id: 6,
   },
   {
-    value: 'SUDURPASHCHIM',
-    label: 'Sudurpashchim Pradesh',
+    value: "SUDURPASHCHIM",
+    label: "Sudurpashchim Pradesh",
     id: 7,
   },
 ];
 
 const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
-  console.log(
-    '🚀 ~ file: EmployeeAddressDetailForm.jsx:45 ~ EmployeeAddressDetailForm ~ data:',
-    data
-  );
   const [showTemporaryAddress, setShowTemporaryAddress] = useState(
     Boolean(data[1]?.id)
   );
@@ -62,14 +58,14 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
     !isLoading && (
       <FormikProvider value={formik}>
         <FieldArray
-          name='addresses'
+          name="addresses"
           render={(arrayHelpers) => (
             <div>
               {formik.values.addresses.map((address, index) => (
                 <>
                   {index === 0 ? (
                     <>
-                      <Typography style={{ marginBottom: '20px' }}>
+                      <Typography style={{ marginBottom: "20px" }}>
                         Permanent Address
                       </Typography>
                       <Grid container spacing={3} key={index}>
@@ -77,8 +73,8 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                           <TextField
                             id={`addresses[${index}].country`}
                             name={`addresses[${index}].country`}
-                            label='Country'
-                            placeholder='Enter country'
+                            label="Country"
+                            placeholder="Enter country"
                             fullWidth
                             select
                             value={address.country}
@@ -91,10 +87,10 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                               formik.touched.addresses?.[index]?.country &&
                               formik.errors.addresses?.[index]?.country
                             }
-                            variant='outlined'
+                            variant="outlined"
                             InputLabelProps={{ shrink: true }}
                           >
-                            <MenuItem key='Nepal' value='Nepal'>
+                            <MenuItem key="Nepal" value="Nepal">
                               Nepal
                             </MenuItem>
                           </TextField>
@@ -104,8 +100,8 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                             id={`addresses[${index}].province`}
                             name={`addresses[${index}].province`}
                             select
-                            label='Province'
-                            placeholder='Enter province'
+                            label="Province"
+                            placeholder="Enter province"
                             fullWidth
                             value={address.province}
                             onChange={formik.handleChange}
@@ -119,7 +115,7 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                               formik.touched.addresses?.[index]?.province &&
                               formik.errors.addresses?.[index]?.province
                             }
-                            variant='outlined'
+                            variant="outlined"
                             InputLabelProps={{ shrink: true }}
                           >
                             {province?.map((option) => (
@@ -133,8 +129,8 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                           <TextField
                             id={`addresses[${index}].district`}
                             name={`addresses[${index}].district`}
-                            label='District'
-                            placeholder='Enter district'
+                            label="District"
+                            placeholder="Enter district"
                             fullWidth
                             value={address.district}
                             onChange={formik.handleChange}
@@ -148,7 +144,7 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                               formik.touched.addresses?.[index]?.district &&
                               formik.errors.addresses?.[index]?.district
                             }
-                            variant='outlined'
+                            variant="outlined"
                             InputLabelProps={{ shrink: true }}
                           />
                         </Grid>
@@ -156,8 +152,8 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                           <TextField
                             id={`addresses[${index}].wardNumber`}
                             name={`addresses[${index}].wardNumber`}
-                            label='Ward Number'
-                            placeholder='Enter ward number'
+                            label="Ward Number"
+                            placeholder="Enter ward number"
                             fullWidth
                             value={address.wardNumber}
                             onChange={formik.handleChange}
@@ -171,7 +167,7 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                               formik.touched.addresses?.[index]?.wardNumber &&
                               formik.errors.addresses?.[index]?.wardNumber
                             }
-                            variant='outlined'
+                            variant="outlined"
                             InputLabelProps={{ shrink: true }}
                           />
                         </Grid>
@@ -179,8 +175,8 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                           <TextField
                             id={`addresses[${index}].city`}
                             name={`addresses[${index}].city`}
-                            label='City'
-                            placeholder='Enter city'
+                            label="City"
+                            placeholder="Enter city"
                             fullWidth
                             value={address.city}
                             onChange={formik.handleChange}
@@ -192,7 +188,7 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                               formik.touched.addresses?.[index]?.city &&
                               formik.errors.addresses?.[index]?.city
                             }
-                            variant='outlined'
+                            variant="outlined"
                             InputLabelProps={{ shrink: true }}
                           />
                         </Grid>
@@ -200,8 +196,8 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                           <TextField
                             id={`addresses[${index}].street`}
                             name={`addresses[${index}].street`}
-                            label='Street'
-                            placeholder='Enter street'
+                            label="Street"
+                            placeholder="Enter street"
                             fullWidth
                             value={address.street}
                             onChange={formik.handleChange}
@@ -213,13 +209,13 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                               formik.touched.addresses?.[index]?.street &&
                               formik.errors.addresses?.[index]?.street
                             }
-                            variant='outlined'
+                            variant="outlined"
                             InputLabelProps={{ shrink: true }}
                           />
                         </Grid>
                       </Grid>
                       <Typography
-                        style={{ marginTop: '20px', marginBottom: '20px' }}
+                        style={{ marginTop: "20px", marginBottom: "20px" }}
                       >
                         <ThemeSwitch
                           onClick={() => handleTemporaryButtonClick(index)}
@@ -235,8 +231,8 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                             <TextField
                               id={`addresses[${index}].country`}
                               name={`addresses[${index}].country`}
-                              label='Country'
-                              placeholder='Enter country'
+                              label="Country"
+                              placeholder="Enter country"
                               fullWidth
                               select
                               value={address.country}
@@ -251,10 +247,10 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                                 formik.touched.addresses?.[index]?.country &&
                                 formik.errors.addresses?.[index]?.country
                               }
-                              variant='outlined'
+                              variant="outlined"
                               InputLabelProps={{ shrink: true }}
                             >
-                              <MenuItem key='Nepal' value='Nepal'>
+                              <MenuItem key="Nepal" value="Nepal">
                                 Nepal
                               </MenuItem>
                             </TextField>
@@ -264,8 +260,8 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                               id={`addresses[${index}].province`}
                               name={`addresses[${index}].province`}
                               select
-                              label='Province'
-                              placeholder='Enter province'
+                              label="Province"
+                              placeholder="Enter province"
                               fullWidth
                               value={address.province}
                               onChange={formik.handleChange}
@@ -279,7 +275,7 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                                 formik.touched.addresses?.[index]?.province &&
                                 formik.errors.addresses?.[index]?.province
                               }
-                              variant='outlined'
+                              variant="outlined"
                               InputLabelProps={{ shrink: true }}
                             >
                               {province?.map((option) => (
@@ -296,8 +292,8 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                             <TextField
                               id={`addresses[${index}].district`}
                               name={`addresses[${index}].district`}
-                              label='District'
-                              placeholder='Enter district'
+                              label="District"
+                              placeholder="Enter district"
                               fullWidth
                               value={address.district}
                               onChange={formik.handleChange}
@@ -311,7 +307,7 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                                 formik.touched.addresses?.[index]?.district &&
                                 formik.errors.addresses?.[index]?.district
                               }
-                              variant='outlined'
+                              variant="outlined"
                               InputLabelProps={{ shrink: true }}
                             />
                           </Grid>
@@ -319,8 +315,8 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                             <TextField
                               id={`addresses[${index}].wardNumber`}
                               name={`addresses[${index}].wardNumber`}
-                              label='Ward Number'
-                              placeholder='Enter ward number'
+                              label="Ward Number"
+                              placeholder="Enter ward number"
                               fullWidth
                               value={address.wardNumber}
                               onChange={formik.handleChange}
@@ -334,7 +330,7 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                                 formik.touched.addresses?.[index]?.wardNumber &&
                                 formik.errors.addresses?.[index]?.wardNumber
                               }
-                              variant='outlined'
+                              variant="outlined"
                               InputLabelProps={{ shrink: true }}
                             />
                           </Grid>
@@ -342,8 +338,8 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                             <TextField
                               id={`addresses[${index}].city`}
                               name={`addresses[${index}].city`}
-                              label='City'
-                              placeholder='Enter city'
+                              label="City"
+                              placeholder="Enter city"
                               fullWidth
                               value={address.city}
                               onChange={formik.handleChange}
@@ -355,7 +351,7 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                                 formik.touched.addresses?.[index]?.city &&
                                 formik.errors.addresses?.[index]?.city
                               }
-                              variant='outlined'
+                              variant="outlined"
                               InputLabelProps={{ shrink: true }}
                             />
                           </Grid>
@@ -363,8 +359,8 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                             <TextField
                               id={`addresses[${index}].street`}
                               name={`addresses[${index}].street`}
-                              label='Street'
-                              placeholder='Enter street'
+                              label="Street"
+                              placeholder="Enter street"
                               fullWidth
                               value={address.street}
                               onChange={formik.handleChange}
@@ -378,7 +374,7 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                                 formik.touched.addresses?.[index]?.street &&
                                 formik.errors.addresses?.[index]?.street
                               }
-                              variant='outlined'
+                              variant="outlined"
                               InputLabelProps={{ shrink: true }}
                             />
                           </Grid>

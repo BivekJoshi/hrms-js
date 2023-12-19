@@ -5,7 +5,6 @@ import '../Style/ProjectProgressStyle.css';
 import React from 'react';
 
 export const ProjectProgressCard = ({ projectDataCount }) => {
-  console.log(projectDataCount,"count");
   const BorderLinearProgress = ({ color, ...props }) => {
     return (
       <LinearProgress

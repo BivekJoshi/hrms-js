@@ -17,17 +17,8 @@ import { toast } from "react-toastify";
 
 const Dashboard = () => {
   const { mode } = useContext(ThemeModeContext);
-  const { data, isLoading } = useDashBoardSearch(
-    () => {
-      console.log("Success");
-      toast.success("Successfully Fetch data")
-    },
-    () => {
-      console.log("Error");
-    }
-  );
+  const { data, isLoading } = useDashBoardSearch();
 
-  console.log(data,"data ma");
   const today = new Date();
   const day = new Date().toLocaleDateString("en-us", { weekday: "long" });
 
