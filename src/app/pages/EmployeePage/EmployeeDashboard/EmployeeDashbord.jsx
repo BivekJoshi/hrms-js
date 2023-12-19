@@ -19,50 +19,50 @@ import EmployTaskCard from "../Component/EmployTaskCard";
 const EmployeeDashbord = ({}) => {
   const { data: employData } = useGetLoggedInUser();
   const { mode } = useContext(ThemeModeContext);
-  const { data: loginUsertask } = useGetTaskLoggedInUser();
-  const { data: projectWiseEmployeeData } = useGetProjectWiseEmployee(
-    employData?.employeeId
-  );
-  const taskPendingData = Array.isArray(loginUsertask)
-    ? loginUsertask?.filter(
-        (status) =>
-          status.status === "WORK_IN_PROGRESS" || status.status === "PENDING"
-      )
-    : "";
+  // const { data: loginUsertask } = useGetTaskLoggedInUser();
+  // const { data: projectWiseEmployeeData } = useGetProjectWiseEmployee(
+  //   employData?.employeeId
+  // );
+  // const taskPendingData = Array.isArray(loginUsertask)
+  //   ? loginUsertask?.filter(
+  //       (status) =>
+  //         status.status === "WORK_IN_PROGRESS" || status.status === "PENDING"
+  //     )
+  //   : "";
 
-  const taskCompleteData = Array.isArray(loginUsertask)
-    ? loginUsertask?.filter((status) => status.status === "COMPLETED")
-    : "";
+  // const taskCompleteData = Array.isArray(loginUsertask)
+  //   ? loginUsertask?.filter((status) => status.status === "COMPLETED")
+  //   : "";
   const photo = employData?.userPhotoPath;
   const filePath = photo ? DOC_URL + photo : "";
 
   const task = [
-    {
-      title: "Total Project",
-      taskIcon: Project,
-      numberOfTask: projectWiseEmployeeData
-        ? projectWiseEmployeeData.length
-        : 0,
-      linkTo: "/employee/project",
-      borderColor: "#3399FF",
-    },
+    // {
+    //   title: "Total Project",
+    //   taskIcon: Project,
+    //   numberOfTask: projectWiseEmployeeData
+    //     ? projectWiseEmployeeData.length
+    //     : 0,
+    //   linkTo: "/employee/project",
+    //   borderColor: "#3399FF",
+    // },
     {
       title: "Total Task",
-      numberOfTask: loginUsertask ? loginUsertask.length : 0,
+      // numberOfTask: loginUsertask ? loginUsertask.length : 0,
       taskIcon: Task,
       linkTo: "/employee/project",
       borderColor: "#FF8A7B",
     },
     {
       title: "Task Pending",
-      numberOfTask: taskPendingData ? taskPendingData.length : 0,
+      // numberOfTask: taskPendingData ? taskPendingData.length : 0,
       taskIcon: Pending,
       linkTo: "/employee/project",
       borderColor: "#F8B114",
     },
     {
       title: "Task Complete",
-      numberOfTask: taskCompleteData ? taskCompleteData.length : 0,
+      // numberOfTask: taskCompleteData ? taskCompleteData.length : 0,
       taskIcon: Complet,
       linkTo: "/employee/project",
       borderColor: "#108A23",
@@ -132,7 +132,7 @@ const EmployeeDashbord = ({}) => {
         ))}
         {/* <EmployPichart task={task}/> */}
       </Box>
-      <MiddleEmployDashbord employData={employData} />
+      {/* <MiddleEmployDashbord employData={employData} /> */}
       <Box display="grid" gridTemplateColumns="3fr 2fr" gap="3rem">
         <LeftEmployDashbord />
         <RightEmployDashbord employData={employData} />

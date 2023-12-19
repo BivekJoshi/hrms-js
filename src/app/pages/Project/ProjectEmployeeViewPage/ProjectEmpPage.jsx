@@ -8,17 +8,15 @@ import ProjectMyTask from "../ProjectTask/ProjectMyTask";
 import { useGetLoggedInUser } from "../../../hooks/auth/usePassword";
 import {
   useGetProject,
-  useGetProjectWiseEmployee,
 } from "../../../hooks/project/useProject";
 import { useGetEmployee } from "../../../hooks/employee/useEmployee";
 import { useGetTaskLoggedInUser } from "../../../hooks/project/ProjectTask/useProjectTask";
 
 export default function ProjectEmpPage() {
-  const { data: logInUserData } = useGetLoggedInUser();
-  const { data: taskData } = useGetTaskLoggedInUser();
-  const { data: projectWiseEmployeeData } = useGetProjectWiseEmployee(
-    logInUserData?.employeeId
-  );
+  // const { data: taskData } = useGetTaskLoggedInUser();
+  // const { data: projectWiseEmployeeData } = useGetProjectWiseEmployee(
+  //   logInUserData?.employeeId
+  // );
   const { data: employeeData } = useGetEmployee();
   const { data: projectData } = useGetProject();
 
@@ -38,24 +36,24 @@ export default function ProjectEmpPage() {
           </TabList>
         </Box>
         <TabPanel value="1">
-          <ProjectHomePage
+          {/* <ProjectHomePage
             projectWiseEmployeeData={projectWiseEmployeeData}
             employeeData={employeeData}
             projectData={projectData}
-          />
+          /> */}
         </TabPanel>
         <TabPanel value="2">
           <Project />
         </TabPanel>
         <TabPanel value="3">
-          <ProjectTeamPage
+          {/* <ProjectTeamPage
             projectWiseEmployeeData={projectWiseEmployeeData}
             employeeData={employeeData}
             projectData={projectData}
-          />
+          /> */}
         </TabPanel>
         <TabPanel value="4">
-          <ProjectMyTask taskData={taskData} />
+          {/* <ProjectMyTask taskData={taskData} /> */}
         </TabPanel>
       </TabContext>
     </Box>

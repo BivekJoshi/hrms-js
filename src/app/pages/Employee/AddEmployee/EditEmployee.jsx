@@ -39,7 +39,7 @@ const EditEmployee = () => {
         Edit Details
       </Typography>
       <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }} alternativeLabel>
-        {steps.map((label) => (
+        {steps?.map((label) => (
           <Step key={label} onClick={() => handleStepClick(label)}>
             <StepLabel>{label}</StepLabel>
           </Step>

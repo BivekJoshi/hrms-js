@@ -4,6 +4,7 @@ import {
   addTemporaryAddress,
   editAddress,
   getAddressById,
+  getEmployeeAddressById,
 } from '../../api/address/address-api';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -12,6 +13,13 @@ import { getEmployeeById } from '../../api/employee/employee-api';
 export const useGetEmployeeById = () => {
   const { id } = useParams();
   return useQuery(['getEmployeeById', id], () => getEmployeeById(id), {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
+};
+export const useGetEmployeeAddressById = () => {
+  const { id } = useParams();
+  return useQuery(['getEmployeeById', id], () => getEmployeeAddressById(id), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });

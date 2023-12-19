@@ -31,7 +31,6 @@ export const useDashBoardSearch = (onSuccess, onError) => {
     onSuccess,
     onError,
     select: (response) => {
-      console.log(response,"admin");
       return response
     }
     // select: (response) => testData,

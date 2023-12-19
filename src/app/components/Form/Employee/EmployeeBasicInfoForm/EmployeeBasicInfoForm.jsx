@@ -49,6 +49,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
     useGetDesignation();
   const { data: departmentData, isLoading: loadingDepartment } =
     useGetDepartment();
+
   const { mode } = useContext(ThemeModeContext);
   return (
     <Grid container spacing={3}>

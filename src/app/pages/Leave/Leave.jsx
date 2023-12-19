@@ -16,7 +16,7 @@ import { useLeaveDataSearch } from './Api/LeaveApi';
 
 const Leave = () => {
   const { mode } = React.useContext(ThemeModeContext);
-
+  console.log(leaveDataOfUser);
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
@@ -58,10 +58,10 @@ const Leave = () => {
 
   const columns = [
     {
-      title: 'SN',
-      field: 'id',
+      title: "SN",
+      field: "id",
       sortable: false,
-      width: '10px',
+      width: "10px",
       sorting: false,
       render: (rowData) => rowData.tableData.id + 1,
     },
@@ -78,37 +78,37 @@ const Leave = () => {
       sorting: false,
     },
     {
-      title: 'From',
-      field: 'fromDate',
-      width: '60px',
-      emptyValue: '-',
+      title: "From",
+      field: "fromDate",
+      width: "60px",
+      emptyValue: "-",
       sorting: false,
     },
     {
-      title: 'To',
-      field: 'toDate',
-      width: '60px',
-      emptyValue: '-',
+      title: "To",
+      field: "toDate",
+      width: "60px",
+      emptyValue: "-",
       sorting: false,
     },
     {
-      title: 'Status',
-      field: 'leaveStatus',
-      emptyValue: '-',
-      width: '100px',
+      title: "Status",
+      field: "leaveStatus",
+      emptyValue: "-",
+      width: "100px",
       cellStyle: {
-        whiteSpace: 'nowrap',
+        whiteSpace: "nowrap",
       },
       render: (rowData) => {
         const status = rowData.leaveStatus;
-        let chipColor = '';
+        let chipColor = "";
 
-        if (status === 'APPROVED') {
-          chipColor = 'green';
-        } else if (status === 'REJECTED') {
-          chipColor = 'red';
-        } else if (status === 'PENDING') {
-          chipColor = 'orange';
+        if (status === "APPROVED") {
+          chipColor = "green";
+        } else if (status === "REJECTED") {
+          chipColor = "red";
+        } else if (status === "PENDING") {
+          chipColor = "orange";
         }
 
         return (
@@ -116,8 +116,8 @@ const Leave = () => {
             label={status}
             style={{
               backgroundColor: chipColor,
-              color: 'white',
-              width: '6rem',
+              color: "white",
+              width: "6rem",
             }}
           />
         );
@@ -125,24 +125,32 @@ const Leave = () => {
       sorting: false,
     },
     {
-      title: 'Leave Reason',
-      field: 'leaveReason',
-      width: '240px',
-      emptyValue: '-',
+      title: "Leave Reason",
+      field: "leaveReason",
+      width: "240px",
+      emptyValue: "-",
       render: (rowData) => {
         return (
-          <Tooltip title={<div style={{ maxHeight: '100px', overflowY: 'auto' }}>{rowData?.leaveReason}</div>} placement='top-start' arrow>
+          <Tooltip
+            title={
+              <div style={{ maxHeight: "100px", overflowY: "auto" }}>
+                {rowData?.leaveReason}
+              </div>
+            }
+            placement="top-start"
+            arrow
+          >
             <Chip
               style={{
-                cursor: 'pointer',
-                width: '240px',
+                cursor: "pointer",
+                width: "240px",
                 // height: '40px',
-                display: 'block',
-                background: mode === 'light' ? 'white' : '#434343',
+                display: "block",
+                background: mode === "light" ? "white" : "#434343",
               }}
               label={
                 <Typography
-                  style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}
+                  style={{ overflow: "hidden", textOverflow: "ellipsis" }}
                 >
                   {rowData?.leaveReason}
                 </Typography>
@@ -153,23 +161,23 @@ const Leave = () => {
       },
     },
     {
-      title: 'Remark',
-      field: 'leaveRemarks',
-      width: '240px',
-      emptyValue: '-',
+      title: "Remark",
+      field: "leaveRemarks",
+      width: "240px",
+      emptyValue: "-",
       render: (rowData) => {
         return (
-          <Tooltip title={rowData?.leaveRemarks} placement='top-start' arrow>
+          <Tooltip title={rowData?.leaveRemarks} placement="top-start" arrow>
             <Chip
               style={{
-                cursor: 'pointer',
-                width: '240px',
-                display: 'block',
-                background: mode === 'light' ? 'white' : '#434343',
+                cursor: "pointer",
+                width: "240px",
+                display: "block",
+                background: mode === "light" ? "white" : "#434343",
               }}
               label={
                 <Typography
-                  style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}
+                  style={{ overflow: "hidden", textOverflow: "ellipsis" }}
                 >
                   {rowData?.leaveRemarks}
                 </Typography>
@@ -187,23 +195,23 @@ const Leave = () => {
       field:'approvedBy',
     },
     {
-      title: 'Actions',
-      width: '10px',
+      title: "Actions",
+      width: "10px",
       render: (rowData) => {
-        const isApprovedOrRejected = ['APPROVED', 'REJECTED'].includes(
+        const isApprovedOrRejected = ["APPROVED", "REJECTED"].includes(
           rowData.leaveStatus
         );
 
         return (
-          <Stack direction='row' spacing={0}>
+          <Stack direction="row" spacing={0}>
             <Button
-              color='primary'
+              color="primary"
               onClick={() => handleEditLeave(rowData)}
               disabled={isApprovedOrRejected}
             >
               <ModeEditOutlineIcon />
             </Button>
-            <Button color='primary' onClick={() => handleDeleteLeave(rowData)}>
+            <Button color="primary" onClick={() => handleDeleteLeave(rowData)}>
               <DeleteIcon />
             </Button>
           </Stack>
@@ -219,16 +227,16 @@ const Leave = () => {
     <>
       <Box
         sx={{
-          display: 'flex',
-          justifyContent: 'flex-end',
-          marginBottom: '16px',
+          display: "flex",
+          justifyContent: "flex-end",
+          marginBottom: "16px",
         }}
       >
         <ButtonComponent
           OnClick={handleAddOpenModal}
-          Border='none'
+          Border="none"
           color={"#fff"}
-          buttonName={'+ Add Leave'}
+          buttonName={"+ Add Leave"}
         />
       </Box>
 
@@ -259,7 +267,7 @@ const Leave = () => {
           open={openDeleteModal}
           handleCloseModal={handleCloseDeleteModal}
           handleConfirmDelete={handleConfirmDelete}
-          message={'Leave'}
+          message={"Leave"}
         />
       )}
     </>
