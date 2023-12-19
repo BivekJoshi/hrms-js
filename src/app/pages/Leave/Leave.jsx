@@ -16,7 +16,6 @@ import { useLeaveDataSearch } from './Api/LeaveApi';
 
 const Leave = () => {
   const { mode } = React.useContext(ThemeModeContext);
-  console.log(leaveDataOfUser);
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
