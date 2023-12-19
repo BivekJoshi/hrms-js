@@ -4,6 +4,7 @@ import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import PermissionHoc from '../../../hoc/permissionHoc';
 import useAuth from '../../../../auth/hooks/component/login/useAuth';
 import CustomTable from '../../../components/CustomTable/CustomTable';
+import HocButton from '../../../hoc/hocButton';
 
 const CompanyTableView = ({
   permissions,
@@ -13,6 +14,7 @@ const CompanyTableView = ({
   handleDeleteCompany,
 }) => {
   const { isEmployee } = useAuth();
+
 
   const columns = [
     {
@@ -55,19 +57,19 @@ const CompanyTableView = ({
   const actions = [
     {
       icon: () => (
-        <ModeEditOutlineIcon />
-        // <HocButton
-        //   permissions={permissions?.canEdit}
-        //   icon={<ModeEditOutlineIcon />}
-        // />
+        // <ModeEditOutlineIcon />
+        <HocButton
+          permissions={permissions?.canEdit}
+          icon={<ModeEditOutlineIcon />}
+        />
       ),
       tooltip: 'Edit Branch',
       onClick: (event, rowData) => handleEditCompany(rowData),
     },
     {
       icon: () => (
-        <DeleteIcon />
-        // <HocButton permissions={permissions?.canDelete} icon={<DeleteIcon />} />
+        // <DeleteIcon />
+        <HocButton permissions={permissions?.canDelete} icon={<DeleteIcon />} />
       ),
       tooltip: 'Delete Branch',
       onClick: (event, rowData) => handleDeleteCompany(rowData),
@@ -94,4 +96,4 @@ const CompanyTableView = ({
   );
 };
 
-export default PermissionHoc(CompanyTableView);
+export default CompanyTableView;

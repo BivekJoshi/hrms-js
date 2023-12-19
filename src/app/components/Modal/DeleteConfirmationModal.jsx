@@ -18,6 +18,7 @@ const DeleteConfirmationModal = ({
   message,
 }) => {
   const { mode } = useContext(ThemeModeContext);
+  console.log({"mode": mode})
 
   return (
     <Dialog open={open} onClose={handleCloseModal}>
@@ -31,7 +32,8 @@ const DeleteConfirmationModal = ({
             variant="contained"
             onClick={handleConfirmDelete}
             disabled={isLoading}
-            startIcon={isLoading ? <CircularProgress size={20} /> : null}
+            startIcon={isLoading && <CircularProgress size={20} /> }
+            color="success"
           >
             {isLoading ? "Deleting..." : "Confirm"}
           </Button>

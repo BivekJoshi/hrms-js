@@ -1,18 +1,20 @@
-import * as React from "react";
-import { useState } from "react";
-import { Box, Button, Chip, Stack, Tooltip, Typography } from "@mui/material";
-import { useDeleteLeave, useGetleaveOfUser } from "../../hooks/leave/useLeave";
-import DeleteIcon from "@mui/icons-material/Delete";
-import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
-import { AddLeaveModal, EditLeaveModal } from "./LeaveModal/LeaveModal";
-import DeleteConfirmationModal from "../../components/Modal/DeleteConfirmationModal";
-import { ButtonComponent } from "../../components/Button/ButtonComponent";
-import ThemeModeContext from "../../../theme/ThemeModeContext";
-import CustomTable from "../../components/CustomTable/CustomTable";
+import * as React from 'react';
+import { useState } from 'react';
+import { Box, Button, Chip, Stack, Tooltip, Typography } from '@mui/material';
+
+import { useDeleteLeave } from '../../hooks/leave/useLeave';
+
+import DeleteIcon from '@mui/icons-material/Delete';
+import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
+import { AddLeaveModal, EditLeaveModal } from './LeaveModal/LeaveModal';
+import DeleteConfirmationModal from '../../components/Modal/DeleteConfirmationModal';
+import { ButtonComponent } from '../../components/Button/ButtonComponent';
+import ThemeModeContext from '../../../theme/ThemeModeContext';
+import CustomTable from '../../components/CustomTable/CustomTable';
+import { toast } from 'react-toastify';
+import { useLeaveDataSearch } from './Api/LeaveApi';
 
 const Leave = () => {
-  const { data: leaveDataOfUser, isLoading: loading } = useGetleaveOfUser();
-
   const { mode } = React.useContext(ThemeModeContext);
   console.log(leaveDataOfUser);
   const [openAddModal, setOpenAddModal] = useState(false);
@@ -44,6 +46,16 @@ const Leave = () => {
     setOpenEditModal(true);
   };
 
+  const { data, isLoading:loadingg } = useLeaveDataSearch(
+    () => {
+      console.log("Success");
+      toast.success("Successfully Fetch data1111")
+    },
+    () => {
+      console.log("Error");
+    }
+  );
+
   const columns = [
     {
       title: "SN",
@@ -54,15 +66,15 @@ const Leave = () => {
       render: (rowData) => rowData.tableData.id + 1,
     },
     {
-      title: "Employee Name",
-      width: "100px",
-      render: (rowData) => rowData.employeeName,
+      title: 'Employee Name',
+      field: 'employeeName',
+      width: '100px',
       sorting: false,
     },
     {
-      title: "Leave Type",
-      width: "100px",
-      render: (rowData) => rowData.leaveType,
+      title: 'Leave Type',
+      field:'leaveType',
+      width: '100px',
       sorting: false,
     },
     {
@@ -177,22 +189,10 @@ const Leave = () => {
     },
 
     {
-      title: "Approved By",
-      width: "80px",
-      render: (rowData) => {
-        return (
-          <Typography
-            style={{
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-              textAlign: "center",
-            }}
-          >
-            {rowData?.approvedBy ? rowData?.approvedBy : "-"}
-          </Typography>
-        );
-      },
+      title: 'Approved By',
+      width: '80px',
       sorting: false,
+      field:'approvedBy',
     },
     {
       title: "Actions",
@@ -221,7 +221,7 @@ const Leave = () => {
     },
   ];
 
-  if (loading) return <>Loading</>;
+  // if (isLoading || loadingemployee || loadingleaveType) return <>Loading</>;
 
   return (
     <>
@@ -242,10 +242,10 @@ const Leave = () => {
 
       <CustomTable
         columns={columns}
-        data={leaveDataOfUser}
-        tableLayout="fixed"
-        title="Leave Data"
-        isLoading={loading}
+        data={data}
+        tableLayout='fixed'
+        title='Leave Data'
+        // isLoading={loadingleave}
       />
       {openEditModal && (
         <EditLeaveModal

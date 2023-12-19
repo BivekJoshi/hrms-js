@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Grid, TextField, Button, MenuItem } from "@mui/material";
 import { useRoleForm } from "../../../../hooks/auth/roles/RoleForm/useRoleForm";
 import ThemeModeContext from "../../../../../theme/ThemeModeContext";
+import { ButtonComponent } from '../../../../components/Button/ButtonComponent';
 
 const roleStatus = [
   {
@@ -82,22 +83,22 @@ export const AddRoleFields = ({ onClose,isLoading,data }) => {
           direction="row"
           justifyContent="flex-end"
           alignItems="flex-end"
+          gap={1}
+          mt={2}
         >
-          <Button
+          <ButtonComponent
             variant="contained"
-            onClick={handleFormSubmit}
-            sx={{ mt: 3, ml: 1 }}
-          >
-            {submitButtonText}
-          </Button>
-          <Button
+            OnClick={handleFormSubmit}
+            // sx={{ mt: 3, ml: 1 }}
+            buttonName={submitButtonText}
+          />
+          <ButtonComponent
             variant="contained"
-            onClick={onClose}
-            sx={{ mt: 3, ml: 1 }}
-            color="error"
-          >
-            Cancel
-          </Button>
+            OnClick={onClose}
+            // sx={{ mt: 3, ml: 1 }}
+            BGColor={"#d32f2f"}
+            buttonName={"Cancel"}
+          />
         </Grid>
       </Grid>
     )
