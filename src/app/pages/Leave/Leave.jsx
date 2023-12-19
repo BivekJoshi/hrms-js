@@ -248,7 +248,7 @@ const Leave = () => {
       />
       {openEditModal && (
         <EditLeaveModal
-          id={editedLeave?.id}
+          data={editedLeave}
           open={openEditModal}
           handleCloseModal={handleCloseEditModal}
           title={'Edit Leave'}
