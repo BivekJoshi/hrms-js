@@ -1,7 +1,7 @@
-import React from "react";
-import { format, addMonths } from "date-fns";
-import { enUS } from "date-fns/locale";
-import CustomTable from "../../components/CustomTable/CustomTable";
+import React from 'react';
+import { format, addMonths } from 'date-fns';
+import { enUS } from 'date-fns/locale';
+import CustomTable from '../../components/CustomTable/CustomTable';
 
 const Age = (dateOfBirth) => {
   const year = new Date(dateOfBirth).getFullYear();
@@ -15,7 +15,7 @@ const Birthdaytable = ({ data, isloading, currMonth }) => {
   const Data = data
     ?.map((row, i) => {
       const currentYear = new Date().getFullYear();
-      let empBday = row.dateOfBirth.split("-");
+      let empBday = row.dateOfBirth.split('-');
       const bdayThisYear = `${currentYear}-${empBday[1]}-${empBday[2]}`;
       const dateOfBirth = new Date(row.dateOfBirth);
       const isTodayBirthday =
@@ -24,15 +24,15 @@ const Birthdaytable = ({ data, isloading, currMonth }) => {
       const age = Age(row.dateOfBirth);
       return {
         fullName: `${row.fullName}`,
-        position: row?.positionName || "",
-        dateOfBirth: format(new Date(row.dateOfBirth), "dd MMMM", {
+        position: row?.positionName || '',
+        dateOfBirth: format(new Date(row.dateOfBirth), 'dd MMMM', {
           locale: enUS,
         }),
-        dayOfBirth: format(new Date(bdayThisYear), "EEEE", {
+        dayOfBirth: format(new Date(bdayThisYear), 'EEEE', {
           locale: enUS,
         }),
         age: age,
-        gender: row.gender || "",
+        gender: row.gender || '',
         isTodayBirthday: isTodayBirthday,
       };
     })
@@ -48,19 +48,19 @@ const Birthdaytable = ({ data, isloading, currMonth }) => {
   return (
     <CustomTable
       columns={[
-        { title: "Name", field: "fullName", sorting: false },
-        { title: "Position", field: "position", sorting: false },
-        { title: "Date", field: "dateOfBirth", sorting: false },
-        { title: "Day", field: "dayOfBirth", sorting: false },
-        { title: "Age", field: "age", sorting: false },
-        { title: "Gender", field: "gender", sorting: false },
+        { title: 'Name', field: 'fullName', sorting: false },
+        { title: 'Position', field: 'position', sorting: false },
+        { title: 'Date', field: 'dateOfBirth', sorting: false },
+        { title: 'Day', field: 'dayOfBirth', sorting: false },
+        { title: 'Age', field: 'age', sorting: false },
+        { title: 'Gender', field: 'gender', sorting: false },
       ]}
       data={Data}
       title={currMonth}
       rowStyle={(rowData) => ({
-        backgroundColor: rowData.isTodayBirthday === true ? "red" : "",
-        color: rowData.isTodayBirthday ? "white" : "",
-        fontSize: ".8rem",
+        backgroundColor: rowData.isTodayBirthday === true ? 'red' : '',
+        color: rowData.isTodayBirthday ? 'white' : '',
+        fontSize: '.8rem',
       })}
     />
   );

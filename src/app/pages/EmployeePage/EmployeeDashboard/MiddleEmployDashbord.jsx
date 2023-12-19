@@ -14,6 +14,7 @@ export const MiddleEmployDashbord = ({}) => {
   // const { data } = useGetEmployeeAverageWork();
   // const averageWork = data !== "NaN" ? ((data / 9) * 100) / 100 : 0;
   const { mode } = useContext(ThemeModeContext);
+  console.log(attendanceData);
   return (
     <Box
       display='grid'

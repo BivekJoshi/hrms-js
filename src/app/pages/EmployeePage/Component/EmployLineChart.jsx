@@ -42,7 +42,7 @@ export const EmployLineChart = ({ attendanceData }) => {
   const series = [
     {
       name: "Present Days",
-      data: attendanceData?.map((item) => item.attendanceCountRes.presentDays),
+      data: attendanceData?.map((item) => item?.attendanceCountRes),
     },
   ];
 
