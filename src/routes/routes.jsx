@@ -175,7 +175,7 @@ const routes = [
     component: <Designation component="designation" />,
   },
   {
-    path: "company",
+    path: "branch",
     name: "Company",
     id: nanoid(),
     component: <Company component="company" />,

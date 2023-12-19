@@ -10,18 +10,19 @@ const DesignationFields = ({ onClose, isLoading, data }) => {
     formik.handleSubmit();
   };
 
-  const submitButtonText = data ? 'Update Designation' : 'Add Designation';
+  const submitButtonText = data ? "Update Designation" : "Add Designation";
 
   return (
     !isLoading && (
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
           <TextField
-            id='positionName'
-            name='positionName'
-            label='Designation Name'
-            placeholder='Enter Designation name'
+            id="positionName"
+            name="positionName"
+            label="Designation Name"
+            placeholder="Enter Designation name"
             fullWidth
+            
             required
             value={formik.values.positionName}
             onChange={formik.handleChange}
@@ -37,10 +38,10 @@ const DesignationFields = ({ onClose, isLoading, data }) => {
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
-            id='positionLevel'
-            name='positionLevel'
-            label='Designation Level'
-            placeholder='Enter designation level'
+            id="positionLevel"
+            name="positionLevel"
+            label="Designation Level"
+            placeholder="Enter designation level"
             fullWidth
             required
             value={formik.values.positionLevel}
@@ -58,13 +59,13 @@ const DesignationFields = ({ onClose, isLoading, data }) => {
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
-            id='salary'
-            name='salary'
-            label='Salary'
-            placeholder='Enter salary'
+            id="salary"
+            name="salary"
+            label="Salary"
+            placeholder="Enter salary"
             fullWidth
             required
-            type='number'
+            type="number"
             value={formik.values.salary}
             onChange={formik.handleChange}
             error={formik.touched.salary && Boolean(formik.errors.salary)}
@@ -75,10 +76,10 @@ const DesignationFields = ({ onClose, isLoading, data }) => {
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
-            id='positionDetails'
-            name='positionDetails'
-            label='Designation Details'
-            placeholder='Enter designation details'
+            id="positionDetails"
+            name="positionDetails"
+            label="Designation Details"
+            placeholder="Enter designation details"
             fullWidth
             multiline
             rows={3}
@@ -97,22 +98,22 @@ const DesignationFields = ({ onClose, isLoading, data }) => {
         </Grid>
         <Grid
           container
-          direction='row'
-          justifyContent='flex-end'
-          alignItems='flex-end'
+          direction="row"
+          justifyContent="flex-end"
+          alignItems="flex-end"
         >
           <Button
-            variant='contained'
+            variant="contained"
             onClick={handleFormSubmit}
             sx={{ mt: 3, ml: 1 }}
           >
             {submitButtonText}
           </Button>
           <Button
-            variant='contained'
+            variant="contained"
             onClick={onClose}
             sx={{ mt: 3, ml: 1 }}
-            color='error'
+            color="error"
           >
             Cancel
           </Button>

@@ -4,6 +4,7 @@ import { Autocomplete } from "@mui/material";
 import { useGetEmployee } from "../../../hooks/employee/useEmployee";
 import { useAddUserControlForm } from "../../../pages/Auth/UserControl/Users/useAddUserControlForm";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
+import { ButtonComponent } from "../../Button/ButtonComponent";
 
 export const AddUserControlFields = ({ onClose }) => {
   const { data: employeeData } = useGetEmployee();
@@ -87,21 +88,19 @@ export const AddUserControlFields = ({ onClose }) => {
           justifyContent="flex-end"
           alignItems="flex-end"
         >
-          <Button
+          <ButtonComponent
             variant="contained"
-            onClick={handleFormSubmit}
+            OnClick={handleFormSubmit}
             sx={{ mt: 3, ml: 1, color: "#fff" }}
-          >
-            Add User
-          </Button>
-          <Button
+            buttonName={"Add User"}
+          />
+          <ButtonComponent
             variant="contained"
-            onClick={onClose}
+            OnClick={onClose}
             sx={{ mt: 3, ml: 1 }}
-            color="error"
-          >
-            Cancel
-          </Button>
+            BGColor={"#d32f2f"}
+            buttonName={"Cancel"}
+          />
         </Grid>
       </Grid>
     </>

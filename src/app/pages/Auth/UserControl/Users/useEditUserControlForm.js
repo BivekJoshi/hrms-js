@@ -8,8 +8,8 @@ export const useEditUserControlForm = ({rowData}) => {
 
     const formik = useFormik({
         initialValues: {
-            userId: rowData?.id||"",
-            roleId: "",
+            userId: rowData?.id || "",
+            roleId: rowData?.role?.id || "",
         },
         // validationSchema: UserSchema,
         onSubmit: (values) => {

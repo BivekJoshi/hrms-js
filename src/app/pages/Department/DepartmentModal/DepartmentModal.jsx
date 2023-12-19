@@ -16,8 +16,8 @@ export const AddDepartmentModal = ({ open, handleCloseModal, title }) => {
   );
 };
 
-export const EditDepartmentModal = ({ open, handleCloseModal, id, title }) => {
-  const { data } = useGetDepartmentById(id);
+export const EditDepartmentModal = ({ open, handleCloseModal, title, data }) => {
+  // const { data } = useGetDepartmentById(id);
   return (
     <div>
       <FormModal

@@ -313,6 +313,7 @@ const ProjectCard = ({
         <EditProjectModal
         title={"Edit Project"}
           id={editedProject?.id}
+          data={editedProject}
           open={openEditModal}
           handleCloseModal={handleCloseEditModal}
         />
