@@ -2,14 +2,12 @@ import { useFormik } from "formik";
 import { AddressSchema } from "./AddressSchema";
 import {
   useEditAddress,
-  useGetAddressById,
   usePermanentAddAddress,
   useTemporaryAddress,
 } from '../useAddress';
 import { toast } from 'react-toastify';
-import { useParams } from 'react-router-dom';
 
-export const usePermanentAddressForm = (isLoading, data) => {
+export const usePermanentAddressForm = (data, isLoading) => {
   const { mutate: permanentMutate } = usePermanentAddAddress({});
   const { mutate: temporaryMutate } = useTemporaryAddress({});
   const { mutate: editMutate } = useEditAddress({});

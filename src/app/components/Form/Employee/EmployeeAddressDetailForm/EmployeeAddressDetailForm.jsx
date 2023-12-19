@@ -1,4 +1,4 @@
-import { Grid, TextField, MenuItem, Typography, Button } from "@mui/material";
+import { Grid, TextField, MenuItem, Typography } from "@mui/material";
 import { FieldArray, FormikProvider } from "formik";
 import React, { useEffect, useState } from "react";
 import { ThemeSwitch } from "../../../../../theme/ThemeSwitch";
@@ -42,6 +42,10 @@ const province = [
 ];
 
 const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
+  console.log(
+    '🚀 ~ file: EmployeeAddressDetailForm.jsx:45 ~ EmployeeAddressDetailForm ~ formik:',
+    formik
+  );
   const [showTemporaryAddress, setShowTemporaryAddress] = useState(
     Boolean(data[1]?.id)
   );

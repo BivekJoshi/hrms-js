@@ -1,29 +1,18 @@
 import * as React from "react";
 import { useState } from "react";
 import { Box, Button, Chip, Stack, Tooltip, Typography } from "@mui/material";
-import { useGetLeaveType } from "../../hooks/leaveType/useLeaveType";
-
-import {
-  useDeleteLeave,
-  useGetLeave,
-  useGetleaveOfUser,
-} from "../../hooks/leave/useLeave";
-import { useGetEmployee } from "../../hooks/employee/useEmployee";
-
+import { useDeleteLeave, useGetleaveOfUser } from "../../hooks/leave/useLeave";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import { AddLeaveModal, EditLeaveModal } from "./LeaveModal/LeaveModal";
 import DeleteConfirmationModal from "../../components/Modal/DeleteConfirmationModal";
 import { ButtonComponent } from "../../components/Button/ButtonComponent";
-import { useGetUserControl } from "../../hooks/auth/userControl/useUserControl";
 import ThemeModeContext from "../../../theme/ThemeModeContext";
 import CustomTable from "../../components/CustomTable/CustomTable";
-import { toast } from "react-toastify";
-import { useLeaveDataSearch } from "./Api/LeaveApi";
 
-const Leave = ({ isLoading }) => {
+const Leave = () => {
   const { data: leaveDataOfUser, isLoading: loading } = useGetleaveOfUser();
-  
+
   const { mode } = React.useContext(ThemeModeContext);
   console.log(leaveDataOfUser);
   const [openAddModal, setOpenAddModal] = useState(false);
@@ -192,7 +181,13 @@ const Leave = ({ isLoading }) => {
       width: "80px",
       render: (rowData) => {
         return (
-          <Typography style={{ overflow: "hidden", textOverflow: "ellipsis", textAlign:"center" }}>
+          <Typography
+            style={{
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              textAlign: "center",
+            }}
+          >
             {rowData?.approvedBy ? rowData?.approvedBy : "-"}
           </Typography>
         );
