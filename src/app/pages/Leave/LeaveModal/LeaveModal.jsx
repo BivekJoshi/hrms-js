@@ -16,8 +16,8 @@ export const AddLeaveModal = ({ open, handleCloseModal, title}) => {
   )
 }
 
-export const EditLeaveModal = ({ open, handleCloseModal, id, title }) => {
-    const { data } = useGetLeaveById(id);
+export const EditLeaveModal = ({ open, handleCloseModal, data, title }) => {
+    // const { data } = useGetLeaveById(id);
     return (
       <div>
         <FormModal
