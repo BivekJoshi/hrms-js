@@ -42,13 +42,16 @@ const province = [
 ];
 
 const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
-  console.log({"data": data})
+  console.log(
+    '🚀 ~ file: EmployeeAddressDetailForm.jsx:45 ~ EmployeeAddressDetailForm ~ data:',
+    data
+  );
   const [showTemporaryAddress, setShowTemporaryAddress] = useState(
-    Boolean(data?.addresses?.[1]?.id)
+    Boolean(data[1]?.id)
   );
 
   useEffect(() => {
-    setShowTemporaryAddress(data?.addresses?.[1]?.id);
+    setShowTemporaryAddress(data[1]?.id);
   }, [data]);
 
   const handleTemporaryButtonClick = (index) => {
