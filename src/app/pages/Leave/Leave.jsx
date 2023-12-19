@@ -48,7 +48,7 @@ const Leave = () => {
   const { data, isLoading:loadingg } = useLeaveDataSearch(
     () => {
       console.log("Success");
-      toast.success("Successfully Fetch data1111")
+      toast.success("Successfully Fetched data")
     },
     () => {
       console.log("Error");

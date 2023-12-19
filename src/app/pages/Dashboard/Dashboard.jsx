@@ -13,7 +13,6 @@ import DashboardCard from "../../components/cards/Dashboard/DashboardCard";
 import { ProjectProgressCard } from "../../components/cards/ProjectProgress/ProjectProgressCard";
 import { ProjectTable } from "./DashboardTable/ProjectTable";
 import { useDashBoardSearch } from "./api/dashboardApi";
-import { toast } from "react-toastify";
 
 const Dashboard = () => {
   const { mode } = useContext(ThemeModeContext);
