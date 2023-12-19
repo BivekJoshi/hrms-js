@@ -43,8 +43,8 @@ const province = [
 
 const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
   console.log(
-    '🚀 ~ file: EmployeeAddressDetailForm.jsx:45 ~ EmployeeAddressDetailForm ~ data:',
-    data
+    '🚀 ~ file: EmployeeAddressDetailForm.jsx:45 ~ EmployeeAddressDetailForm ~ formik:',
+    formik
   );
   const [showTemporaryAddress, setShowTemporaryAddress] = useState(
     Boolean(data[1]?.id)
