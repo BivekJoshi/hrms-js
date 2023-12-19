@@ -85,21 +85,19 @@ const EmployeeDashboard = Loadable(
     import("../app/pages/EmployeePage/EmployeeDashboard/EmployeeDashbord")
   )
 );
-const { isSuperAdmin, isAdmin, isHr, isManager, isEmployee, isHrClerk } =
-  useAuth();
 const routes = [
   {
     path: "dashboard",
     name: "Dashboard",
     id: nanoid(),
-    component: !isEmployee ? <Dashboard /> : <EmployeeDashboard />,
+    component:<Dashboard /> ,
   },
-  // {
-  //   path: "home",
-  //   name: "Employee Dashboard",
-  //   id: nanoid(),
-  //   component: <EmployeeDashboard />,
-  // },
+  {
+    path: "home",
+    name: "Employee Dashboard",
+    id: nanoid(),
+    component: <EmployeeDashboard />,
+  },
   {
     path: "project/dashboard",
     name: "Project Dashboard",

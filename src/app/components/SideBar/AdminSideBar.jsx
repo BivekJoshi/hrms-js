@@ -260,7 +260,7 @@ export default function AdminSidebar() {
           sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
         />
       ),
-      path: 'dashboard',
+      path: 'home',
       subMenus: [],
     },
     {
