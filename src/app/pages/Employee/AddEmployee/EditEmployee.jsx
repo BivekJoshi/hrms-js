@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import EditEmployeeForm from '../../../components/Form/Employee/EmployeeBasicInfoForm/EditEmployeeForm/EditEmployeeForm';
 import { useNavigate, useParams } from 'react-router-dom';
 import useAuth from '../../../../auth/hooks/component/login/useAuth';
+import { toast } from 'react-toastify'; // Import toast from the library
+
 
 const EditEmployee = () => {
   const { getStepContent, handleNext, steps } = EditEmployeeForm();
@@ -32,6 +34,11 @@ const EditEmployee = () => {
   const targetRoute = isEmployee
     ? `/employee/viewprofile`
     : `/admin/employee/${id}`;
+
+    const handleSubmit = () => {
+      toast.success('Changes submitted successfully');  
+      navigate(targetRoute);
+    };
 
   return (
     <div>
@@ -68,13 +75,22 @@ const EditEmployee = () => {
                   Back
                 </Button>
               )}
-              {activeStep !== 0 && (
+              {activeStep !== 0 || activeStep !== 6 && (
                 <Button
                   sx={{ mt: 3, ml: 1 }}
                   variant='outlined'
                   onClick={handleSkip}
                 >
                   Skip
+                </Button>
+              )}
+              {activeStep === 6 && (
+                <Button
+                  sx={{ mt: 3, ml: 1 }}
+                  variant='outlined'
+                  onClick={ handleSubmit} 
+                >
+                  Submit
                 </Button>
               )}
               {activeStep === steps.length - 1 ? (
