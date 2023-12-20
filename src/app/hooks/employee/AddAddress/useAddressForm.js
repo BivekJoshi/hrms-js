@@ -13,10 +13,6 @@ export const usePermanentAddressForm = (data, isLoading) => {
   const { mutate: editMutate } = useEditAddress({});
 
   const addressDetails = !isLoading && data;
-  console.log(
-    '🚀 ~ file: useAddressForm.js:16 ~ usePermanentAddressForm ~ addressDetails:',
-    addressDetails
-  );
 
   const initialValues = {
     addresses: [
