@@ -6,6 +6,7 @@ import {
   useGetEmployeeHistoryById,
 } from '../useEmployeeHistory';
 import { useParams } from 'react-router-dom';
+import HistorySchema from './HistorySchema';
 
 const useEmployeeHistoryForm = () => {
   const { id } = useParams();
@@ -44,6 +45,7 @@ const useEmployeeHistoryForm = () => {
             ],
     },
     enableReinitialize: true,
+    validationSchema: HistorySchema,
     onSubmit: (values) => {
       if (values.history.some((history) => !history.id)) {
         handleRequest(values);

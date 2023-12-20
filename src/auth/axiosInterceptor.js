@@ -6,6 +6,7 @@ import { docContextPath, getBaseUrl } from './getBaseUrl';
 
 // const baseURL = 'http://172.16.16.131:8083/hrms/api/';
 //export const baseURL = 'https://172.16.16.94:6523/hrms/api/';
+// export const DOC_URL = 'https://103.94.159.144/';
 export const DOC_URL = docContextPath();
 const baseURL = getBaseUrl();
 // returns true if exipred && false is not

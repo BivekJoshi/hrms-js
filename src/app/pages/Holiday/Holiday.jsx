@@ -17,7 +17,7 @@ import FormModal from "../../components/Modal/FormModal";
 import HolidayFields from "../../components/Form/Holiday/HolidayFields";
 import EmailForHoliday from "../Email/EmailForHoliday";
 import useAuth from "../../../auth/hooks/component/login/useAuth";
-import { OpenHoliday } from "./HolidayModal/HolidayModal";
+import { OpenEmpHoliday, OpenHoliday } from "./HolidayModal/HolidayModal";
 import { ButtonComponent } from "../../components/Button/ButtonComponent";
 
 const Holiday = ({ permissions }) => {
@@ -55,18 +55,15 @@ const Holiday = ({ permissions }) => {
     }
   };
   const handleOpenModal = (e) => {
-    const hasPermission = permissions?.canEdit;
-    // console.log({"hasPermission": hasPermission})
-    if(hasPermission) {
-      setEventGetID(e?.event?._def?.publicId);
-      setOpenModal(true);
-    }
+    setEventGetID(e?.event?._def?.publicId);
+    setOpenModal(true);
   };
 
   const handleEmailButtonClick = () => {
     setOpenEmailModal(true);
     setOpenSubmitModal(false);
   };
+  const hasPermission = permissions?.canEdit;
 
   return (
     <>
@@ -148,7 +145,6 @@ const Holiday = ({ permissions }) => {
                   variant="contained"
                   sx={{ mt: 3, ml: 1, color: "#fff" }}
                   onClick={handleEmailButtonClick}
-                  
                 >
                   Yes
                 </Button>
@@ -170,7 +166,7 @@ const Holiday = ({ permissions }) => {
 
       {openEmailModal && (
         <FormModal
-        title={"Send Email"}
+          title={"Send Email"}
           open={openEmailModal}
           onClose={() => setOpenEmailModal(false)}
           formComponent={
@@ -214,9 +210,16 @@ const Holiday = ({ permissions }) => {
         />
       )} */}
 
-      {openModal && (
+      {openModal && hasPermission ? (
         <OpenHoliday
           title={"Edit Holiday"}
+          id={getEventID}
+          open={openModal}
+          handleCloseModal={() => setOpenModal(false)}
+        />
+      ) : (
+        <OpenEmpHoliday
+          title={"Holiday Details"}
           id={getEventID}
           open={openModal}
           handleCloseModal={() => setOpenModal(false)}
