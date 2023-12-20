@@ -1,8 +1,8 @@
-import { Grid, TextField, MenuItem, Typography } from "@mui/material";
-import { FieldArray, FormikProvider } from "formik";
-import React, { useEffect, useState } from "react";
-import { ThemeSwitch } from "../../../../../theme/ThemeSwitch";
-import { usePermanentAddressForm } from "../../../../hooks/employee/AddAddress/useAddressForm";
+import { Grid, TextField, MenuItem, Typography } from '@mui/material';
+import { FieldArray, FormikProvider } from 'formik';
+import React, { useEffect, useState } from 'react';
+import { ThemeSwitch } from '../../../../../theme/ThemeSwitch';
+import { usePermanentAddressForm } from '../../../../hooks/employee/AddAddress/useAddressForm';
 
 const province = [
   {
@@ -51,7 +51,7 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
 
   const handleTemporaryButtonClick = () => {
     setShowTemporaryAddress((val) => !val);
-    formik.setFieldValue("perTempAddSame", !formik.values.perTempAddSame);
+    formik.setFieldValue('perTempAddSame', !formik.values.perTempAddSame);
   };
 
   return (
@@ -61,7 +61,7 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
           name='addresses'
           render={(arrayHelpers) => (
             <div>
-              {formik.values.addresses.map((address, index) => (
+              {formik?.values?.addresses?.map((address, index) => (
                 <>
                   {index === 0 ? (
                     <>
@@ -218,7 +218,7 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                         style={{ marginTop: '20px', marginBottom: '20px' }}
                       >
                         <ThemeSwitch
-                          name="isAddressSperTempAddSameame"
+                          name='isAddressSperTempAddSameame'
                           checked={showTemporaryAddress}
                           onClick={() => handleTemporaryButtonClick(index)}
                         />
