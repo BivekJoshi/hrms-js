@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext } from "react";
+import React, { useState, useRef, useContext, useEffect} from "react";
 import {
   Typography,
   Popper,
@@ -65,7 +65,7 @@ const Notification = ({ data }) => {
   }
 
   const prevOpen = useRef(open);
-  React.useEffect(() => {
+useEffect(() => {
     if (prevOpen.current === true && open === false) {
       anchorRef.current.focus();
     }

@@ -14,6 +14,7 @@ import {
 import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 import {
   useGetProject,
+  useGetProjectDetail,
   useGetProjectPageWise,
 } from '../../../hooks/project/useProject';
 import { AddProjectModal } from '../ProjectModal/ProjectModal';
@@ -30,6 +31,8 @@ const Project = ({ permissions }) => {
 
   const [openModal, setOpenModal] = useState(false);
   const { data: projectData, isLoading } = useGetProject();
+  const { data: projectDetail } = useGetProjectDetail();
+console.log(projectDetail);
 
   const [nameFilter, setNameFilter] = useState('');
   const [companyFilter, setCompanyFilter] = useState('');
@@ -132,7 +135,7 @@ const Project = ({ permissions }) => {
           gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
         }}
       >
-        {projectData?.map((item, index) => (
+        {projectDetail?.map((item, index) => (
           <ProjectCard
             item={item}
             Id={item.id}
@@ -140,9 +143,9 @@ const Project = ({ permissions }) => {
             ProjectName={item.projectName}
             StartDate={item.startDate}
             EndDate={item.endDate}
-            ProjectLeaderId={item.projectLeaderId}
-            // AssociateCompanies={item.associateCompanies[0].branchName}
+            ProjectLeaderId={item.projectLeadName}
             TaskStatus={item.taskStatus}
+            totalEmployee={item.totalEmployee}
           />
         ))}
       </Grid>

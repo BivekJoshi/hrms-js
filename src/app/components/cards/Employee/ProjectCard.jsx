@@ -22,9 +22,9 @@ const ProjectCard = ({
   StartDate,
   EndDate,
   ProjectLeaderId,
-  AssociateCompanies,
   TaskStatus,
   item,
+  totalEmployee
 }) => {
   const navigate = useNavigate();
   const { isEmployee } = useAuth();
@@ -205,7 +205,7 @@ const ProjectCard = ({
                 />
               </Typography>
               <Typography variant="body2" color="text.primary">
-                Team Size: 0
+                Team Size:  {totalEmployee === null ? "0" : totalEmployee}
               </Typography>
             </Stack>
             <CardContent
@@ -276,13 +276,7 @@ const ProjectCard = ({
                     Project Leader
                   </Typography>
                   <Typography variant="p">
-                    {/* {getProjectLeaderName(ProjectLeaderId)} */}Sanjaya Thakur
-                  </Typography>
-                  <Typography variant="p" style={{ margin: "10px 0" }}>
-                    <Typography sx={{ fontSize: "1rem", fontWeight: 600 }}>
-                      Associate Companies
-                    </Typography>
-                    {AssociateCompanies}
+                    {ProjectLeaderId}
                   </Typography>
                 </Stack>
               </Box>
