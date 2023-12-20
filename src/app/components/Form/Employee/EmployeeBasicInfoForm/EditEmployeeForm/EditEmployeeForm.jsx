@@ -31,7 +31,6 @@ const EditEmployeeForm = () => {
     'Bank Details',
     'Employee History',
     'Document Details',
-    // 'Other Details',
   ];
 
   const { data, isLoading: employeeLoading } = useGetEmployeeById(id);
