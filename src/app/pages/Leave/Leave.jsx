@@ -1,6 +1,14 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { Box, Button, Chip, Stack, Tooltip, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  Chip,
+  Grid,
+  Stack,
+  Tooltip,
+  Typography,
+} from '@mui/material';
 
 import { useDeleteLeave } from '../../hooks/leave/useLeave';
 
@@ -16,7 +24,6 @@ import { useLeaveDataSearch } from './Api/LeaveApi';
 
 const Leave = () => {
   const { mode } = React.useContext(ThemeModeContext);
-
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
@@ -37,7 +44,7 @@ const Leave = () => {
   };
 
   const handleConfirmDelete = () => {
-    deleteLeaveMutation.mutate(deletedLeave.id);
+    deleteLeaveMutation.mutate(deletedLeave.leaveId);
     setOpenDeleteModal(false);
   };
 
@@ -46,13 +53,13 @@ const Leave = () => {
     setOpenEditModal(true);
   };
 
-  const { data, isLoading:loadingg } = useLeaveDataSearch(
+  const { data, isLoading: loading } = useLeaveDataSearch(
     () => {
       console.log("Success");
-      toast.success("Successfully Fetch data1111")
+      toast.success("Successfully Fetched data")
     },
     () => {
-      console.log("Error");
+      console.log('Error');
     }
   );
 
@@ -61,33 +68,28 @@ const Leave = () => {
       title: 'SN',
       field: 'id',
       sortable: false,
-      width: '10px',
       sorting: false,
       render: (rowData) => rowData.tableData.id + 1,
     },
     {
       title: 'Employee Name',
       field: 'employeeName',
-      width: '100px',
       sorting: false,
     },
     {
       title: 'Leave Type',
-      field:'leaveType',
-      width: '100px',
+      field: 'leaveType',
       sorting: false,
     },
     {
       title: 'From',
       field: 'fromDate',
-      width: '60px',
       emptyValue: '-',
       sorting: false,
     },
     {
       title: 'To',
       field: 'toDate',
-      width: '60px',
       emptyValue: '-',
       sorting: false,
     },
@@ -95,7 +97,6 @@ const Leave = () => {
       title: 'Status',
       field: 'leaveStatus',
       emptyValue: '-',
-      width: '100px',
       cellStyle: {
         whiteSpace: 'nowrap',
       },
@@ -127,11 +128,14 @@ const Leave = () => {
     {
       title: 'Leave Reason',
       field: 'leaveReason',
-      width: '240px',
       emptyValue: '-',
       render: (rowData) => {
         return (
-          <Tooltip title={<div style={{ maxHeight: '100px', overflowY: 'auto' }}>{rowData?.leaveReason}</div>} placement='top-start' arrow>
+          <Tooltip
+            title={<div>{rowData?.leaveReason}</div>}
+            placement='top-start'
+            arrow
+          >
             <Chip
               style={{
                 cursor: 'pointer',
@@ -184,29 +188,35 @@ const Leave = () => {
       title: 'Approved By',
       width: '80px',
       sorting: false,
-      field:'approvedBy',
+      field: 'approvedBy',
     },
     {
       title: 'Actions',
-      width: '10px',
+      width: '150px',
       render: (rowData) => {
         const isApprovedOrRejected = ['APPROVED', 'REJECTED'].includes(
           rowData.leaveStatus
         );
 
         return (
-          <Stack direction='row' spacing={0}>
+          <Grid
+            display='flex'
+            flexDirection='row'
+            gap={0}
+            justifyContent='center'
+          >
             <Button
               color='primary'
               onClick={() => handleEditLeave(rowData)}
               disabled={isApprovedOrRejected}
+              sx={{ padding: '0' }}
             >
               <ModeEditOutlineIcon />
             </Button>
             <Button color='primary' onClick={() => handleDeleteLeave(rowData)}>
               <DeleteIcon />
             </Button>
-          </Stack>
+          </Grid>
         );
       },
       sorting: false,
@@ -227,7 +237,7 @@ const Leave = () => {
         <ButtonComponent
           OnClick={handleAddOpenModal}
           Border='none'
-          color={"#fff"}
+          color={'#fff'}
           buttonName={'+ Add Leave'}
         />
       </Box>
@@ -235,23 +245,22 @@ const Leave = () => {
       <CustomTable
         columns={columns}
         data={data}
-        tableLayout='fixed'
         title='Leave Data'
-        // isLoading={loadingleave}
+        isLoading={loading}
       />
       {openEditModal && (
         <EditLeaveModal
-          id={editedLeave?.id}
+          data={editedLeave}
           open={openEditModal}
           handleCloseModal={handleCloseEditModal}
-          title={"Edit Leave"}
+          title={'Edit Leave'}
         />
       )}
       {openAddModal && (
         <AddLeaveModal
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
-          title={"Apply Leave"}
+          title={'Apply Leave'}
         />
       )}
       {openDeleteModal && (

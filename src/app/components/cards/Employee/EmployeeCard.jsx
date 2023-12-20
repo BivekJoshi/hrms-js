@@ -1,20 +1,20 @@
-import React, { useState, useEffect, useRef, useContext } from 'react';
-import { Email, LocalPhone } from '@mui/icons-material';
-import { Box, Button, CardMedia, Tooltip } from '@mui/material';
-import { Chip, ClickAwayListener, Grow, Stack } from '@mui/material';
-import { MenuItem, MenuList, Paper, Popper, Typography } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import Male from '../../../../assets/male.png';
-import Female from '../../../../assets/female.png';
-import MainCard from '../MainCard';
-import EmailModal from '../../../pages/Email/EmailModal';
-import { EditDeactivationEmployeeModal } from '../../../pages/Employee/EmployeeDeactivationModal/EditDeactivationEmployeeModal';
-import ProgressbyAll from '../../../pages/Employee/ProgressEmployeeData/ProgressbyAll';
-import PopOver from '../../../../theme/overrides/PopOver';
-import ThemeModeContext from '../../../../theme/ThemeModeContext';
-import { DOC_URL } from '../../../../auth/axiosInterceptor';
-import useAuth from '../../../../auth/hooks/component/login/useAuth';
+import React, { useState, useEffect, useRef, useContext } from "react";
+import { Email, LocalPhone } from "@mui/icons-material";
+import { Box, Button, CardMedia, Tooltip } from "@mui/material";
+import { Chip, ClickAwayListener, Grow, Stack } from "@mui/material";
+import { MenuItem, MenuList, Paper, Popper, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import Male from "../../../../assets/male.png";
+import Female from "../../../../assets/female.png";
+import MainCard from "../MainCard";
+import EmailModal from "../../../pages/Email/EmailModal";
+import { EditDeactivationEmployeeModal } from "../../../pages/Employee/EmployeeDeactivationModal/EditDeactivationEmployeeModal";
+import ProgressbyAll from "../../../pages/Employee/ProgressEmployeeData/ProgressbyAll";
+import PopOver from "../../../../theme/overrides/PopOver";
+import ThemeModeContext from "../../../../theme/ThemeModeContext";
+import { DOC_URL } from "../../../../auth/axiosInterceptor";
+import useAuth from "../../../../auth/hooks/component/login/useAuth";
 
 const EmployeeCard = ({
   IsActive,
@@ -51,10 +51,10 @@ const EmployeeCard = ({
   };
 
   function handleListKeyDown(event) {
-    if (event.key === 'Tab') {
+    if (event.key === "Tab") {
       event.preventDefault();
       setOpen(false);
-    } else if (event.key === 'Escape') {
+    } else if (event.key === "Escape") {
       setOpen(false);
     }
   }
@@ -85,36 +85,36 @@ const EmployeeCard = ({
         <MainCard
           grow={true}
           style={{
-            textAlign: 'center',
-            padding: '1.5rem',
-            backgroundColor: mode === 'light' ? 'white' : '#292929',
+            textAlign: "center",
+            padding: "1.5rem",
+            backgroundColor: mode === "light" ? "white" : "#292929",
           }}
         >
-          <Box display='flex' justifyContent={'end'}>
+          <Box display="flex" justifyContent={"end"}>
             {isEmployee ? (
-              ''
+              ""
             ) : (
               <>
                 <Button
                   style={{
-                    marginTop: '5px',
-                    fontSize: '.7rem',
-                    padding: '1px 5px',
+                    marginTop: "5px",
+                    fontSize: ".7rem",
+                    padding: "1px 5px",
                   }}
                   onClick={handleClick}
-                  variant='outlined'
-                  color={IsActive ? 'success' : 'warning'}
+                  variant="outlined"
+                  color={IsActive ? "success" : "warning"}
                 >
-                  {IsActive ? 'Terminate' : 'Active'}
+                  {IsActive ? "Terminate" : "Active"}
                 </Button>
 
                 <Box>
                   <Button
                     ref={anchorRef}
-                    id='composition-button'
-                    aria-controls={open ? 'composition-menu' : undefined}
-                    aria-expanded={open ? 'true' : undefined}
-                    aria-haspopup='true'
+                    id="composition-button"
+                    aria-controls={open ? "composition-menu" : undefined}
+                    aria-expanded={open ? "true" : undefined}
+                    aria-haspopup="true"
                     onClick={handleToggle}
                   >
                     <MoreHorizIcon />
@@ -123,7 +123,7 @@ const EmployeeCard = ({
                     open={open}
                     anchorEl={anchorRef.current}
                     role={undefined}
-                    placement='bottom-start'
+                    placement="bottom-start"
                     transition
                     disablePortal
                   >
@@ -132,26 +132,26 @@ const EmployeeCard = ({
                         {...TransitionProps}
                         style={{
                           transformOrigin:
-                            placement === 'bottom-start'
-                              ? 'left top'
-                              : 'left bottom',
+                            placement === "bottom-start"
+                              ? "left top"
+                              : "left bottom",
                         }}
                       >
                         <Paper>
                           <ClickAwayListener onClickAway={handleClose}>
                             <MenuList
                               autoFocusItem={open}
-                              id='composition-menu'
-                              aria-labelledby='composition-button'
+                              id="composition-menu"
+                              aria-labelledby="composition-button"
                               onKeyDown={handleListKeyDown}
-                              style={{ fontSize: '.8rem' }}
+                              style={{ fontSize: ".8rem" }}
                             >
                               <MenuItem
                                 onClick={() => {
                                   navigate(`edit/${EmployeeId}`);
                                   handleClose();
                                 }}
-                                style={{ fontSize: '.8rem' }}
+                                style={{ fontSize: ".8rem" }}
                               >
                                 Edit
                               </MenuItem>
@@ -160,7 +160,7 @@ const EmployeeCard = ({
                                   navigate(`${EmployeeId}`);
                                   handleClose();
                                 }}
-                                style={{ fontSize: '.8rem' }}
+                                style={{ fontSize: ".8rem" }}
                               >
                                 View Profile
                               </MenuItem>
@@ -176,59 +176,47 @@ const EmployeeCard = ({
           </Box>
           <Stack
             style={{
-              textAlign: ' -webkit-center',
-              marginTop: '1rem',
-              alignItems: 'center',
+              textAlign: " -webkit-center",
+              marginTop: "1rem",
+              alignItems: "center",
             }}
-          >
-            {/* <CardMedia
-              component='img'
-              src={
-                employeePhoto
-                  ? img
-                  : EGender === 'MALE'
-                  ? Male
-                  : ''
-                  ? Female
-                  : Female
-              }
-              alt='IMG'
-              sx={{ width: 66, height: 66, borderRadius: '2rem' }}
-            /> */}
-          </Stack>
-          <div style={{ paddingTop: '16px' }}>
+          ></Stack>
+          <div style={{ paddingTop: "16px" }}>
             {ProgressBarRes && <ProgressbyAll ProgressbyAll={ProgressBarRes} />}
           </div>
 
           <Stack>
             <Typography
-              style={{ fontWeight: 700, margin: '1rem 0', fontSize: '20px' }}
+              style={{ fontWeight: 700, margin: "1rem 0", fontSize: "20px" }}
             >
               <Chip
                 sx={{
-                  bgcolor: mode === 'light' ? 'white' : 'rgb(41, 41, 41)',
-                  fontSize: '1rem',
-                  width: '80%',
+                  bgcolor: mode === "light" ? "white" : "rgb(41, 41, 41)",
+                  fontSize: "1rem",
+                  width: "80%",
                 }}
                 label={
-                  <Typography variant='h6' style={{ overflow: "hidden", textOverflow: "ellipsis" }}>
+                  <Typography
+                    variant="h6"
+                    style={{ overflow: "hidden", textOverflow: "ellipsis" }}
+                  >
                     {EFirstName || ""} {EMiddleName || ""} {ELastName || ""}
                   </Typography>
                 }
               />
             </Typography>
-            <Box padding={'0 1rem'}>
-              <Typography variant='body2' gutterBottom>
-                <Tooltip title={PositionLevel || ''}>
+            <Box padding={"0 1rem"}>
+              <Typography variant="body2" gutterBottom>
+                <Tooltip title={PositionLevel || ""}>
                   <Chip
                     style={{ width: 230 }}
                     label={
                       <p
                         style={{
-                          textOverflow: 'ellipsis',
-                          overflow: 'hidden',
+                          textOverflow: "ellipsis",
+                          overflow: "hidden",
                         }}
-                      >{`${PositionName || ''} (${PositionLevel || ''})`}</p>
+                      >{`${PositionName || ""} `}</p>
                     }
                   />
                 </Tooltip>
@@ -236,49 +224,49 @@ const EmployeeCard = ({
             </Box>
           </Stack>
           {isEmployee ? (
-            ''
+            ""
           ) : (
             <Stack
               style={{
-                fontSize: '.9rem',
+                fontSize: ".9rem",
               }}
             >
               <Box
-                backgroundColor={mode === 'light' ? '#f5f5f5' : '#4d4c4c'}
-                padding='.5rem'
-                borderRadius='.5rem'
+                backgroundColor={mode === "light" ? "#f5f5f5" : "#4d4c4c"}
+                padding=".5rem"
+                borderRadius=".5rem"
               >
                 <Tooltip
-                  title={`Send Email To ${EFirstName || ''} ${
-                    EMiddleName || ''
-                  } ${ELastName || ''}`}
+                  title={`Send Email To ${EFirstName || ""} ${
+                    EMiddleName || ""
+                  } ${ELastName || ""}`}
                 >
                   <Stack
                     onClick={handleOpenEmailform}
                     spacing={{ xs: 1 }}
-                    direction='row'
+                    direction="row"
                     useFlexGap
-                    flexWrap='wrap'
-                    alignItems='center'
+                    flexWrap="wrap"
+                    alignItems="center"
                   >
-                    <Email sx={{ fontSize: '1.2rem' }} />
+                    <Email sx={{ fontSize: "1.2rem" }} />
                     <Chip
                       sx={{
-                        bgcolor: mode === 'light' ? '#f5f5f5' : '#4d4c4c',
-                        fontSize: '1rem',
-                        width: '80%',
-                        justifyContent: 'flex-start',
-                        padding: '0',
+                        bgcolor: mode === "light" ? "#f5f5f5" : "#4d4c4c",
+                        fontSize: "1rem",
+                        width: "80%",
+                        justifyContent: "flex-start",
+                        padding: "0",
                       }}
                       label={
                         <Typography
-                          variant='p'
+                          variant="p"
                           style={{
-                            margin: '10px 0 0 -12px',
-                            fontSize: '.85rem',
+                            margin: "10px 0 0 -12px",
+                            fontSize: ".85rem",
                           }}
                         >
-                          {OfficeEmail || ''}
+                          {OfficeEmail || ""}
                         </Typography>
                       }
                     />
@@ -287,17 +275,17 @@ const EmployeeCard = ({
 
                 <Stack
                   spacing={{ xs: 1 }}
-                  direction='row'
+                  direction="row"
                   useFlexGap
-                  flexWrap='wrap'
-                  alignItems='center'
+                  flexWrap="wrap"
+                  alignItems="center"
                 >
-                  <LocalPhone sx={{ fontSize: '1.2rem' }} />
+                  <LocalPhone sx={{ fontSize: "1.2rem" }} />
                   <Typography
-                    variant='p'
-                    style={{ margin: '10px 0', fontSize: '.85rem' }}
+                    variant="p"
+                    style={{ margin: "10px 0", fontSize: ".85rem" }}
                   >
-                    {MobileNumber || ''}
+                    {MobileNumber || ""}
                   </Typography>
                 </Stack>
               </Box>
@@ -306,7 +294,7 @@ const EmployeeCard = ({
         </MainCard>
         {openEmailForm && (
           <EmailModal
-            officeEmail={OfficeEmail || ''}
+            officeEmail={OfficeEmail || ""}
             employeeId={EmployeeId}
             open={openEmailForm}
             onClose={handleCloseEmailform}
@@ -317,7 +305,7 @@ const EmployeeCard = ({
 
       {openDeactivateModal && (
         <EditDeactivationEmployeeModal
-          title={'Terminate Employee'}
+          title={"Terminate Employee"}
           id={EmployeeId}
           open={openDeactivateModal}
           handleCloseModal={handleCloseDeactivateModal}

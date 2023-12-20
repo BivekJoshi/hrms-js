@@ -29,7 +29,7 @@ const leaveStatus = [
 ];
 
 export const EditLeaveFields = ({ onClose, isLoading, data }) => {
-  const { isManager } = useAuth();
+  const { isManager, isSuperAdmin } = useAuth();
   const { data: employeeData } = useGetEmployee();
   const { data: leaveTypeData } = useGetLeaveType();
   const { formik } = useLeaveForm(data);
@@ -70,7 +70,7 @@ export const EditLeaveFields = ({ onClose, isLoading, data }) => {
   };
 
   const submitButtonText = data ? 'Update Leave' : 'Add Leave';
-  if (isManager) {
+  if (isManager || isSuperAdmin) {
     return (
       !isLoading && (
         <Grid container spacing={3}>
@@ -165,6 +165,7 @@ export const EditLeaveFields = ({ onClose, isLoading, data }) => {
 };
 
 export const LeaveFields = ({ onClose, isLoading, data }) => {
+  console.log('🚀 ~ file: LeaveFields.jsx:168 ~ LeaveFields ~ data:', data);
   const { data: employeeData } = useGetEmployee();
   const { data: leaveTypeData } = useGetLeaveType();
   const { formik } = useLeaveForm(data);

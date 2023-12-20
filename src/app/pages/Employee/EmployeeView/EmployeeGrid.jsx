@@ -1,6 +1,6 @@
-import React, { useContext, useState } from "react";
-import { useGetEmployee } from "../../../hooks/employee/useEmployee";
-import EmployeeGridView from "./EmployeePage/EmployeeGridView";
+import React, { useContext, useState } from 'react';
+import { useGetEmployee } from '../../../hooks/employee/useEmployee';
+import EmployeeGridView from './EmployeePage/EmployeeGridView';
 import {
   Box,
   Container,
@@ -11,28 +11,28 @@ import {
   Typography,
   Skeleton,
   Tooltip,
-} from "@mui/material";
-import ThemeModeContext from "../../../../theme/ThemeModeContext";
+} from '@mui/material';
+import ThemeModeContext from '../../../../theme/ThemeModeContext';
 
 const EmployeeGrid = ({ employeeData, isLoading }) => {
-  const [nameFilter, setNameFilter] = useState("");
-  const [positionFilter, setPositionFilter] = useState("");
-  const [phoneFilter, setPhoneFilter] = useState("");
+  const [nameFilter, setNameFilter] = useState('');
+  const [positionFilter, setPositionFilter] = useState('');
+  const [phoneFilter, setPhoneFilter] = useState('');
   const { palette } = useContext(ThemeModeContext);
   const filteredEmployees = employeeData?.filter(
     (employee) =>
       `${employee.firstName} ${employee.lastName}`
         .toLowerCase()
         .includes(nameFilter.toLowerCase()) &&
-      employee?.position?.positionName
-        .toLowerCase()
-        .includes(positionFilter.toLowerCase()) &&
+      employee?.positionId
+        // .toLowerCase()
+        // .includes(positionFilter.toLowerCase()) 
+        &&
       employee?.mobileNumber.toString().includes(phoneFilter)
   );
-
   if (isLoading) {
     return (
-      <Skeleton sx={{ height: 190 }} animation="wave" variant="rectangular" />
+      <Skeleton sx={{ height: 190 }} animation='wave' variant='rectangular' />
     );
   }
   return (
@@ -40,45 +40,44 @@ const EmployeeGrid = ({ employeeData, isLoading }) => {
       <Grid
         container
         sx={{
-          display: "flex",
-          padding: "16px",
-          borderRadius: "6px",
-          marginBottom: "16px",
+          display: 'flex',
+          padding: '16px',
+          borderRadius: '6px',
+          marginBottom: '16px',
           backgroundColor: palette?.background?.default,
         }}
       >
-        <Typography variant="h7" fontWeight={500}>
+        <Typography variant='h7' fontWeight={500}>
           Filter By:
         </Typography>
         <Grid container spacing={4}>
           <Grid item xs={4}>
-            {" "}
+            {' '}
             <TextField
-              label="Filter by Name"
+              label='Filter by Name'
               value={nameFilter}
               onChange={(e) => setNameFilter(e.target.value)}
               fullWidth
-              size="small"
+              size='small'
             />
           </Grid>
           <Grid item xs={4}>
-            {" "}
+            {' '}
             <TextField
-              label="Filter by Position"
+              label='Filter by Position'
               value={positionFilter}
               onChange={(e) => setPositionFilter(e.target.value)}
               fullWidth
-              size="small"
+              size='small'
             />
           </Grid>
           <Grid item xs={4}>
-            {" "}
             <TextField
-              label="Filter by Phone Number"
+              label='Filter by Phone Number'
               value={phoneFilter}
               onChange={(e) => setPhoneFilter(e.target.value)}
               fullWidth
-              size="small"
+              size='small'
             />
           </Grid>
         </Grid>

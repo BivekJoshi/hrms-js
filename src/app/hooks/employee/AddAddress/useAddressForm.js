@@ -7,22 +7,21 @@ import {
 } from '../useAddress';
 import { toast } from 'react-toastify';
 
-export const usePermanentAddressForm = ({
-  addressData,
-  addressLoading,
-}) => {
+export const usePermanentAddressForm = (data, isLoading) => {
   const { mutate: permanentMutate } = usePermanentAddAddress({});
   const { mutate: temporaryMutate } = useTemporaryAddress({});
   const { mutate: editMutate } = useEditAddress({});
 
-  const addressDetails = !addressLoading && addressData?.addresses;
-
-  console.log({"addressDetails": addressDetails})
+  const addressDetails = !isLoading && data;
+  console.log(
+    '🚀 ~ file: useAddressForm.js:16 ~ usePermanentAddressForm ~ addressDetails:',
+    addressDetails
+  );
 
   const initialValues = {
     addresses: [
-      createAddressObject(addressDetails?.[0]),
-      createAddressObject(addressDetails?.[1]),
+      createAddressObject(addressDetails),
+      createAddressObject(addressDetails),
     ],
   };
 
@@ -47,7 +46,7 @@ export const usePermanentAddressForm = ({
   }
 
   function handleSubmit(values) {
-    const hasAddresses = addressDetails?.length > 0;
+    const hasAddresses = addressDetails ? addressDetails?.length > 0 : '';
 
     if (hasAddresses) {
       handleEditRequest(values);
@@ -66,12 +65,12 @@ export const usePermanentAddressForm = ({
     } else {
       // If temporary address is not empty, update both permanent and temporary addresses
       permanentMutate({
-        ...addresses[0],
+        ...addresses,
         addressType: 'PERMANENT',
       });
 
       temporaryMutate({
-        ...addresses[1],
+        ...addresses,
         addressType: 'TEMPORARY',
       });
     }

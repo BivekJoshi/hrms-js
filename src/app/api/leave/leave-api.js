@@ -10,6 +10,15 @@ export const getleave = async () => {
   }
 };
 
+/*________________________GET leave by user_____________________________________*/
+export const getleaveOfUser = async () => {
+  // const { isEmployee } = useAuth();
+  // if (!isEmployee) {
+    const data = await axiosInstance.get(`/leave/leave-detail`);
+    return data;
+  // }
+};
+
 /*________________________GET PENDING LEAVE_____________________________________*/
 export const getpendingleave = async () => {
   const data = await axiosInstance.get(`/leave/leaves-pending`);

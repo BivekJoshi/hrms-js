@@ -4,7 +4,6 @@ import { Box } from '@mui/material';
 import ThemeModeContext from '../../../theme/ThemeModeContext';
 
 const BarChatDiagram = ({ dashboardData }) => {
-  console.log(dashboardData,"data ma chai ");
   const { mode, palette } = useContext(ThemeModeContext);
 
   const names = [

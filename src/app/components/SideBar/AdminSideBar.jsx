@@ -2,9 +2,6 @@ import React, { useContext, useState } from 'react';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import CoPresentOutlinedIcon from '@mui/icons-material/CoPresentOutlined';
 import ApprovalOutlinedIcon from '@mui/icons-material/ApprovalOutlined';
-import LaptopIcon from '@mui/icons-material/Laptop';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import PersonIcon from '@mui/icons-material/Person';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import MailIcon from '@mui/icons-material/Mail';
 import CakeIcon from '@mui/icons-material/Cake';
@@ -41,6 +38,7 @@ import jwtDecode from 'jwt-decode';
 // import BreadCrumbs from '../../../routes/routes';
 import Logo from '../../../assets/logo.png';
 import SmallLogo from '../../../assets/smallLogo.png';
+import { useGetLoggedInUser } from '../../hooks/auth/usePassword';
 
 const drawerWidth = 260;
 
@@ -91,6 +89,7 @@ export default function AdminSidebar() {
   const user = getUser();
   const decode = jwtDecode(user);
   const userRole = decode?.userRole;
+  const { data: loggedUserData } = useGetLoggedInUser();
 
   const drawerMenusForAdmin = [
     {
@@ -367,6 +366,7 @@ export default function AdminSidebar() {
         open={open}
         handleDrawerOpen={handleDrawerOpen}
         drawerWidth={drawerWidth}
+        loggedUserData={loggedUserData}
       />
       <Drawer
         sx={{
