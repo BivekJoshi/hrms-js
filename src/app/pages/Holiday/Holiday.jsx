@@ -55,8 +55,11 @@ const Holiday = ({ permissions }) => {
     }
   };
   const handleOpenModal = (e) => {
-    setEventGetID(e?.event?._def?.publicId);
-    setOpenModal(true);
+    const eId = e?.event?._def?.publicId;
+    if (eId) {
+      setEventGetID(eId);
+      setOpenModal(true);
+    }
   };
 
   const handleEmailButtonClick = () => {
@@ -64,6 +67,7 @@ const Holiday = ({ permissions }) => {
     setOpenSubmitModal(false);
   };
   const hasPermission = permissions?.canEdit;
+  console.log("getEventID:", getEventID);
 
   return (
     <>
@@ -202,22 +206,15 @@ const Holiday = ({ permissions }) => {
         }}
       />
 
-      {/* {openModal && (
-        <OpenHoliday
-          id={getEventID}
-          open={openModal}
-          handleCloseModal={handleCloseModal}
-        />
-      )} */}
-
-      {openModal && hasPermission ? (
+      {openModal && hasPermission && (
         <OpenHoliday
           title={"Edit Holiday"}
           id={getEventID}
           open={openModal}
           handleCloseModal={() => setOpenModal(false)}
         />
-      ) : (
+      )}
+      {openModal && !hasPermission && (
         <OpenEmpHoliday
           title={"Holiday Details"}
           id={getEventID}

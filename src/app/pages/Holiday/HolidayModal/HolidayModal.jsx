@@ -21,7 +21,6 @@ export const OpenHoliday = ({ open, handleCloseModal, id, title }) => {
 };
 
 export const OpenEmpHoliday = ({ open, handleCloseModal, id, title }) => {
-  console.log(id)
   const { data } = useGetHolidayById(id);
   return (
     <div>

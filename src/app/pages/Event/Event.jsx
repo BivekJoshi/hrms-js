@@ -55,8 +55,11 @@ const Event = ({ permissions }) => {
     }
   };
   const handleOpenModal = (e) => {
-    setEventGetID(e?.event?._def?.publicId);
-    setOpenModal(true);
+    const eId = e?.event?._def?.publicId;
+    if (eId) {
+      setEventGetID(eId);
+      setOpenModal(true);
+    }
   };
 
   const handleEmailButtonClick = () => {
@@ -189,14 +192,15 @@ const Event = ({ permissions }) => {
         }}
       />
 
-      {openModal && hasPermission ? (
+      {openModal && hasPermission && (
         <OpenEvent
           title={"Edit Event"}
           id={getEventID}
           open={openModal}
           handleCloseModal={() => setOpenModal(false)}
         />
-      ) : (
+      )}
+      {openModal && !hasPermission && (
         <OpenEmpEvent
           title={"Event Details"}
           id={getEventID}
