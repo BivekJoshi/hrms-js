@@ -2,6 +2,7 @@ import { Grid, TextField, MenuItem, Typography } from '@mui/material';
 import { FieldArray, FormikProvider } from 'formik';
 import React, { useEffect, useState } from 'react';
 import { ThemeSwitch } from '../../../../../theme/ThemeSwitch';
+import { usePermanentAddressForm } from '../../../../hooks/employee/AddAddress/useAddressForm';
 
 const province = [
   {
@@ -42,16 +43,15 @@ const province = [
 ];
 
 const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
-  const [showTemporaryAddress, setShowTemporaryAddress] = useState(
-    Boolean(data[1]?.id)
-  );
-
+  const [showTemporaryAddress, setShowTemporaryAddress] = useState(false);
   useEffect(() => {
-    setShowTemporaryAddress(data[1]?.id);
-  }, [data]);
+    const isperTempAddressTrue = formik.values?.perTempAddSame;
+    setShowTemporaryAddress(isperTempAddressTrue);
+  }, [formik.values]);
 
-  const handleTemporaryButtonClick = (index) => {
-    setShowTemporaryAddress(!showTemporaryAddress);
+  const handleTemporaryButtonClick = () => {
+    setShowTemporaryAddress((val) => !val);
+    formik.setFieldValue('perTempAddSame', !formik.values.perTempAddSame);
   };
 
   return (
@@ -61,7 +61,7 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
           name='addresses'
           render={(arrayHelpers) => (
             <div>
-              {formik.values.addresses.map((address, index) => (
+              {formik?.values?.addresses?.map((address, index) => (
                 <>
                   {index === 0 ? (
                     <>
@@ -218,9 +218,11 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                         style={{ marginTop: '20px', marginBottom: '20px' }}
                       >
                         <ThemeSwitch
+                          name='isAddressSperTempAddSameame'
+                          checked={showTemporaryAddress}
                           onClick={() => handleTemporaryButtonClick(index)}
                         />
-                        Temporary Address is not same as permanent
+                        Do you have different Temporary Address?
                       </Typography>
                     </>
                   ) : (
