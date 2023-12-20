@@ -197,9 +197,9 @@ const Attendance = () => {
     );
 
   return (
-    <div className="main">
+    <div className='main'>
       <h2>Attendance</h2>
-      <div className="Search">
+      <div className='Search'>
         <Box
           component='form'
           noValidate
@@ -224,7 +224,7 @@ const Attendance = () => {
                 onChange={(e) => setSearchEmployee(e.target.value)}
               />
             </Grid>
-            <Grid item xs={4}>
+            {/* <Grid item xs={4}>
               <TextField
                 select
                 label='Select Month'
@@ -263,7 +263,7 @@ const Attendance = () => {
                   </MenuItem>
                 ))}
               </TextField>
-            </Grid>
+            </Grid> */}
           </Grid>
         </Box>
       </div>

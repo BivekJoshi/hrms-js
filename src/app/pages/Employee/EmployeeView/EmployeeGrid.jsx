@@ -15,6 +15,10 @@ import {
 import ThemeModeContext from '../../../../theme/ThemeModeContext';
 
 const EmployeeGrid = ({ employeeData, isLoading }) => {
+  console.log(
+    '🚀 ~ file: EmployeeGrid.jsx:18 ~ EmployeeGrid ~ employeeData:',
+    employeeData
+  );
   const [nameFilter, setNameFilter] = useState('');
   const [positionFilter, setPositionFilter] = useState('');
   const [phoneFilter, setPhoneFilter] = useState('');
@@ -24,10 +28,9 @@ const EmployeeGrid = ({ employeeData, isLoading }) => {
       `${employee.firstName} ${employee.lastName}`
         .toLowerCase()
         .includes(nameFilter.toLowerCase()) &&
-      employee?.positionId
-        // .toLowerCase()
-        // .includes(positionFilter.toLowerCase()) 
-        &&
+      employee?.positionName
+        .toLowerCase()
+        .includes(positionFilter.toLowerCase()) &&
       employee?.mobileNumber.toString().includes(phoneFilter)
   );
   if (isLoading) {
@@ -84,7 +87,7 @@ const EmployeeGrid = ({ employeeData, isLoading }) => {
       </Grid>
 
       <EmployeeGridView
-        employeeData={employeeData}
+        employeeData={filteredEmployees}
         isLoading={isLoading}
       />
     </>
