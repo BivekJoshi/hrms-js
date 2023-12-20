@@ -7,17 +7,19 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './Style/Login.css';
 import groupImg from '../../../../assets/group.png';
 
 import poweredBy from '../../../../assets/poweredBy.jpg';
 import { LoadingButton } from '@mui/lab';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import ThemeModeContext from '../../../../theme/ThemeModeContext';
 import { useLoginForm } from '../../../../auth/hooks/component/login/useLoginForm';
 import Bg from '../../../../assets/bg.png';
+import { getUser, removeUser } from '../../../utils/cookieHelper';
+import jwtDecode from 'jwt-decode';
 
 const NewLogin = () => {
   const { mode } = useContext(ThemeModeContext);
@@ -28,6 +30,36 @@ const NewLogin = () => {
     loading,
     handleMouseDownPassword,
   } = useLoginForm({});
+
+  const authToken = getUser();
+
+  const [user, setUser] = useState(authToken);
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    setUser(authToken);
+    if (user) {
+      const decode = jwtDecode(user);
+      const userRole = decode?.userRole;
+
+      if (!userRole) {
+        removeUser();
+        navigate('/');
+      } else if (
+        userRole === 'ROLE_SUPER_ADMIN' ||
+        userRole === 'ROLE_ADMIN' ||
+        userRole === 'ROLE_MANAGER' ||
+        userRole === 'ROLE_HR_ADMIN' ||
+        userRole === 'ROLE_HR_CLERK'
+      ) {
+        navigate('/admin/dashboard');
+      } else if (userRole === 'ROLE_EMPLOYEE') {
+        navigate('/employee/home');
+      } else {
+        navigate('/');
+      }
+    }
+  }, [user]);
   return (
     <div style={{ height: '100dvh' }}>
       <div className='login-bgg'>

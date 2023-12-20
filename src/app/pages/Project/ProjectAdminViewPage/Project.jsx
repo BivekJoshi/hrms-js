@@ -14,6 +14,7 @@ import {
 import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 import {
   useGetProject,
+  useGetProjectDetail,
   useGetProjectPageWise,
 } from '../../../hooks/project/useProject';
 import { AddProjectModal } from '../ProjectModal/ProjectModal';
@@ -29,7 +30,7 @@ const Project = ({ permissions }) => {
   const { isEmployee } = useAuth();
 
   const [openModal, setOpenModal] = useState(false);
-  const { data: projectData, isLoading } = useGetProject();
+  const { data: projectDetail, isLoading } = useGetProjectDetail();
 
   const [nameFilter, setNameFilter] = useState('');
   const [companyFilter, setCompanyFilter] = useState('');
@@ -51,7 +52,7 @@ const Project = ({ permissions }) => {
     setOpenModal(false);
   };
 
-  const filteredProject = projectData?.filter((project) =>
+  const filteredProject = projectDetail?.filter((project) =>
     project?.projectName.toLowerCase().includes(nameFilter.toLowerCase())
   );
 
@@ -100,19 +101,11 @@ const Project = ({ permissions }) => {
                 Search Project
               </Typography>
               <Grid container spacing={3}>
-                <Grid item xs={12} sm={12} md={6}>
+                <Grid item xs={12}>
                   <TextField
                     label='Filter by Name'
                     value={nameFilter}
                     onChange={(e) => setNameFilter(e.target.value)}
-                    fullWidth
-                  />
-                </Grid>
-                <Grid item xs={12} sm={12} md={6}>
-                  <TextField
-                    label='Filter by Company'
-                    value={companyFilter}
-                    onChange={(e) => setCompanyFilter(e.target.value)}
                     fullWidth
                   />
                 </Grid>
@@ -132,19 +125,20 @@ const Project = ({ permissions }) => {
           gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
         }}
       >
-        {projectData?.map((item, index) => (
-          <ProjectCard
-            item={item}
-            Id={item.id}
-            key={index}
-            ProjectName={item.projectName}
-            StartDate={item.startDate}
-            EndDate={item.endDate}
-            ProjectLeaderId={item.projectLeaderId}
-            // AssociateCompanies={item.associateCompanies[0].branchName}
-            TaskStatus={item.taskStatus}
-          />
-        ))}
+        {filteredProject &&
+          filteredProject?.map((item, index) => (
+            <ProjectCard
+              item={item}
+              Id={item.projectid}
+              key={index}
+              ProjectName={item.projectName}
+              StartDate={item.startDate}
+              EndDate={item.endDate}
+              ProjectLeaderId={item.projectLeadName}
+              TaskStatus={item.taskStatus}
+              totalEmployee={item.totalEmployee}
+            />
+          ))}
       </Grid>
 
       {/* <Box padding="2rem" display="grid" justifyContent={"center"}>

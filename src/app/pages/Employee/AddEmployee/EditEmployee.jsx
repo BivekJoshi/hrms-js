@@ -1,11 +1,10 @@
-import { Box, Button, Container, Paper, Step } from '@mui/material';
-import { StepLabel, Stepper, Typography } from '@mui/material';
-import React, { useState } from 'react';
-import EditEmployeeForm from '../../../components/Form/Employee/EmployeeBasicInfoForm/EditEmployeeForm/EditEmployeeForm';
-import { useNavigate, useParams } from 'react-router-dom';
-import useAuth from '../../../../auth/hooks/component/login/useAuth';
-import { toast } from 'react-toastify'; // Import toast from the library
-
+import { Box, Button, Container, Paper, Step } from "@mui/material";
+import { StepLabel, Stepper, Typography } from "@mui/material";
+import React, { useState } from "react";
+import EditEmployeeForm from "../../../components/Form/Employee/EmployeeBasicInfoForm/EditEmployeeForm/EditEmployeeForm";
+import { useNavigate, useParams } from "react-router-dom";
+import useAuth from "../../../../auth/hooks/component/login/useAuth";
+import { toast } from "react-toastify"; // Import toast from the library
 
 const EditEmployee = () => {
   const { getStepContent, handleNext, steps } = EditEmployeeForm();
@@ -35,14 +34,14 @@ const EditEmployee = () => {
     ? `/employee/viewprofile`
     : `/admin/employee/${id}`;
 
-    const handleSubmit = () => {
-      toast.success('Changes submitted successfully');  
-      navigate(targetRoute);
-    };
+  const handleSubmit = () => {
+    toast.success("Changes submitted successfully");
+    navigate(targetRoute);
+  };
 
   return (
     <div>
-      <Typography component='h1' variant='h4' align='center'>
+      <Typography component="h1" variant="h4" align="center">
         Edit Details
       </Typography>
       <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }} alternativeLabel>
@@ -55,7 +54,7 @@ const EditEmployee = () => {
       <React.Fragment>
         {activeStep === steps.length ? (
           <React.Fragment>
-            <Typography variant='h5' gutterBottom>
+            <Typography variant="h5" gutterBottom>
               Employee added successfully
             </Typography>
             <Button onClick={handleReturn} sx={{ mt: 3, ml: 1 }}>
@@ -65,45 +64,38 @@ const EditEmployee = () => {
         ) : (
           <React.Fragment>
             {getStepContent(activeStep)}
-            <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
               {activeStep !== 0 && (
                 <Button
                   onClick={handleBack}
                   sx={{ mt: 3, ml: 1 }}
-                  variant='outlined'
+                  variant="outlined"
                 >
                   Back
                 </Button>
               )}
-              {activeStep !== 0 || activeStep !== 6 && (
-                <Button
-                  sx={{ mt: 3, ml: 1 }}
-                  variant='outlined'
-                  onClick={handleSkip}
-                >
-                  Skip
-                </Button>
-              )}
+              {activeStep !== 0 ||
+                (activeStep !== 6 && (
+                  <Button
+                    sx={{ mt: 3, ml: 1 }}
+                    variant="outlined"
+                    onClick={handleSkip}
+                  >
+                    Skip
+                  </Button>
+                ))}
               {activeStep === 6 && (
                 <Button
                   sx={{ mt: 3, ml: 1 }}
-                  variant='outlined'
-                  onClick={ handleSubmit} 
+                  variant="contained"
+                  onClick={handleSubmit}
                 >
                   Submit
                 </Button>
               )}
-              {activeStep === steps.length - 1 ? (
+              {activeStep !== steps.length - 1 && (
                 <Button
-                  variant='contained'
-                  onClick={() => navigate(targetRoute)}
-                  sx={{ mt: 3, ml: 1 }}
-                >
-                  Add Changes
-                </Button>
-              ) : (
-                <Button
-                  variant='contained'
+                  variant="contained"
                   onClick={() => {
                     handleNext({
                       activeStep,

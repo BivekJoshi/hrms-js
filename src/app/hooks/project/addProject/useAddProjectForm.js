@@ -13,7 +13,7 @@ const useAddProjectForm = () => {
       endDate: '',
       taskStatus: 'PENDING',
       projectLeadId: '',
-      branchId: '',
+      companyId: '',
     },
     validationSchema: ProjectSchema,
     onSubmit: (values) => {

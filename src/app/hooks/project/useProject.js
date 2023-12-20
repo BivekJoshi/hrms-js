@@ -10,12 +10,20 @@ import {
   removeActiveProject,
   getProjectByEmployeeIdInvolved,
   getProjectWiseEmployee,
+  getProjectDetail,
 } from "../../api/project/project-api";
 import { toast } from "react-toastify";
 
 /*________________________GET_____________________________________*/
 export const useGetProject = () => {
   return useQuery(["getProject"], () => getProject(), {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
+};
+/*________________________GET_____________________________________*/
+export const useGetProjectDetail = () => {
+  return useQuery(["getProjectDetail"], () => getProjectDetail(), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });

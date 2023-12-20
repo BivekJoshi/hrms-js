@@ -5,6 +5,11 @@ export const getProject = async () => {
     const data = await axiosInstance.get(`/project/get-all`);
     return data;
 };
+{/*________________________GET Project Detail_____________________________________*/ }
+export const getProjectDetail = async () => {
+    const data = await axiosInstance.get(`/project/get-all-project-details`);
+    return data;
+};
 {/*________________________GET-page-wise_____________________________________*/ }
 export const getProjectPageWise = async (pageNumber) => {
     const data = await axiosInstance.get(`/project/get-all-page-wise/${pageNumber}`);
