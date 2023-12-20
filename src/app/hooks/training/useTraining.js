@@ -4,6 +4,7 @@ import {
   deleteTraining,
   editTraining,
   getEmployeeById,
+  getTrainingByEmpId,
   getTrainingById,
   getTrainingDetail,
 } from '../../api/training/training-api';
@@ -21,6 +22,14 @@ export const useGetTraining = () => {
 /*________________________GET BY TRAINING ID_____________________________________*/
 export const useGetTrainingById = (id) => {
   return useQuery(['getTrainingById', id], () => getTrainingById(id), {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
+};
+
+/*________________________GET BY TRAINING ID_____________________________________*/
+export const useGetTrainingByEmpId = (id) => {
+  return useQuery(['getTrainingByEmpId', id], () => getTrainingByEmpId(id), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
@@ -45,7 +54,7 @@ export const useAddTrainingDetail = ({ onSuccess }) => {
       onSuccess: (data, variables, context) => {
         toast.success('Succesfully added Employee Training');
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries('getEmployeeById');
+        queryClient.invalidateQueries('getTrainingByEmpId');
       },
       onError: (err, _variables, _context) => {
         toast.error(`error: ${err.message}`);
@@ -64,7 +73,7 @@ export const useDeleteTraining = ({ onSuccess }) => {
       onSuccess: (data, variables, context) => {
         toast.success('Successfully deleted Employee Training');
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries('getEmployeeById');
+        queryClient.invalidateQueries('getTrainingByEmpId');
       },
       onError: (err, _variables, _context) => {
         toast.error(`Error: ${err.message}`);
@@ -83,7 +92,7 @@ export const useEditTraining = ({ onSuccess, empId }) => {
       onSuccess: (data, variables, context) => {
         toast.success('Successfully edited Employee Training');
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries('getEmployeeById');
+        queryClient.invalidateQueries('getTrainingByEmpId');
       },
       onError: (err, _variables, _context) => {
         toast.error(`Error: ${err.message}`);

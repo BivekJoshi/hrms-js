@@ -88,7 +88,7 @@ export const usePermanentAddressForm = (data, isLoading) => {
       perTempAddSame: !formik?.values?.perTempAddSame,
     };
     const finalAddress = [permanentAddress, temporary];
-    console.log(formik.values?.perTempAddSame);
+  
     if (!formik.values?.perTempAddSame) {
       permanentMutate([finalAddress?.[0]]);
     } else permanentMutate(finalAddress);
@@ -116,7 +116,7 @@ export const usePermanentAddressForm = (data, isLoading) => {
       addressType: 'TEMPORARY',
     };
     const finalAddress = [permanentAddress, temporary];
-    console.log(formik.values?.perTempAddSame);
+    
     const handleEditMutate = (address, onSuccessMessage) => {
       editMutate(address, {
         onSuccess: () => {

@@ -22,6 +22,15 @@ export const getTrainingById = async (id) => {
   }
 };
 
+/*________________________GET BY TRAININGID_____________________________________*/
+
+export const getTrainingByEmpId = async (id) => {
+  if (id) {
+    const data = await axiosInstance.get(`/training/employee-id/${id}`);
+    return data;
+  }
+};
+
 /*________________________GET BY EMPLOYEEID_____________________________________*/
 
 export const getEmployeeById = async (id) => {
