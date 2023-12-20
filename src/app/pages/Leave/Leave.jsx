@@ -44,7 +44,7 @@ const Leave = () => {
   };
 
   const handleConfirmDelete = () => {
-    deleteLeaveMutation.mutate(deletedLeave.id);
+    deleteLeaveMutation.mutate(deletedLeave.leaveId);
     setOpenDeleteModal(false);
   };
 
@@ -63,7 +63,6 @@ const Leave = () => {
     }
   );
 
-  console.log('🚀 ~ file: Leave.jsx:57 ~ Leave ~ data:', data);
   const columns = [
     {
       title: 'SN',
