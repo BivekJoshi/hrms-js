@@ -11,7 +11,7 @@ const store = configureStore({
     event: eventReducer,
     holiday: holidayReducer,
     user: userReducer,
-    employEditForm: editFormDetailsCount,
+    employeEditForm: editFormDetailsCount,
   },
 });
 
