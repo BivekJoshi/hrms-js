@@ -18,7 +18,11 @@ export const getBaseUrl = () => {
 };
 
 export const docContextPath = () => {
-  const protocolAndHost = `${window.location.protocol}//${window.location.hostname}`;
+  if (envType === 'development') {
+    return 'https://103.94.159.144/';
+  } else {
+    const protocolAndHost = `${window.location.protocol}//${window.location.hostname}/`;
 
-  return protocolAndHost;
+    return protocolAndHost;
+  }
 };
