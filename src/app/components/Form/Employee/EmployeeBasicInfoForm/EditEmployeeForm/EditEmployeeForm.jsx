@@ -24,14 +24,13 @@ const EditEmployeeForm = () => {
   const { id } = useParams();
 
   const steps = [
-    "Basic Details",
-    "Address Details",
-    "Family Details",
-    "Educational Details",
-    "Bank Details",
-    "Employee History",
-    "Document Details",
-    // 'Other Details',
+    'Basic Details',
+    'Address Details',
+    'Family Details',
+    'Educational Details',
+    'Bank Details',
+    'Employee History',
+    'Document Details',
   ];
 
   const { data, isLoading: employeeLoading } = useGetEmployeeById(id);
