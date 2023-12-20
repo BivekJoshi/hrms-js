@@ -106,7 +106,7 @@ const EditEmployeeForm = () => {
         throw new Error('Unknown Step');
     }
   };
- 
+
   const handleNext = ({ activeStep, setActiveStep }) => {
     switch (activeStep) {
       case 0:

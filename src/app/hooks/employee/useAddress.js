@@ -4,7 +4,6 @@ import {
   addTemporaryAddress,
   editAddress,
   getAddressById,
-  getEmployeeAddressById,
 } from '../../api/address/address-api';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -17,13 +16,6 @@ export const useGetEmployeeById = () => {
     refetchOnWindowFocus: false,
   });
 };
-export const useGetEmployeeAddressById = () => {
-  const { id } = useParams();
-  return useQuery(['getEmployeeById', id], () => getEmployeeAddressById(id), {
-    refetchInterval: false,
-    refetchOnWindowFocus: false,
-  });
-};
 
 export const usePermanentAddAddress = ({ onSuccess }) => {
   const { id } = useParams();
@@ -32,7 +24,7 @@ export const usePermanentAddAddress = ({ onSuccess }) => {
     (formData) => addPermanentAddress(formData, id),
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Permanent address added successfully');
+        toast.success('Address added successfully');
         onSuccess && onSuccess(data, variables, context);
       },
       onError: (err, _variables, _context) => {

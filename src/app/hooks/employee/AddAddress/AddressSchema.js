@@ -1,9 +1,9 @@
-import * as Yup from 'yup';
+import * as Yup from "yup";
 import {
   ageRegex,
   onlyTextRegex,
-  onlyNumberRegExp
-} from '../../../../validation/validationRegex';
+  onlyNumberRegExp,
+} from "../../../../validation/validationRegex";
 
 // const AddressSchema = Yup.object().shape({
 //   addresses: Yup.array().of(
@@ -48,37 +48,39 @@ import {
 //   ),
 // });
 
-
 const AddressSchema = Yup.object().shape({
   addresses: Yup.array().of(
     Yup.object().shape({
-      country: Yup.string().when('addressType', {
-        is: 'PERMANENT',
-        then: Yup.string().required('Country is required'),
+      country: Yup.string().when(["addressType", "perTempAddSame"], {
+        is: (addressType, perTempAddSame) => (
+          addressType === "permanent" || perTempAddSame
+        ),
+        then: Yup.string().required("Country is required"),
       }),
-      province: Yup.string().when('addressType', {
-        is: 'PERMANENT',
-        then: Yup.string().required('Province is required'),
+      province: Yup.string().when("addressType", {
+        is: "PERMANENT",
+        then: Yup.string().required("Province is required"),
       }),
-      district: Yup.string().when('addressType', {
-        is: 'PERMANENT',
-        then: Yup.string().required('District is required'),
+      district: Yup.string().when("addressType", {
+        is: "PERMANENT",
+        then: Yup.string().required("District is required"),
       }),
-      wardNumber: Yup.number().when('addressType', {
-        is: 'PERMANENT',
-        then: Yup.number().typeError('Ward number must be a number').required('Ward number is required'),
-      }),      
-      city: Yup.string().when('addressType', {
-        is: 'PERMANENT',
-        then: Yup.string().required('City is required'),
+      wardNumber: Yup.number().when("addressType", {
+        is: "PERMANENT",
+        then: Yup.number()
+          .typeError("Ward number must be a number")
+          .required("Ward number is required"),
       }),
-      street: Yup.string().when('addressType', {
-        is: 'PERMANENT',
-        then: Yup.string().required('Street is required'),
+      city: Yup.string().when("addressType", {
+        is: "PERMANENT",
+        then: Yup.string().required("City is required"),
+      }),
+      street: Yup.string().when("addressType", {
+        is: "PERMANENT",
+        then: Yup.string().required("Street is required"),
       }),
     })
   ),
 });
-
 
 export { AddressSchema };
