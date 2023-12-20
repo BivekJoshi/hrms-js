@@ -15,6 +15,7 @@ const useEmployeeHistoryForm = () => {
   const { data: empHistoryData, isLoading: empHistoryLoading } = useGetEmployeeHistoryById(id);
 
   const historyDetails =
+  console.log({"hello": empHistoryData})
     !empHistoryLoading && Array.isArray(empHistoryData)
       ? empHistoryData.map((empHistory) => ({
           id: empHistory?.id || '',
