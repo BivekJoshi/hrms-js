@@ -231,10 +231,10 @@ const DateInput = ({ formik, isHalfDay, isMultipleDays }) => {
           <Grid item xs={12} sm={6}>
             <TextField
               name='toDate'
-              label='Select To Date'
+              label='Select To'
               type='date'
               inputProps={{
-                min: currentDate, // Disable past date selections
+                min: formik.values.fromDate || currentDate,
               }}
               required
               InputLabelProps={{ shrink: true }}

@@ -28,8 +28,7 @@ const ProjectCard = ({
 }) => {
   const navigate = useNavigate();
   const { isEmployee } = useAuth();
-  const { data: employeeData } = useGetEmployee();
-  const { data: projectEmployeeData } = useGetProjectEmployee();
+  // const { data: projectEmployeeData } = useGetProjectEmployee();
   const { mode } = useContext(ThemeModeContext);
 
   const [openEditModal, setOpenEditModal] = useState(false);
@@ -81,25 +80,6 @@ const ProjectCard = ({
   const handleEditProject = (item) => {
     setEditedProject(item);
     setOpenEditModal(true);
-  };
-
-  const getProjectLeaderName = (projectLeaderId) => {
-    const projectLeader = employeeData?.find(
-      (employee) => employee.id == projectLeaderId
-    );
-    if (projectLeader) {
-      const { firstName, middleName, lastName } = projectLeader;
-      return `${firstName} ${middleName} ${lastName}`;
-    }
-    return projectLeaderId;
-  };
-
-  const getEmployeeNumber = (id) => {
-    const projectId = id;
-    const projectEmployeeNumber = projectEmployeeData?.filter(
-      (empNum) => empNum.projectId === projectId
-    ).length;
-    return projectEmployeeNumber || 0;
   };
 
   return (
@@ -225,7 +205,7 @@ const ProjectCard = ({
                 />
               </Typography>
               <Typography variant="body2" color="text.primary">
-                Team Size: {getEmployeeNumber(Id)}
+                Team Size: 0
               </Typography>
             </Stack>
             <CardContent
@@ -296,7 +276,7 @@ const ProjectCard = ({
                     Project Leader
                   </Typography>
                   <Typography variant="p">
-                    {getProjectLeaderName(ProjectLeaderId)}
+                    {/* {getProjectLeaderName(ProjectLeaderId)} */}Sanjaya Thakur
                   </Typography>
                   <Typography variant="p" style={{ margin: "10px 0" }}>
                     <Typography sx={{ fontSize: "1rem", fontWeight: 600 }}>
