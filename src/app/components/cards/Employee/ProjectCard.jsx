@@ -231,7 +231,7 @@ const ProjectCard = ({
             </CardContent>
 
             <Stack>
-              <Box padding={"0 1rem"}>
+              <Box padding={"0 1rem 1rem"}>
                 <Typography variant="body2" gutterBottom>
                   <Chip
                     label={
