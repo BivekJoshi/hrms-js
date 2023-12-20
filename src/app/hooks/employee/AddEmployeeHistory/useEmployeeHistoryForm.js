@@ -5,6 +5,7 @@ import {
   useGetEmployeeHistory,
 } from '../useEmployeeHistory';
 import { useParams } from 'react-router-dom';
+import HistorySchema from './HistorySchema';
 
 const useEmployeeHistoryForm = () => {
   const { id } = useParams();
