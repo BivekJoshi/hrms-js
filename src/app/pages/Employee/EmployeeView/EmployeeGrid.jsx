@@ -84,7 +84,7 @@ const EmployeeGrid = ({ employeeData, isLoading }) => {
       </Grid>
 
       <EmployeeGridView
-        employeeData={filteredEmployees}
+        employeeData={employeeData}
         isLoading={isLoading}
       />
     </>

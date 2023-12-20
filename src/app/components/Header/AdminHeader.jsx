@@ -36,7 +36,7 @@ const AppBar = styled(MuiAppBar, {
   }),
 }));
 
-export default function AdminHeader({ open, handleDrawerOpen }) {
+export default function AdminHeader({ open, handleDrawerOpen ,loggedUserData}) {
   const { data: birthdayData } = useGetTodayBirthday();
   const { data: eventData } = useGetEventNotification();
   const { toggleMode, palette } = useContext(ThemeModeContext);
@@ -89,7 +89,7 @@ export default function AdminHeader({ open, handleDrawerOpen }) {
 
           <TodayBirthday data={birthdayData} />
           <Notification data={eventData} />
-          <Profile />
+          <Profile loggedUserData={loggedUserData}/>
         </Stack>
       </Toolbar>
     </AppBar>

@@ -3,27 +3,30 @@ import {
   useAddEmployeeHistory,
   useEditEmployeeHistory,
   useGetEmployeeHistory,
+  useGetEmployeeHistoryById,
 } from '../useEmployeeHistory';
 import { useParams } from 'react-router-dom';
+import HistorySchema from './HistorySchema';
 
 const useEmployeeHistoryForm = () => {
   const { id } = useParams();
   const { mutate: addMutate } = useAddEmployeeHistory({});
   const { mutate: editMutate } = useEditEmployeeHistory({});
-  const { data, isLoading } = useGetEmployeeHistory(id);
+  const { data: empHistoryData, isLoading: empHistoryLoading } = useGetEmployeeHistoryById(id);
 
   const historyDetails =
-    !isLoading &&
-    data?.map((empHistory) => ({
-      id: empHistory?.id || '',
-      employerName: empHistory?.employerName || '',
-      employerAddress: empHistory?.employerAddress || '',
-      pastPosition: empHistory?.pastPosition || '',
-      fromDate: empHistory?.fromDate || '',
-      toDate: empHistory?.toDate || '',
-      description: empHistory?.description || '',
-      remarks: empHistory?.remarks || '',
-    }));
+    !empHistoryLoading && Array.isArray(empHistoryData)
+      ? empHistoryData.map((empHistory) => ({
+          id: empHistory?.id || '',
+          employerName: empHistory?.employerName || '',
+          employerAddress: empHistory?.employerAddress || '',
+          pastPosition: empHistory?.pastPosition || '',
+          fromDate: empHistory?.fromDate || '',
+          toDate: empHistory?.toDate || '',
+          description: empHistory?.description || '',
+          remarks: empHistory?.remarks || '',
+        }))
+      : [];
   const formik = useFormik({
     initialValues: {
       history:
@@ -41,7 +44,8 @@ const useEmployeeHistoryForm = () => {
               },
             ],
     },
-    enableReinitialize: 'true',
+    enableReinitialize: true,
+    validationSchema: HistorySchema,
     onSubmit: (values) => {
       if (values.history.some((history) => !history.id)) {
         handleRequest(values);

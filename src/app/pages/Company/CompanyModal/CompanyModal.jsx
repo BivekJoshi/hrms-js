@@ -19,6 +19,7 @@ export const AddCompanyModal = ({ open, handleCloseModal, title }) => {
 
 export const EditCompanyModal = ({ open, handleCloseModal, data, title }) => {
   // const { data } = useGetCompanyById(id);
+  console.log(data,"dta");
   return (
     <Box>
       <FormModal

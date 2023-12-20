@@ -4,6 +4,7 @@ import EmployeeCard from '../../../../components/cards/Employee/EmployeeCard';
 import { useGetEmployeeData } from '../../../../hooks/employee/useEmployee';
 
 const EmployeeGridView = ({ employeeData, isLoading }) => {
+
   if (isLoading)
     return (
       <>

@@ -17,7 +17,7 @@ import {
 
 /*________________________GET ALL_____________________________________*/
 export const useGetleaveOfUser = () => {
-  return useQuery(["getleaveOfUser"], () => getleaveOfUser(), {
+  return useQuery(["getLeave"], () => getleaveOfUser(), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
@@ -25,7 +25,7 @@ export const useGetleaveOfUser = () => {
 
 /*________________________GET ALL_____________________________________*/
 export const useGetLeave = () => {
-  return useQuery(["getLeave"], () => getleave(), {
+  return useQuery(["getleaveOfUser"], () => getleave(), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
@@ -112,7 +112,7 @@ export const useDeleteLeave = ({ onSuccess }) => {
     onSuccess: (data, variables, context) => {
       toast.success("Successfully deleted Leave");
       onSuccess && onSuccess(data, variables, context);
-      queryClient.invalidateQueries("getLoggedInUserLeave");
+      queryClient.invalidateQueries("getLeave");
     },
     onError: (err, _variables, _context) => {
       toast.error(`Error: ${err.message}`);
