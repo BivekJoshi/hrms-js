@@ -12,7 +12,8 @@ const useEmployeeHistoryForm = () => {
   const { id } = useParams();
   const { mutate: addMutate } = useAddEmployeeHistory({});
   const { mutate: editMutate } = useEditEmployeeHistory({});
-  const { data: empHistoryData, isLoading: empHistoryLoading } = useGetEmployeeHistoryById(id);
+  const { data: empHistoryData, isLoading: empHistoryLoading } =
+    useGetEmployeeHistoryById(id);
 
   const historyDetails =
     !empHistoryLoading && Array.isArray(empHistoryData)
@@ -45,7 +46,7 @@ const useEmployeeHistoryForm = () => {
             ],
     },
     enableReinitialize: true,
-    validationSchema: HistorySchema,
+    // validationSchema: HistorySchema,
     onSubmit: (values) => {
       if (values.history.some((history) => !history.id)) {
         handleRequest(values);

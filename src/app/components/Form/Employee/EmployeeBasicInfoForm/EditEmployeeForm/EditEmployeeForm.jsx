@@ -155,8 +155,10 @@ const EditEmployeeForm = () => {
         employeeHistoryFormik.setFieldTouched('');
 
         employeeHistoryFormik.handleSubmit();
+        setActiveStep(activeStep + 1);
+
         if (employeeHistoryFormik.isValid && employeeHistoryFormik.dirty) {
-          setActiveStep(activeStep + 1);
+          // setActiveStep(activeStep + 1);
         }
         break;
 
