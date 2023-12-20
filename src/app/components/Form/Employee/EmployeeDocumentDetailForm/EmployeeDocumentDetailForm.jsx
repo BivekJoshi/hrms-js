@@ -1,7 +1,7 @@
 import { Accordion, AccordionDetails } from '@mui/material';
 import { AccordionSummary, Button } from '@mui/material';
 import { Grid, Typography, Box } from '@mui/material';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   useAddDocument,
   useDeleteDocument,
@@ -16,7 +16,7 @@ const EmployeeDocumentDetailForm = () => {
   const { id } = useParams();
   const fileInputRef = useRef(null);
   const [openEditModal, setOpenEditModal] = useState(false);
-  const [expandedAccordion, setExpandedAccordion] = useState(null);
+  const [expandedAccordion, setExpandedAccordion] = useState('panel1');
   const [selectedDocument, setSelectedDocument] = useState('');
   const [document, setDocument] = useState('');
   const [imagePreviewMap, setImagePreviewMap] = useState({});
@@ -95,17 +95,19 @@ const EmployeeDocumentDetailForm = () => {
                 }}
               >
                 <Box>
-                  <img
-                    src={`${url}${document?.path}`}
-                    alt='Document'
-                    width={240}
-                    height={140}
-                    style={{
-                      objectFit: 'cover',
-                      width: '100%',
-                      height: '100%',
-                    }}
-                  />
+                  {expandedAccordion && !imagePreviewMap[expandedAccordion] && (
+                    <img
+                      src={`${url}${document?.path}`}
+                      alt='Document'
+                      width={240}
+                      height={140}
+                      style={{
+                        objectFit: 'cover',
+                        width: '100%',
+                        height: '100%',
+                      }}
+                    />
+                  )}
                 </Box>
 
                 <Box
@@ -161,7 +163,6 @@ const EmployeeDocumentDetailForm = () => {
                   <input
                     type='file'
                     ref={fileInputRef}
-                    label='citizenship'
                     onChange={handleChangeImage}
                   />
                   <Button
