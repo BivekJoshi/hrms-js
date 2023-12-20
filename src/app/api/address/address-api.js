@@ -1,7 +1,7 @@
-import { axiosInstance } from '../../../auth/axiosInterceptor';
+import { axiosInstance } from "../../../auth/axiosInterceptor";
 
 export const addPermanentAddress = async (formData, id) => {
-  const data = await axiosInstance.post(`/address/create/${id}`, [formData]);
+  const data = await axiosInstance.post(`/address/create/${id}`, formData);
   return data;
 };
 
@@ -29,7 +29,7 @@ export const getEmployeeAddressById = (id) => {
 
 export const editAddress = async (formData, id) => {
   if (id) {
-    const data = axiosInstance.put(`/address/edit/${formData?.id}`, formData);
+    const data = axiosInstance.post(`/address/create/${id}`, formData);
     return data;
   }
   // let addressId = [];

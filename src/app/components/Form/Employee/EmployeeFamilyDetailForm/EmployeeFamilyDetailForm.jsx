@@ -10,7 +10,7 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
 
   const deleteFamilyMutation = useDeleteFamily({});
   const handleDeleteFamily = (familyMember) => {
-    if (familyMember.id) {
+    if (familyMember?.id) {
       deleteFamilyMutation.mutate(familyMember.id);
     }
   };

@@ -132,7 +132,7 @@ const Project = ({ permissions }) => {
           gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
         }}
       >
-        {filteredProject && filteredProject?.map((item, index) => (
+        {projectData?.map((item, index) => (
           <ProjectCard
             item={item}
             Id={item.id}

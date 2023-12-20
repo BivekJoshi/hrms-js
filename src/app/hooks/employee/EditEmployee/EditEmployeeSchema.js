@@ -8,7 +8,7 @@ const EditEmployeeSchema = Yup.object().shape({
   dateOfJoin: Yup.string().required('Date of join is required'),
   mobileNumber: Yup.string().required('Mobile number is required'),
   citizenshipNumber: Yup.string().required('Citizenship number is required'),
-  panNumber: Yup.string().required('PAN number is required'),
+  // panNumber: Yup.string().required('PAN number is required'),
   officeEmail: Yup.string().required('Official email is required'),
   maritalStatus: Yup.string().required('Marital status is required'),
   branchId: Yup.string().required('Branch name is required'),

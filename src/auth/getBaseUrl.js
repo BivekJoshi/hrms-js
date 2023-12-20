@@ -8,8 +8,8 @@ export const contextPath = () => {
 
 export const getBaseUrl = () => {
   if (envType === "development") {
+    // return 'http://172.16.16.85:8083/hrms/api/';
     return "http://103.94.159.144:8083/hrms/api/";
-    // return 'http://172.16.16.131:8083/hrms/api/';
 
     // return 'https://dgtrade.dghub.io:8080/hrms';
   } else if (envType === "production") {
@@ -18,7 +18,11 @@ export const getBaseUrl = () => {
 };
 
 export const docContextPath = () => {
-  const protocolAndHost = `${window.location.protocol}//${window.location.hostname}`;
+  if (envType === 'development') {
+    return 'https://103.94.159.144/';
+  } else {
+    const protocolAndHost = `${window.location.protocol}//${window.location.hostname}/`;
 
-  return protocolAndHost;
+    return protocolAndHost;
+  }
 };

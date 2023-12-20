@@ -17,8 +17,7 @@ export default function ProjectEmpPage() {
   // const { data: projectWiseEmployeeData } = useGetProjectWiseEmployee(
   //   logInUserData?.employeeId
   // );
-  const { data: employeeData } = useGetEmployee();
-  const { data: projectData } = useGetProject();
+  const { data: projectData , isLoading } = useGetProject();
 
   const [value, setValue] = React.useState("1");
   const handleChange = (event, newValue) => {
@@ -43,7 +42,7 @@ export default function ProjectEmpPage() {
           /> */}
         </TabPanel>
         <TabPanel value="2">
-          <Project />
+          <Project projectData={projectData} isLoading={isLoading}/>
         </TabPanel>
         <TabPanel value="3">
           {/* <ProjectTeamPage

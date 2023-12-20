@@ -179,7 +179,7 @@ const AddprojectFields = ({ onClose, isLoading }) => {
             renderInput={(params) => (
               <TextField
                 {...params}
-                label='User Name'
+                label='Project Leader'
                 placeholder='Enter User name...'
                 fullWidth
                 required
@@ -198,17 +198,17 @@ const AddprojectFields = ({ onClose, isLoading }) => {
 
         <Grid item xs={12} sm={12}>
           <TextField
-            id='branchId'
-            name='branchId'
+            id='companyId'
+            name='companyId'
             select
             label='Project Company Name'
             placeholder='Enter Company Id'
             fullWidth
             required
-            value={formik.values.branchId}
+            value={formik.values.companyId}
             onChange={formik.handleChange}
-            error={formik.touched.branchId && Boolean(formik.errors.branchId)}
-            helperText={formik.touched.branchId && formik.errors.branchId}
+            error={formik.touched.companyId && Boolean(formik.errors.companyId)}
+            helperText={formik.touched.companyId && formik.errors.companyId}
             variant='outlined'
             InputLabelProps={{ shrink: true }}
           >

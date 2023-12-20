@@ -77,7 +77,7 @@ const EmployeeDocumentDetailForm = () => {
               >
                 <Box>
                   <img
-                    src={`${url}${document?.path}`}
+                    src={`${url}/${document?.path}`}
                     alt="Document"
                     width={240}
                     height={140}

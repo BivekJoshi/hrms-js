@@ -2,7 +2,7 @@ import * as Yup from 'yup';
 import {
   ageRegex,
   onlyTextRegex,
-  onlyNumberRegExp
+  onlyNumberRegExp,
 } from '../../../../validation/validationRegex';
 
 // const AddressSchema = Yup.object().shape({
@@ -48,13 +48,12 @@ import {
 //   ),
 // });
 
-
 const AddressSchema = Yup.object().shape({
   addresses: Yup.array().of(
     Yup.object().shape({
       country: Yup.string().when('addressType', {
         is: 'PERMANENT',
-        then: Yup.string().required('Country is required'),
+        then: Yup.string().required('country is required'),
       }),
       province: Yup.string().when('addressType', {
         is: 'PERMANENT',
@@ -66,8 +65,10 @@ const AddressSchema = Yup.object().shape({
       }),
       wardNumber: Yup.number().when('addressType', {
         is: 'PERMANENT',
-        then: Yup.number().typeError('Ward number must be a number').required('Ward number is required'),
-      }),      
+        then: Yup.number()
+          .typeError('Ward number must be a number')
+          .required('Ward number is required'),
+      }),
       city: Yup.string().when('addressType', {
         is: 'PERMANENT',
         then: Yup.string().required('City is required'),
@@ -79,6 +80,5 @@ const AddressSchema = Yup.object().shape({
     })
   ),
 });
-
 
 export { AddressSchema };
