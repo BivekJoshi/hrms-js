@@ -30,6 +30,7 @@ const EmployeeDocumentDetailForm = () => {
     id,
     selectedDocument || documentType[0]?.input 
   );
+
   const url = DOC_URL;
 
   const handleFormSubmit = (documentType) => {
@@ -77,7 +78,7 @@ const EmployeeDocumentDetailForm = () => {
               >
                 <Box>
                   <img
-                    src={`${url}/${document?.path}`}
+                    src={`${url}${document?.path}`}
                     alt="Document"
                     width={240}
                     height={140}

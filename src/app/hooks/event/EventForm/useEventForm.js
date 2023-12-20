@@ -12,10 +12,10 @@ const useEventForm = (setOpenSubmitModal, handleCloseModal) => {
       eventDate: data?.eventDate || "",
       eventTime: data?.eventTime || "",
       eventDescription: data?.eventDescription || "",
-      id: data?.id,
+      id: data?.id || "",
     },
     validationSchema: EventSchema,
-    enableReinitialize: "true",
+    enableReinitialize: true,
     // onSubmit: (values) => {
     //   if (data?.id) {
     //     handledEditRequest(values);
@@ -30,8 +30,8 @@ const useEventForm = (setOpenSubmitModal, handleCloseModal) => {
       const formData = { ...values };
       addEvent(formData, {
         onSuccess: (data) => {
-          handleCloseModal();
           formik.resetForm();
+          handleCloseModal();
         },
       }),
         setOpenSubmitModal(true);

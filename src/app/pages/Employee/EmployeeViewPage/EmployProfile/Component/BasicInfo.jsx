@@ -3,10 +3,19 @@ import "../Style/Style.css";
 import { Box, Divider } from "@mui/material";
 
 import ListUserDetails from "../../InfoTabs/BaiscInfoTab/Components/ListUserDetails";
+import { useParams } from 'react-router-dom';
+import { useGetBankByEmployeeId } from '../../../../../hooks/employee/useBank';
+import { useGetFammilyById } from '../../../../../hooks/employee/useFamily';
 
 const BasicInfo = ({ data, mode }) => {
+  const { id } = useParams();
+  const { data: bankData } = useGetBankByEmployeeId();
+  const { data: familyData } = useGetFammilyById(id);
+  const bData = bankData && bankData?.[0];
+  const fData = familyData && familyData?.[0];
+  
   const EMPLOYEE = {
-    Gender: data?.gender || "",
+    "Gender": data?.gender || "",
     "Citizenship Number": data?.citizenshipNumber || "",
     "Date of Birth": data?.dateOfBirth || "",
     "Marital Status": data?.maritalStatus || "",
@@ -15,15 +24,15 @@ const BasicInfo = ({ data, mode }) => {
   };
 
   const FAMILYMEMBERS = {
-    Name: data?.familyMembers?.[0]?.name || "",
-    Relation: data?.familyMembers?.[0]?.relation || "",
-    "Contact Number": data?.familyMembers?.[0]?.mobileNumber || "",
+    "Name": fData?.name || "",
+    "Relation": fData?.relation || "",
+    "Contact Number": fData?.mobileNumber || "",
   };
 
   const BANKDETAILS = {
-    "Bank Name": data?.bankDetailSet?.[0]?.bankName || "",
-    "Account Number": data?.bankDetailSet?.[0]?.bankAccountNumber || "",
-    Location: data?.bankDetailSet?.[0]?.bankAddress || "",
+    "Bank Name": bData?.bankName || "",
+    "Account Number": bData?.bankAccountNumber || "",
+    "Location": bData?.bankAddress || "",
     "PAN Number": data?.panNumber || "",
   };
 

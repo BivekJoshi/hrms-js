@@ -253,6 +253,16 @@ export default function AdminSidebar() {
       path: 'users',
       subMenus: [],
     },
+    {
+      name: 'Email Configuration',
+      icon: (
+        <PersonAddIcon
+          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
+        />
+      ),
+      path: 'email',
+      subMenus: [],
+    },
   ];
   const drawerMenusForEmployee = [
     {
