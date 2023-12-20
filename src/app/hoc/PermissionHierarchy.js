@@ -24,6 +24,7 @@ const PermissionHierarchy = {
   event: commonPermissions,
   todo: allPermissions,
   leaveType: commonPermissions,
+  leaves: commonPermissions,
   resourceDeactivated: commonPermissions,
   officeResource: commonPermissions,
   employeeResource: commonPermissions,

@@ -14,10 +14,12 @@ import { ProjectProgressCard } from "../../components/cards/ProjectProgress/Proj
 import { ProjectTable } from "./DashboardTable/ProjectTable";
 import { useDashBoardSearch } from "./api/dashboardApi";
 import { toast } from "react-toastify";
+import { useGetLoggedInUser } from '../../hooks/auth/usePassword';
 
 const Dashboard = () => {
   const { mode } = useContext(ThemeModeContext);
   const { data, isLoading } = useDashBoardSearch();
+  const { data: loggedUserData } = useGetLoggedInUser();
 
   const today = new Date();
   const day = new Date().toLocaleDateString("en-us", { weekday: "long" });
@@ -28,7 +30,7 @@ const Dashboard = () => {
     year: "numeric",
   };
   const formattedDate = today.toLocaleDateString(undefined, options);
-
+console.log({"data": loggedUserData})
   return (
     <>
       <Box
@@ -62,7 +64,7 @@ const Dashboard = () => {
               Welcome
             </Typography>
 
-            <Typography variant="h6">ADMIN</Typography>
+            <Typography variant="h6">{loggedUserData?.name}</Typography>
           </div>
           <div>
             <Typography variant="h6" textAlign="end" fontWeight={600}>

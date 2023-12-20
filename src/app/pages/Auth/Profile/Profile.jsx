@@ -5,20 +5,11 @@ import MenuItem from "@mui/material/MenuItem";
 import { useNavigate } from "react-router-dom";
 import { removeUser } from "../../../utils/cookieHelper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { useGetLoggedInUser } from "../../../hooks/auth/usePassword";
-import useAuth from "../../../../auth/hooks/component/login/useAuth";
 
-const Profile = () => {
+const Profile = (loggedUserData) => {
+  console.log(loggedUserData?.loggedUserData, "data ma ");
+
   const navigate = useNavigate();
-
-  const {
-    isSuperAdmin,
-    isAdmin,
-    isHr,
-    isManager,
-    isEmployee,
-    isHrClerk,
-  } = useAuth();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -29,27 +20,16 @@ const Profile = () => {
   };
 
   const handleChangePassword = () => {
-    if (isAdmin || isManager || isSuperAdmin || isHrClerk || isHr) {
-      navigate("/admin/reset-password");
-    } else {
-      navigate("/employee/reset-password");
-    }
-
+    navigate(`reset-password`);
     handleClose();
   };
   const handleProfile = () => {
-    if (isAdmin || isManager || isSuperAdmin || isHrClerk || isHr) {
-    navigate("/admin/myprofile");
-    }else{
-      navigate("/employee/myprofile");
-    }
+    navigate(`myprofile`);
     handleClose();
   };
   const btnStyle = {
     color: "#fff",
   };
-
-  const { data: loggedUserData } = useGetLoggedInUser();
 
   return (
     <div>
@@ -61,7 +41,7 @@ const Profile = () => {
         onClick={handleClick}
         style={btnStyle}
       >
-        {loggedUserData?.name} <KeyboardArrowDownIcon />
+        {loggedUserData?.loggedUserData?.name} <KeyboardArrowDownIcon />
       </Button>
       <Menu
         id="basic-menu"
