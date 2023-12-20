@@ -48,10 +48,6 @@ export const usePermanentAddressForm = (data, isLoading) => {
     enableReinitialize: true,
     onSubmit: handleSubmit,
   });
-  console.log(
-    '🚀 ~ file: useAddressForm.js:31 ~ usePermanentAddressForm ~ formik:',
-    formik
-  );
 
   function createAddressObject(details) {
     return {

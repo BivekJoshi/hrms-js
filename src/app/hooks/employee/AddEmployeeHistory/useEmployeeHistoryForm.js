@@ -3,17 +3,19 @@ import {
   useAddEmployeeHistory,
   useEditEmployeeHistory,
   useGetEmployeeHistory,
-  useGetEmployeeHistoryById,
 } from '../useEmployeeHistory';
 import { useParams } from 'react-router-dom';
-import HistorySchema from './HistorySchema';
 
 const useEmployeeHistoryForm = () => {
   const { id } = useParams();
   const { mutate: addMutate } = useAddEmployeeHistory({});
   const { mutate: editMutate } = useEditEmployeeHistory({});
   const { data: empHistoryData, isLoading: empHistoryLoading } =
-    useGetEmployeeHistoryById(id);
+    useGetEmployeeHistory(id);
+  console.log(
+    '🚀 ~ file: useEmployeeHistoryForm.js:16 ~ useEmployeeHistoryForm ~ empHistoryData:',
+    empHistoryData
+  );
 
   const historyDetails =
     !empHistoryLoading && Array.isArray(empHistoryData)
