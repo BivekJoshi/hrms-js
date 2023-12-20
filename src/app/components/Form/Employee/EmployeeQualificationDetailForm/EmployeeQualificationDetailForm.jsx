@@ -88,7 +88,7 @@ const EmployeeQualificationDetailForm = ({ formik, isLoading }) => {
                         onChange={handleChange}
                         error={Boolean(
                           formik.touched.education?.[index]?.institute &&
-                            formik.errors.education?.[index]?.institude
+                            formik.errors.education?.[index]?.institute
                         )}
                         helperText={
                           formik.touched.education?.[index]?.institute &&

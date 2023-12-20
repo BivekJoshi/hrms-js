@@ -1,14 +1,14 @@
-import { Box, Grid, Pagination, Stack } from "@mui/material";
-import React, { useState } from "react";
-import EmployeeCard from "../../../../components/cards/Employee/EmployeeCard";
-import { useGetEmployeeData } from "../../../../hooks/employee/useEmployee";
+import { Box, Grid, Pagination, Stack } from '@mui/material';
+import React, { useState } from 'react';
+import EmployeeCard from '../../../../components/cards/Employee/EmployeeCard';
+import { useGetEmployeeData } from '../../../../hooks/employee/useEmployee';
 
 const EmployeeGridView = ({ employeeData, isLoading }) => {
   if (isLoading)
     return (
       <>
         <Skeleton />
-        <Skeleton animation="wave" />
+        <Skeleton animation='wave' />
         <Skeleton animation={false} />
       </>
     );
@@ -18,28 +18,28 @@ const EmployeeGridView = ({ employeeData, isLoading }) => {
         container
         item
         gap={1}
-        className="project-card-control"
+        className='project-card-control'
         sx={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(285px, 1fr))",
-          gap: "1rem",
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(285px, 1fr))',
+          gap: '1rem',
         }}
       >
         {employeeData?.map((employee, index) => (
           <EmployeeCard
             key={index}
-            IsActive={employee?.isActive || ""}
-            EmployeeId={employee?.id || ""}
-            EFirstName={employee?.firstName || ""}
-            EMiddleName={employee?.middleName || ""}
-            ELastName={employee?.lastName || ""}
-            OfficeEmail={employee?.officeEmail || ""}
-            MobileNumber={employee?.mobileNumber || ""}
-            PositionName={employee?.positionId || ""}
-            PositionLevel={employee?.position?.positionLevel || ""}
-            EGender={employee?.gender || ""}
+            IsActive={employee?.isActive || ''}
+            EmployeeId={employee?.id || ''}
+            EFirstName={employee?.firstName || ''}
+            EMiddleName={employee?.middleName || ''}
+            ELastName={employee?.lastName || ''}
+            OfficeEmail={employee?.officeEmail || ''}
+            MobileNumber={employee?.mobileNumber || ''}
+            PositionName={employee?.positionName || ''}
+            PositionLevel={employee?.position?.positionLevel || ''}
+            EGender={employee?.gender || ''}
             EmployeeData={employeeData}
-            ProgressBarRes={employee?.progressBarRes || ""}
+            ProgressBarRes={employee?.progressBarRes || ''}
             employeePhoto={employee?.employeePhotoPath}
           />
         ))}
