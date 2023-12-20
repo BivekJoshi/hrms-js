@@ -201,7 +201,7 @@ const AddprojectFields = ({ onClose, isLoading }) => {
             id='companyId'
             name='companyId'
             select
-            label='Project Company Name'
+            label='Project Branch Name'
             placeholder='Enter Company Id'
             fullWidth
             required

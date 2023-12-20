@@ -3,22 +3,23 @@ import useTrainingForm from '../../../hooks/training/TrainingForm/useTrainingFor
 import { Button, Grid, TextField } from '@mui/material';
 
 const TrainingField = ({ onClose, isLoading, data, empId }) => {
-  const { formik } = useTrainingForm(data, empId);
+  console.log(data)
+  const { formik } = useTrainingForm(data, empId, onClose);
   const handleFormSubmit = () => {
     formik.handleSubmit();
 
-    if (formik.isValid) {
-      formik.setTouched({
-        trainingName: true,
-        trainingLevel: true,
-        trainingInstitute: true,
-        category: true,
-        startDate: true,
-        endDate: true,
-      });
+    // if (formik.isValid) {
+    //   formik.setTouched({
+    //     trainingName: true,
+    //     trainingLevel: true,
+    //     trainingInstitute: true,
+    //     category: true,
+    //     startDate: true,
+    //     endDate: true,
+    //   });
       onClose();
-    }
-  };
+    };
+
   const submitButtonText = data ? 'Update' : 'Add';
   return (
     !isLoading && (

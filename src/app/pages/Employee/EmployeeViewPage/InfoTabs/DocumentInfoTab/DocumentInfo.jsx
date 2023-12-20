@@ -52,7 +52,7 @@ const documentName = [
     label: "Awards and Acheivements",
     value: "AWARD_AND_ACHIEVEMENT",
   },
-]
+];
 const DocumentInfo = () => {
   const { isSuperAdmin, isAdmin, isHr, isEmployee, isHrAdmin, isManager } =
     useAuth();
@@ -85,10 +85,14 @@ const DocumentInfo = () => {
               <p>Loading..</p>
             ) : (
               Object.keys(groupedDocuments).map((documentType, index) => (
-                <Tab 
-                key={index} 
-                label={documentName?.find((doc) => doc?.value === documentType)?.label}
-                value={documentType} />
+                <Tab
+                  key={index}
+                  label={
+                    documentName?.find((doc) => doc?.value === documentType)
+                      ?.label
+                  }
+                  value={documentType}
+                />
               ))
             )}
           </TabList>
@@ -100,8 +104,8 @@ const DocumentInfo = () => {
             <TabPanel
               key={documentType}
               value={documentType}
-              sx={{ 
-                padding:"0px",
+              sx={{
+                padding: "0px",
                 display: "grid",
                 gridTemplateColumns: "repeat(2, 1fr)",
                 gap: "1rem",
@@ -114,8 +118,8 @@ const DocumentInfo = () => {
                       <iframe
                         title="PDF Document"
                         src={`${url}${document?.path}`}
-                        width="500px"
-                        height="450px"
+                        width="400px"
+                        height="350px"
                       />
                     </div>
                   ) : (
@@ -123,7 +127,8 @@ const DocumentInfo = () => {
                       key={document.id}
                       src={`${url}${document?.path}`}
                       alt="Document"
-                      width="100%"
+                      width="400px"
+                      height="350px"
                     />
                   )}
                 </div>
