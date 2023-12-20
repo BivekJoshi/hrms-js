@@ -20,6 +20,7 @@ const EmployeeDocumentDetailForm = () => {
   const [selectedDocument, setSelectedDocument] = useState("");
   const [document, setDocument] = useState("");
   const [editedDocument, setEditedDocument] = useState({});
+  const [imagePreview, setImagePreview] = useState(documentType[0]?.input);
 
   const handleCloseEditModal = () => setOpenEditModal(false);
 
@@ -28,7 +29,7 @@ const EmployeeDocumentDetailForm = () => {
 
   const { data: documentPhoto } = useGetDocumentByDocumentType(
     id,
-    selectedDocument || documentType[0]?.input 
+    selectedDocument || documentType[0]?.input
   );
   const url = DOC_URL;
 
@@ -45,7 +46,15 @@ const EmployeeDocumentDetailForm = () => {
   };
 
   const handleChangeImage = (e) => {
-    setDocument(e.target.files[0]);
+    const file = e.target.files[0];
+    setDocument(file);
+    const reader = new FileReader();
+    reader.onload = () => {
+      setImagePreview(reader.result);
+    };
+    if (file) {
+      reader.readAsDataURL(file);
+    }
   };
 
   const handleDelete = (document) => {
@@ -72,7 +81,7 @@ const EmployeeDocumentDetailForm = () => {
                   gap: "1rem",
                   marginLeft: "15vh",
                   position: "relative",
-                  paddingRight:"2rem"
+                  paddingRight: "2rem",
                 }}
               >
                 <Box>
@@ -81,7 +90,11 @@ const EmployeeDocumentDetailForm = () => {
                     alt="Document"
                     width={240}
                     height={140}
-                    style={{ objectFit: "cover", width: "100%", height: "100%" }}
+                    style={{
+                      objectFit: "cover",
+                      width: "100%",
+                      height: "100%",
+                    }}
                   />
                 </Box>
                 <Box
@@ -90,9 +103,9 @@ const EmployeeDocumentDetailForm = () => {
                     justifyContent: "center",
                     gap: ".5rem",
                     position: "absolute",
-                    bottom: "10px",
+                    bottom: "0",
                     left: "20vh",
-                    textAlign:"center"
+                    textAlign: "center",
                   }}
                 >
                   <Button
@@ -118,7 +131,7 @@ const EmployeeDocumentDetailForm = () => {
 
         <Grid item xs={12} sm={6}>
           {documentType &&
-            documentType.map((document) => (
+            documentType.map((document, index) => (
               <Accordion
                 key={document.id}
                 expanded={expandedAccordion === `panel${document?.id}`}
@@ -146,6 +159,16 @@ const EmployeeDocumentDetailForm = () => {
                   >
                     Upload
                   </Button>
+                  {imagePreview && selectedDocument && (
+                    <img
+                      key={document.id}
+                      src={imagePreview}
+                      alt="Selected Profile"
+                      // style={{ width: "50%" }}
+                      height="200px"
+                      width="200px"
+                    />
+                  )}
                 </AccordionDetails>
               </Accordion>
             ))}
