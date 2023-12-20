@@ -18,7 +18,6 @@ const DeleteConfirmationModal = ({
   message,
 }) => {
   const { mode } = useContext(ThemeModeContext);
-  console.log({"mode": mode})
 
   return (
     <Dialog open={open} onClose={handleCloseModal}>

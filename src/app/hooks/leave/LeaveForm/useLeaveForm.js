@@ -8,6 +8,7 @@ import {
 import { LeaveSchema } from '../Validation/LeaveSchema';
 
 const useLeaveForm = (data) => {
+  console.log({"data": data})
   const { mutate: addLeave } = useAddLeaveByAdmin({});
   const { mutate: editLeave } = useEditLeaveByAdmin({});
 
@@ -24,10 +25,10 @@ const useLeaveForm = (data) => {
       applyLeaveDays: data?.applyLeaveDays || '',
       id: data?.leaveId || '',
     },
-    validationSchema: LeaveSchema,
-    enableReinitialize: 'true',
+    // validationSchema: LeaveSchema,
+    enableReinitialize: true,
     onSubmit: (values) => {
-      if (data?.id) {
+      if (data?.leaveId) {
         handledEditRequest(values);
       } else {
         handleRequest(values);

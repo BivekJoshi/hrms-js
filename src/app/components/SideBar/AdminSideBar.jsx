@@ -38,7 +38,8 @@ import jwtDecode from 'jwt-decode';
 // import BreadCrumbs from '../../../routes/routes';
 import Logo from '../../../assets/logo.png';
 import SmallLogo from '../../../assets/smallLogo.png';
-
+import { useGetLoggedInUser } from '../../hooks/auth/usePassword';
+import LaptopIcon from '@mui/icons-material/Laptop';
 const drawerWidth = 260;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
@@ -88,6 +89,7 @@ export default function AdminSidebar() {
   const user = getUser();
   const decode = jwtDecode(user);
   const userRole = decode?.userRole;
+  const { data: loggedUserData } = useGetLoggedInUser();
 
   const drawerMenusForAdmin = [
     {
@@ -161,16 +163,16 @@ export default function AdminSidebar() {
         },
       ],
     },
-    // {
-    //   name: 'Logistics',
-    //   icon: (
-    //     <LaptopIcon
-    //       sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
-    //     />
-    //   ),
-    //   path: 'logistics/office',
-    //   subMenus: [],
-    // },
+    {
+      name: 'Logistics',
+      icon: (
+        <LaptopIcon
+          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
+        />
+      ),
+      path: 'logistics/office',
+      subMenus: [],
+    },
     {
       name: 'Department',
       icon: (
@@ -364,6 +366,7 @@ export default function AdminSidebar() {
         open={open}
         handleDrawerOpen={handleDrawerOpen}
         drawerWidth={drawerWidth}
+        loggedUserData={loggedUserData}
       />
       <Drawer
         sx={{

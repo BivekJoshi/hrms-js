@@ -121,18 +121,16 @@ const EditEmployeeForm = () => {
       case 1:
         permanentFormik.setFieldTouched('');
 
-        if (permanentFormik.isValid) {
-          permanentFormik.handleSubmit(() => {
-            setActiveStep(activeStep + 1);
-          });
+        permanentFormik.handleSubmit();
+        if (permanentFormik.isValid && permanentFormik.dirty) {
+          setActiveStep(activeStep + 1);
         }
         break;
       case 2:
         familyFormik.setFieldTouched('');
-        if (familyFormik.isValid) {
-          familyFormik.handleSubmit(() => {
-            setActiveStep(activeStep + 1);
-          });
+        familyFormik.handleSubmit();
+        if (familyFormik.isValid && familyFormik.dirty) {
+          setActiveStep(activeStep + 1);
         }
 
         break;
@@ -140,28 +138,27 @@ const EditEmployeeForm = () => {
       case 3:
         qualificationFormik.setFieldTouched('');
 
-        if (qualificationFormik.isValid) {
-          qualificationFormik.handleSubmit(() => {
-            setActiveStep(activeStep + 1);
-          });
+        qualificationFormik.handleSubmit();
+        if (qualificationFormik.isValid && qualificationFormik.dirty) {
+          setActiveStep(activeStep + 1);
         }
         break;
       case 4:
         bankFormik.setFieldTouched('');
 
-        if (bankFormik.isValid) {
-          bankFormik.handleSubmit(() => {
-            setActiveStep(activeStep + 1);
-          });
+        bankFormik.handleSubmit();
+        if (bankFormik.isValid && bankFormik.dirty) {
+          setActiveStep(activeStep + 1);
         }
         break;
       case 5:
         employeeHistoryFormik.setFieldTouched('');
 
-        if (employeeHistoryFormik.isValid) {
-          employeeHistoryFormik.handleSubmit(() => {
-            setActiveStep(activeStep + 1);
-          });
+        employeeHistoryFormik.handleSubmit();
+        setActiveStep(activeStep + 1);
+
+        if (employeeHistoryFormik.isValid && employeeHistoryFormik.dirty) {
+          // setActiveStep(activeStep + 1);
         }
         break;
 

@@ -70,7 +70,7 @@ const Roles = () => {
           marginY: "1rem",
         }}
       >
-        <Stack sx={{ display: "flex", flexDirection: "row-reverse" }}>
+        {/* <Stack sx={{ display: "flex", flexDirection: "row-reverse" }}>
           <ButtonComponent
             color="#fff"
             variant="contained"
@@ -78,7 +78,7 @@ const Roles = () => {
             OnClick={handleAddOpenModal}
             buttonName={"+ Add Role"}
           />
-        </Stack>
+        </Stack> */}
         {roleData &&
           roleData.map((role, index) => {
             const { name } = getRoleStyle(role?.name);
@@ -114,7 +114,7 @@ const Roles = () => {
                   </Typography>
                 </div>
 
-                <Stack
+                {/* <Stack
                   sx={{
                     display: "flex",
                     flexDirection: "row",
@@ -136,7 +136,7 @@ const Roles = () => {
                   >
                     Delete
                   </Button>
-                </Stack>
+                </Stack> */}
               </Stack>
             );
           })}
