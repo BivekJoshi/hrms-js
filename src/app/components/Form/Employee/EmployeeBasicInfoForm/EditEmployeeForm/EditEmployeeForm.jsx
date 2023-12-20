@@ -129,7 +129,7 @@ const EditEmployeeForm = () => {
       case 2:
         familyFormik.setFieldTouched('');
         familyFormik.handleSubmit();
-        if (familyFormik.isValid && familyFormik.dirty) {
+        if (familyFormik.isValid) {
           setActiveStep(activeStep + 1);
         }
 
@@ -139,7 +139,7 @@ const EditEmployeeForm = () => {
         qualificationFormik.setFieldTouched('');
 
         qualificationFormik.handleSubmit();
-        if (qualificationFormik.isValid && qualificationFormik.dirty) {
+        if (qualificationFormik.isValid) {
           setActiveStep(activeStep + 1);
         }
         break;
@@ -147,7 +147,7 @@ const EditEmployeeForm = () => {
         bankFormik.setFieldTouched('');
 
         bankFormik.handleSubmit();
-        if (bankFormik.isValid && bankFormik.dirty) {
+        if (bankFormik.isValid) {
           setActiveStep(activeStep + 1);
         }
         break;
@@ -157,7 +157,7 @@ const EditEmployeeForm = () => {
         employeeHistoryFormik.handleSubmit();
         setActiveStep(activeStep + 1);
 
-        if (employeeHistoryFormik.isValid && employeeHistoryFormik.dirty) {
+        if (employeeHistoryFormik.isValid) {
           // setActiveStep(activeStep + 1);
         }
         break;
