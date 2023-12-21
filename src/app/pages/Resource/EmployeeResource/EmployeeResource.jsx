@@ -50,12 +50,13 @@ const EmployeeResource = ({ permissions }) => {
   };
 
   const handleEditRowData = (rowData) => {
+    console.log(rowData)
     setEditedEmployeeResource(rowData);
     setOpenEditModal(true);
   };
 
   const getEmployeeName = (rowData) => {
-    const employeeId = rowData?.id;
+    const employeeId = rowData?.empId;
     const employee = employeeData?.find((emp) => emp?.id === employeeId);
     const name = `${employee?.firstName} ${employee?.middleName || ""} ${
       employee?.lastName
@@ -137,22 +138,21 @@ const EmployeeResource = ({ permissions }) => {
           padding: ".5rem 0",
         }}
       >
-        <ButtonComponent
+        <HocButton
           color={"primary"}
+          permissions={permissions}
           variant={"outlined"}
           onClick={() => {
             navigate(`/admin/logistics/office`);
           }}
           buttonName={"Logistics"}
-          BGColor="white"
-          TextColor="black"
         />
         <HocButton
           permissions={permissions}
           color={"white"}
           variant={"contained"}
           onClick={handleAddOpenModal}
-          buttonName={"+Provide Logistics to Employee"}
+          buttonName={"+Provide Logistics"}
         />
       </Box>
 
@@ -183,7 +183,7 @@ const EmployeeResource = ({ permissions }) => {
       {openEditModal && (
         <EditEmployeeResourceModal
           title={"Edit Logistics"}
-          id={editedEmployeeResouce?.id}
+          data={editedEmployeeResouce}
           open={openEditModal}
           handleCloseModal={handleCloseEditModal}
         />

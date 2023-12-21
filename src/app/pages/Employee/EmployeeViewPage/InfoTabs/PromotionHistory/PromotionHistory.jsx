@@ -25,7 +25,7 @@ const PromotionHistory = () => {
   const { data: designationData, isLoading: loadingDesignation } =
     useGetDesignation();
   // const { data: trainingData } = useGetTrainingByEmpId(id);
-  // console.log(trainingData);
+
 
   const [openAddModal, setOpenAddModal] = useState(false);
 

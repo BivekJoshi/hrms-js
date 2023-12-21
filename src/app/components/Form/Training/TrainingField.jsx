@@ -3,7 +3,6 @@ import useTrainingForm from '../../../hooks/training/TrainingForm/useTrainingFor
 import { Button, Grid, TextField } from '@mui/material';
 
 const TrainingField = ({ onClose, isLoading, data, empId }) => {
-  console.log(data)
   const { formik } = useTrainingForm(data, empId, onClose);
   const handleFormSubmit = () => {
     formik.handleSubmit();

@@ -13,10 +13,6 @@ const useEmployeeHistoryForm = () => {
   const { mutate: editMutate } = useEditEmployeeHistory({});
   const { data: empHistoryData, isLoading: empHistoryLoading } =
     useGetEmployeeHistory(id);
-  console.log(
-    '🚀 ~ file: useEmployeeHistoryForm.js:16 ~ useEmployeeHistoryForm ~ empHistoryData:',
-    empHistoryData
-  );
 
   const historyDetails =
     !empHistoryLoading && Array.isArray(empHistoryData)
