@@ -193,7 +193,7 @@ const EmployeeDocumentDetailForm = () => {
                           display: "flex",
                           border: "1px solid #B9BEC7",
                           borderRadius:".3rem",
-                          width: "450px",
+                          // width: "450px",
                         }}
                         component="span"
                       >
@@ -202,13 +202,13 @@ const EmployeeDocumentDetailForm = () => {
                             backgroundColor: "#E7E0EB",
                             padding: ".5rem",
                             borderRadius:".3rem",
-                            minWidth:"7rem",
+                            minWidth:"20%",
                             fontWeight:500
                           }}
                         >
                           Choose file
                         </div>
-                        <div style={{ minwidth: "3rem" ,color:"#B9BEC7",padding:".3rem"}}>
+                        <div style={{ minwidth: "50%" ,color:"#B9BEC7",padding:".3rem"}}>
                           {<p>{docPathSelected ? docPathSelected : "No file choosen"}</p>}
                         </div>
                       </Box>
