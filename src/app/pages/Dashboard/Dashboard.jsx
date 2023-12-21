@@ -15,11 +15,13 @@ import { ProjectTable } from "./DashboardTable/ProjectTable";
 import { useDashBoardSearch } from "./api/dashboardApi";
 import { toast } from "react-toastify";
 import { useGetLoggedInUser } from '../../hooks/auth/usePassword';
+import { DOC_URL } from '../../../auth/axiosInterceptor';
 
 const Dashboard = () => {
   const { mode } = useContext(ThemeModeContext);
   const { data, isLoading } = useDashBoardSearch();
   const { data: loggedUserData } = useGetLoggedInUser();
+  const url = DOC_URL;
 
   const today = new Date();
   const day = new Date().toLocaleDateString("en-us", { weekday: "long" });
@@ -30,7 +32,7 @@ const Dashboard = () => {
     year: "numeric",
   };
   const formattedDate = today.toLocaleDateString(undefined, options);
-
+console.log(loggedUserData)
   return (
     <>
       <Box
@@ -46,7 +48,7 @@ const Dashboard = () => {
       >
         <CardMedia
           component="img"
-          src={Male}
+          src={loggedUserData?.userPhotoPath ? `${url}${loggedUserData.userPhotoPath}` : Male}
           alt="Img"
           sx={{ width: 66, height: 66, borderRadius: "2rem" }}
         />
@@ -56,7 +58,7 @@ const Dashboard = () => {
             justifyContent: "space-between",
             alignItems: "center",
             width: "100%",
-            marginRight: "1rem",
+            margin: "0 1rem",
           }}
         >
           <div>
