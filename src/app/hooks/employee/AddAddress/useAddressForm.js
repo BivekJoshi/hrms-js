@@ -120,7 +120,6 @@ export const usePermanentAddressForm = (data, isLoading) => {
       addressType: 'TEMPORARY',
     };
     const finalAddress = [permanentAddress, temporary];
-    console.log(formik.values?.perTempAddSame);
     const handleEditMutate = (address, onSuccessMessage) => {
       editMutate(address, {
         onSuccess: () => {
