@@ -8,6 +8,7 @@ import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import LockPersonIcon from "@mui/icons-material/LockPerson";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { LoadingButton } from "@mui/lab";
+import { toast } from "react-toastify";
 
 function ValidationItem(props) {
   return (
@@ -55,27 +56,22 @@ const ResetPassword = ({ isLoading }) => {
 
   const [showOldPassword, setShowOldPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [confirmPassword,setConfirmPassword]=useState();
-
+  const [confirmPassword, setConfirmPassword] = useState();
 
   const handleFormSubmit = async () => {
-
     const doPasswordsMatch = formik.values.password === confirmPassword;
 
     if (!doPasswordsMatch) {
-      formik.setErrors({
-        confirmPassword: "New password and confirm password do not match",
-      });
+      toast.error("New password and confirm password do not match")
       return;
+    } else {
+      formik.handleSubmit();
     }
-
-    formik.handleSubmit();
-
   };
 
-  const handleConfimPassword=(event)=>{
-    setConfirmPassword(event.target.value)
-  }
+  const handleConfimPassword = (event) => {
+    setConfirmPassword(event.target.value);
+  };
 
   const style = {
     display: "flex",

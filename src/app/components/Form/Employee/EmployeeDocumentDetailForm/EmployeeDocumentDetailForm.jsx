@@ -26,7 +26,7 @@ const EmployeeDocumentDetailForm = () => {
   const [uploadStatusMap, setUploadStatusMap] = useState({});
   const handleCloseEditModal = () => setOpenEditModal(false);
 
-  const [showInfo, setShowInfo] = useState(false);
+  const docPathSelected = document?.name;
 
   const { mutate: deleteDocument } = useDeleteDocument({});
   const { mutate: addDocument } = useAddDocument({});
@@ -53,6 +53,7 @@ const EmployeeDocumentDetailForm = () => {
   const handleChange = (panel, doc) => (_, isExpanded) => {
     setSelectedDocument(doc);
     setExpandedAccordion(isExpanded ? panel : null);
+    setDocument("");
   };
 
   const handleChangeImage = (e) => {
@@ -137,7 +138,7 @@ const EmployeeDocumentDetailForm = () => {
                     color="primary"
                     onClick={() => handleEditFormSubmit(document)}
                     startIcon={<img src={updateIcon} />}
-                    sx={{ textTransform: "none" }}
+                    sx={{ textTransform: "none", fontWeight: "bold" }}
                   >
                     Update
                   </Button>
@@ -146,7 +147,7 @@ const EmployeeDocumentDetailForm = () => {
                     color="error"
                     onClick={() => handleDelete(document)}
                     startIcon={<img src={deleteIcon} />}
-                    sx={{ textTransform: "none" }}
+                    sx={{ textTransform: "none", fontWeight: "bold" }}
                   >
                     Delete
                   </Button>
@@ -162,30 +163,67 @@ const EmployeeDocumentDetailForm = () => {
                 key={document.id}
                 expanded={expandedAccordion === `panel${document?.id}`}
                 onChange={handleChange(`panel${document?.id}`, document?.input)}
-                sx={{ borderBottom: '1px solid black', boxShadow:"none", margin:"0 !important"}} 
+                sx={{
+                  borderBottom: "1px solid black",
+                  boxShadow: "none",
+                  margin: "0 !important",
+                }}
               >
                 <AccordionSummary
                   aria-controls={`panel${document.id}a-content`}
                   id={`panel${document.id}a-header`}
                 >
-                  <Typography>{document?.label}</Typography>
+                  <Typography variant="h7" sx={{ fontWeight: 500 }}>
+                    {document?.label}
+                  </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                  <input
-                    type="file"
-                    ref={fileInputRef}
-                    onChange={handleChangeImage}
-                  />
-                  <Button
-                    variant="contained"
-                    type="button"
-                    disabled={uploadStatusMap[expandedAccordion]}
-                    onClick={() => {
-                      handleFormSubmit(document.input);
-                    }}
-                  >
-                    Upload
-                  </Button>
+                  <Box sx={{ display: "flex", gap: "1rem" }}>
+                    <label htmlFor="file">
+                      <input
+                        type="file"
+                        ref={fileInputRef}
+                        onChange={handleChangeImage}
+                        style={{ display: "none" }}
+                        id="file"
+                      />
+                      <Box
+                        sx={{
+                          cursor: "pointer",
+                          display: "flex",
+                          border: "1px solid #B9BEC7",
+                          borderRadius:".3rem",
+                          width: "450px",
+                        }}
+                        component="span"
+                      >
+                        <div
+                          style={{
+                            backgroundColor: "#E7E0EB",
+                            padding: ".5rem",
+                            borderRadius:".3rem",
+                            minWidth:"7rem",
+                            fontWeight:500
+                          }}
+                        >
+                          Choose file
+                        </div>
+                        <div style={{ minwidth: "3rem" ,color:"#B9BEC7",padding:".3rem"}}>
+                          {<p>{docPathSelected ? docPathSelected : "No file choosen"}</p>}
+                        </div>
+                      </Box>
+                    </label>
+                    <Button
+                      variant="outlined"
+                      disabled={uploadStatusMap[expandedAccordion]}
+                      onClick={() => {
+                        handleFormSubmit(document.input);
+                      }}
+                      sx={{ textTransform: "none", fontWeight: "bold" }}
+                    >
+                      Upload
+                    </Button>
+                  </Box>
                 </AccordionDetails>
               </Accordion>
             ))}
