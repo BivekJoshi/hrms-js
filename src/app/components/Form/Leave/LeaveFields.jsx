@@ -61,6 +61,7 @@ export const EditLeaveFields = ({ onClose, isLoading, data }) => {
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
+    onClose();
 
     // if (formik.isValid) {
     //   formik.resetForm({

@@ -6,6 +6,7 @@ import {
   deleteLeave,
   editLeave,
   editLeaveByAdmin,
+  editLeaveStatusByAdmin,
   getEmployeeLeaveById,
   getLeaveById,
   getLoggedInUserLeave,
@@ -139,6 +140,21 @@ export const useEditLeave = ({ onSuccess }) => {
 export const useEditLeaveByAdmin = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(["editLeaveByAdmin"], (formData) => editLeaveByAdmin(formData), {
+    onSuccess: (data, variables, context) => {
+      toast.success("Successfully edited Leave");
+      onSuccess && onSuccess(data, variables, context);
+      queryClient.invalidateQueries("getLeave");
+    },
+    onError: (err, _variables, _context) => {
+      toast.error(`Error: ${err.message}`);
+    },
+  });
+};
+
+/*________________________EDIT BY ADMIN_____________________________________*/
+export const useEditLeaveStatusByAdmin = ({ onSuccess }) => {
+  const queryClient = useQueryClient();
+  return useMutation(["editLeaveByAdmin"], (formData) => editLeaveStatusByAdmin(formData), {
     onSuccess: (data, variables, context) => {
       toast.success("Successfully edited Leave");
       onSuccess && onSuccess(data, variables, context);

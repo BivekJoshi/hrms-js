@@ -96,6 +96,13 @@ export const editLeaveByAdmin = async (formData) => {
   return data;
 };
 
+/*________________________EDIT BY OTHER_____________________________________*/
+export const editLeaveStatusByAdmin = async (formData) => { 
+  const { id, leaveStatus } = formData;
+  const data = await axiosInstance.put(`/leave/confirm/${id}?leaveStatus=${leaveStatus}`, formData);
+  return data;
+};
+
 /*________________________DELETE_____________________________________*/
 export const deleteLeave = async (leaveId) => {
   const response = await axiosInstance.delete(`/leave/${leaveId}`);

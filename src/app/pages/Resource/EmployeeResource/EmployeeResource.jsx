@@ -22,8 +22,8 @@ import { ButtonComponent } from "../../../components/Button/ButtonComponent";
 const EmployeeResource = ({ permissions }) => {
   const navigate = useNavigate();
   const { data: employeeResourceData, isLoading } = useGetEmployeeResource();
-  const { data: officeResourceData } = useGetOfficeResource();
-  const { data: employeeData, isLoading: loadingemployee } = useGetEmployee();
+  // const { data: officeResourceData } = useGetOfficeResource();
+  // const { data: employeeData, isLoading: loadingemployee } = useGetEmployee();
 
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
@@ -50,7 +50,6 @@ const EmployeeResource = ({ permissions }) => {
   };
 
   const handleEditRowData = (rowData) => {
-    console.log(rowData)
     setEditedEmployeeResource(rowData);
     setOpenEditModal(true);
   };
@@ -82,20 +81,24 @@ const EmployeeResource = ({ permissions }) => {
     },
     {
       title: "Employee Name",
-      render: (rowData) => {
-        return <p>{getEmployeeName(rowData)} </p>;
-      },
-      customFilterAndSearch: (searchValue, rowData) => {
-        const employeeName = getEmployeeName(rowData);
-        return employeeName.toLowerCase().includes(searchValue.toLowerCase());
-      },
+      field: "employeeName",
+      emptyValue: "-",
+      // render: (rowData) => {
+      //   return <p>{getEmployeeName(rowData)} </p>;
+      // },
+      // customFilterAndSearch: (searchValue, rowData) => {
+      //   const employeeName = getEmployeeName(rowData);
+      //   return employeeName.toLowerCase().includes(searchValue.toLowerCase());
+      // },
       sorting: false,
     },
     {
       title: "Resource",
-      render: (rowData) => {
-        return <p>{getResourceName(rowData)}</p>;
-      },
+      field: "officeResourceName",
+      emptyValue: "-",
+      // render: (rowData) => {
+      //   return <p>{getResourceName(rowData)}</p>;
+      // },
       // customFilterAndSearch: (searchValue, rowData) => {
       //   const resourceName = getResourceName(rowData);
       //   return resourceName.toLowerCase().includes(searchValue.toLowerCase());

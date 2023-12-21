@@ -32,7 +32,7 @@ const Dashboard = () => {
     year: "numeric",
   };
   const formattedDate = today.toLocaleDateString(undefined, options);
-console.log(loggedUserData)
+
   return (
     <>
       <Box
