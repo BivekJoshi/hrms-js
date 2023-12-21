@@ -90,11 +90,10 @@ const EmployeeDocumentDetailForm = () => {
                   flexDirection: "column",
                   gap: "1rem",
                   marginLeft: "15vh",
-                  position: "relative",
                   paddingRight: "2rem",
                 }}
               >
-                <Box>
+                <Box display="flex" justifyContent="center">
                   {expandedAccordion && !imagePreviewMap[expandedAccordion] && (
                     <img
                       src={`${url}${document?.path}`}
@@ -103,22 +102,29 @@ const EmployeeDocumentDetailForm = () => {
                       height={240}
                       style={{
                         objectFit: "contain",
-                        position: "absolute",
-                        left:"45px"
-        
                       }}
                     />
                   )}
                 </Box>
-
-                <Box
+                <Grid display="flex" justifyContent="center">
+                  {expandedAccordion && imagePreviewMap[expandedAccordion] && (
+                    <img
+                      src={imagePreviewMap[expandedAccordion]}
+                      alt="Preview"
+                      width={240}
+                      height={240}
+                      style={{
+                        objectFit: "contain",
+                      }}
+                    />
+                  )}
+                </Grid>
+                <Grid
+                  sm={12}
                   sx={{
                     display: "flex",
                     justifyContent: "center",
                     gap: ".5rem",
-                    position: "absolute",
-                    top: "240px",
-                    left: "10vh",
                     textAlign: "center",
                   }}
                 >
@@ -138,22 +144,9 @@ const EmployeeDocumentDetailForm = () => {
                   >
                     Delete
                   </Button>
-                </Box>
+                </Grid>
               </Grid>
             ))}
-          {expandedAccordion && imagePreviewMap[expandedAccordion] && (
-            <img
-              src={imagePreviewMap[expandedAccordion]}
-              alt="Preview"
-              width={240}
-              height={240}
-              style={{
-                objectFit: "contain",
-                position: "absolute",
-                left:"67vh"
-              }}
-            />
-          )}
         </Grid>
 
         <Grid item xs={12} sm={6}>
