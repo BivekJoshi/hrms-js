@@ -7,8 +7,6 @@ import jwtDecode from 'jwt-decode';
 const ProtectedRoute = ({ redirectTo }) => {
   const navigate = useNavigate();
   const user = getUser();
-  const decode = jwtDecode(user);
-  const userRole = decode?.userRole;
 
   useEffect(() => {
     if (!user) {
@@ -18,7 +16,7 @@ const ProtectedRoute = ({ redirectTo }) => {
     // eslint-disable-next-line
   }, []);
 
-  if (userRole) return <Navigate exact to={redirectTo} />;
+  if (!user) return <Navigate exact to={redirectTo} />;
   return (
     <Box>
       <Outlet />
