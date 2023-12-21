@@ -14,6 +14,15 @@ const commonPermissions = {
   employee: { canView: true },
 };
 
+const specialPermissions = {
+  superAdmin: allPermissions,
+  admin: { canView: true },
+  manager: { canView: true },
+  hrAdmin: { canView: true },
+  hrClerk: { canView: true },
+  employee: { canView: true },
+}
+
 const PermissionHierarchy = {
   company: commonPermissions,
   // designation: { ...commonPermissions, hrAdmin: allPermissions },
@@ -29,7 +38,7 @@ const PermissionHierarchy = {
   officeResource: commonPermissions,
   employeeResource: commonPermissions,
   holiday: commonPermissions,
-  emailConfig: commonPermissions,
+  emailConfig: specialPermissions,
 };
 
 export default PermissionHierarchy;

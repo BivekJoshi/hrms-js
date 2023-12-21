@@ -21,6 +21,7 @@ import { setUserDetails } from '../../../../Redux/Slice/userSlice';
 const EmployeeDashbord = ({}) => {
   const { data: employData } = useGetLoggedInUser();
   const { mode } = useContext(ThemeModeContext);
+  const url = DOC_URL;
 
   const dispatch = useDispatch();
 
@@ -42,8 +43,8 @@ const EmployeeDashbord = ({}) => {
   // const taskCompleteData = Array.isArray(loginUsertask)
   //   ? loginUsertask?.filter((status) => status.status === "COMPLETED")
   //   : "";
-  const photo = employData?.userPhotoPath;
-  const filePath = photo ? DOC_URL + photo : '';
+  // const photo = employData?.userPhotoPath;
+  // const filePath = photo ? DOC_URL + photo : '';
 
   const task = [
     // {
@@ -100,7 +101,7 @@ const EmployeeDashbord = ({}) => {
       >
         <CardMedia
           component='img'
-          src={filePath ? filePath : Male}
+          src={employData?.userPhotoPath ? `${url}${employData?.userPhotoPath}` : Male}
           alt='Paella dish'
           sx={{ width: 66, height: 66, borderRadius: '2rem' }}
         />

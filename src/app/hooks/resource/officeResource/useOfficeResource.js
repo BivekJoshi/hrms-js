@@ -75,7 +75,7 @@ export const useEditOfficeResource = ({ onSuccess }) => {
       onSuccess: (data, variables, context) => {
         toast.success('Successfully edited office Logistics');
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries('getofficeResource');
+        queryClient.invalidateQueries('getAvailableOfficeResource');
       },
       onError: (err, _variables, _context) => {
         toast.error(`Error: ${err.message}`);
@@ -90,9 +90,15 @@ export const useEditActiveInactiveOfficeResource = ({ onSuccess }) => {
     (formData) => editofficeResourceActiveInactive(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Successfully edited status of office Logistics');
-        onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries('getofficeResource');
+        if(variables?.isActive === true){
+          toast.success('Successfully edited status of office Logistics');
+          onSuccess && onSuccess(data, variables, context);        
+          queryClient.invalidateQueries( 'getdeactivaedofficeResource');
+        } else if (variables?.isActive === false) {
+          toast.success('Successfully edited status of office Logistics');
+          onSuccess && onSuccess(data, variables, context);        
+          queryClient.invalidateQueries( 'getAvailableOfficeResource');
+        }
       },
       onError: (err, _variables, _context) => {
         toast.error(`Error: ${err.message}`);
@@ -109,7 +115,7 @@ export const useEditInactiveOfficeResource = ({ onSuccess }) => {
       onSuccess: (data, variables, context) => {
         toast.success('Successfully edited status of office Logistics');
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries('getofficeResource');
+        queryClient.invalidateQueries('getdeactivaedofficeResource');
       },
       onError: (err, _variables, _context) => {
         toast.error(`Error: ${err.message}`);

@@ -9,6 +9,7 @@ import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from "react-router-dom";
 import LeaveUserView from "../LeaveUserView";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
+import { useGetLoggedInUserLeave } from '../../../hooks/leave/useLeave';
 
 const fabStyle = {
   position: "fixed",
@@ -60,10 +61,13 @@ const formattedDate = `${dayWithOrdinal(today.getDate())} ${
 } ${today.getFullYear()}`;
 
 const ApplyLeaveLayout = () => {
+  const { data: leaveData, isLoading } = useGetLoggedInUserLeave();
   const navigate = useNavigate();
 
-  const{mode} =React.useContext(ThemeModeContext)
+  const{mode} =React.useContext(ThemeModeContext);
 
+  const pendingLeaveData = leaveData && leaveData.filter(leaveRecord => leaveRecord?.leaveStatus === "PENDING");
+// console.log(pendingLeaveData)
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
@@ -93,7 +97,7 @@ const ApplyLeaveLayout = () => {
                   </Typography>
                   <br />
                   <Typography variant="h7" fontWeight="bold">
-                    2023-03-04
+                    {pendingLeaveData?.fromDate}
                   </Typography>
                 </Grid>
                 <Grid item xs={5}>
@@ -102,11 +106,11 @@ const ApplyLeaveLayout = () => {
                   </Typography>
                   <br />
                   <Typography variant="h7" fontWeight="bold">
-                    2023-03-19
+                  {pendingLeaveData?.toDate}
                   </Typography>
                 </Grid>
                 <Grid item xs={2}>
-                  <Chip label="Rejected" sx={{ fontSize: ".7rem" }} />
+                  <Chip label={pendingLeaveData?.leaveStatus} sx={{ fontSize: ".7rem" }} />
                 </Grid>
               </Grid>
             </Box>
@@ -115,7 +119,7 @@ const ApplyLeaveLayout = () => {
       </Grid>
       <br />
       <Grid item xs={12}>
-        <LeaveUserView />
+        <LeaveUserView data={leaveData} />
       </Grid>
       <Fab
         color="secondary"
