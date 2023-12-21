@@ -5,12 +5,13 @@ import {
   useEditLeave,
   useEditLeaveByAdmin,
 } from '../useLeave';
-import { LeaveSchema } from '../Validation/LeaveSchema';
+import { EditLeaveSchema, LeaveSchema } from '../Validation/LeaveSchema';
 
 const useLeaveForm = (data) => {
   const { mutate: addLeave } = useAddLeaveByAdmin({});
   const { mutate: editLeave } = useEditLeaveByAdmin({});
 
+  // console.log(data);
   const formik = useFormik({
     initialValues: {
       employeeId: data?.employeeId || '',
@@ -24,7 +25,7 @@ const useLeaveForm = (data) => {
       applyLeaveDays: data?.applyLeaveDays || '',
       id: data?.leaveId || '',
     },
-    // validationSchema: LeaveSchema,
+    validationSchema: editLeave ?  EditLeaveSchema: LeaveSchema,
     enableReinitialize: true,
     onSubmit: (values) => {
       if (data?.leaveId) {
