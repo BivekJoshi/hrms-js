@@ -55,22 +55,27 @@ const ResetPassword = ({ isLoading }) => {
 
   const [showOldPassword, setShowOldPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [confirmPassword,setConfirmPassword]=useState();
+
 
   const handleFormSubmit = async () => {
-    const doPasswordsMatch =
-      formik.values.password === formik.values.confirmPassword;
+
+    const doPasswordsMatch = formik.values.password === confirmPassword;
 
     if (!doPasswordsMatch) {
       formik.setErrors({
-        confirmPassword: "New password and coonfirm password do not match",
+        confirmPassword: "New password and confirm password do not match",
       });
       return;
     }
-    const isValid = await formik.validateForm();
-    if (isValid) {
-      formik.handleSubmit();
-    }
+
+    formik.handleSubmit();
+
   };
+
+  const handleConfimPassword=(event)=>{
+    setConfirmPassword(event.target.value)
+  }
 
   const style = {
     display: "flex",
@@ -182,7 +187,7 @@ const ResetPassword = ({ isLoading }) => {
                 formik.handleChange(e);
                 handleChangeValidation(e.target.value);
               }}
-              error={formik.touched.password && Boolean(formik.errors.password)}
+              // error={formik.touched.password && Boolean(formik.errors.password)}
               helperText={formik.touched.password && formik.errors.password}
               variant="outlined"
               type={showValues.showPassword ? "text" : "password"}
@@ -217,8 +222,8 @@ const ResetPassword = ({ isLoading }) => {
               placeholder="Confirm your new password..."
               fullWidth
               required
-              value={formik.values.confirmPassword}
-              onChange={formik.handleChange}
+              value={confirmPassword}
+              onChange={handleConfimPassword}
               error={
                 formik.touched.confirmPassword &&
                 Boolean(formik.errors.confirmPassword)
