@@ -1,24 +1,24 @@
-import { Accordion, AccordionDetails } from '@mui/material';
-import { AccordionSummary, Button } from '@mui/material';
-import { Grid, Typography, Box } from '@mui/material';
-import React, { useEffect, useRef, useState } from 'react';
+import { Accordion, AccordionDetails } from "@mui/material";
+import { AccordionSummary, Button } from "@mui/material";
+import { Grid, Typography, Box } from "@mui/material";
+import React, { useEffect, useRef, useState } from "react";
 import {
   useAddDocument,
   useDeleteDocument,
   useGetDocumentByDocumentType,
-} from '../../../../hooks/employee/useDocument';
-import { useParams } from 'react-router-dom';
-import { DOC_URL } from '../../../../../auth/axiosInterceptor';
-import { documentType } from './documentType';
-import { EditDocumentModal } from './EditDocumentModal';
+} from "../../../../hooks/employee/useDocument";
+import { useParams } from "react-router-dom";
+import { DOC_URL } from "../../../../../auth/axiosInterceptor";
+import { documentType } from "./documentType";
+import { EditDocumentModal } from "./EditDocumentModal";
 
 const EmployeeDocumentDetailForm = () => {
   const { id } = useParams();
   const fileInputRef = useRef(null);
   const [openEditModal, setOpenEditModal] = useState(false);
-  const [expandedAccordion, setExpandedAccordion] = useState('panel1');
-  const [selectedDocument, setSelectedDocument] = useState('');
-  const [document, setDocument] = useState('');
+  const [expandedAccordion, setExpandedAccordion] = useState("panel1");
+  const [selectedDocument, setSelectedDocument] = useState("");
+  const [document, setDocument] = useState("");
   const [imagePreviewMap, setImagePreviewMap] = useState({});
   const [editedDocument, setEditedDocument] = useState({});
   const [uploadStatusMap, setUploadStatusMap] = useState({});
@@ -86,68 +86,72 @@ const EmployeeDocumentDetailForm = () => {
               <Grid
                 key={document?.id}
                 style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '1rem',
-                  marginLeft: '15vh',
-                  position: 'relative',
-                  paddingRight: '2rem',
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "1rem",
+                  marginLeft: "15vh",
+                  paddingRight: "2rem",
                 }}
               >
-                <Box>
+                <Box display="flex" justifyContent="center">
                   {expandedAccordion && !imagePreviewMap[expandedAccordion] && (
                     <img
                       src={`${url}${document?.path}`}
-                      alt='Document'
+                      alt="Document"
                       width={240}
-                      height={140}
+                      height={240}
                       style={{
-                        objectFit: 'cover',
-                        width: '100%',
-                        height: '100%',
+                        objectFit: "contain",
                       }}
                     />
                   )}
                 </Box>
-
-                <Box
+                <Grid display="flex" justifyContent="center">
+                  {expandedAccordion && imagePreviewMap[expandedAccordion] && (
+                    <img
+                      src={imagePreviewMap[expandedAccordion]}
+                      alt="Preview"
+                      width={240}
+                      height={240}
+                      style={{
+                        objectFit: "contain",
+                      }}
+                    />
+                  )}
+                </Grid>
+                <Grid
+                  sm={12}
                   sx={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    gap: '.5rem',
-                    position: 'absolute',
-                    bottom: '10px',
-                    left: '20vh',
-                    textAlign: 'center',
+                    display: "flex",
+                    justifyContent: "center",
+                    gap: ".5rem",
+                    textAlign: "center",
                   }}
                 >
                   <Button
-                    sx={{ width: 'fit-content' }}
-                    variant='contained'
-                    color='primary'
+                    sx={{ width: "fit-content" }}
+                    variant="contained"
+                    color="primary"
                     onClick={() => handleEditFormSubmit(document)}
                   >
                     Update
                   </Button>
                   <Button
-                    sx={{ width: 'fit-content' }}
-                    variant='contained'
-                    color='error'
+                    sx={{ width: "fit-content" }}
+                    variant="contained"
+                    color="error"
                     onClick={() => handleDelete(document)}
                   >
                     Delete
                   </Button>
-                </Box>
+                </Grid>
               </Grid>
             ))}
-          {expandedAccordion && imagePreviewMap[expandedAccordion] && (
-            <img src={imagePreviewMap[expandedAccordion]} alt='Preview' />
-          )}
         </Grid>
 
         <Grid item xs={12} sm={6}>
           {documentType &&
-            documentType.map((document) => (
+            documentType.map((document, index) => (
               <Accordion
                 key={document.id}
                 expanded={expandedAccordion === `panel${document?.id}`}
@@ -161,13 +165,13 @@ const EmployeeDocumentDetailForm = () => {
                 </AccordionSummary>
                 <AccordionDetails>
                   <input
-                    type='file'
+                    type="file"
                     ref={fileInputRef}
                     onChange={handleChangeImage}
                   />
                   <Button
-                    variant='contained'
-                    type='button'
+                    variant="contained"
+                    type="button"
                     disabled={uploadStatusMap[expandedAccordion]}
                     onClick={() => {
                       handleFormSubmit(document.input);
@@ -175,6 +179,16 @@ const EmployeeDocumentDetailForm = () => {
                   >
                     Upload
                   </Button>
+                  {/* {imagePreview && selectedDocument && (
+                    <img
+                      key={document.id}
+                      src={imagePreview}
+                      alt="Selected Profile"
+                      // style={{ width: "50%" }}
+                      height="200px"
+                      width="200px"
+                    />
+                  )} */}
                 </AccordionDetails>
               </Accordion>
             ))}
