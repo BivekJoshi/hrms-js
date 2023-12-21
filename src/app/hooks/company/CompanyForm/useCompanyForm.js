@@ -16,7 +16,7 @@ const useCompanyForm = (data, onClose) => {
       id: data?.id,
     },
     validationSchema: CompanySchema,
-    enableReinitialize: "true",
+    enableReinitialize: true,
     onSubmit: (values) => {
       if (data?.id) {
         handledEditRequest(values);

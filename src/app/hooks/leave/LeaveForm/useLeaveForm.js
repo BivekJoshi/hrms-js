@@ -8,7 +8,6 @@ import {
 import { LeaveSchema } from '../Validation/LeaveSchema';
 
 const useLeaveForm = (data) => {
-  console.log({"data": data})
   const { mutate: addLeave } = useAddLeaveByAdmin({});
   const { mutate: editLeave } = useEditLeaveByAdmin({});
 

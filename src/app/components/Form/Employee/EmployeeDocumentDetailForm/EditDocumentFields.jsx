@@ -1,15 +1,21 @@
-import { Grid, TextField, Button, MenuItem, selectClasses } from "@mui/material";
+import {
+  Grid,
+  TextField,
+  Button,
+  MenuItem,
+  selectClasses,
+} from "@mui/material";
 import React, { useState } from "react";
 import useEditDocumentForm from "./useEditDocumentForm";
 
 const EditDocumentFields = ({ onClose, isLoading, id }) => {
-const [selectedDocument, setSelectedDocument] = useState();
-  const { formik } = useEditDocumentForm(id,selectedDocument);
-  
+  const [selectedDocument, setSelectedDocument] = useState();
+  const { formik } = useEditDocumentForm(id, selectedDocument);
+
   const handleChangeImage = (e) => {
     setSelectedDocument(e.target.files[0]);
   };
-  
+
   const handleFormSubmit = () => {
     formik.handleSubmit();
 
@@ -26,11 +32,7 @@ const [selectedDocument, setSelectedDocument] = useState();
     !isLoading && (
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
-          <input
-            type="file"
-            label="citizenship"
-            onChange={handleChangeImage}
-          />
+          <input type="file" label="citizenship" onChange={handleChangeImage} />
         </Grid>
 
         <Grid
@@ -41,19 +43,19 @@ const [selectedDocument, setSelectedDocument] = useState();
         >
           <Button
             variant="contained"
+            onClick={handleFormSubmit}
+            sx={{ mt: 3, ml: 1 }}
+            // color="error"
+          >
+            Update Document
+          </Button>
+          <Button
+            variant="contained"
             onClick={onClose}
             sx={{ mt: 3, ml: 1 }}
             color="error"
           >
             cancel
-          </Button>
-          <Button
-            variant="contained"
-            onClick={handleFormSubmit}
-            sx={{ mt: 3, ml: 1 }}
-            color="error"
-          >
-            Update Document
           </Button>
         </Grid>
       </Grid>

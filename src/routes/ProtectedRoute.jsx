@@ -1,17 +1,16 @@
-import  { useEffect } from "react";
-import { Navigate, Outlet, useNavigate } from "react-router-dom";
-import { getUser, removeUser } from "../app/utils/cookieHelper";
-import { Box } from "@mui/material";
+import { useEffect } from 'react';
+import { Navigate, Outlet, useNavigate } from 'react-router-dom';
+import { getUser, removeUser } from '../app/utils/cookieHelper';
+import { Box } from '@mui/material';
 
 const ProtectedRoute = ({ redirectTo }) => {
   const navigate = useNavigate();
   const user = getUser();
 
- 
   useEffect(() => {
     if (!user) {
       removeUser();
-      navigate("/");
+      navigate('/');
     }
     // eslint-disable-next-line
   }, []);

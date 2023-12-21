@@ -126,7 +126,7 @@ export const EditUserControlFieldsRole = ({ onClose, rowData }) => {
           options={userRoleData || []}
           getOptionLabel={(option) => getRoleLabel(option.id)}
           value={
-            userRoleData.find((role) => role.id === formik.values.roleId) ||
+            userRoleData?.find((role) => role.id === formik.values.roleId) ||
             null
           }
           onChange={(event, newValue) => {

@@ -7,7 +7,6 @@ import { removeUser } from "../../../utils/cookieHelper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 const Profile = (loggedUserData) => {
-  console.log(loggedUserData?.loggedUserData, "data ma ");
 
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);

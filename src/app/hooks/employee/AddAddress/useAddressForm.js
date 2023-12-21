@@ -48,10 +48,6 @@ export const usePermanentAddressForm = (data, isLoading) => {
     enableReinitialize: true,
     onSubmit: handleSubmit,
   });
-  console.log(
-    '🚀 ~ file: useAddressForm.js:31 ~ usePermanentAddressForm ~ formik:',
-    formik
-  );
 
   function createAddressObject(details) {
     return {
@@ -92,7 +88,7 @@ export const usePermanentAddressForm = (data, isLoading) => {
       perTempAddSame: !formik?.values?.perTempAddSame,
     };
     const finalAddress = [permanentAddress, temporary];
-    console.log(formik.values?.perTempAddSame);
+  
     if (!formik.values?.perTempAddSame) {
       permanentMutate([finalAddress?.[0]]);
     } else permanentMutate(finalAddress);

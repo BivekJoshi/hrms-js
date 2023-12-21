@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "react-query";
-import { sendEmail, sendEmailForHoliday, sendEmailToAll, sendEmailToMultipleEmployee } from "../../api/email/email-api";
+import { addEmailConfigure, sendEmail, sendEmailForHoliday, sendEmailToAll, sendEmailToMultipleEmployee } from "../../api/email/email-api";
 import { toast } from "react-toastify";
 
 /*___________________SEND EMAIL FOR PERTICULAR EMPLOYEE ON BASIS OF ID______________________________________*/
@@ -74,4 +74,24 @@ export const useSendEmailForHoliday = ({ onSuccess, employeeId, holidayId }) => 
       },
     }
   );
+};
+
+
+
+
+{
+  /*________________________POST FOR EMAIL CONFIGURATION_____________________________________*/
+}
+export const useEmailConfigure = ({ onSuccess }) => {
+  const queryClient = useQueryClient();
+  return useMutation(['addEmailConfigure'], (formData) => addEmailConfigure(formData), {
+    onSuccess: (data, variables, context) => {
+      toast.success('Succesfully added email configuration');
+      onSuccess && onSuccess(data, variables, context);
+      queryClient.invalidateQueries('addEmailConfigure');
+    },
+    onError: (err, _variables, _context) => {
+      toast.error(`error: ${err.message}`);
+    },
+  });
 };

@@ -9,10 +9,16 @@ import BasicInfo from "./BasicInfo";
 import ThemeModeContext from "../../../../../../theme/ThemeModeContext";
 import { DOC_URL } from "../../../../../../auth/axiosInterceptor";
 import EmailModal from "../../../../Email/EmailModal";
+import { useGetEmployeeByDesignation } from "../../../../../hooks/employee/useEmployee";
+import { useGetDesignationById } from "../../../../../hooks/designation/useDesignation";
+import { useParams } from "react-router-dom";
 
 const primaryColor = "#1c7ed6";
 
 export const PersonalProfile = ({ data }) => {
+  const { id } = useParams();
+  const { data: positionData } = useGetDesignationById(id);
+  const positionName = positionData && positionData?.positionName;
   const [openEmailForm, setOpenEmailForm] = useState(false);
   const handleOpenEmailform = () => {
     setOpenEmailForm(true);
@@ -69,7 +75,7 @@ export const PersonalProfile = ({ data }) => {
             {data?.firstName + " " + data?.middleName + " " + data?.lastName}
           </Typography>
           <Chip
-            label={data?.position?.positionName}
+            label={positionName}
             sx={{ bgcolor: primaryColor, color: "white", width: " 9rem" }}
           />
           <Typography
@@ -101,6 +107,7 @@ export const PersonalProfile = ({ data }) => {
 
       {openEmailForm && (
         <EmailModal
+          title={"Send Email"}
           officeEmail={data?.officeEmail || ""}
           employeeId={data?.id}
           open={openEmailForm}

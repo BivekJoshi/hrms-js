@@ -1,9 +1,9 @@
-import { useFormik } from "formik";
-import { useAddDocument } from "../useDocument";
+import { useFormik } from 'formik';
+import { useAddDocument } from '../useDocument';
 import * as Yup from 'yup';
 
 const validationSchema = Yup.object().shape({
-  documentType: Yup.string().required("Document type is required"),
+  documentType: Yup.string().required('Document type is required'),
 });
 
 export const useAddDocumentForm = ({ document }) => {
@@ -11,7 +11,7 @@ export const useAddDocumentForm = ({ document }) => {
 
   const formik = useFormik({
     initialValues: {
-      documentType: "",
+      documentType: '',
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {

@@ -1,7 +1,11 @@
 import { useMutation } from 'react-query';
 import { login } from '../../../api/login/login-api';
 import { toast } from 'react-toastify';
-import { getUser, setUser } from '../../../../app/utils/cookieHelper';
+import {
+  getUser,
+  removeUser,
+  setUser,
+} from '../../../../app/utils/cookieHelper';
 import { useNavigate } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
 

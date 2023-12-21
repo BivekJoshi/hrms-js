@@ -67,7 +67,6 @@ const Holiday = ({ permissions }) => {
     setOpenSubmitModal(false);
   };
   const hasPermission = permissions?.canEdit;
-  console.log("getEventID:", getEventID);
 
   return (
     <>
