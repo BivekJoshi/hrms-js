@@ -16,8 +16,8 @@ const TrainingField = ({ onClose, isLoading, data, empId }) => {
     //     startDate: true,
     //     endDate: true,
     //   });
-      onClose();
-    };
+    onClose();
+  };
 
   const submitButtonText = data ? 'Update' : 'Add';
   return (

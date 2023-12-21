@@ -116,7 +116,6 @@ export const usePermanentAddressForm = (data, isLoading) => {
       addressType: 'TEMPORARY',
     };
     const finalAddress = [permanentAddress, temporary];
-    
     const handleEditMutate = (address, onSuccessMessage) => {
       editMutate(address, {
         onSuccess: () => {

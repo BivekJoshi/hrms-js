@@ -4,19 +4,14 @@ import { getUser, removeUser } from '../app/utils/cookieHelper';
 import { Box } from '@mui/material';
 import jwtDecode from 'jwt-decode';
 
-const ProtectedRoute = ({ redirectTo }) => {
-  const navigate = useNavigate();
+const AdminRoutes = ({ redirectTo }) => {
   const user = getUser();
+  const decode = jwtDecode(user);
+  const userRole = decode?.userRole;
 
-  useEffect(() => {
-    if (!user) {
-      removeUser();
-      navigate('/');
-    }
-    // eslint-disable-next-line
-  }, []);
+  if (userRole && userRole === 'ROLE_EMPLOYEE')
+    return <Navigate exact to={redirectTo} />;
 
-  if (!user) return <Navigate exact to={redirectTo} />;
   return (
     <Box>
       <Outlet />
@@ -24,4 +19,4 @@ const ProtectedRoute = ({ redirectTo }) => {
   );
 };
 
-export default ProtectedRoute;
+export default AdminRoutes;

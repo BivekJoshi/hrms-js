@@ -1,11 +1,11 @@
-import { useFormik } from 'formik';
+import { useFormik } from "formik";
 import {
   useAddEmployeeHistory,
   useEditEmployeeHistory,
   useGetEmployeeHistory,
-} from '../useEmployeeHistory';
-import { useParams } from 'react-router-dom';
-import HistorySchema from './HistorySchema';
+} from "../useEmployeeHistory";
+import { useParams } from "react-router-dom";
+import HistorySchema from "./HistorySchema";
 
 const useEmployeeHistoryForm = () => {
   const { id } = useParams();
@@ -17,14 +17,14 @@ const useEmployeeHistoryForm = () => {
   const historyDetails =
     !empHistoryLoading && Array.isArray(empHistoryData)
       ? empHistoryData.map((empHistory) => ({
-          id: empHistory?.id || '',
-          employerName: empHistory?.employerName || '',
-          employerAddress: empHistory?.employerAddress || '',
-          pastPosition: empHistory?.pastPosition || '',
-          fromDate: empHistory?.fromDate || '',
-          toDate: empHistory?.toDate || '',
-          description: empHistory?.description || '',
-          remarks: empHistory?.remarks || '',
+          id: empHistory?.id || "",
+          employerName: empHistory?.employerName || "",
+          employerAddress: empHistory?.employerAddress || "",
+          pastPosition: empHistory?.pastPosition || "",
+          fromDate: empHistory?.fromDate || "",
+          toDate: empHistory?.toDate || "",
+          description: empHistory?.description || "",
+          remarks: empHistory?.remarks || "",
         }))
       : [];
   const formik = useFormik({
@@ -34,17 +34,17 @@ const useEmployeeHistoryForm = () => {
           ? historyDetails
           : [
               {
-                employerName: '',
-                employerAddress: '',
-                pastPosition: '',
-                fromDate: '',
-                toDate: '',
-                description: '',
-                remarks: '',
+                employerName: "",
+                employerAddress: "",
+                pastPosition: "",
+                fromDate: "",
+                toDate: "",
+                description: "",
+                remarks: "",
               },
             ],
     },
-    enableReinitialize: true,
+    // enableReinitialize: true,
     validationSchema: HistorySchema,
     onSubmit: (values) => {
       if (values.history.some((history) => !history.id)) {
