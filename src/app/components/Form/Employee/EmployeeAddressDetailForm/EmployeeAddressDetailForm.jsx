@@ -218,7 +218,7 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                         style={{ marginTop: '20px', marginBottom: '20px' }}
                       >
                         <ThemeSwitch
-                          name='isAddressSperTempAddSameame'
+                          name='perTempAddSame'
                           checked={showTemporaryAddress}
                           onClick={() => handleTemporaryButtonClick(index)}
                         />

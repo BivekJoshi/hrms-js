@@ -45,3 +45,15 @@ export const sendEmailForHoliday = async ({
   const res = await axiosInstance.post(url, formData);
   return res;
 };
+
+
+
+
+{
+  /*________________________POST for email congiguration_____________________________________*/
+}
+export const addEmailConfigure = async (formData) => {
+ 
+  const data = await axiosInstance.put('/email/change-email-config', formData);
+  return data;
+};

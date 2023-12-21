@@ -8,6 +8,7 @@ export const EditDocumentModal = ({ open, handleCloseModal, id }) => {
     return (
         <div>
             <FormModal
+            title={"Change Image"}
                 open={open}
                 onClose={handleCloseModal}
                 formComponent={<EditDocumentFields onClose={handleCloseModal} id={id} />} />

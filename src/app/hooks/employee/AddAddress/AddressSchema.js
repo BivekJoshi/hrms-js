@@ -1,9 +1,9 @@
-import * as Yup from 'yup';
+import * as Yup from "yup";
 import {
   ageRegex,
   onlyTextRegex,
   onlyNumberRegExp,
-} from '../../../../validation/validationRegex';
+} from "../../../../validation/validationRegex";
 
 // const AddressSchema = Yup.object().shape({
 //   addresses: Yup.array().of(
@@ -49,36 +49,145 @@ import {
 // });
 
 const AddressSchema = Yup.object().shape({
+  perTempAddSame: Yup.boolean(),
   addresses: Yup.array().of(
     Yup.object().shape({
-      country: Yup.string().when('addressType', {
-        is: 'PERMANENT',
-        then: Yup.string().required('country is required'),
+      addressType: Yup.string().required("Address type is required"),
+      country: Yup.string().when("addressType", {
+        is: "PERMANENT",
+        then: Yup.string().required("Country is required"),
+        otherwise: Yup.string().when("$perTempAddSame", {
+          is: true,
+          then: Yup.string().required("Country is required"),
+        }),
       }),
-      province: Yup.string().when('addressType', {
-        is: 'PERMANENT',
-        then: Yup.string().required('Province is required'),
+      province: Yup.string().when("addressType", {
+        is: "PERMANENT",
+        then: Yup.string().required("Province is required"),
+        otherwise: Yup.string().when("$perTempAddSame", {
+          is: true,
+          then: Yup.string().required("Province is required"),
+        }),
       }),
-      district: Yup.string().when('addressType', {
-        is: 'PERMANENT',
-        then: Yup.string().required('District is required'),
+      district: Yup.string().when("addressType", {
+        is: "PERMANENT",
+        then: Yup.string().required("District is required"),
+        otherwise: Yup.string().when("$perTempAddSame", {
+          is: true,
+          then: Yup.string().required("District is required"),
+        }),
       }),
-      wardNumber: Yup.number().when('addressType', {
-        is: 'PERMANENT',
-        then: Yup.number()
-          .typeError('Ward number must be a number')
-          .required('Ward number is required'),
+      wardNumber: Yup.number().when("addressType", {
+        is: "PERMANENT",
+        then: Yup.number().typeError("Ward number must be a number").required("Ward number is required"),
+        otherwise: Yup.number().when("$perTempAddSame", {
+          is: true,
+          then: Yup.number().typeError("Ward number must be a number").required("Ward number is required"),
+        }),
       }),
-      city: Yup.string().when('addressType', {
-        is: 'PERMANENT',
-        then: Yup.string().required('City is required'),
+      city: Yup.string().when("addressType", {
+        is: "PERMANENT",
+        then: Yup.string().required("City is required"),
+        otherwise: Yup.string().when("$perTempAddSame", {
+          is: true,
+          then: Yup.string().required("City is required"),
+        }),
       }),
-      street: Yup.string().when('addressType', {
-        is: 'PERMANENT',
-        then: Yup.string().required('Street is required'),
+      street: Yup.string().when("addressType", {
+        is: "PERMANENT",
+        then: Yup.string().required("Street is required"),
+        otherwise: Yup.string().when("$perTempAddSame", {
+          is: true,
+          then: Yup.string().required("Street is required"),
+        }),
       }),
     })
-  ),
+  )  .test(
+    "perTempAddSame",
+    "perTempAddSame used in addresses",
+    function (value) {
+      const perTempAddSame = this.resolve(Yup.ref("perTempAddSame"));
+      this.options.context.perTempAddSame = !!perTempAddSame;
+      return true;
+    }
+  )
+  .required(),
 });
 
+
+
 export { AddressSchema };
+
+// const AddressSchema = Yup.object().shape({
+//   perTempAddSame: Yup.boolean(),
+//   addresses: Yup.array()
+//     .of(
+//       Yup.object().shape({
+//         country: Yup.string().when(["addressType", "$perTempAddSame"], {
+//           is: (addressType, perTempAddSame) => {
+//             const both =
+//               addressType === "TEMPORARY" || addressType === "PERMANENT";
+//             return perTempAddSame ? both : addressType === "PERMANENT";
+//           },
+//           then: Yup.string().required("Country is required"),
+//           otherwise: Yup.string(),
+//         }),
+//         province: Yup.string().when(["addressType", "$perTempAddSame"], {
+//           is: (addressType, perTempAddSame) => {
+//             const both =
+//               addressType === "TEMPORARY" || addressType === "PERMANENT";
+//             return perTempAddSame ? both : addressType === "PERMANENT";
+//           },
+//           then: Yup.string().required("Province is required"),
+//         }),
+//         district: Yup.string().when(["addressType", "$perTempAddSame"], {
+//           is: (addressType, perTempAddSame) => {
+//             const both =
+//               addressType === "TEMPORARY" || addressType === "PERMANENT";
+//             return perTempAddSame ? both : addressType === "PERMANENT";
+//           },
+//           then: Yup.string().required("District is required"),
+//           otherwise: Yup.string(),
+//         }),
+//         wardNumber: Yup.number().when(["addressType", "$perTempAddSame"], {
+//           is: (addressType, perTempAddSame) => {
+//             const both =
+//               addressType === "TEMPORARY" || addressType === "PERMANENT";
+//             return perTempAddSame ? both : addressType === "PERMANENT";
+//           },
+//           then: Yup.number()
+//             .typeError("Ward number must be a number")
+//             .required("Ward number is required"),
+//           otherwise: Yup.string(),
+//         }),
+//         city: Yup.string().when(["addressType", "$perTempAddSame"], {
+//           is: (addressType, perTempAddSame) => {
+//             const both =
+//               addressType === "TEMPORARY" || addressType === "PERMANENT";
+//             return perTempAddSame ? both : addressType === "PERMANENT";
+//           },
+//           then: Yup.string().required("City is required"),
+//           otherwise: Yup.string(),
+//         }),
+//         street: Yup.string().when(["addressType", "$perTempAddSame"], {
+//           is: (addressType, perTempAddSame) => {
+//             const both =
+//               addressType === "TEMPORARY" || addressType === "PERMANENT";
+//             return perTempAddSame ? both : addressType === "PERMANENT";
+//           },
+//           then: Yup.string().required("Street is required"),
+//           otherwise: Yup.string(),
+//         }),
+//       })
+//     )
+//     .test(
+//       "perTempAddSame",
+//       "perTempAddSame used in addresses",
+//       function (value) {
+//         const perTempAddSame = this.resolve(Yup.ref("perTempAddSame"));
+//         this.options.context.perTempAddSame = !!perTempAddSame;
+//         return true;
+//       }
+//     )
+//     .required(),
+// });

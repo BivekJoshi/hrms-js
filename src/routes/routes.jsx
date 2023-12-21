@@ -85,6 +85,12 @@ const EmployeeDashboard = Loadable(
     import("../app/pages/EmployeePage/EmployeeDashboard/EmployeeDashbord")
   )
 );
+const EmailConfiguration = Loadable(
+  lazy(() =>
+    import("../app/pages/EmailConfiguration/EmailConfiguration")
+  )
+);
+
 const routes = [
   {
     path: "dashboard",
@@ -281,6 +287,12 @@ const routes = [
     name: "Profile",
     id: nanoid(),
     component: <ProfileDetail />,
+  },
+  {
+    path: "email",
+    name: "Email",
+    id: nanoid(),
+    component: <EmailConfiguration component="emailConfig" />,
   },
 ];
 

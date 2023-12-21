@@ -22,11 +22,12 @@ export const AddLeaveTypeModal = ({ open, handleCloseModal, existingLeaveTypes, 
   )
 }
 
-export const EditLeaveTypeModal = ({ open, handleCloseModal, id }) => {
-  const { data } = useGetLeaveTypeById(id);
+export const EditLeaveTypeModal = ({ open, handleCloseModal, data, title }) => {
+  // const { data } = useGetLeaveTypeById(id);
   return (
     <Box>
       <FormModal
+      title={title}
         open={open}
         onClose={handleCloseModal}
         formComponent={<LeaveTypeFields onClose={handleCloseModal} data={data} />}

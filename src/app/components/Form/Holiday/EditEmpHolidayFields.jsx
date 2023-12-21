@@ -3,24 +3,16 @@ import React from "react";
 import { ButtonComponent } from "../../Button/ButtonComponent";
 
 const EditEmpHolidayFields = ({ onClose, data }) => {
-console.log(data)
+  
   return (
     <Grid container spacing={3}>
       <Grid item xs={12} sm={12} lg={6} xl={6}>
-        <Typography variant='h6'>Event Name:</Typography>
+        <Typography variant='h6'>Holiday Name:</Typography>
         <Typography variant='p'>{data?.holidayName}</Typography>
       </Grid>
       <Grid item xs={12} sm={12} lg={6} xl={6}>
         <Typography variant='h6'>Date:</Typography>
         <Typography variant='p'>{data?.holidayDate}</Typography>
-      </Grid>
-      <Grid item xs={12} sm={12} lg={6} xl={6}>
-        <Typography variant='h6'>Time:</Typography>
-        <Typography variant='p'>{data?.eventTime}</Typography>
-      </Grid>
-      <Grid item xs={12} sm={12} lg={6} xl={6}>
-        <Typography variant='h6'>Location:</Typography>
-        <Typography variant='p'>{data?.eventLocation}</Typography>
       </Grid>
       <Grid item xs={12} sm={12} lg={12} xl={12}>
         <Typography variant='h6'>Description:</Typography>

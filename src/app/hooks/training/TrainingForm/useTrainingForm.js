@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 import { useAddTrainingDetail, useEditTraining } from "../useTraining";
 import { TrainingSchema } from "./TrainingSchema";
 
-const useTrainingForm = (data,empId) => {
+const useTrainingForm = (data,empId, onClose) => {
   const { mutate: addTraining } = useAddTrainingDetail({});
   const { mutate: editTraining } = useEditTraining({empId});
 

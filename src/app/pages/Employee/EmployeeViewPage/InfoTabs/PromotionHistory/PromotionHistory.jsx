@@ -11,14 +11,8 @@ import { useGetLoggedInUserInfo } from "../../../../../hooks/employee/useEmploye
 import CustomTable from "../../../../../components/CustomTable/CustomTable";
 
 const PromotionHistory = () => {
-  const {
-    isSuperAdmin,
-    isAdmin,
-    isHr,
-    isEmployee,
-    isHrAdmin,
-    isManager,
-  } = useAuth();
+  const { isSuperAdmin, isAdmin, isHr, isEmployee, isHrAdmin, isManager } =
+    useAuth();
   const { data: loggedInUserData, isLoading: isLoadingUserData } = isEmployee
     ? useGetLoggedInUserInfo()
     : {};
@@ -28,10 +22,10 @@ const PromotionHistory = () => {
       ? useGetPromotionHistory(id)
       : useGetPromotionHistory(loggedInUserData?.id);
 
-  const {
-    data: designationData,
-    isLoading: loadingDesignation,
-  } = useGetDesignation();
+  const { data: designationData, isLoading: loadingDesignation } =
+    useGetDesignation();
+  // const { data: trainingData } = useGetTrainingByEmpId(id);
+  // console.log(trainingData);
 
   const [openAddModal, setOpenAddModal] = useState(false);
 
@@ -123,13 +117,14 @@ const PromotionHistory = () => {
 
       <CustomTable
         columns={columns}
-        data={mappedPromotionHistory}
+        data={PromotionHistory}
         title="Designation List"
         isLoading={isLoading || loadingDesignation}
       />
 
       {openAddModal && (
         <AddPromotionHistory
+          title={"Add Promotion"}
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
         />
