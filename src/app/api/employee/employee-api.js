@@ -19,9 +19,9 @@ export const getLoggedInUserInfo = async () => {
 {
   /*________________________GETBYPAGINATION_____________________________________*/
 }
-export const getEmployeeData = async (pageNumber) => {
+export const getEmployeeData = async (pageNumber,pageSize) => {
   const data = await axiosInstance.get(
-    `/employee/get-all-page-wise/${pageNumber}/?pageSize=${pageNumber}&sortBy=id&sortDir=asc`
+    `/employee/get-all-page-wise/${pageNumber}/?pageSize=${pageSize}&sortBy=id&sortDir=asc`
   );
   return data;
 };
