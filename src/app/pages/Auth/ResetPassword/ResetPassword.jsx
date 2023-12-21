@@ -57,8 +57,17 @@ const ResetPassword = ({ isLoading }) => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleFormSubmit = async () => {
+    const doPasswordsMatch =
+      formik.values.password === formik.values.confirmPassword;
+
+    if (!doPasswordsMatch) {
+      formik.setErrors({
+        confirmPassword: "New password and coonfirm password do not match",
+      });
+      return;
+    }
     const isValid = await formik.validateForm();
-    if(isValid){
+    if (isValid) {
       formik.handleSubmit();
     }
   };
@@ -136,7 +145,6 @@ const ResetPassword = ({ isLoading }) => {
                 formik.touched.oldPassword && formik.errors.oldPassword
               }
               variant="outlined"
-              
               type={showOldPassword ? "text" : "password"}
               InputLabelProps={{ shrink: true }}
               InputProps={{
@@ -177,7 +185,6 @@ const ResetPassword = ({ isLoading }) => {
               error={formik.touched.password && Boolean(formik.errors.password)}
               helperText={formik.touched.password && formik.errors.password}
               variant="outlined"
-              
               type={showValues.showPassword ? "text" : "password"}
               InputLabelProps={{ shrink: true }}
               InputProps={{
@@ -220,7 +227,6 @@ const ResetPassword = ({ isLoading }) => {
                 formik.touched.confirmPassword && formik.errors.confirmPassword
               }
               variant="outlined"
-              
               type={showConfirmPassword ? "text" : "password"}
               InputLabelProps={{ shrink: true }}
               InputProps={{

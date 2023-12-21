@@ -11,6 +11,8 @@ import { useParams } from "react-router-dom";
 import { DOC_URL } from "../../../../../auth/axiosInterceptor";
 import { documentType } from "./documentType";
 import { EditDocumentModal } from "./EditDocumentModal";
+import deleteIcon from '../../../../../assets/approve.png'
+import updateIcon from '../../../../../assets/update.png'
 
 const EmployeeDocumentDetailForm = () => {
   const { id } = useParams();
@@ -23,6 +25,8 @@ const EmployeeDocumentDetailForm = () => {
   const [editedDocument, setEditedDocument] = useState({});
   const [uploadStatusMap, setUploadStatusMap] = useState({});
   const handleCloseEditModal = () => setOpenEditModal(false);
+
+  const [showInfo, setShowInfo] = useState(false);
 
   const { mutate: deleteDocument } = useDeleteDocument({});
   const { mutate: addDocument } = useAddDocument({});
@@ -129,18 +133,20 @@ const EmployeeDocumentDetailForm = () => {
                   }}
                 >
                   <Button
-                    sx={{ width: "fit-content" }}
-                    variant="contained"
+                    variant="outlined"
                     color="primary"
                     onClick={() => handleEditFormSubmit(document)}
+                    startIcon={<img src={updateIcon} />}
+                    sx={{textTransform:'none'}}
                   >
                     Update
                   </Button>
                   <Button
-                    sx={{ width: "fit-content" }}
-                    variant="contained"
+                    variant="outlined"
                     color="error"
                     onClick={() => handleDelete(document)}
+                    startIcon={<img src={deleteIcon} />}
+                    sx={{textTransform:'none'}}
                   >
                     Delete
                   </Button>
@@ -179,18 +185,10 @@ const EmployeeDocumentDetailForm = () => {
                   >
                     Upload
                   </Button>
-                  {/* {imagePreview && selectedDocument && (
-                    <img
-                      key={document.id}
-                      src={imagePreview}
-                      alt="Selected Profile"
-                      // style={{ width: "50%" }}
-                      height="200px"
-                      width="200px"
-                    />
-                  )} */}
                 </AccordionDetails>
               </Accordion>
+
+
             ))}
         </Grid>
       </Grid>
