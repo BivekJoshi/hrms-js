@@ -1,4 +1,4 @@
-import { Accordion, AccordionDetails } from "@mui/material";
+import { Accordion, AccordionDetails, Divider } from "@mui/material";
 import { AccordionSummary, Button } from "@mui/material";
 import { Grid, Typography, Box } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
@@ -11,8 +11,8 @@ import { useParams } from "react-router-dom";
 import { DOC_URL } from "../../../../../auth/axiosInterceptor";
 import { documentType } from "./documentType";
 import { EditDocumentModal } from "./EditDocumentModal";
-import deleteIcon from '../../../../../assets/approve.png'
-import updateIcon from '../../../../../assets/update.png'
+import deleteIcon from "../../../../../assets/approve.png";
+import updateIcon from "../../../../../assets/update.png";
 
 const EmployeeDocumentDetailForm = () => {
   const { id } = useParams();
@@ -137,7 +137,7 @@ const EmployeeDocumentDetailForm = () => {
                     color="primary"
                     onClick={() => handleEditFormSubmit(document)}
                     startIcon={<img src={updateIcon} />}
-                    sx={{textTransform:'none'}}
+                    sx={{ textTransform: "none" }}
                   >
                     Update
                   </Button>
@@ -146,7 +146,7 @@ const EmployeeDocumentDetailForm = () => {
                     color="error"
                     onClick={() => handleDelete(document)}
                     startIcon={<img src={deleteIcon} />}
-                    sx={{textTransform:'none'}}
+                    sx={{ textTransform: "none" }}
                   >
                     Delete
                   </Button>
@@ -162,6 +162,7 @@ const EmployeeDocumentDetailForm = () => {
                 key={document.id}
                 expanded={expandedAccordion === `panel${document?.id}`}
                 onChange={handleChange(`panel${document?.id}`, document?.input)}
+                sx={{ borderBottom: '1px solid black', boxShadow:"none", margin:"0 !important"}} 
               >
                 <AccordionSummary
                   aria-controls={`panel${document.id}a-content`}
@@ -187,8 +188,6 @@ const EmployeeDocumentDetailForm = () => {
                   </Button>
                 </AccordionDetails>
               </Accordion>
-
-
             ))}
         </Grid>
       </Grid>
