@@ -15,10 +15,6 @@ import {
 import ThemeModeContext from '../../../../theme/ThemeModeContext';
 
 const EmployeeGrid = ({ employeeData, isLoading }) => {
-  console.log(
-    '🚀 ~ file: EmployeeGrid.jsx:18 ~ EmployeeGrid ~ employeeData:',
-    employeeData
-  );
   const [nameFilter, setNameFilter] = useState('');
   const [positionFilter, setPositionFilter] = useState('');
   const [phoneFilter, setPhoneFilter] = useState('');
