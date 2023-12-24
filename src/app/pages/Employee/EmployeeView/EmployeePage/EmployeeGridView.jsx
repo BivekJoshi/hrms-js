@@ -13,26 +13,23 @@ import EmployeeCard from "../../../../components/cards/Employee/EmployeeCard";
 import { useGetEmployeeData } from "../../../../hooks/employee/useEmployee";
 
 const EmployeeGridView = () => {
-  const [pageNumber, setPageNumber] = useState(0);
-  const [pageSize, setPageSize] = useState("");
-  const { data: employeeData, isLoading: loading } = useGetEmployeeData(
-    pageNumber,
-    pageSize
-  );
+  const [pageNumber, setpageNumber] = useState(0);
+  const { data: employeeData, isLoading } = useGetEmployeeData(pageNumber, 10);
+  console.log(employeeData, "data ma ");
 
   const handlePageChange = (event, newPage) => {
-    const adjustedPageNumber = newPage - 1;
-    setPageNumber(adjustedPageNumber);
+    setpageNumber(newPage - 1);
   };
-  const handlePageSizeChange = (event, newValue) => {
-    const newPageSize = parseInt(newValue, 10) || 12;
-    setPageSize(newPageSize);
-    setPageNumber(0);
-  };
-
-  useEffect(() => {}, [pageNumber, pageSize]);
-
-  return !loading && (
+  
+  if (isLoading)
+    return (
+      <>
+        <Skeleton />
+        <Skeleton animation="wave" />
+        <Skeleton animation={false} />
+      </>
+    );
+  return (
     <>
       <Grid
         container
@@ -64,31 +61,15 @@ const EmployeeGridView = () => {
         ))}
       </Grid>
 
-      <Box padding="2rem" display="grid" justifyContent={"end"}>
-        <div style={{ display: "flex" }}>
-          <Pagination
-            count={employeeData?.totalPages}
-            page={pageNumber + 1}
-            onChange={handlePageChange}
-            size="large"
-            color="primary"
-            showFirstButton
-            showLastButton
-          />
-          <Autocomplete
-            value={pageSize}
-            onChange={handlePageSizeChange}
-            options={[12, 24, 36]}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                label="page"
-                variant="outlined"
-                size="small"
-              />
-            )}
-          />
-        </div>
+      <Box padding="2rem" display="grid" justifyContent={"center"}>
+        <Pagination
+          count={employeeData?.totalPages}
+          // page={employeeData}
+          onChange={handlePageChange}
+          boundaryCount={3}
+          size="large"
+          color="primary"
+        />
       </Box>
     </>
   );

@@ -16,6 +16,7 @@ import {
   AddProjectEmployeeModal,
   EditProjectEmployeeModal,
 } from "../ProjectModal/ProjectModal";
+import CustomTable from "../../../components/CustomTable/CustomTable";
 
 const ProjectDetail = () => {
   const { id } = useParams();
@@ -181,27 +182,12 @@ const ProjectDetail = () => {
         </Typography>
       </Box>
       <br />
-      <MaterialTable
+      <CustomTable
         columns={columns}
         data={projectEmployeeData}
         title="Project Employee Data"
         isLoading={isLoading}
-        options={{
-          padding: "dense",
-          margin: 50,
-          pageSize: 10,
-          emptyRowsWhenPaging: false,
-          headerStyle: {
-            backgroundColor: "#1c7ed6",
-            color: "#FFF",
-            fontSize: "1rem",
-            padding: "dense",
-            height: 50,
-          },
-          rowStyle: {
-            fontSize: ".8rem",
-          },
-        }}
+        exportButton={true}
       />
       {openAddModal && (
         <AddProjectEmployeeModal

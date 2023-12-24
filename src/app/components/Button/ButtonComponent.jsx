@@ -23,7 +23,8 @@ export const ButtonComponent = ({
         background: BGColor ? BGColor : '',
         color: TextColor ? TextColor : '#fff',
         border: Border ? Border : '',
-        margin: '1rem 0rem 0.5rem 0.5rem'
+        margin: '1rem 0rem 0.5rem 0.5rem',
+        textTransform:"none"
       }}
       disabled={disabled ? disabled : false}
     >

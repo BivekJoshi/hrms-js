@@ -98,28 +98,29 @@ const Leave = ({ permissions }) => {
       title: "Status",
       field: "leaveStatus",
       emptyValue: "-",
-      cellStyle: {
-        whiteSpace: "nowrap",
-      },
+      // cellStyle: {
+      //   whiteSpace: "nowrap",
+      // },
       render: (rowData) => {
-        const status = rowData.leaveStatus;
+        const status = rowData.leaveStatus.toLowerCase();
         let chipColor = "";
 
-        if (status === "APPROVED") {
+        if (status === "approved") {
           chipColor = "green";
-        } else if (status === "REJECTED") {
+        } else if (status === "rejected") {
           chipColor = "red";
-        } else if (status === "PENDING") {
+        } else if (status === "pending") {
           chipColor = "orange";
         }
 
         return (
           <Chip
-            label={status}
-            style={{
+            label={status.charAt(0).toUpperCase() + status.slice(1)}
+            sx={{
               backgroundColor: chipColor,
               color: "white",
               width: "6rem",
+              // textTransform:'capatalize'
             }}
           />
         );
@@ -188,27 +189,34 @@ const Leave = ({ permissions }) => {
     {
       title: "Approved By",
       width: "80px",
+      title: "Approved By",
+      width: "80px",
       sorting: false,
+      field: "approvedBy",
       field: "approvedBy",
     },
     // {
-    //   title: 'Actions',
-    //   width: '10px',
+    //   title: "Actions",
+    //   width: "10px",
     //   render: (rowData) => {
-    //     const isApprovedOrRejected = ['APPROVED', 'REJECTED'].includes(
+    //     const isApprovedOrRejected = ["APPROVED", "REJECTED"].includes(
     //       rowData.leaveStatus
     //     );
 
     //     return (
-    //       <Stack direction='row' spacing={0}>
+    //       <Stack direction="row" spacing={0}>
     //         <Button
-    //           color='primary'
+    //           color="primary"
     //           onClick={() => handleEditLeave(rowData)}
     //           disabled={isApprovedOrRejected}
     //         >
     //           <ModeEditOutlineIcon />
     //         </Button>
-    //         <Button color='primary' onClick={() => handleDeleteLeave(rowData)}>
+    //         <Button
+    //           color="primary"
+    //           onClick={() => handleDeleteLeave(rowData)}
+    //           disabled={isApprovedOrRejected}
+    //         >
     //           <DeleteIcon />
     //         </Button>
     //       </Stack>
@@ -220,24 +228,16 @@ const Leave = ({ permissions }) => {
 
   const actions = [
     {
-      icon: () => (
-        <HocButton
-          permissions={permissions?.canEdit}
-          icon={<ModeEditOutlineIcon />}
-        />
-      ),
+      icon: () => <ModeEditOutlineIcon />,
       tooltip: "Edit Leave",
       onClick: (event, rowData) => handleEditLeave(rowData),
     },
     {
-      icon: () => (
-        <HocButton permissions={permissions?.canDelete} icon={<DeleteIcon />} />
-      ),
-      tooltip: "Delete Leave",
+      icon: () => <DeleteIcon />,
+      tooltip: "Edit Leave",
       onClick: (event, rowData) => handleDeleteLeave(rowData),
     },
   ];
-
   // if (isLoading || loadingemployee || loadingleaveType) return <>Loading</>;
 
   return (
@@ -257,7 +257,10 @@ const Leave = ({ permissions }) => {
         />
       </Box>
 
-      <Box gap={2} sx={{display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <Box
+        gap={2}
+        sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}
+      >
         {pendingLeaves && pendingLeaves.length > 0 && (
           <CustomTable
             columns={columns}
@@ -273,7 +276,6 @@ const Leave = ({ permissions }) => {
             columns={columns}
             data={approvedRejectedLeaves}
             title="Approved/Rejected Leave Data"
-            actions={actions}
             isLoading={loading}
           />
         )}

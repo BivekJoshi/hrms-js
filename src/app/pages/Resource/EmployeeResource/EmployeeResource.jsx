@@ -142,15 +142,6 @@ const EmployeeResource = ({ permissions }) => {
         }}
       >
         <HocButton
-          color={"primary"}
-          permissions={permissions}
-          variant={"outlined"}
-          onClick={() => {
-            navigate(`/admin/logistics/office`);
-          }}
-          buttonName={"Logistics"}
-        />
-        <HocButton
           permissions={permissions}
           color={"white"}
           variant={"contained"}
