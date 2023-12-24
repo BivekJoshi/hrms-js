@@ -7,7 +7,7 @@ import {
 import ThemeModeContext from "../../../../../theme/ThemeModeContext";
 import { ButtonComponent } from "../../../Button/ButtonComponent";
 
-export const AddprojectEmployeeFields = ({ onClose, isLoading }) => {
+export const AddprojectEmployeeFields = ( onClose, isLoading ) => {
   const { data: employeeData, isLoading: loadingEmployee } = useGetEmployee();
 
   const { mode } = useContext(ThemeModeContext);

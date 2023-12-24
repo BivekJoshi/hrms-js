@@ -15,12 +15,7 @@ import { useGetEmployee } from "../../../hooks/employee/useEmployee";
 import CustomTable from "../../../components/CustomTable/CustomTable";
 
 const ProjectTask = () => {
-  const {
-    data: ProjectTask,
-    isLoading,
-    refetch,
-    isRefetching,
-  } = useGetProjectTaskByProjectId();
+  const { data: ProjectTask, isLoading,  refetch,  isRefetching} = useGetProjectTaskByProjectId();
   const [state, setState] = useState({ right: false });
   const [editedTask, setEditedTask] = useState({});
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
@@ -189,9 +184,9 @@ const ProjectTask = () => {
         const employeeIds = rowData.projectEmployees.map(
           (employee) => employee.empId
         );
-        const matchedEmployees = employeeData && employeeData.filter((employee) =>
-          employeeIds.includes(employee.id)
-        );
+        const matchedEmployees =
+          employeeData &&
+          employeeData.filter((employee) => employeeIds.includes(employee.id));
         const matchedEmployeeNames = matchedEmployees.map(
           (employee) =>
             `${employee.firstName} ${employee.middleName} ${employee.lastName}`
@@ -256,6 +251,7 @@ const ProjectTask = () => {
       />
       {openEditModal && (
         <EditProjectTaskModal
+          title={"Edit Task"}
           id={editedRowData?.id}
           data={editedRowData}
           open={openEditModal}

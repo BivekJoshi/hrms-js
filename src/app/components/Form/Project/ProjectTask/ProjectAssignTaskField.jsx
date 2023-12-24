@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
-import useProjectAssignTaskForm from '../../../../hooks/project/ProjectTask/ProjectTaskForm/useProjectAssignTaskForm';
-import { Button, Grid, MenuItem, TextField } from '@mui/material';
-import { useGetProjectEmployeeById } from '../../../../hooks/project/projectEmployee/useProjectEmployee';
-import { useParams } from 'react-router-dom';
-import { useGetEmployee } from '../../../../hooks/employee/useEmployee';
-import ThemeModeContext from '../../../../../theme/ThemeModeContext';
+import React, { useContext } from "react";
+import useProjectAssignTaskForm from "../../../../hooks/project/ProjectTask/ProjectTaskForm/useProjectAssignTaskForm";
+import { Autocomplete, Button, Grid, MenuItem, TextField } from "@mui/material";
+import { useGetProjectEmployeeById } from "../../../../hooks/project/projectEmployee/useProjectEmployee";
+import { useParams } from "react-router-dom";
+import { useGetEmployee } from "../../../../hooks/employee/useEmployee";
+import ThemeModeContext from "../../../../../theme/ThemeModeContext";
 
 const ProjectAssignTaskField = ({ onClose, data }) => {
   const { mode } = useContext(ThemeModeContext);
@@ -14,11 +14,12 @@ const ProjectAssignTaskField = ({ onClose, data }) => {
 
   const { data: projectData, isLoading: LoadingProjectEmployeeData } =
     useGetProjectEmployeeById(projectTd);
+  console.log("data", projectData);
   const { data: employeeData, isLoading: loadingEmployee } = useGetEmployee();
 
   const getEmployeeNameById = (employeeId) => {
     const employee = employeeData?.find((emp) => emp?.id === employeeId);
-    const name = `${employee?.firstName} ${employee?.middleName || ''} ${
+    const name = `${employee?.firstName} ${employee?.middleName || ""} ${
       employee?.lastName
     }`;
     return name;
@@ -41,7 +42,43 @@ const ProjectAssignTaskField = ({ onClose, data }) => {
         <p>{data?.detail}</p>
       </Grid>
       <Grid item xs={12} sm={12}>
-        <TextField
+        <Autocomplete
+          id="projectEmployeeId"
+          name="projectEmployeeId"
+          options={projectData}
+          getOptionLabel={(option) => option?.employeeName || ""}
+          value={
+            (!LoadingProjectEmployeeData &&
+              projectData.find(
+                (option) => option.id === formik.values.projectEmployeeId
+              )) ||
+            null
+          }
+          onChange={(event, newValue) => {
+            formik.setFieldValue("projectEmployeeId", newValue?.id || "");
+          }}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label="Assign Task To"
+              placeholder="Select Employee"
+              fullWidth
+              required
+              error={
+                formik.touched.projectEmployeeId &&
+                Boolean(formik.errors.projectEmployeeId)
+              }
+              helperText={
+                formik.touched.projectEmployeeId &&
+                formik.errors.projectEmployeeId
+              }
+              variant="outlined"
+              InputLabelProps={{ shrink: true }}
+            />
+          )}
+        />
+
+        {/* <TextField
           id='projectEmployeeId '
           name='projectEmployeeId '
           select
@@ -72,27 +109,27 @@ const ProjectAssignTaskField = ({ onClose, data }) => {
                 {getEmployeeNameById(option.empId)}
               </MenuItem>
             ))}
-        </TextField>
+        </TextField> */}
       </Grid>
 
       <Grid
         container
-        direction='row'
-        justifyContent='flex-end'
-        alignItems='flex-end'
+        direction="row"
+        justifyContent="flex-end"
+        alignItems="flex-end"
       >
         <Button
-          variant='contained'
+          variant="contained"
           onClick={handleFormSubmit}
           sx={{ mt: 3, ml: 1 }}
         >
           Assign Task
         </Button>
         <Button
-          variant='contained'
+          variant="contained"
           onClick={onClose}
           sx={{ mt: 3, ml: 1 }}
-          color='error'
+          color="error"
         >
           Cancel
         </Button>

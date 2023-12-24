@@ -77,7 +77,11 @@ export const DeactivateProjectModal = ({
 
 /*____________________________________________Project Employee Modal_________________________________________________________________*/
 
-export const AddProjectEmployeeModal = ({ open, handleCloseAddModal, title }) => {
+export const AddProjectEmployeeModal = ({
+  open,
+  handleCloseAddModal,
+  title,
+}) => {
   return (
     <FormModal
       title={title}
@@ -98,11 +102,14 @@ export const EditProjectEmployeeModal = ({
   return (
     <div>
       <FormModal
-      title={title}
+        title={title}
         open={open}
         onClose={handleCloseEditModal}
         formComponent={
-          <EditProjectEmployeeFields onClose={handleCloseEditModal} data={data} />
+          <EditProjectEmployeeFields
+            onClose={handleCloseEditModal}
+            data={data}
+          />
         }
       />
     </div>
@@ -110,10 +117,17 @@ export const EditProjectEmployeeModal = ({
 };
 
 /*____________________________________________Project Employee Task  Modal_________________________________________________________________*/
-export const EditProjectTaskModal = ({ open, handleCloseModal, id, data }) => {
+export const EditProjectTaskModal = ({
+  open,
+  handleCloseModal,
+  id,
+  data,
+  title,
+}) => {
   return (
     <div>
       <FormModal
+        title={title}
         open={open}
         onClose={handleCloseModal}
         formComponent={

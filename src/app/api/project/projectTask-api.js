@@ -27,9 +27,10 @@ export const getProjectTaskByTaskId = async (id) => {
   /*________________________ADD-REMOVE PROJECT EMPLOYEE PROJECT TASK_____________________________________*/
 }
 export const editAssignTaskToEmployee = async (formData) => {
- 
-  const projectTaskId = formData.projectTaskId;
-  const projectEmployeeId = formData["projectEmployeeId "];
+  const { projectTaskId, projectEmployeeId } = formData;
+
+  // const projectTaskId = formData.projectTaskId;
+  // const projectEmployeeId = formData["projectEmployeeId "];
   const data = await axiosInstance.put(
     `/project-task/add-remove-project-employee/${projectTaskId}?projectEmployeeId=${projectEmployeeId}`,
     formData

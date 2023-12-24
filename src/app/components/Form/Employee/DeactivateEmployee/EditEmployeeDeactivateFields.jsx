@@ -9,6 +9,7 @@ import { useActiveTerminateEmployee } from '../../../../hooks/employee/Deactivat
 import { termintionOptions, activationOption } from './TerminationOption';
 
 export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
+  console.log("data", data)
   const { data: employeeData } = useGetEmployee();
   const { formik } = useRemoveDeactiveEmployeeForm(data, onClose);
 
