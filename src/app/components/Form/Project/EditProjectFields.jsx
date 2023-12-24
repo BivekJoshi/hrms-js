@@ -4,42 +4,30 @@ import useEditProjectForm from "../../../hooks/project/editProject/useEditProjec
 // import { useGetCompany } from "../../../hooks/company/useCompany";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
 import { ButtonComponent } from '../../Button/ButtonComponent';
+import { useGetEmployee } from "../../../hooks/employee/useEmployee";
 // import { useGetProjectDetail } from "../../../hooks/project/useProject";
 
-const EditProjectFields = ({ onClose, isLoading, data }) => {
+const EditProjectFields = ({ onClose, isLoading, data }) => {z
   const { formik } = useEditProjectForm(data);
   // const { data: projectData } = useGetProjectDetail();
-  // const { data: companyData } = useGetCompany();
+  const { data: employeeData } = useGetEmployee();
   const { mode } = useContext(ThemeModeContext);
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
-
-    if (formik.isValid) {
-      formik.setTouched({
-        projectName: true,
-        startDate: true,
-        endDate: true,
-        taskStatus: true,
-        projectLeadName: true,
-        branchId: true,
-      });
-      onClose();
-    }
+    onClose();
   };
 
-  console.log(formik);
-
-  // const getProjectLeaderName = (projectLeadId) => {
-  //   const projectLeader = employeeData?.find(
-  //     (employee) => employee.id == projectLeadId
-  //   );
-  //   if (projectLeader) {
-  //     const { firstName, middleName, lastName } = projectLeader;
-  //     return `${firstName} ${middleName} ${lastName}`;
-  //   }
-  //   return projectLeadId;
-  // };
+  const getProjectLeaderName = (projectLeadId) => {
+    const projectLeader = employeeData?.find(
+      (employee) => employee.id == projectLeadId
+    );
+    if (projectLeader) {
+      const { firstName, middleName, lastName } = projectLeader;
+      return `${firstName} ${middleName} ${lastName}`;
+    }
+    return projectLeadId;
+  };
 
   // const getCompanyName = (associateCompanies) => {
   //   return (
@@ -153,7 +141,7 @@ const EditProjectFields = ({ onClose, isLoading, data }) => {
           </TextField>
         </Grid>
         <Grid item xs={12} sm={6}>
-          <TextField
+          {/* <TextField
             id='projectLeadName'
             name='projectLeadName'
             label='Assign a Project Leader'
@@ -172,8 +160,8 @@ const EditProjectFields = ({ onClose, isLoading, data }) => {
             }
             variant='outlined'
             InputLabelProps={{ shrink: true }}
-          />
-          {/* <Autocomplete
+          /> */}
+          <Autocomplete
             id="projectLeadId"
             name="projectLeadId"
             options={employeeData || []}
@@ -206,7 +194,7 @@ const EditProjectFields = ({ onClose, isLoading, data }) => {
                 }
               />
             )}
-          /> */}
+          />
         </Grid>
         {/* <Grid item xs={12} sm={12}>
           <TextField

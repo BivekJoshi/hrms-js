@@ -5,7 +5,7 @@ import { useGetEmployeeData } from "../../../../hooks/employee/useEmployee";
 
 const EmployeeGridView = () => {
   const [pageNumber, setpageNumber] = useState(0);
-  const { data: employeeData, isLoading } = useGetEmployeeData(pageNumber, 12);
+  const { data: employeeData, isLoading } = useGetEmployeeData(pageNumber, 10);
   console.log(employeeData, "data ma ");
 
   const handlePageChange = (event, newPage) => {
@@ -43,7 +43,7 @@ const EmployeeGridView = () => {
             ELastName={employee?.lastName || ""}
             OfficeEmail={employee?.officeEmail || ""}
             MobileNumber={employee?.mobileNumber || ""}
-            PositionName={employee?.positionName || ""}
+            PositionName={employee?.position?.positionName || ""}
             PositionLevel={employee?.position?.positionLevel || ""}
             EGender={employee?.gender || ""}
             // EmployeeData={employeeData}
