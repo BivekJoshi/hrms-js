@@ -98,28 +98,29 @@ const Leave = ({ permissions }) => {
       title: "Status",
       field: "leaveStatus",
       emptyValue: "-",
-      cellStyle: {
-        whiteSpace: "nowrap",
-      },
+      // cellStyle: {
+      //   whiteSpace: "nowrap",
+      // },
       render: (rowData) => {
-        const status = rowData.leaveStatus;
+        const status = rowData.leaveStatus.toLowerCase();
         let chipColor = "";
 
-        if (status === "APPROVED") {
+        if (status === "approved") {
           chipColor = "green";
-        } else if (status === "REJECTED") {
+        } else if (status === "rejected") {
           chipColor = "red";
-        } else if (status === "PENDING") {
+        } else if (status === "pending") {
           chipColor = "orange";
         }
 
         return (
           <Chip
-            label={status}
-            style={{
+            label={status.charAt(0).toUpperCase() + status.slice(1)}
+            sx={{
               backgroundColor: chipColor,
               color: "white",
               width: "6rem",
+              // textTransform:'capatalize'
             }}
           />
         );
@@ -228,12 +229,12 @@ const Leave = ({ permissions }) => {
   const actions = [
     {
       icon: () => <ModeEditOutlineIcon />,
-      tooltip: 'Edit Leave',
+      tooltip: "Edit Leave",
       onClick: (event, rowData) => handleEditLeave(rowData),
     },
     {
       icon: () => <DeleteIcon />,
-      tooltip: 'Edit Leave',
+      tooltip: "Edit Leave",
       onClick: (event, rowData) => handleDeleteLeave(rowData),
     },
   ];
@@ -256,7 +257,10 @@ const Leave = ({ permissions }) => {
         />
       </Box>
 
-      <Box gap={2} sx={{display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <Box
+        gap={2}
+        sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}
+      >
         {pendingLeaves && pendingLeaves.length > 0 && (
           <CustomTable
             columns={columns}

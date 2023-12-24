@@ -30,7 +30,7 @@ const HocButton = ({
         cursor: isDisabled ? "not-allowed" : "pointer",
         '&:hover':{
           backgroundColor: isDisabled ? "" : hoverBg,
-        }   
+        }, 
   };
   const handleClick = isDisabled ? null : onClick;
   const buttonText = isDisabled ? disabledIcon || icon || buttonName : icon || buttonName;
