@@ -1,4 +1,4 @@
-import { Accordion, AccordionDetails } from '@mui/material';
+import { Accordion, AccordionDetails, Divider } from '@mui/material';
 import { AccordionSummary, Button } from '@mui/material';
 import { Grid, Typography, Box } from '@mui/material';
 import React, { useEffect, useRef, useState } from 'react';
@@ -11,18 +11,24 @@ import { useParams } from 'react-router-dom';
 import { DOC_URL } from '../../../../../auth/axiosInterceptor';
 import { documentType } from './documentType';
 import { EditDocumentModal } from './EditDocumentModal';
+import deleteIcon from '../../../../../assets/approve.png';
+import updateIcon from '../../../../../assets/update.png';
 
 const EmployeeDocumentDetailForm = () => {
   const { id } = useParams();
   const fileInputRef = useRef(null);
   const [openEditModal, setOpenEditModal] = useState(false);
   const [expandedAccordion, setExpandedAccordion] = useState('panel1');
+
   const [selectedDocument, setSelectedDocument] = useState('');
   const [document, setDocument] = useState('');
   const [imagePreviewMap, setImagePreviewMap] = useState({});
+
   const [editedDocument, setEditedDocument] = useState({});
   const [uploadStatusMap, setUploadStatusMap] = useState({});
   const handleCloseEditModal = () => setOpenEditModal(false);
+
+  const docPathSelected = document?.name;
 
   const { mutate: deleteDocument } = useDeleteDocument({});
   const { mutate: addDocument } = useAddDocument({});
@@ -49,6 +55,7 @@ const EmployeeDocumentDetailForm = () => {
   const handleChange = (panel, doc) => (_, isExpanded) => {
     setSelectedDocument(doc);
     setExpandedAccordion(isExpanded ? panel : null);
+    setDocument('');
   };
 
   const handleChangeImage = (e) => {
@@ -90,91 +97,192 @@ const EmployeeDocumentDetailForm = () => {
                   flexDirection: 'column',
                   gap: '1rem',
                   marginLeft: '15vh',
-                  position: 'relative',
                   paddingRight: '2rem',
                 }}
               >
-                <Box>
+                <Box display='flex' justifyContent='center'>
                   {expandedAccordion && !imagePreviewMap[expandedAccordion] && (
                     <img
                       src={`${url}${document?.path}`}
                       alt='Document'
                       width={240}
-                      height={140}
+                      height={240}
                       style={{
-                        objectFit: 'cover',
-                        width: '100%',
-                        height: '100%',
+                        objectFit: 'contain',
                       }}
                     />
                   )}
                 </Box>
-
-                <Box
-                  sx={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    gap: '.5rem',
-                    position: 'absolute',
-                    bottom: '10px',
-                    left: '20vh',
-                    textAlign: 'center',
-                  }}
-                >
-                  <Button
-                    sx={{ width: 'fit-content' }}
-                    variant='contained'
-                    color='primary'
-                    onClick={() => handleEditFormSubmit(document)}
+                {expandedAccordion && !imagePreviewMap[expandedAccordion] && (
+                  <Grid
+                    sm={12}
+                    sx={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                      gap: '.5rem',
+                      textAlign: 'center',
+                    }}
                   >
-                    Update
-                  </Button>
-                  <Button
-                    sx={{ width: 'fit-content' }}
-                    variant='contained'
-                    color='error'
-                    onClick={() => handleDelete(document)}
-                  >
-                    Delete
-                  </Button>
-                </Box>
+                    <Button
+                      variant='outlined'
+                      color='primary'
+                      onClick={() => handleEditFormSubmit(document)}
+                      startIcon={<img src={updateIcon} />}
+                      sx={{ textTransform: 'none', fontWeight: 'bold' }}
+                    >
+                      Update
+                    </Button>
+                    <Button
+                      variant='outlined'
+                      color='error'
+                      onClick={() => handleDelete(document)}
+                      startIcon={<img src={deleteIcon} />}
+                      sx={{ textTransform: 'none', fontWeight: 'bold' }}
+                    >
+                      Delete
+                    </Button>
+                  </Grid>
+                )}
               </Grid>
             ))}
-          {expandedAccordion && imagePreviewMap[expandedAccordion] && (
-            <img src={imagePreviewMap[expandedAccordion]} alt='Preview' />
-          )}
+          <Grid display='flex' justifyContent='center'>
+            {expandedAccordion && imagePreviewMap[expandedAccordion] && (
+              <>
+                <Grid
+                  key={document?.id}
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '1rem',
+                    marginLeft: '15vh',
+                    paddingRight: '2rem',
+                  }}
+                >
+                  <img
+                    src={imagePreviewMap[expandedAccordion]}
+                    alt='Preview'
+                    width={240}
+                    height={240}
+                    style={{
+                      objectFit: 'contain',
+                    }}
+                  />
+                  <Box display='flex' justifyContent='center'>
+                    <Grid
+                      sm={12}
+                      sx={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        gap: '.5rem',
+                        textAlign: 'center',
+                      }}
+                    >
+                      {/* <Button
+                        variant='outlined'
+                        color='primary'
+                        onClick={() => handleEditFormSubmit(document)}
+                        startIcon={<img src={updateIcon} />}
+                        sx={{ textTransform: 'none', fontWeight: 'bold' }}
+                      >
+                        Update
+                      </Button>
+                      <Button
+                        variant='outlined'
+                        color='error'
+                        onClick={() => handleDelete(document)}
+                        startIcon={<img src={deleteIcon} />}
+                        sx={{ textTransform: 'none', fontWeight: 'bold' }}
+                      >
+                        Delete
+                      </Button> */}
+                    </Grid>
+                  </Box>
+                </Grid>
+              </>
+            )}
+          </Grid>
         </Grid>
 
         <Grid item xs={12} sm={6}>
           {documentType &&
-            documentType.map((document) => (
+            documentType.map((document, index) => (
               <Accordion
                 key={document.id}
                 expanded={expandedAccordion === `panel${document?.id}`}
                 onChange={handleChange(`panel${document?.id}`, document?.input)}
+                sx={{
+                  borderBottom: '1px solid black',
+                  boxShadow: 'none',
+                  margin: '0 !important',
+                }}
               >
                 <AccordionSummary
                   aria-controls={`panel${document.id}a-content`}
                   id={`panel${document.id}a-header`}
                 >
-                  <Typography>{document?.label}</Typography>
+                  <Typography variant='h7' sx={{ fontWeight: 500 }}>
+                    {document?.label}
+                  </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                  <input
-                    type='file'
-                    ref={fileInputRef}
-                    onChange={handleChangeImage}
-                  />
-                  <Button
-                    variant='contained'
-                    type='button'
-                    disabled={uploadStatusMap[expandedAccordion]}
-                    onClick={() => {
-                      handleFormSubmit(document.input);
-                    }}
-                  >
-                    Upload
-                  </Button>
+                  <Box sx={{ display: 'flex', gap: '1rem' }}>
+                    <label htmlFor='file'>
+                      <input
+                        type='file'
+                        ref={fileInputRef}
+                        onChange={handleChangeImage}
+                        style={{ display: 'none' }}
+                        id='file'
+                      />
+                      <Box
+                        sx={{
+                          cursor: 'pointer',
+                          display: 'flex',
+                          border: '1px solid #B9BEC7',
+                          borderRadius: '.3rem',
+                          // width: "450px",
+                        }}
+                        component='span'
+                      >
+                        <div
+                          style={{
+                            backgroundColor: '#E7E0EB',
+                            padding: '.5rem',
+                            borderRadius: '.3rem',
+                            minWidth: '20%',
+                            fontWeight: 500,
+                          }}
+                        >
+                          Choose file
+                        </div>
+                        <div
+                          style={{
+                            minwidth: '50%',
+                            color: '#B9BEC7',
+                            padding: '.3rem',
+                          }}
+                        >
+                          {
+                            <p>
+                              {docPathSelected
+                                ? docPathSelected
+                                : 'No file choosen'}
+                            </p>
+                          }
+                        </div>
+                      </Box>
+                    </label>
+                    <Button
+                      variant='outlined'
+                      disabled={uploadStatusMap[expandedAccordion]}
+                      onClick={() => {
+                        handleFormSubmit(document.input);
+                      }}
+                      sx={{ textTransform: 'none', fontWeight: 'bold' }}
+                    >
+                      Upload
+                    </Button>
+                  </Box>
                 </AccordionDetails>
               </Accordion>
             ))}

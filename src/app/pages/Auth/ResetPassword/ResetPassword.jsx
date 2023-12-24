@@ -8,6 +8,7 @@ import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import LockPersonIcon from "@mui/icons-material/LockPerson";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { LoadingButton } from "@mui/lab";
+import { toast } from "react-toastify";
 
 function ValidationItem(props) {
   return (
@@ -55,12 +56,21 @@ const ResetPassword = ({ isLoading }) => {
 
   const [showOldPassword, setShowOldPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [confirmPassword, setConfirmPassword] = useState();
 
   const handleFormSubmit = async () => {
-    const isValid = await formik.validateForm();
-    if(isValid){
+    const doPasswordsMatch = formik.values.password === confirmPassword;
+
+    if (!doPasswordsMatch) {
+      toast.error("New password and confirm password do not match")
+      return;
+    } else {
       formik.handleSubmit();
     }
+  };
+
+  const handleConfimPassword = (event) => {
+    setConfirmPassword(event.target.value);
   };
 
   const style = {
@@ -136,7 +146,6 @@ const ResetPassword = ({ isLoading }) => {
                 formik.touched.oldPassword && formik.errors.oldPassword
               }
               variant="outlined"
-              
               type={showOldPassword ? "text" : "password"}
               InputLabelProps={{ shrink: true }}
               InputProps={{
@@ -174,10 +183,9 @@ const ResetPassword = ({ isLoading }) => {
                 formik.handleChange(e);
                 handleChangeValidation(e.target.value);
               }}
-              error={formik.touched.password && Boolean(formik.errors.password)}
+              // error={formik.touched.password && Boolean(formik.errors.password)}
               helperText={formik.touched.password && formik.errors.password}
               variant="outlined"
-              
               type={showValues.showPassword ? "text" : "password"}
               InputLabelProps={{ shrink: true }}
               InputProps={{
@@ -210,8 +218,8 @@ const ResetPassword = ({ isLoading }) => {
               placeholder="Confirm your new password..."
               fullWidth
               required
-              value={formik.values.confirmPassword}
-              onChange={formik.handleChange}
+              value={confirmPassword}
+              onChange={handleConfimPassword}
               error={
                 formik.touched.confirmPassword &&
                 Boolean(formik.errors.confirmPassword)
@@ -220,7 +228,6 @@ const ResetPassword = ({ isLoading }) => {
                 formik.touched.confirmPassword && formik.errors.confirmPassword
               }
               variant="outlined"
-              
               type={showConfirmPassword ? "text" : "password"}
               InputLabelProps={{ shrink: true }}
               InputProps={{

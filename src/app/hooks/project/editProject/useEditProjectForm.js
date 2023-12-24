@@ -12,9 +12,9 @@ const useEditProjectForm = (data) => {
       startDate: data?.startDate || '',
       endDate: data?.endDate || '',
       taskStatus: data?.taskStatus || '',
-      projectLeadId: data?.projectLeadId || '',
-      branchId: data?.branches?.[0]?.id || '',
-      id: data?.id,
+      projectLeadName: data?.projectLeadName || '',
+      // companyId: data?.companyId || '',
+      projectid: data?.projectid,
     },
     validationSchema: ProjectSchema,
     enableReinitialize: 'true',
@@ -33,3 +33,4 @@ const useEditProjectForm = (data) => {
 };
 
 export default useEditProjectForm;
+

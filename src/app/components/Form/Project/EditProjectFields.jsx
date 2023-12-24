@@ -1,15 +1,15 @@
-import { Grid, TextField, Button, MenuItem, Autocomplete } from "@mui/material";
+import { Grid, TextField, Button, MenuItem } from "@mui/material";
 import React, { useContext } from "react";
 import useEditProjectForm from "../../../hooks/project/editProject/useEditProjectForm";
-import { useGetCompany } from "../../../hooks/company/useCompany";
-import { useGetEmployee } from "../../../hooks/employee/useEmployee";
+// import { useGetCompany } from "../../../hooks/company/useCompany";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
 import { ButtonComponent } from '../../Button/ButtonComponent';
+// import { useGetProjectDetail } from "../../../hooks/project/useProject";
 
 const EditProjectFields = ({ onClose, isLoading, data }) => {
   const { formik } = useEditProjectForm(data);
-  const { data: employeeData } = useGetEmployee();
-  const { data: companyData } = useGetCompany();
+  // const { data: projectData } = useGetProjectDetail();
+  // const { data: companyData } = useGetCompany();
   const { mode } = useContext(ThemeModeContext);
 
   const handleFormSubmit = () => {
@@ -21,23 +21,25 @@ const EditProjectFields = ({ onClose, isLoading, data }) => {
         startDate: true,
         endDate: true,
         taskStatus: true,
-        projectLeadId: true,
+        projectLeadName: true,
         branchId: true,
       });
       onClose();
     }
   };
 
-  const getProjectLeaderName = (projectLeadId) => {
-    const projectLeader = employeeData?.find(
-      (employee) => employee.id == projectLeadId
-    );
-    if (projectLeader) {
-      const { firstName, middleName, lastName } = projectLeader;
-      return `${firstName} ${middleName} ${lastName}`;
-    }
-    return projectLeadId;
-  };
+  console.log(formik);
+
+  // const getProjectLeaderName = (projectLeadId) => {
+  //   const projectLeader = employeeData?.find(
+  //     (employee) => employee.id == projectLeadId
+  //   );
+  //   if (projectLeader) {
+  //     const { firstName, middleName, lastName } = projectLeader;
+  //     return `${firstName} ${middleName} ${lastName}`;
+  //   }
+  //   return projectLeadId;
+  // };
 
   // const getCompanyName = (associateCompanies) => {
   //   return (
@@ -152,21 +154,21 @@ const EditProjectFields = ({ onClose, isLoading, data }) => {
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-            id='ProjectLeadId'
-            name='ProjectLeadId'
+            id='projectLeadName'
+            name='projectLeadName'
             label='Assign a Project Leader'
             placeholder='Enter ProjectLeadId'
             fullWidth
             disabled
             required
-            value={getProjectLeaderName(formik.values.projectLeadId)}
+            value={formik.values.projectLeadName}
             onChange={formik.handleChange}
             error={
-              formik.touched.projectLeadId &&
-              Boolean(formik.errors.projectLeadId)
+              formik.touched.projectLeadName &&
+              Boolean(formik.errors.projectLeadName)
             }
             helperText={
-              formik.touched.projectLeadId && formik.errors.projectLeadId
+              formik.touched.projectLeadName && formik.errors.projectLeadName
             }
             variant='outlined'
             InputLabelProps={{ shrink: true }}
@@ -206,11 +208,11 @@ const EditProjectFields = ({ onClose, isLoading, data }) => {
             )}
           /> */}
         </Grid>
-        <Grid item xs={12} sm={12}>
+        {/* <Grid item xs={12} sm={12}>
           <TextField
-            id='branchId'
-            name='branchId'
-            label='Branch Name'
+            id='companyId'
+            name='companyId'
+            label='Company Name'
             placeholder='Enter branch'
             disabled
             fullWidth
@@ -221,7 +223,7 @@ const EditProjectFields = ({ onClose, isLoading, data }) => {
             variant='outlined'
             InputLabelProps={{ shrink: true }}
           />
-        </Grid>
+        </Grid> */}
 
         <Grid
           container
