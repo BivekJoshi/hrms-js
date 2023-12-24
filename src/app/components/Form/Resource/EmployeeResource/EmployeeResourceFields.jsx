@@ -12,12 +12,16 @@ import { useGetAvailableOfficeResource } from '../../../../hooks/resource/office
 import { useGetEmployee } from '../../../../hooks/employee/useEmployee';
 import ThemeModeContext from '../../../../../theme/ThemeModeContext';
 
-const EmployeeResourceFields = ({ onClose, isLoading, data }) => {
-  const { data: availableOfficeResource } = useGetAvailableOfficeResource();
+const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
+  const { data: availableOfficeResource, isLoading: resourceLoad } =
+    useGetAvailableOfficeResource();
   const { data: employeeData } = useGetEmployee();
   const { mode } = useContext(ThemeModeContext);
   const { formik } = useEmployeeResourceForm(data);
-
+  console.log(
+    '🚀 ~ file: EmployeeResourceFields.jsx:20 ~ EmployeeResourceFields ~ formik:',
+    formik
+  );
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
@@ -26,15 +30,7 @@ const EmployeeResourceFields = ({ onClose, isLoading, data }) => {
     }
   };
   const submitButtonText = data ? 'Update Resource' : ' Provide Resource';
-
-  const getEmployeeName = (employeeId) => {
-    if (employeeId !== '') {
-      const employee =
-        data && employeeData?.find((emp) => emp.id === employeeId);
-      const { firstName, middleName, lastName } = employee;
-      return firstName;
-    }
-  };
+  const currentDate = new Date().toISOString().split('T')[0];
 
   return (
     !isLoading && (
@@ -43,6 +39,7 @@ const EmployeeResourceFields = ({ onClose, isLoading, data }) => {
           <Autocomplete
             id='employeeId'
             name='employeeId'
+            disabled={editMode}
             options={employeeData || []}
             getOptionLabel={(employee) =>
               `${employee?.firstName} ${employee?.middleName} ${employee?.lastName}`
@@ -81,9 +78,10 @@ const EmployeeResourceFields = ({ onClose, isLoading, data }) => {
             label='Office Logistics'
             placeholder='Select Logistics'
             fullWidth
+            disabled={editMode}
             required
             select
-            value={formik.values.officeResourceId}
+            value={formik?.values?.officeResourceId}
             onChange={formik.handleChange}
             error={
               formik.touched.officeResourceId &&
@@ -93,13 +91,17 @@ const EmployeeResourceFields = ({ onClose, isLoading, data }) => {
               formik.touched.officeResourceId && formik.errors.officeResourceId
             }
             variant='outlined'
-            InputLabelProps={{ shrink: true }}
+            InputLabelProps={{
+              shrink:
+                Boolean(formik.values.officeResourceId) ||
+                Boolean(formik.values.officeResourceId !== ''),
+            }}
           >
-            {availableOfficeResource &&
-              availableOfficeResource.map((option) => (
+            {!resourceLoad &&
+              availableOfficeResource?.map((option) => (
                 <MenuItem
                   key={option?.id}
-                  value={option?.id}
+                  value={option.id}
                   sx={{ bgcolor: mode === 'light' ? '' : '#413e3e' }}
                 >
                   {option?.name}
@@ -119,6 +121,9 @@ const EmployeeResourceFields = ({ onClose, isLoading, data }) => {
             required
             value={formik.values.receiveDate}
             onChange={formik.handleChange}
+            inputProps={{
+              max: currentDate, // Disable past date selections
+            }}
             error={
               formik.touched.receiveDate && Boolean(formik.errors.receiveDate)
             }
@@ -142,6 +147,9 @@ const EmployeeResourceFields = ({ onClose, isLoading, data }) => {
             }
             helperText={formik.touched.returnDate && formik.errors.returnDate}
             variant='outlined'
+            inputProps={{
+              max: currentDate, // Disable past date selections
+            }}
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
