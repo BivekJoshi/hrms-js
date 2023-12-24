@@ -9,7 +9,7 @@ import {
 
 const useAddBankForm = () => {
   const { data, isLoading } = useGetBankByEmployeeId();
-  const bankDetails = !isLoading && data[0];
+  const bankDetails = !isLoading && data?.[0];
   const { mutate } = useAddBank({});
   const { mutate: editMutate } = useEditBank({});
 
