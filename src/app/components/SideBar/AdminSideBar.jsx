@@ -113,11 +113,6 @@ export default function AdminSidebar() {
       path: 'employee',
       subMenus: [
         // {
-        //   name: 'Add Employee',
-        //   path: 'employee/add',
-        //   icon: <PersonAddIcon style={{ color: primaryColor }} />,
-        // },
-        // {
         //   name: "Employee",
         //   path: "employee",
         //   icon: (
@@ -165,16 +160,6 @@ export default function AdminSidebar() {
       ],
     },
     {
-      name: 'Logistics',
-      icon: (
-        <LaptopIcon
-          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
-        />
-      ),
-      path: 'logistics',
-      subMenus: [],
-    },
-    {
       name: 'Department',
       icon: (
         <WorkspacesIcon
@@ -203,6 +188,35 @@ export default function AdminSidebar() {
       ),
       path: 'branch',
       subMenus: [],
+    },
+    {
+      name: 'Logistics',
+      icon: (
+        <LaptopIcon
+          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
+        />
+      ),
+      path: 'logistics',
+      subMenus: [
+        {
+          name: 'Logistics',
+          path: 'officeResource',
+          icon: (
+            <MailIcon
+              sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
+            />
+          ),
+        },
+        {
+          name: 'Provide Logistics',
+          path: 'logistics',
+          icon: (
+            <MailIcon
+              sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
+            />
+          ),
+        },
+      ],
     },
     {
       name: 'Project',

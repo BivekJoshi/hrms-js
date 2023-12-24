@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { useState } from 'react';
+import * as React from "react";
+import { useState } from "react";
 import {
   Box,
   Button,
@@ -8,23 +8,28 @@ import {
   Stack,
   Tooltip,
   Typography,
-} from '@mui/material';
+} from "@mui/material";
 
-import { useDeleteLeave, useGetLeave, useGetleaveOfUser } from '../../hooks/leave/useLeave';
+import {
+  useDeleteLeave,
+  useGetLeave,
+  useGetleaveOfUser,
+} from "../../hooks/leave/useLeave";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
-import DeleteIcon from '@mui/icons-material/Delete';
-import { AddLeaveModal, EditLeaveModal } from './LeaveModal/LeaveModal';
-import DeleteConfirmationModal from '../../components/Modal/DeleteConfirmationModal';
-import { ButtonComponent } from '../../components/Button/ButtonComponent';
-import ThemeModeContext from '../../../theme/ThemeModeContext';
-import CustomTable from '../../components/CustomTable/CustomTable';
-import { toast } from 'react-toastify';
-import { useLeaveDataSearch } from './Api/LeaveApi';
-import HocButton from '../../hoc/hocButton';
-import PermissionHoc from '../../hoc/permissionHoc';
+import DeleteIcon from "@mui/icons-material/Delete";
+import { AddLeaveModal, EditLeaveModal } from "./LeaveModal/LeaveModal";
+import DeleteConfirmationModal from "../../components/Modal/DeleteConfirmationModal";
+import { ButtonComponent } from "../../components/Button/ButtonComponent";
+import ThemeModeContext from "../../../theme/ThemeModeContext";
+import CustomTable from "../../components/CustomTable/CustomTable";
+import { toast } from "react-toastify";
+import { useLeaveDataSearch } from "./Api/LeaveApi";
+import HocButton from "../../hoc/hocButton";
+import PermissionHoc from "../../hoc/permissionHoc";
 
 const Leave = ({ permissions }) => {
   const { mode } = React.useContext(ThemeModeContext);
+  const { data: leaveData, isLoading: loading } = useGetleaveOfUser();
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
@@ -54,64 +59,68 @@ const Leave = ({ permissions }) => {
     setOpenEditModal(true);
   };
 
-  const { data, isLoading: loading } = useGetleaveOfUser();
+  const pendingLeaves =
+    leaveData && leaveData.filter((item) => item?.leaveStatus === "PENDING");
+  const approvedRejectedLeaves =
+    leaveData && leaveData.filter((item) => item?.leaveStatus !== "PENDING");
 
   const columns = [
     {
-      title: 'SN',
-      field: 'id',
+      title: "SN",
+      field: "id",
       sortable: false,
       sorting: false,
       render: (rowData) => rowData.tableData.id + 1,
     },
     {
-      title: 'Employee Name',
-      field: 'employeeName',
+      title: "Employee Name",
+      field: "employeeName",
       sorting: false,
     },
     {
-      title: 'Leave Type',
-      field: 'leaveType',
+      title: "Leave Type",
+      field: "leaveType",
       sorting: false,
     },
     {
-      title: 'From',
-      field: 'fromDate',
-      emptyValue: '-',
+      title: "From",
+      field: "fromDate",
+      emptyValue: "-",
       sorting: false,
     },
     {
-      title: 'To',
-      field: 'toDate',
-      emptyValue: '-',
+      title: "To",
+      field: "toDate",
+      emptyValue: "-",
       sorting: false,
     },
     {
-      title: 'Status',
-      field: 'leaveStatus',
-      emptyValue: '-',
-      cellStyle: {
-        whiteSpace: 'nowrap',
-      },
+      title: "Status",
+      field: "leaveStatus",
+      emptyValue: "-",
+      // cellStyle: {
+      //   whiteSpace: "nowrap",
+      // },
       render: (rowData) => {
-        const status = rowData.leaveStatus;
-        let chipColor = '';
+        const status = rowData.leaveStatus.toLowerCase();
+        let chipColor = "";
 
-        if (status === 'APPROVED') {
-          chipColor = 'green';
-        } else if (status === 'REJECTED') {
-          chipColor = 'red';
-        } else if (status === 'PENDING') {
-          chipColor = 'orange';
+        if (status === "approved") {
+          chipColor = "green";
+        } else if (status === "rejected") {
+          chipColor = "red";
+        } else if (status === "pending") {
+          chipColor = "orange";
         }
 
         return (
           <Chip
-            label={status}
-            style={{
+            label={status.charAt(0).toUpperCase() + status.slice(1)}
+            sx={{
               backgroundColor: chipColor,
-              color: 'white',
-              width: '6rem',
+              color: "white",
+              width: "6rem",
+              // textTransform:'capatalize'
             }}
           />
         );
@@ -119,27 +128,27 @@ const Leave = ({ permissions }) => {
       sorting: false,
     },
     {
-      title: 'Leave Reason',
-      field: 'leaveReason',
-      emptyValue: '-',
+      title: "Leave Reason",
+      field: "leaveReason",
+      emptyValue: "-",
       render: (rowData) => {
         return (
           <Tooltip
             title={<div>{rowData?.leaveReason}</div>}
-            placement='top-start'
+            placement="top-start"
             arrow
           >
             <Chip
               style={{
-                cursor: 'pointer',
-                width: '240px',
+                cursor: "pointer",
+                width: "240px",
                 // height: '40px',
-                display: 'block',
-                background: mode === 'light' ? 'white' : '#434343',
+                display: "block",
+                background: mode === "light" ? "white" : "#434343",
               }}
               label={
                 <Typography
-                  style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}
+                  style={{ overflow: "hidden", textOverflow: "ellipsis" }}
                 >
                   {rowData?.leaveReason}
                 </Typography>
@@ -150,23 +159,23 @@ const Leave = ({ permissions }) => {
       },
     },
     {
-      title: 'Remark',
-      field: 'leaveRemarks',
-      width: '240px',
-      emptyValue: '-',
+      title: "Remark",
+      field: "leaveRemarks",
+      width: "240px",
+      emptyValue: "-",
       render: (rowData) => {
         return (
-          <Tooltip title={rowData?.leaveRemarks} placement='top-start' arrow>
+          <Tooltip title={rowData?.leaveRemarks} placement="top-start" arrow>
             <Chip
               style={{
-                cursor: 'pointer',
-                width: '240px',
-                display: 'block',
-                background: mode === 'light' ? 'white' : '#434343',
+                cursor: "pointer",
+                width: "240px",
+                display: "block",
+                background: mode === "light" ? "white" : "#434343",
               }}
               label={
                 <Typography
-                  style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}
+                  style={{ overflow: "hidden", textOverflow: "ellipsis" }}
                 >
                   {rowData?.leaveRemarks}
                 </Typography>
@@ -178,29 +187,36 @@ const Leave = ({ permissions }) => {
     },
 
     {
-      title: 'Approved By',
-      width: '80px',
+      title: "Approved By",
+      width: "80px",
+      title: "Approved By",
+      width: "80px",
       sorting: false,
-      field: 'approvedBy',
+      field: "approvedBy",
+      field: "approvedBy",
     },
     // {
-    //   title: 'Actions',
-    //   width: '10px',
+    //   title: "Actions",
+    //   width: "10px",
     //   render: (rowData) => {
-    //     const isApprovedOrRejected = ['APPROVED', 'REJECTED'].includes(
+    //     const isApprovedOrRejected = ["APPROVED", "REJECTED"].includes(
     //       rowData.leaveStatus
     //     );
 
     //     return (
-    //       <Stack direction='row' spacing={0}>
+    //       <Stack direction="row" spacing={0}>
     //         <Button
-    //           color='primary'
+    //           color="primary"
     //           onClick={() => handleEditLeave(rowData)}
     //           disabled={isApprovedOrRejected}
     //         >
     //           <ModeEditOutlineIcon />
     //         </Button>
-    //         <Button color='primary' onClick={() => handleDeleteLeave(rowData)}>
+    //         <Button
+    //           color="primary"
+    //           onClick={() => handleDeleteLeave(rowData)}
+    //           disabled={isApprovedOrRejected}
+    //         >
     //           <DeleteIcon />
     //         </Button>
     //       </Stack>
@@ -212,64 +228,72 @@ const Leave = ({ permissions }) => {
 
   const actions = [
     {
-      icon: () => (
-        <HocButton
-          permissions={permissions?.canEdit}
-          icon={<ModeEditOutlineIcon />}
-        />
-      ),
+      icon: () => <ModeEditOutlineIcon />,
       tooltip: "Edit Leave",
       onClick: (event, rowData) => handleEditLeave(rowData),
     },
     {
-      icon: () => (
-        <HocButton permissions={permissions?.canDelete} icon={<DeleteIcon />} />
-      ),
-      tooltip: "Delete Leave",
+      icon: () => <DeleteIcon />,
+      tooltip: "Edit Leave",
       onClick: (event, rowData) => handleDeleteLeave(rowData),
     },
-  ]
-
+  ];
   // if (isLoading || loadingemployee || loadingleaveType) return <>Loading</>;
 
   return (
     <>
       <Box
         sx={{
-          display: 'flex',
-          justifyContent: 'flex-end',
-          marginBottom: '16px',
+          display: "flex",
+          justifyContent: "flex-end",
+          marginBottom: "16px",
         }}
       >
         <ButtonComponent
           OnClick={handleAddOpenModal}
-          Border='none'
-          color={'#fff'}
-          buttonName={'+ Add Leave'}
+          Border="none"
+          color={"#fff"}
+          buttonName={"+ Add Leave"}
         />
       </Box>
 
-      <CustomTable
-        columns={columns}
-        data={data}
-        title='Leave Data'
-        actions={actions}
-        isLoading={loading}
-      />
+      <Box
+        gap={2}
+        sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}
+      >
+        {pendingLeaves && pendingLeaves.length > 0 && (
+          <CustomTable
+            columns={columns}
+            data={pendingLeaves}
+            title="Pending Leave Data"
+            actions={actions}
+            isLoading={loading}
+          />
+        )}
+
+        {approvedRejectedLeaves && approvedRejectedLeaves.length > 0 && (
+          <CustomTable
+            columns={columns}
+            data={approvedRejectedLeaves}
+            title="Approved/Rejected Leave Data"
+            isLoading={loading}
+          />
+        )}
+      </Box>
+
       {openEditModal && (
         <EditLeaveModal
           data={editedLeave}
           open={openEditModal}
           handleCloseModal={handleCloseEditModal}
-          title={'Edit Leave'}
-          
+          title={"Edit Leave"}
         />
       )}
       {openAddModal && (
         <AddLeaveModal
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
-          title={'Apply Leave'}
+          title={"Apply Leave"}
         />
       )}
       {openDeleteModal && (
@@ -277,7 +301,7 @@ const Leave = ({ permissions }) => {
           open={openDeleteModal}
           handleCloseModal={handleCloseDeleteModal}
           handleConfirmDelete={handleConfirmDelete}
-          message={'Leave'}
+          message={"Leave"}
         />
       )}
     </>

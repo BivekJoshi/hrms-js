@@ -28,20 +28,27 @@ export const useGetProjectDetail = () => {
     refetchOnWindowFocus: false,
   });
 };
-export const useGetProjectPageWise = (pageNumber) => {
-  return useQuery(["getProjectPageWise"], () => getProjectPageWise(pageNumber), {
-    refetchInterval: false,
-    refetchOnWindowFocus: false,
-  });
+export const useGetProjectPageWise = (pageNumber, pageSize) => {
+  return useQuery(
+    ["getProjectPageWise", pageNumber, pageSize],
+    () => getProjectPageWise(pageNumber, pageSize),
+    {
+      refetchInterval: false,
+      refetchOnWindowFocus: false,
+    }
+  );
 };
-
 
 /*________________________GET_____________________________________*/
 export const useGetDeactivatedProject = (id) => {
-  return useQuery(["getDeactivatedProject",id], () => getDeactivatedProject(id), {
-    refetchInterval: false,
-    refetchOnWindowFocus: false,
-  });
+  return useQuery(
+    ["getDeactivatedProject", id],
+    () => getDeactivatedProject(id),
+    {
+      refetchInterval: false,
+      refetchOnWindowFocus: false,
+    }
+  );
 };
 
 /*________________________GET-BY_ID_____________________________________*/
@@ -52,21 +59,28 @@ export const useGetProjectById = (id) => {
   });
 };
 
-
 /*________________________GET-BY_ID_____________________________________*/
 export const useGetProjectByEmployeeIdInvolved = (employeeId) => {
-  return useQuery(["getProjectByEmployeeIdInvolved", employeeId], () => getProjectByEmployeeIdInvolved(employeeId), {
-    refetchInterval: false,
-    refetchOnWindowFocus: false,
-  });
+  return useQuery(
+    ["getProjectByEmployeeIdInvolved", employeeId],
+    () => getProjectByEmployeeIdInvolved(employeeId),
+    {
+      refetchInterval: false,
+      refetchOnWindowFocus: false,
+    }
+  );
 };
 
 /*________________________GET-PROJECT_WISE_EMPLOYEE____________________________________*/
 export const useGetProjectWiseEmployee = (employeeId) => {
-  return useQuery(["getProjectWiseEmployee", employeeId], () => getProjectWiseEmployee(employeeId), {
-    refetchInterval: false,
-    refetchOnWindowFocus: false,
-  });
+  return useQuery(
+    ["getProjectWiseEmployee", employeeId],
+    () => getProjectWiseEmployee(employeeId),
+    {
+      refetchInterval: false,
+      refetchOnWindowFocus: false,
+    }
+  );
 };
 
 /*________________________POST_____________________________________*/
@@ -99,8 +113,7 @@ export const useAddActivateProject = ({ onSuccess }) => {
   });
 };
 
-
-  /*________________________EDIT_____________________________________*/
+/*________________________EDIT_____________________________________*/
 export const useEditProject = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(["editProject"], (formData) => editProject(formData), {
@@ -110,38 +123,45 @@ export const useEditProject = ({ onSuccess }) => {
       queryClient.invalidateQueries("getProject");
     },
     onError: (err, _variables, _context) => {
-      toast.error(`Error: ${(err.message)}`);
+      toast.error(`Error: ${err.message}`);
     },
   });
 };
 
-
 /*________________________DE-ACTIVATE-PROJECT_____________________________________*/
 export const useDeleteProject = ({ onSuccess }) => {
   const queryClient = useQueryClient();
-  return useMutation(["removeProject"], (formData) => removeActiveProject(formData), {
-    onSuccess: (data, variables, context) => {
-      toast.success("Successfully removed project");
-      onSuccess && onSuccess(data, variables, context);
-      queryClient.invalidateQueries("getProject");
-    },
-    onError: (err, _variables, _context) => {
-      toast.error(`Error: ${(err.message)}`);
-    },
-  });
+  return useMutation(
+    ["removeProject"],
+    (formData) => removeActiveProject(formData),
+    {
+      onSuccess: (data, variables, context) => {
+        toast.success("Successfully removed project");
+        onSuccess && onSuccess(data, variables, context);
+        queryClient.invalidateQueries("getProject");
+      },
+      onError: (err, _variables, _context) => {
+        toast.error(`Error: ${err.message}`);
+      },
+    }
+  );
 };
 
 /*________________________ACTIVATE-PROJECT_____________________________________*/
 export const useActiveProject = ({ onSuccess }) => {
   const queryClient = useQueryClient();
-  return useMutation(["activeProject"], (formData) => addActiveProject(formData), {
-    onSuccess: (data, variables, context) => {
-      toast.success("Successfully added project");
-      onSuccess && onSuccess(data, variables, context);
-      queryClient.invalidateQueries("getDeactivatedProject");
-    },
-    onError: (err, _variables, _context) => {
-      toast.error(`Error: ${(err.message)}`);
-    },
-  });
+  return useMutation(
+    ["activeProject"],
+    (formData) => addActiveProject(formData),
+    {
+      onSuccess: (data, variables, context) => {
+        toast.success("Successfully added project");
+        onSuccess && onSuccess(data, variables, context);
+        queryClient.invalidateQueries("getDeactivatedProject");
+      },
+      onError: (err, _variables, _context) => {
+        toast.error(`Error: ${err.message}`);
+      },
+    }
+  );
 };
