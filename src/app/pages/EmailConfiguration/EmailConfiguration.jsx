@@ -3,9 +3,11 @@ import React, { useState } from "react";
 import useEmailConfigureForm from "../../hooks/email/emailConfiguration/useEmailConfigureForm";
 import PermissionHoc from "../../hoc/permissionHoc";
 import HocButton from '../../hoc/hocButton';
+import { useGetEmailConfigure } from '../../hooks/email/useEmail';
 
 const EmailConfiguration = ({ permissions }) => {
-  const { formik } = useEmailConfigureForm();
+  const { data: emailData, isLoading } = useGetEmailConfigure();
+  const { formik } = useEmailConfigureForm(emailData, isLoading);
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
