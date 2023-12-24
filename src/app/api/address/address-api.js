@@ -27,11 +27,29 @@ export const getEmployeeAddressById = (id) => {
   }
 };
 
+export const getDistrict = async (provienceId) => {
+  if (provienceId) {
+    const res = await axiosInstance.get(
+      `/utility/district?province=${provienceId}`
+    );
+    return res;
+  }
+};
+export const getMunicipality = async (district) => {
+  if (district) {
+    const res = await axiosInstance.get(
+      `/utility/municipal?district=${district}`
+    );
+    return res;
+  }
+};
+
 export const editAddress = async (formData, id) => {
   if (id) {
     const data = axiosInstance.post(`/address/create/${id}`, formData);
     return data;
   }
+
   // let addressId = [];
   // if (formData?.addresses.length > 0) {
   //   addressId.push(formData?.addresses[0]?.id);

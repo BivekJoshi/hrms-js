@@ -1,17 +1,19 @@
-import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import {
   addPermanentAddress,
   addTemporaryAddress,
   editAddress,
   getAddressById,
-} from '../../api/address/address-api';
-import { useParams } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { getEmployeeById } from '../../api/employee/employee-api';
+  getDistrict,
+  getMunicipality,
+} from "../../api/address/address-api";
+import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import { getEmployeeById } from "../../api/employee/employee-api";
 
 export const useGetEmployeeById = () => {
   const { id } = useParams();
-  return useQuery(['getEmployeeById', id], () => getEmployeeById(id), {
+  return useQuery(["getEmployeeById", id], () => getEmployeeById(id), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
@@ -20,11 +22,11 @@ export const useGetEmployeeById = () => {
 export const usePermanentAddAddress = ({ onSuccess }) => {
   const { id } = useParams();
   return useMutation(
-    ['addAddress'],
+    ["addAddress"],
     (formData) => addPermanentAddress(formData, id),
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Address added successfully');
+        toast.success("Address added successfully");
         onSuccess && onSuccess(data, variables, context);
       },
       onError: (err, _variables, _context) => {
@@ -44,7 +46,7 @@ export const useTemporaryAddress = ({ onSuccess }) => {
     return Promise.resolve();
   };
 
-  return useMutation(['temporaryAddress'], addTemporaryAddressMutation, {
+  return useMutation(["temporaryAddress"], addTemporaryAddressMutation, {
     onSuccess: (data, variables, context) => {
       // toast.success('Temporary address added successfully');
       onSuccess && onSuccess(data, variables, context);
@@ -56,7 +58,7 @@ export const useTemporaryAddress = ({ onSuccess }) => {
 };
 
 export const useGetAddressById = (id) => {
-  return useQuery(['getAddressById', id], () => getAddressById(id), {
+  return useQuery(["getAddressById", id], () => getAddressById(id), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
@@ -66,15 +68,37 @@ export const useEditAddress = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   const { id } = useParams();
   return useMutation(
-    ['editAddress'],
+    ["editAddress"],
     (formData) => {
       editAddress(formData, id);
     },
     {
       onSuccess: (data, variables, context) => {
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries('getEmployeeById');
+        queryClient.invalidateQueries("getEmployeeById");
       },
+    }
+  );
+};
+
+export const useGetDistrictByProvience = (provienceId) => {
+  return useQuery(
+    ["getDistrict", provienceId],
+    () => getDistrict(provienceId),
+    {
+      refetchInterval: true,
+      refetchOnWindowFocus: false,
+    }
+  );
+};
+
+export const useGetMunipalityByDistrict = (districtName) => {
+  return useQuery(
+    ["getMunicipality", districtName],
+    () => getMunicipality(districtName),
+    {
+      refetchInterval: true,
+      refetchOnWindowFocus: false,
     }
   );
 };
