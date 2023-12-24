@@ -160,7 +160,7 @@ export const AddprojectEmployeeFields = ( onClose, isLoading ) => {
 
 export const EditProjectEmployeeFields = ({ data, onClose, isLoading }) => {
   const { formik } = useProjectEmployeeForm(data, onClose);
-  // console.log(data);
+
   const handleFormSubmit = () => {
     if(formik.isValid){
       formik.handleSubmit();

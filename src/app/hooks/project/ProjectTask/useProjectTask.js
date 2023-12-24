@@ -14,7 +14,7 @@ import { toast } from "react-toastify";
 /*________________________GETBYID_____________________________________*/
 export const useGetProjectTaskByProjectId = () => {
   const { id } = useParams();
-  return useQuery(["getProjecttask", id], () => getProjectTask(id), {
+  return useQuery(["getProjectTask", id], () => getProjectTask(id), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
@@ -75,21 +75,21 @@ export const useAddCreateTask = ({ onSuccess }) => {
 };
 
 /*________________________UPDATE TASK_____________________________________________________________________________________*/
-export const useEditCreateTask = ({taskId}) => {
+export const useEditCreateTask = ({onSuccess, taskId}) => {
   const queryClient = useQueryClient();
   return useMutation(
     ["editProjectCreateTask"],
     (formData) => editProjectCreateTask(formData,taskId),
-    // {
-    //   onSuccess: (data, variables, context) => {
-    //     toast.success("SucessFully edited Task");
-    //     onSuccess && onSuccess(data, variables, context);
-    //     queryClient.invalidateQueries("getProjectEmployeeById");
-    //   },
-    //   onError: (err, _variables, _context) => {
-    //     toast.error(`error: ${err.message}`);
-    //   },
-    // }
+    {
+      onSuccess: (data, variables, context) => {
+        toast.success("SucessFully edited Task");
+        onSuccess && onSuccess(data, variables, context);
+        queryClient.invalidateQueries("getProjecttask");
+      },
+      onError: (err, _variables, _context) => {
+        toast.error(`error: ${err.message}`);
+      },
+    }
   );
 };
 

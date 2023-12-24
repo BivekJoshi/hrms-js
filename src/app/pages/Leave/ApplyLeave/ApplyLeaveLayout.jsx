@@ -9,7 +9,7 @@ import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from "react-router-dom";
 import LeaveUserView from "../LeaveUserView";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
-import { useGetLoggedInUserLeave } from '../../../hooks/leave/useLeave';
+import { useGetLoggedInUserLeave } from "../../../hooks/leave/useLeave";
 
 const fabStyle = {
   position: "fixed",
@@ -64,9 +64,11 @@ const ApplyLeaveLayout = () => {
   const { data: leaveData, isLoading } = useGetLoggedInUserLeave();
   const navigate = useNavigate();
 
-  const{mode} =React.useContext(ThemeModeContext);
+  const { mode } = React.useContext(ThemeModeContext);
 
-  const pendingLeaveData = leaveData && leaveData.filter(leaveRecord => leaveRecord?.leaveStatus === "PENDING");
+  const pendingLeaveData =
+    leaveData &&
+    leaveData.filter((leaveRecord) => leaveRecord?.leaveStatus === "PENDING");
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -80,41 +82,47 @@ const ApplyLeaveLayout = () => {
           <ApplyLeave />
         </Grid>
         <Grid item xs={12}>
-          <Item>
-            <Box
-              borderLeft="6px solid green"
-              paddingLeft="10"
-              backgroundColor={mode === "light" ? "#efeeeb" : "#4f4e4c"}
-              padding=".5rem"
-            >
-              <Typography fontSize="1.2rem">
-                <b>Your Leave Request</b>
-              </Typography>
-              <Grid container spacing={2} paddingTop=".5rem">
-                <Grid item xs={5}>
-                  <Typography variant="h7" fontWeight="bold">
-                    From Date
+          {pendingLeaveData &&
+            pendingLeaveData.map((data) => (
+              <Item>
+                <Box
+                  borderLeft="6px solid green"
+                  paddingLeft="10"
+                  backgroundColor={mode === "light" ? "#efeeeb" : "#4f4e4c"}
+                  padding=".5rem"
+                >
+                  <Typography fontSize="1.2rem">
+                    <b>Your Leave Request</b>
                   </Typography>
-                  <br />
-                  <Typography variant="h7" fontWeight="bold">
-                    {pendingLeaveData?.fromDate}
-                  </Typography>
-                </Grid>
-                <Grid item xs={5}>
-                  <Typography variant="h7" fontWeight="bold">
-                    To Date
-                  </Typography>
-                  <br />
-                  <Typography variant="h7" fontWeight="bold">
-                  {pendingLeaveData?.toDate}
-                  </Typography>
-                </Grid>
-                <Grid item xs={2}>
-                  <Chip label={pendingLeaveData?.leaveStatus} sx={{ fontSize: ".7rem" }} />
-                </Grid>
-              </Grid>
-            </Box>
-          </Item>
+                  <Grid container spacing={2} paddingTop=".5rem">
+                    <Grid item xs={5}>
+                      <Typography variant="h7" fontWeight="bold">
+                        From Date
+                      </Typography>
+                      <br />
+                      <Typography variant="h7" fontWeight="bold">
+                        {data?.fromDate}
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={5}>
+                      <Typography variant="h7" fontWeight="bold">
+                        To Date
+                      </Typography>
+                      <br />
+                      <Typography variant="h7" fontWeight="bold">
+                        {data?.toDate}
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={2}>
+                      <Chip
+                        label={data?.leaveStatus}
+                        sx={{ fontSize: "1.2rem", background: "#ffa500", color: "#fff" }}
+                      />
+                    </Grid>
+                  </Grid>
+                </Box>
+              </Item>
+            ))}
         </Grid>
       </Grid>
       <br />

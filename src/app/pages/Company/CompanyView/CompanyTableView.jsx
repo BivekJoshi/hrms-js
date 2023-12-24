@@ -1,10 +1,10 @@
-import * as React from 'react';
-import DeleteIcon from '@mui/icons-material/Delete';
-import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
-import PermissionHoc from '../../../hoc/permissionHoc';
-import useAuth from '../../../../auth/hooks/component/login/useAuth';
-import CustomTable from '../../../components/CustomTable/CustomTable';
-import HocButton from '../../../hoc/hocButton';
+import * as React from "react";
+import DeleteIcon from "@mui/icons-material/Delete";
+import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
+import PermissionHoc from "../../../hoc/permissionHoc";
+import useAuth from "../../../../auth/hooks/component/login/useAuth";
+import CustomTable from "../../../components/CustomTable/CustomTable";
+import HocButton from "../../../hoc/hocButton";
 
 const CompanyTableView = ({
   permissions,
@@ -15,41 +15,49 @@ const CompanyTableView = ({
 }) => {
   const { isEmployee } = useAuth();
 
-
   const columns = [
     {
-      title: 'SN',
+      title: "SN",
       render: (rowData) => rowData.tableData.id + 1,
-      width: '3%',
+      width: "5%",
       sortable: false,
       sorting: false,
     },
     {
-      title: 'Branch Name',
-      field: 'branchName',
-      emptyValue: '-',
-      width: '20vh',
+      title: "Branch Name",
+      field: "branchName",
+      emptyValue: "-",
+      width: "10%",
       sorting: false,
     },
     {
-      title: 'Branch Address',
-      field: 'branchAddress',
-      emptyValue: '-',
-      width: '10vh',
+      title: "Branch Address",
+      field: "branchAddress",
+      emptyValue: "-",
+      width: "10%",
       sorting: false,
     },
     {
-      title: 'Contact',
-      field: 'branchContact',
-      emptyValue: '-',
-      width: '10vh',
+      title: "Contact",
+      field: "branchContact",
+      emptyValue: "-",
+      width: "10%",
       sorting: false,
     },
     {
-      title: 'Description',
-      field: 'branchDescription',
-      emptyValue: '-',
-      width: 400,
+      title: "Description",
+      field: "branchDescription",
+      render: (rowData) => (
+        <div
+          style={{
+            whiteSpace: "wrap",
+          }}
+        >
+          {rowData?.branchDescription}
+        </div>
+      ),
+      emptyValue: "-",
+      width: 160,
       sorting: false,
     },
   ];
@@ -63,7 +71,7 @@ const CompanyTableView = ({
           icon={<ModeEditOutlineIcon />}
         />
       ),
-      tooltip: 'Edit Branch',
+      tooltip: "Edit Branch",
       onClick: (event, rowData) => handleEditCompany(rowData),
     },
     {
@@ -71,7 +79,7 @@ const CompanyTableView = ({
         // <DeleteIcon />
         <HocButton permissions={permissions?.canDelete} icon={<DeleteIcon />} />
       ),
-      tooltip: 'Delete Branch',
+      tooltip: "Delete Branch",
       onClick: (event, rowData) => handleDeleteCompany(rowData),
     },
   ];
@@ -87,7 +95,7 @@ const CompanyTableView = ({
       <CustomTable
         columns={columns}
         data={companyData}
-        title='Branch List'
+        title="Branch List"
         isLoading={isLoading}
         exportButton={true}
         actions={actions}

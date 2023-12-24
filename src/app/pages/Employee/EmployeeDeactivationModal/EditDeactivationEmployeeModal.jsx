@@ -10,10 +10,10 @@ import DeactivateUser from '../../../components/Form/Employee/DeactivateUser/Dea
 export const EditDeactivationEmployeeModal = ({
   open,
   handleCloseModal,
-  data,
+  id,
   title,
 }) => {
-  // const { data } = useGetEmployeeById(id);
+  const { data } = useGetEmployeeById(id);
   return (
     <div>
       <FormModal
@@ -30,6 +30,32 @@ export const EditDeactivationEmployeeModal = ({
     </div>
   );
 };
+
+
+export const EditActivationEmployeeModal = ({
+  open,
+  handleCloseModal,
+  data,
+  title,
+}) => {
+  // const { data } = useGetEmployeeById(id);
+  return (
+    <div>
+      <FormModal
+        title={title}
+        open={open}
+        onClose={handleCloseModal}
+        formComponent={
+          <EditEmployeeActivateFields
+            onClose={handleCloseModal}
+            data={data}
+          />
+        }
+      />
+    </div>
+  );
+};
+
 
 export const EditActivationUserModal = ({ open, handleCloseModal, id }) => {
   return (
