@@ -129,6 +129,7 @@ export const getEmployeeProgress = async (id) => {
   /*________________________EDIT-TO-DE-Terminate-EMPLOYEE_____________________________________*/
 }
 export const terminateEmployee = async (formData) => {
+  console.log("hello",formData)
   const { employeeId, terminationType, effectiveDate } = formData;
   const data = await axiosInstance.put(
     `/employee/edit-termination/${employeeId}?terminationType=${terminationType}&effectiveDate=${effectiveDate}`

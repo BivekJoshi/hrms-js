@@ -77,29 +77,39 @@ export const DeactivateProjectModal = ({
 
 /*____________________________________________Project Employee Modal_________________________________________________________________*/
 
-export const AddProjectEmployeeModal = ({ open, handleCloseModal }) => {
+export const AddProjectEmployeeModal = ({
+  open,
+  handleCloseAddModal,
+  title,
+}) => {
   return (
     <FormModal
+      title={title}
       open={open}
-      onClose={handleCloseModal}
-      formComponent={<AddprojectEmployeeFields onClose={handleCloseModal} />}
+      onClose={handleCloseAddModal}
+      formComponent={<AddprojectEmployeeFields onClose={handleCloseAddModal} />}
     />
   );
 };
 
 export const EditProjectEmployeeModal = ({
   open,
-  handleCloseModal,
-  projectTd,
+  handleCloseEditModal,
+  data,
+  title,
 }) => {
-  const { data } = useGetProjectEmployeeById(projectTd);
+  // const { data } = useGetProjectEmployeeById(projectTd);
   return (
     <div>
       <FormModal
+        title={title}
         open={open}
-        onClose={handleCloseModal}
+        onClose={handleCloseEditModal}
         formComponent={
-          <EditProjectEmployeeFields onClose={handleCloseModal} data={data} />
+          <EditProjectEmployeeFields
+            onClose={handleCloseEditModal}
+            data={data}
+          />
         }
       />
     </div>
@@ -107,10 +117,17 @@ export const EditProjectEmployeeModal = ({
 };
 
 /*____________________________________________Project Employee Task  Modal_________________________________________________________________*/
-export const EditProjectTaskModal = ({ open, handleCloseModal, id, data }) => {
+export const EditProjectTaskModal = ({
+  open,
+  handleCloseModal,
+  id,
+  data,
+  title,
+}) => {
   return (
     <div>
       <FormModal
+        title={title}
         open={open}
         onClose={handleCloseModal}
         formComponent={

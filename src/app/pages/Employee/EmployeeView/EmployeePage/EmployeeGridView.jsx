@@ -1,5 +1,14 @@
-import { Box, Grid, Pagination, Skeleton, Stack } from "@mui/material";
-import React, { useState } from "react";
+import {
+  Autocomplete,
+  Box,
+  Grid,
+  MenuItem,
+  Pagination,
+  Skeleton,
+  Stack,
+  TextField,
+} from "@mui/material";
+import React, { useEffect, useState } from "react";
 import EmployeeCard from "../../../../components/cards/Employee/EmployeeCard";
 import { useGetEmployeeData } from "../../../../hooks/employee/useEmployee";
 
@@ -46,7 +55,6 @@ const EmployeeGridView = () => {
             PositionName={employee?.position?.positionName || ""}
             PositionLevel={employee?.position?.positionLevel || ""}
             EGender={employee?.gender || ""}
-            // EmployeeData={employeeData}
             ProgressBarRes={employee?.progressBarRes || ""}
             employeePhoto={employee?.employeePhotoPath}
           />

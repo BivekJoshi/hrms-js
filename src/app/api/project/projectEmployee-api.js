@@ -38,6 +38,7 @@ export const addProjectEmployeeUpdateTask = async (formData) => {
 
 /*________________________EDIT_____________________________________*/ 
 export const editProjectEmployee = async (formData) => {
+    console.log("formData", formData);
     const {id} = formData;
     const data = await axiosInstance.put(`/project-employee/update/${id}`, formData);
     return data;
