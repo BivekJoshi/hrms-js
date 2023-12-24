@@ -46,7 +46,7 @@ export const editUserControlRoleSetting = async (formData, userId, roleId) => {
   /*________________________DELETE_____________________________________*/
 }
 export const deleteUser = async (id) => {
-  const response = await axiosInstance.delete(
+  const response = await axiosInstance.put(
     `/user/set-activation/${id}?setIsActive=false`
   );
   return response.data;

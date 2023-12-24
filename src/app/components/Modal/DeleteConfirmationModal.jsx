@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext } from 'react';
 import {
   Dialog,
   DialogActions,
@@ -7,8 +7,8 @@ import {
   Button,
   CircularProgress,
   Box,
-} from "@mui/material";
-import ThemeModeContext from "../../../theme/ThemeModeContext";
+} from '@mui/material';
+import ThemeModeContext from '../../../theme/ThemeModeContext';
 
 const DeleteConfirmationModal = ({
   open,
@@ -21,22 +21,22 @@ const DeleteConfirmationModal = ({
 
   return (
     <Dialog open={open} onClose={handleCloseModal}>
-      <Box sx={{ bgcolor: mode === "light" ? "" : "#413e3e" }}>
-        <DialogTitle>Confirm Delete</DialogTitle>
+      <Box sx={{ bgcolor: mode === 'light' ? '' : '#413e3e' }}>
+        <DialogTitle>Confirm Deactivate</DialogTitle>
         <DialogContent>
-          Are you sure you want to delete this {message}?
+          Are you sure you want to deactivate this {message}?
         </DialogContent>
         <DialogActions>
           <Button
-            variant="contained"
+            variant='contained'
             onClick={handleConfirmDelete}
             disabled={isLoading}
-            startIcon={isLoading && <CircularProgress size={20} /> }
-            color="success"
+            startIcon={isLoading && <CircularProgress size={20} />}
+            color='success'
           >
-            {isLoading ? "Deleting..." : "Confirm"}
+            {isLoading ? 'Deleting...' : 'Confirm'}
           </Button>
-          <Button variant="contained" onClick={handleCloseModal} color="error">
+          <Button variant='contained' onClick={handleCloseModal} color='error'>
             Cancel
           </Button>
         </DialogActions>

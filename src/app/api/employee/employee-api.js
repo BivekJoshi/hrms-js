@@ -19,7 +19,7 @@ export const getLoggedInUserInfo = async () => {
 {
   /*________________________GETBYPAGINATION_____________________________________*/
 }
-export const getEmployeeData = async (pageNumber,pageSize) => {
+export const getEmployeeData = async (pageNumber, pageSize) => {
   const data = await axiosInstance.get(
     `/employee/get-all-page-wise/${pageNumber}/?pageSize=${pageSize}&sortBy=id&sortDir=asc`
   );
@@ -88,6 +88,11 @@ export const getDeactivatedEmployee = async () => {
   return data;
 };
 
+export const getDeactivatedUser = async () => {
+  const data = await axiosInstance.get(`/user/get-deactivated-user`);
+  return data;
+};
+
 {
   /*________________________EDIT-TO-DE-ACTIVATE-EMPLOYEE_____________________________________*/
 }
@@ -137,6 +142,13 @@ export const activeEmployee = async (formData) => {
   const { employeeId, terminationType, effectiveDate } = formData;
   const data = await axiosInstance.put(
     `/employee/edit-termination/${employeeId}?terminationType=${terminationType}&effectiveDate=${effectiveDate}`
+  );
+  return data;
+};
+
+export const activateUser = async (formData) => {
+  const data = await axiosInstance.put(
+    `/user/set-activation/${formData?.userId}?setIsActive=true`
   );
   return data;
 };
