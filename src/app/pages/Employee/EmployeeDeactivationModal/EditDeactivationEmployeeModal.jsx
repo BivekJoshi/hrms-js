@@ -35,6 +35,7 @@ export const EditActivationUserModal = ({ open, handleCloseModal, id }) => {
   return (
     <div>
       <FormModal
+        title={"Activate user"}
         open={open}
         onClose={handleCloseModal}
         formComponent={<DeactivateUser onClose={handleCloseModal} id={id} />}

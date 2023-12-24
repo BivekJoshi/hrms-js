@@ -22,7 +22,6 @@ const BasicInfo = ({ data, mode }) => {
     "Date of Join": data?.dateOfJoin || "",
     Position: data?.position?.positionName || "",
   };
-console.log(data);
   const FAMILYMEMBERS = {
     "Name": fData?.name || "",
     "Relation": fData?.relation || "",
