@@ -251,8 +251,8 @@ const routes = [
   //   component: <DeactivatedOfficeResource component="resourceDeactivated"/>,
   // },
   {
-    path: 'logistics/office',
-    name: 'Office Logistics',
+    path: "officeResource",
+    name: "Office Logistics",
     id: nanoid(),
     component: <OfficeResource component='officeResource' />,
   },

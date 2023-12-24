@@ -49,6 +49,14 @@ export const sendEmailForHoliday = async ({
 
 
 
+
+{
+  /*________________________GET_____________________________________*/
+}
+export const getEmailConfigure = async () => {
+  const data = await axiosInstance.get(`/email/get-email-config`);
+  return data;
+};
 {
   /*________________________POST for email congiguration_____________________________________*/
 }
