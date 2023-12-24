@@ -4,12 +4,13 @@ import {
   useAddLeaveByAdmin,
   useEditLeave,
   useEditLeaveByAdmin,
+  useEditLeaveStatusByAdmin,
 } from '../useLeave';
 import { EditLeaveSchema, LeaveSchema } from '../Validation/LeaveSchema';
 
 const useLeaveForm = (data) => {
   const { mutate: addLeave } = useAddLeaveByAdmin({});
-  const { mutate: editLeave } = useEditLeaveByAdmin({});
+  const { mutate: editLeave } = useEditLeaveStatusByAdmin({});
 
   // console.log(data);
   const formik = useFormik({

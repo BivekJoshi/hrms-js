@@ -60,13 +60,14 @@ const DeactivatedOfficeResource = () => {
       <CustomTable
         columns={columns}
         data={data}
-        title="Deactivated Office Logistics"
+        title="Deactivated Logistics"
         isLoading={isLoading}
         exportButton={true}
       />
 
       {openModal && (
         <OfficeResourceLogisticsModal
+        title={"Activate Logistics"}
           id={activateOfficeResource?.id}
           open={openModal}
           handleCloseModal={handleCloseActivatedModal}

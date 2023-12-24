@@ -15,8 +15,7 @@ export const AddEmployeeResourceModal=({open,handleCloseModal, title})=>{
         </div>
     )
 }
-export const EditEmployeeResourceModal = ({ open, handleCloseModal, id, title }) => {
-    const { data } = useGetEmployeeResourceById(id);
+export const EditEmployeeResourceModal = ({ open, handleCloseModal, data, title }) => {
     return (
       <div>
         <FormModal

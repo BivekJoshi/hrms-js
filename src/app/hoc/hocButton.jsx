@@ -14,8 +14,10 @@ const HocButton = ({
   color,
   hoverBg,
 }) => {
+
   const { isEmployee } = useAuth();
   const isDisabled = !permissions;
+
 
   if (isEmployee && isDisabled) {
     return null;
@@ -34,7 +36,7 @@ const HocButton = ({
   const buttonText = isDisabled ? disabledIcon || icon || buttonName : icon || buttonName;
 
   return(
-    <Button sx={buttonSx} variant={variant} onClick={handleClick}>
+    <Button sx={buttonSx} variant={variant} onClick={handleClick} disabled={isDisabled}>
       {buttonText}
     </Button>
   )

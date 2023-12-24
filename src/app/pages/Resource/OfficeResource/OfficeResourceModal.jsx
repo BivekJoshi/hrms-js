@@ -20,12 +20,14 @@ export const AddOfficeResourceModal = ({ open, handleCloseModal, title }) => {
 export const EditOfficeResourceModal = ({
   open,
   handleCloseModal,
-  id,
+  data,
+  title,
 }) => {
-  const { data } = useGetOfficeResourceById(id);
+  // const { data } = useGetOfficeResourceById(id);
   return (
     <div>
       <FormModal
+        title={title}
         open={open}
         onClose={handleCloseModal}
         formComponent={
@@ -40,10 +42,12 @@ export const OfficeResourceLogisticsModal = ({
   open,
   handleCloseModal,
   id,
+  title,
 }) => {
   return (
     <div>
       <FormModal
+        title={title}
         open={open}
         onClose={handleCloseModal}
         formComponent={

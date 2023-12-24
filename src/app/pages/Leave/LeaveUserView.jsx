@@ -26,9 +26,10 @@ const halfLeaveType = [
     value: "SECOND_HALF",
   },
 ];
-const LeaveUserView = () => {
+const LeaveUserView = ({ data }) => {
   const navigate = useNavigate();
-  const { data: leaveData, isLoading } = useGetLoggedInUserLeave();
+  const leaveData = data;
+  // const { data: leaveData, isLoading } = useGetLoggedInUserLeave();
   const { data: leaveTypeData, isLoading: loadingLeaveType } =
     useGetLeaveType();
   const [deletedLeave, setDeletedLeave] = useState({});

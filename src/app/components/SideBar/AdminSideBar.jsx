@@ -15,6 +15,7 @@ import EventIcon from '@mui/icons-material/Event';
 import HolidayVillageIcon from '@mui/icons-material/HolidayVillage';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
+import LaptopIcon from '@mui/icons-material/Laptop';
 import { ListItemIcon } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import {
@@ -39,7 +40,7 @@ import jwtDecode from 'jwt-decode';
 import Logo from '../../../assets/logo.png';
 import SmallLogo from '../../../assets/smallLogo.png';
 import { useGetLoggedInUser } from '../../hooks/auth/usePassword';
-import LaptopIcon from '@mui/icons-material/Laptop';
+
 const drawerWidth = 260;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
@@ -170,7 +171,7 @@ export default function AdminSidebar() {
           sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
         />
       ),
-      path: 'logistics/office',
+      path: 'logistics',
       subMenus: [],
     },
     {
@@ -254,9 +255,9 @@ export default function AdminSidebar() {
       subMenus: [],
     },
     {
-      name: 'Email Configuration',
+      name: 'Email Configure',
       icon: (
-        <PersonAddIcon
+        <MailIcon
           sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
         />
       ),
@@ -347,14 +348,12 @@ export default function AdminSidebar() {
     },
   ];
 
-  const drawerMenus =
-    userRole === 'ROLE_ADMIN' ||
-    userRole === 'ROLE_SUPER_ADMIN' ||
-    userRole === 'ROLE_MANAGER' ||
-    userRole === 'ROLE_HR' ||
-    userRole === 'ROLE_HR_CLERK'
-      ? drawerMenusForAdmin
-      : drawerMenusForEmployee;
+  const filteredDrawerMenus = drawerMenusForAdmin.filter(menu => menu?.path !== 'email');
+
+  const drawerMenus =    
+    (userRole === 'ROLE_SUPER_ADMIN' || userRole === 'ROLE_ADMIN') ? drawerMenusForAdmin :
+    (userRole === 'ROLE_MANAGER' || userRole === 'ROLE_HR' ||  userRole === 'ROLE_HR_CLERK') ? filteredDrawerMenus :
+    drawerMenusForEmployee;
 
   const handleDrawerOpen = () => {
     setOpen(true);

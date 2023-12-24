@@ -22,8 +22,8 @@ import { ButtonComponent } from "../../../components/Button/ButtonComponent";
 const EmployeeResource = ({ permissions }) => {
   const navigate = useNavigate();
   const { data: employeeResourceData, isLoading } = useGetEmployeeResource();
-  const { data: officeResourceData } = useGetOfficeResource();
-  const { data: employeeData, isLoading: loadingemployee } = useGetEmployee();
+  // const { data: officeResourceData } = useGetOfficeResource();
+  // const { data: employeeData, isLoading: loadingemployee } = useGetEmployee();
 
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
@@ -55,7 +55,7 @@ const EmployeeResource = ({ permissions }) => {
   };
 
   const getEmployeeName = (rowData) => {
-    const employeeId = rowData?.id;
+    const employeeId = rowData?.empId;
     const employee = employeeData?.find((emp) => emp?.id === employeeId);
     const name = `${employee?.firstName} ${employee?.middleName || ""} ${
       employee?.lastName
@@ -81,20 +81,24 @@ const EmployeeResource = ({ permissions }) => {
     },
     {
       title: "Employee Name",
-      render: (rowData) => {
-        return <p>{getEmployeeName(rowData)} </p>;
-      },
-      customFilterAndSearch: (searchValue, rowData) => {
-        const employeeName = getEmployeeName(rowData);
-        return employeeName.toLowerCase().includes(searchValue.toLowerCase());
-      },
+      field: "employeeName",
+      emptyValue: "-",
+      // render: (rowData) => {
+      //   return <p>{getEmployeeName(rowData)} </p>;
+      // },
+      // customFilterAndSearch: (searchValue, rowData) => {
+      //   const employeeName = getEmployeeName(rowData);
+      //   return employeeName.toLowerCase().includes(searchValue.toLowerCase());
+      // },
       sorting: false,
     },
     {
       title: "Resource",
-      render: (rowData) => {
-        return <p>{getResourceName(rowData)}</p>;
-      },
+      field: "officeResourceName",
+      emptyValue: "-",
+      // render: (rowData) => {
+      //   return <p>{getResourceName(rowData)}</p>;
+      // },
       // customFilterAndSearch: (searchValue, rowData) => {
       //   const resourceName = getResourceName(rowData);
       //   return resourceName.toLowerCase().includes(searchValue.toLowerCase());
@@ -137,22 +141,21 @@ const EmployeeResource = ({ permissions }) => {
           padding: ".5rem 0",
         }}
       >
-        <ButtonComponent
+        <HocButton
           color={"primary"}
+          permissions={permissions}
           variant={"outlined"}
           onClick={() => {
             navigate(`/admin/logistics/office`);
           }}
           buttonName={"Logistics"}
-          BGColor="white"
-          TextColor="black"
         />
         <HocButton
           permissions={permissions}
           color={"white"}
           variant={"contained"}
           onClick={handleAddOpenModal}
-          buttonName={"+Provide Logistics to Employee"}
+          buttonName={"+Provide Logistics"}
         />
       </Box>
 
@@ -183,7 +186,7 @@ const EmployeeResource = ({ permissions }) => {
       {openEditModal && (
         <EditEmployeeResourceModal
           title={"Edit Logistics"}
-          id={editedEmployeeResouce?.id}
+          data={editedEmployeeResouce}
           open={openEditModal}
           handleCloseModal={handleCloseEditModal}
         />

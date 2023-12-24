@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import {
   addEmployee,
   editEmployee,
@@ -10,34 +10,37 @@ import {
   getEmployeeBydepartment,
   getEmployeeProgress,
   getLoggedInUserInfo,
-} from '../../api/employee/employee-api';
-import { toast } from 'react-toastify';
-import { useParams } from 'react-router-dom';
+} from "../../api/employee/employee-api";
+import { toast } from "react-toastify";
+import { useParams } from "react-router-dom";
 
 export const useGetEmployee = () => {
-  return useQuery(['getEmployee'], () => getEmployee(), {
+  return useQuery(["getEmployee"], () => getEmployee(), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
 };
 
 export const useGetLoggedInUserInfo = () => {
-  return useQuery(['getLoggedInUserInfo'], () => getLoggedInUserInfo(), {
+  return useQuery(["getLoggedInUserInfo"], () => getLoggedInUserInfo(), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
 };
 
-export const useGetEmployeeData = (pageNumber) => {
-  return useQuery(['getEmployeeData', pageNumber], () => getEmployeeData(pageNumber), {
-    refetchInterval: false,
-    refetchOnWindowFocus: false,
-  });
-
+export const useGetEmployeeData = (pageNumber, pageSize) => {
+  return useQuery(
+    ["getEmployeeData", pageNumber, pageSize],
+    () => getEmployeeData(pageNumber, pageSize),
+    {
+      refetchInterval: false,
+      refetchOnWindowFocus: false,
+    }
+  );
 };
 
 export const useGetEmployeeById = (id) => {
-  return useQuery(['getEmployeeById', id], () => getEmployeeById(id), {
+  return useQuery(["getEmployeeById", id], () => getEmployeeById(id), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
@@ -48,7 +51,7 @@ export const useEditEmployee = ({ onSuccess }) => {
   const { id } = useParams();
 
   return useMutation(
-    ['editEmployee '],
+    ["editEmployee "],
     (formData) => {
       editEmployee(formData, id);
     },
@@ -56,7 +59,7 @@ export const useEditEmployee = ({ onSuccess }) => {
       onSuccess: (data, variables, context) => {
         toast.success("Employee edited successfully");
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries('getEmployeeById');
+        queryClient.invalidateQueries("getEmployeeById");
       },
       onError: (err, _variables, _context) => {
         toast.error(`error: ${err.message}`);
@@ -67,11 +70,11 @@ export const useEditEmployee = ({ onSuccess }) => {
 
 export const useAddEmployee = (onSuccess) => {
   const queryClient = useQueryClient();
-  return useMutation(['addEmployees'], (formData) => addEmployee(formData), {
+  return useMutation(["addEmployees"], (formData) => addEmployee(formData), {
     onSuccess: (data, variables, context) => {
-      toast.success('Employee added successfully');
+      toast.success("Employee added successfully");
       onSuccess && onSuccess(data, variables, context);
-      queryClient.invalidateQueries('getEmployee');
+      queryClient.invalidateQueries("getEmployee");
     },
     onError: (err, _variables, _context) => {
       toast.error(`error: ${err.message}`);
@@ -80,29 +83,40 @@ export const useAddEmployee = (onSuccess) => {
 };
 
 export const useGetEmployeeByDepartment = (searchQuery) => {
-  return useQuery(['getEmployeeBydepartment', searchQuery], () => getEmployeeBydepartment(), {
-    refetchInterval: false,
-    refetchOnWindowFocus: false,
-  });
+  return useQuery(
+    ["getEmployeeBydepartment", searchQuery],
+    () => getEmployeeBydepartment(),
+    {
+      refetchInterval: false,
+      refetchOnWindowFocus: false,
+    }
+  );
 };
 
 export const useGetEmployeeByCompany = (searchQuery) => {
-  return useQuery(['getEmployeeByCompany', searchQuery], () => getEmployeeByCompany(searchQuery), {
-    refetchInterval: false,
-    refetchOnWindowFocus: false,
-  });
+  return useQuery(
+    ["getEmployeeByCompany", searchQuery],
+    () => getEmployeeByCompany(searchQuery),
+    {
+      refetchInterval: false,
+      refetchOnWindowFocus: false,
+    }
+  );
 };
 
 export const useGetEmployeeByDesignation = (searchQuery) => {
-  return useQuery(['getEmployeeByDesignation', searchQuery], () => getEmployeeByDesignation(searchQuery), {
-    refetchInterval: false,
-    refetchOnWindowFocus: false,
-  });
+  return useQuery(
+    ["getEmployeeByDesignation", searchQuery],
+    () => getEmployeeByDesignation(searchQuery),
+    {
+      refetchInterval: false,
+      refetchOnWindowFocus: false,
+    }
+  );
 };
 
-
 export const useGetEmployeeProgress = (id) => {
-  return useQuery(['getEmployeeProgress',id], () => getEmployeeProgress(id), {
+  return useQuery(["getEmployeeProgress", id], () => getEmployeeProgress(id), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });

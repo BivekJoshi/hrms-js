@@ -23,8 +23,8 @@ const ProjectDetail = () => {
     id
   );
 
-  const { data: employeeData } = useGetEmployee();
-  const { data: projectData } = useGetProject();
+  // const { data: employeeData } = useGetEmployee();
+  // const { data: projectData } = useGetProject();
 
   const [openAddModal, setOpenAddModal] = useState(false);
 
@@ -78,9 +78,10 @@ const ProjectDetail = () => {
     },
     {
       title: "Employee Name",
-      render: (rowData) => {
-        return <p>{getEmployeeName(rowData)}</p>;
-      },
+      field: "employeeName",
+      // render: (rowData) => {
+      //   return <p>{getEmployeeName(rowData)}</p>;
+      // },
       width: 80,
       sorting: false,
     },

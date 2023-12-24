@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import { useAddRenamePassword } from "../usePassword";
-import { ResetPasswordSchema } from "./ResetPasswordSchema";
 
 const useAddRenamePasswordForm = ({ id }) => {
   const [loading, setLoading] = useState(false);

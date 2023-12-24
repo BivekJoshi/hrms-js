@@ -54,7 +54,7 @@ const Leave = ({ permissions }) => {
     setOpenEditModal(true);
   };
 
-  const { data, isLoading: loading } = useGetleaveOfUser ();
+  const { data, isLoading: loading } = useGetleaveOfUser();
 
   const columns = [
     {

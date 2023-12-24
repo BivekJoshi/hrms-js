@@ -44,6 +44,7 @@ const useEmployeeHistoryForm = () => {
               },
             ],
     },
+    // enableReinitialize: true,
     validationSchema: HistorySchema,
     onSubmit: (values) => {
       if (values.history.some((history) => !history.id)) {
