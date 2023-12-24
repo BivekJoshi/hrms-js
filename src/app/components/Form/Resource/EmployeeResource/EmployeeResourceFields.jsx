@@ -18,10 +18,6 @@ const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
   const { data: employeeData } = useGetEmployee();
   const { mode } = useContext(ThemeModeContext);
   const { formik } = useEmployeeResourceForm(data);
-  console.log(
-    '🚀 ~ file: EmployeeResourceFields.jsx:20 ~ EmployeeResourceFields ~ formik:',
-    formik
-  );
 
   const handleFormSubmit = () => {
     formik.handleSubmit();

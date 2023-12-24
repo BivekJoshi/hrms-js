@@ -102,15 +102,18 @@ const EmployeeDocumentDetailForm = () => {
               >
                 <Box display='flex' justifyContent='center'>
                   {expandedAccordion && !imagePreviewMap[expandedAccordion] && (
-                    <img
-                      src={`${url}${document?.path}`}
-                      alt='Document'
-                      width={240}
-                      height={240}
-                      style={{
-                        objectFit: 'contain',
-                      }}
-                    />
+                    <>
+                      <Typography variant='h6'>Uploaded Document</Typography>
+                      <img
+                        src={`${url}${document?.path}`}
+                        alt='Document'
+                        width={240}
+                        height={240}
+                        style={{
+                          objectFit: 'contain',
+                        }}
+                      />
+                    </>
                   )}
                 </Box>
                 {expandedAccordion && !imagePreviewMap[expandedAccordion] && (
@@ -158,6 +161,7 @@ const EmployeeDocumentDetailForm = () => {
                     paddingRight: '2rem',
                   }}
                 >
+                  <Typography variant='h6'>Preview Document</Typography>
                   <img
                     src={imagePreviewMap[expandedAccordion]}
                     alt='Preview'
