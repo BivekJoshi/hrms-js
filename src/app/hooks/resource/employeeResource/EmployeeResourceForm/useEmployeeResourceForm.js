@@ -1,21 +1,25 @@
 import {
   useAddEmployeeResource,
   useEditEmployeeResource,
-} from "../useEmployeeResource";
-import { useFormik } from "formik";
-import { EmployeeResourceSchema } from "./EmployeeResourceSchema";
+} from '../useEmployeeResource';
+import { useFormik } from 'formik';
+import { EmployeeResourceSchema } from './EmployeeResourceSchema';
 
 const useEmployeeResourceForm = (data) => {
+  console.log(
+    '🚀 ~ file: useEmployeeResourceForm.js:9 ~ useEmployeeResourceForm ~ data:',
+    data
+  );
   const { mutate: addEmployeeResource } = useAddEmployeeResource({});
   const { mutate: editEmployeeResource } = useEditEmployeeResource({});
 
   const formik = useFormik({
     initialValues: {
-      officeResourceId: data?.officeResourceId || "",
-      employeeId: data?.empId || "",
-      receiveDate: data?.receiveDate || "",
-      returnDate: data?.returnDate || "",
-      id: data?.id || "",
+      officeResourceId: data?.officeResourceId || '',
+      employeeId: data?.employeeId || '',
+      receiveDate: data?.receiveDate || '',
+      returnDate: data?.returnDate || '',
+      id: data?.id || '',
     },
     validationSchema: EmployeeResourceSchema,
     enableReinitialize: true,
