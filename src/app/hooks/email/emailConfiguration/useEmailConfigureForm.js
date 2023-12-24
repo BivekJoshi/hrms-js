@@ -2,16 +2,16 @@ import { useFormik } from "formik";
 import { useEmailConfigure } from '../useEmail';
 import { EmailSchema } from './EmailSchema';
 
-const useEmailConfigureForm = () => {
+const useEmailConfigureForm = (emailData) => {
   const { mutate: emailConfigure } = useEmailConfigure({});
 
   const formik = useFormik({
     initialValues: {
-      sender: "",
-      host: "",
-      port: "",
-      password: "",
-      signature: "",
+      sender: emailData?.sender || "",
+      host: emailData?.host || "",
+      port: emailData?.port || "",
+      password: emailData?.password || "",
+      signature: emailData?.signature || "",
     },
     validationSchema: EmailSchema,
     enableReinitialize: true,

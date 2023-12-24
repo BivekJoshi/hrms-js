@@ -6,10 +6,6 @@ import { useFormik } from 'formik';
 import { EmployeeResourceSchema } from './EmployeeResourceSchema';
 
 const useEmployeeResourceForm = (data) => {
-  console.log(
-    '🚀 ~ file: useEmployeeResourceForm.js:9 ~ useEmployeeResourceForm ~ data:',
-    data
-  );
   const { mutate: addEmployeeResource } = useAddEmployeeResource({});
   const { mutate: editEmployeeResource } = useEditEmployeeResource({});
 

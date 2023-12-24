@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import { useGetDeactivatedEmployee } from '../../../hooks/employee/DeactivateEmploye/useEmployee';
+import { useGetDeactivatedUser } from '../../../../hooks/employee/DeactivateEmploye/useEmployee';
+import CustomTable from '../../../../components/CustomTable/CustomTable';
 import RestoreFromTrashOutlinedIcon from '@mui/icons-material/RestoreFromTrashOutlined';
-import CustomTable from '../../../components/CustomTable/CustomTable';
-import { EditDeactivationEmployeeModal } from '../EmployeeDeactivationModal/EditDeactivationEmployeeModal';
+import { EditActivationUserModal } from '../../../Employee/EmployeeDeactivationModal/EditDeactivationEmployeeModal';
 
-const DeactivatedEmployee = () => {
-  const { data: deactivateEmployee, isLoading } = useGetDeactivatedEmployee();
-
+const DeactiveUser = () => {
+  const { data: deactivateUser, isLoading } = useGetDeactivatedUser();
   const [openDeactivatedModal, setOpenDeactivatedModal] = useState(false);
   const [deactivatedEmployee, setDeactivatedEmployee] = useState({});
+
   const handleCloseDeactivatedModal = () => setOpenDeactivatedModal(false);
 
   const handleDeactivatedEmployee = (rowData) => {
@@ -27,17 +27,14 @@ const DeactivatedEmployee = () => {
     },
     {
       title: 'Name',
-      render: (rowData) => {
-        const name = `${rowData?.firstName} ${rowData?.lastName}`;
-        return name || '-';
-      },
+      field: 'name',
       // width: 120,
       sortable: false,
       sorting: false,
     },
     {
       title: 'Email',
-      field: 'officeEmail',
+      field: 'email',
       emptyValue: '-',
       // width: 120,
       sortable: false,
@@ -45,16 +42,16 @@ const DeactivatedEmployee = () => {
     },
     {
       title: 'Phone Number',
-      field: 'mobileNumber',
+      field: 'mobileNo',
       emptyValue: '-',
       // width: 120,
       sortable: false,
       sorting: false,
     },
     {
-      title: 'Position',
+      title: 'Role',
       render: (rowData) => {
-        const position = rowData?.position?.positionName;
+        const position = rowData?.role?.name;
         return position ? position : '-';
       },
       // width: 120,
@@ -72,26 +69,25 @@ const DeactivatedEmployee = () => {
   ];
 
   if (isLoading) return <>Loading</>;
-
   return (
-    <>
+    <div>
+      {' '}
       <CustomTable
         columns={columns}
-        data={deactivateEmployee}
-        title='Inactive Employee'
+        data={deactivateUser}
+        title='Inactive Users'
         isLoading={isLoading}
         actions={actions}
       />
-
       {openDeactivatedModal && (
-        <EditDeactivationEmployeeModal
+        <EditActivationUserModal
           id={deactivatedEmployee?.id}
           open={openDeactivatedModal}
           handleCloseModal={handleCloseDeactivatedModal}
         />
       )}
-    </>
+    </div>
   );
 };
 
-export default DeactivatedEmployee;
+export default DeactiveUser;
