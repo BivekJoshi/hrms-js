@@ -29,6 +29,7 @@ import PermissionHoc from "../../hoc/permissionHoc";
 
 const Leave = ({ permissions }) => {
   const { mode } = React.useContext(ThemeModeContext);
+  const { data: leaveData, isLoading: loading } = useGetleaveOfUser();
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
@@ -58,7 +59,10 @@ const Leave = ({ permissions }) => {
     setOpenEditModal(true);
   };
 
-  const { data, isLoading: loading } = useGetleaveOfUser();
+  const pendingLeaves =
+    leaveData && leaveData.filter((item) => item?.leaveStatus === "PENDING");
+  const approvedRejectedLeaves =
+    leaveData && leaveData.filter((item) => item?.leaveStatus !== "PENDING");
 
   const columns = [
     {
@@ -184,40 +188,55 @@ const Leave = ({ permissions }) => {
     {
       title: "Approved By",
       width: "80px",
+      title: "Approved By",
+      width: "80px",
       sorting: false,
       field: "approvedBy",
+      field: "approvedBy",
     },
-    {
-      title: "Actions",
-      width: "10px",
-      render: (rowData) => {
-        const isApprovedOrRejected = ["APPROVED", "REJECTED"].includes(
-          rowData.leaveStatus
-        );
+    // {
+    //   title: "Actions",
+    //   width: "10px",
+    //   render: (rowData) => {
+    //     const isApprovedOrRejected = ["APPROVED", "REJECTED"].includes(
+    //       rowData.leaveStatus
+    //     );
 
-        return (
-          <Stack direction="row" spacing={0}>
-            <Button
-              color="primary"
-              onClick={() => handleEditLeave(rowData)}
-              disabled={isApprovedOrRejected}
-            >
-              <ModeEditOutlineIcon />
-            </Button>
-            <Button
-              color="primary"
-              onClick={() => handleDeleteLeave(rowData)}
-              disabled={isApprovedOrRejected}
-            >
-              <DeleteIcon />
-            </Button>
-          </Stack>
-        );
-      },
-      sorting: false,
-    },
+    //     return (
+    //       <Stack direction="row" spacing={0}>
+    //         <Button
+    //           color="primary"
+    //           onClick={() => handleEditLeave(rowData)}
+    //           disabled={isApprovedOrRejected}
+    //         >
+    //           <ModeEditOutlineIcon />
+    //         </Button>
+    //         <Button
+    //           color="primary"
+    //           onClick={() => handleDeleteLeave(rowData)}
+    //           disabled={isApprovedOrRejected}
+    //         >
+    //           <DeleteIcon />
+    //         </Button>
+    //       </Stack>
+    //     );
+    //   },
+    //   sorting: false,
+    // },
   ].filter(Boolean);
 
+  const actions = [
+    {
+      icon: () => <ModeEditOutlineIcon />,
+      tooltip: 'Edit Leave',
+      onClick: (event, rowData) => handleEditLeave(rowData),
+    },
+    {
+      icon: () => <DeleteIcon />,
+      tooltip: 'Edit Leave',
+      onClick: (event, rowData) => handleDeleteLeave(rowData),
+    },
+  ];
   // if (isLoading || loadingemployee || loadingleaveType) return <>Loading</>;
 
   return (
@@ -237,13 +256,27 @@ const Leave = ({ permissions }) => {
         />
       </Box>
 
-      <CustomTable
-        columns={columns}
-        data={data}
-        title="Leave Data"
-        // actions={actions}
-        isLoading={loading}
-      />
+      <Box gap={2} sx={{display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        {pendingLeaves && pendingLeaves.length > 0 && (
+          <CustomTable
+            columns={columns}
+            data={pendingLeaves}
+            title="Pending Leave Data"
+            actions={actions}
+            isLoading={loading}
+          />
+        )}
+
+        {approvedRejectedLeaves && approvedRejectedLeaves.length > 0 && (
+          <CustomTable
+            columns={columns}
+            data={approvedRejectedLeaves}
+            title="Approved/Rejected Leave Data"
+            isLoading={loading}
+          />
+        )}
+      </Box>
+
       {openEditModal && (
         <EditLeaveModal
           data={editedLeave}

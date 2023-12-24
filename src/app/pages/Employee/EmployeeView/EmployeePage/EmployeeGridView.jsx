@@ -8,10 +8,10 @@ const EmployeeGridView = () => {
   const { data: employeeData, isLoading } = useGetEmployeeData(pageNumber, 10);
   console.log(employeeData, "data ma ");
 
-  const handlePageChange=(event, newPage)=>{
-    console.log(newPage,"Cliced");
-    setpageNumber(newPage);
-  }
+  const handlePageChange = (event, newPage) => {
+    setpageNumber(newPage - 1);
+  };
+  
   if (isLoading)
     return (
       <>
@@ -59,8 +59,8 @@ const EmployeeGridView = () => {
           // page={employeeData}
           onChange={handlePageChange}
           boundaryCount={3}
-          size='large'
-          color='primary'
+          size="large"
+          color="primary"
         />
       </Box>
     </>

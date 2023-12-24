@@ -1,5 +1,5 @@
-import { useMutation, useQueryClient } from "react-query";
-import { addEmailConfigure, sendEmail, sendEmailForHoliday, sendEmailToAll, sendEmailToMultipleEmployee } from "../../api/email/email-api";
+import { useMutation, useQuery, useQueryClient } from "react-query";
+import { addEmailConfigure, getEmailConfigure, sendEmail, sendEmailForHoliday, sendEmailToAll, sendEmailToMultipleEmployee } from "../../api/email/email-api";
 import { toast } from "react-toastify";
 
 /*___________________SEND EMAIL FOR PERTICULAR EMPLOYEE ON BASIS OF ID______________________________________*/
@@ -79,6 +79,18 @@ export const useSendEmailForHoliday = ({ onSuccess, employeeId, holidayId }) => 
 
 
 
+
+
+
+{
+  /*________________________GET_____________________________________*/
+}
+export const useGetEmailConfigure = () => {
+  return useQuery(["getEmailConfigure"], () => getEmailConfigure(), {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
+};
 {
   /*________________________POST FOR EMAIL CONFIGURATION_____________________________________*/
 }
