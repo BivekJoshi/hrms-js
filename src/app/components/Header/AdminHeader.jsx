@@ -83,6 +83,7 @@ export default function AdminHeader({
             variant='h6'
             noWrap
             color={'#fff'}
+            style={{ cursor: 'pointer' }}
             onClick={handleNavigate}
           >
             Human Resource Management System
