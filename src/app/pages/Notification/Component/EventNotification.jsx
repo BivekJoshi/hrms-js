@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import DoneIcon from "@mui/icons-material/Done";
 import CloseIcon from "@mui/icons-material/Close";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 export const EventNotification = ({
   Eventname,
@@ -26,33 +27,6 @@ export const EventNotification = ({
           padding: "1rem 1rem",
         }}
       >
-        {/* <Typography variant='h7' color='primary' fontWeight={400}>
-          {Eventname}
-        </Typography>
-        {data &&
-          data.map((ename, index) => (
-            <MenuItem
-              key={index}
-              onClick={handleClose}
-              sx={{
-                display: 'flex',
-                gap: '1rem',
-                alignItems: 'center',
-              }}
-            >
-              <Typography variant='h7'>{ename?.eventName}</Typography>
-              <Box
-                sx={{
-                  display: 'flex',
-                  flexDirection: 'start',
-                  color: 'gray',
-                }}
-              >
-                <Typography>{ename?.eventTime}</Typography> &nbsp;
-                <Typography>{ename?.eventLocation}</Typography>
-              </Box>
-            </MenuItem>
-          ))} */}
         <Typography variant="h5" sx={{ color: "#6DAB23" }}>
           Today's Event
         </Typography>
@@ -69,18 +43,22 @@ export const EventNotification = ({
             data.map((ename, index) => (
               <>
                 <div
-                  style={{ display: "flex", justifyContent: "space-between" }}
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    gap: "1rem",
+                  }}
                 >
                   <div
                     style={{
                       border: "1px solid #E0E0E0",
-                      borderRadius: "6px 6px 0 0",
+                      borderRadius: "6px",
                     }}
                   >
                     <div
                       style={{
                         backgroundColor: "rgb(215, 64, 52)",
-                        padding: ".2rem 1.4rem",
+                        padding: ".1rem 1rem",
                         color: "#fff",
                         fontWeight: "bold",
                         borderRadius: "6px 6px 0 0",
@@ -91,8 +69,9 @@ export const EventNotification = ({
                     <div
                       style={{
                         backgroundColor: "#fff",
-                        padding: ".2rem 1.4rem",
+                        padding: ".1rem .8rem",
                         fontWeight: "bold",
+                        borderRadius: "6px",
                       }}
                     >
                       <Typography variant="h5">25</Typography>
@@ -103,19 +82,19 @@ export const EventNotification = ({
                       style={{
                         display: "flex",
                         alignItems: "center",
-                        gap: "1rem",
+                        gap: ".5rem",
                       }}
                     >
                       <div
                         style={{
                           backgroundColor: "red",
-                          width: "13px",
-                          height: "13px",
+                          width: "8px",
+                          height: "8px",
                           borderRadius: "50%",
                         }}
                       ></div>
-                      <Typography variant="h6" sx={{ fontWeight: 600 }}>
-                      {ename?.eventName}
+                      <Typography variant="h7" sx={{ fontWeight: 600 }}>
+                        {ename?.eventName}
                       </Typography>
                     </div>
                     <div
@@ -126,17 +105,21 @@ export const EventNotification = ({
                       }}
                     >
                       <AccessTimeIcon />
-                      <Typography variant="h6">{ename?.eventTime} - Onwards</Typography>
+                      <Typography variant="h7">
+                        {ename?.eventTime} - Onwards
+                      </Typography>
                     </div>
                   </div>
                   <div></div>
                 </div>
                 <Divider sx={{ marginTop: ".5rem" }} />
-                <Typography variant="h6" sx={{ maxWidth: "25rem" }}>
-                {ename?.eventLocation}
-                </Typography>
+                <div style={{ maxWidth: "15rem" ,display:"flex",alignItems:'center'}}>
+                <LocationOnIcon/>
+                  <Typography variant="h7"><b>Location :</b>{ename?.eventLocation}</Typography>
+                </div>
+
                 <br />
-                <Typography variant="h6" sx={{ fontWeight: 500 }}>
+                <Typography variant="h7" sx={{ fontWeight: 500 }}>
                   Are you attending?
                 </Typography>
                 <div
@@ -147,7 +130,7 @@ export const EventNotification = ({
                   }}
                 >
                   <Typography
-                    variant="h5"
+                    variant="h6"
                     sx={{
                       color: "green",
                       fontWeight: 500,
@@ -161,7 +144,7 @@ export const EventNotification = ({
                   </Typography>
                   <Divider orientation="vertical" flexItem></Divider>
                   <Typography
-                    variant="h5"
+                    variant="h6"
                     sx={{
                       color: "red",
                       fontWeight: 500,

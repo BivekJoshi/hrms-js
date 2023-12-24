@@ -145,6 +145,7 @@ const Project = ({ permissions }) => {
       <Box padding="2rem" display="grid" justifyContent={"center"}>
         <Pagination
           count={projectDetail?.totalPages}
+          page={pageNumber+1}
           onChange={handlePageChange}
           boundaryCount={3}
           size="large"

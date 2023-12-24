@@ -56,7 +56,7 @@ const EmployeeGridView = () => {
       <Box padding="2rem" display="grid" justifyContent={"center"}>
         <Pagination
           count={employeeData?.totalPages}
-          // page={employeeData}
+          page={pageNumber+1}
           onChange={handlePageChange}
           boundaryCount={3}
           size="large"
