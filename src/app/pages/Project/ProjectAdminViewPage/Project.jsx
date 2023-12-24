@@ -130,7 +130,7 @@ const Project = ({ permissions }) => {
           projectDetail?.projectResList?.map((item, index) => (
             <ProjectCard
               item={item}
-              Id={item.projectid}
+              Id={item.id}
               key={index}
               ProjectName={item.projectName}
               StartDate={item.startDate}
