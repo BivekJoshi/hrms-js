@@ -45,7 +45,6 @@ export default function AdminHeader({
   const { data: birthdayData } = useGetTodayBirthday();
   const { data: eventData } = useGetEventNotification();
   const { toggleMode, palette } = useContext(ThemeModeContext);
-  console.log(loggedUserData?.role?.name, "data");
 
   const navigate = useNavigate();
 

@@ -19,14 +19,14 @@ import {
 
 const ProjectDetail = () => {
   const { id } = useParams();
-  const { data: projectEmployeeData, isLoading } = useGetProjectEmployeeById(
-    id
-  );
+  const { data: projectEmployeeData, isLoading } =
+    useGetProjectEmployeeById(id);
 
   // const { data: employeeData } = useGetEmployee();
   // const { data: projectData } = useGetProject();
 
   const [openAddModal, setOpenAddModal] = useState(false);
+  const [openEditModal, setOpenEditModal] = useState(false);
 
   const handleAddOpenModal = () => setOpenAddModal(true);
   const handleCloseAddModal = () => setOpenAddModal(false);
@@ -50,7 +50,7 @@ const ProjectDetail = () => {
     return name;
   };
 
-  const [openEditModal, setOpenEditModal] = useState(false);
+  
   const [editedEmployee, setEditedEmployee] = useState({});
   const handleEditProjectEmployee = (rowData) => {
     setEditedEmployee(rowData);
@@ -71,7 +71,7 @@ const ProjectDetail = () => {
   const columns = [
     {
       title: "SN",
-      render: (rowData) => rowData.tableData.id + 1,
+      render: (rowData) => rowData?.tableData?.index + 1,
       width: 80,
       sortable: false,
       sorting: false,
@@ -205,16 +205,18 @@ const ProjectDetail = () => {
       />
       {openAddModal && (
         <AddProjectEmployeeModal
+          title={"Add Employee"}
           open={openAddModal}
-          handleCloseModal={handleCloseAddModal}
+          handleCloseAddModal={handleCloseAddModal}
         />
       )}
 
       {openEditModal && (
         <EditProjectEmployeeModal
-          projectTd={editedEmployee?.id}
+          title={"Edit Project Details"}
+          data={editedEmployee}
           open={openEditModal}
-          handleCloseModal={handleCloseEditModal}
+          handleCloseEditModal={handleCloseEditModal}
         />
       )}
       {openDeleteModal && (

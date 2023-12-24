@@ -114,7 +114,7 @@ export const useAddProjectEmployeeUpdateTask = ({ onSuccess }) => {
 };
 
 /*________________________EDIT______________________________________________________________________________________________*/
-export const useEditProjectEmployee = async ({ onSuccess }) => {
+export const useEditProjectEmployee =  ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(
     ["editProjectEmployee"],

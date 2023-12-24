@@ -28,7 +28,6 @@ const EditProjectFields = ({ onClose, isLoading, data }) => {
     }
   };
 
-  console.log(formik);
 
   // const getProjectLeaderName = (projectLeadId) => {
   //   const projectLeader = employeeData?.find(

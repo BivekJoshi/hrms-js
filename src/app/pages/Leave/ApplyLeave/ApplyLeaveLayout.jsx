@@ -67,7 +67,7 @@ const ApplyLeaveLayout = () => {
   const{mode} =React.useContext(ThemeModeContext);
 
   const pendingLeaveData = leaveData && leaveData.filter(leaveRecord => leaveRecord?.leaveStatus === "PENDING");
-// console.log(pendingLeaveData)
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>

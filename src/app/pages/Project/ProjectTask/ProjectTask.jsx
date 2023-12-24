@@ -189,7 +189,7 @@ const ProjectTask = () => {
         const employeeIds = rowData.projectEmployees.map(
           (employee) => employee.empId
         );
-        const matchedEmployees = employeeData.filter((employee) =>
+        const matchedEmployees = employeeData && employeeData.filter((employee) =>
           employeeIds.includes(employee.id)
         );
         const matchedEmployeeNames = matchedEmployees.map(
