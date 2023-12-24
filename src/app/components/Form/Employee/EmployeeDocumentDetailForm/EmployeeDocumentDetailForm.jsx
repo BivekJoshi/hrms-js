@@ -96,13 +96,19 @@ const EmployeeDocumentDetailForm = () => {
                   display: 'flex',
                   flexDirection: 'column',
                   gap: '1rem',
-                  marginLeft: '15vh',
+
                   paddingRight: '2rem',
                 }}
               >
                 <Box display='flex' justifyContent='center'>
                   {expandedAccordion && !imagePreviewMap[expandedAccordion] && (
-                    <>
+                    <div
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '8px',
+                      }}
+                    >
                       <Typography variant='h6'>Uploaded Document</Typography>
                       <img
                         src={`${url}${document?.path}`}
@@ -113,7 +119,7 @@ const EmployeeDocumentDetailForm = () => {
                           objectFit: 'contain',
                         }}
                       />
-                    </>
+                    </div>
                   )}
                 </Box>
                 {expandedAccordion && !imagePreviewMap[expandedAccordion] && (
@@ -157,20 +163,27 @@ const EmployeeDocumentDetailForm = () => {
                     display: 'flex',
                     flexDirection: 'column',
                     gap: '1rem',
-                    marginLeft: '15vh',
                     paddingRight: '2rem',
                   }}
                 >
-                  <Typography variant='h6'>Preview Document</Typography>
-                  <img
-                    src={imagePreviewMap[expandedAccordion]}
-                    alt='Preview'
-                    width={240}
-                    height={240}
+                  <div
                     style={{
-                      objectFit: 'contain',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: '8px',
                     }}
-                  />
+                  >
+                    <Typography variant='h6'>Preview Document</Typography>
+                    <img
+                      src={imagePreviewMap[expandedAccordion]}
+                      alt='Preview'
+                      width={240}
+                      height={240}
+                      style={{
+                        objectFit: 'contain',
+                      }}
+                    />
+                  </div>
                   <Box display='flex' justifyContent='center'>
                     <Grid
                       sm={12}
