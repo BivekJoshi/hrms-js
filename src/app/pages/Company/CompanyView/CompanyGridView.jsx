@@ -78,7 +78,7 @@ const CompanyGridView = ({
                 </Typography>
 
                 <br />
-                <Typography variant='p' sx={{ textAlign: 'center' }}>
+                <Typography variant='p' sx={{ textAlign: 'center', width:"300px" }}>
                   {item?.branchDescription || null}
                 </Typography>
                 <br />

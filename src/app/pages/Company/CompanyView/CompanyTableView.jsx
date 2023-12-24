@@ -5,6 +5,7 @@ import PermissionHoc from '../../../hoc/permissionHoc';
 import useAuth from '../../../../auth/hooks/component/login/useAuth';
 import CustomTable from '../../../components/CustomTable/CustomTable';
 import HocButton from '../../../hoc/hocButton';
+import { Chip, Typography } from '@mui/material';
 
 const CompanyTableView = ({
   permissions,
@@ -49,8 +50,19 @@ const CompanyTableView = ({
       title: 'Description',
       field: 'branchDescription',
       emptyValue: '-',
-      width: 400,
-      sorting: false,
+      width:'10vh',
+      render: (rowData) => {
+        return (
+         
+                <Typography
+                  style={{ overflow: 'hidden', textOverflow: 'ellipsis', width:"15rem"}}
+                >
+                  {rowData?.branchDescription}
+                </Typography>
+              
+            
+        );
+      },
     },
   ];
 

@@ -81,6 +81,19 @@ const EmployeeDocumentDetailForm = () => {
     <div>
       <Grid container>
         <Grid item xs={12} sm={6} md={6}>
+          <Grid display="flex" justifyContent="center">
+            {expandedAccordion && imagePreviewMap[expandedAccordion] && (
+              <img
+                src={imagePreviewMap[expandedAccordion]}
+                alt="Preview"
+                width={240}
+                height={240}
+                style={{
+                  objectFit: "contain",
+                }}
+              />
+            )}
+          </Grid>
           {documentPhoto &&
             documentPhoto.map((document) => (
               <Grid
@@ -89,8 +102,8 @@ const EmployeeDocumentDetailForm = () => {
                   display: "flex",
                   flexDirection: "column",
                   gap: "1rem",
-                  marginLeft: "15vh",
-                  paddingRight: "2rem",
+                  // marginLeft: "15vh",
+                  // paddingRight: "2rem",
                 }}
               >
                 <Box display="flex" justifyContent="center">
@@ -106,19 +119,6 @@ const EmployeeDocumentDetailForm = () => {
                     />
                   )}
                 </Box>
-                <Grid display="flex" justifyContent="center">
-                  {expandedAccordion && imagePreviewMap[expandedAccordion] && (
-                    <img
-                      src={imagePreviewMap[expandedAccordion]}
-                      alt="Preview"
-                      width={240}
-                      height={240}
-                      style={{
-                        objectFit: "contain",
-                      }}
-                    />
-                  )}
-                </Grid>
                 <Grid
                   sm={12}
                   sx={{
@@ -156,6 +156,11 @@ const EmployeeDocumentDetailForm = () => {
                 key={document.id}
                 expanded={expandedAccordion === `panel${document?.id}`}
                 onChange={handleChange(`panel${document?.id}`, document?.input)}
+                sx={{
+                  margin: "0 !important",
+                  borderBottom: "1px solid black",
+                  boxShadow: "none",
+                }}
               >
                 <AccordionSummary
                   aria-controls={`panel${document.id}a-content`}
