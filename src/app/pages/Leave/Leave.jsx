@@ -189,10 +189,7 @@ const Leave = ({ permissions }) => {
     {
       title: "Approved By",
       width: "80px",
-      title: "Approved By",
-      width: "80px",
       sorting: false,
-      field: "approvedBy",
       field: "approvedBy",
     },
     // {
