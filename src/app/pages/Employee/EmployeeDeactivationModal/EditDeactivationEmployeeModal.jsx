@@ -10,10 +10,10 @@ import DeactivateUser from '../../../components/Form/Employee/DeactivateUser/Dea
 export const EditDeactivationEmployeeModal = ({
   open,
   handleCloseModal,
-  data,
+  id,
   title,
 }) => {
-  // const { data } = useGetEmployeeById(id);
+  const { data } = useGetEmployeeById(id);
   return (
     <div>
       <FormModal

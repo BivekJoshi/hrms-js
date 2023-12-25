@@ -14,7 +14,6 @@ const ProjectAssignTaskField = ({ onClose, data }) => {
 
   const { data: projectData, isLoading: LoadingProjectEmployeeData } =
     useGetProjectEmployeeById(projectTd);
-  console.log("data", projectData);
   const { data: employeeData, isLoading: loadingEmployee } = useGetEmployee();
 
   const getEmployeeNameById = (employeeId) => {

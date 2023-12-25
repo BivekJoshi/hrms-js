@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useGetDeactivatedOfficeResource } from "../../../hooks/resource/officeResource/useOfficeResource";
-import { Button, Stack } from "@mui/material";
+import { Box, Button, Grid, Stack, Typography } from "@mui/material";
 import { OfficeResourceLogisticsModal } from "./OfficeResourceModal";
 import CustomTable from "../../../components/CustomTable/CustomTable";
+import CloseIcon from "@mui/icons-material/Close";
 
-const DeactivatedOfficeResource = () => {
+const DeactivatedOfficeResource = ({closeModal, title}) => {
   const { data, isLoading } = useGetDeactivatedOfficeResource();
   const [openModal, setopenModal] = useState(false);
   const [activateOfficeResource, setActivateOfficeResource] = useState({});
@@ -57,17 +58,22 @@ const DeactivatedOfficeResource = () => {
   ];
   return (
     <>
+      <Grid sx={{display: 'flex', justifyContent: 'space-between', margin: '0.2rem 0.6rem'}}>
+      <Typography variant='h6'> {title} </Typography>
+      <Typography onClick={closeModal} sx={{cursor: 'pointer'}}> <CloseIcon /> </Typography>
+      </Grid>
       <CustomTable
         columns={columns}
         data={data}
         title="Deactivated Logistics"
         isLoading={isLoading}
         exportButton={true}
+        height={"320px"}
       />
 
       {openModal && (
         <OfficeResourceLogisticsModal
-        title={"Activate Logistics"}
+          title={"Activate Logistics"}
           id={activateOfficeResource?.id}
           open={openModal}
           handleCloseModal={handleCloseActivatedModal}

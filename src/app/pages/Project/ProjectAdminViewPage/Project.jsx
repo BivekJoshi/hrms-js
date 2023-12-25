@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import Typography from '@mui/material/Typography';
+import React, { useState } from "react";
+import Typography from "@mui/material/Typography";
 import {
+  Autocomplete,
   Box,
   Button,
   Card,
@@ -10,32 +11,36 @@ import {
   Pagination,
   Stack,
   TextField,
-} from '@mui/material';
-import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
+} from "@mui/material";
+import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
 import {
   useGetProject,
   useGetProjectDetail,
   useGetProjectPageWise,
-} from '../../../hooks/project/useProject';
-import { AddProjectModal } from '../ProjectModal/ProjectModal';
+} from "../../../hooks/project/useProject";
+import { AddProjectModal } from "../ProjectModal/ProjectModal";
 
-import ProjectCard from '../../../components/cards/Employee/ProjectCard';
-import HocButton from '../../../hoc/hocButton';
-import PermissionHoc from '../../../hoc/permissionHoc';
-import useAuth from '../../../../auth/hooks/component/login/useAuth';
-import DeactivatedProject from '../DeactivatedProject/DeactivatedProject';
-import { ButtonComponent } from '../../../components/Button/ButtonComponent';
+import ProjectCard from "../../../components/cards/Employee/ProjectCard";
+import HocButton from "../../../hoc/hocButton";
+import PermissionHoc from "../../../hoc/permissionHoc";
+import useAuth from "../../../../auth/hooks/component/login/useAuth";
+import DeactivatedProject from "../DeactivatedProject/DeactivatedProject";
+import { ButtonComponent } from "../../../components/Button/ButtonComponent";
 
 const Project = ({ permissions }) => {
-  const [pageNumber, setpageNumber] = useState(0);
+  const [pageNumber, setPageNumber] = useState(0);
+  const [pageSize, setPageSize] = useState(6);
   const { isEmployee } = useAuth();
 
   const [openModal, setOpenModal] = useState(false);
+  const {data: projectData} = useGetProjectDetail();
   const { data: projectDetail, isLoading } = useGetProjectPageWise(
     pageNumber,
-    5
+    pageSize,
   );
 
+  const [nameFilter, setNameFilter] = useState("");
+  const [companyFilter, setCompanyFilter] = useState("");
   const [isContainerVisible, setIsContainerVisible] = useState(false);
   const [openAddModal, setOpenAddModal] = useState(false);
 
@@ -57,34 +62,41 @@ const Project = ({ permissions }) => {
   if (isLoading) return <>Loading</>;
 
   const handlePageChange = (event, newPage) => {
-    setpageNumber(newPage - 1);
+    setPageNumber(newPage - 1);
   };
+
+  const handlePageSizeChange = (event, newValue) => {
+    const newPageSize = parseInt(newValue, 6) || 0;
+    setPageSize(newPageSize);
+    setPageNumber(0);
+  };
+  console.log(projectData)
 
   return (
     <>
       <Box>
         <Typography
-          className='project-button'
-          variant='h5'
+          className="project-button"
+          variant="h5"
           sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            marginBottom: '1.2rem',
+            display: "flex",
+            justifyContent: "space-between",
+            marginBottom: "1.2rem",
           }}
         >
           On-Going Projects
           {isEmployee ? null : (
-            <Box display='flex'>
+            <Box display="flex">
               <ButtonComponent
-                BGColor='white'
-                TextColor='#000'
+                BGColor="white"
+                TextColor="#000"
                 OnClick={handleOpenModal}
-                buttonName={'Terminated Project'}
+                buttonName={"Terminated Project"}
               />
               <ButtonComponent
-                color='white'
+                color="white"
                 OnClick={handleAddOpenModal}
-                buttonName='+ Add Project'
+                buttonName="+ Add Project"
               />
             </Box>
           )}
@@ -121,16 +133,16 @@ const Project = ({ permissions }) => {
         container
         item
         gap={3}
-        className='project-card-control'
+        className="project-card-control"
         sx={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))",
         }}
       >
-        {projectDetail?.projectResList?.map((item, index) => (
+        {projectData?.map((item, index) => (
           <ProjectCard
             item={item}
-            Id={item?.id}
+            Id={item?.projectid}
             key={index}
             ProjectName={item?.projectName}
             StartDate={item?.startDate}
@@ -142,20 +154,35 @@ const Project = ({ permissions }) => {
         ))}
       </Grid>
 
-      <Box padding='2rem' display='grid' justifyContent={'center'}>
+      <Box mt={4} display="flex" justifyContent={"end"}>
         <Pagination
           count={projectDetail?.totalPages}
-          page={pageNumber+1}
+          page={pageNumber + 1}
           onChange={handlePageChange}
           boundaryCount={3}
-          size='large'
-          color='primary'
+          showFirstButton
+          showLastButton
+          size="large"
+          color="primary"
+        />
+        <Autocomplete
+          value={pageSize}
+          onChange={handlePageSizeChange}
+          options={[5, 10, 15, 20, 25, 30]}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label="page"
+              variant="outlined"
+              size="small"
+            />
+          )}
         />
       </Box>
 
       {openAddModal && (
         <AddProjectModal
-          title={'Add Project'}
+          title={"Add Project"}
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
         />
@@ -164,17 +191,17 @@ const Project = ({ permissions }) => {
       <Modal
         open={openModal}
         onClose={handleCloseModal}
-        aria-labelledby='modal-title'
-        aria-describedby='modal-description'
+        aria-labelledby="modal-title"
+        aria-describedby="modal-description"
       >
         <Box
           sx={{
-            position: 'absolute',
-            top: '40%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
+            position: "absolute",
+            top: "40%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
             // width: 400,
-            bgcolor: 'background.paper',
+            bgcolor: "background.paper",
             boxShadow: 24,
             p: 4,
           }}
@@ -183,14 +210,14 @@ const Project = ({ permissions }) => {
           <br />
           <Grid
             container
-            direction='row'
-            justifyContent='flex-end'
-            alignItems='flex-end'
+            direction="row"
+            justifyContent="flex-end"
+            alignItems="flex-end"
           >
             <Button
               onClick={() => setOpenModal(false)}
-              color='error'
-              variant='contained'
+              color="error"
+              variant="contained"
             >
               Close
             </Button>

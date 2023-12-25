@@ -6,7 +6,7 @@ import { useGetDeactivatedEmployee } from '../../../hooks/employee/DeactivateEmp
 
 const DeactivatedEmployee = () => {
   const { data: deactivateEmployee, isLoading } = useGetDeactivatedEmployee();
-console.log("deactivateEmployee", deactivateEmployee)
+
   const [openDeactivatedModal, setOpenDeactivatedModal] = useState(false);
   const [deactivatedEmployee, setDeactivatedEmployee] = useState({});
   const handleCloseDeactivatedModal = () => setOpenDeactivatedModal(false);

@@ -1,12 +1,12 @@
-import MaterialTable from 'material-table';
-import React, { useContext } from 'react';
-import ThemeModeContext from '../../../theme/ThemeModeContext';
-import tableIcons from '../../../theme/overrides/TableIcon';
+import MaterialTable from "material-table";
+import React, { useContext } from "react";
+import ThemeModeContext from "../../../theme/ThemeModeContext";
+import tableIcons from "../../../theme/overrides/TableIcon";
 
 const CustomTable = (props) => {
   const { palette } = useContext(ThemeModeContext); // Accessing mode from context
   return (
-    <div style={{ height: '100%' }}>
+    <div style={{ height: "100%" }}>
       <MaterialTable
         icons={tableIcons}
         columns={props?.columns}
@@ -16,23 +16,25 @@ const CustomTable = (props) => {
         options={{
           search: props?.search || true,
           tableLayout: props?.tableLayout,
-          padding: 'dense',
+          padding: "dense",
           pageSize: props?.pageSize || 10,
           emptyRowsWhenPaging: props?.emptyRowsWhenPaging || false,
           exportButton: props?.exportButton || false,
           headerStyle: {
             backgroundColor: palette?.secondary?.main,
             color: palette?.text?.tableHead,
-            fontSize: '.8rem',
-            fontWeight: 'bold',
-            textAlign: 'center',
+            fontSize: ".8rem",
+            fontWeight: "bold",
+            textAlign: "center",
             border: `1px solid ${palette?.divider}`,
-            textTransform: 'capitalize',
+            textTransform: "capitalize",
           },
           actionsColumnIndex: -1,
           rowStyle: props?.rowStyle || {
-            fontSize: '.8rem',
+            fontSize: ".8rem",
           },
+          maxBodyHeight: props?.height || "",
+          scroll: props?.scroll || "",
         }}
         actions={props?.actions}
       />
