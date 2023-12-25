@@ -63,8 +63,6 @@ export const LeftEmployDashbord = ({}) => {
     const eventDateObject = new Date(eventDate);
     const month = eventDateObject.toLocaleString("default", { month: "short" });
     const day = eventDateObject.getDate();
-    console.log(month);
-    console.log(day);
     return { day, month };
   };
 
@@ -134,6 +132,7 @@ export const LeftEmployDashbord = ({}) => {
                     className="notification"
                     bgcolor={mode === "light" ? "#ECFFE3" : "#313131"}
                     boxShadow={2}
+                    marginTop="8px"
                   >
                     <Typography>
                       At {notify?.eventName}: {notify?.eventDescription}

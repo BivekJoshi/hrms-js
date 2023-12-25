@@ -68,7 +68,7 @@ export const RightEmployDashbord = ({ employData }) => {
           </Box>
           <Box alignSelf="center">
             <ButtonComponent
-              buttonName={"APPLY Leave"}
+              buttonName={"Apply Leave"}
               OnClick={() => {
                 navigate("/employee/applyleavefield");
               }}
