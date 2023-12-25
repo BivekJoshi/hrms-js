@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { useNavigate } from "react-router-dom";
 import { removeUser } from "../../../utils/cookieHelper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import ThemeModeContext from '../../../../theme/ThemeModeContext';
 
 const Profile = (loggedUserData) => {
-
+  const { palette } = useContext(ThemeModeContext);
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -49,6 +50,9 @@ const Profile = (loggedUserData) => {
         onClose={handleClose}
         MenuListProps={{
           "aria-labelledby": "basic-button",
+        }}
+        PaperProps={{
+          style: {background: palette.mode === 'light' ? '' : palette?.background?.default},
         }}
       >
         <MenuItem onClick={handleProfile}>Profile</MenuItem>

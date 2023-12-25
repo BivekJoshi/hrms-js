@@ -20,7 +20,7 @@ const DesignationFields = ({ onClose, isLoading, data }) => {
             id="positionName"
             name="positionName"
             label="Designation Name"
-            placeholder="Enter Designation name"
+            placeholder="Enter designation name"
             fullWidth
             
             required

@@ -69,28 +69,33 @@ const Leave = ({ permissions }) => {
       title: "SN",
       field: "id",
       sortable: false,
+      width: '10px',
       sorting: false,
       render: (rowData) => rowData.tableData.id + 1,
     },
     {
       title: "Employee Name",
       field: "employeeName",
+      width: '60px',
       sorting: false,
     },
     {
       title: "Leave Type",
       field: "leaveType",
+      width: '60px',
       sorting: false,
     },
     {
       title: "From",
       field: "fromDate",
+      width: '60px',
       emptyValue: "-",
       sorting: false,
     },
     {
       title: "To",
       field: "toDate",
+      width: '60px',
       emptyValue: "-",
       sorting: false,
     },
@@ -130,58 +135,43 @@ const Leave = ({ permissions }) => {
     {
       title: "Leave Reason",
       field: "leaveReason",
+      width: "15%",
       emptyValue: "-",
       render: (rowData) => {
         return (
-          <Tooltip
-            title={<div>{rowData?.leaveReason}</div>}
-            placement="top-start"
-            arrow
-          >
-            <Chip
-              style={{
-                cursor: "pointer",
-                width: "240px",
-                // height: '40px',
-                display: "block",
-                background: mode === "light" ? "white" : "#434343",
-              }}
-              label={
-                <Typography
-                  style={{ overflow: "hidden", textOverflow: "ellipsis" }}
-                >
-                  {rowData?.leaveReason}
-                </Typography>
-              }
-            />
-          </Tooltip>
+          <div style={{whiteSpace: 'wrap'}}>
+            {rowData?.leaveReason}
+          </div>
         );
       },
     },
     {
       title: "Remark",
       field: "leaveRemarks",
-      width: "240px",
+      width: "15%",
       emptyValue: "-",
       render: (rowData) => {
         return (
-          <Tooltip title={rowData?.leaveRemarks} placement="top-start" arrow>
-            <Chip
-              style={{
-                cursor: "pointer",
-                width: "240px",
-                display: "block",
-                background: mode === "light" ? "white" : "#434343",
-              }}
-              label={
-                <Typography
-                  style={{ overflow: "hidden", textOverflow: "ellipsis" }}
-                >
-                  {rowData?.leaveRemarks}
-                </Typography>
-              }
-            />
-          </Tooltip>
+          <div style={{whiteSpace: 'wrap'}}>
+            {rowData?.leaveRemarks}
+          </div>
+          // <Tooltip title={rowData?.leaveRemarks} placement="top-start" arrow>
+          //   <Chip
+          //     style={{
+          //       cursor: "pointer",
+          //       width: "240px",
+          //       display: "block",
+          //       background: mode === "light" ? "white" : "#434343",
+          //     }}
+          //     label={
+          //       <Typography
+          //         style={{ overflow: "hidden", textOverflow: "ellipsis" }}
+          //       >
+          //         {rowData?.leaveRemarks}
+          //       </Typography>
+          //     }
+          //   />
+          // </Tooltip>
         );
       },
     },

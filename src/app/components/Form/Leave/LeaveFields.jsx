@@ -251,6 +251,7 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
                     bgcolor='black'
                     {...params}
                     label='Employee Name'
+                placeholder='Select employee Name'
                     fullWidth
                     requireds
                     error={
@@ -295,6 +296,7 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
               <Autocomplete
                 id='leaveTypeId'
                 name='leaveTypeId'
+               
                 options={leaveTypeData}
                 getOptionLabel={(option) =>
                   `${capitalize(option.leaveName)} Leave`
@@ -307,6 +309,7 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
                   <TextField
                     {...params}
                     label='Leave Name'
+                    placeholder='Select leave type'
                     fullWidth
                     required
                     error={
@@ -362,7 +365,7 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
               id='leaveReason'
               name='leaveReason'
               label='Leave Reason'
-              placeholder='Enter leave Reason'
+              placeholder='Enter leave reason'
               fullWidth
               multiline
               rows={2}
