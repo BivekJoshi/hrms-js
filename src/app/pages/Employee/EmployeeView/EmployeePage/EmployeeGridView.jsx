@@ -14,7 +14,7 @@ import { useGetEmployeeData } from "../../../../hooks/employee/useEmployee";
 
 const EmployeeGridView = () => {
   const [pageNumber, setpageNumber] = useState(0);
-  const { data: employeeData, isLoading } = useGetEmployeeData(pageNumber, 10);
+  const { data: employeeData, isLoading } = useGetEmployeeData(pageNumber, 12);
 
   const handlePageChange = (event, newPage) => {
     setpageNumber(newPage - 1);
