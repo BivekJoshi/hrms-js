@@ -15,6 +15,7 @@ export const EventNotification = ({
   handleClose,
   handleListKeyDown,
 }) => {
+  console.log(data,"data ma ");
   return (
     <>
       <MenuList
