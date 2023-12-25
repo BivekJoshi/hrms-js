@@ -36,8 +36,6 @@ const Project = ({ permissions }) => {
     5
   );
 
-  const [nameFilter, setNameFilter] = useState('');
-  const [companyFilter, setCompanyFilter] = useState('');
   const [isContainerVisible, setIsContainerVisible] = useState(false);
   const [openAddModal, setOpenAddModal] = useState(false);
 
