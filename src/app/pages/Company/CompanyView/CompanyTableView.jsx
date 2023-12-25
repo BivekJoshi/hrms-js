@@ -5,6 +5,7 @@ import PermissionHoc from "../../../hoc/permissionHoc";
 import useAuth from "../../../../auth/hooks/component/login/useAuth";
 import CustomTable from "../../../components/CustomTable/CustomTable";
 import HocButton from "../../../hoc/hocButton";
+import { Chip, Tooltip, Typography } from "@mui/material";
 
 const CompanyTableView = ({
   permissions,
@@ -19,7 +20,7 @@ const CompanyTableView = ({
     {
       title: "SN",
       render: (rowData) => rowData.tableData.id + 1,
-      width: "5%",
+      width: "3%",
       sortable: false,
       sorting: false,
     },
@@ -27,38 +28,43 @@ const CompanyTableView = ({
       title: "Branch Name",
       field: "branchName",
       emptyValue: "-",
-      width: "10%",
+      width: "20vh",
       sorting: false,
     },
     {
       title: "Branch Address",
       field: "branchAddress",
       emptyValue: "-",
-      width: "10%",
+      width: "10vh",
       sorting: false,
     },
     {
       title: "Contact",
       field: "branchContact",
       emptyValue: "-",
-      width: "10%",
+      width: "10vh",
       sorting: false,
     },
     {
       title: "Description",
       field: "branchDescription",
-      render: (rowData) => (
-        <div
-          style={{
-            whiteSpace: "wrap",
-          }}
-        >
-          {rowData?.branchDescription}
-        </div>
-      ),
       emptyValue: "-",
-      width: 160,
-      sorting: false,
+      width: "10vh",
+      render: (rowData) => {
+        return (
+          <Tooltip
+            title={rowData?.branchDescription}
+            placement="top-start"
+            arrow
+          >
+            <Typography
+              style={{ overflow: "hidden", textOverflow: "ellipsis", width:"15rem" }}
+            >
+              {rowData?.branchDescription}
+            </Typography>
+          </Tooltip>
+        );
+      },
     },
   ];
 

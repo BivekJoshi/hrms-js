@@ -65,7 +65,7 @@ axiosInstance.interceptors.response.use(
         return Promise.reject(error);
       } else if (
         errorMessage ===
-        'Company delete error: could not execute batch; SQL [delete from associate_company where id=?]; constraint [fkgs9c8ufts6dmvhvg4ptxshl0s]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute batch'
+        'Branch delete error: could not execute batch; SQL [delete from branch where id=?]; constraint [fk_employee_branch_id]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute batch'
       ) {
         toast.error('Cannot delete company. Please contact admin.');
       } else if (errorMessage === 'access_denied_no_permission') {
