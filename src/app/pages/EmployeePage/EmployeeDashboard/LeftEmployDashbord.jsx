@@ -8,6 +8,7 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useGetHolidaybyMonth } from "../../../hooks/holiday/useHoliday";
 import { useNavigate } from "react-router-dom";
+import Sad from "../../../../assets/sad.png";
 
 export const LeftEmployDashbord = ({}) => {
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ export const LeftEmployDashbord = ({}) => {
   const calculateRemainingDays = (eventDate) => {
     if (!eventDate) return "";
     const eventDateTime = new Date(eventDate).getTime();
-    const remainingTime =  eventDateTime - currentDate.getTime();
+    const remainingTime = eventDateTime - currentDate.getTime();
     const remainingDays = Math.ceil(remainingTime / (1000 * 3600 * 24));
     return remainingDays;
   };
@@ -50,8 +51,6 @@ export const LeftEmployDashbord = ({}) => {
     const eventDate = new Date(event.eventDate);
     return eventDate >= currentDate;
   });
-
-  console.log(upcomingEvents);
 
   const upcomingHolidays = currentHoliday?.filter((holiday) => {
     const holidayDate = new Date(holiday.holidayDate);
@@ -113,7 +112,7 @@ export const LeftEmployDashbord = ({}) => {
                     </Typography>
                   </Grid>
                   <Typography fontSize="12px">
-                    Remaining: {calculateRemainingDays(notify?.eventDate)}
+                    Remaining: {calculateRemainingDays(notify?.eventDate)}day
                   </Typography>
                   <Typography fontSize="12px">
                     Time: {TimeIn12Hour(notify?.eventTime)}
@@ -134,12 +133,21 @@ export const LeftEmployDashbord = ({}) => {
             ))
           ) : (
             <Grid
-              height="10rem"
+              padding="28px 16px"
               display="flex"
               justifyContent="center"
               alignItems="center"
+              flexDirection="column"
+              bgcolor="#ECFFE3"
+              gap={1}
             >
-              <Typography variant="h5" color={palette.primary.main}>No Event Found !</Typography>
+              <img src={Sad} alt="sad.png" />
+              <Typography variant="h5" >
+                OOPS!
+              </Typography>
+              <Typography variant="h6" >
+                No any Upcoming Events
+              </Typography>
             </Grid>
           )}
         </Grid>
@@ -204,7 +212,7 @@ export const LeftEmployDashbord = ({}) => {
                 </Grid>
 
                 <Typography fontSize="12px">
-                  Remaining: {calculateRemainingDays(notify?.holidayDate)}
+                  Remaining: {calculateRemainingDays(notify?.holidayDate)} day
                 </Typography>
               </Grid>
             </Grid>
