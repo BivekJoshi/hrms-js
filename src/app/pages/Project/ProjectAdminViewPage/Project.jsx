@@ -36,8 +36,6 @@ const Project = ({ permissions }) => {
     5
   );
 
-  const [nameFilter, setNameFilter] = useState('');
-  const [companyFilter, setCompanyFilter] = useState('');
   const [isContainerVisible, setIsContainerVisible] = useState(false);
   const [openAddModal, setOpenAddModal] = useState(false);
 
@@ -132,14 +130,14 @@ const Project = ({ permissions }) => {
         {projectDetail?.projectResList?.map((item, index) => (
           <ProjectCard
             item={item}
-            Id={item.id}
+            Id={item?.id}
             key={index}
-            ProjectName={item.projectName}
-            StartDate={item.startDate}
-            EndDate={item.endDate}
-            ProjectLeaderId={item.projectLeadName}
-            TaskStatus={item.taskStatus}
-            totalEmployee={item.totalEmployee}
+            ProjectName={item?.projectName}
+            StartDate={item?.startDate}
+            EndDate={item?.endDate}
+            ProjectLeaderId={item?.projectLeadName}
+            TaskStatus={item?.taskStatus}
+            totalEmployee={item?.totalEmployee}
           />
         ))}
       </Grid>

@@ -27,10 +27,9 @@ const EmployeeTableView = ({ employeeData, isLoading }) => {
     {
       title: "Position",
       render: (rowData) => {
-        const position = `${rowData?.position?.positionName || "-"} (${
-          rowData?.position?.positionLevel || "-"
-        })`;
-        return position ? position : "-";
+        const position = `${rowData?.positionName || "-"}`
+        // (${rowData?.position?.positionLevel || ""})`
+        return position ? position : "";
       },
       width: 340,
       sorting: false,

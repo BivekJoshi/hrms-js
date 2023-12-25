@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import { useGetEmployee } from "../../../../hooks/employee/useEmployee";
 import ThemeModeContext from "../../../../../theme/ThemeModeContext";
 
-const ProjectAssignTaskField = ({ onClose, data }) => {
+const ProjectEditTaskField = ({ onClose, data }) => {
   const { mode } = useContext(ThemeModeContext);
 
   const { formik } = useProjectAssignTaskForm({ data });
@@ -137,4 +137,4 @@ const ProjectAssignTaskField = ({ onClose, data }) => {
   );
 };
 
-export default ProjectAssignTaskField;
+export default ProjectEditTaskField;

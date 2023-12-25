@@ -5,8 +5,9 @@ import ProjectDetail from '../ProjectAdminViewPage/ProjectDetail';
 import ProjectTask from '../ProjectTask/ProjectTask';
 import { useParams } from 'react-router-dom';
 import { useGetProjectById } from '../../../hooks/project/useProject';
+import PermissionHoc from '../../../hoc/permissionHoc';
 
-export default function ProjectAddViewEmployeePage() {
+const ProjectAddViewEmployeePage = ({ permissions }) => {
   const [value, setValue] = React.useState('1');
   const { id } = useParams();
   const { data: ProjectDetails } = useGetProjectById(id);
@@ -36,9 +37,11 @@ export default function ProjectAddViewEmployeePage() {
           <ProjectDetail />
         </TabPanel>
         <TabPanel value='2'>
-          <ProjectTask />
+          <ProjectTask permissions={permissions} />
         </TabPanel>
       </TabContext>
     </Box>
   );
 }
+
+export default PermissionHoc(ProjectAddViewEmployeePage);

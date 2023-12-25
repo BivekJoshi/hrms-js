@@ -6,15 +6,17 @@ import {
 import SaveIcon from "@material-ui/icons/Save";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import { useState } from "react";
-import { EditProjectTaskModal } from "../ProjectModal/ProjectModal";
+import { AddProjectTaskModal, AssignProjectTaskModal, EditProjectTaskModal } from "../ProjectModal/ProjectModal";
 import { Box, Button, Chip, SwipeableDrawer } from "@mui/material";
 import ProjectTaskField from "../../../components/Form/Project/ProjectTask/ProjectTaskFields";
 import DeleteIcon from "@mui/icons-material/Delete";
 import DeleteConfirmationModal from "../../../components/Modal/DeleteConfirmationModal";
 import { useGetEmployee } from "../../../hooks/employee/useEmployee";
 import CustomTable from "../../../components/CustomTable/CustomTable";
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import HocButton from "../../../hoc/hocButton";
 
-const ProjectTask = () => {
+const ProjectTask = ({ permissions }) => {
   const {
     data: ProjectTask,
     isLoading,
@@ -25,7 +27,11 @@ const ProjectTask = () => {
   const [editedTask, setEditedTask] = useState({});
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [deletedTask, setDeletedTask] = useState({});
+  const handleCloseAddModal = () => setOpenAddModal(false);
   const { data: employeeData } = useGetEmployee();
+
+  const [openAddModal, setOpenAddModal] = useState(false);
+  const handleAddOpenModal = () => setOpenAddModal(true);
 
   const [tableData, setTableData] = useState(ProjectTask);
 
@@ -45,27 +51,20 @@ const ProjectTask = () => {
     setOpenDeleteModal(false);
   };
 
-  const toggleDrawer = (anchor, open) => (event) => {
-    if (
-      event?.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
-      return;
-    }
-    setState({ ...state, [anchor]: open });
-  };
+  const [openAssignModal, setOpenAssignModal] = useState(false);
+  const [assignData, setAssignData] = useState({});
 
   const [openEditModal, setOpenEditModal] = useState(false);
-  const [editedRowData, setEditedRowData] = useState({});
-
-  const handleEditRowData = (rowData) => {
-    setEditedRowData(rowData);
-    setOpenEditModal(true);
-  };
+  const [editData, setEditData] = useState({});
 
   const handleAssignTask = (rowData) => {
-    setState({ ...state, right: true });
-    setEditedTask(rowData);
+    setAssignData(rowData);
+    setOpenAssignModal(true);
+  };
+
+  const handleEditTask = (rowData) => {
+    setEditData(rowData);
+    setOpenEditModal(true);
   };
   const columns = [
     {
@@ -186,78 +185,91 @@ const ProjectTask = () => {
       //   },
       // },
       render: (rowData) => {
-        const employeeIds = rowData.projectEmployees.map(
-          (employee) => employee.empId
-        );
-        const matchedEmployees = employeeData.filter((employee) =>
-          employeeIds.includes(employee.id)
-        );
+        const projectEmployees = rowData?.projectEmployees || [];
+        const employeeIds = projectEmployees.map((employee) => employee.employeeId);
+      
+        const matchedEmployees = employeeData
+          ? employeeData.filter((employee) => employeeIds.includes(employee.id))
+          : [];
+      
         const matchedEmployeeNames = matchedEmployees.map(
-          (employee) =>
-            `${employee.firstName} ${employee.middleName} ${employee.lastName}`
+          (employee) => `${employee?.firstName} ${employee.middleName || ""} ${employee?.lastName}`
         );
+      
         return matchedEmployeeNames.join(", ");
       },
+    },
+  ].filter(Boolean);
+
+  const actions = [
+    {
+      icon: () => (
+        <HocButton
+          permissions={permissions.canAdd}
+          icon={<AssignmentIcon />}
+        />
+      ),
+      tooltip: "Assign task",
+      onClick: (event, rowData) => handleAssignTask(rowData),
+    },
+    {
+      icon: () => (
+        <HocButton permissions={permissions.canEdit} icon={<ModeEditOutlineIcon />} />
+      ),
+      tooltip: "Edit task",
+      onClick: (event, rowData) => handleEditTask(rowData),
+    },
+    {
+      icon: () => (
+        <HocButton permissions={permissions.canDelete} icon={<DeleteIcon />} />
+      ),
+      tooltip: "Delete task",
+      onClick: (event, rowData) => handleDeleteTask(rowData),
     },
   ];
 
   return (
     <>
-      <div>
-        {["right"].map((anchor) => (
-          <React.Fragment key={anchor}>
-            <Button onClick={toggleDrawer(anchor, true)} variant="contained">
-              Add Task
-            </Button>
-            <SwipeableDrawer
-              anchor={anchor}
-              open={state[anchor]}
-              onClose={toggleDrawer(anchor, false)}
-              onOpen={toggleDrawer(anchor, true)}
-            >
-              <Box
-                sx={{ width: 350, padding: 5 }}
-                role="presentation"
-                //   onClick={toggleDrawer(anchor, false)}
-                //   onKeyDown={toggleDrawer(anchor, false)}
-              >
-                <ProjectTaskField
-                  data={editedTask}
-                  onClose={() => setState({ right: false })}
-                />
-              </Box>
-            </SwipeableDrawer>
-          </React.Fragment>
-        ))}
-      </div>
-      <br />
+      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+        <HocButton
+          permissions={permissions}
+          color={"white"}
+          variant={"contained"}
+          onClick={handleAddOpenModal}
+          buttonName={"+ Add Task"}
+        />
+      </Box>
+      <br></br>
+
       <CustomTable
         columns={columns}
         data={tableData}
         title="Project Task"
         isLoading={isLoading}
-        actions={[
-          {
-            icon: () => <ModeEditOutlineIcon sx={{ color: "#01579b" }} />,
-            tooltip: "Edit Project TaskDetails",
-            onClick: (event, rowData) => handleEditRowData(rowData),
-          },
-          {
-            icon: () => <SaveIcon sx={{ color: "#01579b" }} />,
-            tooltip: "Save User",
-            onClick: (event, rowData) => handleAssignTask(rowData),
-          },
-          {
-            icon: () => <DeleteIcon sx={{ color: "#01579b" }} />,
-            tooltip: "Delete Task",
-            onClick: (event, rowData) => handleDeleteTask(rowData),
-          },
-        ]}
+        actions={actions}
       />
-      {openEditModal && (
+
+      {openAddModal && (
+        <AddProjectTaskModal
+          title={"Add Task"}
+          open={openAddModal}
+          handleCloseModal={handleCloseAddModal}
+        />
+      )}
+      {openAssignModal && (
+        <AssignProjectTaskModal
+          title={"Edit Task"}
+          id={assignData?.id}
+          data={assignData}
+          open={openAssignModal}
+          handleCloseModal={() => setOpenAssignModal(false)}
+        />
+      )}
+       {openEditModal && (
         <EditProjectTaskModal
-          id={editedRowData?.id}
-          data={editedRowData}
+          title={"Edit Task"}
+          id={assignData?.id}
+          data={editData}
           open={openEditModal}
           handleCloseModal={() => setOpenEditModal(false)}
         />
@@ -270,6 +282,8 @@ const ProjectTask = () => {
           message={"Task"}
         />
       )}
+
+    
     </>
   );
 };
