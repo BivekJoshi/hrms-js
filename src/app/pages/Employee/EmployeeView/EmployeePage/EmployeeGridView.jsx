@@ -13,8 +13,8 @@ import EmployeeCard from "../../../../components/cards/Employee/EmployeeCard";
 import { useGetEmployeeData } from "../../../../hooks/employee/useEmployee";
 
 const EmployeeGridView = () => {
-  const [pageNumber, setpageNumber] = useState(0);
-  const { data: employeeData, isLoading } = useGetEmployeeData(pageNumber, 10);
+  const [pageNumber, setpageNumber] = useState(1);
+  const { data: employeeData, isLoading } = useGetEmployeeData(1, 10);
 
   const handlePageChange = (event, newPage) => {
     setpageNumber(newPage - 1);

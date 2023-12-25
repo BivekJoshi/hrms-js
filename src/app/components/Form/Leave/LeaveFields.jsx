@@ -31,34 +31,9 @@ const leaveStatus = [
 export const EditLeaveFields = ({ onClose, isLoading, data }) => {
   const { isManager, isSuperAdmin } = useAuth();
  
-  // const { data: employeeData } = useGetEmployee();
-  // const { data: leaveTypeData } = useGetLeaveType();
   const { formik } = useLeaveForm(data);
   const { mode } = useContext(ThemeModeContext);
-  // const employeeId = data?.employeeId;
-
-  // const capitalize = (str) => {
-  //   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
-  // };
-
-  // const getLeaveTypeName = (leaveTypeId) => {
-  //   const leaveType = leaveTypeData?.find((type) => type.id === leaveTypeId);
-  //   return leaveType ? leaveType.leaveName : '';
-  // };
-
-  // const getEmployeeFullName = () => {
-  //   const employee = employeeData?.find((emp) => emp.id === employeeId);
-  //   if (employee) {
-  //     const { firstName, middleName, lastName } = employee;
-  //     return (
-  //       <Box sx={{ bgcolor: mode === 'light' ? '' : '#413e3e' }}>
-  //         {firstName || ''} {middleName || ''} {lastName || ''}
-  //       </Box>
-  //     );
-  //   }
-  //   return '';
-  // };
-
+  
   const handleFormSubmit = () => {
     formik.handleSubmit();
     onClose();
@@ -70,8 +45,9 @@ export const EditLeaveFields = ({ onClose, isLoading, data }) => {
     //   onClose();
     // }
   };
-
+// console.log(formik);
   const submitButtonText = data ? 'Update Leave' : 'Add Leave';
+
   if (isManager || isSuperAdmin) {
     return (
       !isLoading && (

@@ -82,7 +82,6 @@ console.log("deactivateEmployee", deactivateEmployee)
         isLoading={isLoading}
         actions={actions}
       />
-
       {openDeactivatedModal && (
         <EditActivationEmployeeModal 
         title={"Employee Activation"}

@@ -1,21 +1,28 @@
-import { Box, ClickAwayListener, Divider, Grow, MenuItem } from "@mui/material";
+import {
+  Box,
+  ClickAwayListener,
+  Divider,
+  Grid,
+  Grow,
+  MenuItem,
+} from "@mui/material";
 import { MenuList, Paper, Popper, Typography } from "@mui/material";
-import React from "react";
+import React, { useContext } from "react";
 import { useGetEmployee } from "../../../hooks/employee/useEmployee";
 import { Link } from "react-router-dom";
 import DoneIcon from "@mui/icons-material/Done";
 import CloseIcon from "@mui/icons-material/Close";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import LocationOnIcon from '@mui/icons-material/LocationOn';
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import ThemeModeContext from "../../../../theme/ThemeModeContext";
 
 export const EventNotification = ({
-  Eventname,
   data,
   open,
   handleClose,
   handleListKeyDown,
 }) => {
-  console.log(data,"data ma ");
+  const { mode, palette } = useContext(ThemeModeContext);
   return (
     <>
       <MenuList
@@ -28,7 +35,7 @@ export const EventNotification = ({
           padding: "1rem 1rem",
         }}
       >
-        <Typography variant="h5" sx={{ color: "#6DAB23" }}>
+        <Typography variant="h6" sx={{ color: "#6DAB23" }}>
           Today's Event
         </Typography>
 
@@ -56,27 +63,24 @@ export const EventNotification = ({
                       borderRadius: "6px",
                     }}
                   >
-                    <div
+                    <Typography
                       style={{
-                        backgroundColor: "rgb(215, 64, 52)",
-                        padding: ".1rem 1rem",
+                        backgroundColor: palette.primary.main,
+                        padding: "1px 8px",
                         color: "#fff",
-                        fontWeight: "bold",
                         borderRadius: "6px 6px 0 0",
                       }}
+                      fontSize="11px"
                     >
                       Dec
-                    </div>
-                    <div
-                      style={{
-                        backgroundColor: "#fff",
-                        padding: ".1rem .8rem",
-                        fontWeight: "bold",
-                        borderRadius: "6px",
-                      }}
+                    </Typography>
+                    <Typography
+                      fontSize="11px"
+                      textAlign="center"
+                      bgcolor={mode === "light" ? "#fff" : ""}
                     >
-                      <Typography variant="h5">25</Typography>
-                    </div>
+                      25
+                    </Typography>
                   </div>
                   <div>
                     <div
@@ -89,12 +93,12 @@ export const EventNotification = ({
                       <div
                         style={{
                           backgroundColor: "red",
-                          width: "8px",
-                          height: "8px",
+                          width: "10px",
+                          height: "10px",
                           borderRadius: "50%",
                         }}
                       ></div>
-                      <Typography variant="h7" sx={{ fontWeight: 600 }}>
+                      <Typography sx={{ fontWeight: 600, fontSize: "13px" }}>
                         {ename?.eventName}
                       </Typography>
                     </div>
@@ -105,8 +109,10 @@ export const EventNotification = ({
                         gap: "1rem",
                       }}
                     >
-                      <AccessTimeIcon />
-                      <Typography variant="h7">
+                      <AccessTimeIcon
+                        style={{ width: "13px", height: "13px" }}
+                      />
+                      <Typography fontSize="13px">
                         {ename?.eventTime} - Onwards
                       </Typography>
                     </div>
@@ -114,13 +120,18 @@ export const EventNotification = ({
                   <div></div>
                 </div>
                 <Divider sx={{ marginTop: ".5rem" }} />
-                <div style={{ maxWidth: "15rem" ,display:"flex",alignItems:'center'}}>
-                <LocationOnIcon/>
-                  <Typography variant="h7"><b>Location :</b>{ename?.eventLocation}</Typography>
-                </div>
-
-                <br />
-                <Typography variant="h7" sx={{ fontWeight: 500 }}>
+                <Grid
+                  display="flex"
+                  flexDirection="row"
+                  justifyContent="space-between"
+                  padding="5px"
+                >
+                  <LocationOnIcon fontSize="13px" />
+                  <Typography sx={{ maxWidth: "25rem", fontSize: "13px" }}>
+                    At {ename?.eventLocation}
+                  </Typography>
+                </Grid>
+                <Typography variant="h8" sx={{ fontWeight: 500 }}>
                   Are you attending?
                 </Typography>
                 <div
@@ -131,28 +142,26 @@ export const EventNotification = ({
                   }}
                 >
                   <Typography
-                    variant="h6"
                     sx={{
                       color: "green",
-                      fontWeight: 500,
                       display: "flex",
                       alignItems: "center",
                       gap: ".5rem",
                       cursor: "pointer",
+                      fontSize: "13px",
                     }}
                   >
                     <DoneIcon /> Yes
                   </Typography>
                   <Divider orientation="vertical" flexItem></Divider>
                   <Typography
-                    variant="h6"
                     sx={{
                       color: "red",
-                      fontWeight: 500,
                       display: "flex",
                       alignItems: "center",
                       gap: ".5rem",
                       cursor: "pointer",
+                      fontSize: "13px",
                     }}
                   >
                     <CloseIcon /> No
