@@ -32,7 +32,7 @@ const Notification = ({ data }) => {
     : "";
   const eventCount = isManager
     ? pendingLeaveData?.length + data?.eventCount || 0
-    : data?.eventCount || 0;
+    : data?.events?.length || 0;
   const displayCount = eventCount > 0 ? eventCount : null;
 
   const [open, setOpen] = useState(false);

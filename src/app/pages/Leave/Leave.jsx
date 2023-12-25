@@ -98,18 +98,18 @@ const Leave = ({ permissions }) => {
       title: "Status",
       field: "leaveStatus",
       emptyValue: "-",
-      // cellStyle: {
-      //   whiteSpace: "nowrap",
-      // },
+      cellStyle: {
+        whiteSpace: "nowrap",
+      },
       render: (rowData) => {
-        const status = rowData.leaveStatus.toLowerCase();
+        const status = rowData.leaveStatus;
         let chipColor = "";
 
-        if (status === "approved") {
+        if (status === "APPROVED") {
           chipColor = "green";
-        } else if (status === "rejected") {
+        } else if (status === "REJECTED") {
           chipColor = "red";
-        } else if (status === "pending") {
+        } else if (status === "PENDING") {
           chipColor = "orange";
         }
 
@@ -120,7 +120,6 @@ const Leave = ({ permissions }) => {
               backgroundColor: chipColor,
               color: "white",
               width: "6rem",
-              // textTransform:'capatalize'
             }}
           />
         );
@@ -141,14 +140,16 @@ const Leave = ({ permissions }) => {
             <Chip
               style={{
                 cursor: "pointer",
-                width: "240px",
-                // height: '40px',
                 display: "block",
                 background: mode === "light" ? "white" : "#434343",
               }}
               label={
                 <Typography
-                  style={{ overflow: "hidden", textOverflow: "ellipsis" }}
+                  style={{
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    width: "5rem",
+                  }}
                 >
                   {rowData?.leaveReason}
                 </Typography>
@@ -175,7 +176,11 @@ const Leave = ({ permissions }) => {
               }}
               label={
                 <Typography
-                  style={{ overflow: "hidden", textOverflow: "ellipsis" }}
+                  style={{
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    width: "5rem",
+                  }}
                 >
                   {rowData?.leaveRemarks}
                 </Typography>
@@ -189,41 +194,9 @@ const Leave = ({ permissions }) => {
     {
       title: "Approved By",
       width: "80px",
-      title: "Approved By",
-      width: "80px",
       sorting: false,
       field: "approvedBy",
-      field: "approvedBy",
     },
-    // {
-    //   title: "Actions",
-    //   width: "10px",
-    //   render: (rowData) => {
-    //     const isApprovedOrRejected = ["APPROVED", "REJECTED"].includes(
-    //       rowData.leaveStatus
-    //     );
-
-    //     return (
-    //       <Stack direction="row" spacing={0}>
-    //         <Button
-    //           color="primary"
-    //           onClick={() => handleEditLeave(rowData)}
-    //           disabled={isApprovedOrRejected}
-    //         >
-    //           <ModeEditOutlineIcon />
-    //         </Button>
-    //         <Button
-    //           color="primary"
-    //           onClick={() => handleDeleteLeave(rowData)}
-    //           disabled={isApprovedOrRejected}
-    //         >
-    //           <DeleteIcon />
-    //         </Button>
-    //       </Stack>
-    //     );
-    //   },
-    //   sorting: false,
-    // },
   ].filter(Boolean);
 
   const actions = [
@@ -241,7 +214,7 @@ const Leave = ({ permissions }) => {
   // if (isLoading || loadingemployee || loadingleaveType) return <>Loading</>;
 
   return (
-    <>
+    <Grid>
       <Box
         sx={{
           display: "flex",
@@ -304,7 +277,7 @@ const Leave = ({ permissions }) => {
           message={"Leave"}
         />
       )}
-    </>
+    </Grid>
   );
 };
 

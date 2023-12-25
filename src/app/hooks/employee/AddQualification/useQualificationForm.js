@@ -39,7 +39,7 @@ const useQualificationForm = () => {
               },
             ],
     },
-    enableReinitialize: 'true',
+    enableReinitialize: true,
     validationSchema: QualificationSchema,
     onSubmit: (values) => {
       if (values.education.some((edu) => !edu.id)) {

@@ -35,13 +35,11 @@
 
 .notification {
   margin-bottom: 1rem;
-  border: 1px solid white;
   text-align: center;
   border-radius: 0.5rem;
   padding: 0.5rem;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   padding: 16px;
 }
 

@@ -1,123 +1,104 @@
-import { Box } from '@mui/system';
-import React, { useContext } from 'react';
-import '../../Style/Style.css';
-import { ButtonComponent } from '../../../components/Button/ButtonComponent';
-import { Divider, Typography } from '@mui/material';
-import ThemeModeContext from '../../../../theme/ThemeModeContext';
-import { useNavigate } from 'react-router-dom';
-import { useGetLoggedInUserLeaveBalance } from '../../../hooks/leave/useLeave';
-import { uselogInEemployeeResource } from '../../../hooks/resource/employeeResource/useEmployeeResource';
-import { useGetOfficeResource } from '../../../hooks/resource/officeResource/useOfficeResource';
-import { PendingTask } from '../Component/PendingTask';
+import { Box } from "@mui/system";
+import React, { useContext } from "react";
+import "../../Style/Style.css";
+import { ButtonComponent } from "../../../components/Button/ButtonComponent";
+import { Divider, Grid, Typography } from "@mui/material";
+import ThemeModeContext from "../../../../theme/ThemeModeContext";
+import { useNavigate } from "react-router-dom";
+import { useGetLoggedInUserLeaveBalance } from "../../../hooks/leave/useLeave";
+import { uselogInEemployeeResource } from "../../../hooks/resource/employeeResource/useEmployeeResource";
+import { useGetOfficeResource } from "../../../hooks/resource/officeResource/useOfficeResource";
+import { PendingTask } from "../Component/PendingTask";
+import ToDoList from "../Component/ToDoList";
 
 export const RightEmployDashbord = ({ employData }) => {
   const navigate = useNavigate();
   const { data: leavebalance } = useGetLoggedInUserLeaveBalance();
-  // const { data: resourceLogInUser } = uselogInEemployeeResource(
-  //   employData?.employeeId
-  // );
-  const { data: officeresource } = useGetOfficeResource();
-
-  const getResourceName = (logistic) => {
-    const resourceName = officeresource?.find(
-      (resource) => resource?.id === logistic
-    );
-    return resourceName?.name;
-  };
 
   const sumOfLeaveTaken = Array.isArray(leavebalance)
     ? leavebalance?.reduce((accumulator, currentValue) => {
         return accumulator + currentValue?.leaveTaken;
       }, 0)
-    : '';
+    : "";
 
   const sumOfLeaveBalance = Array.isArray(leavebalance)
     ? leavebalance.reduce((accumulator, currentValue) => {
         return accumulator + currentValue.leaveBalance;
       }, 0)
-    : '';
-  const avegLeaveBalance = Array.isArray(leavebalance)
-    ? sumOfLeaveBalance / leavebalance.length
-    : '';
+    : "";
+ console.log(leavebalance);
 
   const { mode } = useContext(ThemeModeContext);
   return (
     <Box>
-      {/* <Box className="taskTable">
-        <Typography variant="h6">Pending Task</Typography>
-        <Box margin="1rem 0">
-          <PendingTask />
-        </Box>
-      </Box> */}
       <Box>
-        <Typography variant='h5'>Your Leaves</Typography>
+        <Typography variant="h5">Your Leaves</Typography>
         <Box
           className={
-            mode === 'light'
-              ? 'employeeDeshbordBG employeeDeshbord'
-              : 'employeeDeshbordBGDark employeeDeshbord'
+            mode === "light"
+              ? " employeeDeshbord"
+              : "employeeDeshbordBGDark employeeDeshbord"
           }
-          display='flex'
-          marginTop='1rem'
-          flexDirection='column'
-          justifyContent='center'
-          padding=' 1rem'
-          boxShadow='7'
-          borderRadius='10px'
+          display="flex"
+          marginTop="1rem"
+          flexDirection="column"
+          justifyContent="center"
+          padding={{sm:" 1rem " ,md:"0", lg:"1rem"}}
+          flexWrap="wrap"
+          borderRadius="10px"
         >
           <Box
-            display='flex'
-            flexDirection='row'
-            justifyContent='space-between'
+            display="flex"
+            flexDirection="row"
+            justifyContent="space-between"
+            alignItems="center"
+            gap={1}
           >
-            <Box>
-              <Typography>{sumOfLeaveTaken}</Typography>LEAVE TAKEN
-            </Box>
-            <Divider sx={{ border: '1px solid black' }} />
-            <Box alignSelf='center'>
-              <Typography>{avegLeaveBalance}</Typography> REMAINING
-            </Box>
+            <Card bgcolor={"#D6EBFF"} leaveName={"Annual Leaves"} />
+            <Card
+              bgcolor={"#FFDAD5"}
+              leaveName={"Leave Taken"}
+              leavetaken={sumOfLeaveTaken}
+            />
+            <Card
+              bgcolor={"#ECFFE3"}
+              leaveName={"Remaining"}
+              leavetaken={sumOfLeaveBalance}
+            />
           </Box>
-          <Box alignSelf='center' paddingTop='2rem'>
+          <Box alignSelf="center">
             <ButtonComponent
-              buttonName={'APPLY Leave'}
+              buttonName={"Apply Leave"}
               OnClick={() => {
-                navigate('/employee/applyleavefield');
+                navigate("/employee/applyleavefield");
               }}
             />
           </Box>
         </Box>
       </Box>
-      {/* {resourceLogInUser && (
-        <Box margin="1rem 0">
-          <Typography variant="h5" style={{ margin: "1rem 0" }}>Logistic Used</Typography>
-          <Box
-            className={
-              mode === "light"
-                ? "employeeDeshbordBG employeeDeshbord"
-                : "employeeDeshbordBGDark employeeDeshbord"
-            }
-            padding="1rem"
-            height="5rem"
-            maxHeight="10rem"
-            overflow="auto"
-            boxShadow="7"
-            borderRadius="10px"
-          >
-            {Array.isArray(resourceLogInUser)
-              ? resourceLogInUser.map((logistic) => (
-                  <Typography
-                    fontWeight="600"
-                    textAlign="center"
-                    key={logistic.id}
-                  >
-                    {getResourceName(logistic?.officeResourceId)}
-                  </Typography>
-                ))
-              : ""}
-          </Box>
-        </Box>
-      )} */}
+      <Grid>
+        <ToDoList/>
+      </Grid>
     </Box>
+  );
+};
+
+export const Card = ({ bgcolor, leaveName, leavetaken }) => {
+  return (
+    <Grid
+      bgcolor={bgcolor}
+      display="flex"
+      flexDirection="column"
+      justifyContent="center"
+      width="100%"
+      height="150px"
+    >
+      <Typography alignSelf="center" fontSize={{sm:"22px",md:"18px", lg:"22px"}}>
+        {bgcolor === "#D6EBFF" ? "3/12" : leavetaken + " Days"}
+      </Typography>
+      <Typography fontSize={{xs:"11px",sm:"14px", md:"12px", lg:"14px"}} alignSelf="center">
+        {leaveName}
+      </Typography>
+    </Grid>
   );
 };

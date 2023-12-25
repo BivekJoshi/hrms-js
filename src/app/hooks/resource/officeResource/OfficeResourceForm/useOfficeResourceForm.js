@@ -9,7 +9,7 @@ import { OfficeResourceSchema } from "./OfficeResourceSchema";
 const useOfficeResourceForm = (data) => {
   const { mutate: addOfficeResource } = useAddOfficeResource({});
   const { mutate: editOfficeResource } = useEditOfficeResource({});
-  const { mutate: editDeactivatedOfficeResource } = useEditActiveInactiveOfficeResource({});
+  // const { mutate: editDeactivatedOfficeResource } = useEditActiveInactiveOfficeResource({});
 
   const handleSubmit = (values) => {
     values = { ...values };
@@ -25,8 +25,9 @@ const useOfficeResourceForm = (data) => {
   };
 
   const handleEditAndDeactivate = (values) => {
+    console.log(values)
     editOfficeResource(values, formik);
-    editDeactivatedOfficeResource(values, formik); 
+    // editDeactivatedOfficeResource(values, formik); 
   };
 
   const formik = useFormik({

@@ -1,19 +1,47 @@
-import { Box, ClickAwayListener, Divider, Grow, MenuItem } from "@mui/material";
+import {
+  Box,
+  Button,
+  ClickAwayListener,
+  Divider,
+  Grid,
+  Grow,
+  MenuItem,
+} from "@mui/material";
 import { MenuList, Paper, Popper, Typography } from "@mui/material";
-import React from "react";
+import React, { useContext } from "react";
 import { useGetEmployee } from "../../../hooks/employee/useEmployee";
 import { Link } from "react-router-dom";
 import DoneIcon from "@mui/icons-material/Done";
 import CloseIcon from "@mui/icons-material/Close";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import ThemeModeContext from "../../../../theme/ThemeModeContext";
+import useEventConfirmationForm from "../../../hooks/event/EventForm/useEventConfirmationForm";
 
 export const EventNotification = ({
-  Eventname,
   data,
   open,
   handleClose,
   handleListKeyDown,
 }) => {
+  const { mode, palette } = useContext(ThemeModeContext);
+
+  const { formik } = useEventConfirmationForm(data);
+
+  const handleButton = (response, eventId, notificationId) => {
+    formik.setFieldValue("status", response);
+    formik.setFieldValue("eventId", eventId);
+    formik.setFieldValue("notificationId", notificationId);
+    formik.handleSubmit();
+  };
+
+  const getUpcomingDay = (eventDate) => {
+    const eventDateObject = new Date(eventDate);
+    const month = eventDateObject.toLocaleString("default", { month: "short" });
+    const day = eventDateObject.getDate();
+    return { day, month };
+  };
+
   return (
     <>
       <MenuList
@@ -24,98 +52,76 @@ export const EventNotification = ({
         sx={{
           textAlign: "center",
           padding: "1rem 1rem",
+          maxHeight:"25rem",
+          overflowY:"scroll"
         }}
       >
-        {/* <Typography variant='h7' color='primary' fontWeight={400}>
-          {Eventname}
-        </Typography>
-        {data &&
-          data.map((ename, index) => (
-            <MenuItem
-              key={index}
-              onClick={handleClose}
-              sx={{
-                display: 'flex',
-                gap: '1rem',
-                alignItems: 'center',
-              }}
-            >
-              <Typography variant='h7'>{ename?.eventName}</Typography>
-              <Box
-                sx={{
-                  display: 'flex',
-                  flexDirection: 'start',
-                  color: 'gray',
-                }}
-              >
-                <Typography>{ename?.eventTime}</Typography> &nbsp;
-                <Typography>{ename?.eventLocation}</Typography>
-              </Box>
-            </MenuItem>
-          ))} */}
-        <Typography variant="h5" sx={{ color: "#6DAB23" }}>
-          Today's Event
+        <Typography variant="h6" sx={{ color: "#6DAB23" }}>
+          Comming Event
         </Typography>
 
-        <Box
-          sx={{
-            backgroundColor: "#F7F8F9",
-            padding: ".8rem",
-            margin: ".5rem",
-            borderRadius: "6px",
-          }}
-        >
-          {data &&
-            data.map((ename, index) => (
-              <>
+        {data &&
+          data.map((ename, index) => (
+            <>
+            {ename.notificationId !== "1" && (
+              <Box
+                sx={{
+                  backgroundColor: "#F7F8F9",
+                  padding: ".8rem",
+                  margin: ".5rem",
+                  borderRadius: "6px",
+                }}
+              >
                 <div
-                  style={{ display: "flex", justifyContent: "space-between" }}
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    gap: "1rem",
+                  }}
                 >
                   <div
                     style={{
                       border: "1px solid #E0E0E0",
-                      borderRadius: "6px 6px 0 0",
+                      borderRadius: "6px",
                     }}
                   >
-                    <div
+                    <Typography
                       style={{
-                        backgroundColor: "rgb(215, 64, 52)",
-                        padding: ".2rem 1.4rem",
+                        backgroundColor: palette.primary.main,
+                        padding: "1px 8px",
                         color: "#fff",
-                        fontWeight: "bold",
                         borderRadius: "6px 6px 0 0",
                       }}
+                      fontSize="11px"
                     >
-                      Dec
-                    </div>
-                    <div
-                      style={{
-                        backgroundColor: "#fff",
-                        padding: ".2rem 1.4rem",
-                        fontWeight: "bold",
-                      }}
+                      {getUpcomingDay(ename?.eventDate).month}
+                    </Typography>
+                    <Typography
+                      fontSize="11px"
+                      textAlign="center"
+                      bgcolor={mode === "light" ? "#fff" : ""}
                     >
-                      <Typography variant="h5">25</Typography>
-                    </div>
+                      {getUpcomingDay(ename?.eventDate).day}
+                    </Typography>
                   </div>
                   <div>
                     <div
                       style={{
                         display: "flex",
                         alignItems: "center",
-                        gap: "1rem",
+                        gap: ".5rem",
                       }}
                     >
                       <div
                         style={{
                           backgroundColor: "red",
-                          width: "13px",
-                          height: "13px",
+                          width: "10px",
+                          height: "10px",
                           borderRadius: "50%",
                         }}
                       ></div>
-                      <Typography variant="h6" sx={{ fontWeight: 600 }}>
-                      {ename?.eventName}
+                      <Typography sx={{ fontWeight: 600, fontSize: "13px" }}>
+                        {ename?.eventName}
                       </Typography>
                     </div>
                     <div
@@ -125,18 +131,29 @@ export const EventNotification = ({
                         gap: "1rem",
                       }}
                     >
-                      <AccessTimeIcon />
-                      <Typography variant="h6">{ename?.eventTime} - Onwards</Typography>
+                      <AccessTimeIcon
+                        style={{ width: "13px", height: "13px" }}
+                      />
+                      <Typography fontSize="13px">
+                        {ename?.eventTime} - Onwards
+                      </Typography>
                     </div>
                   </div>
                   <div></div>
                 </div>
                 <Divider sx={{ marginTop: ".5rem" }} />
-                <Typography variant="h6" sx={{ maxWidth: "25rem" }}>
-                {ename?.eventLocation}
-                </Typography>
-                <br />
-                <Typography variant="h6" sx={{ fontWeight: 500 }}>
+                <Grid
+                  display="flex"
+                  flexDirection="row"
+                  justifyContent="space-between"
+                  padding="5px"
+                >
+                  <LocationOnIcon fontSize="13px" />
+                  <Typography sx={{ maxWidth: "14rem", fontSize: "13px" }}>
+                    <b>Location: </b>{ename?.eventLocation}
+                  </Typography>
+                </Grid>
+                <Typography variant="h8" sx={{ fontWeight: 500 }}>
                   Are you attending?
                 </Typography>
                 <div
@@ -146,37 +163,46 @@ export const EventNotification = ({
                     alignItems: "center",
                   }}
                 >
-                  <Typography
-                    variant="h5"
+                  <Button
                     sx={{
                       color: "green",
-                      fontWeight: 500,
-                      display: "flex",
-                      alignItems: "center",
-                      gap: ".5rem",
-                      cursor: "pointer",
+                      textTransform: "none",
+                      fontWeight: "bold",
                     }}
+                    startIcon={<DoneIcon />}
+                    onClick={() =>
+                      handleButton(
+                        "YES",
+                        ename?.eventId,
+                        ename?.notificationId
+                      )
+                    }
                   >
-                    <DoneIcon /> Yes
-                  </Typography>
+                    Yes
+                  </Button>
                   <Divider orientation="vertical" flexItem></Divider>
-                  <Typography
-                    variant="h5"
+                  <Button
                     sx={{
                       color: "red",
-                      fontWeight: 500,
-                      display: "flex",
-                      alignItems: "center",
-                      gap: ".5rem",
-                      cursor: "pointer",
+                      textTransform: "none",
+                      fontWeight: "bold",
                     }}
+                    startIcon={<CloseIcon />}
+                    onClick={() =>
+                      handleButton(
+                        "NO",
+                        ename?.eventId,
+                        ename?.notificationId
+                      )
+                    }
                   >
-                    <CloseIcon /> No
-                  </Typography>
+                    No
+                  </Button>
                 </div>
-              </>
-            ))}
-        </Box>
+              </Box>
+            )}
+            </>
+          ))}
       </MenuList>
     </>
   );

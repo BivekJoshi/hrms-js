@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-import { Box, Button, Stack } from "@mui/material";
+import { Box, Button, Grid, Stack } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 
@@ -131,8 +131,8 @@ const LeaveType = ({ permissions }) => {
 
   if (isLoading) return <>Loading</>;
   return (
-    <>
-      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+    <Grid>
+      <Box sx={{ display: "flex", justifyContent: "flex-end", paddingBottom:"1rem"}}>
         <HocButton
           permissions={permissions}
           color="white"
@@ -141,7 +141,6 @@ const LeaveType = ({ permissions }) => {
           buttonName={"+ Add Leave Type"}
         />
       </Box>
-      <br></br>
       <CustomTable
         columns={columns}
         data={leaveTypeData}
@@ -172,7 +171,7 @@ const LeaveType = ({ permissions }) => {
           message={"Leave Type"}
         />
       )}
-    </>
+    </Grid>
   );
 };
 
