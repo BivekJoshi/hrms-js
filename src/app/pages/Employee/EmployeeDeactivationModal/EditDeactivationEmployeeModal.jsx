@@ -31,6 +31,32 @@ export const EditDeactivationEmployeeModal = ({
   );
 };
 
+
+export const EditActivationEmployeeModal = ({
+  open,
+  handleCloseModal,
+  data,
+  title,
+}) => {
+  // const { data } = useGetEmployeeById(id);
+  return (
+    <div>
+      <FormModal
+        title={title}
+        open={open}
+        onClose={handleCloseModal}
+        formComponent={
+          <EditEmployeeActivateFields
+            onClose={handleCloseModal}
+            data={data}
+          />
+        }
+      />
+    </div>
+  );
+};
+
+
 export const EditActivationUserModal = ({ open, handleCloseModal, id }) => {
   return (
     <div>

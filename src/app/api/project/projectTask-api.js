@@ -55,7 +55,7 @@ export const addProjectCreateTask = async (formData) => {
 /*________________________UPDATE TASK_____________________________________*/
 
 export const editProjectCreateTask = async (formData, taskId) => {
-  const data = await axiosInstance.post(
+  const data = await axiosInstance.put(
     `/project-task/update/${taskId}`,
     formData
   );

@@ -14,7 +14,7 @@ const removeDeactiveEmployeeSchema = Yup.object().shape({
 
 export const useRemoveDeactiveEmployeeForm = (data, onClose) => {
   const { mutate } = useTerminateEmployee({});
-  console.log("datadhj", data)
+
   const formik = useFormik({
     initialValues: {
       employeeId: data?.id || "",

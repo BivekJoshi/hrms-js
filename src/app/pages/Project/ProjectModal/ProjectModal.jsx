@@ -7,14 +7,15 @@ import {
   EditProjectDeactivateFields,
   EditProjectActivateFields,
 } from "../../../components/Form/Project/EditProjectDeactivateFields";
-
+ 
 import {
   AddprojectEmployeeFields,
   EditProjectEmployeeFields,
 } from "../../../components/Form/Project/projectEmployee/AddProjectEmployeeFields";
 import { useGetProjectEmployeeById } from "../../../hooks/project/projectEmployee/useProjectEmployee";
 import ProjectAssignTaskField from "../../../components/Form/Project/ProjectTask/ProjectAssignTaskField";
-
+import ProjectTaskField from '../../../components/Form/Project/ProjectTask/ProjectTaskFields';
+ 
 export const AddProjectModal = ({ open, handleCloseModal, title }) => {
   return (
     <FormModal
@@ -25,7 +26,7 @@ export const AddProjectModal = ({ open, handleCloseModal, title }) => {
     />
   );
 };
-
+ 
 export const EditProjectModal = ({ open, handleCloseModal, data, title }) => {
   // const { data } = useGetProjectById(id);
   return (
@@ -41,7 +42,7 @@ export const EditProjectModal = ({ open, handleCloseModal, data, title }) => {
     </div>
   );
 };
-
+ 
 export const AddProjectActiveModal = ({ open, handleCloseModal, id }) => {
   return (
     <FormModal
@@ -53,7 +54,7 @@ export const AddProjectActiveModal = ({ open, handleCloseModal, id }) => {
     />
   );
 };
-
+ 
 export const DeactivateProjectModal = ({
   open,
   handleCloseModal,
@@ -74,9 +75,9 @@ export const DeactivateProjectModal = ({
     </div>
   );
 };
-
+ 
 /*____________________________________________Project Employee Modal_________________________________________________________________*/
-
+ 
 export const AddProjectEmployeeModal = ({
   open,
   handleCloseAddModal,
@@ -91,7 +92,7 @@ export const AddProjectEmployeeModal = ({
     />
   );
 };
-
+ 
 export const EditProjectEmployeeModal = ({
   open,
   handleCloseEditModal,
@@ -115,9 +116,65 @@ export const EditProjectEmployeeModal = ({
     </div>
   );
 };
-
+ 
+ 
+// Open of Project Task Modal  add edit assign task to employee
+ 
+/*____________________________________________Project Employee Task  Modal_________________________________________________________________*/
+export const AddProjectTaskModal = ({
+  open,
+  handleCloseModal,
+  id,
+  data,
+  title,
+}) => {
+  return (
+    <div>
+      <FormModal
+        title={title}
+        open={open}
+        onClose={handleCloseModal}
+        formComponent={
+          <ProjectTaskField
+            onClose={handleCloseModal}
+            id={id}
+            data={data}
+          />
+        }
+      />
+    </div>
+  );
+};
+ 
 /*____________________________________________Project Employee Task  Modal_________________________________________________________________*/
 export const EditProjectTaskModal = ({
+  open,
+  handleCloseModal,
+  id,
+  data,
+  title,
+}) => {
+ 
+  return (
+    <div>
+      <FormModal
+        title={title}
+        open={open}
+        onClose={handleCloseModal}
+        formComponent={
+          <ProjectTaskField
+            onClose={handleCloseModal}
+            id={id}
+            data={data}
+          />
+        }
+      />
+    </div>
+  );
+};
+ 
+/*____________________________________________Project Employee Task  Modal_________________________________________________________________*/
+export const AssignProjectTaskModal = ({
   open,
   handleCloseModal,
   id,
@@ -141,3 +198,4 @@ export const EditProjectTaskModal = ({
     </div>
   );
 };
+ 

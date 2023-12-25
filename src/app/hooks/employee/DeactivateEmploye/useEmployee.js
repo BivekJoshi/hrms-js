@@ -75,7 +75,7 @@ export const useTerminateEmployee = ({ onSuccess }) => {
       onSuccess: (data, variables, context) => {
         toast.success('Successfully removed Employee');
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries('getDeactivateEmployee');
+        queryClient.invalidateQueries('getEmployeeData');
       },
       onError: (err, _variables, _context) => {
         toast.error(`Error: ${err.message}`);
