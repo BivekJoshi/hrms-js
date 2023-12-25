@@ -1,7 +1,6 @@
-import { Box } from "@mui/system";
 import React, { useContext, useState } from "react";
 import "../../Style/Style.css";
-import { Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
 import { useGetEventByMonth } from "../../../hooks/event/useEvent";
 import { ButtonComponent } from "../../../components/Button/ButtonComponent";
@@ -12,8 +11,7 @@ import { useNavigate } from "react-router-dom";
 
 export const LeftEmployDashbord = ({}) => {
   const navigate = useNavigate();
-  const { mode } = useContext(ThemeModeContext);
-
+  const { mode, palette } = useContext(ThemeModeContext);
   const monthAd = new Date().toLocaleString("en-US", { month: "2-digit" });
 
   const { data: employAllNotiData } = useGetEventByMonth(monthAd);
@@ -28,117 +26,200 @@ export const LeftEmployDashbord = ({}) => {
   const toggleDropdownHoliday = (index) => {
     setOpenHolidayIndex((prevIndex) => (prevIndex === index ? -1 : index));
   };
+  const currentDate = new Date();
+
+  const calculateRemainingDays = (eventDate) => {
+    if (!eventDate) return "";
+    const eventDateTime = new Date(eventDate).getTime();
+    const remainingTime = currentDate.getTime() - eventDateTime;
+    const remainingDays = Math.ceil(remainingTime / (1000 * 3600 * 24));
+    return remainingDays;
+  };
+
+  const TimeIn12Hour = (eventTime) => {
+    if (!eventTime) return "";
+    const [hours, minutes] = eventTime.split(":");
+    const isPM = parseInt(hours) >= 12;
+    const hours12 = parseInt(hours) % 12 || 12;
+
+    const formattedTime = `${hours12}:${minutes} ${isPM ? "PM" : "AM"}`;
+    return formattedTime;
+  };
 
   return (
-    <Box className="employeeDeshbord">
-      <Box>
-        <Typography variant="h5" style={{ marginBottom: "1rem" }}>Event & Holiday</Typography>
-        <Box
-          className={
-            mode === "light"
-              ? " employeeDeshbord"
-              : "employeeDeshbordBGDark employeeDeshbord"
-          }
-          boxShadow="7"
-          padding=".5rem"
-          borderRadius="10px"
-        >
-          <Box className="employeeDeshbord" padding="1rem 2rem 0">
-            <Typography variant="h6">Event this month </Typography>
-
-            <Box display="grid" gap="1rem">
-              {employAllNotiData && employAllNotiData?.slice(0, 3).map((notify, index) => (
-                <Box key={index}>
-                  <Box
-                    onClick={() => toggleDropdown(index)}
+    <Grid className="employeeDeshbord">
+      <Grid className="employeeDeshbord">
+        <Typography variant="h5">Upcoming Events </Typography>
+        <Grid display="grid" gap="1rem">
+          {employAllNotiData &&
+            employAllNotiData?.slice(0, 3).map((notify, index) => (
+              <Grid key={index}>
+                <Grid
+                  onClick={() => toggleDropdown(index)}
+                  display="flex"
+                  flexDirection="row"
+                  justifyContent="space-between"
+                  borderRadius="8px"
+                  padding=".5em 1rem"
+                  alignItems="center"
+                  bgcolor={palette.background.event}
+                  boxShadow={2}
+                >
+                  <Grid
                     display="flex"
                     flexDirection="row"
-                    justifyContent="space-between"
-                    border="1px solid #d0d0d5"
-                    borderRadius=".5rem"
-                    padding="0 1rem"
                     alignItems="center"
+                    gap={2}
+                  >
+                    <div
+                      style={{
+                        border: "1px solid #E0E0E0",
+                        borderRadius: "6px 6px 0 0",
+                      }}
+                    >
+                      <Typography
+                        style={{
+                          backgroundColor: palette.primary.main,
+                          padding: "1px 8px",
+                          color: "#fff",
+                          borderRadius: "6px 6px 0 0",
+                        }}
+                        fontSize="11px"
+                      >
+                        Dec
+                      </Typography>
+                      <Typography
+                        fontSize="11px"
+                        textAlign="center"
+                        bgcolor={mode === "light" ? "#fff" : ""}
+                      >
+                        25
+                      </Typography>
+                    </div>
+                    <Typography fontWeight={600} fontSize="14px">
+                      {notify?.eventName}
+                    </Typography>
+                  </Grid>
+                  <Typography fontSize="12px">
+                    Remaining: {calculateRemainingDays(notify?.eventDate)}
+                  </Typography>
+                  <Typography fontSize="12px">
+                    Time: {TimeIn12Hour(notify?.eventTime)}
+                  </Typography>
+                  {/* <Typography>Date: {formatDate(notify?.eventDate)}</Typography> */}
+                  {/* <Grid>
+                    {openItemIndex === index ? (
+                      <KeyboardArrowUpIcon />
+                    ) : (
+                      <KeyboardArrowDownIcon />
+                    )}
+                  </Grid> */}
+                </Grid>
+                {openItemIndex === index && (
+                  <Grid
+                    className="notification"
+                    bgcolor={mode === "light" ? "#ECFFE3" : "#313131"}
                     boxShadow={2}
                   >
-                    {notify?.eventName}
-                    <Box>
-                      {openItemIndex === index ? (
-                        <KeyboardArrowUpIcon />
-                      ) : (
-                        <KeyboardArrowDownIcon />
-                      )}
-                    </Box>
-                  </Box>
-                  {openItemIndex === index && (
-                    <Box
-                      className="notification"
-                      bgcolor={mode === "light" ? "#e1dfdf" : "#313131"}
-                    >
-                      <Typography>At {notify?.eventLocation}</Typography>
-                      <Typography>Time: {notify?.eventTime}</Typography>
-                      <Typography>{notify?.eventName}</Typography>
-                    </Box>
-                  )}
-                </Box>
-              ))}
-            </Box>
-            <Box textAlign="center">
-              <ButtonComponent
-                OnClick={() => {
-                  navigate("/employee/event");
-                }}
-                buttonName={"Click here to see all event"}
-              />
-            </Box>
-          </Box>
-          <Box className="employeeDeshbord" padding="1rem 2rem 1rem">
-            <Typography variant="h6">Holiday this month</Typography>
+                    <Typography>
+                      At {notify?.eventName}: {notify?.eventDescription}
+                    </Typography>
+                  </Grid>
+                )}
+              </Grid>
+            ))}
+        </Grid>
+        <Grid textAlign="center">
+          <ButtonComponent
+            OnClick={() => {
+              navigate("/employee/event");
+            }}
+            buttonName={"Click here to see all event"}
+          />
+        </Grid>
+      </Grid>
+      <Grid className="employeeDeshbord">
+        <Typography variant="h5">Upcoming Holidays</Typography>
 
-            <Box display="grid" gap="1rem">
-              {currentHoliday?.slice(0, 3).map((notify, index) => (
-                <Box key={index}>
-                  <Box
-                    onClick={() => toggleDropdownHoliday(index)}
-                    display="flex"
-                    flexDirection="row"
-                    justifyContent="space-between"
-                    border="1px solid #d0d0d5"
-                    borderRadius=".5rem"
-                    padding="0 1rem"
-                    alignItems="center"
-                    boxShadow={2}
+        <Grid display="grid" gap="1rem">
+          {currentHoliday?.slice(0, 3).map((notify, index) => (
+            <Grid key={index}>
+              <Grid
+                onClick={() => toggleDropdownHoliday(index)}
+                display="flex"
+                flexDirection="row"
+                justifyContent="space-between"
+                borderRadius=".5rem"
+                alignItems="center"
+                boxShadow={2}
+                padding=".5em 1rem"
+                bgcolor={palette.background.holiday}
+              >
+                <Grid
+                  display="flex"
+                  flexDirection="row"
+                  alignItems="center"
+                  gap={2}
+                >
+                  <div
+                    style={{
+                      border: "1px solid #E0E0E0",
+                      borderRadius: "6px 6px 0 0",
+                    }}
                   >
-                    {notify?.holidayName} : {notify?.holidayDate}
-                    <Box>
-                      {openHolidayIndex === index ? (
-                        <KeyboardArrowUpIcon />
-                      ) : (
-                        <KeyboardArrowDownIcon />
-                      )}
-                    </Box>
-                  </Box>
-                  {openHolidayIndex === index && (
-                    <Box
-                      className="notification"
-                      bgcolor={mode === "light" ? "#e7e2e2" : "#565454"}
+                    <Typography
+                      style={{
+                        backgroundColor: palette.primary.holiday,
+                        padding: "1px 8px",
+                        color: "#fff",
+                        borderRadius: "6px 6px 0 0",
+                      }}
+                      fontSize="11px"
                     >
-                      <Typography>{notify?.holidayDescription}</Typography>
-                    </Box>
+                      Dec
+                    </Typography>
+                    <Typography
+                      fontSize="11px"
+                      textAlign="center"
+                      bgcolor={mode === "light" ? "#fff" : ""}
+                    >
+                      25
+                    </Typography>
+                  </div>
+                  {notify?.holidayName}
+                </Grid>
+
+                <Typography fontSize="12px">
+                  Remaining: {calculateRemainingDays(notify?.holidayDate)}
+                </Typography>
+                {/* <Grid>
+                  {openHolidayIndex === index ? (
+                    <KeyboardArrowUpIcon />
+                  ) : (
+                    <KeyboardArrowDownIcon />
                   )}
-                </Box>
-              ))}
-            </Box>
-            <Box textAlign="center">
-              <ButtonComponent
-                OnClick={() => {
-                  navigate("/employee/holiday");
-                }}
-                buttonName={"Click here to see All Holiday"}
-              />
-            </Box>
-          </Box>
-        </Box>
-      </Box>
-    </Box>
+                </Grid> */}
+              </Grid>
+              {/* {openHolidayIndex === index && (
+                <Grid
+                  className="notification"
+                  bgcolor={mode === "light" ? "#e7e2e2" : "#565454"}
+                >
+                  <Typography>{notify?.holidayDescription}</Typography>
+                </Grid>
+              )} */}
+            </Grid>
+          ))}
+        </Grid>
+        <Grid textAlign="center">
+          <ButtonComponent
+            OnClick={() => {
+              navigate("/employee/holiday");
+            }}
+            buttonName={"Click here to see All Holiday"}
+          />
+        </Grid>
+      </Grid>
+    </Grid>
   );
 };
