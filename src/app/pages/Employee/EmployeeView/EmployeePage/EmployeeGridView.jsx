@@ -65,6 +65,8 @@ const EmployeeGridView = () => {
           count={employeeData?.totalPages}
           // page={employeeData}
           onChange={handlePageChange}
+          showFirstButton
+          showLastButton
           boundaryCount={3}
           size="large"
           color="primary"
