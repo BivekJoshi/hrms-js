@@ -58,6 +58,16 @@ export const LeftEmployDashbord = ({}) => {
     return holidayDate >= currentDate;
   });
 
+  // only day and month
+  const getUpcomingDay = (eventDate) => {
+    const eventDateObject = new Date(eventDate);
+    const month = eventDateObject.toLocaleString("default", { month: "short" });
+    const day = eventDateObject.getDate();
+    console.log(month);
+    console.log(day);
+    return { day, month };
+  };
+
   return (
     <Grid className="employeeDeshbord">
       <Grid className="employeeDeshbord">
@@ -98,14 +108,14 @@ export const LeftEmployDashbord = ({}) => {
                         }}
                         fontSize="11px"
                       >
-                        Dec
+                        {getUpcomingDay(notify?.eventDate).month}
                       </Typography>
                       <Typography
                         fontSize="11px"
                         textAlign="center"
                         bgcolor={mode === "light" ? "#fff" : ""}
                       >
-                        25
+                        {getUpcomingDay(notify?.eventDate).day}
                       </Typography>
                     </div>
                     <Typography fontWeight={600} fontSize="14px">
@@ -161,7 +171,7 @@ export const LeftEmployDashbord = ({}) => {
         <Typography variant="h5">Upcoming Holidays</Typography>
 
         <Grid display="grid" gap="1rem">
-          {upcomingHolidays?.length > 0? (
+          {upcomingHolidays?.length > 0 ? (
             upcomingHolidays?.slice(0, 3).map((notify, index) => (
               <Grid key={index}>
                 <Grid
@@ -196,14 +206,14 @@ export const LeftEmployDashbord = ({}) => {
                         }}
                         fontSize="11px"
                       >
-                        Dec
+                        {getUpcomingDay(notify?.holidayDate).month}
                       </Typography>
                       <Typography
                         fontSize="11px"
                         textAlign="center"
                         bgcolor={mode === "light" ? "#fff" : ""}
                       >
-                        25
+                         {getUpcomingDay(notify?.holidayDate).day}
                       </Typography>
                     </div>
                     {notify?.holidayName}

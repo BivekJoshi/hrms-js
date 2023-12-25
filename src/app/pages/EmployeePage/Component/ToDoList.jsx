@@ -3,12 +3,20 @@ import React, { useContext } from "react";
 import { useGetTodoList } from "../../../hooks/todoList/useTodoList";
 import { ButtonComponent } from "../../../components/Button/ButtonComponent";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
-import Todo from "../../../../assets/todo.png"
+import Todo from "../../../../assets/todo.png";
 
 const ToDoList = () => {
   const { data: todoListData, isLoading } = useGetTodoList();
   const { mode, palette } = useContext(ThemeModeContext);
-  console.log(todoListData);
+  
+  // only day and month
+  const getUpcomingDay = (eventDate) => {
+    const eventDateObject = new Date(eventDate);
+    const month = eventDateObject.toLocaleString("default", { month: "short" });
+    const day = eventDateObject.getDate();
+    return { day, month };
+  };
+
   return (
     <Grid className="employeeDeshbord">
       <Typography variant="h5">Todo List </Typography>
@@ -48,14 +56,14 @@ const ToDoList = () => {
                       }}
                       fontSize="11px"
                     >
-                      Dec
+                      {getUpcomingDay(notify?.dueDate).month}
                     </Typography>
                     <Typography
                       fontSize="11px"
                       textAlign="center"
                       bgcolor={mode === "light" ? "#fff" : ""}
                     >
-                      25
+                      {getUpcomingDay(notify?.dueDate).day}
                     </Typography>
                   </div>
                   <Typography fontWeight={600} fontSize="14px">

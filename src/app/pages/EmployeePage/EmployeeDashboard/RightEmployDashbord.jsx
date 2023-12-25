@@ -14,17 +14,6 @@ import ToDoList from "../Component/ToDoList";
 export const RightEmployDashbord = ({ employData }) => {
   const navigate = useNavigate();
   const { data: leavebalance } = useGetLoggedInUserLeaveBalance();
-  // const { data: resourceLogInUser } = uselogInEemployeeResource(
-  //   employData?.employeeId
-  // );
-  const { data: officeresource } = useGetOfficeResource();
-
-  const getResourceName = (logistic) => {
-    const resourceName = officeresource?.find(
-      (resource) => resource?.id === logistic
-    );
-    return resourceName?.name;
-  };
 
   const sumOfLeaveTaken = Array.isArray(leavebalance)
     ? leavebalance?.reduce((accumulator, currentValue) => {
@@ -37,9 +26,7 @@ export const RightEmployDashbord = ({ employData }) => {
         return accumulator + currentValue.leaveBalance;
       }, 0)
     : "";
-  const avegLeaveBalance = Array.isArray(leavebalance)
-    ? sumOfLeaveBalance / leavebalance.length
-    : "";
+ console.log(leavebalance);
 
   const { mode } = useContext(ThemeModeContext);
   return (
@@ -107,7 +94,7 @@ export const Card = ({ bgcolor, leaveName, leavetaken }) => {
       height="150px"
     >
       <Typography alignSelf="center" fontSize={{sm:"22px",md:"18px", lg:"22px"}}>
-        {bgcolor === "#D6EBFF" ? "3/12" : leavetaken}
+        {bgcolor === "#D6EBFF" ? "3/12" : leavetaken + " Days"}
       </Typography>
       <Typography fontSize={{xs:"11px",sm:"14px", md:"12px", lg:"14px"}} alignSelf="center">
         {leaveName}
