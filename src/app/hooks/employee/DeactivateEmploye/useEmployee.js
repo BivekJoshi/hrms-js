@@ -75,7 +75,7 @@ export const useTerminateEmployee = ({ onSuccess }) => {
       onSuccess: (data, variables, context) => {
         toast.success('Successfully removed Employee');
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries('getEmployee');
+        queryClient.invalidateQueries('getEmployeeData');
       },
       onError: (err, _variables, _context) => {
         toast.error(`Error: ${err.message}`);
@@ -94,7 +94,7 @@ export const useActiveTerminateEmployee = ({ onSuccess }) => {
       onSuccess: (data, variables, context) => {
         toast.success('Successfully activated Employee');
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries('getEmployee');
+        queryClient.invalidateQueries('getDeactivateEmployee');
       },
       onError: (err, _variables, _context) => {
         toast.error(`Error: ${err.message}`);

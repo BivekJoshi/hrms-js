@@ -224,7 +224,7 @@ const routes = [
     path: 'project/:id',
     name: 'Project Detail',
     id: nanoid(),
-    component: <ProjectAddViewEmployeePage />,
+    component: <ProjectAddViewEmployeePage component='projectTask' />,
   },
   // {
   //   path: "project/get-deactivated-projects",

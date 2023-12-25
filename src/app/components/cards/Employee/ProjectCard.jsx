@@ -3,7 +3,7 @@ import { Avatar, Box, Button, CardContent } from "@mui/material";
 import { Chip, Divider, Grid, Typography } from "@mui/material";
 import { ClickAwayListener, Grow, Stack } from "@mui/material";
 import { MenuItem, MenuList, Paper, Popper } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 
 import MainCard from "../MainCard";

@@ -1,12 +1,20 @@
-import { Box, Grid, Pagination, Skeleton, Stack } from "@mui/material";
-import React, { useState } from "react";
+import {
+  Autocomplete,
+  Box,
+  Grid,
+  MenuItem,
+  Pagination,
+  Skeleton,
+  Stack,
+  TextField,
+} from "@mui/material";
+import React, { useEffect, useState } from "react";
 import EmployeeCard from "../../../../components/cards/Employee/EmployeeCard";
 import { useGetEmployeeData } from "../../../../hooks/employee/useEmployee";
 
 const EmployeeGridView = () => {
   const [pageNumber, setpageNumber] = useState(0);
   const { data: employeeData, isLoading } = useGetEmployeeData(pageNumber, 10);
-  console.log(employeeData, "data ma ");
 
   const handlePageChange = (event, newPage) => {
     setpageNumber(newPage - 1);
@@ -46,7 +54,6 @@ const EmployeeGridView = () => {
             PositionName={employee?.position?.positionName || ""}
             PositionLevel={employee?.position?.positionLevel || ""}
             EGender={employee?.gender || ""}
-            // EmployeeData={employeeData}
             ProgressBarRes={employee?.progressBarRes || ""}
             employeePhoto={employee?.employeePhotoPath}
           />
