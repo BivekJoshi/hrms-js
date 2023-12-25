@@ -173,7 +173,7 @@ const OfficeResource = ({ permissions }) => {
       <OpenCLoseModel
         openModal={openModal}
         handleCloseModal={handleCloseModal}
-        modelName={<DeactivatedOfficeResource />}
+        modelName={<DeactivatedOfficeResource closeModal={handleCloseModal} title={"Deactivated Logistics"} />}
         setOpenModal={setOpenModal}
       />
       {/* <OpenCLoseModel

@@ -7,7 +7,7 @@ import {
 } from "../useProjectEmployee";
 import { useParams } from "react-router-dom";
 
-export const useProjectEmployeeForm = (data, onClose, onCloseAdd) => {
+export const useProjectEmployeeForm = ({data, onClose}) => {
   const { id } = useParams();
   const { mutate: addProjectEmployee } = useAddProjectEmployee({});
   const { mutate: editProjectEmployee } = useEditProjectEmployee({});
@@ -37,8 +37,7 @@ export const useProjectEmployeeForm = (data, onClose, onCloseAdd) => {
     values = { ...values };
     addProjectEmployee(values, {
       onSuccess: () => {
-        
-        onCloseAdd();
+        onClose();
         formik.resetForm();
       },
     });

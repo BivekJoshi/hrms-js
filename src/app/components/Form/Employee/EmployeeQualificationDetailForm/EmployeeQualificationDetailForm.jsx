@@ -124,7 +124,7 @@ const EmployeeQualificationDetailForm = ({ formik, isLoading }) => {
                       <TextField
                         id={`education[${index}].grade`}
                         name={`education[${index}].grade`}
-                        label='Grade'
+                        label='Grade/percentage'
                         placeholder='Enter your grade'
                         fullWidth
                         value={study.grade}

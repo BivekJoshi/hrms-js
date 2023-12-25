@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   ClickAwayListener,
   Divider,
   Grid,
@@ -15,15 +16,32 @@ import CloseIcon from "@mui/icons-material/Close";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
+import useEventConfirmationForm from "../../../hooks/event/EventForm/useEventConfirmationForm";
 
 export const EventNotification = ({
-  Eventname,
   data,
   open,
   handleClose,
   handleListKeyDown,
 }) => {
   const { mode, palette } = useContext(ThemeModeContext);
+
+  const { formik } = useEventConfirmationForm(data);
+
+  const handleButton = (response, eventId, notificationId) => {
+    formik.setFieldValue("status", response);
+    formik.setFieldValue("eventId", eventId);
+    formik.setFieldValue("notificationId", notificationId);
+    formik.handleSubmit();
+  };
+
+  const getUpcomingDay = (eventDate) => {
+    const eventDateObject = new Date(eventDate);
+    const month = eventDateObject.toLocaleString("default", { month: "short" });
+    const day = eventDateObject.getDate();
+    return { day, month };
+  };
+
   return (
     <>
       <MenuList
@@ -34,30 +52,37 @@ export const EventNotification = ({
         sx={{
           textAlign: "center",
           padding: "1rem 1rem",
+          maxHeight:"25rem",
+          overflowY:"scroll"
         }}
       >
         <Typography variant="h6" sx={{ color: "#6DAB23" }}>
-          Today's Event
+          Comming Event
         </Typography>
 
-        <Box
-          sx={{
-            backgroundColor: "#F7F8F9",
-            padding: ".8rem",
-            margin: ".5rem",
-            borderRadius: "6px",
-          }}
-        >
-          {data &&
-            data.map((ename, index) => (
-              <>
+        {data &&
+          data.map((ename, index) => (
+            <>
+            {ename.notificationId !== "1" && (
+              <Box
+                sx={{
+                  backgroundColor: "#F7F8F9",
+                  padding: ".8rem",
+                  margin: ".5rem",
+                  borderRadius: "6px",
+                }}
+              >
                 <div
-                  style={{ display: "flex", justifyContent: "space-between" }}
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    gap: "1rem",
+                  }}
                 >
                   <div
                     style={{
                       border: "1px solid #E0E0E0",
-                      borderRadius: "6px 6px 0 0",
+                      borderRadius: "6px",
                     }}
                   >
                     <Typography
@@ -69,14 +94,14 @@ export const EventNotification = ({
                       }}
                       fontSize="11px"
                     >
-                      Dec
+                      {getUpcomingDay(ename?.eventDate).month}
                     </Typography>
                     <Typography
                       fontSize="11px"
                       textAlign="center"
                       bgcolor={mode === "light" ? "#fff" : ""}
                     >
-                      25
+                      {getUpcomingDay(ename?.eventDate).day}
                     </Typography>
                   </div>
                   <div>
@@ -84,7 +109,7 @@ export const EventNotification = ({
                       style={{
                         display: "flex",
                         alignItems: "center",
-                        gap: "1rem",
+                        gap: ".5rem",
                       }}
                     >
                       <div
@@ -124,8 +149,8 @@ export const EventNotification = ({
                   padding="5px"
                 >
                   <LocationOnIcon fontSize="13px" />
-                  <Typography sx={{ maxWidth: "25rem", fontSize: "13px" }}>
-                    At {ename?.eventLocation}
+                  <Typography sx={{ maxWidth: "14rem", fontSize: "13px" }}>
+                    <b>Location: </b>{ename?.eventLocation}
                   </Typography>
                 </Grid>
                 <Typography variant="h8" sx={{ fontWeight: 500 }}>
@@ -138,35 +163,46 @@ export const EventNotification = ({
                     alignItems: "center",
                   }}
                 >
-                  <Typography
+                  <Button
                     sx={{
                       color: "green",
-                      display: "flex",
-                      alignItems: "center",
-                      gap: ".5rem",
-                      cursor: "pointer",
-                      fontSize: "13px",
+                      textTransform: "none",
+                      fontWeight: "bold",
                     }}
+                    startIcon={<DoneIcon />}
+                    onClick={() =>
+                      handleButton(
+                        "YES",
+                        ename?.eventId,
+                        ename?.notificationId
+                      )
+                    }
                   >
-                    <DoneIcon /> Yes
-                  </Typography>
+                    Yes
+                  </Button>
                   <Divider orientation="vertical" flexItem></Divider>
-                  <Typography
+                  <Button
                     sx={{
                       color: "red",
-                      display: "flex",
-                      alignItems: "center",
-                      gap: ".5rem",
-                      cursor: "pointer",
-                      fontSize: "13px",
+                      textTransform: "none",
+                      fontWeight: "bold",
                     }}
+                    startIcon={<CloseIcon />}
+                    onClick={() =>
+                      handleButton(
+                        "NO",
+                        ename?.eventId,
+                        ename?.notificationId
+                      )
+                    }
                   >
-                    <CloseIcon /> No
-                  </Typography>
+                    No
+                  </Button>
                 </div>
-              </>
-            ))}
-        </Box>
+              </Box>
+            )}
+            </>
+          ))}
       </MenuList>
     </>
   );
