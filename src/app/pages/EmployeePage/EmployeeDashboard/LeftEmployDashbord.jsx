@@ -68,9 +68,9 @@ export const LeftEmployDashbord = ({}) => {
 
   return (
     <Grid className="employeeDeshbord">
-      <Grid className="employeeDeshbord">
+      <Grid display="flex" flexDirection="column" gap="1rem">
         <Typography variant="h5">Upcoming Events </Typography>
-        <Grid display="grid" gap="1rem" minHeight={"218px"}>
+        <Grid display="grid" gap="1rem" >
           {upcomingEvents?.length > 0 ? (
             upcomingEvents?.slice(0, 3).map((notify, index) => (
               <Grid key={index}>
