@@ -58,7 +58,7 @@ export const useAddOfficeResource = ({ onSuccess }) => {
     onSuccess: (data, variables, context) => {
       toast.success('Succesfully added Office Logistics');
       onSuccess && onSuccess(data, variables, context);
-      queryClient.invalidateQueries('getofficeResource');
+      queryClient.invalidateQueries('getAvailableOfficeResource');
     },
     onError: (err, _variables, _context) => {
       toast.error(`error: ${err.message}`);

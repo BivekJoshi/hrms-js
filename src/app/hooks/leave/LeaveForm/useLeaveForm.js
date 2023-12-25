@@ -50,7 +50,7 @@ const useLeaveForm = (data,onClose) => {
     values = { ...values };
     editLeave(values, formik,{
       onSuccess:()=>{
-        onClose();
+        formik.resetForm();
       }
     });
   };

@@ -34,6 +34,7 @@ const EmployeeCard = ({
   const [open, setOpen] = useState(false);
   const [openEmailForm, setOpenEmailForm] = useState(false);
   const { mode } = useContext(ThemeModeContext); // Accessing mode from context
+  // console.log({"doc": DOC_URL, "emp": employeePhoto})
   const img = DOC_URL + employeePhoto;
 
   const anchorRef = useRef(null);
@@ -186,6 +187,13 @@ const EmployeeCard = ({
           </div>
 
           <Stack>
+          
+          <CardMedia
+          component="img"
+          src={img ? img : Male}
+          alt="Img"
+          sx={{ width: 66, height: 66, borderRadius: "2rem" }}
+        />
             <Typography
               style={{ fontWeight: 700, margin: "1rem 0", fontSize: "20px" }}
             >

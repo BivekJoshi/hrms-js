@@ -20,3 +20,8 @@ body {
 .css-heg063-MuiTabs-flexContainer {
   flex-wrap: wrap;
 }
+/* for form Modal */
+.css-hsrx2h{
+top: 50% !important;
+border-radius: 1rem;
+}

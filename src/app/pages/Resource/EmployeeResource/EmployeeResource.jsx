@@ -120,12 +120,19 @@ const EmployeeResource = ({ permissions }) => {
   ];
   const actions = [
     {
-      icon: () => <ModeEditOutlineIcon sx={{ color: "#01579B" }} />,
+      icon: () => (
+        <HocButton
+          permissions={permissions?.canEdit}
+          icon={<ModeEditOutlineIcon />}
+        />
+      ),
       tooltip: "Edit Logistics",
       onClick: (event, rowData) => handleEditRowData(rowData),
     },
     {
-      icon: () => <DeleteIcon sx={{ color: "#01579B" }} />,
+      icon: () => (
+        <HocButton permissions={permissions?.canDelete} icon={<DeleteIcon />} />
+      ),
       tooltip: "Remove Logistics",
       onClick: (event, rowData) => handleDeleteRowData(rowData),
     },

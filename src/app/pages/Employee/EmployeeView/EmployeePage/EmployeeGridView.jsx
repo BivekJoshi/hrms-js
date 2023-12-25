@@ -13,13 +13,23 @@ import EmployeeCard from "../../../../components/cards/Employee/EmployeeCard";
 import { useGetEmployeeData } from "../../../../hooks/employee/useEmployee";
 
 const EmployeeGridView = () => {
-  const [pageNumber, setpageNumber] = useState(0);
-  const { data: employeeData, isLoading } = useGetEmployeeData(pageNumber, 12);
+  const [pageNumber, setPageNumber] = useState(0);
+  const [pageSize, setPageSize] = useState(12);
+  const { data: employeeData, isLoading } = useGetEmployeeData(
+    pageNumber,
+    pageSize
+  );
 
   const handlePageChange = (event, newPage) => {
-    setpageNumber(newPage - 1);
+    setPageNumber(newPage - 1);
   };
-  
+
+  const handlePageSizeChange = (event, newValue) => {
+    const newPageSize = parseInt(newValue, 10) || 0;
+    setPageSize(newPageSize);
+    setPageNumber(0);
+  };
+
   if (isLoading)
     return (
       <>
@@ -28,6 +38,7 @@ const EmployeeGridView = () => {
         <Skeleton animation={false} />
       </>
     );
+   
   return (
     <>
       <Grid
@@ -55,21 +66,34 @@ const EmployeeGridView = () => {
             PositionLevel={employee?.position?.positionLevel || ""}
             EGender={employee?.gender || ""}
             ProgressBarRes={employee?.progressBarRes || ""}
-            employeePhoto={employee?.employeePhotoPath}
+            employeePhoto={employee?.employeePhotoPath || ""}
           />
         ))}
       </Grid>
 
-      <Box padding="2rem" display="grid" justifyContent={"center"}>
+      <Box mt={4} display="flex" justifyContent={"end"}>
         <Pagination
           count={employeeData?.totalPages}
-          // page={employeeData}
+          page={pageNumber + 1}
           onChange={handlePageChange}
           showFirstButton
           showLastButton
           boundaryCount={3}
           size="large"
           color="primary"
+        />
+        <Autocomplete
+          value={pageSize}
+          onChange={handlePageSizeChange}
+          options={[20, 30, 40, 50, 100]}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label="page"
+              variant="outlined"
+              size="small"
+            />
+          )}
         />
       </Box>
     </>
