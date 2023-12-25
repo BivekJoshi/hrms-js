@@ -17,6 +17,7 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
 import useEventConfirmationForm from "../../../hooks/event/EventForm/useEventConfirmationForm";
+import "./style.css";
 
 export const EventNotification = ({
   data,
@@ -41,6 +42,12 @@ export const EventNotification = ({
     const day = eventDateObject.getDate();
     return { day, month };
   };
+ // upcoming event
+//  const currentDate = new Date();
+//  const upcomingEvents = data?.filter((event) => {
+//    const eventDate = new Date(event.eventDate);
+//    return eventDate >= currentDate;
+//  });
 
   return (
     <>
@@ -51,9 +58,9 @@ export const EventNotification = ({
         onKeyDown={handleListKeyDown}
         sx={{
           textAlign: "center",
-          padding: "1rem 1rem",
-          maxHeight:"25rem",
-          overflowY:"scroll"
+          padding: ".5rem",
+          maxHeight: "25rem",
+          overflowY: "scroll",
         }}
       >
         <Typography variant="h6" sx={{ color: "#6DAB23" }}>
@@ -63,144 +70,145 @@ export const EventNotification = ({
         {data &&
           data.map((ename, index) => (
             <>
-            {ename.notificationId !== "1" && (
-              <Box
-                sx={{
-                  backgroundColor: "#F7F8F9",
-                  padding: ".8rem",
-                  margin: ".5rem",
-                  borderRadius: "6px",
-                }}
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    gap: "1rem",
+              {ename.notificationId !== "1" && (
+                <Box
+                  sx={{
+                    backgroundColor: "#F7F8F9",
+                    padding: ".8rem",
+                    margin: ".5rem",
+                    borderRadius: "6px",
                   }}
                 >
                   <div
                     style={{
-                      border: "1px solid #E0E0E0",
-                      borderRadius: "6px",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      gap: "1rem",
                     }}
                   >
-                    <Typography
-                      style={{
-                        backgroundColor: palette.primary.main,
-                        padding: "1px 8px",
-                        color: "#fff",
-                        borderRadius: "6px 6px 0 0",
-                      }}
-                      fontSize="11px"
-                    >
-                      {getUpcomingDay(ename?.eventDate).month}
-                    </Typography>
-                    <Typography
-                      fontSize="11px"
-                      textAlign="center"
-                      bgcolor={mode === "light" ? "#fff" : ""}
-                    >
-                      {getUpcomingDay(ename?.eventDate).day}
-                    </Typography>
-                  </div>
-                  <div>
                     <div
                       style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: ".5rem",
+                        border: "1px solid #E0E0E0",
+                        borderRadius: "6px",
                       }}
                     >
+                      <Typography
+                        style={{
+                          backgroundColor: palette.primary.main,
+                          padding: "1px 8px",
+                          color: "#fff",
+                          borderRadius: "6px 6px 0 0",
+                        }}
+                        fontSize="11px"
+                      >
+                        {getUpcomingDay(ename?.eventDate).month}
+                      </Typography>
+                      <Typography
+                        fontSize="11px"
+                        textAlign="center"
+                        bgcolor={mode === "light" ? "#fff" : ""}
+                      >
+                        {getUpcomingDay(ename?.eventDate).day}
+                      </Typography>
+                    </div>
+                    <div>
                       <div
                         style={{
-                          backgroundColor: "red",
-                          width: "10px",
-                          height: "10px",
-                          borderRadius: "50%",
+                          display: "flex",
+                          alignItems: "center",
+                          gap: ".5rem",
                         }}
-                      ></div>
-                      <Typography sx={{ fontWeight: 600, fontSize: "13px" }}>
-                        {ename?.eventName}
-                      </Typography>
+                      >
+                        <div
+                          style={{
+                            backgroundColor: "red",
+                            width: "10px",
+                            height: "10px",
+                            borderRadius: "50%",
+                          }}
+                        ></div>
+                        <Typography sx={{ fontWeight: 600, fontSize: "13px" }}>
+                          {ename?.eventName}
+                        </Typography>
+                      </div>
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "1rem",
+                        }}
+                      >
+                        <AccessTimeIcon
+                          style={{ width: "13px", height: "13px" }}
+                        />
+                        <Typography fontSize="13px">
+                          {ename?.eventTime} - Onwards
+                        </Typography>
+                      </div>
                     </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "1rem",
-                      }}
-                    >
-                      <AccessTimeIcon
-                        style={{ width: "13px", height: "13px" }}
-                      />
-                      <Typography fontSize="13px">
-                        {ename?.eventTime} - Onwards
-                      </Typography>
-                    </div>
+                    <div></div>
                   </div>
-                  <div></div>
-                </div>
-                <Divider sx={{ marginTop: ".5rem" }} />
-                <Grid
-                  display="flex"
-                  flexDirection="row"
-                  justifyContent="space-between"
-                  padding="5px"
-                >
-                  <LocationOnIcon fontSize="13px" />
-                  <Typography sx={{ maxWidth: "14rem", fontSize: "13px" }}>
-                    <b>Location: </b>{ename?.eventLocation}
+                  <Divider sx={{ marginTop: ".5rem" }} />
+                  <Grid
+                    display="flex"
+                    flexDirection="row"
+                    justifyContent="space-between"
+                    padding="5px"
+                  >
+                    <LocationOnIcon fontSize="13px" />
+                    <Typography sx={{ maxWidth: "14rem", fontSize: "13px" }}>
+                      <b>Location: </b>
+                      {ename?.eventLocation}
+                    </Typography>
+                  </Grid>
+                  <Typography variant="h8" sx={{ fontWeight: 500 }}>
+                    Are you attending?
                   </Typography>
-                </Grid>
-                <Typography variant="h8" sx={{ fontWeight: 500 }}>
-                  Are you attending?
-                </Typography>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-around",
-                    alignItems: "center",
-                  }}
-                >
-                  <Button
-                    sx={{
-                      color: "green",
-                      textTransform: "none",
-                      fontWeight: "bold",
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-around",
+                      alignItems: "center",
                     }}
-                    startIcon={<DoneIcon />}
-                    onClick={() =>
-                      handleButton(
-                        "YES",
-                        ename?.eventId,
-                        ename?.notificationId
-                      )
-                    }
                   >
-                    Yes
-                  </Button>
-                  <Divider orientation="vertical" flexItem></Divider>
-                  <Button
-                    sx={{
-                      color: "red",
-                      textTransform: "none",
-                      fontWeight: "bold",
-                    }}
-                    startIcon={<CloseIcon />}
-                    onClick={() =>
-                      handleButton(
-                        "NO",
-                        ename?.eventId,
-                        ename?.notificationId
-                      )
-                    }
-                  >
-                    No
-                  </Button>
-                </div>
-              </Box>
-            )}
+                    <Button
+                      sx={{
+                        color: "green",
+                        textTransform: "none",
+                        fontWeight: "bold",
+                      }}
+                      startIcon={<DoneIcon />}
+                      onClick={() =>
+                        handleButton(
+                          "YES",
+                          ename?.eventId,
+                          ename?.notificationId
+                        )
+                      }
+                    >
+                      Yes
+                    </Button>
+                    <Divider orientation="vertical" flexItem></Divider>
+                    <Button
+                      sx={{
+                        color: "red",
+                        textTransform: "none",
+                        fontWeight: "bold",
+                      }}
+                      startIcon={<CloseIcon />}
+                      onClick={() =>
+                        handleButton(
+                          "NO",
+                          ename?.eventId,
+                          ename?.notificationId
+                        )
+                      }
+                    >
+                      No
+                    </Button>
+                  </div>
+                </Box>
+              )}
             </>
           ))}
       </MenuList>
