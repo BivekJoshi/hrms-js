@@ -37,7 +37,8 @@ const getPalette = (darkMode) => {
       tabbg: darkMode ? '#3D4852' : '#E8F5E9',
       activetabBg: darkMode ? '#25262E' : '#C8E6C9',
       event: darkMode ? "#3f413f" : "#D5FFCB",
-      holiday: darkMode ? "" :"#FFEDEA"
+      holiday: darkMode ? "" :"#FFEDEA",
+      toDo: darkMode ? "" :"#F2F4F4"
     },
     text: {
       primary: darkMode ? '#FFFFFF' : '#000',

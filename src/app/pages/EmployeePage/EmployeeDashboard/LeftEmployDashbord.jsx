@@ -8,7 +8,8 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useGetHolidaybyMonth } from "../../../hooks/holiday/useHoliday";
 import { useNavigate } from "react-router-dom";
-// import Sad from "../../../../assets/sad.png";
+import Event from "../../../../assets/EDevent.png";
+import Holiday from "../../../../assets/EDholiday.png";
 
 export const LeftEmployDashbord = ({}) => {
   const navigate = useNavigate();
@@ -57,11 +58,19 @@ export const LeftEmployDashbord = ({}) => {
     return holidayDate >= currentDate;
   });
 
+  // only day and month
+  const getUpcomingDay = (eventDate) => {
+    const eventDateObject = new Date(eventDate);
+    const month = eventDateObject.toLocaleString("default", { month: "short" });
+    const day = eventDateObject.getDate();
+    return { day, month };
+  };
+
   return (
     <Grid className="employeeDeshbord">
       <Grid className="employeeDeshbord">
         <Typography variant="h5">Upcoming Events </Typography>
-        <Grid display="grid" gap="1rem">
+        <Grid display="grid" gap="1rem" minHeight={"218px"}>
           {upcomingEvents?.length > 0 ? (
             upcomingEvents?.slice(0, 3).map((notify, index) => (
               <Grid key={index}>
@@ -97,14 +106,14 @@ export const LeftEmployDashbord = ({}) => {
                         }}
                         fontSize="11px"
                       >
-                        Dec
+                        {getUpcomingDay(notify?.eventDate).month}
                       </Typography>
                       <Typography
                         fontSize="11px"
                         textAlign="center"
                         bgcolor={mode === "light" ? "#fff" : ""}
                       >
-                        25
+                        {getUpcomingDay(notify?.eventDate).day}
                       </Typography>
                     </div>
                     <Typography fontWeight={600} fontSize="14px">
@@ -123,6 +132,7 @@ export const LeftEmployDashbord = ({}) => {
                     className="notification"
                     bgcolor={mode === "light" ? "#ECFFE3" : "#313131"}
                     boxShadow={2}
+                    marginTop="8px"
                   >
                     <Typography>
                       At {notify?.eventName}: {notify?.eventDescription}
@@ -141,13 +151,9 @@ export const LeftEmployDashbord = ({}) => {
               bgcolor="#ECFFE3"
               gap={1}
             >
-              {/* <img src={Sad} alt="sad.png" /> */}
-              <Typography variant="h5" >
-                OOPS!
-              </Typography>
-              <Typography variant="h6" >
-                No any Upcoming Events
-              </Typography>
+              <img src={Event} alt="sad.png" />
+
+              <Typography variant="h6">No any Upcoming Events</Typography>
             </Grid>
           )}
         </Grid>
@@ -164,59 +170,75 @@ export const LeftEmployDashbord = ({}) => {
         <Typography variant="h5">Upcoming Holidays</Typography>
 
         <Grid display="grid" gap="1rem">
-          {upcomingHolidays?.slice(0, 3).map((notify, index) => (
-            <Grid key={index}>
-              <Grid
-                onClick={() => toggleDropdownHoliday(index)}
-                display="flex"
-                flexDirection="row"
-                justifyContent="space-between"
-                borderRadius=".5rem"
-                alignItems="center"
-                boxShadow={2}
-                padding=".5em 1rem"
-                bgcolor={palette.background.holiday}
-              >
+          {upcomingHolidays?.length > 0 ? (
+            upcomingHolidays?.slice(0, 3).map((notify, index) => (
+              <Grid key={index}>
                 <Grid
+                  onClick={() => toggleDropdownHoliday(index)}
                   display="flex"
                   flexDirection="row"
+                  justifyContent="space-between"
+                  borderRadius=".5rem"
                   alignItems="center"
-                  gap={2}
+                  boxShadow={2}
+                  padding=".5em 1rem"
+                  bgcolor={palette.background.holiday}
                 >
-                  <div
-                    style={{
-                      border: "1px solid #E0E0E0",
-                      borderRadius: "6px 6px 0 0",
-                    }}
+                  <Grid
+                    display="flex"
+                    flexDirection="row"
+                    alignItems="center"
+                    gap={2}
                   >
-                    <Typography
+                    <div
                       style={{
-                        backgroundColor: palette.primary.holiday,
-                        padding: "1px 8px",
-                        color: "#fff",
+                        border: "1px solid #E0E0E0",
                         borderRadius: "6px 6px 0 0",
                       }}
-                      fontSize="11px"
                     >
-                      Dec
-                    </Typography>
-                    <Typography
-                      fontSize="11px"
-                      textAlign="center"
-                      bgcolor={mode === "light" ? "#fff" : ""}
-                    >
-                      25
-                    </Typography>
-                  </div>
-                  {notify?.holidayName}
-                </Grid>
+                      <Typography
+                        style={{
+                          backgroundColor: palette.primary.holiday,
+                          padding: "1px 8px",
+                          color: "#fff",
+                          borderRadius: "6px 6px 0 0",
+                        }}
+                        fontSize="11px"
+                      >
+                        {getUpcomingDay(notify?.holidayDate).month}
+                      </Typography>
+                      <Typography
+                        fontSize="11px"
+                        textAlign="center"
+                        bgcolor={mode === "light" ? "#fff" : ""}
+                      >
+                         {getUpcomingDay(notify?.holidayDate).day}
+                      </Typography>
+                    </div>
+                    {notify?.holidayName}
+                  </Grid>
 
-                <Typography fontSize="12px">
-                  Remaining: {calculateRemainingDays(notify?.holidayDate)} day
-                </Typography>
+                  <Typography fontSize="12px">
+                    Remaining: {calculateRemainingDays(notify?.holidayDate)} day
+                  </Typography>
+                </Grid>
               </Grid>
+            ))
+          ) : (
+            <Grid
+              padding="28px 16px"
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              flexDirection="column"
+              bgcolor={palette.background.holiday}
+              gap={1}
+            >
+              <img src={Holiday} alt="EDholiday.png" />
+
+              <Typography variant="h6">No any Upcoming Events</Typography>
             </Grid>
-          ))}
+          )}
         </Grid>
         <Grid textAlign="center">
           <ButtonComponent

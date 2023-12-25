@@ -9,21 +9,11 @@ import { useGetLoggedInUserLeaveBalance } from "../../../hooks/leave/useLeave";
 import { uselogInEemployeeResource } from "../../../hooks/resource/employeeResource/useEmployeeResource";
 import { useGetOfficeResource } from "../../../hooks/resource/officeResource/useOfficeResource";
 import { PendingTask } from "../Component/PendingTask";
+import ToDoList from "../Component/ToDoList";
 
 export const RightEmployDashbord = ({ employData }) => {
   const navigate = useNavigate();
   const { data: leavebalance } = useGetLoggedInUserLeaveBalance();
-  // const { data: resourceLogInUser } = uselogInEemployeeResource(
-  //   employData?.employeeId
-  // );
-  const { data: officeresource } = useGetOfficeResource();
-
-  const getResourceName = (logistic) => {
-    const resourceName = officeresource?.find(
-      (resource) => resource?.id === logistic
-    );
-    return resourceName?.name;
-  };
 
   const sumOfLeaveTaken = Array.isArray(leavebalance)
     ? leavebalance?.reduce((accumulator, currentValue) => {
@@ -36,9 +26,7 @@ export const RightEmployDashbord = ({ employData }) => {
         return accumulator + currentValue.leaveBalance;
       }, 0)
     : "";
-  const avegLeaveBalance = Array.isArray(leavebalance)
-    ? sumOfLeaveBalance / leavebalance.length
-    : "";
+ console.log(leavebalance);
 
   const { mode } = useContext(ThemeModeContext);
   return (
@@ -55,7 +43,7 @@ export const RightEmployDashbord = ({ employData }) => {
           marginTop="1rem"
           flexDirection="column"
           justifyContent="center"
-          padding=" 1rem "
+          padding={{sm:" 1rem " ,md:"0", lg:"1rem"}}
           flexWrap="wrap"
           borderRadius="10px"
         >
@@ -80,7 +68,7 @@ export const RightEmployDashbord = ({ employData }) => {
           </Box>
           <Box alignSelf="center">
             <ButtonComponent
-              buttonName={"APPLY Leave"}
+              buttonName={"Apply Leave"}
               OnClick={() => {
                 navigate("/employee/applyleavefield");
               }}
@@ -88,6 +76,9 @@ export const RightEmployDashbord = ({ employData }) => {
           </Box>
         </Box>
       </Box>
+      <Grid>
+        <ToDoList/>
+      </Grid>
     </Box>
   );
 };
@@ -102,10 +93,10 @@ export const Card = ({ bgcolor, leaveName, leavetaken }) => {
       width="100%"
       height="150px"
     >
-      <Typography alignSelf="center" fontSize="22px">
-        {bgcolor === "#D6EBFF" ? "3/12" : leavetaken}
+      <Typography alignSelf="center" fontSize={{sm:"22px",md:"18px", lg:"22px"}}>
+        {bgcolor === "#D6EBFF" ? "3/12" : leavetaken + " Days"}
       </Typography>
-      <Typography fontSize="14px" alignSelf="center">
+      <Typography fontSize={{xs:"11px",sm:"14px", md:"12px", lg:"14px"}} alignSelf="center">
         {leaveName}
       </Typography>
     </Grid>

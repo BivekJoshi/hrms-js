@@ -35,6 +35,13 @@ export const EventNotification = ({
     formik.handleSubmit();
   };
 
+  const getUpcomingDay = (eventDate) => {
+    const eventDateObject = new Date(eventDate);
+    const month = eventDateObject.toLocaleString("default", { month: "short" });
+    const day = eventDateObject.getDate();
+    return { day, month };
+  };
+
   return (
     <>
       <MenuList
@@ -45,6 +52,8 @@ export const EventNotification = ({
         sx={{
           textAlign: "center",
           padding: "1rem 1rem",
+          maxHeight:"25rem",
+          overflowY:"scroll"
         }}
       >
         <Typography variant="h6" sx={{ color: "#6DAB23" }}>
@@ -85,14 +94,14 @@ export const EventNotification = ({
                       }}
                       fontSize="11px"
                     >
-                      Dec
+                      {getUpcomingDay(ename?.eventDate).month}
                     </Typography>
                     <Typography
                       fontSize="11px"
                       textAlign="center"
                       bgcolor={mode === "light" ? "#fff" : ""}
                     >
-                      25
+                      {getUpcomingDay(ename?.eventDate).day}
                     </Typography>
                   </div>
                   <div>
