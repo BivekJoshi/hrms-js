@@ -145,7 +145,7 @@ export const EditLeaveFields = ({ onClose, isLoading, data }) => {
 export const LeaveFields = ({ onClose, isLoading, data }) => {
   const { data: employeeData } = useGetEmployee();
   const { data: leaveTypeData } = useGetLeaveType();
-  const { formik } = useLeaveForm(data);
+  const { formik } = useLeaveForm(data,onClose);
   const { mode } = useContext(ThemeModeContext);
   const employeeId = data?.employeeId;
 
@@ -173,13 +173,6 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
-
-    if (formik.isValid) {
-      formik.resetForm({
-        isHalfDay: false,
-      });
-      onClose();
-    }
   };
 
   const isMoreThanOneDayDifference = () => {

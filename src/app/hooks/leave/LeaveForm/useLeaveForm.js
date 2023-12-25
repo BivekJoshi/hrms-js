@@ -8,7 +8,7 @@ import {
 } from '../useLeave';
 import { EditLeaveSchema, LeaveSchema } from '../Validation/LeaveSchema';
 
-const useLeaveForm = (data) => {
+const useLeaveForm = (data,onClose) => {
   const { mutate: addLeave } = useAddLeaveByAdmin({});
   const { mutate: editLeave } = useEditLeaveStatusByAdmin({});
 
@@ -39,12 +39,21 @@ const useLeaveForm = (data) => {
 
   const handleRequest = (values) => {
     values = { ...values };
-    addLeave(values, formik);
+    addLeave(values, formik,{
+      onSuccess:()=>{
+        onClose();
+        formik.resetForm();
+      }
+    });
   };
 
   const handledEditRequest = (values) => {
     values = { ...values };
-    editLeave(values, formik);
+    editLeave(values, formik,{
+      onSuccess:()=>{
+        onClose();
+      }
+    });
   };
   return { formik };
 };

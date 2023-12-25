@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useGetDeactivatedEmployee } from '../../../hooks/employee/DeactivateEmploye/useEmployee';
-import { EditActivationUserModal } from '../EmployeeDeactivationModal/EditDeactivationEmployeeModal';
+import { EditActivationEmployeeModal } from '../EmployeeDeactivationModal/EditDeactivationEmployeeModal';
 import RestoreFromTrashOutlinedIcon from '@mui/icons-material/RestoreFromTrashOutlined';
 import CustomTable from '../../../components/CustomTable/CustomTable';
+import { EditDeactivationEmployeeModal } from '../EmployeeDeactivationModal/EditDeactivationEmployeeModal';
 
 const DeactivatedEmployee = () => {
   const { data: deactivateEmployee, isLoading } = useGetDeactivatedEmployee();
@@ -83,7 +84,7 @@ const DeactivatedEmployee = () => {
         actions={actions}
       />
       {openDeactivatedModal && (
-        <EditActivationUserModal
+        <EditActivationEmployeeModal
           id={deactivatedEmployee?.id}
           open={openDeactivatedModal}
           handleCloseModal={handleCloseDeactivatedModal}

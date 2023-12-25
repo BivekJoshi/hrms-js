@@ -29,6 +29,7 @@ import PermissionHoc from "../../hoc/permissionHoc";
 
 const Leave = ({ permissions }) => {
   const { mode } = React.useContext(ThemeModeContext);
+  const { data: leaveData, isLoading: loading } = useGetleaveOfUser();
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
@@ -58,7 +59,10 @@ const Leave = ({ permissions }) => {
     setOpenEditModal(true);
   };
 
-  const { data, isLoading: loading } = useGetleaveOfUser();
+  const pendingLeaves =
+    leaveData && leaveData.filter((item) => item?.leaveStatus === "PENDING");
+  const approvedRejectedLeaves =
+    leaveData && leaveData.filter((item) => item?.leaveStatus !== "PENDING");
 
   const columns = [
     {
@@ -111,8 +115,8 @@ const Leave = ({ permissions }) => {
 
         return (
           <Chip
-            label={status}
-            style={{
+            label={status.charAt(0).toUpperCase() + status.slice(1)}
+            sx={{
               backgroundColor: chipColor,
               color: "white",
               width: "6rem",
@@ -197,24 +201,16 @@ const Leave = ({ permissions }) => {
 
   const actions = [
     {
-      icon: () => (
-        <HocButton
-          permissions={permissions?.canEdit}
-          icon={<ModeEditOutlineIcon />}
-        />
-      ),
+      icon: () => <ModeEditOutlineIcon />,
       tooltip: "Edit Leave",
       onClick: (event, rowData) => handleEditLeave(rowData),
     },
     {
-      icon: () => (
-        <HocButton permissions={permissions?.canDelete} icon={<DeleteIcon />} />
-      ),
-      tooltip: "Delete Leave",
+      icon: () => <DeleteIcon />,
+      tooltip: "Edit Leave",
       onClick: (event, rowData) => handleDeleteLeave(rowData),
     },
   ];
-
   // if (isLoading || loadingemployee || loadingleaveType) return <>Loading</>;
 
   return (
@@ -234,13 +230,30 @@ const Leave = ({ permissions }) => {
         />
       </Box>
 
-      <CustomTable
-        columns={columns}
-        data={data}
-        title="Leave Data"
-        actions={actions}
-        isLoading={loading}
-      />
+      <Box
+        gap={2}
+        sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}
+      >
+        {pendingLeaves && pendingLeaves.length > 0 && (
+          <CustomTable
+            columns={columns}
+            data={pendingLeaves}
+            title="Pending Leave Data"
+            actions={actions}
+            isLoading={loading}
+          />
+        )}
+
+        {approvedRejectedLeaves && approvedRejectedLeaves.length > 0 && (
+          <CustomTable
+            columns={columns}
+            data={approvedRejectedLeaves}
+            title="Approved/Rejected Leave Data"
+            isLoading={loading}
+          />
+        )}
+      </Box>
+
       {openEditModal && (
         <EditLeaveModal
           data={editedLeave}

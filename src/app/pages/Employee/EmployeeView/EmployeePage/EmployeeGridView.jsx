@@ -7,9 +7,10 @@ const EmployeeGridView = () => {
   const [pageNumber, setpageNumber] = useState(1);
   const { data: employeeData, isLoading } = useGetEmployeeData(1, 10);
 
-  const handlePageChange=()=>{
-    console.log("Cliced");
-  }
+  const handlePageChange = (event, newPage) => {
+    setpageNumber(newPage - 1);
+  };
+  
   if (isLoading)
     return (
       <>
@@ -41,7 +42,7 @@ const EmployeeGridView = () => {
             ELastName={employee?.lastName || ""}
             OfficeEmail={employee?.officeEmail || ""}
             MobileNumber={employee?.mobileNumber || ""}
-            PositionName={employee?.positionName || ""}
+            PositionName={employee?.position?.positionName || ""}
             PositionLevel={employee?.position?.positionLevel || ""}
             EGender={employee?.gender || ""}
             // EmployeeData={employeeData}
@@ -57,8 +58,8 @@ const EmployeeGridView = () => {
           // page={employeeData}
           onChange={handlePageChange}
           boundaryCount={3}
-          size='large'
-          color='primary'
+          size="large"
+          color="primary"
         />
       </Box>
     </>

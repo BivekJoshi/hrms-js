@@ -27,10 +27,14 @@ import DeactivatedProject from '../DeactivatedProject/DeactivatedProject';
 import { ButtonComponent } from '../../../components/Button/ButtonComponent';
 
 const Project = ({ permissions }) => {
+  const [pageNumber, setpageNumber] = useState(0);
   const { isEmployee } = useAuth();
 
   const [openModal, setOpenModal] = useState(false);
-  const { data: projectDetail, isLoading } = useGetProjectDetail();
+  const { data: projectDetail, isLoading } = useGetProjectPageWise(
+    pageNumber,
+    5
+  );
 
   const [nameFilter, setNameFilter] = useState('');
   const [companyFilter, setCompanyFilter] = useState('');
@@ -52,11 +56,11 @@ const Project = ({ permissions }) => {
     setOpenModal(false);
   };
 
-  const filteredProject = projectDetail?.filter((project) =>
-    project?.projectName.toLowerCase().includes(nameFilter.toLowerCase())
-  );
-
   if (isLoading) return <>Loading</>;
+
+  const handlePageChange = (event, newPage) => {
+    setpageNumber(newPage - 1);
+  };
 
   return (
     <>
@@ -89,21 +93,21 @@ const Project = ({ permissions }) => {
         </Typography>
       </Box>
 
-      <Stack sx={{ display: 'flex', flexDirection: 'row-reverse' }}>
+      {/* <Stack sx={{ display: "flex", flexDirection: "row-reverse" }}>
         <FilterAltOutlinedIcon
           onClick={handleFilterIconClick}
-          style={{ fontSize: '32px' }}
+          style={{ fontSize: "32px" }}
         />
         {isContainerVisible && (
-          <Container maxWidth='100vh'>
+          <Container maxWidth="100vh">
             <Card sx={{ padding: 1 }}>
-              <Typography variant='h6' gutterBottom>
+              <Typography variant="h6" gutterBottom>
                 Search Project
               </Typography>
               <Grid container spacing={3}>
                 <Grid item xs={12}>
                   <TextField
-                    label='Filter by Name'
+                    label="Filter by Name"
                     value={nameFilter}
                     onChange={(e) => setNameFilter(e.target.value)}
                     fullWidth
@@ -113,7 +117,7 @@ const Project = ({ permissions }) => {
             </Card>
           </Container>
         )}
-      </Stack>
+      </Stack> */}
       <br />
       <Grid
         container
@@ -125,32 +129,30 @@ const Project = ({ permissions }) => {
           gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
         }}
       >
-        {filteredProject &&
-          filteredProject?.map((item, index) => (
-            <ProjectCard
-              item={item}
-              Id={item.projectid}
-              key={index}
-              ProjectName={item.projectName}
-              StartDate={item.startDate}
-              EndDate={item.endDate}
-              ProjectLeaderId={item.projectLeadName}
-              TaskStatus={item.taskStatus}
-              totalEmployee={item.totalEmployee}
-            />
-          ))}
+        {projectDetail?.projectResList?.map((item, index) => (
+          <ProjectCard
+            item={item}
+            Id={item.id}
+            key={index}
+            ProjectName={item.projectName}
+            StartDate={item.startDate}
+            EndDate={item.endDate}
+            ProjectLeaderId={item.projectLeadName}
+            TaskStatus={item.taskStatus}
+            totalEmployee={item.totalEmployee}
+          />
+        ))}
       </Grid>
 
-      {/* <Box padding="2rem" display="grid" justifyContent={"center"}>
+      <Box padding='2rem' display='grid' justifyContent={'center'}>
         <Pagination
-          count={totalPages}
-          page={currentPage}
+          count={projectDetail?.totalPages}
           onChange={handlePageChange}
           boundaryCount={3}
-          size="large"
-          color="primary"
+          size='large'
+          color='primary'
         />
-      </Box> */}
+      </Box>
 
       {openAddModal && (
         <AddProjectModal
