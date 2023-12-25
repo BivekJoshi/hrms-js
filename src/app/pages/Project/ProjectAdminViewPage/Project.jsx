@@ -132,14 +132,14 @@ const Project = ({ permissions }) => {
         {projectDetail?.projectResList?.map((item, index) => (
           <ProjectCard
             item={item}
-            Id={item.id}
+            Id={item?.id}
             key={index}
-            ProjectName={item.projectName}
-            StartDate={item.startDate}
-            EndDate={item.endDate}
-            ProjectLeaderId={item.projectLeadName}
-            TaskStatus={item.taskStatus}
-            totalEmployee={item.totalEmployee}
+            ProjectName={item?.projectName}
+            StartDate={item?.startDate}
+            EndDate={item?.endDate}
+            ProjectLeaderId={item?.projectLeadName}
+            TaskStatus={item?.taskStatus}
+            totalEmployee={item?.totalEmployee}
           />
         ))}
       </Grid>

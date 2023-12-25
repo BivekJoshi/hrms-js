@@ -45,7 +45,12 @@ const useProjectTaskForm = (data) => {
 
   const handledEditRequest = (values) => {
     values = { ...values };
-    editprojectCreateTask(values, formik);
+    editprojectCreateTask(values, {
+      onSuccess:(data)=>{
+        formik.resetForm();
+      
+      }
+    });
   };
   return { formik };
 };
