@@ -31,7 +31,7 @@ export const LeftEmployDashbord = ({}) => {
   const calculateRemainingDays = (eventDate) => {
     if (!eventDate) return "";
     const eventDateTime = new Date(eventDate).getTime();
-    const remainingTime = currentDate.getTime() - eventDateTime;
+    const remainingTime =  eventDateTime - currentDate.getTime();
     const remainingDays = Math.ceil(remainingTime / (1000 * 3600 * 24));
     return remainingDays;
   };
@@ -46,13 +46,25 @@ export const LeftEmployDashbord = ({}) => {
     return formattedTime;
   };
 
+  const upcomingEvents = employAllNotiData?.filter((event) => {
+    const eventDate = new Date(event.eventDate);
+    return eventDate >= currentDate;
+  });
+
+  console.log(upcomingEvents);
+
+  const upcomingHolidays = currentHoliday?.filter((holiday) => {
+    const holidayDate = new Date(holiday.holidayDate);
+    return holidayDate >= currentDate;
+  });
+
   return (
     <Grid className="employeeDeshbord">
       <Grid className="employeeDeshbord">
         <Typography variant="h5">Upcoming Events </Typography>
         <Grid display="grid" gap="1rem">
-          {employAllNotiData &&
-            employAllNotiData?.slice(0, 3).map((notify, index) => (
+          {upcomingEvents?.length > 0 ? (
+            upcomingEvents?.slice(0, 3).map((notify, index) => (
               <Grid key={index}>
                 <Grid
                   onClick={() => toggleDropdown(index)}
@@ -106,14 +118,6 @@ export const LeftEmployDashbord = ({}) => {
                   <Typography fontSize="12px">
                     Time: {TimeIn12Hour(notify?.eventTime)}
                   </Typography>
-                  {/* <Typography>Date: {formatDate(notify?.eventDate)}</Typography> */}
-                  {/* <Grid>
-                    {openItemIndex === index ? (
-                      <KeyboardArrowUpIcon />
-                    ) : (
-                      <KeyboardArrowDownIcon />
-                    )}
-                  </Grid> */}
                 </Grid>
                 {openItemIndex === index && (
                   <Grid
@@ -127,7 +131,17 @@ export const LeftEmployDashbord = ({}) => {
                   </Grid>
                 )}
               </Grid>
-            ))}
+            ))
+          ) : (
+            <Grid
+              height="10rem"
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+            >
+              <Typography variant="h5" color={palette.primary.main}>No Event Found !</Typography>
+            </Grid>
+          )}
         </Grid>
         <Grid textAlign="center">
           <ButtonComponent
@@ -142,7 +156,7 @@ export const LeftEmployDashbord = ({}) => {
         <Typography variant="h5">Upcoming Holidays</Typography>
 
         <Grid display="grid" gap="1rem">
-          {currentHoliday?.slice(0, 3).map((notify, index) => (
+          {upcomingHolidays?.slice(0, 3).map((notify, index) => (
             <Grid key={index}>
               <Grid
                 onClick={() => toggleDropdownHoliday(index)}
@@ -192,22 +206,7 @@ export const LeftEmployDashbord = ({}) => {
                 <Typography fontSize="12px">
                   Remaining: {calculateRemainingDays(notify?.holidayDate)}
                 </Typography>
-                {/* <Grid>
-                  {openHolidayIndex === index ? (
-                    <KeyboardArrowUpIcon />
-                  ) : (
-                    <KeyboardArrowDownIcon />
-                  )}
-                </Grid> */}
               </Grid>
-              {/* {openHolidayIndex === index && (
-                <Grid
-                  className="notification"
-                  bgcolor={mode === "light" ? "#e7e2e2" : "#565454"}
-                >
-                  <Typography>{notify?.holidayDescription}</Typography>
-                </Grid>
-              )} */}
             </Grid>
           ))}
         </Grid>
