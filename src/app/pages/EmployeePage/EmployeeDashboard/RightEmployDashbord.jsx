@@ -9,6 +9,7 @@ import { useGetLoggedInUserLeaveBalance } from "../../../hooks/leave/useLeave";
 import { uselogInEemployeeResource } from "../../../hooks/resource/employeeResource/useEmployeeResource";
 import { useGetOfficeResource } from "../../../hooks/resource/officeResource/useOfficeResource";
 import { PendingTask } from "../Component/PendingTask";
+import ToDoList from "../Component/ToDoList";
 
 export const RightEmployDashbord = ({ employData }) => {
   const navigate = useNavigate();
@@ -55,7 +56,7 @@ export const RightEmployDashbord = ({ employData }) => {
           marginTop="1rem"
           flexDirection="column"
           justifyContent="center"
-          padding=" 1rem "
+          padding={{sm:" 1rem " ,md:"0", lg:"1rem"}}
           flexWrap="wrap"
           borderRadius="10px"
         >
@@ -88,6 +89,9 @@ export const RightEmployDashbord = ({ employData }) => {
           </Box>
         </Box>
       </Box>
+      <Grid>
+        <ToDoList/>
+      </Grid>
     </Box>
   );
 };
@@ -102,10 +106,10 @@ export const Card = ({ bgcolor, leaveName, leavetaken }) => {
       width="100%"
       height="150px"
     >
-      <Typography alignSelf="center" fontSize="22px">
+      <Typography alignSelf="center" fontSize={{sm:"22px",md:"18px", lg:"22px"}}>
         {bgcolor === "#D6EBFF" ? "3/12" : leavetaken}
       </Typography>
-      <Typography fontSize="14px" alignSelf="center">
+      <Typography fontSize={{xs:"11px",sm:"14px", md:"12px", lg:"14px"}} alignSelf="center">
         {leaveName}
       </Typography>
     </Grid>
