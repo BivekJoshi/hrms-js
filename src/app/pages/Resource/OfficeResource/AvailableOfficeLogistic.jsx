@@ -32,20 +32,20 @@ export const AvailableOfficeLogistic = (props) => {
       width: "57rem",
       sorting: false,
     },
-    // {
-    //   title: "Active",
-    //   field: "isActive",
-    //   emptyValue: "-",
-    //   width: "57rem",
-    //   sorting: false,
-    // },
+    {
+      title: "Active",
+      field: "isActive",
+      emptyValue: "-",
+      width: "57rem",
+      sorting: false,
+    },
   ];
   return (
     <>
       <CustomTable
         columns={columns}
         data={data}
-        title="Deactivated Office Logistics"
+        title="Activated Office Logistics"
         isLoading={isLoading}
         exportButton={true}
       />

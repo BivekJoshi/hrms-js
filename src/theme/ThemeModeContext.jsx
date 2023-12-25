@@ -23,6 +23,7 @@ const getPalette = (darkMode) => {
       main: darkMode ? '#81C784' : '#388E3C',
       light: darkMode ? '#f0ca92' : '#6DAB23',
       dark: darkMode ? '#cd7539' : '#cd7539',
+      holiday: darkMode ? "" :"#FF8A7B"
     },
     secondary: {
       main: darkMode ? '#10598E' : '#98D8F1',
@@ -35,6 +36,9 @@ const getPalette = (darkMode) => {
       imageCaption: darkMode ? '#c5c7cb' : '#616161',
       tabbg: darkMode ? '#3D4852' : '#E8F5E9',
       activetabBg: darkMode ? '#25262E' : '#C8E6C9',
+      event: darkMode ? "#3f413f" : "#D5FFCB",
+      holiday: darkMode ? "" :"#FFEDEA",
+      toDo: darkMode ? "" :"#F2F4F4"
     },
     text: {
       primary: darkMode ? '#FFFFFF' : '#000',

@@ -31,3 +31,9 @@ body {
 .MuiAutocomplete-option:hover {
   background-color: #e0e0e0;
 }
+
+/* for form Modal */
+.css-hsrx2h {
+  top: 50% !important;
+  border-radius: 1rem;
+}

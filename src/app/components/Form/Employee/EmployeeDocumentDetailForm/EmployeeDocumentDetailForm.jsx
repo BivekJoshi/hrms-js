@@ -88,6 +88,19 @@ const EmployeeDocumentDetailForm = () => {
     <div>
       <Grid container>
         <Grid item xs={12} sm={6} md={6}>
+          <Grid display="flex" justifyContent="center">
+            {expandedAccordion && imagePreviewMap[expandedAccordion] && (
+              <img
+                src={imagePreviewMap[expandedAccordion]}
+                alt="Preview"
+                width={240}
+                height={240}
+                style={{
+                  objectFit: "contain",
+                }}
+              />
+            )}
+          </Grid>
           {documentPhoto &&
             documentPhoto.map((document) => (
               <Grid
@@ -96,7 +109,6 @@ const EmployeeDocumentDetailForm = () => {
                   display: 'flex',
                   flexDirection: 'column',
                   gap: '1rem',
-
                   paddingRight: '2rem',
                 }}
               >
@@ -122,16 +134,16 @@ const EmployeeDocumentDetailForm = () => {
                     </div>
                   )}
                 </Box>
-                {expandedAccordion && !imagePreviewMap[expandedAccordion] && (
-                  <Grid
-                    sm={12}
-                    sx={{
-                      display: 'flex',
-                      justifyContent: 'center',
-                      gap: '.5rem',
-                      textAlign: 'center',
-                    }}
-                  >
+                <Grid
+                  sm={12}
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    gap: ".5rem",
+                    textAlign: "center",
+                  }}
+                >
+                  
                     <Button
                       variant='outlined'
                       color='primary'
@@ -151,10 +163,10 @@ const EmployeeDocumentDetailForm = () => {
                       Delete
                     </Button>
                   </Grid>
-                )}
+                
               </Grid>
             ))}
-          <Grid display='flex' justifyContent='center'>
+          {/* <Grid display='flex' justifyContent='center'>
             {expandedAccordion && imagePreviewMap[expandedAccordion] && (
               <>
                 <Grid
@@ -211,13 +223,12 @@ const EmployeeDocumentDetailForm = () => {
                         sx={{ textTransform: 'none', fontWeight: 'bold' }}
                       >
                         Delete
-                      </Button> */}
                     </Grid>
                   </Box>
                 </Grid>
               </>
             )}
-          </Grid>
+          </Grid> */}
         </Grid>
 
         <Grid item xs={12} sm={6}>
@@ -228,9 +239,9 @@ const EmployeeDocumentDetailForm = () => {
                 expanded={expandedAccordion === `panel${document?.id}`}
                 onChange={handleChange(`panel${document?.id}`, document?.input)}
                 sx={{
-                  borderBottom: '1px solid black',
-                  boxShadow: 'none',
-                  margin: '0 !important',
+                  margin: "0 !important",
+                  borderBottom: "1px solid black",
+                  boxShadow: "none",
                 }}
               >
                 <AccordionSummary

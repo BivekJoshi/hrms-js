@@ -143,7 +143,7 @@ const EmployeeDashbord = ({}) => {
         {/* <EmployPichart task={task}/> */}
       </Box>
       {/* <MiddleEmployDashbord employData={employData} /> */}
-      <Box display='grid' gridTemplateColumns='3fr 2fr' gap='3rem'>
+      <Box display='grid' gridTemplateColumns={{md:'5fr 4fr', xs:"1fr"}} gap='3rem' padding="2rem 0">
         <LeftEmployDashbord />
         <RightEmployDashbord employData={employData} />
       </Box>

@@ -5,36 +5,39 @@ import {
   Grid,
   MenuItem,
   TextField,
-} from '@mui/material';
-import React, { useContext } from 'react';
-import useEmployeeResourceForm from '../../../../hooks/resource/employeeResource/EmployeeResourceForm/useEmployeeResourceForm';
-import { useGetAvailableOfficeResource } from '../../../../hooks/resource/officeResource/useOfficeResource';
-import { useGetEmployee } from '../../../../hooks/employee/useEmployee';
-import ThemeModeContext from '../../../../../theme/ThemeModeContext';
+} from "@mui/material";
+import React, { useContext } from "react";
+import useEmployeeResourceForm from "../../../../hooks/resource/employeeResource/EmployeeResourceForm/useEmployeeResourceForm";
+import {
+  useGetAvailableOfficeResource,
+  useGetOfficeResource,
+} from "../../../../hooks/resource/officeResource/useOfficeResource";
+import { useGetEmployee } from "../../../../hooks/employee/useEmployee";
+import ThemeModeContext from "../../../../../theme/ThemeModeContext";
 
 const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
   const { data: availableOfficeResource, isLoading: resourceLoad } =
     useGetAvailableOfficeResource();
+  const { data: officeResourceData } = useGetOfficeResource();
   const { data: employeeData } = useGetEmployee();
   const { mode } = useContext(ThemeModeContext);
-  const { formik } = useEmployeeResourceForm(data);
+  const { formik } = useEmployeeResourceForm(data, onClose);
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
-    if (formik.isValid) {
-      onClose();
-    }
+    // if (formik.isValid) {
+    onClose();
   };
-  const submitButtonText = data ? 'Update Resource' : ' Provide Resource';
-  const currentDate = new Date().toISOString().split('T')[0];
+  const submitButtonText = data ? "Update Resource" : " Provide Resource";
+  const currentDate = new Date().toISOString().split("T")[0];
 
   return (
     !isLoading && (
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
           <Autocomplete
-            id='employeeId'
-            name='employeeId'
+            id="employeeId"
+            name="employeeId"
             disabled={editMode}
             options={employeeData || []}
             getOptionLabel={(employee) =>
@@ -44,17 +47,16 @@ const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
               (employee) => employee?.id === formik.values?.employeeId
             )}
             onChange={(event, newValue) => {
-              // newValue will be the selected employee object
-              formik.setFieldValue('employeeId', newValue?.id || ''); // Set the id in formik
+              formik.setFieldValue("employeeId", newValue?.id || "");
             }}
             renderInput={(params) => (
               <TextField
                 {...params}
-                label='User Name'
-                placeholder='Enter User name...'
+                label="Employee Name"
+                placeholder="Select employee"
                 fullWidth
                 required
-                variant='outlined'
+                variant="outlined"
                 InputLabelProps={{ shrink: true }}
                 error={
                   formik.touched.employeeId && Boolean(formik.errors.employeeId)
@@ -68,51 +70,48 @@ const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
         </Grid>
 
         <Grid item xs={12} sm={12}>
-          <TextField
-            id='officeResourceId'
-            name='officeResourceId'
-            label='Office Logistics'
-            placeholder='Select Logistics'
-            fullWidth
+          <Autocomplete
+            id="officeResourceId"
+            name="officeResourceId"
             disabled={editMode}
-            required
-            select
-            value={formik?.values?.officeResourceId}
-            onChange={formik.handleChange}
-            error={
-              formik.touched.officeResourceId &&
-              Boolean(formik.errors.officeResourceId)
-            }
-            helperText={
-              formik.touched.officeResourceId && formik.errors.officeResourceId
-            }
-            variant='outlined'
-            InputLabelProps={{
-              shrink:
-                Boolean(formik.values.officeResourceId) ||
-                Boolean(formik.values.officeResourceId !== ''),
+            options={availableOfficeResource || []}
+            getOptionLabel={(option) => option?.name || ""}
+            value={officeResourceData?.find(
+              (resource) =>
+                resource?.id === formik.values.officeResourceId || ""
+            )}
+            onChange={(event, newValue) => {
+              formik.setFieldValue("officeResourceId", newValue?.id || "");
             }}
-          >
-            {!resourceLoad &&
-              availableOfficeResource?.map((option) => (
-                <MenuItem
-                  key={option?.id}
-                  value={option.id}
-                  sx={{ bgcolor: mode === 'light' ? '' : '#413e3e' }}
-                >
-                  {option?.name}
-                </MenuItem>
-              ))}
-          </TextField>
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                variant="outlined"
+                label="Office Logistics"
+                placeholder="Select logistics"
+                fullWidth
+                required
+                error={
+                  formik.touched.officeResourceId &&
+                  Boolean(formik.errors.officeResourceId)
+                }
+                helperText={
+                  formik.touched.officeResourceId &&
+                  formik.errors.officeResourceId
+                }
+                InputLabelProps={{ shrink: true }}
+              />
+            )}
+          />
         </Grid>
 
         <Grid item xs={12} sm={12}>
           <TextField
-            type='date'
-            id='receiveDate'
-            name='receiveDate'
-            label='Received Date'
-            placeholder='Select date'
+            type="date"
+            id="receiveDate"
+            name="receiveDate"
+            label="Received Date"
+            placeholder="Select date"
             fullWidth
             required
             value={formik.values.receiveDate}
@@ -124,17 +123,17 @@ const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
               formik.touched.receiveDate && Boolean(formik.errors.receiveDate)
             }
             helperText={formik.touched.receiveDate && formik.errors.receiveDate}
-            variant='outlined'
+            variant="outlined"
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
-            type='date'
-            id='returnDate'
-            name='returnDate'
-            label='Returned Date'
-            placeholder='Select date'
+            type="date"
+            id="returnDate"
+            name="returnDate"
+            label="Returned Date"
+            placeholder="Select date"
             fullWidth
             value={formik.values.returnDate}
             onChange={formik.handleChange}
@@ -142,31 +141,31 @@ const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
               formik.touched.returnDate && Boolean(formik.errors.returnDate)
             }
             helperText={formik.touched.returnDate && formik.errors.returnDate}
-            variant='outlined'
+            variant="outlined"
             inputProps={{
-              max: currentDate, // Disable past date selections
+              max: currentDate,
             }}
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
         <Grid
           container
-          direction='row'
-          justifyContent='flex-end'
-          alignItems='flex-end'
+          direction="row"
+          justifyContent="flex-end"
+          alignItems="flex-end"
         >
           <Button
-            variant='contained'
+            variant="contained"
             onClick={handleFormSubmit}
             sx={{ mt: 3, ml: 1 }}
           >
             {submitButtonText}
           </Button>
           <Button
-            variant='contained'
+            variant="contained"
             onClick={onClose}
             sx={{ mt: 3, ml: 1 }}
-            color='error'
+            color="error"
           >
             Cancel
           </Button>
