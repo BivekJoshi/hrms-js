@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { useGetDeactivatedEmployee } from '../../../hooks/employee/DeactivateEmploye/useEmployee';
 import RestoreFromTrashOutlinedIcon from '@mui/icons-material/RestoreFromTrashOutlined';
 import CustomTable from '../../../components/CustomTable/CustomTable';
-import { EditDeactivationEmployeeModal } from '../EmployeeDeactivationModal/EditDeactivationEmployeeModal';
+import { EditActivationEmployeeModal, EditDeactivationEmployeeModal } from '../EmployeeDeactivationModal/EditDeactivationEmployeeModal';
+import { useGetDeactivatedEmployee } from '../../../hooks/employee/DeactivateEmploye/useEmployee';
 
 const DeactivatedEmployee = () => {
   const { data: deactivateEmployee, isLoading } = useGetDeactivatedEmployee();
@@ -65,7 +65,7 @@ const DeactivatedEmployee = () => {
 
   const actions = [
     {
-      icon: () => <RestoreFromTrashOutlinedIcon />,
+      icon: 'Activate',
       tooltip: 'Activate Employee',
       onClick: (event, rowData) => handleDeactivatedEmployee(rowData),
     },
@@ -78,14 +78,15 @@ const DeactivatedEmployee = () => {
       <CustomTable
         columns={columns}
         data={deactivateEmployee}
-        title='Inactive Employee'
+        title="Inactive Employee"
         isLoading={isLoading}
         actions={actions}
       />
 
       {openDeactivatedModal && (
-        <EditDeactivationEmployeeModal
-          id={deactivatedEmployee?.id}
+        <EditActivationEmployeeModal 
+        title={"Employee Activation"}
+          data={deactivatedEmployee}
           open={openDeactivatedModal}
           handleCloseModal={handleCloseDeactivatedModal}
         />
