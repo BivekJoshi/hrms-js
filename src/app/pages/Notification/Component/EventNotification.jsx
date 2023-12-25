@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   ClickAwayListener,
   Divider,
   Grid,
@@ -15,6 +16,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
+import useEventConfirmationForm from "../../../hooks/event/EventForm/useEventConfirmationForm";
 
 export const EventNotification = ({
   data,
@@ -23,6 +25,16 @@ export const EventNotification = ({
   handleListKeyDown,
 }) => {
   const { mode, palette } = useContext(ThemeModeContext);
+
+  const { formik } = useEventConfirmationForm(data);
+
+  const handleButton = (response, eventId, notificationId) => {
+    formik.setFieldValue("status", response);
+    formik.setFieldValue("eventId", eventId);
+    formik.setFieldValue("notificationId", notificationId);
+    formik.handleSubmit();
+  };
+
   return (
     <>
       <MenuList
@@ -36,20 +48,21 @@ export const EventNotification = ({
         }}
       >
         <Typography variant="h6" sx={{ color: "#6DAB23" }}>
-          Today's Event
+          Comming Event
         </Typography>
 
-        <Box
-          sx={{
-            backgroundColor: "#F7F8F9",
-            padding: ".8rem",
-            margin: ".5rem",
-            borderRadius: "6px",
-          }}
-        >
-          {data &&
-            data.map((ename, index) => (
-              <>
+        {data &&
+          data.map((ename, index) => (
+            <>
+            {ename.notificationId !== "1" && (
+              <Box
+                sx={{
+                  backgroundColor: "#F7F8F9",
+                  padding: ".8rem",
+                  margin: ".5rem",
+                  borderRadius: "6px",
+                }}
+              >
                 <div
                   style={{
                     display: "flex",
@@ -127,8 +140,8 @@ export const EventNotification = ({
                   padding="5px"
                 >
                   <LocationOnIcon fontSize="13px" />
-                  <Typography sx={{ maxWidth: "25rem", fontSize: "13px" }}>
-                    At {ename?.eventLocation}
+                  <Typography sx={{ maxWidth: "14rem", fontSize: "13px" }}>
+                    <b>Location: </b>{ename?.eventLocation}
                   </Typography>
                 </Grid>
                 <Typography variant="h8" sx={{ fontWeight: 500 }}>
@@ -141,35 +154,46 @@ export const EventNotification = ({
                     alignItems: "center",
                   }}
                 >
-                  <Typography
+                  <Button
                     sx={{
                       color: "green",
-                      display: "flex",
-                      alignItems: "center",
-                      gap: ".5rem",
-                      cursor: "pointer",
-                      fontSize: "13px",
+                      textTransform: "none",
+                      fontWeight: "bold",
                     }}
+                    startIcon={<DoneIcon />}
+                    onClick={() =>
+                      handleButton(
+                        "YES",
+                        ename?.eventId,
+                        ename?.notificationId
+                      )
+                    }
                   >
-                    <DoneIcon /> Yes
-                  </Typography>
+                    Yes
+                  </Button>
                   <Divider orientation="vertical" flexItem></Divider>
-                  <Typography
+                  <Button
                     sx={{
                       color: "red",
-                      display: "flex",
-                      alignItems: "center",
-                      gap: ".5rem",
-                      cursor: "pointer",
-                      fontSize: "13px",
+                      textTransform: "none",
+                      fontWeight: "bold",
                     }}
+                    startIcon={<CloseIcon />}
+                    onClick={() =>
+                      handleButton(
+                        "NO",
+                        ename?.eventId,
+                        ename?.notificationId
+                      )
+                    }
                   >
-                    <CloseIcon /> No
-                  </Typography>
+                    No
+                  </Button>
                 </div>
-              </>
-            ))}
-        </Box>
+              </Box>
+            )}
+            </>
+          ))}
       </MenuList>
     </>
   );

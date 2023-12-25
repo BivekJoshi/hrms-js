@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext, useEffect } from "react";
+import React, { useState, useRef, useContext, useEffect} from "react";
 import {
   Typography,
   Popper,
@@ -19,13 +19,14 @@ import { useGetLeave } from "../../hooks/leave/useLeave";
 import useAuth from "../../../auth/hooks/component/login/useAuth";
 
 const Notification = ({ data }) => {
+  const [status, setStatus] = useState();
   const { mode } = useContext(ThemeModeContext);
   const { isManager } = useAuth();
   const { data: leaveData } = useGetLeave();
 
   const eventName = data?.events;
 
-  //leave notifications
+//leave notifications
   const pendingLeaveData = isManager
     ? leaveData?.filter((leave) => leave.leaveStatus === "PENDING")
     : "";
@@ -41,7 +42,7 @@ const Notification = ({ data }) => {
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
-    //setstatus (data?.ischecked = true)
+//setstatus (data?.ischecked = true)
   };
 
   const handleClose = () => {
