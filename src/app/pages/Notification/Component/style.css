@@ -1,0 +1,18 @@
+/* Customize the scrollbar */
+::-webkit-scrollbar {
+  width: 12px; /* Width of the entire scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Color of the tracking area */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(88, 179, 88); /* Color of the scrollbar thumb */
+  border-radius: 6px; /* Rounded corners */
+  border: 3px solid #f1f1f1; /* Border around the thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: green; /* Color of the scrollbar thumb on hover */
+}

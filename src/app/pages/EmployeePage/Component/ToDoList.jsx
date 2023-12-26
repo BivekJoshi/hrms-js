@@ -18,9 +18,9 @@ const ToDoList = () => {
   };
 
   return (
-    <Grid className="employeeDeshbord">
+    <Grid display="flex" flexDirection="column" gap="1rem">
       <Typography variant="h5">Todo List </Typography>
-      <Grid display="grid" gap="1rem" minHeight={"218px"}>
+      <Grid display="grid" gap="1rem" >
         {todoListData?.length > 0 ? (
           todoListData?.slice(0, 3).map((notify, index) => (
             <Grid key={index}>
@@ -110,14 +110,15 @@ const ToDoList = () => {
           </Grid>
         )}
       </Grid>
+      {todoListData?.length >= 3 &&
       <Grid textAlign="center">
         <ButtonComponent
           OnClick={() => {
-            navigate("/employee/event");
+            navigate("/employee/todolist");
           }}
           buttonName={"Click here to see all todo list"}
         />
-      </Grid>
+      </Grid>}
     </Grid>
   );
 };

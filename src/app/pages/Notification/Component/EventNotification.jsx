@@ -17,6 +17,7 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
 import useEventConfirmationForm from "../../../hooks/event/EventForm/useEventConfirmationForm";
+import "./style.css";
 
 export const EventNotification = ({
   data,
@@ -41,6 +42,12 @@ export const EventNotification = ({
     const day = eventDateObject.getDate();
     return { day, month };
   };
+ // upcoming event
+//  const currentDate = new Date();
+//  const upcomingEvents = data?.filter((event) => {
+//    const eventDate = new Date(event.eventDate);
+//    return eventDate >= currentDate;
+//  });
 
   return (
     <>
@@ -51,9 +58,9 @@ export const EventNotification = ({
         onKeyDown={handleListKeyDown}
         sx={{
           textAlign: "center",
-          padding: "1rem 1rem",
-          maxHeight:"25rem",
-          overflowY:"scroll"
+          padding: ".5rem",
+          maxHeight: "25rem",
+          overflowY: "scroll",
         }}
       >
         <Typography variant="h6" sx={{ color: "#6DAB23" }}>
@@ -81,8 +88,9 @@ export const EventNotification = ({
                 >
                   <div
                     style={{
-                      border: "1px solid #E0E0E0",
-                      borderRadius: "6px",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      gap: "1rem",
                     }}
                   >
                     <Typography
@@ -107,37 +115,65 @@ export const EventNotification = ({
                   <div>
                     <div
                       style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: ".5rem",
+                        border: "1px solid #E0E0E0",
+                        borderRadius: "6px",
                       }}
                     >
+                      <Typography
+                        style={{
+                          backgroundColor: palette.primary.main,
+                          padding: "1px 8px",
+                          color: "#fff",
+                          borderRadius: "6px 6px 0 0",
+                        }}
+                        fontSize="11px"
+                      >
+                        {getUpcomingDay(ename?.eventDate).month}
+                      </Typography>
+                      <Typography
+                        fontSize="11px"
+                        textAlign="center"
+                        bgcolor={mode === "light" ? "#fff" : ""}
+                      >
+                        {getUpcomingDay(ename?.eventDate).day}
+                      </Typography>
+                    </div>
+                    <div>
                       <div
                         style={{
-                          backgroundColor: "red",
-                          width: "10px",
-                          height: "10px",
-                          borderRadius: "50%",
+                          display: "flex",
+                          alignItems: "center",
+                          gap: ".5rem",
                         }}
-                      ></div>
-                      <Typography sx={{ fontWeight: 600, fontSize: "13px" }}>
-                        {ename?.eventName}
-                      </Typography>
+                      >
+                        <div
+                          style={{
+                            backgroundColor: "red",
+                            width: "10px",
+                            height: "10px",
+                            borderRadius: "50%",
+                          }}
+                        ></div>
+                        <Typography sx={{ fontWeight: 600, fontSize: "13px" }}>
+                          {ename?.eventName}
+                        </Typography>
+                      </div>
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "1rem",
+                        }}
+                      >
+                        <AccessTimeIcon
+                          style={{ width: "13px", height: "13px" }}
+                        />
+                        <Typography fontSize="13px">
+                          {ename?.eventTime} - Onwards
+                        </Typography>
+                      </div>
                     </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "1rem",
-                      }}
-                    >
-                      <AccessTimeIcon
-                        style={{ width: "13px", height: "13px" }}
-                      />
-                      <Typography fontSize="13px">
-                        {ename?.eventTime} - Onwards
-                      </Typography>
-                    </div>
+                    <div></div>
                   </div>
                   <div></div>
                 </div>

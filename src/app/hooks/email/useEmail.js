@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { addEmailConfigure, getEmailConfigure, sendEmail, sendEmailForHoliday, sendEmailToAll, sendEmailToMultipleEmployee } from "../../api/email/email-api";
+import { addChangeEmail, addEmailConfigure, getEmailConfigure, sendEmail, sendEmailForHoliday, sendEmailToAll, sendEmailToMultipleEmployee } from "../../api/email/email-api";
 import { toast } from "react-toastify";
 
 /*___________________SEND EMAIL FOR PERTICULAR EMPLOYEE ON BASIS OF ID______________________________________*/
@@ -101,6 +101,21 @@ export const useEmailConfigure = ({ onSuccess }) => {
       toast.success('Succesfully added email configuration');
       onSuccess && onSuccess(data, variables, context);
       queryClient.invalidateQueries('addEmailConfigure');
+    },
+    onError: (err, _variables, _context) => {
+      toast.error(`error: ${err.message}`);
+    },
+  });
+};
+
+/*________________________POST FOR Change EMAIL_____________________________________*/
+export const useChangeEmail = ({ onSuccess }) => {
+  const queryClient = useQueryClient();
+  return useMutation(['addChangeEmail'], (formData) => addChangeEmail(formData), {
+    onSuccess: (data, variables, context) => {
+      toast.success('Successfully changed email');
+      onSuccess && onSuccess(data, variables, context);
+      queryClient.invalidateQueries('addChangeEmail');
     },
     onError: (err, _variables, _context) => {
       toast.error(`error: ${err.message}`);

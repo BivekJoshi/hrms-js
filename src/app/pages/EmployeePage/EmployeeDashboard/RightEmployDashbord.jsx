@@ -92,6 +92,7 @@ export const Card = ({ bgcolor, leaveName, leavetaken }) => {
       justifyContent="center"
       width="100%"
       height="150px"
+      borderRadius="8px"
     >
       <Typography alignSelf="center" fontSize={{sm:"22px",md:"18px", lg:"22px"}}>
         {bgcolor === "#D6EBFF" ? "3/12" : leavetaken + " Days"}
