@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
-import { Grid, Button, MenuItem, TextField, Typography } from "@mui/material";
-import { Autocomplete } from "@mui/material";
-import { useGetEmployee } from "../../../hooks/employee/useEmployee";
-import { useAddUserControlForm } from "../../../pages/Auth/UserControl/Users/useAddUserControlForm";
-import ThemeModeContext from "../../../../theme/ThemeModeContext";
-import { ButtonComponent } from "../../Button/ButtonComponent";
+import React, { useContext } from 'react';
+import { Grid, Button, MenuItem, TextField, Typography } from '@mui/material';
+import { Autocomplete } from '@mui/material';
+import { useGetEmployee } from '../../../hooks/employee/useEmployee';
+import { useAddUserControlForm } from '../../../pages/Auth/UserControl/Users/useAddUserControlForm';
+import ThemeModeContext from '../../../../theme/ThemeModeContext';
+import { ButtonComponent } from '../../Button/ButtonComponent';
 
 export const AddUserControlFields = ({ onClose }) => {
   const { data: employeeData } = useGetEmployee();
@@ -21,18 +21,18 @@ export const AddUserControlFields = ({ onClose }) => {
 
   const handleUserNameChange = (event, selectedEmployee) => {
     if (selectedEmployee) {
-      formik.setFieldValue("employeeId", selectedEmployee.id);
-      formik.setFieldValue("email", selectedEmployee.officeEmail);
+      formik.setFieldValue('employeeId', selectedEmployee.id);
+      formik.setFieldValue('email', selectedEmployee.officeEmail);
     }
   };
 
-  const nameLabel = (employee) => {
-    if(employee?.middleName === ''){
-      return  `${employee?.firstName} ${employee?.lastName}`
+  const nameLabel = (emp) => {
+    if (emp?.middleName === '') {
+      return `${emp?.firstName} ${emp?.lastName}`;
     } else {
-      return  `${employee?.firstName} ${employee?.middleName} ${employee?.lastName}`
+      return `${emp?.firstName} ${emp?.lastName} ${emp?.lastName}`;
     }
-  }
+  };
 
   return (
     <>
@@ -43,12 +43,10 @@ export const AddUserControlFields = ({ onClose }) => {
           </Typography>
           <br />
           <Autocomplete
-            id="employeeId"
-            name="employeeId"
+            id='employeeId'
+            name='employeeId'
             options={employeeData || []}
-            getOptionLabel={(employee) => {
-              return nameLabel(employee)
-            }}
+            getOptionLabel={(employee) => nameLabel(employee)}
             value={employeeData?.find(
               (employee) => employee?.id === formik.values?.employeeId
             )}
@@ -57,12 +55,11 @@ export const AddUserControlFields = ({ onClose }) => {
             renderInput={(params) => (
               <TextField
                 {...params}
-                label="User Name"
-                placeholder="Enter User name..."
+                label='User Name'
+                placeholder='Enter User name...'
                 fullWidth
                 required
-                variant="outlined"
-                
+                variant='outlined'
                 InputLabelProps={{ shrink: true }}
                 error={
                   formik.touched.employeeId && Boolean(formik.errors.employeeId)
@@ -77,40 +74,40 @@ export const AddUserControlFields = ({ onClose }) => {
 
         <Grid item xs={12} sm={12}>
           <TextField
-            id="email"
-            name="email"
-            label="Email"
-            placeholder="Enter email..."
-            type="email"
+            id='email'
+            name='email'
+            label='Email'
+            placeholder='Enter email...'
+            type='email'
             fullWidth
             required
             value={formik.values.email}
             onChange={formik.handleChange}
             error={formik.touched.email && Boolean(formik.errors.email)}
             helperText={formik.touched.email && formik.errors.email}
-            variant="outlined"
+            variant='outlined'
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
 
         <Grid
           container
-          direction="row"
-          justifyContent="flex-end"
-          alignItems="flex-end"
+          direction='row'
+          justifyContent='flex-end'
+          alignItems='flex-end'
         >
           <ButtonComponent
-            variant="contained"
+            variant='contained'
             OnClick={handleFormSubmit}
-            sx={{ mt: 3, ml: 1, color: "#fff" }}
-            buttonName={"Add User"}
+            sx={{ mt: 3, ml: 1, color: '#fff' }}
+            buttonName={'Add User'}
           />
           <ButtonComponent
-            variant="contained"
+            variant='contained'
             OnClick={onClose}
             sx={{ mt: 3, ml: 1 }}
-            BGColor={"#d32f2f"}
-            buttonName={"Cancel"}
+            BGColor={'#d32f2f'}
+            buttonName={'Cancel'}
           />
         </Grid>
       </Grid>

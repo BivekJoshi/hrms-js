@@ -269,7 +269,7 @@ export default function AdminSidebar() {
       subMenus: [],
     },
     {
-      name: 'Email Configure',
+      name: 'Setting',
       icon: (
         <MailIcon
           sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
