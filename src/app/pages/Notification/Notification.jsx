@@ -21,8 +21,7 @@ import useAuth from "../../../auth/hooks/component/login/useAuth";
 const Notification = ({ data }) => {
   const { isManager } = useAuth();
   const { data: leaveData } = useGetLeave();
-
-  console.log(data, "data");
+  const { mode } = useContext(ThemeModeContext);
 
   const eventName = data?.events;
 

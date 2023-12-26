@@ -176,7 +176,7 @@ const Event = ({ permissions }) => {
 
       <Grid container spacing={2}>
         <Grid item xs={3}>
-          <EventList/>
+          <EventList eventData={eventData}/>
         </Grid>
         <Grid item xs={9}>
           <Box sx={{ padding: "2rem" }}>
@@ -184,11 +184,11 @@ const Event = ({ permissions }) => {
               ref={calendarRef}
               plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
               initialView="dayGridMonth"
-              headerToolbar={{
-                start: "customTodayButton prev,next",
-                center: "title",
-                end: "dayGridMonth,timeGridWeek,timeGridDay",
-              }}
+              // headerToolbar={{
+                // start: "customTodayButton prev,next",
+                // center: "title",
+                // end: "dayGridMonth,timeGridWeek,timeGridDay",
+              // }}
               height={"90vh"}
               events={events}
               eventClick={handleOpenModal}
