@@ -1,16 +1,16 @@
-import React from "react";
-import { useChangeEmail } from "../useEmail";
-import { useFormik } from "formik";
-import { ChangeEmailSchema } from "./changeEmailSchema";
+import React from 'react';
+import { useChangeEmail } from '../useEmail';
+import { useFormik } from 'formik';
+import changeEmailSchema from './changeEmailSchema';
 
 const useChangeForm = () => {
   const { mutate: changeEmail } = useChangeEmail({});
   const formik = useFormik({
     initialValues: {
-      newEmail: "",
-      confirmEmail: "",
+      newEmail: '',
+      confirmEmail: '',
     },
-    validationSchema: ChangeEmailSchema,
+    validationSchema: changeEmailSchema,
     // enableReinitialize: true,
     onSubmit: (values) => {
       handleRequest(values);
