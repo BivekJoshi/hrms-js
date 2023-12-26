@@ -8,16 +8,17 @@ const useChangeForm = () => {
   const formik = useFormik({
     initialValues: {
       newEmail: "",
+      confirmEmail: "",
     },
     validationSchema: ChangeEmailSchema,
-    enableReinitialize: true,
+    // enableReinitialize: true,
     onSubmit: (values) => {
       handleRequest(values);
     },
   });
-
-  const handleRequest = (values) => {
-    values = { ...values };
+  console.log(formik);
+  const handleRequest = ({ newEmail }) => {
+    const values = { newEmail };
     changeEmail(values, formik, {
       onSuccess: () => {
         formik.resetForm();

@@ -6,22 +6,11 @@ import { toast } from "react-toastify";
 
 const ChangeEmail = () => {
   const { formik } = useChangeForm({});
-  const [conformEmail, setConformEmail] = useState();
 
   const handleFormSubmit = async () => {
-    const doEmailMatch = formik.values.newEmail === conformEmail;
-    console.log(doEmailMatch);
-    if (!doEmailMatch) {
-      toast.error("New Email and Confirm Email do not match");
-      return;
-    } else {
-      formik.handleSubmit();
-    }
+    formik.handleSubmit();
   };
 
-  const handleConfimEmail = (event) => {
-    setConformEmail(event.target.value);
-  };
   return (
     <Grid container spacing={3}>
       <Grid item xs={12} sm={12}>
@@ -46,18 +35,18 @@ const ChangeEmail = () => {
       </Grid>
       <Grid item xs={12} sm={12}>
         <TextField
-          id="conformEmail"
-          name="conformEmail"
-          label="Conform Email"
+          id="confirmEmail"
+          name="confirmEmail"
+          label="Confirm Email"
           placeholder="Enter Conform Email"
           fullWidth
           required
-          value={formik.values.conformEmail}
-          onChange={handleConfimEmail}
+          value={formik.values.confirmEmail}
+          onChange={formik.handleChange}
           error={
-            formik.touched.conformEmail && Boolean(formik.errors.conformEmail)
+            formik.touched.confirmEmail && Boolean(formik.errors.confirmEmail)
           }
-          helperText={formik.touched.conformEmail && formik.errors.conformEmail}
+          helperText={formik.touched.confirmEmail && formik.errors.confirmEmail}
           variant="outlined"
           InputLabelProps={{ shrink: true }}
           size="small"
