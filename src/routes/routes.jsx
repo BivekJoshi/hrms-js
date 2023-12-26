@@ -86,8 +86,8 @@ const EmployeeDashboard = Loadable(
     import('../app/pages/EmployeePage/EmployeeDashboard/EmployeeDashbord')
   )
 );
-const EmailConfiguration = Loadable(
-  lazy(() => import('../app/pages/EmailConfiguration/EmailConfiguration'))
+const Setting = Loadable(
+  lazy(() => import('../app/pages/EmailConfiguration/Setting'))
 );
 
 const routes = [
@@ -291,7 +291,7 @@ const routes = [
     path: 'email',
     name: 'Email',
     id: nanoid(),
-    component: <EmailConfiguration component='emailConfig' />,
+    component: <Setting component='emailConfig' />,
   },
   {
     path: 'users/deactivated',
