@@ -1,8 +1,7 @@
 import { LoadingButton } from '@mui/lab';
 import { Grid, TextField, Typography } from '@mui/material';
-import React, { useState } from 'react';
+import React from 'react';
 import useChangeForm from '../../../hooks/email/changeEmail/useChangeForm';
-import { toast } from 'react-toastify';
 
 const ChangeEmail = () => {
   const { formik } = useChangeForm({});
