@@ -16,7 +16,6 @@ const useChangeForm = () => {
       handleRequest(values);
     },
   });
-  console.log(formik);
   const handleRequest = ({ newEmail }) => {
     const values = { newEmail };
     changeEmail(values, formik, {
