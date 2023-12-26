@@ -6,8 +6,7 @@ import AddIcon from '@mui/icons-material/Add';
 import { useDeleteFamily } from '../../../../hooks/employee/useFamily';
 
 const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
-  const { values, handleChange } = formik;
-
+  const { values, handleChange, handleBlur, touched, errors } = formik;
   const deleteFamilyMutation = useDeleteFamily({});
   const handleDeleteFamily = (familyMember) => {
     if (familyMember?.id) {
@@ -34,18 +33,19 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
                           id={`family[${index}].name`}
                           name={`family[${index}].name`}
                           label='Name'
-                          placeholder='Enter name'
+                          placeholder='Enter Name'
                           fullWidth
                           required
                           value={familyMember.name}
                           onChange={handleChange}
+                          onBlur={handleBlur} // Add onBlur to update touched state
                           error={Boolean(
-                            formik.touched.family?.[index]?.name &&
-                              formik.errors.family?.[index]?.name
+                            touched.family?.[index]?.name &&
+                              errors.family?.[index]?.name
                           )}
                           helperText={
-                            formik.touched.family?.[index]?.name &&
-                            formik.errors.family?.[index]?.name
+                            touched.family?.[index]?.name &&
+                            errors.family?.[index]?.name
                           }
                           variant='outlined'
                           InputLabelProps={{ shrink: true }}
@@ -54,19 +54,21 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
                       <Grid item xs={12} sm={3}>
                         <TextField
                           id={`family[${index}].relation`}
-                          name={`family[${index}].relation`}
+                          relation={`family[${index}].relation`}
                           label='Relation'
-                          placeholder='Enter relation'
+                          placeholder='Enter Relation'
                           fullWidth
+                          required
                           value={familyMember.relation}
                           onChange={handleChange}
+                          onBlur={handleBlur} // Add onBlur to update touched state
                           error={Boolean(
-                            formik.touched.family?.[index]?.relation &&
-                              formik.errors.family?.[index]?.relation
+                            touched.family?.[index]?.relation &&
+                              errors.family?.[index]?.relation
                           )}
                           helperText={
-                            formik.touched.family?.[index]?.relation &&
-                            formik.errors.family?.[index]?.relation
+                            touched.family?.[index]?.relation &&
+                            errors.family?.[index]?.relation
                           }
                           variant='outlined'
                           InputLabelProps={{ shrink: true }}
@@ -77,17 +79,19 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
                           id={`family[${index}].mobileNumber`}
                           name={`family[${index}].mobileNumber`}
                           label='Mobile Number'
-                          placeholder='Enter mobile number'
+                          placeholder='Enter Mobile Number'
                           fullWidth
+                          required
                           value={familyMember.mobileNumber}
                           onChange={handleChange}
+                          onBlur={handleBlur} // Add onBlur to update touched state
                           error={Boolean(
-                            formik.touched.family?.[index]?.mobileNumber &&
-                              formik.errors.family?.[index]?.mobileNumber
+                            touched.family?.[index]?.mobileNumber &&
+                              errors.family?.[index]?.mobileNumber
                           )}
                           helperText={
-                            formik.touched.family?.[index]?.mobileNumber &&
-                            formik.errors.family?.[index]?.mobileNumber
+                            touched.family?.[index]?.mobileNumber &&
+                            errors.family?.[index]?.mobileNumber
                           }
                           variant='outlined'
                           InputLabelProps={{ shrink: true }}
