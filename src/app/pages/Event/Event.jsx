@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import { Box, Button, Grid, Typography } from "@mui/material";
 
 import FullCalendar from "@fullcalendar/react";
@@ -18,9 +18,10 @@ import FormModal from "../../components/Modal/FormModal";
 import AddEventFields from "../../components/Form/Event/AddEventFields";
 import useAuth from "../../../auth/hooks/component/login/useAuth";
 import { ButtonComponent } from "../../components/Button/ButtonComponent";
+import ThemeModeContext from "../../../theme/ThemeModeContext";
+import EventList from "./EventList";
 
 const Event = ({ permissions }) => {
-  const { isEmployee, isHrClerk } = useAuth();
 
   const calendarRef = useRef(null);
   const [events, setEvents] = useState([]);
@@ -173,24 +174,33 @@ const Event = ({ permissions }) => {
         />
       )}
 
-      <FullCalendar
-        ref={calendarRef}
-        plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-        initialView="dayGridMonth"
-        headerToolbar={{
-          start: "customTodayButton prev,next",
-          center: "title",
-          end: "dayGridMonth,timeGridWeek,timeGridDay",
-        }}
-        height={"90vh"}
-        events={events}
-        eventClick={handleOpenModal}
-        customButtons={{
-          customTodayButton: {
-            text: "Today",
-          },
-        }}
-      />
+      <Grid container spacing={2}>
+        <Grid item xs={3}>
+          <EventList/>
+        </Grid>
+        <Grid item xs={9}>
+          <Box sx={{ padding: "2rem" }}>
+            <FullCalendar
+              ref={calendarRef}
+              plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+              initialView="dayGridMonth"
+              headerToolbar={{
+                start: "customTodayButton prev,next",
+                center: "title",
+                end: "dayGridMonth,timeGridWeek,timeGridDay",
+              }}
+              height={"90vh"}
+              events={events}
+              eventClick={handleOpenModal}
+              customButtons={{
+                customTodayButton: {
+                  text: "Today",
+                },
+              }}
+            />
+          </Box>
+        </Grid>
+      </Grid>
 
       {openModal && hasPermission && (
         <OpenEvent

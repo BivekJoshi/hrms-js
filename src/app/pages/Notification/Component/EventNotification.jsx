@@ -62,8 +62,8 @@ export const EventNotification = ({
 
         {data &&
           data.map((ename, index) => (
-            <>
-            {ename.notificationId !== "1" && (
+            <div key={index}>
+            {ename.notificationId === "0" && (
               <Box
                 sx={{
                   backgroundColor: "#F7F8F9",
@@ -145,16 +145,18 @@ export const EventNotification = ({
                 <Grid
                   display="flex"
                   flexDirection="row"
-                  justifyContent="space-between"
                   padding="5px"
                 >
+                  <div style={{display:'flex'}}>
                   <LocationOnIcon fontSize="13px" />
-                  <Typography sx={{ maxWidth: "14rem", fontSize: "13px" }}>
-                    <b>Location: </b>{ename?.eventLocation}
+                  <Typography sx={{ fontSize: "13px" ,fontWeight:700}}>Location :</Typography>
+                  </div>
+                  <Typography sx={{ maxWidth: "12rem", fontSize: "13px" }}>
+                    {" "}{ename?.eventLocation}
                   </Typography>
                 </Grid>
-                <Typography variant="h8" sx={{ fontWeight: 500 }}>
-                  Are you attending?
+                <Typography sx={{ fontSize: "13px" }}>
+                  <b>Are you attending?</b>
                 </Typography>
                 <div
                   style={{
@@ -172,7 +174,7 @@ export const EventNotification = ({
                     startIcon={<DoneIcon />}
                     onClick={() =>
                       handleButton(
-                        "YES",
+                        "OK",
                         ename?.eventId,
                         ename?.notificationId
                       )
@@ -201,7 +203,7 @@ export const EventNotification = ({
                 </div>
               </Box>
             )}
-            </>
+            </div>
           ))}
       </MenuList>
     </>
