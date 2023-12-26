@@ -12,7 +12,8 @@ const AddEmployeeSchema = Yup.object().shape({
   mobileNumber: Yup.string()
     .required('Mobile number is required')
     .matches(/^[0-9]{10}$/, 'Invalid mobile number format'),
-  citizenshipNumber: Yup.string().required('Citizenship number is required'),
+  citizenshipNumber: Yup.string().matches(/^[0-9\/-]+$/, 'Enter valid citizenship number').required('Citizenship number is required'),
+  panNumber: Yup.string().matches(/^[0-9\/-]+$/, 'Enter valid pan number'),
   officeEmail: Yup.string()
     .required('Official email is required')
     .matches(
