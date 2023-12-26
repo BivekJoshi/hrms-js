@@ -14,7 +14,7 @@ const priority = [
     label: "Medium",
   },
   {
-    value: "HIGH ",
+    value: "HIGH",
     label: "High",
   },
 ];
@@ -80,7 +80,7 @@ const TodoListFields = ({ onClose, isLoading, data }) => {
             helperText={formik.touched.dueDate && formik.errors.dueDate}
           />
         </Grid>
-
+      
         <Grid item xs={12} sm={12}>
           <TextField
             id="priority"
@@ -97,7 +97,7 @@ const TodoListFields = ({ onClose, isLoading, data }) => {
             variant="outlined"
             InputLabelProps={{ shrink: true }}
           >
-            {priority.map((option) => (
+            {priority && priority.map((option) => (
               <MenuItem
                 key={option.value}
                 value={option.value}

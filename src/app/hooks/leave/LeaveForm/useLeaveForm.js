@@ -12,7 +12,6 @@ const useLeaveForm = (data,onClose) => {
   const { mutate: addLeave } = useAddLeaveByAdmin({});
   const { mutate: editLeave } = useEditLeaveStatusByAdmin({});
 
-  // console.log(data);
   const formik = useFormik({
     initialValues: {
       employeeId: data?.employeeId || '',

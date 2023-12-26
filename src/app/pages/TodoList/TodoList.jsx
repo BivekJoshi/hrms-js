@@ -74,11 +74,11 @@ const TodoList = ({ permissions }) => {
         let chipColor = "";
 
         if (priority === "HIGH") {
-          chipColor = "green";
-        } else if (priority === "MEDIUM") {
           chipColor = "red";
-        } else if (priority === "LOW") {
+        } else if (priority === "MEDIUM") {
           chipColor = "orange";
+        } else if (priority === "LOW") {
+          chipColor = "green";
         }
 
         return (
@@ -138,7 +138,7 @@ const TodoList = ({ permissions }) => {
       {openEditModal && (
         <EditTodoListModal
         title={"Edit Todo List"}
-          id={editedTodo?.id}
+          data={editedTodo}
           open={openEditModal}
           handleCloseModal={handleCloseEditModal}
         />

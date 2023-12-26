@@ -45,7 +45,7 @@ export const EditLeaveFields = ({ onClose, isLoading, data }) => {
     //   onClose();
     // }
   };
-// console.log(formik);
+
   const submitButtonText = data ? 'Update Leave' : 'Add Leave';
 
   if (isManager || isSuperAdmin) {

@@ -36,7 +36,7 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
                           label='Name'
                           placeholder='Enter name'
                           fullWidth
-                          required
+                          
                           value={familyMember.name}
                           onChange={handleChange}
                           error={Boolean(
@@ -58,6 +58,7 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
                           label='Relation'
                           placeholder='Enter relation'
                           fullWidth
+                          
                           value={familyMember.relation}
                           onChange={handleChange}
                           error={Boolean(
@@ -79,6 +80,7 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
                           label='Mobile Number'
                           placeholder='Enter mobile number'
                           fullWidth
+                          
                           value={familyMember.mobileNumber}
                           onChange={handleChange}
                           error={Boolean(

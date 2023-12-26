@@ -6,7 +6,7 @@ const AddEmployeeSchema = Yup.object().shape({
   lastName: Yup.string().required('Last name is required'),
   gender: Yup.string().required('Gender is required'),
   dateOfBirth: Yup.date()
-    .required()
+    .required('Date of birth is required')
     .max(sub({ years: 18 }, new Date()), 'Employee must be over 18 years old'),
   dateOfJoin: Yup.string().required('Date of join is required'),
   mobileNumber: Yup.string()

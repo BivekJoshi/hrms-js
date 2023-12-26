@@ -20,7 +20,7 @@ export const useAddUserControlForm = (onClose) => {
     values = {
       ...values,
     };
-    mutate(values, formik, {
+    mutate(values, {
       onSuccess: () => {
         onClose();
         formik.handleReset();

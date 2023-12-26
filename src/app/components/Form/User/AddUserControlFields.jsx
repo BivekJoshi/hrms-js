@@ -11,10 +11,11 @@ export const AddUserControlFields = ({ onClose }) => {
   const { formik } = useAddUserControlForm(onClose);
   const { mode } = useContext(ThemeModeContext);
 
-  const handleFormSubmit = async () => {
-    const isValid = await formik.validateForm();
-    if (isValid) {
-      formik.handleSubmit();
+  const handleFormSubmit = () => {
+    // const isValid = await formik.validateForm();
+    formik.handleSubmit();
+    if (formik.isValid) {
+      // formik.handleSubmit();
     }
   };
 
@@ -25,25 +26,34 @@ export const AddUserControlFields = ({ onClose }) => {
     }
   };
 
+  const nameLabel = (employee) => {
+    if(employee?.middleName === ''){
+      return  `${employee?.firstName} ${employee?.lastName}`
+    } else {
+      return  `${employee?.firstName} ${employee?.middleName} ${employee?.lastName}`
+    }
+  }
+
   return (
     <>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
           <Typography sx={{color:'orange'}}>
-            To add an employee as a user its address detail must be Filled
+            To add an employee, user's permanent address detail must be Filled
           </Typography>
           <br />
           <Autocomplete
             id="employeeId"
             name="employeeId"
             options={employeeData || []}
-            getOptionLabel={(employee) =>
-              `${employee?.firstName} ${employee?.middleName} ${employee?.lastName}`
-            }
+            getOptionLabel={(employee) => {
+              return nameLabel(employee)
+            }}
             value={employeeData?.find(
               (employee) => employee?.id === formik.values?.employeeId
             )}
             onChange={handleUserNameChange}
+            
             renderInput={(params) => (
               <TextField
                 {...params}
@@ -52,6 +62,7 @@ export const AddUserControlFields = ({ onClose }) => {
                 fullWidth
                 required
                 variant="outlined"
+                
                 InputLabelProps={{ shrink: true }}
                 error={
                   formik.touched.employeeId && Boolean(formik.errors.employeeId)
