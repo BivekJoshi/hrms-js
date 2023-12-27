@@ -42,7 +42,7 @@ const EditEmployeeForm = () => {
     useQualificationForm();
 
   const { formik: familyFormik, isLoading: isLoadingFamily } = useFamilyForm();
-
+ console.log(familyFormik)
   const { formik, isLoading } = useEditEmployeeForm({ data, employeeLoading });
 
   const { formik: permanentFormik, isLoading: addressLoading } =

@@ -45,7 +45,7 @@ export const EditLeaveFields = ({ onClose, isLoading, data }) => {
     //   onClose();
     // }
   };
-  // console.log(formik);
+
   const submitButtonText = data ? 'Update Leave' : 'Add Leave';
 
   if (isManager || isSuperAdmin) {
@@ -227,6 +227,7 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
                     bgcolor='black'
                     {...params}
                     label='Employee Name'
+                    placeholder='Select employee Name'
                     fullWidth
                     requireds
                     error={
@@ -283,6 +284,7 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
                   <TextField
                     {...params}
                     label='Leave Name'
+                    placeholder='Select leave type'
                     fullWidth
                     required
                     error={
@@ -338,7 +340,7 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
               id='leaveReason'
               name='leaveReason'
               label='Leave Reason'
-              placeholder='Enter leave Reason'
+              placeholder='Enter leave reason'
               fullWidth
               multiline
               rows={2}

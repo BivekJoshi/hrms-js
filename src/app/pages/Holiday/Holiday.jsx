@@ -49,9 +49,9 @@ const Holiday = ({ permissions }) => {
   const handleCloseModal = () => setOpenAddModal(false);
   const { formik, data } = useHolidayForm(setOpenSubmitModal, handleCloseModal);
 
-  const handleFormSubmit = async () => {
+  const handleFormSubmit = () => {
     formik.handleSubmit();
-    if (!formik.isValidating && formik.isValid) {
+    if (formik.isValid) {
     }
   };
   const handleOpenModal = (e) => {
@@ -108,7 +108,7 @@ const Holiday = ({ permissions }) => {
                 />
                 <ButtonComponent
                   variant="contained"
-                  onClick={handleCloseModal}
+                  OnClick={handleCloseModal}
                   sx={{ mt: 3, ml: 1 }}
                   BGColor={"#d32f2f"}
                   buttonName={"Cancel"}

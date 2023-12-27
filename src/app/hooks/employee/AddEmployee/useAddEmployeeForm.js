@@ -2,8 +2,8 @@ import { useAddEmployee } from '../useEmployee';
 import { useFormik } from 'formik';
 import { AddEmployeeSchema } from './addEmployeeSchema';
 
-const useAddEmployeeForm = (onClose) => {
-  const { mutate: addEmployee, data, isLoading } = useAddEmployee();
+const useAddEmployeeForm = (handleOpenSubmitModal) => {
+  const { mutate: addEmployee } = useAddEmployee();
 
   const formik = useFormik({
     initialValues: {
@@ -32,12 +32,12 @@ const useAddEmployeeForm = (onClose) => {
     values = { ...values };
     addEmployee(values, {
       onSuccess: () => {
-        onClose();
+        handleOpenSubmitModal();
         formik.resetForm();
       },
     });
   };
-  return { formik, data, isLoading };
+  return { formik };
 };
 
 export default useAddEmployeeForm;
