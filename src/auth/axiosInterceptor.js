@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import { getUser, removeUser } from '../app/utils/cookieHelper';
 import { docContextPath, getBaseUrl } from './getBaseUrl';
 
-// const baseURL = 'http://172.16.16.131:8083/hrms/api/';
+// const baseURL = 'http://172.16.16.190:8083/hrms/api/';
 //export const baseURL = 'https://172.16.16.94:6523/hrms/api/';
 // export const DOC_URL = 'https://103.94.159.144/';
 export const DOC_URL = docContextPath();
