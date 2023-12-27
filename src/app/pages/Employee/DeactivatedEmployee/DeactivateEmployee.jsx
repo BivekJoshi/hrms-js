@@ -3,6 +3,7 @@ import RestoreFromTrashOutlinedIcon from '@mui/icons-material/RestoreFromTrashOu
 import CustomTable from '../../../components/CustomTable/CustomTable';
 import { EditActivationEmployeeModal, EditDeactivationEmployeeModal } from '../EmployeeDeactivationModal/EditDeactivationEmployeeModal';
 import { useGetDeactivatedEmployee } from '../../../hooks/employee/DeactivateEmploye/useEmployee';
+import PersonAddAltSharpIcon from '@mui/icons-material/PersonAddAltSharp';
 
 const DeactivatedEmployee = () => {
   const { data: deactivateEmployee, isLoading } = useGetDeactivatedEmployee();
@@ -65,7 +66,7 @@ const DeactivatedEmployee = () => {
 
   const actions = [
     {
-      icon: 'Activate',
+      icon: () => <PersonAddAltSharpIcon style={{color: 'green'}} />,
       tooltip: 'Activate Employee',
       onClick: (event, rowData) => handleDeactivatedEmployee(rowData),
     },
