@@ -243,7 +243,7 @@ const routes = [
     path: 'event/attendance',
     name: 'Event Attendance',
     id: nanoid(),
-    component: <EventAttendance />,
+    component: <EventAttendance component='eventAttendance' />,
   },
   {
     path: 'holiday',

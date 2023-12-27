@@ -40,6 +40,7 @@ export const PersonalProfile = ({ data }) => {
 
   return (
     <>
+    
       <Grid
         sx={{
           bgcolor: mode === "light" ? "#cfe8fc" : "#292929",
@@ -51,6 +52,7 @@ export const PersonalProfile = ({ data }) => {
           gap: "1rem",
         }}
       >
+        
         <Box
           className="profileInfo"
           bgcolor={mode === "light" ? "" : "#3f413f"}
@@ -102,6 +104,7 @@ export const PersonalProfile = ({ data }) => {
             {data?.mobileNumber}
           </Typography>
         </Box>
+        
         <BasicInfo data={data} mode={mode} />
       </Grid>
 

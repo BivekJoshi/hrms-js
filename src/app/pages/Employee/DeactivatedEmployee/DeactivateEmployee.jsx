@@ -5,6 +5,7 @@ import {
   EditDeactivationEmployeeModal,
 } from '../EmployeeDeactivationModal/EditDeactivationEmployeeModal';
 import { useGetDeactivatedEmployee } from '../../../hooks/employee/DeactivateEmploye/useEmployee';
+import PersonAddAltSharpIcon from '@mui/icons-material/PersonAddAltSharp';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 const DeactivatedEmployee = () => {
@@ -68,7 +69,7 @@ const DeactivatedEmployee = () => {
 
   const actions = [
     {
-      icon: () => <AddCircleIcon />,
+      icon: () => <PersonAddAltSharpIcon style={{color: 'green'}} />,
       tooltip: 'Activate Employee',
       onClick: (event, rowData) => handleDeactivatedEmployee(rowData),
     },

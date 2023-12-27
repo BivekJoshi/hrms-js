@@ -50,9 +50,7 @@ export default function ListUserDetails({ cardTitle, data, mode }) {
           {cardTitle}
         </Typography>
         <Stack sx={{ display: "flex", alignItems: "center" }}>
-          {isEmployee ? (
-            ""
-          ) : (
+          {!isEmployee && (cardTitle === 'Basic Informations') && (
             <BorderColorIcon
               onClick={handleOnClick}
               fontSize="large"

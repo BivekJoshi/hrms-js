@@ -70,7 +70,6 @@ const DeactiveUser = () => {
   if (isLoading) return <>Loading</>;
   return (
     <div>
-      {' '}
       <CustomTable
         columns={columns}
         data={deactivateUser}
