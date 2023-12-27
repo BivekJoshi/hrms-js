@@ -121,7 +121,7 @@ export const useEditProjectEmployee =  ({ onSuccess }) => {
     (formData) => editProjectEmployee(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success("successfully edited project");
+        toast.success("Successfully edited project");
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries("getProjectEmployee");
       },
@@ -140,7 +140,7 @@ export const useEditProjectEmployeeAddRemoveTaskId = async ({ onSuccess }) => {
     (formData) => editProjectEmployeeAddRemoveTaskId(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success("successfully edited project");
+        toast.success("Successfully edited project");
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries("getProjectEmployee");
       },

@@ -1,35 +1,31 @@
-import { Grid, Button, TextField } from "@mui/material";
+import { Grid, Button, TextField, Typography } from "@mui/material";
 import React from "react";
-import { useRemoveActiveProject, useAddActiveProject } from "../../../hooks/project/addProject/useAddProjectActiveForm";
+import {
+  useRemoveActiveProject,
+  useAddActiveProject,
+} from "../../../hooks/project/addProject/useAddProjectActiveForm";
 import { useGetDeactivatedProject } from "../../../hooks/project/useProject";
-import { ButtonComponent } from '../../Button/ButtonComponent';
 
 export const EditProjectDeactivateFields = ({ onClose, isLoading, data }) => {
-
   const { formik } = useRemoveActiveProject(data);
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
-
-    if (formik.isValid) {
-      formik.setTouched({
-        projectId: true,
-      });
-      onClose();
-    }
+    onClose();
   };
 
   const getProjectName = (projectId) => {
     if (data && data?.id === projectId) {
-      return data?.projectName
-    } return projectId
+      return data?.projectName;
+    }
+    return projectId;
   };
 
   return (
     !isLoading && (
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
-          <TextField
+          {/* <TextField
             id="projectId"
             name="projectId"
             label="Project Name"
@@ -41,7 +37,9 @@ export const EditProjectDeactivateFields = ({ onClose, isLoading, data }) => {
             helperText={formik.touched.projectId && formik.errors.projectId}
             variant="outlined"
             InputLabelProps={{ shrink: true }}
-          />
+          /> */}
+          <Typography varinat="h6">Are u sure u want to terminate this project?</Typography>
+          <Typography variant="h7"> {getProjectName(formik.values.projectId)}</Typography> 
         </Grid>
 
         <Grid
@@ -50,12 +48,13 @@ export const EditProjectDeactivateFields = ({ onClose, isLoading, data }) => {
           justifyContent="flex-end"
           alignItems="flex-end"
         >
-          <ButtonComponent
+          <Button
             variant="contained"
-            OnClick={handleFormSubmit}
+            onClick={handleFormSubmit}
             sx={{ mt: 3, ml: 1 }}
-            buttonName={"Terminate Project"}
-          />
+          >
+            Terminate Project
+          </Button>
           <Button
             variant="contained"
             onClick={onClose}
@@ -76,20 +75,14 @@ export const EditProjectActivateFields = ({ onClose, isLoading, data }) => {
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
-
-    if (formik.isValid) {
-      formik.setTouched({
-        projectId: true,
-      });
-      onClose();
-    }
+    onClose();
   };
 
   const getProjectName = (projectId) => {
     return (
-      projectData?.find((project) => project?.id === projectId)
-        ?.projectName || projectId
-    )
+      projectData?.find((project) => project?.id === projectId)?.projectName ||
+      projectId
+    );
   };
 
   return (
@@ -117,12 +110,13 @@ export const EditProjectActivateFields = ({ onClose, isLoading, data }) => {
           justifyContent="flex-end"
           alignItems="flex-end"
         >
-          <ButtonComponent
-          variant="contained"
-          OnClick={handleFormSubmit}
-          sx={{ mt: 3, ml: 1 }}
-          buttonName={"Activate Project"}
-          />
+          <Button
+            variant="contained"
+            onClick={handleFormSubmit}
+            sx={{ mt: 3, ml: 1 }}
+          >
+            Activate Project
+          </Button>
           <Button
             variant="contained"
             onClick={onClose}

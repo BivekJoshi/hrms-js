@@ -38,8 +38,6 @@ const AddprojectFields = ({ onClose, isLoading }) => {
 
   const handleFormSubmit = async () => {
     formik.handleSubmit();
-    if (formik.isValid) {
-    }
   };
 
   return (
@@ -61,6 +59,7 @@ const AddprojectFields = ({ onClose, isLoading }) => {
             helperText={formik.touched.projectName && formik.errors.projectName}
             variant="outlined"
             InputLabelProps={{ shrink: true }}
+            size="small"
           />
         </Grid>
 
@@ -77,6 +76,7 @@ const AddprojectFields = ({ onClose, isLoading }) => {
             helperText={formik.touched.startDate && formik.errors.startDate}
             variant="outlined"
             InputLabelProps={{ shrink: true }}
+            size="small"
           />
         </Grid>
 
@@ -92,71 +92,10 @@ const AddprojectFields = ({ onClose, isLoading }) => {
             helperText={formik.touched.endDate && formik.errors.endDate}
             variant="outlined"
             InputLabelProps={{ shrink: true }}
+            size="small"
           />
         </Grid>
-
-        {/* <Grid item xs={12} sm={6}>
-          <TextField
-            name="taskStatus"
-            label="Project Status"
-            fullWidth
-            select
-            required
-            value={formik.values.taskStatus}
-            onChange={formik.handleChange}
-            error={
-              formik.touched.taskStatus && Boolean(formik.errors.taskStatus)
-            }
-            helperText={formik.touched.taskStatus && formik.errors.taskStatus}
-            variant="outlined"
-            
-            InputLabelProps={{ shrink: true }}
-          >
-            {projectOptions?.map((option) => (
-              <MenuItem
-                key={option?.id}
-                value={option?.value}
-                sx={{ bgcolor: mode === "light" ? "" : "#413e3e" }}
-              >
-                {option?.label}
-              </MenuItem>
-            ))}
-          </TextField>
-        </Grid> */}
-
         <Grid item xs={12} sm={12}>
-          {/* <TextField
-            id="projectLeadId"
-            name="projectLeadId"
-            select
-            required
-            label="Assign a Project Leader."
-            placeholder="Enter project Leader"
-            fullWidth
-            value={formik.values.projectLeadId}
-            onChange={formik.handleChange}
-            error={
-              formik.touched.projectLeadId &&
-              Boolean(formik.errors.projectLeadId)
-            }
-            helperText={
-              formik.touched.projectLeadId && formik.errors.projectLeadId
-            }
-            variant="outlined"
-            InputLabelProps={{ shrink: true }}
-          >
-            {!loadingEmployee &&
-              employeeData.map((option) => (
-                <MenuItem
-                  key={option?.id}
-                  value={option?.id}
-                  sx={{ bgcolor: mode === "light" ? "" : "#413e3e" }}
-                >
-                  {option?.firstName} {option?.middleName} {option?.lastName}
-                </MenuItem>
-              ))}
-          </TextField>
-           */}
           <Autocomplete
             id="projectLeadId"
             name="projectLeadId"
@@ -187,6 +126,7 @@ const AddprojectFields = ({ onClose, isLoading }) => {
                 helperText={
                   formik.touched.employeeId && formik.errors.employeeId
                 }
+                size="small"
               />
             )}
           />
@@ -207,6 +147,7 @@ const AddprojectFields = ({ onClose, isLoading }) => {
             helperText={formik.touched.companyId && formik.errors.companyId}
             variant="outlined"
             InputLabelProps={{ shrink: true }}
+            size="small"
           >
             {!loadingCompany &&
               companyData.map((option) => (

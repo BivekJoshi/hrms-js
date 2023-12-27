@@ -76,7 +76,7 @@ export const useAddEvent = ({ onSuccess }) => {
       queryClient.invalidateQueries('getEvent');
     },
     onError: (err, _variables, _context) => {
-      toast.error(`error: ${err.message}`);
+      // toast.error(`error: ${err.message}`);
     },
   });
 };
