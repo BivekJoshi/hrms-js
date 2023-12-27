@@ -13,7 +13,7 @@ import ProjectEmpPage from '../app/pages/Project/ProjectEmployeeViewPage/Project
 import HomeIcon from '@mui/icons-material/Home';
 import useAuth from '../auth/hooks/component/login/useAuth';
 import DeactiveUser from '../app/pages/Auth/UserControl/Users/DeactiveUser';
-// import EmployeeMapping from '../app/pages/EmployeeMapping/EmployeeMapping';
+import EventAttendance from '../app/pages/Event/EventAttendance/EventAttendance';
 
 const ProfileDetail = Loadable(
   lazy(() => import('../app/pages/Auth/Profile/ProfileDetail'))
@@ -243,6 +243,12 @@ const routes = [
     component: <Event component='event' />,
   },
   {
+    path: 'event/attendance',
+    name: 'Event Attendance',
+    id: nanoid(),
+    component: <EventAttendance />,
+  },
+  {
     path: 'holiday',
     name: 'Holiday',
     id: nanoid(),
@@ -255,8 +261,8 @@ const routes = [
   //   component: <DeactivatedOfficeResource component="resourceDeactivated"/>,
   // },
   {
-    path: "officeResource",
-    name: "Office Logistics",
+    path: 'officeResource',
+    name: 'Office Logistics',
     id: nanoid(),
     component: <OfficeResource component='officeResource' />,
   },

@@ -238,7 +238,17 @@ export default function AdminSidebar() {
         />
       ),
       path: 'event',
-      subMenus: [],
+      subMenus: [
+        {
+          name: 'Event Attendance',
+          path: 'event/attendance',
+          icon: (
+            <MailIcon
+              sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
+            />
+          ),
+        },
+      ],
     },
     {
       name: 'Holiday',
@@ -374,12 +384,18 @@ export default function AdminSidebar() {
     },
   ];
 
-  const filteredDrawerMenus = drawerMenusForAdmin.filter(menu => menu?.path !== 'email');
+  const filteredDrawerMenus = drawerMenusForAdmin.filter(
+    (menu) => menu?.path !== 'email'
+  );
 
-  const drawerMenus =    
-    (userRole === 'ROLE_SUPER_ADMIN' || userRole === 'ROLE_ADMIN') ? drawerMenusForAdmin :
-    (userRole === 'ROLE_MANAGER' || userRole === 'ROLE_HR' ||  userRole === 'ROLE_HR_CLERK') ? filteredDrawerMenus :
-    drawerMenusForEmployee;
+  const drawerMenus =
+    userRole === 'ROLE_SUPER_ADMIN' || userRole === 'ROLE_ADMIN'
+      ? drawerMenusForAdmin
+      : userRole === 'ROLE_MANAGER' ||
+        userRole === 'ROLE_HR' ||
+        userRole === 'ROLE_HR_CLERK'
+      ? filteredDrawerMenus
+      : drawerMenusForEmployee;
 
   const handleDrawerOpen = () => {
     setOpen(true);
