@@ -5,7 +5,7 @@ import HocButton from "../../../hoc/hocButton";
 import { useGetEmailConfigure } from "../../../hooks/email/useEmail";
 
 const EmailConfiguration = ({ permissions }) => {
-  console.log(permissions)
+  
   const { data: emailData, isLoading } = useGetEmailConfigure();
   const { formik } = useEmailConfigureForm(emailData, isLoading);
 
