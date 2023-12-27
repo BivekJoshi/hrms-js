@@ -61,20 +61,14 @@ axiosInstance.interceptors.response.use(
         errorMessage === 'user_disabled'
       ) {
         removeUser();
-        window.location.replace('/');
+        window.location.replace('/#');
         return Promise.reject(error);
       } else if (
         errorMessage ===
         'Branch delete error: could not execute batch; SQL [delete from branch where id=?]; constraint [fk_employee_branch_id]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute batch'
       ) {
         toast.error('Cannot delete company. Please contact admin.');
-      } else if (errorMessage === 'access_denied_no_permission') {
-        window.location.replace('/not-found');
-      } else if (errorMessage) {
-        toast.error(errorMessage);
-        return Promise.reject({ message: errorMessage });
       } else {
-        toast.error('Some error occurred');
         return Promise.reject(error.response.data);
       }
     } else {
