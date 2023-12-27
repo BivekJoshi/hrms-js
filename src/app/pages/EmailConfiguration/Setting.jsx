@@ -3,10 +3,10 @@ import React from "react";
 import EmailConfiguration from "./Component/EmailConfiguration";
 import ChangeEmail from "./Component/ChangeEmail";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
+import PermissionHoc from "../../hoc/permissionHoc";
 
-const Setting = () => {
+const Setting = ({permissions}) => {
   const [value, setValue] = React.useState("1");
-
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -33,13 +33,13 @@ const Setting = () => {
         />
       </TabList>
       <TabPanel value="1">
-        <EmailConfiguration />
+        <EmailConfiguration permissions={permissions}/>
       </TabPanel>
       <TabPanel value="2">
-        <ChangeEmail />
+        <ChangeEmail permissions={permissions}/>
       </TabPanel>
     </TabContext>
   );
 };
 
-export default Setting;
+export default PermissionHoc(Setting);

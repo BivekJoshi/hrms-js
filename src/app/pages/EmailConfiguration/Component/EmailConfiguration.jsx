@@ -121,4 +121,4 @@ const EmailConfiguration = ({ permissions }) => {
   );
 };
 
-export default PermissionHoc(EmailConfiguration);
+export default EmailConfiguration;

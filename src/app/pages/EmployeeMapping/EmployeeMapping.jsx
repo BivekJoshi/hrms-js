@@ -1,16 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { useGetEmployeeDeviceMappingById } from "../../hooks/EmployeeMapping/useEmployeeMapping";
-import { useParams } from "react-router-dom";
 import CustomTable from "../../components/CustomTable/CustomTable";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
-import { Typography } from "@mui/material";
+import { IconButton, Typography } from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
+import EditDataModal from "./Component/EditDataModal";
 
 const EmployeeMapping = () => {
-  // const { branchId } = useParams();
-  const { data: mapeData } = useGetEmployeeDeviceMappingById();
-  console.log(mapeData);
+  const { data: mapeData, isLoading } = useGetEmployeeDeviceMappingById();
+  const [openEditModal, setOpenEditModal] = useState(false);
+  const [editedData, setEditedData] = useState({});
 
+  const handleCloseEditModal = () => setOpenEditModal(false);
+  const handleEditData = (rowData) => {
+    setEditedData(rowData);
+    setOpenEditModal(true);
+  };
   const columns = [
     {
       title: "SN",
@@ -90,9 +96,9 @@ const EmployeeMapping = () => {
           <Typography textAlign="center">
             {/* {rowData?.deviceEmpId && rowData?.deviceBranchId ? ( */}
             {rowData?.isActive ? (
-              <CheckCircleIcon sx={{color:"green" }}/>
+              <CheckCircleIcon sx={{ color: "green" }} />
             ) : (
-              <CancelIcon sx={{color:"red" }} />
+              <CancelIcon sx={{ color: "red" }} />
             )}
           </Typography>
         );
@@ -100,15 +106,41 @@ const EmployeeMapping = () => {
     },
   ];
 
+  const actions = [
+    (rowData) => ({
+      icon: () => (
+        <IconButton
+          //   permissions={permissions?.canEdit}
+          disabled={rowData.deviceEmpId && rowData.deviceBranchId}
+          color="primary"
+        >
+          <EditIcon />
+        </IconButton>
+      ),
+      tooltip: "Edit Branch Id And Employee Id",
+        onClick: (event, rowData) => handleEditData(rowData),
+    }),
+  ];
+
   return (
-    <CustomTable
-      columns={columns}
-      data={mapeData}
-      title="Branch List"
-      //   isLoading={isLoading}
-      exportButton={true}
-      //   actions={actions}
-    />
+    <>
+      <CustomTable
+        columns={columns}
+        data={mapeData}
+        title="Branch List"
+        isLoading={isLoading}
+        exportButton={true}
+        actions={actions}
+      />
+      {openEditModal && (
+        <EditDataModal
+          title={"Edit Company"}
+          data={editedData}
+          open={openEditModal}
+          handleCloseModal={handleCloseEditModal}
+        />
+      )}
+    </>
   );
 };
 

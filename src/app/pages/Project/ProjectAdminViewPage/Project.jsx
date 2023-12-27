@@ -70,7 +70,6 @@ const Project = ({ permissions }) => {
     setPageSize(newPageSize);
     setPageNumber(0);
   };
-  console.log(projectData)
 
   return (
     <>

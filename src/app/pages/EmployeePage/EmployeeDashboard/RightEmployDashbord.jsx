@@ -26,7 +26,6 @@ export const RightEmployDashbord = ({ employData }) => {
         return accumulator + currentValue.leaveBalance;
       }, 0)
     : "";
- console.log(leavebalance);
 
   const { mode } = useContext(ThemeModeContext);
   return (
