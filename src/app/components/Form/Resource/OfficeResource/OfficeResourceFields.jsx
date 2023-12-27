@@ -4,13 +4,13 @@ import useOfficeResourceForm from '../../../../hooks/resource/officeResource/Off
 import { ThemeSwitch } from '../../../../../theme/ThemeSwitch';
 
 const OfficeResourceFields = ({ onClose, isLoading, data }) => {
-  const { formik } = useOfficeResourceForm(data);
+  const { formik } = useOfficeResourceForm(data, onClose);
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
 
     if (formik.isValid) {
-      onClose();
+     
     }
   };
   const submitButtonText = data ? 'Update ' : 'Add ';

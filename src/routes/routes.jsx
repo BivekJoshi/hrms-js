@@ -89,6 +89,9 @@ const EmployeeDashboard = Loadable(
 const Setting = Loadable(
   lazy(() => import("../app/pages/EmailConfiguration/Setting"))
 );
+const EmployeeMapping = Loadable(
+  lazy(() => import('../app/pages/EmployeeMapping/EmployeeMapping'))
+);
 
 const routes = [
   {
@@ -298,6 +301,12 @@ const routes = [
     name: "User Deactivated",
     id: nanoid(),
     component: <DeactiveUser />,
+  },
+  {
+    path: 'employee/mapping',
+    name: 'Employee Mapping',
+    id: nanoid(),
+    component: <EmployeeMapping />,
   },
 ];
 

@@ -1,10 +1,10 @@
 import { LoadingButton } from '@mui/lab';
 import { Grid, TextField, Typography } from '@mui/material';
-import React, { useState } from 'react';
+import React from 'react';
 import useChangeForm from '../../../hooks/email/changeEmail/useChangeForm';
-import { toast } from 'react-toastify';
+import HocButton from '../../../hoc/hocButton';
 
-const ChangeEmail = () => {
+const ChangeEmail = ({permissions}) => {
   const { formik } = useChangeForm({});
 
   const handleFormSubmit = () => {
@@ -59,15 +59,13 @@ const ChangeEmail = () => {
         alignItems='flex-end'
         marginTop='1rem'
       >
-        <LoadingButton
-          width='10rem'
+        <HocButton
+          variant="contained"
+          permissions={permissions?.canAdd}
           onClick={handleFormSubmit}
-          variant='contained'
-          //   loading={loading}
-          className='login-btn'
-        >
-          Change Email
-        </LoadingButton>
+          sx={{ mt: 3, ml: 1 }}
+          buttonName={"Change Email"}
+        />
       </Grid>
     </Grid>
   );

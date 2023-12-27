@@ -284,6 +284,8 @@ const Attendance = () => {
               <TableHead>
                 <TableRow style={{ backgroundColor: palette.secondary.main }}>
                   <TableCell style={{ color: 'white' }}>Sn No.</TableCell>
+                  <TableCell style={{ color: 'white' }}>Employees</TableCell>
+
                   {daysArray.map((d) => (
                     <TableCell key={d} style={{ textAlign: 'center' }}>
                       <Box color='white'>{d}</Box>

@@ -19,6 +19,7 @@ import LaptopIcon from '@mui/icons-material/Laptop';
 import { ListItemIcon } from '@mui/material';
 import TodayIcon from '@mui/icons-material/Today';
 import { styled } from '@mui/material/styles';
+import TimeToLeaveIcon from '@mui/icons-material/TimeToLeave';
 import {
   Box,
   Drawer,
@@ -128,7 +129,7 @@ export default function AdminSidebar() {
           name: 'Leave',
           path: 'employee/leaves',
           icon: (
-            <MailIcon
+            <TimeToLeaveIcon
               sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
             />
           ),
@@ -269,6 +270,16 @@ export default function AdminSidebar() {
         />
       ),
       path: 'todolist',
+      subMenus: [],
+    },
+    {
+      name: 'Employee Mapping',
+      icon: (
+        <PersonAddIcon
+          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
+        />
+      ),
+      path: 'employee/mapping',
       subMenus: [],
     },
     {

@@ -6,7 +6,7 @@ import {
 } from "../useOfficeResource";
 import { OfficeResourceSchema } from "./OfficeResourceSchema";
 
-const useOfficeResourceForm = (data) => {
+const useOfficeResourceForm = (data, onClose) => {
   const { mutate: addOfficeResource } = useAddOfficeResource({});
   const { mutate: editOfficeResource } = useEditOfficeResource({});
   // const { mutate: editDeactivatedOfficeResource } = useEditActiveInactiveOfficeResource({});
@@ -21,12 +21,20 @@ const useOfficeResourceForm = (data) => {
   };
 
   const handleAdd = (values) => {
-    addOfficeResource(values, formik);
+    addOfficeResource(values, {
+      onSuccess: () => {
+        onClose();
+      }
+    });
   };
 
   const handleEditAndDeactivate = (values) => {
   
-    editOfficeResource(values, formik);
+    editOfficeResource(values, {
+      onSuccess: () => {
+        onClose();
+      }
+    });
     // editDeactivatedOfficeResource(values, formik); 
   };
 
