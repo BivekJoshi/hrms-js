@@ -17,6 +17,7 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import LaptopIcon from '@mui/icons-material/Laptop';
 import { ListItemIcon } from '@mui/material';
+import TodayIcon from '@mui/icons-material/Today';
 import { styled } from '@mui/material/styles';
 import TimeToLeaveIcon from '@mui/icons-material/TimeToLeave';
 import {
@@ -243,7 +244,7 @@ export default function AdminSidebar() {
           name: 'Event Attendance',
           path: 'event/attendance',
           icon: (
-            <MailIcon
+            <TodayIcon
               sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
             />
           ),

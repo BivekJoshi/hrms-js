@@ -1,63 +1,20 @@
-// import { useFormik } from "formik";
-// import { useAddHoliday, useEditHoliday } from "../useHoliday";
-// import { HolidaySchema } from "./HolidaySchema";
-
-// const useHolidayForm = (data, handleSubmitModal) => {
-//   const { mutate: addHoliday } = useAddHoliday({});
-//   const { mutate: editHoliday } = useEditHoliday({});
-
-//   const formik = useFormik({
-//     initialValues: {
-//       holidayName: data?.holidayName || "",
-//       holidayDate: data?.holidayDate || "",
-//       holidayDescription: data?.holidayDescription || "",
-//       id: data?.id,
-//     },
-//     validationSchema: HolidaySchema,
-//     enableReinitialize: "true",
-//     onSubmit: (values) => {
-//       if (data?.id) {
-//         handledEditRequest(values);
-//       } else {
-//         handleRequest(values);
-//       }
-//     },
-//   });
-
-//   const handleRequest = (values) => {
-//     values = { ...values };
-//     addHoliday(values, formik);
-//     handleSubmitModal();
-//   };
-
-//   const handledEditRequest = (values) => {
-//     values = { ...values };
-//     editHoliday(values, formik);
-//   };
-
-//   return { formik };
-// };
-
-// export default useHolidayForm;
-
-
 import { useFormik } from "formik";
 import { useAddHoliday, useEditHoliday } from "../useHoliday";
 import { HolidaySchema } from "./HolidaySchema";
 
 const useHolidayForm = (setOpenSubmitModal, handleCloseModal) => {
-  const { mutate: addEvent, data } = useAddHoliday({});
-  const { mutate: editEvent } = useEditHoliday({});
+  const { mutate: addEvent } = useAddHoliday({});
+  // const { mutate: editEvent } = useEditHoliday({});
 
   const formik = useFormik({
     initialValues: {
-      holidayName: data?.holidayName || "",
-      holidayDate: data?.holidayDate || "",
-      holidayDescription: data?.holidayDescription || "",
-      id: data?.id,
+      holidayName: '',
+      holidayDate: '',
+      holidayDescription: '',
+      id: '',
     },
     validationSchema: HolidaySchema,
-    enableReinitialize: "true",
+    enableReinitialize: true,
     // onSubmit: (values) => {
     //   if (data?.id) {
     //     handledEditRequest(values);
@@ -71,9 +28,10 @@ const useHolidayForm = (setOpenSubmitModal, handleCloseModal) => {
     onSubmit: (values) => {
       const formData = { ...values };
       addEvent(formData, {
-        onSuccess: (data) => {
-          handleCloseModal();
+        onSuccess: () => {
           formik.resetForm();
+          handleCloseModal();
+          
         },
       }),
         setOpenSubmitModal(true);
@@ -100,7 +58,7 @@ const useHolidayForm = (setOpenSubmitModal, handleCloseModal) => {
     editEvent(values, formik);
   };
 
-  return { formik ,data};
+  return { formik};
 };
 
 export default useHolidayForm;

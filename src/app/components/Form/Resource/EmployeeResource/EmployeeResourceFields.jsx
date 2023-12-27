@@ -25,8 +25,9 @@ const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
-    // if (formik.isValid) {
-    onClose();
+    if (formik.isValid) {
+    // onClose();
+    }
   };
   const submitButtonText = data ? "Update Resource" : " Provide Resource";
   const currentDate = new Date().toISOString().split("T")[0];

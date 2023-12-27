@@ -177,7 +177,7 @@ const ProjectDetail = () => {
         >
           <p>Employee Involved</p>
           <Button variant="contained" onClick={handleAddOpenModal}>
-            +Add Employee
+            + Add Employee
           </Button>
         </Typography>
       </Box>

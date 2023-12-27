@@ -13,7 +13,7 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
       deleteFamilyMutation.mutate(familyMember.id);
     }
   };
-
+console.log(formik.touched?.family && formik.touched?.family[0]?.relation )
   return (
     !isLoading && (
       <div>
@@ -35,7 +35,7 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
                           label='Name'
                           placeholder='Enter Name'
                           fullWidth
-                          required
+                          // required
                           value={familyMember.name}
                           onChange={handleChange}
                           error={Boolean(
@@ -57,7 +57,7 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
                           label='Relation'
                           placeholder='Enter Relation'
                           fullWidth
-                          required
+                          // required
                           value={familyMember.relation}
                           onChange={handleChange}
                           onBlur={handleBlur} // Add onBlur to update touched state
@@ -80,7 +80,7 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
                           label='Mobile Number'
                           placeholder='Enter Mobile Number'
                           fullWidth
-                          required
+                          // required
                           value={familyMember.mobileNumber}
                           onChange={handleChange}
                           onBlur={handleBlur} // Add onBlur to update touched state

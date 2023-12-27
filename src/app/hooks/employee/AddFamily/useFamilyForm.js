@@ -22,7 +22,7 @@ const useFamilyForm = () => {
   const formik = useFormik({
     initialValues: {
       family:
-        familyDetails && familyDetails.length > 0
+        familyDetails && familyDetails?.length > 0
           ? familyDetails
           : [
               {

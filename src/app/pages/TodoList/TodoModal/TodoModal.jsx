@@ -16,8 +16,8 @@ export const AddTodoListModal = ({ open, handleCloseModal, title }) => {
   );
 };
 
-export const EditTodoListModal = ({ open, handleCloseModal, id, title }) => {
-  const { data } = useGetTodoListById(id);
+export const EditTodoListModal = ({ open, handleCloseModal, data, title }) => {
+  // const { data } = useGetTodoListById(id);
   return (
     <div>
       <FormModal

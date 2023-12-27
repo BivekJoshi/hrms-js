@@ -25,6 +25,7 @@ const useOfficeResourceForm = (data) => {
   };
 
   const handleEditAndDeactivate = (values) => {
+  
     editOfficeResource(values, formik);
     // editDeactivatedOfficeResource(values, formik); 
   };

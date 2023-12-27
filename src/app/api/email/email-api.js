@@ -1,4 +1,4 @@
-import { axiosInstance } from '../../../auth/axiosInterceptor';
+import { axiosInstance } from "../../../auth/axiosInterceptor";
 
 /*___________________SEND EMAIL FOR PERTICULAR EMPLOYEE ON BASIS OF ID______________________________________*/
 export const sendEmail = async ({ formData, employeeId }) => {
@@ -16,7 +16,7 @@ export const sendEmail = async ({ formData, employeeId }) => {
 export const sendEmailToMultipleEmployee = async ({ formData, employeeId }) => {
   const employeeIdParams = employeeId
     .map((id) => `employeeIds=${id}`)
-    .join('&');
+    .join("&");
   const url = `/email/employee-ids?employeeIds=${employeeIdParams}`;
   const res = await axiosInstance.post(url, formData);
   return res;
@@ -26,7 +26,7 @@ export const sendEmailToMultipleEmployee = async ({ formData, employeeId }) => {
 export const sendEmailToAll = async ({ formData, employeeId, eventId }) => {
   const employeeIdParams = employeeId
     .map((id) => `employeeIds=${id}`)
-    .join('&');
+    .join("&");
   const url = `/email/employee-ids/event?${employeeIdParams}&eventId=${eventId}`;
   const res = await axiosInstance.post(url, formData);
   return res;
@@ -40,15 +40,11 @@ export const sendEmailForHoliday = async ({
 }) => {
   const employeeIdParams = employeeId
     .map((id) => `employeeIds=${id}`)
-    .join('&');
+    .join("&");
   const url = `/email/employees/holiday?${employeeIdParams}&holidayId=${holidayId}`;
   const res = await axiosInstance.post(url, formData);
   return res;
 };
-
-
-
-
 
 {
   /*________________________GET_____________________________________*/
@@ -61,14 +57,30 @@ export const getEmailConfigure = async () => {
   /*________________________POST for email congiguration_____________________________________*/
 }
 export const addEmailConfigure = async (formData) => {
- 
-  const data = await axiosInstance.put('/email/change-email-config', formData);
+  const data = await axiosInstance.put("/email/change-email-config", formData);
   return data;
 };
 
 /*________________________POST for email Change _____________________________________*/
 export const addChangeEmail = async (formData) => {
-  const newEmail = formData.newEmail
-  const data = await axiosInstance.put(`/user/change/email?newEmail=${newEmail}`, formData);
-  return data;  
+  const newEmail = formData.newEmail;
+  const data = await axiosInstance.put(
+    `/user/change/email?newEmail=${newEmail}`,
+    formData
+  );
+  return data;
+};
+
+/*________________________POST for PATH Configuration _____________________________________*/
+
+export const addPathConfigure = async (formData) => {
+  const data = await axiosInstance.post("/path-config", formData);
+  return data;
+};
+
+/*________________________ GET for PATH Configuration _____________________________________*/
+
+export const getPathConfig = async () => {
+  const data = await axiosInstance.get(`/path-config/get`);
+  return data;
 };

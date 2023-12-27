@@ -88,7 +88,7 @@ const EmailForHoliday = ({ getEventID, onClose }) => {
               <MenuItem value="technical">Technical Employees</MenuItem>
               <MenuItem value="businessa">Business A Employees</MenuItem>
               <MenuItem value="businessb">Business B Employees</MenuItem>
-              <MenuItem value="none">None</MenuItem>
+              {/* <MenuItem value="none">None</MenuItem> */}
             </Select>
           </Grid>
         </Grid>

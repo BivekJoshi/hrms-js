@@ -24,10 +24,7 @@ export const getUserControlById = async (id) => {
 export const addUserControl = async (formData) => {
   const { employeeId, roleId } = formData;
   if (employeeId) {
-    const data = await axiosInstance.post(
-      `/user/create/${employeeId}`,
-      formData
-    );
+    const data = await axiosInstance.post(`/user/create/${employeeId}`, formData);
     return data;
   }
 };

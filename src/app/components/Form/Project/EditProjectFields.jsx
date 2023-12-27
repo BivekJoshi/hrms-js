@@ -1,4 +1,4 @@
-import { Grid, TextField, Button, MenuItem } from "@mui/material";
+import { Grid, TextField, Button, MenuItem, Autocomplete } from "@mui/material";
 import React, { useContext } from "react";
 import useEditProjectForm from "../../../hooks/project/editProject/useEditProjectForm";
 // import { useGetCompany } from "../../../hooks/company/useCompany";
@@ -7,7 +7,7 @@ import { ButtonComponent } from '../../Button/ButtonComponent';
 import { useGetEmployee } from "../../../hooks/employee/useEmployee";
 // import { useGetProjectDetail } from "../../../hooks/project/useProject";
 
-const EditProjectFields = ({ onClose, isLoading, data }) => {z
+const EditProjectFields = ({ onClose, isLoading, data }) => {
   const { formik } = useEditProjectForm(data);
   // const { data: projectData } = useGetProjectDetail();
   const { data: employeeData } = useGetEmployee();

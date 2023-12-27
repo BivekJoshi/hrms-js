@@ -3,16 +3,17 @@ import { useAddEvent, useEditEvent } from "../useEvent";
 import { EventSchema } from "../Validation/EventSchema";
 
 const useEventForm = (setOpenSubmitModal, handleCloseModal) => {
-  const { mutate: addEvent, data } = useAddEvent({});
-  const { mutate: editEvent } = useEditEvent({});
+  const { mutate: addEvent } = useAddEvent({});
+  // const { mutate: editEvent } = useEditEvent({});
 
   const formik = useFormik({
     initialValues: {
-      eventName: data?.eventName || "",
-      eventDate: data?.eventDate || "",
-      eventTime: data?.eventTime || "",
-      eventDescription: data?.eventDescription || "",
-      id: data?.id || "",
+      eventName: '',
+      eventDate: '',
+      eventTime: '',
+      eventDescription: '',
+      eventLocation: '',
+      id: '',
     },
     validationSchema: EventSchema,
     enableReinitialize: true,
@@ -29,7 +30,7 @@ const useEventForm = (setOpenSubmitModal, handleCloseModal) => {
     onSubmit: (values) => {
       const formData = { ...values };
       addEvent(formData, {
-        onSuccess: (data) => {
+        onSuccess: () => {
           formik.resetForm();
           handleCloseModal();
         },
@@ -55,10 +56,10 @@ const useEventForm = (setOpenSubmitModal, handleCloseModal) => {
 
   const handledEditRequest = (values) => {
     values = { ...values };
-    editEvent(values, formik);
+    // editEvent(values, formik);
   };
 
-  return { formik ,data};
+  return { formik};
 };
 
 export default useEventForm;

@@ -77,7 +77,7 @@ export const useAddEmployee = (onSuccess) => {
       queryClient.invalidateQueries('getEmployee');
     },
     onError: (err, _variables, _context) => {
-      toast.error(`error: ${err.message}`);
+      // toast.error(`error: ${err.message}`);
     },
   });
 };

@@ -14,8 +14,8 @@ export const getleave = async () => {
 export const getleaveOfUser = async () => {
   // const { isEmployee } = useAuth();
   // if (!isEmployee) {
-    const data = await axiosInstance.get(`/leave/leave-detail`);
-    return data;
+  const data = await axiosInstance.get(`/leave/leave-detail`);
+  return data;
   // }
 };
 
@@ -72,10 +72,18 @@ export const addleave = async (formData) => {
 export const addLeaveByAdmin = async (formData) => {
   const employeeId = formData?.employeeId?.id;
   const submitedData = {
-    ...formData,
     leaveTypeId: formData?.leaveTypeId?.id,
+    leaveReason: formData?.leaveReason,
+    fromDate: formData?.fromDate,
+    toDate: formData?.toDate,
+    isHalfDay: formData?.isHalfDay,
+    halfLeaveType: formData?.halfLeaveType,
+    leaveRemarks: formData?.leaveRemarks,
   };
-  const data = await axiosInstance.post(`/leave/create/${employeeId}`, submitedData);
+  const data = await axiosInstance.post(
+    `/leave/create/${employeeId}`,
+    submitedData
+  );
   return data;
 };
 
@@ -90,16 +98,22 @@ export const editLeave = async (formData) => {
 };
 
 /*________________________EDIT BY OTHER_____________________________________*/
-export const editLeaveByAdmin = async (formData) => {  
+export const editLeaveByAdmin = async (formData) => {
   const { id, employeeId } = formData;
-  const data = await axiosInstance.put(`/leave/update/${id}?employeeId=${employeeId}`, formData);
+  const data = await axiosInstance.put(
+    `/leave/update/${id}?employeeId=${employeeId}`,
+    formData
+  );
   return data;
 };
 
 /*________________________EDIT BY OTHER_____________________________________*/
-export const editLeaveStatusByAdmin = async (formData) => { 
+export const editLeaveStatusByAdmin = async (formData) => {
   const { id, leaveStatus } = formData;
-  const data = await axiosInstance.put(`/leave/confirm/${id}?leaveStatus=${leaveStatus}`, formData);
+  const data = await axiosInstance.put(
+    `/leave/confirm/${id}?leaveStatus=${leaveStatus}`,
+    formData
+  );
   return data;
 };
 

@@ -33,7 +33,11 @@ const useEmployeeResourceForm = (data, onClose) => {
 
   const handleRequest = (values) => {
     values = { ...values };
-    addEmployeeResource(values, formik);
+    addEmployeeResource(values, {
+      onSuccess: () => {
+        onClose();
+      }
+    });
   };
 
   const handledEditRequest = (values) => {

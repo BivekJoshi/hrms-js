@@ -40,7 +40,7 @@ export const useAddUserControl = ({ onSuccess }) => {
         queryClient.invalidateQueries("getUserControl");
       },
       onError: (err, _variables, _context) => {
-        toast.error(`error: ${err.message}`);
+        // toast.error(`error: ${err.message}`);
       },
     }
   );
