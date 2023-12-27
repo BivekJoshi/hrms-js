@@ -20,7 +20,7 @@ import useEventConfirmationForm from '../../../hooks/event/EventForm/useEventCon
 import './style.css';
 import { getUser } from '../../../utils/cookieHelper';
 import jwtDecode from 'jwt-decode';
-
+ 
 export const EventNotification = ({
   data,
   open,
@@ -28,7 +28,7 @@ export const EventNotification = ({
   handleListKeyDown,
 }) => {
   const { mode, palette } = useContext(ThemeModeContext);
-
+ 
   const { formik } = useEventConfirmationForm(data);
   const user = getUser();
   const decode = jwtDecode(user);
@@ -39,7 +39,7 @@ export const EventNotification = ({
     formik.setFieldValue('notificationId', notificationId);
     formik.handleSubmit();
   };
-
+ 
   const getUpcomingDay = (eventDate) => {
     const eventDateObject = new Date(eventDate);
     const month = eventDateObject.toLocaleString('default', { month: 'short' });
@@ -52,7 +52,7 @@ export const EventNotification = ({
   //    const eventDate = new Date(event.eventDate);
   //    return eventDate >= currentDate;
   //  });
-
+ 
   return (
     <>
       <MenuList
@@ -68,15 +68,16 @@ export const EventNotification = ({
         }}
       >
         <Typography variant='h6' sx={{ color: '#6DAB23' }}>
-          Comming Event
+          Upcoming Event
         </Typography>
-
+ 
         {data &&
           data.map((ename, index) => (
             <>
               <Box
                 sx={{
-                  backgroundColor: '#F7F8F9',
+                  // backgroundColor: '#F7F8F9',
+                  backgroundColor:mode==="light"?"#F7F8F9":"#3e3e3e",
                   padding: '.8rem',
                   margin: '.5rem',
                   borderRadius: '6px',
@@ -229,16 +230,16 @@ export const LeaveNotification = ({
   handleListKeyDown,
 }) => {
   const { data: employeeData } = useGetEmployee();
-
+ 
   const getEmployeeName = (employeeId) => {
     const employee = employeeData?.find((emp) => emp.id === employeeId);
-
+ 
     const name = `${employee?.firstName} ${employee?.middleName || ''} ${
       employee?.lastName || ''
     }`;
     return name;
   };
-
+ 
   return (
     <>
       <MenuList
@@ -277,3 +278,4 @@ export const LeaveNotification = ({
     </>
   );
 };
+ 

@@ -5,7 +5,7 @@ import ThemeModeContext from '../../../theme/ThemeModeContext';
 
 const BarChatDiagram = ({ dashboardData }) => {
   const { mode, palette } = useContext(ThemeModeContext);
-
+console.log(dashboardData)
   const names = [
     'All Employees',
     'New Employees',
@@ -14,9 +14,9 @@ const BarChatDiagram = ({ dashboardData }) => {
   ];
   const Data = [
     `${dashboardData?.employeeInfo?.allEmployee}`,
-    `${dashboardData?.employeeInfo?.newEmployees}`,
-    `${dashboardData?.employeeInfo?.maleEmployees}`,
-    `${dashboardData?.employeeInfo?.femaleEmployees}`,
+    `${dashboardData?.employeeInfo?.newEmployee}`,
+    `${dashboardData?.employeeInfo?.maleEmployee}`,
+    `${dashboardData?.employeeInfo?.femaleEmployee}`,
   ];
   const barColors = palette.secondary.main;
   const chartOptions = {
