@@ -3,7 +3,7 @@ import { useFormik } from 'formik';
 import { ProjectSchema } from '../validation/ProjectSchema';
 import { useAddProject } from '../useProject';
 
-const useAddProjectForm = () => {
+const useAddProjectForm = (onClose) => {
   const { mutate } = useAddProject({});
 
   const formik = useFormik({
@@ -25,7 +25,10 @@ const useAddProjectForm = () => {
     values = {
       ...values,
     };
-    mutate(values, formik, { onSuccess: () => formik.handleReset() });
+    mutate(values, formik, { onSuccess: () => {
+      onclose();
+      formik.handleReset()
+    } });
   };
 
   return { formik };

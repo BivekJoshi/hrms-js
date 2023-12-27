@@ -4,7 +4,7 @@ import useAddProjectForm from "../../../hooks/project/addProject/useAddProjectFo
 import { useGetEmployee } from "../../../hooks/employee/useEmployee";
 import { useGetCompany } from "../../../hooks/company/useCompany";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
-import { ButtonComponent } from '../../Button/ButtonComponent';
+import { ButtonComponent } from "../../Button/ButtonComponent";
 
 const projectOptions = [
   // {
@@ -13,8 +13,8 @@ const projectOptions = [
   //   id: 1,
   // },
   {
-    value: 'COMPLETED',
-    label: 'Completed',
+    value: "COMPLETED",
+    label: "Completed",
     id: 2,
   },
   // {
@@ -34,15 +34,11 @@ const AddprojectFields = ({ onClose, isLoading }) => {
   const { data: companyData, isLoading: loadingCompany } = useGetCompany();
   const { mode } = useContext(ThemeModeContext);
 
-  const { formik } = useAddProjectForm();
+  const { formik } = useAddProjectForm(onClose);
 
   const handleFormSubmit = async () => {
-    const isValid = await formik.validateForm();
-    if (isValid) {
-      formik.handleSubmit();
-      if (formik.isValid) {
-        onClose();
-      }
+    formik.handleSubmit();
+    if (formik.isValid) {
     }
   };
 
@@ -51,10 +47,10 @@ const AddprojectFields = ({ onClose, isLoading }) => {
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
           <TextField
-            id='projectName'
-            name='projectName'
-            label='Project Name'
-            placeholder='Enter project name'
+            id="projectName"
+            name="projectName"
+            label="Project Name"
+            placeholder="Enter project name"
             fullWidth
             required
             value={formik.values.projectName}
@@ -63,38 +59,38 @@ const AddprojectFields = ({ onClose, isLoading }) => {
               formik.touched.projectName && Boolean(formik.errors.projectName)
             }
             helperText={formik.touched.projectName && formik.errors.projectName}
-            variant='outlined'
+            variant="outlined"
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
 
         <Grid item xs={12} sm={6}>
           <TextField
-            name='startDate'
-            label='Start Date'
-            type='date'
+            name="startDate"
+            label="Start Date"
+            type="date"
             fullWidth
             required
             value={formik.values.startDate}
             onChange={formik.handleChange}
             error={formik.touched.startDate && Boolean(formik.errors.startDate)}
             helperText={formik.touched.startDate && formik.errors.startDate}
-            variant='outlined'
+            variant="outlined"
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
 
         <Grid item xs={12} sm={6}>
           <TextField
-            name='endDate'
-            label='Deadline Date'
-            type='date'
+            name="endDate"
+            label="Deadline Date"
+            type="date"
             fullWidth
             value={formik.values.endDate}
             onChange={formik.handleChange}
             error={formik.touched.endDate && Boolean(formik.errors.endDate)}
             helperText={formik.touched.endDate && formik.errors.endDate}
-            variant='outlined'
+            variant="outlined"
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
@@ -162,8 +158,8 @@ const AddprojectFields = ({ onClose, isLoading }) => {
           </TextField>
            */}
           <Autocomplete
-            id='projectLeadId'
-            name='projectLeadId'
+            id="projectLeadId"
+            name="projectLeadId"
             options={employeeData || []}
             getOptionLabel={(employee) =>
               `${employee?.firstName} ${employee?.middleName} ${employee?.lastName}`
@@ -173,17 +169,17 @@ const AddprojectFields = ({ onClose, isLoading }) => {
             )}
             onChange={(event, selectedEmployee) => {
               if (selectedEmployee) {
-                formik.setFieldValue('projectLeadId', selectedEmployee.id);
+                formik.setFieldValue("projectLeadId", selectedEmployee.id);
               }
             }}
             renderInput={(params) => (
               <TextField
                 {...params}
-                label='Project Leader'
-                placeholder='Enter User name...'
+                label="Project Leader"
+                placeholder="Enter User name..."
                 fullWidth
                 required
-                variant='outlined'
+                variant="outlined"
                 InputLabelProps={{ shrink: true }}
                 error={
                   formik.touched.employeeId && Boolean(formik.errors.employeeId)
@@ -198,18 +194,18 @@ const AddprojectFields = ({ onClose, isLoading }) => {
 
         <Grid item xs={12} sm={12}>
           <TextField
-            id='companyId'
-            name='companyId'
+            id="companyId"
+            name="companyId"
             select
-            label='Project Branch Name'
-            placeholder='Enter Company Id'
+            label="Project Branch Name"
+            placeholder="Enter Company Id"
             fullWidth
             required
             value={formik.values.companyId}
             onChange={formik.handleChange}
             error={formik.touched.companyId && Boolean(formik.errors.companyId)}
             helperText={formik.touched.companyId && formik.errors.companyId}
-            variant='outlined'
+            variant="outlined"
             InputLabelProps={{ shrink: true }}
           >
             {!loadingCompany &&
@@ -217,7 +213,7 @@ const AddprojectFields = ({ onClose, isLoading }) => {
                 <MenuItem
                   key={option?.id}
                   value={option?.id}
-                  sx={{ bgcolor: mode === 'light' ? '' : '#413e3e' }}
+                  sx={{ bgcolor: mode === "light" ? "" : "#413e3e" }}
                 >
                   {option?.branchName}
                 </MenuItem>
@@ -227,9 +223,9 @@ const AddprojectFields = ({ onClose, isLoading }) => {
 
         <Grid
           container
-          direction='row'
-          justifyContent='flex-end'
-          alignItems='flex-end'
+          direction="row"
+          justifyContent="flex-end"
+          alignItems="flex-end"
         >
           <ButtonComponent
             variant="contained"
@@ -239,7 +235,7 @@ const AddprojectFields = ({ onClose, isLoading }) => {
             buttonName={"Add Project"}
           />
           <ButtonComponent
-            variant='contained'
+            variant="contained"
             OnClick={onClose}
             sx={{ mt: 3, ml: 1 }}
             BGColor={"#d32f2f"}
