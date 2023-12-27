@@ -32,7 +32,7 @@ const Dashboard = () => {
     year: "numeric",
   };
   const formattedDate = today.toLocaleDateString(undefined, options);
-
+console.log(data);
   return (
     <>
       <Box
@@ -118,7 +118,7 @@ const Dashboard = () => {
             <DashboardCard
               title="Holiday"
               icon={Holiday}
-              count={data?.totalEvents}
+              count={data?.totalHolidays}
               linkTo="/admin/holiday"
               borderColor="#FF8A7B"
             />

@@ -14,4 +14,4 @@ const FamilySchema = Yup.object().shape({
     .min(1, "Need at least a family"),
 });
 
-export { FamilySchema };
+export default  FamilySchema;

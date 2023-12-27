@@ -18,6 +18,7 @@ import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import LaptopIcon from '@mui/icons-material/Laptop';
 import { ListItemIcon } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import TimeToLeaveIcon from '@mui/icons-material/TimeToLeave';
 import {
   Box,
   Drawer,
@@ -26,6 +27,7 @@ import {
   ListItemButton,
   Button,
 } from '@mui/material';
+import SettingsIcon from '@mui/icons-material/Settings';
 import { ListItemText, Collapse, IconButton } from '@mui/material/';
 import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
@@ -125,7 +127,7 @@ export default function AdminSidebar() {
           name: 'Leave',
           path: 'employee/leaves',
           icon: (
-            <MailIcon
+            <TimeToLeaveIcon
               sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
             />
           ),
@@ -259,6 +261,16 @@ export default function AdminSidebar() {
       subMenus: [],
     },
     {
+      name: 'Employee Mapping',
+      icon: (
+        <PersonAddIcon
+          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
+        />
+      ),
+      path: 'employee/mapping',
+      subMenus: [],
+    },
+    {
       name: 'Users',
       icon: (
         <PersonAddIcon
@@ -271,7 +283,7 @@ export default function AdminSidebar() {
     {
       name: 'Setting',
       icon: (
-        <MailIcon
+        <SettingsIcon
           sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
         />
       ),

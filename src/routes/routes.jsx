@@ -13,6 +13,7 @@ import ProjectEmpPage from '../app/pages/Project/ProjectEmployeeViewPage/Project
 import HomeIcon from '@mui/icons-material/Home';
 import useAuth from '../auth/hooks/component/login/useAuth';
 import DeactiveUser from '../app/pages/Auth/UserControl/Users/DeactiveUser';
+// import EmployeeMapping from '../app/pages/EmployeeMapping/EmployeeMapping';
 
 const ProfileDetail = Loadable(
   lazy(() => import('../app/pages/Auth/Profile/ProfileDetail'))
@@ -88,6 +89,9 @@ const EmployeeDashboard = Loadable(
 );
 const Setting = Loadable(
   lazy(() => import('../app/pages/EmailConfiguration/Setting'))
+);
+const EmployeeMapping = Loadable(
+  lazy(() => import('../app/pages/EmployeeMapping/EmployeeMapping'))
 );
 
 const routes = [
@@ -298,6 +302,12 @@ const routes = [
     name: 'User Deactivated',
     id: nanoid(),
     component: <DeactiveUser />,
+  },
+  {
+    path: 'employee/mapping',
+    name: 'Employee Mapping',
+    id: nanoid(),
+    component: <EmployeeMapping />,
   },
 ];
 

@@ -13,8 +13,24 @@ const Setting = () => {
   return (
     <TabContext value={value}>
       <TabList onChange={handleChange} aria-label="lab API tabs example">
-        <Tab label="Email Configuration" value="1" />
-        <Tab label="Change Email" value="2" />
+        <Tab
+          label="Email Configuration"
+          value="1"
+          style={{
+            fontSize: "1rem",
+            // color: primaryColor,
+            fontWeight: "bolder",
+          }}
+        />
+        <Tab
+          label="Change Email"
+          value="2"
+          style={{
+            fontSize: "1rem",
+            // color: primaryColor,
+            fontWeight: "bolder",
+          }}
+        />
       </TabList>
       <TabPanel value="1">
         <EmailConfiguration />
