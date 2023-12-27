@@ -9,6 +9,7 @@ import DeleteConfirmationModal from "../../../components/Modal/DeleteConfirmatio
 import CompanyGridView from "../CompanyView/CompanyGridView";
 
 const CompanyGrid = ({ permissions ,companyData,isLoading}) => {
+  console.log("companyData", companyData)
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [editedCompany, setEditedCompany] = useState({});
@@ -45,7 +46,7 @@ const CompanyGrid = ({ permissions ,companyData,isLoading}) => {
       {openEditModal && (
         <EditCompanyModal
           title={"Edit Branch"}
-          data={companyData[0]}
+          data={editedCompany}
           open={openEditModal}
           handleCloseModal={handleCloseEditModal}
         />

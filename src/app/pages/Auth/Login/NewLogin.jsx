@@ -60,6 +60,11 @@ const NewLogin = () => {
       }
     }
   }, [user]);
+
+  const handleFormSubmit = () => {
+    formik.handleSubmit();
+  };
+  
   return (
     <div style={{ height: '100dvh' }}>
       <div className='login-bgg'>
@@ -395,7 +400,7 @@ const NewLogin = () => {
 
               <LoadingButton
                 fullWidth
-                onClick={() => formik.submitForm()}
+                onClick={handleFormSubmit}
                 variant='contained'
                 loading={loading}
                 sx={{

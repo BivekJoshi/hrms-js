@@ -8,6 +8,7 @@ import { useGetEmployee } from "../../../hooks/employee/useEmployee";
 // import { useGetProjectDetail } from "../../../hooks/project/useProject";
 
 const EditProjectFields = ({ onClose, isLoading, data }) => {
+  console.log(data, 'ghj')
   const { formik } = useEditProjectForm(data);
   // const { data: projectData } = useGetProjectDetail();
   const { data: employeeData } = useGetEmployee();

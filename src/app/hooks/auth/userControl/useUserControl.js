@@ -35,7 +35,7 @@ export const useAddUserControl = ({ onSuccess }) => {
     (formData) => addUserControl(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success("User added successfully");
+        toast.success("User added Successfully");
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries("getUserControl");
       },
@@ -54,7 +54,7 @@ export const useEditUserControl = ({ onSuccess }) => {
     (formData) => editUserControlRoleSetting(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success("successfully edited user");
+        toast.success("Successfully edited user");
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries("getUserControl");
       },

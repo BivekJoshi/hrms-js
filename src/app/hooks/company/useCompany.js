@@ -40,7 +40,7 @@ export const useAddCompany = ({ onSuccess }) => {
       queryClient.invalidateQueries('getCompany');
     },
     onError: (err, _variables, _context) => {
-      toast.error(`error: ${err.message}`);
+      toast.error(`${err.message}`);
     },
   });
 };
