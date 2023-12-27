@@ -55,7 +55,7 @@ const Employee = () => {
   const handleCloseEmailModal = () => {
     setOpenAddModal(false);
     setOpenSubmitModal(false);
-  }
+  };
 
   const { formik } = useAddEmployeeForm(handleOpenSubmitModal);
 
@@ -65,7 +65,7 @@ const Employee = () => {
 
   const handleSubmit = () => {
     formik.handleSubmit();
-    if(formik.isValid) {
+    if (formik.isValid) {
     }
   };
 
@@ -101,7 +101,7 @@ const Employee = () => {
                 onClick={handleAddOpenModal}
                 sx={{ textTransform: 'none', color: '#fff' }}
               >
-                +Add Employee
+                + Add Employee
               </Button>
             </Box>
           </Box>
@@ -130,7 +130,12 @@ const Employee = () => {
                 position: 'relative',
               }}
             >
-              <Typography variant='h6' sx={{color: mode === 'light' ? '#000' : '#fff'}}>Add Employee</Typography>
+              <Typography
+                variant='h6'
+                sx={{ color: mode === 'light' ? '#000' : '#fff' }}
+              >
+                Add Employee
+              </Typography>
               <div
                 style={{
                   width: '100%',
@@ -158,7 +163,10 @@ const Employee = () => {
                 variant='contained'
                 color='success'
                 onClick={handleSubmit}
-                sx={{ textTransform: 'none', color: mode === 'light' ? '#fff' : '#fff' }}
+                sx={{
+                  textTransform: 'none',
+                  color: mode === 'light' ? '#fff' : '#fff',
+                }}
               >
                 Submit
               </Button>
@@ -176,7 +184,7 @@ const Employee = () => {
           </Box>
         </div>
       </Modal>
-{/* 
+      {/* 
       <Modal
         open={openSubmitModal}
         onClose={handleCloseEmailModal}

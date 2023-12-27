@@ -17,6 +17,7 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import LaptopIcon from '@mui/icons-material/Laptop';
 import { ListItemIcon } from '@mui/material';
+import TodayIcon from '@mui/icons-material/Today';
 import { styled } from '@mui/material/styles';
 import {
   Box,
@@ -26,6 +27,7 @@ import {
   ListItemButton,
   Button,
 } from '@mui/material';
+import SettingsIcon from '@mui/icons-material/Settings';
 import { ListItemText, Collapse, IconButton } from '@mui/material/';
 import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
@@ -241,7 +243,7 @@ export default function AdminSidebar() {
           name: 'Event Attendance',
           path: 'event/attendance',
           icon: (
-            <MailIcon
+            <TodayIcon
               sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
             />
           ),
@@ -281,7 +283,7 @@ export default function AdminSidebar() {
     {
       name: 'Setting',
       icon: (
-        <MailIcon
+        <SettingsIcon
           sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
         />
       ),
