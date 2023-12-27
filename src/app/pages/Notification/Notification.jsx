@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext, useEffect} from "react";
+import React, { useState, useRef, useContext, useEffect } from "react";
 import {
   Typography,
   Popper,
@@ -19,20 +19,25 @@ import { useGetLeave } from "../../hooks/leave/useLeave";
 import useAuth from "../../../auth/hooks/component/login/useAuth";
 
 const Notification = ({ data }) => {
-  const [status, setStatus] = useState();
-  const { mode } = useContext(ThemeModeContext);
   const { isManager } = useAuth();
   const { data: leaveData } = useGetLeave();
+  const { mode } = useContext(ThemeModeContext);
 
   const eventName = data?.events;
 
-//leave notifications
+  //leave notifications
   const pendingLeaveData = isManager
     ? leaveData?.filter((leave) => leave.leaveStatus === "PENDING")
     : "";
   const eventCount = isManager
     ? pendingLeaveData?.length + data?.eventCount || 0
     : data?.events?.length || 0;
+
+  const filteredEvents = data?.events?.filter((event) => event.notificationId === "0");
+  const filterEventcount=filteredEvents?.length;
+
+  console.log(filterEventcount,"events");
+
   const displayCount = eventCount > 0 ? eventCount : null;
 
   const [open, setOpen] = useState(false);
@@ -42,7 +47,7 @@ const Notification = ({ data }) => {
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
-//setstatus (data?.ischecked = true)
+    //setstatus (data?.ischecked = true)
   };
 
   const handleClose = () => {
@@ -88,7 +93,9 @@ const Notification = ({ data }) => {
       <IconButton ref={anchorRef} onClick={handleToggle} style={btnStyle}>
         <Tooltip title="Notifications">
           <Badge
-            badgeContent={data?.isChecked ? "" : displayCount}
+            // badgeContent={data?.isChecked ? "" : displayCount}
+            badgeContent={data?.isChecked ? "" : filterEventcount}
+            
             color="secondary"
           >
             <NotificationsIcon />
