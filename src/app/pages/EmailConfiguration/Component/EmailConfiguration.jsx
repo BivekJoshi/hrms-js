@@ -1,11 +1,11 @@
 import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
 import useEmailConfigureForm from "../../../hooks/email/emailConfiguration/useEmailConfigureForm";
-import PermissionHoc from "../../../hoc/permissionHoc";
 import HocButton from "../../../hoc/hocButton";
 import { useGetEmailConfigure } from "../../../hooks/email/useEmail";
 
 const EmailConfiguration = ({ permissions }) => {
+  console.log(permissions)
   const { data: emailData, isLoading } = useGetEmailConfigure();
   const { formik } = useEmailConfigureForm(emailData, isLoading);
 
@@ -121,4 +121,4 @@ const EmailConfiguration = ({ permissions }) => {
   );
 };
 
-export default PermissionHoc(EmailConfiguration);
+export default EmailConfiguration;

@@ -58,7 +58,7 @@ console.log(formik.touched?.family && formik.touched?.family[0]?.relation )
                           label='Relation'
                           placeholder='Enter Relation'
                           fullWidth
-                          required
+                          // required
                           value={familyMember.relation}
                           onChange={handleChange}
                           onBlur={handleBlur} // Add onBlur to update touched state
@@ -81,7 +81,7 @@ console.log(formik.touched?.family && formik.touched?.family[0]?.relation )
                           label='Mobile Number'
                           placeholder='Enter Mobile Number'
                           fullWidth
-                          required
+                          // required
                           value={familyMember.mobileNumber}
                           onChange={handleChange}
                           onBlur={handleBlur} // Add onBlur to update touched state
