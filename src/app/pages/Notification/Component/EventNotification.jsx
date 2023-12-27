@@ -76,7 +76,8 @@ export const EventNotification = ({
             <>
               <Box
                 sx={{
-                  backgroundColor: '#F7F8F9',
+                  // backgroundColor: '#F7F8F9',
+                  backgroundColor:mode==="light"?"#F7F8F9":"#3e3e3e",
                   padding: '.8rem',
                   margin: '.5rem',
                   borderRadius: '6px',
