@@ -31,6 +31,13 @@ export const useGetEventNotification = () => {
   });
 };
 
+export const useGetEventAttenderList = () => {
+  return useQuery(['getEventAttenderList'], () => getEventAttenderList(), {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
+};
+
 {
   /*________________________GETBYID_____________________________________*/
 }

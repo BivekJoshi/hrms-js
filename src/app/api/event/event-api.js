@@ -16,6 +16,11 @@ export const getEventNotification = async () => {
   return data;
 };
 
+export const getEventAttenderList = async () => {
+  const data = await axiosInstance.get(`/event/get-notification-admin`);
+  return data;
+};
+
 {
   /*________________________GETBYID_____________________________________*/
 }
