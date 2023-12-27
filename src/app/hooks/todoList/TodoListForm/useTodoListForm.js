@@ -14,7 +14,7 @@ const useTodoListForm = (data, onClose) => {
       priority: data?.priority || "",
     },
     validationSchema: TodoListSchema,
-    enableReinitialize: "true",
+    enableReinitialize: true,
     onSubmit: (values) => {
       if (data?.id) {
         handledEditRequest(values);

@@ -1,14 +1,14 @@
-import React from "react";
-import { useGetPromotionHistory } from "../../../../../hooks/promotionHistory/usePromotionHistory";
-import { useParams } from "react-router-dom";
-import { Box, Button } from "@mui/material";
-import { AddPromotionHistory } from "./PromotionHistoryModal";
-import { useState } from "react";
-import "../../EmployProfile/Style/Style.css";
-import { useGetDesignation } from "../../../../../hooks/designation/useDesignation";
-import useAuth from "../../../../../../auth/hooks/component/login/useAuth";
-import { useGetLoggedInUserInfo } from "../../../../../hooks/employee/useEmployee";
-import CustomTable from "../../../../../components/CustomTable/CustomTable";
+import React from 'react';
+import { useGetPromotionHistory } from '../../../../../hooks/promotionHistory/usePromotionHistory';
+import { useParams } from 'react-router-dom';
+import { Box, Button } from '@mui/material';
+import { AddPromotionHistory } from './PromotionHistoryModal';
+import { useState } from 'react';
+import '../../EmployProfile/Style/Style.css';
+import { useGetDesignation } from '../../../../../hooks/designation/useDesignation';
+import useAuth from '../../../../../../auth/hooks/component/login/useAuth';
+import { useGetLoggedInUserInfo } from '../../../../../hooks/employee/useEmployee';
+import CustomTable from '../../../../../components/CustomTable/CustomTable';
 
 const PromotionHistory = () => {
   const { isSuperAdmin, isAdmin, isHr, isEmployee, isHrAdmin, isManager } =
@@ -25,7 +25,6 @@ const PromotionHistory = () => {
   const { data: designationData, isLoading: loadingDesignation } =
     useGetDesignation();
   // const { data: trainingData } = useGetTrainingByEmpId(id);
-  
 
   const [openAddModal, setOpenAddModal] = useState(false);
 
@@ -34,8 +33,8 @@ const PromotionHistory = () => {
 
   const mappedPromotionHistory = PromotionHistory?.map((item) => {
     const position = designationData?.find((pos) => pos.id === item.positionId);
-    const positionName = `${position?.positionName || "-"} (${
-      position?.positionLevel || "-"
+    const positionName = `${position?.positionName || '-'} (${
+      position?.positionLevel || '-'
     })`;
     return {
       ...item,
@@ -45,47 +44,47 @@ const PromotionHistory = () => {
 
   const columns = [
     {
-      title: "Position Name",
-      field: "positionId",
-      emptyValue: "-",
+      title: 'Position Name',
+      field: 'positionId',
+      emptyValue: '-',
       width: 300,
     },
     {
-      title: "Effective From",
-      field: "effectiveFromDate",
-      emptyValue: "-",
+      title: 'Effective From',
+      field: 'effectiveFromDate',
+      emptyValue: '-',
       width: 200,
     },
     {
-      title: "Effective To",
-      field: "effectiveToDate",
-      emptyValue: "-",
+      title: 'Effective To',
+      field: 'effectiveToDate',
+      emptyValue: '-',
       width: 200,
     },
     {
-      title: "Remarks",
-      field: "remarks",
-      emptyValue: "-",
+      title: 'Remarks',
+      field: 'remarks',
+      emptyValue: '-',
       width: 200,
     },
     {
-      title: "Position Hold",
-      field: "lastPosition",
-      emptyValue: "-",
+      title: 'Position Hold',
+      field: 'lastPosition',
+      emptyValue: '-',
       width: 50,
       render: (rowData) => {
         return (
           <div
             style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
             }}
           >
             {rowData.lastPosition ? (
-              <span style={{ color: "green" }}>✔</span>
+              <span style={{ color: 'green' }}>✔</span>
             ) : (
-              <span style={{ color: "red" }}>✕</span>
+              <span style={{ color: 'red' }}>✕</span>
             )}
           </div>
         );
@@ -94,37 +93,37 @@ const PromotionHistory = () => {
   ];
 
   return (
-    <Box className="tableIcon">
+    <Box className='tableIcon'>
       <Box
         sx={{
-          display: "flex",
-          justifyContent: "flex-end",
-          paddingBottom: "10px",
+          display: 'flex',
+          justifyContent: 'flex-end',
+          paddingBottom: '10px',
         }}
       >
         {!isEmployee ? (
           <Button
-            variant="contained"
+            variant='contained'
             sx={{ mt: 3, ml: 1 }}
             onClick={handleAddOpenModal}
           >
-            +Add Promotion
+            + Add Promotion
           </Button>
         ) : (
-          ""
+          ''
         )}
       </Box>
 
       <CustomTable
         columns={columns}
         data={PromotionHistory}
-        title="Designation List"
+        title='Designation List'
         isLoading={isLoading || loadingDesignation}
       />
 
       {openAddModal && (
         <AddPromotionHistory
-          title={"Add Promotion"}
+          title={'Add Promotion'}
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
         />

@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { useGetDeactivatedUser } from '../../../../hooks/employee/DeactivateEmploye/useEmployee';
 import CustomTable from '../../../../components/CustomTable/CustomTable';
-import RestoreFromTrashOutlinedIcon from '@mui/icons-material/RestoreFromTrashOutlined';
 import { EditActivationUserModal } from '../../../Employee/EmployeeDeactivationModal/EditDeactivationEmployeeModal';
-
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 const DeactiveUser = () => {
   const { data: deactivateUser, isLoading } = useGetDeactivatedUser();
   const [openDeactivatedModal, setOpenDeactivatedModal] = useState(false);
@@ -62,7 +61,7 @@ const DeactiveUser = () => {
 
   const actions = [
     {
-      icon: () => <RestoreFromTrashOutlinedIcon />,
+      icon: () => <AddCircleIcon />,
       tooltip: 'Activate Employee',
       onClick: (event, rowData) => handleDeactivatedEmployee(rowData),
     },
@@ -71,7 +70,6 @@ const DeactiveUser = () => {
   if (isLoading) return <>Loading</>;
   return (
     <div>
-      {' '}
       <CustomTable
         columns={columns}
         data={deactivateUser}

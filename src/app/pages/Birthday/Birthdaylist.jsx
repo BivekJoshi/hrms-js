@@ -1,9 +1,9 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext } from 'react';
 
-import { addMonths, format } from "date-fns";
-import Birthdaytable from "./Birthdaytable";
-import { useGetUpcomingBirthday } from "../../hooks/birthday/useBirthday";
-import { Typography } from "@mui/material";
+import { addMonths, format } from 'date-fns';
+import Birthdaytable from './Birthdaytable';
+import { useGetUpcomingBirthday } from '../../hooks/birthday/useBirthday';
+import { Typography } from '@mui/material';
 
 const Birthdaylist = () => {
   const today = new Date();
@@ -39,19 +39,15 @@ const Birthdaylist = () => {
 
   return (
     <div>
-      <Typography variant="h4" noWrap component="div">
-        Birthday List of Employees
-      </Typography>
-
       <Birthdaytable
         data={thisMonthBirthdays}
-        currMonth={format(new Date(), "MMMM")}
+        currMonth={format(new Date(), 'MMMM')}
       />
-      
+
       <br />
       <Birthdaytable
         data={upcomingBirthdays}
-        currMonth={format(addMonths(new Date(), 1), "MMMM")}
+        currMonth={format(addMonths(new Date(), 1), 'MMMM')}
       />
     </div>
   );

@@ -52,7 +52,7 @@ const Event = ({ permissions }) => {
 
   const handleFormSubmit = async () => {
     formik.handleSubmit();
-    if (!formik.isValidating && formik.isValid) {
+    if (formik.isValid) {
     }
   };
   const handleOpenModal = (e) => {

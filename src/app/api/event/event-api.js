@@ -76,3 +76,23 @@ export const editEvent = async (formData) => {
     return data;
   }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+{
+  /*________________________EDIT-EVENT-ATTENDANCE_____________________________________*/
+}
+export const editEventAttendance = async (formData) => {
+    const data = await axiosInstance.put(`/event/add-attender`, formData);
+    return data;
+};

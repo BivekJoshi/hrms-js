@@ -161,7 +161,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           onChange={formik.handleChange}
           error={formik.touched.dateOfJoin && Boolean(formik.errors.dateOfJoin)}
           helperText={formik.touched.dateOfJoin && formik.errors.dateOfJoin}
-          inputProps={{ max: today }}
+          inputProps={{ min: formik.values.dateOfBirth, max: today }}
         />
       </Grid>
       <Grid item xs={12} sm={6} md={4}>

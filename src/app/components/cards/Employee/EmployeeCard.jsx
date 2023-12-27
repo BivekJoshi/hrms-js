@@ -34,7 +34,6 @@ const EmployeeCard = ({
   const [open, setOpen] = useState(false);
   const [openEmailForm, setOpenEmailForm] = useState(false);
   const { mode } = useContext(ThemeModeContext); // Accessing mode from context
-  // console.log({"doc": DOC_URL, "emp": employeePhoto})
   const img = DOC_URL + employeePhoto;
 
   const anchorRef = useRef(null);

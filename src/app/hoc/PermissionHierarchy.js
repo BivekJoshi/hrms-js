@@ -39,7 +39,9 @@ const PermissionHierarchy = {
   employeeResource: commonPermissions,
   holiday: commonPermissions,
   projectTask: commonPermissions,
+  eventAttendance: specialPermissions,
   emailConfig: specialPermissions,
+  
 };
 
 export default PermissionHierarchy;

@@ -11,10 +11,11 @@ export const AddUserControlFields = ({ onClose }) => {
   const { formik } = useAddUserControlForm(onClose);
   const { mode } = useContext(ThemeModeContext);
 
-  const handleFormSubmit = async () => {
-    const isValid = await formik.validateForm();
-    if (isValid) {
-      formik.handleSubmit();
+  const handleFormSubmit = () => {
+    // const isValid = await formik.validateForm();
+    formik.handleSubmit();
+    if (formik.isValid) {
+      // formik.handleSubmit();
     }
   };
 
@@ -37,8 +38,8 @@ export const AddUserControlFields = ({ onClose }) => {
     <>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
-          <Typography sx={{ color: 'orange' }}>
-            To add an employee as a user its address detail must be Filled
+          <Typography sx={{color:'orange'}}>
+            To add an employee, user's permanent address detail must be Filled
           </Typography>
           <br />
           <Autocomplete
@@ -50,6 +51,7 @@ export const AddUserControlFields = ({ onClose }) => {
               (employee) => employee?.id === formik.values?.employeeId
             )}
             onChange={handleUserNameChange}
+            
             renderInput={(params) => (
               <TextField
                 {...params}

@@ -1,14 +1,23 @@
 import React from "react";
 import "../Style/Style.css";
-import { Box, Divider } from "@mui/material";
-
+import { Box, Divider, Stack } from "@mui/material";
+import BorderColorIcon from "@mui/icons-material/BorderColor";
 import ListUserDetails from "../../InfoTabs/BaiscInfoTab/Components/ListUserDetails";
 import { useParams } from 'react-router-dom';
 import { useGetBankByEmployeeId } from '../../../../../hooks/employee/useBank';
 import { useGetFammilyById } from '../../../../../hooks/employee/useFamily';
+import useAuth from '../../../../../../auth/hooks/component/login/useAuth';
 
 const BasicInfo = ({ data, mode }) => {
   const { id } = useParams();
+  const {
+    isSuperAdmin,
+    isAdmin,
+    isHr,
+    isEmployee,
+    isHrAdmin,
+    isManager,
+  } = useAuth();
   const { data: bankData } = useGetBankByEmployeeId();
   const { data: familyData } = useGetFammilyById(id);
   const bData = bankData && bankData?.[0];
@@ -35,13 +44,34 @@ const BasicInfo = ({ data, mode }) => {
     "PAN Number": data?.panNumber || "",
   };
 
+  const handleOnClick = () => {
+    if (isAdmin || isSuperAdmin || isHr || isManager || isHrAdmin) {
+      navigate(`/admin/employee/edit/${id}`);
+    } else {
+      navigate(`/employee/employee/edit/${loggedInUserData?.employeeId}`);
+    }
+  };
+
   return (
     <>
+    
+     {/* <Stack sx={{ display: "flex" }}>
+          {isEmployee ? (
+            ""
+          ) : (
+            <BorderColorIcon
+              onClick={handleOnClick}
+              fontSize="large"
+              sx={{ color: "rgb(28, 126, 214)", paddingRight: "1rem" }}
+            />
+          )}
+        </Stack> */}
       <Box
         container
         className="ProfileStyle"
         sx={{ backgroundColor: mode === "light" ? "#ededed" : "#292929" }}
       >
+         
         <Box>
           <ListUserDetails
             data={EMPLOYEE}
