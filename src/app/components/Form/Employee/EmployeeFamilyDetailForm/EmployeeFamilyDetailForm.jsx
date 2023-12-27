@@ -38,7 +38,6 @@ console.log(formik.touched?.family && formik.touched?.family[0]?.relation )
                           // required
                           value={familyMember.name}
                           onChange={handleChange}
-                          onBlur={handleBlur} // Add onBlur to update touched state
                           error={Boolean(
                             touched.family?.[index]?.name &&
                               errors.family?.[index]?.name

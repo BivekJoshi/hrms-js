@@ -1,5 +1,5 @@
-import { useMutation, useQuery, useQueryClient } from "react-query";
-import { toast } from "react-toastify";
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { toast } from 'react-toastify';
 import {
   addEvent,
   addEventConfirmation,
@@ -9,13 +9,13 @@ import {
   getEventById,
   getEventByMonth,
   getEventNotification,
-} from "../../api/event/event-api";
+} from '../../api/event/event-api';
 
 {
   /*________________________GET_____________________________________*/
 }
 export const useGetEvent = () => {
-  return useQuery(["getEvent"], () => getEvent(), {
+  return useQuery(['getEvent'], () => getEvent(), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
@@ -25,7 +25,14 @@ export const useGetEvent = () => {
   /*________________________GET_____________________________________*/
 }
 export const useGetEventNotification = () => {
-  return useQuery(["getEventNofication"], () => getEventNotification(), {
+  return useQuery(['getEventNofication'], () => getEventNotification(), {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
+};
+
+export const useGetEventAttenderList = () => {
+  return useQuery(['getEventAttenderList'], () => getEventAttenderList(), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
@@ -35,7 +42,7 @@ export const useGetEventNotification = () => {
   /*________________________GETBYID_____________________________________*/
 }
 export const useGetEventById = (id) => {
-  return useQuery(["getEventById", id], () => getEventById(id), {
+  return useQuery(['getEventById', id], () => getEventById(id), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
@@ -46,7 +53,7 @@ export const useGetEventById = (id) => {
 }
 export const useGetEventByMonth = (monthAd) => {
   return useQuery(
-    ["getEventByMonth", monthAd],
+    ['getEventByMonth', monthAd],
     () => getEventByMonth(monthAd),
     {
       refetchInterval: false,
@@ -60,11 +67,11 @@ export const useGetEventByMonth = (monthAd) => {
 }
 export const useAddEvent = ({ onSuccess }) => {
   const queryClient = useQueryClient();
-  return useMutation(["addEvent"], (formData) => addEvent(formData), {
+  return useMutation(['addEvent'], (formData) => addEvent(formData), {
     onSuccess: (data, variables, context) => {
-      toast.success("Succesfully added an Event");
+      toast.success('Succesfully added an Event');
       onSuccess && onSuccess(data, variables, context);
-      queryClient.invalidateQueries("getEvent");
+      queryClient.invalidateQueries('getEvent');
     },
     onError: (err, _variables, _context) => {
       toast.error(`error: ${err.message}`);
@@ -74,13 +81,16 @@ export const useAddEvent = ({ onSuccess }) => {
 
 /*________________________POST CONFIRMATION_____________________________________*/
 export const useAddEventConfirmaation = ({ onSuccess }) => {
+  const queryClient = useQueryClient();
+
   return useMutation(
-    ["addEventConfirmation"],
+    ['addEventConfirmation'],
     (formData) => addEventConfirmation(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success("Succesfully added an Event Confirmation");
+        toast.success('Succesfully added an Event Confirmation');
         onSuccess && onSuccess(data, variables, context);
+        queryClient.invalidateQueries('getEventNofication');
       },
       onError: (err, _variables, _context) => {
         toast.error(`error: ${err.message}`);
@@ -94,11 +104,11 @@ export const useAddEventConfirmaation = ({ onSuccess }) => {
 }
 export const useDeleteEvent = ({ onSuccess }) => {
   const queryClient = useQueryClient();
-  return useMutation(["deleteEvent"], (eventId) => deleteEvent(eventId), {
+  return useMutation(['deleteEvent'], (eventId) => deleteEvent(eventId), {
     onSuccess: (data, variables, context) => {
-      toast.success("Successfully deleted an Event");
+      toast.success('Successfully deleted an Event');
       onSuccess && onSuccess(data, variables, context);
-      queryClient.invalidateQueries("getEvent");
+      queryClient.invalidateQueries('getEvent');
     },
     onError: (err, _variables, _context) => {
       toast.error(`Error: ${err.message}`);
@@ -111,11 +121,11 @@ export const useDeleteEvent = ({ onSuccess }) => {
 }
 export const useEditEvent = ({ onSuccess }) => {
   const queryClient = useQueryClient();
-  return useMutation(["editEvent"], (formData) => editEvent(formData), {
+  return useMutation(['editEvent'], (formData) => editEvent(formData), {
     onSuccess: (data, variables, context) => {
-      toast.success("Succesfully edited an Event");
+      toast.success('Succesfully edited an Event');
       onSuccess && onSuccess(data, variables, context);
-      queryClient.invalidateQueries("getEvent");
+      queryClient.invalidateQueries('getEvent');
     },
     onError: (err, _variables, _context) => {
       toast.error(`error: ${err.message}`);

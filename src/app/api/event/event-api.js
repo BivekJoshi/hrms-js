@@ -1,4 +1,4 @@
-import { axiosInstance } from "../../../auth/axiosInterceptor";
+import { axiosInstance } from '../../../auth/axiosInterceptor';
 
 {
   /*________________________GET_____________________________________*/
@@ -13,6 +13,11 @@ export const getEvent = async () => {
 }
 export const getEventNotification = async () => {
   const data = await axiosInstance.get(`/event/get-notification`);
+  return data;
+};
+
+export const getEventAttenderList = async () => {
+  const data = await axiosInstance.get(`/event/get-notification-admin`);
   return data;
 };
 
@@ -42,13 +47,13 @@ export const getEventByMonth = async (monthAd) => {
   /*________________________POST_____________________________________*/
 }
 export const addEvent = async (formData) => {
-  const data = await axiosInstance.post("/event/create", formData);
+  const data = await axiosInstance.post('/event/create', formData);
   return data;
 };
 
 /*________________________POST FOR APPROVAL_____________________________________*/
 export const addEventConfirmation = async (formData) => {
-  const data = await axiosInstance.post("/event/confirmation", formData);
+  const data = await axiosInstance.post('/event/confirmation', formData);
   return data;
 };
 {
