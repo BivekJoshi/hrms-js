@@ -198,7 +198,7 @@ const Attendance = () => {
 
   return (
     <div className='main'>
-      <h2>Attendance</h2>
+      <Typography variant='h5'>Attendance</Typography>
       <div className='Search'>
         <Box
           component='form'

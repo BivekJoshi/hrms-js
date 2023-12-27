@@ -1,6 +1,6 @@
-import { Button } from "@mui/material";
-import React from "react";
-import useAuth from "../../auth/hooks/component/login/useAuth";
+import { Button } from '@mui/material';
+import React from 'react';
+import useAuth from '../../auth/hooks/component/login/useAuth';
 
 const HocButton = ({
   buttonName,
@@ -23,11 +23,12 @@ const HocButton = ({
 
   const buttonSx = {
     ...sx,
-    backgroundColor: isDisabled ? "" : bg,
-    color: isDisabled ? "#fff" : color,
-    cursor: isDisabled ? "not-allowed" : "pointer",
-    "&:hover": {
-      backgroundColor: isDisabled ? "" : hoverBg,
+    backgroundColor: isDisabled ? '' : bg,
+    textTransform: 'none',
+    color: isDisabled ? '#fff' : color,
+    cursor: isDisabled ? 'not-allowed' : 'pointer',
+    '&:hover': {
+      backgroundColor: isDisabled ? '' : hoverBg,
     },
   };
   const handleClick = isDisabled ? null : onClick;

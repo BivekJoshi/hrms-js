@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-import RestoreFromTrashOutlinedIcon from '@mui/icons-material/RestoreFromTrashOutlined';
 import CustomTable from '../../../components/CustomTable/CustomTable';
-import { EditActivationEmployeeModal, EditDeactivationEmployeeModal } from '../EmployeeDeactivationModal/EditDeactivationEmployeeModal';
+import {
+  EditActivationEmployeeModal,
+  EditDeactivationEmployeeModal,
+} from '../EmployeeDeactivationModal/EditDeactivationEmployeeModal';
 import { useGetDeactivatedEmployee } from '../../../hooks/employee/DeactivateEmploye/useEmployee';
 import PersonAddAltSharpIcon from '@mui/icons-material/PersonAddAltSharp';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 const DeactivatedEmployee = () => {
   const { data: deactivateEmployee, isLoading } = useGetDeactivatedEmployee();
@@ -79,13 +82,13 @@ const DeactivatedEmployee = () => {
       <CustomTable
         columns={columns}
         data={deactivateEmployee}
-        title="Inactive Employee"
+        title='Inactive Employee'
         isLoading={isLoading}
         actions={actions}
       />
       {openDeactivatedModal && (
-        <EditActivationEmployeeModal 
-        title={"Employee Activation"}
+        <EditActivationEmployeeModal
+          title={'Employee Activation'}
           data={deactivatedEmployee}
           open={openDeactivatedModal}
           handleCloseModal={handleCloseDeactivatedModal}

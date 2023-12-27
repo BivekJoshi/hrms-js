@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useGetEventAttenderList } from '../../../hooks/event/useEvent';
 import PermissionHoc from '../../../hoc/permissionHoc';
 import HocButton from '../../../hoc/hocButton';
-import DeleteIcon from "@mui/icons-material/Delete";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import CustomTable from '../../../components/CustomTable/CustomTable';
 import DoneSharpIcon from '@mui/icons-material/DoneSharp';
@@ -11,29 +10,9 @@ import { EditEventAttendanceModal } from '../EventModal/EventModal';
 
 const EventAttendance = ({ permissions }) => {
   const { data: eventAttendanceData, isLoading } = useGetEventAttenderList();
-  // const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
-  // const [openDeleteModal, setOpenDeleteModal] = useState(false);
-
   const [editedEventAttendance, setEditedEventAttendance] = useState({});
-  // const [deletedDepartment, setDeletedDepartment] = useState({});
-
-  // const handleAddOpenModal = () => setOpenAddModal(true);
-  // const handleCloseAddModal = () => setOpenAddModal(false);
-
   const handleCloseEditModal = () => setOpenEditModal(false);
-  // const handleCloseDeleteModal = () => setOpenDeleteModal(false);
-
-  // // const deleteDepartmentMutation = useDeleteDepartment({});
-  // const handleDeleteDepartment = (rowData) => {
-  //   setDeletedDepartment(rowData);
-  //   setOpenDeleteModal(true);
-  // };
-
-  // const handleConfirmDelete = () => {
-  //   // deleteDepartmentMutation.mutate(deletedDepartment.id);
-  //   setOpenDeleteModal(false);
-  // };
 
   const handleEditEventAttendance = (rowData) => {
     setEditedEventAttendance(rowData);
@@ -122,15 +101,7 @@ const EventAttendance = ({ permissions }) => {
       tooltip: "Edit Event",
       onClick: (event, rowData) => handleEditEventAttendance(rowData),
     },
-    // {
-    //   icon: () => (
-    //     <HocButton permissions={permissions.canDelete} icon={<DeleteIcon />} />
-    //   ),
-    //   tooltip: "Delete Department",
-    //   onClick: (event, rowData) => handleDeleteDepartment(rowData),
-    // },
   ];
-
 
   return !isLoading && (
     <>
@@ -144,7 +115,6 @@ const EventAttendance = ({ permissions }) => {
         {openEditModal && (
         <EditEventAttendanceModal
           title={"Edit Event Attendance"}
-          // id={editedDepartment?.id}
           data={editedEventAttendance}
           open={openEditModal}
           handleCloseModal={handleCloseEditModal}
