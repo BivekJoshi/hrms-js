@@ -8,7 +8,6 @@ import PermissionHoc from "../../hoc/permissionHoc";
 
 const Setting = ({ permissions }) => {
   const [value, setValue] = React.useState("1");
-
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -23,7 +22,7 @@ const Setting = ({ permissions }) => {
         <EmailConfiguration permissions={permissions} />
       </TabPanel>
       <TabPanel value="2">
-        <ChangeEmail />
+        <ChangeEmail permissions={permissions}/>
       </TabPanel>
       <TabPanel value="3">
         <PathConfiguration permissions={permissions} />
