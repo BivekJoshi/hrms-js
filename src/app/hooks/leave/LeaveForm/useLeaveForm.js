@@ -1,38 +1,32 @@
-import { useFormik } from 'formik';
+import { useFormik } from "formik";
 import {
   useAddLeave,
   useAddLeaveByAdmin,
   useEditLeave,
   useEditLeaveByAdmin,
   useEditLeaveStatusByAdmin,
-} from '../useLeave';
-import { EditLeaveSchema, LeaveSchema } from '../Validation/LeaveSchema';
+} from "../useLeave";
+import { EditLeaveSchema, LeaveSchema } from "../Validation/LeaveSchema";
 
 const useLeaveForm = (data, onClose) => {
-  const { mutate: addLeave } = useAddLeaveByAdmin({});
-  const { mutate: editLeave } = useEditLeaveStatusByAdmin({});
+  const { mutate: addLeave, isSuccess } = useAddLeaveByAdmin({});
 
   const formik = useFormik({
     initialValues: {
-      employeeId: data?.employeeId || '',
-      leaveTypeId: data?.leaveTypeId || '',
-      leaveReason: data?.leaveReason || '',
-      fromDate: data?.fromDate || '',
-      toDate: data?.toDate || '',
-      leaveStatus: data?.leaveStatus || 'PENDING',
-      leaveRemarks: data?.leaveRemarks || '',
+      employeeId: data?.employeeId?.id,
+      leaveTypeId: data?.leaveTypeId || "",
+      leaveReason: data?.leaveReason || "",
+      fromDate: data?.fromDate || "",
+      toDate: data?.toDate || "",
+      leaveRemarks: data?.leaveRemarks || "",
       isHalfDay: data?.isHalfDay || false,
-      applyLeaveDays: data?.applyLeaveDays || '',
-      id: data?.leaveId || '',
+      applyLeaveDays: data?.applyLeaveDays || "",
+      id: data?.leaveId || "",
     },
-    validationSchema: data?.leaveId ? EditLeaveSchema : LeaveSchema,
+    validationSchema: LeaveSchema,
     enableReinitialize: true,
     onSubmit: (values) => {
-      if (data?.leaveId) {
-        handledEditRequest(values);
-      } else {
-        handleRequest(values);
-      }
+      handleRequest(values);
     },
   });
 
@@ -46,15 +40,42 @@ const useLeaveForm = (data, onClose) => {
     });
   };
 
-  const handledEditRequest = (values) => {
-    values = { ...values };
-    editLeave(values, formik, {
-      onSuccess: () => {
-        formik.resetForm();
-      },
-    });
-  };
+  if (isSuccess) {
+    onClose();
+    formik.resetForm();
+  }
+
   return { formik };
 };
 
-export default useLeaveForm;
+const useLeaveEditForm = (data, onClose) => {
+  const { mutate: editLeave, isSuccess } = useEditLeaveStatusByAdmin({});
+
+  const formik = useFormik({
+    initialValues: {
+      id: data?.leaveId,
+      employeeId: data?.employeeId || "",
+      leaveStatus: "",
+    },
+    validationSchema: EditLeaveSchema,
+    onSubmit: (value) => {
+      handledEditRequest(value);
+    },
+  });
+
+  const handledEditRequest = async (values) => {
+    const value = {
+      id: values.id,
+      leaveStatus: values.leaveStatus,
+      leaveRemarks: values.leaveRemarks,
+    };
+    await editLeave(value, formik);
+  };
+  if (isSuccess) {
+    onClose();
+    formik.resetForm();
+  }
+  return { formik };
+};
+
+export { useLeaveForm, useLeaveEditForm };

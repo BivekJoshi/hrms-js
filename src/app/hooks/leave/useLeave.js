@@ -50,10 +50,14 @@ export const useGetLoggedInUserLeave = () => {
 
 /*________________________GET LEAVE OF LOGGED IN USER LEAVE BALANCE_____________________________________*/
 export const useGetLoggedInUserLeaveBalance = () => {
-  return useQuery(["getLoggedInUserLeaveBalance"], () => getLoggedInUserLeaveBalance(), {
-    refetchInterval: false,
-    refetchOnWindowFocus: false,
-  });
+  return useQuery(
+    ["getLoggedInUserLeaveBalance"],
+    () => getLoggedInUserLeaveBalance(),
+    {
+      refetchInterval: false,
+      refetchOnWindowFocus: false,
+    }
+  );
 };
 
 /*________________________GET BY LEAVE ID_____________________________________*/
@@ -79,16 +83,26 @@ export const useGetEmployeeLeaveById = (id) => {
 /*________________________POST BY ADMIN_____________________________________*/
 export const useAddLeaveByAdmin = ({ onSuccess }) => {
   const queryClient = useQueryClient();
-  return useMutation(["addLeaveByAdmin"], (formData) => addLeaveByAdmin(formData), {
-    onSuccess: (data, variables, context) => {
-      toast.success("Succesfully added Leave");
-      onSuccess && onSuccess(data, variables, context);
-      queryClient.invalidateQueries("getLeave");
-    },
-    onError: (err, _variables, _context) => {
-      toast.error(`error: ${err.message}`);
-    },
-  });
+  const mutation = useMutation(
+    ["addLeaveByAdmin"],
+    (formData) => addLeaveByAdmin(formData),
+    {
+      onSuccess: (data, variables, context) => {
+        toast.success("Succesfully added Leave");
+        onSuccess && onSuccess(data, variables, context);
+        queryClient.invalidateQueries("getLeave");
+      },
+      onError: (err, _variables, _context) => {
+        toast.error(`error: ${err.message}`);
+      },
+    }
+  );
+  return {
+    mutate: mutation.mutate,
+    isSuccess: mutation.isSuccess,
+    isError: mutation.isError,
+    error: mutation.error,
+  };
 };
 
 /*________________________POST BY USER_____________________________________*/
@@ -139,29 +153,43 @@ export const useEditLeave = ({ onSuccess }) => {
 /*________________________EDIT BY ADMIN_____________________________________*/
 export const useEditLeaveByAdmin = ({ onSuccess }) => {
   const queryClient = useQueryClient();
-  return useMutation(["editLeaveByAdmin"], (formData) => editLeaveByAdmin(formData), {
-    onSuccess: (data, variables, context) => {
-      toast.success("Successfully edited Leave");
-      onSuccess && onSuccess(data, variables, context);
-      queryClient.invalidateQueries("getLeave");
-    },
-    onError: (err, _variables, _context) => {
-      toast.error(`Error: ${err.message}`);
-    },
-  });
+  return useMutation(
+    ["editLeaveByAdmin"],
+    (formData) => editLeaveByAdmin(formData),
+    {
+      onSuccess: (data, variables, context) => {
+        toast.success("Successfully edited Leave");
+        onSuccess && onSuccess(data, variables, context);
+        queryClient.invalidateQueries("getLeave");
+      },
+      onError: (err, _variables, _context) => {
+        toast.error(`Error: ${err.message}`);
+      },
+    }
+  );
 };
 
 /*________________________EDIT BY ADMIN_____________________________________*/
 export const useEditLeaveStatusByAdmin = ({ onSuccess }) => {
   const queryClient = useQueryClient();
-  return useMutation(["editLeaveByAdmin"], (formData) => editLeaveStatusByAdmin(formData), {
-    onSuccess: (data, variables, context) => {
-      toast.success("Successfully edited Leave");
-      onSuccess && onSuccess(data, variables, context);
-      queryClient.invalidateQueries("getLeave");
-    },
-    onError: (err, _variables, _context) => {
-      toast.error(`Error: ${err.message}`);
-    },
-  });
+  const mutation = useMutation(
+    ["editLeaveByAdmin"],
+    (formData) => editLeaveStatusByAdmin(formData),
+    {
+      onSuccess: (data, variables, context) => {
+        toast.success("Successfully edited Leave");
+        onSuccess && onSuccess(data, variables, context);
+        queryClient.invalidateQueries("getLeave");
+      },
+      onError: (err, _variables, _context) => {
+        toast.error(`Error: ${err.message}`);
+      },
+    }
+  );
+  return {
+    mutate: mutation.mutate,
+    isSuccess: mutation.isSuccess,
+    isError: mutation.isError,
+    error: mutation.error,
+  };
 };
