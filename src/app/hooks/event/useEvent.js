@@ -6,6 +6,7 @@ import {
   deleteEvent,
   editEvent,
   getEvent,
+  getEventAttenderList,
   getEventById,
   getEventByMonth,
   getEventNotification,
