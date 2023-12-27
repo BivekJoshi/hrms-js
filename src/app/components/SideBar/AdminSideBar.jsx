@@ -42,6 +42,7 @@ import jwtDecode from 'jwt-decode';
 import Logo from '../../../assets/logo.png';
 import SmallLogo from '../../../assets/smallLogo.png';
 import { useGetLoggedInUser } from '../../hooks/auth/usePassword';
+import BreadCrumbs from '../../../routes/routes';
 
 const drawerWidth = 260;
 
@@ -561,7 +562,7 @@ export default function AdminSidebar() {
             gap='1rem'
             alignItems='center'
           >
-            {/* <BreadCrumb /> */}
+            <BreadCrumbs />
           </Box>
           <div style={{ minHeight: '90vh' }}>
             <Outlet />
