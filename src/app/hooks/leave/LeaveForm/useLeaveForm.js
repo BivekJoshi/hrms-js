@@ -42,6 +42,7 @@ const useLeaveForm = (data, onClose) => {
 
   if (isSuccess) {
     onClose();
+    formik.resetForm();
   }
 
   return { formik };
@@ -72,6 +73,7 @@ const useLeaveEditForm = (data, onClose) => {
   };
   if (isSuccess) {
     onClose();
+    formik.resetForm();
   }
   return { formik };
 };
