@@ -8,7 +8,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import EditDataModal from "./Component/EditDataModal";
 
 const EmployeeMapping = () => {
-  const { data: mapeData, isLoading } = useGetEmployeeDeviceMappingById();
+  const { data: mapData, isLoading } = useGetEmployeeDeviceMappingById();
   const [openEditModal, setOpenEditModal] = useState(false);
   const [editedData, setEditedData] = useState({});
 
@@ -129,7 +129,7 @@ const EmployeeMapping = () => {
     <>
       <CustomTable
         columns={columns}
-        data={mapeData}
+        data={mapData}
         title="Branch List"
         isLoading={isLoading}
         exportButton={true}

@@ -4,8 +4,8 @@ import FormModal from "../../../components/Modal/FormModal";
 import { useEmployeeMappingForm } from "../../../hooks/EmployeeMapping/useEmployeeMappingForm";
 
 const EditDataModal = ({ open, handleCloseModal, data }) => {
-  const { formik } = useEmployeeMappingForm(data);
-console.log(data);
+  const { formik } = useEmployeeMappingForm(data, handleCloseModal);
+
   const handleFormSubmit = () => {
     formik.handleSubmit();
   };
@@ -22,7 +22,7 @@ console.log(data);
                 id="deviceBranchId"
                 name="deviceBranchId"
                 label="Device Branch Id"
-                placeholder="Enter resource name"
+                placeholder="Enter Device Branch Id"
                 type="number"
                 fullWidth
                 required
@@ -44,7 +44,7 @@ console.log(data);
                 id="deviceEmpId"
                 name="deviceEmpId"
                 label="Device Employee Id"
-                placeholder="Enter resource name"
+                placeholder="Enter Device Employee Id"
                 type="number"
                 fullWidth
                 required

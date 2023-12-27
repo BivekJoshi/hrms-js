@@ -1,16 +1,17 @@
 import React from "react";
 import { useAddEmployeeDeviceMappingById } from "./useEmployeeMapping";
 import { useFormik } from "formik";
+import AddMapSchema from "./MappingSchema";
 
-export const useEmployeeMappingForm = (data) => {
+export const useEmployeeMappingForm = (data, handleCloseModal) => {
   const { mutate: deviceMutate } = useAddEmployeeDeviceMappingById({});
   const formik = useFormik({
     initialValues: {
-      employedId: data?.id ||"",
-      deviceEmpId: data?.deviceEmpId || "",
+      employedId: data?.id || "",
+      deviceEmpId: parseInt(data?.deviceEmpId) || "",
       deviceBranchId: data?.deviceBranchId || "",
     },
-    // validationSchema:   changeEmailSchema,
+    validationSchema:   AddMapSchema,
     enableReinitialize: true,
     onSubmit: (values) => {
       handleRequest(values);
@@ -18,8 +19,9 @@ export const useEmployeeMappingForm = (data) => {
   });
   const handleRequest = (values) => {
     values = { ...values };
-    deviceMutate(values,  {
+    deviceMutate([values], {
       onSuccess: () => {
+        handleCloseModal();
         formik.resetForm();
       },
     });
