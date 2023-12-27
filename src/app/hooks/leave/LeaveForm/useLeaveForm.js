@@ -8,11 +8,10 @@ import {
 } from '../useLeave';
 import { EditLeaveSchema, LeaveSchema } from '../Validation/LeaveSchema';
 
-const useLeaveForm = (data,onClose) => {
+const useLeaveForm = (data, onClose) => {
   const { mutate: addLeave } = useAddLeaveByAdmin({});
   const { mutate: editLeave } = useEditLeaveStatusByAdmin({});
 
-  // console.log(data);
   const formik = useFormik({
     initialValues: {
       employeeId: data?.employeeId || '',
@@ -26,7 +25,7 @@ const useLeaveForm = (data,onClose) => {
       applyLeaveDays: data?.applyLeaveDays || '',
       id: data?.leaveId || '',
     },
-    validationSchema: editLeave ?  EditLeaveSchema: LeaveSchema,
+    validationSchema: data?.leaveId ? EditLeaveSchema : LeaveSchema,
     enableReinitialize: true,
     onSubmit: (values) => {
       if (data?.leaveId) {
@@ -39,20 +38,20 @@ const useLeaveForm = (data,onClose) => {
 
   const handleRequest = (values) => {
     values = { ...values };
-    addLeave(values, formik,{
-      onSuccess:()=>{
+    addLeave(values, formik, {
+      onSuccess: () => {
         onClose();
         formik.resetForm();
-      }
+      },
     });
   };
 
   const handledEditRequest = (values) => {
     values = { ...values };
-    editLeave(values, formik,{
-      onSuccess:()=>{
+    editLeave(values, formik, {
+      onSuccess: () => {
         formik.resetForm();
-      }
+      },
     });
   };
   return { formik };

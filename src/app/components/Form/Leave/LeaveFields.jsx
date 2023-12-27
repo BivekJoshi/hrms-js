@@ -30,10 +30,10 @@ const leaveStatus = [
 
 export const EditLeaveFields = ({ onClose, isLoading, data }) => {
   const { isManager, isSuperAdmin } = useAuth();
- 
+
   const { formik } = useLeaveForm(data);
   const { mode } = useContext(ThemeModeContext);
-  
+
   const handleFormSubmit = () => {
     formik.handleSubmit();
     onClose();
@@ -45,7 +45,7 @@ export const EditLeaveFields = ({ onClose, isLoading, data }) => {
     //   onClose();
     // }
   };
-// console.log(formik);
+  // console.log(formik);
   const submitButtonText = data ? 'Update Leave' : 'Add Leave';
 
   if (isManager || isSuperAdmin) {
@@ -54,9 +54,8 @@ export const EditLeaveFields = ({ onClose, isLoading, data }) => {
         <Grid container spacing={3}>
           <Grid item xs={12} sm={12}>
             <Typography variant='p'>
-              {data?.employeeName} wants to take a{' '}
-              {data?.leaveType} Leave From Date{' '}
-              {data?.fromDate} To Date {data?.toDate}. Total of{' '}
+              {data?.employeeName} wants to take a {data?.leaveType} Leave From
+              Date {data?.fromDate} To Date {data?.toDate}. Total of{' '}
               {formik.values.applyLeaveDays} Days
             </Typography>
           </Grid>
@@ -145,7 +144,8 @@ export const EditLeaveFields = ({ onClose, isLoading, data }) => {
 export const LeaveFields = ({ onClose, isLoading, data }) => {
   const { data: employeeData } = useGetEmployee();
   const { data: leaveTypeData } = useGetLeaveType();
-  const { formik } = useLeaveForm(data,onClose);
+  const { formik } = useLeaveForm(data, onClose);
+  console.log('🚀 ~ file: LeaveFields.jsx:149 ~ LeaveFields ~ formik:', formik);
   const { mode } = useContext(ThemeModeContext);
   const employeeId = data?.employeeId;
 
