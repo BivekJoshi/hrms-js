@@ -20,7 +20,7 @@ import useEventConfirmationForm from '../../../hooks/event/EventForm/useEventCon
 import './style.css';
 import { getUser } from '../../../utils/cookieHelper';
 import jwtDecode from 'jwt-decode';
-
+ 
 export const EventNotification = ({
   data,
   open,
@@ -28,7 +28,7 @@ export const EventNotification = ({
   handleListKeyDown,
 }) => {
   const { mode, palette } = useContext(ThemeModeContext);
-
+ 
   const { formik } = useEventConfirmationForm(data);
   const user = getUser();
   const decode = jwtDecode(user);
@@ -39,7 +39,7 @@ export const EventNotification = ({
     formik.setFieldValue('notificationId', notificationId);
     formik.handleSubmit();
   };
-
+ 
   const getUpcomingDay = (eventDate) => {
     const eventDateObject = new Date(eventDate);
     const month = eventDateObject.toLocaleString('default', { month: 'short' });
@@ -52,7 +52,7 @@ export const EventNotification = ({
   //    const eventDate = new Date(event.eventDate);
   //    return eventDate >= currentDate;
   //  });
-
+ 
   return (
     <>
       <MenuList
@@ -70,24 +70,23 @@ export const EventNotification = ({
         <Typography variant='h6' sx={{ color: '#6DAB23' }}>
           Comming Event
         </Typography>
-
+ 
         {data &&
           data.map((ename, index) => (
-            <div key={index}>
-            {ename.notificationId === "0" && (
+            <>
               <Box
                 sx={{
-                  backgroundColor: "#F7F8F9",
-                  padding: ".8rem",
-                  margin: ".5rem",
-                  borderRadius: "6px",
+                  backgroundColor: '#F7F8F9',
+                  padding: '.8rem',
+                  margin: '.5rem',
+                  borderRadius: '6px',
                 }}
               >
                 <div
                   style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    gap: "1rem",
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    gap: '1rem',
                   }}
                 >
                   <div
@@ -99,18 +98,18 @@ export const EventNotification = ({
                     <Typography
                       style={{
                         backgroundColor: palette.primary.main,
-                        padding: "1px 8px",
-                        color: "#fff",
-                        borderRadius: "6px 6px 0 0",
+                        padding: '1px 8px',
+                        color: '#fff',
+                        borderRadius: '6px 6px 0 0',
                       }}
-                      fontSize="11px"
+                      fontSize='11px'
                     >
                       {getUpcomingDay(ename?.eventDate).month}
                     </Typography>
                     <Typography
-                      fontSize="11px"
-                      textAlign="center"
-                      bgcolor={mode === "light" ? "#fff" : ""}
+                      fontSize='11px'
+                      textAlign='center'
+                      bgcolor={mode === 'light' ? '#fff' : ''}
                     >
                       {getUpcomingDay(ename?.eventDate).day}
                     </Typography>
@@ -152,69 +151,71 @@ export const EventNotification = ({
                   </div>
                   <div></div>
                 </div>
-                <Divider sx={{ marginTop: ".5rem" }} />
+                <Divider sx={{ marginTop: '.5rem' }} />
                 <Grid
-                  display="flex"
-                  flexDirection="row"
-                  padding="5px"
+                  display='flex'
+                  flexDirection='row'
+                  gap='8px'
+                  padding='5px'
                 >
-                  <div style={{display:'flex'}}>
-                  <LocationOnIcon fontSize="13px" />
-                  <Typography sx={{ fontSize: "13px" ,fontWeight:700}}>Location :</Typography>
-                  </div>
-                  <Typography sx={{ maxWidth: "12rem", fontSize: "13px" }}>
-                    {" "}{ename?.eventLocation}
+                  <LocationOnIcon fontSize='13px' />
+                  <Typography sx={{ maxWidth: '14rem', fontSize: '13px' }}>
+                    <b>Location: </b>
+                    {ename?.eventLocation}
                   </Typography>
                 </Grid>
-                <Typography sx={{ fontSize: "13px" }}>
-                  <b>Are you attending?</b>
-                </Typography>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-around",
-                    alignItems: "center",
-                  }}
-                >
-                  <Button
-                    sx={{
-                      color: "green",
-                      textTransform: "none",
-                      fontWeight: "bold",
-                    }}
-                    startIcon={<DoneIcon />}
-                    onClick={() =>
-                      handleButton(
-                        "OK",
-                        ename?.eventId,
-                        ename?.notificationId
-                      )
-                    }
-                  >
-                    Yes
-                  </Button>
-                  <Divider orientation="vertical" flexItem></Divider>
-                  <Button
-                    sx={{
-                      color: "red",
-                      textTransform: "none",
-                      fontWeight: "bold",
-                    }}
-                    startIcon={<CloseIcon />}
-                    onClick={() =>
-                      handleButton(
-                        "NO",
-                        ename?.eventId,
-                        ename?.notificationId
-                      )
-                    }
-                  >
-                    No
-                  </Button>
-                </div>
+                {userRole === 'ROLE_EMPLOYEE' && (
+                  <div>
+                    <Typography variant='h8' sx={{ fontWeight: 500 }}>
+                      Are you attending?
+                    </Typography>
+                    <div
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'space-around',
+                        alignItems: 'center',
+                      }}
+                    >
+                      <Button
+                        sx={{
+                          color: 'green',
+                          textTransform: 'none',
+                          fontWeight: 'bold',
+                        }}
+                        startIcon={<DoneIcon />}
+                        onClick={() =>
+                          handleButton(
+                            'YES',
+                            ename?.eventId,
+                            ename?.notificationId
+                          )
+                        }
+                      >
+                        Yes
+                      </Button>
+                      <Divider orientation='vertical' flexItem></Divider>
+                      <Button
+                        sx={{
+                          color: 'red',
+                          textTransform: 'none',
+                          fontWeight: 'bold',
+                        }}
+                        startIcon={<CloseIcon />}
+                        onClick={() =>
+                          handleButton(
+                            'NO',
+                            ename?.eventId,
+                            ename?.notificationId
+                          )
+                        }
+                      >
+                        No
+                      </Button>
+                    </div>
+                  </div>
+                )}
               </Box>
-            )}
-            </div>
+            </>
           ))}
       </MenuList>
     </>
@@ -228,16 +229,16 @@ export const LeaveNotification = ({
   handleListKeyDown,
 }) => {
   const { data: employeeData } = useGetEmployee();
-
+ 
   const getEmployeeName = (employeeId) => {
     const employee = employeeData?.find((emp) => emp.id === employeeId);
-
+ 
     const name = `${employee?.firstName} ${employee?.middleName || ''} ${
       employee?.lastName || ''
     }`;
     return name;
   };
-
+ 
   return (
     <>
       <MenuList
@@ -276,3 +277,4 @@ export const LeaveNotification = ({
     </>
   );
 };
+ 
