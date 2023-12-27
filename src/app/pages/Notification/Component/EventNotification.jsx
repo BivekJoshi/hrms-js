@@ -6,18 +6,20 @@ import {
   Grid,
   Grow,
   MenuItem,
-} from "@mui/material";
-import { MenuList, Paper, Popper, Typography } from "@mui/material";
-import React, { useContext } from "react";
-import { useGetEmployee } from "../../../hooks/employee/useEmployee";
-import { Link } from "react-router-dom";
-import DoneIcon from "@mui/icons-material/Done";
-import CloseIcon from "@mui/icons-material/Close";
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import ThemeModeContext from "../../../../theme/ThemeModeContext";
-import useEventConfirmationForm from "../../../hooks/event/EventForm/useEventConfirmationForm";
-import "./style.css";
+} from '@mui/material';
+import { MenuList, Paper, Popper, Typography } from '@mui/material';
+import React, { useContext } from 'react';
+import { useGetEmployee } from '../../../hooks/employee/useEmployee';
+import { Link } from 'react-router-dom';
+import DoneIcon from '@mui/icons-material/Done';
+import CloseIcon from '@mui/icons-material/Close';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import ThemeModeContext from '../../../../theme/ThemeModeContext';
+import useEventConfirmationForm from '../../../hooks/event/EventForm/useEventConfirmationForm';
+import './style.css';
+import { getUser } from '../../../utils/cookieHelper';
+import jwtDecode from 'jwt-decode';
 
 export const EventNotification = ({
   data,
@@ -28,42 +30,44 @@ export const EventNotification = ({
   const { mode, palette } = useContext(ThemeModeContext);
 
   const { formik } = useEventConfirmationForm(data);
-
+  const user = getUser();
+  const decode = jwtDecode(user);
+  const userRole = decode?.userRole;
   const handleButton = (response, eventId, notificationId) => {
-    formik.setFieldValue("status", response);
-    formik.setFieldValue("eventId", eventId);
-    formik.setFieldValue("notificationId", notificationId);
+    formik.setFieldValue('status', response);
+    formik.setFieldValue('eventId', eventId);
+    formik.setFieldValue('notificationId', notificationId);
     formik.handleSubmit();
   };
 
   const getUpcomingDay = (eventDate) => {
     const eventDateObject = new Date(eventDate);
-    const month = eventDateObject.toLocaleString("default", { month: "short" });
+    const month = eventDateObject.toLocaleString('default', { month: 'short' });
     const day = eventDateObject.getDate();
     return { day, month };
   };
- // upcoming event
-//  const currentDate = new Date();
-//  const upcomingEvents = data?.filter((event) => {
-//    const eventDate = new Date(event.eventDate);
-//    return eventDate >= currentDate;
-//  });
+  // upcoming event
+  //  const currentDate = new Date();
+  //  const upcomingEvents = data?.filter((event) => {
+  //    const eventDate = new Date(event.eventDate);
+  //    return eventDate >= currentDate;
+  //  });
 
   return (
     <>
       <MenuList
         autoFocusItem={open}
-        id="composition-menu"
-        aria-labelledby="composition-button"
+        id='composition-menu'
+        aria-labelledby='composition-button'
         onKeyDown={handleListKeyDown}
         sx={{
-          textAlign: "center",
-          padding: ".5rem",
-          maxHeight: "25rem",
-          overflowY: "scroll",
+          textAlign: 'center',
+          padding: '.5rem',
+          maxHeight: '25rem',
+          overflowY: 'scroll',
         }}
       >
-        <Typography variant="h6" sx={{ color: "#6DAB23" }}>
+        <Typography variant='h6' sx={{ color: '#6DAB23' }}>
           Comming Event
         </Typography>
 
@@ -88,9 +92,8 @@ export const EventNotification = ({
                 >
                   <div
                     style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      gap: "1rem",
+                      border: '1px solid #E0E0E0',
+                      borderRadius: '6px',
                     }}
                   >
                     <Typography
@@ -115,65 +118,37 @@ export const EventNotification = ({
                   <div>
                     <div
                       style={{
-                        border: "1px solid #E0E0E0",
-                        borderRadius: "6px",
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '.5rem',
                       }}
                     >
-                      <Typography
-                        style={{
-                          backgroundColor: palette.primary.main,
-                          padding: "1px 8px",
-                          color: "#fff",
-                          borderRadius: "6px 6px 0 0",
-                        }}
-                        fontSize="11px"
-                      >
-                        {getUpcomingDay(ename?.eventDate).month}
-                      </Typography>
-                      <Typography
-                        fontSize="11px"
-                        textAlign="center"
-                        bgcolor={mode === "light" ? "#fff" : ""}
-                      >
-                        {getUpcomingDay(ename?.eventDate).day}
-                      </Typography>
-                    </div>
-                    <div>
                       <div
                         style={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: ".5rem",
+                          backgroundColor: 'red',
+                          width: '10px',
+                          height: '10px',
+                          borderRadius: '50%',
                         }}
-                      >
-                        <div
-                          style={{
-                            backgroundColor: "red",
-                            width: "10px",
-                            height: "10px",
-                            borderRadius: "50%",
-                          }}
-                        ></div>
-                        <Typography sx={{ fontWeight: 600, fontSize: "13px" }}>
-                          {ename?.eventName}
-                        </Typography>
-                      </div>
-                      <div
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: "1rem",
-                        }}
-                      >
-                        <AccessTimeIcon
-                          style={{ width: "13px", height: "13px" }}
-                        />
-                        <Typography fontSize="13px">
-                          {ename?.eventTime} - Onwards
-                        </Typography>
-                      </div>
+                      ></div>
+                      <Typography sx={{ fontWeight: 600, fontSize: '13px' }}>
+                        {ename?.eventName}
+                      </Typography>
                     </div>
-                    <div></div>
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '1rem',
+                      }}
+                    >
+                      <AccessTimeIcon
+                        style={{ width: '13px', height: '13px' }}
+                      />
+                      <Typography fontSize='13px'>
+                        {ename?.eventTime} - Onwards
+                      </Typography>
+                    </div>
                   </div>
                   <div></div>
                 </div>
@@ -257,8 +232,8 @@ export const LeaveNotification = ({
   const getEmployeeName = (employeeId) => {
     const employee = employeeData?.find((emp) => emp.id === employeeId);
 
-    const name = `${employee?.firstName} ${employee?.middleName || ""} ${
-      employee?.lastName || ""
+    const name = `${employee?.firstName} ${employee?.middleName || ''} ${
+      employee?.lastName || ''
     }`;
     return name;
   };
@@ -267,15 +242,15 @@ export const LeaveNotification = ({
     <>
       <MenuList
         autoFocusItem={open}
-        id="composition-menu"
-        aria-labelledby="composition-button"
+        id='composition-menu'
+        aria-labelledby='composition-button'
         onKeyDown={handleListKeyDown}
         sx={{
-          textAlign: "center",
-          padding: "0.5rem 1rem",
+          textAlign: 'center',
+          padding: '0.5rem 1rem',
         }}
       >
-        <Typography variant="h6" color="primary" fontWeight={400}>
+        <Typography variant='h6' color='primary' fontWeight={400}>
           {Eventname}
         </Typography>
         {data &&
@@ -284,14 +259,14 @@ export const LeaveNotification = ({
               key={index}
               onClick={handleClose}
               sx={{
-                display: "flex",
-                gap: "1rem",
-                alignItems: "center",
+                display: 'flex',
+                gap: '1rem',
+                alignItems: 'center',
               }}
             >
               <Link
-                to="/admin/leave"
-                style={{ textDecoration: "none", fontSize: "1rem" }}
+                to='/admin/leave'
+                style={{ textDecoration: 'none', fontSize: '1rem' }}
               >
                 {getEmployeeName(ename.employeeId)}
               </Link>

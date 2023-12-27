@@ -1,19 +1,19 @@
-import React from 'react';
-import { useFormik } from 'formik';
-import { ProjectSchema } from '../validation/ProjectSchema';
-import { useAddProject } from '../useProject';
+import React from "react";
+import { useFormik } from "formik";
+import { ProjectSchema } from "../validation/ProjectSchema";
+import { useAddProject } from "../useProject";
 
-const useAddProjectForm = () => {
+const useAddProjectForm = (onClose) => {
   const { mutate } = useAddProject({});
 
   const formik = useFormik({
     initialValues: {
-      projectName: '',
-      startDate: '',
-      endDate: '',
-      taskStatus: 'PENDING',
-      projectLeadId: '',
-      companyId: '',
+      projectName: "",
+      startDate: "",
+      endDate: "",
+      taskStatus: "PENDING",
+      projectLeadId: "",
+      companyId: "",
     },
     validationSchema: ProjectSchema,
     onSubmit: (values) => {
@@ -22,10 +22,13 @@ const useAddProjectForm = () => {
   });
 
   const handleRequest = (values) => {
-    values = {
-      ...values,
-    };
-    mutate(values, formik, { onSuccess: () => formik.handleReset() });
+    values = { ...values };
+    mutate(values, formik, {
+      onSuccess: () => {
+        onClose();
+        formik.handleReset();
+      },
+    });
   };
 
   return { formik };

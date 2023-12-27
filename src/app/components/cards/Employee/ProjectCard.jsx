@@ -28,7 +28,6 @@ const ProjectCard = ({
 }) => {
   const navigate = useNavigate();
   const { isEmployee } = useAuth();
-  // const { data: projectEmployeeData } = useGetProjectEmployee();
   const { mode } = useContext(ThemeModeContext);
 
   const [openEditModal, setOpenEditModal] = useState(false);
@@ -36,6 +35,7 @@ const ProjectCard = ({
 
   const [editedProject, setEditedProject] = useState({});
   const [deactivateProject, setDeactivateProject] = useState({});
+
 
   const handleCloseEditModal = () => setOpenEditModal(false);
   const handleCloseDeactivateModal = () => setOpenDeactiveModal(false);

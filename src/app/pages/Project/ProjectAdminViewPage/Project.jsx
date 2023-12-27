@@ -33,14 +33,11 @@ const Project = ({ permissions }) => {
   const { isEmployee } = useAuth();
 
   const [openModal, setOpenModal] = useState(false);
-  const {data: projectData} = useGetProjectDetail();
   const { data: projectDetail, isLoading } = useGetProjectPageWise(
     pageNumber,
     pageSize,
   );
 
-  const [nameFilter, setNameFilter] = useState("");
-  const [companyFilter, setCompanyFilter] = useState("");
   const [isContainerVisible, setIsContainerVisible] = useState(false);
   const [openAddModal, setOpenAddModal] = useState(false);
 
@@ -70,7 +67,6 @@ const Project = ({ permissions }) => {
     setPageSize(newPageSize);
     setPageNumber(0);
   };
-  console.log(projectData)
 
   return (
     <>
@@ -139,7 +135,7 @@ const Project = ({ permissions }) => {
           gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))",
         }}
       >
-        {projectData?.map((item, index) => (
+        {projectDetail?.projectResList?.map((item, index) => (
           <ProjectCard
             item={item}
             Id={item?.projectid}

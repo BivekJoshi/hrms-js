@@ -51,8 +51,6 @@ const Holiday = ({ permissions }) => {
 
   const handleFormSubmit = async () => {
     formik.handleSubmit();
-    if (!formik.isValidating && formik.isValid) {
-    }
   };
   const handleOpenModal = (e) => {
     const eId = e?.event?._def?.publicId;
