@@ -573,7 +573,7 @@ export default function AdminSidebar() {
             gap='1rem'
             alignItems='center'
           >
-            <BreadCrumbs />
+            {/* <BreadCrumbs /> */}
           </Box>
           <div style={{ minHeight: '90vh' }}>
             <Outlet />
