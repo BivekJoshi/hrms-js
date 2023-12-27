@@ -22,7 +22,7 @@ export const useGetEmployeeDeviceMappingById = () => {
 export const useAddEmployeeDeviceMappingById = ({ onSuccess }) => {
   return useMutation(
     ["addEmployeeDeviceMappingById"],
-    (formData) => addEmployeeDeviceMappingById({ formData }),
+    (formData) => addEmployeeDeviceMappingById( formData ),
     
     {
       onSuccess: (data, variables, context) => {

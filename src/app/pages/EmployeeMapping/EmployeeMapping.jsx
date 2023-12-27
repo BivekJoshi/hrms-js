@@ -118,7 +118,10 @@ const EmployeeMapping = () => {
         </IconButton>
       ),
       tooltip: "Edit Branch Id And Employee Id",
-        onClick: (event, rowData) => handleEditData(rowData),
+      onClick: (event, rowData) =>
+        rowData.deviceEmpId && rowData.deviceBranchId
+          ? ""
+          : handleEditData(rowData),
     }),
   ];
 

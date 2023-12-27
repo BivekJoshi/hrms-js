@@ -23,6 +23,7 @@ console.log(data);
                 name="deviceBranchId"
                 label="Device Branch Id"
                 placeholder="Enter resource name"
+                type="number"
                 fullWidth
                 required
                 value={formik.values.deviceBranchId}
@@ -44,6 +45,7 @@ console.log(data);
                 name="deviceEmpId"
                 label="Device Employee Id"
                 placeholder="Enter resource name"
+                type="number"
                 fullWidth
                 required
                 value={formik.values.deviceEmpId}
