@@ -29,6 +29,7 @@ export default function ListUserDetails({ cardTitle, data, mode }) {
     isHrAdmin,
     isManager,
   } = useAuth();
+  console.log("data", cardTitle)
 
   const { id } = useParams();
 
@@ -50,9 +51,7 @@ export default function ListUserDetails({ cardTitle, data, mode }) {
           {cardTitle}
         </Typography>
         <Stack sx={{ display: "flex", alignItems: "center" }}>
-          {isEmployee ? (
-            ""
-          ) : (
+          {!isEmployee && (cardTitle === 'Basic Informations') && (
             <BorderColorIcon
               onClick={handleOnClick}
               fontSize="large"
