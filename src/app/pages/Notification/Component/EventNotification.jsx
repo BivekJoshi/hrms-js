@@ -68,7 +68,7 @@ export const EventNotification = ({
         }}
       >
         <Typography variant='h6' sx={{ color: '#6DAB23' }}>
-          Comming Event
+          Upcoming Event
         </Typography>
 
         {data &&
