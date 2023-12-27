@@ -15,7 +15,7 @@ const useEditEventForm = (data) => {
       id: data?.id,
     },
     validationSchema: EventSchema,
-    enableReinitialize: "true",
+    enableReinitialize: true,
     onSubmit: (values) => {
       handleRequest(values);
     },

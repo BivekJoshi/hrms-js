@@ -5,7 +5,9 @@ import {
   addEventConfirmation,
   deleteEvent,
   editEvent,
+  editEventAttendance,
   getEvent,
+  getEventAttenderList,
   getEventById,
   getEventByMonth,
   getEventNotification,
@@ -126,6 +128,35 @@ export const useEditEvent = ({ onSuccess }) => {
       toast.success('Succesfully edited an Event');
       onSuccess && onSuccess(data, variables, context);
       queryClient.invalidateQueries('getEvent');
+    },
+    onError: (err, _variables, _context) => {
+      toast.error(`error: ${err.message}`);
+    },
+  });
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+{
+  /*________________________EDIT- ATTENDANCE_____________________________________*/
+}
+export const useEditEventAttendance = ({ onSuccess }) => {
+  const queryClient = useQueryClient();
+  return useMutation(['editEvent'], (formData) => editEventAttendance(formData), {
+    onSuccess: (data, variables, context) => {
+      toast.success('Succesfully edited an Event');
+      onSuccess && onSuccess(data, variables, context);
+      queryClient.invalidateQueries('getEventAttenderList');
     },
     onError: (err, _variables, _context) => {
       toast.error(`error: ${err.message}`);

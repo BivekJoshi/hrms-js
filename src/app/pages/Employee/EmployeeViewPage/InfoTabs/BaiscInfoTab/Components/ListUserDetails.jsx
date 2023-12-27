@@ -29,7 +29,6 @@ export default function ListUserDetails({ cardTitle, data, mode }) {
     isHrAdmin,
     isManager,
   } = useAuth();
-  console.log("data", cardTitle)
 
   const { id } = useParams();
 
