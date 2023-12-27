@@ -8,10 +8,10 @@ const useHolidayForm = (setOpenSubmitModal, handleCloseModal) => {
 
   const formik = useFormik({
     initialValues: {
-      holidayName: '',
-      holidayDate: '',
-      holidayDescription: '',
-      id: '',
+      holidayName: "",
+      holidayDate: "",
+      holidayDescription: "",
+      id: "",
     },
     validationSchema: HolidaySchema,
     enableReinitialize: true,
@@ -31,10 +31,9 @@ const useHolidayForm = (setOpenSubmitModal, handleCloseModal) => {
         onSuccess: () => {
           formik.resetForm();
           handleCloseModal();
-          
+          setOpenSubmitModal(true);
         },
-      }),
-        setOpenSubmitModal(true);
+      });
     },
   });
   //   onSubmit: (values) => {
@@ -47,9 +46,7 @@ const useHolidayForm = (setOpenSubmitModal, handleCloseModal) => {
   const handleRequest = (values) => {
     values = { ...values };
     addEvent(values, {
-      onSuccess: (data) => {
-       
-      },
+      onSuccess: (data) => {},
     });
   };
 
@@ -58,8 +55,7 @@ const useHolidayForm = (setOpenSubmitModal, handleCloseModal) => {
     editEvent(values, formik);
   };
 
-  return { formik};
+  return { formik };
 };
 
 export default useHolidayForm;
-

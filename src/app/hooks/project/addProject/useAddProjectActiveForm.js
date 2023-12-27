@@ -27,7 +27,6 @@ export const useRemoveActiveProject = (data) => {
 };
 
 export const useAddActiveProject = (data) => {
-    
     const { mutate } = useActiveProject({});
     const formik = useFormik({
         initialValues: {
