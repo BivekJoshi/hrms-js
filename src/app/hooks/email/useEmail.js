@@ -1,18 +1,26 @@
-import { useMutation, useQuery, useQueryClient } from "react-query";
-import { addChangeEmail, addEmailConfigure, getEmailConfigure, sendEmail, sendEmailForHoliday, sendEmailToAll, sendEmailToMultipleEmployee } from "../../api/email/email-api";
-import { toast } from "react-toastify";
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+import {
+  addChangeEmail,
+  addEmailConfigure,
+  getEmailConfigure,
+  sendEmail,
+  sendEmailForHoliday,
+  sendEmailToAll,
+  sendEmailToMultipleEmployee,
+} from '../../api/email/email-api';
+import { toast } from 'react-toastify';
 
 /*___________________SEND EMAIL FOR PERTICULAR EMPLOYEE ON BASIS OF ID______________________________________*/
 export const useSendEmail = ({ employeeId, onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(
-    ["sendEmail"],
+    ['sendEmail'],
     (formData) => sendEmail({ formData, employeeId }),
     {
       onSuccess: (data, variables, context) => {
-        toast.success("Successfully Send Mail");
+        toast.success('Successfully Send Mail');
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries("sendEmail");
+        queryClient.invalidateQueries('sendEmail');
       },
       onError: (err, _variables, _context) => {
         toast.error(`Error: ${err.message}`);
@@ -24,11 +32,11 @@ export const useSendEmail = ({ employeeId, onSuccess }) => {
 /*___________________SEND EMAIL FOR MULTIPLE EMPLOYEE ON BASIS OF ID______________________________________*/
 export const useSendEmailToMultipleEmployee = ({ onSuccess, employeeId }) => {
   return useMutation(
-    ["sendEmailToMultipleEmployee"],
-    (formData) => sendEmailToMultipleEmployee({ formData, employeeId}),
+    ['sendEmailToMultipleEmployee'],
+    (formData) => sendEmailToMultipleEmployee({ formData, employeeId }),
     {
       onSuccess: (data, variables, context) => {
-        toast.success("Successfully Send Mail To Selected Employee");
+        toast.success('Successfully Send Mail To Selected Employee');
         onSuccess && onSuccess(data, variables, context);
       },
       onError: (err, _variables, _context) => {
@@ -42,13 +50,13 @@ export const useSendEmailToMultipleEmployee = ({ onSuccess, employeeId }) => {
 export const useSendEmailToAll = ({ onSuccess, employeeId, eventId }) => {
   const queryClient = useQueryClient();
   return useMutation(
-    ["sendEmailToAll"],
+    ['sendEmailToAll'],
     (formData) => sendEmailToAll({ formData, employeeId, eventId }),
     {
       onSuccess: (data, variables, context) => {
-        toast.success("Successfully Send Mail To All The Employee");
+        toast.success('Successfully Send Mail To All The Employee');
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries("sendEmailToAll");
+        queryClient.invalidateQueries('sendEmailToAll');
       },
       onError: (err, _variables, _context) => {
         toast.error(`Error: ${err.message}`);
@@ -58,16 +66,20 @@ export const useSendEmailToAll = ({ onSuccess, employeeId, eventId }) => {
 };
 
 /*___________________SEND EMAIL TO ALL EMPLOYEE FOR HOLIDAY______________________________________*/
-export const useSendEmailForHoliday = ({ onSuccess, employeeId, holidayId }) => {
+export const useSendEmailForHoliday = ({
+  onSuccess,
+  employeeId,
+  holidayId,
+}) => {
   const queryClient = useQueryClient();
   return useMutation(
-    ["sendEmailForHoliday"],
+    ['sendEmailForHoliday'],
     (formData) => sendEmailForHoliday({ formData, employeeId, holidayId }),
     {
       onSuccess: (data, variables, context) => {
-        toast.success("Successfully Send Mail To All The Employee");
+        toast.success('Successfully Send Mail To All The Employee');
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries("sendEmailForHoliday");
+        queryClient.invalidateQueries('sendEmailForHoliday');
       },
       onError: (err, _variables, _context) => {
         toast.error(`Error: ${err.message}`);
@@ -76,17 +88,11 @@ export const useSendEmailForHoliday = ({ onSuccess, employeeId, holidayId }) => 
   );
 };
 
-
-
-
-
-
-
 {
   /*________________________GET_____________________________________*/
 }
 export const useGetEmailConfigure = () => {
-  return useQuery(["getEmailConfigure"], () => getEmailConfigure(), {
+  return useQuery(['getEmailConfigure'], () => getEmailConfigure(), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
@@ -96,29 +102,36 @@ export const useGetEmailConfigure = () => {
 }
 export const useEmailConfigure = ({ onSuccess }) => {
   const queryClient = useQueryClient();
-  return useMutation(['addEmailConfigure'], (formData) => addEmailConfigure(formData), {
-    onSuccess: (data, variables, context) => {
-      toast.success('Succesfully added email configuration');
-      onSuccess && onSuccess(data, variables, context);
-      queryClient.invalidateQueries('addEmailConfigure');
-    },
-    onError: (err, _variables, _context) => {
-      toast.error(`error: ${err.message}`);
-    },
-  });
+  return useMutation(
+    ['addEmailConfigure'],
+    (formData) => addEmailConfigure(formData),
+    {
+      onSuccess: (data, variables, context) => {
+        toast.success('Succesfully added email configuration');
+        onSuccess && onSuccess(data, variables, context);
+        queryClient.invalidateQueries('addEmailConfigure');
+      },
+      onError: (err, _variables, _context) => {
+        toast.error(`error: ${err.message}`);
+      },
+    }
+  );
 };
 
 /*________________________POST FOR Change EMAIL_____________________________________*/
 export const useChangeEmail = ({ onSuccess }) => {
   const queryClient = useQueryClient();
-  return useMutation(['addChangeEmail'], (formData) => addChangeEmail(formData), {
-    onSuccess: (data, variables, context) => {
-      toast.success('Successfully changed email');
-      onSuccess && onSuccess(data, variables, context);
-      queryClient.invalidateQueries('addChangeEmail');
-    },
-    onError: (err, _variables, _context) => {
-      toast.error(`error: ${err.message}`);
-    },
-  });
+  return useMutation(
+    ['addChangeEmail'],
+    (formData) => addChangeEmail(formData),
+    {
+      onSuccess: (data, variables, context) => {
+        toast.success('Successfully changed email. Check email to login');
+        onSuccess && onSuccess(data, variables, context);
+      },
+      onError: (err, _variables, _context) => {
+        toast.error(`error: ${err.message}`);
+      },
+    }
+  );
 };

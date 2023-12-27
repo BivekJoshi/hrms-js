@@ -58,6 +58,22 @@ const EmployeeDocumentDetailForm = () => {
     setDocument('');
   };
 
+  // const handleChangeImage = (e) => {
+  //   const file = e.target.files[0];
+  //   setDocument(file);
+
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     reader.onload = () => {
+  //       setImagePreviewMap((prevMap) => ({
+  //         ...prevMap,
+  //         [expandedAccordion]: reader.result,
+  //       }));
+  //     };
+  //     reader.readAsDataURL(file);
+  //   }
+  // };
+
   const handleChangeImage = (e) => {
     const file = e.target.files[0];
     setDocument(file);
@@ -71,6 +87,18 @@ const EmployeeDocumentDetailForm = () => {
         }));
       };
       reader.readAsDataURL(file);
+
+      // Handle form submission when an image is selected
+      const values = {
+        documentType: selectedDocument || documentType[0]?.input,
+        document: file,
+      };
+      addDocument(values);
+
+      setUploadStatusMap((prevMap) => ({
+        ...prevMap,
+        [expandedAccordion]: true,
+      }));
     }
   };
 
@@ -88,15 +116,15 @@ const EmployeeDocumentDetailForm = () => {
     <div>
       <Grid container>
         <Grid item xs={12} sm={6} md={6}>
-          <Grid display="flex" justifyContent="center">
+          <Grid display='flex' justifyContent='center'>
             {expandedAccordion && imagePreviewMap[expandedAccordion] && (
               <img
                 src={imagePreviewMap[expandedAccordion]}
-                alt="Preview"
+                alt='Preview'
                 width={240}
                 height={240}
                 style={{
-                  objectFit: "contain",
+                  objectFit: 'contain',
                 }}
               />
             )}
@@ -137,33 +165,31 @@ const EmployeeDocumentDetailForm = () => {
                 <Grid
                   sm={12}
                   sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    gap: ".5rem",
-                    textAlign: "center",
+                    display: 'flex',
+                    justifyContent: 'center',
+                    gap: '.5rem',
+                    textAlign: 'center',
                   }}
                 >
-                  
-                    <Button
-                      variant='outlined'
-                      color='primary'
-                      onClick={() => handleEditFormSubmit(document)}
-                      startIcon={<img src={updateIcon} />}
-                      sx={{ textTransform: 'none', fontWeight: 'bold' }}
-                    >
-                      Update
-                    </Button>
-                    <Button
-                      variant='outlined'
-                      color='error'
-                      onClick={() => handleDelete(document)}
-                      startIcon={<img src={deleteIcon} />}
-                      sx={{ textTransform: 'none', fontWeight: 'bold' }}
-                    >
-                      Delete
-                    </Button>
-                  </Grid>
-                
+                  <Button
+                    variant='outlined'
+                    color='primary'
+                    onClick={() => handleEditFormSubmit(document)}
+                    startIcon={<img src={updateIcon} />}
+                    sx={{ textTransform: 'none', fontWeight: 'bold' }}
+                  >
+                    Update
+                  </Button>
+                  <Button
+                    variant='outlined'
+                    color='error'
+                    onClick={() => handleDelete(document)}
+                    startIcon={<img src={deleteIcon} />}
+                    sx={{ textTransform: 'none', fontWeight: 'bold' }}
+                  >
+                    Delete
+                  </Button>
+                </Grid>
               </Grid>
             ))}
           {/* <Grid display='flex' justifyContent='center'>
@@ -239,9 +265,9 @@ const EmployeeDocumentDetailForm = () => {
                 expanded={expandedAccordion === `panel${document?.id}`}
                 onChange={handleChange(`panel${document?.id}`, document?.input)}
                 sx={{
-                  margin: "0 !important",
-                  borderBottom: "1px solid black",
-                  boxShadow: "none",
+                  margin: '0 !important',
+                  borderBottom: '1px solid black',
+                  boxShadow: 'none',
                 }}
               >
                 <AccordionSummary
@@ -300,7 +326,7 @@ const EmployeeDocumentDetailForm = () => {
                         </div>
                       </Box>
                     </label>
-                    <Button
+                    {/* <Button
                       variant='outlined'
                       disabled={uploadStatusMap[expandedAccordion]}
                       onClick={() => {
@@ -309,7 +335,7 @@ const EmployeeDocumentDetailForm = () => {
                       sx={{ textTransform: 'none', fontWeight: 'bold' }}
                     >
                       Upload
-                    </Button>
+                    </Button> */}
                   </Box>
                 </AccordionDetails>
               </Accordion>
