@@ -1,15 +1,24 @@
 import { LoadingButton } from '@mui/lab';
 import { Grid, TextField, Typography } from '@mui/material';
 import React from 'react';
-import useChangeForm from '../../../hooks/email/changeEmail/useChangeForm';
+import { useChangeForm, useResendForm } from '../../../hooks/email/changeEmail/useChangeForm';
 import HocButton from '../../../hoc/hocButton';
+import { useGetLoggedInUser } from '../../../hooks/auth/usePassword';
+import { axiosInstance } from '../../../../auth/axiosInterceptor';
+import { useParams } from 'react-router-dom';
 
 const ChangeEmail = ({permissions}) => {
+  const { id } = useParams();
   const { formik } = useChangeForm({});
-
+  // const { formik: resendFormik } = useResendForm({});
+  const { data: userLoggedData } = useGetLoggedInUser()
   const handleFormSubmit = () => {
     formik.handleSubmit();
   };
+  const handleResend = () => {
+    axiosInstance.post('user/activate/email-resend')
+    // resendFormik.handleSubmit();
+  }
 
   return (
     <Grid container spacing={3}>
@@ -59,6 +68,15 @@ const ChangeEmail = ({permissions}) => {
         alignItems='flex-end'
         marginTop='1rem'
       >
+         {userLoggedData?.changeEmailReq && userLoggedData?.id === 1 && (
+          <HocButton
+          variant='contained'
+          permissions={permissions?.canAdd}
+          onClick={handleResend}
+          buttonName={"Resend Email"}
+          />
+            
+        )}
         <HocButton
           variant="contained"
           permissions={permissions?.canAdd}

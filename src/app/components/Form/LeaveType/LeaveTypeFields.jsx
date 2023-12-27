@@ -130,6 +130,7 @@ const LeaveTypeFields = ({ onClose, isLoading, data, existingLeaveTypes }) => {
             placeholder='Enter total leave days'
             fullWidth
             required
+            disabled
             type='number'
             value={formik.values.leaveTotal}
             onChange={formik.handleChange}

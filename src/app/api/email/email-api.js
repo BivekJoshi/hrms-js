@@ -54,7 +54,7 @@ export const getEmailConfigure = async () => {
   return data;
 };
 {
-  /*________________________POST for email congiguration_____________________________________*/
+  /*________________________PUT for email congiguration_____________________________________*/
 }
 export const addEmailConfigure = async (formData) => {
   const data = await axiosInstance.put("/email/change-email-config", formData);
@@ -66,6 +66,14 @@ export const addChangeEmail = async (formData) => {
   const newEmail = formData.newEmail;
   const data = await axiosInstance.put(
     `/user/change/email?newEmail=${newEmail}`,
+    formData
+  );
+  return data;
+};
+/*________________________POST for email Change _____________________________________*/
+export const addResendEmailEmail = async (formData) => {
+  const data = await axiosInstance.post(
+    `/user/activate/email-resend`,
     formData
   );
   return data;
