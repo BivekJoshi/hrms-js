@@ -44,6 +44,7 @@ const EmployeeQualificationDetailForm = ({ formik, isLoading }) => {
                         fullWidth
                         value={study.passedLevel}
                         onChange={handleChange}
+                        onBlur={formik.handleBlur}
                         error={Boolean(
                           formik.touched.education?.[index]?.passedLevel &&
                             formik.errors.education?.[index]?.passedLevel
@@ -65,6 +66,7 @@ const EmployeeQualificationDetailForm = ({ formik, isLoading }) => {
                         fullWidth
                         value={study.board}
                         onChange={handleChange}
+                        onBlur={formik.handleBlur}
                         error={Boolean(
                           formik.touched.education?.[index]?.board &&
                             formik.errors.education?.[index]?.board
@@ -86,6 +88,7 @@ const EmployeeQualificationDetailForm = ({ formik, isLoading }) => {
                         fullWidth
                         value={study.institute}
                         onChange={handleChange}
+                        onBlur={formik.handleBlur}
                         error={Boolean(
                           formik.touched.education?.[index]?.institute &&
                             formik.errors.education?.[index]?.institute
@@ -108,6 +111,7 @@ const EmployeeQualificationDetailForm = ({ formik, isLoading }) => {
                         fullWidth
                         value={study.passedYear}
                         onChange={handleChange}
+                        onBlur={formik.handleBlur}
                         error={Boolean(
                           formik.touched.education?.[index]?.passedYear &&
                             formik.errors.education?.[index]?.passedYear

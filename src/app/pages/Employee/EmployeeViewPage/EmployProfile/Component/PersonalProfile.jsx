@@ -12,13 +12,17 @@ import EmailModal from "../../../../Email/EmailModal";
 import { useGetEmployeeByDesignation } from "../../../../../hooks/employee/useEmployee";
 import { useGetDesignationById } from "../../../../../hooks/designation/useDesignation";
 import { useParams } from "react-router-dom";
+import { useGetLoggedInUser } from "../../../../../hooks/auth/usePassword";
+import useAuth from "../../../../../../auth/hooks/component/login/useAuth";
 
 const primaryColor = "#1c7ed6";
 
 export const PersonalProfile = ({ data }) => {
+  const { isEmployee } = useAuth();
   const { id } = useParams();
+  const { data: loggedUserData } = useGetLoggedInUser();
   const { data: positionData } = useGetDesignationById(id);
-  const positionName = positionData && positionData?.positionName;
+  const positionName = positionData && positionData?.positionLevel;
   const [openEmailForm, setOpenEmailForm] = useState(false);
   const handleOpenEmailform = () => {
     setOpenEmailForm(true);
@@ -28,19 +32,26 @@ export const PersonalProfile = ({ data }) => {
   };
   const { mode } = useContext(ThemeModeContext);
 
-  const photo = data?.uploadFiles;
-  const employeePhoto = photo
-    ? photo.find((file) => file?.documentType === "EMPLOYEE_PHOTO")
-    : "";
-  const filePath = employeePhoto
-    ? DOC_URL + employeePhoto.path
+  const employeeImg = loggedUserData?.userPhotoPath;
+  const employeeFilePath = employeeImg
+    ? DOC_URL + employeeImg
     : data?.gender === "MALE"
     ? Male
     : Female;
 
+  const photo = data?.userPhotoPath;
+  const employeePhoto = photo
+    ? photo.find((file) => file?.documentType === "EMPLOYEE_PHOTO")
+    : "";
+  const filePath = photo
+    ? DOC_URL + photo
+    : data?.gender === "MALE"
+    ? Male
+    : Female;
+
+    console.log(positionData);
   return (
     <>
-    
       <Grid
         sx={{
           bgcolor: mode === "light" ? "#cfe8fc" : "#292929",
@@ -52,10 +63,10 @@ export const PersonalProfile = ({ data }) => {
           gap: "1rem",
         }}
       >
-        
         <Box
           className="profileInfo"
           bgcolor={mode === "light" ? "" : "#3f413f"}
+          sx={{ background: mode === "light" ? "#bfddf5" : "#3f413f" }}
         >
           <Avatar
             sx={{
@@ -65,7 +76,7 @@ export const PersonalProfile = ({ data }) => {
               alignSelf: "center",
             }}
             variant="circle"
-            src={filePath}
+            src={isEmployee ? employeeFilePath : filePath}
           />
           <Typography
             sx={{
@@ -104,8 +115,8 @@ export const PersonalProfile = ({ data }) => {
             {data?.mobileNumber}
           </Typography>
         </Box>
-        
-        <BasicInfo data={data} mode={mode} />
+
+        <BasicInfo data={data} mode={mode} positionName={positionName}/>
       </Grid>
 
       {openEmailForm && (

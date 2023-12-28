@@ -18,6 +18,7 @@ const EmployeeBankDetailForm = ({ formik }) => {
           fullWidth
           value={formik.values.bankName}
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           error={formik.touched.bankName && Boolean(formik.errors.bankName)}
           helperText={formik.touched.bankName && formik.errors.bankName}
           variant="outlined"
@@ -34,6 +35,7 @@ const EmployeeBankDetailForm = ({ formik }) => {
           fullWidth
           value={formik.values.bankAccountNumber}
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           error={
             formik.touched.bankAccountNumber &&
             Boolean(formik.errors.bankAccountNumber)
@@ -55,6 +57,7 @@ const EmployeeBankDetailForm = ({ formik }) => {
           fullWidth
           value={formik.values.bankAddress}
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           error={
             formik.touched.bankAddress && Boolean(formik.errors.bankAddress)
           }

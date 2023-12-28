@@ -26,7 +26,6 @@ export const RightEmployDashbord = ({ employData }) => {
         return accumulator + currentValue.leaveBalance;
       }, 0)
     : "";
- 
 
   const { mode } = useContext(ThemeModeContext);
   return (
@@ -43,7 +42,7 @@ export const RightEmployDashbord = ({ employData }) => {
           marginTop="1rem"
           flexDirection="column"
           justifyContent="center"
-          padding={{sm:" 1rem " ,md:"0", lg:"1rem"}}
+          padding={{ sm: " 1rem ", md: "0", lg: "1rem" }}
           flexWrap="wrap"
           borderRadius="10px"
         >
@@ -54,14 +53,17 @@ export const RightEmployDashbord = ({ employData }) => {
             alignItems="center"
             gap={1}
           >
-            <Card bgcolor={"#D6EBFF"} leaveName={"Annual Leaves"} />
             <Card
-              bgcolor={"#FFDAD5"}
+              bgcolor={mode === "light" ? "#D6EBFF" : "#0F6FA6"}
+              leaveName={"Annual Leaves"}
+            />
+            <Card
+              bgcolor={mode === "light" ? "#FFDAD5" : "#E53935"}
               leaveName={"Leave Taken"}
               leavetaken={sumOfLeaveTaken}
             />
             <Card
-              bgcolor={"#ECFFE3"}
+              bgcolor={mode === "light" ? "#ECFFE3" : "#388E3C"}
               leaveName={"Remaining"}
               leavetaken={sumOfLeaveBalance}
             />
@@ -77,7 +79,7 @@ export const RightEmployDashbord = ({ employData }) => {
         </Box>
       </Box>
       <Grid>
-        <ToDoList/>
+        <ToDoList />
       </Grid>
     </Box>
   );
@@ -94,10 +96,16 @@ export const Card = ({ bgcolor, leaveName, leavetaken }) => {
       height="150px"
       borderRadius="8px"
     >
-      <Typography alignSelf="center" fontSize={{sm:"22px",md:"18px", lg:"22px"}}>
-        {bgcolor === "#D6EBFF" ? "3/12" : leavetaken + " Days"}
+      <Typography
+        alignSelf="center"
+        fontSize={{ sm: "22px", md: "18px", lg: "22px" }}
+      >
+        {leaveName === "Annual Leaves" ? "3/12" : leavetaken + " Days"}
       </Typography>
-      <Typography fontSize={{xs:"11px",sm:"14px", md:"12px", lg:"14px"}} alignSelf="center">
+      <Typography
+        fontSize={{ xs: "11px", sm: "14px", md: "12px", lg: "14px" }}
+        alignSelf="center"
+      >
         {leaveName}
       </Typography>
     </Grid>

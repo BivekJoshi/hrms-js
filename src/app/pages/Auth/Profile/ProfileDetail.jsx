@@ -11,6 +11,7 @@ const ProfileDetail = () => {
   const photo = loggedUserData?.userPhotoPath;
   const filePath = photo ? DOC_URL + photo : "";
 
+  console.log(loggedUserData);
   return (
     <Box
       display="grid"
