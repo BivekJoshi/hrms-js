@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
@@ -15,6 +15,7 @@ import { GiBigDiamondRing } from "react-icons/gi";
 import KitesurfingIcon from "@mui/icons-material/Kitesurfing";
 import BabyChangingStationIcon from "@mui/icons-material/BabyChangingStation";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
+import FortIcon from "@mui/icons-material/Fort";
 
 // const Item = styled(Paper)(({ theme }) => ({
 //   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -63,65 +64,31 @@ const ApplyLeave = () => {
     {
       id: 1,
       leaveType: "SICK ",
-      icon: (
-        <BabyChangingStationIcon
-          style={{
-            width: "3rem",
-            height: "3rem",
-            color: mode === "light" ? "#6DAB23" : "white",
-          }}
-        />
-      ),
     },
     {
       id: 2,
       leaveType: "ANNUAL ",
-      icon: (
-        <MdOutlineFlightTakeoff
-          style={{
-            width: "3rem",
-            color: mode === "light" ? "#6DAB23" : "white",
-          }}
-        />
-      ),
     },
     {
       id: 3,
       leaveType: "MATERNITY ",
-      icon: (
-        <MdPregnantWoman
-          style={{
-            width: "3rem",
-            color: mode === "light" ? "#6DAB23" : "white",
-          }}
-        />
-      ),
     },
 
     {
       id: 4,
       leaveType: "PATERNITY ",
-      icon: (
-        <FaBaby
-          style={{
-            width: "2rem",
-            color: mode === "light" ? "#6DAB23" : "white",
-          }}
-        />
-      ),
+    },
+    {
+      id: 6,
+      leaveType: "CASUAL ",
+    },
+    {
+      id: 7,
+      leaveType: "MATERNITY ADDITIONAL ",
     },
     {
       id: 5,
       leaveType: "UNPAID ",
-      icon: (
-        <KitesurfingIcon
-          style={{
-            width: "3rem",
-            height: "3rem",
-            color: mode === "light" ? "#6DAB23" : "white",
-          }}
-        />
-      ),
     },
   ];
   // if (isLoading || !leavebalance || !leaveTypeData) {
@@ -143,7 +110,6 @@ const ApplyLeave = () => {
           key={index}
           boxShadow="7"
           borderRadius="1.5rem"
-          minHeight="200px"
           bgcolor={mode === "light" ? "" : "#4f4e4c"}
         >
           <Typography variant="h6" marginTop="1rem">
@@ -153,10 +119,10 @@ const ApplyLeave = () => {
             {leaveIconMap.get(data ? data?.leaveTypeId : "")}
           </Typography>
           <Typography fontSize="1rem">
-            <b>Available Leave: {data ? data.leaveBalance : ""}</b>
+            <b> Leave Taken: {data ? data.leaveTaken : ""}</b>
           </Typography>
           <Typography fontSize="1rem">
-            <b>Total Leave: {data ? data.leaveTaken : ""}</b>
+            <b>Available Leave: {data ? data.leaveBalance : ""}</b>
           </Typography>
         </Box>
       ))
@@ -165,7 +131,6 @@ const ApplyLeave = () => {
           key={index}
           boxShadow="7"
           borderRadius="1.5rem"
-          minHeight="200px"
           bgcolor={mode === "light" ? "" : "#4f4e4c"}
         >
           <Typography variant="h6" marginTop="1rem">
@@ -184,37 +149,39 @@ const ApplyLeave = () => {
       ));
 
   const chunkedBoxes = [];
-  for (let i = 0; i < boxes.length; i += 5) {
-    chunkedBoxes.push(boxes.slice(i, i + 5));
+  for (let i = 0; i < boxes.length; i += 4) {
+    chunkedBoxes.push(boxes.slice(i, i + 4));
   }
 
   return (
-    <Box sx={{ flexGrow: 1 }} paddingBottom="2rem">
-      <Typography variant="h4">Taken Leave</Typography>
-      <Carousel
-        showThumbs={false}
-        showArrows={false}
-        showStatus={false}
-        renderArrowPrev={(onClickHandler) => (
-          <CustomArrow onClick={onClickHandler} direction="prev" />
-        )}
-        renderArrowNext={(onClickHandler) => (
-          <CustomArrow onClick={onClickHandler} direction="next" />
-        )}
-      >
-        {chunkedBoxes.map((chunk, index) => (
-          <Box
-            style={{ padding: " 0 0 1rem", margin: "1rem .5rem" }}
-            display="grid"
-            gridTemplateColumns="repeat(auto-fit, minmax(0, 1fr))"
-            gap="1rem"
-            key={index}
-          >
-            {chunk}
-          </Box>
-        ))}
-      </Carousel>
-    </Box>
+    <>
+      <Box sx={{ flexGrow: 1 }} paddingBottom="2rem">
+        <Typography variant="h4">Taken Leave</Typography>
+        <Carousel
+          showThumbs={false}
+          showArrows={false}
+          showStatus={false}
+          renderArrowPrev={(onClickHandler) => (
+            <CustomArrow onClick={onClickHandler} direction="prev" />
+          )}
+          renderArrowNext={(onClickHandler) => (
+            <CustomArrow onClick={onClickHandler} direction="next" />
+          )}
+        >
+          {chunkedBoxes.map((chunk, index) => (
+            <Box
+              style={{ padding: " 0 0 1rem", margin: "1rem .5rem" }}
+              display="grid"
+              gridTemplateColumns="repeat(auto-fit, minmax(125px, 1fr))"
+              gap="1rem"
+              key={index}
+            >
+              {chunk}
+            </Box>
+          ))}
+        </Carousel>
+      </Box>
+    </>
   );
 };
 
