@@ -33,10 +33,14 @@ const EmployeeDocumentDetailForm = () => {
   const { mutate: deleteDocument } = useDeleteDocument({});
   const { mutate: addDocument } = useAddDocument({});
 
-  const { data: documentPhoto } = useGetDocumentByDocumentType(
+  const { data: documentPhoto, refetch } = useGetDocumentByDocumentType(
     id,
     selectedDocument || documentType[0]?.input
   );
+
+  useEffect(() => {
+    refetch();
+  }, [selectedDocument]);
 
   const url = DOC_URL;
 
