@@ -7,16 +7,16 @@ import {
   Tooltip,
   Badge,
   Box,
-} from "@mui/material";
-import { Paper, ClickAwayListener, MenuList } from "@mui/material";
-import NotificationsIcon from "@mui/icons-material/NotificationsNone";
-import ThemeModeContext from "../../../theme/ThemeModeContext";
+} from '@mui/material';
+import { Paper, ClickAwayListener, MenuList } from '@mui/material';
+import NotificationsIcon from '@mui/icons-material/NotificationsNone';
+import ThemeModeContext from '../../../theme/ThemeModeContext';
 import {
   EventNotification,
   LeaveNotification,
-} from "./Component/EventNotification";
-import { useGetLeave } from "../../hooks/leave/useLeave";
-import useAuth from "../../../auth/hooks/component/login/useAuth";
+} from './Component/EventNotification';
+import { useGetLeave } from '../../hooks/leave/useLeave';
+import useAuth from '../../../auth/hooks/component/login/useAuth';
 
 const Notification = ({ data }) => {
   const { isManager } = useAuth();
@@ -27,16 +27,18 @@ const Notification = ({ data }) => {
 
   //leave notifications
   const pendingLeaveData = isManager
-    ? leaveData?.filter((leave) => leave.leaveStatus === "PENDING")
-    : "";
+    ? leaveData?.filter((leave) => leave.leaveStatus === 'PENDING')
+    : '';
   const eventCount = isManager
     ? pendingLeaveData?.length + data?.eventCount || 0
     : data?.events?.length || 0;
 
-  const filteredEvents = data?.events?.filter((event) => event.notificationId === "0");
-  const filterEventcount=filteredEvents?.length;
+  const filteredEvents = data?.events?.filter(
+    (event) => event.notificationId === '0'
+  );
+  const filterEventcount = filteredEvents?.length;
 
-  console.log(filterEventcount,"events");
+  // console.log(filterEventcount, 'events');
 
   const displayCount = eventCount > 0 ? eventCount : null;
 
@@ -55,10 +57,10 @@ const Notification = ({ data }) => {
   };
 
   function handleListKeyDown(event) {
-    if (event.key === "Tab") {
+    if (event.key === 'Tab') {
       event.preventDefault();
       setOpen(false);
-    } else if (event.key === "Escape") {
+    } else if (event.key === 'Escape') {
       setOpen(false);
     }
   }
@@ -77,72 +79,69 @@ const Notification = ({ data }) => {
       }
     };
 
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
 
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
 
   const btnStyle = {
-    color: "#fff",
+    color: '#fff',
   };
 
   return (
     <Box>
       <IconButton ref={anchorRef} onClick={handleToggle} style={btnStyle}>
-        <Tooltip title="Notifications">
+        <Tooltip title='Notifications'>
           <Badge
             // badgeContent={data?.isChecked ? "" : displayCount}
-            badgeContent={data?.isChecked ? "" : filterEventcount}
-            
-            color="secondary"
+            badgeContent={data?.isChecked ? '' : filterEventcount}
+            color='secondary'
           >
             <NotificationsIcon />
           </Badge>
         </Tooltip>
       </IconButton>
-      {eventCount !== 0 ? (
+      {data?.event?.length !== 0 ? (
         <Popper
           open={open}
           anchorEl={anchorRef.current}
           role={undefined}
-          placement="bottom-start"
+          placement='bottom-start'
           transition
           disablePortal
-          style={{ marginLeft: "4rem" }}
+          style={{ marginLeft: '4rem' }}
         >
           {({ TransitionProps, placement }) => (
             <Grow
               {...TransitionProps}
               style={{
                 transformOrigin:
-                  placement === "bottom-start" ? "left top" : "left bottom",
+                  placement === 'bottom-start' ? 'left top' : 'left bottom',
               }}
             >
               <Paper>
                 {/* Listens for click outside and triggers handleCLickAway */}
-                <ClickAwayListener onClickAway={handleClickAway}>
+                <ClickAwayListener>
                   {isManager ? (
                     <>
                       {pendingLeaveData.length > 0 ? (
                         <LeaveNotification
-                          Eventname={"Leave Request"}
+                          Eventname={'Leave Request'}
                           data={pendingLeaveData}
                           open={open}
                           handleClose={handleClose}
                           handleListKeyDown={handleListKeyDown}
                         />
                       ) : null}
-                      {data.eventCount !== 0 && (
-                        <EventNotification
-                          Eventname={"Today's Event"}
-                          data={eventName}
-                          open={open}
-                          handleClose={handleClose}
-                          handleListKeyDown={handleListKeyDown}
-                        />
-                      )}
+                      <EventNotification
+                        Eventname={"Today's Event"}
+                        data={eventName}
+                        open={open}
+                        handleClose={handleClose}
+                        handleListKeyDown={handleListKeyDown}
+                      />
                     </>
                   ) : (
                     <EventNotification
@@ -163,36 +162,36 @@ const Notification = ({ data }) => {
           open={open}
           anchorEl={anchorRef.current}
           role={undefined}
-          placement="bottom-start"
+          placement='bottom-start'
           transition
           disablePortal
-          style={{ width: { xs: "30%", lg: "15%" }, marginLeft: "-4rem" }}
+          style={{ width: { xs: '30%', lg: '15%' }, marginLeft: '-4rem' }}
         >
           {({ TransitionProps, placement }) => (
             <Grow
               {...TransitionProps}
               style={{
-                background: mode === "light" ? "" : "#4d4c4c",
+                background: mode === 'light' ? '' : '#4d4c4c',
                 transformOrigin:
-                  placement === "bottom-start" ? "left top" : "left bottom",
+                  placement === 'bottom-start' ? 'left top' : 'left bottom',
               }}
             >
               <Paper>
                 <ClickAwayListener onClickAway={handleClickAway}>
                   <MenuList
                     autoFocusItem={open}
-                    id="composition-menu"
-                    aria-labelledby="composition-button"
+                    id='composition-menu'
+                    aria-labelledby='composition-button'
                     onKeyDown={handleListKeyDown}
                     sx={{
-                      textAlign: "center",
-                      width: "100%",
-                      padding: "1rem 2rem",
+                      textAlign: 'center',
+                      width: '100%',
+                      padding: '1rem 2rem',
                     }}
                   >
                     <Typography
-                      variant="h7"
-                      color={mode === "light" ? "primary" : "white"}
+                      variant='h7'
+                      color={mode === 'light' ? 'primary' : 'white'}
                     >
                       No Events For Today!
                     </Typography>

@@ -11,7 +11,6 @@ import MainCard from "../MainCard";
 import EmailModal from "../../../pages/Email/EmailModal";
 import { EditDeactivationEmployeeModal } from "../../../pages/Employee/EmployeeDeactivationModal/EditDeactivationEmployeeModal";
 import ProgressbyAll from "../../../pages/Employee/ProgressEmployeeData/ProgressbyAll";
-import PopOver from "../../../../theme/overrides/PopOver";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
 import { DOC_URL } from "../../../../auth/axiosInterceptor";
 import useAuth from "../../../../auth/hooks/component/login/useAuth";
