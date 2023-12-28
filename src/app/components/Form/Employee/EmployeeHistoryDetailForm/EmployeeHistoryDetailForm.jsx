@@ -4,7 +4,7 @@ import React from 'react';
 import { useDeleteHistory } from '../../../../hooks/employee/useEmployeeHistory';
 
 const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
-  const { values, handleChange } = formik;
+  const { values, handleChange, handleBlur, touched, errors } = formik;
 
   const deleteHistoryMutation = useDeleteHistory({});
   const handleDeleteHistory = (history) => {
@@ -31,18 +31,20 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                         <TextField
                           id={`history[${index}].employerName`}
                           name={`history[${index}].employerName`}
-                          label='Branch Name'
-                          placeholder='Enter the branch name you worked last time'
+                          label='Employer Name'
+                          placeholder='Enter Employer Name'
                           fullWidth
+                          // required
+                          onBlur={handleBlur}
                           value={employeeHistory.employerName}
-                          onChange={formik.handleChange}
+                          onChange={handleChange}
                           error={Boolean(
-                            formik.touched.history?.[index]?.employerName &&
-                              formik.errors.history?.[index]?.employerName
+                            touched.history?.[index]?.employerName &&
+                              errors.history?.[index]?.employerName
                           )}
                           helperText={
-                            formik.touched.history?.[index]?.employerName &&
-                            formik.errors.history?.[index]?.employerName
+                            touched.history?.[index]?.employerName &&
+                            errors.history?.[index]?.employerName
                           }
                           variant='outlined'
                           InputLabelProps={{ shrink: true }}
@@ -53,18 +55,20 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                         <TextField
                           id={`history[${index}].employerAddress`}
                           name={`history[${index}].employerAddress`}
-                          label='Company Address'
-                          placeholder='Enter the company address you worked last time'
+                          label='Employer Address'
+                          placeholder='Enter Employer Address'
                           fullWidth
+                          // required
+                          onBlur={handleBlur}
                           value={employeeHistory.employerAddress}
-                          onChange={formik.handleChange}
+                          onChange={handleChange}
                           error={Boolean(
-                            formik.touched.history?.[index]?.employerAddress &&
-                              formik.errors.history?.[index]?.employerAddress
+                            touched.history?.[index]?.employerAddress &&
+                              errors.history?.[index]?.employerAddress
                           )}
                           helperText={
-                            formik.touched.history?.[index]?.employerAddress &&
-                            formik.errors.history?.[index]?.employerAddress
+                            touched.history?.[index]?.employerAddress &&
+                            errors.history?.[index]?.employerAddress
                           }
                           variant='outlined'
                           InputLabelProps={{ shrink: true }}
@@ -75,17 +79,19 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                           id={`history[${index}].pastPosition`}
                           name={`history[${index}].pastPosition`}
                           label='Past Position'
-                          placeholder='Enter your past position'
+                          placeholder='Enter Past Position'
                           fullWidth
+                          // required
+                          onBlur={handleBlur}
                           value={employeeHistory.pastPosition}
                           onChange={handleChange}
                           error={Boolean(
-                            formik.touched.history?.[index]?.pastPosition &&
-                              formik.errors.history?.[index]?.pastPosition
+                            touched.history?.[index]?.pastPosition &&
+                              errors.history?.[index]?.pastPosition
                           )}
                           helperText={
-                            formik.touched.history?.[index]?.pastPosition &&
-                            formik.errors.history?.[index]?.pastPosition
+                            touched.history?.[index]?.pastPosition &&
+                            errors.history?.[index]?.pastPosition
                           }
                           variant='outlined'
                           InputLabelProps={{ shrink: true }}
@@ -95,19 +101,20 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                         <TextField
                           id={`history[${index}].fromDate`}
                           name={`history[${index}].fromDate`}
-                          label='Join Date'
-                          placeholder='Enter Your Join date'
+                          label='Date From'
+                          placeholder='Select Date Form'
                           fullWidth
-                          type='date'
+                          // required
+                          onBlur={handleBlur}
                           value={employeeHistory.fromDate}
                           onChange={handleChange}
                           error={Boolean(
-                            formik.touched.history?.[index]?.fromDate &&
-                              formik.errors.history?.[index]?.fromDate
+                            touched.history?.[index]?.fromDate &&
+                              errors.history?.[index]?.fromDate
                           )}
                           helperText={
-                            formik.touched.history?.[index]?.fromDate &&
-                            formik.errors.history?.[index]?.fromDate
+                            touched.history?.[index]?.fromDate &&
+                            errors.history?.[index]?.fromDate
                           }
                           variant='outlined'
                           InputLabelProps={{ shrink: true }}
@@ -117,19 +124,20 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                         <TextField
                           id={`history[${index}].toDate`}
                           name={`history[${index}].toDate`}
-                          label='To Date'
-                          placeholder='Enter Date'
+                          label='Date To'
+                          placeholder='Enter Date To'
                           fullWidth
-                          type='date'
+                          onBlur={handleBlur}
+                          // required
                           value={employeeHistory.toDate}
                           onChange={handleChange}
                           error={Boolean(
-                            formik.touched.history?.[index]?.toDate &&
-                              formik.errors.history?.[index]?.toDate
+                            touched.history?.[index]?.toDate &&
+                              errors.history?.[index]?.toDate
                           )}
                           helperText={
-                            formik.touched.history?.[index]?.toDate &&
-                            formik.errors.history?.[index]?.toDate
+                            touched.history?.[index]?.toDate &&
+                            errors.history?.[index]?.toDate
                           }
                           variant='outlined'
                           InputLabelProps={{ shrink: true }}
@@ -140,17 +148,19 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                           id={`history[${index}].description`}
                           name={`history[${index}].description`}
                           label='Description'
-                          placeholder='Say somthing about last caompany'
+                          placeholder='Enter Description'
                           fullWidth
+                          onBlur={handleBlur}
+                          // required
                           value={employeeHistory.description}
                           onChange={handleChange}
                           error={Boolean(
-                            formik.touched.history?.[index]?.description &&
-                              formik.errors.history?.[index]?.description
+                            touched.history?.[index]?.description &&
+                              errors.history?.[index]?.description
                           )}
                           helperText={
-                            formik.touched.history?.[index]?.description &&
-                            formik.errors.history?.[index]?.description
+                            touched.history?.[index]?.description &&
+                            errors.history?.[index]?.description
                           }
                           variant='outlined'
                           InputLabelProps={{ shrink: true }}
@@ -161,17 +171,19 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                           id={`history[${index}].remarks`}
                           name={`history[${index}].remarks`}
                           label='Remarks'
-                          placeholder='Remarks'
+                          placeholder='Enter Remarks'
                           fullWidth
+                          onBlur={handleBlur}
+                          // required
                           value={employeeHistory.remarks}
                           onChange={handleChange}
                           error={Boolean(
-                            formik.touched.history?.[index]?.remarks &&
-                              formik.errors.history?.[index]?.remarks
+                            touched.history?.[index]?.remarks &&
+                              errors.history?.[index]?.remarks
                           )}
                           helperText={
-                            formik.touched.history?.[index]?.remarks &&
-                            formik.errors.history?.[index]?.remarks
+                            touched.history?.[index]?.remarks &&
+                            errors.history?.[index]?.remarks
                           }
                           variant='outlined'
                           InputLabelProps={{ shrink: true }}

@@ -7,13 +7,13 @@ import { useDeleteFamily } from '../../../../hooks/employee/useFamily';
 
 const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
   const { values, handleChange, handleBlur, touched, errors } = formik;
+
   const deleteFamilyMutation = useDeleteFamily({});
   const handleDeleteFamily = (familyMember) => {
     if (familyMember?.id) {
       deleteFamilyMutation.mutate(familyMember.id);
     }
   };
-console.log(formik.touched?.family && formik.touched?.family[0]?.relation )
   return (
     !isLoading && (
       <div>
@@ -38,6 +38,7 @@ console.log(formik.touched?.family && formik.touched?.family[0]?.relation )
                           // required
                           value={familyMember.name}
                           onChange={handleChange}
+                          onBlur={handleBlur}
                           error={Boolean(
                             touched.family?.[index]?.name &&
                               errors.family?.[index]?.name

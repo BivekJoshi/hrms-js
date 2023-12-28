@@ -29,6 +29,7 @@ const EmployeeGrid = ({ employeeData, isLoading }) => {
         .includes(positionFilter.toLowerCase()) &&
       employee?.mobileNumber.toString().includes(phoneFilter)
   );
+
   if (isLoading) {
     return (
       <Skeleton sx={{ height: 190 }} animation='wave' variant='rectangular' />

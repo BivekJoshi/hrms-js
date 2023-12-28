@@ -130,7 +130,7 @@ const EmployeeMapping = () => {
       <CustomTable
         columns={columns}
         data={mapData}
-        title="Branch List"
+        title="Employee Mapping"
         isLoading={isLoading}
         exportButton={true}
         actions={actions}
