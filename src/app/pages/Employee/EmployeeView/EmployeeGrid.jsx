@@ -20,9 +20,16 @@ const EmployeeGrid = ({ employeeData, isLoading }) => {
   const [phoneFilter, setPhoneFilter] = useState("");
   const { palette } = useContext(ThemeModeContext);
 
+  const newEmployee = employeeData?.employees?.map((employee) => {
+    const { firstName, lastName } = employee;
+    const empData = `${firstName}${lastName}`;
+    console.log("emp", empData);
+    console.log("name", nameFilter);
+});
+
   const filteredEmployees = employeeData?.employees?.filter(
     (employee) =>
-      `${employee.firstName} ${employee.lastName}`
+      `${employee?.firstName}${employee?.middleName}${employee?.lastName}`
         .toLowerCase()
         .includes(nameFilter.toLowerCase()) &&
       employee?.positionName

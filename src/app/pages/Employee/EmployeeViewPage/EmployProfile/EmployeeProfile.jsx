@@ -26,9 +26,10 @@ const EmployeeProfile = () => {
       ? useGetEmployeeById(id)
       : {};
 
-  const { data: loggedInUserData ,isLoading:isLoadingUserData} = isEmployee ? useGetLoggedInUserInfo() : {};
-  // const { data: loggedInUserData ,isLoading:isLoadingUserData} = isEmployee ? useGetLoggedInUser() : {};
-
+  // const { data: loggedInUserData ,isLoading:isLoadingUserData} = isEmployee ? useGetLoggedInUserInfo() : {};
+  const { data: userData } = useGetLoggedInUser();
+  const empId = userData && userData?.employeeId;
+  const { data: loggedInUserData ,isLoading:isLoadingUserData} = useGetEmployeeById(empId);
 
   if (isLoading||isLoadingUserData) return <>Loading</>;
 
@@ -43,7 +44,7 @@ const EmployeeProfile = () => {
           </>
         ) : (
           <>
-            <PersonalProfile data={loggedInUserData} />
+            <PersonalProfile data={loggedInUserData} empId={empId} />
             <EmployeeDetailProfile data={loggedInUserData} />
           </>
         )}
