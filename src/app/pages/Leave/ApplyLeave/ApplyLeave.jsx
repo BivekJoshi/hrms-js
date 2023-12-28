@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
@@ -15,6 +15,7 @@ import { GiBigDiamondRing } from "react-icons/gi";
 import KitesurfingIcon from "@mui/icons-material/Kitesurfing";
 import BabyChangingStationIcon from "@mui/icons-material/BabyChangingStation";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
+import FortIcon from "@mui/icons-material/Fort";
 
 // const Item = styled(Paper)(({ theme }) => ({
 //   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -111,6 +112,32 @@ const ApplyLeave = () => {
       ),
     },
     {
+      id: 6,
+      leaveType: "CASUAL ",
+      icon: (
+        <FortIcon
+          style={{
+            width: "3rem",
+            height: "3rem",
+            color: mode === "light" ? "#6DAB23" : "white",
+          }}
+        />
+      ),
+    },
+    {
+      id: 7,
+      leaveType: "MATERNITY_ADDITIONAL ",
+      icon: (
+        <KitesurfingIcon
+          style={{
+            width: "3rem",
+            height: "3rem",
+            color: mode === "light" ? "#6DAB23" : "white",
+          }}
+        />
+      ),
+    },
+    {
       id: 5,
       leaveType: "UNPAID ",
       icon: (
@@ -153,10 +180,10 @@ const ApplyLeave = () => {
             {leaveIconMap.get(data ? data?.leaveTypeId : "")}
           </Typography>
           <Typography fontSize="1rem">
-            <b>Available Leave: {data ? data.leaveBalance : ""}</b>
+            <b> Leave Taken: {data ? data.leaveTaken : ""}</b>
           </Typography>
           <Typography fontSize="1rem">
-            <b>Total Leave: {data ? data.leaveTaken : ""}</b>
+            <b>Available Leave: {data ? data.leaveBalance : ""}</b>
           </Typography>
         </Box>
       ))
@@ -189,32 +216,37 @@ const ApplyLeave = () => {
   }
 
   return (
-    <Box sx={{ flexGrow: 1 }} paddingBottom="2rem">
-      <Typography variant="h4">Taken Leave</Typography>
-      <Carousel
-        showThumbs={false}
-        showArrows={false}
-        showStatus={false}
-        renderArrowPrev={(onClickHandler) => (
-          <CustomArrow onClick={onClickHandler} direction="prev" />
-        )}
-        renderArrowNext={(onClickHandler) => (
-          <CustomArrow onClick={onClickHandler} direction="next" />
-        )}
-      >
-        {chunkedBoxes.map((chunk, index) => (
-          <Box
-            style={{ padding: " 0 0 1rem", margin: "1rem .5rem" }}
-            display="grid"
-            gridTemplateColumns="repeat(auto-fit, minmax(0, 1fr))"
-            gap="1rem"
-            key={index}
-          >
-            {chunk}
-          </Box>
-        ))}
-      </Carousel>
-    </Box>
+    <>
+      <Box sx={{ flexGrow: 1 }} paddingBottom="2rem">
+        <Typography variant="h4">Taken Leave</Typography>
+        <Carousel
+          showThumbs={false}
+          showArrows={false}
+          showStatus={false}
+          renderArrowPrev={(onClickHandler) => (
+            <CustomArrow onClick={onClickHandler} direction="prev" />
+          )}
+          renderArrowNext={(onClickHandler) => (
+            <CustomArrow onClick={onClickHandler} direction="next" />
+          )}
+        >
+          {chunkedBoxes.map((chunk, index) => (
+            <Box
+              style={{ padding: " 0 0 1rem", margin: "1rem .5rem" }}
+              display="grid"
+              gridTemplateColumns="repeat(auto-fit, minmax(0, 1fr))"
+              gap="1rem"
+              key={index}
+            >
+              {chunk}
+            </Box>
+          ))}
+        </Carousel>
+      </Box>
+      <Grid>
+        hi
+      </Grid>
+    </>
   );
 };
 

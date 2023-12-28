@@ -46,7 +46,6 @@ export const PersonalProfile = ({ data }) => {
     ? Male
     : Female;
 
-    console.log(positionData);
   return (
     <>
       <Grid
