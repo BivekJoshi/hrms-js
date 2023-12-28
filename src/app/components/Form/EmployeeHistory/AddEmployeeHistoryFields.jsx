@@ -2,7 +2,7 @@ import React from "react";
 import { Grid, TextField, Button, Autocomplete } from "@mui/material";
 import useAddEmployeeHistoryForm from '../../../hooks/employeehistory/useAddEmployeeHistoryForm';
 
-const AddEmployeeHistoryFields = ( onClose, isLoading ) => {
+const AddEmployeeHistoryFields = ( {onClose, isLoading }) => {
   const { formik } = useAddEmployeeHistoryForm();
 
   const handleFormSubmit = () => {
