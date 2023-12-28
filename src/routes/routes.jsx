@@ -1,4 +1,4 @@
-import React, { lazy, useContext } from 'react';
+import React, { lazy, useContext, useState } from 'react';
 import { nanoid } from 'nanoid';
 import { Link, useLocation } from 'react-router-dom';
 import { Breadcrumbs, Typography } from '@mui/material';
@@ -356,6 +356,12 @@ export default function BreadCrumbs() {
   };
   const pathSegments = pathBreadCrump().split('/').filter(Boolean);
 
+  const redirectTo = (path) => {
+    const newPath = currentPath ? currentPath.split(path) : [];
+    const actualPath = newPath.length > 0 ? `${newPath[0]}${path}` : path;
+    return actualPath;
+  };
+
   return (
     <>
       {pathSegments.length > 0 && (
@@ -375,18 +381,6 @@ export default function BreadCrumbs() {
             />{' '}
           </Link>
           {pathSegments.map((segment, index) => {
-            const partialPath = `/${pathSegments
-              .slice(0, index + 1)
-              .join('/')}`;
-
-            const linkto = () => {
-              if (isEmployee) {
-                return `/employee${partialPath}`;
-              } else {
-                return `/admin${partialPath}`;
-              }
-            };
-
             return (
               <Link
                 key={index}
@@ -395,7 +389,7 @@ export default function BreadCrumbs() {
                   color: mode === 'light' ? 'inherit' : 'white',
                   textDecoration: 'none',
                 }}
-                to={linkto}
+                to={redirectTo(segment)}
               >
                 <Typography
                   key={index}

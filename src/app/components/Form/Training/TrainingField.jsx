@@ -7,7 +7,7 @@ const TrainingField = ({ onClose, isLoading, data, empId }) => {
   const handleFormSubmit = () => {
     formik.handleSubmit();
 
-    // if (formik.isValid) {
+    if (formik.isValid) {
     //   formik.setTouched({
     //     trainingName: true,
     //     trainingLevel: true,
@@ -15,8 +15,8 @@ const TrainingField = ({ onClose, isLoading, data, empId }) => {
     //     category: true,
     //     startDate: true,
     //     endDate: true,
-    //   });
-    onClose();
+      };
+    // onClose();
   };
 
   const submitButtonText = data ? 'Update' : 'Add';

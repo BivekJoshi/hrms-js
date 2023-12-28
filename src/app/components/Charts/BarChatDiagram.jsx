@@ -5,7 +5,7 @@ import ThemeModeContext from '../../../theme/ThemeModeContext';
 
 const BarChatDiagram = ({ dashboardData }) => {
   const { mode, palette } = useContext(ThemeModeContext);
-console.log(dashboardData)
+
   const names = [
     'All Employees',
     'New Employees',
