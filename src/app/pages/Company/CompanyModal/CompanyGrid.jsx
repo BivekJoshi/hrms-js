@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import { EditCompanyModal } from "./CompanyModal";
+import { EditCompanyModal } from './CompanyModal';
 import {
   useDeleteCompany,
   useGetCompany,
-} from "../../../hooks/company/useCompany";
-import DeleteConfirmationModal from "../../../components/Modal/DeleteConfirmationModal";
-import CompanyGridView from "../CompanyView/CompanyGridView";
+} from '../../../hooks/company/useCompany';
+import DeleteConfirmationModal from '../../../components/Modal/DeleteConfirmationModal';
+import CompanyGridView from '../CompanyView/CompanyGridView';
 
-const CompanyGrid = ({ permissions ,companyData,isLoading}) => {
+const CompanyGrid = ({ permissions, companyData, isLoading }) => {
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [editedCompany, setEditedCompany] = useState({});
@@ -44,7 +44,7 @@ const CompanyGrid = ({ permissions ,companyData,isLoading}) => {
       />
       {openEditModal && (
         <EditCompanyModal
-          title={"Edit Branch"}
+          title={'Edit Branch'}
           data={editedCompany}
           open={openEditModal}
           handleCloseModal={handleCloseEditModal}
@@ -55,7 +55,7 @@ const CompanyGrid = ({ permissions ,companyData,isLoading}) => {
           open={openDeleteModal}
           handleCloseModal={handleCloseDeleteModal}
           handleConfirmDelete={handleConfirmDelete}
-          message={"Branch"}
+          message={'Branch'}
         />
       )}
     </>

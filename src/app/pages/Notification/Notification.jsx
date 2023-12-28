@@ -38,7 +38,6 @@ const Notification = ({ data }) => {
   );
   const filterEventcount = filteredEvents?.length;
 
-
   const displayCount = eventCount > 0 ? eventCount : null;
 
   const [open, setOpen] = useState(false);

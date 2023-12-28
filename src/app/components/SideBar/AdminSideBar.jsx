@@ -43,7 +43,8 @@ import jwtDecode from 'jwt-decode';
 import Logo from '../../../assets/logo.png';
 import SmallLogo from '../../../assets/smallLogo.png';
 import { useGetLoggedInUser } from '../../hooks/auth/usePassword';
-
+import BreadCrumbs from '../../../routes/routes';
+import PeopleIcon from '@mui/icons-material/People';
 const drawerWidth = 260;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
@@ -274,7 +275,7 @@ export default function AdminSidebar() {
     {
       name: 'Employee Mapping',
       icon: (
-        <PersonAddIcon
+        <PeopleIcon
           sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
         />
       ),
@@ -572,7 +573,7 @@ export default function AdminSidebar() {
             gap='1rem'
             alignItems='center'
           >
-            {/* <BreadCrumb /> */}
+            {/* <BreadCrumbs /> */}
           </Box>
           <div style={{ minHeight: '90vh' }}>
             <Outlet />

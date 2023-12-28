@@ -43,9 +43,12 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
             value={formik.values.branchAddress}
             onChange={formik.handleChange}
             error={
-              formik.touched.branchAddress && Boolean(formik.errors.branchAddress)
+              formik.touched.branchAddress &&
+              Boolean(formik.errors.branchAddress)
             }
-            helperText={formik.touched.branchAddress && formik.errors.branchAddress}
+            helperText={
+              formik.touched.branchAddress && formik.errors.branchAddress
+            }
             variant='outlined'
             InputLabelProps={{ shrink: true }}
             size='small'
@@ -62,9 +65,12 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
             value={formik.values.branchContact}
             onChange={formik.handleChange}
             error={
-              formik.touched.branchContact && Boolean(formik.errors.branchContact)
+              formik.touched.branchContact &&
+              Boolean(formik.errors.branchContact)
             }
-            helperText={formik.touched.branchContact && formik.errors.branchContact}
+            helperText={
+              formik.touched.branchContact && formik.errors.branchContact
+            }
             variant='outlined'
             InputLabelProps={{ shrink: true }}
             size='small'
