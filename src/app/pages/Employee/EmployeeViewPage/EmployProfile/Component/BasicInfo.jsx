@@ -63,14 +63,14 @@ const BasicInfo = ({ data, mode, positionName, empId }) => {
         </Stack> */}
       <Box
         container
-        className="ProfileStyle"
-        sx={{ backgroundColor: mode === "light" ? "#ededed" : "#292929" }}
+        className='ProfileStyle'
+        sx={{ backgroundColor: mode === 'light' ? '#ededed' : '#292929' }}
       >
         <Box>
           <ListUserDetails
             data={EMPLOYEE}
-            cardTitle={"Basic Informations"}
-            MarginBottom={"1rem"}
+            cardTitle={'Basic Informations'}
+            MarginBottom={'1rem'}
             mode={mode}
           />
           <Divider />
@@ -78,18 +78,18 @@ const BasicInfo = ({ data, mode, positionName, empId }) => {
        
         <Box
           sx={{
-            display: "grid",
-            gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr" },
-            gap: "1rem",
-            marginTop: { xs: "-3rem", sm: 0 },
+            display: 'grid',
+            gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr' },
+            gap: '1rem',
+            marginTop: { xs: '-3rem', sm: 0 },
           }}
-          className="FAM-BANK-DETAILS"
+          className='FAM-BANK-DETAILS'
         >
           <Box>
           {BANKDETAILS && BANKDETAILS.length > 0 && (
             <ListUserDetails
               data={BANKDETAILS}
-              cardTitle={"Bank Details"}
+              cardTitle={'Bank Details'}
               mode={mode}
             />
           )}

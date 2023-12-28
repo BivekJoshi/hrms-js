@@ -85,7 +85,7 @@ export const PersonalProfile = ({ data, empId }) => {
             {data?.firstName + ' ' + data?.middleName + ' ' + data?.lastName}
           </Typography>
           <Chip
-            label={positionName}
+            label={data?.positionName}
             sx={{ bgcolor: primaryColor, color: 'white', width: ' 9rem' }}
           />
           <Typography
