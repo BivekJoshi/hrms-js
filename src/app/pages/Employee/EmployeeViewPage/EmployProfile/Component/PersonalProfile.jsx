@@ -39,10 +39,7 @@ export const PersonalProfile = ({ data }) => {
     ? Male
     : Female;
 
-  const photo = data?.userPhotoPath;
-  const employeePhoto = photo
-    ? photo.find((file) => file?.documentType === "EMPLOYEE_PHOTO")
-    : "";
+  const photo = data?.employeePhotoPath;
   const filePath = photo
     ? DOC_URL + photo
     : data?.gender === "MALE"
