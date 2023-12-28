@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { addEmployeeHistory, deleteEmployeeHistory, editEmployeeHistory, getEmployeeHistory, getEmployeeHistoryById } from "../../api/employeeHistory/employeeHistory";
+import { addEmpHistory, addEmployeeHistory, deleteEmployeeHistory, editEmployeeHistory, getEmployeeHistory, getEmployeeHistoryById } from "../../api/employeeHistory/employeeHistory";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -73,4 +73,24 @@ export const useEditEmployeeHistory = ({ onSuccess }) => {
             },
         }
     );
+};
+
+
+
+{/*________________________POST-FOR-VIEW-DETAIL-ADD-PORTION_____________________________________*/ }
+export const useAddEmpHistory = ({ onSuccess }) => {
+    const queryClient = useQueryClient();
+    const { id } = useParams();
+    return useMutation(['addEmployeeHistory'],
+        (formData) => addEmpHistory(formData, id),
+        {
+            onSuccess: (data, variables, context) => {
+                toast.success('Successfully added Employee History');
+                onSuccess && onSuccess(data, variables, context);
+                queryClient.invalidateQueries('getEmployeeHistoryById');
+            },
+            onError: (err, _variables, _context) => {
+                toast.error(`error: ${err.message}`);
+            },
+        });
 };

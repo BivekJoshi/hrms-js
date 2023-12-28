@@ -16,6 +16,7 @@ import { useParams } from "react-router-dom";
 const primaryColor = "#1c7ed6";
 
 export const PersonalProfile = ({ data }) => {
+  // const { id } = data?.employeeId;
   const { id } = useParams();
   const { data: positionData } = useGetDesignationById(id);
   const positionName = positionData && positionData?.positionName;
