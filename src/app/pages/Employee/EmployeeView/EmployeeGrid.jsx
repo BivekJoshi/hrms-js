@@ -30,6 +30,7 @@ const EmployeeGrid = ({ employeeData, isLoading }) => {
         .includes(positionFilter.toLowerCase()) &&
       employee?.mobileNumber.toString().includes(phoneFilter)
   );
+
   if (isLoading) {
     return (
       <>

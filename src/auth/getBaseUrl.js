@@ -5,10 +5,6 @@ export const contextPath = () => {
     window.location.pathname.indexOf('/', 2)
   );
 };
-console.log(
-  '🚀 ~ file: getBaseUrl.js:3 ~ contextPath ~ contextPath:',
-  contextPath
-);
 
 export const getBaseUrl = () => {
   if (envType === 'development') {

@@ -1,14 +1,13 @@
-import { Grid, TextField, Button, MenuItem, Autocomplete } from "@mui/material";
-import React, { useContext } from "react";
-import useEditProjectForm from "../../../hooks/project/editProject/useEditProjectForm";
+import { Grid, TextField, Button, MenuItem, Autocomplete } from '@mui/material';
+import React, { useContext } from 'react';
+import useEditProjectForm from '../../../hooks/project/editProject/useEditProjectForm';
 // import { useGetCompany } from "../../../hooks/company/useCompany";
-import ThemeModeContext from "../../../../theme/ThemeModeContext";
+import ThemeModeContext from '../../../../theme/ThemeModeContext';
 import { ButtonComponent } from '../../Button/ButtonComponent';
-import { useGetEmployee } from "../../../hooks/employee/useEmployee";
+import { useGetEmployee } from '../../../hooks/employee/useEmployee';
 // import { useGetProjectDetail } from "../../../hooks/project/useProject";
 
 const EditProjectFields = ({ onClose, isLoading, data }) => {
- 
   const { formik } = useEditProjectForm(data);
   // const { data: projectData } = useGetProjectDetail();
   const { data: employeeData } = useGetEmployee();
@@ -163,8 +162,8 @@ const EditProjectFields = ({ onClose, isLoading, data }) => {
             InputLabelProps={{ shrink: true }}
           /> */}
           <Autocomplete
-            id="projectLeadId"
-            name="projectLeadId"
+            id='projectLeadId'
+            name='projectLeadId'
             options={employeeData || []}
             getOptionLabel={(employee) =>
               `${employee?.firstName} ${employee?.middleName} ${employee?.lastName}`
@@ -174,18 +173,17 @@ const EditProjectFields = ({ onClose, isLoading, data }) => {
             )}
             onChange={(event, selectedEmployee) => {
               if (selectedEmployee) {
-                formik.setFieldValue("projectLeadId", selectedEmployee.id);
+                formik.setFieldValue('projectLeadId', selectedEmployee.id);
               }
             }}
             renderInput={(params) => (
               <TextField
                 {...params}
-                label="User Name"
-                placeholder="Enter User name..."
+                label='User Name'
+                placeholder='Enter User name...'
                 fullWidth
                 required
-                variant="outlined"
-                
+                variant='outlined'
                 InputLabelProps={{ shrink: true }}
                 error={
                   formik.touched.employeeId && Boolean(formik.errors.employeeId)
@@ -221,10 +219,10 @@ const EditProjectFields = ({ onClose, isLoading, data }) => {
           alignItems='flex-end'
         >
           <ButtonComponent
-            variant="contained"
+            variant='contained'
             onClick={handleFormSubmit}
             sx={{ mt: 3, ml: 1 }}
-            buttonName={"Update Project"}
+            buttonName={'Update Project'}
           />
           <Button
             variant='contained'
