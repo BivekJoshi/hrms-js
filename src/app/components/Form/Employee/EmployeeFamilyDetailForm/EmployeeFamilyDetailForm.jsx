@@ -13,7 +13,7 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
       deleteFamilyMutation.mutate(familyMember.id);
     }
   };
-console.log(formik.touched?.family && formik.touched?.family[0]?.relation )
+
   return (
     !isLoading && (
       <div>

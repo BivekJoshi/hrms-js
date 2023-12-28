@@ -19,7 +19,6 @@ const EventList = ({}) => {
   const [openIndex, setOpenIndex] = useState(null);
 
   const { data: eventData } = useGetEventNotification();
-  console.log(eventData);
 
   const handleClick = (index) => {
     setOpenIndex(openIndex === index ? null : index);

@@ -1,12 +1,15 @@
 import * as React from 'react';
 import { useState } from 'react';
 import {
+  Autocomplete,
   Box,
   Button,
   Divider,
   Grid,
   IconButton,
   Modal,
+  Pagination,
+  TextField,
   Typography,
 } from '@mui/material';
 import Tab from '@mui/material/Tab';
@@ -22,12 +25,27 @@ import { useNavigate } from 'react-router-dom';
 import { ButtonComponent } from '../../components/Button/ButtonComponent';
 import './Style/Style.css';
 import ThemeModeContext from '../../../theme/ThemeModeContext';
-import { useGetEmployee } from '../../hooks/employee/useEmployee';
+import { useGetEmployee, useGetEmployeeData } from '../../hooks/employee/useEmployee';
 import EmployeeTableView from './EmployeeView/EmployeePage/EmployeeTableView';
 
 const Employee = () => {
   const { mode } = React.useContext(ThemeModeContext);
-  const { data: employeeData, isLoading } = useGetEmployee();
+  const [pageNumber, setPageNumber] = useState(0);
+  const [pageSize, setPageSize] = useState(12);
+  const { data: employeeData, isLoading } = useGetEmployeeData(
+    pageNumber,
+    pageSize
+  );
+  const handlePageChange = (event, newPage) => {
+    setPageNumber(newPage - 1);
+  };
+
+  const handlePageSizeChange = (event, newValue) => {
+    const newPageSize = parseInt(newValue, 10) || 0;
+    setPageSize(newPageSize);
+    setPageNumber(0);
+  };
+  // const { data: employeeData, isLoading } = useGetEmployee();
 
   const style = {
     position: 'absolute',
@@ -184,6 +202,32 @@ const Employee = () => {
           </Box>
         </div>
       </Modal>
+
+      <Box mt={4} display="flex" justifyContent={"end"}>
+        <Pagination
+          count={employeeData?.totalPages}
+          page={pageNumber + 1}
+          onChange={handlePageChange}
+          showFirstButton
+          showLastButton
+          boundaryCount={3}
+          size="large"
+          color="primary"
+        />
+        <Autocomplete
+          value={pageSize}
+          onChange={handlePageSizeChange}
+          options={[20, 30, 40, 50, 100]}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label="page"
+              variant="outlined"
+              size="small"
+            />
+          )}
+        />
+      </Box>
       {/* 
       <Modal
         open={openSubmitModal}
