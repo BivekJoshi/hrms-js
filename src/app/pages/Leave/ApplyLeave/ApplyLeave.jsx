@@ -64,91 +64,31 @@ const ApplyLeave = () => {
     {
       id: 1,
       leaveType: "SICK ",
-      icon: (
-        <BabyChangingStationIcon
-          style={{
-            width: "3rem",
-            height: "3rem",
-            color: mode === "light" ? "#6DAB23" : "white",
-          }}
-        />
-      ),
     },
     {
       id: 2,
       leaveType: "ANNUAL ",
-      icon: (
-        <MdOutlineFlightTakeoff
-          style={{
-            width: "3rem",
-            color: mode === "light" ? "#6DAB23" : "white",
-          }}
-        />
-      ),
     },
     {
       id: 3,
       leaveType: "MATERNITY ",
-      icon: (
-        <MdPregnantWoman
-          style={{
-            width: "3rem",
-            color: mode === "light" ? "#6DAB23" : "white",
-          }}
-        />
-      ),
     },
 
     {
       id: 4,
       leaveType: "PATERNITY ",
-      icon: (
-        <FaBaby
-          style={{
-            width: "2rem",
-            color: mode === "light" ? "#6DAB23" : "white",
-          }}
-        />
-      ),
     },
     {
       id: 6,
       leaveType: "CASUAL ",
-      icon: (
-        <FortIcon
-          style={{
-            width: "3rem",
-            height: "3rem",
-            color: mode === "light" ? "#6DAB23" : "white",
-          }}
-        />
-      ),
     },
     {
       id: 7,
-      leaveType: "MATERNITY_ADDITIONAL ",
-      icon: (
-        <KitesurfingIcon
-          style={{
-            width: "3rem",
-            height: "3rem",
-            color: mode === "light" ? "#6DAB23" : "white",
-          }}
-        />
-      ),
+      leaveType: "MATERNITY ADDITIONAL ",
     },
     {
       id: 5,
       leaveType: "UNPAID ",
-      icon: (
-        <KitesurfingIcon
-          style={{
-            width: "3rem",
-            height: "3rem",
-            color: mode === "light" ? "#6DAB23" : "white",
-          }}
-        />
-      ),
     },
   ];
   // if (isLoading || !leavebalance || !leaveTypeData) {
@@ -170,7 +110,6 @@ const ApplyLeave = () => {
           key={index}
           boxShadow="7"
           borderRadius="1.5rem"
-          minHeight="200px"
           bgcolor={mode === "light" ? "" : "#4f4e4c"}
         >
           <Typography variant="h6" marginTop="1rem">
@@ -192,7 +131,6 @@ const ApplyLeave = () => {
           key={index}
           boxShadow="7"
           borderRadius="1.5rem"
-          minHeight="200px"
           bgcolor={mode === "light" ? "" : "#4f4e4c"}
         >
           <Typography variant="h6" marginTop="1rem">
@@ -211,8 +149,8 @@ const ApplyLeave = () => {
       ));
 
   const chunkedBoxes = [];
-  for (let i = 0; i < boxes.length; i += 5) {
-    chunkedBoxes.push(boxes.slice(i, i + 5));
+  for (let i = 0; i < boxes.length; i += 4) {
+    chunkedBoxes.push(boxes.slice(i, i + 4));
   }
 
   return (
@@ -234,7 +172,7 @@ const ApplyLeave = () => {
             <Box
               style={{ padding: " 0 0 1rem", margin: "1rem .5rem" }}
               display="grid"
-              gridTemplateColumns="repeat(auto-fit, minmax(0, 1fr))"
+              gridTemplateColumns="repeat(auto-fit, minmax(125px, 1fr))"
               gap="1rem"
               key={index}
             >
@@ -243,9 +181,6 @@ const ApplyLeave = () => {
           ))}
         </Carousel>
       </Box>
-      <Grid>
-        hi
-      </Grid>
     </>
   );
 };
