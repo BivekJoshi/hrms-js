@@ -18,7 +18,7 @@ const useTrainingForm = (data,empId, onClose) => {
     },
 
     validationSchema: TrainingSchema,
-    enableReinitialize: "true",
+    enableReinitialize: true,
     onSubmit: (values) => {
       if (data?.id) {
         handledEditRequest(values);
@@ -30,7 +30,11 @@ const useTrainingForm = (data,empId, onClose) => {
 
   const handleRequest = (values) => {
     values = { ...values };
-    addTraining(values, formik);
+    addTraining(values, {
+      onSuccess: () => {
+        onClose();
+      }
+    });
   };
 
   const handledEditRequest = (values) => {

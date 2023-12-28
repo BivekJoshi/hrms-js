@@ -8,6 +8,7 @@ import { PersonalProfile } from "./Component/PersonalProfile";
 import ProgressById from "../../ProgressEmployeeData/ProgressById";
 import useAuth from "../../../../../auth/hooks/component/login/useAuth";
 import { EmployeeDetailProfile } from "./Component/EmployeeDetailProfile";
+import { useGetLoggedInUser } from '../../../../hooks/auth/usePassword';
 
 const EmployeeProfile = () => {
   const {
@@ -26,7 +27,7 @@ const EmployeeProfile = () => {
       : {};
 
   const { data: loggedInUserData ,isLoading:isLoadingUserData} = isEmployee ? useGetLoggedInUserInfo() : {};
-
+  // const { data: loggedInUserData ,isLoading:isLoadingUserData} = isEmployee ? useGetLoggedInUser() : {};
 
 
   if (isLoading||isLoadingUserData) return <>Loading</>;

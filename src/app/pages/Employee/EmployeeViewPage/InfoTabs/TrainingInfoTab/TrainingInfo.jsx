@@ -18,6 +18,7 @@ const TrainingInfo = ({ data }) => {
   const { data: loggedInUserData, isLoading: isLoading } = isEmployee
     ? useGetLoggedInUserInfo()
     : {};
+
   const { id } = useParams();
   const { data: trainingData } = useGetTrainingByEmpId(id);
 

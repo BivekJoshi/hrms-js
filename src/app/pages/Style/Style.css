@@ -1,20 +1,3 @@
-/* .todayBN {
-  position: absolute !important;
-  z-index: 1300;
-  right: 63px !importanemployeeDeshbordt;
-  bottom: 0;
-  top: 0;
-  left: 0;
-}
-.todayBN .css-197drkz-MuiPaper-root-MuiPopover-paper-MuiMenu-paper {
-  top: 50px !important;
-  left: 80% !important;
-}
-
-.css-aidwu-MuiButtonBase-root-MuiButton-root{
-  border: none !important;
-} */
-
 .employeeDeshbord {
   display: grid;
   grid-template-rows: 1fr;

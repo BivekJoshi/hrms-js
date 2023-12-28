@@ -11,7 +11,6 @@ import MainCard from "../MainCard";
 import EmailModal from "../../../pages/Email/EmailModal";
 import { EditDeactivationEmployeeModal } from "../../../pages/Employee/EmployeeDeactivationModal/EditDeactivationEmployeeModal";
 import ProgressbyAll from "../../../pages/Employee/ProgressEmployeeData/ProgressbyAll";
-import PopOver from "../../../../theme/overrides/PopOver";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
 import { DOC_URL } from "../../../../auth/axiosInterceptor";
 import useAuth from "../../../../auth/hooks/component/login/useAuth";
@@ -34,7 +33,7 @@ const EmployeeCard = ({
   const [open, setOpen] = useState(false);
   const [openEmailForm, setOpenEmailForm] = useState(false);
   const { mode } = useContext(ThemeModeContext); // Accessing mode from context
-  const img = DOC_URL + employeePhoto;
+  // const img = DOC_URL + employeePhoto;
 
   const anchorRef = useRef(null);
   const prevOpen = useRef(open);
@@ -79,6 +78,12 @@ const EmployeeCard = ({
     setOpenDeactivateModal(true);
   };
 
+  const imageFinal = employeePhoto
+  ? DOC_URL + employeePhoto
+  : EGender === 'MALE'
+  ? Male
+  : Female;
+
   return (
     <>
       <Box>
@@ -86,12 +91,17 @@ const EmployeeCard = ({
           grow={true}
           style={{
             textAlign: "center",
-            padding: "1.5rem",
+            padding: "1rem 1.5rem",
             backgroundColor: mode === "light" ? "white" : "#292929",
           }}
         >
-          <Box display="flex" justifyContent={"end"}>
-            {isEmployee ? (
+          
+          <Box display="flex" justifyContent={"space-between"} alignItems={'center'}>
+          <div style={{ paddingTop: "16px" }}>
+            {ProgressBarRes && <ProgressbyAll ProgressbyAll={ProgressBarRes} />}
+          </div>
+           <div style={{display: 'flex', alignItems: 'ceneter'}}>
+           {isEmployee ? (
               ""
             ) : (
               <>
@@ -173,26 +183,31 @@ const EmployeeCard = ({
                 </Box>
               </>
             )}
+           </div>
           </Box>
+
+
+
+
+
           <Stack
             style={{
               textAlign: " -webkit-center",
               marginTop: "1rem",
               alignItems: "center",
             }}
-          ></Stack>
-          <div style={{ paddingTop: "16px" }}>
-            {ProgressBarRes && <ProgressbyAll ProgressbyAll={ProgressBarRes} />}
-          </div>
+          >  <Stack>
+     
 
-          <Stack>
+        
           
           <CardMedia
           component="img"
-          src={img ? img : Male}
+          src={imageFinal}
           alt="Img"
           sx={{ width: 66, height: 66, borderRadius: "2rem" }}
         />
+        </Stack>
             <Typography
               style={{ fontWeight: 700, margin: "1rem 0", fontSize: "20px" }}
             >
@@ -200,7 +215,7 @@ const EmployeeCard = ({
                 sx={{
                   bgcolor: mode === "light" ? "white" : "rgb(41, 41, 41)",
                   fontSize: "1rem",
-                  width: "80%",
+                  width: "100%",
                 }}
                 label={
                   <Typography

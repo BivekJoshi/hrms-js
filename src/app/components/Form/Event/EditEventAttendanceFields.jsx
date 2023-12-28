@@ -13,7 +13,7 @@ import ThemeModeContext from '../../../../theme/ThemeModeContext';
 const EditEventAttendanceFields = ({ onClose, isLoading, data }) => {
   const { palette } = useContext(ThemeModeContext);
   const { formik } = useEditEventAttendanceForm(data, onClose);
-  // console.log(data);
+ 
   const handleFormSubmit = async () => {
     // const isValid = await formik.validateForm();
     formik.handleSubmit();

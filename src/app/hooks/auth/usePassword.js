@@ -7,6 +7,7 @@ import {
   getLoggedInUser,
 } from "../../api/auth/password-api";
 import { useNavigate } from "react-router-dom";
+import { removeUser } from '../../utils/cookieHelper';
 
 {
   /*________________________GET-LOGGED-IN-USER_____________________________________*/
@@ -60,8 +61,9 @@ export const useAddResetPassword = ({id, onSuccess }) => {
       onSuccess: (data, variables, context) => {
         toast.success("Password has been Changed Successfully");
          onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries("resetPassword");
-        navigate("/admin/dashboard");
+        // queryClient.invalidateQueries("resetPassword");
+        removeUser();
+        navigate("/");
       },
       onError: (err, _variables, _context) => {
         toast.error(`error: ${err.message}`);

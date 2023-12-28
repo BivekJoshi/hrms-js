@@ -5,11 +5,12 @@ import { TabContext, TabPanel } from "@mui/lab";
 
 import LeaveInfo from "../../InfoTabs/LeaveInfoTab/LeaveInfo";
 import AcademicsInfo from "../../InfoTabs/AcademicsInfoTab/AcademicsInfo";
-import PromotionHistory from "../../InfoTabs/PromotionHistory/PromotionHistory";
 import "../Style/Style.css";
 import AttendenceInfo from "../../InfoTabs/AttendenceInfoTab/AttendenceInfo";
 import DocumentInfo from "../../InfoTabs/DocumentInfoTab/DocumentInfo";
 import TrainingInfo from "../../InfoTabs/TrainingInfoTab/TrainingInfo";
+import PromotionHistory from '../../InfoTabs/PromotionHistory/PromotionHistory';
+import EmployeeHistory from '../../InfoTabs/EmployeeHistoryTab/EmployeeHistory';
 
 const primaryColor = "#1c7ed6";
 
@@ -20,6 +21,7 @@ export const DetailProfile = ({ data }) => {
   };
   return (
     <Box sx={{ typography: "body1" }}>
+      
       <TabContext value={value}>
         <TableContainer sx={{ borderBottom: 1, borderColor: "divider" }}>
           <Table aria-label="simple table">
@@ -59,7 +61,7 @@ export const DetailProfile = ({ data }) => {
                   }}
                 />
                 <Tab
-                  label="Promotion History"
+                  label="Position History"
                   value="4"
                   style={{
                     fontSize: "1rem",
@@ -67,8 +69,8 @@ export const DetailProfile = ({ data }) => {
                     fontWeight: "bolder",
                   }}
                 />
-                <Tab
-                  label="Training"
+                 <Tab
+                  label="Employee History"
                   value="5"
                   style={{
                     fontSize: "1rem",
@@ -77,8 +79,17 @@ export const DetailProfile = ({ data }) => {
                   }}
                 />
                 <Tab
-                  label="Documents"
+                  label="Training"
                   value="6"
+                  style={{
+                    fontSize: "1rem",
+                    color: primaryColor,
+                    fontWeight: "bolder",
+                  }}
+                />
+                <Tab
+                  label="Documents"
+                  value="7"
                   style={{
                     fontSize: "1rem",
                     color: primaryColor,
@@ -103,9 +114,12 @@ export const DetailProfile = ({ data }) => {
             <PromotionHistory data={data} />
           </TabPanel>
           <TabPanel value="5" style={{ padding: 10 }}>
-            <TrainingInfo data={data}/>
+            <EmployeeHistory data={data} />
           </TabPanel>
           <TabPanel value="6" style={{ padding: 10 }}>
+            <TrainingInfo data={data}/>
+          </TabPanel>
+          <TabPanel value="7" style={{ padding: 10 }}>
             <DocumentInfo />
           </TabPanel>
         </Box>

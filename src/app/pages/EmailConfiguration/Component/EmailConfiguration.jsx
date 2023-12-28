@@ -3,9 +3,11 @@ import React, { useState } from 'react';
 import useEmailConfigureForm from '../../../hooks/email/emailConfiguration/useEmailConfigureForm';
 import HocButton from '../../../hoc/hocButton';
 import { useGetEmailConfigure } from '../../../hooks/email/useEmail';
+import { useGetLoggedInUser } from '../../../hooks/auth/usePassword';
 
 const EmailConfiguration = ({ permissions }) => {
   const { data: emailData, isLoading } = useGetEmailConfigure();
+  
   const { formik } = useEmailConfigureForm(emailData, isLoading);
 
   const handleFormSubmit = () => {
@@ -108,6 +110,7 @@ const EmailConfiguration = ({ permissions }) => {
         justifyContent='flex-end'
         alignItems='flex-end'
       >
+       
         <HocButton
           variant='contained'
           permissions={permissions?.canAdd}

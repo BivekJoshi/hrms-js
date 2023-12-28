@@ -4,8 +4,10 @@ import { axiosInstance } from '../../../auth/axiosInterceptor';
   /*________________________POST_____________________________________*/
 }
 export const addEmployeeHistory = async (formData, id) => {
+  
   const newHis = formData?.history;
-  const dataToPost = newHis.filter(
+  console.log('formData', formData)
+  const dataToPost = newHis?.filter(
     (item) => item.id === undefined || item.id === ''
   );
   const data = await axiosInstance.post(
@@ -14,6 +16,8 @@ export const addEmployeeHistory = async (formData, id) => {
   );
   return data;
 };
+
+
 
 {
   /*________________________GETBYID_____________________________________*/
@@ -57,6 +61,28 @@ export const editEmployeeHistory = async (formData, id) => {
   const data = await axiosInstance.put(
     `/employment-history/update/${id}?${queryString}`,
     formData?.history
+  );
+  return data;
+};
+
+
+
+
+
+
+
+
+
+
+
+{
+  /*________________________POST-FOR-VIEW-DETAIL-ADD-PORTION_____________________________________*/
+}
+export const addEmpHistory = async (formData, id) => {
+  const postData = [formData];
+  const data = await axiosInstance.post(
+    `/employment-history/create/${id}`,
+    postData
   );
   return data;
 };

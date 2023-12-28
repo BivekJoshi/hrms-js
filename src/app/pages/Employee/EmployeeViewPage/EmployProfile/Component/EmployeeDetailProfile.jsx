@@ -39,7 +39,7 @@ export const EmployeeDetailProfile = ({ data }) => {
                   }}
                 />
                 <Tab
-                  label="Promotion History"
+                  label="Position History"
                   value="2"
                   style={{
                     fontSize: "1rem",
@@ -47,8 +47,8 @@ export const EmployeeDetailProfile = ({ data }) => {
                     fontWeight: "bolder",
                   }}
                 />
-                <Tab
-                  label="Training"
+                   <Tab
+                  label="Position History"
                   value="3"
                   style={{
                     fontSize: "1rem",
@@ -57,8 +57,17 @@ export const EmployeeDetailProfile = ({ data }) => {
                   }}
                 />
                 <Tab
-                  label="Documents"
+                  label="Training"
                   value="4"
+                  style={{
+                    fontSize: "1rem",
+                    color: primaryColor,
+                    fontWeight: "bolder",
+                  }}
+                />
+                <Tab
+                  label="Documents"
+                  value="5"
                   style={{
                     fontSize: "1rem",
                     color: primaryColor,
@@ -77,9 +86,12 @@ export const EmployeeDetailProfile = ({ data }) => {
             <PromotionHistory data={data} />
           </TabPanel>
           <TabPanel value="3" style={{ padding: 10 }}>
-            <TrainingInfo data={data}/>
+            <PromotionHistory data={data} />
           </TabPanel>
           <TabPanel value="4" style={{ padding: 10 }}>
+            <TrainingInfo data={data}/>
+          </TabPanel>
+          <TabPanel value="5" style={{ padding: 10 }}>
             <DocumentInfo />
           </TabPanel>
         </Box>

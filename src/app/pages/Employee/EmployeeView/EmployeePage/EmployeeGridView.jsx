@@ -10,35 +10,8 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import EmployeeCard from "../../../../components/cards/Employee/EmployeeCard";
-import { useGetEmployeeData } from "../../../../hooks/employee/useEmployee";
 
-const EmployeeGridView = () => {
-  const [pageNumber, setPageNumber] = useState(0);
-  const [pageSize, setPageSize] = useState(12);
-  const { data: employeeData, isLoading } = useGetEmployeeData(
-    pageNumber,
-    pageSize
-  );
-
-  const handlePageChange = (event, newPage) => {
-    setPageNumber(newPage - 1);
-  };
-
-  const handlePageSizeChange = (event, newValue) => {
-    const newPageSize = parseInt(newValue, 10) || 0;
-    setPageSize(newPageSize);
-    setPageNumber(0);
-  };
-
-  if (isLoading)
-    return (
-      <>
-        <Skeleton />
-        <Skeleton animation="wave" />
-        <Skeleton animation={false} />
-      </>
-    );
-   
+const EmployeeGridView = ({employeeData}) => {   
   return (
     <>
       <Grid
@@ -52,7 +25,7 @@ const EmployeeGridView = () => {
           gap: "1rem",
         }}
       >
-        {employeeData?.employees?.map((employee, index) => (
+        {employeeData?.map((employee, index) => (
           <EmployeeCard
             key={index}
             IsActive={employee?.isActive || ""}
@@ -62,7 +35,7 @@ const EmployeeGridView = () => {
             ELastName={employee?.lastName || ""}
             OfficeEmail={employee?.officeEmail || ""}
             MobileNumber={employee?.mobileNumber || ""}
-            PositionName={employee?.position?.positionName || ""}
+            PositionName={employee?.positionName || ""}
             PositionLevel={employee?.position?.positionLevel || ""}
             EGender={employee?.gender || ""}
             ProgressBarRes={employee?.progressBarRes || ""}
@@ -70,32 +43,6 @@ const EmployeeGridView = () => {
           />
         ))}
       </Grid>
-
-      <Box mt={4} display="flex" justifyContent={"end"}>
-        <Pagination
-          count={employeeData?.totalPages}
-          page={pageNumber + 1}
-          onChange={handlePageChange}
-          showFirstButton
-          showLastButton
-          boundaryCount={3}
-          size="large"
-          color="primary"
-        />
-        <Autocomplete
-          value={pageSize}
-          onChange={handlePageSizeChange}
-          options={[20, 30, 40, 50, 100]}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              label="page"
-              variant="outlined"
-              size="small"
-            />
-          )}
-        />
-      </Box>
     </>
   );
 };

@@ -135,3 +135,21 @@ export const useChangeEmail = ({ onSuccess }) => {
     }
   );
 };
+
+/*________________________POST FOR RESEND EMAIL_____________________________________*/
+export const useResendEmail = ({ onSuccess }) => {
+  const queryClient = useQueryClient();
+  return useMutation(
+    ['addChangeEmail'],
+    (formData) => addChangeEmail(formData),
+    {
+      onSuccess: (data, variables, context) => {
+        toast.success('Successfully resend email. Check email to login');
+        onSuccess && onSuccess(data, variables, context);
+      },
+      onError: (err, _variables, _context) => {
+        toast.error(`error: ${err.message}`);
+      },
+    }
+  );
+};
