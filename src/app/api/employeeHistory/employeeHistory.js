@@ -15,8 +15,6 @@ export const addEmployeeHistory = async (formData, id) => {
   return data;
 };
 
-
-
 {
   /*________________________GETBYID_____________________________________*/
 }
@@ -62,16 +60,6 @@ export const editEmployeeHistory = async (formData, id) => {
   );
   return data;
 };
-
-
-
-
-
-
-
-
-
-
 
 {
   /*________________________POST-FOR-VIEW-DETAIL-ADD-PORTION_____________________________________*/

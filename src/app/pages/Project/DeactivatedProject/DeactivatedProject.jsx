@@ -17,12 +17,12 @@ const DeactivatedProject = () => {
   const [activateProject, setActivateProject] = useState({});
   const handleCloseActivateModal = () => setOpenActivateModal(false);
 
-  const getLeaderName = (rowData) => {
-    const projectId = rowData.projectLeaderId;
-    const employee = employeeData?.find((emp) => emp.id === projectId);
-    const name = `${employee?.firstName} ${employee?.middleName} ${employee?.lastName}`;
-    return name;
-  };
+  // const getLeaderName = (rowData) => {
+  //   const projectId = rowData.projectLeaderId;
+  //   const employee = employeeData?.find((emp) => emp.id === projectId);
+  //   const name = `${employee?.firstName} ${employee?.middleName} ${employee?.lastName}`;
+  //   return name;
+  // };
 
   const handleActivateProject = (rowData) => {
     setActivateProject(rowData);
@@ -42,12 +42,12 @@ const DeactivatedProject = () => {
       field: 'projectName',
       emptyValue: '-',
     },
-    {
-      title: 'Project Leader Name',
-      render: (rowData) => {
-        return <p>{getLeaderName(rowData)}</p>;
-      },
-    },
+    // {
+    //   title: 'Project Leader Name',
+    //   render: (rowData) => {
+    //     return <p>{getLeaderName(rowData)}</p>;
+    //   },
+    // },
   ];
 
   const actions = [
@@ -71,7 +71,7 @@ const DeactivatedProject = () => {
         options={{
           padding: 'dense',
           margin: 50,
-          pageSize: 5,
+          pageSize: 20,
           emptyRowsWhenPaging: false,
           actionsColumnIndex: -1,
           headerStyle: {
