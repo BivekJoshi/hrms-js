@@ -2,8 +2,8 @@ import React from "react";
 import { Grid, TextField, Button, Autocomplete } from "@mui/material";
 import useAddEmployeeHistoryForm from '../../../hooks/employeehistory/useAddEmployeeHistoryForm';
 
-const AddEmployeeHistoryFields = ( {onClose, isLoading }) => {
-  const { formik } = useAddEmployeeHistoryForm();
+const AddEmployeeHistoryFields = ({onClose, isLoading}) => {
+  const { formik } = useAddEmployeeHistoryForm(onClose);
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
@@ -21,11 +21,12 @@ const AddEmployeeHistoryFields = ( {onClose, isLoading }) => {
   return (
     !isLoading && (
       <Grid container spacing={3}>
-        <Grid item xs={12} sm={12}>
+        <Grid item xs={12} md={6} lg={6} xl={6} sm={12}>
           <TextField
             id="pastPosition"
             name="pastPosition"
-            label="Last Position"
+            label="Employee Position"
+            placeholder="Enter position"
             fullWidth
             value={formik.values.pastPosition}
             onChange={formik.handleChange}
@@ -41,7 +42,37 @@ const AddEmployeeHistoryFields = ( {onClose, isLoading }) => {
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
-        <Grid item xs={12} sm={12}>
+        <Grid item xs={12} md={6} lg={6} xl={6} sm={12}>
+          <TextField
+            id="employerName"
+            name="employerName"
+            label="Branch Name"
+            placeholder="Enter branch name"
+            fullWidth
+            value={formik.values.employerName}
+            onChange={formik.handleChange}
+            error={formik.touched.employerName && Boolean(formik.errors.employerName)}
+            helperText={formik.touched.employerName && formik.errors.employerName}
+            variant="outlined"
+            InputLabelProps={{ shrink: true }}
+          />
+        </Grid>
+        <Grid item xs={12} md={6} lg={6} xl={6} sm={12}>
+          <TextField
+            id="employerAddress"
+            name="employerAddress"
+            label="Branch Address"
+            placeholder="Enter branch address"
+            fullWidth
+            value={formik.values.employerAddress}
+            onChange={formik.handleChange}
+            error={formik.touched.employerAddress && Boolean(formik.errors.employerAddress)}
+            helperText={formik.touched.employerAddress && formik.errors.employerAddress}
+            variant="outlined"
+            InputLabelProps={{ shrink: true }}
+          />
+        </Grid>
+        <Grid item xs={12} md={6} lg={6} xl={6} sm={12}>
           <TextField
             id="fromDate"
             name="fromDate"
@@ -62,7 +93,7 @@ const AddEmployeeHistoryFields = ( {onClose, isLoading }) => {
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
-        <Grid item xs={12} sm={12}>
+        <Grid item xs={12} md={6} lg={6} xl={6} sm={12}>
           <TextField
             id="toDate"
             name="toDate"
@@ -83,11 +114,11 @@ const AddEmployeeHistoryFields = ( {onClose, isLoading }) => {
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
-        <Grid item xs={12} sm={12}>
+        <Grid item xs={12} md={6} lg={6} xl={6} sm={12}>
           <TextField
             id="description"
             name="description"
-            label="Description"
+            label="Work Description"
             placeholder="Enter work description"
             fullWidth
             value={formik.values.description}
@@ -98,7 +129,7 @@ const AddEmployeeHistoryFields = ( {onClose, isLoading }) => {
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
-        <Grid item xs={12} sm={12}>
+        <Grid item xs={12} md={6} lg={6} xl={6} sm={12}>
           <TextField
             id="remarks"
             name="remarks"
@@ -113,21 +144,7 @@ const AddEmployeeHistoryFields = ( {onClose, isLoading }) => {
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
-        <Grid item xs={12} sm={12}>
-          <TextField
-            id="employerAddress"
-            name="employerAddress"
-            label="employerAddress"
-            placeholder="Enter work employerAddress"
-            fullWidth
-            value={formik.values.employerAddress}
-            onChange={formik.handleChange}
-            error={formik.touched.employerAddress && Boolean(formik.errors.employerAddress)}
-            helperText={formik.touched.employerAddress && formik.errors.employerAddress}
-            variant="outlined"
-            InputLabelProps={{ shrink: true }}
-          />
-        </Grid>
+       
         <Grid
           container
           direction="row"

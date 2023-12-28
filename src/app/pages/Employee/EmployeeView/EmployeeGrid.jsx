@@ -20,16 +20,39 @@ const EmployeeGrid = ({ employeeData, isLoading }) => {
   const [phoneFilter, setPhoneFilter] = useState("");
   const { palette } = useContext(ThemeModeContext);
 
-  const filteredEmployees = employeeData?.employees?.filter(
-    (employee) =>
-      `${employee.firstName} ${employee.lastName}`
-        .toLowerCase()
-        .includes(nameFilter.toLowerCase()) &&
-      employee?.positionName
-        .toLowerCase()
-        .includes(positionFilter.toLowerCase()) &&
-      employee?.mobileNumber.toString().includes(phoneFilter)
-  );
+
+  // const filteredEmployees = employeeData?.employees?.filter(
+  //   (employee) =>
+  //     `${employee?.firstName}${employee?.middleName}${employee?.lastName}`
+  //       .toLowerCase()
+  //       .includes(nameFilter.toLowerCase()) &&
+  //     employee?.positionName
+  //       .toLowerCase()
+  //       .includes(positionFilter.toLowerCase()) &&
+  //     employee?.mobileNumber.toString().includes(phoneFilter)
+  // );
+  const filteredEmployees = employeeData?.employees?.filter((employee) => {
+    if (!employee || !employeeData) return false;
+
+    const fullName = `${employee?.firstName}${employee?.middleName}${employee?.lastName}`;
+    const copiedNameParts = nameFilter.trim().toLowerCase().split(/\s+/);
+
+    console.log('Copied Name Parts:', copiedNameParts);
+    console.log('Employee Full Name:', fullName.toLowerCase());
+
+    const isNameIncluded = copiedNameParts.every((part) =>
+      fullName.toLowerCase().includes(part)
+    );
+
+    const position = employee?.positionName.toLowerCase();
+    const phone = employee?.mobileNumber.toString();
+
+    return (
+      isNameIncluded &&
+      position.includes(positionFilter.trim().toLowerCase()) &&
+      phone.includes(phoneFilter.trim())
+    );
+  });
 
   if (isLoading) {
     return (
