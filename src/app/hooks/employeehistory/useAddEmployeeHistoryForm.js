@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 import { useAddEmpHistory } from "../employee/useEmployeeHistory";
 import { HistorySchema } from "./HistorySchema";
 
-const useAddEmployeeHistoryForm = () => {
+const useAddEmployeeHistoryForm = (onClose) => {
   const { mutate } = useAddEmpHistory({});
 
   const formik = useFormik({
@@ -27,7 +27,7 @@ const useAddEmployeeHistoryForm = () => {
     };
     mutate(values, {
       onSuccess: () => {
-        // onclose();
+        onClose();
         formik.handleReset();
       },
     });

@@ -1,10 +1,12 @@
-import * as Yup from "yup";
+import * as Yup from 'yup';
 
 const LeaveSchema = Yup.object().shape({
   // leaveTypeId:Yup.mixed().required("Please Select Leave Name"),
-  fromDate: Yup.string().required("Please Select Date"),
-  leaveTypeId: Yup.object().nullable().required("Please select leave type"),
-  employeeId:Yup.object().nullable().required("Please select employee name")
+  fromDate: Yup.string().required('Please Select Date'),
+  toDate: Yup.string().required('Please Select Date'),
+
+  leaveTypeId: Yup.object().nullable().required('Please select leave type'),
+  employeeId: Yup.object().nullable().required('Please select employee name'),
   // leaveStatus:Yup.string().required("Required")
 });
 
@@ -17,7 +19,7 @@ const EditLeaveSchema = Yup.object().shape({
   // })
   // .required('You need to either approve or reject this leave.'),
   leaveStatus: Yup.string().required(
-    "You need to either approve or reject this leave."
+    'You need to either approve or reject this leave.'
   ),
 });
 

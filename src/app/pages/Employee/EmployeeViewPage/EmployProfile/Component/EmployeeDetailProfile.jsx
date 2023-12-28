@@ -8,6 +8,7 @@ import PromotionHistory from "../../InfoTabs/PromotionHistory/PromotionHistory";
 import "../Style/Style.css";
 import DocumentInfo from "../../InfoTabs/DocumentInfoTab/DocumentInfo";
 import TrainingInfo from "../../InfoTabs/TrainingInfoTab/TrainingInfo";
+import EmployeeHistory from '../../InfoTabs/EmployeeHistoryTab/EmployeeHistory';
 
 const primaryColor = "#1c7ed6";
 
@@ -48,7 +49,7 @@ export const EmployeeDetailProfile = ({ data }) => {
                   }}
                 /> */}
                    <Tab
-                  label="Position History"
+                  label="Employee History"
                   value="3"
                   style={{
                     fontSize: "1rem",
@@ -86,7 +87,7 @@ export const EmployeeDetailProfile = ({ data }) => {
             <PromotionHistory data={data} />
           </TabPanel> */}
           <TabPanel value="3" style={{ padding: 10 }}>
-            <PromotionHistory data={data} />
+            <EmployeeHistory data={data} />
           </TabPanel>
           <TabPanel value="4" style={{ padding: 10 }}>
             <TrainingInfo data={data}/>

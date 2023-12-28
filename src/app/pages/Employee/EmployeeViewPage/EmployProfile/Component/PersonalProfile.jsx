@@ -17,12 +17,13 @@ import useAuth from '../../../../../../auth/hooks/component/login/useAuth';
 
 const primaryColor = '#1c7ed6';
 
-export const PersonalProfile = ({ data }) => {
+export const PersonalProfile = ({ data, empId }) => {
+  
   const { isEmployee } = useAuth();
   const { id } = useParams();
   const { data: loggedUserData } = useGetLoggedInUser();
   const { data: positionData } = useGetDesignationById(id);
-  const positionName = positionData && positionData?.positionLevel;
+  const positionName = data?.positionName;
   const [openEmailForm, setOpenEmailForm] = useState(false);
   const handleOpenEmailform = () => {
     setOpenEmailForm(true);
@@ -84,7 +85,7 @@ export const PersonalProfile = ({ data }) => {
             {data?.firstName + ' ' + data?.middleName + ' ' + data?.lastName}
           </Typography>
           <Chip
-            label={positionName}
+            label={data?.positionName}
             sx={{ bgcolor: primaryColor, color: 'white', width: ' 9rem' }}
           />
           <Typography
@@ -112,7 +113,7 @@ export const PersonalProfile = ({ data }) => {
           </Typography>
         </Box>
 
-        <BasicInfo data={data} mode={mode} positionName={positionName} />
+        <BasicInfo data={data} mode={mode} positionName={positionName} empId={empId} />
       </Grid>
 
       {openEmailForm && (
