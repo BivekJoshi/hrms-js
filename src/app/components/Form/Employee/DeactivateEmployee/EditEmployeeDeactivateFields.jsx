@@ -5,6 +5,7 @@ import {
   MenuItem,
   Typography,
   Autocomplete,
+  Avatar,
 } from "@mui/material";
 import React, { useContext } from "react";
 import {
@@ -18,7 +19,7 @@ import {
   useGetDeactivatedUser,
 } from "../../../../hooks/employee/DeactivateEmploye/useEmployee";
 import { termintionOptions, activationOption } from "./TerminationOption";
-import ThemeModeContext from '../../../../../theme/ThemeModeContext';
+import ThemeModeContext from "../../../../../theme/ThemeModeContext";
 
 export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
   const { palette } = useContext(ThemeModeContext);
@@ -62,10 +63,20 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
           />
         </Grid>
         <Grid item xs={12} sm={12} md={12}>
-          <Typography variant="h6" component="h6">
-            Do you really want to Terminate employee
-            <b> {getEmployeeName(formik.values.employeeId)}</b>
-          </Typography>
+          <div style={{display:"flex"}}>
+          <div>
+            <Avatar
+              alt={getEmployeeName(formik.values.employeeId)}
+              src="/static/images/avatar/1.jpg"
+            />
+          </div>
+          <div>
+            <Typography>{getEmployeeName(formik.values.employeeId)}</Typography>
+            <Typography sx={{fontSize:"14px",fontWeight:500}}>Do you really want to Terminate employee?</Typography>
+            <Typography>This change will be official.</Typography>
+          </div>
+          </div>
+
         </Grid>
 
         <Grid item xs={12} sm={12} md={12}>
@@ -88,6 +99,7 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
             }
             variant="outlined"
             InputLabelProps={{ shrink: true }}
+            size="small"
           />
         </Grid>
         <Grid item xs={12} sm={12}>
@@ -105,7 +117,13 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
             renderOption={(props, option) => (
               <MenuItem
                 {...props}
-                style={{ backgroundColor: palette?.mode === 'light' ? palette.background.paper : palette.background.default }}>
+                style={{
+                  backgroundColor:
+                    palette?.mode === "light"
+                      ? palette.background.paper
+                      : palette.background.default,
+                }}
+              >
                 {option.label}
               </MenuItem>
             )}
@@ -124,36 +142,10 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
                   formik.errors.terminationType
                 }
                 variant="outlined"
-                InputLabelProps={{ shrink: true }}
+                size="small"
               />
             )}
           />
-
-          {/* <TextField
-            id='terminationType'
-            select
-            name='terminationType'
-            label='Termanation Type'
-            placeholder='Enter Employee staus'
-            fullWidth
-            value={formik.values.terminationType}
-            onChange={formik.handleChange}
-            error={
-              formik.touched.terminationType &&
-              Boolean(formik.errors.terminationType)
-            }
-            helperText={
-              formik.touched.terminationType && formik.errors.terminationType
-            }
-            variant='outlined'
-            InputLabelProps={{ shrink: true }}
-          >
-            {termintionOptions?.map((option) => (
-              <MenuItem key={option?.id} value={option?.value}>
-                {option?.label}
-              </MenuItem>
-            ))}
-          </TextField> */}
         </Grid>
 
         <Grid
@@ -169,7 +161,7 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
           <Button
             variant="contained"
             onClick={handleFormSubmit}
-            sx={{ mt: 3, ml: 1, color: '#fff' }}
+            sx={{ mt: 3, ml: 1, color: "#fff" }}
           >
             Yes Proceed
           </Button>
@@ -271,7 +263,7 @@ export const EditEmployeeActivateFields = ({ onClose, isLoading, data }) => {
           />
         </Grid>
         <Grid item xs={12} sm={12}>
-        <Autocomplete
+          <Autocomplete
             id="terminationType"
             name="terminationType"
             options={activationOption || []}
@@ -285,7 +277,13 @@ export const EditEmployeeActivateFields = ({ onClose, isLoading, data }) => {
             renderOption={(props, option) => (
               <MenuItem
                 {...props}
-                style={{ backgroundColor: palette?.mode === 'light' ? palette.background.paper : palette.background.default }}>
+                style={{
+                  backgroundColor:
+                    palette?.mode === "light"
+                      ? palette.background.paper
+                      : palette.background.default,
+                }}
+              >
                 {option.label}
               </MenuItem>
             )}
@@ -345,7 +343,7 @@ export const EditEmployeeActivateFields = ({ onClose, isLoading, data }) => {
           <Button
             variant="contained"
             onClick={handleFormSubmit}
-            sx={{ mt: 3, ml: 1, color: '#fff' }}
+            sx={{ mt: 3, ml: 1, color: "#fff" }}
           >
             Yes Proceed
           </Button>

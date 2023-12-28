@@ -14,6 +14,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import useAuth from '../auth/hooks/component/login/useAuth';
 import DeactiveUser from '../app/pages/Auth/UserControl/Users/DeactiveUser';
 import EventAttendance from '../app/pages/Event/EventAttendance/EventAttendance';
+import EmploymentType from '../app/pages/EmploymentType/EmploymentType';
 
 const ProfileDetail = Loadable(
   lazy(() => import('../app/pages/Auth/Profile/ProfileDetail'))
@@ -186,6 +187,12 @@ const routes = [
     name: 'Company',
     id: nanoid(),
     component: <Company component='company' />,
+  },
+  {
+    path: 'emplyment-type',
+    name: 'Employment Type',
+    id: nanoid(),
+    component: <EmploymentType component='employmenttype'/>,
   },
   {
     path: 'department',
