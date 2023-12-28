@@ -38,7 +38,6 @@ const Notification = ({ data }) => {
   );
   const filterEventcount = filteredEvents?.length;
 
-  console.log(filterEventcount, 'events');
 
   const displayCount = eventCount > 0 ? eventCount : null;
 

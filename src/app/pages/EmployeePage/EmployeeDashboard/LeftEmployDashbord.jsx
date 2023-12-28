@@ -153,11 +153,13 @@ export const LeftEmployDashbord = ({}) => {
             >
               <img src={Event} alt="sad.png" />
 
-              <Typography variant="h6">No any Upcoming Events</Typography>
+              <Typography variant="h6" color="black">
+                No any Upcoming Events
+              </Typography>
             </Grid>
           )}
         </Grid>
-        {upcomingHolidays?.length >=  3 && (
+        {upcomingHolidays?.length >= 3 && (
           <Grid textAlign="center">
             <ButtonComponent
               OnClick={() => {
@@ -238,7 +240,9 @@ export const LeftEmployDashbord = ({}) => {
             >
               <img src={Holiday} alt="EDholiday.png" />
 
-              <Typography variant="h6">No any Upcoming Events</Typography>
+              <Typography variant="h6" color="black">
+                No any Upcoming Holidays
+              </Typography>
             </Grid>
           )}
         </Grid>

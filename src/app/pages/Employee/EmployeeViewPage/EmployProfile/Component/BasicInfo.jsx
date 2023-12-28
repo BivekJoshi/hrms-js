@@ -8,7 +8,7 @@ import { useGetBankByEmployeeId } from '../../../../../hooks/employee/useBank';
 import { useGetFammilyById } from '../../../../../hooks/employee/useFamily';
 import useAuth from '../../../../../../auth/hooks/component/login/useAuth';
 
-const BasicInfo = ({ data, mode }) => {
+const BasicInfo = ({ data, mode,positionName }) => {
   const { id } = useParams();
   const {
     isSuperAdmin,
@@ -29,7 +29,7 @@ const BasicInfo = ({ data, mode }) => {
     "Date of Birth": data?.dateOfBirth || "",
     "Marital Status": data?.maritalStatus || "",
     "Date of Join": data?.dateOfJoin || "",
-    Position: data?.position?.positionName || "",
+    Position: positionName || "",
   };
   const FAMILYMEMBERS = {
     "Name": fData?.name || "",

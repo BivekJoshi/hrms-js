@@ -13,7 +13,6 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
       deleteFamilyMutation.mutate(familyMember.id);
     }
   };
-console.log(formik.touched?.family && formik.touched?.family[0]?.relation )
   return (
     !isLoading && (
       <div>
@@ -38,6 +37,8 @@ console.log(formik.touched?.family && formik.touched?.family[0]?.relation )
                           // required
                           value={familyMember.name}
                           onChange={handleChange}
+                          onBlur={formik.handleBlur}
+                          useAddFamily
                           error={Boolean(
                             touched.family?.[index]?.name &&
                               errors.family?.[index]?.name

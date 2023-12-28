@@ -10,7 +10,6 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
   };
 
   const submitButtonText = data ? 'Update Branch' : 'Add Branch';
-  console.log(data, "edhjfk")
   return (
     !isLoading && (
       <Grid container spacing={3}>
