@@ -40,7 +40,6 @@ const EmployeeHistory = () => {
   //     positionId: positionName,
   //   };
   // });
-
   const columns = [
     {
       title: 'SN',
@@ -49,6 +48,18 @@ const EmployeeHistory = () => {
       maxWidth: '50px',
       sortable: false,
       sorting: false,
+    },
+    {
+      title: 'Branch Name',
+      field: 'employerName',
+      emptyValue: '-',
+      width: 300,
+    },
+    {
+      title: 'Branch Address',
+      field: 'employerAddress',
+      emptyValue: '-',
+      width: 300,
     },
     {
       title: 'Position Hold',

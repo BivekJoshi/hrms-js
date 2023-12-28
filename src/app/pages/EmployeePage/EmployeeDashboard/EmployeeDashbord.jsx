@@ -64,14 +64,14 @@ const EmployeeDashbord = ({}) => {
       borderColor: '#FF8A7B',
     },
     {
-      title: 'Task Pending',
+      title: 'Pending Task',
       // numberOfTask: taskPendingData ? taskPendingData.length : 0,
       taskIcon: Pending,
       linkTo: '/employee/project',
       borderColor: '#F8B114',
     },
     {
-      title: 'Task Complete',
+      title: 'Completed Task',
       // numberOfTask: taskCompleteData ? taskCompleteData.length : 0,
       taskIcon: Complet,
       linkTo: '/employee/project',

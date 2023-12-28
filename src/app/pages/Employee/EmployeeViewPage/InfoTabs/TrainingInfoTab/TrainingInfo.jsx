@@ -22,7 +22,6 @@ const TrainingInfo = ({ data }) => {
   const { id } = useParams();
   const { data: trainingData } = useGetTrainingByEmpId(id);
 
-
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
@@ -114,13 +113,15 @@ const TrainingInfo = ({ data }) => {
           paddingBottom: "10px",
         }}
       >
-        <Button
-          variant="contained"
-          sx={{ mt: 3, ml: 1 }}
-          onClick={handleAddOpenModal}
-        >
-          + Add Training
-        </Button>
+        {!isEmployee && (
+          <Button
+            variant="contained"
+            sx={{ mt: 3, ml: 1 }}
+            onClick={handleAddOpenModal}
+          >
+            + Add Training
+          </Button>
+        )}
       </Box>
 
       <CustomTable
