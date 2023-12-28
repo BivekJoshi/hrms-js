@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useGetDocumentById } from '../../../../../hooks/employee/useDocument';
 import { DOC_URL } from '../../../../../../auth/axiosInterceptor';
@@ -12,7 +12,8 @@ import useAuth from '../../../../../../auth/hooks/component/login/useAuth';
 import { useGetLoggedInUserInfo } from '../../../../../hooks/employee/useEmployee';
 import { Button, Fade, Modal } from '@mui/material';
 import ThemeModeContext from '../../../../../../theme/ThemeModeContext';
-
+import ReactToPrint from 'react-to-print';
+import './printDocs.css';
 const documentName = [
   {
     id: 1,
@@ -78,7 +79,7 @@ const DocumentInfo = () => {
   const [value, setValue] = React.useState('EMPLOYEE_PHOTO');
   const [previewImage, setPreviewImage] = useState(null);
   const [isPreviewOpen, setPreviewOpen] = useState(false);
-
+  const componentRef = useRef();
   const openPreview = (imageUrl) => {
     setPreviewImage(imageUrl);
     setPreviewOpen(true);
@@ -136,6 +137,9 @@ const DocumentInfo = () => {
               sx={{
                 padding: '0px',
                 display: 'flex',
+                alignItems: 'center', // Center content vertically
+                justifyContent: 'center', // Center content horizontally
+                height: '100%',
               }}
             >
               {groupedDocuments[documentType].map((document) => (
@@ -161,19 +165,30 @@ const DocumentInfo = () => {
                   ) : (
                     <>
                       <img
+                        ref={componentRef}
                         key={document.id}
                         src={`${url}${document?.path}`}
                         alt='Document'
                         width='400px'
                         height='350px'
+                        className='to-print'
                         onClick={() => openPreview(`${url}${document?.path}`)}
                       />
-                      <Button
-                        variant='contained'
-                        onClick={() => openPreview(`${url}${document?.path}`)}
-                      >
-                        Preview
-                      </Button>
+                      <div style={{ display: 'flex', gap: '16px' }}>
+                        <Button
+                          variant='contained'
+                          onClick={() => openPreview(`${url}${document?.path}`)}
+                        >
+                          Preview
+                        </Button>
+                        <ReactToPrint
+                          trigger={() => (
+                            <Button variant='contained'>Print Document</Button>
+                          )}
+                          content={() => componentRef.current}
+                          documentTitle='hrms-docuemt.pdf'
+                        />
+                      </div>
                       <Modal
                         open={isPreviewOpen}
                         onClose={closePreview}
