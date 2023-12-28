@@ -69,6 +69,8 @@ axiosInstance.interceptors.response.use(
       ) {
         toast.error('Cannot delete company. Please contact admin.');
       } else {
+        toast.error(errorMessage);
+
         return Promise.reject(error.response.data);
       }
     } else {

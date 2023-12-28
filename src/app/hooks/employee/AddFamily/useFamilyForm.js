@@ -1,8 +1,8 @@
-import React from "react";
-import { useFormik } from "formik";
-import FamilySchema from "./FamilySchema";
-import { useAddFamily, useEditFamily, useGetFammilyById } from "../useFamily";
-import { useParams } from "react-router-dom";
+import React from 'react';
+import { useFormik } from 'formik';
+import FamilySchema from './FamilySchema';
+import { useAddFamily, useEditFamily, useGetFammilyById } from '../useFamily';
+import { useParams } from 'react-router-dom';
 
 const useFamilyForm = () => {
   const { id } = useParams();
@@ -13,22 +13,22 @@ const useFamilyForm = () => {
   const familyDetails =
     !isLoading &&
     data?.map((familyMember) => ({
-      id: familyMember.id || "",
-      name: familyMember.name || "",
-      relation: familyMember.relation || "",
-      mobileNumber: familyMember.mobileNumber || "",
+      id: familyMember.id || '',
+      name: familyMember.name || '',
+      relation: familyMember.relation || '',
+      mobileNumber: familyMember.mobileNumber || '',
     }));
 
   const formik = useFormik({
     initialValues: {
       family:
-        familyDetails && familyDetails?.length > 0
+        familyDetails?.length > 0
           ? familyDetails
           : [
               {
-                name: "",
-                relation: "",
-                mobileNumber: "",
+                name: '',
+                relation: '',
+                mobileNumber: '',
               },
             ],
     },
