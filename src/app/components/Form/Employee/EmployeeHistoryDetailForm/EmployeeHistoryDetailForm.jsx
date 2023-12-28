@@ -34,7 +34,7 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                           label='Employer Name'
                           placeholder='Enter Employer Name'
                           fullWidth
-                          // required
+                          required
                           onBlur={handleBlur}
                           value={employeeHistory.employerName}
                           onChange={handleChange}
@@ -58,7 +58,7 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                           label='Employer Address'
                           placeholder='Enter Employer Address'
                           fullWidth
-                          // required
+                          required
                           onBlur={handleBlur}
                           value={employeeHistory.employerAddress}
                           onChange={handleChange}
@@ -81,7 +81,7 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                           label='Past Position'
                           placeholder='Enter Past Position'
                           fullWidth
-                          // required
+                          required
                           onBlur={handleBlur}
                           value={employeeHistory.pastPosition}
                           onChange={handleChange}
@@ -104,7 +104,8 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                           label='Date From'
                           placeholder='Select Date Form'
                           fullWidth
-                          // required
+                          type='date'
+                          required
                           onBlur={handleBlur}
                           value={employeeHistory.fromDate}
                           onChange={handleChange}
@@ -127,8 +128,9 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                           label='Date To'
                           placeholder='Enter Date To'
                           fullWidth
+                          type='date'
                           onBlur={handleBlur}
-                          // required
+                          required
                           value={employeeHistory.toDate}
                           onChange={handleChange}
                           error={Boolean(
@@ -151,7 +153,7 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                           placeholder='Enter Description'
                           fullWidth
                           onBlur={handleBlur}
-                          // required
+                          required
                           value={employeeHistory.description}
                           onChange={handleChange}
                           error={Boolean(
@@ -174,7 +176,7 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                           placeholder='Enter Remarks'
                           fullWidth
                           onBlur={handleBlur}
-                          // required
+                          required
                           value={employeeHistory.remarks}
                           onChange={handleChange}
                           error={Boolean(
