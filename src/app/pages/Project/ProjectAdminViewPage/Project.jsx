@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Typography from "@mui/material/Typography";
 import {
   Autocomplete,
@@ -26,11 +26,15 @@ import PermissionHoc from "../../../hoc/permissionHoc";
 import useAuth from "../../../../auth/hooks/component/login/useAuth";
 import DeactivatedProject from "../DeactivatedProject/DeactivatedProject";
 import { ButtonComponent } from "../../../components/Button/ButtonComponent";
+import ThemeModeContext from '../../../../theme/ThemeModeContext';
 
 const Project = ({ permissions }) => {
   const [pageNumber, setPageNumber] = useState(0);
   const [pageSize, setPageSize] = useState(6);
+  const [nameFilter, setNameFilter] = useState("");
+  const [leaderNameFilter, setLeaderNameFilter] = useState("");
   const { isEmployee } = useAuth();
+  const { palette } = useContext(ThemeModeContext);
 
   const [openModal, setOpenModal] = useState(false);
   const { data: projectDetail, isLoading } = useGetProjectPageWise(
@@ -60,6 +64,7 @@ const Project = ({ permissions }) => {
 
   const handlePageChange = (event, newPage) => {
     setPageNumber(newPage - 1);
+    window.scroll(0,0);
   };
 
   const handlePageSizeChange = (event, newValue) => {
@@ -67,9 +72,58 @@ const Project = ({ permissions }) => {
     setPageSize(newPageSize);
     setPageNumber(0);
   };
+  const filteredProjects = projectDetail?.projectResList?.filter(
+    (project) =>
+      `${project.projectName}`
+        .toLowerCase()
+        .includes(nameFilter.toLowerCase()) && 
+        project?.projectLeadName
+        .toLowerCase()
+        .includes(leaderNameFilter.toLowerCase())
+  );
 
   return (
     <>
+     <Grid
+        container
+        sx={{
+          display: "flex",
+          justifyContent: 'end',
+          padding: "16px",
+          borderRadius: "6px",
+          marginBottom: "16px",
+          backgroundColor: palette?.background?.default,
+        }}
+      >
+        <Typography variant="h7" mb={1} ontWeight={500}>
+          Filter By:
+        </Typography>
+        <Grid container spacing={4} sx={{display: 'flex', justifyContent: 'end'}}>
+          <Grid item xs={4}>
+            {" "}
+            <TextField
+              label="Filter by Project Name"
+              value={nameFilter}
+              onChange={(e) => setNameFilter(e.target.value)}
+              fullWidth
+              size="small"
+            />
+          </Grid>
+          <Grid item xs={4}>
+            {" "}
+            <TextField
+              label="Filter by Project Leader Name"
+              value={leaderNameFilter}
+              onChange={(e) => setLeaderNameFilter(e.target.value)}
+              fullWidth
+              size="small"
+            />
+          </Grid>
+        </Grid>
+      </Grid>
+
+
+
       <Box>
         <Typography
           className="project-button"
@@ -135,7 +189,7 @@ const Project = ({ permissions }) => {
           gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))",
         }}
       >
-        {projectDetail?.projectResList?.map((item, index) => (
+        {filteredProjects?.map((item, index) => (
           <ProjectCard
             item={item}
             Id={item?.projectid}

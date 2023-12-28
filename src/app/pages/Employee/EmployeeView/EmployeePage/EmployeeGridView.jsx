@@ -10,7 +10,6 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import EmployeeCard from "../../../../components/cards/Employee/EmployeeCard";
-import { useGetEmployeeData } from "../../../../hooks/employee/useEmployee";
 
 const EmployeeGridView = ({employeeData}) => {   
   return (

@@ -38,6 +38,7 @@ const Employee = () => {
   );
   const handlePageChange = (event, newPage) => {
     setPageNumber(newPage - 1);
+    window.scroll(0,0);
   };
 
   const handlePageSizeChange = (event, newValue) => {

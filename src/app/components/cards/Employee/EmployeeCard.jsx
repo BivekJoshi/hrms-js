@@ -29,7 +29,6 @@ const EmployeeCard = ({
   ProgressBarRes,
   employeePhoto,
 }) => {
-  console.log(EGender)
   const { isEmployee } = useAuth();
   const [open, setOpen] = useState(false);
   const [openEmailForm, setOpenEmailForm] = useState(false);
