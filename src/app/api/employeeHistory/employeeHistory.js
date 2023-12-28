@@ -3,7 +3,7 @@ import { axiosInstance } from '../../../auth/axiosInterceptor';
 {
   /*________________________POST_____________________________________*/
 }
-export const addEmployeeHistory = async (formData, id) => {
+export const addEmployeeHistory = async (formData, id) => {  
   const newHis = formData?.history;
   const dataToPost = newHis?.filter(
     (item) => item.id === undefined || item.id === ''

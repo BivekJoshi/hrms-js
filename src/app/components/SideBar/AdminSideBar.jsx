@@ -395,6 +395,7 @@ export default function AdminSidebar() {
       ? drawerMenusForAdmin
       : userRole === 'ROLE_MANAGER' ||
         userRole === 'ROLE_HR' ||
+        userRole === 'ROLE_HR_ADMIN' ||
         userRole === 'ROLE_HR_CLERK'
       ? filteredDrawerMenus
       : drawerMenusForEmployee;
