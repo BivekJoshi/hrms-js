@@ -112,7 +112,12 @@ const EmploymentType = () => {
           title={"Edit Employment Type"}
           open={openEditModal}
           onClose={handleCloseEditModal}
-          formComponent={<EmploymentTypeFields onClose={handleCloseAddModal} data={editedType}/>}
+          formComponent={
+            <EmploymentTypeFields
+              onClose={handleCloseEditModal}
+              data={editedType}
+            />
+          }
         />
       )}
       {openDeleteModal && (

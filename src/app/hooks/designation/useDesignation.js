@@ -63,9 +63,9 @@ export const useDeleteDesignation = ({ onSuccess }) => {
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries("getDesignation");
       },
-      onError: (err, _variables, _context) => {
-        toast.error(`Error: ${err.message}`);
-      },
+      // onError: (err, _variables, _context) => {
+      //   toast.error(`Error: ${err.message}`);
+      // },
     }
   );
 };

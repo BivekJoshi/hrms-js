@@ -174,6 +174,118 @@ const Leave = ({ permissions }) => {
         );
       },
     },
+  ].filter(Boolean);
+
+  const columnsApprovedRejected=[
+    {
+      title: "SN",
+      field: "id",
+      sortable: false,
+      width: '10px',
+      sorting: false,
+      render: (rowData) => rowData.tableData.id + 1,
+    },
+    {
+      title: "Employee Name",
+      field: "employeeName",
+      width: '60px',
+      sorting: false,
+    },
+    {
+      title: "Leave Type",
+      field: "leaveType",
+      width: '60px',
+      sorting: false,
+    },
+    {
+      title: "From",
+      field: "fromDate",
+      width: '60px',
+      emptyValue: "-",
+      sorting: false,
+    },
+    {
+      title: "To",
+      field: "toDate",
+      width: '60px',
+      emptyValue: "-",
+      sorting: false,
+    },
+    {
+      title: "Status",
+      field: "leaveStatus",
+      emptyValue: "-",
+      cellStyle: {
+        whiteSpace: "nowrap",
+      },
+      render: (rowData) => {
+        const status = rowData.leaveStatus;
+        let chipColor = "";
+
+        if (status === "APPROVED") {
+          chipColor = "green";
+        } else if (status === "REJECTED") {
+          chipColor = "red";
+        } else if (status === "PENDING") {
+          chipColor = "orange";
+        }
+
+        return (
+          <Chip
+            label={status.charAt(0).toUpperCase() + status.slice(1)}
+            sx={{
+              backgroundColor: chipColor,
+              color: "white",
+              width: "6rem",
+            }}
+          />
+        );
+      },
+      sorting: false,
+    },
+    {
+      title: "Leave Reason",
+      field: "leaveReason",
+      width: "15%",
+      emptyValue: "-",
+      render: (rowData) => {
+        return (
+          <div style={{whiteSpace: 'wrap'}}>
+            {rowData?.leaveReason}
+          </div>
+        );
+      },
+    },
+    {
+      title: "Remark",
+      field: "leaveRemarks",
+      width: "15%",
+      emptyValue: "-",
+      render: (rowData) => {
+        return (
+          <div style={{whiteSpace: 'wrap'}}>
+            {rowData?.leaveRemarks}
+          </div>
+          // <Tooltip title={rowData?.leaveRemarks} placement="top-start" arrow>
+          //   <Chip
+          //     style={{
+          //       cursor: "pointer",
+          //       width: "240px",
+          //       display: "block",
+          //       background: mode === "light" ? "white" : "#434343",
+          //     }}
+          //     label={
+          //       <Typography
+          //         style={{ overflow: "hidden", textOverflow: "ellipsis" }}
+          //       >
+          //         {rowData?.leaveRemarks}
+          //       </Typography>
+          //     }
+          //   />
+          // </Tooltip>
+        );
+      },
+    },
 
     {
       title: "Approved By",
@@ -182,7 +294,6 @@ const Leave = ({ permissions }) => {
       field: "approvedBy",
     },
   ].filter(Boolean);
-
   const actions = [
     {
       icon: () => <ModeEditOutlineIcon />,
@@ -230,7 +341,7 @@ const Leave = ({ permissions }) => {
 
         {approvedRejectedLeaves && approvedRejectedLeaves.length > 0 && (
           <CustomTable
-            columns={columns}
+            columns={columnsApprovedRejected}
             data={approvedRejectedLeaves}
             title="Approved/Rejected Leave Data"
             isLoading={loading}
