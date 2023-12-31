@@ -56,9 +56,9 @@ export const useDeleteCompany = ({ onSuccess }) => {
       onSuccess && onSuccess(data, variables, context);
       queryClient.invalidateQueries('getCompany');
     },
-    onError: (err, _variables, _context) => {
-      toast.error(`Error: ${err.message}`);
-    },
+    // onError: (err, _variables, _context) => {
+    //   toast.error(`Error: ${err.message}`);
+    // },
   });
 };
 

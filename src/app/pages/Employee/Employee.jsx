@@ -204,7 +204,8 @@ const Employee = () => {
         </div>
       </Modal>
 
-      <Box mt={4} display="flex" justifyContent={"end"}>
+      <Box mt={4} display="flex" justifyContent={"space-around"}>
+        <div></div>
         <Pagination
           count={employeeData?.totalPages}
           page={pageNumber + 1}

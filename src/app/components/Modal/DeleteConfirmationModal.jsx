@@ -22,9 +22,9 @@ const DeleteConfirmationModal = ({
   return (
     <Dialog open={open} onClose={handleCloseModal}>
       <Box sx={{ bgcolor: mode === 'light' ? '' : '#413e3e' }}>
-        <DialogTitle>Confirm Deactivate</DialogTitle>
+        <DialogTitle>Confirm Delete</DialogTitle>
         <DialogContent>
-          Are you sure you want to deactivate this {message}?
+          Are you sure you want to delete this {message}?
         </DialogContent>
         <DialogActions>
           <Button

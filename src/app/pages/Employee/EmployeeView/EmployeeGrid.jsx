@@ -34,19 +34,19 @@ const EmployeeGrid = ({ employeeData, isLoading }) => {
     if (!employee || !employeeData) return false;
 
     const fullName = `${employee?.firstName}${employee?.middleName}${employee?.lastName}`;
-    const copiedNameParts = nameFilter.trim().toLowerCase().split(/\s+/);
+    const copiedNameParts = nameFilter?.trim()?.toLowerCase()?.split(/\s+/);
 
     const isNameIncluded = copiedNameParts.every((part) =>
-      fullName.toLowerCase().includes(part)
+      fullName?.toLowerCase()?.includes(part)
     );
 
-    const position = employee?.positionName.toLowerCase();
-    const phone = employee?.mobileNumber.toString();
+    const position = employee?.positionName?.toLowerCase();
+    const phone = employee?.mobileNumber?.toString();
 
     return (
       isNameIncluded &&
-      position.includes(positionFilter.trim().toLowerCase()) &&
-      phone.includes(phoneFilter.trim())
+      position?.includes(positionFilter.trim()?.toLowerCase()) &&
+      phone?.includes(phoneFilter?.trim())
     );
   });
 

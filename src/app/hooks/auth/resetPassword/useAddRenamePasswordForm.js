@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import { useAddRenamePassword } from "../usePassword";
+import { NewPasswordSchema } from "./Validation/ValidateSchema";
 
 const useAddRenamePasswordForm = ({ id }) => {
   const [loading, setLoading] = useState(false);
@@ -15,11 +16,13 @@ const useAddRenamePasswordForm = ({ id }) => {
     initialValues: {
       password: "",
     },
+    validationSchema: NewPasswordSchema,
     onSubmit: (values) => {
       setLoading(true);
       handleRequest(values);
     },
   });
+
 
   const handleRequest = (values) => {
     values = {

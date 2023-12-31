@@ -81,6 +81,7 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
                           label='Mobile Number'
                           placeholder='Enter Mobile Number'
                           fullWidth
+                          // type="number"
                           // required
                           value={familyMember.mobileNumber}
                           onChange={handleChange}
