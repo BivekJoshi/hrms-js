@@ -139,6 +139,7 @@ const Users = ({ permissions }) => {
           <AddUserControlModal
             title={'Add User'}
             open={openAddModal}
+            userControlData={userControlData}
             handleCloseModal={handleCloseAddModal}
           />
         )}

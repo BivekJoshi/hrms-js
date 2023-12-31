@@ -49,7 +49,6 @@ const EmployeeProfile = () => {
               >
                 {!showPersonalProfile && (
                   <ButtonComponent buttonName={"Show Profile"} />
-                  // Show Profile <Person2Icon sx={{ fontSize: "2rem" }} />
                 )}
               </Typography>
               {showPersonalProfile && (
