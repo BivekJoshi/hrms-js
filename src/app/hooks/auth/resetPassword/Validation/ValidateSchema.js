@@ -13,13 +13,13 @@ const NewPasswordSchema = Yup.object().shape({
       /^(?=.*[@#$%^&+=])/,
       "Password must contain at least one special character (@, #, $, %, ^, &, +, =,!)."
     )
-    .test(
-        "passwords-match",
-        "New password must not be the same as old password.",
-        function (value) {
-          return this.parent.oldPassword !== value;
-        }
-      )
+    // .test(
+    //     "passwords-match",
+    //     "New password must not be the same as old password.",
+    //     function (value) {
+    //       return this.parent.oldPassword !== value;
+    //     }
+    //   )
 });
 
 export { NewPasswordSchema };
