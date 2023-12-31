@@ -24,7 +24,7 @@ const BasicInfo = ({ data, mode, positionName, empId }) => {
     "Date of Birth": data?.dateOfBirth || "",
     "Marital Status": data?.maritalStatus || "",
     "Date of Join": data?.dateOfJoin || "",
-    "Position": positionName || "",
+    Position: data?.positionName || "",
     "PAN Number": data?.panNumber || "",
   };
   const FAMILYMEMBERS = {
@@ -37,65 +37,58 @@ const BasicInfo = ({ data, mode, positionName, empId }) => {
     "Bank Name": bData?.bankName || "",
     "Account Number": bData?.bankAccountNumber || "",
     Location: bData?.bankAddress || "",
-    
   };
 
-  const handleOnClick = () => {
-    if (isAdmin || isSuperAdmin || isHr || isManager || isHrAdmin) {
-      navigate(`/admin/employee/edit/${id}`);
-    } else {
-      navigate(`/employee/employee/edit/${loggedInUserData?.employeeId}`);
-    }
-  };
+  // const handleOnClick = () => {
+  //   if (isAdmin || isSuperAdmin || isHr || isManager || isHrAdmin) {
+  //     navigate(`/admin/employee/edit/${id}`);
+  //   } else {
+  //     navigate(`/employee/employee/edit/${loggedInUserData?.employeeId}`);
+  //   }
+  // };
 
   return (
     <>
-      {/* <Stack sx={{ display: "flex" }}>
-          {isEmployee ? (
-            ""
-          ) : (
-            <BorderColorIcon
-              onClick={handleOnClick}
-              fontSize="large"
-              sx={{ color: "rgb(28, 126, 214)", paddingRight: "1rem" }}
-            />
-          )}
-        </Stack> */}
       <Box
         container
-        className='ProfileStyle'
-        sx={{ backgroundColor: mode === 'light' ? '#ededed' : '#292929' }}
-      >
+        sx={{
+          display: "flex",
+          flexDirection: "column", // or 'row' based on your layout preference
+          gap: "2rem",
+          borderRadius: "1rem",
+          padding: "1rem",
+          backgroundColor: mode === "light" ? "#ededed" : "#292929",
+        }}      >
         <Box>
           <ListUserDetails
             data={EMPLOYEE}
-            cardTitle={'Basic Informations'}
-            MarginBottom={'1rem'}
+            cardTitle={"Basic Informations"}
+            MarginBottom={"1rem"}
             mode={mode}
           />
           <Divider />
         </Box>
-       
+
         <Box
           sx={{
-            display: 'grid',
-            gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr' },
-            gap: '1rem',
-            marginTop: { xs: '-3rem', sm: 0 },
+            display: "grid",
+            gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr" },
+            gap: "1rem",
+            marginTop: { xs: "-3rem", sm: 0 },
           }}
-          className='FAM-BANK-DETAILS'
+          className="FAM-BANK-DETAILS"
         >
           <Box>
-          {BANKDETAILS && BANKDETAILS.length > 0 && (
-            <ListUserDetails
-              data={BANKDETAILS}
-              cardTitle={'Bank Details'}
-              mode={mode}
-            />
-          )}
+            {bankData && bankData.length > 0 && (
+              <ListUserDetails
+                data={BANKDETAILS}
+                cardTitle={"Bank Details"}
+                mode={mode}
+              />
+            )}
           </Box>
           <Box>
-            {FAMILYMEMBERS && FAMILYMEMBERS.length > 0 && (
+            {familyData && familyData.length > 0 && (
               <ListUserDetails
                 data={FAMILYMEMBERS}
                 cardTitle={"Family Informations"}
