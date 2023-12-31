@@ -39,7 +39,7 @@ export const EmployeeDetailProfile = ({ data }) => {
                     fontWeight: "bolder",
                   }}
                 />
-                <Tab
+                {/* <Tab
                   label="Position History"
                   value="2"
                   style={{
@@ -47,7 +47,7 @@ export const EmployeeDetailProfile = ({ data }) => {
                     color: primaryColor,
                     fontWeight: "bolder",
                   }}
-                />
+                /> */}
                    <Tab
                   label="Employee History"
                   value="3"
@@ -83,9 +83,9 @@ export const EmployeeDetailProfile = ({ data }) => {
           <TabPanel value="1" style={{ padding: 10 }}>
             <AcademicsInfo data={data} />
           </TabPanel>
-          <TabPanel value="2" style={{ padding: 10 }}>
+          {/* <TabPanel value="2" style={{ padding: 10 }}>
             <PromotionHistory data={data} />
-          </TabPanel>
+          </TabPanel> */}
           <TabPanel value="3" style={{ padding: 10 }}>
             <EmployeeHistory data={data} />
           </TabPanel>

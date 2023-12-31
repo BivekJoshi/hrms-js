@@ -117,7 +117,6 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
             variant='outlined'
             InputLabelProps={{ shrink: true }}
             inputProps={{ maxLength: 250 }}
-            size='small'
           />
         </Grid>
         <Grid

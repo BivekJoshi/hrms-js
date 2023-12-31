@@ -20,6 +20,7 @@ import { ListItemIcon } from '@mui/material';
 import TodayIcon from '@mui/icons-material/Today';
 import { styled } from '@mui/material/styles';
 import TimeToLeaveIcon from '@mui/icons-material/TimeToLeave';
+import BadgeIcon from '@mui/icons-material/Badge';
 import {
   Box,
   Drawer,
@@ -191,6 +192,16 @@ export default function AdminSidebar() {
         />
       ),
       path: 'branch',
+      subMenus: [],
+    },
+    {
+      name: 'Employment Type',
+      icon: (
+        <BadgeIcon
+          sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
+        />
+      ),
+      path: 'emplyment-type',
       subMenus: [],
     },
     {

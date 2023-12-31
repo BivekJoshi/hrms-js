@@ -1,4 +1,3 @@
-import { nanoid } from 'nanoid';
 import { Grid, TextField, Button, MenuItem } from '@mui/material';
 import React from 'react';
 import useDesignationForm from '../../../hooks/designation/DesignationForm/useDesignationForm';

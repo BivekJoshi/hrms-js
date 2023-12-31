@@ -4,6 +4,7 @@ import { useGetCompany } from "../../../../hooks/company/useCompany";
 import { useGetDesignation } from "../../../../hooks/designation/useDesignation";
 import { useGetDepartment } from "../../../../hooks/department/useDepartment";
 import ThemeModeContext from "../../../../../theme/ThemeModeContext";
+import { useGetEmploymentType } from "../../../../hooks/employmentType/useEmploymentType";
 
 const genderOptions = [
   {
@@ -67,6 +68,10 @@ const EmployeeBasicInfoForm = ({ formik }) => {
     data: departmentData,
     isLoading: loadingDepartment,
   } = useGetDepartment();
+  const {
+    data: employmentTypeData,
+    isLoading: loadingEmploymentType,
+  } = useGetEmploymentType();
 
   const { mode } = useContext(ThemeModeContext);
   return (
@@ -263,7 +268,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
         />
       </Grid>
       <Grid item xs={12} sm={6} md={4}>
-        <TextField
+        {/* <TextField
           id="employmentType"
           name="employmentType"
           label="Employment Type"
@@ -283,7 +288,32 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           InputLabelProps={{
             shrink: Boolean(formik.values.employmentType),
           }}
-        />
+        /> */}
+         <TextField
+          id="employmentTypeId"
+          name="employmentTypeId"
+          select
+          label="Employment Type"
+          placeholder="Select your employment type"
+          fullWidth
+          required
+          value={!loadingEmploymentType && formik.values.employmentTypeId}
+          onChange={formik.handleChange}
+          error={formik.touched.employmentTypeId && Boolean(formik.errors.employmentTypeId)}
+          helperText={formik.touched.employmentTypeId && formik.errors.employmentTypeId}
+          variant="outlined"
+        >
+          {!loadingEmploymentType &&
+            employmentTypeData?.map((option) => (
+              <MenuItem
+                key={option?.id}
+                value={option?.id}
+                sx={{ bgcolor: mode === "light" ? "" : "#413e3e" }}
+              >
+                {option?.name}
+              </MenuItem>
+            ))}
+        </TextField>
       </Grid>
       <Grid item xs={12} sm={6} md={4}>
         <TextField
