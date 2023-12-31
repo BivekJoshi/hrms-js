@@ -12,23 +12,22 @@ import "../../Style/BasicInfoStyle.css";
 import { useGetLoggedInUser } from "../../../../../hooks/auth/usePassword";
 import useAuth from "../../../../../../auth/hooks/component/login/useAuth";
 
-const AttendenceInfo = () => {
-  const { isEmployee } = useAuth();
-
-  let id;
-  if (isEmployee) {
-    const { data: loggedInUserDataInfo } = useGetLoggedInUser();
-    id = loggedInUserDataInfo?.employeeId;
-  } else {
-    const { id: paramId } = useParams();
-    id = paramId;
-  }
-
-  const { data: attendanceData } = useGetEmployeeAttendanceById(id);
-
+const AttendenceInfo = ({ data }) => {
+  const { data: attendanceData } = useGetEmployeeAttendanceById(data?.id);
   const calendarRef = useRef(null);
-
   const [events, setEvents] = useState([]);
+
+  // const { isEmployee } = useAuth();
+  // let id;
+  // if (isEmployee) {
+  //   const { data: loggedInUserDataInfo } = useGetLoggedInUser();
+  //   id = loggedInUserDataInfo?.employeeId;
+  // } else {
+  //   const { id: paramId } = useParams();
+  //   id = paramId;
+  // }
+
+  
   useEffect(() => {
     if (attendanceData) {
       const formattedEvents = attendanceData.map((event) => ({

@@ -87,7 +87,7 @@ export const useAddEmpHistory = ({ onSuccess }) => {
             onSuccess: (data, variables, context) => {
                 toast.success('Successfully added Employee History');
                 onSuccess && onSuccess(data, variables, context);
-                queryClient.invalidateQueries('getEmployeeHistoryById');
+                queryClient.invalidateQueries('getEmployeeHistory');
             },
             onError: (err, _variables, _context) => {
                 toast.error(`error: ${err.message}`);

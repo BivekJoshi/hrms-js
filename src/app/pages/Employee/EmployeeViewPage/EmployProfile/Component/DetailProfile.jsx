@@ -14,13 +14,13 @@ import EmployeeHistory from '../../InfoTabs/EmployeeHistoryTab/EmployeeHistory';
 
 const primaryColor = "#1c7ed6";
 
-export const DetailProfile = ({ data }) => {
+export const DetailProfile = ({ data, role }) => {
   const [value, setValue] = React.useState("1");
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
   return (
-    <Box sx={{ typography: "body1" }}>
+    <Box sx={{ typography: "body1"}}>
       
       <TabContext value={value}>
         <TableContainer sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -32,6 +32,7 @@ export const DetailProfile = ({ data }) => {
                 onChange={handleChange}
                 aria-label="lab API tabs example"
                 className="tableAlignment"
+                
               >
                 <Tab
                   label="Leave Records"
@@ -102,25 +103,25 @@ export const DetailProfile = ({ data }) => {
         </TableContainer>
         <Box>
           <TabPanel value="1" style={{ padding: 10 }}>
-            <LeaveInfo data={data} />
+            <LeaveInfo data={data} role={role} />
           </TabPanel>
           <TabPanel value="2" style={{ padding: 10 }}>
-            <AcademicsInfo data={data} />
+            <AcademicsInfo data={data} role={role}  />
           </TabPanel>
           <TabPanel value="3" style={{ padding: 10 }}>
-            <AttendenceInfo data={data} />
+            <AttendenceInfo data={data} role={role}  />
           </TabPanel>
           <TabPanel value="4" style={{ padding: 10 }}>
-            <PromotionHistory data={data} />
+            <PromotionHistory data={data} role={role}  />
           </TabPanel>
           <TabPanel value="5" style={{ padding: 10 }}>
-            <EmployeeHistory data={data} />
+            <EmployeeHistory data={data} role={role}  />
           </TabPanel>
           <TabPanel value="6" style={{ padding: 10 }}>
-            <TrainingInfo data={data}/>
+            <TrainingInfo data={data} role={role} />
           </TabPanel>
           <TabPanel value="7" style={{ padding: 10 }}>
-            <DocumentInfo />
+            <DocumentInfo data={data} role={role} />
           </TabPanel>
         </Box>
       </TabContext>

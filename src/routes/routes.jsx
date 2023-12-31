@@ -24,13 +24,7 @@ const OfficeResource = Loadable(
 const EmployeeResource = Loadable(
   lazy(() => import('../app/pages/Resource/EmployeeResource/EmployeeResource'))
 );
-const EmployeeProfile = Loadable(
-  lazy(() =>
-    import(
-      '../app/pages/Employee/EmployeeViewPage/EmployProfile/EmployeeProfile'
-    )
-  )
-);
+
 const DeactivatedEmployee = Loadable(
   lazy(() =>
     import('../app/pages/Employee/DeactivatedEmployee/DeactivateEmployee')
@@ -92,6 +86,14 @@ const Setting = Loadable(
 );
 const EmployeeMapping = Loadable(
   lazy(() => import('../app/pages/EmployeeMapping/EmployeeMapping'))
+);
+
+const EmployeeProfile = Loadable(
+  lazy(() =>
+    import(
+      '../app/pages/Employee/EmployeeViewPage/EmployProfile/EmployeeProfile'
+    )
+  )
 );
 
 const routes = [
@@ -166,7 +168,7 @@ const routes = [
     path: 'employee/:id',
     name: 'Employee Profile',
     id: nanoid(),
-    component: <EmployeeProfile />,
+    component: <EmployeeProfile component='employeeProfile' />,
   },
   {
     path: 'employee/edit/:id',

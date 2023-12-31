@@ -219,8 +219,9 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
                   `${option?.firstName} ${option?.middleName} ${option?.lastName}`
                 }
                 value={formik.values.employeeId || null}
-                onChange={(event, value) =>
+                onChange={(event, value) => {
                   formik.setFieldValue('employeeId', value)
+                }
                 }
                 renderInput={(params) => (
                   <TextField

@@ -1,30 +1,36 @@
-import { useFormik } from 'formik';
-import { PromotionSchema } from '../Validation/PromotionSchema';
-import { useAddPromotionHistory } from '../usePromotionHistory';
+import { useFormik } from "formik";
+import { PromotionSchema } from "../Validation/PromotionSchema";
+import { useAddPromotionHistory } from "../usePromotionHistory";
 
-const useAddPromotionHistoryForm = () => {
-    const { mutate } = useAddPromotionHistory({});
+const useAddPromotionHistoryForm = (onClose) => {
+  const { mutate } = useAddPromotionHistory({});
 
-    const formik = useFormik({
-        initialValues: {
-            positionId: '',
-            effectiveFromDate: '',
-            remarks: '',
-        },
-        validationSchema: PromotionSchema,
-        onSubmit: (values) => {
-            handleRequest(values);
-        },
-    });
+  const formik = useFormik({
+    initialValues: {
+      positionId: '',
+      effectiveFromDate: '',
+      remarks: '',
+    },
+    validationSchema: PromotionSchema,
+    enableReinitialize: true,
+    onSubmit: (values) => {
+      handleRequest(values);
+    },
+  });
 
-    const handleRequest = (values) => {
-        values = {
-            ...values,
-        };
-        mutate(values, formik, { onSuccess: () => formik.handleReset() });
+  const handleRequest = (values) => {
+    values = {
+      ...values,
     };
+    mutate(values, {
+      onSuccess: () => {
+        onClose();
+        // formik.resetForm();
+      },
+    });
+  };
 
-    return { formik };
+  return { formik };
 };
 
 export default useAddPromotionHistoryForm;

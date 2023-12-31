@@ -42,7 +42,7 @@ const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
             disabled={editMode}
             options={employeeData || []}
             getOptionLabel={(employee) =>
-              `${employee?.firstName} ${employee?.middleName} ${employee?.lastName}`
+              `${employee?.firstName} ${employee?.middleName || ''} ${employee?.lastName}`
             }
             value={employeeData?.find(
               (employee) => employee?.id === formik.values?.employeeId
