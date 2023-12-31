@@ -17,7 +17,7 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import CloseIcon from '@mui/icons-material/Close';
-
+ 
 import EmployeeBasicInfoForm from '../../components/Form/Employee/EmployeeBasicInfoForm/EmployeeBasicInfoForm';
 import useAddEmployeeForm from '../../hooks/employee/AddEmployee/useAddEmployeeForm';
 import EmployeeGrid from './EmployeeView/EmployeeGrid';
@@ -27,7 +27,7 @@ import './Style/Style.css';
 import ThemeModeContext from '../../../theme/ThemeModeContext';
 import { useGetEmployee, useGetEmployeeData } from '../../hooks/employee/useEmployee';
 import EmployeeTableView from './EmployeeView/EmployeePage/EmployeeTableView';
-
+ 
 const Employee = () => {
   const { mode } = React.useContext(ThemeModeContext);
   const [pageNumber, setPageNumber] = useState(0);
@@ -40,14 +40,14 @@ const Employee = () => {
     setPageNumber(newPage - 1);
     window.scroll(0,0);
   };
-
+ 
   const handlePageSizeChange = (event, newValue) => {
     const newPageSize = parseInt(newValue, 10) || 0;
     setPageSize(newPageSize);
     setPageNumber(0);
   };
   // const { data: employeeData, isLoading } = useGetEmployee();
-
+ 
   const style = {
     position: 'absolute',
     top: '50%',
@@ -60,34 +60,34 @@ const Employee = () => {
     p: 4,
     background: mode === 'light' ? '' : '#413e3e',
   };
-
+ 
   const navigate = useNavigate();
-
+ 
   const [value, setValue] = React.useState('1');
-
+ 
   const [openAddModal, setOpenAddModal] = useState(false);
   const handleAddOpenModal = () => setOpenAddModal(true);
   const handleAddCloseModal = () => setOpenAddModal(false);
-
+ 
   const [openSubmitModal, setOpenSubmitModal] = useState(false);
   const handleOpenSubmitModal = () => setOpenAddModal(false);
   const handleCloseEmailModal = () => {
     setOpenAddModal(false);
     setOpenSubmitModal(false);
   };
-
+ 
   const { formik } = useAddEmployeeForm(handleOpenSubmitModal);
-
+ 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
+ 
   const handleSubmit = () => {
     formik.handleSubmit();
     if (formik.isValid) {
     }
   };
-
+ 
   return (
     <>
       <TabContext value={value}>
@@ -136,7 +136,7 @@ const Employee = () => {
           </TabPanel>
         </Box>
       </TabContext>
-
+ 
       <Modal open={openAddModal} onClose={() => setOpenAddModal(false)}>
         <div>
           <Box sx={style}>
@@ -203,9 +203,8 @@ const Employee = () => {
           </Box>
         </div>
       </Modal>
-
-      <Box mt={4} display="flex" justifyContent={"space-around"}>
-        <div></div>
+ 
+      <Box mt={4} display="flex" justifyContent={"end"}>
         <Pagination
           count={employeeData?.totalPages}
           page={pageNumber + 1}
@@ -230,7 +229,7 @@ const Employee = () => {
           )}
         />
       </Box>
-      {/* 
+      {/*
       <Modal
         open={openSubmitModal}
         onClose={handleCloseEmailModal}
@@ -269,5 +268,5 @@ const Employee = () => {
     </>
   );
 };
-
+ 
 export default Employee;

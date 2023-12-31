@@ -28,7 +28,7 @@ const EditEmployeeForm = () => {
 
   const steps = [
     'Basic Details',
-    'Office Details',
+    // 'Office Details',
     'Address Details',
     'Family Details',
     'Educational Details',
@@ -40,7 +40,7 @@ const EditEmployeeForm = () => {
 
   const { data, isLoading: employeeLoading } = useGetEmployeeById(id);
   const { data: addressData, isLoading: getaddressLoading } = useGetAddressById(id);
-  const { data: officeData, isLoading: getofficeLoading } = useGetOfficeEmployeeById(id);
+  // const { data: officeData, isLoading: getofficeLoading } = useGetOfficeEmployeeById(id);
 
   const { formik: qualificationFormik, isLoading: isLoadingQualification } = useQualificationForm();
 
@@ -48,7 +48,7 @@ const EditEmployeeForm = () => {
   const { formik, isLoading } = useEditEmployeeForm({ data, employeeLoading });
 
   const { formik: permanentFormik, isLoading: addressLoading } = usePermanentAddressForm(addressData, getaddressLoading);
-  const { formik: officeFormik, isLoading: officeLoading } = useOfficeEmployeeForm({officeData, getofficeLoading});
+  // const { formik: officeFormik, isLoading: officeLoading } = useOfficeEmployeeForm({officeData, getofficeLoading});
 
   const { formik: bankFormik } = useAddBankForm({ data, employeeLoading });
 
@@ -64,16 +64,16 @@ const EditEmployeeForm = () => {
       case 0:
         return <EmployeeBasicInfoForm formik={formik} isLoading={isLoading} />;
 
-        case 1:
-        return (
-          <EmployeeOfficeDetailForm
-            formik={officeFormik}
-            isLoading={officeLoading}
-            data={officeData}
-          />
-        );
+        // case 1:
+        // return (
+        //   <EmployeeOfficeDetailForm
+        //     formik={officeFormik}
+        //     isLoading={officeLoading}
+        //     data={officeData}
+        //   />
+        // );
 
-      case 2:
+      case 1:
         return (
           <EmployeeAddressDetailForm
             formik={permanentFormik}
@@ -82,7 +82,7 @@ const EditEmployeeForm = () => {
           />
         );
 
-      case 3:
+      case 2:
         return (
           <EmployeeFamilyDetailForm
             formik={familyFormik}
@@ -90,7 +90,7 @@ const EditEmployeeForm = () => {
           />
         );
 
-      case 4:
+      case 3:
         return (
           <EmployeeQualificationDetailForm
             formik={qualificationFormik}
@@ -98,13 +98,13 @@ const EditEmployeeForm = () => {
           />
         );
 
-      case 5:
+      case 4:
         return <EmployeeBankDetailForm formik={bankFormik} />;
 
-      case 6:
+      case 5:
         return <EmployeeHistoryDetailForm formik={employeeHistoryFormik} />;
 
-      case 7:
+      case 6:
         return <EmployeeDocumentDetailForm formik={documentFormik} />;
 
       // case 7:
@@ -190,7 +190,7 @@ const EditEmployeeForm = () => {
   const handleNext = ({ activeStep, setActiveStep }) => {
     const formikArray = [
       formik,
-      officeFormik,
+      // officeFormik,
       permanentFormik,      
       familyFormik,
       qualificationFormik,
