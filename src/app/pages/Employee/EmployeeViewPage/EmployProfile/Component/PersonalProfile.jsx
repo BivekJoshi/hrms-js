@@ -1,29 +1,17 @@
 import React, { useContext, useState } from 'react';
-
-import { Box, Button, Chip, Grid } from '@mui/material';
+import { Box, Chip, Grid } from '@mui/material';
 import { Typography, Avatar } from '@mui/material';
-
 import Male from '../../../../../../assets/male.png';
 import Female from '../../../../../../assets/female.png';
 import BasicInfo from './BasicInfo';
 import ThemeModeContext from '../../../../../../theme/ThemeModeContext';
 import { DOC_URL } from '../../../../../../auth/axiosInterceptor';
 import EmailModal from '../../../../Email/EmailModal';
-import { useGetEmployeeByDesignation } from '../../../../../hooks/employee/useEmployee';
-import { useGetDesignationById } from '../../../../../hooks/designation/useDesignation';
-import { useParams } from 'react-router-dom';
-import { useGetLoggedInUser } from '../../../../../hooks/auth/usePassword';
-import useAuth from '../../../../../../auth/hooks/component/login/useAuth';
 
 const primaryColor = '#1c7ed6';
 
-export const PersonalProfile = ({ data, empId }) => {
-  
-  const { isEmployee } = useAuth();
-  const { id } = useParams();
-  const { data: loggedUserData } = useGetLoggedInUser();
-  const { data: positionData } = useGetDesignationById(id);
-  const positionName = data?.positionName;
+export const PersonalProfile = ({ data, role }) => {
+  const { mode } = useContext(ThemeModeContext);
   const [openEmailForm, setOpenEmailForm] = useState(false);
   const handleOpenEmailform = () => {
     setOpenEmailForm(true);
@@ -31,21 +19,15 @@ export const PersonalProfile = ({ data, empId }) => {
   const handleCloseEmailform = () => {
     setOpenEmailForm(false);
   };
-  const { mode } = useContext(ThemeModeContext);
 
-  const employeeImg = loggedUserData?.userPhotoPath;
-  const employeeFilePath = employeeImg
-    ? DOC_URL + employeeImg
+
+  const filePath =data?.employeePhotoPath
+    ? DOC_URL + data?.employeePhotoPath
     : data?.gender === 'MALE'
     ? Male
-    : Female;
+    : Female
 
-  const photo = data?.employeePhotoPath;
-  const filePath = photo
-    ? DOC_URL + photo
-    : data?.gender === 'MALE'
-    ? Male
-    : Female;
+    const positionName = (data?.positionName);
 
   return (
     <>
@@ -73,7 +55,7 @@ export const PersonalProfile = ({ data, empId }) => {
               alignSelf: 'center',
             }}
             variant='circle'
-            src={isEmployee ? employeeFilePath : filePath}
+            src={filePath}
           />
           <Typography
             sx={{
@@ -85,7 +67,7 @@ export const PersonalProfile = ({ data, empId }) => {
             {data?.firstName + ' ' + data?.middleName + ' ' + data?.lastName}
           </Typography>
           <Chip
-            label={data?.positionName}
+            label={positionName}
             sx={{ bgcolor: primaryColor, color: 'white', width: ' 9rem' }}
           />
           <Typography
@@ -113,7 +95,7 @@ export const PersonalProfile = ({ data, empId }) => {
           </Typography>
         </Box>
 
-        <BasicInfo data={data} mode={mode} positionName={positionName} empId={empId} />
+        <BasicInfo data={data} mode={mode} role={role} positionName={positionName} />
       </Grid>
 
       {openEmailForm && (

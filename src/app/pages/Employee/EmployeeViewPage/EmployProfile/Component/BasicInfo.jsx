@@ -8,16 +8,17 @@ import { useGetBankByEmployeeId } from "../../../../../hooks/employee/useBank";
 import { useGetFammilyById } from "../../../../../hooks/employee/useFamily";
 import useAuth from "../../../../../../auth/hooks/component/login/useAuth";
 
-const BasicInfo = ({ data, mode, positionName, empId }) => {
-  console.log("sdf", data);
-  const { id } = useParams();
-  const { isSuperAdmin, isAdmin, isHr, isEmployee, isHrAdmin, isManager } =
-    useAuth();
+const BasicInfo = ({ data, mode, positionName, role }) => {
+  // const { id } = useParams();
+  // const { isSuperAdmin, isAdmin, isHr, isEmployee, isHrAdmin, isManager } =
+  //   useAuth();
+
   const { data: bankData } = useGetBankByEmployeeId();
-  const { data: familyData } = useGetFammilyById(empId);
+  const { data: familyData } = useGetFammilyById(data?.id);
+  
   const bData = bankData && bankData?.[0];
   const fData = familyData && familyData?.[0];
-
+  
   const EMPLOYEE = {
     Gender: data?.gender || "",
     "Citizenship Number": data?.citizenshipNumber || "",
@@ -40,13 +41,13 @@ const BasicInfo = ({ data, mode, positionName, empId }) => {
     
   };
 
-  const handleOnClick = () => {
-    if (isAdmin || isSuperAdmin || isHr || isManager || isHrAdmin) {
-      navigate(`/admin/employee/edit/${id}`);
-    } else {
-      navigate(`/employee/employee/edit/${loggedInUserData?.employeeId}`);
-    }
-  };
+  // const handleOnClick = () => {
+  //   if (isAdmin || isSuperAdmin || isHr || isManager || isHrAdmin) {
+  //     navigate(`/admin/employee/edit/${id}`);
+  //   } else {
+  //     navigate(`/employee/employee/edit/${loggedInUserData?.employeeId}`);
+  //   }
+  // };
 
   return (
     <>
@@ -63,8 +64,15 @@ const BasicInfo = ({ data, mode, positionName, empId }) => {
         </Stack> */}
       <Box
         container
-        className='ProfileStyle'
-        sx={{ backgroundColor: mode === 'light' ? '#ededed' : '#292929' }}
+        // sx={{ display: 'grid', gridTemplateRows: '1fr 1fr', rowGap: '2rem', borderRadius: '1rem', padding: '1rem', backgroundColor: mode === 'light' ? '#ededed' : '#292929' }}
+        sx={{
+          display: 'flex',
+          flexDirection: 'column', // or 'row' based on your layout preference
+          gap: '2rem',
+          borderRadius: '1rem',
+          padding: '1rem',
+          backgroundColor: mode === 'light' ? '#ededed' : '#292929',
+        }}
       >
         <Box>
           <ListUserDetails
@@ -86,7 +94,7 @@ const BasicInfo = ({ data, mode, positionName, empId }) => {
           className='FAM-BANK-DETAILS'
         >
           <Box>
-          {BANKDETAILS && BANKDETAILS.length > 0 && (
+          {bankData && bankData.length > 0 && (
             <ListUserDetails
               data={BANKDETAILS}
               cardTitle={'Bank Details'}
@@ -95,7 +103,7 @@ const BasicInfo = ({ data, mode, positionName, empId }) => {
           )}
           </Box>
           <Box>
-            {FAMILYMEMBERS && FAMILYMEMBERS.length > 0 && (
+            {familyData && familyData.length > 0 && (
               <ListUserDetails
                 data={FAMILYMEMBERS}
                 cardTitle={"Family Informations"}

@@ -10,6 +10,7 @@ export const getPromotionHistory = async (id) => {
 
 {/*________________________POST_____________________________________*/ }
 export const addPromotionHistory = async (formData,id) => {
+  console.log("formData", formData)
   const data = await axiosInstance.post(`/promotion-history/create/${id}`, formData);
   return data;
 };
