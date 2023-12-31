@@ -72,7 +72,7 @@ const EmploymentTypeFields = ({ onClose, isLoading, data }) => {
           </Button>
           <Button
             variant="contained"
-            onClick={onClose}
+            onClick={()=>onClose()}
             sx={{ mt: 3, ml: 1 }}
             color="error"
           >
