@@ -24,12 +24,14 @@ export const sendEmailToMultipleEmployee = async ({ formData, employeeId }) => {
 
 /*___________________SEND EMAIL TO ALL EMPLOYEE EVENT______________________________________*/
 export const sendEmailToAll = async ({ formData, employeeId, eventId }) => {
-  const employeeIdParams = employeeId
-    .map((id) => `employeeIds=${id}`)
-    .join("&");
-  const url = `/email/employee-ids/event?${employeeIdParams}&eventId=${eventId}`;
-  const res = await axiosInstance.post(url, formData);
-  return res;
+  if (employeeId) {
+    // const employeeIdParams = employeeId
+    //   .map((id) => `employeeIds=${id}`)
+    //   .join("&");
+    // const url = `/email/employee-ids/event?${employeeIdParams}&eventId=${eventId}`;
+    const res = await axiosInstance.post(`/email/employee-ids/event?eventId=${eventId}`, employeeId);
+    return res;
+  }
 };
 
 /*___________________SEND EMAIL TO ALL EMPLOYEE HOLIDAY______________________________________*/

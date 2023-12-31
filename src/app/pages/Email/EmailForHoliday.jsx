@@ -12,6 +12,7 @@ import { useGetEmployee } from "../../hooks/employee/useEmployee";
 import { getBusinessAEmployeeById, getBusinessBEmployeeById, getFemaleEmployeeById, getMaleEmployeeById, getTechnicalEmployeeById } from "../../components/Email/EmailSorting";
 
 const EmailForHoliday = ({ getEventID, onClose }) => {
+  console.log(getEventID,"id ma chai");
   const { data: employeeData } = useGetEmployee();
   const [employeeId, setEmployeeId] = useState();
   const [emailData, setEmailData] = useState();
