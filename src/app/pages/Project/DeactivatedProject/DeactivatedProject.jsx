@@ -11,7 +11,7 @@ import RestoreFromTrashOutlinedIcon from '@mui/icons-material/RestoreFromTrashOu
 
 const DeactivatedProject = () => {
   const { data: deactivatedProject, isLoading } = useGetDeactivatedProject();
-  const { data: employeeData } = useGetEmployee();
+  // const { data: employeeData } = useGetEmployee();
 
   const [openActivateModal, setOpenActivateModal] = useState(false);
   const [activateProject, setActivateProject] = useState({});
@@ -90,6 +90,7 @@ const DeactivatedProject = () => {
 
       {openActivateModal && (
         <AddProjectActiveModal
+        title={'Activate Project'}
           id={activateProject?.id}
           open={openActivateModal}
           handleCloseModal={handleCloseActivateModal}
