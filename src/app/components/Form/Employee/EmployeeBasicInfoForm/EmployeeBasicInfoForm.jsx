@@ -172,7 +172,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           helperText={formik.touched.dateOfBirth && formik.errors.dateOfBirth}
         />
       </Grid>
-      <Grid item xs={12} sm={6} md={4}>
+      {/* <Grid item xs={12} sm={6} md={4}>
         <TextField
           name="dateOfJoin"
           label="Date of Join"
@@ -186,7 +186,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           helperText={formik.touched.dateOfJoin && formik.errors.dateOfJoin}
           inputProps={{ min: formik.values.dateOfBirth, max: today }}
         />
-      </Grid>
+      </Grid> */}
       <Grid item xs={12} sm={6} md={4}>
         <TextField
           id="mobileNumber"
@@ -267,8 +267,8 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           }}
         />
       </Grid>
-      <Grid item xs={12} sm={6} md={4}>
-        {/* <TextField
+      {/* <Grid item xs={12} sm={6} md={4}>
+        <TextField
           id="employmentType"
           name="employmentType"
           label="Employment Type"
@@ -288,7 +288,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           InputLabelProps={{
             shrink: Boolean(formik.values.employmentType),
           }}
-        /> */}
+        />
          <TextField
           id="employmentTypeId"
           name="employmentTypeId"
@@ -314,7 +314,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
               </MenuItem>
             ))}
         </TextField>
-      </Grid>
+      </Grid> */}
       <Grid item xs={12} sm={6} md={4}>
         <TextField
           id="maritalStatus"
@@ -345,7 +345,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           ))}
         </TextField>
       </Grid>
-      <Grid item xs={12} sm={6} md={4}>
+      {/* <Grid item xs={12} sm={6} md={4}>
         <TextField
           id="branchId"
           name="branchId"
@@ -371,8 +371,8 @@ const EmployeeBasicInfoForm = ({ formik }) => {
               </MenuItem>
             ))}
         </TextField>
-      </Grid>
-      <Grid item xs={12} sm={6} md={4}>
+      </Grid> */}
+      {/* <Grid item xs={12} sm={6} md={4}>
         <TextField
           id="positionId"
           name="positionId"
@@ -398,7 +398,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
               </MenuItem>
             ))}
         </TextField>
-        {/* <Autocomplete
+        <Autocomplete
             id="positionId"
             name="positionId"
             options={designationData}
@@ -423,9 +423,9 @@ const EmployeeBasicInfoForm = ({ formik }) => {
               
                     />
             )}
-          /> */}
-      </Grid>
-      <Grid item xs={12} sm={6} md={4}>
+          />
+      </Grid> */}
+      {/* <Grid item xs={12} sm={6} md={4}>
         <TextField
           id="departmentId"
           name="departmentId"
@@ -453,8 +453,8 @@ const EmployeeBasicInfoForm = ({ formik }) => {
               </MenuItem>
             ))}
         </TextField>
-      </Grid>
-      <Grid item xs={12} sm={6} md={4}>
+      </Grid> */}
+      {/* <Grid item xs={12} sm={6} md={4}>
         <TextField
           id="shiftType"
           name="shiftType"
@@ -479,7 +479,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
             </MenuItem>
           ))}
         </TextField>
-      </Grid>
+      </Grid> */}
     </Grid>
   );
 };

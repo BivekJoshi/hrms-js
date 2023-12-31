@@ -71,7 +71,7 @@ export const DetailProfile = ({ data, role }) => {
                   }}
                 />
                  <Tab
-                  label="Employee History"
+                  label="Work History"
                   value="5"
                   style={{
                     fontSize: "1rem",

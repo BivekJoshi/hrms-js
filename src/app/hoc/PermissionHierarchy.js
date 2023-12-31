@@ -31,7 +31,7 @@ const PermissionHierarchy = {
   project: commonPermissions,
   users: commonPermissions,
   event: commonPermissions,
-  todo: allPermissions,
+  todos: allPermissions,
   leaveType: commonPermissions,
   leaves: commonPermissions,
   resourceDeactivated: commonPermissions,

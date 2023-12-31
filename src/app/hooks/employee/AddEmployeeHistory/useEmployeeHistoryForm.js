@@ -11,8 +11,7 @@ const useEmployeeHistoryForm = () => {
   const { id } = useParams();
   const { mutate: addMutate } = useAddEmployeeHistory({});
   const { mutate: editMutate } = useEditEmployeeHistory({});
-  const { data: empHistoryData, isLoading: empHistoryLoading } =
-    useGetEmployeeHistory(id);
+  const { data: empHistoryData, isLoading: empHistoryLoading } = useGetEmployeeHistory(id);
 
   const historyDetails =
     !empHistoryLoading &&

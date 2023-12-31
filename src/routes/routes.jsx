@@ -213,7 +213,7 @@ const routes = [
     path: 'todolist',
     name: 'To Do List',
     id: nanoid(),
-    component: <TodoList component='todo' />,
+    component: <TodoList component='todos' />,
   },
   {
     path: 'leave',

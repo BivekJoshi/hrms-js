@@ -65,6 +65,11 @@ const documentName = [
     label: 'Signed Contract',
     value: 'SIGNED_CONTRACT',
   },
+  {
+    id: 11,
+    label: 'Health Insurance',
+    value: 'HEALTH_INSURANCE',
+  },
 ];
 const DocumentInfo = ({data, role}) => {
   const { isSuperAdmin, isAdmin, isHr, isEmployee, isHrAdmin, isManager } =

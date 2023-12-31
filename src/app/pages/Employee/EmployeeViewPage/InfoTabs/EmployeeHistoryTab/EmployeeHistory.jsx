@@ -108,7 +108,7 @@ const EmployeeHistory = ({data, role}) => {
             sx={{ mt: 3, ml: 1 }}
             onClick={handleAddOpenModal}
           >
-            + Add Employee History
+            + Add Work History
           </Button>
         ) : (
           ''
@@ -118,13 +118,13 @@ const EmployeeHistory = ({data, role}) => {
       <CustomTable
         columns={columns}
         data={employeeHistory}
-        title='Employee History'
+        title='Work History'
         isLoading={isLoading}
       />
 
       {openAddModal && (
         <AddEmployeeHistory
-          title={'Add Employee History'}
+          title={'Add Work History'}
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
         />

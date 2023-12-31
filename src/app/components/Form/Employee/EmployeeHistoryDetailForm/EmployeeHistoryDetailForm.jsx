@@ -24,7 +24,7 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                 {formik.values.history.map((employeeHistory, index) => (
                   <React.Fragment key={index}>
                     <br />
-                    <Divider> Add Employee History</Divider>
+                    <Divider> Add Work History</Divider>
                     <br />
                     <Grid container spacing={3}>
                       <Grid item xs={12} sm={6} md={4}>
