@@ -79,10 +79,10 @@ const EmployeeCard = ({
   };
 
   const imageFinal = employeePhoto
-  ? DOC_URL + employeePhoto
-  : EGender === 'MALE'
-  ? Male
-  : Female;
+    ? DOC_URL + employeePhoto
+    : EGender === "MALE"
+    ? Male
+    : Female;
 
   return (
     <>
@@ -95,100 +95,101 @@ const EmployeeCard = ({
             backgroundColor: mode === "light" ? "white" : "#292929",
           }}
         >
-          
-          <Box display="flex" justifyContent={"space-between"} alignItems={'center'}>
-          <div style={{ paddingTop: "16px" }}>
-            {ProgressBarRes && <ProgressbyAll ProgressbyAll={ProgressBarRes} />}
-          </div>
-           <div style={{display: 'flex', alignItems: 'ceneter'}}>
-           {isEmployee ? (
-              ""
-            ) : (
-              <>
-                <Button
-                  style={{
-                    marginTop: "5px",
-                    fontSize: ".7rem",
-                    padding: "1px 5px",
-                  }}
-                  onClick={handleClick}
-                  variant="outlined"
-                  color={IsActive ? "success" : "warning"}
-                >
-                  {IsActive ? "Terminate" : "Active"}
-                </Button>
-
-                <Box>
+          <Box
+            display="flex"
+            justifyContent={"space-between"}
+            alignItems={"center"}
+          >
+            <div style={{ paddingTop: "16px" }}>
+              {ProgressBarRes && (
+                <ProgressbyAll ProgressbyAll={ProgressBarRes} />
+              )}
+            </div>
+            <div style={{ display: "flex", alignItems: "ceneter" }}>
+              {isEmployee ? (
+                ""
+              ) : (
+                <>
                   <Button
-                    ref={anchorRef}
-                    id="composition-button"
-                    aria-controls={open ? "composition-menu" : undefined}
-                    aria-expanded={open ? "true" : undefined}
-                    aria-haspopup="true"
-                    onClick={handleToggle}
+                    style={{
+                      marginTop: "5px",
+                      fontSize: ".7rem",
+                      padding: "1px 5px",
+                    }}
+                    onClick={handleClick}
+                    variant="outlined"
+                    color={IsActive ? "success" : "warning"}
                   >
-                    <MoreHorizIcon />
+                    {IsActive ? "Terminate" : "Active"}
                   </Button>
-                  <Popper
-                    open={open}
-                    anchorEl={anchorRef.current}
-                    role={undefined}
-                    placement="bottom-start"
-                    transition
-                    disablePortal
-                  >
-                    {({ TransitionProps, placement }) => (
-                      <Grow
-                        {...TransitionProps}
-                        style={{
-                          transformOrigin:
-                            placement === "bottom-start"
-                              ? "left top"
-                              : "left bottom",
-                        }}
-                      >
-                        <Paper>
-                          <ClickAwayListener onClickAway={handleClose}>
-                            <MenuList
-                              autoFocusItem={open}
-                              id="composition-menu"
-                              aria-labelledby="composition-button"
-                              onKeyDown={handleListKeyDown}
-                              style={{ fontSize: ".8rem" }}
-                            >
-                              <MenuItem
-                                onClick={() => {
-                                  navigate(`edit/${EmployeeId}`);
-                                  handleClose();
-                                }}
+
+                  <Box>
+                    <Button
+                      ref={anchorRef}
+                      id="composition-button"
+                      aria-controls={open ? "composition-menu" : undefined}
+                      aria-expanded={open ? "true" : undefined}
+                      aria-haspopup="true"
+                      onClick={handleToggle}
+                    >
+                      <MoreHorizIcon />
+                    </Button>
+                    <Popper
+                      open={open}
+                      anchorEl={anchorRef.current}
+                      role={undefined}
+                      placement="bottom-start"
+                      transition
+                      disablePortal
+                    >
+                      {({ TransitionProps, placement }) => (
+                        <Grow
+                          {...TransitionProps}
+                          style={{
+                            transformOrigin:
+                              placement === "bottom-start"
+                                ? "left top"
+                                : "left bottom",
+                          }}
+                        >
+                          <Paper>
+                            <ClickAwayListener onClickAway={handleClose}>
+                              <MenuList
+                                autoFocusItem={open}
+                                id="composition-menu"
+                                aria-labelledby="composition-button"
+                                onKeyDown={handleListKeyDown}
                                 style={{ fontSize: ".8rem" }}
                               >
-                                Edit
-                              </MenuItem>
-                              <MenuItem
-                                onClick={() => {
-                                  navigate(`${EmployeeId}`);
-                                  handleClose();
-                                }}
-                                style={{ fontSize: ".8rem" }}
-                              >
-                                View Profile
-                              </MenuItem>
-                            </MenuList>
-                          </ClickAwayListener>
-                        </Paper>
-                      </Grow>
-                    )}
-                  </Popper>
-                </Box>
-              </>
-            )}
-           </div>
+                                <MenuItem
+                                  onClick={() => {
+                                    navigate(`edit/${EmployeeId}`);
+                                    handleClose();
+                                  }}
+                                  style={{ fontSize: ".8rem" }}
+                                >
+                                  Edit
+                                </MenuItem>
+                                <MenuItem
+                                  onClick={() => {
+                                    navigate(`${EmployeeId}`);
+                                    handleClose();
+                                  }}
+                                  style={{ fontSize: ".8rem" }}
+                                >
+                                  View Profile
+                                </MenuItem>
+                              </MenuList>
+                            </ClickAwayListener>
+                          </Paper>
+                        </Grow>
+                      )}
+                    </Popper>
+                  </Box>
+                </>
+              )}
+            </div>
           </Box>
-
-
-
-
 
           <Stack
             style={{
@@ -196,18 +197,16 @@ const EmployeeCard = ({
               marginTop: "1rem",
               alignItems: "center",
             }}
-          >  <Stack>
-     
-
-        
-          
-          <CardMedia
-          component="img"
-          src={imageFinal}
-          alt="Img"
-          sx={{ width: 66, height: 66, borderRadius: "2rem" }}
-        />
-        </Stack>
+          >
+            {" "}
+            <Stack>
+              <CardMedia
+                component="img"
+                src={imageFinal}
+                alt="Img"
+                sx={{ width: 66, height: 66, borderRadius: "2rem" }}
+              />
+            </Stack>
             <Typography
               style={{ fontWeight: 700, margin: "1rem 0", fontSize: "20px" }}
             >
@@ -220,7 +219,11 @@ const EmployeeCard = ({
                 label={
                   <Typography
                     variant="h6"
-                    style={{ overflow: "hidden", textOverflow: "ellipsis" }}
+                    style={{
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      textTransform: "capitalize",
+                    }}
                   >
                     {EFirstName || ""} {EMiddleName || ""} {ELastName || ""}
                   </Typography>

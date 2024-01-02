@@ -99,12 +99,12 @@ function EmailForm({ employeeId, onClose, officeEmail }) {
             multiline
             rows={10}
             cols={90}
-            label="Body"
+            label="Message "
             name="message"
             value={emailData?.message}
             onChange={handleInputChange}
             error={errors.message}
-            helperText={errors.message ? "message is required" : ""}
+            helperText={errors.message ? "Message is required" : ""}
           />
         </Grid>
         <br />
