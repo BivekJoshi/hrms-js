@@ -83,7 +83,6 @@ const DocumentInfo = ({data, role}) => {
   const url = DOC_URL;
   const { id } = useParams();
   const { data: getDocument, isLoading } = (role) ? useGetDocumentById(data?.id) : useGetDocumentById(loggedInUserData?.id);
-console.log(role);
   const groupedDocuments = isLoading
     ? {}
     : groupBy(getDocument, 'documentType');

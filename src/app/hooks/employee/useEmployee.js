@@ -10,12 +10,19 @@ import {
   getEmployeeBydepartment,
   getEmployeeProgress,
   getLoggedInUserInfo,
+  getNoneUser,
 } from '../../api/employee/employee-api';
 import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
 
 export const useGetEmployee = () => {
   return useQuery(['getEmployee'], () => getEmployee(), {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
+};
+export const useGetNoneUser = () => {
+  return useQuery(['getNoneUser'], () => getNoneUser(), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });

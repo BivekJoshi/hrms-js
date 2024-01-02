@@ -21,8 +21,6 @@ export const EditProjectDeactivateFields = ({ onClose, isLoading, data }) => {
     return projectId;
   };
 
-  console.log(data);
-
   return (
     !isLoading && (
       <Grid container spacing={3}>

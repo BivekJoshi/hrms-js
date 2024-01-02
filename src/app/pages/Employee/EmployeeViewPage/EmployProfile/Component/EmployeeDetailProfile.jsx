@@ -18,7 +18,6 @@ export const EmployeeDetailProfile = ({ data , role}) => {
     setValue(newValue);
   };
 
-  console.log("hii" + role);
   return (
     <Box sx={{ typography: "body1" }}>
       <TabContext value={value}>

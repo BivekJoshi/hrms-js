@@ -62,7 +62,6 @@ export const DeactivateProjectModal = ({
   title,
 }) => {
   const { data:terminateProject } = useGetProjectById(id);
-  console.log(terminateProject);
   return (
     <div>
       <FormModal

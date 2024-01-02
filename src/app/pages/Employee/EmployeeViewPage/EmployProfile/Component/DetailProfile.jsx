@@ -21,7 +21,6 @@ export const DetailProfile = ({ data, role, setShowPersonalProfile }) => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
   const tabsData = [
     {
       label: "Leave Records",

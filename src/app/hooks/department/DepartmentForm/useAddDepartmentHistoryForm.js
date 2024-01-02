@@ -21,7 +21,6 @@ const useAddDepartmentHistoryForm = (onClose, id) => {
     
     },
   });
-console.log("for", formik)
   const handledAddRequest = (values) => {
     values = { ...values };
     adddepartmentHistory(values, {

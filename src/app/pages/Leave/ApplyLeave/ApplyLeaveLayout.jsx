@@ -127,7 +127,7 @@ const ApplyLeaveLayout = () => {
       </Grid>
       <br />
       <Grid item xs={12}>
-        <LeaveUserView data={leaveData} />
+        <LeaveUserView data={leaveData} isLoading={isLoading}/>
       </Grid>
       <Fab
         color="secondary"
