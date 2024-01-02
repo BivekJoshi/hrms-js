@@ -1,15 +1,14 @@
-import React from "react";
-import "../Style/Style.css";
-import { Box, Divider, Stack } from "@mui/material";
-import BorderColorIcon from "@mui/icons-material/BorderColor";
-import ListUserDetails from "../../InfoTabs/BaiscInfoTab/Components/ListUserDetails";
-import { useParams } from "react-router-dom";
-import { useGetBankByEmployeeId } from "../../../../../hooks/employee/useBank";
-import { useGetFammilyById } from "../../../../../hooks/employee/useFamily";
-import useAuth from "../../../../../../auth/hooks/component/login/useAuth";
+import React from 'react';
+import '../Style/Style.css';
+import { Box, Divider, Stack } from '@mui/material';
+import BorderColorIcon from '@mui/icons-material/BorderColor';
+import ListUserDetails from '../../InfoTabs/BaiscInfoTab/Components/ListUserDetails';
+import { useParams } from 'react-router-dom';
+import { useGetBankByEmployeeId } from '../../../../../hooks/employee/useBank';
+import { useGetFammilyById } from '../../../../../hooks/employee/useFamily';
+import useAuth from '../../../../../../auth/hooks/component/login/useAuth';
 
 const BasicInfo = ({ data, mode, positionName, empId }) => {
-  console.log("sdf", data);
   const { id } = useParams();
   const { isSuperAdmin, isAdmin, isHr, isEmployee, isHrAdmin, isManager } =
     useAuth();
@@ -19,25 +18,24 @@ const BasicInfo = ({ data, mode, positionName, empId }) => {
   const fData = familyData && familyData?.[0];
 
   const EMPLOYEE = {
-    Gender: data?.gender || "",
-    "Citizenship Number": data?.citizenshipNumber || "",
-    "Date of Birth": data?.dateOfBirth || "",
-    "Marital Status": data?.maritalStatus || "",
-    "Date of Join": data?.dateOfJoin || "",
-    "Position": positionName || "",
-    "PAN Number": data?.panNumber || "",
+    Gender: data?.gender || '',
+    'Citizenship Number': data?.citizenshipNumber || '',
+    'Date of Birth': data?.dateOfBirth || '',
+    'Marital Status': data?.maritalStatus || '',
+    'Date of Join': data?.dateOfJoin || '',
+    Position: positionName || '',
+    'PAN Number': data?.panNumber || '',
   };
   const FAMILYMEMBERS = {
-    Name: fData?.name || "",
-    Relation: fData?.relation || "",
-    "Contact Number": fData?.mobileNumber || "",
+    Name: fData?.name || '',
+    Relation: fData?.relation || '',
+    'Contact Number': fData?.mobileNumber || '',
   };
 
   const BANKDETAILS = {
-    "Bank Name": bData?.bankName || "",
-    "Account Number": bData?.bankAccountNumber || "",
-    Location: bData?.bankAddress || "",
-    
+    'Bank Name': bData?.bankName || '',
+    'Account Number': bData?.bankAccountNumber || '',
+    Location: bData?.bankAddress || '',
   };
 
   const handleOnClick = () => {
@@ -75,7 +73,7 @@ const BasicInfo = ({ data, mode, positionName, empId }) => {
           />
           <Divider />
         </Box>
-       
+
         <Box
           sx={{
             display: 'grid',
@@ -86,19 +84,19 @@ const BasicInfo = ({ data, mode, positionName, empId }) => {
           className='FAM-BANK-DETAILS'
         >
           <Box>
-          {BANKDETAILS && BANKDETAILS.length > 0 && (
-            <ListUserDetails
-              data={BANKDETAILS}
-              cardTitle={'Bank Details'}
-              mode={mode}
-            />
-          )}
+            {BANKDETAILS && BANKDETAILS.length > 0 && (
+              <ListUserDetails
+                data={BANKDETAILS}
+                cardTitle={'Bank Details'}
+                mode={mode}
+              />
+            )}
           </Box>
           <Box>
             {FAMILYMEMBERS && FAMILYMEMBERS.length > 0 && (
               <ListUserDetails
                 data={FAMILYMEMBERS}
-                cardTitle={"Family Informations"}
+                cardTitle={'Family Informations'}
                 mode={mode}
               />
             )}

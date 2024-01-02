@@ -36,9 +36,6 @@ const EmployeeGrid = ({ employeeData, isLoading }) => {
     const fullName = `${employee?.firstName}${employee?.middleName}${employee?.lastName}`;
     const copiedNameParts = nameFilter.trim().toLowerCase().split(/\s+/);
 
-    console.log('Copied Name Parts:', copiedNameParts);
-    console.log('Employee Full Name:', fullName.toLowerCase());
-
     const isNameIncluded = copiedNameParts.every((part) =>
       fullName.toLowerCase().includes(part)
     );
