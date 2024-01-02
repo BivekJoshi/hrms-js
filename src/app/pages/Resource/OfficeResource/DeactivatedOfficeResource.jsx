@@ -5,7 +5,7 @@ import { OfficeResourceLogisticsModal } from "./OfficeResourceModal";
 import CustomTable from "../../../components/CustomTable/CustomTable";
 import CloseIcon from "@mui/icons-material/Close";
 
-const DeactivatedOfficeResource = ({closeModal, title}) => {
+const DeactivatedOfficeResource = ({ closeModal, title }) => {
   const { data, isLoading } = useGetDeactivatedOfficeResource();
   const [openModal, setopenModal] = useState(false);
   const [activateOfficeResource, setActivateOfficeResource] = useState({});
@@ -58,18 +58,31 @@ const DeactivatedOfficeResource = ({closeModal, title}) => {
   ];
   return (
     <>
-      <Grid sx={{display: 'flex', justifyContent: 'space-between', margin: '0.2rem 0.6rem'}}>
-      <Typography variant='h6'> {title} </Typography>
-      <Typography onClick={closeModal} sx={{cursor: 'pointer'}}> <CloseIcon /> </Typography>
-      </Grid>
-      <CustomTable
-        columns={columns}
-        data={data}
-        title="Deactivated Logistics"
-        isLoading={isLoading}
-        exportButton={true}
-        height={"320px"}
-      />
+      {/* <Grid
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          margin: "0.2rem 0.6rem",
+        }}
+      >
+        <Typography variant="h6"> {title} </Typography>
+        <Typography onClick={closeModal} sx={{ cursor: "pointer" }}>
+          {" "}
+          <CloseIcon />{" "}
+        </Typography>
+      </Grid> */}
+
+      
+        <CustomTable
+          columns={columns}
+          data={data}
+          title=""
+          isLoading={isLoading}
+          exportButton={true}
+          emptyRowsWhenPaging={true}
+          // sorting={true}
+          height={"320px"}
+        />
 
       {openModal && (
         <OfficeResourceLogisticsModal

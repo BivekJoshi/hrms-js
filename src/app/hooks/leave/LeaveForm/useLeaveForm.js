@@ -6,7 +6,7 @@ import {
   useEditLeaveByAdmin,
   useEditLeaveStatusByAdmin,
 } from "../useLeave";
-import { EditLeaveSchema, LeaveSchema } from "../Validation/LeaveSchema";
+import { EditLeaveSchemaAdmin, LeaveSchemaAdmin } from "../Validation/LeaveSchemaForAdmin";
 
 const useLeaveForm = (data, onClose) => {
   const { mutate: addLeave, isSuccess } = useAddLeaveByAdmin({});
@@ -23,7 +23,7 @@ const useLeaveForm = (data, onClose) => {
       applyLeaveDays: data?.applyLeaveDays || "",
       id: data?.leaveId || "",
     },
-    validationSchema: LeaveSchema,
+    validationSchema: LeaveSchemaAdmin,
     enableReinitialize: true,
     onSubmit: (values) => {
       handleRequest(values);
@@ -57,7 +57,7 @@ const useLeaveEditForm = (data, onClose) => {
       employeeId: data?.employeeId || "",
       leaveStatus: "",
     },
-    validationSchema: EditLeaveSchema,
+    validationSchema: EditLeaveSchemaAdmin,
     onSubmit: (value) => {
       handledEditRequest(value);
     },

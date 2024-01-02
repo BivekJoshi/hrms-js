@@ -24,7 +24,7 @@ const LeaveInfo = ({ isLoading, data, role }) => {
   const getLeaveTypeName = (rowData) => {
     const leaveTypeId = rowData.leaveTypeId;
     const leaveType = leaveTypeData.find((leave) => leave.id === leaveTypeId);
-    const name = `${leaveType.leaveName}`;
+    const name = `${leaveType?.leaveName}`;
     return name;
   };
   const getUserName = (rowData) => {

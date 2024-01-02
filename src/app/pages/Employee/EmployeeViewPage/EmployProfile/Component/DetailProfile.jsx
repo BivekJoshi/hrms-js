@@ -11,6 +11,8 @@ import DocumentInfo from "../../InfoTabs/DocumentInfoTab/DocumentInfo";
 import TrainingInfo from "../../InfoTabs/TrainingInfoTab/TrainingInfo";
 import PromotionHistory from '../../InfoTabs/PromotionHistory/PromotionHistory';
 import EmployeeHistory from '../../InfoTabs/EmployeeHistoryTab/EmployeeHistory';
+import BranchInfo from '../../InfoTabs/BranchTab/BranchInfo';
+import DepartmentInfo from '../../InfoTabs/DepartmentTab/DepartmentInfo';
 
 const primaryColor = "#1c7ed6";
 
@@ -62,7 +64,7 @@ export const DetailProfile = ({ data, role }) => {
                   }}
                 />
                 <Tab
-                  label="Position History"
+                  label="Position"
                   value="4"
                   style={{
                     fontSize: "1rem",
@@ -71,7 +73,7 @@ export const DetailProfile = ({ data, role }) => {
                   }}
                 />
                  <Tab
-                  label="Work History"
+                  label="Work"
                   value="5"
                   style={{
                     fontSize: "1rem",
@@ -89,8 +91,26 @@ export const DetailProfile = ({ data, role }) => {
                   }}
                 />
                 <Tab
-                  label="Documents"
+                  label="Branch"
                   value="7"
+                  style={{
+                    fontSize: "1rem",
+                    color: primaryColor,
+                    fontWeight: "bolder",
+                  }}
+                />
+                <Tab
+                  label="Department"
+                  value="8"
+                  style={{
+                    fontSize: "1rem",
+                    color: primaryColor,
+                    fontWeight: "bolder",
+                  }}
+                />
+                <Tab
+                  label="Documents"
+                  value="9"
                   style={{
                     fontSize: "1rem",
                     color: primaryColor,
@@ -121,6 +141,12 @@ export const DetailProfile = ({ data, role }) => {
             <TrainingInfo data={data} role={role} />
           </TabPanel>
           <TabPanel value="7" style={{ padding: 10 }}>
+            <BranchInfo data={data} role={role} />
+          </TabPanel>
+          <TabPanel value="8" style={{ padding: 10 }}>
+            <DepartmentInfo data={data} role={role} />
+          </TabPanel>
+          <TabPanel value="9" style={{ padding: 10 }}>
             <DocumentInfo data={data} role={role} />
           </TabPanel>
         </Box>

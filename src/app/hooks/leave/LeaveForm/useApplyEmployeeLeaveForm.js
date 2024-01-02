@@ -1,15 +1,12 @@
 import { useFormik } from "formik";
 import { useAddLeave, useEditLeave } from "../useLeave";
-import { EditLeaveSchema, LeaveSchema } from "../Validation/LeaveSchema";
+import { LeaveSchema } from "../Validation/LeaveSchema";
 import { useGetLoggedInUser } from "../../auth/usePassword";
-import { useGetLoggedInUserInfo } from '../../employee/useEmployee';
-import { useNavigate } from 'react-router-dom';
 
-const useApplyLeaveForm = (data) => {
+const useApplyEmployeeLeaveForm = (data) => {
   const { mutate: addLeave } = useAddLeave({});
   const { mutate: editLeave } = useEditLeave({});
   const { data: userData } = useGetLoggedInUser();
-  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
@@ -24,38 +21,28 @@ const useApplyLeaveForm = (data) => {
       leaveStatus: data?.leaveStatus || "PENDING",
       leaveRemarks: data?.leaveRemarks || "",
     },
-    validationSchema: data ? EditLeaveSchema : LeaveSchema,
+    validationSchema: LeaveSchema,
     enableReinitialize: true,
-    // onSubmit: (values, { resetForm }) => {
-      onSubmit: (values) => {
+    onSubmit: async (values, { resetForm }) => {
       if (data?.id) {
-        handledEditRequest(values);
+        await handledEditRequest(values);
       } else {
-        handleRequest(values);
+        await handleRequest(values);
       }
-      // resetForm();
+      resetForm();
     },
   });
 
-  const handleRequest = (values) => {
+  const handleRequest = async (values) => {
     values = { ...values };
-    addLeave(values, formik, {
-      onSuccess: () => {
-        
-        formik.handleReset();
-      }
-    });
+    await addLeave(values, formik);
   };
 
-  const handledEditRequest = (values) => {
+  const handledEditRequest = async (values) => {
     values = { ...values };
-    editLeave(values, formik, {
-      onSuccess: () => {
-        formik.handleReset();
-      }
-    });
+    await editLeave(values, formik);
   };
 
   return { formik };
 };
-export default useApplyLeaveForm;
+export default useApplyEmployeeLeaveForm;

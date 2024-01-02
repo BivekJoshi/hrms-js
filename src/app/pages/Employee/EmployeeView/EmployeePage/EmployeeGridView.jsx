@@ -12,10 +12,7 @@ import React, { useEffect, useState } from 'react';
 import EmployeeCard from '../../../../components/cards/Employee/EmployeeCard';
 
 const EmployeeGridView = ({ employeeData }) => {
-  console.log(
-    '🚀 ~ file: EmployeeGridView.jsx:15 ~ EmployeeGridView ~ employeeData:',
-    employeeData
-  );
+
   return (
     <>
       <Grid

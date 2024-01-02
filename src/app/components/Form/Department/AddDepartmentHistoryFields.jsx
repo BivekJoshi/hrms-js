@@ -1,11 +1,11 @@
+import { Button, Grid, TextField } from "@mui/material";
 import React from "react";
-import { Grid, TextField, Button, Autocomplete } from "@mui/material";
-import useAddPromotionHistoryForm from "../../../hooks/promotionHistory/addPromotionHistory.jsx/useAddPromotionForm";
-import { useGetDesignation } from "../../../hooks/designation/useDesignation";
+import { useGetDepartment } from '../../../hooks/department/useDepartment';
+import useAddDepartmentHistoryForm from '../../../hooks/department/DepartmentForm/useAddDepartmentHistoryForm';
 
-const AddPromotionHistoryFields = ({ onClose, isLoading }) => {
-  const { formik } = useAddPromotionHistoryForm(onClose);
-  const { data: designationData } = useGetDesignation();
+const AddDepartmentHistoryFields = ({ onClose, isLoading, id }) => {
+  const { formik } = useAddDepartmentHistoryForm(onClose, id);
+  const { data: departmntData } = useGetDepartment();
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
@@ -19,62 +19,35 @@ const AddPromotionHistoryFields = ({ onClose, isLoading }) => {
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
           <TextField
-            id="positionId"
-            name="positionId"
-            select
-            label="Position Name"
+            id="branchId"
+            name="branchId"
+            label="Branch Name"
+            placeholder="Enter branch name"
             fullWidth
-            value={formik.values.positionId}
+            required
+            select
+            value={formik.values.branchId}
             onChange={formik.handleChange}
             error={
-              formik.touched.positionId && Boolean(formik.errors.positionId)
+              formik.touched.branchId && Boolean(formik.errors.branchId)
             }
-            helperText={formik.touched.positionId && formik.errors.positionId}
+            helperText={formik.touched.branchId && formik.errors.branchId}
             variant="outlined"
             SelectProps={{
               native: true,
             }}
             InputLabelProps={{ shrink: true }}
+            // size="small"
           >
-            <option value="" disabled>
-              Select position
+             <option value="" disabled>
+              Select Branch
             </option>
-            {designationData?.map((option) => (
+            {departmntData?.map((option) => (
               <option key={option?.id} value={option?.id}>
-                {`${option?.positionName} ${option?.positionLevel}`}
+                {`${option?.branchName}`}
               </option>
             ))}
           </TextField>
-
-          {/* <Autocomplete
-           id="positionId"
-           name="positionId"
-           options={designationData || []}
-           getOptionLabel={(option) =>
-             `${option?.positionName} ${option?.positionLevel}`
-           }
-           value={formik.values.positionId}
-           onChange={(event, value) => {
-             formik.setFieldValue("positionId", value?.id);
-           }}
-           renderInput={(params) => (
-             <TextField
-               {...params}
-               label="Position Name"
-               placeholder="Select position"
-               fullWidth
-               required
-               error={
-                 formik.touched.positionId && Boolean(formik.errors.positionId)
-               }
-               helperText={
-                 formik.touched.positionId && formik.errors.positionId
-               }
-               variant="outlined"
-               InputLabelProps={{ shrink: true }}
-             />
-           )}
-         /> */}
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
@@ -92,6 +65,26 @@ const AddPromotionHistoryFields = ({ onClose, isLoading }) => {
             helperText={
               formik.touched.effectiveFromDate &&
               formik.errors.effectiveFromDate
+            }
+            variant="outlined"
+            InputLabelProps={{ shrink: true }}
+          />
+        </Grid>
+        <Grid item xs={12} sm={12}>
+          <TextField
+            id="effectiveToDate"
+            name="effectiveToDate"
+            label="Effective To Date"
+            type="date"
+            fullWidth
+            value={formik.values.effectiveToDate}
+            onChange={formik.handleChange}
+            error={
+              formik.touched.effectiveToDate &&
+              Boolean(formik.errors.effectiveToDate)
+            }
+            helperText={
+              formik.touched.effectiveToDate && formik.errors.effectiveToDate
             }
             variant="outlined"
             InputLabelProps={{ shrink: true }}
@@ -123,7 +116,7 @@ const AddPromotionHistoryFields = ({ onClose, isLoading }) => {
             onClick={handleFormSubmit}
             sx={{ mt: 3, ml: 1 }}
           >
-            Promote Employee
+            Update Department
           </Button>
           <Button
             variant="contained"
@@ -139,4 +132,4 @@ const AddPromotionHistoryFields = ({ onClose, isLoading }) => {
   );
 };
 
-export default AddPromotionHistoryFields;
+export default AddDepartmentHistoryFields;
