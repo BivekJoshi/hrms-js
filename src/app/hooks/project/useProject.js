@@ -120,7 +120,7 @@ export const useEditProject = ({ onSuccess }) => {
     onSuccess: (data, variables, context) => {
       toast.success("Successfully edited project");
       onSuccess && onSuccess(data, variables, context);
-      queryClient.invalidateQueries("getProject");
+      queryClient.invalidateQueries("getProjectPageWise");
     },
     onError: (err, _variables, _context) => {
       toast.error(`Error: ${err.message}`);

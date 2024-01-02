@@ -11,7 +11,8 @@ const AddEmployeeSchema = Yup.object().shape({
   dateOfJoin: Yup.string().required('Date of join is required'),
   mobileNumber: Yup.string()
     .required('Mobile number is required')
-    .matches(/^[0-9]{10}$/, 'Invalid mobile number format'),
+    .matches(/^9[0-9]{9}$/, 'Invalid mobile number format, must start with 9.'),
+    // .matches(/^[0-9]{10}$/, 'Invalid mobile number format'),
   citizenshipNumber: Yup.string().matches(/^[0-9\/-]+$/, 'Enter valid citizenship number').required('Citizenship number is required'),
   panNumber: Yup.string().matches(/^[0-9\/-]+$/, 'Enter valid pan number'),
   officeEmail: Yup.string()

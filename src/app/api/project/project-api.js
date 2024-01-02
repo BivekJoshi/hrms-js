@@ -94,7 +94,7 @@ export const addProject = async (formData) => {
   /*________________________EDIT_____________________________________*/
 }
 export const editProject = async (formData) => {
-  const { id } = formData;
-  const data = await axiosInstance.put(`/project/update/${id}`, formData);
+  const { projectid } = formData;
+  const data = await axiosInstance.put(`/project/update/${projectid}`, formData);
   return data;
 };
