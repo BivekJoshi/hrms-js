@@ -1,7 +1,6 @@
 import React from "react";
 import "../Style/Style.css";
-import { Box, Divider, Stack } from "@mui/material";
-import BorderColorIcon from "@mui/icons-material/BorderColor";
+import { Box, Divider } from "@mui/material";
 import ListUserDetails from "../../InfoTabs/BaiscInfoTab/Components/ListUserDetails";
 import { useParams } from "react-router-dom";
 import { useGetBankByEmployeeId } from "../../../../../hooks/employee/useBank";
@@ -9,7 +8,6 @@ import { useGetFammilyById } from "../../../../../hooks/employee/useFamily";
 import useAuth from "../../../../../../auth/hooks/component/login/useAuth";
 
 const BasicInfo = ({ data, mode, positionName, empId }) => {
-  console.log("sdf", data);
   const { id } = useParams();
   const { isSuperAdmin, isAdmin, isHr, isEmployee, isHrAdmin, isManager } =
     useAuth();

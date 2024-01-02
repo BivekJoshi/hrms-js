@@ -133,7 +133,7 @@ const AddEmployeeHistoryFields = ({onClose, isLoading}) => {
           <TextField
             id="remarks"
             name="remarks"
-            label="remarks"
+            label="Remarks"
             placeholder="Enter work remarks"
             fullWidth
             value={formik.values.remarks}

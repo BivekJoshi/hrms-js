@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
-import PromotionSchema from "../Validation/PromotionSchema";
 import { useAddPromotionHistory } from "../usePromotionHistory";
+import PositionSchema from "../Validation/PromotionSchema";
 
 const useAddPromotionHistoryForm = () => {
   const { mutate } = useAddPromotionHistory({});
@@ -11,15 +11,19 @@ const useAddPromotionHistoryForm = () => {
       effectiveFromDate: "",
       remarks: "",
     },
-    validationSchema: PromotionSchema,
+    validationSchema: PositionSchema,
     onSubmit: (values) => {
+      const isValid = PositionSchema.isValidSync(values); // Simple validation test
+      console.log('Is valid:', isValid);
       handleRequest(values);
     },
   });
 
   const handleRequest = (values) => {
+    const positionId = values.positionId ? values.positionId.id : null;
     values = {
       ...values,
+      positionId,
     };
     mutate(values, formik, { onSuccess: () => formik.handleReset() });
   };

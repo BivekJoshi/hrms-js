@@ -1,9 +1,9 @@
 import * as Yup from "yup";
 
-const PromotionSchema = Yup.object().shape({
+const PositionSchema = Yup.object().shape({
+  positionId: Yup.object().nullable().required("Position name is required."),
   effectiveFromDate: Yup.string().required(" Effective Date name is required."),
-  positionId: Yup.string().required("Position name is required."),
-
+  remarks: Yup.string().required(" Remarks is required."),
 });
 
-export default PromotionSchema;
+export default PositionSchema;

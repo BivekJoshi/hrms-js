@@ -4,9 +4,8 @@ import useAddPromotionHistoryForm from "../../../hooks/promotionHistory/addPromo
 import { useGetDesignation } from "../../../hooks/designation/useDesignation";
 
 const AddPromotionHistoryFields = ({ onClose, isLoading }) => {
+  const { data: designationData, isLoading: optionLoad } = useGetDesignation();
   const { formik } = useAddPromotionHistoryForm();
-
-  const { data: designationData } = useGetDesignation();
 
   const handleFormSubmit = async () => {
     const isValid = await formik.validateForm();
@@ -24,7 +23,7 @@ const AddPromotionHistoryFields = ({ onClose, isLoading }) => {
       }
     }
   };
-
+  console.log(formik);
   return (
     !isLoading && (
       <Grid container spacing={3}>
@@ -59,24 +58,28 @@ const AddPromotionHistoryFields = ({ onClose, isLoading }) => {
           <Autocomplete
             id="positionId"
             name="positionId"
-            options={designationData}
-            getOptionLabel={(option) =>
-              option ? `${option?.positionName} ${option?.positionLevel}` : ""
-            }
-            value={formik.values.id || null}
-            onChange={(event, value) => {
-              formik.setFieldValue("positionId", value ? value.id : null);
+            options={designationData || []}
+            getOptionLabel={(option) => {
+              return option
+                ? `${option?.positionName || ""} ${option?.positionLevel || ""}`
+                : "";
             }}
+            value={formik.values.positionId}
+            onChange={(event, value) => {
+              formik.setFieldValue("positionId", value);
+            }}
+            onBlur={formik.handleBlur}
             renderInput={(params) => (
               <TextField
                 {...params}
                 label="Position Name"
+                placeholder="Select position name"
                 fullWidth
                 error={
-                  formik.touched.id && Boolean(formik.errors.id)
+                  formik.touched.positionId && Boolean(formik.errors.positionId)
                 }
                 helperText={
-                  formik.touched.id && formik.errors.id
+                  formik.touched.positionId && formik.errors.positionId
                 }
                 variant="outlined"
                 InputLabelProps={{ shrink: true }}
@@ -112,6 +115,7 @@ const AddPromotionHistoryFields = ({ onClose, isLoading }) => {
             label="Remarks"
             placeholder="Enter remarks type"
             fullWidth
+            onBlur={formik.handleBlur}
             value={formik.values.remarks}
             onChange={formik.handleChange}
             error={formik.touched.remarks && Boolean(formik.errors.remarks)}
