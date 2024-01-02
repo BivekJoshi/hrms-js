@@ -10,17 +10,16 @@ import CustomTable from '../../../../../components/CustomTable/CustomTable';
 import { useGetEmployeeHistory } from '../../../../../hooks/employee/useEmployeeHistory';
 import { AddEmployeeHistory } from './EmployeeHistoryModal';
 
-const EmployeeHistory = () => {
-  const { isSuperAdmin, isAdmin, isHr, isEmployee, isHrAdmin, isManager } =
-    useAuth();
-  const { data: loggedInUserData, isLoading: isLoadingUserData } = isEmployee
-    ? useGetLoggedInUserInfo()
-    : {};
+const EmployeeHistory = ({data, role}) => {
+  // const { isSuperAdmin, isAdmin, isHr, isEmployee, isHrAdmin, isManager } =
+  //   useAuth();
+  // const { data: loggedInUserData, isLoading: isLoadingUserData } = isEmployee
+  //   ? useGetLoggedInUserInfo()
+  //   : {};
   const { id } = useParams();
-  const { data: employeeHistory, isLoading } =
-    isSuperAdmin || isAdmin || isHr || isHrAdmin || isManager
+  const { data: employeeHistory, isLoading } = role  
       ? useGetEmployeeHistory(id)
-      : useGetPromotionHistory(loggedInUserData?.id);
+      : useGetEmployeeHistory(data?.id);
   // const { data: designationData, isLoading: loadingDesignation } =
   //   useGetDesignation();
   // const { data: trainingData } = useGetTrainingByEmpId(id);
@@ -103,13 +102,13 @@ const EmployeeHistory = () => {
           paddingBottom: '10px',
         }}
       >
-        {!isEmployee ? (
+        {role ? (
           <Button
             variant='contained'
             sx={{ mt: 3, ml: 1 }}
             onClick={handleAddOpenModal}
           >
-            + Add Employee History
+            + Add Work History
           </Button>
         ) : (
           ''
@@ -119,13 +118,13 @@ const EmployeeHistory = () => {
       <CustomTable
         columns={columns}
         data={employeeHistory}
-        title='Designation List'
+        title='Work History'
         isLoading={isLoading}
       />
 
       {openAddModal && (
         <AddEmployeeHistory
-          title={'Add Employee History'}
+          title={'Add Work History'}
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
         />

@@ -8,11 +8,11 @@ import ThemeModeContext from '../../../../../../theme/ThemeModeContext';
 import { useGetQualificationById } from '../../../../../hooks/employee/useQualification';
 import { useSelector } from 'react-redux';
 
-const AcademicsInfo = ({ data: userDetails }) => {
-  const { data, isLoading } = useGetQualificationById(userDetails?.id);
+const AcademicsInfo = ({ data }) => {
+  const { data: qualificationData, isLoading } = useGetQualificationById(data?.id);
 
   const { mode } = useContext(ThemeModeContext);
-  return (
+  return !isLoading && (
     <Box
       className='profileBasic'
       sx={{
@@ -28,8 +28,8 @@ const AcademicsInfo = ({ data: userDetails }) => {
           marginTop: '0rem',
         }}
       >
-        {data
-          ? data
+        {qualificationData
+          ? qualificationData
               .sort((a, b) => b.passedYear - a.passedYear)
               .map((item, index) => (
                 <AcademicsComponents key={index} data={item} />

@@ -89,6 +89,7 @@ const LeaveTypeFields = ({ onClose, isLoading, data, existingLeaveTypes }) => {
               helperText={formik.touched.leaveName && formik.errors.leaveName}
               variant='outlined'
               InputLabelProps={{ shrink: true }}
+              size="small"
             />
           </Grid>
         ) : (
@@ -109,6 +110,7 @@ const LeaveTypeFields = ({ onClose, isLoading, data, existingLeaveTypes }) => {
               helperText={formik.touched.leaveName && formik.errors.leaveName}
               variant='outlined'
               InputLabelProps={{ shrink: true }}
+              size="small"
             >
               {filteredLeaveNames.map((option) => (
                 <MenuItem
@@ -141,6 +143,7 @@ const LeaveTypeFields = ({ onClose, isLoading, data, existingLeaveTypes }) => {
             helperText={formik.touched.leaveTotal && formik.errors.leaveTotal}
             variant='outlined'
             InputLabelProps={{ shrink: true }}
+            size="small"
           />
         </Grid>
         <Grid item xs={12} sm={12}>

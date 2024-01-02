@@ -26,37 +26,52 @@ const documentName = [
     value: 'CITIZENSHIP',
   },
   {
-    id: 1,
+    id: 3,
     label: 'Pan Card',
     value: 'PAN_CARD',
   },
   {
-    id: 1,
+    id: 4,
     label: 'Academic Document',
     value: 'ACADEMIC_DOCUMENT',
   },
   {
-    id: 1,
+    id: 5,
     label: 'Training Certificate',
     value: 'TRAINING_CERTIFICATE',
   },
   {
-    id: 1,
+    id: 6,
     label: 'Certification',
     value: 'CERTIFICATION',
   },
   {
-    id: 1,
+    id: 7,
     label: 'Experience Letter',
     value: 'EXPERIENCE_LETTER',
   },
   {
-    id: 1,
+    id: 8,
+    label: 'Curriculum Vitae',
+    value: 'CURRICULUM_VITAE',
+  },
+  {
+    id: 9,
     label: 'Awards and Acheivements',
     value: 'AWARD_AND_ACHIEVEMENT',
   },
+  {
+    id: 10,
+    label: 'Signed Contract',
+    value: 'SIGNED_CONTRACT',
+  },
+  {
+    id: 11,
+    label: 'Health Insurance',
+    value: 'HEALTH_INSURANCE',
+  },
 ];
-const DocumentInfo = () => {
+const DocumentInfo = ({data, role}) => {
   const { isSuperAdmin, isAdmin, isHr, isEmployee, isHrAdmin, isManager } =
     useAuth();
   const { data: loggedInUserData, isLoading: isLoadingUserData } = isEmployee
@@ -67,11 +82,8 @@ const DocumentInfo = () => {
 
   const url = DOC_URL;
   const { id } = useParams();
-  const { data: getDocument, isLoading } =
-    isSuperAdmin || isAdmin || isHr || isHrAdmin || isManager
-      ? useGetDocumentById(id)
-      : useGetDocumentById(loggedInUserData?.id);
-
+  const { data: getDocument, isLoading } = (role) ? useGetDocumentById(data?.id) : useGetDocumentById(loggedInUserData?.id);
+console.log(role);
   const groupedDocuments = isLoading
     ? {}
     : groupBy(getDocument, 'documentType');

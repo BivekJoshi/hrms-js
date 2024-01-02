@@ -110,7 +110,8 @@ const EmployeeCard = ({
                 ""
               ) : (
                 <>
-                  <Button
+                 <div style={{display: 'flex', alignItems: 'center'}}>
+                 <Button
                     style={{
                       marginTop: "5px",
                       fontSize: ".7rem",
@@ -123,8 +124,24 @@ const EmployeeCard = ({
                     {IsActive ? "Terminate" : "Active"}
                   </Button>
 
-                  <Box>
+                 
                     <Button
+                      variant="outlined"
+                      sx={{
+                        marginTop: "5px",
+                        fontSize: ".7rem",
+                        padding: "1px 12px",
+                        margin: '0 0.4rem',
+                      }}
+                      onClick={() => {
+                        navigate(`edit/${EmployeeId}`);
+                        // handleClose();
+                      }}
+                    >
+                      Edit
+                    </Button>
+                 </div>
+                    {/* <Button
                       ref={anchorRef}
                       id="composition-button"
                       aria-controls={open ? "composition-menu" : undefined}
@@ -159,7 +176,10 @@ const EmployeeCard = ({
                                 id="composition-menu"
                                 aria-labelledby="composition-button"
                                 onKeyDown={handleListKeyDown}
-                                style={{ fontSize: ".8rem" }}
+                                style={{
+                                  fontSize: ".8rem",
+                                  padding: "0.3rem 1rem",
+                                }}
                               >
                                 <MenuItem
                                   onClick={() => {
@@ -171,42 +191,44 @@ const EmployeeCard = ({
                                   Edit
                                 </MenuItem>
                                 <MenuItem
-                                  onClick={() => {
-                                    navigate(`${EmployeeId}`);
-                                    handleClose();
-                                  }}
-                                  style={{ fontSize: ".8rem" }}
-                                >
-                                  View Profile
-                                </MenuItem>
+                                onClick={() => {
+                                  navigate(`${EmployeeId}`);
+                                  handleClose();
+                                }}
+                                style={{ fontSize: ".8rem" }}
+                              >
+                                View Profile
+                              </MenuItem>
                               </MenuList>
                             </ClickAwayListener>
                           </Paper>
                         </Grow>
                       )}
-                    </Popper>
-                  </Box>
+                    </Popper> */}
+                  
                 </>
               )}
             </div>
           </Box>
 
           <Stack
-            style={{
+            sx={{
               textAlign: " -webkit-center",
               marginTop: "1rem",
               alignItems: "center",
+              cursor: "pointer",
+            }}
+            onClick={() => {
+              navigate(`${EmployeeId}`);
+              // handleClose();
             }}
           >
-            {" "}
-            <Stack>
-              <CardMedia
-                component="img"
-                src={imageFinal}
-                alt="Img"
-                sx={{ width: 66, height: 66, borderRadius: "2rem" }}
-              />
-            </Stack>
+            <CardMedia
+              component="img"
+              src={imageFinal}
+              alt="Img"
+              sx={{ width: 66, height: 66, borderRadius: "2rem" }}
+            />
             <Typography
               style={{ fontWeight: 700, margin: "1rem 0", fontSize: "20px" }}
             >
@@ -230,6 +252,7 @@ const EmployeeCard = ({
                 }
               />
             </Typography>
+
             <Box padding={"0 1rem"}>
               <Typography variant="body2" gutterBottom>
                 <Tooltip title={PositionLevel || ""}>
@@ -248,6 +271,7 @@ const EmployeeCard = ({
               </Typography>
             </Box>
           </Stack>
+
           {isEmployee ? (
             ""
           ) : (
@@ -319,6 +343,7 @@ const EmployeeCard = ({
         </MainCard>
         {openEmailForm && (
           <EmailModal
+            title={"Send Email"}
             officeEmail={OfficeEmail || ""}
             employeeId={EmployeeId}
             open={openEmailForm}

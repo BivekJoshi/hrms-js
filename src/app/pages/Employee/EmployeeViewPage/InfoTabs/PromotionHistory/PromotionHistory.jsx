@@ -9,32 +9,41 @@ import { useGetDesignation } from "../../../../../hooks/designation/useDesignati
 import useAuth from "../../../../../../auth/hooks/component/login/useAuth";
 import { useGetLoggedInUserInfo } from "../../../../../hooks/employee/useEmployee";
 import CustomTable from "../../../../../components/CustomTable/CustomTable";
+// import { positions } from "@mui/system";
 
-const PromotionHistory = () => {
-  const { isSuperAdmin, isAdmin, isHr, isEmployee, isHrAdmin, isManager } =
-    useAuth();
-  const { data: loggedInUserData, isLoading: isLoadingUserData } = isEmployee
-    ? useGetLoggedInUserInfo()
-    : {};
-  const { id } = useParams();
-  const { data: PromotionHistory, isLoading } =
-    isSuperAdmin || isAdmin || isHr || isHrAdmin || isManager
-      ? useGetPromotionHistory(id)
-      : useGetPromotionHistory(loggedInUserData?.id);
-
-  const { data: designationData, isLoading: loadingDesignation } =
-    useGetDesignation();
-  // const { data: trainingData } = useGetTrainingByEmpId(id);
-
+const PromotionHistory = ({ data, role }) => {
   const [openAddModal, setOpenAddModal] = useState(false);
-
   const handleAddOpenModal = () => setOpenAddModal(true);
   const handleCloseAddModal = () => setOpenAddModal(false);
 
+  const { data: PromotionHistory, isLoading } = useGetPromotionHistory(
+    data?.id
+  );
+  const { data: designationData, isLoading: loadingDesignation } =
+    useGetDesignation();
+
+  // const { isSuperAdmin, isAdmin, isHr, isEmployee, isHrAdmin, isManager } =
+  //   useAuth();
+  // const { data: loggedInUserData, isLoading: isLoadingUserData } = isEmployee
+  //   ? useGetLoggedInUserInfo()
+  //   : {};
+  // const { id } = useParams();
+  // const { data: PromotionHistory, isLoading } =
+  //   isSuperAdmin || isAdmin || isHr || isHrAdmin || isManager
+  //     ? useGetPromotionHistory(id)
+  //     : useGetPromotionHistory(loggedInUserData?.id);
+
+  // const { data: trainingData } = useGetTrainingByEmpId(id);
+
+  // const [openAddModal, setOpenAddModal] = useState(false);
+
+  // const handleAddOpenModal = () => setOpenAddModal(true);
+  // const handleCloseAddModal = () => setOpenAddModal(false);
+
   // const mappedPromotionHistory = PromotionHistory?.map((item) => {
   //   const position = designationData?.find((pos) => pos.id === item.positionId);
-  //   const positionName = `${position?.positionName || "-"} (${
-  //     position?.positionLevel || "-"
+  //   const positionName = `${position?.positionName || '-'} (${
+  //     position?.positionLevel || '-'
   //   })`;
   //   return {
   //     ...item,
@@ -56,6 +65,7 @@ const PromotionHistory = () => {
       field: "position.positionName",
       emptyValue: "-",
       width: 300,
+      sorting: false,
     },
     {
       title: "Effective From",
@@ -77,7 +87,8 @@ const PromotionHistory = () => {
     },
     {
       title: "Position Hold",
-      field: "lastPosition",
+      field: "isLastPosition",
+      emptyValue: "-",
       width: 50,
       render: (rowData) => {
         return (
@@ -108,7 +119,7 @@ const PromotionHistory = () => {
           paddingBottom: "10px",
         }}
       >
-        {!isEmployee ? (
+        {role && (
           <Button
             variant="contained"
             sx={{ mt: 3, ml: 1 }}
@@ -116,21 +127,19 @@ const PromotionHistory = () => {
           >
             + Add Position
           </Button>
-        ) : (
-          ""
         )}
       </Box>
 
       <CustomTable
         columns={columns}
         data={PromotionHistory}
-        title="Designation List"
+        title="Position History"
         isLoading={isLoading || loadingDesignation}
       />
 
       {openAddModal && (
         <AddPromotionHistory
-          title={"Add Promotion"}
+          title={"Add Position"}
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
         />

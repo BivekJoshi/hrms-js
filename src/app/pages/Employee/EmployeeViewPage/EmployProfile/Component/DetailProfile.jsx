@@ -19,7 +19,7 @@ export const DetailProfile = ({ data, role, setShowPersonalProfile }) => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
+console.log("hi" +role);
   const tabsData = [
     {
       label: "Leave Records",
@@ -78,6 +78,7 @@ export const DetailProfile = ({ data, role, setShowPersonalProfile }) => {
                 onChange={handleChange}
                 aria-label="lab API tabs example"
                 className="tableAlignment"
+                
               >
                 {tabsData.map((tab) => (
                   <Tab

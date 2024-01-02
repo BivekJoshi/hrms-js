@@ -13,10 +13,11 @@ const BasicInfo = ({ data, mode, positionName, empId }) => {
   const { isSuperAdmin, isAdmin, isHr, isEmployee, isHrAdmin, isManager } =
     useAuth();
   const { data: bankData } = useGetBankByEmployeeId();
-  const { data: familyData } = useGetFammilyById(empId);
+  const { data: familyData } = useGetFammilyById(data?.id);
+  
   const bData = bankData && bankData?.[0];
   const fData = familyData && familyData?.[0];
-
+  
   const EMPLOYEE = {
     Gender: data?.gender || "",
     "Citizenship Number": data?.citizenshipNumber || "",
@@ -37,14 +38,6 @@ const BasicInfo = ({ data, mode, positionName, empId }) => {
     "Account Number": bData?.bankAccountNumber || "",
     Location: bData?.bankAddress || "",
   };
-
-  // const handleOnClick = () => {
-  //   if (isAdmin || isSuperAdmin || isHr || isManager || isHrAdmin) {
-  //     navigate(`/admin/employee/edit/${id}`);
-  //   } else {
-  //     navigate(`/employee/employee/edit/${loggedInUserData?.employeeId}`);
-  //   }
-  // };
 
   return (
     <>

@@ -8,6 +8,6 @@ const DesignationSchema = Yup.object().shape({
   salary: Yup.string()
     .required("Salary is required")
     .matches(/^[0-9]+$/, "Salary must be a valid number"),
-  positionDetails: Yup.string().required("Designation details is required"),
+  // positionDetails: Yup.string().required("Designation details is required"),
 });
 export { DesignationSchema };

@@ -47,7 +47,7 @@ const Event = ({ permissions }) => {
   }, [eventData]);
 
   const handleCloseModal = () => setOpenAddModal(false);
-  const { formik, data } = useEventForm(setOpenSubmitModal, handleCloseModal);
+  const { formik, eventId } = useEventForm(setOpenSubmitModal, handleCloseModal);
 
   const handleFormSubmit = async () => {
     formik.handleSubmit();
@@ -165,7 +165,7 @@ const Event = ({ permissions }) => {
           formComponent={
             <div>
               <EmailToAll
-                getEventID={data?.id}
+                getEventID={eventId}
                 onClose={() => setOpenEmailModal(false)}
               />
             </div>

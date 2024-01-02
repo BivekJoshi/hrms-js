@@ -4,30 +4,46 @@ import useAddPromotionHistoryForm from "../../../hooks/promotionHistory/addPromo
 import { useGetDesignation } from "../../../hooks/designation/useDesignation";
 
 const AddPromotionHistoryFields = ({ onClose, isLoading }) => {
+  const { formik } = useAddPromotionHistoryForm(onClose);
   const { data: designationData, isLoading: optionLoad } = useGetDesignation();
-  const { formik } = useAddPromotionHistoryForm();
 
-  const handleFormSubmit = async () => {
-    const isValid = await formik.validateForm();
-
-    if (isValid) {
-      formik.handleSubmit();
-
-      if (formik.isValid) {
-        formik.setTouched({
-          positionId: false,
-          effectiveFromDate: false,
-          remarks: false,
-        });
-        onClose();
-      }
+  const handleFormSubmit = () => {
+    formik.handleSubmit();
+    if (formik.isValid) {
     }
   };
-  console.log(formik);
   return (
     !isLoading && (
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
+          <TextField
+            id="positionId"
+            name="positionId"
+            select
+            label="Position Name"
+            fullWidth
+            value={formik.values.positionId}
+            onChange={formik.handleChange}
+            error={
+              formik.touched.positionId && Boolean(formik.errors.positionId)
+            }
+            helperText={formik.touched.positionId && formik.errors.positionId}
+            variant="outlined"
+            SelectProps={{
+              native: true,
+            }}
+            InputLabelProps={{ shrink: true }}
+          >
+            <option value="" disabled>
+              Select position
+            </option>
+            {designationData?.map((option) => (
+              <option key={option?.id} value={option?.id}>
+                {`${option?.positionName} ${option?.positionLevel}`}
+              </option>
+            ))}
+          </TextField>
+
           {/* <Autocomplete
             id="positionId"
             name="positionId"

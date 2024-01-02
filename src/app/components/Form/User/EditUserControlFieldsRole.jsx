@@ -74,7 +74,7 @@ export const EditUserControlFieldsRole = ({ onClose, rowData }) => {
           id="rowData?.id"
           name="userId"
           label="User Name"
-          placeholder="Enter User name..."
+          placeholder="Enter User name"
           fullWidth
           required
           select

@@ -9,7 +9,6 @@ import { ButtonComponent } from "../../Button/ButtonComponent";
 export const AddUserControlFields = ({ onClose, userControlData }) => {
   const { data: employeeData } = useGetEmployee();
   const { formik } = useAddUserControlForm(onClose);
-  const { mode } = useContext(ThemeModeContext);
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
@@ -28,24 +27,6 @@ export const AddUserControlFields = ({ onClose, userControlData }) => {
     return `${emp?.firstName} ${emp?.middleName || ""} ${emp?.lastName}`;
   };
 
-  // const getEmployeeId = () => {
-  //   const employeeId = employeeData?.map((nameId) => {
-  //     return nameId.id;
-  //   });
-  //   const employee = userControlData?.find(
-  //     (emp) => emp?.employeeId !== employeeId
-  //   );
-  //   const name = `${employee?.firstName} ${employee?.middleName || ""} ${
-  //     employee?.lastName
-  //   }`;
-  //   return name;
-  // };
-  // const getUserId = (userId) => {
-  //   return (
-  //     userControlData?.find((User) => User?.id !== userId)?.name ||
-  //     userId
-  //   );
-  // };
   return (
     <>
       <Grid container spacing={3}>
@@ -58,7 +39,9 @@ export const AddUserControlFields = ({ onClose, userControlData }) => {
             id="employeeId"
             name="employeeId"
             options={employeeData || []}
-            getOptionLabel={(employee) => nameLabel(employee)}
+            getOptionLabel={(employee) => {
+              return nameLabel(employee);
+            }}
             value={employeeData?.find(
               (employee) => employee?.id === formik.values?.employeeId
             )}
@@ -98,6 +81,7 @@ export const AddUserControlFields = ({ onClose, userControlData }) => {
             helperText={formik.touched.email && formik.errors.email}
             variant="outlined"
             InputLabelProps={{ shrink: true }}
+            size="small"
           />
         </Grid>
 

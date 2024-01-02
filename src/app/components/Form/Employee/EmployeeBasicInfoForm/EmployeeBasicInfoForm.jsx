@@ -5,7 +5,7 @@ import { useGetDesignation } from "../../../../hooks/designation/useDesignation"
 import { useGetDepartment } from "../../../../hooks/department/useDepartment";
 import ThemeModeContext from "../../../../../theme/ThemeModeContext";
 import { useGetEmploymentType } from "../../../../hooks/employmentType/useEmploymentType";
-import "./Style.css"
+import "./Style.css";
 
 const genderOptions = [
   {
@@ -421,7 +421,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
                   formik.touched.positionId && formik.errors.positionId
                 }
                 variant="outlined"
-              
+             
                     />
             )}
           /> */}

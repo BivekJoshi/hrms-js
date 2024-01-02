@@ -1,11 +1,12 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { Chip } from "@mui/material";
+import { Box, Chip } from "@mui/material";
 import { useGetEmployeeLeaveById } from "../../../../../hooks/leave/useLeave";
 import "../../EmployProfile/Style/Style.css";
 import CustomTable from "../../../../../components/CustomTable/CustomTable";
+import { useGetEmployee } from "../../../../../hooks/employee/useEmployee";
 
-const LeaveInfo = ({ isLoading, data }) => {
+const LeaveInfo = ({ isLoading, data, role }) => {
   const fullname = `${data?.firstName} ${data?.middleNam || ""}${
     data?.lastName
   }`;
@@ -14,11 +15,15 @@ const LeaveInfo = ({ isLoading, data }) => {
   const { data: leaveData, isLoading: loadingLeave } =
     useGetEmployeeLeaveById(id);
 
-  if (leaveData) {
-    const pendingLeaves = leaveData.filter(
-      (item) => item.leaveStatus === "PENDING"
-    );
-  }
+  // if (leaveData) {
+  //   const pendingLeaves = leaveData.filter(
+  //     (item) => item.leaveStatus === "PENDING"
+  //   );
+  // }
+  const pendingLeaves =
+    leaveData && leaveData.filter((item) => item?.leaveStatus === "PENDING");
+  const approvedRejectedLeaves =
+    leaveData && leaveData.filter((item) => item?.leaveStatus !== "PENDING");
 
   const columns = [
     {
@@ -125,12 +130,32 @@ const LeaveInfo = ({ isLoading, data }) => {
           </Card>
         </Grid>
       </Grid> */}
-      <CustomTable
+      {/* <CustomTable
         columns={columns}
         data={leaveData}
         title={"Leave Data of " + fullname}
         isLoading={loadingLeave}
-      />
+      /> */}
+      <Box
+        gap={2}
+        sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}
+      >
+        {pendingLeaves && pendingLeaves.length > 0 && (
+          <CustomTable
+            columns={columns}
+            data={pendingLeaves}
+            title="Pending Leave Data"
+          />
+        )}
+
+        {approvedRejectedLeaves && approvedRejectedLeaves.length > 0 && (
+          <CustomTable
+            columns={columns}
+            data={approvedRejectedLeaves}
+            title="Approved/Rejected Leave Data"
+          />
+        )}
+      </Box>
     </>
   );
 };

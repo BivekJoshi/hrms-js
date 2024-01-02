@@ -59,9 +59,9 @@ export const useDeleteDepartment = ({ onSuccess }) => {
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries("getDepartment");
       },
-      onError: (err, _variables, _context) => {
-        toast.error(`Error: ${err.message}`);
-      },
+      // onError: (err, _variables, _context) => {
+      //   toast.error(`Error: ${err.message}`);
+      // },
     }
   );
 };
