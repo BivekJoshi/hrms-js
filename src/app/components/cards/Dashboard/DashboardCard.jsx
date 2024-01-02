@@ -31,6 +31,7 @@ const DashboardCard = ({
       boxShadow={7}
       onClick={handleClick}
       bgcolor={mode === "light" ? "" : "#3f413f"}
+      sx={{cursor: 'pointer'}}
     >
       <Grid>
         <Typography

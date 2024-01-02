@@ -19,33 +19,36 @@ import useEmployeeHistoryForm from '../../../../../hooks/employee/AddEmployeeHis
 import { useAddDocumentForm } from '../../../../../hooks/employee/AddDocument/useAddDocumentForm';
 import { toast } from 'react-toastify';
 import { useGetAddressById } from '../../../../../hooks/employee/useAddress';
+import EmployeeOfficeDetailForm from '../../EmployeeOfficeDetail/EmployeeOfficeDetailForm';
+import useOfficeEmployeeForm from '../../../../../hooks/employee/AddOffice/useOfficeEmployeeForm';
+import { useGetOfficeEmployeeById } from '../../../../../hooks/employee/useOfficeEmployee';
 
 const EditEmployeeForm = () => {
   const { id } = useParams();
 
   const steps = [
     'Basic Details',
+    // 'Office Details',
     'Address Details',
     'Family Details',
     'Educational Details',
     'Bank Details',
-    'Employee History',
+    'Work History',
     'Document Details',
     // 'Other Details',
   ];
 
   const { data, isLoading: employeeLoading } = useGetEmployeeById(id);
-  const { data: addressData, isLoading: getaddressLoading } =
-    useGetAddressById(id);
+  const { data: addressData, isLoading: getaddressLoading } = useGetAddressById(id);
+  // const { data: officeData, isLoading: getofficeLoading } = useGetOfficeEmployeeById(id);
 
-  const { formik: qualificationFormik, isLoading: isLoadingQualification } =
-    useQualificationForm();
+  const { formik: qualificationFormik, isLoading: isLoadingQualification } = useQualificationForm();
 
   const { formik: familyFormik, isLoading: isLoadingFamily } = useFamilyForm();
   const { formik, isLoading } = useEditEmployeeForm({ data, employeeLoading });
 
-  const { formik: permanentFormik, isLoading: addressLoading } =
-    usePermanentAddressForm(addressData, getaddressLoading);
+  const { formik: permanentFormik, isLoading: addressLoading } = usePermanentAddressForm(addressData, getaddressLoading);
+  // const { formik: officeFormik, isLoading: officeLoading } = useOfficeEmployeeForm({officeData, getofficeLoading});
 
   const { formik: bankFormik } = useAddBankForm({ data, employeeLoading });
 
@@ -60,6 +63,15 @@ const EditEmployeeForm = () => {
     switch (step) {
       case 0:
         return <EmployeeBasicInfoForm formik={formik} isLoading={isLoading} />;
+
+        // case 1:
+        // return (
+        //   <EmployeeOfficeDetailForm
+        //     formik={officeFormik}
+        //     isLoading={officeLoading}
+        //     data={officeData}
+        //   />
+        // );
 
       case 1:
         return (
@@ -178,7 +190,8 @@ const EditEmployeeForm = () => {
   const handleNext = ({ activeStep, setActiveStep }) => {
     const formikArray = [
       formik,
-      permanentFormik,
+      // officeFormik,
+      permanentFormik,      
       familyFormik,
       qualificationFormik,
       bankFormik,

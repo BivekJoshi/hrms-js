@@ -4,7 +4,10 @@ import HocButton from "../../hoc/hocButton";
 import CustomTable from "../../components/CustomTable/CustomTable";
 import FormModal from "../../components/Modal/FormModal";
 import EmploymentTypeFields from "../../components/Form/EmploymentType/EmploymentTypeFields.jsx";
-import { useDeleteEmploymentType, useGetEmploymentType } from "../../hooks/employmentType/useEmploymentType.js";
+import {
+  useDeleteEmploymentType,
+  useGetEmploymentType,
+} from "../../hooks/employmentType/useEmploymentType.js";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteConfirmationModal from "../../components/Modal/DeleteConfirmationModal.jsx";
@@ -12,26 +15,33 @@ import DeleteConfirmationModal from "../../components/Modal/DeleteConfirmationMo
 const EmploymentType = () => {
   const { data: employmentTypeData, isLoading } = useGetEmploymentType();
   const [openAddModal, setOpenAddModal] = useState(false);
-  const [openDeleteModal,setOpenDeleteModal]=useState(false);
+  const [openEditModal, setOPenEditModal] = useState(false);
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
-  const [deletedType,setDeletedType]=useState({});
+  const [editedType, setEditedType] = useState({});
+  const [deletedType, setDeletedType] = useState({});
 
   const handleAddOpenModal = () => setOpenAddModal(true);
   const handleCloseAddModal = () => setOpenAddModal(false);
 
-  const handleCloseDeleteModal=()=>setOpenDeleteModal(false);
+  const handleCloseEditModal = () => setOPenEditModal(false);
+  const handleCloseDeleteModal = () => setOpenDeleteModal(false);
 
   const deleteTypeMutation = useDeleteEmploymentType({});
-  const handleDeleteType=(rowData)=>{
+  const handleDeleteType = (rowData) => {
     setDeletedType(rowData);
     setOpenDeleteModal(true);
-  }
+  };
 
-  const handleConfirmDelete=()=>{
+  const handleConfirmDelete = () => {
     deleteTypeMutation.mutate(deletedType.id);
     setOpenDeleteModal(false);
-  }
+  };
 
+  const handleEditType = (rowData) => {
+    setEditedType(rowData);
+    setOPenEditModal(true);
+  };
 
   const columns = [
     {
@@ -58,11 +68,11 @@ const EmploymentType = () => {
   ].filter(Boolean);
 
   const actions = [
-    // {
-    //   icon: () => <EditIcon />,
-    //   tooltip: "Edit Detail",
-    //   // onClick: (event, rowData) => handleEditDesignation(rowData),
-    // },
+    {
+      icon: () => <EditIcon />,
+      tooltip: "Edit Detail",
+      onClick: (event, rowData) => handleEditType(rowData),
+    },
     {
       icon: () => <DeleteIcon />,
       tooltip: "Delete",
@@ -97,6 +107,19 @@ const EmploymentType = () => {
           formComponent={<EmploymentTypeFields onClose={handleCloseAddModal} />}
         />
       )}
+      {openEditModal && (
+        <FormModal
+          title={"Edit Employment Type"}
+          open={openEditModal}
+          onClose={handleCloseEditModal}
+          formComponent={
+            <EmploymentTypeFields
+              onClose={handleCloseEditModal}
+              data={editedType}
+            />
+          }
+        />
+      )}
       {openDeleteModal && (
         <DeleteConfirmationModal
           open={openDeleteModal}
@@ -104,7 +127,6 @@ const EmploymentType = () => {
           handleConfirmDelete={handleConfirmDelete}
           message={"Employment Type"}
         />
-        
       )}
     </>
   );

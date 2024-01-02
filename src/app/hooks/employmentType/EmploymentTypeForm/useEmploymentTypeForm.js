@@ -11,7 +11,7 @@ const useEmploymentTypeForm = (data, onClose) => {
 
   const formik = useFormik({
     initialValues: {
-      name: data?.addEmploymentType || "",
+      name: data?.name || "",
       description: data?.description || "",
       id: data?.id,
     },

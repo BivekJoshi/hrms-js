@@ -15,7 +15,7 @@ const CompanySchema = Yup.object().shape({
     .required("Branch contact is required")
     .matches(/^9[0-9]{9}$/, "Invalid mobile number format"),
   branchAddress: Yup.string().required("Branch address is required"),
-  branchDescription: Yup.string().required("Branch description address is required"),
+  // branchDescription: Yup.string().required("Branch description address is required"),
 });
 
 export { CompanySchema };

@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import { useAddRenamePassword } from "../usePassword";
+import { NewPasswordSchema } from "./Validation/ValidateSchema";
+import { removeUser } from "../../../utils/cookieHelper";
+import { useNavigate } from "react-router-dom";
 
 const useAddRenamePasswordForm = ({ id }) => {
+  const navigate=useNavigate();
   const [loading, setLoading] = useState(false);
   const [showValues, setShowValues] = useState({
     password: "",
@@ -15,6 +19,7 @@ const useAddRenamePasswordForm = ({ id }) => {
     initialValues: {
       password: "",
     },
+    validationSchema: NewPasswordSchema,
     onSubmit: (values) => {
       setLoading(true);
       handleRequest(values);
@@ -28,7 +33,14 @@ const useAddRenamePasswordForm = ({ id }) => {
     mutate(
       { ...values, id },
       formik,
-      { onSuccess: () => formik.handleReset() },
+
+      {
+        onSuccess: () => {
+          removeUser();
+          navigate(`/`);
+          formik.handleReset();
+        },
+      },
       { onSettled: () => setLoading(false) }
     );
   };

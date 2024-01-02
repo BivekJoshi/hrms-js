@@ -123,7 +123,7 @@ const Department = ({ permissions }) => {
       <CustomTable
         columns={columns}
         data={departmentData}
-        title="Department Data"
+        title="Department List"
         isLoading={isLoading}
         exportButton={true}
         actions={actions}

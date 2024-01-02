@@ -1,26 +1,25 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { Chip } from "@mui/material";
+import { Box, Chip } from "@mui/material";
 import { useGetEmployeeLeaveById } from "../../../../../hooks/leave/useLeave";
 import { useGetLeaveType } from "../../../../../hooks/leaveType/useLeaveType";
 import "../../EmployProfile/Style/Style.css";
 import { useGetUserControl } from "../../../../../hooks/auth/userControl/useUserControl";
 import CustomTable from "../../../../../components/CustomTable/CustomTable";
+import { useGetEmployee } from "../../../../../hooks/employee/useEmployee";
 
-const LeaveInfo = ({ isLoading, data }) => {
+const LeaveInfo = ({ isLoading, data, role }) => {
   const fullname = `${data?.firstName} ${data?.middleNam || ""}${
     data?.lastName
   }`;
-
-  const { id } = useParams();
+  const { data: employeeData } = useGetEmployee();
+  // const { id } = useParams();
   const { data: leaveData, isLoading: loadingLeave } = useGetEmployeeLeaveById(
-    id
+    data?.id
   );
-  const {
-    data: leaveTypeData,
-    isLoading: loadingLeaveType,
-  } = useGetLeaveType();
-  const { data: UserData, isLoading: loadingUser } = useGetUserControl();
+  const { data: leaveTypeData, isLoading: loadingLeaveType } =
+    useGetLeaveType();
+  // const { data: UserData, isLoading: loadingUser } = useGetUserControl();
 
   const getLeaveTypeName = (rowData) => {
     const leaveTypeId = rowData.leaveTypeId;
@@ -30,16 +29,25 @@ const LeaveInfo = ({ isLoading, data }) => {
   };
   const getUserName = (rowData) => {
     const confirmById = rowData?.confirmById;
-    const user = UserData?.find((confirmBy) => confirmBy.id === confirmById);
-    const name = `${user?.name || "-"}`;
-    return name;
+    const user = employeeData?.find(
+      (confirmBy) => confirmBy?.id === confirmById
+    );
+
+    if (user) {
+      return `${user?.firstName} ${user?.lastName}`;
+    }
+    return "-";
   };
 
-  if (leaveData) {
-    const pendingLeaves = leaveData.filter(
-      (item) => item.leaveStatus === "PENDING"
-    );
-  }
+  // if (leaveData) {
+  //   const pendingLeaves = leaveData.filter(
+  //     (item) => item.leaveStatus === "PENDING"
+  //   );
+  // }
+  const pendingLeaves =
+    leaveData && leaveData.filter((item) => item?.leaveStatus === "PENDING");
+  const approvedRejectedLeaves =
+    leaveData && leaveData.filter((item) => item?.leaveStatus !== "PENDING");
 
   const columns = [
     {
@@ -146,12 +154,32 @@ const LeaveInfo = ({ isLoading, data }) => {
           </Card>
         </Grid>
       </Grid> */}
-      <CustomTable
+      {/* <CustomTable
         columns={columns}
         data={leaveData}
         title={"Leave Data of " + fullname}
         isLoading={loadingLeave}
-      />
+      /> */}
+      <Box
+        gap={2}
+        sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}
+      >
+        {pendingLeaves && pendingLeaves.length > 0 && (
+          <CustomTable
+            columns={columns}
+            data={pendingLeaves}
+            title="Pending Leave Data"
+          />
+        )}
+
+        {approvedRejectedLeaves && approvedRejectedLeaves.length > 0 && (
+          <CustomTable
+            columns={columns}
+            data={approvedRejectedLeaves}
+            title="Approved/Rejected Leave Data"
+          />
+        )}
+      </Box>
     </>
   );
 };

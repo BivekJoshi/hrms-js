@@ -54,7 +54,7 @@ const EmployeeQualificationDetailForm = ({ formik, isLoading }) => {
                           formik.errors.education?.[index]?.passedLevel
                         }
                         variant='outlined'
-                        InputLabelProps={{ shrink: true }}
+                        size="small"
                       />
                     </Grid>
                     <Grid item xs={12} sm={4}>
@@ -76,7 +76,7 @@ const EmployeeQualificationDetailForm = ({ formik, isLoading }) => {
                           formik.errors.education?.[index]?.board
                         }
                         variant='outlined'
-                        InputLabelProps={{ shrink: true }}
+                        size="small"
                       />
                     </Grid>
                     <Grid item xs={12} sm={4}>
@@ -98,7 +98,7 @@ const EmployeeQualificationDetailForm = ({ formik, isLoading }) => {
                           formik.errors.education?.[index]?.institute
                         }
                         variant='outlined'
-                        InputLabelProps={{ shrink: true }}
+                        size="small"
                       />
                     </Grid>
                     <Grid item xs={12} sm={4}>
@@ -121,14 +121,14 @@ const EmployeeQualificationDetailForm = ({ formik, isLoading }) => {
                           formik.errors.education?.[index]?.passedYear
                         }
                         variant='outlined'
-                        InputLabelProps={{ shrink: true }}
+                        size="small"
                       />
                     </Grid>
                     <Grid item xs={12} sm={4}>
                       <TextField
                         id={`education[${index}].grade`}
                         name={`education[${index}].grade`}
-                        label='Grade/percentage'
+                        label='Grade/ Percentage'
                         placeholder='Enter your grade'
                         fullWidth
                         value={study.grade}
@@ -143,7 +143,7 @@ const EmployeeQualificationDetailForm = ({ formik, isLoading }) => {
                         }
                         variant='outlined'
                         onBlur={formik.handleBlur}
-                        InputLabelProps={{ shrink: true }}
+                        size="small"
                       />
                     </Grid>
 

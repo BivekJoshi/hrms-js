@@ -1,14 +1,14 @@
-import { Grid, TextField, Button, MenuItem } from '@mui/material';
-import React from 'react';
-import useDesignationForm from '../../../hooks/designation/DesignationForm/useDesignationForm';
+import { Grid, TextField, Button, MenuItem } from "@mui/material";
+import React from "react";
+import useDesignationForm from "../../../hooks/designation/DesignationForm/useDesignationForm";
 
 const DesignationFields = ({ onClose, isLoading, data }) => {
-  const { formik } = useDesignationForm(data,onClose);
+  const { formik } = useDesignationForm(data, onClose);
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
   };
-
+  console.log({ salary: data });
   const submitButtonText = data ? "Update Designation" : "Add Designation";
 
   return (
@@ -21,7 +21,6 @@ const DesignationFields = ({ onClose, isLoading, data }) => {
             label="Designation Name"
             placeholder="Enter designation name"
             fullWidth
-            
             required
             value={formik.values.positionName}
             onChange={formik.handleChange}
@@ -31,7 +30,7 @@ const DesignationFields = ({ onClose, isLoading, data }) => {
             helperText={
               formik.touched.positionName && formik.errors.positionName
             }
-            variant='outlined'
+            variant="outlined"
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
@@ -52,26 +51,44 @@ const DesignationFields = ({ onClose, isLoading, data }) => {
             helperText={
               formik.touched.positionLevel && formik.errors.positionLevel
             }
-            variant='outlined'
+            variant="outlined"
             InputLabelProps={{ shrink: true }}
           ></TextField>
         </Grid>
         <Grid item xs={12} sm={12}>
-          <TextField
-            id="salary"
-            name="salary"
-            label="Salary"
-            placeholder="Enter salary"
-            fullWidth
-            required
-            type="number"
-            value={formik.values.salary}
-            onChange={formik.handleChange}
-            error={formik.touched.salary && Boolean(formik.errors.salary)}
-            helperText={formik.touched.salary && formik.errors.salary}
-            variant='outlined'
-            InputLabelProps={{ shrink: true }}
-          />
+          {data ? (
+            <TextField
+              id="salary"
+              name="salary"
+              label="Salary"
+              placeholder="Enter salary"
+              fullWidth
+              required
+              // type="number"
+              value={formik.values.salary || 0}
+              onChange={formik.handleChange}
+              error={formik.touched.salary && Boolean(formik.errors.salary)}
+              helperText={formik.touched.salary && formik.errors.salary}
+              variant="outlined"
+              InputLabelProps={{ shrink: true }}
+            />
+          ) : (
+            <TextField
+              id="salary"
+              name="salary"
+              label="Salary"
+              placeholder="Enter salary"
+              fullWidth
+              required
+              // type="number"
+              value={formik.values.salary}
+              onChange={formik.handleChange}
+              error={formik.touched.salary && Boolean(formik.errors.salary)}
+              helperText={formik.touched.salary && formik.errors.salary}
+              variant="outlined"
+              InputLabelProps={{ shrink: true }}
+            />
+          )}
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
@@ -91,7 +108,7 @@ const DesignationFields = ({ onClose, isLoading, data }) => {
             helperText={
               formik.touched.positionDetails && formik.errors.positionDetails
             }
-            variant='outlined'
+            variant="outlined"
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
