@@ -1,25 +1,30 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { Box, Chip } from "@mui/material";
-import { useGetEmployeeLeaveById } from "../../../../../hooks/leave/useLeave";
+import {
+  useGetEmployeeLeaveById,
+  useGetLoggedInUserLeave,
+} from "../../../../../hooks/leave/useLeave";
 import "../../EmployProfile/Style/Style.css";
 import CustomTable from "../../../../../components/CustomTable/CustomTable";
-import { useGetEmployee } from "../../../../../hooks/employee/useEmployee";
+import useAuth from "../../../../../../auth/hooks/component/login/useAuth";
 
 const LeaveInfo = ({ isLoading, data, role }) => {
   const fullname = `${data?.firstName} ${data?.middleNam || ""}${
     data?.lastName
   }`;
-
+  const { isEmployee } = useAuth();
   const { id } = useParams();
-  const { data: leaveData, isLoading: loadingLeave } =
-    useGetEmployeeLeaveById(id);
+  const { data: leaveData, isLoading: loadingLeave } = isEmployee
+    ? useGetLoggedInUserLeave()
+    : useGetEmployeeLeaveById(id);
 
   // if (leaveData) {
   //   const pendingLeaves = leaveData.filter(
   //     (item) => item.leaveStatus === "PENDING"
   //   );
   // }
+  console.log(leaveData);
   const pendingLeaves =
     leaveData && leaveData.filter((item) => item?.leaveStatus === "PENDING");
   const approvedRejectedLeaves =
@@ -86,11 +91,11 @@ const LeaveInfo = ({ isLoading, data, role }) => {
     {
       title: "Approved By",
       render: (rowData) => {
-        return <p>{rowData.confirmBy.name} </p>;
+        return <p>{rowData?.confirmBy?.name || ""} </p>;
       },
       width: 120,
     },
-  ];
+  ].filter(Boolean);
   if (loadingLeave) return <>Loading</>;
 
   return (

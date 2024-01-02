@@ -14,7 +14,6 @@ const useAddPromotionHistoryForm = () => {
     validationSchema: PositionSchema,
     onSubmit: (values) => {
       const isValid = PositionSchema.isValidSync(values); // Simple validation test
-      console.log('Is valid:', isValid);
       handleRequest(values);
     },
   });

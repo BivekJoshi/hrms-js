@@ -16,7 +16,7 @@ const AddPromotionHistoryFields = ({ onClose, isLoading }) => {
     !isLoading && (
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
-          <TextField
+          {/* <TextField
             id="positionId"
             name="positionId"
             select
@@ -42,7 +42,7 @@ const AddPromotionHistoryFields = ({ onClose, isLoading }) => {
                 {`${option?.positionName} ${option?.positionLevel}`}
               </option>
             ))}
-          </TextField>
+          </TextField> */}
 
           {/* <Autocomplete
             id="positionId"

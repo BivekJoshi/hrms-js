@@ -95,6 +95,7 @@ const ApplyLeave = () => {
   //   return <div>Loading...</div>;
   // }
 
+  console.log(leavebalance);
   const leaveTypeMap = new Map();
   leaveIcon.forEach((leaveType) => {
     leaveTypeMap.set(leaveType.id, leaveType.leaveType);
