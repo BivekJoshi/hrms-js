@@ -7,14 +7,16 @@
     <title>HRMS</title>
     <script>
       const url = window.location.href;
-  if (url.includes("hrms.ssl.com.np")) {
-  window.location.assign("https://hrms.ssl.com.np:8080/hrms/index.html#");
-  } else if (url.includes("pms.ssl.com.np")) {
-  window.location.assign("https://pms.ssl.com.np:8080/pms/index.html#");
-  } else if (url.includes("kyc.ssl.com.np")) {
-  window.location.assign("https://kyc.ssl.com.np:8080/kyc/index.html#/");
-  }
-      </script>
+      if (url.includes("hrms.ssl.com.np")) {
+        const startIndex = url.indexOf('#/') + 2; // Adding 2 to exclude '#/'
+        const textAfterHash = url.substring(startIndex);
+        window.location.assign("https://hrms.ssl.com.np:8080/hrms/index.html#/" + textAfterHash);
+      } else if (url.includes("pms.ssl.com.np")) {
+        window.location.assign("https://pms.ssl.com.np:8080/pms/index.html#");
+      } else if (url.includes("kyc.ssl.com.np")) {
+        window.location.assign("https://kyc.ssl.com.np:8080/kyc/index.html#/");
+      }
+    </script>
 
   </head>
   <body>
