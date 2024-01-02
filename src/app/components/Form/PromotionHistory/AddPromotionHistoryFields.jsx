@@ -5,15 +5,13 @@ import { useGetDesignation } from "../../../hooks/designation/useDesignation";
 
 const AddPromotionHistoryFields = ({ onClose, isLoading }) => {
   const { formik } = useAddPromotionHistoryForm(onClose);
-  const { data: designationData } = useGetDesignation();
+  const { data: designationData, isLoading: optionLoad } = useGetDesignation();
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
     if (formik.isValid) {
-      // onClose();
     }
   };
-
   return (
     !isLoading && (
       <Grid container spacing={3}>
@@ -47,34 +45,63 @@ const AddPromotionHistoryFields = ({ onClose, isLoading }) => {
           </TextField>
 
           {/* <Autocomplete
-           id="positionId"
-           name="positionId"
-           options={designationData || []}
-           getOptionLabel={(option) =>
-             `${option?.positionName} ${option?.positionLevel}`
-           }
-           value={formik.values.positionId}
-           onChange={(event, value) => {
-             formik.setFieldValue("positionId", value?.id);
-           }}
-           renderInput={(params) => (
-             <TextField
-               {...params}
-               label="Position Name"
-               placeholder="Select position"
-               fullWidth
-               required
-               error={
-                 formik.touched.positionId && Boolean(formik.errors.positionId)
-               }
-               helperText={
-                 formik.touched.positionId && formik.errors.positionId
-               }
-               variant="outlined"
-               InputLabelProps={{ shrink: true }}
-             />
-           )}
-         /> */}
+            id="positionId"
+            name="positionId"
+            options={designationData}
+            getOptionLabel={(option) =>
+              `${option?.positionName} (${option?.positionLevel})` || ""
+            }
+            value={formik.values.positionId || null}
+            onChange={(event, value) => {
+              formik.setFieldValue("positionId", value ? value.id : null);
+            }}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Position Name"
+                fullWidth
+                error={
+                  formik.touched.positionId && Boolean(formik.errors.positionId)
+                }
+                helperText={
+                  formik.touched.positionId && formik.errors.positionId
+                }
+                variant="outlined"
+                InputLabelProps={{ shrink: true }}
+              />
+            )}
+          /> */}
+          <Autocomplete
+            id="positionId"
+            name="positionId"
+            options={designationData || []}
+            getOptionLabel={(option) => {
+              return option
+                ? `${option?.positionName || ""} ${option?.positionLevel || ""}`
+                : "";
+            }}
+            value={formik.values.positionId}
+            onChange={(event, value) => {
+              formik.setFieldValue("positionId", value);
+            }}
+            onBlur={formik.handleBlur}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Position Name"
+                placeholder="Select position name"
+                fullWidth
+                error={
+                  formik.touched.positionId && Boolean(formik.errors.positionId)
+                }
+                helperText={
+                  formik.touched.positionId && formik.errors.positionId
+                }
+                variant="outlined"
+                InputLabelProps={{ shrink: true }}
+              />
+            )}
+          />
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
@@ -104,6 +131,7 @@ const AddPromotionHistoryFields = ({ onClose, isLoading }) => {
             label="Remarks"
             placeholder="Enter remarks type"
             fullWidth
+            onBlur={formik.handleBlur}
             value={formik.values.remarks}
             onChange={formik.handleChange}
             error={formik.touched.remarks && Boolean(formik.errors.remarks)}

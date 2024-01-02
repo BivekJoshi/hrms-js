@@ -100,7 +100,7 @@ const EmployeeCard = ({
             justifyContent={"space-between"}
             alignItems={"center"}
           >
-            <div style={{ paddingTop: "8px" }}>
+            <div style={{ paddingTop: "16px" }}>
               {ProgressBarRes && (
                 <ProgressbyAll ProgressbyAll={ProgressBarRes} />
               )}
@@ -240,7 +240,11 @@ const EmployeeCard = ({
                 label={
                   <Typography
                     variant="h6"
-                    style={{ overflow: "hidden", textOverflow: "ellipsis" }}
+                    style={{
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      textTransform: "capitalize",
+                    }}
                   >
                     {EFirstName || ""} {EMiddleName || ""} {ELastName || ""}
                   </Typography>

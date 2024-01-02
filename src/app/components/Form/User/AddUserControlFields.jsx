@@ -6,15 +6,13 @@ import { useAddUserControlForm } from "../../../pages/Auth/UserControl/Users/use
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
 import { ButtonComponent } from "../../Button/ButtonComponent";
 
-export const AddUserControlFields = ({ onClose }) => {
+export const AddUserControlFields = ({ onClose, userControlData }) => {
   const { data: employeeData } = useGetEmployee();
   const { formik } = useAddUserControlForm(onClose);
 
   const handleFormSubmit = () => {
-    // const isValid = await formik.validateForm();
     formik.handleSubmit();
     if (formik.isValid) {
-      // formik.handleSubmit();
     }
   };
 
@@ -26,12 +24,7 @@ export const AddUserControlFields = ({ onClose }) => {
   };
 
   const nameLabel = (emp) => {
-    console.log(emp, "employee");
-    if (emp?.middleName === "") {
-      return `${emp?.firstName} ${emp?.lastName} (${emp?.officeEmail})`;
-    } else {
-      return `${emp?.firstName} ${emp?.lastName} ${emp?.lastName} (${emp?.officeEmail})`;
-    }
+    return `${emp?.firstName} ${emp?.middleName || ""} ${emp?.lastName}`;
   };
 
   return (
@@ -57,11 +50,11 @@ export const AddUserControlFields = ({ onClose }) => {
               <TextField
                 {...params}
                 label="User Name"
-                placeholder="Enter User name"
+                placeholder="Enter User name..."
                 fullWidth
                 required
                 variant="outlined"
-                size="small"
+                InputLabelProps={{ shrink: true }}
                 error={
                   formik.touched.employeeId && Boolean(formik.errors.employeeId)
                 }

@@ -21,6 +21,8 @@ export const EditProjectDeactivateFields = ({ onClose, isLoading, data }) => {
     return projectId;
   };
 
+  console.log(data);
+
   return (
     !isLoading && (
       <Grid container spacing={3}>
@@ -95,6 +97,7 @@ export const EditProjectActivateFields = ({ onClose, isLoading, data }) => {
             label="Project Name"
             placeholder="Enter project Id"
             fullWidth
+            disabled
             value={getProjectName(formik.values.projectId)}
             onChange={formik.handleChange}
             error={formik.touched.projectId && Boolean(formik.errors.projectId)}

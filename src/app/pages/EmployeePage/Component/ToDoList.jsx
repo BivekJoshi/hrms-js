@@ -110,7 +110,7 @@ const ToDoList = () => {
           </Grid>
         )}
       </Grid>
-      {todoListData?.length >= 3 &&
+      {todoListData?.length >= 4 &&
       <Grid textAlign="center">
         <ButtonComponent
           OnClick={() => {

@@ -2,9 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { Box, Chip } from "@mui/material";
 import { useGetEmployeeLeaveById } from "../../../../../hooks/leave/useLeave";
-import { useGetLeaveType } from "../../../../../hooks/leaveType/useLeaveType";
 import "../../EmployProfile/Style/Style.css";
-import { useGetUserControl } from "../../../../../hooks/auth/userControl/useUserControl";
 import CustomTable from "../../../../../components/CustomTable/CustomTable";
 import { useGetEmployee } from "../../../../../hooks/employee/useEmployee";
 
@@ -12,32 +10,10 @@ const LeaveInfo = ({ isLoading, data, role }) => {
   const fullname = `${data?.firstName} ${data?.middleNam || ""}${
     data?.lastName
   }`;
-  const { data: employeeData } = useGetEmployee();
-  // const { id } = useParams();
-  const { data: leaveData, isLoading: loadingLeave } = useGetEmployeeLeaveById(
-    data?.id
-  );
-  const { data: leaveTypeData, isLoading: loadingLeaveType } =
-    useGetLeaveType();
-  // const { data: UserData, isLoading: loadingUser } = useGetUserControl();
 
-  const getLeaveTypeName = (rowData) => {
-    const leaveTypeId = rowData.leaveTypeId;
-    const leaveType = leaveTypeData.find((leave) => leave.id === leaveTypeId);
-    const name = `${leaveType?.leaveName}`;
-    return name;
-  };
-  const getUserName = (rowData) => {
-    const confirmById = rowData?.confirmById;
-    const user = employeeData?.find(
-      (confirmBy) => confirmBy?.id === confirmById
-    );
-
-    if (user) {
-      return `${user?.firstName} ${user?.lastName}`;
-    }
-    return "-";
-  };
+  const { id } = useParams();
+  const { data: leaveData, isLoading: loadingLeave } =
+    useGetEmployeeLeaveById(id);
 
   // if (leaveData) {
   //   const pendingLeaves = leaveData.filter(
@@ -59,7 +35,7 @@ const LeaveInfo = ({ isLoading, data, role }) => {
     {
       title: "Leave Type",
       render: (rowData) => {
-        return <p>{getLeaveTypeName(rowData)}</p>;
+        return <p>{rowData.leaveType.leaveName}</p>;
       },
       width: 150,
     },
@@ -110,12 +86,12 @@ const LeaveInfo = ({ isLoading, data, role }) => {
     {
       title: "Approved By",
       render: (rowData) => {
-        return <p>{getUserName(rowData)} </p>;
+        return <p>{rowData.confirmBy.name} </p>;
       },
       width: 120,
     },
   ];
-  if (isLoading || loadingLeaveType || loadingLeave) return <>Loading</>;
+  if (loadingLeave) return <>Loading</>;
 
   return (
     <>

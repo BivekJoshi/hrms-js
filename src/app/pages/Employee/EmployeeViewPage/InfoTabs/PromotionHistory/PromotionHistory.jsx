@@ -62,9 +62,8 @@ const PromotionHistory = ({ data, role }) => {
     },
     {
       title: "Position Name",
-      field: "positionName",
-      render: (rowData) => rowData?.position?.positionName || "-",
-      // emptyValue: "-",
+      field: "position.positionName",
+      emptyValue: "-",
       width: 300,
       sorting: false,
     },
@@ -100,8 +99,8 @@ const PromotionHistory = ({ data, role }) => {
               alignItems: "center",
             }}
           >
-            {rowData?.isLastPosition ? (
-              <span style={{ color: "green" }}>✔</span>
+            {rowData.isLastPosition === true ? (
+              <span style={{ color: "green", fontSize:"1.2rem" }}>✔</span>
             ) : (
               <span style={{ color: "red" }}>✕</span>
             )}

@@ -9,21 +9,77 @@ import "../Style/Style.css";
 import AttendenceInfo from "../../InfoTabs/AttendenceInfoTab/AttendenceInfo";
 import DocumentInfo from "../../InfoTabs/DocumentInfoTab/DocumentInfo";
 import TrainingInfo from "../../InfoTabs/TrainingInfoTab/TrainingInfo";
-import PromotionHistory from '../../InfoTabs/PromotionHistory/PromotionHistory';
-import EmployeeHistory from '../../InfoTabs/EmployeeHistoryTab/EmployeeHistory';
+import PromotionHistory from "../../InfoTabs/PromotionHistory/PromotionHistory";
+import EmployeeHistory from "../../InfoTabs/EmployeeHistoryTab/EmployeeHistory";
 import BranchInfo from '../../InfoTabs/BranchTab/BranchInfo';
 import DepartmentInfo from '../../InfoTabs/DepartmentTab/DepartmentInfo';
 
 const primaryColor = "#1c7ed6";
 
-export const DetailProfile = ({ data, role }) => {
+export const DetailProfile = ({ data, role, setShowPersonalProfile }) => {
   const [value, setValue] = React.useState("1");
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  const tabsData = [
+    {
+      label: "Leave Records",
+      value: "1",
+      component: <LeaveInfo data={data} role={role} />,
+    },
+    {
+      label: "Academics",
+      value: "2",
+      component: <AcademicsInfo data={data} role={role} />,
+    },
+    {
+      label: "Attendance",
+      value: "3",
+      component: <AttendenceInfo data={data} role={role} />,
+    },
+    {
+      label: "Position History",
+      value: "4",
+      component: <PromotionHistory data={data} role={role} />,
+    },
+    {
+      label: "Employee History",
+      value: "5",
+      component: <EmployeeHistory data={data} role={role} />,
+    },
+    {
+      label: "Training",
+      value: "6",
+      component: <TrainingInfo data={data} role={role} />,
+    },
+    {
+      label: "Training",
+      value: "7",
+      component: <BranchInfo data={data} role={role} />,
+    },
+    {
+      label: "Training",
+      value: "8",
+      component: <DepartmentInfo data={data} role={role} />,
+    },
+    {
+      label: "Documents",
+      value: "9",
+      component: <DocumentInfo data={data} role={role} />,
+    },
+  ];
+
+  const handleClick = (clickedTab) => {
+    if (clickedTab === "showPersonalProfile") {
+      setShowPersonalProfile(true);
+    } else {
+      setShowPersonalProfile(false);
+    }
+  };
+
   return (
-    <Box sx={{ typography: "body1"}}>
-      
+    <Box sx={{ typography: "body1" }}>
       <TabContext value={value}>
         <TableContainer sx={{ borderBottom: 1, borderColor: "divider" }}>
           <Table aria-label="simple table">
@@ -36,119 +92,29 @@ export const DetailProfile = ({ data, role }) => {
                 className="tableAlignment"
                 
               >
-                <Tab
-                  label="Leave Records"
-                  value="1"
-                  style={{
-                    fontSize: "1rem",
-                    color: primaryColor,
-                    fontWeight: "bolder",
-                  }}
-                />
-                <Tab
-                  label="Academics"
-                  value="2"
-                  style={{
-                    fontSize: "1rem",
-                    color: primaryColor,
-                    fontWeight: "bolder",
-                  }}
-                />
-                <Tab
-                  label='Attendence'
-                  value='3'
-                  style={{
-                    fontSize: '1rem',
-                    color: primaryColor,
-                    fontWeight: 'bolder',
-                  }}
-                />
-                <Tab
-                  label="Position"
-                  value="4"
-                  style={{
-                    fontSize: "1rem",
-                    color: primaryColor,
-                    fontWeight: "bolder",
-                  }}
-                />
-                 <Tab
-                  label="Work"
-                  value="5"
-                  style={{
-                    fontSize: "1rem",
-                    color: primaryColor,
-                    fontWeight: "bolder",
-                  }}
-                />
-                <Tab
-                  label="Training"
-                  value="6"
-                  style={{
-                    fontSize: "1rem",
-                    color: primaryColor,
-                    fontWeight: "bolder",
-                  }}
-                />
-                <Tab
-                  label="Branch"
-                  value="7"
-                  style={{
-                    fontSize: "1rem",
-                    color: primaryColor,
-                    fontWeight: "bolder",
-                  }}
-                />
-                <Tab
-                  label="Department"
-                  value="8"
-                  style={{
-                    fontSize: "1rem",
-                    color: primaryColor,
-                    fontWeight: "bolder",
-                  }}
-                />
-                <Tab
-                  label="Documents"
-                  value="9"
-                  style={{
-                    fontSize: "1rem",
-                    color: primaryColor,
-                    fontWeight: "bolder",
-                  }}
-                />
+                {tabsData.map((tab) => (
+                  <Tab
+                    key={tab.value}
+                    label={tab.label}
+                    value={tab.value}
+                    onClick={() => handleClick(tab.value)}
+                    style={{
+                      fontSize: "1rem",
+                      color: primaryColor,
+                      fontWeight: "bolder",
+                    }}
+                  />
+                ))}
               </Tabs>
             </TableHead>
           </Table>
         </TableContainer>
         <Box>
-          <TabPanel value="1" style={{ padding: 10 }}>
-            <LeaveInfo data={data} role={role} />
-          </TabPanel>
-          <TabPanel value="2" style={{ padding: 10 }}>
-            <AcademicsInfo data={data} role={role}  />
-          </TabPanel>
-          <TabPanel value="3" style={{ padding: 10 }}>
-            <AttendenceInfo data={data} role={role}  />
-          </TabPanel>
-          <TabPanel value="4" style={{ padding: 10 }}>
-            <PromotionHistory data={data} role={role}  />
-          </TabPanel>
-          <TabPanel value="5" style={{ padding: 10 }}>
-            <EmployeeHistory data={data} role={role}  />
-          </TabPanel>
-          <TabPanel value="6" style={{ padding: 10 }}>
-            <TrainingInfo data={data} role={role} />
-          </TabPanel>
-          <TabPanel value="7" style={{ padding: 10 }}>
-            <BranchInfo data={data} role={role} />
-          </TabPanel>
-          <TabPanel value="8" style={{ padding: 10 }}>
-            <DepartmentInfo data={data} role={role} />
-          </TabPanel>
-          <TabPanel value="9" style={{ padding: 10 }}>
-            <DocumentInfo data={data} role={role} />
-          </TabPanel>
+          {tabsData.map((tab) => (
+            <TabPanel key={tab.value} value={tab.value} style={{ padding: 10 }}>
+              {tab.component}
+            </TabPanel>
+          ))}
         </Box>
       </TabContext>
     </Box>

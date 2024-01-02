@@ -83,6 +83,7 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
                           fullWidth
                           // type="number"
                           // required
+                          type='number'
                           value={familyMember.mobileNumber}
                           onChange={handleChange}
                           onBlur={handleBlur} // Add onBlur to update touched state

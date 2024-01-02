@@ -19,13 +19,13 @@ const BasicInfo = ({ data, mode, positionName, empId }) => {
   const fData = familyData && familyData?.[0];
   
   const EMPLOYEE = {
-    Gender: data?.gender || '',
-    'Citizenship Number': data?.citizenshipNumber || '',
-    'Date of Birth': data?.dateOfBirth || '',
-    'Marital Status': data?.maritalStatus || '',
-    'Date of Join': data?.dateOfJoin || '',
-    Position: positionName || '',
-    'PAN Number': data?.panNumber || '',
+    Gender: data?.gender || "",
+    "Citizenship Number": data?.citizenshipNumber || "",
+    "Date of Birth": data?.dateOfBirth || "",
+    "Marital Status": data?.maritalStatus || "",
+    "Date of Join": data?.dateOfJoin || "",
+    Position: data?.positionName || "",
+    "PAN Number": data?.panNumber || "",
   };
   const FAMILYMEMBERS = {
     Name: fData?.name || '',
@@ -34,9 +34,9 @@ const BasicInfo = ({ data, mode, positionName, empId }) => {
   };
 
   const BANKDETAILS = {
-    'Bank Name': bData?.bankName || '',
-    'Account Number': bData?.bankAccountNumber || '',
-    Location: bData?.bankAddress || '',
+    "Bank Name": bData?.bankName || "",
+    "Account Number": bData?.bankAccountNumber || "",
+    Location: bData?.bankAddress || "",
   };
 
   return (
@@ -44,19 +44,18 @@ const BasicInfo = ({ data, mode, positionName, empId }) => {
       <Box
         container
         sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '2rem',
-          borderRadius: '1rem',
-          padding: '1rem',
-          backgroundColor: mode === 'light' ? '#ededed' : '#292929',
-        }}
-      >
+          display: "flex",
+          flexDirection: "column", // or 'row' based on your layout preference
+          gap: "2rem",
+          borderRadius: "1rem",
+          padding: "1rem",
+          backgroundColor: mode === "light" ? "#ededed" : "#292929",
+        }}      >
         <Box>
           <ListUserDetails
             data={EMPLOYEE}
-            cardTitle={'Basic Informations'}
-            MarginBottom={'1rem'}
+            cardTitle={"Basic Informations"}
+            MarginBottom={"1rem"}
             mode={mode}
           />
           <Divider />
@@ -64,18 +63,18 @@ const BasicInfo = ({ data, mode, positionName, empId }) => {
 
         <Box
           sx={{
-            display: 'grid',
-            gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr' },
-            gap: '1rem',
-            marginTop: { xs: '-3rem', sm: 0 },
+            display: "grid",
+            gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr" },
+            gap: "1rem",
+            marginTop: { xs: "-3rem", sm: 0 },
           }}
-          className='FAM-BANK-DETAILS'
+          className="FAM-BANK-DETAILS"
         >
           <Box>
-            {BANKDETAILS && BANKDETAILS.length > 0 && (
+            {bankData && bankData.length > 0 && (
               <ListUserDetails
                 data={BANKDETAILS}
-                cardTitle={'Bank Details'}
+                cardTitle={"Bank Details"}
                 mode={mode}
               />
             )}
