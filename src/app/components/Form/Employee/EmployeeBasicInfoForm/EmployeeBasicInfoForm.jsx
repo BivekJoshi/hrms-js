@@ -5,6 +5,7 @@ import { useGetDesignation } from "../../../../hooks/designation/useDesignation"
 import { useGetDepartment } from "../../../../hooks/department/useDepartment";
 import ThemeModeContext from "../../../../../theme/ThemeModeContext";
 import { useGetEmploymentType } from "../../../../hooks/employmentType/useEmploymentType";
+import "./Style.css"
 
 const genderOptions = [
   {
@@ -60,22 +61,16 @@ const today = new Date().toISOString().split("T")[0];
 
 const EmployeeBasicInfoForm = ({ formik }) => {
   const { data: companyData, isLoading: loadingCompany } = useGetCompany();
-  const {
-    data: designationData,
-    isLoading: loadingDesignation,
-  } = useGetDesignation();
-  const {
-    data: departmentData,
-    isLoading: loadingDepartment,
-  } = useGetDepartment();
-  const {
-    data: employmentTypeData,
-    isLoading: loadingEmploymentType,
-  } = useGetEmploymentType();
+  const { data: designationData, isLoading: loadingDesignation } =
+    useGetDesignation();
+  const { data: departmentData, isLoading: loadingDepartment } =
+    useGetDepartment();
+  const { data: employmentTypeData, isLoading: loadingEmploymentType } =
+    useGetEmploymentType();
 
   const { mode } = useContext(ThemeModeContext);
   return (
-    <Grid container spacing={3}>
+    <Grid container spacing={1.25}>
       <Grid item xs={12} sm={6} md={4}>
         <TextField
           id="firstName"
@@ -289,7 +284,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
             shrink: Boolean(formik.values.employmentType),
           }}
         /> */}
-         <TextField
+        <TextField
           id="employmentTypeId"
           name="employmentTypeId"
           select
@@ -297,10 +292,16 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           placeholder="Select your employment type"
           fullWidth
           required
+          onBlur={formik.handleBlur}
           value={!loadingEmploymentType && formik.values.employmentTypeId}
           onChange={formik.handleChange}
-          error={formik.touched.employmentTypeId && Boolean(formik.errors.employmentTypeId)}
-          helperText={formik.touched.employmentTypeId && formik.errors.employmentTypeId}
+          error={
+            formik.touched.employmentTypeId &&
+            Boolean(formik.errors.employmentTypeId)
+          }
+          helperText={
+            formik.touched.employmentTypeId && formik.errors.employmentTypeId
+          }
           variant="outlined"
         >
           {!loadingEmploymentType &&

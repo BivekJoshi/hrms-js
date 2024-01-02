@@ -82,6 +82,7 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
                           placeholder='Enter Mobile Number'
                           fullWidth
                           // required
+                          type='number'
                           value={familyMember.mobileNumber}
                           onChange={handleChange}
                           onBlur={handleBlur} // Add onBlur to update touched state
