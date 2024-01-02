@@ -29,23 +29,23 @@ export const sendEmailToAll = async ({ formData, employeeId, eventId }) => {
     //   .map((id) => `employeeIds=${id}`)
     //   .join("&");
     // const url = `/email/employee-ids/event?${employeeIdParams}&eventId=${eventId}`;
-    const res = await axiosInstance.post(`/email/employee-ids/event?eventId=${eventId}`, employeeId);
+    const res = await axiosInstance.post(
+      `/email/employee-ids/event?eventId=${eventId}`,
+      employeeId
+    );
     return res;
   }
 };
 
 /*___________________SEND EMAIL TO ALL EMPLOYEE HOLIDAY______________________________________*/
-export const sendEmailForHoliday = async ({
-  formData,
-  employeeId,
-  holidayId,
-}) => {
-  const employeeIdParams = employeeId
-    .map((id) => `employeeIds=${id}`)
-    .join("&");
-  const url = `/email/employees/holiday?${employeeIdParams}&holidayId=${holidayId}`;
-  const res = await axiosInstance.post(url, formData);
-  return res;
+export const sendEmailForHoliday = async ({ employeeId, holidayId }) => {
+  if (employeeId) {
+    const res = await axiosInstance.post(
+      `/email/employees/holiday?holidayId=${holidayId}`,
+      employeeId
+    );
+    return res;
+  }
 };
 
 {

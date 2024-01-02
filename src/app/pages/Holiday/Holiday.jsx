@@ -47,7 +47,7 @@ const Holiday = ({ permissions }) => {
   }, [holidayData]);
 
   const handleCloseModal = () => setOpenAddModal(false);
-  const { formik, data } = useHolidayForm(setOpenSubmitModal, handleCloseModal);
+  const { formik, holidayId } = useHolidayForm(setOpenSubmitModal, handleCloseModal);
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
@@ -173,7 +173,7 @@ const Holiday = ({ permissions }) => {
           formComponent={
             <div>
               <EmailForHoliday
-                getEventID={data?.id}
+                getEventID={holidayId}
                 onClose={() => setOpenEmailModal(false)}
               />
             </div>

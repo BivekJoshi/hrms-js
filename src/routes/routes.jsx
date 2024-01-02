@@ -198,7 +198,7 @@ const routes = [
     path: 'emplyment-type',
     name: 'Employment Type',
     id: nanoid(),
-    component: <EmploymentType component='employmenttype'/>,
+    component: <EmploymentType component='employmenttype' />,
   },
   {
     path: 'department',
@@ -393,36 +393,40 @@ export default function BreadCrumbs() {
             />{' '}
           </Link>
           {pathSegments.map((segment, index) => {
-            return (
-              <Link
-                key={index}
-                underline='hover'
-                style={{
-                  color: mode === 'light' ? 'inherit' : 'white',
-                  textDecoration: 'none',
-                }}
-                to={redirectTo(segment)}
-              >
-                <Typography
+            const isLastSegment = index === pathSegments.length - 1;
+            if (segment !== 'edit' && isNaN(Number(segment))) {
+              return (
+                <Link
                   key={index}
-                  color='text.primary'
-                  textTransform='capitalize'
-                  padding='5px'
-                  textDecoration='none'
-                  sx={{
-                    '&:hover': {
-                      bgcolor: '#6DAB2345',
-                      padding: '5px',
-                      textDecoration: 'underline',
-                      borderRadius: '5px',
-                      color: '#6dab23',
-                    },
+                  underline='hover'
+                  style={{
+                    color: mode === 'light' ? 'inherit' : 'white',
+                    textDecoration: 'none',
                   }}
+                  to={redirectTo(segment)}
                 >
-                  {segment}
-                </Typography>
-              </Link>
-            );
+                  <Typography
+                    key={index}
+                    color='text.primary'
+                    textTransform='capitalize'
+                    padding='5px'
+                    textDecoration='none'
+                    sx={{
+                      '&:hover': {
+                        bgcolor: '#6DAB2345',
+                        padding: '5px',
+                        textDecoration: 'underline',
+                        borderRadius: '5px',
+                        color: '#6dab23',
+                      },
+                      fontWeight: isLastSegment ? 600 : 500,
+                    }}
+                  >
+                    {segment}
+                  </Typography>
+                </Link>
+              );
+            }
           })}
         </Breadcrumbs>
       )}

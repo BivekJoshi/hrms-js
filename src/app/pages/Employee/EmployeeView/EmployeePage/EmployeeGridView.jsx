@@ -12,7 +12,6 @@ import React, { useEffect, useState } from 'react';
 import EmployeeCard from '../../../../components/cards/Employee/EmployeeCard';
 
 const EmployeeGridView = ({ employeeData }) => {
-
   return (
     <>
       <Grid
