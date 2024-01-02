@@ -100,7 +100,7 @@ const EmployeeCard = ({
             justifyContent={"space-between"}
             alignItems={"center"}
           >
-            <div style={{ paddingTop: "8px" }}>
+            <div style={{ paddingTop: "16px" }}>
               {ProgressBarRes && (
                 <ProgressbyAll ProgressbyAll={ProgressBarRes} />
               )}
@@ -113,7 +113,7 @@ const EmployeeCard = ({
                  <div style={{display: 'flex', alignItems: 'center'}}>
                  <Button
                     style={{
-                      marginTop: "5px",
+                      // marginTop: "5px",
                       fontSize: ".7rem",
                       padding: "1px 5px",
                     }}
@@ -123,7 +123,6 @@ const EmployeeCard = ({
                   >
                     {IsActive ? "Terminate" : "Active"}
                   </Button>
-
                  
                     <Button
                       variant="outlined"
@@ -241,7 +240,11 @@ const EmployeeCard = ({
                 label={
                   <Typography
                     variant="h6"
-                    style={{ overflow: "hidden", textOverflow: "ellipsis" }}
+                    style={{
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      textTransform: "capitalize",
+                    }}
                   >
                     {EFirstName || ""} {EMiddleName || ""} {ELastName || ""}
                   </Typography>

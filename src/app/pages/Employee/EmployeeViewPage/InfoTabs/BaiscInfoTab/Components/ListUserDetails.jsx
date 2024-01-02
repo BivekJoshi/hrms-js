@@ -54,7 +54,7 @@ export default function ListUserDetails({ cardTitle, data, mode }) {
             <BorderColorIcon
               onClick={handleOnClick}
               fontSize="large"
-              sx={{ color: "rgb(28, 126, 214)", paddingRight: "1rem" }}
+              sx={{ color: "rgb(28, 126, 214)", paddingRight: "1rem", cursor:"pointer"}}
             />
           )}
         </Stack>

@@ -33,7 +33,7 @@ const ApplyLeaveField = () => {
     formik.handleSubmit();
 
     if (formik.isValid) {
-      navigate('/employee/leave');
+      // navigate('/employee/leave');
     }
   };
 

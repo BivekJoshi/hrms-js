@@ -1,6 +1,5 @@
 import React from "react";
 import FormModal from "../../../components/Modal/FormModal";
-import { useGetDepartmentById } from "../../../hooks/department/useDepartment";
 import DepartmentFields from "../../../components/Form/Department/DepartmentFields";
 
 export const AddDepartmentModal = ({ open, handleCloseModal, title }) => {

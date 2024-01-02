@@ -12,6 +12,7 @@ import {
 
 import {
   useDeleteLeave,
+  useDeleteLeaveAdmin,
   useGetLeave,
   useGetleaveOfUser,
 } from "../../hooks/leave/useLeave";
@@ -43,7 +44,7 @@ const Leave = ({ permissions }) => {
   const handleCloseEditModal = () => setOpenEditModal(false);
   const handleCloseDeleteModal = () => setOpenDeleteModal(false);
 
-  const deleteLeaveMutation = useDeleteLeave({});
+  const deleteLeaveMutation = useDeleteLeaveAdmin({});
   const handleDeleteLeave = (rowData) => {
     setDeletedLeave(rowData);
     setOpenDeleteModal(true);
@@ -333,7 +334,7 @@ const Leave = ({ permissions }) => {
           <CustomTable
             columns={columns}
             data={pendingLeaves}
-            title="Pending Leave Data"
+            title="Pending Leave Data "
             actions={actions}
             isLoading={loading}
           />

@@ -159,7 +159,7 @@ export const LeftEmployDashbord = ({}) => {
             </Grid>
           )}
         </Grid>
-        {upcomingHolidays?.length >= 3 && (
+        {upcomingHolidays?.length >= 4 && (
           <Grid textAlign="center">
             <ButtonComponent
               OnClick={() => {
@@ -246,7 +246,7 @@ export const LeftEmployDashbord = ({}) => {
             </Grid>
           )}
         </Grid>
-        {upcomingEvents?.length >= 3 && (
+        {upcomingHolidays?.length >= 4 && (
           <Grid textAlign="center">
             <ButtonComponent
               OnClick={() => {

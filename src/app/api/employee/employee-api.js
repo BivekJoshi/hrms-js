@@ -7,6 +7,13 @@ export const getEmployee = async () => {
   const data = await axiosInstance.get(`/employee/get-all`);
   return data;
 };
+{
+  /*________________________GETNoneUser_____________________________________*/
+}
+export const getNoneUser = async () => {
+  const data = await axiosInstance.get(`/employee/non-user`);
+  return data;
+};
 
 {
   /*________________________GETALL_____________________________________*/

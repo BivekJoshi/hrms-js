@@ -12,11 +12,12 @@ import EmployeeHistory from '../../InfoTabs/EmployeeHistoryTab/EmployeeHistory';
 
 const primaryColor = "#1c7ed6";
 
-export const EmployeeDetailProfile = ({ data }) => {
+export const EmployeeDetailProfile = ({ data , role}) => {
   const [value, setValue] = React.useState("1");
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
   return (
     <Box sx={{ typography: "body1" }}>
       <TabContext value={value}>
@@ -92,8 +93,8 @@ export const EmployeeDetailProfile = ({ data }) => {
           <TabPanel value="4" style={{ padding: 10 }}>
             <TrainingInfo data={data}/>
           </TabPanel>
-          <TabPanel value="5" style={{ padding: 10 }}>
-            <DocumentInfo />
+          <TabPanel value="5" style={{ padding: 10 }} >
+            <DocumentInfo role={role}/>
           </TabPanel>
         </Box>
       </TabContext>

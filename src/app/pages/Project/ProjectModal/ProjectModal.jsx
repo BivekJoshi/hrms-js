@@ -61,7 +61,7 @@ export const DeactivateProjectModal = ({
   id,
   title,
 }) => {
-  const { data } = useGetProjectById(id);
+  const { data:terminateProject } = useGetProjectById(id);
   return (
     <div>
       <FormModal
@@ -69,7 +69,7 @@ export const DeactivateProjectModal = ({
         open={open}
         onClose={handleCloseModal}
         formComponent={
-          <EditProjectDeactivateFields onClose={handleCloseModal} data={data} />
+          <EditProjectDeactivateFields onClose={handleCloseModal} data={terminateProject} />
         }
       />
     </div>

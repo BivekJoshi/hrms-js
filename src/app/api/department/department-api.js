@@ -46,3 +46,23 @@ export const deleteDepartment = async (departmentId) => {
     return response.data;
   }
 };
+
+
+
+//  history - controller
+{
+  /*________________________GET-BRANCH-HISTORY-CONTROLLER_____________________________________*/
+}
+
+export const getDepartmentHistory = async (id) => {
+  if (id) {
+    const data = await axiosInstance.get(`/department/get-department-histories/${id}`);
+    return data;
+  }
+};
+
+{/*________________________POST_____________________________________*/ }
+export const addDepartmentHistory = async (formData) => {
+  const data = await axiosInstance.post(`/department/assign-department-to-employee/`, formData);
+  return data;
+};

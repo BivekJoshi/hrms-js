@@ -95,6 +95,7 @@ export const EditProjectActivateFields = ({ onClose, isLoading, data }) => {
             label="Project Name"
             placeholder="Enter project Id"
             fullWidth
+            disabled
             value={getProjectName(formik.values.projectId)}
             onChange={formik.handleChange}
             error={formik.touched.projectId && Boolean(formik.errors.projectId)}

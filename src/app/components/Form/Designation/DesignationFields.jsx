@@ -8,7 +8,6 @@ const DesignationFields = ({ onClose, isLoading, data }) => {
   const handleFormSubmit = () => {
     formik.handleSubmit();
   };
-  console.log({ salary: data });
   const submitButtonText = data ? "Update Designation" : "Add Designation";
 
   return (

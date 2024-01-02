@@ -58,27 +58,31 @@ const DeactivatedOfficeResource = ({ closeModal, title }) => {
   ];
   return (
     <>
-      <Grid
+      {/* <Grid
         sx={{
-          display: 'flex',
-          justifyContent: 'flex-end',
-          margin: '0.2rem 0.6rem',
+          display: "flex",
+          justifyContent: "space-between",
+          margin: "0.2rem 0.6rem",
         }}
       >
-        {/* <Typography variant='h6'> {title} </Typography> */}
-        <Typography onClick={closeModal} sx={{ cursor: 'pointer' }}>
-          {' '}
-          <CloseIcon />{' '}
+        <Typography variant="h6"> {title} </Typography>
+        <Typography onClick={closeModal} sx={{ cursor: "pointer" }}>
+          {" "}
+          <CloseIcon />{" "}
         </Typography>
-      </Grid>
-      <CustomTable
-        columns={columns}
-        data={data}
-        title='Deactivated Logistics'
-        isLoading={isLoading}
-        exportButton={true}
-        height={'320px'}
-      />
+      </Grid> */}
+
+      
+        <CustomTable
+          columns={columns}
+          data={data}
+          title=""
+          isLoading={isLoading}
+          exportButton={true}
+          emptyRowsWhenPaging={true}
+          // sorting={true}
+          height={"320px"}
+        />
 
       {openModal && (
         <OfficeResourceLogisticsModal

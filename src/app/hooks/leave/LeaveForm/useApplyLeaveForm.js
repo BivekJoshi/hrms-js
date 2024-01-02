@@ -1,12 +1,15 @@
 import { useFormik } from "formik";
 import { useAddLeave, useEditLeave } from "../useLeave";
-import { LeaveSchema } from "../Validation/LeaveSchema";
+import { EditLeaveSchema, LeaveSchema } from "../Validation/LeaveSchema";
 import { useGetLoggedInUser } from "../../auth/usePassword";
+import { useGetLoggedInUserInfo } from '../../employee/useEmployee';
+import { useNavigate } from 'react-router-dom';
 
 const useApplyLeaveForm = (data) => {
   const { mutate: addLeave } = useAddLeave({});
   const { mutate: editLeave } = useEditLeave({});
   const { data: userData } = useGetLoggedInUser();
+  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
@@ -21,26 +24,36 @@ const useApplyLeaveForm = (data) => {
       leaveStatus: data?.leaveStatus || "PENDING",
       leaveRemarks: data?.leaveRemarks || "",
     },
-    validationSchema: LeaveSchema,
+    validationSchema: data ? EditLeaveSchema : LeaveSchema,
     enableReinitialize: true,
-    onSubmit: async (values, { resetForm }) => {
+    // onSubmit: (values, { resetForm }) => {
+      onSubmit: (values) => {
       if (data?.id) {
-        await handledEditRequest(values);
+        handledEditRequest(values);
       } else {
-        await handleRequest(values);
+        handleRequest(values);
       }
-      resetForm();
+      // resetForm();
     },
   });
 
-  const handleRequest = async (values) => {
+  const handleRequest = (values) => {
     values = { ...values };
-    await addLeave(values, formik);
+    addLeave(values, formik, {
+      onSuccess: () => {
+        
+        formik.handleReset();
+      }
+    });
   };
 
-  const handledEditRequest = async (values) => {
+  const handledEditRequest = (values) => {
     values = { ...values };
-    await editLeave(values, formik);
+    editLeave(values, formik, {
+      onSuccess: () => {
+        formik.handleReset();
+      }
+    });
   };
 
   return { formik };

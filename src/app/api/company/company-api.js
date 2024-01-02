@@ -1,4 +1,4 @@
-import { axiosInstance } from '../../../auth/axiosInterceptor';
+import { axiosInstance } from "../../../auth/axiosInterceptor";
 
 {
   /*________________________GET_____________________________________*/
@@ -22,7 +22,7 @@ export const getCompanyById = async (id) => {
   /*________________________POST_____________________________________*/
 }
 export const addCompany = async (formData) => {
-  const data = await axiosInstance.post('/branch/create', formData);
+  const data = await axiosInstance.post("/branch/create", formData);
   return data;
 };
 
@@ -43,4 +43,33 @@ export const deleteCompany = async (branchId) => {
     const response = await axiosInstance.delete(`/branch/delete/${branchId}`);
     return response.data;
   }
+};
+
+{
+  /*________________________EDIT-ASSIG-BRANCH_____________________________________*/
+}
+export const editAssignCompany = async (formData) => {
+  const { id } = formData;
+  const data = await axiosInstance.put(`/branch/update/${id}`, formData);
+  return data;
+};
+
+
+
+//  history - controller
+{
+  /*________________________GET-BRANCH-HISTORY-CONTROLLER_____________________________________*/
+}
+
+export const getBranchHistory = async (id) => {
+  if (id) {
+    const data = await axiosInstance.get(`/branch/get-histories/${id}`);
+    return data;
+  }
+};
+
+{/*________________________POST_____________________________________*/ }
+export const addBranchHistory = async (formData) => {
+  const data = await axiosInstance.post(`/branch/assign-to-employee/`, formData);
+  return data;
 };

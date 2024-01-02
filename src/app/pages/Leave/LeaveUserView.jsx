@@ -26,12 +26,9 @@ const halfLeaveType = [
     value: "SECOND_HALF",
   },
 ];
-const LeaveUserView = ({ data }) => {
+const LeaveUserView = ({ data, isLoading }) => {
   const navigate = useNavigate();
   const leaveData = data;
-  // const { data: leaveData, isLoading } = useGetLoggedInUserLeave();
-  const { data: leaveTypeData, isLoading: loadingLeaveType } =
-    useGetLeaveType();
   const [deletedLeave, setDeletedLeave] = useState({});
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const { mode } = useContext(ThemeModeContext);
@@ -44,13 +41,6 @@ const LeaveUserView = ({ data }) => {
   const handleConfirmDelete = () => {
     deleteLeaveMutation.mutate(deletedLeave.id);
     setOpenDeleteModal(false);
-  };
-
-  const getLeaveTypeName = (rowData) => {
-    const leaveTypeId = rowData?.leaveTypeId;
-    const leaveType = leaveTypeData?.find((leave) => leave?.id === leaveTypeId);
-    const name = `${leaveType?.leaveName}`;
-    return name;
   };
 
   const halfLeaveTypeName = (rowData) => {
@@ -71,13 +61,6 @@ const LeaveUserView = ({ data }) => {
     }
   };
 
-  const { data: UserData, isLoading: loadingUser } = useGetUserControl();
-  const getUserName = (rowData) => {
-    const confirmById = rowData?.confirmById;
-    const user = UserData?.find((confirmBy) => confirmBy.id === confirmById);
-    const name = `${user?.name || "-"}`;
-    return name;
-  };
   const handleEditLeave = (rowData) => {
     navigate(`/employee/applyleavefield`, { state: { rowData } });
   };
@@ -91,9 +74,7 @@ const LeaveUserView = ({ data }) => {
     },
     {
       title: "Leave Type",
-      render: (rowData) => {
-        return <p>{getLeaveTypeName(rowData)}</p>;
-      },
+      field: "leaveType.leaveName",
       width: 60,
     },
     {
@@ -149,9 +130,7 @@ const LeaveUserView = ({ data }) => {
     },
     {
       title: "Approved By",
-      render: (rowData) => {
-        return <p>{getUserName(rowData)} </p>;
-      },
+      field: "confirmBy.name",
       width: 120,
     },
     {
@@ -225,7 +204,7 @@ const LeaveUserView = ({ data }) => {
         columns={columns}
         data={leaveData}
         title="Leave History"
-        isLoading={loadingLeaveType}
+        isLoading={isLoading}
       />
       {openDeleteModal && (
         <DeleteConfirmationModal
