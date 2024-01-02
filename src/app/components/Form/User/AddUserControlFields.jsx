@@ -1,7 +1,10 @@
 import React, { useContext } from "react";
 import { Grid, Button, MenuItem, TextField, Typography } from "@mui/material";
 import { Autocomplete } from "@mui/material";
-import { useGetEmployee, useGetNoneUser } from "../../../hooks/employee/useEmployee";
+import {
+  useGetEmployee,
+  useGetNoneUser,
+} from "../../../hooks/employee/useEmployee";
 import { useAddUserControlForm } from "../../../pages/Auth/UserControl/Users/useAddUserControlForm";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
 import { ButtonComponent } from "../../Button/ButtonComponent";
@@ -9,7 +12,7 @@ import { ButtonComponent } from "../../Button/ButtonComponent";
 export const AddUserControlFields = ({ onClose, userControlData }) => {
   const { data: employeeData } = useGetNoneUser();
   const { formik } = useAddUserControlForm(onClose);
-console.log(employeeData);
+  console.log(employeeData);
   const handleFormSubmit = () => {
     formik.handleSubmit();
     if (formik.isValid) {
@@ -24,7 +27,11 @@ console.log(employeeData);
   };
 
   const nameLabel = (emp) => {
-    return `${emp?.firstName} ${emp?.middleName || ""} ${emp?.lastName}`;
+    if (emp?.middleName) {
+      return `${emp?.firstName} ${emp?.middleName || ""} ${emp?.lastName}`;
+    } else {
+      return `${emp?.firstName} ${emp?.lastName}`;
+    }
   };
 
   return (
