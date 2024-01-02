@@ -38,8 +38,13 @@ export const EditProjectDeactivateFields = ({ onClose, isLoading, data }) => {
             variant="outlined"
             InputLabelProps={{ shrink: true }}
           /> */}
-          <Typography varinat="h6">Are u sure u want to terminate this project?</Typography>
-          <Typography variant="h7"> {getProjectName(formik.values.projectId)}</Typography> 
+          <Typography varinat="h6">
+            Are u sure u want to terminate this project?
+          </Typography>
+          <Typography variant="h7">
+            {" "}
+            {getProjectName(formik.values.projectId)}
+          </Typography>
         </Grid>
 
         <Grid
@@ -71,11 +76,11 @@ export const EditProjectDeactivateFields = ({ onClose, isLoading, data }) => {
 
 export const EditProjectActivateFields = ({ onClose, isLoading, data }) => {
   const { data: projectData } = useGetDeactivatedProject();
-  const { formik } = useAddActiveProject(data);
+  const { formik } = useAddActiveProject(data, onClose);
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
-    onClose();
+    // onClose();
   };
 
   const getProjectName = (projectId) => {
@@ -89,6 +94,10 @@ export const EditProjectActivateFields = ({ onClose, isLoading, data }) => {
     !isLoading && (
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
+          <Typography>Do you really want to activate this project <span style={{fontSize:"1.2rem",fontWeight:500}}>{getProjectName(formik.values.projectId)}</span> </Typography>
+        </Grid>
+
+        {/* <Grid item xs={12} sm={12}>
           <TextField
             id="projectId"
             name="projectId"
@@ -103,7 +112,7 @@ export const EditProjectActivateFields = ({ onClose, isLoading, data }) => {
             variant="outlined"
             InputLabelProps={{ shrink: true }}
           />
-        </Grid>
+        </Grid> */}
 
         <Grid
           container

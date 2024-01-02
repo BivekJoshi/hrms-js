@@ -138,7 +138,8 @@ export const useDeleteProject = ({ onSuccess }) => {
       onSuccess: (data, variables, context) => {
         toast.success("Successfully removed project");
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries("getProject");
+        queryClient.invalidateQueries("getProjectPageWise");
+        queryClient.invalidateQueries("getDeactivatedProject");
       },
       onError: (err, _variables, _context) => {
         toast.error(`Error: ${err.message}`);
@@ -158,6 +159,7 @@ export const useActiveProject = ({ onSuccess }) => {
         toast.success("Successfully added project");
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries("getDeactivatedProject");
+        queryClient.invalidateQueries("getProjectPageWise");
       },
       onError: (err, _variables, _context) => {
         toast.error(`Error: ${err.message}`);
