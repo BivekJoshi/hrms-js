@@ -1,11 +1,12 @@
-import React from "react";
-import "../Style/Style.css";
-import { Box, Divider } from "@mui/material";
-import ListUserDetails from "../../InfoTabs/BaiscInfoTab/Components/ListUserDetails";
-import { useParams } from "react-router-dom";
-import { useGetBankByEmployeeId } from "../../../../../hooks/employee/useBank";
-import { useGetFammilyById } from "../../../../../hooks/employee/useFamily";
-import useAuth from "../../../../../../auth/hooks/component/login/useAuth";
+import React from 'react';
+import '../Style/Style.css';
+import { Box, Divider, Stack } from '@mui/material';
+import BorderColorIcon from '@mui/icons-material/BorderColor';
+import ListUserDetails from '../../InfoTabs/BaiscInfoTab/Components/ListUserDetails';
+import { useParams } from 'react-router-dom';
+import { useGetBankByEmployeeId } from '../../../../../hooks/employee/useBank';
+import { useGetFammilyById } from '../../../../../hooks/employee/useFamily';
+import useAuth from '../../../../../../auth/hooks/component/login/useAuth';
 
 const BasicInfo = ({ data, mode, positionName, empId }) => {
   const { id } = useParams();
@@ -26,9 +27,9 @@ const BasicInfo = ({ data, mode, positionName, empId }) => {
     "PAN Number": data?.panNumber || "",
   };
   const FAMILYMEMBERS = {
-    Name: fData?.name || "",
-    Relation: fData?.relation || "",
-    "Contact Number": fData?.mobileNumber || "",
+    Name: fData?.name || '',
+    Relation: fData?.relation || '',
+    'Contact Number': fData?.mobileNumber || '',
   };
 
   const BANKDETAILS = {
@@ -89,7 +90,7 @@ const BasicInfo = ({ data, mode, positionName, empId }) => {
             {familyData && familyData.length > 0 && (
               <ListUserDetails
                 data={FAMILYMEMBERS}
-                cardTitle={"Family Informations"}
+                cardTitle={'Family Informations'}
                 mode={mode}
               />
             )}
