@@ -39,7 +39,7 @@ const AddprojectFields = ({ onClose, isLoading }) => {
   const handleFormSubmit = async () => {
     formik.handleSubmit();
   };
-
+  const currentDate = new Date().toISOString().split('T')[0];
   return (
     !isLoading && (
       <Grid container spacing={3}>
@@ -68,6 +68,9 @@ const AddprojectFields = ({ onClose, isLoading }) => {
             name="startDate"
             label="Start Date"
             type="date"
+            inputProps={{
+              min: currentDate, // Disable past date selections
+            }}
             fullWidth
             required
             value={formik.values.startDate}
@@ -85,6 +88,9 @@ const AddprojectFields = ({ onClose, isLoading }) => {
             name="endDate"
             label="Deadline Date"
             type="date"
+            inputProps={{
+              min: formik.values.fromDate || currentDate,
+            }}
             fullWidth
             value={formik.values.endDate}
             onChange={formik.handleChange}

@@ -80,6 +80,7 @@ const LeaveTypeFields = ({ onClose, isLoading, data, existingLeaveTypes }) => {
               placeholder='Enter leave name'
               fullWidth
               required
+              disabled
               value={formik.values.leaveName}
               onChange={formik.handleChange}
               error={
