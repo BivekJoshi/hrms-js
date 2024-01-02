@@ -15,7 +15,7 @@ const useDesignationForm = (data, onClose) => {
       id: data?.id,
     },
     validationSchema: DesignationSchema,
-    enableReinitialize: "true",
+    enableReinitialize: true,
     onSubmit: (values) => {
       if (data?.id) {
         handledEditRequest(values);

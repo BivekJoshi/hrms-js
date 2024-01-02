@@ -5,7 +5,7 @@ import { useGetDesignation } from "../../../../hooks/designation/useDesignation"
 import { useGetDepartment } from "../../../../hooks/department/useDepartment";
 import ThemeModeContext from "../../../../../theme/ThemeModeContext";
 import { useGetEmploymentType } from "../../../../hooks/employmentType/useEmploymentType";
-
+ 
 const genderOptions = [
   {
     value: "MALE",
@@ -47,7 +47,7 @@ const shiftType = [
     label: "Business B",
   },
 ];
-
+ 
 const currentDate = new Date();
 const minAge = new Date(
   currentDate.getFullYear() - 18,
@@ -57,7 +57,7 @@ const minAge = new Date(
   .toISOString()
   .split("T")[0];
 const today = new Date().toISOString().split("T")[0];
-
+ 
 const EmployeeBasicInfoForm = ({ formik }) => {
   const { data: companyData, isLoading: loadingCompany } = useGetCompany();
   const {
@@ -72,7 +72,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
     data: employmentTypeData,
     isLoading: loadingEmploymentType,
   } = useGetEmploymentType();
-
+ 
   const { mode } = useContext(ThemeModeContext);
   return (
     <Grid container spacing={3}>
@@ -420,7 +420,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
                   formik.touched.positionId && formik.errors.positionId
                 }
                 variant="outlined"
-              
+             
                     />
             )}
           /> */}
@@ -483,5 +483,5 @@ const EmployeeBasicInfoForm = ({ formik }) => {
     </Grid>
   );
 };
-
+ 
 export default EmployeeBasicInfoForm;

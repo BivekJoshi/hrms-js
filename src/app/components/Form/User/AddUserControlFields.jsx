@@ -1,15 +1,14 @@
-import React, { useContext } from 'react';
-import { Grid, Button, MenuItem, TextField, Typography } from '@mui/material';
-import { Autocomplete } from '@mui/material';
-import { useGetEmployee } from '../../../hooks/employee/useEmployee';
-import { useAddUserControlForm } from '../../../pages/Auth/UserControl/Users/useAddUserControlForm';
-import ThemeModeContext from '../../../../theme/ThemeModeContext';
-import { ButtonComponent } from '../../Button/ButtonComponent';
+import React, { useContext } from "react";
+import { Grid, Button, MenuItem, TextField, Typography } from "@mui/material";
+import { Autocomplete } from "@mui/material";
+import { useGetEmployee } from "../../../hooks/employee/useEmployee";
+import { useAddUserControlForm } from "../../../pages/Auth/UserControl/Users/useAddUserControlForm";
+import ThemeModeContext from "../../../../theme/ThemeModeContext";
+import { ButtonComponent } from "../../Button/ButtonComponent";
 
 export const AddUserControlFields = ({ onClose }) => {
   const { data: employeeData } = useGetEmployee();
   const { formik } = useAddUserControlForm(onClose);
-  const { mode } = useContext(ThemeModeContext);
 
   const handleFormSubmit = () => {
     // const isValid = await formik.validateForm();
@@ -21,16 +20,17 @@ export const AddUserControlFields = ({ onClose }) => {
 
   const handleUserNameChange = (event, selectedEmployee) => {
     if (selectedEmployee) {
-      formik.setFieldValue('employeeId', selectedEmployee.id);
-      formik.setFieldValue('email', selectedEmployee.officeEmail);
+      formik.setFieldValue("employeeId", selectedEmployee.id);
+      formik.setFieldValue("email", selectedEmployee.officeEmail);
     }
   };
 
   const nameLabel = (emp) => {
-    if (emp?.middleName === '') {
-      return `${emp?.firstName} ${emp?.lastName}`;
+    console.log(emp, "employee");
+    if (emp?.middleName === "") {
+      return `${emp?.firstName} ${emp?.lastName} (${emp?.officeEmail})`;
     } else {
-      return `${emp?.firstName} ${emp?.lastName} ${emp?.lastName}`;
+      return `${emp?.firstName} ${emp?.lastName} ${emp?.lastName} (${emp?.officeEmail})`;
     }
   };
 
@@ -38,29 +38,30 @@ export const AddUserControlFields = ({ onClose }) => {
     <>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
-          <Typography sx={{color:'orange'}}>
+          <Typography sx={{ color: "orange" }}>
             To add an employee, user's permanent address detail must be Filled
           </Typography>
           <br />
           <Autocomplete
-            id='employeeId'
-            name='employeeId'
+            id="employeeId"
+            name="employeeId"
             options={employeeData || []}
-            getOptionLabel={(employee) => nameLabel(employee)}
+            getOptionLabel={(employee) => {
+              return nameLabel(employee);
+            }}
             value={employeeData?.find(
               (employee) => employee?.id === formik.values?.employeeId
             )}
             onChange={handleUserNameChange}
-            
             renderInput={(params) => (
               <TextField
                 {...params}
-                label='User Name'
-                placeholder='Enter User name...'
+                label="User Name"
+                placeholder="Enter User name"
                 fullWidth
                 required
-                variant='outlined'
-                InputLabelProps={{ shrink: true }}
+                variant="outlined"
+                size="small"
                 error={
                   formik.touched.employeeId && Boolean(formik.errors.employeeId)
                 }
@@ -74,40 +75,41 @@ export const AddUserControlFields = ({ onClose }) => {
 
         <Grid item xs={12} sm={12}>
           <TextField
-            id='email'
-            name='email'
-            label='Email'
-            placeholder='Enter email...'
-            type='email'
+            id="email"
+            name="email"
+            label="Email"
+            placeholder="Enter email..."
+            type="email"
             fullWidth
             required
             value={formik.values.email}
             onChange={formik.handleChange}
             error={formik.touched.email && Boolean(formik.errors.email)}
             helperText={formik.touched.email && formik.errors.email}
-            variant='outlined'
+            variant="outlined"
             InputLabelProps={{ shrink: true }}
+            size="small"
           />
         </Grid>
 
         <Grid
           container
-          direction='row'
-          justifyContent='flex-end'
-          alignItems='flex-end'
+          direction="row"
+          justifyContent="flex-end"
+          alignItems="flex-end"
         >
           <ButtonComponent
-            variant='contained'
+            variant="contained"
             OnClick={handleFormSubmit}
-            sx={{ mt: 3, ml: 1, color: '#fff' }}
-            buttonName={'Add User'}
+            sx={{ mt: 3, ml: 1, color: "#fff" }}
+            buttonName={"Add User"}
           />
           <ButtonComponent
-            variant='contained'
+            variant="contained"
             OnClick={onClose}
             sx={{ mt: 3, ml: 1 }}
-            BGColor={'#d32f2f'}
-            buttonName={'Cancel'}
+            BGColor={"#d32f2f"}
+            buttonName={"Cancel"}
           />
         </Grid>
       </Grid>

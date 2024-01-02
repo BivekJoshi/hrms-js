@@ -10,7 +10,7 @@ import useEditDocumentForm from "./useEditDocumentForm";
 
 const EditDocumentFields = ({ onClose, isLoading, id }) => {
   const [selectedDocument, setSelectedDocument] = useState();
-  const { formik } = useEditDocumentForm(id, selectedDocument);
+  const { formik } = useEditDopcumentForm(id, selectedDocument);
 
   const handleChangeImage = (e) => {
     setSelectedDocument(e.target.files[0]);

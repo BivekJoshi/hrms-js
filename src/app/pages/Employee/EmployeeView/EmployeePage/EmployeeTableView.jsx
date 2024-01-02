@@ -20,7 +20,7 @@ const EmployeeTableView = ({ employeeData, isLoading }) => {
       title: 'Employee',
       field: 'firstName',
       render: (rowData) =>
-        `${rowData.firstName} ${rowData.middleName} ${rowData.lastName}`,
+        `${rowData?.firstName} ${rowData?.middleName || ''} ${rowData?.lastName}`,
       // width: "10%",
       sorting: false,
     },

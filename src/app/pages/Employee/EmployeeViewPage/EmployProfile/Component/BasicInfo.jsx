@@ -13,10 +13,11 @@ const BasicInfo = ({ data, mode, positionName, empId }) => {
   const { isSuperAdmin, isAdmin, isHr, isEmployee, isHrAdmin, isManager } =
     useAuth();
   const { data: bankData } = useGetBankByEmployeeId();
-  const { data: familyData } = useGetFammilyById(empId);
+  const { data: familyData } = useGetFammilyById(data?.id);
+  
   const bData = bankData && bankData?.[0];
   const fData = familyData && familyData?.[0];
-
+  
   const EMPLOYEE = {
     Gender: data?.gender || '',
     'Citizenship Number': data?.citizenshipNumber || '',
@@ -38,31 +39,18 @@ const BasicInfo = ({ data, mode, positionName, empId }) => {
     Location: bData?.bankAddress || '',
   };
 
-  const handleOnClick = () => {
-    if (isAdmin || isSuperAdmin || isHr || isManager || isHrAdmin) {
-      navigate(`/admin/employee/edit/${id}`);
-    } else {
-      navigate(`/employee/employee/edit/${loggedInUserData?.employeeId}`);
-    }
-  };
-
   return (
     <>
-      {/* <Stack sx={{ display: "flex" }}>
-          {isEmployee ? (
-            ""
-          ) : (
-            <BorderColorIcon
-              onClick={handleOnClick}
-              fontSize="large"
-              sx={{ color: "rgb(28, 126, 214)", paddingRight: "1rem" }}
-            />
-          )}
-        </Stack> */}
       <Box
         container
-        className='ProfileStyle'
-        sx={{ backgroundColor: mode === 'light' ? '#ededed' : '#292929' }}
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '2rem',
+          borderRadius: '1rem',
+          padding: '1rem',
+          backgroundColor: mode === 'light' ? '#ededed' : '#292929',
+        }}
       >
         <Box>
           <ListUserDetails
@@ -93,7 +81,7 @@ const BasicInfo = ({ data, mode, positionName, empId }) => {
             )}
           </Box>
           <Box>
-            {FAMILYMEMBERS && FAMILYMEMBERS.length > 0 && (
+            {familyData && familyData.length > 0 && (
               <ListUserDetails
                 data={FAMILYMEMBERS}
                 cardTitle={'Family Informations'}

@@ -237,14 +237,14 @@ const RenamePassword = ({ isLoading }) => {
               />
             </Grid>
             <Grid item>
-              <Button
+              <LoadingButton
                 onClick={handleFormSubmit}
                 variant="contained"
                 // sx={{ mt: 5, ml: 1 }}
                 fullWidth
               >
                 Create Password
-              </Button>
+              </LoadingButton>
               <Button onClick={handleCancel} sx={{ mt: 3, ml: 1 }}>
                 <ArrowBackIcon />
                 Back to your login page

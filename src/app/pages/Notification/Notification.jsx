@@ -109,7 +109,7 @@ const Notification = ({ data }) => {
         >
           {isManager ? (
             <>
-              {pendingLeaveData.length > 0 ? (
+              {pendingLeaveData?.length > 0 ? (
                 <LeaveNotification
                   Eventname={"Leave Request"}
                   data={pendingLeaveData}

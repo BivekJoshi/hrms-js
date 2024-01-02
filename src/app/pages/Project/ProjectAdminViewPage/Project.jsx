@@ -75,11 +75,11 @@ const Project = ({ permissions }) => {
   const filteredProjects = projectDetail?.projectResList?.filter(
     (project) =>
       `${project.projectName}`
-        .toLowerCase()
-        .includes(nameFilter.toLowerCase()) &&
-      project?.projectLeadName
-        .toLowerCase()
-        .includes(leaderNameFilter.toLowerCase())
+        ?.toLowerCase()
+        ?.includes(nameFilter.toLowerCase()) && 
+        project?.projectLeadName
+        ?.toLowerCase()
+        ?.includes(leaderNameFilter.toLowerCase())
   );
 
   return (

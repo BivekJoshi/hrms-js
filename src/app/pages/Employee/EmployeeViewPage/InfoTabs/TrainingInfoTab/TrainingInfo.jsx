@@ -13,14 +13,16 @@ import useAuth from "../../../../../../auth/hooks/component/login/useAuth";
 import { useGetLoggedInUserInfo } from "../../../../../hooks/employee/useEmployee";
 import CustomTable from "../../../../../components/CustomTable/CustomTable";
 
-const TrainingInfo = ({ data }) => {
+const TrainingInfo = ({ data, role }) => {
   const { isEmployee } = useAuth();
   const { data: loggedInUserData, isLoading: isLoading } = isEmployee
     ? useGetLoggedInUserInfo()
     : {};
 
   const { id } = useParams();
-  const { data: trainingData } = useGetTrainingByEmpId(id);
+  const { data: trainingData } = role
+    ? useGetTrainingByEmpId(id)
+    : useGetTrainingByEmpId(data?.id);
 
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
@@ -52,6 +54,14 @@ const TrainingInfo = ({ data }) => {
   };
 
   const columns = [
+    {
+      title: "SN",
+      render: (rowData) => rowData.tableData.id + 1,
+      width: "3%",
+      maxWidth: "50px",
+      sortable: false,
+      sorting: false,
+    },
     {
       title: "Training Name",
       field: "trainingName",
