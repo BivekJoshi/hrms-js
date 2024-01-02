@@ -1,18 +1,17 @@
-import React from "react";
-import "../Style/Style.css";
-import { Box, Divider, Stack } from "@mui/material";
-import BorderColorIcon from "@mui/icons-material/BorderColor";
-import ListUserDetails from "../../InfoTabs/BaiscInfoTab/Components/ListUserDetails";
-import { useParams } from "react-router-dom";
-import { useGetBankByEmployeeId } from "../../../../../hooks/employee/useBank";
-import { useGetFammilyById } from "../../../../../hooks/employee/useFamily";
-import useAuth from "../../../../../../auth/hooks/component/login/useAuth";
+import React from 'react';
+import '../Style/Style.css';
+import { Box, Divider, Stack } from '@mui/material';
+import BorderColorIcon from '@mui/icons-material/BorderColor';
+import ListUserDetails from '../../InfoTabs/BaiscInfoTab/Components/ListUserDetails';
+import { useParams } from 'react-router-dom';
+import { useGetBankByEmployeeId } from '../../../../../hooks/employee/useBank';
+import { useGetFammilyById } from '../../../../../hooks/employee/useFamily';
+import useAuth from '../../../../../../auth/hooks/component/login/useAuth';
 
-const BasicInfo = ({ data, mode, positionName, role }) => {
-  // const { id } = useParams();
-  // const { isSuperAdmin, isAdmin, isHr, isEmployee, isHrAdmin, isManager } =
-  //   useAuth();
-
+const BasicInfo = ({ data, mode, positionName, empId }) => {
+  const { id } = useParams();
+  const { isSuperAdmin, isAdmin, isHr, isEmployee, isHrAdmin, isManager } =
+    useAuth();
   const { data: bankData } = useGetBankByEmployeeId();
   const { data: familyData } = useGetFammilyById(data?.id);
   
@@ -20,54 +19,33 @@ const BasicInfo = ({ data, mode, positionName, role }) => {
   const fData = familyData && familyData?.[0];
   
   const EMPLOYEE = {
-    Gender: data?.gender || "",
-    "Citizenship Number": data?.citizenshipNumber || "",
-    "Date of Birth": data?.dateOfBirth || "",
-    "Marital Status": data?.maritalStatus || "",
-    "Date of Join": data?.dateOfJoin || "",
-    "Position": positionName || "",
-    "PAN Number": data?.panNumber || "",
+    Gender: data?.gender || '',
+    'Citizenship Number': data?.citizenshipNumber || '',
+    'Date of Birth': data?.dateOfBirth || '',
+    'Marital Status': data?.maritalStatus || '',
+    'Date of Join': data?.dateOfJoin || '',
+    Position: positionName || '',
+    'PAN Number': data?.panNumber || '',
   };
   const FAMILYMEMBERS = {
-    Name: fData?.name || "",
-    Relation: fData?.relation || "",
-    "Contact Number": fData?.mobileNumber || "",
+    Name: fData?.name || '',
+    Relation: fData?.relation || '',
+    'Contact Number': fData?.mobileNumber || '',
   };
 
   const BANKDETAILS = {
-    "Bank Name": bData?.bankName || "",
-    "Account Number": bData?.bankAccountNumber || "",
-    Location: bData?.bankAddress || "",
-    
+    'Bank Name': bData?.bankName || '',
+    'Account Number': bData?.bankAccountNumber || '',
+    Location: bData?.bankAddress || '',
   };
-
-  // const handleOnClick = () => {
-  //   if (isAdmin || isSuperAdmin || isHr || isManager || isHrAdmin) {
-  //     navigate(`/admin/employee/edit/${id}`);
-  //   } else {
-  //     navigate(`/employee/employee/edit/${loggedInUserData?.employeeId}`);
-  //   }
-  // };
 
   return (
     <>
-      {/* <Stack sx={{ display: "flex" }}>
-          {isEmployee ? (
-            ""
-          ) : (
-            <BorderColorIcon
-              onClick={handleOnClick}
-              fontSize="large"
-              sx={{ color: "rgb(28, 126, 214)", paddingRight: "1rem" }}
-            />
-          )}
-        </Stack> */}
       <Box
         container
-        // sx={{ display: 'grid', gridTemplateRows: '1fr 1fr', rowGap: '2rem', borderRadius: '1rem', padding: '1rem', backgroundColor: mode === 'light' ? '#ededed' : '#292929' }}
         sx={{
           display: 'flex',
-          flexDirection: 'column', // or 'row' based on your layout preference
+          flexDirection: 'column',
           gap: '2rem',
           borderRadius: '1rem',
           padding: '1rem',
@@ -83,7 +61,7 @@ const BasicInfo = ({ data, mode, positionName, role }) => {
           />
           <Divider />
         </Box>
-       
+
         <Box
           sx={{
             display: 'grid',
@@ -94,19 +72,19 @@ const BasicInfo = ({ data, mode, positionName, role }) => {
           className='FAM-BANK-DETAILS'
         >
           <Box>
-          {bankData && bankData.length > 0 && (
-            <ListUserDetails
-              data={BANKDETAILS}
-              cardTitle={'Bank Details'}
-              mode={mode}
-            />
-          )}
+            {BANKDETAILS && BANKDETAILS.length > 0 && (
+              <ListUserDetails
+                data={BANKDETAILS}
+                cardTitle={'Bank Details'}
+                mode={mode}
+              />
+            )}
           </Box>
           <Box>
             {familyData && familyData.length > 0 && (
               <ListUserDetails
                 data={FAMILYMEMBERS}
-                cardTitle={"Family Informations"}
+                cardTitle={'Family Informations'}
                 mode={mode}
               />
             )}

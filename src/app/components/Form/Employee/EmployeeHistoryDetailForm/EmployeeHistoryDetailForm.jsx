@@ -194,40 +194,61 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                           size="small"
                         />
                       </Grid>
-                      <Grid item xs={12} sm={1}>
-                        {values.history.length > 1 && (
-                          <Button
-                            variant="contained"
-                            onClick={() => {
-                              arrayHelpers.remove(index);
-                              handleDeleteHistory(employeeHistory);
+                      <Grid item xs={12} sm={8}>
+                        <div
+                          style={{
+                            display: "flex",
+                            gap: ".5rem",
+                            justifyContent: "flex-end",
+                          }}
+                        >
+                          <div
+                            onClick={() =>
+                              arrayHelpers.push({
+                                employerName: "",
+                                employerAddress: "",
+                                pastPosition: "",
+                                fromDate: "",
+                                toDate: "",
+                                description: "",
+                                remarks: "",
+                              })
+                            }
+                            style={{
+                              cursor:
+                                index !== values.history.length - 1
+                                  ? "not-allowed"
+                                  : "pointer",
+                              color:
+                                index !== values.history.length - 1
+                                  ? "#BDBDBD"
+                                  : "#388E3C",
+                              pointerEvents:
+                                index !== values.history.length - 1
+                                  ? "none"
+                                  : "auto",
                             }}
-                            color="error"
+                            disabled={index !== values.history.length - 1}
                           >
-                            Delete
-                          </Button>
-                        )}
+                            <AddIcon />
+                          </div>
+                          {values.history.length > 1 && (
+                            <div
+                              onClick={() => {
+                                arrayHelpers.remove(index);
+                                handleDeleteFamily(employeeHistory);
+                              }}
+                              style={{ cursor: "pointer" }}
+                            >
+                              <img src={DeleteIcon} alt="icon" />
+                            </div>
+                          )}
+                        </div>
                       </Grid>
                     </Grid>
                   </React.Fragment>
                 ))}
                 <br />
-                <Button
-                  variant="contained"
-                  onClick={() =>
-                    arrayHelpers.push({
-                      employerName: "",
-                      employerAddress: "",
-                      pastPosition: "",
-                      fromDate: "",
-                      toDate: "",
-                      description: "",
-                      remarks: "",
-                    })
-                  }
-                >
-                  Add
-                </Button>
               </>
             )}
           />

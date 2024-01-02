@@ -128,17 +128,15 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
                             <AddIcon />
                           </div>
                           {values.family.length > 1 && (
-                            <>
-                              <div
-                                onClick={() => {
-                                  arrayHelpers.remove(index);
-                                  handleDeleteFamily(familyMember);
-                                }}
-                                style={{ cursor: "pointer" }}
-                              >
-                                <img src={DeleteIcon} alt="icon" />
-                              </div>
-                            </>
+                            <div
+                              onClick={() => {
+                                arrayHelpers.remove(index);
+                                handleDeleteFamily(familyMember);
+                              }}
+                              style={{ cursor: "pointer" }}
+                            >
+                              <img src={DeleteIcon} alt="icon" />
+                            </div>
                           )}
                         </div>
                       </Grid>
