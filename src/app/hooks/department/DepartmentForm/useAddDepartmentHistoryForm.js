@@ -3,18 +3,17 @@ import { useAddDepartmentHistory } from '../../departmentHistory/useDepartmentHi
 import { DepartmentHistorySchema } from '../Validation/departmentHistorySchema';
 
 const useAddDepartmentHistoryForm = (onClose, id) => {
-  const { mutate: addAssignHistory } = useAddDepartmentHistory({});
+  const { mutate: adddepartmentHistory } = useAddDepartmentHistory({});
 
   const formik = useFormik({
     initialValues: {
-      branchId: "",
+      departmentId: "",
       effectiveFromDate: "",
       effectiveToDate: "",
       remarks: "",
       employeeId: id,
-      branchId: "",
     },
-    validationSchema: DepartmentHistorySchema,
+    // validationSchema: DepartmentHistorySchema,
     enableReinitialize: true,
     onSubmit: (values) => {
      
@@ -22,10 +21,10 @@ const useAddDepartmentHistoryForm = (onClose, id) => {
     
     },
   });
-
+console.log("for", formik)
   const handledAddRequest = (values) => {
     values = { ...values };
-    addAssignHistory(values, {
+    adddepartmentHistory(values, {
       onSuccess: () => {
         onClose();
       },

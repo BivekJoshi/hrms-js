@@ -54,12 +54,12 @@ export const DetailProfile = ({ data, role, setShowPersonalProfile }) => {
       component: <TrainingInfo data={data} role={role} />,
     },
     {
-      label: "Training",
+      label: "Branch",
       value: "7",
       component: <BranchInfo data={data} role={role} />,
     },
     {
-      label: "Training",
+      label: "Department",
       value: "8",
       component: <DepartmentInfo data={data} role={role} />,
     },

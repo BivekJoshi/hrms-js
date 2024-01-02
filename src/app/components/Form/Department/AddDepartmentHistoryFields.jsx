@@ -5,7 +5,7 @@ import useAddDepartmentHistoryForm from '../../../hooks/department/DepartmentFor
 
 const AddDepartmentHistoryFields = ({ onClose, isLoading, id }) => {
   const { formik } = useAddDepartmentHistoryForm(onClose, id);
-  const { data: departmntData } = useGetDepartment();
+  const { data: departmentData } = useGetDepartment();
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
@@ -19,19 +19,19 @@ const AddDepartmentHistoryFields = ({ onClose, isLoading, id }) => {
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
           <TextField
-            id="branchId"
-            name="branchId"
-            label="Branch Name"
-            placeholder="Enter branch name"
+            id="departmentId"
+            name="departmentId"
+            label="Department Name"
+            placeholder="Enter Department name"
             fullWidth
             required
             select
-            value={formik.values.branchId}
+            value={formik.values.departmentId}
             onChange={formik.handleChange}
             error={
-              formik.touched.branchId && Boolean(formik.errors.branchId)
+              formik.touched.departmentId && Boolean(formik.errors.departmentId)
             }
-            helperText={formik.touched.branchId && formik.errors.branchId}
+            helperText={formik.touched.departmentId && formik.errors.departmentId}
             variant="outlined"
             SelectProps={{
               native: true,
@@ -42,9 +42,9 @@ const AddDepartmentHistoryFields = ({ onClose, isLoading, id }) => {
              <option value="" disabled>
               Select Branch
             </option>
-            {departmntData?.map((option) => (
+            {departmentData?.map((option) => (
               <option key={option?.id} value={option?.id}>
-                {`${option?.branchName}`}
+                {`${option?.departmentName}`}
               </option>
             ))}
           </TextField>
@@ -56,6 +56,7 @@ const AddDepartmentHistoryFields = ({ onClose, isLoading, id }) => {
             label="Effective From Date"
             type="date"
             fullWidth
+            required
             value={formik.values.effectiveFromDate}
             onChange={formik.handleChange}
             error={
@@ -77,6 +78,7 @@ const AddDepartmentHistoryFields = ({ onClose, isLoading, id }) => {
             label="Effective To Date"
             type="date"
             fullWidth
+            required
             value={formik.values.effectiveToDate}
             onChange={formik.handleChange}
             error={
