@@ -6,13 +6,13 @@ import {
   MenuItem,
   OutlinedInput,
   Select,
+  TextField,
   Typography,
 } from "@mui/material";
 import { useGetEmployee } from "../../hooks/employee/useEmployee";
 import { getBusinessAEmployeeById, getBusinessBEmployeeById, getFemaleEmployeeById, getMaleEmployeeById, getTechnicalEmployeeById } from "../../components/Email/EmailSorting";
 
 const EmailForHoliday = ({ getEventID, onClose }) => {
-  console.log(getEventID,"id ma chai");
   const { data: employeeData } = useGetEmployee();
   const [employeeId, setEmployeeId] = useState();
   const [emailData, setEmailData] = useState();
@@ -73,15 +73,17 @@ const EmailForHoliday = ({ getEventID, onClose }) => {
             xs={12}
             sx={{ display: "flex", alignItems: "center" }}
           >
-            <Select
-              sx={{ m: 1, width: 300 }}
-              labelId="demo-multiple-name-label"
-              id="employeeId"
+            <TextField
+              id="holidayId"
+              name="holidayId"
               select
+              label="Select"
+              placeholder="Select employees"
+              fullWidth
+              required
               value={employeeId}
               onChange={handleChange}
-              input={<OutlinedInput label="To" />}
-              inputLabelProps={{shrink: true, color: "red"}}
+              variant="outlined"
             >
               <MenuItem value="all">All Employees</MenuItem>
               <MenuItem value="male">Male Employees</MenuItem>
@@ -90,7 +92,7 @@ const EmailForHoliday = ({ getEventID, onClose }) => {
               <MenuItem value="businessa">Business A Employees</MenuItem>
               <MenuItem value="businessb">Business B Employees</MenuItem>
               {/* <MenuItem value="none">None</MenuItem> */}
-            </Select>
+              </TextField>
           </Grid>
         </Grid>
         <Grid

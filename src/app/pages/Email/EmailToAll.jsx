@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import { useSendEmailToAll } from "../../hooks/email/useEmail";
-import { Button, Grid, MenuItem, OutlinedInput, Select, Typography } from "@mui/material";
+import {
+  Button,
+  Grid,
+  MenuItem,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { useGetEmployee } from "../../hooks/employee/useEmployee";
 import {
   getBusinessAEmployeeById,
@@ -24,7 +30,7 @@ const EmailToAll = ({ getEventID, onClose }) => {
   const sendEmailMutation = useSendEmailToAll({
     onSuccess: () => {
       setEmailData();
-      onClose(); 
+      onClose();
     },
     employeeId: employeeId,
     eventId: getEventID,
@@ -63,7 +69,9 @@ const EmailToAll = ({ getEventID, onClose }) => {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <Typography variant="h4"h2>Email</Typography>
+        <Typography variant="h4" h2>
+          Email
+        </Typography>
         <Grid container spacing={2}>
           <Grid
             item
@@ -71,14 +79,17 @@ const EmailToAll = ({ getEventID, onClose }) => {
             xs={12}
             sx={{ display: "flex", alignItems: "center" }}
           >
-            <Select
-              sx={{ m: 1, width: 300 }}
-              labelId="demo-multiple-name-label"
-              id="employeeId"
+            <TextField
+              id="eventId "
+              name="eventId "
               select
+              label="Select"
+              placeholder="Select employees"
+              fullWidth
+              required
               value={employeeId}
               onChange={handleChange}
-              input={<OutlinedInput label="To" />}
+              variant="outlined"
             >
               <MenuItem value="all">All Employees</MenuItem>
               <MenuItem value="male">Male Employees</MenuItem>
@@ -87,7 +98,7 @@ const EmailToAll = ({ getEventID, onClose }) => {
               <MenuItem value="businessa">Business A Employees</MenuItem>
               <MenuItem value="businessb">Business B Employees</MenuItem>
               <MenuItem value="none">None</MenuItem>
-            </Select>
+            </TextField>
           </Grid>
         </Grid>
         <Grid
@@ -97,7 +108,7 @@ const EmailToAll = ({ getEventID, onClose }) => {
           alignItems="flex-end"
           mt={2}
         >
-          <Button type="submit" variant="contained" sx={{color: "#fff"}}>
+          <Button type="submit" variant="contained" sx={{ color: "#fff" }}>
             Send
           </Button>
           <Button

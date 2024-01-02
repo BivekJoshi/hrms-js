@@ -1,10 +1,12 @@
 import { useFormik } from "formik";
 import { useAddHoliday, useEditHoliday } from "../useHoliday";
 import { HolidaySchema } from "./HolidaySchema";
+import { useState } from "react";
 
 const useHolidayForm = (setOpenSubmitModal, handleCloseModal) => {
   const { mutate: addEvent } = useAddHoliday({});
   // const { mutate: editEvent } = useEditHoliday({});
+  const [holidayId, setHolidayId] = useState();
 
   const formik = useFormik({
     initialValues: {
@@ -27,11 +29,13 @@ const useHolidayForm = (setOpenSubmitModal, handleCloseModal) => {
     // },
     onSubmit: (values) => {
       const formData = { ...values };
+      setHolidayId(null);
       addEvent(formData, {
-        onSuccess: () => {
+        onSuccess: (data) => {
           formik.resetForm();
+          setHolidayId(data.id);
           handleCloseModal();
-          setOpenSubmitModal(true);
+          // setOpenSubmitModal(true);
         },
       });
     },
@@ -55,7 +59,7 @@ const useHolidayForm = (setOpenSubmitModal, handleCloseModal) => {
     editEvent(values, formik);
   };
 
-  return { formik };
+  return { formik,holidayId };
 };
 
 export default useHolidayForm;
