@@ -167,35 +167,35 @@ const LeaveUserView = ({ data, isLoading }) => {
         );
       },
     },
-    {
-      title: "Actions",
-      render: (rowData) => {
-        const isApprovedOrRejected = ["APPROVED", "REJECTED"].includes(
-          rowData.leaveStatus
-        );
+    // {
+    //   title: "Actions",
+    //   render: (rowData) => {
+    //     const isApprovedOrRejected = ["APPROVED", "REJECTED"].includes(
+    //       rowData.leaveStatus
+    //     );
 
-        return (
-          <Stack direction="row" spacing={0}>
-            <Button
-              color="primary"
-              onClick={() => handleEditLeave(rowData)}
-              disabled={isApprovedOrRejected}
-            >
-              <ModeEditOutlineIcon />
-            </Button>
-            <Button
-              color="primary"
-              onClick={() => handleDeleteLeave(rowData)}
-              disabled={isApprovedOrRejected}
-            >
-              <DeleteIcon />
-            </Button>
-          </Stack>
-        );
-      },
-      sorting: false,
-      width: 120,
-    },
+    //     return (
+    //       <Stack direction="row" spacing={0}>
+    //         <Button
+    //           color="primary"
+    //           onClick={() => handleEditLeave(rowData)}
+    //           disabled={isApprovedOrRejected}
+    //         >
+    //           <ModeEditOutlineIcon />
+    //         </Button>
+    //         <Button
+    //           color="primary"
+    //           onClick={() => handleDeleteLeave(rowData)}
+    //           disabled={isApprovedOrRejected}
+    //         >
+    //           <DeleteIcon />
+    //         </Button>
+    //       </Stack>
+    //     );
+    //   },
+    //   sorting: false,
+    //   width: 120,
+    // },
   ];
 
   return (

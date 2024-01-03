@@ -1,7 +1,7 @@
 import React from "react";
-import { Box, Tab, Table, Tabs } from "@mui/material";
+import { Box, Divider, Tab, Table, Tabs } from "@mui/material";
 import { TableContainer, TableHead } from "@mui/material";
-import { TabContext, TabPanel } from "@mui/lab";
+import { TabContext, TabList, TabPanel } from "@mui/lab";
 
 import LeaveInfo from "../../InfoTabs/LeaveInfoTab/LeaveInfo";
 import AcademicsInfo from "../../InfoTabs/AcademicsInfoTab/AcademicsInfo";
@@ -15,6 +15,23 @@ import BranchInfo from '../../InfoTabs/BranchTab/BranchInfo';
 import DepartmentInfo from '../../InfoTabs/DepartmentTab/DepartmentInfo';
 
 const primaryColor = "#1c7ed6";
+
+const labelStyle = {
+  backgroundColor: "#EBEDEF",
+  marginLeft: ".5rem",
+  textTransform: "none",
+  borderRadius: ".5rem",
+  color: "black",
+  textDecoder:"none",
+  fontWeight:"bold"
+};
+const activeLabelStyle = {
+  ...labelStyle,
+  backgroundColor: "#329EF4",
+  borderBottom: "none",
+  textDecoder:"none",
+  fontWeight:"bold"
+};
 
 export const DetailProfile = ({ data, role, setShowPersonalProfile }) => {
   const [value, setValue] = React.useState("1");
@@ -80,16 +97,16 @@ export const DetailProfile = ({ data, role, setShowPersonalProfile }) => {
   return (
     <Box sx={{ typography: "body1" }}>
       <TabContext value={value}>
-        <TableContainer sx={{ borderBottom: 1, borderColor: "divider" }}>
+        <TableContainer>
           <Table aria-label="simple table">
             <TableHead>
-              <Tabs
+              <TabList
                 value={value}
                 variant="scrollable"
                 onChange={handleChange}
-                aria-label="lab API tabs example"
-                className="tableAlignment"
-                
+                // aria-label="lab API tabs example"
+                // className="tableAlignment"
+                indicatorColor="none"
               >
                 {tabsData.map((tab) => (
                   <Tab
@@ -97,17 +114,20 @@ export const DetailProfile = ({ data, role, setShowPersonalProfile }) => {
                     label={tab.label}
                     value={tab.value}
                     onClick={() => handleClick(tab.value)}
-                    style={{
-                      fontSize: "1rem",
-                      color: primaryColor,
-                      fontWeight: "bolder",
-                    }}
+                    // style={{
+                    //   fontSize: "1rem",
+                    //   color: primaryColor,
+                    //   fontWeight: "bolder",
+                    // }}
+                    style={value === tab?.value ? activeLabelStyle : labelStyle}
                   />
                 ))}
-              </Tabs>
+              </TabList>
             </TableHead>
           </Table>
         </TableContainer>
+        <br/>
+        <Divider/>
         <Box>
           {tabsData.map((tab) => (
             <TabPanel key={tab.value} value={tab.value} style={{ padding: 10 }}>
