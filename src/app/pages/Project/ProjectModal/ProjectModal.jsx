@@ -52,9 +52,10 @@ export const AddProjectActiveModal = ({
 }) => {
   return (
     <FormModal
-      title={title}
+      title={"Activate Project"}
       open={open}
       onClose={handleCloseModal}
+      width={370}
       formComponent={
         <EditProjectActivateFields onClose={handleCloseModal} data={id} />
       }

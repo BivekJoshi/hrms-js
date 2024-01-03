@@ -1,10 +1,11 @@
-import { Grid, Button, TextField, Typography } from "@mui/material";
+import { Grid, Button, Typography, Divider } from "@mui/material";
 import React from "react";
 import {
   useRemoveActiveProject,
   useAddActiveProject,
 } from "../../../hooks/project/addProject/useAddProjectActiveForm";
 import { useGetDeactivatedProject } from "../../../hooks/project/useProject";
+import Restore from "../../../../assets/restore.png"
 
 export const EditProjectDeactivateFields = ({ onClose, isLoading, data }) => {
   const { formik } = useRemoveActiveProject(data);
@@ -94,26 +95,19 @@ export const EditProjectActivateFields = ({ onClose, isLoading, data }) => {
     !isLoading && (
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
-          <Typography>Do you really want to activate this project <span style={{fontSize:"1.2rem",fontWeight:500}}>{getProjectName(formik.values.projectId)}</span> </Typography>
+          <Typography fontSize="20px" textAlign="center">
+            Are you sure you want to activate this project?
+          </Typography>
+          <Typography fontSize="14px" textAlign="center" fontWeight={400}>
+            Project Name : {getProjectName(formik.values.projectId)}
+          </Typography>
         </Grid>
-
-        {/* <Grid item xs={12} sm={12}>
-          <TextField
-            id="projectId"
-            name="projectId"
-            label="Project Name"
-            placeholder="Enter project Id"
-            fullWidth
-            disabled
-            value={getProjectName(formik.values.projectId)}
-            onChange={formik.handleChange}
-            error={formik.touched.projectId && Boolean(formik.errors.projectId)}
-            helperText={formik.touched.projectId && formik.errors.projectId}
-            variant="outlined"
-            InputLabelProps={{ shrink: true }}
-          />
-        </Grid> */}
-
+        <Grid item xs={12} sm={12} textAlign="center">
+          <img src={Restore} alt="Restore" />
+        </Grid>
+        <Grid item xs={12} sm={12} textAlign="center">
+        <Divider sx={{width:"100%"}}/>
+        </Grid>
         <Grid
           container
           direction="row"
