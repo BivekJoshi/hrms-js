@@ -19,7 +19,7 @@ export const getEventNotification = async () => {
 export const getEventAttenderList = async (filterData) => {
   const { eventId, employeeId } = filterData;
   const data = await axiosInstance.get(`/event/get-notification-admin`, {
-    params: { eventId: eventId, empId: employeeId },
+    params: { eventId: eventId, userId: employeeId },
   });
   return data;
 };
