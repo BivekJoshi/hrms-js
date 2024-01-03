@@ -113,7 +113,7 @@ const EmployeeCard = ({
                  <div style={{display: 'flex', alignItems: 'center'}}>
                  <Button
                     style={{
-                      marginTop: "5px",
+                      // marginTop: "5px",
                       fontSize: ".7rem",
                       padding: "1px 5px",
                     }}
@@ -123,7 +123,6 @@ const EmployeeCard = ({
                   >
                     {IsActive ? "Terminate" : "Active"}
                   </Button>
-
                  
                     <Button
                       variant="outlined"

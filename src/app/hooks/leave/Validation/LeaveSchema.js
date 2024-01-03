@@ -5,9 +5,10 @@ const LeaveSchema = Yup.object().shape({
   fromDate: Yup.string().required('Please Select Date'),
   toDate: Yup.string().required('Please Select Date'),
 
-  leaveTypeId: Yup.object().nullable().required('Please select leave type'),
-  employeeId: Yup.object().nullable().required('Please select employee name'),
-  // leaveStatus:Yup.string().required("Required")
+  leaveTypeId: Yup.object().required('Please select leave type'),
+  employeeId: Yup.string().required('Please select employee name'),
+  leaveReason: Yup.string().required('Please select leave reason'),
+  leaveStatus:Yup.string().required("Required")
 });
 
 export { LeaveSchema };

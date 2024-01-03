@@ -25,6 +25,7 @@ const specialPermissions = {
 
 const PermissionHierarchy = {
   company: commonPermissions,
+  assignCompany: commonPermissions,
   // designation: { ...commonPermissions, hrAdmin: allPermissions },
   designation: commonPermissions,
   department: commonPermissions,

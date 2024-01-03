@@ -65,21 +65,21 @@ const Notification = ({ data }) => {
     }
   }
 
-  useEffect(() => {
-    // checks if target click is outside Popper
-    const handleClickOutside = (event) => {
-      // anchorRef refers icon button triggering the Popper
-      if (anchorRef.current && !anchorRef.current.contains(event.target)) {
-        setOpen(false);
-      }
-    };
+  // useEffect(() => {
+  //   // checks if target click is outside Popper
+  //   const handleClickOutside = (event) => {
+  //     // anchorRef refers icon button triggering the Popper
+  //     if (anchorRef.current && !anchorRef.current.contains(event.target)) {
+  //       setOpen(false);
+  //     }
+  //   };
 
-    document.addEventListener("mousedown", handleClickOutside);
+  //   document.addEventListener("mousedown", handleClickOutside);
 
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+  //   return () => {
+  //     document.removeEventListener("mousedown", handleClickOutside);
+  //   };
+  // }, []);
 
   const btnStyle = {
     color: "#fff",

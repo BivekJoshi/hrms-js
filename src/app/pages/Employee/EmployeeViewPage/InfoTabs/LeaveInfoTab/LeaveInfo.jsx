@@ -24,7 +24,6 @@ const LeaveInfo = ({ isLoading, data, role }) => {
   //     (item) => item.leaveStatus === "PENDING"
   //   );
   // }
-  console.log(leaveData);
   const pendingLeaves =
     leaveData && leaveData.filter((item) => item?.leaveStatus === "PENDING");
   const approvedRejectedLeaves =

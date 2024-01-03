@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import {
   addCompany,
   deleteCompany,
+  editAssignCompany,
   editCompany,
   getCompany,
   getCompanyById,
@@ -68,6 +69,25 @@ export const useDeleteCompany = ({ onSuccess }) => {
 export const useEditCompany = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(['editCompany'], (formData) => editCompany(formData), {
+    onSuccess: (data, variables, context) => {
+      toast.success('Successfully edited Company');
+      onSuccess && onSuccess(data, variables, context);
+      queryClient.invalidateQueries('getCompany');
+    },
+    onError: (err, _variables, _context) => {
+      toast.error(`Error: ${err.message}`);
+    },
+  });
+};
+
+
+
+{
+  /*________________________EDIT-assign-branch_____________________________________*/
+}
+export const useEditAssignCompany = ({ onSuccess }) => {
+  const queryClient = useQueryClient();
+  return useMutation(['editCompany'], (formData) => editAssignCompany(formData), {
     onSuccess: (data, variables, context) => {
       toast.success('Successfully edited Company');
       onSuccess && onSuccess(data, variables, context);

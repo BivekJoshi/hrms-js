@@ -12,6 +12,7 @@ import {
 
 import {
   useDeleteLeave,
+  useDeleteLeaveAdmin,
   useGetLeave,
   useGetleaveOfUser,
 } from "../../hooks/leave/useLeave";
@@ -43,7 +44,7 @@ const Leave = ({ permissions }) => {
   const handleCloseEditModal = () => setOpenEditModal(false);
   const handleCloseDeleteModal = () => setOpenDeleteModal(false);
 
-  const deleteLeaveMutation = useDeleteLeave({});
+  const deleteLeaveMutation = useDeleteLeaveAdmin({});
   const handleDeleteLeave = (rowData) => {
     setDeletedLeave(rowData);
     setOpenDeleteModal(true);
@@ -228,13 +229,13 @@ const Leave = ({ permissions }) => {
     },
     {
       title: "Remark",
-      field: "leaveRemarks",
+      field: "remarks",
       width: "15%",
       emptyValue: "-",
       render: (rowData) => {
         return (
           <div style={{whiteSpace: 'wrap'}}>
-            {rowData?.leaveRemarks}
+            {rowData?.remarks}
           </div>
           // <Tooltip title={rowData?.leaveRemarks} placement="top-start" arrow>
           //   <Chip
@@ -303,7 +304,7 @@ const Leave = ({ permissions }) => {
           <CustomTable
             columns={columns}
             data={pendingLeaves}
-            title="Pending Leave Data"
+            title="Pending Leave Data "
             actions={actions}
             isLoading={loading}
           />

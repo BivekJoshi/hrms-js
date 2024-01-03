@@ -62,6 +62,9 @@ const Designation = Loadable(
 const Department = Loadable(
   lazy(() => import('../app/pages/Department/Department'))
 );
+const AssignDepartment = Loadable(
+  lazy(() => import('../app/pages/Department/AssignDepartment'))
+);
 const Company = Loadable(lazy(() => import('../app/pages/Company/Company')));
 const LeaveType = Loadable(
   lazy(() => import('../app/pages/LeaveType/LeaveType'))
@@ -202,7 +205,6 @@ const routes = [
     id: nanoid(),
     component: <Department component='department' />,
   },
-
   {
     path: 'presence',
     name: 'My Attendance',
@@ -351,7 +353,7 @@ export default function BreadCrumbs() {
 
   const getDashboardLink = () => {
     if (isEmployee) {
-      return '/employee/dashboard';
+      return '/employee/home';
     } else {
       return '/admin/dashboard';
     }

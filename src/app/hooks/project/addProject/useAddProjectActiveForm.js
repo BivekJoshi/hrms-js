@@ -10,7 +10,7 @@ export const useRemoveActiveProject = (data) => {
         initialValues: {
             projectId: data?.id || "",
         },
-        enableReinitialize: "true",
+        enableReinitialize: true,
         onSubmit: (values) => {
             handleRequest(values);
         },
@@ -26,13 +26,13 @@ export const useRemoveActiveProject = (data) => {
     return { formik };
 };
 
-export const useAddActiveProject = (data) => {
+export const useAddActiveProject = (data, onClose) => {
     const { mutate } = useActiveProject({});
     const formik = useFormik({
         initialValues: {
             projectId: data || "",
         },
-        enableReinitialize: "true",
+        enableReinitialize: true,
         onSubmit: (values) => {
             handleRequest(values);
         },
@@ -42,7 +42,11 @@ export const useAddActiveProject = (data) => {
         values = {
             ...values,
         };
-        mutate(values, formik);
+        mutate(values, {
+            onSuccess: () => {
+                onClose();
+            }
+        });
     };
 
     return { formik };

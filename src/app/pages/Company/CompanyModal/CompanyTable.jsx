@@ -44,7 +44,7 @@ const CompanyTable = ({ permissions, companyData, isLoading }) => {
       />
       {openEditModal && (
         <EditCompanyModal
-          title={"Edit Company"}
+          title={"Edit Branch"}
           // id={editedCompany?.id}
           data={editedCompany}
           open={openEditModal}

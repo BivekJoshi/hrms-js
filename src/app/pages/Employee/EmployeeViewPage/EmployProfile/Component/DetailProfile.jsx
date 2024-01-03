@@ -11,6 +11,8 @@ import DocumentInfo from "../../InfoTabs/DocumentInfoTab/DocumentInfo";
 import TrainingInfo from "../../InfoTabs/TrainingInfoTab/TrainingInfo";
 import PromotionHistory from "../../InfoTabs/PromotionHistory/PromotionHistory";
 import EmployeeHistory from "../../InfoTabs/EmployeeHistoryTab/EmployeeHistory";
+import BranchInfo from '../../InfoTabs/BranchTab/BranchInfo';
+import DepartmentInfo from '../../InfoTabs/DepartmentTab/DepartmentInfo';
 
 const primaryColor = "#1c7ed6";
 
@@ -51,8 +53,18 @@ export const DetailProfile = ({ data, role, setShowPersonalProfile }) => {
       component: <TrainingInfo data={data} role={role} />,
     },
     {
-      label: "Documents",
+      label: "Branch",
       value: "7",
+      component: <BranchInfo data={data} role={role} />,
+    },
+    {
+      label: "Department",
+      value: "8",
+      component: <DepartmentInfo data={data} role={role} />,
+    },
+    {
+      label: "Documents",
+      value: "9",
       component: <DocumentInfo data={data} role={role} />,
     },
   ];

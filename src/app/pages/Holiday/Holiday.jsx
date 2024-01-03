@@ -37,8 +37,8 @@ const Holiday = ({ permissions }) => {
   useEffect(() => {
     if (holidayData) {
       const formattedEvents = holidayData.map((event) => ({
-        title: event.holidayName,
-        date: event.holidayDate,
+        title: event?.holidayName,
+        date: event?.holidayDate,
         description: event?.holidayDescription,
         id: event.id,
       }));
@@ -127,7 +127,7 @@ const Holiday = ({ permissions }) => {
               <Typography variant="h4">Holiday Added Successfully!</Typography>
               <p>Do you like to Email this holiday to Employee.</p>
               <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-                {/* <ButtonComponent
+                <ButtonComponent
                  variant="contained"
                  sx={{ mt: 3, ml: 1 }}
                  OnClick={handleEmailButtonClick}
@@ -141,8 +141,8 @@ const Holiday = ({ permissions }) => {
                 }}
                  buttonName={"No"}
                  BGColor={"#d32f2f"}
-                /> */}
-                <Button
+                />
+                {/* <Button
                   variant="contained"
                   sx={{ mt: 3, ml: 1, color: "#fff" }}
                   onClick={handleEmailButtonClick}
@@ -158,7 +158,7 @@ const Holiday = ({ permissions }) => {
                   color="error"
                 >
                   No
-                </Button>
+                </Button> */}
               </Box>
             </div>
           }

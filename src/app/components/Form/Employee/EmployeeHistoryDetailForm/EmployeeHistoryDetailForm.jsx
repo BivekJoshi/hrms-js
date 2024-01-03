@@ -33,10 +33,10 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                         <TextField
                           id={`history[${index}].employerName`}
                           name={`history[${index}].employerName`}
-                          label="Employer Name"
-                          placeholder="Enter Employer Name"
+                          label="Branch Name"
+                          placeholder="Enter branch Name"
                           fullWidth
-                          required
+                          // required
                           onBlur={handleBlur}
                           value={employeeHistory.employerName}
                           onChange={handleChange}
@@ -56,10 +56,10 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                         <TextField
                           id={`history[${index}].employerAddress`}
                           name={`history[${index}].employerAddress`}
-                          label="Employer Address"
-                          placeholder="Enter Employer Address"
+                          label="Branch Address"
+                          placeholder="Enter branch Address"
                           fullWidth
-                          required
+                          // required
                           onBlur={handleBlur}
                           value={employeeHistory.employerAddress}
                           onChange={handleChange}
@@ -82,7 +82,7 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                           label="Past Position"
                           placeholder="Enter Past Position"
                           fullWidth
-                          required
+                          // required
                           onBlur={handleBlur}
                           value={employeeHistory.pastPosition}
                           onChange={handleChange}
@@ -106,7 +106,7 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                           placeholder="Select Date Form"
                           fullWidth
                           type="date"
-                          required
+                          // required
                           onBlur={handleBlur}
                           value={employeeHistory.fromDate}
                           onChange={handleChange}
@@ -132,7 +132,7 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                           fullWidth
                           type="date"
                           onBlur={handleBlur}
-                          required
+                          // required
                           value={employeeHistory.toDate}
                           onChange={handleChange}
                           error={Boolean(
@@ -156,7 +156,7 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                           placeholder="Enter Description"
                           fullWidth
                           onBlur={handleBlur}
-                          required
+                          // required
                           value={employeeHistory.description}
                           onChange={handleChange}
                           error={Boolean(
@@ -179,7 +179,7 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                           placeholder="Enter Remarks"
                           fullWidth
                           onBlur={handleBlur}
-                          required
+                          // required
                           value={employeeHistory.remarks}
                           onChange={handleChange}
                           error={Boolean(

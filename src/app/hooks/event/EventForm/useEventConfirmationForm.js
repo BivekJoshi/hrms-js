@@ -9,6 +9,7 @@ const useEventConfirmationForm = (data) => {
       eventId: "",
       notificationId: "",
       status: "",
+      remarks: "",
     },
 
     enableReinitialize: true,
