@@ -96,7 +96,7 @@ const OfficeResource = ({ permissions }) => {
       field: "description",
       render: (rowData) => (
         <Typography style={{ overflowWrap: "break-word" }}>
-          {rowData.description}
+          {rowData?.description}
         </Typography>
       ),
       emptyValue: "-",
