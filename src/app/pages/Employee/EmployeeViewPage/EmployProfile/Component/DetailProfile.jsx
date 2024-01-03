@@ -38,12 +38,12 @@ export const DetailProfile = ({ data, role, setShowPersonalProfile }) => {
       component: <AttendenceInfo data={data} role={role} />,
     },
     {
-      label: "Position History",
+      label: "Position",
       value: "4",
       component: <PromotionHistory data={data} role={role} />,
     },
     {
-      label: "Employee History",
+      label: "Work",
       value: "5",
       component: <EmployeeHistory data={data} role={role} />,
     },

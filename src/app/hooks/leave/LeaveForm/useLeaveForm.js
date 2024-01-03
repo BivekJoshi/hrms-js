@@ -32,7 +32,7 @@ const useLeaveForm = (data, onClose) => {
 
   const handleRequest = (values) => {
     values = { ...values };
-    addLeave(values, formik, {
+    addLeave(values, {
       onSuccess: () => {
         onClose();
         formik.resetForm();

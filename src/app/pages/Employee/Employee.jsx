@@ -17,8 +17,6 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import CloseIcon from '@mui/icons-material/Close';
- 
-import EmployeeBasicInfoForm from '../../components/Form/Employee/EmployeeBasicInfoForm/EmployeeBasicInfoForm';
 import useAddEmployeeForm from '../../hooks/employee/AddEmployee/useAddEmployeeForm';
 import EmployeeGrid from './EmployeeView/EmployeeGrid';
 import { useNavigate } from 'react-router-dom';
@@ -27,6 +25,7 @@ import './Style/Style.css';
 import ThemeModeContext from '../../../theme/ThemeModeContext';
 import { useGetEmployee, useGetEmployeeData } from '../../hooks/employee/useEmployee';
 import EmployeeTableView from './EmployeeView/EmployeePage/EmployeeTableView';
+import EmployeeBasicInfoForm from '../../components/Form/Employee/EmployeeBasicInfoForm/EmployeeBasicInfoForm';
  
 const Employee = () => {
   const { mode } = React.useContext(ThemeModeContext);
@@ -84,8 +83,8 @@ const Employee = () => {
  
   const handleSubmit = () => {
     formik.handleSubmit();
-    if (formik.isValid) {
-    }
+    // if (formik.isValid) {
+    // }
   };
  
   return (

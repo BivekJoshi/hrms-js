@@ -60,17 +60,17 @@ const minAge = new Date(
 const today = new Date().toISOString().split("T")[0];
 
 const EmployeeBasicInfoForm = ({ formik }) => {
-  const { data: companyData, isLoading: loadingCompany } = useGetCompany();
-  const { data: designationData, isLoading: loadingDesignation } =
-    useGetDesignation();
-  const { data: departmentData, isLoading: loadingDepartment } =
-    useGetDepartment();
-  const { data: employmentTypeData, isLoading: loadingEmploymentType } =
-    useGetEmploymentType();
+  // const { data: companyData, isLoading: loadingCompany } = useGetCompany();
+  // const { data: designationData, isLoading: loadingDesignation } =
+  //   useGetDesignation();
+  // const { data: departmentData, isLoading: loadingDepartment } =
+  //   useGetDepartment();
+  // const { data: employmentTypeData, isLoading: loadingEmploymentType } =
+  //   useGetEmploymentType();
 
   const { mode } = useContext(ThemeModeContext);
   return (
-    <Grid container spacing={1.25}>
+    <Grid container spacing={2}>
       <Grid item xs={12} sm={6} md={4}>
         <TextField
           id="firstName"
@@ -262,8 +262,8 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           }}
         />
       </Grid>
-      <Grid item xs={12} sm={6} md={4}>
-        {/* <TextField
+      {/* <Grid item xs={12} sm={6} md={4}>
+        <TextField
           id="employmentType"
           name="employmentType"
           label="Employment Type"
@@ -283,7 +283,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           InputLabelProps={{
             shrink: Boolean(formik.values.employmentType),
           }}
-        /> */}
+        />
         <TextField
           id="employmentTypeId"
           name="employmentTypeId"
@@ -315,7 +315,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
               </MenuItem>
             ))}
         </TextField>
-      </Grid>
+      </Grid> */}
       <Grid item xs={12} sm={6} md={4}>
         <TextField
           id="maritalStatus"
@@ -346,7 +346,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           ))}
         </TextField>
       </Grid>
-      <Grid item xs={12} sm={6} md={4}>
+      {/* <Grid item xs={12} sm={6} md={4}>
         <TextField
           id="branchId"
           name="branchId"
@@ -372,8 +372,8 @@ const EmployeeBasicInfoForm = ({ formik }) => {
               </MenuItem>
             ))}
         </TextField>
-      </Grid>
-      <Grid item xs={12} sm={6} md={4}>
+      </Grid> */}
+      {/* <Grid item xs={12} sm={6} md={4}>
         <TextField
           id="positionId"
           name="positionId"
@@ -399,7 +399,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
               </MenuItem>
             ))}
         </TextField>
-        {/* <Autocomplete
+        <Autocomplete
             id="positionId"
             name="positionId"
             options={designationData}
@@ -424,9 +424,9 @@ const EmployeeBasicInfoForm = ({ formik }) => {
              
                     />
             )}
-          /> */}
-      </Grid>
-      <Grid item xs={12} sm={6} md={4}>
+          />
+      </Grid> */}
+      {/* <Grid item xs={12} sm={6} md={4}>
         <TextField
           id="departmentId"
           name="departmentId"
@@ -454,8 +454,8 @@ const EmployeeBasicInfoForm = ({ formik }) => {
               </MenuItem>
             ))}
         </TextField>
-      </Grid>
-      <Grid item xs={12} sm={6} md={4}>
+      </Grid> */}
+      {/* <Grid item xs={12} sm={6} md={4}>
         <TextField
           id="shiftType"
           name="shiftType"
@@ -480,6 +480,26 @@ const EmployeeBasicInfoForm = ({ formik }) => {
             </MenuItem>
           ))}
         </TextField>
+      </Grid> */}
+      <Grid item xs={12} sm={6} md={4}>
+        <TextField
+          id="remarks"
+          name="remarks"
+          label="Remarks"
+          placeholder="Enter remarks"
+          fullWidth
+          // required
+          value={formik.values.remarks}
+          onChange={formik.handleChange}
+          error={
+            formik.touched.remarks && Boolean(formik.errors.remarks)
+          }
+          helperText={formik.touched.remarks && formik.errors.remarks}
+          variant="outlined"
+          InputLabelProps={{
+            shrink: Boolean(formik.values.remarks),
+          }}
+        />
       </Grid>
     </Grid>
   );

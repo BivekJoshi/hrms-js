@@ -221,10 +221,9 @@ const EventAttendance = ({ permissions }) => {
           title: "User Confirmation",
           field: "status",
           render: (rowData) => {
-            console.log("rowData", newStatus);
-            if (newStatus === "OK") {
+            if (rowData?.status === "OK") {
               return <Typography sx={{ color: "green" }}>Coming</Typography>;
-            } else if (newStatus === "NO") {
+            } else if (rowData?.status === "NO") {
               return <Typography sx={{ color: "red" }}>Not Coming</Typography>;
             } else {
               return (
