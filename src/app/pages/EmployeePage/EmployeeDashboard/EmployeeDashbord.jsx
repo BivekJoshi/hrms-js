@@ -134,7 +134,7 @@ const EmployeeDashbord = ({}) => {
           <EmployTaskCard
             key={index}
             title={taskDetail.title}
-            numberOfTask={taskDetail.numberOfTask}
+            numberOfTask={taskDetail.numberOfTask || 0}
             taskIcon={taskDetail.taskIcon}
             borderColor={taskDetail.borderColor}
             linkTo={taskDetail.linkTo}
