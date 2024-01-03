@@ -176,6 +176,7 @@ const OfficeResource = ({ permissions }) => {
       )}
       {openModal && (
         <DeactivatedOfficeResourceModal
+          width={"fit-content"}
           open={openModal}
           handleCloseModal={handleCloseModal}
           title={"Deactivated Logistics"}

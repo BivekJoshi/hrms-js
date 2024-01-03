@@ -36,7 +36,6 @@ const ProjectCard = ({
   const [editedProject, setEditedProject] = useState({});
   const [deactivateProject, setDeactivateProject] = useState({});
 
-
   const handleCloseEditModal = () => setOpenEditModal(false);
   const handleCloseDeactivateModal = () => setOpenDeactiveModal(false);
 
@@ -81,7 +80,7 @@ const ProjectCard = ({
     setEditedProject(item);
     setOpenEditModal(true);
   };
-
+  
   return (
     <>
         <MainCard
@@ -292,10 +291,11 @@ const ProjectCard = ({
           handleCloseModal={handleCloseEditModal}
         />
       )}
+      
       {openDeactivateModal && (
         <DeactivateProjectModal
         title={"Terminate Project"}
-          id={deactivateProject?.id}
+          id={deactivateProject?.projectid}
           open={openDeactivateModal}
           handleCloseModal={handleCloseDeactivateModal}
         />

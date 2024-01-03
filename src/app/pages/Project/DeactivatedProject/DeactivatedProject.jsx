@@ -23,7 +23,7 @@ const DeactivatedProject = () => {
   //   const name = `${employee?.firstName} ${employee?.middleName} ${employee?.lastName}`;
   //   return name;
   // };
-
+ 
   const handleActivateProject = (rowData) => {
     setActivateProject(rowData);
     setOpenActivateModal(true);
@@ -32,7 +32,7 @@ const DeactivatedProject = () => {
   const columns = [
     {
       title: 'SN',
-      render: (rowData) => rowData.tableData.id + 1,
+      render: (rowData) => rowData.tableData.index + 1,
       width: '2%',
       sortable: false,
       sorting: false,

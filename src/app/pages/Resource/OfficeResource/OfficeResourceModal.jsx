@@ -3,7 +3,7 @@ import FormModal from "../../../components/Modal/FormModal";
 import OfficeResourceFields from "../../../components/Form/Resource/OfficeResource/OfficeResourceFields";
 import { useGetOfficeResourceById } from "../../../hooks/resource/officeResource/useOfficeResource";
 import EditOfficeResourceActivationFields from "../../../components/Form/Resource/OfficeResource/EditOfficeResourceActivationFields";
-import DeactivatedOfficeResource from './DeactivatedOfficeResource';
+import DeactivatedOfficeResource from "./DeactivatedOfficeResource";
 
 export const AddOfficeResourceModal = ({ open, handleCloseModal, title }) => {
   return (
@@ -62,9 +62,8 @@ export const OfficeResourceLogisticsModal = ({
   );
 };
 
-
-
 export const DeactivatedOfficeResourceModal = ({
+  width,
   open,
   handleCloseModal,
   data,
@@ -74,6 +73,7 @@ export const DeactivatedOfficeResourceModal = ({
   return (
     <div>
       <FormModal
+        width={width}
         title={title}
         open={open}
         onClose={handleCloseModal}

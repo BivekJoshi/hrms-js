@@ -23,7 +23,7 @@ const useAddProjectForm = (onClose) => {
 
   const handleRequest = (values) => {
     values = { ...values };
-    mutate(values, formik, {
+    mutate(values, {
       onSuccess: () => {
         onClose();
         formik.handleReset();

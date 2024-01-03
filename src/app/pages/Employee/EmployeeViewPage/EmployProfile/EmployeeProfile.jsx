@@ -15,20 +15,15 @@ import { useGetLoggedInUser } from "../../../../hooks/auth/usePassword";
 import { Typography } from "@mui/material";
 import { ButtonComponent } from "../../../../components/Button/ButtonComponent";
 
-const EmployeeProfile = (role) => {
-  const { isSuperAdmin, isAdmin, isHr, isEmployee, isHrAdmin, isManager } =
-    useAuth();
+const EmployeeProfile = () => {
+  const { isSuperAdmin, isAdmin, isHr, isEmployee, isHrAdmin, isManager } = useAuth();
   const { id } = useParams();
   const { data: userData } = useGetLoggedInUser();
   const empId = userData && userData?.employeeId;
   const isAdmins = isSuperAdmin || isAdmin || isHrAdmin || isHr || isManager;
-  const { data: employeeDataById, isLoading } = isAdmins
-    ? useGetEmployeeById(id)
-    : useGetEmployeeById(empId);
+   const { data: employeeDataById, isLoading } = isAdmins ? useGetEmployeeById(id) : useGetEmployeeById(empId);
   const [showPersonalProfile, setShowPersonalProfile] = useState(true);
-  const togglePersonalProfile = () => {
-    setShowPersonalProfile(!showPersonalProfile);
-  };
+  const togglePersonalProfile = () => {setShowPersonalProfile(!showPersonalProfile)};
   // if (isLoading || isLoadingUserData) return <>Loading</>;
 
   return (
@@ -46,7 +41,7 @@ const EmployeeProfile = (role) => {
                 <ButtonComponent buttonName={"Show Profile"} />
               )}
             </Typography>
-            {showPersonalProfile && <PersonalProfile data={employeeDataById}  role={role}/>}
+            {showPersonalProfile && <PersonalProfile data={employeeDataById}  role={isAdmins}/>}
           </div>
           <DetailProfile
             data={employeeDataById}
@@ -54,7 +49,7 @@ const EmployeeProfile = (role) => {
             togglePersonalProfile={() =>
               setShowPersonalProfile(!showPersonalProfile)
             }
-            role={role}
+            role={isAdmins}
           />
         </div>
       </>
