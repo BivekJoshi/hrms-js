@@ -66,7 +66,6 @@ const AssignDepartment = Loadable(
   lazy(() => import('../app/pages/Department/AssignDepartment'))
 );
 const Company = Loadable(lazy(() => import('../app/pages/Company/Company')));
-const AssignCompany = Loadable(lazy(() => import('../app/pages/Company/AssignCompany')));
 const LeaveType = Loadable(
   lazy(() => import('../app/pages/LeaveType/LeaveType'))
 );
