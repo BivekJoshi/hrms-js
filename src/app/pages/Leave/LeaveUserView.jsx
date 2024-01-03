@@ -150,7 +150,7 @@ const LeaveUserView = ({ data, isLoading }) => {
             <Chip
               style={{
                 cursor: "pointer",
-                width: "200px",
+                maxWidth: "10rem",
                 height: "50px",
                 display: "block",
                 background: mode === "light" ? "white" : "#434343",
