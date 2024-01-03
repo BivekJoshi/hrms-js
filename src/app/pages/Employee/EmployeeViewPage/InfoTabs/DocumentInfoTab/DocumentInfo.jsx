@@ -70,6 +70,11 @@ const documentName = [
     label: 'Health Insurance',
     value: 'HEALTH_INSURANCE',
   },
+  {
+    id: 12,
+    label: 'Other Document',
+    value: 'OTHER_DOCUMENT',
+  },
 ];
 const DocumentInfo = ({data, role}) => {
   const { isSuperAdmin, isAdmin, isHr, isEmployee, isHrAdmin, isManager } =

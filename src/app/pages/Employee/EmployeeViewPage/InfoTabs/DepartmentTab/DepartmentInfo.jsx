@@ -96,7 +96,7 @@ const DepartmentInfo = ({ data, role }) => {
 
       {openAddModal && (
         <AddDepartmentHistory
-          title={'Change Department'}
+          title={'Change Employee Department'}
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
           id={data?.id}
