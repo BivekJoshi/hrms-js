@@ -54,6 +54,9 @@ axiosInstance.interceptors.response.use(
     return response.data;
   },
   function (error) {
+    if (error?.response?.status === 401) {
+      window.location.replace('/#');
+    }
     if (error.response) {
       const errorMessage = error?.response?.data?.message;
       if (
