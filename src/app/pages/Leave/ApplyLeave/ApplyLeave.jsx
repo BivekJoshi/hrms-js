@@ -1,32 +1,13 @@
 import React, { useContext } from "react";
 import { Grid, Typography } from "@mui/material";
-import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
 import "../../Style/Style.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import { useGetLoggedInUserLeaveBalance } from "../../../hooks/leave/useLeave";
 import { useGetLeaveType } from "../../../hooks/leaveType/useLeaveType";
-import { GiFireworkRocket } from "react-icons/gi";
-import { MdPregnantWoman, MdOutlineFlightTakeoff } from "react-icons/md";
-import { FaBaby } from "react-icons/fa";
-import { GiBigDiamondRing } from "react-icons/gi";
-import KitesurfingIcon from "@mui/icons-material/Kitesurfing";
-import BabyChangingStationIcon from "@mui/icons-material/BabyChangingStation";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
-import FortIcon from "@mui/icons-material/Fort";
 
-// const Item = styled(Paper)(({ theme }) => ({
-//   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-//   ...theme.typography.body2,
-//   padding: theme.spacing(1),
-//   textAlign: "center",
-//   minHeight: 290,
-//   maxHeight: 310,
-//   // padding: 30,
-//   // margin: 8,
-// }));
 const CustomArrow = ({ onClick, direction }) => {
   const arrowStyles = {
     fontSize: 30,
@@ -60,128 +41,60 @@ const ApplyLeave = () => {
     return <div>Loading...</div>;
   }
 
-  const leaveIcon = [
-    {
-      id: 1,
-      leaveType: "SICK ",
-    },
-    {
-      id: 2,
-      leaveType: "ANNUAL ",
-    },
-    {
-      id: 3,
-      leaveType: "MATERNITY ",
-    },
-
-    {
-      id: 4,
-      leaveType: "PATERNITY ",
-    },
-    {
-      id: 6,
-      leaveType: "CASUAL ",
-    },
-    {
-      id: 7,
-      leaveType: "MATERNITY ADDITIONAL ",
-    },
-    {
-      id: 5,
-      leaveType: "UNPAID ",
-    },
-  ];
-  // if (isLoading || !leavebalance || !leaveTypeData) {
-  //   return <div>Loading...</div>;
-  // }
-
-  const leaveTypeMap = new Map();
-  leaveIcon.forEach((leaveType) => {
-    leaveTypeMap.set(leaveType.id, leaveType.leaveType);
-  });
-  const leaveIconMap = new Map();
-  leaveIcon.forEach((leaveIcon) => {
-    leaveIconMap.set(leaveIcon.id, leaveIcon.icon);
-  });
-
-  const boxes = leavebalance
-    ? leavebalance.map((data, index) => (
-        <Box
-          key={index}
-          boxShadow="7"
-          borderRadius="1.5rem"
-          bgcolor={mode === "light" ? "" : "#4f4e4c"}
-        >
-          <Typography variant="h6" marginTop="1rem">
-            {leaveTypeMap.get(data ? data?.leaveTypeId : "")}
-          </Typography>
-          <Typography variant="h2" color="#3e019b" style={{ marginTop: 25 }}>
-            {leaveIconMap.get(data ? data?.leaveTypeId : "")}
-          </Typography>
-          <Typography fontSize="1rem">
-            <b> Leave Taken: {data ? data.leaveTaken : ""}</b>
-          </Typography>
-          <Typography fontSize="1rem">
-            <b>Available Leave: {data ? data.leaveBalance : ""}</b>
-          </Typography>
-        </Box>
-      ))
-    : leaveIcon.map((leave, index) => (
-        <Box
-          key={index}
-          boxShadow="7"
-          borderRadius="1.5rem"
-          bgcolor={mode === "light" ? "" : "#4f4e4c"}
-        >
-          <Typography variant="h6" marginTop="1rem">
-            {leave.leaveType}
-          </Typography>
-          <Typography variant="h2" color="#3e019b" style={{ marginTop: 25 }}>
-            {leave.icon}
-          </Typography>
-          <Typography fontSize="1rem">
-            <b>Available Leave: 0</b>
-          </Typography>
-          <Typography fontSize="1rem">
-            <b>Total Leave: 0</b>
-          </Typography>
-        </Box>
-      ));
-
+  const boxes =
+    leavebalance &&
+    leavebalance.map((data, index) => (
+      <Box
+        key={index}
+        boxShadow="7"
+        borderRadius="1.5rem"
+        padding="1rem"
+        bgcolor={mode === "light" ? "" : "#4f4e4c"}
+        borderLeft="4px solid #388E3C"
+      >
+        <Typography fontSize="16px">
+          <b>{data ? data?.leaveName : ""}</b>
+        </Typography>
+        <Typography fontSize="14px">
+          Leave Taken: {data ? data.leaveTaken : ""}
+        </Typography>
+        <Typography fontSize="14px" fontWeight={500}>
+          Available Leave: {data ? data.leaveBalance : ""}
+        </Typography>
+      </Box>
+    ));
   const chunkedBoxes = [];
   for (let i = 0; i < boxes.length; i += 4) {
     chunkedBoxes.push(boxes.slice(i, i + 4));
   }
 
   return (
-    <>
-      <Box sx={{ flexGrow: 1 }} paddingBottom="2rem">
-        <Typography variant="h4">Taken Leave</Typography>
-        <Carousel
-          showThumbs={false}
-          showArrows={false}
-          showStatus={false}
-          renderArrowPrev={(onClickHandler) => (
-            <CustomArrow onClick={onClickHandler} direction="prev" />
-          )}
-          renderArrowNext={(onClickHandler) => (
-            <CustomArrow onClick={onClickHandler} direction="next" />
-          )}
-        >
-          {chunkedBoxes.map((chunk, index) => (
-            <Box
-              style={{ padding: " 0 0 1rem", margin: "1rem .5rem" }}
-              display="grid"
-              gridTemplateColumns="repeat(auto-fit, minmax(125px, 1fr))"
-              gap="1rem"
-              key={index}
-            >
-              {chunk}
-            </Box>
-          ))}
-        </Carousel>
-      </Box>
-    </>
+    <Box sx={{ flexGrow: 1 }}>
+      <Typography variant="h5">Taken Leave</Typography>
+      <Carousel
+        showThumbs={false}
+        showArrows={false}
+        showStatus={false}
+        renderArrowPrev={(onClickHandler) => (
+          <CustomArrow onClick={onClickHandler} direction="prev" />
+        )}
+        renderArrowNext={(onClickHandler) => (
+          <CustomArrow onClick={onClickHandler} direction="next" />
+        )}
+      >
+        {chunkedBoxes.map((chunk, index) => (
+          <Box
+            style={{ padding: " 0 0 1rem", margin: "1rem .5rem" }}
+            display="grid"
+            gridTemplateColumns="repeat(auto-fit, minmax(125px, 1fr))"
+            gap="1rem"
+            key={index}
+          >
+            {chunk}
+          </Box>
+        ))}
+      </Carousel>
+    </Box>
   );
 };
 
