@@ -12,7 +12,6 @@ import { ButtonComponent } from "../../Button/ButtonComponent";
 export const AddUserControlFields = ({ onClose, userControlData }) => {
   const { data: employeeData } = useGetNoneUser();
   const { formik } = useAddUserControlForm(onClose);
- 
   const handleFormSubmit = () => {
     formik.handleSubmit();
     if (formik.isValid) {
@@ -27,10 +26,11 @@ export const AddUserControlFields = ({ onClose, userControlData }) => {
   };
 
   const nameLabel = (emp) => {
-    if (emp?.middleName) {
-      return `${emp?.firstName} ${emp?.middleName} ${emp?.lastName}`;
+    console.log(emp, "employee");
+    if (emp?.middleName === "") {
+      return `${emp?.firstName} ${emp?.lastName} (${emp?.officeEmail})`;
     } else {
-      return `${emp?.firstName} ${emp?.lastName}`;
+      return `${emp?.firstName} ${emp?.lastName} ${emp?.lastName} (${emp?.officeEmail})`;
     }
   };
 
@@ -57,11 +57,11 @@ export const AddUserControlFields = ({ onClose, userControlData }) => {
               <TextField
                 {...params}
                 label="User Name"
-                placeholder="Enter User name..."
+                placeholder="Enter User name"
                 fullWidth
                 required
                 variant="outlined"
-                InputLabelProps={{ shrink: true }}
+                size="small"
                 error={
                   formik.touched.employeeId && Boolean(formik.errors.employeeId)
                 }
