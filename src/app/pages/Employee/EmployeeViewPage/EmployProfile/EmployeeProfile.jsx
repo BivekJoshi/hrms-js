@@ -43,6 +43,7 @@ const EmployeeProfile = () => {
             </Typography>
             {showPersonalProfile && <PersonalProfile data={employeeDataById}  role={isAdmins}/>}
           </div>
+          <br/>
           <DetailProfile
             data={employeeDataById}
             setShowPersonalProfile={setShowPersonalProfile}

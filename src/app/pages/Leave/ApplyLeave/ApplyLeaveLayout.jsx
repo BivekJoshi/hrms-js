@@ -4,12 +4,14 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import ApplyLeave from "./ApplyLeave";
-import { Chip, Fab, Typography } from "@mui/material";
+import { Button, Chip, Fab, Typography } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from "react-router-dom";
 import LeaveUserView from "../LeaveUserView";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
 import { useGetLoggedInUserLeave } from "../../../hooks/leave/useLeave";
+import EditIcon from "@mui/icons-material/Edit";
+import useApplyLeaveForm from "../../../hooks/leave/LeaveForm/useApplyLeaveForm";
 
 const fabStyle = {
   position: "fixed",
@@ -63,6 +65,7 @@ const formattedDate = `${dayWithOrdinal(today.getDate())} ${
 const ApplyLeaveLayout = () => {
   const { data: leaveData, isLoading } = useGetLoggedInUserLeave();
   const navigate = useNavigate();
+  const { formik: applyLeaveFormik } = useApplyLeaveForm();
 
   const { mode } = React.useContext(ThemeModeContext);
 
@@ -70,6 +73,9 @@ const ApplyLeaveLayout = () => {
     leaveData &&
     leaveData.filter((leaveRecord) => leaveRecord?.leaveStatus === "PENDING");
 
+  const handleClickEditButton = (data) => {
+    navigate(`/employee/applyleavefield`, { state: { data} });
+  };
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
@@ -83,51 +89,67 @@ const ApplyLeaveLayout = () => {
         </Grid>
         <Grid item xs={12}>
           {pendingLeaveData &&
-            pendingLeaveData.map((data) => (
-              <Item>
-                <Box
-                  borderLeft="6px solid green"
-                  paddingLeft="10"
-                  backgroundColor={mode === "light" ? "#efeeeb" : "#4f4e4c"}
-                  padding=".5rem"
-                >
-                  <Typography fontSize="1.2rem">
-                    <b>Your Leave Request</b>
-                  </Typography>
-                  <Grid container spacing={2} paddingTop=".5rem">
-                    <Grid item xs={5}>
-                      <Typography variant="h7" fontWeight="bold">
-                        From Date
-                      </Typography>
-                      <br />
-                      <Typography variant="h7" fontWeight="bold">
-                        {data?.fromDate}
-                      </Typography>
+            pendingLeaveData.map((data) => {
+              // console.log(data, "data");
+              return (
+                <Item>
+                  <Box
+                    borderLeft="6px solid green"
+                    paddingLeft="10"
+                    backgroundColor={mode === "light" ? "#efeeeb" : "#4f4e4c"}
+                    padding=".5rem"
+                  >
+                    <Typography fontSize="1.2rem">
+                      <b>Your Leave Request</b>
+                    </Typography>
+                    <Grid container spacing={2} paddingTop=".5rem">
+                      <Grid item xs={4}>
+                        <Typography variant="h7" fontWeight="bold">
+                          From Date
+                        </Typography>
+                        <br />
+                        <Typography variant="h7" fontWeight="bold">
+                          {data?.fromDate}
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={4}>
+                        <Typography variant="h7" fontWeight="bold">
+                          To Date
+                        </Typography>
+                        <br />
+                        <Typography variant="h7" fontWeight="bold">
+                          {data?.toDate}
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={3}>
+                        <Chip
+                          label={data?.leaveStatus}
+                          sx={{
+                            fontSize: "1.2rem",
+                            background: "#ffa500",
+                            color: "#fff",
+                          }}
+                        />{" "}
+                        {data?.leaveType?.leaveName} LEAVE
+                      </Grid>
+                      <Grid item xs={1}>
+                        <Button
+                          style={{ color: "blue" }}
+                          onClick={() => handleClickEditButton(data)}
+                        >
+                          <EditIcon />
+                        </Button>
+                      </Grid>
                     </Grid>
-                    <Grid item xs={5}>
-                      <Typography variant="h7" fontWeight="bold">
-                        To Date
-                      </Typography>
-                      <br />
-                      <Typography variant="h7" fontWeight="bold">
-                        {data?.toDate}
-                      </Typography>
-                    </Grid>
-                    <Grid item xs={2}>
-                      <Chip
-                        label={data?.leaveStatus}
-                        sx={{ fontSize: "1.2rem", background: "#ffa500", color: "#fff" }}
-                      />
-                    </Grid>
-                  </Grid>
-                </Box>
-              </Item>
-            ))}
+                  </Box>
+                </Item>
+              );
+            })}
         </Grid>
       </Grid>
       <br />
       <Grid item xs={12}>
-        <LeaveUserView data={leaveData} isLoading={isLoading}/>
+        <LeaveUserView data={leaveData} isLoading={isLoading} />
       </Grid>
       <Fab
         color="secondary"
