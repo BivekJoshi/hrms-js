@@ -56,6 +56,7 @@ const useLeaveEditForm = (data, onClose) => {
       id: data?.leaveId,
       employeeId: data?.employeeId || "",
       leaveStatus: "",
+      leaveRemarks: "",
     },
     validationSchema: EditLeaveSchemaAdmin,
     onSubmit: (value) => {

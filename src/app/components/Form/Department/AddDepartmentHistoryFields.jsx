@@ -40,7 +40,7 @@ const AddDepartmentHistoryFields = ({ onClose, isLoading, id }) => {
             // size="small"
           >
              <option value="" disabled>
-              Select Branch
+              Select Department
             </option>
             {departmentData?.map((option) => (
               <option key={option?.id} value={option?.id}>
@@ -71,7 +71,7 @@ const AddDepartmentHistoryFields = ({ onClose, isLoading, id }) => {
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
-        <Grid item xs={12} sm={12}>
+        {/* <Grid item xs={12} sm={12}>
           <TextField
             id="effectiveToDate"
             name="effectiveToDate"
@@ -91,7 +91,7 @@ const AddDepartmentHistoryFields = ({ onClose, isLoading, id }) => {
             variant="outlined"
             InputLabelProps={{ shrink: true }}
           />
-        </Grid>
+        </Grid> */}
         <Grid item xs={12} sm={12}>
           <TextField
             id="remarks"
