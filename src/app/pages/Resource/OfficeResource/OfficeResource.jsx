@@ -4,7 +4,7 @@ import {
   useGetAvailableOfficeResource,
   useGetUsedOfficeResource,
 } from "../../../hooks/resource/officeResource/useOfficeResource";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import {
   AddOfficeResourceModal,
   DeactivatedOfficeResourceModal,
@@ -94,6 +94,11 @@ const OfficeResource = ({ permissions }) => {
     {
       title: "Description",
       field: "description",
+      render: (rowData) => (
+        <Typography style={{ overflowWrap: "break-word" }}>
+          {rowData.description}
+        </Typography>
+      ),
       emptyValue: "-",
       width: "57rem",
       sorting: false,
