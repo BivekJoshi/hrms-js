@@ -12,7 +12,6 @@ import { ButtonComponent } from "../../Button/ButtonComponent";
 export const AddUserControlFields = ({ onClose, userControlData }) => {
   const { data: employeeData } = useGetNoneUser();
   const { formik } = useAddUserControlForm(onClose);
-  console.log(employeeData);
   const handleFormSubmit = () => {
     formik.handleSubmit();
     if (formik.isValid) {

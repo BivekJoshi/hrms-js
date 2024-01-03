@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Box,
   Divider,
@@ -6,26 +6,26 @@ import {
   IconButton,
   Modal,
   Typography,
-} from '@mui/material';
-import ThemeModeContext from '../../../theme/ThemeModeContext';
-import { useContext } from 'react';
-import CloseIcon from '@mui/icons-material/Close';
+} from "@mui/material";
+import ThemeModeContext from "../../../theme/ThemeModeContext";
+import { useContext } from "react";
+import CloseIcon from "@mui/icons-material/Close";
 
-const FormModal = ({ open, onClose, formComponent, sx, title }) => {
+const FormModal = ({ open, onClose, formComponent, sx, title, width }) => {
   const { mode } = useContext(ThemeModeContext);
   const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '1px solid #808080',
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: width ? width : 400,
+    bgcolor: "background.paper",
+    border: "1px solid #808080",
     borderRadius: 2,
     boxShadow: 24,
-    p: '12px 24px',
-    background: mode === 'light' ? '' : '#413e3e',
-    color: mode === 'light' ? '' : 'white',
+    p: "12px 24px",
+    background: mode === "light" ? "" : "#413e3e",
+    color: mode === "light" ? "" : "white",
   };
 
   return (
@@ -33,28 +33,28 @@ const FormModal = ({ open, onClose, formComponent, sx, title }) => {
       <Modal
         open={open}
         onClose={onClose}
-        aria-labelledby='modal-modal-title'
-        aria-describedby='modal-modal-description'
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
         // sx={sx}
       >
         <Box sx={style}>
           <Grid
             sx={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              marginBottom: '1rem',
-              position: 'relative',
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              marginBottom: "1rem",
+              position: "relative",
             }}
           >
-            <Typography variant='h6'>{title ?? title}</Typography>
+            <Typography variant="h6">{title ?? title}</Typography>
             <div
               style={{
-                width: '100%',
-                height: '1px',
-                backgroundColor: '#e0e0e0',
-                position: 'absolute',
-                bottom: '0',
+                width: "100%",
+                height: "1px",
+                backgroundColor: "#e0e0e0",
+                position: "absolute",
+                bottom: "0",
               }}
             />
             <IconButton onClick={onClose}>
