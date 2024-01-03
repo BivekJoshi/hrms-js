@@ -69,7 +69,7 @@ const LeaveUserView = ({ data, isLoading }) => {
     {
       title: "SN",
       render: (rowData) => rowData.tableData.id + 1,
-      width: 20,
+      width: 2,
       sortable: false,
     },
     {

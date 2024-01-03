@@ -14,8 +14,6 @@ import EmployeeHistory from "../../InfoTabs/EmployeeHistoryTab/EmployeeHistory";
 import BranchInfo from '../../InfoTabs/BranchTab/BranchInfo';
 import DepartmentInfo from '../../InfoTabs/DepartmentTab/DepartmentInfo';
 
-const primaryColor = "#1c7ed6";
-
 const labelStyle = {
   backgroundColor: "#EBEDEF",
   marginLeft: ".5rem",
