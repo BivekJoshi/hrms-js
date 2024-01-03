@@ -1,4 +1,4 @@
-import { axiosInstance } from '../../../auth/axiosInterceptor';
+import { axiosInstance } from "../../../auth/axiosInterceptor";
 
 {
   /*________________________GETALL_____________________________________*/
@@ -20,6 +20,10 @@ export const getNoneUser = async () => {
 }
 export const getLoggedInUserInfo = async () => {
   const data = await axiosInstance.get(`/employee/logged-in/employee-details`);
+  return data;
+};
+export const getAllEmployeeData = async () => {
+  const data = await axiosInstance.get(`/employee/get-all`);
   return data;
 };
 
