@@ -30,7 +30,7 @@ export const AddUserControlFields = ({ onClose, userControlData }) => {
     if (emp?.middleName === "") {
       return `${emp?.firstName} ${emp?.lastName} (${emp?.officeEmail})`;
     } else {
-      return `${emp?.firstName} ${emp?.lastName} ${emp?.lastName} (${emp?.officeEmail})`;
+      return `${emp?.firstName} ${emp?.middleName} ${emp?.lastName} (${emp?.officeEmail})`;
     }
   };
 
