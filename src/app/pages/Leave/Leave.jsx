@@ -259,13 +259,13 @@ const Leave = ({ permissions }) => {
     },
     {
       title: "Remark",
-      field: "leaveRemarks",
+      field: "remarks",
       width: "15%",
       emptyValue: "-",
       render: (rowData) => {
         return (
           <div style={{whiteSpace: 'wrap'}}>
-            {rowData?.leaveRemarks}
+            {rowData?.remarks}
           </div>
           // <Tooltip title={rowData?.leaveRemarks} placement="top-start" arrow>
           //   <Chip
