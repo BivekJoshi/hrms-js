@@ -58,7 +58,7 @@ axiosInstance.interceptors.response.use(
     if (error?.response) {
       if (error?.response?.status === 401) {
         removeUser();
-        window.location.href('/#');
+        window.location.replace('/#');
       }
       const errorMessage = error?.response?.data?.message;
       if (
