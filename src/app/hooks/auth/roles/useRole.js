@@ -1,5 +1,5 @@
-import { useMutation, useQuery, useQueryClient } from "react-query";
-import { toast } from "react-toastify";
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { toast } from 'react-toastify';
 import {
   addRole,
   deleteRole,
@@ -7,11 +7,11 @@ import {
   editRole,
   getRole,
   getRoleById,
-} from "../../../api/auth/roles/role-api";
+} from '../../../api/auth/roles/role-api';
 
 /*________________________GET_____________________________________*/
 export const useGetRole = () => {
-  return useQuery(["getRole"], () => getRole(), {
+  return useQuery(['getRole'], () => getRole(), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
@@ -19,7 +19,7 @@ export const useGetRole = () => {
 
 /*________________________GETBYID_____________________________________*/
 export const useGetRoleByID = (id) => {
-  return useQuery(["getRoleById", id], () => getRoleById(id), {
+  return useQuery(['getRoleById', id], () => getRoleById(id), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
@@ -28,11 +28,11 @@ export const useGetRoleByID = (id) => {
 /*________________________POST_____________________________________*/
 export const useAddRole = ({ onSuccess }) => {
   const queryClient = useQueryClient();
-  return useMutation(["addUserControl"], (formData) => addRole(formData), {
+  return useMutation(['addUserControl'], (formData) => addRole(formData), {
     onSuccess: (data, variables, context) => {
-      toast.success("Role Added Sucessfully");
+      toast.success('Role Added Sucessfully');
       onSuccess && onSuccess(data, variables, context);
-      queryClient.invalidateQueries("getRole");
+      queryClient.invalidateQueries('getRole');
     },
     onError: (err, _variables, _context) => {
       toast.error(`error: ${err.message}`);
@@ -43,11 +43,11 @@ export const useAddRole = ({ onSuccess }) => {
 /*________________________EDIT NAME_____________________________________*/
 export const useEditRole = ({ onSuccess }) => {
   const queryClient = useQueryClient();
-  return useMutation(["editUserControl"], (formData) => editRole(formData), {
+  return useMutation(['editUserControl'], (formData) => editRole(formData), {
     onSuccess: (data, variables, context) => {
-      toast.success("Role Edied Sucessfully");
+      toast.success('Role Edied Sucessfully');
       onSuccess && onSuccess(data, variables, context);
-      queryClient.invalidateQueries("getRole");
+      queryClient.invalidateQueries('getRole');
     },
     onError: (err, _variables, _context) => {
       toast.error(`Error: ${err.message}`);
@@ -59,16 +59,13 @@ export const useEditRole = ({ onSuccess }) => {
 export const useEditPermissionRole = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(
-    ["editPermissionRole"],
+    ['editPermissionRole'],
     (formData) => editPermissionRole(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success("Role Edied Sucessfully");
+        toast.success('Role Edied Sucessfully');
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries("getRole");
-      },
-      onError: (err, _variables, _context) => {
-        toast.error(`Error: ${err.message}`);
+        queryClient.invalidateQueries('getRole');
       },
     }
   );
@@ -76,11 +73,11 @@ export const useEditPermissionRole = ({ onSuccess }) => {
 /*________________________DELETE_____________________________________*/
 export const useDeleteRole = ({ onSuccess }) => {
   const queryClient = useQueryClient();
-  return useMutation(["deleteUserControl"], (id) => deleteRole(id), {
+  return useMutation(['deleteUserControl'], (id) => deleteRole(id), {
     onSuccess: (data, variables, context) => {
-      toast.success("Successfully deleted user");
+      toast.success('Successfully deleted user');
       onSuccess && onSuccess(data, variables, context);
-      queryClient.invalidateQueries("getRole");
+      queryClient.invalidateQueries('getRole');
     },
     onError: (err, _variables, _context) => {
       toast.error(`Error: ${err.message}`);

@@ -78,9 +78,6 @@ export const useEditEmploymentType = ({ onSuccess }) => {
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries('getEmploymentType');
       },
-      onError: (err, _variables, _context) => {
-        toast.error(`Error: ${err.message}`);
-      },
     }
   );
 };

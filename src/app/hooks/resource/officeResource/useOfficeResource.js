@@ -1,5 +1,5 @@
-import { useMutation, useQuery, useQueryClient } from "react-query";
-import { toast } from "react-toastify";
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { toast } from 'react-toastify';
 import {
   addofficeResource,
   editofficeResource,
@@ -10,13 +10,13 @@ import {
   getdeactivaedofficeResource,
   getofficeResource,
   getofficeResourceById,
-} from "../../../api/resource/officeResource/officeResouce";
+} from '../../../api/resource/officeResource/officeResouce';
 
 {
   /*________________________GET ALL OFFICE RESOURCE_____________________________________*/
 }
 export const useGetOfficeResource = () => {
-  return useQuery(["getofficeResource"], () => getofficeResource(), {
+  return useQuery(['getofficeResource'], () => getofficeResource(), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
@@ -25,7 +25,7 @@ export const useGetOfficeResource = () => {
   /*________________________GET used OFFICE RESOURCE_____________________________________*/
 }
 export const useGetUsedOfficeResource = () => {
-  return useQuery(["getUsedOfficeResource"], () => getUsedOfficeResource(), {
+  return useQuery(['getUsedOfficeResource'], () => getUsedOfficeResource(), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
@@ -35,7 +35,7 @@ export const useGetUsedOfficeResource = () => {
 }
 export const useGetAvailableOfficeResource = () => {
   return useQuery(
-    ["getAvailableOfficeResource"],
+    ['getAvailableOfficeResource'],
     () => getAvailableOfficeResource(),
     {
       refetchInterval: false,
@@ -49,7 +49,7 @@ export const useGetAvailableOfficeResource = () => {
 }
 export const useGetOfficeResourceById = (id) => {
   return useQuery(
-    ["getofficeResourceById", id],
+    ['getofficeResourceById', id],
     () => getofficeResourceById(id),
     {
       refetchInterval: false,
@@ -63,7 +63,7 @@ export const useGetOfficeResourceById = (id) => {
 }
 export const useGetDeactivatedOfficeResource = () => {
   return useQuery(
-    ["getdeactivaedofficeResource"],
+    ['getdeactivaedofficeResource'],
     () => getdeactivaedofficeResource(),
     {
       refetchInterval: false,
@@ -78,16 +78,13 @@ export const useGetDeactivatedOfficeResource = () => {
 export const useAddOfficeResource = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(
-    ["addofficeResource"],
+    ['addofficeResource'],
     (formData) => addofficeResource(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success("Succesfully added Office Logistics");
+        toast.success('Succesfully added Office Logistics');
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries("getAvailableOfficeResource");
-      },
-      onError: (err, _variables, _context) => {
-        toast.error(`error: ${err.message}`);
+        queryClient.invalidateQueries('getAvailableOfficeResource');
       },
     }
   );
@@ -99,16 +96,13 @@ export const useAddOfficeResource = ({ onSuccess }) => {
 export const useEditOfficeResource = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(
-    ["editofficeResource"],
+    ['editofficeResource'],
     (formData) => editofficeResource(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success("Successfully edited office Logistics");
+        toast.success('Successfully edited office Logistics');
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries("getAvailableOfficeResource");
-      },
-      onError: (err, _variables, _context) => {
-        toast.error(`Error: ${err.message}`);
+        queryClient.invalidateQueries('getAvailableOfficeResource');
       },
     }
   );
@@ -120,17 +114,14 @@ export const useEditOfficeResource = ({ onSuccess }) => {
 export const useEditActiveInactiveOfficeResource = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(
-    ["editofficeResourceActiveInactive"],
+    ['editofficeResourceActiveInactive'],
     (formData) => editofficeResourceActiveInactive(formData),
     {
-      onSuccess: (data, variables, context) => {       
-          toast.success("Successfully edited status of office Logistics");
-          onSuccess && onSuccess(data, variables, context);
-          queryClient.invalidateQueries("getdeactivaedofficeResource");
-          queryClient.invalidateQueries("getAvailableOfficeResource");        
-      },
-      onError: (err, _variables, _context) => {
-        toast.error(`Error: ${err.message}`);
+      onSuccess: (data, variables, context) => {
+        toast.success('Successfully edited status of office Logistics');
+        onSuccess && onSuccess(data, variables, context);
+        queryClient.invalidateQueries('getdeactivaedofficeResource');
+        queryClient.invalidateQueries('getAvailableOfficeResource');
       },
     }
   );
@@ -142,17 +133,14 @@ export const useEditActiveInactiveOfficeResource = ({ onSuccess }) => {
 export const useEditInactiveOfficeResource = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(
-    ["editofficeResourceInactive"],
+    ['editofficeResourceInactive'],
     (formData) => editofficeResourceInactive(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success("Successfully edited status of office Logistics");
+        toast.success('Successfully edited status of office Logistics');
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries("getdeactivaedofficeResource");
-        queryClient.invalidateQueries("getUsedOfficeResource");
-      },
-      onError: (err, _variables, _context) => {
-        toast.error(`Error: ${err.message}`);
+        queryClient.invalidateQueries('getdeactivaedofficeResource');
+        queryClient.invalidateQueries('getUsedOfficeResource');
       },
     }
   );

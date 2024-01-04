@@ -1,8 +1,17 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
-import { addHoliday, deleteHoliday, editHoliday, getHoliday, getHolidayById, getHolidayByMonth } from '../../api/holiday/holiday-api';
+import {
+  addHoliday,
+  deleteHoliday,
+  editHoliday,
+  getHoliday,
+  getHolidayById,
+  getHolidayByMonth,
+} from '../../api/holiday/holiday-api';
 
-{/*________________________GET_____________________________________*/ }
+{
+  /*________________________GET_____________________________________*/
+}
 export const useGetHoliday = () => {
   return useQuery(['getHoliday'], () => getHoliday(), {
     refetchInterval: false,
@@ -10,7 +19,9 @@ export const useGetHoliday = () => {
   });
 };
 
-{/*________________________GETBYID_____________________________________*/ }
+{
+  /*________________________GETBYID_____________________________________*/
+}
 export const useGetHolidayById = (id) => {
   return useQuery(['getHolidayById', id], () => getHolidayById(id), {
     refetchInterval: false,
@@ -18,15 +29,23 @@ export const useGetHolidayById = (id) => {
   });
 };
 
-{/*________________________GETCURRENTMONTH_____________________________________*/ }
+{
+  /*________________________GETCURRENTMONTH_____________________________________*/
+}
 export const useGetHolidaybyMonth = (monthAd) => {
-  return useQuery(['getHolidayByMonth',monthAd], () => getHolidayByMonth(monthAd), {
-    refetchInterval: false,
-    refetchOnWindowFocus: false,
-  });
+  return useQuery(
+    ['getHolidayByMonth', monthAd],
+    () => getHolidayByMonth(monthAd),
+    {
+      refetchInterval: false,
+      refetchOnWindowFocus: false,
+    }
+  );
 };
 
-{/*________________________POST_____________________________________*/ }
+{
+  /*________________________POST_____________________________________*/
+}
 export const useAddHoliday = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(['addHoliday'], (formData) => addHoliday(formData), {
@@ -41,7 +60,9 @@ export const useAddHoliday = ({ onSuccess }) => {
   });
 };
 
-{/*________________________DELETE_____________________________________*/ }
+{
+  /*________________________DELETE_____________________________________*/
+}
 export const useDeleteHoliday = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(
@@ -53,14 +74,13 @@ export const useDeleteHoliday = ({ onSuccess }) => {
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries('getHoliday');
       },
-      onError: (err, _variables, _context) => {
-        toast.error(`Error: ${err.message}`);
-      },
     }
   );
 };
 
-{/*________________________EDIT_____________________________________*/ }
+{
+  /*________________________EDIT_____________________________________*/
+}
 export const useEditHoliday = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(['editHoliday'], (formData) => editHoliday(formData), {
