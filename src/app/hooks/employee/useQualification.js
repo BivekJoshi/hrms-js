@@ -8,15 +8,23 @@ import {
 import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
 
-{/*________________________GETBYID_____________________________________*/ }
+{
+  /*________________________GETBYID_____________________________________*/
+}
 export const useGetQualificationById = (id) => {
-  return useQuery(['getQualificationById', id], () => getQualificationById(id), {
-    refetchInterval: false,
-    refetchOnWindowFocus: false,
-  });
+  return useQuery(
+    ['getQualificationById', id],
+    () => getQualificationById(id),
+    {
+      refetchInterval: false,
+      refetchOnWindowFocus: false,
+    }
+  );
 };
 
-{/*________________________POST_____________________________________*/ }
+{
+  /*________________________POST_____________________________________*/
+}
 export const useAddQualification = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   const { id } = useParams();
@@ -29,47 +37,48 @@ export const useAddQualification = ({ onSuccess }) => {
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries('getQualificationById');
       },
-      onError: (err, _variables, _context) => {
-        toast.error(`error: ${err.message}`);
-      },
     }
   );
 };
 
-{/*________________________EDIT_____________________________________*/ }
-export const useEditQualification = ({onSuccess}) => {
+{
+  /*________________________EDIT_____________________________________*/
+}
+export const useEditQualification = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   const { id } = useParams();
-  return useMutation(['editQualification'], (formData) => {
-    editQualification(formData, id);
-  },
+  return useMutation(
+    ['editQualification'],
+    (formData) => {
+      editQualification(formData, id);
+    },
     {
       onSuccess: (data, variables, context) => {
         toast.success('Qualification edited Sucessfully');
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries('getQualificationById');
       },
-      onError: (err, _variables, _context) => {
-        toast.error(`error: ${err.message}`);
-      },
     }
   );
 };
 
-{/*________________________DELETE_____________________________________*/ }
+{
+  /*________________________DELETE_____________________________________*/
+}
 export const useDeleteQualification = ({ onSuccess }) => {
   const queryClient = useQueryClient();
-  return useMutation(['deleteQualifiaction'],
-      (qualificationId) => deleteQualifiaction(qualificationId),
-      {
-          onSuccess: (data, variables, context) => {
-              toast.success('Education Detail deleted successfully');
-              onSuccess && onSuccess(data, variables, context);
-              queryClient.invalidateQueries('getQualificationById');
-          },
-          onError: (err, _variables, _context) => {
-              toast.error(`Error: ${err.message}`);
-          },
-      }
+  return useMutation(
+    ['deleteQualifiaction'],
+    (qualificationId) => deleteQualifiaction(qualificationId),
+    {
+      onSuccess: (data, variables, context) => {
+        toast.success('Education Detail deleted successfully');
+        onSuccess && onSuccess(data, variables, context);
+        queryClient.invalidateQueries('getQualificationById');
+      },
+      onError: (err, _variables, _context) => {
+        toast.error(`Error: ${err.message}`);
+      },
+    }
   );
 };

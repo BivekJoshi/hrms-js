@@ -1,18 +1,18 @@
-import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import {
   addDepartment,
   deleteDepartment,
   editDepartment,
   getDepartment,
   getDepartmentById,
-} from "../../api/department/department-api";
-import { toast } from "react-toastify";
+} from '../../api/department/department-api';
+import { toast } from 'react-toastify';
 
 {
   /*________________________GET_____________________________________*/
 }
 export const useGetDepartment = () => {
-  return useQuery(["getDepartment"], () => getDepartment(), {
+  return useQuery(['getDepartment'], () => getDepartment(), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
@@ -22,7 +22,7 @@ export const useGetDepartment = () => {
   /*________________________GETBYID_____________________________________*/
 }
 export const useGetDepartmentById = (id) => {
-  return useQuery(["getDepartmentById", id], () => getDepartmentById(id), {
+  return useQuery(['getDepartmentById', id], () => getDepartmentById(id), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
@@ -33,11 +33,11 @@ export const useGetDepartmentById = (id) => {
 }
 export const useAddDepartment = ({ onSuccess }) => {
   const queryClient = useQueryClient();
-  return useMutation(["addDepartment"], (formData) => addDepartment(formData), {
+  return useMutation(['addDepartment'], (formData) => addDepartment(formData), {
     onSuccess: (data, variables, context) => {
-      toast.success("Succesfully added Department");
+      toast.success('Succesfully added Department');
       onSuccess && onSuccess(data, variables, context);
-      queryClient.invalidateQueries("getDepartment");
+      queryClient.invalidateQueries('getDepartment');
     },
     onError: (err, _variables, _context) => {
       toast.error(`error: ${err.message}`);
@@ -51,13 +51,13 @@ export const useAddDepartment = ({ onSuccess }) => {
 export const useDeleteDepartment = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(
-    ["deleteDepartment"],
+    ['deleteDepartment'],
     (departmentId) => deleteDepartment(departmentId),
     {
       onSuccess: (data, variables, context) => {
-        toast.success("Successfully deleted Department");
+        toast.success('Successfully deleted Department');
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries("getDepartment");
+        queryClient.invalidateQueries('getDepartment');
       },
       // onError: (err, _variables, _context) => {
       //   toast.error(`Error: ${err.message}`);
@@ -72,16 +72,13 @@ export const useDeleteDepartment = ({ onSuccess }) => {
 export const useEditDepartment = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(
-    ["editDepartment"],
+    ['editDepartment'],
     (formData) => editDepartment(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success("Successfully edited Department");
+        toast.success('Successfully edited Department');
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries("getDepartment");
-      },
-      onError: (err, _variables, _context) => {
-        toast.error(`Error: ${err.message}`);
+        queryClient.invalidateQueries('getDepartment');
       },
     }
   );
