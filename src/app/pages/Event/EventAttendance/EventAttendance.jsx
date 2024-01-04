@@ -1,43 +1,43 @@
-import React, { useEffect, useState } from "react";
-import { useGetEventAttenderList } from "../../../hooks/event/useEvent";
-import PermissionHoc from "../../../hoc/permissionHoc";
-import HocButton from "../../../hoc/hocButton";
-import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
-import CustomTable from "../../../components/CustomTable/CustomTable";
-import DoneSharpIcon from "@mui/icons-material/DoneSharp";
-import CloseSharpIcon from "@mui/icons-material/CloseSharp";
-import { EditEventAttendanceModal } from "../EventModal/EventModal";
-import NewFilter from "../../../components/NewFilter/NewFilter";
-import { useGetAllEvent, usegetAllEmployeeData } from "./useEventAttendance";
-import { Badge, Chip, Typography } from "@mui/material";
-import { getEventAttenderList } from "../../../api/event/event-api";
-import { toast } from "react-toastify";
+import React, { useEffect, useState } from 'react';
+import { useGetEventAttenderList } from '../../../hooks/event/useEvent';
+import PermissionHoc from '../../../hoc/permissionHoc';
+import HocButton from '../../../hoc/hocButton';
+import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
+import CustomTable from '../../../components/CustomTable/CustomTable';
+import DoneSharpIcon from '@mui/icons-material/DoneSharp';
+import CloseSharpIcon from '@mui/icons-material/CloseSharp';
+import { EditEventAttendanceModal } from '../EventModal/EventModal';
+import NewFilter from '../../../components/NewFilter/NewFilter';
+import { useGetAllEvent, usegetAllEmployeeData } from './useEventAttendance';
+import { Badge, Chip, Typography } from '@mui/material';
+import { getEventAttenderList } from '../../../api/event/event-api';
+import { toast } from 'react-toastify';
 
 const EventAttendance = ({ permissions }) => {
   const { employeeData, employeeAllData } = usegetAllEmployeeData();
   const { eventData, eventAllData } = useGetAllEvent();
   const columns = [
     {
-      title: "SN",
-      field: "tableData.id",
+      title: 'SN',
+      field: 'tableData.id',
       render: (rowData) => rowData.tableData.id + 1,
-      width: "3%",
+      width: '3%',
       sortable: false,
       sorting: false,
     },
 
     {
-      title: "Employee Name",
-      field: "userName",
-      emptyValue: "-",
-      width: "20vh",
+      title: 'Employee Name',
+      field: 'userName',
+      emptyValue: '-',
+      width: '20vh',
       sorting: false,
     },
     {
-      title: "Contact Detail",
-      field: "mobileNumber",
-      emptyValue: "-",
-      width: "20vh",
+      title: 'Contact Detail',
+      field: 'mobileNumber',
+      emptyValue: '-',
+      width: '20vh',
       sorting: false,
       render: (rowData) => {
         return (
@@ -49,87 +49,86 @@ const EventAttendance = ({ permissions }) => {
       },
     },
     {
-      title: "Email",
-      field: "email",
+      title: 'Email',
+      field: 'email',
       hidden: true,
       export: true,
     },
     {
-      title: "Event Name",
-      field: "eventName",
-      emptyValue: "-",
-      width: "20vh",
+      title: 'Event Name',
+      field: 'eventName',
+      emptyValue: '-',
+      width: '20vh',
       sorting: false,
     },
     {
-      title: "Date",
-      field: "eventDate",
-      emptyValue: "-",
-      width: "20vh",
+      title: 'Date',
+      field: 'eventDate',
+      emptyValue: '-',
+      width: '20vh',
       sorting: false,
     },
     {
-      title: "Time",
-      field: "eventTime",
-      emptyValue: "-",
-      width: "20vh",
+      title: 'Time',
+      field: 'eventTime',
+      emptyValue: '-',
+      width: '20vh',
       sorting: false,
     },
     {
-      title: "Location",
-      field: "eventLocation",
-      emptyValue: "-",
-      width: "20vh",
+      title: 'Location',
+      field: 'eventLocation',
+      emptyValue: '-',
+      width: '20vh',
       sorting: false,
     },
     {
-      title: "Description",
-      field: "eventDescription",
-      emptyValue: "-",
-      width: "20vh",
+      title: 'Description',
+      field: 'eventDescription',
+      emptyValue: '-',
+      width: '20vh',
       sorting: false,
     },
     {
-      title: "User Confirmation",
-      field: "status",
-      emptyValue: "-",
+      title: 'User Confirmation',
+      field: 'status',
+      emptyValue: '-',
       sorting: false,
-      align: "center",
+      align: 'center',
       render: (rowData) => {
-        if (rowData?.status === "OK") {
-          return <Chip color="success" label="Coming" />;
+        if (rowData?.status === 'OK') {
+          return <Chip color='success' label='Coming' />;
         } else
           return (
             <Chip
-              color="error"
-              sx={{ width: "max-content" }}
-              label="Not Coming"
+              color='error'
+              sx={{ width: 'max-content' }}
+              label='Not Coming'
             />
           );
       },
     },
     {
-      title: "Attended",
-      field: "isPresent",
-      width: "4rem",
+      title: 'Attended',
+      field: 'isPresent',
       render: (rowData) => {
         if (rowData?.isPresent) {
           return (
             <div>
-              <Badge color="success" badgeContent="Yes" />
+              <Badge color='success' badgeContent='Yes' />
             </div>
           );
         } else
           return (
             <div>
-              <Badge color="error" badgeContent="No" />
+              <Badge color='error' badgeContent='No' />
             </div>
           );
       },
-      emptyValue: "-",
-      width: "20vh",
+      emptyValue: '-',
+      width: '20vh',
       sorting: false,
-      align: "center",
+      align: 'center',
     },
   ].filter(Boolean);
 
@@ -151,18 +150,18 @@ const EventAttendance = ({ permissions }) => {
 
   const filterMenu = [
     {
-      label: "Event",
-      name: "eventId",
-      type: "autoComplete",
+      label: 'Event',
+      name: 'eventId',
+      type: 'autoComplete',
       options: eventData || [],
       md: 6,
       sm: 6,
       xs: 6,
     },
     {
-      label: "Employee",
-      name: "employeeId",
-      type: "autoComplete",
+      label: 'Employee',
+      name: 'employeeId',
+      type: 'autoComplete',
       options: employeeData || [],
       md: 6,
       sm: 6,
@@ -178,7 +177,7 @@ const EventAttendance = ({ permissions }) => {
           icon={<ModeEditOutlineIcon />}
         />
       ),
-      tooltip: "Edit Event",
+      tooltip: 'Edit Event',
       onClick: (event, rowData) => handleEditEventAttendance(rowData),
     },
   ];
@@ -199,12 +198,12 @@ const EventAttendance = ({ permissions }) => {
           (d) => d.id === values?.employeeId
         );
         setAdditionalLeft({
-          "Employee Name": employeeData?.find(
+          'Employee Name': employeeData?.find(
             (d) => d.id === values?.employeeId
           )?.label,
           Email: additionalData?.officeEmail,
         });
-        setAdditionalRight({ "Contact No.": additionalData?.mobileNumber });
+        setAdditionalRight({ 'Contact No.': additionalData?.mobileNumber });
       } else if (values?.eventId) {
         const additionalData = eventAllData?.find(
           (d) => d.id === values?.eventId
@@ -212,7 +211,7 @@ const EventAttendance = ({ permissions }) => {
         setAdditionalLeft({
           Event: additionalData?.eventName,
           Location: additionalData?.eventLocation,
-          "Event Description": additionalData?.eventDescription,
+          'Event Description': additionalData?.eventDescription,
         });
         setAdditionalRight({
           Date: additionalData?.eventDate,
@@ -233,18 +232,18 @@ const EventAttendance = ({ permissions }) => {
       <CustomTable
         columns={getColumns(columns, searchParams)}
         data={tableData}
-        title="Event Attendance Report"
+        title='Event Attendance Report'
         isLoading={isLoading}
         additionalLeft={additionalLeft}
         additionalRight={additionalRight}
-        fileName="Event Report"
+        fileName='Event Report'
         actions={actions}
         exportButton
         exportExcel
       />
       {openEditModal && (
         <EditEventAttendanceModal
-          title={"Edit Event Attendance"}
+          title={'Edit Event Attendance'}
           data={editedEventAttendance}
           open={openEditModal}
           handleCloseModal={handleCloseEditModal}
@@ -258,27 +257,27 @@ const getColumns = (column, searchParams) => {
   if (searchParams?.employeeId && searchParams?.eventId) {
     return column?.filter(
       (d) =>
-        d.field !== "userName" &&
-        d.field !== "mobileNumber" &&
-        d.field !== "email" &&
-        d.field !== "branch"
+        d.field !== 'userName' &&
+        d.field !== 'mobileNumber' &&
+        d.field !== 'email' &&
+        d.field !== 'branch'
     );
   } else if (searchParams?.employeeId) {
     return column?.filter(
       (d) =>
-        d.field !== "userName" &&
-        d.field !== "mobileNumber" &&
-        d.field !== "email" &&
-        d.field !== "branch"
+        d.field !== 'userName' &&
+        d.field !== 'mobileNumber' &&
+        d.field !== 'email' &&
+        d.field !== 'branch'
     );
   } else if (searchParams?.eventId) {
     return column?.filter(
       (d) =>
-        d.field !== "eventName" &&
-        d.field !== "eventLocation" &&
-        d.field !== "eventDate" &&
-        d.field !== "eventTime" &&
-        d.field !== "eventDescription"
+        d.field !== 'eventName' &&
+        d.field !== 'eventLocation' &&
+        d.field !== 'eventDate' &&
+        d.field !== 'eventTime' &&
+        d.field !== 'eventDescription'
     );
   } else return column;
 };
