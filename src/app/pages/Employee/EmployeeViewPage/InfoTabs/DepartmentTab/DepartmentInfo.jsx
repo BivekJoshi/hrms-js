@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { Box, Button } from '@mui/material';
-import CustomTable from '../../../../../components/CustomTable/CustomTable';
-import { AddDepartmentHistory } from './DepartmentInfoModal';
-import { useGetDepartmentHistory } from '../../../../../hooks/departmentHistory/useDepartmentHistory';
+import React, { useState } from "react";
+import { Box, Button } from "@mui/material";
+import CustomTable from "../../../../../components/CustomTable/CustomTable";
+import { AddDepartmentHistory } from "./DepartmentInfoModal";
+import { useGetDepartmentHistory } from "../../../../../hooks/departmentHistory/useDepartmentHistory";
 
 const DepartmentInfo = ({ data, role }) => {
   const [openAddModal, setOpenAddModal] = useState(false);
@@ -15,51 +15,51 @@ const DepartmentInfo = ({ data, role }) => {
 
   const columns = [
     {
-      title: 'SN',
+      title: "SN",
       render: (rowData) => rowData.tableData.id + 1,
-      width: '3%',
-      maxWidth: '50px',
+      width: "3%",
+      maxWidth: "50px",
       sortable: false,
       sorting: false,
     },
     {
-      title: 'Department Name',
-      field: 'departmentId',
-      render: (rowData) => rowData?.department?.departmentName || '-',
+      title: "Department Name",
+      field: "departmentId",
+      render: (rowData) => rowData?.department?.departmentName || "-",
       // emptyValue: "-",
       width: 300,
       sorting: false,
     },
     {
-      title: 'Effective From',
-      field: 'effectiveFromDate',
-      emptyValue: '-',
+      title: "Effective From",
+      field: "effectiveFromDate",
+      emptyValue: "-",
       width: 200,
     },
     {
-      title: 'Effective To',
-      field: 'effectiveToDate',
-      emptyValue: '-',
+      title: "Effective To",
+      field: "effectiveToDate",
+      emptyValue: "-",
       width: 200,
     },
     {
-      title: 'Department Status',
-      field: 'isRecentDepartment',
-      emptyValue: '-',
+      title: "Department Status",
+      field: "isRecentDepartment",
+      emptyValue: "-",
       width: 50,
       render: (rowData) => {
         return (
           <div
             style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
             }}
           >
             {rowData?.isRecentDepartment ? (
-              <span style={{ color: 'green' }}>✔</span>
+              <span style={{ color: "green" }}>✔</span>
             ) : (
-              <span style={{ color: 'red' }}>✕</span>
+              <span style={{ color: "red" }}>✕</span>
             )}
           </div>
         );
@@ -68,38 +68,47 @@ const DepartmentInfo = ({ data, role }) => {
   ];
 
   return (
-    <Box className='tableIcon'>
+    <Box className="tableIcon">
       <Box
         sx={{
-          display: 'flex',
-          justifyContent: 'flex-end',
-          paddingBottom: '10px',
+          display: "flex",
+          justifyContent: "flex-end",
+          paddingBottom: "10px",
         }}
       >
-        {role && (
-          <Button
-            variant='contained'
-            sx={{ mt: 3, ml: 1 }}
-            onClick={handleAddOpenModal}
-          >
-            Change Department
-          </Button>
-        )}
+        {isLoading
+          ? ""
+          : role && (
+              <Button
+                variant="contained"
+                sx={{ mt: 3, ml: 1 }}
+                onClick={handleAddOpenModal}
+              >
+                {branchHistoryData?.length !== 0
+                  ? "Change Department"
+                  : "Add Department"}
+              </Button>
+            )}
       </Box>
 
       <CustomTable
         columns={columns}
         data={branchHistoryData}
-        title='Department History'
+        title="Department History"
         isLoading={isLoading}
       />
 
       {openAddModal && (
         <AddDepartmentHistory
-          title={'Change Department'}
+          title={
+            branchHistoryData?.length !== 0
+              ? "Change Employee Department"
+              : "Add Employee Department"
+          }
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
           id={data?.id}
+          branchHistoryData={branchHistoryData}
         />
       )}
     </Box>

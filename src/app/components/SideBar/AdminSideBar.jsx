@@ -47,7 +47,6 @@ import SmallLogo from "../../../assets/smallLogo.png";
 import { useGetLoggedInUser } from "../../hooks/auth/usePassword";
 import BreadCrumbs from "../../../routes/routes";
 import PeopleIcon from "@mui/icons-material/People";
-
 const drawerWidth = 260;
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(

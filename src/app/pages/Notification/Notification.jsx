@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext, useEffect } from "react";
+import React, { useState, useRef, useContext, useEffect } from 'react';
 import {
   Typography,
   Popper,
@@ -9,19 +9,20 @@ import {
   Box,
   Menu,
   MenuItem,
-} from "@mui/material";
-import { Paper, ClickAwayListener, MenuList } from "@mui/material";
-import NotificationsIcon from "@mui/icons-material/NotificationsNone";
-import ThemeModeContext from "../../../theme/ThemeModeContext";
+} from '@mui/material';
+import { Paper, ClickAwayListener, MenuList } from '@mui/material';
+import NotificationsIcon from '@mui/icons-material/NotificationsNone';
+import ThemeModeContext from '../../../theme/ThemeModeContext';
 import {
   EventNotification,
   LeaveNotification,
-} from "./Component/EventNotification";
-import { useGetLeave } from "../../hooks/leave/useLeave";
-import useAuth from "../../../auth/hooks/component/login/useAuth";
+} from './Component/EventNotification';
+import { useGetLeave } from '../../hooks/leave/useLeave';
+import useAuth from '../../../auth/hooks/component/login/useAuth';
 
 const Notification = ({ data }) => {
-  const { isManager } = useAuth();
+  const { isManager, isEmployee } = useAuth();
+
   const { data: leaveData } = useGetLeave();
   const { mode } = useContext(ThemeModeContext);
 
@@ -29,15 +30,16 @@ const Notification = ({ data }) => {
 
   //leave notifications
   const pendingLeaveData = isManager
-    ? leaveData?.filter((leave) => leave.leaveStatus === "PENDING")
-    : "";
+    ? leaveData?.filter((leave) => leave.leaveStatus === 'PENDING')
+    : '';
   const eventCount = isManager
     ? pendingLeaveData?.length + data?.eventCount || 0
     : data?.events?.length || 0;
 
   const filteredEvents = data?.events?.filter(
-    (event) => event.notificationId === "0"
+    (event) => event.notificationId === '0'
   );
+
   const filterEventcount = filteredEvents?.length;
 
   const displayCount = eventCount > 0 ? eventCount : null;
@@ -57,10 +59,10 @@ const Notification = ({ data }) => {
   };
 
   function handleListKeyDown(event) {
-    if (event.key === "Tab") {
+    if (event.key === 'Tab') {
       event.preventDefault();
       setOpen(false);
-    } else if (event.key === "Escape") {
+    } else if (event.key === 'Escape') {
       setOpen(false);
     }
   }
@@ -82,17 +84,17 @@ const Notification = ({ data }) => {
   // }, []);
 
   const btnStyle = {
-    color: "#fff",
+    color: '#fff',
   };
 
   return (
     <Box>
       <IconButton ref={anchorRef} onClick={handleToggle} style={btnStyle}>
-        <Tooltip title="Notifications">
+        <Tooltip title='Notifications'>
           <Badge
             // badgeContent={data?.isChecked ? "" : displayCount}
-            badgeContent={data?.isChecked ? "" : filterEventcount}
-            color="secondary"
+            badgeContent={filterEventcount}
+            color='secondary'
           >
             <NotificationsIcon />
           </Badge>
@@ -105,13 +107,13 @@ const Notification = ({ data }) => {
           onClose={handleClose}
           TransitionComponent={Grow}
           disablePortal
-          sx={{padding:"0px"}}
+          sx={{ padding: '0px' }}
         >
           {isManager ? (
             <>
               {pendingLeaveData?.length > 0 ? (
                 <LeaveNotification
-                  Eventname={"Leave Request"}
+                  Eventname={'Leave Request'}
                   data={pendingLeaveData}
                   handleClose={handleClose}
                   handleListKeyDown={handleListKeyDown}
@@ -119,7 +121,7 @@ const Notification = ({ data }) => {
               ) : null}
               <EventNotification
                 Eventname={"Today's Event"}
-                data={eventName}
+                data={filteredEvents}
                 handleClose={handleClose}
                 handleListKeyDown={handleListKeyDown}
               />
@@ -128,7 +130,7 @@ const Notification = ({ data }) => {
             <MenuItem>
               <EventNotification
                 Eventname={"Today's Event"}
-                data={eventName}
+                data={filteredEvents}
                 handleClose={handleClose}
                 handleListKeyDown={handleListKeyDown}
               />
@@ -142,23 +144,23 @@ const Notification = ({ data }) => {
           onClose={handleClose}
           TransitionComponent={Grow}
           disablePortal
-          style={{ width: { xs: "30%", lg: "15%" }, marginLeft: "-4rem" }}
+          style={{ width: { xs: '30%', lg: '15%' }, marginLeft: '-4rem' }}
         >
           <MenuList
             autoFocusItem={open}
-            id="composition-menu"
-            aria-labelledby="composition-button"
+            id='composition-menu'
+            aria-labelledby='composition-button'
             onKeyDown={handleListKeyDown}
             sx={{
-              textAlign: "center",
-              width: "100%",
-              padding: "1rem 2rem",
+              textAlign: 'center',
+              width: '100%',
+              padding: '1rem 2rem',
             }}
           >
             <MenuItem>
               <Typography
-                variant="h7"
-                color={mode === "light" ? "primary" : "white"}
+                variant='h7'
+                color={mode === 'light' ? 'primary' : 'white'}
               >
                 No Events For Today!
               </Typography>

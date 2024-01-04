@@ -30,6 +30,11 @@ const DeactivatedOfficeResource = ({ closeModal, title }) => {
     {
       title: "Appliance Name",
       field: "name",
+      render: (rowData) => (
+        <Typography maxWidth="5rem" style={{ overflowWrap: "break-word" }}>
+          {rowData?.name}
+        </Typography>
+      ),
       emptyValue: "-",
       width: "18.75rem",
       sorting: false,
@@ -43,9 +48,11 @@ const DeactivatedOfficeResource = ({ closeModal, title }) => {
     },
     {
       title: "Description",
-      field: "description",
-      emptyValue: "-",
-      width: "57rem",
+      render: (rowData) => (
+        <Typography maxWidth="10rem" style={{ overflowWrap: "break-word" }}>
+          {rowData?.description}
+        </Typography>
+      ),
       sorting: false,
     },
     {

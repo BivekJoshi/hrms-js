@@ -1,0 +1,10 @@
+.filterButton {
+    border: 1px solid #737D8F;
+    display: flex;
+    width: fit-content;
+    padding: 6px 12px;
+    border-radius: 3px;
+    gap: 8px;
+    background: #fff;
+    cursor: pointer;
+}

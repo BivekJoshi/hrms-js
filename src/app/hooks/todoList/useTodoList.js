@@ -51,7 +51,7 @@ export const useAddTodoList = ({ onSuccess }) => {
 
   return useMutation(["addTodoList"], (formData) => addTodoList(formData), {
     onSuccess: (data, variables, context) => {
-      toast.success("Message added successfully");
+      toast.success("Work todo is added successfully");
       onSuccess && onSuccess(data, variables, context);
       queryClient.invalidateQueries("getTodoList");
     },

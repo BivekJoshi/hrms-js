@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import {
   getProjectEmployee,
   addProjectEmployee,
@@ -9,13 +9,13 @@ import {
   addProjectEmployeeCreateTask,
   addProjectEmployeeUpdateTask,
   editProjectEmployeeAddRemoveTaskId,
-  getProjectEmployeeTaskByLoggedInUser
-} from "../../../api/project/projectEmployee-api";
-import { toast } from "react-toastify";
+  getProjectEmployeeTaskByLoggedInUser,
+} from '../../../api/project/projectEmployee-api';
+import { toast } from 'react-toastify';
 
 /*________________________GET___________________________________________________________________________________*/
 export const useGetProjectEmployee = () => {
-  return useQuery(["getProjectEmployee"], () => getProjectEmployee(), {
+  return useQuery(['getProjectEmployee'], () => getProjectEmployee(), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
@@ -24,7 +24,7 @@ export const useGetProjectEmployee = () => {
 /*________________________GET-BY_ID________________________________________________________________________________*/
 export const useGetProjectEmployeeById = (projectTd) => {
   return useQuery(
-    ["getProjectEmployeeById", projectTd],
+    ['getProjectEmployeeById', projectTd],
     () => getProjectEmployeeById(projectTd),
     {
       refetchInterval: false,
@@ -33,10 +33,10 @@ export const useGetProjectEmployeeById = (projectTd) => {
   );
 };
 
-/*________________________GET TASK Logged-In User_____________________________________*/ 
-export const useGetProjectEmployeeByLoggedInUser  = () => {
+/*________________________GET TASK Logged-In User_____________________________________*/
+export const useGetProjectEmployeeByLoggedInUser = () => {
   return useQuery(
-    ["getProjectEmployeeTaskByLoggedInUser"],
+    ['getProjectEmployeeTaskByLoggedInUser'],
     () => getProjectEmployeeTaskByLoggedInUser(),
     {
       refetchInterval: false,
@@ -47,7 +47,7 @@ export const useGetProjectEmployeeByLoggedInUser  = () => {
 /*________________________GET TASK ID_______________________________________________________________________________*/
 export const useGetProjectEmployeeTaskById = (projectId) => {
   return useQuery(
-    ["getProjectEmployeeTaskById", projectId],
+    ['getProjectEmployeeTaskById', projectId],
     () => getProjectEmployeeTaskById(projectId),
     {
       refetchInterval: false,
@@ -60,16 +60,13 @@ export const useGetProjectEmployeeTaskById = (projectId) => {
 export const useAddProjectEmployee = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(
-    ["addProjectEmployee"],
+    ['addProjectEmployee'],
     (formData) => addProjectEmployee(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success("Employee added successfully");
+        toast.success('Employee added successfully');
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries("getProjectEmployeeById");
-      },
-      onError: (err, _variables, _context) => {
-        toast.error(`error: ${err.message}`);
+        queryClient.invalidateQueries('getProjectEmployeeById');
       },
     }
   );
@@ -79,16 +76,13 @@ export const useAddProjectEmployee = ({ onSuccess }) => {
 export const useAddProjectEmployeeCreateTask = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(
-    ["addProjectEmployeeCreateTask"],
+    ['addProjectEmployeeCreateTask'],
     (formData) => addProjectEmployeeCreateTask(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success("Employee added successfully");
+        toast.success('Employee added successfully');
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries("getProjectEmployeeById");
-      },
-      onError: (err, _variables, _context) => {
-        toast.error(`error: ${err.message}`);
+        queryClient.invalidateQueries('getProjectEmployeeById');
       },
     }
   );
@@ -98,32 +92,29 @@ export const useAddProjectEmployeeCreateTask = ({ onSuccess }) => {
 export const useAddProjectEmployeeUpdateTask = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(
-    ["addProjectEmployeeUpdateTask"],
+    ['addProjectEmployeeUpdateTask'],
     (formData) => addProjectEmployeeUpdateTask(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success("Employee added successfully");
+        toast.success('Employee added successfully');
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries("getProjectEmployeeById");
-      },
-      onError: (err, _variables, _context) => {
-        toast.error(`error: ${err.message}`);
+        queryClient.invalidateQueries('getProjectEmployeeById');
       },
     }
   );
 };
 
 /*________________________EDIT______________________________________________________________________________________________*/
-export const useEditProjectEmployee =  ({ onSuccess }) => {
+export const useEditProjectEmployee = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(
-    ["editProjectEmployee"],
+    ['editProjectEmployee'],
     (formData) => editProjectEmployee(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success("Successfully edited project");
+        toast.success('Successfully edited project');
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries("getProjectEmployee");
+        queryClient.invalidateQueries('getProjectEmployee');
       },
       onError: (err, _variables, _context) => {
         toast.error(`Error: ${(err, message)}`);
@@ -136,13 +127,13 @@ export const useEditProjectEmployee =  ({ onSuccess }) => {
 export const useEditProjectEmployeeAddRemoveTaskId = async ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(
-    ["editProjectEmployeeAddRemoveTaskId"],
+    ['editProjectEmployeeAddRemoveTaskId'],
     (formData) => editProjectEmployeeAddRemoveTaskId(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success("Successfully edited project");
+        toast.success('Successfully edited project');
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries("getProjectEmployee");
+        queryClient.invalidateQueries('getProjectEmployee');
       },
       onError: (err, _variables, _context) => {
         toast.error(`Error: ${(err, message)}`);
@@ -155,18 +146,14 @@ export const useEditProjectEmployeeAddRemoveTaskId = async ({ onSuccess }) => {
 export const useDeleteProjectEmployee = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(
-    ["deleteProjectEmployee"],
+    ['deleteProjectEmployee'],
     (id) => deleteProjectEmployee(id),
     {
       onSuccess: (data, variables, context) => {
-        toast.success("Successfully deleted employee");
+        toast.success('Successfully deleted employee');
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries("getProjectEmployeeById");
-      },
-      onError: (err, _variables, _context) => {
-        toast.error(`Error: ${err.message}`);
+        queryClient.invalidateQueries('getProjectEmployeeById');
       },
     }
   );
 };
-

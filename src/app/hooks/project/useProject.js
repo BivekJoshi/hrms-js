@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import {
   getProject,
   getProjectPageWise,
@@ -11,26 +11,26 @@ import {
   getProjectByEmployeeIdInvolved,
   getProjectWiseEmployee,
   getProjectDetail,
-} from "../../api/project/project-api";
-import { toast } from "react-toastify";
+} from '../../api/project/project-api';
+import { toast } from 'react-toastify';
 
 /*________________________GET_____________________________________*/
 export const useGetProject = () => {
-  return useQuery(["getProject"], () => getProject(), {
+  return useQuery(['getProject'], () => getProject(), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
 };
 /*________________________GET_____________________________________*/
 export const useGetProjectDetail = () => {
-  return useQuery(["getProjectDetail"], () => getProjectDetail(), {
+  return useQuery(['getProjectDetail'], () => getProjectDetail(), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
 };
 export const useGetProjectPageWise = (pageNumber, pageSize) => {
   return useQuery(
-    ["getProjectPageWise", pageNumber, pageSize],
+    ['getProjectPageWise', pageNumber, pageSize],
     () => getProjectPageWise(pageNumber, pageSize),
     {
       refetchInterval: false,
@@ -42,7 +42,7 @@ export const useGetProjectPageWise = (pageNumber, pageSize) => {
 /*________________________GET_____________________________________*/
 export const useGetDeactivatedProject = (id) => {
   return useQuery(
-    ["getDeactivatedProject", id],
+    ['getDeactivatedProject', id],
     () => getDeactivatedProject(id),
     {
       refetchInterval: false,
@@ -53,7 +53,7 @@ export const useGetDeactivatedProject = (id) => {
 
 /*________________________GET-BY_ID_____________________________________*/
 export const useGetProjectById = (id) => {
-  return useQuery(["getProjectById", id], () => getProjectById(id), {
+  return useQuery(['getProjectById', id], () => getProjectById(id), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
@@ -62,7 +62,7 @@ export const useGetProjectById = (id) => {
 /*________________________GET-BY_ID_____________________________________*/
 export const useGetProjectByEmployeeIdInvolved = (employeeId) => {
   return useQuery(
-    ["getProjectByEmployeeIdInvolved", employeeId],
+    ['getProjectByEmployeeIdInvolved', employeeId],
     () => getProjectByEmployeeIdInvolved(employeeId),
     {
       refetchInterval: false,
@@ -74,7 +74,7 @@ export const useGetProjectByEmployeeIdInvolved = (employeeId) => {
 /*________________________GET-PROJECT_WISE_EMPLOYEE____________________________________*/
 export const useGetProjectWiseEmployee = (employeeId) => {
   return useQuery(
-    ["getProjectWiseEmployee", employeeId],
+    ['getProjectWiseEmployee', employeeId],
     () => getProjectWiseEmployee(employeeId),
     {
       refetchInterval: false,
@@ -86,11 +86,11 @@ export const useGetProjectWiseEmployee = (employeeId) => {
 /*________________________POST_____________________________________*/
 export const useAddProject = ({ onSuccess }) => {
   const queryClient = useQueryClient();
-  return useMutation(["addProject"], (formData) => addProject(formData), {
+  return useMutation(['addProject'], (formData) => addProject(formData), {
     onSuccess: (data, variables, context) => {
-      toast.success("Project added successfully");
+      toast.success('Project added successfully');
       onSuccess && onSuccess(data, variables, context);
-      queryClient.invalidateQueries("getProject");
+      queryClient.invalidateQueries('getProject');
     },
     onError: (err, _variables, _context) => {
       toast.error(`error: ${err.message}`);
@@ -101,11 +101,11 @@ export const useAddProject = ({ onSuccess }) => {
 /*________________________POST-TO-ACTIVATE-PROJECT_____________________________________*/
 export const useAddActivateProject = ({ onSuccess }) => {
   const queryClient = useQueryClient();
-  return useMutation(["addProject"], (formData) => addActiveProject(formData), {
+  return useMutation(['addProject'], (formData) => addActiveProject(formData), {
     onSuccess: (data, variables, context) => {
-      toast.success("Project activated successfully");
+      toast.success('Project activated successfully');
       onSuccess && onSuccess(data, variables, context);
-      queryClient.invalidateQueries("getProject");
+      queryClient.invalidateQueries('getProject');
     },
     onError: (err, _variables, _context) => {
       toast.error(`error: ${err.message}`);
@@ -116,11 +116,11 @@ export const useAddActivateProject = ({ onSuccess }) => {
 /*________________________EDIT_____________________________________*/
 export const useEditProject = ({ onSuccess }) => {
   const queryClient = useQueryClient();
-  return useMutation(["editProject"], (formData) => editProject(formData), {
+  return useMutation(['editProject'], (formData) => editProject(formData), {
     onSuccess: (data, variables, context) => {
-      toast.success("Successfully edited project");
+      toast.success('Successfully edited project');
       onSuccess && onSuccess(data, variables, context);
-      queryClient.invalidateQueries("getProjectPageWise");
+      queryClient.invalidateQueries('getProjectPageWise');
     },
     onError: (err, _variables, _context) => {
       toast.error(`Error: ${err.message}`);
@@ -132,17 +132,14 @@ export const useEditProject = ({ onSuccess }) => {
 export const useDeleteProject = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(
-    ["removeProject"],
+    ['removeProject'],
     (formData) => removeActiveProject(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success("Successfully removed project");
+        toast.success('Successfully removed project');
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries("getProjectPageWise");
-        queryClient.invalidateQueries("getDeactivatedProject");
-      },
-      onError: (err, _variables, _context) => {
-        toast.error(`Error: ${err.message}`);
+        queryClient.invalidateQueries('getProjectPageWise');
+        queryClient.invalidateQueries('getDeactivatedProject');
       },
     }
   );
@@ -152,17 +149,14 @@ export const useDeleteProject = ({ onSuccess }) => {
 export const useActiveProject = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(
-    ["activeProject"],
+    ['activeProject'],
     (formData) => addActiveProject(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success("Successfully added project");
+        toast.success('Successfully added project');
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries("getDeactivatedProject");
-        queryClient.invalidateQueries("getProjectPageWise");
-      },
-      onError: (err, _variables, _context) => {
-        toast.error(`Error: ${err.message}`);
+        queryClient.invalidateQueries('getDeactivatedProject');
+        queryClient.invalidateQueries('getProjectPageWise');
       },
     }
   );

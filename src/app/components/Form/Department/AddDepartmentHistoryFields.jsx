@@ -1,9 +1,14 @@
 import { Button, Grid, TextField } from "@mui/material";
 import React from "react";
-import { useGetDepartment } from '../../../hooks/department/useDepartment';
-import useAddDepartmentHistoryForm from '../../../hooks/department/DepartmentForm/useAddDepartmentHistoryForm';
+import { useGetDepartment } from "../../../hooks/department/useDepartment";
+import useAddDepartmentHistoryForm from "../../../hooks/department/DepartmentForm/useAddDepartmentHistoryForm";
 
-const AddDepartmentHistoryFields = ({ onClose, isLoading, id }) => {
+const AddDepartmentHistoryFields = ({
+  onClose,
+  isLoading,
+  id,
+  branchHistoryData,
+}) => {
   const { formik } = useAddDepartmentHistoryForm(onClose, id);
   const { data: departmentData } = useGetDepartment();
 
@@ -13,16 +18,17 @@ const AddDepartmentHistoryFields = ({ onClose, isLoading, id }) => {
       // onClose();
     }
   };
+  const currentDate = new Date().toISOString().split('T')[0];
 
   return (
     !isLoading && (
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
           <TextField
-            id="departmentId"
-            name="departmentId"
-            label="Department Name"
-            placeholder="Enter Department name"
+            id='departmentId'
+            name='departmentId'
+            label='Department Name'
+            placeholder='Enter Department name'
             fullWidth
             required
             select
@@ -31,7 +37,9 @@ const AddDepartmentHistoryFields = ({ onClose, isLoading, id }) => {
             error={
               formik.touched.departmentId && Boolean(formik.errors.departmentId)
             }
-            helperText={formik.touched.departmentId && formik.errors.departmentId}
+            helperText={
+              formik.touched.departmentId && formik.errors.departmentId
+            }
             variant="outlined"
             SelectProps={{
               native: true,
@@ -39,8 +47,8 @@ const AddDepartmentHistoryFields = ({ onClose, isLoading, id }) => {
             InputLabelProps={{ shrink: true }}
             // size="small"
           >
-             <option value="" disabled>
-              Select Branch
+            <option value="" disabled>
+              Select Department
             </option>
             {departmentData?.map((option) => (
               <option key={option?.id} value={option?.id}>
@@ -51,11 +59,14 @@ const AddDepartmentHistoryFields = ({ onClose, isLoading, id }) => {
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
-            id="effectiveFromDate"
-            name="effectiveFromDate"
-            label="Effective From Date"
-            type="date"
+            id='effectiveFromDate'
+            name='effectiveFromDate'
+            label='Effective From Date'
+            type='date'
             fullWidth
+            inputProps={{
+              max: currentDate, // Disable past date selections
+            }}
             required
             value={formik.values.effectiveFromDate}
             onChange={formik.handleChange}
@@ -67,11 +78,11 @@ const AddDepartmentHistoryFields = ({ onClose, isLoading, id }) => {
               formik.touched.effectiveFromDate &&
               formik.errors.effectiveFromDate
             }
-            variant="outlined"
+            variant='outlined'
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
-        <Grid item xs={12} sm={12}>
+        {/* <Grid item xs={12} sm={12}>
           <TextField
             id="effectiveToDate"
             name="effectiveToDate"
@@ -91,40 +102,42 @@ const AddDepartmentHistoryFields = ({ onClose, isLoading, id }) => {
             variant="outlined"
             InputLabelProps={{ shrink: true }}
           />
-        </Grid>
+        </Grid> */}
         <Grid item xs={12} sm={12}>
           <TextField
-            id="remarks"
-            name="remarks"
-            label="Remarks"
-            placeholder="Enter remarks type"
+            id='remarks'
+            name='remarks'
+            label='Remarks'
+            placeholder='Enter remarks type'
             fullWidth
             value={formik.values.remarks}
             onChange={formik.handleChange}
             error={formik.touched.remarks && Boolean(formik.errors.remarks)}
             helperText={formik.touched.remarks && formik.errors.remarks}
-            variant="outlined"
+            variant='outlined'
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
         <Grid
           container
-          direction="row"
-          justifyContent="flex-end"
-          alignItems="flex-end"
+          direction='row'
+          justifyContent='flex-end'
+          alignItems='flex-end'
         >
           <Button
-            variant="contained"
+            variant='contained'
             onClick={handleFormSubmit}
             sx={{ mt: 3, ml: 1 }}
           >
-            Update Department
+            {branchHistoryData?.length !== 0
+              ? "Update Department"
+              : "Add Department"}
           </Button>
           <Button
-            variant="contained"
+            variant='contained'
             onClick={onClose}
             sx={{ mt: 3, ml: 1 }}
-            color="error"
+            color='error'
           >
             Cancel
           </Button>

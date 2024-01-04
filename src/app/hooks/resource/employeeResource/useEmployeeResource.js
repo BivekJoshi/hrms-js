@@ -1,5 +1,5 @@
-import { useMutation, useQuery, useQueryClient } from "react-query";
-import { toast } from "react-toastify";
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { toast } from 'react-toastify';
 import {
   addemployeeResource,
   deleteemployeeResource,
@@ -7,13 +7,13 @@ import {
   getemployeeResource,
   getemployeeResourceById,
   logInRemployeeResource,
-} from "../../../api/resource/employeeResouce/employeeResource";
+} from '../../../api/resource/employeeResouce/employeeResource';
 
 {
   /*________________________GET ALL EMPLOYEE RESOURCE_____________________________________*/
 }
 export const useGetEmployeeResource = () => {
-  return useQuery(["getemployeeResource"], () => getemployeeResource(), {
+  return useQuery(['getemployeeResource'], () => getemployeeResource(), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
@@ -24,7 +24,7 @@ export const useGetEmployeeResource = () => {
 }
 export const useGetEmployeeResourceById = (id) => {
   return useQuery(
-    ["getemployeeResourceById", id],
+    ['getemployeeResourceById', id],
     () => getemployeeResourceById(id),
     {
       refetchInterval: false,
@@ -36,9 +36,9 @@ export const useGetEmployeeResourceById = (id) => {
 {
   /*_________________________get uselogIn EMPLOYEE RESOURCE_____________________________________*/
 }
-export const uselogInEemployeeResource = ( id ) => {
+export const uselogInEemployeeResource = (id) => {
   return useQuery(
-    ["logInRemployeeResource", id],
+    ['logInRemployeeResource', id],
     () => logInRemployeeResource(id),
     {
       refetchInterval: false,
@@ -51,16 +51,13 @@ export const uselogInEemployeeResource = ( id ) => {
 export const useAddEmployeeResource = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(
-    ["addemployeeResource"],
+    ['addemployeeResource'],
     (formData) => addemployeeResource(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success("Succesfully added Employee with ofiice Resource");
+        toast.success('Succesfully added Employee with ofiice Resource');
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries("getemployeeResource");
-      },
-      onError: (err, _variables, _context) => {
-        toast.error(`error: ${err.message}`);
+        queryClient.invalidateQueries('getemployeeResource');
       },
     }
   );
@@ -73,16 +70,13 @@ export const useDeleteEmployeeResource = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   getemployeeResource;
   return useMutation(
-    ["deleteemployeeResource"],
+    ['deleteemployeeResource'],
     (leaveId) => deleteemployeeResource(leaveId),
     {
       onSuccess: (data, variables, context) => {
-        toast.success("Successfully deleted Employee with office Logistics");
+        toast.success('Successfully deleted Employee with office Logistics');
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries("getemployeeResource");
-      },
-      onError: (err, _variables, _context) => {
-        toast.error(`Error: ${err.message}`);
+        queryClient.invalidateQueries('getemployeeResource');
       },
     }
   );
@@ -94,19 +88,14 @@ export const useDeleteEmployeeResource = ({ onSuccess }) => {
 export const useEditEmployeeResource = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(
-    ["editemployeeResource"],
+    ['editemployeeResource'],
     (formData) => editemployeeResource(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success("Successfully edited Employee with office Logistics");
+        toast.success('Successfully edited Employee with office Logistics');
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries("getemployeeResource");
-      },
-      onError: (err, _variables, _context) => {
-        toast.error(`Error: ${err.message}`);
+        queryClient.invalidateQueries('getemployeeResource');
       },
     }
   );
 };
-
-

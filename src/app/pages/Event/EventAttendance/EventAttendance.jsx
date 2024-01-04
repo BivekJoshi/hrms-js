@@ -1,207 +1,85 @@
-// import React, { useState } from 'react';
-// import { useGetEventAttenderList } from '../../../hooks/event/useEvent';
-// import PermissionHoc from '../../../hoc/permissionHoc';
-// import HocButton from '../../../hoc/hocButton';
-// import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
-// import CustomTable from '../../../components/CustomTable/CustomTable';
-// import DoneSharpIcon from '@mui/icons-material/DoneSharp';
-// import CloseSharpIcon from '@mui/icons-material/CloseSharp';
-// import { EditEventAttendanceModal } from '../EventModal/EventModal';
-
-// const EventAttendance = ({ permissions }) => {
-//   const { data: eventAttendanceData, isLoading } = useGetEventAttenderList();
-//   const [openEditModal, setOpenEditModal] = useState(false);
-//   const [editedEventAttendance, setEditedEventAttendance] = useState({});
-//   const handleCloseEditModal = () => setOpenEditModal(false);
-
-//   const handleEditEventAttendance = (rowData) => {
-//     setEditedEventAttendance(rowData);
-//     setOpenEditModal(true);
-//   };
-
-//   const columns = [
-//     {
-//       title: "SN",
-//       render: (rowData) => rowData.tableData.id + 1,
-//       width: "3%",
-//       sortable: false,
-//       sorting: false,
-//     },
-//     {
-//       title: "Employee Name",
-//       field: "userName",
-//       emptyValue: "-",
-//       width: "20vh",
-//       sorting: false,
-//     },
-//     {
-//       title: "Contact",
-//       field: "mobileNumber",
-//       emptyValue: "-",
-//       width: "20vh",
-//       sorting: false,
-//     },
-//     {
-//       title: "Event Name",
-//       field: "eventName",
-//       emptyValue: "-",
-//       width: "20vh",
-//       sorting: false,
-//     },
-//     {
-//       title: "Date",
-//       field: "eventDate",
-//       emptyValue: "-",
-//       width: "20vh",
-//       sorting: false,
-//     },
-//     {
-//       title: "Time",
-//       field: "eventTime",
-//       emptyValue: "-",
-//       width: "20vh",
-//       sorting: false,
-//     },
-//     {
-//       title: "Location",
-//       field: "eventLocation",
-//       emptyValue: "-",
-//       width: "20vh",
-//       sorting: false,
-//     },
-//     {
-//       title: "Description",
-//       field: "eventDescription",
-//       emptyValue: "-",
-//       width: "20vh",
-//       sorting: false,
-//     },
-//     {
-//       title: "Status",
-//       field: "isPresent",
-//       render: (rowData) => {
-//         if(rowData?.isPresent){
-//           return (<div><DoneSharpIcon style={{color: 'green'}} /></div>)
-//         } else return (<div><CloseSharpIcon style={{color: 'red'}} /></div>)
-//       },
-//       emptyValue: "-",
-//       width: "20vh",
-//       sorting: false,
-//     },
-//   ].filter(Boolean);
-
-//   const actions = [
-//     {
-//       icon: () => (
-//         <HocButton
-//           permissions={permissions.canEdit}
-//           icon={<ModeEditOutlineIcon />}
-//         />
-//       ),
-//       tooltip: "Edit Event",
-//       onClick: (event, rowData) => handleEditEventAttendance(rowData),
-//     },
-//   ];
-
-//   return !isLoading && (
-//     <>
-//        <CustomTable
-//         columns={columns}
-//         data={eventAttendanceData?.events}
-//         title="Event Attendance Data"
-//         isLoading={isLoading}
-//         actions={actions}
-//       />
-//         {openEditModal && (
-//         <EditEventAttendanceModal
-//           title={"Edit Event Attendance"}
-//           data={editedEventAttendance}
-//           open={openEditModal}
-//           handleCloseModal={handleCloseEditModal}
-//         />
-//       )}
-//     </>
-//   );
-// };
-
-// export default PermissionHoc(EventAttendance);
-
-
-
-
-import React, { useState } from 'react';
-import { useGetEventAttenderList } from '../../../hooks/event/useEvent';
-import PermissionHoc from '../../../hoc/permissionHoc';
-import HocButton from '../../../hoc/hocButton';
+import React, { useEffect, useState } from "react";
+import { useGetEventAttenderList } from "../../../hooks/event/useEvent";
+import PermissionHoc from "../../../hoc/permissionHoc";
+import HocButton from "../../../hoc/hocButton";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
-import CustomTable from '../../../components/CustomTable/CustomTable';
-import DoneSharpIcon from '@mui/icons-material/DoneSharp';
-import CloseSharpIcon from '@mui/icons-material/CloseSharp';
-import { EditEventAttendanceModal } from '../EventModal/EventModal';
+import CustomTable from "../../../components/CustomTable/CustomTable";
+import DoneSharpIcon from "@mui/icons-material/DoneSharp";
+import CloseSharpIcon from "@mui/icons-material/CloseSharp";
+import { EditEventAttendanceModal } from "../EventModal/EventModal";
+import NewFilter from "../../../components/NewFilter/NewFilter";
+import { useGetAllEvent, usegetAllEmployeeData } from "./useEventAttendance";
+import { Badge, Chip, Typography } from "@mui/material";
+import { getEventAttenderList } from "../../../api/event/event-api";
+import { toast } from "react-toastify";
 
 const EventAttendance = ({ permissions }) => {
-  const { data: eventAttendanceData, isLoading } = useGetEventAttenderList();
-  const [openEditModal, setOpenEditModal] = useState(false);
-  const [editedEventAttendance, setEditedEventAttendance] = useState({});
-  const handleCloseEditModal = () => setOpenEditModal(false);
-
-  const handleEditEventAttendance = (rowData) => {
-    setEditedEventAttendance(rowData);
-    setOpenEditModal(true);
-  };
-
-  const eventsByEventName = {};
-  eventAttendanceData?.events.forEach((event) => {
-    const eventName = event.eventName || 'Event';
-    if (!eventsByEventName[eventName]) {
-      eventsByEventName[eventName] = [];
-    }
-    eventsByEventName[eventName].push(event);
-  });
-
-  // this create table for each event with different event name
-  const eventTables = Object.entries(eventsByEventName).map(([eventName, events]) => {
-    
+  const { employeeData, employeeAllData } = usegetAllEmployeeData();
+  const { eventData, eventAllData } = useGetAllEvent();
   const columns = [
     {
       title: "SN",
+      field: "tableData.id",
       render: (rowData) => rowData.tableData.id + 1,
+      pdfWidth: "2rem",
       width: "3%",
       sortable: false,
+      export: false,
       sorting: false,
     },
+
     {
       title: "Employee Name",
       field: "userName",
       emptyValue: "-",
+      pdfWidth: "7rem",
       width: "20vh",
       sorting: false,
     },
     {
-      title: "Contact",
+      title: "Contact Detail",
       field: "mobileNumber",
       emptyValue: "-",
+      pdfWidth: "5rem",
       width: "20vh",
       sorting: false,
+      render: (rowData) => {
+        return (
+          <div>
+            <div>{rowData.mobileNumber}</div>
+            <div>{rowData.email}</div>
+          </div>
+        );
+      },
+    },
+    {
+      title: "Email",
+      field: "email",
+      pdfWidth: "7rem",
+      hidden: true,
+      export: true,
     },
     {
       title: "Event Name",
       field: "eventName",
       emptyValue: "-",
+      pdfWidth: "8rem",
       width: "20vh",
+
       sorting: false,
     },
     {
       title: "Date",
       field: "eventDate",
       emptyValue: "-",
-      width: "20vh",
+      pdfWidth: "7rem",
       sorting: false,
     },
     {
       title: "Time",
       field: "eventTime",
       emptyValue: "-",
+      pdfWidth: "4rem",
       width: "20vh",
       sorting: false,
     },
@@ -209,58 +87,174 @@ const EventAttendance = ({ permissions }) => {
       title: "Location",
       field: "eventLocation",
       emptyValue: "-",
+      pdfWidth: "5rem",
       width: "20vh",
+
       sorting: false,
     },
     {
       title: "Description",
       field: "eventDescription",
       emptyValue: "-",
+      pdfWidth: "10rem",
       width: "20vh",
       sorting: false,
     },
     {
-      title: "Status",
+      title: "User Confirmation",
+      field: "status",
+      emptyValue: "-",
+      sorting: false,
+      pdfWidth: "4rem",
+      align: "center",
+      render: (rowData) => {
+        if (rowData?.status === "OK") {
+          return <Chip color="success" label="Coming" />;
+        } else
+          return (
+            <Chip
+              color="error"
+              sx={{ pdfWidth: "max-content" }}
+              label="Not Coming"
+            />
+          );
+      },
+    },
+    {
+      title: "Attended",
       field: "isPresent",
       render: (rowData) => {
-        if(rowData?.isPresent){
-          return (<div><DoneSharpIcon style={{color: 'green'}} /></div>)
-        } else return (<div><CloseSharpIcon style={{color: 'red'}} /></div>)
+        if (rowData?.isPresent) {
+          return (
+            <div>
+              <Badge color="success" badgeContent="Yes" />
+            </div>
+          );
+        } else
+          return (
+            <div>
+              <Badge color="error" badgeContent="No" />
+            </div>
+          );
       },
       emptyValue: "-",
+      pdfWidth: "5rem",
       width: "20vh",
+
       sorting: false,
+      align: "center",
     },
   ].filter(Boolean);
 
-    const actions = [
-      {
-        icon: () => (
-          <HocButton
-            permissions={permissions.canEdit}
-            icon={<ModeEditOutlineIcon />}
-          />
-        ),
-        tooltip: "Edit Event",
-        onClick: (event, rowData) => handleEditEventAttendance(rowData),
-      },
-    ];
+  const [openEditModal, setOpenEditModal] = useState(false);
+  const [editedEventAttendance, setEditedEventAttendance] = useState({});
+  const [additionalLeft, setAdditionalLeft] = useState({});
+  const [additionalRight, setAdditionalRight] = useState({});
 
-    return (
-      <CustomTable
-        key={eventName}
-        columns={columns}
-        data={events}
-        title={`Event Data of - ${eventName}`}
-        isLoading={isLoading}
-        actions={actions}
-      />
-    );
-  });
+  const handleCloseEditModal = () => setOpenEditModal(false);
+  const [searchParams, setSearchParams] = useState({});
+  const [isLoading, setisLoading] = useState(false);
 
-  return !isLoading && (
+  const [tableData, setTableData] = useState([]);
+
+  const handleEditEventAttendance = (rowData) => {
+    setEditedEventAttendance(rowData);
+    setOpenEditModal(true);
+  };
+
+  const filterMenu = [
+    {
+      label: "Event",
+      name: "eventId",
+      type: "autoComplete",
+      options: eventData || [],
+      md: 6,
+      sm: 6,
+      xs: 6,
+    },
+    {
+      label: "Employee",
+      name: "employeeId",
+      type: "autoComplete",
+      options: employeeData || [],
+      md: 6,
+      sm: 6,
+      xs: 6,
+    },
+  ];
+
+  const actions = [
+    {
+      icon: () => (
+        <HocButton
+          permissions={permissions.canEdit}
+          icon={<ModeEditOutlineIcon />}
+        />
+      ),
+      tooltip: "Edit Event",
+      onClick: (event, rowData) => handleEditEventAttendance(rowData),
+    },
+  ];
+
+  useEffect(() => {
+    handleSearch();
+  }, []);
+
+  const handleSearch = async (values) => {
+    setisLoading(true);
+    setSearchParams({ ...values });
+    try {
+      const data = await getEventAttenderList({ ...values });
+      setisLoading(false);
+      setTableData(data?.events);
+      if (values?.employeeId || (values?.employeeId && values?.eventId)) {
+        const additionalData = employeeAllData?.find(
+          (d) => d.id === values?.employeeId
+        );
+        setAdditionalLeft({
+          "Employee Name": employeeData?.find(
+            (d) => d.id === values?.employeeId
+          )?.label,
+          Email: additionalData?.officeEmail,
+        });
+        setAdditionalRight({ "Contact No.": additionalData?.mobileNumber });
+      } else if (values?.eventId) {
+        const additionalData = eventAllData?.find(
+          (d) => d.id === values?.eventId
+        );
+        setAdditionalLeft({
+          Event: additionalData?.eventName,
+          Location: additionalData?.eventLocation,
+          "Event Description": additionalData?.eventDescription,
+        });
+        setAdditionalRight({
+          Date: additionalData?.eventDate,
+          Time: additionalData?.eventTime,
+        });
+      } else {
+        setAdditionalLeft({});
+        setAdditionalRight({});
+      }
+    } catch (error) {
+      toast.error(error);
+    }
+  };
+
+  return (
     <>
-      {eventTables}
+      <NewFilter inputField={filterMenu} searchCallBack={handleSearch} />
+      <CustomTable
+        columns={getColumns(columns, searchParams)}
+        data={tableData}
+        title="Event Attendance Report"
+        isLoading={isLoading}
+        additionalLeft={additionalLeft}
+        additionalRight={additionalRight}
+        fileName="Event Report"
+        actions={actions}
+        exportButton
+        exportExcel
+      />
       {openEditModal && (
         <EditEventAttendanceModal
           title={"Edit Event Attendance"}
@@ -271,6 +265,35 @@ const EventAttendance = ({ permissions }) => {
       )}
     </>
   );
+};
+
+const getColumns = (column, searchParams) => {
+  if (searchParams?.employeeId && searchParams?.eventId) {
+    return column?.filter(
+      (d) =>
+        d.field !== "userName" &&
+        d.field !== "mobileNumber" &&
+        d.field !== "email" &&
+        d.field !== "branch"
+    );
+  } else if (searchParams?.employeeId) {
+    return column?.filter(
+      (d) =>
+        d.field !== "userName" &&
+        d.field !== "mobileNumber" &&
+        d.field !== "email" &&
+        d.field !== "branch"
+    );
+  } else if (searchParams?.eventId) {
+    return column?.filter(
+      (d) =>
+        d.field !== "eventName" &&
+        d.field !== "eventLocation" &&
+        d.field !== "eventDate" &&
+        d.field !== "eventTime" &&
+        d.field !== "eventDescription"
+    );
+  } else return column;
 };
 
 export default PermissionHoc(EventAttendance);

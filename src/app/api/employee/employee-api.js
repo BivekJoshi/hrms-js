@@ -22,6 +22,10 @@ export const getLoggedInUserInfo = async () => {
   const data = await axiosInstance.get(`/employee/logged-in/employee-details`);
   return data;
 };
+export const getAllEmployeeData = async () => {
+  const data = await axiosInstance.get(`/employee/get-all`);
+  return data;
+};
 
 {
   /*________________________GETBYPAGINATION_____________________________________*/

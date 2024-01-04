@@ -58,7 +58,7 @@ const AddEventFields = ({ formik }) => {
             InputLabelProps={{ shrink: true }}
             size='small'
             inputProps={{
-              min: new Date().toISOString().split('T')[0], 
+              min: new Date().toISOString().split('T')[0],
             }}
           />
         </Grid>

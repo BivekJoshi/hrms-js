@@ -1,70 +1,44 @@
-import React from "react";
-import { PieChart, Pie, Cell, Legend, ResponsiveContainer } from "recharts";
-import { Box } from "@mui/material";
-import "../Style/Style.css";
+import React from 'react';
+import ReactApexChart from 'react-apexcharts';
 
-export const EmployPichart = ({ task }) => {
-  const COLORS = ["#F65E3C", "#A1E000", "#9137B8", "#D93084"];
+export const EmployPichart = ({ data }) => {
+  const COLORS = ['#399F4D', '#F9C143', '#C2514B', '#875923'];
 
-  const Bullet = ({ backgroundColor, size }) => {
-    return (
-      <div
-        className="CirecleBullet"
-        style={{
-          backgroundColor,
-          width: size,
-          height: size,
-        }}
-      ></div>
-    );
+  const series = data
+    ? Object.entries(data).map(([key, value]) => (value ? value : "nana"))
+    : [];
+  const labels = data
+    ? Object.entries(data).map(([key, value]) => (key ? key : "0"))
+    : [];
+
+  const options = {
+    chart: {
+      width: 380,
+      type: 'donut',
+    },
+    labels: labels,
+    colors: COLORS,
+    responsive: [
+      {
+        breakpoint: 480,
+        options: {
+          chart: {
+            width: 200,
+          },
+          legend: {
+            position: 'top',
+          },
+        },
+      },
+    ],
   };
 
   return (
-    <Box className="pichartStyle">
-      <ResponsiveContainer width="100%" height={250}>
-        <PieChart
-          width={300}
-          height={150}
-          style={{ position: "inherit", paddingLeft: "3rem" }}
-        >
-          <Pie
-            data={task}
-            dataKey="numberOfTask"
-            nameKey="nameOfTask"
-            cx="55%"
-            cy="35%"
-            outerRadius={60}
-            fill="#8884d8"
-          >
-            {task.map((entry, index) => (
-              <Cell
-                key={`cell-${index}`}
-                fill={COLORS[index % COLORS.length]}
-              />
-            ))}
-          </Pie>
-        </PieChart>
-      </ResponsiveContainer>
-      <Legend
-        content={
-          <ul className="LegendList">
-            {task.map((entry, index) => (
-              <Box key={`item-${index}`}>
-                <div className="BulletLabel">
-                  <Bullet
-                    backgroundColor={COLORS[index % COLORS.length]}
-                    size="10px"
-                  />
-                  <div style={{ fontSize: ".8rem" }}>{entry.nameOfTask}</div>
-                  <div style={{ marginLeft: "5px", fontSize: ".8rem" }}>
-                    {entry.numberOfTask}
-                  </div>
-                </div>
-              </Box>
-            ))}
-          </ul>
-        }
-      />
-    </Box>
+    <ReactApexChart
+      options={options}
+      series={series}
+      type='donut'
+      height={250}
+    />
   );
 };

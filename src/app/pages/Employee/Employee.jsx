@@ -36,12 +36,14 @@ const labelStyle = {
   borderRadius: ".5rem",
   color: "black",
   textDecoder: "none",
+  // fontWeight: "bold",
 };
 const activeLabelStyle = {
   ...labelStyle,
   backgroundColor: "#329EF4",
   borderBottom: "none",
   textDecoder: "none",
+  // fontWeight: "bold",
 };
 
 const Employee = () => {
@@ -99,8 +101,8 @@ const Employee = () => {
 
   const handleSubmit = () => {
     formik.handleSubmit();
-    if (formik.isValid) {
-    }
+    // if (formik.isValid) {
+    // }
   };
 
   return (

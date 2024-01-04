@@ -3,6 +3,7 @@ import jwtDecode from 'jwt-decode';
 import { toast } from 'react-toastify';
 import { getUser, removeUser } from '../app/utils/cookieHelper';
 import { docContextPath, getBaseUrl } from './getBaseUrl';
+const envType = import.meta.env.MODE;
 
 // const baseURL = 'http://172.16.16.94:8083/hrms/api/';
 //export const baseURL = 'https://172.16.16.94:6523/hrms/api/';
@@ -27,6 +28,14 @@ const checkIfExpired = (token) => {
     return false;
   }
   return true;
+};
+
+const navigateOnError = () => {
+  if (envType === 'development') {
+    return window.location.replace('/#');
+  } else {
+    return window.location.replace('/hrms/index.html#/');
+  }
 };
 
 export const axiosInstance = Axios.create({
@@ -54,7 +63,11 @@ axiosInstance.interceptors.response.use(
     return response.data;
   },
   function (error) {
-    if (error.response) {
+    if (error?.response) {
+      if (error?.response?.status === 401) {
+        removeUser();
+        navigateOnError();
+      }
       const errorMessage = error?.response?.data?.message;
       if (
         errorMessage === 'invalid_or_missing_token' ||

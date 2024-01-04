@@ -33,11 +33,19 @@ export const useGetEventNotification = () => {
   });
 };
 
-export const useGetEventAttenderList = () => {
-  return useQuery(['getEventAttenderList'], () => getEventAttenderList(), {
-    refetchInterval: false,
-    refetchOnWindowFocus: false,
-  });
+export const useGetEventAttenderList = (filterState) => {
+  const getQuery = useQuery(
+    ['getEventAttenderList', filterState],
+    () => getEventAttenderList(filterState),
+    {
+      refetchInterval: false,
+      refetchOnWindowFocus: false,
+    }
+  );
+  return {
+    data: getQuery.data,
+    isLoading: getQuery.isLoading,
+  };
 };
 
 {
@@ -94,9 +102,6 @@ export const useAddEventConfirmaation = ({ onSuccess }) => {
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries('getEventNofication');
       },
-      onError: (err, _variables, _context) => {
-        toast.error(`error: ${err.message}`);
-      },
     }
   );
 };
@@ -135,31 +140,20 @@ export const useEditEvent = ({ onSuccess }) => {
   });
 };
 
-
-
-
-
-
-
-
-
-
-
-
-
 {
   /*________________________EDIT- ATTENDANCE_____________________________________*/
 }
 export const useEditEventAttendance = ({ onSuccess }) => {
   const queryClient = useQueryClient();
-  return useMutation(['editEvent'], (formData) => editEventAttendance(formData), {
-    onSuccess: (data, variables, context) => {
-      toast.success('Succesfully edited an Event');
-      onSuccess && onSuccess(data, variables, context);
-      queryClient.invalidateQueries('getEventAttenderList');
-    },
-    onError: (err, _variables, _context) => {
-      toast.error(`error: ${err.message}`);
-    },
-  });
+  return useMutation(
+    ['editEvent'],
+    (formData) => editEventAttendance(formData),
+    {
+      onSuccess: (data, variables, context) => {
+        toast.success('Succesfully edited an Event');
+        onSuccess && onSuccess(data, variables, context);
+        queryClient.invalidateQueries('getEventAttenderList');
+      },
+    }
+  );
 };
