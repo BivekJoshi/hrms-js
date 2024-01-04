@@ -116,7 +116,6 @@ const ToDoList = () => {
         <Grid textAlign="center">
           <ButtonComponent
             OnClick={() => {
-              console.log("Todo List")
               navigate("/employee/todolist");
             }}
             buttonName={"Click here to see all todo list"}

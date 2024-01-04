@@ -138,7 +138,13 @@ const Leave = ({ permissions }) => {
       width: "15%",
       emptyValue: "-",
       render: (rowData) => {
-        return <div style={{ whiteSpace: "wrap" }}>{rowData?.leaveReason}</div>;
+        return (
+          <Typography
+            style={{ whiteSpace: "wrap", overflowWrap: "break-word" }}
+          >
+            {rowData?.leaveReason}
+          </Typography>
+        );
       },
     },
   ].filter(Boolean);
@@ -230,13 +236,13 @@ const Leave = ({ permissions }) => {
       },
     },
     {
-      title: "Remark",
-      field: "remarks",
+      title: "Remarks",
+      field: "leaveRemarks",
       width: "15%",
       emptyValue: "-",
       render: (rowData) => {
         return (
-          <div style={{ whiteSpace: "wrap" }}>{rowData?.remarks}</div>
+          <div style={{ whiteSpace: "wrap" }}>{rowData?.leaveRemarks}</div>
           // <Tooltip title={rowData?.leaveRemarks} placement="top-start" arrow>
           //   <Chip
           //     style={{

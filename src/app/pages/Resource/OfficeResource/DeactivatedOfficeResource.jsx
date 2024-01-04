@@ -28,7 +28,7 @@ const DeactivatedOfficeResource = ({ closeModal, title }) => {
       field: "name",
       render: (rowData) => (
         <Typography maxWidth="5rem" style={{ overflowWrap: "break-word" }}>
-          {rowData.name}
+          {rowData?.name}
         </Typography>
       ),
       emptyValue: "-",
@@ -46,7 +46,7 @@ const DeactivatedOfficeResource = ({ closeModal, title }) => {
       title: "Description",
       render: (rowData) => (
         <Typography maxWidth="10rem" style={{ overflowWrap: "break-word" }}>
-          {rowData.description}
+          {rowData?.description}
         </Typography>
       ),
       sorting: false,

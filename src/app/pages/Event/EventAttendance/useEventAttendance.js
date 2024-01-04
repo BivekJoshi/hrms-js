@@ -5,7 +5,9 @@ import { getEvent } from "../../../api/event/event-api";
 const employeeOptions = (data) => {
   if (data) {
     return data.map((item) => ({
-      label: item?.firstName + " " + item?.middleName + " " + item?.lastName,
+      label: item?.middleName
+        ? item?.firstName + " " + item?.middleName + " " + item?.lastName
+        : item?.firstName + " " + item?.lastName,
       id: item?.id,
     }));
   }
@@ -30,6 +32,7 @@ export const usegetAllEmployeeData = () => {
   );
   return {
     employeeData: employeeOptions(getQuery?.data),
+    employeeAllData: getQuery?.data,
     isLoading: getQuery.isLoading,
   };
 };
@@ -40,6 +43,7 @@ export const useGetAllEvent = () => {
   });
   return {
     eventData: eventOptions(getQuery?.data),
+    eventAllData: getQuery?.data,
     isLoading: getQuery.isLoading,
   };
 };

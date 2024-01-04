@@ -70,19 +70,23 @@ const documentName = [
     label: 'Health Insurance',
     value: 'HEALTH_INSURANCE',
   },
+  {
+    id: 12,
+    label: 'Other Document',
+    value: 'OTHER_DOCUMENT',
+  },
 ];
-const DocumentInfo = ({data, role}) => {
-  const { isSuperAdmin, isAdmin, isHr, isEmployee, isHrAdmin, isManager } =
-    useAuth();
-  const { data: loggedInUserData, isLoading: isLoadingUserData } = isEmployee
+const DocumentInfo = ({ data, role }) => {
+  const { data: loggedInUserData, isLoading: isLoadingUserData } = role
     ? useGetLoggedInUserInfo()
     : {};
 
   const { mode } = useContext(ThemeModeContext);
 
   const url = DOC_URL;
-  const { id } = useParams();
-  const { data: getDocument, isLoading } = (role) ? useGetDocumentById(data?.id) : useGetDocumentById(loggedInUserData?.id);
+  const { data: getDocument, isLoading } = role
+    ? useGetDocumentById(data?.id)
+    : useGetDocumentById(loggedInUserData?.id);
   const groupedDocuments = isLoading
     ? {}
     : groupBy(getDocument, 'documentType');

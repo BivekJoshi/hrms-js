@@ -22,7 +22,7 @@ import './style.css';
 import { getUser } from '../../../utils/cookieHelper';
 import jwtDecode from 'jwt-decode';
 
-export const EventNotification = ({ data }) => {
+export const EventNotification = ({ data ,handleClose}) => {
   const { mode, palette } = useContext(ThemeModeContext);
   const [showRemark, setShowRemark] = useState(false);
 
@@ -44,6 +44,8 @@ export const EventNotification = ({ data }) => {
     formik.setFieldValue('eventId', eventId);
     formik.setFieldValue('notificationId', notificationId);
     formik.handleSubmit();
+    setShowRemark({ ...showRemark, [index]: false });
+    handleClose();
   };
 
   const getUpcomingDay = (eventDate) => {
@@ -199,13 +201,15 @@ export const EventNotification = ({ data }) => {
                       //     ename?.notificationId
                       //   )
                       // }
-                      onClick={() => setShowRemark(true)}
+                      onClick={() =>
+                        setShowRemark({ ...showRemark, [index]: true })
+                      }
                     >
                       No
                     </Button>
                   </div>
-                  {showRemark && (
-                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                  {showRemark?.[index] && (
+                    <div style={{ display: "flex", flexDirection: "column" }}>
                       <TextField
                         id='remarks'
                         name='remarks'

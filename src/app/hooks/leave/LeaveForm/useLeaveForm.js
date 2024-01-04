@@ -32,7 +32,7 @@ const useLeaveForm = (data, onClose) => {
 
   const handleRequest = (values) => {
     values = { ...values };
-    addLeave(values, formik, {
+    addLeave(values, {
       onSuccess: () => {
         onClose();
         formik.resetForm();
@@ -56,6 +56,7 @@ const useLeaveEditForm = (data, onClose) => {
       id: data?.leaveId,
       employeeId: data?.employeeId || "",
       leaveStatus: "",
+      leaveRemarks: "",
     },
     validationSchema: EditLeaveSchemaAdmin,
     onSubmit: (value) => {

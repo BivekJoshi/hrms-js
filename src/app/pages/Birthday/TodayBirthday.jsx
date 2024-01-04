@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext } from 'react';
+import React, { useState, useRef, useContext } from "react";
 import {
   Button,
   Box,
@@ -12,13 +12,15 @@ import {
   ClickAwayListener,
   MenuList,
   Typography,
-} from '@mui/material';
-import CakeIcon from '@mui/icons-material/Cake';
-import '../Style/Style.css';
-import ThemeModeContext from '../../../theme/ThemeModeContext';
-import { useNavigate } from 'react-router-dom';
-import '../Style/Style.css';
-import Birthdaylist from './Birthdaylist';
+} from "@mui/material";
+import CakeIcon from "@mui/icons-material/Cake";
+import "../Style/Style.css";
+import ThemeModeContext from "../../../theme/ThemeModeContext";
+import { useNavigate } from "react-router-dom";
+import "../Style/Style.css";
+import Birthdaylist from "./Birthdaylist";
+import { getUser } from "../../utils/cookieHelper";
+import jwtDecode from "jwt-decode";
 
 const TodayBirthday = ({ data }) => {
   const birthdayEmployeeName = data?.birthdayEmployees;
@@ -28,6 +30,9 @@ const TodayBirthday = ({ data }) => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
+  const user = getUser();
+  const decode = jwtDecode(user);
+  const userRole = decode?.userRole;
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -43,15 +48,17 @@ const TodayBirthday = ({ data }) => {
     setOpen(false);
   };
   const handleClick = (bname) => {
-    navigate(`/admin/employee/${bname?.id}`);
+    {
+      userRole !== "ROLE_EMPLOYEE" && navigate(`/admin/employee/${bname?.id}`);
+    }
     setOpen(false);
   };
 
   function handleListKeyDown(event) {
-    if (event.key === 'Tab') {
+    if (event.key === "Tab") {
       event.preventDefault();
       setOpen(false);
-    } else if (event.key === 'Escape') {
+    } else if (event.key === "Escape") {
       setOpen(false);
     }
   }
@@ -66,16 +73,16 @@ const TodayBirthday = ({ data }) => {
   }, [open]);
 
   const btnStyle = {
-    color: '#fff',
+    color: "#fff",
   };
 
   return (
     <Box>
       <IconButton ref={anchorRef} onClick={handleToggle} style={btnStyle}>
-        <Tooltip title='Birthday Notification'>
+        <Tooltip title="Birthday Notification">
           <Badge
-            badgeContent={data?.isChecked ? '' : displayCount}
-            color='secondary'
+            badgeContent={data?.isChecked ? "" : displayCount}
+            color="secondary"
           >
             <CakeIcon />
           </Badge>
@@ -86,35 +93,35 @@ const TodayBirthday = ({ data }) => {
           open={open}
           anchorEl={anchorRef.current}
           role={undefined}
-          placement='bottom-start'
+          placement="bottom-start"
           transition
           disablePortal
-          style={{ marginLeft: '-4rem' }}
+          style={{ marginLeft: "-4rem" }}
         >
           {({ TransitionProps, placement }) => (
             <Grow
               {...TransitionProps}
               style={{
-                background: mode === 'light' ? '' : '#4d4c4c',
+                background: mode === "light" ? "" : "#4d4c4c",
                 transformOrigin:
-                  placement === 'bottom-start' ? 'left top' : 'left bottom',
+                  placement === "bottom-start" ? "left top" : "left bottom",
               }}
             >
               <Paper>
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList
                     autoFocusItem={open}
-                    id='composition-menu'
-                    aria-labelledby='composition-button'
+                    id="composition-menu"
+                    aria-labelledby="composition-button"
                     onKeyDown={handleListKeyDown}
                     sx={{
-                      textAlign: 'center',
-                      padding: '0.5rem 1rem',
+                      textAlign: "center",
+                      padding: "0.5rem 1rem",
                     }}
                   >
                     <Typography
-                      variant='h6'
-                      color={mode === 'light' ? 'primary' : 'white'}
+                      variant="h6"
+                      color={mode === "light" ? "primary" : "white"}
                       fontWeight={400}
                     >
                       Today's Birthday
@@ -124,7 +131,7 @@ const TodayBirthday = ({ data }) => {
                         <MenuItem
                           key={index}
                           onClick={() => handleClick(bname)}
-                          sx={{ justifyContent: 'center' }}
+                          sx={{ justifyContent: "center" }}
                         >
                           {bname.fullName}
                         </MenuItem>
@@ -140,36 +147,36 @@ const TodayBirthday = ({ data }) => {
           open={open}
           anchorEl={anchorRef.current}
           role={undefined}
-          placement='bottom-start'
+          placement="bottom-start"
           transition
           disablePortal
-          style={{ width: { xs: '30%', lg: '15%' }, marginLeft: '-4rem' }}
+          style={{ width: { xs: "30%", lg: "15%" }, marginLeft: "-4rem" }}
         >
           {({ TransitionProps, placement }) => (
             <Grow
               {...TransitionProps}
               style={{
-                background: mode === 'light' ? '' : '#4d4c4c',
+                background: mode === "light" ? "" : "#4d4c4c",
                 transformOrigin:
-                  placement === 'bottom-start' ? 'left top' : 'left bottom',
+                  placement === "bottom-start" ? "left top" : "left bottom",
               }}
             >
               <Paper>
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList
                     autoFocusItem={open}
-                    id='composition-menu'
-                    aria-labelledby='composition-button'
+                    id="composition-menu"
+                    aria-labelledby="composition-button"
                     onKeyDown={handleListKeyDown}
                     sx={{
-                      textAlign: 'center',
-                      width: '100%',
-                      padding: '1rem 2rem',
+                      textAlign: "center",
+                      width: "100%",
+                      padding: "1rem 2rem",
                     }}
                   >
                     <Typography
-                      variant='h7'
-                      color={mode === 'light' ? 'primary' : 'white'}
+                      variant="h7"
+                      color={mode === "light" ? "primary" : "white"}
                     >
                       No one is celebrating a birthday today.
                     </Typography>

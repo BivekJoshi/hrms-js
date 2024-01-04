@@ -14,42 +14,8 @@ import { getEventAttenderList } from "../../../api/event/event-api";
 import { toast } from "react-toastify";
 
 const EventAttendance = ({ permissions }) => {
-  const { employeeData } = usegetAllEmployeeData();
-  const { eventData } = useGetAllEvent();
-  const [openEditModal, setOpenEditModal] = useState(false);
-  const [editedEventAttendance, setEditedEventAttendance] = useState({});
-  const handleCloseEditModal = () => setOpenEditModal(false);
-  const [filterState, setFilterState] = useState("");
-  const [isLoading, setisLoading] = useState(false);
-
-  const [tableData, setTableData] = useState([]);
-
-  const handleEditEventAttendance = (rowData) => {
-    setEditedEventAttendance(rowData);
-    setOpenEditModal(true);
-  };
-
-  const filterMenu = [
-    {
-      label: "Event",
-      name: "eventId",
-      type: "autoComplete",
-      options: eventData || [],
-      md: 6,
-      sm: 6,
-      xs: 6,
-    },
-    {
-      label: "Employee",
-      name: "employeeId",
-      type: "autoComplete",
-      options: employeeData || [],
-      md: 6,
-      sm: 6,
-      xs: 6,
-    },
-  ];
-
+  const { employeeData, employeeAllData } = usegetAllEmployeeData();
+  const { eventData, eventAllData } = useGetAllEvent();
   const columns = [
     {
       title: "SN",
@@ -172,18 +138,55 @@ const EventAttendance = ({ permissions }) => {
     },
   ].filter(Boolean);
 
-    const actions = [
-      {
-        icon: () => (
-          <HocButton
-            permissions={permissions.canEdit}
-            icon={<ModeEditOutlineIcon />}
-          />
-        ),
-        tooltip: "Edit Event",
-        onClick: (event, rowData) => handleEditEventAttendance(rowData),
-      },
-    ];
+  const [openEditModal, setOpenEditModal] = useState(false);
+  const [editedEventAttendance, setEditedEventAttendance] = useState({});
+  const [additionalLeft, setAdditionalLeft] = useState({});
+  const [additionalRight, setAdditionalRight] = useState({});
+
+  const handleCloseEditModal = () => setOpenEditModal(false);
+  const [searchParams, setSearchParams] = useState({});
+  const [isLoading, setisLoading] = useState(false);
+
+  const [tableData, setTableData] = useState([]);
+
+  const handleEditEventAttendance = (rowData) => {
+    setEditedEventAttendance(rowData);
+    setOpenEditModal(true);
+  };
+
+  const filterMenu = [
+    {
+      label: "Event",
+      name: "eventId",
+      type: "autoComplete",
+      options: eventData || [],
+      md: 6,
+      sm: 6,
+      xs: 6,
+    },
+    {
+      label: "Employee",
+      name: "employeeId",
+      type: "autoComplete",
+      options: employeeData || [],
+      md: 6,
+      sm: 6,
+      xs: 6,
+    },
+  ];
+
+  const actions = [
+    {
+      icon: () => (
+        <HocButton
+          permissions={permissions.canEdit}
+          icon={<ModeEditOutlineIcon />}
+        />
+      ),
+      tooltip: "Edit Event",
+      onClick: (event, rowData) => handleEditEventAttendance(rowData),
+    },
+  ];
 
   useEffect(() => {
     handleSearch();
@@ -191,22 +194,54 @@ const EventAttendance = ({ permissions }) => {
 
   const handleSearch = async (values) => {
     setisLoading(true);
+    setSearchParams({ ...values });
     try {
       const data = await getEventAttenderList({ ...values });
       setisLoading(false);
       setTableData(data?.events);
+      if (values?.employeeId || (values?.employeeId && values?.eventId)) {
+        const additionalData = employeeAllData?.find(
+          (d) => d.id === values?.employeeId
+        );
+        setAdditionalLeft({
+          "Employee Name": employeeData?.find(
+            (d) => d.id === values?.employeeId
+          )?.label,
+          Email: additionalData?.officeEmail,
+        });
+        setAdditionalRight({ "Contact No.": additionalData?.mobileNumber });
+      } else if (values?.eventId) {
+        const additionalData = eventAllData?.find(
+          (d) => d.id === values?.eventId
+        );
+        setAdditionalLeft({
+          Event: additionalData?.eventName,
+          Location: additionalData?.eventLocation,
+          "Event Description": additionalData?.eventDescription,
+        });
+        setAdditionalRight({
+          Date: additionalData?.eventDate,
+          Time: additionalData?.eventTime,
+        });
+      } else {
+        setAdditionalLeft({});
+        setAdditionalRight({});
+      }
     } catch (error) {
       toast.error(error);
     }
   };
+
   return (
     <>
       <NewFilter inputField={filterMenu} searchCallBack={handleSearch} />
       <CustomTable
-        columns={columns}
+        columns={getColumns(columns, searchParams)}
         data={tableData}
         title="Event Attendance Data"
         isLoading={isLoading}
+        additionalLeft={additionalLeft}
+        additionalRight={additionalRight}
         actions={actions}
         exportButton
       />
@@ -220,6 +255,35 @@ const EventAttendance = ({ permissions }) => {
       )}
     </>
   );
+};
+
+const getColumns = (column, searchParams) => {
+  if (searchParams?.employeeId && searchParams?.eventId) {
+    return column?.filter(
+      (d) =>
+        d.field !== "userName" &&
+        d.field !== "mobileNumber" &&
+        d.field !== "email" &&
+        d.field !== "branch"
+    );
+  } else if (searchParams?.employeeId) {
+    return column?.filter(
+      (d) =>
+        d.field !== "userName" &&
+        d.field !== "mobileNumber" &&
+        d.field !== "email" &&
+        d.field !== "branch"
+    );
+  } else if (searchParams?.eventId) {
+    return column?.filter(
+      (d) =>
+        d.field !== "eventName" &&
+        d.field !== "eventLocation" &&
+        d.field !== "eventDate" &&
+        d.field !== "eventTime" &&
+        d.field !== "eventDescription"
+    );
+  } else return column;
 };
 
 export default PermissionHoc(EventAttendance);
