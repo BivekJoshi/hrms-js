@@ -53,11 +53,10 @@ export const exportExcel = (
   };
 
   const forLeftCell = "A";
-  let forRightCell = "A";
+  let forRightCell = String.fromCharCode(65 + colLength); // Start from the column after the last data column
 
   if (additionalLeft && Object.values(additionalLeft).length > 0) {
     let start = additionalDataStart;
-    forRightCell = "G";
     for (let key in additionalLeft) {
       console.log(key, additionalLeft[key]);
       worksheet.getCell(`${forLeftCell + start}`).value = {
