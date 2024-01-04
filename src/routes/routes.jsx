@@ -15,6 +15,8 @@ import useAuth from '../auth/hooks/component/login/useAuth';
 import DeactiveUser from '../app/pages/Auth/UserControl/Users/DeactiveUser';
 import EventAttendance from '../app/pages/Event/EventAttendance/EventAttendance';
 import EmploymentType from '../app/pages/EmploymentType/EmploymentType';
+import EmailLog from '../app/pages/EmailLog/EmailLog';
+import EmailLogUserId from '../app/pages/EmailLog/EmailLogUserId';
 
 const ProfileDetail = Loadable(
   lazy(() => import('../app/pages/Auth/Profile/ProfileDetail'))
@@ -325,6 +327,18 @@ const routes = [
     name: 'Employee Mapping',
     id: nanoid(),
     component: <EmployeeMapping />,
+  },
+  {
+    path: 'email-log',
+    name: 'Email Log',
+    id: nanoid(),
+    component: <EmailLog/>,
+  },
+  {
+    path: 'email-log-id',
+    name: 'Email Log',
+    id: nanoid(),
+    component: <EmailLogUserId/>,
   },
 ];
 
