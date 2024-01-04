@@ -256,7 +256,7 @@ const Employee = () => {
           )}
         />
       </Box>
-      {/*
+      
       <Modal
         open={openSubmitModal}
         onClose={handleCloseEmailModal}
@@ -291,7 +291,7 @@ const Employee = () => {
             </Box>
           </Box>
         </div>
-      </Modal> */}
+      </Modal>
     </>
   );
 };
