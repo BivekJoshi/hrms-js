@@ -1,23 +1,39 @@
 import React from "react";
 import ReactApexChart from "react-apexcharts";
 
-export const EmployPichart = () => {
+export const EmployPichart = ({
+  employeeCountPerDepartment,
+  employeeCountPerEmpType,
+}) => {
   const task = [
     {
-      numberOfTask: 1,
-      nameOfTask: "Task 1",
+      numberOfTask: employeeCountPerDepartment
+        ? employeeCountPerDepartment.Account
+        : employeeCountPerEmpType[".part-time"],
+      nameOfTask: employeeCountPerDepartment ? "Account" : "Part Time",
     },
     {
-      numberOfTask: 1,
-      nameOfTask: "Task 2",
+      numberOfTask: employeeCountPerDepartment
+        ? employeeCountPerDepartment.Management
+        : employeeCountPerEmpType?.deded,
+      nameOfTask: employeeCountPerDepartment ? "Management" : "Deded ",
     },
     {
-      numberOfTask: 1,
-      nameOfTask: "Task 3",
+      numberOfTask: employeeCountPerDepartment
+        ? employeeCountPerDepartment.Technical
+        : employeeCountPerEmpType,
+      nameOfTask: employeeCountPerDepartment ? "Technical" : "testsxsxdsgdsg",
     },
   ];
 
   const COLORS = ["#F65E3C", "#A1E000", "#9137B8", "#D93084"];
+
+  // const series = employeeCountPerDepartment?.map(([key, value]) => {
+  //   key;
+  // });
+  // const labels = employeeCountPerDepartment?.map(([key, value]) => {
+  //   value;
+  // });
 
   const series = task.map((entry) => entry.numberOfTask);
   const labels = task.map((entry) => entry.nameOfTask);
@@ -45,11 +61,6 @@ export const EmployPichart = () => {
   };
 
   return (
-    <ReactApexChart
-      options={options}
-      series={series}
-      type="pie"
-      height={250}
-    />
+    <ReactApexChart options={options} series={series} type="pie" height={250} />
   );
 };
