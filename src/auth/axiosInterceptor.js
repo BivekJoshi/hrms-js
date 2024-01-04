@@ -5,7 +5,6 @@ import { getUser, removeUser } from '../app/utils/cookieHelper';
 import { docContextPath, getBaseUrl } from './getBaseUrl';
 import { Navigate } from 'react-router-dom';
 
-
 // const baseURL = 'http://172.16.16.94:8083/hrms/api/';
 //export const baseURL = 'https://172.16.16.94:6523/hrms/api/';
 // export const DOC_URL = 'https://103.94.159.144/';
@@ -57,9 +56,9 @@ axiosInstance.interceptors.response.use(
   },
   function (error) {
     if (error?.response) {
-      if(error?.response?.status === 401) {
+      if (error?.response?.status === 401) {
         removeUser();
-        window.location.href('/');
+        window.location.href('/#');
       }
       const errorMessage = error?.response?.data?.message;
       if (
