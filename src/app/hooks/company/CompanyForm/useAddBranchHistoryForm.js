@@ -7,7 +7,7 @@ const useAddBranchHistoryForm = (onClose, id) => {
 
   const formik = useFormik({
     initialValues: {
-      departmentId: "",
+      branchId: "",
       effectiveFromDate: "",
       effectiveToDate: "",
       remarks: "",

@@ -1,10 +1,11 @@
 import React from 'react';
-import { useEditProject } from '../useProject';
+import { useEditProject, useGetProjectById } from '../useProject';
 import { useFormik } from 'formik';
 import { ProjectSchema } from '../validation/ProjectSchema';
 
-const useEditProjectForm = (data) => {
+const useEditProjectForm = (data, onClose) => {
   const { mutate } = useEditProject({});
+const { data: projectCompanyData } = useGetProjectById(data?.projectid);
 
   const formik = useFormik({
     initialValues: {
@@ -13,7 +14,8 @@ const useEditProjectForm = (data) => {
       endDate: data?.endDate || '',
       taskStatus: data?.taskStatus || '',
       projectLeadName: data?.projectLeadName || '',
-      // companyId: data?.companyId || '',
+      projectLeadId: data?.projectLeadId || '',
+      companyId: projectCompanyData?.branches?.[0]?.id || '',
       projectid: data?.projectid,
     },
     validationSchema: ProjectSchema,
@@ -23,10 +25,13 @@ const useEditProjectForm = (data) => {
       handleRequest(values);
     },
   });
-
   const handleRequest = (values) => {
     values = { ...values };
-    mutate(values, formik);
+    mutate(values, {
+      onSuccess: () => {
+        onClose();
+      }
+    });
   };
 
   return { formik };

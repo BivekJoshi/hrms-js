@@ -1,10 +1,11 @@
-import { Grid, Button, TextField, Typography } from "@mui/material";
+import { Grid, Button, Typography, Divider } from "@mui/material";
 import React from "react";
 import {
   useRemoveActiveProject,
   useAddActiveProject,
 } from "../../../hooks/project/addProject/useAddProjectActiveForm";
 import { useGetDeactivatedProject } from "../../../hooks/project/useProject";
+import Restore from "../../../../assets/restore.png"
 
 export const EditProjectDeactivateFields = ({ onClose, isLoading, data }) => {
   const { formik } = useRemoveActiveProject(data);
@@ -38,8 +39,13 @@ export const EditProjectDeactivateFields = ({ onClose, isLoading, data }) => {
             variant="outlined"
             InputLabelProps={{ shrink: true }}
           /> */}
-          <Typography varinat="h6">Are u sure u want to terminate this project?</Typography>
-          <Typography variant="h7"> {getProjectName(formik.values.projectId)}</Typography> 
+          <Typography varinat="h6">
+            Are u sure u want to terminate this project?
+          </Typography>
+          <Typography variant="h7">
+            {" "}
+            {getProjectName(formik.values.projectId)}
+          </Typography>
         </Grid>
 
         <Grid
@@ -71,11 +77,11 @@ export const EditProjectDeactivateFields = ({ onClose, isLoading, data }) => {
 
 export const EditProjectActivateFields = ({ onClose, isLoading, data }) => {
   const { data: projectData } = useGetDeactivatedProject();
-  const { formik } = useAddActiveProject(data);
+  const { formik } = useAddActiveProject(data, onClose);
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
-    onClose();
+    // onClose();
   };
 
   const getProjectName = (projectId) => {
@@ -89,22 +95,19 @@ export const EditProjectActivateFields = ({ onClose, isLoading, data }) => {
     !isLoading && (
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
-          <TextField
-            id="projectId"
-            name="projectId"
-            label="Project Name"
-            placeholder="Enter project Id"
-            fullWidth
-            disabled
-            value={getProjectName(formik.values.projectId)}
-            onChange={formik.handleChange}
-            error={formik.touched.projectId && Boolean(formik.errors.projectId)}
-            helperText={formik.touched.projectId && formik.errors.projectId}
-            variant="outlined"
-            InputLabelProps={{ shrink: true }}
-          />
+          <Typography fontSize="20px" textAlign="center">
+            Are you sure you want to activate this project?
+          </Typography>
+          <Typography fontSize="14px" textAlign="center" fontWeight={400}>
+            Project Name : {getProjectName(formik.values.projectId)}
+          </Typography>
         </Grid>
-
+        <Grid item xs={12} sm={12} textAlign="center">
+          <img src={Restore} alt="Restore" />
+        </Grid>
+        <Grid item xs={12} sm={12} textAlign="center">
+        <Divider sx={{width:"100%"}}/>
+        </Grid>
         <Grid
           container
           direction="row"

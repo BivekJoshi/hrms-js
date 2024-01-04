@@ -26,11 +26,10 @@ export const AddUserControlFields = ({ onClose, userControlData }) => {
   };
 
   const nameLabel = (emp) => {
-    console.log(emp, "employee");
     if (emp?.middleName === "") {
-      return `${emp?.firstName} ${emp?.lastName} (${emp?.officeEmail})`;
+      return `${emp?.firstName} ${emp?.lastName} (${emp?.positionName})`;
     } else {
-      return `${emp?.firstName} ${emp?.lastName} ${emp?.lastName} (${emp?.officeEmail})`;
+      return `${emp?.firstName} ${emp?.middleName} ${emp?.lastName} (${emp?.positionName})`;
     }
   };
 

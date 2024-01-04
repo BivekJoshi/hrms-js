@@ -1,16 +1,14 @@
-import React from 'react';
-import FormModal from '../../../components/Modal/FormModal';
-import { useGetLeaveById } from '../../../hooks/leave/useLeave';
-import {
-  EditLeaveFields,
-  LeaveFields,
-} from '../../../components/Form/Leave/LeaveFields';
+import React from "react";
+import FormModal from "../../../components/Modal/FormModal";
+import { EditLeaveFields } from "../../../components/Form/Leave/LeaveFields";
+import { LeaveFields } from "../../../components/Form/Leave/AddLeavefield";
 
 export const AddLeaveModal = ({ open, handleCloseModal, title }) => {
   return (
     <div>
       <FormModal
         title={title}
+        width={500}
         open={open}
         onClose={handleCloseModal}
         formComponent={<LeaveFields onClose={handleCloseModal} />}
@@ -26,7 +24,9 @@ export const EditLeaveModal = ({ open, handleCloseModal, data, title }) => {
         open={open}
         onClose={handleCloseModal}
         title={title}
-        formComponent={<EditLeaveFields onClose={handleCloseModal} data={data} />}
+        formComponent={
+          <EditLeaveFields onClose={handleCloseModal} data={data} />
+        }
       />
     </div>
   );

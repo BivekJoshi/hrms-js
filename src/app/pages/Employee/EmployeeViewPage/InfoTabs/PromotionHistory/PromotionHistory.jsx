@@ -125,7 +125,7 @@ const PromotionHistory = ({ data, role }) => {
             sx={{ mt: 3, ml: 1 }}
             onClick={handleAddOpenModal}
           >
-            + Add Position
+            Change Position
           </Button>
         )}
       </Box>

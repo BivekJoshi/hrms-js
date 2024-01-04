@@ -13,7 +13,7 @@ const useAddDepartmentHistoryForm = (onClose, id) => {
       remarks: "",
       employeeId: id,
     },
-    // validationSchema: DepartmentHistorySchema,
+    validationSchema: DepartmentHistorySchema,
     enableReinitialize: true,
     onSubmit: (values) => {
      
@@ -21,6 +21,7 @@ const useAddDepartmentHistoryForm = (onClose, id) => {
     
     },
   });
+
   const handledAddRequest = (values) => {
     values = { ...values };
     adddepartmentHistory(values, {

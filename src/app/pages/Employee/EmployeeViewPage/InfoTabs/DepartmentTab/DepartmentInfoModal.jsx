@@ -7,6 +7,7 @@ export const AddDepartmentHistory = ({ open, handleCloseModal, title, id }) => {
     <div>
       <FormModal
         title={title}
+        
         open={open}
         onClose={handleCloseModal}
         formComponent={<AddDepartmentHistoryFields onClose={handleCloseModal} id={id} />}

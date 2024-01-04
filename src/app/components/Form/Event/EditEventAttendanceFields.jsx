@@ -25,12 +25,12 @@ const EditEventAttendanceFields = ({ onClose, isLoading, data }) => {
   const statusOption = [
     {
       id: 1,
-      label: "present",
+      label: "Present",
       value: "true",
     },
     {
       id: 2,
-      label: "absent",
+      label: "Absent",
       value: "false",
     },
   ];

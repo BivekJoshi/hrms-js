@@ -69,7 +69,7 @@ const LeaveUserView = ({ data, isLoading }) => {
     {
       title: "SN",
       render: (rowData) => rowData.tableData.id + 1,
-      width: 20,
+      width: 2,
       sortable: false,
     },
     {
@@ -150,7 +150,7 @@ const LeaveUserView = ({ data, isLoading }) => {
             <Chip
               style={{
                 cursor: "pointer",
-                width: "200px",
+                maxWidth: "10rem",
                 height: "50px",
                 display: "block",
                 background: mode === "light" ? "white" : "#434343",
@@ -167,35 +167,35 @@ const LeaveUserView = ({ data, isLoading }) => {
         );
       },
     },
-    {
-      title: "Actions",
-      render: (rowData) => {
-        const isApprovedOrRejected = ["APPROVED", "REJECTED"].includes(
-          rowData.leaveStatus
-        );
+    // {
+    //   title: "Actions",
+    //   render: (rowData) => {
+    //     const isApprovedOrRejected = ["APPROVED", "REJECTED"].includes(
+    //       rowData.leaveStatus
+    //     );
 
-        return (
-          <Stack direction="row" spacing={0}>
-            <Button
-              color="primary"
-              onClick={() => handleEditLeave(rowData)}
-              disabled={isApprovedOrRejected}
-            >
-              <ModeEditOutlineIcon />
-            </Button>
-            <Button
-              color="primary"
-              onClick={() => handleDeleteLeave(rowData)}
-              disabled={isApprovedOrRejected}
-            >
-              <DeleteIcon />
-            </Button>
-          </Stack>
-        );
-      },
-      sorting: false,
-      width: 120,
-    },
+    //     return (
+    //       <Stack direction="row" spacing={0}>
+    //         <Button
+    //           color="primary"
+    //           onClick={() => handleEditLeave(rowData)}
+    //           disabled={isApprovedOrRejected}
+    //         >
+    //           <ModeEditOutlineIcon />
+    //         </Button>
+    //         <Button
+    //           color="primary"
+    //           onClick={() => handleDeleteLeave(rowData)}
+    //           disabled={isApprovedOrRejected}
+    //         >
+    //           <DeleteIcon />
+    //         </Button>
+    //       </Stack>
+    //     );
+    //   },
+    //   sorting: false,
+    //   width: 120,
+    // },
   ];
 
   return (

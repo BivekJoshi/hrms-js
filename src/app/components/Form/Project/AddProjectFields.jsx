@@ -36,8 +36,11 @@ const AddprojectFields = ({ onClose, isLoading }) => {
 
   const { formik } = useAddProjectForm(onClose);
 
-  const handleFormSubmit = async () => {
+  const handleFormSubmit = () => {
     formik.handleSubmit();
+    if(formik.isValid){
+      // onClose();
+    }
   };
   const currentDate = new Date().toISOString().split('T')[0];
   return (
@@ -89,7 +92,7 @@ const AddprojectFields = ({ onClose, isLoading }) => {
             label="Deadline Date"
             type="date"
             inputProps={{
-              min: formik.values.fromDate || currentDate,
+              min: formik.values.startDate,
             }}
             fullWidth
             value={formik.values.endDate}

@@ -35,7 +35,7 @@ const useHolidayForm = (setOpenSubmitModal, handleCloseModal) => {
           formik.resetForm();
           setHolidayId(data.id);
           handleCloseModal();
-          // setOpenSubmitModal(true);
+          setOpenSubmitModal(true);
         },
       });
     },
