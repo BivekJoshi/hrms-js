@@ -16,7 +16,7 @@ const useApplyLeaveForm = (data) => {
       id: data?.id,
       isHalfDay: data?.applyLeaveDays === 0.5 ? true : false,
       employeeId: userData?.employeeId || "",
-      leaveTypeId: data?.leaveTypeId || "",
+      leaveTypeId: data?.leaveType?.id || "",
       leaveReason: data?.leaveReason || "",
       fromDate: data?.fromDate || "",
       toDate: data?.toDate || "",

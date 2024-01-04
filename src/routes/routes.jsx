@@ -353,7 +353,7 @@ export default function BreadCrumbs() {
 
   const getDashboardLink = () => {
     if (isEmployee) {
-      return '/employee/dashboard';
+      return '/employee/home';
     } else {
       return '/admin/dashboard';
     }

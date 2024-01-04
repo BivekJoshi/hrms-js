@@ -3,6 +3,8 @@ import jwtDecode from 'jwt-decode';
 import { toast } from 'react-toastify';
 import { getUser, removeUser } from '../app/utils/cookieHelper';
 import { docContextPath, getBaseUrl } from './getBaseUrl';
+import { Navigate } from 'react-router-dom';
+
 
 // const baseURL = 'http://172.16.16.94:8083/hrms/api/';
 //export const baseURL = 'https://172.16.16.94:6523/hrms/api/';
@@ -54,11 +56,11 @@ axiosInstance.interceptors.response.use(
     return response.data;
   },
   function (error) {
-    if (error?.response?.status === 401) {
-      removeUser();
-      window.location.replace('/#');
-    }
-    if (error.response) {
+    if (error?.response) {
+      if(error?.response?.status === 401) {
+        removeUser();
+        window.location.href('/');
+      }
       const errorMessage = error?.response?.data?.message;
       if (
         errorMessage === 'invalid_or_missing_token' ||
