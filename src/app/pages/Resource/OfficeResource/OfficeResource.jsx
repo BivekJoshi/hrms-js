@@ -74,7 +74,7 @@ const OfficeResource = ({ permissions }) => {
     {
       title: "SN",
       render: (rowData) => rowData.tableData.id + 1,
-      width: "6rem",
+      width: "2rem",
       sorting: false,
     },
     {

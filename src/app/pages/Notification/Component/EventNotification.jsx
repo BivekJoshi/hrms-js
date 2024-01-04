@@ -27,17 +27,10 @@ export const EventNotification = ({ data ,handleClose}) => {
   const [showRemark, setShowRemark] = useState(false);
 
   const { formik } = useEventConfirmationForm(data);
-  console.log(
-    '🚀 ~ file: EventNotification.jsx:30 ~ EventNotification ~ formik:',
-    formik
-  );
+
   const user = getUser();
   const decode = jwtDecode(user);
   const userRole = decode?.userRole;
-  console.log(
-    '🚀 ~ file: EventNotification.jsx:33 ~ EventNotification ~ userRole:',
-    userRole
-  );
 
   const handleButton = (response, eventId, notificationId) => {
     formik.setFieldValue('status', response);
