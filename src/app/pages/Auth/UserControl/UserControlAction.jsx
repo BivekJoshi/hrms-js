@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
-import Button from '@mui/material/Button';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { EditUserControlModal } from './Users/AddUserControlModal';
-import { useDeleteUserControl } from '../../../hooks/auth/userControl/useUserControl';
-import DeleteConfirmationModal from '../../../components/Modal/DeleteConfirmationModal';
+import React, { useState } from "react";
+import Button from "@mui/material/Button";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { EditUserControlModal } from "./Users/AddUserControlModal";
+import { useDeleteUserControl } from "../../../hooks/auth/userControl/useUserControl";
+import DeleteConfirmationModal from "../../../components/Modal/DeleteConfirmationModal";
+import { useNavigate } from "react-router-dom";
 
 const UserControlAction = ({ rowData }) => {
+  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
@@ -46,33 +48,38 @@ const UserControlAction = ({ rowData }) => {
     handleClose();
   };
 
+  const handleViewEmailLog = () => {
+    navigate(`/admin/email-log-id`, { state: { rowData } });
+  };
+
   return (
     <div>
       <Button
-        id='basic-button'
-        aria-controls={open ? 'basic-menu' : undefined}
-        aria-haspopup='true'
-        aria-expanded={open ? 'true' : undefined}
+        id="basic-button"
+        aria-controls={open ? "basic-menu" : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
       >
         <MoreVertIcon />
       </Button>
       <Menu
-        id='basic-menu'
+        id="basic-menu"
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
         MenuListProps={{
-          'aria-labelledby': 'basic-button',
+          "aria-labelledby": "basic-button",
         }}
       >
         <MenuItem onClick={handleEditButton}>Edit</MenuItem>
         <MenuItem onClick={handleDeleteButton}>Deactivate</MenuItem>
+        <MenuItem onClick={handleViewEmailLog}>View Email Log</MenuItem>
       </Menu>
 
       {isEditModalOpen && (
         <EditUserControlModal
-          title={'Edit Role'}
+          title={"Edit Role"}
           rowData={rowData}
           open={isEditModalOpen}
           handleCloseModal={handleCloseEditModal}
@@ -83,7 +90,7 @@ const UserControlAction = ({ rowData }) => {
           open={openDeleteModal}
           handleCloseModal={handleCloseDeleteModal}
           handleConfirmDelete={handleConfirmDelete}
-          message={'User'}
+          message={"User"}
         />
       )}
     </div>
