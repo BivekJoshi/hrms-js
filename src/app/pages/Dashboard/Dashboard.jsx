@@ -12,7 +12,7 @@ import { EmployPichart } from "../EmployeePage/Component/EmployPichart";
 
 const Dashboard = () => {
   const { mode } = useContext(ThemeModeContext);
-  const { data, isLoading } = useDashBoardSearch();
+  const { data: dashboardData, isLoading } = useDashBoardSearch();
   const { data: loggedUserData } = useGetLoggedInUser();
   const url = DOC_URL;
 
@@ -90,7 +90,7 @@ const Dashboard = () => {
             // rowSpacing={1}
             gap={{ sm: "12px", lg: "32px" }}
           >
-            <DashboardCard data={data} />
+            <DashboardCard data={dashboardData} />
           </Grid>
         </div>
 
@@ -99,7 +99,7 @@ const Dashboard = () => {
             <Typography variant="h5" sx={{ marginBottom: "16px" }}>
               Employee Information
             </Typography>
-            <BarChatDiagram dashboardData={data} />
+            <BarChatDiagram data={dashboardData} />
           </Grid>
           <Grid item md={6} xs={12}>
             <div>
@@ -113,10 +113,10 @@ const Dashboard = () => {
                 boxShadow="0 4px 8px 3px rgba(0,0,0,.15), 0 1px 3px rgba(0,0,0,.3)"
               >
                 <Typography variant="v6">
-                  Total Project : {data?.projectInfo?.total || "0"}
+                  Total Project : {dashboardData?.projectInfo?.total || "0"}
                 </Typography>
                 <div style={{ marginTop: "16px" }}>
-                  <ProjectProgressCard projectDataCount={data} />
+                  <ProjectProgressCard projectDataCount={dashboardData} />
                 </div>
               </Grid>
             </div>
@@ -131,7 +131,7 @@ const Dashboard = () => {
               padding="1rem "
               boxShadow="0 4px 8px 3px rgba(0,0,0,.15), 0 1px 3px rgba(0,0,0,.3)"
             >
-              <EmployPichart data={data?.employeeCountPerDepartment} />
+              <EmployPichart data={dashboardData?.employeeCountPerDepartment} />
             </Grid>
           </Grid>
           <Grid item md={6} xs={12}>
@@ -144,7 +144,7 @@ const Dashboard = () => {
               padding="1rem "
               boxShadow="0 4px 8px 3px rgba(0,0,0,.15), 0 1px 3px rgba(0,0,0,.3)"
             >
-              <EmployPichart data={data?.employeeCountPerEmpType} />
+              <EmployPichart data={dashboardData?.employeeCountPerEmpType} />
             </Grid>
           </Grid>
         </Grid>
