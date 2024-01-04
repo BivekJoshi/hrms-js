@@ -56,9 +56,6 @@ export const useAddTrainingDetail = ({ onSuccess }) => {
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries('getTrainingByEmpId');
       },
-      onError: (err, _variables, _context) => {
-        toast.error(`error: ${err.message}`);
-      },
     }
   );
 };
@@ -75,9 +72,6 @@ export const useDeleteTraining = ({ onSuccess }) => {
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries('getTrainingByEmpId');
       },
-      onError: (err, _variables, _context) => {
-        toast.error(`Error: ${err.message}`);
-      },
     }
   );
 };
@@ -93,9 +87,6 @@ export const useEditTraining = ({ onSuccess, empId }) => {
         toast.success('Successfully edited Employee Training');
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries('getTrainingByEmpId');
-      },
-      onError: (err, _variables, _context) => {
-        toast.error(`Error: ${err.message}`);
       },
     }
   );

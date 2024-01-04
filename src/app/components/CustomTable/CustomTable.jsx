@@ -3,6 +3,7 @@ import React, { useContext } from "react";
 import ThemeModeContext from "../../../theme/ThemeModeContext";
 import tableIcons from "../../../theme/overrides/TableIcon";
 import { exportExcel } from "../../utils/ExportExcel";
+import { pdfExport } from "../../utils/tablepdfExport";
 
 const CustomTable = (props) => {
   const { palette } = useContext(ThemeModeContext); // Accessing mode from context
@@ -80,7 +81,20 @@ const CustomTable = (props) => {
           pageSize: props?.pageSize || 10,
           emptyRowsWhenPaging: props?.emptyRowsWhenPaging || false,
           exportButton: props?.exportButton || false,
-
+          exportPdf: (columns, data) =>
+            new Promise((resolve, reject) => {
+              pdfExport(
+                columns,
+                data,
+                props.title,
+                props.fileName,
+                props.additionalLeft,
+                props.additionalRight,
+                "landscape",
+                resolve,
+                reject
+              );
+            }),
           exportCsv: (columns, data) =>
             props.exportExcel &&
             exportExcel(

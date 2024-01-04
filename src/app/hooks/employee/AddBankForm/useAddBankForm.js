@@ -17,6 +17,7 @@ const useAddBankForm = () => {
     initialValues: {
       id: bankDetails?.id || '',
       bankName: bankDetails?.bankName || '',
+      bankBranch: bankDetails?.bankBranch || '',
       bankAddress: bankDetails?.bankAddress || '',
       bankAccountNumber: bankDetails?.bankAccountNumber || '',
     },

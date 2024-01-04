@@ -1,5 +1,5 @@
-import { useMutation, useQuery, useQueryClient } from "react-query";
-import { toast } from "react-toastify";
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { toast } from 'react-toastify';
 import {
   addLeaveByAdmin,
   addleave,
@@ -14,12 +14,12 @@ import {
   getleave,
   getleaveOfUser,
   getpendingleave,
-} from "../../api/leave/leave-api";
+} from '../../api/leave/leave-api';
 import { useNavigate } from 'react-router-dom';
 
 /*________________________GET ALL_____________________________________*/
 export const useGetleaveOfUser = () => {
-  return useQuery(["getLeave"], () => getleaveOfUser(), {
+  return useQuery(['getLeave'], () => getleaveOfUser(), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
@@ -27,7 +27,7 @@ export const useGetleaveOfUser = () => {
 
 /*________________________GET ALL_____________________________________*/
 export const useGetLeave = () => {
-  return useQuery(["getleaveOfUser"], () => getleave(), {
+  return useQuery(['getleaveOfUser'], () => getleave(), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
@@ -35,7 +35,7 @@ export const useGetLeave = () => {
 
 /*________________________GET PENDING LEAVE_____________________________________*/
 export const useGetPendingLeave = () => {
-  return useQuery(["getpendingleave"], () => getpendingleave(), {
+  return useQuery(['getpendingleave'], () => getpendingleave(), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
@@ -43,7 +43,7 @@ export const useGetPendingLeave = () => {
 
 /*________________________GET LOGGED IN USER LEAVE_____________________________________*/
 export const useGetLoggedInUserLeave = () => {
-  return useQuery(["getLoggedInUserLeave"], () => getLoggedInUserLeave(), {
+  return useQuery(['getLoggedInUserLeave'], () => getLoggedInUserLeave(), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
@@ -52,7 +52,7 @@ export const useGetLoggedInUserLeave = () => {
 /*________________________GET LEAVE OF LOGGED IN USER LEAVE BALANCE_____________________________________*/
 export const useGetLoggedInUserLeaveBalance = () => {
   return useQuery(
-    ["getLoggedInUserLeaveBalance"],
+    ['getLoggedInUserLeaveBalance'],
     () => getLoggedInUserLeaveBalance(),
     {
       refetchInterval: false,
@@ -63,7 +63,7 @@ export const useGetLoggedInUserLeaveBalance = () => {
 
 /*________________________GET BY LEAVE ID_____________________________________*/
 export const useGetLeaveById = (id) => {
-  return useQuery(["getLeaveById", id], () => getLeaveById(id), {
+  return useQuery(['getLeaveById', id], () => getLeaveById(id), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
@@ -72,7 +72,7 @@ export const useGetLeaveById = (id) => {
 /*________________________GET EMPLOYEE LEAVE BY ID_____________________________________*/
 export const useGetEmployeeLeaveById = (id) => {
   return useQuery(
-    ["getEmployeeLeaveById", id],
+    ['getEmployeeLeaveById', id],
     () => getEmployeeLeaveById(id),
     {
       refetchInterval: false,
@@ -85,16 +85,13 @@ export const useGetEmployeeLeaveById = (id) => {
 export const useAddLeaveByAdmin = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   const mutation = useMutation(
-    ["addLeaveByAdmin"],
+    ['addLeaveByAdmin'],
     (formData) => addLeaveByAdmin(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success("Succesfully added Leave");
+        toast.success('Succesfully added Leave');
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries("getLeave");
-      },
-      onError: (err, _variables, _context) => {
-        toast.error(`error: ${err.message}`);
+        queryClient.invalidateQueries('getLeave');
       },
     }
   );
@@ -110,12 +107,12 @@ export const useAddLeaveByAdmin = ({ onSuccess }) => {
 export const useAddLeave = ({ onSuccess }) => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  return useMutation(["addLeave"], (formData) => addleave(formData), {
+  return useMutation(['addLeave'], (formData) => addleave(formData), {
     onSuccess: (data, variables, context) => {
-      toast.success("Succesfully added Leave");
+      toast.success('Succesfully added Leave');
       navigate('/employee/leave');
       onSuccess && onSuccess(data, variables, context);
-      queryClient.invalidateQueries("useGetLoggedInUserLeave");
+      queryClient.invalidateQueries('useGetLoggedInUserLeave');
     },
     onError: (err, _variables, _context) => {
       toast.error(`error: ${err.message}`);
@@ -126,11 +123,11 @@ export const useAddLeave = ({ onSuccess }) => {
 /*________________________DELETE_____________________________________*/
 export const useDeleteLeave = ({ onSuccess }) => {
   const queryClient = useQueryClient();
-  return useMutation(["deleteLeave"], (leaveId) => deleteLeave(leaveId), {
+  return useMutation(['deleteLeave'], (leaveId) => deleteLeave(leaveId), {
     onSuccess: (data, variables, context) => {
-      toast.success("Successfully deleted Leave");
+      toast.success('Successfully deleted Leave');
       onSuccess && onSuccess(data, variables, context);
-      queryClient.invalidateQueries("getLoggedInUserLeave");
+      queryClient.invalidateQueries('getLoggedInUserLeave');
     },
     onError: (err, _variables, _context) => {
       toast.error(`Error: ${err.message}`);
@@ -141,11 +138,11 @@ export const useDeleteLeave = ({ onSuccess }) => {
 /*________________________DELETE FOR ADMIN_____________________________________*/
 export const useDeleteLeaveAdmin = ({ onSuccess }) => {
   const queryClient = useQueryClient();
-  return useMutation(["deleteLeave"], (leaveId) => deleteLeave(leaveId), {
+  return useMutation(['deleteLeave'], (leaveId) => deleteLeave(leaveId), {
     onSuccess: (data, variables, context) => {
-      toast.success("Successfully deleted Leave");
+      toast.success('Successfully deleted Leave');
       onSuccess && onSuccess(data, variables, context);
-      queryClient.invalidateQueries("getLeave");
+      queryClient.invalidateQueries('getLeave');
     },
     onError: (err, _variables, _context) => {
       toast.error(`Error: ${err.message}`);
@@ -157,12 +154,12 @@ export const useDeleteLeaveAdmin = ({ onSuccess }) => {
 export const useEditLeave = ({ onSuccess }) => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  return useMutation(["editLeave"], (formData) => editLeave(formData), {
+  return useMutation(['editLeave'], (formData) => editLeave(formData), {
     onSuccess: (data, variables, context) => {
-      toast.success("Successfully edited Leave");
+      toast.success('Successfully edited Leave');
       navigate('/employee/leave');
       onSuccess && onSuccess(data, variables, context);
-      queryClient.invalidateQueries("getLoggedInUserLeave");
+      queryClient.invalidateQueries('getLoggedInUserLeave');
     },
     onError: (err, _variables, _context) => {
       toast.error(`Error: ${err.message}`);
@@ -174,16 +171,13 @@ export const useEditLeave = ({ onSuccess }) => {
 export const useEditLeaveByAdmin = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(
-    ["editLeaveByAdmin"],
+    ['editLeaveByAdmin'],
     (formData) => editLeaveByAdmin(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success("Successfully edited Leave");
+        toast.success('Successfully edited Leave');
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries("getLeave");
-      },
-      onError: (err, _variables, _context) => {
-        toast.error(`Error: ${err.message}`);
+        queryClient.invalidateQueries('getLeave');
       },
     }
   );
@@ -193,16 +187,13 @@ export const useEditLeaveByAdmin = ({ onSuccess }) => {
 export const useEditLeaveStatusByAdmin = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   const mutation = useMutation(
-    ["editLeaveByAdmin"],
+    ['editLeaveByAdmin'],
     (formData) => editLeaveStatusByAdmin(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success("Successfully edited Leave");
+        toast.success('Successfully edited Leave');
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries("getLeave");
-      },
-      onError: (err, _variables, _context) => {
-        toast.error(`Error: ${err.message}`);
+        queryClient.invalidateQueries('getLeave');
       },
     }
   );

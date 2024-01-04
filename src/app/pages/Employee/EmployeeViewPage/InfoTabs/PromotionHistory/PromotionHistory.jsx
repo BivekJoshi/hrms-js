@@ -1,15 +1,10 @@
 import React from "react";
 import { useGetPromotionHistory } from "../../../../../hooks/promotionHistory/usePromotionHistory";
-import { useParams } from "react-router-dom";
 import { Box, Button } from "@mui/material";
 import { AddPromotionHistory } from "./PromotionHistoryModal";
 import { useState } from "react";
 import "../../EmployProfile/Style/Style.css";
-import { useGetDesignation } from "../../../../../hooks/designation/useDesignation";
-import useAuth from "../../../../../../auth/hooks/component/login/useAuth";
-import { useGetLoggedInUserInfo } from "../../../../../hooks/employee/useEmployee";
 import CustomTable from "../../../../../components/CustomTable/CustomTable";
-// import { positions } from "@mui/system";
 
 const PromotionHistory = ({ data, role }) => {
   const [openAddModal, setOpenAddModal] = useState(false);
@@ -19,37 +14,6 @@ const PromotionHistory = ({ data, role }) => {
   const { data: PromotionHistory, isLoading } = useGetPromotionHistory(
     data?.id
   );
-  const { data: designationData, isLoading: loadingDesignation } =
-    useGetDesignation();
-
-  // const { isSuperAdmin, isAdmin, isHr, isEmployee, isHrAdmin, isManager } =
-  //   useAuth();
-  // const { data: loggedInUserData, isLoading: isLoadingUserData } = isEmployee
-  //   ? useGetLoggedInUserInfo()
-  //   : {};
-  // const { id } = useParams();
-  // const { data: PromotionHistory, isLoading } =
-  //   isSuperAdmin || isAdmin || isHr || isHrAdmin || isManager
-  //     ? useGetPromotionHistory(id)
-  //     : useGetPromotionHistory(loggedInUserData?.id);
-
-  // const { data: trainingData } = useGetTrainingByEmpId(id);
-
-  // const [openAddModal, setOpenAddModal] = useState(false);
-
-  // const handleAddOpenModal = () => setOpenAddModal(true);
-  // const handleCloseAddModal = () => setOpenAddModal(false);
-
-  // const mappedPromotionHistory = PromotionHistory?.map((item) => {
-  //   const position = designationData?.find((pos) => pos.id === item.positionId);
-  //   const positionName = `${position?.positionName || '-'} (${
-  //     position?.positionLevel || '-'
-  //   })`;
-  //   return {
-  //     ...item,
-  //     positionId: positionName,
-  //   };
-  // });
 
   const columns = [
     {
@@ -100,7 +64,7 @@ const PromotionHistory = ({ data, role }) => {
             }}
           >
             {rowData.isLastPosition === true ? (
-              <span style={{ color: "green", fontSize:"1.2rem" }}>✔</span>
+              <span style={{ color: "green", fontSize: "1.2rem" }}>✔</span>
             ) : (
               <span style={{ color: "red" }}>✕</span>
             )}
@@ -119,29 +83,36 @@ const PromotionHistory = ({ data, role }) => {
           paddingBottom: "10px",
         }}
       >
-        {role && (
-          <Button
-            variant="contained"
-            sx={{ mt: 3, ml: 1 }}
-            onClick={handleAddOpenModal}
-          >
-            Change Position
-          </Button>
-        )}
+        {isLoading
+          ? ""
+          : role && (
+              <Button
+                variant="contained"
+                sx={{ mt: 3, ml: 1 }}
+                onClick={handleAddOpenModal}
+              >
+                {PromotionHistory?.length !== 0
+                  ? " Change Position"
+                  : "Add Position"}
+              </Button>
+            )}
       </Box>
 
       <CustomTable
         columns={columns}
         data={PromotionHistory}
         title="Position History"
-        isLoading={isLoading || loadingDesignation}
+        isLoading={isLoading}
       />
 
       {openAddModal && (
         <AddPromotionHistory
-          title={"Add Position"}
+          title={
+            PromotionHistory?.length !== 0 ? " Change Position" : "Add Position"
+          }
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
+          PromotionHistory={PromotionHistory}
         />
       )}
     </Box>

@@ -1,16 +1,16 @@
-import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import {
   addEmployeeDeviceMappingById,
   getEmployeeDeviceMappingById,
-} from "../../api/employeeMapping/employeeMappingApi";
-import { toast } from "react-toastify";
+} from '../../api/employeeMapping/employeeMappingApi';
+import { toast } from 'react-toastify';
 
 {
   /*________________________GET_____________________________________*/
 }
 export const useGetEmployeeDeviceMappingById = () => {
   return useQuery(
-    ["getEmployeeDeviceMappingById"],
+    ['getEmployeeDeviceMappingById'],
     () => getEmployeeDeviceMappingById(),
     {
       refetchInterval: false,
@@ -23,17 +23,14 @@ export const useGetEmployeeDeviceMappingById = () => {
 export const useAddEmployeeDeviceMappingById = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(
-    ["addEmployeeDeviceMappingById"],
-    (formData) => addEmployeeDeviceMappingById(formData ),
-    
+    ['addEmployeeDeviceMappingById'],
+    (formData) => addEmployeeDeviceMappingById(formData),
+
     {
       onSuccess: (data, variables, context) => {
-        toast.success("Successfully Send Mail");
+        toast.success('Successfully Send Mail');
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries("getEmployeeDeviceMappingById");
-      },
-      onError: (err, _variables, _context) => {
-        toast.error(`Error: ${err.message}`);
+        queryClient.invalidateQueries('getEmployeeDeviceMappingById');
       },
     }
   );

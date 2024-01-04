@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import {
   getUserControl,
   getUserControlById,
@@ -6,14 +6,14 @@ import {
   getUserRole,
   editUserControlRoleSetting,
   deleteUser,
-} from "../../../api/auth/userControl/userControl-api";
-import { toast } from "react-toastify";
+} from '../../../api/auth/userControl/userControl-api';
+import { toast } from 'react-toastify';
 
 {
   /*________________________GET_____________________________________*/
 }
 export const useGetUserControl = () => {
-  return useQuery(["getUserControl"], () => getUserControl(), {
+  return useQuery(['getUserControl'], () => getUserControl(), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
@@ -21,7 +21,7 @@ export const useGetUserControl = () => {
 
 /*________________________GET-USER-BY-ID_____________________________________*/
 export const useGetUserControlById = (id) => {
-  return useQuery(["getUserControl", id], () => getUserControlById(id), {
+  return useQuery(['getUserControl', id], () => getUserControlById(id), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
@@ -31,13 +31,13 @@ export const useGetUserControlById = (id) => {
 export const useAddUserControl = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(
-    ["addUserControl"],
+    ['addUserControl'],
     (formData) => addUserControl(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success("User added Successfully");
+        toast.success('User added Successfully');
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries("getUserControl");
+        queryClient.invalidateQueries('getUserControl');
       },
       onError: (err, _variables, _context) => {
         // toast.error(`error: ${err.message}`);
@@ -50,29 +50,26 @@ export const useAddUserControl = ({ onSuccess }) => {
 export const useEditUserControl = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(
-    ["editUserControlRoleSetting"],
+    ['editUserControlRoleSetting'],
     (formData) => editUserControlRoleSetting(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success("Successfully edited user");
+        toast.success('Successfully edited user');
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries("getUserControl");
-      },
-      onError: (err, _variables, _context) => {
-        toast.error(`Error: ${err.message}`);
+        queryClient.invalidateQueries('getUserControl');
       },
     }
   );
 };
 
 /*________________________DELETE_____________________________________*/
-export const useDeleteUserControl = ({ onSuccess ,rowData}) => {
+export const useDeleteUserControl = ({ onSuccess, rowData }) => {
   const queryClient = useQueryClient();
-  return useMutation(["deleteUserControl"], (id) => deleteUser(rowData?.id), {
+  return useMutation(['deleteUserControl'], (id) => deleteUser(rowData?.id), {
     onSuccess: (data, variables, context) => {
-      toast.success("Successfully deleted user");
+      toast.success('Successfully deleted user');
       onSuccess && onSuccess(data, variables, context);
-      queryClient.invalidateQueries("getUserControl");
+      queryClient.invalidateQueries('getUserControl');
     },
     onError: (err, _variables, _context) => {
       toast.error(`Error: ${err.message}`);
@@ -80,16 +77,16 @@ export const useDeleteUserControl = ({ onSuccess ,rowData}) => {
   });
 };
 
+{
+  /*____________________________ROLE-API____________________________________________*/
+}
 
-
-
-{/*____________________________ROLE-API____________________________________________*/}
-
-
-  {/*____________________________GET-USER____________________________________________*/}
-  export const useGetUserRole = () => {
-    return useQuery(["getUserRole"], () => getUserRole(), {
-      refetchInterval: false,
-      refetchOnWindowFocus: false,
-    });
-  };
+{
+  /*____________________________GET-USER____________________________________________*/
+}
+export const useGetUserRole = () => {
+  return useQuery(['getUserRole'], () => getUserRole(), {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
+};

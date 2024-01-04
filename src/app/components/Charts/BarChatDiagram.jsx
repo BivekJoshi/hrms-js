@@ -2,20 +2,21 @@ import React, { useContext } from "react";
 import ReactApexChart from "react-apexcharts";
 import { Box } from "@mui/material";
 import ThemeModeContext from "../../../theme/ThemeModeContext";
+import "./Style/Style.css"
 
-const BarChatDiagram = ({ data }) => {
+const BarChatDiagram = ({ dashboardData }) => {
   const { mode, palette } = useContext(ThemeModeContext);
   const names = [
     "All Employees",
-    "New Employees",
+    "New Employees", 
     "Male Employees",
     "Female Employees",
   ];
   const Data = [
-    `${data?.employeeInfo?.allEmployee}`,
-    `${data?.employeeInfo?.newEmployee}`,
-    `${data?.employeeInfo?.maleEmployee}`,
-    `${data?.employeeInfo?.femaleEmployee}`,
+    `${dashboardData?.allEmployee}`,
+    `${dashboardData?.newEmployee}`,
+    `${dashboardData?.maleEmployee}`,
+    `${dashboardData?.femaleEmployee}`,
   ];
   const barColors = ["#F65E3C", "#A1E000", "#9137B8", "#D93084"];
 

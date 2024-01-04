@@ -81,10 +81,16 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                             placeholder="Enter province"
                             fullWidth
                             value={address.province}
-                            onChange={(event) => {
+                            onChange={(event, value) => {
                               formik.handleChange(event);
-                              formik.setFieldValue(`addresses[${index}].district`,"");
-                              formik.setFieldValue(`addresses[${index}].municipality`,"");
+                              formik.setFieldValue(
+                                `addresses[${index}].district`,
+                                null
+                              );
+                              formik.setFieldValue(
+                                `addresses[${index}].municipality`,
+                                null
+                              );
                             }}
                             error={
                               formik.touched.addresses?.[index]?.province &&
@@ -121,6 +127,10 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                               formik.setFieldValue(
                                 `addresses[${index}].district`,
                                 newValue?.name || ""
+                              );
+                              formik.setFieldValue(
+                                `addresses[${index}].municipality`,
+                                ""
                               );
                             }}
                             renderInput={(params) => (
@@ -311,10 +321,16 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                               placeholder="Enter province"
                               fullWidth
                               value={address.province}
-                              onChange={(event) => {
+                              onChange={(event, value) => {
                                 formik.handleChange(event);
-                                formik.setFieldValue(`addresses[${index}].district`,"");
-                                formik.setFieldValue(`addresses[${index}].municipality`,"");
+                                formik.setFieldValue(
+                                  `addresses[${index}].district`,
+                                  null
+                                );
+                                formik.setFieldValue(
+                                  `addresses[${index}].municipality`,
+                                  null
+                                );
                               }}
                               error={
                                 formik.touched.addresses?.[index]?.province &&
