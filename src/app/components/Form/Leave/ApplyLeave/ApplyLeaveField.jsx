@@ -1,20 +1,10 @@
-import {
-  Autocomplete,
-  Button,
-  Divider,
-  Grid,
-  TextField,
-  Typography,
-  Tab,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
-} from "@mui/material";
+import { Autocomplete, Button, Divider, Grid, TextField } from "@mui/material";
+import { Typography, Tab, RadioGroup } from "@mui/material";
+import { FormControlLabel, Radio } from "@mui/material";
 import React, { useState } from "react";
 import { useGetLeaveType } from "../../../../hooks/leaveType/useLeaveType";
 import useApplyLeaveForm from "../../../../hooks/leave/LeaveForm/useApplyLeaveForm";
-import { useGetLeaveById } from "../../../../hooks/leave/useLeave";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 
 const ApplyLeaveField = () => {
@@ -44,9 +34,9 @@ const ApplyLeaveField = () => {
   return (
     <>
       <Typography variant="h6">
-        <b>Leave Type</b>
+        <b>Apply Leave</b>
       </Typography>
-      <Divider />
+      <Divider sx={{ mb: "1rem" }} />
       <Grid container spacing={1}>
         <Grid item xs={12} sm={6}>
           Leave Type
@@ -192,11 +182,15 @@ const DateInput = ({ formik, isHalfDay, isMultipleDays }) => {
     const fromDateValue = e.target.value;
     formik.handleChange(e);
     formik.setFieldValue("toDate", fromDateValue);
-    formik.setFieldValue("halfLeaveType", null);
+    // formik.setFieldValue("halfLeaveType", fromDateValue);
     if (isHalfDay) {
       formik.setFieldValue("isHalfDay", true);
       formik.setFieldValue("halfLeaveType", halfType);
     }
+  };
+  const handleHalfTypeChange = (e) => {
+    setHalfType(e.target.value);
+    formik.setFieldValue("halfLeaveType", e.target.value);
   };
   const currentDate = new Date().toISOString().split("T")[0];
   return (
@@ -246,7 +240,7 @@ const DateInput = ({ formik, isHalfDay, isMultipleDays }) => {
             aria-labelledby="demo-row-radio-buttons-group-label"
             name="halfLeaveType"
             value={formik.values.halfLeaveType || "FIRST_HALF"}
-            onChange={formik.handleChange}
+            onChange={handleHalfTypeChange}
             style={{ display: "flex", marginTop: "0.6rem" }}
           >
             <FormControlLabel
