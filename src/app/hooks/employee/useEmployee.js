@@ -64,12 +64,12 @@ export const useEditEmployee = ({ onSuccess }) => {
     },
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Employee edited successfully');
         onSuccess && onSuccess(data, variables, context);
+        if (data) {
+          toast.success('Employee edited successfully');
+        }
+
         queryClient.invalidateQueries('getEmployeeById');
-      },
-      onError: (err, _variables, _context) => {
-        toast.error(`error: ${err.message}`);
       },
     }
   );
