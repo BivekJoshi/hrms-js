@@ -100,7 +100,7 @@ const OfficeResource = ({ permissions }) => {
         </Typography>
       ),
       emptyValue: "-",
-      width: "12rem",
+      width: "18rem",
       sorting: false,
     },
   ];

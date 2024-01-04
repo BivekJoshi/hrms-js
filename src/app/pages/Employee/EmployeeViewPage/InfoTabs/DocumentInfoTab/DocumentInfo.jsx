@@ -75,6 +75,11 @@ const documentName = [
     label: 'Other Document',
     value: 'OTHER_DOCUMENT',
   },
+  {
+    id: 12,
+    label: 'Other Document',
+    value: 'OTHER_DOCUMENT',
+  },
 ];
 const DocumentInfo = ({ data, role }) => {
   // const { data: loggedInUserData, isLoading: isLoadingUserData } = isEmp ? useGetLoggedInUserInfo() : {};
