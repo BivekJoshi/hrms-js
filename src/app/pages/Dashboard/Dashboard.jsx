@@ -121,7 +121,7 @@ const Dashboard = () => {
               </Grid>
             </div>
           </Grid>
-          {/* <Grid item md={6} xs={12}>
+          <Grid item md={6} xs={12}>
             <Typography variant="h5" sx={{ marginBottom: "16px" }}>
               Employee Count Per Department
             </Typography>
@@ -146,7 +146,7 @@ const Dashboard = () => {
             >
               <EmployPichart employeeCountPerEmpType={data?.employeeCountPerEmpType} />
             </Grid>
-          </Grid> */}
+          </Grid>
         </Grid>
       </Box>
     </>
