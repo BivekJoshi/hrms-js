@@ -218,7 +218,7 @@ const routes = [
     component: <TodoList component='todos' />,
   },
   {
-    path: 'leave',
+    path: 'leaveHistory',
     name: 'Apply Leave',
     id: nanoid(),
     component: <ApplyLeaveLayout />,

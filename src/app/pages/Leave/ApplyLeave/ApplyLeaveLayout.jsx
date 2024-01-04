@@ -11,7 +11,6 @@ import LeaveUserView from "../LeaveUserView";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
 import { useGetLoggedInUserLeave } from "../../../hooks/leave/useLeave";
 import EditIcon from "@mui/icons-material/Edit";
-import useApplyLeaveForm from "../../../hooks/leave/LeaveForm/useApplyLeaveForm";
 
 const fabStyle = {
   position: "fixed",
@@ -65,7 +64,6 @@ const formattedDate = `${dayWithOrdinal(today.getDate())} ${
 const ApplyLeaveLayout = () => {
   const { data: leaveData, isLoading } = useGetLoggedInUserLeave();
   const navigate = useNavigate();
-  const { formik: applyLeaveFormik } = useApplyLeaveForm();
 
   const { mode } = React.useContext(ThemeModeContext);
 
@@ -151,14 +149,14 @@ const ApplyLeaveLayout = () => {
       <Grid item xs={12}>
         <LeaveUserView data={leaveData} isLoading={isLoading} />
       </Grid>
-      <Fab
+      {/* <Fab
         color="secondary"
         aria-label="add"
         style={fabStyle}
         onClick={() => navigate(`/employee/applyleavefield`)}
       >
         <AddIcon />
-      </Fab>
+      </Fab> */}
     </Box>
   );
 };

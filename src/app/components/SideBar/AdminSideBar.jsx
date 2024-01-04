@@ -46,6 +46,8 @@ import SmallLogo from "../../../assets/smallLogo.png";
 import { useGetLoggedInUser } from "../../hooks/auth/usePassword";
 import BreadCrumbs from "../../../routes/routes";
 import PeopleIcon from "@mui/icons-material/People";
+import HistoryIcon from '@mui/icons-material/History';
+
 const drawerWidth = 260;
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
@@ -347,8 +349,18 @@ export default function AdminSidebar() {
       subMenus: [],
     },
     {
+      name: "Leave History",
+      path: "leaveHistory",
+      icon: (
+        <HistoryIcon
+          sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
+        />
+      ),
+      subMenus: [],
+    },
+    {
       name: "Apply Leave",
-      path: "leave",
+      path: "applyleavefield",
       icon: (
         <ApprovalOutlinedIcon
           sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
@@ -554,13 +566,6 @@ export default function AdminSidebar() {
           >
             Logout
           </Button>
-          {/* <Typography
-            variant='body2'
-            sx={{ marginRight: '8px', marginTop: '1rem' }}
-          >
-            {mode === 'light' ? 'Dark' : 'Light'} Mode
-            <Switch checked={mode === 'dark'} onChange={toggleMode} />
-          </Typography> */}
         </Box>
       </Drawer>
 
