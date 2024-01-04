@@ -31,10 +31,10 @@ const checkIfExpired = (token) => {
 };
 
 const navigateOnError = () => {
-  if (envType === 'developement') {
+  if (envType === 'development') {
     return window.location.replace('/#');
   } else {
-    return window.location.replace('/hrms/index.html#');
+    return window.location.replace('/hrms/index.html#/');
   }
 };
 
