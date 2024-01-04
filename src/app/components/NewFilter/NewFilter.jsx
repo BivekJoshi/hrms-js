@@ -23,13 +23,11 @@ const NewFilter = ({ inputField, searchCallBack, validate }) => {
   }, {});
 
   const handleFilterButtonClick = () => {
-    setShowFilter((val) => !val);
+    // setShowFilter((val) => !val);
   };
 
-  const handleSearch = (values) => {
-    if (Object.keys(values).length > 0) {
-      searchCallBack(values);
-    }
+  const handleSearch = async (values) => {
+    searchCallBack(values);
   };
 
   const getComponentToRender = (element, setFieldValue, formikProps) => {
@@ -40,6 +38,11 @@ const NewFilter = ({ inputField, searchCallBack, validate }) => {
             name={element?.name}
             getOptionLabel={(option) => option.label}
             options={element?.options}
+            value={
+              element?.options.find(
+                (option) => option.id === formikProps?.values?.[element.name]
+              ) || null
+            }
             renderInput={(params) => (
               <TextField
                 {...params}
@@ -49,7 +52,7 @@ const NewFilter = ({ inputField, searchCallBack, validate }) => {
                 required={element?.required}
               />
             )}
-            onChange={(e, value) => setFieldValue(element.name, value.id)}
+            onChange={(e, value) => setFieldValue(element.name, value?.id)}
           />
         );
       case "autoCompleteLabel":
@@ -57,6 +60,11 @@ const NewFilter = ({ inputField, searchCallBack, validate }) => {
           <Autocomplete
             name={element?.name}
             getOptionLabel={(option) => option.label}
+            value={
+              element?.options.find(
+                (option) => option.id === formikProps?.values?.[element.name]
+              ) || null
+            }
             options={element?.options}
             renderInput={(params) => (
               <TextField
@@ -66,7 +74,7 @@ const NewFilter = ({ inputField, searchCallBack, validate }) => {
                 placeholder={element?.placeholder}
               />
             )}
-            onChange={(e, value) => setFieldValue(element.name, value.label)}
+            onChange={(e, value) => setFieldValue(element.name, value?.label)}
           />
         );
       case "dropDownId":
