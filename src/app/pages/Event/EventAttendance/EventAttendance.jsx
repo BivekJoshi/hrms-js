@@ -19,6 +19,7 @@ const EventAttendance = ({ permissions }) => {
   const columns = [
     {
       title: "SN",
+      field: "tableData.id",
       render: (rowData) => rowData.tableData.id + 1,
       width: "3%",
       sortable: false,
@@ -30,13 +31,6 @@ const EventAttendance = ({ permissions }) => {
       field: "userName",
       emptyValue: "-",
       width: "20vh",
-      sorting: false,
-    },
-    {
-      title: "Branch",
-      field: "branch",
-      emptyValue: "-",
-      sortable: false,
       sorting: false,
     },
     {
@@ -117,6 +111,7 @@ const EventAttendance = ({ permissions }) => {
     {
       title: "Attended",
       field: "isPresent",
+      width: "4rem",
       render: (rowData) => {
         if (rowData?.isPresent) {
           return (
@@ -238,12 +233,14 @@ const EventAttendance = ({ permissions }) => {
       <CustomTable
         columns={getColumns(columns, searchParams)}
         data={tableData}
-        title="Event Attendance Data"
+        title="Event Attendance Report"
         isLoading={isLoading}
         additionalLeft={additionalLeft}
         additionalRight={additionalRight}
+        fileName="Event Report"
         actions={actions}
         exportButton
+        exportExcel
       />
       {openEditModal && (
         <EditEventAttendanceModal
