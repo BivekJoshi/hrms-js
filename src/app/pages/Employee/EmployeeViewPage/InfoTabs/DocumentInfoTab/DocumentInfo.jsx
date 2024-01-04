@@ -77,19 +77,13 @@ const documentName = [
   },
 ];
 const DocumentInfo = ({ data, role }) => {
-  const { data: loggedInUserData, isLoading: isLoadingUserData } = isEmployee
-    ? useGetLoggedInUserInfo()
-    : {};
+  // const { data: loggedInUserData, isLoading: isLoadingUserData } = isEmp ? useGetLoggedInUserInfo() : {};
 
   const { mode } = useContext(ThemeModeContext);
 
   const url = DOC_URL;
-  const { data: getDocument, isLoading } = role
-    ? useGetDocumentById(data?.id)
-    : useGetDocumentById(loggedInUserData?.id);
-  const groupedDocuments = isLoading
-    ? {}
-    : groupBy(getDocument, "documentType");
+  const { data: getDocument, isLoading } = role ? useGetDocumentById(data?.id)  : useGetDocumentById(data?.id);
+  const groupedDocuments = isLoading ? {} : groupBy(getDocument, "documentType");
 
   const [value, setValue] = React.useState("EMPLOYEE_PHOTO");
   const [previewImage, setPreviewImage] = useState(null);

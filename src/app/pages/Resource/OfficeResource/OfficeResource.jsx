@@ -74,7 +74,7 @@ const OfficeResource = ({ permissions }) => {
     {
       title: "SN",
       render: (rowData) => rowData.tableData.id + 1,
-      width: "6rem",
+      width: "2rem",
       sorting: false,
     },
     {
@@ -100,7 +100,7 @@ const OfficeResource = ({ permissions }) => {
         </Typography>
       ),
       emptyValue: "-",
-      width: "18rem",
+      width: "12rem",
       sorting: false,
     },
   ];

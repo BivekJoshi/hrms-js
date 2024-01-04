@@ -17,9 +17,7 @@ const EmployeeHistory = ({data, role}) => {
   //   ? useGetLoggedInUserInfo()
   //   : {};
   const { id } = useParams();
-  const { data: employeeHistory, isLoading } = role  
-      ? useGetEmployeeHistory(id)
-      : useGetEmployeeHistory(data?.id);
+  const { data: employeeHistory, isLoading } = role ? useGetEmployeeHistory(id) : useGetEmployeeHistory(data?.id);
   // const { data: designationData, isLoading: loadingDesignation } =
   //   useGetDesignation();
   // const { data: trainingData } = useGetTrainingByEmpId(id);

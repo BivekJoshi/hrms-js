@@ -48,7 +48,6 @@ const useAddForgotPasswordForm = () => {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-  console.log(formik, "formik")
 
   return {
     formik,

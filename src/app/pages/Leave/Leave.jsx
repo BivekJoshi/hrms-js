@@ -217,25 +217,24 @@ const Leave = ({ permissions }) => {
     {
       title: "Leave Reason",
       field: "leaveReason",
-      width: "15%",
+      width: "120px",
       emptyValue: "-",
       render: (rowData) => {
         return (
-          <div style={{whiteSpace: 'wrap', width:"10rem"}}>
+          <div style={{whiteSpace: 'normal'}}>
             {rowData?.leaveReason}
           </div>
         );
       },
     },
     {
-      title: "Remarks
-      ",
+      title: "Remarks",
       field: "leaveRemarks",
-      width: "15%",
+      width: "120px",
       emptyValue: "-",
       render: (rowData) => {
         return (
-          <div style={{whiteSpace: 'wrap'}}>
+          <div style={{whiteSpace: 'normal'}}>
             {rowData?.leaveRemarks}
           </div>
           // <Tooltip title={rowData?.leaveRemarks} placement="top-start" arrow>

@@ -21,7 +21,7 @@ const EmployeeProfile = () => {
   const { data: userData } = useGetLoggedInUser();
   const empId = userData && userData?.employeeId;
   const isAdmins = isSuperAdmin || isAdmin || isHrAdmin || isHr || isManager;
-   const { data: employeeDataById, isLoading } = isAdmins ? useGetEmployeeById(id) : useGetEmployeeById(empId);
+  const { data: employeeDataById, isLoading } = isAdmins ? useGetEmployeeById(id) : useGetEmployeeById(empId);
   const [showPersonalProfile, setShowPersonalProfile] = useState(true);
   const togglePersonalProfile = () => {setShowPersonalProfile(!showPersonalProfile)};
   // if (isLoading || isLoadingUserData) return <>Loading</>;
