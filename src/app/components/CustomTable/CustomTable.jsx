@@ -2,6 +2,7 @@ import MaterialTable, { MTableToolbar } from "material-table";
 import React, { useContext } from "react";
 import ThemeModeContext from "../../../theme/ThemeModeContext";
 import tableIcons from "../../../theme/overrides/TableIcon";
+import { exportExcel } from "../../utils/ExportExcel";
 
 const CustomTable = (props) => {
   const { palette } = useContext(ThemeModeContext); // Accessing mode from context
@@ -66,6 +67,12 @@ const CustomTable = (props) => {
         data={props?.data}
         title={props?.title}
         isLoading={props?.isLoading}
+        localization={{
+          toolbar: {
+            exportCSVName: props.exportExcel ? "Export Excel" : "Export CSV",
+            exportPDFName: props.pdfNone ? "" : "Export PDF ",
+          },
+        }}
         options={{
           search: props?.search || true,
           tableLayout: props?.tableLayout,
@@ -73,6 +80,16 @@ const CustomTable = (props) => {
           pageSize: props?.pageSize || 10,
           emptyRowsWhenPaging: props?.emptyRowsWhenPaging || false,
           exportButton: props?.exportButton || false,
+
+          exportCsv: (columns, data) =>
+            props.exportExcel &&
+            exportExcel(
+              columns,
+              data,
+              props.fileName,
+              props.additionalLeft,
+              props.additionalRight
+            ),
           headerStyle: {
             backgroundColor: palette?.secondary?.main,
             color: palette?.text?.tableHead,
@@ -106,9 +123,7 @@ const CustomTable = (props) => {
                 <div>
                   <span>{renderAdditionInformationLeft()}</span>
                 </div>
-                <div>
-                  {renderAdditionInformationRight()}
-                </div>
+                <div>{renderAdditionInformationRight()}</div>
               </div>
             </div>
           ),
