@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { useGetBranchHistory } from '../../../../../hooks/branchHistory/useBranchHistory';
-import { Box, Button } from '@mui/material';
-import CustomTable from '../../../../../components/CustomTable/CustomTable';
-import { useGetCompany } from '../../../../../hooks/company/useCompany';
-import { AddBranchHistory } from './BranchInfoModal';
+import React, { useState } from "react";
+import { useGetBranchHistory } from "../../../../../hooks/branchHistory/useBranchHistory";
+import { Box, Button } from "@mui/material";
+import CustomTable from "../../../../../components/CustomTable/CustomTable";
+import { useGetCompany } from "../../../../../hooks/company/useCompany";
+import { AddBranchHistory } from "./BranchInfoModal";
 
 const BranchInfo = ({ data, role }) => {
   const [openAddModal, setOpenAddModal] = useState(false);
@@ -14,57 +14,57 @@ const BranchInfo = ({ data, role }) => {
 
   const columns = [
     {
-      title: 'SN',
+      title: "SN",
       render: (rowData) => rowData.tableData.id + 1,
-      width: '3%',
-      maxWidth: '50px',
+      width: "3%",
+      maxWidth: "50px",
       sortable: false,
       sorting: false,
     },
     {
-      title: 'Branch Name',
-      field: 'branchId',
-      render: (rowData) => rowData?.branch?.branchName || '-',
+      title: "Branch Name",
+      field: "branchId",
+      render: (rowData) => rowData?.branch?.branchName || "-",
       // emptyValue: "-",
       width: 300,
       sorting: false,
     },
     {
-      title: 'Effective From',
-      field: 'effectiveFromDate',
-      emptyValue: '-',
+      title: "Effective From",
+      field: "effectiveFromDate",
+      emptyValue: "-",
       width: 200,
     },
     {
-      title: 'Effective To',
-      field: 'effectiveToDate',
-      emptyValue: '-',
+      title: "Effective To",
+      field: "effectiveToDate",
+      emptyValue: "-",
       width: 200,
     },
     {
-      title: 'Remarks',
-      field: 'remarks',
-      emptyValue: '-',
+      title: "Remarks",
+      field: "remarks",
+      emptyValue: "-",
       width: 200,
     },
     {
-      title: 'Branch Status',
-      field: 'isRecentBranch',
-      emptyValue: '-',
+      title: "Branch Status",
+      field: "isRecentBranch",
+      emptyValue: "-",
       width: 50,
       render: (rowData) => {
         return (
           <div
             style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
             }}
           >
             {rowData?.isRecentBranch ? (
-              <span style={{ color: 'green' }}>✔</span>
+              <span style={{ color: "green" }}>✔</span>
             ) : (
-              <span style={{ color: 'red' }}>✕</span>
+              <span style={{ color: "red" }}>✕</span>
             )}
           </div>
         );
@@ -73,38 +73,47 @@ const BranchInfo = ({ data, role }) => {
   ];
 
   return (
-    <Box className='tableIcon'>
+    <Box className="tableIcon">
       <Box
         sx={{
-          display: 'flex',
-          justifyContent: 'flex-end',
-          paddingBottom: '10px',
+          display: "flex",
+          justifyContent: "flex-end",
+          paddingBottom: "10px",
         }}
       >
-        {role && (
-          <Button
-            variant='contained'
-            sx={{ mt: 3, ml: 1 }}
-            onClick={handleAddOpenModal}
-          >
-            Change Branch
-          </Button>
-        )}
+        {isLoading
+          ? ""
+          : role && (
+              <Button
+                variant="contained"
+                sx={{ mt: 3, ml: 1 }}
+                onClick={handleAddOpenModal}
+              >
+                {branchHistoryData?.length !== 0
+                  ? "Change Branch"
+                  : "Add Branch"}
+              </Button>
+            )}
       </Box>
 
       <CustomTable
         columns={columns}
         data={branchHistoryData}
-        title='Branch History'
+        title="Branch History"
         isLoading={isLoading}
       />
 
       {openAddModal && (
         <AddBranchHistory
-          title={'Change Employee Branch'}
+          title={
+            branchHistoryData?.length !== 0
+              ? "Change Employee Branch"
+              : "Add Employee Branch"
+          }
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
           id={data?.id}
+          branchHistoryData={branchHistoryData}
         />
       )}
     </Box>

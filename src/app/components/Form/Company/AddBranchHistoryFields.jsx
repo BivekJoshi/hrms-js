@@ -3,7 +3,7 @@ import React from "react";
 import useAddBranchHistoryForm from "../../../hooks/company/CompanyForm/useAddBranchHistoryForm";
 import { useGetCompany } from "../../../hooks/company/useCompany";
 
-const AddBranchHistoryFields = ({ onClose, isLoading, id }) => {
+const AddBranchHistoryFields = ({ onClose, isLoading, id, branchHistoryData }) => {
   const { formik } = useAddBranchHistoryForm(onClose, id);
   const { data: branchData } = useGetCompany();
 
@@ -70,26 +70,6 @@ const AddBranchHistoryFields = ({ onClose, isLoading, id }) => {
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
-        {/* <Grid item xs={12} sm={12}>
-          <TextField
-            id="effectiveToDate"
-            name="effectiveToDate"
-            label="Effective To Date"
-            type="date"
-            fullWidth
-            value={formik.values.effectiveToDate}
-            onChange={formik.handleChange}
-            error={
-              formik.touched.effectiveToDate &&
-              Boolean(formik.errors.effectiveToDate)
-            }
-            helperText={
-              formik.touched.effectiveToDate && formik.errors.effectiveToDate
-            }
-            variant="outlined"
-            InputLabelProps={{ shrink: true }}
-          />
-        </Grid> */}
         <Grid item xs={12} sm={12}>
           <TextField
             id="remarks"
@@ -116,7 +96,12 @@ const AddBranchHistoryFields = ({ onClose, isLoading, id }) => {
             onClick={handleFormSubmit}
             sx={{ mt: 3, ml: 1 }}
           >
-            Update Branch
+            
+            {
+            branchHistoryData?.length !== 0
+              ? "Update Branch"
+              : "Add Employee Branch"
+          }
           </Button>
           <Button
             variant="contained"

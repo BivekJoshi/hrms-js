@@ -1,9 +1,14 @@
 import { Button, Grid, TextField } from "@mui/material";
 import React from "react";
-import { useGetDepartment } from '../../../hooks/department/useDepartment';
-import useAddDepartmentHistoryForm from '../../../hooks/department/DepartmentForm/useAddDepartmentHistoryForm';
+import { useGetDepartment } from "../../../hooks/department/useDepartment";
+import useAddDepartmentHistoryForm from "../../../hooks/department/DepartmentForm/useAddDepartmentHistoryForm";
 
-const AddDepartmentHistoryFields = ({ onClose, isLoading, id }) => {
+const AddDepartmentHistoryFields = ({
+  onClose,
+  isLoading,
+  id,
+  branchHistoryData,
+}) => {
   const { formik } = useAddDepartmentHistoryForm(onClose, id);
   const { data: departmentData } = useGetDepartment();
 
@@ -31,7 +36,9 @@ const AddDepartmentHistoryFields = ({ onClose, isLoading, id }) => {
             error={
               formik.touched.departmentId && Boolean(formik.errors.departmentId)
             }
-            helperText={formik.touched.departmentId && formik.errors.departmentId}
+            helperText={
+              formik.touched.departmentId && formik.errors.departmentId
+            }
             variant="outlined"
             SelectProps={{
               native: true,
@@ -39,7 +46,7 @@ const AddDepartmentHistoryFields = ({ onClose, isLoading, id }) => {
             InputLabelProps={{ shrink: true }}
             // size="small"
           >
-             <option value="" disabled>
+            <option value="" disabled>
               Select Department
             </option>
             {departmentData?.map((option) => (
@@ -118,7 +125,9 @@ const AddDepartmentHistoryFields = ({ onClose, isLoading, id }) => {
             onClick={handleFormSubmit}
             sx={{ mt: 3, ml: 1 }}
           >
-            Update Department
+            {branchHistoryData?.length !== 0
+              ? "Update Department"
+              : "Add Department"}
           </Button>
           <Button
             variant="contained"
