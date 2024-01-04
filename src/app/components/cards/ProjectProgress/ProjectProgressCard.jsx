@@ -28,34 +28,40 @@ export const ProjectProgressCard = ({ projectDataCount }) => {
       count: projectDataCount?.projectInfo?.delayed || 0,
     },
   ];
-
+  const totalCount = progressData.reduce(
+    (total, item) => total + item.count,
+    0
+  );
   return (
-    <Grid display="grid" gridTemplateColumns="1fr 1fr" gap={2}>
-      {progressData.map((item, index) => (
-        <Grid
-          bgcolor={item.color}
-          display="flex"
-          flexDirection="column"
-          justifyContent="center"
-          width="100%"
-          height="113px"
-          borderRadius="8px"
-        >
-          <Typography
-            alignSelf="center"
-            fontSize={{ sm: "22px", md: "18px", lg: "22px" }}
+    <>
+      <Typography variant="v6">Total Project : {totalCount || "0"}</Typography>
+      <Grid display="grid" gridTemplateColumns="1fr 1fr" gap={2} mt={2}>
+        {progressData.map((item, index) => (
+          <Grid
+            bgcolor={item.color}
+            display="flex"
+            flexDirection="column"
+            justifyContent="center"
+            width="100%"
+            height="113px"
+            borderRadius="8px"
           >
-            {item.count}
-          </Typography>
-          <Typography
-            fontSize={{ xs: "11px", sm: "14px", md: "12px", lg: "14px" }}
-            alignSelf="center"
-            fontWeight={600}
-          >
-            {item.title}
-          </Typography>
-        </Grid>
-      ))}
-    </Grid>
+            <Typography
+              alignSelf="center"
+              fontSize={{ sm: "22px", md: "18px", lg: "22px" }}
+            >
+              {item.count}
+            </Typography>
+            <Typography
+              fontSize={{ xs: "11px", sm: "14px", md: "12px", lg: "14px" }}
+              alignSelf="center"
+              fontWeight={600}
+            >
+              {item.title}
+            </Typography>
+          </Grid>
+        ))}
+      </Grid>
+    </>
   );
 };

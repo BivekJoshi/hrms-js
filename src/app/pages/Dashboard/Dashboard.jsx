@@ -13,7 +13,6 @@ import { EmployPichart } from '../EmployeePage/Component/EmployPichart';
 const Dashboard = () => {
   const { mode } = useContext(ThemeModeContext);
   const { data, isLoading } = useDashBoardSearch();
-  console.log('🚀 ~ file: Dashboard.jsx:16 ~ Dashboard ~ data:', data);
   const { data: loggedUserData } = useGetLoggedInUser();
   const url = DOC_URL;
 
@@ -100,7 +99,7 @@ const Dashboard = () => {
             <Typography variant='h5' sx={{ marginBottom: '16px' }}>
               Employee Information
             </Typography>
-            <BarChatDiagram dashboardData={data} />
+            <BarChatDiagram dashboardData={data?.employeeInfo} />
           </Grid>
           <Grid item md={6} xs={12}>
             <div>
@@ -113,41 +112,40 @@ const Dashboard = () => {
                 padding='1rem '
                 boxShadow='0 4px 8px 3px rgba(0,0,0,.15), 0 1px 3px rgba(0,0,0,.3)'
               >
-                <Typography variant='v6'>
-                  Total Project : {data?.projectInfo?.total || '0'}
-                </Typography>
-                <div style={{ marginTop: '16px' }}>
-                  <ProjectProgressCard projectDataCount={data} />
-                </div>
+                <ProjectProgressCard projectDataCount={data} />
               </Grid>
             </div>
           </Grid>
-          {/* <Grid item md={6} xs={12}>
-            <Typography variant='h5' sx={{ marginBottom: '16px' }}>
-              Employee Count Per Department
-            </Typography>
-            <Grid
-              borderRadius={'6px'}
-              bgcolor={mode === 'light' ? 'white' : '#3f413f'}
-              padding='1rem '
-              boxShadow='0 4px 8px 3px rgba(0,0,0,.15), 0 1px 3px rgba(0,0,0,.3)'
-            >
-              <EmployPichart data={data?.employeeCountPerDepartment} />
+          {data?.employeeCountPerDepartment && (
+            <Grid item md={6} xs={12}>
+              <Typography variant="h5" sx={{ marginBottom: "16px" }}>
+                Employee Count Per Department
+              </Typography>
+              <Grid
+                borderRadius={"6px"}
+                bgcolor={mode === "light" ? "white" : "#3f413f"}
+                padding="1rem "
+                boxShadow="0 4px 8px 3px rgba(0,0,0,.15), 0 1px 3px rgba(0,0,0,.3)"
+              >
+                <EmployPichart data={data?.employeeCountPerDepartment} />
+              </Grid>
             </Grid>
-          </Grid>
-          <Grid item md={6} xs={12}>
-            <Typography variant='h5' sx={{ marginBottom: '16px' }}>
-              Employee Count Per Employee Type
-            </Typography>
-            <Grid
-              borderRadius={'6px'}
-              bgcolor={mode === 'light' ? 'white' : '#3f413f'}
-              padding='1rem '
-              boxShadow='0 4px 8px 3px rgba(0,0,0,.15), 0 1px 3px rgba(0,0,0,.3)'
-            >
-              <EmployPichart data={data?.employeeCountPerEmpType} />
+          )}
+          {data?.employeeCountPerEmpType && (
+            <Grid item md={6} xs={12}>
+              <Typography variant="h5" sx={{ marginBottom: "16px" }}>
+                Employee Count Per Employee Type
+              </Typography>
+              <Grid
+                borderRadius={"6px"}
+                bgcolor={mode === "light" ? "white" : "#3f413f"}
+                padding="1rem "
+                boxShadow="0 4px 8px 3px rgba(0,0,0,.15), 0 1px 3px rgba(0,0,0,.3)"
+              >
+                <EmployPichart data={data?.employeeCountPerEmpType} />
+              </Grid>
             </Grid>
-          </Grid> */}
+          )}
         </Grid>
       </Box>
     </>

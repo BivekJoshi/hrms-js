@@ -39,6 +39,7 @@ const Notification = ({ data }) => {
   const filteredEvents = data?.events?.filter(
     (event) => event.notificationId === '0'
   );
+
   const filterEventcount = filteredEvents?.length;
 
   const displayCount = eventCount > 0 ? eventCount : null;
@@ -92,7 +93,7 @@ const Notification = ({ data }) => {
         <Tooltip title='Notifications'>
           <Badge
             // badgeContent={data?.isChecked ? "" : displayCount}
-            badgeContent={data?.isChecked ? '' : filterEventcount}
+            badgeContent={filterEventcount}
             color='secondary'
           >
             <NotificationsIcon />
@@ -120,7 +121,7 @@ const Notification = ({ data }) => {
               ) : null}
               <EventNotification
                 Eventname={"Today's Event"}
-                data={eventName}
+                data={filteredEvents}
                 handleClose={handleClose}
                 handleListKeyDown={handleListKeyDown}
               />
@@ -129,7 +130,7 @@ const Notification = ({ data }) => {
             <MenuItem>
               <EventNotification
                 Eventname={"Today's Event"}
-                data={eventName}
+                data={filteredEvents}
                 handleClose={handleClose}
                 handleListKeyDown={handleListKeyDown}
               />
