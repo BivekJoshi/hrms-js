@@ -4,11 +4,13 @@ import { useGetTodoList } from "../../../hooks/todoList/useTodoList";
 import { ButtonComponent } from "../../../components/Button/ButtonComponent";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
 import Todo from "../../../../assets/todo.png";
+import { useNavigate } from 'react-router-dom';
 
 const ToDoList = () => {
+  const navigate = useNavigate();
   const { data: todoListData, isLoading } = useGetTodoList();
   const { mode, palette } = useContext(ThemeModeContext);
-  
+
   // only day and month
   const getUpcomingDay = (eventDate) => {
     const eventDateObject = new Date(eventDate);
@@ -20,7 +22,7 @@ const ToDoList = () => {
   return (
     <Grid display="flex" flexDirection="column" gap="1rem">
       <Typography variant="h5">Todo List </Typography>
-      <Grid display="grid" gap="1rem" >
+      <Grid display="grid" gap="1rem">
         {todoListData?.length > 0 ? (
           todoListData?.slice(0, 3).map((notify, index) => (
             <Grid key={index}>
@@ -110,15 +112,16 @@ const ToDoList = () => {
           </Grid>
         )}
       </Grid>
-      {todoListData?.length >= 4 &&
-      <Grid textAlign="center">
-        <ButtonComponent
-          OnClick={() => {
-            navigate("/employee/todolist");
-          }}
-          buttonName={"Click here to see all todo list"}
-        />
-      </Grid>}
+      {todoListData?.length >= 4 && (
+        <Grid textAlign="center">
+          <ButtonComponent
+            OnClick={() => {
+              navigate("/employee/todolist");
+            }}
+            buttonName={"Click here to see all todo list"}
+          />
+        </Grid>
+      )}
     </Grid>
   );
 };

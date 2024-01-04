@@ -145,36 +145,6 @@ const Leave = ({ permissions }) => {
         );
       },
     },
-    {
-      title: "Remark",
-      field: "leaveRemarks",
-      width: "15%",
-      emptyValue: "-",
-      render: (rowData) => {
-        return (
-          <div style={{whiteSpace: 'wrap'}}>
-            {rowData?.leaveRemarks}
-          </div>
-          // <Tooltip title={rowData?.leaveRemarks} placement="top-start" arrow>
-          //   <Chip
-          //     style={{
-          //       cursor: "pointer",
-          //       width: "240px",
-          //       display: "block",
-          //       background: mode === "light" ? "white" : "#434343",
-          //     }}
-          //     label={
-          //       <Typography
-          //         style={{ overflow: "hidden", textOverflow: "ellipsis" }}
-          //       >
-          //         {rowData?.leaveRemarks}
-          //       </Typography>
-          //     }
-          //   />
-          // </Tooltip>
-        );
-      },
-    },
   ].filter(Boolean);
 
   const columnsApprovedRejected=[
@@ -251,14 +221,15 @@ const Leave = ({ permissions }) => {
       emptyValue: "-",
       render: (rowData) => {
         return (
-          <div style={{whiteSpace: 'wrap'}}>
+          <div style={{whiteSpace: 'wrap', width:"10rem"}}>
             {rowData?.leaveReason}
           </div>
         );
       },
     },
     {
-      title: "Remark",
+      title: "Remarks
+      ",
       field: "leaveRemarks",
       width: "15%",
       emptyValue: "-",
@@ -303,7 +274,7 @@ const Leave = ({ permissions }) => {
     },
     {
       icon: () => <DeleteIcon />,
-      tooltip: "Edit Leave",
+      tooltip: "Delete Leave",
       onClick: (event, rowData) => handleDeleteLeave(rowData),
     },
   ];

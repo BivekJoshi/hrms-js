@@ -4,7 +4,7 @@ import {
   useGetAvailableOfficeResource,
   useGetUsedOfficeResource,
 } from "../../../hooks/resource/officeResource/useOfficeResource";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import {
   AddOfficeResourceModal,
   DeactivatedOfficeResourceModal,
@@ -74,28 +74,33 @@ const OfficeResource = ({ permissions }) => {
     {
       title: "SN",
       render: (rowData) => rowData.tableData.id + 1,
-      width: "3%",
+      width: "6rem",
       sorting: false,
     },
     {
       title: "Resource Name",
       field: "name",
       emptyValue: "-",
-      width: "18.75rem",
+      width: "12rem",
       sorting: false,
     },
     {
       title: "Identification Number",
       field: "uniqueNumber",
       emptyValue: "-",
-      width: "18.75rem",
+      width: "12rem",
       sorting: false,
     },
     {
       title: "Description",
       field: "description",
+      render: (rowData) => (
+        <Typography style={{ overflowWrap: "break-word" }}>
+          {rowData?.description}
+        </Typography>
+      ),
       emptyValue: "-",
-      width: "57rem",
+      width: "18rem",
       sorting: false,
     },
   ];

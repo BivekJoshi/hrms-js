@@ -56,7 +56,7 @@ const Profile = (loggedUserData) => {
         }}
       >
         <MenuItem onClick={handleProfile}>Profile</MenuItem>
-        <MenuItem onClick={handleChangePassword}>Reset Password</MenuItem>
+        <MenuItem onClick={handleChangePassword}>Change Password</MenuItem>
         <MenuItem
           onClick={() => {
             removeUser();

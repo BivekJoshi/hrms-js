@@ -25,7 +25,6 @@ const { data: projectCompanyData } = useGetProjectById(data?.projectid);
       handleRequest(values);
     },
   });
-console.log("formik",formik)
   const handleRequest = (values) => {
     values = { ...values };
     mutate(values, {

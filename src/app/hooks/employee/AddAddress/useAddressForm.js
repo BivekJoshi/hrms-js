@@ -18,14 +18,14 @@ export const usePermanentAddressForm = (data, isLoading) => {
     addresses: [
       {
         addressType: "PERMANENT",
-        id: addressDetails[0]?.id || null,
-        country: addressDetails[0]?.country || "",
-        province: addressDetails[0]?.province || "",
-        district: addressDetails[0]?.district || "",
-        municipality: addressDetails[0]?.municipality || "",
-        wardNumber: addressDetails[0]?.wardNumber || "",
-        city: addressDetails[0]?.city || "",
-        street: addressDetails[0]?.street || "",
+        id: addressDetails?.[0]?.id || null,
+        country: addressDetails?.[0]?.country || "",
+        province: addressDetails?.[0]?.province || "",
+        district: addressDetails?.[0]?.district || "",
+        municipality: addressDetails?.[0]?.municipality || "",
+        wardNumber: addressDetails?.[0]?.wardNumber || "",
+        city: addressDetails?.[0]?.city || "",
+        street: addressDetails?.[0]?.street || "",
       },
       {
         addressType: "TEMPORARY",

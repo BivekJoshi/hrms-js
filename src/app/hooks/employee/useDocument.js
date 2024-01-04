@@ -158,7 +158,7 @@ export const useEditDocument = ({ onSuccess }) => {
     imgData.append("file", data);
 
     const { newData } = await axiosInstance.put(
-      `employee/document/change-multipart-file/${id}`,
+      `/document/change-multipart-file/${id}`,
       imgData,
       {
         headers: {

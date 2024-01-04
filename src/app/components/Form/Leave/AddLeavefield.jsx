@@ -1,128 +1,97 @@
-import {
-  Autocomplete,
-  Button,
-  Divider,
-  Grid,
-  TextField,
-  Typography,
-  Tab,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
-} from "@mui/material";
-import React, { useState } from "react";
-import { useGetLeaveType } from "../../../../hooks/leaveType/useLeaveType";
-import useApplyLeaveForm from "../../../../hooks/leave/LeaveForm/useApplyLeaveForm";
-import { useGetLeaveById } from "../../../../hooks/leave/useLeave";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Grid, TextField, Button, Autocomplete, Radio } from "@mui/material";
+import { FormControlLabel, Tab, RadioGroup } from "@mui/material";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
+import { useLeaveForm } from "../../../hooks/leave/LeaveForm/useLeaveForm";
+import { useGetEmployee } from "../../../hooks/employee/useEmployee";
+import { useGetLeaveType } from "../../../hooks/leaveType/useLeaveType";
+import { useState } from "react";
+import "./Style.css";
 
-const ApplyLeaveField = () => {
-  const [value, setValue] = useState("1");
-  const location = useLocation();
-  const data = location?.state?.data || null;
-  const { formik } = useApplyLeaveForm(data);
-
+export const LeaveFields = ({ onClose, isLoading, data }) => {
+  const { data: employeeData } = useGetEmployee();
   const { data: leaveTypeData } = useGetLeaveType();
-
-  const handleFormSubmit = () => {
-    formik.handleSubmit();
-  };
+  const { formik } = useLeaveForm(data, onClose);
+  const [value, setValue] = useState("1");
 
   const capitalize = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
   };
 
-  const getLeaveTypeName = (leaveTypeId) => {
-    const leaveType = leaveTypeData?.find((type) => type.id === leaveTypeId);
-    return leaveType ? leaveType.leaveName : "";
+  const handleFormSubmit = () => {
+    formik.handleSubmit();
   };
 
+  const submitButtonText = "Add Leave";
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
   return (
-    <>
-      <Typography variant="h6">
-        <b>Leave Type</b>
-      </Typography>
-      <Divider />
-      <Grid container spacing={1}>
-        <Grid item xs={12} sm={6}>
-          Leave Type
-        </Grid>
-        {data ? (
-          <Grid item xs={12} sm={12}>
-            <TextField
-              name="leaveTypeId"
-              required
-              InputLabelProps={{ shrink: true }}
-              fullWidth
-              value={getLeaveTypeName(formik.values.leaveTypeId)}
-              error={
-                formik.touched.leaveTypeId && Boolean(formik.errors.leaveTypeId)
-              }
-              helperText={
-                formik.touched.leaveTypeId && formik.errors.leaveTypeId
-              }
-            />
-          </Grid>
-        ) : (
-          <Grid item xs={12} sm={12}>
-            <Autocomplete
-              id="leaveTypeId"
-              name="leaveTypeId"
-              options={leaveTypeData}
-              getOptionLabel={(option) =>
-                `${capitalize(option.leaveName)} Leave`
-              }
-              value={formik.values.leaveTypeId || null}
-              onChange={(event, value) =>
-                formik.setFieldValue("leaveTypeId", value)
-              }
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  fullWidth
-                  required
-                  error={
-                    formik.touched.leaveTypeId &&
-                    Boolean(formik.errors.leaveTypeId)
-                  }
-                  helperText={
-                    formik.touched.leaveTypeId && formik.errors.leaveTypeId
-                  }
-                  variant="outlined"
-                  InputLabelProps={{ shrink: true }}
-                />
-              )}
-            />
-          </Grid>
-        )}
-        <Grid item xs={12} sm={6}>
-          Leave Reason
-        </Grid>
+    !isLoading && (
+      <Grid container spacing={2}>
         <Grid item xs={12} sm={12}>
-          <TextField
-            id="leaveReason"
-            name="leaveReason"
-            // label="Leave Reason"
-            placeholder="Enter leave Reason"
-            fullWidth
-            multiline
-            rows={3}
-            value={formik.values.leaveReason}
-            onChange={formik.handleChange}
-            error={
-              formik.touched.leaveReason && Boolean(formik.errors.leaveReason)
+          <Autocomplete
+            id="employeeId"
+            name="employeeId"
+            options={employeeData}
+            getOptionLabel={(option) =>
+              `${option?.firstName} ${option?.middleName} ${option?.lastName}`
             }
-            helperText={formik.touched.leaveReason && formik.errors.leaveReason}
-            variant="outlined"
-            InputLabelProps={{ shrink: true }}
+            value={formik.values.employeeId || null}
+            onChange={(event, value) => {
+              formik.setFieldValue("employeeId", value);
+            }}
+            renderInput={(params) => (
+              <TextField
+                bgcolor="black"
+                {...params}
+                label="Employee Name"
+                placeholder="Select employee Name"
+                fullWidth
+                required
+                error={
+                  formik.touched.employeeId && Boolean(formik.errors.employeeId)
+                }
+                helperText={
+                  formik.touched.employeeId && formik.errors.employeeId
+                }
+                variant="outlined"
+                InputLabelProps={{ shrink: true }}
+              />
+            )}
           />
         </Grid>
 
         <Grid item xs={12} sm={12}>
+          <Autocomplete
+            id="leaveTypeId"
+            name="leaveTypeId"
+            options={leaveTypeData}
+            getOptionLabel={(option) => `${capitalize(option.leaveName)} Leave`}
+            value={formik.values.leaveTypeId || null}
+            onChange={(event, value) =>
+              formik.setFieldValue("leaveTypeId", value)
+            }
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Leave Name"
+                placeholder="Select leave type"
+                fullWidth
+                required
+                error={
+                  formik.touched.leaveTypeId &&
+                  Boolean(formik.errors.leaveTypeId)
+                }
+                helperText={
+                  formik.touched.leaveTypeId && formik.errors.leaveTypeId
+                }
+                variant="outlined"
+                InputLabelProps={{ shrink: true }}
+              />
+            )}
+          />
+        </Grid>
+        <Grid item xs={12} sm={12} padding="0 24px 0 !important">
           <TabContext value={value}>
             <TabList
               onChange={handleChange}
@@ -133,35 +102,34 @@ const ApplyLeaveField = () => {
               <Tab label="One Day" value="2" />
               <Tab label="Multiple Days" value="3" />
             </TabList>
-            <TabPanel value="1">
-              <HalfDay formik={formik} />
-            </TabPanel>
-            <TabPanel value="2">
-              <OneDay formik={formik} />
-            </TabPanel>
-            <TabPanel value="3">
-              <MultipleDays formik={formik} />
-            </TabPanel>
+            <Grid>
+              <TabPanel value="1">
+                <HalfDay formik={formik} />
+              </TabPanel>
+              <TabPanel value="2">
+                <OneDay formik={formik} />
+              </TabPanel>
+              <TabPanel value="3">
+                <MultipleDays formik={formik} />
+              </TabPanel>
+            </Grid>
           </TabContext>
-        </Grid>
-
-        <Grid item xs={12} sm={6}>
-          Leave Remarks
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
-            id="leaveRemarks"
-            name="leaveRemarks"
-            placeholder="Any additional Details to add"
+            id="leaveReason"
+            name="leaveReason"
+            label="Leave Reason"
+            placeholder="Enter leave reason"
             fullWidth
-            value={formik.values.leaveRemarks}
+            multiline
+            rows={2}
+            value={formik.values.leaveReason}
             onChange={formik.handleChange}
             error={
-              formik.touched.leaveRemarks && Boolean(formik.errors.leaveRemarks)
+              formik.touched.leaveReason && Boolean(formik.errors.leaveReason)
             }
-            helperText={
-              formik.touched.leaveRemarks && formik.errors.leaveRemarks
-            }
+            helperText={formik.touched.leaveReason && formik.errors.leaveReason}
             variant="outlined"
             InputLabelProps={{ shrink: true }}
           />
@@ -175,13 +143,21 @@ const ApplyLeaveField = () => {
           <Button
             variant="contained"
             onClick={handleFormSubmit}
-            sx={{ mt: 3, ml: 1 }}
+            sx={{ mt: 3, ml: 1, color: "#fff" }}
           >
-            Submit
+            {submitButtonText}
+          </Button>
+          <Button
+            variant="contained"
+            onClick={onClose}
+            sx={{ mt: 3, ml: 1 }}
+            color="error"
+          >
+            Cancel
           </Button>
         </Grid>
       </Grid>
-    </>
+    )
   );
 };
 
@@ -273,5 +249,3 @@ const OneDay = ({ formik }) => <DateInput formik={formik} />;
 const MultipleDays = ({ formik }) => (
   <DateInput formik={formik} isMultipleDays={true} />
 );
-
-export default ApplyLeaveField;
