@@ -58,17 +58,22 @@ export const useEditEmployee = ({ onSuccess }) => {
   const { id } = useParams();
 
   return useMutation(
-    ['editEmployee '],
-    (formData) => {
-      editEmployee(formData, id);
+    ['editEmployee'],
+    async (formData) => {
+      try {
+        const data = await editEmployee(formData, id);
+        return data;
+      } catch (error) {
+        throw error;
+      }
     },
     {
-      onSuccess: (data, variables, context) => {
-        onSuccess && onSuccess(data, variables, context);
+      onSuccess: (data) => {
         if (data) {
           toast.success('Employee edited successfully');
         }
 
+        onSuccess && onSuccess(data);
         queryClient.invalidateQueries('getEmployeeById');
       },
     }
