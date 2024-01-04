@@ -90,7 +90,7 @@ const ApplyLeaveLayout = () => {
         <Grid item xs={12}>
           {pendingLeaveData &&
             pendingLeaveData.map((data) => {
-              // console.log(data, "data");
+             
               return (
                 <Item>
                   <Box

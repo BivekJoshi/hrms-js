@@ -27,9 +27,11 @@ import { toast } from "react-toastify";
 import { useLeaveDataSearch } from "./Api/LeaveApi";
 import HocButton from "../../hoc/hocButton";
 import PermissionHoc from "../../hoc/permissionHoc";
+import useAuth from '../../../auth/hooks/component/login/useAuth';
 
 const Leave = ({ permissions }) => {
   const { mode } = React.useContext(ThemeModeContext);
+  const { isManager, isSuperAdmin } = useAuth();
   const { data: leaveData, isLoading: loading } = useGetleaveOfUser();
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
@@ -271,7 +273,8 @@ const Leave = ({ permissions }) => {
       field: "approvedBy",
     },
   ].filter(Boolean);
-  const actions = [
+
+  const actions = (isManager || isSuperAdmin) && [
     {
       icon: () => <ModeEditOutlineIcon />,
       tooltip: "Edit Leave",
