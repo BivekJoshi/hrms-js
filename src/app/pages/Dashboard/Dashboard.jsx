@@ -1,21 +1,14 @@
 import { Box, CardMedia, Grid, Typography } from "@mui/material";
 import { useContext } from "react";
-import Employee from "../../../assets/employee.png";
-import Event from "../../../assets/event.png";
-import Holiday from "../../../assets/holiday.png";
 import Male from "../../../assets/male.png";
-import Project from "../../../assets/project.png";
-import User from "../../../assets/user.png";
 import ThemeModeContext from "../../../theme/ThemeModeContext";
 import BarChatDiagram from "../../components/Charts/BarChatDiagram";
-import { PieChartDiagram } from "../../components/Charts/PieChartDiagram";
 import DashboardCard from "../../components/cards/Dashboard/DashboardCard";
 import { ProjectProgressCard } from "../../components/cards/ProjectProgress/ProjectProgressCard";
-import { ProjectTable } from "./DashboardTable/ProjectTable";
 import { useDashBoardSearch } from "./api/dashboardApi";
-import { toast } from "react-toastify";
-import { useGetLoggedInUser } from '../../hooks/auth/usePassword';
-import { DOC_URL } from '../../../auth/axiosInterceptor';
+import { useGetLoggedInUser } from "../../hooks/auth/usePassword";
+import { DOC_URL } from "../../../auth/axiosInterceptor";
+import { EmployPichart } from "../EmployeePage/Component/EmployPichart";
 
 const Dashboard = () => {
   const { mode } = useContext(ThemeModeContext);
@@ -47,7 +40,11 @@ const Dashboard = () => {
       >
         <CardMedia
           component="img"
-          src={loggedUserData?.userPhotoPath ? `${url}${loggedUserData.userPhotoPath}` : Male}
+          src={
+            loggedUserData?.userPhotoPath
+              ? `${url}${loggedUserData.userPhotoPath}`
+              : Male
+          }
           alt="Img"
           sx={{ width: 66, height: 66, borderRadius: "2rem" }}
         />
@@ -93,41 +90,7 @@ const Dashboard = () => {
             // rowSpacing={1}
             gap={{ sm: "12px", lg: "32px" }}
           >
-            <DashboardCard
-              title="Users"
-              icon={User}
-              count={data?.totalUser}
-              linkTo="/admin/users"
-              borderColor="#3399FF"
-            />
-            <DashboardCard
-              title="Employees"
-              icon={Employee}
-              count={data?.totalEmployee}
-              linkTo="/admin/employee"
-              borderColor="#F8B114"
-            />
-            <DashboardCard
-              title="Events"
-              icon={Event}
-              count={data?.totalEvents}
-              linkTo="/admin/event"
-              borderColor="#108A23"
-            />
-            <DashboardCard
-              title="Holiday"
-              icon={Holiday}
-              count={data?.totalHolidays}
-              linkTo="/admin/holiday"
-              borderColor="#FF8A7B"
-            />
-            <DashboardCard
-              title="Project"
-              icon={Project}
-              count={data?.totalProjects}
-              linkTo="/admin/project"
-              borderColor="#875923 "
-            />
+            <DashboardCard data={data} />
           </Grid>
         </div>
 
@@ -137,7 +100,6 @@ const Dashboard = () => {
               Employee Information
             </Typography>
             <BarChatDiagram dashboardData={data} />
-            {/* <PieChartDiagram dashboardData={dashboardData} /> */}
           </Grid>
           <Grid item md={6} xs={12}>
             <div>
@@ -151,24 +113,40 @@ const Dashboard = () => {
                 boxShadow="0 4px 8px 3px rgba(0,0,0,.15), 0 1px 3px rgba(0,0,0,.3)"
               >
                 <Typography variant="v6">
-                  Total Project : {data?.projectInfo?.total}
+                  Total Project : {data?.projectInfo?.total || "0"}
                 </Typography>
                 <div style={{ marginTop: "16px" }}>
                   <ProjectProgressCard projectDataCount={data} />
                 </div>
               </Grid>
             </div>
-
-            {/* <Grid sx={{ mt: "32px" }}>
-              <ProjectTable projectData={data} />
-            </Grid> */}
-            <Grid item xs={12} sm={6}>
-              {/* <PendingLeaveTable
-              pendingLeaveData={pendingLeaveData}
-              loading={loadingPendingLeave}
-            /> */}
+          </Grid>
+          {/* <Grid item md={6} xs={12}>
+            <Typography variant="h5" sx={{ marginBottom: "16px" }}>
+              Employee Count Per Department
+            </Typography>
+            <Grid
+              borderRadius={"6px"}
+              bgcolor={mode === "light" ? "white" : "#3f413f"}
+              padding="1rem "
+              boxShadow="0 4px 8px 3px rgba(0,0,0,.15), 0 1px 3px rgba(0,0,0,.3)"
+            >
+              <EmployPichart employeeCountPerDepartment={data?.employeeCountPerDepartment} />
             </Grid>
           </Grid>
+          <Grid item md={6} xs={12}>
+            <Typography variant="h5" sx={{ marginBottom: "16px" }}>
+              Employee Count Per Employee Type
+            </Typography>
+            <Grid
+              borderRadius={"6px"}
+              bgcolor={mode === "light" ? "white" : "#3f413f"}
+              padding="1rem "
+              boxShadow="0 4px 8px 3px rgba(0,0,0,.15), 0 1px 3px rgba(0,0,0,.3)"
+            >
+              <EmployPichart employeeCountPerEmpType={data?.employeeCountPerEmpType} />
+            </Grid>
+          </Grid> */}
         </Grid>
       </Box>
     </>
