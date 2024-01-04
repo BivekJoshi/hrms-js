@@ -1,42 +1,15 @@
 import React from "react";
 import ReactApexChart from "react-apexcharts";
 
-export const EmployPichart = ({
-  employeeCountPerDepartment,
-  employeeCountPerEmpType,
-}) => {
-  const task = [
-    {
-      numberOfTask: employeeCountPerDepartment
-        ? employeeCountPerDepartment.Account
-        : employeeCountPerEmpType["part-time"],
-      nameOfTask: employeeCountPerDepartment ? "Account" : "Part Time",
-    },
-    {
-      numberOfTask: employeeCountPerDepartment
-        ? employeeCountPerDepartment.Management
-        : employeeCountPerEmpType?.deded,
-      nameOfTask: employeeCountPerDepartment ? "Management" : "Deded ",
-    },
-    {
-      numberOfTask: employeeCountPerDepartment
-        ? employeeCountPerDepartment.Technical
-        : employeeCountPerEmpType.testsxsxdsgdsg,
-      nameOfTask: employeeCountPerDepartment ? "Technical" : "testsxsxdsgdsg",
-    },
-  ];
-
+export const EmployPichart = ({ data }) => {
   const COLORS = ["#399F4D", "#F9C143", "#C2514B", "#875923"];
 
-//   const series = employeeCountPerDepartment
-//   ? Object.entries(employeeCountPerDepartment).map(([key, value]) => key)
-//   : [];
-// const labels = employeeCountPerDepartment
-// ? Object.entries(employeeCountPerDepartment).map(([key, value]) => value)
-// : [];
-
-  const series = task.map((entry) => entry.numberOfTask)
-  const labels = task.map((entry) => entry.nameOfTask);
+  const series = Object.entries(data).map(
+    ([key, value]) => value
+  );
+  const labels = Object.entries(data).map(
+    ([key, value]) => key
+  );
 
   const options = {
     chart: {
