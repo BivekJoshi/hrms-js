@@ -61,8 +61,8 @@ const TrainingField = ({ onClose, isLoading, data, empId }) => {
           <TextField
             id='trainingInstitute'
             name='trainingInstitute'
-            label='Institude'
-            placeholder='Enter training Institude'
+            label='Institute'
+            placeholder='Enter training institute'
             fullWidth
             required
             value={formik.values.trainingInstitute}
@@ -100,7 +100,7 @@ const TrainingField = ({ onClose, isLoading, data, empId }) => {
             id='startDate'
             name='startDate'
             label='Start Date'
-            placeholder='Enter training startDate'
+            placeholder='Enter training start date'
             fullWidth
             type='date'
             required
@@ -117,7 +117,7 @@ const TrainingField = ({ onClose, isLoading, data, empId }) => {
             id='endDate'
             name='endDate'
             label='End Date'
-            placeholder='Enter training endDate'
+            placeholder='Enter training end date'
             fullWidth
             type='date'
             required

@@ -18,6 +18,53 @@ import HocButton from '../../hoc/hocButton';
 import useAuth from '../../../auth/hooks/component/login/useAuth';
 import CustomTable from '../../components/CustomTable/CustomTable';
 
+const leaveName = [
+  {
+    id: 1,
+    leaveName: 'PATERNITY',
+    leaveLabel: 'Paternity Leave',
+  },
+  {
+    id: 2,
+    leaveName: 'MATERNITY',
+    leaveLabel: 'Maternity Leave',
+  },
+  {
+    id: 3,
+    leaveName: 'SICK',
+    leaveLabel: 'Sick Leave',
+  },
+  {
+    id: 4,
+    leaveName: 'UNPAID',
+    leaveLabel: 'Unpaid Leave',
+  },
+  {
+    id: 5,
+    leaveName: 'MATERNITY_ADDITIONAL',
+    leaveLabel: 'Maternity Additional Leave',
+  },
+  {
+    id: 6,
+    leaveName: 'CASUAL',
+    leaveLabel: 'Casual Leave',
+  },
+  {
+    id: 7,
+    leaveName: 'BEREAVEMENT',
+    leaveLabel: 'Bereavent Leave',
+  },
+  {
+    id: 8,
+    leaveName: 'MARRIAGE',
+    leaveLabel: 'Marriage Leave',
+  },
+  {
+    id: 9,
+    leaveName: 'FESTIVAL',
+    leaveLabel: 'Festival Leave',
+  },
+]
 const LeaveType = ({ permissions }) => {
   const { data: leaveTypeData, isLoading } = useGetLeaveType();
   const { isSuperAdmin, isEmployee } = useAuth();
@@ -72,15 +119,26 @@ const LeaveType = ({ permissions }) => {
       title: 'Leave Name',
       field: 'leaveName',
       render: (rowData) => {
-        const formattedLeaveName =
-          rowData.leaveName.charAt(0).toUpperCase() +
-          rowData.leaveName.slice(1).toLowerCase();
-        return `${formattedLeaveName} Leave`;
+        const leaveNameLabel = leaveName.find(leave => leave?.leaveName === rowData?.leaveName)?.leaveLabel || rowData?.leaveName;
+        return <div>{leaveNameLabel}</div>
       },
       width: '10%',
       sortable: false,
       sorting: false,
     },
+    // {
+    //   title: 'Leave Name',
+    //   field: 'leaveName',
+    //   render: (rowData) => {
+    //     const formattedLeaveName =
+    //       rowData.leaveName.charAt(0).toUpperCase() +
+    //       rowData.leaveName.slice(1).toLowerCase();
+    //     return `${formattedLeaveName} Leave`;
+    //   },
+    //   width: '10%',
+    //   sortable: false,
+    //   sorting: false,
+    // },
     {
       title: 'Leave Days',
       field: 'leaveTotal',
