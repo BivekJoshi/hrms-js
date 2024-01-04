@@ -39,9 +39,6 @@ export const useDeleteEmployee = ({ onSuccess }) => {
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries('getEmployee');
       },
-      onError: (err, _variables, _context) => {
-        toast.error(`Error: ${err.message}`);
-      },
     }
   );
 };
@@ -57,9 +54,6 @@ export const useActiveEmployee = ({ onSuccess }) => {
         toast.success('Successfully activated Employee');
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries('getDeactivateEmployee');
-      },
-      onError: (err, _variables, _context) => {
-        toast.error(`Error: ${err.message}`);
       },
     }
   );
@@ -77,9 +71,6 @@ export const useTerminateEmployee = ({ onSuccess }) => {
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries('getEmployeeData');
       },
-      onError: (err, _variables, _context) => {
-        toast.error(`Error: ${err.message}`);
-      },
     }
   );
 };
@@ -95,9 +86,6 @@ export const useActiveTerminateEmployee = ({ onSuccess }) => {
         toast.success('Successfully activated Employee');
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries('getDeactivateEmployee');
-      },
-      onError: (err, _variables, _context) => {
-        toast.error(`Error: ${err.message}`);
       },
     }
   );

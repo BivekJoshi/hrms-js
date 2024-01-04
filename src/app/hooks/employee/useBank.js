@@ -9,7 +9,9 @@ import {
 import { toast } from 'react-toastify';
 import { useParams } from 'react-router';
 
-{/*____________________________GETBANKDETAILSBYID____________________________________________*/}
+{
+  /*____________________________GETBANKDETAILSBYID____________________________________________*/
+}
 export const useGetBankByEmployeeId = () => {
   const { id } = useParams();
   return useQuery(['getBankDetailById'], () => getBankDetailById(id), {
@@ -18,7 +20,9 @@ export const useGetBankByEmployeeId = () => {
   });
 };
 
-{/*____________________________GETBANKDETAILSBYID____________________________________________*/}
+{
+  /*____________________________GETBANKDETAILSBYID____________________________________________*/
+}
 export const useGetBankById = (id) => {
   return useQuery(['getBankDetailsBankId'], () => getBankDetailsBankId(id), {
     refetchInterval: false,
@@ -26,7 +30,9 @@ export const useGetBankById = (id) => {
   });
 };
 
-{/*____________________________GETALL____________________________________________*/}
+{
+  /*____________________________GETALL____________________________________________*/
+}
 export const useGetBank = () => {
   return useQuery(['getBank'], () => getBankDetails(), {
     refetchInterval: false,
@@ -34,7 +40,9 @@ export const useGetBank = () => {
   });
 };
 
-{/*____________________________POST____________________________________________*/}
+{
+  /*____________________________POST____________________________________________*/
+}
 export const useAddBank = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   const { id } = useParams();
@@ -50,7 +58,9 @@ export const useAddBank = ({ onSuccess }) => {
   });
 };
 
-{/*____________________________EDIT____________________________________________*/}
+{
+  /*____________________________EDIT____________________________________________*/
+}
 export const useEditBank = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(
@@ -63,9 +73,6 @@ export const useEditBank = ({ onSuccess }) => {
         toast.success('Bank edited successfully');
         onSuccess && onSuccess(data, variable, context);
         queryClient.invalidateQueries('getBankDetailById');
-      },
-      onError: (err, _variables, _context) => {
-        toast.error(`error: ${err.message}`);
       },
     }
   );
