@@ -17,7 +17,7 @@ const BarChatDiagram = ({ dashboardData }) => {
     `${dashboardData?.employeeInfo?.maleEmployee}`,
     `${dashboardData?.employeeInfo?.femaleEmployee}`,
   ];
-  const barColors = palette.secondary.main;
+  const COLORS = ["#F65E3C", "#A1E000", "#9137B8", "#D93084"];
   const chartOptions = {
     chart: {
       type: 'bar',
@@ -31,7 +31,7 @@ const BarChatDiagram = ({ dashboardData }) => {
         },
       },
     },
-    colors: barColors,
+    colors: COLORS,
     dataLabels: {
       enabled: true,
       style: {

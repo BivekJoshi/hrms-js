@@ -70,33 +70,33 @@ const Leave = ({ permissions }) => {
       title: "SN",
       field: "id",
       sortable: false,
-      width: '10px',
+      width: "10px",
       sorting: false,
       render: (rowData) => rowData.tableData.id + 1,
     },
     {
       title: "Employee Name",
       field: "employeeName",
-      width: '60px',
+      width: "60px",
       sorting: false,
     },
     {
       title: "Leave Type",
       field: "leaveType",
-      width: '60px',
+      width: "60px",
       sorting: false,
     },
     {
       title: "From",
       field: "fromDate",
-      width: '60px',
+      width: "60px",
       emptyValue: "-",
       sorting: false,
     },
     {
       title: "To",
       field: "toDate",
-      width: '60px',
+      width: "60px",
       emptyValue: "-",
       sorting: false,
     },
@@ -138,47 +138,43 @@ const Leave = ({ permissions }) => {
       width: "15%",
       emptyValue: "-",
       render: (rowData) => {
-        return (
-          <div style={{whiteSpace: 'wrap'}}>
-            {rowData?.leaveReason}
-          </div>
-        );
+        return <div style={{ whiteSpace: "wrap" }}>{rowData?.leaveReason}</div>;
       },
     },
   ].filter(Boolean);
 
-  const columnsApprovedRejected=[
+  const columnsApprovedRejected = [
     {
       title: "SN",
       field: "id",
       sortable: false,
-      width: '10px',
+      width: "10px",
       sorting: false,
       render: (rowData) => rowData.tableData.id + 1,
     },
     {
       title: "Employee Name",
       field: "employeeName",
-      width: '60px',
+      width: "60px",
       sorting: false,
     },
     {
       title: "Leave Type",
       field: "leaveType",
-      width: '60px',
+      width: "60px",
       sorting: false,
     },
     {
       title: "From",
       field: "fromDate",
-      width: '60px',
+      width: "60px",
       emptyValue: "-",
       sorting: false,
     },
     {
       title: "To",
       field: "toDate",
-      width: '60px',
+      width: "60px",
       emptyValue: "-",
       sorting: false,
     },
@@ -221,7 +217,13 @@ const Leave = ({ permissions }) => {
       emptyValue: "-",
       render: (rowData) => {
         return (
-          <div style={{whiteSpace: 'wrap', width:"10rem"}}>
+          <div
+            style={{
+              whiteSpace: "wrap",
+              width: "15rem",
+              overflowWrap: "break-word",
+            }}
+          >
             {rowData?.leaveReason}
           </div>
         );
@@ -234,9 +236,7 @@ const Leave = ({ permissions }) => {
       emptyValue: "-",
       render: (rowData) => {
         return (
-          <div style={{whiteSpace: 'wrap'}}>
-            {rowData?.remarks}
-          </div>
+          <div style={{ whiteSpace: "wrap" }}>{rowData?.remarks}</div>
           // <Tooltip title={rowData?.leaveRemarks} placement="top-start" arrow>
           //   <Chip
           //     style={{
