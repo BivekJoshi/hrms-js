@@ -99,7 +99,7 @@ const Dashboard = () => {
             <Typography variant='h5' sx={{ marginBottom: '16px' }}>
               Employee Information
             </Typography>
-            <BarChatDiagram dashboardData={data?.employeeInfo} />
+            <BarChatDiagram data={dashboardData} />
           </Grid>
           <Grid item md={6} xs={12}>
             <div>
@@ -112,11 +112,11 @@ const Dashboard = () => {
                 padding='1rem '
                 boxShadow='0 4px 8px 3px rgba(0,0,0,.15), 0 1px 3px rgba(0,0,0,.3)'
               >
-                <ProjectProgressCard projectDataCount={data} />
+                <ProjectProgressCard projectDataCount={dashboardData} />
               </Grid>
             </div>
           </Grid>
-          {data?.employeeCountPerDepartment && (
+          {dashboardData?.employeeCountPerDepartment && (
             <Grid item md={6} xs={12}>
               <Typography variant="h5" sx={{ marginBottom: "16px" }}>
                 Employee Count Per Department
@@ -127,11 +127,11 @@ const Dashboard = () => {
                 padding="1rem "
                 boxShadow="0 4px 8px 3px rgba(0,0,0,.15), 0 1px 3px rgba(0,0,0,.3)"
               >
-                <EmployPichart data={data?.employeeCountPerDepartment} />
+                <EmployPichart data={dashboardData?.employeeCountPerDepartment} />
               </Grid>
             </Grid>
           )}
-          {data?.employeeCountPerEmpType && (
+          {dashboardData?.employeeCountPerEmpType && (
             <Grid item md={6} xs={12}>
               <Typography variant="h5" sx={{ marginBottom: "16px" }}>
                 Employee Count Per Employee Type
@@ -142,7 +142,7 @@ const Dashboard = () => {
                 padding="1rem "
                 boxShadow="0 4px 8px 3px rgba(0,0,0,.15), 0 1px 3px rgba(0,0,0,.3)"
               >
-                <EmployPichart data={data?.employeeCountPerEmpType} />
+                <EmployPichart data={dashboardData?.employeeCountPerEmpType} />
               </Grid>
             </Grid>
           )}

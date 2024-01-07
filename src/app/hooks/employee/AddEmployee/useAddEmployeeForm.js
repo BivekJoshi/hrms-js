@@ -1,9 +1,11 @@
 import { useAddEmployee } from '../useEmployee';
 import { useFormik } from 'formik';
 import { AddEmployeeSchema } from './addEmployeeSchema';
+import { useState } from 'react';
 
-const useAddEmployeeForm = (handleOpenSubmitModal) => {
+const useAddEmployeeForm = (handleOpenSubmitModal, handleOpenEmailModal) => {
   const { mutate: addEmployee } = useAddEmployee();
+  const [ empId, setEmpId ] = useState();
 
   const formik = useFormik({
     initialValues: {
@@ -33,14 +35,17 @@ const useAddEmployeeForm = (handleOpenSubmitModal) => {
 
   const handleRequest = (values) => {
     values = { ...values };
+    setEmpId(null)
     addEmployee(values, {
-      onSuccess: () => {
+      onSuccess: (data) => {
+        setEmpId(data?.id)
         handleOpenSubmitModal();
+        handleOpenEmailModal();
         formik.resetForm();
       },
     });
   };
-  return { formik };
+  return { formik, empId };
 };
 
 export default useAddEmployeeForm;

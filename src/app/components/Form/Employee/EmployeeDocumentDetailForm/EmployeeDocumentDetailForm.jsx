@@ -81,10 +81,7 @@ const EmployeeDocumentDetailForm = () => {
         documentType: doc,
         document: file,
       };
-      console.log(
-        '🚀 ~ file: EmployeeDocumentDetailForm.jsx:84 ~ handleChangeImage ~ values:',
-        values
-      );
+     
       addDocument(values);
 
       setUploadStatusMap((prevMap) => ({

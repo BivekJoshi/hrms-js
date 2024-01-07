@@ -31,10 +31,6 @@ export const useDashBoardSearch = (onSuccess, onError) => {
     onSuccess,
     onError,
     select: (response) => {
-      console.log(
-        '🚀 ~ file: dashboardApi.js:39 ~ returnuseQuery ~ response:',
-        response
-      );
       return response;
     },
     // select: (response) => testData,

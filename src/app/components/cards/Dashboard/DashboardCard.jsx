@@ -63,7 +63,7 @@ const DashboardCard = ({ data }) => {
           Width="232px"
           Height="80px"
           borderRadius="0px 8px 8px 0px"
-          borderLeft={`6px solid ${card.borderColor}`}
+          borderLeft={`6px solid ${card?.borderColor}`}
           padding="8px 20px 8px 20px"
           boxShadow={7}
           onClick={handleClick}
@@ -73,19 +73,19 @@ const DashboardCard = ({ data }) => {
           <Grid>
             <Typography
               align="center"
-              color={mode === "light" ? `${card.borderColor}` : "white"}
+              color={mode === "light" ? `${card?.borderColor}` : "white"}
               fontSize="14px"
               fontWeight={"500"}
               Lineheight="20px"
             >
-              {card.title}
+              {card?.title}
             </Typography>
             <Divider
               sx={{
-                border: `1px solid ${card.borderColor}`,
+                border: `1px solid ${card?.borderColor}`,
                 height: "3px",
                 width: "42px",
-                background: ` ${card.borderColor}`,
+                background: ` ${card?.borderColor}`,
               }}
             />
           </Grid>
@@ -100,7 +100,7 @@ const DashboardCard = ({ data }) => {
               fontWeight={500}
               color={mode === "light" ? "" : "white"}
             >
-              {card.count}
+              {card?.count}
             </Typography>
           </Stack>
         </Stack>

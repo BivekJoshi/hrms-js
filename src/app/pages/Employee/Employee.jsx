@@ -54,6 +54,7 @@ const Employee = () => {
     pageNumber,
     pageSize
   );
+ 
   const handlePageChange = (event, newPage) => {
     setPageNumber(newPage - 1);
     window.scroll(0, 0);
@@ -88,13 +89,14 @@ const Employee = () => {
 
   const [openSubmitModal, setOpenSubmitModal] = useState(false);
   const handleOpenSubmitModal = () => setOpenAddModal(false);
+  const handleOpenEmailModal = () => setOpenSubmitModal(true);
   const handleCloseEmailModal = () => {
     setOpenAddModal(false);
     setOpenSubmitModal(false);
   };
 
-  const { formik } = useAddEmployeeForm(handleOpenSubmitModal);
-
+  const { formik, empId } = useAddEmployeeForm(handleOpenSubmitModal, handleOpenEmailModal);
+// console.log(data, "data")
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -274,7 +276,7 @@ const Employee = () => {
                 style={{ marginTop: '10px' }}
                 sx={{ mt: 3, ml: 1 }}
                 onClick={() => {
-                  navigate(`edit/${data?.id}`);
+                  navigate(`edit/${empId}`);
                 }}
               >
                 Yes
