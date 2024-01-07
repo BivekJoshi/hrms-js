@@ -10,10 +10,6 @@ import User from "../../../../assets/user.png";
 
 const DashboardCard = ({ data }) => {
   const navigate = useNavigate();
-
-  const handleClick = () => {
-    navigate(linkTo);
-  };
   const cardData = [
     {
       title: "Users",
@@ -52,7 +48,9 @@ const DashboardCard = ({ data }) => {
     },
   ];
   const { mode } = useContext(ThemeModeContext);
-
+  const handleClick = (linkTo) => {
+    navigate(linkTo);
+  };
   return (
     <>
       {cardData?.map((card, index) => (
@@ -66,7 +64,7 @@ const DashboardCard = ({ data }) => {
           borderLeft={`6px solid ${card.borderColor}`}
           padding="8px 20px 8px 20px"
           boxShadow={7}
-          onClick={handleClick}
+          onClick={() => handleClick(card.linkTo)} 
           bgcolor={mode === "light" ? "" : "#3f413f"}
           sx={{ cursor: "pointer" }}
         >

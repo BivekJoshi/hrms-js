@@ -8,7 +8,7 @@ export const EmployPichart = ({ data }) => {
     ? Object.entries(data).map(([key, value]) => (value ? value : "nana"))
     : [];
   const labels = data
-    ? Object.entries(data).map(([key, value]) => (key ? key : "0"))
+    ? Object.entries(data).map(([key, value]) => (key ? key.toUpperCase() : "0"))
     : [];
 
   const options = {

@@ -5,7 +5,6 @@ import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import ApplyLeave from "./ApplyLeave";
 import { Button, Chip, Fab, Typography } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from "react-router-dom";
 import LeaveUserView from "../LeaveUserView";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
@@ -72,7 +71,7 @@ const ApplyLeaveLayout = () => {
     leaveData.filter((leaveRecord) => leaveRecord?.leaveStatus === "PENDING");
 
   const handleClickEditButton = (data) => {
-    navigate(`/employee/applyleavefield`, { state: { data} });
+    navigate(`/employee/applyleavefield`, { state: { data } });
   };
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -88,7 +87,6 @@ const ApplyLeaveLayout = () => {
         <Grid item xs={12}>
           {pendingLeaveData &&
             pendingLeaveData.map((data) => {
-             
               return (
                 <Item>
                   <Box
@@ -149,14 +147,6 @@ const ApplyLeaveLayout = () => {
       <Grid item xs={12}>
         <LeaveUserView data={leaveData} isLoading={isLoading} />
       </Grid>
-      {/* <Fab
-        color="secondary"
-        aria-label="add"
-        style={fabStyle}
-        onClick={() => navigate(`/employee/applyleavefield`)}
-      >
-        <AddIcon />
-      </Fab> */}
     </Box>
   );
 };

@@ -1,15 +1,9 @@
 import React, { useContext, useState } from "react";
 import {
   useDeleteLeave,
-  useGetLoggedInUserLeave,
 } from "../../hooks/leave/useLeave";
-import { useGetLeaveType } from "../../hooks/leaveType/useLeaveType";
-import { Button, Chip, Stack, Tooltip, Typography } from "@mui/material";
-import { useGetUserControl } from "../../hooks/auth/userControl/useUserControl";
-import DeleteIcon from "@mui/icons-material/Delete";
-import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
+import { Chip,  Tooltip, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import ApplyLeaveField from "../../components/Form/Leave/ApplyLeave/ApplyLeaveField";
 import DeleteConfirmationModal from "../../components/Modal/DeleteConfirmationModal";
 import ThemeModeContext from "../../../theme/ThemeModeContext";
 import CustomTable from "../../components/CustomTable/CustomTable";
@@ -167,35 +161,6 @@ const LeaveUserView = ({ data, isLoading }) => {
         );
       },
     },
-    // {
-    //   title: "Actions",
-    //   render: (rowData) => {
-    //     const isApprovedOrRejected = ["APPROVED", "REJECTED"].includes(
-    //       rowData.leaveStatus
-    //     );
-
-    //     return (
-    //       <Stack direction="row" spacing={0}>
-    //         <Button
-    //           color="primary"
-    //           onClick={() => handleEditLeave(rowData)}
-    //           disabled={isApprovedOrRejected}
-    //         >
-    //           <ModeEditOutlineIcon />
-    //         </Button>
-    //         <Button
-    //           color="primary"
-    //           onClick={() => handleDeleteLeave(rowData)}
-    //           disabled={isApprovedOrRejected}
-    //         >
-    //           <DeleteIcon />
-    //         </Button>
-    //       </Stack>
-    //     );
-    //   },
-    //   sorting: false,
-    //   width: 120,
-    // },
   ];
 
   return (
