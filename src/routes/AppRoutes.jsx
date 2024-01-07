@@ -54,7 +54,7 @@ const AppRoutes = () => {
                     />
                      <Route
                       key="2"
-                      path='email-log-id'
+                      path='mail-log-id'
                       exact
                       element={<EmailLogUserId/>}
                     />

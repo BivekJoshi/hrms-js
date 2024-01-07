@@ -11,7 +11,7 @@ const useCompanyForm = (data, onClose) => {
       branchName: data?.branchName || "",
       branchEmail: data?.branchEmail || "",
       branchContact: data?.branchContact || "",
-      branchAddress: data?.branchAddress||"",
+      branchAddress: data?.branchAddress || "",
       branchDescription: data?.branchDescription || "",
       id: data?.id,
     },
