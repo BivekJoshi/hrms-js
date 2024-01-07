@@ -54,7 +54,7 @@ export const useEditQualification = ({ onSuccess }) => {
     },
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Qualification edited Sucessfully');
+        toast.success('Qualification updated sucessfully');
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries('getQualificationById');
       },
