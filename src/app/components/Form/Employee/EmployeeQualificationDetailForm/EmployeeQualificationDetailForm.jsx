@@ -169,7 +169,7 @@ const EmployeeQualificationDetailForm = ({ formik, isLoading }) => {
                                 id={`education[${index}].passedYear`}
                                 name={`education[${index}].passedYear`}
                                 label="Passed Year (A.D.)"
-                                placeholder="Enter your passed year"
+                                placeholder="Select your passed year"
                                 fullWidth
                                 error={Boolean(
                                   formik.touched.education?.[index]
@@ -219,7 +219,7 @@ const EmployeeQualificationDetailForm = ({ formik, isLoading }) => {
                         direction="row"
                         justifyContent="flex-end"
                         alignItems="center"
-                        gap= '.5rem'
+                        gap=".5rem"
                       >
                         <div
                           onClick={() =>
@@ -233,19 +233,21 @@ const EmployeeQualificationDetailForm = ({ formik, isLoading }) => {
                           }
                           style={{
                             cursor:
-                              index !== values.education.length - 1
+                              index !== values.education.length - 1 ||
+                              index >= passedLevel?.length - 1
                                 ? "not-allowed"
                                 : "pointer",
                             color:
-                              index !== values.education.length - 1
+                              index !== values.education.length - 1 ||
+                              index >= passedLevel?.length - 1
                                 ? "#BDBDBD"
                                 : "#388E3C",
                             pointerEvents:
-                              index !== values.education.length - 1
+                              index !== values.education.length - 1 ||
+                              index >= passedLevel?.length - 1
                                 ? "none"
                                 : "auto",
                           }}
-                          disabled={index !== values.education.length - 1}
                         >
                           <AddIcon />
                         </div>
@@ -266,7 +268,6 @@ const EmployeeQualificationDetailForm = ({ formik, isLoading }) => {
                 );
               })}
               <br />
-     
             </>
           )}
         />
