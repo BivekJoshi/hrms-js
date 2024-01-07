@@ -185,15 +185,23 @@ const EventAttendance = ({ permissions }) => {
 
   const actions = [
     {
-      icon: () => (
-        <HocButton
-          permissions={permissions.canEdit}
-          icon={<ModeEditOutlineIcon />}
-        />
-      ),
+      icon: () => <ModeEditOutlineIcon />,
+
+      disabled: !permissions?.canEdit,
+
       tooltip: "Edit Event",
       onClick: (event, rowData) => handleEditEventAttendance(rowData),
     },
+    // {
+    //   icon: () => (
+    //     <HocButton
+    //       permissions={permissions.canEdit}
+    //       icon={<ModeEditOutlineIcon />}
+    //     />
+    //   ),
+    //   tooltip: "Edit Event",
+    //   onClick: (event, rowData) => handleEditEventAttendance(rowData),
+    // },
   ];
 
   useEffect(() => {

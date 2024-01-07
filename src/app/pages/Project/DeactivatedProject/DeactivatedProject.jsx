@@ -14,7 +14,6 @@ import RestoreFromTrashOutlinedIcon from '@mui/icons-material/RestoreFromTrashOu
 import CloseIcon from '@mui/icons-material/Close';
 
 const DeactivatedProject = ({onClick}) => {
-  console.log(onClick);
   const { data: deactivatedProject, isLoading } = useGetDeactivatedProject();
   // const { data: employeeData } = useGetEmployee();
 

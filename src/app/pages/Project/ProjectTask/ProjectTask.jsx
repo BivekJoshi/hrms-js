@@ -203,29 +203,49 @@ const ProjectTask = ({ permissions }) => {
 
   const actions = [
     {
-      icon: () => (
-        <HocButton
-          permissions={permissions.canAdd}
-          icon={<AssignmentIcon />}
-        />
-      ),
+      icon: () => <AssignmentIcon />,
+
+      disabled: !permissions?.canAdd,
+
       tooltip: "Assign task",
       onClick: (event, rowData) => handleAssignTask(rowData),
     },
     {
-      icon: () => (
-        <HocButton permissions={permissions.canEdit} icon={<ModeEditOutlineIcon />} />
-      ),
+      icon: () => <ModeEditOutlineIcon />,
+      disabled: !permissions?.canEdit,
       tooltip: "Edit task",
       onClick: (event, rowData) => handleEditTask(rowData),
     },
     {
-      icon: () => (
-        <HocButton permissions={permissions.canDelete} icon={<DeleteIcon />} />
-      ),
+      icon: () => <DeleteIcon />,
+      disabled: !permissions?.canDelete,
       tooltip: "Delete task",
       onClick: (event, rowData) => handleDeleteTask(rowData),
     },
+    // {
+    //   icon: () => (
+    //     <HocButton
+    //       permissions={permissions.canAdd}
+    //       icon={<AssignmentIcon />}
+    //     />
+    //   ),
+    //   tooltip: "Assign task",
+    //   onClick: (event, rowData) => handleAssignTask(rowData),
+    // },
+    // {
+    //   icon: () => (
+    //     <HocButton permissions={permissions.canEdit} icon={<ModeEditOutlineIcon />} />
+    //   ),
+    //   tooltip: "Edit task",
+    //   onClick: (event, rowData) => handleEditTask(rowData),
+    // },
+    // {
+    //   icon: () => (
+    //     <HocButton permissions={permissions.canDelete} icon={<DeleteIcon />} />
+    //   ),
+    //   tooltip: "Delete task",
+    //   onClick: (event, rowData) => handleDeleteTask(rowData),
+    // },
   ];
 
   return (
