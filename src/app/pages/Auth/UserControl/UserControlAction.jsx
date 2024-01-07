@@ -49,7 +49,7 @@ const UserControlAction = ({ rowData }) => {
   };
 
   const handleViewEmailLog = () => {
-    navigate(`/admin/email-log-id`, { state: { rowData } });
+    navigate(`/admin/mail-log-id`, { state: { rowData } });
   };
 
   return (

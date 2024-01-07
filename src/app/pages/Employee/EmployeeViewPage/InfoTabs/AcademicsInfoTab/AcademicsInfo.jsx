@@ -9,34 +9,40 @@ import { useGetQualificationById } from '../../../../../hooks/employee/useQualif
 import { useSelector } from 'react-redux';
 
 const AcademicsInfo = ({ data }) => {
-  const { data: qualificationData, isLoading } = useGetQualificationById(data?.id);
+  const { data: qualificationData, isLoading } = useGetQualificationById(
+    data?.id
+  );
 
   const { mode } = useContext(ThemeModeContext);
-  return !isLoading && (
-    <Box
-      className='profileBasic'
-      sx={{
-        bgcolor: mode === 'light' ? '#ededed' : '#454546',
-      }}
-    >
-      <Timeline
+  return (
+    !isLoading && (
+      <Box
+        className='profileBasic'
         sx={{
-          [`& .${timelineItemClasses.root}:before`]: {
-            flex: 0,
-            padding: 0,
-          },
-          marginTop: '0rem',
+          bgcolor: mode === 'light' ? '#ededed' : '#454546',
         }}
       >
-        {qualificationData
-          ? qualificationData
+        <Timeline
+          sx={{
+            [`& .${timelineItemClasses.root}:before`]: {
+              flex: 0,
+              padding: 0,
+            },
+            marginTop: '0rem',
+          }}
+        >
+          {qualificationData && qualificationData.length > 0 ? (
+            qualificationData
               .sort((a, b) => b.passedYear - a.passedYear)
               .map((item, index) => (
                 <AcademicsComponents key={index} data={item} />
               ))
-          : ''}
-      </Timeline>
-    </Box>
+          ) : (
+            <p>No records found</p>
+          )}
+        </Timeline>
+      </Box>
+    )
   );
 };
 

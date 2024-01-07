@@ -13,7 +13,11 @@ import { useGetLoggedInUser } from "../../../../../hooks/auth/usePassword";
 import useAuth from "../../../../../../auth/hooks/component/login/useAuth";
 
 const AttendenceInfo = ({ data }) => {
-  const { data: attendanceData } = useGetEmployeeAttendanceById(data?.id);
+  const { data: userData } = useGetLoggedInUser();
+  const { data: attendanceData } = data
+    ? useGetEmployeeAttendanceById(data?.id)
+    : useGetEmployeeAttendanceById(userData?.employeeId);
+
   const calendarRef = useRef(null);
   const [events, setEvents] = useState([]);
 
@@ -27,18 +31,30 @@ const AttendenceInfo = ({ data }) => {
   //   id = paramId;
   // }
 
-  
   useEffect(() => {
     if (attendanceData) {
       const formattedEvents = attendanceData.map((event) => ({
-        title: event.timeIn,
-        date: event.attendanceDate,
-        backgroundColor: "white",
-        id: event.id,
+        title: "Present",
+        start: new Date(event.punchTime),
+        backgroundColor: "green",
+        id: event.empId,
+        time: new Date(event.punchTime).toLocaleTimeString(), // Add time property
       }));
       setEvents(formattedEvents);
     }
   }, [attendanceData]);
+
+  // useEffect(() => {
+  //   if (attendanceData) {
+  //     const formattedEvents = attendanceData.map((event) => ({
+  //       title: event.timeIn,
+  //       date: event.attendanceDate,
+  //       backgroundColor: "white",
+  //       id: event.id,
+  //     }));
+  //     setEvents(formattedEvents);
+  //   }
+  // }, [attendanceData]);
 
   return (
     <Box className={attendanceData ? "attendenceDesign" : ""}>
@@ -165,20 +181,36 @@ export default AttendenceInfo;
 
 function renderEventContent(eventInfo) {
   return (
-    <Box className="attendanceHover">
+    <Box className="attendanceHover" sx={{ display: "flex" }}>
       <Box border={"none"} textAlign="center">
         {!eventInfo ? (
           <HdrAutoOutlinedIcon sx={{ color: "red" }} />
         ) : (
-          <TbCircleLetterP
-            style={{ width: "2.5rem", height: "2.5rem", color: "green" }}
-          />
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start",
+            }}
+          >
+            <TbCircleLetterP
+              style={{ width: "2.5rem", height: "2.5rem", color: "green" }}
+            />
+            <div>
+              <Typography>
+                Check In : {eventInfo?.event?._def?.extendedProps?.time}
+              </Typography>
+              <Typography>Check Out : {eventInfo?.event?._def?.extendedProps?.time}</Typography>
+            </div>
+          </div>
         )}
       </Box>
-      <Box className="timeInO">
-        <Typography>TimeIn : {eventInfo.event.title}</Typography>
+      {/* <Box className="timeInO" sx={{ color: "green" }}>
+        <Typography>
+          TimeIn : {eventInfo?.event?._def?.extendedProps?.time}
+        </Typography>
         <Typography>TimeOut : {eventInfo.event.date}</Typography>
-      </Box>
+      </Box> */}
     </Box>
   );
 }

@@ -5,14 +5,14 @@ import ThemeModeContext from '../../../theme/ThemeModeContext';
 import BarChatDiagram from '../../components/Charts/BarChatDiagram';
 import DashboardCard from '../../components/cards/Dashboard/DashboardCard';
 import { ProjectProgressCard } from '../../components/cards/ProjectProgress/ProjectProgressCard';
-import { useDashBoardSearch } from './api/dashboardApi';
 import { useGetLoggedInUser } from '../../hooks/auth/usePassword';
 import { DOC_URL } from '../../../auth/axiosInterceptor';
 import { EmployPichart } from '../EmployeePage/Component/EmployPichart';
+import { useGetDashboard } from '../../hooks/dashboard/useDashboard';
 
 const Dashboard = () => {
   const { mode } = useContext(ThemeModeContext);
-  const { data, isLoading } = useDashBoardSearch();
+  const { data, isLoading } = useGetDashboard();
   const { data: loggedUserData } = useGetLoggedInUser();
   const url = DOC_URL;
 
@@ -25,7 +25,7 @@ const Dashboard = () => {
     year: 'numeric',
   };
   const formattedDate = today.toLocaleDateString(undefined, options);
-  return (
+  return !isLoading && (
     <>
       <Box
         display='flex'
@@ -99,7 +99,7 @@ const Dashboard = () => {
             <Typography variant='h5' sx={{ marginBottom: '16px' }}>
               Employee Information
             </Typography>
-            <BarChatDiagram dashboardData={data?.employeeInfo} />
+            <BarChatDiagram data={data?.employeeInfo} />
           </Grid>
           <Grid item md={6} xs={12}>
             <div>
@@ -118,14 +118,14 @@ const Dashboard = () => {
           </Grid>
           {data?.employeeCountPerDepartment && (
             <Grid item md={6} xs={12}>
-              <Typography variant="h5" sx={{ marginBottom: "16px" }}>
+              <Typography variant='h5' sx={{ marginBottom: '16px' }}>
                 Employee Count Per Department
               </Typography>
               <Grid
-                borderRadius={"6px"}
-                bgcolor={mode === "light" ? "white" : "#3f413f"}
-                padding="1rem "
-                boxShadow="0 4px 8px 3px rgba(0,0,0,.15), 0 1px 3px rgba(0,0,0,.3)"
+                borderRadius={'6px'}
+                bgcolor={mode === 'light' ? 'white' : '#3f413f'}
+                padding='1rem '
+                boxShadow='0 4px 8px 3px rgba(0,0,0,.15), 0 1px 3px rgba(0,0,0,.3)'
               >
                 <EmployPichart data={data?.employeeCountPerDepartment} />
               </Grid>
@@ -133,14 +133,14 @@ const Dashboard = () => {
           )}
           {data?.employeeCountPerEmpType && (
             <Grid item md={6} xs={12}>
-              <Typography variant="h5" sx={{ marginBottom: "16px" }}>
+              <Typography variant='h5' sx={{ marginBottom: '16px' }}>
                 Employee Count Per Employee Type
               </Typography>
               <Grid
-                borderRadius={"6px"}
-                bgcolor={mode === "light" ? "white" : "#3f413f"}
-                padding="1rem "
-                boxShadow="0 4px 8px 3px rgba(0,0,0,.15), 0 1px 3px rgba(0,0,0,.3)"
+                borderRadius={'6px'}
+                bgcolor={mode === 'light' ? 'white' : '#3f413f'}
+                padding='1rem '
+                boxShadow='0 4px 8px 3px rgba(0,0,0,.15), 0 1px 3px rgba(0,0,0,.3)'
               >
                 <EmployPichart data={data?.employeeCountPerEmpType} />
               </Grid>

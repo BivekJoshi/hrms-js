@@ -5,11 +5,16 @@ import {
   useGetDeactivatedProject,
 } from '../../../hooks/project/useProject';
 import { useGetEmployee } from '../../../hooks/employee/useEmployee';
-import { Button, Stack } from '@mui/material';
-import { AddProjectActiveModal } from '../ProjectModal/ProjectModal';
+import { IconButton, Grid, Typography } from '@mui/material';
+import {
+  AddProjectActiveModal,
+  AddProjectModal,
+} from '../ProjectModal/ProjectModal';
 import RestoreFromTrashOutlinedIcon from '@mui/icons-material/RestoreFromTrashOutlined';
+import CloseIcon from '@mui/icons-material/Close';
 
-const DeactivatedProject = () => {
+const DeactivatedProject = ({onClick}) => {
+  console.log(onClick);
   const { data: deactivatedProject, isLoading } = useGetDeactivatedProject();
   // const { data: employeeData } = useGetEmployee();
 
@@ -42,17 +47,11 @@ const DeactivatedProject = () => {
       field: 'projectName',
       emptyValue: '-',
     },
-    // {
-    //   title: 'Project Leader Name',
-    //   render: (rowData) => {
-    //     return <p>{getLeaderName(rowData)}</p>;
-    //   },
-    // },
   ];
 
   const actions = [
     {
-      icon: () => <RestoreFromTrashOutlinedIcon sx={{ color: '#01579B' }} />,
+      icon: () => <RestoreFromTrashOutlinedIcon sx={{ color: "#01579B" }} />,
       tooltip: 'Activate Project',
       onClick: (event, rowData) => handleActivateProject(rowData),
     },
@@ -62,6 +61,21 @@ const DeactivatedProject = () => {
 
   return (
     <>
+      <div>
+        <Grid
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            margin: "0.2rem 0.6rem",
+          }}
+        >
+          <Typography variant="h6"> Terminated project</Typography>
+
+          <IconButton onClick={onClick}>
+            <CloseIcon />
+          </IconButton>
+        </Grid>
+      </div>
       <br />
       <MaterialTable
         columns={columns}

@@ -71,7 +71,7 @@ const EmployeeGrid = ({ employeeData, isLoading }) => {
           backgroundColor: palette?.background?.default,
         }}
       >
-        <Typography variant='h7' mb={1} ontWeight={500}>
+        <Typography variant='h7' mb={1} fontWeight={500}>
           Filter By:
         </Typography>
         <Grid container spacing={4}>

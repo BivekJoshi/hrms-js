@@ -116,7 +116,7 @@ const NewFilter = ({ inputField, searchCallBack, validate }) => {
         // backgroundColor: "#fafafa",
       }}
     >
-      <Typography variant='h7' mb={1} ontWeight={500}>
+      <Typography variant='h7' mb={1} fontWeight={500}>
         Filter By:
       </Typography>
       <Grid

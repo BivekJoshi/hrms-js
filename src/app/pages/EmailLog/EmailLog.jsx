@@ -10,7 +10,7 @@ const EmailLog = () => {
   const navigate = useNavigate();
 
   const handleViewLog = (rowData) => {
-    navigate(`/admin/email-log-id`, { state: { rowData } });
+    navigate(`/admin/mail-log-id`, { state: { rowData } });
   };
   const columns = [
     {
@@ -78,13 +78,13 @@ const EmailLog = () => {
   // const filteredData = data.filter(
   //   (row) => row.emailType === "FORGOT_PASSWORD" && row.result === "SUCCESS"
   // );
-  // const actions = [
-  //   {
-  //     icon: () => <RemoveRedEyeOutlinedIcon />,
-  //     tooltip: "View Details",
-  //     onClick: (event, rowData) => handleViewLog(rowData),
-  //   },
-  // ];
+  const actions = [
+    {
+      icon: () => <RemoveRedEyeOutlinedIcon />,
+      tooltip: "View Details",
+      onClick: (event, rowData) => handleViewLog(rowData),
+    },
+  ];
 
   return (
     <>
@@ -93,7 +93,7 @@ const EmailLog = () => {
         data={data}
         title="Email Log"
         isLoading={isLoading}
-        // actions={actions}
+        actions={actions}
       />
     </>
   );

@@ -12,8 +12,8 @@ import { toast } from "react-toastify";
 //   });
 // };
 
-export const useGetEmailLogByFilter = (userId,id) => {
-  return useQuery(["getEmailLogByFilter"], () => getEmailLogByFilter(userId,id), {
+export const useGetEmailLogByFilter = (userId,id,userIdFromEmailLog) => {
+  return useQuery(["getEmailLogByFilter"], () => getEmailLogByFilter(userId,id,userIdFromEmailLog), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });

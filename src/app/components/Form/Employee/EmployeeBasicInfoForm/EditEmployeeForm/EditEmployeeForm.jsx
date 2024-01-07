@@ -33,17 +33,14 @@ const EditEmployeeForm = () => {
   ];
 
   const { data, isLoading: employeeLoading } = useGetEmployeeById(id);
-  const { data: addressData, isLoading: getaddressLoading } =
-    useGetAddressById(id);
+  const { data: addressData, isLoading: getaddressLoading } = useGetAddressById(id);
 
-  const { formik: qualificationFormik, isLoading: isLoadingQualification } =
-    useQualificationForm();
+  const { formik: qualificationFormik, isLoading: isLoadingQualification } = useQualificationForm();
 
   const { formik: familyFormik, isLoading: isLoadingFamily } = useFamilyForm();
   const { formik, isLoading } = useEditEmployeeForm({ data, employeeLoading });
 
-  const { formik: permanentFormik, isLoading: addressLoading } =
-    usePermanentAddressForm(addressData, getaddressLoading);
+  const { formik: permanentFormik, isLoading: addressLoading } = usePermanentAddressForm(addressData, getaddressLoading);
 
   const { formik: bankFormik } = useAddBankForm({ data, employeeLoading });
 
