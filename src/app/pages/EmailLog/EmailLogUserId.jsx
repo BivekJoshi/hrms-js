@@ -20,7 +20,12 @@ const EmailLogUserId = () => {
   const [passId,setPassId]=useState("");
   const location = useLocation();
   const { data: userData, isLoading: loadingUser } = useGetUserControl();
+
   const userId = location?.state?.rowData?.id || null;
+
+  const userIdFromEmailLog = location?.state?.rowData?.user?.id || null;
+  console.log(userIdFromEmailLog,"id ma chaiiiiiii");
+
   const { palette } = useContext(ThemeModeContext);
   const [openAddModal, setOpenAddModal] = useState(false);
   const { formik } = useEmailResendForm(passId);
@@ -29,7 +34,7 @@ const EmailLogUserId = () => {
     data,
     isLoading,
     refetch: refetchFilterData,
-  } = useGetEmailLogByFilter(userId, id);
+  } = useGetEmailLogByFilter(userId, id,userIdFromEmailLog);
 
   const handleClick = (rowData) => {
     const UserId=rowData?.user?.id;

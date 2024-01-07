@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 import { useAddPromotionHistory } from "../usePromotionHistory";
 import PositionSchema from "../Validation/PromotionSchema";
 
-const useAddPromotionHistoryForm = () => {
+const useAddPromotionHistoryForm = (onClose) => {
   const { mutate } = useAddPromotionHistory({});
 
   const formik = useFormik({
@@ -13,7 +13,6 @@ const useAddPromotionHistoryForm = () => {
     },
     validationSchema: PositionSchema,
     onSubmit: (values) => {
-      const isValid = PositionSchema.isValidSync(values); // Simple validation test
       handleRequest(values);
     },
   });
@@ -24,7 +23,12 @@ const useAddPromotionHistoryForm = () => {
       ...values,
       positionId,
     };
-    mutate(values, formik, { onSuccess: () => formik.handleReset() });
+    mutate(values, {
+      onSuccess: () => {
+        formik.handleReset();
+        onClose();
+      },
+    });
   };
 
   return { formik };

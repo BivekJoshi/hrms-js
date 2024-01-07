@@ -321,7 +321,7 @@ export default function AdminSidebar() {
           sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
         />
       ),
-      path: "email-log",
+      path: "mail-log",
       subMenus: [],
     },
   ];
@@ -410,7 +410,7 @@ export default function AdminSidebar() {
   ];
 
   const filteredDrawerMenus = drawerMenusForAdmin.filter(
-    (menu) => menu?.path !== "email"
+    (menu) => menu?.path !== "email" && menu?.path !== "mail-log"
   );
 
   const drawerMenus =
