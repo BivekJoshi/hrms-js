@@ -1,34 +1,16 @@
-import { Box, Button, List, Modal, Stack, Typography } from "@mui/material";
-import React, { useState } from "react";
-import { useParams } from "react-router";
+import { Box, Button, List, Modal, Stack, Typography } from '@mui/material';
+import React, { useState } from 'react';
+import { useParams } from 'react-router';
 
-import InfoItem from "./InfoItem";
-import BorderColorIcon from "@mui/icons-material/BorderColor";
-import { Link, useNavigate } from "react-router-dom";
-import { useGetLoggedInUser } from "../../../../../../hooks/auth/usePassword";
-import useAuth from "../../../../../../../auth/hooks/component/login/useAuth";
-
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
+import InfoItem from './InfoItem';
+import BorderColorIcon from '@mui/icons-material/BorderColor';
+import { useNavigate } from 'react-router-dom';
+import { useGetLoggedInUser } from '../../../../../../hooks/auth/usePassword';
+import useAuth from '../../../../../../../auth/hooks/component/login/useAuth';
 
 export default function ListUserDetails({ cardTitle, data, mode }) {
-  const {
-    isSuperAdmin,
-    isAdmin,
-    isHr,
-    isEmployee,
-    isHrAdmin,
-    isManager,
-  } = useAuth();
+  const { isSuperAdmin, isAdmin, isHr, isEmployee, isHrAdmin, isManager } =
+    useAuth();
 
   const { id } = useParams();
 
@@ -45,16 +27,20 @@ export default function ListUserDetails({ cardTitle, data, mode }) {
   };
   return (
     <>
-      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-        <Typography variant="h6" sx={{ fontWeight: 600 }}>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+        <Typography variant='h6' sx={{ fontWeight: 600 }}>
           {cardTitle}
         </Typography>
-        <Stack sx={{ display: "flex", alignItems: "center" }}>
-          {!isEmployee && (cardTitle === 'Basic Informations') && (
+        <Stack sx={{ display: 'flex', alignItems: 'center' }}>
+          {!isEmployee && cardTitle === 'Basic Informations' && (
             <BorderColorIcon
               onClick={handleOnClick}
-              fontSize="large"
-              sx={{ color: "rgb(28, 126, 214)", paddingRight: "1rem", cursor:"pointer"}}
+              fontSize='large'
+              sx={{
+                color: 'rgb(28, 126, 214)',
+                paddingRight: '1rem',
+                cursor: 'pointer',
+              }}
             />
           )}
         </Stack>
@@ -70,8 +56,8 @@ export default function ListUserDetails({ cardTitle, data, mode }) {
       </Box>
       <List
         sx={{
-          bgcolor: mode === "light" ? "#ededed" : "#3f413f",
-          borderRadius: "1rem",
+          bgcolor: mode === 'light' ? '#ededed' : '#3f413f',
+          borderRadius: '1rem',
         }}
       >
         {Object.keys(data)?.map((item, index) => (
