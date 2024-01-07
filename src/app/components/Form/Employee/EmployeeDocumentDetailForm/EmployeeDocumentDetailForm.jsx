@@ -20,7 +20,7 @@ const EmployeeDocumentDetailForm = () => {
   const [openEditModal, setOpenEditModal] = useState(false);
   const [expandedAccordion, setExpandedAccordion] = useState('panel1');
 
-  const [selectedDocument, setSelectedDocument] = useState('');
+  const [selectedDocument, setSelectedDocument] = useState('EMPLOYEE_PHOTO');
   const [document, setDocument] = useState('');
   const [imagePreviewMap, setImagePreviewMap] = useState({});
 
@@ -239,74 +239,83 @@ const EmployeeDocumentDetailForm = () => {
 
         <Grid item xs={12} sm={6}>
           {documentType &&
-            documentType.map((document, index) => (
-              <Accordion
-                key={document.id}
-                expanded={expandedAccordion === `panel${document?.id}`}
-                onChange={handleChange(`panel${document?.id}`, document?.input)}
-                sx={{
-                  margin: '0 !important',
-                  borderBottom: '1px solid black',
-                  boxShadow: 'none',
-                }}
-              >
-                <AccordionSummary
-                  aria-controls={`panel${document.id}a-content`}
-                  id={`panel${document.id}a-header`}
+            documentType.map((document, index) => {
+              const isInputDisabled = documentPhoto?.some(
+                (photo) => photo?.documentType === selectedDocument
+              );
+
+              return (
+                <Accordion
+                  key={document.id}
+                  expanded={expandedAccordion === `panel${document?.id}`}
+                  onChange={handleChange(
+                    `panel${document?.id}`,
+                    document?.input
+                  )}
+                  sx={{
+                    margin: '0 !important',
+                    borderBottom: '1px solid black',
+                    boxShadow: 'none',
+                  }}
                 >
-                  <Typography variant='h7' sx={{ fontWeight: 500 }}>
-                    {document?.label}
-                  </Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Box sx={{ display: 'flex', gap: '1rem' }}>
-                    <label htmlFor='file'>
-                      <input
-                        type='file'
-                        ref={fileInputRef}
-                        onChange={(e) => handleChangeImage(e)}
-                        style={{ display: 'none' }}
-                        id='file'
-                      />
-                      <Box
-                        sx={{
-                          cursor: 'pointer',
-                          display: 'flex',
-                          border: '1px solid #B9BEC7',
-                          borderRadius: '.3rem',
-                          // width: "450px",
-                        }}
-                        component='span'
-                      >
-                        <div
-                          style={{
-                            backgroundColor: '#E7E0EB',
-                            padding: '.5rem',
+                  <AccordionSummary
+                    aria-controls={`panel${document.id}a-content`}
+                    id={`panel${document.id}a-header`}
+                  >
+                    <Typography variant='h7' sx={{ fontWeight: 500 }}>
+                      {document?.label}
+                    </Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <Box sx={{ display: 'flex', gap: '1rem' }}>
+                      <label htmlFor='file'>
+                        <input
+                          type='file'
+                          ref={fileInputRef}
+                          onChange={(e) => handleChangeImage(e)}
+                          style={{ display: 'none' }}
+                          disabled={isInputDisabled}
+                          id='file'
+                        />
+                        <Box
+                          sx={{
+                            cursor: 'pointer',
+                            display: 'flex',
+                            border: '1px solid #B9BEC7',
                             borderRadius: '.3rem',
-                            minWidth: '20%',
-                            fontWeight: 500,
+                            // width: "450px",
                           }}
+                          component='span'
                         >
-                          Choose file
-                        </div>
-                        <div
-                          style={{
-                            minwidth: '50%',
-                            color: '#B9BEC7',
-                            padding: '.3rem',
-                          }}
-                        >
-                          {
-                            <p>
-                              {docPathSelected
-                                ? docPathSelected
-                                : 'No file choosen'}
-                            </p>
-                          }
-                        </div>
-                      </Box>
-                    </label>
-                    {/* <Button
+                          <div
+                            style={{
+                              backgroundColor: '#E7E0EB',
+                              padding: '.5rem',
+                              borderRadius: '.3rem',
+                              minWidth: '20%',
+                              fontWeight: 500,
+                            }}
+                          >
+                            Choose file
+                          </div>
+                          <div
+                            style={{
+                              minwidth: '50%',
+                              color: '#B9BEC7',
+                              padding: '.3rem',
+                            }}
+                          >
+                            {
+                              <p>
+                                {docPathSelected
+                                  ? docPathSelected
+                                  : 'No file choosen'}
+                              </p>
+                            }
+                          </div>
+                        </Box>
+                      </label>
+                      {/* <Button
                       variant='outlined'
                       disabled={uploadStatusMap[expandedAccordion]}
                       onClick={() => {
@@ -316,10 +325,11 @@ const EmployeeDocumentDetailForm = () => {
                     >
                       Upload
                     </Button> */}
-                  </Box>
-                </AccordionDetails>
-              </Accordion>
-            ))}
+                    </Box>
+                  </AccordionDetails>
+                </Accordion>
+              );
+            })}
         </Grid>
       </Grid>
       {openEditModal && (
