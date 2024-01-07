@@ -1,17 +1,11 @@
 import React from 'react';
 import '../Style/Style.css';
 import { Box, Divider, Stack } from '@mui/material';
-import BorderColorIcon from '@mui/icons-material/BorderColor';
 import ListUserDetails from '../../InfoTabs/BaiscInfoTab/Components/ListUserDetails';
-import { useParams } from 'react-router-dom';
 import { useGetBankByEmployeeId } from '../../../../../hooks/employee/useBank';
 import { useGetFammilyById } from '../../../../../hooks/employee/useFamily';
-import useAuth from '../../../../../../auth/hooks/component/login/useAuth';
 
 const BasicInfo = ({ data, mode, positionName, empId }) => {
-  const { id } = useParams();
-  const { isSuperAdmin, isAdmin, isHr, isEmployee, isHrAdmin, isManager } =
-    useAuth();
   const { data: bankData } = useGetBankByEmployeeId();
   const { data: familyData } = useGetFammilyById(data?.id);
 
@@ -23,7 +17,6 @@ const BasicInfo = ({ data, mode, positionName, empId }) => {
     'Citizenship Number': data?.citizenshipNumber || '',
     'Date of Birth': data?.dateOfBirth || '',
     'Marital Status': data?.maritalStatus || '',
-    // "Date of Join": data?.dateOfJoin || "",
     Position: data?.positionName || '',
     'PAN Number': data?.panNumber || '',
   };
