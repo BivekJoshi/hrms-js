@@ -111,24 +111,26 @@ export const EditProjectActivateFields = ({ onClose, isLoading, data }) => {
         <Grid
           container
           direction="row"
-          justifyContent="flex-end"
-          alignItems="flex-end"
+          justifyContent="center"
+          alignItems="center"
+          gap='28px'
         >
           <Button
-            variant="contained"
-            onClick={handleFormSubmit}
-            sx={{ mt: 3, ml: 1 }}
-          >
-            Activate Project
-          </Button>
-          <Button
-            variant="contained"
-            onClick={onClose}
-            sx={{ mt: 3, ml: 1 }}
-            color="error"
-          >
-            Cancel
-          </Button>
+  variant="contained"
+  onClick={handleFormSubmit}
+  sx={{ mt: 3, ml: 1, textTransform: 'capitalize' }}
+>
+  Activate Project
+</Button>
+
+<Button
+  variant="contained"
+  onClick={onClose}
+  sx={{ mt: 3, ml: 1, textTransform: 'capitalize' }}
+  color="error"
+>
+  Cancel
+</Button>
         </Grid>
       </Grid>
     )

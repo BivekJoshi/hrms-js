@@ -10,7 +10,7 @@ const capitalizeAndAddSpace = (str) => {
     .replace(/(?:^|\s)\S/g, (a) => a.toUpperCase()); // Capitalize the first letter of each word
 };
 
-const BarChatDiagram = ({ dashboardData }) => {
+const BarChatDiagram = ({ data }) => {
   const { mode, palette } = useContext(ThemeModeContext);
 
   const names = dashboardData

@@ -81,7 +81,6 @@ const EmployeeDocumentDetailForm = () => {
         documentType: selectedDocument || documentType[0]?.input,
         document: file,
       };
-
       addDocument(values);
 
       setUploadStatusMap((prevMap) => ({

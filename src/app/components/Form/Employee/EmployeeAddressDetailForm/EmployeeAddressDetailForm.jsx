@@ -115,10 +115,10 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                         <Grid item xs={12} sm={6} md={3}>
                           <Autocomplete
                             options={permanentDistrictsOptions || []}
-                            getOptionLabel={(option) => option.name}
+                            getOptionLabel={(option) => option?.name}
                             value={
                               permanentDistrictsOptions?.find(
-                                (d) => d.name === address?.district
+                                (d) => d?.name === address?.district
                               ) || null
                             }
                             getOptionKey={(option) => option.name}

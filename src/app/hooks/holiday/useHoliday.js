@@ -85,7 +85,7 @@ export const useEditHoliday = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(['editHoliday'], (formData) => editHoliday(formData), {
     onSuccess: (data, variables, context) => {
-      toast.success('Succesfully edited Holiday');
+      toast.success('Succesfully updated holiday');
       onSuccess && onSuccess(data, variables, context);
       queryClient.invalidateQueries('getHoliday');
     },

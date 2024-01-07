@@ -25,7 +25,7 @@ const Dashboard = () => {
     year: "numeric",
   };
   const formattedDate = today.toLocaleDateString(undefined, options);
-  return (
+  return !isLoading && (
     <>
       <Box
         display="flex"
@@ -97,7 +97,7 @@ const Dashboard = () => {
             <Typography variant="h5" sx={{ marginBottom: "16px" }}>
               Employee Information
             </Typography>
-            <BarChatDiagram dashboardData={data?.employeeInfo} />
+            <BarChatDiagram data={data?.employeeInfo} />
           </Grid>
           <Grid item md={6} xs={12}>
             <div>

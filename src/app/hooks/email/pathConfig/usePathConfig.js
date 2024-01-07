@@ -9,7 +9,7 @@ export const usePathAddConfig = ({ onSuccess }) => {
     (formData) => addPathConfigure(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success("Success");
+        toast.success("Successfully added path configuration");
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries("addPathConfig");
       },
