@@ -25,7 +25,7 @@ const EmployeeGridView = ({ employeeData }) => {
           gap: '1rem',
         }}
       >
-        {employeeData?.map((employee, index) => (
+        {employeeData?.employees?.map((employee, index) => (
           <EmployeeCard
             key={index}
             IsActive={employee?.isActive || ''}

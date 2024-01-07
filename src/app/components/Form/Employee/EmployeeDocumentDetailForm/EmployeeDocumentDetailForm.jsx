@@ -1,27 +1,28 @@
-import { Accordion, AccordionDetails, Divider } from '@mui/material';
-import { AccordionSummary, Button } from '@mui/material';
-import { Grid, Typography, Box } from '@mui/material';
-import React, { useEffect, useRef, useState } from 'react';
+import { Accordion, AccordionDetails, Chip, Divider } from "@mui/material";
+import { AccordionSummary, Button } from "@mui/material";
+import { Grid, Typography, Box } from "@mui/material";
+import React, { useEffect, useRef, useState } from "react";
 import {
   useAddDocument,
   useDeleteDocument,
   useGetDocumentByDocumentType,
-} from '../../../../hooks/employee/useDocument';
-import { useParams } from 'react-router-dom';
-import { DOC_URL } from '../../../../../auth/axiosInterceptor';
-import { documentType } from './documentType';
-import { EditDocumentModal } from './EditDocumentModal';
-import deleteIcon from '../../../../../assets/approve.png';
-import updateIcon from '../../../../../assets/update.png';
+  useGetDocumentById,
+} from "../../../../hooks/employee/useDocument";
+import { useParams } from "react-router-dom";
+import { DOC_URL } from "../../../../../auth/axiosInterceptor";
+import { documentType } from "./documentType";
+import { EditDocumentModal } from "./EditDocumentModal";
+import deleteIcon from "../../../../../assets/approve.png";
+import updateIcon from "../../../../../assets/update.png";
 
 const EmployeeDocumentDetailForm = () => {
   const { id } = useParams();
   const fileInputRef = useRef(null);
   const [openEditModal, setOpenEditModal] = useState(false);
-  const [expandedAccordion, setExpandedAccordion] = useState('panel1');
+  const [expandedAccordion, setExpandedAccordion] = useState("panel1");
 
-  const [selectedDocument, setSelectedDocument] = useState('EMPLOYEE_PHOTO');
-  const [document, setDocument] = useState('');
+  const [selectedDocument, setSelectedDocument] = useState("EMPLOYEE_PHOTO");
+  const [document, setDocument] = useState("");
   const [imagePreviewMap, setImagePreviewMap] = useState({});
 
   const [editedDocument, setEditedDocument] = useState({});
@@ -36,6 +37,7 @@ const EmployeeDocumentDetailForm = () => {
     id,
     selectedDocument || documentType[0]?.input
   );
+  const { data: getDocument, isLoading } = useGetDocumentById(id);
 
   useEffect(() => {
     refetch();
@@ -46,7 +48,7 @@ const EmployeeDocumentDetailForm = () => {
   const handleChange = (panel, doc) => (_, isExpanded) => {
     setSelectedDocument(doc);
     setExpandedAccordion(isExpanded ? panel : null);
-    setDocument('');
+    setDocument("");
   };
 
   const handleChangeImage = (e) => {
@@ -79,8 +81,8 @@ const EmployeeDocumentDetailForm = () => {
     const { id } = document;
     deleteDocument(id);
 
-    setSelectedDocument('');
-    setDocument('');
+    setSelectedDocument("");
+    setDocument("");
     setImagePreviewMap((prevMap) => ({
       ...prevMap,
       [expandedAccordion]: undefined,
@@ -96,15 +98,15 @@ const EmployeeDocumentDetailForm = () => {
     <div>
       <Grid container>
         <Grid item xs={12} sm={6} md={6}>
-          <Grid display='flex' justifyContent='center'>
+          <Grid display="flex" justifyContent="center">
             {expandedAccordion && imagePreviewMap[expandedAccordion] && (
               <img
                 src={imagePreviewMap[expandedAccordion]}
-                alt='Preview'
+                alt="Preview"
                 width={240}
                 height={240}
                 style={{
-                  objectFit: 'contain',
+                  objectFit: "contain",
                 }}
               />
             )}
@@ -114,29 +116,29 @@ const EmployeeDocumentDetailForm = () => {
               <Grid
                 key={document?.id}
                 style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '1rem',
-                  paddingRight: '2rem',
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "1rem",
+                  paddingRight: "2rem",
                 }}
               >
-                <Box display='flex' justifyContent='center'>
+                <Box display="flex" justifyContent="center">
                   {expandedAccordion && !imagePreviewMap[expandedAccordion] && (
                     <div
                       style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        gap: '8px',
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "8px",
                       }}
                     >
-                      <Typography variant='h6'>Uploaded Document</Typography>
+                      <Typography variant="h6">Uploaded Document</Typography>
                       <img
                         src={`${url}${document?.path}`}
-                        alt='Document'
+                        alt="Document"
                         width={240}
                         height={240}
                         style={{
-                          objectFit: 'contain',
+                          objectFit: "contain",
                         }}
                       />
                     </div>
@@ -145,27 +147,27 @@ const EmployeeDocumentDetailForm = () => {
                 <Grid
                   sm={12}
                   sx={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    gap: '.5rem',
-                    textAlign: 'center',
+                    display: "flex",
+                    justifyContent: "center",
+                    gap: ".5rem",
+                    textAlign: "center",
                   }}
                 >
                   <Button
-                    variant='outlined'
-                    color='primary'
+                    variant="outlined"
+                    color="primary"
                     onClick={() => handleEditFormSubmit(document)}
                     startIcon={<img src={updateIcon} />}
-                    sx={{ textTransform: 'none', fontWeight: 'bold' }}
+                    sx={{ textTransform: "none", fontWeight: "bold" }}
                   >
                     Update
                   </Button>
                   <Button
-                    variant='outlined'
-                    color='error'
+                    variant="outlined"
+                    color="error"
                     onClick={() => handleDelete(document)}
                     startIcon={<img src={deleteIcon} />}
-                    sx={{ textTransform: 'none', fontWeight: 'bold' }}
+                    sx={{ textTransform: "none", fontWeight: "bold" }}
                   >
                     Delete
                   </Button>
@@ -253,46 +255,51 @@ const EmployeeDocumentDetailForm = () => {
                     document?.input
                   )}
                   sx={{
-                    margin: '0 !important',
-                    borderBottom: '1px solid black',
-                    boxShadow: 'none',
+                    margin: "0 !important",
+                    borderBottom: "1px solid black",
+                    boxShadow: "none",
                   }}
                 >
                   <AccordionSummary
                     aria-controls={`panel${document.id}a-content`}
                     id={`panel${document.id}a-header`}
                   >
-                    <Typography variant='h7' sx={{ fontWeight: 500 }}>
+                    <Typography variant="h7" sx={{ fontWeight: 500 }}>
                       {document?.label}
                     </Typography>
+                    {getDocument.map((data, index) => {
+                      if (document.input === data.documentType) {
+                        return <Chip label="Uploaded" color="success"/>;
+                      }
+                    })}
                   </AccordionSummary>
                   <AccordionDetails>
-                    <Box sx={{ display: 'flex', gap: '1rem' }}>
-                      <label htmlFor='file'>
+                    <Box sx={{ display: "flex", gap: "1rem" }}>
+                      <label htmlFor="file">
                         <input
-                          type='file'
+                          type="file"
                           ref={fileInputRef}
                           onChange={(e) => handleChangeImage(e)}
-                          style={{ display: 'none' }}
+                          style={{ display: "none" }}
                           disabled={isInputDisabled}
-                          id='file'
+                          id="file"
                         />
                         <Box
                           sx={{
-                            cursor: 'pointer',
-                            display: 'flex',
-                            border: '1px solid #B9BEC7',
-                            borderRadius: '.3rem',
+                            cursor: "pointer",
+                            display: "flex",
+                            border: "1px solid #B9BEC7",
+                            borderRadius: ".3rem",
                             // width: "450px",
                           }}
-                          component='span'
+                          component="span"
                         >
                           <div
                             style={{
-                              backgroundColor: '#E7E0EB',
-                              padding: '.5rem',
-                              borderRadius: '.3rem',
-                              minWidth: '20%',
+                              backgroundColor: "#E7E0EB",
+                              padding: ".5rem",
+                              borderRadius: ".3rem",
+                              minWidth: "20%",
                               fontWeight: 500,
                             }}
                           >
@@ -300,16 +307,16 @@ const EmployeeDocumentDetailForm = () => {
                           </div>
                           <div
                             style={{
-                              minwidth: '50%',
-                              color: '#B9BEC7',
-                              padding: '.3rem',
+                              minwidth: "50%",
+                              color: "#B9BEC7",
+                              padding: ".3rem",
                             }}
                           >
                             {
                               <p>
                                 {docPathSelected
                                   ? docPathSelected
-                                  : 'No file choosen'}
+                                  : "No file choosen"}
                               </p>
                             }
                           </div>
