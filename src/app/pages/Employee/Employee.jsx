@@ -81,9 +81,10 @@ const Employee = () => {
 
   const [value, setValue] = React.useState('1');
 
-  const [openAddModal, setOpenAddModal] = useState(false);
-  const handleAddOpenModal = () => setOpenAddModal(true);
+  const [openAddModal, setOpenAddModal] = useState(false);  
+  const [openSubmitModal, setOpenSubmitModal] = useState(false);
 
+  const handleAddOpenModal = () => setOpenAddModal(true);
   const handleOpenSubmitModal = () => setOpenAddModal(false);
   const handleOpenEmailModal = () => setOpenSubmitModal(true);
   const handleCloseEmailModal = () => {
@@ -92,7 +93,7 @@ const Employee = () => {
   };
 
   const { formik, empId } = useAddEmployeeForm(handleOpenSubmitModal, handleOpenEmailModal);
-// console.log(data, "data")
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
