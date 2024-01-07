@@ -64,7 +64,7 @@ const leaveName = [
     leaveName: 'FESTIVAL',
     leaveLabel: 'Festival Leave',
   },
-]
+];
 const LeaveType = ({ permissions }) => {
   const { data: leaveTypeData, isLoading } = useGetLeaveType();
   const { isSuperAdmin, isEmployee } = useAuth();
@@ -120,10 +120,11 @@ const LeaveType = ({ permissions }) => {
       field: 'leaveName',
       width: '5%',
       render: (rowData) => {
-        const leaveNameLabel = leaveName.find(leave => leave?.leaveName === rowData?.leaveName)?.leaveLabel || rowData?.leaveName;
-        return <div>{leaveNameLabel}</div>
+        const leaveNameLabel =
+          leaveName.find((leave) => leave?.leaveName === rowData?.leaveName)
+            ?.leaveLabel || rowData?.leaveName;
+        return <div>{leaveNameLabel}</div>;
       },
-      width: '10%',
       sortable: false,
       sorting: false,
     },
