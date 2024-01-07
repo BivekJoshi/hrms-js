@@ -25,13 +25,12 @@ const EmployeeDocumentDetailForm = () => {
   const [imagePreviewMap, setImagePreviewMap] = useState({});
 
   const [editedDocument, setEditedDocument] = useState({});
-  const [uploadStatusMap, setUploadStatusMap] = useState({});
   const handleCloseEditModal = () => setOpenEditModal(false);
 
   const docPathSelected = document?.name;
 
   const { mutate: deleteDocument } = useDeleteDocument({});
-  const { mutate: addDocument } = useAddDocument({});
+  const { mutate: addDocument, isSuccess } = useAddDocument({});
 
   const { data: documentPhoto, refetch } = useGetDocumentByDocumentType(
     id,
@@ -40,21 +39,9 @@ const EmployeeDocumentDetailForm = () => {
 
   useEffect(() => {
     refetch();
-  }, [selectedDocument]);
+  }, [isSuccess]);
 
   const url = DOC_URL;
-
-  const handleFormSubmit = (documentType) => {
-    if (document) {
-      const values = { documentType, document };
-      addDocument(values);
-
-      setUploadStatusMap((prevMap) => ({
-        ...prevMap,
-        [expandedAccordion]: true,
-      }));
-    }
-  };
 
   const handleChange = (panel, doc) => (_, isExpanded) => {
     setSelectedDocument(doc);
@@ -65,6 +52,9 @@ const EmployeeDocumentDetailForm = () => {
   const handleChangeImage = (e) => {
     const file = e.target.files[0];
     setDocument(file);
+
+    // Reset the input value to null to allow selecting the same file again
+    e.target.value = null;
 
     if (file) {
       const reader = new FileReader();
@@ -82,17 +72,19 @@ const EmployeeDocumentDetailForm = () => {
         document: file,
       };
       addDocument(values);
-
-      setUploadStatusMap((prevMap) => ({
-        ...prevMap,
-        [expandedAccordion]: true,
-      }));
     }
   };
 
   const handleDelete = (document) => {
     const { id } = document;
     deleteDocument(id);
+
+    setSelectedDocument('');
+    setDocument('');
+    setImagePreviewMap((prevMap) => ({
+      ...prevMap,
+      [expandedAccordion]: undefined,
+    }));
   };
 
   const handleEditFormSubmit = (document) => {

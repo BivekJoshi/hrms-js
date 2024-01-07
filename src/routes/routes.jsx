@@ -329,13 +329,13 @@ const routes = [
     component: <EmployeeMapping />,
   },
   {
-    path: 'email-log',
+    path: 'mail-log',
     name: 'Email Log',
     id: nanoid(),
     component: <EmailLog/>,
   },
   {
-    path: 'email-log-id',
+    path: 'mail-log-id',
     name: 'Email Log',
     id: nanoid(),
     component: <EmailLogUserId/>,
