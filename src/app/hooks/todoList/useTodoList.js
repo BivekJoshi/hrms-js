@@ -51,7 +51,7 @@ export const useAddTodoList = ({ onSuccess }) => {
 
   return useMutation(["addTodoList"], (formData) => addTodoList(formData), {
     onSuccess: (data, variables, context) => {
-      toast.success("Work todo is added successfully");
+      toast.success("Todo message added successfully");
       onSuccess && onSuccess(data, variables, context);
       queryClient.invalidateQueries("getTodoList");
     },
@@ -68,7 +68,7 @@ export const useEditTodoList = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(["editTodoList"], (formData) => editTodoList(formData), {
     onSuccess: (data, variables, context) => {
-      toast.success("Message edited successfully");
+      toast.success("Todo message edited successfully");
       onSuccess && onSuccess(data, variables, context);
       queryClient.invalidateQueries("getTodoList");
     },
@@ -86,7 +86,7 @@ export const useDeleteTodoList = ({ onSuccess }) => {
 
   return useMutation(["deleteTodoList"], (id) => deleteTodoList(id), {
     onSuccess: (data, variables, context) => {
-      toast.success("Message deleted successfully");
+      toast.success("Todo message deleted successfully");
       onSuccess && onSuccess(data, variables, context);
       queryClient.invalidateQueries("getTodoList");
     },
