@@ -2,6 +2,8 @@ import {
   Grid,
   TextField,
   Divider,
+  MenuItem,
+  Autocomplete,
 } from "@mui/material";
 import { FieldArray, FormikProvider } from "formik";
 import React, { useState } from "react";
@@ -31,9 +33,14 @@ const passedLevel = [
     label: "Graduate",
   },
 ];
+
+const years = Array.from(
+  { length: 100 },
+  (_, index) => new Date().getFullYear() - index
+); // Change 100 to adjust the range of available years
+
 const EmployeeQualificationDetailForm = ({ formik, isLoading }) => {
   const { values, handleChange } = formik;
-  const [dropDownOptions, setdropDownOptions] = useState([...passedLevel]);
 
   const deleteQualificationMutation = useDeleteQualification({});
   const handleDeleteQualification = (study) => {
@@ -51,7 +58,6 @@ const EmployeeQualificationDetailForm = ({ formik, isLoading }) => {
     );
     return filter;
   };
-
   return (
     !isLoading && (
       <FormikProvider value={formik}>
@@ -147,26 +153,39 @@ const EmployeeQualificationDetailForm = ({ formik, isLoading }) => {
                         />
                       </Grid>
                       <Grid item xs={12} sm={4}>
-                        <TextField
-                          id={`education[${index}].passedYear`}
-                          name={`education[${index}].passedYear`}
-                          type="number"
-                          label="Passed Year (A.D.)"
-                          placeholder="Enter your passed year"
-                          fullWidth
-                          value={study.passedYear}
-                          onChange={handleChange}
-                          onBlur={formik.handleBlur}
-                          error={Boolean(
-                            formik.touched.education?.[index]?.passedYear &&
-                              formik.errors.education?.[index]?.passedYear
-                          )}
-                          helperText={
-                            formik.touched.education?.[index]?.passedYear &&
-                            formik.errors.education?.[index]?.passedYear
-                          }
-                          variant="outlined"
-                          size="small"
+                        <Autocomplete
+                          options={years}
+                          onChange={(e, newValue) => {
+                            formik.setFieldValue(
+                              `education[${index}].passedYear`,
+                              newValue
+                            );
+                          }}
+                          value={study?.passedYear}
+                          renderInput={(params) => {
+                            return (
+                              <TextField
+                                {...params}
+                                id={`education[${index}].passedYear`}
+                                name={`education[${index}].passedYear`}
+                                label="Passed Year (A.D.)"
+                                placeholder="Enter your passed year"
+                                fullWidth
+                                error={Boolean(
+                                  formik.touched.education?.[index]
+                                    ?.passedYear &&
+                                    formik.errors.education?.[index]?.passedYear
+                                )}
+                                helperText={
+                                  formik.touched.education?.[index]
+                                    ?.passedYear &&
+                                  formik.errors.education?.[index]?.passedYear
+                                }
+                                variant="outlined"
+                                size="small"
+                              />
+                            );
+                          }}
                         />
                       </Grid>
                       <Grid item xs={12} sm={4}>
