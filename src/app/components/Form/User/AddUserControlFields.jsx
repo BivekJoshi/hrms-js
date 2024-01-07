@@ -25,16 +25,14 @@ export const AddUserControlFields = ({ onClose, userControlData }) => {
     }
   };
 
-  const nameLabel = (emp) => {
-    if (emp?.middleName === "") {
-      return `${emp?.firstName} ${emp?.lastName} ${
-        emp?.positionName !== null ? `(${emp?.positionName})` : ""
-      }`;
-    } else {
-      return `${emp?.firstName} ${emp?.middleName} ${emp?.lastName} ${
-        emp?.positionName !== null ? `(${emp?.positionName})` : ""
-      }`;
-    }
+  const getNameLabel = (emp) => {
+    const fullName = emp?.middleName === ""
+      ? `${emp?.firstName} ${emp?.lastName}`
+      : `${emp?.firstName} ${emp?.middleName} ${emp?.lastName}`;
+
+    const position = emp?.positionName !== null ? `(${emp?.positionName})` : "";
+
+    return `${fullName} ${position}`;
   };
 
   return (
@@ -49,9 +47,7 @@ export const AddUserControlFields = ({ onClose, userControlData }) => {
             id="employeeId"
             name="employeeId"
             options={employeeData || []}
-            getOptionLabel={(employee) => {
-              return nameLabel(employee);
-            }}
+            getOptionLabel={(employee) => getNameLabel(employee)}
             value={employeeData?.find(
               (employee) => employee?.id === formik.values?.employeeId
             )}

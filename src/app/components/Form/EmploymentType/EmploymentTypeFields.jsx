@@ -42,7 +42,8 @@ const EmploymentTypeFields = ({ onClose, isLoading, data }) => {
             label="Description"
             placeholder="Enter description"
             fullWidth
-            required
+            multiline
+            // required
             value={formik.values.description}
             onChange={formik.handleChange}
             error={

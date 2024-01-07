@@ -187,7 +187,7 @@ const EmployeeResource = ({ permissions }) => {
       )}
       {openAddModal && (
         <AddEmployeeResourceModal
-          title={'Add Logistics'}
+          title={'Provide Logistics'}
           id={editedEmployeeResouce?.id}
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
