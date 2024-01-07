@@ -15,6 +15,18 @@ import {
 import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
 
+const nameLabel = (emp) => {
+  const position =
+    emp?.positionName !== null && emp?.positionName !== undefined
+      ? `(${emp.positionName})`
+      : "";
+  if (emp?.middleName === "") {
+    return `${emp?.firstName} ${emp?.lastName} ${position}`;
+  } else {
+    return `${emp?.firstName} ${emp?.middleName} ${emp?.lastName} ${position}`;
+  }
+};
+
 export const useGetEmployee = () => {
   return useQuery(["getEmployee"], () => getEmployee(), {
     refetchInterval: false,
@@ -22,10 +34,18 @@ export const useGetEmployee = () => {
   });
 };
 export const useGetNoneUser = () => {
-  return useQuery(["getNoneUser"], () => getNoneUser(), {
+  const getQuery = useQuery(["getNoneUser"], () => getNoneUser(), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
+  return {
+    data:
+      getQuery.data?.map((d) => ({
+        id: d?.id,
+        label: nameLabel(d),
+        email: d?.officeEmail,
+      })) || [],
+  };
 };
 
 export const useGetLoggedInUserInfo = () => {
