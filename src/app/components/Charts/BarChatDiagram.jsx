@@ -13,10 +13,10 @@ const BarChatDiagram = ({ data }) => {
     "Female Employees",
   ];
   const Data = [
-    `${data?.employeeInfo?.allEmployee}`,
-    `${data?.employeeInfo?.newEmployee}`,
-    `${data?.employeeInfo?.maleEmployee}`,
-    `${data?.employeeInfo?.femaleEmployee}`,
+    `${data?.allEmployee}`,
+    `${data?.newEmployee}`,
+    `${data?.maleEmployee}`,
+    `${data?.femaleEmployee}`,
   ];
   const barColors = ["#F65E3C", "#A1E000", "#9137B8", "#D93084"];
 

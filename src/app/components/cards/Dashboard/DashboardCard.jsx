@@ -9,11 +9,9 @@ import Project from '../../../../assets/project.png';
 import User from '../../../../assets/user.png';
 
 const DashboardCard = ({ data }) => {
+  const { mode } = useContext(ThemeModeContext);
   const navigate = useNavigate();
 
-  const handleClick = () => {
-    navigate(linkTo);
-  };
   const cardData = [
     {
       title: 'Users',
@@ -51,7 +49,13 @@ const DashboardCard = ({ data }) => {
       borderColor: '#875923',
     },
   ];
-  const { mode } = useContext(ThemeModeContext);
+
+  const handleClick = (card) => {
+    console.log(card, "card")
+    navigate(card);
+  };
+
+
 
   return (
     <>
@@ -67,7 +71,7 @@ const DashboardCard = ({ data }) => {
           borderLeft={`6px solid ${card?.borderColor}`}
           padding='8px 20px 8px 20px'
           boxShadow={7}
-          onClick={handleClick}
+          onClick={() => handleClick(card?.linkTo)}
           bgcolor={mode === 'light' ? '' : '#3f413f'}
           sx={{ cursor: 'pointer' }}
         >
