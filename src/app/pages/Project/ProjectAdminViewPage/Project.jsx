@@ -7,6 +7,7 @@ import {
   Card,
   Container,
   Grid,
+  IconButton,
   Modal,
   Pagination,
   Stack,
@@ -29,6 +30,7 @@ import { ButtonComponent } from '../../../components/Button/ButtonComponent';
 import ThemeModeContext from '../../../../theme/ThemeModeContext';
 
 const Project = ({ permissions }) => {
+  // State and hooks
   const [pageNumber, setPageNumber] = useState(0);
   const [pageSize, setPageSize] = useState(6);
   const [nameFilter, setNameFilter] = useState('');
@@ -45,13 +47,16 @@ const Project = ({ permissions }) => {
   const [isContainerVisible, setIsContainerVisible] = useState(false);
   const [openAddModal, setOpenAddModal] = useState(false);
 
+  // Function to handle opening/closing filter container
   const handleFilterIconClick = () => {
     setIsContainerVisible(!isContainerVisible);
   };
 
+  // Functions to handle opening/closing add project modal
   const handleAddOpenModal = () => setOpenAddModal(true);
   const handleCloseAddModal = () => setOpenAddModal(false);
 
+  // Functions to handle opening/closing terminated project modal
   const handleOpenModal = () => {
     setOpenModal(true);
   };
@@ -60,8 +65,7 @@ const Project = ({ permissions }) => {
     setOpenModal(false);
   };
 
-  if (isLoading) return <>Loading</>;
-
+  // Handle page change and page size change
   const handlePageChange = (event, newPage) => {
     setPageNumber(newPage - 1);
     window.scroll(0, 0);
@@ -72,6 +76,8 @@ const Project = ({ permissions }) => {
     setPageSize(newPageSize);
     setPageNumber(0);
   };
+
+  // Filter projects based on name and leader name
   const filteredProjects = projectDetail?.projectResList?.filter(
     (project) =>
       `${project.projectName}`
@@ -140,6 +146,7 @@ const Project = ({ permissions }) => {
                 OnClick={handleOpenModal}
                 buttonName={'Terminated Project'}
               />
+              {/* Button to open add project modal */}
               <ButtonComponent
                 color='white'
                 OnClick={handleAddOpenModal}
@@ -150,31 +157,7 @@ const Project = ({ permissions }) => {
         </Typography>
       </Box>
 
-      {/* <Stack sx={{ display: "flex", flexDirection: "row-reverse" }}>
-        <FilterAltOutlinedIcon
-          onClick={handleFilterIconClick}
-          style={{ fontSize: "32px" }}
-        />
-        {isContainerVisible && (
-          <Container maxWidth="100vh">
-            <Card sx={{ padding: 1 }}>
-              <Typography variant="h6" gutterBottom>
-                Search Project
-              </Typography>
-              <Grid container spacing={3}>
-                <Grid item xs={12}>
-                  <TextField
-                    label="Filter by Name"
-                    value={nameFilter}
-                    onChange={(e) => setNameFilter(e.target.value)}
-                    fullWidth
-                  />
-                </Grid>
-              </Grid>
-            </Card>
-          </Container>
-        )}
-      </Stack> */}
+      {/* Project filter container */}
       <br />
       <Grid
         container
@@ -186,6 +169,7 @@ const Project = ({ permissions }) => {
           gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
         }}
       >
+        {/* Mapping over filtered projects to display project cards */}
         {filteredProjects?.map((item, index) => (
           <ProjectCard
             item={item}
@@ -227,6 +211,7 @@ const Project = ({ permissions }) => {
         />
       </Box>
 
+      {/* Add project modal */}
       {openAddModal && (
         <AddProjectModal
           title={'Add Project'}
@@ -235,6 +220,7 @@ const Project = ({ permissions }) => {
         />
       )}
 
+      {/* Terminated project modal */}
       <Modal
         open={openModal}
         onClose={handleCloseModal}
@@ -253,7 +239,8 @@ const Project = ({ permissions }) => {
             p: 4,
           }}
         >
-          <DeactivatedProject />
+          {/* DeactivatedProject component to display terminated projects */}
+          <DeactivatedProject  onClick={() => setOpenModal(false)} /> 
           <br />
           <Grid
             container
@@ -261,6 +248,7 @@ const Project = ({ permissions }) => {
             justifyContent='flex-end'
             alignItems='flex-end'
           >
+            {/* <IconButton onClick={() => setOpenModal(false)}><CloseIcon /></IconButton> */}
             <Button
               onClick={() => setOpenModal(false)}
               color='error'
