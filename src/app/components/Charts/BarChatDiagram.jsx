@@ -13,14 +13,14 @@ const capitalizeAndAddSpace = (str) => {
 const BarChatDiagram = ({ data }) => {
   const { mode, palette } = useContext(ThemeModeContext);
 
-  const names = dashboardData
-    ? Object.entries(dashboardData).map(([key, value]) =>
+  const names = data
+    ? Object.entries(data).map(([key, value]) =>
         key ? capitalizeAndAddSpace(key) : "0"
       )
     : [];
 
-  const Data = dashboardData
-    ? Object.entries(dashboardData).map(([key, value]) =>
+  const Data = data
+    ? Object.entries(data).map(([key, value]) =>
         value ? value : "nana"
       )
     : [];
