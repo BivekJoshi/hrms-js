@@ -22,7 +22,8 @@ const AcademicsInfo = ({ data }) => {
           bgcolor: mode === 'light' ? '#ededed' : '#454546',
         }}
       >
-        <Timeline
+        <AcademicsComponents data={qualificationData} isLoading={isLoading} />
+        {/* <Timeline
           sx={{
             [`& .${timelineItemClasses.root}:before`]: {
               flex: 0,
@@ -40,7 +41,7 @@ const AcademicsInfo = ({ data }) => {
           ) : (
             <p>No records found</p>
           )}
-        </Timeline>
+        </Timeline> */}
       </Box>
     )
   );

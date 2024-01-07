@@ -276,12 +276,12 @@ const Leave = ({ permissions }) => {
 
   const actions = (isManager || isSuperAdmin) && [
     {
-      icon: () => <ModeEditOutlineIcon />,
+      icon: () => <ModeEditOutlineIcon style={{color: 'green'}} />,
       tooltip: "Edit Leave",
       onClick: (event, rowData) => handleEditLeave(rowData),
     },
     {
-      icon: () => <DeleteIcon />,
+      icon: () => <DeleteIcon style={{color: '#d32f2f'}} />,
       tooltip: "Delete Leave",
       onClick: (event, rowData) => handleDeleteLeave(rowData),
     },

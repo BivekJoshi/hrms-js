@@ -203,7 +203,7 @@ const ProjectTask = ({ permissions }) => {
 
   const actions = [
     {
-      icon: () => <AssignmentIcon />,
+      icon: () => <AssignmentIcon style={{color: 'green'}} />,
 
       disabled: !permissions?.canAdd,
 
@@ -211,13 +211,13 @@ const ProjectTask = ({ permissions }) => {
       onClick: (event, rowData) => handleAssignTask(rowData),
     },
     {
-      icon: () => <ModeEditOutlineIcon />,
+      icon: () => <ModeEditOutlineIcon style={{color: 'green'}} />,
       disabled: !permissions?.canEdit,
       tooltip: "Edit task",
       onClick: (event, rowData) => handleEditTask(rowData),
     },
     {
-      icon: () => <DeleteIcon />,
+      icon: () => <DeleteIcon style={{color: '#d32f2f'}} />,
       disabled: !permissions?.canDelete,
       tooltip: "Delete task",
       onClick: (event, rowData) => handleDeleteTask(rowData),

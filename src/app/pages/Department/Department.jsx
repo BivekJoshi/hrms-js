@@ -82,14 +82,14 @@ const Department = ({ permissions }) => {
 
   const actions = [
     {
-      icon: () => <ModeEditOutlineIcon />,
+      icon: () => <ModeEditOutlineIcon style={{color: 'green'}} />,
       tooltip: 'Edit Department',
       disabled: !permissions?.canEdit,
 
       onClick: (event, rowData) => handleEditDepartment(rowData),
     },
     {
-      icon: () => <DeleteIcon />,
+      icon: () => <DeleteIcon style={{color: '#d32f2f'}} />,
       disabled: !permissions?.canDelete,
 
       tooltip: 'Delete Department',
