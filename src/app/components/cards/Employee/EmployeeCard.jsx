@@ -34,7 +34,7 @@ const EmployeeCard = ({
   const [openEmailForm, setOpenEmailForm] = useState(false);
   const { mode } = useContext(ThemeModeContext); // Accessing mode from context
   // const img = DOC_URL + employeePhoto;
-
+  const fullName = EFirstName + EMiddleName + ELastName;
   const anchorRef = useRef(null);
   const prevOpen = useRef(open);
   const navigate = useNavigate();
