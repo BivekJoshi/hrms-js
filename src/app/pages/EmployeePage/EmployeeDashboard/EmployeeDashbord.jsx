@@ -47,15 +47,15 @@ const EmployeeDashbord = ({}) => {
   // const filePath = photo ? DOC_URL + photo : '';
 
   const task = [
-    // {
-    //   title: "Total Project",
-    //   taskIcon: Project,
-    //   numberOfTask: projectWiseEmployeeData
-    //     ? projectWiseEmployeeData.length
-    //     : 0,
-    //   linkTo: "/employee/project",
-    //   borderColor: "#3399FF",
-    // },
+    {
+      title: "Total Project",
+      taskIcon: Project,
+      // numberOfTask: projectWiseEmployeeData
+      //   ? projectWiseEmployeeData.length
+      //   : 0,
+      linkTo: "/employee/project",
+      borderColor: "#3399FF",
+    },
     {
       title: 'Total Task',
       // numberOfTask: loginUsertask ? loginUsertask.length : 0,
@@ -125,8 +125,7 @@ const EmployeeDashbord = ({}) => {
 
       <Box
         display='grid'
-        grid
-        gridTemplateColumns='repeat(auto-fit, minmax(125px, 1fr))'
+        gridTemplateColumns='repeat(auto-fit, minmax(225px, 1fr))'
         gap='1rem'
         padding='2rem 0 0'
       >

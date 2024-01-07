@@ -27,9 +27,13 @@ export const AddUserControlFields = ({ onClose, userControlData }) => {
 
   const nameLabel = (emp) => {
     if (emp?.middleName === "") {
-      return `${emp?.firstName} ${emp?.lastName} (${emp?.positionName})`;
+      return `${emp?.firstName} ${emp?.lastName} ${
+        emp?.positionName !== null ? `(${emp?.positionName})` : ""
+      }`;
     } else {
-      return `${emp?.firstName} ${emp?.middleName} ${emp?.lastName} (${emp?.positionName})`;
+      return `${emp?.firstName} ${emp?.middleName} ${emp?.lastName} ${
+        emp?.positionName !== null ? `(${emp?.positionName})` : ""
+      }`;
     }
   };
 
