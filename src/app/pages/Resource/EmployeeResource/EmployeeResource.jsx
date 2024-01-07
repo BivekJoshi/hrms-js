@@ -120,22 +120,34 @@ const EmployeeResource = ({ permissions }) => {
   ];
   const actions = [
     {
-      icon: () => (
-        <HocButton
-          permissions={permissions?.canEdit}
-          icon={<ModeEditOutlineIcon />}
-        />
-      ),
+      icon: () => <ModeEditOutlineIcon />,
+      disabled: !permissions?.canEdit,
       tooltip: 'Edit Logistics',
       onClick: (event, rowData) => handleEditRowData(rowData),
     },
     {
-      icon: () => (
-        <HocButton permissions={permissions?.canDelete} icon={<DeleteIcon />} />
-      ),
+      icon: () => <DeleteIcon />,
+      disabled: !permissions?.canDelete,
       tooltip: 'Remove Logistics',
       onClick: (event, rowData) => handleDeleteRowData(rowData),
     },
+    // {
+    //   icon: () => (
+    //     <HocButton
+    //       permissions={permissions?.canEdit}
+    //       icon={<ModeEditOutlineIcon />}
+    //     />
+    //   ),
+    //   tooltip: 'Edit Logistics',
+    //   onClick: (event, rowData) => handleEditRowData(rowData),
+    // },
+    // {
+    //   icon: () => (
+    //     <HocButton permissions={permissions?.canDelete} icon={<DeleteIcon />} />
+    //   ),
+    //   tooltip: 'Remove Logistics',
+    //   onClick: (event, rowData) => handleDeleteRowData(rowData),
+    // },
   ];
 
   return (

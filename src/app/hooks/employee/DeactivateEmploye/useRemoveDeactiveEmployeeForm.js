@@ -38,7 +38,7 @@ export const useRemoveDeactiveEmployeeForm = (data, onClose) => {
   return { formik };
 };
 
-export const useAddActiveEmployeeForm = (id) => {
+export const useAddActiveEmployeeForm = (id, onClose) => {
   const { mutate } = useActiveTerminateEmployee({});
   const formik = useFormik({
     initialValues: {
@@ -57,7 +57,11 @@ export const useAddActiveEmployeeForm = (id) => {
       employeeId: id,
       ...values,
     };
-    mutate(values, formik);
+    mutate(values, {
+      onSuccess: () => {
+        onClose();
+      }
+    });
   };
   return { formik };
 };
