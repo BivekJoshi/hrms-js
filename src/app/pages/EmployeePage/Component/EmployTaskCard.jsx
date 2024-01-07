@@ -23,8 +23,6 @@ const EmployTaskCard = ({
       flexDirection="row"
       justifyContent="space-between"
       alignItems="center"
-      Width="232px"
-      Height="80px"
       borderRadius="0px 8px 8px 0px"
       borderLeft={`6px solid ${borderColor}`}
       padding="8px 20px 8px 20px"
@@ -38,7 +36,7 @@ const EmployTaskCard = ({
           color={mode === "light" ? `${borderColor}` : "white"}
           fontSize="14px"
           fontWeight={"500"}
-          Lineheight="20px"
+          lineheight="20px"
         >
           {title}
         </Typography>

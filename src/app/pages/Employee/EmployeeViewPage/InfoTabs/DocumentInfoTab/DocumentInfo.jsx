@@ -1,17 +1,16 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { useGetDocumentById } from '../../../../../hooks/employee/useDocument';
-import { DOC_URL } from '../../../../../../auth/axiosInterceptor';
-import Box from '@mui/material/Box';
-import Tab from '@mui/material/Tab';
-import TabContext from '@mui/lab/TabContext';
-import TabList from '@mui/lab/TabList';
-import TabPanel from '@mui/lab/TabPanel';
-import { groupBy } from 'lodash';
-import { Button, Fade, Modal } from '@mui/material';
-import ThemeModeContext from '../../../../../../theme/ThemeModeContext';
-import ReactToPrint from 'react-to-print';
-import './printDocs.css';
+import React, { useContext, useRef, useState } from "react";
+import { useGetDocumentById } from "../../../../../hooks/employee/useDocument";
+import { DOC_URL } from "../../../../../../auth/axiosInterceptor";
+import Box from "@mui/material/Box";
+import Tab from "@mui/material/Tab";
+import TabContext from "@mui/lab/TabContext";
+import TabList from "@mui/lab/TabList";
+import TabPanel from "@mui/lab/TabPanel";
+import { groupBy } from "lodash";
+import { Button, Fade, Modal } from "@mui/material";
+import ThemeModeContext from "../../../../../../theme/ThemeModeContext";
+import ReactToPrint from "react-to-print";
+import "./printDocs.css";
 const documentName = [
   {
     id: 1,
@@ -70,13 +69,13 @@ const documentName = [
   },
   {
     id: 12,
-    label: 'Other Document',
-    value: 'OTHER_DOCUMENT',
+    label: "Other Document",
+    value: "OTHER_DOCUMENT",
   },
   {
     id: 12,
-    label: 'Other Document',
-    value: 'OTHER_DOCUMENT',
+    label: "Other Document",
+    value: "OTHER_DOCUMENT",
   },
 ];
 const DocumentInfo = ({ data, role }) => {

@@ -1,20 +1,35 @@
-import React from 'react';
-import ReactApexChart from 'react-apexcharts';
+import React from "react";
+import ReactApexChart from "react-apexcharts";
 
 export const EmployPichart = ({ data }) => {
-  const COLORS = ['#399F4D', '#F9C143', '#C2514B', '#875923'];
+  const COLORS = [
+    "#399F4D",
+    "#F9C143",
+    "#C2514B",
+    "#875923",
+    "#146DA7",
+    "#E05F2E",
+    "#5E2750",
+    "#3A9AD9",
+    "#F7941E",
+    "#F07F13",
+    "#0078A8",
+    "#8B48B8",
+  ];
 
   const series = data
     ? Object.entries(data).map(([key, value]) => (value ? value : "nana"))
     : [];
   const labels = data
-    ? Object.entries(data).map(([key, value]) => (key ? key : "0"))
+    ? Object.entries(data).map(([key, value]) =>
+        key ? key.toUpperCase() : "0"
+      )
     : [];
 
   const options = {
     chart: {
       width: 380,
-      type: 'donut',
+      type: "donut",
     },
     labels: labels,
     colors: COLORS,
@@ -26,7 +41,7 @@ export const EmployPichart = ({ data }) => {
             width: 200,
           },
           legend: {
-            position: 'top',
+            position: "top",
           },
         },
       },
@@ -37,7 +52,7 @@ export const EmployPichart = ({ data }) => {
     <ReactApexChart
       options={options}
       series={series}
-      type='donut'
+      type="donut"
       height={250}
     />
   );
