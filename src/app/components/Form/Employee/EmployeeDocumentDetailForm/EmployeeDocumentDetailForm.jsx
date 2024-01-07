@@ -94,6 +94,9 @@ const EmployeeDocumentDetailForm = () => {
     setOpenEditModal(true);
   };
 
+  {
+    !isLoading && <div>loading</div>;
+  }
   return (
     <div>
       <Grid container>
@@ -245,7 +248,7 @@ const EmployeeDocumentDetailForm = () => {
               const isInputDisabled =
                 index === 0
                   ? documentPhoto?.some(
-                      (photo) => photo?.documentType === 'EMPLOYEE_PHOTO'
+                      (photo) => photo?.documentType === "EMPLOYEE_PHOTO"
                     )
                   : documentPhoto?.some(
                       (photo) => photo?.documentType === selectedDocument
@@ -272,9 +275,9 @@ const EmployeeDocumentDetailForm = () => {
                     <Typography variant="h7" sx={{ fontWeight: 500 }}>
                       {document?.label}
                     </Typography>
-                    {getDocument.map((data, index) => {
+                    {getDocument?.map((data, index) => {
                       if (document.input === data.documentType) {
-                        return <Chip label="Uploaded" color="success"/>;
+                        return <Chip label="Uploaded" color="success" />;
                       }
                     })}
                   </AccordionSummary>

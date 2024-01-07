@@ -34,7 +34,7 @@ export const useGetDocumentByFileId = (id) => {
 }
 export const useGetDocumentByDocumentType = (id, documentType) => {
   return useQuery(
-    ['getDocumentType', id, documentType],
+    ['getDocumentByDocumentType', id, documentType],
     async () => await getDocumentByDocumentType(id, documentType),
     {
       refetchInterval: false,
@@ -77,7 +77,7 @@ export const useAddDocument = ({ onSuccess }) => {
         toast.success('Document added successfully');
         onSuccess && onSuccess(data, variables, context);
 
-        // queryClient.refetchQueries('getDocumentType');
+        queryClient.refetchQueries(['getDocumentById', id]);
       },
     }
   );
