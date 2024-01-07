@@ -37,7 +37,7 @@ export const getEmployeeHistory = (id) => {
 
 export const getEmployeeEmployment = (id) => {
   if (id) {
-    const data = axiosInstance.get(`/employment-history/emp-histories/${id}`);
+    const data = axiosInstance.get(`/employment-history/${id}`);
     return data;
   }
 };
@@ -77,5 +77,10 @@ export const addEmpHistory = async (formData, id) => {
     `/employment-history/create/${id}`,
     postData
   );
+  return data;
+};
+
+export const addEmploymentHistory = async (formData, id) => {
+  const data = await axiosInstance.post(`/employment-history/${id}`, formData);
   return data;
 };

@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import {
   addEmpHistory,
   addEmployeeHistory,
+  addEmploymentHistory,
   deleteEmployeeHistory,
   editEmployeeHistory,
   getEmployeeEmployment,
@@ -127,6 +128,25 @@ export const useAddEmpHistory = ({ onSuccess }) => {
         toast.success('Successfully added Employee History');
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries('getEmployeeHistory');
+      },
+      onError: (err, _variables, _context) => {
+        toast.error(`error: ${err.message}`);
+      },
+    }
+  );
+};
+
+export const useAddEmploymentHistory = ({ onSuccess }) => {
+  const queryClient = useQueryClient();
+  const { id } = useParams();
+  return useMutation(
+    ['addEmploymentHistory'],
+    (formData) => addEmploymentHistory(formData, id),
+    {
+      onSuccess: (data, variables, context) => {
+        toast.success('Successfully added Employment Details');
+        onSuccess && onSuccess(data, variables, context);
+        queryClient.invalidateQueries('getEmployeeEmployment');
       },
       onError: (err, _variables, _context) => {
         toast.error(`error: ${err.message}`);

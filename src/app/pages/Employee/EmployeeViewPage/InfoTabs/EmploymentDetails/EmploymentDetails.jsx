@@ -1,16 +1,16 @@
 import { Box, Button } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import CustomTable from '../../../../../components/CustomTable/CustomTable';
 import { useParams } from 'react-router-dom';
 import { useGetEmployeeEmployment } from '../../../../../hooks/employee/useEmployeeHistory';
+import { AddEmploymentHistory } from './AddEmploymentHistory';
 
-const EmploymentDetails = ({ data, role }) => {
+const EmploymentDetails = ({ data }) => {
   const { id } = useParams();
+  const [openAddModal, setOpenAddModal] = useState(false);
+  const handleAddOpenModal = () => setOpenAddModal(true);
+  const handleCloseAddModal = () => setOpenAddModal(false);
   const { data: employeeHistory, isLoading } = useGetEmployeeEmployment(id);
-  console.log(
-    '🚀 ~ file: EmploymentDetails.jsx:10 ~ EmploymentDetails ~ employeeHistory:',
-    employeeHistory
-  );
 
   const columns = [
     {
@@ -73,17 +73,13 @@ const EmploymentDetails = ({ data, role }) => {
           paddingBottom: '10px',
         }}
       >
-        {role ? (
-          <Button
-            variant='contained'
-            sx={{ mt: 3, ml: 1 }}
-            // onClick={handleAddOpenModal}
-          >
-            + Add Employment Details
-          </Button>
-        ) : (
-          ''
-        )}
+        <Button
+          variant='contained'
+          sx={{ mt: 3, ml: 1 }}
+          onClick={handleAddOpenModal}
+        >
+          + Add Employment Details
+        </Button>
       </Box>
 
       <CustomTable
@@ -93,13 +89,13 @@ const EmploymentDetails = ({ data, role }) => {
         isLoading={isLoading}
       />
 
-      {/* {openAddModal && (
-        <AddEmployeeHistory
-          title={'+ Add Employment Details'}
+      {openAddModal && (
+        <AddEmploymentHistory
+          title={'Add Employment Details'}
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
         />
-      )} */}
+      )}
     </Box>
   );
 };
