@@ -20,7 +20,7 @@ const EmployeeDocumentDetailForm = () => {
   const [openEditModal, setOpenEditModal] = useState(false);
   const [expandedAccordion, setExpandedAccordion] = useState('panel1');
 
-  const [selectedDocument, setSelectedDocument] = useState('EMPLOYEE_PHOTO');
+  const [selectedDocument, setSelectedDocument] = useState();
   const [document, setDocument] = useState('');
   const [imagePreviewMap, setImagePreviewMap] = useState({});
 
@@ -78,8 +78,7 @@ const EmployeeDocumentDetailForm = () => {
   const handleDelete = (document) => {
     const { id } = document;
     deleteDocument(id);
-
-    setSelectedDocument('');
+    // setSelectedDocument('');
     setDocument('');
     setImagePreviewMap((prevMap) => ({
       ...prevMap,
@@ -240,9 +239,14 @@ const EmployeeDocumentDetailForm = () => {
         <Grid item xs={12} sm={6}>
           {documentType &&
             documentType.map((document, index) => {
-              const isInputDisabled = documentPhoto?.some(
-                (photo) => photo?.documentType === selectedDocument
-              );
+              const isInputDisabled =
+                index === 0
+                  ? documentPhoto?.some(
+                      (photo) => photo?.documentType === 'EMPLOYEE_PHOTO'
+                    )
+                  : documentPhoto?.some(
+                      (photo) => photo?.documentType === selectedDocument
+                    );
 
               return (
                 <Accordion
