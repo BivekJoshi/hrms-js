@@ -35,7 +35,7 @@ export const useGetDocumentByFileId = (id) => {
 export const useGetDocumentByDocumentType = (id, documentType) => {
   return useQuery(
     ['getDocumentType', id, documentType],
-    () => getDocumentByDocumentType(id, documentType),
+    async () => await getDocumentByDocumentType(id, documentType),
     {
       refetchInterval: false,
       refetchOnWindowFocus: false,
@@ -67,15 +67,17 @@ export const useAddDocument = ({ onSuccess }) => {
   };
   const queryClient = useQueryClient();
   return useMutation(
-    ['addDocument'],
-    (formData) => {
-      addDocument(formData, id);
+    'addDocument',
+    async (formData) => {
+      const result = await addDocument(formData, id);
+      return result;
     },
     {
       onSuccess: (data, variables, context) => {
         toast.success('Document added successfully');
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries('getDocumentType');
+
+        // queryClient.refetchQueries('getDocumentType');
       },
     }
   );
@@ -125,16 +127,23 @@ export const useAddProfile = ({ onSuccess }) => {
 }
 export const useDeleteDocument = ({ onSuccess }) => {
   const queryClient = useQueryClient();
-  return useMutation(['deleteDocument'], (id) => deleteDocumentByFileId(id), {
-    onSuccess: (data, variables, context) => {
-      toast.success('Successfully deleted file');
-      onSuccess && onSuccess(data, variables, context);
-      queryClient.invalidateQueries('getDocumentType');
+  return useMutation(
+    ['deleteDocument'],
+    async (id) => {
+      const result = await deleteDocumentByFileId(id);
+      return result;
     },
-    onError: (err, _variables, _context) => {
-      toast.error(`Error: ${err.message}`);
-    },
-  });
+    {
+      onSuccess: (data, variables, context) => {
+        toast.success('Successfully deleted file');
+        onSuccess && onSuccess(data, variables, context);
+        queryClient.refetchQueries('getDocumentType');
+      },
+      onError: (err, _variables, _context) => {
+        toast.error(`Error: ${err.message}`);
+      },
+    }
+  );
 };
 
 {
@@ -159,11 +168,18 @@ export const useEditDocument = ({ onSuccess }) => {
   };
 
   const queryClient = useQueryClient();
-  return useMutation(['editDocument'], (formData) => editDocument(formData), {
-    onSuccess: (data, variables, context) => {
-      toast.success('Successfully edited Document');
-      onSuccess && onSuccess(data, variables, context);
-      queryClient.invalidateQueries('getDocumentType');
+  return useMutation(
+    ['editDocument'],
+    async (formData) => {
+      const result = editDocument(formData);
+      return result;
     },
-  });
+    {
+      onSuccess: (data, variables, context) => {
+        toast.success('Successfully edited Document');
+        onSuccess && onSuccess(data, variables, context);
+        // queryClient.refetchQueries("getDocumentType");
+      },
+    }
+  );
 };
