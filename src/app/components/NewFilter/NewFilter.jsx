@@ -116,6 +116,9 @@ const NewFilter = ({ inputField, searchCallBack, validate }) => {
         // backgroundColor: "#fafafa",
       }}
     >
+      <Typography variant='h7' mb={1} ontWeight={500}>
+        Filter By:
+      </Typography>
       <Grid
         sx={{
           display: 'flex',
@@ -123,7 +126,7 @@ const NewFilter = ({ inputField, searchCallBack, validate }) => {
           justifyContent: 'end',
         }}
       >
-        <div className='filterButton' onClick={handleFilterButtonClick}>
+        {/* <Box className='filterButton' onClick={handleFilterButtonClick}>
           <Typography>Filter</Typography>
           <svg
             width='17'
@@ -144,7 +147,7 @@ const NewFilter = ({ inputField, searchCallBack, validate }) => {
               </clipPath>
             </defs>
           </svg>
-        </div>
+        </Box> */}
       </Grid>
       {showFilter && (
         <div style={{ paddingTop: '16px' }}>
