@@ -30,9 +30,9 @@ export const getAllEmployeeData = async () => {
 {
   /*________________________GETBYPAGINATION_____________________________________*/
 }
-export const getEmployeeData = async (pageNumber, pageSize) => {
+export const getEmployeeData = async (pageNumber, pageSize,search) => {
   const data = await axiosInstance.get(
-    `/employee/get-all-page-wise/${pageNumber}/?pageSize=${pageSize}&sortBy=id&sortDir=asc`
+    `/employee/get-all-page-wise/${pageNumber}/?pageSize=${pageSize}&sortBy=id&sortDir=asc&search=${search}`
   );
   return data;
 };

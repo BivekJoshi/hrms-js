@@ -26,6 +26,7 @@ import "./Style/Style.css";
 import ThemeModeContext from "../../../theme/ThemeModeContext";
 import { useGetEmployeeData } from "../../hooks/employee/useEmployee";
 import EmployeeTableView from "./EmployeeView/EmployeePage/EmployeeTableView";
+import EmployeeGridView from "./EmployeeView/EmployeePage/EmployeeGridView";
 
 const labelStyle = {
   backgroundColor: "#EBEDEF",
@@ -45,14 +46,16 @@ const activeLabelStyle = {
 };
 
 const Employee = () => {
-  const { mode } = React.useContext(ThemeModeContext);
+  const { mode, palette } = React.useContext(ThemeModeContext);
   const [pageNumber, setPageNumber] = useState(0);
   const [pageSize, setPageSize] = useState(12);
+  const [search, setSearch] = useState("");
+
   const { data: employeeData, isLoading } = useGetEmployeeData(
     pageNumber,
-    pageSize
+    pageSize,
+    search
   );
-
   const handlePageChange = (event, newPage) => {
     setPageNumber(newPage - 1);
     window.scroll(0, 0);
@@ -75,8 +78,6 @@ const Employee = () => {
     boxShadow: 24,
     p: 4,
     background: mode === "light" ? "" : "#413e3e",
-    height: { xs: "100%", md: "auto" },
-    overflow:{ xs: "scroll", md: "auto" }
   };
 
   const navigate = useNavigate();
@@ -105,6 +106,11 @@ const Employee = () => {
 
   const handleSubmit = () => {
     formik.handleSubmit();
+  };
+
+  const handleFilterChange = (e) => {
+    const value = e.target.value;
+    setSearch(value);
   };
 
   return (
@@ -154,7 +160,31 @@ const Employee = () => {
             </Box>
           </Box>
           <TabPanel value="1">
-            <EmployeeGrid employeeData={employeeData} isLoading={isLoading} />
+            <Grid
+              container
+              sx={{
+                display: "flex",
+                padding: "16px",
+                borderRadius: "6px",
+                marginBottom: "16px",
+                backgroundColor: palette?.background?.default,
+              }}
+            >
+              <Typography variant="h7" mb={1} fontWeight={500}>
+                Filter By:
+              </Typography>
+              <Grid item xs={8}>
+                <TextField
+                  label="Filter by name, phone number, and position"
+                  value={search}
+                  onChange={handleFilterChange}
+                  fullWidth
+                  size="small"
+                />
+              </Grid>
+            </Grid>
+            {/* <EmployeeGrid employeeData={employeeData} isLoading={isLoading} /> */}
+            <EmployeeGridView employeeData={employeeData} />
           </TabPanel>
           <TabPanel value="2">
             {/* <EmployeeTable /> */}
