@@ -107,7 +107,7 @@ const Department = ({ permissions }) => {
     <>
       <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
         <HocButton
-          permissions={permissions}
+          permissions={permissions?.canAdd}
           color={'white'}
           variant={'contained'}
           onClick={handleAddOpenModal}

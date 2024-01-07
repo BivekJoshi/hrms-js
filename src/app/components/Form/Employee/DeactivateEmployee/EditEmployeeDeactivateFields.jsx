@@ -44,7 +44,7 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
   return (
     !isLoading && (
       <Grid container spacing={3}>
-        <Grid item xs={12} sm={12} md={12}>
+        {/* <Grid item xs={12} sm={12} md={12}>
           <TextField
             id='EmployeeId'
             name='EmployeeId'
@@ -61,7 +61,7 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
             InputLabelProps={{ shrink: true }}
             style={{ display: 'none' }}
           />
-        </Grid>
+        </Grid> */}
         <Grid item xs={12} sm={12} md={12}>
           <div style={{ display: 'flex' }}>
             <div>
@@ -70,7 +70,7 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
                 src='/static/images/avatar/1.jpg'
               />
             </div>
-            <div>
+            <div style={{ marginLeft: '0.8rem'}}>
               <Typography>
                 {getEmployeeName(formik.values.employeeId)}
               </Typography>
@@ -187,18 +187,18 @@ export const EditEmployeeActivateFields = ({ onClose, isLoading, data }) => {
   const id = data?.id;
   // const { data: employeeData } = useActiveTerminateEmployee({});
   const { data: employeeData } = useGetDeactivatedEmployee();
-  const { formik } = useAddActiveEmployeeForm(id);
+  const { formik } = useAddActiveEmployeeForm(id, onClose);
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
 
     if (formik.isValid) {
-      formik.setTouched({
-        employeeId: true,
-        terminationType: true,
-        effectiveDate: true,
-      });
-      onClose();
+      // formik.setTouched({
+      //   employeeId: true,
+      //   terminationType: true,
+      //   effectiveDate: true,
+      // });
+      // onClose();
     }
   };
 
