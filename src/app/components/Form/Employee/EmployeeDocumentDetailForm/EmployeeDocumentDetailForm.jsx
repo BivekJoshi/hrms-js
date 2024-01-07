@@ -1,4 +1,4 @@
-import { Accordion, AccordionDetails, Divider } from '@mui/material';
+import { Accordion, AccordionDetails, Chip, Divider } from '@mui/material';
 import { AccordionSummary, Button } from '@mui/material';
 import { Grid, Typography, Box } from '@mui/material';
 import React, { useEffect, useRef, useState } from 'react';
@@ -6,6 +6,7 @@ import {
   useAddDocument,
   useDeleteDocument,
   useGetDocumentByDocumentType,
+  useGetDocumentById,
 } from '../../../../hooks/employee/useDocument';
 import { useParams } from 'react-router-dom';
 import { DOC_URL } from '../../../../../auth/axiosInterceptor';
@@ -20,7 +21,7 @@ const EmployeeDocumentDetailForm = () => {
   const [openEditModal, setOpenEditModal] = useState(false);
   const [expandedAccordion, setExpandedAccordion] = useState('panel1');
 
-  const [selectedDocument, setSelectedDocument] = useState();
+  const [selectedDocument, setSelectedDocument] = useState('EMPLOYEE_PHOTO');
   const [document, setDocument] = useState('');
   const [imagePreviewMap, setImagePreviewMap] = useState({});
 
@@ -36,6 +37,7 @@ const EmployeeDocumentDetailForm = () => {
     id,
     selectedDocument || documentType[0]?.input
   );
+  const { data: getDocument, isLoading } = useGetDocumentById(id);
 
   useEffect(() => {
     refetch();
@@ -78,7 +80,8 @@ const EmployeeDocumentDetailForm = () => {
   const handleDelete = (document) => {
     const { id } = document;
     deleteDocument(id);
-    // setSelectedDocument('');
+
+    setSelectedDocument('');
     setDocument('');
     setImagePreviewMap((prevMap) => ({
       ...prevMap,
@@ -91,6 +94,9 @@ const EmployeeDocumentDetailForm = () => {
     setOpenEditModal(true);
   };
 
+  {
+    !isLoading && <div>loading</div>;
+  }
   return (
     <div>
       <Grid container>
@@ -266,9 +272,30 @@ const EmployeeDocumentDetailForm = () => {
                     aria-controls={`panel${document.id}a-content`}
                     id={`panel${document.id}a-header`}
                   >
-                    <Typography variant='h7' sx={{ fontWeight: 500 }}>
-                      {document?.label}
-                    </Typography>
+                    <div
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        width: '100%',
+                      }}
+                    >
+                      <Typography variant='h7' sx={{ fontWeight: 500 }}>
+                        {document?.label}
+                      </Typography>
+                      {getDocument?.map((data, index) => {
+                        if (document.input === data.documentType) {
+                          return (
+                            <Chip
+                              key={index}
+                              label='Uploaded'
+                              variant='outlined'
+                              color='success'
+                            />
+                          );
+                        }
+                      })}
+                    </div>
                   </AccordionSummary>
                   <AccordionDetails>
                     <Box sx={{ display: 'flex', gap: '1rem' }}>

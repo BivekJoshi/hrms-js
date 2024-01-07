@@ -13,6 +13,7 @@ import PromotionHistory from '../../InfoTabs/PromotionHistory/PromotionHistory';
 import EmployeeHistory from '../../InfoTabs/EmployeeHistoryTab/EmployeeHistory';
 import BranchInfo from '../../InfoTabs/BranchTab/BranchInfo';
 import DepartmentInfo from '../../InfoTabs/DepartmentTab/DepartmentInfo';
+import EmploymentDetails from '../../InfoTabs/EmploymentDetails/EmploymentDetails';
 
 const labelStyle = {
   backgroundColor: '#EBEDEF',
@@ -52,10 +53,15 @@ export const DetailProfile = ({ data, role, setShowPersonalProfile }) => {
       value: '3',
       component: <AttendenceInfo data={data} role={role} />,
     },
+    // {
+    //   label: 'Position',
+    //   value: '4',
+    //   component: <PromotionHistory data={data} role={role} />,
+    // },
     {
-      label: 'Position',
-      value: '4',
-      component: <PromotionHistory data={data} role={role} />,
+      label: 'Employment Details',
+      value: '10',
+      component: <EmploymentDetails data={data} role={role} />,
     },
     {
       label: 'Work',
@@ -67,16 +73,16 @@ export const DetailProfile = ({ data, role, setShowPersonalProfile }) => {
       value: '6',
       component: <TrainingInfo data={data} role={role} />,
     },
-    {
-      label: 'Branch',
-      value: '7',
-      component: <BranchInfo data={data} role={role} />,
-    },
-    {
-      label: 'Department',
-      value: '8',
-      component: <DepartmentInfo data={data} role={role} />,
-    },
+    // {
+    //   label: 'Branch',
+    //   value: '7',
+    //   component: <BranchInfo data={data} role={role} />,
+    // },
+    // {
+    //   label: 'Department',
+    //   value: '8',
+    //   component: <DepartmentInfo data={data} role={role} />,
+    // },
     {
       label: 'Documents',
       value: '9',
