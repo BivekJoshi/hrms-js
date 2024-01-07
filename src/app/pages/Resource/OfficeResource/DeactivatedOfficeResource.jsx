@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useGetDeactivatedOfficeResource } from "../../../hooks/resource/officeResource/useOfficeResource";
-import { Box, Button, Grid, Stack, Typography } from "@mui/material";
+import { Box, Button, Grid, IconButton, Stack, Typography } from "@mui/material";
 import { OfficeResourceLogisticsModal } from "./OfficeResourceModal";
 import CustomTable from "../../../components/CustomTable/CustomTable";
 import CloseIcon from "@mui/icons-material/Close";

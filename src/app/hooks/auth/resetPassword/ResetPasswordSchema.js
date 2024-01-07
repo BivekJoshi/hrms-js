@@ -1,7 +1,7 @@
 import * as Yup from "yup";
 
 const ResetPasswordSchema = Yup.object().shape({
-  oldPassword: Yup.string().required("Old Password is required."),
+  oldPassword: Yup.string().required("Old password is required."),
   password: Yup.string()
     .required("Password is required.")
     .min(8, "Password must be at least 8 characters long.")

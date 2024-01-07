@@ -118,6 +118,7 @@ const LeaveType = ({ permissions }) => {
     {
       title: 'Leave Name',
       field: 'leaveName',
+      width: '5%',
       render: (rowData) => {
         const leaveNameLabel = leaveName.find(leave => leave?.leaveName === rowData?.leaveName)?.leaveLabel || rowData?.leaveName;
         return <div>{leaveNameLabel}</div>
@@ -159,14 +160,23 @@ const LeaveType = ({ permissions }) => {
     {
       title: 'Description',
       field: 'leaveDescription',
+      width: '15%',
       sortable: false,
       sorting: false,
       emptyValue: '-',
-      cellStyle: {
-        wordBreak: 'break-all',
-      },
+      render: (rowData) => (
+        <div
+          style={{
+            whiteSpace: 'normal',
+            overflowWrap: 'break-word',
+            wordWrap: 'break-word',
+            wordBreak: 'break-all',
+          }}
+        >
+          {rowData?.leaveDescription}
+        </div>
+      ),
     },
-
     {
       title: 'Actions',
       render: (rowData) => (
