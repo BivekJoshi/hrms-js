@@ -21,7 +21,7 @@ const EmployeeDocumentDetailForm = () => {
   const [openEditModal, setOpenEditModal] = useState(false);
   const [expandedAccordion, setExpandedAccordion] = useState("panel1");
 
-  const [selectedDocument, setSelectedDocument] = useState('EMPLOYEE_PHOTO');
+  const [selectedDocument, setSelectedDocument] = useState();
   const [document, setDocument] = useState('');
   const [imagePreviewMap, setImagePreviewMap] = useState({});
 

@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import ReactApexChart from "react-apexcharts";
+import ThemeModeContext from "../../../../theme/ThemeModeContext";
 
 export const EmployPichart = ({ data }) => {
   const COLORS = [
@@ -16,6 +17,7 @@ export const EmployPichart = ({ data }) => {
     "#0078A8",
     "#8B48B8",
   ];
+  const { mode } = useContext(ThemeModeContext);
 
   const series = data
     ? Object.entries(data).map(([key, value]) => (value ? value : "nana"))
@@ -33,6 +35,11 @@ export const EmployPichart = ({ data }) => {
     },
     labels: labels,
     colors: COLORS,
+    legend: {
+      labels: {
+        colors: labels.map(() => (mode === "dark" ? "white" : "black")),
+      },
+    },
     responsive: [
       {
         breakpoint: 480,
