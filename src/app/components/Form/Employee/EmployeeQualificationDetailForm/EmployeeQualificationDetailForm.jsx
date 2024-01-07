@@ -1,16 +1,13 @@
 import {
   Grid,
   TextField,
-  Button,
-  Typography,
   Divider,
-  MenuItem,
 } from "@mui/material";
 import { FieldArray, FormikProvider } from "formik";
 import React, { useState } from "react";
-import CloseIcon from "@mui/icons-material/Close";
 import AddIcon from "@mui/icons-material/Add";
 import { useDeleteQualification } from "../../../../hooks/employee/useQualification";
+import DeleteIcon from "../../../../../assets/DeleteIcon.png";
 
 const passedLevel = [
   {
@@ -203,19 +200,46 @@ const EmployeeQualificationDetailForm = ({ formik, isLoading }) => {
                         direction="row"
                         justifyContent="flex-end"
                         alignItems="center"
+                        gap= '.5rem'
                       >
+                        <div
+                          onClick={() =>
+                            arrayHelpers.push({
+                              board: "",
+                              institute: "",
+                              passedLevel: "",
+                              passedYear: "",
+                              grade: "",
+                            })
+                          }
+                          style={{
+                            cursor:
+                              index !== values.education.length - 1
+                                ? "not-allowed"
+                                : "pointer",
+                            color:
+                              index !== values.education.length - 1
+                                ? "#BDBDBD"
+                                : "#388E3C",
+                            pointerEvents:
+                              index !== values.education.length - 1
+                                ? "none"
+                                : "auto",
+                          }}
+                          disabled={index !== values.education.length - 1}
+                        >
+                          <AddIcon />
+                        </div>
                         {values.education.length > 1 && (
-                          <Button
-                            variant="contained"
+                          <div
                             onClick={() => {
                               arrayHelpers.remove(index);
                               handleDeleteQualification(study);
                             }}
-                            color="error"
+                            style={{ cursor: "pointer" }}
                           >
-                            {/* <CloseIcon /> */}
-                            Delete
-                          </Button>
+                            <img src={DeleteIcon} alt="icon" />
+                          </div>
                         )}
                       </Grid>
                     </Grid>
@@ -223,21 +247,7 @@ const EmployeeQualificationDetailForm = ({ formik, isLoading }) => {
                 );
               })}
               <br />
-              <Button
-                variant="contained"
-                onClick={() =>
-                  arrayHelpers.push({
-                    board: "",
-                    institute: "",
-                    passedLevel: "",
-                    passedYear: "",
-                    grade: "",
-                  })
-                }
-              >
-                {/* <AddIcon /> */}
-                Add
-              </Button>
+     
             </>
           )}
         />
