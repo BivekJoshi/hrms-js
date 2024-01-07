@@ -85,11 +85,11 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                               formik.handleChange(event);
                               formik.setFieldValue(
                                 `addresses[${index}].district`,
-                                null
+                                ""
                               );
                               formik.setFieldValue(
                                 `addresses[${index}].municipality`,
-                                null
+                                ""
                               );
                             }}
                             error={
@@ -325,11 +325,11 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                                 formik.handleChange(event);
                                 formik.setFieldValue(
                                   `addresses[${index}].district`,
-                                  null
+                                  ""
                                 );
                                 formik.setFieldValue(
                                   `addresses[${index}].municipality`,
-                                  null
+                                  ""
                                 );
                               }}
                               error={

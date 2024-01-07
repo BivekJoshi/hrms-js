@@ -67,11 +67,6 @@ function EmailForm({ employeeId, onClose, officeEmail }) {
   return (
     <form onSubmit={handleSubmit}>
       <Grid container spacing={3}>
-        {/* <Grid item xs={12}>
-          <Typography variant="h6" gutterBottom>
-            Send Email
-          </Typography>
-        </Grid> */}
         <br />
         <Grid item xs={12}>
           <TextField
@@ -82,6 +77,7 @@ function EmailForm({ employeeId, onClose, officeEmail }) {
             onChange={handleInputChange}
             error={errors.to}
             helperText={errors.to ? "To is required" : ""}
+            size="small"
           />
         </Grid>
         <Grid item xs={12}>
@@ -91,6 +87,7 @@ function EmailForm({ employeeId, onClose, officeEmail }) {
             name="subject"
             value={emailData?.subject}
             onChange={handleInputChange}
+            size="small"
           />
         </Grid>
         <Grid item xs={12}>

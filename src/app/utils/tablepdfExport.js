@@ -1,5 +1,5 @@
 import pdfMake from "pdfmake/build/pdfmake.min.js";
-import pdfFonts from "pdfmake/build/vfs_fonts";
+import * as pdfFonts from "pdfmake/build/vfs_fonts";
 
 export const pdfExport = (
   columns,
@@ -213,4 +213,3 @@ const getWidthForPdfTable = (columns, orientation) => {
   // console.log(widths);
   return widths;
 };
-export default getWidthForPdfTable;

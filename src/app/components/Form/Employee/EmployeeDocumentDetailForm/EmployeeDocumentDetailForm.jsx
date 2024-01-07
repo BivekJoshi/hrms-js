@@ -78,10 +78,9 @@ const EmployeeDocumentDetailForm = () => {
 
       // Handle form submission when an image is selected
       const values = {
-        documentType: doc,
+        documentType: selectedDocument || documentType[0]?.input,
         document: file,
       };
-     
       addDocument(values);
 
       setUploadStatusMap((prevMap) => ({
