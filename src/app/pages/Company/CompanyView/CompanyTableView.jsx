@@ -70,24 +70,36 @@ const CompanyTableView = ({
 
   const actions = [
     {
-      icon: () => (
-        // <ModeEditOutlineIcon />
-        <HocButton
-          permissions={permissions?.canEdit}
-          icon={<ModeEditOutlineIcon />}
-        />
-      ),
+      icon : () => <ModeEditOutlineIcon />,
+      disabled: !permissions?.canEdit,
       tooltip: "Edit Branch",
       onClick: (event, rowData) => handleEditCompany(rowData),
     },
     {
-      icon: () => (
-        // <DeleteIcon />
-        <HocButton permissions={permissions?.canDelete} icon={<DeleteIcon />} />
-      ),
+      icon : () => <DeleteIcon />,
+      disabled: !permissions?.canDelete,
       tooltip: "Delete Branch",
       onClick: (event, rowData) => handleDeleteCompany(rowData),
     },
+    // {
+    //   icon: () => (
+    //     // <ModeEditOutlineIcon />
+    //     <HocButton
+    //       permissions={permissions?.canEdit}
+    //       icon={<ModeEditOutlineIcon />}
+    //     />
+    //   ),
+    //   tooltip: "Edit Branch",
+    //   onClick: (event, rowData) => handleEditCompany(rowData),
+    // },
+    // {
+    //   icon: () => (
+    //     // <DeleteIcon />
+    //     <HocButton permissions={permissions?.canDelete} icon={<DeleteIcon />} />
+    //   ),
+    //   tooltip: "Delete Branch",
+    //   onClick: (event, rowData) => handleDeleteCompany(rowData),
+    // },
   ];
 
   if (isEmployee) {
