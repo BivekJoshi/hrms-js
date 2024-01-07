@@ -89,7 +89,7 @@ const Designation = ({ permissions }) => {
 
   const actions = [
     {
-      icon: () => <ModeEditOutlineIcon />,
+      icon: () => <ModeEditOutlineIcon style={{color: 'green'}} />,
 
       disabled: !permissions?.canEdit,
 
@@ -97,7 +97,7 @@ const Designation = ({ permissions }) => {
       onClick: (event, rowData) => handleEditDesignation(rowData),
     },
     {
-      icon: () => <DeleteIcon />,
+      icon: () => <DeleteIcon style={{color: '#d32f2f'}} />,
       disabled: !permissions?.canDelete,
 
       tooltip: 'Delete',

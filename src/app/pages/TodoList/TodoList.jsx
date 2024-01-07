@@ -70,7 +70,7 @@ const TodoList = ({ permissions }) => {
       },
       sorting: false,
       render: (rowData) => {
-        const priority = rowData.priority;
+        const priority = rowData?.priority;
         let chipColor = '';
 
         if (priority === 'HIGH') {
@@ -97,13 +97,13 @@ const TodoList = ({ permissions }) => {
 
   const actions = [
     {
-      icon: () => <ModeEditOutlineIcon sx={{ color: '#01579B' }} />,
-      tooltip: 'Edit To Do',
+      icon: () => <ModeEditOutlineIcon style={{color: 'green'}} />,
+      tooltip: 'Edit to do',
       onClick: (event, rowData) => handleEditTodoList(rowData),
     },
     {
-      icon: () => <DeleteIcon sx={{ color: '#01579B' }} />,
-      tooltip: 'Delete List',
+      icon: () => <DeleteIcon style={{color: '#d32f2f'}} />,
+      tooltip: 'Delete to do',
       onClick: (event, rowData) => handleDeleteTodoList(rowData.id),
     },
   ];

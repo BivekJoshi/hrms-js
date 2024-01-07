@@ -185,7 +185,7 @@ const EventAttendance = ({ permissions }) => {
 
   const actions = [
     {
-      icon: () => <ModeEditOutlineIcon />,
+      icon: () => <ModeEditOutlineIcon style={{color: 'green'}} />,
 
       disabled: !permissions?.canEdit,
 

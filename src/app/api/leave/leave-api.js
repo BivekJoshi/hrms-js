@@ -5,7 +5,7 @@ import useAuth from "../../../auth/hooks/component/login/useAuth";
 export const getleave = async () => {
   const { isEmployee } = useAuth();
   if (!isEmployee) {
-    const data = await axiosInstance.get(`/leave/get-all`);
+    const data = await axiosInstance.get(`/leave/get-all-fiscal-year-leave`);
     return data;
   }
 };

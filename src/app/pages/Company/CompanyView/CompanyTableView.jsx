@@ -70,13 +70,13 @@ const CompanyTableView = ({
 
   const actions = [
     {
-      icon : () => <ModeEditOutlineIcon />,
+      icon : () => <ModeEditOutlineIcon style={{color: 'green'}} />,
       disabled: !permissions?.canEdit,
       tooltip: "Edit Branch",
       onClick: (event, rowData) => handleEditCompany(rowData),
     },
     {
-      icon : () => <DeleteIcon />,
+      icon : () => <DeleteIcon style={{color: '#d32f2f'}} />,
       disabled: !permissions?.canDelete,
       tooltip: "Delete Branch",
       onClick: (event, rowData) => handleDeleteCompany(rowData),

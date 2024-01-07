@@ -196,7 +196,7 @@ const Project = ({ permissions }) => {
           size='large'
           color='primary'
         />
-        <Autocomplete
+        {/* <Autocomplete
           value={pageSize}
           onChange={handlePageSizeChange}
           options={[5, 10, 15, 20, 25, 30]}
@@ -208,7 +208,7 @@ const Project = ({ permissions }) => {
               size='small'
             />
           )}
-        />
+        /> */}
       </Box>
 
       {/* Add project modal */}

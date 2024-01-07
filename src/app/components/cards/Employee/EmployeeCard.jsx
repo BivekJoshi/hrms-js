@@ -248,7 +248,7 @@ const EmployeeCard = ({
               }
             />
 
-            <Box padding={'0 1rem'}>
+            <Box padding={'1rem 0'}>
               <Tooltip title={PositionLevel || ''}>
                 <Chip
                   style={{ width: 230 }}

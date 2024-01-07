@@ -17,9 +17,19 @@ export const AddUserControlFields = ({ onClose }) => {
 
   const handleUserNameChange = (event, selectedEmployee) => {
     if (selectedEmployee) {
-      formik.setFieldValue('employeeId', selectedEmployee.id);
-      formik.setFieldValue('email', selectedEmployee.email);
+      formik.setFieldValue("employeeId", selectedEmployee.id);
+      formik.setFieldValue("email", selectedEmployee.officeEmail);
     }
+  };
+
+  const getNameLabel = (emp) => {
+    const fullName = emp?.middleName === ""
+      ? `${emp?.firstName} ${emp?.lastName}`
+      : `${emp?.firstName} ${emp?.middleName} ${emp?.lastName}`;
+
+    const position = emp?.positionName !== null ? `(${emp?.positionName})` : "";
+
+    return `${fullName} ${position}`;
   };
 
   return (
@@ -34,7 +44,7 @@ export const AddUserControlFields = ({ onClose }) => {
             id='employeeId'
             name='employeeId'
             options={employeeData || []}
-            getOptionLabel={(option) => option.label}
+            getOptionLabel={(employee) => getNameLabel(employee)}
             value={employeeData?.find(
               (employee) => employee?.id === formik.values?.employeeId
             )}
