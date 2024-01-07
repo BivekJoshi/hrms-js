@@ -162,10 +162,13 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
 };
 
 const DateInput = ({ formik, isHalfDay, isMultipleDays }) => {
-  const [halfType, setHalfType] = useState("FIRST_HALF");
+  const [halfType, setHalfType] = useState("");
 
   const handleFromDateChange = (e) => {
     const fromDateValue = e.target.value;
+    if(fromDateValue) {
+      setHalfType('FIRST_HALF')
+    }
     formik.handleChange(e);
     formik.setFieldValue("toDate", fromDateValue);
     formik.setFieldValue("halfLeaveType", null);
@@ -221,7 +224,7 @@ const DateInput = ({ formik, isHalfDay, isMultipleDays }) => {
             row
             aria-labelledby="demo-row-radio-buttons-group-label"
             name="halfLeaveType"
-            value={formik.values.halfLeaveType || "FIRST_HALF"}
+            value={formik.values.halfLeaveType || halfType}
             onChange={formik.handleChange}
             style={{ display: "flex", marginTop: "0.6rem" }}
           >
