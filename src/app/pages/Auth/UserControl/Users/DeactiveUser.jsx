@@ -61,7 +61,7 @@ const DeactiveUser = () => {
 
   const actions = [
     {
-      icon: () => <AddCircleIcon />,
+      icon: () => <AddCircleIcon style={{color: 'green'}} />,
       tooltip: 'Activate Employee',
       onClick: (event, rowData) => handleDeactivatedEmployee(rowData),
     },

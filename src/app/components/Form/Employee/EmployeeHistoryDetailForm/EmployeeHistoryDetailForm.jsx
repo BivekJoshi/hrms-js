@@ -156,13 +156,14 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                           size='small'
                         />
                       </Grid>
-                      <Grid item xs={12} sm={6} md={4}>
+                      <Grid item xs={12} sm={12} md={12}>
                         <TextField
                           id={`history[${index}].description`}
                           name={`history[${index}].description`}
                           label='Description'
                           placeholder='Enter Description'
                           fullWidth
+                          multiline
                           onBlur={handleBlur}
                           // required
                           value={employeeHistory.description}
@@ -179,7 +180,7 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                           size='small'
                         />
                       </Grid>
-                      <Grid item xs={12} sm={6} md={4}>
+                      {/* <Grid item xs={12} sm={6} md={4}>
                         <TextField
                           id={`history[${index}].remarks`}
                           name={`history[${index}].remarks`}
@@ -201,7 +202,7 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                           variant='outlined'
                           size='small'
                         />
-                      </Grid>
+                      </Grid> */}
                       <Grid item xs={12} sm={8}>
                         <div
                           style={{

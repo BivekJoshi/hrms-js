@@ -274,7 +274,7 @@ const Employee = () => {
           size="large"
           color="primary"
         />
-        <Autocomplete
+        {/* <Autocomplete
           value={pageSize}
           onChange={handlePageSizeChange}
           options={[20, 30, 40, 50, 100]}
@@ -287,7 +287,7 @@ const Employee = () => {
               size="small"
             />
           )}
-        />
+        /> */}
       </Box>
 
       <Modal
