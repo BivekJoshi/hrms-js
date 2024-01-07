@@ -9,7 +9,6 @@ export const exportExcel = (
   additionalRight
 ) => {
   const workbook = new XLSX.Workbook();
-  console.log(additionalLeft);
 
   const worksheet = workbook.addWorksheet(fileName?.replace("pdf", ""), {
     properties: {
@@ -58,7 +57,7 @@ export const exportExcel = (
   if (additionalLeft && Object.values(additionalLeft).length > 0) {
     let start = additionalDataStart;
     for (let key in additionalLeft) {
-      console.log(key, additionalLeft[key]);
+      
       worksheet.getCell(`${forLeftCell + start}`).value = {
         richText: [
           { text: key, font: { bold: true, color: { argb: "0000FF" } } },

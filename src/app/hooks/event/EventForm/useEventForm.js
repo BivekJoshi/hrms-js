@@ -38,7 +38,7 @@ const useEventForm = (setOpenSubmitModal, handleCloseModal) => {
     addEvent(values, {
       onSuccess: (data) => {
         formik.resetForm();
-        setEventId(data.id);
+        setEventId(data?.id);
         handleCloseModal();
         setOpenSubmitModal(true);
       },

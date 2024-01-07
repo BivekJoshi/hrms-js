@@ -9,11 +9,9 @@ import Project from '../../../../assets/project.png';
 import User from '../../../../assets/user.png';
 
 const DashboardCard = ({ data }) => {
+  const { mode } = useContext(ThemeModeContext);
   const navigate = useNavigate();
 
-  const handleClick = () => {
-    navigate(linkTo);
-  };
   const cardData = [
     {
       title: 'Users',
@@ -51,7 +49,13 @@ const DashboardCard = ({ data }) => {
       borderColor: '#875923',
     },
   ];
-  const { mode } = useContext(ThemeModeContext);
+
+  const handleClick = (card) => {
+    console.log(card, "card")
+    navigate(card);
+  };
+
+
 
   return (
     <>
@@ -64,29 +68,29 @@ const DashboardCard = ({ data }) => {
           width='232px'
           height='80px'
           borderRadius='0px 8px 8px 0px'
-          borderLeft={`6px solid ${card.borderColor}`}
+          borderLeft={`6px solid ${card?.borderColor}`}
           padding='8px 20px 8px 20px'
           boxShadow={7}
-          onClick={handleClick}
+          onClick={() => handleClick(card?.linkTo)}
           bgcolor={mode === 'light' ? '' : '#3f413f'}
           sx={{ cursor: 'pointer' }}
         >
           <Grid>
             <Typography
               align='center'
-              color={mode === 'light' ? `${card.borderColor}` : 'white'}
+              color={mode === 'light' ? `${card?.borderColor}` : 'white'}
               fontSize='14px'
               fontWeight={'500'}
               lineheight='20px'
             >
-              {card.title}
+              {card?.title}
             </Typography>
             <Divider
               sx={{
-                border: `1px solid ${card.borderColor}`,
+                border: `1px solid ${card?.borderColor}`,
                 height: '3px',
                 width: '42px',
-                background: ` ${card.borderColor}`,
+                background: ` ${card?.borderColor}`,
               }}
             />
           </Grid>
@@ -101,7 +105,7 @@ const DashboardCard = ({ data }) => {
               fontWeight={500}
               color={mode === 'light' ? '' : 'white'}
             >
-              {card.count}
+              {card?.count}
             </Typography>
           </Stack>
         </Stack>
