@@ -85,7 +85,7 @@ const AddEmploymentHistoryFields = ({ onClose }) => {
           id='positionId'
           name='positionId'
           select
-          label='Branch Name'
+          label='Position Name'
           placeholder='Select your branch'
           fullWidth
           required

@@ -1,9 +1,11 @@
-import { Box, Button } from '@mui/material';
-import React, { useState } from 'react';
-import CustomTable from '../../../../../components/CustomTable/CustomTable';
-import { useParams } from 'react-router-dom';
-import { useGetEmployeeEmployment } from '../../../../../hooks/employee/useEmployeeHistory';
-import { AddEmploymentHistory } from './AddEmploymentHistory';
+import { Box, Button, Typography } from "@mui/material";
+import React, { useState } from "react";
+import CustomTable from "../../../../../components/CustomTable/CustomTable";
+import { useParams } from "react-router-dom";
+import { useGetEmployeeEmployment } from "../../../../../hooks/employee/useEmployeeHistory";
+import { AddEmploymentHistory } from "./AddEmploymentHistory";
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import CancelIcon from '@mui/icons-material/Cancel';
 
 const EmploymentDetails = ({ data }) => {
   const { id } = useParams();
@@ -14,67 +16,78 @@ const EmploymentDetails = ({ data }) => {
 
   const columns = [
     {
-      title: 'SN',
+      title: "SN",
       render: (rowData) => rowData.tableData.id + 1,
-      width: '3%',
-      maxWidth: '50px',
+      width: "3%",
+      maxWidth: "50px",
       sortable: false,
       sorting: false,
     },
     {
-      title: 'Branch Name',
-      field: 'employerName',
-      emptyValue: '-',
+      title: "Department Name",
+      field: "department.departmentName",
+      emptyValue: "-",
       width: 300,
     },
     {
-      title: 'Branch Address',
-      field: 'employerAddress',
-      emptyValue: '-',
+      title: "Branch Name",
+      field: "branch.branchName",
+      emptyValue: "-",
       width: 300,
     },
     {
-      title: 'Position Hold',
-      field: 'pastPosition',
-      emptyValue: '-',
+      title: "Position Hold",
+      field: "position.positionName",
+      emptyValue: "-",
       width: 300,
     },
     {
-      title: 'From Date',
-      field: 'fromDate',
-      emptyValue: '-',
+      title: "From Date",
+      field: "effectiveDateFrom",
+      emptyValue: "-",
       width: 200,
     },
     {
-      title: 'To Date',
-      field: 'toDate',
-      emptyValue: '-',
+      title: "To Date",
+      field: "effectiveDateTo",
+      emptyValue: "-",
       width: 200,
     },
     {
-      title: 'Remarks',
-      field: 'remarks',
-      emptyValue: '-',
+      title: "Remarks",
+      field: "remarks",
+      emptyValue: "-",
       width: 200,
     },
     {
-      title: 'description',
-      field: 'description',
-      emptyValue: '-',
+      title: "Active",
+      field: "isActive",
+      render: (rowData) => {
+        return (
+          <Typography textAlign="center">
+            {rowData?.isActive ? (
+              <CheckCircleIcon sx={{ color: "green" }} />
+            ) : (
+              <CancelIcon sx={{ color: "red" }} />
+            )}
+          </Typography>
+        );
+      },
+      emptyValue: "-",
       width: 50,
     },
   ];
   return (
-    <Box className='tableIcon'>
+    <Box className="tableIcon">
       <Box
         sx={{
-          display: 'flex',
-          justifyContent: 'flex-end',
-          paddingBottom: '10px',
+          display: "flex",
+          justifyContent: "flex-end",
+          paddingBottom: "10px",
         }}
       >
         <Button
-          variant='contained'
+          variant="contained"
           sx={{ mt: 3, ml: 1 }}
           onClick={handleAddOpenModal}
         >
@@ -85,13 +98,13 @@ const EmploymentDetails = ({ data }) => {
       <CustomTable
         columns={columns}
         data={employeeHistory}
-        title='Employment Details'
+        title="Employment Details"
         isLoading={isLoading}
       />
 
       {openAddModal && (
         <AddEmploymentHistory
-          title={'Add Employment Details'}
+          title={"Add Employment Details"}
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
         />
