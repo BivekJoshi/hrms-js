@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { useState } from 'react';
+import * as React from "react";
+import { useState } from "react";
 import {
   Autocomplete,
   Box,
@@ -11,36 +11,36 @@ import {
   Pagination,
   TextField,
   Typography,
-} from '@mui/material';
-import Tab from '@mui/material/Tab';
-import TabContext from '@mui/lab/TabContext';
-import TabList from '@mui/lab/TabList';
-import TabPanel from '@mui/lab/TabPanel';
-import CloseIcon from '@mui/icons-material/Close';
+} from "@mui/material";
+import Tab from "@mui/material/Tab";
+import TabContext from "@mui/lab/TabContext";
+import TabList from "@mui/lab/TabList";
+import TabPanel from "@mui/lab/TabPanel";
+import CloseIcon from "@mui/icons-material/Close";
 
-import EmployeeBasicInfoForm from '../../components/Form/Employee/EmployeeBasicInfoForm/EmployeeBasicInfoForm';
-import useAddEmployeeForm from '../../hooks/employee/AddEmployee/useAddEmployeeForm';
-import EmployeeGrid from './EmployeeView/EmployeeGrid';
-import { useNavigate } from 'react-router-dom';
-import './Style/Style.css';
-import ThemeModeContext from '../../../theme/ThemeModeContext';
-import { useGetEmployeeData } from '../../hooks/employee/useEmployee';
-import EmployeeTableView from './EmployeeView/EmployeePage/EmployeeTableView';
+import EmployeeBasicInfoForm from "../../components/Form/Employee/EmployeeBasicInfoForm/EmployeeBasicInfoForm";
+import useAddEmployeeForm from "../../hooks/employee/AddEmployee/useAddEmployeeForm";
+import EmployeeGrid from "./EmployeeView/EmployeeGrid";
+import { useNavigate } from "react-router-dom";
+import "./Style/Style.css";
+import ThemeModeContext from "../../../theme/ThemeModeContext";
+import { useGetEmployeeData } from "../../hooks/employee/useEmployee";
+import EmployeeTableView from "./EmployeeView/EmployeePage/EmployeeTableView";
 
 const labelStyle = {
-  backgroundColor: '#EBEDEF',
-  marginLeft: '.5rem',
-  textTransform: 'none',
-  borderRadius: '.5rem',
-  color: 'black',
-  textDecoder: 'none',
+  backgroundColor: "#EBEDEF",
+  marginLeft: ".5rem",
+  textTransform: "none",
+  borderRadius: ".5rem",
+  color: "black",
+  textDecoder: "none",
   // fontWeight: "bold",
 };
 const activeLabelStyle = {
   ...labelStyle,
-  backgroundColor: '#329EF4',
-  borderBottom: 'none',
-  textDecoder: 'none',
+  backgroundColor: "#329EF4",
+  borderBottom: "none",
+  textDecoder: "none",
   // fontWeight: "bold",
 };
 
@@ -52,7 +52,7 @@ const Employee = () => {
     pageNumber,
     pageSize
   );
- 
+
   const handlePageChange = (event, newPage) => {
     setPageNumber(newPage - 1);
     window.scroll(0, 0);
@@ -65,23 +65,25 @@ const Employee = () => {
   };
 
   const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    bgcolor: 'background.paper',
-    border: '1px solid #808080',
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    bgcolor: "background.paper",
+    border: "1px solid #808080",
     borderRadius: 2,
     boxShadow: 24,
     p: 4,
-    background: mode === 'light' ? '' : '#413e3e',
+    background: mode === "light" ? "" : "#413e3e",
+    height: { xs: "100%", md: "auto" },
+    overflow:{ xs: "scroll", md: "auto" }
   };
 
   const navigate = useNavigate();
 
-  const [value, setValue] = React.useState('1');
+  const [value, setValue] = React.useState("1");
 
-  const [openAddModal, setOpenAddModal] = useState(false);  
+  const [openAddModal, setOpenAddModal] = useState(false);
   const [openSubmitModal, setOpenSubmitModal] = useState(false);
 
   const handleAddOpenModal = () => setOpenAddModal(true);
@@ -92,7 +94,10 @@ const Employee = () => {
     setOpenSubmitModal(false);
   };
 
-  const { formik, empId } = useAddEmployeeForm(handleOpenSubmitModal, handleOpenEmailModal);
+  const { formik, empId } = useAddEmployeeForm(
+    handleOpenSubmitModal,
+    handleOpenEmailModal
+  );
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -105,53 +110,53 @@ const Employee = () => {
   return (
     <>
       <TabContext value={value}>
-        <Box sx={{ width: '100%' }}>
+        <Box sx={{ width: "100%" }}>
           <Box
             sx={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
             }}
           >
             <TabList
               onChange={handleChange}
-              aria-label='lab API tabs example'
-              indicatorColor='none'
+              aria-label="lab API tabs example"
+              indicatorColor="none"
             >
               <Tab
-                label='Grid View'
-                value='1'
-                style={value === '1' ? activeLabelStyle : labelStyle}
+                label="Grid View"
+                value="1"
+                style={value === "1" ? activeLabelStyle : labelStyle}
               />
               <Tab
-                label='Table View'
-                value='2'
-                style={value === '2' ? activeLabelStyle : labelStyle}
+                label="Table View"
+                value="2"
+                style={value === "2" ? activeLabelStyle : labelStyle}
               />
             </TabList>
-            <Box sx={{ display: 'flex', gap: '12px' }}>
+            <Box sx={{ display: "flex", gap: "12px" }}>
               <Button
-                variant='outlined'
+                variant="outlined"
                 onClick={() => {
-                  navigate('deactivated');
+                  navigate("deactivated");
                 }}
-                sx={{ textTransform: 'none' }}
+                sx={{ textTransform: "none" }}
               >
                 Inactive Employee
               </Button>
               <Button
-                variant='contained'
+                variant="contained"
                 onClick={handleAddOpenModal}
-                sx={{ textTransform: 'none', color: '#fff' }}
+                sx={{ textTransform: "none", color: "#fff" }}
               >
                 + Add Employee
               </Button>
             </Box>
           </Box>
-          <TabPanel value='1'>
+          <TabPanel value="1">
             <EmployeeGrid employeeData={employeeData} isLoading={isLoading} />
           </TabPanel>
-          <TabPanel value='2'>
+          <TabPanel value="2">
             {/* <EmployeeTable /> */}
             <EmployeeTableView
               employeeData={employeeData}
@@ -166,26 +171,26 @@ const Employee = () => {
           <Box sx={style}>
             <Grid
               sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                marginBottom: '1rem',
-                position: 'relative',
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                marginBottom: "1rem",
+                position: "relative",
               }}
             >
               <Typography
-                variant='h6'
-                sx={{ color: mode === 'light' ? '#000' : '#fff' }}
+                variant="h6"
+                sx={{ color: mode === "light" ? "#000" : "#fff" }}
               >
                 Add Employee
               </Typography>
               <div
                 style={{
-                  width: '100%',
-                  height: '1px',
-                  backgroundColor: '#e0e0e0',
-                  position: 'absolute',
-                  bottom: '0',
+                  width: "100%",
+                  height: "1px",
+                  backgroundColor: "#e0e0e0",
+                  position: "absolute",
+                  bottom: "0",
                 }}
               />
               <IconButton onClick={() => setOpenAddModal(false)}>
@@ -193,33 +198,33 @@ const Employee = () => {
               </IconButton>
             </Grid>
             <EmployeeBasicInfoForm formik={formik} />
-            <Divider style={{ paddingTop: '16px' }} />
+            <Divider style={{ paddingTop: "16px" }} />
             <Box
               sx={{
-                display: 'flex',
-                justifyContent: 'flex-end',
-                gap: '1rem',
-                paddingTop: '16px',
+                display: "flex",
+                justifyContent: "flex-end",
+                gap: "1rem",
+                paddingTop: "16px",
               }}
             >
               <Button
-                variant='contained'
-                color='success'
+                variant="contained"
+                color="success"
                 onClick={handleSubmit}
                 sx={{
-                  textTransform: 'none',
-                  color: mode === 'light' ? '#fff' : '#fff',
+                  textTransform: "none",
+                  color: mode === "light" ? "#fff" : "#fff",
                 }}
               >
                 Submit
               </Button>
               <Button
-                variant='contained'
-                color='error'
+                variant="contained"
+                color="error"
                 onClick={() => {
                   setOpenAddModal(false);
                 }}
-                sx={{ textTransform: 'none' }}
+                sx={{ textTransform: "none" }}
               >
                 Cancel
               </Button>
@@ -228,7 +233,7 @@ const Employee = () => {
         </div>
       </Modal>
 
-      <Box mt={4} display='flex' justifyContent={'end'}>
+      <Box mt={4} display="flex" justifyContent={"end"}>
         <Pagination
           count={employeeData?.totalPages}
           page={pageNumber + 1}
@@ -236,8 +241,8 @@ const Employee = () => {
           showFirstButton
           showLastButton
           boundaryCount={3}
-          size='large'
-          color='primary'
+          size="large"
+          color="primary"
         />
         <Autocomplete
           value={pageSize}
@@ -247,29 +252,29 @@ const Employee = () => {
           renderInput={(params) => (
             <TextField
               {...params}
-              label='page'
-              variant='outlined'
-              size='small'
+              label="page"
+              variant="outlined"
+              size="small"
             />
           )}
         />
       </Box>
-      
+
       <Modal
         open={openSubmitModal}
         onClose={handleCloseEmailModal}
-        aria-labelledby='modal-modal-title'
-        aria-describedby='modal-modal-description'
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
       >
         <div>
           <Box sx={style}>
-            <Typography variant='h6'>
+            <Typography variant="h6">
               Do you like to add more Details of this Employee??
             </Typography>
-            <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
               <Button
-                variant='contained'
-                style={{ marginTop: '10px' }}
+                variant="contained"
+                style={{ marginTop: "10px" }}
                 sx={{ mt: 3, ml: 1 }}
                 onClick={() => {
                   navigate(`edit/${empId}`);
@@ -278,11 +283,11 @@ const Employee = () => {
                 Yes
               </Button>
               <Button
-                variant='contained'
-                style={{ marginTop: '10px' }}
+                variant="contained"
+                style={{ marginTop: "10px" }}
                 onClick={handleCloseEmailModal}
                 sx={{ mt: 3, ml: 1 }}
-                color='error'
+                color="error"
               >
                 No
               </Button>

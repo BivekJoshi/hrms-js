@@ -11,7 +11,7 @@ const capitalizeAndAddSpace = (str) => {
 };
 
 const BarChatDiagram = ({ data }) => {
-  const { mode, palette } = useContext(ThemeModeContext);
+  const { mode } = useContext(ThemeModeContext);
 
   const names = data
     ? Object.entries(data).map(([key, value]) =>
@@ -20,9 +20,7 @@ const BarChatDiagram = ({ data }) => {
     : [];
 
   const Data = data
-    ? Object.entries(data).map(([key, value]) =>
-        value ? value : "nana"
-      )
+    ? Object.entries(data).map(([key, value]) => (value ? value : "nana"))
     : [];
   const barColors = ["#F65E3C", "#A1E000", "#9137B8", "#D93084"];
 
