@@ -21,6 +21,7 @@ import TodayIcon from "@mui/icons-material/Today";
 import { styled } from "@mui/material/styles";
 import TimeToLeaveIcon from "@mui/icons-material/TimeToLeave";
 import BadgeIcon from "@mui/icons-material/Badge";
+import MarkEmailUnreadOutlinedIcon from "@mui/icons-material/MarkEmailUnreadOutlined";
 import {
   Box,
   Drawer,
@@ -315,6 +316,16 @@ export default function AdminSidebar() {
       path: "email",
       subMenus: [],
     },
+    {
+      name: "Email Log",
+      icon: (
+        <MarkEmailUnreadOutlinedIcon
+          sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
+        />
+      ),
+      path: "email-log",
+      subMenus: [],
+    },
   ];
 
   const drawerMenusForEmployee = [
@@ -415,10 +426,9 @@ export default function AdminSidebar() {
   );
 
   const drawerMenus =
-    userRole === "ROLE_SUPER_ADMIN"
+    userRole === "ROLE_SUPER_ADMIN" || userRole === "ROLE_ADMIN"
       ? drawerMenusForAdmin
       : userRole === "ROLE_MANAGER" ||
-        userRole === "ROLE_ADMIN" ||
         userRole === "ROLE_HR" ||
         userRole === "ROLE_HR_ADMIN" ||
         userRole === "ROLE_HR_CLERK"

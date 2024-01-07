@@ -81,7 +81,17 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                             placeholder="Enter province"
                             fullWidth
                             value={address.province}
-                            onChange={formik.handleChange}
+                            onChange={(event, value) => {
+                              formik.handleChange(event);
+                              formik.setFieldValue(
+                                `addresses[${index}].district`,
+                                ""
+                              );
+                              formik.setFieldValue(
+                                `addresses[${index}].municipality`,
+                                ""
+                              );
+                            }}
                             error={
                               formik.touched.addresses?.[index]?.province &&
                               Boolean(
@@ -117,6 +127,10 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                               formik.setFieldValue(
                                 `addresses[${index}].district`,
                                 newValue?.name || ""
+                              );
+                              formik.setFieldValue(
+                                `addresses[${index}].municipality`,
+                                ""
                               );
                             }}
                             renderInput={(params) => (
@@ -171,13 +185,16 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                                 value={address?.municipality}
                                 fullWidth
                                 error={
-                                  formik.touched.addresses?.[index]?.municipality &&
+                                  formik.touched.addresses?.[index]
+                                    ?.municipality &&
                                   Boolean(
-                                    formik.errors.addresses?.[index]?.municipality
+                                    formik.errors.addresses?.[index]
+                                      ?.municipality
                                   )
                                 }
                                 helperText={
-                                  formik.touched.addresses?.[index]?.municipality &&
+                                  formik.touched.addresses?.[index]
+                                    ?.municipality &&
                                   formik.errors.addresses?.[index]?.municipality
                                 }
                                 variant="outlined"
@@ -304,7 +321,17 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                               placeholder="Enter province"
                               fullWidth
                               value={address.province}
-                              onChange={formik.handleChange}
+                              onChange={(event, value) => {
+                                formik.handleChange(event);
+                                formik.setFieldValue(
+                                  `addresses[${index}].district`,
+                                  ""
+                                );
+                                formik.setFieldValue(
+                                  `addresses[${index}].municipality`,
+                                  ""
+                                );
+                              }}
                               error={
                                 formik.touched.addresses?.[index]?.province &&
                                 Boolean(
@@ -409,7 +436,8 @@ const EmployeeAddressDetailForm = ({ formik, isLoading, data }) => {
                                   helperText={
                                     formik.touched.addresses?.[index]
                                       ?.municipality &&
-                                    formik.errors.addresses?.[index]?.municipality
+                                    formik.errors.addresses?.[index]
+                                      ?.municipality
                                   }
                                   variant="outlined"
                                   size="small"

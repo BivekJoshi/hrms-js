@@ -16,6 +16,10 @@ const DeactivatedOfficeResource = ({ closeModal, title }) => {
     setopenModal(true);
   };
 
+  const handleViewLog = (rowData) => {
+    
+  };
+
   const columns = [
     {
       title: "SN",

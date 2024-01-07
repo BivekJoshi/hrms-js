@@ -62,22 +62,6 @@ const EmployeeDocumentDetailForm = () => {
     setDocument('');
   };
 
-  // const handleChangeImage = (e) => {
-  //   const file = e.target.files[0];
-  //   setDocument(file);
-
-  //   if (file) {
-  //     const reader = new FileReader();
-  //     reader.onload = () => {
-  //       setImagePreviewMap((prevMap) => ({
-  //         ...prevMap,
-  //         [expandedAccordion]: reader.result,
-  //       }));
-  //     };
-  //     reader.readAsDataURL(file);
-  //   }
-  // };
-
   const handleChangeImage = (e) => {
     const file = e.target.files[0];
     setDocument(file);
@@ -97,6 +81,7 @@ const EmployeeDocumentDetailForm = () => {
         documentType: selectedDocument || documentType[0]?.input,
         document: file,
       };
+
       addDocument(values);
 
       setUploadStatusMap((prevMap) => ({
@@ -288,7 +273,7 @@ const EmployeeDocumentDetailForm = () => {
                       <input
                         type='file'
                         ref={fileInputRef}
-                        onChange={handleChangeImage}
+                        onChange={(e) => handleChangeImage(e)}
                         style={{ display: 'none' }}
                         id='file'
                       />

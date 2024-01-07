@@ -1,20 +1,35 @@
-import * as React from 'react';
-import { Box, Button } from '@mui/material';
-import Tab from '@mui/material/Tab';
-import TabContext from '@mui/lab/TabContext';
-import TabList from '@mui/lab/TabList';
-import TabPanel from '@mui/lab/TabPanel';
-import { AddCompanyModal } from './CompanyModal/CompanyModal';
-import { useState } from 'react';
-import CompanyTable from './CompanyModal/CompanyTable';
-import CompanyGrid from './CompanyModal/CompanyGrid';
-import PermissionHoc from '../../hoc/permissionHoc';
-import HocButton from '../../hoc/hocButton';
-import { useGetUserRole } from '../../hooks/auth/userControl/useUserControl';
-import { useGetCompany } from '../../hooks/company/useCompany';
+import * as React from "react";
+import { Box, Button } from "@mui/material";
+import Tab from "@mui/material/Tab";
+import TabContext from "@mui/lab/TabContext";
+import TabList from "@mui/lab/TabList";
+import TabPanel from "@mui/lab/TabPanel";
+import { AddCompanyModal } from "./CompanyModal/CompanyModal";
+import { useState } from "react";
+import CompanyTable from "./CompanyModal/CompanyTable";
+import CompanyGrid from "./CompanyModal/CompanyGrid";
+import PermissionHoc from "../../hoc/permissionHoc";
+import HocButton from "../../hoc/hocButton";
+import { useGetUserRole } from "../../hooks/auth/userControl/useUserControl";
+import { useGetCompany } from "../../hooks/company/useCompany";
+
+const labelStyle = {
+  backgroundColor: "#EBEDEF",
+  marginLeft: ".5rem",
+  textTransform: "none",
+  borderRadius: ".5rem",
+  color: "black",
+  textDecoder: "none",
+};
+const activeLabelStyle = {
+  ...labelStyle,
+  backgroundColor: "#329EF4",
+  borderBottom: "none",
+  textDecoder: "none",
+};
 
 const Company = ({ permissions }) => {
-  const [value, setValue] = React.useState('1');
+  const [value, setValue] = React.useState("1");
   const [openAddModal, setOpenAddModal] = useState(false);
   const handleAddOpenModal = () => setOpenAddModal(true);
   const handleCloseAddModal = () => setOpenAddModal(false);
@@ -24,33 +39,40 @@ const Company = ({ permissions }) => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  // const { data: userRoleData } = useGetUserRole();
 
   return (
     <>
       <TabContext value={value}>
-        <Box sx={{ width: '100%' }}>
+        <Box sx={{ width: "100%" }}>
           <Box
             sx={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
             }}
           >
-            <TabList onChange={handleChange} aria-label='lab API tabs example'>
-              <Tab label='Table View' value='1' />
-              <Tab label='Grid View' value='2' />
+            <TabList onChange={handleChange} indicatorColor="none">
+              <Tab
+                label="Table View"
+                value="1"
+                style={value === "1" ? activeLabelStyle : labelStyle}
+              />
+              <Tab
+                label="Grid View"
+                value="2"
+                style={value === "2" ? activeLabelStyle : labelStyle}
+              />
             </TabList>
 
             <HocButton
               permissions={permissions?.canAdd}
-              color={'white'}
-              variant={'contained'}
+              color={"white"}
+              variant={"contained"}
               onClick={handleAddOpenModal}
-              buttonName={'+ Add Branch'}
+              buttonName={"+ Add Branch"}
             />
           </Box>
-          <TabPanel value='1' sx={{ padding: '0' }}>
+          <TabPanel value="1" sx={{ padding: "0" }}>
             <br />
             <CompanyTable
               permissions={permissions}
@@ -58,7 +80,7 @@ const Company = ({ permissions }) => {
               isLoading={isLoading}
             />
           </TabPanel>
-          <TabPanel value='2'>
+          <TabPanel value="2">
             <br />
             <CompanyGrid
               permissions={permissions}
@@ -70,7 +92,7 @@ const Company = ({ permissions }) => {
       </TabContext>
       {openAddModal && (
         <AddCompanyModal
-          title={'Add Branch'}
+          title={"Add Branch"}
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
         />
