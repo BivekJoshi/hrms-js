@@ -58,12 +58,12 @@ const EmployeeTableView = ({ employeeData, isLoading }) => {
 
   const actions = [
     {
-      icon: () => <EditIcon />,
+      icon: () => <EditIcon style={{color: 'green'}} />,
       tooltip: 'Edit Detail',
       onClick: (event, rowData) => handleEditEmployee(rowData),
     },
     {
-      icon: () => <RemoveRedEyeOutlinedIcon />,
+      icon: () => <RemoveRedEyeOutlinedIcon style={{color: 'green'}} />,
       tooltip: 'View Details',
       onClick: (event, rowData) => handleViewEmployee(rowData),
     },

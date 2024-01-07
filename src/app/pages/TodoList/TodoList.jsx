@@ -70,7 +70,7 @@ const TodoList = ({ permissions }) => {
       },
       sorting: false,
       render: (rowData) => {
-        const priority = rowData.priority;
+        const priority = rowData?.priority;
         let chipColor = '';
 
         if (priority === 'HIGH') {
