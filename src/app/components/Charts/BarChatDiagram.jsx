@@ -2,22 +2,28 @@ import React, { useContext } from "react";
 import ReactApexChart from "react-apexcharts";
 import { Box } from "@mui/material";
 import ThemeModeContext from "../../../theme/ThemeModeContext";
-import "./Style/Style.css"
+import "./Style/Style.css";
+const capitalizeAndAddSpace = (str) => {
+  return str
+    .replace(/([A-Z])/g, " $1") // Add space before capital letters
+    .trim() // Remove leading and trailing spaces
+    .replace(/(?:^|\s)\S/g, (a) => a.toUpperCase()); // Capitalize the first letter of each word
+};
 
 const BarChatDiagram = ({ data }) => {
   const { mode, palette } = useContext(ThemeModeContext);
-  const names = [
-    "All Employees",
-    "New Employees", 
-    "Male Employees",
-    "Female Employees",
-  ];
-  const Data = [
-    `${data?.allEmployee}`,
-    `${data?.newEmployee}`,
-    `${data?.maleEmployee}`,
-    `${data?.femaleEmployee}`,
-  ];
+
+  const names = data
+    ? Object.entries(data).map(([key, value]) =>
+        key ? capitalizeAndAddSpace(key) : "0"
+      )
+    : [];
+
+  const Data = data
+    ? Object.entries(data).map(([key, value]) =>
+        value ? value : "nana"
+      )
+    : [];
   const barColors = ["#F65E3C", "#A1E000", "#9137B8", "#D93084"];
 
   const chartOptions = {

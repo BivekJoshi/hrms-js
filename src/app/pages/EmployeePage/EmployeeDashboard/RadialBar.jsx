@@ -71,7 +71,6 @@ const RadialBar = ({ averageWork, data }) => {
       bgcolor={mode === "light" ? "" : "#3f413f"}
       padding="2rem"
     >
-      {/* ApexChart */}
       <ReactApexChart
         options={options}
         series={options.series}
