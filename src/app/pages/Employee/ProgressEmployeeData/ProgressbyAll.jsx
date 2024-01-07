@@ -1,17 +1,16 @@
-import * as React from 'react';
+import React from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
-function CircularProgressWithLabel(props) {
-  const { value, labelColor, progressColor } = props;
-
-  const labelStyle = {
-    color: labelColor || 'black',
-  };
-
+function CircularProgressWithLabel({
+  value,
+  labelColor = 'black',
+  progressColor = 'gray',
+  ...props
+}) {
   const circularProgressStyle = {
-    color: progressColor || 'gray',
+    color: progressColor,
   };
 
   return (
@@ -19,6 +18,7 @@ function CircularProgressWithLabel(props) {
       <CircularProgress
         variant='determinate'
         style={circularProgressStyle}
+        value={value}
         {...props}
       />
       <Box
@@ -34,7 +34,7 @@ function CircularProgressWithLabel(props) {
         }}
       >
         <Typography variant='caption' component='div' color='text.secondary'>
-          <span style={labelStyle}>{`${Math.round(value)}%`}</span>
+          <span style={{ color: labelColor }}>{`${Math.round(value)}%`}</span>
         </Typography>
       </Box>
     </Box>
@@ -63,15 +63,12 @@ const ProgressbyAll = ({ ProgressbyAll }) => {
       positionSet,
       employmentHistoryAdded,
       qualificationAdded,
-    ].filter((item) => item).length;
+    ].filter(Boolean).length;
 
-    const progress = (filledItems / 8) * 100;
-
-    return progress;
+    return (filledItems / 8) * 100;
   };
 
   const progress = calculateProgress();
-
   const labelColor = progress < 50 ? 'red' : 'green';
   const progressColor = progress < 50 ? 'lightcoral' : 'lightgreen';
 
