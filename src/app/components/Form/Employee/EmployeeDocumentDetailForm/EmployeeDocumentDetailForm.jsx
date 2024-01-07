@@ -242,9 +242,14 @@ const EmployeeDocumentDetailForm = () => {
         <Grid item xs={12} sm={6}>
           {documentType &&
             documentType.map((document, index) => {
-              const isInputDisabled = documentPhoto?.some(
-                (photo) => photo?.documentType === selectedDocument
-              );
+              const isInputDisabled =
+                index === 0
+                  ? documentPhoto?.some(
+                      (photo) => photo?.documentType === 'EMPLOYEE_PHOTO'
+                    )
+                  : documentPhoto?.some(
+                      (photo) => photo?.documentType === selectedDocument
+                    );
 
               return (
                 <Accordion
