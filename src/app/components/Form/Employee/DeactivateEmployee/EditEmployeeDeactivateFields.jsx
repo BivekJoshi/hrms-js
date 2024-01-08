@@ -25,10 +25,6 @@ import Male from '../../../../../assets/male.png';
 import Female from '../../../../../assets/female.png';
 
 export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
-  console.log(
-    '🚀 ~ file: EditEmployeeDeactivateFields.jsx:25 ~ EditEmployeeDeactivateFields ~ data:',
-    data
-  );
   const { palette } = useContext(ThemeModeContext);
   const { data: employeeData } = useGetEmployee();
   const { formik } = useRemoveDeactiveEmployeeForm(data, onClose);
