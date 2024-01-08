@@ -1,16 +1,16 @@
-import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { toast } from 'react-toastify';
+import { useMutation, useQuery, useQueryClient } from "react-query";
+import { toast } from "react-toastify";
 import {
   addEmploymentType,
   deleteEmploymentType,
   editEmploymentType,
   getEmploymentType,
   getEmploymentTypeById,
-} from '../../api/employmentType/employmentType-api';
+} from "../../api/employmentType/employmentType-api";
 
 /*________________________GET_____________________________________*/
 export const useGetEmploymentType = () => {
-  return useQuery(['getEmploymentType'], () => getEmploymentType(), {
+  return useQuery(["getEmploymentType"], () => getEmploymentType(), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
@@ -19,7 +19,7 @@ export const useGetEmploymentType = () => {
 /*________________________GETBYID_____________________________________*/
 export const useGetEmploymentTypeById = (id) => {
   return useQuery(
-    ['getEmploymentTypeById', id],
+    ["getEmploymentTypeById", id],
     () => getEmploymentTypeById(id),
     {
       refetchInterval: false,
@@ -32,13 +32,13 @@ export const useGetEmploymentTypeById = (id) => {
 export const useAddEmploymentType = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(
-    ['addEmploymentType'],
+    ["addEmploymentType"],
     (formData) => addEmploymentType(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Succesfully added Employment Type');
+        toast.success("Succesfully added Employment Type");
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries('getEmploymentType');
+        queryClient.invalidateQueries("getEmploymentType");
       },
       onError: (err, _variables, _context) => {
         toast.error(`${err.message}`);
@@ -50,33 +50,34 @@ export const useAddEmploymentType = ({ onSuccess }) => {
 /*________________________DELETE_____________________________________*/
 export const useDeleteEmploymentType = ({ onSuccess }) => {
   const queryClient = useQueryClient();
-  return useMutation(
-    ['deleteEmploymentType'],
-    (id) => deleteEmploymentType(id),
+  const employmentTypeDelete = useMutation(
+    ["deleteEmploymentType"],
+    async (id) => await deleteEmploymentType(id),
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Successfully deleted Employement Type');
+        toast.success("Successfully deleted Employement Type");
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries('getEmploymentType');
+        queryClient.invalidateQueries("getEmploymentType");
       },
-      // onError: (err, _variables, _context) => {
-      //   toast.error(`Error: ${err.message}`);
-      // },
     }
   );
+  return {
+    isSuccess: employmentTypeDelete.isSuccess,
+    deleteTypeMutation: employmentTypeDelete.mutate,
+  };
 };
 
 /*________________________EDIT_____________________________________*/
 export const useEditEmploymentType = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(
-    ['editCompany'],
+    ["editCompany"],
     (formData) => editEmploymentType(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Successfully edited EmploymentType');
+        toast.success("Successfully edited EmploymentType");
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries('getEmploymentType');
+        queryClient.invalidateQueries("getEmploymentType");
       },
     }
   );

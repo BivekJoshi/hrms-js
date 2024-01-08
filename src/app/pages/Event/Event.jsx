@@ -183,11 +183,6 @@ const Event = ({ permissions }) => {
               ref={calendarRef}
               plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
               initialView='dayGridMonth'
-              // headerToolbar={{
-              // start: "customTodayButton prev,next",
-              // center: "title",
-              // end: "dayGridMonth,timeGridWeek,timeGridDay",
-              // }}
               height={'90vh'}
               events={events}
               eventClick={handleOpenModal}

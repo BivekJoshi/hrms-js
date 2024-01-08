@@ -30,7 +30,7 @@ const DesignationFields = ({ onClose, isLoading, data }) => {
               formik.touched.positionName && formik.errors.positionName
             }
             variant="outlined"
-            InputLabelProps={{ shrink: true }}
+            size="small"
           />
         </Grid>
         <Grid item xs={12} sm={12}>
@@ -51,7 +51,7 @@ const DesignationFields = ({ onClose, isLoading, data }) => {
               formik.touched.positionLevel && formik.errors.positionLevel
             }
             variant="outlined"
-            InputLabelProps={{ shrink: true }}
+            size="small"
           ></TextField>
         </Grid>
         <Grid item xs={12} sm={12}>
@@ -69,7 +69,7 @@ const DesignationFields = ({ onClose, isLoading, data }) => {
               error={formik.touched.salary && Boolean(formik.errors.salary)}
               helperText={formik.touched.salary && formik.errors.salary}
               variant="outlined"
-              InputLabelProps={{ shrink: true }}
+              size="small"
             />
           ) : (
             <TextField
@@ -85,7 +85,7 @@ const DesignationFields = ({ onClose, isLoading, data }) => {
               error={formik.touched.salary && Boolean(formik.errors.salary)}
               helperText={formik.touched.salary && formik.errors.salary}
               variant="outlined"
-              InputLabelProps={{ shrink: true }}
+              size="small"
             />
           )}
         </Grid>
@@ -108,7 +108,7 @@ const DesignationFields = ({ onClose, isLoading, data }) => {
               formik.touched.positionDetails && formik.errors.positionDetails
             }
             variant="outlined"
-            InputLabelProps={{ shrink: true }}
+            size="small"
           />
         </Grid>
         <Grid

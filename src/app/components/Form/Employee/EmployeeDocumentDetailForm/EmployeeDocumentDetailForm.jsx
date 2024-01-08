@@ -19,13 +19,13 @@ const EmployeeDocumentDetailForm = () => {
   const { id } = useParams();
   const fileInputRef = useRef(null);
   const [openEditModal, setOpenEditModal] = useState(false);
-  const [expandedAccordion, setExpandedAccordion] = useState("panel1");
+  const [expandedAccordion, setExpandedAccordion] = useState("");
 
   const [selectedDocument, setSelectedDocument] = useState();
   const [document, setDocument] = useState('');
   const [imagePreviewMap, setImagePreviewMap] = useState({});
-
   const [editedDocument, setEditedDocument] = useState({});
+
   const handleCloseEditModal = () => setOpenEditModal(false);
 
   const docPathSelected = document?.name;
@@ -235,7 +235,7 @@ const EmployeeDocumentDetailForm = () => {
                     </div>
                   </AccordionSummary>
                   <AccordionDetails>
-                    <Box sx={{ display: "flex", gap: "1rem" }}>
+                    <Box sx={{ display: "flex", gap: "1rem" ,flexDirection:"column"}}>
                       <label htmlFor="file">
                         <input
                           type="file"
@@ -251,7 +251,6 @@ const EmployeeDocumentDetailForm = () => {
                             display: "flex",
                             border: "1px solid #B9BEC7",
                             borderRadius: ".3rem",
-                            // width: "450px",
                           }}
                           component="span"
                         >
@@ -283,16 +282,7 @@ const EmployeeDocumentDetailForm = () => {
                           </div>
                         </Box>
                       </label>
-                      {/* <Button
-                      variant='outlined'
-                      disabled={uploadStatusMap[expandedAccordion]}
-                      onClick={() => {
-                        handleFormSubmit(document.input);
-                      }}
-                      sx={{ textTransform: 'none', fontWeight: 'bold' }}
-                    >
-                      Upload
-                    </Button> */}
+                      <Typography variant="h8" sx={{color:'rgb(214, 214, 214)'}}>{document?.desc}</Typography>
                     </Box>
                   </AccordionDetails>
                 </Accordion>

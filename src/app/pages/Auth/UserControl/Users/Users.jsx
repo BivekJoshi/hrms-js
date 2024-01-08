@@ -109,7 +109,7 @@ const Users = ({ permissions }) => {
             <Button
               type='button'
               variant='contained'
-              sx={{ maxWidth: 'fit-content', color: '#fff' }}
+              sx={{ maxWidth: 'fit-content', color: '#fff',textTransform:"none" }}
               onClick={handleAddOpenModal}
             >
               + Add User
