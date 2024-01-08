@@ -4,46 +4,10 @@ import { useDeleteHoliday } from '../../../hooks/holiday/useHoliday';
 import PermissionHoc from '../../../hoc/permissionHoc';
 
 const HolidayFields = ({ formik }) => {
-  // const [openSubmitModal, setOpenSubmitModal] = useState(false);
-
-  // const handleSubmitModal = () => {
-  //   setOpenSubmitModal(true);
-  // };
-  // const handleCloseModal = () => {
-  //   setOpenSubmitModal();
-  // };
-  // const { formik } = useHolidayForm(data, handleSubmitModal, onClose);
-
-  // const handleFormSubmit = async () => {
-  //   const isValid = await formik.validateForm();
-
-  //   if (isValid) {
-  //     formik.handleSubmit();
-
-  //     if (formik.isValid) {
-  //       // onClose();
-  //       // setOpenSubmitModal(false);
-  //     }
-  //   }
-  // };
-
-  // const deleteHolidayMutation = useDeleteHoliday({});
-  // const handleDeleteHoliday = () => {
-  //   deleteHolidayMutation.mutate(data.id);
-  //   onClose();
-  // };
-  // const submitButtonText = data ? "Update" : "Add Holiday";
 
   const handleCloseConfirmationModal = () => {
     setConfirmationModal(false);
   };
-
-  // const deleteHolidayMutation = useDeleteHoliday({});
-  // const handleDeleteHoliday = () => {
-  //   deleteHolidayMutation.mutate(data.id);
-  //   onClose();
-  // };
-  // const submitButtonText = data ? "Update" : "Add Holiday";
 
   return (
     <>
@@ -111,44 +75,6 @@ const HolidayFields = ({ formik }) => {
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
-        {/* <Grid
-          container
-          direction="row"
-          justifyContent="flex-end"
-          alignItems="flex-end"
-        >
-          <>
-            {data ? (
-              <Button
-                variant="contained"
-                onClick={handleDeleteHoliday}
-                sx={{ mt: 3, ml: 1 }}
-                color="error"
-              >
-                Delete
-              </Button>
-            ) : (
-              ""
-            )}
-          </>
-
-          <Button
-            variant="contained"
-            onClick={handleFormSubmit}
-            sx={{ mt: 3, ml: 1 }}
-          >
-            {submitButtonText}
-          </Button>
-
-          <Button
-            variant="contained"
-            onClick={onClose}
-            sx={{ mt: 3, ml: 1 }}
-            color="error"
-          >
-            Cancel
-          </Button>
-        </Grid> */}
       </Grid>
     </>
   );

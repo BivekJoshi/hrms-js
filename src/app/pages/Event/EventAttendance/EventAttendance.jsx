@@ -38,17 +38,29 @@ const EventAttendance = ({ permissions }) => {
     },
     {
       title: "Contact Detail",
-      field: "mobileNumber",
+      field: "email",
       emptyValue: "-",
-      pdfWidth: "5rem",
-      width: "20vh",
       sorting: false,
       render: (rowData) => {
         return (
           <Tooltip title={rowData?.email} placement="top-start" arrow>
-            <div style={{ width: "10rem", overflow: "hidden", cursor:"pointer" }}>
+            <div
+              style={{
+                maxWidth: "10rem",
+                overflow: "hidden",
+                cursor: "pointer",
+              }}
+            >
               <div>{rowData.mobileNumber}</div>
-              <div>{rowData.email}</div>
+              <div
+                style={{
+                  overflow: "hidden",
+                  whiteSpace: "nowrap",
+                  textOverflow: "ellipsis",
+                }}
+              >
+                {rowData.email}
+              </div>
             </div>
           </Tooltip>
         );
@@ -187,23 +199,23 @@ const EventAttendance = ({ permissions }) => {
 
   const actions = [
     {
-      icon: () => <ModeEditOutlineIcon style={{ color: "green" }} />,
+      icon: () => (
+        <ModeEditOutlineIcon
+          sx={{
+            color: "black",
+            "&:hover": {
+              color: "green",
+            },
+          }}
+        />
+      ),
 
       disabled: !permissions?.canEdit,
 
       tooltip: "Edit Event",
       onClick: (event, rowData) => handleEditEventAttendance(rowData),
     },
-    // {
-    //   icon: () => (
-    //     <HocButton
-    //       permissions={permissions.canEdit}
-    //       icon={<ModeEditOutlineIcon />}
-    //     />
-    //   ),
-    //   tooltip: "Edit Event",
-    //   onClick: (event, rowData) => handleEditEventAttendance(rowData),
-    // },
+
   ];
 
   useEffect(() => {

@@ -103,13 +103,31 @@ const EmployeeResource = ({ permissions }) => {
   ];
   const actions = [
     {
-      icon: () => <ModeEditOutlineIcon style={{ color: "green" }} />,
+      icon: () => (
+        <ModeEditOutlineIcon
+          sx={{
+            color: "black",
+            "&:hover": {
+              color: "green",
+            },
+          }}
+        />
+      ),
       disabled: !permissions?.canEdit,
       tooltip: "Edit Logistics",
       onClick: (event, rowData) => handleEditRowData(rowData),
     },
     {
-      icon: () => <DeleteIcon style={{ color: "#d32f2f" }} />,
+      icon: () => (
+        <DeleteIcon
+          sx={{
+            color: "black",
+            "&:hover": {
+              color: "red",
+            },
+          }}
+        />
+      ),
       disabled: !permissions?.canDelete,
       tooltip: "Remove Logistics",
       onClick: (event, rowData) => handleDeleteRowData(rowData),

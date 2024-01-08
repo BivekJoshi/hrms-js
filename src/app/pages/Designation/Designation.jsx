@@ -1,10 +1,8 @@
 import * as React from "react";
 import { useState } from "react";
-import { Box, Button, Stack } from "@mui/material";
-
+import { Box } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
-
 import {
   useDeleteDesignation,
   useGetDesignation,
@@ -17,7 +15,6 @@ import DeleteConfirmationModal from "../../components/Modal/DeleteConfirmationMo
 import PermissionHoc from "../../hoc/permissionHoc";
 import HocButton from "../../hoc/hocButton";
 import CustomTable from "../../components/CustomTable/CustomTable";
-import { useEffect } from "react";
 
 const Designation = ({ permissions }) => {
   const { data: designationData, isLoading } = useGetDesignation();
@@ -97,15 +94,31 @@ const Designation = ({ permissions }) => {
 
   const actions = [
     {
-      icon: () => <ModeEditOutlineIcon style={{ color: "green" }} />,
-
+      icon: () => (
+        <ModeEditOutlineIcon
+          sx={{
+            color: "black",
+            "&:hover": {
+              color: "green",
+            },
+          }}
+        />
+      ),
       disabled: !permissions?.canEdit,
-
       tooltip: "Edit Detail",
       onClick: (event, rowData) => handleEditDesignation(rowData),
     },
     {
-      icon: () => <DeleteIcon style={{ color: "#d32f2f" }} />,
+      icon: () => (
+        <DeleteIcon
+          sx={{
+            color: "black",
+            "&:hover": {
+              color: "red",
+            },
+          }}
+        />
+      ),
       disabled: !permissions?.canDelete,
 
       tooltip: "Delete",
