@@ -1,17 +1,12 @@
-import { Button, FormControlLabel, Grid, TextField } from '@mui/material';
+import { Button, Grid, TextField } from '@mui/material';
 import React from 'react';
 import useOfficeResourceForm from '../../../../hooks/resource/officeResource/OfficeResourceForm/useOfficeResourceForm';
-import { ThemeSwitch } from '../../../../../theme/ThemeSwitch';
 
 const OfficeResourceFields = ({ onClose, isLoading, data }) => {
   const { formik } = useOfficeResourceForm(data, onClose);
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
-
-    if (formik.isValid) {
-     
-    }
   };
   const submitButtonText = data ? 'Update Logistics' : 'Add Logistics';
 
@@ -31,7 +26,7 @@ const OfficeResourceFields = ({ onClose, isLoading, data }) => {
             error={formik.touched.name && Boolean(formik.errors.name)}
             helperText={formik.touched.name && formik.errors.name}
             variant='outlined'
-            InputLabelProps={{ shrink: true }}
+            size="small"
           />
         </Grid>
         <Grid item xs={12} sm={12}>
@@ -51,7 +46,7 @@ const OfficeResourceFields = ({ onClose, isLoading, data }) => {
               formik.touched.uniqueNumber && formik.errors.uniqueNumber
             }
             variant='outlined'
-            InputLabelProps={{ shrink: true }}
+            size="small"
           />
         </Grid>
         <Grid item xs={12} sm={12}>
@@ -70,19 +65,6 @@ const OfficeResourceFields = ({ onClose, isLoading, data }) => {
             }
             helperText={formik.touched.description && formik.errors.description}
             variant='outlined'
-            InputLabelProps={{ shrink: true }}
-          />
-        </Grid>
-        <Grid item xs={12} sm={12}>
-          <FormControlLabel
-            control={
-              <ThemeSwitch
-                checked={formik.values.isActive}
-                onChange={formik.handleChange}
-                name='isActive'
-              />
-            }
-            label='If you want to deactive the office Logistics set switch to false'
           />
         </Grid>
         <Grid

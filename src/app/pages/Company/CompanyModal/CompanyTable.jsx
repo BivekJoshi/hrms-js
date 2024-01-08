@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CompanyTableView from "../CompanyView/CompanyTableView";
 import { EditCompanyModal } from "./CompanyModal";
 import {
@@ -16,15 +16,20 @@ const CompanyTable = ({ permissions, companyData, isLoading }) => {
   const handleCloseEditModal = () => setOpenEditModal(false);
   const handleCloseDeleteModal = () => setOpenDeleteModal(false);
 
-  const deleteCompanyMutation = useDeleteCompany({});
+  const {deleteCompanyMutation,isSuccess:isDeleteSuccess} = useDeleteCompany({});
   const handleDeleteCompany = (rowData) => {
     setDeletedCompany(rowData);
     setOpenDeleteModal(true);
   };
 
+  useEffect(() => {
+    if (isDeleteSuccess) {
+      setOpenDeleteModal(false);
+    }
+  }, [isDeleteSuccess]);
+
   const handleConfirmDelete = () => {
-    deleteCompanyMutation.mutate(deletedCompany.id);
-    setOpenDeleteModal(false);
+    deleteCompanyMutation(deletedCompany.id);
   };
 
   const handleEditCompany = (rowData) => {

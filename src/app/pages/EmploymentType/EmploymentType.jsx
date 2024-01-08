@@ -1,5 +1,5 @@
 import { Box, Button } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import HocButton from "../../hoc/hocButton";
 import CustomTable from "../../components/CustomTable/CustomTable";
 import FormModal from "../../components/Modal/FormModal";
@@ -27,15 +27,24 @@ const EmploymentType = () => {
   const handleCloseEditModal = () => setOPenEditModal(false);
   const handleCloseDeleteModal = () => setOpenDeleteModal(false);
 
-  const deleteTypeMutation = useDeleteEmploymentType({});
+  const {
+    deleteTypeMutation,
+    isSuccess: isDeleteSuccess,
+  } = useDeleteEmploymentType({});
+
   const handleDeleteType = (rowData) => {
     setDeletedType(rowData);
     setOpenDeleteModal(true);
   };
 
+  useEffect(() => {
+    if (isDeleteSuccess) {
+      setOpenDeleteModal(false);
+    }
+  }, [isDeleteSuccess]);
+
   const handleConfirmDelete = () => {
-    deleteTypeMutation.mutate(deletedType.id);
-    setOpenDeleteModal(false);
+    deleteTypeMutation(deletedType.id);
   };
 
   const handleEditType = (rowData) => {
@@ -69,12 +78,12 @@ const EmploymentType = () => {
 
   const actions = [
     {
-      icon: () => <EditIcon style={{color: 'green'}} />,
+      icon: () => <EditIcon style={{ color: "green" }} />,
       tooltip: "Edit Detail",
       onClick: (event, rowData) => handleEditType(rowData),
     },
     {
-      icon: () => <DeleteIcon style={{color: '#d32f2f'}} />,
+      icon: () => <DeleteIcon style={{ color: "#d32f2f" }} />,
       tooltip: "Delete",
       onClick: (event, rowData) => handleDeleteType(rowData),
     },
