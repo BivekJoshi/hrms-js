@@ -42,7 +42,6 @@ const EditEmployee = () => {
         variant='elevation'
         sx={{ pt: 3, pb: 5 }}
         alternativeLabel
-        connector={<ColorlibConnector />}
       >
         {steps?.map((label) => (
           <Step key={label} onClick={() => handleStepClick(label)}>
