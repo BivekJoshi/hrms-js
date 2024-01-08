@@ -48,9 +48,6 @@ export const useTemporaryAddress = ({ onSuccess }) => {
       // toast.success('Temporary address added successfully');
       onSuccess && onSuccess(data, variables, context);
     },
-    onError: (err, _variables, _context) => {
-      toast.error(`error: ${err.message}`);
-    },
   });
 };
 

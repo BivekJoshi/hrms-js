@@ -1,4 +1,4 @@
-import { Button, Divider, Grid, TextField } from '@mui/material';
+import { Button, Divider, Grid, TextField, Tooltip } from '@mui/material';
 import { FieldArray, FormikProvider } from 'formik';
 import React from 'react';
 import { useDeleteHistory } from '../../../../hooks/employee/useEmployeeHistory';
@@ -128,6 +128,30 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                           size='small'
                         />
                       </Grid>
+                      <Grid item xs={12} sm={12} md={8}>
+                        <TextField
+                          id={`history[${index}].description`}
+                          name={`history[${index}].description`}
+                          label='Description'
+                          placeholder='Enter Description'
+                          fullWidth
+                          multiline
+                          onBlur={handleBlur}
+                          // required
+                          value={employeeHistory.description}
+                          onChange={handleChange}
+                          error={Boolean(
+                            touched.history?.[index]?.description &&
+                              errors.history?.[index]?.description
+                          )}
+                          helperText={
+                            touched.history?.[index]?.description &&
+                            errors.history?.[index]?.description
+                          }
+                          variant='outlined'
+                          size='small'
+                        />
+                      </Grid>
                       <Grid item xs={12} sm={6} md={4}>
                         <TextField
                           id={`history[${index}].toDate`}
@@ -154,30 +178,6 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                           }
                           variant='outlined'
                           InputLabelProps={{ shrink: true }}
-                          size='small'
-                        />
-                      </Grid>
-                      <Grid item xs={12} sm={12} md={8}>
-                        <TextField
-                          id={`history[${index}].description`}
-                          name={`history[${index}].description`}
-                          label='Description'
-                          placeholder='Enter Description'
-                          fullWidth
-                          multiline
-                          onBlur={handleBlur}
-                          // required
-                          value={employeeHistory.description}
-                          onChange={handleChange}
-                          error={Boolean(
-                            touched.history?.[index]?.description &&
-                              errors.history?.[index]?.description
-                          )}
-                          helperText={
-                            touched.history?.[index]?.description &&
-                            errors.history?.[index]?.description
-                          }
-                          variant='outlined'
                           size='small'
                         />
                       </Grid>
@@ -240,17 +240,21 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                             }}
                             disabled={index !== values.history.length - 1}
                           >
-                            <AddIcon />
+                            <Tooltip title='Add work history'>
+                              <AddIcon />
+                            </Tooltip>
                           </div>
                           {values.history.length > 1 && (
                             <div
                               onClick={() => {
                                 arrayHelpers.remove(index);
-                                handleDeleteFamily(employeeHistory);
+                                handleDeleteHistory(employeeHistory);
                               }}
                               style={{ cursor: 'pointer' }}
                             >
-                              <img src={DeleteIcon} onClick={() => handleDeleteHistory(employeeHistory)} alt='icon' />
+                              <Tooltip title='Delete work history'>
+                                <img src={DeleteIcon} alt='icon' />
+                              </Tooltip>
                             </div>
                           )}
                         </div>

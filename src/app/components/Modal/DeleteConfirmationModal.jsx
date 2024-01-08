@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext } from "react";
 import {
   Dialog,
   DialogActions,
@@ -7,8 +7,9 @@ import {
   Button,
   CircularProgress,
   Box,
-} from '@mui/material';
-import ThemeModeContext from '../../../theme/ThemeModeContext';
+} from "@mui/material";
+import ThemeModeContext from "../../../theme/ThemeModeContext";
+import CustomButton from "../../utils/Button/Button";
 
 const DeleteConfirmationModal = ({
   open,
@@ -21,24 +22,20 @@ const DeleteConfirmationModal = ({
 
   return (
     <Dialog open={open} onClose={handleCloseModal}>
-      <Box sx={{ bgcolor: mode === 'light' ? '' : '#413e3e' }}>
+      <Box sx={{ bgcolor: mode === "light" ? "" : "#413e3e" }}>
         <DialogTitle>Confirm Delete</DialogTitle>
         <DialogContent>
           Are you sure you want to delete this {message}?
         </DialogContent>
         <DialogActions>
-          <Button
-            variant='contained'
+          <CustomButton
+            text={isLoading ? "Deleting..." : "Confirm"}
+            type="success"
             onClick={handleConfirmDelete}
             disabled={isLoading}
             startIcon={isLoading && <CircularProgress size={20} />}
-            color='success'
-          >
-            {isLoading ? 'Deleting...' : 'Confirm'}
-          </Button>
-          <Button variant='contained' onClick={handleCloseModal} color='error'>
-            Cancel
-          </Button>
+          />
+          <CustomButton text="Cancel" onClick={handleCloseModal} type="error" />
         </DialogActions>
       </Box>
     </Dialog>

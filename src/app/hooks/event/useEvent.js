@@ -117,9 +117,6 @@ export const useDeleteEvent = ({ onSuccess }) => {
       onSuccess && onSuccess(data, variables, context);
       queryClient.invalidateQueries('getEvent');
     },
-    onError: (err, _variables, _context) => {
-      toast.error(`Error: ${err.message}`);
-    },
   });
 };
 
@@ -133,9 +130,6 @@ export const useEditEvent = ({ onSuccess }) => {
       toast.success('Succesfully edited an Event');
       onSuccess && onSuccess(data, variables, context);
       queryClient.invalidateQueries('getEvent');
-    },
-    onError: (err, _variables, _context) => {
-      toast.error(`error: ${err.message}`);
     },
   });
 };

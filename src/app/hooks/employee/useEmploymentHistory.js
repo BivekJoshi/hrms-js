@@ -18,16 +18,8 @@ const useEmploymentHistory = (onClose) => {
       handleRequest(values);
     },
   });
-  console.log(
-    '🚀 ~ file: useEmploymentHistory.js:21 ~ useEmployeeHistoryForm ~ formik:',
-    formik
-  );
 
   const handleRequest = (values) => {
-    console.log(
-      '🚀 ~ file: useEmploymentHistory.js:23 ~ handleRequest ~ values:',
-      values
-    );
     values = {
       ...values,
     };

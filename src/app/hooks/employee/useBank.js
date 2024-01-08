@@ -52,9 +52,6 @@ export const useAddBank = ({ onSuccess }) => {
       onSuccess && onSuccess(data, variables, context);
       queryClient.invalidateQueries('getBankDetailById');
     },
-    onError: (err, _variables, _context) => {
-      toast.error(`error: ${err.message}`);
-    },
   });
 };
 

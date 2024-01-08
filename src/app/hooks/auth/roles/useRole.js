@@ -34,9 +34,6 @@ export const useAddRole = ({ onSuccess }) => {
       onSuccess && onSuccess(data, variables, context);
       queryClient.invalidateQueries('getRole');
     },
-    onError: (err, _variables, _context) => {
-      toast.error(`error: ${err.message}`);
-    },
   });
 };
 
@@ -48,9 +45,6 @@ export const useEditRole = ({ onSuccess }) => {
       toast.success('Role Edied Sucessfully');
       onSuccess && onSuccess(data, variables, context);
       queryClient.invalidateQueries('getRole');
-    },
-    onError: (err, _variables, _context) => {
-      toast.error(`Error: ${err.message}`);
     },
   });
 };
@@ -78,9 +72,6 @@ export const useDeleteRole = ({ onSuccess }) => {
       toast.success('Successfully deleted user');
       onSuccess && onSuccess(data, variables, context);
       queryClient.invalidateQueries('getRole');
-    },
-    onError: (err, _variables, _context) => {
-      toast.error(`Error: ${err.message}`);
     },
   });
 };
