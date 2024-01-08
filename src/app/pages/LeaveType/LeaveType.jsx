@@ -192,7 +192,7 @@ const LeaveType = ({ permissions }) => {
             permissions={permissions}
             color={'primary'}
             onClick={() => handleDeleteLeaveType(rowData)}
-            icon={<DeleteIcon />}
+            icon={<DeleteIcon color='error' />}
           />
         </Stack>
       ),
