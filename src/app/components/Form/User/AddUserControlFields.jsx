@@ -5,7 +5,7 @@ import { useGetNoneUser } from '../../../hooks/employee/useEmployee';
 import { useAddUserControlForm } from '../../../pages/Auth/UserControl/Users/useAddUserControlForm';
 import { ButtonComponent } from '../../Button/ButtonComponent';
 import renderOptions from '../../../utils/renderOptions';
-
+ 
 export const AddUserControlFields = ({ onClose }) => {
   const { data: employeeData } = useGetNoneUser();
   const { formik } = useAddUserControlForm(onClose);
@@ -14,14 +14,14 @@ export const AddUserControlFields = ({ onClose }) => {
     if (formik.isValid) {
     }
   };
-
+ 
   const handleUserNameChange = (event, selectedEmployee) => {
     if (selectedEmployee) {
       formik.setFieldValue('employeeId', selectedEmployee.id);
       formik.setFieldValue('email', selectedEmployee.email);
     }
   };
-
+ 
   return (
     <Grid>
       <Grid container spacing={3}>
@@ -62,7 +62,7 @@ export const AddUserControlFields = ({ onClose }) => {
             }
           />
         </Grid>
-
+ 
         <Grid item xs={12} sm={12}>
           <TextField
             id='email'
@@ -81,7 +81,7 @@ export const AddUserControlFields = ({ onClose }) => {
             size='small'
           />
         </Grid>
-
+ 
         <Grid
           container
           direction='row'

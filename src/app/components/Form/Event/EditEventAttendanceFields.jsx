@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import {
   Autocomplete,
+  Button,
   Grid,
   MenuItem,
   TextField,
@@ -8,17 +9,16 @@ import {
 } from "@mui/material";
 import { ButtonComponent } from "../../Button/ButtonComponent";
 import useEditEventAttendanceForm from "../../../hooks/event/editEvent/useEditEventAttendanceForm";
-import ThemeModeContext from '../../../../theme/ThemeModeContext';
+import ThemeModeContext from "../../../../theme/ThemeModeContext";
 
 const EditEventAttendanceFields = ({ onClose, isLoading, data }) => {
   const { palette } = useContext(ThemeModeContext);
   const { formik } = useEditEventAttendanceForm(data, onClose);
- 
+
   const handleFormSubmit = async () => {
     // const isValid = await formik.validateForm();
     formik.handleSubmit();
     if (formik.isValid) {
-      
     }
   };
 

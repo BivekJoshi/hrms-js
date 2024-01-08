@@ -112,34 +112,36 @@ const OfficeResource = ({ permissions }) => {
 
   const actions = [
     {
-      icon: () => <ModeEditOutlineIcon style={{ color: 'green' }} />,
+      icon: () => (
+        <ModeEditOutlineIcon
+          sx={{
+            color: "black",
+            "&:hover": {
+              color: "green",
+            },
+          }}
+        />
+      ),
       disabled: !permissions?.canEdit,
       tooltip: 'Edit Logistics',
       onClick: (event, rowData) => handleEditRowData(rowData),
     },
     {
-      icon: () => <DeleteIcon style={{ color: '#d32f2f' }} />,
+      icon: () => (
+        <DeleteIcon
+          sx={{
+            color: "black",
+            "&:hover": {
+              color: "red",
+            },
+          }}
+        />
+      ),
       disabled: !permissions?.canDelete,
       tooltip: 'Remove Logistics',
       onClick: (event, rowData) => handleDeleteRowData(rowData),
     },
-    // {
-    //   icon: () => (
-    //     <HocButton
-    //       permissions={permissions?.canEdit}
-    //       icon={<ModeEditOutlineIcon />}
-    //     />
-    //   ),
-    //   tooltip: "Edit Logistics",
-    //   onClick: (event, rowData) => handleEditRowData(rowData),
-    // },
-    // {
-    //   icon: () => (
-    //     <HocButton permissions={permissions.canDelete} icon={<DeleteIcon />} />
-    //   ),
-    //   tooltip: "Delete Department",
-    //   onClick: (event, rowData) => handleDeleteRowData(rowData),
-    // },
+  
   ];
   return (
     <>
@@ -198,23 +200,7 @@ const OfficeResource = ({ permissions }) => {
           title={'Deactivated Logistics'}
         />
       )}
-      {/* <OpenCLoseModel
-        openModal={openModal}
-        handleCloseModal={handleCloseModal}
-        modelName={
-          <DeactivatedOfficeResource
-            closeModal={handleCloseModal}
-            title={'Deactivated Logistics'}
-          />
-        }
-        setOpenModal={setOpenModal}
-      /> */}
-      {/* <OpenCLoseModel
-        openModal={openNotUseModal}
-        handleCloseModal={handleCloseAvailableModal}
-        modelName={<AvailableOfficeLogistic />}
-        setOpenModal={setOpenNotUseModal}
-      /> */}
+      
       {openDeleteModal && (
         <DeleteConfirmationModal
           open={openDeleteModal}
