@@ -198,26 +198,8 @@ export const EditEmployeeActivateFields = ({ onClose, isLoading, data }) => {
     !isLoading && (
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
-          <TextField
-            id="projectId"
-            name="projectId"
-            label="Employee Name"
-            placeholder="Enter project Id"
-            fullWidth
-            value={getEmployeeName(formik.values.employeeId)}
-            onChange={formik.handleChange}
-            error={
-              formik.touched.employeeId && Boolean(formik.errors.employeeId)
-            }
-            helperText={formik.touched.employeeId && formik.errors.employeeId}
-            variant="outlined"
-            InputLabelProps={{ shrink: true }}
-            style={{ display: "none" }}
-          />
-        </Grid>
-        <Grid item xs={12} sm={12}>
-          <Typography variant="h6" component="h6">
-            Do you really want to Activate employee
+          <Typography sx={{ fontSize: "18px" }} textAlign="center">
+            Do you really want to Activate employee?
             <b> {getEmployeeName(formik.values.employeeId)}</b>
           </Typography>
         </Grid>
@@ -288,32 +270,6 @@ export const EditEmployeeActivateFields = ({ onClose, isLoading, data }) => {
               />
             )}
           />
-
-          {/* <TextField
-            id="terminationType"
-            select
-            name="terminationType"
-            label="Termanation Type"
-            placeholder="Enter Employee staus"
-            fullWidth
-            value={formik.values.terminationType}
-            onChange={formik.handleChange}
-            error={
-              formik.touched.terminationType &&
-              Boolean(formik.errors.terminationType)
-            }
-            helperText={
-              formik.touched.terminationType && formik.errors.terminationType
-            }
-            variant="outlined"
-            InputLabelProps={{ shrink: true }}
-          >
-            {activationOption?.map((option) => (
-              <MenuItem key={option?.id} value={option?.value}>
-                {option?.label}
-              </MenuItem>
-            ))}
-          </TextField> */}
         </Grid>
 
         <Grid
@@ -325,14 +281,14 @@ export const EditEmployeeActivateFields = ({ onClose, isLoading, data }) => {
           <Button
             variant="contained"
             onClick={handleFormSubmit}
-            sx={{ mt: 3, ml: 1, color: "#fff" }}
+            sx={{ mt: 3, ml: 1, color: "#fff", textTransform:"capitalize" }}
           >
-            Yes Proceed
+            Activate Employee
           </Button>
           <Button
             variant="contained"
             onClick={onClose}
-            sx={{ mt: 3, ml: 1 }}
+            sx={{ mt: 3, ml: 1, textTransform:"capitalize" }}
             color="error"
           >
             Cancel

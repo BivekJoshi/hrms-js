@@ -9,7 +9,7 @@ const EmploymentTypeFields = ({ onClose, isLoading, data }) => {
     formik.handleSubmit();
   };
 
-  const submitButtonText = data ? "Update" : "Add";
+  const submitButtonText = data ? "Update Employment Type" : "Add Employment Type";
 
   return (
     !isLoading && (

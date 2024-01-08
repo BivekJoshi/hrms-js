@@ -80,6 +80,11 @@ const OfficeResource = ({ permissions }) => {
     {
       title: "Resource Name",
       field: "name",
+      render: (rowData) => (
+        <Typography style={{ overflowWrap: "break-word", width:"15rem" }}>
+          {rowData?.name}
+        </Typography>
+      ),
       emptyValue: "-",
       width: "12rem",
       sorting: false,
@@ -95,7 +100,7 @@ const OfficeResource = ({ permissions }) => {
       title: "Description",
       field: "description",
       render: (rowData) => (
-        <Typography style={{ overflowWrap: "break-word" }}>
+        <Typography style={{ overflowWrap: "break-word", width:"30rem" }}>
           {rowData?.description}
         </Typography>
       ),
