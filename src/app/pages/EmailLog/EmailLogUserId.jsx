@@ -82,15 +82,15 @@ const EmailLogUserId = () => {
     },
 
     {
-      title: "Time Stamp",
-      field: "timeStamp",
+      title: "Result",
+      field: "result",
       emptyValue: "-",
       width: 200,
       sorting: false,
     },
     {
-      title: "Result",
-      field: "result",
+      title: "Time Stamp",
+      field: "timeStamp",
       emptyValue: "-",
       width: 200,
       sorting: false,
