@@ -20,6 +20,7 @@ const CompanyTableView = ({
     {
       title: "SN",
       render: (rowData) => rowData.tableData.id + 1,
+      field:"tableData.id",
       width: "3%",
       sortable: false,
       sorting: false,
@@ -58,7 +59,11 @@ const CompanyTableView = ({
             arrow
           >
             <Typography
-              style={{ overflow: "hidden", textOverflow: "ellipsis", width:"15rem" }}
+              style={{
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                width: "15rem",
+              }}
             >
               {rowData?.branchDescription}
             </Typography>
@@ -70,13 +75,13 @@ const CompanyTableView = ({
 
   const actions = [
     {
-      icon : () => <ModeEditOutlineIcon style={{color: 'green'}} />,
+      icon: () => <ModeEditOutlineIcon style={{ color: "green" }} />,
       disabled: !permissions?.canEdit,
       tooltip: "Edit Branch",
       onClick: (event, rowData) => handleEditCompany(rowData),
     },
     {
-      icon : () => <DeleteIcon style={{color: '#d32f2f'}} />,
+      icon: () => <DeleteIcon style={{ color: "#d32f2f" }} />,
       disabled: !permissions?.canDelete,
       tooltip: "Delete Branch",
       onClick: (event, rowData) => handleDeleteCompany(rowData),
@@ -114,9 +119,11 @@ const CompanyTableView = ({
         columns={columns}
         data={companyData}
         title="Branch List"
+        fileName="Branch-List"
         isLoading={isLoading}
         exportButton={true}
         actions={actions}
+        exportExcel
       />
     </>
   );
