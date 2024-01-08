@@ -124,12 +124,14 @@ const TodoListFields = ({ onClose, isLoading, data }) => {
             variant='contained'
             OnClick={handleFormSubmit}
             sx={{ mt: 3, ml: 1, color: '#fff' }}
+            color={"#fff"}
             buttonName={submitButtonText}
           />
           <ButtonComponent
             variant='contained'
             OnClick={onClose}
             sx={{ mt: 3, ml: 1 }}
+            color={"#fff"}
             BGColor={'#d32f2f'}
             buttonName={'Cancel'}
           />
