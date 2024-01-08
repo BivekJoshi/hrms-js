@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Box, Divider, Tab, Table, Tabs } from '@mui/material';
 import { TableContainer, TableHead } from '@mui/material';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
@@ -14,6 +14,7 @@ import EmployeeHistory from '../../InfoTabs/EmployeeHistoryTab/EmployeeHistory';
 import BranchInfo from '../../InfoTabs/BranchTab/BranchInfo';
 import DepartmentInfo from '../../InfoTabs/DepartmentTab/DepartmentInfo';
 import EmploymentDetails from '../../InfoTabs/EmploymentDetails/EmploymentDetails';
+import ThemeModeContext from '../../../../../../theme/ThemeModeContext';
 
 const labelStyle = {
   backgroundColor: '#EBEDEF',
@@ -37,7 +38,7 @@ export const DetailProfile = ({ data, role, setShowPersonalProfile }) => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
+  const { palette, mode } = useContext(ThemeModeContext);
   const labelStyle = {
     backgroundColor: palette.secondary.main,
     marginLeft: '.5rem',
@@ -83,11 +84,11 @@ export const DetailProfile = ({ data, role, setShowPersonalProfile }) => {
       value: '10',
       component: <EmploymentDetails data={data} role={role} />,
     },
-    {
-      label: 'Employment Details',
-      value: '10',
-      component: <EmploymentDetails data={data} role={role} />,
-    },
+    // {
+    //   label: 'Employment Details',
+    //   value: '10',
+    //   component: <EmploymentDetails data={data} role={role} />,
+    // },
     {
       label: 'Work',
       value: '5',

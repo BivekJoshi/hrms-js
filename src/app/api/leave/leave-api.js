@@ -1,11 +1,11 @@
-import { axiosInstance } from "../../../auth/axiosInterceptor";
-import useAuth from "../../../auth/hooks/component/login/useAuth";
+import { axiosInstance } from '../../../auth/axiosInterceptor';
+import useAuth from '../../../auth/hooks/component/login/useAuth';
 
 /*________________________GET ALL_____________________________________*/
 export const getleave = async () => {
   const { isEmployee } = useAuth();
   if (!isEmployee) {
-    const data = await axiosInstance.get(`/leave/get-all`);
+    const data = await axiosInstance.get(`/leave/get-all-fiscal-year-leave`);
     return data;
   }
 };
@@ -110,9 +110,7 @@ export const editLeaveByAdmin = async (formData) => {
 /*________________________EDIT BY OTHER_____________________________________*/
 export const editLeaveStatusByAdmin = async (formData) => {
   const { id } = formData;
-  const data = await axiosInstance.put(
-    `/leave/confirm/${id}`, formData
-  );
+  const data = await axiosInstance.put(`/leave/confirm/${id}`, formData);
   return data;
 };
 
