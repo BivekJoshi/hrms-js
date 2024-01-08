@@ -22,7 +22,7 @@ const EmployeeDocumentDetailForm = () => {
   const [expandedAccordion, setExpandedAccordion] = useState("panel1");
 
   const [selectedDocument, setSelectedDocument] = useState();
-  const [document, setDocument] = useState("");
+  const [document, setDocument] = useState('');
   const [imagePreviewMap, setImagePreviewMap] = useState({});
 
   const [editedDocument, setEditedDocument] = useState({});

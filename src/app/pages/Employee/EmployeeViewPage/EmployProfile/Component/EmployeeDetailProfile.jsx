@@ -4,7 +4,6 @@ import { TableContainer, TableHead } from "@mui/material";
 import { TabContext, TabPanel } from "@mui/lab";
 
 import AcademicsInfo from "../../InfoTabs/AcademicsInfoTab/AcademicsInfo";
-import PromotionHistory from "../../InfoTabs/PromotionHistory/PromotionHistory";
 import "../Style/Style.css";
 import DocumentInfo from "../../InfoTabs/DocumentInfoTab/DocumentInfo";
 import TrainingInfo from "../../InfoTabs/TrainingInfoTab/TrainingInfo";

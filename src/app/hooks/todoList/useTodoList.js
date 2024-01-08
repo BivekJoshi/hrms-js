@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import {
   addTodoList,
   deleteTodoList,
@@ -6,14 +6,14 @@ import {
   getTodoList,
   getTodoListById,
   getTodoListByUserId,
-} from "../../api/todoList/toDo-api";
-import { toast } from "react-toastify";
+} from '../../api/todoList/toDo-api';
+import { toast } from 'react-toastify';
 
 {
   /*________________________GET_____________________________________*/
 }
 export const useGetTodoList = () => {
-  return useQuery(["getTodoList"], () => getTodoList(), {
+  return useQuery(['getTodoList'], () => getTodoList(), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
@@ -23,7 +23,7 @@ export const useGetTodoList = () => {
   /*________________________GET-BY-ID_____________________________________*/
 }
 export const useGetTodoListById = (id) => {
-  return useQuery(["getTodoListById", id], () => getTodoListById(id), {
+  return useQuery(['getTodoListById', id], () => getTodoListById(id), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
@@ -34,7 +34,7 @@ export const useGetTodoListById = (id) => {
 }
 export const useGetTodoListByUserId = (userId) => {
   return useQuery(
-    ["getTodoListByUserId", userId],
+    ['getTodoListByUserId', userId],
     () => getTodoListByUserId(userId),
     {
       refetchInterval: false,
@@ -49,14 +49,11 @@ export const useGetTodoListByUserId = (userId) => {
 export const useAddTodoList = ({ onSuccess }) => {
   const queryClient = useQueryClient();
 
-  return useMutation(["addTodoList"], (formData) => addTodoList(formData), {
+  return useMutation(['addTodoList'], (formData) => addTodoList(formData), {
     onSuccess: (data, variables, context) => {
-      toast.success("Todo message added successfully");
+      toast.success('Todo message added successfully');
       onSuccess && onSuccess(data, variables, context);
-      queryClient.invalidateQueries("getTodoList");
-    },
-    onError: (err, _variables, _context) => {
-      toast.error(`error: ${err.message}`);
+      queryClient.invalidateQueries('getTodoList');
     },
   });
 };
@@ -66,14 +63,11 @@ export const useAddTodoList = ({ onSuccess }) => {
 }
 export const useEditTodoList = ({ onSuccess }) => {
   const queryClient = useQueryClient();
-  return useMutation(["editTodoList"], (formData) => editTodoList(formData), {
+  return useMutation(['editTodoList'], (formData) => editTodoList(formData), {
     onSuccess: (data, variables, context) => {
-      toast.success("Todo message edited successfully");
+      toast.success('Todo message edited successfully');
       onSuccess && onSuccess(data, variables, context);
-      queryClient.invalidateQueries("getTodoList");
-    },
-    onError: (err, _variables, _context) => {
-      toast.error(`error: ${err.message}`);
+      queryClient.invalidateQueries('getTodoList');
     },
   });
 };
@@ -84,14 +78,11 @@ export const useEditTodoList = ({ onSuccess }) => {
 export const useDeleteTodoList = ({ onSuccess }) => {
   const queryClient = useQueryClient();
 
-  return useMutation(["deleteTodoList"], (id) => deleteTodoList(id), {
+  return useMutation(['deleteTodoList'], (id) => deleteTodoList(id), {
     onSuccess: (data, variables, context) => {
-      toast.success("Todo message deleted successfully");
+      toast.success('Todo message deleted successfully');
       onSuccess && onSuccess(data, variables, context);
-      queryClient.invalidateQueries("getTodoList");
-    },
-    onError: (err, _variables, _context) => {
-      toast.error(`error: ${err.message}`);
+      queryClient.invalidateQueries('getTodoList');
     },
   });
 };

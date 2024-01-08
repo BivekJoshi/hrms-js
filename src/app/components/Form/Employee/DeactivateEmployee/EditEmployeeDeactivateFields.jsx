@@ -20,6 +20,9 @@ import {
 } from '../../../../hooks/employee/DeactivateEmploye/useEmployee';
 import { termintionOptions, activationOption } from './TerminationOption';
 import ThemeModeContext from '../../../../../theme/ThemeModeContext';
+import { DOC_URL } from '../../../../../auth/axiosInterceptor';
+import Male from '../../../../../assets/male.png';
+import Female from '../../../../../assets/female.png';
 
 export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
   const { palette } = useContext(ThemeModeContext);
@@ -40,6 +43,12 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
     }
     return employeeId;
   };
+
+  const filePath = data?.employeePhotoPath
+    ? DOC_URL + data?.employeePhotoPath
+    : data?.gender === 'MALE'
+    ? Male
+    : Female;
 
   return (
     !isLoading && (
@@ -63,21 +72,21 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
           />
         </Grid> */}
         <Grid item xs={12} sm={12} md={12}>
-          <div style={{ display: 'flex' }}>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
             <div>
               <Avatar
                 alt={getEmployeeName(formik.values.employeeId)}
-                src='/static/images/avatar/1.jpg'
+                src={filePath}
               />
             </div>
-            <div style={{ marginLeft: '0.8rem'}}>
+            <div style={{ marginLeft: '0.8rem' }}>
               <Typography>
                 {getEmployeeName(formik.values.employeeId)}
               </Typography>
-              <Typography sx={{ fontSize: '14px', fontWeight: 500 }}>
+              {/* <Typography sx={{ fontSize: '14px', fontWeight: 500 }}>
                 Do you really want to Terminate employee?
-              </Typography>
-              <Typography>This change will be official.</Typography>
+              </Typography> */}
+              {/* <Typography>This change will be official.</Typography> */}
             </div>
           </div>
         </Grid>
