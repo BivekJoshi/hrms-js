@@ -7,6 +7,12 @@ import useApplyLeaveForm from "../../../../hooks/leave/LeaveForm/useApplyLeaveFo
 import { useLocation } from "react-router-dom";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 
+const leaveOptions = [
+  { id: "HALF_DAY", label: "Half Day" },
+  { id: "ONE_DAY", label: "One Day" },
+  { id: "MULTI_DAY", label: "Multiple Days" },
+];
+
 const ApplyLeaveField = () => {
   const [value, setValue] = useState("1");
   const location = useLocation();

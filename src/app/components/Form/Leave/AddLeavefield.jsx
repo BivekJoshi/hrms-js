@@ -24,7 +24,6 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
   const { data: employeeData } = useGetEmployee();
   const { data: leaveTypeData } = useGetLeaveType();
   const { formik } = useLeaveForm(data, onClose);
-  console.log(formik.values);
 
   const capitalize = (str) => {
     return str?.charAt(0)?.toUpperCase() + str.slice(1).toLowerCase();
@@ -78,7 +77,6 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
             }
           />
         </Grid>
-
         <Grid item xs={12} sm={12}>
           <Autocomplete
             id="leaveTypeId"
