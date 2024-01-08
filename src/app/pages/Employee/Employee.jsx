@@ -30,30 +30,31 @@ import EmployeeGridView from './EmployeeView/EmployeePage/EmployeeGridView';
 import { debounce } from 'lodash';
 import { useEffect } from 'react';
 
-const labelStyle = {
-  backgroundColor: '#EBEDEF',
-  marginLeft: '.5rem',
-  textTransform: 'none',
-  borderRadius: '.5rem',
-  color: 'black',
-  textDecoder: 'none',
-  // fontWeight: "bold",
-};
-const activeLabelStyle = {
-  ...labelStyle,
-  backgroundColor: '#329EF4',
-  borderBottom: 'none',
-  textDecoder: 'none',
-  // fontWeight: "bold",
-};
-
 const Employee = () => {
   const { mode, palette } = React.useContext(ThemeModeContext);
   const [pageNumber, setPageNumber] = useState(0);
   const [pageSize, setPageSize] = useState(12);
   const [search, setSearch] = useState('');
   const [debounceValue, setdebounceValue] = useState('');
+  const labelStyle = {
+    backgroundColor: palette.secondary.main,
+    marginLeft: '.5rem',
+    textTransform: 'none',
+    borderRadius: '.5rem',
+    color: mode === 'light' ? 'black' : 'white',
+    textDecoder: 'none',
+    // fontWeight: "bold",
+  };
+  const activeLabelStyle = {
+    ...labelStyle,
+    backgroundColor:
+      mode === 'dark' ? palette.text.primary : palette.secondary.light,
+    borderBottom: 'none',
+    textDecoder: 'none',
+    color: mode === 'dark' ? 'black' : 'white',
 
+    // fontWeight: "bold",
+  };
   const {
     data: employeeData,
     isLoading,

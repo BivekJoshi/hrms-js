@@ -16,23 +16,6 @@ import DepartmentInfo from '../../InfoTabs/DepartmentTab/DepartmentInfo';
 import EmploymentDetails from '../../InfoTabs/EmploymentDetails/EmploymentDetails';
 import ThemeModeContext from '../../../../../../theme/ThemeModeContext';
 
-const labelStyle = {
-  backgroundColor: '#EBEDEF',
-  marginLeft: '.5rem',
-  textTransform: 'none',
-  borderRadius: '.5rem',
-  color: 'black',
-  textDecoder: 'none',
-  fontWeight: 'bold',
-};
-const activeLabelStyle = {
-  ...labelStyle,
-  backgroundColor: '#329EF4',
-  borderBottom: 'none',
-  textDecoder: 'none',
-  fontWeight: 'bold',
-};
-
 export const DetailProfile = ({ data, role, setShowPersonalProfile }) => {
   const [value, setValue] = React.useState('1');
   const { palette, mode } = React.useContext(ThemeModeContext);
@@ -40,7 +23,6 @@ export const DetailProfile = ({ data, role, setShowPersonalProfile }) => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  const { palette, mode } = useContext(ThemeModeContext);
   const labelStyle = {
     backgroundColor: palette.secondary.main,
     marginLeft: '.5rem',
