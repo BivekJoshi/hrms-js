@@ -71,9 +71,6 @@ export const useDeleteUserControl = ({ onSuccess, rowData }) => {
       onSuccess && onSuccess(data, variables, context);
       queryClient.invalidateQueries('getUserControl');
     },
-    onError: (err, _variables, _context) => {
-      toast.error(`Error: ${err.message}`);
-    },
   });
 };
 

@@ -114,9 +114,6 @@ export const useAddLeave = ({ onSuccess }) => {
       onSuccess && onSuccess(data, variables, context);
       queryClient.invalidateQueries('useGetLoggedInUserLeave');
     },
-    onError: (err, _variables, _context) => {
-      toast.error(`error: ${err.message}`);
-    },
   });
 };
 
@@ -129,9 +126,6 @@ export const useDeleteLeave = ({ onSuccess }) => {
       onSuccess && onSuccess(data, variables, context);
       queryClient.invalidateQueries('getLoggedInUserLeave');
     },
-    onError: (err, _variables, _context) => {
-      toast.error(`Error: ${err.message}`);
-    },
   });
 };
 
@@ -143,9 +137,6 @@ export const useDeleteLeaveAdmin = ({ onSuccess }) => {
       toast.success('Successfully deleted Leave');
       onSuccess && onSuccess(data, variables, context);
       queryClient.invalidateQueries('getLeave');
-    },
-    onError: (err, _variables, _context) => {
-      toast.error(`Error: ${err.message}`);
     },
   });
 };
@@ -160,9 +151,6 @@ export const useEditLeave = ({ onSuccess }) => {
       navigate('/employee/leave');
       onSuccess && onSuccess(data, variables, context);
       queryClient.invalidateQueries('getLoggedInUserLeave');
-    },
-    onError: (err, _variables, _context) => {
-      toast.error(`Error: ${err.message}`);
     },
   });
 };

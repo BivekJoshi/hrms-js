@@ -104,6 +104,7 @@ const EmailLog = () => {
     <>
       <CustomTable
         columns={columns}
+        singleAction
         data={data}
         title="Email Log"
         isLoading={isLoading}

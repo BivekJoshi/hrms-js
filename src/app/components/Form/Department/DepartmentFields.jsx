@@ -1,6 +1,7 @@
 import { Grid, TextField, Button } from "@mui/material";
 import React from "react";
 import useDepartmentForm from "../../../hooks/department/DepartmentForm/useDepartmentForm";
+import CustomButton from "../../../utils/Button/Button";
 
 const DepartmentFields = ({ onClose, isLoading, data }) => {
   const { formik } = useDepartmentForm(data, onClose);
@@ -84,21 +85,18 @@ const DepartmentFields = ({ onClose, isLoading, data }) => {
           justifyContent="flex-end"
           alignItems="flex-end"
         >
-          <Button
-            variant="contained"
+          <CustomButton
+            text={submitButtonText}
             onClick={handleFormSubmit}
-            sx={{ mt: 3, ml: 1, textTransform: "capitalize" }}
-          >
-            {submitButtonText}
-          </Button>
-          <Button
-            variant="contained"
+            type="success"
+            style={{ mt: 3, ml: 1 }}
+          />
+          <CustomButton
+            text={"Cancel"}
             onClick={onClose}
-            sx={{ mt: 3, ml: 1, textTransform: "capitalize" }}
-            color="error"
-          >
-            Cancel
-          </Button>
+            type="error"
+            style={{ mt: 3, ml: 1 }}
+          />
         </Grid>
       </Grid>
     )
