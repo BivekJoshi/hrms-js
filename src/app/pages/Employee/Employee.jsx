@@ -27,6 +27,7 @@ import ThemeModeContext from "../../../theme/ThemeModeContext";
 import { useGetEmployeeData } from "../../hooks/employee/useEmployee";
 import EmployeeTableView from "./EmployeeView/EmployeePage/EmployeeTableView";
 import EmployeeGridView from "./EmployeeView/EmployeePage/EmployeeGridView";
+import { debounce } from "lodash";
 
 const labelStyle = {
   backgroundColor: "#EBEDEF",
@@ -50,12 +51,14 @@ const Employee = () => {
   const [pageNumber, setPageNumber] = useState(0);
   const [pageSize, setPageSize] = useState(12);
   const [search, setSearch] = useState("");
+  const [debounceValue, setdebounceValue] = useState("");
 
   const { data: employeeData, isLoading } = useGetEmployeeData(
     pageNumber,
     pageSize,
-    search
+    debounceValue
   );
+
   const handlePageChange = (event, newPage) => {
     setPageNumber(newPage - 1);
     window.scroll(0, 0);
@@ -108,9 +111,16 @@ const Employee = () => {
     formik.handleSubmit();
   };
 
-  const handleFilterChange = (e) => {
+  const debounceSearch = debounce((value) => {
+    if (value.length > 3) {
+      setdebounceValue(value);
+    }
+  }, 200);
+
+  const handleDebounce = (e) => {
     const value = e.target.value;
     setSearch(value);
+    debounceSearch(value);
   };
 
   return (
@@ -177,7 +187,7 @@ const Employee = () => {
                 <TextField
                   label="Filter by name, phone number, and position"
                   value={search}
-                  onChange={handleFilterChange}
+                  onChange={handleDebounce}
                   fullWidth
                   size="small"
                 />
