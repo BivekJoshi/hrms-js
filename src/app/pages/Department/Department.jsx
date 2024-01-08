@@ -82,14 +82,14 @@ const Department = ({ permissions }) => {
 
   const actions = [
     {
-      icon: () => <ModeEditOutlineIcon style={{color: 'green'}} />,
+      icon: () => <ModeEditOutlineIcon style={{ color: 'green' }} />,
       tooltip: 'Edit Department',
       disabled: !permissions?.canEdit,
 
       onClick: (event, rowData) => handleEditDepartment(rowData),
     },
     {
-      icon: () => <DeleteIcon style={{color: '#d32f2f'}} />,
+      icon: () => <DeleteIcon style={{ color: '#d32f2f' }} />,
       disabled: !permissions?.canDelete,
 
       tooltip: 'Delete Department',
@@ -108,7 +108,6 @@ const Department = ({ permissions }) => {
       <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
         <HocButton
           permissions={permissions?.canAdd}
-          color={'white'}
           variant={'contained'}
           onClick={handleAddOpenModal}
           buttonName={'+ Add Department'}

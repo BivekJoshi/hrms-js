@@ -138,19 +138,21 @@ const Project = ({ permissions }) => {
         >
           On-Going Projects
           {isEmployee ? null : (
-            <Box display="flex">
-              <ButtonComponent
-                BGColor="white"
-                TextColor="#000"
-                OnClick={handleOpenModal}
-                buttonName={"Terminated Project"}
-              />
-              {/* Button to open add project modal */}
-              <ButtonComponent
-                color="white"
-                OnClick={handleAddOpenModal}
-                buttonName="+ Add Project"
-              />
+            <Box sx={{ display: 'flex', gap: '12px' }}>
+              <Button
+                variant='outlined'
+                onClick={handleOpenModal}
+                sx={{ textTransform: 'none' }}
+              >
+                Terminated Project{' '}
+              </Button>
+              <Button
+                variant='contained'
+                onClick={handleAddOpenModal}
+                sx={{ textTransform: 'none', color: '#fff' }}
+              >
+                + Add Project
+              </Button>
             </Box>
           )}
         </Typography>

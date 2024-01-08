@@ -173,6 +173,7 @@ export const EditEmployeeActivateFields = ({ onClose, isLoading, data }) => {
   const { palette } = useContext(ThemeModeContext);
   const id = data?.id;
   const { data: employeeData } = useGetDeactivatedEmployee();
+
   const { formik } = useAddActiveEmployeeForm(id, onClose);
 
   const handleFormSubmit = () => {
@@ -198,9 +199,9 @@ export const EditEmployeeActivateFields = ({ onClose, isLoading, data }) => {
     !isLoading && (
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
-          <Typography sx={{ fontSize: "18px" }} textAlign="center">
-            Do you really want to Activate employee?
-            <b> {getEmployeeName(formik.values.employeeId)}</b>
+          <Typography variant='h6'>
+            Do you really want to Activate employee ?
+            <b> {getEmployeeName(id)}</b>
           </Typography>
         </Grid>
 
