@@ -22,12 +22,12 @@ const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
   } = useGetAvailableOfficeResource();
   const { data: officeResourceData } = useGetOfficeResource();
   const { data: employeeData } = useGetEmployee();
+
   const { formik } = useEmployeeResourceForm(data, onClose);
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
   };
-  const submitButtonText = data ? "Update Resource" : " Provide Resource";
   const currentDate = new Date().toISOString().split("T")[0];
 
   return (
@@ -40,15 +40,13 @@ const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
             disabled={editMode}
             options={employeeData || []}
             getOptionLabel={(employee) =>
-              `${employee?.firstName} ${employee?.middleName || ""} ${
-                employee?.lastName
-              }`
+              `${employee?.label}`
             }
             value={employeeData?.find(
               (employee) => employee?.id === formik.values?.employeeId
             )}
             onChange={(event, newValue) => {
-              formik.setFieldValue("employeeId", newValue?.id || "");
+              formik.setFieldValue("employeeId", newValue?.employeeId || "");
             }}
             renderInput={(params) => (
               <TextField
