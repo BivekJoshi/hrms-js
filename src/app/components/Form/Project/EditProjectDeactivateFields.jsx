@@ -40,7 +40,7 @@ export const EditProjectDeactivateFields = ({ onClose, isLoading, data }) => {
             InputLabelProps={{ shrink: true }}
           /> */}
           <Typography varinat="h6">
-            Are u sure u want to terminate this project?
+            Are you sure you want to terminate this project?
           </Typography>
           <Typography variant="h7">
             {" "}

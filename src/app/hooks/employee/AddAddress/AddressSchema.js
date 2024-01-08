@@ -90,11 +90,13 @@ const AddressSchema = Yup.object().shape({
           is: "PERMANENT",
           then: Yup.number()
             .typeError("Ward number must be a number")
+            .max(6, "Invalid ward number, exceed length 3")
             .required("Ward number is required"),
           otherwise: Yup.number().when("$perTempAddSame", {
             is: true,
             then: Yup.number()
               .typeError("Ward number must be a number")
+             
               .required("Ward number is required"),
           }),
         }),

@@ -49,6 +49,7 @@ const Company = ({ permissions }) => {
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
+              
             }}
           >
             <TabList onChange={handleChange} indicatorColor="none">

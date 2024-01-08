@@ -156,7 +156,7 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                           size='small'
                         />
                       </Grid>
-                      <Grid item xs={12} sm={12} md={12}>
+                      <Grid item xs={12} sm={12} md={8}>
                         <TextField
                           id={`history[${index}].description`}
                           name={`history[${index}].description`}

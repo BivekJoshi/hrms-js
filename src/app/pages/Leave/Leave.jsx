@@ -62,8 +62,9 @@ const Leave = ({ permissions }) => {
     setOpenEditModal(true);
   };
 
-  const pendingLeaves =
-    leaveData && leaveData.filter((item) => item?.leaveStatus === "PENDING");
+  const pendingLeavesEmp = leaveData && leaveData.filter((item) => item?.leaveStatus === "PENDING");
+  const pendingLeaves = pendingLeavesEmp && pendingLeavesEmp?.sort((a, b) => b.leaveId - a.leaveId); // it short pending leaves according to it latest created
+
   const approvedRejectedLeaves =
     leaveData && leaveData.filter((item) => item?.leaveStatus !== "PENDING");
 
@@ -265,12 +266,29 @@ const Leave = ({ permissions }) => {
         );
       },
     },
-
     {
       title: "Approved By",
       width: "80px",
       sorting: false,
       field: "approvedBy",
+      render: (rowData) => {
+        if (rowData?.leaveStatus === "APPROVED") {
+          return <Typography>{rowData.approvedBy}</Typography>;
+        }
+        return "-";
+      },
+    },
+    {
+      title: "Rejected By",
+      width: "80px",
+      sorting: false,
+      field: "approvedBy",
+      render: (rowData) => {
+        if (rowData?.leaveStatus === "REJECTED") {
+          return <Typography>{rowData?.approvedBy}</Typography>;
+        }
+        return "-";
+      },
     },
   ].filter(Boolean);
 
