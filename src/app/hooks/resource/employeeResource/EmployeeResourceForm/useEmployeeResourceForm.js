@@ -1,9 +1,9 @@
 import {
   useAddEmployeeResource,
   useEditEmployeeResource,
-} from '../useEmployeeResource';
-import { useFormik } from 'formik';
-import { EmployeeResourceSchema } from './EmployeeResourceSchema';
+} from "../useEmployeeResource";
+import { useFormik } from "formik";
+import { EmployeeResourceSchema } from "./EmployeeResourceSchema";
 
 const useEmployeeResourceForm = (data, onClose) => {
   const { mutate: addEmployeeResource } = useAddEmployeeResource({});
@@ -11,15 +11,16 @@ const useEmployeeResourceForm = (data, onClose) => {
 
   const formik = useFormik({
     initialValues: {
-      officeResourceId: data?.officeResourceId || '',
-      officeResourceName: data?.officeResourceName || '',
-      employeeId: data?.employeeId || '',
-      employeeName: data?.employeeName || '',
-      receiveDate: data?.receiveDate || '',
-      returnDate: data?.returnDate || '',
-      id: data?.id || '',
+      officeResourceId: data?.officeResource?.id || "",
+      employeeId: data?.employee?.id || "",
+      receiveDate: data?.receiveDate || "",
+      returnDate: data?.returnDate || "",
+      conditionWhileProvided: data?.conditionWhileProvided || "",
+      conditionWhileReturned: data?.conditionWhileReturned || "",
+      remarks: data?.remarks || "",
+      id: data?.id || "",
     },
-    validationSchema: EmployeeResourceSchema,
+    // validationSchema: EmployeeResourceSchema,
     enableReinitialize: true,
 
     onSubmit: (values) => {
@@ -36,7 +37,7 @@ const useEmployeeResourceForm = (data, onClose) => {
     addEmployeeResource(values, {
       onSuccess: () => {
         onClose();
-      }
+      },
     });
   };
 
@@ -46,8 +47,7 @@ const useEmployeeResourceForm = (data, onClose) => {
       onSuccess: () => {
         onClose();
         // formik.resetForm();
-      
-      }
+      },
     });
   };
 

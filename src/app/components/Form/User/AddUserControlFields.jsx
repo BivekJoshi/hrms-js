@@ -26,9 +26,9 @@ export const AddUserControlFields = ({ onClose }) => {
     <Grid>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
-          <Typography sx={{ color: 'orange' }}>
+          {/* <Typography sx={{ color: 'orange' }}>
             To add an employee, user's permanent address detail must be Filled
-          </Typography>
+          </Typography> */}
           <br />
           <Autocomplete
             id='employeeId'

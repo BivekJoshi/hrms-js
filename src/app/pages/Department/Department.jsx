@@ -16,6 +16,7 @@ import PermissionHoc from "../../hoc/permissionHoc";
 import HocButton from "../../hoc/hocButton";
 import useAuth from "../../../auth/hooks/component/login/useAuth";
 import CustomTable from "../../components/CustomTable/CustomTable";
+import { useEffect } from "react";
 
 const Department = ({ permissions }) => {
   const { isEmployee } = useAuth();
@@ -34,15 +35,24 @@ const Department = ({ permissions }) => {
   const handleCloseEditModal = () => setOpenEditModal(false);
   const handleCloseDeleteModal = () => setOpenDeleteModal(false);
 
-  const deleteDepartmentMutation = useDeleteDepartment({});
+  const {
+    deleteDepartmentMutation,
+    isSuccess: isDeleteSuccess,
+  } = useDeleteDepartment({});
+
   const handleDeleteDepartment = (rowData) => {
     setDeletedDepartment(rowData);
     setOpenDeleteModal(true);
   };
 
+  useEffect(() => {
+    if (isDeleteSuccess) {
+      setOpenDeleteModal(false);
+    }
+  }, [isDeleteSuccess]);
+
   const handleConfirmDelete = () => {
-    deleteDepartmentMutation.mutate(deletedDepartment.id);
-    setOpenDeleteModal(false);
+    deleteDepartmentMutation(deletedDepartment.id);
   };
 
   const handleEditDepartment = (rowData) => {

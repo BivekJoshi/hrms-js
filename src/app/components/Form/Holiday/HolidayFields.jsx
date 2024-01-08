@@ -27,7 +27,7 @@ const HolidayFields = ({ formik }) => {
             }
             helperText={formik.touched.holidayName && formik.errors.holidayName}
             variant='outlined'
-            InputLabelProps={{ shrink: true }}
+            size="small"
           />
         </Grid>
         <Grid item xs={12} sm={12}>
@@ -49,6 +49,7 @@ const HolidayFields = ({ formik }) => {
             inputProps={{
               min: new Date().toISOString().split('T')[0], 
             }}
+            size="small"
           />
         </Grid>
         <Grid item xs={12} sm={12}>

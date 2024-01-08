@@ -1,5 +1,5 @@
 import { Box, Button } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import HocButton from "../../hoc/hocButton";
 import CustomTable from "../../components/CustomTable/CustomTable";
 import FormModal from "../../components/Modal/FormModal";
@@ -27,15 +27,24 @@ const EmploymentType = () => {
   const handleCloseEditModal = () => setOPenEditModal(false);
   const handleCloseDeleteModal = () => setOpenDeleteModal(false);
 
-  const deleteTypeMutation = useDeleteEmploymentType({});
+  const {
+    deleteTypeMutation,
+    isSuccess: isDeleteSuccess,
+  } = useDeleteEmploymentType({});
+
   const handleDeleteType = (rowData) => {
     setDeletedType(rowData);
     setOpenDeleteModal(true);
   };
 
+  useEffect(() => {
+    if (isDeleteSuccess) {
+      setOpenDeleteModal(false);
+    }
+  }, [isDeleteSuccess]);
+
   const handleConfirmDelete = () => {
-    deleteTypeMutation.mutate(deletedType.id);
-    setOpenDeleteModal(false);
+    deleteTypeMutation(deletedType.id);
   };
 
   const handleEditType = (rowData) => {
