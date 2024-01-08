@@ -81,7 +81,7 @@ const DepartmentInfo = ({ data, role }) => {
           : role && (
               <Button
                 variant="contained"
-                sx={{ mt: 3, ml: 1 }}
+                sx={{ mt: 3, ml: 1, textTransform: "capitalize"}}
                 onClick={handleAddOpenModal}
               >
                 {branchHistoryData?.length !== 0

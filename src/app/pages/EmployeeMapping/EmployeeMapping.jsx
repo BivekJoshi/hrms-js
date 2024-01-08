@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { useGetEmployeeDeviceMappingById } from '../../hooks/EmployeeMapping/useEmployeeMapping';
-import CustomTable from '../../components/CustomTable/CustomTable';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import CancelIcon from '@mui/icons-material/Cancel';
-import { IconButton, Typography } from '@mui/material';
-import EditIcon from '@mui/icons-material/Edit';
-import EditDataModal from './Component/EditDataModal';
+import React, { useState } from "react";
+import { useGetEmployeeDeviceMappingById } from "../../hooks/EmployeeMapping/useEmployeeMapping";
+import CustomTable from "../../components/CustomTable/CustomTable";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import CancelIcon from "@mui/icons-material/Cancel";
+import { IconButton, Typography } from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
+import EditDataModal from "./Component/EditDataModal";
 
 const EmployeeMapping = () => {
   const { data: mapData, isLoading } = useGetEmployeeDeviceMappingById();
@@ -19,86 +19,82 @@ const EmployeeMapping = () => {
   };
   const columns = [
     {
-      title: 'SN',
+      title: "SN",
       render: (rowData) => rowData.tableData.id + 1,
-      width: '3%',
+      width: "3%",
       sortable: false,
       sorting: false,
     },
+
     {
-      title: 'Employee Name',
-      field: 'firstName',
-      width: '20vh',
+      title: "Employee Id",
+      field: "deviceEmpId",
+      emptyValue: "-",
+      width: "10vh",
+      sorting: false,
+    },
+    {
+      title: "Employee Name",
+      field: "firstName",
+      width: "20vh",
       sorting: false,
       render: (rowData) => {
         return (
-          <Typography>
-            {rowData?.firstName} {rowData?.middleName || ''} {rowData?.lastName}
+          <Typography textTransform="capitalize">
+            {rowData?.firstName} {rowData?.middleName || ""} {rowData?.lastName}
           </Typography>
         );
       },
     },
     {
-      title: 'Device Branch Id',
-      field: 'deviceBranchId',
-      emptyValue: '-',
-      width: '10vh',
+      title: "Branch Id",
+      field: "deviceBranchId",
+      emptyValue: "-",
+      width: "10vh",
       sorting: false,
     },
     {
-      title: 'Device Employee Id',
-      field: 'deviceEmpId',
-      emptyValue: '-',
-      width: '10vh',
+      title: "Date Of Join",
+      field: "dateOfJoin",
+      emptyValue: "-",
+      width: "10vh",
+      sorting: false,
+    },
+
+    {
+      title: "Contact",
+      field: "mobileNumber",
+      emptyValue: "-",
+      width: "10vh",
       sorting: false,
     },
     {
-      title: 'Contact',
-      field: 'mobileNumber',
-      emptyValue: '-',
-      width: '10vh',
+      title: "Email",
+      field: "officeEmail",
+      emptyValue: "-",
+      width: "10vh",
+      sorting: false,
+    },
+
+    {
+      title: "Shift Type",
+      field: "shiftType",
+      emptyValue: "-",
+      width: "10vh",
       sorting: false,
     },
     {
-      title: 'Email',
-      field: 'officeEmail',
-      emptyValue: '-',
-      width: '10vh',
-      sorting: false,
-    },
-    // {
-    //   title: "Date Of Join",
-    //   field: "dateOfJoin",
-    //   emptyValue: "-",
-    //   width: "10vh",
-    //   sorting: false,
-    // },
-    {
-      title: 'Date Of Birth',
-      field: 'dateOfBirth',
-      emptyValue: '-',
-      width: '10vh',
-      sorting: false,
-    },
-    {
-      title: 'Shift Type',
-      field: 'shiftType',
-      emptyValue: '-',
-      width: '10vh',
-      sorting: false,
-    },
-    {
-      title: 'Active',
+      title: "Map",
       //   field: "isActive ",
-      width: '10vh',
+      width: "10vh",
       render: (rowData) => {
         return (
-          <Typography textAlign='center'>
+          <Typography textAlign="center">
             {/* {rowData?.deviceEmpId && rowData?.deviceBranchId ? ( */}
             {rowData?.isActive ? (
-              <CheckCircleIcon sx={{ color: 'green' }} />
+              <CheckCircleIcon sx={{ color: "green" }} />
             ) : (
-              <CancelIcon sx={{ color: 'red' }} />
+              <CancelIcon sx={{ color: "red" }} />
             )}
           </Typography>
         );
@@ -112,15 +108,15 @@ const EmployeeMapping = () => {
         <IconButton
           //   permissions={permissions?.canEdit}
           disabled={rowData.deviceEmpId && rowData.deviceBranchId}
-          color='primary'
+          color="primary"
         >
           <EditIcon />
         </IconButton>
       ),
-      tooltip: 'Edit Branch Id And Employee Id',
+      tooltip: "Edit Branch Id And Employee Id",
       onClick: (event, rowData) =>
         rowData.deviceEmpId && rowData.deviceBranchId
-          ? ''
+          ? ""
           : handleEditData(rowData),
     }),
   ];
@@ -130,7 +126,7 @@ const EmployeeMapping = () => {
       <CustomTable
         columns={columns}
         data={mapData}
-        title='Employee Mapping'
+        title="Employee Mapping"
         isLoading={isLoading}
         exportButton={true}
         actions={actions}
@@ -138,7 +134,7 @@ const EmployeeMapping = () => {
       />
       {openEditModal && (
         <EditDataModal
-          title={'Edit Company'}
+          title={"Edit Company"}
           data={editedData}
           open={openEditModal}
           handleCloseModal={handleCloseEditModal}

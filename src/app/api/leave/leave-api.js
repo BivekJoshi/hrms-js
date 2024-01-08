@@ -1,5 +1,5 @@
-import { axiosInstance } from '../../../auth/axiosInterceptor';
-import useAuth from '../../../auth/hooks/component/login/useAuth';
+import { axiosInstance } from "../../../auth/axiosInterceptor";
+import useAuth from "../../../auth/hooks/component/login/useAuth";
 
 /*________________________GET ALL_____________________________________*/
 export const getleave = async () => {
@@ -70,7 +70,7 @@ export const addleave = async (formData) => {
 
 /*________________________POST BY OTHER_____________________________________*/
 export const addLeaveByAdmin = async (formData) => {
-  const employeeId = formData?.employeeId?.id;
+  const employeeId = formData?.employeeId;
   const submitedData = {
     leaveTypeId: formData?.leaveTypeId?.id,
     leaveReason: formData?.leaveReason,
@@ -78,7 +78,6 @@ export const addLeaveByAdmin = async (formData) => {
     toDate: formData?.toDate,
     isHalfDay: formData?.isHalfDay,
     halfLeaveType: formData?.halfLeaveType,
-    leaveRemarks: formData?.leaveRemarks,
   };
   const data = await axiosInstance.post(
     `/leave/create/${employeeId}`,
