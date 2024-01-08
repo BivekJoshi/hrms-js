@@ -1,36 +1,29 @@
-import React from 'react';
-import { Grid, TextField, Button } from '@mui/material';
-import { useDeleteEvent } from '../../../hooks/event/useEvent';
-import useEventForm from '../../../hooks/event/EventForm/useEventForm';
-import useEditEventForm from '../../../hooks/event/editEvent/useEditEventForm';
-import HocButton from '../../../hoc/hocButton';
-import PermissionHoc from '../../../hoc/permissionHoc';
+import React from "react";
+import { Grid, TextField, Button } from "@mui/material";
+import { useDeleteEvent } from "../../../hooks/event/useEvent";
+import useEventForm from "../../../hooks/event/EventForm/useEventForm";
+import useEditEventForm from "../../../hooks/event/editEvent/useEditEventForm";
+import HocButton from "../../../hoc/hocButton";
+import PermissionHoc from "../../../hoc/permissionHoc";
 import { ButtonComponent } from "../../Button/ButtonComponent";
+import { useEffect } from "react";
 
 const EditEventFields = ({ onClose, isLoading, data, permissions }) => {
   const { formik } = useEditEventForm(data);
 
   const handleFormSubmit = async () => {
-    const isValid = await formik.validateForm();
-
-    if (isValid) {
-      formik.handleSubmit();
-
-      if (formik.isValid) {
-        formik.setTouched({
-          eventName: false,
-          eventDate: false,
-          eventTime: false,
-          eventDescription: false,
-        });
-        onClose();
-      }
-    }
+    formik.handleSubmit();
   };
-  const deleteEventMutation = useDeleteEvent({});
+  const { deleteEventMutation, isSuccess: isDeleteSuccess } = useDeleteEvent(
+    {}
+  );
+  useEffect(() => {
+    if (isDeleteSuccess) {
+      onClose();
+    }
+  }, [isDeleteSuccess]);
   const handleDeleteEvent = () => {
-    deleteEventMutation.mutate(data.id);
-    onClose();
+    deleteEventMutation(data.id);
   };
   return (
     !isLoading && (
@@ -46,8 +39,8 @@ const EditEventFields = ({ onClose, isLoading, data, permissions }) => {
             onChange={formik.handleChange}
             error={formik.touched.eventName && Boolean(formik.errors.eventName)}
             helperText={formik.touched.eventName && formik.errors.eventName}
-            variant='outlined'
-            InputLabelProps={{ shrink: true }}
+            variant="outlined"
+            size="small"
           />
         </Grid>
         <Grid item xs={12} sm={12}>
@@ -62,8 +55,9 @@ const EditEventFields = ({ onClose, isLoading, data, permissions }) => {
             onChange={formik.handleChange}
             error={formik.touched.eventDate && Boolean(formik.errors.eventDate)}
             helperText={formik.touched.eventDate && formik.errors.eventDate}
-            variant='outlined'
+            variant="outlined"
             InputLabelProps={{ shrink: true }}
+            size="small"
           />
         </Grid>
         <Grid item xs={12} sm={12}>
@@ -78,8 +72,9 @@ const EditEventFields = ({ onClose, isLoading, data, permissions }) => {
             onChange={formik.handleChange}
             error={formik.touched.eventTime && Boolean(formik.errors.eventTime)}
             helperText={formik.touched.eventTime && formik.errors.eventTime}
-            variant='outlined'
+            variant="outlined"
             InputLabelProps={{ shrink: true }}
+            size="small"
           />
         </Grid>
         <Grid item xs={12} sm={12}>
@@ -98,8 +93,8 @@ const EditEventFields = ({ onClose, isLoading, data, permissions }) => {
             helperText={
               formik.touched.eventDescription && formik.errors.eventDescription
             }
-            variant='outlined'
-            InputLabelProps={{ shrink: true }}
+            variant="outlined"
+            size="small"
           />
         </Grid>
         <Grid item xs={12} sm={12}>
@@ -118,8 +113,8 @@ const EditEventFields = ({ onClose, isLoading, data, permissions }) => {
             helperText={
               formik.touched.eventLocation && formik.errors.eventLocation
             }
-            variant='outlined'
-            InputLabelProps={{ shrink: true }}
+            variant="outlined"
+            size="small"
           />
         </Grid>
         <Grid
@@ -127,9 +122,7 @@ const EditEventFields = ({ onClose, isLoading, data, permissions }) => {
           direction="row"
           justifyContent="flex-end"
           alignItems="flex-end"
-          
-        >        
-         
+        >
           <ButtonComponent
             variant="contained"
             OnClick={handleFormSubmit}

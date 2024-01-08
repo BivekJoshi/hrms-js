@@ -8,9 +8,7 @@ import {
 } from "../../api/designation/designation-api";
 import { toast } from "react-toastify";
 
-{
-  /*________________________GET_____________________________________*/
-}
+/*________________________GET_____________________________________*/
 export const useGetDesignation = () => {
   return useQuery(["getDesignation"], () => getDesignation(), {
     refetchInterval: false,
@@ -18,9 +16,7 @@ export const useGetDesignation = () => {
   });
 };
 
-{
-  /*________________________GETBYID_____________________________________*/
-}
+/*________________________GETBYID_____________________________________*/
 export const useGetDesignationById = (id) => {
   return useQuery(["getDesignationById", id], () => getDesignationById(id), {
     refetchInterval: false,
@@ -28,9 +24,7 @@ export const useGetDesignationById = (id) => {
   });
 };
 
-{
-  /*________________________POST_____________________________________*/
-}
+/*________________________POST_____________________________________*/
 export const useAddDesignation = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(
@@ -46,9 +40,7 @@ export const useAddDesignation = ({ onSuccess }) => {
   );
 };
 
-{
-  /*________________________DELETE_____________________________________*/
-}
+/*________________________DELETE_____________________________________*/
 export const useDeleteDesignation = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   const designationDelete = useMutation(
@@ -60,9 +52,6 @@ export const useDeleteDesignation = ({ onSuccess }) => {
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries("getDesignation");
       },
-      // onError: (err, _variables, _context) => {
-      //   toast.error(`Error: ${err.message}`);
-      // },
     }
   );
   return {
@@ -71,9 +60,7 @@ export const useDeleteDesignation = ({ onSuccess }) => {
   };
 };
 
-{
-  /*________________________EDIT_____________________________________*/
-}
+/*________________________EDIT_____________________________________*/
 export const useEditDesignation = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(
