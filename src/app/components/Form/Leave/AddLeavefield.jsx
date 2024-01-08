@@ -135,14 +135,13 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
           <TextField
             name="leavePeriod"
             select
-            variant="outlined"
             value={formik.values?.leavePeriod}
             label="Leave Period"
             placeholder="Select leave period"
             fullWidth
             required
             onChange={handleChange}
-            InputLabelProps={{ shrink: true }}
+            InputLabelProps={{ shrink: Boolean(formik.values.leavePeriod) }}
             error={
               formik.touched.leavePeriod && Boolean(formik.errors.leavePeriod)
             }
