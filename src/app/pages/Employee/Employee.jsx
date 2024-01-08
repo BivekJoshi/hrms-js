@@ -45,14 +45,34 @@ const activeLabelStyle = {
 };
 
 const Employee = () => {
-  const { mode } = React.useContext(ThemeModeContext);
+  const { mode, palette } = React.useContext(ThemeModeContext);
   const [pageNumber, setPageNumber] = useState(0);
   const [pageSize, setPageSize] = useState(12);
+  const [search, setSearch] = useState('');
+  const labelStyle = {
+    backgroundColor: palette.secondary.main,
+    marginLeft: '.5rem',
+    textTransform: 'none',
+    borderRadius: '.5rem',
+    color: mode === 'light' ? 'black' : 'white',
+    textDecoder: 'none',
+    // fontWeight: "bold",
+  };
+  const activeLabelStyle = {
+    ...labelStyle,
+    backgroundColor:
+      mode === 'dark' ? palette.text.primary : palette.secondary.main,
+    borderBottom: 'none',
+    textDecoder: 'none',
+    color: mode === 'dark' ? 'black' : 'white',
+
+    // fontWeight: "bold",
+  };
   const { data: employeeData, isLoading } = useGetEmployeeData(
     pageNumber,
-    pageSize
+    pageSize,
+    search
   );
-
   const handlePageChange = (event, newPage) => {
     setPageNumber(newPage - 1);
     window.scroll(0, 0);
@@ -105,6 +125,11 @@ const Employee = () => {
 
   const handleSubmit = () => {
     formik.handleSubmit();
+  };
+
+  const handleFilterChange = (e) => {
+    const value = e.target.value;
+    setSearch(value);
   };
 
   return (
@@ -216,7 +241,7 @@ const Employee = () => {
                   color: mode === 'light' ? '#fff' : '#fff',
                 }}
               >
-                Submit
+                Add Employee
               </Button>
               <Button
                 variant='contained'
@@ -244,7 +269,7 @@ const Employee = () => {
           size='large'
           color='primary'
         />
-        <Autocomplete
+        {/* <Autocomplete
           value={pageSize}
           onChange={handlePageSizeChange}
           options={[20, 30, 40, 50, 100]}
@@ -257,7 +282,7 @@ const Employee = () => {
               size='small'
             />
           )}
-        />
+        /> */}
       </Box>
 
       <Modal

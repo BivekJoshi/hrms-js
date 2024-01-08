@@ -33,7 +33,25 @@ const Company = ({ permissions }) => {
   const [openAddModal, setOpenAddModal] = useState(false);
   const handleAddOpenModal = () => setOpenAddModal(true);
   const handleCloseAddModal = () => setOpenAddModal(false);
+  const labelStyle = {
+    backgroundColor: palette.secondary.main,
+    marginLeft: '.5rem',
+    textTransform: 'none',
+    borderRadius: '.5rem',
+    color: mode === 'light' ? 'black' : 'white',
+    textDecoder: 'none',
+    // fontWeight: "bold",
+  };
+  const activeLabelStyle = {
+    ...labelStyle,
+    backgroundColor:
+      mode === 'dark' ? palette.text.primary : palette.secondary.main,
+    borderBottom: 'none',
+    textDecoder: 'none',
+    color: mode === 'dark' ? 'black' : 'white',
 
+    // fontWeight: "bold",
+  };
   const { data: companyData, isLoading } = useGetCompany();
 
   const handleChange = (event, newValue) => {

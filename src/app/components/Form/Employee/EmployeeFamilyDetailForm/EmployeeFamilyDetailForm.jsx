@@ -1,9 +1,9 @@
-import { Grid, TextField, Divider } from "@mui/material";
-import React from "react";
-import { FieldArray, FormikProvider } from "formik";
-import AddIcon from "@mui/icons-material/Add";
-import { useDeleteFamily } from "../../../../hooks/employee/useFamily";
-import DeleteIcon from "../../../../../assets/DeleteIcon.png";
+import { Grid, TextField, Divider, Tooltip } from '@mui/material';
+import React from 'react';
+import { FieldArray, FormikProvider } from 'formik';
+import AddIcon from '@mui/icons-material/Add';
+import { useDeleteFamily } from '../../../../hooks/employee/useFamily';
+import DeleteIcon from '../../../../../assets/DeleteIcon.png';
 
 const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
   const { values, handleChange, handleBlur, touched, errors } = formik;
@@ -19,7 +19,7 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
       <div>
         <FormikProvider value={formik}>
           <FieldArray
-            name="family"
+            name='family'
             render={(arrayHelpers) => (
               <>
                 {formik.values.family.map((familyMember, index) => (
@@ -32,8 +32,8 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
                         <TextField
                           id={`family[${index}].name`}
                           name={`family[${index}].name`}
-                          label="Name"
-                          placeholder="Enter Name"
+                          label='Name'
+                          placeholder='Enter Name'
                           fullWidth
                           // required
                           value={familyMember.name}
@@ -47,16 +47,16 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
                             touched.family?.[index]?.name &&
                             errors.family?.[index]?.name
                           }
-                          variant="outlined"
-                          size="small"
+                          variant='outlined'
+                          size='small'
                         />
                       </Grid>
                       <Grid item xs={12} sm={3.6}>
                         <TextField
                           id={`family[${index}].relation`}
                           relation={`family[${index}].relation`}
-                          label="Relation"
-                          placeholder="Enter Relation"
+                          label='Relation'
+                          placeholder='Enter Relation'
                           fullWidth
                           // required
                           value={familyMember.relation}
@@ -70,16 +70,16 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
                             touched.family?.[index]?.relation &&
                             errors.family?.[index]?.relation
                           }
-                          variant="outlined"
-                          size="small"
+                          variant='outlined'
+                          size='small'
                         />
                       </Grid>
                       <Grid item xs={12} sm={3.6}>
                         <TextField
                           id={`family[${index}].mobileNumber`}
                           name={`family[${index}].mobileNumber`}
-                          label="Mobile Number"
-                          placeholder="Enter Mobile Number"
+                          label='Mobile Number'
+                          placeholder='Enter Mobile Number'
                           fullWidth
                           // type="number"
                           // required
@@ -95,38 +95,40 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
                             touched.family?.[index]?.mobileNumber &&
                             errors.family?.[index]?.mobileNumber
                           }
-                          variant="outlined"
-                          size="small"
+                          variant='outlined'
+                          size='small'
                         />
                       </Grid>
 
                       <Grid item xs={12} sm={1}>
-                        <div style={{ display: "flex", gap: ".5rem" }}>
+                        <div style={{ display: 'flex', gap: '.5rem' }}>
                           <div
                             onClick={() =>
                               arrayHelpers.push({
-                                name: "",
-                                relation: "",
-                                mobileNumber: "",
+                                name: '',
+                                relation: '',
+                                mobileNumber: '',
                               })
                             }
                             style={{
                               cursor:
                                 index !== values.family.length - 1
-                                  ? "not-allowed"
-                                  : "pointer",
+                                  ? 'not-allowed'
+                                  : 'pointer',
                               color:
                                 index !== values.family.length - 1
-                                  ? "#BDBDBD"
-                                  : "#388E3C",
+                                  ? '#BDBDBD'
+                                  : '#388E3C',
                               pointerEvents:
                                 index !== values.family.length - 1
-                                  ? "none"
-                                  : "auto",
+                                  ? 'none'
+                                  : 'auto',
                             }}
                             disabled={index !== values.family.length - 1}
                           >
-                            <AddIcon />
+                            <Tooltip title='Add family detail'>
+                              <AddIcon />
+                            </Tooltip>
                           </div>
                           {values.family.length > 1 && (
                             <div
@@ -134,9 +136,11 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
                                 arrayHelpers.remove(index);
                                 handleDeleteFamily(familyMember);
                               }}
-                              style={{ cursor: "pointer" }}
+                              style={{ cursor: 'pointer' }}
                             >
-                              <img src={DeleteIcon} alt="icon" />
+                              <Tooltip title='Delete family detail'>
+                                <img src={DeleteIcon} alt='icon' />
+                              </Tooltip>
                             </div>
                           )}
                         </div>

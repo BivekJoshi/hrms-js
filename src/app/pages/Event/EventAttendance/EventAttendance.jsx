@@ -9,7 +9,7 @@ import CloseSharpIcon from "@mui/icons-material/CloseSharp";
 import { EditEventAttendanceModal } from "../EventModal/EventModal";
 import NewFilter from "../../../components/NewFilter/NewFilter";
 import { useGetAllEvent, usegetAllEmployeeData } from "./useEventAttendance";
-import { Badge, Chip, Typography } from "@mui/material";
+import { Badge, Chip, Tooltip, Typography } from "@mui/material";
 import { getEventAttenderList } from "../../../api/event/event-api";
 import { toast } from "react-toastify";
 
@@ -45,10 +45,12 @@ const EventAttendance = ({ permissions }) => {
       sorting: false,
       render: (rowData) => {
         return (
-          <div>
-            <div>{rowData.mobileNumber}</div>
-            <div>{rowData.email}</div>
-          </div>
+          <Tooltip title={rowData?.email} placement="top-start" arrow>
+            <div style={{ width: "10rem", overflow: "hidden", cursor:"pointer" }}>
+              <div>{rowData.mobileNumber}</div>
+              <div>{rowData.email}</div>
+            </div>
+          </Tooltip>
         );
       },
     },
@@ -185,7 +187,7 @@ const EventAttendance = ({ permissions }) => {
 
   const actions = [
     {
-      icon: () => <ModeEditOutlineIcon />,
+      icon: () => <ModeEditOutlineIcon style={{ color: "green" }} />,
 
       disabled: !permissions?.canEdit,
 

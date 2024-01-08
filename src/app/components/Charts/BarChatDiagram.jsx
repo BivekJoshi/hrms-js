@@ -58,13 +58,7 @@ const BarChatDiagram = ({ data }) => {
       categories: names,
       labels: {
         style: {
-          colors: [
-            mode === "dark" ? "white" : "black",
-            mode === "dark" ? "white" : "black",
-            mode === "dark" ? "white" : "black",
-            mode === "dark" ? "white" : "black",
-            mode === "dark" ? "white" : "black",
-          ],
+          colors: names.map(() => (mode === "dark" ? "white" : "black")),
         },
       },
     },
@@ -77,14 +71,6 @@ const BarChatDiagram = ({ data }) => {
         style: {
           colors: [mode === "dark" ? "white" : "black"],
         },
-      },
-    },
-    legend: {
-      labels: {
-        colors: [
-          mode === "dark" ? "white" : "black",
-          mode === "dark" ? "white" : "black",
-        ],
       },
     },
   };

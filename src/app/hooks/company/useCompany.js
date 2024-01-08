@@ -74,27 +74,23 @@ export const useEditCompany = ({ onSuccess }) => {
       onSuccess && onSuccess(data, variables, context);
       queryClient.invalidateQueries('getCompany');
     },
-    onError: (err, _variables, _context) => {
-      toast.error(`Error: ${err.message}`);
-    },
   });
 };
-
-
 
 {
   /*________________________EDIT-assign-branch_____________________________________*/
 }
 export const useEditAssignCompany = ({ onSuccess }) => {
   const queryClient = useQueryClient();
-  return useMutation(['editCompany'], (formData) => editAssignCompany(formData), {
-    onSuccess: (data, variables, context) => {
-      toast.success('Successfully edited Company');
-      onSuccess && onSuccess(data, variables, context);
-      queryClient.invalidateQueries('getCompany');
-    },
-    onError: (err, _variables, _context) => {
-      toast.error(`Error: ${err.message}`);
-    },
-  });
+  return useMutation(
+    ['editCompany'],
+    (formData) => editAssignCompany(formData),
+    {
+      onSuccess: (data, variables, context) => {
+        toast.success('Successfully edited Company');
+        onSuccess && onSuccess(data, variables, context);
+        queryClient.invalidateQueries('getCompany');
+      },
+    }
+  );
 };

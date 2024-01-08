@@ -9,7 +9,7 @@ const EmploymentTypeFields = ({ onClose, isLoading, data }) => {
     formik.handleSubmit();
   };
 
-  const submitButtonText = data ? "Update" : "Add";
+  const submitButtonText = data ? "Update Employment Type" : "Add Employment Type";
 
   return (
     !isLoading && (
@@ -42,7 +42,8 @@ const EmploymentTypeFields = ({ onClose, isLoading, data }) => {
             label="Description"
             placeholder="Enter description"
             fullWidth
-            required
+            multiline
+            // required
             value={formik.values.description}
             onChange={formik.handleChange}
             error={
@@ -66,14 +67,14 @@ const EmploymentTypeFields = ({ onClose, isLoading, data }) => {
           <Button
             variant="contained"
             onClick={handleFormSubmit}
-            sx={{ mt: 3, ml: 1 }}
+            sx={{ mt: 3, ml: 1, textTransform: "capitalize" }}
           >
             {submitButtonText}
           </Button>
           <Button
             variant="contained"
             onClick={onClose}
-            sx={{ mt: 3, ml: 1 }}
+            sx={{ mt: 3, ml: 1, textTransform: "capitalize" }}
             color="error"
           >
             Cancel

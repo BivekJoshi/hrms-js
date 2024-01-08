@@ -29,7 +29,8 @@ const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
     // onClose();
     }
   };
-  const submitButtonText = data ? "Update Resource" : " Provide Resource";
+  
+  const submitButtonText = data ? "Update Logistics" : " Provide Logistics";
   const currentDate = new Date().toISOString().split("T")[0];
 
   return (
@@ -158,14 +159,14 @@ const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
           <Button
             variant="contained"
             onClick={handleFormSubmit}
-            sx={{ mt: 3, ml: 1 }}
+            sx={{ mt: 3, ml: 1, textTransform: "capitalize" }}
           >
             {submitButtonText}
           </Button>
           <Button
             variant="contained"
             onClick={onClose}
-            sx={{ mt: 3, ml: 1 }}
+            sx={{ mt: 3, ml: 1, textTransform: "capitalize" }}
             color="error"
           >
             Cancel

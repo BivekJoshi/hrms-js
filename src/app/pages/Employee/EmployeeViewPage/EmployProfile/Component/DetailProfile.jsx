@@ -35,6 +35,8 @@ const activeLabelStyle = {
 
 export const DetailProfile = ({ data, role, setShowPersonalProfile }) => {
   const [value, setValue] = React.useState('1');
+  const { palette, mode } = React.useContext(ThemeModeContext);
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -99,16 +101,16 @@ export const DetailProfile = ({ data, role, setShowPersonalProfile }) => {
       value: '6',
       component: <TrainingInfo data={data} role={role} />,
     },
-    // {
-    //   label: 'Branch',
-    //   value: '7',
-    //   component: <BranchInfo data={data} role={role} />,
-    // },
-    // {
-    //   label: 'Department',
-    //   value: '8',
-    //   component: <DepartmentInfo data={data} role={role} />,
-    // },
+    {
+      label: 'Branch',
+      value: '7',
+      component: <BranchInfo data={data} role={role} />,
+    },
+    {
+      label: 'Department',
+      value: '8',
+      component: <DepartmentInfo data={data} role={role} />,
+    },
     {
       label: 'Documents',
       value: '9',

@@ -1,33 +1,24 @@
-import MaterialTable from '@material-table/core';
-import React, { useState } from 'react';
+import MaterialTable from "@material-table/core";
+import React, { useState } from "react";
 import {
   useAddActivateProject,
   useGetDeactivatedProject,
-} from '../../../hooks/project/useProject';
-import { useGetEmployee } from '../../../hooks/employee/useEmployee';
-import { IconButton, Grid, Typography } from '@mui/material';
+} from "../../../hooks/project/useProject";
+import { useGetEmployee } from "../../../hooks/employee/useEmployee";
+import { IconButton, Grid, Typography } from "@mui/material";
 import {
   AddProjectActiveModal,
   AddProjectModal,
-} from '../ProjectModal/ProjectModal';
-import RestoreFromTrashOutlinedIcon from '@mui/icons-material/RestoreFromTrashOutlined';
-import CloseIcon from '@mui/icons-material/Close';
+} from "../ProjectModal/ProjectModal";
+import RestoreFromTrashOutlinedIcon from "@mui/icons-material/RestoreFromTrashOutlined";
+import CloseIcon from "@mui/icons-material/Close";
 
-const DeactivatedProject = ({onClick}) => {
+const DeactivatedProject = ({ onClick }) => {
   const { data: deactivatedProject, isLoading } = useGetDeactivatedProject();
-  // const { data: employeeData } = useGetEmployee();
-
   const [openActivateModal, setOpenActivateModal] = useState(false);
   const [activateProject, setActivateProject] = useState({});
   const handleCloseActivateModal = () => setOpenActivateModal(false);
 
-  // const getLeaderName = (rowData) => {
-  //   const projectId = rowData.projectLeaderId;
-  //   const employee = employeeData?.find((emp) => emp.id === projectId);
-  //   const name = `${employee?.firstName} ${employee?.middleName} ${employee?.lastName}`;
-  //   return name;
-  // };
- 
   const handleActivateProject = (rowData) => {
     setActivateProject(rowData);
     setOpenActivateModal(true);
@@ -35,22 +26,22 @@ const DeactivatedProject = ({onClick}) => {
 
   const columns = [
     {
-      title: 'SN',
+      title: "SN",
       render: (rowData) => rowData.tableData.index + 1,
-      width: '2%',
+      width: "2%",
       sortable: false,
       sorting: false,
     },
     {
-      title: 'Project Name',
-      field: 'projectName',
-      emptyValue: '-',
+      title: "Project Name",
+      field: "projectName",
+      emptyValue: "-",
     },
   ];
 
   const actions = [
     {
-      icon: () => <RestoreFromTrashOutlinedIcon sx={{ color: "#01579B" }} />,
+      icon: () => <RestoreFromTrashOutlinedIcon style={{color: 'green'}} />,
       tooltip: 'Activate Project',
       onClick: (event, rowData) => handleActivateProject(rowData),
     },
@@ -79,23 +70,23 @@ const DeactivatedProject = ({onClick}) => {
       <MaterialTable
         columns={columns}
         data={deactivatedProject}
-        title='Inactive Projects'
+        title="Inactive Projects"
         isLoading={isLoading}
         options={{
-          padding: 'dense',
+          padding: "dense",
           margin: 50,
           pageSize: 20,
           emptyRowsWhenPaging: false,
           actionsColumnIndex: -1,
           headerStyle: {
-            backgroundColor: '#1c7ed6',
-            color: '#FFF',
-            fontSize: '1rem',
-            padding: 'dense',
+            backgroundColor: "#1c7ed6",
+            color: "#FFF",
+            fontSize: "1rem",
+            padding: "dense",
             height: 50,
           },
           rowStyle: {
-            fontSize: '.8rem',
+            fontSize: ".8rem",
           },
         }}
         actions={actions}
@@ -103,7 +94,7 @@ const DeactivatedProject = ({onClick}) => {
 
       {openActivateModal && (
         <AddProjectActiveModal
-        title={'Activate Project'}
+          title={"Activate Project"}
           id={activateProject?.id}
           open={openActivateModal}
           handleCloseModal={handleCloseActivateModal}

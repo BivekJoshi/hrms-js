@@ -4,6 +4,9 @@ import CoPresentOutlinedIcon from "@mui/icons-material/CoPresentOutlined";
 import ApprovalOutlinedIcon from "@mui/icons-material/ApprovalOutlined";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import MailIcon from "@mui/icons-material/Mail";
+import DvrIcon from '@mui/icons-material/Dvr';
+import LaptopChromebookIcon from '@mui/icons-material/LaptopChromebook';
+import DevicesIcon from '@mui/icons-material/Devices';
 import CakeIcon from "@mui/icons-material/Cake";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
 import WorkspacesIcon from "@mui/icons-material/Workspaces";
@@ -15,7 +18,6 @@ import EventIcon from "@mui/icons-material/Event";
 import HolidayVillageIcon from "@mui/icons-material/HolidayVillage";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
-import LaptopIcon from "@mui/icons-material/Laptop";
 import { ListItemIcon } from "@mui/material";
 import TodayIcon from "@mui/icons-material/Today";
 import { styled } from "@mui/material/styles";
@@ -210,7 +212,7 @@ export default function AdminSidebar() {
     {
       name: "Logistics",
       icon: (
-        <LaptopIcon
+        <DvrIcon
           sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
         />
       ),
@@ -220,7 +222,7 @@ export default function AdminSidebar() {
           name: "Logistics",
           path: "officeResource",
           icon: (
-            <MailIcon
+            <LaptopChromebookIcon
               sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
             />
           ),
@@ -229,7 +231,7 @@ export default function AdminSidebar() {
           name: "Provide Logistics",
           path: "logistics",
           icon: (
-            <MailIcon
+            <DevicesIcon
               sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
             />
           ),

@@ -60,7 +60,21 @@ const EmailLog = () => {
       field: "timeStamp",
       emptyValue: "-",
       width: 200,
-      sorting: false,
+      render: (rowData) => {
+        const timeStamp = rowData.timeStamp;
+        if (timeStamp) {
+          const formattedDate = new Date(timeStamp).toLocaleDateString(
+            "en-US",
+            {
+              year: "numeric",
+              month: "2-digit",
+              day: "2-digit",
+            }
+          );
+
+          return formattedDate;
+        }
+      },
     },
     // {
     //   title: "Actions",
@@ -90,6 +104,7 @@ const EmailLog = () => {
     <>
       <CustomTable
         columns={columns}
+        singleAction
         data={data}
         title="Email Log"
         isLoading={isLoading}

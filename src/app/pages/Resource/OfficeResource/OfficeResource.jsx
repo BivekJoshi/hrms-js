@@ -4,7 +4,7 @@ import {
   useGetAvailableOfficeResource,
   useGetUsedOfficeResource,
 } from "../../../hooks/resource/officeResource/useOfficeResource";
-import { Box, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import {
   AddOfficeResourceModal,
   DeactivatedOfficeResourceModal,
@@ -80,6 +80,11 @@ const OfficeResource = ({ permissions }) => {
     {
       title: "Resource Name",
       field: "name",
+      render: (rowData) => (
+        <Typography style={{ overflowWrap: "break-word", width: "15rem" }}>
+          {rowData?.name}
+        </Typography>
+      ),
       emptyValue: "-",
       width: "12rem",
       sorting: false,
@@ -95,7 +100,7 @@ const OfficeResource = ({ permissions }) => {
       title: "Description",
       field: "description",
       render: (rowData) => (
-        <Typography style={{ overflowWrap: "break-word" }}>
+        <Typography style={{ overflowWrap: "break-word", width: "30rem" }}>
           {rowData?.description}
         </Typography>
       ),
@@ -107,22 +112,34 @@ const OfficeResource = ({ permissions }) => {
 
   const actions = [
     {
-      icon: () => (
-        <HocButton
-          permissions={permissions?.canEdit}
-          icon={<ModeEditOutlineIcon />}
-        />
-      ),
+      icon: () => <ModeEditOutlineIcon style={{ color: "green" }} />,
+      disabled: !permissions?.canEdit,
       tooltip: "Edit Logistics",
       onClick: (event, rowData) => handleEditRowData(rowData),
     },
     {
-      icon: () => (
-        <HocButton permissions={permissions.canDelete} icon={<DeleteIcon />} />
-      ),
-      tooltip: "Delete Department",
+      icon: () => <DeleteIcon style={{ color: "#d32f2f" }} />,
+      disabled: !permissions?.canDelete,
+      tooltip: "Remove Logistics",
       onClick: (event, rowData) => handleDeleteRowData(rowData),
     },
+    // {
+    //   icon: () => (
+    //     <HocButton
+    //       permissions={permissions?.canEdit}
+    //       icon={<ModeEditOutlineIcon />}
+    //     />
+    //   ),
+    //   tooltip: "Edit Logistics",
+    //   onClick: (event, rowData) => handleEditRowData(rowData),
+    // },
+    // {
+    //   icon: () => (
+    //     <HocButton permissions={permissions.canDelete} icon={<DeleteIcon />} />
+    //   ),
+    //   tooltip: "Delete Department",
+    //   onClick: (event, rowData) => handleDeleteRowData(rowData),
+    // },
   ];
   return (
     <>
@@ -134,26 +151,20 @@ const OfficeResource = ({ permissions }) => {
           padding: ".5rem 0",
         }}
       >
-        <ButtonComponent
-          OnClick={handleOpenModal}
-          buttonName={"Deactivated Logistics"}
-          // buttonName={
-          //   <DeleteForeverIcon sx={{ width: '1rem', height: '1rem' }} />
-          // }
-          BGColor="white"
-          TextColor="black"
-        />
-        {/* <ButtonComponent
-          OnClick={handleOpenAvailableModal}
-          buttonName={'Available Logistics'}
-          BGColor='white'
-          TextColor='black'
-        /> */}
-        <ButtonComponent
-          color="white"
-          OnClick={handleAddOpenModal}
-          buttonName={"+ Add Office Logistics"}
-        />
+        <Button
+          variant="outlined"
+          onClick={handleOpenModal}
+          sx={{ textTransform: "none" }}
+        >
+          Deactivated Logistics
+        </Button>
+        <Button
+          variant="contained"
+          onClick={handleAddOpenModal}
+          sx={{ textTransform: "none" }}
+        >
+          + Add Office Logistics
+        </Button>
       </Box>
 
       <CustomTable

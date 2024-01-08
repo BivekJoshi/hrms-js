@@ -67,7 +67,7 @@ export const useTerminateEmployee = ({ onSuccess }) => {
     (formData) => terminateEmployee(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Successfully removed Employee');
+        toast.success('Employee terminated successfully');
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries('getEmployeeData');
       },
@@ -98,9 +98,6 @@ export const useActivateUser = ({ onSuccess }) => {
       toast.success('Successfully activated user.');
       onSuccess && onSuccess(data, variables, context);
       queryClient.invalidateQueries('getDeactivateUser');
-    },
-    onError: (err, _variables, _context) => {
-      toast.error(`Error: ${err.message}`);
     },
   });
 };
