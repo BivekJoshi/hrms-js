@@ -10,8 +10,10 @@ const EmployeeTableView = ({ employeeData, isLoading }) => {
   const columns = [
     {
       title: "SN",
+      field: "tableData.id",
       render: (rowData) => rowData.tableData.id + 1,
       width: "3%",
+      pdfWidth: "2rem",
       maxWidth: "50px",
       sortable: false,
       sorting: false,
@@ -19,6 +21,7 @@ const EmployeeTableView = ({ employeeData, isLoading }) => {
     {
       title: "Employee",
       field: "firstName",
+      pdfWidth: "10rem",
       render: (rowData) =>
         `${rowData?.firstName} ${rowData?.middleName || ""} ${
           rowData?.lastName
@@ -28,6 +31,8 @@ const EmployeeTableView = ({ employeeData, isLoading }) => {
     },
     {
       title: "Position",
+      pdfWidth: "8rem",
+      field: "position",
       render: (rowData) => {
         const position = `${rowData?.positionName || "-"}`;
         // (${rowData?.position?.positionLevel || ""})`
@@ -39,12 +44,14 @@ const EmployeeTableView = ({ employeeData, isLoading }) => {
     {
       title: "Email",
       field: "officeEmail",
+      pdfWidth: "12rem",
       emptyValue: "-",
       sorting: false,
     },
     {
       title: "Contact No.",
       field: "mobileNumber",
+      pdfWidth: "10rem",
       emptyValue: "-",
       sorting: false,
     },
@@ -94,9 +101,11 @@ const EmployeeTableView = ({ employeeData, isLoading }) => {
       columns={columns}
       data={employeeData?.employees}
       title="Employees"
+      fileName="Employee-Report.pdf"
       isLoading={isLoading}
       actions={actions}
       exportButton={true}
+      exportExcel
     />
   );
 };

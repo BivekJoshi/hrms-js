@@ -16,11 +16,10 @@ import ThemeModeContext from '../../../theme/ThemeModeContext';
 
 const Company = ({ permissions }) => {
   const [value, setValue] = React.useState('1');
-  const { palette, mode } = React.useContext(ThemeModeContext);
-
   const [openAddModal, setOpenAddModal] = useState(false);
   const handleAddOpenModal = () => setOpenAddModal(true);
   const handleCloseAddModal = () => setOpenAddModal(false);
+  const { palette, mode } = React.useContext(ThemeModeContext);
   const labelStyle = {
     backgroundColor: palette.secondary.main,
     marginLeft: '.5rem',
@@ -33,7 +32,7 @@ const Company = ({ permissions }) => {
   const activeLabelStyle = {
     ...labelStyle,
     backgroundColor:
-      mode === 'dark' ? palette.text.primary : palette.secondary.main,
+      mode === 'dark' ? palette.text.primary : palette.secondary.light,
     borderBottom: 'none',
     textDecoder: 'none',
     color: mode === 'dark' ? 'black' : 'white',
@@ -72,6 +71,7 @@ const Company = ({ permissions }) => {
 
             <HocButton
               permissions={permissions?.canAdd}
+              color={'white'}
               variant={'contained'}
               onClick={handleAddOpenModal}
               buttonName={'+ Add Branch'}

@@ -1,10 +1,8 @@
 import * as React from "react";
 import { useState } from "react";
-import { Box, Button, Stack } from "@mui/material";
-
+import { Box } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
-
 import {
   useDeleteDesignation,
   useGetDesignation,
@@ -34,15 +32,22 @@ const Designation = ({ permissions }) => {
   const handleCloseEditModal = () => setOpenEditModal(false);
   const handleCloseDeleteModal = () => setOpenDeleteModal(false);
 
-  const deleteDesignationMutation = useDeleteDesignation({});
+  const { deleteDesignationMutation, isSuccess: isDeleteSuccess } =
+    useDeleteDesignation({});
+
   const handleDeleteDesignation = (rowData) => {
     setDeletedDesignation(rowData);
     setOpenDeleteModal(true);
   };
 
+  useEffect(() => {
+    if (isDeleteSuccess) {
+      setOpenDeleteModal(false);
+    }
+  }, [isDeleteSuccess]);
+
   const handleConfirmDelete = () => {
-    deleteDesignationMutation.mutate(deletedDesignation.id);
-    setOpenDeleteModal(false);
+    deleteDesignationMutation(deletedDesignation.id);
   };
 
   const handleEditDesignation = (rowData) => {

@@ -20,6 +20,7 @@ const CompanyTableView = ({
     {
       title: "SN",
       render: (rowData) => rowData.tableData.id + 1,
+      field: "tableData.id",
       width: "3%",
       sortable: false,
       sorting: false,
@@ -103,25 +104,6 @@ const CompanyTableView = ({
       tooltip: "Delete Branch",
       onClick: (event, rowData) => handleDeleteCompany(rowData),
     },
-    // {
-    //   icon: () => (
-    //     // <ModeEditOutlineIcon />
-    //     <HocButton
-    //       permissions={permissions?.canEdit}
-    //       icon={<ModeEditOutlineIcon />}
-    //     />
-    //   ),
-    //   tooltip: "Edit Branch",
-    //   onClick: (event, rowData) => handleEditCompany(rowData),
-    // },
-    // {
-    //   icon: () => (
-    //     // <DeleteIcon />
-    //     <HocButton permissions={permissions?.canDelete} icon={<DeleteIcon />} />
-    //   ),
-    //   tooltip: "Delete Branch",
-    //   onClick: (event, rowData) => handleDeleteCompany(rowData),
-    // },
   ];
 
   if (isEmployee) {
@@ -139,6 +121,7 @@ const CompanyTableView = ({
         isLoading={isLoading}
         exportButton={true}
         actions={actions}
+        exportExcel
       />
     </>
   );

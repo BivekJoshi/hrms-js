@@ -27,12 +27,15 @@ import ThemeModeContext from '../../../theme/ThemeModeContext';
 import { useGetEmployeeData } from '../../hooks/employee/useEmployee';
 import EmployeeTableView from './EmployeeView/EmployeePage/EmployeeTableView';
 import EmployeeGridView from './EmployeeView/EmployeePage/EmployeeGridView';
+import { debounce } from 'lodash';
+import { useEffect } from 'react';
 
 const Employee = () => {
   const { mode, palette } = React.useContext(ThemeModeContext);
   const [pageNumber, setPageNumber] = useState(0);
   const [pageSize, setPageSize] = useState(12);
   const [search, setSearch] = useState('');
+  const [debounceValue, setdebounceValue] = useState('');
   const labelStyle = {
     backgroundColor: palette.secondary.main,
     marginLeft: '.5rem',
@@ -45,18 +48,19 @@ const Employee = () => {
   const activeLabelStyle = {
     ...labelStyle,
     backgroundColor:
-      mode === 'dark' ? palette.text.primary : palette.secondary.main,
+      mode === 'dark' ? palette.text.primary : palette.secondary.light,
     borderBottom: 'none',
     textDecoder: 'none',
     color: mode === 'dark' ? 'black' : 'white',
 
     // fontWeight: "bold",
   };
-  const { data: employeeData, isLoading } = useGetEmployeeData(
-    pageNumber,
-    pageSize,
-    search
-  );
+  const {
+    data: employeeData,
+    isLoading,
+    refetch,
+  } = useGetEmployeeData(pageNumber, pageSize, debounceValue);
+
   const handlePageChange = (event, newPage) => {
     setPageNumber(newPage - 1);
     window.scroll(0, 0);
@@ -79,6 +83,8 @@ const Employee = () => {
     boxShadow: 24,
     p: 4,
     background: mode === 'light' ? '' : '#413e3e',
+    height: { xs: '100%', md: 'auto' },
+    overflow: { xs: 'scroll', md: 'auto' },
   };
 
   const navigate = useNavigate();
@@ -109,9 +115,22 @@ const Employee = () => {
     formik.handleSubmit();
   };
 
-  const handleFilterChange = (e) => {
+  useEffect(() => {
+    if (debounceValue?.length < 3) {
+      refetch();
+    }
+  }, [debounceValue]);
+
+  const debounceSearch = debounce((value) => {
+    if (value.length >= 3) {
+      setdebounceValue(value);
+    } else setdebounceValue('');
+  }, 300);
+
+  const handleDebounce = (e) => {
     const value = e.target.value;
     setSearch(value);
+    debounceSearch(value);
   };
 
   return (
@@ -175,18 +194,17 @@ const Employee = () => {
                 Filter By:
               </Typography>
               <Grid container spacing={4}>
-                <Grid item xs={4}>
+                <Grid item xs={5}>
                   <TextField
-                    label="Filter by name, phone number, and position"
+                    label='Filter by name, phone number, and position'
                     value={search}
-                    onChange={handleFilterChange}
+                    onChange={handleDebounce}
                     fullWidth
-                    size="small"
+                    size='small'
                   />
                 </Grid>
               </Grid>
             </Grid>
-            {/* <EmployeeGrid employeeData={employeeData} isLoading={isLoading} /> */}
             <EmployeeGridView employeeData={employeeData} />
           </TabPanel>
           <TabPanel value='2'>
@@ -285,9 +303,9 @@ const Employee = () => {
           renderInput={(params) => (
             <TextField
               {...params}
-              label="page"
-              variant="outlined"
-              size="small"
+              label='page'
+              variant='outlined'
+              size='small'
             />
           )}
         /> */}
