@@ -1,19 +1,19 @@
-import { Accordion, AccordionDetails, Chip, Divider } from '@mui/material';
-import { AccordionSummary, Button } from '@mui/material';
-import { Grid, Typography, Box } from '@mui/material';
-import React, { useEffect, useRef, useState } from 'react';
+import { Accordion, AccordionDetails, Chip, Divider } from "@mui/material";
+import { AccordionSummary, Button } from "@mui/material";
+import { Grid, Typography, Box } from "@mui/material";
+import React, { useEffect, useRef, useState } from "react";
 import {
   useAddDocument,
   useDeleteDocument,
   useGetDocumentByDocumentType,
   useGetDocumentById,
-} from '../../../../hooks/employee/useDocument';
-import { useParams } from 'react-router-dom';
-import { DOC_URL } from '../../../../../auth/axiosInterceptor';
-import { documentType } from './documentType';
-import { EditDocumentModal } from './EditDocumentModal';
-import deleteIcon from '../../../../../assets/approve.png';
-import updateIcon from '../../../../../assets/update.png';
+} from "../../../../hooks/employee/useDocument";
+import { useParams } from "react-router-dom";
+import { DOC_URL } from "../../../../../auth/axiosInterceptor";
+import { documentType } from "./documentType";
+import { EditDocumentModal } from "./EditDocumentModal";
+import deleteIcon from "../../../../../assets/approve.png";
+import updateIcon from "../../../../../assets/update.png";
 
 const EmployeeDocumentDetailForm = () => {
   const { id } = useParams();
@@ -22,7 +22,7 @@ const EmployeeDocumentDetailForm = () => {
   const [expandedAccordion, setExpandedAccordion] = useState("panel1");
 
   const [selectedDocument, setSelectedDocument] = useState();
-  const [document, setDocument] = useState('');
+  const [document, setDocument] = useState("");
   const [imagePreviewMap, setImagePreviewMap] = useState({});
 
   const [editedDocument, setEditedDocument] = useState({});
@@ -81,8 +81,8 @@ const EmployeeDocumentDetailForm = () => {
     const { id } = document;
     deleteDocument(id);
 
-    setSelectedDocument('');
-    setDocument('');
+    setSelectedDocument("");
+    setDocument("");
     setImagePreviewMap((prevMap) => ({
       ...prevMap,
       [expandedAccordion]: undefined,
@@ -177,69 +177,6 @@ const EmployeeDocumentDetailForm = () => {
                 </Grid>
               </Grid>
             ))}
-          {/* <Grid display='flex' justifyContent='center'>
-            {expandedAccordion && imagePreviewMap[expandedAccordion] && (
-              <>
-                <Grid
-                  key={document?.id}
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '1rem',
-                    paddingRight: '2rem',
-                  }}
-                >
-                  <div
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      gap: '8px',
-                    }}
-                  >
-                    <Typography variant='h6'>Preview Document</Typography>
-                    <img
-                      src={imagePreviewMap[expandedAccordion]}
-                      alt='Preview'
-                      width={240}
-                      height={240}
-                      style={{
-                        objectFit: 'contain',
-                      }}
-                    />
-                  </div>
-                  <Box display='flex' justifyContent='center'>
-                    <Grid
-                      sm={12}
-                      sx={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        gap: '.5rem',
-                        textAlign: 'center',
-                      }}
-                    >
-                      {/* <Button
-                        variant='outlined'
-                        color='primary'
-                        onClick={() => handleEditFormSubmit(document)}
-                        startIcon={<img src={updateIcon} />}
-                        sx={{ textTransform: 'none', fontWeight: 'bold' }}
-                      >
-                        Update
-                      </Button>
-                      <Button
-                        variant='outlined'
-                        color='error'
-                        onClick={() => handleDelete(document)}
-                        startIcon={<img src={deleteIcon} />}
-                        sx={{ textTransform: 'none', fontWeight: 'bold' }}
-                      >
-                        Delete
-                    </Grid>
-                  </Box>
-                </Grid>
-              </>
-            )}
-          </Grid> */}
         </Grid>
 
         <Grid item xs={12} sm={6}>
@@ -274,13 +211,13 @@ const EmployeeDocumentDetailForm = () => {
                   >
                     <div
                       style={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                        width: '100%',
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        width: "100%",
                       }}
                     >
-                      <Typography variant='h7' sx={{ fontWeight: 500 }}>
+                      <Typography variant="h7" sx={{ fontWeight: 500 }}>
                         {document?.label}
                       </Typography>
                       {getDocument?.map((data, index) => {
@@ -288,9 +225,9 @@ const EmployeeDocumentDetailForm = () => {
                           return (
                             <Chip
                               key={index}
-                              label='Uploaded'
-                              variant='outlined'
-                              color='success'
+                              label="Uploaded"
+                              variant="outlined"
+                              color="success"
                             />
                           );
                         }
