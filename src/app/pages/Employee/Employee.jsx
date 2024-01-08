@@ -154,7 +154,7 @@ const Employee = () => {
               <Button
                 variant='contained'
                 onClick={handleAddOpenModal}
-                sx={{ textTransform: 'none', color: '#fff' }}
+                sx={{ textTransform: 'none' }}
               >
                 + Add Employee
               </Button>

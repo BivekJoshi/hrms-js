@@ -32,6 +32,7 @@ const Notification = ({ data }) => {
   const pendingLeaveData = isManager
     ? leaveData?.filter((leave) => leave.leaveStatus === 'PENDING')
     : '';
+
   const eventCount = isManager
     ? pendingLeaveData?.length + data?.eventCount || 0
     : data?.events?.length || 0;
