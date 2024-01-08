@@ -70,12 +70,12 @@ const EmploymentType = () => {
   const actions = [
     {
       icon: () => <EditIcon style={{color: 'green'}} />,
-      tooltip: "Edit Detail",
+      tooltip: "Edit Employment Type",
       onClick: (event, rowData) => handleEditType(rowData),
     },
     {
       icon: () => <DeleteIcon style={{color: '#d32f2f'}} />,
-      tooltip: "Delete",
+      tooltip: "Delete Employment Type",
       onClick: (event, rowData) => handleDeleteType(rowData),
     },
   ];

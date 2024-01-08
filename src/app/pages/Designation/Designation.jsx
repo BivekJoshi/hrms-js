@@ -93,14 +93,14 @@ const Designation = ({ permissions }) => {
 
       disabled: !permissions?.canEdit,
 
-      tooltip: 'Edit Detail',
+      tooltip: 'Edit Designation',
       onClick: (event, rowData) => handleEditDesignation(rowData),
     },
     {
       icon: () => <DeleteIcon style={{color: '#d32f2f'}} />,
       disabled: !permissions?.canDelete,
 
-      tooltip: 'Delete',
+      tooltip: 'Delete Designation',
       onClick: (event, rowData) => handleDeleteDesignation(rowData),
     },
   ];
