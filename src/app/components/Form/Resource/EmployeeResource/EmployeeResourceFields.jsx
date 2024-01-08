@@ -27,6 +27,7 @@ const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
   const handleFormSubmit = () => {
     formik.handleSubmit();
   };
+  const submitButtonText = data ? "Update Resource" : " Provide Resource";
   const currentDate = new Date().toISOString().split("T")[0];
 
   return (
@@ -74,7 +75,7 @@ const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
             id="officeResourceId"
             name="officeResourceId"
             disabled={editMode}
-            options={officeResourceData || []}
+            options={availableOfficeResource || []}
             getOptionLabel={(option) => option?.name || ""}
             value={officeResourceData?.find(
               (resource) =>

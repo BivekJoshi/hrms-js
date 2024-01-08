@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Box, Divider, Tab, Table, Tabs } from '@mui/material';
 import { TableContainer, TableHead } from '@mui/material';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
@@ -23,7 +23,6 @@ export const DetailProfile = ({ data, role, setShowPersonalProfile }) => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
   const labelStyle = {
     backgroundColor: palette.secondary.main,
     marginLeft: '.5rem',
@@ -36,7 +35,7 @@ export const DetailProfile = ({ data, role, setShowPersonalProfile }) => {
   const activeLabelStyle = {
     ...labelStyle,
     backgroundColor:
-      mode === 'dark' ? palette.text.primary : palette.secondary.main,
+      mode === 'dark' ? palette.text.primary : palette.secondary.light,
     borderBottom: 'none',
     textDecoder: 'none',
     color: mode === 'dark' ? 'black' : 'white',
@@ -63,6 +62,11 @@ export const DetailProfile = ({ data, role, setShowPersonalProfile }) => {
       label: 'Position',
       value: '4',
       component: <PromotionHistory data={data} role={role} />,
+    },
+    {
+      label: 'Employment Details',
+      value: '10',
+      component: <EmploymentDetails data={data} role={role} />,
     },
     // {
     //   label: 'Employment Details',

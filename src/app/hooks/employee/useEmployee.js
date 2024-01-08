@@ -28,10 +28,15 @@ const nameLabel = (emp) => {
 };
 
 export const useGetEmployee = () => {
-  return useQuery(["getEmployee"], () => getEmployee(), {
+  const getQuery = useQuery(["getEmployee"], () => getEmployee(), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
+  return {
+    data: getQuery?.data?.map((d) => {
+      return { employeeId: d.id, label: nameLabel(d) };
+    }) || [],
+  };
 };
 export const useGetNoneUser = () => {
   const getQuery = useQuery(["getNoneUser"], () => getNoneUser(), {

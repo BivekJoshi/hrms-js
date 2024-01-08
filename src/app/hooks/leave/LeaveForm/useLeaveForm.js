@@ -6,14 +6,17 @@ import {
   useEditLeaveByAdmin,
   useEditLeaveStatusByAdmin,
 } from "../useLeave";
-import { EditLeaveSchemaAdmin, LeaveSchemaAdmin } from "../Validation/LeaveSchemaForAdmin";
+import {
+  EditLeaveSchemaAdmin,
+  LeaveSchemaAdmin,
+} from "../Validation/LeaveSchemaForAdmin";
 
 const useLeaveForm = (data, onClose) => {
   const { mutate: addLeave, isSuccess } = useAddLeaveByAdmin({});
 
   const formik = useFormik({
     initialValues: {
-      employeeId: data?.employeeId?.id,
+      employeeId: data?.employeeId?.id || "",
       leaveTypeId: data?.leaveTypeId || "",
       leaveReason: data?.leaveReason || "",
       fromDate: data?.fromDate || "",
@@ -21,7 +24,9 @@ const useLeaveForm = (data, onClose) => {
       leaveRemarks: data?.leaveRemarks || "",
       isHalfDay: data?.isHalfDay || false,
       applyLeaveDays: data?.applyLeaveDays || "",
+      halfLeaveType: "FIRST_HALF",
       id: data?.leaveId || "",
+      leavePeriod: "",
     },
     validationSchema: LeaveSchemaAdmin,
     enableReinitialize: true,

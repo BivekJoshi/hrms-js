@@ -12,7 +12,7 @@ const EditDataModal = ({ open, handleCloseModal, data }) => {
   return (
     <Box>
       <FormModal
-        title={"Edit Data"}
+        title={"Edit Employee Mapping"}
         open={open}
         onClose={handleCloseModal}
         formComponent={
@@ -70,15 +70,15 @@ const EditDataModal = ({ open, handleCloseModal, data }) => {
               <Button
                 variant="contained"
                 onClick={handleFormSubmit}
-                sx={{ mt: 3, ml: 1 }}
+                sx={{ mt: 3, ml: 1, textTransform:"capitalize" }}
                 onClose={handleCloseModal}
               >
-                submit change
+                Update Mapping
               </Button>
               <Button
                 variant="contained"
                 onClick={handleCloseModal}
-                sx={{ mt: 3, ml: 1 }}
+                sx={{ mt: 3, ml: 1, textTransform:"capitalize" }}
                 color="error"
               >
                 Cancel

@@ -8,8 +8,7 @@ const OfficeResourceFields = ({ onClose, isLoading, data }) => {
   const handleFormSubmit = () => {
     formik.handleSubmit();
   };
-  
-  const submitButtonText = data ? 'Update ' : 'Add ';
+  const submitButtonText = data ? 'Update Logistics' : 'Add Logistics';
 
   return (
     !isLoading && (
@@ -77,7 +76,7 @@ const OfficeResourceFields = ({ onClose, isLoading, data }) => {
           <Button
             variant='contained'
             onClick={handleFormSubmit}
-            sx={{ mt: 3, ml: 1 }}
+            sx={{ mt: 3, ml: 1, textTransform: "capitalize" }}
             onClose={onClose}
           >
             {submitButtonText}
@@ -85,7 +84,7 @@ const OfficeResourceFields = ({ onClose, isLoading, data }) => {
           <Button
             variant='contained'
             onClick={onClose}
-            sx={{ mt: 3, ml: 1 }}
+            sx={{ mt: 3, ml: 1, textTransform: "capitalize" }}
             color='error'
           >
             Cancel

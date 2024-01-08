@@ -1,85 +1,85 @@
-import { Stack, Button, Typography } from '@mui/material';
-import React, { useState } from 'react';
-import UserControlAction from '../../../../pages/Auth/UserControl/UserControlAction';
-import { AddUserControlModal } from './AddUserControlModal';
-import { useGetUserControl } from '../../../../hooks/auth/userControl/useUserControl';
-import CustomTable from '../../../../components/CustomTable/CustomTable';
-import { useNavigate } from 'react-router-dom';
+import { Stack, Button, Typography } from "@mui/material";
+import React, { useState } from "react";
+import UserControlAction from "../../../../pages/Auth/UserControl/UserControlAction";
+import { AddUserControlModal } from "./AddUserControlModal";
+import { useGetUserControl } from "../../../../hooks/auth/userControl/useUserControl";
+import CustomTable from "../../../../components/CustomTable/CustomTable";
+import { useNavigate } from "react-router-dom";
 
 const roleType = [
   {
-    name: 'ROLE_SUPER_ADMIN',
-    label: 'Super Admin',
+    name: "ROLE_SUPER_ADMIN",
+    label: "Super Admin",
     id: 1,
   },
   {
-    name: 'ROLE_ADMIN',
-    label: 'Admin',
+    name: "ROLE_ADMIN",
+    label: "Admin",
     id: 2,
   },
   {
-    name: 'ROLE_MANAGER',
-    label: 'Manager',
+    name: "ROLE_MANAGER",
+    label: "Manager",
     id: 3,
   },
   {
-    name: 'ROLE_HR_ADMIN',
-    label: 'HR Admin',
+    name: "ROLE_HR_ADMIN",
+    label: "HR Admin",
     id: 1,
   },
   {
-    name: 'ROLE_HR_CLERK',
-    label: 'HR Clerk',
+    name: "ROLE_HR_CLERK",
+    label: "HR Clerk",
     id: 1,
   },
   {
-    name: 'ROLE_EMPLOYEE',
-    label: 'Employee',
+    name: "ROLE_EMPLOYEE",
+    label: "Employee",
     id: 1,
   },
 ];
 
 const columns = [
   {
-    title: 'SN',
+    title: "SN",
     render: (rowData) => rowData.tableData.id + 1,
-    width: '3%',
+    width: "3%",
     sortable: false,
     sorting: false,
   },
   {
-    title: 'Name',
-    field: 'name',
-    emptyValue: '-',
-    width: '80',
+    title: "Name",
+    field: "name",
+    emptyValue: "-",
+    width: "80",
   },
   {
-    title: 'Mobile Number',
-    field: 'mobileNo',
-    emptyValue: '-',
-    width: '80',
+    title: "Mobile Number",
+    field: "mobileNo",
+    emptyValue: "-",
+    width: "80",
   },
   {
-    title: 'Email',
-    field: 'email',
-    emptyValue: '-',
-    width: '120',
+    title: "Email",
+    field: "email",
+    emptyValue: "-",
+    width: "120",
   },
   {
-    title: 'Role',
+    title: "Role",
     render: (rowData) => getRoleLabel(rowData?.role?.name),
-    width: '80',
+    width: "80",
   },
   {
-    title: 'Action',
+    title: "Action",
     render: (rowData) => <UserControlAction rowData={rowData} />,
-    width: '1rem',
+    width: "1rem",
   },
 ];
 
 const getRoleLabel = (roleName) => {
   const role = roleType?.find((role) => role?.name === roleName);
-  return role ? role?.label : '-';
+  return role ? role?.label : "-";
 };
 
 const Users = ({ permissions }) => {
@@ -94,32 +94,36 @@ const Users = ({ permissions }) => {
       <>
         <Stack
           sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '1rem',
+            display: "flex",
+            flexDirection: "column",
+            gap: "1rem",
           }}
         >
           <Stack
             sx={{
-              display: 'flex',
-              flexDirection: 'row-reverse',
-              gap: '12px',
+              display: "flex",
+              flexDirection: "row-reverse",
+              gap: "12px",
             }}
           >
             <Button
-              type='button'
-              variant='contained'
-              sx={{ maxWidth: 'fit-content', color: '#fff',textTransform:"none" }}
+              type="button"
+              variant="contained"
+              sx={{
+                maxWidth: "fit-content",
+                color: "#fff",
+                textTransform: "capitalize",
+              }}
               onClick={handleAddOpenModal}
             >
               + Add User
             </Button>
             <Button
-              variant='outlined'
+              variant="outlined"
               onClick={() => {
-                navigate('deactivated');
+                navigate("deactivated");
               }}
-              sx={{ textTransform: 'none' }}
+              sx={{ textTransform: "none" }}
             >
               Inactive User
             </Button>
@@ -128,7 +132,7 @@ const Users = ({ permissions }) => {
             <CustomTable
               columns={columns}
               data={userControlData}
-              title='User List'
+              title="User List"
               isLoading={isLoading}
               // actions={actions}
             />
@@ -137,7 +141,7 @@ const Users = ({ permissions }) => {
 
         {openAddModal && (
           <AddUserControlModal
-            title={'Add User'}
+            title={"Add User"}
             open={openAddModal}
             handleCloseModal={handleCloseAddModal}
           />

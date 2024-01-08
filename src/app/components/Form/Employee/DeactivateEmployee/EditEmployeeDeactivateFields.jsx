@@ -13,11 +13,7 @@ import {
   useRemoveDeactiveEmployeeForm,
 } from '../../../../hooks/employee/DeactivateEmploye/useRemoveDeactiveEmployeeForm';
 import { useGetEmployee } from '../../../../hooks/employee/useEmployee';
-import {
-  useActiveTerminateEmployee,
-  useGetDeactivatedEmployee,
-  useGetDeactivatedUser,
-} from '../../../../hooks/employee/DeactivateEmploye/useEmployee';
+import { useGetDeactivatedEmployee } from '../../../../hooks/employee/DeactivateEmploye/useEmployee';
 import { termintionOptions, activationOption } from './TerminationOption';
 import ThemeModeContext from '../../../../../theme/ThemeModeContext';
 import { DOC_URL } from '../../../../../auth/axiosInterceptor';
@@ -53,24 +49,6 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
   return (
     !isLoading && (
       <Grid container spacing={3}>
-        {/* <Grid item xs={12} sm={12} md={12}>
-          <TextField
-            id='EmployeeId'
-            name='EmployeeId'
-            label='Employee Name'
-            placeholder='Enter Employee Id'
-            fullWidth
-            value={getEmployeeName(formik.values.employeeId)}
-            onChange={formik.handleChange}
-            error={
-              formik.touched.employeeId && Boolean(formik.errors.employeeId)
-            }
-            helperText={formik.touched.employeeId && formik.errors.employeeId}
-            variant='outlined'
-            InputLabelProps={{ shrink: true }}
-            style={{ display: 'none' }}
-          />
-        </Grid> */}
         <Grid item xs={12} sm={12} md={12}>
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <div>
@@ -194,21 +172,13 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
 export const EditEmployeeActivateFields = ({ onClose, isLoading, data }) => {
   const { palette } = useContext(ThemeModeContext);
   const id = data?.id;
-  // const { data: employeeData } = useActiveTerminateEmployee({});
   const { data: employeeData } = useGetDeactivatedEmployee();
 
   const { formik } = useAddActiveEmployeeForm(id, onClose);
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
-
     if (formik.isValid) {
-      // formik.setTouched({
-      //   employeeId: true,
-      //   terminationType: true,
-      //   effectiveDate: true,
-      // });
-      // onClose();
     }
   };
 
@@ -228,26 +198,9 @@ export const EditEmployeeActivateFields = ({ onClose, isLoading, data }) => {
   return (
     !isLoading && (
       <Grid container spacing={3}>
-        <Grid item xs={12} sm={12} style={{ display: 'none' }}>
-          <TextField
-            id='projectId'
-            name='projectId'
-            label='Employee Name'
-            placeholder='Enter project Id'
-            fullWidth
-            value={getEmployeeName(formik.values.employeeId)}
-            onChange={formik.handleChange}
-            error={
-              formik.touched.employeeId && Boolean(formik.errors.employeeId)
-            }
-            helperText={formik.touched.employeeId && formik.errors.employeeId}
-            variant='outlined'
-            InputLabelProps={{ shrink: true }}
-          />
-        </Grid>
         <Grid item xs={12} sm={12}>
           <Typography variant='h6'>
-            Do you really want to Activate employee
+            Do you really want to Activate employee ?
             <b> {getEmployeeName(id)}</b>
           </Typography>
         </Grid>
@@ -318,32 +271,6 @@ export const EditEmployeeActivateFields = ({ onClose, isLoading, data }) => {
               />
             )}
           />
-
-          {/* <TextField
-            id="terminationType"
-            select
-            name="terminationType"
-            label="Termanation Type"
-            placeholder="Enter Employee staus"
-            fullWidth
-            value={formik.values.terminationType}
-            onChange={formik.handleChange}
-            error={
-              formik.touched.terminationType &&
-              Boolean(formik.errors.terminationType)
-            }
-            helperText={
-              formik.touched.terminationType && formik.errors.terminationType
-            }
-            variant="outlined"
-            InputLabelProps={{ shrink: true }}
-          >
-            {activationOption?.map((option) => (
-              <MenuItem key={option?.id} value={option?.value}>
-                {option?.label}
-              </MenuItem>
-            ))}
-          </TextField> */}
         </Grid>
 
         <Grid
@@ -355,14 +282,14 @@ export const EditEmployeeActivateFields = ({ onClose, isLoading, data }) => {
           <Button
             variant='contained'
             onClick={handleFormSubmit}
-            sx={{ mt: 3, ml: 1, color: '#fff' }}
+            sx={{ mt: 3, ml: 1, color: '#fff', textTransform: 'capitalize' }}
           >
-            Yes Proceed
+            Activate Employee
           </Button>
           <Button
             variant='contained'
             onClick={onClose}
-            sx={{ mt: 3, ml: 1 }}
+            sx={{ mt: 3, ml: 1, textTransform: 'capitalize' }}
             color='error'
           >
             Cancel

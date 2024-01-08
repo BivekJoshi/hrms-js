@@ -20,7 +20,7 @@ const EmployeeGridView = ({ employeeData }) => {
         gap={1}
         className='project-card-control'
         sx={{
-          display: 'grid',
+          display: `${employeeData?.employees?.length < 3 ? 'flex' : 'grid'}`,
           gridTemplateColumns: 'repeat(auto-fit, minmax(285px, 1fr))',
           gap: '1rem',
         }}
