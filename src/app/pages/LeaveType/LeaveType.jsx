@@ -192,7 +192,7 @@ const LeaveType = ({ permissions }) => {
             permissions={permissions}
             color={'primary'}
             onClick={() => handleDeleteLeaveType(rowData)}
-            icon={<DeleteIcon />}
+            icon={<DeleteIcon color='error' />}
           />
         </Stack>
       ),
@@ -227,7 +227,7 @@ const LeaveType = ({ permissions }) => {
       />
       {openEditModal && (
         <EditLeaveTypeModal
-          title={'Leave Type'}
+          title={'Edit Leave Type'}
           data={editedLeaveType}
           open={openEditModal}
           handleCloseModal={handleCloseEditModal}

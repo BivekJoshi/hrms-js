@@ -89,7 +89,7 @@ const DeactivatedEmployee = () => {
       />
       {openDeactivatedModal && (
         <EditActivationEmployeeModal
-          title={'Employee Activation'}
+          title={'Activate Employee'}
           data={deactivatedEmployee}
           open={openDeactivatedModal}
           handleCloseModal={handleCloseDeactivatedModal}
