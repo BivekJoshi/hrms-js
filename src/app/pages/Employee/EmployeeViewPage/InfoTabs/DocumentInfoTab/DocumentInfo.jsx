@@ -1,16 +1,16 @@
-import React, { useContext, useRef, useState } from "react";
-import { useGetDocumentById } from "../../../../../hooks/employee/useDocument";
-import { DOC_URL } from "../../../../../../auth/axiosInterceptor";
-import Box from "@mui/material/Box";
-import Tab from "@mui/material/Tab";
-import TabContext from "@mui/lab/TabContext";
-import TabList from "@mui/lab/TabList";
-import TabPanel from "@mui/lab/TabPanel";
-import { groupBy } from "lodash";
-import { Button, Fade, Modal } from "@mui/material";
-import ThemeModeContext from "../../../../../../theme/ThemeModeContext";
-import ReactToPrint from "react-to-print";
-import "./printDocs.css";
+import React, { useContext, useEffect, useRef, useState } from 'react';
+import { useGetDocumentById } from '../../../../../hooks/employee/useDocument';
+import { DOC_URL } from '../../../../../../auth/axiosInterceptor';
+import Box from '@mui/material/Box';
+import Tab from '@mui/material/Tab';
+import TabContext from '@mui/lab/TabContext';
+import TabList from '@mui/lab/TabList';
+import TabPanel from '@mui/lab/TabPanel';
+import { groupBy } from 'lodash';
+import { Button, Fade, Modal } from '@mui/material';
+import ThemeModeContext from '../../../../../../theme/ThemeModeContext';
+import ReactToPrint from 'react-to-print';
+import './printDocs.css';
 const documentName = [
   {
     id: 1,
@@ -69,13 +69,13 @@ const documentName = [
   },
   {
     id: 12,
-    label: "Other Document",
-    value: "OTHER_DOCUMENT",
+    label: 'Other Document',
+    value: 'OTHER_DOCUMENT',
   },
   {
     id: 12,
-    label: "Other Document",
-    value: "OTHER_DOCUMENT",
+    label: 'Other Document',
+    value: 'OTHER_DOCUMENT',
   },
 ];
 const DocumentInfo = ({ data, role }) => {
@@ -91,7 +91,7 @@ const DocumentInfo = ({ data, role }) => {
     ? {}
     : groupBy(getDocument, 'documentType');
 
-  const [value, setValue] = React.useState('EMPLOYEE_PHOTO');
+  const [value, setValue] = React.useState();
   const [previewImage, setPreviewImage] = useState(null);
   const [isPreviewOpen, setPreviewOpen] = useState(false);
   const componentRef = useRef();
@@ -99,6 +99,12 @@ const DocumentInfo = ({ data, role }) => {
     setPreviewImage(imageUrl);
     setPreviewOpen(true);
   };
+
+  useEffect(() => {
+    if (!isLoading && Object.keys(groupedDocuments)?.length > 0) {
+      setValue(Object.keys(groupedDocuments)[0]);
+    }
+  }, [groupedDocuments]);
 
   const closePreview = () => {
     setPreviewOpen(false);
