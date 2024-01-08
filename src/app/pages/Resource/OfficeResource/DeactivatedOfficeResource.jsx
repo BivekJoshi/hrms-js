@@ -24,7 +24,7 @@ const DeactivatedOfficeResource = ({ closeModal, title }) => {
     {
       title: "SN",
       render: (rowData) => rowData.tableData.id + 1,
-      width: "3%",
+      width: "8px",
       sorting: false,
     },
     {
@@ -36,20 +36,21 @@ const DeactivatedOfficeResource = ({ closeModal, title }) => {
         </Typography>
       ),
       emptyValue: "-",
-      width: "18.75rem",
+      width: "20px",
       sorting: false,
     },
     {
       title: "Identification Number",
       field: "uniqueNumber",
       emptyValue: "-",
-      width: "18.75rem",
+      width: "20px",
       sorting: false,
     },
     {
       title: "Description",
+      width: "120px",
       render: (rowData) => (
-        <Typography maxWidth="10rem" style={{ overflowWrap: "break-word" }}>
+        <Typography style={{ overflowWrap: "break-word", width: '280px' }}>
           {rowData?.description}
         </Typography>
       ),
