@@ -14,28 +14,34 @@ import EmployeeHistory from '../../InfoTabs/EmployeeHistoryTab/EmployeeHistory';
 import BranchInfo from '../../InfoTabs/BranchTab/BranchInfo';
 import DepartmentInfo from '../../InfoTabs/DepartmentTab/DepartmentInfo';
 import EmploymentDetails from '../../InfoTabs/EmploymentDetails/EmploymentDetails';
-
-const labelStyle = {
-  backgroundColor: '#EBEDEF',
-  marginLeft: '.5rem',
-  textTransform: 'none',
-  borderRadius: '.5rem',
-  color: 'black',
-  textDecoder: 'none',
-  fontWeight: 'bold',
-};
-const activeLabelStyle = {
-  ...labelStyle,
-  backgroundColor: '#329EF4',
-  borderBottom: 'none',
-  textDecoder: 'none',
-  fontWeight: 'bold',
-};
+import ThemeModeContext from '../../../../../../theme/ThemeModeContext';
 
 export const DetailProfile = ({ data, role, setShowPersonalProfile }) => {
   const [value, setValue] = React.useState('1');
+  const { palette, mode } = React.useContext(ThemeModeContext);
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
+  };
+
+  const labelStyle = {
+    backgroundColor: palette.secondary.main,
+    marginLeft: '.5rem',
+    textTransform: 'none',
+    borderRadius: '.5rem',
+    color: mode === 'light' ? 'black' : 'white',
+    textDecoder: 'none',
+    // fontWeight: "bold",
+  };
+  const activeLabelStyle = {
+    ...labelStyle,
+    backgroundColor:
+      mode === 'dark' ? palette.text.primary : palette.secondary.main,
+    borderBottom: 'none',
+    textDecoder: 'none',
+    color: mode === 'dark' ? 'black' : 'white',
+
+    // fontWeight: "bold",
   };
   const tabsData = [
     {
