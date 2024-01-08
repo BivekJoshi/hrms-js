@@ -10,7 +10,6 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
 
   const deleteHistoryMutation = useDeleteHistory({});
   const handleDeleteHistory = (history) => {
-    console.log(history, "history")
     if (history.id) {
       deleteHistoryMutation.mutate(history.id);
     }

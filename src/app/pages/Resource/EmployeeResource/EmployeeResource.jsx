@@ -82,7 +82,12 @@ const EmployeeResource = ({ permissions }) => {
     {
       title: 'Employee Name',
       field: 'employeeName',
-      emptyValue: '-',
+      
+      render: (rowData) => {
+        const name = rowData?.employee?.firstName + " " + rowData?.employee?.middleName + " " +  rowData?.employee?.lastName
+        return name ? name : "-"
+      },
+      // emptyValue: '-',
       // render: (rowData) => {
       //   return <p>{getEmployeeName(rowData)} </p>;
       // },
@@ -95,7 +100,12 @@ const EmployeeResource = ({ permissions }) => {
     {
       title: 'Resource',
       field: 'officeResourceName',
-      emptyValue: '-',
+      render: (rowData) => {
+        const resource = rowData?.officeResource?.name;
+        // const name = rowData?.employee?.firstName + " " + rowData?.employee?.middleName + " " +  rowData?.employee?.lastName
+        return resource ? resource : "-"
+      },
+      // emptyValue: '-',
       // render: (rowData) => {
       //   return <p>{getResourceName(rowData)}</p>;
       // },
