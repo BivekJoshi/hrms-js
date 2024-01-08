@@ -27,7 +27,7 @@ import { toast } from "react-toastify";
 import { useLeaveDataSearch } from "./Api/LeaveApi";
 import HocButton from "../../hoc/hocButton";
 import PermissionHoc from "../../hoc/permissionHoc";
-import useAuth from '../../../auth/hooks/component/login/useAuth';
+import useAuth from "../../../auth/hooks/component/login/useAuth";
 
 const Leave = ({ permissions }) => {
   const { mode } = React.useContext(ThemeModeContext);
@@ -276,12 +276,30 @@ const Leave = ({ permissions }) => {
 
   const actions = (isManager || isSuperAdmin) && [
     {
-      icon: () => <ModeEditOutlineIcon style={{color: 'green'}} />,
+      icon: () => (
+        <ModeEditOutlineIcon
+          sx={{
+            color: "black",
+            "&:hover": {
+              color: "green",
+            },
+          }}
+        />
+      ),
       tooltip: "Edit Leave",
       onClick: (event, rowData) => handleEditLeave(rowData),
     },
     {
-      icon: () => <DeleteIcon style={{color: '#d32f2f'}} />,
+      icon: () => (
+        <DeleteIcon
+          sx={{
+            color: "black",
+            "&:hover": {
+              color: "red",
+            },
+          }}
+        />
+      ),
       tooltip: "Delete Leave",
       onClick: (event, rowData) => handleDeleteLeave(rowData),
     },

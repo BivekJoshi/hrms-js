@@ -3,7 +3,7 @@ import { useGetEmployeeDeviceMappingById } from "../../hooks/EmployeeMapping/use
 import CustomTable from "../../components/CustomTable/CustomTable";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
-import { IconButton, Typography } from "@mui/material";
+import { IconButton, Tooltip, Typography } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import EditDataModal from "./Component/EditDataModal";
 
@@ -71,6 +71,23 @@ const EmployeeMapping = () => {
     {
       title: "Email",
       field: "officeEmail",
+      render: (rowData) => {
+        return (
+          <Tooltip title={rowData.officeEmail} placement="top-start" arrow>
+            <div
+              style={{
+                width: "10rem",
+                overflow: "hidden",
+                whiteSpace: "nowrap",
+                textOverflow: "ellipsis",
+                cursor: "pointer",
+              }}
+            >
+              {rowData.officeEmail}
+            </div>
+          </Tooltip>
+        );
+      },
       emptyValue: "-",
       width: "10vh",
       sorting: false,
@@ -108,7 +125,12 @@ const EmployeeMapping = () => {
         <IconButton
           //   permissions={permissions?.canEdit}
           disabled={rowData.deviceEmpId && rowData.deviceBranchId}
-          color="primary"
+          sx={{
+            color: "black",
+            "&:hover": {
+              color: "green",
+            },
+          }}
         >
           <EditIcon />
         </IconButton>

@@ -1,11 +1,7 @@
-import React, { useContext } from "react";
-import { Grid, TextField, Button, MenuItem, Autocomplete } from "@mui/material";
-import ThemeModeContext from "../../../../theme/ThemeModeContext";
+import React from "react";
+import { Grid, TextField, Button, Autocomplete } from "@mui/material";
 import { useEditUserControlForm } from "../../../pages/Auth/UserControl/Users/useEditUserControlForm";
-import {
-  useGetUserControl,
-  useGetUserRole,
-} from "../../../hooks/auth/userControl/useUserControl";
+import { useGetUserRole } from "../../../hooks/auth/userControl/useUserControl";
 import { ButtonComponent } from '../../Button/ButtonComponent';
 
 const roleType = [
@@ -42,20 +38,13 @@ const roleType = [
 ];
 
 export const EditUserControlFieldsRole = ({ onClose, rowData }) => {
-  const { data: userData } = useGetUserControl();
   const { data: userRoleData } = useGetUserRole();
-
   const { formik } = useEditUserControlForm({ rowData });
-  const { mode } = useContext(ThemeModeContext);
 
   const getRoleLabel = (roleId) => {
     const role = roleType?.find((r) => r?.id === roleId);
     return role ? role?.label : "";
   };
-  // const getRoleName = (roleId) => {
-  //   const role = roleType?.find((r) => r?.id === roleId);
-  //   return role ? role?.label : "";
-  // };
 
   const handleFormSubmit = async () => {
     const isValid = await formik.validateForm();
@@ -70,54 +59,8 @@ export const EditUserControlFieldsRole = ({ onClose, rowData }) => {
   return (
     <Grid container spacing={3}>
       <Grid item xs={12} sm={12}>
-        {/* <TextField
-          id="rowData?.id"
-          name="userId"
-          label="User Name"
-          placeholder="Enter User name"
-          fullWidth
-          required
-          select
-          value={formik.values.userId}
-          // onChange={handleUserNameChange}
-          error={formik.touched.userId && Boolean(formik.errors.userId)}
-          helperText={formik.touched.userId && formik.errors.userId}
-          variant="outlined"
-          
-          InputLabelProps={{ shrink: true }}
-        >
-        </TextField> */}
         <p>{rowData?.name}</p>
       </Grid>
-
-      {/* <Grid item xs={12} sm={12}>
-        <TextField
-          id='roleId'
-          name='roleId'
-          label='Role'
-          placeholder='Enter role...'
-          fullWidth
-          select
-          required
-          value={getRoleName(formik.values.roleId)}
-          onChange={formik.handleChange}
-          error={formik.touched.roleId && Boolean(formik.errors.roleId)}
-          helperText={formik.touched.roleId && formik.errors.roleId}
-          variant='outlined'
-          InputLabelProps={{ shrink: true }}
-        >
-          {userRoleData &&
-            userRoleData.map((role) => (
-              <MenuItem
-                key={role?.id}
-                value={role?.id}
-                sx={{ bgcolor: mode === 'light' ? '' : '#413e3e' }}
-              >
-                {getRoleLabel(role?.id)}
-              </MenuItem>
-            ))}
-        </TextField>
-      </Grid> */}
 
       <Grid item xs={12} sm={12}>
         <Autocomplete
@@ -160,13 +103,13 @@ export const EditUserControlFieldsRole = ({ onClose, rowData }) => {
           variant="contained"
           OnClick={handleFormSubmit}
           sx={{ mt: 3, ml: 1 }}
-          buttonName={"Update"}
+          buttonName={"Update Role"}
         />
         <ButtonComponent
           variant="contained"
           OnClick={onClose}
           sx={{ mt: 3, ml: 1 }}
-          color="error"
+          BGColor="red"
           buttonName={"Cancel"}
         />
       </Grid>

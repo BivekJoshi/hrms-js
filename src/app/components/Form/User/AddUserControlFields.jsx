@@ -5,7 +5,7 @@ import { useGetNoneUser } from '../../../hooks/employee/useEmployee';
 import { useAddUserControlForm } from '../../../pages/Auth/UserControl/Users/useAddUserControlForm';
 import { ButtonComponent } from '../../Button/ButtonComponent';
 import renderOptions from '../../../utils/renderOptions';
-
+ 
 export const AddUserControlFields = ({ onClose }) => {
   const { data: employeeData } = useGetNoneUser();
   const { formik } = useAddUserControlForm(onClose);
@@ -14,24 +14,14 @@ export const AddUserControlFields = ({ onClose }) => {
     if (formik.isValid) {
     }
   };
-
+ 
   const handleUserNameChange = (event, selectedEmployee) => {
     if (selectedEmployee) {
-      formik.setFieldValue("employeeId", selectedEmployee.id);
-      formik.setFieldValue("email", selectedEmployee.officeEmail);
+      formik.setFieldValue('employeeId', selectedEmployee.id);
+      formik.setFieldValue('email', selectedEmployee.email);
     }
   };
-
-  const getNameLabel = (emp) => {
-    const fullName = emp?.middleName === ""
-      ? `${emp?.firstName} ${emp?.lastName}`
-      : `${emp?.firstName} ${emp?.middleName} ${emp?.lastName}`;
-
-    const position = emp?.positionName !== null ? `(${emp?.positionName})` : "";
-
-    return `${fullName} ${position}`;
-  };
-
+ 
   return (
     <Grid>
       <Grid container spacing={3}>
@@ -44,7 +34,7 @@ export const AddUserControlFields = ({ onClose }) => {
             id='employeeId'
             name='employeeId'
             options={employeeData || []}
-            getOptionLabel={(employee) => getNameLabel(employee)}
+            getOptionLabel={(option) => option.label}
             value={employeeData?.find(
               (employee) => employee?.id === formik.values?.employeeId
             )}
@@ -72,7 +62,7 @@ export const AddUserControlFields = ({ onClose }) => {
             }
           />
         </Grid>
-
+ 
         <Grid item xs={12} sm={12}>
           <TextField
             id='email'
@@ -91,7 +81,7 @@ export const AddUserControlFields = ({ onClose }) => {
             size='small'
           />
         </Grid>
-
+ 
         <Grid
           container
           direction='row'

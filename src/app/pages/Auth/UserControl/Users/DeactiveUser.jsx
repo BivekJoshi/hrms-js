@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { useGetDeactivatedUser } from '../../../../hooks/employee/DeactivateEmploye/useEmployee';
-import CustomTable from '../../../../components/CustomTable/CustomTable';
-import { EditActivationUserModal } from '../../../Employee/EmployeeDeactivationModal/EditDeactivationEmployeeModal';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
+import React, { useState } from "react";
+import { useGetDeactivatedUser } from "../../../../hooks/employee/DeactivateEmploye/useEmployee";
+import CustomTable from "../../../../components/CustomTable/CustomTable";
+import { EditActivationUserModal } from "../../../Employee/EmployeeDeactivationModal/EditDeactivationEmployeeModal";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 const DeactiveUser = () => {
   const { data: deactivateUser, isLoading } = useGetDeactivatedUser();
   const [openDeactivatedModal, setOpenDeactivatedModal] = useState(false);
@@ -17,41 +17,41 @@ const DeactiveUser = () => {
 
   const columns = [
     {
-      title: 'SN',
+      title: "SN",
       render: (rowData) => rowData.tableData.id + 1,
-      width: '3%',
-      maxWidth: '50px',
+      width: "3%",
+      maxWidth: "50px",
       sortable: false,
       sorting: false,
     },
     {
-      title: 'Name',
-      field: 'name',
+      title: "Name",
+      field: "name",
       // width: 120,
       sortable: false,
       sorting: false,
     },
     {
-      title: 'Email',
-      field: 'email',
-      emptyValue: '-',
+      title: "Email",
+      field: "email",
+      emptyValue: "-",
       // width: 120,
       sortable: false,
       sorting: false,
     },
     {
-      title: 'Phone Number',
-      field: 'mobileNo',
-      emptyValue: '-',
+      title: "Phone Number",
+      field: "mobileNo",
+      emptyValue: "-",
       // width: 120,
       sortable: false,
       sorting: false,
     },
     {
-      title: 'Role',
+      title: "Role",
       render: (rowData) => {
         const position = rowData?.role?.name;
-        return position ? position : '-';
+        return position ? position : "-";
       },
       // width: 120,
       sortable: false,
@@ -61,8 +61,17 @@ const DeactiveUser = () => {
 
   const actions = [
     {
-      icon: () => <AddCircleIcon style={{color: 'green'}} />,
-      tooltip: 'Activate Employee',
+      icon: () => (
+        <AddCircleIcon
+          sx={{
+            color: "black",
+            "&:hover": {
+              color: "green",
+            },
+          }}
+        />
+      ),
+      tooltip: "Activate Employee",
       onClick: (event, rowData) => handleDeactivatedEmployee(rowData),
     },
   ];
@@ -73,7 +82,7 @@ const DeactiveUser = () => {
       <CustomTable
         columns={columns}
         data={deactivateUser}
-        title='Inactive Users'
+        title="Inactive Users"
         isLoading={isLoading}
         actions={actions}
       />
