@@ -28,6 +28,7 @@ import { useGetEmployeeData } from "../../hooks/employee/useEmployee";
 import EmployeeTableView from "./EmployeeView/EmployeePage/EmployeeTableView";
 import EmployeeGridView from "./EmployeeView/EmployeePage/EmployeeGridView";
 import { debounce } from "lodash";
+import { useEffect } from "react";
 
 const labelStyle = {
   backgroundColor: "#EBEDEF",
@@ -53,11 +54,11 @@ const Employee = () => {
   const [search, setSearch] = useState("");
   const [debounceValue, setdebounceValue] = useState("");
 
-  const { data: employeeData, isLoading } = useGetEmployeeData(
-    pageNumber,
-    pageSize,
-    debounceValue
-  );
+  const {
+    data: employeeData,
+    isLoading,
+    refetch,
+  } = useGetEmployeeData(pageNumber, pageSize, debounceValue);
 
   const handlePageChange = (event, newPage) => {
     setPageNumber(newPage - 1);
@@ -110,11 +111,17 @@ const Employee = () => {
   const handleSubmit = () => {
     formik.handleSubmit();
   };
+  
+  useEffect(() => {
+    if (debounceValue?.length < 3) {
+      refetch();
+    }
+  }, [debounceValue]);
 
   const debounceSearch = debounce((value) => {
-    if (value.length > 3) {
+    if (value.length >= 3) {
       setdebounceValue(value);
-    }
+    } else setdebounceValue("");
   }, 200);
 
   const handleDebounce = (e) => {
