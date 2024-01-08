@@ -84,3 +84,8 @@ export const addEmploymentHistory = async (formData, id) => {
   const data = await axiosInstance.post(`/employment-history/${id}`, formData);
   return data;
 };
+
+export const transferEmploymentHistory = async (formData, id) => {
+  const data = await axiosInstance.put(`/employment-history/${id}`, formData);
+  return data;
+};

@@ -37,6 +37,26 @@ export const DetailProfile = ({ data, role, setShowPersonalProfile }) => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  const labelStyle = {
+    backgroundColor: palette.secondary.main,
+    marginLeft: '.5rem',
+    textTransform: 'none',
+    borderRadius: '.5rem',
+    color: mode === 'light' ? 'black' : 'white',
+    textDecoder: 'none',
+    // fontWeight: "bold",
+  };
+  const activeLabelStyle = {
+    ...labelStyle,
+    backgroundColor:
+      mode === 'dark' ? palette.text.primary : palette.secondary.light,
+    borderBottom: 'none',
+    textDecoder: 'none',
+    color: mode === 'dark' ? 'black' : 'white',
+
+    // fontWeight: "bold",
+  };
   const tabsData = [
     {
       label: 'Leave Records',
@@ -53,11 +73,16 @@ export const DetailProfile = ({ data, role, setShowPersonalProfile }) => {
       value: '3',
       component: <AttendenceInfo data={data} role={role} />,
     },
-    // {
-    //   label: 'Position',
-    //   value: '4',
-    //   component: <PromotionHistory data={data} role={role} />,
-    // },
+    {
+      label: 'Position',
+      value: '4',
+      component: <PromotionHistory data={data} role={role} />,
+    },
+    {
+      label: 'Employment Details',
+      value: '10',
+      component: <EmploymentDetails data={data} role={role} />,
+    },
     {
       label: 'Employment Details',
       value: '10',
