@@ -8,6 +8,7 @@ import {
   MenuItem,
   Stack,
   TextField,
+  Tooltip,
 } from "@mui/material";
 import { useGetEmailLogByFilter } from "../../hooks/emailLog/useEmailLog";
 import { useLocation } from "react-router-dom";
@@ -100,13 +101,15 @@ const EmailLogUserId = () => {
         <Stack direction="row" spacing={0}>
           {rowData.emailType === "CREATE_USER" &&
             rowData.result !== "SUCCESS" && (
-              <Button
-                color="primary"
-                onClick={() => handleClick(rowData)}
-                variant="outlined"
-              >
-                <ReplayIcon />
-              </Button>
+              <Tooltip title="Resend">
+                <Button
+                  color="primary"
+                  onClick={() => handleClick(rowData)}
+                  variant="outlined"
+                >
+                  <ReplayIcon />
+                </Button>
+              </Tooltip>
             )}
         </Stack>
       ),
