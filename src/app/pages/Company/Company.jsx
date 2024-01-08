@@ -16,25 +16,28 @@ import ThemeModeContext from '../../../theme/ThemeModeContext';
 
 const Company = ({ permissions }) => {
   const [value, setValue] = React.useState('1');
-  const { palette } = React.useContext(ThemeModeContext);
+  const { palette, mode } = React.useContext(ThemeModeContext);
 
   const [openAddModal, setOpenAddModal] = useState(false);
   const handleAddOpenModal = () => setOpenAddModal(true);
   const handleCloseAddModal = () => setOpenAddModal(false);
   const labelStyle = {
-    backgroundColor: '#EBEDEF',
+    backgroundColor: palette.secondary.main,
     marginLeft: '.5rem',
     textTransform: 'none',
     borderRadius: '.5rem',
-    color: 'black',
+    color: mode === 'light' ? 'black' : 'white',
     textDecoder: 'none',
     // fontWeight: "bold",
   };
   const activeLabelStyle = {
     ...labelStyle,
-    backgroundColor: palette.secondary.main,
+    backgroundColor:
+      mode === 'dark' ? palette.text.primary : palette.secondary.main,
     borderBottom: 'none',
     textDecoder: 'none',
+    color: mode === 'dark' ? 'black' : 'white',
+
     // fontWeight: "bold",
   };
   const { data: companyData, isLoading } = useGetCompany();

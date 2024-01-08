@@ -34,19 +34,22 @@ const Employee = () => {
   const [pageSize, setPageSize] = useState(12);
   const [search, setSearch] = useState('');
   const labelStyle = {
-    backgroundColor: '#EBEDEF',
+    backgroundColor: palette.secondary.main,
     marginLeft: '.5rem',
     textTransform: 'none',
     borderRadius: '.5rem',
-    color: 'black',
+    color: mode === 'light' ? 'black' : 'white',
     textDecoder: 'none',
     // fontWeight: "bold",
   };
   const activeLabelStyle = {
     ...labelStyle,
-    backgroundColor: palette.secondary.main,
+    backgroundColor:
+      mode === 'dark' ? palette.text.primary : palette.secondary.main,
     borderBottom: 'none',
     textDecoder: 'none',
+    color: mode === 'dark' ? 'black' : 'white',
+
     // fontWeight: "bold",
   };
   const { data: employeeData, isLoading } = useGetEmployeeData(
