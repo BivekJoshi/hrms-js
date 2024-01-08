@@ -20,18 +20,10 @@ const EmployeeDocumentDetailForm = () => {
   const fileInputRef = useRef(null);
   const [openEditModal, setOpenEditModal] = useState(false);
   const [expandedAccordion, setExpandedAccordion] = useState('panel1');
-  console.log(
-    '🚀 ~ file: EmployeeDocumentDetailForm.jsx:23 ~ expandedAccordion:',
-    expandedAccordion
-  );
 
   const [selectedDocument, setSelectedDocument] = useState();
   const [document, setDocument] = useState('');
   const [imagePreviewMap, setImagePreviewMap] = useState({});
-  console.log(
-    '🚀 ~ file: EmployeeDocumentDetailForm.jsx:28 ~ imagePreviewMap:',
-    imagePreviewMap
-  );
 
   const [editedDocument, setEditedDocument] = useState({});
   const handleCloseEditModal = () => setOpenEditModal(false);
