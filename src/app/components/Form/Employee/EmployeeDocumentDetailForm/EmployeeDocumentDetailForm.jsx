@@ -22,7 +22,7 @@ const EmployeeDocumentDetailForm = () => {
   const [expandedAccordion, setExpandedAccordion] = useState("");
 
   const [selectedDocument, setSelectedDocument] = useState();
-  const [document, setDocument] = useState('');
+  const [document, setDocument] = useState("");
   const [imagePreviewMap, setImagePreviewMap] = useState({});
   const [editedDocument, setEditedDocument] = useState({});
 
@@ -235,7 +235,13 @@ const EmployeeDocumentDetailForm = () => {
                     </div>
                   </AccordionSummary>
                   <AccordionDetails>
-                    <Box sx={{ display: "flex", gap: "1rem" ,flexDirection:"column"}}>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        gap: ".5rem",
+                        flexDirection: "column",
+                      }}
+                    >
                       <label htmlFor="file">
                         <input
                           type="file"
@@ -282,7 +288,20 @@ const EmployeeDocumentDetailForm = () => {
                           </div>
                         </Box>
                       </label>
-                      <Typography variant="h8" sx={{color:'rgb(214, 214, 214)'}}>{document?.desc}</Typography>
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          width: "100%",
+                        }}
+                      >
+                        <Typography sx={{ fontSize: "12px" }}>
+                          {document?.desc}
+                        </Typography>
+                        <Typography sx={{ fontSize: "12px" }}>
+                          {document?.fileSize}
+                        </Typography>
+                      </div>
                     </Box>
                   </AccordionDetails>
                 </Accordion>

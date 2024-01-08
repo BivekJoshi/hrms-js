@@ -20,10 +20,7 @@ import CustomTable from '../../../components/CustomTable/CustomTable';
 import { ButtonComponent } from '../../../components/Button/ButtonComponent';
 
 const EmployeeResource = ({ permissions }) => {
-  const navigate = useNavigate();
   const { data: employeeResourceData, isLoading } = useGetEmployeeResource();
-  // const { data: officeResourceData } = useGetOfficeResource();
-  // const { data: employeeData, isLoading: loadingemployee } = useGetEmployee();
 
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
@@ -54,22 +51,6 @@ const EmployeeResource = ({ permissions }) => {
     setOpenEditModal(true);
   };
 
-  const getEmployeeName = (rowData) => {
-    const employeeId = rowData?.empId;
-    const employee = employeeData?.find((emp) => emp?.id === employeeId);
-    const name = `${employee?.firstName} ${employee?.middleName || ''} ${
-      employee?.lastName
-    }`;
-    return name;
-  };
-  const getResourceName = (rowData) => {
-    const resourceId = rowData?.officeResourceId;
-    const resourceName = officeResourceData?.find(
-      (resource) => resource?.id === resourceId
-    );
-    return resourceName?.name;
-  };
-
   const columns = [
     {
       title: 'SN',
@@ -81,28 +62,14 @@ const EmployeeResource = ({ permissions }) => {
     },
     {
       title: 'Employee Name',
-      field: 'employeeName',
+      field: 'employee.firstName',
       emptyValue: '-',
-      // render: (rowData) => {
-      //   return <p>{getEmployeeName(rowData)} </p>;
-      // },
-      // customFilterAndSearch: (searchValue, rowData) => {
-      //   const employeeName = getEmployeeName(rowData);
-      //   return employeeName.toLowerCase().includes(searchValue.toLowerCase());
-      // },
       sorting: false,
     },
     {
       title: 'Resource',
-      field: 'officeResourceName',
+      field: 'officeResource.name',
       emptyValue: '-',
-      // render: (rowData) => {
-      //   return <p>{getResourceName(rowData)}</p>;
-      // },
-      // customFilterAndSearch: (searchValue, rowData) => {
-      //   const resourceName = getResourceName(rowData);
-      //   return resourceName.toLowerCase().includes(searchValue.toLowerCase());
-      // },
       sorting: false,
     },
     {
@@ -112,8 +79,26 @@ const EmployeeResource = ({ permissions }) => {
       sorting: false,
     },
     {
+      title: 'Device Condition Before',
+      field: 'conditionWhileProvided',
+      emptyValue: '-',
+      sorting: false,
+    },
+    {
       title: 'Returned Date',
       field: 'returnDate',
+      emptyValue: '-',
+      sorting: false,
+    },
+    {
+      title: 'Device Condition After',
+      field: 'conditionWhileReturned',
+      emptyValue: '-',
+      sorting: false,
+    },
+    {
+      title: 'Remarks',
+      field: 'remarks',
       emptyValue: '-',
       sorting: false,
     },

@@ -16,20 +16,17 @@ import { useGetEmployee } from "../../../../hooks/employee/useEmployee";
 import ThemeModeContext from "../../../../../theme/ThemeModeContext";
 
 const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
-  const { data: availableOfficeResource, isLoading: resourceLoad } =
-    useGetAvailableOfficeResource();
+  const {
+    data: availableOfficeResource,
+    isLoading: resourceLoad,
+  } = useGetAvailableOfficeResource();
   const { data: officeResourceData } = useGetOfficeResource();
   const { data: employeeData } = useGetEmployee();
-  const { mode } = useContext(ThemeModeContext);
   const { formik } = useEmployeeResourceForm(data, onClose);
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
-    if (formik.isValid) {
-    // onClose();
-    }
   };
-  const submitButtonText = data ? "Update Resource" : " Provide Resource";
   const currentDate = new Date().toISOString().split("T")[0];
 
   return (
@@ -42,7 +39,9 @@ const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
             disabled={editMode}
             options={employeeData || []}
             getOptionLabel={(employee) =>
-              `${employee?.firstName} ${employee?.middleName || ''} ${employee?.lastName}`
+              `${employee?.firstName} ${employee?.middleName || ""} ${
+                employee?.lastName
+              }`
             }
             value={employeeData?.find(
               (employee) => employee?.id === formik.values?.employeeId
@@ -58,13 +57,13 @@ const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
                 fullWidth
                 required
                 variant="outlined"
-                InputLabelProps={{ shrink: true }}
                 error={
                   formik.touched.employeeId && Boolean(formik.errors.employeeId)
                 }
                 helperText={
                   formik.touched.employeeId && formik.errors.employeeId
                 }
+                size="small"
               />
             )}
           />
@@ -75,7 +74,7 @@ const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
             id="officeResourceId"
             name="officeResourceId"
             disabled={editMode}
-            options={availableOfficeResource || []}
+            options={officeResourceData || []}
             getOptionLabel={(option) => option?.name || ""}
             value={officeResourceData?.find(
               (resource) =>
@@ -100,7 +99,7 @@ const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
                   formik.touched.officeResourceId &&
                   formik.errors.officeResourceId
                 }
-                InputLabelProps={{ shrink: true }}
+                size="small"
               />
             )}
           />
@@ -126,27 +125,49 @@ const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
             helperText={formik.touched.receiveDate && formik.errors.receiveDate}
             variant="outlined"
             InputLabelProps={{ shrink: true }}
+            size="small"
           />
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
-            type="date"
-            id="returnDate"
-            name="returnDate"
-            label="Returned Date"
-            placeholder="Select date"
+            id="conditionWhileProvided"
+            name="conditionWhileProvided"
+            label="Device Condition"
+            placeholder="Enter device condition"
             fullWidth
-            value={formik.values.returnDate}
+            value={formik.values.conditionWhileProvided}
             onChange={formik.handleChange}
             error={
-              formik.touched.returnDate && Boolean(formik.errors.returnDate)
+              formik.touched.conditionWhileProvided &&
+              Boolean(formik.errors.conditionWhileProvided)
             }
-            helperText={formik.touched.returnDate && formik.errors.returnDate}
+            helperText={
+              formik.touched.conditionWhileProvided &&
+              formik.errors.conditionWhileProvided
+            }
             variant="outlined"
-            inputProps={{
-              max: currentDate,
-            }}
-            InputLabelProps={{ shrink: true }}
+            size="small"
+          />
+        </Grid>
+        <Grid item xs={12} sm={12}>
+          <TextField
+            id="remarks"
+            name="remarks"
+            label="Remark"
+            placeholder="Enter remark for the resource"
+            fullWidth
+            value={formik.values.remarks}
+            onChange={formik.handleChange}
+            error={
+              formik.touched.remarks &&
+              Boolean(formik.errors.remarks)
+            }
+            helperText={
+              formik.touched.remarks &&
+              formik.errors.remarks
+            }
+            variant="outlined"
+            size="small"
           />
         </Grid>
         <Grid
@@ -160,7 +181,7 @@ const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
             onClick={handleFormSubmit}
             sx={{ mt: 3, ml: 1 }}
           >
-            {submitButtonText}
+            Submit
           </Button>
           <Button
             variant="contained"
