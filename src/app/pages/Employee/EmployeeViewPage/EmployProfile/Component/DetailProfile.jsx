@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Box, Divider, Tab, Table, Tabs } from '@mui/material';
 import { TableContainer, TableHead } from '@mui/material';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
@@ -16,6 +16,23 @@ import DepartmentInfo from '../../InfoTabs/DepartmentTab/DepartmentInfo';
 import EmploymentDetails from '../../InfoTabs/EmploymentDetails/EmploymentDetails';
 import ThemeModeContext from '../../../../../../theme/ThemeModeContext';
 
+const labelStyle = {
+  backgroundColor: '#EBEDEF',
+  marginLeft: '.5rem',
+  textTransform: 'none',
+  borderRadius: '.5rem',
+  color: 'black',
+  textDecoder: 'none',
+  fontWeight: 'bold',
+};
+const activeLabelStyle = {
+  ...labelStyle,
+  backgroundColor: '#329EF4',
+  borderBottom: 'none',
+  textDecoder: 'none',
+  fontWeight: 'bold',
+};
+
 export const DetailProfile = ({ data, role, setShowPersonalProfile }) => {
   const [value, setValue] = React.useState('1');
   const { palette, mode } = React.useContext(ThemeModeContext);
@@ -23,7 +40,7 @@ export const DetailProfile = ({ data, role, setShowPersonalProfile }) => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
+  const { palette, mode } = useContext(ThemeModeContext);
   const labelStyle = {
     backgroundColor: palette.secondary.main,
     marginLeft: '.5rem',
@@ -36,7 +53,7 @@ export const DetailProfile = ({ data, role, setShowPersonalProfile }) => {
   const activeLabelStyle = {
     ...labelStyle,
     backgroundColor:
-      mode === 'dark' ? palette.text.primary : palette.secondary.main,
+      mode === 'dark' ? palette.text.primary : palette.secondary.light,
     borderBottom: 'none',
     textDecoder: 'none',
     color: mode === 'dark' ? 'black' : 'white',
@@ -63,6 +80,11 @@ export const DetailProfile = ({ data, role, setShowPersonalProfile }) => {
       label: 'Position',
       value: '4',
       component: <PromotionHistory data={data} role={role} />,
+    },
+    {
+      label: 'Employment Details',
+      value: '10',
+      component: <EmploymentDetails data={data} role={role} />,
     },
     // {
     //   label: 'Employment Details',

@@ -29,6 +29,7 @@ const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
     // onClose();
     }
   };
+  
   const submitButtonText = data ? "Update Logistics" : " Provide Logistics";
   const currentDate = new Date().toISOString().split("T")[0];
 

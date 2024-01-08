@@ -8,6 +8,7 @@ import {
   getEmployeeEmployment,
   getEmployeeHistory,
   getEmployeeHistoryById,
+  transferEmploymentHistory,
 } from '../../api/employeeHistory/employeeHistory';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -150,6 +151,22 @@ export const useAddEmploymentHistory = ({ onSuccess }) => {
       },
       onError: (err, _variables, _context) => {
         toast.error(`error: ${err.message}`);
+      },
+    }
+  );
+};
+
+export const useTransferEmploymentHistory = ({ onSuccess }) => {
+  const queryClient = useQueryClient();
+  const { id } = useParams();
+  return useMutation(
+    ['transferEmploymentHistory'],
+    (formData) => transferEmploymentHistory(formData, id),
+    {
+      onSuccess: (data, variables, context) => {
+        toast.success('Successfully transfered');
+        onSuccess && onSuccess(data, variables, context);
+        queryClient.invalidateQueries('getEmployeeEmployment');
       },
     }
   );

@@ -227,7 +227,7 @@ const LeaveType = ({ permissions }) => {
       />
       {openEditModal && (
         <EditLeaveTypeModal
-          title={'Leave Type'}
+          title={'Edit Leave Type'}
           data={editedLeaveType}
           open={openEditModal}
           handleCloseModal={handleCloseEditModal}

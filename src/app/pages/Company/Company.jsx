@@ -12,12 +12,24 @@ import PermissionHoc from '../../hoc/permissionHoc';
 import HocButton from '../../hoc/hocButton';
 import { useGetUserRole } from '../../hooks/auth/userControl/useUserControl';
 import { useGetCompany } from '../../hooks/company/useCompany';
-import ThemeModeContext from '../../../theme/ThemeModeContext';
+
+const labelStyle = {
+  backgroundColor: '#EBEDEF',
+  marginLeft: '.5rem',
+  textTransform: 'none',
+  borderRadius: '.5rem',
+  color: 'black',
+  textDecoder: 'none',
+};
+const activeLabelStyle = {
+  ...labelStyle,
+  backgroundColor: '#329EF4',
+  borderBottom: 'none',
+  textDecoder: 'none',
+};
 
 const Company = ({ permissions }) => {
   const [value, setValue] = React.useState('1');
-  const { palette, mode } = React.useContext(ThemeModeContext);
-
   const [openAddModal, setOpenAddModal] = useState(false);
   const handleAddOpenModal = () => setOpenAddModal(true);
   const handleCloseAddModal = () => setOpenAddModal(false);
@@ -72,6 +84,7 @@ const Company = ({ permissions }) => {
 
             <HocButton
               permissions={permissions?.canAdd}
+              color={'white'}
               variant={'contained'}
               onClick={handleAddOpenModal}
               buttonName={'+ Add Branch'}

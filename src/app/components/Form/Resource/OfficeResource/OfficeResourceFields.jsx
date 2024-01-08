@@ -13,7 +13,7 @@ const OfficeResourceFields = ({ onClose, isLoading, data }) => {
      
     }
   };
-  const submitButtonText = data ? 'Update ' : 'Add Logistics';
+  const submitButtonText = data ? 'Update Logistics' : 'Add Logistics';
 
   return (
     !isLoading && (
