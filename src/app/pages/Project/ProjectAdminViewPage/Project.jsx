@@ -1,5 +1,5 @@
-import React, { useContext, useState } from 'react';
-import Typography from '@mui/material/Typography';
+import React, { useContext, useState } from "react";
+import Typography from "@mui/material/Typography";
 import {
   Autocomplete,
   Box,
@@ -12,29 +12,29 @@ import {
   Pagination,
   Stack,
   TextField,
-} from '@mui/material';
-import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
+} from "@mui/material";
+import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
 import {
   useGetProject,
   useGetProjectDetail,
   useGetProjectPageWise,
-} from '../../../hooks/project/useProject';
-import { AddProjectModal } from '../ProjectModal/ProjectModal';
+} from "../../../hooks/project/useProject";
+import { AddProjectModal } from "../ProjectModal/ProjectModal";
 
-import ProjectCard from '../../../components/cards/Employee/ProjectCard';
-import HocButton from '../../../hoc/hocButton';
-import PermissionHoc from '../../../hoc/permissionHoc';
-import useAuth from '../../../../auth/hooks/component/login/useAuth';
-import DeactivatedProject from '../DeactivatedProject/DeactivatedProject';
-import { ButtonComponent } from '../../../components/Button/ButtonComponent';
-import ThemeModeContext from '../../../../theme/ThemeModeContext';
+import ProjectCard from "../../../components/cards/Employee/ProjectCard";
+import HocButton from "../../../hoc/hocButton";
+import PermissionHoc from "../../../hoc/permissionHoc";
+import useAuth from "../../../../auth/hooks/component/login/useAuth";
+import DeactivatedProject from "../DeactivatedProject/DeactivatedProject";
+import { ButtonComponent } from "../../../components/Button/ButtonComponent";
+import ThemeModeContext from "../../../../theme/ThemeModeContext";
 
 const Project = ({ permissions }) => {
   // State and hooks
   const [pageNumber, setPageNumber] = useState(0);
   const [pageSize, setPageSize] = useState(6);
-  const [nameFilter, setNameFilter] = useState('');
-  const [leaderNameFilter, setLeaderNameFilter] = useState('');
+  const [nameFilter, setNameFilter] = useState("");
+  const [leaderNameFilter, setLeaderNameFilter] = useState("");
   const { isEmployee } = useAuth();
   const { palette } = useContext(ThemeModeContext);
 
@@ -82,8 +82,8 @@ const Project = ({ permissions }) => {
     (project) =>
       `${project.projectName}`
         ?.toLowerCase()
-        ?.includes(nameFilter.toLowerCase()) && 
-        project?.projectLeadName
+        ?.includes(nameFilter.toLowerCase()) &&
+      project?.projectLeadName
         ?.toLowerCase()
         ?.includes(leaderNameFilter.toLowerCase())
   );
@@ -93,35 +93,34 @@ const Project = ({ permissions }) => {
       <Grid
         container
         sx={{
-          display: 'flex',
-          padding: '16px',
-          borderRadius: '6px',
-          marginBottom: '16px',
+          display: "flex",
+          padding: "16px",
+          borderRadius: "6px",
+          marginBottom: "16px",
           backgroundColor: palette?.background?.default,
         }}
       >
-        <Typography variant='h7' mb={1} fontWeight={500}>
+        <Typography variant="h7" mb={1} fontWeight={500}>
           Filter By:
         </Typography>
         <Grid container spacing={4}>
           <Grid item xs={4}>
-            {' '}
             <TextField
-              label='Filter by Project Name'
+              label="Filter by Project Name"
               value={nameFilter}
               onChange={(e) => setNameFilter(e.target.value)}
               fullWidth
-              size='small'
+              size="small"
             />
           </Grid>
           <Grid item xs={4}>
-            {' '}
+            {" "}
             <TextField
-              label='Filter by Project Leader Name'
+              label="Filter by Project Leader Name"
               value={leaderNameFilter}
               onChange={(e) => setLeaderNameFilter(e.target.value)}
               fullWidth
-              size='small'
+              size="small"
             />
           </Grid>
         </Grid>
@@ -129,28 +128,28 @@ const Project = ({ permissions }) => {
 
       <Box>
         <Typography
-          className='project-button'
-          variant='h5'
+          className="project-button"
+          variant="h5"
           sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            marginBottom: '1.2rem',
+            display: "flex",
+            justifyContent: "space-between",
+            marginBottom: "1.2rem",
           }}
         >
           On-Going Projects
           {isEmployee ? null : (
-            <Box display='flex'>
+            <Box display="flex">
               <ButtonComponent
-                BGColor='white'
-                TextColor='#000'
+                BGColor="white"
+                TextColor="#000"
                 OnClick={handleOpenModal}
-                buttonName={'Terminated Project'}
+                buttonName={"Terminated Project"}
               />
               {/* Button to open add project modal */}
               <ButtonComponent
-                color='white'
+                color="white"
                 OnClick={handleAddOpenModal}
-                buttonName='+ Add Project'
+                buttonName="+ Add Project"
               />
             </Box>
           )}
@@ -163,10 +162,10 @@ const Project = ({ permissions }) => {
         container
         item
         gap={3}
-        className='project-card-control'
+        className="project-card-control"
         sx={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))",
         }}
       >
         {/* Mapping over filtered projects to display project cards */}
@@ -185,7 +184,7 @@ const Project = ({ permissions }) => {
         ))}
       </Grid>
 
-      <Box mt={4} display='flex' justifyContent={'end'}>
+      <Box mt={4} display="flex" justifyContent={"end"}>
         <Pagination
           count={projectDetail?.totalPages}
           page={pageNumber + 1}
@@ -193,8 +192,8 @@ const Project = ({ permissions }) => {
           boundaryCount={3}
           showFirstButton
           showLastButton
-          size='large'
-          color='primary'
+          size="large"
+          color="primary"
         />
         {/* <Autocomplete
           value={pageSize}
@@ -214,7 +213,7 @@ const Project = ({ permissions }) => {
       {/* Add project modal */}
       {openAddModal && (
         <AddProjectModal
-          title={'Add Project'}
+          title={"Add Project"}
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
         />
@@ -224,35 +223,36 @@ const Project = ({ permissions }) => {
       <Modal
         open={openModal}
         onClose={handleCloseModal}
-        aria-labelledby='modal-title'
-        aria-describedby='modal-description'
+        aria-labelledby="modal-title"
+        aria-describedby="modal-description"
       >
         <Box
           sx={{
-            position: 'absolute',
-            top: '40%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
+            position: "absolute",
+            top: "40%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
             // width: 400,
-            bgcolor: 'background.paper',
+            bgcolor: "background.paper",
             boxShadow: 24,
             p: 4,
           }}
         >
           {/* DeactivatedProject component to display terminated projects */}
-          <DeactivatedProject  onClick={() => setOpenModal(false)} /> 
+          <DeactivatedProject onClick={() => setOpenModal(false)} />
           <br />
           <Grid
             container
-            direction='row'
-            justifyContent='flex-end'
-            alignItems='flex-end'
+            direction="row"
+            justifyContent="flex-end"
+            alignItems="flex-end"
           >
             {/* <IconButton onClick={() => setOpenModal(false)}><CloseIcon /></IconButton> */}
             <Button
               onClick={() => setOpenModal(false)}
-              color='error'
-              variant='contained'
+              color="error"
+              variant="contained"
+              sx={{ textTransform: "capitalize" }}
             >
               Close
             </Button>

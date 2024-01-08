@@ -44,7 +44,7 @@ const TodoListFields = ({ onClose, isLoading, data }) => {
     formik.handleSubmit();
   };
 
-  const submitButtonText = data ? 'Update Message' : 'Add Message';
+  const submitButtonText = data ? 'Update Todo' : 'Add Todo';
   const currentDate = new Date().toISOString().split('T')[0];
 
   return (
@@ -54,8 +54,8 @@ const TodoListFields = ({ onClose, isLoading, data }) => {
           <TextField
             id='message'
             name='message'
-            label='Message'
-            placeholder='Enter your message...'
+            label='Todo'
+            placeholder='Enter your Todo...'
             fullWidth
             required
             value={formik.values.message}

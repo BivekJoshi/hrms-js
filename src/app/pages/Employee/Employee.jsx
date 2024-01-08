@@ -111,6 +111,7 @@ const Employee = () => {
   const handleFilterChange = (e) => {
     const value = e.target.value;
     setSearch(value);
+    console.log(value);
   };
 
   return (
@@ -173,14 +174,26 @@ const Employee = () => {
               <Typography variant="h7" mb={1} fontWeight={500}>
                 Filter By:
               </Typography>
-              <Grid item xs={8}>
-                <TextField
-                  label="Filter by name, phone number, and position"
-                  value={search}
-                  onChange={handleFilterChange}
-                  fullWidth
-                  size="small"
-                />
+              <Grid container spacing={4}>
+                <Grid item xs={4}>
+                  <TextField
+                    label="Filter by name, phone number, and position"
+                    value={search}
+                    onChange={handleFilterChange}
+                    fullWidth
+                    size="small"
+                  />
+                </Grid>
+                {/* <Grid item xs={4}>
+                  {" "}
+                  <TextField
+                    label="Filter by Project Leader Name"
+                    value={search}
+                    onChange={handleFilterChange}
+                    fullWidth
+                    size="small"
+                  />
+                </Grid> */}
               </Grid>
             </Grid>
             {/* <EmployeeGrid employeeData={employeeData} isLoading={isLoading} /> */}
@@ -246,7 +259,7 @@ const Employee = () => {
                   color: mode === "light" ? "#fff" : "#fff",
                 }}
               >
-                Submit
+                Add Employee
               </Button>
               <Button
                 variant="contained"
