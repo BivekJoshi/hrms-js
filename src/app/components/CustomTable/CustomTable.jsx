@@ -73,6 +73,9 @@ const CustomTable = (props) => {
             exportCSVName: props.exportExcel ? "Export Excel" : "Export CSV",
             exportPDFName: props.pdfNone ? "" : "Export PDF ",
           },
+          header: {
+            actions: props.singleAction ? "Action" : "Actions",
+          },
         }}
         options={{
           search: props?.search || true,
