@@ -56,7 +56,7 @@ const DeactivatedOfficeResource = ({ closeModal, title }) => {
       sorting: false,
     },
     {
-      title: "Actions",
+      title: "Action",
       render: (rowData) => (
         <Stack direction="row" spacing={0}>
           <Button color="primary" onClick={() => handleActivate(rowData)}>
@@ -92,6 +92,7 @@ const DeactivatedOfficeResource = ({ closeModal, title }) => {
         emptyRowsWhenPaging={true}
         // sorting={true}
         height={"320px"}
+        // singleAction={true}
       />
 
       {openModal && (

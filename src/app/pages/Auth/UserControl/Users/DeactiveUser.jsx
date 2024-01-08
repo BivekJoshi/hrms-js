@@ -3,6 +3,40 @@ import { useGetDeactivatedUser } from '../../../../hooks/employee/DeactivateEmpl
 import CustomTable from '../../../../components/CustomTable/CustomTable';
 import { EditActivationUserModal } from '../../../Employee/EmployeeDeactivationModal/EditDeactivationEmployeeModal';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+
+const roleType = [
+  {
+    name: 'ROLE_SUPER_ADMIN',
+    label: 'Super Admin',
+    id: 1,
+  },
+  {
+    name: 'ROLE_ADMIN',
+    label: 'Admin',
+    id: 2,
+  },
+  {
+    name: 'ROLE_MANAGER',
+    label: 'Manager',
+    id: 3,
+  },
+  {
+    name: 'ROLE_HR_ADMIN',
+    label: 'HR Admin',
+    id: 1,
+  },
+  {
+    name: 'ROLE_HR_CLERK',
+    label: 'HR Clerk',
+    id: 1,
+  },
+  {
+    name: 'ROLE_EMPLOYEE',
+    label: 'Employee',
+    id: 1,
+  },
+];
+
 const DeactiveUser = () => {
   const { data: deactivateUser, isLoading } = useGetDeactivatedUser();
   const [openDeactivatedModal, setOpenDeactivatedModal] = useState(false);
@@ -13,6 +47,11 @@ const DeactiveUser = () => {
   const handleDeactivatedEmployee = (rowData) => {
     setDeactivatedEmployee(rowData);
     setOpenDeactivatedModal(true);
+  };
+
+  const getRoleLabel = (roleName) => {
+    const role = roleType?.find((role) => role?.name === roleName);
+    return role ? role?.label : '-';
   };
 
   const columns = [
@@ -49,10 +88,7 @@ const DeactiveUser = () => {
     },
     {
       title: 'Role',
-      render: (rowData) => {
-        const position = rowData?.role?.name;
-        return position ? position : '-';
-      },
+      render: (rowData) => getRoleLabel(rowData?.role?.name),
       // width: 120,
       sortable: false,
       sorting: false,
@@ -76,6 +112,7 @@ const DeactiveUser = () => {
         title='Inactive Users'
         isLoading={isLoading}
         actions={actions}
+        singleAction={true}
       />
       {openDeactivatedModal && (
         <EditActivationUserModal

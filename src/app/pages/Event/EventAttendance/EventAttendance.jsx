@@ -262,6 +262,7 @@ const EventAttendance = ({ permissions }) => {
         actions={actions}
         exportButton
         exportExcel
+        singleAction={true}
       />
       {openEditModal && (
         <EditEventAttendanceModal

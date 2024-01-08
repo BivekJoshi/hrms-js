@@ -37,13 +37,14 @@ const DeactivatedProject = ({onClick}) => {
     {
       title: 'SN',
       render: (rowData) => rowData.tableData.index + 1,
-      width: '2%',
+      width: '4%',
       sortable: false,
       sorting: false,
     },
     {
       title: 'Project Name',
       field: 'projectName',
+      width: '80%',
       emptyValue: '-',
     },
   ];
@@ -93,9 +94,14 @@ const DeactivatedProject = ({onClick}) => {
             fontSize: '1rem',
             padding: 'dense',
             height: 50,
-          },
+          },          
           rowStyle: {
             fontSize: '.8rem',
+          },
+        }}
+        localization={{
+          header: {
+            actions: "Action",
           },
         }}
         actions={actions}
