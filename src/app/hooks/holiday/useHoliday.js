@@ -54,9 +54,6 @@ export const useAddHoliday = ({ onSuccess }) => {
       onSuccess && onSuccess(data, variables, context);
       queryClient.invalidateQueries('getHoliday');
     },
-    onError: (err, _variables, _context) => {
-      toast.error(`error: ${err.message}`);
-    },
   });
 };
 
@@ -88,9 +85,6 @@ export const useEditHoliday = ({ onSuccess }) => {
       toast.success('Succesfully updated holiday');
       onSuccess && onSuccess(data, variables, context);
       queryClient.invalidateQueries('getHoliday');
-    },
-    onError: (err, _variables, _context) => {
-      toast.error(`error: ${err.message}`);
     },
   });
 };

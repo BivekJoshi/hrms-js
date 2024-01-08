@@ -5,7 +5,7 @@ import {
   useAddActiveProject,
 } from "../../../hooks/project/addProject/useAddProjectActiveForm";
 import { useGetDeactivatedProject } from "../../../hooks/project/useProject";
-import Restore from "../../../../assets/restore.png"
+import Restore from "../../../../assets/restore.png";
 
 export const EditProjectDeactivateFields = ({ onClose, isLoading, data }) => {
   const { formik } = useRemoveActiveProject(data);
@@ -25,7 +25,7 @@ export const EditProjectDeactivateFields = ({ onClose, isLoading, data }) => {
   return (
     !isLoading && (
       <Grid container spacing={3}>
-        <Grid item xs={12} sm={12}>
+        <Grid item xs={12} sm={12} textAlign="center">
           {/* <TextField
             id="projectId"
             name="projectId"
@@ -39,11 +39,10 @@ export const EditProjectDeactivateFields = ({ onClose, isLoading, data }) => {
             variant="outlined"
             InputLabelProps={{ shrink: true }}
           /> */}
-          <Typography varinat="h6">
-            Are u sure u want to terminate this project?
+          <Typography varinat="h6" textAlign="center">
+            Are you certain that you want to terminate this project?
           </Typography>
-          <Typography variant="h7">
-            {" "}
+          <Typography variant="h7" textAlign="center">
             {getProjectName(formik.values.projectId)}
           </Typography>
         </Grid>
@@ -106,31 +105,31 @@ export const EditProjectActivateFields = ({ onClose, isLoading, data }) => {
           <img src={Restore} alt="Restore" />
         </Grid>
         <Grid item xs={12} sm={12} textAlign="center">
-        <Divider sx={{width:"100%"}}/>
+          <Divider sx={{ width: "100%" }} />
         </Grid>
         <Grid
           container
           direction="row"
           justifyContent="center"
           alignItems="center"
-          gap='28px'
+          gap="28px"
         >
           <Button
-  variant="contained"
-  onClick={handleFormSubmit}
-  sx={{ mt: 3, ml: 1, textTransform: 'capitalize' }}
->
-  Activate Project
-</Button>
+            variant="contained"
+            onClick={handleFormSubmit}
+            sx={{ mt: 3, ml: 1, textTransform: "capitalize" }}
+          >
+            Activate Project
+          </Button>
 
-<Button
-  variant="contained"
-  onClick={onClose}
-  sx={{ mt: 3, ml: 1, textTransform: 'capitalize' }}
-  color="error"
->
-  Cancel
-</Button>
+          <Button
+            variant="contained"
+            onClick={onClose}
+            sx={{ mt: 3, ml: 1, textTransform: "capitalize" }}
+            color="error"
+          >
+            Cancel
+          </Button>
         </Grid>
       </Grid>
     )

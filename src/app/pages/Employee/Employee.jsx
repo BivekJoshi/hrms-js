@@ -111,7 +111,7 @@ const Employee = () => {
   const handleSubmit = () => {
     formik.handleSubmit();
   };
-  
+
   useEffect(() => {
     if (debounceValue?.length < 3) {
       refetch();
@@ -190,17 +190,18 @@ const Employee = () => {
               <Typography variant="h7" mb={1} fontWeight={500}>
                 Filter By:
               </Typography>
-              <Grid item xs={8}>
-                <TextField
-                  label="Filter by name, phone number, and position"
-                  value={search}
-                  onChange={handleDebounce}
-                  fullWidth
-                  size="small"
-                />
+              <Grid container spacing={4}>
+                <Grid item xs={4}>
+                  <TextField
+                    label="Filter by name, phone number, and position"
+                    value={search}
+                    onChange={handleDebounce}
+                    fullWidth
+                    size="small"
+                  />
+                </Grid>
               </Grid>
             </Grid>
-            {/* <EmployeeGrid employeeData={employeeData} isLoading={isLoading} /> */}
             <EmployeeGridView employeeData={employeeData} />
           </TabPanel>
           <TabPanel value="2">
@@ -263,7 +264,7 @@ const Employee = () => {
                   color: mode === "light" ? "#fff" : "#fff",
                 }}
               >
-                Submit
+                Add Employee
               </Button>
               <Button
                 variant="contained"

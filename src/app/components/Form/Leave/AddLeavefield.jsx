@@ -143,14 +143,14 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
           <Button
             variant="contained"
             onClick={handleFormSubmit}
-            sx={{ mt: 3, ml: 1, color: "#fff" }}
+            sx={{ mt: 3, ml: 1, color: "#fff", textTransform: "capitalize" }}
           >
             {submitButtonText}
           </Button>
           <Button
             variant="contained"
             onClick={onClose}
-            sx={{ mt: 3, ml: 1 }}
+            sx={{ mt: 3, ml: 1, textTransform: "capitalize" }}
             color="error"
           >
             Cancel

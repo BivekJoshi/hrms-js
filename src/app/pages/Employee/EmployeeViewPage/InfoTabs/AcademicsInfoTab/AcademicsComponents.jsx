@@ -1,56 +1,62 @@
-import React, { useContext } from "react";
+import React, { useContext } from 'react';
 
-import TimelineItem from "@mui/lab/TimelineItem";
-import TimelineSeparator from "@mui/lab/TimelineSeparator";
-import TimelineConnector from "@mui/lab/TimelineConnector";
-import TimelineContent from "@mui/lab/TimelineContent";
-import TimelineDot from "@mui/lab/TimelineDot";
-import { Box, Divider, Typography } from "@mui/material";
-import ThemeModeContext from "../../../../../../theme/ThemeModeContext";
-import CustomTable from "../../../../../components/CustomTable/CustomTable";
+import TimelineItem from '@mui/lab/TimelineItem';
+import TimelineSeparator from '@mui/lab/TimelineSeparator';
+import TimelineConnector from '@mui/lab/TimelineConnector';
+import TimelineContent from '@mui/lab/TimelineContent';
+import TimelineDot from '@mui/lab/TimelineDot';
+import { Box, Divider, Typography } from '@mui/material';
+import ThemeModeContext from '../../../../../../theme/ThemeModeContext';
+import CustomTable from '../../../../../components/CustomTable/CustomTable';
 
-const primaryColor = "#1c7ed6";
+const primaryColor = '#1c7ed6';
 const AcademicsComponents = ({ data, isLoading }) => {
   // const { mode } = useContext(ThemeModeContext);
 
-  console.log({ data: data });
-
   const columns = [
     {
-      title: "SN",
+      title: 'SN',
       render: (rowData) => rowData.tableData.id + 1,
-      width: "3%",
+      width: '3%',
       sortable: false,
       sorting: false,
     },
     {
-      title: "Board",
-      field: "board",
+      title: 'Passed Level',
+      field: 'passedLevel',
+
+      emptyValue: '-',
+      width: '20vh',
+      sorting: false,
+    },
+    {
+      title: 'Board',
+      field: 'board',
       render: (rowData) => {
         const board = rowData?.board;
-        return board.toUpperCase()
+        return board.toUpperCase();
       },
-      emptyValue: "-",
-      width: "20vh",
+      emptyValue: '-',
+      width: '20vh',
       sorting: false,
     },
     {
-      title: "Institute",
-      field: "institute",
-      emptyValue: "-",
-      width: "20vh",
+      title: 'Institute',
+      field: 'institute',
+      emptyValue: '-',
+      width: '20vh',
       sorting: false,
     },
     {
-      title: "Grade",
-      field: "grade",
-      emptyValue: "-",
+      title: 'Grade',
+      field: 'grade',
+      emptyValue: '-',
       sorting: false,
     },
     {
-      title: "Passed Year",
-      field: "passedYear",
-      emptyValue: "-",
+      title: 'Passed Year',
+      field: 'passedYear',
+      emptyValue: '-',
       sorting: false,
     },
   ].filter(Boolean);
@@ -87,7 +93,7 @@ const AcademicsComponents = ({ data, isLoading }) => {
       <CustomTable
         columns={columns}
         data={data}
-        title="Academics"
+        title='Academics'
         isLoading={isLoading}
         exportButton={true}
       />

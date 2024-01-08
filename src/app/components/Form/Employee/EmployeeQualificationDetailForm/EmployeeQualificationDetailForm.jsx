@@ -4,33 +4,34 @@ import {
   Divider,
   MenuItem,
   Autocomplete,
-} from "@mui/material";
-import { FieldArray, FormikProvider } from "formik";
-import React, { useState } from "react";
-import AddIcon from "@mui/icons-material/Add";
-import { useDeleteQualification } from "../../../../hooks/employee/useQualification";
-import DeleteIcon from "../../../../../assets/DeleteIcon.png";
+  Tooltip,
+} from '@mui/material';
+import { FieldArray, FormikProvider } from 'formik';
+import React, { useState } from 'react';
+import AddIcon from '@mui/icons-material/Add';
+import { useDeleteQualification } from '../../../../hooks/employee/useQualification';
+import DeleteIcon from '../../../../../assets/DeleteIcon.png';
 
 const passedLevel = [
   {
     id: 1,
-    label: "SLC / SEE",
+    label: 'SLC / SEE',
   },
   {
     id: 2,
-    label: "HSEB / NEB",
+    label: 'HSEB / NEB',
   },
   {
     id: 3,
-    label: "Undergraduate",
+    label: 'Undergraduate',
   },
   {
     id: 4,
-    label: "Post Graduate",
+    label: 'Post Graduate',
   },
   {
     id: 5,
-    label: "Graduate",
+    label: 'Graduate',
   },
 ];
 
@@ -62,7 +63,7 @@ const EmployeeQualificationDetailForm = ({ formik, isLoading }) => {
     !isLoading && (
       <FormikProvider value={formik}>
         <FieldArray
-          name="education"
+          name='education'
           render={(arrayHelpers) => (
             <>
               {formik.values.education.map((study, index) => {
@@ -76,8 +77,8 @@ const EmployeeQualificationDetailForm = ({ formik, isLoading }) => {
                         <TextField
                           id={`education[${index}].passedLevel`}
                           name={`education[${index}].passedLevel`}
-                          label="Passed Level"
-                          placeholder="Enter your passed level"
+                          label='Passed Level'
+                          placeholder='Enter your passed level'
                           fullWidth
                           select
                           value={study.passedLevel}
@@ -91,14 +92,14 @@ const EmployeeQualificationDetailForm = ({ formik, isLoading }) => {
                             formik.touched.education?.[index]?.passedLevel &&
                             formik.errors.education?.[index]?.passedLevel
                           }
-                          variant="outlined"
-                          size="small"
+                          variant='outlined'
+                          size='small'
                           SelectProps={{
                             native: true,
                           }}
                           InputLabelProps={{ shrink: true }}
                         >
-                          <option value="" disabled>
+                          <option value='' disabled>
                             Select Level
                           </option>
                           {getOptions(index)?.map((option) => (
@@ -112,8 +113,8 @@ const EmployeeQualificationDetailForm = ({ formik, isLoading }) => {
                         <TextField
                           id={`education[${index}].board`}
                           name={`education[${index}].board`}
-                          label="Education Board"
-                          placeholder="Enter your education board"
+                          label='Education Board'
+                          placeholder='Enter your education board'
                           fullWidth
                           value={study.board}
                           onChange={handleChange}
@@ -126,16 +127,16 @@ const EmployeeQualificationDetailForm = ({ formik, isLoading }) => {
                             formik.touched.education?.[index]?.board &&
                             formik.errors.education?.[index]?.board
                           }
-                          variant="outlined"
-                          size="small"
+                          variant='outlined'
+                          size='small'
                         />
                       </Grid>
                       <Grid item xs={12} sm={4}>
                         <TextField
                           id={`education[${index}].institute`}
                           name={`education[${index}].institute`}
-                          label="Institute"
-                          placeholder="Enter your institute"
+                          label='Institute'
+                          placeholder='Enter your institute'
                           fullWidth
                           value={study.institute}
                           onChange={handleChange}
@@ -148,8 +149,8 @@ const EmployeeQualificationDetailForm = ({ formik, isLoading }) => {
                             formik.touched.education?.[index]?.institute &&
                             formik.errors.education?.[index]?.institute
                           }
-                          variant="outlined"
-                          size="small"
+                          variant='outlined'
+                          size='small'
                         />
                       </Grid>
                       <Grid item xs={12} sm={4}>
@@ -168,8 +169,8 @@ const EmployeeQualificationDetailForm = ({ formik, isLoading }) => {
                                 {...params}
                                 id={`education[${index}].passedYear`}
                                 name={`education[${index}].passedYear`}
-                                label="Passed Year (A.D.)"
-                                placeholder="Select your passed year"
+                                label='Passed Year (A.D.)'
+                                placeholder='Select your passed year'
                                 fullWidth
                                 error={Boolean(
                                   formik.touched.education?.[index]
@@ -181,8 +182,8 @@ const EmployeeQualificationDetailForm = ({ formik, isLoading }) => {
                                     ?.passedYear &&
                                   formik.errors.education?.[index]?.passedYear
                                 }
-                                variant="outlined"
-                                size="small"
+                                variant='outlined'
+                                size='small'
                               />
                             );
                           }}
@@ -192,8 +193,8 @@ const EmployeeQualificationDetailForm = ({ formik, isLoading }) => {
                         <TextField
                           id={`education[${index}].grade`}
                           name={`education[${index}].grade`}
-                          label="Grade / Percentage(%)"
-                          placeholder="Enter grade/percentage(%)"
+                          label='Grade / Percentage(%)'
+                          placeholder='Enter grade/percentage(%)'
                           fullWidth
                           value={study.grade}
                           onChange={handleChange}
@@ -205,9 +206,9 @@ const EmployeeQualificationDetailForm = ({ formik, isLoading }) => {
                             formik.touched.education?.[index]?.grade &&
                             formik.errors.education?.[index]?.grade
                           }
-                          variant="outlined"
+                          variant='outlined'
                           onBlur={formik.handleBlur}
-                          size="small"
+                          size='small'
                         />
                       </Grid>
 
@@ -216,40 +217,42 @@ const EmployeeQualificationDetailForm = ({ formik, isLoading }) => {
                         xs={12}
                         sm={4}
                         container
-                        direction="row"
-                        justifyContent="flex-end"
-                        alignItems="center"
-                        gap=".5rem"
+                        direction='row'
+                        justifyContent='flex-end'
+                        alignItems='center'
+                        gap='.5rem'
                       >
                         <div
                           onClick={() =>
                             arrayHelpers.push({
-                              board: "",
-                              institute: "",
-                              passedLevel: "",
-                              passedYear: "",
-                              grade: "",
+                              board: '',
+                              institute: '',
+                              passedLevel: '',
+                              passedYear: '',
+                              grade: '',
                             })
                           }
                           style={{
                             cursor:
                               index !== values.education.length - 1 ||
                               index >= passedLevel?.length - 1
-                                ? "not-allowed"
-                                : "pointer",
+                                ? 'not-allowed'
+                                : 'pointer',
                             color:
                               index !== values.education.length - 1 ||
                               index >= passedLevel?.length - 1
-                                ? "#BDBDBD"
-                                : "#388E3C",
+                                ? '#BDBDBD'
+                                : '#388E3C',
                             pointerEvents:
                               index !== values.education.length - 1 ||
                               index >= passedLevel?.length - 1
-                                ? "none"
-                                : "auto",
+                                ? 'none'
+                                : 'auto',
                           }}
                         >
-                          <AddIcon />
+                          <Tooltip title='Add education detail'>
+                            <AddIcon />
+                          </Tooltip>
                         </div>
                         {values.education.length > 1 && (
                           <div
@@ -257,9 +260,11 @@ const EmployeeQualificationDetailForm = ({ formik, isLoading }) => {
                               arrayHelpers.remove(index);
                               handleDeleteQualification(study);
                             }}
-                            style={{ cursor: "pointer" }}
+                            style={{ cursor: 'pointer' }}
                           >
-                            <img src={DeleteIcon} alt="icon" />
+                            <Tooltip title='Delete education detail'>
+                              <img src={DeleteIcon} alt='icon' />
+                            </Tooltip>
                           </div>
                         )}
                       </Grid>

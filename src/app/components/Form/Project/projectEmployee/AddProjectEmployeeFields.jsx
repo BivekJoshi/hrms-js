@@ -10,23 +10,12 @@ import { ButtonComponent } from "../../../Button/ButtonComponent";
 export const AddprojectEmployeeFields = ( onClose, isLoading ) => {
   const { data: employeeData, isLoading: loadingEmployee } = useGetEmployee();
 
-  const { mode } = useContext(ThemeModeContext);
   const { formik } = useProjectEmployeeForm(onClose);
 
   const handleFormSubmit = () => {
     if(formik.isValid){
       formik.handleSubmit();
     }
-
-    // if (formik.isValid) {
-    //   formik.setTouched({
-    //     assignedOn: true,
-    //     deAssignedOn: true,
-    //     employeeId: true,
-    //     projectId: true,
-    //   });
-    //   onClose();
-    // }
   };
 
   return (
@@ -69,29 +58,6 @@ export const AddprojectEmployeeFields = ( onClose, isLoading ) => {
           />
         </Grid>
 
-        {/* <Grid item xs={12} sm={12}>
-          <TextField
-            id="projectId"
-            select
-            name="projectId"
-            label="Project Name"
-            placeholder="Enter Project Name"
-            fullWidth
-            value={formik.values.projectDataById?.id}
-            onChange={formik.handleChange}
-            error={formik.touched.projectId && Boolean(formik.errors.projectId)}
-            helperText={formik.touched.projectId && formik.errors.projectId}
-            variant="outlined"
-            
-            InputLabelProps={{ shrink: true }}
-          >
-            {
-              <MenuItem value={projectDataById?.id}>
-                {projectDataById?.projectName}
-              </MenuItem>
-            }
-          </TextField>
-        </Grid> */}
         <Grid item xs={12} sm={12}>
           <TextField
             id="assignedOn"

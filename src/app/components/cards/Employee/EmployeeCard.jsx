@@ -86,7 +86,7 @@ const EmployeeCard = ({
 
   return (
     <>
-      <Box>
+      <Box maxWidth={"285px"}>
         <MainCard
           grow={true}
           style={{

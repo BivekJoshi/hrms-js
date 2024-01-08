@@ -92,9 +92,6 @@ export const useAddProject = ({ onSuccess }) => {
       onSuccess && onSuccess(data, variables, context);
       queryClient.invalidateQueries('getProject');
     },
-    onError: (err, _variables, _context) => {
-      toast.error(`error: ${err.message}`);
-    },
   });
 };
 
@@ -107,9 +104,6 @@ export const useAddActivateProject = ({ onSuccess }) => {
       onSuccess && onSuccess(data, variables, context);
       queryClient.invalidateQueries('getProject');
     },
-    onError: (err, _variables, _context) => {
-      toast.error(`error: ${err.message}`);
-    },
   });
 };
 
@@ -121,9 +115,6 @@ export const useEditProject = ({ onSuccess }) => {
       toast.success('Successfully edited project');
       onSuccess && onSuccess(data, variables, context);
       queryClient.invalidateQueries('getProjectPageWise');
-    },
-    onError: (err, _variables, _context) => {
-      toast.error(`Error: ${err.message}`);
     },
   });
 };

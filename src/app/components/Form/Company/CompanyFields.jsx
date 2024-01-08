@@ -1,6 +1,6 @@
-import { Grid, TextField, Button } from '@mui/material';
-import React from 'react';
-import useCompanyForm from '../../../hooks/company/CompanyForm/useCompanyForm';
+import { Grid, TextField, Button } from "@mui/material";
+import React from "react";
+import useCompanyForm from "../../../hooks/company/CompanyForm/useCompanyForm";
 
 const CompanyFields = ({ onClose, isLoading, data }) => {
   const { formik } = useCompanyForm(data, onClose);
@@ -9,16 +9,16 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
     formik.handleSubmit();
   };
 
-  const submitButtonText = data ? 'Update Branch' : 'Add Branch';
+  const submitButtonText = data ? "Update Branch" : "Add Branch";
   return (
     !isLoading && (
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
           <TextField
-            id='branchName'
-            name='branchName'
-            label='Branch Name'
-            placeholder='Enter branch name'
+            id="branchName"
+            name="branchName"
+            label="Branch Name"
+            placeholder="Enter branch name"
             fullWidth
             required
             value={formik.values.branchName}
@@ -27,17 +27,17 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
               formik.touched.branchName && Boolean(formik.errors.branchName)
             }
             helperText={formik.touched.branchName && formik.errors.branchName}
-            variant='outlined'
+            variant="outlined"
             InputLabelProps={{ shrink: true }}
-            size='small'
+            size="small"
           />
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
-            id='branchAddress'
-            name='branchAddress'
-            label='Address'
-            placeholder='Enter branch address'
+            id="branchAddress"
+            name="branchAddress"
+            label="Address"
+            placeholder="Enter branch address"
             fullWidth
             required
             value={formik.values.branchAddress}
@@ -49,17 +49,17 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
             helperText={
               formik.touched.branchAddress && formik.errors.branchAddress
             }
-            variant='outlined'
+            variant="outlined"
             InputLabelProps={{ shrink: true }}
-            size='small'
+            size="small"
           />
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
-            id='branchContact'
-            name='branchContact'
-            label='Contact'
-            placeholder='Enter branch contact'
+            id="branchContact"
+            name="branchContact"
+            label="Contact"
+            placeholder="Enter branch contact"
             fullWidth
             required
             value={formik.values.branchContact}
@@ -71,17 +71,17 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
             helperText={
               formik.touched.branchContact && formik.errors.branchContact
             }
-            variant='outlined'
+            variant="outlined"
             InputLabelProps={{ shrink: true }}
-            size='small'
+            size="small"
           />
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
-            id='branchEmail'
-            name='branchEmail'
-            label='Email'
-            placeholder='Enter branch email'
+            id="branchEmail"
+            name="branchEmail"
+            label="Email"
+            placeholder="Enter branch email"
             fullWidth
             required
             value={formik.values.branchEmail}
@@ -90,17 +90,17 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
               formik.touched.branchEmail && Boolean(formik.errors.branchEmail)
             }
             helperText={formik.touched.branchEmail && formik.errors.branchEmail}
-            variant='outlined'
+            variant="outlined"
             InputLabelProps={{ shrink: true }}
-            size='small'
+            size="small"
           />
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
-            id='branchDescription'
-            name='branchDescription'
-            label='Description'
-            placeholder='Enter your Branch Description'
+            id="branchDescription"
+            name="branchDescription"
+            label="Description"
+            placeholder="Enter your Branch Description"
             fullWidth
             multiline
             rows={3}
@@ -114,29 +114,29 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
               formik.touched.branchDescription &&
               formik.errors.branchDescription
             }
-            variant='outlined'
+            variant="outlined"
             InputLabelProps={{ shrink: true }}
             inputProps={{ maxLength: 250 }}
           />
         </Grid>
         <Grid
           container
-          direction='row'
-          justifyContent='flex-end'
-          alignItems='flex-end'
+          direction="row"
+          justifyContent="flex-end"
+          alignItems="flex-end"
         >
           <Button
-            variant='contained'
+            variant="contained"
             onClick={handleFormSubmit}
-            sx={{ mt: 3, ml: 1 }}
+            sx={{ mt: 3, ml: 1, textTransform: "capitalize" }}
           >
             {submitButtonText}
           </Button>
           <Button
-            variant='contained'
+            variant="contained"
             onClick={onClose}
-            sx={{ mt: 3, ml: 1 }}
-            color='error'
+            sx={{ mt: 3, ml: 1, textTransform: "capitalize" }}
+            color="error"
           >
             Cancel
           </Button>
