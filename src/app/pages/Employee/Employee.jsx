@@ -29,6 +29,24 @@ import EmployeeTableView from './EmployeeView/EmployeePage/EmployeeTableView';
 import EmployeeGridView from './EmployeeView/EmployeePage/EmployeeGridView';
 import { debounce } from 'lodash';
 import { useEffect } from 'react';
+import { useCallback } from 'react';
+
+const labelStyle = {
+  backgroundColor: '#EBEDEF',
+  marginLeft: '.5rem',
+  textTransform: 'none',
+  borderRadius: '.5rem',
+  color: 'black',
+  textDecoder: 'none',
+  // fontWeight: "bold",
+};
+const activeLabelStyle = {
+  ...labelStyle,
+  backgroundColor: '#329EF4',
+  borderBottom: 'none',
+  textDecoder: 'none',
+  // fontWeight: "bold",
+};
 
 const Employee = () => {
   const { mode, palette } = React.useContext(ThemeModeContext);
@@ -121,11 +139,16 @@ const Employee = () => {
     }
   }, [debounceValue]);
 
-  const debounceSearch = debounce((value) => {
-    if (value.length >= 3) {
-      setdebounceValue(value);
-    } else setdebounceValue('');
-  }, 300);
+  const debounceSearch = useCallback(
+    debounce((value) => {
+      if (value.length >= 3) {
+        setdebounceValue(value);
+      } else {
+        setdebounceValue('');
+      }
+    }, 300),
+    []
+  );
 
   const handleDebounce = (e) => {
     const value = e.target.value;
