@@ -20,7 +20,7 @@ const CompanyTableView = ({
     {
       title: "SN",
       render: (rowData) => rowData.tableData.id + 1,
-      field:"tableData.id",
+      field: "tableData.id",
       width: "3%",
       sortable: false,
       sorting: false,
@@ -36,7 +36,7 @@ const CompanyTableView = ({
       title: "Branch Address",
       field: "branchAddress",
       emptyValue: "-",
-      width: "10vh",
+      width: "5vh",
       sorting: false,
     },
     {
@@ -62,7 +62,7 @@ const CompanyTableView = ({
               style={{
                 overflow: "hidden",
                 textOverflow: "ellipsis",
-                width: "15rem",
+                width: "8rem",
               }}
             >
               {rowData?.branchDescription}
@@ -119,7 +119,6 @@ const CompanyTableView = ({
         columns={columns}
         data={companyData}
         title="Branch List"
-        fileName="Branch-List"
         isLoading={isLoading}
         exportButton={true}
         actions={actions}

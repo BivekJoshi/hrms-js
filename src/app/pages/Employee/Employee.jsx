@@ -122,7 +122,7 @@ const Employee = () => {
     if (value.length >= 3) {
       setdebounceValue(value);
     } else setdebounceValue("");
-  }, 200);
+  }, 300);
 
   const handleDebounce = (e) => {
     const value = e.target.value;
@@ -170,7 +170,7 @@ const Employee = () => {
               <Button
                 variant="contained"
                 onClick={handleAddOpenModal}
-                sx={{ textTransform: "none", color: "#fff" }}
+                sx={{ textTransform: "none" }}
               >
                 + Add Employee
               </Button>
