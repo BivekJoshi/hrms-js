@@ -196,6 +196,7 @@ export const EditEmployeeActivateFields = ({ onClose, isLoading, data }) => {
   const id = data?.id;
   // const { data: employeeData } = useActiveTerminateEmployee({});
   const { data: employeeData } = useGetDeactivatedEmployee();
+
   const { formik } = useAddActiveEmployeeForm(id, onClose);
 
   const handleFormSubmit = () => {
@@ -227,7 +228,7 @@ export const EditEmployeeActivateFields = ({ onClose, isLoading, data }) => {
   return (
     !isLoading && (
       <Grid container spacing={3}>
-        <Grid item xs={12} sm={12}>
+        <Grid item xs={12} sm={12} style={{ display: 'none' }}>
           <TextField
             id='projectId'
             name='projectId'
@@ -242,13 +243,12 @@ export const EditEmployeeActivateFields = ({ onClose, isLoading, data }) => {
             helperText={formik.touched.employeeId && formik.errors.employeeId}
             variant='outlined'
             InputLabelProps={{ shrink: true }}
-            style={{ display: 'none' }}
           />
         </Grid>
         <Grid item xs={12} sm={12}>
-          <Typography variant='h6' component='h6'>
+          <Typography variant='h6'>
             Do you really want to Activate employee
-            <b> {getEmployeeName(formik.values.employeeId)}</b>
+            <b> {getEmployeeName(id)}</b>
           </Typography>
         </Grid>
 
