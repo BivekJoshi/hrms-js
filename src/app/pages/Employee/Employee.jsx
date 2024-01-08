@@ -194,7 +194,7 @@ const Employee = () => {
                 Filter By:
               </Typography>
               <Grid container spacing={4}>
-                <Grid item xs={4}>
+                <Grid item xs={5}>
                   <TextField
                     label='Filter by name, phone number, and position'
                     value={search}
