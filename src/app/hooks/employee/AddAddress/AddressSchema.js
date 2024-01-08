@@ -90,30 +90,30 @@ const AddressSchema = Yup.object().shape({
           is: "PERMANENT",
           then: Yup.number()
             .typeError("Ward number must be a number")
-            .max(6, "Invalid ward number, exceed length 3")
+            .max(999, "Invalid ward number, exceed length 3")
             .required("Ward number is required"),
           otherwise: Yup.number().when("$perTempAddSame", {
             is: true,
             then: Yup.number()
               .typeError("Ward number must be a number")
-             
+              .max(999, "Invalid ward number, exceed length 3")
               .required("Ward number is required"),
           }),
         }),
         city: Yup.string().when("addressType", {
           is: "PERMANENT",
-          then: Yup.string().required("City is required"),
+          then: Yup.string().required("City is required").max(25, "City name cannot be greater than 25 characters"),
           otherwise: Yup.string().when("$perTempAddSame", {
             is: true,
-            then: Yup.string().required("City is required"),
+            then: Yup.string().required("City is required").max(25, "City name cannot be greater than 25 characters"),
           }),
         }),
         street: Yup.string().when("addressType", {
           is: "PERMANENT",
-          then: Yup.string().required("Street is required"),
+          then: Yup.string().required("Street is required").max(25, "Street name cannot be greater than 25 characters"),
           otherwise: Yup.string().when("$perTempAddSame", {
             is: true,
-            then: Yup.string().required("Street is required"),
+            then: Yup.string().required("Street is required").max(25, "Street name cannot be greater than 25 characters"),
           }),
         }),
       })

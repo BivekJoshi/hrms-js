@@ -20,7 +20,7 @@ const EmployeeBankDetailForm = ({ formik }) => {
           size='small'
         />
       </Grid>
-      <Grid item xs={12} sm={6} md={4}>
+      {/* <Grid item xs={12} sm={6} md={4}>
         <TextField
           id='bankBranch'
           name='bankBranch'
@@ -35,7 +35,7 @@ const EmployeeBankDetailForm = ({ formik }) => {
           variant='outlined'
           size='small'
         />
-      </Grid>
+      </Grid> */}
       <Grid item xs={12} sm={6} md={4}>
         <TextField
           id='bankAccountNumber'
@@ -64,6 +64,7 @@ const EmployeeBankDetailForm = ({ formik }) => {
           label='Bank Address'
           placeholder='Enter bank address'
           fullWidth
+          multiline
           value={formik.values.bankAddress}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}

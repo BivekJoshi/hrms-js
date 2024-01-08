@@ -10,6 +10,7 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
 
   const deleteHistoryMutation = useDeleteHistory({});
   const handleDeleteHistory = (history) => {
+    console.log(history, "history")
     if (history.id) {
       deleteHistoryMutation.mutate(history.id);
     }
@@ -249,7 +250,7 @@ const EmployeeHistoryDetailForm = ({ formik, isLoading }) => {
                               }}
                               style={{ cursor: 'pointer' }}
                             >
-                              <img src={DeleteIcon} alt='icon' />
+                              <img src={DeleteIcon} onClick={() => handleDeleteHistory(employeeHistory)} alt='icon' />
                             </div>
                           )}
                         </div>
