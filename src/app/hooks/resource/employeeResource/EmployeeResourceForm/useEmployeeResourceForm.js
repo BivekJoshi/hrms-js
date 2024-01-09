@@ -8,7 +8,7 @@ import { EmployeeResourceSchema } from "./EmployeeResourceSchema";
 const useEmployeeResourceForm = (data, onClose) => {
   const { mutate: addEmployeeResource } = useAddEmployeeResource({});
   const { mutate: editEmployeeResource } = useEditEmployeeResource({});
-console.log(data, "data")
+
   const formik = useFormik({
     initialValues: {
       officeResourceId: data?.officeResource?.id || "",

@@ -31,7 +31,7 @@ const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
   return (
     !isLoading && (
       <Grid container spacing={3}>
-        <Grid item xs={12} sm={12}>
+        <Grid item xs={12} sm={12} md={6} lg={6}>
           {data ? (
             <TextField
               variant="outlined"
@@ -93,7 +93,7 @@ const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
           )}
         </Grid>
 
-        <Grid item xs={12} sm={12}>
+        <Grid item xs={12} sm={12} md={6} lg={6}>
           {data ? (
             <TextField
               variant="outlined"
@@ -149,7 +149,7 @@ const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
           )}
         </Grid>
 
-        <Grid item xs={12} sm={12}>
+        <Grid item xs={12} sm={12} md={6} lg={6}>
           <TextField
             type="date"
             id="receiveDate"
@@ -172,7 +172,7 @@ const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
             size="small"
           />
         </Grid>
-        <Grid item xs={12} sm={12}>
+        <Grid item xs={12} sm={12} md={6} lg={6}>
           <TextField
             id="conditionWhileProvided"
             name="conditionWhileProvided"
@@ -193,13 +193,14 @@ const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
             size="small"
           />
         </Grid>
-        <Grid item xs={12} sm={12}>
+        <Grid item xs={12} sm={12} md={12} lg={12}>
           <TextField
             id="remarks"
             name="remarks"
             label="Remark"
             placeholder="Enter remark for the resource"
             fullWidth
+            multiline
             value={formik.values.remarks}
             onChange={formik.handleChange}
             error={formik.touched.remarks && Boolean(formik.errors.remarks)}
