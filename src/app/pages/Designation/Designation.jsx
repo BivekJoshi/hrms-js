@@ -15,10 +15,11 @@ import DeleteConfirmationModal from '../../components/Modal/DeleteConfirmationMo
 import PermissionHoc from '../../hoc/permissionHoc';
 import HocButton from '../../hoc/hocButton';
 import CustomTable from '../../components/CustomTable/CustomTable';
+import ThemeModeContext from '../../../theme/ThemeModeContext';
 
 const Designation = ({ permissions }) => {
   const { data: designationData, isLoading } = useGetDesignation();
-
+  const { palette } = React.useContext(ThemeModeContext);
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
@@ -97,7 +98,7 @@ const Designation = ({ permissions }) => {
       icon: () => (
         <ModeEditOutlineIcon
           sx={{
-            color: 'black',
+            color: palette?.text?.primary,
             '&:hover': {
               color: 'green',
             },
@@ -112,7 +113,7 @@ const Designation = ({ permissions }) => {
       icon: () => (
         <DeleteIcon
           sx={{
-            color: 'black',
+            color: palette?.text?.primary,
             '&:hover': {
               color: 'red',
             },
