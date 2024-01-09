@@ -36,12 +36,10 @@ const years = Array.from(
 ); // Change 100 to adjust the range of available years
 
 const QualificationAddField = ({ formik }) => {
-  
   const handleImageChange = (fileName, event) => {
     formik.setFieldValue(fileName, event.target.files[0]);
   };
 
-  console.log(formik.values);
   return (
     <Grid container spacing={3}>
       <Grid item xs={12}>
@@ -119,7 +117,9 @@ const QualificationAddField = ({ formik }) => {
       <Grid item xs={12}>
         <Autocomplete
           options={years}
-          onChange={formik.handleChange}
+          onChange={(e, newValue) => {
+            formik.setFieldValue(`passedYear`, newValue);
+          }}
           value={formik.values.passedYear}
           renderInput={(params) => {
             return (
