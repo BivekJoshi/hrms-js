@@ -8,11 +8,13 @@ import { EmployeeResourceSchema } from "./EmployeeResourceSchema";
 const useEmployeeResourceForm = (data, onClose) => {
   const { mutate: addEmployeeResource } = useAddEmployeeResource({});
   const { mutate: editEmployeeResource } = useEditEmployeeResource({});
-
+console.log(data, "data")
   const formik = useFormik({
     initialValues: {
       officeResourceId: data?.officeResource?.id || "",
+      officeResourceName: data?.officeResourceName || '',
       employeeId: data?.employee?.id || "",
+      employeeName: data?.employeeName || '',
       receiveDate: data?.receiveDate || "",
       returnDate: data?.returnDate || "",
       conditionWhileProvided: data?.conditionWhileProvided || "",
@@ -20,7 +22,7 @@ const useEmployeeResourceForm = (data, onClose) => {
       remarks: data?.remarks || "",
       id: data?.id || "",
     },
-    // validationSchema: EmployeeResourceSchema,
+    validationSchema: EmployeeResourceSchema,
     enableReinitialize: true,
 
     onSubmit: (values) => {
