@@ -20,6 +20,7 @@ import useAddRenamePasswordForm from "../../../hooks/auth/resetPassword/useAddRe
 import { useLocation, useNavigate } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import InitialPage from "../InitialPage/InitialPage";
+import { toast } from "react-toastify";
 
 function ValidationItem(props) {
   return (
@@ -77,10 +78,22 @@ const RenamePassword = ({ isLoading }) => {
   } = usePasswordValidation();
 
   const handleFormSubmit = async () => {
+    if (!formik.values.password) {
+      toast("Password fields cannot be empty", { appearance: "error" });
+      return;
+    }
+    if (!formik.values.confirmPassword) {
+      toast("Confirm Password field cannot be empty", {
+        appearance: "error",
+      });
+      return;
+    }
     const isValid = await formik.validateForm();
     if (isValid) {
       if (formik.values.password === formik.values.confirmPassword) {
         formik.handleSubmit();
+      } else {
+        toast.error("Passwords do not match");
       }
     }
   };
@@ -161,7 +174,6 @@ const RenamePassword = ({ isLoading }) => {
                 }
                 helperText={formik.touched.password && formik.errors.password}
                 variant="outlined"
-                
                 type={showValues.showPassword ? "text" : "password"}
                 InputLabelProps={{ shrink: true }}
                 InputProps={{
@@ -205,7 +217,6 @@ const RenamePassword = ({ isLoading }) => {
                   formik.errors.confirmPassword
                 }
                 variant="outlined"
-                
                 type={showConfirmPassword ? "text" : "password"}
                 InputLabelProps={{ shrink: true }}
                 InputProps={{
@@ -240,12 +251,15 @@ const RenamePassword = ({ isLoading }) => {
               <LoadingButton
                 onClick={handleFormSubmit}
                 variant="contained"
-                // sx={{ mt: 5, ml: 1 }}
+                sx={{ textTransform: "capitalize" }}
                 fullWidth
               >
                 Create Password
               </LoadingButton>
-              <Button onClick={handleCancel} sx={{ mt: 3, ml: 1 }}>
+              <Button
+                onClick={handleCancel}
+                sx={{ mt: 3, ml: 1, textTransform: "capitalize" }}
+              >
                 <ArrowBackIcon />
                 Back to your login page
               </Button>

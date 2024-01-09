@@ -77,12 +77,6 @@ const EmployeeResource = ({ permissions }) => {
       sorting: false,
     },
     {
-      title: 'Device Condition Before',
-      field: 'conditionWhileProvided',
-      emptyValue: '-',
-      sorting: false,
-    },
-    {
       title: 'Returned Date',
       field: 'returnDate',
       emptyValue: '-',

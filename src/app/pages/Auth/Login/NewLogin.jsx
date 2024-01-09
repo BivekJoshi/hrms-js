@@ -256,7 +256,7 @@ const NewLogin = () => {
               />
               <span className='login-lines'>
                 <svg
-                  width='400'
+                  width='100%'
                   height='278'
                   viewBox='0 0 400 278'
                   fill='none'
