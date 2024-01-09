@@ -13,9 +13,7 @@ import {
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
-{
-  /*________________________GETBYID_____________________________________*/
-}
+/*________________________GETBYID_____________________________________*/
 export const useGetEmployeeHistoryById = (id) => {
   return useQuery(
     ["getEmployeeHistoryById", id],
@@ -27,9 +25,7 @@ export const useGetEmployeeHistoryById = (id) => {
   );
 };
 
-{
-  /*________________________GETBY EMPLOYEE HISTORY ID_____________________________________*/
-}
+/*________________________GETBY EMPLOYEE HISTORY ID_____________________________________*/
 export const useGetEmployeeHistory = (id) => {
   return useQuery(["getEmployeeHistory", id], () => getEmployeeHistory(id), {
     refetchInterval: false,
@@ -48,35 +44,31 @@ export const useGetEmployeeEmployment = (id) => {
   );
 };
 
-{
-  /*________________________POST_____________________________________*/
-}
+/*________________________POST_____________________________________*/
 export const useAddEmployeeHistory = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   const { id } = useParams();
-  const addEmployeeDetails= useMutation(
+  const addEmployeeDetails = useMutation(
     ["addEmployeeHistory"],
     async (formData) => await addEmployeeHistory(formData, id),
     {
       onSuccess: (data, variables, context) => {
         toast.success("Successfully added Employee History");
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries("getEmployeeHistoryById");
+        queryClient.invalidateQueries("useGetEmployeeHistory");
       },
       onError: (err, _variables, _context) => {
         toast.error(`error: ${err.message}`);
       },
     }
   );
-  return{
+  return {
     addEmployee: addEmployeeDetails.mutate,
     isSuccess: addEmployeeDetails.isSuccess,
-  }
+  };
 };
 
-{
-  /*________________________DELETE_____________________________________*/
-}
+/*________________________DELETE_____________________________________*/
 export const useDeleteHistory = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(
@@ -86,7 +78,7 @@ export const useDeleteHistory = ({ onSuccess }) => {
       onSuccess: (data, variables, context) => {
         toast.success("Employee History deleted successfully");
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries("getEmployeeHistoryById");
+        queryClient.invalidateQueries("useGetEmployeeHistory");
       },
       onError: (err, _variables, _context) => {
         toast.error(`Error: ${err.message}`);
@@ -95,9 +87,7 @@ export const useDeleteHistory = ({ onSuccess }) => {
   );
 };
 
-{
-  /*________________________EDIT_____________________________________*/
-}
+/*________________________EDIT_____________________________________*/
 export const useEditEmployeeHistory = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   const { id } = useParams();
@@ -110,7 +100,7 @@ export const useEditEmployeeHistory = ({ onSuccess }) => {
       onSuccess: (data, variables, context) => {
         toast.success("Employee History edited sucessfully");
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries("useGetEmployeeHistoryById");
+        queryClient.invalidateQueries("useGetEmployeeHistory");
       },
       onError: (err, _variables, _context) => {
         toast.error(`error: ${err.message}`);
@@ -123,9 +113,7 @@ export const useEditEmployeeHistory = ({ onSuccess }) => {
   };
 };
 
-{
-  /*________________________POST-FOR-VIEW-DETAIL-ADD-PORTION_____________________________________*/
-}
+/*________________________POST-FOR-VIEW-DETAIL-ADD-PORTION_____________________________________*/
 export const useAddEmpHistory = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   const { id } = useParams();

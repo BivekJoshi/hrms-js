@@ -20,6 +20,7 @@ import { useAddDocumentForm } from '../../../../../hooks/employee/AddDocument/us
 import { useGetAddressById } from '../../../../../hooks/employee/useAddress';
 import NewEmployeeFamilyDetailForm from '../../EmployeeFamilyDetailForm/NewEmployeeFamilyDetailForm';
 import NewEmployeeHistoryDetailForm from '../../EmployeeHistoryDetailForm/NewEmployeeHistoryDetailForm';
+import NewEmployeeQualificationDetailForm from '../../EmployeeQualificationDetailForm/NewEmployeeQualificationDetailForm';
 
 const EditEmployeeForm = () => {
   const { id } = useParams();
@@ -80,7 +81,7 @@ const EditEmployeeForm = () => {
 
       case 3:
         return (
-          <EmployeeQualificationDetailForm
+          <NewEmployeeQualificationDetailForm
             formik={qualificationFormik}
             isLoading={isLoadingQualification}
           />

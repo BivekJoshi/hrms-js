@@ -1,32 +1,32 @@
 import { useFormik } from "formik";
 import {
-  useAddEmployeeHistory,
-  useEditEmployeeHistory,
-} from "../../../../hooks/employee/useEmployeeHistory";
+  useAddQualification,
+  useEditQualification,
+} from "../../../../hooks/employee/useQualification";
 
-const useAddHistoryDetails = () => {
+const useAddQualificationDetails = () => {
   const {
     addEmployee: addEmployeemutate,
     isSuccess: isFormSubmitSuccess,
-  } = useAddEmployeeHistory({});
-  const { editHistoryMutate, isSuccess: isEditSuccess } = useEditEmployeeHistory(
-    {}
-  );
+  } = useAddQualification({});
+
+  const {
+    editQualificationMutate,
+    isSuccess: isEditSuccess,
+  } = useEditQualification({});
 
   const formik = useFormik({
     initialValues: {
-        employerName: "",
-        employerAddress: "",
-        pastPosition: "",
-        fromDate: "",
-        toDate: "",
-        description: "",
-        remarks:"",
+      board: "",
+      institute: "",
+      passedLevel: "",
+      passedYear: "",
+      grade: "",
     },
     // validationSchema: PositionSchema,
     onSubmit: (values) => {
       if (values?.id) {
-        editHistoryMutate(values, {
+        editQualificationMutate(values, {
           onSuccess: () => {
             formik.handleReset();
           },
@@ -50,4 +50,4 @@ const useAddHistoryDetails = () => {
   return { formik, isFormSubmitSuccess, isEditSuccess };
 };
 
-export default useAddHistoryDetails;
+export default useAddQualificationDetails;

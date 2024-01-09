@@ -10,26 +10,17 @@ export const getQualificationById = async (id) => {
 
 /*________________________POST_____________________________________*/
 export const addQualification = async (formData, id) => {
-  const newEdu = formData?.education;
-  const dataToPost = newEdu.filter(
-    (item) => item.id === undefined || item.id === ""
-  );
-  const data = await axiosInstance.post(
-    `/qualification/create/${id}`,
-    dataToPost
-  );
+  const data = await axiosInstance.post(`/qualification/create/${id}`, [
+    formData,
+  ]);
   return data;
 };
 
 /*________________________EDIT_____________________________________*/
 export const editQualification = async (formData, id) => {
-  const newData = formData?.education;
-  const qIds = newData && newData.map((education) => education?.id);
-  const queryString = qIds.map((qId) => `qIds=${qId}`).join("&");
-  const data = await axiosInstance.put(
-    `/qualification/update/${id}?${queryString}`,
-    formData?.education
-  );
+  const data = await axiosInstance.put(`/qualification/update/${id}`, [
+    formData,
+  ]);
   return data;
 };
 
