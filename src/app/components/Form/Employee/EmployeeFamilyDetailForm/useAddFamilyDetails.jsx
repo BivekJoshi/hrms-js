@@ -1,7 +1,8 @@
 import { useFormik } from 'formik';
+import { useAddfamilyMember } from '../../../../hooks/employee/useFamily';
 
 const useAddFamilyDetails = (onClose) => {
-  const { mutate } = useAddPromotionHistory({});
+  const { mutate } = useAddfamilyMember({});
 
   const formik = useFormik({
     initialValues: {
