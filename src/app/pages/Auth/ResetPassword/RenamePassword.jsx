@@ -32,15 +32,15 @@ function ValidationItem(props) {
           sx={{ fontWeight: "90rem", color: "#888888" }}
         >
           {props.validated ? (
-            <>
+            <Grid display="flex" gap={1} alignItems="center">
               <CheckCircleOutlineIcon sx={{ color: "green" }} />
               {props.message}
-            </>
+            </Grid>
           ) : (
-            <>
+            <Grid display="flex" gap={1} alignItems="center">
               <CancelOutlinedIcon sx={{ color: "red" }} />
               {props.message}
-            </>
+            </Grid>
           )}
         </Typography>
       </div>
@@ -77,25 +77,8 @@ const RenamePassword = ({ isLoading }) => {
     handleChangeValidation,
   } = usePasswordValidation();
 
-  const handleFormSubmit = async () => {
-    if (!formik.values.password) {
-      toast("Password fields cannot be empty", { appearance: "error" });
-      return;
-    }
-    if (!formik.values.confirmPassword) {
-      toast("Confirm Password field cannot be empty", {
-        appearance: "error",
-      });
-      return;
-    }
-    const isValid = await formik.validateForm();
-    if (isValid) {
-      if (formik.values.password === formik.values.confirmPassword) {
-        formik.handleSubmit();
-      } else {
-        toast.error("Passwords do not match");
-      }
-    }
+  const handleFormSubmit =  () => {
+    formik.handleSubmit();
   };
 
   const style = {
