@@ -1,4 +1,11 @@
-import { Autocomplete, Grid, MenuItem, TextField } from "@mui/material";
+import {
+  Autocomplete,
+  FormLabel,
+  Grid,
+  Input,
+  MenuItem,
+  TextField,
+} from "@mui/material";
 import React from "react";
 
 const passedLevel = [
@@ -29,6 +36,11 @@ const years = Array.from(
 ); // Change 100 to adjust the range of available years
 
 const QualificationAddField = ({ formik }) => {
+  const handleImageChange = (fileName, event) => {
+    formik.setFieldValue(fileName, event.target.files[0]);
+  };
+
+  console.log(formik.values);
   return (
     <Grid container spacing={3}>
       <Grid item xs={12}>
@@ -77,17 +89,20 @@ const QualificationAddField = ({ formik }) => {
                 placeholder="Enter passed level"
                 fullWidth
                 error={
-                  formik.touched.passedLevel && Boolean(formik.errors.passedLevel)
+                  formik.touched.passedLevel &&
+                  Boolean(formik.errors.passedLevel)
                 }
-                helperText={formik.touched.passedLevel && formik.errors.passedLevel}
+                helperText={
+                  formik.touched.passedLevel && formik.errors.passedLevel
+                }
                 variant="outlined"
                 size="small"
               />
             );
           }}
         />
-        </Grid>
-        <Grid item xs={12}>
+      </Grid>
+      <Grid item xs={12}>
         <TextField
           id={`passedLevel`}
           name={`passedLevel`}
@@ -147,6 +162,36 @@ const QualificationAddField = ({ formik }) => {
           variant="outlined"
           size="small"
           InputLabelProps={{ shrink: true }}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <FormLabel component="legend">Upload Transcript</FormLabel>
+        <Input
+          type="file"
+          fullWidth
+          id="transcript"
+          name="transcript"
+          onChange={(e) => handleImageChange("transcript", e)}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <FormLabel component="legend">Upload Character Certificate</FormLabel>
+        <Input
+          type="file"
+          fullWidth
+          id="characterCertificate"
+          name="characterCertificate"
+          onChange={(e) => handleImageChange("characterCertificate", e)}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <FormLabel component="legend">Upload other Document</FormLabel>
+        <Input
+          type="file"
+          fullWidth
+          id="otherDocument"
+          name="otherDocument"
+          onChange={(e) => handleImageChange("otherDocument", e)}
         />
       </Grid>
     </Grid>
