@@ -5,15 +5,11 @@ import {
 } from "../../../../hooks/employee/useQualification";
 
 const useAddQualificationDetails = () => {
-  const {
-    addEmployee: addEmployeemutate,
-    isSuccess: isFormSubmitSuccess,
-  } = useAddQualification({});
+  const { addEmployee: addEmployeemutate, isSuccess: isFormSubmitSuccess } =
+    useAddQualification({});
 
-  const {
-    editQualificationMutate,
-    isSuccess: isEditSuccess,
-  } = useEditQualification({});
+  const { editQualificationMutate, isSuccess: isEditSuccess } =
+    useEditQualification({});
 
   const formik = useFormik({
     initialValues: {

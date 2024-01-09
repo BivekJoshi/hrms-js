@@ -36,6 +36,7 @@ const years = Array.from(
 ); // Change 100 to adjust the range of available years
 
 const QualificationAddField = ({ formik }) => {
+  
   const handleImageChange = (fileName, event) => {
     formik.setFieldValue(fileName, event.target.files[0]);
   };
@@ -170,6 +171,7 @@ const QualificationAddField = ({ formik }) => {
           type="file"
           fullWidth
           id="transcript"
+          accept="image/*"
           name="transcript"
           onChange={(e) => handleImageChange("transcript", e)}
         />
@@ -178,6 +180,7 @@ const QualificationAddField = ({ formik }) => {
         <FormLabel component="legend">Upload Character Certificate</FormLabel>
         <Input
           type="file"
+          accept="image/*"
           fullWidth
           id="characterCertificate"
           name="characterCertificate"
@@ -188,6 +191,7 @@ const QualificationAddField = ({ formik }) => {
         <FormLabel component="legend">Upload other Document</FormLabel>
         <Input
           type="file"
+          accept="image/*"
           fullWidth
           id="otherDocument"
           name="otherDocument"
