@@ -47,13 +47,13 @@ const EmployeeHistory = ({data, role}) => {
       sorting: false,
     },
     {
-      title: 'Branch Name',
+      title: 'Organization Name',
       field: 'employerName',
       emptyValue: '-',
       width: 300,
     },
     {
-      title: 'Branch Address',
+      title: 'Organization Address',
       field: 'employerAddress',
       emptyValue: '-',
       width: 300,

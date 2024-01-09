@@ -135,6 +135,7 @@ const Users = ({ permissions }) => {
               title="User List"
               isLoading={isLoading}
               // actions={actions}
+              // singleAction={false}
             />
           </Stack>
         </Stack>

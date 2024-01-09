@@ -75,7 +75,7 @@ const TrainingInfo = ({ data, role }) => {
       width: 100,
     },
     {
-      title: "Institude",
+      title: "Institute",
       field: "trainingInstitute",
       emptyValue: "-",
       width: 100,
@@ -95,15 +95,14 @@ const TrainingInfo = ({ data, role }) => {
     {
       title: "End Date",
       width: 75,
-
       field: "endDate",
       emptyValue: "-",
     },
     {
       title: "Actions",
-      width: 75,
+      width: 12,
       render: (rowData) => (
-        <Stack direction="row" justifyContent={"space-evenly"}>
+        <Stack sx={{display: 'flex', flexDirection: 'row'}}>
           <Button color="primary" onClick={() => handleEditTraining(rowData)}>
             <ModeEditOutlineIcon />
           </Button>

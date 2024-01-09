@@ -180,13 +180,14 @@ const AddprojectFields = ({ onClose, isLoading }) => {
           <ButtonComponent
             variant="contained"
             OnClick={handleFormSubmit}
-            TextColor={"#fff"}
+            color={"#fff"}
             sx={{ mt: 3, ml: 1 }}
             buttonName={"Add Project"}
           />
           <ButtonComponent
             variant="contained"
             OnClick={onClose}
+            color={"#fff"}
             sx={{ mt: 3, ml: 1 }}
             BGColor={"#d32f2f"}
             buttonName={"Cancel"}

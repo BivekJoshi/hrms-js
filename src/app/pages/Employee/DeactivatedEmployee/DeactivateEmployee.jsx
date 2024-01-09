@@ -94,6 +94,7 @@ const DeactivatedEmployee = () => {
         title="Inactive Employee"
         isLoading={isLoading}
         actions={actions}
+        singleAction={true}
       />
       {openDeactivatedModal && (
         <EditActivationEmployeeModal

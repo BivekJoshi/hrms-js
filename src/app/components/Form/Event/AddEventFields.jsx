@@ -33,6 +33,7 @@ const AddEventFields = ({ formik }) => {
             label='Event'
             placeholder='Enter event name'
             fullWidth
+            multiline
             value={formik.values.eventName}
             onChange={formik.handleChange}
             error={formik.touched.eventName && Boolean(formik.errors.eventName)}
@@ -42,7 +43,7 @@ const AddEventFields = ({ formik }) => {
             size='small'
           />
         </Grid>
-        <Grid item xs={12} sm={12}>
+        <Grid item xs={12} sm={12} md={6}>
           <TextField
             id='eventDate'
             name='eventDate'
@@ -62,7 +63,7 @@ const AddEventFields = ({ formik }) => {
             }}
           />
         </Grid>
-        <Grid item xs={12} sm={12}>
+        <Grid item xs={12} sm={12} md={6}>
           <TextField
             id='eventTime'
             name='eventTime'
@@ -81,31 +82,12 @@ const AddEventFields = ({ formik }) => {
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
-            id='eventDescription'
-            name='eventDescription'
-            label='Description'
-            placeholder='Enter your Event Description'
-            fullWidth
-            value={formik.values.eventDescription}
-            onChange={formik.handleChange}
-            error={
-              formik.touched.eventDescription &&
-              Boolean(formik.errors.eventDescription)
-            }
-            helperText={
-              formik.touched.eventDescription && formik.errors.eventDescription
-            }
-            variant='outlined'
-            InputLabelProps={{ shrink: true }}
-          />
-        </Grid>
-        <Grid item xs={12} sm={12}>
-          <TextField
             id='eventLocation'
             name='eventLocation'
             label='Event Location'
             placeholder='Enter your Event Location'
             fullWidth
+            multiline
             value={formik.values.eventLocation}
             onChange={formik.handleChange}
             error={
@@ -118,6 +100,27 @@ const AddEventFields = ({ formik }) => {
             variant='outlined'
             InputLabelProps={{ shrink: true }}
             size='small'
+          />
+        </Grid>
+        <Grid item xs={12} sm={12}>
+          <TextField
+            id='eventDescription'
+            name='eventDescription'
+            label='Description'
+            placeholder='Enter your Event Description'
+            fullWidth
+            multiline
+            value={formik.values.eventDescription}
+            onChange={formik.handleChange}
+            error={
+              formik.touched.eventDescription &&
+              Boolean(formik.errors.eventDescription)
+            }
+            helperText={
+              formik.touched.eventDescription && formik.errors.eventDescription
+            }
+            variant='outlined'
+            InputLabelProps={{ shrink: true }}
           />
         </Grid>
       </Grid>

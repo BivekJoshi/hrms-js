@@ -3,6 +3,7 @@ import * as Yup from "yup";
 const EmployeeResourceSchema = Yup.object().shape({
   officeResourceId: Yup.string().required("Please select office logistics"),
   employeeId: Yup.string().required("Please select employee name"),
+  remarks: Yup.string().max(255, "Remarks cannot be greater than 255 characters"),
   receiveDate: Yup.string().required("Please select the received date"),
   returnDate: Yup.string()
     .nullable()
