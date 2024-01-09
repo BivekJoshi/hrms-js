@@ -1,4 +1,4 @@
-import { Box, Button, Container, Paper, Step } from '@mui/material';
+import { Box, Button, Container, Grid, Paper, Step } from '@mui/material';
 import { StepLabel, Stepper, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import EditEmployeeForm from '../../../components/Form/Employee/EmployeeBasicInfoForm/EditEmployeeForm/EditEmployeeForm';
@@ -33,7 +33,7 @@ const EditEmployee = () => {
   };
 
   return (
-    <Container>
+    <Grid>
       <Typography component='h1' variant='h4' align='center'>
         Edit Details
       </Typography>
@@ -106,7 +106,7 @@ const EditEmployee = () => {
           </Box>
         </>
       )}
-    </Container>
+    </Grid>
   );
 };
 
