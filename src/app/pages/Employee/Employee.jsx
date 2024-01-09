@@ -315,7 +315,7 @@ const Employee = () => {
           showFirstButton
           showLastButton
           boundaryCount={3}
-          size='large'
+          // size='small'
           color='primary'
         />
         {/* <Autocomplete
