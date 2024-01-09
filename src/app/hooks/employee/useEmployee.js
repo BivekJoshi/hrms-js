@@ -78,7 +78,7 @@ export const useGetEmployeeById = (id) => {
   });
 };
 
-export const useEditEmployee = ({ onSuccess }) => {
+export const useEditEmployee = ( onSuccess ) => {
   const queryClient = useQueryClient();
   const { id } = useParams();
 

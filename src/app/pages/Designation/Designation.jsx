@@ -10,15 +10,15 @@ import {
 import {
   AddDesignationModal,
   EditDesignationModal,
-} from "./DesignationModal/DesignationModal";
-import DeleteConfirmationModal from "../../components/Modal/DeleteConfirmationModal";
-import PermissionHoc from "../../hoc/permissionHoc";
-import HocButton from "../../hoc/hocButton";
-import CustomTable from "../../components/CustomTable/CustomTable";
+} from './DesignationModal/DesignationModal';
+import DeleteConfirmationModal from '../../components/Modal/DeleteConfirmationModal';
+import PermissionHoc from '../../hoc/permissionHoc';
+import HocButton from '../../hoc/hocButton';
+import CustomTable from '../../components/CustomTable/CustomTable';
 
 const Designation = ({ permissions }) => {
   const { data: designationData, isLoading } = useGetDesignation();
-
+  const { palette } = React.useContext(ThemeModeContext);
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
@@ -97,9 +97,9 @@ const Designation = ({ permissions }) => {
       icon: () => (
         <ModeEditOutlineIcon
           sx={{
-            color: "black",
-            "&:hover": {
-              color: "green",
+            color: 'black',
+            '&:hover': {
+              color: 'green',
             },
           }}
         />
@@ -112,9 +112,9 @@ const Designation = ({ permissions }) => {
       icon: () => (
         <DeleteIcon
           sx={{
-            color: "black",
-            "&:hover": {
-              color: "red",
+            color: 'black',
+            '&:hover': {
+              color: 'red',
             },
           }}
         />

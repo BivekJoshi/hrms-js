@@ -21,6 +21,7 @@ const DesignationFields = ({ onClose, isLoading, data }) => {
             placeholder="Enter designation name"
             fullWidth
             required
+            multiline
             value={formik.values.positionName}
             onChange={formik.handleChange}
             error={
@@ -41,6 +42,7 @@ const DesignationFields = ({ onClose, isLoading, data }) => {
             placeholder="Enter designation level"
             fullWidth
             required
+            multiline
             value={formik.values.positionLevel}
             onChange={formik.handleChange}
             error={

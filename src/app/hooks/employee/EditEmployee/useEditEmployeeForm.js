@@ -3,7 +3,7 @@ import { EditEmployeeSchema } from './EditEmployeeSchema';
 import { useFormik } from 'formik';
 
 const useEditEmployeeForm = ({ data, isLoading }) => {
-  const { mutate } = useEditEmployee({});
+  const { mutate: editEmployee } = useEditEmployee();
 
   const formik = useFormik({
     initialValues: {
@@ -35,7 +35,11 @@ const useEditEmployeeForm = ({ data, isLoading }) => {
     values = {
       ...values,
     };
-    mutate(values, formik);
+    editEmployee(values, {
+      onSuccess: () => {
+        // formik.resetForm();
+      }
+    });
   };
 
   return { formik, isLoading };

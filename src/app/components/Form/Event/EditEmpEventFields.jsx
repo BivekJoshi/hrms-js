@@ -36,6 +36,7 @@ const EditEmpEventFields = ({ onClose, data }) => {
           variant="contained"
           OnClick={onClose}
           BGColor={"#d32f2f"}
+          color={"#fff"}
           buttonName={"Cancel"}
         />
       </Grid>

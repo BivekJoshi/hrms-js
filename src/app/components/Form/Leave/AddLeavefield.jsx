@@ -24,7 +24,6 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
   const { data: employeeData } = useGetEmployee();
   const { data: leaveTypeData } = useGetLeaveType();
   const { formik } = useLeaveForm(data, onClose);
-  console.log(formik.values);
 
   const capitalize = (str) => {
     return str?.charAt(0)?.toUpperCase() + str.slice(1).toLowerCase();
@@ -52,7 +51,6 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
               (employee) => employee?.employeeId === formik.values?.employeeId
             )}
             onChange={(event, value) => {
-              console.log(value);
               formik.setFieldValue("employeeId", value?.employeeId);
             }}
             renderInput={(params) => (
@@ -78,7 +76,6 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
             }
           />
         </Grid>
-
         <Grid item xs={12} sm={12}>
           <Autocomplete
             id="leaveTypeId"
@@ -207,10 +204,13 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
 };
 
 const DateInput = ({ formik, isHalfDay, isMultipleDays }) => {
-  const [halfType, setHalfType] = useState("FIRST_HALF");
+  const [halfType, setHalfType] = useState("");
 
   const handleFromDateChange = (e) => {
     const fromDateValue = e.target.value;
+    if(fromDateValue) {
+      setHalfType('FIRST_HALF')
+    }
     formik.handleChange(e);
     formik.setFieldValue("toDate", fromDateValue);
     formik.setFieldValue("halfLeaveType", null);
@@ -266,7 +266,7 @@ const DateInput = ({ formik, isHalfDay, isMultipleDays }) => {
             row
             aria-labelledby="demo-row-radio-buttons-group-label"
             name="halfLeaveType"
-            value={formik.values.halfLeaveType}
+            value={formik.values.halfLeaveType || halfType}
             onChange={formik.handleChange}
             style={{ display: "flex", marginTop: "0.6rem" }}
           >

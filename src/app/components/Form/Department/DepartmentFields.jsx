@@ -21,6 +21,7 @@ const DepartmentFields = ({ onClose, isLoading, data }) => {
             placeholder="Enter department name"
             fullWidth
             required
+            multiline
             value={formik.values.departmentName}
             onChange={formik.handleChange}
             error={
@@ -41,6 +42,7 @@ const DepartmentFields = ({ onClose, isLoading, data }) => {
             label="Department Type"
             placeholder="Enter department type"
             fullWidth
+            multiline
             required
             value={formik.values.departmentType}
             onChange={formik.handleChange}
@@ -63,7 +65,7 @@ const DepartmentFields = ({ onClose, isLoading, data }) => {
             placeholder="Enter department description"
             fullWidth
             multiline
-            rows={3}
+            rows={4}
             value={formik.values.departmentDescription}
             onChange={formik.handleChange}
             error={

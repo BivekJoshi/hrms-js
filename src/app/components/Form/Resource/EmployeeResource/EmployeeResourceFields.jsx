@@ -16,10 +16,8 @@ import { useGetEmployee } from "../../../../hooks/employee/useEmployee";
 import ThemeModeContext from "../../../../../theme/ThemeModeContext";
 
 const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
-  const {
-    data: availableOfficeResource,
-    isLoading: resourceLoad,
-  } = useGetAvailableOfficeResource();
+  const { data: availableOfficeResource, isLoading: resourceLoad } =
+    useGetAvailableOfficeResource();
   const { data: officeResourceData } = useGetOfficeResource();
   const { data: employeeData } = useGetEmployee();
 
@@ -34,74 +32,121 @@ const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
     !isLoading && (
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
-          <Autocomplete
-            id="employeeId"
-            name="employeeId"
-            disabled={editMode}
-            options={employeeData || []}
-            getOptionLabel={(employee) =>
-              `${employee?.label}`
-            }
-            value={employeeData?.find(
-              (employee) => employee?.id === formik.values?.employeeId
-            )}
-            onChange={(event, newValue) => {
-              formik.setFieldValue("employeeId", newValue?.employeeId || "");
-            }}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                label="Employee Name"
-                placeholder="Select employee"
-                fullWidth
-                required
-                variant="outlined"
-                error={
-                  formik.touched.employeeId && Boolean(formik.errors.employeeId)
-                }
-                helperText={
-                  formik.touched.employeeId && formik.errors.employeeId
-                }
-                size="small"
-              />
-            )}
-          />
+          {data ? (
+            <TextField
+              variant="outlined"
+              label="Employee Name"
+              fullWidth
+              required
+              disabled
+              value={
+                [
+                  data?.employee?.firstName,
+                  data?.employee?.middleName,
+                  data?.employee?.lastName,
+                ]
+                  .filter(Boolean)
+                  .join(" ") || ""
+              }
+              error={
+                formik.touched.officeResourceId &&
+                Boolean(formik.errors.officeResourceId)
+              }
+              helperText={
+                formik.touched.officeResourceId &&
+                formik.errors.officeResourceId
+              }
+              InputLabelProps={{ shrink: true }}
+            />
+          ) : (
+            <Autocomplete
+              id="employeeId"
+              name="employeeId"
+              disabled={editMode}
+              options={employeeData || []}
+              getOptionLabel={(employee) => `${employee?.label}`}
+              value={employeeData?.find((emp) => {
+                emp?.employeeId === formik.values.employeeId || "";
+              })}
+              onChange={(event, newValue) => {
+                formik.setFieldValue("employeeId", newValue?.employeeId || "");
+              }}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label="Employee Name"
+                  placeholder="Select employee"
+                  fullWidth
+                  required
+                  variant="outlined"
+                  error={
+                    formik.touched.employeeId &&
+                    Boolean(formik.errors.employeeId)
+                  }
+                  helperText={
+                    formik.touched.employeeId && formik.errors.employeeId
+                  }
+                  size="small"
+                />
+              )}
+            />
+          )}
         </Grid>
 
         <Grid item xs={12} sm={12}>
-          <Autocomplete
-            id="officeResourceId"
-            name="officeResourceId"
-            disabled={editMode}
-            options={availableOfficeResource || []}
-            getOptionLabel={(option) => option?.name || ""}
-            value={officeResourceData?.find(
-              (resource) =>
-                resource?.id === formik.values.officeResourceId || ""
-            )}
-            onChange={(event, newValue) => {
-              formik.setFieldValue("officeResourceId", newValue?.id || "");
-            }}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                variant="outlined"
-                label="Office Logistics"
-                placeholder="Select logistics"
-                fullWidth
-                required
-                error={
-                  formik.touched.officeResourceId &&
-                  Boolean(formik.errors.officeResourceId)
-                }
-                helperText={
-                  formik.touched.officeResourceId &&
-                  formik.errors.officeResourceId
-                }
-                size="small"
-              />
-            )}
-          />
+          {data ? (
+            <TextField
+              variant="outlined"
+              label="Office Logistics"
+              fullWidth
+              required
+              disabled
+              value={data?.officeResource?.name || ""}
+              error={
+                formik.touched.officeResourceId &&
+                Boolean(formik.errors.officeResourceId)
+              }
+              helperText={
+                formik.touched.officeResourceId &&
+                formik.errors.officeResourceId
+              }
+              InputLabelProps={{ shrink: true }}
+            />
+          ) : (
+            <Autocomplete
+              id="officeResourceId"
+              name="officeResourceId"
+              disabled={editMode}
+              options={availableOfficeResource || []}
+              getOptionLabel={(option) => option?.name || ""}
+              value={officeResourceData?.find(
+                (resource) =>
+                  resource?.id === formik.values.officeResourceId || ""
+              )}
+              onChange={(event, newValue) => {
+                formik.setFieldValue("officeResourceId", newValue?.id || "");
+              }}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  variant="outlined"
+                  label="Office Logistics"
+                  placeholder="Select logistics"
+                  fullWidth
+                  required
+                  error={
+                    formik.touched.officeResourceId &&
+                    Boolean(formik.errors.officeResourceId)
+                  }
+                  helperText={
+                    formik.touched.officeResourceId &&
+                    formik.errors.officeResourceId
+                  }
+                  InputLabelProps={{ shrink: true }}
+                />
+              )}
+            />
+          )}
         </Grid>
 
         <Grid item xs={12} sm={12}>
@@ -148,23 +193,18 @@ const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
             size="small"
           />
         </Grid>
-        <Grid item xs={12} sm={12}>
+        <Grid item xs={12} sm={12} md={12} lg={12}>
           <TextField
             id="remarks"
             name="remarks"
             label="Remark"
             placeholder="Enter remark for the resource"
             fullWidth
+            multiline
             value={formik.values.remarks}
             onChange={formik.handleChange}
-            error={
-              formik.touched.remarks &&
-              Boolean(formik.errors.remarks)
-            }
-            helperText={
-              formik.touched.remarks &&
-              formik.errors.remarks
-            }
+            error={formik.touched.remarks && Boolean(formik.errors.remarks)}
+            helperText={formik.touched.remarks && formik.errors.remarks}
             variant="outlined"
             size="small"
           />
