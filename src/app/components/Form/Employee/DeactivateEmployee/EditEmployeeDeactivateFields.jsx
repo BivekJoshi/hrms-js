@@ -29,6 +29,7 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
     formik.handleSubmit();
   };
 
+  const fullName = data && (data?.firstName + " " + (data?.middleName || "") + " " + data?.lastName);
   const getEmployeeName = (employeeId) => {
     const employeeName = employeeData?.find(
       (employee) => employee?.id === employeeId
@@ -39,12 +40,14 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
     }
     return employeeId;
   };
-
+console.log("data", data)
   const filePath = data?.employeePhotoPath
     ? DOC_URL + data?.employeePhotoPath
     : data?.gender === 'MALE'
     ? Male
     : Female;
+
+    const currentDate = new Date().toISOString().split('T')[0];
 
   return (
     !isLoading && (
@@ -59,7 +62,8 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
             </div>
             <div style={{ marginLeft: '0.8rem' }}>
               <Typography>
-                {getEmployeeName(formik.values.employeeId)}
+                {fullName}
+                {/* {getEmployeeName(formik.values.employeeId)} */}
               </Typography>
               {/* <Typography sx={{ fontSize: '14px', fontWeight: 500 }}>
                 Do you really want to Terminate employee?
@@ -90,6 +94,9 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
             variant='outlined'
             InputLabelProps={{ shrink: true }}
             size='small'
+            inputProps={{
+              min: currentDate, // Disable past date selections
+            }}
           />
         </Grid>
         <Grid item xs={12} sm={12}>
