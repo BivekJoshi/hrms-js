@@ -84,7 +84,7 @@ const EditEmployee = () => {
                 </Button>
               )} */}
 
-              {activeStep !== steps.length - 1 && (
+              {activeStep < 7 && (
                 <>
                   <Button
                     variant='contained'

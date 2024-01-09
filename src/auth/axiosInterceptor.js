@@ -63,10 +63,14 @@ axiosInstance.interceptors.response.use(
     return response.data;
   },
   function (error) {
+    console.log('🚀 ~ file: axiosInterceptor.js:66 ~ error:', error);
     if (error?.response) {
       if (error?.response?.status === 401) {
         removeUser();
         navigateOnError();
+      }
+      if (error?.response?.status === 403) {
+        toast.error('Access Denined');
       }
       const errorMessage = error?.response?.data?.message;
       if (

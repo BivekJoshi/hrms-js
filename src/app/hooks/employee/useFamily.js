@@ -31,6 +31,26 @@ export const useAddFamily = ({ onSuccess }) => {
         });
 };
 
+
+
+{/*________________________POST_____________________________________*/ }
+export const  = ({ onSuccess }) => {
+    const queryClient = useQueryClient();
+     const { id } = useParams();
+    return useMutation(['addFamily'],
+        (formData) => addfamily(formData, id),
+        {
+            onSuccess: (data, variables, context) => {
+                toast.success(`Successfully added family member`);
+                onSuccess && onSuccess(data, variables, context);
+                queryClient.invalidateQueries('getEmployeeById');
+            },
+            onError: (err, _variables, _context) => {
+                toast.error(`error: ${err.message}`);
+            },
+        });
+};
+
 {/*________________________GETBYID_____________________________________*/ }
 export const useGetFammilyById = (id) => {
     return useQuery(['getFamilyById', id], () => getFamilyById(id), {
