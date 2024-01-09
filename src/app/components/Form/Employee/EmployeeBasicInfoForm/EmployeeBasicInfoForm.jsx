@@ -481,13 +481,14 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           ))}
         </TextField>
       </Grid> */}
-      <Grid item xs={12} sm={6} md={4}>
+      <Grid item xs={12} sm={12} md={8}>
         <TextField
           id='remarks'
           name='remarks'
           label='Remarks'
           placeholder='Enter remarks'
           fullWidth
+          multiline
           // required
           value={formik.values.remarks}
           onChange={formik.handleChange}
@@ -497,6 +498,9 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           InputLabelProps={{
             shrink: Boolean(formik.values.remarks),
           }}
+          // inputProps={{
+          //   maxLength: 255,
+          // }}
         />
       </Grid>
     </Grid>

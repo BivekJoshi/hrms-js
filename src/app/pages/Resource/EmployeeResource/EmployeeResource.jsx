@@ -54,14 +54,38 @@ const EmployeeResource = ({ permissions }) => {
     },
     {
       title: 'Employee Name',
-      field: 'employee.firstName',
-      emptyValue: '-',
+      field: 'employeeName',
+      
+      render: (rowData) => {
+        const name = rowData?.employee?.firstName + " " + rowData?.employee?.middleName + " " +  rowData?.employee?.lastName
+        return name ? name : "-"
+      },
+      // emptyValue: '-',
+      // render: (rowData) => {
+      //   return <p>{getEmployeeName(rowData)} </p>;
+      // },
+      // customFilterAndSearch: (searchValue, rowData) => {
+      //   const employeeName = getEmployeeName(rowData);
+      //   return employeeName.toLowerCase().includes(searchValue.toLowerCase());
+      // },
       sorting: false,
     },
     {
       title: 'Resource',
-      field: 'officeResource.name',
-      emptyValue: '-',
+      field: 'officeResourceName',
+      render: (rowData) => {
+        const resource = rowData?.officeResource?.name;
+        // const name = rowData?.employee?.firstName + " " + rowData?.employee?.middleName + " " +  rowData?.employee?.lastName
+        return resource ? resource : "-"
+      },
+      // emptyValue: '-',
+      // render: (rowData) => {
+      //   return <p>{getResourceName(rowData)}</p>;
+      // },
+      // customFilterAndSearch: (searchValue, rowData) => {
+      //   const resourceName = getResourceName(rowData);
+      //   return resourceName.toLowerCase().includes(searchValue.toLowerCase());
+      // },
       sorting: false,
     },
     {

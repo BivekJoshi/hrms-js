@@ -195,6 +195,8 @@ export const EditEmployeeActivateFields = ({ onClose, isLoading, data }) => {
     return employeeId;
   };
 
+  const currentDate = new Date().toISOString().split("T")[0];
+
   return (
     !isLoading && (
       <Grid container spacing={3}>
@@ -225,6 +227,10 @@ export const EditEmployeeActivateFields = ({ onClose, isLoading, data }) => {
             }
             variant='outlined'
             InputLabelProps={{ shrink: true }}
+            // inputProps={{
+            //   max: currentDate, // Disable past date selections
+            //   min: currentDate,
+            // }}
           />
         </Grid>
         <Grid item xs={12} sm={12}>

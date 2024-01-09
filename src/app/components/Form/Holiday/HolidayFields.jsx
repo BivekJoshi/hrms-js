@@ -20,6 +20,7 @@ const HolidayFields = ({ formik }) => {
             placeholder='Enter holiday name'
             fullWidth
             required
+            multiline
             value={formik.values.holidayName}
             onChange={formik.handleChange}
             error={

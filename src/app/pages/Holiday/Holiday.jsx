@@ -104,6 +104,7 @@ const Holiday = ({ permissions }) => {
                 <ButtonComponent
                   variant="contained"
                   OnClick={handleFormSubmit}
+                  color={"#fff"}
                   sx={{ mt: 3, ml: 1, color: "#fff" }}
                   buttonName={"Add Holiday"}
                 />
@@ -112,6 +113,7 @@ const Holiday = ({ permissions }) => {
                   OnClick={handleCloseModal}
                   sx={{ mt: 3, ml: 1 }}
                   BGColor={"#d32f2f"}
+                  color={"#fff"}
                   buttonName={"Cancel"}
                 />
               </Grid>

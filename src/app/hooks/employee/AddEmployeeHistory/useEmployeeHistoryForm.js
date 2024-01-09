@@ -23,7 +23,7 @@ const useEmployeeHistoryForm = () => {
       fromDate: empHistory?.fromDate || '',
       toDate: empHistory?.toDate || '',
       description: empHistory?.description || '',
-      remarks: empHistory?.remarks || '',
+      // remarks: empHistory?.remarks || '',
     }));
 
   const formik = useFormik({
@@ -39,7 +39,7 @@ const useEmployeeHistoryForm = () => {
                 fromDate: '',
                 toDate: '',
                 description: '',
-                remarks: '',
+                // remarks: '',
               },
             ],
     },

@@ -152,6 +152,7 @@ const EmployeeMapping = () => {
         isLoading={isLoading}
         exportButton={true}
         actions={actions}
+        singleAction={true}
       />
       {openEditModal && (
         <EditDataModal

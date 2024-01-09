@@ -17,6 +17,7 @@ const EditEmployeeSchema = Yup.object().shape({
   panNumber: Yup.string().matches(/^[0-9\/-]+$/, "Enter valid pan number"),
   officeEmail: Yup.string().required("Official email is required"),
   maritalStatus: Yup.string().required("Marital status is required"),
+  remarks: Yup.string().max(255, "Remarks cannot be greater than 255 characters")
   // branchId: Yup.string().required("Branch name is required"),
   // positionId: Yup.string().required("Position is required"),
   // departmentId: Yup.string().required("Department is required"),
