@@ -52,7 +52,7 @@ const CompanyTableView = ({
       title: 'Description',
       field: 'branchDescription',
       emptyValue: '-',
-      width: '10vh',
+      // width: '10vh',
       render: (rowData) => {
         return (
           <Tooltip
@@ -64,7 +64,7 @@ const CompanyTableView = ({
               style={{
                 overflow: 'hidden',
                 textOverflow: 'ellipsis',
-                width: '8rem',
+                width: '20rem',
               }}
             >
               {rowData?.branchDescription}
