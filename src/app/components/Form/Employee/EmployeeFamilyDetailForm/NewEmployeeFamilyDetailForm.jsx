@@ -63,7 +63,7 @@ const NewEmployeeFamilyDetailForm = () => {
       id: "actions",
       label: "Actions",
       minWidth: 50,
-      align: "right",
+      align: "center",
       render: () => {
         return <div>TEst</div>;
       },
