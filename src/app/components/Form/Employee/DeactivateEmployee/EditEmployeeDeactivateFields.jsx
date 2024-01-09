@@ -202,7 +202,7 @@ export const EditEmployeeActivateFields = ({ onClose, isLoading, data }) => {
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
           <Typography variant='h6'>
-            Do you really want to Activate employee ?
+            Do you really want to activate employee ?
             <b> {getEmployeeName(id)}</b>
           </Typography>
         </Grid>
@@ -227,10 +227,10 @@ export const EditEmployeeActivateFields = ({ onClose, isLoading, data }) => {
             }
             variant='outlined'
             InputLabelProps={{ shrink: true }}
-            // inputProps={{
-            //   max: currentDate, // Disable past date selections
-            //   min: currentDate,
-            // }}
+            inputProps={{
+              // max: currentDate, // Disable past date selections
+              min: currentDate,
+            }}
           />
         </Grid>
         <Grid item xs={12} sm={12}>

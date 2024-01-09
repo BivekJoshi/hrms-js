@@ -4,7 +4,7 @@ const CompanySchema = Yup.object().shape({
   branchName: Yup.string()
     .required("Branch name is required")
     .min(3, "Branch name must be at least 3 characters")
-    .max(25, "Branch name cannot be greater than 25 characters")
+    .max(50, "Branch name cannot be greater than 50 characters")
     .matches(/^[^0-9]*$/, "Branch name cannot contain numbers"),
   branchEmail: Yup.string()
     .required("Branch email is required")

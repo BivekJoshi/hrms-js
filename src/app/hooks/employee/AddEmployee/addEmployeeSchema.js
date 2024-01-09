@@ -18,7 +18,7 @@ const AddEmployeeSchema = Yup.object().shape({
   citizenshipNumber: Yup.string()
     .matches(/^[0-9\/-]+$/, "Enter valid citizenship number")
     .required("Citizenship number is required").max(25, "Citizenship cannot be greater than 25 characters"),
-  panNumber: Yup.string().matches(/^[0-9\/-]+$/, "Enter valid pan number").max(25, "Pan number cannot be greater than 25 characters"),
+  panNumber: Yup.string().matches(/^[0-9\/-]+$/, "Enter valid pan number").max(25, "Pan number cannot be greater than 25 numbers"),
   officeEmail: Yup.string()
     .required("Office email is required")
     .max(50, "Office email cannot be greater than 50 characters")
