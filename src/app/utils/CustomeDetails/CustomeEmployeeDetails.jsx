@@ -51,6 +51,7 @@ const CustomeEmployeeDetails = ({
 
   const handleCloseAddModal = () => {
     setOpenAddModal(false);
+    setSelectedRowId();
     formik.setValues({});
   };
 
