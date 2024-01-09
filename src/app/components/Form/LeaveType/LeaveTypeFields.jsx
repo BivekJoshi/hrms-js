@@ -112,15 +112,19 @@ const LeaveTypeFields = ({ onClose, isLoading, data, existingLeaveTypes }) => {
               InputLabelProps={{ shrink: true }}
               size="small"
             >
-              {filteredLeaveNames.map((option) => (
-                <MenuItem
-                  key={option.value}
-                  value={option.value}
-                  sx={mode === "light" ? "" : { bgcolor: "#413e3e" }}
-                >
-                  {option.label}
-                </MenuItem>
-              ))}
+              {filteredLeaveNames.length === 0 ? (
+                <MenuItem disabled>No remaining leave options</MenuItem>
+              ) : (
+                filteredLeaveNames.map((option) => (
+                  <MenuItem
+                    key={option.value}
+                    value={option.value}
+                    sx={mode === "light" ? "" : { bgcolor: "#413e3e" }}
+                  >
+                    {option.label}
+                  </MenuItem>
+                ))
+              )}
             </TextField>
           </Grid>
         )}
@@ -212,14 +216,14 @@ const LeaveTypeFields = ({ onClose, isLoading, data, existingLeaveTypes }) => {
           <Button
             variant="contained"
             onClick={handleFormSubmit}
-            sx={{ mt: 3, ml: 1, textTransform:"capitalize" }}
+            sx={{ mt: 3, ml: 1, textTransform: "capitalize" }}
           >
             {submitButtonText}
           </Button>
           <Button
             variant="contained"
             onClick={onClose}
-            sx={{ mt: 3, ml: 1, textTransform:"capitalize"  }}
+            sx={{ mt: 3, ml: 1, textTransform: "capitalize" }}
             color="error"
           >
             Cancel
