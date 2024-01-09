@@ -93,9 +93,14 @@ const DeactivatedProject = ({ onClick }) => {
             fontSize: "1rem",
             padding: "dense",
             height: 50,
-          },
+          },          
           rowStyle: {
             fontSize: ".8rem",
+          },
+        }}
+        localization={{
+          header: {
+            actions: "Action",
           },
         }}
         actions={actions}

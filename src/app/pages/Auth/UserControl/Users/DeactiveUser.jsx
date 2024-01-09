@@ -15,6 +15,11 @@ const DeactiveUser = () => {
     setOpenDeactivatedModal(true);
   };
 
+  const getRoleLabel = (roleName) => {
+    const role = roleType?.find((role) => role?.name === roleName);
+    return role ? role?.label : '-';
+  };
+
   const columns = [
     {
       title: "SN",
@@ -85,6 +90,7 @@ const DeactiveUser = () => {
         title="Inactive Users"
         isLoading={isLoading}
         actions={actions}
+        singleAction={true}
       />
       {openDeactivatedModal && (
         <EditActivationUserModal
