@@ -1,4 +1,4 @@
-import { Autocomplete, Grid, MenuItem, TextField } from "@mui/material";
+import { Grid, MenuItem, TextField } from "@mui/material";
 import React from "react";
 
 const passedLevel = [
@@ -23,10 +23,6 @@ const passedLevel = [
     label: "Graduate",
   },
 ];
-const years = Array.from(
-  { length: 100 },
-  (_, index) => new Date().getFullYear() - index
-); // Change 100 to adjust the range of available years
 
 const QualificationAddField = ({ formik }) => {
   return (
@@ -46,7 +42,7 @@ const QualificationAddField = ({ formik }) => {
           size="small"
         />
       </Grid>
-      {/* <Grid item xs={12}>
+      <Grid item xs={12}>
         <TextField
           id={`institute`}
           name={`institute`}
@@ -61,40 +57,14 @@ const QualificationAddField = ({ formik }) => {
           variant="outlined"
           size="small"
         />
-      </Grid> */}
+      </Grid>
       <Grid item xs={12}>
-        <Autocomplete
-          options={years}
-          onChange={formik.handleChange}
-          value={formik.values.passedLevel}
-          renderInput={(params) => {
-            return (
-              <TextField
-                {...params}
-                id={`passedLevel`}
-                name={`passedLevel`}
-                label="Passed Year"
-                placeholder="Enter passed level"
-                fullWidth
-                error={
-                  formik.touched.passedLevel && Boolean(formik.errors.passedLevel)
-                }
-                helperText={formik.touched.passedLevel && formik.errors.passedLevel}
-                variant="outlined"
-                size="small"
-              />
-            );
-          }}
-        />
-        </Grid>
-        <Grid item xs={12}>
         <TextField
           id={`passedLevel`}
           name={`passedLevel`}
           label="Passed Level"
           placeholder="Enter passed level"
           fullWidth
-          select
           // required
           value={formik.values.passedLevel}
           onChange={formik.handleChange}
@@ -106,14 +76,9 @@ const QualificationAddField = ({ formik }) => {
           size="small"
         >
           {passedLevel?.map((option) => (
-            <>
-              {/* <MenuItem value="" disabled>
-                Select Level
-              </MenuItem> */}
-              <MenuItem key={option.id} value={option.id}>
-                {option.label}
-              </MenuItem>
-            </>
+            <MenuItem key={option.id} value={option.id}>
+              {option.label}
+            </MenuItem>
           ))}
         </TextField>
       </Grid>
