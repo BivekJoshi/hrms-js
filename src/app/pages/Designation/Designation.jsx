@@ -6,7 +6,7 @@ import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import {
   useDeleteDesignation,
   useGetDesignation,
-} from "../../hooks/designation/useDesignation";
+} from '../../hooks/designation/useDesignation';
 import {
   AddDesignationModal,
   EditDesignationModal,
@@ -40,7 +40,7 @@ const Designation = ({ permissions }) => {
     setOpenDeleteModal(true);
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (isDeleteSuccess) {
       setOpenDeleteModal(false);
     }
@@ -57,37 +57,37 @@ const Designation = ({ permissions }) => {
 
   const columns = [
     {
-      title: "SN",
+      title: 'SN',
       render: (rowData) => rowData.tableData.id + 1,
-      maxWidth: "1px",
+      maxWidth: '1px',
       sortable: false,
       sorting: false,
     },
     {
-      title: "Designation Name",
-      field: "positionName",
-      emptyValue: "-",
+      title: 'Designation Name',
+      field: 'positionName',
+      emptyValue: '-',
       width: 200,
       sorting: false,
     },
     {
-      title: "Designation Level",
-      field: "positionLevel",
-      emptyValue: "-",
+      title: 'Designation Level',
+      field: 'positionLevel',
+      emptyValue: '-',
       width: 200,
       sorting: false,
     },
     {
-      title: "Salary",
-      field: "salary",
-      emptyValue: "-",
+      title: 'Salary',
+      field: 'salary',
+      emptyValue: '-',
       width: 80,
       sorting: false,
     },
     {
-      title: "Details",
-      field: "positionDetails",
-      emptyValue: "-",
+      title: 'Details',
+      field: 'positionDetails',
+      emptyValue: '-',
       sorting: false,
     },
   ].filter(Boolean);
@@ -121,7 +121,7 @@ const Designation = ({ permissions }) => {
       ),
       disabled: !permissions?.canDelete,
 
-      tooltip: "Delete",
+      tooltip: 'Delete',
       onClick: (event, rowData) => handleDeleteDesignation(rowData),
     },
   ];
@@ -129,27 +129,27 @@ const Designation = ({ permissions }) => {
 
   return (
     <>
-      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+      <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
         <HocButton
           permissions={permissions?.canAdd}
-          color={"white"}
-          variant={"contained"}
+          color={'white'}
+          variant={'contained'}
           onClick={handleAddOpenModal}
-          buttonName={"+ Add Designation"}
+          buttonName={'+ Add Designation'}
         />
       </Box>
       <br />
       <CustomTable
         columns={columns}
         data={designationData}
-        title="Designation List"
+        title='Designation List'
         isLoading={isLoading}
         actions={actions}
       />
 
       {openEditModal && (
         <EditDesignationModal
-          title={"Edit Designation"}
+          title={'Edit Designation'}
           // id={editedDesignation?.id}
           data={editedDesignation}
           open={openEditModal}
@@ -158,7 +158,7 @@ const Designation = ({ permissions }) => {
       )}
       {openAddModal && (
         <AddDesignationModal
-          title={"Add Designation"}
+          title={'Add Designation'}
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
         />
@@ -168,7 +168,7 @@ const Designation = ({ permissions }) => {
           open={openDeleteModal}
           handleCloseModal={handleCloseDeleteModal}
           handleConfirmDelete={handleConfirmDelete}
-          message={"Designation"}
+          message={'Designation'}
         />
       )}
     </>
