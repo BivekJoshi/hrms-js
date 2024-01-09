@@ -29,6 +29,7 @@ const HolidayFields = ({ formik }) => {
             helperText={formik.touched.holidayName && formik.errors.holidayName}
             variant='outlined'
             size="small"
+            InputLabelProps={{ shrink: true }}
           />
         </Grid>
         <Grid item xs={12} sm={12}>
@@ -58,7 +59,7 @@ const HolidayFields = ({ formik }) => {
             id='holidayDescription'
             name='holidayDescription'
             label='Description'
-            placeholder='Enter your Holiday Description'
+            placeholder='Enter holiday description'
             fullWidth
             multiline
             rows={3}
