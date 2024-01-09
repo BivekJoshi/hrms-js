@@ -76,35 +76,36 @@ const DeactivatedProject = ({ onClick }) => {
         </Grid>
       </div>
       <br />
-      <MaterialTable
-        columns={columns}
-        data={deactivatedProject}
-        title="Inactive Projects"
-        isLoading={isLoading}
-        options={{
-          padding: "dense",
-          margin: 50,
-          pageSize: 20,
-          emptyRowsWhenPaging: false,
-          actionsColumnIndex: -1,
-          headerStyle: {
-            backgroundColor: "#1c7ed6",
-            color: "#FFF",
-            fontSize: "1rem",
+        <MaterialTable
+          columns={columns}
+          data={deactivatedProject}
+          title="Inactive Projects"
+          isLoading={isLoading}
+          options={{
             padding: "dense",
-            height: 50,
-          },          
-          rowStyle: {
-            fontSize: ".8rem",
-          },
-        }}
-        localization={{
-          header: {
-            actions: "Action",
-          },
-        }}
-        actions={actions}
-      />
+            margin: 50,
+            pageSize: 20,
+            emptyRowsWhenPaging: false,
+            actionsColumnIndex: -1,
+            headerStyle: {
+              backgroundColor: "#1c7ed6",
+              color: "#FFF",
+              fontSize: "1rem",
+              padding: "dense",
+              height: 50,
+            },
+            rowStyle: {
+              fontSize: ".8rem",
+            },
+            maxBodyHeight: '35vh',
+          }}
+          localization={{
+            header: {
+              actions: "Action",
+            },
+          }}
+          actions={actions}
+        />
 
       {openActivateModal && (
         <AddProjectActiveModal

@@ -7,7 +7,7 @@ import {
 } from "../useProjectEmployee";
 import { useParams } from "react-router-dom";
 
-export const useProjectEmployeeForm = ({data, onClose}) => {
+export const useProjectEmployeeForm = (data, onClose) => {
   const { id } = useParams();
   const { mutate: addProjectEmployee } = useAddProjectEmployee({});
   const { mutate: editProjectEmployee } = useEditProjectEmployee({});
@@ -38,7 +38,7 @@ export const useProjectEmployeeForm = ({data, onClose}) => {
     addProjectEmployee(values, {
       onSuccess: () => {
         onClose();
-        formik.resetForm();
+        formik.handleReset();        
       },
     });
   };
@@ -48,8 +48,7 @@ export const useProjectEmployeeForm = ({data, onClose}) => {
     editProjectEmployee(values, {
       onSuccess: () => {
         onClose();
-        formik.handleReset();
-        
+        formik.handleReset();        
       },
     });
   };

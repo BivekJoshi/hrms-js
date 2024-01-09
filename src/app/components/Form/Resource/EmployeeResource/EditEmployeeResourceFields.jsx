@@ -49,9 +49,6 @@ const EditEmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
             required
             value={formik.values.returnDate}
             onChange={formik.handleChange}
-            inputProps={{
-              max: currentDate, // Disable past date selections
-            }}
             error={
               formik.touched.returnDate && Boolean(formik.errors.returnDate)
             }
@@ -59,6 +56,9 @@ const EditEmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
             variant="outlined"
             InputLabelProps={{ shrink: true }}
             size="small"
+            inputProps={{
+              min: data?.receiveDate,
+            }}
           />
         </Grid>
         {/* <Grid item xs={12} sm={12}>

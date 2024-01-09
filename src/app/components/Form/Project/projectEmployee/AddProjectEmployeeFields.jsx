@@ -7,17 +7,19 @@ import {
 import ThemeModeContext from "../../../../../theme/ThemeModeContext";
 import { ButtonComponent } from "../../../Button/ButtonComponent";
 
-export const AddprojectEmployeeFields = ( onClose, isLoading ) => {
+export const AddprojectEmployeeFields = ({ onClose, isLoading }) => {
   const { data: employeeData, isLoading: loadingEmployee } = useGetEmployee();
 
   const { formik } = useProjectEmployeeForm(onClose);
 
   const handleFormSubmit = () => {
     if(formik.isValid){
-      formik.handleSubmit();
+      // formik.handleSubmit();
+      onClose();
     }
   };
-
+  const currentDate = new Date().toISOString().split('T')[0];
+console.log(formik, "formik")
   return (
     !loadingEmployee && (
       <Grid container spacing={3}>
@@ -26,18 +28,15 @@ export const AddprojectEmployeeFields = ( onClose, isLoading ) => {
             id="employeeId"
             name="employeeId"
             options={employeeData}
-            getOptionLabel={(option) =>
-              `${option?.firstName} ${option.middleName || ""} ${
-                option?.lastName
-              }`
-            }
+            getOptionLabel={(option) => option?.label }
             value={
               employeeData && employeeData.find(
-                (employee) => employee.id === formik.values.employeeId
+                (employee) => employee.employeeId === formik.values.employeeId
               ) || null
             }
             onChange={(event, newValue) => {
-              formik.setFieldValue("employeeId", newValue?.id || "");
+              console.log(newValue)
+              formik.setFieldValue("employeeId", newValue?.employeeId || "");
             }}
             renderInput={(params) => (
               <TextField
@@ -73,10 +72,13 @@ export const AddprojectEmployeeFields = ( onClose, isLoading ) => {
             helperText={formik.touched.assignedOn && formik.errors.assignedOn}
             variant="outlined"
             InputLabelProps={{ shrink: true }}
+            inputProps={{
+              min: currentDate, // Disable past date selections
+            }}
           />
         </Grid>
 
-        <Grid item xs={12} sm={12}>
+        {/* <Grid item xs={12} sm={12}>
           <TextField
             id="deAssignedOn"
             name="deAssignedOn"
@@ -93,8 +95,11 @@ export const AddprojectEmployeeFields = ( onClose, isLoading ) => {
             }
             variant="outlined"
             InputLabelProps={{ shrink: true }}
+            inputProps={{
+              min: formik.values.assignedOn, // Disable past date selections
+            }}
           />
-        </Grid>
+        </Grid> */}
 
         <Grid
           container
@@ -126,9 +131,11 @@ export const AddprojectEmployeeFields = ( onClose, isLoading ) => {
 
 export const EditProjectEmployeeFields = ({ data, onClose, isLoading }) => {
   const { formik } = useProjectEmployeeForm(data, onClose);
+ 
   const handleFormSubmit = () => {
+    formik.handleSubmit();
     if(formik.isValid){
-      formik.handleSubmit();
+      // onClose();
     }
 
     // if (formik.isValid) {
@@ -141,6 +148,7 @@ export const EditProjectEmployeeFields = ({ data, onClose, isLoading }) => {
     //   onClose();
     // }
   };
+  const currentDate = new Date().toISOString().split('T')[0];
 
   return (
     !isLoading && (
@@ -213,6 +221,9 @@ export const EditProjectEmployeeFields = ({ data, onClose, isLoading }) => {
             helperText={formik.touched.assignedOn && formik.errors.assignedOn}
             variant="outlined"
             InputLabelProps={{ shrink: true }}
+            inputProps={{
+              min: formik.values.assignedOn, // Disable past date selections
+            }}
           />
         </Grid>
 
@@ -233,6 +244,9 @@ export const EditProjectEmployeeFields = ({ data, onClose, isLoading }) => {
             }
             variant="outlined"
             InputLabelProps={{ shrink: true }}
+            inputProps={{
+              min: formik.values.assignedOn, // Disable past date selections
+            }}
           />
         </Grid>
 

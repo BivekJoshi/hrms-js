@@ -85,7 +85,7 @@ const AddEventFields = ({ formik }) => {
             id='eventLocation'
             name='eventLocation'
             label='Event Location'
-            placeholder='Enter your Event Location'
+            placeholder='Enter event location'
             fullWidth
             multiline
             value={formik.values.eventLocation}
@@ -107,7 +107,7 @@ const AddEventFields = ({ formik }) => {
             id='eventDescription'
             name='eventDescription'
             label='Description'
-            placeholder='Enter your Event Description'
+            placeholder='Enter event description'
             fullWidth
             multiline
             value={formik.values.eventDescription}
