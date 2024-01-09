@@ -15,6 +15,7 @@ import DeleteConfirmationModal from '../../components/Modal/DeleteConfirmationMo
 import PermissionHoc from '../../hoc/permissionHoc';
 import HocButton from '../../hoc/hocButton';
 import CustomTable from '../../components/CustomTable/CustomTable';
+import ThemeModeContext from '../../../theme/ThemeModeContext';
 
 const Designation = ({ permissions }) => {
   const { data: designationData, isLoading } = useGetDesignation();

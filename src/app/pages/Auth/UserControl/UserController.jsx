@@ -7,12 +7,31 @@ import TabPanel from '@mui/lab/TabPanel';
 import Roles from "./Roles/Roles";
 import Users from "./Users/Users";
 import PermissionHoc from '../../../hoc/permissionHoc';
+import ThemeModeContext from '../../../../theme/ThemeModeContext';
 
 const UserController = ({ permissions }) => {
   const [value, setValue] = React.useState('1');
+  const { mode, palette } = React.useContext(ThemeModeContext);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+  };
+
+  const labelStyle = {
+    backgroundColor: palette.secondary.main,
+    marginLeft: '.5rem',
+    textTransform: 'none',
+    borderRadius: '.5rem',
+    color: mode === 'light' ? 'black' : 'white',
+    textDecoder: 'none',
+  };
+  const activeLabelStyle = {
+    ...labelStyle,
+    backgroundColor:
+      mode === 'dark' ? palette.text.primary : palette.secondary.light,
+    borderBottom: 'none',
+    textDecoder: 'none',
+    color: mode === 'dark' ? 'black' : 'white',
   };
 
   return (

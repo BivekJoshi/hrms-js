@@ -23,7 +23,7 @@ const CompanyTableView = ({
       title: 'SN',
       render: (rowData) => rowData.tableData.id + 1,
       field: 'tableData.id',
-      width: '3%',
+      width: '6%',
       sortable: false,
       sorting: false,
     },
@@ -31,45 +31,39 @@ const CompanyTableView = ({
       title: 'Branch Name',
       field: 'branchName',
       emptyValue: '-',
-      width: '20vh',
+      width: '80px',
       sorting: false,
     },
     {
       title: 'Branch Address',
       field: 'branchAddress',
       emptyValue: '-',
-      width: '5vh',
+      width: '80px',
       sorting: false,
     },
     {
       title: 'Contact',
       field: 'branchContact',
       emptyValue: '-',
-      width: '10vh',
+      width: '80px',
       sorting: false,
     },
     {
       title: 'Description',
       field: 'branchDescription',
       emptyValue: '-',
-      width: '10vh',
+      width: '120px',
       render: (rowData) => {
-        return (
-          <Tooltip
-            title={rowData?.branchDescription}
-            placement='top-start'
-            arrow
-          >
+        return (          
             <Typography
               style={{
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-                width: '8rem',
+                // overflow: 'hidden',
+                // textOverflow: 'ellipsis',
+                // width: '20rem',
               }}
             >
               {rowData?.branchDescription}
             </Typography>
-          </Tooltip>
         );
       },
     },

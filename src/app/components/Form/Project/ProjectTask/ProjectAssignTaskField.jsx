@@ -9,7 +9,7 @@ import ThemeModeContext from "../../../../../theme/ThemeModeContext";
 const ProjectAssignTaskField = ({ onClose, data }) => {
   const { mode } = useContext(ThemeModeContext);
 
-  const { formik } = useProjectAssignTaskForm({ data });
+  const { formik } = useProjectAssignTaskForm( data, onClose );
   const { id: projectTd } = useParams();
 
   const { data: projectData, isLoading: LoadingProjectEmployeeData } =
@@ -27,7 +27,7 @@ const ProjectAssignTaskField = ({ onClose, data }) => {
   const handleFormSubmit = () => {
     formik.handleSubmit();
     if (formik.isValid) {
-      onClose();
+      // onClose();
     }
   };
 
