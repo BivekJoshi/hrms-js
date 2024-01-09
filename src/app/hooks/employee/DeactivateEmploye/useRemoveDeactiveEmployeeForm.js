@@ -8,8 +8,10 @@ import * as Yup from 'yup';
 
 // Validation schema for removing a deactivated employee
 const removeDeactiveEmployeeSchema = Yup.object().shape({
-  effectiveDate: Yup.date().required("Effective date is required"),
-  terminationType: Yup.string().required("Activation reason is required"),
+  // effectiveDate: Yup.date().required("Effective date is required"),
+  // terminationType: Yup.string().required("Activation reason is required"),
+  effectiveDate: Yup.date().required('Effective date is required'),
+  terminationType: Yup.string().required('Termination Type is required'),
 });
 
 export const useRemoveDeactiveEmployeeForm = (data, onClose) => {

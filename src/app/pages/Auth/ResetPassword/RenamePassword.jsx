@@ -20,6 +20,7 @@ import useAddRenamePasswordForm from "../../../hooks/auth/resetPassword/useAddRe
 import { useLocation, useNavigate } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import InitialPage from "../InitialPage/InitialPage";
+import { toast } from "react-toastify";
 
 function ValidationItem(props) {
   return (
@@ -31,15 +32,15 @@ function ValidationItem(props) {
           sx={{ fontWeight: "90rem", color: "#888888" }}
         >
           {props.validated ? (
-            <>
+            <Grid display="flex" gap={1} alignItems="center">
               <CheckCircleOutlineIcon sx={{ color: "green" }} />
               {props.message}
-            </>
+            </Grid>
           ) : (
-            <>
+            <Grid display="flex" gap={1} alignItems="center">
               <CancelOutlinedIcon sx={{ color: "red" }} />
               {props.message}
-            </>
+            </Grid>
           )}
         </Typography>
       </div>
@@ -76,13 +77,8 @@ const RenamePassword = ({ isLoading }) => {
     handleChangeValidation,
   } = usePasswordValidation();
 
-  const handleFormSubmit = async () => {
-    const isValid = await formik.validateForm();
-    if (isValid) {
-      if (formik.values.password === formik.values.confirmPassword) {
-        formik.handleSubmit();
-      }
-    }
+  const handleFormSubmit =  () => {
+    formik.handleSubmit();
   };
 
   const style = {
@@ -161,7 +157,6 @@ const RenamePassword = ({ isLoading }) => {
                 }
                 helperText={formik.touched.password && formik.errors.password}
                 variant="outlined"
-                
                 type={showValues.showPassword ? "text" : "password"}
                 InputLabelProps={{ shrink: true }}
                 InputProps={{
@@ -205,7 +200,6 @@ const RenamePassword = ({ isLoading }) => {
                   formik.errors.confirmPassword
                 }
                 variant="outlined"
-                
                 type={showConfirmPassword ? "text" : "password"}
                 InputLabelProps={{ shrink: true }}
                 InputProps={{
@@ -240,12 +234,15 @@ const RenamePassword = ({ isLoading }) => {
               <LoadingButton
                 onClick={handleFormSubmit}
                 variant="contained"
-                // sx={{ mt: 5, ml: 1 }}
+                sx={{ textTransform: "capitalize" }}
                 fullWidth
               >
                 Create Password
               </LoadingButton>
-              <Button onClick={handleCancel} sx={{ mt: 3, ml: 1 }}>
+              <Button
+                onClick={handleCancel}
+                sx={{ mt: 3, ml: 1, textTransform: "capitalize" }}
+              >
                 <ArrowBackIcon />
                 Back to your login page
               </Button>

@@ -1,8 +1,8 @@
-import * as React from 'react';
-import { useState } from 'react';
-import { Box } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
-import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
+import * as React from "react";
+import { useState } from "react";
+import { Box } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import {
   useDeleteDesignation,
   useGetDesignation,
@@ -18,7 +18,7 @@ import CustomTable from '../../components/CustomTable/CustomTable';
 
 const Designation = ({ permissions }) => {
   const { data: designationData, isLoading } = useGetDesignation();
-
+  const { palette } = React.useContext(ThemeModeContext);
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
@@ -105,7 +105,7 @@ const Designation = ({ permissions }) => {
         />
       ),
       disabled: !permissions?.canEdit,
-      tooltip: 'Edit Detail',
+      tooltip: "Edit Detail",
       onClick: (event, rowData) => handleEditDesignation(rowData),
     },
     {

@@ -31,23 +31,6 @@ import { debounce } from 'lodash';
 import { useEffect } from 'react';
 import { useCallback } from 'react';
 
-const labelStyle = {
-  backgroundColor: '#EBEDEF',
-  marginLeft: '.5rem',
-  textTransform: 'none',
-  borderRadius: '.5rem',
-  color: 'black',
-  textDecoder: 'none',
-  // fontWeight: "bold",
-};
-const activeLabelStyle = {
-  ...labelStyle,
-  backgroundColor: '#329EF4',
-  borderBottom: 'none',
-  textDecoder: 'none',
-  // fontWeight: "bold",
-};
-
 const Employee = () => {
   const { mode, palette } = React.useContext(ThemeModeContext);
   const [pageNumber, setPageNumber] = useState(0);
