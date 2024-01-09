@@ -107,7 +107,7 @@ const CustomeEmployeeDetails = ({
               </TableRow>
             </TableHead>
             <TableBody>
-              {!isLoading &&
+              {!isLoading && data?.length > 0 ? (
                 data?.map((row) => {
                   return (
                     <TableRow
@@ -160,7 +160,14 @@ const CustomeEmployeeDetails = ({
                       })}
                     </TableRow>
                   );
-                })}
+                })
+              ) : (
+                <TableRow>
+                  <TableCell></TableCell>
+
+                  <TableCell align='center'>No Record Found</TableCell>
+                </TableRow>
+              )}
             </TableBody>
           </Table>
         </TableContainer>
