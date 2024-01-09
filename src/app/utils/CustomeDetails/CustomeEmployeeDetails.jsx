@@ -82,7 +82,7 @@ const CustomeEmployeeDetails = ({
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow>
-                {columns.map((column) => (
+                {columns?.map((column) => (
                   <TableCell
                     key={column.id}
                     align={column.align}
@@ -103,7 +103,7 @@ const CustomeEmployeeDetails = ({
                       tabIndex={-1}
                       key={row.code}
                     >
-                      {columns.map((column) => {
+                      {columns?.map((column) => {
                         const value = row[column.id];
                         if (column?.id === "actions") {
                           return (

@@ -49,7 +49,7 @@ const NewEmployeeFamilyDetailForm = () => {
   const handleDeleteFamily = (familyMember) => {
     if (familyMember?.id) {
       deleteFamilyMutation.mutate(familyMember.id);
-    }
+    }     
   };
   const columns = [
     { id: "name", label: "Name", minWidth: 170 },

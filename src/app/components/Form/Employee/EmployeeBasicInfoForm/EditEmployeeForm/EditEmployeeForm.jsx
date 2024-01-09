@@ -19,6 +19,7 @@ import useEmployeeHistoryForm from '../../../../../hooks/employee/AddEmployeeHis
 import { useAddDocumentForm } from '../../../../../hooks/employee/AddDocument/useAddDocumentForm';
 import { useGetAddressById } from '../../../../../hooks/employee/useAddress';
 import NewEmployeeFamilyDetailForm from '../../EmployeeFamilyDetailForm/NewEmployeeFamilyDetailForm';
+import NewEmployeeHistoryDetailForm from '../../EmployeeHistoryDetailForm/NewEmployeeHistoryDetailForm';
 
 const EditEmployeeForm = () => {
   const { id } = useParams();
@@ -89,7 +90,7 @@ const EditEmployeeForm = () => {
         return <EmployeeBankDetailForm formik={bankFormik} />;
 
       case 5:
-        return <EmployeeHistoryDetailForm formik={employeeHistoryFormik} />;
+        return <NewEmployeeHistoryDetailForm formik={employeeHistoryFormik} />;
 
       case 6:
         return <EmployeeDocumentDetailForm formik={documentFormik} />;

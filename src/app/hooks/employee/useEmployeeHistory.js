@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import {
   addEmpHistory,
   addEmployeeHistory,
@@ -9,16 +9,16 @@ import {
   getEmployeeHistory,
   getEmployeeHistoryById,
   transferEmploymentHistory,
-} from '../../api/employeeHistory/employeeHistory';
-import { useParams } from 'react-router-dom';
-import { toast } from 'react-toastify';
+} from "../../api/employeeHistory/employeeHistory";
+import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 {
   /*________________________GETBYID_____________________________________*/
 }
 export const useGetEmployeeHistoryById = (id) => {
   return useQuery(
-    ['getEmployeeHistoryById', id],
+    ["getEmployeeHistoryById", id],
     () => getEmployeeHistoryById(id),
     {
       refetchInterval: false,
@@ -31,7 +31,7 @@ export const useGetEmployeeHistoryById = (id) => {
   /*________________________GETBY EMPLOYEE HISTORY ID_____________________________________*/
 }
 export const useGetEmployeeHistory = (id) => {
-  return useQuery(['getEmployeeHistory', id], () => getEmployeeHistory(id), {
+  return useQuery(["getEmployeeHistory", id], () => getEmployeeHistory(id), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
@@ -39,7 +39,7 @@ export const useGetEmployeeHistory = (id) => {
 
 export const useGetEmployeeEmployment = (id) => {
   return useQuery(
-    ['getEmployeeEmployment', id],
+    ["getEmployeeEmployment", id],
     () => getEmployeeEmployment(id),
     {
       refetchInterval: false,
@@ -54,20 +54,24 @@ export const useGetEmployeeEmployment = (id) => {
 export const useAddEmployeeHistory = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   const { id } = useParams();
-  return useMutation(
-    ['addEmployeeHistory'],
-    (formData) => addEmployeeHistory(formData, id),
+  const addEmployeeDetails= useMutation(
+    ["addEmployeeHistory"],
+    async (formData) => await addEmployeeHistory(formData, id),
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Successfully added Employee History');
+        toast.success("Successfully added Employee History");
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries('getEmployeeHistoryById');
+        queryClient.invalidateQueries("getEmployeeHistoryById");
       },
       onError: (err, _variables, _context) => {
         toast.error(`error: ${err.message}`);
       },
     }
   );
+  return{
+    addEmployee: addEmployeeDetails.mutate,
+    isSuccess: addEmployeeDetails.isSuccess,
+  }
 };
 
 {
@@ -76,13 +80,13 @@ export const useAddEmployeeHistory = ({ onSuccess }) => {
 export const useDeleteHistory = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(
-    ['deleteEmployeeHistory'],
+    ["deleteEmployeeHistory"],
     (employeeHistoryId) => deleteEmployeeHistory(employeeHistoryId),
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Employee History deleted successfully');
+        toast.success("Employee History deleted successfully");
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries('getEmployeeHistoryById');
+        queryClient.invalidateQueries("getEmployeeHistoryById");
       },
       onError: (err, _variables, _context) => {
         toast.error(`Error: ${err.message}`);
@@ -97,22 +101,26 @@ export const useDeleteHistory = ({ onSuccess }) => {
 export const useEditEmployeeHistory = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   const { id } = useParams();
-  return useMutation(
-    ['editEmployeeHistory'],
-    (formData) => {
-      editEmployeeHistory(formData, id);
+  const mutateEditHistory = useMutation(
+    ["editEmployeeHistory"],
+    async (formData) => {
+      await editEmployeeHistory(formData, id);
     },
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Employee History edited sucessfully');
+        toast.success("Employee History edited sucessfully");
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries('useGetEmployeeHistoryById');
+        queryClient.invalidateQueries("useGetEmployeeHistoryById");
       },
       onError: (err, _variables, _context) => {
         toast.error(`error: ${err.message}`);
       },
     }
   );
+  return {
+    editHistoryMutate: mutateEditHistory.mutate,
+    isSuccess: mutateEditHistory.isSuccess,
+  };
 };
 
 {
@@ -122,13 +130,13 @@ export const useAddEmpHistory = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   const { id } = useParams();
   return useMutation(
-    ['addEmployeeHistory'],
+    ["addEmployeeHistory"],
     (formData) => addEmpHistory(formData, id),
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Successfully added Employee History');
+        toast.success("Successfully added Employee History");
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries('getEmployeeHistory');
+        queryClient.invalidateQueries("getEmployeeHistory");
       },
       onError: (err, _variables, _context) => {
         toast.error(`error: ${err.message}`);
@@ -141,13 +149,13 @@ export const useAddEmploymentHistory = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   const { id } = useParams();
   return useMutation(
-    ['addEmploymentHistory'],
+    ["addEmploymentHistory"],
     (formData) => addEmploymentHistory(formData, id),
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Successfully added Employment Details');
+        toast.success("Successfully added Employment Details");
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries('getEmployeeEmployment');
+        queryClient.invalidateQueries("getEmployeeEmployment");
       },
       onError: (err, _variables, _context) => {
         toast.error(`error: ${err.message}`);
@@ -160,13 +168,13 @@ export const useTransferEmploymentHistory = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   const { id } = useParams();
   return useMutation(
-    ['transferEmploymentHistory'],
+    ["transferEmploymentHistory"],
     (formData) => transferEmploymentHistory(formData, id),
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Successfully transfered');
+        toast.success("Successfully transfered");
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries('getEmployeeEmployment');
+        queryClient.invalidateQueries("getEmployeeEmployment");
       },
     }
   );
