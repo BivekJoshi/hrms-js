@@ -37,9 +37,9 @@ const status = [
     label: 'Pending',
   },
 ];
+
 const ProjectTaskField = ({ onClose, isLoading, data }) => {
-  
-  const { formik } = useProjectTaskForm(data);
+  const { formik } = useProjectTaskForm(data, onClose);
   const { mode } = useContext(ThemeModeContext);
   const { id } = useParams();
 
@@ -47,12 +47,13 @@ const ProjectTaskField = ({ onClose, isLoading, data }) => {
     formik.handleSubmit();
 
     if (formik.isValid) {
-      onClose();
+      // onClose();
     }
   };
+  const currentDate = new Date().toISOString().split('T')[0];
 
   const { data: projectData, isLoading: loadingProject } = useGetProject();
-  const submitButtonText = data ? 'Update Message' : 'Add Message';
+  const submitButtonText = data ? 'Update Task' : 'Add Task';
 
   const ProjectNameField = id ? null : (
     <Grid item xs={12} sm={12}>
@@ -94,7 +95,7 @@ const ProjectTaskField = ({ onClose, isLoading, data }) => {
             id='name'
             name='name'
             label='Task'
-            placeholder='Enter your message...'
+            placeholder='Enter task message...'
             fullWidth
             required
             value={formik.values.name}
@@ -110,9 +111,10 @@ const ProjectTaskField = ({ onClose, isLoading, data }) => {
             id='detail'
             name='detail'
             label='Detail'
-            placeholder='Enter your details'
+            placeholder='Enter task details'
             fullWidth
             required
+            multiline
             value={formik.values.detail}
             onChange={formik.handleChange}
             error={formik.touched.detail && Boolean(formik.errors.detail)}
@@ -188,6 +190,9 @@ const ProjectTaskField = ({ onClose, isLoading, data }) => {
             onChange={formik.handleChange}
             error={formik.touched.dueDate && Boolean(formik.errors.dueDate)}
             helperText={formik.touched.dueDate && formik.errors.dueDate}
+            inputProps={{
+              min: currentDate, // Disable past date selections
+            }}
           />
         </Grid>
 
