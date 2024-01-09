@@ -82,7 +82,6 @@ const QualificationAddField = ({ formik }) => {
           placeholder="Enter passed level"
           fullWidth
           select
-          // required
           value={formik.values.passedLevel}
           onChange={formik.handleChange}
           error={
