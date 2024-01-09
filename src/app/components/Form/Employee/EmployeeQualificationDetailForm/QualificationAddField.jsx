@@ -36,7 +36,7 @@ const QualificationAddField = ({ formik }) => {
         />
       </Grid>
       <Grid item xs={12}>
-        {/* <TextField
+        <TextField
           id={`passedLevel`}
           name={`passedLevel`}
           label="Passed Level"
@@ -51,39 +51,7 @@ const QualificationAddField = ({ formik }) => {
           helperText={formik.touched.passedLevel && formik.errors.passedLevel}
           variant="outlined"
           size="small"
-        /> */}
-        <Grid item xs={12} sm={4}>
-          <TextField
-            id={`passedLevel`}
-            name={`passedLevel`}
-            label="Passed Level"
-            placeholder="Enter your passed level"
-            fullWidth
-            select
-            value={formik.values.passedLevel}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            error={
-              formik.touched.passedLevel && Boolean(formik.errors.passedLevel)
-            }
-            helperText={formik.touched.passedLevel && formik.errors.passedLevel}
-            variant="outlined"
-            size="small"
-            SelectProps={{
-              native: true,
-            }}
-            InputLabelProps={{ shrink: true }}
-          >
-            <option value="" disabled>
-              Select Level
-            </option>
-            {getOptions(index)?.map((option) => (
-              <option key={option?.id} value={option?.label}>
-                {`${option?.label}`}
-              </option>
-            ))}
-          </TextField>
-        </Grid>
+        />
       </Grid>
       <Grid item xs={12}>
         <TextField
