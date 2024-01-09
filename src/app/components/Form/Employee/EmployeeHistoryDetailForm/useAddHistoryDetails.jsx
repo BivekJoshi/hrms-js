@@ -3,6 +3,15 @@ import {
   useAddEmployeeHistory,
   useEditEmployeeHistory,
 } from "../../../../hooks/employee/useEmployeeHistory";
+import * as Yup from "yup";
+
+const HistorySchema = Yup.object().shape({
+  pastPosition: Yup.string().required("Past position is Required"),
+  fromDate: Yup.string().required("From Date is Required"),
+  toDate: Yup.string().required("To Date is Required"),
+  employerName: Yup.string().required("Oraganization Name is Required"),
+  employerAddress: Yup.string().required("Branch Address is Required"),
+});
 
 const useAddHistoryDetails = () => {
   const {
@@ -23,7 +32,7 @@ const useAddHistoryDetails = () => {
         description: "",
         remarks:"",
     },
-    // validationSchema: PositionSchema,
+    validationSchema: HistorySchema,
     onSubmit: (values) => {
       if (values?.id) {
         editHistoryMutate(values, {
