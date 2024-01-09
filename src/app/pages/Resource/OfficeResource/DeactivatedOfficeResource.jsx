@@ -29,7 +29,7 @@ const DeactivatedOfficeResource = ({ closeModal, title }) => {
     {
       title: 'SN',
       render: (rowData) => rowData.tableData.id + 1,
-      width: '3%',
+      width: "8px",
       sorting: false,
     },
     {
@@ -40,27 +40,29 @@ const DeactivatedOfficeResource = ({ closeModal, title }) => {
           {rowData?.name}
         </div>
       ),
-      emptyValue: '-',
+      emptyValue: "-",
+      width: "20px",
       sorting: false,
     },
     {
-      title: 'Identification Number',
-      field: 'uniqueNumber',
-      emptyValue: '-',
-      width: '18.75rem',
+      title: "Identification Number",
+      field: "uniqueNumber",
+      emptyValue: "-",
+      width: "20px",
       sorting: false,
     },
     {
-      title: 'Description',
+      title: "Description",
+      width: "120px",
       render: (rowData) => (
-        <div style={{ overflowWrap: 'break-word', width: '18rem' }}>
+        <Typography style={{ overflowWrap: "break-word", width: '280px' }}>
           {rowData?.description}
-        </div>
+        </Typography>
       ),
       sorting: false,
     },
     {
-      title: 'Actions',
+      title: "Action",
       render: (rowData) => (
         <Tooltip title='Activate Logistic'>
           <IconButton onClick={() => handleActivate(rowData)}>

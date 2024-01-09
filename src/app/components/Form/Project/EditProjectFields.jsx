@@ -230,6 +230,7 @@ const EditProjectFields = ({ onClose, isLoading, data }) => {
           <ButtonComponent
             variant="contained"
             OnClick={handleFormSubmit}
+            color= {'#fff'}
             // sx={{ mt: 3, ml: 1 }}
             buttonName={"Update Project"}
           />

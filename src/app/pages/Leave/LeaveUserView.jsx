@@ -123,12 +123,7 @@ const LeaveUserView = ({ data, isLoading }) => {
       },
     },
     {
-      title: "Approved By",
-      field: "confirmBy.name",
-      width: 120,
-    },
-    {
-      title: "Reason",
+      title: "Employee Remarks",
       field: "leaveReason",
       emptyValue: "-",
       cellStyle: {
@@ -160,6 +155,35 @@ const LeaveUserView = ({ data, isLoading }) => {
           </Tooltip>
         );
       },
+    },
+    {
+      title: 'Approved By',
+      width: '80px',
+      sorting: false,
+      field: "approvedBy",
+      render: (rowData) => {
+        if (rowData?.leaveStatus === "APPROVED") {
+          return <Typography>{rowData.confirmBy?.name}</Typography>;
+        }
+        return "-";
+      },
+    },
+    {
+      title: "Rejected By",
+      width: "80px",
+      sorting: false,
+      field: "approvedBy",
+      render: (rowData) => {
+        if (rowData?.leaveStatus === "REJECTED") {
+          return <Typography>{rowData.confirmBy?.name}</Typography>;
+        }
+        return "-";
+      },
+    },
+    {
+      title: "Remarks",
+      field: "leaveRemarks",
+      width: 120,
     },
   ];
 

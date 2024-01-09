@@ -194,10 +194,10 @@ const ProjectTask = ({ permissions }) => {
           (employee) => employee.employeeId
         );
 
-        const matchedEmployees = employeeData
-          ? employeeData.filter((employee) => employeeIds.includes(employee.id))
-          : [];
-
+        const matchedEmployees = employeeData && employeeData.filter((employee) => {
+          employeeIds.includes(employee?.employeeId)
+        })
+        
         const matchedEmployeeNames = matchedEmployees.map(
           (employee) =>
             `${employee?.firstName} ${employee.middleName || ""} ${
@@ -244,7 +244,12 @@ const ProjectTask = ({ permissions }) => {
       onClick: (event, rowData) => handleEditTask(rowData),
     },
     {
-      icon: () => <DeleteIcon style={{ color: "#d32f2f" }} />,
+      icon: () => <DeleteIcon sx={{
+        color: "black",
+        "&:hover": {
+          color: "red",
+        },
+      }} />,
       disabled: !permissions?.canDelete,
       tooltip: "Delete task",
       onClick: (event, rowData) => handleDeleteTask(rowData),
@@ -281,7 +286,7 @@ const ProjectTask = ({ permissions }) => {
       )}
       {openAssignModal && (
         <AssignProjectTaskModal
-          title={"Edit Task"}
+          title={"Edit Assign Task"}
           id={assignData?.id}
           data={assignData}
           open={openAssignModal}

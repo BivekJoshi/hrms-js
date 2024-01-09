@@ -158,7 +158,8 @@ const NewLogin = () => {
                 variant='outlined'
                 autoFocus
                 autoComplete='username'
-                InputLabelProps={{ shrink: Boolean(formik.values.email) }}
+                // InputLabelProps={{ shrink: Boolean(formik.values.email) }}
+                InputLabelProps={{ shrink: true }}
                 size='small'
               />
               <TextField
@@ -168,6 +169,7 @@ const NewLogin = () => {
                 name='password'
                 autoComplete='current-password'
                 fullWidth
+                // autoFocus
                 size='small'
                 onKeyPress={(ev) => {
                   if (ev.key === 'Enter') {
@@ -183,7 +185,8 @@ const NewLogin = () => {
                 helperText={formik.touched.password && formik.errors.password}
                 type={showValues.showPassword ? 'text' : 'password'}
                 sx={{ minWidth: '10vw', mt: 1 }}
-                InputLabelProps={{ shrink: Boolean(formik.values.password) }}
+                // InputLabelProps={{ shrink: Boolean(formik.values.password) }}
+                InputLabelProps={{ shrink: true }}
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position='end'>
@@ -256,7 +259,7 @@ const NewLogin = () => {
               />
               <span className='login-lines'>
                 <svg
-                  width='400'
+                  width='100%'
                   height='278'
                   viewBox='0 0 400 278'
                   fill='none'

@@ -31,7 +31,7 @@ const BarChatDiagram = ({ data }) => {
     },
     plotOptions: {
       bar: {
-        horizontal: false, // Swap to false to make it vertical
+        horizontal: false,
         dataLabels: {
           position: "top",
         },
@@ -99,6 +99,13 @@ const BarChatDiagram = ({ data }) => {
         type="bar"
         height={300}
       />
+      <style>
+        {`
+          .apexcharts-menu {
+            min-width: 120px;
+          }
+        `}
+      </style>
     </Box>
   );
 };

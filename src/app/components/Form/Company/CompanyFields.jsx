@@ -21,6 +21,7 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
             placeholder="Enter branch name"
             fullWidth
             required
+            multiline
             value={formik.values.branchName}
             onChange={formik.handleChange}
             error={
@@ -40,6 +41,7 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
             placeholder="Enter branch address"
             fullWidth
             required
+            multiline
             value={formik.values.branchAddress}
             onChange={formik.handleChange}
             error={
@@ -103,7 +105,7 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
             placeholder="Enter your Branch Description"
             fullWidth
             multiline
-            rows={3}
+            rows={4}
             value={formik.values.branchDescription}
             onChange={formik.handleChange}
             error={
@@ -116,7 +118,7 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
             }
             variant="outlined"
             InputLabelProps={{ shrink: true }}
-            inputProps={{ maxLength: 250 }}
+            // inputProps={{ maxLength: 250 }}
           />
         </Grid>
         <Grid
