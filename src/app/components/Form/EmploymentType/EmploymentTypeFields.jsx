@@ -55,7 +55,7 @@ const EmploymentTypeFields = ({ onClose, isLoading, data }) => {
             }
             variant='outlined'
             InputLabelProps={{ shrink: true }}
-            inputProps={{ maxLength: 250 }}
+            // inputProps={{ maxLength: 250 }}
           />
         </Grid>
         <Grid

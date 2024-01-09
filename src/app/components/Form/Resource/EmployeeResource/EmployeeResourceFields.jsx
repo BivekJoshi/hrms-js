@@ -31,7 +31,7 @@ const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
   return (
     !isLoading && (
       <Grid container spacing={3}>
-        <Grid item xs={12} sm={12} md={6} lg={6}>
+        <Grid item xs={12} sm={12}>
           {data ? (
             <TextField
               variant="outlined"
@@ -93,7 +93,7 @@ const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
           )}
         </Grid>
 
-        <Grid item xs={12} sm={12} md={6} lg={6}>
+        <Grid item xs={12} sm={12}>
           {data ? (
             <TextField
               variant="outlined"
@@ -149,7 +149,7 @@ const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
           )}
         </Grid>
 
-        <Grid item xs={12} sm={12} md={6} lg={6}>
+        <Grid item xs={12} sm={12}>
           <TextField
             type="date"
             id="receiveDate"
@@ -172,7 +172,7 @@ const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
             size="small"
           />
         </Grid>
-        <Grid item xs={12} sm={12} md={6} lg={6}>
+        <Grid item xs={12} sm={12}>
           <TextField
             id="conditionWhileProvided"
             name="conditionWhileProvided"
