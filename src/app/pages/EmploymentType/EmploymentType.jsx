@@ -78,12 +78,30 @@ const EmploymentType = () => {
 
   const actions = [
     {
-      icon: () => <EditIcon style={{ color: "green" }} />,
+      icon: () => (
+        <EditIcon
+          sx={{
+            color: "black",
+            "&:hover": {
+              color: "green",
+            },
+          }}
+        />
+      ),
       tooltip: "Edit Detail",
       onClick: (event, rowData) => handleEditType(rowData),
     },
     {
-      icon: () => <DeleteIcon style={{ color: "#d32f2f" }} />,
+      icon: () => (
+        <DeleteIcon
+          sx={{
+            color: "black",
+            "&:hover": {
+              color: "red",
+            },
+          }}
+        />
+      ),
       tooltip: "Delete",
       onClick: (event, rowData) => handleDeleteType(rowData),
     },

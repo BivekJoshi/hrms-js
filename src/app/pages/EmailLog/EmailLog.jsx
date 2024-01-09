@@ -94,7 +94,16 @@ const EmailLog = () => {
   // );
   const actions = [
     {
-      icon: () => <RemoveRedEyeOutlinedIcon />,
+      icon: () => (
+        <RemoveRedEyeOutlinedIcon
+          sx={{
+            color: "black",
+            "&:hover": {
+              color: "green",
+            },
+          }}
+        />
+      ),
       tooltip: "View Details",
       onClick: (event, rowData) => handleViewLog(rowData),
     },

@@ -6,14 +6,18 @@ import {
 import SaveIcon from "@material-ui/icons/Save";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import { useState } from "react";
-import { AddProjectTaskModal, AssignProjectTaskModal, EditProjectTaskModal } from "../ProjectModal/ProjectModal";
+import {
+  AddProjectTaskModal,
+  AssignProjectTaskModal,
+  EditProjectTaskModal,
+} from "../ProjectModal/ProjectModal";
 import { Box, Button, Chip, SwipeableDrawer } from "@mui/material";
 import ProjectTaskField from "../../../components/Form/Project/ProjectTask/ProjectTaskFields";
 import DeleteIcon from "@mui/icons-material/Delete";
 import DeleteConfirmationModal from "../../../components/Modal/DeleteConfirmationModal";
 import { useGetEmployee } from "../../../hooks/employee/useEmployee";
 import CustomTable from "../../../components/CustomTable/CustomTable";
-import AssignmentIcon from '@mui/icons-material/Assignment';
+import AssignmentIcon from "@mui/icons-material/Assignment";
 import HocButton from "../../../hoc/hocButton";
 
 const ProjectTask = ({ permissions }) => {
@@ -186,16 +190,21 @@ const ProjectTask = ({ permissions }) => {
       // },
       render: (rowData) => {
         const projectEmployees = rowData?.projectEmployees || [];
-        const employeeIds = projectEmployees.map((employee) => employee.employeeId);
-      
+        const employeeIds = projectEmployees.map(
+          (employee) => employee.employeeId
+        );
+
         const matchedEmployees = employeeData
           ? employeeData.filter((employee) => employeeIds.includes(employee.id))
           : [];
-      
+
         const matchedEmployeeNames = matchedEmployees.map(
-          (employee) => `${employee?.firstName} ${employee.middleName || ""} ${employee?.lastName}`
+          (employee) =>
+            `${employee?.firstName} ${employee.middleName || ""} ${
+              employee?.lastName
+            }`
         );
-      
+
         return matchedEmployeeNames.join(", ");
       },
     },
@@ -203,7 +212,16 @@ const ProjectTask = ({ permissions }) => {
 
   const actions = [
     {
-      icon: () => <AssignmentIcon style={{color: 'green'}} />,
+      icon: () => (
+        <AssignmentIcon
+          sx={{
+            color: "black",
+            "&:hover": {
+              color: "green",
+            },
+          }}
+        />
+      ),
 
       disabled: !permissions?.canAdd,
 
@@ -211,41 +229,26 @@ const ProjectTask = ({ permissions }) => {
       onClick: (event, rowData) => handleAssignTask(rowData),
     },
     {
-      icon: () => <ModeEditOutlineIcon style={{color: 'green'}} />,
+      icon: () => (
+        <ModeEditOutlineIcon
+          sx={{
+            color: "black",
+            "&:hover": {
+              color: "green",
+            },
+          }}
+        />
+      ),
       disabled: !permissions?.canEdit,
       tooltip: "Edit task",
       onClick: (event, rowData) => handleEditTask(rowData),
     },
     {
-      icon: () => <DeleteIcon style={{color: '#d32f2f'}} />,
+      icon: () => <DeleteIcon style={{ color: "#d32f2f" }} />,
       disabled: !permissions?.canDelete,
       tooltip: "Delete task",
       onClick: (event, rowData) => handleDeleteTask(rowData),
     },
-    // {
-    //   icon: () => (
-    //     <HocButton
-    //       permissions={permissions.canAdd}
-    //       icon={<AssignmentIcon />}
-    //     />
-    //   ),
-    //   tooltip: "Assign task",
-    //   onClick: (event, rowData) => handleAssignTask(rowData),
-    // },
-    // {
-    //   icon: () => (
-    //     <HocButton permissions={permissions.canEdit} icon={<ModeEditOutlineIcon />} />
-    //   ),
-    //   tooltip: "Edit task",
-    //   onClick: (event, rowData) => handleEditTask(rowData),
-    // },
-    // {
-    //   icon: () => (
-    //     <HocButton permissions={permissions.canDelete} icon={<DeleteIcon />} />
-    //   ),
-    //   tooltip: "Delete task",
-    //   onClick: (event, rowData) => handleDeleteTask(rowData),
-    // },
   ];
 
   return (
@@ -285,7 +288,7 @@ const ProjectTask = ({ permissions }) => {
           handleCloseModal={() => setOpenAssignModal(false)}
         />
       )}
-       {openEditModal && (
+      {openEditModal && (
         <EditProjectTaskModal
           title={"Edit Task"}
           id={assignData?.id}
@@ -302,8 +305,6 @@ const ProjectTask = ({ permissions }) => {
           message={"Task"}
         />
       )}
-
-    
     </>
   );
 };

@@ -5,27 +5,18 @@ import {
   Button,
   Chip,
   Grid,
-  Stack,
-  Tooltip,
   Typography,
 } from '@mui/material';
-
 import {
-  useDeleteLeave,
   useDeleteLeaveAdmin,
-  useGetLeave,
   useGetleaveOfUser,
 } from '../../hooks/leave/useLeave';
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { AddLeaveModal, EditLeaveModal } from './LeaveModal/LeaveModal';
 import DeleteConfirmationModal from '../../components/Modal/DeleteConfirmationModal';
-import { ButtonComponent } from '../../components/Button/ButtonComponent';
 import ThemeModeContext from '../../../theme/ThemeModeContext';
 import CustomTable from '../../components/CustomTable/CustomTable';
-import { toast } from 'react-toastify';
-import { useLeaveDataSearch } from './Api/LeaveApi';
-import HocButton from '../../hoc/hocButton';
 import PermissionHoc from '../../hoc/permissionHoc';
 import useAuth from '../../../auth/hooks/component/login/useAuth';
 
@@ -276,13 +267,31 @@ const Leave = ({ permissions }) => {
 
   const actions = (isManager || isSuperAdmin) && [
     {
-      icon: () => <ModeEditOutlineIcon style={{ color: 'green' }} />,
-      tooltip: 'Edit Leave',
+      icon: () => (
+        <ModeEditOutlineIcon
+          sx={{
+            color: "black",
+            "&:hover": {
+              color: "green",
+            },
+          }}
+        />
+      ),
+      tooltip: "Edit Leave",
       onClick: (event, rowData) => handleEditLeave(rowData),
     },
     {
-      icon: () => <DeleteIcon style={{ color: '#d32f2f' }} />,
-      tooltip: 'Delete Leave',
+      icon: () => (
+        <DeleteIcon
+          sx={{
+            color: "black",
+            "&:hover": {
+              color: "red",
+            },
+          }}
+        />
+      ),
+      tooltip: "Delete Leave",
       onClick: (event, rowData) => handleDeleteLeave(rowData),
     },
   ];

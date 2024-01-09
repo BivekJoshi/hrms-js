@@ -47,7 +47,10 @@ const Holiday = ({ permissions }) => {
   }, [holidayData]);
 
   const handleCloseModal = () => setOpenAddModal(false);
-  const { formik, holidayId } = useHolidayForm(setOpenSubmitModal, handleCloseModal);
+  const { formik, holidayId } = useHolidayForm(
+    setOpenSubmitModal,
+    handleCloseModal
+  );
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
@@ -128,19 +131,19 @@ const Holiday = ({ permissions }) => {
               <p>Do you like to Email this holiday to Employee.</p>
               <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
                 <ButtonComponent
-                 variant="contained"
-                 sx={{ mt: 3, ml: 1 }}
-                 OnClick={handleEmailButtonClick}
-                 buttonName={"Yes"}
+                  variant="contained"
+                  sx={{ mt: 3, ml: 1 }}
+                  OnClick={handleEmailButtonClick}
+                  buttonName={"Yes"}
                 />
                 <ButtonComponent
-                 variant="contained"
-                 sx={{ mt: 3, ml: 1 }}
-                 OnClick={() => {
-                  setOpenSubmitModal(false);
-                }}
-                 buttonName={"No"}
-                 BGColor={"#d32f2f"}
+                  variant="contained"
+                  sx={{ mt: 3, ml: 1 }}
+                  OnClick={() => {
+                    setOpenSubmitModal(false);
+                  }}
+                  buttonName={"No"}
+                  BGColor={"#d32f2f"}
                 />
                 {/* <Button
                   variant="contained"
