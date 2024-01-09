@@ -11,7 +11,7 @@ const FamilyAddFields = ({ formik }) => {
           label="Name"
           placeholder="Enter Name"
           fullWidth
-          // required
+          required
           value={formik.values.name}
           onChange={formik.handleChange}
           error={formik.touched.name && Boolean(formik.errors.name)}
@@ -24,10 +24,10 @@ const FamilyAddFields = ({ formik }) => {
         <TextField
           id={`relation`}
           relation={`relation`}
-          label="relation"
+          label="Relation"
           placeholder="Enter relation"
           fullWidth
-          // required
+          required
           value={formik.values.relation}
           onChange={formik.handleChange}
           error={formik.touched.relation && Boolean(formik.errors.relation)}
@@ -40,10 +40,10 @@ const FamilyAddFields = ({ formik }) => {
         <TextField
           id={`mobileNumber`}
           mobileNumber={`mobileNumber`}
-          label="mobileNumber"
+          label="Mobile Number"
           placeholder="Enter mobileNumber"
           fullWidth
-          // required
+          required
           value={formik.values.mobileNumber}
           onChange={formik.handleChange}
           error={

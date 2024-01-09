@@ -12,23 +12,13 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import AddFields from "./AddFields";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Backdrop from "@mui/material/Backdrop";
+import ThemeModeContext from "../../../theme/ThemeModeContext";
 
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  boxShadow: 24,
-  px: 4,
-  py: 2,
-};
 const CustomeEmployeeDetails = ({
   formik,
   title,
@@ -39,9 +29,27 @@ const CustomeEmployeeDetails = ({
   renderFeilds,
   handleFormSubmit,
   deleteCallBack,
+  modalWidth,
 }) => {
   const [openAddModal, setOpenAddModal] = useState(false);
   const [selectedRowId, setSelectedRowId] = useState();
+  const { mode } = useContext(ThemeModeContext);
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: modalWidth ? modalWidth : 400,
+    bgcolor: "background.paper",
+    border: "1px solid #808080",
+    borderRadius: 2,
+    boxShadow: 24,
+    px: 4,
+    py: 3,
+    background: mode === "light" ? "" : "#413e3e",
+    color: mode === "light" ? "" : "white",
+    overFlow: "scroll",
+  };
 
   useEffect(() => {
     if (isSubmitSuccess) {
@@ -53,6 +61,7 @@ const CustomeEmployeeDetails = ({
     setOpenAddModal(false);
     setSelectedRowId();
     formik.setValues({});
+    formik.resetForm();
   };
 
   const handleEdit = (row) => {
@@ -168,11 +177,7 @@ const CustomeEmployeeDetails = ({
         >
           <Fade in={openAddModal}>
             <Box sx={style}>
-              <Typography
-                sx={{ mb: 5, textAlign: "center" }}
-                variant="h6"
-                component="h2"
-              >
+              <Typography sx={{ mb: 5, textAlign: "center" }} variant="h6">
                 {selectedRowId ? "Edit" : "Add"} {title}
               </Typography>
               <div style={{ marginTop: "1rem" }}>
