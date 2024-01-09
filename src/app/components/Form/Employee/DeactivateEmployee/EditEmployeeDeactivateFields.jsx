@@ -177,16 +177,8 @@ export const EditEmployeeActivateFields = ({ onClose, isLoading, data }) => {
   };
 
   const getEmployeeName = (employeeId) => {
-    const employee = employeeData?.find(
-      (employee) => employee?.id === employeeId
-    );
-
-    if (employee) {
-      const { firstName, middleName, lastName } = employee;
-      return `${firstName} ${middleName || ""} ${lastName || ""}`.trim();
-    }
-
-    return employeeId;
+    const name = employeeData?.find((d) => d.employeeId === employeeId)?.label;
+    return name;
   };
 
   return (
