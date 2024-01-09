@@ -51,7 +51,6 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
               (employee) => employee?.employeeId === formik.values?.employeeId
             )}
             onChange={(event, value) => {
-              console.log(value);
               formik.setFieldValue("employeeId", value?.employeeId);
             }}
             renderInput={(params) => (

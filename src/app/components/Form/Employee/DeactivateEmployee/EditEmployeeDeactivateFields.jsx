@@ -40,7 +40,7 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
     }
     return employeeId;
   };
-console.log("data", data)
+
   const filePath = data?.employeePhotoPath
     ? DOC_URL + data?.employeePhotoPath
     : data?.gender === 'MALE'
