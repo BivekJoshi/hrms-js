@@ -40,7 +40,6 @@ const QualificationAddField = ({ formik }) => {
     formik.setFieldValue(fileName, event.target.files[0]);
   };
 
-  console.log(formik.values);
   return (
     <Grid container spacing={3}>
       <Grid item xs={12}>
@@ -117,7 +116,9 @@ const QualificationAddField = ({ formik }) => {
       <Grid item xs={12}>
         <Autocomplete
           options={years}
-          onChange={formik.handleChange}
+          onChange={(e, newValue) => {
+            formik.setFieldValue(`passedYear`, newValue);
+          }}
           value={formik.values.passedYear}
           renderInput={(params) => {
             return (
@@ -149,6 +150,7 @@ const QualificationAddField = ({ formik }) => {
           type="file"
           fullWidth
           id="transcript"
+          accept="image/*"
           name="transcript"
           onChange={(e) => handleImageChange("transcript", e)}
         />
@@ -157,6 +159,7 @@ const QualificationAddField = ({ formik }) => {
         <FormLabel component="legend">Upload Character Certificate</FormLabel>
         <Input
           type="file"
+          accept="image/*"
           fullWidth
           id="characterCertificate"
           name="characterCertificate"
@@ -167,6 +170,7 @@ const QualificationAddField = ({ formik }) => {
         <FormLabel component="legend">Upload other Document</FormLabel>
         <Input
           type="file"
+          accept="image/*"
           fullWidth
           id="otherDocument"
           name="otherDocument"

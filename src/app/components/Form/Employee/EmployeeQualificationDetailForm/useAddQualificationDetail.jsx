@@ -15,7 +15,7 @@ const QualificationSchema = Yup.object().shape({
   passedLevel: Yup.string().required("Enter pass level"),
   passedYear: Yup.string()?.nullable().required("Passed year is required"),
   grade: Yup.string()
-    .required("Grade is required")
+    .notRequired()
     .matches(
       /^(100(\.0{1,2})?%?|\d{0,2}(\.\d{1,2})?%?$|^[A-Ea-e](?:[+-])?)(?:\s?[A-Za-z+-])?$/,
       "Enter valid grade, percentage not greater than 100, or a letter grade (A to E) with optional + or - "
@@ -23,15 +23,11 @@ const QualificationSchema = Yup.object().shape({
 });
 
 const useAddQualificationDetails = () => {
-  const {
-    addEmployee: addEmployeemutate,
-    isSuccess: isFormSubmitSuccess,
-  } = useAddQualification({});
+  const { addEmployee: addEmployeemutate, isSuccess: isFormSubmitSuccess } =
+    useAddQualification({});
 
-  const {
-    editQualificationMutate,
-    isSuccess: isEditSuccess,
-  } = useEditQualification({});
+  const { editQualificationMutate, isSuccess: isEditSuccess } =
+    useEditQualification({});
 
   const formik = useFormik({
     initialValues: {
