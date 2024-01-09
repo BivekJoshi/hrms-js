@@ -1,18 +1,29 @@
-import { useFormik } from 'formik';
-import { useAddfamilyMember } from '../../../../hooks/employee/useFamily';
+import { useFormik } from "formik";
+import {
+  useAddfamilyMember,
+  useEditFamily,
+} from "../../../../hooks/employee/useFamily";
 
-const useAddFamilyDetails = (onClose) => {
-  const { mutate } = useAddfamilyMember({});
+const useAddFamilyDetails = () => {
+  const { addEmployee: addEmployeemutate, isSuccess: isFormSubmitSuccess } =
+    useAddfamilyMember({});
+  const { editFamilyMutate, isSuccess: isEditSuccess } = useEditFamily({});
 
   const formik = useFormik({
     initialValues: {
-      name: '',
-      relation: '',
-      mobileNumber: '',
+      name: "",
+      relation: "",
+      mobileNumber: "",
     },
     // validationSchema: PositionSchema,
     onSubmit: (values) => {
-      handleRequest(values);
+      if (values?.id) {
+        editFamilyMutate(values, {
+          onSuccess: () => {
+            formik.handleReset();
+          },
+        });
+      } else handleRequest(values);
     },
   });
 
@@ -20,15 +31,14 @@ const useAddFamilyDetails = (onClose) => {
     values = {
       ...values,
     };
-    mutate(values, {
+    addEmployeemutate(values, {
       onSuccess: () => {
         formik.handleReset();
-        onClose();
       },
     });
   };
 
-  return { formik };
+  return { formik, isFormSubmitSuccess, isEditSuccess };
 };
 
 export default useAddFamilyDetails;
