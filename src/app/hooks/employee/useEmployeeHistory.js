@@ -55,7 +55,7 @@ export const useAddEmployeeHistory = ({ onSuccess }) => {
       onSuccess: (data, variables, context) => {
         toast.success("Successfully added Employee History");
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries("useGetEmployeeHistory");
+        queryClient.invalidateQueries("getEmployeeHistory");
       },
       onError: (err, _variables, _context) => {
         toast.error(`error: ${err.message}`);
@@ -78,7 +78,7 @@ export const useDeleteHistory = ({ onSuccess }) => {
       onSuccess: (data, variables, context) => {
         toast.success("Employee History deleted successfully");
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries("useGetEmployeeHistory");
+        queryClient.invalidateQueries("getEmployeeHistory");
       },
       onError: (err, _variables, _context) => {
         toast.error(`Error: ${err.message}`);
@@ -100,7 +100,7 @@ export const useEditEmployeeHistory = ({ onSuccess }) => {
       onSuccess: (data, variables, context) => {
         toast.success("Employee History edited sucessfully");
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries("useGetEmployeeHistory");
+        queryClient.invalidateQueries("getEmployeeHistory");
       },
       onError: (err, _variables, _context) => {
         toast.error(`error: ${err.message}`);
@@ -143,7 +143,7 @@ export const useAddEmploymentHistory = ({ onSuccess }) => {
       onSuccess: (data, variables, context) => {
         toast.success("Successfully added Employment Details");
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries("getEmployeeEmployment");
+        queryClient.invalidateQueries("getEmployeeHistory");
       },
       onError: (err, _variables, _context) => {
         toast.error(`error: ${err.message}`);
@@ -162,7 +162,7 @@ export const useTransferEmploymentHistory = ({ onSuccess }) => {
       onSuccess: (data, variables, context) => {
         toast.success("Successfully transfered");
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries("getEmployeeEmployment");
+        queryClient.invalidateQueries("getEmployeeHistory");
       },
     }
   );
