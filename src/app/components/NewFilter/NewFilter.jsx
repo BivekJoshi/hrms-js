@@ -9,14 +9,15 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import React from 'react';
+import React, { useContext } from 'react';
 import { useState } from 'react';
 import './NewFilter.css';
 import { Field, Form, Formik } from 'formik';
+import ThemeModeContext from '../../../theme/ThemeModeContext';
 
 const NewFilter = ({ inputField, searchCallBack, validate }) => {
   const [showFilter, setShowFilter] = useState(true);
-
+  const { palette } = useContext(ThemeModeContext);
   const initialValues = inputField.reduce((acc, item) => {
     acc[item.name] = '';
     return acc;
@@ -113,7 +114,7 @@ const NewFilter = ({ inputField, searchCallBack, validate }) => {
         marginBottom: '16px',
         padding: ' 16px',
         borderRadius: '6px',
-        // backgroundColor: "#fafafa",
+        backgroundColor: palette?.background?.default,
       }}
     >
       <Typography variant='h7' mb={1} fontWeight={500}>
