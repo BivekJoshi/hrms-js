@@ -12,7 +12,7 @@ const AddEmployeeHistoryFields = ({ onClose, isLoading }) => {
   return (
     !isLoading && (
       <Grid container spacing={3}>
-        <Grid item xs={12} md={6} lg={6} xl={6} sm={12}>
+        <Grid item xs={12} md={12} sm={12}>
           <TextField
             id="pastPosition"
             name="pastPosition"
@@ -32,7 +32,7 @@ const AddEmployeeHistoryFields = ({ onClose, isLoading }) => {
             size="small"
           />
         </Grid>
-        <Grid item xs={12} md={6} lg={6} xl={6} sm={12}>
+        <Grid item xs={12} md={12} sm={12}>
           <TextField
             id="employerName"
             name="employerName"
@@ -52,7 +52,7 @@ const AddEmployeeHistoryFields = ({ onClose, isLoading }) => {
             size="small"
           />
         </Grid>
-        <Grid item xs={12} md={6} lg={6} xl={6} sm={12}>
+        <Grid item xs={12} md={12} sm={12}>
           <TextField
             id="employerAddress"
             name="employerAddress"
@@ -73,7 +73,7 @@ const AddEmployeeHistoryFields = ({ onClose, isLoading }) => {
             size="small"
           />
         </Grid>
-        <Grid item xs={12} md={6} lg={6} xl={6} sm={12}>
+        <Grid item xs={12} md={6} sm={12}>
           <TextField
             id="fromDate"
             name="fromDate"
@@ -90,7 +90,7 @@ const AddEmployeeHistoryFields = ({ onClose, isLoading }) => {
             size="small"
           />
         </Grid>
-        <Grid item xs={12} md={6} lg={6} xl={6} sm={12}>
+        <Grid item xs={12} md={6} sm={12}>
           <TextField
             id="toDate"
             name="toDate"
@@ -106,6 +106,9 @@ const AddEmployeeHistoryFields = ({ onClose, isLoading }) => {
             variant="outlined"
             InputLabelProps={{ shrink: true }}
             size="small"
+            inputProps={{
+              min: formik?.values?.fromDate, 
+            }}
           />
         </Grid>
 
@@ -113,37 +116,16 @@ const AddEmployeeHistoryFields = ({ onClose, isLoading }) => {
           <TextField
             id="remarks"
             name="remarks"
-            label="Remarks"
+            label="Work Remarks"
             fullWidth
             value={formik.values.remarks}
             onChange={formik.handleChange}
             error={formik.touched.remarks && Boolean(formik.errors.remarks)}
             helperText={formik.touched.remarks && formik.errors.remarks}
-            variant="outlined"
-            InputLabelProps={{ shrink: Boolean(formik.values.remarks) }}
+            variant='outlined'
+            InputLabelProps={{ shrink: true }}
             multiline
-            minRows={1}
-            size="small"
-          />
-        </Grid>
-
-        <Grid item xs={12} md={12} lg={12} xl={12} sm={12}>
-          <TextField
-            id="description"
-            name="description"
-            label="Work Description"
-            fullWidth
-            multiline
-            rows={4}
-            value={formik.values.description}
-            onChange={formik.handleChange}
-            error={
-              formik.touched.description && Boolean(formik.errors.description)
-            }
-            helperText={formik.touched.description && formik.errors.description}
-            variant="outlined"
-            InputLabelProps={{ shrink: Boolean(formik.values.description) }}
-            inputProps={{ maxLength: 250 }}
+            minRows={3}
           />
         </Grid>
 

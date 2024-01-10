@@ -38,11 +38,8 @@ const AddprojectFields = ({ onClose, isLoading }) => {
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
-    if(formik.isValid){
-      // onClose();
-    }
   };
-  const currentDate = new Date().toISOString().split('T')[0];
+  const currentDate = new Date().toISOString().split("T")[0];
   return (
     !isLoading && (
       <Grid container spacing={3}>
@@ -51,7 +48,6 @@ const AddprojectFields = ({ onClose, isLoading }) => {
             id="projectName"
             name="projectName"
             label="Project Name"
-            placeholder="Enter project name"
             fullWidth
             required
             value={formik.values.projectName}
@@ -61,7 +57,7 @@ const AddprojectFields = ({ onClose, isLoading }) => {
             }
             helperText={formik.touched.projectName && formik.errors.projectName}
             variant="outlined"
-            InputLabelProps={{ shrink: true }}
+            InputLabelProps={{ shrink: Boolean(formik.values.projectName) }}
             size="small"
           />
         </Grid>
@@ -72,7 +68,7 @@ const AddprojectFields = ({ onClose, isLoading }) => {
             label="Start Date"
             type="date"
             inputProps={{
-              min: currentDate, // Disable past date selections
+              min: currentDate,
             }}
             fullWidth
             required
@@ -109,26 +105,25 @@ const AddprojectFields = ({ onClose, isLoading }) => {
             id="projectLeadId"
             name="projectLeadId"
             options={employeeData || []}
-            getOptionLabel={(employee) =>
-              employee?.label
-            }
+            getOptionLabel={(employee) => employee?.label}
             value={employeeData?.find(
               (employee) => employee?.employeeId === formik.values?.employeeId
             )}
             onChange={(event, selectedEmployee) => {
               if (selectedEmployee) {
-                formik.setFieldValue("projectLeadId", selectedEmployee.employeeId);
+                formik.setFieldValue(
+                  "projectLeadId",
+                  selectedEmployee.employeeId
+                );
               }
             }}
             renderInput={(params) => (
               <TextField
                 {...params}
                 label="Project Leader"
-                placeholder="Enter User name..."
                 fullWidth
                 required
                 variant="outlined"
-                InputLabelProps={{ shrink: true }}
                 error={
                   formik.touched.employeeId && Boolean(formik.errors.employeeId)
                 }
@@ -136,6 +131,7 @@ const AddprojectFields = ({ onClose, isLoading }) => {
                   formik.touched.employeeId && formik.errors.employeeId
                 }
                 size="small"
+                InputLabelProps={{ shrink:true }}
               />
             )}
           />
@@ -155,7 +151,7 @@ const AddprojectFields = ({ onClose, isLoading }) => {
             error={formik.touched.companyId && Boolean(formik.errors.companyId)}
             helperText={formik.touched.companyId && formik.errors.companyId}
             variant="outlined"
-            InputLabelProps={{ shrink: true }}
+            InputLabelProps={{ shrink: Boolean(formik.values.companyId) }}
             size="small"
           >
             {!loadingCompany &&

@@ -10,14 +10,16 @@ import CustomTable from '../../../../../components/CustomTable/CustomTable';
 import { useGetEmployeeHistory } from '../../../../../hooks/employee/useEmployeeHistory';
 import { AddEmployeeHistory } from './EmployeeHistoryModal';
 
-const EmployeeHistory = ({data, role}) => {
+const EmployeeHistory = ({ data, role }) => {
   // const { isSuperAdmin, isAdmin, isHr, isEmployee, isHrAdmin, isManager } =
   //   useAuth();
   // const { data: loggedInUserData, isLoading: isLoadingUserData } = isEmployee
   //   ? useGetLoggedInUserInfo()
   //   : {};
   const { id } = useParams();
-  const { data: employeeHistory, isLoading } = role ? useGetEmployeeHistory(id) : useGetEmployeeHistory(data?.id);
+  const { data: employeeHistory, isLoading } = role
+    ? useGetEmployeeHistory(id)
+    : useGetEmployeeHistory(data?.id);
   // const { data: designationData, isLoading: loadingDesignation } =
   //   useGetDesignation();
   // const { data: trainingData } = useGetTrainingByEmpId(id);
@@ -82,52 +84,46 @@ const EmployeeHistory = ({data, role}) => {
       emptyValue: '-',
       width: 200,
     },
-    {
-      title: 'description',
-      field: 'description',
-      emptyValue: '-',
-      width: 50,
-    },
   ];
 
   return (
-   <>
-    <Box className='tableIcon'>
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'flex-end',
-          paddingBottom: '10px',
-        }}
-      >
-        {role ? (
-          <Button
-            variant='contained'
-            sx={{ mt: 3, ml: 1 }}
-            onClick={handleAddOpenModal}
-          >
-            + Add Work History
-          </Button>
-        ) : (
-          ''
+    <>
+      <Box className='tableIcon'>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'flex-end',
+            paddingBottom: '10px',
+          }}
+        >
+          {role ? (
+            <Button
+              variant='contained'
+              sx={{ mt: 3, ml: 1 }}
+              onClick={handleAddOpenModal}
+            >
+              + Add Work History
+            </Button>
+          ) : (
+            ''
+          )}
+        </Box>
+
+        <CustomTable
+          columns={columns}
+          data={employeeHistory}
+          title='Work History'
+          isLoading={isLoading}
+        />
+
+        {openAddModal && (
+          <AddEmployeeHistory
+            title={'Add Work History'}
+            open={openAddModal}
+            handleCloseModal={handleCloseAddModal}
+          />
         )}
       </Box>
-
-      <CustomTable
-        columns={columns}
-        data={employeeHistory}
-        title='Work History'
-        isLoading={isLoading}
-      />
-
-      {openAddModal && (
-        <AddEmployeeHistory
-          title={'Add Work History'}
-          open={openAddModal}
-          handleCloseModal={handleCloseAddModal}
-        />
-      )}
-    </Box>
     </>
   );
 };

@@ -94,7 +94,7 @@ export const useAddLeaveByAdmin = ({ onSuccess }) => {
 
         queryClient.invalidateQueries({
           predicate: (query) => {
-            return ['getLeave', 'getLeaveOfUser'];
+            return ['getLeave', 'getpendingleave'];
           },
         });
       },
@@ -141,7 +141,11 @@ export const useDeleteLeaveAdmin = ({ onSuccess }) => {
     onSuccess: (data, variables, context) => {
       toast.success('Successfully deleted Leave');
       onSuccess && onSuccess(data, variables, context);
-      queryClient.invalidateQueries('getLeave');
+      queryClient.invalidateQueries({
+        predicate: (query) => {
+          return ['getLeave', 'getpendingleave'];
+        },
+      });
     },
   });
 };
@@ -187,6 +191,12 @@ export const useEditLeaveStatusByAdmin = ({ onSuccess }) => {
         toast.success('Successfully edited Leave');
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries('getLeave');
+
+        queryClient.invalidateQueries({
+          predicate: (query) => {
+            return ['getLeave', 'getpendingleave'];
+          },
+        });
       },
     }
   );
