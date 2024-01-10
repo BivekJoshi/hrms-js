@@ -34,25 +34,27 @@ const CustomeEmployeeDetails = ({
   handleFormSubmit,
   deleteCallBack,
   modalWidth,
+  modalHeight,
+  showDocumentImg,
+  renderShowDocumentCell,
 }) => {
   const [openAddModal, setOpenAddModal] = useState(false);
   const [selectedRowId, setSelectedRowId] = useState();
   const { mode } = useContext(ThemeModeContext);
+
   const style = {
     position: "absolute",
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: modalWidth ? modalWidth : 400,
+    width: modalWidth && modalWidth,
     bgcolor: "background.paper",
     border: "1px solid #808080",
     borderRadius: 2,
     boxShadow: 24,
     p: "12px 24px",
-    background: mode === "light" ? "" : "#413e3e",
-    color: mode === "light" ? "" : "white",
-    // height: "100%",
-    overFlow: "scroll",
+    height: modalHeight ? modalHeight : "70vh",
+    overflowY: "auto",
   };
 
   useEffect(() => {
@@ -132,7 +134,9 @@ const CustomeEmployeeDetails = ({
                                 >
                                   <ModeEditOutlineIcon
                                     sx={{
-                                      color: "black",
+                                      color:
+                                        mode !== "dark" ? "black" : "#fcfcfc",
+                                      cursor: "pointer",
                                       "&:hover": {
                                         color: "green",
                                       },
@@ -141,7 +145,9 @@ const CustomeEmployeeDetails = ({
                                   />
                                   <DeleteIcon
                                     sx={{
-                                      color: "black",
+                                      color:
+                                        mode !== "dark" ? "black" : "#fcfcfc",
+                                      cursor: "pointer",
                                       "&:hover": {
                                         color: "red",
                                       },
@@ -160,18 +166,13 @@ const CustomeEmployeeDetails = ({
                           }
                         })}
                       </TableRow>
-                      {showDocumentImg && (
-                        <TableRow>
-                          <TableCell>Test</TableCell>
-                        </TableRow>
-                      )}
+                      {showDocumentImg && renderShowDocumentCell}
                     </>
                   );
                 })
               ) : (
                 <TableRow>
                   <TableCell></TableCell>
-
                   <TableCell align="center">No Record Found</TableCell>
                 </TableRow>
               )}
@@ -204,7 +205,10 @@ const CustomeEmployeeDetails = ({
                   position: "relative",
                 }}
               >
-                <Typography variant="h6">
+                <Typography
+                  variant="h6"
+                  color={mode === "dark" ? "#fcfcfc" : ""}
+                >
                   {selectedRowId ? "Edit" : "Add"} {title}
                 </Typography>
                 <div
@@ -224,6 +228,7 @@ const CustomeEmployeeDetails = ({
                 fileds={renderFeilds}
                 handleFormSubmit={handleFormSubmit}
                 onClose={handleCloseAddModal}
+                selectedRowId={selectedRowId}
               />
             </Box>
           </Fade>
