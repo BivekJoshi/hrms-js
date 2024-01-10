@@ -40,7 +40,6 @@ export const DetailProfile = ({ data, role, setShowPersonalProfile }) => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  const { palette, mode } = useContext(ThemeModeContext);
   const labelStyle = {
     backgroundColor: palette.secondary.main,
     marginLeft: '.5rem',
