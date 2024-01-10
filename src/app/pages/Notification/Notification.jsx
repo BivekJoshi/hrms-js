@@ -1,31 +1,28 @@
-import React, { useState, useRef, useContext } from "react";
-import { Typography, Grow, IconButton, Tooltip } from "@mui/material";
-import { Badge, Box, Menu, MenuItem } from "@mui/material";
-import { MenuList } from "@mui/material";
-import NotificationsIcon from "@mui/icons-material/NotificationsNone";
-import ThemeModeContext from "../../../theme/ThemeModeContext";
-import { EventNotification } from "./Component/EventNotification";
-import { useGetLeave } from "../../hooks/leave/useLeave";
-import useAuth from "../../../auth/hooks/component/login/useAuth";
-import { LeaveNotification } from "./Component/LeaveNotification";
+import React, { useState, useRef, useContext } from 'react';
+import { Typography, Grow, IconButton, Tooltip } from '@mui/material';
+import { Badge, Box, Menu, MenuItem } from '@mui/material';
+import { MenuList } from '@mui/material';
+import NotificationsIcon from '@mui/icons-material/NotificationsNone';
+import ThemeModeContext from '../../../theme/ThemeModeContext';
+import { EventNotification } from './Component/EventNotification';
+import { useGetLeave, useGetPendingLeave } from '../../hooks/leave/useLeave';
+import useAuth from '../../../auth/hooks/component/login/useAuth';
+import { LeaveNotification } from './Component/LeaveNotification';
 
 const Notification = ({ data }) => {
   const { isManager } = useAuth();
 
-  const { data: leaveData,  refetch: refetchLeaveData } = useGetLeave();
+  const { data: leaveData, refetch: refetchLeaveData } = useGetPendingLeave();
   const { mode } = useContext(ThemeModeContext);
 
-  //leave notificationsPJB
-  const pendingLeaveData = isManager
-    ? leaveData?.filter((leave) => leave.leaveStatus === "PENDING")
-    : "";
+  const pendingLeaveData = isManager ? leaveData : [];
 
   const eventCount = isManager
     ? pendingLeaveData?.length + data?.events?.length || 0
     : data?.events?.length || 0;
 
   const filteredEvents = data?.events?.filter(
-    (event) => event.notificationId === "0"
+    (event) => event.notificationId === '0'
   );
 
   const [open, setOpen] = useState(false);
@@ -40,10 +37,10 @@ const Notification = ({ data }) => {
   };
 
   function handleListKeyDown(event) {
-    if (event.key === "Tab") {
+    if (event.key === 'Tab') {
       event.preventDefault();
       setOpen(false);
-    } else if (event.key === "Escape") {
+    } else if (event.key === 'Escape') {
       setOpen(false);
     }
   }
@@ -52,10 +49,10 @@ const Notification = ({ data }) => {
       <IconButton
         ref={anchorRef}
         onClick={handleToggle}
-        style={{ color: "#fff" }}
+        style={{ color: '#fff' }}
       >
-        <Tooltip title="Notifications">
-          <Badge badgeContent={eventCount} color="secondary">
+        <Tooltip title='Notifications'>
+          <Badge badgeContent={eventCount} color='secondary'>
             <NotificationsIcon />
           </Badge>
         </Tooltip>
@@ -67,13 +64,13 @@ const Notification = ({ data }) => {
           onClose={handleClose}
           TransitionComponent={Grow}
           disablePortal
-          sx={{ padding: "0px !important" }}
+          sx={{ padding: '0px !important' }}
         >
           {isManager ? (
             <>
               {pendingLeaveData?.length > 0 ? (
                 <LeaveNotification
-                  Eventname={"Leave Request"}
+                  Eventname={'Leave Request'}
                   data={pendingLeaveData}
                   handleClose={handleClose}
                   onLeaveConfirmation={refetchLeaveData}
@@ -105,23 +102,23 @@ const Notification = ({ data }) => {
           onClose={handleClose}
           TransitionComponent={Grow}
           disablePortal
-          style={{ width: { xs: "30%", lg: "15%" }, marginLeft: "-4rem" }}
+          style={{ width: { xs: '30%', lg: '15%' }, marginLeft: '-4rem' }}
         >
           <MenuList
             autoFocusItem={open}
-            id="composition-menu"
-            aria-labelledby="composition-button"
+            id='composition-menu'
+            aria-labelledby='composition-button'
             onKeyDown={handleListKeyDown}
             sx={{
-              textAlign: "center",
-              width: "100%",
-              padding: "1rem 2rem",
+              textAlign: 'center',
+              width: '100%',
+              padding: '1rem 2rem',
             }}
           >
             <MenuItem>
               <Typography
-                variant="h7"
-                color={mode === "light" ? "primary" : "white"}
+                variant='h7'
+                color={mode === 'light' ? 'primary' : 'white'}
               >
                 No Events For Today!
               </Typography>

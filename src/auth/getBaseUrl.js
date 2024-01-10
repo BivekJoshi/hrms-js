@@ -12,10 +12,7 @@ export const getBaseUrl = () => {
     // return 'http://172.16.16.85:8083/hrms/api/';
     // return 'http://172.16.16.190:8083/hrms/api/'; // bipeen sir
     // return 'http://bipeen:8083/hrms/api/'; //Ajit sir
-    // return 'http://172.16.16.53:8083/hrms/api/'; //Bippen dai 
-
     return 'http://103.94.159.144:8083/hrms/api/';
-
     // return 'https://dgtrade.dghub.io:8080/hrms';
   } else if (envType === 'production') {
     return contextPath() + '/api';

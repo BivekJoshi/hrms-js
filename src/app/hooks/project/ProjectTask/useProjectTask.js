@@ -48,7 +48,7 @@ export const useEditProjectTaskAssign = ({ onSuccess }) => {
     (formData) => editAssignTaskToEmployee(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Successfully edited Company');
+        toast.success('Successfully assigned');
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries('getProjectTask');
       },
@@ -80,7 +80,7 @@ export const useEditCreateTask = ({ onSuccess, taskId }) => {
     (formData) => editProjectCreateTask(formData, taskId),
     {
       onSuccess: (data, variables, context) => {
-        toast.success('SucessFully edited Task');
+        toast.success('Successfully edited Task');
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries('getProjectTask');
       },
