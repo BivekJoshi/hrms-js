@@ -31,16 +31,14 @@ const AddEventFields = ({ formik }) => {
             id='eventName'
             name='eventName'
             label='Event'
-            placeholder='Enter event name'
             fullWidth
-            multiline
             value={formik.values.eventName}
             onChange={formik.handleChange}
             error={formik.touched.eventName && Boolean(formik.errors.eventName)}
             helperText={formik.touched.eventName && formik.errors.eventName}
             variant='outlined'
-            InputLabelProps={{ shrink: true }}
             size='small'
+            InputLabelProps={{ shrink: Boolean(formik.values.eventName) }}
           />
         </Grid>
         <Grid item xs={12} sm={12} md={6}>
@@ -85,9 +83,7 @@ const AddEventFields = ({ formik }) => {
             id='eventLocation'
             name='eventLocation'
             label='Event Location'
-            placeholder='Enter event location'
             fullWidth
-            multiline
             value={formik.values.eventLocation}
             onChange={formik.handleChange}
             error={
@@ -98,7 +94,7 @@ const AddEventFields = ({ formik }) => {
               formik.touched.eventLocation && formik.errors.eventLocation
             }
             variant='outlined'
-            InputLabelProps={{ shrink: true }}
+            InputLabelProps={{ shrink: Boolean(formik.values.eventLocation) }}
             size='small'
           />
         </Grid>
@@ -107,9 +103,9 @@ const AddEventFields = ({ formik }) => {
             id='eventDescription'
             name='eventDescription'
             label='Description'
-            placeholder='Enter event description'
             fullWidth
             multiline
+            rows={4}
             value={formik.values.eventDescription}
             onChange={formik.handleChange}
             error={
@@ -120,7 +116,8 @@ const AddEventFields = ({ formik }) => {
               formik.touched.eventDescription && formik.errors.eventDescription
             }
             variant='outlined'
-            InputLabelProps={{ shrink: true }}
+            InputLabelProps={{ shrink: Boolean(formik.values.eventDescription) }}
+            inputProps={{ maxLength: 250 }}
           />
         </Grid>
       </Grid>

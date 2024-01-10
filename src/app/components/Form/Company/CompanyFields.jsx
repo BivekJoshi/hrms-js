@@ -18,10 +18,8 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
             id="branchName"
             name="branchName"
             label="Branch Name"
-            placeholder="Enter branch name"
             fullWidth
             required
-            multiline
             value={formik.values.branchName}
             onChange={formik.handleChange}
             error={
@@ -29,7 +27,7 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
             }
             helperText={formik.touched.branchName && formik.errors.branchName}
             variant="outlined"
-            InputLabelProps={{ shrink: true }}
+            InputLabelProps={{ shrink: Boolean(formik.values.branchName) }}
             size="small"
           />
         </Grid>
@@ -38,10 +36,8 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
             id="branchAddress"
             name="branchAddress"
             label="Address"
-            placeholder="Enter branch address"
             fullWidth
             required
-            multiline
             value={formik.values.branchAddress}
             onChange={formik.handleChange}
             error={
@@ -52,7 +48,7 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
               formik.touched.branchAddress && formik.errors.branchAddress
             }
             variant="outlined"
-            InputLabelProps={{ shrink: true }}
+            InputLabelProps={{ shrink: Boolean(formik.values.branchAddress) }}
             size="small"
           />
         </Grid>
@@ -61,7 +57,6 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
             id="branchContact"
             name="branchContact"
             label="Contact"
-            placeholder="Enter branch contact"
             fullWidth
             required
             value={formik.values.branchContact}
@@ -74,7 +69,7 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
               formik.touched.branchContact && formik.errors.branchContact
             }
             variant="outlined"
-            InputLabelProps={{ shrink: true }}
+            InputLabelProps={{ shrink: Boolean(formik.values.branchContact) }}
             size="small"
           />
         </Grid>
@@ -83,7 +78,6 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
             id="branchEmail"
             name="branchEmail"
             label="Email"
-            placeholder="Enter branch email"
             fullWidth
             required
             value={formik.values.branchEmail}
@@ -93,7 +87,7 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
             }
             helperText={formik.touched.branchEmail && formik.errors.branchEmail}
             variant="outlined"
-            InputLabelProps={{ shrink: true }}
+            InputLabelProps={{ shrink: Boolean(formik.values.branchEmail) }}
             size="small"
           />
         </Grid>
@@ -102,7 +96,6 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
             id="branchDescription"
             name="branchDescription"
             label="Description"
-            placeholder="Enter your Branch Description"
             fullWidth
             multiline
             rows={4}
@@ -117,8 +110,8 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
               formik.errors.branchDescription
             }
             variant="outlined"
-            InputLabelProps={{ shrink: true }}
-            // inputProps={{ maxLength: 250 }}
+            InputLabelProps={{ shrink: Boolean(formik.values.branchDescription) }}
+            inputProps={{ maxLength: 250 }}
           />
         </Grid>
         <Grid

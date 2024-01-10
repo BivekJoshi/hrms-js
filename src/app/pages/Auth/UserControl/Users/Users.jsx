@@ -43,7 +43,7 @@ const columns = [
   {
     title: "SN",
     render: (rowData) => rowData.tableData.id + 1,
-    width: "3%",
+    maxWidth:'1rem',
     sortable: false,
     sorting: false,
   },
@@ -73,7 +73,7 @@ const columns = [
   {
     title: "Action",
     render: (rowData) => <UserControlAction rowData={rowData} />,
-    width: "1rem",
+    maxWidth:'3rem'
   },
 ];
 

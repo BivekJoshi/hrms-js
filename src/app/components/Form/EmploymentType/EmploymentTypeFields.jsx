@@ -19,7 +19,6 @@ const EmploymentTypeFields = ({ onClose, isLoading, data }) => {
             id="name"
             name="name"
             label="Employment Type name"
-            placeholder="Enter employment type"
             fullWidth
             required
             value={formik.values.name}
@@ -31,8 +30,8 @@ const EmploymentTypeFields = ({ onClose, isLoading, data }) => {
               formik.touched.name && formik.errors.name
             }
             variant='outlined'
-            InputLabelProps={{ shrink: true }}
             size="small"
+            InputLabelProps={{ shrink: Boolean(formik.values.name) }}
           />
         </Grid>
         <Grid item xs={12} sm={12}>
@@ -43,7 +42,7 @@ const EmploymentTypeFields = ({ onClose, isLoading, data }) => {
             placeholder="Enter description"
             fullWidth
             multiline
-            // required
+            rows={4}
             value={formik.values.description}
             onChange={formik.handleChange}
             error={
@@ -54,8 +53,8 @@ const EmploymentTypeFields = ({ onClose, isLoading, data }) => {
               formik.touched.description && formik.errors.description
             }
             variant='outlined'
-            InputLabelProps={{ shrink: true }}
-            // inputProps={{ maxLength: 250 }}
+            InputLabelProps={{ shrink: Boolean(formik.values.description) }}
+            inputProps={{ maxLength: 250 }}
           />
         </Grid>
         <Grid

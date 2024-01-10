@@ -30,7 +30,6 @@ const ChangeEmail = ({permissions}) => {
           id='newEmail'
           name='newEmail'
           label='New Email'
-          placeholder='Enter New Email'
           fullWidth
           required
           value={formik.values.newEmail}
@@ -38,7 +37,7 @@ const ChangeEmail = ({permissions}) => {
           error={formik.touched.newEmail && Boolean(formik.errors.newEmail)}
           helperText={formik.touched.newEmail && formik.errors.newEmail}
           variant='outlined'
-          InputLabelProps={{ shrink: true }}
+          InputLabelProps={{ shrink: Boolean(formik.values.newEmail) }}
           size='small'
         />
       </Grid>
@@ -47,7 +46,6 @@ const ChangeEmail = ({permissions}) => {
           id='confirmEmail'
           name='confirmEmail'
           label='Confirm Email'
-          placeholder='Enter Confirm Email'
           fullWidth
           required
           value={formik.values.confirmEmail}
@@ -57,7 +55,7 @@ const ChangeEmail = ({permissions}) => {
           }
           helperText={formik.touched.confirmEmail && formik.errors.confirmEmail}
           variant='outlined'
-          InputLabelProps={{ shrink: true }}
+          InputLabelProps={{ shrink: Boolean(formik.values.confirmEmail) }}
           size='small'
         />
       </Grid>

@@ -12,13 +12,10 @@ const AddBranchHistoryFields = ({
 }) => {
   const { formik } = useAddBranchHistoryForm(onClose, id);
   const { data: branchData, isLoading: branchLoading } = useGetCompany();
-  console.log('🚀 ~ branchData:', branchData);
+
   const { mode } = useContext(ThemeModeContext);
   const handleFormSubmit = () => {
     formik.handleSubmit();
-    if (formik.isValid) {
-      // onClose();
-    }
   };
 
   return (
@@ -37,8 +34,7 @@ const AddBranchHistoryFields = ({
             error={formik.touched.branchId && Boolean(formik.errors.branchId)}
             helperText={formik.touched.branchId && formik.errors.branchId}
             variant='outlined'
-
-            // size="small"
+            size="small"
           >
             {!branchLoading &&
               branchData?.map((option) => (
@@ -71,6 +67,7 @@ const AddBranchHistoryFields = ({
             }
             variant='outlined'
             InputLabelProps={{ shrink: true }}
+            size="small"
           />
         </Grid>
         <Grid item xs={12} sm={12}>
@@ -85,7 +82,9 @@ const AddBranchHistoryFields = ({
             helperText={formik.touched.remarks && formik.errors.remarks}
             variant='outlined'
             multiline
-            minRows={3}
+            InputLabelProps={{ shrink: Boolean(formik.values.remarks) }}
+            rows={4}
+            inputProps={{ maxLength: 250 }}
           />
         </Grid>
         <Grid

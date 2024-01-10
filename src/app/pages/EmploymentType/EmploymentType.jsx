@@ -64,14 +64,14 @@ const EmploymentType = () => {
       title: "Type Name",
       field: "name",
       emptyValue: "-",
-      width: 200,
+      maxWidth: "140px",
       sorting: false,
     },
     {
       title: "Description",
       field: "description",
       emptyValue: "-",
-      width: 200,
+      width: 400,
       sorting: false,
     },
   ].filter(Boolean);
