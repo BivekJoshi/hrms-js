@@ -8,9 +8,9 @@ const TrainingSchema = Yup.object().shape({
   startDate: Yup.string().required('Start date is required'),
   endDate: Yup.string()
     .required('End date is required')
-    .when('startDate', (startDate, schema) => {
-      return schema.min(startDate, 'End date must not be less than start date');
-    }),
+    // .when('startDate', (startDate, schema) => {
+    //   return schema.min(startDate, 'End date must not be less than start date');
+    // }),
 });
 
 export { TrainingSchema };

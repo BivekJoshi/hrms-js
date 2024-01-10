@@ -12,6 +12,7 @@ import {
 } from "../ProjectModal/ProjectModal";
 import RestoreFromTrashOutlinedIcon from "@mui/icons-material/RestoreFromTrashOutlined";
 import CloseIcon from "@mui/icons-material/Close";
+import ReplayIcon from "@mui/icons-material/Replay";
 
 const DeactivatedProject = ({ onClick }) => {
   const { data: deactivatedProject, isLoading } = useGetDeactivatedProject();
@@ -28,7 +29,7 @@ const DeactivatedProject = ({ onClick }) => {
     {
       title: "SN",
       render: (rowData) => rowData.tableData.index + 1,
-      width: "2%",
+      maxWidth: "1px",
       sortable: false,
       sorting: false,
     },
@@ -36,13 +37,15 @@ const DeactivatedProject = ({ onClick }) => {
       title: "Project Name",
       field: "projectName",
       emptyValue: "-",
+      width: 200,
     },
+    
   ];
 
   const actions = [
     {
       icon: () => (
-        <RestoreFromTrashOutlinedIcon
+        <ReplayIcon
           sx={{
             color: "black",
             "&:hover": {
