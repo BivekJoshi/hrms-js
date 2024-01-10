@@ -91,9 +91,6 @@ export const useAddLeaveByAdmin = ({ onSuccess }) => {
       onSuccess: (data, variables, context) => {
         toast.success('Succesfully added Leave');
         onSuccess && onSuccess(data, variables, context);
-        // queryClient.invalidateQueries({
-        //   queryKey: ['getLeave', 'getLeaveOfUser'],
-        // });
 
         queryClient.invalidateQueries({
           predicate: (query) => {
