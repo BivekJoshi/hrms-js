@@ -70,7 +70,7 @@ const HistoryAddField = ({ formik }) => {
           size='small'
         />
       </Grid>
-      <Grid item xs={12}>
+      <Grid item xs={6}>
         <TextField
           id={`fromDate`}
           name={`fromDate`}
@@ -90,7 +90,7 @@ const HistoryAddField = ({ formik }) => {
           InputLabelProps={{ shrink: true }}
         />
       </Grid>
-      <Grid item xs={12}>
+      <Grid item xs={6}>
         <TextField
           id={`toDate`}
           name={`toDate`}
@@ -118,6 +118,8 @@ const HistoryAddField = ({ formik }) => {
           placeholder='Enter description'
           fullWidth
           // required
+          multiline
+          minRows={3}
           value={formik.values.description}
           onChange={formik.handleChange}
           error={

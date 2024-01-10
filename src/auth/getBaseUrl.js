@@ -14,7 +14,6 @@ export const getBaseUrl = () => {
     // return 'http://bipeen:8083/hrms/api/'; //Ajit sir
     // return 'http://172.16.16.53:8083/hrms/api/'; //Bippen dai 
 
-
     return 'http://103.94.159.144:8083/hrms/api/';
 
     // return 'https://dgtrade.dghub.io:8080/hrms';
