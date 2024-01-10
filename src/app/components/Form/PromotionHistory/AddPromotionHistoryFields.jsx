@@ -39,6 +39,7 @@ const AddPromotionHistoryFields = ({
                 {...params}
                 label='Position Name'
                 fullWidth
+                required
                 error={
                   formik.touched.positionId && Boolean(formik.errors.positionId)
                 }
@@ -46,6 +47,7 @@ const AddPromotionHistoryFields = ({
                   formik.touched.positionId && formik.errors.positionId
                 }
                 variant='outlined'
+                size='small'
               />
             )}
           />
@@ -57,6 +59,7 @@ const AddPromotionHistoryFields = ({
             label='Effective From Date'
             type='date'
             fullWidth
+            required
             value={formik.values.effectiveFromDate}
             onChange={formik.handleChange}
             error={
@@ -69,6 +72,7 @@ const AddPromotionHistoryFields = ({
             }
             variant='outlined'
             InputLabelProps={{ shrink: true }}
+            size='small'
           />
         </Grid>
         <Grid item xs={12} sm={12}>
@@ -84,7 +88,8 @@ const AddPromotionHistoryFields = ({
             helperText={formik.touched.remarks && formik.errors.remarks}
             variant='outlined'
             multiline
-            minRows={3}
+            rows={4}
+            inputProps={{ maxLength: 250 }}
           />
         </Grid>
         <Grid
