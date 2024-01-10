@@ -268,7 +268,7 @@ export const EditEmployeeActivateFields = ({ onClose, isLoading, data }) => {
             renderInput={(params) => (
               <TextField
                 {...params}
-                label='Reason'
+                label=' Reason'
                 placeholder='Select Reason'
                 fullWidth
                 error={
@@ -280,7 +280,7 @@ export const EditEmployeeActivateFields = ({ onClose, isLoading, data }) => {
                   formik.errors.terminationType
                 }
                 variant='outlined'
-                InputLabelProps={{ shrink: true }}
+                // InputLabelProps={{ shrink: true }}
               />
             )}
           />

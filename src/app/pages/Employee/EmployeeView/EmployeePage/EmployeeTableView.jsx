@@ -6,7 +6,11 @@ import CustomTable from "../../../../components/CustomTable/CustomTable";
 
 const EmployeeTableView = ({ employeeData, isLoading }) => {
   const navigate = useNavigate();
-
+  const sortedEmployees = employeeData?.employees?.slice().sort((a, b) => {
+    const nameA = a?.firstName?.toLowerCase() || "";
+    const nameB = b?.firstName?.toLowerCase() || "";
+    return nameA.localeCompare(nameB);
+  });
   const columns = [
     {
       title: "SN",
@@ -99,7 +103,7 @@ const EmployeeTableView = ({ employeeData, isLoading }) => {
   return (
     <CustomTable
       columns={columns}
-      data={employeeData?.employees}
+      data={sortedEmployees}
       title="Employees"
       fileName="Employee-Report.pdf"
       isLoading={isLoading}
