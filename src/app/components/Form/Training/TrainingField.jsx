@@ -4,7 +4,6 @@ import { Button, Grid, TextField } from '@mui/material';
 
 const TrainingField = ({ onClose, isLoading, data, empId }) => {
   const { formik } = useTrainingForm(data, empId, onClose);
-  console.log('🚀 ~ TrainingField ~ formik:', formik);
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
