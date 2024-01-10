@@ -103,6 +103,16 @@ const NewFilter = ({ inputField, searchCallBack, validate }) => {
             onChange={element?.onChange}
           />
         );
+      case 'attendance':
+        return (
+          <TextField
+            name={element?.name}
+            label={element?.label}
+            fullWidth
+            value={element?.value}
+            onChange={(e) => element?.onChange(e.target.value)}
+          />
+        );
 
       default:
         return (
@@ -119,6 +129,8 @@ const NewFilter = ({ inputField, searchCallBack, validate }) => {
   const handleClear = (formikProps) => {
     if (inputField[0]?.type === 'employeeSearch') {
       inputField[0]?.setSearch();
+    } else if (inputField[0]?.type === 'attendance') {
+      inputField[0]?.customClear('');
     } else {
       formikProps?.resetForm();
     }
