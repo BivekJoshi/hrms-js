@@ -5,29 +5,29 @@ import {
   Input,
   MenuItem,
   TextField,
-} from "@mui/material";
-import React from "react";
+} from '@mui/material';
+import React from 'react';
 
 const passedLevel = [
   {
     id: 1,
-    label: "SLC / SEE",
+    label: 'SLC / SEE',
   },
   {
     id: 2,
-    label: "HSEB / NEB",
+    label: 'HSEB / NEB',
   },
   {
     id: 3,
-    label: "Undergraduate",
+    label: 'Undergraduate',
   },
   {
     id: 4,
-    label: "Post Graduate",
+    label: 'Post Graduate',
   },
   {
     id: 5,
-    label: "Graduate",
+    label: 'Graduate',
   },
 ];
 const years = Array.from(
@@ -42,43 +42,43 @@ const QualificationAddField = ({ formik }) => {
 
   return (
     <Grid container spacing={3}>
-      <Grid item xs={12}>
+      <Grid item xs={12} sm={12} md={12}>
         <TextField
           id={`board`}
           name={`board`}
-          label="Board"
-          placeholder="Enter board"
+          label='Board'
+          placeholder='Enter board'
           fullWidth
           value={formik.values.board}
           onChange={formik.handleChange}
           error={formik.touched.board && Boolean(formik.errors.board)}
           helperText={formik.touched.board && formik.errors.board}
-          variant="outlined"
-          size="small"
+          variant='outlined'
+          size='small'
         />
       </Grid>
-      <Grid item xs={12}>
+      <Grid item xs={12} sm={12} md={12}>
         <TextField
           id={`institute`}
           name={`institute`}
-          label="Institude"
-          placeholder="Enter institude"
+          label='Institude'
+          placeholder='Enter institude'
           fullWidth
           // required
           value={formik.values.institute}
           onChange={formik.handleChange}
           error={formik.touched.institute && Boolean(formik.errors.institute)}
           helperText={formik.touched.institute && formik.errors.institute}
-          variant="outlined"
-          size="small"
+          variant='outlined'
+          size='small'
         />
       </Grid>
-      <Grid item xs={12}>
+      <Grid item xs={12} sm={12} md={6}>
         <TextField
           id={`passedLevel`}
           name={`passedLevel`}
-          label="Passed Level"
-          placeholder="Enter passed level"
+          label='Passed Level'
+          placeholder='Enter passed level'
           fullWidth
           select
           // required
@@ -88,8 +88,8 @@ const QualificationAddField = ({ formik }) => {
             formik.touched.passedLevel && Boolean(formik.errors.passedLevel)
           }
           helperText={formik.touched.passedLevel && formik.errors.passedLevel}
-          variant="outlined"
-          size="small"
+          variant='outlined'
+          size='small'
         >
           {passedLevel?.map((option) => (
             <MenuItem key={option.id} value={option.id}>
@@ -98,23 +98,23 @@ const QualificationAddField = ({ formik }) => {
           ))}
         </TextField>
       </Grid>
-      <Grid item xs={12}>
+      <Grid item xs={12} sm={12} md={6}>
         <TextField
           id={`grade`}
           name={`grade`}
-          label="Grade/Percentage"
-          placeholder="Enter grade"
+          label='Grade/Percentage'
+          placeholder='Enter grade'
           fullWidth
           value={formik.values.grade}
           onChange={formik.handleChange}
           error={formik.touched.grade && Boolean(formik.errors.grade)}
           helperText={formik.touched.grade && formik.errors.grade}
-          variant="outlined"
-          size="small"
+          variant='outlined'
+          size='small'
           InputLabelProps={{ shrink: true }}
         />
       </Grid>
-      <Grid item xs={12}>
+      <Grid item xs={12} sm={12} md={12}>
         <Autocomplete
           options={years}
           onChange={(e, newValue) => {
@@ -127,8 +127,8 @@ const QualificationAddField = ({ formik }) => {
                 {...params}
                 id={`passedYear`}
                 name={`passedYear`}
-                label="Passed Year (A.D.)"
-                placeholder="Select your passed year"
+                label='Passed Year (A.D.)'
+                placeholder='Select your passed year'
                 fullWidth
                 error={Boolean(
                   formik.touched.education?.passedYear &&
@@ -138,44 +138,44 @@ const QualificationAddField = ({ formik }) => {
                   formik.touched.education?.passedYear &&
                   formik.errors.education?.passedYear
                 }
-                variant="outlined"
-                size="small"
+                variant='outlined'
+                size='small'
               />
             );
           }}
         />
       </Grid>
       <Grid item xs={12}>
-        <FormLabel component="legend">Upload Transcript</FormLabel>
+        <FormLabel component='legend'>Upload Transcript</FormLabel>
         <Input
-          type="file"
+          type='file'
           fullWidth
-          id="transcript"
-          accept="image/*"
-          name="transcript"
-          onChange={(e) => handleImageChange("transcript", e)}
+          id='transcript'
+          accept='image/*'
+          name='transcript'
+          onChange={(e) => handleImageChange('transcript', e)}
         />
       </Grid>
       <Grid item xs={12}>
-        <FormLabel component="legend">Upload Character Certificate</FormLabel>
+        <FormLabel component='legend'>Upload Character Certificate</FormLabel>
         <Input
-          type="file"
-          accept="image/*"
+          type='file'
+          accept='image/*'
           fullWidth
-          id="characterCertificate"
-          name="characterCertificate"
-          onChange={(e) => handleImageChange("characterCertificate", e)}
+          id='characterCertificate'
+          name='characterCertificate'
+          onChange={(e) => handleImageChange('characterCertificate', e)}
         />
       </Grid>
       <Grid item xs={12}>
-        <FormLabel component="legend">Upload other Document</FormLabel>
+        <FormLabel component='legend'>Upload other Document</FormLabel>
         <Input
-          type="file"
-          accept="image/*"
+          type='file'
+          accept='image/*'
           fullWidth
-          id="otherDocument"
-          name="otherDocument"
-          onChange={(e) => handleImageChange("otherDocument", e)}
+          id='otherDocument'
+          name='otherDocument'
+          onChange={(e) => handleImageChange('otherDocument', e)}
         />
       </Grid>
     </Grid>
