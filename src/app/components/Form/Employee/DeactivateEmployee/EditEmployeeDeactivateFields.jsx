@@ -29,7 +29,9 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
     formik.handleSubmit();
   };
 
-  const fullName = data && (data?.firstName + " " + (data?.middleName || "") + " " + data?.lastName);
+  const fullName =
+    data &&
+    data?.firstName + ' ' + (data?.middleName || '') + ' ' + data?.lastName;
   const getEmployeeName = (employeeId) => {
     const employeeName = employeeData?.find(
       (employee) => employee?.id === employeeId
@@ -47,7 +49,7 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
     ? Male
     : Female;
 
-    const currentDate = new Date().toISOString().split('T')[0];
+  const currentDate = new Date().toISOString().split('T')[0];
 
   return (
     !isLoading && (
@@ -202,7 +204,7 @@ export const EditEmployeeActivateFields = ({ onClose, isLoading, data }) => {
     return employeeId;
   };
 
-  const currentDate = new Date().toISOString().split("T")[0];
+  const currentDate = new Date().toISOString().split('T')[0];
 
   return (
     !isLoading && (
@@ -268,8 +270,7 @@ export const EditEmployeeActivateFields = ({ onClose, isLoading, data }) => {
             renderInput={(params) => (
               <TextField
                 {...params}
-                label=' Reason'
-                placeholder='Select Reason'
+                label='Reason'
                 fullWidth
                 error={
                   formik.touched.terminationType &&
