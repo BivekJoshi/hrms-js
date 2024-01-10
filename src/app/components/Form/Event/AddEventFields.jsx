@@ -110,6 +110,7 @@ const AddEventFields = ({ formik }) => {
             placeholder='Enter event description'
             fullWidth
             multiline
+            minRows={3}
             value={formik.values.eventDescription}
             onChange={formik.handleChange}
             error={
