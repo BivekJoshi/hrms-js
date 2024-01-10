@@ -106,6 +106,9 @@ const AddEmployeeHistoryFields = ({ onClose, isLoading }) => {
             variant="outlined"
             InputLabelProps={{ shrink: true }}
             size="small"
+            inputProps={{
+              min: formik?.values?.fromDate, 
+            }}
           />
         </Grid>
 
