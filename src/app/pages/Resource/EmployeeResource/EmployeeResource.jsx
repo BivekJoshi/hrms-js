@@ -53,24 +53,15 @@ const EmployeeResource = ({ permissions }) => {
       sorting: false,
     },
     {
-      title: "Employee Name",
-      field: "employee",
-      emptyValue: "-",
-      render: (rowData) => {
-        return (
-          <Typography>
-            {rowData.employee.firstName + " "}
-            {rowData.employee.middleName + " " || ""}
-            {rowData.employee.lastName}
-          </Typography>
-        );
-      },
+      title: 'Employee Name',
+      field: 'employee.firstName',
+      emptyValue: '-',
       sorting: false,
     },
     {
-      title: "Resource",
-      field: "officeResource.name",
-      emptyValue: "-",
+      title: 'Resource',
+      field: 'officeResource.name',
+      emptyValue: '-',
       sorting: false,
     },
     {
@@ -80,21 +71,63 @@ const EmployeeResource = ({ permissions }) => {
       sorting: false,
     },
     {
-      title: "Returned Date",
-      field: "returnDate",
-      emptyValue: "-",
+      title: 'Device Condition Before',
+      field: 'conditionWhileProvided',
+      emptyValue: '-',
+      sorting: false,
+    },
+    {
+      title: 'Device Condition Before',
+      field: 'conditionWhileProvided',
+      emptyValue: '-',
+      sorting: false,
+    },
+    {
+      title: 'Returned Date',
+      field: 'returnDate',
+      emptyValue: '-',
+      sorting: false,
+    },
+    {
+      title: 'Device Condition After',
+      field: 'conditionWhileReturned',
+      emptyValue: '-',
+      sorting: false,
+    },
+    {
+      title: 'Remarks',
+      field: 'remarks',
+      emptyValue: '-',
       sorting: false,
     },
   ];
   const actions = [
     {
-      icon: () => <ModeEditOutlineIcon style={{ color: "green" }} />,
+      icon: () => (
+        <ModeEditOutlineIcon
+          sx={{
+            color: "black",
+            "&:hover": {
+              color: "green",
+            },
+          }}
+        />
+      ),
       disabled: !permissions?.canEdit,
       tooltip: "Edit Logistics",
       onClick: (event, rowData) => handleEditRowData(rowData),
     },
     {
-      icon: () => <DeleteIcon style={{ color: "#d32f2f" }} />,
+      icon: () => (
+        <DeleteIcon
+          sx={{
+            color: "black",
+            "&:hover": {
+              color: "red",
+            },
+          }}
+        />
+      ),
       disabled: !permissions?.canDelete,
       tooltip: "Remove Logistics",
       onClick: (event, rowData) => handleDeleteRowData(rowData),

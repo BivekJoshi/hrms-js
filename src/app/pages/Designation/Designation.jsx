@@ -1,10 +1,8 @@
-import * as React from 'react';
-import { useState } from 'react';
-import { Box, Button, Stack } from '@mui/material';
-
-import DeleteIcon from '@mui/icons-material/Delete';
-import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
-
+import * as React from "react";
+import { useState } from "react";
+import { Box } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import {
   useDeleteDesignation,
   useGetDesignation,
@@ -12,11 +10,11 @@ import {
 import {
   AddDesignationModal,
   EditDesignationModal,
-} from './DesignationModal/DesignationModal';
-import DeleteConfirmationModal from '../../components/Modal/DeleteConfirmationModal';
-import PermissionHoc from '../../hoc/permissionHoc';
-import HocButton from '../../hoc/hocButton';
-import CustomTable from '../../components/CustomTable/CustomTable';
+} from "./DesignationModal/DesignationModal";
+import DeleteConfirmationModal from "../../components/Modal/DeleteConfirmationModal";
+import PermissionHoc from "../../hoc/permissionHoc";
+import HocButton from "../../hoc/hocButton";
+import CustomTable from "../../components/CustomTable/CustomTable";
 
 const Designation = ({ permissions }) => {
   const { data: designationData, isLoading } = useGetDesignation();
@@ -34,15 +32,22 @@ const Designation = ({ permissions }) => {
   const handleCloseEditModal = () => setOpenEditModal(false);
   const handleCloseDeleteModal = () => setOpenDeleteModal(false);
 
-  const deleteDesignationMutation = useDeleteDesignation({});
+  const { deleteDesignationMutation, isSuccess: isDeleteSuccess } =
+    useDeleteDesignation({});
+
   const handleDeleteDesignation = (rowData) => {
     setDeletedDesignation(rowData);
     setOpenDeleteModal(true);
   };
 
+  React.useEffect(() => {
+    if (isDeleteSuccess) {
+      setOpenDeleteModal(false);
+    }
+  }, [isDeleteSuccess]);
+
   const handleConfirmDelete = () => {
-    deleteDesignationMutation.mutate(deletedDesignation.id);
-    setOpenDeleteModal(false);
+    deleteDesignationMutation(deletedDesignation.id);
   };
 
   const handleEditDesignation = (rowData) => {
@@ -89,15 +94,31 @@ const Designation = ({ permissions }) => {
 
   const actions = [
     {
-      icon: () => <ModeEditOutlineIcon style={{color: 'green'}} />,
-
+      icon: () => (
+        <ModeEditOutlineIcon
+          sx={{
+            color: "black",
+            "&:hover": {
+              color: "green",
+            },
+          }}
+        />
+      ),
       disabled: !permissions?.canEdit,
-
-      tooltip: 'Edit Detail',
+      tooltip: "Edit Detail",
       onClick: (event, rowData) => handleEditDesignation(rowData),
     },
     {
-      icon: () => <DeleteIcon style={{color: '#d32f2f'}} />,
+      icon: () => (
+        <DeleteIcon
+          sx={{
+            color: "black",
+            "&:hover": {
+              color: "red",
+            },
+          }}
+        />
+      ),
       disabled: !permissions?.canDelete,
 
       tooltip: 'Delete',

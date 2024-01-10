@@ -41,8 +41,17 @@ const DeactivatedProject = ({ onClick }) => {
 
   const actions = [
     {
-      icon: () => <RestoreFromTrashOutlinedIcon style={{color: 'green'}} />,
-      tooltip: 'Activate Project',
+      icon: () => (
+        <RestoreFromTrashOutlinedIcon
+          sx={{
+            color: "black",
+            "&:hover": {
+              color: "green",
+            },
+          }}
+        />
+      ),
+      tooltip: "Activate Project",
       onClick: (event, rowData) => handleActivateProject(rowData),
     },
   ];

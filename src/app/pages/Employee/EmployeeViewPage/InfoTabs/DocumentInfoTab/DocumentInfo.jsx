@@ -100,12 +100,6 @@ const DocumentInfo = ({ data, role }) => {
     setPreviewOpen(true);
   };
 
-  useEffect(() => {
-    if (!isLoading && Object.keys(groupedDocuments)?.length > 0) {
-      setValue(Object.keys(groupedDocuments)[0]);
-    }
-  }, [groupedDocuments]);
-
   const closePreview = () => {
     setPreviewOpen(false);
   };

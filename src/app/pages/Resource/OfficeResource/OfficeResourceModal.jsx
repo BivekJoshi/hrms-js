@@ -1,9 +1,9 @@
-import React from "react";
-import FormModal from "../../../components/Modal/FormModal";
-import OfficeResourceFields from "../../../components/Form/Resource/OfficeResource/OfficeResourceFields";
-import { useGetOfficeResourceById } from "../../../hooks/resource/officeResource/useOfficeResource";
-import EditOfficeResourceActivationFields from "../../../components/Form/Resource/OfficeResource/EditOfficeResourceActivationFields";
-import DeactivatedOfficeResource from "./DeactivatedOfficeResource";
+import React from 'react';
+import FormModal from '../../../components/Modal/FormModal';
+import OfficeResourceFields from '../../../components/Form/Resource/OfficeResource/OfficeResourceFields';
+import { useGetOfficeResourceById } from '../../../hooks/resource/officeResource/useOfficeResource';
+import EditOfficeResourceActivationFields from '../../../components/Form/Resource/OfficeResource/EditOfficeResourceActivationFields';
+import DeactivatedOfficeResource from './DeactivatedOfficeResource';
 
 export const AddOfficeResourceModal = ({ open, handleCloseModal, title }) => {
   return (
@@ -78,7 +78,11 @@ export const DeactivatedOfficeResourceModal = ({
         open={open}
         onClose={handleCloseModal}
         formComponent={
-          <DeactivatedOfficeResource onClose={handleCloseModal} data={data} />
+          <DeactivatedOfficeResource
+            title={title}
+            onClose={handleCloseModal}
+            data={data}
+          />
         }
       />
     </div>

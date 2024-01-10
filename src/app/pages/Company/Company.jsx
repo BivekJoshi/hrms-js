@@ -12,27 +12,14 @@ import PermissionHoc from '../../hoc/permissionHoc';
 import HocButton from '../../hoc/hocButton';
 import { useGetUserRole } from '../../hooks/auth/userControl/useUserControl';
 import { useGetCompany } from '../../hooks/company/useCompany';
-
-const labelStyle = {
-  backgroundColor: '#EBEDEF',
-  marginLeft: '.5rem',
-  textTransform: 'none',
-  borderRadius: '.5rem',
-  color: 'black',
-  textDecoder: 'none',
-};
-const activeLabelStyle = {
-  ...labelStyle,
-  backgroundColor: '#329EF4',
-  borderBottom: 'none',
-  textDecoder: 'none',
-};
+import ThemeModeContext from '../../../theme/ThemeModeContext';
 
 const Company = ({ permissions }) => {
   const [value, setValue] = React.useState('1');
   const [openAddModal, setOpenAddModal] = useState(false);
   const handleAddOpenModal = () => setOpenAddModal(true);
   const handleCloseAddModal = () => setOpenAddModal(false);
+  const { palette, mode } = React.useContext(ThemeModeContext);
   const labelStyle = {
     backgroundColor: palette.secondary.main,
     marginLeft: '.5rem',
@@ -45,7 +32,7 @@ const Company = ({ permissions }) => {
   const activeLabelStyle = {
     ...labelStyle,
     backgroundColor:
-      mode === 'dark' ? palette.text.primary : palette.secondary.main,
+      mode === 'dark' ? palette.text.primary : palette.secondary.light,
     borderBottom: 'none',
     textDecoder: 'none',
     color: mode === 'dark' ? 'black' : 'white',

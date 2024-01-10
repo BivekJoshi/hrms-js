@@ -26,6 +26,10 @@ import './Style/Style.css';
 import ThemeModeContext from '../../../theme/ThemeModeContext';
 import { useGetEmployeeData } from '../../hooks/employee/useEmployee';
 import EmployeeTableView from './EmployeeView/EmployeePage/EmployeeTableView';
+import EmployeeGridView from './EmployeeView/EmployeePage/EmployeeGridView';
+import { debounce } from 'lodash';
+import { useEffect } from 'react';
+import { useCallback } from 'react';
 
 const labelStyle = {
   backgroundColor: '#EBEDEF',
@@ -49,6 +53,7 @@ const Employee = () => {
   const [pageNumber, setPageNumber] = useState(0);
   const [pageSize, setPageSize] = useState(12);
   const [search, setSearch] = useState('');
+  const [debounceValue, setdebounceValue] = useState('');
   const labelStyle = {
     backgroundColor: palette.secondary.main,
     marginLeft: '.5rem',
@@ -61,18 +66,19 @@ const Employee = () => {
   const activeLabelStyle = {
     ...labelStyle,
     backgroundColor:
-      mode === 'dark' ? palette.text.primary : palette.secondary.main,
+      mode === 'dark' ? palette.text.primary : palette.secondary.light,
     borderBottom: 'none',
     textDecoder: 'none',
     color: mode === 'dark' ? 'black' : 'white',
 
     // fontWeight: "bold",
   };
-  const { data: employeeData, isLoading } = useGetEmployeeData(
-    pageNumber,
-    pageSize,
-    search
-  );
+  const {
+    data: employeeData,
+    isLoading,
+    refetch,
+  } = useGetEmployeeData(pageNumber, pageSize, debounceValue);
+
   const handlePageChange = (event, newPage) => {
     setPageNumber(newPage - 1);
     window.scroll(0, 0);
@@ -127,9 +133,27 @@ const Employee = () => {
     formik.handleSubmit();
   };
 
-  const handleFilterChange = (e) => {
+  useEffect(() => {
+    if (debounceValue?.length < 3) {
+      refetch();
+    }
+  }, [debounceValue]);
+
+  const debounceSearch = useCallback(
+    debounce((value) => {
+      if (value.length >= 3) {
+        setdebounceValue(value);
+      } else {
+        setdebounceValue('');
+      }
+    }, 300),
+    []
+  );
+
+  const handleDebounce = (e) => {
     const value = e.target.value;
     setSearch(value);
+    debounceSearch(value);
   };
 
   return (
@@ -172,14 +196,39 @@ const Employee = () => {
               <Button
                 variant='contained'
                 onClick={handleAddOpenModal}
-                sx={{ textTransform: 'none', color: '#fff' }}
+                sx={{ textTransform: 'none' }}
               >
                 + Add Employee
               </Button>
             </Box>
           </Box>
           <TabPanel value='1'>
-            <EmployeeGrid employeeData={employeeData} isLoading={isLoading} />
+            <Grid
+              container
+              sx={{
+                display: 'flex',
+                padding: '16px',
+                borderRadius: '6px',
+                marginBottom: '16px',
+                backgroundColor: palette?.background?.default,
+              }}
+            >
+              <Typography variant='h7' mb={1} fontWeight={500}>
+                Filter By:
+              </Typography>
+              <Grid container spacing={4}>
+                <Grid item xs={5}>
+                  <TextField
+                    label='Filter by name, phone number, and position'
+                    value={search}
+                    onChange={handleDebounce}
+                    fullWidth
+                    size='small'
+                  />
+                </Grid>
+              </Grid>
+            </Grid>
+            <EmployeeGridView employeeData={employeeData} />
           </TabPanel>
           <TabPanel value='2'>
             {/* <EmployeeTable /> */}

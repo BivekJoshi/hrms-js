@@ -1,85 +1,76 @@
-import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import {
   addDesignation,
   deleteDesignation,
   editDesignation,
   getDesignation,
   getDesignationById,
-} from '../../api/designation/designation-api';
-import { toast } from 'react-toastify';
+} from "../../api/designation/designation-api";
+import { toast } from "react-toastify";
 
-{
-  /*________________________GET_____________________________________*/
-}
+/*________________________GET_____________________________________*/
 export const useGetDesignation = () => {
-  return useQuery(['getDesignation'], () => getDesignation(), {
+  return useQuery(["getDesignation"], () => getDesignation(), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
 };
 
-{
-  /*________________________GETBYID_____________________________________*/
-}
+/*________________________GETBYID_____________________________________*/
 export const useGetDesignationById = (id) => {
-  return useQuery(['getDesignationById', id], () => getDesignationById(id), {
+  return useQuery(["getDesignationById", id], () => getDesignationById(id), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
 };
 
-{
-  /*________________________POST_____________________________________*/
-}
+/*________________________POST_____________________________________*/
 export const useAddDesignation = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(
-    ['addDesignation'],
+    ["addDesignation"],
     (formData) => addDesignation(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Succesfully added Designation');
+        toast.success("Succesfully added Designation");
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries('getDesignation');
+        queryClient.invalidateQueries("getDesignation");
       },
     }
   );
 };
 
-{
-  /*________________________DELETE_____________________________________*/
-}
+/*________________________DELETE_____________________________________*/
 export const useDeleteDesignation = ({ onSuccess }) => {
   const queryClient = useQueryClient();
-  return useMutation(
-    ['deleteDesignation'],
-    (designationId) => deleteDesignation(designationId),
+  const designationDelete = useMutation(
+    ["deleteDesignation"],
+    async (designationId) => await deleteDesignation(designationId),
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Successfully deleted Designation');
+        toast.success("Successfully deleted Designation");
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries('getDesignation');
+        queryClient.invalidateQueries("getDesignation");
       },
-      // onError: (err, _variables, _context) => {
-      //   toast.error(`Error: ${err.message}`);
-      // },
     }
   );
+  return {
+    isSuccess: designationDelete.isSuccess,
+    deleteDesignationMutation: designationDelete.mutate,
+  };
 };
 
-{
-  /*________________________EDIT_____________________________________*/
-}
+/*________________________EDIT_____________________________________*/
 export const useEditDesignation = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(
-    ['editDesignation'],
+    ["editDesignation"],
     (formData) => editDesignation(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Successfully edited designation');
+        toast.success("Successfully edited designation");
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries('getDesignation');
+        queryClient.invalidateQueries("getDesignation");
       },
     }
   );

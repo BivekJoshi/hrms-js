@@ -1,5 +1,5 @@
-import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { toast } from 'react-toastify';
+import { useMutation, useQuery, useQueryClient } from "react-query";
+import { toast } from "react-toastify";
 import {
   addEvent,
   addEventConfirmation,
@@ -11,23 +11,19 @@ import {
   getEventById,
   getEventByMonth,
   getEventNotification,
-} from '../../api/event/event-api';
+} from "../../api/event/event-api";
 
-{
-  /*________________________GET_____________________________________*/
-}
+/*________________________GET_____________________________________*/
 export const useGetEvent = () => {
-  return useQuery(['getEvent'], () => getEvent(), {
+  return useQuery(["getEvent"], () => getEvent(), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
 };
 
-{
-  /*________________________GET_____________________________________*/
-}
+/*________________________GET_____________________________________*/
 export const useGetEventNotification = () => {
-  return useQuery(['getEventNofication'], () => getEventNotification(), {
+  return useQuery(["getEventNofication"], () => getEventNotification(), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
@@ -35,7 +31,7 @@ export const useGetEventNotification = () => {
 
 export const useGetEventAttenderList = (filterState) => {
   const getQuery = useQuery(
-    ['getEventAttenderList', filterState],
+    ["getEventAttenderList", filterState],
     () => getEventAttenderList(filterState),
     {
       refetchInterval: false,
@@ -48,22 +44,18 @@ export const useGetEventAttenderList = (filterState) => {
   };
 };
 
-{
-  /*________________________GETBYID_____________________________________*/
-}
+/*________________________GETBYID_____________________________________*/
 export const useGetEventById = (id) => {
-  return useQuery(['getEventById', id], () => getEventById(id), {
+  return useQuery(["getEventById", id], () => getEventById(id), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
 };
 
-{
-  /*________________________GET BY MONTH_____________________________________*/
-}
+/*________________________GET BY MONTH_____________________________________*/
 export const useGetEventByMonth = (monthAd) => {
   return useQuery(
-    ['getEventByMonth', monthAd],
+    ["getEventByMonth", monthAd],
     () => getEventByMonth(monthAd),
     {
       refetchInterval: false,
@@ -72,16 +64,14 @@ export const useGetEventByMonth = (monthAd) => {
   );
 };
 
-{
-  /*________________________POST_____________________________________*/
-}
+/*________________________POST_____________________________________*/
 export const useAddEvent = ({ onSuccess }) => {
   const queryClient = useQueryClient();
-  return useMutation(['addEvent'], (formData) => addEvent(formData), {
+  return useMutation(["addEvent"], (formData) => addEvent(formData), {
     onSuccess: (data, variables, context) => {
-      toast.success('Succesfully added an Event');
+      toast.success("Succesfully added an Event");
       onSuccess && onSuccess(data, variables, context);
-      queryClient.invalidateQueries('getEvent');
+      queryClient.invalidateQueries("getEvent");
     },
     onError: (err, _variables, _context) => {
       // toast.error(`error: ${err.message}`);
@@ -94,59 +84,61 @@ export const useAddEventConfirmaation = ({ onSuccess }) => {
   const queryClient = useQueryClient();
 
   return useMutation(
-    ['addEventConfirmation'],
+    ["addEventConfirmation"],
     (formData) => addEventConfirmation(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Succesfully added an Event Confirmation');
+        toast.success("Succesfully added an Event Confirmation");
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries('getEventNofication');
+        queryClient.invalidateQueries("getEventNofication");
       },
     }
   );
 };
 
-{
-  /*________________________DELETE_____________________________________*/
-}
+/*________________________DELETE_____________________________________*/
 export const useDeleteEvent = ({ onSuccess }) => {
   const queryClient = useQueryClient();
-  return useMutation(['deleteEvent'], (eventId) => deleteEvent(eventId), {
-    onSuccess: (data, variables, context) => {
-      toast.success('Successfully deleted an Event');
-      onSuccess && onSuccess(data, variables, context);
-      queryClient.invalidateQueries('getEvent');
-    },
-  });
+  const eventDelete = useMutation(
+    ["deleteEvent"],
+    async (eventId) => await deleteEvent(eventId),
+    {
+      onSuccess: (data, variables, context) => {
+        toast.success("Successfully deleted an Event");
+        onSuccess && onSuccess(data, variables, context);
+        queryClient.invalidateQueries("getEvent");
+      },
+    }
+  );
+  return {
+    isSuccess: eventDelete.isSuccess,
+    deleteEventMutation: eventDelete.mutate,
+  };
 };
 
-{
-  /*________________________EDIT_____________________________________*/
-}
+/*________________________EDIT_____________________________________*/
 export const useEditEvent = ({ onSuccess }) => {
   const queryClient = useQueryClient();
-  return useMutation(['editEvent'], (formData) => editEvent(formData), {
+  return useMutation(["editEvent"], (formData) => editEvent(formData), {
     onSuccess: (data, variables, context) => {
-      toast.success('Succesfully edited an Event');
+      toast.success("Succesfully edited an Event");
       onSuccess && onSuccess(data, variables, context);
-      queryClient.invalidateQueries('getEvent');
+      queryClient.invalidateQueries("getEvent");
     },
   });
 };
 
-{
-  /*________________________EDIT- ATTENDANCE_____________________________________*/
-}
+/*________________________EDIT- ATTENDANCE_____________________________________*/
 export const useEditEventAttendance = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(
-    ['editEvent'],
+    ["editEvent"],
     (formData) => editEventAttendance(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Succesfully edited an Event');
+        toast.success("Succesfully edited an Event");
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries('getEventAttenderList');
+        queryClient.invalidateQueries("getEventAttenderList");
       },
     }
   );

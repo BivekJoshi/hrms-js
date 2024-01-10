@@ -2,6 +2,7 @@ import React from 'react';
 import FormModal from '../../../components/Modal/FormModal';
 import EmployeeResourceFields from '../../../components/Form/Resource/EmployeeResource/EmployeeResourceFields';
 import { useGetEmployeeResourceById } from '../../../hooks/resource/employeeResource/useEmployeeResource';
+import EditEmployeeResourceFields from '../../../components/Form/Resource/EmployeeResource/EditEmployeeResourceFields';
 
 export const AddEmployeeResourceModal = ({ open, handleCloseModal, title }) => {
   return (
@@ -28,7 +29,7 @@ export const EditEmployeeResourceModal = ({
         open={open}
         onClose={handleCloseModal}
         formComponent={
-          <EmployeeResourceFields
+          <EditEmployeeResourceFields
             onClose={handleCloseModal}
             data={data}
             editMode={true}

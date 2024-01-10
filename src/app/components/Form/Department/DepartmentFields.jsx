@@ -31,7 +31,7 @@ const DepartmentFields = ({ onClose, isLoading, data }) => {
               formik.touched.departmentName && formik.errors.departmentName
             }
             variant="outlined"
-            InputLabelProps={{ shrink: true }}
+            size="small"
           />
         </Grid>
         <Grid item xs={12} sm={12}>
@@ -52,7 +52,7 @@ const DepartmentFields = ({ onClose, isLoading, data }) => {
               formik.touched.departmentType && formik.errors.departmentType
             }
             variant="outlined"
-            InputLabelProps={{ shrink: true }}
+            size="small"
           />
         </Grid>
         <Grid item xs={12} sm={12}>
@@ -75,7 +75,6 @@ const DepartmentFields = ({ onClose, isLoading, data }) => {
               formik.errors.departmentDescription
             }
             variant="outlined"
-            InputLabelProps={{ shrink: true }}
           />
         </Grid>
 

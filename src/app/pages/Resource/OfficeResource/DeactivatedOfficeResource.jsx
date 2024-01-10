@@ -1,10 +1,17 @@
-import React, { useState } from "react";
-import { useGetDeactivatedOfficeResource } from "../../../hooks/resource/officeResource/useOfficeResource";
-import { Box, Button, Grid, IconButton, Stack, Typography } from "@mui/material";
-import { OfficeResourceLogisticsModal } from "./OfficeResourceModal";
-import CustomTable from "../../../components/CustomTable/CustomTable";
-import CloseIcon from "@mui/icons-material/Close";
-
+import React, { useState } from 'react';
+import { useGetDeactivatedOfficeResource } from '../../../hooks/resource/officeResource/useOfficeResource';
+import {
+  Box,
+  Button,
+  Grid,
+  IconButton,
+  Stack,
+  Tooltip,
+  Typography,
+} from '@mui/material';
+import { OfficeResourceLogisticsModal } from './OfficeResourceModal';
+import CustomTable from '../../../components/CustomTable/CustomTable';
+import AddTaskIcon from '@mui/icons-material/AddTask';
 const DeactivatedOfficeResource = ({ closeModal, title }) => {
   const { data, isLoading } = useGetDeactivatedOfficeResource();
   const [openModal, setopenModal] = useState(false);
@@ -16,53 +23,50 @@ const DeactivatedOfficeResource = ({ closeModal, title }) => {
     setopenModal(true);
   };
 
-  const handleViewLog = (rowData) => {
-    
-  };
+  const handleViewLog = (rowData) => {};
 
   const columns = [
     {
-      title: "SN",
+      title: 'SN',
       render: (rowData) => rowData.tableData.id + 1,
-      width: "3%",
+      width: '3%',
       sorting: false,
     },
     {
-      title: "Appliance Name",
-      field: "name",
+      title: 'Appliance Name',
+      field: 'name',
       render: (rowData) => (
-        <Typography maxWidth="5rem" style={{ overflowWrap: "break-word" }}>
+        <div style={{ overflowWrap: 'break-word', width: '8rem' }}>
           {rowData?.name}
-        </Typography>
+        </div>
       ),
-      emptyValue: "-",
-      width: "18.75rem",
+      emptyValue: '-',
       sorting: false,
     },
     {
-      title: "Identification Number",
-      field: "uniqueNumber",
-      emptyValue: "-",
-      width: "18.75rem",
+      title: 'Identification Number',
+      field: 'uniqueNumber',
+      emptyValue: '-',
+      width: '18.75rem',
       sorting: false,
     },
     {
-      title: "Description",
+      title: 'Description',
       render: (rowData) => (
-        <Typography maxWidth="10rem" style={{ overflowWrap: "break-word" }}>
+        <div style={{ overflowWrap: 'break-word', width: '18rem' }}>
           {rowData?.description}
-        </Typography>
+        </div>
       ),
       sorting: false,
     },
     {
-      title: "Actions",
+      title: 'Actions',
       render: (rowData) => (
-        <Stack direction="row" spacing={0}>
-          <Button color="primary" onClick={() => handleActivate(rowData)}>
-            Activate
-          </Button>
-        </Stack>
+        <Tooltip title='Activate Logistic'>
+          <IconButton onClick={() => handleActivate(rowData)}>
+            <AddTaskIcon />
+          </IconButton>
+        </Tooltip>
       ),
       sorting: false,
     },
@@ -86,17 +90,17 @@ const DeactivatedOfficeResource = ({ closeModal, title }) => {
       <CustomTable
         columns={columns}
         data={data}
-        title=""
+        title={title}
         isLoading={isLoading}
         exportButton={true}
         emptyRowsWhenPaging={true}
         // sorting={true}
-        height={"320px"}
+        height={'320px'}
       />
 
       {openModal && (
         <OfficeResourceLogisticsModal
-          title={"Activate Logistics"}
+          title={'Activate Logistics'}
           id={activateOfficeResource?.id}
           open={openModal}
           handleCloseModal={handleCloseActivatedModal}

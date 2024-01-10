@@ -16,23 +16,6 @@ import DepartmentInfo from '../../InfoTabs/DepartmentTab/DepartmentInfo';
 import EmploymentDetails from '../../InfoTabs/EmploymentDetails/EmploymentDetails';
 import ThemeModeContext from '../../../../../../theme/ThemeModeContext';
 
-const labelStyle = {
-  backgroundColor: '#EBEDEF',
-  marginLeft: '.5rem',
-  textTransform: 'none',
-  borderRadius: '.5rem',
-  color: 'black',
-  textDecoder: 'none',
-  fontWeight: 'bold',
-};
-const activeLabelStyle = {
-  ...labelStyle,
-  backgroundColor: '#329EF4',
-  borderBottom: 'none',
-  textDecoder: 'none',
-  fontWeight: 'bold',
-};
-
 export const DetailProfile = ({ data, role, setShowPersonalProfile }) => {
   const [value, setValue] = React.useState('1');
   const { palette, mode } = React.useContext(ThemeModeContext);
@@ -66,14 +49,20 @@ export const DetailProfile = ({ data, role, setShowPersonalProfile }) => {
       component: <LeaveInfo data={data} role={role} />,
     },
     {
-      label: 'Academics',
-      value: '2',
-      component: <AcademicsInfo data={data} role={role} />,
-    },
-    {
       label: 'Attendance',
       value: '3',
       component: <AttendenceInfo data={data} role={role} />,
+    },
+    {
+      label: 'Branch',
+      value: '7',
+      component: <BranchInfo data={data} role={role} />,
+    },
+
+    {
+      label: 'Department',
+      value: '8',
+      component: <DepartmentInfo data={data} role={role} />,
     },
     {
       label: 'Position',
@@ -81,35 +70,29 @@ export const DetailProfile = ({ data, role, setShowPersonalProfile }) => {
       component: <PromotionHistory data={data} role={role} />,
     },
     {
-      label: 'Employment Details',
-      value: '10',
-      component: <EmploymentDetails data={data} role={role} />,
+      label: 'Training',
+      value: '6',
+      component: <TrainingInfo data={data} role={role} />,
     },
-    // {
-    //   label: 'Employment Details',
-    //   value: '10',
-    //   component: <EmploymentDetails data={data} role={role} />,
-    // },
+
+    {
+      label: 'Academics',
+      value: '2',
+      component: <AcademicsInfo data={data} role={role} />,
+    },
+
     {
       label: 'Work',
       value: '5',
       component: <EmployeeHistory data={data} role={role} />,
     },
+
     {
-      label: 'Training',
-      value: '6',
-      component: <TrainingInfo data={data} role={role} />,
+      label: 'Employment Details',
+      value: '10',
+      component: <EmploymentDetails data={data} role={role} />,
     },
-    {
-      label: 'Branch',
-      value: '7',
-      component: <BranchInfo data={data} role={role} />,
-    },
-    {
-      label: 'Department',
-      value: '8',
-      component: <DepartmentInfo data={data} role={role} />,
-    },
+
     {
       label: 'Documents',
       value: '9',
