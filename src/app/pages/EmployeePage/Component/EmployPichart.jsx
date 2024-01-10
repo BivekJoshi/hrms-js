@@ -43,11 +43,20 @@ export const EmployPichart = ({ data }) => {
     },
     chart: {
       width: 380,
-      type: 'donut',
+      type: "donut",
+      toolbar: {
+        show: false, // Hide the toolbar to avoid conflicts
+      },
     },
     labels: labels,
     colors: COLORS,
     legend: {
+      floating: true,
+      position: "right", // You can change the position if needed
+      containerMargin: {
+        right: 50, // Adjust the margin to move both donut chart and legend
+      },
+      offsetY: 40,
       labels: {
         colors: labels.map(() => (mode === 'dark' ? 'white' : 'black')),
       },
