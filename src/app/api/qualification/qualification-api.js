@@ -12,10 +12,12 @@ export const getQualificationById = async (id) => {
 export const addQualification = async (formData, id) => {
   const educationForm = new FormData();
   educationForm.append("board", formData?.board);
-  educationForm.append("institute ", formData?.institute);
-  educationForm.append("passedLevel  ", formData?.passedLevel);
-  educationForm.append("passedYear   ", formData?.passedYear);
-  educationForm.append("grade  ", formData?.grade);
+  educationForm.append("institute", formData?.institute);
+  educationForm.append("passedLevel", formData?.passedLevel);
+  educationForm.append("passedYear", formData?.passedYear);
+  educationForm.append("grade", formData?.grade);
+  educationForm.append("scoreType", formData?.scoreType);
+
   if (formData?.transcript) {
     educationForm.append("transcript  ", formData?.transcript || "");
   }
@@ -38,10 +40,15 @@ export const addQualification = async (formData, id) => {
 
 /*________________________EDIT_____________________________________*/
 export const editQualification = async (formData, id) => {
-  const data = await axiosInstance.put(`/qualification/update/${id}`, [
-    formData,
-  ]);
+  const data = await axiosInstance.put(
+    `/qualification/update/${formData?.id}`,
+    formData
+  );
   return data;
+};
+
+export const editQualifiacationDocument = async (formData, id) => {
+  await axiosInstance.put(`/qualification/update-file/${id}`, formData);
 };
 
 /*________________________DELETE_____________________________________*/

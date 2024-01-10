@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import {
   addQualification,
   deleteQualifiaction,
+  editQualifiacationDocument,
   editQualification,
   getQualificationById,
 } from "../../api/qualification/qualification-api";
@@ -32,8 +33,8 @@ export const useAddQualification = ({ onSuccess }) => {
     {
       onSuccess: (data, variables, context) => {
         toast.success("Qualification added Successfully");
+        queryClient.refetchQueries("getQualificationById");
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries("getQualificationById");
       },
     }
   );
@@ -47,16 +48,16 @@ export const useAddQualification = ({ onSuccess }) => {
 export const useEditQualification = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   const { id } = useParams();
-  const mutateEditQualification= useMutation(
+  const mutateEditQualification = useMutation(
     ["editQualification"],
-    async(formData) => {
+    async (formData) => {
       await editQualification(formData, id);
     },
     {
       onSuccess: (data, variables, context) => {
         toast.success("Qualification updated sucessfully");
+        queryClient.refetchQueries("getQualificationById");
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries("getQualificationById");
       },
     }
   );
@@ -64,6 +65,12 @@ export const useEditQualification = ({ onSuccess }) => {
     editQualificationMutate: mutateEditQualification.mutate,
     isSuccess: mutateEditQualification.isSuccess,
   };
+};
+
+export const useEditQualificationDocument = (id) => {
+  return useMutation(["updateQualificationDocs"], async (formData) => {
+    await editQualifiacationDocument(formData, id);
+  });
 };
 
 {
