@@ -6,7 +6,7 @@ const ProjectSchema = Yup.object().shape({
     .max(50, "Project name cannot exceed 50 characters"),
   startDate: Yup.string().required("Project start date is required"),
   taskStatus: Yup.string().required("Please select task status"),
-  projectLeadId: Yup.number().required("Please select leader for project"),
+  projectLeadId: Yup.string().required("Please select leader for project"),
   // companyId: Yup.number().required("Please Select Company"),
 });
 

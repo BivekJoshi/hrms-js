@@ -51,11 +51,11 @@ const Roles = () => {
                     </Typography>
                   </AccordionSummary>
                   <AccordionDetails>
-                    <Typography>
-                      {/* Nulla facilisi. Phasellus sollicitudin nulla et quam
+                    {/* <Typography>
+                      Nulla facilisi. Phasellus sollicitudin nulla et quam
                       mattis feugiat. Aliquam eget maximus est, id dignissim
-                      quam. */}
-                    </Typography>
+                      quam.
+                    </Typography> */}
                   </AccordionDetails>
                 </Accordion>
               </div>

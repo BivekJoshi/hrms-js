@@ -114,7 +114,6 @@ const NewFilter = ({ inputField, searchCallBack, validate }) => {
         marginBottom: '16px',
         padding: ' 16px',
         borderRadius: '6px',
-        // backgroundColor: "#fafafa",
         backgroundColor: palette?.background?.default,
       }}
     >
