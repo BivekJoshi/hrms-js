@@ -98,19 +98,36 @@ const TrainingInfo = ({ data, role }) => {
       field: "endDate",
       emptyValue: "-",
     },
+  ];
+
+  const actions = [
     {
-      title: "Actions",
-      width: 12,
-      render: (rowData) => (
-        <Stack sx={{display: 'flex', flexDirection: 'row'}}>
-          <Button color="primary" onClick={() => handleEditTraining(rowData)}>
-            <ModeEditOutlineIcon />
-          </Button>
-          <Button color="primary" onClick={() => handleDeleteTraining(rowData)}>
-            <DeleteIcon />
-          </Button>
-        </Stack>
+      icon: () => (
+        <ModeEditOutlineIcon
+          sx={{
+            color: "black",
+            "&:hover": {
+              color: "green",
+            },
+          }}
+        />
       ),
+      tooltip: "Edit Detail",
+      onClick: (event, rowData) => handleEditTraining(rowData),
+    },
+    {
+      icon: () => (
+        <DeleteIcon
+          sx={{
+            color: "black",
+            "&:hover": {
+              color: "red",
+            },
+          }}
+        />
+      ),
+      tooltip: "Delete",
+      onClick: (event, rowData) => handleDeleteTraining(rowData),
     },
   ];
   return (
@@ -137,7 +154,7 @@ const TrainingInfo = ({ data, role }) => {
         columns={columns}
         data={trainingData}
         title="Training History"
-        // isLoading={isLoading}
+        actions={actions}
       />
 
       {openAddModal && (
