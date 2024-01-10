@@ -66,7 +66,7 @@ export const useAddCreateTask = ({ onSuccess }) => {
       onSuccess: (data, variables, context) => {
         toast.success('Project Task Added Sucessfully');
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries('getProjecttask');
+        queryClient.invalidateQueries('getProjectTask');
       },
     }
   );
@@ -82,7 +82,7 @@ export const useEditCreateTask = ({ onSuccess, taskId }) => {
       onSuccess: (data, variables, context) => {
         toast.success('SucessFully edited Task');
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries('getProjecttask');
+        queryClient.invalidateQueries('getProjectTask');
       },
     }
   );
@@ -98,7 +98,7 @@ export const useDeleteProjectTask = ({ onSuccess }) => {
       onSuccess: (data, variables, context) => {
         toast.success('Successfully deleted Task');
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries('getProjecttask');
+        queryClient.invalidateQueries('getProjectTask');
       },
     }
   );

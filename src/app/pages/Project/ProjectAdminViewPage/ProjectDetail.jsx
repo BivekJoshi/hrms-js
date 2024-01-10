@@ -51,7 +51,6 @@ const ProjectDetail = () => {
     return name;
   };
 
-  
   const [editedEmployee, setEditedEmployee] = useState({});
   const handleEditProjectEmployee = (rowData) => {
     setEditedEmployee(rowData);
@@ -72,7 +71,7 @@ const ProjectDetail = () => {
   const columns = [
     {
       title: "SN",
-      render: (rowData) => rowData?.tableData?.id +1,
+      render: (rowData) => rowData?.tableData?.id + 1,
       width: 80,
       sortable: false,
       sorting: false,
@@ -147,13 +146,27 @@ const ProjectDetail = () => {
             color="primary"
             onClick={() => handleEditProjectEmployee(rowData)}
           >
-            <EditIcon />
+            <EditIcon
+              sx={{
+                color: "black",
+                "&:hover": {
+                  color: "green",
+                },
+              }}
+            />
           </Button>
           <Button
             color="primary"
             onClick={() => handleDeleteProjectEmployee(rowData)}
           >
-            <DeleteIcon />
+            <DeleteIcon
+              sx={{
+                color: "black",
+                "&:hover": {
+                  color: "red",
+                },
+              }}
+            />
           </Button>
         </Stack>
       ),
@@ -199,7 +212,7 @@ const ProjectDetail = () => {
 
       {openEditModal && (
         <EditProjectEmployeeModal
-          title={"Edit Project Details"}
+          title={"Edit Project Employee Details"}
           data={editedEmployee}
           open={openEditModal}
           handleCloseEditModal={handleCloseEditModal}

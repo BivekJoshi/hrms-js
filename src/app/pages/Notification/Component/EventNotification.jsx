@@ -27,7 +27,7 @@ export const EventNotification = ({ data, handleClose }) => {
     formik.setFieldValue("notificationId", notificationId);
     formik.handleSubmit();
     setShowRemark({ ...showRemark, [index]: false });
-    handleClose();
+    handleClose
   };
 
   const getUpcomingDay = (eventDate) => {

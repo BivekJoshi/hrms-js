@@ -110,14 +110,14 @@ const AddprojectFields = ({ onClose, isLoading }) => {
             name="projectLeadId"
             options={employeeData || []}
             getOptionLabel={(employee) =>
-              `${employee?.firstName} ${employee?.middleName} ${employee?.lastName}`
+              employee?.label
             }
             value={employeeData?.find(
-              (employee) => employee?.id === formik.values?.employeeId
+              (employee) => employee?.employeeId === formik.values?.employeeId
             )}
             onChange={(event, selectedEmployee) => {
               if (selectedEmployee) {
-                formik.setFieldValue("projectLeadId", selectedEmployee.id);
+                formik.setFieldValue("projectLeadId", selectedEmployee.employeeId);
               }
             }}
             renderInput={(params) => (
