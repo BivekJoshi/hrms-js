@@ -1,11 +1,11 @@
-import React from "react";
-import { useFormik } from "formik";
-import { ProjectEmployeeSchema } from "../validation/ProjectEmployeeSchema";
+import React from 'react';
+import { useFormik } from 'formik';
+import { ProjectEmployeeSchema } from '../validation/ProjectEmployeeSchema';
 import {
   useAddProjectEmployee,
   useEditProjectEmployee,
-} from "../useProjectEmployee";
-import { useParams } from "react-router-dom";
+} from '../useProjectEmployee';
+import { useParams } from 'react-router-dom';
 
 export const useProjectEmployeeForm = (data, onClose) => {
   const { id } = useParams();
@@ -14,13 +14,13 @@ export const useProjectEmployeeForm = (data, onClose) => {
 
   const formik = useFormik({
     initialValues: {
-      id: data?.id || "",
-      assignedOn: data?.assignedOn || "",
-      deAssignedOn: data?.deAssignedOn || "",
-      employeeId: data?.employeeId || "",
-      employeeName: data?.employeeName || "",
-      projectId: data?.projectId || id || "",
-      projectName: data?.projectName || "",
+      id: data?.id || '',
+      assignedOn: data?.assignedOn || '',
+      deAssignedOn: data?.deAssignedOn || '',
+      employeeId: data?.employeeId || '',
+      employeeName: data?.employeeName || '',
+      projectId: data?.projectId || id || '',
+      projectName: data?.projectName || '',
     },
     validationSchema: ProjectEmployeeSchema,
     enableReinitialize: true,
@@ -38,7 +38,7 @@ export const useProjectEmployeeForm = (data, onClose) => {
     addProjectEmployee(values, {
       onSuccess: () => {
         onClose();
-        formik.handleReset();        
+        formik.handleReset();
       },
     });
   };
@@ -48,7 +48,7 @@ export const useProjectEmployeeForm = (data, onClose) => {
     editProjectEmployee(values, {
       onSuccess: () => {
         onClose();
-        formik.handleReset();        
+        formik.handleReset();
       },
     });
   };

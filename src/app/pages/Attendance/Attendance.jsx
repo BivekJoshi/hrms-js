@@ -17,6 +17,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { ButtonComponent } from '../../components/Button/ButtonComponent';
 import ThemeModeContext from '../../../theme/ThemeModeContext';
 import useWindowWidth from '../../hooks/windowwidth/useWindowWidth';
+import NewFilter from '../../components/NewFilter/NewFilter';
 
 const month = [
   {
@@ -111,6 +112,7 @@ const Attendance = () => {
   const { palette } = useContext(ThemeModeContext);
 
   const [searchEmployee, setSearchEmployee] = useState('');
+  console.log('🚀 ~ Attendance ~ searchEmployee:', searchEmployee);
   const [searchMonth, setSearchMonth] = useState('');
   const [searchYear, setSearchYear] = useState('');
 
@@ -196,10 +198,24 @@ const Attendance = () => {
       </>
     );
 
+  const filterMenu = [
+    {
+      name: 'employeeName',
+      label: 'Employee Name',
+      value: searchEmployee,
+      type: 'attendance',
+      onChange: setSearchEmployee,
+      md: 6,
+      sm: 12,
+      customClear: setSearchEmployee,
+    },
+  ];
+
   return (
     <div className='main'>
       <Typography variant='h5'>Attendance</Typography>
-      <div className='Search'>
+      <NewFilter inputField={filterMenu} />
+      {/* <div className='Search'>
         <Box
           component='form'
           noValidate
@@ -224,7 +240,7 @@ const Attendance = () => {
                 onChange={(e) => setSearchEmployee(e.target.value)}
               />
             </Grid>
-            {/* <Grid item xs={4}>
+             <Grid item xs={4}>
               <TextField
                 select
                 label='Select Month'
@@ -263,10 +279,10 @@ const Attendance = () => {
                   </MenuItem>
                 ))}
               </TextField>
-            </Grid> */}
+            </Grid> 
           </Grid>
         </Box>
-      </div>
+      </div> */}
 
       <Typography
         variant='h6'

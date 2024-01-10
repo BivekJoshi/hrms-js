@@ -198,7 +198,7 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
 };
 
 const DateInput = ({ formik, isHalfDay, isMultipleDays }) => {
-  const [halfType, setHalfType] = useState('');
+  const [halfType, setHalfType] = useState('FIRST_HALF');
 
   const handleFromDateChange = (e) => {
     const fromDateValue = e.target.value;

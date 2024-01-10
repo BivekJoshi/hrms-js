@@ -1,10 +1,10 @@
-import { useFormik } from "formik";
+import { useFormik } from 'formik';
 import {
   useAddOfficeResource,
   useEditOfficeResource,
   useEditActiveInactiveOfficeResource,
-} from "../useOfficeResource";
-import { OfficeResourceSchema } from "./OfficeResourceSchema";
+} from '../useOfficeResource';
+import { OfficeResourceSchema } from './OfficeResourceSchema';
 
 const useOfficeResourceForm = (data, onClose) => {
   const { mutate: addOfficeResource } = useAddOfficeResource({});
@@ -24,26 +24,25 @@ const useOfficeResourceForm = (data, onClose) => {
     addOfficeResource(values, {
       onSuccess: () => {
         onClose();
-      }
+      },
     });
   };
 
   const handleEditAndDeactivate = (values) => {
-  
     editOfficeResource(values, {
       onSuccess: () => {
         onClose();
-      }
+      },
     });
-    // editDeactivatedOfficeResource(values, formik); 
+    // editDeactivatedOfficeResource(values, formik);
   };
 
   const formik = useFormik({
     initialValues: {
-      name: data?.name || "",
-      uniqueNumber: data?.uniqueNumber || "",
-      description: data?.description || "",
-      id: data?.id || "",
+      name: data?.name || '',
+      uniqueNumber: data?.uniqueNumber || '',
+      description: data?.description || '',
+      id: data?.id || '',
       isActive: data?.isActive || false,
     },
     validationSchema: OfficeResourceSchema,
