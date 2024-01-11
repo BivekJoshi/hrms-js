@@ -64,7 +64,7 @@ const NewLogin = () => {
   const handleFormSubmit = () => {
     formik.handleSubmit();
   };
-  
+
   return (
     <div style={{ height: '100dvh' }}>
       <div className='login-bgg'>
@@ -133,7 +133,7 @@ const NewLogin = () => {
                 fill='#6DAB23'
               />
             </svg>
-            <Grid className='largDesign' width={{ lg: '30rem' }}>
+            <Grid className='largDesign' width={{ lg: '30rem', xs: '80%' }}>
               <Typography fontSize='40px' color='primary' fontWeight='600'>
                 Log In
               </Typography>
@@ -158,8 +158,7 @@ const NewLogin = () => {
                 variant='outlined'
                 autoFocus
                 autoComplete='username'
-                // InputLabelProps={{ shrink: Boolean(formik.values.email) }}
-                InputLabelProps={{ shrink: true }}
+                InputLabelProps={{ shrink: Boolean(formik.values.email) }}
                 size='small'
               />
               <TextField
@@ -185,8 +184,7 @@ const NewLogin = () => {
                 helperText={formik.touched.password && formik.errors.password}
                 type={showValues.showPassword ? 'text' : 'password'}
                 sx={{ minWidth: '10vw', mt: 1 }}
-                // InputLabelProps={{ shrink: Boolean(formik.values.password) }}
-                InputLabelProps={{ shrink: true }}
+                InputLabelProps={{ shrink: Boolean(formik.values.password) }}
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position='end'>
