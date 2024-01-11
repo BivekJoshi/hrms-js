@@ -35,6 +35,7 @@ const ShowImagePreview = ({ documentData }) => {
     boxShadow: 24,
     p: "12px 24px",
   };
+  // console.log('d', documentData?.path)
   return (
     <div>
       <Box
