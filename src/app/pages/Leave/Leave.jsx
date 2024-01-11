@@ -320,7 +320,7 @@ const Leave = ({ permissions }) => {
           <CustomTable
             columns={columns}
             data={pendingLeaves}
-            title='Pending Leave Data '
+            title='Pending Leave Data'
             actions={actions}
             isLoading={loading}
           />
