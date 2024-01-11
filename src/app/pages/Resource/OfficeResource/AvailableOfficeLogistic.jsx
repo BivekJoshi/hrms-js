@@ -47,7 +47,7 @@ export const AvailableOfficeLogistic = (props) => {
         data={data}
         title="Activated Office Logistics"
         isLoading={isLoading}
-        exportButton={true}
+        // exportButton={true}
       />
     </>
   );

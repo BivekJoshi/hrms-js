@@ -95,7 +95,7 @@ const AcademicsComponents = ({ data, isLoading }) => {
         data={data}
         title='Academics'
         isLoading={isLoading}
-        exportButton={true}
+        // exportButton={true}
       />
     </>
   );

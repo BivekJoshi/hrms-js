@@ -188,7 +188,7 @@ const ProjectDetail = () => {
         data={projectEmployeeData}
         title="Project Employee Data"
         isLoading={isLoading}
-        exportButton={true}
+        // exportButton={true}
       />
       {openAddModal && (
         <AddProjectEmployeeModal

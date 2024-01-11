@@ -174,7 +174,7 @@ const OfficeResource = ({ permissions }) => {
         data={availableOfficeResource}
         title='Available Logistics'
         isLoading={isLoading}
-        exportButton={true}
+        // exportButton={true}
         actions={actions}
       />
       {openAddModal && (

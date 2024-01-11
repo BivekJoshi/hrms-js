@@ -149,8 +149,7 @@ const Department = ({ permissions }) => {
         data={departmentData}
         title="Department List"
         isLoading={isLoading}
-        exportButton
-        exportExcel
+        // exportButton={true}
         actions={actions}
       />
 

@@ -177,7 +177,7 @@ const EmployeeResource = ({ permissions }) => {
         title="Employee Logistics"
         isLoading={isLoading}
         actions={actions}
-        exportButton={true}
+        // exportButton={true}
       />
       {openDeleteModal && (
         <DeleteConfirmationModal

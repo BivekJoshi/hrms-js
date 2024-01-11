@@ -58,7 +58,7 @@ const Birthdaytable = ({ data, isloading, currMonth }) => {
       data={Data}
       title={'Birthday List of ' + currMonth}
       rowStyle={(rowData) => ({
-        backgroundColor: rowData.isTodayBirthday === true ? 'red' : '',
+        backgroundColor: rowData.isTodayBirthday === true ? 'rgb(92, 165, 3)' : '',
         color: rowData.isTodayBirthday ? 'white' : '',
         fontSize: '.8rem',
       })}
