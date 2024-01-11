@@ -31,7 +31,16 @@ const useAddHistoryDetails = () => {
     validationSchema: HistorySchema,
     onSubmit: (values) => {
       if (values?.id) {
-        editHistoryMutate(values, {
+        const formValues = {
+          employerName: values.employerName,
+          employerAddress: values.employerAddress,
+          pastPosition: values.pastPosition,
+          fromDate: values.fromDate,
+          toDate: values.toDate,
+          remarks: values.remarks,
+          id: values.id,
+        };
+        editHistoryMutate(formValues, {
           onSuccess: () => {
             formik.handleReset();
           },

@@ -57,9 +57,14 @@ export const editFamily = async (formData, id) => {
   return data;
 };
 
-export const editFamilyMember = async (formData, id) => {
-  const data = await axiosInstance.put(`/family-member/update/${id}`, formData);
-  return data;
+export const editFamilyMember = async (formData) => {
+  if (formData?.id) {
+    const data = await axiosInstance.put(
+      `/family-member/update/${formData?.id}`,
+      formData
+    );
+    return data;
+  }
 };
 
 /*________________________DELETE_____________________________________*/

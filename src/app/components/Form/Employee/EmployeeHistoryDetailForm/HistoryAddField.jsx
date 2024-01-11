@@ -1,15 +1,28 @@
 import {
+  Box,
+  Fade,
   FormControlLabel,
   FormLabel,
   Grid,
+  IconButton,
   Input,
+  Modal,
   TextField,
+  Tooltip,
 } from "@mui/material";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import ThemeModeContext from "../../../../../theme/ThemeModeContext";
+import { Preview } from "@mui/icons-material";
+import CloseIcon from "@mui/icons-material/Close";
+import { useEditWorkExpirenceDoc } from "../../../../hooks/employee/useEmployeeHistory";
+import { DOC_URL } from "../../../../../auth/axiosInterceptor";
 
 const HistoryAddField = ({ formik }) => {
   const { mode } = useContext(ThemeModeContext);
+
+  const id = formik.values?.id;
+
+  const updateWorkExpericence = useEditWorkExpirenceDoc(id);
 
   const currentDate = new Date().toISOString().split("T")[0];
 
@@ -18,9 +31,23 @@ const HistoryAddField = ({ formik }) => {
   const [documentImg, setDocumnetImage] = useState(null);
 
   const handleImageChange = (event) => {
-    formik.setFieldValue("image", event.target.files[0]);
+    const value = event.target?.files[0];
+    formik.setFieldValue("experienceLetter", value);
+    if (id) {
+      const formData = new FormData();
+      formData.append("file", value);
+      formData.append("documentType", "experienceLetter");
+      updateWorkExpericence.mutate(formData);
+    }
+    if (value) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setPreviewImage(reader.result);
+      };
+      reader.readAsDataURL(value);
+    }
   };
-  
+
   const openPreview = (imageUrl) => {
     setDocumnetImage(imageUrl);
     setPreviewOpen(true);
@@ -29,6 +56,19 @@ const HistoryAddField = ({ formik }) => {
   const closePreview = () => {
     setPreviewOpen(false);
   };
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    bgcolor: "background.paper",
+    border: "1px solid #808080",
+    borderRadius: 2,
+    minWidth:"70vh",
+    boxShadow: 24,
+    p: "12px 24px",
+  };
+
   return (
     <>
       <Grid container spacing={3}>
@@ -152,15 +192,34 @@ const HistoryAddField = ({ formik }) => {
         </Grid>
         <Grid item xs={12}>
           <FormLabel component="legend">Upload Experience Documnet</FormLabel>
-
-          <Input
-            type="file"
-            accept="image/*"
-            fullWidth
-            id="image"
-            name="image"
-            onChange={handleImageChange}
-          />
+          <div style={{ display: "flex" }}>
+            <Input
+              type="file"
+              accept="image/*"
+              fullWidth
+              id="experienceLetter"
+              name="experienceLetter"
+              onChange={handleImageChange}
+            />
+            {(formik?.values?.experienceLetter ||
+              formik?.values?.experiencePath) && (
+              <Tooltip title="Preview">
+                <Preview
+                  sx={{
+                    mt: 1,
+                    cursor: "pointer",
+                    color: mode === "dark" ? "#fcfcfc" : "",
+                  }}
+                  onClick={() =>
+                    openPreview(
+                      formik?.values?.experienceLetter ||
+                        formik?.values?.experiencePath
+                    )
+                  }
+                />
+              </Tooltip>
+            )}
+          </div>
         </Grid>
       </Grid>
       <Modal
@@ -172,11 +231,31 @@ const HistoryAddField = ({ formik }) => {
       >
         <Fade in={isPreviewOpen}>
           <Box sx={style}>
-            <img
-              src={previewImage ? previewImage : `${DOC_URL}${documentImg}`}
-              alt="Preview"
-              style={{ width: "100%", color: mode === "dark" ? "#fcfcfc" : "" }}
-            />
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "end",
+                width: "100%",
+                height: "2rem",
+                margin:"3px 2px"
+              }}
+            >
+              <IconButton sx={{ cursor: "pointer" }} onClick={closePreview}>
+                <CloseIcon />
+              </IconButton>
+            </div>
+            <div>
+              {" "}
+              <img
+                src={previewImage ? previewImage : `${DOC_URL}${documentImg}`}
+                alt="Preview"
+                style={{
+                  width: "100%",
+                  objectFit: "cover",
+                  color: mode === "dark" ? "#fcfcfc" : "",
+                }}
+              />
+            </div>
           </Box>
         </Fade>
       </Modal>
