@@ -126,7 +126,7 @@ export const useAddEmpHistory = ({ onSuccess }) => {
   const { id } = useParams();
   return useMutation(
     ["addEmployeeHistory"],
-    (formData) => addEmpHistory(formData, id),
+    (formData) => addEmployeeHistory(formData, id),
     {
       onSuccess: (data, variables, context) => {
         toast.success("Successfully added work History");
