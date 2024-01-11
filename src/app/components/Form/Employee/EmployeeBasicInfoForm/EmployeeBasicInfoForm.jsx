@@ -347,6 +347,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
             ))}
         </TextField>
       </Grid> */}
+
       {/* <Grid item xs={12} sm={6} md={4}>
         <TextField
           id="branchId"
