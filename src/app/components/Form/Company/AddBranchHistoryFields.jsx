@@ -80,7 +80,7 @@ const AddBranchHistoryFields = ({
             maxLength={255}
             variant='outlined'
             multiline
-            minRows={3}
+            rows={3}
           />
         </Grid>
         <Grid

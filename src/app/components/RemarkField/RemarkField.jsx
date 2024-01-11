@@ -10,7 +10,7 @@ const RemarkField = ({
   fullWidth,
   variant,
   multiline,
-  minRows,
+  rows,
 }) => {
   const [remainingChars, setRemainingChars] = useState(maxLength);
 
@@ -36,7 +36,7 @@ const RemarkField = ({
       helperText={`${remainingChars} characters remaining`}
       variant={variant || 'outlined'}
       multiline={multiline || false}
-      minRows={minRows || 3}
+      rows={rows || 3}
     />
   );
 };
