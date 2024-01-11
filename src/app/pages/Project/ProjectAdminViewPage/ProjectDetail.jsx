@@ -1,22 +1,22 @@
-import React, { useState } from "react";
-import Typography from "@mui/material/Typography";
+import React, { useState } from 'react';
+import Typography from '@mui/material/Typography';
 import {
   useDeleteProjectEmployee,
   useGetProjectEmployeeById,
-} from "../../../hooks/project/projectEmployee/useProjectEmployee";
-import { useParams } from "react-router-dom";
-import MaterialTable from "@material-table/core";
-import { useGetEmployee } from "../../../hooks/employee/useEmployee";
-import { Box, Button, Grid, Stack } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteConfirmationModal from "../../../components/Modal/DeleteConfirmationModal";
-import { useGetProject } from "../../../hooks/project/useProject";
+} from '../../../hooks/project/projectEmployee/useProjectEmployee';
+import { useParams } from 'react-router-dom';
+import MaterialTable from '@material-table/core';
+import { useGetEmployee } from '../../../hooks/employee/useEmployee';
+import { Box, Button, Grid, Stack } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteConfirmationModal from '../../../components/Modal/DeleteConfirmationModal';
+import { useGetProject } from '../../../hooks/project/useProject';
 import {
   AddProjectEmployeeModal,
   EditProjectEmployeeModal,
-} from "../ProjectModal/ProjectModal";
-import CustomTable from "../../../components/CustomTable/CustomTable";
+} from '../ProjectModal/ProjectModal';
+import CustomTable from '../../../components/CustomTable/CustomTable';
 
 const ProjectDetail = () => {
   const { id } = useParams();
@@ -57,15 +57,15 @@ const ProjectDetail = () => {
 
   const columns = [
     {
-      title: "SN",
+      title: 'SN',
       render: (rowData) => rowData?.tableData?.id + 1,
-      maxWidth: "1px",
+      maxWidth: '1px',
       sortable: false,
       sorting: false,
     },
     {
-      title: "Employee Name",
-      field: "employeeName",
+      title: 'Employee Name',
+      field: 'employeeName',
       // render: (rowData) => {
       //   return <p>{getEmployeeName(rowData)}</p>;
       // },
@@ -73,16 +73,16 @@ const ProjectDetail = () => {
       sorting: false,
     },
     {
-      title: "Assigned On",
-      field: "assignedOn",
-      emptyValue: "-",
+      title: 'Assigned On',
+      field: 'assignedOn',
+      emptyValue: '-',
       width: 80,
       sorting: false,
     },
     {
-      title: "Deassigned On",
-      field: "deAssignedOn",
-      emptyValue: "-",
+      title: 'Deassigned On',
+      field: 'deAssignedOn',
+      emptyValue: '-',
       width: 80,
       sorting: false,
     },
@@ -94,23 +94,23 @@ const ProjectDetail = () => {
     //   sorting: false,
     // },
     {
-      title: "On Project",
-      field: "onProject",
-      emptyValue: "-",
+      title: 'On Project',
+      field: 'onProject',
+      emptyValue: '-',
       width: 50,
       render: (rowData) => {
         return (
           <div
             style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
             }}
           >
             {rowData.onProject ? (
-              <span style={{ color: "green" }}>✔</span>
+              <span style={{ color: 'green' }}>✔</span>
             ) : (
-              <span style={{ color: "red" }}>✕</span>
+              <span style={{ color: 'red' }}>✕</span>
             )}
           </div>
         );
@@ -126,31 +126,31 @@ const ProjectDetail = () => {
     //   sorting: false,
     // },
     {
-      title: "Actions",
+      title: 'Actions',
       render: (rowData) => (
-        <Stack direction="row" spacing={0}>
+        <Stack direction='row' spacing={0}>
           <Button
-            color="primary"
+            color='primary'
             onClick={() => handleEditProjectEmployee(rowData)}
           >
             <EditIcon
               sx={{
-                color: "black",
-                "&:hover": {
-                  color: "green",
+                color: 'black',
+                '&:hover': {
+                  color: 'green',
                 },
               }}
             />
           </Button>
           <Button
-            color="primary"
+            color='primary'
             onClick={() => handleDeleteProjectEmployee(rowData)}
           >
             <DeleteIcon
               sx={{
-                color: "black",
-                "&:hover": {
-                  color: "red",
+                color: 'black',
+                '&:hover': {
+                  color: 'red',
                 },
               }}
             />
@@ -158,8 +158,7 @@ const ProjectDetail = () => {
         </Stack>
       ),
       sorting: false,
-      maxWidth: "90px",
-
+      maxWidth: '90px',
     },
   ];
 
@@ -169,16 +168,16 @@ const ProjectDetail = () => {
     <>
       <Box>
         <Typography
-          variant="h4"
+          variant='h4'
           sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            marginBottom: "1.2rem",
+            display: 'flex',
+            justifyContent: 'space-between',
+            marginBottom: '1.2rem',
           }}
         >
           <p>Employee Involved</p>
-          <Button variant="contained" onClick={handleAddOpenModal}>
-            + Add Employee
+          <Button variant='contained' onClick={handleAddOpenModal}>
+            Add Employee
           </Button>
         </Typography>
       </Box>
@@ -186,13 +185,13 @@ const ProjectDetail = () => {
       <CustomTable
         columns={columns}
         data={projectEmployeeData}
-        title="Project Employee Data"
+        title='Project Employee Data'
         isLoading={isLoading}
         // exportButton={true}
       />
       {openAddModal && (
         <AddProjectEmployeeModal
-          title={"Add Employee"}
+          title={'Add Employee'}
           open={openAddModal}
           handleCloseAddModal={handleCloseAddModal}
         />
@@ -200,7 +199,7 @@ const ProjectDetail = () => {
 
       {openEditModal && (
         <EditProjectEmployeeModal
-          title={"Edit Project Employee Details"}
+          title={'Edit Project Employee Details'}
           data={editedEmployee}
           open={openEditModal}
           handleCloseEditModal={handleCloseEditModal}
@@ -211,7 +210,7 @@ const ProjectDetail = () => {
           open={openDeleteModal}
           handleCloseModal={handleCloseDeleteModal}
           handleConfirmDelete={handleConfirmDelete}
-          message={"Project Employee"}
+          message={'Project Employee'}
         />
       )}
     </>

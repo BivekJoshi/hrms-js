@@ -53,19 +53,31 @@ const CompanyTableView = ({
       field: 'branchDescription',
       emptyValue: '-',
       width: '120px',
-      render: (rowData) => {
-        return (          
-            <Typography
-              style={{
-                // overflow: 'hidden',
-                // textOverflow: 'ellipsis',
-                // width: '20rem',
-              }}
-            >
-              {rowData?.branchDescription}
-            </Typography>
-        );
-      },
+      // render: (rowData) => {
+      //   return (          
+      //       <Typography
+      //         style={{
+      //           // overflow: 'hidden',
+      //           // textOverflow: 'ellipsis',
+      //           // width: '20rem',
+      //         }}
+      //       >
+      //         {rowData?.branchDescription}
+      //       </Typography>
+      //   );
+      // },
+      render: (rowData) => (
+        <div
+          style={{
+            whiteSpace: 'normal',
+            overflowWrap: 'break-word',
+            wordWrap: 'break-word',
+            wordBreak: 'break-all',
+          }}
+        >
+          {rowData?.branchDescription}
+        </div>
+      ),
     },
   ];
 

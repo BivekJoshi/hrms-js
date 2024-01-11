@@ -54,6 +54,7 @@ const scoreType = [
     label: "Grade",
   },
 ];
+
 const years = Array.from(
   { length: 100 },
   (_, index) => new Date().getFullYear() - index
@@ -110,8 +111,111 @@ const QualificationAddField = ({ passedLevelData, formik }) => {
     p: "12px 24px",
   };
 
+  const valuesToRemove = passedLevelData.map((item) => item.passedlevel);
+
+  const filteredPassedLevel = passedLevel.filter(
+    (item) => !valuesToRemove.includes(item.id)
+  );
+
+  const passedLevelOptions = formik?.values?.id
+    ? passedLevel
+    : filteredPassedLevel;
+
   return (
     <Grid container spacing={2}>
+      <Grid item xs={12} sm={12} md={12}>
+        <TextField
+          id={`passedLevel`}
+          name={`passedLevel`}
+          label="Passed Level"
+          fullWidth
+          select
+          disabled={formik?.values?.id && Boolean(formik?.values?.id)}
+          value={formik.values.passedLevel}
+          onChange={formik.handleChange}
+          error={
+            formik.touched.passedLevel && Boolean(formik.errors.passedLevel)
+          }
+          helperText={formik.touched.passedLevel && formik.errors.passedLevel}
+          variant="outlined"
+          size="small"
+          InputLabelProps={{ shrink: Boolean(formik.values.passedLevel) }}
+        >
+          {passedLevelOptions?.map((option) => (
+            <MenuItem key={option.id} value={option.id}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </TextField>
+      </Grid>
+      <Grid item xs={12} sm={12} md={12}>
+        <Autocomplete
+          options={years}
+          onChange={(e, newValue) => {
+            formik.setFieldValue(`passedYear`, newValue);
+          }}
+          value={formik.values.passedYear}
+          renderInput={(params) => {
+            return (
+              <TextField
+                {...params}
+                id={`passedYear`}
+                name={`passedYear`}
+                label="Passed Year (A.D.)"
+                fullWidth
+                error={
+                  formik.touched.passedYear && Boolean(formik.errors.passedYear)
+                }
+                helperText={
+                  formik.touched.passedYear && formik.errors.passedYear
+                }
+                variant="outlined"
+                size="small"
+                InputLabelProps={{ shrink: Boolean(formik.values.passedYear) }}
+              />
+            );
+          }}
+        />
+      </Grid>
+
+      <Grid item xs={12} sm={12} md={6}>
+        <TextField
+          id={`scoreType`}
+          name={`scoreType`}
+          label="Score type"
+          fullWidth
+          select
+          // required
+          value={formik.values.scoreType}
+          onChange={formik.handleChange}
+          error={formik.touched.scoreType && Boolean(formik.errors.scoreType)}
+          helperText={formik.touched.scoreType && formik.errors.scoreType}
+          variant="outlined"
+          size="small"
+          InputLabelProps={{ shrink: Boolean(formik.values.scoreType) }}
+        >
+          {scoreType?.map((option) => (
+            <MenuItem key={option.id} value={option.id}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </TextField>
+      </Grid>
+      <Grid item xs={12} sm={12} md={6}>
+        <TextField
+          id={`grade`}
+          name={`grade`}
+          label="Score"
+          fullWidth
+          value={formik.values.grade}
+          onChange={formik.handleChange}
+          error={formik.touched.grade && Boolean(formik.errors.grade)}
+          helperText={formik.touched.grade && formik.errors.grade}
+          variant="outlined"
+          size="small"
+          InputLabelProps={{ shrink: Boolean(formik.values.grade) }}
+        />
+      </Grid>
       <Grid item xs={12} sm={12} md={12}>
         <TextField
           id={`board`}
@@ -144,99 +248,7 @@ const QualificationAddField = ({ passedLevelData, formik }) => {
           InputLabelProps={{ shrink: Boolean(formik.values.institute) }}
         />
       </Grid>
-      <Grid item xs={12} sm={12} md={6}>
-        <TextField
-          id={`passedLevel`}
-          name={`passedLevel`}
-          label="Passed Level"
-          fullWidth
-          select
-          value={formik.values.passedLevel}
-          onChange={formik.handleChange}
-          error={
-            formik.touched.passedLevel && Boolean(formik.errors.passedLevel)
-          }
-          helperText={formik.touched.passedLevel && formik.errors.passedLevel}
-          variant="outlined"
-          size="small"
-          InputLabelProps={{ shrink: Boolean(formik.values.passedLevel) }}
-        >
-          {passedLevel?.map((option) => (
-            <MenuItem key={option.id} value={option.id}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
-      </Grid>
-      <Grid item xs={12} sm={12} md={6}>
-        <TextField
-          id={`scoreType`}
-          name={`scoreType`}
-          label="Score type"
-          fullWidth
-          select
-          // required
-          value={formik.values.scoreType}
-          onChange={formik.handleChange}
-          error={formik.touched.scoreType && Boolean(formik.errors.scoreType)}
-          helperText={formik.touched.scoreType && formik.errors.scoreType}
-          variant="outlined"
-          size="small"
-          InputLabelProps={{ shrink: Boolean(formik.values.scoreType) }}
-        >
-          {scoreType?.map((option) => (
-            <MenuItem key={option.id} value={option.id}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
-      </Grid>
-      {formik?.values?.scoreType && (
-        <Grid item xs={12} sm={12} md={12}>
-          <TextField
-            id={`grade`}
-            name={`grade`}
-            label="Score"
-            fullWidth
-            value={formik.values.grade}
-            onChange={formik.handleChange}
-            error={formik.touched.grade && Boolean(formik.errors.grade)}
-            helperText={formik.touched.grade && formik.errors.grade}
-            variant="outlined"
-            size="small"
-            InputLabelProps={{ shrink: Boolean(formik.values.grade) }}
-          />
-        </Grid>
-      )}
-      <Grid item xs={12} sm={12} md={12}>
-        <Autocomplete
-          options={years}
-          onChange={(e, newValue) => {
-            formik.setFieldValue(`passedYear`, newValue);
-          }}
-          value={formik.values.passedYear}
-          renderInput={(params) => {
-            return (
-              <TextField
-                {...params}
-                id={`passedYear`}
-                name={`passedYear`}
-                label="Passed Year (A.D.)"
-                fullWidth
-                error={
-                  formik.touched.passedYear && Boolean(formik.errors.passedYear)
-                }
-                helperText={
-                  formik.touched.passedYear && formik.errors.passedYear
-                }
-                variant="outlined"
-                size="small"
-                InputLabelProps={{ shrink: Boolean(formik.values.passedYear) }}
-              />
-            );
-          }}
-        />
-      </Grid>
+
       <Grid item xs={12}>
         <FormLabel component="legend">Upload Transcript</FormLabel>
         <div style={{ display: "flex" }}>

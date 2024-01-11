@@ -192,7 +192,7 @@ const Employee = () => {
                 onClick={handleAddOpenModal}
                 sx={{ textTransform: 'none' }}
               >
-                + Add Employee
+                Add Employee
               </Button>
             </Box>
           </Box>

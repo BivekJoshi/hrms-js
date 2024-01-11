@@ -1,20 +1,21 @@
-import * as React from "react";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import AppRoutes from "./routes/AppRoutes";
+import * as React from 'react';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import AppRoutes from './routes/AppRoutes';
+import ThemeModeContext from './theme/ThemeModeContext';
 
 export default function App() {
   return (
     <>
       <ToastContainer
-        position="bottom-right"
+        position='bottom-right'
         autoClose={3000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
         rtl={false}
         pauseOnFocusLoss
-        theme="light"
+        theme='light'
         draggable
         pauseOnHover
       />

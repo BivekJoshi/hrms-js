@@ -1,23 +1,24 @@
-import React, { useState, useRef, useEffect } from "react";
-import { Box, Button, Grid, Typography } from "@mui/material";
+import React, { useState, useRef, useEffect } from 'react';
+import { Box, Button, Grid, Typography } from '@mui/material';
+import { toast } from 'react-toastify';
 
-import FullCalendar from "@fullcalendar/react";
-import dayGridPlugin from "@fullcalendar/daygrid";
-import timeGridPlugin from "@fullcalendar/timegrid";
-import interactionPlugin from "@fullcalendar/interaction";
+import FullCalendar from '@fullcalendar/react';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import interactionPlugin from '@fullcalendar/interaction';
 
-import HocButton from "../../hoc/hocButton";
-import PermissionHoc from "../../hoc/permissionHoc";
+import HocButton from '../../hoc/hocButton';
+import PermissionHoc from '../../hoc/permissionHoc';
 
-import { useGetHoliday } from "../../hooks/holiday/useHoliday";
-import useHolidayForm from "../../hooks/holiday/HolidayForm/useHolidayForm";
+import { useGetHoliday } from '../../hooks/holiday/useHoliday';
+import useHolidayForm from '../../hooks/holiday/HolidayForm/useHolidayForm';
 
-import FormModal from "../../components/Modal/FormModal";
-import HolidayFields from "../../components/Form/Holiday/HolidayFields";
-import EmailForHoliday from "../Email/EmailForHoliday";
-import useAuth from "../../../auth/hooks/component/login/useAuth";
-import { OpenEmpHoliday, OpenHoliday } from "./HolidayModal/HolidayModal";
-import { ButtonComponent } from "../../components/Button/ButtonComponent";
+import FormModal from '../../components/Modal/FormModal';
+import HolidayFields from '../../components/Form/Holiday/HolidayFields';
+import EmailForHoliday from '../Email/EmailForHoliday';
+import useAuth from '../../../auth/hooks/component/login/useAuth';
+import { OpenEmpHoliday, OpenHoliday } from './HolidayModal/HolidayModal';
+import { ButtonComponent } from '../../components/Button/ButtonComponent';
 
 const Holiday = ({ permissions }) => {
   const { isEmployee, isHrClerk } = useAuth();
@@ -71,13 +72,13 @@ const Holiday = ({ permissions }) => {
   return (
     <>
       {isEmployee || isHrClerk ? null : (
-        <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+        <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
           <HocButton
             permissions={permissions}
-            color={"#fff"}
-            variant={"contained"}
+            color={'#fff'}
+            variant={'contained'}
             onClick={() => setOpenAddModal(true)}
-            buttonName={"+ Add Holiday"}
+            buttonName={'Add Holiday'}
           />
         </Box>
       )}
@@ -85,7 +86,7 @@ const Holiday = ({ permissions }) => {
 
       {openAddModal && (
         <FormModal
-          title={"Add Holiday"}
+          title={'Add Holiday'}
           open={openAddModal}
           onClose={() => setOpenAddModal(false)}
           formComponent={
@@ -94,26 +95,26 @@ const Holiday = ({ permissions }) => {
               <HolidayFields formik={formik} />
               <Grid
                 container
-                direction="row"
-                justifyContent="flex-end"
-                alignItems="flex-end"
+                direction='row'
+                justifyContent='flex-end'
+                alignItems='flex-end'
                 gap={1}
                 mt={2}
               >
                 <ButtonComponent
-                  variant="contained"
+                  variant='contained'
                   OnClick={handleFormSubmit}
-                  color={"#fff"}
-                  sx={{ mt: 3, ml: 1, color: "#fff" }}
-                  buttonName={"Add Holiday"}
+                  color={'#fff'}
+                  sx={{ mt: 3, ml: 1, color: '#fff' }}
+                  buttonName={'Add Holiday'}
                 />
                 <ButtonComponent
-                  variant="contained"
+                  variant='contained'
                   OnClick={handleCloseModal}
                   sx={{ mt: 3, ml: 1 }}
-                  BGColor={"#d32f2f"}
-                  color={"#fff"}
-                  buttonName={"Cancel"}
+                  BGColor={'#d32f2f'}
+                  color={'#fff'}
+                  buttonName={'Cancel'}
                 />
               </Grid>
             </>
@@ -123,28 +124,28 @@ const Holiday = ({ permissions }) => {
 
       {openSubmitModal && (
         <FormModal
-          title={"Holiday"}
+          title={'Holiday'}
           open={openSubmitModal}
           onClose={() => setOpenSubmitModal(false)}
           formComponent={
             <div>
-              <Typography variant="h4">Holiday Added Successfully!</Typography>
+              <Typography variant='h4'>Holiday Added Successfully!</Typography>
               <p>Do you like to Email this holiday to Employee.</p>
-              <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+              <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <ButtonComponent
-                  variant="contained"
+                  variant='contained'
                   sx={{ mt: 3, ml: 1 }}
                   OnClick={handleEmailButtonClick}
-                  buttonName={"Yes"}
+                  buttonName={'Yes'}
                 />
                 <ButtonComponent
-                  variant="contained"
+                  variant='contained'
                   sx={{ mt: 3, ml: 1 }}
                   OnClick={() => {
                     setOpenSubmitModal(false);
                   }}
-                  buttonName={"No"}
-                  BGColor={"#d32f2f"}
+                  buttonName={'No'}
+                  BGColor={'#d32f2f'}
                 />
                 {/* <Button
                   variant="contained"
@@ -171,7 +172,7 @@ const Holiday = ({ permissions }) => {
 
       {openEmailModal && (
         <FormModal
-          title={"Send Email"}
+          title={'Send Email'}
           open={openEmailModal}
           onClose={() => setOpenEmailModal(false)}
           formComponent={
@@ -188,18 +189,18 @@ const Holiday = ({ permissions }) => {
       <FullCalendar
         ref={calendarRef}
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-        initialView="dayGridMonth"
+        initialView='dayGridMonth'
         // headerToolbar={{
         //   start: "customTodayButton prev,next",
         //   center: "title",
         //   end: "dayGridMonth,timeGridWeek,timeGridDay",
         // }}
         eventClick={handleOpenModal}
-        height={"90vh"}
+        height={'90vh'}
         events={events}
         customButtons={{
           customTodayButton: {
-            text: "Today",
+            text: 'Today',
             // click: function () {
             //   handleTodayClick(events);
             // },
@@ -209,7 +210,7 @@ const Holiday = ({ permissions }) => {
 
       {openModal && hasPermission && (
         <OpenHoliday
-          title={"Edit Holiday"}
+          title={'Edit Holiday'}
           id={getEventID}
           open={openModal}
           handleCloseModal={() => setOpenModal(false)}
@@ -217,7 +218,7 @@ const Holiday = ({ permissions }) => {
       )}
       {openModal && !hasPermission && (
         <OpenEmpHoliday
-          title={"Holiday Details"}
+          title={'Holiday Details'}
           id={getEventID}
           open={openModal}
           handleCloseModal={() => setOpenModal(false)}
