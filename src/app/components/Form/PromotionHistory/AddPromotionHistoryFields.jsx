@@ -2,6 +2,7 @@ import React from 'react';
 import { Grid, TextField, Button, Autocomplete } from '@mui/material';
 import useAddPromotionHistoryForm from '../../../hooks/promotionHistory/addPromotionHistory.jsx/useAddPromotionForm';
 import { useGetDesignation } from '../../../hooks/designation/useDesignation';
+import RemarkField from '../../RemarkField/RemarkField';
 
 const AddPromotionHistoryFields = ({
   onClose,
@@ -77,16 +78,14 @@ const AddPromotionHistoryFields = ({
           />
         </Grid>
         <Grid item xs={12} sm={12}>
-          <TextField
+          <RemarkField
             id='remarks'
             name='remarks'
             label='Remarks'
             fullWidth
             onBlur={formik.handleBlur}
-            value={formik.values.remarks}
-            onChange={formik.handleChange}
-            error={formik.touched.remarks && Boolean(formik.errors.remarks)}
-            helperText={formik.touched.remarks && formik.errors.remarks}
+            formik={formik}
+            maxLength={255}
             variant='outlined'
             multiline
             rows={3}

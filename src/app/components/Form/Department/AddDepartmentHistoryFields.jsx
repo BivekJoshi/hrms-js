@@ -2,6 +2,7 @@ import { Button, Grid, TextField } from "@mui/material";
 import React from "react";
 import { useGetDepartment } from "../../../hooks/department/useDepartment";
 import useAddDepartmentHistoryForm from "../../../hooks/department/DepartmentForm/useAddDepartmentHistoryForm";
+import RemarkField from '../../RemarkField/RemarkField';
 
 const AddDepartmentHistoryFields = ({
   onClose,
@@ -132,12 +133,25 @@ const AddDepartmentHistoryFields = ({
             InputLabelProps={{ shrink: true }}
           />
         </Grid> */}
-        <Grid item xs={12} sm={12}>
+         <Grid item xs={12} sm={12}>
+          <RemarkField
+             id='remarks'
+             name='remarks'
+             label='Remarks'
+            fullWidth
+            formik={formik}
+            maxLength={255}
+            variant='outlined'
+            multiline
+            rows={3}
+          />
+        </Grid>
+        {/* <Grid item xs={12} sm={12}>
           <TextField
             id="remarks"
             name="remarks"
             label="Remarks"
-            placeholder="Enter remarks type"
+            placeholder="Enter remarks"
             fullWidth
             value={formik.values.remarks}
             onChange={formik.handleChange}
@@ -148,7 +162,7 @@ const AddDepartmentHistoryFields = ({
             multiline
             rows={3}
           />
-        </Grid>
+        </Grid> */}
         <Grid
           container
           direction="row"
