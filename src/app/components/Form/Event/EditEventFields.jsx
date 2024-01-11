@@ -9,9 +9,9 @@ import { ButtonComponent } from "../../Button/ButtonComponent";
 import { useEffect } from "react";
 
 const EditEventFields = ({ onClose, isLoading, data, permissions }) => {
-  const { formik } = useEditEventForm(data);
-
-  const handleFormSubmit = async () => {
+  const { formik } = useEditEventForm(data, onClose);
+console.log(formik, "fields")
+  const handleFormSubmit = () => {
     formik.handleSubmit();
   };
   const { deleteEventMutation, isSuccess: isDeleteSuccess } = useDeleteEvent(

@@ -1,4 +1,4 @@
-import { Button, Grid, TextField } from "@mui/material";
+import { Button, Grid, MenuItem, TextField } from "@mui/material";
 import React from "react";
 import { useGetDepartment } from "../../../hooks/department/useDepartment";
 import useAddDepartmentHistoryForm from "../../../hooks/department/DepartmentForm/useAddDepartmentHistoryForm";
@@ -22,7 +22,7 @@ const AddDepartmentHistoryFields = ({
   const currentDate = new Date().toISOString().split("T")[0];
  
   const effectiveDate = (branchHistoryData && branchHistoryData.length > 0) ? branchHistoryData?.find(date => date?.isRecentDepartment === true) : null; // find effective date for validation
-
+console.log("departmentData", departmentData)
   return (
     !isLoading && (
       <Grid container spacing={3}>
@@ -44,20 +44,22 @@ const AddDepartmentHistoryFields = ({
               formik.touched.departmentId && formik.errors.departmentId
             }
             variant="outlined"
-            SelectProps={{
-              native: true,
-            }}
             InputLabelProps={{ shrink: true }}
             // size="small"
           >
-            <option value="" disabled>
+            {departmentData?.map((option) => (
+              <MenuItem key={option?.id} value={option?.id}>
+                {option?.departmentName}
+              </MenuItem>
+            ))}
+            {/* <option value="" disabled>
               Select Department
             </option>
             {departmentData?.map((option) => (
               <option key={option?.id} value={option?.id}>
                 {`${option?.departmentName}`}
               </option>
-            ))}
+            ))} */}
           </TextField>
         </Grid>
         <Grid item xs={12} sm={12}>
