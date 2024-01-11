@@ -8,9 +8,20 @@ const TrainingSchema = Yup.object().shape({
   startDate: Yup.string().required('Start date is required'),
   endDate: Yup.string()
     .required('End date is required')
-    .when('startDate', (startDate, schema) => {
-      return schema.min(startDate, 'End date must not be less than start date');
-    }),
+    .test(
+      'is-greater-or-equal',
+      'End date must be greater than or equal to start date',
+      function (endDate) {
+        const startDate = this.parent.startDate;
+        if (!startDate || !endDate) {
+          // Return true if either date is missing to let the required validation handle it
+          return true;
+        }
+
+        // Compare dates
+        return new Date(endDate) >= new Date(startDate);
+      }
+    ),
 });
 
 export { TrainingSchema };
