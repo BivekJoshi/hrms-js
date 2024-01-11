@@ -1,8 +1,8 @@
-import * as React from "react";
-import { useState } from "react";
-import { Box } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
-import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
+import * as React from 'react';
+import { useState } from 'react';
+import { Box } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import {
   useDeleteDesignation,
   useGetDesignation,
@@ -106,7 +106,7 @@ const Designation = ({ permissions }) => {
         />
       ),
       disabled: !permissions?.canEdit,
-      tooltip: "Edit Detail",
+      tooltip: 'Edit Detail',
       onClick: (event, rowData) => handleEditDesignation(rowData),
     },
     {
@@ -136,7 +136,7 @@ const Designation = ({ permissions }) => {
           color={'white'}
           variant={'contained'}
           onClick={handleAddOpenModal}
-          buttonName={'+ Add Designation'}
+          buttonName={'Add Designation'}
         />
       </Box>
       <br />

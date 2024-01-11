@@ -4,7 +4,7 @@ import React from 'react';
 const EmployeeBankDetailForm = ({ formik }) => {
   return (
     <Grid container spacing={3}>
-      <Grid item xs={12} sm={6} md={4}>
+      <Grid item xs={12} sm={6} md={6}>
         <TextField
           id='bankName'
           name='bankName'
@@ -20,7 +20,7 @@ const EmployeeBankDetailForm = ({ formik }) => {
           size='small'
         />
       </Grid>
-      <Grid item xs={12} sm={6} md={4}>
+      <Grid item xs={12} sm={6} md={6}>
         <TextField
           id='bankBranch'
           name='bankBranch'
@@ -36,7 +36,7 @@ const EmployeeBankDetailForm = ({ formik }) => {
           size='small'
         />
       </Grid>
-      <Grid item xs={12} sm={6} md={4}>
+      <Grid item xs={12} sm={6} md={6}>
         <TextField
           id='bankAccountNumber'
           name='bankAccountNumber'
@@ -57,7 +57,7 @@ const EmployeeBankDetailForm = ({ formik }) => {
           size='small'
         />
       </Grid>
-      <Grid item xs={12} sm={6} md={4}>
+      <Grid item xs={12} sm={6} md={6}>
         <TextField
           id='bankAddress'
           name='bankAddress'

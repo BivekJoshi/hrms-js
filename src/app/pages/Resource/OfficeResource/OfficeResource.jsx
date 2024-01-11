@@ -115,9 +115,9 @@ const OfficeResource = ({ permissions }) => {
       icon: () => (
         <ModeEditOutlineIcon
           sx={{
-            color: "black",
-            "&:hover": {
-              color: "green",
+            color: 'black',
+            '&:hover': {
+              color: 'green',
             },
           }}
         />
@@ -130,9 +130,9 @@ const OfficeResource = ({ permissions }) => {
       icon: () => (
         <DeleteIcon
           sx={{
-            color: "black",
-            "&:hover": {
-              color: "red",
+            color: 'black',
+            '&:hover': {
+              color: 'red',
             },
           }}
         />
@@ -141,7 +141,6 @@ const OfficeResource = ({ permissions }) => {
       tooltip: 'Remove Logistics',
       onClick: (event, rowData) => handleDeleteRowData(rowData),
     },
-  
   ];
   return (
     <>
@@ -165,7 +164,7 @@ const OfficeResource = ({ permissions }) => {
           onClick={handleAddOpenModal}
           sx={{ textTransform: 'none' }}
         >
-          + Add Office Logistics
+          Add Office Logistics
         </Button>
       </Box>
 
@@ -200,7 +199,7 @@ const OfficeResource = ({ permissions }) => {
           title={'Deactivated Logistics'}
         />
       )}
-      
+
       {openDeleteModal && (
         <DeleteConfirmationModal
           open={openDeleteModal}

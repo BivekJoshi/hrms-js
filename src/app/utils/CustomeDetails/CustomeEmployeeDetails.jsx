@@ -136,7 +136,7 @@ const CustomeEmployeeDetails = ({
           }}
           sx={{ textTransform: 'capitalize', mb: 1 }}
         >
-          + Add
+          Add
         </Button>
       </div>
       <Paper sx={{ width: '100%', overflow: 'hidden' }}>

@@ -95,6 +95,7 @@ export const ThemeContextProvider = ({ children }) => {
         styleOverrides: {
           root: {
             textTransform: 'none',
+            color: mode === 'dark' && '#f5f5f5',
           },
         },
       },
