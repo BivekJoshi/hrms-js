@@ -236,7 +236,7 @@ const QualificationAddField = ({ passedLevelData, formik }) => {
         <TextField
           id={`institute`}
           name={`institute`}
-          label="Institude"
+          label="Institute"
           fullWidth
           required
           value={formik.values.institute}

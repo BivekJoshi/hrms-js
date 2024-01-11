@@ -9,6 +9,7 @@ import { useGetLoggedInUserInfo } from '../../../../../hooks/employee/useEmploye
 import CustomTable from '../../../../../components/CustomTable/CustomTable';
 import { useGetEmployeeHistory } from '../../../../../hooks/employee/useEmployeeHistory';
 import { AddEmployeeHistory } from './EmployeeHistoryModal';
+import NewEmployeeHistoryDetailForm from '../../../../../components/Form/Employee/EmployeeHistoryDetailForm/NewEmployeeHistoryDetailForm';
 
 const EmployeeHistory = ({ data, role }) => {
   // const { isSuperAdmin, isAdmin, isHr, isEmployee, isHrAdmin, isManager } =
@@ -88,7 +89,7 @@ const EmployeeHistory = ({ data, role }) => {
 
   return (
     <>
-      <Box className='tableIcon'>
+      {/* <Box className='tableIcon'>
         <Box
           sx={{
             display: 'flex',
@@ -123,7 +124,8 @@ const EmployeeHistory = ({ data, role }) => {
             handleCloseModal={handleCloseAddModal}
           />
         )}
-      </Box>
+      </Box> */}
+      <NewEmployeeHistoryDetailForm />
     </>
   );
 };
