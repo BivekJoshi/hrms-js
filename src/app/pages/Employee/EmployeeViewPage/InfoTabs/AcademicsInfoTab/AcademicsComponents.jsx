@@ -8,7 +8,9 @@ import TimelineDot from "@mui/lab/TimelineDot";
 import { Box, Divider, Typography } from "@mui/material";
 import ThemeModeContext from "../../../../../../theme/ThemeModeContext";
 import CustomTable from "../../../../../components/CustomTable/CustomTable";
+import NewEmployeeQualificationDetailForm from "../../../../../components/Form/Employee/EmployeeQualificationDetailForm/NewEmployeeQualificationDetailForm";
 
+const primaryColor = "#1c7ed6";
 const AcademicsComponents = ({ data, isLoading }) => {
   
   const columns = [
@@ -102,13 +104,7 @@ const AcademicsComponents = ({ data, isLoading }) => {
           </TimelineContent>
         </TimelineItem>
       </Box> */}
-      <CustomTable
-        columns={columns}
-        data={data}
-        title="Academics"
-        isLoading={isLoading}
-        exportButton={true}
-      />
+      <NewEmployeeQualificationDetailForm />
     </>
   );
 };
