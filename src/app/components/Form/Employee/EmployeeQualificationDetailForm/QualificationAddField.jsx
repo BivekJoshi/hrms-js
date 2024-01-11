@@ -54,6 +54,7 @@ const scoreType = [
     label: "Grade",
   },
 ];
+
 const years = Array.from(
   { length: 100 },
   (_, index) => new Date().getFullYear() - index
@@ -109,6 +110,12 @@ const QualificationAddField = ({ passedLevelData, formik }) => {
     boxShadow: 24,
     p: "12px 24px",
   };
+
+  const valuesToRemove = passedLevelData.map((item) => item.passedlevel);
+
+  const filteredPassedLevel = passedLevel.filter(
+    (item) => !valuesToRemove.includes(item.id)
+  );
 
   return (
     <Grid container spacing={2}>
