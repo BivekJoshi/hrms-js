@@ -1,6 +1,7 @@
 import React from "react";
 import { Grid, TextField, Button, Autocomplete } from "@mui/material";
 import useAddEmployeeHistoryForm from "../../../hooks/employeehistory/useAddEmployeeHistoryForm";
+import RemarkField from "../../RemarkField/RemarkField";
 
 const AddEmployeeHistoryFields = ({ onClose, isLoading }) => {
   const { formik } = useAddEmployeeHistoryForm(onClose);
@@ -107,13 +108,13 @@ const AddEmployeeHistoryFields = ({ onClose, isLoading }) => {
             InputLabelProps={{ shrink: true }}
             size="small"
             inputProps={{
-              min: formik?.values?.fromDate, 
+              min: formik?.values?.fromDate,
             }}
           />
         </Grid>
 
         <Grid item xs={12} md={12} lg={12} xl={6} sm={12}>
-          <TextField
+          {/* <TextField
             id="remarks"
             name="remarks"
             label="Work Remarks"
@@ -126,6 +127,21 @@ const AddEmployeeHistoryFields = ({ onClose, isLoading }) => {
             InputLabelProps={{ shrink: true }}
             multiline
             rows={3}
+          /> */}
+          <RemarkField
+            id="remarks"
+            name="remarks"
+            label="Remarks"
+            fullWidth
+            formik={formik}
+            maxLength={255}
+            variant="outlined"
+            multiline
+            InputLabelProps={{
+              shrink: Boolean(formik.values.remarks),
+            }}
+            rows={4}
+            inputProps={{ maxLength: 255 }}
           />
         </Grid>
 

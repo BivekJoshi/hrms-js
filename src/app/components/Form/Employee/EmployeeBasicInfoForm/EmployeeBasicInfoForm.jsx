@@ -6,6 +6,7 @@ import { useGetDepartment } from "../../../../hooks/department/useDepartment";
 import ThemeModeContext from "../../../../../theme/ThemeModeContext";
 import { useGetEmploymentType } from "../../../../hooks/employmentType/useEmploymentType";
 import "./Style.css";
+import RemarkField from "../../../RemarkField/RemarkField";
 
 const genderOptions = [
   {
@@ -346,7 +347,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
             ))}
         </TextField>
       </Grid> */}
-      
+
       {/* <Grid item xs={12} sm={6} md={4}>
         <TextField
           id="branchId"
@@ -479,7 +480,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
         </TextField>
       </Grid> */}
       <Grid item xs={12} sm={12} md={8}>
-        <TextField
+        {/* <TextField
           id="remarks"
           name="remarks"
           label="Remarks"
@@ -497,6 +498,21 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           }}
           inputProps={{ maxLength: 250 }}
           // size="small"
+        /> */}
+        <RemarkField
+          id="remarks"
+          name="remarks"
+          label="Remarks"
+          fullWidth
+          formik={formik}
+          maxLength={255}
+          variant="outlined"
+          multiline
+          InputLabelProps={{
+            shrink: Boolean(formik.values.remarks),
+          }}
+          rows={2}
+          inputProps={{ maxLength: 255 }}
         />
       </Grid>
     </Grid>

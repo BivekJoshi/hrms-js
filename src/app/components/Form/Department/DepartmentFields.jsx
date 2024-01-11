@@ -2,6 +2,7 @@ import { Grid, TextField, Button } from "@mui/material";
 import React from "react";
 import useDepartmentForm from "../../../hooks/department/DepartmentForm/useDepartmentForm";
 import CustomButton from "../../../utils/Button/Button";
+import RemarkField from "../../RemarkField/RemarkField";
 
 const DepartmentFields = ({ onClose, isLoading, data }) => {
   const { formik } = useDepartmentForm(data, onClose);
@@ -56,7 +57,7 @@ const DepartmentFields = ({ onClose, isLoading, data }) => {
           />
         </Grid>
         <Grid item xs={12} sm={12}>
-          <TextField
+          {/* <TextField
             id="departmentDescription"
             name="departmentDescription"
             label="Description"
@@ -76,6 +77,21 @@ const DepartmentFields = ({ onClose, isLoading, data }) => {
             variant="outlined"
             InputLabelProps={{ shrink: Boolean(formik.values.departmentDescription) }}
             inputProps={{ maxLength: 250 }}
+          /> */}
+          <RemarkField
+            id="departmentDescription"
+            name="departmentDescription"
+            label="Description"
+            fullWidth
+            formik={formik}
+            maxLength={255}
+            variant="outlined"
+            multiline
+            InputLabelProps={{
+              shrink: Boolean(formik.values.departmentDescription),
+            }}
+            rows={4}
+            inputProps={{ maxLength: 255 }}
           />
         </Grid>
 

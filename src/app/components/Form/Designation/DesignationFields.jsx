@@ -1,6 +1,7 @@
 import { Grid, TextField, Button, MenuItem } from "@mui/material";
 import React from "react";
 import useDesignationForm from "../../../hooks/designation/DesignationForm/useDesignationForm";
+import RemarkField from "../../RemarkField/RemarkField";
 
 const DesignationFields = ({ onClose, isLoading, data }) => {
   const { formik } = useDesignationForm(data, onClose);
@@ -90,7 +91,7 @@ const DesignationFields = ({ onClose, isLoading, data }) => {
           )}
         </Grid>
         <Grid item xs={12} sm={12}>
-          <TextField
+          {/* <TextField
             id="positionDetails"
             name="positionDetails"
             label="Designation Details"
@@ -110,6 +111,21 @@ const DesignationFields = ({ onClose, isLoading, data }) => {
             size="small"
             InputLabelProps={{ shrink: Boolean(formik.values.positionDetails) }}
             inputProps={{ maxLength: 250 }}
+          /> */}
+          <RemarkField
+            id="positionDetails"
+            name="positionDetails"
+            label="Designation Details"
+            fullWidth
+            formik={formik}
+            maxLength={255}
+            variant="outlined"
+            multiline
+            InputLabelProps={{
+              shrink: Boolean(formik.values.positionDetails),
+            }}
+            rows={4}
+            inputProps={{ maxLength: 255 }}
           />
         </Grid>
         <Grid

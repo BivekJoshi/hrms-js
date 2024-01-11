@@ -1,6 +1,7 @@
 import { Grid, TextField, Button } from "@mui/material";
 import React from "react";
 import useCompanyForm from "../../../hooks/company/CompanyForm/useCompanyForm";
+import RemarkField from "../../RemarkField/RemarkField";
 
 const CompanyFields = ({ onClose, isLoading, data }) => {
   const { formik } = useCompanyForm(data, onClose);
@@ -92,7 +93,7 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
           />
         </Grid>
         <Grid item xs={12} sm={12}>
-          <TextField
+          {/* <TextField
             id="branchDescription"
             name="branchDescription"
             label="Description"
@@ -112,6 +113,21 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
             variant="outlined"
             InputLabelProps={{ shrink: Boolean(formik.values.branchDescription) }}
             inputProps={{ maxLength: 250 }}
+          /> */}
+          <RemarkField
+            id="branchDescription"
+            name="branchDescription"
+            label="Description"
+            fullWidth
+            formik={formik}
+            maxLength={255}
+            variant="outlined"
+            multiline
+            InputLabelProps={{
+              shrink: Boolean(formik.values.branchDescription),
+            }}
+            rows={4}
+            inputProps={{ maxLength: 255 }}
           />
         </Grid>
         <Grid
