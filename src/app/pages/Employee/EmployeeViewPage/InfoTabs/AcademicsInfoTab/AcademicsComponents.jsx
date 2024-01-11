@@ -9,16 +9,8 @@ import { Box, Divider, Typography } from "@mui/material";
 import ThemeModeContext from "../../../../../../theme/ThemeModeContext";
 import CustomTable from "../../../../../components/CustomTable/CustomTable";
 
-const primaryColor = "#1c7ed6";
 const AcademicsComponents = ({ data, isLoading }) => {
-  // const { mode } = useContext(ThemeModeContext);
-  const level = [
-    {
-      id: 1,
-      passedLabel: "Post Graduate",
-      passedValue: "POST_GRADUATE",
-    },
-  ];
+  
   const columns = [
     {
       title: "SN",
