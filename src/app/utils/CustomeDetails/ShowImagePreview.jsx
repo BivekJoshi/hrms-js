@@ -15,6 +15,7 @@ import CloseIcon from '@mui/icons-material/Close';
 const ShowImagePreview = ({ row }) => {
   const [documentData, setDocumentData] = useState([]);
   const [selectedItem, setSelectedItem] = useState();
+  const [hoveredItem, setHoveredItem] = useState(null);
 
   useEffect(() => {
     const accumulateDocumentData = () => {
@@ -35,7 +36,7 @@ const ShowImagePreview = ({ row }) => {
       }
       if (experiencePath) {
         newDocumentData.push({
-          name: 'Expirence Letter',
+          name: 'Experience Letter',
           path: experiencePath,
         });
       }
@@ -60,24 +61,14 @@ const ShowImagePreview = ({ row }) => {
     accumulateDocumentData();
   }, [row]);
 
-  const [isHovered, setIsHovered] = useState(false);
-  const [isPreviewOpen, setPreviewOpen] = useState(false);
-
-  const handleHover = () => {
-    setIsHovered(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-  };
   const openPreview = (name) => {
-    setPreviewOpen(true);
     setSelectedItem(name);
   };
+
   const closePreview = () => {
-    setPreviewOpen(false);
-    setSelectedItem();
+    setSelectedItem(null);
   };
+
   const style = {
     position: 'absolute',
     top: '50%',
@@ -93,8 +84,10 @@ const ShowImagePreview = ({ row }) => {
   };
 
   const singleDoc = documentData?.map((document) => {
+    const isItemHovered = hoveredItem === document.name;
+
     return (
-      <TableCell>
+      <TableCell key={document.name}>
         <Box
           sx={{
             display: 'flex',
@@ -103,16 +96,16 @@ const ShowImagePreview = ({ row }) => {
           }}
         >
           <Typography variant='p'>
-            {document?.name !== 'Expirence Letter' ? document?.name : ''}
+            {document?.name !== 'Experience Letter' ? document?.name : ''}
           </Typography>
           <div
             className='image-preview-container'
-            onMouseEnter={handleHover}
-            onMouseLeave={handleMouseLeave}
+            onMouseEnter={() => setHoveredItem(document.name)}
+            onMouseLeave={() => setHoveredItem(null)}
           >
             <img src={DOC_URL + document?.path} alt={document?.name} />
             <div
-              className={`overlay-container ${isHovered ? 'visible' : ''}`}
+              className={`overlay-container ${isItemHovered ? 'visible' : ''}`}
               onClick={() => openPreview(document?.name)}
             >
               <BsEye color='white' size={30} />
@@ -129,13 +122,13 @@ const ShowImagePreview = ({ row }) => {
 
       {selectedItem && (
         <Modal
-          open={isPreviewOpen}
+          open={true}
           onClose={closePreview}
           aria-labelledby='transition-modal-title'
           aria-describedby='transition-modal-description'
           closeAfterTransition
         >
-          <Fade in={isPreviewOpen}>
+          <Fade in={true}>
             <Box sx={style}>
               <div
                 style={{
@@ -170,7 +163,7 @@ const ShowImagePreview = ({ row }) => {
                     documentData?.find((item) => item?.name === selectedItem)
                       ?.path
                   }
-                  alt={document?.name}
+                  alt={selectedItem}
                 />
               </div>
             </Box>

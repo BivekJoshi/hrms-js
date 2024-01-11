@@ -67,7 +67,7 @@ const NewEmployeeQualificationDetailForm = () => {
         isSubmitSuccess={isFormSubmitSuccess || isEditSuccess}
         deleteCallBack={handleDeleteHistory}
         showDocumentImg
-        modalHeight={'65vh'}
+        modalHeight={'70vh'}
         modalWidth={500}
       />
     </div>
