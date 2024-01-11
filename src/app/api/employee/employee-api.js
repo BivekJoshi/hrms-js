@@ -7,6 +7,11 @@ export const getEmployee = async () => {
   const data = await axiosInstance.get(`/employee/get-all`);
   return data;
 };
+
+export const getEmployeeName = async () => {
+  const data = await axiosInstance.get(`/employee/details`);
+  return data;
+};
 {
   /*________________________GETNoneUser_____________________________________*/
 }
@@ -30,7 +35,7 @@ export const getAllEmployeeData = async () => {
 {
   /*________________________GETBYPAGINATION_____________________________________*/
 }
-export const getEmployeeData = async (pageNumber, pageSize,search) => {
+export const getEmployeeData = async (pageNumber, pageSize, search) => {
   const data = await axiosInstance.get(
     `/employee/get-all-page-wise/${pageNumber}/?pageSize=${pageSize}&sortBy=id&sortDir=asc&search=${search}`
   );

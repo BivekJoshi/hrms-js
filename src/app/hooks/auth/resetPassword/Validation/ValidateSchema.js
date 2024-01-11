@@ -14,8 +14,8 @@ const NewPasswordSchema = Yup.object().shape({
       "Password must contain at least one special character (@, #, $, %, ^, &, +, =,!)."
     ),
   confirmPassword: Yup.string()
-    .oneOf([Yup.ref("password"), null], "Passwords must match")
-    .required("Confirm Password is required."),
+    .required("Confirm Password is required.")
+    .oneOf([Yup.ref("password"), null], "Passwords must match"),
 });
 
-export { NewPasswordSchema };
+export default NewPasswordSchema;

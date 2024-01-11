@@ -5,6 +5,6 @@
     padding: 6px 12px;
     border-radius: 3px;
     gap: 8px;
-    background: #fff;
+    background: transparent;
     cursor: pointer;
 }

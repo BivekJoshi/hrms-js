@@ -126,7 +126,7 @@ export const useAddEmpHistory = ({ onSuccess }) => {
     (formData) => addEmpHistory(formData, id),
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Successfully added Employee History');
+        toast.success('Successfully added work History');
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries('getEmployeeHistory');
       },

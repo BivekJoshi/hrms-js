@@ -1,32 +1,32 @@
-import { useFormik } from "formik";
+import { useFormik } from 'formik';
 import {
   useAddLeave,
   useAddLeaveByAdmin,
   useEditLeave,
   useEditLeaveByAdmin,
   useEditLeaveStatusByAdmin,
-} from "../useLeave";
+} from '../useLeave';
 import {
   EditLeaveSchemaAdmin,
   LeaveSchemaAdmin,
-} from "../Validation/LeaveSchemaForAdmin";
+} from '../Validation/LeaveSchemaForAdmin';
 
 const useLeaveForm = (data, onClose) => {
   const { mutate: addLeave, isSuccess } = useAddLeaveByAdmin({});
 
   const formik = useFormik({
     initialValues: {
-      employeeId: data?.employeeId?.id || "",
-      leaveTypeId: data?.leaveTypeId || "",
-      leaveReason: data?.leaveReason || "",
-      fromDate: data?.fromDate || "",
-      toDate: data?.toDate || "",
-      leaveRemarks: data?.leaveRemarks || "",
+      employeeId: data?.employeeId?.id || '',
+      leaveTypeId: data?.leaveTypeId || '',
+      leaveReason: data?.leaveReason || '',
+      fromDate: data?.fromDate || '',
+      toDate: data?.toDate || '',
+      leaveRemarks: data?.leaveRemarks || '',
       isHalfDay: data?.isHalfDay || false,
-      applyLeaveDays: data?.applyLeaveDays || "",
-      halfLeaveType: "FIRST_HALF",
-      id: data?.leaveId || "",
-      leavePeriod: "",
+      applyLeaveDays: data?.applyLeaveDays || '',
+      halfLeaveType: 'FIRST_HALF',
+      id: data?.leaveId || '',
+      leavePeriod: '',
     },
     validationSchema: LeaveSchemaAdmin,
     enableReinitialize: true,
@@ -34,6 +34,7 @@ const useLeaveForm = (data, onClose) => {
       handleRequest(values);
     },
   });
+  console.log('🚀 ~ useLeaveForm ~ formik:', formik);
 
   const handleRequest = (values) => {
     values = { ...values };
@@ -59,9 +60,9 @@ const useLeaveEditForm = (data, onClose) => {
   const formik = useFormik({
     initialValues: {
       id: data?.leaveId,
-      employeeId: data?.employeeId || "",
-      leaveStatus: "",
-      leaveRemarks: "",
+      employeeId: data?.employeeId || '',
+      leaveStatus: '',
+      leaveRemarks: '',
     },
     validationSchema: EditLeaveSchemaAdmin,
     onSubmit: (value) => {

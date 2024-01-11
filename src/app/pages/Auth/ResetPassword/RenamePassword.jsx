@@ -67,7 +67,7 @@ const RenamePassword = ({ isLoading }) => {
     loading,
     handleMouseDownPassword,
   } = useAddRenamePasswordForm({ id });
-
+console.log(formik)
   const {
     lowerValidated,
     upperValidated,

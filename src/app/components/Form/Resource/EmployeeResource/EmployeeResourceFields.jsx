@@ -5,28 +5,31 @@ import {
   Grid,
   MenuItem,
   TextField,
-} from "@mui/material";
-import React, { useContext } from "react";
-import useEmployeeResourceForm from "../../../../hooks/resource/employeeResource/EmployeeResourceForm/useEmployeeResourceForm";
+} from '@mui/material';
+import React, { useContext } from 'react';
+import useEmployeeResourceForm from '../../../../hooks/resource/employeeResource/EmployeeResourceForm/useEmployeeResourceForm';
 import {
   useGetAvailableOfficeResource,
   useGetOfficeResource,
-} from "../../../../hooks/resource/officeResource/useOfficeResource";
-import { useGetEmployee } from "../../../../hooks/employee/useEmployee";
-import ThemeModeContext from "../../../../../theme/ThemeModeContext";
+} from '../../../../hooks/resource/officeResource/useOfficeResource';
+import {
+  useGetEmployee,
+  useGetEmployeeName,
+} from '../../../../hooks/employee/useEmployee';
+import ThemeModeContext from '../../../../../theme/ThemeModeContext';
 
 const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
   const { data: availableOfficeResource, isLoading: resourceLoad } =
     useGetAvailableOfficeResource();
   const { data: officeResourceData } = useGetOfficeResource();
-  const { data: employeeData } = useGetEmployee();
+  const { data: employeeData } = useGetEmployeeName();
 
   const { formik } = useEmployeeResourceForm(data, onClose);
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
   };
-  const currentDate = new Date().toISOString().split("T")[0];
+  const currentDate = new Date().toISOString().split('T')[0];
 
   return (
     !isLoading && (
@@ -34,8 +37,8 @@ const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
         <Grid item xs={12} sm={12}>
           {data ? (
             <TextField
-              variant="outlined"
-              label="Employee Name"
+              variant='outlined'
+              label='Employee Name'
               fullWidth
               required
               disabled
@@ -46,7 +49,7 @@ const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
                   data?.employee?.lastName,
                 ]
                   .filter(Boolean)
-                  .join(" ") || ""
+                  .join(' ') || ''
               }
               error={
                 formik.touched.officeResourceId &&
@@ -60,25 +63,25 @@ const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
             />
           ) : (
             <Autocomplete
-              id="employeeId"
-              name="employeeId"
+              id='employeeId'
+              name='employeeId'
               disabled={editMode}
               options={employeeData || []}
               getOptionLabel={(employee) => `${employee?.label}`}
               value={employeeData?.find((emp) => {
-                emp?.employeeId === formik.values.employeeId || "";
+                emp?.employeeId === formik.values.employeeId || '';
               })}
               onChange={(event, newValue) => {
-                formik.setFieldValue("employeeId", newValue?.employeeId || "");
+                formik.setFieldValue('employeeId', newValue?.employeeId || '');
               }}
               renderInput={(params) => (
                 <TextField
                   {...params}
-                  label="Employee Name"
-                  placeholder="Select employee"
+                  label='Employee Name'
+                  placeholder='Select employee'
                   fullWidth
                   required
-                  variant="outlined"
+                  variant='outlined'
                   error={
                     formik.touched.employeeId &&
                     Boolean(formik.errors.employeeId)
@@ -86,7 +89,7 @@ const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
                   helperText={
                     formik.touched.employeeId && formik.errors.employeeId
                   }
-                  size="small"
+                  size='small'
                 />
               )}
             />
@@ -96,12 +99,12 @@ const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
         <Grid item xs={12} sm={12}>
           {data ? (
             <TextField
-              variant="outlined"
-              label="Office Logistics"
+              variant='outlined'
+              label='Office Logistics'
               fullWidth
               required
               disabled
-              value={data?.officeResource?.name || ""}
+              value={data?.officeResource?.name || ''}
               error={
                 formik.touched.officeResourceId &&
                 Boolean(formik.errors.officeResourceId)
@@ -114,24 +117,24 @@ const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
             />
           ) : (
             <Autocomplete
-              id="officeResourceId"
-              name="officeResourceId"
+              id='officeResourceId'
+              name='officeResourceId'
               disabled={editMode}
               options={availableOfficeResource || []}
-              getOptionLabel={(option) => option?.name || ""}
+              getOptionLabel={(option) => option?.name || ''}
               value={officeResourceData?.find(
                 (resource) =>
-                  resource?.id === formik.values.officeResourceId || ""
+                  resource?.id === formik.values.officeResourceId || ''
               )}
               onChange={(event, newValue) => {
-                formik.setFieldValue("officeResourceId", newValue?.id || "");
+                formik.setFieldValue('officeResourceId', newValue?.id || '');
               }}
               renderInput={(params) => (
                 <TextField
                   {...params}
-                  variant="outlined"
-                  label="Office Logistics"
-                  placeholder="Select logistics"
+                  variant='outlined'
+                  label='Office Logistics'
+                  placeholder='Select logistics'
                   fullWidth
                   required
                   error={
@@ -151,11 +154,11 @@ const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
 
         <Grid item xs={12} sm={12}>
           <TextField
-            type="date"
-            id="receiveDate"
-            name="receiveDate"
-            label="Received Date"
-            placeholder="Select date"
+            type='date'
+            id='receiveDate'
+            name='receiveDate'
+            label='Received Date'
+            placeholder='Select date'
             fullWidth
             required
             value={formik.values.receiveDate}
@@ -167,17 +170,17 @@ const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
               formik.touched.receiveDate && Boolean(formik.errors.receiveDate)
             }
             helperText={formik.touched.receiveDate && formik.errors.receiveDate}
-            variant="outlined"
+            variant='outlined'
             InputLabelProps={{ shrink: true }}
-            size="small"
+            size='small'
           />
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
-            id="conditionWhileProvided"
-            name="conditionWhileProvided"
-            label="Device Condition"
-            placeholder="Enter device condition"
+            id='conditionWhileProvided'
+            name='conditionWhileProvided'
+            label='Device Condition'
+            placeholder='Enter device condition'
             fullWidth
             value={formik.values.conditionWhileProvided}
             onChange={formik.handleChange}
@@ -189,45 +192,44 @@ const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
               formik.touched.conditionWhileProvided &&
               formik.errors.conditionWhileProvided
             }
-            variant="outlined"
-            size="small"
-            
+            variant='outlined'
+            size='small'
           />
         </Grid>
         <Grid item xs={12} sm={12} md={12} lg={12}>
           <TextField
-            id="remarks"
-            name="remarks"
-            label="Remark"
-            placeholder="Enter remark for the resource"
+            id='remarks'
+            name='remarks'
+            label='Remark'
+            placeholder='Enter remark for the resource'
             fullWidth
             multiline
             value={formik.values.remarks}
             onChange={formik.handleChange}
             error={formik.touched.remarks && Boolean(formik.errors.remarks)}
             helperText={formik.touched.remarks && formik.errors.remarks}
-            variant="outlined"
-            size="small"
+            variant='outlined'
+            size='small'
           />
         </Grid>
         <Grid
           container
-          direction="row"
-          justifyContent="flex-end"
-          alignItems="flex-end"
+          direction='row'
+          justifyContent='flex-end'
+          alignItems='flex-end'
         >
           <Button
-            variant="contained"
+            variant='contained'
             onClick={handleFormSubmit}
             sx={{ mt: 3, ml: 1 }}
           >
             Submit
           </Button>
           <Button
-            variant="contained"
+            variant='contained'
             onClick={onClose}
             sx={{ mt: 3, ml: 1 }}
-            color="error"
+            color='error'
           >
             Cancel
           </Button>

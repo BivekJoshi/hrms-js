@@ -29,6 +29,19 @@ export const EmployPichart = ({ data }) => {
     : [];
 
   const options = {
+    plotOptions: {
+      pie: {
+        // customScale: 1,
+        // startAngle: 0,
+
+        donut: {
+          size: "60%",
+          labels: {
+            show: true,
+          },
+        },
+      },
+    },
     chart: {
       width: 380,
       type: "donut",
@@ -36,6 +49,12 @@ export const EmployPichart = ({ data }) => {
     labels: labels,
     colors: COLORS,
     legend: {
+      // floating: true,
+      // position: "right", // You can change the position if needed
+      // containerMargin: {
+      //   right: 50, // Adjust the margin to move both donut chart and legend
+      // },
+      // offsetY: 40,
       labels: {
         colors: labels.map(() => (mode === "dark" ? "white" : "black")),
       },
@@ -56,11 +75,13 @@ export const EmployPichart = ({ data }) => {
   };
 
   return (
-    <ReactApexChart
-      options={options}
-      series={series}
-      type="donut"
-      height={250}
-    />
+      <ReactApexChart
+        options={options}
+        series={series}
+        type="donut"
+        height={250}
+      />
+
+ 
   );
 };
