@@ -54,6 +54,7 @@ const scoreType = [
     label: "Grade",
   },
 ];
+
 const years = Array.from(
   { length: 100 },
   (_, index) => new Date().getFullYear() - index
@@ -110,6 +111,16 @@ const QualificationAddField = ({ passedLevelData, formik }) => {
     p: "12px 24px",
   };
 
+  const valuesToRemove = passedLevelData.map((item) => item.passedlevel);
+
+  const filteredPassedLevel = passedLevel.filter(
+    (item) => !valuesToRemove.includes(item.id)
+  );
+
+  const passedLevelOptions = formik?.values?.id
+    ? passedLevel
+    : filteredPassedLevel;
+
   return (
     <Grid container spacing={2}>
       <Grid item xs={12} sm={12} md={12}>
@@ -151,6 +162,7 @@ const QualificationAddField = ({ passedLevelData, formik }) => {
           label="Passed Level"
           fullWidth
           select
+          disabled={formik?.values?.id && Boolean(formik?.values?.id)}
           value={formik.values.passedLevel}
           onChange={formik.handleChange}
           error={
@@ -161,7 +173,7 @@ const QualificationAddField = ({ passedLevelData, formik }) => {
           size="small"
           InputLabelProps={{ shrink: Boolean(formik.values.passedLevel) }}
         >
-          {passedLevel?.map((option) => (
+          {passedLevelOptions?.map((option) => (
             <MenuItem key={option.id} value={option.id}>
               {option.label}
             </MenuItem>
