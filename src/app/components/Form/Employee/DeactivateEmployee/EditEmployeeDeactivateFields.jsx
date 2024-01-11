@@ -270,7 +270,8 @@ export const EditEmployeeActivateFields = ({ onClose, isLoading, data }) => {
             renderInput={(params) => (
               <TextField
                 {...params}
-                label='Reason'
+                label=' Reason'
+                placeholder='Select Reason'
                 fullWidth
                 error={
                   formik.touched.terminationType &&

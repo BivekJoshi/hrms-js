@@ -32,7 +32,7 @@ export const useAddDesignation = ({ onSuccess }) => {
     (formData) => addDesignation(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success("Succesfully added Designation");
+        toast.success("Successfully added Designation");
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries("getDesignation");
       },

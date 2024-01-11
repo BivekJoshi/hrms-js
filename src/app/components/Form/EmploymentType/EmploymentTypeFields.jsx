@@ -18,7 +18,7 @@ const EmploymentTypeFields = ({ onClose, isLoading, data }) => {
           <TextField
             id="name"
             name="name"
-            label="Employment Type name"
+            label="Employment Type Name"
             placeholder="Enter employment type"
             fullWidth
             required

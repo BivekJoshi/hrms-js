@@ -61,7 +61,7 @@ const CompanyTable = ({ permissions, companyData, isLoading }) => {
           open={openDeleteModal}
           handleCloseModal={handleCloseDeleteModal}
           handleConfirmDelete={handleConfirmDelete}
-          message={"Company"}
+          message={"Branch"}
         />
       )}
     </>

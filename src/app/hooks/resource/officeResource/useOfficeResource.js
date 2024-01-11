@@ -82,7 +82,7 @@ export const useAddOfficeResource = ({ onSuccess }) => {
     (formData) => addofficeResource(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Succesfully added Office Logistics');
+        toast.success('Successfully added Office Logistics');
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries('getAvailableOfficeResource');
       },
