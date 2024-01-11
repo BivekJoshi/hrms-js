@@ -18,17 +18,21 @@ const AddDepartmentHistoryFields = ({
       // onClose();
     }
   };
-  const currentDate = new Date().toISOString().split('T')[0];
+  const currentDate = new Date().toISOString().split("T")[0];
+ 
+  const effectiveDate = (branchHistoryData && branchHistoryData.length > 0) ? branchHistoryData?.find(date => date?.isRecentDepartment === true) : null; // find effective date for validation
+
+  console.log("data", effectiveDate);
 
   return (
     !isLoading && (
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
           <TextField
-            id='departmentId'
-            name='departmentId'
-            label='Department Name'
-            placeholder='Enter Department name'
+            id="departmentId"
+            name="departmentId"
+            label="Department Name"
+            placeholder="Enter Department name"
             fullWidth
             required
             select
@@ -58,29 +62,56 @@ const AddDepartmentHistoryFields = ({
           </TextField>
         </Grid>
         <Grid item xs={12} sm={12}>
-          <TextField
-            id='effectiveFromDate'
-            name='effectiveFromDate'
-            label='Effective From Date'
-            type='date'
-            fullWidth
-            inputProps={{
-              max: currentDate, // Disable past date selections
-            }}
-            required
-            value={formik.values.effectiveFromDate}
-            onChange={formik.handleChange}
-            error={
-              formik.touched.effectiveFromDate &&
-              Boolean(formik.errors.effectiveFromDate)
-            }
-            helperText={
-              formik.touched.effectiveFromDate &&
-              formik.errors.effectiveFromDate
-            }
-            variant='outlined'
-            InputLabelProps={{ shrink: true }}
-          />
+          {effectiveDate ? (
+            <TextField
+              id="effectiveFromDate"
+              name="effectiveFromDate"
+              label="Effective From Date"
+              type="date"
+              fullWidth
+              inputProps={{
+                min: effectiveDate?.effectiveFromDate, // Disable past date selections
+                max: currentDate,
+              }}
+              required
+              value={effectiveDate ? formik.values.effectiveFromDate : '' }
+              onChange={formik.handleChange}
+              error={
+                formik.touched.effectiveFromDate &&
+                Boolean(formik.errors.effectiveFromDate)
+              }
+              helperText={
+                formik.touched.effectiveFromDate &&
+                formik.errors.effectiveFromDate
+              }
+              variant="outlined"
+              InputLabelProps={{ shrink: true }}
+            />
+          ) : (
+            <TextField
+              id="effectiveFromDate"
+              name="effectiveFromDate"
+              label="Effective From Date"
+              type="date"
+              fullWidth
+              inputProps={{
+                max: currentDate, // Disable past date selections
+              }}
+              required
+              value={formik.values.effectiveFromDate}
+              onChange={formik.handleChange}
+              error={
+                formik.touched.effectiveFromDate &&
+                Boolean(formik.errors.effectiveFromDate)
+              }
+              helperText={
+                formik.touched.effectiveFromDate &&
+                formik.errors.effectiveFromDate
+              }
+              variant="outlined"
+              InputLabelProps={{ shrink: true }}
+            />
+          )}
         </Grid>
         {/* <Grid item xs={12} sm={12}>
           <TextField
@@ -105,27 +136,29 @@ const AddDepartmentHistoryFields = ({
         </Grid> */}
         <Grid item xs={12} sm={12}>
           <TextField
-            id='remarks'
-            name='remarks'
-            label='Remarks'
-            placeholder='Enter remarks type'
+            id="remarks"
+            name="remarks"
+            label="Remarks"
+            placeholder="Enter remarks type"
             fullWidth
             value={formik.values.remarks}
             onChange={formik.handleChange}
             error={formik.touched.remarks && Boolean(formik.errors.remarks)}
             helperText={formik.touched.remarks && formik.errors.remarks}
-            variant='outlined'
+            variant="outlined"
             InputLabelProps={{ shrink: true }}
+            multiline
+            minRows={3}
           />
         </Grid>
         <Grid
           container
-          direction='row'
-          justifyContent='flex-end'
-          alignItems='flex-end'
+          direction="row"
+          justifyContent="flex-end"
+          alignItems="flex-end"
         >
           <Button
-            variant='contained'
+            variant="contained"
             onClick={handleFormSubmit}
             sx={{ mt: 3, ml: 1 }}
           >
@@ -134,10 +167,10 @@ const AddDepartmentHistoryFields = ({
               : "Add Department"}
           </Button>
           <Button
-            variant='contained'
+            variant="contained"
             onClick={onClose}
             sx={{ mt: 3, ml: 1 }}
-            color='error'
+            color="error"
           >
             Cancel
           </Button>
