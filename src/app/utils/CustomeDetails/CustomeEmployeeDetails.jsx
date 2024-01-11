@@ -42,6 +42,7 @@ const CustomeEmployeeDetails = ({
   const [selectedRowId, setSelectedRowId] = useState();
   const { mode } = useContext(ThemeModeContext);
   const [documentData, setDocumentData] = useState([]);
+  console.log('🚀 ~ documentData:', documentData);
   const style = {
     position: 'absolute',
     top: '50%',
@@ -207,7 +208,9 @@ const CustomeEmployeeDetails = ({
                             return (
                               <TableCell>
                                 {' '}
-                                <ShowImagePreview documentData={document} />
+                                <ShowImagePreview
+                                  documentData={documentData[0]}
+                                />
                               </TableCell>
                             );
                           } else {
