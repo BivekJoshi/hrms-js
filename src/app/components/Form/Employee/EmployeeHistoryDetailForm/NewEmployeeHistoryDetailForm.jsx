@@ -49,6 +49,7 @@ const NewEmployeeHistoryDetailForm = () => {
     },
   ];
 
+  
   return (
     <div>
       <CustomeEmployeeDetails

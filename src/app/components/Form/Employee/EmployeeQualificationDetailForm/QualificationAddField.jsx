@@ -17,7 +17,7 @@ import { Box } from "@mui/system";
 import { DOC_URL } from "../../../../../auth/axiosInterceptor";
 import ThemeModeContext from "../../../../../theme/ThemeModeContext";
 
-export  const passedLevel = [
+const passedLevel = [
   {
     id: "SLC",
     label: "SLC / SEE",
@@ -43,7 +43,8 @@ export  const passedLevel = [
     label: "PHD",
   },
 ];
-export const scoreType = [
+
+const scoreType = [
   {
     id: "PERCENT",
     label: "Percentage",
@@ -58,7 +59,7 @@ const years = Array.from(
   (_, index) => new Date().getFullYear() - index
 ); // Change 100 to adjust the range of available years
 
-const QualificationAddField = ({ formik }) => {
+const QualificationAddField = ({ passedLevelData, formik }) => {
   const [previewImage, setPreviewImage] = useState(null);
   const [isPreviewOpen, setPreviewOpen] = useState(false);
   const [documentImg, setDocumnetImage] = useState(null);
@@ -108,6 +109,7 @@ const QualificationAddField = ({ formik }) => {
     boxShadow: 24,
     p: "12px 24px",
   };
+
   return (
     <Grid container spacing={2}>
       <Grid item xs={12} sm={12} md={12}>

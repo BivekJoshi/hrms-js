@@ -45,6 +45,10 @@ const NewEmployeeQualificationDetailForm = () => {
     },
   ];
 
+  const passedLevelData = data?.map((d) => {
+    return { passedlevel: d.passedLevel };
+  });
+
   return (
     <div>
       <CustomeEmployeeDetails
@@ -52,13 +56,18 @@ const NewEmployeeQualificationDetailForm = () => {
         title={"Education Detail"}
         columns={columns}
         data={data}
-        renderFeilds={<QualificationAddField formik={formik} />}
+        renderFeilds={
+          <QualificationAddField
+            passedLevelData={passedLevelData}
+            formik={formik}
+          />
+        }
         isLoading={isLoading}
         handleFormSubmit={handleSubmit}
         isSubmitSuccess={isFormSubmitSuccess || isEditSuccess}
         deleteCallBack={handleDeleteHistory}
         showDocumentImg
-        modalHeight={"69vh"}
+        modalHeight={"80vh"}
         modalWidth={500}
       />
     </div>
