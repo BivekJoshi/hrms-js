@@ -112,7 +112,6 @@ const Attendance = () => {
   const { palette } = useContext(ThemeModeContext);
 
   const [searchEmployee, setSearchEmployee] = useState('');
-  console.log('🚀 ~ Attendance ~ searchEmployee:', searchEmployee);
   const [searchMonth, setSearchMonth] = useState('');
   const [searchYear, setSearchYear] = useState('');
 
@@ -201,7 +200,7 @@ const Attendance = () => {
   const filterMenu = [
     {
       name: 'employeeName',
-      label: 'Employee Name',
+      label: 'Search by Employee name',
       value: searchEmployee,
       type: 'attendance',
       onChange: setSearchEmployee,
@@ -214,75 +213,8 @@ const Attendance = () => {
   return (
     <div className='main'>
       <Typography variant='h5'>Attendance</Typography>
-      <NewFilter inputField={filterMenu} />
-      {/* <div className='Search'>
-        <Box
-          component='form'
-          noValidate
-          autoComplete='on'
-          borderRadius='6px'
-          padding='16px'
-          bgcolor={palette?.background?.default}
-        >
-          <Grid>
-            <Typography variant='h7' fontWeight={500}>
-              Filter By:
-            </Typography>
-          </Grid>
-          <Grid container spacing={4}>
-            <Grid item xs={4}>
-              <TextField
-                id='standard-basic'
-                fullWidth
-                label='Search Employee'
-                variant='outlined'
-                value={searchEmployee}
-                onChange={(e) => setSearchEmployee(e.target.value)}
-              />
-            </Grid>
-             <Grid item xs={4}>
-              <TextField
-                select
-                label='Select Month'
-                fullWidth
-                defaultValue={monthName}
-                value={searchMonth}
-                onChange={(e) => setSearchMonth(e.target.value)}
-              >
-                {month.map((option) => (
-                  <MenuItem
-                    key={option.value}
-                    value={option.value}
-                    sx={{ bgcolor: mode === 'light' ? '' : '#413e3e' }}
-                  >
-                    {option.label}
-                  </MenuItem>
-                ))}
-              </TextField>
-            </Grid>
-            <Grid item xs={4}>
-              <TextField
-                select
-                fullWidth
-                label='Select Year'
-                defaultValue={year}
-                value={searchYear}
-                onChange={(e) => setSearchYear(e.target.value)}
-              >
-                {year0.map((option) => (
-                  <MenuItem
-                    key={option.value}
-                    value={option.value}
-                    sx={{ bgcolor: mode === 'light' ? '' : '#413e3e' }}
-                  >
-                    {option.label}
-                  </MenuItem>
-                ))}
-              </TextField>
-            </Grid> 
-          </Grid>
-        </Box>
-      </div> */}
+      <NewFilter inputField={filterMenu} disableSubmit={true}/>
+      
 
       <Typography
         variant='h6'

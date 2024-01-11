@@ -23,7 +23,7 @@ export const usePostResendEmail = ({ onSuccess,passId }) => {
 
   return useMutation(['postResentEmail'], (formData) => postResentEmail(formData,passId), {
     onSuccess: (data, variables, context) => {
-      toast.success('Succesfully resend email');
+      toast.success('Successfully resend email');
       onSuccess && onSuccess(data, variables, context);
     },
   });

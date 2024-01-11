@@ -1,4 +1,4 @@
-import { useFormik } from "formik";
+import { useFormik } from 'formik';
 import { BranchHistorySchema } from '../Validation/BranchHistorySchema';
 import { useAddBranchHistory } from '../../branchHistory/useBranchHistory';
 
@@ -7,18 +7,16 @@ const useAddBranchHistoryForm = (onClose, id) => {
 
   const formik = useFormik({
     initialValues: {
-      branchId: "",
-      effectiveFromDate: "",
-      effectiveToDate: "",
-      remarks: "",
+      branchId: '',
+      effectiveFromDate: '',
+      effectiveToDate: '',
+      remarks: '',
       employeeId: id,
     },
     validationSchema: BranchHistorySchema,
     enableReinitialize: true,
     onSubmit: (values) => {
-     
-        handledAddRequest(values);
-    
+      handledAddRequest(values);
     },
   });
 

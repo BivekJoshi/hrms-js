@@ -36,7 +36,7 @@ export const useAddEmploymentType = ({ onSuccess }) => {
     (formData) => addEmploymentType(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success("Succesfully added Employment Type");
+        toast.success("Successfully added Employment Type");
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries("getEmploymentType");
       },
@@ -55,7 +55,7 @@ export const useDeleteEmploymentType = ({ onSuccess }) => {
     async (id) => await deleteEmploymentType(id),
     {
       onSuccess: (data, variables, context) => {
-        toast.success("Successfully deleted Employement Type");
+        toast.success("Successfully deleted Employment Type");
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries("getEmploymentType");
       },

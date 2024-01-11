@@ -8,8 +8,8 @@ import * as Yup from 'yup';
 
 // Validation schema for terminating employee
 const removeDeactiveEmployeeSchema = Yup.object().shape({
-  effectiveDate: Yup.date().required('Effective date is required'),
-  terminationType: Yup.string().required('Termination reason is required'),
+  effectiveDate: Yup.date().required('Effective from date is required'),
+  terminationType: Yup.string().required('Termination type is required'),
 });
 // Validation schema for activating employee
 const activeEmployeeSchema = Yup.object().shape({

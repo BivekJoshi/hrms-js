@@ -13,7 +13,7 @@ const TrainingField = ({ onClose, isLoading, data, empId }) => {
   };
   const currentDate = new Date().toISOString().split('T')[0];
 
-  const submitButtonText = data ? 'Update' : 'Add';
+  const submitButtonText = data ? 'Update Training' : 'Add Training';
   return (
     !isLoading && (
       <Grid container spacing={3}>

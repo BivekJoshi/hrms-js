@@ -116,14 +116,15 @@ const QualificationAddField = ({ formik }) => {
           id={`board`}
           name={`board`}
           label="Board"
-          placeholder="Enter board"
           fullWidth
+          required
           value={formik.values.board}
           onChange={formik.handleChange}
           error={formik.touched.board && Boolean(formik.errors.board)}
           helperText={formik.touched.board && formik.errors.board}
           variant="outlined"
           size="small"
+          InputLabelProps={{ shrink: Boolean(formik.values.board) }}
         />
       </Grid>
       <Grid item xs={12} sm={12} md={12}>
@@ -131,15 +132,15 @@ const QualificationAddField = ({ formik }) => {
           id={`institute`}
           name={`institute`}
           label="Institude"
-          placeholder="Enter institude"
           fullWidth
-          // required
+          required
           value={formik.values.institute}
           onChange={formik.handleChange}
           error={formik.touched.institute && Boolean(formik.errors.institute)}
           helperText={formik.touched.institute && formik.errors.institute}
           variant="outlined"
           size="small"
+          InputLabelProps={{ shrink: Boolean(formik.values.institute) }}
         />
       </Grid>
       <Grid item xs={12} sm={12} md={6}>
@@ -147,7 +148,6 @@ const QualificationAddField = ({ formik }) => {
           id={`passedLevel`}
           name={`passedLevel`}
           label="Passed Level"
-          placeholder="Enter passed level"
           fullWidth
           select
           value={formik.values.passedLevel}
@@ -158,6 +158,7 @@ const QualificationAddField = ({ formik }) => {
           helperText={formik.touched.passedLevel && formik.errors.passedLevel}
           variant="outlined"
           size="small"
+          InputLabelProps={{ shrink: Boolean(formik.values.passedLevel) }}
         >
           {passedLevel?.map((option) => (
             <MenuItem key={option.id} value={option.id}>
@@ -171,7 +172,6 @@ const QualificationAddField = ({ formik }) => {
           id={`scoreType`}
           name={`scoreType`}
           label="Score type"
-          placeholder="Select score type"
           fullWidth
           select
           // required
@@ -181,6 +181,7 @@ const QualificationAddField = ({ formik }) => {
           helperText={formik.touched.scoreType && formik.errors.scoreType}
           variant="outlined"
           size="small"
+          InputLabelProps={{ shrink: Boolean(formik.values.scoreType) }}
         >
           {scoreType?.map((option) => (
             <MenuItem key={option.id} value={option.id}>
@@ -195,7 +196,6 @@ const QualificationAddField = ({ formik }) => {
             id={`grade`}
             name={`grade`}
             label="Score"
-            placeholder="Enter score"
             fullWidth
             value={formik.values.grade}
             onChange={formik.handleChange}
@@ -203,7 +203,7 @@ const QualificationAddField = ({ formik }) => {
             helperText={formik.touched.grade && formik.errors.grade}
             variant="outlined"
             size="small"
-            InputLabelProps={{ shrink: true }}
+            InputLabelProps={{ shrink: Boolean(formik.values.grade) }}
           />
         </Grid>
       )}
@@ -221,7 +221,6 @@ const QualificationAddField = ({ formik }) => {
                 id={`passedYear`}
                 name={`passedYear`}
                 label="Passed Year (A.D.)"
-                placeholder="Select your passed year"
                 fullWidth
                 error={
                   formik.touched.passedYear && Boolean(formik.errors.passedYear)
@@ -231,6 +230,7 @@ const QualificationAddField = ({ formik }) => {
                 }
                 variant="outlined"
                 size="small"
+                InputLabelProps={{ shrink: Boolean(formik.values.passedYear) }}
               />
             );
           }}

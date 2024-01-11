@@ -140,7 +140,7 @@ const AddEmployeeHistoryFields = ({ onClose, isLoading }) => {
             onClick={handleFormSubmit}
             sx={{ mt: 3, ml: 1 }}
           >
-            Add
+            Add Work History
           </Button>
           <Button
             variant="contained"

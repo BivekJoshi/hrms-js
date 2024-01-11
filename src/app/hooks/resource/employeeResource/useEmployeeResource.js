@@ -55,7 +55,7 @@ export const useAddEmployeeResource = ({ onSuccess }) => {
     (formData) => addemployeeResource(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Succesfully provide employee with office logistic');
+        toast.success('Successfully provide employee with office logistic');
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries('getemployeeResource');
       },

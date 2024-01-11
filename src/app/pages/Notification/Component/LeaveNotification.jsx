@@ -55,6 +55,27 @@ export const LeaveNotification = ({
     }
   };
 
+  // requested date
+  const getTimeDifference = (dateString) => {
+    const currentDate = new Date();
+    const requestedDate = new Date(dateString);
+
+    const timeDifference = currentDate - requestedDate;
+    const seconds = Math.floor(timeDifference / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+
+    if (days > 0) {
+      return `${days} day${days > 1 ? "s" : ""} ago`;
+    } else if (hours > 0) {
+      return `${hours} hour${hours > 1 ? "s" : ""} ago`;
+    } else if (minutes > 0) {
+      return `${minutes} minute${minutes > 1 ? "s" : ""} ago`;
+    } else {
+      return "Just now";
+    }
+  };
   return (
     <Grid
       sx={{
@@ -98,8 +119,10 @@ export const LeaveNotification = ({
                   justifyContent='space-between'
                 >
                   <Typography
-                    fontSize='14px'
-                    style={{ textTransform: 'capitalize' }}
+                    width="10rem"
+                    fontSize="14px"
+                    textAlign="center"
+                    style={{ textTransform: "capitalize" }}
                   >
                     <span style={{ textTransform: 'capitalize' }}>
                       {ename.leaveType.leaveName + ' '}
@@ -128,10 +151,11 @@ export const LeaveNotification = ({
                       ? ' ' + 'half' + ' '
                       : ' ' + ename.applyLeaveDays + ' '}
                   </span>
-                  days.
+                  {ename.applyLeaveDays > 1 ? " days." : "day."}
                 </Typography>
-                <Typography fontSize='12px'>
-                  From: {formatDate(ename.fromDate)} -{formatDate(ename.toDate)}
+                <Typography fontSize="12px">
+                  From: {formatDate(ename.fromDate)} -{" "}
+                  {formatDate(ename.toDate)}
                 </Typography>
               </Grid>
               <Typography
@@ -139,7 +163,7 @@ export const LeaveNotification = ({
                 color={mode === 'light' ? '#7A757F' : ''}
                 p='8px 8px 0 8px'
               >
-                Requested :
+                Requested :{getTimeDifference(ename.createdDate || "")}
               </Typography>
             </Grid>
           ))}

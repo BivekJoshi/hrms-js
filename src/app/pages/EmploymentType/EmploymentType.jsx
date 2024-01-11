@@ -71,8 +71,20 @@ const EmploymentType = () => {
       title: "Description",
       field: "description",
       emptyValue: "-",
-      width: 400,
+      width: 300,
       sorting: false,
+      render: (rowData) => (
+        <div
+          style={{
+            whiteSpace: "normal",
+            overflowWrap: "break-word",
+            wordWrap: "break-word",
+            wordBreak: "break-all",
+          }}
+        >
+          {rowData?.description}
+        </div>
+      ),
     },
   ].filter(Boolean);
 
