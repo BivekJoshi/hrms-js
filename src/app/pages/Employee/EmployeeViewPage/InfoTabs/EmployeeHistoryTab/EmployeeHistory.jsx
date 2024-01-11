@@ -102,7 +102,7 @@ const EmployeeHistory = ({ data, role }) => {
               sx={{ mt: 3, ml: 1 }}
               onClick={handleAddOpenModal}
             >
-              + Add Work History
+              Add Work History
             </Button>
           ) : (
             ''

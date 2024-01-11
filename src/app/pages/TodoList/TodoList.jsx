@@ -140,7 +140,7 @@ const TodoList = ({ permissions }) => {
       <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
         <ButtonComponent
           OnClick={handleAddOpenModal}
-          buttonName={'+ Add Todo'}
+          buttonName={'Add Todo'}
           color='#fff'
         />
       </Box>

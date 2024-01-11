@@ -151,7 +151,7 @@ const Project = ({ permissions }) => {
                 onClick={handleAddOpenModal}
                 sx={{ textTransform: 'none', color: '#fff' }}
               >
-                + Add Project
+                Add Project
               </Button>
             </Box>
           )}
