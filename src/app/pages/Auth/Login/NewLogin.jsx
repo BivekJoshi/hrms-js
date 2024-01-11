@@ -64,7 +64,7 @@ const NewLogin = () => {
   const handleFormSubmit = () => {
     formik.handleSubmit();
   };
-  
+
   return (
     <div style={{ height: '100dvh' }}>
       <div className='login-bgg'>
@@ -133,7 +133,7 @@ const NewLogin = () => {
                 fill='#6DAB23'
               />
             </svg>
-            <Grid className='largDesign' width={{ lg: '30rem' }}>
+            <Grid className='largDesign' width={{ lg: '30rem', xs: '80%' }}>
               <Typography fontSize='40px' color='primary' fontWeight='600'>
                 Log In
               </Typography>
@@ -168,6 +168,7 @@ const NewLogin = () => {
                 name='password'
                 autoComplete='current-password'
                 fullWidth
+                // autoFocus
                 size='small'
                 onKeyPress={(ev) => {
                   if (ev.key === 'Enter') {
@@ -256,7 +257,7 @@ const NewLogin = () => {
               />
               <span className='login-lines'>
                 <svg
-                  width='400'
+                  width='100%'
                   height='278'
                   viewBox='0 0 400 278'
                   fill='none'

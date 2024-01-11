@@ -30,28 +30,11 @@ import EmployeeGridView from './EmployeeView/EmployeePage/EmployeeGridView';
 import { debounce } from 'lodash';
 import { useEffect } from 'react';
 import { useCallback } from 'react';
-
-const labelStyle = {
-  backgroundColor: '#EBEDEF',
-  marginLeft: '.5rem',
-  textTransform: 'none',
-  borderRadius: '.5rem',
-  color: 'black',
-  textDecoder: 'none',
-  // fontWeight: "bold",
-};
-const activeLabelStyle = {
-  ...labelStyle,
-  backgroundColor: '#329EF4',
-  borderBottom: 'none',
-  textDecoder: 'none',
-  // fontWeight: "bold",
-};
+import NewFilter from '../../components/NewFilter/NewFilter';
 
 const Employee = () => {
   const { mode, palette } = React.useContext(ThemeModeContext);
   const [pageNumber, setPageNumber] = useState(0);
-  const [pageSize, setPageSize] = useState(12);
   const [search, setSearch] = useState('');
   const [debounceValue, setdebounceValue] = useState('');
   const labelStyle = {
@@ -77,17 +60,11 @@ const Employee = () => {
     data: employeeData,
     isLoading,
     refetch,
-  } = useGetEmployeeData(pageNumber, pageSize, debounceValue);
+  } = useGetEmployeeData(pageNumber, 12, debounceValue);
 
   const handlePageChange = (event, newPage) => {
     setPageNumber(newPage - 1);
     window.scroll(0, 0);
-  };
-
-  const handlePageSizeChange = (event, newValue) => {
-    const newPageSize = parseInt(newValue, 10) || 0;
-    setPageSize(newPageSize);
-    setPageNumber(0);
   };
 
   const style = {
@@ -124,6 +101,29 @@ const Employee = () => {
     handleOpenSubmitModal,
     handleOpenEmailModal
   );
+  const handleDebounce = (e) => {
+    const value = e.target.value;
+    setSearch(value);
+    debounceSearch(value);
+  };
+
+  const handleClearSearch = () => {
+    setSearch('');
+    setdebounceValue('');
+  };
+
+  const filterMenu = [
+    {
+      label: 'Name, Phone Number, Position',
+      name: 'name',
+      type: 'employeeSearch',
+      md: 6,
+      sm: 12,
+      value: search,
+      setSearch: handleClearSearch,
+      onChange: handleDebounce,
+    },
+  ];
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -149,12 +149,6 @@ const Employee = () => {
     }, 300),
     []
   );
-
-  const handleDebounce = (e) => {
-    const value = e.target.value;
-    setSearch(value);
-    debounceSearch(value);
-  };
 
   return (
     <>
@@ -203,7 +197,9 @@ const Employee = () => {
             </Box>
           </Box>
           <TabPanel value='1'>
-            <Grid
+            <NewFilter inputField={filterMenu} disableSubmit={true} />
+
+            {/* <Grid
               container
               sx={{
                 display: 'flex',
@@ -227,7 +223,7 @@ const Employee = () => {
                   />
                 </Grid>
               </Grid>
-            </Grid>
+            </Grid> */}
             <EmployeeGridView employeeData={employeeData} />
           </TabPanel>
           <TabPanel value='2'>

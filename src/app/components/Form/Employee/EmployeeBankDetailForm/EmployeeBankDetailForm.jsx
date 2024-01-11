@@ -64,6 +64,7 @@ const EmployeeBankDetailForm = ({ formik }) => {
           label='Bank Address'
           placeholder='Enter bank address'
           fullWidth
+          multiline
           value={formik.values.bankAddress}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}

@@ -28,7 +28,7 @@ const EditEmployee = () => {
     : `/admin/employee/${id}`;
 
   const handleSubmit = () => {
-    toast.success('Changes submitted successfully');
+    handleNext({ activeStep, setActiveStep });
     navigate(targetRoute);
   };
 

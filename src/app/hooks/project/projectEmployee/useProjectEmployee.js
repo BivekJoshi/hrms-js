@@ -114,7 +114,7 @@ export const useEditProjectEmployee = ({ onSuccess }) => {
       onSuccess: (data, variables, context) => {
         toast.success('Successfully edited project');
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries('getProjectEmployee');
+        queryClient.invalidateQueries('getProjectEmployeeById');
       },
       onError: (err, _variables, _context) => {
         toast.error(`Error: ${(err, message)}`);

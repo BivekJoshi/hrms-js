@@ -75,7 +75,7 @@ const TrainingInfo = ({ data, role }) => {
       width: 100,
     },
     {
-      title: "Institude",
+      title: "Institute",
       field: "trainingInstitute",
       emptyValue: "-",
       width: 100,
@@ -95,23 +95,39 @@ const TrainingInfo = ({ data, role }) => {
     {
       title: "End Date",
       width: 75,
-
       field: "endDate",
       emptyValue: "-",
     },
+  ];
+
+  const actions = [
     {
-      title: "Actions",
-      width: 75,
-      render: (rowData) => (
-        <Stack direction="row" justifyContent={"space-evenly"}>
-          <Button color="primary" onClick={() => handleEditTraining(rowData)}>
-            <ModeEditOutlineIcon />
-          </Button>
-          <Button color="primary" onClick={() => handleDeleteTraining(rowData)}>
-            <DeleteIcon />
-          </Button>
-        </Stack>
+      icon: () => (
+        <ModeEditOutlineIcon
+          sx={{
+            color: "black",
+            "&:hover": {
+              color: "green",
+            },
+          }}
+        />
       ),
+      tooltip: "Edit Detail",
+      onClick: (event, rowData) => handleEditTraining(rowData),
+    },
+    {
+      icon: () => (
+        <DeleteIcon
+          sx={{
+            color: "black",
+            "&:hover": {
+              color: "red",
+            },
+          }}
+        />
+      ),
+      tooltip: "Delete",
+      onClick: (event, rowData) => handleDeleteTraining(rowData),
     },
   ];
   return (
@@ -138,7 +154,7 @@ const TrainingInfo = ({ data, role }) => {
         columns={columns}
         data={trainingData}
         title="Training History"
-        // isLoading={isLoading}
+        actions={actions}
       />
 
       {openAddModal && (

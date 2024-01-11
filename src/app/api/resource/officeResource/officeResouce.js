@@ -10,13 +10,13 @@ export const getofficeResource = async () => {
   /*________________________GET used OFFICE RESOURCE_____________________________________*/
 
 export const getUsedOfficeResource = async () => {
-  const data = await axiosInstance.get(`/office-resource/in-use`);
+  const data = await axiosInstance.get(`/office-resource/in-use-by-employee`);
   return data;
 };
   /*________________________GET not used OFFICE RESOURCE_____________________________________*/
 
 export const getAvailableOfficeResource = async () => {
-  const data = await axiosInstance.get(`/office-resource/not/in-use`);
+  const data = await axiosInstance.get(`/office-resource/available`);
   return data;
 };
 

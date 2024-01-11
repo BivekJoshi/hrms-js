@@ -4,8 +4,8 @@ const FamilySchema = Yup.object().shape({
   family: Yup.array()
     .of(
       Yup.object().shape({
-        name: Yup.string().required("Name is required"),
-        relation: Yup.string().required("Relation is required"),
+        name: Yup.string().required("Name is required").max(50, "Family name cannot be greater than 50 characters"),
+        relation: Yup.string().required("Relation is required").max(25, "Relation cannot be greater than 25 characters"),
         mobileNumber: Yup.string()
         .required('Mobile number is required')
         .matches(/^[0-9]{10}$/, 'Invalid mobile number format, must be 10 digits.')

@@ -110,14 +110,14 @@ const AddprojectFields = ({ onClose, isLoading }) => {
             name="projectLeadId"
             options={employeeData || []}
             getOptionLabel={(employee) =>
-              `${employee?.firstName} ${employee?.middleName} ${employee?.lastName}`
+              employee?.label
             }
             value={employeeData?.find(
-              (employee) => employee?.id === formik.values?.employeeId
+              (employee) => employee?.employeeId === formik.values?.employeeId
             )}
             onChange={(event, selectedEmployee) => {
               if (selectedEmployee) {
-                formik.setFieldValue("projectLeadId", selectedEmployee.id);
+                formik.setFieldValue("projectLeadId", selectedEmployee.employeeId);
               }
             }}
             renderInput={(params) => (
@@ -180,13 +180,14 @@ const AddprojectFields = ({ onClose, isLoading }) => {
           <ButtonComponent
             variant="contained"
             OnClick={handleFormSubmit}
-            TextColor={"#fff"}
+            color={"#fff"}
             sx={{ mt: 3, ml: 1 }}
             buttonName={"Add Project"}
           />
           <ButtonComponent
             variant="contained"
             OnClick={onClose}
+            color={"#fff"}
             sx={{ mt: 3, ml: 1 }}
             BGColor={"#d32f2f"}
             buttonName={"Cancel"}

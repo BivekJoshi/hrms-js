@@ -1,10 +1,8 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { Email, LocalPhone } from '@mui/icons-material';
 import { Box, Button, CardMedia, Tooltip } from '@mui/material';
-import { Chip, ClickAwayListener, Grow, Stack } from '@mui/material';
-import { MenuItem, MenuList, Paper, Popper, Typography } from '@mui/material';
+import { Chip, Typography, Stack } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import Male from '../../../../assets/male.png';
 import Female from '../../../../assets/female.png';
 import MainCard from '../MainCard';
@@ -33,30 +31,9 @@ const EmployeeCard = ({
   const [open, setOpen] = useState(false);
   const [openEmailForm, setOpenEmailForm] = useState(false);
   const { mode } = useContext(ThemeModeContext); // Accessing mode from context
-  // const img = DOC_URL + employeePhoto;
-  const fullName = EFirstName + EMiddleName + ELastName;
   const anchorRef = useRef(null);
   const prevOpen = useRef(open);
   const navigate = useNavigate();
-  const handleToggle = () => {
-    setOpen((prevOpen) => !prevOpen);
-  };
-
-  const handleClose = (event) => {
-    if (anchorRef.current && anchorRef.current.contains(event.target)) {
-      return;
-    }
-    setOpen(false);
-  };
-
-  function handleListKeyDown(event) {
-    if (event.key === 'Tab') {
-      event.preventDefault();
-      setOpen(false);
-    } else if (event.key === 'Escape') {
-      setOpen(false);
-    }
-  }
 
   useEffect(() => {
     if (prevOpen.current === true && open === false) {
@@ -113,7 +90,6 @@ const EmployeeCard = ({
                   <div style={{ display: 'flex', alignItems: 'center' }}>
                     <Button
                       style={{
-                        // marginTop: "5px",
                         fontSize: '.7rem',
                         padding: '1px 5px',
                       }}
@@ -134,76 +110,11 @@ const EmployeeCard = ({
                       }}
                       onClick={() => {
                         navigate(`edit/${EmployeeId}`);
-                        // handleClose();
                       }}
                     >
                       Edit
                     </Button>
                   </div>
-                  {/* <Button
-                      ref={anchorRef}
-                      id="composition-button"
-                      aria-controls={open ? "composition-menu" : undefined}
-                      aria-expanded={open ? "true" : undefined}
-                      aria-haspopup="true"
-                      onClick={handleToggle}
-                    >
-                      <MoreHorizIcon />
-                    </Button>
-                    <Popper
-                      open={open}
-                      anchorEl={anchorRef.current}
-                      role={undefined}
-                      placement="bottom-start"
-                      transition
-                      disablePortal
-                    >
-                      {({ TransitionProps, placement }) => (
-                        <Grow
-                          {...TransitionProps}
-                          style={{
-                            transformOrigin:
-                              placement === "bottom-start"
-                                ? "left top"
-                                : "left bottom",
-                          }}
-                        >
-                          <Paper>
-                            <ClickAwayListener onClickAway={handleClose}>
-                              <MenuList
-                                autoFocusItem={open}
-                                id="composition-menu"
-                                aria-labelledby="composition-button"
-                                onKeyDown={handleListKeyDown}
-                                style={{
-                                  fontSize: ".8rem",
-                                  padding: "0.3rem 1rem",
-                                }}
-                              >
-                                <MenuItem
-                                  onClick={() => {
-                                    navigate(`edit/${EmployeeId}`);
-                                    handleClose();
-                                  }}
-                                  style={{ fontSize: ".8rem" }}
-                                >
-                                  Edit
-                                </MenuItem>
-                                <MenuItem
-                                onClick={() => {
-                                  navigate(`${EmployeeId}`);
-                                  handleClose();
-                                }}
-                                style={{ fontSize: ".8rem" }}
-                              >
-                                View Profile
-                              </MenuItem>
-                              </MenuList>
-                            </ClickAwayListener>
-                          </Paper>
-                        </Grow>
-                      )}
-                    </Popper> */}
                 </>
               )}
             </div>
@@ -218,7 +129,6 @@ const EmployeeCard = ({
             }}
             onClick={() => {
               navigate(`${EmployeeId}`);
-              // handleClose();
             }}
           >
             <CardMedia
@@ -247,31 +157,33 @@ const EmployeeCard = ({
                 </Typography>
               }
             />
-
-            <Box padding={'1rem 0'}>
-              <Tooltip title={PositionLevel || ''}>
-                <Chip
-                  style={{ width: 230 }}
-                  label={
-                    <Typography
-                      variant='p'
-                      style={{
-                        textOverflow: 'ellipsis',
-                        overflow: 'hidden',
-                      }}
-                    >{`${PositionName || ''} `}</Typography>
-                  }
-                />
-              </Tooltip>
-            </Box>
+            {PositionName && (
+              <Box pt={'1rem 0 0 0'}>
+                <Tooltip title={PositionLevel || ''}>
+                  <Chip
+                    style={{ width: 230 }}
+                    label={
+                      <Typography
+                        variant='p'
+                        style={{
+                          textOverflow: 'ellipsis',
+                          overflow: 'hidden',
+                        }}
+                      >{`${PositionName || ''} `}</Typography>
+                    }
+                  />
+                </Tooltip>
+              </Box>
+            )}
           </Stack>
 
           {isEmployee ? (
             ''
           ) : (
             <Stack
-              style={{
+              sx={{
                 fontSize: '.9rem',
+                pt: '1rem',
               }}
             >
               <Box

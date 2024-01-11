@@ -1,7 +1,8 @@
 import { useFormik } from "formik";
-import { useEditProjectTaskAssign } from "../useProjectTask";
+import { useEditProjectTaskAssign } from '../useProjectTask';
+import { TaskSchema } from './TaskSchema';
 
-const useProjectAssignTaskForm = ({data}) => {
+const useProjectAssignTaskForm = (data, onClose) => {
   const { mutate: projectCreateTask } = useEditProjectTaskAssign({});
 
   const formik = useFormik({
@@ -9,7 +10,7 @@ const useProjectAssignTaskForm = ({data}) => {
       projectTaskId: data?.id||"",
       projectEmployeeId: "",
     },
-    // validationSchema: ProjectTaskSchema,
+    validationSchema: TaskSchema,
     enableReinitialize: true,
 
     onSubmit: (values) => {
@@ -19,7 +20,11 @@ const useProjectAssignTaskForm = ({data}) => {
 
   const handleRequest = (values) => {
     values = { ...values };
-    projectCreateTask(values, formik);
+    projectCreateTask(values, {
+      onSuccess: () => {
+        onClose();
+      }
+    });
   };
 
   return { formik };

@@ -24,16 +24,8 @@ const useTransferEmployment = (data) => {
       handleRequest(values);
     },
   });
-  console.log(
-    '🚀 ~ file: useTransferEmployment.js:27 ~ useTransferEmployment ~ formik:',
-    formik
-  );
 
   const handleRequest = (values) => {
-    console.log(
-      '🚀 ~ file: useTransferEmployment.js:33 ~ handleRequest ~ values:',
-      values
-    );
     values = {
       ...values,
     };

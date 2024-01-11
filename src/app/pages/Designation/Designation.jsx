@@ -1,8 +1,8 @@
-import * as React from 'react';
-import { useState } from 'react';
-import { Box } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
-import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
+import * as React from "react";
+import { useState } from "react";
+import { Box } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import {
   useDeleteDesignation,
   useGetDesignation,
@@ -15,10 +15,11 @@ import DeleteConfirmationModal from '../../components/Modal/DeleteConfirmationMo
 import PermissionHoc from '../../hoc/permissionHoc';
 import HocButton from '../../hoc/hocButton';
 import CustomTable from '../../components/CustomTable/CustomTable';
+import ThemeModeContext from '../../../theme/ThemeModeContext';
 
 const Designation = ({ permissions }) => {
   const { data: designationData, isLoading } = useGetDesignation();
-
+  const { palette } = React.useContext(ThemeModeContext);
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
@@ -105,7 +106,7 @@ const Designation = ({ permissions }) => {
         />
       ),
       disabled: !permissions?.canEdit,
-      tooltip: 'Edit Detail',
+      tooltip: "Edit Detail",
       onClick: (event, rowData) => handleEditDesignation(rowData),
     },
     {

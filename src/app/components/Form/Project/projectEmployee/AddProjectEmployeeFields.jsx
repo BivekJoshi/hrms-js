@@ -1,49 +1,45 @@
-import { Grid, Button, TextField, MenuItem, Autocomplete } from "@mui/material";
-import React, { useContext } from "react";
-import { useGetEmployee } from "../../../../hooks/employee/useEmployee";
-import {
-  useProjectEmployeeForm,
-} from "../../../../hooks/project/projectEmployee/addProjectEmployee/useAddProjectEmployeeForm";
-import ThemeModeContext from "../../../../../theme/ThemeModeContext";
-import { ButtonComponent } from "../../../Button/ButtonComponent";
+import { Grid, Button, TextField, MenuItem, Autocomplete } from '@mui/material';
+import React, { useContext } from 'react';
+import { useGetEmployee } from '../../../../hooks/employee/useEmployee';
+import { useProjectEmployeeForm } from '../../../../hooks/project/projectEmployee/addProjectEmployee/useAddProjectEmployeeForm';
+import ThemeModeContext from '../../../../../theme/ThemeModeContext';
+import { ButtonComponent } from '../../../Button/ButtonComponent';
 
-export const AddprojectEmployeeFields = ( onClose, isLoading ) => {
+export const AddprojectEmployeeFields = ({ onClose, isLoading }) => {
   const { data: employeeData, isLoading: loadingEmployee } = useGetEmployee();
 
   const { formik } = useProjectEmployeeForm(onClose);
 
   const handleFormSubmit = () => {
-    if(formik.isValid){
+    if (formik.isValid) {
       formik.handleSubmit();
     }
   };
-
+  const currentDate = new Date().toISOString().split('T')[0];
   return (
     !loadingEmployee && (
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
           <Autocomplete
-            id="employeeId"
-            name="employeeId"
+            id='employeeId'
+            name='employeeId'
             options={employeeData}
-            getOptionLabel={(option) =>
-              `${option?.firstName} ${option.middleName || ""} ${
-                option?.lastName
-              }`
-            }
+            getOptionLabel={(option) => option?.label}
             value={
-              employeeData && employeeData.find(
-                (employee) => employee.id === formik.values.employeeId
-              ) || null
+              (employeeData &&
+                employeeData.find(
+                  (employee) => employee.employeeId === formik.values.employeeId
+                )) ||
+              null
             }
             onChange={(event, newValue) => {
-              formik.setFieldValue("employeeId", newValue?.id || "");
+              formik.setFieldValue('employeeId', newValue?.employeeId || '');
             }}
             renderInput={(params) => (
               <TextField
                 {...params}
-                label="Employee Name"
-                placeholder="Enter Employee Name"
+                label='Employee Name'
+                placeholder='Enter Employee Name'
                 fullWidth
                 error={
                   formik.touched.employeeId && Boolean(formik.errors.employeeId)
@@ -51,7 +47,7 @@ export const AddprojectEmployeeFields = ( onClose, isLoading ) => {
                 helperText={
                   formik.touched.employeeId && formik.errors.employeeId
                 }
-                variant="outlined"
+                variant='outlined'
                 InputLabelProps={{ shrink: true }}
               />
             )}
@@ -60,10 +56,10 @@ export const AddprojectEmployeeFields = ( onClose, isLoading ) => {
 
         <Grid item xs={12} sm={12}>
           <TextField
-            id="assignedOn"
-            name="assignedOn"
-            label="Assigned On"
-            type="date"
+            id='assignedOn'
+            name='assignedOn'
+            label='Assigned On'
+            type='date'
             fullWidth
             value={formik.values.assignedOn}
             onChange={formik.handleChange}
@@ -71,12 +67,15 @@ export const AddprojectEmployeeFields = ( onClose, isLoading ) => {
               formik.touched.assignedOn && Boolean(formik.errors.assignedOn)
             }
             helperText={formik.touched.assignedOn && formik.errors.assignedOn}
-            variant="outlined"
+            variant='outlined'
             InputLabelProps={{ shrink: true }}
+            inputProps={{
+              min: currentDate, // Disable past date selections
+            }}
           />
         </Grid>
 
-        <Grid item xs={12} sm={12}>
+        {/* <Grid item xs={12} sm={12}>
           <TextField
             id="deAssignedOn"
             name="deAssignedOn"
@@ -93,30 +92,33 @@ export const AddprojectEmployeeFields = ( onClose, isLoading ) => {
             }
             variant="outlined"
             InputLabelProps={{ shrink: true }}
+            inputProps={{
+              min: formik.values.assignedOn, // Disable past date selections
+            }}
           />
-        </Grid>
+        </Grid> */}
 
         <Grid
           container
-          direction="row"
-          justifyContent="flex-end"
-          alignItems="flex-end"
+          direction='row'
+          justifyContent='flex-end'
+          alignItems='flex-end'
           gap={1}
           mt={2}
         >
           <ButtonComponent
-            variant="contained"
+            variant='contained'
             OnClick={handleFormSubmit}
             sx={{ mt: 3, ml: 1 }}
-            buttonName={"Add Employee"}
+            buttonName={'Add Employee'}
           />
 
           <ButtonComponent
-            variant="contained"
+            variant='contained'
             OnClick={onClose}
-            sx={{ mt: 3, ml: 1, bgcolor: "red" }}
-            BGColor={"#d32f2f"}
-            buttonName={"Cancel"}
+            sx={{ mt: 3, ml: 1, bgcolor: 'red' }}
+            BGColor={'#d32f2f'}
+            buttonName={'Cancel'}
           />
         </Grid>
       </Grid>
@@ -126,9 +128,11 @@ export const AddprojectEmployeeFields = ( onClose, isLoading ) => {
 
 export const EditProjectEmployeeFields = ({ data, onClose, isLoading }) => {
   const { formik } = useProjectEmployeeForm(data, onClose);
+
   const handleFormSubmit = () => {
-    if(formik.isValid){
-      formik.handleSubmit();
+    formik.handleSubmit();
+    if (formik.isValid) {
+      // onClose();
     }
 
     // if (formik.isValid) {
@@ -141,6 +145,7 @@ export const EditProjectEmployeeFields = ({ data, onClose, isLoading }) => {
     //   onClose();
     // }
   };
+  const currentDate = new Date().toISOString().split('T')[0];
 
   return (
     !isLoading && (
@@ -163,10 +168,10 @@ export const EditProjectEmployeeFields = ({ data, onClose, isLoading }) => {
             InputLabelProps={{ shrink: true }}
           /> */}
           <TextField
-            id="employeeId"
-            name="employeeId"
+            id='employeeId'
+            name='employeeId'
             // select
-            label="Employee Name"
+            label='Employee Name'
             // placeholder="Enter Employee Name"
             fullWidth
             disabled
@@ -175,35 +180,39 @@ export const EditProjectEmployeeFields = ({ data, onClose, isLoading }) => {
             error={
               formik.touched.employeeName && Boolean(formik.errors.employeeName)
             }
-            helperText={formik.touched.employeeName && formik.errors.employeeName}
-            variant="outlined"
+            helperText={
+              formik.touched.employeeName && formik.errors.employeeName
+            }
+            variant='outlined'
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
 
         <Grid item xs={12} sm={12}>
           <TextField
-            id="projectId"
+            id='projectId'
             // select
-            name="projectId"
-            label="Project Name"
-            placeholder="Enter Project Name"
+            name='projectId'
+            label='Project Name'
+            placeholder='Enter Project Name'
             fullWidth
             disabled
             value={formik.values.projectName}
             onChange={formik.handleChange}
-            error={formik.touched.projectName && Boolean(formik.errors.projectName)}
+            error={
+              formik.touched.projectName && Boolean(formik.errors.projectName)
+            }
             helperText={formik.touched.projectName && formik.errors.projectName}
-            variant="outlined"
+            variant='outlined'
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
-            id="assignedOn"
-            name="assignedOn"
-            label="Assigned On"
-            type="date"
+            id='assignedOn'
+            name='assignedOn'
+            label='Assigned On'
+            type='date'
             fullWidth
             value={formik.values.assignedOn}
             onChange={formik.handleChange}
@@ -211,17 +220,20 @@ export const EditProjectEmployeeFields = ({ data, onClose, isLoading }) => {
               formik.touched.assignedOn && Boolean(formik.errors.assignedOn)
             }
             helperText={formik.touched.assignedOn && formik.errors.assignedOn}
-            variant="outlined"
+            variant='outlined'
             InputLabelProps={{ shrink: true }}
+            inputProps={{
+              min: formik.values.assignedOn, // Disable past date selections
+            }}
           />
         </Grid>
 
         <Grid item xs={12} sm={12}>
           <TextField
-            id="deAssignedOn"
-            name="deAssignedOn"
-            label="Deassigned On"
-            type="date"
+            id='deAssignedOn'
+            name='deAssignedOn'
+            label='Deassigned On'
+            type='date'
             fullWidth
             value={formik.values.deAssignedOn}
             onChange={formik.handleChange}
@@ -231,29 +243,32 @@ export const EditProjectEmployeeFields = ({ data, onClose, isLoading }) => {
             helperText={
               formik.touched.deAssignedOn && formik.errors.deAssignedOn
             }
-            variant="outlined"
+            variant='outlined'
             InputLabelProps={{ shrink: true }}
+            inputProps={{
+              min: formik.values.assignedOn, // Disable past date selections
+            }}
           />
         </Grid>
 
         <Grid
           container
-          direction="row"
-          justifyContent="flex-end"
-          alignItems="flex-end"
+          direction='row'
+          justifyContent='flex-end'
+          alignItems='flex-end'
         >
           <ButtonComponent
-            variant="contained"
+            variant='contained'
             OnClick={handleFormSubmit}
-            sx={{ mt: 3, ml: 1, color: "#fff" }}
-            buttonName={"Edit Project"}
+            sx={{ mt: 3, ml: 1, color: '#fff' }}
+            buttonName={'Edit Project'}
           />
           <ButtonComponent
-            variant="contained"
+            variant='contained'
             OnClick={onClose}
             sx={{ mt: 3, ml: 1 }}
-            BGColor={"#d32f2f"}
-            buttonName={"Cancel"}
+            BGColor={'#d32f2f'}
+            buttonName={'Cancel'}
           />
         </Grid>
       </Grid>

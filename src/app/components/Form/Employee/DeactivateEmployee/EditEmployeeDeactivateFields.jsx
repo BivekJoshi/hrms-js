@@ -29,6 +29,9 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
     formik.handleSubmit();
   };
 
+  const fullName =
+    data &&
+    data?.firstName + ' ' + (data?.middleName || '') + ' ' + data?.lastName;
   const getEmployeeName = (employeeId) => {
     const employeeName = employeeData?.find(
       (employee) => employee?.id === employeeId
@@ -46,6 +49,8 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
     ? Male
     : Female;
 
+  const currentDate = new Date().toISOString().split('T')[0];
+
   return (
     !isLoading && (
       <Grid container spacing={3}>
@@ -59,7 +64,8 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
             </div>
             <div style={{ marginLeft: '0.8rem' }}>
               <Typography>
-                {getEmployeeName(formik.values.employeeId)}
+                {fullName}
+                {/* {getEmployeeName(formik.values.employeeId)} */}
               </Typography>
               {/* <Typography sx={{ fontSize: '14px', fontWeight: 500 }}>
                 Do you really want to Terminate employee?
@@ -90,6 +96,9 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
             variant='outlined'
             InputLabelProps={{ shrink: true }}
             size='small'
+            inputProps={{
+              min: currentDate, // Disable past date selections
+            }}
           />
         </Grid>
         <Grid item xs={12} sm={12}>
@@ -195,12 +204,14 @@ export const EditEmployeeActivateFields = ({ onClose, isLoading, data }) => {
     return employeeId;
   };
 
+  const currentDate = new Date().toISOString().split('T')[0];
+
   return (
     !isLoading && (
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
           <Typography variant='h6'>
-            Do you really want to Activate employee ?
+            Do you really want to activate employee ?
             <b> {getEmployeeName(id)}</b>
           </Typography>
         </Grid>
@@ -225,6 +236,10 @@ export const EditEmployeeActivateFields = ({ onClose, isLoading, data }) => {
             }
             variant='outlined'
             InputLabelProps={{ shrink: true }}
+            inputProps={{
+              // max: currentDate, // Disable past date selections
+              min: currentDate,
+            }}
           />
         </Grid>
         <Grid item xs={12} sm={12}>
@@ -256,7 +271,6 @@ export const EditEmployeeActivateFields = ({ onClose, isLoading, data }) => {
               <TextField
                 {...params}
                 label='Reason'
-                placeholder='Select Reason'
                 fullWidth
                 error={
                   formik.touched.terminationType &&
@@ -267,7 +281,7 @@ export const EditEmployeeActivateFields = ({ onClose, isLoading, data }) => {
                   formik.errors.terminationType
                 }
                 variant='outlined'
-                InputLabelProps={{ shrink: true }}
+                // InputLabelProps={{ shrink: true }}
               />
             )}
           />

@@ -6,10 +6,15 @@ import {
 } from './useEmployee';
 import * as Yup from 'yup';
 
-// Validation schema for removing a deactivated employee
+// Validation schema for terminating employee
 const removeDeactiveEmployeeSchema = Yup.object().shape({
+  effectiveDate: Yup.date().required('Effective from date is required'),
+  terminationType: Yup.string().required('Termination type is required'),
+});
+// Validation schema for activating employee
+const activeEmployeeSchema = Yup.object().shape({
   effectiveDate: Yup.date().required('Effective date is required'),
-  terminationType: Yup.string().required('Reason is required'),
+  terminationType: Yup.string().required('Activation reason is required'),
 });
 
 export const useRemoveDeactiveEmployeeForm = (data, onClose) => {
@@ -45,8 +50,8 @@ export const useAddActiveEmployeeForm = (id, onClose) => {
       terminationType: '',
       effectiveDate: '',
     },
-    enableReinitialize: 'true',
-    validationSchema: removeDeactiveEmployeeSchema,
+    enableReinitialize: true,
+    validationSchema: activeEmployeeSchema,
     onSubmit: (values) => {
       handleRequest(values);
     },

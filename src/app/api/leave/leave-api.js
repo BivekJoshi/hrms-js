@@ -1,5 +1,5 @@
-import { axiosInstance } from "../../../auth/axiosInterceptor";
-import useAuth from "../../../auth/hooks/component/login/useAuth";
+import { axiosInstance } from '../../../auth/axiosInterceptor';
+import useAuth from '../../../auth/hooks/component/login/useAuth';
 
 /*________________________GET ALL_____________________________________*/
 export const getleave = async () => {
