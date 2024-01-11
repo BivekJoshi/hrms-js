@@ -35,8 +35,7 @@ const AddBranchHistoryFields = ({
             error={formik.touched.branchId && Boolean(formik.errors.branchId)}
             helperText={formik.touched.branchId && formik.errors.branchId}
             variant='outlined'
-
-            // size="small"
+            size="small"
           >
             {!branchLoading &&
               branchData?.map((option) => (
@@ -84,7 +83,9 @@ const AddBranchHistoryFields = ({
             maxLength={255}
             variant='outlined'
             multiline
-            rows={3}
+            InputLabelProps={{ shrink: Boolean(formik.values.remarks) }}
+            rows={4}
+            inputProps={{ maxLength: 250 }}
           />
         </Grid>
         <Grid

@@ -37,21 +37,8 @@ const ProjectDetail = () => {
 
   const [deletedProjectEmployee, setDeletedProjectEmployee] = useState({});
 
-  const getEmployeeName = (rowData) => {
-    const employeeId = rowData.empId;
-    const employee = employeeData?.find((emp) => emp.id == employeeId);
-    const name = `${employee?.firstName} ${employee?.lastName}`;
-    return name;
-  };
-
-  const getLeaderName = (rowData) => {
-    const projectId = rowData.projId;
-    const project = projectData?.find((prj) => prj.id == projectId);
-    const name = `${project?.projectName}`;
-    return name;
-  };
-
   const [editedEmployee, setEditedEmployee] = useState({});
+
   const handleEditProjectEmployee = (rowData) => {
     setEditedEmployee(rowData);
     setOpenEditModal(true);
@@ -72,7 +59,7 @@ const ProjectDetail = () => {
     {
       title: "SN",
       render: (rowData) => rowData?.tableData?.id + 1,
-      width: 80,
+      maxWidth: "1px",
       sortable: false,
       sorting: false,
     },
@@ -171,7 +158,8 @@ const ProjectDetail = () => {
         </Stack>
       ),
       sorting: false,
-      width: 100,
+      maxWidth: "90px",
+
     },
   ];
 

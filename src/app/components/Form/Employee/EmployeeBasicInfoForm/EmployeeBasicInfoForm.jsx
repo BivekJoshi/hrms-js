@@ -77,7 +77,6 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           id="firstName"
           name="firstName"
           label="First Name"
-          placeholder="Enter your first name"
           fullWidth
           required
           value={formik.values.firstName}
@@ -87,6 +86,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           variant="outlined"
           autoFocus
           InputLabelProps={{ shrink: Boolean(formik.values.firstName) }}
+          size="small"
         />
       </Grid>
       <Grid item xs={12} sm={6} md={4}>
@@ -94,7 +94,6 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           id="middleName"
           name="middleName"
           label="Middle Name"
-          placeholder="Enter your middle name"
           fullWidth
           value={formik.values.middleName}
           onChange={formik.handleChange}
@@ -104,6 +103,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           InputLabelProps={{
             shrink: Boolean(formik.values.middleName),
           }}
+          size="small"
         />
       </Grid>
       <Grid item xs={12} sm={6} md={4}>
@@ -111,7 +111,6 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           id="lastName"
           name="lastName"
           label="Last Name"
-          placeholder="Enter your last name"
           fullWidth
           required
           value={formik.values.lastName}
@@ -122,6 +121,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           InputLabelProps={{
             shrink: Boolean(formik.values.lastName),
           }}
+          size="small"
         />
       </Grid>
       <Grid item xs={12} sm={6} md={4}>
@@ -130,7 +130,6 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           name="gender"
           select
           label="Gender"
-          placeholder="Select your gender"
           fullWidth
           required
           value={formik.values.gender}
@@ -139,6 +138,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           helperText={formik.touched.gender && formik.errors.gender}
           variant="outlined"
           onBlur={formik.handleBlur}
+          size="small"
         >
           {genderOptions?.map((option) => (
             <MenuItem
@@ -166,6 +166,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           }
           inputProps={{ max: minAge }}
           helperText={formik.touched.dateOfBirth && formik.errors.dateOfBirth}
+          size="small"
         />
       </Grid>
       {/* <Grid item xs={12} sm={6} md={4}>
@@ -188,7 +189,6 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           id="mobileNumber"
           name="mobileNumber"
           label="Mobile Number"
-          placeholder="Enter your mobile number"
           fullWidth
           required
           value={formik.values.mobileNumber}
@@ -201,6 +201,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           InputLabelProps={{
             shrink: Boolean(formik.values.mobileNumber),
           }}
+          size="small"
         />
       </Grid>
       <Grid item xs={12} sm={6} md={4}>
@@ -208,7 +209,6 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           id="CitizenshipNumber"
           name="citizenshipNumber"
           label="Citizenship Number"
-          placeholder="Enter citizenship number"
           fullWidth
           required
           value={formik.values.citizenshipNumber}
@@ -224,6 +224,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           InputLabelProps={{
             shrink: Boolean(formik.values.citizenshipNumber),
           }}
+          size="small"
         />
       </Grid>
       <Grid item xs={12} sm={6} md={4}>
@@ -231,7 +232,6 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           id="panNumber"
           name="panNumber"
           label="PAN Number"
-          placeholder="Enter PAN number"
           fullWidth
           value={formik.values.panNumber}
           onChange={formik.handleChange}
@@ -241,16 +241,48 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           InputLabelProps={{
             shrink: Boolean(formik.values.panNumber),
           }}
+          size="small"
         />
+      </Grid>
+      <Grid item xs={12} sm={6} md={4}>
+        <TextField
+          id="maritalStatus"
+          name="maritalStatus"
+          select
+          label="Marital Status"
+          fullWidth
+          required
+          value={formik.values.maritalStatus}
+          onChange={formik.handleChange}
+          error={
+            formik.touched.maritalStatus && Boolean(formik.errors.maritalStatus)
+          }
+          helperText={
+            formik.touched.maritalStatus && formik.errors.maritalStatus
+          }
+          variant="outlined"
+          size="small"
+        >
+          {maritalStatus?.map((option) => (
+            <MenuItem
+              key={option.value}
+              value={option.value}
+              sx={{ bgcolor: mode === "light" ? "" : "#413e3e" }}
+            >
+              {option.label}
+            </MenuItem>
+          ))}
+        </TextField>
       </Grid>
       <Grid item xs={12} sm={6} md={4}>
         <TextField
           id="officeEmail"
           name="officeEmail"
           label="Office Email"
-          placeholder="Enter office email"
           fullWidth
           required
+          multiline
+          rows={2}
           value={formik.values.officeEmail}
           onChange={formik.handleChange}
           error={
@@ -268,7 +300,6 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           id="employmentType"
           name="employmentType"
           label="Employment Type"
-          placeholder="Enter employement type"
           fullWidth
           required
           value={formik.values.employmentType}
@@ -290,7 +321,6 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           name="employmentTypeId"
           select
           label="Employment Type"
-          placeholder="Select your employment type"
           fullWidth
           required
           onBlur={formik.handleBlur}
@@ -317,43 +347,12 @@ const EmployeeBasicInfoForm = ({ formik }) => {
             ))}
         </TextField>
       </Grid> */}
-      <Grid item xs={12} sm={6} md={4}>
-        <TextField
-          id="maritalStatus"
-          name="maritalStatus"
-          select
-          label="Marital Status"
-          placeholder="Select marital status"
-          fullWidth
-          required
-          value={formik.values.maritalStatus}
-          onChange={formik.handleChange}
-          error={
-            formik.touched.maritalStatus && Boolean(formik.errors.maritalStatus)
-          }
-          helperText={
-            formik.touched.maritalStatus && formik.errors.maritalStatus
-          }
-          variant="outlined"
-        >
-          {maritalStatus?.map((option) => (
-            <MenuItem
-              key={option.value}
-              value={option.value}
-              sx={{ bgcolor: mode === "light" ? "" : "#413e3e" }}
-            >
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
-      </Grid>
       {/* <Grid item xs={12} sm={6} md={4}>
         <TextField
           id="branchId"
           name="branchId"
           select
           label="Branch Name"
-          placeholder="Select your branch"
           fullWidth
           required
           value={!loadingCompany && formik.values.branchId}
@@ -380,7 +379,6 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           name="positionId"
           select
           label="Designation"
-          placeholder="Select your designation"
           fullWidth
           required
           value={!loadingDesignation && formik.values.positionId}
@@ -433,7 +431,6 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           name="departmentId"
           select
           label="Department Name"
-          placeholder="Select your department"
           fullWidth
           required
           value={!loadingDepartment && formik.values.departmentId}
@@ -462,7 +459,6 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           name="shiftType"
           select
           label="Shift Type"
-          placeholder="Select shift type"
           fullWidth
           required
           value={formik.values.shiftType}
@@ -483,6 +479,25 @@ const EmployeeBasicInfoForm = ({ formik }) => {
         </TextField>
       </Grid> */}
       <Grid item xs={12} sm={12} md={8}>
+        {/* <TextField
+          id="remarks"
+          name="remarks"
+          label="Remarks"
+          fullWidth
+          multiline
+          rows={2}
+          // required
+          value={formik.values.remarks}
+          onChange={formik.handleChange}
+          error={formik.touched.remarks && Boolean(formik.errors.remarks)}
+          helperText={formik.touched.remarks && formik.errors.remarks}
+          variant="outlined"
+          InputLabelProps={{
+            shrink: Boolean(formik.values.remarks),
+          }}
+          inputProps={{ maxLength: 250 }}
+          // size="small"
+        /> */}
         <RemarkField
           id="remarks"
           name="remarks"
@@ -492,28 +507,12 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           maxLength={255}
           variant="outlined"
           multiline
-          rows={1}
-        />
-        {/* <TextField
-          id='remarks'
-          name='remarks'
-          label='Remarks'
-          placeholder='Enter remarks'
-          fullWidth
-          multiline
-          // required
-          value={formik.values.remarks}
-          onChange={formik.handleChange}
-          error={formik.touched.remarks && Boolean(formik.errors.remarks)}
-          helperText={formik.touched.remarks && formik.errors.remarks}
-          variant='outlined'
           InputLabelProps={{
             shrink: Boolean(formik.values.remarks),
           }}
-          // inputProps={{
-          //   maxLength: 255,
-          // }}
-        /> */}
+          rows={2}
+          inputProps={{ maxLength: 255 }}
+        />
       </Grid>
     </Grid>
   );

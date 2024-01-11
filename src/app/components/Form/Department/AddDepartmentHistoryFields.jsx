@@ -2,7 +2,7 @@ import { Button, Grid, MenuItem, TextField } from "@mui/material";
 import React from "react";
 import { useGetDepartment } from "../../../hooks/department/useDepartment";
 import useAddDepartmentHistoryForm from "../../../hooks/department/DepartmentForm/useAddDepartmentHistoryForm";
-import RemarkField from '../../RemarkField/RemarkField';
+import RemarkField from "../../RemarkField/RemarkField";
 
 const AddDepartmentHistoryFields = ({
   onClose,
@@ -15,14 +15,12 @@ const AddDepartmentHistoryFields = ({
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
-    if (formik.isValid) {
-      // onClose();
-    }
   };
   const currentDate = new Date().toISOString().split("T")[0];
  
   const effectiveDate = (branchHistoryData && branchHistoryData.length > 0) ? branchHistoryData?.find(date => date?.isRecentDepartment === true) : null; // find effective date for validation
 console.log("departmentData", departmentData)
+
   return (
     !isLoading && (
       <Grid container spacing={3}>
@@ -35,6 +33,7 @@ console.log("departmentData", departmentData)
             fullWidth
             required
             select
+            size="small"
             value={formik.values.departmentId}
             onChange={formik.handleChange}
             error={
@@ -56,7 +55,7 @@ console.log("departmentData", departmentData)
               Select Department
             </option>
             {departmentData?.map((option) => (
-              <option key={option?.id} value={option?.id}>
+              <MenuItem key={option?.id} value={option?.id}>
                 {`${option?.departmentName}`}
               </option>
             ))} */}

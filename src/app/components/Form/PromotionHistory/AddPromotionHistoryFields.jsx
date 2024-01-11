@@ -1,8 +1,8 @@
-import React from 'react';
-import { Grid, TextField, Button, Autocomplete } from '@mui/material';
-import useAddPromotionHistoryForm from '../../../hooks/promotionHistory/addPromotionHistory.jsx/useAddPromotionForm';
-import { useGetDesignation } from '../../../hooks/designation/useDesignation';
-import RemarkField from '../../RemarkField/RemarkField';
+import React from "react";
+import { Grid, TextField, Button, Autocomplete } from "@mui/material";
+import useAddPromotionHistoryForm from "../../../hooks/promotionHistory/addPromotionHistory.jsx/useAddPromotionForm";
+import { useGetDesignation } from "../../../hooks/designation/useDesignation";
+import RemarkField from "../../RemarkField/RemarkField";
 
 const AddPromotionHistoryFields = ({
   onClose,
@@ -24,42 +24,45 @@ const AddPromotionHistoryFields = ({
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
           <Autocomplete
-            id='positionId'
-            name='positionId'
+            id="positionId"
+            name="positionId"
             options={designationData || []}
             getOptionLabel={(option) => {
               return option
-                ? `${option?.positionName || ''} ${option?.positionLevel || ''}`
-                : '';
+                ? `${option?.positionName || ""} ${option?.positionLevel || ""}`
+                : "";
             }}
             value={formik.values.positionId}
             onChange={(event, value) => {
-              formik.setFieldValue('positionId', value);
+              formik.setFieldValue("positionId", value);
             }}
             onBlur={formik.handleBlur}
             renderInput={(params) => (
               <TextField
                 {...params}
-                label='Position Name'
+                label="Position Name"
                 fullWidth
+                required
                 error={
                   formik.touched.positionId && Boolean(formik.errors.positionId)
                 }
                 helperText={
                   formik.touched.positionId && formik.errors.positionId
                 }
-                variant='outlined'
+                variant="outlined"
+                size="small"
               />
             )}
           />
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
-            id='effectiveFromDate'
-            name='effectiveFromDate'
-            label='Effective From Date'
-            type='date'
+            id="effectiveFromDate"
+            name="effectiveFromDate"
+            label="Effective From Date"
+            type="date"
             fullWidth
+            required
             value={formik.values.effectiveFromDate}
             onChange={formik.handleChange}
             error={
@@ -70,7 +73,7 @@ const AddPromotionHistoryFields = ({
               formik.touched.effectiveFromDate &&
               formik.errors.effectiveFromDate
             }
-            variant='outlined'
+            variant="outlined"
             InputLabelProps={{ shrink: true }}
             inputProps={{
               max: currentDate,
@@ -78,7 +81,7 @@ const AddPromotionHistoryFields = ({
           />
         </Grid>
         <Grid item xs={12} sm={12}>
-          <RemarkField
+          {/* <TextField
             id='remarks'
             name='remarks'
             label='Remarks'
@@ -88,29 +91,43 @@ const AddPromotionHistoryFields = ({
             maxLength={255}
             variant='outlined'
             multiline
-            rows={3}
+            rows={4}
+            inputProps={{ maxLength: 250 }}
+          /> */}
+          <RemarkField
+            id="remarks"
+            name="remarks"
+            label="Remarks"
+            fullWidth
+            formik={formik}
+            maxLength={255}
+            variant="outlined"
+            multiline
+            InputLabelProps={{ shrink: Boolean(formik.values.remarks) }}
+            rows={4}
+            inputProps={{ maxLength: 250 }}
           />
         </Grid>
         <Grid
           container
-          direction='row'
-          justifyContent='flex-end'
-          alignItems='flex-end'
+          direction="row"
+          justifyContent="flex-end"
+          alignItems="flex-end"
         >
           <Button
-            variant='contained'
+            variant="contained"
             onClick={handleFormSubmit}
             sx={{ mt: 3, ml: 1 }}
           >
             {PromotionHistory?.length !== 0
-              ? ' Change Position'
-              : 'Add Position'}
+              ? " Change Position"
+              : "Add Position"}
           </Button>
           <Button
-            variant='contained'
+            variant="contained"
             onClick={onClose}
             sx={{ mt: 3, ml: 1 }}
-            color='error'
+            color="error"
           >
             Cancel
           </Button>

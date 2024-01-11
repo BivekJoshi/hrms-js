@@ -67,6 +67,7 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
                   formik.touched.employeeId && formik.errors.employeeId
                 }
                 variant='outlined'
+                size="small"
               />
             )}
             renderOption={(props, option) =>
@@ -98,6 +99,7 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
                   formik.touched.leaveTypeId && formik.errors.leaveTypeId
                 }
                 variant='outlined'
+                size="small"
               />
             )}
           />
@@ -139,6 +141,7 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
               formik.touched.leavePeriod && Boolean(formik.errors.leavePeriod)
             }
             helperText={formik.touched.leavePeriod && formik.errors.leavePeriod}
+            size="small"
           >
             {leaveOptions?.map((option) => (
               <MenuItem key={option?.id} value={option?.id}>
@@ -160,7 +163,7 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
             fullWidth
             required
             multiline
-            rows={2}
+            rows={4}
             value={formik.values.leaveReason}
             onChange={formik.handleChange}
             error={
@@ -168,6 +171,8 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
             }
             helperText={formik.touched.leaveReason && formik.errors.leaveReason}
             variant='outlined'
+            size="small"
+            InputLabelProps={{ shrink: Boolean(formik.values.leaveReason) }}
           />
         </Grid>
         <Grid
@@ -232,6 +237,7 @@ const DateInput = ({ formik, isHalfDay, isMultipleDays }) => {
             onChange={handleFromDateChange}
             error={formik.touched.fromDate && Boolean(formik.errors.fromDate)}
             helperText={formik.touched.fromDate && formik.errors.fromDate}
+            size="small"
           />
         </Grid>
         {isMultipleDays && (
@@ -250,6 +256,8 @@ const DateInput = ({ formik, isHalfDay, isMultipleDays }) => {
               onChange={formik.handleChange}
               error={formik.touched.toDate && Boolean(formik.errors.toDate)}
               helperText={formik.touched.toDate && formik.errors.toDate}
+              size="small"
+              disabled={!formik?.values?.fromDate}
             />
           </Grid>
         )}

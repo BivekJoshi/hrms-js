@@ -77,8 +77,7 @@ const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
               renderInput={(params) => (
                 <TextField
                   {...params}
-                  label='Employee Name'
-                  placeholder='Select employee'
+                  label="Employee Name"
                   fullWidth
                   required
                   variant='outlined'
@@ -132,9 +131,8 @@ const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
               renderInput={(params) => (
                 <TextField
                   {...params}
-                  variant='outlined'
-                  label='Office Logistics'
-                  placeholder='Select logistics'
+                  variant="outlined"
+                  label="Office Logistics"
                   fullWidth
                   required
                   error={
@@ -145,7 +143,8 @@ const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
                     formik.touched.officeResourceId &&
                     formik.errors.officeResourceId
                   }
-                  InputLabelProps={{ shrink: true }}
+                  InputLabelProps={{ shrink: Boolean(formik.values.officeResourceId) }}
+                  size="small"
                 />
               )}
             />
@@ -154,17 +153,16 @@ const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
 
         <Grid item xs={12} sm={12}>
           <TextField
-            type='date'
-            id='receiveDate'
-            name='receiveDate'
-            label='Received Date'
-            placeholder='Select date'
+            type="date"
+            id="receiveDate"
+            name="receiveDate"
+            label="Received Date"
             fullWidth
             required
             value={formik.values.receiveDate}
             onChange={formik.handleChange}
             inputProps={{
-              max: currentDate, // Disable past date selections
+              max: currentDate,
             }}
             error={
               formik.touched.receiveDate && Boolean(formik.errors.receiveDate)
@@ -177,10 +175,9 @@ const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
-            id='conditionWhileProvided'
-            name='conditionWhileProvided'
-            label='Device Condition'
-            placeholder='Enter device condition'
+            id="conditionWhileProvided"
+            name="conditionWhileProvided"
+            label="Device Condition"
             fullWidth
             value={formik.values.conditionWhileProvided}
             onChange={formik.handleChange}
@@ -192,24 +189,27 @@ const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
               formik.touched.conditionWhileProvided &&
               formik.errors.conditionWhileProvided
             }
-            variant='outlined'
-            size='small'
+            variant="outlined"
+            size="small"
+            InputLabelProps={{ shrink: Boolean(formik.values.conditionWhileProvided) }}
           />
         </Grid>
         <Grid item xs={12} sm={12} md={12} lg={12}>
           <TextField
-            id='remarks'
-            name='remarks'
-            label='Remark'
-            placeholder='Enter remark for the resource'
+            id="remarks"
+            name="remarks"
+            label="Remarks"
             fullWidth
             multiline
+            rows={4}
             value={formik.values.remarks}
             onChange={formik.handleChange}
             error={formik.touched.remarks && Boolean(formik.errors.remarks)}
             helperText={formik.touched.remarks && formik.errors.remarks}
-            variant='outlined'
-            size='small'
+            variant="outlined"
+            size="small"
+            InputLabelProps={{ shrink: Boolean(formik.values.remarks) }}
+            inputProps={{ maxLength: 250 }}
           />
         </Grid>
         <Grid

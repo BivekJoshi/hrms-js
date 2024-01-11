@@ -1,12 +1,11 @@
 import React from "react";
 import { Grid, TextField, Button } from "@mui/material";
 import { useDeleteEvent } from "../../../hooks/event/useEvent";
-import useEventForm from "../../../hooks/event/EventForm/useEventForm";
 import useEditEventForm from "../../../hooks/event/editEvent/useEditEventForm";
-import HocButton from "../../../hoc/hocButton";
 import PermissionHoc from "../../../hoc/permissionHoc";
-import { ButtonComponent } from "../../Button/ButtonComponent";
 import { useEffect } from "react";
+import DeleteIcon from "@mui/icons-material/Delete";
+import UpdateIcon from "@mui/icons-material/Update";
 
 const EditEventFields = ({ onClose, isLoading, data, permissions }) => {
   const { formik } = useEditEventForm(data, onClose);
@@ -25,6 +24,7 @@ console.log(formik, "fields")
   const handleDeleteEvent = () => {
     deleteEventMutation(data.id);
   };
+  const isEventDateValid = new Date(formik.values.eventDate) > new Date();
   return (
     !isLoading && (
       <Grid container spacing={3}>
@@ -33,7 +33,6 @@ console.log(formik, "fields")
             id="eventName"
             name="eventName"
             label="Event"
-            placeholder="Enter event name"
             fullWidth
             value={formik.values.eventName}
             onChange={formik.handleChange}
@@ -41,9 +40,10 @@ console.log(formik, "fields")
             helperText={formik.touched.eventName && formik.errors.eventName}
             variant="outlined"
             size="small"
+            InputLabelProps={{ shrink: Boolean(formik.values.eventName) }}
           />
         </Grid>
-        <Grid item xs={12} sm={12}>
+        <Grid item xs={12} sm={12} md={6}>
           <TextField
             id="eventDate"
             name="eventDate"
@@ -58,9 +58,12 @@ console.log(formik, "fields")
             variant="outlined"
             InputLabelProps={{ shrink: true }}
             size="small"
+            inputProps={{
+              min: new Date().toISOString().split("T")[0],
+            }}
           />
         </Grid>
-        <Grid item xs={12} sm={12}>
+        <Grid item xs={12} sm={12} md={6}>
           <TextField
             id="eventTime"
             name="eventTime"
@@ -79,30 +82,9 @@ console.log(formik, "fields")
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
-            id="eventDescription"
-            name="eventDescription"
-            label="Description"
-            placeholder="Enter your Event Description"
-            fullWidth
-            value={formik.values.eventDescription}
-            onChange={formik.handleChange}
-            error={
-              formik.touched.eventDescription &&
-              Boolean(formik.errors.eventDescription)
-            }
-            helperText={
-              formik.touched.eventDescription && formik.errors.eventDescription
-            }
-            variant="outlined"
-            size="small"
-          />
-        </Grid>
-        <Grid item xs={12} sm={12}>
-          <TextField
             id="eventLocation"
             name="eventLocation"
             label="Event Location"
-            placeholder="Enter your Event Location"
             fullWidth
             value={formik.values.eventLocation}
             onChange={formik.handleChange}
@@ -115,6 +97,32 @@ console.log(formik, "fields")
             }
             variant="outlined"
             size="small"
+            InputLabelProps={{ shrink: Boolean(formik.values.eventLocation) }}
+          />
+        </Grid>
+        <Grid item xs={12} sm={12}>
+          <TextField
+            id="eventDescription"
+            name="eventDescription"
+            label="Description"
+            fullWidth
+            multiline
+            rows={4}
+            value={formik.values.eventDescription}
+            onChange={formik.handleChange}
+            error={
+              formik.touched.eventDescription &&
+              Boolean(formik.errors.eventDescription)
+            }
+            helperText={
+              formik.touched.eventDescription && formik.errors.eventDescription
+            }
+            variant="outlined"
+            size="small"
+            InputLabelProps={{
+              shrink: Boolean(formik.values.eventDescription),
+            }}
+            inputProps={{ maxLength: 250 }}
           />
         </Grid>
         <Grid
@@ -122,27 +130,28 @@ console.log(formik, "fields")
           direction="row"
           justifyContent="flex-end"
           alignItems="flex-end"
+          gap=".5rem"
+          sx={{ marginTop: "1rem" }}
         >
-          <ButtonComponent
+          <Button
             variant="contained"
-            OnClick={handleFormSubmit}
-            // sx={{ mt: 3, ml: 1 }}
-            buttonName={"Update Event"}
-          />
-          <ButtonComponent
+            startIcon={<UpdateIcon />}
+            onClick={handleFormSubmit}
+            disabled={!isEventDateValid}
+          >
+            Update Event
+          </Button>
+          <Button
             variant="contained"
-            OnClick={handleDeleteEvent}
-            // sx={{ mt: 3, ml: 1 }}
-            BGColor={"#d32f2f"}
-            buttonName={"Delete"}
-          />
-          <ButtonComponent
-            variant="contained"
-            OnClick={onClose}
-            // sx={{ mt: 3, ml: 1 }}
-            BGColor={"#d32f2f"}
-            buttonName={"Cancel"}
-          />
+            startIcon={<DeleteIcon />}
+            color="error"
+            onClick={handleDeleteEvent}
+          >
+            Delete
+          </Button>
+          <Button variant="contained" color="error" onClick={onClose}>
+            Cancel
+          </Button>
         </Grid>
       </Grid>
     )

@@ -79,7 +79,6 @@ const documentName = [
   },
 ];
 const DocumentInfo = ({ data, role }) => {
-  // const { data: loggedInUserData, isLoading: isLoadingUserData } = isEmp ? useGetLoggedInUserInfo() : {};
 
   const { mode } = useContext(ThemeModeContext);
 

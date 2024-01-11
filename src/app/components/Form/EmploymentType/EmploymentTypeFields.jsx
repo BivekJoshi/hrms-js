@@ -1,15 +1,18 @@
-import { Grid, TextField, Button, MenuItem } from '@mui/material';
-import React from 'react';
-import useEmploymentTypeForm from '../../../hooks/employmentType/EmploymentTypeForm/useEmploymentTypeForm';
+import { Grid, TextField, Button, MenuItem } from "@mui/material";
+import React from "react";
+import useEmploymentTypeForm from "../../../hooks/employmentType/EmploymentTypeForm/useEmploymentTypeForm";
+import RemarkField from "../../RemarkField/RemarkField";
 
 const EmploymentTypeFields = ({ onClose, isLoading, data }) => {
-  const { formik } = useEmploymentTypeForm(data,onClose);
+  const { formik } = useEmploymentTypeForm(data, onClose);
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
   };
 
-  const submitButtonText = data ? "Update Employment Type" : "Add Employment Type";
+  const submitButtonText = data
+    ? "Update Employment Type"
+    : "Add Employment Type";
 
   return (
     !isLoading && (
@@ -18,44 +21,33 @@ const EmploymentTypeFields = ({ onClose, isLoading, data }) => {
           <TextField
             id="name"
             name="name"
-            label="Employment Type Name"
-            placeholder="Enter employment type"
+            label="Employment Type name"
             fullWidth
             required
             value={formik.values.name}
             onChange={formik.handleChange}
-            error={
-              formik.touched.name && Boolean(formik.errors.name)
-            }
-            helperText={
-              formik.touched.name && formik.errors.name
-            }
-            variant='outlined'
-            InputLabelProps={{ shrink: true }}
+            error={formik.touched.name && Boolean(formik.errors.name)}
+            helperText={formik.touched.name && formik.errors.name}
+            variant="outlined"
             size="small"
+            InputLabelProps={{ shrink: Boolean(formik.values.name) }}
           />
         </Grid>
         <Grid item xs={12} sm={12}>
-          <TextField
+          <RemarkField
             id="description"
             name="description"
             label="Description"
-            placeholder="Enter description"
             fullWidth
+            formik={formik}
+            maxLength={255}
+            variant="outlined"
             multiline
-            // required
-            value={formik.values.description}
-            onChange={formik.handleChange}
-            error={
-              formik.touched.description &&
-              Boolean(formik.errors.description)
-            }
-            helperText={
-              formik.touched.description && formik.errors.description
-            }
-            variant='outlined'
-            InputLabelProps={{ shrink: true }}
-            // inputProps={{ maxLength: 250 }}
+            InputLabelProps={{
+              shrink: Boolean(formik.values.description),
+            }}
+            rows={4}
+            inputProps={{ maxLength: 255 }}
           />
         </Grid>
         <Grid

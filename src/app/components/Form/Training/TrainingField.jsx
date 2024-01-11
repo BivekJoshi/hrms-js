@@ -34,6 +34,7 @@ const TrainingField = ({ onClose, isLoading, data, empId }) => {
             }
             variant='outlined'
             InputLabelProps={{ shrink: Boolean(formik.values.trainingName) }}
+            size="small"
           />
         </Grid>
         <Grid item xs={12} sm={12}>
@@ -54,6 +55,7 @@ const TrainingField = ({ onClose, isLoading, data, empId }) => {
             }
             variant='outlined'
             InputLabelProps={{ shrink: Boolean(formik.values.trainingLevel) }}
+            size="small"
           />
         </Grid>
         <Grid item xs={12} sm={12}>
@@ -77,6 +79,7 @@ const TrainingField = ({ onClose, isLoading, data, empId }) => {
             InputLabelProps={{
               shrink: Boolean(formik.values.trainingInstitute),
             }}
+            size="small"
           />
         </Grid>
         <Grid item xs={12} sm={12}>
@@ -92,6 +95,7 @@ const TrainingField = ({ onClose, isLoading, data, empId }) => {
             helperText={formik.touched.category && formik.errors.category}
             variant='outlined'
             InputLabelProps={{ shrink: Boolean(formik.values.category) }}
+            size="small"
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -132,6 +136,7 @@ const TrainingField = ({ onClose, isLoading, data, empId }) => {
               min: formik?.values?.startDate, // Disable past date selections
               max: currentDate, // Disable past date selections
             }}
+            size="small"
           />
         </Grid>
         <Grid
