@@ -1,10 +1,10 @@
 import * as Yup from 'yup';
 
 const TrainingSchema = Yup.object().shape({
-  trainingName: Yup.string().required('Training name is required'),
-  trainingLevel: Yup.string().required('Training level is required'),
-  trainingInstitute: Yup.string().required('Training institute is required'),
-  category: Yup.string().required('Category is required'),
+  trainingName: Yup.string().required('Training name is required').max(50, 'Training name cannot be greater than 50  characters'),
+  trainingLevel: Yup.string().required('Training level is required').max(50, 'Training level cannot be greater than 50  characters'),
+  trainingInstitute: Yup.string().required('Training institute is required').max(50, 'Training institute cannot be greater than 50  characters'),
+  category: Yup.string().required('Category is required').max(50, 'Training category cannot be greater than 50  characters'),
   startDate: Yup.string().required('Start date is required'),
   endDate: Yup.string()
     .required('End date is required')

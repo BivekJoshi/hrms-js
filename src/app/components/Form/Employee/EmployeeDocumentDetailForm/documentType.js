@@ -9,7 +9,7 @@ export const documentType = [
   {
     label: "Curriculum Vitae",
     input: "CURRICULUM_VITAE",
-    desc: "* Curriculum vitue format must be in jpeg/png/jpg",
+    desc: "* Curriculum vitae format must be in jpeg/png/jpg",
     fileSize: "* File size should be max 5MB",
     id: 2,
   },

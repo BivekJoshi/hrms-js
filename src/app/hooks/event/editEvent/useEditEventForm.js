@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 import { useEditEvent } from "../useEvent";
 import { EventSchema } from "../Validation/EventSchema";
 
-const useEditEventForm = (data) => {
+const useEditEventForm = (data, onClose) => {
   const { mutate } = useEditEvent({});
 
   const formik = useFormik({
@@ -20,12 +20,17 @@ const useEditEventForm = (data) => {
       handleRequest(values);
     },
   });
-
+console.log(formik, "form")
   const handleRequest = (values) => {
     values = {
       ...values,
     };
-    mutate(values, formik, { onSuccess: () => formik.handleReset() });
+    mutate(values, {
+      onSuccess: () => {
+        onClose();
+        formik.handleReset();
+      },
+    });
   };
 
   return { formik };

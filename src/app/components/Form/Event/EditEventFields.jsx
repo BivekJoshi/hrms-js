@@ -8,9 +8,9 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import UpdateIcon from "@mui/icons-material/Update";
 
 const EditEventFields = ({ onClose, isLoading, data, permissions }) => {
-  const { formik } = useEditEventForm(data);
-
-  const handleFormSubmit = async () => {
+  const { formik } = useEditEventForm(data, onClose);
+console.log(formik, "fields")
+  const handleFormSubmit = () => {
     formik.handleSubmit();
   };
   const { deleteEventMutation, isSuccess: isDeleteSuccess } = useDeleteEvent(

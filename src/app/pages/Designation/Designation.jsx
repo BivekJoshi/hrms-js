@@ -88,7 +88,21 @@ const Designation = ({ permissions }) => {
     {
       title: 'Details',
       field: 'positionDetails',
+      width: '20%',
       emptyValue: '-',
+      render: (rowData) => {
+        return (
+          <div
+            style={{
+              whiteSpace: 'wrap',
+              width: '15rem',
+              overflowWrap: 'break-word',
+            }}
+          >
+            {rowData?.positionDetails}
+          </div>
+        );
+      },
       sorting: false,
     },
   ].filter(Boolean);

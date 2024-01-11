@@ -1,6 +1,7 @@
 import { useFormik } from "formik";
 import { DepartmentSchema } from "../Validation/DepartmentSchema";
 import { useAddDepartment, useEditDepartment } from "../useDepartment";
+import { isEqual } from 'lodash';
 
 const useDepartmentForm = (data, onClose) => {
   const { mutate: addDepartment } = useAddDepartment({});
@@ -34,13 +35,24 @@ const useDepartmentForm = (data, onClose) => {
     });
   };
 
+  // const handledEditRequest = (values) => {
+  //   values = { ...values };
+  //   editDepartment(values, {
+  //     onSuccess:()=>{
+  //       onClose();
+  //     }
+  //   });
+  // };
+
   const handledEditRequest = (values) => {
     values = { ...values };
-    editDepartment(values, {
-      onSuccess:()=>{
-        onClose();
-      }
-    });
+    if (!isEqual(values, formik.initialValues)) {
+      editDepartment(values, {
+        onSuccess: () => {
+          onClose();
+        },
+      });
+    }
   };
 
   return { formik };
