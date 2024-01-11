@@ -150,7 +150,7 @@ const EmployeeMapping = () => {
         data={mapData}
         title="Employee Mapping"
         isLoading={isLoading}
-        exportButton={true}
+        // exportButton={true}
         actions={actions}
         singleAction={true}
       />

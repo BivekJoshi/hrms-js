@@ -94,7 +94,7 @@ const DeactivatedOfficeResource = ({ closeModal, title }) => {
         data={data}
         title={title}
         isLoading={isLoading}
-        exportButton={true}
+        // exportButton={true}
         emptyRowsWhenPaging={true}
         // sorting={true}
         height={'320px'}

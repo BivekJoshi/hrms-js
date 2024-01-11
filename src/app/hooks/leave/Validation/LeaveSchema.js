@@ -2,7 +2,7 @@ import * as Yup from 'yup';
 
 const LeaveSchema = Yup.object().shape({
   // leaveTypeId:Yup.mixed().required("Please Select Leave Name"),
-  fromDate: Yup.date().required('Please Select Date').min(new Date(), 'Leave date cannot be in the past'),
+  fromDate: Yup.date().required('Please Select Date'),
   toDate: Yup.date()
   .required('Please Select Date')
   .min(Yup.ref('fromDate'), 'To date cannot be earlier than from date'),

@@ -215,7 +215,6 @@ const EventAttendance = ({ permissions }) => {
       tooltip: "Edit Event",
       onClick: (event, rowData) => handleEditEventAttendance(rowData),
     },
-
   ];
 
   useEffect(() => {

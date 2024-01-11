@@ -49,23 +49,35 @@ const CompanyTableView = ({
       sorting: false,
     },
     {
-      title: "Description",
-      field: "branchDescription",
-      emptyValue: "-",
-      width: "120px",
-      render: (rowData) => {
-        return (
-          <Typography
-            style={{
-              whiteSpace: "wrap",
-              width: "18rem",
-              overflowWrap: "break-word",
-            }}
-          >
-            {rowData?.branchDescription}
-          </Typography>
-        );
-      },
+      title: 'Description',
+      field: 'branchDescription',
+      emptyValue: '-',
+      width: '120px',
+      // render: (rowData) => {
+      //   return (          
+      //       <Typography
+      //         style={{
+      //           // overflow: 'hidden',
+      //           // textOverflow: 'ellipsis',
+      //           // width: '20rem',
+      //         }}
+      //       >
+      //         {rowData?.branchDescription}
+      //       </Typography>
+      //   );
+      // },
+      render: (rowData) => (
+        <div
+          style={{
+            whiteSpace: 'normal',
+            overflowWrap: 'break-word',
+            wordWrap: 'break-word',
+            wordBreak: 'break-all',
+          }}
+        >
+          {rowData?.branchDescription}
+        </div>
+      ),
     },
   ];
 
@@ -115,9 +127,9 @@ const CompanyTableView = ({
         data={companyData}
         title="Branch List"
         isLoading={isLoading}
-        exportButton={true}
+        // exportButton={true}
         actions={actions}
-        exportExcel
+        // exportExcel
       />
     </>
   );

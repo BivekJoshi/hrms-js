@@ -28,26 +28,38 @@ const PromotionHistory = ({ data, role }) => {
       title: "Position Name",
       field: "position.positionName",
       emptyValue: "-",
-      width: 300,
+      width: 100,
       sorting: false,
     },
     {
       title: "Effective From",
       field: "effectiveFromDate",
       emptyValue: "-",
-      width: 200,
+      width: 100,
     },
     {
       title: "Effective To",
       field: "effectiveToDate",
       emptyValue: "-",
-      width: 200,
+      width: 100,
     },
     {
       title: "Remarks",
       field: "remarks",
       emptyValue: "-",
-      width: 200,
+      width: 250,
+      render: (rowData) => (
+        <div
+          style={{
+            whiteSpace: 'normal',
+            overflowWrap: 'break-word',
+            wordWrap: 'break-word',
+            wordBreak: 'break-all',
+          }}
+        >
+          {rowData?.remarks}
+        </div>
+      ),
     },
     {
       title: "Position Hold",

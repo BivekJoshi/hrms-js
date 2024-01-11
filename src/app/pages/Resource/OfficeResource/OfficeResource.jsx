@@ -1,27 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   useEditActiveInactiveOfficeResource,
   useGetAvailableOfficeResource,
   useGetUsedOfficeResource,
-} from '../../../hooks/resource/officeResource/useOfficeResource';
-import { Box, Button, Typography } from '@mui/material';
+} from "../../../hooks/resource/officeResource/useOfficeResource";
+import { Box, Button, Typography } from "@mui/material";
 import {
   AddOfficeResourceModal,
   DeactivatedOfficeResourceModal,
   EditOfficeResourceModal,
-} from './OfficeResourceModal';
-import { ButtonComponent } from '../../../components/Button/ButtonComponent';
-import DeactivatedOfficeResource from './DeactivatedOfficeResource';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import { AvailableOfficeLogistic } from './AvailableOfficeLogistic';
-import { OpenCLoseModel } from './OpenCLoseModel';
-import { useGetEmployee } from '../../../hooks/employee/useEmployee';
-import CustomTable from '../../../components/CustomTable/CustomTable';
-import DeleteIcon from '@mui/icons-material/Delete';
-import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
-import HocButton from '../../../hoc/hocButton';
-import PermissionHoc from '../../../hoc/permissionHoc';
-import DeleteConfirmationModal from '../../../components/Modal/DeleteConfirmationModal';
+} from "./OfficeResourceModal";
+import { ButtonComponent } from "../../../components/Button/ButtonComponent";
+import DeactivatedOfficeResource from "./DeactivatedOfficeResource";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import { AvailableOfficeLogistic } from "./AvailableOfficeLogistic";
+import { OpenCLoseModel } from "./OpenCLoseModel";
+import { useGetEmployee } from "../../../hooks/employee/useEmployee";
+import CustomTable from "../../../components/CustomTable/CustomTable";
+import DeleteIcon from "@mui/icons-material/Delete";
+import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
+import HocButton from "../../../hoc/hocButton";
+import PermissionHoc from "../../../hoc/permissionHoc";
+import DeleteConfirmationModal from "../../../components/Modal/DeleteConfirmationModal";
+import HighlightOffOutlinedIcon from "@mui/icons-material/HighlightOffOutlined";
+import FormModal from "../../../components/Modal/FormModal";
 
 const OfficeResource = ({ permissions }) => {
   const { data: officeResourceData, isLoading } = useGetUsedOfficeResource();
@@ -65,47 +67,47 @@ const OfficeResource = ({ permissions }) => {
   const getEmployeeName = (rowData) => {
     const employeeId = rowData?.employeeId;
     const employee = employeeData?.find((emp) => emp?.id === employeeId);
-    const name = `${employee?.firstName} ${employee?.middleName || ''} ${
+    const name = `${employee?.firstName} ${employee?.middleName || ""} ${
       employee?.lastName
     }`;
     return name;
   };
   const columns = [
     {
-      title: 'SN',
+      title: "SN",
       render: (rowData) => rowData.tableData.id + 1,
-      width: '2rem',
+      width: "2rem",
       sorting: false,
     },
     {
-      title: 'Resource Name',
-      field: 'name',
+      title: "Resource Name",
+      field: "name",
       render: (rowData) => (
-        <Typography style={{ overflowWrap: 'break-word', width: '15rem' }}>
+        <Typography style={{ overflowWrap: "break-word", width: "15rem" }}>
           {rowData?.name}
         </Typography>
       ),
-      emptyValue: '-',
-      width: '12rem',
+      emptyValue: "-",
+      width: "12rem",
       sorting: false,
     },
     {
-      title: 'Identification Number',
-      field: 'uniqueNumber',
-      emptyValue: '-',
-      width: '12rem',
+      title: "Identification Number",
+      field: "uniqueNumber",
+      emptyValue: "-",
+      width: "12rem",
       sorting: false,
     },
     {
-      title: 'Description',
-      field: 'description',
+      title: "Description",
+      field: "description",
       render: (rowData) => (
-        <Typography style={{ overflowWrap: 'break-word', width: '30rem' }}>
+        <Typography style={{ overflowWrap: "break-word", width: "30rem" }}>
           {rowData?.description}
         </Typography>
       ),
-      emptyValue: '-',
-      width: '18rem',
+      emptyValue: "-",
+      width: "18rem",
       sorting: false,
     },
   ];
@@ -115,30 +117,30 @@ const OfficeResource = ({ permissions }) => {
       icon: () => (
         <ModeEditOutlineIcon
           sx={{
-            color: 'black',
-            '&:hover': {
-              color: 'green',
+            color: "black",
+            "&:hover": {
+              color: "green",
             },
           }}
         />
       ),
       disabled: !permissions?.canEdit,
-      tooltip: 'Edit Logistics',
+      tooltip: "Edit Logistics",
       onClick: (event, rowData) => handleEditRowData(rowData),
     },
     {
       icon: () => (
-        <DeleteIcon
+        <HighlightOffOutlinedIcon
           sx={{
-            color: 'black',
-            '&:hover': {
-              color: 'red',
+            color: "black",
+            "&:hover": {
+              color: "red",
             },
           }}
         />
       ),
       disabled: !permissions?.canDelete,
-      tooltip: 'Remove Logistics',
+      tooltip: "Inactivate Logistics",
       onClick: (event, rowData) => handleDeleteRowData(rowData),
     },
   ];
@@ -146,23 +148,23 @@ const OfficeResource = ({ permissions }) => {
     <>
       <Box
         sx={{
-          display: 'flex',
-          justifyContent: 'flex-end',
-          gap: '1rem',
-          padding: '.5rem 0',
+          display: "flex",
+          justifyContent: "flex-end",
+          gap: "1rem",
+          padding: ".5rem 0",
         }}
       >
         <Button
-          variant='outlined'
+          variant="outlined"
           onClick={handleOpenModal}
-          sx={{ textTransform: 'none' }}
+          sx={{ textTransform: "none" }}
         >
           Deactivated Logistics
         </Button>
         <Button
-          variant='contained'
+          variant="contained"
           onClick={handleAddOpenModal}
-          sx={{ textTransform: 'none' }}
+          sx={{ textTransform: "none" }}
         >
           Add Office Logistics
         </Button>
@@ -171,21 +173,21 @@ const OfficeResource = ({ permissions }) => {
       <CustomTable
         columns={columns}
         data={availableOfficeResource}
-        title='Available Logistics'
+        title="Available Logistics"
         isLoading={isLoading}
-        exportButton={true}
+        // exportButton={true}
         actions={actions}
       />
       {openAddModal && (
         <AddOfficeResourceModal
-          title={'Add Logistics'}
+          title={"Add Logistics"}
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
         />
       )}
       {openEditModal && (
         <EditOfficeResourceModal
-          title={'Edit Logistics'}
+          title={"Edit Logistics"}
           data={editedRowData}
           open={openEditModal}
           handleCloseModal={handleCloseEditModal}
@@ -193,19 +195,49 @@ const OfficeResource = ({ permissions }) => {
       )}
       {openModal && (
         <DeactivatedOfficeResourceModal
-          width={'fit-content'}
+          width={"fit-content"}
           open={openModal}
           handleCloseModal={handleCloseModal}
-          title={'Deactivated Logistics'}
+          title={"Deactivated Logistics"}
         />
       )}
 
       {openDeleteModal && (
-        <DeleteConfirmationModal
+        <FormModal
+          title={"Deactivate Logistics"}
           open={openDeleteModal}
-          handleCloseModal={handleCloseDeleteModal}
-          handleConfirmDelete={handleConfirmDelete}
-          message={'Resource'}
+          onClose={handleCloseDeleteModal}
+          formComponent={
+            <div>
+              <Typography>
+                Are u sure you want to inactivate the logistics?
+              </Typography>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  gap: "1rem",
+                  justifyContent: "flex-end",
+                  margin:".5rem"
+                }}
+              >
+                <Button
+                  variant="contained"
+                  color="success"
+                  onClick={handleConfirmDelete}
+                >
+                  Yes Proceed
+                </Button>
+                <Button
+                  onClick={handleCloseDeleteModal}
+                  variant="contained"
+                  color="error"
+                >
+                  Close
+                </Button>
+              </div>
+            </div>
+          }
         />
       )}
     </>
