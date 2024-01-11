@@ -108,6 +108,9 @@ const TrainingField = ({ onClose, isLoading, data, empId }) => {
             helperText={formik.touched.startDate && formik.errors.startDate}
             variant='outlined'
             InputLabelProps={{ shrink: true }}
+            inputProps={{
+              max: currentDate,
+            }}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -127,6 +130,7 @@ const TrainingField = ({ onClose, isLoading, data, empId }) => {
             InputLabelProps={{ shrink: true }}
             inputProps={{
               min: formik?.values?.startDate, // Disable past date selections
+              max: currentDate, // Disable past date selections
             }}
           />
         </Grid>

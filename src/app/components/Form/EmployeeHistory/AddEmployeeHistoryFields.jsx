@@ -17,6 +17,8 @@ const AddEmployeeHistoryFields = ({ onClose, isLoading }) => {
     }
   };
 
+  const currentDate = new Date().toISOString().split('T')[0];
+
   return (
     !isLoading && (
       <Grid container spacing={3}>
@@ -91,6 +93,9 @@ const AddEmployeeHistoryFields = ({ onClose, isLoading }) => {
             helperText={formik.touched.fromDate && formik.errors.fromDate}
             variant='outlined'
             InputLabelProps={{ shrink: true }}
+            inputProps={{
+              max: currentDate,
+            }}
           />
         </Grid>
         <Grid item xs={12} md={6} sm={12}>
@@ -106,6 +111,10 @@ const AddEmployeeHistoryFields = ({ onClose, isLoading }) => {
             helperText={formik.touched.toDate && formik.errors.toDate}
             variant='outlined'
             InputLabelProps={{ shrink: true }}
+            inputProps={{
+              min: formik?.values?.fromDate, // Disable past date selections
+              max: currentDate, // Disable past date selections
+            }}
           />
         </Grid>
         <Grid item xs={12} md={12} sm={12}>
@@ -122,7 +131,7 @@ const AddEmployeeHistoryFields = ({ onClose, isLoading }) => {
             variant='outlined'
             InputLabelProps={{ shrink: true }}
             multiline
-            minRows={3}
+            rows={3}
           />
         </Grid>
 

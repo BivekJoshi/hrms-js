@@ -146,9 +146,9 @@ const AddDepartmentHistoryFields = ({
             error={formik.touched.remarks && Boolean(formik.errors.remarks)}
             helperText={formik.touched.remarks && formik.errors.remarks}
             variant="outlined"
-            InputLabelProps={{ shrink: true }}
+            // InputLabelProps={{ shrink: true }}
             multiline
-            minRows={3}
+            rows={3}
           />
         </Grid>
         <Grid

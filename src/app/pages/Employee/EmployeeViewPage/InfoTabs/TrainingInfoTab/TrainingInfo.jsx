@@ -159,7 +159,7 @@ const TrainingInfo = ({ data, role }) => {
 
       {openAddModal && (
         <AddTrainingInfo
-          title={"Add Training History"}
+          title={"Add Training"}
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
         />
