@@ -1,6 +1,7 @@
 import { useFormik } from "formik";
 import { useAddDesignation, useEditDesignation } from "../useDesignation";
 import { DesignationSchema } from "../Validation/DesignationSchema";
+import { isEqual } from 'lodash';
 
 const useDesignationForm = (data, onClose) => {
   const { mutate: addDesignation } = useAddDesignation({});
@@ -35,13 +36,25 @@ const useDesignationForm = (data, onClose) => {
     });
   };
 
+  // const handledEditRequest = (values) => {
+  //   values = { ...values };
+  //   editDesignation(values, {
+  //     onSuccess: () => {
+  //       onClose();
+  //     },
+  //   });
+  // };
+
   const handledEditRequest = (values) => {
     values = { ...values };
-    editDesignation(values, {
-      onSuccess: () => {
-        onClose();
-      },
-    });
+    console.log(isEqual(values, formik.initialValues), "isEqual")
+    if (!isEqual(values, formik.initialValues)) {
+      editDesignation(values, {
+        onSuccess: () => {
+          onClose();
+        },
+      });
+    }
   };
 
   return { formik };
