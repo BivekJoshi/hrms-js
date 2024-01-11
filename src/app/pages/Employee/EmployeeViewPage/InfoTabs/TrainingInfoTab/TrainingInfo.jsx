@@ -4,14 +4,15 @@ import { useParams } from 'react-router-dom';
 import {
   useDeleteTraining,
   useGetTrainingByEmpId,
-} from '../../../../../hooks/training/useTraining';
-import { AddTrainingInfo, EditTrainingInfo } from './TrainingModal';
-import DeleteIcon from '@mui/icons-material/Delete';
-import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
-import DeleteConfirmationModal from '../../../../../components/Modal/DeleteConfirmationModal';
-import useAuth from '../../../../../../auth/hooks/component/login/useAuth';
-import { useGetLoggedInUserInfo } from '../../../../../hooks/employee/useEmployee';
-import CustomTable from '../../../../../components/CustomTable/CustomTable';
+} from "../../../../../hooks/training/useTraining";
+import { AddTrainingInfo, EditTrainingInfo } from "./TrainingModal";
+import DeleteIcon from "@mui/icons-material/Delete";
+import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
+import DeleteConfirmationModal from "../../../../../components/Modal/DeleteConfirmationModal";
+import useAuth from "../../../../../../auth/hooks/component/login/useAuth";
+import { useGetLoggedInUserInfo } from "../../../../../hooks/employee/useEmployee";
+import CustomTable from "../../../../../components/CustomTable/CustomTable";
+import ThemeModeContext from "../../../../../../theme/ThemeModeContext";
 
 const TrainingInfo = ({ data, role }) => {
   const { isEmployee } = useAuth();
@@ -99,15 +100,16 @@ const TrainingInfo = ({ data, role }) => {
       emptyValue: '-',
     },
   ];
+  const { mode } = React.useContext(ThemeModeContext);
 
   const actions = [
     {
       icon: () => (
         <ModeEditOutlineIcon
           sx={{
-            color: 'black',
-            '&:hover': {
-              color: 'green',
+            color: mode === "light" ? "black" : "white",
+            "&:hover": {
+              color: "green",
             },
           }}
         />
@@ -119,9 +121,9 @@ const TrainingInfo = ({ data, role }) => {
       icon: () => (
         <DeleteIcon
           sx={{
-            color: 'black',
-            '&:hover': {
-              color: 'red',
+            color: mode === "light" ? "black" : "white",
+            "&:hover": {
+              color: "red",
             },
           }}
         />

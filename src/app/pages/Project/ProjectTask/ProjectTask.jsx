@@ -10,15 +10,16 @@ import {
   AddProjectTaskModal,
   AssignProjectTaskModal,
   EditProjectTaskModal,
-} from '../ProjectModal/ProjectModal';
-import { Box, Button, Chip, SwipeableDrawer } from '@mui/material';
-import ProjectTaskField from '../../../components/Form/Project/ProjectTask/ProjectTaskFields';
-import DeleteIcon from '@mui/icons-material/Delete';
-import DeleteConfirmationModal from '../../../components/Modal/DeleteConfirmationModal';
-import { useGetEmployee } from '../../../hooks/employee/useEmployee';
-import CustomTable from '../../../components/CustomTable/CustomTable';
-import AssignmentIcon from '@mui/icons-material/Assignment';
-import HocButton from '../../../hoc/hocButton';
+} from "../ProjectModal/ProjectModal";
+import { Box, Button, Chip, SwipeableDrawer } from "@mui/material";
+import ProjectTaskField from "../../../components/Form/Project/ProjectTask/ProjectTaskFields";
+import DeleteIcon from "@mui/icons-material/Delete";
+import DeleteConfirmationModal from "../../../components/Modal/DeleteConfirmationModal";
+import { useGetEmployee } from "../../../hooks/employee/useEmployee";
+import CustomTable from "../../../components/CustomTable/CustomTable";
+import AssignmentIcon from "@mui/icons-material/Assignment";
+import HocButton from "../../../hoc/hocButton";
+import ThemeModeContext from "../../../../theme/ThemeModeContext";
 
 const ProjectTask = ({ permissions }) => {
   const {
@@ -211,15 +212,16 @@ const ProjectTask = ({ permissions }) => {
       },
     },
   ].filter(Boolean);
+  const { mode } = React.useContext(ThemeModeContext);
 
   const actions = [
     {
       icon: () => (
         <AssignmentIcon
           sx={{
-            color: 'black',
-            '&:hover': {
-              color: 'green',
+            color: mode === "light" ? "black" : "white",
+            "&:hover": {
+              color: "green",
             },
           }}
         />
@@ -234,9 +236,9 @@ const ProjectTask = ({ permissions }) => {
       icon: () => (
         <ModeEditOutlineIcon
           sx={{
-            color: 'black',
-            '&:hover': {
-              color: 'green',
+            color: mode === "light" ? "black" : "white",
+            "&:hover": {
+              color: "green",
             },
           }}
         />
@@ -246,16 +248,12 @@ const ProjectTask = ({ permissions }) => {
       onClick: (event, rowData) => handleEditTask(rowData),
     },
     {
-      icon: () => (
-        <DeleteIcon
-          sx={{
-            color: 'black',
-            '&:hover': {
-              color: 'red',
-            },
-          }}
-        />
-      ),
+      icon: () => <DeleteIcon sx={{
+        color: mode === "light" ? "black" : "white",
+        "&:hover": {
+          color: "red",
+        },
+      }} />,
       disabled: !permissions?.canDelete,
       tooltip: 'Delete task',
       onClick: (event, rowData) => handleDeleteTask(rowData),

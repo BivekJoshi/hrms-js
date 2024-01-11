@@ -6,6 +6,7 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import { IconButton, Tooltip, Typography } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import EditDataModal from "./Component/EditDataModal";
+import ThemeModeContext from "../../../theme/ThemeModeContext";
 
 const EmployeeMapping = () => {
   const { data: mapData, isLoading } = useGetEmployeeDeviceMappingById();
@@ -118,6 +119,7 @@ const EmployeeMapping = () => {
       },
     },
   ];
+  const { mode } = React.useContext(ThemeModeContext);
 
   const actions = [
     (rowData) => ({
@@ -126,7 +128,7 @@ const EmployeeMapping = () => {
           //   permissions={permissions?.canEdit}
           disabled={rowData.deviceEmpId && rowData.deviceBranchId}
           sx={{
-            color: "black",
+            color: mode === "light" ? "black" : "white",
             "&:hover": {
               color: "green",
             },

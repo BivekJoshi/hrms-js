@@ -4,6 +4,7 @@ import { useGetEmailLogByFilter } from "../../hooks/emailLog/useEmailLog";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import { useNavigate } from "react-router-dom";
 import { Button, Stack } from "@mui/material";
+import ThemeModeContext from "../../../theme/ThemeModeContext";
 
 const EmailLog = () => {
   const { data, isLoading } = useGetEmailLogByFilter();
@@ -92,12 +93,14 @@ const EmailLog = () => {
   // const filteredData = data.filter(
   //   (row) => row.emailType === "FORGOT_PASSWORD" && row.result === "SUCCESS"
   // );
+  const { mode } = React.useContext(ThemeModeContext);
+
   const actions = [
     {
       icon: () => (
         <RemoveRedEyeOutlinedIcon
           sx={{
-            color: "black",
+            color: mode === "light" ? "black" : "white",
             "&:hover": {
               color: "green",
             },

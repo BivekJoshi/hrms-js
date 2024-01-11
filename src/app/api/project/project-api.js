@@ -64,9 +64,10 @@ export const getProjectWiseEmployee = async (employeeId) => {
   /*________________________EDIT-TO-ACTIVATE-PROJECT_____________________________________*/
 }
 export const addActiveProject = async (formData) => {
-  const { projectId } = formData;
+  const { projectId, remarks } = formData;
   const data = await axiosInstance.put(
-    `/project/change-activation-status/${projectId}?isActive=true`
+    `/project/change-activation-status/${projectId}?isActive=true`,
+    { remarks }
   );
   return data;
 };
@@ -75,9 +76,10 @@ export const addActiveProject = async (formData) => {
   /*________________________EDIT-TO-DE-ACTIVATE-PROJECT_____________________________________*/
 }
 export const removeActiveProject = async (formData) => {
-  const { projectId } = formData;
+  const { projectId, remarks } = formData;
   const data = await axiosInstance.put(
-    `/project/change-activation-status/${projectId}?isActive=false`
+    `/project/change-activation-status/${projectId}?isActive=false`,
+    { remarks }
   );
   return data;
 };
@@ -95,6 +97,9 @@ export const addProject = async (formData) => {
 }
 export const editProject = async (formData) => {
   const { projectid } = formData;
-  const data = await axiosInstance.put(`/project/update/${projectid}`, formData);
+  const data = await axiosInstance.put(
+    `/project/update/${projectid}`,
+    formData
+  );
   return data;
 };

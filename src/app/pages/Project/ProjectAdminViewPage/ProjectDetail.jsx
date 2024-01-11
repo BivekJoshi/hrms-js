@@ -1,28 +1,28 @@
-import React, { useState } from 'react';
-import Typography from '@mui/material/Typography';
+import React, { useContext, useState } from "react";
+import Typography from "@mui/material/Typography";
 import {
   useDeleteProjectEmployee,
   useGetProjectEmployeeById,
-} from '../../../hooks/project/projectEmployee/useProjectEmployee';
-import { useParams } from 'react-router-dom';
-import MaterialTable from '@material-table/core';
-import { useGetEmployee } from '../../../hooks/employee/useEmployee';
-import { Box, Button, Grid, Stack } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteConfirmationModal from '../../../components/Modal/DeleteConfirmationModal';
-import { useGetProject } from '../../../hooks/project/useProject';
+} from "../../../hooks/project/projectEmployee/useProjectEmployee";
+import { useParams } from "react-router-dom";
+import MaterialTable from "@material-table/core";
+import { useGetEmployee } from "../../../hooks/employee/useEmployee";
+import { Box, Button, Grid, Stack } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteConfirmationModal from "../../../components/Modal/DeleteConfirmationModal";
 import {
   AddProjectEmployeeModal,
   EditProjectEmployeeModal,
-} from '../ProjectModal/ProjectModal';
-import CustomTable from '../../../components/CustomTable/CustomTable';
+} from "../ProjectModal/ProjectModal";
+import CustomTable from "../../../components/CustomTable/CustomTable";
+import ThemeModeContext from "../../../../theme/ThemeModeContext";
 
 const ProjectDetail = () => {
   const { id } = useParams();
   const { data: projectEmployeeData, isLoading } =
     useGetProjectEmployeeById(id);
-
+  const { mode } = useContext(ThemeModeContext);
   // const { data: employeeData } = useGetEmployee();
   // const { data: projectData } = useGetProject();
 
@@ -135,9 +135,9 @@ const ProjectDetail = () => {
           >
             <EditIcon
               sx={{
-                color: 'black',
-                '&:hover': {
-                  color: 'green',
+                color: mode === "light" ? "black" : "white",
+                "&:hover": {
+                  color: "green",
                 },
               }}
             />
@@ -148,9 +148,9 @@ const ProjectDetail = () => {
           >
             <DeleteIcon
               sx={{
-                color: 'black',
-                '&:hover': {
-                  color: 'red',
+                color: mode === "light" ? "black" : "white",
+                "&:hover": {
+                  color: "red",
                 },
               }}
             />
@@ -158,7 +158,7 @@ const ProjectDetail = () => {
         </Stack>
       ),
       sorting: false,
-      maxWidth: '90px',
+      maxWidth: "90px",
     },
   ];
 
