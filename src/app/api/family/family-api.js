@@ -15,9 +15,10 @@ export const addfamily = async (formData, id) => {
 };
 
 export const addfamilyMember = async (formData, id) => {
-  const data = await axiosInstance.post(`/family-member/create/${id}`, [
-    formData,
-  ]);
+  const data = await axiosInstance.post(
+    `/family-member/create/${id}`,
+    formData
+  );
   return data;
 };
 
@@ -57,9 +58,7 @@ export const editFamily = async (formData, id) => {
 };
 
 export const editFamilyMember = async (formData, id) => {
-  const data = await axiosInstance.put(`/family-member/update/${id}`, [
-    formData,
-  ]);
+  const data = await axiosInstance.put(`/family-member/update/${id}`, formData);
   return data;
 };
 

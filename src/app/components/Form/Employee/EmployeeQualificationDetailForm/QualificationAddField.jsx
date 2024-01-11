@@ -18,14 +18,14 @@ import { Box } from "@mui/system";
 import { DOC_URL } from "../../../../../auth/axiosInterceptor";
 import ThemeModeContext from "../../../../../theme/ThemeModeContext";
 
-const passedLevel = [
+export  const passedLevel = [
   {
     id: "SLC",
     label: "SLC / SEE",
   },
   {
     id: "PLUS_TWO",
-    label: "HSEB / NEB",
+    label: "Plus Two",
   },
   {
     id: "BACHELORS",
@@ -44,7 +44,7 @@ const passedLevel = [
     label: "PHD",
   },
 ];
-const scoreType = [
+export const scoreType = [
   {
     id: "PERCENT",
     label: "Percentage",

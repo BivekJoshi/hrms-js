@@ -14,23 +14,19 @@ const HistorySchema = Yup.object().shape({
 });
 
 const useAddHistoryDetails = () => {
-  const {
-    addEmployee: addEmployeemutate,
-    isSuccess: isFormSubmitSuccess,
-  } = useAddEmployeeHistory({});
-  const { editHistoryMutate, isSuccess: isEditSuccess } = useEditEmployeeHistory(
-    {}
-  );
+  const { addEmployee: addEmployeemutate, isSuccess: isFormSubmitSuccess } =
+    useAddEmployeeHistory({});
+  const { editHistoryMutate, isSuccess: isEditSuccess } =
+    useEditEmployeeHistory({});
 
   const formik = useFormik({
     initialValues: {
-        employerName: "",
-        employerAddress: "",
-        pastPosition: "",
-        fromDate: "",
-        toDate: "",
-        description: "",
-        remarks:"",
+      employerName: "",
+      employerAddress: "",
+      pastPosition: "",
+      fromDate: "",
+      toDate: "",
+      remarks: "",
     },
     validationSchema: HistorySchema,
     onSubmit: (values) => {

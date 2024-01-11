@@ -17,24 +17,10 @@ import {
   useDeleteFamily,
   useGetFammilyById,
 } from "../../../../hooks/employee/useFamily";
-import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
-import DeleteIcon from "@mui/icons-material/Delete";
-import Fade from "@mui/material/Fade";
-import Backdrop from "@mui/material/Backdrop";
 import FamilyAddFields from "./FamilyAddFields";
 import useAddFamilyDetails from "./useAddFamilyDetails";
 import CustomeEmployeeDetails from "../../../../utils/CustomeDetails/CustomeEmployeeDetails";
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
+
 const NewEmployeeFamilyDetailForm = () => {
   const { id } = useParams();
   const { data, isLoading } = useGetFammilyById(id);
@@ -49,7 +35,7 @@ const NewEmployeeFamilyDetailForm = () => {
   const handleDeleteFamily = (familyMember) => {
     if (familyMember?.id) {
       deleteFamilyMutation.mutate(familyMember.id);
-    }     
+    }
   };
   const columns = [
     { id: "name", label: "Name", minWidth: 170 },
@@ -82,6 +68,7 @@ const NewEmployeeFamilyDetailForm = () => {
         handleFormSubmit={handleSubmit}
         isSubmitSuccess={isFormSubmitSuccess || isEditSuccess}
         deleteCallBack={handleDeleteFamily}
+        modalWidth={400}
       />
     </div>
   );
