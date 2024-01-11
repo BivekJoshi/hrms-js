@@ -50,7 +50,7 @@ export const useAddHoliday = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(['addHoliday'], (formData) => addHoliday(formData), {
     onSuccess: (data, variables, context) => {
-      toast.success('Succesfully added Holiday');
+      toast.success('Successfully added Holiday');
       onSuccess && onSuccess(data, variables, context);
       queryClient.invalidateQueries('getHoliday');
     },
@@ -82,7 +82,7 @@ export const useEditHoliday = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(['editHoliday'], (formData) => editHoliday(formData), {
     onSuccess: (data, variables, context) => {
-      toast.success('Succesfully updated holiday');
+      toast.success('Successfully updated holiday');
       onSuccess && onSuccess(data, variables, context);
       queryClient.invalidateQueries('getHoliday');
     },

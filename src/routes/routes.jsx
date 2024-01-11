@@ -196,7 +196,7 @@ const routes = [
     component: <Company component='company' />,
   },
   {
-    path: 'emplyment-type',
+    path: 'employment-type',
     name: 'Employment Type',
     id: nanoid(),
     component: <EmploymentType component='employmenttype' />,

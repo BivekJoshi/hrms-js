@@ -100,7 +100,7 @@ const AddBranchHistoryFields = ({
           >
             {branchHistoryData?.length !== 0
               ? 'Update Branch'
-              : 'Add Employee Branch'}
+              : 'Add Branch'}
           </Button>
           <Button
             variant='contained'
