@@ -63,7 +63,6 @@ axiosInstance.interceptors.response.use(
     return response.data;
   },
   function (error) {
-    console.log('🚀 ~ file: axiosInterceptor.js:66 ~ error:', error);
     if (error?.response) {
       if (error?.response?.status === 401) {
         removeUser();

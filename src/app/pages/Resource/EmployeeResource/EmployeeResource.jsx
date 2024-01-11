@@ -20,10 +20,6 @@ const EmployeeResource = ({ permissions }) => {
 
   const [deletedData, setDeletedData] = useState({});
   const [editedEmployeeResouce, setEditedEmployeeResource] = useState({});
-  console.log(
-    '🚀 ~ EmployeeResource ~ editedEmployeeResouce:',
-    editedEmployeeResouce
-  );
 
   const handleAddOpenModal = () => setOpenAddModal(true);
   const handleCloseAddModal = () => setOpenAddModal(false);
@@ -42,9 +38,9 @@ const EmployeeResource = ({ permissions }) => {
     setOpenDeleteModal(false);
   };
 
-  const actionsCellStyle={
-    padding:"0 2rem"
-  }
+  const actionsCellStyle = {
+    padding: '0 2rem',
+  };
   const handleEditRowData = (rowData) => {
     setEditedEmployeeResource(rowData);
     setOpenEditModal(true);
@@ -138,9 +134,9 @@ const EmployeeResource = ({ permissions }) => {
       icon: () => (
         <ModeEditOutlineIcon
           sx={{
-            color: mode === "light" ? "black" : "white",
-            "&:hover": {
-              color: "green",
+            color: mode === 'light' ? 'black' : 'white',
+            '&:hover': {
+              color: 'green',
             },
           }}
         />
@@ -154,9 +150,9 @@ const EmployeeResource = ({ permissions }) => {
       icon: () => (
         <DeleteIcon
           sx={{
-            color: mode === "light" ? "black" : "white",
-            "&:hover": {
-              color: "red",
+            color: mode === 'light' ? 'black' : 'white',
+            '&:hover': {
+              color: 'red',
             },
           }}
         />
