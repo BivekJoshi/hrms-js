@@ -15,7 +15,7 @@ import './NewFilter.css';
 import { Field, Form, Formik } from 'formik';
 import ThemeModeContext from '../../../theme/ThemeModeContext';
 
-const NewFilter = ({ inputField, searchCallBack, validate }) => {
+const NewFilter = ({ inputField, disableSubmit, searchCallBack, validate }) => {
   const [showFilter, setShowFilter] = useState(true);
   const { palette, mode } = useContext(ThemeModeContext);
   const initialValues = inputField.reduce((acc, item) => {
@@ -207,16 +207,18 @@ const NewFilter = ({ inputField, searchCallBack, validate }) => {
                     })}
                   </Grid>
                   <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                    <Button
-                      type='submit'
-                      variant='contained'
-                      sx={{
-                        mt: 2,
-                        textTransform: 'none',
-                      }}
-                    >
-                      Search
-                    </Button>
+                    {!disableSubmit && (
+                      <Button
+                        type='submit'
+                        variant='contained'
+                        sx={{
+                          mt: 2,
+                          textTransform: 'none',
+                        }}
+                      >
+                        Search
+                      </Button>
+                    )}
                     <Button
                       variant='outlined'
                       sx={{

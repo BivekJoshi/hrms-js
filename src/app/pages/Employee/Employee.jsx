@@ -197,7 +197,7 @@ const Employee = () => {
             </Box>
           </Box>
           <TabPanel value='1'>
-            <NewFilter inputField={filterMenu} />
+            <NewFilter inputField={filterMenu} disableSubmit={true} />
 
             {/* <Grid
               container

@@ -112,7 +112,6 @@ const Attendance = () => {
   const { palette } = useContext(ThemeModeContext);
 
   const [searchEmployee, setSearchEmployee] = useState('');
-
   const [searchMonth, setSearchMonth] = useState('');
   const [searchYear, setSearchYear] = useState('');
 
@@ -214,7 +213,7 @@ const Attendance = () => {
   return (
     <div className='main'>
       <Typography variant='h5'>Attendance</Typography>
-      <NewFilter inputField={filterMenu} />
+      <NewFilter inputField={filterMenu} disableSubmit={true} />
       {/* <div className='Search'>
         <Box
           component='form'

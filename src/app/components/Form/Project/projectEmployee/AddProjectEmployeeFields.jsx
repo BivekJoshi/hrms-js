@@ -16,7 +16,6 @@ export const AddprojectEmployeeFields = ({ onClose, isLoading }) => {
     }
   };
   const currentDate = new Date().toISOString().split('T')[0];
- 
   return (
     !loadingEmployee && (
       <Grid container spacing={3}>

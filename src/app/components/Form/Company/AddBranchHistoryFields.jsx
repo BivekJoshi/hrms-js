@@ -1,8 +1,9 @@
 import { Button, Grid, MenuItem, TextField } from '@mui/material';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import useAddBranchHistoryForm from '../../../hooks/company/CompanyForm/useAddBranchHistoryForm';
 import { useGetCompany } from '../../../hooks/company/useCompany';
 import ThemeModeContext from '../../../../theme/ThemeModeContext';
+import RemarkField from '../../RemarkField/RemarkField';
 
 const AddBranchHistoryFields = ({
   onClose,
@@ -12,13 +13,9 @@ const AddBranchHistoryFields = ({
 }) => {
   const { formik } = useAddBranchHistoryForm(onClose, id);
   const { data: branchData, isLoading: branchLoading } = useGetCompany();
- 
   const { mode } = useContext(ThemeModeContext);
   const handleFormSubmit = () => {
     formik.handleSubmit();
-    if (formik.isValid) {
-      // onClose();
-    }
   };
   const currentDate = new Date().toISOString().split('T')[0];
 
@@ -78,15 +75,13 @@ const AddBranchHistoryFields = ({
           />
         </Grid>
         <Grid item xs={12} sm={12}>
-          <TextField
+          <RemarkField
             id='remarks'
             name='remarks'
             label='Remarks'
             fullWidth
-            value={formik.values.remarks}
-            onChange={formik.handleChange}
-            error={formik.touched.remarks && Boolean(formik.errors.remarks)}
-            helperText={formik.touched.remarks && formik.errors.remarks}
+            formik={formik}
+            maxLength={255}
             variant='outlined'
             multiline
             rows={3}
