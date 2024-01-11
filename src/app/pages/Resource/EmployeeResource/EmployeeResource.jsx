@@ -42,6 +42,9 @@ const EmployeeResource = ({ permissions }) => {
     setOpenDeleteModal(false);
   };
 
+  const actionsCellStyle={
+    padding:"0 2rem"
+  }
   const handleEditRowData = (rowData) => {
     setEditedEmployeeResource(rowData);
     setOpenEditModal(true);
@@ -128,14 +131,16 @@ const EmployeeResource = ({ permissions }) => {
       sorting: false,
     },
   ];
+  const { mode } = React.useContext(ThemeModeContext);
+
   const actions = [
     {
       icon: () => (
         <ModeEditOutlineIcon
           sx={{
-            color: 'black',
-            '&:hover': {
-              color: 'green',
+            color: mode === "light" ? "black" : "white",
+            "&:hover": {
+              color: "green",
             },
           }}
         />
@@ -149,9 +154,9 @@ const EmployeeResource = ({ permissions }) => {
       icon: () => (
         <DeleteIcon
           sx={{
-            color: 'black',
-            '&:hover': {
-              color: 'red',
+            color: mode === "light" ? "black" : "white",
+            "&:hover": {
+              color: "red",
             },
           }}
         />
@@ -187,7 +192,8 @@ const EmployeeResource = ({ permissions }) => {
         title='Employee Logistics'
         isLoading={isLoading}
         actions={actions}
-        // exportButton={true}
+        exportButton={true}
+        actionsCellStyle={actionsCellStyle}
       />
       {openDeleteModal && (
         <DeleteConfirmationModal

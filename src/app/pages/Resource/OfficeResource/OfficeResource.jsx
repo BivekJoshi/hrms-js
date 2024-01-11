@@ -9,21 +9,20 @@ import {
   AddOfficeResourceModal,
   DeactivatedOfficeResourceModal,
   EditOfficeResourceModal,
-} from "./OfficeResourceModal";
-import { ButtonComponent } from "../../../components/Button/ButtonComponent";
-import DeactivatedOfficeResource from "./DeactivatedOfficeResource";
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import { AvailableOfficeLogistic } from "./AvailableOfficeLogistic";
-import { OpenCLoseModel } from "./OpenCLoseModel";
-import { useGetEmployee } from "../../../hooks/employee/useEmployee";
-import CustomTable from "../../../components/CustomTable/CustomTable";
-import DeleteIcon from "@mui/icons-material/Delete";
-import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
-import HocButton from "../../../hoc/hocButton";
-import PermissionHoc from "../../../hoc/permissionHoc";
-import DeleteConfirmationModal from "../../../components/Modal/DeleteConfirmationModal";
-import HighlightOffOutlinedIcon from "@mui/icons-material/HighlightOffOutlined";
-import FormModal from "../../../components/Modal/FormModal";
+} from './OfficeResourceModal';
+import { ButtonComponent } from '../../../components/Button/ButtonComponent';
+import DeactivatedOfficeResource from './DeactivatedOfficeResource';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import { AvailableOfficeLogistic } from './AvailableOfficeLogistic';
+import { OpenCLoseModel } from './OpenCLoseModel';
+import { useGetEmployee } from '../../../hooks/employee/useEmployee';
+import CustomTable from '../../../components/CustomTable/CustomTable';
+import DeleteIcon from '@mui/icons-material/Delete';
+import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
+import HocButton from '../../../hoc/hocButton';
+import PermissionHoc from '../../../hoc/permissionHoc';
+import DeleteConfirmationModal from '../../../components/Modal/DeleteConfirmationModal';
+import ThemeModeContext from '../../../../theme/ThemeModeContext';
 
 const OfficeResource = ({ permissions }) => {
   const { data: officeResourceData, isLoading } = useGetUsedOfficeResource();
@@ -111,13 +110,14 @@ const OfficeResource = ({ permissions }) => {
       sorting: false,
     },
   ];
+  const { mode } = React.useContext(ThemeModeContext);
 
   const actions = [
     {
       icon: () => (
         <ModeEditOutlineIcon
           sx={{
-            color: "black",
+            color: mode === "light" ? "black" : "white",
             "&:hover": {
               color: "green",
             },
@@ -132,7 +132,7 @@ const OfficeResource = ({ permissions }) => {
       icon: () => (
         <HighlightOffOutlinedIcon
           sx={{
-            color: "black",
+            color: mode === "light" ? "black" : "white",
             "&:hover": {
               color: "red",
             },

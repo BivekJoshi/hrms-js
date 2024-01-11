@@ -9,6 +9,7 @@ export const useRemoveActiveProject = (data) => {
     const formik = useFormik({
         initialValues: {
             projectId: data?.id || "",
+            remarks: "",
         },
         enableReinitialize: true,
         onSubmit: (values) => {
@@ -17,6 +18,7 @@ export const useRemoveActiveProject = (data) => {
     });
 
     const handleRequest = (values) => {
+        console.log(values);
         values = {
             ...values,
         };
@@ -31,6 +33,7 @@ export const useAddActiveProject = (data, onClose) => {
     const formik = useFormik({
         initialValues: {
             projectId: data || "",
+            remarks: "",
         },
         enableReinitialize: true,
         onSubmit: (values) => {

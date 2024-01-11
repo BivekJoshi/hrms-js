@@ -4,7 +4,6 @@ import {
   addofficeResource,
   editofficeResource,
   editofficeResourceActiveInactive,
-  editofficeResourceInactive,
   getAvailableOfficeResource,
   getUsedOfficeResource,
   getdeactivaedofficeResource,
@@ -118,7 +117,7 @@ export const useEditActiveInactiveOfficeResource = ({ onSuccess }) => {
     (formData) => editofficeResourceActiveInactive(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Successfully edited status of office Logistics');
+        toast.success('Successfully removed office Logistics');
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries('getdeactivaedofficeResource');
         queryClient.invalidateQueries('getAvailableOfficeResource');
@@ -127,21 +126,3 @@ export const useEditActiveInactiveOfficeResource = ({ onSuccess }) => {
   );
 };
 
-{
-  /*________________________EDIT ACTIVE-INACTIVE OFFICE RESOURCE____________________________________*/
-}
-export const useEditInactiveOfficeResource = ({ onSuccess }) => {
-  const queryClient = useQueryClient();
-  return useMutation(
-    ['editofficeResourceInactive'],
-    (formData) => editofficeResourceInactive(formData),
-    {
-      onSuccess: (data, variables, context) => {
-        toast.success('Successfully edited status of office Logistics');
-        onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries('getdeactivaedofficeResource');
-        queryClient.invalidateQueries('getUsedOfficeResource');
-      },
-    }
-  );
-};

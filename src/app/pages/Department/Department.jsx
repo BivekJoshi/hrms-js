@@ -21,6 +21,7 @@ import { useEffect } from 'react';
 const Department = ({ permissions }) => {
   const { isEmployee } = useAuth();
   const { data: departmentData, isLoading } = useGetDepartment();
+  const { mode } = React.useContext(ThemeModeContext);
 
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
@@ -93,9 +94,9 @@ const Department = ({ permissions }) => {
       icon: () => (
         <ModeEditOutlineIcon
           sx={{
-            color: 'black',
-            '&:hover': {
-              color: 'green',
+            color: mode === "light" ? "black" : "white",
+            "&:hover": {
+              color: "green",
             },
           }}
         />
@@ -109,9 +110,9 @@ const Department = ({ permissions }) => {
       icon: () => (
         <DeleteIcon
           sx={{
-            color: 'black',
-            '&:hover': {
-              color: 'red',
+            color: mode === "light" ? "black" : "white",
+            "&:hover": {
+              color: "red",
             },
           }}
         />
