@@ -10,6 +10,7 @@ import { EditEmployeeResourceModal } from './EmployeeResourceModal';
 import PermissionHoc from '../../../hoc/permissionHoc';
 import HocButton from '../../../hoc/hocButton';
 import CustomTable from '../../../components/CustomTable/CustomTable';
+import { ThemeModeContext } from './../../../../theme/ThemeModeContext';
 
 const EmployeeResource = ({ permissions }) => {
   const { data: employeeResourceData, isLoading } = useGetEmployeeResource();
@@ -141,8 +142,7 @@ const EmployeeResource = ({ permissions }) => {
           }}
         />
       ),
-      disabled:
-        !permissions?.canEdit || editedEmployeeResouce?.returnDate === null,
+      disabled: !permissions?.canEdit,
       tooltip: 'Edit Logistics',
       onClick: (event, rowData) => handleEditRowData(rowData),
     },
