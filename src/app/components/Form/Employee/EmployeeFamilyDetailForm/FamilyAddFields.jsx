@@ -9,13 +9,13 @@ const FamilyAddFields = ({ formik }) => {
           id={`name`}
           name={`name`}
           label='Name'
-          placeholder='Enter Name'
           fullWidth
           required
           value={formik.values.name}
           onChange={formik.handleChange}
           error={formik.touched.name && Boolean(formik.errors.name)}
           helperText={formik.touched.name && formik.errors.name}
+          InputLabelProps={{ shrink: Boolean(formik.values.name) }}
           variant='outlined'
           size='small'
         />
@@ -25,13 +25,13 @@ const FamilyAddFields = ({ formik }) => {
           id={`relation`}
           relation={`relation`}
           label='Relation'
-          placeholder='Enter relation'
           fullWidth
           required
           value={formik.values.relation}
           onChange={formik.handleChange}
           error={formik.touched.relation && Boolean(formik.errors.relation)}
           helperText={formik.touched.relation && formik.errors.relation}
+          InputLabelProps={{ shrink: Boolean(formik.values.relation) }}
           variant='outlined'
           size='small'
         />
@@ -41,7 +41,6 @@ const FamilyAddFields = ({ formik }) => {
           id={`mobileNumber`}
           mobileNumber={`mobileNumber`}
           label='Mobile Number'
-          placeholder='Enter mobileNumber'
           fullWidth
           required
           value={formik.values.mobileNumber}
@@ -50,6 +49,7 @@ const FamilyAddFields = ({ formik }) => {
             formik.touched.mobileNumber && Boolean(formik.errors.mobileNumber)
           }
           helperText={formik.touched.mobileNumber && formik.errors.mobileNumber}
+          InputLabelProps={{ shrink: Boolean(formik.values.mobileNumber) }}
           variant='outlined'
           size='small'
         />

@@ -112,7 +112,7 @@ const AddEmployeeHistoryFields = ({ onClose, isLoading }) => {
           />
         </Grid>
 
-        <Grid item xs={12} md={6} lg={6} xl={6} sm={12}>
+        <Grid item xs={12} md={12} lg={12} xl={6} sm={12}>
           <TextField
             id="remarks"
             name="remarks"
@@ -125,7 +125,7 @@ const AddEmployeeHistoryFields = ({ onClose, isLoading }) => {
             variant='outlined'
             InputLabelProps={{ shrink: true }}
             multiline
-            minRows={3}
+            rows={3}
           />
         </Grid>
 

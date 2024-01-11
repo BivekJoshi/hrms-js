@@ -4,13 +4,13 @@ import {
   Grid,
   Input,
   TextField,
-} from '@mui/material';
-import React from 'react';
+} from "@mui/material";
+import React from "react";
 
 const HistoryAddField = ({ formik }) => {
-  const currentDate = new Date().toISOString().split('T')[0];
+  const currentDate = new Date().toISOString().split("T")[0];
   const handleImageChange = (event) => {
-    formik.setFieldValue('image', event.target.files[0]);
+    formik.setFieldValue("image", event.target.files[0]);
   };
   return (
     <Grid container spacing={3}>
@@ -18,27 +18,27 @@ const HistoryAddField = ({ formik }) => {
         <TextField
           id={`employerName`}
           name={`employerName`}
-          label='Organization Name'
-          placeholder='Enter organization Name'
+          label="Organization Name"
           fullWidth
+          required
           value={formik.values.employerName}
           onChange={formik.handleChange}
           error={
             formik.touched.employerName && Boolean(formik.errors.employerName)
           }
           helperText={formik.touched.employerName && formik.errors.employerName}
-          variant='outlined'
-          size='small'
+          InputLabelProps={{ shrink: Boolean(formik.values.employerName) }}
+          variant="outlined"
+          size="small"
         />
       </Grid>
       <Grid item xs={12}>
         <TextField
           id={`employerAddress`}
           name={`employerAddress`}
-          label='Organization Address'
-          placeholder='Enter organization address'
+          label="Organization Address"
           fullWidth
-          // required
+          required
           value={formik.values.employerAddress}
           onChange={formik.handleChange}
           error={
@@ -48,45 +48,46 @@ const HistoryAddField = ({ formik }) => {
           helperText={
             formik.touched.employerAddress && formik.errors.employerAddress
           }
-          variant='outlined'
-          size='small'
+          InputLabelProps={{ shrink: Boolean(formik.values.employerAddress) }}
+          variant="outlined"
+          size="small"
         />
       </Grid>
       <Grid item xs={12}>
         <TextField
           id={`pastPosition`}
           name={`pastPosition`}
-          label='Past Position'
-          placeholder='Enter past position'
+          label="Past Position"
           fullWidth
-          // required
+          required
           value={formik.values.pastPosition}
           onChange={formik.handleChange}
           error={
             formik.touched.pastPosition && Boolean(formik.errors.pastPosition)
           }
           helperText={formik.touched.pastPosition && formik.errors.pastPosition}
-          variant='outlined'
-          size='small'
+          InputLabelProps={{ shrink: Boolean(formik.values.pastPosition) }}
+          variant="outlined"
+          size="small"
         />
       </Grid>
       <Grid item xs={6}>
         <TextField
           id={`fromDate`}
           name={`fromDate`}
-          label='From Date'
-          placeholder='Enter from date'
+          label="From Date"
           fullWidth
-          type='date'
+          type="date"
           inputProps={{
             max: currentDate,
           }}
+          required
           value={formik.values.fromDate}
           onChange={formik.handleChange}
           error={formik.touched.fromDate && Boolean(formik.errors.fromDate)}
           helperText={formik.touched.fromDate && formik.errors.fromDate}
-          variant='outlined'
-          size='small'
+          variant="outlined"
+          size="small"
           InputLabelProps={{ shrink: true }}
         />
       </Grid>
@@ -94,10 +95,9 @@ const HistoryAddField = ({ formik }) => {
         <TextField
           id={`toDate`}
           name={`toDate`}
-          label='To Date'
-          placeholder='Enter to date'
+          label="To Date"
           fullWidth
-          type='date'
+          type="date"
           inputProps={{
             max: currentDate,
           }}
@@ -105,8 +105,8 @@ const HistoryAddField = ({ formik }) => {
           onChange={formik.handleChange}
           error={formik.touched.toDate && Boolean(formik.errors.toDate)}
           helperText={formik.touched.toDate && formik.errors.toDate}
-          variant='outlined'
-          size='small'
+          variant="outlined"
+          size="small"
           InputLabelProps={{ shrink: true }}
         />
       </Grid>
@@ -114,31 +114,30 @@ const HistoryAddField = ({ formik }) => {
         <TextField
           id={`description`}
           name={`description`}
-          label='Description'
-          placeholder='Enter description'
+          label="Description"
           fullWidth
-          // required
           multiline
-          minRows={3}
+          rows={4}
           value={formik.values.description}
           onChange={formik.handleChange}
           error={
             formik.touched.description && Boolean(formik.errors.description)
           }
           helperText={formik.touched.description && formik.errors.description}
-          variant='outlined'
-          size='small'
+          InputLabelProps={{ shrink: Boolean(formik.values.description) }}
+          variant="outlined"
+          size="small"
         />
       </Grid>
       <Grid item xs={12}>
-        <FormLabel component='legend'>Upload Experience Documnet</FormLabel>
+        <FormLabel component="legend">Upload Experience Documnet</FormLabel>
 
         <Input
-          type='file'
-          accept='image/*'
+          type="file"
+          accept="image/*"
           fullWidth
-          id='image'
-          name='image'
+          id="image"
+          name="image"
           onChange={handleImageChange}
         />
       </Grid>

@@ -38,6 +38,7 @@ const ProjectDetail = () => {
   const [deletedProjectEmployee, setDeletedProjectEmployee] = useState({});
 
   const [editedEmployee, setEditedEmployee] = useState({});
+
   const handleEditProjectEmployee = (rowData) => {
     setEditedEmployee(rowData);
     setOpenEditModal(true);

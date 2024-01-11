@@ -31,14 +31,12 @@ export const AddprojectEmployeeFields = ({ onClose, isLoading }) => {
               null
             }
             onChange={(event, newValue) => {
-              console.log(newValue);
               formik.setFieldValue("employeeId", newValue?.employeeId || "");
             }}
             renderInput={(params) => (
               <TextField
                 {...params}
                 label="Employee Name"
-                placeholder="Enter Employee Name"
                 fullWidth
                 error={
                   formik.touched.employeeId && Boolean(formik.errors.employeeId)
@@ -47,7 +45,6 @@ export const AddprojectEmployeeFields = ({ onClose, isLoading }) => {
                   formik.touched.employeeId && formik.errors.employeeId
                 }
                 variant="outlined"
-                InputLabelProps={{ shrink: true }}
                 size="small"
               />
             )}

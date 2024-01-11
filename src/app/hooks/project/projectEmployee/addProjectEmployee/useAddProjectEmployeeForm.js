@@ -7,7 +7,7 @@ import {
 } from '../useProjectEmployee';
 import { useParams } from 'react-router-dom';
 
-export const useProjectEmployeeForm = ({data, onClose}) => {
+export const useProjectEmployeeForm = (data, onClose) => {
   const { id } = useParams();
   const { mutate: addProjectEmployee } = useAddProjectEmployee({});
   const { mutate: editProjectEmployee } = useEditProjectEmployee({});
