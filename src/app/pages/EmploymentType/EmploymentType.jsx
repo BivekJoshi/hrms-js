@@ -64,7 +64,7 @@ const EmploymentType = () => {
       title: "Type Name",
       field: "name",
       emptyValue: "-",
-      width: 200,
+      maxWidth: "140px",
       sorting: false,
     },
     {

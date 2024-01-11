@@ -33,7 +33,6 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
                           id={`family[${index}].name`}
                           name={`family[${index}].name`}
                           label='Name'
-                          placeholder='Enter Name'
                           fullWidth
                           // required
                           value={familyMember.name}
@@ -56,7 +55,6 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
                           id={`family[${index}].relation`}
                           relation={`family[${index}].relation`}
                           label='Relation'
-                          placeholder='Enter Relation'
                           fullWidth
                           // required
                           value={familyMember.relation}
@@ -79,7 +77,6 @@ const EmployeeFamilyDetailForm = ({ formik, isLoading }) => {
                           id={`family[${index}].mobileNumber`}
                           name={`family[${index}].mobileNumber`}
                           label='Mobile Number'
-                          placeholder='Enter Mobile Number'
                           fullWidth
                           // type="number"
                           // required

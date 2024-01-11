@@ -26,9 +26,6 @@ export const AddUserControlFields = ({ onClose }) => {
     <Grid>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
-          {/* <Typography sx={{ color: 'orange' }}>
-            To add an employee, user's permanent address detail must be Filled
-          </Typography> */}
           <br />
           <Autocomplete
             id='employeeId'
@@ -44,7 +41,6 @@ export const AddUserControlFields = ({ onClose }) => {
               <TextField
                 {...params}
                 label='User Name'
-                placeholder='Enter User name'
                 fullWidth
                 required
                 variant='outlined'
@@ -68,7 +64,6 @@ export const AddUserControlFields = ({ onClose }) => {
             id='email'
             name='email'
             label='Email'
-            placeholder='Enter email...'
             type='email'
             fullWidth
             required
@@ -77,7 +72,7 @@ export const AddUserControlFields = ({ onClose }) => {
             error={formik.touched.email && Boolean(formik.errors.email)}
             helperText={formik.touched.email && formik.errors.email}
             variant='outlined'
-            InputLabelProps={{ shrink: true }}
+            InputLabelProps={{ shrink: Boolean(formik.values.email) }}
             size='small'
           />
         </Grid>

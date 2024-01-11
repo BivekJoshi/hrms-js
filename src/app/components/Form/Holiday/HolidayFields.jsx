@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
-import { Grid, TextField, Button } from '@mui/material';
-import { useDeleteHoliday } from '../../../hooks/holiday/useHoliday';
-import PermissionHoc from '../../../hoc/permissionHoc';
+import React, { useState } from "react";
+import { Grid, TextField, Button } from "@mui/material";
+import { useDeleteHoliday } from "../../../hooks/holiday/useHoliday";
+import PermissionHoc from "../../../hoc/permissionHoc";
 
 const HolidayFields = ({ formik }) => {
-
   const handleCloseConfirmationModal = () => {
     setConfirmationModal(false);
   };
@@ -14,10 +13,9 @@ const HolidayFields = ({ formik }) => {
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
           <TextField
-            id='holidayName'
-            name='holidayName'
-            label='Holiday'
-            placeholder='Enter holiday name'
+            id="holidayName"
+            name="holidayName"
+            label="Holiday"
             fullWidth
             required
             multiline
@@ -27,17 +25,17 @@ const HolidayFields = ({ formik }) => {
               formik.touched.holidayName && Boolean(formik.errors.holidayName)
             }
             helperText={formik.touched.holidayName && formik.errors.holidayName}
-            variant='outlined'
+            variant="outlined"
             size="small"
-            InputLabelProps={{ shrink: true }}
+            InputLabelProps={{ shrink: Boolean(formik.values.holidayName) }}
           />
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
-            id='holidayDate'
-            name='holidayDate'
-            type='date'
-            label='Date of Holiday'
+            id="holidayDate"
+            name="holidayDate"
+            type="date"
+            label="Date of Holiday"
             fullWidth
             required
             value={formik.values.holidayDate}
@@ -46,23 +44,22 @@ const HolidayFields = ({ formik }) => {
               formik.touched.holidayDate && Boolean(formik.errors.holidayDate)
             }
             helperText={formik.touched.holidayDate && formik.errors.holidayDate}
-            variant='outlined'
+            variant="outlined"
             InputLabelProps={{ shrink: true }}
             inputProps={{
-              min: new Date().toISOString().split('T')[0], 
+              min: new Date().toISOString().split("T")[0],
             }}
             size="small"
           />
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
-            id='holidayDescription'
-            name='holidayDescription'
-            label='Description'
-            placeholder='Enter holiday description'
+            id="holidayDescription"
+            name="holidayDescription"
+            label="Description"
             fullWidth
             multiline
-            rows={3}
+            rows={4}
             value={formik.values.holidayDescription}
             onChange={formik.handleChange}
             error={
@@ -73,8 +70,8 @@ const HolidayFields = ({ formik }) => {
               formik.touched.holidayDescription &&
               formik.errors.holidayDescription
             }
-            variant='outlined'
-            InputLabelProps={{ shrink: true }}
+            variant="outlined"
+            InputLabelProps={{ shrink: Boolean(formik.values.holidayDescription) }}
           />
         </Grid>
       </Grid>

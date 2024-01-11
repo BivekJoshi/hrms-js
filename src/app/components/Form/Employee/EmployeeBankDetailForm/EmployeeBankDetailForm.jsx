@@ -9,13 +9,13 @@ const EmployeeBankDetailForm = ({ formik }) => {
           id='bankName'
           name='bankName'
           label='Bank Name'
-          placeholder='Enter bank name'
           fullWidth
           value={formik.values.bankName}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           error={formik.touched.bankName && Boolean(formik.errors.bankName)}
           helperText={formik.touched.bankName && formik.errors.bankName}
+          InputLabelProps={{ shrink: Boolean(formik.values.bankName) }}
           variant='outlined'
           size='small'
         />
@@ -25,13 +25,13 @@ const EmployeeBankDetailForm = ({ formik }) => {
           id='bankBranch'
           name='bankBranch'
           label='Bank Branch'
-          placeholder='Enter bank branch'
           fullWidth
           value={formik.values.bankBranch}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           error={formik.touched.bankBranch && Boolean(formik.errors.bankBranch)}
           helperText={formik.touched.bankBranch && formik.errors.bankBranch}
+          InputLabelProps={{ shrink: Boolean(formik.values.bankBranch) }}
           variant='outlined'
           size='small'
         />
@@ -41,7 +41,6 @@ const EmployeeBankDetailForm = ({ formik }) => {
           id='bankAccountNumber'
           name='bankAccountNumber'
           label='Bank Account Number'
-          placeholder='Enter bank account number'
           fullWidth
           value={formik.values.bankAccountNumber}
           onChange={formik.handleChange}
@@ -53,6 +52,7 @@ const EmployeeBankDetailForm = ({ formik }) => {
           helperText={
             formik.touched.bankAccountNumber && formik.errors.bankAccountNumber
           }
+          InputLabelProps={{ shrink: Boolean(formik.values.bankAccountNumber) }}
           variant='outlined'
           size='small'
         />
@@ -62,7 +62,6 @@ const EmployeeBankDetailForm = ({ formik }) => {
           id='bankAddress'
           name='bankAddress'
           label='Bank Address'
-          placeholder='Enter bank address'
           fullWidth
           multiline
           value={formik.values.bankAddress}
@@ -72,6 +71,7 @@ const EmployeeBankDetailForm = ({ formik }) => {
             formik.touched.bankAddress && Boolean(formik.errors.bankAddress)
           }
           helperText={formik.touched.bankAddress && formik.errors.bankAddress}
+          InputLabelProps={{ shrink: Boolean(formik.values.bankAddress) }}
           variant='outlined'
           size='small'
         />

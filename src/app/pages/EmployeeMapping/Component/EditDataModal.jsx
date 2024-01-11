@@ -22,7 +22,6 @@ const EditDataModal = ({ open, handleCloseModal, data }) => {
                 id="deviceBranchId"
                 name="deviceBranchId"
                 label="Device Branch Id"
-                placeholder="Enter Device Branch Id"
                 type="number"
                 fullWidth
                 required
@@ -36,7 +35,8 @@ const EditDataModal = ({ open, handleCloseModal, data }) => {
                   formik.touched.deviceBranchId && formik.errors.deviceBranchId
                 }
                 variant="outlined"
-                InputLabelProps={{ shrink: true }}
+                InputLabelProps={{ shrink: Boolean(formik.values.deviceBranchId) }}
+                size="small"
               />
             </Grid>
             <Grid item xs={12} sm={12}>
@@ -44,7 +44,6 @@ const EditDataModal = ({ open, handleCloseModal, data }) => {
                 id="deviceEmpId"
                 name="deviceEmpId"
                 label="Device Employee Id"
-                placeholder="Enter Device Employee Id"
                 type="number"
                 fullWidth
                 required
@@ -58,7 +57,8 @@ const EditDataModal = ({ open, handleCloseModal, data }) => {
                   formik.touched.deviceEmpId && formik.errors.deviceEmpId
                 }
                 variant="outlined"
-                InputLabelProps={{ shrink: true }}
+                InputLabelProps={{ shrink: Boolean(formik.values.deviceEmpId) }}
+                size="small"
               />
             </Grid>
             <Grid

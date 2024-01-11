@@ -18,6 +18,9 @@ import { useGetEmployeeById } from '../../../../../hooks/employee/useEmployee';
 import useEmployeeHistoryForm from '../../../../../hooks/employee/AddEmployeeHistory/useEmployeeHistoryForm';
 import { useAddDocumentForm } from '../../../../../hooks/employee/AddDocument/useAddDocumentForm';
 import { useGetAddressById } from '../../../../../hooks/employee/useAddress';
+import NewEmployeeFamilyDetailForm from '../../EmployeeFamilyDetailForm/NewEmployeeFamilyDetailForm';
+import NewEmployeeHistoryDetailForm from '../../EmployeeHistoryDetailForm/NewEmployeeHistoryDetailForm';
+import NewEmployeeQualificationDetailForm from '../../EmployeeQualificationDetailForm/NewEmployeeQualificationDetailForm';
 
 const EditEmployeeForm = () => {
   const { id } = useParams();
@@ -33,14 +36,17 @@ const EditEmployeeForm = () => {
   ];
 
   const { data, isLoading: employeeLoading } = useGetEmployeeById(id);
-  const { data: addressData, isLoading: getaddressLoading } = useGetAddressById(id);
+  const { data: addressData, isLoading: getaddressLoading } =
+    useGetAddressById(id);
 
-  const { formik: qualificationFormik, isLoading: isLoadingQualification } = useQualificationForm();
+  const { formik: qualificationFormik, isLoading: isLoadingQualification } =
+    useQualificationForm();
 
   const { formik: familyFormik, isLoading: isLoadingFamily } = useFamilyForm();
   const { formik, isLoading } = useEditEmployeeForm({ data, employeeLoading });
 
-  const { formik: permanentFormik, isLoading: addressLoading } = usePermanentAddressForm(addressData, getaddressLoading);
+  const { formik: permanentFormik, isLoading: addressLoading } =
+    usePermanentAddressForm(addressData, getaddressLoading);
 
   const { formik: bankFormik } = useAddBankForm({ data, employeeLoading });
 
@@ -67,7 +73,7 @@ const EditEmployeeForm = () => {
 
       case 2:
         return (
-          <EmployeeFamilyDetailForm
+          <NewEmployeeFamilyDetailForm
             formik={familyFormik}
             isLoading={isLoadingFamily}
           />
@@ -75,7 +81,7 @@ const EditEmployeeForm = () => {
 
       case 3:
         return (
-          <EmployeeQualificationDetailForm
+          <NewEmployeeQualificationDetailForm
             formik={qualificationFormik}
             isLoading={isLoadingQualification}
           />
@@ -85,7 +91,7 @@ const EditEmployeeForm = () => {
         return <EmployeeBankDetailForm formik={bankFormik} />;
 
       case 5:
-        return <EmployeeHistoryDetailForm formik={employeeHistoryFormik} />;
+        return <NewEmployeeHistoryDetailForm formik={employeeHistoryFormik} />;
 
       case 6:
         return <EmployeeDocumentDetailForm formik={documentFormik} />;
