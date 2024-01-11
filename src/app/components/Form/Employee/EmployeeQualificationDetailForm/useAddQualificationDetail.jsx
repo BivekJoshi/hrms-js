@@ -19,7 +19,7 @@ const QualificationSchema = Yup.object().shape({
     is: (scoreType) => scoreType === "PERCENT",
     then: Yup.string()
       .matches(
-        /^(100(\.0{1,2})?%?|\d{0,2}(\.\d{1,2})?$)/,
+        /^(100(\.0{1,2})?|\d{0,2}(\.\d{1,2})?)$/,
         "Enter valid percentage not greater than 100"
       )
       .test(
