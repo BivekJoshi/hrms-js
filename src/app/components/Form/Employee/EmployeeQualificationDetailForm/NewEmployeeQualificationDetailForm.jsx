@@ -27,16 +27,16 @@ const NewEmployeeQualificationDetailForm = () => {
   };
 
   const columns = [
+    { id: 'board', label: 'Board', minWidth: 170 },
+    { id: 'institute', label: 'Institude', minWidth: 150 },
     {
       id: 'passedLevel',
       label: 'Passed Level',
       minWidth: 150,
     },
-    { id: "passedYear", label: "Passed Year", minWidth: 150 },
-    { id: "scoreType", label: "Score Type", minWidth: 150 },
-    { id: "grade", label: "Score", minWidth: 150 },
-    { id: "board", label: "Board", minWidth: 170 },
-    { id: "institute", label: "Institude", minWidth: 150 },
+    { id: 'passedYear', label: 'Passed Year', minWidth: 150 },
+    { id: 'scoreType', label: 'Score Type', minWidth: 150 },
+    { id: 'grade', label: 'Score', minWidth: 150 },
     {
       id: 'actions',
       label: 'Actions',
@@ -67,7 +67,7 @@ const NewEmployeeQualificationDetailForm = () => {
         isSubmitSuccess={isFormSubmitSuccess || isEditSuccess}
         deleteCallBack={handleDeleteHistory}
         showDocumentImg
-        modalHeight={'70vh'}
+        modalHeight={'65vh'}
         modalWidth={500}
       />
     </div>
