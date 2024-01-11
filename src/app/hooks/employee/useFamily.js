@@ -78,11 +78,10 @@ export const useGetFammilyById = (id) => {
 }
 export const useEditFamily = ({ onSuccess }) => {
   const queryClient = useQueryClient();
-  const { id } = useParams();
   const mutateEditFamily = useMutation(
     ["editFamily"],
     async (formData) => {
-      await editFamilyMember(formData, id);
+      await editFamilyMember(formData);
     },
     {
       onSuccess: (data, variables, context) => {
@@ -97,7 +96,7 @@ export const useEditFamily = ({ onSuccess }) => {
   );
   return {
     editFamilyMutate: mutateEditFamily.mutate,
-    isSuccess: mutateEditFamily.isSuccess,
+    isSuccess: mutateEditFamily.isSuccess ? true : false,
   };
 };
 

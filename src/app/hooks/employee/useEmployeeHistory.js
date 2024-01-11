@@ -5,6 +5,7 @@ import {
   addEmploymentHistory,
   deleteEmployeeHistory,
   editEmployeeHistory,
+  editWorkExpirence,
   getEmployeeEmployment,
   getEmployeeHistory,
   getEmployeeHistoryById,
@@ -64,7 +65,7 @@ export const useAddEmployeeHistory = ({ onSuccess }) => {
   );
   return {
     addEmployee: addEmployeeDetails.mutate,
-    isSuccess: addEmployeeDetails.isSuccess,
+    isSuccess: addEmployeeDetails.isSuccess || false,
   };
 };
 
@@ -90,11 +91,11 @@ export const useDeleteHistory = ({ onSuccess }) => {
 /*________________________EDIT_____________________________________*/
 export const useEditEmployeeHistory = ({ onSuccess }) => {
   const queryClient = useQueryClient();
-  const { id } = useParams();
+  // const { id } = useParams();
   const mutateEditHistory = useMutation(
     ["editEmployeeHistory"],
     async (formData) => {
-      await editEmployeeHistory(formData, id);
+      await editEmployeeHistory(formData);
     },
     {
       onSuccess: (data, variables, context) => {
@@ -109,8 +110,14 @@ export const useEditEmployeeHistory = ({ onSuccess }) => {
   );
   return {
     editHistoryMutate: mutateEditHistory.mutate,
-    isSuccess: mutateEditHistory.isSuccess,
+    isSuccess: mutateEditHistory.isSuccess || false,
   };
+};
+
+export const useEditWorkExpirenceDoc = (id) => {
+  return useMutation(["updateWorkExpirence"], async (formData) => {
+    await editWorkExpirence(formData, id);
+  });
 };
 
 /*________________________POST-FOR-VIEW-DETAIL-ADD-PORTION_____________________________________*/
@@ -122,7 +129,7 @@ export const useAddEmpHistory = ({ onSuccess }) => {
     (formData) => addEmpHistory(formData, id),
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Successfully added work History');
+        toast.success("Successfully added work History");
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries("getEmployeeHistory");
       },

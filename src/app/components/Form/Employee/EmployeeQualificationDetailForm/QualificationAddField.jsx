@@ -11,7 +11,6 @@ import {
 } from "@mui/material";
 import React, { useContext } from "react";
 import { useEditQualificationDocument } from "../../../../hooks/employee/useQualification";
-import { ViewAgenda } from "@material-ui/icons";
 import { Preview } from "@mui/icons-material";
 import { useState } from "react";
 import { Box } from "@mui/system";
@@ -25,7 +24,7 @@ const passedLevel = [
   },
   {
     id: "PLUS_TWO",
-    label: "HSEB / NEB",
+    label: "Plus Two",
   },
   {
     id: "BACHELORS",
@@ -44,6 +43,7 @@ const passedLevel = [
     label: "PHD",
   },
 ];
+
 const scoreType = [
   {
     id: "PERCENT",
@@ -59,7 +59,7 @@ const years = Array.from(
   (_, index) => new Date().getFullYear() - index
 ); // Change 100 to adjust the range of available years
 
-const QualificationAddField = ({ formik }) => {
+const QualificationAddField = ({ passedLevelData, formik }) => {
   const [previewImage, setPreviewImage] = useState(null);
   const [isPreviewOpen, setPreviewOpen] = useState(false);
   const [documentImg, setDocumnetImage] = useState(null);
@@ -109,6 +109,7 @@ const QualificationAddField = ({ formik }) => {
     boxShadow: 24,
     p: "12px 24px",
   };
+
   return (
     <Grid container spacing={2}>
       <Grid item xs={12} sm={12} md={12}>

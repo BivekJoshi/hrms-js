@@ -4,9 +4,24 @@ import { axiosInstance } from "../../../auth/axiosInterceptor";
   /*________________________POST_____________________________________*/
 }
 export const addEmployeeHistory = async (formData, id) => {
-  const data = await axiosInstance.post(`/employment-history/create/${id}`, [
-    formData,
-  ]);
+  const workHistoryForm = new FormData();
+  // for (let key of Object.keys(formData)) {
+  //   workHistoryForm.append(key, formData[key]);
+  // }
+  workHistoryForm.append("employerName", formData?.employerName);
+  workHistoryForm.append("employerAddress", formData?.employerAddress);
+  workHistoryForm.append("pastPosition", formData?.pastPosition);
+  workHistoryForm.append("fromDate", formData?.fromDate);
+  workHistoryForm.append("toDate", formData?.toDate);
+  workHistoryForm.append("remarks", formData?.remarks);
+  if (formData?.experienceLetter) {
+    workHistoryForm.append("experienceLetter", formData?.experienceLetter);
+  }
+
+  const data = await axiosInstance.post(
+    `/employment-history/create/${id}`,
+    workHistoryForm
+  );
   return data;
 };
 
@@ -52,7 +67,7 @@ export const deleteEmployeeHistory = async (employeeHistoryId) => {
 {
   /*________________________EDIT_____________________________________*/
 }
-export const editEmployeeHistory = async (formData, id) => {
+export const editEmployeeHistory = async (formData) => {
   // const newData = formData?.history;
   // const empHisId = newData && newData.map((history) => history?.id);
   // const queryString = empHisId.map((HisId) => `empHisId=${HisId}`).join('&');
@@ -60,12 +75,17 @@ export const editEmployeeHistory = async (formData, id) => {
   //   `/employment-history/update/${id}?${queryString}`,
   //   formData?.history
   // );
-  if (id) {
-    const data = await axiosInstance.put(`/employment-history/update/${id}`, [
-      formData,
-    ]);
+  if (formData?.id) {
+    const data = await axiosInstance.put(
+      `/employment-history/update/${formData?.id}`,
+      formData
+    );
+    return data;
   }
-  return data;
+};
+
+export const editWorkExpirence = async (formData, id) => {
+  await axiosInstance.put(`/employment-history/update-file/${id}`, formData);
 };
 
 {

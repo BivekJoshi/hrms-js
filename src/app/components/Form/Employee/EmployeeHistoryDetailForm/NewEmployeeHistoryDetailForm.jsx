@@ -36,7 +36,8 @@ const NewEmployeeHistoryDetailForm = () => {
     },
     { id: "fromDate", label: "From Date", minWidth: 150 },
     { id: "toDate", label: "To Date", minWidth: 150 },
-
+    { id: "remarks", label: "Remarks", minWidth: 150 },
+    { id: "experiencePath", label: "File" },
     {
       id: "actions",
       label: "Actions",
@@ -48,6 +49,7 @@ const NewEmployeeHistoryDetailForm = () => {
     },
   ];
 
+  
   return (
     <div>
       <CustomeEmployeeDetails
@@ -60,6 +62,8 @@ const NewEmployeeHistoryDetailForm = () => {
         handleFormSubmit={handleSubmit}
         isSubmitSuccess={isFormSubmitSuccess || isEditSuccess}
         deleteCallBack={handleDeleteHistory}
+        modalWidth={500}
+        modalHeight={"70vh"}
       />
     </div>
   );
