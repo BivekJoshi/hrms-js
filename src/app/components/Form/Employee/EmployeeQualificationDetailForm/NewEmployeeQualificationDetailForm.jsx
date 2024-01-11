@@ -1,13 +1,13 @@
-import React from "react";
-import { useParams } from "react-router-dom";
+import React from 'react';
+import { useParams } from 'react-router-dom';
 
-import QualificationAddField from "./QualificationAddField";
-import useAddQualificationDetails from "./useAddQualificationDetail";
-import CustomeEmployeeDetails from "../../../../utils/CustomeDetails/CustomeEmployeeDetails";
+import QualificationAddField from './QualificationAddField';
+import useAddQualificationDetails from './useAddQualificationDetail';
+import CustomeEmployeeDetails from '../../../../utils/CustomeDetails/CustomeEmployeeDetails';
 import {
   useDeleteQualification,
   useGetQualificationById,
-} from "../../../../hooks/employee/useQualification";
+} from '../../../../hooks/employee/useQualification';
 
 const NewEmployeeQualificationDetailForm = () => {
   const { id } = useParams();
@@ -28,8 +28,8 @@ const NewEmployeeQualificationDetailForm = () => {
 
   const columns = [
     {
-      id: "passedLevel",
-      label: "Passed Level",
+      id: 'passedLevel',
+      label: 'Passed Level',
       minWidth: 150,
     },
     { id: "passedYear", label: "Passed Year", minWidth: 150 },
@@ -38,10 +38,10 @@ const NewEmployeeQualificationDetailForm = () => {
     { id: "board", label: "Board", minWidth: 170 },
     { id: "institute", label: "Institude", minWidth: 150 },
     {
-      id: "actions",
-      label: "Actions",
+      id: 'actions',
+      label: 'Actions',
       minWidth: 50,
-      align: "right",
+      align: 'right',
     },
   ];
 
@@ -53,7 +53,7 @@ const NewEmployeeQualificationDetailForm = () => {
     <div>
       <CustomeEmployeeDetails
         formik={formik}
-        title={"Education Detail"}
+        title={'Education Detail'}
         columns={columns}
         data={data}
         renderFeilds={
@@ -67,7 +67,7 @@ const NewEmployeeQualificationDetailForm = () => {
         isSubmitSuccess={isFormSubmitSuccess || isEditSuccess}
         deleteCallBack={handleDeleteHistory}
         showDocumentImg
-        modalHeight={"80vh"}
+        modalHeight={'65vh'}
         modalWidth={500}
       />
     </div>

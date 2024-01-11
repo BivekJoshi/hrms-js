@@ -1,11 +1,65 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { DOC_URL } from '../../../auth/axiosInterceptor';
-import { Box, Fade, IconButton, Modal, Typography } from '@mui/material';
+import {
+  Box,
+  Fade,
+  IconButton,
+  Modal,
+  TableCell,
+  Typography,
+} from '@mui/material';
 import { BsEye } from 'react-icons/bs';
 import './ShowImagePreview.css';
 import CloseIcon from '@mui/icons-material/Close';
 
-const ShowImagePreview = ({ documentData }) => {
+const ShowImagePreview = ({ row }) => {
+  const [documentData, setDocumentData] = useState([]);
+  const [selectedItem, setSelectedItem] = useState();
+
+  useEffect(() => {
+    const accumulateDocumentData = () => {
+      const newDocumentData = [];
+
+      const {
+        transcriptPath,
+        otherDocumentPath,
+        characterCertificatePath,
+        experiencePath,
+      } = row;
+
+      if (transcriptPath) {
+        newDocumentData.push({
+          name: 'Transcript',
+          path: transcriptPath,
+        });
+      }
+      if (experiencePath) {
+        newDocumentData.push({
+          name: 'Expirence Letter',
+          path: experiencePath,
+        });
+      }
+
+      if (otherDocumentPath) {
+        newDocumentData.push({
+          name: 'Other Document',
+          path: otherDocumentPath,
+        });
+      }
+
+      if (characterCertificatePath) {
+        newDocumentData.push({
+          name: 'Character Certificate',
+          path: characterCertificatePath,
+        });
+      }
+
+      setDocumentData(newDocumentData);
+    };
+
+    accumulateDocumentData();
+  }, [row]);
+
   const [isHovered, setIsHovered] = useState(false);
   const [isPreviewOpen, setPreviewOpen] = useState(false);
 
@@ -16,11 +70,13 @@ const ShowImagePreview = ({ documentData }) => {
   const handleMouseLeave = () => {
     setIsHovered(false);
   };
-  const openPreview = () => {
+  const openPreview = (name) => {
     setPreviewOpen(true);
+    setSelectedItem(name);
   };
   const closePreview = () => {
     setPreviewOpen(false);
+    setSelectedItem();
   };
   const style = {
     position: 'absolute',
@@ -35,77 +91,93 @@ const ShowImagePreview = ({ documentData }) => {
     boxShadow: 24,
     p: '12px 24px',
   };
-  return (
-    <div>
-      <Box
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '1rem',
-        }}
-      >
-        <Typography variant='p'>
-          {document?.name !== 'Expirence Letter' ? documentData?.name : ''}
-        </Typography>
-        <div
-          className='image-preview-container'
-          onMouseEnter={handleHover}
-          onMouseLeave={handleMouseLeave}
+
+  const singleDoc = documentData?.map((document) => {
+    return (
+      <TableCell>
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '1rem',
+          }}
         >
-          <img src={DOC_URL + documentData?.path} alt={documentData?.name} />
+          <Typography variant='p'>
+            {document?.name !== 'Expirence Letter' ? document?.name : ''}
+          </Typography>
           <div
-            className={`overlay-container ${isHovered ? 'visible' : ''}`}
-            onClick={openPreview}
+            className='image-preview-container'
+            onMouseEnter={handleHover}
+            onMouseLeave={handleMouseLeave}
           >
-            <BsEye color='white' size={30} />
-          </div>
-        </div>
-      </Box>
-      <Modal
-        open={isPreviewOpen}
-        onClose={closePreview}
-        aria-labelledby='transition-modal-title'
-        aria-describedby='transition-modal-description'
-        closeAfterTransition
-      >
-        <Fade in={isPreviewOpen}>
-          <Box sx={style}>
+            <img src={DOC_URL + document?.path} alt={document?.name} />
             <div
-              style={{
-                display: 'flex',
-                justifyContent: 'end',
-                width: '100%',
-                height: '2rem',
-                bottom: '0',
-              }}
+              className={`overlay-container ${isHovered ? 'visible' : ''}`}
+              onClick={() => openPreview(document?.name)}
             >
-              <IconButton onClick={closePreview}>
-                <CloseIcon />
-              </IconButton>
+              <BsEye color='white' size={30} />
             </div>
-            <div
-              style={{
-                width: '100%',
-                height: '100%',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
-              <img
+          </div>
+        </Box>
+      </TableCell>
+    );
+  });
+
+  return (
+    <>
+      {singleDoc}
+
+      {selectedItem && (
+        <Modal
+          open={isPreviewOpen}
+          onClose={closePreview}
+          aria-labelledby='transition-modal-title'
+          aria-describedby='transition-modal-description'
+          closeAfterTransition
+        >
+          <Fade in={isPreviewOpen}>
+            <Box sx={style}>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'end',
+                  width: '100%',
+                  height: '2rem',
+                  bottom: '0',
+                }}
+              >
+                <IconButton onClick={closePreview}>
+                  <CloseIcon />
+                </IconButton>
+              </div>
+              <div
                 style={{
                   width: '100%',
-                  height: '-webkit-fill-available',
-                  paddingBottom: '5%',
+                  height: '100%',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
                 }}
-                src={DOC_URL + documentData?.path}
-                alt={documentData?.name}
-              />
-            </div>
-          </Box>
-        </Fade>
-      </Modal>
-    </div>
+              >
+                <img
+                  style={{
+                    width: '100%',
+                    height: '-webkit-fill-available',
+                    paddingBottom: '5%',
+                  }}
+                  src={
+                    DOC_URL +
+                    documentData?.find((item) => item?.name === selectedItem)
+                      ?.path
+                  }
+                  alt={document?.name}
+                />
+              </div>
+            </Box>
+          </Fade>
+        </Modal>
+      )}
+    </>
   );
 };
 

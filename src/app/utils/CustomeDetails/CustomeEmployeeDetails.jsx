@@ -42,7 +42,6 @@ const CustomeEmployeeDetails = ({
   const [selectedRowId, setSelectedRowId] = useState();
   const { mode } = useContext(ThemeModeContext);
   const [documentData, setDocumentData] = useState([]);
-  console.log('🚀 ~ documentData:', documentData);
   const style = {
     position: 'absolute',
     top: '50%',
@@ -77,51 +76,6 @@ const CustomeEmployeeDetails = ({
     setSelectedRowId(row?.id);
   };
 
-  useEffect(() => {
-    const accumulateDocumentData = () => {
-      const newDocumentData = [];
-
-      data.forEach((row) => {
-        const {
-          transcriptPath,
-          otherDocumentPath,
-          characterCertificatePath,
-          experiencePath,
-        } = row;
-
-        if (transcriptPath) {
-          newDocumentData.push({
-            name: 'Transcript',
-            path: transcriptPath,
-          });
-        }
-        if (experiencePath) {
-          newDocumentData.push({
-            name: 'Expirence Letter',
-            path: experiencePath,
-          });
-        }
-
-        if (otherDocumentPath) {
-          newDocumentData.push({
-            name: 'Other Document',
-            path: otherDocumentPath,
-          });
-        }
-
-        if (characterCertificatePath) {
-          newDocumentData.push({
-            name: 'Character Certificate',
-            path: characterCertificatePath,
-          });
-        }
-      });
-
-      setDocumentData(newDocumentData);
-    };
-
-    accumulateDocumentData();
-  }, [data]);
   return (
     <div>
       <Typography variant='h6' textAlign='center'>
@@ -207,10 +161,7 @@ const CustomeEmployeeDetails = ({
                           } else if (column?.id === 'experiencePath') {
                             return (
                               <TableCell>
-                                {' '}
-                                <ShowImagePreview
-                                  documentData={documentData[0]}
-                                />
+                                <ShowImagePreview row={row} />
                               </TableCell>
                             );
                           } else {
@@ -228,11 +179,7 @@ const CustomeEmployeeDetails = ({
                       </TableRow>
                       {showDocumentImg && (
                         <TableRow>
-                          {documentData.map((document, index) => (
-                            <TableCell key={index}>
-                              <ShowImagePreview documentData={document} />
-                            </TableCell>
-                          ))}
+                          <ShowImagePreview row={row} />
                         </TableRow>
                       )}
                     </>
