@@ -1,24 +1,24 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 import {
   useDeleteProjectTask,
   useGetProjectTaskByProjectId,
-} from "../../../hooks/project/ProjectTask/useProjectTask";
-import SaveIcon from "@material-ui/icons/Save";
-import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
-import { useState } from "react";
+} from '../../../hooks/project/ProjectTask/useProjectTask';
+import SaveIcon from '@material-ui/icons/Save';
+import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
+import { useState } from 'react';
 import {
   AddProjectTaskModal,
   AssignProjectTaskModal,
   EditProjectTaskModal,
-} from "../ProjectModal/ProjectModal";
-import { Box, Button, Chip, SwipeableDrawer } from "@mui/material";
-import ProjectTaskField from "../../../components/Form/Project/ProjectTask/ProjectTaskFields";
-import DeleteIcon from "@mui/icons-material/Delete";
-import DeleteConfirmationModal from "../../../components/Modal/DeleteConfirmationModal";
-import { useGetEmployee } from "../../../hooks/employee/useEmployee";
-import CustomTable from "../../../components/CustomTable/CustomTable";
-import AssignmentIcon from "@mui/icons-material/Assignment";
-import HocButton from "../../../hoc/hocButton";
+} from '../ProjectModal/ProjectModal';
+import { Box, Button, Chip, SwipeableDrawer } from '@mui/material';
+import ProjectTaskField from '../../../components/Form/Project/ProjectTask/ProjectTaskFields';
+import DeleteIcon from '@mui/icons-material/Delete';
+import DeleteConfirmationModal from '../../../components/Modal/DeleteConfirmationModal';
+import { useGetEmployee } from '../../../hooks/employee/useEmployee';
+import CustomTable from '../../../components/CustomTable/CustomTable';
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import HocButton from '../../../hoc/hocButton';
 
 const ProjectTask = ({ permissions }) => {
   const {
@@ -72,53 +72,53 @@ const ProjectTask = ({ permissions }) => {
   };
   const columns = [
     {
-      title: "SN",
+      title: 'SN',
       render: (rowData) => rowData.tableData.id + 1,
-      width: "3%",
+      width: '3%',
       sortable: false,
       sorting: false,
     },
     {
-      title: "Name",
-      field: "name",
-      emptyValue: "-",
-      width: "80",
+      title: 'Name',
+      field: 'name',
+      emptyValue: '-',
+      width: '80',
     },
     {
-      title: "Details",
-      field: "detail",
-      emptyValue: "-",
-      width: "80",
+      title: 'Details',
+      field: 'detail',
+      emptyValue: '-',
+      width: '80',
     },
     {
-      title: "DueDate",
-      field: "dueDate",
-      emptyValue: "-",
-      width: "80",
+      title: 'DueDate',
+      field: 'dueDate',
+      emptyValue: '-',
+      width: '80',
     },
     {
-      title: "Priority",
-      field: "priority",
-      emptyValue: "-",
-      width: "180px",
+      title: 'Priority',
+      field: 'priority',
+      emptyValue: '-',
+      width: '180px',
       cellStyle: {
-        whiteSpace: "nowrap",
+        whiteSpace: 'nowrap',
       },
       sorting: false,
       render: (rowData) => {
         const priority = rowData.priority;
-        let chipColor = "";
-        let label = "";
+        let chipColor = '';
+        let label = '';
 
-        if (priority === "HIGH") {
-          chipColor = "red";
-          label = "High";
-        } else if (priority === "MEDIUM") {
-          chipColor = "#b042ff";
-          label = "Medium";
-        } else if (priority === "LOW") {
-          chipColor = "orange";
-          label = "Low";
+        if (priority === 'HIGH') {
+          chipColor = 'red';
+          label = 'High';
+        } else if (priority === 'MEDIUM') {
+          chipColor = '#b042ff';
+          label = 'Medium';
+        } else if (priority === 'LOW') {
+          chipColor = 'orange';
+          label = 'Low';
         }
 
         return (
@@ -126,40 +126,40 @@ const ProjectTask = ({ permissions }) => {
             label={label}
             style={{
               backgroundColor: chipColor,
-              color: "white",
-              padding: "0px",
-              width: "7rem",
+              color: 'white',
+              padding: '0px',
+              width: '7rem',
             }}
           />
         );
       },
     },
     {
-      title: "Status",
-      field: "status",
-      emptyValue: "-",
-      width: "180px",
+      title: 'Status',
+      field: 'status',
+      emptyValue: '-',
+      width: '180px',
       cellStyle: {
-        whiteSpace: "nowrap",
+        whiteSpace: 'nowrap',
       },
       sorting: false,
       render: (rowData) => {
         const status = rowData.status;
-        let chipColor = "";
-        let label = "";
+        let chipColor = '';
+        let label = '';
 
-        if (status === "WORK_IN_PROGRESS") {
-          chipColor = "#efaf67";
-          label = "WIP";
-        } else if (status === "COMPLETED") {
-          chipColor = "#9bedff";
-          label = "Completed";
-        } else if (status === "DELAYED") {
-          chipColor = "#f9aeae";
-          label = "Delayed";
+        if (status === 'WORK_IN_PROGRESS') {
+          chipColor = '#efaf67';
+          label = 'WIP';
+        } else if (status === 'COMPLETED') {
+          chipColor = '#9bedff';
+          label = 'Completed';
+        } else if (status === 'DELAYED') {
+          chipColor = '#f9aeae';
+          label = 'Delayed';
         } else {
-          chipColor = "#83f28f";
-          label = "Pending";
+          chipColor = '#83f28f';
+          label = 'Pending';
         }
 
         return (
@@ -167,20 +167,20 @@ const ProjectTask = ({ permissions }) => {
             label={label}
             style={{
               backgroundColor: chipColor,
-              color: "#000",
-              padding: "0px",
-              margin: "0px",
-              width: "7rem",
+              color: '#000',
+              padding: '0px',
+              margin: '0px',
+              width: '7rem',
             }}
           />
         );
       },
     },
     {
-      title: "Assign To",
-      field: "projectEmployees",
-      emptyValue: "-",
-      width: "80",
+      title: 'Assign To',
+      field: 'projectEmployees',
+      emptyValue: '-',
+      width: '80',
       //   render: (rowData) => {
       //     const employeeIds = rowData.projectEmployees.map(
       //       (employee) => employee.id
@@ -194,18 +194,20 @@ const ProjectTask = ({ permissions }) => {
           (employee) => employee.employeeId
         );
 
-        const matchedEmployees = employeeData && employeeData.filter((employee) => {
-          employeeIds.includes(employee?.employeeId)
-        })
-        
+        const matchedEmployees =
+          employeeData &&
+          employeeData.filter((employee) => {
+            employeeIds.includes(employee?.employeeId);
+          });
+
         const matchedEmployeeNames = matchedEmployees.map(
           (employee) =>
-            `${employee?.firstName} ${employee.middleName || ""} ${
+            `${employee?.firstName} ${employee.middleName || ''} ${
               employee?.lastName
             }`
         );
 
-        return matchedEmployeeNames.join(", ");
+        return matchedEmployeeNames.join(', ');
       },
     },
   ].filter(Boolean);
@@ -215,9 +217,9 @@ const ProjectTask = ({ permissions }) => {
       icon: () => (
         <AssignmentIcon
           sx={{
-            color: "black",
-            "&:hover": {
-              color: "green",
+            color: 'black',
+            '&:hover': {
+              color: 'green',
             },
           }}
         />
@@ -225,46 +227,50 @@ const ProjectTask = ({ permissions }) => {
 
       disabled: !permissions?.canAdd,
 
-      tooltip: "Assign task",
+      tooltip: 'Assign task',
       onClick: (event, rowData) => handleAssignTask(rowData),
     },
     {
       icon: () => (
         <ModeEditOutlineIcon
           sx={{
-            color: "black",
-            "&:hover": {
-              color: "green",
+            color: 'black',
+            '&:hover': {
+              color: 'green',
             },
           }}
         />
       ),
       disabled: !permissions?.canEdit,
-      tooltip: "Edit task",
+      tooltip: 'Edit task',
       onClick: (event, rowData) => handleEditTask(rowData),
     },
     {
-      icon: () => <DeleteIcon sx={{
-        color: "black",
-        "&:hover": {
-          color: "red",
-        },
-      }} />,
+      icon: () => (
+        <DeleteIcon
+          sx={{
+            color: 'black',
+            '&:hover': {
+              color: 'red',
+            },
+          }}
+        />
+      ),
       disabled: !permissions?.canDelete,
-      tooltip: "Delete task",
+      tooltip: 'Delete task',
       onClick: (event, rowData) => handleDeleteTask(rowData),
     },
   ];
 
   return (
     <>
-      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+      <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
         <HocButton
           permissions={permissions}
-          color={"white"}
-          variant={"contained"}
+          color={'white'}
+          variant={'contained'}
           onClick={handleAddOpenModal}
-          buttonName={"+ Add Task"}
+          buttonName={'Add Task'}
         />
       </Box>
       <br></br>
@@ -272,21 +278,21 @@ const ProjectTask = ({ permissions }) => {
       <CustomTable
         columns={columns}
         data={tableData}
-        title="Project Task"
+        title='Project Task'
         isLoading={isLoading}
         actions={actions}
       />
 
       {openAddModal && (
         <AddProjectTaskModal
-          title={"Add Task"}
+          title={'Add Task'}
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
         />
       )}
       {openAssignModal && (
         <AssignProjectTaskModal
-          title={"Edit Assign Task"}
+          title={'Edit Assign Task'}
           id={assignData?.id}
           data={assignData}
           open={openAssignModal}
@@ -295,7 +301,7 @@ const ProjectTask = ({ permissions }) => {
       )}
       {openEditModal && (
         <EditProjectTaskModal
-          title={"Edit Task"}
+          title={'Edit Task'}
           id={assignData?.id}
           data={editData}
           open={openEditModal}
@@ -307,7 +313,7 @@ const ProjectTask = ({ permissions }) => {
           open={openDeleteModal}
           handleCloseModal={handleCloseDeleteModal}
           handleConfirmDelete={handleConfirmDelete}
-          message={"Task"}
+          message={'Task'}
         />
       )}
     </>

@@ -121,7 +121,7 @@ const EmploymentDetails = ({ data }) => {
           sx={{ mt: 3, ml: 1 }}
           onClick={handleAddOpenModal}
         >
-          + Add Employment Details
+          Add Employment Details
         </Button>
       </Box>
       {actionDD === 'Actions' && (

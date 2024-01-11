@@ -74,7 +74,7 @@ const Company = ({ permissions }) => {
               color={'white'}
               variant={'contained'}
               onClick={handleAddOpenModal}
-              buttonName={'+ Add Branch'}
+              buttonName={'Add Branch'}
             />
           </Box>
           <TabPanel value='1' sx={{ padding: '0' }}>
