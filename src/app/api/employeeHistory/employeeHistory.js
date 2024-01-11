@@ -4,9 +4,15 @@ import { axiosInstance } from "../../../auth/axiosInterceptor";
   /*________________________POST_____________________________________*/
 }
 export const addEmployeeHistory = async (formData, id) => {
-  const data = await axiosInstance.post(`/employment-history/create/${id}`, [
-    formData,
-  ]);
+  const workHistoryForm = new FormData();
+  for (let key of Object.keys(formData)) {
+    workHistoryForm.append(key, formData[key]);
+  }
+
+  const data = await axiosInstance.post(
+    `/employment-history/create/${id}`,
+    workHistoryForm
+  );
   return data;
 };
 

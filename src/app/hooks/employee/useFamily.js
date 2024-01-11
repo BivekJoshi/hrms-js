@@ -97,7 +97,7 @@ export const useEditFamily = ({ onSuccess }) => {
   );
   return {
     editFamilyMutate: mutateEditFamily.mutate,
-    isSuccess: mutateEditFamily.isSuccess,
+    isSuccess: mutateEditFamily.isSuccess ? true : false,
   };
 };
 

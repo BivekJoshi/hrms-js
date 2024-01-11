@@ -37,6 +37,7 @@ const NewEmployeeFamilyDetailForm = () => {
       deleteFamilyMutation.mutate(familyMember.id);
     }
   };
+
   const columns = [
     { id: "name", label: "Name", minWidth: 170 },
     { id: "relation", label: "Relation", minWidth: 150 },
@@ -55,6 +56,7 @@ const NewEmployeeFamilyDetailForm = () => {
       },
     },
   ];
+
 
   return (
     <div>
