@@ -1,11 +1,11 @@
-import { useFormik } from 'formik';
-import AddBankSchema from './BankSchema';
+import { useFormik } from "formik";
+import AddBankSchema from "./BankSchema";
 import {
   useAddBank,
   useEditBank,
   useGetBankByEmployeeId,
   useGetBankById,
-} from '../useBank';
+} from "../useBank";
 
 const useAddBankForm = () => {
   const { data, isLoading } = useGetBankByEmployeeId();
@@ -15,11 +15,11 @@ const useAddBankForm = () => {
 
   const formik = useFormik({
     initialValues: {
-      id: bankDetails?.id || '',
-      bankName: bankDetails?.bankName || '',
-      bankBranch: bankDetails?.bankBranch || '',
-      bankAddress: bankDetails?.bankAddress || '',
-      bankAccountNumber: bankDetails?.bankAccountNumber || '',
+      id: bankDetails?.id || "",
+      bankName: bankDetails?.bankName || "",
+      bankBranch: bankDetails?.bankBranch || "",
+      bankAddress: bankDetails?.bankAddress || "",
+      bankAccountNumber: bankDetails?.bankAccountNumber || "",
     },
     validationSchema: AddBankSchema,
     enableReinitialize: true,
@@ -33,12 +33,16 @@ const useAddBankForm = () => {
   });
   const handleRequest = (values) => {
     values = { ...values };
-    mutate(values, formik);
+    mutate(values, {
+      onSuccess: () => {},
+    });
   };
 
   const handledEditRequest = (values) => {
     values = { ...values };
-    editMutate(values, formik);
+    editMutate(values, {
+      onSuccess: () => {},
+    });
   };
   return { formik };
 };
