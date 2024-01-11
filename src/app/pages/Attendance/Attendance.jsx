@@ -112,7 +112,7 @@ const Attendance = () => {
   const { palette } = useContext(ThemeModeContext);
 
   const [searchEmployee, setSearchEmployee] = useState('');
-  console.log('🚀 ~ Attendance ~ searchEmployee:', searchEmployee);
+
   const [searchMonth, setSearchMonth] = useState('');
   const [searchYear, setSearchYear] = useState('');
 

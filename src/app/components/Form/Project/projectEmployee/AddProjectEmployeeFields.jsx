@@ -16,7 +16,7 @@ export const AddprojectEmployeeFields = ({ onClose, isLoading }) => {
     }
   };
   const currentDate = new Date().toISOString().split('T')[0];
-  console.log(formik, 'formik');
+ 
   return (
     !loadingEmployee && (
       <Grid container spacing={3}>
@@ -34,7 +34,6 @@ export const AddprojectEmployeeFields = ({ onClose, isLoading }) => {
               null
             }
             onChange={(event, newValue) => {
-              console.log(newValue);
               formik.setFieldValue('employeeId', newValue?.employeeId || '');
             }}
             renderInput={(params) => (

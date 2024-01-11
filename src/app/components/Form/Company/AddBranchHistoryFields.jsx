@@ -12,7 +12,7 @@ const AddBranchHistoryFields = ({
 }) => {
   const { formik } = useAddBranchHistoryForm(onClose, id);
   const { data: branchData, isLoading: branchLoading } = useGetCompany();
-  console.log('🚀 ~ branchData:', branchData);
+ 
   const { mode } = useContext(ThemeModeContext);
   const handleFormSubmit = () => {
     formik.handleSubmit();

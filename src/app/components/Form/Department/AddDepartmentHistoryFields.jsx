@@ -22,8 +22,6 @@ const AddDepartmentHistoryFields = ({
  
   const effectiveDate = (branchHistoryData && branchHistoryData.length > 0) ? branchHistoryData?.find(date => date?.isRecentDepartment === true) : null; // find effective date for validation
 
-  console.log("data", effectiveDate);
-
   return (
     !isLoading && (
       <Grid container spacing={3}>

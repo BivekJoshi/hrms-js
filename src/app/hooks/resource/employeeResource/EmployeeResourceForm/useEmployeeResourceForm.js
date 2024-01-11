@@ -38,7 +38,6 @@ const useEmployeeResourceForm = (data, onClose) => {
       }
     },
   });
-  console.log('🚀 ~ useEmployeeResourceForm ~ formik:', formik);
 
   const handleRequest = (values) => {
     values = { ...values };
