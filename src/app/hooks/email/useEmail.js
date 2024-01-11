@@ -95,7 +95,7 @@ export const useEmailConfigure = ({ onSuccess }) => {
     (formData) => addEmailConfigure(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Succesfully changed email configuration');
+        toast.success('Successfully changed email configuration');
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries('addEmailConfigure');
       },

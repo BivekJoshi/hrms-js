@@ -2,6 +2,7 @@ import { Grid, TextField, Button } from "@mui/material";
 import React from "react";
 import useDepartmentForm from "../../../hooks/department/DepartmentForm/useDepartmentForm";
 import CustomButton from "../../../utils/Button/Button";
+import RemarkField from "../../RemarkField/RemarkField";
 
 const DepartmentFields = ({ onClose, isLoading, data }) => {
   const { formik } = useDepartmentForm(data, onClose);
@@ -18,10 +19,8 @@ const DepartmentFields = ({ onClose, isLoading, data }) => {
             id="departmentName"
             name="departmentName"
             label="Department Name"
-            placeholder="Enter department name"
             fullWidth
             required
-            multiline
             value={formik.values.departmentName}
             onChange={formik.handleChange}
             error={
@@ -33,6 +32,7 @@ const DepartmentFields = ({ onClose, isLoading, data }) => {
             }
             variant="outlined"
             size="small"
+            InputLabelProps={{ shrink: Boolean(formik.values.departmentName) }}
           />
         </Grid>
         <Grid item xs={12} sm={12}>
@@ -40,9 +40,7 @@ const DepartmentFields = ({ onClose, isLoading, data }) => {
             id="departmentType"
             name="departmentType"
             label="Department Type"
-            placeholder="Enter department type"
             fullWidth
-            multiline
             required
             value={formik.values.departmentType}
             onChange={formik.handleChange}
@@ -55,14 +53,14 @@ const DepartmentFields = ({ onClose, isLoading, data }) => {
             }
             variant="outlined"
             size="small"
+            InputLabelProps={{ shrink: Boolean(formik.values.departmentType) }}
           />
         </Grid>
         <Grid item xs={12} sm={12}>
-          <TextField
+          {/* <TextField
             id="departmentDescription"
             name="departmentDescription"
             label="Description"
-            placeholder="Enter department description"
             fullWidth
             multiline
             rows={4}
@@ -77,6 +75,23 @@ const DepartmentFields = ({ onClose, isLoading, data }) => {
               formik.errors.departmentDescription
             }
             variant="outlined"
+            InputLabelProps={{ shrink: Boolean(formik.values.departmentDescription) }}
+            inputProps={{ maxLength: 250 }}
+          /> */}
+          <RemarkField
+            id="departmentDescription"
+            name="departmentDescription"
+            label="Description"
+            fullWidth
+            formik={formik}
+            maxLength={255}
+            variant="outlined"
+            multiline
+            InputLabelProps={{
+              shrink: Boolean(formik.values.departmentDescription),
+            }}
+            rows={4}
+            inputProps={{ maxLength: 255 }}
           />
         </Grid>
 

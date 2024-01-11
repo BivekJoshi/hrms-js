@@ -45,10 +45,6 @@ const ProjectTaskField = ({ onClose, isLoading, data }) => {
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
-
-    if (formik.isValid) {
-      // onClose();
-    }
   };
   const currentDate = new Date().toISOString().split('T')[0];
 

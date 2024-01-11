@@ -24,7 +24,6 @@ const EmailConfiguration = ({ permissions }) => {
           id='sender'
           name='sender'
           label='Sender Email'
-          placeholder='Enter sending email'
           fullWidth
           required
           value={formik.values.sender}
@@ -32,7 +31,7 @@ const EmailConfiguration = ({ permissions }) => {
           error={formik.touched.sender && Boolean(formik.errors.sender)}
           helperText={formik.touched.sender && formik.errors.sender}
           variant='outlined'
-          InputLabelProps={{ shrink: true }}
+          InputLabelProps={{ shrink: Boolean(formik.values.sender) }}
           size='small'
         />
       </Grid>
@@ -41,7 +40,6 @@ const EmailConfiguration = ({ permissions }) => {
           id='host'
           name='host'
           label='Host'
-          placeholder='Enter host name'
           fullWidth
           required
           value={formik.values.host}
@@ -49,7 +47,7 @@ const EmailConfiguration = ({ permissions }) => {
           error={formik.touched.host && Boolean(formik.errors.host)}
           helperText={formik.touched.host && formik.errors.host}
           variant='outlined'
-          InputLabelProps={{ shrink: true }}
+          InputLabelProps={{ shrink: Boolean(formik.values.host) }}
           size='small'
         />
       </Grid>
@@ -58,7 +56,6 @@ const EmailConfiguration = ({ permissions }) => {
           id='port'
           name='port'
           label='Port'
-          placeholder='Enter port name'
           fullWidth
           required
           value={formik.values.port}
@@ -66,7 +63,7 @@ const EmailConfiguration = ({ permissions }) => {
           error={formik.touched.port && Boolean(formik.errors.port)}
           helperText={formik.touched.port && formik.errors.port}
           variant='outlined'
-          InputLabelProps={{ shrink: true }}
+          InputLabelProps={{ shrink: Boolean(formik.values.port) }}
           size='small'
         />
       </Grid>
@@ -75,7 +72,6 @@ const EmailConfiguration = ({ permissions }) => {
           id='signature'
           name='signature'
           label='Signature'
-          placeholder='Enter signature name'
           fullWidth
           required
           value={formik.values.signature}
@@ -83,7 +79,7 @@ const EmailConfiguration = ({ permissions }) => {
           error={formik.touched.signature && Boolean(formik.errors.signature)}
           helperText={formik.touched.signature && formik.errors.signature}
           variant='outlined'
-          InputLabelProps={{ shrink: true }}
+          InputLabelProps={{ shrink: Boolean(formik.values.signature) }}
           size='small'
         />
       </Grid>
@@ -92,7 +88,6 @@ const EmailConfiguration = ({ permissions }) => {
           id='password'
           name='password'
           label='Password'
-          placeholder='Enter password name'
           fullWidth
           required
           value={formik.values.password}
@@ -100,7 +95,7 @@ const EmailConfiguration = ({ permissions }) => {
           error={formik.touched.password && Boolean(formik.errors.password)}
           helperText={formik.touched.password && formik.errors.password}
           variant='outlined'
-          InputLabelProps={{ shrink: true }}
+          InputLabelProps={{ shrink: Boolean(formik.values.password) }}
           size='small'
         />
       </Grid>

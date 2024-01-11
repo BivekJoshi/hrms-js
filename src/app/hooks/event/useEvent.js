@@ -69,7 +69,7 @@ export const useAddEvent = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(["addEvent"], (formData) => addEvent(formData), {
     onSuccess: (data, variables, context) => {
-      toast.success("Succesfully added an Event");
+      toast.success("Successfully added an Event");
       onSuccess && onSuccess(data, variables, context);
       queryClient.invalidateQueries("getEvent");
     },
@@ -88,7 +88,7 @@ export const useAddEventConfirmaation = ({ onSuccess }) => {
     (formData) => addEventConfirmation(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success("Succesfully added an Event Confirmation");
+        toast.success("Successfully added an Event Confirmation");
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries("getEventNofication");
       },
@@ -121,7 +121,7 @@ export const useEditEvent = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(["editEvent"], (formData) => editEvent(formData), {
     onSuccess: (data, variables, context) => {
-      toast.success("Succesfully edited an Event");
+      toast.success("Successfully edited an Event");
       onSuccess && onSuccess(data, variables, context);
       queryClient.invalidateQueries("getEvent");
     },
@@ -136,7 +136,7 @@ export const useEditEventAttendance = ({ onSuccess }) => {
     (formData) => editEventAttendance(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success("Succesfully edited an Event");
+        toast.success("Successfully edited an Event");
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries("getEventAttenderList");
       },

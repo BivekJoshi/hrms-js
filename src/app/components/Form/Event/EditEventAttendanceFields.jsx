@@ -7,9 +7,9 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { ButtonComponent } from "../../Button/ButtonComponent";
 import useEditEventAttendanceForm from "../../../hooks/event/editEvent/useEditEventAttendanceForm";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
+import UpdateIcon from "@mui/icons-material/Update";
 
 const EditEventAttendanceFields = ({ onClose, isLoading, data }) => {
   const { palette } = useContext(ThemeModeContext);
@@ -75,14 +75,13 @@ const EditEventAttendanceFields = ({ onClose, isLoading, data }) => {
               <TextField
                 {...params}
                 label="Attend status"
-                placeholder="Enter Employee Status"
                 fullWidth
                 error={
                   formik.touched.isPresent && Boolean(formik.errors.isPresent)
                 }
                 helperText={formik.touched.isPresent && formik.errors.isPresent}
                 variant="outlined"
-                InputLabelProps={{ shrink: true }}
+                size="small"
               />
             )}
           />
@@ -92,18 +91,20 @@ const EditEventAttendanceFields = ({ onClose, isLoading, data }) => {
           direction="row"
           justifyContent="flex-end"
           alignItems="flex-end"
+          gap="1rem"
+          marginTop="1rem"
         >
-          <ButtonComponent
+          <Button
+            color="success"
             variant="contained"
-            OnClick={handleFormSubmit}
-            buttonName={"Update Event"}
-          />
-          <ButtonComponent
-            variant="contained"
-            OnClick={onClose}
-            BGColor={"#d32f2f"}
-            buttonName={"Cancel"}
-          />
+            startIcon={<UpdateIcon />}
+            onClick={handleFormSubmit}
+          >
+            Update
+          </Button>
+          <Button color="error" variant="contained" onClick={onClose}>
+            Close
+          </Button>
         </Grid>
       </Grid>
     )

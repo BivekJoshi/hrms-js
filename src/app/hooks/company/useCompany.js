@@ -30,7 +30,7 @@ export const useAddCompany = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(["addCompany"], (formData) => addCompany(formData), {
     onSuccess: (data, variables, context) => {
-      toast.success("Succesfully added Company");
+      toast.success("Successfully added Branch");
       onSuccess && onSuccess(data, variables, context);
       queryClient.invalidateQueries("getCompany");
     },
@@ -48,7 +48,7 @@ export const useDeleteCompany = ({ onSuccess }) => {
     async (branchId) => await deleteCompany(branchId),
     {
       onSuccess: (data, variables, context) => {
-        toast.success("Successfully deleted Company");
+        toast.success("Successfully deleted Branch");
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries("getCompany");
       },
@@ -65,7 +65,7 @@ export const useEditCompany = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(["editCompany"], (formData) => editCompany(formData), {
     onSuccess: (data, variables, context) => {
-      toast.success("Successfully edited Company");
+      toast.success("Successfully edited Branch");
       onSuccess && onSuccess(data, variables, context);
       queryClient.invalidateQueries("getCompany");
     },

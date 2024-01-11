@@ -76,39 +76,6 @@ const ProjectEditTaskField = ({ onClose, data }) => {
             />
           )}
         />
-
-        {/* <TextField
-          id='projectEmployeeId '
-          name='projectEmployeeId '
-          select
-          label='Assign Task To'
-          placeholder='Select Employee'
-          fullWidth
-          required
-          value={!LoadingProjectEmployeeData && formik.values.projectEmployeeId}
-          onChange={formik.handleChange}
-          error={
-            formik.touched.projectEmployeeId &&
-            Boolean(formik.errors.projectEmployeeId)
-          }
-          helperText={
-            formik.touched.projectEmployeeId && formik.errors.projectEmployeeId
-          }
-          variant='outlined'
-          InputLabelProps={{ shrink: true }}
-        >
-          {!LoadingProjectEmployeeData &&
-            !loadingEmployee &&
-            projectData.map((option) => (
-              <MenuItem
-                key={option.id}
-                value={option.id}
-                sx={{ bgcolor: mode === 'light' ? '' : '#413e3e' }}
-              >
-                {getEmployeeNameById(option.empId)}
-              </MenuItem>
-            ))}
-        </TextField> */}
       </Grid>
 
       <Grid

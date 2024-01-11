@@ -16,20 +16,20 @@ import { Preview } from "@mui/icons-material";
 import CloseIcon from "@mui/icons-material/Close";
 import { useEditWorkExpirenceDoc } from "../../../../hooks/employee/useEmployeeHistory";
 import { DOC_URL } from "../../../../../auth/axiosInterceptor";
-
+ 
 const HistoryAddField = ({ formik }) => {
   const { mode } = useContext(ThemeModeContext);
-
+ 
   const id = formik.values?.id;
-
+ 
   const updateWorkExpericence = useEditWorkExpirenceDoc(id);
-
+ 
   const currentDate = new Date().toISOString().split("T")[0];
-
+ 
   const [previewImage, setPreviewImage] = useState(null);
   const [isPreviewOpen, setPreviewOpen] = useState(false);
   const [documentImg, setDocumnetImage] = useState(null);
-
+ 
   const handleImageChange = (event) => {
     const value = event.target?.files[0];
     formik.setFieldValue("experienceLetter", value);
@@ -47,12 +47,12 @@ const HistoryAddField = ({ formik }) => {
       reader.readAsDataURL(value);
     }
   };
-
+ 
   const openPreview = (imageUrl) => {
     setDocumnetImage(imageUrl);
     setPreviewOpen(true);
   };
-
+ 
   const closePreview = () => {
     setPreviewOpen(false);
   };
@@ -68,7 +68,7 @@ const HistoryAddField = ({ formik }) => {
     boxShadow: 24,
     p: "12px 24px",
   };
-
+ 
   return (
     <>
       <Grid container spacing={3}>
@@ -262,5 +262,5 @@ const HistoryAddField = ({ formik }) => {
     </>
   );
 };
-
+ 
 export default HistoryAddField;

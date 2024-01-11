@@ -33,7 +33,8 @@ const LeaveInfo = ({ isLoading, data, role }) => {
     {
       title: "SN",
       render: (rowData) => rowData.tableData.id + 1,
-      width: 80,
+      // width: 80,
+      maxWidth:"1px",
       sortable: false,
     },
     {
@@ -64,24 +65,24 @@ const LeaveInfo = ({ isLoading, data, role }) => {
         whiteSpace: "nowrap",
       },
       render: (rowData) => {
-        const status = rowData.leaveStatus;
+        const status = rowData.leaveStatus.toLowerCase();
         let chipColor = "";
 
-        if (status === "APPROVED") {
-          chipColor = "green";
-        } else if (status === "REJECTED") {
-          chipColor = "red";
-        } else if (status === "PENDING") {
-          chipColor = "orange";
+        if (status === "approved") {
+          chipColor = "rgb(139, 214, 49)";
+        } else if (status === "rejected") {
+          chipColor = "rgb(255, 79, 79)";
+        } else if (status === "pending") {
+          chipColor = "rgb(255, 126, 71)";
         }
 
         return (
           <Chip
-            label={status}
+            label={status.charAt(0).toUpperCase() + status.slice(1)}
             style={{
               backgroundColor: chipColor,
               color: "white",
-              // width: " 9rem",
+              // width: " 6rem",
             }}
           />
         );

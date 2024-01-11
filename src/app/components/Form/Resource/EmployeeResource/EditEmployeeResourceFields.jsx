@@ -40,11 +40,10 @@ const EditEmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
 
         <Grid item xs={12} sm={12}>
           <TextField
-            type='date'
-            id='returnDate'
-            name='returnDate'
-            label='Returned Date'
-            placeholder='Select date'
+            type="date"
+            id="returnDate"
+            name="returnDate"
+            label="Returned Date"
             fullWidth
             required
             value={formik.values.returnDate}
@@ -62,32 +61,11 @@ const EditEmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
             }}
           />
         </Grid>
-        {/* <Grid item xs={12} sm={12}>
-          <TextField
-            id="conditionWhileProvided"
-            name="conditionWhileProvided"
-            label="Device Condition"
-            placeholder="Enter device condition"
-            fullWidth
-            value={formik.values.conditionWhileProvided}
-            onChange={formik.handleChange}
-            error={
-              formik.touched.conditionWhileProvided &&
-              Boolean(formik.errors.conditionWhileProvided)
-            }
-            helperText={
-              formik.touched.conditionWhileProvided &&
-              formik.errors.conditionWhileProvided
-            }
-            variant="outlined"
-            size="small"
-          />
-        </Grid> */}
         <Grid item xs={12} sm={12}>
           <TextField
-            id='conditionWhileReturned'
-            name='conditionWhileReturned'
-            label='Device Condition when Returned'
+            id="conditionWhileReturned"
+            name="conditionWhileReturned"
+            label="Device Condition when Returned"
             fullWidth
             value={formik.values.conditionWhileReturned}
             onChange={formik.handleChange}
@@ -99,8 +77,9 @@ const EditEmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
               formik.touched.conditionWhileReturned &&
               formik.errors.conditionWhileReturned
             }
-            variant='outlined'
-            size='small'
+            variant="outlined"
+            size="small"
+            InputLabelProps={{ shrink: Boolean(formik.values.conditionWhileReturned) }}
           />
         </Grid>
         {/* <Grid item xs={12} sm={12}>

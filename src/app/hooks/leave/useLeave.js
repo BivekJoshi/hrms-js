@@ -89,7 +89,7 @@ export const useAddLeaveByAdmin = ({ onSuccess }) => {
     (formData) => addLeaveByAdmin(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Succesfully added Leave');
+        toast.success('Successfully added Leave');
         onSuccess && onSuccess(data, variables, context);
 
         queryClient.invalidateQueries({
@@ -114,7 +114,7 @@ export const useAddLeave = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(['addLeave'], (formData) => addleave(formData), {
     onSuccess: (data, variables, context) => {
-      toast.success('Succesfully added Leave');
+      toast.success('Successfully added Leave');
       navigate('/employee/leaveHistory');
       onSuccess && onSuccess(data, variables, context);
       queryClient.invalidateQueries('useGetLoggedInUserLeave');

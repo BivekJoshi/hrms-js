@@ -43,7 +43,6 @@ export const EditLeaveFields = ({ onClose, isLoading, data }) => {
               name="leaveStatus"
               select
               label="Leave Status"
-              placeholder="Select your leaveStatus"
               fullWidth
               required
               value={formik.values.leaveStatus}
@@ -54,8 +53,8 @@ export const EditLeaveFields = ({ onClose, isLoading, data }) => {
               helperText={
                 formik.touched.leaveStatus && formik.errors.leaveStatus
               }
-              //
-              // InputLabelProps={{ shrink: true }}
+              InputLabelProps={{ shrink: Boolean(formik.values.leaveStatus) }}
+              size="small"
             >
               {leaveStatus.map((option) => (
                 <MenuItem
@@ -73,10 +72,9 @@ export const EditLeaveFields = ({ onClose, isLoading, data }) => {
               id="leaveRemarks"
               name="leaveRemarks"
               label="Message"
-              placeholder="Enter a message"
               fullWidth
               multiline
-              rows={2}
+              rows={4}
               value={formik.values.leaveRemarks}
               onChange={formik.handleChange}
               error={
@@ -87,7 +85,8 @@ export const EditLeaveFields = ({ onClose, isLoading, data }) => {
                 formik.touched.leaveRemarks && formik.errors.leaveRemarks
               }
               variant="outlined"
-              InputLabelProps={{ shrink: true }}
+              InputLabelProps={{ shrink: Boolean(formik.values.leaveRemarks) }}
+              inputProps={{ maxLength: 250 }}
             />
           </Grid>
           <Grid

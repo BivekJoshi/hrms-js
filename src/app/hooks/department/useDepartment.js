@@ -29,7 +29,7 @@ export const useAddDepartment = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(["addDepartment"], (formData) => addDepartment(formData), {
     onSuccess: (data, variables, context) => {
-      toast.success("Succesfully added Department");
+      toast.success("Successfully added Department");
       onSuccess && onSuccess(data, variables, context);
       queryClient.invalidateQueries("getDepartment");
     },
