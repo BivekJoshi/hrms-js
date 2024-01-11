@@ -34,7 +34,6 @@ const useLeaveForm = (data, onClose) => {
       handleRequest(values);
     },
   });
-  console.log('🚀 ~ useLeaveForm ~ formik:', formik);
 
   const handleRequest = (values) => {
     values = { ...values };
