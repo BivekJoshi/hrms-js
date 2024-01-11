@@ -15,7 +15,7 @@ export const useAddBranchHistory = ({ onSuccess }) => {
     const queryClient = useQueryClient();
     return useMutation(['addBranchHistory'], (formData) => addBranchHistory(formData), {
         onSuccess: (data, variables, context) => {
-            toast.success('Succesfully added branch history of employee');
+            toast.success('Successfully added branch history of employee');
             onSuccess && onSuccess(data, variables, context);
             queryClient.invalidateQueries('getBranchHistory');
         },

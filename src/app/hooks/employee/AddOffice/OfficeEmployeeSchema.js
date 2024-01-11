@@ -11,9 +11,9 @@ const OfficeEmployeeSchema = Yup.object().shape({
   panNumber: Yup.string().matches(/^[0-9\/-]+$/, 'Enter valid pan number'),
   officeEmail: Yup.string().required('Official email is required'),
   maritalStatus: Yup.string().required('Marital status is required'),
-  branchId: Yup.string().required('Branch name is required'),
+  branchId: Yup.string().required('Branch Name is required'),
   positionId: Yup.string().required('Position is required'),
-  departmentId: Yup.string().required('Department is required'),
+  departmentId: Yup.string().required('Department Type is required'),
 });
 
 export { OfficeEmployeeSchema };

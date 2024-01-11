@@ -52,7 +52,7 @@ export const useAddTrainingDetail = ({ onSuccess }) => {
     (formData) => addTrainingDetail(formData, id),
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Succesfully added Employee Training');
+        toast.success('Successfully added Employee Training');
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries('getTrainingByEmpId');
       },

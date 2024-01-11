@@ -15,7 +15,6 @@ import {
 import DeleteConfirmationModal from "../../components/Modal/DeleteConfirmationModal";
 import PermissionHoc from "../../hoc/permissionHoc";
 import HocButton from "../../hoc/hocButton";
-import useAuth from "../../../auth/hooks/component/login/useAuth";
 import CustomTable from "../../components/CustomTable/CustomTable";
 
 const leaveName = [
@@ -67,7 +66,6 @@ const leaveName = [
 ];
 const LeaveType = ({ permissions }) => {
   const { data: leaveTypeData, isLoading } = useGetLeaveType();
-  const { isSuperAdmin, isEmployee } = useAuth();
 
   const [existingLeaveTypes, setExistingLeaveTypes] = useState([]);
 
