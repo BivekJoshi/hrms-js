@@ -12,8 +12,7 @@ import NewEmployeeQualificationDetailForm from "../../../../../components/Form/E
 
 const primaryColor = "#1c7ed6";
 const AcademicsComponents = ({ data, isLoading }) => {
-  // const { mode } = useContext(ThemeModeContext);
-
+  
   const columns = [
     {
       title: "SN",
@@ -22,10 +21,24 @@ const AcademicsComponents = ({ data, isLoading }) => {
       sortable: false,
       sorting: false,
     },
+    // {
+    //   title: "Passed Level",
+    //   field: "passedLevel",
+    //   render: (rowData) => {
+    //     const passedName = level?.find((name) => {
+    //       const fullName = name?.passedValue === rowData?.passedLabel
+    //       console.log({"name?.passedValue": name?.passedValue, "rowData?.passedLabel": rowData})
+    //     });
+        
+    //     return passedName || '-';
+    //   },
+    //   width: "20vh",
+    //   sorting: false,
+    // },
+    
     {
       title: "Passed Level",
       field: "passedLevel",
-
       emptyValue: "-",
       width: "20vh",
       sorting: false,

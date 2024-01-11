@@ -12,7 +12,7 @@ const useEmployeeHistoryForm = () => {
   const { mutate: addMutate } = useAddEmployeeHistory({});
   const { mutate: editMutate } = useEditEmployeeHistory({});
   const { data: empHistoryData, isLoading: empHistoryLoading } = useGetEmployeeHistory(id);
-
+console.log("his", empHistoryData)
   const historyDetails =
     !empHistoryLoading &&
     empHistoryData?.map((empHistory) => ({
@@ -23,6 +23,7 @@ const useEmployeeHistoryForm = () => {
       fromDate: empHistory?.fromDate || '',
       toDate: empHistory?.toDate || '',
       description: empHistory?.description || '',
+      experiencePath: empHistory?.experiencePath || '',
       // remarks: empHistory?.remarks || '',
     }));
 

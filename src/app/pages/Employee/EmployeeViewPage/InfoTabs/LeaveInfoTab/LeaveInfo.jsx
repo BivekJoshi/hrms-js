@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { Box, Chip } from "@mui/material";
+import { Box, Chip, Typography } from "@mui/material";
 import {
   useGetEmployeeLeaveById,
   useGetLoggedInUserLeave,
@@ -88,12 +88,36 @@ const LeaveInfo = ({ isLoading, data, role }) => {
         );
       },
     },
+    // {
+    //   title: "Approved By",
+    //   render: (rowData) => {
+    //     return <p>{rowData?.confirmBy?.name || ""} </p>;
+    //   },
+    //   width: 120,
+    // },
     {
       title: "Approved By",
+      width: "80px",
+      sorting: false,
+      field: "approvedBy",
       render: (rowData) => {
-        return <p>{rowData?.confirmBy?.name || ""} </p>;
+        if (rowData?.leaveStatus === "APPROVED") {
+          return <Typography>{rowData?.confirmBy?.name}</Typography>;
+        }
+        return "-";
       },
-      width: 120,
+    },
+    {
+      title: "Rejected By",
+      width: "80px",
+      sorting: false,
+      field: "approvedBy",
+      render: (rowData) => {
+        if (rowData?.leaveStatus === "REJECTED") {
+          return <Typography>{rowData?.confirmBy?.name}</Typography>;
+        }
+        return "-";
+      },
     },
   ].filter(Boolean);
   if (loadingLeave) return <>Loading</>;

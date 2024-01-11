@@ -17,6 +17,7 @@ const AddBranchHistoryFields = ({
   const handleFormSubmit = () => {
     formik.handleSubmit();
   };
+  const currentDate = new Date().toISOString().split('T')[0];
 
   return (
     !isLoading && (
@@ -67,7 +68,9 @@ const AddBranchHistoryFields = ({
             }
             variant='outlined'
             InputLabelProps={{ shrink: true }}
-            size="small"
+            inputProps={{
+              max: currentDate,
+            }}
           />
         </Grid>
         <Grid item xs={12} sm={12}>
