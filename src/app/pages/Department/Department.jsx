@@ -95,9 +95,9 @@ const Department = ({ permissions }) => {
       icon: () => (
         <ModeEditOutlineIcon
           sx={{
-            color: mode === 'light' ? 'black' : 'white',
-            '&:hover': {
-              color: 'green',
+            color: mode === "light" ? "black" : "white",
+            "&:hover": {
+              color: "green",
             },
           }}
         />
@@ -111,9 +111,9 @@ const Department = ({ permissions }) => {
       icon: () => (
         <DeleteIcon
           sx={{
-            color: mode === 'light' ? 'black' : 'white',
-            '&:hover': {
-              color: 'red',
+            color: mode === "light" ? "black" : "white",
+            "&:hover": {
+              color: "red",
             },
           }}
         />
@@ -149,8 +149,11 @@ const Department = ({ permissions }) => {
         data={departmentData}
         title='Department List'
         isLoading={isLoading}
-        // exportButton={true}
         actions={actions}
+        fileName="Department List"
+        exportButton
+        exportExcel
+        pdfNone
       />
 
       {openEditModal && (
