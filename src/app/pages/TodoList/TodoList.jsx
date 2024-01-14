@@ -50,8 +50,20 @@ const TodoList = ({ permissions }) => {
     {
       title: 'Task',
       field: 'message',
-      width: '300px',
+      width: '400px',
       sorting: false,
+      render: (rowData) => (
+        <div
+          style={{
+            whiteSpace: 'normal',
+            overflowWrap: 'break-word',
+            wordWrap: 'break-word',
+            wordBreak: 'break-all',
+          }}
+        >
+          {rowData?.message}
+        </div>
+      ),
     },
     {
       title: 'Due',

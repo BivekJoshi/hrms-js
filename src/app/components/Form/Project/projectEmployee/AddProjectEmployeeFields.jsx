@@ -8,10 +8,11 @@ import { ButtonComponent } from "../../../Button/ButtonComponent";
 export const AddprojectEmployeeFields = ({ onClose, isLoading }) => {
   const { data: employeeData, isLoading: loadingEmployee } = useGetEmployee();
 
-  const { formik } = useProjectEmployeeForm( onClose );
+  const { formik } = useProjectEmployeeForm({ onClose });
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
+    onClose();
   };
   const currentDate = new Date().toISOString().split('T')[0];
   return (

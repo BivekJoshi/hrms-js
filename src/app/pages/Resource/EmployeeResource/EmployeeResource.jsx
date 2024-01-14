@@ -223,8 +223,10 @@ const EmployeeResource = ({ permissions }) => {
         data={employeeResourceData}
         title="Employee Logistics"
         isLoading={isLoading}
-        // actions={actions}
-        // exportButton={true}
+        fileName="Employee Logistics List"
+        exportButton
+        exportExcel
+        pdfNone
       />
       {openDeleteModal && (
         <DeleteConfirmationModal

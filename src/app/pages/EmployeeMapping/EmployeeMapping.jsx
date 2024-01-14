@@ -152,9 +152,12 @@ const EmployeeMapping = () => {
         data={mapData}
         title="Employee Mapping"
         isLoading={isLoading}
-        // exportButton={true}
         actions={actions}
         singleAction={true}
+        fileName="Employee Mapping"
+        exportButton
+        exportExcel
+        pdfNone
       />
       {openEditModal && (
         <EditDataModal
