@@ -260,7 +260,7 @@ const EmployeeResource = ({ permissions }) => {
       {/* <CustomTable
         columns={columns}
         data={employeeResourceData}
-        title='Employee Logistics'
+        title="Employee Logistics"
         isLoading={isLoading}
         // actions={actions}
         // exportButton={true}

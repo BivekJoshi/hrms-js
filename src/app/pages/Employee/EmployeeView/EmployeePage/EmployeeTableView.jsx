@@ -110,8 +110,9 @@ const EmployeeTableView = ({ employeeData, isLoading }) => {
       fileName="Employee-Report.pdf"
       isLoading={isLoading}
       actions={actions}
-      // exportButton={true}
+      exportButton
       exportExcel
+      pdfNone
     />
   );
 };
