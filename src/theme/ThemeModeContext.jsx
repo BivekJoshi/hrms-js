@@ -35,7 +35,7 @@ const getPalette = (darkMode) => {
       paper: darkMode ? '#292929' : '#fff',
       imageCaption: darkMode ? '#c5c7cb' : '#616161',
       tabbg: darkMode ? '#3D4852' : '#E8F5E9',
-      activetabBg: darkMode ? '#25262E' : '#C8E6C9',
+      activetabBg: darkMode ? '#388E3C' : '#C8E6C9',
       event: darkMode ? '#b3f594' : '#D5FFCB',
       holiday: darkMode ? '#eeccc6' : '#FFEDEA',
       toDo: darkMode ? '' : '#F2F4F4',
