@@ -187,7 +187,10 @@ const ProjectDetail = () => {
         data={projectEmployeeData}
         title='Project Employee Data'
         isLoading={isLoading}
-        // exportButton={true}
+        fileName="Project Employee List"
+        exportButton
+        exportExcel
+        pdfNone
       />
       {openAddModal && (
         <AddProjectEmployeeModal

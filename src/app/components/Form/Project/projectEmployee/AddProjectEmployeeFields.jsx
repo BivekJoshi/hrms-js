@@ -12,6 +12,7 @@ export const ProjectEmployeeFields = ({ data, onClose, isLoading }) => {
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
+    // onClose();
   };
   const currentDate = new Date().toISOString().split("T")[0];
 

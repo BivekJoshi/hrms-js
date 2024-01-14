@@ -79,13 +79,12 @@ export const EditUserControlFieldsRole = ({ onClose, rowData }) => {
             <TextField
               {...params}
               label="Role"
-              placeholder="Enter role..."
               fullWidth
               required
               error={formik.touched.roleId && Boolean(formik.errors.roleId)}
               helperText={formik.touched.roleId && formik.errors.roleId}
               variant="outlined"
-              InputLabelProps={{ shrink: true }}
+              size="small"
             />
           )}
         />
