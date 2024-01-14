@@ -1,15 +1,15 @@
-import { Box, Typography } from '@mui/material';
-import React, { useState } from 'react';
-import { useDeleteEmployeeResource } from '../../../hooks/resource/employeeResource/useEmployeeResource';
-import { useGetEmployeeResource } from '../../../hooks/resource/employeeResource/useEmployeeResource';
-import DeleteIcon from '@mui/icons-material/Delete';
-import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
-import DeleteConfirmationModal from '../../../components/Modal/DeleteConfirmationModal';
-import { AddEmployeeResourceModal } from './EmployeeResourceModal';
-import { EditEmployeeResourceModal } from './EmployeeResourceModal';
-import PermissionHoc from '../../../hoc/permissionHoc';
-import HocButton from '../../../hoc/hocButton';
-import CustomTable from '../../../components/CustomTable/CustomTable';
+import { Box, Typography } from "@mui/material";
+import React, { useState } from "react";
+import { useDeleteEmployeeResource } from "../../../hooks/resource/employeeResource/useEmployeeResource";
+import { useGetEmployeeResource } from "../../../hooks/resource/employeeResource/useEmployeeResource";
+import DeleteIcon from "@mui/icons-material/Delete";
+import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
+import DeleteConfirmationModal from "../../../components/Modal/DeleteConfirmationModal";
+import { AddEmployeeResourceModal } from "./EmployeeResourceModal";
+import { EditEmployeeResourceModal } from "./EmployeeResourceModal";
+import PermissionHoc from "../../../hoc/permissionHoc";
+import HocButton from "../../../hoc/hocButton";
+import CustomTable from "../../../components/CustomTable/CustomTable";
 
 const EmployeeResource = ({ permissions }) => {
   const { data: employeeResourceData, isLoading } = useGetEmployeeResource();
@@ -20,10 +20,6 @@ const EmployeeResource = ({ permissions }) => {
 
   const [deletedData, setDeletedData] = useState({});
   const [editedEmployeeResouce, setEditedEmployeeResource] = useState({});
-  console.log(
-    '🚀 ~ EmployeeResource ~ editedEmployeeResouce:',
-    editedEmployeeResouce
-  );
 
   const handleAddOpenModal = () => setOpenAddModal(true);
   const handleCloseAddModal = () => setOpenAddModal(false);
@@ -47,27 +43,34 @@ const EmployeeResource = ({ permissions }) => {
     setOpenEditModal(true);
   };
 
+  const returnedResource =
+    employeeResourceData &&
+    employeeResourceData.filter((item) => item?.returnDate);
+  const usedResource =
+    employeeResourceData &&
+    employeeResourceData.filter((item) => item?.returnDate === null);
+
   const columns = [
     {
-      title: 'SN',
+      title: "SN",
       render: (rowData) => rowData.tableData.id + 1,
-      width: '3%',
-      maxWidth: '40px',
+      width: "3%",
+      maxWidth: "40px",
       sortable: false,
       sorting: false,
     },
     {
-      title: 'Employee Name',
-      field: 'employeeName',
+      title: "Employee Name",
+      field: "employeeName",
 
       render: (rowData) => {
         const name =
           rowData?.employee?.firstName +
-          ' ' +
+          " " +
           rowData?.employee?.middleName +
-          ' ' +
+          " " +
           rowData?.employee?.lastName;
-        return name ? name : '-';
+        return name ? name : "-";
       },
       // emptyValue: '-',
       // render: (rowData) => {
@@ -80,12 +83,12 @@ const EmployeeResource = ({ permissions }) => {
       sorting: false,
     },
     {
-      title: 'Resource',
-      field: 'officeResourceName',
+      title: "Resource",
+      field: "officeResourceName",
       render: (rowData) => {
         const resource = rowData?.officeResource?.name;
         // const name = rowData?.employee?.firstName + " " + rowData?.employee?.middleName + " " +  rowData?.employee?.lastName
-        return resource ? resource : '-';
+        return resource ? resource : "-";
       },
       // emptyValue: '-',
       // render: (rowData) => {
@@ -98,33 +101,44 @@ const EmployeeResource = ({ permissions }) => {
       sorting: false,
     },
     {
-      title: 'Received Date',
-      field: 'receiveDate',
-      emptyValue: '-',
+      title: "Received Date",
+      field: "receiveDate",
+      emptyValue: "-",
       sorting: false,
     },
     {
-      title: 'Device Condition Before',
-      field: 'conditionWhileProvided',
-      emptyValue: '-',
+      title: "Device Condition Before",
+      field: "conditionWhileProvided",
+      emptyValue: "-",
       sorting: false,
     },
     {
-      title: 'Returned Date',
-      field: 'returnDate',
-      emptyValue: '-',
+      title: "Returned Date",
+      field: "returnDate",
+      emptyValue: "-",
       sorting: false,
     },
     {
-      title: 'Device Condition After',
-      field: 'conditionWhileReturned',
-      emptyValue: '-',
+      title: "Device Condition After",
+      field: "conditionWhileReturned",
+      emptyValue: "-",
       sorting: false,
     },
+    // {
+    //   title: "Status",
+    //   render: (rowData) => {
+    //     if (rowData?.returnDate) {
+    //       return <Typography sx={{background: 'yellow', borderRadius: '1rem', textAlign: 'center'}}>Returned</Typography>
+    //     } else  return <Typography sx={{background: 'yellow', borderRadius: '1rem', textAlign: 'center'}}>Using</Typography>
+    //   },
+    //   // field: 'remarks',
+    //   // emptyValue: '-',
+    //   sorting: false,
+    // },
     {
-      title: 'Remarks',
-      field: 'remarks',
-      emptyValue: '-',
+      title: "Remarks",
+      field: "remarks",
+      emptyValue: "-",
       sorting: false,
     },
   ];
@@ -133,31 +147,31 @@ const EmployeeResource = ({ permissions }) => {
       icon: () => (
         <ModeEditOutlineIcon
           sx={{
-            color: 'black',
-            '&:hover': {
-              color: 'green',
+            color: "black",
+            "&:hover": {
+              color: "green",
             },
           }}
         />
       ),
       disabled:
         !permissions?.canEdit || editedEmployeeResouce?.returnDate === null,
-      tooltip: 'Edit Logistics',
+      tooltip: "Edit Logistics",
       onClick: (event, rowData) => handleEditRowData(rowData),
     },
     {
       icon: () => (
         <DeleteIcon
           sx={{
-            color: 'black',
-            '&:hover': {
-              color: 'red',
+            color: "black",
+            "&:hover": {
+              color: "red",
             },
           }}
         />
       ),
       disabled: !permissions?.canDelete,
-      tooltip: 'Remove Logistics',
+      tooltip: "Remove Logistics",
       onClick: (event, rowData) => handleDeleteRowData(rowData),
     },
   ];
@@ -166,40 +180,54 @@ const EmployeeResource = ({ permissions }) => {
     <>
       <Box
         sx={{
-          display: 'flex',
-          justifyContent: 'flex-end',
-          gap: '1rem',
-          padding: '.5rem 0',
+          display: "flex",
+          justifyContent: "flex-end",
+          gap: "1rem",
+          padding: ".5rem 0",
         }}
       >
         <HocButton
           permissions={permissions}
-          color={'white'}
-          variant={'contained'}
+          color={"white"}
+          variant={"contained"}
           onClick={handleAddOpenModal}
-          buttonName={'+ Provide Logistics'}
+          buttonName={"+ Provide Logistics"}
         />
       </Box>
 
-      <CustomTable
-        columns={columns}
-        data={employeeResourceData}
-        title='Employee Logistics'
-        isLoading={isLoading}
-        actions={actions}
-        // exportButton={true}
-      />
+      <Box
+        gap={2}
+        sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}
+      >
+         <CustomTable
+          columns={columns}
+          data={usedResource}
+          title="Currently Used Logistics"
+          isLoading={isLoading}
+          actions={actions}
+          // exportButton={true}
+        />
+        <CustomTable
+          columns={columns}
+          data={returnedResource}
+          title="Returned Logistics"
+          isLoading={isLoading}
+          actions={actions}
+          // exportButton={true}
+        />
+      </Box>
+
       {openDeleteModal && (
         <DeleteConfirmationModal
           open={openDeleteModal}
           handleCloseModal={handleCloseDeleteModal}
           handleConfirmDelete={handleConfirmDelete}
-          message={'Employee with Resource'}
+          message={"Employee with Resource"}
         />
       )}
       {openAddModal && (
         <AddEmployeeResourceModal
-          title={'Provide Logistics'}
+          title={"Provide Logistics"}
           id={editedEmployeeResouce?.id}
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
@@ -207,7 +235,7 @@ const EmployeeResource = ({ permissions }) => {
       )}
       {openEditModal && (
         <EditEmployeeResourceModal
-          title={'Edit Logistics'}
+          title={"Edit Logistics"}
           data={editedEmployeeResouce}
           open={openEditModal}
           handleCloseModal={handleCloseEditModal}

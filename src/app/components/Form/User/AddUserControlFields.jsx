@@ -31,7 +31,7 @@ export const AddUserControlFields = ({ onClose }) => {
             id='employeeId'
             name='employeeId'
             options={employeeData || []}
-            getOptionLabel={(option) => option.label}
+            getOptionLabel={(option) => option?.label}
             value={employeeData?.find(
               (employee) => employee?.id === formik?.values?.employeeId
             )}

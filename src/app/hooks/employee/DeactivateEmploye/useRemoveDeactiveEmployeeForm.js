@@ -13,7 +13,7 @@ const removeDeactiveEmployeeSchema = Yup.object().shape({
 });
 // Validation schema for activating employee
 const activeEmployeeSchema = Yup.object().shape({
-  effectiveDate: Yup.date().required('Effective date is required'),
+  effectiveDate: Yup.date().required('Effective from date is required'),
   terminationType: Yup.string().required('Activation reason is required'),
 });
 
