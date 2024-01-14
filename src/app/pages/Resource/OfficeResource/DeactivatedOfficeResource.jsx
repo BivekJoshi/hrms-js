@@ -66,7 +66,12 @@ const DeactivatedOfficeResource = ({ closeModal, title }) => {
       render: (rowData) => (
         <Tooltip title='Activate Logistic'>
           <IconButton onClick={() => handleActivate(rowData)}>
-            <AddTaskIcon />
+            <AddTaskIcon  sx={{
+            color: "black",
+            "&:hover": {
+              color: "green",
+            },
+          }} />
           </IconButton>
         </Tooltip>
       ),
