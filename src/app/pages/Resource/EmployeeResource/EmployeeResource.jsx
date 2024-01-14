@@ -134,24 +134,24 @@ const EmployeeResource = ({ permissions }) => {
       render: (rowData) => {
         return (
           <>
-            <Button disabled={rowData?.returnDate === null}>
+            <Button disabled={rowData?.returnDate !== null}>
               <ModeEditOutlineIcon
                 onClick={(event) => handleEditRowData(rowData)}
                 sx={{
                   color:
-                    rowData?.returnDate === null
+                    rowData?.returnDate !== null
                       ? "rgb(188, 188, 188)"
                       : "black",
                   "&:hover": { color: "green" },
                 }}
               />
             </Button>
-            <Button disabled={rowData?.returnDate === null}>
+            <Button disabled={rowData?.returnDate !== null}>
               <DeleteIcon
                 onClick={(event) => handleDeleteRowData(rowData)}
                 sx={{
                   color:
-                    rowData?.returnDate === null
+                    rowData?.returnDate !== null
                       ? "rgb(188, 188, 188)"
                       : "black",
                   "&:hover": { color: "green" },
