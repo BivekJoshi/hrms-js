@@ -3,7 +3,7 @@ import { axiosInstance } from "../../../auth/axiosInterceptor";
 /*________________________GETBYID_____________________________________*/
 export const getQualificationById = async (id) => {
   if (id) {
-    const data = axiosInstance.get(`/qualification/employee-id/${id}`);
+    const data = await axiosInstance.get(`/qualification/employee-id/${id}`);
     return data;
   }
 };

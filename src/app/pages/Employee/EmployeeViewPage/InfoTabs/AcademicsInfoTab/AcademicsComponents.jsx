@@ -9,10 +9,12 @@ import { Box, Divider, Typography } from "@mui/material";
 import ThemeModeContext from "../../../../../../theme/ThemeModeContext";
 import CustomTable from "../../../../../components/CustomTable/CustomTable";
 import NewEmployeeQualificationDetailForm from "../../../../../components/Form/Employee/EmployeeQualificationDetailForm/NewEmployeeQualificationDetailForm";
+import useAuth from "../../../../../../auth/hooks/component/login/useAuth";
 
 const primaryColor = "#1c7ed6";
 const AcademicsComponents = ({ data, isLoading }) => {
-  
+  const auth = useAuth();
+
   const columns = [
     {
       title: "SN",
@@ -29,13 +31,13 @@ const AcademicsComponents = ({ data, isLoading }) => {
     //       const fullName = name?.passedValue === rowData?.passedLabel
     //       console.log({"name?.passedValue": name?.passedValue, "rowData?.passedLabel": rowData})
     //     });
-        
+
     //     return passedName || '-';
     //   },
     //   width: "20vh",
     //   sorting: false,
     // },
-    
+
     {
       title: "Passed Level",
       field: "passedLevel",
@@ -104,7 +106,7 @@ const AcademicsComponents = ({ data, isLoading }) => {
           </TimelineContent>
         </TimelineItem>
       </Box> */}
-      <NewEmployeeQualificationDetailForm />
+      <NewEmployeeQualificationDetailForm employeId={auth?.userId} />
     </>
   );
 };
