@@ -37,7 +37,7 @@ export const useProjectEmployeeForm = (data, onClose) => {
     values = { ...values };
     addProjectEmployee(values, {
       onSuccess: () => {
-        // onClose
+        onClose();
         formik.handleReset();
       },
     });

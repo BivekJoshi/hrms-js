@@ -1,15 +1,15 @@
-import { Box, Button, Typography } from "@mui/material";
-import React, { useState } from "react";
-import { useDeleteEmployeeResource } from "../../../hooks/resource/employeeResource/useEmployeeResource";
-import { useGetEmployeeResource } from "../../../hooks/resource/employeeResource/useEmployeeResource";
-import DeleteIcon from "@mui/icons-material/Delete";
-import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
-import DeleteConfirmationModal from "../../../components/Modal/DeleteConfirmationModal";
-import { AddEmployeeResourceModal } from "./EmployeeResourceModal";
-import { EditEmployeeResourceModal } from "./EmployeeResourceModal";
-import PermissionHoc from "../../../hoc/permissionHoc";
-import HocButton from "../../../hoc/hocButton";
-import CustomTable from "../../../components/CustomTable/CustomTable";
+import { Box, Button, Typography } from '@mui/material';
+import React, { useState } from 'react';
+import { useDeleteEmployeeResource } from '../../../hooks/resource/employeeResource/useEmployeeResource';
+import { useGetEmployeeResource } from '../../../hooks/resource/employeeResource/useEmployeeResource';
+import DeleteIcon from '@mui/icons-material/Delete';
+import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
+import DeleteConfirmationModal from '../../../components/Modal/DeleteConfirmationModal';
+import { AddEmployeeResourceModal } from './EmployeeResourceModal';
+import { EditEmployeeResourceModal } from './EmployeeResourceModal';
+import PermissionHoc from '../../../hoc/permissionHoc';
+import HocButton from '../../../hoc/hocButton';
+import CustomTable from '../../../components/CustomTable/CustomTable';
 
 const EmployeeResource = ({ permissions }) => {
   const { data: employeeResourceData, isLoading } = useGetEmployeeResource();
@@ -20,8 +20,6 @@ const EmployeeResource = ({ permissions }) => {
 
   const [deletedData, setDeletedData] = useState({});
   const [editedEmployeeResouce, setEditedEmployeeResource] = useState({});
-  // console.log(employeeResourceData,"editedEmployeeResouce");
-  // console.log('employeeResourceData?.returnDate:', employeeResourceData?.returnDate);
   const handleAddOpenModal = () => setOpenAddModal(true);
   const handleCloseAddModal = () => setOpenAddModal(false);
 
@@ -46,6 +44,13 @@ const EmployeeResource = ({ permissions }) => {
     setEditedEmployeeResource(rowData);
     setOpenEditModal(true);
   };
+
+  const returnedResource =
+    employeeResourceData &&
+    employeeResourceData.filter((item) => item?.returnDate);
+  const usedResource =
+    employeeResourceData &&
+    employeeResourceData.filter((item) => item?.returnDate === null);
 
   const columns = [
     {
@@ -121,83 +126,95 @@ const EmployeeResource = ({ permissions }) => {
       emptyValue: "-",
       sorting: false,
     },
+    // {
+    //   title: "Status",
+    //   render: (rowData) => {
+    //     if (rowData?.returnDate) {
+    //       return <Typography sx={{background: 'yellow', borderRadius: '1rem', textAlign: 'center'}}>Returned</Typography>
+    //     } else  return <Typography sx={{background: 'yellow', borderRadius: '1rem', textAlign: 'center'}}>Using</Typography>
+    //   },
+    //   // field: 'remarks',
+    //   // emptyValue: '-',
+    //   sorting: false,
+    // },
     {
       title: "Remarks",
       field: "remarks",
       emptyValue: "-",
       sorting: false,
     },
+    // {
+    //   id: 'actions',
+    //   label: 'Actions',
+    //   title: 'Action',
+    //   render: (rowData) => {
+    //     return (
+    //       <>
+    //         <Button disabled={rowData?.returnDate !== null}>
+    //           <ModeEditOutlineIcon
+    //             onClick={(event) => handleEditRowData(rowData)}
+    //             sx={{
+    //               color:
+    //                 rowData?.returnDate === null
+    //                   ? 'rgb(188, 188, 188)'
+    //                   : 'black',
+    //               '&:hover': { color: 'green' },
+    //             }}
+    //           />
+    //         </Button>
+    //         <Button disabled={rowData?.returnDate !== null}>
+    //           <DeleteIcon
+    //             onClick={(event) => handleDeleteRowData(rowData)}
+    //             sx={{
+    //               color:
+    //                 rowData?.returnDate === null
+    //                   ? 'rgb(188, 188, 188)'
+    //                   : 'black',
+    //               '&:hover': { color: 'green' },
+    //             }}
+    //           />
+    //         </Button>
+    //       </>
+    //     );
+    //   },
+    // },
+  ];
+
+  const actions = [
     {
-      id: "actions",
-      label: "Actions",
-      title: "Action",
-      render: (rowData) => {
-        return (
-          <>
-            <Button disabled={rowData?.returnDate !== null}>
-              <ModeEditOutlineIcon
-                onClick={(event) => handleEditRowData(rowData)}
-                sx={{
-                  color:
-                    rowData?.returnDate !== null
-                      ? "rgb(188, 188, 188)"
-                      : "black",
-                  "&:hover": { color: "green" },
-                }}
-              />
-            </Button>
-            <Button disabled={rowData?.returnDate !== null}>
-              <DeleteIcon
-                onClick={(event) => handleDeleteRowData(rowData)}
-                sx={{
-                  color:
-                    rowData?.returnDate !== null
-                      ? "rgb(188, 188, 188)"
-                      : "black",
-                  "&:hover": { color: "green" },
-                }}
-              />
-            </Button>
-          </>
-        );
-      },
+      icon: () => (
+        <Button disabled={!permissions?.canEdit && editedEmployeeResouce?.returnDate === null}>
+          <ModeEditOutlineIcon
+            sx={{
+              color: "black",
+              "&:hover": {
+                color: "green",
+              },
+            }}
+          />
+        </Button>
+      ),
+
+      tooltip: "Edit Logistics",
+      onClick: (event, rowData) => handleEditRowData(rowData),
+    },
+    {
+      icon: (rowData) => (
+        <DeleteIcon
+          sx={{
+            color: "black",
+            "&:hover": {
+              color: "red",
+            },
+          }}
+        />
+      ),
+      disabled:
+        !permissions?.canDelete || employeeResourceData?.returnDate === null,
+      tooltip: "Remove Logistics",
+      onClick: (event, rowData) => handleDeleteRowData(rowData),
     },
   ];
-  // const actions = [
-  //   {
-  //     icon: () => (
-  //       <Button disabled={!permissions?.canEdit && editedEmployeeResouce?.returnDate === null}>
-  //         <ModeEditOutlineIcon
-  //           sx={{
-  //             color: "black",
-  //             "&:hover": {
-  //               color: "green",
-  //             },
-  //           }}
-  //         />
-  //       </Button>
-  //     ),
-
-  //     tooltip: "Edit Logistics",
-  //     onClick: (event, rowData) => handleEditRowData(rowData),
-  //   },
-  //   {
-  //     icon: (rowData) => (
-  //       <DeleteIcon
-  //         sx={{
-  //           color: "black",
-  //           "&:hover": {
-  //             color: "red",
-  //           },
-  //         }}
-  //       />
-  //     ),
-  //     disabled:
-  //       !permissions?.canDelete || employeeResourceData?.returnDate === null,
-  //     tooltip: "Remove Logistics",
-  //     onClick: (event, rowData) => handleDeleteRowData(rowData),
-  //   },
-  // ];
 
   return (
     <>
@@ -218,16 +235,36 @@ const EmployeeResource = ({ permissions }) => {
         />
       </Box>
 
-      <CustomTable
+      <Box
+        gap={2}
+        sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}
+      >
+         <CustomTable
+          columns={columns}
+          data={usedResource}
+          title="Currently Used Logistics"
+          isLoading={isLoading}
+          actions={actions}
+          // exportButton={true}
+        />
+        <CustomTable
+          columns={columns}
+          data={returnedResource}
+          title="Returned Logistics"
+          isLoading={isLoading}
+          // actions={actions}
+          // exportButton={true}
+        />
+      </Box>
+
+      {/* <CustomTable
         columns={columns}
         data={employeeResourceData}
         title="Employee Logistics"
         isLoading={isLoading}
-        fileName="Employee Logistics List"
-        exportButton
-        exportExcel
-        pdfNone
-      />
+        // actions={actions}
+        // exportButton={true}
+      /> */}
       {openDeleteModal && (
         <DeleteConfirmationModal
           open={openDeleteModal}
