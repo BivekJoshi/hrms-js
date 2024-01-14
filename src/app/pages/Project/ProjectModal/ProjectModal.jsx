@@ -9,8 +9,9 @@ import {
 } from "../../../components/Form/Project/EditProjectDeactivateFields";
 
 import {
-  AddprojectEmployeeFields,
-  EditProjectEmployeeFields,
+  // AddprojectEmployeeFields,
+  // EditProjectEmployeeFields,
+  ProjectEmployeeFields,
 } from "../../../components/Form/Project/projectEmployee/AddProjectEmployeeFields";
 import { useGetProjectEmployeeById } from "../../../hooks/project/projectEmployee/useProjectEmployee";
 import ProjectAssignTaskField from "../../../components/Form/Project/ProjectTask/ProjectAssignTaskField";
@@ -100,7 +101,7 @@ export const AddProjectEmployeeModal = ({
       title={title}
       open={open}
       onClose={handleCloseAddModal}
-      formComponent={<AddprojectEmployeeFields onClose={handleCloseAddModal} />}
+      formComponent={<ProjectEmployeeFields onClose={handleCloseAddModal} />}
     />
   );
 };
@@ -119,7 +120,7 @@ export const EditProjectEmployeeModal = ({
         open={open}
         onClose={handleCloseEditModal}
         formComponent={
-          <EditProjectEmployeeFields
+          <ProjectEmployeeFields
             onClose={handleCloseEditModal}
             data={data}
           />

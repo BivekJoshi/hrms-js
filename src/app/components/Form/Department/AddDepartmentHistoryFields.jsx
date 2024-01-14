@@ -136,7 +136,7 @@ const AddDepartmentHistoryFields = ({
             InputLabelProps={{ shrink: true }}
           />
         </Grid> */}
-        <Grid item xs={12} sm={12}>
+         <Grid item xs={12} sm={12}>
           <RemarkField
             id='remarks'
             name='remarks'

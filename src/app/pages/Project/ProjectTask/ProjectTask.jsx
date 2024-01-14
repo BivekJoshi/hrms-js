@@ -290,7 +290,7 @@ const ProjectTask = ({ permissions }) => {
       )}
       {openAssignModal && (
         <AssignProjectTaskModal
-          title={'Edit Assign Task'}
+          title={'Assign Task'}
           id={assignData?.id}
           data={assignData}
           open={openAssignModal}

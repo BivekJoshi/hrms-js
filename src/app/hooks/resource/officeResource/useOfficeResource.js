@@ -117,7 +117,11 @@ export const useEditActiveInactiveOfficeResource = ({ onSuccess }) => {
     (formData) => editofficeResourceActiveInactive(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Successfully removed office Logistics');
+        if(variables?.isActive) {
+          toast.success('Successfully activate office logistic');
+        } else {
+          toast.success('Successfully removed office logistic');
+        }       
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries('getdeactivaedofficeResource');
         queryClient.invalidateQueries('getAvailableOfficeResource');
