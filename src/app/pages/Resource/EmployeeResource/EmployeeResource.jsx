@@ -74,6 +74,16 @@ const EmployeeResource = ({ permissions }) => {
           rowData?.employee?.lastName;
         return name ? name : "-";
       },
+      customFilterAndSearch: (searchValue, rowData) => {
+        if(rowData?.middleName) {
+          const employeeName = rowData?.employee?.firstName+" "+rowData?.employee?.middleName+" "+rowData?.employee?.lastName;
+          return employeeName.toLowerCase().includes(searchValue.toLowerCase());
+        } else {
+          const employeeName = rowData?.employee?.firstName+" "+rowData?.employee?.lastName;
+          return employeeName.toLowerCase().includes(searchValue.toLowerCase());
+        }
+      },
+      sorting: false,
       // emptyValue: '-',
       // render: (rowData) => {
       //   return <p>{getEmployeeName(rowData)} </p>;
@@ -82,7 +92,6 @@ const EmployeeResource = ({ permissions }) => {
       //   const employeeName = getEmployeeName(rowData);
       //   return employeeName.toLowerCase().includes(searchValue.toLowerCase());
       // },
-      sorting: false,
     },
     {
       title: "Resource",
