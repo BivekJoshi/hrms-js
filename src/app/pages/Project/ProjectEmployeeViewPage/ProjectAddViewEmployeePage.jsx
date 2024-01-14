@@ -42,7 +42,7 @@ const ProjectAddViewEmployeePage = ({ permissions }) => {
         gutterBottom
         sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
       >
-        Project :{ProjectDetails?.projectName}
+        Project: {ProjectDetails?.projectName}
       </Typography>
       <TabContext value={value}>
         <Box>

@@ -1,18 +1,19 @@
-import React, { useState } from 'react';
-import { Box, Button, Chip, Stack } from '@mui/material';
-import Skeleton from '@mui/material/Skeleton';
+import React, { useContext, useState } from "react";
+import { Box, Button, Chip, Stack, Typography } from "@mui/material";
+import Skeleton from "@mui/material/Skeleton";
 
 import {
   useGetTodoList,
   useDeleteTodoList,
-} from '../../hooks/todoList/useTodoList';
-import { AddTodoListModal, EditTodoListModal } from './TodoModal/TodoModal';
+} from "../../hooks/todoList/useTodoList";
+import { AddTodoListModal, EditTodoListModal } from "./TodoModal/TodoModal";
 
-import DeleteIcon from '@mui/icons-material/Delete';
-import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
-import { ButtonComponent } from '../../components/Button/ButtonComponent';
-import PermissionHoc from '../../hoc/permissionHoc';
-import CustomTable from '../../components/CustomTable/CustomTable';
+import DeleteIcon from "@mui/icons-material/Delete";
+import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
+import { ButtonComponent } from "../../components/Button/ButtonComponent";
+import PermissionHoc from "../../hoc/permissionHoc";
+import CustomTable from "../../components/CustomTable/CustomTable";
+import ThemeModeContext from "../../../theme/ThemeModeContext";
 
 const TodoList = ({ permissions }) => {
   const { data: todoListData, isLoading } = useGetTodoList();
@@ -40,56 +41,51 @@ const TodoList = ({ permissions }) => {
 
   const columns = [
     {
-      title: 'SN',
+      title: "SN",
       render: (rowData) => rowData.tableData.id + 1,
-      maxWidth: '1px',
+      maxWidth: "1px",
       sortable: false,
       sorting: false,
     },
     {
-      title: 'Task',
-      field: 'message',
-      width: '400px',
+      title: "Task",
+      field: "message",
+      width: "300px",
       sorting: false,
-      render: (rowData) => (
-        <div
-          style={{
-            whiteSpace: 'normal',
-            overflowWrap: 'break-word',
-            wordWrap: 'break-word',
-            wordBreak: 'break-all',
-          }}
-        >
-          {rowData?.message}
-        </div>
-      ),
+      render: (rowData) => {
+        return (
+          <Typography style={{ overflowWrap: "break-word", wordBreak:"break-all" }}>
+            {rowData.message}
+          </Typography>
+        );
+      },
     },
     {
-      title: 'Due',
-      field: 'dueDate',
-      width: '180px',
+      title: "Due",
+      field: "dueDate",
+      width: "180px",
       // type: 'numeric',
       sorting: false,
     },
     {
-      title: 'Priority',
-      field: 'priority',
-      emptyValue: '-',
-      width: '180px',
+      title: "Priority",
+      field: "priority",
+      emptyValue: "-",
+      width: "180px",
       cellStyle: {
-        whiteSpace: 'nowrap',
+        whiteSpace: "nowrap",
       },
       sorting: false,
       render: (rowData) => {
         const priority = rowData?.priority;
-        let chipColor = '';
+        let chipColor = "";
 
-        if (priority === 'HIGH') {
-          chipColor = 'red';
-        } else if (priority === 'MEDIUM') {
-          chipColor = 'orange';
-        } else if (priority === 'LOW') {
-          chipColor = 'green';
+        if (priority === "HIGH") {
+          chipColor = "red";
+        } else if (priority === "MEDIUM") {
+          chipColor = "orange";
+        } else if (priority === "LOW") {
+          chipColor = "green";
         }
 
         return (
@@ -97,8 +93,8 @@ const TodoList = ({ permissions }) => {
             label={priority}
             style={{
               backgroundColor: chipColor,
-              color: 'white',
-              width: ' 9rem',
+              color: "white",
+              width: " 9rem",
             }}
           />
         );
@@ -106,33 +102,34 @@ const TodoList = ({ permissions }) => {
     },
   ];
 
+  const { mode } = useContext(ThemeModeContext);
   const actions = [
     {
       icon: () => (
         <ModeEditOutlineIcon
           sx={{
-            color: 'black',
-            '&:hover': {
-              color: 'green',
+            color: mode === "light" ? "black" : "white",
+            "&:hover": {
+              color: "green",
             },
           }}
         />
       ),
-      tooltip: 'Edit to do',
+      tooltip: "Edit to do",
       onClick: (event, rowData) => handleEditTodoList(rowData),
     },
     {
       icon: () => (
         <DeleteIcon
           sx={{
-            color: 'black',
-            '&:hover': {
-              color: 'red',
+            color: mode === "light" ? "black" : "white",
+            "&:hover": {
+              color: "red",
             },
           }}
         />
       ),
-      tooltip: 'Delete to do',
+      tooltip: "Delete to do",
       onClick: (event, rowData) => handleDeleteTodoList(rowData.id),
     },
   ];
@@ -141,31 +138,31 @@ const TodoList = ({ permissions }) => {
     return (
       <>
         <Skeleton />
-        <Skeleton animation='wave' />
+        <Skeleton animation="wave" />
         <Skeleton animation={false} />
       </>
     );
 
   return (
     <>
-      <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
         <ButtonComponent
           OnClick={handleAddOpenModal}
-          buttonName={'Add Todo'}
-          color='#fff'
+          buttonName={"Add Todo"}
+          color="#fff"
         />
       </Box>
       <CustomTable
         columns={columns}
         data={todoListData}
-        title='Todo List'
+        title="Todo List"
         isLoading={isLoading}
         actions={actions}
       />
 
       {openEditModal && (
         <EditTodoListModal
-          title={'Edit Todo List'}
+          title={"Edit Todo List"}
           data={editedTodo}
           open={openEditModal}
           handleCloseModal={handleCloseEditModal}
@@ -176,9 +173,16 @@ const TodoList = ({ permissions }) => {
         <AddTodoListModal
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
-          title={'Add Todo List'}
+          title={"Add Todo List"}
         />
       )}
+      <style>
+        {`
+        .css-a80liw-MuiTableCell-root{
+          text-align: center;
+        }
+        `}
+      </style>
     </>
   );
 };

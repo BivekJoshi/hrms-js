@@ -2,31 +2,23 @@ import React, { useState } from 'react';
 import {
   useEditActiveInactiveOfficeResource,
   useGetAvailableOfficeResource,
-  useGetUsedOfficeResource,
-} from '../../../hooks/resource/officeResource/useOfficeResource';
-import { Box, Button, Typography } from '@mui/material';
+} from "../../../hooks/resource/officeResource/useOfficeResource";
+import { Box, Button, Typography } from "@mui/material";
 import {
   AddOfficeResourceModal,
   DeactivatedOfficeResourceModal,
   EditOfficeResourceModal,
-} from './OfficeResourceModal';
-import { ButtonComponent } from '../../../components/Button/ButtonComponent';
-import DeactivatedOfficeResource from './DeactivatedOfficeResource';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import { AvailableOfficeLogistic } from './AvailableOfficeLogistic';
-import { OpenCLoseModel } from './OpenCLoseModel';
-import { useGetEmployee } from '../../../hooks/employee/useEmployee';
-import CustomTable from '../../../components/CustomTable/CustomTable';
-import DeleteIcon from '@mui/icons-material/Delete';
-import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
-import PermissionHoc from '../../../hoc/permissionHoc';
-import ThemeModeContext from '../../../../theme/ThemeModeContext';
-import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+} from "./OfficeResourceModal";
+import CustomTable from "../../../components/CustomTable/CustomTable";
+import DeleteIcon from "@mui/icons-material/Delete";
+import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
+import PermissionHoc from "../../../hoc/permissionHoc";
+import ThemeModeContext from "../../../../theme/ThemeModeContext";
 import FormModal from '../../../components/Modal/FormModal';
+
 const OfficeResource = ({ permissions }) => {
   const { data: availableOfficeResource, isLoading } =
     useGetAvailableOfficeResource();
-  const { data: employeeData, isLoading: loadingemployee } = useGetEmployee();
   const [openModal, setOpenModal] = useState(false);
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
@@ -105,9 +97,9 @@ const OfficeResource = ({ permissions }) => {
       icon: () => (
         <ModeEditOutlineIcon
           sx={{
-            color: mode === 'light' ? 'black' : 'white',
-            '&:hover': {
-              color: 'green',
+            color: mode === "light" ? "black" : "white",
+            "&:hover": {
+              color: "green",
             },
           }}
         />
@@ -118,11 +110,11 @@ const OfficeResource = ({ permissions }) => {
     },
     {
       icon: () => (
-        <HighlightOffIcon
+        <DeleteIcon
           sx={{
-            color: mode === 'light' ? 'black' : 'white',
-            '&:hover': {
-              color: 'red',
+            color: mode === "light" ? "black" : "white",
+            "&:hover": {
+              color: "red",
             },
           }}
         />
@@ -205,11 +197,11 @@ const OfficeResource = ({ permissions }) => {
               </Typography>
               <div
                 style={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  gap: '1rem',
-                  justifyContent: 'flex-end',
-                  margin: '.5rem',
+                  display: "flex",
+                  flexDirection: "row",
+                  gap: "1rem",
+                  justifyContent: "flex-end",
+                  margin: ".5rem",
                 }}
               >
                 <Button
