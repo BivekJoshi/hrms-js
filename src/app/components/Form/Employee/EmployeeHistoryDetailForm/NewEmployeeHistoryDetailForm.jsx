@@ -10,9 +10,9 @@ import CustomeEmployeeDetails from "../../../../utils/CustomeDetails/CustomeEmpl
 import HistoryAddField from "./HistoryAddField";
 import useAddHistoryDetails from "./useAddHistoryDetails";
 
-const NewEmployeeHistoryDetailForm = () => {
+const NewEmployeeHistoryDetailForm = ({employeeId}) => {
   const { id } = useParams();
-  const { data, isLoading } = useGetEmployeeHistory(id);
+  const { data, isLoading } = useGetEmployeeHistory(id || employeeId);
   const { formik, isFormSubmitSuccess, isEditSuccess } = useAddHistoryDetails();
   const deleteHistoryMutation = useDeleteHistory({});
 
