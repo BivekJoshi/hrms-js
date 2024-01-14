@@ -221,7 +221,6 @@ export const EditEmployeeActivateFields = ({ onClose, isLoading, data }) => {
             id='effectiveDate'
             name='effectiveDate'
             label='Effective From Date'
-            placeholder='Effective Date'
             type='date'
             fullWidth
             required
@@ -236,8 +235,8 @@ export const EditEmployeeActivateFields = ({ onClose, isLoading, data }) => {
             }
             variant='outlined'
             InputLabelProps={{ shrink: true }}
+            size="small"
             inputProps={{
-              // max: currentDate, // Disable past date selections
               min: currentDate,
             }}
           />
@@ -271,7 +270,6 @@ export const EditEmployeeActivateFields = ({ onClose, isLoading, data }) => {
               <TextField
                 {...params}
                 label=' Reason'
-                placeholder='Select Reason'
                 fullWidth
                 error={
                   formik.touched.terminationType &&
@@ -282,7 +280,7 @@ export const EditEmployeeActivateFields = ({ onClose, isLoading, data }) => {
                   formik.errors.terminationType
                 }
                 variant='outlined'
-                // InputLabelProps={{ shrink: true }}
+                size="small"
               />
             )}
           />

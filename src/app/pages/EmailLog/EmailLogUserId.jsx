@@ -149,7 +149,6 @@ const EmailLogUserId = () => {
           id="userId"
           name="userId"
           label="User Name"
-          placeholder="Select user name"
           fullWidth
           required
           value={id}

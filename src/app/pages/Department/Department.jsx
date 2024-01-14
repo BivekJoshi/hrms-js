@@ -149,8 +149,11 @@ const Department = ({ permissions }) => {
         data={departmentData}
         title='Department List'
         isLoading={isLoading}
-        // exportButton={true}
         actions={actions}
+        fileName="Department List"
+        exportButton
+        exportExcel
+        pdfNone
       />
 
       {openEditModal && (
