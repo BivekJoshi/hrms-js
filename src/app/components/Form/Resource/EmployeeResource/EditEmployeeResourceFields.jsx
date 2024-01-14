@@ -40,10 +40,10 @@ const EditEmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
 
         <Grid item xs={12} sm={12}>
           <TextField
-            type="date"
-            id="returnDate"
-            name="returnDate"
-            label="Returned Date"
+            type='date'
+            id='returnDate'
+            name='returnDate'
+            label='Returned Date'
             fullWidth
             required
             value={formik.values.returnDate}
@@ -63,9 +63,9 @@ const EditEmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
-            id="conditionWhileReturned"
-            name="conditionWhileReturned"
-            label="Device Condition when Returned"
+            id='conditionWhileReturned'
+            name='conditionWhileReturned'
+            label='Device condition when returned'
             fullWidth
             value={formik.values.conditionWhileReturned}
             onChange={formik.handleChange}
@@ -77,9 +77,11 @@ const EditEmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
               formik.touched.conditionWhileReturned &&
               formik.errors.conditionWhileReturned
             }
-            variant="outlined"
-            size="small"
-            InputLabelProps={{ shrink: Boolean(formik.values.conditionWhileReturned) }}
+            variant='outlined'
+            size='small'
+            InputLabelProps={{
+              shrink: Boolean(formik.values.conditionWhileReturned),
+            }}
           />
         </Grid>
         {/* <Grid item xs={12} sm={12}>
@@ -108,7 +110,7 @@ const EditEmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
             onClick={handleFormSubmit}
             sx={{ mt: 3, ml: 1 }}
           >
-            Submit
+            Update Logistics
           </Button>
           <Button
             variant='contained'

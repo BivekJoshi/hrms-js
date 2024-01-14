@@ -1,15 +1,15 @@
-import { Box, Typography } from "@mui/material";
-import React, { useState } from "react";
-import { useDeleteEmployeeResource } from "../../../hooks/resource/employeeResource/useEmployeeResource";
-import { useGetEmployeeResource } from "../../../hooks/resource/employeeResource/useEmployeeResource";
-import DeleteIcon from "@mui/icons-material/Delete";
-import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
-import DeleteConfirmationModal from "../../../components/Modal/DeleteConfirmationModal";
-import { AddEmployeeResourceModal } from "./EmployeeResourceModal";
-import { EditEmployeeResourceModal } from "./EmployeeResourceModal";
-import PermissionHoc from "../../../hoc/permissionHoc";
-import HocButton from "../../../hoc/hocButton";
-import CustomTable from "../../../components/CustomTable/CustomTable";
+import { Box, Button, Typography } from '@mui/material';
+import React, { useState } from 'react';
+import { useDeleteEmployeeResource } from '../../../hooks/resource/employeeResource/useEmployeeResource';
+import { useGetEmployeeResource } from '../../../hooks/resource/employeeResource/useEmployeeResource';
+import DeleteIcon from '@mui/icons-material/Delete';
+import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
+import DeleteConfirmationModal from '../../../components/Modal/DeleteConfirmationModal';
+import { AddEmployeeResourceModal } from './EmployeeResourceModal';
+import { EditEmployeeResourceModal } from './EmployeeResourceModal';
+import PermissionHoc from '../../../hoc/permissionHoc';
+import HocButton from '../../../hoc/hocButton';
+import CustomTable from '../../../components/CustomTable/CustomTable';
 
 const EmployeeResource = ({ permissions }) => {
   const { data: employeeResourceData, isLoading } = useGetEmployeeResource();
@@ -20,7 +20,6 @@ const EmployeeResource = ({ permissions }) => {
 
   const [deletedData, setDeletedData] = useState({});
   const [editedEmployeeResouce, setEditedEmployeeResource] = useState({});
-
   const handleAddOpenModal = () => setOpenAddModal(true);
   const handleCloseAddModal = () => setOpenAddModal(false);
 
@@ -38,6 +37,9 @@ const EmployeeResource = ({ permissions }) => {
     setOpenDeleteModal(false);
   };
 
+  const actionsCellStyle = {
+    padding: '0 2rem',
+  };
   const handleEditRowData = (rowData) => {
     setEditedEmployeeResource(rowData);
     setOpenEditModal(true);
@@ -141,26 +143,63 @@ const EmployeeResource = ({ permissions }) => {
       emptyValue: "-",
       sorting: false,
     },
+    // {
+    //   id: 'actions',
+    //   label: 'Actions',
+    //   title: 'Action',
+    //   render: (rowData) => {
+    //     return (
+    //       <>
+    //         <Button disabled={rowData?.returnDate !== null}>
+    //           <ModeEditOutlineIcon
+    //             onClick={(event) => handleEditRowData(rowData)}
+    //             sx={{
+    //               color:
+    //                 rowData?.returnDate === null
+    //                   ? 'rgb(188, 188, 188)'
+    //                   : 'black',
+    //               '&:hover': { color: 'green' },
+    //             }}
+    //           />
+    //         </Button>
+    //         <Button disabled={rowData?.returnDate !== null}>
+    //           <DeleteIcon
+    //             onClick={(event) => handleDeleteRowData(rowData)}
+    //             sx={{
+    //               color:
+    //                 rowData?.returnDate === null
+    //                   ? 'rgb(188, 188, 188)'
+    //                   : 'black',
+    //               '&:hover': { color: 'green' },
+    //             }}
+    //           />
+    //         </Button>
+    //       </>
+    //     );
+    //   },
+    // },
   ];
+
   const actions = [
     {
       icon: () => (
-        <ModeEditOutlineIcon
-          sx={{
-            color: "black",
-            "&:hover": {
-              color: "green",
-            },
-          }}
-        />
+        <Button disabled={!permissions?.canEdit && editedEmployeeResouce?.returnDate === null}>
+          <ModeEditOutlineIcon
+            sx={{
+              color: "black",
+              "&:hover": {
+                color: "green",
+              },
+            }}
+          />
+        </Button>
       ),
-      disabled:
-        !permissions?.canEdit || editedEmployeeResouce?.returnDate === null,
+
       tooltip: "Edit Logistics",
       onClick: (event, rowData) => handleEditRowData(rowData),
     },
     {
-      icon: () => (
+      icon: (rowData) => (
         <DeleteIcon
           sx={{
             color: "black",
@@ -170,7 +209,8 @@ const EmployeeResource = ({ permissions }) => {
           }}
         />
       ),
-      disabled: !permissions?.canDelete,
+      disabled:
+        !permissions?.canDelete || employeeResourceData?.returnDate === null,
       tooltip: "Remove Logistics",
       onClick: (event, rowData) => handleDeleteRowData(rowData),
     },
@@ -212,11 +252,19 @@ const EmployeeResource = ({ permissions }) => {
           data={returnedResource}
           title="Returned Logistics"
           isLoading={isLoading}
-          actions={actions}
+          // actions={actions}
           // exportButton={true}
         />
       </Box>
 
+      {/* <CustomTable
+        columns={columns}
+        data={employeeResourceData}
+        title='Employee Logistics'
+        isLoading={isLoading}
+        // actions={actions}
+        // exportButton={true}
+      /> */}
       {openDeleteModal && (
         <DeleteConfirmationModal
           open={openDeleteModal}

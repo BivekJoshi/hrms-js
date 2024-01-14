@@ -1,13 +1,10 @@
-import * as React from "react";
-import DeleteIcon from "@mui/icons-material/Delete";
-import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
-import PermissionHoc from "../../../hoc/permissionHoc";
-import useAuth from "../../../../auth/hooks/component/login/useAuth";
-import CustomTable from "../../../components/CustomTable/CustomTable";
-import HocButton from "../../../hoc/hocButton";
-import { Chip, Tooltip, Typography } from "@mui/material";
-import ThemeModeContext from "../../../../theme/ThemeModeContext";
-import { useContext } from "react";
+import * as React from 'react';
+import DeleteIcon from '@mui/icons-material/Delete';
+import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
+import useAuth from '../../../../auth/hooks/component/login/useAuth';
+import CustomTable from '../../../components/CustomTable/CustomTable';
+import ThemeModeContext from '../../../../theme/ThemeModeContext';
+import { useContext } from 'react';
 
 const CompanyTableView = ({
   permissions,
@@ -54,7 +51,7 @@ const CompanyTableView = ({
       emptyValue: '-',
       width: '120px',
       // render: (rowData) => {
-      //   return (          
+      //   return (
       //       <Typography
       //         style={{
       //           // overflow: 'hidden',

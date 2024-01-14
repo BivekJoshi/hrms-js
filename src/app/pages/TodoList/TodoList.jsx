@@ -12,7 +12,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import { ButtonComponent } from '../../components/Button/ButtonComponent';
 import PermissionHoc from '../../hoc/permissionHoc';
-import HocButton from '../../hoc/hocButton';
 import CustomTable from '../../components/CustomTable/CustomTable';
 
 const TodoList = ({ permissions }) => {

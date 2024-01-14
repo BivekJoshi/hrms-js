@@ -1,4 +1,4 @@
-import MaterialTable, { MTableToolbar } from "material-table";
+import MaterialTable, { MTableAction, MTableToolbar } from "material-table";
 import React, { useContext } from "react";
 import ThemeModeContext from "../../../theme/ThemeModeContext";
 import tableIcons from "../../../theme/overrides/TableIcon";
@@ -81,6 +81,13 @@ const CustomTable = (props) => {
           search: props?.search || true,
           tableLayout: props?.tableLayout,
           padding: "dense",
+          cellStyle: {
+            textAlign: "center",
+          },
+          actionsCellStyle: props?.actionsCellStyle
+            ? props?.actionsCellStyle
+            : "",
+          // padding:" 0px 20px",
           pageSize: props?.pageSize || 10,
           emptyRowsWhenPaging: props?.emptyRowsWhenPaging || false,
           exportButton: props?.exportButton || false,
@@ -119,6 +126,7 @@ const CustomTable = (props) => {
           actionsColumnIndex: -1,
           rowStyle: props?.rowStyle || {
             fontSize: ".8rem",
+            alignItems: "center",
           },
           maxBodyHeight: props?.height || "",
           scroll: props?.scroll || "",
@@ -144,6 +152,7 @@ const CustomTable = (props) => {
               </div>
             </div>
           ),
+          // Action: (props) => <MTableAction {...props} style={{display:"flex", justifyContent: 'center' }} />, // Add this line to center align the actions
         }}
       />
     </div>
