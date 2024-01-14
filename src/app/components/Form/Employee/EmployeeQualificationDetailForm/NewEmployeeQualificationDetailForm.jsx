@@ -28,7 +28,7 @@ const NewEmployeeQualificationDetailForm = () => {
 
   const columns = [
     { id: 'board', label: 'Board', minWidth: 170 },
-    { id: 'institute', label: 'Institude', minWidth: 150 },
+    { id: 'institute', label: 'Institute', minWidth: 150 },
     {
       id: 'passedLevel',
       label: 'Passed Level',
