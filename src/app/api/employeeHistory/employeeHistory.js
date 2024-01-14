@@ -101,11 +101,32 @@ export const addEmpHistory = async (formData, id) => {
 };
 
 export const addEmploymentHistory = async (formData, id) => {
-  const data = await axiosInstance.post(`/employment-history/${id}`, formData);
+  const path = formData?.multiplePosition
+    ? `/employment-history/${id}?multiplePosition=true`
+    : `/employment-history/${id}`;
+  const data = await axiosInstance.post(path, formData);
+  return data;
+};
+
+export const editEmployeeDetails = async (formData, id) => {
+  const { tableId, effectiveDateTo } = formData;
+
+  const path = `/employment-history/update-position/${tableId}?employeeId=${id}`;
+  const data = await axiosInstance.put(path, {
+    effectiveDateTo: effectiveDateTo,
+  });
   return data;
 };
 
 export const transferEmploymentHistory = async (formData, id) => {
   const data = await axiosInstance.put(`/employment-history/${id}`, formData);
+  return data;
+};
+
+export const transferUpgradeEmployee = async (formData, id) => {
+  const data = await axiosInstance.put(
+    `/employment-history/update-branch-department/${id}?allPosition=${formData?.allPosition}`,
+    formData
+  );
   return data;
 };
