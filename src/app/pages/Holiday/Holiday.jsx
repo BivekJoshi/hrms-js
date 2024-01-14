@@ -46,7 +46,10 @@ const Holiday = ({ permissions }) => {
     }
   }, [holidayData]);
 
-  const handleCloseModal = () => setOpenAddModal(false);
+  const handleCloseModal = () => {
+    setOpenAddModal(false)
+    formik.handleReset();
+  };
   const { formik, holidayId } = useHolidayForm(
     setOpenSubmitModal,
     handleCloseModal
@@ -88,7 +91,7 @@ const Holiday = ({ permissions }) => {
         <FormModal
           title={'Add Holiday'}
           open={openAddModal}
-          onClose={() => setOpenAddModal(false)}
+          onClose={handleCloseModal}
           formComponent={
             <>
               {/*Import Event Field Here*/}

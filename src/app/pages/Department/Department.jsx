@@ -17,6 +17,7 @@ import HocButton from '../../hoc/hocButton';
 import useAuth from '../../../auth/hooks/component/login/useAuth';
 import CustomTable from '../../components/CustomTable/CustomTable';
 import { useEffect } from 'react';
+import ThemeModeContext from '../../../theme/ThemeModeContext';
 
 const Department = ({ permissions }) => {
   const { isEmployee } = useAuth();
@@ -94,9 +95,9 @@ const Department = ({ permissions }) => {
       icon: () => (
         <ModeEditOutlineIcon
           sx={{
-            color: mode === "light" ? "black" : "white",
-            "&:hover": {
-              color: "green",
+            color: mode === 'light' ? 'black' : 'white',
+            '&:hover': {
+              color: 'green',
             },
           }}
         />
@@ -110,9 +111,9 @@ const Department = ({ permissions }) => {
       icon: () => (
         <DeleteIcon
           sx={{
-            color: mode === "light" ? "black" : "white",
-            "&:hover": {
-              color: "red",
+            color: mode === 'light' ? 'black' : 'white',
+            '&:hover': {
+              color: 'red',
             },
           }}
         />
