@@ -34,7 +34,7 @@ export const ProjectProgressCard = ({ projectDataCount }) => {
   );
   return (
     <>
-      <Typography variant='v6'>Total Project : {totalCount || '0'}</Typography>
+      <Typography variant='v6'>Total Project: {totalCount || '0'}</Typography>
       <Grid display='grid' gridTemplateColumns='1fr 1fr' gap={2} mt={2}>
         {progressData.map((item, index) => (
           <Grid

@@ -62,7 +62,7 @@ export default function ProjectHomePage({
                     }}
                   >
                     <p>
-                      Project : <b>{getProjectName(project?.projectId)}</b>
+                      Project: <b>{getProjectName(project?.projectId)}</b>
                     </p>
                     {project?.employeeIds?.map((employeeId, index) => {
                       const employee =

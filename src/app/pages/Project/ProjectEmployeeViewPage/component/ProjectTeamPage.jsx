@@ -21,7 +21,7 @@ function ProjectTeamPage({
         projectWiseEmployeeData.map((project, index) => (
           <Box key={index} sx={{ marginTop: "3rem" }}>
             <Typography variant='h4' style={{ padding: " 0 0 1rem 0 " }}>
-              Project : {getProjectName(project?.projectId)}
+              Project: {getProjectName(project?.projectId)}
             </Typography>
             <Box key={project?.projecctId}>
               <Grid
