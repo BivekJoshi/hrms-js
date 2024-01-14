@@ -42,7 +42,6 @@ const EmploymentTransfer = ({ data }) => {
             name='fromDepartment'
             select
             label='From Department'
-            // placeholder='Select your department'
             fullWidth
             disabled
             required
@@ -75,7 +74,6 @@ const EmploymentTransfer = ({ data }) => {
             name='departmentId'
             select
             label='To Department'
-            // placeholder='Select your department'
             fullWidth
             required
             value={!loadingDepartment && formik.values.departmentId}
@@ -106,7 +104,6 @@ const EmploymentTransfer = ({ data }) => {
             name='fromBranch'
             select
             label='From Branch'
-            // placeholder='Select your branch'
             fullWidth
             required
             disabled
@@ -136,7 +133,6 @@ const EmploymentTransfer = ({ data }) => {
             name='branchId'
             select
             label='To Branch'
-            // placeholder='Select your branch'
             fullWidth
             required
             value={!loadingCompany && formik.values.branchId}

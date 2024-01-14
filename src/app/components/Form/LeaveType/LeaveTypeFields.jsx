@@ -10,6 +10,7 @@ import { ThemeSwitch } from "../../../../theme/ThemeSwitch";
 import useLeaveTypeForm from "../../../hooks/leaveType/LeaveTypeForm/useLeaveTypeForm";
 import { useContext } from "react";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
+import RemarkField from "../../RemarkField/RemarkField";
 
 const LEAVENAME = [
   {
@@ -77,7 +78,6 @@ const LeaveTypeFields = ({ onClose, isLoading, data, existingLeaveTypes }) => {
               id="leaveName"
               name="leaveName"
               label="Leave Name"
-              placeholder="Enter leave name"
               fullWidth
               required
               disabled
@@ -99,7 +99,6 @@ const LeaveTypeFields = ({ onClose, isLoading, data, existingLeaveTypes }) => {
               name="leaveName"
               select
               label="Leave Type"
-              placeholder="Select your leaveName"
               fullWidth
               required
               value={formik.values.leaveName}
@@ -109,7 +108,7 @@ const LeaveTypeFields = ({ onClose, isLoading, data, existingLeaveTypes }) => {
               }
               helperText={formik.touched.leaveName && formik.errors.leaveName}
               variant="outlined"
-              InputLabelProps={{ shrink: true }}
+              InputLabelProps={{ shrink: Boolean(formik.values.leaveName) }}
               size="small"
             >
               {filteredLeaveNames.length === 0 ? (
@@ -135,7 +134,6 @@ const LeaveTypeFields = ({ onClose, isLoading, data, existingLeaveTypes }) => {
               id="leaveTotal"
               name="leaveTotal"
               label="Total Leave Days"
-              placeholder="Enter total leave days"
               fullWidth
               required
               disabled
@@ -147,7 +145,7 @@ const LeaveTypeFields = ({ onClose, isLoading, data, existingLeaveTypes }) => {
               }
               helperText={formik.touched.leaveTotal && formik.errors.leaveTotal}
               variant="outlined"
-              InputLabelProps={{ shrink: true }}
+              InputLabelProps={{ shrink: Boolean(formik.values.leaveTotal) }}
               size="small"
             />
           ) : (
@@ -155,7 +153,6 @@ const LeaveTypeFields = ({ onClose, isLoading, data, existingLeaveTypes }) => {
               id="leaveTotal"
               name="leaveTotal"
               label="Total Leave Days"
-              placeholder="Enter total leave days"
               fullWidth
               required
               type="number"
@@ -166,31 +163,26 @@ const LeaveTypeFields = ({ onClose, isLoading, data, existingLeaveTypes }) => {
               }
               helperText={formik.touched.leaveTotal && formik.errors.leaveTotal}
               variant="outlined"
-              InputLabelProps={{ shrink: true }}
+              InputLabelProps={{ shrink: Boolean(formik.values.leaveTotal) }}
               size="small"
             />
           )}
         </Grid>
         <Grid item xs={12} sm={12}>
-          <TextField
+          <RemarkField
             id="leaveDescription"
             name="leaveDescription"
-            label="Description"
-            placeholder="Enter leave description"
+            label="Leave Description"
             fullWidth
-            multiline
-            rows={3}
-            value={formik.values.leaveDescription}
-            onChange={formik.handleChange}
-            error={
-              formik.touched.leaveDescription &&
-              Boolean(formik.errors.leaveDescription)
-            }
-            helperText={
-              formik.touched.leaveDescription && formik.errors.leaveDescription
-            }
+            formik={formik}
+            maxLength={255}
             variant="outlined"
-            InputLabelProps={{ shrink: true }}
+            multiline
+            InputLabelProps={{
+              shrink: Boolean(formik.values.leaveDescription),
+            }}
+            rows={4}
+            inputProps={{ maxLength: 255 }}
           />
         </Grid>
         <Grid item xs={12} sm={12}>

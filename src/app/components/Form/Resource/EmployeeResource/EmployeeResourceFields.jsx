@@ -17,6 +17,7 @@ import {
   useGetEmployeeName,
 } from '../../../../hooks/employee/useEmployee';
 import ThemeModeContext from '../../../../../theme/ThemeModeContext';
+import RemarkField from '../../../RemarkField/RemarkField';
 
 const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
   const { data: availableOfficeResource, isLoading: resourceLoad } =
@@ -195,21 +196,20 @@ const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
           />
         </Grid>
         <Grid item xs={12} sm={12} md={12} lg={12}>
-          <TextField
+          <RemarkField
             id="remarks"
             name="remarks"
             label="Remarks"
             fullWidth
-            multiline
-            rows={4}
-            value={formik.values.remarks}
-            onChange={formik.handleChange}
-            error={formik.touched.remarks && Boolean(formik.errors.remarks)}
-            helperText={formik.touched.remarks && formik.errors.remarks}
+            formik={formik}
+            maxLength={255}
             variant="outlined"
-            size="small"
-            InputLabelProps={{ shrink: Boolean(formik.values.remarks) }}
-            inputProps={{ maxLength: 250 }}
+            multiline
+            InputLabelProps={{
+              shrink: Boolean(formik.values.remarks),
+            }}
+            rows={4}
+            inputProps={{ maxLength: 255 }}
           />
         </Grid>
         <Grid
