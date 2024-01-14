@@ -1,13 +1,13 @@
-import * as React from 'react';
-import { useState, useEffect } from 'react';
-import { Box, Button, Grid, Stack } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
-import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
+import * as React from "react";
+import { useState, useEffect } from "react";
+import { Box, Button, Grid, Stack } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 
 import {
   useDeleteLeaveType,
   useGetLeaveType,
-} from '../../hooks/leaveType/useLeaveType';
+} from "../../hooks/leaveType/useLeaveType";
 import {
   AddLeaveTypeModal,
   EditLeaveTypeModal,
@@ -21,48 +21,48 @@ import ThemeModeContext from "../../../theme/ThemeModeContext";
 const leaveName = [
   {
     id: 1,
-    leaveName: 'PATERNITY',
-    leaveLabel: 'Paternity Leave',
+    leaveName: "PATERNITY",
+    leaveLabel: "Paternity Leave",
   },
   {
     id: 2,
-    leaveName: 'MATERNITY',
-    leaveLabel: 'Maternity Leave',
+    leaveName: "MATERNITY",
+    leaveLabel: "Maternity Leave",
   },
   {
     id: 3,
-    leaveName: 'SICK',
-    leaveLabel: 'Sick Leave',
+    leaveName: "SICK",
+    leaveLabel: "Sick Leave",
   },
   {
     id: 4,
-    leaveName: 'UNPAID',
-    leaveLabel: 'Unpaid Leave',
+    leaveName: "UNPAID",
+    leaveLabel: "Unpaid Leave",
   },
   {
     id: 5,
-    leaveName: 'MATERNITY_ADDITIONAL',
-    leaveLabel: 'Maternity Additional Leave',
+    leaveName: "MATERNITY_ADDITIONAL",
+    leaveLabel: "Maternity Additional Leave",
   },
   {
     id: 6,
-    leaveName: 'CASUAL',
-    leaveLabel: 'Casual Leave',
+    leaveName: "CASUAL",
+    leaveLabel: "Casual Leave",
   },
   {
     id: 7,
-    leaveName: 'BEREAVEMENT',
-    leaveLabel: 'Bereavent Leave',
+    leaveName: "BEREAVEMENT",
+    leaveLabel: "Bereavent Leave",
   },
   {
     id: 8,
-    leaveName: 'MARRIAGE',
-    leaveLabel: 'Marriage Leave',
+    leaveName: "MARRIAGE",
+    leaveLabel: "Marriage Leave",
   },
   {
     id: 9,
-    leaveName: 'FESTIVAL',
-    leaveLabel: 'Festival Leave',
+    leaveName: "FESTIVAL",
+    leaveLabel: "Festival Leave",
   },
 ];
 const LeaveType = ({ permissions }) => {
@@ -108,16 +108,16 @@ const LeaveType = ({ permissions }) => {
 
   const columns = [
     {
-      title: 'SN',
+      title: "SN",
       render: (rowData) => rowData.tableData.id + 1,
-      width: '1%',
+      width: "1%",
       sortable: false,
       sorting: false,
     },
     {
-      title: 'Leave Name',
-      field: 'leaveName',
-      width: '5%',
+      title: "Leave Name",
+      field: "leaveName",
+      width: "5%",
       render: (rowData) => {
         const leaveNameLabel =
           leaveName.find((leave) => leave?.leaveName === rowData?.leaveName)
@@ -141,105 +141,148 @@ const LeaveType = ({ permissions }) => {
     //   sorting: false,
     // },
     {
-      title: 'Leave Days',
-      field: 'leaveTotal',
-      emptyValue: '-',
+      title: "Leave Days",
+      field: "leaveTotal",
+      emptyValue: "-",
       // width: 15,
       sortable: false,
       sorting: false,
     },
     {
-      title: 'Carry Forward',
-      field: 'isCarryForward',
-      emptyValue: '-',
+      title: "Carry Forward",
+      field: "isCarryForward",
+      emptyValue: "-",
       // width: 10,
-      render: (rowData) => (rowData.isCarryForward ? 'Yes' : 'No'),
+      render: (rowData) => (rowData.isCarryForward ? "Yes" : "No"),
       sortable: false,
       sorting: false,
     },
     {
-      title: 'Description',
-      field: 'leaveDescription',
-      width: '15%',
+      title: "Description",
+      field: "leaveDescription",
+      width: "15%",
       sortable: false,
       sorting: false,
-      emptyValue: '-',
+      emptyValue: "-",
       render: (rowData) => (
         <div
           style={{
-            whiteSpace: 'normal',
-            overflowWrap: 'break-word',
-            wordWrap: 'break-word',
-            wordBreak: 'break-all',
+            whiteSpace: "normal",
+            overflowWrap: "break-word",
+            wordWrap: "break-word",
+            wordBreak: "break-all",
           }}
         >
           {rowData?.leaveDescription}
         </div>
       ),
     },
+    {
+      id: "actions",
+      label: "Actions",
+      title: "Action",
+      render: (rowData) => {
+        return (
+          <div style={{ display: "flex" }}>
+            <Button disabled={!permissions?.canEdit}>
+              <ModeEditOutlineIcon
+                sx={{
+                  color: mode === "light" ? "black" : "white",
+                  "&:hover": {
+                    color: "green",
+                  },
+                }}
+                onClick={(event) => handleEditLeaveType(rowData)}
+              />
+            </Button>
+            <Button disabled={!rowData?.deletable || !permissions?.canDelete}>
+              <DeleteIcon
+                sx={{
+                  color:
+                    rowData?.deletable === false
+                      ? "rgb(188, 188, 188)"
+                      : "black",
+                  "&:hover": { color: "red" },
+                }}
+                // sx={{
+                //   color: mode === "light" ? "black" : "white",
+                //   "&:hover": {
+                //     color: "green",
+                //   },
+                // }}
+                onClick={(event) => handleDeleteLeaveType(rowData)}
+              />
+            </Button>
+          </div>
+        );
+      },
+    },
   ];
   const { mode } = React.useContext(ThemeModeContext);
 
-  const actions = [
-    {
-      icon: () => (
-        <ModeEditOutlineIcon
-          sx={{
-            color: mode === "light" ? "black" : "white",
-            "&:hover": {
-              color: "green",
-            },
-          }}
-        />
-      ),
-      disabled: !permissions?.canEdit,
-      tooltip: 'Edit Detail',
-      onClick: (event, rowData) => handleEditLeaveType(rowData),
-    },
-    {
-      icon: () => (
-        <DeleteIcon
-          sx={{
-            color: mode === "light" ? "black" : "white",
-            "&:hover": {
-              color: "red",
-            },
-          }}
-        />
-      ),
-      disabled: !permissions?.canDelete,
-      tooltip: 'Delete',
-      onClick: (event, rowData) => handleDeleteLeaveType(rowData),
-    },
-  ];
+  // const actions = [
+  //   {
+  //     icon: () => (
+  //       <ModeEditOutlineIcon
+  //         sx={{
+  //           color: mode === "light" ? "black" : "white",
+  //           "&:hover": {
+  //             color: "green",
+  //           },
+  //         }}
+  //       />
+  //     ),
+  //     disabled: !permissions?.canEdit,
+  //     tooltip: "Edit Detail",
+  //     onClick: (event, rowData) => handleEditLeaveType(rowData),
+  //   },
+  //   {
+  //     icon: () => (
+  //       <DeleteIcon
+  //         sx={{
+  //           color: mode === "light" ? "black" : "white",
+  //           "&:hover": {
+  //             color: "red",
+  //           },
+  //         }}
+  //       />
+  //     ),
+  //     // disabled: !permissions?.canDelete,
+  //     disabled: (rowData) => !rowData?.deletable,
+  //     tooltip: "Delete",
+  //     onClick: (event, rowData) => handleDeleteLeaveType(rowData),
+  //   },
+  // ];
+
   if (isLoading) return <>Loading</>;
+
   return (
     <Grid>
       <Box
         sx={{
-          display: 'flex',
-          justifyContent: 'flex-end',
-          paddingBottom: '1rem',
+          display: "flex",
+          justifyContent: "flex-end",
+          paddingBottom: "1rem",
         }}
       >
         <HocButton
           permissions={permissions}
-          color='white'
-          variant={'contained'}
+          color="white"
+          variant={"contained"}
           onClick={handleAddOpenModal}
-          buttonName={'Add Leave Type'}
+          buttonName={"Add Leave Type"}
         />
       </Box>
       <CustomTable
         columns={columns}
         data={leaveTypeData}
-        title='Leave Type'
+        title="Leave Type"
         isLoading={isLoading}
-        actions={actions}
+        // actions={actions}
       />
       {openEditModal && (
         <EditLeaveTypeModal
-          title={'Edit Leave Type'}
+          title={"Edit Leave Type"}
           data={editedLeaveType}
           open={openEditModal}
           handleCloseModal={handleCloseEditModal}
@@ -248,7 +291,7 @@ const LeaveType = ({ permissions }) => {
       {openAddModal && (
         <AddLeaveTypeModal
           open={openAddModal}
-          title={'Add Leave Type'}
+          title={"Add Leave Type"}
           handleCloseModal={handleCloseAddModal}
           existingLeaveTypes={existingLeaveTypes}
         />
@@ -258,7 +301,7 @@ const LeaveType = ({ permissions }) => {
           open={openDeleteModal}
           handleCloseModal={handleCloseDeleteModal}
           handleConfirmDelete={handleConfirmDelete}
-          message={'Leave Type'}
+          message={"Leave Type"}
         />
       )}
     </Grid>

@@ -108,7 +108,7 @@ export const EditProjectActivateFields = ({ onClose, isLoading, data }) => {
             id="remarks"
             name="remarks"
             label="Reason"
-            placeholder="Give reason "
+            placeholder="Give activation reason"
             fullWidth
             // disabled
             value={getProjectName(formik.values.remarks)}
