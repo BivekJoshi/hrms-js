@@ -17,6 +17,8 @@ const AddPromotionHistoryFields = ({
     if (formik.isValid) {
     }
   };
+  const currentDate = new Date().toISOString().split('T')[0];
+
   return (
     !isLoading && (
       <Grid container spacing={3}>
@@ -73,9 +75,8 @@ const AddPromotionHistoryFields = ({
             }
             variant="outlined"
             InputLabelProps={{ shrink: true }}
-            size="small"
             inputProps={{
-              min: new Date().toISOString().split("T")[0],
+              max: currentDate,
             }}
           />
         </Grid>
@@ -86,10 +87,8 @@ const AddPromotionHistoryFields = ({
             label='Remarks'
             fullWidth
             onBlur={formik.handleBlur}
-            value={formik.values.remarks}
-            onChange={formik.handleChange}
-            error={formik.touched.remarks && Boolean(formik.errors.remarks)}
-            helperText={formik.touched.remarks && formik.errors.remarks}
+            formik={formik}
+            maxLength={255}
             variant='outlined'
             multiline
             rows={4}

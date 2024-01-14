@@ -6,20 +6,19 @@ import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import {
   useDeleteDesignation,
   useGetDesignation,
-} from '../../hooks/designation/useDesignation';
+} from "../../hooks/designation/useDesignation";
 import {
   AddDesignationModal,
   EditDesignationModal,
-} from './DesignationModal/DesignationModal';
-import DeleteConfirmationModal from '../../components/Modal/DeleteConfirmationModal';
-import PermissionHoc from '../../hoc/permissionHoc';
-import HocButton from '../../hoc/hocButton';
-import CustomTable from '../../components/CustomTable/CustomTable';
-import ThemeModeContext from '../../../theme/ThemeModeContext';
+} from "./DesignationModal/DesignationModal";
+import DeleteConfirmationModal from "../../components/Modal/DeleteConfirmationModal";
+import PermissionHoc from "../../hoc/permissionHoc";
+import HocButton from "../../hoc/hocButton";
+import CustomTable from "../../components/CustomTable/CustomTable";
+import ThemeModeContext from "../../../theme/ThemeModeContext";
 
 const Designation = ({ permissions }) => {
   const { data: designationData, isLoading } = useGetDesignation();
-  const { palette } = React.useContext(ThemeModeContext);
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
@@ -55,40 +54,55 @@ const Designation = ({ permissions }) => {
     setEditedDesignation(rowData);
     setOpenEditModal(true);
   };
+  const { mode } = React.useContext(ThemeModeContext);
 
   const columns = [
     {
-      title: 'SN',
+      title: "SN",
       render: (rowData) => rowData.tableData.id + 1,
-      maxWidth: '1px',
+      maxWidth: "1px",
       sortable: false,
       sorting: false,
     },
     {
-      title: 'Designation Name',
-      field: 'positionName',
-      emptyValue: '-',
+      title: "Designation Name",
+      field: "positionName",
+      emptyValue: "-",
       width: 200,
       sorting: false,
     },
     {
-      title: 'Designation Level',
-      field: 'positionLevel',
-      emptyValue: '-',
+      title: "Designation Level",
+      field: "positionLevel",
+      emptyValue: "-",
       width: 200,
       sorting: false,
     },
     {
-      title: 'Salary',
-      field: 'salary',
-      emptyValue: '-',
+      title: "Salary",
+      field: "salary",
+      emptyValue: "-",
       width: 80,
       sorting: false,
     },
     {
       title: 'Details',
       field: 'positionDetails',
+      width: '20%',
       emptyValue: '-',
+      render: (rowData) => {
+        return (
+          <div
+            style={{
+              whiteSpace: 'wrap',
+              width: '15rem',
+              overflowWrap: 'break-word',
+            }}
+          >
+            {rowData?.positionDetails}
+          </div>
+        );
+      },
       sorting: false,
     },
   ].filter(Boolean);
@@ -98,9 +112,9 @@ const Designation = ({ permissions }) => {
       icon: () => (
         <ModeEditOutlineIcon
           sx={{
-            color: 'black',
-            '&:hover': {
-              color: 'green',
+            color: mode === "light" ? "black" : "white",
+            "&:hover": {
+              color: "green",
             },
           }}
         />
@@ -113,28 +127,35 @@ const Designation = ({ permissions }) => {
       icon: () => (
         <DeleteIcon
           sx={{
-            color: 'black',
-            '&:hover': {
-              color: 'red',
+            color: mode === "light" ? "black" : "white",
+            "&:hover": {
+              color: "red",
             },
           }}
         />
       ),
       disabled: !permissions?.canDelete,
 
-      tooltip: 'Delete',
+      tooltip: "Delete",
       onClick: (event, rowData) => handleDeleteDesignation(rowData),
     },
   ];
   if (isLoading) return <>Loading</>;
 
+  const actionsCellStyle = {
+    width: "64px",
+    padding: " 7px 39px",
+    display: "flex",
+    justifyContent: "stretch",
+    alignItems: "center",
+  };
   return (
     <>
-      <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
         <HocButton
           permissions={permissions?.canAdd}
-          color={'white'}
-          variant={'contained'}
+          color={"white"}
+          variant={"contained"}
           onClick={handleAddOpenModal}
           buttonName={'Add Designation'}
         />
@@ -143,14 +164,15 @@ const Designation = ({ permissions }) => {
       <CustomTable
         columns={columns}
         data={designationData}
-        title='Designation List'
+        title="Designation List"
         isLoading={isLoading}
         actions={actions}
+        actionsCellStyle={actionsCellStyle}
       />
 
       {openEditModal && (
         <EditDesignationModal
-          title={'Edit Designation'}
+          title={"Edit Designation"}
           // id={editedDesignation?.id}
           data={editedDesignation}
           open={openEditModal}
@@ -159,7 +181,7 @@ const Designation = ({ permissions }) => {
       )}
       {openAddModal && (
         <AddDesignationModal
-          title={'Add Designation'}
+          title={"Add Designation"}
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
         />
@@ -169,7 +191,7 @@ const Designation = ({ permissions }) => {
           open={openDeleteModal}
           handleCloseModal={handleCloseDeleteModal}
           handleConfirmDelete={handleConfirmDelete}
-          message={'Designation'}
+          message={"Designation"}
         />
       )}
     </>

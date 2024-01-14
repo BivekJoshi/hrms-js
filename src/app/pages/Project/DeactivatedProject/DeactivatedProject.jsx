@@ -13,6 +13,7 @@ import {
 import RestoreFromTrashOutlinedIcon from "@mui/icons-material/RestoreFromTrashOutlined";
 import CloseIcon from "@mui/icons-material/Close";
 import ReplayIcon from "@mui/icons-material/Replay";
+import ThemeModeContext from "../../../../theme/ThemeModeContext";
 
 const DeactivatedProject = ({ onClick }) => {
   const { data: deactivatedProject, isLoading } = useGetDeactivatedProject();
@@ -41,13 +42,14 @@ const DeactivatedProject = ({ onClick }) => {
     },
     
   ];
+  const { mode } = React.useContext(ThemeModeContext);
 
   const actions = [
     {
       icon: () => (
         <ReplayIcon
           sx={{
-            color: "black",
+            color: mode === "light" ? "black" : "white",
             "&:hover": {
               color: "green",
             },

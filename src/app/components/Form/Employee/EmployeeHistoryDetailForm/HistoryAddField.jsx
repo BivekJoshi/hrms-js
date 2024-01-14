@@ -161,6 +161,7 @@ const HistoryAddField = ({ formik }) => {
             type="date"
             inputProps={{
               max: currentDate,
+              min: formik.values.fromDate,
             }}
             value={formik.values.toDate}
             onChange={formik.handleChange}

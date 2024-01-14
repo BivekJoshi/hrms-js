@@ -20,9 +20,9 @@ const getPalette = (darkMode) => {
   return {
     mode: darkMode ? 'dark' : 'light',
     primary: {
-      main: darkMode ? '#304D30' : '#388E3C',
+      main: darkMode ? '#7bb338' : '#388E3C',
       light: darkMode ? '#f0ca92' : '#6DAB23',
-      dark: darkMode ? '#18751c' : '#1dab23',
+      dark: darkMode ? '#98c464' : '#7bb338',
       holiday: darkMode ? '' : '#FF8A7B',
     },
     secondary: {

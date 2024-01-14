@@ -39,6 +39,9 @@ const EmployeeResource = ({ permissions }) => {
     setOpenDeleteModal(false);
   };
 
+  const actionsCellStyle = {
+    padding: '0 2rem',
+  };
   const handleEditRowData = (rowData) => {
     setEditedEmployeeResource(rowData);
     setOpenEditModal(true);

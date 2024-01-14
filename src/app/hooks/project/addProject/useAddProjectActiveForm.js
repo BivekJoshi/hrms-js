@@ -4,50 +4,52 @@ import { ProjectSchema } from '../validation/ProjectSchema';
 import { useActiveProject, useDeleteProject } from '../useProject';
 
 export const useRemoveActiveProject = (data) => {
-    const { mutate } = useDeleteProject({});
-   
-    const formik = useFormik({
-        initialValues: {
-            projectId: data?.id || "",
-        },
-        enableReinitialize: true,
-        onSubmit: (values) => {
-            handleRequest(values);
-        },
-    });
+  const { mutate } = useDeleteProject({});
 
-    const handleRequest = (values) => {
-        values = {
-            ...values,
-        };
-        mutate(values, formik);
+  const formik = useFormik({
+    initialValues: {
+      projectId: data?.id || '',
+      remarks: '',
+    },
+    enableReinitialize: true,
+    onSubmit: (values) => {
+      handleRequest(values);
+    },
+  });
+
+  const handleRequest = (values) => {
+    values = {
+      ...values,
     };
+    mutate(values, formik);
+  };
 
-    return { formik };
+  return { formik };
 };
 
 export const useAddActiveProject = (data, onClose) => {
-    const { mutate } = useActiveProject({});
-    const formik = useFormik({
-        initialValues: {
-            projectId: data || "",
-        },
-        enableReinitialize: true,
-        onSubmit: (values) => {
-            handleRequest(values);
-        },
-    });
+  const { mutate } = useActiveProject({});
+  const formik = useFormik({
+    initialValues: {
+      projectId: data || '',
+      remarks: '',
+    },
+    enableReinitialize: true,
+    onSubmit: (values) => {
+      handleRequest(values);
+    },
+  });
 
-    const handleRequest = (values) => {
-        values = {
-            ...values,
-        };
-        mutate(values, {
-            onSuccess: () => {
-                onClose();
-            }
-        });
+  const handleRequest = (values) => {
+    values = {
+      ...values,
     };
+    mutate(values, {
+      onSuccess: () => {
+        onClose();
+      },
+    });
+  };
 
-    return { formik };
+  return { formik };
 };

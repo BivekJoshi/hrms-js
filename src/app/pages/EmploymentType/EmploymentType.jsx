@@ -7,10 +7,11 @@ import EmploymentTypeFields from '../../components/Form/EmploymentType/Employmen
 import {
   useDeleteEmploymentType,
   useGetEmploymentType,
-} from '../../hooks/employmentType/useEmploymentType.js';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteConfirmationModal from '../../components/Modal/DeleteConfirmationModal.jsx';
+} from "../../hooks/employmentType/useEmploymentType.js";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteConfirmationModal from "../../components/Modal/DeleteConfirmationModal.jsx";
+import ThemeModeContext from "../../../theme/ThemeModeContext.jsx";
 
 const EmploymentType = () => {
   const { data: employmentTypeData, isLoading } = useGetEmploymentType();
@@ -85,15 +86,16 @@ const EmploymentType = () => {
       ),
     },
   ].filter(Boolean);
+  const { mode } = React.useContext(ThemeModeContext);
 
   const actions = [
     {
       icon: () => (
         <EditIcon
           sx={{
-            color: 'black',
-            '&:hover': {
-              color: 'green',
+            color: mode === "light" ? "black" : "white",
+            "&:hover": {
+              color: "green",
             },
           }}
         />
@@ -105,9 +107,9 @@ const EmploymentType = () => {
       icon: () => (
         <DeleteIcon
           sx={{
-            color: 'black',
-            '&:hover': {
-              color: 'red',
+            color: mode === "light" ? "black" : "white",
+            "&:hover": {
+              color: "red",
             },
           }}
         />

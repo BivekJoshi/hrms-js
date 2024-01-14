@@ -121,10 +121,10 @@ export const DetailProfile = ({ data, role, setShowPersonalProfile }) => {
         >
           {tabsData.map((tab) => (
             <Tab
-              key={tab.value}
-              label={tab.label}
-              value={tab.value}
-              onClick={() => handleClick(tab.value)}
+              key={tab?.value}
+              label={tab?.label}
+              value={tab?.value}
+              onClick={() => handleClick(tab?.value)}
               // style={{
               //   fontSize: "1rem",
               //   color: primaryColor,

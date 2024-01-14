@@ -11,11 +11,12 @@ import {
 import {
   AddLeaveTypeModal,
   EditLeaveTypeModal,
-} from './LeaveTypeModal/LeaveTypeModal';
-import DeleteConfirmationModal from '../../components/Modal/DeleteConfirmationModal';
-import PermissionHoc from '../../hoc/permissionHoc';
-import HocButton from '../../hoc/hocButton';
-import CustomTable from '../../components/CustomTable/CustomTable';
+} from "./LeaveTypeModal/LeaveTypeModal";
+import DeleteConfirmationModal from "../../components/Modal/DeleteConfirmationModal";
+import PermissionHoc from "../../hoc/permissionHoc";
+import HocButton from "../../hoc/hocButton";
+import CustomTable from "../../components/CustomTable/CustomTable";
+import ThemeModeContext from "../../../theme/ThemeModeContext";
 
 const leaveName = [
   {
@@ -177,15 +178,16 @@ const LeaveType = ({ permissions }) => {
       ),
     },
   ];
+  const { mode } = React.useContext(ThemeModeContext);
 
   const actions = [
     {
       icon: () => (
         <ModeEditOutlineIcon
           sx={{
-            color: 'black',
-            '&:hover': {
-              color: 'green',
+            color: mode === "light" ? "black" : "white",
+            "&:hover": {
+              color: "green",
             },
           }}
         />
@@ -198,9 +200,9 @@ const LeaveType = ({ permissions }) => {
       icon: () => (
         <DeleteIcon
           sx={{
-            color: 'black',
-            '&:hover': {
-              color: 'red',
+            color: mode === "light" ? "black" : "white",
+            "&:hover": {
+              color: "red",
             },
           }}
         />
