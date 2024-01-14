@@ -177,82 +177,81 @@ const LeaveType = ({ permissions }) => {
         </div>
       ),
     },
-    {
-      id: "actions",
-      label: "Actions",
-      title: "Action",
-      render: (rowData) => {
-        return (
-          <div style={{ display: "flex" }}>
-            <Button disabled={!permissions?.canEdit}>
-              <ModeEditOutlineIcon
-                sx={{
-                  color: mode === "light" ? "black" : "white",
-                  "&:hover": {
-                    color: "green",
-                  },
-                }}
-                onClick={(event) => handleEditLeaveType(rowData)}
-              />
-            </Button>
-            <Button disabled={!rowData?.deletable || !permissions?.canDelete}>
-              <DeleteIcon
-                sx={{
-                  color:
-                    rowData?.deletable === false
-                      ? "rgb(188, 188, 188)"
-                      : "black",
-                  "&:hover": { color: "red" },
-                }}
-                // sx={{
-                //   color: mode === "light" ? "black" : "white",
-                //   "&:hover": {
-                //     color: "green",
-                //   },
-                // }}
-                onClick={(event) => handleDeleteLeaveType(rowData)}
-              />
-            </Button>
-          </div>
-        );
-      },
-    },
+    // {
+    //   id: "actions",
+    //   label: "Actions",
+    //   title: "Action",
+    //   render: (rowData) => {
+    //     return (
+    //       <div style={{ display: "flex" }}>
+    //         <Button disabled={!permissions?.canEdit}>
+    //           <ModeEditOutlineIcon
+    //             sx={{
+    //               color: mode === "light" ? "black" : "white",
+    //               "&:hover": {
+    //                 color: "green",
+    //               },
+    //             }}
+    //             onClick={(event) => handleEditLeaveType(rowData)}
+    //           />
+    //         </Button>
+    //         <Button disabled={!rowData?.deletable || !permissions?.canDelete}>
+    //           <DeleteIcon
+    //             sx={{
+    //               color:
+    //                 rowData?.deletable === false
+    //                   ? "rgb(188, 188, 188)"
+    //                   : "black",
+    //               "&:hover": { color: "red" },
+    //             }}
+    //             // sx={{
+    //             //   color: mode === "light" ? "black" : "white",
+    //             //   "&:hover": {
+    //             //     color: "green",
+    //             //   },
+    //             // }}
+    //             onClick={(event) => handleDeleteLeaveType(rowData)}
+    //           />
+    //         </Button>
+    //       </div>
+    //     );
+    //   },
+    // },
   ];
   const { mode } = React.useContext(ThemeModeContext);
 
-  // const actions = [
-  //   {
-  //     icon: () => (
-  //       <ModeEditOutlineIcon
-  //         sx={{
-  //           color: mode === "light" ? "black" : "white",
-  //           "&:hover": {
-  //             color: "green",
-  //           },
-  //         }}
-  //       />
-  //     ),
-  //     disabled: !permissions?.canEdit,
-  //     tooltip: "Edit Detail",
-  //     onClick: (event, rowData) => handleEditLeaveType(rowData),
-  //   },
-  //   {
-  //     icon: () => (
-  //       <DeleteIcon
-  //         sx={{
-  //           color: mode === "light" ? "black" : "white",
-  //           "&:hover": {
-  //             color: "red",
-  //           },
-  //         }}
-  //       />
-  //     ),
-  //     // disabled: !permissions?.canDelete,
-  //     disabled: (rowData) => !rowData?.deletable,
-  //     tooltip: "Delete",
-  //     onClick: (event, rowData) => handleDeleteLeaveType(rowData),
-  //   },
-  // ];
+  const actions = [
+    {
+      icon: () => (
+        <ModeEditOutlineIcon
+          sx={{
+            color: mode === "light" ? "black" : "white",
+            "&:hover": {
+              color: "green",
+            },
+          }}
+        />
+      ),
+      disabled: !permissions?.canEdit,
+      tooltip: "Edit Detail",
+      onClick: (event, rowData) => handleEditLeaveType(rowData),
+    },
+    {
+      icon: () => (
+        <DeleteIcon
+          sx={{
+            color: mode === "light" ? "black" : "white",
+            "&:hover": {
+              color: "red",
+            },
+          }}
+        />
+      ),
+      disabled: !permissions?.canDelete,
+      tooltip: "Delete",
+      onClick: (event, rowData) => handleDeleteLeaveType(rowData),
+    },
+  ];
 
   if (isLoading) return <>Loading</>;
 
@@ -278,7 +277,7 @@ const LeaveType = ({ permissions }) => {
         data={leaveTypeData}
         title="Leave Type"
         isLoading={isLoading}
-        // actions={actions}
+        actions={actions}
       />
       {openEditModal && (
         <EditLeaveTypeModal
