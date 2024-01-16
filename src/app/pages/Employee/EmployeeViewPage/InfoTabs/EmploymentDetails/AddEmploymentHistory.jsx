@@ -1,8 +1,13 @@
-import React from 'react';
-import FormModal from '../../../../../components/Modal/FormModal';
-import AddEmploymentHistoryFields from '../../../../../components/Form/EmploymentHistory/AddEmploymentHistoryFields';
+import React from "react";
+import FormModal from "../../../../../components/Modal/FormModal";
+import AddEmploymentHistoryFields from "../../../../../components/Form/EmploymentHistory/AddEmploymentHistoryFields";
 
-export const AddEmploymentHistory = ({ open, handleCloseModal, title }) => {
+export const AddEmploymentHistory = ({
+  open,
+  handleCloseModal,
+  title,
+  multiplePosition,
+}) => {
   return (
     <div>
       <FormModal
@@ -10,7 +15,10 @@ export const AddEmploymentHistory = ({ open, handleCloseModal, title }) => {
         open={open}
         onClose={handleCloseModal}
         formComponent={
-          <AddEmploymentHistoryFields onClose={handleCloseModal} />
+          <AddEmploymentHistoryFields
+            onClose={handleCloseModal}
+            multiplePosition={multiplePosition}
+          />
         }
       />
     </div>

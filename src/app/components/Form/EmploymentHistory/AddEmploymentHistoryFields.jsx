@@ -1,24 +1,31 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useGetDepartment } from '../../../hooks/department/useDepartment';
 import { useGetCompany } from '../../../hooks/company/useCompany';
 import { Button, Grid, MenuItem, TextField } from '@mui/material';
 import { useGetDesignation } from '../../../hooks/designation/useDesignation';
 import ThemeModeContext from '../../../../theme/ThemeModeContext';
 import useEmploymentHistory from '../../../hooks/employee/useEmploymentHistory';
-import RemarkField from '../../RemarkField/RemarkField';
 
-const AddEmploymentHistoryFields = ({ onClose }) => {
+const AddEmploymentHistoryFields = ({ onClose, multiplePosition }) => {
   const { formik } = useEmploymentHistory(onClose);
   const { mode } = useContext(ThemeModeContext);
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
   };
+
+  useEffect(() => {
+    if (multiplePosition) {
+      formik.setFieldValue('multiplePosition', true);
+    }
+  }, [multiplePosition]);
+
   const { data: departmentData, isLoading: loadingDepartment } =
     useGetDepartment();
   const { data: companyData, isLoading: loadingCompany } = useGetCompany();
   const { data: designationData, isLoading: loadingDesignation } =
     useGetDesignation();
+
   return (
     <Grid container spacing={2}>
       <Grid item xs={12} sm={12}>
@@ -111,6 +118,7 @@ const AddEmploymentHistoryFields = ({ onClose }) => {
           label='Effective From Date'
           type='date'
           fullWidth
+          required
           value={formik.values.effectiveDateFrom}
           onChange={formik.handleChange}
           error={
@@ -124,12 +132,12 @@ const AddEmploymentHistoryFields = ({ onClose }) => {
           InputLabelProps={{ shrink: true }}
         />
       </Grid>
-      <Grid item xs={12} sm={12}>
+      {/* <Grid item xs={12} sm={12}>
         <TextField
-          id='effectiveDateTo'
-          name='effectiveDateTo'
-          label='Effective Date To'
-          type='date'
+          id="effectiveDateTo"
+          name="effectiveDateTo"
+          label="Effective To Date"
+          type="date"
           fullWidth
           value={formik.values.effectiveDateTo}
           onChange={formik.handleChange}
@@ -146,7 +154,7 @@ const AddEmploymentHistoryFields = ({ onClose }) => {
           variant='outlined'
           InputLabelProps={{ shrink: true }}
         />
-      </Grid>
+      </Grid> */}
       <Grid item xs={12} sm={12}>
         <RemarkField
           id='remarks'
