@@ -55,7 +55,7 @@ const DeactivatedOfficeResource = ({ closeModal, title }) => {
       title: "Description",
       width: "120px",
       render: (rowData) => (
-        <Typography style={{ overflowWrap: "break-word", width: '280px' }}>
+        <Typography style={{ overflowWrap: "break-word", wordBreak: "break-all" }}>
           {rowData?.description}
         </Typography>
       ),

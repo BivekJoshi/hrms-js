@@ -90,7 +90,7 @@ const EmployeeResource = ({ permissions }) => {
       render: (rowData) => {
         const resource = rowData?.officeResource?.name;
         return (
-          <Typography style={{ overflowWrap: "break-word", width: "15rem" }}>
+          <Typography style={{ overflowWrap: "break-word", wordBreak: "break-all" }}>
             {resource ? resource : "-"}
           </Typography>
         );
@@ -174,7 +174,7 @@ const EmployeeResource = ({ permissions }) => {
         >
           <ModeEditOutlineIcon
             sx={{
-              color: "black",
+              color: mode === "light" ? "black" : "white",
               "&:hover": {
                 color: "green",
               },
@@ -193,12 +193,12 @@ const EmployeeResource = ({ permissions }) => {
     {
       icon: (rowData) => (
         <DeleteIcon
-          sx={{
-            color: "black",
-            "&:hover": {
-              color: "red",
-            },
-          }}
+        sx={{
+          color: mode === "light" ? "black" : "white",
+          "&:hover": {
+            color: "red",
+          },
+        }}
         />
       ),
       disabled:
