@@ -66,12 +66,3 @@ export const editofficeResourceActiveInactive = async (formData) => {
   );
   return data;
 };
-
-export const editofficeResourceInactive = async (formData) => {
-  const { id } = formData;
-  const data = await axiosInstance.put(
-    `/office-resource/set-activation/${id}?isActive=true`,
-    formData
-  );
-  return data;
-};

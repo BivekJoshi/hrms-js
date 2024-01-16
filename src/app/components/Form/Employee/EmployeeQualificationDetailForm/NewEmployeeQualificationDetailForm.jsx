@@ -9,9 +9,9 @@ import {
   useGetQualificationById,
 } from "../../../../hooks/employee/useQualification";
 
-const NewEmployeeQualificationDetailForm = () => {
+const NewEmployeeQualificationDetailForm = ({ employeId }) => {
   const { id } = useParams();
-  const { data, isLoading } = useGetQualificationById(id);
+  const { data, isLoading } = useGetQualificationById(id || employeId);
   const { formik, isFormSubmitSuccess, isEditSuccess } =
     useAddQualificationDetails();
   const deleteHistoryMutation = useDeleteQualification({});
@@ -27,8 +27,8 @@ const NewEmployeeQualificationDetailForm = () => {
   };
 
   const columns = [
-    { id: "board", label: "Board", minWidth: 170 },
-    { id: "institute", label: "Institude", minWidth: 150 },
+    { id: 'board', label: 'Board', minWidth: 170 },
+    { id: 'institute', label: 'Institute', minWidth: 150 },
     {
       id: "passedLevel",
       label: "Passed Level",
@@ -67,7 +67,7 @@ const NewEmployeeQualificationDetailForm = () => {
         isSubmitSuccess={isFormSubmitSuccess || isEditSuccess}
         deleteCallBack={handleDeleteHistory}
         showDocumentImg
-        modalHeight={"80vh"}
+        modalHeight={"65vh"}
         modalWidth={500}
       />
     </div>

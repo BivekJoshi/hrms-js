@@ -1,18 +1,11 @@
 import MaterialTable from "@material-table/core";
 import React, { useState } from "react";
-import {
-  useAddActivateProject,
-  useGetDeactivatedProject,
-} from "../../../hooks/project/useProject";
-import { useGetEmployee } from "../../../hooks/employee/useEmployee";
+import { useGetDeactivatedProject } from "../../../hooks/project/useProject";
 import { IconButton, Grid, Typography } from "@mui/material";
-import {
-  AddProjectActiveModal,
-  AddProjectModal,
-} from "../ProjectModal/ProjectModal";
-import RestoreFromTrashOutlinedIcon from "@mui/icons-material/RestoreFromTrashOutlined";
+import { AddProjectActiveModal } from "../ProjectModal/ProjectModal";
 import CloseIcon from "@mui/icons-material/Close";
-import ReplayIcon from "@mui/icons-material/Replay";
+import Restore from "../../../../assets/restore.png";
+import ThemeModeContext from "../../../../theme/ThemeModeContext";
 
 const DeactivatedProject = ({ onClick }) => {
   const { data: deactivatedProject, isLoading } = useGetDeactivatedProject();
@@ -39,18 +32,21 @@ const DeactivatedProject = ({ onClick }) => {
       emptyValue: "-",
       width: 200,
     },
-    
   ];
+  const { mode } = React.useContext(ThemeModeContext);
 
   const actions = [
     {
       icon: () => (
-        <ReplayIcon
-          sx={{
-            color: "black",
+        <img
+          src={Restore}
+          alt="Restore"
+          style={{
+            color: mode === "light" ? "black" : "white",
             "&:hover": {
               color: "green",
             },
+            width: "1.5rem",
           }}
         />
       ),
@@ -79,36 +75,42 @@ const DeactivatedProject = ({ onClick }) => {
         </Grid>
       </div>
       <br />
-        <MaterialTable
-          columns={columns}
-          data={deactivatedProject}
-          title="Inactive Projects"
-          isLoading={isLoading}
-          options={{
+      <MaterialTable
+        columns={columns}
+        data={deactivatedProject}
+        title="Inactive Projects"
+        isLoading={isLoading}
+        options={{
+          padding: "dense",
+          margin: 50,
+          pageSize: 20,
+          emptyRowsWhenPaging: false,
+          actionsCellStyle: {
+            display: "flex",
+            justifyContent: "stretch",
+            alignItems: "center",
+            padding:"0 20px"
+          },
+          actionsColumnIndex: -1,
+          headerStyle: {
+            backgroundColor: "#1c7ed6",
+            color: "#FFF",
+            fontSize: "1rem",
             padding: "dense",
-            margin: 50,
-            pageSize: 20,
-            emptyRowsWhenPaging: false,
-            actionsColumnIndex: -1,
-            headerStyle: {
-              backgroundColor: "#1c7ed6",
-              color: "#FFF",
-              fontSize: "1rem",
-              padding: "dense",
-              height: 50,
-            },
-            rowStyle: {
-              fontSize: ".8rem",
-            },
-            maxBodyHeight: '35vh',
-          }}
-          localization={{
-            header: {
-              actions: "Action",
-            },
-          }}
-          actions={actions}
-        />
+            height: 50,
+          },
+          rowStyle: {
+            fontSize: ".8rem",
+          },
+          maxBodyHeight: "35vh",
+        }}
+        localization={{
+          header: {
+            actions: "Action",
+          },
+        }}
+        actions={actions}
+      />
 
       {openActivateModal && (
         <AddProjectActiveModal

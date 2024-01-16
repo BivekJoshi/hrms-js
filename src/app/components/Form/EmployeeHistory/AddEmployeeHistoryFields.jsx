@@ -113,21 +113,7 @@ const AddEmployeeHistoryFields = ({ onClose, isLoading }) => {
           />
         </Grid>
 
-        <Grid item xs={12} md={12} lg={12} xl={6} sm={12}>
-          {/* <TextField
-            id="remarks"
-            name="remarks"
-            label="Work Remarks"
-            fullWidth
-            value={formik.values.remarks}
-            onChange={formik.handleChange}
-            error={formik.touched.remarks && Boolean(formik.errors.remarks)}
-            helperText={formik.touched.remarks && formik.errors.remarks}
-            variant='outlined'
-            InputLabelProps={{ shrink: true }}
-            multiline
-            rows={3}
-          /> */}
+        <Grid item xs={12} md={12} lg={12} sm={12}>
           <RemarkField
             id="remarks"
             name="remarks"

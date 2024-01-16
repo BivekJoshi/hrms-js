@@ -6,8 +6,8 @@ import {
   MenuItem,
   TextField,
   Typography,
-} from '@mui/material';
-import useEmployeeResourceForm from '../../../../hooks/resource/employeeResource/EmployeeResourceForm/useEmployeeResourceForm';
+} from "@mui/material";
+import useEmployeeResourceForm from "../../../../hooks/resource/employeeResource/EmployeeResourceForm/useEmployeeResourceForm";
 
 const EditEmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
   const { formik } = useEmployeeResourceForm(data, onClose);
@@ -15,25 +15,32 @@ const EditEmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
   const handleFormSubmit = () => {
     formik.handleSubmit();
   };
-  const currentDate = new Date().toISOString().split('T')[0];
+  const currentDate = new Date().toISOString().split("T")[0];
 
   return (
     !isLoading && (
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
-          <Typography variant='h6'>
-            Employee :{' '}
+          <Typography variant="h6">
+            Employee :{" "}
             <b>
-              {data?.employee?.firstName} {data?.employee?.middleName}{' '}
+              {data?.employee?.firstName} {data?.employee?.middleName}{" "}
               {data?.employee?.lastName}
             </b>
           </Typography>
-          <Typography variant='h6'>
-            {' '}
+          <Typography variant="h6">
+            {" "}
             Provided Date : <b>{data?.receiveDate}</b>
           </Typography>
-          <Typography variant='h6'>
-            {' '}
+          <Typography
+            variant="h6"
+            style={{
+              overflowWrap: "break-word",
+              textTransform: "capitalize",
+              wordBreak:"break-all"
+            }}
+          >
+            {" "}
             Logistics : <b>{data?.officeResource?.name}</b>
           </Typography>
         </Grid>
@@ -52,9 +59,9 @@ const EditEmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
               formik.touched.returnDate && Boolean(formik.errors.returnDate)
             }
             helperText={formik.touched.returnDate && formik.errors.returnDate}
-            variant='outlined'
+            variant="outlined"
             InputLabelProps={{ shrink: true }}
-            size='small'
+            size="small"
             inputProps={{
               min: data?.receiveDate,
               max: currentDate,
@@ -65,7 +72,7 @@ const EditEmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
           <TextField
             id="conditionWhileReturned"
             name="conditionWhileReturned"
-            label="Device Condition when Returned"
+            label="Device condition when returned"
             fullWidth
             value={formik.values.conditionWhileReturned}
             onChange={formik.handleChange}
@@ -79,7 +86,9 @@ const EditEmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
             }
             variant="outlined"
             size="small"
-            InputLabelProps={{ shrink: Boolean(formik.values.conditionWhileReturned) }}
+            InputLabelProps={{
+              shrink: Boolean(formik.values.conditionWhileReturned),
+            }}
           />
         </Grid>
         {/* <Grid item xs={12} sm={12}>
@@ -99,23 +108,23 @@ const EditEmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
         </Grid> */}
         <Grid
           container
-          direction='row'
-          justifyContent='flex-end'
-          alignItems='flex-end'
+          direction="row"
+          justifyContent="flex-end"
+          alignItems="flex-end"
         >
           <Button
-            variant='contained'
+            variant="contained"
             onClick={handleFormSubmit}
             disabled={!formik?.dirty}
             sx={{ mt: 3, ml: 1 }}
           >
-            Submit
+            Update Logistics
           </Button>
           <Button
-            variant='contained'
+            variant="contained"
             onClick={onClose}
             sx={{ mt: 3, ml: 1 }}
-            color='error'
+            color="error"
           >
             Cancel
           </Button>

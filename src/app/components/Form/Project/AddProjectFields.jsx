@@ -125,10 +125,10 @@ const AddprojectFields = ({ onClose, isLoading }) => {
                 required
                 variant='outlined'
                 error={
-                  formik.touched.employeeId && Boolean(formik.errors.employeeId)
+                  formik.touched.projectLeadId && Boolean(formik.errors.projectLeadId)
                 }
                 helperText={
-                  formik.touched.employeeId && formik.errors.employeeId
+                  formik.touched.projectLeadId && formik.errors.projectLeadId
                 }
                 size='small'
                 InputLabelProps={{ shrink: true }}
@@ -146,6 +146,7 @@ const AddprojectFields = ({ onClose, isLoading }) => {
             placeholder='Enter Company Id'
             fullWidth
             required
+            onBlur={formik.handleBlur}
             value={formik.values.companyId}
             onChange={formik.handleChange}
             error={formik.touched.companyId && Boolean(formik.errors.companyId)}

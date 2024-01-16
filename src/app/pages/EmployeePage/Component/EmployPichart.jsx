@@ -49,12 +49,7 @@ export const EmployPichart = ({ data }) => {
     labels: labels,
     colors: COLORS,
     legend: {
-      // floating: true,
-      // position: "right", // You can change the position if needed
-      // containerMargin: {
-      //   right: 50, // Adjust the margin to move both donut chart and legend
-      // },
-      // offsetY: 40,
+      
       labels: {
         colors: labels.map(() => (mode === "dark" ? "white" : "black")),
       },
@@ -75,13 +70,22 @@ export const EmployPichart = ({ data }) => {
   };
 
   return (
+    <div className="apex-chart-container">
       <ReactApexChart
         options={options}
         series={series}
         type="donut"
         height={250}
       />
-
- 
+      <style>
+        {`
+        .apex-chart-container .apexcharts-legend {
+          width: 16rem;
+          overflow-wrap: break-word;
+          word-break: break-all;
+        }
+        `}
+      </style>
+    </div>
   );
 };

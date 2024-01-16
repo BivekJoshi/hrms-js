@@ -173,6 +173,17 @@ const AttendenceInfo = ({ data }) => {
         events={events}
         eventContent={renderEventContent}
       />
+      <style>
+        {`
+         .fc .fc-daygrid-day.fc-day-today {
+             background-color: #78bcff;
+         }
+         .fc *{
+          text-align: center;
+          justify-content: center;
+          }
+         `}
+      </style>
     </Box>
   );
 };
@@ -200,7 +211,9 @@ function renderEventContent(eventInfo) {
               <Typography>
                 Check In : {eventInfo?.event?._def?.extendedProps?.time}
               </Typography>
-              <Typography>Check Out : {eventInfo?.event?._def?.extendedProps?.time}</Typography>
+              <Typography>
+                Check Out : {eventInfo?.event?._def?.extendedProps?.time}
+              </Typography>
             </div>
           </div>
         )}

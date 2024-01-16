@@ -53,21 +53,27 @@ export const DetailProfile = ({ data, role, setShowPersonalProfile }) => {
       value: '3',
       component: <AttendenceInfo data={data} role={role} />,
     },
-    {
-      label: 'Branch',
-      value: '7',
-      component: <BranchInfo data={data} role={role} />,
-    },
+    // {
+    //   label: "Branch",
+    //   value: "7",
+    //   component: <BranchInfo data={data} role={role} />,
+    // },
+
+    // {
+    //   label: "Department",
+    //   value: "8",
+    //   component: <DepartmentInfo data={data} role={role} />,
+    // },
+    // {
+    //   label: "Position",
+    //   value: "4",
+    //   component: <PromotionHistory data={data} role={role} />,
+    // },
 
     {
-      label: 'Department',
-      value: '8',
-      component: <DepartmentInfo data={data} role={role} />,
-    },
-    {
-      label: 'Position',
-      value: '4',
-      component: <PromotionHistory data={data} role={role} />,
+      label: 'Employment Details',
+      value: '10',
+      component: <EmploymentDetails data={data} role={role} />,
     },
     {
       label: 'Training',
@@ -86,12 +92,6 @@ export const DetailProfile = ({ data, role, setShowPersonalProfile }) => {
       value: '5',
       component: <EmployeeHistory data={data} role={role} />,
     },
-
-    // {
-    //   label: 'Employment Details',
-    //   value: '10',
-    //   component: <EmploymentDetails data={data} role={role} />,
-    // },
 
     {
       label: 'Documents',
@@ -121,10 +121,10 @@ export const DetailProfile = ({ data, role, setShowPersonalProfile }) => {
         >
           {tabsData.map((tab) => (
             <Tab
-              key={tab.value}
-              label={tab.label}
-              value={tab.value}
-              onClick={() => handleClick(tab.value)}
+              key={tab?.value}
+              label={tab?.label}
+              value={tab?.value}
+              onClick={() => handleClick(tab?.value)}
               // style={{
               //   fontSize: "1rem",
               //   color: primaryColor,

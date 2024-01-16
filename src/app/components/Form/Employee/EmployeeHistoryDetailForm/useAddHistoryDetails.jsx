@@ -6,11 +6,12 @@ import {
 import * as Yup from "yup";
 
 const HistorySchema = Yup.object().shape({
-  pastPosition: Yup.string().required("Past position is Required"),
-  fromDate: Yup.string().required("From Date is Required"),
-  toDate: Yup.string().required("To Date is Required"),
-  employerName: Yup.string().required("Oraganization Name is Required"),
-  employerAddress: Yup.string().required("Branch Address is Required"),
+  pastPosition: Yup.string().required("Past position is required"),
+  fromDate: Yup.string().required("From date is required"),
+  toDate: Yup.string().required("To date is required"),
+  employerName: Yup.string().required("Oraganization name is required"),
+  employerAddress: Yup.string().required("Branch address is required"),
+  remarks: Yup.string().max(255, "Remarksc than 255 characters"),
 });
 
 const useAddHistoryDetails = () => {

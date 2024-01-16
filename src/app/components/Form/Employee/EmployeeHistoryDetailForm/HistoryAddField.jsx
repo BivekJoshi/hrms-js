@@ -16,20 +16,21 @@ import { Preview } from "@mui/icons-material";
 import CloseIcon from "@mui/icons-material/Close";
 import { useEditWorkExpirenceDoc } from "../../../../hooks/employee/useEmployeeHistory";
 import { DOC_URL } from "../../../../../auth/axiosInterceptor";
- 
+import RemarkField from "../../../RemarkField/RemarkField";
+
 const HistoryAddField = ({ formik }) => {
   const { mode } = useContext(ThemeModeContext);
- 
+
   const id = formik.values?.id;
- 
+
   const updateWorkExpericence = useEditWorkExpirenceDoc(id);
- 
+
   const currentDate = new Date().toISOString().split("T")[0];
- 
+
   const [previewImage, setPreviewImage] = useState(null);
   const [isPreviewOpen, setPreviewOpen] = useState(false);
   const [documentImg, setDocumnetImage] = useState(null);
- 
+
   const handleImageChange = (event) => {
     const value = event.target?.files[0];
     formik.setFieldValue("experienceLetter", value);
@@ -47,12 +48,12 @@ const HistoryAddField = ({ formik }) => {
       reader.readAsDataURL(value);
     }
   };
- 
+
   const openPreview = (imageUrl) => {
     setDocumnetImage(imageUrl);
     setPreviewOpen(true);
   };
- 
+
   const closePreview = () => {
     setPreviewOpen(false);
   };
@@ -64,11 +65,11 @@ const HistoryAddField = ({ formik }) => {
     bgcolor: "background.paper",
     border: "1px solid #808080",
     borderRadius: 2,
-    minWidth:"70vh",
+    minWidth: "70vh",
     boxShadow: 24,
     p: "12px 24px",
   };
- 
+
   return (
     <>
       <Grid container spacing={3}>
@@ -77,7 +78,6 @@ const HistoryAddField = ({ formik }) => {
             id={`employerName`}
             name={`employerName`}
             label="Organization Name"
-            placeholder="Enter organization Name"
             fullWidth
             value={formik.values.employerName}
             onChange={formik.handleChange}
@@ -87,6 +87,7 @@ const HistoryAddField = ({ formik }) => {
             helperText={
               formik.touched.employerName && formik.errors.employerName
             }
+            InputLabelProps={{ shrink: Boolean(formik.values.employerName) }}
             variant="outlined"
             size="small"
           />
@@ -96,7 +97,6 @@ const HistoryAddField = ({ formik }) => {
             id={`employerAddress`}
             name={`employerAddress`}
             label="Organization Address"
-            placeholder="Enter organization address"
             fullWidth
             // required
             value={formik.values.employerAddress}
@@ -108,6 +108,7 @@ const HistoryAddField = ({ formik }) => {
             helperText={
               formik.touched.employerAddress && formik.errors.employerAddress
             }
+            InputLabelProps={{ shrink: Boolean(formik.values.employerAddress) }}
             variant="outlined"
             size="small"
           />
@@ -117,7 +118,6 @@ const HistoryAddField = ({ formik }) => {
             id={`pastPosition`}
             name={`pastPosition`}
             label="Past Position"
-            placeholder="Enter past position"
             fullWidth
             // required
             value={formik.values.pastPosition}
@@ -128,6 +128,7 @@ const HistoryAddField = ({ formik }) => {
             helperText={
               formik.touched.pastPosition && formik.errors.pastPosition
             }
+            InputLabelProps={{ shrink: Boolean(formik.values.pastPosition) }}
             variant="outlined"
             size="small"
           />
@@ -137,7 +138,6 @@ const HistoryAddField = ({ formik }) => {
             id={`fromDate`}
             name={`fromDate`}
             label="From Date"
-            placeholder="Enter from date"
             fullWidth
             type="date"
             inputProps={{
@@ -157,11 +157,11 @@ const HistoryAddField = ({ formik }) => {
             id={`toDate`}
             name={`toDate`}
             label="To Date"
-            placeholder="Enter to date"
             fullWidth
             type="date"
             inputProps={{
               max: currentDate,
+              min: formik.values.fromDate,
             }}
             value={formik.values.toDate}
             onChange={formik.handleChange}
@@ -173,11 +173,10 @@ const HistoryAddField = ({ formik }) => {
           />
         </Grid>
         <Grid item xs={12}>
-          <TextField
+          {/* <TextField
             id={`remarks`}
             name={`remarks`}
             label="Remarks"
-            placeholder="Enter remarks"
             fullWidth
             // required
             multiline
@@ -188,10 +187,25 @@ const HistoryAddField = ({ formik }) => {
             helperText={formik.touched.remarks && formik.errors.remarks}
             variant="outlined"
             size="small"
+          /> */}
+          <RemarkField
+            id="remarks"
+            name="remarks"
+            label="Remarks"
+            fullWidth
+            formik={formik}
+            maxLength={255}
+            variant="outlined"
+            multiline
+            InputLabelProps={{
+              shrink: Boolean(formik.values.remarks),
+            }}
+            rows={4}
+            inputProps={{ maxLength: 255 }}
           />
         </Grid>
         <Grid item xs={12}>
-          <FormLabel component="legend">Upload Experience Documnet</FormLabel>
+          <FormLabel component="legend">Upload Experience Document</FormLabel>
           <div style={{ display: "flex" }}>
             <Input
               type="file"
@@ -237,7 +251,7 @@ const HistoryAddField = ({ formik }) => {
                 justifyContent: "end",
                 width: "100%",
                 height: "2rem",
-                margin:"3px 2px"
+                margin: "3px 2px",
               }}
             >
               <IconButton sx={{ cursor: "pointer" }} onClick={closePreview}>
@@ -262,5 +276,5 @@ const HistoryAddField = ({ formik }) => {
     </>
   );
 };
- 
+
 export default HistoryAddField;

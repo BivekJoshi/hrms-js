@@ -2,35 +2,26 @@ import React, { useState } from 'react';
 import {
   useEditActiveInactiveOfficeResource,
   useGetAvailableOfficeResource,
-  useGetUsedOfficeResource,
-} from '../../../hooks/resource/officeResource/useOfficeResource';
-import { Box, Button, Typography } from '@mui/material';
+} from "../../../hooks/resource/officeResource/useOfficeResource";
+import { Box, Button, Typography } from "@mui/material";
 import {
   AddOfficeResourceModal,
   DeactivatedOfficeResourceModal,
   EditOfficeResourceModal,
-} from './OfficeResourceModal';
-import { ButtonComponent } from '../../../components/Button/ButtonComponent';
-import DeactivatedOfficeResource from './DeactivatedOfficeResource';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import { AvailableOfficeLogistic } from './AvailableOfficeLogistic';
-import { OpenCLoseModel } from './OpenCLoseModel';
-import { useGetEmployee } from '../../../hooks/employee/useEmployee';
-import CustomTable from '../../../components/CustomTable/CustomTable';
-import DeleteIcon from '@mui/icons-material/Delete';
-import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
-import HocButton from '../../../hoc/hocButton';
-import PermissionHoc from '../../../hoc/permissionHoc';
-import DeleteConfirmationModal from '../../../components/Modal/DeleteConfirmationModal';
+} from "./OfficeResourceModal";
+import CustomTable from "../../../components/CustomTable/CustomTable";
+import DeleteIcon from "@mui/icons-material/Delete";
+import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
+import PermissionHoc from "../../../hoc/permissionHoc";
+import ThemeModeContext from "../../../../theme/ThemeModeContext";
+import FormModal from '../../../components/Modal/FormModal';
 
 const OfficeResource = ({ permissions }) => {
-  const { data: officeResourceData, isLoading } = useGetUsedOfficeResource();
-  const { data: availableOfficeResource } = useGetAvailableOfficeResource();
-  const { data: employeeData, isLoading: loadingemployee } = useGetEmployee();
+  const { data: availableOfficeResource, isLoading } =
+    useGetAvailableOfficeResource();
   const [openModal, setOpenModal] = useState(false);
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
-  const [openNotUseModal, setOpenNotUseModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [editedRowData, setEditedRowData] = useState({});
   const [deletedResource, setDeletedResource] = useState({});
@@ -59,17 +50,7 @@ const OfficeResource = ({ permissions }) => {
 
   const handleOpenModal = () => setOpenModal(true);
   const handleCloseModal = () => setOpenModal(false);
-  const handleOpenAvailableModal = () => setOpenNotUseModal(true);
-  const handleCloseAvailableModal = () => setOpenNotUseModal(false);
 
-  const getEmployeeName = (rowData) => {
-    const employeeId = rowData?.employeeId;
-    const employee = employeeData?.find((emp) => emp?.id === employeeId);
-    const name = `${employee?.firstName} ${employee?.middleName || ''} ${
-      employee?.lastName
-    }`;
-    return name;
-  };
   const columns = [
     {
       title: 'SN',
@@ -109,15 +90,16 @@ const OfficeResource = ({ permissions }) => {
       sorting: false,
     },
   ];
+  const { mode } = React.useContext(ThemeModeContext);
 
   const actions = [
     {
       icon: () => (
         <ModeEditOutlineIcon
           sx={{
-            color: 'black',
-            '&:hover': {
-              color: 'green',
+            color: mode === "light" ? "black" : "white",
+            "&:hover": {
+              color: "green",
             },
           }}
         />
@@ -130,15 +112,15 @@ const OfficeResource = ({ permissions }) => {
       icon: () => (
         <DeleteIcon
           sx={{
-            color: 'black',
-            '&:hover': {
-              color: 'red',
+            color: mode === "light" ? "black" : "white",
+            "&:hover": {
+              color: "red",
             },
           }}
         />
       ),
       disabled: !permissions?.canDelete,
-      tooltip: 'Remove Logistics',
+      tooltip: 'Inactivate Logistics',
       onClick: (event, rowData) => handleDeleteRowData(rowData),
     },
   ];
@@ -173,8 +155,11 @@ const OfficeResource = ({ permissions }) => {
         data={availableOfficeResource}
         title='Available Logistics'
         isLoading={isLoading}
-        exportButton={true}
         actions={actions}
+        fileName="Available Logistics List"
+        exportButton
+        exportExcel
+        pdfNone
       />
       {openAddModal && (
         <AddOfficeResourceModal
@@ -201,11 +186,41 @@ const OfficeResource = ({ permissions }) => {
       )}
 
       {openDeleteModal && (
-        <DeleteConfirmationModal
+        <FormModal
+          title={'Deactivate Logistics'}
           open={openDeleteModal}
-          handleCloseModal={handleCloseDeleteModal}
-          handleConfirmDelete={handleConfirmDelete}
-          message={'Resource'}
+          onClose={handleCloseDeleteModal}
+          formComponent={
+            <div>
+              <Typography>
+                Are u sure you want to inactivate the logistics?
+              </Typography>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  gap: "1rem",
+                  justifyContent: "flex-end",
+                  margin: ".5rem",
+                }}
+              >
+                <Button
+                  variant='contained'
+                  color='success'
+                  onClick={handleConfirmDelete}
+                >
+                  Yes Proceed
+                </Button>
+                <Button
+                  onClick={handleCloseDeleteModal}
+                  variant='contained'
+                  color='error'
+                >
+                  Close
+                </Button>
+              </div>
+            </div>
+          }
         />
       )}
     </>

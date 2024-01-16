@@ -66,7 +66,12 @@ const DeactivatedOfficeResource = ({ closeModal, title }) => {
       render: (rowData) => (
         <Tooltip title='Activate Logistic'>
           <IconButton onClick={() => handleActivate(rowData)}>
-            <AddTaskIcon />
+            <AddTaskIcon  sx={{
+            color: "black",
+            "&:hover": {
+              color: "green",
+            },
+          }} />
           </IconButton>
         </Tooltip>
       ),
@@ -94,10 +99,13 @@ const DeactivatedOfficeResource = ({ closeModal, title }) => {
         data={data}
         title={title}
         isLoading={isLoading}
-        exportButton={true}
         emptyRowsWhenPaging={true}
         // sorting={true}
         height={'320px'}
+        fileName="Inactive office resource"
+        exportButton
+        exportExcel
+        pdfNone
       />
 
       {openModal && (

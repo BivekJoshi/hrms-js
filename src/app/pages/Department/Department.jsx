@@ -1,27 +1,28 @@
-import * as React from 'react';
-import { useState } from 'react';
-import { Box } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
-import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
+import * as React from "react";
+import { useState } from "react";
+import { Box } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import {
   useDeleteDepartment,
   useGetDepartment,
-} from '../../hooks/department/useDepartment';
+} from "../../hooks/department/useDepartment";
 import {
   AddDepartmentModal,
   EditDepartmentModal,
-} from './DepartmentModal/DepartmentModal';
-import DeleteConfirmationModal from '../../components/Modal/DeleteConfirmationModal';
-import PermissionHoc from '../../hoc/permissionHoc';
-import HocButton from '../../hoc/hocButton';
-import useAuth from '../../../auth/hooks/component/login/useAuth';
-import CustomTable from '../../components/CustomTable/CustomTable';
-import { useEffect } from 'react';
-import { Formik } from 'formik';
+} from "./DepartmentModal/DepartmentModal";
+import DeleteConfirmationModal from "../../components/Modal/DeleteConfirmationModal";
+import PermissionHoc from "../../hoc/permissionHoc";
+import HocButton from "../../hoc/hocButton";
+import useAuth from "../../../auth/hooks/component/login/useAuth";
+import CustomTable from "../../components/CustomTable/CustomTable";
+import { useEffect } from "react";
+import ThemeModeContext from "../../../theme/ThemeModeContext";
 
 const Department = ({ permissions }) => {
   const { isEmployee } = useAuth();
   const { data: departmentData, isLoading } = useGetDepartment();
+  const { mode } = React.useContext(ThemeModeContext);
 
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
@@ -61,30 +62,43 @@ const Department = ({ permissions }) => {
 
   const columns = [
     {
-      title: 'SN',
+      title: "SN",
       render: (rowData) => rowData.tableData.id + 1,
-      width: '3%',
+      width: "3%",
       sortable: false,
       sorting: false,
     },
     {
-      title: 'Department Name',
-      field: 'departmentName',
-      emptyValue: '-',
-      width: '20vh',
+      title: "Department Name",
+      field: "departmentName",
+      emptyValue: "-",
+      width: "20vh",
       sorting: false,
     },
     {
-      title: 'Department Type',
-      field: 'departmentType',
-      emptyValue: '-',
-      width: '20vh',
+      title: "Department Type",
+      field: "departmentType",
+      emptyValue: "-",
+      width: "20vh",
       sorting: false,
     },
     {
-      title: 'Description',
-      field: 'departmentDescription',
-      emptyValue: '-',
+      title: "Description",
+      field: "departmentDescription",
+      render: (rowData) => {
+        return (
+          <div
+            style={{
+              whiteSpace: "wrap",
+              width: "25rem",
+              overflowWrap: "break-word",
+            }}
+          >
+            {rowData?.departmentDescription}
+          </div>
+        );
+      },
+      emptyValue: "-",
       sorting: false,
     },
   ].filter(Boolean);
@@ -94,14 +108,14 @@ const Department = ({ permissions }) => {
       icon: () => (
         <ModeEditOutlineIcon
           sx={{
-            color: 'black',
-            '&:hover': {
-              color: 'green',
+            color: mode === "light" ? "black" : "white",
+            "&:hover": {
+              color: "green",
             },
           }}
         />
       ),
-      tooltip: 'Edit Department',
+      tooltip: "Edit Department",
       disabled: !permissions?.canEdit,
 
       onClick: (event, rowData) => handleEditDepartment(rowData),
@@ -110,16 +124,16 @@ const Department = ({ permissions }) => {
       icon: () => (
         <DeleteIcon
           sx={{
-            color: 'black',
-            '&:hover': {
-              color: 'red',
+            color: mode === "light" ? "black" : "white",
+            "&:hover": {
+              color: "red",
             },
           }}
         />
       ),
       disabled: !permissions?.canDelete,
 
-      tooltip: 'Delete Department',
+      tooltip: "Delete Department",
       onClick: (event, rowData) => handleDeleteDepartment(rowData),
     },
   ];
@@ -132,12 +146,12 @@ const Department = ({ permissions }) => {
 
   return (
     <>
-      <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
         <HocButton
           permissions={permissions?.canAdd}
-          variant={'contained'}
+          variant={"contained"}
           onClick={handleAddOpenModal}
-          buttonName={'Add Department'}
+          buttonName={"Add Department"}
         />
       </Box>
 
@@ -146,15 +160,18 @@ const Department = ({ permissions }) => {
       <CustomTable
         columns={columns}
         data={departmentData}
-        title='Department List'
+        title="Department List"
         isLoading={isLoading}
-        exportButton={true}
         actions={actions}
+        fileName="Department List"
+        exportButton
+        exportExcel
+        pdfNone
       />
 
       {openEditModal && (
         <EditDepartmentModal
-          title={'Edit Department'}
+          title={"Edit Department"}
           // id={editedDepartment?.id}
           data={editedDepartment}
           open={openEditModal}
@@ -163,7 +180,7 @@ const Department = ({ permissions }) => {
       )}
       {openAddModal && (
         <AddDepartmentModal
-          title={'Add Department'}
+          title={"Add Department"}
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
         />
@@ -173,7 +190,7 @@ const Department = ({ permissions }) => {
           open={openDeleteModal}
           handleCloseModal={handleCloseDeleteModal}
           handleConfirmDelete={handleConfirmDelete}
-          message={'Department'}
+          message={"Department"}
         />
       )}
     </>

@@ -19,7 +19,6 @@ import ThemeModeContext from '../../../theme/ThemeModeContext';
 
 const Designation = ({ permissions }) => {
   const { data: designationData, isLoading } = useGetDesignation();
-  const { palette } = React.useContext(ThemeModeContext);
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
@@ -55,6 +54,7 @@ const Designation = ({ permissions }) => {
     setEditedDesignation(rowData);
     setOpenEditModal(true);
   };
+  const { mode } = React.useContext(ThemeModeContext);
 
   const columns = [
     {
@@ -88,17 +88,31 @@ const Designation = ({ permissions }) => {
     {
       title: 'Details',
       field: 'positionDetails',
+      // width: '14%',
       emptyValue: '-',
+      render: (rowData) => {
+        return (
+          <div
+            style={{
+              whiteSpace: 'wrap',
+              width: '25rem',
+              overflowWrap: 'break-word',
+            }}
+          >
+            {rowData?.positionDetails}
+          </div>
+        );
+      },
       sorting: false,
     },
-  ].filter(Boolean);
+  ];
 
   const actions = [
     {
       icon: () => (
         <ModeEditOutlineIcon
           sx={{
-            color: 'black',
+            color: mode === 'light' ? 'black' : 'white',
             '&:hover': {
               color: 'green',
             },
@@ -113,7 +127,7 @@ const Designation = ({ permissions }) => {
       icon: () => (
         <DeleteIcon
           sx={{
-            color: 'black',
+            color: mode === 'light' ? 'black' : 'white',
             '&:hover': {
               color: 'red',
             },
@@ -128,6 +142,13 @@ const Designation = ({ permissions }) => {
   ];
   if (isLoading) return <>Loading</>;
 
+  // const actionsCellStyle = {
+  //   width: '64px',
+  //   padding: ' 7px 39px',
+  //   display: 'flex',
+  //   justifyContent: 'stretch',
+  //   alignItems: 'center',
+  // };
   return (
     <>
       <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
@@ -146,6 +167,7 @@ const Designation = ({ permissions }) => {
         title='Designation List'
         isLoading={isLoading}
         actions={actions}
+        // actionsCellStyle={actionsCellStyle}
       />
 
       {openEditModal && (

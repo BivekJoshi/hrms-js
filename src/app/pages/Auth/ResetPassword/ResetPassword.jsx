@@ -132,7 +132,7 @@ const ResetPassword = ({ isLoading }) => {
               id="oldPassword"
               name="oldPassword"
               label="Old Password"
-              placeholder="Enter your old password..."
+              placeholder="Enter your old password"
               fullWidth
               required
               value={formik.values.oldPassword}
@@ -175,7 +175,7 @@ const ResetPassword = ({ isLoading }) => {
               id="password"
               name="password"
               label="New Password"
-              placeholder="Enter your new password..."
+              placeholder="Enter your new password"
               fullWidth
               required
               value={formik.values.password}
@@ -215,7 +215,7 @@ const ResetPassword = ({ isLoading }) => {
               id="confirmPassword"
               name="confirmPassword"
               label="Confirm New Password"
-              placeholder="Confirm your new password..."
+              placeholder="Confirm your new password"
               fullWidth
               required
               value={confirmPassword}

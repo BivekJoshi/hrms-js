@@ -198,36 +198,9 @@ const Employee = () => {
           </Box>
           <TabPanel value='1'>
             <NewFilter inputField={filterMenu} disableSubmit={true} />
-
-            {/* <Grid
-              container
-              sx={{
-                display: 'flex',
-                padding: '16px',
-                borderRadius: '6px',
-                marginBottom: '16px',
-                backgroundColor: palette?.background?.default,
-              }}
-            >
-              <Typography variant='h7' mb={1} fontWeight={500}>
-                Filter By:
-              </Typography>
-              <Grid container spacing={4}>
-                <Grid item xs={5}>
-                  <TextField
-                    label='Filter by name, phone number, and position'
-                    value={search}
-                    onChange={handleDebounce}
-                    fullWidth
-                    size='small'
-                  />
-                </Grid>
-              </Grid>
-            </Grid> */}
             <EmployeeGridView employeeData={employeeData} />
           </TabPanel>
           <TabPanel value='2'>
-            {/* <EmployeeTable /> */}
             <EmployeeTableView
               employeeData={employeeData}
               isLoading={isLoading}
@@ -310,7 +283,7 @@ const Employee = () => {
           onChange={handlePageChange}
           showFirstButton
           showLastButton
-          boundaryCount={3}
+          boundaryCount={2}
           // size='small'
           color='primary'
         />

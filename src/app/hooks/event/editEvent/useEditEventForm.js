@@ -1,17 +1,17 @@
-import { useFormik } from "formik";
-import { useEditEvent } from "../useEvent";
-import { EventSchema } from "../Validation/EventSchema";
+import { useFormik } from 'formik';
+import { useEditEvent } from '../useEvent';
+import { EventSchema } from '../Validation/EventSchema';
 
-const useEditEventForm = (data) => {
+const useEditEventForm = (data, onClose) => {
   const { mutate } = useEditEvent({});
 
   const formik = useFormik({
     initialValues: {
-      eventName: data?.eventName || "",
-      eventDate: data?.eventDate || "",
-      eventTime: data?.eventTime || "",
-      eventDescription: data?.eventDescription || "",
-      eventLocation: data?.eventLocation || "",
+      eventName: data?.eventName || '',
+      eventDate: data?.eventDate || '',
+      eventTime: data?.eventTime || '',
+      eventDescription: data?.eventDescription || '',
+      eventLocation: data?.eventLocation || '',
       id: data?.id,
     },
     validationSchema: EventSchema,
@@ -20,12 +20,16 @@ const useEditEventForm = (data) => {
       handleRequest(values);
     },
   });
-
   const handleRequest = (values) => {
     values = {
       ...values,
     };
-    mutate(values, formik, { onSuccess: () => formik.handleReset() });
+    mutate(values, {
+      onSuccess: () => {
+        onClose();
+        formik.handleReset();
+      },
+    });
   };
 
   return { formik };

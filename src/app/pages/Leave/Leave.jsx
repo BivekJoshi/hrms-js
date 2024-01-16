@@ -267,9 +267,9 @@ const Leave = ({ permissions }) => {
       icon: () => (
         <ModeEditOutlineIcon
           sx={{
-            color: 'black',
-            '&:hover': {
-              color: 'green',
+            color: mode === "light" ? "black" : "white",
+            "&:hover": {
+              color: "green",
             },
           }}
         />
@@ -281,9 +281,9 @@ const Leave = ({ permissions }) => {
       icon: () => (
         <DeleteIcon
           sx={{
-            color: 'black',
-            '&:hover': {
-              color: 'red',
+            color: mode === "light" ? "black" : "white",
+            "&:hover": {
+              color: "red",
             },
           }}
         />
@@ -320,7 +320,7 @@ const Leave = ({ permissions }) => {
           <CustomTable
             columns={columns}
             data={pendingLeaves}
-            title='Pending Leave Data '
+            title='Pending Leave Data'
             actions={actions}
             isLoading={loading}
           />

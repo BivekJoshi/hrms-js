@@ -1,28 +1,28 @@
-import { Accordion, AccordionDetails, Chip, Divider } from "@mui/material";
-import { AccordionSummary, Button } from "@mui/material";
-import { Grid, Typography, Box } from "@mui/material";
-import React, { useEffect, useRef, useState } from "react";
+import { Accordion, AccordionDetails, Chip, Divider } from '@mui/material';
+import { AccordionSummary, Button } from '@mui/material';
+import { Grid, Typography, Box } from '@mui/material';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   useAddDocument,
   useDeleteDocument,
   useGetDocumentByDocumentType,
   useGetDocumentById,
-} from "../../../../hooks/employee/useDocument";
-import { useParams } from "react-router-dom";
-import { DOC_URL } from "../../../../../auth/axiosInterceptor";
-import { documentType } from "./documentType";
-import { EditDocumentModal } from "./EditDocumentModal";
-import deleteIcon from "../../../../../assets/approve.png";
-import updateIcon from "../../../../../assets/update.png";
+} from '../../../../hooks/employee/useDocument';
+import { useParams } from 'react-router-dom';
+import { DOC_URL } from '../../../../../auth/axiosInterceptor';
+import { documentType } from './documentType';
+import { EditDocumentModal } from './EditDocumentModal';
+import deleteIcon from '../../../../../assets/approve.png';
+import updateIcon from '../../../../../assets/update.png';
 
 const EmployeeDocumentDetailForm = () => {
   const { id } = useParams();
   const fileInputRef = useRef(null);
   const [openEditModal, setOpenEditModal] = useState(false);
-  const [expandedAccordion, setExpandedAccordion] = useState("");
+  const [expandedAccordion, setExpandedAccordion] = useState('');
 
   const [selectedDocument, setSelectedDocument] = useState();
-  const [document, setDocument] = useState("");
+  const [document, setDocument] = useState('');
   const [imagePreviewMap, setImagePreviewMap] = useState({});
   const [editedDocument, setEditedDocument] = useState({});
 
@@ -81,8 +81,8 @@ const EmployeeDocumentDetailForm = () => {
     const { id } = document;
     deleteDocument(id);
 
-    setSelectedDocument("");
-    setDocument("");
+    setSelectedDocument('');
+    setDocument('');
     setImagePreviewMap((prevMap) => ({
       ...prevMap,
       [expandedAccordion]: undefined,
@@ -220,13 +220,13 @@ const EmployeeDocumentDetailForm = () => {
                   >
                     <div
                       style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        width: "100%",
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        width: '100%',
                       }}
                     >
-                      <Typography variant="h7" sx={{ fontWeight: 500 }}>
+                      <Typography variant='h7' sx={{ fontWeight: 500 }}>
                         {document?.label}
                       </Typography>
                       {getDocument?.map((data, index) => {
@@ -234,9 +234,9 @@ const EmployeeDocumentDetailForm = () => {
                           return (
                             <Chip
                               key={index}
-                              label="Uploaded"
-                              variant="outlined"
-                              color="success"
+                              label='Uploaded'
+                              variant='outlined'
+                              color='success'
                             />
                           );
                         }
@@ -246,14 +246,15 @@ const EmployeeDocumentDetailForm = () => {
                   <AccordionDetails>
                     <Box
                       sx={{
-                        display: "flex",
-                        gap: ".5rem",
-                        flexDirection: "column",
+                        display: 'flex',
+                        gap: '.5rem',
+                        flexDirection: 'column',
                       }}
                     >
-                      <label htmlFor="file">
+                      <label htmlFor='file'>
                         <input
                           type='file'
+                          accept={document?.accept}
                           ref={fileInputRef}
                           onChange={(e) => handleChangeImage(e)}
                           style={{ display: 'none' }}
@@ -262,10 +263,10 @@ const EmployeeDocumentDetailForm = () => {
                         />
                         <Box
                           sx={{
-                            cursor: "pointer",
-                            display: "flex",
-                            border: "1px solid #B9BEC7",
-                            borderRadius: ".3rem",
+                            cursor: 'pointer',
+                            display: 'flex',
+                            border: '1px solid #B9BEC7',
+                            borderRadius: '.3rem',
                           }}
                           component='span'
                         >
@@ -299,15 +300,15 @@ const EmployeeDocumentDetailForm = () => {
                       </label>
                       <div
                         style={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                          width: "100%",
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          width: '100%',
                         }}
                       >
-                        <Typography sx={{ fontSize: "12px" }}>
+                        <Typography sx={{ fontSize: '12px' }}>
                           {document?.desc}
                         </Typography>
-                        <Typography sx={{ fontSize: "12px" }}>
+                        <Typography sx={{ fontSize: '12px' }}>
                           {document?.fileSize}
                         </Typography>
                       </div>

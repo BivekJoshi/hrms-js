@@ -51,6 +51,7 @@ const NewFilter = ({ inputField, disableSubmit, searchCallBack, validate }) => {
                 name={element?.name}
                 placeholder={element?.placeholder}
                 required={element?.required}
+                size="small"
               />
             )}
             onChange={(e, value) => setFieldValue(element.name, value?.id)}
@@ -73,6 +74,7 @@ const NewFilter = ({ inputField, disableSubmit, searchCallBack, validate }) => {
                 label={element?.label}
                 name={element?.name}
                 placeholder={element?.placeholder}
+                size="small"
               />
             )}
             onChange={(e, value) => setFieldValue(element.name, value?.label)}

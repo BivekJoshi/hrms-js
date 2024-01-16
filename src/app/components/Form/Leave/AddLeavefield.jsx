@@ -67,7 +67,7 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
                   formik.touched.employeeId && formik.errors.employeeId
                 }
                 variant='outlined'
-                size="small"
+                size='small'
               />
             )}
             renderOption={(props, option) =>
@@ -99,7 +99,7 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
                   formik.touched.leaveTypeId && formik.errors.leaveTypeId
                 }
                 variant='outlined'
-                size="small"
+                size='small'
               />
             )}
           />
@@ -141,7 +141,7 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
               formik.touched.leavePeriod && Boolean(formik.errors.leavePeriod)
             }
             helperText={formik.touched.leavePeriod && formik.errors.leavePeriod}
-            size="small"
+            size='small'
           >
             {leaveOptions?.map((option) => (
               <MenuItem key={option?.id} value={option?.id}>
@@ -171,7 +171,7 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
             }
             helperText={formik.touched.leaveReason && formik.errors.leaveReason}
             variant='outlined'
-            size="small"
+            size='small'
             InputLabelProps={{ shrink: Boolean(formik.values.leaveReason) }}
           />
         </Grid>
@@ -218,7 +218,10 @@ const DateInput = ({ formik, isHalfDay, isMultipleDays }) => {
       formik.setFieldValue('halfLeaveType', halfType);
     }
   };
-  const currentDate = new Date().toISOString().split('T')[0];
+  // const currentDate = new Date().toISOString().split('T')[0];
+  const currentDate = new Date();
+  currentDate.setDate(currentDate.getDate() + 1);
+  const newDate = currentDate.toISOString().split('T')[0];
   return (
     <>
       <div style={{ display: 'flex', gap: '0.5rem' }}>
@@ -228,7 +231,7 @@ const DateInput = ({ formik, isHalfDay, isMultipleDays }) => {
             label={isMultipleDays ? 'Date From' : 'Select Date'}
             type='date'
             inputProps={{
-              min: currentDate, // Disable past date selections
+              min: newDate,
             }}
             required
             InputLabelProps={{ shrink: true }}
@@ -237,7 +240,7 @@ const DateInput = ({ formik, isHalfDay, isMultipleDays }) => {
             onChange={handleFromDateChange}
             error={formik.touched.fromDate && Boolean(formik.errors.fromDate)}
             helperText={formik.touched.fromDate && formik.errors.fromDate}
-            size="small"
+            size='small'
           />
         </Grid>
         {isMultipleDays && (
@@ -247,7 +250,7 @@ const DateInput = ({ formik, isHalfDay, isMultipleDays }) => {
               label={'Date To'}
               type='date'
               inputProps={{
-                min: formik.values.fromDate || currentDate,
+                min: formik.values.fromDate || newDate,
               }}
               required
               InputLabelProps={{ shrink: true }}
@@ -256,7 +259,7 @@ const DateInput = ({ formik, isHalfDay, isMultipleDays }) => {
               onChange={formik.handleChange}
               error={formik.touched.toDate && Boolean(formik.errors.toDate)}
               helperText={formik.touched.toDate && formik.errors.toDate}
-              size="small"
+              size='small'
               disabled={!formik?.values?.fromDate}
             />
           </Grid>

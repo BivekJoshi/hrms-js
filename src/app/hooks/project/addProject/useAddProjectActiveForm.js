@@ -23,7 +23,7 @@ export const useRemoveActiveProject = (data) => {
         mutate(values, formik);
     };
 
-    return { formik };
+  return { formik };
 };
 
 export const useAddActiveProject = (data, onClose) => {
@@ -38,16 +38,16 @@ export const useAddActiveProject = (data, onClose) => {
         },
     });
 
-    const handleRequest = (values) => {
-        values = {
-            ...values,
-        };
-        mutate(values, {
-            onSuccess: () => {
-                onClose();
-            }
-        });
+  const handleRequest = (values) => {
+    values = {
+      ...values,
     };
+    mutate(values, {
+      onSuccess: () => {
+        onClose();
+      },
+    });
+  };
 
-    return { formik };
+  return { formik };
 };

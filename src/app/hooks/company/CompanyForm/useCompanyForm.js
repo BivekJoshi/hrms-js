@@ -1,6 +1,7 @@
-import { useFormik } from "formik";
-import { useAddCompany, useEditCompany } from "../useCompany";
-import { CompanySchema } from "../Validation/CompanySchema";
+import { useFormik } from 'formik';
+import { useAddCompany, useEditCompany } from '../useCompany';
+import { CompanySchema } from '../Validation/CompanySchema';
+import { isEqual } from 'lodash';
 
 const useCompanyForm = (data, onClose) => {
   const { mutate: addCompany } = useAddCompany({});
@@ -8,11 +9,11 @@ const useCompanyForm = (data, onClose) => {
 
   const formik = useFormik({
     initialValues: {
-      branchName: data?.branchName || "",
-      branchEmail: data?.branchEmail || "",
-      branchContact: data?.branchContact || "",
-      branchAddress: data?.branchAddress || "",
-      branchDescription: data?.branchDescription || "",
+      branchName: data?.branchName || '',
+      branchEmail: data?.branchEmail || '',
+      branchContact: data?.branchContact || '',
+      branchAddress: data?.branchAddress || '',
+      branchDescription: data?.branchDescription || '',
       id: data?.id,
     },
     validationSchema: CompanySchema,
@@ -36,14 +37,26 @@ const useCompanyForm = (data, onClose) => {
     });
   };
 
+  // const handledEditRequest = (values) => {
+  //   values = { ...values };
+  //   editCompany(values, {
+  //     onSuccess: () => {
+  //       onClose();
+  //     },
+  //   });
+  // };
+
   const handledEditRequest = (values) => {
     values = { ...values };
-    editCompany(values, {
-      onSuccess: () => {
-        onClose();
-      },
-    });
+    if (!isEqual(values, formik.initialValues)) {
+      editCompany(values, {
+        onSuccess: () => {
+          onClose();
+        },
+      });
+    }
   };
+
   return { formik };
 };
 

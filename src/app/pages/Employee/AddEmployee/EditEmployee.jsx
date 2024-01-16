@@ -45,7 +45,7 @@ const EditEmployee = () => {
       >
         {steps?.map((label) => (
           <Step key={label} onClick={() => handleStepClick(label)}>
-            <StepLabel>{label}</StepLabel>
+            <StepLabel style={{ color: 'white' }}>{label}</StepLabel>
           </Step>
         ))}
       </Stepper>
@@ -74,16 +74,6 @@ const EditEmployee = () => {
               )}
             </div>
             <div>
-              {/* {(activeStep !== 0 || activeStep !== 6) && (
-                <Button
-                  sx={{ mt: 3, ml: 1, textTransform: 'capitalize' }}
-                  variant='outlined'
-                  onClick={handleSkip}
-                >
-                  Skip
-                </Button>
-              )} */}
-
               {activeStep < 7 && (
                 <>
                   <Button
@@ -106,6 +96,13 @@ const EditEmployee = () => {
           </Box>
         </>
       )}
+      <style>{`
+      .css-opt7yd-MuiStepIcon-text {
+        fill: rgb(255 255 255 / 87%);
+        font-size: 0.95rem;
+        font-family: "Roboto","Helvetica","Arial",sans-serif;
+    }
+      `}</style>
     </Grid>
   );
 };
