@@ -35,16 +35,17 @@ const EditEmploymentTransfer = ({ data, isLoading }) => {
     { id: 'effectiveDateFrom', label: 'From Date', minWidth: 170 },
     { id: 'effectiveDateTo', label: 'To Date', minWidth: 170 },
     { id: 'remarks', label: 'Remarks', minWidth: 170 },
-    { id: 'isActive', label: 'Active', minWidth: 170 },
-    {
-      id: 'actions',
-      label: 'Actions',
-      minWidth: 50,
-      align: 'center',
-      render: () => {
-        return <div>TEst</div>;
-      },
-    },
+    // { id: 'isActive', label: 'Active', minWidth: 170 },
+    // {
+    //   id: 'actions',
+    //   label: 'Actions',
+    //   showDelete:false,
+    //   minWidth: 50,
+    //   align: 'center',
+    //   render: () => {
+    //     return <div>TEst</div>;
+    //   },
+    // },
   ];
   return (
     <CustomeEmployeeDetails

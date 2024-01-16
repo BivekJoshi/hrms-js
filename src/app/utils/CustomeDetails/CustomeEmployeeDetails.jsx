@@ -180,17 +180,20 @@ const CustomeEmployeeDetails = ({
                                     }}
                                     onClick={() => handleEdit(row)}
                                   />
+                                  {column?.showDelete!==false?
                                   <DeleteIcon
-                                    sx={{
-                                      color:
-                                        mode !== 'dark' ? 'black' : '#fcfcfc',
-                                      cursor: 'pointer',
-                                      '&:hover': {
-                                        color: 'red',
-                                      },
-                                    }}
-                                    onClick={() => deleteCallBack(row)}
-                                  />
+                                  sx={{
+                                    color:
+                                      mode !== 'dark' ? 'black' : '#fcfcfc',
+                                    cursor: 'pointer',
+                                    '&:hover': {
+                                      color: 'red',
+                                    },
+                                  }}
+                                  onClick={() => deleteCallBack(row)}
+                                />:""
+                                  }
+                                  
                                 </div>
                               </TableCell>
                             );

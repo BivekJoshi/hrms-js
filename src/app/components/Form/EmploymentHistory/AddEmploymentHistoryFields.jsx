@@ -143,6 +143,28 @@ const AddEmploymentHistoryFields = ({
           size='small'
         />
       </Grid>
+      {/* <Grid item xs={adjustSize || 12} sm={adjustSize || 12}>
+        <TextField
+          id='effectiveDateTo'
+          name='effectiveDateTo'
+          label='Effective To Date'
+          type='date'
+          fullWidth
+          required
+          value={formik.values.effectiveDateTo}
+          onChange={formik.handleChange}
+          error={
+            formik.touched.effectiveDateTo &&
+            Boolean(formik.errors.effectiveDateTo)
+          }
+          helperText={
+            formik.touched.effectiveDateTo && formik.errors.effectiveDateTo
+          }
+          variant='outlined'
+          InputLabelProps={{ shrink: true }}
+          size='small'
+        />
+      </Grid> */}
       <Grid item xs={adjustSize || 12} sm={adjustSize || 12}>
         <RemarkField
           id='remarks'
