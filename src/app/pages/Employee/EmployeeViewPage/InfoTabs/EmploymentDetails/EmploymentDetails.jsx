@@ -45,10 +45,8 @@ const EmploymentDetails = ({ data, role }) => {
   console.log('🚀 ~ EmploymentDetails ~ activeData:', activeData?.length > 1);
 
   const [actionDD, setActionDD] = React.useState('Actions');
-  console.log('🚀 ~ EmploymentDetails ~ actionDD:', actionDD);
 
   const handleChange = (event) => {
-    console.log('🚀 ~ handleChange ~ event:', event);
     setActionDD(event.target.value);
     if (event.target?.value === 'AddPosition') {
       setAddPosition(true);
