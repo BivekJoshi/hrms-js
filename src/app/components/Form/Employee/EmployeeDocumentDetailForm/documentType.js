@@ -34,33 +34,33 @@ export const documentType = [
 
     id: 4,
   },
-  {
-    label: 'Academic Document',
-    input: 'ACADEMIC_DOCUMENT',
-    desc: '* Academic document format must be in pdf',
-    fileSize: '* File size should be max 25MB',
-    accept: '.pdf',
+  // {
+  //   label: 'Academic Document',
+  //   input: 'ACADEMIC_DOCUMENT',
+  //   desc: '* Academic document format must be in pdf',
+  //   fileSize: '* File size should be max 25MB',
+  //   accept: '.pdf',
 
-    id: 5,
-  },
-  {
-    label: 'Training Certificate',
-    input: 'TRAINING_CERTIFICATE',
-    desc: '* Training certificate format must be in pdf',
-    fileSize: '* File size should be max 25MB',
-    accept: '.pdf',
+  //   id: 5,
+  // },
+  // {
+  //   label: 'Training Certificate',
+  //   input: 'TRAINING_CERTIFICATE',
+  //   desc: '* Training certificate format must be in pdf',
+  //   fileSize: '* File size should be max 25MB',
+  //   accept: '.pdf',
 
-    id: 6,
-  },
-  {
-    label: 'Certification',
-    input: 'CERTIFICATION',
-    desc: '* Certication document must be in pdf format',
-    fileSize: '* File size should be max 25MB',
-    accept: '.pdf',
+  //   id: 6,
+  // },
+  // {
+  //   label: 'Certification',
+  //   input: 'CERTIFICATION',
+  //   desc: '* Certication document must be in pdf format',
+  //   fileSize: '* File size should be max 25MB',
+  //   accept: '.pdf',
 
-    id: 7,
-  },
+  //   id: 7,
+  // },
   {
     label: 'Experience Letter',
     input: 'EXPERIENCE_LETTER',
