@@ -28,8 +28,6 @@ const ProjectTask = ({ permissions }) => {
     refetch,
     isRefetching,
   } = useGetProjectTaskByProjectId();
-  const [state, setState] = useState({ right: false });
-  const [editedTask, setEditedTask] = useState({});
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [deletedTask, setDeletedTask] = useState({});
   const handleCloseAddModal = () => setOpenAddModal(false);

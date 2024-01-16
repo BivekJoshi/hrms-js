@@ -1,15 +1,16 @@
-import { Box, Button, Typography } from '@mui/material';
-import React, { useState } from 'react';
-import { useDeleteEmployeeResource } from '../../../hooks/resource/employeeResource/useEmployeeResource';
-import { useGetEmployeeResource } from '../../../hooks/resource/employeeResource/useEmployeeResource';
-import DeleteIcon from '@mui/icons-material/Delete';
-import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
-import DeleteConfirmationModal from '../../../components/Modal/DeleteConfirmationModal';
-import { AddEmployeeResourceModal } from './EmployeeResourceModal';
-import { EditEmployeeResourceModal } from './EmployeeResourceModal';
-import PermissionHoc from '../../../hoc/permissionHoc';
-import HocButton from '../../../hoc/hocButton';
-import CustomTable from '../../../components/CustomTable/CustomTable';
+import { Box, Button, Grid, Typography } from "@mui/material";
+import React, { useContext, useState } from "react";
+import { useDeleteEmployeeResource } from "../../../hooks/resource/employeeResource/useEmployeeResource";
+import { useGetEmployeeResource } from "../../../hooks/resource/employeeResource/useEmployeeResource";
+import DeleteIcon from "@mui/icons-material/Delete";
+import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
+import DeleteConfirmationModal from "../../../components/Modal/DeleteConfirmationModal";
+import { AddEmployeeResourceModal } from "./EmployeeResourceModal";
+import { EditEmployeeResourceModal } from "./EmployeeResourceModal";
+import PermissionHoc from "../../../hoc/permissionHoc";
+import HocButton from "../../../hoc/hocButton";
+import CustomTable from "../../../components/CustomTable/CustomTable";
+import ThemeModeContext from "../../../../theme/ThemeModeContext";
 
 const EmployeeResource = ({ permissions }) => {
   const { data: employeeResourceData, isLoading } = useGetEmployeeResource();
@@ -37,9 +38,7 @@ const EmployeeResource = ({ permissions }) => {
     setOpenDeleteModal(false);
   };
 
-  const actionsCellStyle = {
-    padding: '0 2rem',
-  };
+  const { mode } = useContext(ThemeModeContext);
   const handleEditRowData = (rowData) => {
     setEditedEmployeeResource(rowData);
     setOpenEditModal(true);
@@ -74,14 +73,6 @@ const EmployeeResource = ({ permissions }) => {
           rowData?.employee?.lastName;
         return name ? name : "-";
       },
-      // emptyValue: '-',
-      // render: (rowData) => {
-      //   return <p>{getEmployeeName(rowData)} </p>;
-      // },
-      // customFilterAndSearch: (searchValue, rowData) => {
-      //   const employeeName = getEmployeeName(rowData);
-      //   return employeeName.toLowerCase().includes(searchValue.toLowerCase());
-      // },
       sorting: false,
     },
     {
@@ -89,17 +80,12 @@ const EmployeeResource = ({ permissions }) => {
       field: "officeResourceName",
       render: (rowData) => {
         const resource = rowData?.officeResource?.name;
-        // const name = rowData?.employee?.firstName + " " + rowData?.employee?.middleName + " " +  rowData?.employee?.lastName
-        return resource ? resource : "-";
+        return (
+          <Typography style={{ overflowWrap: "break-word", width: "15rem" }}>
+            {resource ? resource : "-"}
+          </Typography>
+        );
       },
-      // emptyValue: '-',
-      // render: (rowData) => {
-      //   return <p>{getResourceName(rowData)}</p>;
-      // },
-      // customFilterAndSearch: (searchValue, rowData) => {
-      //   const resourceName = getResourceName(rowData);
-      //   return resourceName.toLowerCase().includes(searchValue.toLowerCase());
-      // },
       sorting: false,
     },
     {
@@ -126,64 +112,22 @@ const EmployeeResource = ({ permissions }) => {
       emptyValue: "-",
       sorting: false,
     },
-    // {
-    //   title: "Status",
-    //   render: (rowData) => {
-    //     if (rowData?.returnDate) {
-    //       return <Typography sx={{background: 'yellow', borderRadius: '1rem', textAlign: 'center'}}>Returned</Typography>
-    //     } else  return <Typography sx={{background: 'yellow', borderRadius: '1rem', textAlign: 'center'}}>Using</Typography>
-    //   },
-    //   // field: 'remarks',
-    //   // emptyValue: '-',
-    //   sorting: false,
-    // },
     {
       title: "Remarks",
       field: "remarks",
       emptyValue: "-",
       sorting: false,
     },
-    // {
-    //   id: 'actions',
-    //   label: 'Actions',
-    //   title: 'Action',
-    //   render: (rowData) => {
-    //     return (
-    //       <>
-    //         <Button disabled={rowData?.returnDate !== null}>
-    //           <ModeEditOutlineIcon
-    //             onClick={(event) => handleEditRowData(rowData)}
-    //             sx={{
-    //               color:
-    //                 rowData?.returnDate === null
-    //                   ? 'rgb(188, 188, 188)'
-    //                   : 'black',
-    //               '&:hover': { color: 'green' },
-    //             }}
-    //           />
-    //         </Button>
-    //         <Button disabled={rowData?.returnDate !== null}>
-    //           <DeleteIcon
-    //             onClick={(event) => handleDeleteRowData(rowData)}
-    //             sx={{
-    //               color:
-    //                 rowData?.returnDate === null
-    //                   ? 'rgb(188, 188, 188)'
-    //                   : 'black',
-    //               '&:hover': { color: 'green' },
-    //             }}
-    //           />
-    //         </Button>
-    //       </>
-    //     );
-    //   },
-    // },
   ];
 
   const actions = [
     {
       icon: () => (
-        <Button disabled={!permissions?.canEdit && editedEmployeeResouce?.returnDate === null}>
+        <Button
+          disabled={
+            !permissions?.canEdit && editedEmployeeResouce?.returnDate === null
+          }
+        >
           <ModeEditOutlineIcon
             sx={{
               color: "black",
@@ -239,7 +183,7 @@ const EmployeeResource = ({ permissions }) => {
         gap={2}
         sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}
       >
-         <CustomTable
+        <CustomTable
           columns={columns}
           data={usedResource}
           title="Currently Used Logistics"

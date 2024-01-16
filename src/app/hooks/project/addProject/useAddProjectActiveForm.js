@@ -4,41 +4,39 @@ import { ProjectSchema } from '../validation/ProjectSchema';
 import { useActiveProject, useDeleteProject } from '../useProject';
 
 export const useRemoveActiveProject = (data) => {
-  const { mutate } = useDeleteProject({});
+    const { mutate } = useDeleteProject({});
+   
+    const formik = useFormik({
+        initialValues: {
+            projectId: data?.id || "",
+        },
+        enableReinitialize: true,
+        onSubmit: (values) => {
+            handleRequest(values);
+        },
+    });
 
-  const formik = useFormik({
-    initialValues: {
-      projectId: data?.id || '',
-      remarks: '',
-    },
-    enableReinitialize: true,
-    onSubmit: (values) => {
-      handleRequest(values);
-    },
-  });
-
-  const handleRequest = (values) => {
-    values = {
-      ...values,
+    const handleRequest = (values) => {
+        values = {
+            ...values,
+        };
+        mutate(values, formik);
     };
-    mutate(values, formik);
-  };
 
   return { formik };
 };
 
 export const useAddActiveProject = (data, onClose) => {
-  const { mutate } = useActiveProject({});
-  const formik = useFormik({
-    initialValues: {
-      projectId: data || '',
-      remarks: '',
-    },
-    enableReinitialize: true,
-    onSubmit: (values) => {
-      handleRequest(values);
-    },
-  });
+    const { mutate } = useActiveProject({});
+    const formik = useFormik({
+        initialValues: {
+            projectId: data || "",
+        },
+        enableReinitialize: true,
+        onSubmit: (values) => {
+            handleRequest(values);
+        },
+    });
 
   const handleRequest = (values) => {
     values = {

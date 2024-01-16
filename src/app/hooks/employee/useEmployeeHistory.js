@@ -4,12 +4,14 @@ import {
   addEmployeeHistory,
   addEmploymentHistory,
   deleteEmployeeHistory,
+  editEmployeeDetails,
   editEmployeeHistory,
   editWorkExpirence,
   getEmployeeEmployment,
   getEmployeeHistory,
   getEmployeeHistoryById,
   transferEmploymentHistory,
+  transferUpgradeEmployee,
 } from "../../api/employeeHistory/employeeHistory";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -145,15 +147,31 @@ export const useAddEmploymentHistory = ({ onSuccess }) => {
   const { id } = useParams();
   return useMutation(
     ["addEmploymentHistory"],
-    (formData) => addEmploymentHistory(formData, id),
+    async (formData) => await addEmploymentHistory(formData, id),
     {
       onSuccess: (data, variables, context) => {
         toast.success("Successfully added Employment Details");
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries("getEmployeeHistory");
+        queryClient.invalidateQueries("getEmployeeEmployment");
       },
       onError: (err, _variables, _context) => {
         toast.error(`error: ${err.message}`);
+      },
+    }
+  );
+};
+
+export const useEditEmployee = ({ onSuccess }) => {
+  const queryClient = useQueryClient();
+  const { id } = useParams();
+  return useMutation(
+    ["editEmployeeDetails"],
+    async (formData) => await editEmployeeDetails(formData, id),
+    {
+      onSuccess: (data, variables, context) => {
+        toast.success("Successfully Edit Employment Details");
+        onSuccess && onSuccess(data, variables, context);
+        queryClient.invalidateQueries("getEmployeeEmployment");
       },
     }
   );
@@ -164,12 +182,28 @@ export const useTransferEmploymentHistory = ({ onSuccess }) => {
   const { id } = useParams();
   return useMutation(
     ["transferEmploymentHistory"],
-    (formData) => transferEmploymentHistory(formData, id),
+    async (formData) => await transferEmploymentHistory(formData, id),
     {
       onSuccess: (data, variables, context) => {
         toast.success("Successfully transfered");
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries("getEmployeeHistory");
+        queryClient.invalidateQueries("getEmployeeEmployment");
+      },
+    }
+  );
+};
+
+export const useTransferUpgradeEmployee = ({ onSuccess }) => {
+  const queryClient = useQueryClient();
+  const { id } = useParams();
+  return useMutation(
+    ["transferUpgradeEmployee"],
+    async (formData) => await transferUpgradeEmployee(formData, id),
+    {
+      onSuccess: (data, variables, context) => {
+        toast.success("Success");
+        onSuccess && onSuccess(data, variables, context);
+        queryClient.invalidateQueries("getEmployeeEmployment");
       },
     }
   );

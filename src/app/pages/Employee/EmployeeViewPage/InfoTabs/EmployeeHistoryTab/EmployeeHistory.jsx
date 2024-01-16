@@ -1,15 +1,15 @@
-import React from 'react';
-import { useGetPromotionHistory } from '../../../../../hooks/promotionHistory/usePromotionHistory';
-import { useParams } from 'react-router-dom';
-import { Box, Button } from '@mui/material';
-import { useState } from 'react';
-import { useGetDesignation } from '../../../../../hooks/designation/useDesignation';
-import useAuth from '../../../../../../auth/hooks/component/login/useAuth';
-import { useGetLoggedInUserInfo } from '../../../../../hooks/employee/useEmployee';
-import CustomTable from '../../../../../components/CustomTable/CustomTable';
-import { useGetEmployeeHistory } from '../../../../../hooks/employee/useEmployeeHistory';
-import { AddEmployeeHistory } from './EmployeeHistoryModal';
-import NewEmployeeHistoryDetailForm from '../../../../../components/Form/Employee/EmployeeHistoryDetailForm/NewEmployeeHistoryDetailForm';
+import React from "react";
+import { useGetPromotionHistory } from "../../../../../hooks/promotionHistory/usePromotionHistory";
+import { useParams } from "react-router-dom";
+import { Box, Button } from "@mui/material";
+import { useState } from "react";
+import { useGetDesignation } from "../../../../../hooks/designation/useDesignation";
+import useAuth from "../../../../../../auth/hooks/component/login/useAuth";
+import { useGetLoggedInUserInfo } from "../../../../../hooks/employee/useEmployee";
+import CustomTable from "../../../../../components/CustomTable/CustomTable";
+import { useGetEmployeeHistory } from "../../../../../hooks/employee/useEmployeeHistory";
+import { AddEmployeeHistory } from "./EmployeeHistoryModal";
+import NewEmployeeHistoryDetailForm from "../../../../../components/Form/Employee/EmployeeHistoryDetailForm/NewEmployeeHistoryDetailForm";
 
 const EmployeeHistory = ({ data, role }) => {
   // const { isSuperAdmin, isAdmin, isHr, isEmployee, isHrAdmin, isManager } =
@@ -17,10 +17,13 @@ const EmployeeHistory = ({ data, role }) => {
   // const { data: loggedInUserData, isLoading: isLoadingUserData } = isEmployee
   //   ? useGetLoggedInUserInfo()
   //   : {};
-  const { id } = useParams();
-  const { data: employeeHistory, isLoading } = role
-    ? useGetEmployeeHistory(id)
-    : useGetEmployeeHistory(data?.id);
+  // const { id } = useParams();
+  // const { data: employeeHistory, isLoading } = role
+  //   ? useGetEmployeeHistory(id)
+  //   : useGetEmployeeHistory(data?.id);
+
+  const auth = useAuth();
+
   // const { data: designationData, isLoading: loadingDesignation } =
   //   useGetDesignation();
   // const { data: trainingData } = useGetTrainingByEmpId(id);
@@ -42,47 +45,47 @@ const EmployeeHistory = ({ data, role }) => {
   // });
   const columns = [
     {
-      title: 'SN',
+      title: "SN",
       render: (rowData) => rowData.tableData.id + 1,
-      width: '3%',
-      maxWidth: '50px',
+      width: "3%",
+      maxWidth: "50px",
       sortable: false,
       sorting: false,
     },
     {
-      title: 'Organization Name',
-      field: 'employerName',
-      emptyValue: '-',
+      title: "Organization Name",
+      field: "employerName",
+      emptyValue: "-",
       width: 300,
     },
     {
-      title: 'Organization Address',
-      field: 'employerAddress',
-      emptyValue: '-',
+      title: "Organization Address",
+      field: "employerAddress",
+      emptyValue: "-",
       width: 300,
     },
     {
-      title: 'Position Hold',
-      field: 'pastPosition',
-      emptyValue: '-',
+      title: "Position Hold",
+      field: "pastPosition",
+      emptyValue: "-",
       width: 300,
     },
     {
-      title: 'From Date',
-      field: 'fromDate',
-      emptyValue: '-',
+      title: "From Date",
+      field: "fromDate",
+      emptyValue: "-",
       width: 200,
     },
     {
-      title: 'To Date',
-      field: 'toDate',
-      emptyValue: '-',
+      title: "To Date",
+      field: "toDate",
+      emptyValue: "-",
       width: 200,
     },
     {
-      title: 'Remarks',
-      field: 'remarks',
-      emptyValue: '-',
+      title: "Remarks",
+      field: "remarks",
+      emptyValue: "-",
       width: 200,
     },
   ];
@@ -125,7 +128,7 @@ const EmployeeHistory = ({ data, role }) => {
           />
         )}
       </Box> */}
-      <NewEmployeeHistoryDetailForm />
+      <NewEmployeeHistoryDetailForm employeeId={auth?.userId} />
     </>
   );
 };
