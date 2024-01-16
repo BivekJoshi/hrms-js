@@ -29,7 +29,6 @@ const AcademicsComponents = ({ data, isLoading }) => {
     //   render: (rowData) => {
     //     const passedName = level?.find((name) => {
     //       const fullName = name?.passedValue === rowData?.passedLabel
-    //       console.log({"name?.passedValue": name?.passedValue, "rowData?.passedLabel": rowData})
     //     });
 
     //     return passedName || '-';
