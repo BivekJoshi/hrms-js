@@ -1,6 +1,6 @@
 import React from "react";
 import "../Style/Style.css";
-import { Box, Divider, Stack } from "@mui/material";
+import { Box, Divider, Grid, Stack } from "@mui/material";
 import ListUserDetails from "../../InfoTabs/BaiscInfoTab/Components/ListUserDetails";
 import { useGetBankByEmployeeId } from "../../../../../hooks/employee/useBank";
 import { useGetFammilyById } from "../../../../../hooks/employee/useFamily";
@@ -63,24 +63,24 @@ const BasicInfo = ({ data, mode, positionName, empId }) => {
         }}
         className="FAM-BANK-DETAILS"
       >
-        <Box>
-          {bankData && bankData.length > 0 && (
+         {bankData && bankData.length > 0 && (
+          <Grid>
             <ListUserDetails
               data={BANKDETAILS}
               cardTitle={"Bank Details"}
               mode={mode}
             />
-          )}
-        </Box>
-        <Box>
-          {familyData && familyData.length > 0 && (
+          </Grid>
+        )}
+        {familyData && familyData.length > 0 && (
+          <Grid>
             <ListUserDetails
               data={FAMILYMEMBERS}
               cardTitle={"Family Informations"}
               mode={mode}
             />
-          )}
-        </Box>
+          </Grid>
+        )}
       </Box>
     </Box>
   );
