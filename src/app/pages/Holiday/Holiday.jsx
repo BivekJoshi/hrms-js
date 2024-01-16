@@ -104,6 +104,7 @@ const Holiday = ({ permissions }) => {
                 <ButtonComponent
                   variant='contained'
                   OnClick={handleFormSubmit}
+                  disabled={!formik.dirty}
                   color={'#fff'}
                   sx={{ mt: 3, ml: 1, color: '#fff' }}
                   buttonName={'Add Holiday'}

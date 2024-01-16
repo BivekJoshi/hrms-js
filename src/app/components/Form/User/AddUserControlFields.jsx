@@ -86,6 +86,7 @@ export const AddUserControlFields = ({ onClose }) => {
           <ButtonComponent
             variant='contained'
             OnClick={handleFormSubmit}
+            disabled={!formik.dirty}
             sx={{ mt: 3, ml: 1, color: '#fff' }}
             buttonName={'Add User'}
           />
