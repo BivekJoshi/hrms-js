@@ -283,7 +283,7 @@ const Employee = () => {
           onChange={handlePageChange}
           showFirstButton
           showLastButton
-          boundaryCount={3}
+          boundaryCount={2}
           // size='small'
           color='primary'
         />

@@ -95,7 +95,7 @@ const Designation = ({ permissions }) => {
           <div
             style={{
               whiteSpace: 'wrap',
-              width: '15rem',
+              width: '25rem',
               overflowWrap: 'break-word',
             }}
           >
@@ -105,7 +105,7 @@ const Designation = ({ permissions }) => {
       },
       sorting: false,
     },
-  ].filter(Boolean);
+  ];
 
   const actions = [
     {
@@ -142,13 +142,13 @@ const Designation = ({ permissions }) => {
   ];
   if (isLoading) return <>Loading</>;
 
-  const actionsCellStyle = {
-    width: '64px',
-    padding: ' 7px 39px',
-    display: 'flex',
-    justifyContent: 'stretch',
-    alignItems: 'center',
-  };
+  // const actionsCellStyle = {
+  //   width: '64px',
+  //   padding: ' 7px 39px',
+  //   display: 'flex',
+  //   justifyContent: 'stretch',
+  //   alignItems: 'center',
+  // };
   return (
     <>
       <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
@@ -167,7 +167,7 @@ const Designation = ({ permissions }) => {
         title='Designation List'
         isLoading={isLoading}
         actions={actions}
-        actionsCellStyle={actionsCellStyle}
+        // actionsCellStyle={actionsCellStyle}
       />
 
       {openEditModal && (

@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Box, Button } from "@mui/material";
 import CustomTable from "../../../../../components/CustomTable/CustomTable";
 import { AddDepartmentHistory } from "./DepartmentInfoModal";
 import { useGetDepartmentHistory } from "../../../../../hooks/departmentHistory/useDepartmentHistory";
+import ThemeModeContext from '../../../../../../theme/ThemeModeContext';
 
 const DepartmentInfo = ({ data, role }) => {
   const [openAddModal, setOpenAddModal] = useState(false);
   const handleAddOpenModal = () => setOpenAddModal(true);
   const handleCloseAddModal = () => setOpenAddModal(false);
+  const { mode } = useContext(ThemeModeContext);
 
   const { data: branchHistoryData, isLoading } = useGetDepartmentHistory(
     data?.id
@@ -57,7 +59,7 @@ const DepartmentInfo = ({ data, role }) => {
             }}
           >
             {rowData?.isRecentDepartment ? (
-              <span style={{ color: "green" }}>✔</span>
+             <span style={{ color: mode === 'light' ? 'green' : '#00ff00' }}>✔</span>
             ) : (
               <span style={{ color: "red" }}>✕</span>
             )}
