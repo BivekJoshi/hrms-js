@@ -42,10 +42,13 @@ const EmploymentDetails = ({ data, role }) => {
   const { data: employeeHistory, isLoading } = useGetEmployeeEmployment(id);
 
   const activeData = employeeHistory?.filter((item) => item?.isActive === true);
+  console.log('🚀 ~ EmploymentDetails ~ activeData:', activeData?.length > 1);
 
   const [actionDD, setActionDD] = React.useState('Actions');
+  console.log('🚀 ~ EmploymentDetails ~ actionDD:', actionDD);
 
   const handleChange = (event) => {
+    console.log('🚀 ~ handleChange ~ event:', event);
     setActionDD(event.target.value);
     if (event.target?.value === 'AddPosition') {
       setAddPosition(true);
@@ -173,16 +176,16 @@ const EmploymentDetails = ({ data, role }) => {
                 <MenuItem value='Actions'>
                   <em>None</em>
                 </MenuItem>
-                {activeData && activeData?.length > 1 ? (
-                  <MenuItem value={'AllTransfer/Upgrade'}>
+                {activeData && activeData?.length > 1 && (
+                  <MenuItem value='AllTransfer/Upgrade'>
                     Transfer or Up/Downgrade
                   </MenuItem>
-                ) : (
-                  <>
-                    {' '}
-                    <MenuItem value={'Transfer'}>Transfer</MenuItem>
-                    <MenuItem value={'Up/Downgrade'}>Up/Downgrade</MenuItem>
-                  </>
+                )}
+                {activeData && activeData?.length === 1 && (
+                  <MenuItem value='Transfer'>Transfer</MenuItem>
+                )}
+                {activeData && activeData?.length === 1 && (
+                  <MenuItem value='Up/Downgrade'>Up/Downgrade</MenuItem>
                 )}
                 <MenuItem value='AddPosition'>Add Position </MenuItem>
               </Select>
