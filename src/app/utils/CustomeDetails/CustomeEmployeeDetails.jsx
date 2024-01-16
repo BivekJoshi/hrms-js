@@ -38,6 +38,7 @@ const CustomeEmployeeDetails = ({
   modalWidth,
   modalHeight,
   showDocumentImg,
+  showAddButton,
 }) => {
   const [openAddModal, setOpenAddModal] = useState(false);
   const [selectedRowId, setSelectedRowId] = useState();
@@ -74,7 +75,6 @@ const CustomeEmployeeDetails = ({
     }
   }, [auth?.isEmployee]);
 
-
   const handleCloseAddModal = () => {
     setOpenAddModal(false);
     setSelectedRowId();
@@ -83,6 +83,14 @@ const CustomeEmployeeDetails = ({
   };
 
   const handleEdit = (row) => {
+
+// if(title==="Employment Detail"){
+// const{ depart
+// }
+
+//   formik.
+// }
+
     formik.setValues(row);
     setOpenAddModal(true);
     setSelectedRowId(row?.id);
@@ -94,7 +102,7 @@ const CustomeEmployeeDetails = ({
         {title}
       </Typography>
 
-      {!auth.isEmployee && (
+      {!auth?.isEmployee && showAddButton && (
         <div style={{ display: "flex", justifyContent: "flex-end" }}>
           <Button
             variant="contained"
@@ -114,11 +122,11 @@ const CustomeEmployeeDetails = ({
               <TableRow>
                 {tableColumn?.map((column) => (
                   <TableCell
-                    key={column.id}
-                    align={column.align}
-                    style={{ minWidth: column.minWidth }}
+                    key={column?.id}
+                    align={column?.align}
+                    style={{ minWidth: column?.minWidth }}
                   >
-                    {column.label}
+                    {column?.label}
                   </TableCell>
                 ))}
               </TableRow>
@@ -126,6 +134,7 @@ const CustomeEmployeeDetails = ({
             <TableBody>
               {!isLoading && data?.length > 0 ? (
                 data?.map((row) => {
+                  // console.log(row,"rowwwwwwwwwwwwwwwwwwwwwwwwwww");
                   return (
                     <>
                       <TableRow
@@ -135,10 +144,16 @@ const CustomeEmployeeDetails = ({
                         key={row.code}
                       >
                         {tableColumn?.map((column) => {
-                          const value = row[column.id];
+                          let value;
+                          if (column?.nested) {
+                            value = row[column?.id][`${column?.subId}`];
+                          } else {
+                            value = row[column?.id];
+                          }
+
                           if (column?.id === "actions") {
                             return (
-                              <TableCell key={column.id} align={column.align}>
+                              <TableCell key={column?.id} align={column?.align}>
                                 <div
                                   style={{
                                     display: "flex",
@@ -181,8 +196,8 @@ const CustomeEmployeeDetails = ({
                           } else {
                             return (
                               <TableCell
-                                key={column.id}
-                                align={column.align}
+                                key={column?.id}
+                                align={column?.align}
                                 sx={{ wordBreak: "break-all" }}
                               >
                                 {value}

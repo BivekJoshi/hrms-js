@@ -69,6 +69,7 @@ const NewEmployeeQualificationDetailForm = ({ employeId }) => {
         showDocumentImg
         modalHeight={"65vh"}
         modalWidth={500}
+        showAddButton={true}
       />
     </div>
   );

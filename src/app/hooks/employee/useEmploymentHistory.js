@@ -1,5 +1,8 @@
 import { useFormik } from "formik";
-import { useAddEmploymentHistory } from "./useEmployeeHistory";
+import {
+  useAddEmploymentHistory,
+  useTransferEmploymentHistory,
+} from "./useEmployeeHistory";
 import * as Yup from "yup";
 
 const EmployeeSchema = Yup.object().shape({
@@ -9,11 +12,16 @@ const EmployeeSchema = Yup.object().shape({
   effectiveDateFrom: Yup.string().required("From Date is Required"),
 });
 
-const useEmploymentHistory = (onClose) => {
+const useEmploymentHistory = (data,onClose) => {
   const { mutate } = useAddEmploymentHistory({});
+  const {
+    mutate: editTransferEmploymentHistory,
+  } = useTransferEmploymentHistory({});
+  console.log(data,"bivu jos");
+
   const formik = useFormik({
     initialValues: {
-      positionId: "",
+      positionId: data?.positionId||"",
       branchId: "",
       departmentId: "",
       effectiveDateFrom: "",
@@ -22,16 +30,29 @@ const useEmploymentHistory = (onClose) => {
       multiplePosition: false,
     },
     validationSchema: EmployeeSchema,
+    enableReinitialize:true,
     onSubmit: (values) => {
-      handleRequest(values);
+      if(data){
+        handleEditRequest(values);
+      }else{
+        handleRequest(values);
+      }
     },
   });
 
   const handleRequest = (values) => {
-    values = {
-      ...values,
-    };
+    values = { ...values };
     mutate(values, {
+      onSuccess: () => {
+        onClose();
+        formik.handleReset();
+      },
+    });
+  };
+
+  const handleEditRequest = (values) => {
+    values = { ...values };
+    editTransferEmploymentHistory(values, {
       onSuccess: () => {
         onClose();
         formik.handleReset();

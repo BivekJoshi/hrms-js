@@ -71,6 +71,7 @@ const NewEmployeeFamilyDetailForm = () => {
         isSubmitSuccess={isFormSubmitSuccess || isEditSuccess}
         deleteCallBack={handleDeleteFamily}
         modalWidth={400}
+        showAddButton={false}
       />
     </div>
   );
