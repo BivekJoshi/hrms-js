@@ -141,14 +141,15 @@ const CustomeEmployeeDetails = ({
             <TableBody>
               {!isLoading && data?.length > 0 ? (
                 data?.map((row) => {
-                  // console.log(row,"rowwwwwwwwwwwwwwwwwwwwwwwwwww");
+                  const rowKey = "emp-row" + row.id;
+                  console.log(rowKey);
                   return (
                     <>
                       <TableRow
                         hover
                         role='checkbox'
                         tabIndex={-1}
-                        key={row.code}
+                        key={rowKey}
                       >
                         {tableColumn?.map((column) => {
                           let value;
@@ -199,16 +200,17 @@ const CustomeEmployeeDetails = ({
                             );
                           } else if (column?.id === 'experiencePath') {
                             return (
-                              <TableCell>
+                              <TableCell key={rowKey+column.id}>
+                                experiencePath
                                 <ShowImagePreview row={row} />
                               </TableCell>
                             );
                           } else {
                             return (
                               <TableCell
-                                key={column?.id}
-                                align={column?.align}
-                                sx={{ wordBreak: 'break-all' }}
+                                key={rowKey+column.id}
+                                align={column.align}
+                                sx={{ wordBreak: "break-all" }}
                               >
                                 {value}
                               </TableCell>

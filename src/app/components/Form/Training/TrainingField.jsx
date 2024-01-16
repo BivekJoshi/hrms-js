@@ -115,6 +115,7 @@ const TrainingField = ({ onClose, isLoading, data, empId }) => {
             inputProps={{
               max: currentDate,
             }}
+            size="small"
           />
         </Grid>
         <Grid item xs={12} sm={6}>
