@@ -125,19 +125,22 @@ const CustomeEmployeeDetails = ({
             <TableBody>
               {!isLoading && data?.length > 0 ? (
                 data?.map((row) => {
+                  const rowKey = "emp-row" + row.id;
+                  console.log(rowKey);
                   return (
                     <>
                       <TableRow
                         hover
                         role="checkbox"
                         tabIndex={-1}
-                        key={row.code}
+                        key={rowKey}
                       >
                         {tableColumn?.map((column) => {
                           const value = row[column.id];
+
                           if (column?.id === "actions") {
                             return (
-                              <TableCell key={column.id} align={column.align}>
+                              <TableCell key={rowKey+column.id} align={column.align}>
                                 <div
                                   style={{
                                     display: "flex",
@@ -173,14 +176,15 @@ const CustomeEmployeeDetails = ({
                             );
                           } else if (column?.id === "experiencePath") {
                             return (
-                              <TableCell>
+                              <TableCell key={rowKey+column.id}>
+                                experiencePath
                                 <ShowImagePreview row={row} />
                               </TableCell>
                             );
                           } else {
                             return (
                               <TableCell
-                                key={column.id}
+                                key={rowKey+column.id}
                                 align={column.align}
                                 sx={{ wordBreak: "break-all" }}
                               >
