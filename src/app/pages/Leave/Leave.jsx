@@ -1,18 +1,18 @@
-import * as React from 'react';
-import { useState } from 'react';
-import { Box, Button, Chip, Grid, Typography } from '@mui/material';
+import * as React from "react";
+import { useState } from "react";
+import { Box, Button, Chip, Grid, Typography } from "@mui/material";
 import {
   useDeleteLeaveAdmin,
   useGetleaveOfUser,
-} from '../../hooks/leave/useLeave';
-import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
-import DeleteIcon from '@mui/icons-material/Delete';
-import { AddLeaveModal, EditLeaveModal } from './LeaveModal/LeaveModal';
-import DeleteConfirmationModal from '../../components/Modal/DeleteConfirmationModal';
-import ThemeModeContext from '../../../theme/ThemeModeContext';
-import CustomTable from '../../components/CustomTable/CustomTable';
-import PermissionHoc from '../../hoc/permissionHoc';
-import useAuth from '../../../auth/hooks/component/login/useAuth';
+} from "../../hooks/leave/useLeave";
+import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { AddLeaveModal, EditLeaveModal } from "./LeaveModal/LeaveModal";
+import DeleteConfirmationModal from "../../components/Modal/DeleteConfirmationModal";
+import ThemeModeContext from "../../../theme/ThemeModeContext";
+import CustomTable from "../../components/CustomTable/CustomTable";
+import PermissionHoc from "../../hoc/permissionHoc";
+import useAuth from "../../../auth/hooks/component/login/useAuth";
 
 const Leave = ({ permissions }) => {
   const { mode } = React.useContext(ThemeModeContext);
@@ -48,65 +48,65 @@ const Leave = ({ permissions }) => {
   };
 
   const pendingLeavesEmp =
-    leaveData && leaveData.filter((item) => item?.leaveStatus === 'PENDING');
+    leaveData && leaveData?.filter((item) => item?.leaveStatus === "PENDING");
   const pendingLeaves =
     pendingLeavesEmp && pendingLeavesEmp?.sort((a, b) => b.leaveId - a.leaveId); // it short pending leaves according to it latest created
 
   const approvedRejectedLeaves =
-    leaveData && leaveData.filter((item) => item?.leaveStatus !== 'PENDING');
+    leaveData && leaveData?.filter((item) => item?.leaveStatus !== "PENDING");
 
   const columns = [
     {
-      title: 'SN',
-      field: 'id',
+      title: "SN",
+      field: "id",
       sortable: false,
-      width: '10px',
+      width: "10px",
       sorting: false,
       render: (rowData) => rowData.tableData.id + 1,
     },
     {
-      title: 'Employee Name',
-      field: 'employeeName',
-      width: '60px',
+      title: "Employee Name",
+      field: "employeeName",
+      width: "60px",
       sorting: false,
     },
     {
-      title: 'Leave Type',
-      field: 'leaveType',
-      width: '60px',
+      title: "Leave Type",
+      field: "leaveType",
+      width: "60px",
       sorting: false,
     },
     {
-      title: 'From',
-      field: 'fromDate',
-      width: '60px',
-      emptyValue: '-',
+      title: "From",
+      field: "fromDate",
+      width: "60px",
+      emptyValue: "-",
       sorting: false,
     },
     {
-      title: 'To',
-      field: 'toDate',
-      width: '60px',
-      emptyValue: '-',
+      title: "To",
+      field: "toDate",
+      width: "60px",
+      emptyValue: "-",
       sorting: false,
     },
     {
-      title: 'Status',
-      field: 'leaveStatus',
-      emptyValue: '-',
+      title: "Status",
+      field: "leaveStatus",
+      emptyValue: "-",
       cellStyle: {
-        whiteSpace: 'nowrap',
+        whiteSpace: "nowrap",
       },
       render: (rowData) => {
         const status = rowData.leaveStatus.toLowerCase();
-        let chipColor = '';
+        let chipColor = "";
 
-        if (status === 'approved') {
-          chipColor = 'rgb(139, 214, 49)';
-        } else if (status === 'rejected') {
-          chipColor = 'rgb(255, 79, 79)';
-        } else if (status === 'pending') {
-          chipColor = 'rgb(255, 126, 71)';
+        if (status === "approved") {
+          chipColor = "rgb(139, 214, 49)";
+        } else if (status === "rejected") {
+          chipColor = "rgb(255, 79, 79)";
+        } else if (status === "pending") {
+          chipColor = "rgb(255, 126, 71)";
         }
 
         return (
@@ -114,8 +114,8 @@ const Leave = ({ permissions }) => {
             label={status.charAt(0).toUpperCase() + status.slice(1)}
             style={{
               backgroundColor: chipColor,
-              color: 'white',
-              width: '6rem',
+              color: "white",
+              width: "6rem",
             }}
           />
         );
@@ -123,14 +123,17 @@ const Leave = ({ permissions }) => {
       sorting: false,
     },
     {
-      title: 'Leave Reason',
-      field: 'leaveReason',
-      width: '15%',
-      emptyValue: '-',
+      title: "Leave Reason",
+      field: "leaveReason",
+      width: "15%",
+      emptyValue: "-",
       render: (rowData) => {
         return (
           <Typography
-            style={{ whiteSpace: 'wrap', overflowWrap: 'break-word' }}
+            style={{
+              overflowWrap: "break-word",
+              wordBreak: "break-all",
+            }}
           >
             {rowData?.leaveReason}
           </Typography>
@@ -141,56 +144,56 @@ const Leave = ({ permissions }) => {
 
   const columnsApprovedRejected = [
     {
-      title: 'SN',
-      field: 'id',
+      title: "SN",
+      field: "id",
       sortable: false,
-      width: '10px',
+      width: "10px",
       sorting: false,
       render: (rowData) => rowData.tableData.id + 1,
     },
     {
-      title: 'Employee Name',
-      field: 'employeeName',
-      width: '60px',
+      title: "Employee Name",
+      field: "employeeName",
+      width: "60px",
       sorting: false,
     },
     {
-      title: 'Leave Type',
-      field: 'leaveType',
-      width: '60px',
+      title: "Leave Type",
+      field: "leaveType",
+      width: "60px",
       sorting: false,
     },
     {
-      title: 'From',
-      field: 'fromDate',
-      width: '60px',
-      emptyValue: '-',
+      title: "From",
+      field: "fromDate",
+      width: "60px",
+      emptyValue: "-",
       sorting: false,
     },
     {
-      title: 'To',
-      field: 'toDate',
-      width: '60px',
-      emptyValue: '-',
+      title: "To",
+      field: "toDate",
+      width: "60px",
+      emptyValue: "-",
       sorting: false,
     },
     {
-      title: 'Status',
-      field: 'leaveStatus',
-      emptyValue: '-',
+      title: "Status",
+      field: "leaveStatus",
+      emptyValue: "-",
       cellStyle: {
-        whiteSpace: 'nowrap',
+        whiteSpace: "nowrap",
       },
       render: (rowData) => {
         const status = rowData.leaveStatus.toLowerCase();
-        let chipColor = '';
+        let chipColor = "";
 
-        if (status === 'approved') {
-          chipColor = 'rgb(139, 214, 49)';
-        } else if (status === 'rejected') {
-          chipColor = 'rgb(255, 79, 79)';
-        } else if (status === 'pending') {
-          chipColor = 'rgb(255, 126, 71)';
+        if (status === "approved") {
+          chipColor = "rgb(139, 214, 49)";
+        } else if (status === "rejected") {
+          chipColor = "rgb(255, 79, 79)";
+        } else if (status === "pending") {
+          chipColor = "rgb(255, 126, 71)";
         }
 
         return (
@@ -198,8 +201,8 @@ const Leave = ({ permissions }) => {
             label={status.charAt(0).toUpperCase() + status.slice(1)}
             style={{
               backgroundColor: chipColor,
-              color: 'white',
-              width: '6rem',
+              color: "white",
+              width: "6rem",
             }}
           />
         );
@@ -207,17 +210,16 @@ const Leave = ({ permissions }) => {
       sorting: false,
     },
     {
-      title: 'Leave Reason',
-      field: 'leaveReason',
-      width: '15%',
-      emptyValue: '-',
+      title: "Leave Reason",
+      field: "leaveReason",
+      width: "15%",
+      emptyValue: "-",
       render: (rowData) => {
         return (
           <div
             style={{
-              whiteSpace: 'wrap',
-              width: '15rem',
-              overflowWrap: 'break-word',
+              overflowWrap: "break-word",
+              wordBreak: "break-all",
             }}
           >
             {rowData?.leaveReason}
@@ -226,38 +228,45 @@ const Leave = ({ permissions }) => {
       },
     },
     {
-      title: 'Remarks',
-      field: 'leaveRemarks',
-      width: '15%',
-      emptyValue: '-',
+      title: "Remarks",
+      field: "leaveRemarks",
+      width: "15%",
+      emptyValue: "-",
       render: (rowData) => {
         return (
-          <div style={{ whiteSpace: 'wrap' }}>{rowData?.leaveRemarks}</div>
+          <div
+            style={{
+              overflowWrap: "break-word",
+              wordBreak: "break-all",
+            }}
+          >
+            {rowData?.leaveRemarks}
+          </div>
         );
       },
     },
     {
-      title: 'Approved By',
-      width: '80px',
+      title: "Approved By",
+      width: "80px",
       sorting: false,
-      field: 'approvedBy',
+      field: "approvedBy",
       render: (rowData) => {
-        if (rowData?.leaveStatus === 'APPROVED') {
+        if (rowData?.leaveStatus === "APPROVED") {
           return <Typography>{rowData.approvedBy}</Typography>;
         }
-        return '-';
+        return "-";
       },
     },
     {
-      title: 'Rejected By',
-      width: '80px',
+      title: "Rejected By",
+      width: "80px",
       sorting: false,
-      field: 'approvedBy',
+      field: "approvedBy",
       render: (rowData) => {
-        if (rowData?.leaveStatus === 'REJECTED') {
+        if (rowData?.leaveStatus === "REJECTED") {
           return <Typography>{rowData?.approvedBy}</Typography>;
         }
-        return '-';
+        return "-";
       },
     },
   ].filter(Boolean);
@@ -274,7 +283,7 @@ const Leave = ({ permissions }) => {
           }}
         />
       ),
-      tooltip: 'Edit Leave',
+      tooltip: "Edit Leave",
       onClick: (event, rowData) => handleEditLeave(rowData),
     },
     {
@@ -288,7 +297,7 @@ const Leave = ({ permissions }) => {
           }}
         />
       ),
-      tooltip: 'Delete Leave',
+      tooltip: "Delete Leave",
       onClick: (event, rowData) => handleDeleteLeave(rowData),
     },
   ];
@@ -298,15 +307,15 @@ const Leave = ({ permissions }) => {
     <Grid>
       <Box
         sx={{
-          display: 'flex',
-          justifyContent: 'flex-end',
-          marginBottom: '16px',
+          display: "flex",
+          justifyContent: "flex-end",
+          marginBottom: "16px",
         }}
       >
         <Button
-          variant='contained'
+          variant="contained"
           onClick={handleAddOpenModal}
-          sx={{ textTransform: 'none' }}
+          sx={{ textTransform: "none" }}
         >
           Add Leave
         </Button>
@@ -314,13 +323,13 @@ const Leave = ({ permissions }) => {
 
       <Box
         gap={2}
-        sx={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
+        sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}
       >
         {pendingLeaves && pendingLeaves.length > 0 && (
           <CustomTable
             columns={columns}
             data={pendingLeaves}
-            title='Pending Leave Data'
+            title="Pending Leave Data"
             actions={actions}
             isLoading={loading}
           />
@@ -330,7 +339,7 @@ const Leave = ({ permissions }) => {
           <CustomTable
             columns={columnsApprovedRejected}
             data={approvedRejectedLeaves}
-            title='Approved/Rejected Leave Data'
+            title="Approved/Rejected Leave Data"
             isLoading={loading}
           />
         )}
@@ -341,14 +350,14 @@ const Leave = ({ permissions }) => {
           data={editedLeave}
           open={openEditModal}
           handleCloseModal={handleCloseEditModal}
-          title={'Edit Leave'}
+          title={"Edit Leave"}
         />
       )}
       {openAddModal && (
         <AddLeaveModal
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
-          title={'Apply Leave'}
+          title={"Apply Leave"}
         />
       )}
       {openDeleteModal && (
@@ -356,7 +365,7 @@ const Leave = ({ permissions }) => {
           open={openDeleteModal}
           handleCloseModal={handleCloseDeleteModal}
           handleConfirmDelete={handleConfirmDelete}
-          message={'Leave'}
+          message={"Leave"}
         />
       )}
     </Grid>

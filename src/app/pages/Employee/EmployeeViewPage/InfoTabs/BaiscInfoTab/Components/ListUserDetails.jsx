@@ -1,4 +1,4 @@
-import { Box, Button, List, Modal, Stack, Typography } from '@mui/material';
+import { Box, Button, Grid, List, Modal, Stack, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { useParams } from 'react-router';
 
@@ -27,11 +27,11 @@ export default function ListUserDetails({ cardTitle, data, mode }) {
   };
   return (
     <>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+      <Box sx={{ display: 'flex'}}>
         <Typography variant='h6' sx={{ fontWeight: 600 }}>
           {cardTitle}
         </Typography>
-        <Stack sx={{ display: 'flex', alignItems: 'center' }}>
+        <Grid sx={{ display: 'flex' }}>
           {!isEmployee && cardTitle === 'Basic Informations' && (
             <BorderColorIcon
               onClick={handleOnClick}
@@ -43,7 +43,7 @@ export default function ListUserDetails({ cardTitle, data, mode }) {
               }}
             />
           )}
-        </Stack>
+        </Grid>
         {/* 
         <Modal open={open} onClose={handleClose}>
           <Box sx={style}>

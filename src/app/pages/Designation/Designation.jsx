@@ -1,8 +1,8 @@
-import * as React from 'react';
-import { useState } from 'react';
-import { Box } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
-import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
+import * as React from "react";
+import { useState } from "react";
+import { Box } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import {
   useDeleteDesignation,
   useGetDesignation,
@@ -88,14 +88,14 @@ const Designation = ({ permissions }) => {
     {
       title: 'Details',
       field: 'positionDetails',
-      // width: '14%',
+      width: '20%',
       emptyValue: '-',
       render: (rowData) => {
         return (
           <div
             style={{
               whiteSpace: 'wrap',
-              width: '25rem',
+              width: '15rem',
               overflowWrap: 'break-word',
             }}
           >
@@ -120,7 +120,7 @@ const Designation = ({ permissions }) => {
         />
       ),
       disabled: !permissions?.canEdit,
-      tooltip: 'Edit Detail',
+      tooltip: "Edit Detail",
       onClick: (event, rowData) => handleEditDesignation(rowData),
     },
     {
@@ -142,13 +142,13 @@ const Designation = ({ permissions }) => {
   ];
   if (isLoading) return <>Loading</>;
 
-  // const actionsCellStyle = {
-  //   width: '64px',
-  //   padding: ' 7px 39px',
-  //   display: 'flex',
-  //   justifyContent: 'stretch',
-  //   alignItems: 'center',
-  // };
+  const actionsCellStyle = {
+    width: '64px',
+    padding: ' 7px 39px',
+    display: 'flex',
+    justifyContent: 'stretch',
+    alignItems: 'center',
+  };
   return (
     <>
       <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
@@ -157,7 +157,7 @@ const Designation = ({ permissions }) => {
           color={'white'}
           variant={'contained'}
           onClick={handleAddOpenModal}
-          buttonName={'Add Designation'}
+          buttonName={"Add Designation"}
         />
       </Box>
       <br />
@@ -167,7 +167,7 @@ const Designation = ({ permissions }) => {
         title='Designation List'
         isLoading={isLoading}
         actions={actions}
-        // actionsCellStyle={actionsCellStyle}
+        actionsCellStyle={actionsCellStyle}
       />
 
       {openEditModal && (
