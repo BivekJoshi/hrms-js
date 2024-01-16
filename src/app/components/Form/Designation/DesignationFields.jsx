@@ -2,7 +2,6 @@ import { Grid, TextField, Button, MenuItem } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import useDesignationForm from "../../../hooks/designation/DesignationForm/useDesignationForm";
 import RemarkField from "../../RemarkField/RemarkField";
-import UpdateFormik from "../../Formik/UpdateFormik";
 
 const DesignationFields = ({ onClose, isLoading, data }) => {
   const { formik } = useDesignationForm(data, onClose);
@@ -10,8 +9,6 @@ const DesignationFields = ({ onClose, isLoading, data }) => {
   const handleFormSubmit = () => {
     formik.handleSubmit();
   };
-
-  const hasChanges = UpdateFormik({ formik });
 
   const submitButtonText = data ? "Update Designation" : "Add Designation";
 
@@ -142,7 +139,7 @@ const DesignationFields = ({ onClose, isLoading, data }) => {
             variant="contained"
             onClick={handleFormSubmit}
             sx={{ mt: 3, ml: 1, textTransform: "capitalize" }}
-            disabled={!hasChanges && !!data}
+            disabled={!formik?.dirty}
           >
             {submitButtonText}
           </Button>
