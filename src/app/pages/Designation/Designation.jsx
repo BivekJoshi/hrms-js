@@ -88,7 +88,7 @@ const Designation = ({ permissions }) => {
     {
       title: 'Details',
       field: 'positionDetails',
-      width: '20%',
+      // width: '14%',
       emptyValue: '-',
       render: (rowData) => {
         return (
