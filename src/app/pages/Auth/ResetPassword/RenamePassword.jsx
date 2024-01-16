@@ -143,7 +143,7 @@ const RenamePassword = ({ isLoading }) => {
                 id='password'
                 name='password'
                 label='Password'
-                placeholder='Enter your new password...'
+                placeholder='Enter your new password'
                 fullWidth
                 required
                 value={formik.values.password}
@@ -185,7 +185,7 @@ const RenamePassword = ({ isLoading }) => {
                 id='confirmPassword'
                 name='confirmPassword'
                 label='Confirm New Password'
-                placeholder='Confirm your new password...'
+                placeholder='Confirm your new password'
                 fullWidth
                 required
                 value={formik.values.confirmPassword}

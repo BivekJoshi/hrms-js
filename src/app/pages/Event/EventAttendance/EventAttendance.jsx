@@ -277,6 +277,7 @@ const EventAttendance = ({ permissions }) => {
         actions={actions}
         exportButton
         exportExcel
+        // pdfNone
         singleAction={true}
       />
       {openEditModal && (

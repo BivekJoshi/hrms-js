@@ -47,7 +47,10 @@ export const AvailableOfficeLogistic = (props) => {
         data={data}
         title="Activated Office Logistics"
         isLoading={isLoading}
-        // exportButton={true}
+        fileName="Activated Office Logistics"
+        exportButton
+        exportExcel
+        pdfNone
       />
     </>
   );

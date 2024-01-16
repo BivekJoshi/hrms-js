@@ -124,9 +124,10 @@ const CompanyTableView = ({
         data={companyData}
         title="Branch List"
         isLoading={isLoading}
-        // exportButton={true}
         actions={actions}
-        // exportExcel
+        fileName="Branch List"
+        exportButton
+        pdfNone
       />
     </>
   );

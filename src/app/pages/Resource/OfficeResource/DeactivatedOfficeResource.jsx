@@ -99,10 +99,13 @@ const DeactivatedOfficeResource = ({ closeModal, title }) => {
         data={data}
         title={title}
         isLoading={isLoading}
-        // exportButton={true}
         emptyRowsWhenPaging={true}
         // sorting={true}
         height={'320px'}
+        fileName="Inactive office resource"
+        exportButton
+        exportExcel
+        pdfNone
       />
 
       {openModal && (

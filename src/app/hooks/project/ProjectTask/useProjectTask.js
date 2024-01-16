@@ -64,7 +64,7 @@ export const useAddCreateTask = ({ onSuccess }) => {
     (formData) => addProjectCreateTask(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Project Task Added Sucessfully');
+        toast.success('Successfully added Project Task');
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries('getProjectTask');
       },

@@ -25,8 +25,8 @@ export const EditProjectDeactivateFields = ({ onClose, isLoading, data }) => {
   return (
     !isLoading && (
       <Grid container spacing={3}>
-        <Grid item xs={12} sm={12} textAlign="center">
-          <Typography varinat="h6" textAlign="center">
+        <Grid item xs={12} sm={12} textAlign="left">
+          <Typography varinat="h6" textAlign="left">
             Are you certain that you want to terminate this project?
           </Typography>
           <Typography variant="h7" textAlign="center">
@@ -119,9 +119,7 @@ export const EditProjectActivateFields = ({ onClose, isLoading, data }) => {
             InputLabelProps={{ shrink: true }}
           />{" "}
         </Grid>
-        <Grid item xs={12} sm={12} textAlign="center">
-          <img src={Restore} alt="Restore" />
-        </Grid>
+        
         <Grid item xs={12} sm={12} textAlign="center">
           <Divider sx={{ width: "100%" }} />
         </Grid>
