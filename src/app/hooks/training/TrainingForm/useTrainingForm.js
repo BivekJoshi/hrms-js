@@ -39,7 +39,11 @@ const useTrainingForm = (data,empId, onClose) => {
 
   const handledEditRequest = (values) => {
     values = { ...values };
-    editTraining(values, formik);
+    editTraining(values, {
+      onSuccess: () => {
+        onClose();
+      }
+    });
   };
   return { formik };
 };
