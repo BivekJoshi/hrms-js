@@ -5,6 +5,7 @@ import { Button, Grid, MenuItem, TextField } from '@mui/material';
 import { useGetDesignation } from '../../../hooks/designation/useDesignation';
 import ThemeModeContext from '../../../../theme/ThemeModeContext';
 import useEmploymentHistory from '../../../hooks/employee/useEmploymentHistory';
+import RemarkField from '../../RemarkField/RemarkField';
 
 const AddEmploymentHistoryFields = ({ onClose, multiplePosition }) => {
   const { formik } = useEmploymentHistory(onClose);

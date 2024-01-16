@@ -42,7 +42,6 @@ const EmploymentDetails = ({ data, role }) => {
   const { data: employeeHistory, isLoading } = useGetEmployeeEmployment(id);
 
   const activeData = employeeHistory?.filter((item) => item?.isActive === true);
-  console.log('🚀 ~ EmploymentDetails ~ activeData:', activeData?.length > 1);
 
   const [actionDD, setActionDD] = React.useState('Actions');
 
