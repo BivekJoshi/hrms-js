@@ -189,7 +189,7 @@ const EmployeeResource = ({ permissions }) => {
     // },
   ];
 
-  const actions = [
+  const editAction = [
     {
       icon: () => (
         <Button disabled={!permissions?.canEdit && editedEmployeeResouce?.returnDate === null}>
@@ -207,6 +207,10 @@ const EmployeeResource = ({ permissions }) => {
       tooltip: "Edit Logistics",
       onClick: (event, rowData) => handleEditRowData(rowData),
     },
+   
+  ];
+
+  const deleteAction = [
     {
       icon: (rowData) => (
         <DeleteIcon
@@ -253,7 +257,8 @@ const EmployeeResource = ({ permissions }) => {
           data={usedResource}
           title="Currently Used Logistics"
           isLoading={isLoading}
-          actions={actions}
+          actions={editAction}
+          singleAction={true}
           // exportButton={true}
         />
         <CustomTable
@@ -261,7 +266,8 @@ const EmployeeResource = ({ permissions }) => {
           data={returnedResource}
           title="Returned Logistics"
           isLoading={isLoading}
-          // actions={actions}
+          actions={deleteAction}
+          singleAction={true}
           // exportButton={true}
         />
       </Box>
