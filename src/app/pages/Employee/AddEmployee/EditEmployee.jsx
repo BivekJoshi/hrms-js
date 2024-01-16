@@ -9,7 +9,6 @@ import { toast } from 'react-toastify'; // Import toast from the library
 const EditEmployee = () => {
   // Destructure functions and variables directly
   const { getStepContent, handleNext, steps } = EditEmployeeForm();
-  console.log('🚀 ~ EditEmployee ~ steps:', steps);
   const [activeStep, setActiveStep] = useState(0);
   const navigate = useNavigate();
   const { id } = useParams();

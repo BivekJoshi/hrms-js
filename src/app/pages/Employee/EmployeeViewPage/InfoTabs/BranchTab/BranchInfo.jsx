@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useGetBranchHistory } from "../../../../../hooks/branchHistory/useBranchHistory";
 import { Box, Button } from "@mui/material";
 import CustomTable from "../../../../../components/CustomTable/CustomTable";
 import { useGetCompany } from "../../../../../hooks/company/useCompany";
 import { AddBranchHistory } from "./BranchInfoModal";
+import ThemeModeContext from '../../../../../../theme/ThemeModeContext';
 
 const BranchInfo = ({ data, role }) => {
   const [openAddModal, setOpenAddModal] = useState(false);
   const handleAddOpenModal = () => setOpenAddModal(true);
   const handleCloseAddModal = () => setOpenAddModal(false);
+  const { mode } = useContext(ThemeModeContext);
 
   const { data: branchHistoryData, isLoading } = useGetBranchHistory(data?.id);
 
@@ -62,7 +64,7 @@ const BranchInfo = ({ data, role }) => {
             }}
           >
             {rowData?.isRecentBranch ? (
-              <span style={{ color: "green" }}>✔</span>
+              <span style={{ color: mode === 'light' ? 'green' : '#00ff00' }}>✔</span>
             ) : (
               <span style={{ color: "red" }}>✕</span>
             )}

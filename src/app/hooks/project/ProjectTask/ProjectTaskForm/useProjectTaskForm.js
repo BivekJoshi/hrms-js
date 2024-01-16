@@ -15,7 +15,7 @@ const useProjectTaskForm = (data, onClose) => {
       name: data?.name || "",
       detail: data?.detail || "",
       priority: data?.priority || "",
-      status: data?.status || "",
+      status: data?.status || "WORK_IN_PROGRESS",
       dueDate: data?.dueDate || "",
       projectId: parseInt(id) || data?.projectId || "",
       id: data?.id || "",

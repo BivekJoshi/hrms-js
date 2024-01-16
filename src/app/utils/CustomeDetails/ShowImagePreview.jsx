@@ -34,6 +34,14 @@ const ShowImagePreview = ({ row }) => {
           path: transcriptPath,
         });
       }
+
+      if (characterCertificatePath) {
+        newDocumentData.push({
+          name: 'Character Certificate',
+          path: characterCertificatePath,
+        });
+      }
+
       if (experiencePath) {
         newDocumentData.push({
           name: 'Experience Letter',
@@ -47,14 +55,6 @@ const ShowImagePreview = ({ row }) => {
           path: otherDocumentPath,
         });
       }
-
-      if (characterCertificatePath) {
-        newDocumentData.push({
-          name: 'Character Certificate',
-          path: characterCertificatePath,
-        });
-      }
-
       setDocumentData(newDocumentData);
     };
 

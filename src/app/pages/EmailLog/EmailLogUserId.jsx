@@ -77,7 +77,7 @@ const EmailLogUserId = () => {
       title: "Log",
       field: "log",
       emptyValue: "-",
-      width: 350,
+      width: 320,
       sorting: false,
     },
 
@@ -97,7 +97,7 @@ const EmailLogUserId = () => {
     },
     {
       title: "Action",
-      maxWidth: "1px",
+      width: "1px",
       render: (rowData) => (
         <Stack
           direction="row"
