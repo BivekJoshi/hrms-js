@@ -106,7 +106,8 @@ const EmploymentDetails = ({ data }) => {
             labelId='demo-select-small-label'
             id='demo-select-small'
             value={actionDD}
-            label='Age'
+            sx={{ width: '300px' }}
+            label='Action'
             onChange={handleChange}
           >
             <MenuItem value='Actions'>
@@ -116,13 +117,15 @@ const EmploymentDetails = ({ data }) => {
             <MenuItem value={'Up/Downgrade'}>Up/Downgrade</MenuItem>
           </Select>
         </FormControl>
-        <Button
-          variant='contained'
-          sx={{ mt: 3, ml: 1 }}
-          onClick={handleAddOpenModal}
-        >
-          Add Employment Details
-        </Button>
+        {employeeHistory?.length === 0 && (
+          <Button
+            variant='contained'
+            sx={{ mt: 3, ml: 1 }}
+            onClick={handleAddOpenModal}
+          >
+            Add Employment Details
+          </Button>
+        )}
       </Box>
       {actionDD === 'Actions' && (
         <CustomTable

@@ -1,14 +1,15 @@
-import { Box, Button, Container, Grid, Paper, Step } from "@mui/material";
-import { StepLabel, Stepper, Typography } from "@mui/material";
-import React, { useState } from "react";
-import EditEmployeeForm from "../../../components/Form/Employee/EmployeeBasicInfoForm/EditEmployeeForm/EditEmployeeForm";
-import { useNavigate, useParams } from "react-router-dom";
-import useAuth from "../../../../auth/hooks/component/login/useAuth";
-import { toast } from "react-toastify"; // Import toast from the library
+import { Box, Button, Container, Grid, Paper, Step } from '@mui/material';
+import { StepLabel, Stepper, Typography } from '@mui/material';
+import React, { useState } from 'react';
+import EditEmployeeForm from '../../../components/Form/Employee/EmployeeBasicInfoForm/EditEmployeeForm/EditEmployeeForm';
+import { useNavigate, useParams } from 'react-router-dom';
+import useAuth from '../../../../auth/hooks/component/login/useAuth';
+import { toast } from 'react-toastify'; // Import toast from the library
 
 const EditEmployee = () => {
   // Destructure functions and variables directly
   const { getStepContent, handleNext, steps } = EditEmployeeForm();
+  console.log('🚀 ~ EditEmployee ~ steps:', steps);
   const [activeStep, setActiveStep] = useState(0);
   const navigate = useNavigate();
   const { id } = useParams();
@@ -34,24 +35,24 @@ const EditEmployee = () => {
 
   return (
     <Grid>
-      <Typography component="h1" variant="h4" align="center">
+      <Typography component='h1' variant='h4' align='center'>
         Edit Details
       </Typography>
       <Stepper
         activeStep={activeStep}
-        variant="elevation"
+        variant='elevation'
         sx={{ pt: 3, pb: 5 }}
         alternativeLabel
       >
         {steps?.map((label) => (
           <Step key={label} onClick={() => handleStepClick(label)}>
-            <StepLabel style={{ color: "white" }}>{label}</StepLabel>
+            <StepLabel style={{ color: 'white' }}>{label}</StepLabel>
           </Step>
         ))}
       </Stepper>
       {activeStep === steps.length ? (
         <>
-          <Typography variant="h5" gutterBottom>
+          <Typography variant='h5' gutterBottom>
             Employee added successfully
           </Typography>
           <Button onClick={handleReturn} sx={{ mt: 3, ml: 1 }}>
@@ -61,31 +62,31 @@ const EditEmployee = () => {
       ) : (
         <>
           {getStepContent(activeStep)}
-          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
             <div>
               {activeStep !== 0 && (
                 <Button
                   onClick={handleBack}
-                  sx={{ mt: 3, ml: 1, textTransform: "capitalize" }}
-                  variant="outlined"
+                  sx={{ mt: 3, ml: 1, textTransform: 'capitalize' }}
+                  variant='outlined'
                 >
                   Back
                 </Button>
               )}
             </div>
-            <div> 
+            <div>
               {activeStep < 7 && (
                 <>
                   <Button
-                    variant="contained"
+                    variant='contained'
                     onClick={() => handleNext({ activeStep, setActiveStep })}
-                    sx={{ mt: 3, ml: 1, textTransform: "capitalize" }}
+                    sx={{ mt: 3, ml: 1, textTransform: 'capitalize' }}
                   >
                     Next
                   </Button>
                   <Button
-                    sx={{ mt: 3, ml: 1, textTransform: "capitalize" }}
-                    variant="contained"
+                    sx={{ mt: 3, ml: 1, textTransform: 'capitalize' }}
+                    variant='contained'
                     onClick={handleSubmit}
                   >
                     Save and Exit
