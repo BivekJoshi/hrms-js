@@ -22,6 +22,7 @@ const UserControlAction = ({ rowData }) => {
   const handleDeleteButton = (rowData) => {
     setDeletedUser(rowData);
     setOpenDeleteModal(true);
+    handleClose();
   };
 
   const handleConfirmDelete = () => {

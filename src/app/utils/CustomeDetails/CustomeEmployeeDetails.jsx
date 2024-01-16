@@ -74,7 +74,6 @@ const CustomeEmployeeDetails = ({
     }
   }, [auth?.isEmployee]);
 
-
   const handleCloseAddModal = () => {
     setOpenAddModal(false);
     setSelectedRowId();

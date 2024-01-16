@@ -73,6 +73,15 @@ const EmployeeResource = ({ permissions }) => {
           rowData?.employee?.lastName;
         return name ? name : "-";
       },
+      customFilterAndSearch: (searchValue, rowData) => {
+        if(rowData?.middleName) {
+          const employeeName = rowData?.employee?.firstName+" "+rowData?.employee?.middleName+" "+rowData?.employee?.lastName;
+          return employeeName.toLowerCase().includes(searchValue.toLowerCase());
+        } else {
+          const employeeName = rowData?.employee?.firstName+" "+rowData?.employee?.lastName;
+          return employeeName.toLowerCase().includes(searchValue.toLowerCase());
+        }
+      },
       sorting: false,
     },
     {
@@ -118,9 +127,44 @@ const EmployeeResource = ({ permissions }) => {
       emptyValue: "-",
       sorting: false,
     },
+    // {
+    //   id: 'actions',
+    //   label: 'Actions',
+    //   title: 'Action',
+    //   render: (rowData) => {
+    //     return (
+    //       <>
+    //         <Button disabled={rowData?.returnDate !== null}>
+    //           <ModeEditOutlineIcon
+    //             onClick={(event) => handleEditRowData(rowData)}
+    //             sx={{
+    //               color:
+    //                 rowData?.returnDate === null
+    //                   ? 'rgb(188, 188, 188)'
+    //                   : 'black',
+    //               '&:hover': { color: 'green' },
+    //             }}
+    //           />
+    //         </Button>
+    //         <Button disabled={rowData?.returnDate !== null}>
+    //           <DeleteIcon
+    //             onClick={(event) => handleDeleteRowData(rowData)}
+    //             sx={{
+    //               color:
+    //                 rowData?.returnDate === null
+    //                   ? 'rgb(188, 188, 188)'
+    //                   : 'black',
+    //               '&:hover': { color: 'green' },
+    //             }}
+    //           />
+    //         </Button>
+    //       </>
+    //     );
+    //   },
+    // },
   ];
 
-  const actions = [
+  const editAction = [
     {
       icon: () => (
         <Button
@@ -142,6 +186,10 @@ const EmployeeResource = ({ permissions }) => {
       tooltip: "Edit Logistics",
       onClick: (event, rowData) => handleEditRowData(rowData),
     },
+   
+  ];
+
+  const deleteAction = [
     {
       icon: (rowData) => (
         <DeleteIcon
@@ -188,7 +236,8 @@ const EmployeeResource = ({ permissions }) => {
           data={usedResource}
           title="Currently Used Logistics"
           isLoading={isLoading}
-          actions={actions}
+          actions={editAction}
+          singleAction={true}
           // exportButton={true}
         />
         <CustomTable
@@ -196,7 +245,8 @@ const EmployeeResource = ({ permissions }) => {
           data={returnedResource}
           title="Returned Logistics"
           isLoading={isLoading}
-          // actions={actions}
+          actions={deleteAction}
+          singleAction={true}
           // exportButton={true}
         />
       </Box>

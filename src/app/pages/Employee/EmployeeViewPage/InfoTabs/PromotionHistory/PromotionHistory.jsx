@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useGetPromotionHistory } from "../../../../../hooks/promotionHistory/usePromotionHistory";
 import { Box, Button } from "@mui/material";
 import { AddPromotionHistory } from "./PromotionHistoryModal";
 import { useState } from "react";
 import "../../EmployProfile/Style/Style.css";
 import CustomTable from "../../../../../components/CustomTable/CustomTable";
+import ThemeModeContext from '../../../../../../theme/ThemeModeContext';
 
 const PromotionHistory = ({ data, role }) => {
   const [openAddModal, setOpenAddModal] = useState(false);
   const handleAddOpenModal = () => setOpenAddModal(true);
   const handleCloseAddModal = () => setOpenAddModal(false);
+  const { mode } = useContext(ThemeModeContext);
 
   const { data: PromotionHistory, isLoading } = useGetPromotionHistory(
     data?.id
@@ -76,7 +78,7 @@ const PromotionHistory = ({ data, role }) => {
             }}
           >
             {rowData.isLastPosition === true ? (
-              <span style={{ color: "green", fontSize: "1.2rem" }}>✔</span>
+              <span style={{ color: mode === 'light' ? 'green' : '#00ff00' }}>✔</span>
             ) : (
               <span style={{ color: "red" }}>✕</span>
             )}

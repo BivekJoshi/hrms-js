@@ -69,8 +69,8 @@ const EmailToAll = ({ getEventID, onClose }) => {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <Typography variant="h4" h2>
-          Email
+        <Typography variant="h6">
+          Send email to
         </Typography>
         <Grid container spacing={2}>
           <Grid
@@ -97,7 +97,7 @@ const EmailToAll = ({ getEventID, onClose }) => {
               <MenuItem value="technical">Technical Employees</MenuItem>
               <MenuItem value="businessa">Business A Employees</MenuItem>
               <MenuItem value="businessb">Business B Employees</MenuItem>
-              <MenuItem value="none">None</MenuItem>
+              {/* <MenuItem value="none">None</MenuItem> */}
             </TextField>
           </Grid>
         </Grid>
