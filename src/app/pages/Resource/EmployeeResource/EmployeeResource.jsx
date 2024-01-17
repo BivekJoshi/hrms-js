@@ -51,7 +51,120 @@ const EmployeeResource = ({ permissions }) => {
     employeeResourceData &&
     employeeResourceData.filter((item) => item?.returnDate === null);
 
-  const columns = [
+    const currentlyUsedLogistics = [
+      {
+        title: "SN",
+        render: (rowData) => rowData.tableData.id + 1,
+        width: "3%",
+        maxWidth: "40px",
+        sortable: false,
+        sorting: false,
+      },
+      {
+        title: "Employee Name",
+        field: "employeeName",
+  
+        render: (rowData) => {
+          const name =
+            rowData?.employee?.firstName +
+            " " +
+            rowData?.employee?.middleName +
+            " " +
+            rowData?.employee?.lastName;
+          return name ? name : "-";
+        },
+        customFilterAndSearch: (searchValue, rowData) => {
+          if(rowData?.middleName) {
+            const employeeName = rowData?.employee?.firstName+" "+rowData?.employee?.middleName+" "+rowData?.employee?.lastName;
+            return employeeName.toLowerCase().includes(searchValue.toLowerCase());
+          } else {
+            const employeeName = rowData?.employee?.firstName+" "+rowData?.employee?.lastName;
+            return employeeName.toLowerCase().includes(searchValue.toLowerCase());
+          }
+        },
+        sorting: false,
+      },
+      {
+        title: "Resource",
+        field: "officeResourceName",
+        render: (rowData) => {
+          const resource = rowData?.officeResource?.name;
+          return (
+            <Typography style={{ overflowWrap: "break-word", wordBreak: "break-all" }}>
+              {resource ? resource : "-"}
+            </Typography>
+          );
+        },
+        sorting: false,
+      },
+      {
+        title: "Received Date",
+        field: "receiveDate",
+        emptyValue: "-",
+        sorting: false,
+      },
+      {
+        title: "Device Condition Before",
+        field: "conditionWhileProvided",
+        emptyValue: "-",
+        sorting: false,
+      },
+      // {
+      //   title: "Returned Date",
+      //   field: "returnDate",
+      //   emptyValue: "-",
+      //   sorting: false,
+      // },
+      // {
+      //   title: "Device Condition After",
+      //   field: "conditionWhileReturned",
+      //   emptyValue: "-",
+      //   sorting: false,
+      // },
+      {
+        title: "Remarks",
+        field: "remarks",
+        emptyValue: "-",
+        sorting: false,
+      },
+      // {
+      //   id: 'actions',
+      //   label: 'Actions',
+      //   title: 'Action',
+      //   render: (rowData) => {
+      //     return (
+      //       <>
+      //         <Button disabled={rowData?.returnDate !== null}>
+      //           <ModeEditOutlineIcon
+      //             onClick={(event) => handleEditRowData(rowData)}
+      //             sx={{
+      //               color:
+      //                 rowData?.returnDate === null
+      //                   ? 'rgb(188, 188, 188)'
+      //                   : 'black',
+      //               '&:hover': { color: 'green' },
+      //             }}
+      //           />
+      //         </Button>
+      //         <Button disabled={rowData?.returnDate !== null}>
+      //           <DeleteIcon
+      //             onClick={(event) => handleDeleteRowData(rowData)}
+      //             sx={{
+      //               color:
+      //                 rowData?.returnDate === null
+      //                   ? 'rgb(188, 188, 188)'
+      //                   : 'black',
+      //               '&:hover': { color: 'green' },
+      //             }}
+      //           />
+      //         </Button>
+      //       </>
+      //     );
+      //   },
+      // },
+    ];
+
+  const returnedLogistics = [
     {
       title: "SN",
       render: (rowData) => rowData.tableData.id + 1,
@@ -232,7 +345,7 @@ const EmployeeResource = ({ permissions }) => {
         sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}
       >
         <CustomTable
-          columns={columns}
+          columns={currentlyUsedLogistics}
           data={usedResource}
           title="Currently Used Logistics"
           isLoading={isLoading}
@@ -241,7 +354,7 @@ const EmployeeResource = ({ permissions }) => {
           // exportButton={true}
         />
         <CustomTable
-          columns={columns}
+          columns={returnedLogistics}
           data={returnedResource}
           title="Returned Logistics"
           isLoading={isLoading}

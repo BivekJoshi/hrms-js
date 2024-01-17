@@ -2,9 +2,17 @@ import * as Yup from "yup";
 import { sub } from "date-fns/fp";
 
 const AddEmployeeSchema = Yup.object().shape({
-  firstName: Yup.string().required("First name is required").max(25, "First name cannot be greater than 25 characters"),
-  middleName: Yup.string().max(25, "Middle name cannot be greater than 25 characters"),
-  lastName: Yup.string().required("Last name is required").max(25, "Last name cannot be greater than 25 characters"),
+  firstName: Yup.string()
+  .required("First name is required")
+  .max(25, "First name cannot be greater than 25 characters")
+  .matches(/^[A-Za-z]+$/, 'Name must contain only letters'),
+  middleName: Yup.string()
+  .max(25, "Middle name cannot be greater than 25 characters")
+  .matches(/^[A-Za-z]+$/, 'Name must contain only letters'),
+  lastName: Yup.string()
+  .required("Last name is required")
+  .max(25, "Last name cannot be greater than 25 characters")
+  .matches(/^[A-Za-z]+$/, 'Name must contain only letters'),
   gender: Yup.string().required("Gender is required"),
   dateOfBirth: Yup.date()
     .required("Date of birth is required")
@@ -17,8 +25,11 @@ const AddEmployeeSchema = Yup.object().shape({
   // .matches(/^[0-9]{10}$/, 'Invalid mobile number format'),
   citizenshipNumber: Yup.string()
     .matches(/^[0-9\/-]+$/, "Enter valid citizenship number")
-    .required("Citizenship number is required").max(25, "Citizenship cannot be greater than 25 characters"),
-  panNumber: Yup.string().matches(/^[0-9\/-]+$/, "Enter valid pan number").max(25, "Pan number cannot be greater than 25 numbers"),
+    .required("Citizenship number is required")
+    .max(25, "Citizenship number cannot be greater than 25 characters"),
+  panNumber: Yup.string()
+  .matches(/^[0-9\/-]+$/, "Enter valid pan number")
+  .max(25, "Pan number cannot be greater than 25 numbers"),
   officeEmail: Yup.string()
     .required("Office email is required")
     .max(50, "Office email cannot be greater than 50 characters")

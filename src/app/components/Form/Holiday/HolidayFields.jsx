@@ -3,6 +3,7 @@ import { Grid, TextField } from "@mui/material";
 import PermissionHoc from "../../../hoc/permissionHoc";
 import FormModal from "../../Modal/FormModal";
 import { ButtonComponent } from "../../Button/ButtonComponent";
+import RemarkField from "../../RemarkField/RemarkField";
 
 const HolidayFields = ({
   formik,
@@ -70,7 +71,7 @@ const HolidayFields = ({
                 />
               </Grid>
               <Grid item xs={12} sm={12}>
-                <TextField
+                {/* <TextField
                   id="holidayDescription"
                   name="holidayDescription"
                   label="Description"
@@ -91,6 +92,21 @@ const HolidayFields = ({
                   InputLabelProps={{
                     shrink: Boolean(formik.values.holidayDescription),
                   }}
+                /> */}
+                <RemarkField
+                  id="holidayDescription"
+                  name="holidayDescription"
+                  label="Description"
+                  fullWidth
+                  formik={formik}
+                  maxLength={255}
+                  variant="outlined"
+                  multiline
+                  InputLabelProps={{
+                    shrink: Boolean(formik.values.holidayDescription),
+                  }}
+                  rows={4}
+                  inputProps={{ maxLength: 255 }}
                 />
               </Grid>
               <Grid
