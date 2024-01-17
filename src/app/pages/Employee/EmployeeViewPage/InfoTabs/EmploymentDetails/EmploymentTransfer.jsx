@@ -16,7 +16,7 @@ import { useGetDesignation } from "../../../../../hooks/designation/useDesignati
 import ThemeModeContext from "../../../../../../theme/ThemeModeContext";
 import { ThemeSwitch } from "../../../../../../theme/ThemeSwitch";
 
-const EmploymentTransfer = ({ data, handleSuccess, minDate }) => {
+const EmploymentTransfer = ({ data, handleSuccess, minDate, backCallBack }) => {
   const { data: departmentData, isLoading: loadingDepartment } =
     useGetDepartment();
   const { data: companyData, isLoading: loadingCompany } = useGetCompany();
@@ -29,7 +29,7 @@ const EmploymentTransfer = ({ data, handleSuccess, minDate }) => {
     formik.handleSubmit();
   };
   return (
-    <Box marginTop={3} padding={4}>
+    <Box sx={{ px: 1, mt: 2 }}>
       <Grid container spacing={3}>
         <Grid sm={12}>
           <Typography variant="h6" marginLeft={3}>
@@ -107,7 +107,7 @@ const EmploymentTransfer = ({ data, handleSuccess, minDate }) => {
             id="fromBranch"
             name="fromBranch"
             select
-            label='From Branch'
+            label="From Branch"
             fullWidth
             required
             disabled
@@ -137,7 +137,7 @@ const EmploymentTransfer = ({ data, handleSuccess, minDate }) => {
             id="branchId"
             name="branchId"
             select
-            label='To Branch'
+            label="To Branch"
             fullWidth
             required
             value={!loadingCompany && formik.values.branchId}
@@ -311,6 +311,15 @@ const EmploymentTransfer = ({ data, handleSuccess, minDate }) => {
           justifyContent="flex-end"
           alignItems="flex-end"
         >
+          <Button
+            sx={{ mt: 3, ml: 1 }}
+            onClick={backCallBack}
+            color="success"
+            variant="outlined"
+          >
+            Back
+          </Button>
+
           <Button
             variant="contained"
             onClick={handleFormSubmit}

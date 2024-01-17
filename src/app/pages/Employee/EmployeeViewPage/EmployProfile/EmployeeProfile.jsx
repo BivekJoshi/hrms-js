@@ -1,19 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   useGetEmployeeById,
   useGetLoggedInUserInfo,
-} from '../../../../hooks/employee/useEmployee';
-import { useParams } from 'react-router-dom';
+} from "../../../../hooks/employee/useEmployee";
+import { useParams } from "react-router-dom";
 
-import './Style/Style.css';
-import { DetailProfile } from './Component/DetailProfile';
-import { PersonalProfile } from './Component/PersonalProfile';
-import ProgressById from '../../ProgressEmployeeData/ProgressById';
-import useAuth from '../../../../../auth/hooks/component/login/useAuth';
-import { EmployeeDetailProfile } from './Component/EmployeeDetailProfile';
-import { useGetLoggedInUser } from '../../../../hooks/auth/usePassword';
-import { Typography } from '@mui/material';
-import { ButtonComponent } from '../../../../components/Button/ButtonComponent';
+import "./Style/Style.css";
+import { DetailProfile } from "./Component/DetailProfile";
+import { PersonalProfile } from "./Component/PersonalProfile";
+import ProgressById from "../../ProgressEmployeeData/ProgressById";
+import useAuth from "../../../../../auth/hooks/component/login/useAuth";
+import { EmployeeDetailProfile } from "./Component/EmployeeDetailProfile";
+import { useGetLoggedInUser } from "../../../../hooks/auth/usePassword";
+import { Typography } from "@mui/material";
+import { ButtonComponent } from "../../../../components/Button/ButtonComponent";
+import CustomButton from "../../../../utils/Button/Button";
 
 const EmployeeProfile = () => {
   const { isSuperAdmin, isAdmin, isHr, isEmployee, isHrAdmin, isManager } =
@@ -35,19 +36,22 @@ const EmployeeProfile = () => {
     !isLoading && (
       <>
         <ProgressById />
-        <div className='employeeBody'>
+        <div className="employeeBody">
           <div>
             {!showPersonalProfile && (
-              <ButtonComponent
-                OnClick={togglePersonalProfile}
-                buttonName={'Show Profile'}
+              // <ButtonComponent
+              //   OnClick={togglePersonalProfile}
+              //   buttonName={"Show Profile"}
+              // />
+              <CustomButton
+                text="Show Profile"
+                onClick={togglePersonalProfile}
               />
             )}
             {showPersonalProfile && (
               <PersonalProfile data={employeeDataById} role={isAdmins} />
             )}
           </div>
-          <br />
           <DetailProfile
             data={employeeDataById}
             setShowPersonalProfile={setShowPersonalProfile}

@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { DOC_URL } from '../../../auth/axiosInterceptor';
 import {
   Box,
-  Button,
   Fade,
   IconButton,
   Modal,
@@ -207,8 +206,6 @@ const ShowImagePreview = ({ row }) => {
     p: '12px 24px',
   };
 
-  console.log(documentData);
-
   const singleDoc = documentData?.map((document) => {
     const isItemHovered = hoveredItem === document.name;
 
@@ -255,7 +252,7 @@ const ShowImagePreview = ({ row }) => {
       </TableCell>
     );
   });
-  console.log(singleDoc);
+
   return (
     <>
       {singleDoc}

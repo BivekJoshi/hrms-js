@@ -60,7 +60,8 @@ const minAge = new Date(
   .split("T")[0];
 const today = new Date().toISOString().split("T")[0];
 
-const EmployeeBasicInfoForm = ({ formik }) => {
+const EmployeeBasicInfoForm = ({ formik, data }) => {
+ 
   // const { data: companyData, isLoading: loadingCompany } = useGetCompany();
   // const { data: designationData, isLoading: loadingDesignation } =
   //   useGetDesignation();
@@ -513,6 +514,7 @@ const EmployeeBasicInfoForm = ({ formik }) => {
           }}
           rows={2}
           inputProps={{ maxLength: 255 }}
+          data={data?.remarks}
         />
       </Grid>
     </Grid>

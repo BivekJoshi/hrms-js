@@ -26,7 +26,6 @@ export const EventNotification = ({ data, handleClose }) => {
     formik.setFieldValue("eventId", eventId);
     formik.setFieldValue("notificationId", notificationId);
     formik.handleSubmit();
-    setShowRemark({ ...showRemark, [index]: false });
     handleClose
   };
 
@@ -207,6 +206,7 @@ export const EventNotification = ({ data, handleClose }) => {
                           ename?.notificationId
                         )
                       }
+                      sx={{marginTop:".5rem"}}
                     >
                       <b>Submit</b>
                     </Button>

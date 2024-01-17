@@ -59,18 +59,7 @@ const ResetPassword = ({ isLoading }) => {
   const [confirmPassword, setConfirmPassword] = useState();
 
   const handleFormSubmit = async () => {
-    const doPasswordsMatch = formik.values.password === confirmPassword;
-
-    if (!doPasswordsMatch) {
-      toast.error("New password and confirm password do not match")
-      return;
-    } else {
-      formik.handleSubmit();
-    }
-  };
-
-  const handleConfimPassword = (event) => {
-    setConfirmPassword(event.target.value);
+    formik.handleSubmit();
   };
 
   const style = {
@@ -174,7 +163,7 @@ const ResetPassword = ({ isLoading }) => {
             <TextField
               id="password"
               name="password"
-              label="New Password"
+              label="Password"
               placeholder="Enter your new password"
               fullWidth
               required
@@ -183,7 +172,7 @@ const ResetPassword = ({ isLoading }) => {
                 formik.handleChange(e);
                 handleChangeValidation(e.target.value);
               }}
-              // error={formik.touched.password && Boolean(formik.errors.password)}
+              error={formik.touched.password && Boolean(formik.errors.password)}
               helperText={formik.touched.password && formik.errors.password}
               variant="outlined"
               type={showValues.showPassword ? "text" : "password"}
@@ -218,8 +207,8 @@ const ResetPassword = ({ isLoading }) => {
               placeholder="Confirm your new password"
               fullWidth
               required
-              value={confirmPassword}
-              onChange={handleConfimPassword}
+              value={formik.values.confirmPassword}
+              onChange={formik.handleChange}
               error={
                 formik.touched.confirmPassword &&
                 Boolean(formik.errors.confirmPassword)

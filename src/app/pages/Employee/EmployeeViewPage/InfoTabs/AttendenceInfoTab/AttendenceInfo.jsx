@@ -10,7 +10,6 @@ import { TbCircleLetterP } from "react-icons/tb";
 import { Box, Card, CardContent, Grid, Typography } from "@mui/material";
 import "../../Style/BasicInfoStyle.css";
 import { useGetLoggedInUser } from "../../../../../hooks/auth/usePassword";
-import useAuth from "../../../../../../auth/hooks/component/login/useAuth";
 
 const AttendenceInfo = ({ data }) => {
   const { data: userData } = useGetLoggedInUser();
@@ -20,16 +19,6 @@ const AttendenceInfo = ({ data }) => {
 
   const calendarRef = useRef(null);
   const [events, setEvents] = useState([]);
-
-  // const { isEmployee } = useAuth();
-  // let id;
-  // if (isEmployee) {
-  //   const { data: loggedInUserDataInfo } = useGetLoggedInUser();
-  //   id = loggedInUserDataInfo?.employeeId;
-  // } else {
-  //   const { id: paramId } = useParams();
-  //   id = paramId;
-  // }
 
   useEffect(() => {
     if (attendanceData) {
@@ -43,18 +32,6 @@ const AttendenceInfo = ({ data }) => {
       setEvents(formattedEvents);
     }
   }, [attendanceData]);
-
-  // useEffect(() => {
-  //   if (attendanceData) {
-  //     const formattedEvents = attendanceData.map((event) => ({
-  //       title: event.timeIn,
-  //       date: event.attendanceDate,
-  //       backgroundColor: "white",
-  //       id: event.id,
-  //     }));
-  //     setEvents(formattedEvents);
-  //   }
-  // }, [attendanceData]);
 
   return (
     <Box className={attendanceData ? "attendenceDesign" : ""}>
@@ -218,12 +195,6 @@ function renderEventContent(eventInfo) {
           </div>
         )}
       </Box>
-      {/* <Box className="timeInO" sx={{ color: "green" }}>
-        <Typography>
-          TimeIn : {eventInfo?.event?._def?.extendedProps?.time}
-        </Typography>
-        <Typography>TimeOut : {eventInfo.event.date}</Typography>
-      </Box> */}
     </Box>
   );
 }

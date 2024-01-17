@@ -128,6 +128,7 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
             }}
             rows={4}
             inputProps={{ maxLength: 255 }}
+            data={data?.branchDescription}
           />
         </Grid>
         <Grid

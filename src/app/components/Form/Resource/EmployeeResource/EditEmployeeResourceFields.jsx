@@ -8,6 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import useEmployeeResourceForm from "../../../../hooks/resource/employeeResource/EmployeeResourceForm/useEmployeeResourceForm";
+import RemarkField from '../../../RemarkField/RemarkField';
 
 const EditEmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
   const { formik } = useEmployeeResourceForm(data, onClose);
@@ -89,6 +90,24 @@ const EditEmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
             InputLabelProps={{
               shrink: Boolean(formik.values.conditionWhileReturned),
             }}
+          />
+        </Grid>
+        <Grid item xs={12} sm={12} md={12} lg={12}>
+          <RemarkField
+            id="remarks"
+            name="remarks"
+            label="Remarks"
+            fullWidth
+            formik={formik}
+            maxLength={255}
+            variant="outlined"
+            multiline
+            InputLabelProps={{
+              shrink: Boolean(formik.values.remarks),
+            }}
+            rows={4}
+            inputProps={{ maxLength: 255 }}
+            data={data?.remarks}
           />
         </Grid>
         {/* <Grid item xs={12} sm={12}>

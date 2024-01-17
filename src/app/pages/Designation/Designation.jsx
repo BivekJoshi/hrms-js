@@ -95,8 +95,8 @@ const Designation = ({ permissions }) => {
           <div
             style={{
               whiteSpace: 'wrap',
-              width: '15rem',
               overflowWrap: 'break-word',
+              wordBreak:"break-all"
             }}
           >
             {rowData?.positionDetails}
@@ -142,13 +142,6 @@ const Designation = ({ permissions }) => {
   ];
   if (isLoading) return <>Loading</>;
 
-  const actionsCellStyle = {
-    width: '64px',
-    padding: ' 7px 39px',
-    display: 'flex',
-    justifyContent: 'stretch',
-    alignItems: 'center',
-  };
   return (
     <>
       <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
@@ -167,7 +160,6 @@ const Designation = ({ permissions }) => {
         title='Designation List'
         isLoading={isLoading}
         actions={actions}
-        actionsCellStyle={actionsCellStyle}
       />
 
       {openEditModal && (

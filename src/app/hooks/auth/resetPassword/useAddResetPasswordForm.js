@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import { useAddResetPassword, useGetLoggedInUser } from "../usePassword";
-import { ResetPasswordSchema } from "./ResetPasswordSchema";
+import ResetPasswordSchema from "./ResetPasswordSchema";
 
 const useAddForgotPasswordForm = () => {
   const [loading, setLoading] = useState(false);
@@ -12,12 +12,13 @@ const useAddForgotPasswordForm = () => {
   });
   const { data: loggedInUser } = useGetLoggedInUser();
   const id = loggedInUser?.id;
-  const { mutate } = useAddResetPassword({id});
+  const { mutate } = useAddResetPassword({ id });
 
   const formik = useFormik({
     initialValues: {
       oldPassword: "",
       password: "",
+      confirmPassword: "",
     },
     validationSchema: ResetPasswordSchema,
     onSubmit: (values) => {
@@ -27,11 +28,9 @@ const useAddForgotPasswordForm = () => {
   });
 
   const handleRequest = (values) => {
-    values = {
-      ...values,
-    };
+    const { oldPassword, password } = values;
     mutate(
-      values,
+      { oldPassword, password, id },
       formik,
       { onSuccess: () => formik.handleReset() },
       { onSettled: () => setLoading(false) }

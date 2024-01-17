@@ -4,8 +4,6 @@ import { useParams } from "react-router";
 import EmployeeAddressDetailForm from "../../EmployeeAddressDetailForm/EmployeeAddressDetailForm";
 import EmployeeBankDetailForm from "../../EmployeeBankDetailForm/EmployeeBankDetailForm";
 import EmployeeDocumentDetailForm from "../../EmployeeDocumentDetailForm/EmployeeDocumentDetailForm";
-import EmployeeFamilyDetailForm from "../../EmployeeFamilyDetailForm/EmployeeFamilyDetailForm";
-import EmployeeQualificationDetailForm from "../../EmployeeQualificationDetailForm/EmployeeQualificationDetailForm";
 import EmployeeBasicInfoForm from "../EmployeeBasicInfoForm";
 import EmployeeHistoryDetailForm from "../../EmployeeHistoryDetailForm/EmployeeHistoryDetailForm";
 
@@ -46,7 +44,7 @@ const EditEmployeeForm = () => {
     "Document Details",
   ];
 
-  const { data, isLoading: employeeLoading } = useGetEmployeeById(id);
+  const { data , isLoading: employeeLoading } = useGetEmployeeById(id);
   const { data: addressData, isLoading: getaddressLoading } = useGetAddressById(
     id
   );
@@ -83,7 +81,7 @@ const EditEmployeeForm = () => {
   const getStepContent = (step) => {
     switch (step) {
       case 0:
-        return <EmployeeBasicInfoForm formik={formik} isLoading={isLoading} />;
+        return <EmployeeBasicInfoForm formik={formik} isLoading={isLoading} data={data} />;
 
       case 1:
         return (

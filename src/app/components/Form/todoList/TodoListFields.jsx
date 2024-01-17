@@ -3,6 +3,7 @@ import { Grid, TextField, Button, MenuItem } from "@mui/material";
 import useTodoListForm from "../../../hooks/todoList/TodoListForm/useTodoListForm";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
 import { ButtonComponent } from "../../Button/ButtonComponent";
+import RemarkField from "../../RemarkField/RemarkField";
 
 const priority = [
   {
@@ -51,7 +52,42 @@ const TodoListFields = ({ onClose, isLoading, data }) => {
     !isLoading && (
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
-          <TextField
+          {data ? (
+             <RemarkField
+             id="message"
+             name="message"
+             label="Todo"
+             fullWidth
+             req={true}
+             formik={formik}
+             data={data?.message}
+             maxLength={255}
+             variant="outlined"
+             multiline
+             InputLabelProps={{
+               shrink: Boolean(formik.values.message),
+             }}
+             rows={4}
+             inputProps={{ maxLength: 255 }}
+           />
+          ) : (
+            <TextField
+            id="message"
+            name="message"
+            label="Todo"
+            fullWidth
+            required
+            multiline
+            value={formik.values.message}
+            onChange={formik.handleChange}
+            error={formik.touched.message && Boolean(formik.errors.message)}
+            helperText={formik.touched.message && formik.errors.message}
+            variant="outlined"
+            InputLabelProps={{ shrink: Boolean(formik.values.message) }}
+            size="small"
+          /> 
+          )}
+          {/* <TextField
             id="message"
             name="message"
             label="Todo"
@@ -64,7 +100,24 @@ const TodoListFields = ({ onClose, isLoading, data }) => {
             variant="outlined"
             InputLabelProps={{ shrink: Boolean(formik.values.message) }}
             size="small"
-          />
+          /> */}
+          {/* <RemarkField
+            id="message"
+            name="message"
+            label="Todo"
+            fullWidth
+            req={true}
+            formik={formik}
+            data={data?.message}
+            maxLength={255}
+            variant="outlined"
+            multiline
+            InputLabelProps={{
+              shrink: Boolean(formik.values.message),
+            }}
+            rows={4}
+            inputProps={{ maxLength: 255 }}
+          /> */}
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
