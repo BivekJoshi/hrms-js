@@ -1,4 +1,4 @@
-import * as Yup from "yup";
+import * as Yup from 'yup';
 
 const BranchHistorySchema = Yup.object().shape({
   branchId: Yup.string().required('Branch is required'),
@@ -6,6 +6,7 @@ const BranchHistorySchema = Yup.object().shape({
   // effectiveToDate: Yup.string().required('Date is required'),
   employeeId: Yup.string().required('Employee is required'),
   // remarks: Yup.string().required('Remarks is required'),
+  remarks: Yup.string().max(255, `Maximum ${255} characters allowed`),
 });
 
 export { BranchHistorySchema };

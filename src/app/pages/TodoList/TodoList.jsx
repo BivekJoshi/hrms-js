@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Box, Button, Chip, Stack } from "@mui/material";
+import React, { useContext, useState } from "react";
+import { Box, Button, Chip, Stack, Typography } from "@mui/material";
 import Skeleton from "@mui/material/Skeleton";
 
 import {
@@ -12,8 +12,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import { ButtonComponent } from "../../components/Button/ButtonComponent";
 import PermissionHoc from "../../hoc/permissionHoc";
-import HocButton from "../../hoc/hocButton";
 import CustomTable from "../../components/CustomTable/CustomTable";
+import ThemeModeContext from "../../../theme/ThemeModeContext";
 
 const TodoList = ({ permissions }) => {
   const { data: todoListData, isLoading } = useGetTodoList();
@@ -48,10 +48,17 @@ const TodoList = ({ permissions }) => {
       sorting: false,
     },
     {
-      title: "Message",
+      title: "Task",
       field: "message",
       width: "300px",
       sorting: false,
+      render: (rowData) => {
+        return (
+          <Typography style={{ overflowWrap: "break-word", wordBreak:"break-all" }}>
+            {rowData.message}
+          </Typography>
+        );
+      },
     },
     {
       title: "Due",
@@ -95,12 +102,13 @@ const TodoList = ({ permissions }) => {
     },
   ];
 
+  const { mode } = useContext(ThemeModeContext);
   const actions = [
     {
       icon: () => (
         <ModeEditOutlineIcon
           sx={{
-            color: "black",
+            color: mode === "light" ? "black" : "white",
             "&:hover": {
               color: "green",
             },
@@ -114,7 +122,7 @@ const TodoList = ({ permissions }) => {
       icon: () => (
         <DeleteIcon
           sx={{
-            color: "black",
+            color: mode === "light" ? "black" : "white",
             "&:hover": {
               color: "red",
             },
@@ -140,7 +148,7 @@ const TodoList = ({ permissions }) => {
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
         <ButtonComponent
           OnClick={handleAddOpenModal}
-          buttonName={"+ Add Todo"}
+          buttonName={"Add Todo"}
           color="#fff"
         />
       </Box>
@@ -168,6 +176,13 @@ const TodoList = ({ permissions }) => {
           title={"Add Todo List"}
         />
       )}
+      <style>
+        {`
+        .css-a80liw-MuiTableCell-root{
+          text-align: center;
+        }
+        `}
+      </style>
     </>
   );
 };

@@ -55,7 +55,7 @@ const EditDocumentFields = ({ onClose, isLoading, id }) => {
             sx={{ mt: 3, ml: 1 }}
             color="error"
           >
-            cancel
+            Cancel
           </Button>
         </Grid>
       </Grid>

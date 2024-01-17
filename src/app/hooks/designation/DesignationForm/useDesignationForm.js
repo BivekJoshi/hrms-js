@@ -1,6 +1,7 @@
-import { useFormik } from "formik";
-import { useAddDesignation, useEditDesignation } from "../useDesignation";
-import { DesignationSchema } from "../Validation/DesignationSchema";
+import { useFormik } from 'formik';
+import { useAddDesignation, useEditDesignation } from '../useDesignation';
+import { DesignationSchema } from '../Validation/DesignationSchema';
+import { isEqual } from 'lodash';
 
 const useDesignationForm = (data, onClose) => {
   const { mutate: addDesignation } = useAddDesignation({});
@@ -8,10 +9,10 @@ const useDesignationForm = (data, onClose) => {
 
   const formik = useFormik({
     initialValues: {
-      positionName: data?.positionName || "",
-      positionLevel: data?.positionLevel || "",
-      salary: data?.salary || "",
-      positionDetails: data?.positionDetails || "",
+      positionName: data?.positionName || '',
+      positionLevel: data?.positionLevel || '',
+      salary: data?.salary || '',
+      positionDetails: data?.positionDetails || '',
       id: data?.id,
     },
     validationSchema: DesignationSchema,
@@ -35,13 +36,24 @@ const useDesignationForm = (data, onClose) => {
     });
   };
 
+  // const handledEditRequest = (values) => {
+  //   values = { ...values };
+  //   editDesignation(values, {
+  //     onSuccess: () => {
+  //       onClose();
+  //     },
+  //   });
+  // };
+
   const handledEditRequest = (values) => {
     values = { ...values };
-    editDesignation(values, {
-      onSuccess: () => {
-        onClose();
-      },
-    });
+    if (!isEqual(values, formik.initialValues)) {
+      editDesignation(values, {
+        onSuccess: () => {
+          onClose();
+        },
+      });
+    }
   };
 
   return { formik };

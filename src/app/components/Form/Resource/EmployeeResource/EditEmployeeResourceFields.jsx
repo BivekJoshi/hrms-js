@@ -32,7 +32,14 @@ const EditEmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
             {" "}
             Provided Date : <b>{data?.receiveDate}</b>
           </Typography>
-          <Typography variant="h6">
+          <Typography
+            variant="h6"
+            style={{
+              overflowWrap: "break-word",
+              textTransform: "capitalize",
+              wordBreak:"break-all"
+            }}
+          >
             {" "}
             Logistics : <b>{data?.officeResource?.name}</b>
           </Typography>
@@ -44,14 +51,10 @@ const EditEmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
             id="returnDate"
             name="returnDate"
             label="Returned Date"
-            placeholder="Select date"
             fullWidth
             required
             value={formik.values.returnDate}
             onChange={formik.handleChange}
-            inputProps={{
-              max: currentDate, // Disable past date selections
-            }}
             error={
               formik.touched.returnDate && Boolean(formik.errors.returnDate)
             }
@@ -59,35 +62,17 @@ const EditEmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
             variant="outlined"
             InputLabelProps={{ shrink: true }}
             size="small"
+            inputProps={{
+              min: data?.receiveDate,
+              max: currentDate,
+            }}
           />
         </Grid>
-        {/* <Grid item xs={12} sm={12}>
-          <TextField
-            id="conditionWhileProvided"
-            name="conditionWhileProvided"
-            label="Device Condition"
-            placeholder="Enter device condition"
-            fullWidth
-            value={formik.values.conditionWhileProvided}
-            onChange={formik.handleChange}
-            error={
-              formik.touched.conditionWhileProvided &&
-              Boolean(formik.errors.conditionWhileProvided)
-            }
-            helperText={
-              formik.touched.conditionWhileProvided &&
-              formik.errors.conditionWhileProvided
-            }
-            variant="outlined"
-            size="small"
-          />
-        </Grid> */}
         <Grid item xs={12} sm={12}>
           <TextField
             id="conditionWhileReturned"
             name="conditionWhileReturned"
-            label="Device Condition when Returned"
-            placeholder="Enter device condition"
+            label="Device condition when returned"
             fullWidth
             value={formik.values.conditionWhileReturned}
             onChange={formik.handleChange}
@@ -101,6 +86,9 @@ const EditEmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
             }
             variant="outlined"
             size="small"
+            InputLabelProps={{
+              shrink: Boolean(formik.values.conditionWhileReturned),
+            }}
           />
         </Grid>
         {/* <Grid item xs={12} sm={12}>
@@ -129,7 +117,7 @@ const EditEmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
             onClick={handleFormSubmit}
             sx={{ mt: 3, ml: 1 }}
           >
-            Submit
+            Update Logistics
           </Button>
           <Button
             variant="contained"

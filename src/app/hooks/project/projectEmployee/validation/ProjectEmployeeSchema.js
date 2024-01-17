@@ -1,9 +1,9 @@
 import * as Yup from "yup";
 
 const ProjectEmployeeSchema = Yup.object().shape({
-    employeeId: Yup.string().required("Employee name is required"),
+    employeeId: Yup.string().required("Please select Employee name "),
     // projectId: Yup.string().required("Project name is required"),
-    assignedOn: Yup.string().required("Assigned date is required"),
+    assignedOn: Yup.string().required("Please select assigned date"),
     // deAssignedOn: Yup.string(),
 })
 

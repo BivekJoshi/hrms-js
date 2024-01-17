@@ -11,8 +11,8 @@ const useEmployeeHistoryForm = () => {
   const { id } = useParams();
   const { mutate: addMutate } = useAddEmployeeHistory({});
   const { mutate: editMutate } = useEditEmployeeHistory({});
-  const { data: empHistoryData, isLoading: empHistoryLoading } = useGetEmployeeHistory(id);
-
+  const { data: empHistoryData, isLoading: empHistoryLoading } =
+    useGetEmployeeHistory(id);
   const historyDetails =
     !empHistoryLoading &&
     empHistoryData?.map((empHistory) => ({
@@ -23,7 +23,8 @@ const useEmployeeHistoryForm = () => {
       fromDate: empHistory?.fromDate || '',
       toDate: empHistory?.toDate || '',
       description: empHistory?.description || '',
-      remarks: empHistory?.remarks || '',
+      experiencePath: empHistory?.experiencePath || '',
+      // remarks: empHistory?.remarks || '',
     }));
 
   const formik = useFormik({
@@ -39,7 +40,7 @@ const useEmployeeHistoryForm = () => {
                 fromDate: '',
                 toDate: '',
                 description: '',
-                remarks: '',
+                // remarks: '',
               },
             ],
     },

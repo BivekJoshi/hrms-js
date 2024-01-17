@@ -4,11 +4,9 @@ import { useAddCreateTask, useEditCreateTask,} from "../useProjectTask";
 import { useParams } from "react-router-dom";
 import { getProjectTask } from "../../../../api/project/projectTask-api";
 
-const useProjectTaskForm = (data) => {
-  const taskId=data?.id;
-  
+const useProjectTaskForm = (data, onClose) => {
+  const taskId=data?.id;  
   const { id } = useParams();
-
   const { mutate: addprojectCreateTask } = useAddCreateTask({});
   const { mutate: editprojectCreateTask } = useEditCreateTask({taskId});
 
@@ -17,7 +15,7 @@ const useProjectTaskForm = (data) => {
       name: data?.name || "",
       detail: data?.detail || "",
       priority: data?.priority || "",
-      status: data?.status || "",
+      status: data?.status || "WORK_IN_PROGRESS",
       dueDate: data?.dueDate || "",
       projectId: parseInt(id) || data?.projectId || "",
       id: data?.id || "",
@@ -37,6 +35,7 @@ const useProjectTaskForm = (data) => {
     const formData={...values};
     addprojectCreateTask(formData,{
       onSuccess:(data)=>{
+        onClose();
         formik.resetForm();
       
       }
@@ -47,6 +46,7 @@ const useProjectTaskForm = (data) => {
     values = { ...values };
     editprojectCreateTask(values, {
       onSuccess:(data)=>{
+        onClose();
         formik.resetForm();
       
       }

@@ -1,9 +1,9 @@
-import { Box, Button } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import HocButton from "../../hoc/hocButton";
-import CustomTable from "../../components/CustomTable/CustomTable";
-import FormModal from "../../components/Modal/FormModal";
-import EmploymentTypeFields from "../../components/Form/EmploymentType/EmploymentTypeFields.jsx";
+import { Box, Button } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import HocButton from '../../hoc/hocButton';
+import CustomTable from '../../components/CustomTable/CustomTable';
+import FormModal from '../../components/Modal/FormModal';
+import EmploymentTypeFields from '../../components/Form/EmploymentType/EmploymentTypeFields.jsx';
 import {
   useDeleteEmploymentType,
   useGetEmploymentType,
@@ -11,6 +11,7 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteConfirmationModal from "../../components/Modal/DeleteConfirmationModal.jsx";
+import ThemeModeContext from "../../../theme/ThemeModeContext.jsx";
 
 const EmploymentType = () => {
   const { data: employmentTypeData, isLoading } = useGetEmploymentType();
@@ -27,10 +28,8 @@ const EmploymentType = () => {
   const handleCloseEditModal = () => setOPenEditModal(false);
   const handleCloseDeleteModal = () => setOpenDeleteModal(false);
 
-  const {
-    deleteTypeMutation,
-    isSuccess: isDeleteSuccess,
-  } = useDeleteEmploymentType({});
+  const { deleteTypeMutation, isSuccess: isDeleteSuccess } =
+    useDeleteEmploymentType({});
 
   const handleDeleteType = (rowData) => {
     setDeletedType(rowData);
@@ -54,81 +53,94 @@ const EmploymentType = () => {
 
   const columns = [
     {
-      title: "SN",
+      title: 'SN',
       render: (rowData) => rowData.tableData.id + 1,
-      maxWidth: "1px",
+      maxWidth: '1px',
       sortable: false,
       sorting: false,
     },
     {
-      title: "Type Name",
-      field: "name",
-      emptyValue: "-",
-      width: 200,
+      title: 'Type Name',
+      field: 'name',
+      emptyValue: '-',
+      maxWidth: '140px',
       sorting: false,
     },
     {
-      title: "Description",
-      field: "description",
-      emptyValue: "-",
-      width: 200,
+      title: 'Description',
+      field: 'description',
+      emptyValue: '-',
+      width: 300,
       sorting: false,
+      render: (rowData) => (
+        <div
+          style={{
+            whiteSpace: 'normal',
+            overflowWrap: 'break-word',
+            wordWrap: 'break-word',
+            wordBreak: 'break-all',
+          }}
+        >
+          {rowData?.description}
+        </div>
+      ),
     },
   ].filter(Boolean);
+  const { mode } = React.useContext(ThemeModeContext);
 
   const actions = [
     {
       icon: () => (
         <EditIcon
           sx={{
-            color: "black",
+            color: mode === "light" ? "black" : "white",
             "&:hover": {
               color: "green",
             },
           }}
         />
       ),
-      tooltip: "Edit Detail",
+      tooltip: 'Edit Detail',
       onClick: (event, rowData) => handleEditType(rowData),
     },
     {
       icon: () => (
         <DeleteIcon
           sx={{
-            color: "black",
+            color: mode === "light" ? "black" : "white",
             "&:hover": {
               color: "red",
             },
           }}
         />
       ),
-      tooltip: "Delete",
+      tooltip: 'Delete',
       onClick: (event, rowData) => handleDeleteType(rowData),
     },
   ];
   return (
     <>
-      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+      <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
         <Button
-          variant="contained"
-          sx={{ textTransform: "none" }}
+          variant='contained'
+          sx={{ textTransform: 'none' }}
           onClick={handleAddOpenModal}
         >
-          + Add Employment Type
+          Add Employment Type
         </Button>
       </Box>
       <br />
       <CustomTable
         columns={columns}
         data={employmentTypeData}
-        title="Employment Type"
+        title='Employment Type'
         actions={actions}
         // isLoading={isLoading}
       />
 
       {openAddModal && (
         <FormModal
-          title={"Add Employment Type"}
+          title={'Add Employment Type'}
           open={openAddModal}
           onClose={handleCloseAddModal}
           formComponent={<EmploymentTypeFields onClose={handleCloseAddModal} />}
@@ -136,7 +148,7 @@ const EmploymentType = () => {
       )}
       {openEditModal && (
         <FormModal
-          title={"Edit Employment Type"}
+          title={'Edit Employment Type'}
           open={openEditModal}
           onClose={handleCloseEditModal}
           formComponent={
@@ -152,7 +164,7 @@ const EmploymentType = () => {
           open={openDeleteModal}
           handleCloseModal={handleCloseDeleteModal}
           handleConfirmDelete={handleConfirmDelete}
-          message={"Employment Type"}
+          message={'Employment Type'}
         />
       )}
     </>

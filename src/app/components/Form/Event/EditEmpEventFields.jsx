@@ -1,9 +1,8 @@
-import { Grid, Typography } from "@mui/material";
-import React from "react";
-import { ButtonComponent } from "../../Button/ButtonComponent";
+import { Grid, Typography } from '@mui/material';
+import React from 'react';
+import { ButtonComponent } from '../../Button/ButtonComponent';
 
 const EditEmpEventFields = ({ onClose, data }) => {
-
   return (
     <Grid container spacing={3}>
       <Grid item xs={12} sm={12} lg={6} xl={6}>
@@ -28,15 +27,15 @@ const EditEmpEventFields = ({ onClose, data }) => {
       </Grid>
       <Grid
         container
-        direction="row"
-        justifyContent="flex-end"
-        alignItems="flex-end"
+        direction='row'
+        justifyContent='flex-end'
+        alignItems='flex-end'
       >
         <ButtonComponent
-          variant="contained"
+          variant='contained'
           OnClick={onClose}
-          BGColor={"#d32f2f"}
-          buttonName={"Cancel"}
+          BGColor={'#d32f2f'}
+          buttonName={'Cancel'}
         />
       </Grid>
     </Grid>

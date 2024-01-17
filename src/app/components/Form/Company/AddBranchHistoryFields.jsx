@@ -1,60 +1,60 @@
-import { Button, Grid, TextField } from "@mui/material";
-import React from "react";
-import useAddBranchHistoryForm from "../../../hooks/company/CompanyForm/useAddBranchHistoryForm";
-import { useGetCompany } from "../../../hooks/company/useCompany";
+import { Button, Grid, MenuItem, TextField } from '@mui/material';
+import React, { useContext, useState } from 'react';
+import useAddBranchHistoryForm from '../../../hooks/company/CompanyForm/useAddBranchHistoryForm';
+import { useGetCompany } from '../../../hooks/company/useCompany';
+import ThemeModeContext from '../../../../theme/ThemeModeContext';
+import RemarkField from '../../RemarkField/RemarkField';
 
-const AddBranchHistoryFields = ({ onClose, isLoading, id, branchHistoryData }) => {
+const AddBranchHistoryFields = ({
+  onClose,
+  isLoading,
+  id,
+  branchHistoryData,
+}) => {
   const { formik } = useAddBranchHistoryForm(onClose, id);
-  const { data: branchData } = useGetCompany();
-
+  const { data: branchData, isLoading: branchLoading } = useGetCompany();
+  const { mode } = useContext(ThemeModeContext);
   const handleFormSubmit = () => {
     formik.handleSubmit();
-    if (formik.isValid) {
-      // onClose();
-    }
   };
+  const currentDate = new Date().toISOString().split('T')[0];
 
   return (
     !isLoading && (
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
           <TextField
-            id="branchId"
-            name="branchId"
-            label="Branch Name"
-            placeholder="Enter branch name"
+            id='branchId'
+            name='branchId'
+            label='Branch Name'
             fullWidth
             required
             select
             value={formik.values.branchId}
             onChange={formik.handleChange}
-            error={
-              formik.touched.branchId && Boolean(formik.errors.branchId)
-            }
+            error={formik.touched.branchId && Boolean(formik.errors.branchId)}
             helperText={formik.touched.branchId && formik.errors.branchId}
-            variant="outlined"
-            SelectProps={{
-              native: true,
-            }}
-            InputLabelProps={{ shrink: true }}
-            // size="small"
+            variant='outlined'
+            size="small"
           >
-             <option value="" disabled>
-              Select Branch
-            </option>
-            {branchData?.map((option) => (
-              <option key={option?.id} value={option?.id}>
-                {`${option?.branchName}`}
-              </option>
-            ))}
+            {!branchLoading &&
+              branchData?.map((option) => (
+                <MenuItem
+                  key={option?.id}
+                  value={option?.id}
+                  sx={{ bgcolor: mode === 'light' ? '' : '#413e3e' }}
+                >
+                  {option?.branchName}
+                </MenuItem>
+              ))}
           </TextField>
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
-            id="effectiveFromDate"
-            name="effectiveFromDate"
-            label="Effective From Date"
-            type="date"
+            id='effectiveFromDate'
+            name='effectiveFromDate'
+            label='Effective From Date'
+            type='date'
             fullWidth
             value={formik.values.effectiveFromDate}
             onChange={formik.handleChange}
@@ -66,48 +66,48 @@ const AddBranchHistoryFields = ({ onClose, isLoading, id, branchHistoryData }) =
               formik.touched.effectiveFromDate &&
               formik.errors.effectiveFromDate
             }
-            variant="outlined"
+            variant='outlined'
             InputLabelProps={{ shrink: true }}
+            inputProps={{
+              max: currentDate,
+            }}
           />
         </Grid>
         <Grid item xs={12} sm={12}>
-          <TextField
-            id="remarks"
-            name="remarks"
-            label="Remarks"
-            placeholder="Enter remarks type"
+          <RemarkField
+            id='remarks'
+            name='remarks'
+            label='Remarks'
             fullWidth
-            value={formik.values.remarks}
-            onChange={formik.handleChange}
-            error={formik.touched.remarks && Boolean(formik.errors.remarks)}
-            helperText={formik.touched.remarks && formik.errors.remarks}
-            variant="outlined"
-            InputLabelProps={{ shrink: true }}
+            formik={formik}
+            maxLength={255}
+            variant='outlined'
+            multiline
+            InputLabelProps={{ shrink: Boolean(formik.values.remarks) }}
+            rows={4}
+            inputProps={{ maxLength: 250 }}
           />
         </Grid>
         <Grid
           container
-          direction="row"
-          justifyContent="flex-end"
-          alignItems="flex-end"
+          direction='row'
+          justifyContent='flex-end'
+          alignItems='flex-end'
         >
           <Button
-            variant="contained"
+            variant='contained'
             onClick={handleFormSubmit}
             sx={{ mt: 3, ml: 1 }}
           >
-            
-            {
-            branchHistoryData?.length !== 0
-              ? "Update Branch"
-              : "Add Employee Branch"
-          }
+            {branchHistoryData?.length !== 0
+              ? 'Update Branch'
+              : 'Add Branch'}
           </Button>
           <Button
-            variant="contained"
+            variant='contained'
             onClick={onClose}
             sx={{ mt: 3, ml: 1 }}
-            color="error"
+            color='error'
           >
             Cancel
           </Button>

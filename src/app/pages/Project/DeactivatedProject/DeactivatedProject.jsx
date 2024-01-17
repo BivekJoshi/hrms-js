@@ -1,17 +1,11 @@
 import MaterialTable from "@material-table/core";
 import React, { useState } from "react";
-import {
-  useAddActivateProject,
-  useGetDeactivatedProject,
-} from "../../../hooks/project/useProject";
-import { useGetEmployee } from "../../../hooks/employee/useEmployee";
+import { useGetDeactivatedProject } from "../../../hooks/project/useProject";
 import { IconButton, Grid, Typography } from "@mui/material";
-import {
-  AddProjectActiveModal,
-  AddProjectModal,
-} from "../ProjectModal/ProjectModal";
-import RestoreFromTrashOutlinedIcon from "@mui/icons-material/RestoreFromTrashOutlined";
+import { AddProjectActiveModal } from "../ProjectModal/ProjectModal";
 import CloseIcon from "@mui/icons-material/Close";
+import Restore from "../../../../assets/restore.png";
+import ThemeModeContext from "../../../../theme/ThemeModeContext";
 
 const DeactivatedProject = ({ onClick }) => {
   const { data: deactivatedProject, isLoading } = useGetDeactivatedProject();
@@ -28,7 +22,7 @@ const DeactivatedProject = ({ onClick }) => {
     {
       title: "SN",
       render: (rowData) => rowData.tableData.index + 1,
-      width: "2%",
+      maxWidth: "1px",
       sortable: false,
       sorting: false,
     },
@@ -36,18 +30,23 @@ const DeactivatedProject = ({ onClick }) => {
       title: "Project Name",
       field: "projectName",
       emptyValue: "-",
+      width: 200,
     },
   ];
+  const { mode } = React.useContext(ThemeModeContext);
 
   const actions = [
     {
       icon: () => (
-        <RestoreFromTrashOutlinedIcon
-          sx={{
-            color: "black",
+        <img
+          src={Restore}
+          alt="Restore"
+          style={{
+            color: mode === "light" ? "black" : "white",
             "&:hover": {
               color: "green",
             },
+            width: "1.5rem",
           }}
         />
       ),
@@ -86,6 +85,12 @@ const DeactivatedProject = ({ onClick }) => {
           margin: 50,
           pageSize: 20,
           emptyRowsWhenPaging: false,
+          actionsCellStyle: {
+            display: "flex",
+            justifyContent: "stretch",
+            alignItems: "center",
+            padding:"0 20px"
+          },
           actionsColumnIndex: -1,
           headerStyle: {
             backgroundColor: "#1c7ed6",
@@ -96,6 +101,12 @@ const DeactivatedProject = ({ onClick }) => {
           },
           rowStyle: {
             fontSize: ".8rem",
+          },
+          maxBodyHeight: "35vh",
+        }}
+        localization={{
+          header: {
+            actions: "Action",
           },
         }}
         actions={actions}

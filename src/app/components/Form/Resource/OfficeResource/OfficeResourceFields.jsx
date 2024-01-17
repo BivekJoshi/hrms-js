@@ -18,7 +18,6 @@ const OfficeResourceFields = ({ onClose, isLoading, data }) => {
             id='name'
             name='name'
             label='Resource Name'
-            placeholder='Enter resource name'
             fullWidth
             required
             value={formik.values.name}
@@ -27,14 +26,14 @@ const OfficeResourceFields = ({ onClose, isLoading, data }) => {
             helperText={formik.touched.name && formik.errors.name}
             variant='outlined'
             size="small"
+            InputLabelProps={{ shrink: Boolean(formik.values.name) }}
           />
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
             id='uniqueNumber'
             name='uniqueNumber'
-            label=' Unique Number'
-            placeholder='Enter unique number of resource'
+            label='Identification Key'
             fullWidth
             required
             value={formik.values.uniqueNumber}
@@ -47,6 +46,7 @@ const OfficeResourceFields = ({ onClose, isLoading, data }) => {
             }
             variant='outlined'
             size="small"
+            InputLabelProps={{ shrink: Boolean(formik.values.uniqueNumber) }}
           />
         </Grid>
         <Grid item xs={12} sm={12}>
@@ -54,10 +54,9 @@ const OfficeResourceFields = ({ onClose, isLoading, data }) => {
             id='description'
             name='description'
             label=' Description'
-            placeholder='Enter description of resource'
             fullWidth
             multiline
-            rows={3}
+            rows={4}
             value={formik.values.description}
             onChange={formik.handleChange}
             error={
@@ -65,6 +64,8 @@ const OfficeResourceFields = ({ onClose, isLoading, data }) => {
             }
             helperText={formik.touched.description && formik.errors.description}
             variant='outlined'
+            InputLabelProps={{ shrink: Boolean(formik.values.description) }}
+            inputProps={{ maxLength: 250 }}
           />
         </Grid>
         <Grid

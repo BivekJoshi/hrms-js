@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { Box, Chip } from "@mui/material";
+import { Box, Chip, Typography } from "@mui/material";
 import {
   useGetEmployeeLeaveById,
   useGetLoggedInUserLeave,
@@ -33,7 +33,8 @@ const LeaveInfo = ({ isLoading, data, role }) => {
     {
       title: "SN",
       render: (rowData) => rowData.tableData.id + 1,
-      width: 80,
+      // width: 80,
+      maxWidth:"1px",
       sortable: false,
     },
     {
@@ -64,82 +65,65 @@ const LeaveInfo = ({ isLoading, data, role }) => {
         whiteSpace: "nowrap",
       },
       render: (rowData) => {
-        const status = rowData.leaveStatus;
+        const status = rowData.leaveStatus.toLowerCase();
         let chipColor = "";
 
-        if (status === "APPROVED") {
-          chipColor = "green";
-        } else if (status === "REJECTED") {
-          chipColor = "red";
-        } else if (status === "PENDING") {
-          chipColor = "orange";
+        if (status === "approved") {
+          chipColor = "rgb(139, 214, 49)";
+        } else if (status === "rejected") {
+          chipColor = "rgb(255, 79, 79)";
+        } else if (status === "pending") {
+          chipColor = "rgb(255, 126, 71)";
         }
 
         return (
           <Chip
-            label={status}
+            label={status.charAt(0).toUpperCase() + status.slice(1)}
             style={{
               backgroundColor: chipColor,
               color: "white",
-              // width: " 9rem",
+              // width: " 6rem",
             }}
           />
         );
       },
     },
+    // {
+    //   title: "Approved By",
+    //   render: (rowData) => {
+    //     return <p>{rowData?.confirmBy?.name || ""} </p>;
+    //   },
+    //   width: 120,
+    // },
     {
       title: "Approved By",
+      width: "80px",
+      sorting: false,
+      field: "approvedBy",
       render: (rowData) => {
-        return <p>{rowData?.confirmBy?.name || ""} </p>;
+        if (rowData?.leaveStatus === "APPROVED") {
+          return <Typography>{rowData?.confirmBy?.name}</Typography>;
+        }
+        return "-";
       },
-      width: 120,
+    },
+    {
+      title: "Rejected By",
+      width: "80px",
+      sorting: false,
+      field: "approvedBy",
+      render: (rowData) => {
+        if (rowData?.leaveStatus === "REJECTED") {
+          return <Typography>{rowData?.confirmBy?.name}</Typography>;
+        }
+        return "-";
+      },
     },
   ].filter(Boolean);
   if (loadingLeave) return <>Loading</>;
 
   return (
     <>
-      {/* <Grid container spacing={3}>
-        <Grid item xs={4} sm={4}>
-          <Card variant="outlined">
-            <CardContent>
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="div"
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  fontWeight: "bold",
-                  fontSize: "26px",
-                }}
-              >
-                Leave Total
-              </Typography>
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="div"
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  fontWeight: "bold",
-                  fontSize: "24px",
-                  color: "green",
-                }}
-              >
-                10
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-      </Grid> */}
-      {/* <CustomTable
-        columns={columns}
-        data={leaveData}
-        title={"Leave Data of " + fullname}
-        isLoading={loadingLeave}
-      /> */}
       <Box
         gap={2}
         sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}

@@ -1,6 +1,6 @@
-import { Box, Button, Stack } from "@mui/material";
-import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { Box, Button, Stack } from '@mui/material';
+import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import {
   useDeleteTraining,
   useGetTrainingByEmpId,
@@ -12,6 +12,7 @@ import DeleteConfirmationModal from "../../../../../components/Modal/DeleteConfi
 import useAuth from "../../../../../../auth/hooks/component/login/useAuth";
 import { useGetLoggedInUserInfo } from "../../../../../hooks/employee/useEmployee";
 import CustomTable from "../../../../../components/CustomTable/CustomTable";
+import ThemeModeContext from "../../../../../../theme/ThemeModeContext";
 
 const TrainingInfo = ({ data, role }) => {
   const { isEmployee } = useAuth();
@@ -55,81 +56,98 @@ const TrainingInfo = ({ data, role }) => {
 
   const columns = [
     {
-      title: "SN",
+      title: 'SN',
       render: (rowData) => rowData.tableData.id + 1,
-      width: "3%",
-      maxWidth: "50px",
+      width: '3%',
+      maxWidth: '50px',
       sortable: false,
       sorting: false,
     },
     {
-      title: "Training Name",
-      field: "trainingName",
-      emptyValue: "-",
+      title: 'Training Name',
+      field: 'trainingName',
+      emptyValue: '-',
       width: 100,
     },
     {
-      title: "Training Level",
-      field: "trainingLevel",
-      emptyValue: "-",
+      title: 'Training Level',
+      field: 'trainingLevel',
+      emptyValue: '-',
       width: 100,
     },
     {
-      title: "Institude",
-      field: "trainingInstitute",
-      emptyValue: "-",
+      title: 'Institute',
+      field: 'trainingInstitute',
+      emptyValue: '-',
       width: 100,
     },
     {
-      title: "Category",
-      field: "category",
-      emptyValue: "-",
+      title: 'Category',
+      field: 'category',
+      emptyValue: '-',
       width: 90,
     },
     {
-      title: "Start Date",
-      field: "startDate",
-      emptyValue: "-",
+      title: 'Start Date',
+      field: 'startDate',
+      emptyValue: '-',
       width: 85,
     },
     {
-      title: "End Date",
+      title: 'End Date',
       width: 75,
+      field: 'endDate',
+      emptyValue: '-',
+    },
+  ];
+  const { mode } = React.useContext(ThemeModeContext);
 
-      field: "endDate",
-      emptyValue: "-",
+  const actions = [
+    {
+      icon: () => (
+        <ModeEditOutlineIcon
+          sx={{
+            color: mode === "light" ? "black" : "white",
+            "&:hover": {
+              color: "green",
+            },
+          }}
+        />
+      ),
+      tooltip: 'Edit Detail',
+      onClick: (event, rowData) => handleEditTraining(rowData),
     },
     {
-      title: "Actions",
-      width: 75,
-      render: (rowData) => (
-        <Stack direction="row" justifyContent={"space-evenly"}>
-          <Button color="primary" onClick={() => handleEditTraining(rowData)}>
-            <ModeEditOutlineIcon />
-          </Button>
-          <Button color="primary" onClick={() => handleDeleteTraining(rowData)}>
-            <DeleteIcon />
-          </Button>
-        </Stack>
+      icon: () => (
+        <DeleteIcon
+          sx={{
+            color: mode === "light" ? "black" : "white",
+            "&:hover": {
+              color: "red",
+            },
+          }}
+        />
       ),
+      tooltip: 'Delete',
+      onClick: (event, rowData) => handleDeleteTraining(rowData),
     },
   ];
   return (
-    <Box className="tableIcon">
+    <Box className='tableIcon'>
       <Box
         sx={{
-          display: "flex",
-          justifyContent: "flex-end",
-          paddingBottom: "10px",
+          display: 'flex',
+          justifyContent: 'flex-end',
+          paddingBottom: '10px',
         }}
       >
         {!isEmployee && (
           <Button
-            variant="contained"
+            variant='contained'
             sx={{ mt: 3, ml: 1 }}
             onClick={handleAddOpenModal}
           >
-            + Add Training
+            Add Training
           </Button>
         )}
       </Box>
@@ -137,13 +155,13 @@ const TrainingInfo = ({ data, role }) => {
       <CustomTable
         columns={columns}
         data={trainingData}
-        title="Training History"
-        // isLoading={isLoading}
+        title='Training History'
+        actions={actions}
       />
 
       {openAddModal && (
         <AddTrainingInfo
-          title={"Add Training History"}
+          title={'Add Training History'}
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
         />
@@ -153,13 +171,13 @@ const TrainingInfo = ({ data, role }) => {
           open={openDeleteModal}
           handleCloseModal={handleCloseDeleteModal}
           handleConfirmDelete={handleConfirmDelete}
-          message={"Employee Training"}
+          message={'Employee Training'}
         />
       )}
 
       {(openEditModal && !isEmployee && (
         <EditTrainingInfo
-          title={"Edit Training"}
+          title={'Edit Training'}
           empId={id}
           id={editedTraining?.id}
           open={openEditModal}

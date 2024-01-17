@@ -30,28 +30,11 @@ import EmployeeGridView from './EmployeeView/EmployeePage/EmployeeGridView';
 import { debounce } from 'lodash';
 import { useEffect } from 'react';
 import { useCallback } from 'react';
-
-const labelStyle = {
-  backgroundColor: '#EBEDEF',
-  marginLeft: '.5rem',
-  textTransform: 'none',
-  borderRadius: '.5rem',
-  color: 'black',
-  textDecoder: 'none',
-  // fontWeight: "bold",
-};
-const activeLabelStyle = {
-  ...labelStyle,
-  backgroundColor: '#329EF4',
-  borderBottom: 'none',
-  textDecoder: 'none',
-  // fontWeight: "bold",
-};
+import NewFilter from '../../components/NewFilter/NewFilter';
 
 const Employee = () => {
   const { mode, palette } = React.useContext(ThemeModeContext);
   const [pageNumber, setPageNumber] = useState(0);
-  const [pageSize, setPageSize] = useState(12);
   const [search, setSearch] = useState('');
   const [debounceValue, setdebounceValue] = useState('');
   const labelStyle = {
@@ -77,17 +60,11 @@ const Employee = () => {
     data: employeeData,
     isLoading,
     refetch,
-  } = useGetEmployeeData(pageNumber, pageSize, debounceValue);
+  } = useGetEmployeeData(pageNumber, 12, debounceValue);
 
   const handlePageChange = (event, newPage) => {
     setPageNumber(newPage - 1);
     window.scroll(0, 0);
-  };
-
-  const handlePageSizeChange = (event, newValue) => {
-    const newPageSize = parseInt(newValue, 10) || 0;
-    setPageSize(newPageSize);
-    setPageNumber(0);
   };
 
   const style = {
@@ -124,6 +101,29 @@ const Employee = () => {
     handleOpenSubmitModal,
     handleOpenEmailModal
   );
+  const handleDebounce = (e) => {
+    const value = e.target.value;
+    setSearch(value);
+    debounceSearch(value);
+  };
+
+  const handleClearSearch = () => {
+    setSearch('');
+    setdebounceValue('');
+  };
+
+  const filterMenu = [
+    {
+      label: 'Name, Phone Number, Position',
+      name: 'name',
+      type: 'employeeSearch',
+      md: 6,
+      sm: 12,
+      value: search,
+      setSearch: handleClearSearch,
+      onChange: handleDebounce,
+    },
+  ];
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -149,12 +149,6 @@ const Employee = () => {
     }, 300),
     []
   );
-
-  const handleDebounce = (e) => {
-    const value = e.target.value;
-    setSearch(value);
-    debounceSearch(value);
-  };
 
   return (
     <>
@@ -198,40 +192,15 @@ const Employee = () => {
                 onClick={handleAddOpenModal}
                 sx={{ textTransform: 'none' }}
               >
-                + Add Employee
+                Add Employee
               </Button>
             </Box>
           </Box>
           <TabPanel value='1'>
-            <Grid
-              container
-              sx={{
-                display: 'flex',
-                padding: '16px',
-                borderRadius: '6px',
-                marginBottom: '16px',
-                backgroundColor: palette?.background?.default,
-              }}
-            >
-              <Typography variant='h7' mb={1} fontWeight={500}>
-                Filter By:
-              </Typography>
-              <Grid container spacing={4}>
-                <Grid item xs={5}>
-                  <TextField
-                    label='Filter by name, phone number, and position'
-                    value={search}
-                    onChange={handleDebounce}
-                    fullWidth
-                    size='small'
-                  />
-                </Grid>
-              </Grid>
-            </Grid>
+            <NewFilter inputField={filterMenu} disableSubmit={true} />
             <EmployeeGridView employeeData={employeeData} />
           </TabPanel>
           <TabPanel value='2'>
-            {/* <EmployeeTable /> */}
             <EmployeeTableView
               employeeData={employeeData}
               isLoading={isLoading}
@@ -314,8 +283,8 @@ const Employee = () => {
           onChange={handlePageChange}
           showFirstButton
           showLastButton
-          boundaryCount={3}
-          size='large'
+          boundaryCount={2}
+          // size='small'
           color='primary'
         />
         {/* <Autocomplete

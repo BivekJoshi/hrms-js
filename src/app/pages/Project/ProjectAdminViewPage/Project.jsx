@@ -1,56 +1,31 @@
 import React, { useContext, useState } from "react";
 import Typography from "@mui/material/Typography";
-import {
-  Autocomplete,
-  Box,
-  Button,
-  Card,
-  Container,
-  Grid,
-  IconButton,
-  Modal,
-  Pagination,
-  Stack,
-  TextField,
-} from "@mui/material";
-import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
-import {
-  useGetProject,
-  useGetProjectDetail,
-  useGetProjectPageWise,
-} from "../../../hooks/project/useProject";
+import { Box, Button, Grid, Modal, Pagination } from "@mui/material";
+import { useGetProjectPageWise } from "../../../hooks/project/useProject";
 import { AddProjectModal } from "../ProjectModal/ProjectModal";
 
 import ProjectCard from "../../../components/cards/Employee/ProjectCard";
-import HocButton from "../../../hoc/hocButton";
 import PermissionHoc from "../../../hoc/permissionHoc";
 import useAuth from "../../../../auth/hooks/component/login/useAuth";
 import DeactivatedProject from "../DeactivatedProject/DeactivatedProject";
-import { ButtonComponent } from "../../../components/Button/ButtonComponent";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
+import NewFilter from "../../../components/NewFilter/NewFilter";
 
 const Project = ({ permissions }) => {
   // State and hooks
   const [pageNumber, setPageNumber] = useState(0);
   const [pageSize, setPageSize] = useState(6);
+
   const [nameFilter, setNameFilter] = useState("");
   const [leaderNameFilter, setLeaderNameFilter] = useState("");
   const { isEmployee } = useAuth();
-  const { palette } = useContext(ThemeModeContext);
 
   const [openModal, setOpenModal] = useState(false);
   const { data: projectDetail, isLoading } = useGetProjectPageWise(
     pageNumber,
     pageSize
   );
-
-  const [isContainerVisible, setIsContainerVisible] = useState(false);
   const [openAddModal, setOpenAddModal] = useState(false);
-
-  // Function to handle opening/closing filter container
-  const handleFilterIconClick = () => {
-    setIsContainerVisible(!isContainerVisible);
-  };
 
   // Functions to handle opening/closing add project modal
   const handleAddOpenModal = () => setOpenAddModal(true);
@@ -71,12 +46,6 @@ const Project = ({ permissions }) => {
     window.scroll(0, 0);
   };
 
-  const handlePageSizeChange = (event, newValue) => {
-    const newPageSize = parseInt(newValue, 6) || 0;
-    setPageSize(newPageSize);
-    setPageNumber(0);
-  };
-
   // Filter projects based on name and leader name
   const filteredProjects = projectDetail?.projectResList?.filter(
     (project) =>
@@ -87,45 +56,35 @@ const Project = ({ permissions }) => {
         ?.toLowerCase()
         ?.includes(leaderNameFilter.toLowerCase())
   );
-
+  const handleClearSearch = () => {
+    setNameFilter("");
+    setLeaderNameFilter("");
+  };
+  const filterMenu = [
+    {
+      label: "Project Name",
+      name: "name",
+      type: "employeeSearch",
+      md: 4,
+      sm: 12,
+      value: nameFilter,
+      setSearch: handleClearSearch,
+      onChange: (e) => setNameFilter(e.target.value),
+    },
+    {
+      label: "Project Leader Name",
+      name: "name",
+      type: "employeeSearch",
+      md: 4,
+      sm: 12,
+      value: leaderNameFilter,
+      setSearch: handleClearSearch,
+      onChange: (e) => setLeaderNameFilter(e.target.value),
+    },
+  ];
   return (
     <>
-      <Grid
-        container
-        sx={{
-          display: "flex",
-          padding: "16px",
-          borderRadius: "6px",
-          marginBottom: "16px",
-          backgroundColor: palette?.background?.default,
-        }}
-      >
-        <Typography variant="h7" mb={1} fontWeight={500}>
-          Filter By:
-        </Typography>
-        <Grid container spacing={4}>
-          <Grid item xs={4}>
-            <TextField
-              label="Filter by Project Name"
-              value={nameFilter}
-              onChange={(e) => setNameFilter(e.target.value)}
-              fullWidth
-              size="small"
-            />
-          </Grid>
-          <Grid item xs={4}>
-            {" "}
-            <TextField
-              label="Filter by Project Leader Name"
-              value={leaderNameFilter}
-              onChange={(e) => setLeaderNameFilter(e.target.value)}
-              fullWidth
-              size="small"
-            />
-          </Grid>
-        </Grid>
-      </Grid>
-
+      <NewFilter inputField={filterMenu} disableSubmit={true} />
       <Box>
         <Typography
           className="project-button"
@@ -138,20 +97,20 @@ const Project = ({ permissions }) => {
         >
           On-Going Projects
           {isEmployee ? null : (
-            <Box sx={{ display: 'flex', gap: '12px' }}>
+            <Box sx={{ display: "flex", gap: "12px" }}>
               <Button
-                variant='outlined'
+                variant="outlined"
                 onClick={handleOpenModal}
-                sx={{ textTransform: 'none' }}
+                sx={{ textTransform: "none" }}
               >
-                Terminated Project{' '}
+                Terminated Project{" "}
               </Button>
               <Button
-                variant='contained'
+                variant="contained"
                 onClick={handleAddOpenModal}
-                sx={{ textTransform: 'none', color: '#fff' }}
+                sx={{ textTransform: "none", color: "#fff" }}
               >
-                + Add Project
+                Add Project
               </Button>
             </Box>
           )}
@@ -194,7 +153,7 @@ const Project = ({ permissions }) => {
           boundaryCount={3}
           showFirstButton
           showLastButton
-          size="large"
+          // size="large"
           color="primary"
         />
         {/* <Autocomplete

@@ -34,7 +34,7 @@ const PathConfiguration = ({ permissions }) => {
             formik.touched.applicationUrl && formik.errors.applicationUrl
           }
           variant="outlined"
-          InputLabelProps={{ shrink: true }}
+          InputLabelProps={{ shrink: Boolean(formik.values.applicationUrl) }}
           size="small"
         />
       </Grid>
@@ -52,7 +52,7 @@ const PathConfiguration = ({ permissions }) => {
           }
           helperText={formik.touched.documentUrl && formik.errors.documentUrl}
           variant="outlined"
-          InputLabelProps={{ shrink: true }}
+          InputLabelProps={{ shrink: Boolean(formik.values.documentUrl) }}
           size="small"
         />
       </Grid>

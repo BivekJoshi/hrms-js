@@ -3,10 +3,15 @@ import EditIcon from "@mui/icons-material/Edit";
 import { useNavigate } from "react-router-dom";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import CustomTable from "../../../../components/CustomTable/CustomTable";
+import ThemeModeContext from "../../../../../theme/ThemeModeContext";
 
 const EmployeeTableView = ({ employeeData, isLoading }) => {
   const navigate = useNavigate();
-
+  const sortedEmployees = employeeData?.employees?.slice().sort((a, b) => {
+    const nameA = a?.firstName?.toLowerCase() || "";
+    const nameB = b?.firstName?.toLowerCase() || "";
+    return nameA.localeCompare(nameB);
+  });
   const columns = [
     {
       title: "SN",
@@ -64,13 +69,14 @@ const EmployeeTableView = ({ employeeData, isLoading }) => {
   const handleViewEmployee = (rowData) => {
     navigate(`${rowData.id}`);
   };
+  const { mode } = React.useContext(ThemeModeContext);
 
   const actions = [
     {
       icon: () => (
         <EditIcon
           sx={{
-            color: "black",
+            color: mode === "light" ? "black" : "white",
             "&:hover": {
               color: "green",
             },
@@ -84,7 +90,7 @@ const EmployeeTableView = ({ employeeData, isLoading }) => {
       icon: () => (
         <RemoveRedEyeOutlinedIcon
           sx={{
-            color: "black",
+            color: mode === "light" ? "black" : "white",
             "&:hover": {
               color: "green",
             },
@@ -99,13 +105,14 @@ const EmployeeTableView = ({ employeeData, isLoading }) => {
   return (
     <CustomTable
       columns={columns}
-      data={employeeData?.employees}
+      data={sortedEmployees}
       title="Employees"
       fileName="Employee-Report.pdf"
       isLoading={isLoading}
       actions={actions}
-      exportButton={true}
+      exportButton
       exportExcel
+      pdfNone
     />
   );
 };

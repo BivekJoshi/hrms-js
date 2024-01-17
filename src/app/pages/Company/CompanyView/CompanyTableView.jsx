@@ -1,11 +1,10 @@
-import * as React from "react";
-import DeleteIcon from "@mui/icons-material/Delete";
-import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
-import PermissionHoc from "../../../hoc/permissionHoc";
-import useAuth from "../../../../auth/hooks/component/login/useAuth";
-import CustomTable from "../../../components/CustomTable/CustomTable";
-import HocButton from "../../../hoc/hocButton";
-import { Chip, Tooltip, Typography } from "@mui/material";
+import * as React from 'react';
+import DeleteIcon from '@mui/icons-material/Delete';
+import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
+import useAuth from '../../../../auth/hooks/component/login/useAuth';
+import CustomTable from '../../../components/CustomTable/CustomTable';
+import ThemeModeContext from '../../../../theme/ThemeModeContext';
+import { useContext } from 'react';
 
 const CompanyTableView = ({
   permissions,
@@ -15,13 +14,13 @@ const CompanyTableView = ({
   handleDeleteCompany,
 }) => {
   const { isEmployee } = useAuth();
-
+  const { palette } = useContext(ThemeModeContext);
   const columns = [
     {
       title: "SN",
       render: (rowData) => rowData.tableData.id + 1,
       field: "tableData.id",
-      width: "3%",
+      width: "6%",
       sortable: false,
       sorting: false,
     },
@@ -29,47 +28,53 @@ const CompanyTableView = ({
       title: "Branch Name",
       field: "branchName",
       emptyValue: "-",
-      width: "20vh",
+      width: "80px",
       sorting: false,
     },
     {
       title: "Branch Address",
       field: "branchAddress",
       emptyValue: "-",
-      width: "5vh",
+      width: "80px",
       sorting: false,
     },
     {
       title: "Contact",
       field: "branchContact",
       emptyValue: "-",
-      width: "10vh",
+      width: "80px",
       sorting: false,
     },
     {
-      title: "Description",
-      field: "branchDescription",
-      emptyValue: "-",
-      width: "10vh",
-      render: (rowData) => {
-        return (
-          <Tooltip
-            title={rowData?.branchDescription}
-            placement="top-start"
-            arrow
-          >
-            <Typography
-              style={{
-                overflow: "hidden",
-                textOverflow: "ellipsis",
-                width: "8rem",
-              }}
-            >
-              {rowData?.branchDescription}
-            </Typography>
-          </Tooltip>
-        );
-      },
+      title: 'Description',
+      field: 'branchDescription',
+      emptyValue: '-',
+      width: '120px',
+      // render: (rowData) => {
+      //   return (
+      //       <Typography
+      //         style={{
+      //           // overflow: 'hidden',
+      //           // textOverflow: 'ellipsis',
+      //           // width: '20rem',
+      //         }}
+      //       >
+      //         {rowData?.branchDescription}
+      //       </Typography>
+      //   );
+      // },
+      render: (rowData) => (
+        <div
+          style={{
+            whiteSpace: 'normal',
+            overflowWrap: 'break-word',
+            wordWrap: 'break-word',
+            wordBreak: 'break-all',
+          }}
+        >
+          {rowData?.branchDescription}
+        </div>
+      ),
     },
   ];
 
@@ -78,7 +83,7 @@ const CompanyTableView = ({
       icon: () => (
         <ModeEditOutlineIcon
           sx={{
-            color: "black",
+            color: palette?.text?.primary,
             "&:hover": {
               color: "green",
             },
@@ -93,7 +98,7 @@ const CompanyTableView = ({
       icon: () => (
         <DeleteIcon
           sx={{
-            color: "black",
+            color: palette?.text?.primary,
             "&:hover": {
               color: "red",
             },
@@ -119,9 +124,10 @@ const CompanyTableView = ({
         data={companyData}
         title="Branch List"
         isLoading={isLoading}
-        exportButton={true}
         actions={actions}
-        exportExcel
+        fileName="Branch List"
+        exportButton
+        pdfNone
       />
     </>
   );

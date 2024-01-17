@@ -77,7 +77,7 @@ const EmailLogUserId = () => {
       title: "Log",
       field: "log",
       emptyValue: "-",
-      width: 200,
+      width: 320,
       sorting: false,
     },
 
@@ -97,20 +97,24 @@ const EmailLogUserId = () => {
     },
     {
       title: "Action",
+      width: "1px",
       render: (rowData) => (
-        <Stack direction="row" spacing={0}>
-          {rowData.emailType === "CREATE_USER" &&
-            rowData.result !== "SUCCESS" && (
-              <Tooltip title="Resend">
-                <Button
-                  color="primary"
-                  onClick={() => handleClick(rowData)}
-                  variant="outlined"
-                >
-                  <ReplayIcon />
-                </Button>
-              </Tooltip>
-            )}
+        <Stack
+          direction="row"
+          spacing={0}
+          sx={{ display: "flex", justifyContent: "center" }}
+        >
+          {rowData.emailType === "CREATE_USER" && rowData.result !== "SUCCESS" && (
+            <Tooltip title="Resend">
+              <Button
+                color="primary"
+                onClick={() => handleClick(rowData)}
+                variant="outlined"
+              >
+                <ReplayIcon />
+              </Button>
+            </Tooltip>
+          )}
         </Stack>
       ),
       sorting: false,
@@ -145,7 +149,6 @@ const EmailLogUserId = () => {
           id="userId"
           name="userId"
           label="User Name"
-          placeholder="Select user name"
           fullWidth
           required
           value={id}

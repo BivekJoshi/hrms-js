@@ -71,6 +71,7 @@ function EmailForm({ employeeId, onClose, officeEmail }) {
         <Grid item xs={12}>
           <TextField
             fullWidth
+            required
             label="To"
             name="to"
             value={emailData?.to}
@@ -82,6 +83,7 @@ function EmailForm({ employeeId, onClose, officeEmail }) {
         </Grid>
         <Grid item xs={12}>
           <TextField
+            // required
             fullWidth
             label="Subject"
             name="subject"
@@ -94,6 +96,7 @@ function EmailForm({ employeeId, onClose, officeEmail }) {
           <TextField
             fullWidth
             multiline
+            required
             rows={10}
             cols={90}
             label="Message "

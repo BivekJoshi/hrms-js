@@ -29,6 +29,9 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
     formik.handleSubmit();
   };
 
+  const fullName =
+    data &&
+    data?.firstName + ' ' + (data?.middleName || '') + ' ' + data?.lastName;
   const getEmployeeName = (employeeId) => {
     const name = employeeData?.find((d) => d.employeeId === employeeId)?.label;
     return name;
@@ -39,6 +42,8 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
     : data?.gender === "MALE"
     ? Male
     : Female;
+
+  const currentDate = new Date().toISOString().split('T')[0];
 
   return (
     !isLoading && (
@@ -53,7 +58,8 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
             </div>
             <div style={{ marginLeft: "0.8rem" }}>
               <Typography>
-                {getEmployeeName(formik.values?.employeeId)}
+                {fullName}
+                {/* {getEmployeeName(formik.values.employeeId)} */}
               </Typography>
               {/* <Typography sx={{ fontSize: '14px', fontWeight: 500 }}>
                 Do you really want to Terminate employee?
@@ -83,7 +89,10 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
             }
             variant="outlined"
             InputLabelProps={{ shrink: true }}
-            size="small"
+            size='small'
+            inputProps={{
+              min: currentDate, // Disable past date selections
+            }}
           />
         </Grid>
         <Grid item xs={12} sm={12}>
@@ -181,23 +190,24 @@ export const EditEmployeeActivateFields = ({ onClose, isLoading, data }) => {
     return name;
   };
 
+  const currentDate = new Date().toISOString().split('T')[0];
+
   return (
     !isLoading && (
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
-          <Typography variant="h6">
-            Do you really want to Activate employee ?
+          <Typography variant='h6'>
+            Do you really want to activate employee ?
             <b> {getEmployeeName(id)}</b>
           </Typography>
         </Grid>
 
         <Grid item xs={12} sm={12}>
           <TextField
-            id="effectiveDate"
-            name="effectiveDate"
-            label="Effective From Date"
-            placeholder="Effective Date"
-            type="date"
+            id='effectiveDate'
+            name='effectiveDate'
+            label='Effective From Date'
+            type='date'
             fullWidth
             required
             value={formik.values.effectiveDate}
@@ -211,6 +221,10 @@ export const EditEmployeeActivateFields = ({ onClose, isLoading, data }) => {
             }
             variant="outlined"
             InputLabelProps={{ shrink: true }}
+            size="small"
+            inputProps={{
+              min: currentDate,
+            }}
           />
         </Grid>
         <Grid item xs={12} sm={12}>
@@ -241,8 +255,7 @@ export const EditEmployeeActivateFields = ({ onClose, isLoading, data }) => {
             renderInput={(params) => (
               <TextField
                 {...params}
-                label="Reason"
-                placeholder="Select Reason"
+                label=' Reason'
                 fullWidth
                 error={
                   formik.touched.terminationType &&
@@ -252,8 +265,8 @@ export const EditEmployeeActivateFields = ({ onClose, isLoading, data }) => {
                   formik.touched.terminationType &&
                   formik.errors.terminationType
                 }
-                variant="outlined"
-                InputLabelProps={{ shrink: true }}
+                variant='outlined'
+                size="small"
               />
             )}
           />

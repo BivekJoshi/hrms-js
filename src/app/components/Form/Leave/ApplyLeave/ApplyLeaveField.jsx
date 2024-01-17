@@ -7,6 +7,12 @@ import useApplyLeaveForm from "../../../../hooks/leave/LeaveForm/useApplyLeaveFo
 import { useLocation } from "react-router-dom";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 
+const leaveOptions = [
+  { id: "HALF_DAY", label: "Half Day" },
+  { id: "ONE_DAY", label: "One Day" },
+  { id: "MULTI_DAY", label: "Multiple Days" },
+];
+
 const ApplyLeaveField = () => {
   const [value, setValue] = useState("1");
   const location = useLocation();
@@ -89,28 +95,7 @@ const ApplyLeaveField = () => {
             />
           </Grid>
         )}
-        <Grid item xs={12} sm={6}>
-          Leave Reason
-        </Grid>
-        <Grid item xs={12} sm={12}>
-          <TextField
-            id="leaveReason"
-            name="leaveReason"
-            // label="Leave Reason"
-            placeholder="Enter leave Reason"
-            fullWidth
-            multiline
-            rows={3}
-            value={formik.values.leaveReason}
-            onChange={formik.handleChange}
-            error={
-              formik.touched.leaveReason && Boolean(formik.errors.leaveReason)
-            }
-            helperText={formik.touched.leaveReason && formik.errors.leaveReason}
-            variant="outlined"
-            InputLabelProps={{ shrink: true }}
-          />
-        </Grid>
+      
 
         <Grid item xs={12} sm={12}>
           <TabContext value={value}>
@@ -135,7 +120,7 @@ const ApplyLeaveField = () => {
           </TabContext>
         </Grid>
 
-        <Grid item xs={12} sm={6}>
+        {/* <Grid item xs={12} sm={6}>
           Leave Remarks
         </Grid>
         <Grid item xs={12} sm={12}>
@@ -152,6 +137,28 @@ const ApplyLeaveField = () => {
             helperText={
               formik.touched.leaveRemarks && formik.errors.leaveRemarks
             }
+            variant="outlined"
+            InputLabelProps={{ shrink: true }}
+          />
+        </Grid> */}
+          <Grid item xs={12} sm={6}>
+          Leave Reason
+        </Grid>
+        <Grid item xs={12} sm={12}>
+          <TextField
+            id="leaveReason"
+            name="leaveReason"
+            // label="Leave Reason"
+            placeholder="Enter leave Reason"
+            fullWidth
+            multiline
+            rows={3}
+            value={formik.values.leaveReason}
+            onChange={formik.handleChange}
+            error={
+              formik.touched.leaveReason && Boolean(formik.errors.leaveReason)
+            }
+            helperText={formik.touched.leaveReason && formik.errors.leaveReason}
             variant="outlined"
             InputLabelProps={{ shrink: true }}
           />

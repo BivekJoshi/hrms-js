@@ -1,6 +1,7 @@
 import { Grid, TextField, Button } from "@mui/material";
 import React from "react";
 import useCompanyForm from "../../../hooks/company/CompanyForm/useCompanyForm";
+import RemarkField from "../../RemarkField/RemarkField";
 
 const CompanyFields = ({ onClose, isLoading, data }) => {
   const { formik } = useCompanyForm(data, onClose);
@@ -18,7 +19,6 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
             id="branchName"
             name="branchName"
             label="Branch Name"
-            placeholder="Enter branch name"
             fullWidth
             required
             value={formik.values.branchName}
@@ -28,7 +28,7 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
             }
             helperText={formik.touched.branchName && formik.errors.branchName}
             variant="outlined"
-            InputLabelProps={{ shrink: true }}
+            InputLabelProps={{ shrink: Boolean(formik.values.branchName) }}
             size="small"
           />
         </Grid>
@@ -37,7 +37,6 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
             id="branchAddress"
             name="branchAddress"
             label="Address"
-            placeholder="Enter branch address"
             fullWidth
             required
             value={formik.values.branchAddress}
@@ -50,7 +49,7 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
               formik.touched.branchAddress && formik.errors.branchAddress
             }
             variant="outlined"
-            InputLabelProps={{ shrink: true }}
+            InputLabelProps={{ shrink: Boolean(formik.values.branchAddress) }}
             size="small"
           />
         </Grid>
@@ -59,7 +58,6 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
             id="branchContact"
             name="branchContact"
             label="Contact"
-            placeholder="Enter branch contact"
             fullWidth
             required
             value={formik.values.branchContact}
@@ -72,7 +70,7 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
               formik.touched.branchContact && formik.errors.branchContact
             }
             variant="outlined"
-            InputLabelProps={{ shrink: true }}
+            InputLabelProps={{ shrink: Boolean(formik.values.branchContact) }}
             size="small"
           />
         </Grid>
@@ -81,7 +79,6 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
             id="branchEmail"
             name="branchEmail"
             label="Email"
-            placeholder="Enter branch email"
             fullWidth
             required
             value={formik.values.branchEmail}
@@ -91,19 +88,18 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
             }
             helperText={formik.touched.branchEmail && formik.errors.branchEmail}
             variant="outlined"
-            InputLabelProps={{ shrink: true }}
+            InputLabelProps={{ shrink: Boolean(formik.values.branchEmail) }}
             size="small"
           />
         </Grid>
         <Grid item xs={12} sm={12}>
-          <TextField
+          {/* <TextField
             id="branchDescription"
             name="branchDescription"
             label="Description"
-            placeholder="Enter your Branch Description"
             fullWidth
             multiline
-            rows={3}
+            rows={4}
             value={formik.values.branchDescription}
             onChange={formik.handleChange}
             error={
@@ -115,8 +111,23 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
               formik.errors.branchDescription
             }
             variant="outlined"
-            InputLabelProps={{ shrink: true }}
+            InputLabelProps={{ shrink: Boolean(formik.values.branchDescription) }}
             inputProps={{ maxLength: 250 }}
+          /> */}
+          <RemarkField
+            id="branchDescription"
+            name="branchDescription"
+            label="Description"
+            fullWidth
+            formik={formik}
+            maxLength={255}
+            variant="outlined"
+            multiline
+            InputLabelProps={{
+              shrink: Boolean(formik.values.branchDescription),
+            }}
+            rows={4}
+            inputProps={{ maxLength: 255 }}
           />
         </Grid>
         <Grid

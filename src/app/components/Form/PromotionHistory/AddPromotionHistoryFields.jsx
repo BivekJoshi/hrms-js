@@ -2,6 +2,7 @@ import React from "react";
 import { Grid, TextField, Button, Autocomplete } from "@mui/material";
 import useAddPromotionHistoryForm from "../../../hooks/promotionHistory/addPromotionHistory.jsx/useAddPromotionForm";
 import { useGetDesignation } from "../../../hooks/designation/useDesignation";
+import RemarkField from "../../RemarkField/RemarkField";
 
 const AddPromotionHistoryFields = ({
   onClose,
@@ -16,6 +17,8 @@ const AddPromotionHistoryFields = ({
     if (formik.isValid) {
     }
   };
+  const currentDate = new Date().toISOString().split('T')[0];
+
   return (
     !isLoading && (
       <Grid container spacing={3}>
@@ -38,8 +41,8 @@ const AddPromotionHistoryFields = ({
               <TextField
                 {...params}
                 label="Position Name"
-                placeholder="Select position name"
                 fullWidth
+                required
                 error={
                   formik.touched.positionId && Boolean(formik.errors.positionId)
                 }
@@ -47,7 +50,7 @@ const AddPromotionHistoryFields = ({
                   formik.touched.positionId && formik.errors.positionId
                 }
                 variant="outlined"
-                InputLabelProps={{ shrink: true }}
+                size="small"
               />
             )}
           />
@@ -59,6 +62,7 @@ const AddPromotionHistoryFields = ({
             label="Effective From Date"
             type="date"
             fullWidth
+            required
             value={formik.values.effectiveFromDate}
             onChange={formik.handleChange}
             error={
@@ -71,22 +75,37 @@ const AddPromotionHistoryFields = ({
             }
             variant="outlined"
             InputLabelProps={{ shrink: true }}
+            inputProps={{
+              max: currentDate,
+            }}
           />
         </Grid>
         <Grid item xs={12} sm={12}>
-          <TextField
+          {/* <TextField
+            id='remarks'
+            name='remarks'
+            label='Remarks'
+            fullWidth
+            onBlur={formik.handleBlur}
+            formik={formik}
+            maxLength={255}
+            variant='outlined'
+            multiline
+            rows={4}
+            inputProps={{ maxLength: 250 }}
+          /> */}
+          <RemarkField
             id="remarks"
             name="remarks"
             label="Remarks"
-            placeholder="Enter remarks type"
             fullWidth
-            onBlur={formik.handleBlur}
-            value={formik.values.remarks}
-            onChange={formik.handleChange}
-            error={formik.touched.remarks && Boolean(formik.errors.remarks)}
-            helperText={formik.touched.remarks && formik.errors.remarks}
+            formik={formik}
+            maxLength={255}
             variant="outlined"
-            InputLabelProps={{ shrink: true }}
+            multiline
+            InputLabelProps={{ shrink: Boolean(formik.values.remarks) }}
+            rows={4}
+            inputProps={{ maxLength: 250 }}
           />
         </Grid>
         <Grid

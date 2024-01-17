@@ -27,7 +27,7 @@ export const useAddPromotionHistory = ({ onSuccess }) => {
     (formData) => addPromotionHistory(formData, id),
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Succesfully added Promotion of Employee');
+        toast.success('Position changed successfully');
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries('getPromotionHistory');
       },

@@ -35,12 +35,9 @@ export const useAddLeaveType = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(['addLeaveType'], (formData) => addLeaveType(formData), {
     onSuccess: (data, variables, context) => {
-      toast.success('Succesfully added Leave Type');
+      toast.success('Successfully added Leave Type');
       onSuccess && onSuccess(data, variables, context);
       queryClient.invalidateQueries('getLeaveType');
-    },
-    onError: (err, _variables, _context) => {
-      toast.error(`error: ${err.message}`);
     },
   });
 };
@@ -73,9 +70,6 @@ export const useEditLeaveType = ({ onSuccess }) => {
       toast.success('Successfully edited Leave Type');
       onSuccess && onSuccess(data, variables, context);
       queryClient.invalidateQueries('getLeaveType');
-    },
-    onError: (err, _variables, _context) => {
-      toast.error(`Error: ${err.message}`);
     },
   });
 };

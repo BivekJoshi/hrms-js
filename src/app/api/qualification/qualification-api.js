@@ -3,34 +3,52 @@ import { axiosInstance } from "../../../auth/axiosInterceptor";
 /*________________________GETBYID_____________________________________*/
 export const getQualificationById = async (id) => {
   if (id) {
-    const data = axiosInstance.get(`/qualification/employee-id/${id}`);
+    const data = await axiosInstance.get(`/qualification/employee-id/${id}`);
     return data;
   }
 };
 
 /*________________________POST_____________________________________*/
 export const addQualification = async (formData, id) => {
-  const newEdu = formData?.education;
-  const dataToPost = newEdu.filter(
-    (item) => item.id === undefined || item.id === ""
-  );
+  const educationForm = new FormData();
+  educationForm.append("board", formData?.board);
+  educationForm.append("institute", formData?.institute);
+  educationForm.append("passedLevel", formData?.passedLevel);
+  educationForm.append("passedYear", formData?.passedYear);
+  educationForm.append("grade", formData?.grade);
+  educationForm.append("scoreType", formData?.scoreType);
+
+  if (formData?.transcript) {
+    educationForm.append("transcript  ", formData?.transcript || "");
+  }
+  if (formData?.characterCertificate) {
+    educationForm.append(
+      "characterCertificate ",
+      formData?.characterCertificate || ""
+    );
+  }
+  if (formData?.otherDocument) {
+    educationForm.append("otherDocument  ", formData?.otherDocument || "");
+  }
+
   const data = await axiosInstance.post(
     `/qualification/create/${id}`,
-    dataToPost
+    educationForm
   );
   return data;
 };
 
 /*________________________EDIT_____________________________________*/
 export const editQualification = async (formData, id) => {
-  const newData = formData?.education;
-  const qIds = newData && newData.map((education) => education?.id);
-  const queryString = qIds.map((qId) => `qIds=${qId}`).join("&");
   const data = await axiosInstance.put(
-    `/qualification/update/${id}?${queryString}`,
-    formData?.education
+    `/qualification/update/${formData?.id}`,
+    formData
   );
   return data;
+};
+
+export const editQualifiacationDocument = async (formData, id) => {
+  await axiosInstance.put(`/qualification/update-file/${id}`, formData);
 };
 
 /*________________________DELETE_____________________________________*/

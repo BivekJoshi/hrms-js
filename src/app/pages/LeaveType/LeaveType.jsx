@@ -15,8 +15,8 @@ import {
 import DeleteConfirmationModal from "../../components/Modal/DeleteConfirmationModal";
 import PermissionHoc from "../../hoc/permissionHoc";
 import HocButton from "../../hoc/hocButton";
-import useAuth from "../../../auth/hooks/component/login/useAuth";
 import CustomTable from "../../components/CustomTable/CustomTable";
+import ThemeModeContext from "../../../theme/ThemeModeContext";
 
 const leaveName = [
   {
@@ -67,7 +67,6 @@ const leaveName = [
 ];
 const LeaveType = ({ permissions }) => {
   const { data: leaveTypeData, isLoading } = useGetLeaveType();
-  const { isSuperAdmin, isEmployee } = useAuth();
 
   const [existingLeaveTypes, setExistingLeaveTypes] = useState([]);
 
@@ -178,14 +177,55 @@ const LeaveType = ({ permissions }) => {
         </div>
       ),
     },
+    // {
+    //   id: "actions",
+    //   label: "Actions",
+    //   title: "Action",
+    //   render: (rowData) => {
+    //     return (
+    //       <div style={{ display: "flex" }}>
+    //         <Button disabled={!permissions?.canEdit}>
+    //           <ModeEditOutlineIcon
+    //             sx={{
+    //               color: mode === "light" ? "black" : "white",
+    //               "&:hover": {
+    //                 color: "green",
+    //               },
+    //             }}
+    //             onClick={(event) => handleEditLeaveType(rowData)}
+    //           />
+    //         </Button>
+    //         <Button disabled={!rowData?.deletable || !permissions?.canDelete}>
+    //           <DeleteIcon
+    //             sx={{
+    //               color:
+    //                 rowData?.deletable === false
+    //                   ? "rgb(188, 188, 188)"
+    //                   : "black",
+    //               "&:hover": { color: "red" },
+    //             }}
+    //             // sx={{
+    //             //   color: mode === "light" ? "black" : "white",
+    //             //   "&:hover": {
+    //             //     color: "green",
+    //             //   },
+    //             // }}
+    //             onClick={(event) => handleDeleteLeaveType(rowData)}
+    //           />
+    //         </Button>
+    //       </div>
+    //     );
+    //   },
+    // },
   ];
+  const { mode } = React.useContext(ThemeModeContext);
 
   const actions = [
     {
       icon: () => (
         <ModeEditOutlineIcon
           sx={{
-            color: "black",
+            color: mode === "light" ? "black" : "white",
             "&:hover": {
               color: "green",
             },
@@ -200,7 +240,7 @@ const LeaveType = ({ permissions }) => {
       icon: () => (
         <DeleteIcon
           sx={{
-            color: "black",
+            color: mode === "light" ? "black" : "white",
             "&:hover": {
               color: "red",
             },
@@ -212,7 +252,9 @@ const LeaveType = ({ permissions }) => {
       onClick: (event, rowData) => handleDeleteLeaveType(rowData),
     },
   ];
+
   if (isLoading) return <>Loading</>;
+
   return (
     <Grid>
       <Box
@@ -227,7 +269,7 @@ const LeaveType = ({ permissions }) => {
           color="white"
           variant={"contained"}
           onClick={handleAddOpenModal}
-          buttonName={"+ Add Leave Type"}
+          buttonName={"Add Leave Type"}
         />
       </Box>
       <CustomTable

@@ -7,6 +7,7 @@ import {
 import { useGetDeactivatedEmployee } from "../../../hooks/employee/DeactivateEmploye/useEmployee";
 import PersonAddAltSharpIcon from "@mui/icons-material/PersonAddAltSharp";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
+import ThemeModeContext from "../../../../theme/ThemeModeContext";
 
 const DeactivatedEmployee = () => {
   const { data: deactivateEmployee, isLoading } = useGetDeactivatedEmployee();
@@ -66,13 +67,14 @@ const DeactivatedEmployee = () => {
       sorting: false,
     },
   ];
+  const { mode } = React.useContext(ThemeModeContext);
 
   const actions = [
     {
       icon: () => (
         <PersonAddAltSharpIcon
           sx={{
-            color: "black",
+            color: mode === "light" ? "black" : "white",
             "&:hover": {
               color: "green",
             },
@@ -94,6 +96,7 @@ const DeactivatedEmployee = () => {
         title="Inactive Employee"
         isLoading={isLoading}
         actions={actions}
+        singleAction={true}
       />
       {openDeactivatedModal && (
         <EditActivationEmployeeModal

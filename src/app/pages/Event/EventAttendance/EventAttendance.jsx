@@ -12,6 +12,7 @@ import { useGetAllEvent, usegetAllEmployeeData } from "./useEventAttendance";
 import { Badge, Chip, Tooltip, Typography } from "@mui/material";
 import { getEventAttenderList } from "../../../api/event/event-api";
 import { toast } from "react-toastify";
+import ThemeModeContext from "../../../../theme/ThemeModeContext";
 
 const EventAttendance = ({ permissions }) => {
   const { employeeData, employeeAllData } = usegetAllEmployeeData();
@@ -196,13 +197,14 @@ const EventAttendance = ({ permissions }) => {
       xs: 6,
     },
   ];
+  const { mode } = React.useContext(ThemeModeContext);
 
   const actions = [
     {
       icon: () => (
         <ModeEditOutlineIcon
           sx={{
-            color: "black",
+            color: mode === "light" ? "black" : "white",
             "&:hover": {
               color: "green",
             },
@@ -215,7 +217,6 @@ const EventAttendance = ({ permissions }) => {
       tooltip: "Edit Event",
       onClick: (event, rowData) => handleEditEventAttendance(rowData),
     },
-
   ];
 
   useEffect(() => {
@@ -276,6 +277,8 @@ const EventAttendance = ({ permissions }) => {
         actions={actions}
         exportButton
         exportExcel
+        // pdfNone
+        singleAction={true}
       />
       {openEditModal && (
         <EditEventAttendanceModal

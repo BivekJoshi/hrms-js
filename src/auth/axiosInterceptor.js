@@ -68,6 +68,9 @@ axiosInstance.interceptors.response.use(
         removeUser();
         navigateOnError();
       }
+      if (error?.response?.status === 403) {
+        toast.error('Access Denined');
+      }
       const errorMessage = error?.response?.data?.message;
       if (
         errorMessage === 'invalid_or_missing_token' ||

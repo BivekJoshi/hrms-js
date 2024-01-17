@@ -11,6 +11,7 @@ import {
   getEmployeeProgress,
   getLoggedInUserInfo,
   getNoneUser,
+  getEmployeeName,
 } from "../../api/employee/employee-api";
 import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
@@ -33,11 +34,26 @@ export const useGetEmployee = () => {
     refetchOnWindowFocus: false,
   });
   return {
-    data: getQuery?.data?.map((d) => {
-      return { employeeId: d.id, label: nameLabel(d) };
-    }) || [],
+    data:
+      getQuery?.data?.map((d) => {
+        return { employeeId: d.id, label: nameLabel(d) };
+      }) || [],
   };
 };
+
+export const useGetEmployeeName = () => {
+  const getQuery = useQuery(["getEmployeeName"], () => getEmployeeName(), {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
+  return {
+    data:
+      getQuery?.data?.map((d) => {
+        return { employeeId: d.id, label: nameLabel(d) };
+      }) || [],
+  };
+};
+
 export const useGetNoneUser = () => {
   const getQuery = useQuery(["getNoneUser"], () => getNoneUser(), {
     refetchInterval: false,
@@ -78,20 +94,13 @@ export const useGetEmployeeById = (id) => {
   });
 };
 
-export const useEditEmployee = ({ onSuccess }) => {
+export const useEditEmployee = (onSuccess) => {
   const queryClient = useQueryClient();
   const { id } = useParams();
 
   return useMutation(
     ["editEmployee"],
-    async (formData) => {
-      try {
-        const data = await editEmployee(formData, id);
-        return data;
-      } catch (error) {
-        throw error;
-      }
-    },
+    async (formData) => await editEmployee(formData, id),
     {
       onSuccess: (data) => {
         if (data) {

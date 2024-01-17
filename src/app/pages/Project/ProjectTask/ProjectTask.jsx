@@ -11,7 +11,15 @@ import {
   AssignProjectTaskModal,
   EditProjectTaskModal,
 } from "../ProjectModal/ProjectModal";
-import { Box, Button, Chip, SwipeableDrawer } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  Button,
+  Chip,
+  Grid,
+  SwipeableDrawer,
+  Tooltip,
+} from "@mui/material";
 import ProjectTaskField from "../../../components/Form/Project/ProjectTask/ProjectTaskFields";
 import DeleteIcon from "@mui/icons-material/Delete";
 import DeleteConfirmationModal from "../../../components/Modal/DeleteConfirmationModal";
@@ -19,6 +27,7 @@ import { useGetEmployee } from "../../../hooks/employee/useEmployee";
 import CustomTable from "../../../components/CustomTable/CustomTable";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import HocButton from "../../../hoc/hocButton";
+import ThemeModeContext from "../../../../theme/ThemeModeContext";
 
 const ProjectTask = ({ permissions }) => {
   const {
@@ -27,8 +36,6 @@ const ProjectTask = ({ permissions }) => {
     refetch,
     isRefetching,
   } = useGetProjectTaskByProjectId();
-  const [state, setState] = useState({ right: false });
-  const [editedTask, setEditedTask] = useState({});
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [deletedTask, setDeletedTask] = useState({});
   const handleCloseAddModal = () => setOpenAddModal(false);
@@ -79,7 +86,7 @@ const ProjectTask = ({ permissions }) => {
       sorting: false,
     },
     {
-      title: "Name",
+      title: "Task",
       field: "name",
       emptyValue: "-",
       width: "80",
@@ -103,6 +110,7 @@ const ProjectTask = ({ permissions }) => {
       width: "180px",
       cellStyle: {
         whiteSpace: "nowrap",
+        textAlign: "center",
       },
       sorting: false,
       render: (rowData) => {
@@ -141,6 +149,7 @@ const ProjectTask = ({ permissions }) => {
       width: "180px",
       cellStyle: {
         whiteSpace: "nowrap",
+        textAlign: "center",
       },
       sorting: false,
       render: (rowData) => {
@@ -181,41 +190,101 @@ const ProjectTask = ({ permissions }) => {
       field: "projectEmployees",
       emptyValue: "-",
       width: "80",
-      //   render: (rowData) => {
-      //     const employeeIds = rowData.projectEmployees.map(
-      //       (employee) => employee.id
-      //     );
-      //     return employeeIds.join(", ");
-      //   },
-      // },
+      cellStyle: {
+        whiteSpace: "nowrap",
+        textAlign: "center",
+      },
       render: (rowData) => {
-        const projectEmployees = rowData?.projectEmployees || [];
-        const employeeIds = projectEmployees.map(
-          (employee) => employee.employeeId
+        const maxVisibleEmployees =
+          rowData.projectEmployees.length > 3
+            ? 3
+            : rowData.projectEmployees.length;
+
+        const visibleEmployees = rowData.projectEmployees.slice(
+          0,
+          maxVisibleEmployees
         );
+        const remainingEmployees =
+          rowData.projectEmployees.slice(maxVisibleEmployees);
 
-        const matchedEmployees = employeeData
-          ? employeeData.filter((employee) => employeeIds.includes(employee.id))
-          : [];
-
-        const matchedEmployeeNames = matchedEmployees.map(
-          (employee) =>
-            `${employee?.firstName} ${employee.middleName || ""} ${
-              employee?.lastName
-            }`
+        return (
+          <Grid display="flex" gap={1} justifyContent="center">
+            {visibleEmployees.map((employee, index) => (
+              <Tooltip
+                title={
+                  <div>
+                    <Grid
+                      fontSize="14px"
+                      textTransform="capitalize"
+                    >
+                      {employee.employee.firstName}{" "}
+                      {employee.employee.middleName + " " || ""}
+                      {employee.employee.lastName}
+                    </Grid>
+                  </div>
+                }
+              >
+                <Avatar
+                  key={index}
+                  sx={{
+                    width: 34,
+                    height: 34,
+                    backgroundColor: "#2196f3",
+                    color: "#fff",
+                    textTransform: "uppercase",
+                    fontSize: "14px",
+                  }}
+                >
+                  {employee.employee.firstName.charAt(0)}
+                  <span>{employee.employee.lastName.charAt(0)}</span>
+                </Avatar>
+              </Tooltip>
+            ))}
+            {remainingEmployees.length > 0 && (
+              <Tooltip
+                title={
+                  <div>
+                    {remainingEmployees.map((employee, index) => (
+                      <Grid
+                        key={index}
+                        fontSize="14px"
+                        textTransform="capitalize"
+                      >
+                        {employee.employee.firstName}{" "}
+                        {employee.employee.middleName + " " || ""}
+                        {employee.employee.lastName}
+                      </Grid>
+                    ))}
+                  </div>
+                }
+              >
+                <Avatar
+                  sx={{
+                    width: 34,
+                    height: 34,
+                    backgroundColor: "#2196f3",
+                    color: "#fff",
+                    textTransform: "uppercase",
+                    fontSize: "14px",
+                  }}
+                >
+                  +{remainingEmployees.length}
+                </Avatar>
+              </Tooltip>
+            )}
+          </Grid>
         );
-
-        return matchedEmployeeNames.join(", ");
       },
     },
   ].filter(Boolean);
+  const { mode } = React.useContext(ThemeModeContext);
 
   const actions = [
     {
       icon: () => (
         <AssignmentIcon
           sx={{
-            color: "black",
+            color: mode === "light" ? "black" : "white",
             "&:hover": {
               color: "green",
             },
@@ -232,7 +301,7 @@ const ProjectTask = ({ permissions }) => {
       icon: () => (
         <ModeEditOutlineIcon
           sx={{
-            color: "black",
+            color: mode === "light" ? "black" : "white",
             "&:hover": {
               color: "green",
             },
@@ -244,7 +313,16 @@ const ProjectTask = ({ permissions }) => {
       onClick: (event, rowData) => handleEditTask(rowData),
     },
     {
-      icon: () => <DeleteIcon style={{ color: "#d32f2f" }} />,
+      icon: () => (
+        <DeleteIcon
+          sx={{
+            color: mode === "light" ? "black" : "white",
+            "&:hover": {
+              color: "red",
+            },
+          }}
+        />
+      ),
       disabled: !permissions?.canDelete,
       tooltip: "Delete task",
       onClick: (event, rowData) => handleDeleteTask(rowData),
@@ -259,7 +337,7 @@ const ProjectTask = ({ permissions }) => {
           color={"white"}
           variant={"contained"}
           onClick={handleAddOpenModal}
-          buttonName={"+ Add Task"}
+          buttonName={"Add Task"}
         />
       </Box>
       <br></br>
@@ -281,7 +359,7 @@ const ProjectTask = ({ permissions }) => {
       )}
       {openAssignModal && (
         <AssignProjectTaskModal
-          title={"Edit Task"}
+          title={"Assign Task"}
           id={assignData?.id}
           data={assignData}
           open={openAssignModal}

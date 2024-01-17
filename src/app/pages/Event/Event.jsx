@@ -47,7 +47,10 @@ const Event = ({ permissions }) => {
   }, [eventData]);
 
   const handleCloseModal = () => setOpenAddModal(false);
-  const { formik, eventId } = useEventForm(setOpenSubmitModal, handleCloseModal);
+  const { formik, eventId } = useEventForm(
+    setOpenSubmitModal,
+    handleCloseModal
+  );
 
   const handleFormSubmit = async () => {
     formik.handleSubmit();
@@ -76,7 +79,7 @@ const Event = ({ permissions }) => {
           color={'#fff'}
           variant={'contained'}
           onClick={() => setOpenAddModal(true)}
-          buttonName={'+ Add Event'}
+          buttonName={'Add Event'}
         />
       </Box>
 

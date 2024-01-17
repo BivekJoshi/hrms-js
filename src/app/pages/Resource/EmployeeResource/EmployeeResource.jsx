@@ -1,5 +1,5 @@
-import { Box, Typography } from "@mui/material";
-import React, { useState } from "react";
+import { Box, Button, Grid, Typography } from "@mui/material";
+import React, { useContext, useState } from "react";
 import { useDeleteEmployeeResource } from "../../../hooks/resource/employeeResource/useEmployeeResource";
 import { useGetEmployeeResource } from "../../../hooks/resource/employeeResource/useEmployeeResource";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -10,6 +10,7 @@ import { EditEmployeeResourceModal } from "./EmployeeResourceModal";
 import PermissionHoc from "../../../hoc/permissionHoc";
 import HocButton from "../../../hoc/hocButton";
 import CustomTable from "../../../components/CustomTable/CustomTable";
+import ThemeModeContext from "../../../../theme/ThemeModeContext";
 
 const EmployeeResource = ({ permissions }) => {
   const { data: employeeResourceData, isLoading } = useGetEmployeeResource();
@@ -20,7 +21,6 @@ const EmployeeResource = ({ permissions }) => {
 
   const [deletedData, setDeletedData] = useState({});
   const [editedEmployeeResouce, setEditedEmployeeResource] = useState({});
-
   const handleAddOpenModal = () => setOpenAddModal(true);
   const handleCloseAddModal = () => setOpenAddModal(false);
 
@@ -38,10 +38,18 @@ const EmployeeResource = ({ permissions }) => {
     setOpenDeleteModal(false);
   };
 
+  const { mode } = useContext(ThemeModeContext);
   const handleEditRowData = (rowData) => {
     setEditedEmployeeResource(rowData);
     setOpenEditModal(true);
   };
+
+  const returnedResource =
+    employeeResourceData &&
+    employeeResourceData.filter((item) => item?.returnDate);
+  const usedResource =
+    employeeResourceData &&
+    employeeResourceData.filter((item) => item?.returnDate === null);
 
   const columns = [
     {
@@ -53,15 +61,40 @@ const EmployeeResource = ({ permissions }) => {
       sorting: false,
     },
     {
-      title: 'Employee Name',
-      field: 'employee.firstName',
-      emptyValue: '-',
+      title: "Employee Name",
+      field: "employeeName",
+
+      render: (rowData) => {
+        const name =
+          rowData?.employee?.firstName +
+          " " +
+          rowData?.employee?.middleName +
+          " " +
+          rowData?.employee?.lastName;
+        return name ? name : "-";
+      },
+      customFilterAndSearch: (searchValue, rowData) => {
+        if(rowData?.middleName) {
+          const employeeName = rowData?.employee?.firstName+" "+rowData?.employee?.middleName+" "+rowData?.employee?.lastName;
+          return employeeName.toLowerCase().includes(searchValue.toLowerCase());
+        } else {
+          const employeeName = rowData?.employee?.firstName+" "+rowData?.employee?.lastName;
+          return employeeName.toLowerCase().includes(searchValue.toLowerCase());
+        }
+      },
       sorting: false,
     },
     {
-      title: 'Resource',
-      field: 'officeResource.name',
-      emptyValue: '-',
+      title: "Resource",
+      field: "officeResourceName",
+      render: (rowData) => {
+        const resource = rowData?.officeResource?.name;
+        return (
+          <Typography style={{ overflowWrap: "break-word", wordBreak: "break-all" }}>
+            {resource ? resource : "-"}
+          </Typography>
+        );
+      },
       sorting: false,
     },
     {
@@ -71,64 +104,105 @@ const EmployeeResource = ({ permissions }) => {
       sorting: false,
     },
     {
-      title: 'Device Condition Before',
-      field: 'conditionWhileProvided',
-      emptyValue: '-',
+      title: "Device Condition Before",
+      field: "conditionWhileProvided",
+      emptyValue: "-",
       sorting: false,
     },
     {
-      title: 'Device Condition Before',
-      field: 'conditionWhileProvided',
-      emptyValue: '-',
+      title: "Returned Date",
+      field: "returnDate",
+      emptyValue: "-",
       sorting: false,
     },
     {
-      title: 'Returned Date',
-      field: 'returnDate',
-      emptyValue: '-',
+      title: "Device Condition After",
+      field: "conditionWhileReturned",
+      emptyValue: "-",
       sorting: false,
     },
     {
-      title: 'Device Condition After',
-      field: 'conditionWhileReturned',
-      emptyValue: '-',
+      title: "Remarks",
+      field: "remarks",
+      emptyValue: "-",
       sorting: false,
     },
-    {
-      title: 'Remarks',
-      field: 'remarks',
-      emptyValue: '-',
-      sorting: false,
-    },
+    // {
+    //   id: 'actions',
+    //   label: 'Actions',
+    //   title: 'Action',
+    //   render: (rowData) => {
+    //     return (
+    //       <>
+    //         <Button disabled={rowData?.returnDate !== null}>
+    //           <ModeEditOutlineIcon
+    //             onClick={(event) => handleEditRowData(rowData)}
+    //             sx={{
+    //               color:
+    //                 rowData?.returnDate === null
+    //                   ? 'rgb(188, 188, 188)'
+    //                   : 'black',
+    //               '&:hover': { color: 'green' },
+    //             }}
+    //           />
+    //         </Button>
+    //         <Button disabled={rowData?.returnDate !== null}>
+    //           <DeleteIcon
+    //             onClick={(event) => handleDeleteRowData(rowData)}
+    //             sx={{
+    //               color:
+    //                 rowData?.returnDate === null
+    //                   ? 'rgb(188, 188, 188)'
+    //                   : 'black',
+    //               '&:hover': { color: 'green' },
+    //             }}
+    //           />
+    //         </Button>
+    //       </>
+    //     );
+    //   },
+    // },
   ];
-  const actions = [
+
+  const editAction = [
     {
       icon: () => (
-        <ModeEditOutlineIcon
-          sx={{
-            color: "black",
-            "&:hover": {
-              color: "green",
-            },
-          }}
-        />
+        <Button
+          disabled={
+            !permissions?.canEdit && editedEmployeeResouce?.returnDate === null
+          }
+        >
+          <ModeEditOutlineIcon
+            sx={{
+              color: mode === "light" ? "black" : "white",
+              "&:hover": {
+                color: "green",
+              },
+            }}
+          />
+        </Button>
       ),
-      disabled: !permissions?.canEdit,
+
       tooltip: "Edit Logistics",
       onClick: (event, rowData) => handleEditRowData(rowData),
     },
+   
+  ];
+
+  const deleteAction = [
     {
-      icon: () => (
+      icon: (rowData) => (
         <DeleteIcon
-          sx={{
-            color: "black",
-            "&:hover": {
-              color: "red",
-            },
-          }}
+        sx={{
+          color: mode === "light" ? "black" : "white",
+          "&:hover": {
+            color: "red",
+          },
+        }}
         />
       ),
-      disabled: !permissions?.canDelete,
+      disabled:
+        !permissions?.canDelete || employeeResourceData?.returnDate === null,
       tooltip: "Remove Logistics",
       onClick: (event, rowData) => handleDeleteRowData(rowData),
     },
@@ -153,14 +227,38 @@ const EmployeeResource = ({ permissions }) => {
         />
       </Box>
 
-      <CustomTable
+      <Box
+        gap={2}
+        sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}
+      >
+        <CustomTable
+          columns={columns}
+          data={usedResource}
+          title="Currently Used Logistics"
+          isLoading={isLoading}
+          actions={editAction}
+          singleAction={true}
+          // exportButton={true}
+        />
+        <CustomTable
+          columns={columns}
+          data={returnedResource}
+          title="Returned Logistics"
+          isLoading={isLoading}
+          actions={deleteAction}
+          singleAction={true}
+          // exportButton={true}
+        />
+      </Box>
+
+      {/* <CustomTable
         columns={columns}
         data={employeeResourceData}
         title="Employee Logistics"
         isLoading={isLoading}
-        actions={actions}
-        exportButton={true}
-      />
+        // actions={actions}
+        // exportButton={true}
+      /> */}
       {openDeleteModal && (
         <DeleteConfirmationModal
           open={openDeleteModal}

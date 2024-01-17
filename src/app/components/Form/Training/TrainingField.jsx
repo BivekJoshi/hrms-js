@@ -4,24 +4,24 @@ import { Button, Grid, TextField } from '@mui/material';
 
 const TrainingField = ({ onClose, isLoading, data, empId }) => {
   const { formik } = useTrainingForm(data, empId, onClose);
-  
+
   const handleFormSubmit = () => {
     formik.handleSubmit();
     if (formik.isValid) {
-    // onClose();
-      };
+      // onClose();
+    }
   };
+  const currentDate = new Date().toISOString().split('T')[0];
 
-  const submitButtonText = data ? 'Update' : 'Add';
+  const submitButtonText = data ? 'Update Training' : 'Add Training';
   return (
     !isLoading && (
       <Grid container spacing={3}>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={12}>
           <TextField
             id='trainingName'
             name='trainingName'
             label='Training Name'
-            placeholder='Enter training name'
             fullWidth
             required
             value={formik.values.trainingName}
@@ -33,15 +33,15 @@ const TrainingField = ({ onClose, isLoading, data, empId }) => {
               formik.touched.trainingName && formik.errors.trainingName
             }
             variant='outlined'
-            InputLabelProps={{ shrink: true }}
+            InputLabelProps={{ shrink: Boolean(formik.values.trainingName) }}
+            size="small"
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={12}>
           <TextField
             id='trainingLevel'
             name='trainingLevel'
             label='Training level'
-            placeholder='Enter training level'
             fullWidth
             required
             value={formik.values.trainingLevel}
@@ -54,15 +54,15 @@ const TrainingField = ({ onClose, isLoading, data, empId }) => {
               formik.touched.trainingLevel && formik.errors.trainingLevel
             }
             variant='outlined'
-            InputLabelProps={{ shrink: true }}
+            InputLabelProps={{ shrink: Boolean(formik.values.trainingLevel) }}
+            size="small"
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={12}>
           <TextField
             id='trainingInstitute'
             name='trainingInstitute'
             label='Institute'
-            placeholder='Enter training institute'
             fullWidth
             required
             value={formik.values.trainingInstitute}
@@ -76,15 +76,17 @@ const TrainingField = ({ onClose, isLoading, data, empId }) => {
               formik.errors.trainingInstitute
             }
             variant='outlined'
-            InputLabelProps={{ shrink: true }}
+            InputLabelProps={{
+              shrink: Boolean(formik.values.trainingInstitute),
+            }}
+            size="small"
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={12}>
           <TextField
             id='category'
             name='category'
             label='Category'
-            placeholder='Enter training category'
             fullWidth
             required
             value={formik.values.category}
@@ -92,7 +94,8 @@ const TrainingField = ({ onClose, isLoading, data, empId }) => {
             error={formik.touched.category && Boolean(formik.errors.category)}
             helperText={formik.touched.category && formik.errors.category}
             variant='outlined'
-            InputLabelProps={{ shrink: true }}
+            InputLabelProps={{ shrink: Boolean(formik.values.category) }}
+            size="small"
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -100,7 +103,6 @@ const TrainingField = ({ onClose, isLoading, data, empId }) => {
             id='startDate'
             name='startDate'
             label='Start Date'
-            placeholder='Enter training start date'
             fullWidth
             type='date'
             required
@@ -110,6 +112,10 @@ const TrainingField = ({ onClose, isLoading, data, empId }) => {
             helperText={formik.touched.startDate && formik.errors.startDate}
             variant='outlined'
             InputLabelProps={{ shrink: true }}
+            inputProps={{
+              max: currentDate,
+            }}
+            size="small"
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -117,9 +123,9 @@ const TrainingField = ({ onClose, isLoading, data, empId }) => {
             id='endDate'
             name='endDate'
             label='End Date'
-            placeholder='Enter training end date'
             fullWidth
             type='date'
+            disabled={!formik?.values?.startDate}
             required
             value={formik.values.endDate}
             onChange={formik.handleChange}
@@ -127,6 +133,11 @@ const TrainingField = ({ onClose, isLoading, data, empId }) => {
             helperText={formik.touched.endDate && formik.errors.endDate}
             variant='outlined'
             InputLabelProps={{ shrink: true }}
+            inputProps={{
+              min: formik?.values?.startDate, // Disable past date selections
+              max: currentDate, // Disable past date selections
+            }}
+            size="small"
           />
         </Grid>
         <Grid

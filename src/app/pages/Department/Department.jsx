@@ -17,10 +17,12 @@ import HocButton from "../../hoc/hocButton";
 import useAuth from "../../../auth/hooks/component/login/useAuth";
 import CustomTable from "../../components/CustomTable/CustomTable";
 import { useEffect } from "react";
+import ThemeModeContext from "../../../theme/ThemeModeContext";
 
 const Department = ({ permissions }) => {
   const { isEmployee } = useAuth();
   const { data: departmentData, isLoading } = useGetDepartment();
+  const { mode } = React.useContext(ThemeModeContext);
 
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
@@ -35,10 +37,8 @@ const Department = ({ permissions }) => {
   const handleCloseEditModal = () => setOpenEditModal(false);
   const handleCloseDeleteModal = () => setOpenDeleteModal(false);
 
-  const {
-    deleteDepartmentMutation,
-    isSuccess: isDeleteSuccess,
-  } = useDeleteDepartment({});
+  const { deleteDepartmentMutation, isSuccess: isDeleteSuccess } =
+    useDeleteDepartment({});
 
   const handleDeleteDepartment = (rowData) => {
     setDeletedDepartment(rowData);
@@ -85,6 +85,19 @@ const Department = ({ permissions }) => {
     {
       title: "Description",
       field: "departmentDescription",
+      render: (rowData) => {
+        return (
+          <div
+            style={{
+              whiteSpace: "wrap",
+              width: "25rem",
+              overflowWrap: "break-word",
+            }}
+          >
+            {rowData?.departmentDescription}
+          </div>
+        );
+      },
       emptyValue: "-",
       sorting: false,
     },
@@ -95,7 +108,7 @@ const Department = ({ permissions }) => {
       icon: () => (
         <ModeEditOutlineIcon
           sx={{
-            color: "black",
+            color: mode === "light" ? "black" : "white",
             "&:hover": {
               color: "green",
             },
@@ -111,7 +124,7 @@ const Department = ({ permissions }) => {
       icon: () => (
         <DeleteIcon
           sx={{
-            color: "black",
+            color: mode === "light" ? "black" : "white",
             "&:hover": {
               color: "red",
             },
@@ -138,7 +151,7 @@ const Department = ({ permissions }) => {
           permissions={permissions?.canAdd}
           variant={"contained"}
           onClick={handleAddOpenModal}
-          buttonName={"+ Add Department"}
+          buttonName={"Add Department"}
         />
       </Box>
 
@@ -149,8 +162,11 @@ const Department = ({ permissions }) => {
         data={departmentData}
         title="Department List"
         isLoading={isLoading}
-        exportButton={true}
         actions={actions}
+        fileName="Department List"
+        exportButton
+        exportExcel
+        pdfNone
       />
 
       {openEditModal && (

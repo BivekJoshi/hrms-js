@@ -1,32 +1,25 @@
-import React from 'react';
-import { Grid, TextField, Button, Autocomplete } from '@mui/material';
-import useAddEmployeeHistoryForm from '../../../hooks/employeehistory/useAddEmployeeHistoryForm';
+import React from "react";
+import { Grid, TextField, Button, Autocomplete } from "@mui/material";
+import useAddEmployeeHistoryForm from "../../../hooks/employeehistory/useAddEmployeeHistoryForm";
+import RemarkField from "../../RemarkField/RemarkField";
 
 const AddEmployeeHistoryFields = ({ onClose, isLoading }) => {
   const { formik } = useAddEmployeeHistoryForm(onClose);
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
-    if (formik.isValid) {
-      // formik.setTouched({
-      //   positionId: false,
-      //   effectiveFromDate: false,
-      //   remarks: false,
-      // });
-      // onClose();
-    }
   };
 
   return (
     !isLoading && (
       <Grid container spacing={3}>
-        <Grid item xs={12} md={6} lg={6} xl={6} sm={12}>
+        <Grid item xs={12} md={12} sm={12}>
           <TextField
-            id='pastPosition'
-            name='pastPosition'
-            label='Employee Position'
-            placeholder='Enter position'
+            id="pastPosition"
+            name="pastPosition"
+            label="Employee Position"
             fullWidth
+            required
             value={formik.values.pastPosition}
             onChange={formik.handleChange}
             error={
@@ -35,17 +28,18 @@ const AddEmployeeHistoryFields = ({ onClose, isLoading }) => {
             helperText={
               formik.touched.pastPosition && formik.errors.pastPosition
             }
-            variant='outlined'
-            InputLabelProps={{ shrink: true }}
+            variant="outlined"
+            InputLabelProps={{ shrink: Boolean(formik.values.pastPosition) }}
+            size="small"
           />
         </Grid>
-        <Grid item xs={12} md={6} lg={6} xl={6} sm={12}>
+        <Grid item xs={12} md={12} sm={12}>
           <TextField
-            id='employerName'
-            name='employerName'
-            label='Branch Name'
-            placeholder='Enter branch name'
+            id="employerName"
+            name="employerName"
+            label="Branch Name"
             fullWidth
+            required
             value={formik.values.employerName}
             onChange={formik.handleChange}
             error={
@@ -54,17 +48,18 @@ const AddEmployeeHistoryFields = ({ onClose, isLoading }) => {
             helperText={
               formik.touched.employerName && formik.errors.employerName
             }
-            variant='outlined'
-            InputLabelProps={{ shrink: true }}
+            variant="outlined"
+            InputLabelProps={{ shrink: Boolean(formik.values.employerName) }}
+            size="small"
           />
         </Grid>
-        <Grid item xs={12} md={6} lg={6} xl={6} sm={12}>
+        <Grid item xs={12} md={12} sm={12}>
           <TextField
-            id='employerAddress'
-            name='employerAddress'
-            label='Branch Address'
-            placeholder='Enter branch address'
+            id="employerAddress"
+            name="employerAddress"
+            label="Branch Address"
             fullWidth
+            required
             value={formik.values.employerAddress}
             onChange={formik.handleChange}
             error={
@@ -74,93 +69,86 @@ const AddEmployeeHistoryFields = ({ onClose, isLoading }) => {
             helperText={
               formik.touched.employerAddress && formik.errors.employerAddress
             }
-            variant='outlined'
-            InputLabelProps={{ shrink: true }}
+            variant="outlined"
+            InputLabelProps={{ shrink: Boolean(formik.values.employerAddress) }}
+            size="small"
           />
         </Grid>
-        <Grid item xs={12} md={6} lg={6} xl={6} sm={12}>
+        <Grid item xs={12} md={6} sm={12}>
           <TextField
-            id='fromDate'
-            name='fromDate'
-            label='From Date'
-            type='date'
+            id="fromDate"
+            name="fromDate"
+            label="From Date"
+            type="date"
             fullWidth
+            required
             value={formik.values.fromDate}
             onChange={formik.handleChange}
             error={formik.touched.fromDate && Boolean(formik.errors.fromDate)}
             helperText={formik.touched.fromDate && formik.errors.fromDate}
-            variant='outlined'
+            variant="outlined"
             InputLabelProps={{ shrink: true }}
+            size="small"
           />
         </Grid>
-        <Grid item xs={12} md={6} lg={6} xl={6} sm={12}>
+        <Grid item xs={12} md={6} sm={12}>
           <TextField
-            id='toDate'
-            name='toDate'
-            label='To Date'
-            type='date'
+            id="toDate"
+            name="toDate"
+            label="To Date"
+            type="date"
+            disabled={!formik?.values?.fromDate}
+            required
             fullWidth
             value={formik.values.toDate}
             onChange={formik.handleChange}
             error={formik.touched.toDate && Boolean(formik.errors.toDate)}
             helperText={formik.touched.toDate && formik.errors.toDate}
-            variant='outlined'
+            variant="outlined"
             InputLabelProps={{ shrink: true }}
+            size="small"
+            inputProps={{
+              min: formik?.values?.fromDate,
+            }}
           />
         </Grid>
-        <Grid item xs={12} md={6} lg={6} xl={6} sm={12}>
-          <TextField
-            id='description'
-            name='description'
-            label='Work Description'
-            placeholder='Enter work description'
+
+        <Grid item xs={12} md={12} lg={12} sm={12}>
+          <RemarkField
+            id="remarks"
+            name="remarks"
+            label="Remarks"
             fullWidth
-            value={formik.values.description}
-            onChange={formik.handleChange}
-            error={
-              formik.touched.description && Boolean(formik.errors.description)
-            }
-            helperText={formik.touched.description && formik.errors.description}
-            variant='outlined'
-            InputLabelProps={{ shrink: true }}
-          />
-        </Grid>
-        <Grid item xs={12} md={6} lg={6} xl={6} sm={12}>
-          <TextField
-            id='remarks'
-            name='remarks'
-            label='Remarks'
-            placeholder='Enter work remarks'
-            fullWidth
-            value={formik.values.remarks}
-            onChange={formik.handleChange}
-            error={formik.touched.remarks && Boolean(formik.errors.remarks)}
-            helperText={formik.touched.remarks && formik.errors.remarks}
-            variant='outlined'
-            InputLabelProps={{ shrink: true }}
+            formik={formik}
+            maxLength={255}
+            variant="outlined"
             multiline
-            minRows={3}
+            InputLabelProps={{
+              shrink: Boolean(formik.values.remarks),
+            }}
+            rows={4}
+            inputProps={{ maxLength: 255 }}
           />
         </Grid>
 
         <Grid
           container
-          direction='row'
-          justifyContent='flex-end'
-          alignItems='flex-end'
+          direction="row"
+          justifyContent="flex-end"
+          alignItems="flex-end"
         >
           <Button
-            variant='contained'
+            variant="contained"
             onClick={handleFormSubmit}
             sx={{ mt: 3, ml: 1 }}
           >
-            Add
+            Add Work History
           </Button>
           <Button
-            variant='contained'
+            variant="contained"
             onClick={onClose}
             sx={{ mt: 3, ml: 1 }}
-            color='error'
+            color="error"
           >
             Cancel
           </Button>

@@ -89,9 +89,14 @@ export const useAddLeaveByAdmin = ({ onSuccess }) => {
     (formData) => addLeaveByAdmin(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Succesfully added Leave');
+        toast.success('Successfully added Leave');
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries('getLeave');
+
+        queryClient.invalidateQueries({
+          predicate: (query) => {
+            return ['getLeave', 'getpendingleave'];
+          },
+        });
       },
     }
   );
@@ -109,8 +114,8 @@ export const useAddLeave = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(['addLeave'], (formData) => addleave(formData), {
     onSuccess: (data, variables, context) => {
-      toast.success('Succesfully added Leave');
-      navigate('/employee/leave');
+      toast.success('Successfully added Leave');
+      navigate('/employee/leaveHistory');
       onSuccess && onSuccess(data, variables, context);
       queryClient.invalidateQueries('useGetLoggedInUserLeave');
     },
@@ -136,7 +141,11 @@ export const useDeleteLeaveAdmin = ({ onSuccess }) => {
     onSuccess: (data, variables, context) => {
       toast.success('Successfully deleted Leave');
       onSuccess && onSuccess(data, variables, context);
-      queryClient.invalidateQueries('getLeave');
+      queryClient.invalidateQueries({
+        predicate: (query) => {
+          return ['getLeave', 'getpendingleave'];
+        },
+      });
     },
   });
 };
@@ -182,6 +191,12 @@ export const useEditLeaveStatusByAdmin = ({ onSuccess }) => {
         toast.success('Successfully edited Leave');
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries('getLeave');
+
+        queryClient.invalidateQueries({
+          predicate: (query) => {
+            return ['getLeave', 'getpendingleave'];
+          },
+        });
       },
     }
   );

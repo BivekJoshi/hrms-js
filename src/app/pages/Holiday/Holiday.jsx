@@ -1,18 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Box, Button, Grid, Typography } from "@mui/material";
-import { toast } from "react-toastify";
-
+import { Box, Typography } from "@mui/material";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
-
 import HocButton from "../../hoc/hocButton";
 import PermissionHoc from "../../hoc/permissionHoc";
-
 import { useGetHoliday } from "../../hooks/holiday/useHoliday";
 import useHolidayForm from "../../hooks/holiday/HolidayForm/useHolidayForm";
-
 import FormModal from "../../components/Modal/FormModal";
 import HolidayFields from "../../components/Form/Holiday/HolidayFields";
 import EmailForHoliday from "../Email/EmailForHoliday";
@@ -46,7 +41,10 @@ const Holiday = ({ permissions }) => {
     }
   }, [holidayData]);
 
-  const handleCloseModal = () => setOpenAddModal(false);
+  const handleCloseModal = () => {
+    setOpenAddModal(false)
+    formik.handleReset();
+  };
   const { formik, holidayId } = useHolidayForm(
     setOpenSubmitModal,
     handleCloseModal
@@ -78,47 +76,18 @@ const Holiday = ({ permissions }) => {
             color={"#fff"}
             variant={"contained"}
             onClick={() => setOpenAddModal(true)}
-            buttonName={"+ Add Holiday"}
+            buttonName={"Add Holiday"}
           />
         </Box>
       )}
       <br />
-
-      {openAddModal && (
-        <FormModal
-          title={"Add Holiday"}
-          open={openAddModal}
-          onClose={() => setOpenAddModal(false)}
-          formComponent={
-            <>
-              {/*Import Event Field Here*/}
-              <HolidayFields formik={formik} />
-              <Grid
-                container
-                direction="row"
-                justifyContent="flex-end"
-                alignItems="flex-end"
-                gap={1}
-                mt={2}
-              >
-                <ButtonComponent
-                  variant="contained"
-                  OnClick={handleFormSubmit}
-                  sx={{ mt: 3, ml: 1, color: "#fff" }}
-                  buttonName={"Add Holiday"}
-                />
-                <ButtonComponent
-                  variant="contained"
-                  OnClick={handleCloseModal}
-                  sx={{ mt: 3, ml: 1 }}
-                  BGColor={"#d32f2f"}
-                  buttonName={"Cancel"}
-                />
-              </Grid>
-            </>
-          }
-        />
-      )}
+      <HolidayFields
+        formik={formik}
+        openAddModal={openAddModal}
+        setOpenAddModal={setOpenAddModal}
+        handleFormSubmit={handleFormSubmit}
+        handleCloseModal={handleCloseModal}
+      />
 
       {openSubmitModal && (
         <FormModal
