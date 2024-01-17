@@ -16,7 +16,7 @@ import { useGetDesignation } from "../../../../../hooks/designation/useDesignati
 import ThemeModeContext from "../../../../../../theme/ThemeModeContext";
 import { ThemeSwitch } from "../../../../../../theme/ThemeSwitch";
 
-const EmployeeUpDown = ({ data, handleSuccess }) => {
+const EmployeeUpDown = ({ data, handleSuccess, backCallBack }) => {
   const { data: departmentData, isLoading: loadingDepartment } =
     useGetDepartment();
   const { data: companyData, isLoading: loadingCompany } = useGetCompany();
@@ -30,7 +30,7 @@ const EmployeeUpDown = ({ data, handleSuccess }) => {
   };
 
   return (
-    <Box marginTop={3} padding={4}>
+    <Box sx={{ px: 1, mt: 2 }}>
       <Grid container spacing={3}>
         <Grid sm={12}>
           <Typography variant="h6" marginLeft={3}>
@@ -312,6 +312,14 @@ const EmployeeUpDown = ({ data, handleSuccess }) => {
           justifyContent="flex-end"
           alignItems="flex-end"
         >
+          <Button
+            sx={{ mt: 3, ml: 1 }}
+            onClick={backCallBack}
+            color="success"
+            variant="outlined"
+          >
+            Back
+          </Button>
           <Button
             variant="contained"
             onClick={handleFormSubmit}

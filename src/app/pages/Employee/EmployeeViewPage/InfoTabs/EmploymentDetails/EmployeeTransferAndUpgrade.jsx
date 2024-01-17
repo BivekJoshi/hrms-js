@@ -17,7 +17,7 @@ import { useGetDesignation } from "../../../../../hooks/designation/useDesignati
 import ThemeModeContext from "../../../../../../theme/ThemeModeContext";
 import { useGetCompany } from "../../../../../hooks/company/useCompany";
 
-const EmployeeTransferAndUpgrade = ({ handleSuccess }) => {
+const EmployeeTransferAndUpgrade = ({ handleSuccess, backCallBack }) => {
   const { data: departmentData, isLoading: loadingDepartment } =
     useGetDepartment();
   const { data: companyData, isLoading: loadingCompany } = useGetCompany();
@@ -32,7 +32,7 @@ const EmployeeTransferAndUpgrade = ({ handleSuccess }) => {
 
   const isAllposition = formik?.values?.allPosition;
   return (
-    <Box padding={2}>
+    <Box sx={{ px: 1, mt: 2 }}>
       <Grid container spacing={3}>
         <Grid sm={12}>
           <Typography variant="h6" marginLeft={3}>
@@ -193,6 +193,14 @@ const EmployeeTransferAndUpgrade = ({ handleSuccess }) => {
           justifyContent="flex-end"
           alignItems="flex-end"
         >
+          <Button
+            sx={{ mt: 3, ml: 1 }}
+            onClick={backCallBack}
+            color="success"
+            variant="outlined"
+          >
+            Back
+          </Button>
           <Button
             variant="contained"
             sx={{ mt: 3, ml: 1 }}
