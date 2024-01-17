@@ -18,6 +18,7 @@ const Notification = ({ data }) => {
   const filteredEvents = data?.events?.filter(
     (event) => event.notificationId === "0"
   );
+  const filteredEventsCount = filteredEvents?.length || 0;
 
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
@@ -46,7 +47,7 @@ const Notification = ({ data }) => {
         style={{ color: "#fff" }}
       >
         <Tooltip title="Notifications">
-          <Badge badgeContent={eventCount} color="secondary">
+          <Badge badgeContent={filteredEventsCount} color="secondary">
             <NotificationsIcon />
           </Badge>
         </Tooltip>
