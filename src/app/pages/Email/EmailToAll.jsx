@@ -69,9 +69,9 @@ const EmailToAll = ({ getEventID, onClose }) => {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <Typography variant="h6">
+        {/* <Typography variant="h6">
           Send email to
-        </Typography>
+        </Typography> */}
         <Grid container spacing={2}>
           <Grid
             item
@@ -90,6 +90,7 @@ const EmailToAll = ({ getEventID, onClose }) => {
               value={employeeId}
               onChange={handleChange}
               variant="outlined"
+              size="small"
             >
               <MenuItem value="all">All Employees</MenuItem>
               <MenuItem value="male">Male Employees</MenuItem>

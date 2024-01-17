@@ -16,10 +16,7 @@ import PermissionHoc from '../../hoc/permissionHoc';
 
 import FormModal from '../../components/Modal/FormModal';
 import AddEventFields from '../../components/Form/Event/AddEventFields';
-import useAuth from '../../../auth/hooks/component/login/useAuth';
 import { ButtonComponent } from '../../components/Button/ButtonComponent';
-import ThemeModeContext from '../../../theme/ThemeModeContext';
-import EventList from './EventList';
 
 const Event = ({ permissions }) => {
   const calendarRef = useRef(null);
@@ -178,9 +175,6 @@ const Event = ({ permissions }) => {
       )}
 
       <Grid container spacing={2}>
-        {/* <Grid item xs={3}>
-          <EventList eventData={eventData}/>
-        </Grid> */}
         <Grid item xs={12}>
           <Box sx={{ padding: '2rem' }}>
             <FullCalendar
