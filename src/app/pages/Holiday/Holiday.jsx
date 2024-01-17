@@ -96,7 +96,7 @@ const Holiday = ({ permissions }) => {
           onClose={() => setOpenSubmitModal(false)}
           formComponent={
             <div>
-              <Typography variant="h4">Holiday Added Successfully!</Typography>
+              <Typography variant="h5">Holiday Added Successfully!</Typography>
               <p>Do you like to Email this holiday to Employee.</p>
               <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
                 <ButtonComponent
@@ -114,23 +114,6 @@ const Holiday = ({ permissions }) => {
                   buttonName={"No"}
                   BGColor={"#d32f2f"}
                 />
-                {/* <Button
-                  variant="contained"
-                  sx={{ mt: 3, ml: 1, color: "#fff" }}
-                  onClick={handleEmailButtonClick}
-                >
-                  Yes
-                </Button>
-                <Button
-                  variant="contained"
-                  onClick={() => {
-                    setOpenSubmitModal(false);
-                  }}
-                  sx={{ mt: 3, ml: 1 }}
-                  color="error"
-                >
-                  No
-                </Button> */}
               </Box>
             </div>
           }
@@ -157,20 +140,12 @@ const Holiday = ({ permissions }) => {
         ref={calendarRef}
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
         initialView="dayGridMonth"
-        // headerToolbar={{
-        //   start: "customTodayButton prev,next",
-        //   center: "title",
-        //   end: "dayGridMonth,timeGridWeek,timeGridDay",
-        // }}
         eventClick={handleOpenModal}
         height={"90vh"}
         events={events}
         customButtons={{
           customTodayButton: {
             text: "Today",
-            // click: function () {
-            //   handleTodayClick(events);
-            // },
           },
         }}
       />
@@ -191,6 +166,17 @@ const Holiday = ({ permissions }) => {
           handleCloseModal={() => setOpenModal(false)}
         />
       )}
+      <style>
+          {`
+         .fc .fc-daygrid-day.fc-day-today {
+             background-color: #90a7bd;
+         }
+         .fc *{
+          text-align: center;
+          justify-content: center;
+          }
+         `}
+        </style>
     </>
   );
 };

@@ -77,10 +77,18 @@ const EventAttendance = ({ permissions }) => {
     {
       title: "Event Name",
       field: "eventName",
-      emptyValue: "-",
-      pdfWidth: "8rem",
-      width: "20vh",
-
+      render: (rowData) => (
+        <div
+          style={{
+            whiteSpace: 'normal',
+            overflowWrap: 'break-word',
+            wordWrap: 'break-word',
+            wordBreak: 'break-all',
+          }}
+        >
+          {rowData?.eventName}
+        </div>
+      ),
       sorting: false,
     },
     {
@@ -103,17 +111,34 @@ const EventAttendance = ({ permissions }) => {
       field: "eventLocation",
       emptyValue: "-",
       pdfWidth: "5rem",
-      width: "20vh",
-
-      sorting: false,
+      render: (rowData) => (
+        <div
+          style={{
+            whiteSpace: 'normal',
+            overflowWrap: 'break-word',
+            wordWrap: 'break-word',
+            wordBreak: 'break-all',
+          }}
+        >
+          {rowData?.eventLocation}
+        </div>
+      ),
     },
     {
       title: "Description",
       field: "eventDescription",
-      emptyValue: "-",
-      pdfWidth: "10rem",
-      width: "20vh",
-      sorting: false,
+      render: (rowData) => (
+        <div
+          style={{
+            whiteSpace: 'normal',
+            overflowWrap: 'break-word',
+            wordWrap: 'break-word',
+            wordBreak: 'break-all',
+          }}
+        >
+          {rowData?.eventDescription}
+        </div>
+      ),
     },
     {
       title: "User Confirmation",
@@ -183,7 +208,7 @@ const EventAttendance = ({ permissions }) => {
       name: "eventId",
       type: "autoComplete",
       options: eventData || [],
-      md: 6,
+      md: 4,
       sm: 6,
       xs: 6,
     },
@@ -192,7 +217,7 @@ const EventAttendance = ({ permissions }) => {
       name: "employeeId",
       type: "autoComplete",
       options: employeeData || [],
-      md: 6,
+      md: 4,
       sm: 6,
       xs: 6,
     },
@@ -288,6 +313,13 @@ const EventAttendance = ({ permissions }) => {
           handleCloseModal={handleCloseEditModal}
         />
       )}
+      <style>
+        {`
+        .css-qanlhp-MuiPaper-root-MuiCard-root {
+          padding:0 !important;
+        }
+        `}
+      </style>
     </>
   );
 };

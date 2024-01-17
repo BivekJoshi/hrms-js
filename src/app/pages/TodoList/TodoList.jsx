@@ -74,6 +74,7 @@ const TodoList = ({ permissions }) => {
       width: "180px",
       cellStyle: {
         whiteSpace: "nowrap",
+        textAlign: "center",
       },
       sorting: false,
       render: (rowData) => {
@@ -86,7 +87,7 @@ const TodoList = ({ permissions }) => {
           chipColor = "orange";
         } else if (priority === "LOW") {
           chipColor = "green";
-        }
+        }``
 
         return (
           <Chip

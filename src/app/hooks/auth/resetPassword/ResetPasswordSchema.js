@@ -5,6 +5,10 @@ const ResetPasswordSchema = Yup.object().shape({
   password: Yup.string()
     .required("Password is required.")
     .min(8, "Password must be at least 8 characters long.")
+    .notOneOf(
+      [Yup.ref("oldPassword")],
+      "New password must be different from the old password."
+    )
     .matches(
       /^(?=.*[A-Z])/,
       "Password must contain at least one uppercase letter."
@@ -13,14 +17,10 @@ const ResetPasswordSchema = Yup.object().shape({
     .matches(
       /^(?=.*[@#$%^&+=])/,
       "Password must contain at least one special character (@, #, $, %, ^, &, +, =,!)."
-    )
-    .test(
-        "passwords-match",
-        "New password must not be the same as old password.",
-        function (value) {
-          return this.parent.oldPassword !== value;
-        }
-      )
+    ),
+  confirmPassword: Yup.string()
+    .required("Confirm Password is required.")
+    .oneOf([Yup.ref("password"), null], "Passwords must match"),
 });
 
-export { ResetPasswordSchema };
+export default ResetPasswordSchema;

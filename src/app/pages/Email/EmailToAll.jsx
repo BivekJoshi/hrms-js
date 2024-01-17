@@ -69,9 +69,9 @@ const EmailToAll = ({ getEventID, onClose }) => {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        {/* <Typography variant="h6">
+        <Typography variant="h6">
           Send email to
-        </Typography> */}
+        </Typography>
         <Grid container spacing={2}>
           <Grid
             item

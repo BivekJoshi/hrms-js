@@ -63,14 +63,29 @@ const EmploymentType = () => {
       title: 'Type Name',
       field: 'name',
       emptyValue: '-',
-      width: 80,
+      maxWidth: '140px',
       sorting: false,
       render: (rowData) => (
         <div
           style={{
-            whiteSpace: 'normal',
             overflowWrap: 'break-word',
-            wordWrap: 'break-word',
+            wordBreak: 'break-all',
+          }}
+        >
+          {rowData?.name}
+        </div>
+      ),
+    },
+    {
+      title: 'Description',
+      field: 'description',
+      emptyValue: '-',
+      width: 300,
+      sorting: false,
+      render: (rowData) => (
+        <div
+          style={{
+            overflowWrap: 'break-word',
             wordBreak: 'break-all',
           }}
         >

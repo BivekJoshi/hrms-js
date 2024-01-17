@@ -137,7 +137,7 @@ export const LeaveNotification = ({ Eventname, open, handleListKeyDown }) => {
                   <span style={{ textTransform: "capitalize" }}>
                     {ename.employee.firstName}{" "}
                     {" " + ename.employee.middleName + " " || ""}
-                    {ename.employee.lastName}
+                    {ename.employee.lastName}{" "}
                   </span>
                   has requested a
                   <span style={{ textTransform: "capitalize" }}>

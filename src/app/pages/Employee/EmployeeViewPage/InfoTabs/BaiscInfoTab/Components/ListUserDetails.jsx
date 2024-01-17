@@ -1,12 +1,20 @@
-import { Box, Button, Grid, List, Modal, Stack, Typography } from '@mui/material';
-import React, { useState } from 'react';
-import { useParams } from 'react-router';
+import {
+  Box,
+  Button,
+  Grid,
+  List,
+  Modal,
+  Stack,
+  Typography,
+} from "@mui/material";
+import React, { useState } from "react";
+import { useParams } from "react-router";
 
-import InfoItem from './InfoItem';
-import BorderColorIcon from '@mui/icons-material/BorderColor';
-import { useNavigate } from 'react-router-dom';
-import { useGetLoggedInUser } from '../../../../../../hooks/auth/usePassword';
-import useAuth from '../../../../../../../auth/hooks/component/login/useAuth';
+import InfoItem from "./InfoItem";
+import BorderColorIcon from "@mui/icons-material/BorderColor";
+import { useNavigate } from "react-router-dom";
+import { useGetLoggedInUser } from "../../../../../../hooks/auth/usePassword";
+import useAuth from "../../../../../../../auth/hooks/component/login/useAuth";
 
 export default function ListUserDetails({ cardTitle, data, mode }) {
   const { isSuperAdmin, isAdmin, isHr, isEmployee, isHrAdmin, isManager } =
@@ -27,37 +35,28 @@ export default function ListUserDetails({ cardTitle, data, mode }) {
   };
   return (
     <>
-      <Box sx={{ display: 'flex'}}>
-        <Typography variant='h6' sx={{ fontWeight: 600 }}>
+      <Box sx={{ display: "flex", justifyContent:"space-between" }}>
+        <Typography variant="h6" sx={{ fontWeight: 600 }}>
           {cardTitle}
         </Typography>
-        <Grid sx={{ display: 'flex' }}>
-          {!isEmployee && cardTitle === 'Basic Informations' && (
+        <Grid sx={{ display: "flex" }}>
+          {!isEmployee && cardTitle === "Basic Informations" && (
             <BorderColorIcon
               onClick={handleOnClick}
-              fontSize='large'
+              fontSize="large"
               sx={{
-                color: 'rgb(28, 126, 214)',
-                paddingRight: '1rem',
-                cursor: 'pointer',
+                color: "rgb(28, 126, 214)",
+                paddingRight: "1rem",
+                cursor: "pointer",
               }}
             />
           )}
         </Grid>
-        {/* 
-        <Modal open={open} onClose={handleClose}>
-          <Box sx={style}>
-            <Typography variant="h6" component="h2">
-              Edit Basic Info Details
-            </Typography>
-            <Typography sx={{ mt: 2 }}>Here is the edited Details</Typography>
-          </Box>
-        </Modal> */}
       </Box>
       <List
         sx={{
-          bgcolor: mode === 'light' ? '#ededed' : '#3f413f',
-          borderRadius: '1rem',
+          bgcolor: mode === "light" ? "#ededed" : "#3f413f",
+          borderRadius: "1rem",
         }}
       >
         {Object.keys(data)?.map((item, index) => (

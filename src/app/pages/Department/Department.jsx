@@ -90,8 +90,8 @@ const Department = ({ permissions }) => {
           <div
             style={{
               whiteSpace: "wrap",
-              width: "25rem",
               overflowWrap: "break-word",
+              wordBreak: "break-all"
             }}
           >
             {rowData?.departmentDescription}
