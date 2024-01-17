@@ -4,14 +4,15 @@ import * as Yup from "yup";
 const EditEmployeeSchema = Yup.object().shape({
   firstName: Yup.string()
     .required("First name is required")
-    .max(25, "First name cannot be greater than 25 characters"),
-  middleName: Yup.string().max(
-    25,
-    "Middle name cannot be greater than 25 characters"
-  ),
+    .max(25, "First name cannot be greater than 25 characters")
+    .matches(/^[A-Za-z]+$/, 'Name must contain only letters'),
+  middleName: Yup.string()
+  .max(25, "Middle name cannot be greater than 25 characters")
+  .matches(/^[A-Za-z]+$/, 'Name must contain only letters'),
   lastName: Yup.string()
     .required("Last name is required")
-    .max(25, "Last name cannot be greater than 25 characters"),
+    .max(25, "Last name cannot be greater than 25 characters")
+    .matches(/^[A-Za-z]+$/, 'Name must contain only letters'),
   gender: Yup.string().required("Gender is required"),
   dateOfBirth: Yup.date()
     .required("Date of birth is required")
@@ -24,14 +25,21 @@ const EditEmployeeSchema = Yup.object().shape({
 
   citizenshipNumber: Yup.string()
     .matches(/^[0-9\/-]+$/, "Enter valid citizenship number")
-    .required("Citizenship number is required"),
-  panNumber: Yup.string().matches(/^[0-9\/-]+$/, "Enter valid pan number"),
-  officeEmail: Yup.string().required("Official email is required"),
-  maritalStatus: Yup.string().required("Marital status is required"),
-  remarks: Yup.string().max(
-    255,
-    "Remarks cannot be greater than 255 characters"
+    .required("Citizenship number is required")
+    .max(25, "Citizenship number cannot be greater than 25 characters"),
+  panNumber: Yup.string()
+  .matches(/^[0-9\/-]+$/, "Enter valid pan number")
+  .max(25, "Pan number cannot be greater than 25 numbers"),
+  officeEmail: Yup.string()
+  .required("Office email is required")
+  .max(50, "Office email cannot be greater than 50 characters")
+  .matches(
+    /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/,
+    "Invalid email format"
   ),
+  maritalStatus: Yup.string().required("Marital status is required"),
+  remarks: Yup.string()
+  .max(255, "Remarks cannot be greater than 255 characters"),
   // branchId: Yup.string().required("Branch name is required"),
   // positionId: Yup.string().required("Position is required"),
   // departmentId: Yup.string().required("Department is required"),

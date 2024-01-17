@@ -40,7 +40,7 @@ const CustomeEmployeeDetails = ({
   showDocumentImg,
   showAddButton,
 }) => {
-  console.log('🚀 ~ formik:', formik);
+
   const [openAddModal, setOpenAddModal] = useState(false);
   const [selectedRowId, setSelectedRowId] = useState();
   const { mode } = useContext(ThemeModeContext);
@@ -142,7 +142,7 @@ const CustomeEmployeeDetails = ({
               {!isLoading && data?.length > 0 ? (
                 data?.map((row) => {
                   const rowKey = "emp-row" + row.id;
-                  console.log(rowKey);
+                
                   return (
                     <>
                       <TableRow

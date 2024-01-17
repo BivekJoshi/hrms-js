@@ -12,8 +12,9 @@ const RemarkField = ({
   multiline,
   rows,
   data,
+  req,
 }) => {
-  const [remainingChars, setRemainingChars] = useState(maxLength - (data ? data.length : 0));
+  const [remainingChars, setRemainingChars] = useState(maxLength - (data ? data?.length : 0));
 
   const handleChange = (event) => {
     const newValue = event.target.value;
@@ -33,6 +34,7 @@ const RemarkField = ({
       fullWidth={fullWidth}
       value={formik.values[name]}
       onChange={handleChange}
+      required={req ? true : false}
       error={formik.touched[name] && Boolean(formik.errors[name])}
       helperText={`${remainingChars} characters remaining`}
       variant={variant || 'outlined'}

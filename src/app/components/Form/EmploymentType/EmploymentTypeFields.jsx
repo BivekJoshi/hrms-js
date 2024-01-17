@@ -48,6 +48,7 @@ const EmploymentTypeFields = ({ onClose, isLoading, data }) => {
             }}
             rows={4}
             inputProps={{ maxLength: 255 }}
+            data={data?.description}
           />
         </Grid>
         <Grid

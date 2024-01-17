@@ -13,6 +13,7 @@ import { useGetLeaveType } from '../../../hooks/leaveType/useLeaveType';
 import { useState } from 'react';
 import './Style.css';
 import renderOptions from '../../../utils/renderOptions';
+import RemarkField from '../../RemarkField/RemarkField';
 
 const leaveOptions = [
   { id: 'HALF_DAY', label: 'Half Day' },
@@ -156,7 +157,7 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
           {value === 'MULTI_DAY' && <MultipleDays formik={formik} />}
         </Grid>
         <Grid item xs={12} sm={12}>
-          <TextField
+          {/* <TextField
             id='leaveReason'
             name='leaveReason'
             label='Leave Reason'
@@ -173,6 +174,23 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
             variant='outlined'
             size='small'
             InputLabelProps={{ shrink: Boolean(formik.values.leaveReason) }}
+          /> */}
+           <RemarkField
+            id='leaveReason'
+            name='leaveReason'
+            label='Leave Reason'
+            fullWidth
+            req={true}
+            formik={formik}
+            data={data?.leaveReason}
+            maxLength={255}
+            variant='outlined'
+            multiline
+            InputLabelProps={{
+              shrink: Boolean(formik.values.leaveReason),
+            }}
+            rows={4}
+            inputProps={{ maxLength: 255 }}
           />
         </Grid>
         <Grid
