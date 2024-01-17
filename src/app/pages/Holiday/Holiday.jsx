@@ -81,45 +81,13 @@ const Holiday = ({ permissions }) => {
         </Box>
       )}
       <br />
-
-      {openAddModal && (
-        <FormModal
-          title={'Add Holiday'}
-          open={openAddModal}
-          onClose={() => setOpenAddModal(false)}
-          formComponent={
-            <>
-              {/*Import Event Field Here*/}
-              <HolidayFields formik={formik} />
-              <Grid
-                container
-                direction='row'
-                justifyContent='flex-end'
-                alignItems='flex-end'
-                gap={1}
-                mt={2}
-              >
-                <ButtonComponent
-                  variant='contained'
-                  OnClick={handleFormSubmit}
-                  disabled={!formik.dirty}
-                  color={'#fff'}
-                  sx={{ mt: 3, ml: 1, color: '#fff' }}
-                  buttonName={'Add Holiday'}
-                />
-                <ButtonComponent
-                  variant='contained'
-                  OnClick={handleCloseModal}
-                  sx={{ mt: 3, ml: 1 }}
-                  BGColor={'#d32f2f'}
-                  color={'#fff'}
-                  buttonName={'Cancel'}
-                />
-              </Grid>
-            </>
-          }
-        />
-      )}
+      <HolidayFields
+        formik={formik}
+        openAddModal={openAddModal}
+        setOpenAddModal={setOpenAddModal}
+        handleFormSubmit={handleFormSubmit}
+        handleCloseModal={handleCloseModal}
+      />
 
       {openSubmitModal && (
         <FormModal
