@@ -61,15 +61,15 @@ export const documentType = [
 
   //   id: 7,
   // },
-  {
-    label: 'Experience Letter',
-    input: 'EXPERIENCE_LETTER',
-    desc: '* Experience letter must be in pdf',
-    fileSize: '* File size should be max 25MB',
-    accept: '.pdf',
+  // {
+  //   label: 'Experience Letter',
+  //   input: 'EXPERIENCE_LETTER',
+  //   desc: '* Experience letter must be in pdf',
+  //   fileSize: '* File size should be max 25MB',
+  //   accept: '.pdf',
 
-    id: 8,
-  },
+  //   id: 8,
+  // },
   {
     label: 'Award and Achievement',
     input: 'AWARD_AND_ACHIEVEMENT',
