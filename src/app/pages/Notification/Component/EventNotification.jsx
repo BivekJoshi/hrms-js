@@ -207,6 +207,7 @@ export const EventNotification = ({ data, handleClose }) => {
                           ename?.notificationId
                         )
                       }
+                      sx={{marginTop:".5rem"}}
                     >
                       <b>Submit</b>
                     </Button>
