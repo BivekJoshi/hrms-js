@@ -2,7 +2,7 @@ import { axiosInstance } from "../../../auth/axiosInterceptor";
 
 {/*________________________GET_____________________________________*/ }
 export const getLeaveType = async () => {
-  const data = await axiosInstance.get(`/leave-type/get-all`);
+  const data = await axiosInstance.get(`/leave-type/all-active`);
   return data;
 };
 

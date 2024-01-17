@@ -118,6 +118,7 @@ const DesignationFields = ({ onClose, isLoading, data }) => {
             label='Designation Details'
             fullWidth
             formik={formik}
+            data={data?.positionDetails}
             maxLength={255}
             variant='outlined'
             multiline

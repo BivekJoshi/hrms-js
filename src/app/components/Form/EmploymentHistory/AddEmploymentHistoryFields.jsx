@@ -4,11 +4,14 @@ import { useGetCompany } from '../../../hooks/company/useCompany';
 import { Button, Grid, MenuItem, TextField } from '@mui/material';
 import { useGetDesignation } from '../../../hooks/designation/useDesignation';
 import ThemeModeContext from '../../../../theme/ThemeModeContext';
-import useEmploymentHistory from '../../../hooks/employee/useEmploymentHistory';
 import RemarkField from '../../RemarkField/RemarkField';
 
-const AddEmploymentHistoryFields = ({ onClose, multiplePosition }) => {
-  const { formik } = useEmploymentHistory(onClose);
+const AddEmploymentHistoryFields = ({
+  onClose,
+  multiplePosition,
+  formik,
+  adjustSize,
+}) => {
   const { mode } = useContext(ThemeModeContext);
 
   const handleFormSubmit = () => {
@@ -29,7 +32,7 @@ const AddEmploymentHistoryFields = ({ onClose, multiplePosition }) => {
 
   return (
     <Grid container spacing={2}>
-      <Grid item xs={12} sm={12}>
+      <Grid item xs={adjustSize || 12} sm={adjustSize || 12}>
         <TextField
           id='departmentId'
           name='departmentId'
@@ -45,6 +48,10 @@ const AddEmploymentHistoryFields = ({ onClose, multiplePosition }) => {
           }
           helperText={formik.touched.departmentId && formik.errors.departmentId}
           variant='outlined'
+          InputLabelProps={{
+            shrink: Boolean(formik.values.departmentId),
+          }}
+          size='small'
         >
           {!loadingDepartment &&
             departmentData?.map((option) => (
@@ -53,12 +60,12 @@ const AddEmploymentHistoryFields = ({ onClose, multiplePosition }) => {
                 value={option.id}
                 sx={{ bgcolor: mode === 'light' ? '' : '#413e3e' }}
               >
-                {option.departmentName}
+                {option?.departmentName}
               </MenuItem>
             ))}
         </TextField>
       </Grid>
-      <Grid item xs={12} sm={12}>
+      <Grid item xs={adjustSize || 12} sm={adjustSize || 12}>
         <TextField
           id='branchId'
           name='branchId'
@@ -72,6 +79,7 @@ const AddEmploymentHistoryFields = ({ onClose, multiplePosition }) => {
           error={formik.touched.branchId && Boolean(formik.errors.branchId)}
           helperText={formik.touched.branchId && formik.errors.branchId}
           variant='outlined'
+          size='small'
         >
           {!loadingCompany &&
             companyData?.map((option) => (
@@ -85,7 +93,7 @@ const AddEmploymentHistoryFields = ({ onClose, multiplePosition }) => {
             ))}
         </TextField>
       </Grid>
-      <Grid item xs={12} sm={12}>
+      <Grid item xs={adjustSize || 12} sm={adjustSize || 12}>
         <TextField
           id='positionId'
           name='positionId'
@@ -99,6 +107,7 @@ const AddEmploymentHistoryFields = ({ onClose, multiplePosition }) => {
           error={formik.touched.positionId && Boolean(formik.errors.positionId)}
           helperText={formik.touched.positionId && formik.errors.positionId}
           variant='outlined'
+          size='small'
         >
           {!loadingDesignation &&
             designationData?.map((option) => (
@@ -112,7 +121,7 @@ const AddEmploymentHistoryFields = ({ onClose, multiplePosition }) => {
             ))}
         </TextField>
       </Grid>
-      <Grid item xs={12} sm={12}>
+      <Grid item xs={adjustSize || 12} sm={adjustSize || 12}>
         <TextField
           id='effectiveDateFrom'
           name='effectiveDateFrom'
@@ -131,20 +140,19 @@ const AddEmploymentHistoryFields = ({ onClose, multiplePosition }) => {
           }
           variant='outlined'
           InputLabelProps={{ shrink: true }}
+          size='small'
         />
       </Grid>
-      {/* <Grid item xs={12} sm={12}>
+      {/* <Grid item xs={adjustSize || 12} sm={adjustSize || 12}>
         <TextField
-          id="effectiveDateTo"
-          name="effectiveDateTo"
-          label="Effective To Date"
-          type="date"
+          id='effectiveDateTo'
+          name='effectiveDateTo'
+          label='Effective To Date'
+          type='date'
           fullWidth
+          required
           value={formik.values.effectiveDateTo}
           onChange={formik.handleChange}
-          inputProps={{
-            max: formik?.values?.effectiveDateFrom,
-          }}
           error={
             formik.touched.effectiveDateTo &&
             Boolean(formik.errors.effectiveDateTo)
@@ -154,9 +162,10 @@ const AddEmploymentHistoryFields = ({ onClose, multiplePosition }) => {
           }
           variant='outlined'
           InputLabelProps={{ shrink: true }}
+          size='small'
         />
       </Grid> */}
-      <Grid item xs={12} sm={12}>
+      <Grid item xs={adjustSize || 12} sm={adjustSize || 12}>
         <RemarkField
           id='remarks'
           name='remarks'
@@ -170,7 +179,7 @@ const AddEmploymentHistoryFields = ({ onClose, multiplePosition }) => {
           inputProps={{ maxLength: 250 }}
         />
       </Grid>
-      <Grid
+      {/* <Grid
         container
         direction='row'
         justifyContent='flex-end'
@@ -191,7 +200,7 @@ const AddEmploymentHistoryFields = ({ onClose, multiplePosition }) => {
         >
           Cancel
         </Button>
-      </Grid>
+      </Grid> */}
     </Grid>
   );
 };

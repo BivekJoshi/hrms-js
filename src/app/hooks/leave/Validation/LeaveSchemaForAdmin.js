@@ -7,7 +7,7 @@ const LeaveSchemaAdmin = Yup.object().shape({
   .min(Yup.ref('fromDate'), 'To date cannot be earlier than from date'),
   leaveTypeId: Yup.object().required('Please select leave type'),
   employeeId: Yup.mixed().nullable().required('Please select employee name'),
-  leaveReason: Yup.string().required('Please provide a reason '),
+  leaveReason: Yup.string().required(' Leave Reason is required '),
   leavePeriod:Yup.string().required("Please select leave period")
 });
 

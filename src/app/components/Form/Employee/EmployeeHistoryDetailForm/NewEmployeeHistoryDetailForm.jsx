@@ -64,6 +64,7 @@ const NewEmployeeHistoryDetailForm = ({employeeId}) => {
         deleteCallBack={handleDeleteHistory}
         modalWidth={500}
         // modalHeight={"70vh"}
+        showAddButton={true}
       />
     </div>
   );

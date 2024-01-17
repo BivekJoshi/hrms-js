@@ -11,8 +11,9 @@ const RemarkField = ({
   variant,
   multiline,
   rows,
+  data,
 }) => {
-  const [remainingChars, setRemainingChars] = useState(maxLength);
+  const [remainingChars, setRemainingChars] = useState(maxLength - (data ? data.length : 0));
 
   const handleChange = (event) => {
     const newValue = event.target.value;

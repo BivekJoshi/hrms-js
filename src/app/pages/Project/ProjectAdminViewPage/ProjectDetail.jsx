@@ -172,10 +172,10 @@ const ProjectDetail = () => {
           sx={{
             display: 'flex',
             justifyContent: 'space-between',
-            marginBottom: '1.2rem',
+            marginTop: '1.2rem',
           }}
         >
-          <p>Employee Involved</p>
+          <Typography variant="h6">Employee Involved</Typography>
           <Button variant='contained' onClick={handleAddOpenModal}>
             Add Employee
           </Button>

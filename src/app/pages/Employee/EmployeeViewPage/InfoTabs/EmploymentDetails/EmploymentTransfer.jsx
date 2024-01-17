@@ -56,6 +56,7 @@ const EmploymentTransfer = ({ data, handleSuccess, minDate }) => {
               formik.touched.fromDepartment && formik.errors.fromDepartment
             }
             variant="outlined"
+            size="small"
           >
             {!loadingDepartment &&
               departmentData?.map((option) => (
@@ -87,6 +88,7 @@ const EmploymentTransfer = ({ data, handleSuccess, minDate }) => {
               formik.touched.departmentId && formik.errors.departmentId
             }
             variant="outlined"
+            size="small"
           >
             {!loadingDepartment &&
               departmentData?.map((option) => (
@@ -105,8 +107,7 @@ const EmploymentTransfer = ({ data, handleSuccess, minDate }) => {
             id="fromBranch"
             name="fromBranch"
             select
-            label="From Branch"
-            // placeholder='Select your branch'
+            label='From Branch'
             fullWidth
             required
             disabled
@@ -117,6 +118,7 @@ const EmploymentTransfer = ({ data, handleSuccess, minDate }) => {
             }
             helperText={formik.touched.fromBranch && formik.errors.fromBranch}
             variant="outlined"
+            size="small"
           >
             {!loadingCompany &&
               companyData?.map((option) => (
@@ -135,8 +137,7 @@ const EmploymentTransfer = ({ data, handleSuccess, minDate }) => {
             id="branchId"
             name="branchId"
             select
-            label="To Branch"
-            // placeholder='Select your branch'
+            label='To Branch'
             fullWidth
             required
             value={!loadingCompany && formik.values.branchId}
@@ -144,6 +145,7 @@ const EmploymentTransfer = ({ data, handleSuccess, minDate }) => {
             error={formik.touched.branchId && Boolean(formik.errors.branchId)}
             helperText={formik.touched.branchId && formik.errors.branchId}
             variant="outlined"
+            size="small"
           >
             {!loadingCompany &&
               companyData?.map((option) => (
@@ -194,6 +196,7 @@ const EmploymentTransfer = ({ data, handleSuccess, minDate }) => {
                   formik.touched.fromPosition && formik.errors.fromPosition
                 }
                 variant="outlined"
+                size="small"
               >
                 {!loadingDesignation &&
                   designationData?.map((option) => (
@@ -225,6 +228,7 @@ const EmploymentTransfer = ({ data, handleSuccess, minDate }) => {
                   formik.touched.positionId && formik.errors.positionId
                 }
                 variant="outlined"
+                size="small"
               >
                 {!loadingDesignation &&
                   designationData?.map((option) => (
@@ -260,6 +264,7 @@ const EmploymentTransfer = ({ data, handleSuccess, minDate }) => {
               formik.errors.effectiveDateFrom
             }
             variant="outlined"
+            size="small"
             InputLabelProps={{ shrink: true, min: minDate }}
           />
         </Grid>
