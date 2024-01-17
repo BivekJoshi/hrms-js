@@ -55,7 +55,7 @@ const EmploymentType = () => {
     {
       title: 'SN',
       render: (rowData) => rowData.tableData.id + 1,
-      maxWidth: '1px',
+      maxWidth: 12,
       sortable: false,
       sorting: false,
     },
@@ -63,14 +63,7 @@ const EmploymentType = () => {
       title: 'Type Name',
       field: 'name',
       emptyValue: '-',
-      maxWidth: '140px',
-      sorting: false,
-    },
-    {
-      title: 'Description',
-      field: 'description',
-      emptyValue: '-',
-      width: 300,
+      width: 80,
       sorting: false,
       render: (rowData) => (
         <div
@@ -79,6 +72,26 @@ const EmploymentType = () => {
             overflowWrap: 'break-word',
             wordWrap: 'break-word',
             wordBreak: 'break-all',
+          }}
+        >
+          {rowData?.name}
+        </div>
+      ),
+    },
+    {
+      title: 'Description',
+      field: 'description',
+      emptyValue: '-',
+      // width: 420,
+      sorting: false,
+      render: (rowData) => (
+        <div
+          style={{
+            whiteSpace: 'normal',
+            overflowWrap: 'break-word',
+            wordWrap: 'break-word',
+            wordBreak: 'break-all',
+            width: 400,
           }}
         >
           {rowData?.description}

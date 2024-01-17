@@ -46,7 +46,7 @@ const EditEmployeeForm = () => {
     "Document Details",
   ];
 
-  const { data, isLoading: employeeLoading } = useGetEmployeeById(id);
+  const { data , isLoading: employeeLoading } = useGetEmployeeById(id);
   const { data: addressData, isLoading: getaddressLoading } = useGetAddressById(
     id
   );
@@ -83,7 +83,7 @@ const EditEmployeeForm = () => {
   const getStepContent = (step) => {
     switch (step) {
       case 0:
-        return <EmployeeBasicInfoForm formik={formik} isLoading={isLoading} />;
+        return <EmployeeBasicInfoForm formik={formik} isLoading={isLoading} data={data} />;
 
       case 1:
         return (

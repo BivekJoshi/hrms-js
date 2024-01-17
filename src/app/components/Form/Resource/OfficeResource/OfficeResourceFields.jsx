@@ -1,6 +1,7 @@
 import { Button, Grid, TextField } from '@mui/material';
 import React from 'react';
 import useOfficeResourceForm from '../../../../hooks/resource/officeResource/OfficeResourceForm/useOfficeResourceForm';
+import RemarkField from '../../../RemarkField/RemarkField';
 
 const OfficeResourceFields = ({ onClose, isLoading, data }) => {
   const { formik } = useOfficeResourceForm(data, onClose);
@@ -50,7 +51,7 @@ const OfficeResourceFields = ({ onClose, isLoading, data }) => {
           />
         </Grid>
         <Grid item xs={12} sm={12}>
-          <TextField
+          {/* <TextField
             id='description'
             name='description'
             label=' Description'
@@ -66,6 +67,22 @@ const OfficeResourceFields = ({ onClose, isLoading, data }) => {
             variant='outlined'
             InputLabelProps={{ shrink: Boolean(formik.values.description) }}
             inputProps={{ maxLength: 250 }}
+          /> */}
+            <RemarkField
+            id='description'
+            name='description'
+            label=' Description'
+            fullWidth
+            formik={formik}
+            data={data?.description}
+            maxLength={255}
+            variant='outlined'
+            multiline
+            InputLabelProps={{
+              shrink: Boolean(formik.values.description),
+            }}
+            rows={4}
+            inputProps={{ maxLength: 255 }}
           />
         </Grid>
         <Grid
@@ -77,6 +94,7 @@ const OfficeResourceFields = ({ onClose, isLoading, data }) => {
           <Button
             variant='contained'
             onClick={handleFormSubmit}
+            disabled={!formik?.dirty}
             sx={{ mt: 3, ml: 1, textTransform: "capitalize" }}
             onClose={onClose}
           >

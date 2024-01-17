@@ -48,6 +48,7 @@ const EmploymentTypeFields = ({ onClose, isLoading, data }) => {
             }}
             rows={4}
             inputProps={{ maxLength: 255 }}
+            data={data?.description}
           />
         </Grid>
         <Grid
@@ -59,6 +60,7 @@ const EmploymentTypeFields = ({ onClose, isLoading, data }) => {
           <Button
             variant="contained"
             onClick={handleFormSubmit}
+            disabled={!formik?.dirty}
             sx={{ mt: 3, ml: 1, textTransform: "capitalize" }}
           >
             {submitButtonText}

@@ -64,6 +64,11 @@ const leaveName = [
     leaveName: "FESTIVAL",
     leaveLabel: "Festival Leave",
   },
+  {
+    id: 10,
+    leaveName: "ANNUAL",
+    leaveLabel: "Annual Leave",
+  },
 ];
 const LeaveType = ({ permissions }) => {
   const { data: leaveTypeData, isLoading } = useGetLeaveType();
@@ -177,81 +182,88 @@ const LeaveType = ({ permissions }) => {
         </div>
       ),
     },
-    // {
-    //   id: "actions",
-    //   label: "Actions",
-    //   title: "Action",
-    //   render: (rowData) => {
-    //     return (
-    //       <div style={{ display: "flex" }}>
-    //         <Button disabled={!permissions?.canEdit}>
-    //           <ModeEditOutlineIcon
-    //             sx={{
-    //               color: mode === "light" ? "black" : "white",
-    //               "&:hover": {
-    //                 color: "green",
-    //               },
-    //             }}
-    //             onClick={(event) => handleEditLeaveType(rowData)}
-    //           />
-    //         </Button>
-    //         <Button disabled={!rowData?.deletable || !permissions?.canDelete}>
-    //           <DeleteIcon
-    //             sx={{
-    //               color:
-    //                 rowData?.deletable === false
-    //                   ? "rgb(188, 188, 188)"
-    //                   : "black",
-    //               "&:hover": { color: "red" },
-    //             }}
-    //             // sx={{
-    //             //   color: mode === "light" ? "black" : "white",
-    //             //   "&:hover": {
-    //             //     color: "green",
-    //             //   },
-    //             // }}
-    //             onClick={(event) => handleDeleteLeaveType(rowData)}
-    //           />
-    //         </Button>
-    //       </div>
-    //     );
-    //   },
-    // },
+    {
+      id: "actions",
+      label: "Actions",
+      title: "Action",
+      render: (rowData) => {
+        return (
+          <div style={{ display: "flex" }}>
+            <Button disabled={!permissions?.canEdit}>
+              <ModeEditOutlineIcon
+                sx={{
+                  color: mode === "light" ? "black" : "white",
+                  "&:hover": {
+                    color: "green",
+                  },
+                }}
+                onClick={(event) => handleEditLeaveType(rowData)}
+              />
+            </Button>
+            <Button disabled={!rowData?.deletable || !permissions?.canDelete}>
+              <DeleteIcon
+                sx={{
+                  color:
+                    rowData?.deletable === false
+                      ? "rgb(188, 188, 188)"
+                      : "black",
+                  "&:hover": { color: "red" },
+                }}
+                // sx={{
+                //   color: mode === "light" ? "black" : "white",
+                //   "&:hover": {
+                //     color: "green",
+                //   },
+                // }}
+                onClick={(event) => handleDeleteLeaveType(rowData)}
+              />
+            </Button>
+          </div>
+        );
+      },
+    },
   ];
   const { mode } = React.useContext(ThemeModeContext);
 
-  const actions = [
-    {
-      icon: () => (
-        <ModeEditOutlineIcon
-          sx={{
-            color: mode === "light" ? "black" : "white",
-            "&:hover": {
-              color: "green",
-            },
-          }}
-        />
-      ),
-      disabled: !permissions?.canEdit,
-      tooltip: "Edit Detail",
-      onClick: (event, rowData) => handleEditLeaveType(rowData),
-    },
-    {
-      icon: () => (
-        <DeleteIcon
-          sx={{
-            color: mode === "light" ? "black" : "white",
-            "&:hover": {
-              color: "red",
-            },
-          }}
-        />
-      ),
-      disabled: !permissions?.canDelete,
-      tooltip: "Delete",
-      onClick: (event, rowData) => handleDeleteLeaveType(rowData),
-    },
-  ];
+  // const actions = [
+  //   {
+  //     icon: () => (
+  //       <ModeEditOutlineIcon
+  //         sx={{
+  //           color: mode === "light" ? "black" : "white",
+  //           "&:hover": {
+  //             color: "green",
+  //           },
+  //         }}
+  //       />
+  //     ),
+  //     disabled: !permissions?.canEdit,
+  //     tooltip: "Edit Detail",
+  //     onClick: (event, rowData) => handleEditLeaveType(rowData),
+  //   },
+  //   {
+  //     icon: () => (
+  //       <DeleteIcon
+  //         sx={{
+  //           color: mode === "light" ? "black" : "white",
+  //           "&:hover": {
+  //             color: "red",
+  //           },
+  //         }}
+  //       />
+  //     ),
+  //     disabled: !permissions?.canDelete,
+  //     tooltip: "Delete",
+  //     onClick: (event, rowData) => handleDeleteLeaveType(rowData),
+  //   },
+  // ];
+
+  const filteredLeaveNames = existingLeaveTypes
+    ? leaveName.filter(
+        (option) => !existingLeaveTypes.includes(option?.leaveName)
+      )
+    : [];
+  const remainingLeaves = filteredLeaveNames && filteredLeaveNames?.length;
 
   if (isLoading) return <>Loading</>;
 
@@ -264,20 +276,31 @@ const LeaveType = ({ permissions }) => {
           paddingBottom: "1rem",
         }}
       >
-        <HocButton
+        {remainingLeaves === 0 ? (
+          <Button variant={"contained"} disabled>Max Leave Type Reached</Button>
+        ) : (
+          <HocButton
+            permissions={permissions}
+            color="white"
+            variant={"contained"}
+            onClick={handleAddOpenModal}
+            buttonName={"Add Leave Type"}
+          />
+        )}
+        {/* <HocButton
           permissions={permissions}
           color="white"
           variant={"contained"}
           onClick={handleAddOpenModal}
           buttonName={"Add Leave Type"}
-        />
+        /> */}
       </Box>
       <CustomTable
         columns={columns}
         data={leaveTypeData}
         title="Leave Type"
         isLoading={isLoading}
-        actions={actions}
+        // actions={actions}
       />
       {openEditModal && (
         <EditLeaveTypeModal

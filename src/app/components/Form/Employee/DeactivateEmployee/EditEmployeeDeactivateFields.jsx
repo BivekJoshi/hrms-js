@@ -6,19 +6,19 @@ import {
   Typography,
   Autocomplete,
   Avatar,
-} from '@mui/material';
-import React, { useContext } from 'react';
+} from "@mui/material";
+import React, { useContext } from "react";
 import {
   useAddActiveEmployeeForm,
   useRemoveDeactiveEmployeeForm,
-} from '../../../../hooks/employee/DeactivateEmploye/useRemoveDeactiveEmployeeForm';
-import { useGetEmployee } from '../../../../hooks/employee/useEmployee';
-import { useGetDeactivatedEmployee } from '../../../../hooks/employee/DeactivateEmploye/useEmployee';
-import { termintionOptions, activationOption } from './TerminationOption';
-import ThemeModeContext from '../../../../../theme/ThemeModeContext';
-import { DOC_URL } from '../../../../../auth/axiosInterceptor';
-import Male from '../../../../../assets/male.png';
-import Female from '../../../../../assets/female.png';
+} from "../../../../hooks/employee/DeactivateEmploye/useRemoveDeactiveEmployeeForm";
+import { useGetEmployee } from "../../../../hooks/employee/useEmployee";
+import { useGetDeactivatedEmployee } from "../../../../hooks/employee/DeactivateEmploye/useEmployee";
+import { termintionOptions, activationOption } from "./TerminationOption";
+import ThemeModeContext from "../../../../../theme/ThemeModeContext";
+import { DOC_URL } from "../../../../../auth/axiosInterceptor";
+import Male from "../../../../../assets/male.png";
+import Female from "../../../../../assets/female.png";
 
 export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
   const { palette } = useContext(ThemeModeContext);
@@ -33,19 +33,13 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
     data &&
     data?.firstName + ' ' + (data?.middleName || '') + ' ' + data?.lastName;
   const getEmployeeName = (employeeId) => {
-    const employeeName = employeeData?.find(
-      (employee) => employee?.id === employeeId
-    );
-    if (employeeName) {
-      const { firstName, middleName, lastName } = employeeName;
-      return `${firstName} ${middleName || ''} ${lastName || ''}`;
-    }
-    return employeeId;
+    const name = employeeData?.find((d) => d.employeeId === employeeId)?.label;
+    return name;
   };
 
   const filePath = data?.employeePhotoPath
     ? DOC_URL + data?.employeePhotoPath
-    : data?.gender === 'MALE'
+    : data?.gender === "MALE"
     ? Male
     : Female;
 
@@ -55,14 +49,14 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
     !isLoading && (
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12} md={12}>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div style={{ display: "flex", alignItems: "center" }}>
             <div>
               <Avatar
                 alt={getEmployeeName(formik.values.employeeId)}
                 src={filePath}
               />
             </div>
-            <div style={{ marginLeft: '0.8rem' }}>
+            <div style={{ marginLeft: "0.8rem" }}>
               <Typography>
                 {fullName}
                 {/* {getEmployeeName(formik.values.employeeId)} */}
@@ -77,11 +71,11 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
 
         <Grid item xs={12} sm={12} md={12}>
           <TextField
-            id='effectiveDate'
-            name='effectiveDate'
-            label='Effective From Date'
-            placeholder='Effective Date'
-            type='date'
+            id="effectiveDate"
+            name="effectiveDate"
+            label="Effective From Date"
+            placeholder="Effective Date"
+            type="date"
             fullWidth
             required
             value={formik.values.effectiveDate}
@@ -93,7 +87,7 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
             helperText={
               formik.touched.effectiveDate && formik.errors.effectiveDate
             }
-            variant='outlined'
+            variant="outlined"
             InputLabelProps={{ shrink: true }}
             size='small'
             inputProps={{
@@ -103,22 +97,22 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
         </Grid>
         <Grid item xs={12} sm={12}>
           <Autocomplete
-            id='terminationType'
-            name='terminationType'
+            id="terminationType"
+            name="terminationType"
             options={termintionOptions || []}
-            getOptionLabel={(option) => option?.label || ''}
+            getOptionLabel={(option) => option?.label || ""}
             value={termintionOptions.find(
               (option) => option?.value === formik.values.terminationType
             )}
             onChange={(event, newValue) => {
-              formik.setFieldValue('terminationType', newValue?.value || '');
+              formik.setFieldValue("terminationType", newValue?.value || "");
             }}
             renderOption={(props, option) => (
               <MenuItem
                 {...props}
                 style={{
                   backgroundColor:
-                    palette?.mode === 'light'
+                    palette?.mode === "light"
                       ? palette.background.paper
                       : palette.background.default,
                 }}
@@ -129,8 +123,8 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
             renderInput={(params) => (
               <TextField
                 {...params}
-                label='Termination Type'
-                placeholder='Enter Employee Status'
+                label="Termination Type"
+                placeholder="Enter Employee Status"
                 fullWidth
                 error={
                   formik.touched.terminationType &&
@@ -140,8 +134,8 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
                   formik.touched.terminationType &&
                   formik.errors.terminationType
                 }
-                variant='outlined'
-                size='small'
+                variant="outlined"
+                size="small"
               />
             )}
           />
@@ -153,22 +147,22 @@ export const EditEmployeeDeactivateFields = ({ onClose, isLoading, data }) => {
           sm={12}
           md={12}
           container
-          direction='row'
-          justifyContent='flex-end'
-          alignItems='flex-end'
+          direction="row"
+          justifyContent="flex-end"
+          alignItems="flex-end"
         >
           <Button
-            variant='contained'
+            variant="contained"
             onClick={handleFormSubmit}
-            sx={{ mt: 3, ml: 1, color: '#fff' }}
+            sx={{ mt: 3, ml: 1, color: "#fff" }}
           >
             Yes Proceed
           </Button>
           <Button
-            variant='contained'
+            variant="contained"
             onClick={onClose}
             sx={{ mt: 3, ml: 1 }}
-            color='error'
+            color="error"
           >
             No
           </Button>
@@ -192,16 +186,8 @@ export const EditEmployeeActivateFields = ({ onClose, isLoading, data }) => {
   };
 
   const getEmployeeName = (employeeId) => {
-    const employee = employeeData?.find(
-      (employee) => employee?.id === employeeId
-    );
-
-    if (employee) {
-      const { firstName, middleName, lastName } = employee;
-      return `${firstName} ${middleName || ''} ${lastName || ''}`.trim();
-    }
-
-    return employeeId;
+    const name = employeeData?.find((d) => d.employeeId === employeeId)?.label;
+    return name;
   };
 
   const currentDate = new Date().toISOString().split('T')[0];
@@ -233,7 +219,7 @@ export const EditEmployeeActivateFields = ({ onClose, isLoading, data }) => {
             helperText={
               formik.touched.effectiveDate && formik.errors.effectiveDate
             }
-            variant='outlined'
+            variant="outlined"
             InputLabelProps={{ shrink: true }}
             size="small"
             inputProps={{
@@ -243,22 +229,22 @@ export const EditEmployeeActivateFields = ({ onClose, isLoading, data }) => {
         </Grid>
         <Grid item xs={12} sm={12}>
           <Autocomplete
-            id='terminationType'
-            name='terminationType'
+            id="terminationType"
+            name="terminationType"
             options={activationOption || []}
-            getOptionLabel={(option) => option?.label || ''}
+            getOptionLabel={(option) => option?.label || ""}
             value={activationOption.find(
               (option) => option?.value === formik.values.terminationType
             )}
             onChange={(event, newValue) => {
-              formik.setFieldValue('terminationType', newValue?.value || '');
+              formik.setFieldValue("terminationType", newValue?.value || "");
             }}
             renderOption={(props, option) => (
               <MenuItem
                 {...props}
                 style={{
                   backgroundColor:
-                    palette?.mode === 'light'
+                    palette?.mode === "light"
                       ? palette.background.paper
                       : palette.background.default,
                 }}
@@ -288,22 +274,22 @@ export const EditEmployeeActivateFields = ({ onClose, isLoading, data }) => {
 
         <Grid
           container
-          direction='row'
-          justifyContent='flex-end'
-          alignItems='flex-end'
+          direction="row"
+          justifyContent="flex-end"
+          alignItems="flex-end"
         >
           <Button
-            variant='contained'
+            variant="contained"
             onClick={handleFormSubmit}
-            sx={{ mt: 3, ml: 1, color: '#fff', textTransform: 'capitalize' }}
+            sx={{ mt: 3, ml: 1, color: "#fff", textTransform: "capitalize" }}
           >
             Activate Employee
           </Button>
           <Button
-            variant='contained'
+            variant="contained"
             onClick={onClose}
-            sx={{ mt: 3, ml: 1, textTransform: 'capitalize' }}
-            color='error'
+            sx={{ mt: 3, ml: 1, textTransform: "capitalize" }}
+            color="error"
           >
             Cancel
           </Button>

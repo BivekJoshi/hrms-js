@@ -124,47 +124,6 @@ const LeaveInfo = ({ isLoading, data, role }) => {
 
   return (
     <>
-      {/* <Grid container spacing={3}>
-        <Grid item xs={4} sm={4}>
-          <Card variant="outlined">
-            <CardContent>
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="div"
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  fontWeight: "bold",
-                  fontSize: "26px",
-                }}
-              >
-                Leave Total
-              </Typography>
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="div"
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  fontWeight: "bold",
-                  fontSize: "24px",
-                  color: "green",
-                }}
-              >
-                10
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-      </Grid> */}
-      {/* <CustomTable
-        columns={columns}
-        data={leaveData}
-        title={"Leave Data of " + fullname}
-        isLoading={loadingLeave}
-      /> */}
       <Box
         gap={2}
         sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}

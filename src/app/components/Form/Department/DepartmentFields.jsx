@@ -92,6 +92,7 @@ const DepartmentFields = ({ onClose, isLoading, data }) => {
             }}
             rows={4}
             inputProps={{ maxLength: 255 }}
+            data={data?.departmentDescription}
           />
         </Grid>
 
@@ -104,6 +105,7 @@ const DepartmentFields = ({ onClose, isLoading, data }) => {
           <CustomButton
             text={submitButtonText}
             onClick={handleFormSubmit}
+            disabled={!formik?.dirty}
             type="success"
             style={{ mt: 3, ml: 1 }}
           />

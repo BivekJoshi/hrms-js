@@ -6,6 +6,7 @@ import useEditHolidayForm from "../../../hooks/holiday/HolidayForm/useEditHolida
 import { ButtonComponent } from "../../Button/ButtonComponent";
 import DeleteIcon from "@mui/icons-material/Delete";
 import UpdateIcon from "@mui/icons-material/Update";
+import RemarkField from "../../RemarkField/RemarkField";
 
 const EditHolidayFields = ({ onClose, isLoading, data, permissions }) => {
   const { formik } = useEditHolidayForm(data);
@@ -75,7 +76,7 @@ const EditHolidayFields = ({ onClose, isLoading, data, permissions }) => {
           />
         </Grid>
         <Grid item xs={12} sm={12}>
-          <TextField
+          {/* <TextField
             id="holidayDescription"
             name="holidayDescription"
             label="Description"
@@ -96,6 +97,22 @@ const EditHolidayFields = ({ onClose, isLoading, data, permissions }) => {
             InputLabelProps={{
               shrink: Boolean(formik.values.holidayDescription),
             }}
+          /> */}
+          <RemarkField
+            id="holidayDescription"
+            name="holidayDescription"
+            label="Description"
+            fullWidth
+            formik={formik}
+            data={data?.holidayDescription}
+            maxLength={255}
+            variant="outlined"
+            multiline
+            InputLabelProps={{
+              shrink: Boolean(formik.values.holidayDescription),
+            }}
+            rows={4}
+            inputProps={{ maxLength: 255 }}
           />
         </Grid>
         <Grid
