@@ -3,6 +3,7 @@ import React, { useContext, useState } from "react";
 import { useLeaveEditForm } from "../../../hooks/leave/LeaveForm/useLeaveForm";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
 import useAuth from "../../../../auth/hooks/component/login/useAuth";
+import RemarkField from '../../RemarkField/RemarkField';
 
 const leaveStatus = [
   {
@@ -33,8 +34,8 @@ export const EditLeaveFields = ({ onClose, isLoading, data }) => {
         <Grid container spacing={3}>
           <Grid item xs={12} sm={12}>
             <Typography variant="p">
-              {data?.employeeName} wants to take a {data?.leaveType} Leave From
-              Date {data?.fromDate} To Date {data?.toDate}.
+              <span style={{ fontWeight: 500}}>{data?.employeeName}</span> wants to take a <span style={{ fontWeight: 500}}>{data?.leaveType}</span> Leave From
+              Date <span style={{ fontWeight: 500}}>{data?.fromDate}</span> To Date <span style={{ fontWeight: 500}}>{data?.toDate}</span>.
             </Typography>
           </Grid>
           <Grid item xs={12} sm={12}>
@@ -68,7 +69,7 @@ export const EditLeaveFields = ({ onClose, isLoading, data }) => {
             </TextField>
           </Grid>
           <Grid item xs={12} sm={12}>
-            <TextField
+            {/* <TextField
               id="leaveRemarks"
               name="leaveRemarks"
               label="Message"
@@ -87,6 +88,22 @@ export const EditLeaveFields = ({ onClose, isLoading, data }) => {
               variant="outlined"
               InputLabelProps={{ shrink: Boolean(formik.values.leaveRemarks) }}
               inputProps={{ maxLength: 250 }}
+            /> */}
+            <RemarkField
+              id="leaveRemarks"
+              name="leaveRemarks"
+              label="Message"
+              fullWidth
+              formik={formik}
+              data={data?.leaveRemarks}
+              maxLength={255}
+              variant='outlined'
+              multiline
+              InputLabelProps={{
+                shrink: Boolean(formik.values.leaveRemarks),
+              }}
+              rows={4}
+              inputProps={{ maxLength: 255 }}
             />
           </Grid>
           <Grid

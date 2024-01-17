@@ -68,7 +68,7 @@ const LeaveTypeFields = ({ onClose, isLoading, data, existingLeaveTypes }) => {
     : [];
 
   const submitButtonText = data ? "Update Leave Type" : "Add Leave Type";
-
+  
   return (
     !isLoading && (
       <Grid container spacing={3}>
@@ -183,6 +183,7 @@ const LeaveTypeFields = ({ onClose, isLoading, data, existingLeaveTypes }) => {
             }}
             rows={4}
             inputProps={{ maxLength: 255 }}
+            data={data?.leaveDescription}
           />
         </Grid>
         <Grid item xs={12} sm={12}>

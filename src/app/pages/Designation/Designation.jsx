@@ -143,11 +143,11 @@ const Designation = ({ permissions }) => {
   if (isLoading) return <>Loading</>;
 
   const actionsCellStyle = {
-    width: '64px',
-    padding: ' 7px 39px',
-    display: 'flex',
-    justifyContent: 'stretch',
-    alignItems: 'center',
+    // width: '64px',
+    // padding: ' 7px 39px',
+    // display: 'flex',
+    // justifyContent: 'stretch',
+    // alignItems: 'center',
   };
   return (
     <>
