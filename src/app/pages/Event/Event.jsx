@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Grid, Tab, Typography } from "@mui/material";
 
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
@@ -17,8 +17,12 @@ import PermissionHoc from "../../hoc/permissionHoc";
 import FormModal from "../../components/Modal/FormModal";
 import AddEventFields from "../../components/Form/Event/AddEventFields";
 import { ButtonComponent } from "../../components/Button/ButtonComponent";
+import ThemeModeContext from "../../../theme/ThemeModeContext";
+import { TabContext, TabList, TabPanel } from "@mui/lab";
+import EventTableView from "./EventTableView";
 
 const Event = ({ permissions }) => {
+  const { mode, palette } = React.useContext(ThemeModeContext);
   const calendarRef = useRef(null);
   const [events, setEvents] = useState([]);
 
@@ -26,10 +30,28 @@ const Event = ({ permissions }) => {
   const [openSubmitModal, setOpenSubmitModal] = useState(false);
   const [openEmailModal, setOpenEmailModal] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const [value, setValue] = React.useState("1");
 
   const [getEventID, setEventGetID] = useState({});
 
   const { data: eventData, isLoading } = useGetEvent();
+
+  const labelStyle = {
+    backgroundColor: palette.secondary.main,
+    marginLeft: ".5rem",
+    textTransform: "none",
+    borderRadius: ".5rem",
+    color: mode === "light" ? "black" : "white",
+    textDecoder: "none",
+  };
+  const activeLabelStyle = {
+    ...labelStyle,
+    backgroundColor:
+      mode === "dark" ? palette.text.primary : palette.secondary.light,
+    borderBottom: "none",
+    textDecoder: "none",
+    color: mode === "dark" ? "black" : "white",
+  };
 
   useEffect(() => {
     if (eventData) {
@@ -66,22 +88,13 @@ const Event = ({ permissions }) => {
     setOpenEmailModal(true);
     setOpenSubmitModal(false);
   };
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
   const hasPermission = permissions?.canEdit;
   return (
     <>
-      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-        <HocButton
-          permissions={permissions?.canAdd}
-          color={"#fff"}
-          variant={"contained"}
-          onClick={() => setOpenAddModal(true)}
-          buttonName={"Add Event"}
-        />
-      </Box>
-
-      <br />
-
       {openAddModal && (
         <FormModal
           title={"Add Event"}
@@ -174,9 +187,43 @@ const Event = ({ permissions }) => {
         />
       )}
 
-      <Grid container spacing={2}>
-        <Grid item xs={12}>
-          <Box sx={{ padding: "2rem" }}>
+      <TabContext value={value}>
+        <Box sx={{ width: "100%" }}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <TabList
+              onChange={handleChange}
+              aria-label="lab API tabs example"
+              indicatorColor="none"
+            >
+              <Tab
+                label="Calendar View"
+                value="1"
+                style={value === "1" ? activeLabelStyle : labelStyle}
+              />
+              <Tab
+                label="Table View"
+                value="2"
+                style={value === "2" ? activeLabelStyle : labelStyle}
+              />
+            </TabList>
+            <Box sx={{ display: "flex", gap: "12px" }}>
+              <HocButton
+                permissions={permissions?.canAdd}
+                color={"#fff"}
+                variant={"contained"}
+                onClick={() => setOpenAddModal(true)}
+                buttonName={"Add Event"}
+              />
+            </Box>
+          </Box>
+
+          <TabPanel value="1">
             <FullCalendar
               ref={calendarRef}
               plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
@@ -190,10 +237,14 @@ const Event = ({ permissions }) => {
                 },
               }}
             />
-          </Box>
-        </Grid>
-        <style>
-          {`
+          </TabPanel>
+          <TabPanel value="2">
+            <EventTableView eventData={eventData} isLoading={isLoading}/>
+          </TabPanel>
+        </Box>
+      </TabContext>
+      <style>
+        {`
          .fc .fc-daygrid-day.fc-day-today {
              background-color: #90a7bd;
          }
@@ -202,8 +253,7 @@ const Event = ({ permissions }) => {
           justify-content: center;
           }
          `}
-        </style>
-      </Grid>
+      </style>
 
       {openModal && hasPermission && (
         <OpenEvent
