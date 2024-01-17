@@ -134,6 +134,7 @@ const EditEmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
           <Button
             variant="contained"
             onClick={handleFormSubmit}
+            disabled={!formik?.dirty}
             sx={{ mt: 3, ml: 1 }}
           >
             Update Logistics
