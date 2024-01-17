@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { DOC_URL } from '../../../auth/axiosInterceptor';
 import {
   Box,
-  Button,
   Fade,
   IconButton,
   Modal,
@@ -253,7 +252,7 @@ const ShowImagePreview = ({ row }) => {
       </TableCell>
     );
   });
- 
+
   return (
     <>
       {singleDoc}
