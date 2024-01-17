@@ -124,6 +124,7 @@ const TodoListFields = ({ onClose, isLoading, data }) => {
           <Button
             variant="contained"
             onClick={handleFormSubmit}
+            disabled={!formik.dirty}
             sx={{ mt: 3, ml: 1, color: "#fff" }}
           >
             {submitButtonText}

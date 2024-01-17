@@ -104,6 +104,7 @@ const DepartmentFields = ({ onClose, isLoading, data }) => {
           <CustomButton
             text={submitButtonText}
             onClick={handleFormSubmit}
+            disabled={!formik?.dirty}
             type="success"
             style={{ mt: 3, ml: 1 }}
           />
