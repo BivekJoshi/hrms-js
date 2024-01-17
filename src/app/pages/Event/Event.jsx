@@ -1,22 +1,22 @@
-import React, { useState, useRef, useEffect, useContext } from 'react';
-import { Box, Button, Grid, Typography } from '@mui/material';
+import React, { useState, useRef, useEffect } from "react";
+import { Box, Grid, Typography } from "@mui/material";
 
-import FullCalendar from '@fullcalendar/react';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import timeGridPlugin from '@fullcalendar/timegrid';
-import interactionPlugin from '@fullcalendar/interaction';
+import FullCalendar from "@fullcalendar/react";
+import dayGridPlugin from "@fullcalendar/daygrid";
+import timeGridPlugin from "@fullcalendar/timegrid";
+import interactionPlugin from "@fullcalendar/interaction";
 
-import { useGetEvent } from '../../hooks/event/useEvent';
-import useEventForm from '../../hooks/event/EventForm/useEventForm';
-import { OpenEmpEvent, OpenEvent } from './EventModal/EventModal';
-import EmailToAll from '../Email/EmailToAll';
+import { useGetEvent } from "../../hooks/event/useEvent";
+import useEventForm from "../../hooks/event/EventForm/useEventForm";
+import { OpenEmpEvent, OpenEvent } from "./EventModal/EventModal";
+import EmailToAll from "../Email/EmailToAll";
 
-import HocButton from '../../hoc/hocButton';
-import PermissionHoc from '../../hoc/permissionHoc';
+import HocButton from "../../hoc/hocButton";
+import PermissionHoc from "../../hoc/permissionHoc";
 
-import FormModal from '../../components/Modal/FormModal';
-import AddEventFields from '../../components/Form/Event/AddEventFields';
-import { ButtonComponent } from '../../components/Button/ButtonComponent';
+import FormModal from "../../components/Modal/FormModal";
+import AddEventFields from "../../components/Form/Event/AddEventFields";
+import { ButtonComponent } from "../../components/Button/ButtonComponent";
 
 const Event = ({ permissions }) => {
   const calendarRef = useRef(null);
@@ -70,13 +70,13 @@ const Event = ({ permissions }) => {
   const hasPermission = permissions?.canEdit;
   return (
     <>
-      <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
         <HocButton
           permissions={permissions?.canAdd}
-          color={'#fff'}
-          variant={'contained'}
+          color={"#fff"}
+          variant={"contained"}
           onClick={() => setOpenAddModal(true)}
-          buttonName={'Add Event'}
+          buttonName={"Add Event"}
         />
       </Box>
 
@@ -84,7 +84,7 @@ const Event = ({ permissions }) => {
 
       {openAddModal && (
         <FormModal
-          title={'Add Event'}
+          title={"Add Event"}
           open={openAddModal}
           onClose={() => setOpenAddModal(false)}
           formComponent={
@@ -93,25 +93,25 @@ const Event = ({ permissions }) => {
               <AddEventFields formik={formik} />
               <Grid
                 container
-                direction='row'
-                justifyContent='flex-end'
-                alignItems='flex-end'
+                direction="row"
+                justifyContent="flex-end"
+                alignItems="flex-end"
                 gap={1}
                 mt={2}
               >
                 <ButtonComponent
-                  variant='contained'
+                  variant="contained"
                   OnClick={handleFormSubmit}
                   disabled={!formik.dirty}
                   // sx={{ mt: 3, ml: 1 }}
-                  buttonName={'Add Event'}
+                  buttonName={"Add Event"}
                 />
                 <ButtonComponent
-                  variant='contained'
+                  variant="contained"
                   OnClick={handleCloseModal}
                   // sx={{ mt: 3, ml: 1 }}
-                  BGColor={'#d32f2f'}
-                  buttonName={'Cancel'}
+                  BGColor={"#d32f2f"}
+                  buttonName={"Cancel"}
                 />
               </Grid>
             </>
@@ -121,36 +121,36 @@ const Event = ({ permissions }) => {
 
       {openSubmitModal && (
         <FormModal
-          title={'Event'}
+          title={"Event"}
           open={openSubmitModal}
           onClose={() => setOpenSubmitModal(false)}
           formComponent={
             <div>
-              <Typography variant='h4'>Event Added Successfully!</Typography>
+              <Typography variant="h5">Event Added Successfully!</Typography>
               <p>Do you like to Email this event to Employee.</p>
               <Box
                 sx={{
-                  display: 'flex',
-                  justifyContent: 'flex-end',
-                  gap: '1rem',
-                  marginTop: '1rem',
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  gap: "1rem",
+                  marginTop: "1rem",
                 }}
               >
                 <ButtonComponent
-                  variant='contained'
+                  variant="contained"
                   sx={{ mt: 3, ml: 1 }}
                   OnClick={handleEmailButtonClick}
-                  buttonName={'Yes'}
+                  buttonName={"Yes"}
                 />
                 <ButtonComponent
-                  variant='contained'
+                  variant="contained"
                   OnClick={() => {
                     setOpenSubmitModal(false);
                   }}
                   sx={{ mt: 3, ml: 1 }}
-                  BGColor={'#d32f2f'}
-                  color='#fff'
-                  buttonName={'No'}
+                  BGColor={"#d32f2f"}
+                  color="#fff"
+                  buttonName={"No"}
                 />
               </Box>
             </div>
@@ -160,7 +160,7 @@ const Event = ({ permissions }) => {
 
       {openEmailModal && (
         <FormModal
-          title={'Send Email'}
+          title={"Send Email"}
           open={openEmailModal}
           onClose={() => setOpenEmailModal(false)}
           formComponent={
@@ -176,27 +176,38 @@ const Event = ({ permissions }) => {
 
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <Box sx={{ padding: '2rem' }}>
+          <Box sx={{ padding: "2rem" }}>
             <FullCalendar
               ref={calendarRef}
               plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-              initialView='dayGridMonth'
-              height={'90vh'}
+              initialView="dayGridMonth"
+              height={"90vh"}
               events={events}
               eventClick={handleOpenModal}
               customButtons={{
                 customTodayButton: {
-                  text: 'Today',
+                  text: "Today",
                 },
               }}
             />
           </Box>
         </Grid>
+        <style>
+          {`
+         .fc .fc-daygrid-day.fc-day-today {
+             background-color: #90a7bd;
+         }
+         .fc *{
+          text-align: center;
+          justify-content: center;
+          }
+         `}
+        </style>
       </Grid>
 
       {openModal && hasPermission && (
         <OpenEvent
-          title={'Edit Event'}
+          title={"Edit Event"}
           id={getEventID}
           open={openModal}
           handleCloseModal={() => setOpenModal(false)}
@@ -204,7 +215,7 @@ const Event = ({ permissions }) => {
       )}
       {openModal && !hasPermission && (
         <OpenEmpEvent
-          title={'Event Details'}
+          title={"Event Details"}
           id={getEventID}
           open={openModal}
           handleCloseModal={() => setOpenModal(false)}
