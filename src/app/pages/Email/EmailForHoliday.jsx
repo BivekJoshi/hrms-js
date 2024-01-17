@@ -65,7 +65,7 @@ const EmailForHoliday = ({ getEventID, onClose }) => {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <Typography variant="h4">Email</Typography>
+        <Typography variant="h4">Emzzzzail</Typography>
         <Grid container spacing={2}>
           <Grid
             item

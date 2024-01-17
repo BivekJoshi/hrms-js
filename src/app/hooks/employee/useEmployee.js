@@ -120,7 +120,7 @@ export const useAddEmployee = (onSuccess) => {
     onSuccess: (data, variables, context) => {
       toast.success("Employee added successfully");
       onSuccess && onSuccess(data, variables, context);
-      queryClient.invalidateQueries("getEmployee");
+      queryClient.invalidateQueries("getEmployeeData");
     },
     onError: (err, _variables, _context) => {
       // toast.error(`error: ${err.message}`);

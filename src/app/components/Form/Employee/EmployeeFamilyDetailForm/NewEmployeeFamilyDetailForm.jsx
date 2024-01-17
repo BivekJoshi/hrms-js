@@ -1,17 +1,4 @@
-import {
-  Button,
-  Box,
-  Modal,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Typography,
-} from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
 import {
   useDeleteFamily,
@@ -57,7 +44,6 @@ const NewEmployeeFamilyDetailForm = () => {
     },
   ];
 
-
   return (
     <div>
       <CustomeEmployeeDetails
@@ -71,7 +57,7 @@ const NewEmployeeFamilyDetailForm = () => {
         isSubmitSuccess={isFormSubmitSuccess || isEditSuccess}
         deleteCallBack={handleDeleteFamily}
         modalWidth={400}
-        showAddButton={false}
+        showAddButton={true}
       />
     </div>
   );

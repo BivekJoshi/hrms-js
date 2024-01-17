@@ -139,7 +139,7 @@ const Holiday = ({ permissions }) => {
 
       {openEmailModal && (
         <FormModal
-          title={"Send Email"}
+          title={"Send Email for Holiday"}
           open={openEmailModal}
           onClose={() => setOpenEmailModal(false)}
           formComponent={

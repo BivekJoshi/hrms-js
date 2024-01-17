@@ -4,8 +4,6 @@ import { useParams } from "react-router";
 import EmployeeAddressDetailForm from "../../EmployeeAddressDetailForm/EmployeeAddressDetailForm";
 import EmployeeBankDetailForm from "../../EmployeeBankDetailForm/EmployeeBankDetailForm";
 import EmployeeDocumentDetailForm from "../../EmployeeDocumentDetailForm/EmployeeDocumentDetailForm";
-import EmployeeFamilyDetailForm from "../../EmployeeFamilyDetailForm/EmployeeFamilyDetailForm";
-import EmployeeQualificationDetailForm from "../../EmployeeQualificationDetailForm/EmployeeQualificationDetailForm";
 import EmployeeBasicInfoForm from "../EmployeeBasicInfoForm";
 import EmployeeHistoryDetailForm from "../../EmployeeHistoryDetailForm/EmployeeHistoryDetailForm";
 
