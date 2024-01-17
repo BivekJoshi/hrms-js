@@ -86,36 +86,54 @@ const EmploymentDetails = ({ data, role }) => {
       field: "department.departmentName",
       emptyValue: "-",
       width: 300,
+      cellStyle: {
+        textAlign: "start",
+      },
     },
     {
       title: "Branch Name",
       field: "branch.branchName",
       emptyValue: "-",
       width: 300,
+      cellStyle: {
+        textAlign: "start",
+      },
     },
     {
       title: "Position Hold",
       field: "position.positionName",
       emptyValue: "-",
       width: 300,
+      cellStyle: {
+        textAlign: "start",
+      },
     },
     {
       title: "From Date",
       field: "effectiveDateFrom",
       emptyValue: "-",
       width: 200,
+      cellStyle: {
+        textAlign: "start",
+      },
     },
     {
       title: "To Date",
       field: "effectiveDateTo",
       emptyValue: "-",
       width: 200,
+      cellStyle: {
+        textAlign: "start",
+      },
     },
     {
       title: "Remarks",
       field: "remarks",
       emptyValue: "-",
       width: 200,
+      cellStyle: {
+        textAlign: "start",
+      },
     },
     {
       title: "Active",
