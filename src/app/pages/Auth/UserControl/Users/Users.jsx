@@ -73,7 +73,7 @@ const columns = [
   {
     title: 'Action',
     render: (rowData) => <UserControlAction rowData={rowData} />,
-    maxWidth: '3rem',
+    width: '2rem',
   },
 ];
 

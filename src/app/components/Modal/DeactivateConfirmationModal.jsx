@@ -6,6 +6,7 @@ import {
   DialogTitle,
   Button,
   CircularProgress,
+  Box,
 } from "@mui/material";
 import ThemeModeContext from "../../../theme/ThemeModeContext";
 

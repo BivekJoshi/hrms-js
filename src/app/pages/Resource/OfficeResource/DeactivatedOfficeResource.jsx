@@ -23,8 +23,6 @@ const DeactivatedOfficeResource = ({ closeModal, title }) => {
     setopenModal(true);
   };
 
-  console.log(data);
-
   const columns = [
     {
       title: "SN",
@@ -65,20 +63,7 @@ const DeactivatedOfficeResource = ({ closeModal, title }) => {
     },
     {
       title: "Action",
-      render: (rowData) => (
-        <Tooltip title="Activate Logistic">
-          <IconButton onClick={() => handleActivate(rowData)}>
-            <AddTaskIcon
-              sx={{
-                color: "black",
-                "&:hover": {
-                  color: "green",
-                },
-              }}
-            />
-          </IconButton>
-        </Tooltip>
-      ),
+    c
       sorting: false,
     },
   ];

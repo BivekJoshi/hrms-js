@@ -1,9 +1,12 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
 import {
+  activateLeaveType,
   addLeaveType,
+  deactivateLeaveType,
   deleteLeaveType,
   editLeaveType,
+  getAllLeaveType,
   getLeaveType,
   getLeaveTypeById,
 } from '../../api/leaveType/leaveType-api';
@@ -13,6 +16,15 @@ import {
 }
 export const useGetLeaveType = () => {
   return useQuery(['getLeaveType'], () => getLeaveType(), {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
+};
+{
+  /*________________________GET-ALL_____________________________________*/
+}
+export const useGetAllLeaveType = () => {
+  return useQuery(['getAllLeaveType'], () => getAllLeaveType(), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
@@ -72,4 +84,46 @@ export const useEditLeaveType = ({ onSuccess }) => {
       queryClient.invalidateQueries('getLeaveType');
     },
   });
+};
+
+
+// refactor later below api
+{
+  /*________________________deactivate_____________________________________*/
+}
+export const useDeactivateLeaveType = ({ onSuccess }) => {
+  const queryClient = useQueryClient();
+  return useMutation(
+    ['deleteLeaveType'],
+    (data) => deactivateLeaveType(data),
+    {
+      onSuccess: (data, variables, context) => {
+        toast.success('Successfully deleted Leave type');
+        onSuccess && onSuccess(data, variables, context);
+        queryClient.invalidateQueries('getAllLeaveType');
+        queryClient.invalidateQueries('getLeaveType');
+      },
+    }
+  );
+};
+
+
+
+{
+  /*________________________Activate_____________________________________*/
+}
+export const useActivateLeaveType = ({ onSuccess }) => {
+  const queryClient = useQueryClient();
+  return useMutation(
+    ['deleteLeaveType'],
+    (data) => activateLeaveType(data),
+    {
+      onSuccess: (data, variables, context) => {
+        toast.success('Successfully deleted Leave type');
+        onSuccess && onSuccess(data, variables, context);
+        queryClient.invalidateQueries('getAllLeaveType');
+        queryClient.invalidateQueries('getLeaveType');
+      },
+    }
+  );
 };
