@@ -1,27 +1,28 @@
-import React, { useState, useRef, useEffect, useContext } from 'react';
-import { Box, Button, Grid, Typography } from '@mui/material';
+import React, { useState, useRef, useEffect } from "react";
+import { Box, Grid, Tab, Typography } from "@mui/material";
 
-import FullCalendar from '@fullcalendar/react';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import timeGridPlugin from '@fullcalendar/timegrid';
-import interactionPlugin from '@fullcalendar/interaction';
+import FullCalendar from "@fullcalendar/react";
+import dayGridPlugin from "@fullcalendar/daygrid";
+import timeGridPlugin from "@fullcalendar/timegrid";
+import interactionPlugin from "@fullcalendar/interaction";
 
-import { useGetEvent } from '../../hooks/event/useEvent';
-import useEventForm from '../../hooks/event/EventForm/useEventForm';
-import { OpenEmpEvent, OpenEvent } from './EventModal/EventModal';
-import EmailToAll from '../Email/EmailToAll';
+import { useGetEvent } from "../../hooks/event/useEvent";
+import useEventForm from "../../hooks/event/EventForm/useEventForm";
+import { OpenEmpEvent, OpenEvent } from "./EventModal/EventModal";
+import EmailToAll from "../Email/EmailToAll";
 
-import HocButton from '../../hoc/hocButton';
-import PermissionHoc from '../../hoc/permissionHoc';
+import HocButton from "../../hoc/hocButton";
+import PermissionHoc from "../../hoc/permissionHoc";
 
-import FormModal from '../../components/Modal/FormModal';
-import AddEventFields from '../../components/Form/Event/AddEventFields';
-import useAuth from '../../../auth/hooks/component/login/useAuth';
-import { ButtonComponent } from '../../components/Button/ButtonComponent';
-import ThemeModeContext from '../../../theme/ThemeModeContext';
-import EventList from './EventList';
+import FormModal from "../../components/Modal/FormModal";
+import AddEventFields from "../../components/Form/Event/AddEventFields";
+import { ButtonComponent } from "../../components/Button/ButtonComponent";
+import ThemeModeContext from "../../../theme/ThemeModeContext";
+import { TabContext, TabList, TabPanel } from "@mui/lab";
+import EventTableView from "./EventTableView";
 
 const Event = ({ permissions }) => {
+  const { mode, palette } = React.useContext(ThemeModeContext);
   const calendarRef = useRef(null);
   const [events, setEvents] = useState([]);
 
@@ -29,10 +30,28 @@ const Event = ({ permissions }) => {
   const [openSubmitModal, setOpenSubmitModal] = useState(false);
   const [openEmailModal, setOpenEmailModal] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const [value, setValue] = React.useState("1");
 
   const [getEventID, setEventGetID] = useState({});
 
   const { data: eventData, isLoading } = useGetEvent();
+
+  const labelStyle = {
+    backgroundColor: palette.secondary.main,
+    marginLeft: ".5rem",
+    textTransform: "none",
+    borderRadius: ".5rem",
+    color: mode === "light" ? "black" : "white",
+    textDecoder: "none",
+  };
+  const activeLabelStyle = {
+    ...labelStyle,
+    backgroundColor:
+      mode === "dark" ? palette.text.primary : palette.secondary.light,
+    borderBottom: "none",
+    textDecoder: "none",
+    color: mode === "dark" ? "black" : "white",
+  };
 
   useEffect(() => {
     if (eventData) {
@@ -69,25 +88,16 @@ const Event = ({ permissions }) => {
     setOpenEmailModal(true);
     setOpenSubmitModal(false);
   };
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
   const hasPermission = permissions?.canEdit;
   return (
     <>
-      <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-        <HocButton
-          permissions={permissions?.canAdd}
-          color={'#fff'}
-          variant={'contained'}
-          onClick={() => setOpenAddModal(true)}
-          buttonName={'Add Event'}
-        />
-      </Box>
-
-      <br />
-
       {openAddModal && (
         <FormModal
-          title={'Add Event'}
+          title={"Add Event"}
           open={openAddModal}
           onClose={() => setOpenAddModal(false)}
           formComponent={
@@ -96,24 +106,25 @@ const Event = ({ permissions }) => {
               <AddEventFields formik={formik} />
               <Grid
                 container
-                direction='row'
-                justifyContent='flex-end'
-                alignItems='flex-end'
+                direction="row"
+                justifyContent="flex-end"
+                alignItems="flex-end"
                 gap={1}
                 mt={2}
               >
                 <ButtonComponent
-                  variant='contained'
+                  variant="contained"
                   OnClick={handleFormSubmit}
+                  disabled={!formik.dirty}
                   // sx={{ mt: 3, ml: 1 }}
-                  buttonName={'Add Event'}
+                  buttonName={"Add Event"}
                 />
                 <ButtonComponent
-                  variant='contained'
+                  variant="contained"
                   OnClick={handleCloseModal}
                   // sx={{ mt: 3, ml: 1 }}
-                  BGColor={'#d32f2f'}
-                  buttonName={'Cancel'}
+                  BGColor={"#d32f2f"}
+                  buttonName={"Cancel"}
                 />
               </Grid>
             </>
@@ -123,36 +134,36 @@ const Event = ({ permissions }) => {
 
       {openSubmitModal && (
         <FormModal
-          title={'Event'}
+          title={"Event"}
           open={openSubmitModal}
           onClose={() => setOpenSubmitModal(false)}
           formComponent={
             <div>
-              <Typography variant='h4'>Event Added Successfully!</Typography>
+              <Typography variant="h5">Event Added Successfully!</Typography>
               <p>Do you like to Email this event to Employee.</p>
               <Box
                 sx={{
-                  display: 'flex',
-                  justifyContent: 'flex-end',
-                  gap: '1rem',
-                  marginTop: '1rem',
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  gap: "1rem",
+                  marginTop: "1rem",
                 }}
               >
                 <ButtonComponent
-                  variant='contained'
+                  variant="contained"
                   sx={{ mt: 3, ml: 1 }}
                   OnClick={handleEmailButtonClick}
-                  buttonName={'Yes'}
+                  buttonName={"Yes"}
                 />
                 <ButtonComponent
-                  variant='contained'
+                  variant="contained"
                   OnClick={() => {
                     setOpenSubmitModal(false);
                   }}
                   sx={{ mt: 3, ml: 1 }}
-                  BGColor={'#d32f2f'}
-                  color='#fff'
-                  buttonName={'No'}
+                  BGColor={"#d32f2f"}
+                  color="#fff"
+                  buttonName={"No"}
                 />
               </Box>
             </div>
@@ -162,7 +173,7 @@ const Event = ({ permissions }) => {
 
       {openEmailModal && (
         <FormModal
-          title={'Send Email'}
+          title={"Send Email"}
           open={openEmailModal}
           onClose={() => setOpenEmailModal(false)}
           formComponent={
@@ -176,32 +187,77 @@ const Event = ({ permissions }) => {
         />
       )}
 
-      <Grid container spacing={2}>
-        {/* <Grid item xs={3}>
-          <EventList eventData={eventData}/>
-        </Grid> */}
-        <Grid item xs={12}>
-          <Box sx={{ padding: '2rem' }}>
+      <TabContext value={value}>
+        <Box sx={{ width: "100%" }}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <TabList
+              onChange={handleChange}
+              aria-label="lab API tabs example"
+              indicatorColor="none"
+            >
+              <Tab
+                label="Calendar View"
+                value="1"
+                style={value === "1" ? activeLabelStyle : labelStyle}
+              />
+              <Tab
+                label="Table View"
+                value="2"
+                style={value === "2" ? activeLabelStyle : labelStyle}
+              />
+            </TabList>
+            <Box sx={{ display: "flex", gap: "12px" }}>
+              <HocButton
+                permissions={permissions?.canAdd}
+                color={"#fff"}
+                variant={"contained"}
+                onClick={() => setOpenAddModal(true)}
+                buttonName={"Add Event"}
+              />
+            </Box>
+          </Box>
+
+          <TabPanel value="1">
             <FullCalendar
               ref={calendarRef}
               plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-              initialView='dayGridMonth'
-              height={'90vh'}
+              initialView="dayGridMonth"
+              height={"90vh"}
               events={events}
               eventClick={handleOpenModal}
               customButtons={{
                 customTodayButton: {
-                  text: 'Today',
+                  text: "Today",
                 },
               }}
             />
-          </Box>
-        </Grid>
-      </Grid>
+          </TabPanel>
+          <TabPanel value="2">
+            <EventTableView eventData={eventData} isLoading={isLoading}/>
+          </TabPanel>
+        </Box>
+      </TabContext>
+      <style>
+        {`
+         .fc .fc-daygrid-day.fc-day-today {
+             background-color: #90a7bd;
+         }
+         .fc *{
+          text-align: center;
+          justify-content: center;
+          }
+         `}
+      </style>
 
       {openModal && hasPermission && (
         <OpenEvent
-          title={'Edit Event'}
+          title={"Edit Event"}
           id={getEventID}
           open={openModal}
           handleCloseModal={() => setOpenModal(false)}
@@ -209,7 +265,7 @@ const Event = ({ permissions }) => {
       )}
       {openModal && !hasPermission && (
         <OpenEmpEvent
-          title={'Event Details'}
+          title={"Event Details"}
           id={getEventID}
           open={openModal}
           handleCloseModal={() => setOpenModal(false)}

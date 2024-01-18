@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useGetDeactivatedOfficeResource } from '../../../hooks/resource/officeResource/useOfficeResource';
+import React, { useState } from "react";
+import { useGetDeactivatedOfficeResource } from "../../../hooks/resource/officeResource/useOfficeResource";
 import {
   Box,
   Button,
@@ -8,10 +8,10 @@ import {
   Stack,
   Tooltip,
   Typography,
-} from '@mui/material';
-import { OfficeResourceLogisticsModal } from './OfficeResourceModal';
-import CustomTable from '../../../components/CustomTable/CustomTable';
-import AddTaskIcon from '@mui/icons-material/AddTask';
+} from "@mui/material";
+import { OfficeResourceLogisticsModal } from "./OfficeResourceModal";
+import CustomTable from "../../../components/CustomTable/CustomTable";
+import AddTaskIcon from "@mui/icons-material/AddTask";
 const DeactivatedOfficeResource = ({ closeModal, title }) => {
   const { data, isLoading } = useGetDeactivatedOfficeResource();
   const [openModal, setopenModal] = useState(false);
@@ -23,20 +23,20 @@ const DeactivatedOfficeResource = ({ closeModal, title }) => {
     setopenModal(true);
   };
 
-  const handleViewLog = (rowData) => {};
+  console.log(data);
 
   const columns = [
     {
-      title: 'SN',
+      title: "SN",
       render: (rowData) => rowData.tableData.id + 1,
       width: "8px",
       sorting: false,
     },
     {
-      title: 'Appliance Name',
-      field: 'name',
+      title: "Appliance Name",
+      field: "name",
       render: (rowData) => (
-        <div style={{ overflowWrap: 'break-word', width: '8rem' }}>
+        <div style={{ overflowWrap: "break-word", wordBreak: "break-all" }}>
           {rowData?.name}
         </div>
       ),
@@ -55,7 +55,9 @@ const DeactivatedOfficeResource = ({ closeModal, title }) => {
       title: "Description",
       width: "120px",
       render: (rowData) => (
-        <Typography style={{ overflowWrap: "break-word", wordBreak: "break-all" }}>
+        <Typography
+          style={{ overflowWrap: "break-word", wordBreak: "break-all" }}
+        >
           {rowData?.description}
         </Typography>
       ),
@@ -64,14 +66,16 @@ const DeactivatedOfficeResource = ({ closeModal, title }) => {
     {
       title: "Action",
       render: (rowData) => (
-        <Tooltip title='Activate Logistic'>
+        <Tooltip title="Activate Logistic">
           <IconButton onClick={() => handleActivate(rowData)}>
-            <AddTaskIcon  sx={{
-            color: "black",
-            "&:hover": {
-              color: "green",
-            },
-          }} />
+            <AddTaskIcon
+              sx={{
+                color: "black",
+                "&:hover": {
+                  color: "green",
+                },
+              }}
+            />
           </IconButton>
         </Tooltip>
       ),
@@ -101,7 +105,7 @@ const DeactivatedOfficeResource = ({ closeModal, title }) => {
         isLoading={isLoading}
         emptyRowsWhenPaging={true}
         // sorting={true}
-        height={'320px'}
+        height={"320px"}
         fileName="Inactive office resource"
         exportButton
         exportExcel
@@ -110,7 +114,7 @@ const DeactivatedOfficeResource = ({ closeModal, title }) => {
 
       {openModal && (
         <OfficeResourceLogisticsModal
-          title={'Activate Logistics'}
+          title={"Activate Logistics"}
           id={activateOfficeResource?.id}
           open={openModal}
           handleCloseModal={handleCloseActivatedModal}

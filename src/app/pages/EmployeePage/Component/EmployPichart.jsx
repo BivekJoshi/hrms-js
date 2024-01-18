@@ -80,7 +80,7 @@ export const EmployPichart = ({ data }) => {
       <style>
         {`
         .apex-chart-container .apexcharts-legend {
-          width: 16rem;
+          width: 15rem;
           overflow-wrap: break-word;
           word-break: break-all;
         }

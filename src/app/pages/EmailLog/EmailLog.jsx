@@ -1,10 +1,10 @@
-import React from "react";
-import CustomTable from "../../components/CustomTable/CustomTable";
-import { useGetEmailLogByFilter } from "../../hooks/emailLog/useEmailLog";
-import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
-import { useNavigate } from "react-router-dom";
-import { Button, Stack } from "@mui/material";
-import ThemeModeContext from "../../../theme/ThemeModeContext";
+import React from 'react';
+import CustomTable from '../../components/CustomTable/CustomTable';
+import { useGetEmailLogByFilter } from '../../hooks/emailLog/useEmailLog';
+import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
+import { useNavigate } from 'react-router-dom';
+import { Button, Stack } from '@mui/material';
+import ThemeModeContext from '../../../theme/ThemeModeContext';
 
 const EmailLog = () => {
   const { data, isLoading } = useGetEmailLogByFilter();
@@ -15,61 +15,61 @@ const EmailLog = () => {
   };
   const columns = [
     {
-      title: "SN",
+      title: 'SN',
       render: (rowData) => rowData.tableData.id + 1,
-      maxWidth: "1px",
+      maxWidth: '1px',
       sortable: false,
       sorting: false,
     },
     {
-      title: "User Name",
-      field: "user.name",
-      emptyValue: "-",
+      title: 'User Name',
+      field: 'user.name',
+      emptyValue: '-',
       width: 200,
       sorting: false,
     },
     {
-      title: "Email",
-      field: "user.email",
-      emptyValue: "-",
+      title: 'Email',
+      field: 'user.email',
+      emptyValue: '-',
       width: 200,
       sorting: false,
     },
     {
-      title: "Email Type",
-      field: "emailType",
-      emptyValue: "-",
+      title: 'Email Type',
+      field: 'emailType',
+      emptyValue: '-',
       width: 200,
       sorting: false,
     },
     {
-      title: "Log",
-      field: "log",
-      emptyValue: "-",
+      title: 'Log',
+      field: 'log',
+      emptyValue: '-',
       width: 200,
       sorting: false,
     },
     {
-      title: "Result",
-      field: "result",
-      emptyValue: "-",
+      title: 'Result',
+      field: 'result',
+      emptyValue: '-',
       width: 200,
       sorting: false,
     },
     {
-      title: "Time Stamp",
-      field: "timeStamp",
-      emptyValue: "-",
+      title: 'Time Stamp',
+      field: 'timeStamp',
+      emptyValue: '-',
       width: 200,
       render: (rowData) => {
         const timeStamp = rowData.timeStamp;
         if (timeStamp) {
           const formattedDate = new Date(timeStamp).toLocaleDateString(
-            "en-US",
+            'en-US',
             {
-              year: "numeric",
-              month: "2-digit",
-              day: "2-digit",
+              year: 'numeric',
+              month: '2-digit',
+              day: '2-digit',
             }
           );
 
@@ -77,22 +77,8 @@ const EmailLog = () => {
         }
       },
     },
-    // {
-    //   title: "Actions",
-    //   render: (rowData) => (
-    //     <Stack direction="row" spacing={0}>
-    //       <Button color="primary" onClick={() => handleActivate(rowData)}>
-    //         Icon
-    //       </Button>
-    //     </Stack>
-    //   ),
-    //   sorting: false,
-    // },
   ].filter(Boolean);
 
-  // const filteredData = data.filter(
-  //   (row) => row.emailType === "FORGOT_PASSWORD" && row.result === "SUCCESS"
-  // );
   const { mode } = React.useContext(ThemeModeContext);
 
   const actions = [
@@ -100,14 +86,14 @@ const EmailLog = () => {
       icon: () => (
         <RemoveRedEyeOutlinedIcon
           sx={{
-            color: mode === "light" ? "black" : "white",
-            "&:hover": {
-              color: "green",
+            color: mode === 'light' ? 'black' : 'white',
+            '&:hover': {
+              color: 'green',
             },
           }}
         />
       ),
-      tooltip: "View Details",
+      tooltip: 'View Details',
       onClick: (event, rowData) => handleViewLog(rowData),
     },
   ];
@@ -118,7 +104,7 @@ const EmailLog = () => {
         columns={columns}
         singleAction
         data={data}
-        title="Email Log"
+        title='Email Log'
         isLoading={isLoading}
         actions={actions}
       />

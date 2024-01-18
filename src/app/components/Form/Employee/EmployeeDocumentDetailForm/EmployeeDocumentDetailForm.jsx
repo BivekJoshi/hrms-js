@@ -22,18 +22,19 @@ const EmployeeDocumentDetailForm = () => {
   const [expandedAccordion, setExpandedAccordion] = useState('');
 
   const [selectedDocument, setSelectedDocument] = useState();
-  const [document, setDocument] = useState('');
   const [imagePreviewMap, setImagePreviewMap] = useState({});
   const [editedDocument, setEditedDocument] = useState({});
 
   const handleCloseEditModal = () => setOpenEditModal(false);
 
-  const docPathSelected = document?.name;
-
   const { mutate: deleteDocument } = useDeleteDocument({});
   const { mutate: addDocument, isSuccess } = useAddDocument({});
 
-  const { data: documentPhoto, refetch } = useGetDocumentByDocumentType(
+  const {
+    data: documentPhoto,
+    refetch,
+    isLoading: docPhotoLoad,
+  } = useGetDocumentByDocumentType(
     id,
     selectedDocument || documentType[0]?.input
   );
@@ -48,12 +49,10 @@ const EmployeeDocumentDetailForm = () => {
   const handleChange = (panel, doc) => (_, isExpanded) => {
     setSelectedDocument(doc);
     setExpandedAccordion(isExpanded ? panel : null);
-    setDocument('');
   };
 
   const handleChangeImage = (e) => {
     const file = e.target.files[0];
-    setDocument(file);
 
     // Reset the input value to null to allow selecting the same file again
     e.target.value = null;
@@ -81,8 +80,7 @@ const EmployeeDocumentDetailForm = () => {
     const { id } = document;
     deleteDocument(id);
 
-    setSelectedDocument('');
-    setDocument('');
+    // setSelectedDocument('');
     setImagePreviewMap((prevMap) => ({
       ...prevMap,
       [expandedAccordion]: undefined,
@@ -153,171 +151,169 @@ const EmployeeDocumentDetailForm = () => {
                           objectFit: 'contain',
                         }}
                       />
+                      <Grid
+                        sx={{
+                          display: 'flex',
+                          justifyContent: 'center',
+                          gap: '.5rem',
+                          textAlign: 'center',
+                        }}
+                      >
+                        <Button
+                          variant='outlined'
+                          color='primary'
+                          onClick={() => handleEditFormSubmit(document)}
+                          startIcon={<img src={updateIcon} />}
+                          sx={{ textTransform: 'none', fontWeight: 'bold' }}
+                        >
+                          Update
+                        </Button>
+                        <Button
+                          variant='outlined'
+                          color='error'
+                          onClick={() => handleDelete(document)}
+                          startIcon={<img src={deleteIcon} />}
+                          sx={{ textTransform: 'none', fontWeight: 'bold' }}
+                        >
+                          Delete
+                        </Button>
+                      </Grid>
                     </div>
                   )}
                 </Box>
-                <Grid
-                  sm={12}
-                  sx={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    gap: '.5rem',
-                    textAlign: 'center',
-                  }}
-                >
-                  <Button
-                    variant='outlined'
-                    color='primary'
-                    onClick={() => handleEditFormSubmit(document)}
-                    startIcon={<img src={updateIcon} />}
-                    sx={{ textTransform: 'none', fontWeight: 'bold' }}
-                  >
-                    Update
-                  </Button>
-                  <Button
-                    variant='outlined'
-                    color='error'
-                    onClick={() => handleDelete(document)}
-                    startIcon={<img src={deleteIcon} />}
-                    sx={{ textTransform: 'none', fontWeight: 'bold' }}
-                  >
-                    Delete
-                  </Button>
-                </Grid>
               </Grid>
             ))}
         </Grid>
 
-        <Grid item xs={12} sm={6}>
-          {documentType &&
-            documentType.map((document, index) => {
-              const isInputDisabled =
-                index === 0
-                  ? documentPhoto?.some(
-                      (photo) => photo?.documentType === 'EMPLOYEE_PHOTO'
-                    )
-                  : documentPhoto?.some(
-                      (photo) => photo?.documentType === selectedDocument
-                    );
+        {!docPhotoLoad && (
+          <Grid item xs={12} sm={6}>
+            {documentType &&
+              documentType.map((document, index) => {
+                const isInputDisabled = documentPhoto?.some(
+                  (photo) => photo?.documentType === selectedDocument
+                );
 
-              return (
-                <Accordion
-                  key={document.id}
-                  expanded={expandedAccordion === `panel${document?.id}`}
-                  onChange={handleChange(
-                    `panel${document?.id}`,
-                    document?.input
-                  )}
-                  sx={{
-                    margin: '0 !important',
-                    borderBottom: '1px solid black',
-                    boxShadow: 'none',
-                  }}
-                >
-                  <AccordionSummary
-                    aria-controls={`panel${document.id}a-content`}
-                    id={`panel${document.id}a-header`}
+                console.log(documentPhoto, isInputDisabled);
+
+                return (
+                  <Accordion
+                    key={document.id}
+                    expanded={expandedAccordion === `panel${document?.id}`}
+                    onChange={handleChange(
+                      `panel${document?.id}`,
+                      document?.input
+                    )}
+                    sx={{
+                      margin: '0 !important',
+                      borderBottom: '1px solid black',
+                      boxShadow: 'none',
+                    }}
                   >
-                    <div
-                      style={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                        width: '100%',
-                      }}
+                    <AccordionSummary
+                      aria-controls={`panel${document.id}a-content`}
+                      id={`panel${document.id}a-header`}
                     >
-                      <Typography variant='h7' sx={{ fontWeight: 500 }}>
-                        {document?.label}
-                      </Typography>
-                      {getDocument?.map((data, index) => {
-                        if (document.input === data.documentType) {
-                          return (
-                            <Chip
-                              key={index}
-                              label='Uploaded'
-                              variant='outlined'
-                              color='success'
-                            />
-                          );
-                        }
-                      })}
-                    </div>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <Box
-                      sx={{
-                        display: 'flex',
-                        gap: '.5rem',
-                        flexDirection: 'column',
-                      }}
-                    >
-                      <label htmlFor='file'>
-                        <input
-                          type='file'
-                          accept={document?.accept}
-                          ref={fileInputRef}
-                          onChange={(e) => handleChangeImage(e)}
-                          style={{ display: 'none' }}
-                          disabled={isInputDisabled}
-                          id='file'
-                        />
-                        <Box
-                          sx={{
-                            cursor: 'pointer',
-                            display: 'flex',
-                            border: '1px solid #B9BEC7',
-                            borderRadius: '.3rem',
-                          }}
-                          component='span'
-                        >
-                          <div
-                            style={{
-                              backgroundColor: '#E7E0EB',
-                              padding: '.5rem',
-                              borderRadius: '.3rem',
-                              minWidth: '20%',
-                              fontWeight: 500,
-                            }}
-                          >
-                            Choose file
-                          </div>
-                          <div
-                            style={{
-                              minwidth: '50%',
-                              color: '#B9BEC7',
-                              padding: '.3rem',
-                            }}
-                          >
-                            {
-                              <p>
-                                {docPathSelected
-                                  ? docPathSelected
-                                  : 'No file choosen'}
-                              </p>
-                            }
-                          </div>
-                        </Box>
-                      </label>
                       <div
                         style={{
                           display: 'flex',
                           justifyContent: 'space-between',
+                          alignItems: 'center',
                           width: '100%',
                         }}
                       >
-                        <Typography sx={{ fontSize: '12px' }}>
-                          {document?.desc}
+                        <Typography variant='h7' sx={{ fontWeight: 500 }}>
+                          {document?.label}
                         </Typography>
-                        <Typography sx={{ fontSize: '12px' }}>
-                          {document?.fileSize}
-                        </Typography>
+                        {getDocument?.map((data, index) => {
+                          if (document?.input === data?.documentType) {
+                            return (
+                              <Chip
+                                key={index}
+                                label='Uploaded'
+                                variant='outlined'
+                                color='success'
+                              />
+                            );
+                          }
+                        })}
                       </div>
-                    </Box>
-                  </AccordionDetails>
-                </Accordion>
-              );
-            })}
-        </Grid>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                      <Box
+                        sx={{
+                          display: 'flex',
+                          gap: '.5rem',
+                          flexDirection: 'column',
+                        }}
+                      >
+                        <label htmlFor='file'>
+                          <input
+                            type='file'
+                            accept={document?.accept}
+                            ref={fileInputRef}
+                            onChange={(e) => handleChangeImage(e)}
+                            style={{ display: 'none' }}
+                            disabled={isInputDisabled}
+                            id='file'
+                          />
+                          <Box
+                            sx={{
+                              cursor: 'pointer',
+                              display: 'flex',
+                              border: '1px solid #B9BEC7',
+                              borderRadius: '.3rem',
+                            }}
+                            component='span'
+                          >
+                            <div
+                              style={{
+                                backgroundColor: '#E7E0EB',
+                                padding: '.5rem',
+                                borderRadius: '.3rem',
+                                minWidth: '20%',
+                                fontWeight: 500,
+                              }}
+                            >
+                              Choose file
+                            </div>
+                            <div
+                              style={{
+                                minwidth: '50%',
+                                color: '#B9BEC7',
+                                padding: '.3rem',
+                              }}
+                            >
+                              {
+                                <p>
+                                  {documentPhoto?.length > 0
+                                    ? documentPhoto[0]?.path
+                                    : 'No file choosen'}
+                                </p>
+                              }
+                            </div>
+                          </Box>
+                        </label>
+                        <div
+                          style={{
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            width: '100%',
+                          }}
+                        >
+                          <Typography sx={{ fontSize: '12px' }}>
+                            {document?.desc}
+                          </Typography>
+                          <Typography sx={{ fontSize: '12px' }}>
+                            {document?.fileSize}
+                          </Typography>
+                        </div>
+                      </Box>
+                    </AccordionDetails>
+                  </Accordion>
+                );
+              })}
+          </Grid>
+        )}
       </Grid>
       {openEditModal && (
         <EditDocumentModal

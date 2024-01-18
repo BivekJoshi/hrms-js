@@ -70,6 +70,7 @@ const EditDataModal = ({ open, handleCloseModal, data }) => {
               <Button
                 variant="contained"
                 onClick={handleFormSubmit}
+                disabled={!formik.dirty}
                 sx={{ mt: 3, ml: 1, textTransform:"capitalize" }}
                 onClose={handleCloseModal}
               >

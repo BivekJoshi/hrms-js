@@ -32,7 +32,7 @@ export const getofficeResourceById = async (id) => {
   /*________________________GET ALL DEACTIVATED OFFICE RESOURCE_____________________________________*/
 }
 export const getdeactivaedofficeResource = async () => {
-  const data = await axiosInstance.get(`/office-resource/get-deactivated`);
+  const data = await axiosInstance.get(`/office-resource/by-active-status?isActive=false`);
   return data;
 };
 

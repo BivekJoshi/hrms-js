@@ -1,24 +1,22 @@
-import { Button, Divider, Grid, Menu, MenuItem, Popover } from '@mui/material';
-import { MenuList, Typography } from '@mui/material';
-import React, { useContext, useState } from 'react';
-import ThemeModeContext from '../../../../theme/ThemeModeContext';
-import './style.css';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import { toast } from 'react-toastify';
-import { axiosInstance } from '../../../../auth/axiosInterceptor';
+import { Button, Divider, Grid, Menu, MenuItem, Popover } from "@mui/material";
+import { MenuList, Typography } from "@mui/material";
+import React, { useContext, useState } from "react";
+import ThemeModeContext from "../../../../theme/ThemeModeContext";
+import "./style.css";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import { toast } from "react-toastify";
+import { axiosInstance } from "../../../../auth/axiosInterceptor";
+import { useGetPendingLeave } from "../../../hooks/leave/useLeave";
 
-export const LeaveNotification = ({
-  Eventname,
-  data,
-  open,
-  onLeaveConfirmation,
-  handleListKeyDown,
-}) => {
-  const { mode } = useContext(ThemeModeContext); // Accessing mode from context
+export const LeaveNotification = ({ Eventname, open, handleListKeyDown }) => {
+  const { mode } = useContext(ThemeModeContext);
+
+  const { data: leaveData, refetch: refetchLeaveData } = useGetPendingLeave();
+
   const formatDate = (dateString) => {
-    const options = { month: 'short', day: 'numeric' };
+    const options = { month: "short", day: "numeric" };
     const formattedDate = new Date(dateString).toLocaleDateString(
-      'en-US',
+      "en-US",
       options
     );
     return formattedDate;
@@ -46,8 +44,8 @@ export const LeaveNotification = ({
         `/leave/confirm/${selectedItem?.id}`,
         requestBody
       );
-      toast.success('Leave request successfully updated.');
-      onLeaveConfirmation();
+      toast.success("Leave request successfully updated.");
+      refetchLeaveData();
     } catch (error) {
       toast.error(error);
     } finally {
@@ -76,47 +74,47 @@ export const LeaveNotification = ({
       return "Just now";
     }
   };
-  return (
+  return leaveData?.length > 0 ? (
     <Grid
       sx={{
-        textAlign: 'center',
-        maxHeight: '20rem',
-        overflowY: 'scroll',
-        padding: '0px',
-        display: 'flex',
-        flexDirection: 'column',
+        textAlign: "center",
+        maxHeight: "20rem",
+        overflowY: "scroll",
+        padding: "0px",
+        display: "flex",
+        flexDirection: "column",
       }}
     >
       <MenuList
         autoFocusItem={open}
-        id='composition-menu'
-        aria-labelledby='composition-button'
+        id="composition-menu"
+        aria-labelledby="composition-button"
         onKeyDown={handleListKeyDown}
         sx={{
-          textAlign: 'center',
-          padding: '0.5rem 1rem',
+          textAlign: "center",
+          padding: "0.5rem 1rem",
         }}
       >
-        <Typography variant='h6' color='primary' fontWeight={400}>
+        <Typography variant="h6" color="primary" fontWeight={400}>
           {Eventname}
         </Typography>
-        {data &&
-          data?.map((ename, index) => (
+        {leaveData &&
+          leaveData?.map((ename, index) => (
             <Grid
               key={index}
-              display='flex'
-              flexDirection='column'
+              display="flex"
+              flexDirection="column"
               gap={1}
-              mb=' .8rem'
-              backgroundColor={mode === 'light' ? '#F7F8F9' : '#3e3e3e'}
-              textAlign='left'
+              mb=" .8rem"
+              backgroundColor={mode === "light" ? "#F7F8F9" : "#3e3e3e"}
+              textAlign="left"
               p={1}
             >
-              <Grid display='flex' flexDirection='column' p='8px 8px 0 8px'>
+              <Grid display="flex" flexDirection="column" p="8px 8px 0 8px">
                 <Grid
-                  display='flex'
-                  flexDirection='row'
-                  justifyContent='space-between'
+                  display="flex"
+                  flexDirection="row"
+                  justifyContent="space-between"
                 >
                   <Typography
                     width="10rem"
@@ -124,8 +122,8 @@ export const LeaveNotification = ({
                     textAlign="center"
                     style={{ textTransform: "capitalize" }}
                   >
-                    <span style={{ textTransform: 'capitalize' }}>
-                      {ename.leaveType.leaveName + ' '}
+                    <span style={{ textTransform: "capitalize" }}>
+                      {ename.leaveType.leaveName + " "}
                     </span>
                     Leave Applied
                   </Typography>
@@ -134,22 +132,22 @@ export const LeaveNotification = ({
                 <Divider />
               </Grid>
 
-              <Grid width='13rem' p='8px 8px 0 8px'>
-                <Typography fontSize='12px'>
-                  <span style={{ textTransform: 'capitalize' }}>
-                    {ename.employee.firstName}{' '}
-                    {' ' + ename.employee.middleName + ' ' || ''}
-                    {ename.employee.lastName}
+              <Grid width="13rem" p="8px 8px 0 8px">
+                <Typography fontSize="12px">
+                  <span style={{ textTransform: "capitalize" }}>
+                    {ename.employee.firstName}{" "}
+                    {" " + ename.employee.middleName + " " || ""}
+                    {ename.employee.lastName}{" "}
                   </span>
                   has requested a
-                  <span style={{ textTransform: 'capitalize' }}>
-                    {' ' + ename.leaveType.leaveName + ' '}
+                  <span style={{ textTransform: "capitalize" }}>
+                    {" " + ename.leaveType.leaveName + " "}
                   </span>
                   leave for
                   <span>
                     {ename.applyLeaveDays === 0.5
-                      ? ' ' + 'half' + ' '
-                      : ' ' + ename.applyLeaveDays + ' '}
+                      ? " " + "half" + " "
+                      : " " + ename.applyLeaveDays + " "}
                   </span>
                   {ename.applyLeaveDays > 1 ? " days." : "day."}
                 </Typography>
@@ -159,9 +157,9 @@ export const LeaveNotification = ({
                 </Typography>
               </Grid>
               <Typography
-                fontSize='12px'
-                color={mode === 'light' ? '#7A757F' : ''}
-                p='8px 8px 0 8px'
+                fontSize="12px"
+                color={mode === "light" ? "#7A757F" : ""}
+                p="8px 8px 0 8px"
               >
                 Requested :{getTimeDifference(ename.createdDate || "")}
               </Typography>
@@ -169,18 +167,18 @@ export const LeaveNotification = ({
           ))}
         {selectedItem && (
           <Menu
-            id='basic-menu'
+            id="basic-menu"
             anchorEl={anchorEl}
             open={anchorEl}
             onClose={() => setAnchorEl(false)}
             MenuListProps={{
-              'aria-labelledby': 'basic-button',
+              "aria-labelledby": "basic-button",
             }}
           >
-            <MenuItem onClick={() => handleLeaveAction('APPROVED')}>
+            <MenuItem onClick={() => handleLeaveAction("APPROVED")}>
               Approve
             </MenuItem>
-            <MenuItem onClick={() => handleLeaveAction('REJECTED')}>
+            <MenuItem onClick={() => handleLeaveAction("REJECTED")}>
               Rejected
             </MenuItem>
           </Menu>
@@ -200,5 +198,5 @@ export const LeaveNotification = ({
           }
           `}</style>
     </Grid>
-  );
+  ) : null;
 };
