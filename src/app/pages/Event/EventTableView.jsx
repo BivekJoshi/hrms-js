@@ -1,9 +1,28 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import CustomTable from "../../components/CustomTable/CustomTable";
+import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
+import DeleteIcon from "@mui/icons-material/Delete";
+import ThemeModeContext from "../../../theme/ThemeModeContext";
+import { OpenEvent } from "./EventModal/EventModal";
+import { useDeleteEvent } from "../../hooks/event/useEvent";
+import { Box } from "@mui/material";
 
-const EventTableView = ({ eventData, isLoading }) => {
-  console.log(eventData, "eventData");
-
+const EventTableView = ({ eventData, isLoading, permissions }) => {
+  const [openModal, setOpenModal] = useState(false);
+  const [getEventID, setEventGetID] = useState({});
+  const { mode } = useContext(ThemeModeContext);
+  const { deleteEventMutation, isSuccess: isDeleteSuccess } = useDeleteEvent(
+    {}
+  );
+  const handleOpenModal = (rowData) => {
+    if (rowData) {
+      setEventGetID(rowData?.id);
+      setOpenModal(true);
+    }
+  };
+  const handleDeleteEvent = (rowData) => {
+    deleteEventMutation(rowData?.id);
+  };
   const columns = [
     {
       title: "SN",
@@ -76,19 +95,70 @@ const EventTableView = ({ eventData, isLoading }) => {
         </div>
       ),
     },
+    {
+      title: "Actions",
+      export: false,
+      cellStyle: {
+        width: "60px",
+      },
+      render: (rowData) => {
+        return (
+          permissions && (
+            <div style={{ display: "flex", gap: "12px" }}>
+              <div>
+                <ModeEditOutlineIcon
+                  onClick={() => handleOpenModal(rowData)}
+                  sx={{
+                    color: mode === "light" ? "black" : "white",
+                    cursor: "pointer",
+                    "&:hover": {
+                      color: "green",
+                    },
+                  }}
+                />
+              </div>
+              <div>
+                <DeleteIcon
+                  onClick={() => handleDeleteEvent(rowData)}
+                  sx={{
+                    color: mode === "light" ? "black" : "white",
+                    cursor: "pointer",
+                    "&:hover": {
+                      color: "red",
+                    },
+                  }}
+                />
+              </div>
+            </div>
+          )
+        );
+      },
+    },
   ];
   return (
-    <CustomTable
-      columns={columns}
-      data={eventData}
-      title="Event List"
-      isLoading={isLoading}
-      // actions={actions}
-      fileName="Event List"
-      exportButton
-      exportExcel
-      pdfNone
-    />
+    <>
+      <CustomTable
+        columns={columns}
+        data={eventData}
+        title="Event List"
+        isLoading={isLoading}
+        // actions={actions}
+        fileName="Event List"
+        exportButton
+        exportExcel
+        pdfNone
+      />
+
+      {openModal && (
+        <OpenEvent
+          title={"Edit Event"}
+          id={getEventID}
+          open={openModal}
+          hideDelete
+          handleCloseModal={() => setOpenModal(false)}
+        />
+      )}
+    </>
   );
 };
 
