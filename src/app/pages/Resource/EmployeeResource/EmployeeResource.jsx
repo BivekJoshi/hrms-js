@@ -341,7 +341,7 @@ const EmployeeResource = ({ permissions }) => {
           color={"white"}
           variant={"contained"}
           onClick={handleAddOpenModal}
-          buttonName={"+ Provide Logistics"}
+          buttonName={"Provide Logistics"}
         />
       </Box>
 
