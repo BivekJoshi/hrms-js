@@ -223,7 +223,8 @@ const Event = ({ permissions }) => {
             </Box>
           </Box>
 
-          <TabPanel value="1">
+          <TabPanel value="1" sx={{ padding: "0" }}>
+            <br />
             <FullCalendar
               ref={calendarRef}
               plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
@@ -238,8 +239,13 @@ const Event = ({ permissions }) => {
               }}
             />
           </TabPanel>
-          <TabPanel value="2">
-            <EventTableView eventData={eventData} isLoading={isLoading}/>
+          <TabPanel value="2" sx={{ padding: "0" }}>
+            <br />
+            <EventTableView
+              eventData={eventData}
+              isLoading={isLoading}
+              permissions={hasPermission}
+            />
           </TabPanel>
         </Box>
       </TabContext>
