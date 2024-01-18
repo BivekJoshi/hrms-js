@@ -104,7 +104,7 @@ const EventTableView = ({ eventData, isLoading, permissions }) => {
       render: (rowData) => {
         return (
           permissions && (
-            <div style={{ display: "flex", gap: "12px",}}>
+            <div style={{ display: "flex", gap: "12px" }}>
               <div>
                 <ModeEditOutlineIcon
                   onClick={() => handleOpenModal(rowData)}
