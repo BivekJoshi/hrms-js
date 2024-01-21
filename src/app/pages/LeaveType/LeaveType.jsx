@@ -19,6 +19,7 @@ import HocButton from "../../hoc/hocButton";
 import CustomTable from "../../components/CustomTable/CustomTable";
 import ThemeModeContext from "../../../theme/ThemeModeContext";
 import { DeactivatedLeaveTypeModal } from "../../components/Form/LeaveType/DeactivatedLeaveTypeModal";
+import NewFilter from "../../components/NewFilter/NewFilter";
 
 const leaveName = [
   {
@@ -104,7 +105,7 @@ const LeaveType = ({ permissions }) => {
     deleteLeaveTypeMutation.mutate(deletedLeaveType);
     setOpenDeleteModal(false);
   };
-console.log("deletedLeaveType", deletedLeaveType)
+  console.log("deletedLeaveType", deletedLeaveType);
   const handleEditLeaveType = (rowData) => {
     setEditedLeaveType(rowData);
     setOpenEditModal(true);
@@ -283,6 +284,7 @@ console.log("deletedLeaveType", deletedLeaveType)
           gap: "0.6rem",
         }}
       >
+       
         <HocButton
           permissions={permissions}
           variant="outlined"

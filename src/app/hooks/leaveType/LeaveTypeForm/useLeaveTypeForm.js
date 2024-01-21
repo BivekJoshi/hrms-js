@@ -15,7 +15,7 @@ const useLeaveTypeForm = (data, onClose) => {
       id: data?.id,
     },
     validationSchema: LeaveTypeSchema,
-    enableReinitialize: "true",
+    enableReinitialize: true,
     onSubmit: (values) => {
       if (data?.id) {
         handledEditRequest(values);
