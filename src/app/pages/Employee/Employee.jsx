@@ -200,7 +200,8 @@ const Employee = () => {
               </Button>
             </Box>
           </Box>
-          <TabPanel value="1">
+          <TabPanel value="1" sx={{ padding: "0" }}>
+            <br />
             <NewFilter
               inputField={filterMenu}
               disableSubmit={true}
@@ -209,7 +210,8 @@ const Employee = () => {
             />
             <EmployeeGridView employeeData={employeeData} />
           </TabPanel>
-          <TabPanel value="2">
+          <TabPanel value="2" sx={{ padding: "0" }}>
+            <br />
             <EmployeeTableView
               employeeData={employeeData}
               isLoading={isLoading}

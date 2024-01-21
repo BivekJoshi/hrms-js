@@ -10,7 +10,13 @@ import {
   Typography,
 } from "@mui/material";
 import { useGetEmployee } from "../../hooks/employee/useEmployee";
-import { getBusinessAEmployeeById, getBusinessBEmployeeById, getFemaleEmployeeById, getMaleEmployeeById, getTechnicalEmployeeById } from "../../components/Email/EmailSorting";
+import {
+  getBusinessAEmployeeById,
+  getBusinessBEmployeeById,
+  getFemaleEmployeeById,
+  getMaleEmployeeById,
+  getTechnicalEmployeeById,
+} from "../../components/Email/EmailSorting";
 
 const EmailForHoliday = ({ getEventID, onClose }) => {
   const { data: employeeData } = useGetEmployee();
@@ -65,7 +71,6 @@ const EmailForHoliday = ({ getEventID, onClose }) => {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <Typography variant="h4">Email</Typography>
         <Grid container spacing={2}>
           <Grid
             item
@@ -77,7 +82,7 @@ const EmailForHoliday = ({ getEventID, onClose }) => {
               id="holidayId"
               name="holidayId"
               select
-              label="Select"
+              label="Send Email To"
               placeholder="Select employees"
               fullWidth
               required
@@ -92,7 +97,7 @@ const EmailForHoliday = ({ getEventID, onClose }) => {
               <MenuItem value="businessa">Business A Employees</MenuItem>
               <MenuItem value="businessb">Business B Employees</MenuItem>
               {/* <MenuItem value="none">None</MenuItem> */}
-              </TextField>
+            </TextField>
           </Grid>
         </Grid>
         <Grid
@@ -100,8 +105,14 @@ const EmailForHoliday = ({ getEventID, onClose }) => {
           direction="row"
           justifyContent="flex-end"
           alignItems="flex-end"
+          sx={{ my: 1 }}
         >
-          <Button type="submit" variant="contained" color="primary" sx={{color: "#fff"}}>
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            sx={{ color: "#fff" }}
+          >
             Send
           </Button>
           <Button
