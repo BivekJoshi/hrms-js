@@ -80,39 +80,22 @@ const EmploymentType = () => {
       title: 'Description',
       field: 'description',
       emptyValue: '-',
-      width: 300,
+      width: 420,
       sorting: false,
       render: (rowData) => (
         <div
           style={{
+            whiteSpace: 'normal',
             overflowWrap: 'break-word',
+            wordWrap: 'break-word',
             wordBreak: 'break-all',
+            // width: 400,
           }}
         >
-          {rowData?.name}
+          {rowData?.description}
         </div>
       ),
     },
-    // {
-    //   title: 'Description',
-    //   field: 'description',
-    //   emptyValue: '-',
-    //   // width: 420,
-    //   sorting: false,
-    //   render: (rowData) => (
-    //     <div
-    //       style={{
-    //         whiteSpace: 'normal',
-    //         overflowWrap: 'break-word',
-    //         wordWrap: 'break-word',
-    //         wordBreak: 'break-all',
-    //         width: 400,
-    //       }}
-    //     >
-    //       {rowData?.description}
-    //     </div>
-    //   ),
-    // },
   ].filter(Boolean);
   const { mode } = React.useContext(ThemeModeContext);
 
