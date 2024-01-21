@@ -1,39 +1,36 @@
 import React, { useState } from "react";
 import { useSendEmailToAll } from "../../hooks/email/useEmail";
-import {
-  Button,
-  Grid,
-  MenuItem,
-  TextField,
-  Typography,
-} from "@mui/material";
-import { useGetEmployee } from "../../hooks/employee/useEmployee";
-import {
-  getBusinessAEmployeeById,
-  getBusinessBEmployeeById,
-  getFemaleEmployeeById,
-  getMaleEmployeeById,
-  getTechnicalEmployeeById,
-} from "../../components/Email/EmailSorting";
+import { Button, Grid, MenuItem, TextField } from "@mui/material";
+
+const TypeOptions = [
+  {
+    value: "A",
+    label: "All Employee",
+    id: 1,
+  },
+  {
+    value: "F",
+    label: "Female Employee",
+    id: 2,
+  },
+  {
+    value: "O",
+    label: "Other Employee",
+    id: 3,
+  },
+];
 
 const EmailToAll = ({ getEventID, onClose }) => {
-  const { data: employeeData } = useGetEmployee();
-  const [employeeId, setEmployeeId] = useState();
   const [emailData, setEmailData] = useState();
-
-  const maleEmployeeData = getMaleEmployeeById();
-  const femaleEmployeeData = getFemaleEmployeeById();
-  const technicalEmployeeData = getTechnicalEmployeeById();
-  const businessAEmployeeData = getBusinessAEmployeeById();
-  const businessBEmployeeData = getBusinessBEmployeeById();
+  const [selectedValue, setSelectedValue] = useState("");
 
   const sendEmailMutation = useSendEmailToAll({
     onSuccess: () => {
       setEmailData();
       onClose();
     },
-    employeeId: employeeId,
     eventId: getEventID,
+    type: selectedValue,
   });
 
   const handleSubmit = (event) => {
@@ -42,36 +39,12 @@ const EmailToAll = ({ getEventID, onClose }) => {
   };
 
   const handleChange = (event) => {
-    const { value } = event.target;
-    if (value === "all") {
-      const allEmployeeId = employeeData.map((employee) => employee.id);
-      setEmployeeId(allEmployeeId);
-    } else if (value === "male") {
-      const allEmployeeId = maleEmployeeData;
-      setEmployeeId(allEmployeeId);
-    } else if (value === "female") {
-      const allEmployeeId = femaleEmployeeData;
-      setEmployeeId(allEmployeeId);
-    } else if (value === "technical") {
-      const allEmployeeId = technicalEmployeeData;
-      setEmployeeId(allEmployeeId);
-    } else if (value === "businessa") {
-      const allEmployeeId = businessAEmployeeData;
-      setEmployeeId(allEmployeeId);
-    } else if (value === "businessb") {
-      const allEmployeeId = businessBEmployeeData;
-      setEmployeeId(allEmployeeId);
-    } else {
-      setEmployeeId(value);
-    }
+    setSelectedValue(event.target.value);
   };
 
   return (
     <>
       <form onSubmit={handleSubmit}>
-        {/* <Typography variant="h6">
-          Send email to
-        </Typography> */}
         <Grid container spacing={2}>
           <Grid
             item
@@ -80,25 +53,22 @@ const EmailToAll = ({ getEventID, onClose }) => {
             sx={{ display: "flex", alignItems: "center" }}
           >
             <TextField
-              id="eventId "
-              name="eventId "
+              id="type"
+              name="type"
               select
-              label="Select"
-              placeholder="Select employees"
+              label="Select Employee"
               fullWidth
               required
-              value={employeeId}
+              value={selectedValue}
               onChange={handleChange}
               variant="outlined"
               size="small"
             >
-              <MenuItem value="all">All Employees</MenuItem>
-              <MenuItem value="male">Male Employees</MenuItem>
-              <MenuItem value="female">Female Employees</MenuItem>
-              <MenuItem value="technical">Technical Employees</MenuItem>
-              <MenuItem value="businessa">Business A Employees</MenuItem>
-              <MenuItem value="businessb">Business B Employees</MenuItem>
-              {/* <MenuItem value="none">None</MenuItem> */}
+              {TypeOptions?.map((option) => (
+                <MenuItem key={option?.id} value={option?.value}>
+                  {option?.label}
+                </MenuItem>
+              ))}
             </TextField>
           </Grid>
         </Grid>

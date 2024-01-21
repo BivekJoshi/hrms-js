@@ -220,7 +220,7 @@ export default function AdminSidebar() {
       subMenus: [
         {
           name: 'Logistics',
-          path: 'officeResource',
+          path: 'availablelogistics',
           icon: (
             <LaptopChromebookIcon
               sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}
@@ -476,9 +476,9 @@ export default function AdminSidebar() {
           <img
             src={mode === 'dark' ? SmallLogo : Logo}
             alt='Logo'
-            width={mode === 'dark' ? '25%' : '70%'}
+            width={mode === 'dark' ? '20%' : '70%'}
           />
-          {mode === 'dark' && <div>Secured Securities Ltd</div>}
+          {mode === 'dark' && <Typography variant='h8'>Secured Securities Ltd</Typography>}
           <IconButton onClick={handleDrawerClose} sx={{ marginLeft: '2rem' }}>
             <ChevronLeftIcon />
           </IconButton>

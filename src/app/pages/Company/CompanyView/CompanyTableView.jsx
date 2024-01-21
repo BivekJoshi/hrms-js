@@ -46,6 +46,13 @@ const CompanyTableView = ({
       sorting: false,
     },
     {
+      title: "Branch Email",
+      field: "branchEmail",
+      emptyValue: "-",
+      width: "80px",
+      sorting: false,
+    },
+    {
       title: 'Description',
       field: 'branchDescription',
       emptyValue: '-',

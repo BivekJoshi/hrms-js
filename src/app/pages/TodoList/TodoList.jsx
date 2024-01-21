@@ -50,7 +50,7 @@ const TodoList = ({ permissions }) => {
     {
       title: "Task",
       field: "message",
-      width: "300px",
+      minWidth: "700px",
       sorting: false,
       render: (rowData) => {
         return (
@@ -63,7 +63,7 @@ const TodoList = ({ permissions }) => {
     {
       title: "Due",
       field: "dueDate",
-      width: "180px",
+      width: "100px",
       // type: 'numeric',
       sorting: false,
     },
@@ -71,7 +71,7 @@ const TodoList = ({ permissions }) => {
       title: "Priority",
       field: "priority",
       emptyValue: "-",
-      width: "180px",
+      width: "50px",
       cellStyle: {
         whiteSpace: "nowrap",
         textAlign: "center",
@@ -95,7 +95,7 @@ const TodoList = ({ permissions }) => {
             style={{
               backgroundColor: chipColor,
               color: "white",
-              width: " 9rem",
+              width: " 6rem",
             }}
           />
         );
