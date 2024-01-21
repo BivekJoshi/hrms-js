@@ -1,6 +1,6 @@
 import React from "react";
 import { useGetLoggedInUser } from "../../../hooks/auth/usePassword";
-import { Box, List, ListItem, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
+import { Box, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
 import "../Style/Style.css";
 import { DOC_URL } from "../../../../auth/axiosInterceptor";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
@@ -42,7 +42,7 @@ const roleName = [
     role: 'ROLE_EMPLOYEE',
     label: 'Employee',
   },
-]
+];
 
 const ProfileDetail = () => {
   const { data: loggedUserData } = useGetLoggedInUser();
