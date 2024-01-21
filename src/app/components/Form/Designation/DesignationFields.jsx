@@ -137,7 +137,6 @@ const DesignationFields = ({ onClose, isLoading, data }) => {
         >
           <Button
             variant='contained'
-            disabled={!formik?.dirty}
             onClick={handleFormSubmit}
             sx={{ mt: 3, ml: 1, textTransform: "capitalize" }}
           >

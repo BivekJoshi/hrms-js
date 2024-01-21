@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-import { Box, Button, Grid, Stack } from "@mui/material";
+import { Box, Button, Grid, Stack, Tooltip } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 
@@ -196,35 +196,33 @@ const LeaveType = ({ permissions }) => {
       render: (rowData) => {
         return (
           <div style={{ display: "flex" }}>
-            <Button disabled={!permissions?.canEdit}>
-              <ModeEditOutlineIcon
-                sx={{
-                  color: mode === "light" ? "black" : "white",
-                  "&:hover": {
-                    color: "green",
-                  },
-                }}
-                onClick={(event) => handleEditLeaveType(rowData)}
-              />
-            </Button>
-            <Button disabled={!rowData?.deletable || !permissions?.canDelete}>
-              <DeleteIcon
-                sx={{
-                  color:
-                    rowData?.deletable === false
-                      ? "rgb(188, 188, 188)"
-                      : "black",
-                  "&:hover": { color: "red" },
-                }}
-                // sx={{
-                //   color: mode === "light" ? "black" : "white",
-                //   "&:hover": {
-                //     color: "green",
-                //   },
-                // }}
-                onClick={(event) => handleDeleteLeaveType(rowData)}
-              />
-            </Button>
+            <Tooltip title="Edit leave type" placement="bottom">
+              <Button disabled={!permissions?.canEdit}>
+                <ModeEditOutlineIcon
+                  sx={{
+                    color: mode === "light" ? "black" : "white",
+                    "&:hover": {
+                      color: "green",
+                    },
+                  }}
+                  onClick={(event) => handleEditLeaveType(rowData)}
+                />
+              </Button>
+            </Tooltip>
+            <Tooltip title="deactivate leave type" placement="bottom">
+              <Button disabled={!rowData?.deletable || !permissions?.canDelete}>
+                <DeleteIcon
+                  sx={{
+                    color:
+                      rowData?.deletable === false
+                        ? "rgb(188, 188, 188)"
+                        : "black",
+                    "&:hover": { color: "red" },
+                  }}
+                  onClick={(event) => handleDeleteLeaveType(rowData)}
+                />
+              </Button>
+            </Tooltip>
           </div>
         );
       },
@@ -284,7 +282,6 @@ const LeaveType = ({ permissions }) => {
           gap: "0.6rem",
         }}
       >
-       
         <HocButton
           permissions={permissions}
           variant="outlined"

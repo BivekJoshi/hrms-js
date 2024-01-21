@@ -55,6 +55,7 @@ const OfficeResource = ({ permissions }) => {
     {
       title: "SN",
       render: (rowData) => rowData.tableData.id + 1,
+      maxWidth: '12px',
       sorting: false,
     },
     {

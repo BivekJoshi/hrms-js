@@ -1,6 +1,6 @@
 import React from "react";
 import { useGetLoggedInUser } from "../../../hooks/auth/usePassword";
-import { Box, List, ListItem, Stack, Typography } from "@mui/material";
+import { Box, List, ListItem, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
 import "../Style/Style.css";
 import { DOC_URL } from "../../../../auth/axiosInterceptor";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
@@ -50,7 +50,16 @@ const ProfileDetail = () => {
 
   const photo = loggedUserData?.userPhotoPath;
   const filePath = photo ? DOC_URL + photo : "";
+  
   const userRoleLabel = roleName?.find(role => role?.role === loggedUserData?.role?.name)?.label || "No role assigned yet";
+  const userInformation = [
+    { label: "User Name", value: `${employeeData?.firstName} ${employeeData?.middleName || ""} ${employeeData?.lastName}` },
+    { label: "Position", value: employeeData?.positionName },
+    { label: "Mobile", value: employeeData?.mobileNumber },
+    { label: "Address", value: loggedUserData?.address },
+    { label: "User Role", value: userRoleLabel },
+    { label: "Email", value: employeeData?.officeEmail },
+  ];
 
   return (
     <Box
@@ -73,7 +82,7 @@ const ProfileDetail = () => {
       </Stack>
 
       <Typography variant="h4">User Information</Typography>
-      <Stack sx={{ display: "flex", flexDirection: "column" }}>
+      {/* <Stack sx={{ display: "flex", flexDirection: "column" }}>
         <List sx={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
           <Box className="leftGrid">
             <ListItem>User Name :</ListItem>
@@ -81,7 +90,6 @@ const ProfileDetail = () => {
             <ListItem>Mobile:</ListItem>
             <ListItem>Address:</ListItem>
             <ListItem>User Role:</ListItem>
-            {/* <ListItem>User Id:</ListItem> */}
             <ListItem>Email:</ListItem>
           </Box>
           <Box>
@@ -95,11 +103,24 @@ const ProfileDetail = () => {
             <ListItem>
               {userRoleLabel}
             </ListItem>
-            {/* <ListItem>{loggedUserData?.id}</ListItem> */}
             <ListItem>{employeeData?.officeEmail}</ListItem>
           </Box>
         </List>
-      </Stack>
+      </Stack> */}
+       <TableContainer>
+        <Table>
+          <TableBody>
+            {userInformation && userInformation?.map((info) => (
+              <TableRow key={info?.label}>
+                <TableCell component="th" scope="row">
+                  {info?.label}
+                </TableCell>
+                <TableCell>{info?.value}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </Box>
   );
 };

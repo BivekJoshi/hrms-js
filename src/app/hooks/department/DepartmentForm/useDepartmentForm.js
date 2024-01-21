@@ -2,6 +2,7 @@ import { useFormik } from "formik";
 import { DepartmentSchema } from "../Validation/DepartmentSchema";
 import { useAddDepartment, useEditDepartment } from "../useDepartment";
 import { isEqual } from 'lodash';
+import { toast } from 'react-toastify';
 
 const useDepartmentForm = (data, onClose) => {
   const { mutate: addDepartment } = useAddDepartment({});
@@ -52,6 +53,9 @@ const useDepartmentForm = (data, onClose) => {
           onClose();
         },
       });
+    } else if (isEqual(values, formik.initialValues)){
+      toast.warning('No changes were made');
+      onClose();
     }
   };
 

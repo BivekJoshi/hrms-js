@@ -98,7 +98,7 @@ export const useDeactivateLeaveType = ({ onSuccess }) => {
     (data) => deactivateLeaveType(data),
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Successfully activated leave type');
+        toast.success('Successfully deactivated leave type');
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries('getAllLeaveType');
         queryClient.invalidateQueries('getLeaveType');
@@ -119,7 +119,7 @@ export const useActivateLeaveType = ({ onSuccess }) => {
     (data) => activateLeaveType(data),
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Successfully deactivated leave type');
+        toast.success('Successfully activated leave type');
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries('getAllLeaveType');
         queryClient.invalidateQueries('getLeaveType');
