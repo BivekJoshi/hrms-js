@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import {
   addChangeEmail,
   addEmailConfigure,
@@ -7,20 +7,20 @@ import {
   sendEmailForHoliday,
   sendEmailToAll,
   sendEmailToMultipleEmployee,
-} from '../../api/email/email-api';
-import { toast } from 'react-toastify';
+} from "../../api/email/email-api";
+import { toast } from "react-toastify";
 
 /*___________________SEND EMAIL FOR PERTICULAR EMPLOYEE ON BASIS OF ID______________________________________*/
 export const useSendEmail = ({ employeeId, onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(
-    ['sendEmail'],
+    ["sendEmail"],
     (formData) => sendEmail({ formData, employeeId }),
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Successfully Send Mail');
+        toast.success("Successfully Send Mail");
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries('sendEmail');
+        queryClient.invalidateQueries("sendEmail");
       },
     }
   );
@@ -29,11 +29,11 @@ export const useSendEmail = ({ employeeId, onSuccess }) => {
 /*___________________SEND EMAIL FOR MULTIPLE EMPLOYEE ON BASIS OF ID______________________________________*/
 export const useSendEmailToMultipleEmployee = ({ onSuccess, employeeId }) => {
   return useMutation(
-    ['sendEmailToMultipleEmployee'],
+    ["sendEmailToMultipleEmployee"],
     (formData) => sendEmailToMultipleEmployee({ formData, employeeId }),
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Successfully Send Mail To Selected Employee');
+        toast.success("Successfully Send Mail To Selected Employee");
         onSuccess && onSuccess(data, variables, context);
       },
     }
@@ -41,36 +41,32 @@ export const useSendEmailToMultipleEmployee = ({ onSuccess, employeeId }) => {
 };
 
 /*___________________SEND EMAIL TO ALL EMPLOYEE______________________________________*/
-export const useSendEmailToAll = ({ onSuccess, employeeId, eventId }) => {
+export const useSendEmailToAll = ({ onSuccess, eventId, type }) => {
   const queryClient = useQueryClient();
   return useMutation(
-    ['sendEmailToAll'],
-    (formData) => sendEmailToAll({ formData, employeeId, eventId }),
+    ["sendEmailToAll"],
+    (formData) => sendEmailToAll({ formData, eventId, type }),
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Successfully Send Mail To All The Employee');
+        toast.success("Successfully Send Email for Event Message");
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries('sendEmailToAll');
+        queryClient.invalidateQueries("sendEmailToAll");
       },
     }
   );
 };
 
 /*___________________SEND EMAIL TO ALL EMPLOYEE FOR HOLIDAY______________________________________*/
-export const useSendEmailForHoliday = ({
-  onSuccess,
-  employeeId,
-  holidayId,
-}) => {
+export const useSendEmailForHoliday = ({ onSuccess, holidayId, type }) => {
   const queryClient = useQueryClient();
   return useMutation(
-    ['sendEmailForHoliday'],
-    (formData) => sendEmailForHoliday({ formData, employeeId, holidayId }),
+    ["sendEmailForHoliday"],
+    (formData) => sendEmailForHoliday({ formData, holidayId, type }),
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Successfully Send Mail To All The Employee');
+        toast.success("Successfully Send Email For Holiday Message");
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries('sendEmailForHoliday');
+        queryClient.invalidateQueries("sendEmailForHoliday");
       },
     }
   );
@@ -80,7 +76,7 @@ export const useSendEmailForHoliday = ({
   /*________________________GET_____________________________________*/
 }
 export const useGetEmailConfigure = () => {
-  return useQuery(['getEmailConfigure'], () => getEmailConfigure(), {
+  return useQuery(["getEmailConfigure"], () => getEmailConfigure(), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });
@@ -91,13 +87,13 @@ export const useGetEmailConfigure = () => {
 export const useEmailConfigure = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(
-    ['addEmailConfigure'],
+    ["addEmailConfigure"],
     (formData) => addEmailConfigure(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Successfully changed email configuration');
+        toast.success("Successfully changed email configuration");
         onSuccess && onSuccess(data, variables, context);
-        queryClient.invalidateQueries('addEmailConfigure');
+        queryClient.invalidateQueries("addEmailConfigure");
       },
     }
   );
@@ -107,11 +103,11 @@ export const useEmailConfigure = ({ onSuccess }) => {
 export const useChangeEmail = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(
-    ['addChangeEmail'],
+    ["addChangeEmail"],
     (formData) => addChangeEmail(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Successfully changed email. Check your email to login');
+        toast.success("Successfully changed email. Check your email to login");
         onSuccess && onSuccess(data, variables, context);
       },
     }
@@ -122,11 +118,11 @@ export const useChangeEmail = ({ onSuccess }) => {
 export const useResendEmail = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(
-    ['addChangeEmail'],
+    ["addChangeEmail"],
     (formData) => addChangeEmail(formData),
     {
       onSuccess: (data, variables, context) => {
-        toast.success('Successfully resend email. Check email to login');
+        toast.success("Successfully resend email. Check email to login");
         onSuccess && onSuccess(data, variables, context);
       },
     }

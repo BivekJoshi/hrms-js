@@ -6,24 +6,25 @@ import useEmploymentHistory from "../../../../../hooks/employee/useEmploymentHis
 
 export const AddEmploymentHistory = ({
   open,
-  handleCloseModal,
+  onClose,
   title,
   multiplePosition,
 }) => {
-  const { formik } = useEmploymentHistory(handleCloseModal);
+  const { formik } = useEmploymentHistory({ onClose });
   const handleFormSubmit = () => {
     formik.handleSubmit();
+    onClose();
   };
   return (
     <div>
       <FormModal
         title={title}
         open={open}
-        onClose={handleCloseModal}
+        onClose={onClose}
         formComponent={
           <>
             <AddEmploymentHistoryFields
-              onClose={handleCloseModal}
+              onClose={onClose}
               multiplePosition={multiplePosition}
               formik={formik}
             />
@@ -42,7 +43,7 @@ export const AddEmploymentHistory = ({
               </Button>
               <Button
                 variant="contained"
-                onClick={handleCloseModal}
+                onClick={onClose}
                 sx={{ mt: 3, ml: 1 }}
                 color="error"
               >
