@@ -8,11 +8,12 @@ import DoneSharpIcon from "@mui/icons-material/DoneSharp";
 import CloseSharpIcon from "@mui/icons-material/CloseSharp";
 import { EditEventAttendanceModal } from "../EventModal/EventModal";
 import NewFilter from "../../../components/NewFilter/NewFilter";
-import { useGetAllEvent, usegetAllEmployeeData } from "./useEventAttendance";
+import { useGetAllEvent, useGetAllEventAttendance, usegetAllEmployeeData } from "./useEventAttendance";
 import { Badge, Chip, Tooltip, Typography } from "@mui/material";
 import { getEventAttenderList } from "../../../api/event/event-api";
 import { toast } from "react-toastify";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
+import { useQuery } from 'react-query';
 
 const EventAttendance = ({ permissions }) => {
   const { employeeData, employeeAllData } = usegetAllEmployeeData();
@@ -193,6 +194,7 @@ const EventAttendance = ({ permissions }) => {
 
   const handleCloseEditModal = () => setOpenEditModal(false);
   const [searchParams, setSearchParams] = useState({});
+  const { queryData, queryLoading, queryError } = useGetAllEventAttendance(searchParams);
   const [isLoading, setisLoading] = useState(false);
 
   const [tableData, setTableData] = useState([]);
@@ -287,15 +289,22 @@ const EventAttendance = ({ permissions }) => {
       toast.error(error);
     }
   };
+  // const { data: queryData, isLoading: queryLoading, error: queryError } = useQuery(
+  //   ['getEventAttenderList', searchParams],
+  //   async () => {
+  //     const data = await getEventAttenderList(searchParams);
+  //     return data?.events;
+  //   }
+  // );
 
   return (
     <>
       <NewFilter inputField={filterMenu} searchCallBack={handleSearch} />
       <CustomTable
         columns={getColumns(columns, searchParams)}
-        data={tableData}
+        data={queryData}
         title="Event Attendance Report"
-        isLoading={isLoading}
+        isLoading={queryLoading}
         additionalLeft={additionalLeft}
         additionalRight={additionalRight}
         fileName="Event Report"

@@ -132,7 +132,7 @@ export const useEditEvent = ({ onSuccess }) => {
 export const useEditEventAttendance = ({ onSuccess }) => {
   const queryClient = useQueryClient();
   return useMutation(
-    ["editEvent"],
+    ["editEventAttendance"],
     (formData) => editEventAttendance(formData),
     {
       onSuccess: (data, variables, context) => {
