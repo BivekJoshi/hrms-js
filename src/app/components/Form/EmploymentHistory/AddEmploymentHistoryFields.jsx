@@ -29,6 +29,7 @@ const AddEmploymentHistoryFields = ({
   const { data: companyData, isLoading: loadingCompany } = useGetCompany();
   const { data: designationData, isLoading: loadingDesignation } =
     useGetDesignation();
+    const currentDate = new Date().toISOString().split('T')[0];
 
   return (
     <Grid container spacing={2}>
@@ -141,6 +142,9 @@ const AddEmploymentHistoryFields = ({
           variant='outlined'
           InputLabelProps={{ shrink: true }}
           size='small'
+          inputProps={{
+            max: currentDate,
+          }}
         />
       </Grid>
       {/* <Grid item xs={adjustSize || 12} sm={adjustSize || 12}>

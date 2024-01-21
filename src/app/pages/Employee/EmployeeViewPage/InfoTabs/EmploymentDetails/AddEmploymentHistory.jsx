@@ -15,6 +15,7 @@ export const AddEmploymentHistory = ({
     formik.handleSubmit();
     onClose();
   };
+  
   return (
     <div>
       <FormModal
