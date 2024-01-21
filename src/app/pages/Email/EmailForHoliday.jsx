@@ -10,18 +10,23 @@ import {
 const TypeOptions = [
   {
     value: "A",
-    label: "All Employee",
+    label: "All Employees",
     id: 1,
   },
   {
-    value: "F",
-    label: "Female Employee",
+    value: "M",
+    label: "Male Employees",
     id: 2,
   },
   {
-    value: "O",
-    label: "Other Employee",
+    value: "F",
+    label: "Female Employees",
     id: 3,
+  },
+  {
+    value: "O",
+    label: "Other Employees",
+    id: 4,
   },
 ];
 
