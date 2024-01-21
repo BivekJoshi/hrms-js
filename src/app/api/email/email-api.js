@@ -33,11 +33,10 @@ export const sendEmailToAll = async ({ eventId, type }) => {
 };
 
 /*___________________SEND EMAIL TO ALL EMPLOYEE HOLIDAY______________________________________*/
-export const sendEmailForHoliday = async ({ employeeId, holidayId }) => {
-  if (employeeId) {
+export const sendEmailForHoliday = async ({ holidayId, type }) => {
+  if (type && holidayId) {
     const res = await axiosInstance.post(
-      `/email/employees/holiday?holidayId=${holidayId}`,
-      employeeId
+      `/email/employees/holiday?type=${type}&holidayId=${holidayId}`
     );
     return res;
   }

@@ -48,7 +48,7 @@ export const useSendEmailToAll = ({ onSuccess, eventId, type }) => {
     (formData) => sendEmailToAll({ formData, eventId, type }),
     {
       onSuccess: (data, variables, context) => {
-        toast.success("Successfully Send Mail To All The Employee");
+        toast.success("Successfully Send Email for Event Message");
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries("sendEmailToAll");
       },
@@ -57,18 +57,14 @@ export const useSendEmailToAll = ({ onSuccess, eventId, type }) => {
 };
 
 /*___________________SEND EMAIL TO ALL EMPLOYEE FOR HOLIDAY______________________________________*/
-export const useSendEmailForHoliday = ({
-  onSuccess,
-  employeeId,
-  holidayId,
-}) => {
+export const useSendEmailForHoliday = ({ onSuccess, holidayId, type }) => {
   const queryClient = useQueryClient();
   return useMutation(
     ["sendEmailForHoliday"],
-    (formData) => sendEmailForHoliday({ formData, employeeId, holidayId }),
+    (formData) => sendEmailForHoliday({ formData, holidayId, type }),
     {
       onSuccess: (data, variables, context) => {
-        toast.success("Successfully Send Mail To All The Employee");
+        toast.success("Successfully Send Email For Holiday Message");
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries("sendEmailForHoliday");
       },
