@@ -3,10 +3,16 @@ import React, { useState } from "react";
 import FormModal from "../../../components/Modal/FormModal";
 import { useGetEventById } from "../../../hooks/event/useEvent";
 import EditEventFields from "../../../components/Form/Event/EditEventFields";
-import EditEmpEventFields from '../../../components/Form/Event/EditEmpEventFields';
-import EditEventAttendanceFields from '../../../components/Form/Event/EditEventAttendanceFields';
+import EditEmpEventFields from "../../../components/Form/Event/EditEmpEventFields";
+import EditEventAttendanceFields from "../../../components/Form/Event/EditEventAttendanceFields";
 
-export const OpenEvent = ({ open, handleCloseModal, id, title }) => {
+export const OpenEvent = ({
+  open,
+  handleCloseModal,
+  id,
+  title,
+  hideDelete,
+}) => {
   const { data } = useGetEventById(id);
   return (
     <div>
@@ -15,7 +21,7 @@ export const OpenEvent = ({ open, handleCloseModal, id, title }) => {
         open={open}
         onClose={handleCloseModal}
         formComponent={
-          <EditEventFields onClose={handleCloseModal} data={data} />
+          <EditEventFields hideDelete={hideDelete} onClose={handleCloseModal} data={data} />
         }
       />
     </div>
@@ -30,17 +36,21 @@ export const OpenEmpEvent = ({ open, handleCloseModal, id, title }) => {
         title={title}
         open={open}
         onClose={handleCloseModal}
-        formComponent={<EditEmpEventFields onClose={handleCloseModal} data={data} />}
+        formComponent={
+          <EditEmpEventFields onClose={handleCloseModal} data={data} />
+        }
       />
     </div>
   );
 };
 
-
-
-
 // event attendance modal
-export const EditEventAttendanceModal = ({ open, handleCloseModal, data, title }) => {
+export const EditEventAttendanceModal = ({
+  open,
+  handleCloseModal,
+  data,
+  title,
+}) => {
   // const { data } = useGetEventById(id);
   return (
     <div>
@@ -48,7 +58,9 @@ export const EditEventAttendanceModal = ({ open, handleCloseModal, data, title }
         title={title}
         open={open}
         onClose={handleCloseModal}
-        formComponent={<EditEventAttendanceFields onClose={handleCloseModal} data={data} />}
+        formComponent={
+          <EditEventAttendanceFields onClose={handleCloseModal} data={data} />
+        }
       />
     </div>
   );

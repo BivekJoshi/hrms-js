@@ -6,8 +6,15 @@ import PermissionHoc from "../../../hoc/permissionHoc";
 import { useEffect } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import UpdateIcon from "@mui/icons-material/Update";
+import RemarkField from "../../RemarkField/RemarkField";
 
-const EditEventFields = ({ onClose, isLoading, data, permissions }) => {
+const EditEventFields = ({
+  onClose,
+  isLoading,
+  data,
+  permissions,
+  hideDelete,
+}) => {
   const { formik } = useEditEventForm(data, onClose);
   const handleFormSubmit = () => {
     formik.handleSubmit();
@@ -29,7 +36,8 @@ const EditEventFields = ({ onClose, isLoading, data, permissions }) => {
   //   new Date(formik.values.eventDate) >= new Date() ||
   //   formik.values.eventDate === new Date().toISOString().split("T")[0];
 
-  const isEventDateValid = formik.values.eventDate >= new Date().toISOString().split("T")[0];
+  const isEventDateValid =
+    formik.values.eventDate >= new Date().toISOString().split("T")[0];
 
   return (
     !isLoading && (
@@ -107,28 +115,21 @@ const EditEventFields = ({ onClose, isLoading, data, permissions }) => {
           />
         </Grid>
         <Grid item xs={12} sm={12}>
-          <TextField
+          <RemarkField
             id="eventDescription"
             name="eventDescription"
             label="Description"
             fullWidth
-            multiline
-            rows={4}
-            value={formik.values.eventDescription}
-            onChange={formik.handleChange}
-            error={
-              formik.touched.eventDescription &&
-              Boolean(formik.errors.eventDescription)
-            }
-            helperText={
-              formik.touched.eventDescription && formik.errors.eventDescription
-            }
+            formik={formik}
+            data={data?.eventDescription}
+            maxLength={255}
             variant="outlined"
-            size="small"
+            multiline
             InputLabelProps={{
               shrink: Boolean(formik.values.eventDescription),
             }}
-            inputProps={{ maxLength: 250 }}
+            rows={4}
+            inputProps={{ maxLength: 255 }}
           />
         </Grid>
         <Grid
@@ -147,14 +148,16 @@ const EditEventFields = ({ onClose, isLoading, data, permissions }) => {
           >
             Update Event
           </Button>
-          <Button
-            variant="contained"
-            startIcon={<DeleteIcon />}
-            color="error"
-            onClick={handleDeleteEvent}
-          >
-            Delete
-          </Button>
+          {!hideDelete && (
+            <Button
+              variant="contained"
+              startIcon={<DeleteIcon />}
+              color="error"
+              onClick={handleDeleteEvent}
+            >
+              Delete
+            </Button>
+          )}
           <Button variant="contained" color="error" onClick={onClose}>
             Cancel
           </Button>
