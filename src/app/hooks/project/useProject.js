@@ -90,7 +90,7 @@ export const useAddProject = ({ onSuccess }) => {
     onSuccess: (data, variables, context) => {
       toast.success('Project added successfully');
       onSuccess && onSuccess(data, variables, context);
-      queryClient.invalidateQueries('getProject');
+      queryClient.invalidateQueries('getProjectPageWise');
     },
   });
 };

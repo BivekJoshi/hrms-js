@@ -7,7 +7,7 @@ const ProjectSchema = Yup.object().shape({
   startDate: Yup.string().required("Please select start date"),
   taskStatus: Yup.string().required("Please select task status"),
   projectLeadId: Yup.string().required("Please select leader for project"),
-  companyId: Yup.string().required("Please Select Company"),
+  companyId: Yup.string().required("Please Select Project Branch name"),
 });
 
 export { ProjectSchema };

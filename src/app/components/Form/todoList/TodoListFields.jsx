@@ -53,39 +53,41 @@ const TodoListFields = ({ onClose, isLoading, data }) => {
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
           {data ? (
-             <RemarkField
-             id="message"
-             name="message"
-             label="Todo"
-             fullWidth
-             req={true}
-             formik={formik}
-             data={data?.message}
-             maxLength={255}
-             variant="outlined"
-             multiline
-             InputLabelProps={{
-               shrink: Boolean(formik.values.message),
-             }}
-             rows={4}
-             inputProps={{ maxLength: 255 }}
-           />
+            <RemarkField
+              id="message"
+              name="message"
+              label="Todo"
+              fullWidth
+              req={true}
+              formik={formik}
+              data={data?.message}
+              maxLength={255}
+              variant="outlined"
+              multiline
+              InputLabelProps={{
+                shrink: Boolean(formik.values.message),
+              }}
+              rows={4}
+              inputProps={{ maxLength: 255 }}
+            />
           ) : (
-            <TextField
-            id="message"
-            name="message"
-            label="Todo"
-            fullWidth
-            required
-            multiline
-            value={formik.values.message}
-            onChange={formik.handleChange}
-            error={formik.touched.message && Boolean(formik.errors.message)}
-            helperText={formik.touched.message && formik.errors.message}
-            variant="outlined"
-            InputLabelProps={{ shrink: Boolean(formik.values.message) }}
-            size="small"
-          /> 
+            <RemarkField
+              id="message"
+              name="message"
+              label="Todo"
+              fullWidth
+              req={true}
+              formik={formik}
+              data={data?.message}
+              maxLength={255}
+              variant="outlined"
+              multiline
+              InputLabelProps={{
+                shrink: Boolean(formik.values.message),
+              }}
+              rows={4}
+              inputProps={{ maxLength: 255 }}
+            />
           )}
           {/* <TextField
             id="message"

@@ -22,7 +22,7 @@ import EditEmploymentDetails from "./EditEmploymentDetails";
 import useAuth from "../../../../../../auth/hooks/component/login/useAuth";
 import EmployeeTransferAndUpgrade from "./EmployeeTransferAndUpgrade";
 
-const EmploymentDetails = ({ data, role }) => {
+const EmploymentDetails = ({ role }) => {
   const { id } = useParams();
 
   const { isEmployee } = useAuth();
@@ -275,7 +275,7 @@ const EmploymentDetails = ({ data, role }) => {
         <AddEmploymentHistory
           title={"Add Employment Details"}
           open={openAddModal}
-          handleCloseModal={handleCloseAddModal}
+          onClose={handleCloseAddModal}
           multiplePosition={multiPosition}
         />
       )}

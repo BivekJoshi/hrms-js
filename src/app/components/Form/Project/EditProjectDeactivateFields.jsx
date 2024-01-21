@@ -6,6 +6,7 @@ import {
 } from "../../../hooks/project/addProject/useAddProjectActiveForm";
 import { useGetDeactivatedProject } from "../../../hooks/project/useProject";
 import Restore from "../../../../assets/restore.png";
+import RemarkField from "../../RemarkField/RemarkField";
 
 export const EditProjectDeactivateFields = ({ onClose, isLoading, data }) => {
   const { formik } = useRemoveActiveProject(data);
@@ -104,22 +105,21 @@ export const EditProjectActivateFields = ({ onClose, isLoading, data }) => {
           </Typography>
         </Grid>
         <Grid item xs={12} sm={12} textAlign="center">
-          <TextField
+          <RemarkField
             id="remarks"
             name="remarks"
-            label="Reason"
-            placeholder="Give activation reason"
+            label="Remarks"
             fullWidth
-            // disabled
-            value={getProjectName(formik.values.remarks)}
-            onChange={formik.handleChange}
-            error={formik.touched.remarks && Boolean(formik.errors.remarks)}
-            helperText={formik.touched.remarks && formik.errors.remarks}
+            formik={formik}
+            maxLength={255}
             variant="outlined"
-            InputLabelProps={{ shrink: true }}
-          />{" "}
+            multiline
+            InputLabelProps={{ shrink: Boolean(formik.values.remarks) }}
+            rows={4}
+            inputProps={{ maxLength: 250 }}
+          />
         </Grid>
-        
+
         <Grid item xs={12} sm={12} textAlign="center">
           <Divider sx={{ width: "100%" }} />
         </Grid>
