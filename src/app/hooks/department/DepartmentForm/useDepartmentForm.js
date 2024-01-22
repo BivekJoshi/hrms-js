@@ -53,10 +53,7 @@ const useDepartmentForm = (data, onClose) => {
           onClose();
         },
       });
-    } else if (isEqual(values, formik.initialValues)){
-      toast.warning('No changes were made');
-      onClose();
-    }
+    }c
   };
 
   return { formik };

@@ -32,6 +32,7 @@ const TypeOptions = [
 
 const EmailForHoliday = ({ getEventID, onClose }) => {
   const [emailData, setEmailData] = useState();
+  const [error, setError] = useState('');
   const [selectedValue, setSelectedValue] = useState("");
 
   const sendEmailMutation = useSendEmailForHoliday({
@@ -45,11 +46,17 @@ const EmailForHoliday = ({ getEventID, onClose }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if(!selectedValue) {
+      setError('Please select employees');
+      return;
+    }
+    setError('');
     sendEmailMutation.mutate(emailData);
   };
 
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
+    setError('');
   };
 
   return (
@@ -68,11 +75,13 @@ const EmailForHoliday = ({ getEventID, onClose }) => {
               select
               label="Select Employee"
               fullWidth
-              required
+              // required
               value={selectedValue}
               onChange={handleChange}
               variant="outlined"
               size="small"
+              error={Boolean(error)}
+              helperText={error}
             >
               {TypeOptions?.map((option) => (
                 <MenuItem key={option?.id} value={option?.value}>
