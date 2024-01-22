@@ -99,7 +99,6 @@ const EditEventAttendanceFields = ({ onClose, isLoading, data }) => {
             variant="contained"
             startIcon={<UpdateIcon />}
             onClick={handleFormSubmit}
-            disabled={!formik.dirty}
           >
             Update
           </Button>

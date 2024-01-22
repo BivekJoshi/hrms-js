@@ -23,13 +23,11 @@ const DeactivatedOfficeResource = ({ closeModal, title }) => {
     setopenModal(true);
   };
 
-  console.log(data);
-
   const columns = [
     {
       title: "SN",
       render: (rowData) => rowData.tableData.id + 1,
-      width: "8px",
+      maxWidth: "6px",
       sorting: false,
     },
     {
@@ -41,22 +39,22 @@ const DeactivatedOfficeResource = ({ closeModal, title }) => {
         </div>
       ),
       emptyValue: "-",
-      width: "20px",
+      maxWidth: "100px",
       sorting: false,
     },
     {
       title: "Identification Number",
       field: "uniqueNumber",
       emptyValue: "-",
-      width: "20px",
+      maxWidth: "120px",
       sorting: false,
     },
     {
       title: "Description",
-      width: "120px",
+      // minWdth: "320px",
       render: (rowData) => (
         <Typography
-          style={{ overflowWrap: "break-word", wordBreak: "break-all" }}
+          style={{ overflowWrap: "break-word", wordBreak: "break-all", width: '18rem' }}
         >
           {rowData?.description}
         </Typography>

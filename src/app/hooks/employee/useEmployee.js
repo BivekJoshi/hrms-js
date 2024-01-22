@@ -16,17 +16,24 @@ import {
 import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
 
-const nameLabel = (emp) => {
-  const position =
-    emp?.positionName !== null && emp?.positionName !== undefined
-      ? `(${emp.positionName})`
-      : "";
-  if (emp?.middleName === "") {
-    return `${emp?.firstName} ${emp?.lastName} ${position}`;
+const nameLabel = (emp) => {  
+  if (emp?.middleName) {
+    return `${emp?.firstName} ${emp?.middleName} ${emp?.lastName}`;
   } else {
-    return `${emp?.firstName} ${emp?.middleName} ${emp?.lastName} ${position}`;
+    return `${emp?.firstName} ${emp?.lastName}`;
   }
 };
+// const nameLabel = (emp) => {
+//   const position =
+//     emp?.positionName !== null && emp?.positionName !== undefined
+//       ? `(${emp.positionName})`
+//       : "";
+//   if (emp?.middleName === "") {
+//     return `${emp?.firstName} ${emp?.lastName} ${position}`;
+//   } else {
+//     return `${emp?.firstName} ${emp?.middleName} ${emp?.lastName} ${position}`;
+//   }
+// };
 
 export const useGetEmployee = () => {
   const getQuery = useQuery(["getEmployee"], () => getEmployee(), {

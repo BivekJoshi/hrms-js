@@ -9,7 +9,7 @@ import UpdateIcon from "@mui/icons-material/Update";
 import RemarkField from "../../RemarkField/RemarkField";
 
 const EditHolidayFields = ({ onClose, isLoading, data, permissions }) => {
-  const { formik } = useEditHolidayForm(data);
+  const { formik } = useEditHolidayForm(data, onClose);
 
   const handleFormSubmit = async () => {
     const isValid = await formik.validateForm();
@@ -18,7 +18,7 @@ const EditHolidayFields = ({ onClose, isLoading, data, permissions }) => {
       formik.handleSubmit();
 
       if (formik.isValid) {
-        onClose();
+        // onClose();
         // setOpenSubmitModal(false);
       }
     }
@@ -82,7 +82,7 @@ const EditHolidayFields = ({ onClose, isLoading, data, permissions }) => {
             label="Description"
             fullWidth
             multiline
-            rows={4}
+            rows={3}
             value={formik.values.holidayDescription}
             onChange={formik.handleChange}
             error={
@@ -111,7 +111,7 @@ const EditHolidayFields = ({ onClose, isLoading, data, permissions }) => {
             InputLabelProps={{
               shrink: Boolean(formik.values.holidayDescription),
             }}
-            rows={4}
+            rows={3}
             inputProps={{ maxLength: 255 }}
           />
         </Grid>

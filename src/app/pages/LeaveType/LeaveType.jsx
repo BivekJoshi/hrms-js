@@ -1,22 +1,25 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-import { Box, Button, Grid, Stack } from "@mui/material";
+import { Box, Button, Grid, Stack, Tooltip } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 
 import {
+  useDeactivateLeaveType,
   useDeleteLeaveType,
   useGetLeaveType,
 } from "../../hooks/leaveType/useLeaveType";
 import {
   AddLeaveTypeModal,
   EditLeaveTypeModal,
+  GetDeactivatedLeaveTypeModal,
 } from "./LeaveTypeModal/LeaveTypeModal";
-import DeleteConfirmationModal from "../../components/Modal/DeleteConfirmationModal";
 import PermissionHoc from "../../hoc/permissionHoc";
 import HocButton from "../../hoc/hocButton";
 import CustomTable from "../../components/CustomTable/CustomTable";
 import ThemeModeContext from "../../../theme/ThemeModeContext";
+import { DeactivatedLeaveTypeModal } from "../../components/Form/LeaveType/DeactivatedLeaveTypeModal";
+import NewFilter from "../../components/NewFilter/NewFilter";
 
 const leaveName = [
   {
@@ -70,12 +73,14 @@ const leaveName = [
     leaveLabel: "Annual Leave",
   },
 ];
+
 const LeaveType = ({ permissions }) => {
   const { data: leaveTypeData, isLoading } = useGetLeaveType();
 
   const [existingLeaveTypes, setExistingLeaveTypes] = useState([]);
 
   const [openAddModal, setOpenAddModal] = useState(false);
+  const [openDeactivateModal, setOpenDeactivateModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
@@ -83,22 +88,24 @@ const LeaveType = ({ permissions }) => {
   const [deletedLeaveType, setDeletedLeaveType] = useState({});
 
   const handleAddOpenModal = () => setOpenAddModal(true);
+  const handleOpenDeactivateModal = () => setOpenDeactivateModal(true);
   const handleCloseAddModal = () => setOpenAddModal(false);
+  const handleCloseDeactivateModal = () => setOpenDeactivateModal(false);
 
   const handleCloseEditModal = () => setOpenEditModal(false);
   const handleCloseDeleteModal = () => setOpenDeleteModal(false);
 
-  const deleteLeaveTypeMutation = useDeleteLeaveType({});
+  const deleteLeaveTypeMutation = useDeactivateLeaveType({});
   const handleDeleteLeaveType = (rowData) => {
     setDeletedLeaveType(rowData);
     setOpenDeleteModal(true);
   };
 
   const handleConfirmDelete = () => {
-    deleteLeaveTypeMutation.mutate(deletedLeaveType.id);
+    deleteLeaveTypeMutation.mutate(deletedLeaveType);
     setOpenDeleteModal(false);
   };
-
+ 
   const handleEditLeaveType = (rowData) => {
     setEditedLeaveType(rowData);
     setOpenEditModal(true);
@@ -189,35 +196,33 @@ const LeaveType = ({ permissions }) => {
       render: (rowData) => {
         return (
           <div style={{ display: "flex" }}>
-            <Button disabled={!permissions?.canEdit}>
-              <ModeEditOutlineIcon
-                sx={{
-                  color: mode === "light" ? "black" : "white",
-                  "&:hover": {
-                    color: "green",
-                  },
-                }}
-                onClick={(event) => handleEditLeaveType(rowData)}
-              />
-            </Button>
-            <Button disabled={!rowData?.deletable || !permissions?.canDelete}>
-              <DeleteIcon
-                sx={{
-                  color:
-                    rowData?.deletable === false
-                      ? "rgb(188, 188, 188)"
-                      : "black",
-                  "&:hover": { color: "red" },
-                }}
-                // sx={{
-                //   color: mode === "light" ? "black" : "white",
-                //   "&:hover": {
-                //     color: "green",
-                //   },
-                // }}
-                onClick={(event) => handleDeleteLeaveType(rowData)}
-              />
-            </Button>
+            <Tooltip title="Edit leave type" placement="bottom">
+              <Button disabled={!permissions?.canEdit}>
+                <ModeEditOutlineIcon
+                  sx={{
+                    color: mode === "light" ? "black" : "white",
+                    "&:hover": {
+                      color: "green",
+                    },
+                  }}
+                  onClick={(event) => handleEditLeaveType(rowData)}
+                />
+              </Button>
+            </Tooltip>
+            <Tooltip title="deactivate leave type" placement="bottom">
+              <Button disabled={!rowData?.deletable || !permissions?.canDelete}>
+                <DeleteIcon
+                  sx={{
+                    color:
+                      rowData?.deletable === false
+                        ? "rgb(188, 188, 188)"
+                        : "black",
+                    "&:hover": { color: "red" },
+                  }}
+                  onClick={(event) => handleDeleteLeaveType(rowData)}
+                />
+              </Button>
+            </Tooltip>
           </div>
         );
       },
@@ -274,19 +279,28 @@ const LeaveType = ({ permissions }) => {
           display: "flex",
           justifyContent: "flex-end",
           paddingBottom: "1rem",
+          gap: "0.6rem",
         }}
       >
+        <HocButton
+          permissions={permissions}
+          variant="outlined"
+          onClick={handleOpenDeactivateModal}
+          buttonName={"Deactivated Leave Type"}
+        />
         {remainingLeaves === 0 ? (
-          <Button variant={"contained"} disabled>Max Leave Type Reached</Button>
+          <Button variant={"contained"} disabled>
+            Max Leave Type Reached
+          </Button>
         ) : (
           <HocButton
             permissions={permissions}
-            color="white"
             variant={"contained"}
             onClick={handleAddOpenModal}
             buttonName={"Add Leave Type"}
           />
         )}
+
         {/* <HocButton
           permissions={permissions}
           color="white"
@@ -318,12 +332,26 @@ const LeaveType = ({ permissions }) => {
           existingLeaveTypes={existingLeaveTypes}
         />
       )}
+
       {openDeleteModal && (
-        <DeleteConfirmationModal
+        <DeactivatedLeaveTypeModal
+          title={"Deactivate Leave Type"}
           open={openDeleteModal}
+          data={deletedLeaveType}
           handleCloseModal={handleCloseDeleteModal}
           handleConfirmDelete={handleConfirmDelete}
           message={"Leave Type"}
+        />
+      )}
+
+      {openDeactivateModal && (
+        <GetDeactivatedLeaveTypeModal
+          open={openDeactivateModal}
+          title={"Deactivated Leave Type"}
+          handleCloseModal={handleCloseDeactivateModal}
+          data={deletedLeaveType}
+          existingLeaveTypes={existingLeaveTypes}
+          permissions={permissions}
         />
       )}
     </Grid>

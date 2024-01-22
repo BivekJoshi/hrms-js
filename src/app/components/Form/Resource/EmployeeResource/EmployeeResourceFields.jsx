@@ -208,7 +208,7 @@ const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
             InputLabelProps={{
               shrink: Boolean(formik.values.remarks),
             }}
-            rows={4}
+            rows={3}
             inputProps={{ maxLength: 255 }}
           />
         </Grid>
@@ -221,7 +221,6 @@ const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
           <Button
             variant='contained'
             onClick={handleFormSubmit}
-            disabled={!formik?.dirty}
             sx={{ mt: 3, ml: 1 }}
           >
             Submit

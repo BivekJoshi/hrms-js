@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Grid, TextField, Typography } from "@mui/material";
 import { Autocomplete } from "@mui/material";
 import { useGetNoneUser } from "../../../hooks/employee/useEmployee";
@@ -9,9 +9,27 @@ import renderOptions from "../../../utils/renderOptions";
 export const AddUserControlFields = ({ onClose }) => {
   const { data: employeeData } = useGetNoneUser();
   const { formik } = useAddUserControlForm(onClose);
+  const [employeeSelected, setEmployeeSelected] = useState(true);
+
   const handleFormSubmit = () => {
-    formik.handleSubmit();
-    if (formik.isValid) {
+    if (formik.dirty === false) {
+      return setEmployeeSelected(false);
+    } else if (formik.dirty === true) {
+      formik.handleSubmit();
+      if (formik.isValid) {
+      }
+    }
+  };
+
+  const handleEmployeeChange = (event, selectedEmployee) => {
+    if (selectedEmployee) {
+      formik.setFieldValue("employeeId", selectedEmployee.id);
+      formik.setFieldValue("email", selectedEmployee.email);
+      setEmployeeSelected(true); // Reset the error status
+    } else {
+      formik.setFieldValue("employeeId", "");
+      formik.setFieldValue("email", "");
+      setEmployeeSelected(false); // Set the error status
     }
   };
 
@@ -28,12 +46,7 @@ export const AddUserControlFields = ({ onClose }) => {
             value={employeeData?.find(
               (employee) => employee?.id === formik?.values?.employeeId
             )}
-            onChange={(event, selectedEmployee) => {
-              if (selectedEmployee) {
-                formik.setFieldValue("employeeId", selectedEmployee.id);
-                formik.setFieldValue("email", selectedEmployee.email);
-              }
-            }}
+            onChange={handleEmployeeChange}
             renderInput={(params) => (
               <TextField
                 {...params}
@@ -42,11 +55,10 @@ export const AddUserControlFields = ({ onClose }) => {
                 required
                 variant="outlined"
                 size="small"
-                error={
-                  formik.touched.employeeId && Boolean(formik.errors.employeeId)
-                }
+                error={!employeeSelected}
                 helperText={
-                  formik.touched.employeeId && formik.errors.employeeId
+                  (!employeeSelected && "Please select an employee") ||
+                  (formik.touched.employeeId && formik.errors.employeeId)
                 }
               />
             )}

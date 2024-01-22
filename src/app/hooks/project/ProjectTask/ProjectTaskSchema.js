@@ -8,7 +8,7 @@ const ProjectTaskSchema = Yup.object().shape({
   detail: Yup.string()
     .required("Detail is required")
     .max(255, "Message name must be at least 255 characters"),
-  priority: Yup.string().required("Priority is required"),
+  priority: Yup.string().required("Please select priority"),
   status: Yup.string().required("Status is required"),
   dueDate: Yup.string().required("Please select due date "),
 });

@@ -192,8 +192,6 @@ const EmployeeDocumentDetailForm = () => {
                   (photo) => photo?.documentType === selectedDocument
                 );
 
-                console.log(documentPhoto, isInputDisabled);
-
                 return (
                   <Accordion
                     key={document.id}

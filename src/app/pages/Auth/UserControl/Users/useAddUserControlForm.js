@@ -1,7 +1,7 @@
 import React from "react";
 import { useFormik } from "formik";
 import { useAddUserControl } from "../../../../hooks/auth/userControl/useUserControl";
-import { UserSchema } from "./userSchema/UserSchema";
+import { UserAddSchema } from './userSchema/UserSchema';
 
 export const useAddUserControlForm = (onClose) => {
   const { mutate } = useAddUserControl({});
@@ -10,7 +10,7 @@ export const useAddUserControlForm = (onClose) => {
     initialValues: {
       employeeId: "",
     },
-    validationSchema: UserSchema,
+    // validationSchema: UserAddSchema,
     onSubmit: (values) => {
       handleRequest(values);
     },

@@ -18,7 +18,10 @@ const HolidayFields = ({
         <FormModal
           title={"Add Holiday"}
           open={openAddModal}
-          onClose={() => setOpenAddModal(false)}
+          onClose={() => {
+            setOpenAddModal(false)
+            formik.handleReset();
+          }}
           formComponent={
             <Grid container spacing={3}>
               <Grid item xs={12} sm={12}>
@@ -77,7 +80,7 @@ const HolidayFields = ({
                   label="Description"
                   fullWidth
                   multiline
-                  rows={4}
+                  rows={3}
                   value={formik.values.holidayDescription}
                   onChange={formik.handleChange}
                   error={
@@ -105,7 +108,7 @@ const HolidayFields = ({
                   InputLabelProps={{
                     shrink: Boolean(formik.values.holidayDescription),
                   }}
-                  rows={4}
+                  rows={3}
                   inputProps={{ maxLength: 255 }}
                 />
               </Grid>

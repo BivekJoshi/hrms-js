@@ -1,6 +1,8 @@
 import { useAddTodoList, useEditTodoList } from "../useTodoList";
 import { useFormik } from "formik";
 import { TodoListSchema } from "../valaidation/todoListSchema";
+import { isEqual } from "lodash";
+import { toast } from "react-toastify";
 
 const useTodoListForm = (data, onClose) => {
   const { mutate: addTodo } = useAddTodoList({});
@@ -36,11 +38,16 @@ const useTodoListForm = (data, onClose) => {
 
   const handledEditRequest = (values) => {
     values = { ...values };
-    editTodo(values, {
-      onSuccess: () => {
-        onClose();
-      },
-    });
+    if (!isEqual(values, formik.initialValues)) {
+      editTodo(values, {
+        onSuccess: () => {
+          onClose();
+        },
+      });
+    } else if (isEqual(values, formik.initialValues)) {
+      toast.warning("No changes were made");
+      onClose();
+    }
   };
 
   return { formik };

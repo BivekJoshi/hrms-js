@@ -164,7 +164,7 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
             fullWidth
             required
             multiline
-            rows={4}
+            rows={3}
             value={formik.values.leaveReason}
             onChange={formik.handleChange}
             error={
@@ -189,7 +189,7 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
             InputLabelProps={{
               shrink: Boolean(formik.values.leaveReason),
             }}
-            rows={4}
+            rows={3}
             inputProps={{ maxLength: 255 }}
           />
         </Grid>
