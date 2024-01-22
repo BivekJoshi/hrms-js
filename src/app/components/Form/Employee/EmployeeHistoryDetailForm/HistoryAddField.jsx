@@ -25,7 +25,11 @@ const HistoryAddField = ({ formik }) => {
 
   const updateWorkExpericence = useEditWorkExpirenceDoc(id);
 
-  const currentDate = new Date().toISOString().split("T")[0];
+  const currentDate = new Date();
+// Subtract one day
+currentDate.setDate(currentDate.getDate() - 1);
+// Convert to ISO string and extract the date part
+const resultDate = currentDate.toISOString().split("T")[0];
 
   const [previewImage, setPreviewImage] = useState(null);
   const [isPreviewOpen, setPreviewOpen] = useState(false);
@@ -141,7 +145,7 @@ const HistoryAddField = ({ formik }) => {
             fullWidth
             type="date"
             inputProps={{
-              max: currentDate,
+              max: resultDate,
             }}
             value={formik.values.fromDate}
             onChange={formik.handleChange}
