@@ -179,7 +179,7 @@ const AddEmploymentHistoryFields = ({
           maxLength={255}
           variant='outlined'
           multiline
-          rows={4}
+          rows={3}
           inputProps={{ maxLength: 250 }}
         />
       </Grid>

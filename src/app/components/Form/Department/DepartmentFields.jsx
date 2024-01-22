@@ -63,7 +63,7 @@ const DepartmentFields = ({ onClose, isLoading, data }) => {
             label="Description"
             fullWidth
             multiline
-            rows={4}
+            rows={3}
             value={formik.values.departmentDescription}
             onChange={formik.handleChange}
             error={
@@ -90,7 +90,7 @@ const DepartmentFields = ({ onClose, isLoading, data }) => {
             InputLabelProps={{
               shrink: Boolean(formik.values.departmentDescription),
             }}
-            rows={4}
+            rows={3}
             inputProps={{ maxLength: 255 }}
             data={data?.departmentDescription}
           />

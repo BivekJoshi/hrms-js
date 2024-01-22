@@ -82,7 +82,7 @@ const EditHolidayFields = ({ onClose, isLoading, data, permissions }) => {
             label="Description"
             fullWidth
             multiline
-            rows={4}
+            rows={3}
             value={formik.values.holidayDescription}
             onChange={formik.handleChange}
             error={
@@ -111,7 +111,7 @@ const EditHolidayFields = ({ onClose, isLoading, data, permissions }) => {
             InputLabelProps={{
               shrink: Boolean(formik.values.holidayDescription),
             }}
-            rows={4}
+            rows={3}
             inputProps={{ maxLength: 255 }}
           />
         </Grid>

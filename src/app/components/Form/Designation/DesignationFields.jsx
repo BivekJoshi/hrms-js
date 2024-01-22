@@ -97,7 +97,7 @@ const DesignationFields = ({ onClose, isLoading, data }) => {
             label="Designation Details"
             fullWidth
             multiline
-            rows={4}
+            rows={3}
             value={formik.values.positionDetails}
             onChange={formik.handleChange}
             error={
@@ -125,7 +125,7 @@ const DesignationFields = ({ onClose, isLoading, data }) => {
             InputLabelProps={{
               shrink: Boolean(formik.values.positionDetails),
             }}
-            rows={4}
+            rows={3}
             inputProps={{ maxLength: 255 }}
           />
         </Grid>

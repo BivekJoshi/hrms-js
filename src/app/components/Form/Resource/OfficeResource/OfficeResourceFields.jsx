@@ -57,7 +57,7 @@ const OfficeResourceFields = ({ onClose, isLoading, data }) => {
             label=' Description'
             fullWidth
             multiline
-            rows={4}
+            rows={3}
             value={formik.values.description}
             onChange={formik.handleChange}
             error={
@@ -81,7 +81,7 @@ const OfficeResourceFields = ({ onClose, isLoading, data }) => {
             InputLabelProps={{
               shrink: Boolean(formik.values.description),
             }}
-            rows={4}
+            rows={3}
             inputProps={{ maxLength: 255 }}
           />
         </Grid>

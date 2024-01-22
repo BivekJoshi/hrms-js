@@ -99,7 +99,7 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
             label="Description"
             fullWidth
             multiline
-            rows={4}
+            rows={3}
             value={formik.values.branchDescription}
             onChange={formik.handleChange}
             error={
@@ -126,7 +126,7 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
             InputLabelProps={{
               shrink: Boolean(formik.values.branchDescription),
             }}
-            rows={4}
+            rows={3}
             inputProps={{ maxLength: 255 }}
             data={data?.branchDescription}
           />

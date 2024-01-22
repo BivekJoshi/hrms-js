@@ -67,7 +67,7 @@ const TodoListFields = ({ onClose, isLoading, data }) => {
               InputLabelProps={{
                 shrink: Boolean(formik.values.message),
               }}
-              rows={4}
+              rows={3}
               inputProps={{ maxLength: 255 }}
             />
           ) : (
@@ -85,7 +85,7 @@ const TodoListFields = ({ onClose, isLoading, data }) => {
               InputLabelProps={{
                 shrink: Boolean(formik.values.message),
               }}
-              rows={4}
+              rows={3}
               inputProps={{ maxLength: 255 }}
             />
           )}
@@ -117,7 +117,7 @@ const TodoListFields = ({ onClose, isLoading, data }) => {
             InputLabelProps={{
               shrink: Boolean(formik.values.message),
             }}
-            rows={4}
+            rows={3}
             inputProps={{ maxLength: 255 }}
           /> */}
         </Grid>

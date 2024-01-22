@@ -105,7 +105,7 @@ const EditEmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
             InputLabelProps={{
               shrink: Boolean(formik.values.remarks),
             }}
-            rows={4}
+            rows={3}
             inputProps={{ maxLength: 255 }}
             data={data?.remarks}
           />
