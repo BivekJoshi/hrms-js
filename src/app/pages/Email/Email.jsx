@@ -39,6 +39,7 @@ function EmailForm({ employeeId, onClose, officeEmail }) {
         to: false,
         subject: false,
       });
+      onClose();
     }
   };
 

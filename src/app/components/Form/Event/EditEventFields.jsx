@@ -128,7 +128,7 @@ const EditEventFields = ({
             InputLabelProps={{
               shrink: Boolean(formik.values.eventDescription),
             }}
-            rows={4}
+            rows={3}
             inputProps={{ maxLength: 255 }}
           />
         </Grid>

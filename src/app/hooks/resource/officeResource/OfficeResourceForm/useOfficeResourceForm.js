@@ -5,6 +5,8 @@ import {
   useEditActiveInactiveOfficeResource,
 } from '../useOfficeResource';
 import { OfficeResourceSchema } from './OfficeResourceSchema';
+import { toast } from 'react-toastify';
+import { isEqual } from 'lodash';
 
 const useOfficeResourceForm = (data, onClose) => {
   const { mutate: addOfficeResource } = useAddOfficeResource({});
@@ -29,11 +31,16 @@ const useOfficeResourceForm = (data, onClose) => {
   };
 
   const handleEditAndDeactivate = (values) => {
-    editOfficeResource(values, {
-      onSuccess: () => {
-        onClose();
-      },
-    });
+    if (!isEqual(values, formik.initialValues)) {
+      editOfficeResource(values, {
+        onSuccess: () => {
+          onClose();
+        },
+      });
+    } else if (isEqual(values, formik.initialValues)) {
+      toast.warning("No changes were made");
+      onClose();
+    }
     // editDeactivatedOfficeResource(values, formik);
   };
 

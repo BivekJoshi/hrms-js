@@ -106,7 +106,7 @@ const AddEventFields = ({ formik, data }) => {
             label='Description'
             fullWidth
             multiline
-            rows={4}
+            rows={3}
             value={formik.values.eventDescription}
             onChange={formik.handleChange}
             error={
@@ -135,7 +135,7 @@ const AddEventFields = ({ formik, data }) => {
             InputLabelProps={{
               shrink: Boolean(formik.values.eventDescription),
             }}
-            rows={4}
+            rows={3}
             inputProps={{ maxLength: 255 }}
           />
         </Grid>

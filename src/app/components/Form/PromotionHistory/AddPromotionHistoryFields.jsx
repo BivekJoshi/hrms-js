@@ -91,7 +91,7 @@ const AddPromotionHistoryFields = ({
             maxLength={255}
             variant='outlined'
             multiline
-            rows={4}
+            rows={3}
             inputProps={{ maxLength: 250 }}
           /> */}
           <RemarkField
@@ -104,7 +104,7 @@ const AddPromotionHistoryFields = ({
             variant="outlined"
             multiline
             InputLabelProps={{ shrink: Boolean(formik.values.remarks) }}
-            rows={4}
+            rows={3}
             inputProps={{ maxLength: 250 }}
           />
         </Grid>

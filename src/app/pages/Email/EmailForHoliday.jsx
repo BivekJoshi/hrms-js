@@ -10,23 +10,29 @@ import {
 const TypeOptions = [
   {
     value: "A",
-    label: "All Employee",
+    label: "All Employees",
     id: 1,
   },
   {
-    value: "F",
-    label: "Female Employee",
+    value: "M",
+    label: "Male Employees",
     id: 2,
   },
   {
-    value: "O",
-    label: "Other Employee",
+    value: "F",
+    label: "Female Employees",
     id: 3,
+  },
+  {
+    value: "O",
+    label: "Other Employees",
+    id: 4,
   },
 ];
 
 const EmailForHoliday = ({ getEventID, onClose }) => {
   const [emailData, setEmailData] = useState();
+  const [error, setError] = useState('');
   const [selectedValue, setSelectedValue] = useState("");
 
   const sendEmailMutation = useSendEmailForHoliday({
@@ -40,11 +46,17 @@ const EmailForHoliday = ({ getEventID, onClose }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if(!selectedValue) {
+      setError('Please select employees');
+      return;
+    }
+    setError('');
     sendEmailMutation.mutate(emailData);
   };
 
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
+    setError('');
   };
 
   return (
@@ -63,11 +75,13 @@ const EmailForHoliday = ({ getEventID, onClose }) => {
               select
               label="Select Employee"
               fullWidth
-              required
+              // required
               value={selectedValue}
               onChange={handleChange}
               variant="outlined"
               size="small"
+              error={Boolean(error)}
+              helperText={error}
             >
               {TypeOptions?.map((option) => (
                 <MenuItem key={option?.id} value={option?.value}>

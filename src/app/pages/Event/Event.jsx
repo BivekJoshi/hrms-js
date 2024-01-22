@@ -65,7 +65,10 @@ const Event = ({ permissions }) => {
     }
   }, [eventData]);
 
-  const handleCloseModal = () => setOpenAddModal(false);
+  const handleCloseModal = () => {
+    setOpenAddModal(false);
+    formik.handleReset();
+  };
   const { formik, eventId } = useEventForm(
     setOpenSubmitModal,
     handleCloseModal
@@ -99,7 +102,10 @@ const Event = ({ permissions }) => {
         <FormModal
           title={"Add Event"}
           open={openAddModal}
-          onClose={() => setOpenAddModal(false)}
+          onClose={() => {
+            setOpenAddModal(false);
+            formik.handleReset();
+          }}
           formComponent={
             <>
               {/*Import Event Field Here*/}
@@ -115,7 +121,6 @@ const Event = ({ permissions }) => {
                 <ButtonComponent
                   variant="contained"
                   OnClick={handleFormSubmit}
-                  disabled={!formik.dirty}
                   // sx={{ mt: 3, ml: 1 }}
                   buttonName={"Add Event"}
                 />

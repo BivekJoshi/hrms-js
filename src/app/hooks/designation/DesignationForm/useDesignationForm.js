@@ -1,7 +1,8 @@
-import { useFormik } from 'formik';
-import { useAddDesignation, useEditDesignation } from '../useDesignation';
-import { DesignationSchema } from '../Validation/DesignationSchema';
-import { isEqual } from 'lodash';
+import { useFormik } from "formik";
+import { useAddDesignation, useEditDesignation } from "../useDesignation";
+import { DesignationSchema } from "../Validation/DesignationSchema";
+import { isEqual } from "lodash";
+import { toast } from "react-toastify";
 
 const useDesignationForm = (data, onClose) => {
   const { mutate: addDesignation } = useAddDesignation({});
@@ -9,10 +10,10 @@ const useDesignationForm = (data, onClose) => {
 
   const formik = useFormik({
     initialValues: {
-      positionName: data?.positionName || '',
-      positionLevel: data?.positionLevel || '',
-      salary: data?.salary || '',
-      positionDetails: data?.positionDetails || '',
+      positionName: data?.positionName || "",
+      positionLevel: data?.positionLevel || "",
+      salary: data?.salary || "",
+      positionDetails: data?.positionDetails || "",
       id: data?.id,
     },
     validationSchema: DesignationSchema,
@@ -53,6 +54,9 @@ const useDesignationForm = (data, onClose) => {
           onClose();
         },
       });
+    } else if (isEqual(values, formik.initialValues)) {
+      toast.warning("No changes were made");
+      onClose();
     }
   };
 

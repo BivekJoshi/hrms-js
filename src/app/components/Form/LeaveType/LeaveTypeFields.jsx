@@ -181,7 +181,7 @@ const LeaveTypeFields = ({ onClose, isLoading, data, existingLeaveTypes }) => {
             InputLabelProps={{
               shrink: Boolean(formik.values.leaveDescription),
             }}
-            rows={4}
+            rows={3}
             inputProps={{ maxLength: 255 }}
             data={data?.leaveDescription}
           />
