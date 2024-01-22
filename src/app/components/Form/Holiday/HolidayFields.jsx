@@ -18,7 +18,10 @@ const HolidayFields = ({
         <FormModal
           title={"Add Holiday"}
           open={openAddModal}
-          onClose={() => setOpenAddModal(false)}
+          onClose={() => {
+            setOpenAddModal(false)
+            formik.handleReset();
+          }}
           formComponent={
             <Grid container spacing={3}>
               <Grid item xs={12} sm={12}>
