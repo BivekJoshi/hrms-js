@@ -71,7 +71,6 @@ export const DeactivatedLeaveTypeFields = ({ onClose, isLoading, data }) => {
       //   onClose();
     }
   };
-  console.log(data);
 
   return (
     !isLoading && (

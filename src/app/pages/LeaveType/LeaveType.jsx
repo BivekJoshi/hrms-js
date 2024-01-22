@@ -105,7 +105,7 @@ const LeaveType = ({ permissions }) => {
     deleteLeaveTypeMutation.mutate(deletedLeaveType);
     setOpenDeleteModal(false);
   };
-  console.log("deletedLeaveType", deletedLeaveType);
+ 
   const handleEditLeaveType = (rowData) => {
     setEditedLeaveType(rowData);
     setOpenEditModal(true);

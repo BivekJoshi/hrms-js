@@ -52,12 +52,10 @@ const Birthdaytable = ({ data, isloading, currMonth }) => {
           title: "Name",
           field: "fullName",
           sorting: false,
-          // cellStyle: (rowData) => ({
-          //   console.log(rowData)
+          // cellStyle: (rowData) => ({         
           //   // backgroundColor: rowData?.isTodayBirthday === true ? "red" : "blue",
           // }),
           // cellStyle: (rowData) => {
-          //   return console.log(rowData);
           // },
         },
         { title: "Position", field: "position", sorting: false },

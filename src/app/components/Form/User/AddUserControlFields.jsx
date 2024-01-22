@@ -21,7 +21,6 @@ export const AddUserControlFields = ({ onClose }) => {
     }
   };
 
-  // console.log({"employeeData": employeeData})
   const handleEmployeeChange = (event, selectedEmployee) => {
     if (selectedEmployee) {
       formik.setFieldValue("employeeId", selectedEmployee.id);

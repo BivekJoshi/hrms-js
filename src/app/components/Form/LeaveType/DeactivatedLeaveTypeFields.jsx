@@ -81,7 +81,7 @@ const DeactivatedLeaveTypeFields = ({ closeModal, title, permissions }) => {
     setActivateOfficeResource(rowData);
     setopenModal(true);
   };
-console.log("allLeaveTypeData", allLeaveTypeData)
+
   const columns = [
     {
       title: "SN",

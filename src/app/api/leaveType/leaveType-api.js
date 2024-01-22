@@ -67,9 +67,7 @@ export const deleteLeaveType = async (rowData) => {
   /*________________________DELETE_____________________________________*/
 }
 export const deactivateLeaveType = async ({data}) => {
-  
   const { id } = data;
-  console.log("rowData", id)
   const response = await axiosInstance.delete(
     `/leave-type/set-activation/${id}?isActive=false`
   );
