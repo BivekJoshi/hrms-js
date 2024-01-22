@@ -141,6 +141,7 @@ const EventAttendance = ({ permissions }) => {
         </div>
       ),
     },
+   
     {
       title: "User Confirmation",
       field: "status",
@@ -153,11 +154,11 @@ const EventAttendance = ({ permissions }) => {
           return <Chip color="success" label="Coming" />;
         } else
           return (
-            <Chip
-              color="error"
-              sx={{ pdfWidth: "max-content" }}
-              label="Not Coming"
-            />
+            <Tooltip title={rowData?.remarks} placement="top-start" arrow>
+            <div>
+              <Chip color="error" sx={{ pdfWidth: "max-content" }} label="Not Coming" />
+            </div>
+          </Tooltip>
           );
       },
     },
