@@ -4,6 +4,8 @@ import {
   useEditEmploymentType,
 } from "../useEmploymentType";
 import { EmploymentTypeSchema } from "./EmploymentTypeSchema";
+import { isEqual } from "lodash";
+import { toast } from "react-toastify";
 
 const useEmploymentTypeForm = (data, onClose) => {
   const { mutate: addEmploymentType } = useAddEmploymentType({});
@@ -38,11 +40,16 @@ const useEmploymentTypeForm = (data, onClose) => {
 
   const handledEditRequest = (values) => {
     values = { ...values };
-    editEmploymentType(values, {
-      onSuccess: () => {
-        onClose();
-      },
-    });
+    if (!isEqual(values, formik.initialValues)) {
+      editEmploymentType(values, {
+        onSuccess: () => {
+          onClose();
+        },
+      });
+    } else if (isEqual(values, formik.initialValues)) {
+      toast.warning("No changes were made");
+      onClose();
+    }
   };
   return { formik };
 };

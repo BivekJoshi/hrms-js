@@ -1,8 +1,8 @@
 import { useFormik } from "formik";
 import { DepartmentSchema } from "../Validation/DepartmentSchema";
 import { useAddDepartment, useEditDepartment } from "../useDepartment";
-import { isEqual } from 'lodash';
-import { toast } from 'react-toastify';
+import { isEqual } from "lodash";
+import { toast } from "react-toastify";
 
 const useDepartmentForm = (data, onClose) => {
   const { mutate: addDepartment } = useAddDepartment({});
@@ -29,10 +29,10 @@ const useDepartmentForm = (data, onClose) => {
   const handleRequest = (values) => {
     values = { ...values };
     addDepartment(values, {
-      onSuccess:()=>{
+      onSuccess: () => {
         onClose();
         formik.resetForm();
-      }
+      },
     });
   };
 
@@ -53,7 +53,10 @@ const useDepartmentForm = (data, onClose) => {
           onClose();
         },
       });
-    }c
+    } else if (isEqual(values, formik.initialValues)) {
+      toast.warning("No changes were made");
+      onClose();
+    }
   };
 
   return { formik };

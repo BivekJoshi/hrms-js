@@ -9,7 +9,7 @@ import UpdateIcon from "@mui/icons-material/Update";
 import RemarkField from "../../RemarkField/RemarkField";
 
 const EditHolidayFields = ({ onClose, isLoading, data, permissions }) => {
-  const { formik } = useEditHolidayForm(data);
+  const { formik } = useEditHolidayForm(data, onClose);
 
   const handleFormSubmit = async () => {
     const isValid = await formik.validateForm();
@@ -18,7 +18,7 @@ const EditHolidayFields = ({ onClose, isLoading, data, permissions }) => {
       formik.handleSubmit();
 
       if (formik.isValid) {
-        onClose();
+        // onClose();
         // setOpenSubmitModal(false);
       }
     }

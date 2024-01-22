@@ -1,6 +1,8 @@
 import { useFormik } from "formik";
 import { useAddLeaveType, useEditLeaveType } from "../useLeaveType";
 import { LeaveTypeSchema } from "../Validation/LeaveTypeScheme";
+import { toast } from "react-toastify";
+import { isEqual } from 'lodash';
 
 const useLeaveTypeForm = (data, onClose) => {
   const { mutate: addLeaveType } = useAddLeaveType({});
@@ -37,11 +39,16 @@ const useLeaveTypeForm = (data, onClose) => {
 
   const handledEditRequest = (values) => {
     values = { ...values };
-    editLeaveType(values, {
-      onSuccess: () => {
-        onClose();
-      },
-    });
+    if (!isEqual(values, formik.initialValues)) {
+      editLeaveType(values, {
+        onSuccess: () => {
+          onClose();
+        },
+      });
+    } else if (isEqual(values, formik.initialValues)) {
+      toast.warning("No changes were made");
+      onClose();
+    }
   };
   return { formik };
 };

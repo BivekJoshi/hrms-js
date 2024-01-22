@@ -20,16 +20,16 @@ export const useEditUserControlForm = ({ rowData }) => {
 
   const handleRequest = (values) => {
     values = { ...values };
-    if (!isEqual(values, formik.initialValues)) {
+    if (!isEqual(values, formik.initialValues) && values?.roleId) {
       mutate(values, {
         onSuccess: () => {
           formik.handleReset();
         },
       });
-    } else if (isEqual(values, formik.initialValues)) {
+    } else if (isEqual(values, formik.initialValues) || values?.roleId === null) {
       toast.warning("No changes were made");
     }
-  };  
+  }; 
 
   return { formik };
 };
