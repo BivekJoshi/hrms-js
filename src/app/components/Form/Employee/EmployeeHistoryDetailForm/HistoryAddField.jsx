@@ -200,7 +200,7 @@ const HistoryAddField = ({ formik }) => {
             InputLabelProps={{
               shrink: Boolean(formik.values.remarks),
             }}
-            rows={4}
+            rows={3}
             inputProps={{ maxLength: 255 }}
           />
         </Grid>

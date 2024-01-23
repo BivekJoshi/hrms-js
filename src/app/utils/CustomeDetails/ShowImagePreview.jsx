@@ -252,7 +252,7 @@ const ShowImagePreview = ({ row }) => {
       </TableCell>
     );
   });
-
+ 
   return (
     <>
       {singleDoc}

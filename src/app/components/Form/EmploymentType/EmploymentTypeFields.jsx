@@ -46,7 +46,7 @@ const EmploymentTypeFields = ({ onClose, isLoading, data }) => {
             InputLabelProps={{
               shrink: Boolean(formik.values.description),
             }}
-            rows={4}
+            rows={3}
             inputProps={{ maxLength: 255 }}
             data={data?.description}
           />
@@ -59,8 +59,7 @@ const EmploymentTypeFields = ({ onClose, isLoading, data }) => {
         >
           <Button
             variant="contained"
-            onClick={handleFormSubmit}
-            disabled={!formik?.dirty}
+            onClick={handleFormSubmit}           
             sx={{ mt: 3, ml: 1, textTransform: "capitalize" }}
           >
             {submitButtonText}

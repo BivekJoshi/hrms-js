@@ -105,7 +105,7 @@ const EditEmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
             InputLabelProps={{
               shrink: Boolean(formik.values.remarks),
             }}
-            rows={4}
+            rows={3}
             inputProps={{ maxLength: 255 }}
             data={data?.remarks}
           />
@@ -133,8 +133,7 @@ const EditEmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
         >
           <Button
             variant="contained"
-            onClick={handleFormSubmit}
-            disabled={!formik?.dirty}
+            onClick={handleFormSubmit}           
             sx={{ mt: 3, ml: 1 }}
           >
             Update Logistics

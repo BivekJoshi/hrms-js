@@ -55,7 +55,7 @@ const OfficeResource = ({ permissions }) => {
     {
       title: "SN",
       render: (rowData) => rowData.tableData.id + 1,
-      // width/: "2rem",
+      maxWidth: '12px',
       sorting: false,
     },
     {
@@ -69,14 +69,24 @@ const OfficeResource = ({ permissions }) => {
         </Typography>
       ),
       emptyValue: "-",
-      // width: "12rem",
       sorting: false,
     },
     {
       title: "Identification Number",
       field: "uniqueNumber",
+      render: (rowData) => (
+        <Typography
+          style={{
+            whiteSpace: "normal",
+            overflowWrap: "break-word",
+            wordWrap: "break-word",
+            wordBreak: "break-all",
+          }}
+        >
+          {rowData?.uniqueNumber}
+        </Typography>
+      ),
       emptyValue: "-",
-      // width: "12rem",
       sorting: false,
     },
     {
@@ -84,13 +94,17 @@ const OfficeResource = ({ permissions }) => {
       field: "description",
       render: (rowData) => (
         <Typography
-          style={{ overflowWrap: "break-word", wordBreak: "break-all" }}
+          style={{
+            whiteSpace: "normal",
+            overflowWrap: "break-word",
+            wordWrap: "break-word",
+            wordBreak: "break-all",
+          }}
         >
           {rowData?.description}
         </Typography>
       ),
       emptyValue: "-",
-      // width: "18rem",
       sorting: false,
     },
   ];
@@ -105,8 +119,8 @@ const OfficeResource = ({ permissions }) => {
             "&:hover": {
               color: "green",
             },
-            display:"flex",
-            alignItems:'flex-end'
+            display: "flex",
+            alignItems: "flex-end",
           }}
         />
       ),

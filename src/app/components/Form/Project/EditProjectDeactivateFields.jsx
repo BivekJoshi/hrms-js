@@ -115,20 +115,19 @@ export const EditProjectActivateFields = ({ onClose, isLoading, data }) => {
             variant="outlined"
             multiline
             InputLabelProps={{ shrink: Boolean(formik.values.remarks) }}
-            rows={4}
+            rows={3}
             inputProps={{ maxLength: 250 }}
           />
         </Grid>
-
+{/* 
         <Grid item xs={12} sm={12} textAlign="center">
           <Divider sx={{ width: "100%" }} />
-        </Grid>
+        </Grid> */}
         <Grid
           container
           direction="row"
-          justifyContent="center"
-          alignItems="center"
-          gap="28px"
+          justifyContent="flex-end"
+          alignItems="flex-end"
         >
           <Button
             variant="contained"

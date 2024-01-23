@@ -80,7 +80,7 @@ const EmploymentType = () => {
       title: 'Description',
       field: 'description',
       emptyValue: '-',
-      width: 420,
+      // width: 420,
       sorting: false,
       render: (rowData) => (
         <div
@@ -89,7 +89,7 @@ const EmploymentType = () => {
             overflowWrap: 'break-word',
             wordWrap: 'break-word',
             wordBreak: 'break-all',
-            // width: 400,
+            width: '18rem',
           }}
         >
           {rowData?.description}

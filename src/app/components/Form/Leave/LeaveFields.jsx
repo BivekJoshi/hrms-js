@@ -75,7 +75,7 @@ export const EditLeaveFields = ({ onClose, isLoading, data }) => {
               label="Message"
               fullWidth
               multiline
-              rows={4}
+              rows={3}
               value={formik.values.leaveRemarks}
               onChange={formik.handleChange}
               error={
@@ -102,7 +102,7 @@ export const EditLeaveFields = ({ onClose, isLoading, data }) => {
               InputLabelProps={{
                 shrink: Boolean(formik.values.leaveRemarks),
               }}
-              rows={4}
+              rows={3}
               inputProps={{ maxLength: 255 }}
             />
           </Grid>

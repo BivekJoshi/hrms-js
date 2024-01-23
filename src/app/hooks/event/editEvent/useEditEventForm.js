@@ -1,6 +1,8 @@
 import { useFormik } from 'formik';
 import { useEditEvent } from '../useEvent';
 import { EventSchema } from '../Validation/EventSchema';
+import { isEqual } from 'lodash';
+import { toast } from 'react-toastify';
 
 const useEditEventForm = (data, onClose) => {
   const { mutate } = useEditEvent({});
@@ -21,15 +23,17 @@ const useEditEventForm = (data, onClose) => {
     },
   });
   const handleRequest = (values) => {
-    values = {
-      ...values,
-    };
-    mutate(values, {
-      onSuccess: () => {
-        onClose();
-        formik.handleReset();
-      },
-    });
+    values = { ...values };
+    if (!isEqual(values, formik.initialValues)) {
+      mutate(values, {
+        onSuccess: () => {
+          onClose();
+        },
+      });
+    } else if (isEqual(values, formik.initialValues)) {
+      toast.warning("No changes were made");
+      onClose();
+    }
   };
 
   return { formik };

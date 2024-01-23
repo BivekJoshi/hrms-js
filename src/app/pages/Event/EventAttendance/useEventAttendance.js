@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
 import { getAllEmployeeData } from "../../../api/employee/employee-api";
-import { getEvent } from "../../../api/event/event-api";
+import { getEvent, getEventAttenderList } from "../../../api/event/event-api";
 
 const employeeOptions = (data) => {
   if (data) {
@@ -46,4 +46,16 @@ export const useGetAllEvent = () => {
     eventAllData: getQuery?.data,
     isLoading: getQuery.isLoading,
   };
+};
+
+export const useGetAllEventAttendance = (searchParams) => {
+  const { data, isLoading, error } = useQuery(
+    ['getEventAttenderList', searchParams],
+    async () => {
+      const eventData = await getEventAttenderList(searchParams);
+      return eventData?.events;
+    }
+  );
+
+  return { queryData: data, queryLoading: isLoading, queryError: error };
 };

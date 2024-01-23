@@ -1,7 +1,13 @@
 import * as Yup from "yup";
 
-const UserSchema = Yup.object().shape({
-  employeeId: Yup.string().required("Please select an employee"),
+const UserAddSchema = Yup.object().shape({
+  // employeeId: Yup.string().required("Please select an employee"),
 });
 
-export { UserSchema };
+export { UserAddSchema };
+
+const UserEditSchema = Yup.object().shape({
+  roleId: Yup.string().required("Please select role"),
+});
+
+export { UserEditSchema };

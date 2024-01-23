@@ -2,6 +2,7 @@ import { useFormik } from 'formik';
 import { useAddCompany, useEditCompany } from '../useCompany';
 import { CompanySchema } from '../Validation/CompanySchema';
 import { isEqual } from 'lodash';
+import { toast } from 'react-toastify';
 
 const useCompanyForm = (data, onClose) => {
   const { mutate: addCompany } = useAddCompany({});
@@ -54,6 +55,9 @@ const useCompanyForm = (data, onClose) => {
           onClose();
         },
       });
+    } else if (isEqual(values, formik.initialValues)) {
+      toast.warning("No changes were made");
+      onClose();
     }
   };
 

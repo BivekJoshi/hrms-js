@@ -13,7 +13,6 @@ export const documentType = [
     desc: '* Curriculum vitae format must be in jpeg/png/jpg',
     fileSize: '* File size should be max 5MB',
     accept: 'image/*',
-
     id: 2,
   },
   {
