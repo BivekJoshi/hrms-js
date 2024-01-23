@@ -1,28 +1,33 @@
-import { Box, CardMedia, Typography } from '@mui/material';
-import React, { useContext, useEffect } from 'react';
-import Male from '../../../../assets/male.png';
-import '../../Style/Style.css';
-import { LeftEmployDashbord } from './LeftEmployDashbord';
-import { RightEmployDashbord } from './RightEmployDashbord';
-import ThemeModeContext from '../../../../theme/ThemeModeContext';
-import { useGetLoggedInUser } from '../../../hooks/auth/usePassword';
-import { MiddleEmployDashbord } from './MiddleEmployDashbord';
-import { useGetTaskLoggedInUser } from '../../../hooks/project/ProjectTask/useProjectTask';
-import { useGetProjectWiseEmployee } from '../../../hooks/project/useProject';
-import { DOC_URL } from '../../../../auth/axiosInterceptor';
-import Project from '../../../../assets/eproject.png';
-import Task from '../../../../assets/etask.png';
-import Pending from '../../../../assets/pending.png';
-import Complet from '../../../../assets/ecomplet.png';
-import EmployTaskCard from '../Component/EmployTaskCard';
-import { useDispatch } from 'react-redux';
-import { setUserDetails } from '../../../../Redux/Slice/userSlice';
+import { Box, CardMedia, Typography } from "@mui/material";
+import React, { useContext, useEffect } from "react";
+import Male from "../../../../assets/male.png";
+import Female from "../../../../assets/female.png";
+import "../../Style/Style.css";
+import { LeftEmployDashbord } from "./LeftEmployDashbord";
+import { RightEmployDashbord } from "./RightEmployDashbord";
+import ThemeModeContext from "../../../../theme/ThemeModeContext";
+import { useGetLoggedInUser } from "../../../hooks/auth/usePassword";
+import { MiddleEmployDashbord } from "./MiddleEmployDashbord";
+import { useGetTaskLoggedInUser } from "../../../hooks/project/ProjectTask/useProjectTask";
+import { useGetProjectWiseEmployee } from "../../../hooks/project/useProject";
+import { DOC_URL } from "../../../../auth/axiosInterceptor";
+import Project from "../../../../assets/eproject.png";
+import Task from "../../../../assets/etask.png";
+import Pending from "../../../../assets/pending.png";
+import Complet from "../../../../assets/ecomplet.png";
+import EmployTaskCard from "../Component/EmployTaskCard";
+import { useDispatch } from "react-redux";
+import { setUserDetails } from "../../../../Redux/Slice/userSlice";
+import { useGetEmployeeById } from "../../../hooks/employee/useEmployee";
 
 const EmployeeDashbord = ({}) => {
   const { data: employData } = useGetLoggedInUser();
   const { mode } = useContext(ThemeModeContext);
   const url = DOC_URL;
-
+  const { data: employeeDataById, isLoading } = useGetEmployeeById(
+    employData?.employeeId
+  );
+  const EGender = employeeDataById && employeeDataById?.gender;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -57,77 +62,83 @@ const EmployeeDashbord = ({}) => {
       borderColor: "#3399FF",
     },
     {
-      title: 'Total Task',
+      title: "Total Task",
       // numberOfTask: loginUsertask ? loginUsertask.length : 0,
       taskIcon: Task,
-      linkTo: '/employee/project',
-      borderColor: '#FF8A7B',
+      linkTo: "/employee/project",
+      borderColor: "#FF8A7B",
     },
     {
-      title: 'Pending Task',
+      title: "Pending Task",
       // numberOfTask: taskPendingData ? taskPendingData.length : 0,
       taskIcon: Pending,
-      linkTo: '/employee/project',
-      borderColor: '#F8B114',
+      linkTo: "/employee/project",
+      borderColor: "#F8B114",
     },
     {
-      title: 'Completed Task',
+      title: "Completed Task",
       // numberOfTask: taskCompleteData ? taskCompleteData.length : 0,
       taskIcon: Complet,
-      linkTo: '/employee/project',
-      borderColor: '#108A23',
+      linkTo: "/employee/project",
+      borderColor: "#108A23",
     },
   ];
   const today = new Date();
   const options = {
-    weekday: 'long',
-    month: 'long',
-    day: 'numeric',
-    year: 'numeric',
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+    year: "numeric",
   };
+ 
   const formattedDate = today.toLocaleDateString(undefined, options);
+  const imageFinal = employData?.userPhotoPath
+    ? `${url}${employData?.userPhotoPath}`
+    : EGender === "MALE"
+    ? Male
+    : Female;
 
   return (
-    <Box display='grid' gridTemplateRows='1fr' gap='1rem'>
+    <Box display="grid" gridTemplateRows="1fr" gap="1rem">
       <Box
-        display='flex'
-        justifyContent='space-between'
-        padding='1rem'
+        display="flex"
+        justifyContent="space-between"
+        padding="1rem"
         className={
-          mode === 'light' ? 'employeeDeshbordBG' : 'employeeDeshbordBGDark'
+          mode === "light" ? "employeeDeshbordBG" : "employeeDeshbordBGDark"
         }
-        boxShadow='7'
-        borderRadius='10px'
+        boxShadow="7"
+        borderRadius="10px"
       >
         <CardMedia
-          component='img'
-          src={employData?.userPhotoPath ? `${url}${employData?.userPhotoPath}` : Male}
-          alt='Paella dish'
-          sx={{ width: 66, height: 66, borderRadius: '2rem' }}
+          component="img"
+          src={imageFinal}
+          alt="Paella dish"
+          sx={{ width: 66, height: 66, borderRadius: "2rem" }}
         />
         <Box
           style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            width: '100%',
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            width: "100%",
           }}
         >
-          <Typography variant='h6' paddingLeft='1rem'>
+          <Typography variant="h6" paddingLeft="1rem">
             Welcome, <br></br>
             {employData?.name}
           </Typography>
-          <Typography variant='h6' style={{ maxWidth: '200px' }}>
+          <Typography variant="h6" style={{ maxWidth: "200px" }}>
             {formattedDate}
           </Typography>
         </Box>
       </Box>
 
       <Box
-        display='grid'
-        gridTemplateColumns='repeat(auto-fit, minmax(225px, 1fr))'
-        gap='1rem'
-        padding='2rem 0 0'
+        display="grid"
+        gridTemplateColumns="repeat(auto-fit, minmax(225px, 1fr))"
+        gap="1rem"
+        padding="2rem 0 0"
       >
         {task.map((taskDetail, index) => (
           <EmployTaskCard
@@ -142,7 +153,12 @@ const EmployeeDashbord = ({}) => {
         {/* <EmployPichart task={task}/> */}
       </Box>
       {/* <MiddleEmployDashbord employData={employData} /> */}
-      <Box display='grid' gridTemplateColumns={{md:'5fr 4fr', xs:"1fr"}} gap='3rem' padding="2rem 0">
+      <Box
+        display="grid"
+        gridTemplateColumns={{ md: "5fr 4fr", xs: "1fr" }}
+        gap="3rem"
+        padding="2rem 0"
+      >
         <LeftEmployDashbord />
         <RightEmployDashbord employData={employData} />
       </Box>

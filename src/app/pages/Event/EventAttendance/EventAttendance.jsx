@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useGetEventAttenderList } from "../../../hooks/event/useEvent";
 import PermissionHoc from "../../../hoc/permissionHoc";
 import HocButton from "../../../hoc/hocButton";
@@ -8,14 +8,18 @@ import DoneSharpIcon from "@mui/icons-material/DoneSharp";
 import CloseSharpIcon from "@mui/icons-material/CloseSharp";
 import { EditEventAttendanceModal } from "../EventModal/EventModal";
 import NewFilter from "../../../components/NewFilter/NewFilter";
-import { useGetAllEvent, useGetAllEventAttendance, usegetAllEmployeeData } from "./useEventAttendance";
+import {
+  useGetAllEvent,
+  useGetAllEventAttendance,
+  usegetAllEmployeeData,
+} from "./useEventAttendance";
 import { Badge, Chip, Tooltip, Typography } from "@mui/material";
 import { getEventAttenderList } from "../../../api/event/event-api";
 import { toast } from "react-toastify";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
-import { useQuery } from 'react-query';
 
 const EventAttendance = ({ permissions }) => {
+  const { mode, palette } = useContext(ThemeModeContext);
   const { employeeData, employeeAllData } = usegetAllEmployeeData();
   const { eventData, eventAllData } = useGetAllEvent();
   const columns = [
@@ -81,10 +85,10 @@ const EventAttendance = ({ permissions }) => {
       render: (rowData) => (
         <div
           style={{
-            whiteSpace: 'normal',
-            overflowWrap: 'break-word',
-            wordWrap: 'break-word',
-            wordBreak: 'break-all',
+            whiteSpace: "normal",
+            overflowWrap: "break-word",
+            wordWrap: "break-word",
+            wordBreak: "break-all",
           }}
         >
           {rowData?.eventName}
@@ -115,10 +119,10 @@ const EventAttendance = ({ permissions }) => {
       render: (rowData) => (
         <div
           style={{
-            whiteSpace: 'normal',
-            overflowWrap: 'break-word',
-            wordWrap: 'break-word',
-            wordBreak: 'break-all',
+            whiteSpace: "normal",
+            overflowWrap: "break-word",
+            wordWrap: "break-word",
+            wordBreak: "break-all",
           }}
         >
           {rowData?.eventLocation}
@@ -131,17 +135,16 @@ const EventAttendance = ({ permissions }) => {
       render: (rowData) => (
         <div
           style={{
-            whiteSpace: 'normal',
-            overflowWrap: 'break-word',
-            wordWrap: 'break-word',
-            wordBreak: 'break-all',
+            whiteSpace: "normal",
+            overflowWrap: "break-word",
+            wordWrap: "break-word",
+            wordBreak: "break-all",
           }}
         >
           {rowData?.eventDescription}
         </div>
       ),
     },
-   
     {
       title: "User Confirmation",
       field: "status",
@@ -152,15 +155,59 @@ const EventAttendance = ({ permissions }) => {
       render: (rowData) => {
         if (rowData?.status === "OK") {
           return <Chip color="success" label="Coming" />;
-        } else
+        } else {
+          const tooltipContentStyle = {
+           textAlign: 'center',
+           background: mode === 'light' ?  palette?.background?.main : palette?.background?.default
+          };
+      
           return (
-            <Tooltip title={rowData?.remarks} placement="top-start" arrow>
             <div>
-              <Chip color="error" sx={{ pdfWidth: "max-content" }} label="Not Coming" />
+              <Tooltip
+                title={
+                  <div style={tooltipContentStyle}>
+                    <p style={{ fontWeight: 'bold', marginBottom: '4px' }}>
+                      Reason For Absent:
+                    </p>
+                    <br />
+                    <p>{rowData?.remarks}</p>
+                  </div>
+                }
+                placement="top-start"
+                arrow
+              >
+                <Chip
+                  color="error"
+                  sx={{ pdfWidth: "max-content" }}
+                  label="Not Coming"
+                />
+              </Tooltip>
             </div>
-          </Tooltip>
           );
+        }
       },
+      
+      
+      // render: (rowData) => {
+      //   if (rowData?.status === "OK") {
+      //     return <Chip color="success" label="Coming" />;
+      //   } else
+      //     return (
+      //       <div>
+      //         <Tooltip
+      //           title={`Reason For Not Attending Event : <br /> ${rowData?.remarks}`}
+      //           placement="top-start"
+      //           arrow
+      //         >
+      //           <Chip
+      //             color="error"
+      //             sx={{ pdfWidth: "max-content" }}
+      //             label="Not Coming"
+      //           />
+      //         </Tooltip>
+      //       </div>
+      //     );
+      // },
     },
     {
       title: "Attended",
@@ -195,7 +242,8 @@ const EventAttendance = ({ permissions }) => {
 
   const handleCloseEditModal = () => setOpenEditModal(false);
   const [searchParams, setSearchParams] = useState({});
-  const { queryData, queryLoading, queryError } = useGetAllEventAttendance(searchParams);
+  const { queryData, queryLoading, queryError } =
+    useGetAllEventAttendance(searchParams);
   const [isLoading, setisLoading] = useState(false);
 
   const [tableData, setTableData] = useState([]);
@@ -225,7 +273,7 @@ const EventAttendance = ({ permissions }) => {
       xs: 6,
     },
   ];
-  const { mode } = React.useContext(ThemeModeContext);
+  // const { mode } = React.useContext(ThemeModeContext);
 
   const actions = [
     {

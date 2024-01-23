@@ -22,7 +22,7 @@ export const DetailProfile = ({ data, role, setShowPersonalProfile }) => {
   const [value, setValue] = React.useState("1");
   const { palette, mode } = React.useContext(ThemeModeContext);
   const auth = useAuth();
-// console.log({"employeeId": employeeId, "data": data })
+  
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
