@@ -4,7 +4,7 @@ import { useGetTodoList } from "../../../hooks/todoList/useTodoList";
 import { ButtonComponent } from "../../../components/Button/ButtonComponent";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
 import Todo from "../../../../assets/todo.png";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const ToDoList = () => {
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ const ToDoList = () => {
 
   return (
     <Grid display="flex" flexDirection="column" gap="1rem">
-      <Typography variant="h5">Todo List </Typography>
+      <Typography variant="h5">Todo List</Typography>
       <Grid display="grid" gap="1rem">
         {todoListData?.length > 0 ? (
           todoListData?.slice(0, 3).map((notify, index) => (
@@ -42,11 +42,13 @@ const ToDoList = () => {
                   flexDirection="row"
                   alignItems="center"
                   gap={2}
+                  padding='0 1rem'
                 >
                   <div
                     style={{
                       border: "1px solid #E0E0E0",
                       borderRadius: "6px 6px 0 0",
+                      
                     }}
                   >
                     <Typography
@@ -68,7 +70,16 @@ const ToDoList = () => {
                       {getUpcomingDay(notify?.dueDate).day}
                     </Typography>
                   </div>
-                  <Typography fontWeight={600} fontSize="14px">
+                  <Typography
+                    fontWeight={500}
+                    fontSize="14px"
+                    sx={{
+                      overflowWrap: "break-word",
+                      textTransform: "capitalize",
+                      wordBreak: "break-all",
+                      textTransform: 'justify'
+                    }}
+                  >
                     {notify?.message}
                   </Typography>
                 </Grid>
@@ -90,7 +101,7 @@ const ToDoList = () => {
                         ? "red"
                         : "orange",
                     color: "white",
-                    width: " 5rem",
+                    minWidth: "4rem",
                   }}
                 />
               </Grid>

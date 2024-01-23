@@ -3,7 +3,7 @@ import { useAddEventConfirmaation } from "../useEvent";
 import * as Yup from "yup";
 
 const validateSchema = Yup.object().shape({
-  remarks: Yup.string().required("Remarks is Required"),
+  remarks: Yup.string().required("Remarks is required"),
 });
 
 const useEventConfirmationForm = (data) => {
@@ -17,7 +17,7 @@ const useEventConfirmationForm = (data) => {
       remarks: "",
     },
 
-    // validationSchema: validateSchema,
+    validationSchema: validateSchema,
     enableReinitialize: true,
 
     onSubmit: (values) => {
