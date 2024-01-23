@@ -67,6 +67,7 @@ export const LeftEmployDashbord = ({}) => {
   };
 
   return (
+    <>
     <Grid display="flex" flexDirection="column" gap="2rem">
       <Grid display="flex" flexDirection="column" gap="1rem">
         <Typography variant="h5">Upcoming Events </Typography>
@@ -258,5 +259,7 @@ export const LeftEmployDashbord = ({}) => {
         )}
       </Grid>
     </Grid>
+    </>
+    
   );
 };

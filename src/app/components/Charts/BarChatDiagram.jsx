@@ -37,6 +37,11 @@ const BarChatDiagram = ({ data }) => {
         },
       },
     },
+    exporting: {
+      bgcolor: 'red',
+      enabled: true,
+      
+    },
     colors: barColors,
     dataLabels: {
       enabled: true,
@@ -100,9 +105,14 @@ const BarChatDiagram = ({ data }) => {
         height={300}
       />
       <style>
-        {`
+      {`
           .apexcharts-menu {
             min-width: 120px;
+          }
+          .apexcharts-menu.apexcharts-menu-open {
+            background: ${mode === "light" ? "white" : "#3f413f"};
+            color: ${mode === "light" ? "black" : "white"};
+           
           }
         `}
       </style>

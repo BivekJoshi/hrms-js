@@ -210,7 +210,7 @@ const HistoryAddField = ({ formik }) => {
         <Grid item xs={12}>
           <FormLabel component="legend">Upload Experience Document</FormLabel>
           <div style={{ display: "flex" }}>
-            <Input
+            <input
               type="file"
               accept="image/*"
               fullWidth

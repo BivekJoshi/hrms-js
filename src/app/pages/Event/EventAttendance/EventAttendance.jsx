@@ -11,7 +11,7 @@ import NewFilter from "../../../components/NewFilter/NewFilter";
 import {
   useGetAllEvent,
   useGetAllEventAttendance,
-  usegetAllEmployeeData,
+  useGetUserControl,
 } from "./useEventAttendance";
 import { Badge, Chip, Tooltip, Typography } from "@mui/material";
 import { getEventAttenderList } from "../../../api/event/event-api";
@@ -20,7 +20,8 @@ import ThemeModeContext from "../../../../theme/ThemeModeContext";
 
 const EventAttendance = ({ permissions }) => {
   const { mode, palette } = useContext(ThemeModeContext);
-  const { employeeData, employeeAllData } = usegetAllEmployeeData();
+  // const { employeeData, employeeAllData } = usegetAllEmployeeData();
+  const { employeeData, employeeAllData } = useGetUserControl();
   const { eventData, eventAllData } = useGetAllEvent();
   const columns = [
     {
@@ -154,19 +155,22 @@ const EventAttendance = ({ permissions }) => {
       align: "center",
       render: (rowData) => {
         if (rowData?.status === "OK") {
-          return <Chip color="success" label="Coming" />;
+          return <Chip sx={{ color: "#fff" }} color="success" label="Coming" />;
         } else {
           const tooltipContentStyle = {
-           textAlign: 'center',
-           background: mode === 'light' ?  palette?.background?.main : palette?.background?.default
+            textAlign: "center",
+            background:
+              mode === "light"
+                ? palette?.background?.main
+                : palette?.background?.default,
           };
-      
+
           return (
             <div>
               <Tooltip
                 title={
                   <div style={tooltipContentStyle}>
-                    <p style={{ fontWeight: 'bold', marginBottom: '4px' }}>
+                    <p style={{ fontWeight: "bold", marginBottom: "4px" }}>
                       Reason For Absent:
                     </p>
                     <br />
@@ -186,8 +190,7 @@ const EventAttendance = ({ permissions }) => {
           );
         }
       },
-      
-      
+
       // render: (rowData) => {
       //   if (rowData?.status === "OK") {
       //     return <Chip color="success" label="Coming" />;
@@ -216,7 +219,11 @@ const EventAttendance = ({ permissions }) => {
         if (rowData?.isPresent) {
           return (
             <div>
-              <Badge color="success" badgeContent="Yes" />
+              <Badge
+                sx={{ ".css-1k15tnj-MuiBadge-badge": { color: "#fff" } }}
+                color="success"
+                badgeContent="Yes"
+              />
             </div>
           );
         } else

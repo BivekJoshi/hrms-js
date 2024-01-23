@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useGetDeactivatedOfficeResource } from "../../../hooks/resource/officeResource/useOfficeResource";
 import {
   Box,
@@ -12,7 +12,10 @@ import {
 import { OfficeResourceLogisticsModal } from "./OfficeResourceModal";
 import CustomTable from "../../../components/CustomTable/CustomTable";
 import AddTaskIcon from "@mui/icons-material/AddTask";
+import ThemeModeContext from '../../../../theme/ThemeModeContext';
+
 const DeactivatedOfficeResource = ({ closeModal, title }) => {
+  const { mode } = useContext(ThemeModeContext);
   const { data, isLoading } = useGetDeactivatedOfficeResource();
   const [openModal, setopenModal] = useState(false);
   const [activateOfficeResource, setActivateOfficeResource] = useState({});
@@ -68,7 +71,7 @@ const DeactivatedOfficeResource = ({ closeModal, title }) => {
           <IconButton onClick={() => handleActivate(rowData)}>
             <AddTaskIcon
               sx={{
-                color: "black",
+                color: mode=== 'light' ? 'black' : "white",
                 "&:hover": {
                   color: "green",
                 },

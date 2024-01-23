@@ -431,6 +431,15 @@ const NewLogin = () => {
           </Grid>
         </Grid>
       </div>
+      <style>
+        {`
+        @media (min-width: 600px)
+        <style>
+        .css-1k0jequ {
+            padding-left: 0 !important;
+             padding-right: 0 !important;
+        `}
+      </style>
     </div>
   );
 };
