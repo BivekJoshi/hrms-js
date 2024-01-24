@@ -80,7 +80,7 @@ const EmploymentType = () => {
       title: 'Description',
       field: 'description',
       emptyValue: '-',
-      width: 420,
+      width: "100%",
       sorting: false,
       render: (rowData) => (
         <div

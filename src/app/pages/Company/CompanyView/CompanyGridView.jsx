@@ -10,7 +10,7 @@ import {
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
 import CompanyGrid from "../../../../assets/companyGrid.png";
 import PopOver from "../../../../theme/overrides/PopOver";
-import NewFilter from '../../../components/NewFilter/NewFilter';
+import NewFilter from "../../../components/NewFilter/NewFilter";
 
 const CompanyGridView = ({
   permissions,
@@ -21,13 +21,10 @@ const CompanyGridView = ({
 }) => {
   const { palette } = useContext(ThemeModeContext); // Accessing mode from context
 
-const [nameFilter, setNameFilter] = useState("");
+  const [nameFilter, setNameFilter] = useState("");
 
-  const filteredBranch = companyData?.filter(
-    (branch) =>
-      `${branch.branchName}`
-        ?.toLowerCase()
-        ?.includes(nameFilter.toLowerCase())
+  const filteredBranch = companyData?.filter((branch) =>
+    `${branch.branchName}`?.toLowerCase()?.includes(nameFilter.toLowerCase())
   );
   const handleClearSearch = () => {
     setNameFilter("");
@@ -42,12 +39,12 @@ const [nameFilter, setNameFilter] = useState("");
       value: nameFilter,
       setSearch: handleClearSearch,
       onChange: (e) => setNameFilter(e.target.value),
-    }
+    },
   ];
 
   return (
     <>
-     <NewFilter inputField={filterMenu} disableSubmit={true} />
+      <NewFilter inputField={filterMenu} disableSubmit={true} />
       <Grid
         container
         spacing={2}
@@ -112,7 +109,12 @@ const [nameFilter, setNameFilter] = useState("");
                   ? item.branchAddress.slice(0, 30) + "..."
                   : item.branchAddress}
               </Typography>
-
+              <Typography sx={{ display: "flex", justifyContent: "center" }}>
+                {item?.branchContact}{" "}
+                <div style={{ color: "blue", textDecoration: "underline" }}>
+                  ({item?.branchEmail})
+                </div>
+              </Typography>
               <br />
               <Typography
                 variant="p"
