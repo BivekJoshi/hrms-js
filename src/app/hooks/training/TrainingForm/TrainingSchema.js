@@ -9,7 +9,8 @@ const TrainingSchema = Yup.object().shape({
     .max(50, "Training Level cannot be greater than 50  characters"),
   trainingInstitute: Yup.string()
     .required("Training Institute is required")
-    .max(50, "Training Institute cannot be greater than 50  characters"),
+    .max(50, "Training Institute cannot be greater than 50  characters")
+    .min(8, 'Training institute must be at least 8 characters'),
   category: Yup.string()
     .required("Category is required")
     .max(50, "Training category cannot be greater than 50  characters"),

@@ -59,7 +59,8 @@ const NewEmployeeHistoryDetailForm = ({employeeId}) => {
         renderFeilds={<HistoryAddField formik={formik} />}
         isLoading={isLoading}
         handleFormSubmit={handleSubmit}
-        isSubmitSuccess={isFormSubmitSuccess || isEditSuccess}
+        isSubmitSuccess={isFormSubmitSuccess}
+        isEditSuccess={isEditSuccess}
         deleteCallBack={handleDeleteHistory}
         modalWidth={500}
         // modalHeight={"70vh"}
