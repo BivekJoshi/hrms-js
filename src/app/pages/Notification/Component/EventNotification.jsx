@@ -31,8 +31,7 @@ export const EventNotification = ({ data, handleClose }) => {
     formik.setFieldValue("notificationId", notificationId);
     formik.handleSubmit();
     handleClose();
-  };
- 
+  };  
 
   const getUpcomingDay = (eventDate) => {
     const eventDateObject = new Date(eventDate);
@@ -160,6 +159,10 @@ export const EventNotification = ({ data, handleClose }) => {
                       color: "green",
                       textTransform: "none",
                       fontWeight: "bold",
+                      "&:hover": {
+                        backgroundColor: "#2ab52a",
+                        color: '#fff',
+                      },
                     }}
                     startIcon={<DoneIcon />}
                     onClick={() =>
@@ -174,6 +177,10 @@ export const EventNotification = ({ data, handleClose }) => {
                       color: "red",
                       textTransform: "none",
                       fontWeight: "bold",
+                      "&:hover": {
+                        backgroundColor: "#a52424",
+                        color: '#fff',
+                      },
                     }}
                     startIcon={<CloseIcon />}
                     onClick={() =>
