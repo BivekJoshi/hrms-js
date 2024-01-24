@@ -226,7 +226,7 @@ const routes = [
     component: <ApplyLeaveLayout />,
   },
   {
-    path: 'applyleavefield',
+    path: 'applyleave',
     name: 'Apply Leave',
     id: nanoid(),
     component: <ApplyLeaveField />,

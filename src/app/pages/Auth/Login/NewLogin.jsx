@@ -15,7 +15,7 @@ import poweredBy from "../../../../assets/poweredBy.jpg";
 import { LoadingButton } from "@mui/lab";
 import { Link, useNavigate } from "react-router-dom";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import MailOutlineRoundedIcon from '@mui/icons-material/MailOutlineRounded';
+import MailOutlineRoundedIcon from "@mui/icons-material/MailOutlineRounded";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
 import { useLoginForm } from "../../../../auth/hooks/component/login/useLoginForm";
 import Bg from "../../../../assets/bg.png";

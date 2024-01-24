@@ -19,6 +19,7 @@ import {
   Grid,
   SwipeableDrawer,
   Tooltip,
+  Typography,
 } from "@mui/material";
 import ProjectTaskField from "../../../components/Form/Project/ProjectTask/ProjectTaskFields";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -95,7 +96,19 @@ const ProjectTask = ({ permissions }) => {
       title: "Details",
       field: "detail",
       emptyValue: "-",
-      width: "80",
+      render: (rowData) => (
+        <Typography
+          style={{
+            whiteSpace: "normal",
+            overflowWrap: "break-word",
+            wordWrap: "break-word",
+            wordBreak: "break-all",
+            width: '16rem',
+          }}
+        >
+          {rowData?.detail}
+        </Typography>
+      ),
     },
     {
       title: "DueDate",

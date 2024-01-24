@@ -39,6 +39,8 @@ const CustomeEmployeeDetails = ({
   modalHeight,
   showDocumentImg,
   showAddButton,
+  isEditSuccess
+
 }) => {
   const [openAddModal, setOpenAddModal] = useState(false);
   const [selectedRowId, setSelectedRowId] = useState();
@@ -65,7 +67,10 @@ const CustomeEmployeeDetails = ({
     if (isSubmitSuccess) {
       setOpenAddModal(false);
     }
-  }, [isSubmitSuccess]);
+    if(isEditSuccess){
+      setOpenAddModal(false);
+    }
+  }, [isSubmitSuccess,isEditSuccess]);
 
   useEffect(() => {
     if (auth?.isEmployee) {

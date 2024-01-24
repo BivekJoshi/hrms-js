@@ -37,3 +37,10 @@ body {
   top: 50% !important;
   border-radius: 1rem;
 }
+
+
+/* in deploy white line in both side is comming */
+.css-1k0jequ {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}

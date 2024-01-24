@@ -23,6 +23,7 @@ const useApplyLeaveForm = (data) => {
       halfLeaveType: data?.halfLeaveType || "NONE",
       leaveStatus: data?.leaveStatus || "PENDING",
       leaveRemarks: data?.leaveRemarks || "",
+      leavePeriod: '',
     },
     validationSchema: data ? EditLeaveSchema : LeaveSchema,
     enableReinitialize: true,
