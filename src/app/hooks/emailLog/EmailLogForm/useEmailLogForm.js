@@ -1,8 +1,8 @@
 import { useFormik } from "formik";
 import { usePostResendEmail } from "../useEmailLog";
 
-const useEmailResendForm = (passId) => {
-  const { mutate: resendEmail } = usePostResendEmail({passId});
+const useEmailResendForm = (passId,emailType) => {
+  const { mutate: resendEmail } = usePostResendEmail({passId,emailType});
 
   const formik = useFormik({
     initialValues: {
