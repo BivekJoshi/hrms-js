@@ -112,7 +112,7 @@ export const useEditEmployeeHistory = ({ onSuccess }) => {
   );
   return {
     editHistoryMutate: mutateEditHistory.mutate,
-    isSuccess: mutateEditHistory.isSuccess || false,
+    isSuccess: mutateEditHistory.isSuccess ? true : false,
   };
 };
 
