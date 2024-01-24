@@ -43,7 +43,7 @@ const TodoList = ({ permissions }) => {
     {
       title: "SN",
       render: (rowData) => rowData.tableData.id + 1,
-      minWidth: "52px",
+      maxWidth: "52px",
       // sortable: false,
       sorting: false,
     },
