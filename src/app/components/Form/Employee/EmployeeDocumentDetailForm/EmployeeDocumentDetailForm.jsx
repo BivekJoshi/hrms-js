@@ -187,11 +187,10 @@ const EmployeeDocumentDetailForm = () => {
         {!docPhotoLoad && (
           <Grid item xs={12} sm={6}>
             {documentType &&
-              documentType.map((document, index) => {
+              documentType.map((document) => {
                 const isInputDisabled = documentPhoto?.some(
                   (photo) => photo?.documentType === selectedDocument
                 );
-
                 return (
                   <Accordion
                     key={document.id}
@@ -243,7 +242,7 @@ const EmployeeDocumentDetailForm = () => {
                           flexDirection: "column",
                         }}
                       >
-                        <label htmlFor="file">
+                        <label htmlFor={`file-${document?.id}`}>
                           <input
                             type="file"
                             accept={document?.accept}
@@ -251,7 +250,7 @@ const EmployeeDocumentDetailForm = () => {
                             onChange={(e) => handleChangeImage(e)}
                             style={{ display: "none" }}
                             disabled={isInputDisabled}
-                            id="file"
+                            id={`file-${document?.id}`}
                           />
                           <Box
                             sx={{

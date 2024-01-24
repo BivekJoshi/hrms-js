@@ -134,6 +134,7 @@ const NewFilter = ({
             fullWidth
             value={element?.value}
             onChange={(e) => element?.onChange(e.target.value)}
+            size='small'
           />
         );
       case "clearButton":

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useGetEventAttenderList } from "../../../hooks/event/useEvent";
 import PermissionHoc from "../../../hoc/permissionHoc";
 import HocButton from "../../../hoc/hocButton";
@@ -8,15 +8,20 @@ import DoneSharpIcon from "@mui/icons-material/DoneSharp";
 import CloseSharpIcon from "@mui/icons-material/CloseSharp";
 import { EditEventAttendanceModal } from "../EventModal/EventModal";
 import NewFilter from "../../../components/NewFilter/NewFilter";
-import { useGetAllEvent, useGetAllEventAttendance, usegetAllEmployeeData } from "./useEventAttendance";
+import {
+  useGetAllEvent,
+  useGetAllEventAttendance,
+  useGetUserControl,
+} from "./useEventAttendance";
 import { Badge, Chip, Tooltip, Typography } from "@mui/material";
 import { getEventAttenderList } from "../../../api/event/event-api";
 import { toast } from "react-toastify";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
-import { useQuery } from 'react-query';
 
 const EventAttendance = ({ permissions }) => {
-  const { employeeData, employeeAllData } = usegetAllEmployeeData();
+  const { mode, palette } = useContext(ThemeModeContext);
+  // const { employeeData, employeeAllData } = usegetAllEmployeeData();
+  const { employeeData, employeeAllData } = useGetUserControl();
   const { eventData, eventAllData } = useGetAllEvent();
   const columns = [
     {
@@ -81,10 +86,10 @@ const EventAttendance = ({ permissions }) => {
       render: (rowData) => (
         <div
           style={{
-            whiteSpace: 'normal',
-            overflowWrap: 'break-word',
-            wordWrap: 'break-word',
-            wordBreak: 'break-all',
+            whiteSpace: "normal",
+            overflowWrap: "break-word",
+            wordWrap: "break-word",
+            wordBreak: "break-all",
           }}
         >
           {rowData?.eventName}
@@ -115,10 +120,10 @@ const EventAttendance = ({ permissions }) => {
       render: (rowData) => (
         <div
           style={{
-            whiteSpace: 'normal',
-            overflowWrap: 'break-word',
-            wordWrap: 'break-word',
-            wordBreak: 'break-all',
+            whiteSpace: "normal",
+            overflowWrap: "break-word",
+            wordWrap: "break-word",
+            wordBreak: "break-all",
           }}
         >
           {rowData?.eventLocation}
@@ -131,10 +136,10 @@ const EventAttendance = ({ permissions }) => {
       render: (rowData) => (
         <div
           style={{
-            whiteSpace: 'normal',
-            overflowWrap: 'break-word',
-            wordWrap: 'break-word',
-            wordBreak: 'break-all',
+            whiteSpace: "normal",
+            overflowWrap: "break-word",
+            wordWrap: "break-word",
+            wordBreak: "break-all",
           }}
         >
           {rowData?.eventDescription}
@@ -150,16 +155,62 @@ const EventAttendance = ({ permissions }) => {
       align: "center",
       render: (rowData) => {
         if (rowData?.status === "OK") {
-          return <Chip color="success" label="Coming" />;
-        } else
+          return <Chip sx={{ color: "#fff" }} color="success" label="Coming" />;
+        } else {
+          const tooltipContentStyle = {
+            textAlign: "center",
+            background:
+              mode === "light"
+                ? palette?.background?.main
+                : palette?.background?.default,
+          };
+
           return (
-            <Chip
-              color="error"
-              sx={{ pdfWidth: "max-content" }}
-              label="Not Coming"
-            />
+            <div>
+              <Tooltip
+                title={
+                  <div style={tooltipContentStyle}>
+                    <p style={{ fontWeight: "bold", marginBottom: "4px" }}>
+                      Reason For Absent:
+                    </p>
+                    <br />
+                    <p>{rowData?.remarks}</p>
+                  </div>
+                }
+                placement="top-start"
+                arrow
+              >
+                <Chip
+                  color="error"
+                  sx={{ pdfWidth: "max-content" }}
+                  label="Not Coming"
+                />
+              </Tooltip>
+            </div>
           );
+        }
       },
+
+      // render: (rowData) => {
+      //   if (rowData?.status === "OK") {
+      //     return <Chip color="success" label="Coming" />;
+      //   } else
+      //     return (
+      //       <div>
+      //         <Tooltip
+      //           title={`Reason For Not Attending Event : <br /> ${rowData?.remarks}`}
+      //           placement="top-start"
+      //           arrow
+      //         >
+      //           <Chip
+      //             color="error"
+      //             sx={{ pdfWidth: "max-content" }}
+      //             label="Not Coming"
+      //           />
+      //         </Tooltip>
+      //       </div>
+      //     );
+      // },
     },
     {
       title: "Attended",
@@ -168,7 +219,11 @@ const EventAttendance = ({ permissions }) => {
         if (rowData?.isPresent) {
           return (
             <div>
-              <Badge color="success" badgeContent="Yes" />
+              <Badge
+                sx={{ ".css-1k15tnj-MuiBadge-badge": { color: "#fff" } }}
+                color="success"
+                badgeContent="Yes"
+              />
             </div>
           );
         } else
@@ -194,7 +249,8 @@ const EventAttendance = ({ permissions }) => {
 
   const handleCloseEditModal = () => setOpenEditModal(false);
   const [searchParams, setSearchParams] = useState({});
-  const { queryData, queryLoading, queryError } = useGetAllEventAttendance(searchParams);
+  const { queryData, queryLoading, queryError } =
+    useGetAllEventAttendance(searchParams);
   const [isLoading, setisLoading] = useState(false);
 
   const [tableData, setTableData] = useState([]);
@@ -224,7 +280,7 @@ const EventAttendance = ({ permissions }) => {
       xs: 6,
     },
   ];
-  const { mode } = React.useContext(ThemeModeContext);
+  // const { mode } = React.useContext(ThemeModeContext);
 
   const actions = [
     {
@@ -265,9 +321,9 @@ const EventAttendance = ({ permissions }) => {
           "Employee Name": employeeData?.find(
             (d) => d.id === values?.employeeId
           )?.label,
-          Email: additionalData?.officeEmail,
+          Email: additionalData?.email,
         });
-        setAdditionalRight({ "Contact No.": additionalData?.mobileNumber });
+        setAdditionalRight({ "Contact No.": additionalData?.mobileNo });
       } else if (values?.eventId) {
         const additionalData = eventAllData?.find(
           (d) => d.id === values?.eventId
@@ -334,6 +390,7 @@ const EventAttendance = ({ permissions }) => {
 };
 
 const getColumns = (column, searchParams) => {
+ 
   if (searchParams?.employeeId && searchParams?.eventId) {
     return column?.filter(
       (d) =>

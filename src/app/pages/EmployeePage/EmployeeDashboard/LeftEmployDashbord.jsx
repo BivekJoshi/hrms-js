@@ -67,196 +67,213 @@ export const LeftEmployDashbord = ({}) => {
   };
 
   return (
-    <Grid display="flex" flexDirection="column" gap="2rem">
-      <Grid display="flex" flexDirection="column" gap="1rem">
-        <Typography variant="h5">Upcoming Events </Typography>
-        <Grid display="grid" gap="1rem">
-          {upcomingEvents?.length !== 0 ? (
-            upcomingEvents?.slice(0, 3).map((notify, index) => (
-              <Grid key={index}>
-                <Grid
-                  onClick={() => toggleDropdown(index)}
-                  display="flex"
-                  flexDirection="row"
-                  justifyContent="space-between"
-                  borderRadius="8px"
-                  padding=".5em 1rem"
-                  alignItems="center"
-                  bgcolor={palette.background.event}
-                  boxShadow={2}
-                >
+    <>
+      <Grid display="flex" flexDirection="column" gap="2rem">
+        <Grid display="flex" flexDirection="column" gap="1rem">
+          <Typography variant="h5">Upcoming Events </Typography>
+          <Grid display="grid" gap="1rem">
+            {upcomingEvents?.length !== 0 ? (
+              upcomingEvents?.slice(0, 3).map((notify, index) => (
+                <Grid key={index}>
                   <Grid
+                    onClick={() => toggleDropdown(index)}
                     display="flex"
                     flexDirection="row"
+                    justifyContent="space-between"
+                    borderRadius="8px"
+                    padding=".5em 1rem"
                     alignItems="center"
-                    gap={2}
-                  >
-                    <div
-                      style={{
-                        border: "1px solid #E0E0E0",
-                        borderRadius: "6px 6px 0 0",
-                      }}
-                    >
-                      <Typography
-                        style={{
-                          backgroundColor: palette.primary.main,
-                          padding: "1px 8px",
-                          color: "#fff",
-                          borderRadius: "6px 6px 0 0",
-                        }}
-                        fontSize="11px"
-                      >
-                        {getUpcomingDay(notify?.eventDate).month}
-                      </Typography>
-                      <Typography
-                        fontSize="11px"
-                        textAlign="center"
-                        bgcolor={mode === "light" ? "#fff" : ""}
-                      >
-                        {getUpcomingDay(notify?.eventDate).day}
-                      </Typography>
-                    </div>
-                    <Typography fontWeight={600} fontSize="14px">
-                      {notify?.eventName}
-                    </Typography>
-                  </Grid>
-                  <Typography fontSize="12px">
-                    Remaining: {calculateRemainingDays(notify?.eventDate)}day
-                  </Typography>
-                  <Typography fontSize="12px">
-                    Time: {TimeIn12Hour(notify?.eventTime)}
-                  </Typography>
-                </Grid>
-                {openItemIndex === index && (
-                  <Grid
-                    className="notification"
-                    bgcolor={mode === "light" ? "#ECFFE3" : "#313131"}
+                    bgcolor={palette.background.event}
                     boxShadow={2}
-                    marginTop="8px"
                   >
-                    <Typography>
-                      At {notify?.eventName}: {notify?.eventDescription}
-                    </Typography>
-                  </Grid>
-                )}
-              </Grid>
-            ))
-          ) : (
-            <Grid
-              padding="28px 16px"
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-              flexDirection="column"
-              bgcolor="#ECFFE3"
-              gap={1}
-            >
-              <img src={Event} alt="sad.png" />
-
-              <Typography variant="h6" color="black">
-                No any Upcoming Events
-              </Typography>
-            </Grid>
-          )}
-        </Grid>
-        {upcomingEvents?.length >= 4 && (
-          <Grid textAlign="center">
-            <ButtonComponent
-              OnClick={() => {
-                navigate("/employee/event");
-              }}
-              buttonName={"Click here to see all event"}
-            />
-          </Grid>
-        )}
-      </Grid>
-      <Grid className="employeeDeshbord">
-        <Typography variant="h5">Upcoming Holidays</Typography>
-
-        <Grid display="grid" gap="1rem">
-          {upcomingHolidays?.length > 0 ? (
-            upcomingHolidays?.slice(0, 3).map((notify, index) => (
-              <Grid key={index}>
-                <Grid
-                  onClick={() => toggleDropdownHoliday(index)}
-                  display="flex"
-                  flexDirection="row"
-                  justifyContent="space-between"
-                  borderRadius=".5rem"
-                  alignItems="center"
-                  boxShadow={2}
-                  padding=".5em 1rem"
-                  bgcolor={palette.background.holiday}
-                >
-                  <Grid
-                    display="flex"
-                    flexDirection="row"
-                    alignItems="center"
-                    gap={2}
-                  >
-                    <div
-                      style={{
-                        border: "1px solid #E0E0E0",
-                        borderRadius: "6px 6px 0 0",
-                      }}
+                    <Grid
+                      display="flex"
+                      flexDirection="row"
+                      alignItems="center"
+                      gap={2}
                     >
-                      <Typography
+                      <div
                         style={{
-                          backgroundColor: palette.primary.holiday,
-                          padding: "1px 8px",
-                          color: "#fff",
+                          border: "1px solid #E0E0E0",
                           borderRadius: "6px 6px 0 0",
                         }}
-                        fontSize="11px"
                       >
-                        {getUpcomingDay(notify?.holidayDate).month}
-                      </Typography>
+                        <Typography
+                          style={{
+                            backgroundColor: palette.primary.main,
+                            padding: "1px 8px",
+                            color: "#fff",
+                            borderRadius: "6px 6px 0 0",
+                          }}
+                          fontSize="11px"
+                        >
+                          {getUpcomingDay(notify?.eventDate).month}
+                        </Typography>
+                        <Typography
+                          fontSize="11px"
+                          textAlign="center"
+                          bgcolor={mode === "light" ? "#fff" : ""}
+                        >
+                          {getUpcomingDay(notify?.eventDate).day}
+                        </Typography>
+                      </div>
                       <Typography
-                        fontSize="11px"
-                        textAlign="center"
-                        bgcolor={mode === "light" ? "#fff" : ""}
+                        fontWeight={600}
+                        fontSize="14px"
+                        sx={{
+                          overflowWrap: "break-word",
+                          textTransform: "capitalize",
+                          wordBreak: "break-all",
+                          maxWidth: '80%',
+                        }}
                       >
-                        {getUpcomingDay(notify?.holidayDate).day}
+                        {notify?.eventName}
                       </Typography>
-                    </div>
-                    {notify?.holidayName}
+                    </Grid>
+                    <Typography fontSize="12px">
+                      Remaining: {calculateRemainingDays(notify?.eventDate)}day
+                    </Typography>
+                    <Typography fontSize="12px">
+                      Time: {TimeIn12Hour(notify?.eventTime)}
+                    </Typography>
                   </Grid>
-
-                  <Typography fontSize="12px">
-                    Remaining: {calculateRemainingDays(notify?.holidayDate)} day
-                  </Typography>
+                  {openItemIndex === index && (
+                    <Grid
+                      className="notification"
+                      bgcolor={mode === "light" ? "#ECFFE3" : "#313131"}
+                      boxShadow={2}
+                      marginTop="8px"
+                      sx={{
+                        overflowWrap: "break-word",
+                        textTransform: "capitalize",
+                        wordBreak: "break-all",
+                      }}
+                    >
+                      <Typography>
+                        At {notify?.eventName}: {notify?.eventDescription}
+                      </Typography>
+                    </Grid>
+                  )}
                 </Grid>
-              </Grid>
-            ))
-          ) : (
-            <Grid
-              padding="28px 16px"
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-              flexDirection="column"
-              bgcolor={palette.background.holiday}
-              gap={1}
-            >
-              <img src={Holiday} alt="EDholiday.png" />
+              ))
+            ) : (
+              <Grid
+                padding="28px 16px"
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                flexDirection="column"
+                bgcolor="#ECFFE3"
+                gap={1}
+              >
+                <img src={Event} alt="sad.png" />
 
-              <Typography variant="h6" color="black">
-                No any Upcoming Holidays
-              </Typography>
+                <Typography variant="h6" color="black">
+                  No any Upcoming Events
+                </Typography>
+              </Grid>
+            )}
+          </Grid>
+          {upcomingEvents?.length >= 4 && (
+            <Grid textAlign="center">
+              <ButtonComponent
+                OnClick={() => {
+                  navigate("/employee/event");
+                }}
+                buttonName={"Click here to see all event"}
+              />
             </Grid>
           )}
         </Grid>
-        {upcomingHolidays?.length >= 4 && (
-          <Grid textAlign="center">
-            <ButtonComponent
-              OnClick={() => {
-                navigate("/employee/holiday");
-              }}
-              buttonName={"Click here to see All Holiday"}
-            />
+        <Grid className="employeeDeshbord">
+          <Typography variant="h5">Upcoming Holidays</Typography>
+
+          <Grid display="grid" gap="1rem">
+            {upcomingHolidays?.length > 0 ? (
+              upcomingHolidays?.slice(0, 3).map((notify, index) => (
+                <Grid key={index}>
+                  <Grid
+                    onClick={() => toggleDropdownHoliday(index)}
+                    display="flex"
+                    flexDirection="row"
+                    justifyContent="space-between"
+                    borderRadius=".5rem"
+                    alignItems="center"
+                    boxShadow={2}
+                    padding=".5em 1rem"
+                    bgcolor={palette.background.holiday}
+                  >
+                    <Grid
+                      display="flex"
+                      flexDirection="row"
+                      alignItems="center"
+                      gap={2}
+                    >
+                      <div
+                        style={{
+                          border: "1px solid #E0E0E0",
+                          borderRadius: "6px 6px 0 0",
+                        }}
+                      >
+                        <Typography
+                          style={{
+                            backgroundColor: palette.primary.holiday,
+                            padding: "1px 8px",
+                            color: "#fff",
+                            borderRadius: "6px 6px 0 0",
+                          }}
+                          fontSize="11px"
+                        >
+                          {getUpcomingDay(notify?.holidayDate).month}
+                        </Typography>
+                        <Typography
+                          fontSize="11px"
+                          textAlign="center"
+                          bgcolor={mode === "light" ? "#fff" : ""}
+                        >
+                          {getUpcomingDay(notify?.holidayDate).day}
+                        </Typography>
+                      </div>
+                      {notify?.holidayName}
+                    </Grid>
+
+                    <Typography fontSize="12px">
+                      Remaining: {calculateRemainingDays(notify?.holidayDate)}{" "}
+                      day
+                    </Typography>
+                  </Grid>
+                </Grid>
+              ))
+            ) : (
+              <Grid
+                padding="28px 16px"
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                flexDirection="column"
+                bgcolor={palette.background.holiday}
+                gap={1}
+              >
+                <img src={Holiday} alt="EDholiday.png" />
+
+                <Typography variant="h6" color="black">
+                  No any Upcoming Holidays
+                </Typography>
+              </Grid>
+            )}
           </Grid>
-        )}
+          {upcomingHolidays?.length >= 4 && (
+            <Grid textAlign="center">
+              <ButtonComponent
+                OnClick={() => {
+                  navigate("/employee/holiday");
+                }}
+                buttonName={"Click here to see All Holiday"}
+              />
+            </Grid>
+          )}
+        </Grid>
       </Grid>
-    </Grid>
+    </>
   );
 };

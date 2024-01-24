@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import {
   Box,
   Button,
@@ -10,6 +10,7 @@ import {
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
 import CompanyGrid from "../../../../assets/companyGrid.png";
 import PopOver from "../../../../theme/overrides/PopOver";
+import NewFilter from '../../../components/NewFilter/NewFilter';
 
 const CompanyGridView = ({
   permissions,
@@ -20,8 +21,33 @@ const CompanyGridView = ({
 }) => {
   const { palette } = useContext(ThemeModeContext); // Accessing mode from context
 
+const [nameFilter, setNameFilter] = useState("");
+
+  const filteredBranch = companyData?.filter(
+    (branch) =>
+      `${branch.branchName}`
+        ?.toLowerCase()
+        ?.includes(nameFilter.toLowerCase())
+  );
+  const handleClearSearch = () => {
+    setNameFilter("");
+  };
+  const filterMenu = [
+    {
+      label: "Branch Name",
+      name: "name",
+      type: "employeeSearch",
+      md: 4,
+      sm: 12,
+      value: nameFilter,
+      setSearch: handleClearSearch,
+      onChange: (e) => setNameFilter(e.target.value),
+    }
+  ];
+
   return (
     <>
+     <NewFilter inputField={filterMenu} disableSubmit={true} />
       <Grid
         container
         spacing={2}
@@ -32,8 +58,9 @@ const CompanyGridView = ({
           columnGap: "1rem",
           rowGap: "1rem",
         }}
+        mt={1}
       >
-        {companyData.map((item, index) => (
+        {filteredBranch.map((item, index) => (
           <Card key={index}>
             <Box
               sx={{

@@ -34,15 +34,15 @@ const LeaveInfo = ({ isLoading, data, role }) => {
       title: "SN",
       render: (rowData) => rowData.tableData.id + 1,
       // width: 80,
-      maxWidth:"1px",
+      maxWidth:"8px",
       sortable: false,
     },
     {
       title: "Leave Type",
       render: (rowData) => {
-        return <p>{rowData.leaveType.leaveName}</p>;
+        return `${rowData.leaveType.leaveName}`;
       },
-      width: 150,
+      width: 100,
     },
     {
       title: "From",
@@ -82,6 +82,8 @@ const LeaveInfo = ({ isLoading, data, role }) => {
             style={{
               backgroundColor: chipColor,
               color: "white",
+              display: 'flex',
+              textAlign: 'center'
               // width: " 6rem",
             }}
           />
