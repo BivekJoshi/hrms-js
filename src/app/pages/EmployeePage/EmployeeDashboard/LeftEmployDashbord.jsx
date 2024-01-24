@@ -128,7 +128,7 @@ export const LeftEmployDashbord = ({}) => {
                           overflowWrap: "break-word",
                           textTransform: "capitalize",
                           wordBreak: "break-all",
-                          maxWidth: "80%",
+                          maxWidth: '80%',
                         }}
                       >
                         {notify?.eventName}
@@ -255,6 +255,7 @@ export const LeftEmployDashbord = ({}) => {
                       Time: {TimeIn12Hour(notify?.holida)}
                     </Typography> */}
                      
+                      {/* {notify?.holidayName} */}
                     </Grid>
 
                     <Typography fontSize="12px">
