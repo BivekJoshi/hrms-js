@@ -20,7 +20,7 @@ const CompanyGridView = ({
   handleDeleteCompany,
 }) => {
   const { palette } = useContext(ThemeModeContext); // Accessing mode from context
-console.log(companyData)
+
 const [nameFilter, setNameFilter] = useState("");
 
   const filteredBranch = companyData?.filter(

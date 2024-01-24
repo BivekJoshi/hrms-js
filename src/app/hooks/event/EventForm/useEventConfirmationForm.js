@@ -8,7 +8,7 @@ const validateSchema = Yup.object().shape({
 
 const useEventConfirmationForm = (data) => {
   const { mutate: addEventConfirmation } = useAddEventConfirmaation({});
-
+  
   const formik = useFormik({
     initialValues: {
       eventId: "",
@@ -16,8 +16,7 @@ const useEventConfirmationForm = (data) => {
       status: "",
       remarks: "",
     },
-
-    validationSchema: validateSchema,
+    // validationSchema: validateSchema,
     enableReinitialize: true,
 
     onSubmit: (values) => {

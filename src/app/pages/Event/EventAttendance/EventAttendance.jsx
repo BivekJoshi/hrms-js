@@ -321,9 +321,9 @@ const EventAttendance = ({ permissions }) => {
           "Employee Name": employeeData?.find(
             (d) => d.id === values?.employeeId
           )?.label,
-          Email: additionalData?.officeEmail,
+          Email: additionalData?.email,
         });
-        setAdditionalRight({ "Contact No.": additionalData?.mobileNumber });
+        setAdditionalRight({ "Contact No.": additionalData?.mobileNo });
       } else if (values?.eventId) {
         const additionalData = eventAllData?.find(
           (d) => d.id === values?.eventId
@@ -390,6 +390,7 @@ const EventAttendance = ({ permissions }) => {
 };
 
 const getColumns = (column, searchParams) => {
+ 
   if (searchParams?.employeeId && searchParams?.eventId) {
     return column?.filter(
       (d) =>

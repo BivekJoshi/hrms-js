@@ -111,8 +111,14 @@ const BarChatDiagram = ({ data }) => {
           }
           .apexcharts-menu.apexcharts-menu-open {
             background: ${mode === "light" ? "white" : "#3f413f"};
-            color: ${mode === "light" ? "black" : "white"};
-           
+            color: ${mode === "light" ? "black" : "white"};           
+          }
+          .apexcharts-menu.apexcharts-menu-open:hover {
+            background: ${mode === "light" ? "white" : "#3f413f"};
+            color: ${mode === "light" ? "black" : "white"};           
+          }
+          .apexcharts-menu-item:hover {
+            color: ${mode === "light" ? "black" : "black"}; 
           }
         `}
       </style>

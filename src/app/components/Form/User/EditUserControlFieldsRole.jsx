@@ -55,7 +55,6 @@ export const EditUserControlFieldsRole = ({ onClose, rowData }) => {
       }
     }
   };
-  console.log(formik.setFieldValue)
 
   return (
     <Grid container spacing={3}>

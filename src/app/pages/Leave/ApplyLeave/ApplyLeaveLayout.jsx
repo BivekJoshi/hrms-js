@@ -71,7 +71,7 @@ const ApplyLeaveLayout = () => {
     leaveData.filter((leaveRecord) => leaveRecord?.leaveStatus === "PENDING");
 
   const handleClickEditButton = (data) => {
-    navigate(`/employee/applyleavefield`, { state: { data } });
+    navigate(`/employee/applyleave`, { state: { data } });
   };
   return (
     <Box sx={{ flexGrow: 1 }}>

@@ -2,14 +2,14 @@ import * as Yup from 'yup';
 
 const LeaveSchema = Yup.object().shape({
   // leaveTypeId:Yup.mixed().required("Please Select Leave Name"),
-  fromDate: Yup.date().required('Please Select Date'),
+  fromDate: Yup.date().required('Please select date'),
   toDate: Yup.date()
-  .required('Please Select Date')
+  .required('Please select sate')
   .min(Yup.ref('fromDate'), 'To date cannot be earlier than from date'),
   leaveTypeId: Yup.object().required('Please select leave type'),
   employeeId: Yup.string().required('Please select employee name'),
-  leaveReason: Yup.string().required(' Leave Reason is required').max(255, 'Leave reason cannot be greater than 255 characters'),
-  leaveStatus:Yup.string().required("Required")
+  leaveReason: Yup.string().required(' Leave Reason is required').max(255, 'Leave Reason cannot be greater than 255 characters'),
+  leaveStatus:Yup.string().required("Status is required")
 });
 
 export { LeaveSchema };

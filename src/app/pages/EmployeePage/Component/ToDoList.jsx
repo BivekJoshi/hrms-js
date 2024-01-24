@@ -77,7 +77,7 @@ const ToDoList = () => {
                       overflowWrap: "break-word",
                       textTransform: "capitalize",
                       wordBreak: "break-all",
-                      textTransform: 'justify'
+                      // textTransform: 'justify',
                     }}
                   >
                     {notify?.message}

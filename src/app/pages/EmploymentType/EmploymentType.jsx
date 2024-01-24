@@ -55,7 +55,7 @@ const EmploymentType = () => {
     {
       title: 'SN',
       render: (rowData) => rowData.tableData.id + 1,
-      maxWidth: 12,
+      maxWidth: '52px',
       sortable: false,
       sorting: false,
     },

@@ -26,7 +26,9 @@ const ApplyLeaveField = () => {
   };
 
   const capitalize = (str) => {
-    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+    if (str) {
+      return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+    }
   };
 
   const getLeaveTypeName = (leaveTypeId) => {
@@ -95,7 +97,6 @@ const ApplyLeaveField = () => {
             />
           </Grid>
         )}
-      
 
         <Grid item xs={12} sm={12}>
           <TabContext value={value}>
@@ -141,7 +142,7 @@ const ApplyLeaveField = () => {
             InputLabelProps={{ shrink: true }}
           />
         </Grid> */}
-          <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6}>
           Leave Reason
         </Grid>
         <Grid item xs={12} sm={12}>

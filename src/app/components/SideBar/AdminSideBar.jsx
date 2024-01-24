@@ -373,7 +373,7 @@ export default function AdminSidebar() {
     },
     {
       name: 'Apply Leave',
-      path: 'applyleavefield',
+      path: 'applyleave',
       icon: (
         <ApprovalOutlinedIcon
           sx={mode === 'light' ? { color: '#6DAB23' } : { color: 'white' }}

@@ -23,9 +23,10 @@ const CompanySchema = Yup.object().shape({
     .required("Address is required")
     .max(50, "Branch address cannot be greater than 50 characters")
     .matches(
-      /^[^0-9]*$/,
-      "Branch address cannot contain numbers"
+      /^[^0-9!@#$%^&*()_+={}\[\]:;<>.?~\\/]*$/,
+      "Branch address cannot contain numbers or special characters"
     ),
+    
   branchDescription: Yup.string().max(
     255,
     "Description cannot be greater than 255 characters"
