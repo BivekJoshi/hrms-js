@@ -4,6 +4,7 @@ import {
   Autocomplete,
   Box,
   Button,
+  Chip,
   Grid,
   MenuItem,
   Stack,
@@ -81,12 +82,19 @@ const EmailLogUserId = () => {
       sorting: false,
     },
 
-    {
-      title: "Result",
-      field: "result",
-      emptyValue: "-",
+     {
+      title: 'Result',
+      field: 'result',
+      emptyValue: '-',
       width: 200,
       sorting: false,
+      render:(rowData)=>{
+        if(rowData?.result==="SUCCESS"){
+          return <Chip sx={{ color: "#fff" }} color="success" label="Success" />
+        }else if(rowData?.result==="FAILED"){
+          return <Chip sx={{ color: "#fff" }} color="error" label="Failed" />
+        }
+      }
     },
     {
       title: "Time Stamp",

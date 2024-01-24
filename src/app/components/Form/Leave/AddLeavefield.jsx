@@ -27,7 +27,9 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
   const { formik } = useLeaveForm(data, onClose);
 
   const capitalize = (str) => {
-    return str?.charAt(0)?.toUpperCase() + str.slice(1).toLowerCase();
+    if(str){
+      return str?.charAt(0)?.toUpperCase() + str.slice(1).toLowerCase();
+    }
   };
 
   const handleFormSubmit = () => {
@@ -223,19 +225,35 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
 const DateInput = ({ formik, isHalfDay, isMultipleDays }) => {
   const [halfType, setHalfType] = useState('FIRST_HALF');
 
+  // const handleFromDateChange = (e) => {
+  //   const fromDateValue = e.target.value;
+  //   if (fromDateValue) {
+  //     setHalfType('FIRST_HALF');
+  //   }
+  //   formik.handleChange(e);
+  //   formik.setFieldValue('toDate', fromDateValue);
+  //   formik.setFieldValue('halfLeaveType', null);
+  //   if (isHalfDay) {
+  //     formik.setFieldValue('isHalfDay', true);
+  //     formik.setFieldValue('halfLeaveType', halfType);
+  //   }
+  // };
   const handleFromDateChange = (e) => {
+   
     const fromDateValue = e.target.value;
     if (fromDateValue) {
       setHalfType('FIRST_HALF');
     }
     formik.handleChange(e);
-    formik.setFieldValue('toDate', fromDateValue);
-    formik.setFieldValue('halfLeaveType', null);
+    formik.values.fromDate = e.target.value;
+    formik.values.toDate = e.target.value;
+    formik.values.halfLeaveType = null;
     if (isHalfDay) {
       formik.setFieldValue('isHalfDay', true);
       formik.setFieldValue('halfLeaveType', halfType);
     }
   };
+
   // const currentDate = new Date().toISOString().split('T')[0];
   const currentDate = new Date();
   currentDate.setDate(currentDate.getDate() + 1);

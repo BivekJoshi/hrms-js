@@ -35,7 +35,22 @@ export const EditProjectDeactivateFields = ({ onClose, isLoading, data }) => {
           </Typography>
         </Grid>
         <Grid item xs={12} sm={12} textAlign="center">
-          <TextField
+        <RemarkField
+             id="remarks"
+             name="remarks"
+             label="Reason"
+            fullWidth
+            formik={formik}
+            maxLength={255}
+            variant="outlined"
+            multiline
+            InputLabelProps={{
+              shrink: Boolean(formik.values.remarks),
+            }}
+            rows={3}
+            inputProps={{ maxLength: 255 }}
+          />
+          {/* <TextField
             id="remarks"
             name="remarks"
             label="Reason"
@@ -48,7 +63,7 @@ export const EditProjectDeactivateFields = ({ onClose, isLoading, data }) => {
             helperText={formik.touched.remarks && formik.errors.remarks}
             variant="outlined"
             InputLabelProps={{ shrink: true }}
-          />{" "}
+          />{" "} */}
         </Grid>
         <Grid
           container
@@ -97,10 +112,10 @@ export const EditProjectActivateFields = ({ onClose, isLoading, data }) => {
     !isLoading && (
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
-          <Typography fontSize="20px" textAlign="center">
+          <Typography fontSize="20px">
             Are you sure you want to activate this project?
           </Typography>
-          <Typography fontSize="14px" textAlign="center" fontWeight={400}>
+          <Typography fontSize="18px" fontWeight={400}>
             Project Name : {getProjectName(formik.values.projectId)}
           </Typography>
         </Grid>

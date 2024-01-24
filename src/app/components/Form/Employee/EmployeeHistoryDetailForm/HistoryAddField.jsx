@@ -25,7 +25,10 @@ const HistoryAddField = ({ formik }) => {
 
   const updateWorkExpericence = useEditWorkExpirenceDoc(id);
 
-  const currentDate = new Date().toISOString().split("T")[0];
+  const currentDate = new Date();
+  currentDate.setDate(currentDate.getDate() - 1); // Subtract one day
+  const resultDate = currentDate.toISOString().split("T")[0];
+  const currentToDate = new Date().toISOString().split('T')[0];
 
   const [previewImage, setPreviewImage] = useState(null);
   const [isPreviewOpen, setPreviewOpen] = useState(false);
@@ -141,7 +144,7 @@ const HistoryAddField = ({ formik }) => {
             fullWidth
             type="date"
             inputProps={{
-              max: currentDate,
+              max: resultDate,
             }}
             value={formik.values.fromDate}
             onChange={formik.handleChange}
@@ -160,7 +163,7 @@ const HistoryAddField = ({ formik }) => {
             fullWidth
             type="date"
             inputProps={{
-              max: currentDate,
+              max: currentToDate,
               min: formik.values.fromDate,
             }}
             value={formik.values.toDate}
@@ -207,7 +210,7 @@ const HistoryAddField = ({ formik }) => {
         <Grid item xs={12}>
           <FormLabel component="legend">Upload Experience Document</FormLabel>
           <div style={{ display: "flex" }}>
-            <Input
+            <input
               type="file"
               accept="image/*"
               fullWidth

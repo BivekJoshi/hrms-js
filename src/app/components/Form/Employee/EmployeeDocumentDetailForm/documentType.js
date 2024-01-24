@@ -4,7 +4,7 @@ export const documentType = [
     input: 'EMPLOYEE_PHOTO',
     desc: '* Employee Photo format must be in jpeg/png/jpg',
     fileSize: '* File size should be max 5MB',
-    accept: '.png',
+    accept: 'image/*',
     id: 1,
   },
   {

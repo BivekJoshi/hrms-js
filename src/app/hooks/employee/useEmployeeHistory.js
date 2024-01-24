@@ -56,7 +56,7 @@ export const useAddEmployeeHistory = ({ onSuccess }) => {
     async (formData) => await addEmployeeHistory(formData, id),
     {
       onSuccess: (data, variables, context) => {
-        toast.success("Successfully added Employee History");
+        toast.success("Work History added successfully");
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries("getEmployeeHistory");
       },
@@ -79,7 +79,7 @@ export const useDeleteHistory = ({ onSuccess }) => {
     (employeeHistoryId) => deleteEmployeeHistory(employeeHistoryId),
     {
       onSuccess: (data, variables, context) => {
-        toast.success("Employee History deleted successfully");
+        toast.success("Work History deleted successfully");
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries("getEmployeeHistory");
       },
@@ -101,7 +101,7 @@ export const useEditEmployeeHistory = ({ onSuccess }) => {
     },
     {
       onSuccess: (data, variables, context) => {
-        toast.success("Employee History edited sucessfully");
+        toast.success("Work History edited sucessfully");
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries("getEmployeeHistory");
       },
@@ -112,7 +112,7 @@ export const useEditEmployeeHistory = ({ onSuccess }) => {
   );
   return {
     editHistoryMutate: mutateEditHistory.mutate,
-    isSuccess: mutateEditHistory.isSuccess || false,
+    isSuccess: mutateEditHistory.isSuccess ? true : false,
   };
 };
 

@@ -3,7 +3,7 @@ import CustomTable from '../../components/CustomTable/CustomTable';
 import { useGetEmailLogByFilter } from '../../hooks/emailLog/useEmailLog';
 import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 import { useNavigate } from 'react-router-dom';
-import { Button, Stack } from '@mui/material';
+import { Button, Chip, Stack } from '@mui/material';
 import ThemeModeContext from '../../../theme/ThemeModeContext';
 
 const EmailLog = () => {
@@ -55,6 +55,13 @@ const EmailLog = () => {
       emptyValue: '-',
       width: 200,
       sorting: false,
+      render:(rowData)=>{
+        if(rowData?.result==="SUCCESS"){
+          return <Chip sx={{ color: "#fff" }} color="success" label="Success" />
+        }else if(rowData?.result==="FAILED"){
+          return <Chip sx={{ color: "#fff" }} color="error" label="Failed" />
+        }
+      }
     },
     {
       title: 'Time Stamp',

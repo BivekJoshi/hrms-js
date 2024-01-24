@@ -3,12 +3,12 @@ import { useAddEventConfirmaation } from "../useEvent";
 import * as Yup from "yup";
 
 const validateSchema = Yup.object().shape({
-  remarks: Yup.string().required("Remarks is Required"),
+  remarks: Yup.string().required("Remarks is required"),
 });
 
 const useEventConfirmationForm = (data) => {
   const { mutate: addEventConfirmation } = useAddEventConfirmaation({});
-
+  
   const formik = useFormik({
     initialValues: {
       eventId: "",
@@ -16,7 +16,6 @@ const useEventConfirmationForm = (data) => {
       status: "",
       remarks: "",
     },
-
     // validationSchema: validateSchema,
     enableReinitialize: true,
 

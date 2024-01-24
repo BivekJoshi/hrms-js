@@ -213,7 +213,7 @@ const Attendance = () => {
   return (
     <div className='main'>
       <Typography variant='h5'>Attendance</Typography>
-      <NewFilter inputField={filterMenu} disableSubmit={true}/>
+      <NewFilter inputField={filterMenu} disableSubmit={true} />
       
 
       <Typography

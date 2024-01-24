@@ -1,13 +1,13 @@
 import { useQuery } from "react-query";
 import { getAllEmployeeData } from "../../../api/employee/employee-api";
 import { getEvent, getEventAttenderList } from "../../../api/event/event-api";
+import { getUserControl } from '../../../api/auth/userControl/userControl-api';
 
 const employeeOptions = (data) => {
-  if (data) {
+  if (data) {    
     return data.map((item) => ({
-      label: item?.middleName
-        ? item?.firstName + " " + item?.middleName + " " + item?.lastName
-        : item?.firstName + " " + item?.lastName,
+      
+      label: item?.name,
       id: item?.id,
     }));
   }
@@ -21,10 +21,10 @@ const eventOptions = (data) => {
   }
 };
 
-export const usegetAllEmployeeData = () => {
+export const useGetUserControl = () => {
   const getQuery = useQuery(
-    ["getAllemployeeData"],
-    () => getAllEmployeeData(),
+    ["getUserControl"],
+    () => getUserControl(),
     {
       refetchInterval: false,
       refetchOnWindowFocus: false,
@@ -36,6 +36,22 @@ export const usegetAllEmployeeData = () => {
     isLoading: getQuery.isLoading,
   };
 };
+
+// export const usegetAllEmployeeData = () => {
+//   const getQuery = useQuery(
+//     ["getAllemployeeData"],
+//     () => getAllEmployeeData(),
+//     {
+//       refetchInterval: false,
+//       refetchOnWindowFocus: false,
+//     }
+//   );
+//   return {
+//     employeeData: employeeOptions(getQuery?.data),
+//     employeeAllData: getQuery?.data,
+//     isLoading: getQuery.isLoading,
+//   };
+// };
 export const useGetAllEvent = () => {
   const getQuery = useQuery(["getAllEvent"], () => getEvent(), {
     refetchInterval: false,
