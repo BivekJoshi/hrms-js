@@ -3,20 +3,39 @@ import React from "react";
 import { ButtonComponent } from "../../Button/ButtonComponent";
 
 const EditEmpHolidayFields = ({ onClose, data }) => {
-  
   return (
     <Grid container spacing={3}>
       <Grid item xs={12} sm={12} lg={6} xl={6}>
-        <Typography variant='h6'>Holiday Name:</Typography>
-        <Typography variant='p'>{data?.holidayName}</Typography>
+        <Typography variant="h6">Holiday Name:</Typography>
+        <Typography
+          variant="p"
+          style={{
+            whiteSpace: "normal",
+            overflowWrap: "break-word",
+            wordWrap: "break-word",
+            wordBreak: "break-all",
+          }}
+        >
+          {data?.holidayName}
+        </Typography>
       </Grid>
       <Grid item xs={12} sm={12} lg={6} xl={6}>
-        <Typography variant='h6'>Date:</Typography>
-        <Typography variant='p'>{data?.holidayDate}</Typography>
+        <Typography variant="h6">Date:</Typography>
+        <Typography variant="p">{data?.holidayDate}</Typography>
       </Grid>
       <Grid item xs={12} sm={12} lg={12} xl={12}>
-        <Typography variant='h6'>Description:</Typography>
-        <Typography variant='p'>{data?.holidayDescription}</Typography>
+        <Typography variant="h6">Description:</Typography>
+        <Typography
+          variant="p"
+          style={{
+            whiteSpace: "normal",
+            overflowWrap: "break-word",
+            wordWrap: "break-word",
+            wordBreak: "break-all",
+          }}
+        >
+          {data?.holidayDescription}
+        </Typography>
       </Grid>
       <Grid
         container
