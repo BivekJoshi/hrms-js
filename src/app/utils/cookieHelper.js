@@ -1,4 +1,4 @@
-const STORAGE_KEY = 'hrms';
+const STORAGE_KEY = "hrms";
 
 export const setUser = (data) => {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
@@ -10,6 +10,5 @@ export const getUser = () => {
 
 export const removeUser = () => {
   localStorage.removeItem(STORAGE_KEY);
-  localStorage.clear();
 };
 // window.addEventListener("beforeunload", removeUser);
