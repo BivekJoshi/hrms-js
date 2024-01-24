@@ -50,11 +50,15 @@ export const LeftEmployDashbord = ({}) => {
 
   const upcomingEvents = employAllNotiData?.filter((event) => {
     const eventDate = new Date(event.eventDate);
+    eventDate.setHours(0, 0, 0, 0);
+    currentDate.setHours(0, 0, 0, 0);
     return eventDate >= currentDate;
   });
 
   const upcomingHolidays = currentHoliday?.filter((holiday) => {
     const holidayDate = new Date(holiday.holidayDate);
+    holidayDate.setHours(0, 0, 0, 0);
+    currentDate.setHours(0, 0, 0, 0);
     return holidayDate >= currentDate;
   });
 
@@ -124,7 +128,7 @@ export const LeftEmployDashbord = ({}) => {
                           overflowWrap: "break-word",
                           textTransform: "capitalize",
                           wordBreak: "break-all",
-                          maxWidth: '80%',
+                          maxWidth: "80%",
                         }}
                       >
                         {notify?.eventName}
@@ -234,7 +238,23 @@ export const LeftEmployDashbord = ({}) => {
                           {getUpcomingDay(notify?.holidayDate).day}
                         </Typography>
                       </div>
-                      {notify?.holidayName}
+                      <Typography
+                        fontWeight={600}
+                        fontSize="14px"
+                        sx={{
+                          overflowWrap: "break-word",
+                          textTransform: "capitalize",
+                          wordBreak: "break-all",
+                          maxWidth: "80%",
+                        }}
+                      >
+                        {notify?.holidayName}
+                      </Typography>
+                     
+                    {/* <Typography fontSize="12px">
+                      Time: {TimeIn12Hour(notify?.holida)}
+                    </Typography> */}
+                     
                     </Grid>
 
                     <Typography fontSize="12px">
