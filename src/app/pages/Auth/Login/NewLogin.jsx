@@ -23,7 +23,7 @@ import { getUser, removeUser } from "../../../utils/cookieHelper";
 import jwtDecode from "jwt-decode";
 
 const NewLogin = () => {
-  const { mode } = useContext(ThemeModeContext);
+  const { palette } = useContext(ThemeModeContext);
   const {
     formik,
     showValues,
@@ -69,7 +69,10 @@ const NewLogin = () => {
   return (
     <div style={{ height: "100dvh" }}>
       <div className="login-bgg">
-        <Grid className="login-bg-design">
+        <Box
+          className="login-bg-design"
+          sx={{ backgroundColor: palette?.background?.default }}
+        >
           <Box display="flex" justifyContent="center" height="100vh">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -429,7 +432,7 @@ const NewLogin = () => {
               </LoadingButton>
             </Grid>
           </Grid>
-        </Grid>
+        </Box>
       </div>
     </div>
   );
