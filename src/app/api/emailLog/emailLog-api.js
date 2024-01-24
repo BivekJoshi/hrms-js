@@ -18,9 +18,9 @@ export const getEmailLogByFilter = async (userId, id, userIdFromEmailLog) => {
   }
 };
 
-export const postResentEmail = async (formData, passId) => {
+export const postResentEmail = async (formData, passId, emailType) => {
   const data = await axiosInstance.post(
-    `/user/resend-email?userId=${passId}&emailType=CREATE_USER`,
+    `/user/resend-email?userId=${passId}&emailType=${emailType}`,
     formData
   );
   return data;

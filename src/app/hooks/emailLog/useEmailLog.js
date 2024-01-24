@@ -19,9 +19,9 @@ export const useGetEmailLogByFilter = (userId,id,userIdFromEmailLog) => {
   });
 };
 
-export const usePostResendEmail = ({ onSuccess,passId }) => {
+export const usePostResendEmail = ({ onSuccess,passId,emailType }) => {
 
-  return useMutation(['postResentEmail'], (formData) => postResentEmail(formData,passId), {
+  return useMutation(['postResentEmail'], (formData) => postResentEmail(formData,passId,emailType), {
     onSuccess: (data, variables, context) => {
       toast.success('Successfully resend email');
       onSuccess && onSuccess(data, variables, context);

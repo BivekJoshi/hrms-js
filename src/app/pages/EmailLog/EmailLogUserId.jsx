@@ -22,6 +22,7 @@ import ReplayIcon from "@mui/icons-material/Replay";
 const EmailLogUserId = () => {
   const [id, setId] = useState("");
   const [passId, setPassId] = useState("");
+  const [emailType, setEmailType] = useState("");
   const location = useLocation();
   const { data: userData, isLoading: loadingUser } = useGetUserControl();
 
@@ -30,8 +31,7 @@ const EmailLogUserId = () => {
   const userIdFromEmailLog = location?.state?.rowData?.user?.id || null;
 
   const { palette } = useContext(ThemeModeContext);
-  const [openAddModal, setOpenAddModal] = useState(false);
-  const { formik } = useEmailResendForm(passId);
+  const { formik } = useEmailResendForm(passId,emailType);
 
   const {
     data,
@@ -42,6 +42,7 @@ const EmailLogUserId = () => {
   const handleClick = (rowData) => {
     const UserId = rowData?.user?.id;
     setPassId(UserId);
+    setEmailType(rowData?.emailType);
     formik.handleSubmit();
   };
 
@@ -82,19 +83,21 @@ const EmailLogUserId = () => {
       sorting: false,
     },
 
-     {
-      title: 'Result',
-      field: 'result',
-      emptyValue: '-',
+    {
+      title: "Result",
+      field: "result",
+      emptyValue: "-",
       width: 200,
       sorting: false,
-      render:(rowData)=>{
-        if(rowData?.result==="SUCCESS"){
-          return <Chip sx={{ color: "#fff" }} color="success" label="Success" />
-        }else if(rowData?.result==="FAILED"){
-          return <Chip sx={{ color: "#fff" }} color="error" label="Failed" />
+      render: (rowData) => {
+        if (rowData?.result === "SUCCESS") {
+          return (
+            <Chip sx={{ color: "#fff" }} color="success" label="Success" />
+          );
+        } else if (rowData?.result === "FAILED") {
+          return <Chip sx={{ color: "#fff" }} color="error" label="Failed" />;
         }
-      }
+      },
     },
     {
       title: "Time Stamp",
@@ -112,17 +115,22 @@ const EmailLogUserId = () => {
           spacing={0}
           sx={{ display: "flex", justifyContent: "center" }}
         >
-          {rowData.emailType === "CREATE_USER" && rowData.result !== "SUCCESS" && (
-            <Tooltip title="Resend">
-              <Button
-                color="primary"
-                onClick={() => handleClick(rowData)}
-                variant="outlined"
-              >
-                <ReplayIcon />
-              </Button>
-            </Tooltip>
-          )}
+          {(rowData.emailType === "CREATE_USER" ||
+            rowData.emailType === "RESET_PASSWORD" ||
+            rowData.emailType === "FORGOT_PASSWORD" ||
+            rowData.emailType === "CHANGE_EMAIL" ||
+            rowData.emailType === "ACTIVATE_USER") &&
+            rowData.result !== "SUCCESS" && (
+              <Tooltip title="Resend">
+                <Button
+                  color="primary"
+                  onClick={() => handleClick(rowData)}
+                  variant="outlined"
+                >
+                  <ReplayIcon />
+                </Button>
+              </Tooltip>
+            )}
         </Stack>
       ),
       sorting: false,

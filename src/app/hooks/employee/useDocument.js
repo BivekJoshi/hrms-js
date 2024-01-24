@@ -179,7 +179,7 @@ export const useEditDocument = ({ onSuccess }) => {
       onSuccess: (data, variables, context) => {
         toast.success("Successfully edited Document");
         onSuccess && onSuccess(data, variables, context);
-        // queryClient.refetchQueries("getDocumentType");
+        queryClient.refetchQueries("getDocumentById");
       },
     }
   );
