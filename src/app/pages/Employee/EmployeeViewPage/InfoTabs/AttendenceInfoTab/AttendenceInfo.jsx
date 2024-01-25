@@ -182,14 +182,16 @@ function renderEventContent(eventInfo) {
             }}
           >
             <TbCircleLetterP
-              style={{ width: "2.5rem", height: "2.5rem", color: "green" }}
+              style={{ width: "2.5rem", height: "2.5rem", color: "green"}}
             />
-            <div>
-              <Typography>
-                Check In : {eventInfo?.event?._def?.extendedProps?.time}
-              </Typography>
-              <Typography>
-                Check Out : {eventInfo?.event?._def?.extendedProps?.time}
+            <div style={{display: "flex", flexDirection: 'column', gap: '1rem'}}>
+              <Typography variant='p' sx={{display: 'flex', flexDirection: 'column', background: '#9efb9e', padding: '0 1rem', borderRadius: '2rem'}}>
+                <div>
+                Punch Time
+                </div>
+                <div>
+                {(eventInfo?.event?._def?.extendedProps?.time)}
+                </div>
               </Typography>
             </div>
           </div>

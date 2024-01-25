@@ -25,10 +25,10 @@ const EmployeeGridView = ({ employeeData }) => {
           gap: "1rem",
         }}
       >
-        {sortedEmployees?.map((employee, index) => {
+        {sortedEmployees && sortedEmployees?.map((employee, index) => {
           const singlePosition =
-            employee.employeeHistory.length > 0
-              ? employee.employeeHistory[0]?.position?.positionName
+            employee?.employeeHistory?.length > 0
+              ? employee?.employeeHistory[0]?.position?.positionName
               : "";
 
           const multiplePosition =
