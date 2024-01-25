@@ -8,29 +8,31 @@ import * as Yup from "yup";
 const QualificationSchema = Yup.object().shape({
   board: Yup.string()
     .required("Board name is required")
-    .matches(/^[A-Za-z\s]+$/, "Board must only contain letters"),
+    .matches(/^[A-Za-z\s]+$/, "Board must only contain letters")
+    .min(3, "Board Name cannot be less than 3 character"),
   institute: Yup.string()
     .required("Institute is required")
-    .matches(/^[A-Za-z\s]+$/, "Institute must only contain letters"),
+    .matches(/^[A-Za-z\s]+$/, "Institute must only contain letters")
+    .min(3, "Institude Name cannot be less than 3 character"),
   passedLevel: Yup.string().required("Enter pass level"),
   passedYear: Yup.mixed().required("Passed year is required"),
   scoreType: Yup.string()?.nullable().required("Score type is required"),
   grade: Yup.string().when("scoreType", {
     is: (scoreType) => scoreType === "PERCENT",
     then: Yup.string()
+      .required("Grade is required")
       .matches(
         /^(100(\.0{1,2})?|\d{0,2}(\.\d{1,2})?)$/,
         "Enter valid percentage not greater than 100"
       )
-      .test(
-        "min-percentage",
-        "Percentage must not be lower than 32",
-        function (value) {
-          return !value || parseFloat(value) >= 32;
-        }
-      )
+      .test("min-percentage", "Percentage must not be lower than 32", function (
+        value
+      ) {
+        return !value || parseFloat(value) >= 32;
+      })
       .notRequired(),
     otherwise: Yup.string()
+      .required("Grade is required")
       .matches(
         /^(4(\.0{1,2})?|[0-3](\.\d{1,2})?)$/,
         "Enter valid CGPA not greater than 4.0"
@@ -40,11 +42,15 @@ const QualificationSchema = Yup.object().shape({
 });
 
 const useAddQualificationDetails = () => {
-  const { addEmployee: addEmployeemutate, isSuccess: isFormSubmitSuccess } =
-    useAddQualification({});
+  const {
+    addEmployee: addEmployeemutate,
+    isSuccess: isFormSubmitSuccess,
+  } = useAddQualification({});
 
-  const { editQualificationMutate, isSuccess: isEditSuccess } =
-    useEditQualification({});
+  const {
+    editQualificationMutate,
+    isSuccess: isEditSuccess,
+  } = useEditQualification({});
 
   const formik = useFormik({
     initialValues: {
