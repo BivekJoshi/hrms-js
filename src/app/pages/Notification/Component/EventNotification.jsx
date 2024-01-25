@@ -39,7 +39,6 @@ export const EventNotification = ({ data, handleClose }) => {
     const day = eventDateObject.getDate();
     return { day, month };
   };
-  console.log({ data: data.length });
 
   if (data?.length === 0) {
     return (

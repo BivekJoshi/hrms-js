@@ -11,13 +11,13 @@ const BasicInfo = ({ data, mode, positionName, empId }) => {
 
   const bData = bankData && bankData?.[0];
   const fData = familyData && familyData?.[0];
-
+const position = positionName && positionName.length > 0 ? positionName.join(', ') : ''
   const EMPLOYEE = {
     Gender: data?.gender || "",
     "Citizenship Number": data?.citizenshipNumber || "",
     "Date of Birth": data?.dateOfBirth || "",
     "Marital Status": data?.maritalStatus || "",
-    Position: data?.positionName || "",
+    "Position": position || "",
     "PAN Number": data?.panNumber || "",
   };
   const FAMILYMEMBERS = {

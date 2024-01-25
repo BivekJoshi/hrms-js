@@ -61,7 +61,7 @@
 //       } else if (leaveDays == 1) {
 //         return "ONE_DAY";
 //       } else {
-//         console.log("Unexpected value:", leaveDays);
+//        
 //       }
 //     }
 //   };
@@ -500,7 +500,6 @@ const ApplyLeaveField = () => {
   const submitButtonText = data ? "Update Leave" : "Add Leave";
 
   // const handleChange = (e) => {
-  //   console.log(e.target.value);
   //   formik.setFieldValue("leavePeriod", e.target?.value);
   // };
 

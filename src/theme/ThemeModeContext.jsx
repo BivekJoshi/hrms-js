@@ -57,7 +57,6 @@ export const ThemeContextProvider = ({ children }) => {
       : localStorage.getItem("mode");
 
   const [mode, setMode] = useState(storedMode || "light");
-  console.log("🚀 ~ ThemeContextProvider ~ mode:", mode);
 
   const [isDarkMode, setIsDarkMode] = useState(mode === "dark");
   const [width, setWidth] = useState(window.innerWidth);
