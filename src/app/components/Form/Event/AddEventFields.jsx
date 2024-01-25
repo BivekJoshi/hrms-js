@@ -4,26 +4,6 @@ import useEventForm from "../../../hooks/event/EventForm/useEventForm";
 import RemarkField from "../../RemarkField/RemarkField";
 
 const AddEventFields = ({ formik, data }) => {
-  // const { formik, data } = useEventForm();
-
-  // const handleProceed = () => {
-  //   setOpenSubmitModal(false);
-  // };
-
-  // const handleCloseEmailform = () => {
-  //   setOpenEmail(false);
-  //   onClose();
-  // };
-
-  // const handleFormSubmit = async () => {
-  //   formik.handleSubmit();
-
-  //   if (!formik.isValidating && formik.isValid) {
-  //     setOpenSubmitModal(true);
-  //     // onClose();
-  //   }
-  // };
-
   return (
     <>
       <Grid container spacing={3}>
@@ -99,28 +79,6 @@ const AddEventFields = ({ formik, data }) => {
             size="small"
           />
         </Grid>
-        {/* <Grid item xs={12} sm={12}>
-          <TextField
-            id='eventDescription'
-            name='eventDescription'
-            label='Description'
-            fullWidth
-            multiline
-            rows={3}
-            value={formik.values.eventDescription}
-            onChange={formik.handleChange}
-            error={
-              formik.touched.eventDescription &&
-              Boolean(formik.errors.eventDescription)
-            }
-            helperText={
-              formik.touched.eventDescription && formik.errors.eventDescription
-            }
-            variant='outlined'
-            InputLabelProps={{ shrink: Boolean(formik.values.eventDescription) }}
-            inputProps={{ maxLength: 250 }}
-          />
-        </Grid> */}
         <Grid item sx={12} md={12}>
           <RemarkField
             id="eventDescription"

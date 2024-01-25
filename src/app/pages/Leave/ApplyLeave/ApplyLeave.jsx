@@ -8,30 +8,6 @@ import { useGetLoggedInUserLeaveBalance } from "../../../hooks/leave/useLeave";
 import { useGetLeaveType } from "../../../hooks/leaveType/useLeaveType";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
 
-const CustomArrow = ({ onClick, direction }) => {
-  const arrowStyles = {
-    fontSize: 30,
-    cursor: "pointer",
-    zIndex: 2,
-    position: "absolute",
-    top: "50%",
-    transform: "translateY(-50%)",
-    color: "black",
-    padding: 0,
-  };
-
-  const arrowIcon = direction === "prev" ? "<" : ">";
-
-  return (
-    <div
-      style={{ ...arrowStyles, [direction === "prev" ? "left" : "right"]: 1 }}
-      onClick={onClick}
-    >
-      {arrowIcon}
-    </div>
-  );
-};
-
 const ApplyLeave = () => {
   const { data: leavebalance, isLoading } = useGetLoggedInUserLeaveBalance();
   const { data: leaveTypeData } = useGetLeaveType();
@@ -40,6 +16,30 @@ const ApplyLeave = () => {
   if (isLoading || !leavebalance || !leaveTypeData) {
     return <div>Loading...</div>;
   }
+
+  const CustomArrow = ({ onClick, direction }) => {
+    const arrowStyles = {
+      fontSize: 30,
+      cursor: "pointer",
+      zIndex: 2,
+      position: "absolute",
+      top: "50%",
+      transform: "translateY(-50%)",
+      color: mode === 'light' ? 'black' : 'white',
+      padding: 0,
+    };
+
+    const arrowIcon = direction === "prev" ? "<" : ">";
+
+    return (
+      <div
+        style={{ ...arrowStyles, [direction === "prev" ? "left" : "right"]: 1 }}
+        onClick={onClick}
+      >
+        {arrowIcon}
+      </div>
+    );
+  };
 
   const boxes =
     leavebalance &&
