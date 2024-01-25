@@ -215,7 +215,7 @@ const EmploymentDetails = ({ role }) => {
               sx={{ mt: 2, ml: 1 }}
               onClick={handleAddOpenModal}
             >
-              Add Employment Details
+              Add
             </Button>
           )}
         </Box>

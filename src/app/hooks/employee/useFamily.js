@@ -85,7 +85,7 @@ export const useEditFamily = ({ onSuccess }) => {
     },
     {
       onSuccess: (data, variables, context) => {
-        toast.success("Family edited sucessfully");
+        toast.success("Family member edited sucessfully");
         onSuccess && onSuccess(data, variables, context);
         queryClient.invalidateQueries("getFamilyById");
       },
