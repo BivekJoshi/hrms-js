@@ -75,7 +75,7 @@ const Notification = ({ data }) => {
                 handleListKeyDown={handleListKeyDown}
               />
             </>
-          ) : (
+          ) : ( 
             <MenuItem>
               <EventNotification
                 Eventname={"Today's Event"}

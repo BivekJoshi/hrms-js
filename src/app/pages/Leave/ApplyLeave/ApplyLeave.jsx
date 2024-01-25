@@ -76,10 +76,20 @@ const ApplyLeave = () => {
         showArrows={false}
         showStatus={false}
         renderArrowPrev={(onClickHandler) => (
-          <CustomArrow onClick={onClickHandler} direction="prev" />
+          <div style={{border: 'px solid green'}}>
+            <CustomArrow
+            onClick={onClickHandler}
+            direction="prev"
+            customStyles={{ color: mode === "light" ? "green" : "#0AEA0A", fontSize: '2rem' }}
+          />
+          </div>
         )}
         renderArrowNext={(onClickHandler) => (
-          <CustomArrow onClick={onClickHandler} direction="next" />
+          <CustomArrow
+            onClick={onClickHandler}
+            direction="next"
+            customStyles={{ color: mode === "light" ? "green" : "#0AEA0A", fontSize: '2rem' }}
+          />
         )}
       >
         {chunkedBoxes.map((chunk, index) => (
