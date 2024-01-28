@@ -83,7 +83,7 @@ const ApplyLeave = () => {
             <CustomArrow
             onClick={onClickHandler}
             direction="prev"
-            customStyles={{ color: mode === "light" ? "green" : "#0AEA0A", fontSize: '2rem' }}
+            customStyles={{ color: mode === "light" ? "green" : "#fff", fontSize: '2rem' }}
           />
           </div>
         )}
@@ -91,7 +91,7 @@ const ApplyLeave = () => {
           <CustomArrow
             onClick={onClickHandler}
             direction="next"
-            customStyles={{ color: mode === "light" ? "green" : "#0AEA0A", fontSize: '2rem' }}
+            customStyles={{ color: mode === "light" ? "green" : "#fff", fontSize: '2rem' }}
           />
         )}
       >
