@@ -14,9 +14,9 @@ const TrainingSchema = Yup.object().shape({
   category: Yup.string()
     .required("Category is required")
     .max(50, "Training category cannot be greater than 50  characters"),
-  startDate: Yup.string().required("Start date is required"),
+  startDate: Yup.string().required("Please select start date"),
   endDate: Yup.string()
-    .required("End date is required")
+    .required("Please select end date")
     .test(
       "is-greater-or-equal",
       "End date must be greater than or equal to start date",

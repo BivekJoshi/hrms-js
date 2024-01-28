@@ -1,5 +1,6 @@
 import {
   Autocomplete,
+  Divider,
   Fade,
   FormLabel,
   Grid,
@@ -251,8 +252,8 @@ const QualificationAddField = ({ passedLevelData, formik }) => {
 
       <Grid item xs={12}>
         <FormLabel component="legend">Upload Transcript</FormLabel>
-        <div style={{ display: "flex" }}>
-          <Input
+        <div style={{ display: "flex",justifyContent:"space-between" }}>
+          <input
             type="file"
             fullWidth
             id="transcript"
@@ -279,9 +280,12 @@ const QualificationAddField = ({ passedLevelData, formik }) => {
         </div>
       </Grid>
       <Grid item xs={12}>
+        <Divider />
+      </Grid>
+      <Grid item xs={12}>
         <FormLabel component="legend">Upload Character Certificate</FormLabel>
-        <div style={{ display: "flex" }}>
-          <Input
+        <div style={{ display: "flex",justifyContent:"space-between" }}>
+          <input
             type="file"
             accept="image/*"
             fullWidth
@@ -310,9 +314,12 @@ const QualificationAddField = ({ passedLevelData, formik }) => {
         </div>
       </Grid>
       <Grid item xs={12}>
+        <Divider />
+      </Grid>
+      <Grid item xs={12}>
         <FormLabel component="legend">Upload other Document</FormLabel>
-        <div style={{ display: "flex" }}>
-          <Input
+        <div style={{ display: "flex",justifyContent:"space-between" }}>
+          <input
             type="file"
             accept="image/*"
             fullWidth
@@ -339,6 +346,9 @@ const QualificationAddField = ({ passedLevelData, formik }) => {
             </Tooltip>
           )}
         </div>
+      </Grid>
+      <Grid item xs={12}>
+        <Divider />
       </Grid>
       <Modal
         open={isPreviewOpen}
