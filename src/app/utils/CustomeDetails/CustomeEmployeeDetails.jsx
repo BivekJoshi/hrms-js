@@ -262,7 +262,10 @@ const CustomeEmployeeDetails = ({
                   alignItems: "center",
                   justifyContent: "space-between",
                   marginBottom: "1rem",
-                  position: "relative",
+                  // position: "relative",
+                  position: "sticky",
+                  zIndex: "100",
+                  top:"0"
                 }}
               >
                 <Typography

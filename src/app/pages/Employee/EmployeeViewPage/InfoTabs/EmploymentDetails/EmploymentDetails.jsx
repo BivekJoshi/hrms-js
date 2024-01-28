@@ -22,7 +22,7 @@ import EditEmploymentDetails from "./EditEmploymentDetails";
 import useAuth from "../../../../../../auth/hooks/component/login/useAuth";
 import EmployeeTransferAndUpgrade from "./EmployeeTransferAndUpgrade";
 
-const EmploymentDetails = ({ role }) => {
+const EmploymentDetails = ({ role, employeeId }) => {
   const { id } = useParams();
 
   const { isEmployee } = useAuth();
@@ -39,7 +39,7 @@ const EmploymentDetails = ({ role }) => {
     setmultiPosition(false);
   };
 
-  const { data: employeeHistory, isLoading } = useGetEmployeeEmployment(id);
+  const { data: employeeHistory, isLoading } = useGetEmployeeEmployment(id || employeeId);
 
   const activeData = employeeHistory?.filter((item) => item?.isActive === true);
 

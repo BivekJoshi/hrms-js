@@ -107,7 +107,6 @@ export const useEditEmployeeHistory = ({ onSuccess }) => {
       },
       onError: (err, _variables, _context) => {
         // toast.error();
-        console.log(`error: ${err.message}`);
       },
     }
   );
