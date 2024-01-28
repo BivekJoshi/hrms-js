@@ -39,6 +39,7 @@ const getPalette = (darkMode) => {
       event: darkMode ? "#b3f594" : "#D5FFCB",
       holiday: darkMode ? "#eeccc6" : "#FFEDEA",
       toDo: darkMode ? "" : "#F2F4F4",
+      modal: darkMode ? "#303030" : "#4aa14e",  // title modal
     },
     text: {
       primary: darkMode ? "#FFFFFF" : "#000",
