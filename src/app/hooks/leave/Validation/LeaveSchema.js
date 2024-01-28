@@ -5,7 +5,7 @@ const LeaveSchema = Yup.object().shape({
   toDate: Yup.date()
   .required('Please select date')
   .min(Yup.ref('fromDate'), 'To date cannot be earlier than from date'),
-  leaveTypeId: Yup.object().required('Please select leave type'),
+  leaveTypeId: Yup.object().nullable().required('Please select leave type'),
   employeeId: Yup.string().required('Please select employee name'),
   leaveReason: Yup.string().required(' Leave Reason is required').max(255, 'Leave Reason cannot be greater than 255 characters'),
   leaveStatus:Yup.string().required("Status is required"),

@@ -26,6 +26,7 @@ export const EventNotification = ({ data, handleClose }) => {
       setError(true);
       return;
     }
+    setError(false);
     formik.setFieldValue("status", response);
     formik.setFieldValue("eventId", eventId);
     formik.setFieldValue("notificationId", notificationId);
@@ -229,16 +230,12 @@ export const EventNotification = ({ data, handleClose }) => {
                         multiline
                         rows={2}
                         value={formik.values.remarks}
-                        onChange={formik.handleChange}
-                        error={
-                          error ||
-                          (formik.touched.remarks &&
-                            Boolean(formik.errors.remarks))
-                        }
-                        helperText={
-                          (error && "Remarks are required") ||
-                          (formik.touched.remarks && formik.errors.remarks)
-                        }
+                        onChange={(e) => {
+                          formik.handleChange(e);
+                          setError(false);
+                        }}
+                        error={error && !formik.values.remarks}
+                        helperText={error && "Remarks are required"}
                         variant="outlined"
                         size="small"
                       />

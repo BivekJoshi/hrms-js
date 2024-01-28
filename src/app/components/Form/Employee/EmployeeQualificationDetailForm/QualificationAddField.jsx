@@ -252,7 +252,7 @@ const QualificationAddField = ({ passedLevelData, formik }) => {
 
       <Grid item xs={12}>
         <FormLabel component="legend">Upload Transcript</FormLabel>
-        <div style={{ display: "flex",justifyContent:"space-between" }}>
+        <div style={{ display: "flex",justifyContent:"space-between", color: mode === 'light' ? '#000' : '#fff' }}>
           <input
             type="file"
             fullWidth
@@ -284,7 +284,7 @@ const QualificationAddField = ({ passedLevelData, formik }) => {
       </Grid>
       <Grid item xs={12}>
         <FormLabel component="legend">Upload Character Certificate</FormLabel>
-        <div style={{ display: "flex",justifyContent:"space-between" }}>
+        <div style={{ display: "flex",justifyContent:"space-between", color: mode === 'light' ? '#000' : '#fff' }}>
           <input
             type="file"
             accept="image/*"
@@ -318,7 +318,7 @@ const QualificationAddField = ({ passedLevelData, formik }) => {
       </Grid>
       <Grid item xs={12}>
         <FormLabel component="legend">Upload other Document</FormLabel>
-        <div style={{ display: "flex",justifyContent:"space-between" }}>
+        <div style={{ display: "flex",justifyContent:"space-between", color: mode === 'light' ? '#000' : '#fff' }}>
           <input
             type="file"
             accept="image/*"

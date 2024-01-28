@@ -507,6 +507,7 @@ const ApplyLeaveField = () => {
     const selectedPeriod = e.target.value;
     setSelectedLeavePeriod(selectedPeriod);
     formik.setFieldValue("leavePeriod", selectedPeriod);
+    formik.setFieldValue("toDate", formik.values.fromDate);
   };
 
   const getLeaveTypeName = (leaveTypeId) => {
