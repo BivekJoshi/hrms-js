@@ -106,7 +106,7 @@ export const useEditEmployeeHistory = ({ onSuccess }) => {
         queryClient.invalidateQueries("getEmployeeHistory");
       },
       onError: (err, _variables, _context) => {
-        toast.error(`error: ${err.message}`);
+        // toast.error();
       },
     }
   );

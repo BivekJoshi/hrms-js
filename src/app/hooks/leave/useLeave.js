@@ -157,7 +157,7 @@ export const useEditLeave = ({ onSuccess }) => {
   return useMutation(['editLeave'], (formData) => editLeave(formData), {
     onSuccess: (data, variables, context) => {
       toast.success('Successfully edited Leave');
-      navigate('/employee/leave');
+      navigate('/employee/leaveHistory');
       onSuccess && onSuccess(data, variables, context);
       queryClient.invalidateQueries('getLoggedInUserLeave');
     },

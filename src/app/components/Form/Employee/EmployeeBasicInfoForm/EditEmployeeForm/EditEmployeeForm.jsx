@@ -44,10 +44,10 @@ const EditEmployeeForm = () => {
     "Document Details",
   ];
 
-  const { data , isLoading: employeeLoading } = useGetEmployeeById(id);
-  const { data: addressData, isLoading: getaddressLoading } = useGetAddressById(
-    id
-  );
+  const { data, isLoading: employeeLoading } = useGetEmployeeById(id);
+  // const { data: addressData, isLoading: getaddressLoading } = useGetAddressById(
+  //   id
+  // );
   const {
     data: employmentHistoryData,
     isLoading: LoadingEmployment,
@@ -65,7 +65,7 @@ const EditEmployeeForm = () => {
   const {
     formik: permanentFormik,
     isLoading: addressLoading,
-  } = usePermanentAddressForm(addressData, getaddressLoading);
+  } = usePermanentAddressForm(id);
 
   const { formik: employmentHistoryFormik } = useEmploymentHistory();
 
@@ -81,16 +81,16 @@ const EditEmployeeForm = () => {
   const getStepContent = (step) => {
     switch (step) {
       case 0:
-        return <EmployeeBasicInfoForm formik={formik} isLoading={isLoading} data={data} />;
-
-      case 1:
         return (
-          <EmployeeAddressDetailForm
-            formik={permanentFormik}
-            isLoading={addressLoading}
-            data={addressData}
+          <EmployeeBasicInfoForm
+            formik={formik}
+            isLoading={isLoading}
+            data={data}
           />
         );
+
+      case 1:
+        return <EmployeeAddressDetailForm formik={permanentFormik} />;
 
       case 2:
         return employmentHistoryData?.length > 0 ? (
@@ -100,14 +100,15 @@ const EditEmployeeForm = () => {
             //   // handleSuccess={handleSuccess}
             //   minDate={minDate}
             // />
-            <EditEmploymentTransfer data={employmentHistoryData} isLoading={LoadingEmployment}/>
+            <EditEmploymentTransfer
+              data={employmentHistoryData}
+              isLoading={LoadingEmployment}
+            />
           )
         ) : (
           <AddEmploymentHistoryFields
             formik={employmentHistoryFormik}
             adjustSize={6}
-            // isLoading={addressLoading}
-            // data={addressData}
           />
         );
       case 3:

@@ -134,7 +134,7 @@ const NewFilter = ({
             fullWidth
             value={element?.value}
             onChange={(e) => element?.onChange(e.target.value)}
-            size='small'
+            size="small"
           />
         );
       case "clearButton":
@@ -228,7 +228,13 @@ const NewFilter = ({
             {({ setFieldValue, ...formikProps }) => {
               return (
                 <Form>
-                  <Grid container spacing={2} alignItems={"center"}>
+                  <Grid
+                    container
+                    spacing={2}
+                    direction="row"
+                    alignItems="center"
+                    // justifyContent="space-between"
+                  >
                     {inputField?.map((element, index) => {
                       return (
                         <Grid
@@ -246,8 +252,43 @@ const NewFilter = ({
                         </Grid>
                       );
                     })}
+                    <Grid item>
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          flexDirection: "flex-end",
+                          gap:"1rem"
+                          // backgroundColor: "red",
+                        }}
+                      >
+                        {!disableSubmit && (
+                          <Button
+                            type="submit"
+                            variant="contained"
+                            sx={{
+                              textTransform: "none",
+                            }}
+                          >
+                            Search
+                          </Button>
+                        )}
+                        {!hideClear && (
+                          <Button
+                            variant="outlined"
+                            sx={{
+                              textTransform: "none",
+                            }}
+                            color="error"
+                            onClick={() => handleClear(formikProps)}
+                          >
+                            Clear
+                          </Button>
+                        )}
+                      </div>
+                    </Grid>
                   </Grid>
-                  <div style={{ display: "flex", justifyContent: "flex-end" }}>
+                  {/* <div style={{ display: "flex", justifyContent: "flex-end" }}>
                     {!disableSubmit && (
                       <Button
                         type="submit"
@@ -274,7 +315,7 @@ const NewFilter = ({
                         Clear
                       </Button>
                     )}
-                  </div>
+                  </div> */}
                 </Form>
               );
             }}
