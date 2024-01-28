@@ -205,7 +205,7 @@ const Employee = () => {
             <NewFilter
               inputField={filterMenu}
               disableSubmit={true}
-              hideFilter
+              // hideFilter
               hideClear
             />
             <EmployeeGridView employeeData={employeeData} />
@@ -247,7 +247,10 @@ const Employee = () => {
                   bottom: "0",
                 }}
               />
-              <IconButton onClick={() => setOpenAddModal(false)}>
+              <IconButton onClick={() => {
+                setOpenAddModal(false);
+                formik.handleReset();
+              }}>
                 <CloseIcon />
               </IconButton>
             </Grid>
@@ -277,6 +280,7 @@ const Employee = () => {
                 color="error"
                 onClick={() => {
                   setOpenAddModal(false);
+                  formik.handleReset();
                 }}
                 sx={{ textTransform: "none" }}
               >

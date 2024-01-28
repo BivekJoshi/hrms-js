@@ -8,30 +8,6 @@ import { useGetLoggedInUserLeaveBalance } from "../../../hooks/leave/useLeave";
 import { useGetLeaveType } from "../../../hooks/leaveType/useLeaveType";
 import ThemeModeContext from "../../../../theme/ThemeModeContext";
 
-const CustomArrow = ({ onClick, direction }) => {
-  const arrowStyles = {
-    fontSize: 30,
-    cursor: "pointer",
-    zIndex: 2,
-    position: "absolute",
-    top: "50%",
-    transform: "translateY(-50%)",
-    color: "black",
-    padding: 0,
-  };
-
-  const arrowIcon = direction === "prev" ? "<" : ">";
-
-  return (
-    <div
-      style={{ ...arrowStyles, [direction === "prev" ? "left" : "right"]: 1 }}
-      onClick={onClick}
-    >
-      {arrowIcon}
-    </div>
-  );
-};
-
 const ApplyLeave = () => {
   const { data: leavebalance, isLoading } = useGetLoggedInUserLeaveBalance();
   const { data: leaveTypeData } = useGetLeaveType();
@@ -40,6 +16,32 @@ const ApplyLeave = () => {
   if (isLoading || !leavebalance || !leaveTypeData) {
     return <div>Loading...</div>;
   }
+
+  const CustomArrow = ({ onClick, direction, customStyles }) => {
+    const arrowStyles = {
+      fontSize: 30,
+      cursor: "pointer",
+      zIndex: 2,
+      position: "absolute",
+      top: "50%",
+      transform: `translateY(-70%) ${direction === 'prev' ? 'translateX(60%)' : 'translateX(-60%)'}`,
+      color: customStyles.color || (mode === 'light' ? 'black' : 'white'),
+      padding: 0,
+    };
+  
+    const arrowIcon = direction === "prev" ? "<" : ">";
+  
+    return (
+      <div
+        style={{ ...arrowStyles, [direction === "prev" ? "left" : "right"]: 1 }}
+        onClick={onClick}
+      >
+        {arrowIcon}
+      </div>
+    );
+  };
+  
+  
 
   const boxes =
     leavebalance &&
@@ -71,15 +73,26 @@ const ApplyLeave = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Typography variant="h5">Taken Leave</Typography>
-      <Carousel
+    <div>
+    <Carousel
         showThumbs={false}
         showArrows={false}
         showStatus={false}
         renderArrowPrev={(onClickHandler) => (
-          <CustomArrow onClick={onClickHandler} direction="prev" />
+          <div style={{border: 'px solid green'}}>
+            <CustomArrow
+            onClick={onClickHandler}
+            direction="prev"
+            customStyles={{ color: mode === "light" ? "green" : "#fff", fontSize: '2rem' }}
+          />
+          </div>
         )}
         renderArrowNext={(onClickHandler) => (
-          <CustomArrow onClick={onClickHandler} direction="next" />
+          <CustomArrow
+            onClick={onClickHandler}
+            direction="next"
+            customStyles={{ color: mode === "light" ? "green" : "#fff", fontSize: '2rem' }}
+          />
         )}
       >
         {chunkedBoxes.map((chunk, index) => (
@@ -94,6 +107,7 @@ const ApplyLeave = () => {
           </Box>
         ))}
       </Carousel>
+    </div>
     </Box>
   );
 };

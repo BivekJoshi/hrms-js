@@ -147,7 +147,7 @@ const TrainingInfo = ({ data, role }) => {
             sx={{ mt: 3, ml: 1 }}
             onClick={handleAddOpenModal}
           >
-            Add Training
+            Add
           </Button>
         )}
       </Box>
@@ -179,7 +179,7 @@ const TrainingInfo = ({ data, role }) => {
         <EditTrainingInfo
           title={'Edit Training'}
           empId={id}
-          id={editedTraining?.id}
+          data={editedTraining}
           open={openEditModal}
           handleCloseModal={handleCloseEditModal}
         />
