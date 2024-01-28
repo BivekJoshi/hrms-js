@@ -53,7 +53,7 @@ export const useAddfamilyMember = ({ onSuccess }) => {
         queryClient.invalidateQueries("getFamilyById");
       },
       onError: (err, _variables, _context) => {
-        toast.error(`error: ${err.message}`);
+        // toast.error(`error: ${err.message}`);
       },
     }
   );

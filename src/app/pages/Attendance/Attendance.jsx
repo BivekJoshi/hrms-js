@@ -185,7 +185,6 @@ const Attendance = () => {
         minutes < 10 ? "0" : ""
       }${minutes}${ampm}`;
     
-      console.log(formattedTime);
       return (
         
         <div>

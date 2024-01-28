@@ -179,7 +179,7 @@ const TrainingInfo = ({ data, role }) => {
         <EditTrainingInfo
           title={'Edit Training'}
           empId={id}
-          id={editedTraining?.id}
+          data={editedTraining}
           open={openEditModal}
           handleCloseModal={handleCloseEditModal}
         />

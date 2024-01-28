@@ -17,20 +17,20 @@ const ApplyLeave = () => {
     return <div>Loading...</div>;
   }
 
-  const CustomArrow = ({ onClick, direction }) => {
+  const CustomArrow = ({ onClick, direction, customStyles }) => {
     const arrowStyles = {
       fontSize: 30,
       cursor: "pointer",
       zIndex: 2,
       position: "absolute",
       top: "50%",
-      transform: "translateY(-50%)",
-      color: mode === 'light' ? 'black' : 'white',
+      transform: `translateY(-70%) ${direction === 'prev' ? 'translateX(60%)' : 'translateX(-60%)'}`,
+      color: customStyles.color || (mode === 'light' ? 'black' : 'white'),
       padding: 0,
     };
-
+  
     const arrowIcon = direction === "prev" ? "<" : ">";
-
+  
     return (
       <div
         style={{ ...arrowStyles, [direction === "prev" ? "left" : "right"]: 1 }}
@@ -40,6 +40,8 @@ const ApplyLeave = () => {
       </div>
     );
   };
+  
+  
 
   const boxes =
     leavebalance &&
@@ -71,7 +73,8 @@ const ApplyLeave = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Typography variant="h5">Taken Leave</Typography>
-      <Carousel
+    <div>
+    <Carousel
         showThumbs={false}
         showArrows={false}
         showStatus={false}
@@ -104,6 +107,7 @@ const ApplyLeave = () => {
           </Box>
         ))}
       </Carousel>
+    </div>
     </Box>
   );
 };

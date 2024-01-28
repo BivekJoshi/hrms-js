@@ -19,11 +19,11 @@ export const AddTrainingInfo = ({ open, handleCloseModal, title }) => {
 export const EditTrainingInfo = ({
   open,
   handleCloseModal,
-  id,
+  data,
   empId,
   title,
 }) => {
-  const { data } = useGetTrainingById(id);
+  // const { data } = useGetTrainingById(id);
   return (
     <div>
       <FormModal
