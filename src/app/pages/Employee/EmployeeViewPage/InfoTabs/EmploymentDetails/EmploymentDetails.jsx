@@ -285,6 +285,7 @@ const EmploymentDetails = ({ role, employeeId }) => {
           handleClose={handleEditModalClose}
           tableId={rowData?.id}
           minDate={minDate}
+          rowData={rowData}
         />
       )}
     </Box>
