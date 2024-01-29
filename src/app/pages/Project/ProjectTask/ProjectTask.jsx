@@ -103,6 +103,7 @@ const ProjectTask = ({ permissions }) => {
             overflowWrap: "break-word",
             wordWrap: "break-word",
             wordBreak: "break-all",
+            width: '16rem',
           }}
         >
           {rowData?.detail}

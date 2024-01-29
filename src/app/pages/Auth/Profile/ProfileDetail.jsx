@@ -52,9 +52,14 @@ const ProfileDetail = () => {
   const filePath = photo ? DOC_URL + photo : "";
   
   const userRoleLabel = roleName?.find(role => role?.role === loggedUserData?.role?.name)?.label || "No role assigned yet";
+  const positionString = employeeData && employeeData?.employeeHistory?.map(
+    (history) => history?.position?.positionName
+  ) || [];
+  const positionName = positionString && positionString.join(", ");
+
   const userInformation = [
     { label: "User Name", value: `${employeeData?.firstName} ${employeeData?.middleName || ""} ${employeeData?.lastName}` },
-    { label: "Position", value: employeeData?.positionName },
+    { label: "Position", value: positionName },
     { label: "Mobile", value: employeeData?.mobileNumber },
     { label: "Address", value: loggedUserData?.address },
     { label: "User Role", value: userRoleLabel },

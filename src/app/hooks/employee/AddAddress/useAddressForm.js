@@ -2,12 +2,14 @@ import { useFormik } from "formik";
 import { AddressSchema } from "./AddressSchema";
 import {
   useEditAddress,
+  useGetAddressById,
   usePermanentAddAddress,
   useTemporaryAddress,
 } from "../useAddress";
 import { toast } from "react-toastify";
 
-export const usePermanentAddressForm = (data, isLoading) => {
+export const usePermanentAddressForm = (id) => {
+  const { data, isLoading } = useGetAddressById(id);
   const { mutate: permanentMutate } = usePermanentAddAddress({});
   const { mutate: temporaryMutate } = useTemporaryAddress({});
   const { mutate: editMutate } = useEditAddress({});
@@ -94,14 +96,6 @@ export const usePermanentAddressForm = (data, isLoading) => {
     if (!formik.values?.perTempAddSame) {
       permanentMutate([finalAddress?.[0]]);
     } else permanentMutate(finalAddress);
-
-    // if (tempAddressIsEmpty) {
-    //   // If temporary address is empty, only update the permanent address
-    //   permanentMutate([{ ...addressDetails?.[0] }]);
-    // } else {
-    //   // If temporary address is not empty, update both permanent and temporary addresses
-    //   permanentMutate(addressDetails);
-    // }
   }
 
   function handleEditRequest(values) {
@@ -128,7 +122,10 @@ export const usePermanentAddressForm = (data, isLoading) => {
         },
       });
     };
-    if (!formik.values?.perTempAddSame) {
+    if (
+      !formik.values?.perTempAddSame ||
+      formik?.values?.addresses[0]?.addressType === "PERMANENT"
+    ) {
       handleEditMutate([finalAddress?.[0]], "Address edited successfully");
     } else handleEditMutate(finalAddress, "Address edited successfully");
   }

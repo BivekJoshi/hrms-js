@@ -18,6 +18,9 @@ const ToDoList = () => {
     const day = eventDateObject.getDate();
     return { day, month };
   };
+  const toggleDropdown = (index) => {
+   
+  }
 
   return (
     <Grid display="flex" flexDirection="column" gap="1rem">

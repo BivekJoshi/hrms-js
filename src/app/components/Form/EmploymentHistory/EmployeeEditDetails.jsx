@@ -2,8 +2,9 @@ import { Button, Grid, TextField } from "@mui/material";
 import React from "react";
 import useEditEmployeeDetails from "../../../hooks/employee/useEmployeeDetailsEdit";
 
-const EmployeeEditFields = ({ onClose,tableId }) => {
+const EmployeeEditFields = ({ onClose,tableId,rowData }) => {
   const { formik } = useEditEmployeeDetails(onClose, tableId);
+  const currentDate = new Date().toISOString().split('T')[0];
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
@@ -29,6 +30,11 @@ const EmployeeEditFields = ({ onClose,tableId }) => {
             }
             variant="outlined"
             InputLabelProps={{ shrink: true }}
+            inputProps={{
+              min: rowData?.effectiveDateFrom,
+              max: currentDate, 
+            }}
+            size="small"
           />
         </Grid>
       </Grid>

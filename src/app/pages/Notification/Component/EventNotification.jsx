@@ -22,10 +22,6 @@ export const EventNotification = ({ data, handleClose }) => {
   const userRole = decode?.userRole;
 
   const handleButton = (response, eventId, notificationId) => {
-    if (response === "NO" && !formik.values.remarks) {
-      setError(true);
-      return;
-    }
     formik.setFieldValue("status", response);
     formik.setFieldValue("eventId", eventId);
     formik.setFieldValue("notificationId", notificationId);
@@ -41,20 +37,38 @@ export const EventNotification = ({ data, handleClose }) => {
     return { day, month };
   };
 
-  return (
-    <Box
-      sx={{
-        textAlign: "center",
-        maxHeight: "20rem",
-        overflowY: "scroll",
-        padding: "0px",
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
-      <Typography variant="h6" sx={{ color: "#6DAB23" }}>
-        Upcoming Event
-      </Typography>
+  if (data?.length === 0) {
+    return (
+      <Box
+        sx={{
+          textAlign: "center",
+          maxHeight: "20rem",
+          overflowY: "scroll",
+          padding: "0px",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <Typography variant="h6" sx={{ color: "#6DAB23" }}>
+          No Events
+        </Typography>
+      </Box>
+    );
+  } else
+    return (
+      <Box
+        sx={{
+          textAlign: "center",
+          maxHeight: "20rem",
+          overflowY: "scroll",
+          padding: "0px",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <Typography variant="h6" sx={{ color: "#6DAB23" }}>
+          Upcoming Events
+        </Typography>
 
       {data &&
         data?.map((ename, index) => (
@@ -184,22 +198,20 @@ export const EventNotification = ({ data, handleClose }) => {
                   </Button>
                 </div>
                 {showRemark?.[index] && (
-                  <div style={{ display: "flex", flexDirection: "column", gap: '0.1rem' }}>
+                  <div style={{ display: "flex", flexDirection: "column" }}>
                     <TextField
                       id="remarks"
                       name="remarks"
                       label="Remarks"
                       placeholder="Enter your remarks"
                       fullWidth
-                      multiline
-                      rows={2}
                       value={formik.values.remarks}
                       onChange={formik.handleChange}
-                      error={ error ||
+                      error={
                         formik.touched.remarks && Boolean(formik.errors.remarks)
                       }
-                      helperText={ (error && "Remarks are required") ||
-                      (formik.touched.remarks && formik.errors.remarks)
+                      helperText={
+                        formik.touched.remarks && formik.errors.remarks
                       }
                       variant="outlined"
                       size="small"
