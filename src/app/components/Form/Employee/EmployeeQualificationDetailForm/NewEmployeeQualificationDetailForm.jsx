@@ -64,7 +64,8 @@ const NewEmployeeQualificationDetailForm = ({ employeId }) => {
         }
         isLoading={isLoading}
         handleFormSubmit={handleSubmit}
-        isSubmitSuccess={isFormSubmitSuccess || isEditSuccess}
+        isSubmitSuccess={isFormSubmitSuccess}
+        isEditSuccess={isEditSuccess}
         deleteCallBack={handleDeleteHistory}
         showDocumentImg
         modalHeight={"70vh"}
