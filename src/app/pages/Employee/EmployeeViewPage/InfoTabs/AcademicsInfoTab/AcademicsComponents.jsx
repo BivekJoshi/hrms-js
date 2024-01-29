@@ -14,7 +14,7 @@ import useAuth from "../../../../../../auth/hooks/component/login/useAuth";
 const primaryColor = "#1c7ed6";
 const AcademicsComponents = ({ data, isLoading }) => {
   const auth = useAuth();
-
+console.log(auth)
   const columns = [
     {
       title: "SN",
