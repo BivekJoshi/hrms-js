@@ -92,6 +92,15 @@ const EditEmployee = () => {
                   </Button>
                 </>
               )}
+              {activeStep === 7 && (
+                 <Button
+                 sx={{ mt: 3, ml: 1, textTransform: 'capitalize' }}
+                 variant='contained'
+                 onClick={handleSubmit}
+               >
+                 Exit
+               </Button>
+              )}
             </div>
           </Box>
         </>

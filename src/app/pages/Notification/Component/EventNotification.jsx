@@ -22,13 +22,17 @@ export const EventNotification = ({ data, handleClose }) => {
   const userRole = decode?.userRole;
 
   const handleButton = (response, eventId, notificationId) => {
+    if (response === "NO" && !formik.values.remarks) {
+      setError(true);
+      return;
+    }
+    setError(false);
     formik.setFieldValue("status", response);
     formik.setFieldValue("eventId", eventId);
     formik.setFieldValue("notificationId", notificationId);
     formik.handleSubmit();
     handleClose();
   };
- 
 
   const getUpcomingDay = (eventDate) => {
     const eventDateObject = new Date(eventDate);
@@ -180,42 +184,6 @@ export const EventNotification = ({ data, handleClose }) => {
                       handleButton("OK", ename?.eventId, ename?.notificationId)
                     }
                   >
-                    Yes
-                  </Button>
-                  <Divider orientation="vertical" flexItem></Divider>
-                  <Button
-                    sx={{
-                      color: "red",
-                      textTransform: "none",
-                      fontWeight: "bold",
-                    }}
-                    startIcon={<CloseIcon />}
-                    onClick={() =>
-                      setShowRemark({ ...showRemark, [index]: true })
-                    }
-                  >
-                    No
-                  </Button>
-                </div>
-                {showRemark?.[index] && (
-                  <div style={{ display: "flex", flexDirection: "column" }}>
-                    <TextField
-                      id="remarks"
-                      name="remarks"
-                      label="Remarks"
-                      placeholder="Enter your remarks"
-                      fullWidth
-                      value={formik.values.remarks}
-                      onChange={formik.handleChange}
-                      error={
-                        formik.touched.remarks && Boolean(formik.errors.remarks)
-                      }
-                      helperText={
-                        formik.touched.remarks && formik.errors.remarks
-                      }
-                      variant="outlined"
-                      size="small"
-                    />
                     <Button
                       variant="outlined"
                       onClick={() =>

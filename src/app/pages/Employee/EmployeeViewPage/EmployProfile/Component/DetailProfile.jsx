@@ -45,7 +45,7 @@ export const DetailProfile = ({ data, role, setShowPersonalProfile }) => {
 
     // fontWeight: "bold",
   };
-  console.log(data)
+ 
   const tabsData = [
     {
       label: "Leave Records",

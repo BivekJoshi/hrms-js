@@ -63,7 +63,7 @@ const NewEmployeeHistoryDetailForm = ({employeeId}) => {
         isEditSuccess={isEditSuccess}
         deleteCallBack={handleDeleteHistory}
         modalWidth={500}
-        // modalHeight={"70vh"}
+        modalHeight={"70vh"}
         showAddButton={true}
       />
     </div>
