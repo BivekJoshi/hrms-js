@@ -23,6 +23,7 @@ const EditLeaveSchema = Yup.object().shape({
   leaveStatus: Yup.string().required(
     'You need to either approve or reject this leave.'
   ),
+  leaveReason: Yup.string().required('Leave reason is required'),
 });
 
 export { EditLeaveSchema };
