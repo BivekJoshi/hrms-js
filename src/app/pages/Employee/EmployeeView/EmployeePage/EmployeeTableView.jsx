@@ -12,7 +12,7 @@ const EmployeeTableView = ({ employeeData, isLoading }) => {
     const nameB = b?.firstName?.toLowerCase() || "";
     return nameA.localeCompare(nameB);
   });
-  console.log(employeeData, "employeeDataaaa");
+ 
   const columns = [
     {
       title: "SN",
