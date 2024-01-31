@@ -17,11 +17,15 @@ import ThemeModeContext from "../../../../../../theme/ThemeModeContext";
 import { ThemeSwitch } from "../../../../../../theme/ThemeSwitch";
 
 const EmployeeUpDown = ({ data, handleSuccess, backCallBack }) => {
-  const { data: departmentData, isLoading: loadingDepartment } =
-    useGetDepartment();
+  const {
+    data: departmentData,
+    isLoading: loadingDepartment,
+  } = useGetDepartment();
   const { data: companyData, isLoading: loadingCompany } = useGetCompany();
-  const { data: designationData, isLoading: loadingDesignation } =
-    useGetDesignation();
+  const {
+    data: designationData,
+    isLoading: loadingDesignation,
+  } = useGetDesignation();
   const { mode } = useContext(ThemeModeContext);
   const { formik } = useTransferEmployment(data, handleSuccess);
 
@@ -57,6 +61,7 @@ const EmployeeUpDown = ({ data, handleSuccess, backCallBack }) => {
                 formik.touched.fromPosition && formik.errors.fromPosition
               }
               variant="outlined"
+              size="small"
             >
               {!loadingDesignation &&
                 designationData?.map((option) => (
@@ -86,6 +91,7 @@ const EmployeeUpDown = ({ data, handleSuccess, backCallBack }) => {
               }
               helperText={formik.touched.positionId && formik.errors.positionId}
               variant="outlined"
+              size="small"
             >
               {!loadingDesignation &&
                 designationData?.map((option) => (
@@ -139,6 +145,7 @@ const EmployeeUpDown = ({ data, handleSuccess, backCallBack }) => {
                   formik.touched.fromDepartment && formik.errors.fromDepartment
                 }
                 variant="outlined"
+                size="small"
               >
                 {!loadingDepartment &&
                   departmentData?.map((option) => (
@@ -171,6 +178,7 @@ const EmployeeUpDown = ({ data, handleSuccess, backCallBack }) => {
                   formik.touched.departmentId && formik.errors.departmentId
                 }
                 variant="outlined"
+                size="small"
               >
                 {!loadingDepartment &&
                   departmentData?.map((option) => (
@@ -203,6 +211,7 @@ const EmployeeUpDown = ({ data, handleSuccess, backCallBack }) => {
                   formik.touched.fromBranch && formik.errors.fromBranch
                 }
                 variant="outlined"
+                size="small"
               >
                 {!loadingCompany &&
                   companyData?.map((option) => (
@@ -232,6 +241,7 @@ const EmployeeUpDown = ({ data, handleSuccess, backCallBack }) => {
                 }
                 helperText={formik.touched.branchId && formik.errors.branchId}
                 variant="outlined"
+                size="small"
               >
                 {!loadingCompany &&
                   companyData?.map((option) => (
@@ -267,6 +277,7 @@ const EmployeeUpDown = ({ data, handleSuccess, backCallBack }) => {
             }
             variant="outlined"
             InputLabelProps={{ shrink: true }}
+            size="small"
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -287,6 +298,7 @@ const EmployeeUpDown = ({ data, handleSuccess, backCallBack }) => {
             }
             variant="outlined"
             InputLabelProps={{ shrink: true }}
+            size="small"
           />
         </Grid>
         <Grid item xs={12} sm={12}>

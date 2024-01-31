@@ -74,6 +74,7 @@ const EmployeeTransferAndUpgrade = ({ handleSuccess, backCallBack }) => {
             error={formik.touched.branchId && Boolean(formik.errors.branchId)}
             helperText={formik.touched.branchId && formik.errors.branchId}
             variant="outlined"
+            size="small"
           >
             {!loadingCompany &&
               companyData?.map((option) => (
@@ -105,6 +106,7 @@ const EmployeeTransferAndUpgrade = ({ handleSuccess, backCallBack }) => {
               formik.touched.departmentId && formik.errors.departmentId
             }
             variant="outlined"
+            size="small"
           >
             {!loadingDepartment &&
               departmentData?.map((option) => (
@@ -134,6 +136,7 @@ const EmployeeTransferAndUpgrade = ({ handleSuccess, backCallBack }) => {
               }
               helperText={formik.touched.positionId && formik.errors.positionId}
               variant="outlined"
+              size="small"
             >
               {!loadingDesignation &&
                 designationData?.map((option) => (
@@ -168,6 +171,7 @@ const EmployeeTransferAndUpgrade = ({ handleSuccess, backCallBack }) => {
             }
             variant="outlined"
             InputLabelProps={{ shrink: true }}
+            size="small"
           />
         </Grid>
         <Grid item xs={12} sm={12}>
