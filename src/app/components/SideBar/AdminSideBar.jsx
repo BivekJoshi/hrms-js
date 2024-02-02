@@ -473,12 +473,12 @@ export default function AdminSidebar() {
         open={open}
       >
         <DrawerHeader>
-          <img
+          {/* <img
             src={mode === 'dark' ? SmallLogo : Logo}
             alt='Logo'
             width={mode === 'dark' ? '20%' : '70%'}
-          />
-          {mode === 'dark' && <Typography variant='h8'>Secured Securities Ltd</Typography>}
+          /> */}
+          {/* {mode === 'dark' && <Typography variant='h8'>Secured Securities Ltd</Typography>} */}
           <IconButton onClick={handleDrawerClose} sx={{ marginLeft: '2rem' }}>
             <ChevronLeftIcon />
           </IconButton>
