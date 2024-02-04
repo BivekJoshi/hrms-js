@@ -173,30 +173,28 @@ export const EventNotification = ({ data, handleClose }) => {
                     alignItems: "center",
                   }}
                 >
-                  <Button
-                    sx={{
-                      color: "green",
-                      textTransform: "none",
-                      fontWeight: "bold",
-                    }}
-                    startIcon={<DoneIcon />}
-                    onClick={() =>
-                      handleButton("OK", ename?.eventId, ename?.notificationId)
-                    }
-                  >
-                    <Button
-                      variant="outlined"
-                      onClick={() =>
-                        handleButton(
-                          "NO",
-                          ename?.eventId,
-                          ename?.notificationId
-                        )
-                      }
-                      sx={{marginTop:".5rem"}}
-                    >
-                      <b>Submit</b>
-                    </Button>
+                 <Button
+  sx={{
+    color: "green",
+    textTransform: "none",
+    fontWeight: "bold",
+  }}
+  startIcon={<DoneIcon />}
+  onClick={() =>
+    handleButton("OK", ename?.eventId, ename?.notificationId)
+  }
+>
+  <b>Submit</b>
+</Button>
+<Button
+  variant="outlined"
+  onClick={() =>
+    handleButton("NO", ename?.eventId, ename?.notificationId)
+  }
+  sx={{ marginTop: ".5rem" }}
+>
+  <b>Submit</b>
+</Button>
                   </div>
                 )}
               </div>
