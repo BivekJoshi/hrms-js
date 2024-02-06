@@ -6,10 +6,12 @@ import ThemeModeContext from "../../../theme/ThemeModeContext";
 import { OpenEvent } from "./EventModal/EventModal";
 import { useDeleteEvent } from "../../hooks/event/useEvent";
 import { Box } from "@mui/material";
+import DeleteConfirmationModal from "../../components/Modal/DeleteConfirmationModal";
 
 const EventTableView = ({ eventData, isLoading, permissions }) => {
   const [openModal, setOpenModal] = useState(false);
   const [getEventID, setEventGetID] = useState({});
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const { mode } = useContext(ThemeModeContext);
   const { deleteEventMutation, isSuccess: isDeleteSuccess } = useDeleteEvent(
     {}
@@ -21,7 +23,12 @@ const EventTableView = ({ eventData, isLoading, permissions }) => {
     }
   };
   const handleDeleteEvent = (rowData) => {
-    deleteEventMutation(rowData?.id);
+    setEventGetID(rowData?.id);
+    setOpenDeleteModal(true);
+  };
+  const handleConfirmDelete = () => {
+    deleteEventMutation(getEventID);
+    setOpenDeleteModal(false);
   };
   const columns = [
     {
@@ -156,6 +163,14 @@ const EventTableView = ({ eventData, isLoading, permissions }) => {
           open={openModal}
           hideDelete
           handleCloseModal={() => setOpenModal(false)}
+        />
+      )}
+       {openDeleteModal && (
+        <DeleteConfirmationModal
+          open={openDeleteModal}
+          handleCloseModal={() => setOpenDeleteModal(false)}
+          handleConfirmDelete={handleConfirmDelete}
+          message={"Event"}
         />
       )}
     </>
