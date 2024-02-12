@@ -12,13 +12,14 @@ const EmployeeTableView = ({ employeeData, isLoading }) => {
     const nameB = b?.firstName?.toLowerCase() || "";
     return nameA.localeCompare(nameB);
   });
+ 
   const columns = [
     {
       title: "SN",
       field: "tableData.id",
       render: (rowData) => rowData.tableData.id + 1,
       width: "3%",
-      pdfWidth: "2rem",
+      // pdfWidth: "2rem",
       maxWidth: "50px",
       sortable: false,
       sorting: false,
@@ -26,7 +27,7 @@ const EmployeeTableView = ({ employeeData, isLoading }) => {
     {
       title: "Employee",
       field: "firstName",
-      pdfWidth: "10rem",
+      // pdfWidth: "10rem",
       render: (rowData) =>
         `${rowData?.firstName} ${rowData?.middleName || ""} ${
           rowData?.lastName
@@ -36,27 +37,29 @@ const EmployeeTableView = ({ employeeData, isLoading }) => {
     },
     {
       title: "Position",
-      pdfWidth: "8rem",
+      // pdfWidth: "8rem",
       field: "position",
       render: (rowData) => {
-        const position = `${rowData?.positionName || "-"}`;
-        // (${rowData?.position?.positionLevel || ""})`
-        return position ? position : "";
+        const positions =
+          rowData?.employeeHistory?.map(
+            (history) => history?.position?.positionName
+          ) || [];
+        return positions.join(",  ");
       },
-      width: 340,
+      maxWidth: 140,
       sorting: false,
     },
     {
       title: "Email",
       field: "officeEmail",
-      pdfWidth: "12rem",
+      // pdfWidth: "12rem",
       emptyValue: "-",
       sorting: false,
     },
     {
       title: "Contact No.",
       field: "mobileNumber",
-      pdfWidth: "10rem",
+      // pdfWidth: "10rem",
       emptyValue: "-",
       sorting: false,
     },

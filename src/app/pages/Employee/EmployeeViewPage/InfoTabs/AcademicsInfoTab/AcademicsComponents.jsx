@@ -105,7 +105,7 @@ const AcademicsComponents = ({ data, isLoading }) => {
           </TimelineContent>
         </TimelineItem>
       </Box> */}
-      <NewEmployeeQualificationDetailForm employeId={auth?.userId} />
+      <NewEmployeeQualificationDetailForm employeId={data?.id} />
     </>
   );
 };

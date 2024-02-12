@@ -41,6 +41,7 @@ const FamilyAddFields = ({ formik }) => {
           id={`mobileNumber`}
           mobileNumber={`mobileNumber`}
           label='Mobile Number'
+          type="number"
           fullWidth
           required
           value={formik.values.mobileNumber}

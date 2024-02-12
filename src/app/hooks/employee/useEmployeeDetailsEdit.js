@@ -1,5 +1,10 @@
 import { useFormik } from "formik";
 import { useEditEmployee } from "./useEmployeeHistory";
+import * as Yup from "yup";
+
+const ValidateSchema = Yup.object().shape({
+  effectiveDateTo: Yup.string().required("Please select to date"),
+});
 
 const useEditEmployeeDetails = (onclose, tableId) => {
   const { mutate } = useEditEmployee({});
@@ -7,6 +12,8 @@ const useEditEmployeeDetails = (onclose, tableId) => {
     initialValues: {
       effectiveDateTo: "",
     },
+    validationSchema: ValidateSchema,
+    enableReinitialize: true,
     onSubmit: (value) => {
       const submittedData = {
         effectiveDateTo: value?.effectiveDateTo,

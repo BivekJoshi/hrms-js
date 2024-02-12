@@ -36,7 +36,17 @@ const RemarkField = ({
       onChange={handleChange}
       required={req ? true : false}
       error={formik.touched[name] && Boolean(formik.errors[name])}
-      helperText={`${remainingChars} characters remaining`}
+      helperText={
+        <>
+          {formik.touched[name] && Boolean(formik.errors[name]) ? (
+            <>
+              {formik.errors[name]}
+              <br />
+            </>
+          ) : null}
+          {`${remainingChars} characters remaining`}
+        </>
+      }
       variant={variant || 'outlined'}
       multiline={multiline || false}
       rows={rows || 3}

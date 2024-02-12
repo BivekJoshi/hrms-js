@@ -54,7 +54,8 @@ const NewEmployeeFamilyDetailForm = () => {
         renderFeilds={<FamilyAddFields formik={formik} />}
         isLoading={isLoading}
         handleFormSubmit={handleSubmit}
-        isSubmitSuccess={isFormSubmitSuccess || isEditSuccess}
+        isSubmitSuccess={isFormSubmitSuccess}
+        isEditSuccess={isEditSuccess}
         deleteCallBack={handleDeleteFamily}
         modalWidth={400}
         showAddButton={true}

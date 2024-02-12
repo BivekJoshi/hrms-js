@@ -44,7 +44,7 @@ const CustomeEmployeeDetails = ({
 }) => {
   const [openAddModal, setOpenAddModal] = useState(false);
   const [selectedRowId, setSelectedRowId] = useState();
-  const { mode } = useContext(ThemeModeContext);
+  const { mode, palette } = useContext(ThemeModeContext);
   const [tableColumn, setTableColumn] = useState([...columns]);
   const auth = useAuth();
 
@@ -58,7 +58,7 @@ const CustomeEmployeeDetails = ({
     border: "1px solid #808080",
     borderRadius: 2,
     boxShadow: 24,
-    p: "12px 24px",
+    // p: "12px 24px",
     height: modalHeight && modalHeight,
     overflowY: "auto",
   };
@@ -262,7 +262,13 @@ const CustomeEmployeeDetails = ({
                   alignItems: "center",
                   justifyContent: "space-between",
                   marginBottom: "1rem",
-                  position: "relative",
+                  // position: "relative",
+                  position: "sticky",
+                  zIndex: "100",
+                  top:"0",
+                  padding: "12px 24px",
+                  background: mode === 'lignt' ? palette.background.modal : palette.background.modal,
+                  color: '#fff',
                 }}
               >
                 <Typography
@@ -271,7 +277,7 @@ const CustomeEmployeeDetails = ({
                 >
                   {selectedRowId ? "Edit" : "Add"} {title}
                 </Typography>
-                <div
+                {/* <div
                   style={{
                     width: "100%",
                     height: "1px",
@@ -279,17 +285,19 @@ const CustomeEmployeeDetails = ({
                     position: "absolute",
                     bottom: "0",
                   }}
-                />
-                <IconButton onClick={handleCloseAddModal}>
+                /> */}
+                <IconButton onClick={handleCloseAddModal} sx={{color: '#fff'}}>
                   <CloseIcon />
                 </IconButton>
               </Grid>
-              <AddFields
+             <div style={{ padding: '12px 24px'}}>
+             <AddFields
                 fileds={renderFeilds}
                 handleFormSubmit={handleFormSubmit}
                 onClose={handleCloseAddModal}
                 selectedRowId={selectedRowId}
               />
+             </div>
             </Box>
           </Fade>
         </Modal>

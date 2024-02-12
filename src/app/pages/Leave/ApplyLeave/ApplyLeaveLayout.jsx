@@ -73,6 +73,7 @@ const ApplyLeaveLayout = () => {
   const handleClickEditButton = (data) => {
     navigate(`/employee/applyleave`, { state: { data } });
   };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
@@ -108,15 +109,41 @@ const ApplyLeaveLayout = () => {
                           {data?.fromDate}
                         </Typography>
                       </Grid>
-                      <Grid item xs={4}>
-                        <Typography variant="h7" fontWeight="bold">
-                          To Date
-                        </Typography>
-                        <br />
-                        <Typography variant="h7" fontWeight="bold">
+                      {data?.applyLeaveDays > 1 && (
+                        <Grid item xs={4}>
+                          <Typography variant="h7" fontWeight="bold">
+                            To Date
+                          </Typography>
+                          <br />
+                          <Typography variant="h7" fontWeight="bold">
+                            {data?.toDate}
+                          </Typography>
+                        </Grid>
+                      )}
+                      {data?.applyLeaveDays === 1 && (
+                        <Grid item xs={4}>
+                          <Typography variant="h7" fontWeight="bold">
+                            One Day Leave
+                          </Typography>
+                          <br />
+                          {/* <Typography variant="h7" fontWeight="bold">
                           {data?.toDate}
-                        </Typography>
-                      </Grid>
+                        </Typography> */}
+                        </Grid>
+                      )}
+                      {data?.applyLeaveDays === 0.5 && (
+                        <Grid item xs={4}>
+                          <Typography variant="h7" fontWeight="bold">
+                            Half Day Leave
+                          </Typography>
+                          <br />
+                          <Typography variant="h7" fontWeight="bold">
+                            {data?.halfLeaveType === "SECOND_HALF"
+                              ? "Second Half"
+                              : "First Half"}
+                          </Typography>
+                        </Grid>
+                      )}
                       <Grid item xs={3}>
                         <Chip
                           label={data?.leaveStatus}

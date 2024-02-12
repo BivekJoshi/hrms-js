@@ -45,6 +45,7 @@ export const DetailProfile = ({ data, role, setShowPersonalProfile }) => {
 
     // fontWeight: "bold",
   };
+ 
   const tabsData = [
     {
       label: "Leave Records",
@@ -76,7 +77,7 @@ export const DetailProfile = ({ data, role, setShowPersonalProfile }) => {
     {
       label: "Employment Details",
       value: "10",
-      component: <EmploymentDetails role={role} />,
+      component: <EmploymentDetails role={role} employeeId={data?.id} />,
     },
     {
       label: "Training",
@@ -93,7 +94,7 @@ export const DetailProfile = ({ data, role, setShowPersonalProfile }) => {
     {
       label: "Work",
       value: "5",
-      component: <NewEmployeeHistoryDetailForm employeeId={auth?.userId} />,
+      component: <NewEmployeeHistoryDetailForm employeeId={data?.id} />,
     },
 
     {

@@ -22,7 +22,7 @@ import EditEmploymentDetails from "./EditEmploymentDetails";
 import useAuth from "../../../../../../auth/hooks/component/login/useAuth";
 import EmployeeTransferAndUpgrade from "./EmployeeTransferAndUpgrade";
 
-const EmploymentDetails = ({ role }) => {
+const EmploymentDetails = ({ role, employeeId }) => {
   const { id } = useParams();
 
   const { isEmployee } = useAuth();
@@ -39,7 +39,7 @@ const EmploymentDetails = ({ role }) => {
     setmultiPosition(false);
   };
 
-  const { data: employeeHistory, isLoading } = useGetEmployeeEmployment(id);
+  const { data: employeeHistory, isLoading } = useGetEmployeeEmployment(id || employeeId);
 
   const activeData = employeeHistory?.filter((item) => item?.isActive === true);
 
@@ -215,7 +215,7 @@ const EmploymentDetails = ({ role }) => {
               sx={{ mt: 2, ml: 1 }}
               onClick={handleAddOpenModal}
             >
-              Add Employment Details
+              Add
             </Button>
           )}
         </Box>
@@ -285,6 +285,7 @@ const EmploymentDetails = ({ role }) => {
           handleClose={handleEditModalClose}
           tableId={rowData?.id}
           minDate={minDate}
+          rowData={rowData}
         />
       )}
     </Box>
