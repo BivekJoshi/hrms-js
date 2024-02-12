@@ -6,10 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>HRMS</title>
     <script>
-      const url = window.location.href;
+     const url = window.location.href;
       if (url.includes("hrms.ssl.com.np")) {
-        const startIndex = url.indexOf('#/') + 2; // Adding 2 to exclude '#/'
-        const textAfterHash = url.substring(startIndex);
+        let startIndex = url.indexOf('#/') ;
+        let textAfterHash = "";
+ 
+        if(startIndex > 0){       startIndex = startIndex+2;
+            textAfterHash = url.substring(startIndex);
+}
         window.location.assign("https://hrms.ssl.com.np:8080/hrms/index.html#/" + textAfterHash);
       } else if (url.includes("pms.ssl.com.np")) {
         window.location.assign("https://pms.ssl.com.np:8080/pms/index.html#");
