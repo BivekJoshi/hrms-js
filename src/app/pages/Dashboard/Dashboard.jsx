@@ -115,7 +115,7 @@ const Dashboard = () => {
                 </Grid>
               </div>
             </Grid>
-            {data?.employeeCountPerDepartment && (data?.employeeCountPerDepartment?.length > 0) && (
+            {Object.keys(data?.employeeCountPerDepartment).length !== 0 && (
               <Grid item md={6} xs={12}>
                 <Typography variant='h5' sx={{ marginBottom: '16px' }}>
                   Employee Department
@@ -131,7 +131,7 @@ const Dashboard = () => {
                 </Grid>
               </Grid>
             )}
-            {data?.employeeCountPerEmpType && (data?.employeeCountPerEmpType?.length > 0) && (
+            {Object.keys(data?.employeeCountPerEmpType).length !== 0 && (
               <Grid item md={6} xs={12}>
                 <Typography variant='h5' sx={{ marginBottom: '16px' }}>
                   Employee Type

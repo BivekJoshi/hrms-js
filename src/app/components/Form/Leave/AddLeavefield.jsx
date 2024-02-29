@@ -108,28 +108,6 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
           />
         </Grid>
         <Grid item xs={12} sm={12}>
-          {/* <TabContext value={value}>
-            <TabList
-              onChange={handleChange}
-              aria-label="lab API tabs example"
-              variant="fullWidth"
-            >
-              <Tab label="Half Day" value="1" />
-              <Tab label="One Day" value="2" />
-              <Tab label="Multiple Days" value="3" />
-            </TabList>
-            <Grid>
-              <TabPanel value="1">
-                <HalfDay formik={formik} />
-              </TabPanel>
-              <TabPanel value="2">
-                <OneDay formik={formik} />
-              </TabPanel>
-              <TabPanel value="3">
-                <MultipleDays formik={formik} />
-              </TabPanel>
-            </Grid>
-          </TabContext> */}
           <TextField
             name='leavePeriod'
             select
@@ -159,24 +137,6 @@ export const LeaveFields = ({ onClose, isLoading, data }) => {
           {value === 'MULTI_DAY' && <MultipleDays formik={formik} />}
         </Grid>
         <Grid item xs={12} sm={12}>
-          {/* <TextField
-            id='leaveReason'
-            name='leaveReason'
-            label='Leave Reason'
-            fullWidth
-            required
-            multiline
-            rows={3}
-            value={formik.values.leaveReason}
-            onChange={formik.handleChange}
-            error={
-              formik.touched.leaveReason && Boolean(formik.errors.leaveReason)
-            }
-            helperText={formik.touched.leaveReason && formik.errors.leaveReason}
-            variant='outlined'
-            size='small'
-            InputLabelProps={{ shrink: Boolean(formik.values.leaveReason) }}
-          /> */}
            <RemarkField
             id='leaveReason'
             name='leaveReason'

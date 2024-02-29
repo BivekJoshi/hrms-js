@@ -9,8 +9,7 @@ const EditEmpEventFields = ({ onClose, data }) => {
         <Typography variant="h6">Event Name:</Typography>
         <Typography
           variant="p"
-          style={{
-            whiteSpace: "normal",
+          sx={{
             overflowWrap: "break-word",
             wordWrap: "break-word",
             wordBreak: "break-all",
@@ -31,8 +30,7 @@ const EditEmpEventFields = ({ onClose, data }) => {
         <Typography variant="h6">Location:</Typography>
         <Typography
           variant="p"
-          style={{
-            whiteSpace: "normal",
+          sx={{
             overflowWrap: "break-word",
             wordWrap: "break-word",
             wordBreak: "break-all",
@@ -45,8 +43,7 @@ const EditEmpEventFields = ({ onClose, data }) => {
         <Typography variant="h6">Description:</Typography>
         <Typography
           variant="p"
-          style={{
-            whiteSpace: "normal",
+          sx={{
             overflowWrap: "break-word",
             wordWrap: "break-word",
             wordBreak: "break-all",
