@@ -29,6 +29,7 @@ import {
 } from "../../../../../hooks/employee/useEmployeeHistory";
 import EmploymentTransfer from "../../../../../pages/Employee/EmployeeViewPage/InfoTabs/EmploymentDetails/EmploymentTransfer";
 import EditEmploymentTransfer from "../../../../../pages/Employee/EmployeeViewPage/InfoTabs/EmploymentDetails/EditEmployment/EditEmploymentTransfer";
+import WorkShift from "../../../../../pages/Employee/EmployeeViewPage/InfoTabs/WorkShift/WorkShift";
 
 const EditEmployeeForm = () => {
   const { id } = useParams();
@@ -41,6 +42,7 @@ const EditEmployeeForm = () => {
     "Educational Details",
     "Bank Details",
     "Work History",
+    "Work Shift",
     "Document Details",
   ];
 
@@ -48,24 +50,18 @@ const EditEmployeeForm = () => {
   // const { data: addressData, isLoading: getaddressLoading } = useGetAddressById(
   //   id
   // );
-  const {
-    data: employmentHistoryData,
-    isLoading: LoadingEmployment,
-  } = useGetEmployeeEmployment(id);
+  const { data: employmentHistoryData, isLoading: LoadingEmployment } =
+    useGetEmployeeEmployment(id);
 
   const minDate = employmentHistoryData?.[0]?.effectiveDateFrom;
-  const {
-    formik: qualificationFormik,
-    isLoading: isLoadingQualification,
-  } = useQualificationForm();
+  const { formik: qualificationFormik, isLoading: isLoadingQualification } =
+    useQualificationForm();
 
   const { formik: familyFormik, isLoading: isLoadingFamily } = useFamilyForm();
   const { formik, isLoading } = useEditEmployeeForm({ data, employeeLoading });
 
-  const {
-    formik: permanentFormik,
-    isLoading: addressLoading,
-  } = usePermanentAddressForm(id);
+  const { formik: permanentFormik, isLoading: addressLoading } =
+    usePermanentAddressForm(id);
 
   const { formik: employmentHistoryFormik } = useEmploymentHistory();
 
@@ -132,8 +128,9 @@ const EditEmployeeForm = () => {
 
       case 6:
         return <NewEmployeeHistoryDetailForm formik={employeeHistoryFormik} />;
-
       case 7:
+        return <WorkShift />;
+      case 8:
         return <EmployeeDocumentDetailForm formik={documentFormik} />;
 
       default:

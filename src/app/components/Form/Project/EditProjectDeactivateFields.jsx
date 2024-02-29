@@ -142,7 +142,7 @@ export const EditProjectActivateFields = ({ onClose, isLoading, data }) => {
           container
           direction="row"
           justifyContent="flex-end"
-          alignItems="flex-end"
+          alignItems="center"
         >
           <Button
             variant="contained"

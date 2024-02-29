@@ -59,7 +59,6 @@ const DashboardCard = ({ data }) => {
           flexDirection="row"
           justifyContent="space-between"
           alignItems="center"
-          width="232px"
           height="80px"
           borderRadius="0px 8px 8px 0px"
           borderLeft={`6px solid ${card?.borderColor}`}
