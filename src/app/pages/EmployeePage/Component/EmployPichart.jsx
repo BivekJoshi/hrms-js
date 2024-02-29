@@ -20,25 +20,27 @@ export const EmployPichart = ({ data }) => {
   const { mode } = useContext(ThemeModeContext);
 
   const series = data
-    ? Object.entries(data).map(([key, value]) => (value ? value : "nana"))
+    ? Object.entries(data).map(([key, value]) => (value ? parseInt(value) : 0))
     : [];
   const labels = data
     ? Object.entries(data).map(([key, value]) =>
         key ? key.toUpperCase() : "0"
       )
     : [];
+  const allValuesAreZero = series.every((value) => value === 0);
+// const finalSeries = 
 
   const options = {
     plotOptions: {
       pie: {
-        // customScale: 1,
-        // startAngle: 0,
-
         donut: {
           size: "60%",
           labels: {
             show: true,
           },
+        },
+        dataLabels: {
+          hideWhenLessThanPercentage: 2, // Set a threshold percentage
         },
       },
     },
@@ -49,7 +51,6 @@ export const EmployPichart = ({ data }) => {
     labels: labels,
     colors: COLORS,
     legend: {
-      
       labels: {
         colors: labels.map(() => (mode === "dark" ? "white" : "black")),
       },

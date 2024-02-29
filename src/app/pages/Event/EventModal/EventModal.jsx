@@ -35,6 +35,7 @@ export const OpenEmpEvent = ({ open, handleCloseModal, id, title }) => {
       <FormModal
         title={title}
         open={open}
+        // width={"auto"}
         onClose={handleCloseModal}
         formComponent={
           <EditEmpEventFields onClose={handleCloseModal} data={data} />

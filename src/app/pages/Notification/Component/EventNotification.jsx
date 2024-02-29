@@ -26,7 +26,8 @@ export const EventNotification = ({ data, handleClose }) => {
     formik.setFieldValue("eventId", eventId);
     formik.setFieldValue("notificationId", notificationId);
     formik.handleSubmit();
-    handleClose
+    setShowRemark({ ...showRemark, [index]: false });
+    handleClose;
   };
 
   const getUpcomingDay = (eventDate) => {
@@ -111,7 +112,17 @@ export const EventNotification = ({ data, handleClose }) => {
                       borderRadius: "50%",
                     }}
                   ></div>
-                  <Typography sx={{ fontWeight: 600, fontSize: "13px" }}>
+                  <Typography
+                    sx={{
+                      fontWeight: 600,
+                      fontSize: "13px",
+                      whiteSpace: "normal",
+                      overflowWrap: "break-word",
+                      width:"10rem",
+                      wordWrap: "break-word",
+                      wordBreak: "break-all",
+                    }}
+                  >
                     {ename?.eventName}
                   </Typography>
                 </div>
@@ -133,7 +144,16 @@ export const EventNotification = ({ data, handleClose }) => {
             <Divider sx={{ marginTop: ".5rem" }} />
             <Grid display="flex" flexDirection="row" gap="8px" padding="5px">
               <LocationOnIcon fontSize="13px" />
-              <Typography sx={{ maxWidth: "14rem", fontSize: "13px" }}>
+              <Typography
+                sx={{
+                  whiteSpace: "normal",
+                  overflowWrap: "break-word",
+                  wordWrap: "break-word",
+                  width:"10rem",
+                  wordBreak: "break-all",
+                  fontSize: "13px",
+                }}
+              >
                 <b>Location: </b>
                 {ename?.eventLocation}
               </Typography>
@@ -206,7 +226,7 @@ export const EventNotification = ({ data, handleClose }) => {
                           ename?.notificationId
                         )
                       }
-                      sx={{marginTop:".5rem"}}
+                      sx={{ marginTop: ".5rem" }}
                     >
                       <b>Submit</b>
                     </Button>

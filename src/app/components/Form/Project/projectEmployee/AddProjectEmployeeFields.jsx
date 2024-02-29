@@ -1,8 +1,7 @@
-import { Grid, Button, TextField, MenuItem, Autocomplete } from "@mui/material";
-import React, { useContext } from "react";
+import { Grid, TextField, Autocomplete } from "@mui/material";
+import React from "react";
 import { useGetEmployee } from "../../../../hooks/employee/useEmployee";
 import { useProjectEmployeeForm } from "../../../../hooks/project/projectEmployee/addProjectEmployee/useAddProjectEmployeeForm";
-import ThemeModeContext from "../../../../../theme/ThemeModeContext";
 import { ButtonComponent } from "../../../Button/ButtonComponent";
 
 export const ProjectEmployeeFields = ({ data, onClose, isLoading }) => {
