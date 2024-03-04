@@ -20,7 +20,6 @@ export const WorkShiftModal = ({ open, handleCloseModal }) => {
   const handleFormSubmit = () => {
     formik.handleSubmit();
   };
-  console.log(formik);
 
   const daysOfWeek = [
     "SUNDAY",
@@ -31,6 +30,7 @@ export const WorkShiftModal = ({ open, handleCloseModal }) => {
     "FRIDAY",
     "SATURDAY",
   ];
+
   return (
     <div>
       <FormModal
@@ -124,12 +124,6 @@ export const WorkShiftModal = ({ open, handleCloseModal }) => {
                                 updatedOnOffList
                               );
                               formik.setFieldTouched("onOffList", true); // Mark field as touched
-                              formik.setFieldError(
-                                "onOffList",
-                                updatedOnOffList.some((value) => value === true)
-                                  ? ""
-                                  : "Required"
-                              ); // S
                             }}
                           />
                         }
@@ -139,11 +133,20 @@ export const WorkShiftModal = ({ open, handleCloseModal }) => {
                   </FormGroup>
                 </AccordionDetails>
               </Accordion>
-              {formik.touched.onOffList && formik.errors.onOffList && (
-                <Typography style={{ fontSize: "1px" }} color={"red"}>
-                  Required
-                </Typography>
-              )}
+              {formik.values.onOffList.filter((item) => item === true)
+                ?.length === 0 &&
+                formik.errors.onOffList && (
+                  <Typography
+                    style={{
+                      fontSize: "12px",
+                      marginLeft: "12px",
+                      marginTop: "6px",
+                    }}
+                    color={"red"}
+                  >
+                    Required
+                  </Typography>
+                )}
             </Grid>
             <Grid
               container

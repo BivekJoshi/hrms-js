@@ -6,6 +6,9 @@ const WorkShiftSchema = Yup.object().shape({
   onOffList: Yup.array()
     .of(Yup.boolean())
     .min(1, "Please select at least one day")
+    .test("at-least-one-true", "Please select at least one day", (value) =>
+      value.some((val) => val === true)
+    )
     .required("Please select at least one day"),
 });
 
