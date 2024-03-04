@@ -4,86 +4,88 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
+  Autocomplete,
   Button,
   Checkbox,
-  FormControlLabel,
-  FormGroup,
-  Grid,
-  TextField,
+  Typography,
 } from "@mui/material";
+import { FormControlLabel, FormGroup, Grid, TextField } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { addWorkShiftForm } from "../../../hooks/workShift/useWorkShiftForm";
 
 export const WorkShiftModal = ({ open, handleCloseModal }) => {
-  //   const status = [
-  //     {
-  //       value: 0,
-  //       label: "Sunday",
-  //     },
-  //     {
-  //       value: 1,
-  //       label: "Monday",
-  //     },{
-  //       value: 3,
-  //       label: "Tuesday",
-  //     },
-  //     {
-  //       value: 4,
-  //       label: "Wednesday",
-  //     },
+  const onClose = handleCloseModal;
+  const { formik } = addWorkShiftForm(onClose);
 
-  //     {
-  //       value: 5,
-  //       label: "Tuesday",
-  //     },
-  //     {
-  //       value: 5,
-  //       label: "Tuesday",
-  //     },
-  //     {
-  //       value: 6,
-  //       label: "Tuesday",
-  //     },
-  //   ];
+  const handleFormSubmit = () => {
+    formik.handleSubmit();
+  };
+  console.log(formik);
+
+  const daysOfWeek = [
+    "SUNDAY",
+    "MONDAY",
+    "TUESDAY",
+    "WEDNESDAY",
+    "THURSDAY",
+    "FRIDAY",
+    "SATURDAY",
+  ];
   return (
     <div>
       <FormModal
-        title={"Add Work Shift"}
+        title={"Add Work Schedule"}
         open={open}
         onClose={handleCloseModal}
         formComponent={
           <Grid container spacing={3}>
             <Grid item xs={12} sm={12}>
               <TextField
-                id="shiftName"
-                name="shiftName"
-                label="Shift Name"
+                id="scheduleName"
+                name="scheduleName"
+                label="Schedule Name"
                 type="text"
-                // InputLabelProps={{ shrink: true }}
                 fullWidth
-                // inputProps={{ min: currentDate }}
                 required
-                // value={formik.values.dueDate}
-                // onChange={formik.handleChange}
-                // error={formik.touched.dueDate && Boolean(formik.errors.dueDate)}
-                // helperText={formik.touched.dueDate && formik.errors.dueDate}
+                value={formik.values.scheduleName}
+                onChange={formik.handleChange}
+                error={
+                  formik.touched.scheduleName &&
+                  Boolean(formik.errors.scheduleName)
+                }
+                helperText={
+                  formik.touched.scheduleName && formik.errors.scheduleName
+                }
                 size="small"
               />
             </Grid>
             <Grid item xs={12} sm={12}>
-              <TextField
+              <Autocomplete
                 id="startWeekDay"
                 name="startWeekDay"
-                label="Start Week Day"
-                type="date"
-                InputLabelProps={{ shrink: true }}
+                options={daysOfWeek}
+                getOptionLabel={(option) => option}
                 fullWidth
-                // inputProps={{ min: currentDate }}
-                required
-                // value={formik.values.dueDate}
-                // onChange={formik.handleChange}
-                // error={formik.touched.dueDate && Boolean(formik.errors.dueDate)}
-                // helperText={formik.touched.dueDate && formik.errors.dueDate}
-                size="small"
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="Start Week Day"
+                    InputLabelProps={{ shrink: true }}
+                    required
+                    error={
+                      formik.touched.startWeekDay &&
+                      Boolean(formik.errors.startWeekDay)
+                    }
+                    helperText={
+                      formik.touched.startWeekDay && formik.errors.startWeekDay
+                    }
+                    size="small"
+                  />
+                )}
+                value={formik.values.startWeekDay}
+                onChange={(event, newValue) => {
+                  formik.setFieldValue("startWeekDay", newValue);
+                }}
               />
             </Grid>
             <Grid item xs={12} sm={12}>
@@ -98,19 +100,50 @@ export const WorkShiftModal = ({ open, handleCloseModal }) => {
                 </AccordionSummary>
                 <AccordionDetails>
                   <FormGroup>
-                    <FormControlLabel control={<Checkbox />} label="Sunday" />
-                    <FormControlLabel control={<Checkbox />} label="Monday" />
-                    <FormControlLabel control={<Checkbox />} label="Tuesday" />
-                    <FormControlLabel
-                      control={<Checkbox />}
-                      label="Wednesday"
-                    />
-                    <FormControlLabel control={<Checkbox />} label="Thursday" />
-                    <FormControlLabel control={<Checkbox />} label="Friday" />
-                    <FormControlLabel control={<Checkbox />} label="Saturday" />
+                    {[
+                      "Sunday",
+                      "Monday",
+                      "Tuesday",
+                      "Wednesday",
+                      "Thursday",
+                      "Friday",
+                      "Saturday",
+                    ].map((day, index) => (
+                      <FormControlLabel
+                        key={index}
+                        control={
+                          <Checkbox
+                            checked={formik?.values.onOffList[index]}
+                            onChange={(e) => {
+                              const updatedOnOffList = [
+                                ...formik.values.onOffList,
+                              ];
+                              updatedOnOffList[index] = e.target.checked;
+                              formik.setFieldValue(
+                                "onOffList",
+                                updatedOnOffList
+                              );
+                              formik.setFieldTouched("onOffList", true); // Mark field as touched
+                              formik.setFieldError(
+                                "onOffList",
+                                updatedOnOffList.some((value) => value === true)
+                                  ? ""
+                                  : "Required"
+                              ); // S
+                            }}
+                          />
+                        }
+                        label={day}
+                      />
+                    ))}
                   </FormGroup>
                 </AccordionDetails>
               </Accordion>
+              {formik.touched.onOffList && formik.errors.onOffList && (
+                <Typography style={{ fontSize: "1px" }} color={"red"}>
+                  Required
+                </Typography>
+              )}
             </Grid>
             <Grid
               container
@@ -121,7 +154,7 @@ export const WorkShiftModal = ({ open, handleCloseModal }) => {
             >
               <Button
                 variant="contained"
-                // onClick={handleFormSubmit}
+                onClick={handleFormSubmit}
                 sx={{ mt: 3, ml: 1, color: "#fff" }}
               >
                 Add Work Shift

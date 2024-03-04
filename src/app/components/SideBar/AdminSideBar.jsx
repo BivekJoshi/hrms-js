@@ -319,13 +319,13 @@ export default function AdminSidebar() {
       subMenus: [],
     },
     {
-      name: "Work Shift",
+      name: "Work Schedule",
       icon: (
         <WorkHistoryIcon
           sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
         />
       ),
-      path: "work-shift",
+      path: "work-Schedule",
       subMenus: [],
     },
     {
