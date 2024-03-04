@@ -70,7 +70,7 @@ export const WorkShiftModal = ({ open, handleCloseModal }) => {
                   <TextField
                     {...params}
                     label="Start Week Day"
-                    InputLabelProps={{ shrink: true }}
+                    // InputLabelProps={{ shrink: true }}
                     required
                     error={
                       formik.touched.startWeekDay &&
