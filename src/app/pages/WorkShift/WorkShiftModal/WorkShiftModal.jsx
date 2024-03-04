@@ -144,7 +144,7 @@ export const WorkShiftModal = ({ open, handleCloseModal }) => {
                     }}
                     color={"red"}
                   >
-                    Required
+                    {formik.errors.onOffList}
                   </Typography>
                 )}
             </Grid>
