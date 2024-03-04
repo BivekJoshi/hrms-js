@@ -114,7 +114,7 @@ export const AssignShiftModal = ({ open, handleCloseModal, data }) => {
                 onClick={handleFormSubmit}
                 sx={{ mt: 3, ml: 1, color: "#fff" }}
               >
-                Assign Work Shift
+                Assign Work Schedule
               </Button>
               <Button
                 variant="contained"

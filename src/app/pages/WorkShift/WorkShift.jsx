@@ -3,7 +3,7 @@ import React, { useContext, useState } from "react";
 import { useGetWorkShiftAllActive } from "../../hooks/employee/AddEmployeeWorkShift/useWorkShift";
 import CustomTable from "../../components/CustomTable/CustomTable";
 import { WorkShiftModal } from "./WorkShiftModal/WorkShiftModal";
-import AssignmentIcon from '@mui/icons-material/Assignment';
+import AssignmentIcon from "@mui/icons-material/Assignment";
 import { AssignShiftModal } from "./WorkShiftModal/AssignWorkShiftModel";
 import ThemeModeContext from "../../../theme/ThemeModeContext";
 
@@ -76,7 +76,7 @@ const WorkShift = () => {
           sx={{ textTransform: "none" }}
           onClick={handleAddOpenModal}
         >
-          Add Work Shift
+          Add Work Schedule
         </Button>
       </Box>
       <br />

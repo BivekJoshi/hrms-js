@@ -157,7 +157,7 @@ export const WorkShiftModal = ({ open, handleCloseModal }) => {
                 onClick={handleFormSubmit}
                 sx={{ mt: 3, ml: 1, color: "#fff" }}
               >
-                Add Work Shift
+                Add Work Schedule
               </Button>
               <Button
                 variant="contained"
