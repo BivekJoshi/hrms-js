@@ -17,6 +17,7 @@ import EmploymentDetails from "../../InfoTabs/EmploymentDetails/EmploymentDetail
 import ThemeModeContext from "../../../../../../theme/ThemeModeContext";
 import NewEmployeeHistoryDetailForm from '../../../../../components/Form/Employee/EmployeeHistoryDetailForm/NewEmployeeHistoryDetailForm';
 import useAuth from '../../../../../../auth/hooks/component/login/useAuth';
+import WorkShift from "../../InfoTabs/WorkShift/WorkShift";
 
 export const DetailProfile = ({ data, role, setShowPersonalProfile }) => {
   const [value, setValue] = React.useState("1");
@@ -95,6 +96,11 @@ export const DetailProfile = ({ data, role, setShowPersonalProfile }) => {
       label: "Work",
       value: "5",
       component: <NewEmployeeHistoryDetailForm employeeId={data?.id} />,
+    },
+    {
+      label: "Work Shift",
+      value: "15",
+      component: <WorkShift employeeId={data?.id} />,
     },
 
     {

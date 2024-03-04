@@ -301,8 +301,8 @@ const routes = [
     component: <ProjectEmpPage component="project" />,
   },
   {
-    path: "work-shift",
-    name: "Work Shift",
+    path: "work-Schedule",
+    name: "Work Schedule",
     id: nanoid(),
     component: <WorkShift component="workShift" />,
   },
