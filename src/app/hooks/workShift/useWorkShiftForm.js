@@ -17,10 +17,9 @@ export const addWorkShiftForm = (onClose) => {
     initialValues: {
       scheduleName: "",
       startWeekDay: "",
-      onOffList: Array.from({ length: 7 }, () => ({
-        onTime: null, // Convert empty string to null
-        offTime: null, // Convert empty string to null
-      })),
+      onOffList: [
+        { startTime: "", endTime: "", startLateTime: "", endEarlyTime: "" },
+      ],
     },
     validationSchema: AddWorkShiftSchema,
     enableReinitialize: true,
