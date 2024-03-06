@@ -12,6 +12,9 @@ import {
 import { FormControlLabel, FormGroup, Grid, TextField } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { addWorkShiftForm } from "../../../hooks/workShift/useWorkShiftForm";
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider, TimePicker } from "@mui/x-date-pickers";
 
 export const WorkShiftModal = ({ open, handleCloseModal }) => {
   const onClose = handleCloseModal;
@@ -30,10 +33,12 @@ export const WorkShiftModal = ({ open, handleCloseModal }) => {
     "FRIDAY",
     "SATURDAY",
   ];
-
+  console.log(formik);
   return (
     <div>
       <FormModal
+        width={"480px"}
+        height="100%"
         title={"Add Work Schedule"}
         open={open}
         onClose={handleCloseModal}
@@ -112,22 +117,53 @@ export const WorkShiftModal = ({ open, handleCloseModal }) => {
                       <FormControlLabel
                         key={index}
                         control={
-                          <Checkbox
-                            checked={formik?.values.onOffList[index]}
-                            onChange={(e) => {
-                              const updatedOnOffList = [
-                                ...formik.values.onOffList,
-                              ];
-                              updatedOnOffList[index] = e.target.checked;
-                              formik.setFieldValue(
-                                "onOffList",
-                                updatedOnOffList
-                              );
-                              formik.setFieldTouched("onOffList", true); // Mark field as touched
-                            }}
-                          />
+                          <div
+                            style={{ display: "flex", alignItems: "center" }}
+                          >
+                            <Typography width="6rem" ml={1}>
+                              {day}
+                            </Typography>
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                              <DemoContainer components={["DatePicker"]}>
+                                <TimePicker
+                                  label="On time "
+                                  value={formik.values.onOffList[index].onTime}
+                                  onChange={(newValue) => {
+                                    const updatedOnOffList = [
+                                      ...formik.values.onOffList,
+                                    ];
+                                    updatedOnOffList[index] = {
+                                      ...updatedOnOffList[index],
+                                      onTime: newValue,
+                                    };
+                                    formik.setFieldValue(
+                                      "onOffList",
+                                      updatedOnOffList
+                                    );
+                                    formik.setFieldTouched("onOffList", true);
+                                  }}
+                                  sx={{ width: "5rem" }}
+                                />
+                                <TimePicker
+                                  label="Off time "
+                                  value={formik.values.onOffList[index].offTime}
+                                  onChange={(newValue) => {
+                                    const updatedOnOffList = [
+                                      ...formik.values.onOffList,
+                                    ];
+                                    updatedOnOffList[index].offTime = newValue;
+                                    formik.setFieldValue(
+                                      "onOffList",
+                                      updatedOnOffList
+                                    );
+                                    formik.setFieldTouched("onOffList", true);
+                                  }}
+                                  sx={{ width: "5rem" }}
+                                />
+                              </DemoContainer>
+                            </LocalizationProvider>
+                          </div>
                         }
-                        label={day}
                       />
                     ))}
                   </FormGroup>
@@ -185,6 +221,9 @@ export const WorkShiftModal = ({ open, handleCloseModal }) => {
         .css-118m9qq-MuiButtonBase-root-MuiCheckbox-root{
             padding:5px 9px;
         }
+        .css-1pduc5x-MuiStack-root>.MuiTextField-root {
+          min-width: 140px;
+      }
         `}
       </style>
     </div>

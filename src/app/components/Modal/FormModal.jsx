@@ -11,7 +11,7 @@ import ThemeModeContext from "../../../theme/ThemeModeContext";
 import { useContext } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 
-const FormModal = ({ open, onClose, formComponent, sx, width, title }) => {
+const FormModal = ({ open, onClose, formComponent, sx, width, title, height }) => {
   const { mode } = useContext(ThemeModeContext);
   const style = {
     position: "absolute",
@@ -26,7 +26,7 @@ const FormModal = ({ open, onClose, formComponent, sx, width, title }) => {
     p: "12px 24px",
     background: mode === "light" ? "" : "#413e3e",
     color: mode === "light" ? "" : "white",
-    height: { xs: "100%", md: "auto" },
+    height: height ? height : { xs: "100%", md: "auto" },
     overflow: { xs: "scroll", md: "auto" },
   };
 
