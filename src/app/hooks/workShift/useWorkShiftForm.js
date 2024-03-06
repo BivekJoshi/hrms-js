@@ -5,7 +5,11 @@ import {
   useUpdateWorkShiftStartDate,
 } from "../employee/AddEmployeeWorkShift/useWorkShift";
 import { useFormik } from "formik";
-import { WorkShiftSchema } from "./WorkshiftValidation/WorkshiftValidation";
+import {
+  AddWorkShiftSchema,
+  AssignWorkShiftSchema,
+  UpdateWorkShiftSchema,
+} from "./WorkshiftValidation/WorkshiftValidation";
 
 export const addWorkShiftForm = (onClose) => {
   const { mutate } = useAddWorkShift({});
@@ -13,9 +17,11 @@ export const addWorkShiftForm = (onClose) => {
     initialValues: {
       scheduleName: "",
       startWeekDay: "",
-      onOffList: [false, false, false, false, false, false, false],
+      onOffList: [
+        { startTime: "", endTime: "", startLateTime: "", endEarlyTime: "" },
+      ],
     },
-    validationSchema: WorkShiftSchema,
+    validationSchema: AddWorkShiftSchema,
     enableReinitialize: true,
     onSubmit: (values) => {
       const formData = { ...values };
@@ -39,7 +45,7 @@ export const assignWorkShiftForm = (onClose, data) => {
       workScheduleId: data.id,
       scheduleStartDate: "",
     },
-    // validationSchema: WorkShiftSchema,
+    validationSchema: AssignWorkShiftSchema,
     enableReinitialize: true,
     onSubmit: (values) => {
       const formData = { ...values };
@@ -55,14 +61,14 @@ export const assignWorkShiftForm = (onClose, data) => {
   return { formik };
 };
 
-export const useUpdateWorkShiftStartDateForm = (onClose, data, employeeId) => {
+export const useUpdateWorkShiftStartDateForm = (onClose, data) => {
   const { mutate } = useUpdateWorkShiftStartDate({});
   const formik = useFormik({
     initialValues: {
-      workScheduleEmployeeId: employeeId,
+      workScheduleEmployeeId: data.id,
       startDate: data.startDate || "",
     },
-    // validationSchema: WorkShiftSchema,
+    validationSchema: UpdateWorkShiftSchema,
     enableReinitialize: true,
     onSubmit: (values) => {
       const formData = { ...values };

@@ -1,23 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import FormModal from "../../../components/Modal/FormModal";
 import { Button, Grid, TextField } from "@mui/material";
-import { useGetEmployee } from "../../../hooks/employee/useEmployee";
 import { useUpdateWorkShiftStartDateForm } from "../../../hooks/workShift/useWorkShiftForm";
 
-export const UpdateStartDate = ({
-  open,
-  handleCloseModal,
-  data,
-  employeeId,
-}) => {
+export const UpdateStartDate = ({ open, handleCloseModal, data }) => {
   const onClose = handleCloseModal;
-  const { formik } = useUpdateWorkShiftStartDateForm(onClose, data, employeeId);
+  const { formik } = useUpdateWorkShiftStartDateForm(onClose, data);
+  const [startDateSelected, setStartDateSelected] = useState(true);
 
   const handleFormSubmit = () => {
-    formik.handleSubmit();
+    if (formik.dirty === false) {
+      return setStartDateSelected(false);
+    } else if (formik.dirty === true) {
+      formik.handleSubmit();
+      if (formik.isValid) {
+      }
+    }
   };
-  console.log(data);
 
+  console.log(formik);
   return (
     <div>
       <FormModal
@@ -37,10 +38,11 @@ export const UpdateStartDate = ({
                 required
                 value={formik.values.startDate}
                 onChange={formik.handleChange}
-                error={
-                  formik.touched.startDate && Boolean(formik.errors.startDate)
+                error={!startDateSelected && formik.dirty === false}
+                helperText={
+                  (!startDateSelected && "Please select start Day") ||
+                  (formik.touched.startDate && formik.errors.startDate)
                 }
-                helperText={formik.touched.startDate && formik.errors.startDate}
                 size="small"
               />
             </Grid>

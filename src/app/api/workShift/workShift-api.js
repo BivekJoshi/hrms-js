@@ -38,8 +38,8 @@ export const assignWorkShift = async (formData) => {
 /*________________________PUT_____________________________________*/
 export const updateWorkShiftStartDate = async (formData) => {
   const { workScheduleEmployeeId, startDate } = formData;
-  const data = await axiosInstance.post(
+  const data = await axiosInstance.put(
     `/work-schedule/update-start-date/${workScheduleEmployeeId}?startDate=${startDate}`
-  , formData);
+  );
   return data;
 };
