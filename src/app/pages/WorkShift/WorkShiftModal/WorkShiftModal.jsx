@@ -1,20 +1,18 @@
 import React from "react";
 import FormModal from "../../../components/Modal/FormModal";
 import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
   Autocomplete,
   Button,
-  Checkbox,
-  Typography,
+  TextField,
+  AccordionSummary,
+  Tooltip,
 } from "@mui/material";
-import { FormControlLabel, FormGroup, Grid, TextField } from "@mui/material";
+import { Accordion, AccordionDetails, Typography, Grid } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { addWorkShiftForm } from "../../../hooks/workShift/useWorkShiftForm";
-import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider, TimePicker } from "@mui/x-date-pickers";
+import AddIcon from "@mui/icons-material/Add";
+import DeleteIcon from "../../../../assets/DeleteIcon.png";
+import { FieldArray, FormikProvider } from "formik";
 
 export const WorkShiftModal = ({ open, handleCloseModal }) => {
   const onClose = handleCloseModal;
@@ -37,7 +35,7 @@ export const WorkShiftModal = ({ open, handleCloseModal }) => {
   return (
     <div>
       <FormModal
-        width={"480px"}
+        width={"820px"}
         height="100%"
         title={"Add Work Schedule"}
         open={open}
@@ -104,85 +102,169 @@ export const WorkShiftModal = ({ open, handleCloseModal }) => {
                   Office Days
                 </AccordionSummary>
                 <AccordionDetails>
-                  <FormGroup>
-                    {[
-                      "Sunday",
-                      "Monday",
-                      "Tuesday",
-                      "Wednesday",
-                      "Thursday",
-                      "Friday",
-                      "Saturday",
-                    ].map((day, index) => (
-                      <FormControlLabel
-                        key={index}
-                        control={
-                          <div
-                            style={{ display: "flex", alignItems: "center" }}
-                          >
-                            <Typography width="6rem" ml={1}>
-                              {day}
-                            </Typography>
-                            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                              <DemoContainer components={["DatePicker"]}>
-                                <TimePicker
-                                  label="On time "
-                                  value={formik.values.onOffList[index].onTime}
-                                  onChange={(newValue) => {
-                                    const updatedOnOffList = [
-                                      ...formik.values.onOffList,
-                                    ];
-                                    updatedOnOffList[index] = {
-                                      ...updatedOnOffList[index],
-                                      onTime: newValue,
-                                    };
-                                    formik.setFieldValue(
-                                      "onOffList",
-                                      updatedOnOffList
-                                    );
-                                    formik.setFieldTouched("onOffList", true);
-                                  }}
-                                  sx={{ width: "5rem" }}
-                                />
-                                <TimePicker
-                                  label="Off time "
-                                  value={formik.values.onOffList[index].offTime}
-                                  onChange={(newValue) => {
-                                    const updatedOnOffList = [
-                                      ...formik.values.onOffList,
-                                    ];
-                                    updatedOnOffList[index].offTime = newValue;
-                                    formik.setFieldValue(
-                                      "onOffList",
-                                      updatedOnOffList
-                                    );
-                                    formik.setFieldTouched("onOffList", true);
-                                  }}
-                                  sx={{ width: "5rem" }}
-                                />
-                              </DemoContainer>
-                            </LocalizationProvider>
-                          </div>
-                        }
-                      />
-                    ))}
-                  </FormGroup>
+                  <FormikProvider value={formik} {...formik}>
+                    <FieldArray
+                      name="onOffList"
+                      render={(arrayHelpers) => (
+                        <>
+                          {formik?.values?.onOffList?.map(
+                            (onOffLists, index) => (
+                              <div
+                                style={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                }}
+                              >
+                                <Typography ml={1} width="8rem">
+                                  Shift Day {index + 1}
+                                </Typography>{" "}
+                                <>
+                                  <Grid display="flex" gap={1} mt={2}>
+                                    <TextField
+                                      id={`onOffList[${index}].startTime`}
+                                      name={`onOffList[${index}].startTime`}
+                                      type="time"
+                                      label="Start time "
+                                      InputLabelProps={{ shrink: true }}
+                                      value={onOffLists.startTime}
+                                      required
+                                      onChange={formik.handleChange}
+                                      error={
+                                        formik.touched.onOffList?.[index]
+                                          ?.startTime &&
+                                        formik.errors.onOffList?.[index]
+                                          ?.startTime
+                                      }
+                                      helperText={
+                                        formik.touched.onOffList?.[index]
+                                          ?.startTime &&
+                                        formik.errors.onOffList?.[index]
+                                          ?.startTime
+                                      }
+                                      size="small"
+                                    />
+                                    <TextField
+                                      id={`onOffList[${index}].endTime`}
+                                      name={`onOffList[${index}].endTime`}
+                                      type="time"
+                                      label="End time"
+                                      InputLabelProps={{ shrink: true }}
+                                      value={onOffLists.endTime}
+                                      required
+                                      onChange={formik.handleChange}
+                                      error={
+                                        formik.touched.onOffList?.[index]
+                                          ?.endTime &&
+                                        formik.errors.onOffList?.[index]
+                                          ?.endTime
+                                      }
+                                      helperText={
+                                        formik.touched.onOffList?.[index]
+                                          ?.endTime &&
+                                        formik.errors.onOffList?.[index]
+                                          ?.endTime
+                                      }
+                                      size="small"
+                                    />
+                                    <TextField
+                                      id={`onOffList[${index}].startLateTime`}
+                                      name={`onOffList[${index}].startLateTime`}
+                                      type="time"
+                                      label="Start Late Time"
+                                      InputLabelProps={{ shrink: true }}
+                                      value={onOffLists.startLateTime}
+                                      required
+                                      onChange={formik.handleChange}
+                                      error={
+                                        formik.touched.onOffList?.[index]
+                                          ?.startLateTime &&
+                                        formik.errors.onOffList?.[index]
+                                          ?.startLateTime
+                                      }
+                                      helperText={
+                                        formik.touched.onOffList?.[index]
+                                          ?.startLateTime &&
+                                        formik.errors.onOffList?.[index]
+                                          ?.startLateTime
+                                      }
+                                      size="small"
+                                    />
+                                    <TextField
+                                      id={`onOffList[${index}].endEarlyTime`}
+                                      name={`onOffList[${index}].endEarlyTime`}
+                                      type="time"
+                                      label="End EarlyTime"
+                                      InputLabelProps={{ shrink: true }}
+                                      value={onOffLists.endEarlyTime}
+                                      required
+                                      onChange={formik.handleChange}
+                                      error={
+                                        formik.touched.onOffList?.[index]
+                                          ?.endEarlyTime &&
+                                        formik.errors.onOffList?.[index]
+                                          ?.endEarlyTime
+                                      }
+                                      helperText={
+                                        formik.touched.onOffList?.[index]
+                                          ?.endEarlyTime &&
+                                        formik.errors.onOffList?.[index]
+                                          ?.endEarlyTime
+                                      }
+                                      size="small"
+                                    />
+                                  </Grid>
+                                  <div
+                                    style={{
+                                      display: "flex",
+                                      gap: ".5rem",
+                                      justifyContent: "flex-end",
+                                      marginTop: "20px",
+                                    }}
+                                  >
+                                    <Button
+                                      onClick={() =>
+                                        arrayHelpers.push({
+                                          startTime: "",
+                                          endTime: "",
+                                          startLateTime: "",
+                                          endEarlyTime: "",
+                                        })
+                                      }
+                                      disabled={
+                                        index !==
+                                        formik.values.onOffList.length - 1
+                                      }
+                                    >
+                                      <Tooltip title="Add work Schedule">
+                                        <AddIcon />
+                                      </Tooltip>
+                                    </Button>
+                                    {formik.values.onOffList.length > 1 && (
+                                      <Button
+                                        onClick={() => {
+                                          arrayHelpers.remove(index);
+                                        }}
+                                        style={{ cursor: "pointer" }}
+                                      >
+                                        <Tooltip title="Delete work Schedule">
+                                          <img src={DeleteIcon} alt="icon" />
+                                        </Tooltip>
+                                      </Button>
+                                    )}
+                                  </div>
+                                </>
+                              </div>
+                            )
+                          )}
+                        </>
+                      )}
+                    />
+                  </FormikProvider>
                 </AccordionDetails>
               </Accordion>
-              {formik.values.onOffList.filter((item) => item === true)
-                ?.length === 0 &&
-                formik.errors.onOffList && (
-                  <Typography
-                    style={{
-                      fontSize: "12px",
-                      marginLeft: "12px",
-                      marginTop: "6px",
-                    }}
-                    color={"red"}
-                  >
-                    {formik.errors.onOffList}
-                  </Typography>
-                )}
+              {formik.errors.onOffList && (
+                <Typography color="#d32f2f" ml="14px" fontSize=".75rem" mt="4px"> Required</Typography>
+              )}
             </Grid>
             <Grid
               container
@@ -216,14 +298,17 @@ export const WorkShiftModal = ({ open, handleCloseModal }) => {
           margin:0 !important;
         }
         .css-sh22l5-MuiButtonBase-root-MuiAccordionSummary-root.Mui-expanded{
-            min-height:20px;
+          min-height:20px;
         }
         .css-118m9qq-MuiButtonBase-root-MuiCheckbox-root{
-            padding:5px 9px;
+          padding:5px 9px;
         }
         .css-1pduc5x-MuiStack-root>.MuiTextField-root {
           min-width: 140px;
-      }
+        }.css-1nda1ky-MuiButtonBase-root-MuiButton-root{
+          min-width: 0;
+          padding:0
+        }
         `}
       </style>
     </div>
