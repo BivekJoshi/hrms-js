@@ -31,17 +31,23 @@ export const WorkShiftModal = ({ open, handleCloseModal }) => {
     "FRIDAY",
     "SATURDAY",
   ];
-  console.log(formik);
   return (
     <div>
       <FormModal
         width={"820px"}
-        height="100%"
+        height="fit-content"
         title={"Add Work Schedule"}
         open={open}
         onClose={handleCloseModal}
         formComponent={
-          <Grid container spacing={3}>
+          <Grid
+            container
+            spacing={3}
+            sx={{
+              maxHeight: "80vh",
+              overFlowY: "auto",
+            }}
+          >
             <Grid item xs={12} sm={12}>
               <TextField
                 id="scheduleName"
@@ -235,7 +241,7 @@ export const WorkShiftModal = ({ open, handleCloseModal }) => {
                                         formik.values.onOffList.length - 1
                                       }
                                     >
-                                      <Tooltip title="Add work Schedule">
+                                      <Tooltip title="Add work schedule">
                                         <AddIcon />
                                       </Tooltip>
                                     </Button>
@@ -246,7 +252,7 @@ export const WorkShiftModal = ({ open, handleCloseModal }) => {
                                         }}
                                         style={{ cursor: "pointer" }}
                                       >
-                                        <Tooltip title="Delete work Schedule">
+                                        <Tooltip title="Delete work schedule">
                                           <img src={DeleteIcon} alt="icon" />
                                         </Tooltip>
                                       </Button>
@@ -263,7 +269,15 @@ export const WorkShiftModal = ({ open, handleCloseModal }) => {
                 </AccordionDetails>
               </Accordion>
               {formik.errors.onOffList && (
-                <Typography color="#d32f2f" ml="14px" fontSize=".75rem" mt="4px"> Required</Typography>
+                <Typography
+                  color="#d32f2f"
+                  ml="14px"
+                  fontSize=".75rem"
+                  mt="4px"
+                >
+                  {" "}
+                  Required
+                </Typography>
               )}
             </Grid>
             <Grid
