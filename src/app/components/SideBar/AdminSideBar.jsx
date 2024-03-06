@@ -17,6 +17,8 @@ import AddchartIcon from "@mui/icons-material/Addchart";
 import EventIcon from "@mui/icons-material/Event";
 import HolidayVillageIcon from "@mui/icons-material/HolidayVillage";
 import DashboardIcon from "@mui/icons-material/Dashboard";
+import AssessmentIcon from "@mui/icons-material/Assessment";
+import SettingsApplicationsIcon from "@mui/icons-material/SettingsApplications";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import { ListItemIcon } from "@mui/material";
 import TodayIcon from "@mui/icons-material/Today";
@@ -122,15 +124,6 @@ export default function AdminSidebar() {
       ),
       path: "employee",
       subMenus: [
-        // {
-        //   name: "Employee",
-        //   path: "employee",
-        //   icon: (
-        //     <PersonIcon
-        //       sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
-        //     />
-        //   ),
-        // },
         {
           name: "Leave",
           path: "employee/leaves",
@@ -140,15 +133,7 @@ export default function AdminSidebar() {
             />
           ),
         },
-        {
-          name: "Leave Type",
-          path: "employee/leaveType",
-          icon: (
-            <MailIcon
-              sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
-            />
-          ),
-        },
+
         {
           name: "Attendance",
           path: "employee/attendance",
@@ -168,46 +153,6 @@ export default function AdminSidebar() {
           ),
         },
       ],
-    },
-    {
-      name: "Department",
-      icon: (
-        <WorkspacesIcon
-          sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
-        />
-      ),
-      path: "department",
-      subMenus: [],
-    },
-    {
-      name: "Designation",
-      icon: (
-        <AssignmentIndIcon
-          sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
-        />
-      ),
-      path: "designation",
-      subMenus: [],
-    },
-    {
-      name: "Branch",
-      icon: (
-        <BusinessIcon
-          sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
-        />
-      ),
-      path: "branch",
-      subMenus: [],
-    },
-    {
-      name: "Employment Type",
-      icon: (
-        <BadgeIcon
-          sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
-        />
-      ),
-      path: "employment-type",
-      subMenus: [],
     },
     {
       name: "Logistics",
@@ -238,6 +183,7 @@ export default function AdminSidebar() {
         },
       ],
     },
+
     {
       name: "Project",
       icon: (
@@ -279,23 +225,13 @@ export default function AdminSidebar() {
       subMenus: [],
     },
     {
-      name: "Todo",
+      name: "Todo List",
       icon: (
         <PlaylistAddCheckIcon
           sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
         />
       ),
       path: "todolist",
-      subMenus: [],
-    },
-    {
-      name: "Employee Mapping",
-      icon: (
-        <PeopleIcon
-          sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
-        />
-      ),
-      path: "employee/mapping",
       subMenus: [],
     },
     {
@@ -309,33 +245,109 @@ export default function AdminSidebar() {
       subMenus: [],
     },
     {
-      name: "Setting",
+      name: "Setup & Configuration",
       icon: (
-        <SettingsIcon
+        <SettingsApplicationsIcon
           sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
         />
       ),
-      path: "email",
-      subMenus: [],
+      // path: "setup-configuration",
+      subMenus: [
+        {
+          name: "Leave Type",
+          path: "leaveType",
+          icon: (
+            <MailIcon
+              sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
+            />
+          ),
+        },
+        {
+          name: "Department",
+          icon: (
+            <WorkspacesIcon
+              sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
+            />
+          ),
+          path: "department",
+        },
+        {
+          name: "Designation",
+          icon: (
+            <AssignmentIndIcon
+              sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
+            />
+          ),
+          path: "designation",
+        },
+        {
+          name: "Branch",
+          icon: (
+            <BusinessIcon
+              sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
+            />
+          ),
+          path: "branch",
+        },
+        {
+          name: "Employment Type",
+          icon: (
+            <BadgeIcon
+              sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
+            />
+          ),
+          path: "employment-type",
+          subMenus: [],
+        },
+        {
+          name: "Employee Mapping",
+          icon: (
+            <PeopleIcon
+              sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
+            />
+          ),
+          path: "mapping",
+          subMenus: [],
+        },
+        {
+          name: "Work Schedule",
+          icon: (
+            <WorkHistoryIcon
+              sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
+            />
+          ),
+          path: "work-schedule",
+          subMenus: [],
+        },
+        {
+          name: "Email Log",
+          icon: (
+            <MarkEmailUnreadOutlinedIcon
+              sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
+            />
+          ),
+          path: "mail-log",
+          subMenus: [],
+        },
+        {
+          name: "Setting",
+          icon: (
+            <SettingsIcon
+              sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
+            />
+          ),
+          path: "email",
+        },
+      ],
     },
     {
-      name: "Work Schedule",
+      name: "Reports",
       icon: (
-        <WorkHistoryIcon
+        <AssessmentIcon
           sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
         />
       ),
-      path: "work-Schedule",
-      subMenus: [],
-    },
-    {
-      name: "Email Log",
-      icon: (
-        <MarkEmailUnreadOutlinedIcon
-          sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
-        />
-      ),
-      path: "mail-log",
+      path: "reports",
       subMenus: [],
     },
   ];

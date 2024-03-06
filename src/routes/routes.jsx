@@ -94,6 +94,9 @@ const Setting = Loadable(
 const EmployeeMapping = Loadable(
   lazy(() => import("../app/pages/EmployeeMapping/EmployeeMapping"))
 );
+const Reports = Loadable(
+  lazy(() => import("../app/pages/Reports/Reports.jsx"))
+);
 
 const EmployeeProfile = Loadable(
   lazy(() =>
@@ -148,7 +151,7 @@ const routes = [
     component: <Leave component="leaves" />,
   },
   {
-    path: "employee/leaveType",
+    path: "leaveType",
     id: nanoid(),
     component: <LeaveType component="leaveType" />,
   },
@@ -301,7 +304,7 @@ const routes = [
     component: <ProjectEmpPage component="project" />,
   },
   {
-    path: "work-Schedule",
+    path: "work-schedule",
     name: "Work Schedule",
     id: nanoid(),
     component: <WorkShift component="workShift" />,
@@ -331,7 +334,7 @@ const routes = [
     component: <DeactiveUser />,
   },
   {
-    path: "employee/mapping",
+    path: "mapping",
     name: "Employee Mapping",
     id: nanoid(),
     component: <EmployeeMapping />,
@@ -347,6 +350,12 @@ const routes = [
     name: "Email Log",
     id: nanoid(),
     component: <EmailLogUserId />,
+  },
+  {
+    path: "reports",
+    name: "Reports",
+    id: nanoid(),
+    component: <Reports />,
   },
 ];
 
