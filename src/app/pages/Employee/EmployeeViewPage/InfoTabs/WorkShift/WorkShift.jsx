@@ -61,7 +61,7 @@ const WorkShift = ({ employeeId }) => {
           }}
         />
       ),
-      disabled: palette?.text?.primary,
+      // disabled: palette?.text?.primary,
       tooltip: "Edit Start Date",
       onClick: (event, rowData) => handleUpdateStartDate(rowData),
     },
@@ -69,7 +69,6 @@ const WorkShift = ({ employeeId }) => {
 
   return (
     <>
-      <br />
       <CustomTable
         columns={columns}
         data={WorkShiftAll}
@@ -82,7 +81,6 @@ const WorkShift = ({ employeeId }) => {
         <UpdateStartDate
           open={openEditModal}
           data={updateStartDate}
-          employeeId={employeeId}
           handleCloseModal={handleCloseAddModal}
           title={"Add Todo List"}
         />
