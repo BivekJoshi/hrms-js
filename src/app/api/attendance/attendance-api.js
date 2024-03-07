@@ -1,8 +1,27 @@
 import { axiosInstance } from "../../../auth/axiosInterceptor";
 
-export const getAttendance = async () => {
-  const data = await axiosInstance.get(`/attendance/allGroupedByEmployeeId`);
-  return data;
+export const getAttendance = async ({
+  employeeId,
+  fromDate,
+  toDate,
+  loggedInId,
+}) => {
+  if (!employeeId && !loggedInId) {
+    const data = await axiosInstance.get(
+      `/attendance/allGroupedByEmployeeId?fromDateBS=${fromDate}&toDateBS=${toDate}`
+    );
+    return data;
+  } else if (employeeId) {
+    const data = await axiosInstance.get(
+      `/attendance/allGroupedByEmployeeId?employeeId=${employeeId}&fromDateBS=${fromDate}&toDateBS=${toDate}`
+    );
+    return data;
+  } else if (loggedInId) {
+    const data = await axiosInstance.get(
+      `/attendance/allGroupedByEmployeeId?employeeId=${loggedInId}&fromDateBS=${fromDate}&toDateBS=${toDate}`
+    );
+    return data;
+  }
 };
 
 {
@@ -31,6 +50,14 @@ export const getEmployeeAttendanceMonthWise = async (date) => {
 export const getEmployeeAverageWork = async () => {
   const data = await axiosInstance.get(
     `/attendance/logged-in-user/average-work/hour`
+  );
+  return data;
+};
+
+/*________________________GET EMPLOYEE ATTENDANCE FILTER BY EMPLOYEE ID AND FROM DATE TO DATE_____________________________________*/
+export const getEmployeeAttendanceFilter = async () => {
+  const data = await axiosInstance.get(
+    `/attendance/employees/in-out-time?employeeId=1&fromDate=2024-03-01&toDate=2024-11-0`
   );
   return data;
 };

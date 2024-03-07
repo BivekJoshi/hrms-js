@@ -1,202 +1,145 @@
-import React, { useState, useRef, useEffect } from "react";
-import FullCalendar from "@fullcalendar/react";
-import dayGridPlugin from "@fullcalendar/daygrid";
-import timeGridPlugin from "@fullcalendar/timegrid";
-import interactionPlugin from "@fullcalendar/interaction";
-import { useGetEmployeeAttendanceById } from "../../../../../hooks/attendance/useAttendance";
+import React, { useState } from "react";
+import { useGetAttendance } from "../../../../../hooks/attendance/useAttendance";
 import { useParams } from "react-router-dom";
-import HdrAutoOutlinedIcon from "@mui/icons-material/HdrAutoOutlined";
-import { TbCircleLetterP } from "react-icons/tb";
-import { Box, Card, CardContent, Grid, Typography } from "@mui/material";
-import "../../Style/BasicInfoStyle.css";
+import { Box } from "@mui/material";
+import CustomTable from "../../../../../components/CustomTable/CustomTable";
+import { getNepaliMonthName } from "../../../../Attendance/HelperAttendance";
+
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import Typography from "@mui/material/Typography";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import dateConverter from "../../../../../../theme/dateConverter";
 import { useGetLoggedInUser } from "../../../../../hooks/auth/usePassword";
 
-const AttendenceInfo = ({ data }) => {
-  const { data: userData } = useGetLoggedInUser();
-  const { data: attendanceData } = data
-    ? useGetEmployeeAttendanceById(data?.id)
-    : useGetEmployeeAttendanceById(userData?.employeeId);
+const AttendenceInfo = () => {
+  const { id: employeeId } = useParams();
+  const { data: loggedUserData } = useGetLoggedInUser();
 
-  const calendarRef = useRef(null);
-  const [events, setEvents] = useState([]);
+  const loggedInId=loggedUserData?.id;
+  const TodayDate = new Date();
+  const BSToday = dateConverter(TodayDate, "AD_BS");
+  const fromDate = "2070-01-01";
+  const toDate = BSToday;
 
-  useEffect(() => {
-    if (attendanceData) {
-      const formattedEvents = attendanceData.map((event) => ({
-        title: "Present",
-        start: new Date(event.punchTime),
-        backgroundColor: "green",
-        id: event.empId,
-        time: new Date(event.punchTime).toLocaleTimeString(), // Add time property
-      }));
-      setEvents(formattedEvents);
-    }
-  }, [attendanceData]);
+  const { data, isLoading } = useGetAttendance({
+    employeeId,
+    fromDate,
+    toDate,
+    loggedInId
+  });
+
+  const [expandedState, setExpandedState] = useState({});
+
+  const handleExpansion = (year, month) => {
+    const identifier = `${year}-${month}`;
+    setExpandedState((prevState) => ({
+      ...prevState,
+      [identifier]: !prevState[identifier],
+    }));
+  };
+
+  const separateDataByYearAndMonth = (attendanceList) => {
+    const separatedData = {};
+    attendanceList?.forEach((attendance) => {
+      const date = new Date(attendance.dateBS);
+      const year = date.getFullYear();
+      const month = date.getMonth() + 1;
+      if (!separatedData[year]) {
+        separatedData[year] = {};
+      }
+      if (!separatedData[year][month]) {
+        separatedData[year][month] = [];
+      }
+      separatedData[year][month].push(attendance);
+    });
+    return separatedData;
+  };
+
+  const columns = [
+    {
+      title: "Date",
+      field: "dateBS",
+      emptyValue: "-",
+      width: "80px",
+      sorting: false,
+    },
+    {
+      title: "PunchIn",
+      field: "punchTime",
+      emptyValue: "-",
+      width: "80px",
+      sorting: false,
+    },
+    {
+      title: "PunchOut",
+      field: "punchout",
+      emptyValue: "-",
+      width: "80px",
+      sorting: false,
+    },
+    {
+      title: "Branch",
+      field: "branch",
+      emptyValue: "-",
+      width: "80px",
+      sorting: false,
+    },
+  ];
+
+  const separatedData = separateDataByYearAndMonth(
+    data?.[0]?.attendanceList || []
+  );
 
   return (
-    <Box className={attendanceData ? "attendenceDesign" : ""}>
-      <Grid container spacing={3}>
-        <Grid item xs={4} sm={4}>
-          <Card variant="outlined">
-            <CardContent>
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="div"
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  fontWeight: "bold",
-                  fontSize: "26px",
-                }}
-              >
-                Working Days
-              </Typography>
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="div"
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  fontWeight: "bold",
-                  fontSize: "24px",
-                  color: "green",
-                }}
-              >
-                -
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item xs={4} sm={4}>
-          <Card variant="outlined">
-            <CardContent>
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="div"
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  fontWeight: "bold",
-                  fontSize: "26px",
-                }}
-              >
-                Present Days
-              </Typography>
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="div"
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  fontWeight: "bold",
-                  fontSize: "24px",
-                  color: "green",
-                }}
-              >
-                -
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item xs={4} sm={4}>
-          <Card variant="outlined">
-            <CardContent>
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="div"
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  fontWeight: "bold",
-                  fontSize: "26px",
-                }}
-              >
-                Absent Days
-              </Typography>
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="div"
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  fontWeight: "bold",
-                  fontSize: "24px",
-                  color: "green",
-                }}
-              >
-                -
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-      </Grid>
-      <br />
-      <FullCalendar
-        ref={calendarRef}
-        plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-        initialView="dayGridMonth"
-        headerToolbar={{
-          start: "today prev,next",
-          center: "title",
-          end: "dayGridMonth,timeGridWeek,timeGridDay",
-        }}
-        height={"90vh"}
-        events={events}
-        eventContent={renderEventContent}
-      />
-      <style>
-        {`
-         .fc .fc-daygrid-day.fc-day-today {
-             background-color: #78bcff;
-         }
-         .fc *{
-          text-align: center;
-          justify-content: center;
-          }
-         `}
-      </style>
-    </Box>
+    <div>
+      {Object.entries(separatedData)
+        .reverse()
+        .map(([year, monthData]) => (
+          <>
+            <h4>Year: {year}</h4>
+            <Box key={year} mb={4}>
+              {Object.entries(monthData)
+                .reverse()
+                .map(([month, attendanceList]) => {
+                  const identifier = `${year}-${month}`;
+                  return (
+                    <Accordion
+                      key={identifier}
+                      expanded={expandedState[identifier] || false}
+                      onChange={() => handleExpansion(year, month)}
+                    >
+                      <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                        <Typography>{`${getNepaliMonthName(
+                          month
+                        )}, ${year}`}</Typography>
+                      </AccordionSummary>
+                      <AccordionDetails>
+                        <Box mb={2}>
+                          <CustomTable
+                            key={`${year}-${month}`}
+                            columns={columns}
+                            data={attendanceList}
+                            title={`Attendance Data - ${year}, ${getNepaliMonthName(
+                              month
+                            )}`}
+                            isLoading={isLoading}
+                            pageSize={30}
+                            options={{
+                              search: false,
+                            }}
+                          />
+                        </Box>
+                      </AccordionDetails>
+                    </Accordion>
+                  );
+                })}
+            </Box>
+          </>
+        ))}
+    </div>
   );
 };
 
 export default AttendenceInfo;
-
-function renderEventContent(eventInfo) {
-  return (
-    <Box className="attendanceHover" sx={{ display: "flex" }}>
-      <Box border={"none"} textAlign="center">
-        {!eventInfo ? (
-          <HdrAutoOutlinedIcon sx={{ color: "red" }} />
-        ) : (
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-start",
-            }}
-          >
-            <TbCircleLetterP
-              style={{ width: "2.5rem", height: "2.5rem", color: "green"}}
-            />
-            <div style={{display: "flex", flexDirection: 'column', gap: '1rem'}}>
-              <Typography variant='p' sx={{display: 'flex', flexDirection: 'column', background: '#9efb9e', padding: '0 1rem', borderRadius: '2rem'}}>
-                <div>
-                Punch Time
-                </div>
-                <div>
-                {(eventInfo?.event?._def?.extendedProps?.time)}
-                </div>
-              </Typography>
-            </div>
-          </div>
-        )}
-      </Box>
-    </Box>
-  );
-}
