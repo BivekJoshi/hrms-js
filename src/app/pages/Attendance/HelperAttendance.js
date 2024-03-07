@@ -56,3 +56,13 @@ export const getNepaliMonthName = (month) => {
       return "";
   }
 };
+
+export const convertNepaliToEnglishNumber = (nepaliNumber) => {
+  const nepaliDigits = ["०", "१", "२", "३", "४", "५", "६", "७", "८", "९"];
+
+  const englishDigits = nepaliNumber.replace(/[०-९]/g, (match) => {
+    return nepaliDigits.indexOf(match);
+  });
+
+  return englishDigits;
+};

@@ -4,6 +4,7 @@ import MaterialTable from "@material-table/core";
 import { TableCell, TableRow } from "@mui/material";
 import FilterForm from "./FilterForm";
 import dateConverter from "../../../theme/dateConverter";
+import { convertNepaliToEnglishNumber } from "./HelperAttendance";
 
 const NewAttendance = () => {
   const TodayDate = new Date();
@@ -28,12 +29,11 @@ const NewAttendance = () => {
   };
 
   const handleDateFromChange = (event) => {
-    // console.log(event,"event");
-    setFromDate(event);
+    setFromDate(convertNepaliToEnglishNumber(event));
   };
 
   const handleDateToChange = (event) => {
-    setToDate(event);
+    setToDate(convertNepaliToEnglishNumber(event));
   };
 
   const handleButtonClick = () => {
