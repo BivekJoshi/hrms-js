@@ -10,16 +10,24 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import dateConverter from "../../../../../../theme/dateConverter";
+import { useGetLoggedInUser } from "../../../../../hooks/auth/usePassword";
 
 const AttendenceInfo = () => {
   const { id: employeeId } = useParams();
-  const fromDate = "2076-01-01";
-  const toDate = "2080-10-01";
+  const { data: loggedUserData } = useGetLoggedInUser();
+
+  const loggedInId=loggedUserData?.id;
+  const TodayDate = new Date();
+  const BSToday = dateConverter(TodayDate, "AD_BS");
+  const fromDate = "2070-01-01";
+  const toDate = BSToday;
 
   const { data, isLoading } = useGetAttendance({
     employeeId,
     fromDate,
     toDate,
+    loggedInId
   });
 
   const [expandedState, setExpandedState] = useState({});
@@ -119,8 +127,7 @@ const AttendenceInfo = () => {
                             isLoading={isLoading}
                             pageSize={30}
                             options={{
-                              search:false,
-
+                              search: false,
                             }}
                           />
                         </Box>

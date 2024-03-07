@@ -1,14 +1,24 @@
 import { axiosInstance } from "../../../auth/axiosInterceptor";
 
-export const getAttendance = async ({ employeeId, fromDate, toDate }) => {
-  if (!employeeId) {
+export const getAttendance = async ({
+  employeeId,
+  fromDate,
+  toDate,
+  loggedInId,
+}) => {
+  if (!employeeId && !loggedInId) {
     const data = await axiosInstance.get(
       `/attendance/allGroupedByEmployeeId?fromDateBS=${fromDate}&toDateBS=${toDate}`
     );
     return data;
-  } else {
+  } else if (employeeId) {
     const data = await axiosInstance.get(
       `/attendance/allGroupedByEmployeeId?employeeId=${employeeId}&fromDateBS=${fromDate}&toDateBS=${toDate}`
+    );
+    return data;
+  } else if (loggedInId) {
+    const data = await axiosInstance.get(
+      `/attendance/allGroupedByEmployeeId?employeeId=${loggedInId}&fromDateBS=${fromDate}&toDateBS=${toDate}`
     );
     return data;
   }

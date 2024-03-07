@@ -7,10 +7,15 @@ import {
   getEmployeeAverageWork,
 } from "../../api/attendance/attendance-api";
 
-export const useGetAttendance = ({ employeeId, fromDate, toDate }) => {
+export const useGetAttendance = ({
+  employeeId,
+  fromDate,
+  toDate,
+  loggedInId,
+}) => {
   return useQuery(
     ["getAttendance"],
-    () => getAttendance({ employeeId, fromDate, toDate }),
+    () => getAttendance({ employeeId, fromDate, toDate, loggedInId }),
     {
       refetchInterval: false,
       refetchOnWindowFocus: false,
