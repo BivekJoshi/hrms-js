@@ -4,14 +4,12 @@ import { EmployLineChart } from '../Component/EmployLineChart';
 import GaugeChart from 'react-gauge-chart';
 import {
   useGetEmployeeAttendanceMonthWise,
-  useGetEmployeeAverageWork,
 } from '../../../hooks/attendance/useAttendance';
 import ThemeModeContext from '../../../../theme/ThemeModeContext';
 import RadialBar from './radialBar';
 
 export const MiddleEmployDashbord = ({}) => {
   const { data: attendanceData } = useGetEmployeeAttendanceMonthWise(2080);
-  // const { data } = useGetEmployeeAverageWork();
   // const averageWork = data !== "NaN" ? ((data / 9) * 100) / 100 : 0;
   const { mode } = useContext(ThemeModeContext);
  

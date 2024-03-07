@@ -1,16 +1,26 @@
-import { useQuery } from 'react-query';
+import { useQuery } from "react-query";
 import {
   getAttendance,
   getEmployeeAttendanceById,
+  getEmployeeAttendanceFilter,
   getEmployeeAttendanceMonthWise,
   getEmployeeAverageWork,
-} from '../../api/attendance/attendance-api';
+} from "../../api/attendance/attendance-api";
 
-export const useGetAttendance = () => {
-  return useQuery(['getAttendance'], () => getAttendance(), {
-    refetchInterval: false,
-    refetchOnWindowFocus: false,
-  });
+export const useGetAttendance = ({
+  employeeId,
+  fromDate,
+  toDate,
+  loggedInId,
+}) => {
+  return useQuery(
+    ["getAttendance"],
+    () => getAttendance({ employeeId, fromDate, toDate, loggedInId }),
+    {
+      refetchInterval: false,
+      refetchOnWindowFocus: false,
+    }
+  );
 };
 
 {
@@ -18,7 +28,7 @@ export const useGetAttendance = () => {
 }
 export const useGetEmployeeAttendanceById = (id) => {
   return useQuery(
-    ['getEmployeeAttendanceById', id],
+    ["getEmployeeAttendanceById", id],
     () => getEmployeeAttendanceById(id),
     {
       refetchInterval: false,
@@ -31,20 +41,11 @@ export const useGetEmployeeAttendanceById = (id) => {
 }
 export const useGetEmployeeAttendanceMonthWise = (date) => {
   return useQuery(
-    ['getEmployeeAttendanceMonthWise', date],
+    ["getEmployeeAttendanceMonthWise", date],
     () => getEmployeeAttendanceMonthWise(date),
     {
       refetchInterval: false,
       refetchOnWindowFocus: false,
     }
   );
-};
-
-/*________________________GETEMPLOYEEATTENDANCE average-work_____________________________________*/
-
-export const useGetEmployeeAverageWork = () => {
-  return useQuery(['getEmployeeAverageWork'], () => getEmployeeAverageWork(), {
-    refetchInterval: false,
-    refetchOnWindowFocus: false,
-  });
 };

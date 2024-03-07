@@ -18,6 +18,7 @@ import EmploymentType from "../app/pages/EmploymentType/EmploymentType";
 import EmailLog from "../app/pages/EmailLog/EmailLog";
 import EmailLogUserId from "../app/pages/EmailLog/EmailLogUserId";
 import WorkShift from "../app/pages/WorkShift/WorkShift";
+import NewAttendance from "../app/pages/Attendance/NewAttendance";
 
 const ProfileDetail = Loadable(
   lazy(() => import("../app/pages/Auth/Profile/ProfileDetail"))
@@ -38,7 +39,7 @@ const Birthdaylist = Loadable(
   lazy(() => import("../app/pages/Birthday/Birthdaylist"))
 );
 const Attendance = Loadable(
-  lazy(() => import("../app/pages/Attendance/Attendance"))
+  lazy(() => import("../app/pages/Attendance/NewAttendance"))
 );
 const Project = Loadable(
   lazy(() => import("../app/pages/Project/ProjectAdminViewPage/Project"))

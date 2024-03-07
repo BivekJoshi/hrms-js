@@ -8,7 +8,7 @@ const AddEmployeeSchema = Yup.object().shape({
   .matches(/^[A-Za-z]+$/, 'Name must contain only letters'),
   middleName: Yup.string()
   .max(25, "Middle name cannot be greater than 25 characters")
-  .matches(/^[A-Za-z]+$/, 'Name must contain only letters'),
+  .matches(/^[A-Za-z\s]+$/, 'Name must contain only letters and spaces'),
   lastName: Yup.string()
   .required("Last name is required")
   .max(25, "Last name cannot be greater than 25 characters")
