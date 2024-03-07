@@ -1,8 +1,16 @@
-import { Grid, TextField, Button, Autocomplete } from "@mui/material";
+import {
+  Grid,
+  TextField,
+  Button,
+  Autocomplete,
+  Typography,
+} from "@mui/material";
 import React from "react";
 import { useGetEmployee } from "../../hooks/employee/useEmployee";
 import { NepaliDatePicker } from "nepali-datepicker-reactjs";
 import "nepali-datepicker-reactjs/dist/index.css";
+import "./Style.css";
+
 const FilterForm = ({
   employeeId,
   fromDate,
@@ -14,8 +22,9 @@ const FilterForm = ({
 }) => {
   const { data: employeeData } = useGetEmployee();
   return (
-    <Grid container spacing={3} sx={{ margin: "12px 0 12px 0" }}>
+    <Grid container spacing={3} sx={{ margin: "12px 0 12px 0" }} alignItems="center">
       <Grid item xs={3} sm={3}>
+      <Typography variant="h7">Employee</Typography>
         <Autocomplete
           id="employeeId"
           name="employeeId"
@@ -27,7 +36,8 @@ const FilterForm = ({
           renderInput={(params) => (
             <TextField
               {...params}
-              label="Employee Name"
+              // label="Employee Name"
+              placeholder="Select Employee"
               fullWidth
               required
               variant="outlined"
@@ -37,26 +47,19 @@ const FilterForm = ({
         />
       </Grid>
       <Grid item xs={3} sm={3}>
-        {/* <TextField
-          id="fromDate"
-          name="fromDate"
-          fullWidth
-          required
-          value={fromDate}
-          onChange={handleDateFromChange}
-          variant="outlined"
-          size="small"
-        /> */}
+        <Typography variant="h7">From Date</Typography>
         <NepaliDatePicker
           value={fromDate}
           format="YYYY-MM-DD"
           onChange={handleDateFromChange}
           id="fromDate"
           name="fromDate"
-          // options={{ calenderLocale: "ne", valueLocale: "en" }} />
+          options={{ calenderLocale: "en", valueLocale: "ne" }}
+          className="custom-datepicker"
         />
       </Grid>
       <Grid item xs={3} sm={3}>
+        <Typography variant="h7">To Date</Typography>
         <NepaliDatePicker
           id="toDate"
           name="toDate"
@@ -66,6 +69,8 @@ const FilterForm = ({
           onChange={handleDateToChange}
           variant="outlined"
           size="small"
+          options={{ calenderLocale: "en", valueLocale: "ne" }}
+          className="custom-datepicker"
         />
       </Grid>
       <Grid item xs={3} sm={3}>
