@@ -1,14 +1,21 @@
 import { Box, Button, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useGetWorkShiftAllActive } from "../../hooks/employee/AddEmployeeWorkShift/useWorkShift";
 import CustomTable from "../../components/CustomTable/CustomTable";
 import { WorkShiftModal } from "./WorkShiftModal/WorkShiftModal";
+import AssignmentIcon from "@mui/icons-material/Assignment";
+import { AssignShiftModal } from "./WorkShiftModal/AssignWorkShiftModel";
+import ThemeModeContext from "../../../theme/ThemeModeContext";
 
 const WorkShift = () => {
   const [openAddModal, setOpenAddModal] = useState(false);
   const { data: WorkShiftAll, isLoading } = useGetWorkShiftAllActive();
   const handleAddOpenModal = () => setOpenAddModal(true);
   const handleCloseAddModal = () => setOpenAddModal(false);
+  const [assignCompany, setAssignCompany] = useState({});
+  const [openEditModal, setOpenEditModal] = useState(false);
+  const handleCloseAssignModal = () => setOpenEditModal(false);
+  const { palette } = useContext(ThemeModeContext);
 
   const columns = [
     {
@@ -26,8 +33,8 @@ const WorkShift = () => {
       emptyValue: "-",
     },
     {
-      title: "Shift Name",
-      field: "shiftName",
+      title: "Schedule Name",
+      field: "scheduleName",
       width: "100px",
       sorting: false,
     },
@@ -39,6 +46,27 @@ const WorkShift = () => {
       sorting: false,
     },
   ];
+  const handleEditCompany = (rowData) => {
+    setAssignCompany(rowData);
+    setOpenEditModal(true);
+  };
+  const actions = [
+    {
+      icon: () => (
+        <AssignmentIcon
+          sx={{
+            color: palette?.text?.primary,
+            "&:hover": {
+              color: "green",
+            },
+          }}
+        />
+      ),
+      // disabled: !permissions?.canEdit,
+      tooltip: "Assign Work Schedule",
+      onClick: (event, rowData) => handleEditCompany(rowData),
+    },
+  ];
 
   return (
     <>
@@ -48,22 +76,31 @@ const WorkShift = () => {
           sx={{ textTransform: "none" }}
           onClick={handleAddOpenModal}
         >
-          Add Work Shift
+          Add Work Schedule
         </Button>
       </Box>
       <br />
       <CustomTable
         columns={columns}
         data={WorkShiftAll}
-        title="Work Shift"
+        title="Work Schedule"
         isLoading={isLoading}
-        // actions={actions}
+        actions={actions}
       />
 
-{openAddModal && (
+      {openAddModal && (
         <WorkShiftModal
           open={openAddModal}
           handleCloseModal={handleCloseAddModal}
+          title={"Add Todo List"}
+        />
+      )}
+
+      {openEditModal && (
+        <AssignShiftModal
+          open={openEditModal}
+          data={assignCompany}
+          handleCloseModal={handleCloseAssignModal}
           title={"Add Todo List"}
         />
       )}

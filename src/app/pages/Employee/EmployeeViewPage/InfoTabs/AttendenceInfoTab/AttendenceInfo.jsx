@@ -58,21 +58,14 @@ const AttendenceInfo = () => {
       sorting: false,
     },
     {
-      title: "Day",
-      field: "",
-      emptyValue: "-",
-      width: "80px",
-      sorting: false,
-    },
-    {
-      title: "Check In",
+      title: "PunchIn",
       field: "punchTime",
       emptyValue: "-",
       width: "80px",
       sorting: false,
     },
     {
-      title: "Check Out",
+      title: "PunchOut",
       field: "punchout",
       emptyValue: "-",
       width: "80px",
@@ -80,7 +73,7 @@ const AttendenceInfo = () => {
     },
     {
       title: "Branch",
-      field: "punchout",
+      field: "branch",
       emptyValue: "-",
       width: "80px",
       sorting: false,
@@ -110,13 +103,12 @@ const AttendenceInfo = () => {
                       onChange={() => handleExpansion(year, month)}
                     >
                       <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                        <Typography>{`Month: ${getNepaliMonthName(
+                        <Typography>{`${getNepaliMonthName(
                           month
                         )}, ${year}`}</Typography>
                       </AccordionSummary>
                       <AccordionDetails>
                         <Box mb={2}>
-                          {/* <h3>{`Month: ${getNepaliMonthName(month)}`}</h3> */}
                           <CustomTable
                             key={`${year}-${month}`}
                             columns={columns}
@@ -126,7 +118,10 @@ const AttendenceInfo = () => {
                             )}`}
                             isLoading={isLoading}
                             pageSize={30}
-                            options={false}
+                            options={{
+                              search:false,
+
+                            }}
                           />
                         </Box>
                       </AccordionDetails>

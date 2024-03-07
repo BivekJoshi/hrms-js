@@ -15,14 +15,15 @@ import BranchInfo from "../../InfoTabs/BranchTab/BranchInfo";
 import DepartmentInfo from "../../InfoTabs/DepartmentTab/DepartmentInfo";
 import EmploymentDetails from "../../InfoTabs/EmploymentDetails/EmploymentDetails";
 import ThemeModeContext from "../../../../../../theme/ThemeModeContext";
-import NewEmployeeHistoryDetailForm from '../../../../../components/Form/Employee/EmployeeHistoryDetailForm/NewEmployeeHistoryDetailForm';
-import useAuth from '../../../../../../auth/hooks/component/login/useAuth';
+import NewEmployeeHistoryDetailForm from "../../../../../components/Form/Employee/EmployeeHistoryDetailForm/NewEmployeeHistoryDetailForm";
+import useAuth from "../../../../../../auth/hooks/component/login/useAuth";
+import WorkShift from "../../InfoTabs/WorkShift/WorkShift";
 
 export const DetailProfile = ({ data, role, setShowPersonalProfile }) => {
   const [value, setValue] = React.useState("1");
   const { palette, mode } = React.useContext(ThemeModeContext);
   const auth = useAuth();
-  
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -45,7 +46,7 @@ export const DetailProfile = ({ data, role, setShowPersonalProfile }) => {
 
     // fontWeight: "bold",
   };
- 
+
   const tabsData = [
     {
       label: "Leave Records",
@@ -95,6 +96,11 @@ export const DetailProfile = ({ data, role, setShowPersonalProfile }) => {
       label: "Work",
       value: "5",
       component: <NewEmployeeHistoryDetailForm employeeId={data?.id} />,
+    },
+    {
+      label: "Work Schedule",
+      value: "15",
+      component: <WorkShift employeeId={data?.id} />,
     },
 
     {

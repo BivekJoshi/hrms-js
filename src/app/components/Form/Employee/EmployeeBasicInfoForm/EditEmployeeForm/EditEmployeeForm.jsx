@@ -42,7 +42,7 @@ const EditEmployeeForm = () => {
     "Educational Details",
     "Bank Details",
     "Work History",
-    "Work Shift",
+    "Work Schedule",
     "Document Details",
   ];
 
