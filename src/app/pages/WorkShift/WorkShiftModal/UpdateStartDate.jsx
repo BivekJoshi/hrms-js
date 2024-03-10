@@ -18,7 +18,6 @@ export const UpdateStartDate = ({ open, handleCloseModal, data }) => {
     }
   };
 
-  console.log(formik);
   return (
     <div>
       <FormModal

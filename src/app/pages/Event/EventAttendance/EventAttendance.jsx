@@ -40,7 +40,7 @@ const EventAttendance = ({ permissions }) => {
       field: "userName",
       emptyValue: "-",
       pdfWidth: "7rem",
-      width: "20vh",
+      width: "10vh",
       sorting: false,
     },
     {
@@ -61,9 +61,12 @@ const EventAttendance = ({ permissions }) => {
               <div>{rowData.mobileNumber}</div>
               <div
                 style={{
-                  overflow: "hidden",
-                  whiteSpace: "nowrap",
+                  // overflow: "hidden",
+                  // whiteSpace: "nowrap",
                   textOverflow: "ellipsis",
+                  overflowWrap: "break-word",
+                  wordWrap: "break-word",
+                  wordBreak: "break-all",
                 }}
               >
                 {rowData.email}
@@ -90,6 +93,7 @@ const EventAttendance = ({ permissions }) => {
             overflowWrap: "break-word",
             wordWrap: "break-word",
             wordBreak: "break-all",
+            width: "10rem",
           }}
         >
           {rowData?.eventName}

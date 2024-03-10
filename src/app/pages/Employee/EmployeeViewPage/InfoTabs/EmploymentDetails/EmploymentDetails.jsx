@@ -43,7 +43,7 @@ const EmploymentDetails = ({ role, employeeId }) => {
 
   const activeData = employeeHistory?.filter((item) => item?.isActive === true);
 
-  const [actionDD, setActionDD] = React.useState("Actions");
+  const [actionDD, setActionDD] = useState("Actions");
 
   const handleChange = (event) => {
     setActionDD(event.target.value);

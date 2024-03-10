@@ -53,7 +53,7 @@ const AddressSchema = Yup.object().shape({
   addresses: Yup.array()
     .of(
       Yup.object().shape({
-        addressType: Yup.string().required("Address type is required"),
+        addressType: Yup.string().required("Address Type is required"),
         country: Yup.string().when("addressType", {
           is: "PERMANENT",
           then: Yup.string().required("Country is required"),
@@ -95,7 +95,7 @@ const AddressSchema = Yup.object().shape({
           otherwise: Yup.number().when("$perTempAddSame", {
             is: true,
             then: Yup.number()
-              .typeError("Ward number must be a number")
+              .typeError("Ward Number must be a number")
               .max(999, "Invalid ward number, exceed length 3")
               .required("Ward number is required"),
           }),

@@ -3,7 +3,7 @@ import { useAddDocument } from '../useDocument';
 import * as Yup from 'yup';
 
 const validationSchema = Yup.object().shape({
-  documentType: Yup.string().required('Document type is required'),
+  documentType: Yup.string().required('Document Type is required'),
 });
 
 export const useAddDocumentForm = ({ document }) => {

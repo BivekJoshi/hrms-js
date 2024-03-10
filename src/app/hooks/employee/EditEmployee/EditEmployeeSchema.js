@@ -3,30 +3,30 @@ import * as Yup from "yup";
 
 const EditEmployeeSchema = Yup.object().shape({
   firstName: Yup.string()
-    .required("First name is required")
-    .max(25, "First name cannot be greater than 25 characters")
-    .matches(/^[A-Za-z]+$/, 'Name must contain only letters'),
+    .required("First Name is required")
+    .max(25, "First Name cannot be greater than 25 characters")
+    .matches(/^[A-Za-z]+$/, 'First Name must contain only letters'),
   middleName: Yup.string()
-  .max(25, "Middle name cannot be greater than 25 characters")
-  .matches(/^[A-Za-z\s]+$/, 'Name must contain only letters and spaces'),
+  .max(25, "Middle Name cannot be greater than 25 characters")
+  .matches(/^[A-Za-z]+$/, 'Middle Name must contain only letters'),
   lastName: Yup.string()
-    .required("Last name is required")
-    .max(25, "Last name cannot be greater than 25 characters")
-    .matches(/^[A-Za-z]+$/, 'Name must contain only letters'),
+    .required("Last Name is required")
+    .max(25, "Last Name cannot be greater than 25 characters")
+    .matches(/^[A-Za-z]+$/, 'Last Name must contain only letters'),
   gender: Yup.string().required("Gender is required"),
   dateOfBirth: Yup.date()
-    .required("Date of birth is required")
+    .required("Date of Birth is required")
     .max(sub({ years: 18 }, new Date()), "Employee must be over 18 years old"),
   // dateOfJoin: Yup.string().required("Date of join is required"),
   mobileNumber: Yup.string()
-    .required("Mobile number is required")
+    .required("Mobile Number is required")
     .matches(/^[0-9]{10}$/, "Invalid mobile number format, must be 10 digits.")
     .matches(/^9[0-9]{9}$/, "Invalid mobile number format, must start with 9."),
 
   citizenshipNumber: Yup.string()
     .matches(/^[0-9\/-]+$/, "Enter valid citizenship number")
-    .required("Citizenship number is required")
-    .max(25, "Citizenship number cannot be greater than 25 characters"),
+    .required("Citizenship Number is required")
+    .max(25, "Citizenship Number cannot be greater than 25 characters"),
   panNumber: Yup.string()
   .matches(/^[0-9\/-]+$/, "Enter valid pan number")
   .max(25, "Pan number cannot be greater than 25 numbers"),

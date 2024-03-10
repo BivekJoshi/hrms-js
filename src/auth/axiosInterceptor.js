@@ -65,6 +65,7 @@ axiosInstance.interceptors.response.use(
   function (error) {
     if (error?.response) {
       if (error?.response?.status === 401) {
+        toast.error("Multiple login attempts, Please log in again.")
         removeUser();
         navigateOnError();
       }

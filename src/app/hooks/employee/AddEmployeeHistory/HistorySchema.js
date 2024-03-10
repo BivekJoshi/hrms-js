@@ -13,17 +13,17 @@ const HistorySchema = Yup.object().shape({
   history: Yup.array().of(
     Yup.object().shape({
       employerName: Yup.string()
-        .required("Organization name is Required")
-        .max(50, "Organization name cannot be greater than 50 characters")
-        .min(3, "Organaization name cannot be less than 3 characheter"),
+        .required("Organization Name is required")
+        .max(50, "Organization Name cannot be greater than 50 characters")
+        .min(3, "Organaization Name cannot be less than 3 characheter"),
       employerAddress: Yup.string()
-        .required("Organization address is required")
-        .max(100, "Organization address cannot be greater than 100 characters"),
+        .required("Organization Address is required")
+        .max(100, "Organization Address cannot be greater than 100 characters"),
       pastPosition: Yup.string()
-        .required("Past Position is Required")
-        .max(25, "Position name cannot be greater than 25 characters")
-        .min(3, "Position name cannot be less than 3 characheter"),
-      fromDate: Yup.string().required("From Date is Required"),
+        .required("Past Position is required")
+        .max(25, "Position Name cannot be greater than 25 characters")
+        .min(3, "Position Name cannot be less than 3 characheter"),
+      fromDate: Yup.string().required("From Date is required"),
       toDate: Yup.string()
         .required("To Date is required")
         .test({

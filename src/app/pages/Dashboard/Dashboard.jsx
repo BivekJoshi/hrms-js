@@ -25,6 +25,12 @@ const Dashboard = () => {
     year: "numeric",
   };
   const formattedDate = today.toLocaleDateString(undefined, options);
+
+  const checkDepartmentData = data && Object.values(data?.employeeCountPerDepartment);
+  const checkEmpData = data && Object.values(data?.employeeCountPerEmpType);
+  const checkDepartmentValues = checkDepartmentData && checkDepartmentData.every((value) => value === 0);
+  const checkEmpValues = checkEmpData && checkEmpData.every((value) => value === 0);
+
   return (
     !isLoading && (
       <>
@@ -115,25 +121,23 @@ const Dashboard = () => {
                 </Grid>
               </div>
             </Grid>
-            {data &&
-              Object.keys(data?.employeeCountPerDepartment).length !== 0 && (
-                <Grid item md={6} xs={12}>
-                  <Typography variant="h5" sx={{ marginBottom: "16px" }}>
-                    Employee Department
-                  </Typography>
-                  <Grid
-                    borderRadius={"6px"}
-                    bgcolor={mode === "light" ? "white" : "#3f413f"}
-                    padding="1rem "
-                    width="100%"
-                    boxShadow="0 4px 8px 3px rgba(0,0,0,.15), 0 1px 3px rgba(0,0,0,.3)"
-                  >
-                    <EmployPichart data={data?.employeeCountPerDepartment} />
-                  </Grid>
+            {data && !checkDepartmentValues && (
+              <Grid item md={6} xs={12}>
+                <Typography variant="h5" sx={{ marginBottom: "16px" }}>
+                  Employee Department
+                </Typography>
+                <Grid
+                  borderRadius={"6px"}
+                  bgcolor={mode === "light" ? "white" : "#3f413f"}
+                  padding="1rem "
+                  width="100%"
+                  boxShadow="0 4px 8px 3px rgba(0,0,0,.15), 0 1px 3px rgba(0,0,0,.3)"
+                >
+                  <EmployPichart data={data?.employeeCountPerDepartment} />
                 </Grid>
-              )}
-            {data &&
-              Object.keys(data?.employeeCountPerEmpType).length !== 0 && (
+              </Grid>
+            )}
+            {data && !checkEmpValues && (
                 <Grid item md={6} xs={12}>
                   <Typography variant="h5" sx={{ marginBottom: "16px" }}>
                     Employee Type
