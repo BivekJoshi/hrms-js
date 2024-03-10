@@ -3,7 +3,7 @@ import { useEditEmployee } from "./useEmployeeHistory";
 import * as Yup from "yup";
 
 const ValidateSchema = Yup.object().shape({
-  effectiveDateTo: Yup.string().required("Effective To Date is required"),
+  effectiveDateTo: Yup.string().required(" Please select effective date"),
 });
 
 const useEditEmployeeDetails = (onclose, tableId) => {

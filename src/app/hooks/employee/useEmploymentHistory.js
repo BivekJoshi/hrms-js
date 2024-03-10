@@ -28,7 +28,7 @@ const useEmploymentHistory = ( data) => {
       remarks: "",
       multiplePosition: false,
     },
-    validationSchema: EmployeeSchema,
+    validationSchema: EmployeeSchema, 
     enableReinitialize: true,
     onSubmit: (values) => {
       if (data?.positionId) {

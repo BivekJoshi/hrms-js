@@ -44,7 +44,7 @@ const minAge = new Date(
 const EmployeeBasicInfoForm = ({ formik, data }) => {
   const { mode } = useContext(ThemeModeContext);
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={2} px={3}>
       <Grid item xs={12} sm={6} md={4}>
         <TextField
           id="firstName"

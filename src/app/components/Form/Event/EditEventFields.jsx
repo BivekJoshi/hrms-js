@@ -121,7 +121,6 @@ const EditEventFields = ({
             label="Description"
             fullWidth
             formik={formik}
-            data={data?.eventDescription}
             maxLength={255}
             variant="outlined"
             multiline
@@ -130,6 +129,7 @@ const EditEventFields = ({
             }}
             rows={3}
             inputProps={{ maxLength: 255 }}
+            data={data?.eventDescription}
           />
         </Grid>
         <Grid
