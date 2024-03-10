@@ -67,23 +67,51 @@ const TrainingInfo = ({ data, role }) => {
       title: 'Training Name',
       field: 'trainingName',
       emptyValue: '-',
+      render: (rowData) => {
+        return (
+          <div style={{wordBreak: "break-all"}}>
+            {rowData?.trainingName}
+          </div>
+        )
+      },
       width: 100,
     },
     {
       title: 'Training Level',
       field: 'trainingLevel',
+      render: (rowData) => {
+        return (
+          <div style={{wordBreak: "break-all"}}>
+            {rowData?.trainingLevel}
+          </div>
+        )
+      },
       emptyValue: '-',
       width: 100,
     },
     {
       title: 'Institute',
       field: 'trainingInstitute',
+      render: (rowData) => {
+        return (
+          <div style={{wordBreak: "break-all"}}>
+            {rowData?.trainingInstitute}
+          </div>
+        )
+      },
       emptyValue: '-',
       width: 100,
     },
     {
       title: 'Category',
       field: 'category',
+      render: (rowData) => {
+        return (
+          <div style={{wordBreak: "break-all"}}>
+            {rowData?.category}
+          </div>
+        )
+      },
       emptyValue: '-',
       width: 90,
     },

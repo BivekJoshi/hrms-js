@@ -2,8 +2,8 @@ import * as Yup from "yup";
 
 const EventSchema = Yup.object().shape({
   eventName: Yup.string()
-    .required("Event name is required")
-    .max(50, "Event name cannot be greater than 50 characters"),
+    .required("Event Name is required")
+    .max(50, "Event Name cannot be greater than 50 characters"),
   eventDate: Yup.string().required("Please select event date"),
   eventTime: Yup.string().required("Please select event time"),
   eventDescription: Yup.string()

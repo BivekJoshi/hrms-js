@@ -180,6 +180,7 @@ const EmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
             name="conditionWhileProvided"
             label="Device Condition"
             fullWidth
+            required
             value={formik.values.conditionWhileProvided}
             onChange={formik.handleChange}
             error={

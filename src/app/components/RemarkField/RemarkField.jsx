@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TextField } from '@mui/material';
 
 const RemarkField = ({
@@ -14,7 +14,14 @@ const RemarkField = ({
   data,
   req,
 }) => {
-  const [remainingChars, setRemainingChars] = useState(maxLength - (data ? data?.length : 0));
+  const [remainingChars, setRemainingChars] = useState(maxLength);
+
+  useEffect(() => {
+    if (data) {
+      const remaining = maxLength - data.length;
+      setRemainingChars(remaining >= 0 ? remaining : 0);
+    }
+  }, [data, maxLength]);
 
   const handleChange = (event) => {
     const newValue = event.target.value;
@@ -25,7 +32,7 @@ const RemarkField = ({
       formik.handleChange(event);
     }
   };
-
+  
   return (
     <TextField
       id={id}

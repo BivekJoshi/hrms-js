@@ -7,16 +7,16 @@ import * as Yup from "yup";
 
 const QualificationSchema = Yup.object().shape({
   board: Yup.string()
-    .required("Board name is required")
-    .matches(/^[A-Za-z\s]+$/, "Board must only contain letters")
+    .required("Board Name is required")
+    .matches(/^[A-Za-z\s]+$/, "Board Name must only contain letters")
     .min(3, "Board Name cannot be less than 3 character"),
   institute: Yup.string()
-    .required("Institute is required")
-    .matches(/^[A-Za-z\s]+$/, "Institute must only contain letters")
+    .required("Institute Name is required")
+    .matches(/^[A-Za-z\s]+$/, "Institute Name must only contain letters")
     .min(3, "Institude Name cannot be less than 3 character"),
-  passedLevel: Yup.string().required("Enter pass level"),
-  passedYear: Yup.mixed().required("Passed year is required"),
-  scoreType: Yup.string()?.nullable().required("Score type is required"),
+  passedLevel: Yup.string().required("Passed Level is required"),
+  passedYear: Yup.mixed().required("Passed Year is required"),
+  scoreType: Yup.string()?.nullable().required("Score Type is required"),
   grade: Yup.string().when("scoreType", {
     is: (scoreType) => scoreType === "PERCENT",
     then: Yup.string()
