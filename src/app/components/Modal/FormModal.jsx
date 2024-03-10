@@ -11,8 +11,16 @@ import ThemeModeContext from "../../../theme/ThemeModeContext";
 import { useContext } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 
-const FormModal = ({ open, onClose, formComponent, sx, width, title, height }) => {
-  const { mode } = useContext(ThemeModeContext);
+const FormModal = ({
+  open,
+  onClose,
+  formComponent,
+  sx,
+  width,
+  title,
+  height,
+}) => {
+  const { mode, palette } = useContext(ThemeModeContext);
   const style = {
     position: "absolute",
     top: "50%",
@@ -23,7 +31,7 @@ const FormModal = ({ open, onClose, formComponent, sx, width, title, height }) =
     border: "1px solid #808080",
     borderRadius: 2,
     boxShadow: 24,
-    p: "12px 24px",
+    p: "0 0 12px",
     background: mode === "light" ? "" : "#413e3e",
     color: mode === "light" ? "" : "white",
     height: height ? height : { xs: "100%", md: "auto" },
@@ -44,24 +52,24 @@ const FormModal = ({ open, onClose, formComponent, sx, width, title, height }) =
             alignItems: "center",
             justifyContent: "space-between",
             marginBottom: "1rem",
-            position: "relative",
+            position: "sticky",
+            zIndex: "100",
+            top: "0",
+            padding: "12px 24px",
+            background:
+              mode === "lignt"
+                ? palette.background.header
+                : palette.background.header,
+            color: "#fff",
           }}
         >
           <Typography variant="h6">{title ?? title}</Typography>
-          <div
-            style={{
-              width: "100%",
-              height: "1px",
-              backgroundColor: "#e0e0e0",
-              position: "absolute",
-              bottom: "0",
-            }}
-          />
           <IconButton onClick={onClose}>
             <CloseIcon />
           </IconButton>
         </Grid>
-        {formComponent}
+        <Grid px={3}>{formComponent}</Grid>
+        
       </Box>
     </Modal>
   );

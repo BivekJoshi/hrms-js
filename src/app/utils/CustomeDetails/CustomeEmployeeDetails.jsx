@@ -262,7 +262,6 @@ const CustomeEmployeeDetails = ({
                   alignItems: "center",
                   justifyContent: "space-between",
                   marginBottom: "1rem",
-                  // position: "relative",
                   position: "sticky",
                   zIndex: "100",
                   top:"0",
@@ -277,15 +276,7 @@ const CustomeEmployeeDetails = ({
                 >
                   {selectedRowId ? "Edit" : "Add"} {title}
                 </Typography>
-                {/* <div
-                  style={{
-                    width: "100%",
-                    height: "1px",
-                    backgroundColor: "#e0e0e0",
-                    position: "absolute",
-                    bottom: "0",
-                  }}
-                /> */}
+             
                 <IconButton onClick={handleCloseAddModal} sx={{color: '#fff'}}>
                   <CloseIcon />
                 </IconButton>

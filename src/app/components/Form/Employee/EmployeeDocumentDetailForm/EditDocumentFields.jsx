@@ -4,6 +4,7 @@ import {
   Button,
   MenuItem,
   selectClasses,
+  Typography,
 } from "@mui/material";
 import React, { useState } from "react";
 import useEditDocumentForm from "./useEditDocumentForm";
@@ -22,6 +23,11 @@ const EditDocumentFields = ({ onClose, isLoading, id }) => {
   };
 
   const handleFormSubmit = () => {
+    if (!selectedDocument) {
+      // If no document is selected, show validation error
+      formik.setFieldError("document", "Please choose a document");
+      return;
+    }
     formik.handleSubmit();
 
     if (formik.isValid) {
@@ -32,7 +38,6 @@ const EditDocumentFields = ({ onClose, isLoading, id }) => {
       // onClose();
     }
   };
-
   return (
     !isLoading && (
       <Grid container spacing={3}>

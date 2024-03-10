@@ -325,8 +325,6 @@
 
 // export default EmployeeDocumentDetailForm;
 
-
-
 import { Accordion, AccordionDetails, Chip, Divider } from "@mui/material";
 import { AccordionSummary, Button } from "@mui/material";
 import { Grid, Typography, Box } from "@mui/material";
@@ -343,22 +341,22 @@ import { documentType } from "./documentType";
 import { EditDocumentModal } from "./EditDocumentModal";
 import deleteIcon from "../../../../../assets/approve.png";
 import updateIcon from "../../../../../assets/update.png";
- 
+
 const EmployeeDocumentDetailForm = () => {
   const { id } = useParams();
   const fileInputRef = useRef(null);
   const [openEditModal, setOpenEditModal] = useState(false);
   const [expandedAccordion, setExpandedAccordion] = useState("");
- 
+
   const [selectedDocument, setSelectedDocument] = useState();
   const [imagePreviewMap, setImagePreviewMap] = useState({});
   const [editedDocument, setEditedDocument] = useState({});
- 
+
   const handleCloseEditModal = () => setOpenEditModal(false);
- 
+
   const { mutate: deleteDocument } = useDeleteDocument({});
   const { mutate: addDocument, isSuccess } = useAddDocument({});
- 
+
   const {
     data: documentPhoto,
     refetch,
@@ -368,24 +366,24 @@ const EmployeeDocumentDetailForm = () => {
     selectedDocument || documentType[0]?.input
   );
   const { data: getDocument, isLoading } = useGetDocumentById(id);
- 
+
   useEffect(() => {
     refetch();
   }, [isSuccess, getDocument]);
- 
+
   const url = DOC_URL;
- 
+
   const handleChange = (panel, doc) => (_, isExpanded) => {
     setSelectedDocument(doc);
     setExpandedAccordion(isExpanded ? panel : null);
   };
- 
+
   const handleChangeImage = async (e) => {
     const file = e.target.files[0];
- 
+
     // Reset the input value to null to allow selecting the same file again
     e.target.value = null;
- 
+
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
@@ -395,21 +393,22 @@ const EmployeeDocumentDetailForm = () => {
         }));
       };
       reader.readAsDataURL(file);
- 
+
       // Handle form submission when an image is selected
       const values = {
         documentType: selectedDocument || documentType[0]?.input,
         document: file,
       };
-     await addDocument(values);
-
+      await addDocument(values);
     }
   };
- 
+  const isPdf = (path) => {
+    return path.endsWith(".pdf");
+  };
   const handleDelete = (document) => {
     const { id } = document;
     deleteDocument(id);
- 
+
     // setSelectedDocument('');
     // setImagePreviewMap((prevMap) => {
     //   return {
@@ -418,19 +417,17 @@ const EmployeeDocumentDetailForm = () => {
     //   };
     // });
   };
- 
+
   const handleEditFormSubmit = (document) => {
     setEditedDocument(document);
     setOpenEditModal(true);
   };
- 
+
   if (isLoading) return <div>loading</div>;
- 
   return (
     <div>
       <Grid container>
         <Grid item xs={12} sm={6} md={6}>
-        
           {documentPhoto &&
             documentPhoto.map((document) => (
               <Grid
@@ -452,15 +449,24 @@ const EmployeeDocumentDetailForm = () => {
                       }}
                     >
                       <Typography variant="h6">Uploaded Document</Typography>
-                      <img
-                        src={`${url}${document?.path}`}
-                        alt="Document"
-                        width={240}
-                        height={240}
-                        style={{
-                          objectFit: "contain",
-                        }}
-                      />
+                      {isPdf(document.path) ? (
+                        <embed
+                          src={`${url}${document.path}`}
+                          type="application/pdf"
+                          width={400}
+                          height={400}
+                        />
+                      ) : (
+                        <img
+                          src={`${url}${document.path}`}
+                          alt="Document"
+                          width={240}
+                          height={240}
+                          style={{
+                            objectFit: "contain",
+                          }}
+                        />
+                      )}
                       <Grid
                         sx={{
                           display: "flex",
@@ -494,7 +500,7 @@ const EmployeeDocumentDetailForm = () => {
               </Grid>
             ))}
         </Grid>
- 
+
         {!docPhotoLoad && (
           <Grid item xs={12} sm={6}>
             {documentType &&
@@ -625,6 +631,7 @@ const EmployeeDocumentDetailForm = () => {
       {openEditModal && (
         <EditDocumentModal
           id={editedDocument?.id}
+          path={editedDocument?.path}
           open={openEditModal}
           handleCloseModal={handleCloseEditModal}
         />
@@ -632,6 +639,5 @@ const EmployeeDocumentDetailForm = () => {
     </div>
   );
 };
- 
+
 export default EmployeeDocumentDetailForm;
- 
