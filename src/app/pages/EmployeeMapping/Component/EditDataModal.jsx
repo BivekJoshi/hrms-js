@@ -1,10 +1,15 @@
-import { Box, Button, Grid, TextField } from "@mui/material";
-import React from "react";
+import { Autocomplete, Box, Button, Grid, MenuItem, TextField } from "@mui/material";
+import React, { useContext } from "react";
 import FormModal from "../../../components/Modal/FormModal";
 import { useEmployeeMappingForm } from "../../../hooks/EmployeeMapping/useEmployeeMappingForm";
+import { useGetCompany } from "../../../hooks/company/useCompany";
+import ThemeModeContext from "../../../../theme/ThemeModeContext";
 
 const EditDataModal = ({ open, handleCloseModal, data }) => {
   const { formik } = useEmployeeMappingForm(data, handleCloseModal);
+
+  const { mode } = useContext(ThemeModeContext);
+  const { data: companyData, isLoading } = useGetCompany();
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
@@ -18,7 +23,7 @@ const EditDataModal = ({ open, handleCloseModal, data }) => {
         formComponent={
           <Grid container spacing={3}>
             <Grid item xs={12} sm={12}>
-              <TextField
+              {/* <TextField
                 id="deviceBranchId"
                 name="deviceBranchId"
                 label="Device Branch Id"
@@ -37,7 +42,34 @@ const EditDataModal = ({ open, handleCloseModal, data }) => {
                 variant="outlined"
                 InputLabelProps={{ shrink: Boolean(formik.values.deviceBranchId) }}
                 size="small"
-              />
+              /> */}
+              <TextField
+                id='deviceBranchId'
+                name='deviceBranchId'
+                select
+                label='Branch Name'
+                fullWidth
+                required
+                onBlur={formik.handleBlur}
+                value={formik.values.deviceBranchId}
+                onChange={formik.handleChange}
+                error={formik.touched.deviceBranchId && Boolean(formik.errors.deviceBranchId)}
+                helperText={formik.touched.deviceBranchId && formik.errors.deviceBranchId}
+                variant='outlined'
+                InputLabelProps={{ shrink: Boolean(formik.values.deviceBranchId) }}
+                size='small'
+              >
+                {!isLoading &&
+                  companyData.map((option) => (
+                    <MenuItem
+                      key={option?.id}
+                      value={option?.id}
+                      sx={{ bgcolor: mode === 'light' ? '' : '#413e3e' }}
+                    >
+                      {option?.branchName}
+                    </MenuItem>
+                  ))}
+              </TextField>
             </Grid>
             <Grid item xs={12} sm={12}>
               <TextField
@@ -70,7 +102,7 @@ const EditDataModal = ({ open, handleCloseModal, data }) => {
               <Button
                 variant="contained"
                 onClick={handleFormSubmit}
-                sx={{ mt: 3, ml: 1, textTransform:"capitalize" }}
+                sx={{ mt: 3, ml: 1, textTransform: "capitalize" }}
                 onClose={handleCloseModal}
               >
                 Update Mapping
@@ -78,7 +110,7 @@ const EditDataModal = ({ open, handleCloseModal, data }) => {
               <Button
                 variant="contained"
                 onClick={handleCloseModal}
-                sx={{ mt: 3, ml: 1, textTransform:"capitalize" }}
+                sx={{ mt: 3, ml: 1, textTransform: "capitalize" }}
                 color="error"
               >
                 Cancel
