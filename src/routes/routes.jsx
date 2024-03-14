@@ -352,12 +352,12 @@ const routes = [
     id: nanoid(),
     component: <EmailLogUserId />,
   },
-  {
-    path: "reports",
-    name: "Reports",
-    id: nanoid(),
-    component: <Reports />,
-  },
+  // {
+  //   path: "reports",
+  //   name: "Reports",
+  //   id: nanoid(),
+  //   component: <Reports />,
+  // },
 ];
 
 export { routes };

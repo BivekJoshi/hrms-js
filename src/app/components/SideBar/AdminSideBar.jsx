@@ -340,16 +340,16 @@ export default function AdminSidebar() {
         },
       ],
     },
-    {
-      name: "Reports",
-      icon: (
-        <AssessmentIcon
-          sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
-        />
-      ),
-      path: "reports",
-      subMenus: [],
-    },
+    // {
+    //   name: "Reports",
+    //   icon: (
+    //     <AssessmentIcon
+    //       sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
+    //     />
+    //   ),
+    //   path: "reports",
+    //   subMenus: [],
+    // },
   ];
 
   const drawerMenusForEmployee = [

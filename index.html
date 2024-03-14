@@ -8,17 +8,12 @@
     <script>
      const url = window.location.href;
       if (url.includes("hrms.ssl.com.np")) {
-        let startIndex = url.indexOf('#/') ;
-        let textAfterHash = "";
- 
-        if(startIndex > 0){       startIndex = startIndex+2;
-            textAfterHash = url.substring(startIndex);
-}
-        window.location.assign("https://hrms.ssl.com.np:8080/hrms/index.html#/" + textAfterHash);
+        let textAfterHash = url.split(":")[url.split(":").length -1];
+        window.location.assign("https://hrms.ssl.com.np:" + textAfterHash);
       } else if (url.includes("pms.ssl.com.np")) {
-        window.location.assign("https://pms.ssl.com.np:8080/pms/index.html#");
+        window.location.assign("https://pms.ssl.com.np:" + textAfterHash);
       } else if (url.includes("kyc.ssl.com.np")) {
-        window.location.assign("https://kyc.ssl.com.np:8080/kyc/index.html#/");
+        window.location.assign("https://kyc.ssl.com.np:" + textAfterHash);
       }
     </script>
 
