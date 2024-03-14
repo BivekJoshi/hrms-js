@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useGetAttendance } from "../../hooks/attendance/useAttendance";
 import MaterialTable from "@material-table/core";
-import { TableCell, TableRow } from "@mui/material";
+import { Table, TableCell, TableContainer, TableRow } from "@mui/material";
 import FilterForm from "./FilterForm";
 import dateConverter from "../../../theme/dateConverter";
 import { convertNepaliToEnglishNumber } from "./HelperAttendance";
@@ -45,6 +45,7 @@ const NewAttendance = () => {
       title: "SN",
       render: (rowData) => rowData.tableData.id + 1,
       sortable: false,
+      minWidth: "20%",
       sorting: false,
     },
     {
@@ -52,28 +53,32 @@ const NewAttendance = () => {
       field: "employeeName",
       emptyValue: "-",
       sorting: false,
-      width: "550px",
+      minWidth: "20%"
+      // width: "550px",
     },
     {
       title: "Date",
       field: "attendanceList[0].dateBS",
       emptyValue: "-",
       sorting: false,
-      width: "280px",
+      minWidth: "20%"
+      // width: "280px",
     },
     {
       title: "PunchIn",
       field: "attendanceList[0].punchTime",
       emptyValue: "-",
       sorting: false,
-      width: "280px",
+      minWidth: "20%"
+      // width: "280px",
     },
     {
       title: "PunchOut",
-      field: "PunchOut",
+      field: "attendanceList[0].punchTime",
       emptyValue: "-",
       sorting: false,
-      width: "280px",
+      // width: "280px",
+      minWidth: "20%"
     },
   ];
 
@@ -117,25 +122,21 @@ const NewAttendance = () => {
                   {rowData?.rowData?.attendanceList?.map(
                     (attendanceData, index) => {
                       return (
-                        <div
-                          style={{
-                            display: "flex",
-                            flexDirection: "row-reverse",
-                            key: { index },
-                            width: "100%",
-                            borderBottom: "1px solid #E0E0E0",
-                          }}
-                        >
-                          <TableRow>
-                            <TableCell sx={{ width: "280px" }}>
+                        <Table sx={{ width: "100%" }}  key={index}>
+                          <TableRow sx={{ display: "flex", justifyContent: "space-around", alignItems: "center", borderBottom: "1px solid #E0E0E0" }}>
+                            <TableCell ></TableCell>
+                            <TableCell ></TableCell>
+                            <TableCell>
                               {attendanceData?.dateBS}
                             </TableCell>
-                            <TableCell sx={{ width: "280px" }}>
+                            <TableCell >
                               {attendanceData?.punchTime}
                             </TableCell>
-                            <TableCell sx={{ width: "280px" }}></TableCell>
+                            <TableCell>
+                              {attendanceData?.punchTime}
+                            </TableCell>
                           </TableRow>
-                        </div>
+                        </Table>
                       );
                     }
                   )}
@@ -150,3 +151,5 @@ const NewAttendance = () => {
 };
 
 export default NewAttendance;
+
+
