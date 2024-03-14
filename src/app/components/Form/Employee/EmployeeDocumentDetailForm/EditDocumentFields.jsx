@@ -4,19 +4,30 @@ import {
   Button,
   MenuItem,
   selectClasses,
+  Typography,
 } from "@mui/material";
 import React, { useState } from "react";
 import useEditDocumentForm from "./useEditDocumentForm";
+import * as Yup from 'yup';
+
+const validationSchema = Yup.object().shape({
+  data: Yup.mixed().required('Please upload document'),
+});
 
 const EditDocumentFields = ({ onClose, isLoading, id }) => {
   const [selectedDocument, setSelectedDocument] = useState();
-  const { formik } = useEditDocumentForm(id, selectedDocument);
+  const { formik } = useEditDocumentForm(id, selectedDocument, onClose);
 
   const handleChangeImage = (e) => {
     setSelectedDocument(e.target.files[0]);
   };
 
   const handleFormSubmit = () => {
+    if (!selectedDocument) {
+      // If no document is selected, show validation error
+      formik.setFieldError("document", "Please choose a document");
+      return;
+    }
     formik.handleSubmit();
 
     if (formik.isValid) {
@@ -24,15 +35,17 @@ const EditDocumentFields = ({ onClose, isLoading, id }) => {
         id: id,
         document: selectedDocument || "",
       });
-      onClose();
+      // onClose();
     }
   };
-
   return (
     !isLoading && (
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
           <input type="file" label="citizenship" onChange={handleChangeImage} />
+          {formik.errors.data && (
+              <p style={{ color: "red" }}>{formik.errors.data}</p>
+            )}
         </Grid>
 
         <Grid

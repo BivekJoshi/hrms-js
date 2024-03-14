@@ -75,6 +75,7 @@ const EditEmployeeResourceFields = ({ onClose, isLoading, data, editMode }) => {
             name="conditionWhileReturned"
             label="Device condition when returned"
             fullWidth
+            required
             value={formik.values.conditionWhileReturned}
             onChange={formik.handleChange}
             error={

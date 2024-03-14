@@ -104,7 +104,6 @@ const EditHolidayFields = ({ onClose, isLoading, data, permissions }) => {
             label="Description"
             fullWidth
             formik={formik}
-            data={data?.holidayDescription}
             maxLength={255}
             variant="outlined"
             multiline
@@ -113,6 +112,7 @@ const EditHolidayFields = ({ onClose, isLoading, data, permissions }) => {
             }}
             rows={3}
             inputProps={{ maxLength: 255 }}
+            data={data?.holidayDescription}
           />
         </Grid>
         <Grid

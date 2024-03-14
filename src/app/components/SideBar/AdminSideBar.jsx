@@ -309,16 +309,16 @@ export default function AdminSidebar() {
           path: "mapping",
           subMenus: [],
         },
-        {
-          name: "Work Schedule",
-          icon: (
-            <WorkHistoryIcon
-              sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
-            />
-          ),
-          path: "work-schedule",
-          subMenus: [],
-        },
+        // {
+        //   name: "Work Schedule",
+        //   icon: (
+        //     <WorkHistoryIcon
+        //       sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
+        //     />
+        //   ),
+        //   path: "work-schedule",
+        //   subMenus: [],
+        // },
         {
           name: "Email Log",
           icon: (
@@ -340,16 +340,16 @@ export default function AdminSidebar() {
         },
       ],
     },
-    {
-      name: "Reports",
-      icon: (
-        <AssessmentIcon
-          sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
-        />
-      ),
-      path: "reports",
-      subMenus: [],
-    },
+    // {
+    //   name: "Reports",
+    //   icon: (
+    //     <AssessmentIcon
+    //       sx={mode === "light" ? { color: "#6DAB23" } : { color: "white" }}
+    //     />
+    //   ),
+    //   path: "reports",
+    //   subMenus: [],
+    // },
   ];
 
   const drawerMenusForEmployee = [

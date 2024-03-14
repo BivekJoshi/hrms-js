@@ -8,6 +8,7 @@ const EmployeeResourceSchema = Yup.object().shape({
     'Remarks cannot be greater than 255 characters'
   ),
   receiveDate: Yup.string().required('Please select the received date'),
+  conditionWhileProvided: Yup.string().required('Provided condition of logistics is required'),
   returnDate: Yup.string()
     .nullable()
     .notRequired()
@@ -27,10 +28,10 @@ const EmployeeResourceSchema = Yup.object().shape({
 });
 
 const EmployeeResourceEditSchema = Yup.object().shape({
-  conditionWhileReturned: Yup.string().required('Required'),
+  conditionWhileReturned: Yup.string().required('Returned condition of logistics is required'),
   receiveDate: Yup.string().required('Please select the received date'),
   returnDate: Yup.string()
-    .required('Required')
+    .required('Returned Date is required')
     .when('receiveDate', (receiveDate, schema) => {
       return schema.test({
         test: (returnDate) => {

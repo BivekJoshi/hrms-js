@@ -304,12 +304,12 @@ const routes = [
     id: nanoid(),
     component: <ProjectEmpPage component="project" />,
   },
-  {
-    path: "work-schedule",
-    name: "Work Schedule",
-    id: nanoid(),
-    component: <WorkShift component="workShift" />,
-  },
+  // {
+  //   path: "work-schedule",
+  //   name: "Work Schedule",
+  //   id: nanoid(),
+  //   component: <WorkShift component="workShift" />,
+  // },
   {
     path: "reset-password",
     name: "Reset Password",
@@ -352,12 +352,12 @@ const routes = [
     id: nanoid(),
     component: <EmailLogUserId />,
   },
-  {
-    path: "reports",
-    name: "Reports",
-    id: nanoid(),
-    component: <Reports />,
-  },
+  // {
+  //   path: "reports",
+  //   name: "Reports",
+  //   id: nanoid(),
+  //   component: <Reports />,
+  // },
 ];
 
 export { routes };

@@ -227,30 +227,40 @@ export const WorkShiftModal = ({ open, handleCloseModal }) => {
                                       marginTop: "20px",
                                     }}
                                   >
-                                    <Button
-                                      onClick={() =>
-                                        arrayHelpers.push({
-                                          startTime: "",
-                                          endTime: "",
-                                          startLateTime: "",
-                                          endEarlyTime: "",
-                                        })
-                                      }
-                                      disabled={
-                                        index !==
-                                        formik.values.onOffList.length - 1
-                                      }
-                                    >
-                                      <Tooltip title="Add work schedule">
-                                        <AddIcon />
-                                      </Tooltip>
-                                    </Button>
+                                    {index ===
+                                      formik.values.onOffList.length - 1 && (
+                                      <Button
+                                        onClick={() =>
+                                          arrayHelpers.push({
+                                            startTime: "",
+                                            endTime: "",
+                                            startLateTime: "",
+                                            endEarlyTime: "",
+                                          })
+                                        }
+                                        disabled={
+                                          index !==
+                                          formik.values.onOffList.length - 1
+                                        }
+                                      >
+                                        <Tooltip title="Add work schedule">
+                                          <AddIcon />
+                                        </Tooltip>
+                                      </Button>
+                                    )}
                                     {formik.values.onOffList.length > 1 && (
                                       <Button
                                         onClick={() => {
                                           arrayHelpers.remove(index);
                                         }}
-                                        style={{ cursor: "pointer" }}
+                                        style={{
+                                          cursor: "pointer",
+                                          marginLeft:
+                                            index ===
+                                            formik.values.onOffList.length - 1
+                                              ? "0"
+                                              : "10px",
+                                        }}
                                       >
                                         <Tooltip title="Delete work schedule">
                                           <img src={DeleteIcon} alt="icon" />
@@ -268,7 +278,7 @@ export const WorkShiftModal = ({ open, handleCloseModal }) => {
                   </FormikProvider>
                 </AccordionDetails>
               </Accordion>
-              {formik.errors.onOffList && (
+              {formik.errors.onOffList && formik.touched.onOffList && (
                 <Typography
                   color="#d32f2f"
                   ml="14px"

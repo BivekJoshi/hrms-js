@@ -20,7 +20,7 @@ const BarChatDiagram = ({ data }) => {
     : [];
 
   const Data = data
-    ? Object.entries(data).map(([key, value]) => (value ? value : "nana"))
+    ? Object.entries(data).map(([key, value]) => (value ? value : "0"))
     : [];
   const barColors = ["#F65E3C", "#A1E000", "#9137B8", "#D93084"];
 

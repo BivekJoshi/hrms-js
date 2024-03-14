@@ -1,12 +1,17 @@
 import { useFormik } from "formik";
 import { useTransferEmploymentHistory } from "./useEmployeeHistory";
 import * as Yup from "yup";
+import { TransferSchema } from "./TransferEmployee/TransferSchema";
 
 const EmployeeSchema = Yup.object().shape({
-  // positionId: Yup.string().required("Organization name is Required"),
-  // branchId: Yup.string().required("Organization address is required"),
-  // departmentId: Yup.string().required("Past Position is Required"),
-  effectiveDateFrom: Yup.string().required("From Date is Required"),
+  branchId: Yup.string().required("Organization Address is required"),
+  departmentId: Yup.string().required("Past Position is required"),
+  effectiveDateFrom: Yup.string().required("Effective From Date is required"),
+  positionId: Yup.string().when('changePosition', {
+    is: true,
+    then: Yup.string().required("Organization Name is required"),
+    otherwise: Yup.string()
+  })
 });
 
 const useTransferEmployment = (data, handleSuccess) => {
@@ -27,7 +32,7 @@ const useTransferEmployment = (data, handleSuccess) => {
       remarks: "",
       transferEmployee: false,
     },
-    validationSchema: EmployeeSchema,
+    validationSchema: TransferSchema,
     enableReinitialize: true,
     onSubmit: (values) => {
       handleRequest(values);

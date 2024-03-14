@@ -76,7 +76,7 @@ const Employee = () => {
     border: "1px solid #808080",
     borderRadius: 2,
     boxShadow: 24,
-    p: 4,
+    p: "0 0 12px",
     background: mode === "light" ? "" : "#413e3e",
     height: { xs: "100%", md: "auto" },
     overflow: { xs: "scroll", md: "auto" },
@@ -229,7 +229,15 @@ const Employee = () => {
                 alignItems: "center",
                 justifyContent: "space-between",
                 marginBottom: "1rem",
-                position: "relative",
+                position: "sticky",
+                zIndex: "100",
+                top: "0",
+                padding: "12px 24px",
+                background:
+                  mode === "lignt"
+                    ? palette.background.header
+                    : palette.background.header,
+                color: "#fff",
               }}
             >
               <Typography
@@ -238,25 +246,19 @@ const Employee = () => {
               >
                 Add Employee
               </Typography>
-              <div
-                style={{
-                  width: "100%",
-                  height: "1px",
-                  backgroundColor: "#e0e0e0",
-                  position: "absolute",
-                  bottom: "0",
+              <IconButton
+                onClick={() => {
+                  setOpenAddModal(false);
+                  formik.handleReset();
                 }}
-              />
-              <IconButton onClick={() => {
-                setOpenAddModal(false);
-                formik.handleReset();
-              }}>
+              >
                 <CloseIcon />
               </IconButton>
             </Grid>
             <EmployeeBasicInfoForm formik={formik} />
             <Divider style={{ paddingTop: "16px" }} />
             <Box
+              px={3}
               sx={{
                 display: "flex",
                 justifyContent: "flex-end",

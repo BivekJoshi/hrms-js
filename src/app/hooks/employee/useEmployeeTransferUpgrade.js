@@ -4,7 +4,7 @@ import { useTransferUpgradeEmployee } from "./useEmployeeHistory";
 import * as yup from "yup";
 
 const schema = yup.object().shape({
-  effectiveDateFrom: yup.string().required("Effective date is required"),
+  effectiveDateFrom: yup.string().required("Effective From Date is required"),
   branchId: yup.string().required("Branch is required"),
   departmentId: yup.string().required("Department is required"),
   allPosition: yup.boolean(),

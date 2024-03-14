@@ -66,7 +66,7 @@ export const documentType = [
   {
     label: "Award and Achievement",
     input: "AWARD_AND_ACHIEVEMENT",
-    desc: "* Image Format must be in jpeg/jpg/png",
+    desc: "* File Format must be in pdf",
     fileSize: "* File size should be max 25MB",
     accept: ".pdf",
     id: 9,
@@ -90,7 +90,7 @@ export const documentType = [
   {
     label: "Other Document",
     input: "OTHER_DOCUMENT ",
-    desc: "* Image Format must be in pdf",
+    desc: "* File Format must be in pdf",
     fileSize: "* File size should be max 25MB",
     accept: ".pdf",
     id: 12,

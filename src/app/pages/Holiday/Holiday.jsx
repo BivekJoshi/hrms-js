@@ -175,6 +175,15 @@ const Holiday = ({ permissions }) => {
           text-align: center;
           justify-content: center;
           }
+           .fc .fc-daygrid-day.fc-day-today {
+               background-color: #90a7bd;
+           }
+            .fc-col-header, .fc-scrollgrid-sync-table{
+              width: 100% !important;
+            }
+            .fc-daygrid-body, .fc-daygrid-body-unbalanced {
+              width: 100% !important;
+            }
          `}
         </style>
     </>

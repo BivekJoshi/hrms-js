@@ -3,11 +3,11 @@ import * as Yup from "yup";
 const CompanySchema = Yup.object().shape({
   branchName: Yup.string()
     .required("Branch Name is required")
-    .min(3, "Branch name must be at least 3 characters")
-    .max(50, "Branch name cannot be greater than 50 characters")
+    .min(3, "Branch Name must be at least 3 characters")
+    .max(50, "Branch Name cannot be greater than 50 characters")
     .matches(
       /^[A-Za-z\s]+$/,
-      "Branch name cannot contain numbers or special characters"
+      "Branch Name cannot contain numbers or special characters"
     ),
   branchEmail: Yup.string()
     .required("Email is required")
@@ -20,11 +20,11 @@ const CompanySchema = Yup.object().shape({
     .required("Contact is required")
     .matches(/^9[0-9]{9}$/, "Invalid mobile number format"),
   branchAddress: Yup.string()
-    .required("Address is required")
-    .max(50, "Branch address cannot be greater than 50 characters")
+    .required("Branch Address is required")
+    .max(50, "Branch Address cannot be greater than 50 characters")
     .matches(
       /^[^0-9!@#$%^&*()_+={}\[\]:;<>.?~\\/]*$/,
-      "Branch address cannot contain numbers or special characters"
+      "Branch Address cannot contain numbers or special characters"
     ),
     
   branchDescription: Yup.string().max(

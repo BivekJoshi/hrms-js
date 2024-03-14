@@ -97,11 +97,11 @@ export const DetailProfile = ({ data, role, setShowPersonalProfile }) => {
       value: "5",
       component: <NewEmployeeHistoryDetailForm employeeId={data?.id} />,
     },
-    {
-      label: "Work Schedule",
-      value: "15",
-      component: <WorkShift employeeId={data?.id} />,
-    },
+    // {
+    //   label: "Work Schedule",
+    //   value: "15",
+    //   component: <WorkShift employeeId={data?.id} />,
+    // },
 
     {
       label: "Documents",
