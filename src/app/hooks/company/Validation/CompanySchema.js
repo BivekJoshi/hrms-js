@@ -18,7 +18,8 @@ const CompanySchema = Yup.object().shape({
     ),
   branchContact: Yup.string()
     .required("Contact is required")
-    .matches(/^9[0-9]{9}$/, "Invalid mobile number format"),
+    .matches(/^[0-9]+$/, "Invalid contact number")
+    .max(10,"Contact must be at most 10 digits"),
   branchAddress: Yup.string()
     .required("Branch Address is required")
     .max(50, "Branch Address cannot be greater than 50 characters")
