@@ -29,6 +29,15 @@ const Holiday = ({ permissions }) => {
 
   const { data: holidayData } = useGetHoliday();
 
+  const handleColorChange = () => {
+    const lastColumn = document.getElementsByClassName("fc-daygrid-day-frame");
+    if (lastColumn) {
+      for (let i = 6; i < lastColumn.length; i += 7) {
+        lastColumn[i].style.background = "#fd5d5d";
+      }
+    }
+  };
+
   useEffect(() => {
     if (holidayData) {
       const formattedEvents = holidayData.map((event) => ({
@@ -42,7 +51,7 @@ const Holiday = ({ permissions }) => {
   }, [holidayData]);
 
   const handleCloseModal = () => {
-    setOpenAddModal(false)
+    setOpenAddModal(false);
     formik.handleReset();
   };
   const { formik, holidayId } = useHolidayForm(
@@ -142,6 +151,7 @@ const Holiday = ({ permissions }) => {
         initialView="dayGridMonth"
         eventClick={handleOpenModal}
         height={"90vh"}
+        datesSet={handleColorChange}
         events={events}
         customButtons={{
           customTodayButton: {
@@ -167,7 +177,7 @@ const Holiday = ({ permissions }) => {
         />
       )}
       <style>
-          {`
+        {`
          .fc .fc-daygrid-day.fc-day-today {
              background-color: #90a7bd;
          }
@@ -183,9 +193,10 @@ const Holiday = ({ permissions }) => {
             }
             .fc-daygrid-body, .fc-daygrid-body-unbalanced {
               width: 100% !important;
-            }
+            }import { getAddressById } from './../../api/address/address-api';
+
          `}
-        </style>
+      </style>
     </>
   );
 };
