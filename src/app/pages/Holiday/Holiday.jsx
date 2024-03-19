@@ -29,6 +29,18 @@ const Holiday = ({ permissions }) => {
 
   const { data: holidayData } = useGetHoliday();
 
+  // const handleColorChange = (e) => {
+  //   const lastColumn = document.getElementsByClassName("fc-daygrid-day-frame");
+  //   if (lastColumn) {
+  //     let colIndex = [];
+  //     for (let i = 6; i < lastColumn.length; i += 7) {
+  //       colIndex.push(i);
+  //     }
+  //     for (j = 1 ; j < e.view.dateEnv.locale.week.doy < 5 ; j++) {
+
+  //   }
+  // };
+
   const handleColorChange = () => {
     const lastColumn = document.getElementsByClassName("fc-daygrid-day-frame");
     if (lastColumn) {
