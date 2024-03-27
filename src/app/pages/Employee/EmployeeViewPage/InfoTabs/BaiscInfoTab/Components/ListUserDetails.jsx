@@ -17,8 +17,15 @@ import { useGetLoggedInUser } from "../../../../../../hooks/auth/usePassword";
 import useAuth from "../../../../../../../auth/hooks/component/login/useAuth";
 
 export default function ListUserDetails({ cardTitle, data, mode }) {
-  const { isSuperAdmin, isAdmin, isHr, isEmployee, isHrAdmin, isManager } =
-    useAuth();
+  const {
+    isSuperAdmin,
+    isAdmin,
+    isHr,
+    isEmployee,
+    isHrAdmin,
+    isManager,
+    isHrClerk,
+  } = useAuth();
 
   const { id } = useParams();
 
@@ -27,7 +34,14 @@ export default function ListUserDetails({ cardTitle, data, mode }) {
   const navigate = useNavigate();
 
   const handleOnClick = () => {
-    if (isAdmin || isSuperAdmin || isHr || isManager || isHrAdmin) {
+    if (
+      isAdmin ||
+      isSuperAdmin ||
+      isHr ||
+      isManager ||
+      isHrAdmin ||
+      isHrClerk
+    ) {
       navigate(`/admin/employee/edit/${id}`);
     } else {
       navigate(`/employee/employee/edit/${loggedInUserData?.employeeId}`);
@@ -35,7 +49,7 @@ export default function ListUserDetails({ cardTitle, data, mode }) {
   };
   return (
     <>
-      <Box sx={{ display: "flex", justifyContent:"space-between" }}>
+      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <Typography variant="h6" sx={{ fontWeight: 600 }}>
           {cardTitle}
         </Typography>
