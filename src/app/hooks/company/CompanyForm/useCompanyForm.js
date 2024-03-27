@@ -1,8 +1,8 @@
-import { useFormik } from 'formik';
-import { useAddCompany, useEditCompany } from '../useCompany';
-import { CompanySchema } from '../Validation/CompanySchema';
-import { isEqual } from 'lodash';
-import { toast } from 'react-toastify';
+import { useFormik } from "formik";
+import { useAddCompany, useEditCompany } from "../useCompany";
+import { CompanySchema } from "../Validation/CompanySchema";
+import { isEqual } from "lodash";
+import { toast } from "react-toastify";
 
 const useCompanyForm = (data, onClose) => {
   const { mutate: addCompany } = useAddCompany({});
@@ -10,11 +10,12 @@ const useCompanyForm = (data, onClose) => {
 
   const formik = useFormik({
     initialValues: {
-      branchName: data?.branchName || '',
-      branchEmail: data?.branchEmail || '',
-      branchContact: data?.branchContact || '',
-      branchAddress: data?.branchAddress || '',
-      branchDescription: data?.branchDescription || '',
+      branchName: data?.branchName || "",
+      branchEmail: data?.branchEmail || "",
+      branchContact: data?.branchContact || "",
+      branchTelephone: data?.branchTelephone || "",
+      branchAddress: data?.branchAddress || "",
+      branchDescription: data?.branchDescription || "",
       id: data?.id,
     },
     validationSchema: CompanySchema,

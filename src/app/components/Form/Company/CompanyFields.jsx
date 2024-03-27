@@ -57,9 +57,10 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
           <TextField
             id="branchContact"
             name="branchContact"
-            label="Contact"
+            label="Phone Number"
+            type="number"
             fullWidth
-            required
+            // required
             value={formik.values.branchContact}
             onChange={formik.handleChange}
             error={
@@ -71,6 +72,27 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
             }
             variant="outlined"
             InputLabelProps={{ shrink: Boolean(formik.values.branchContact) }}
+            size="small"
+          />
+        </Grid>
+        <Grid item xs={12} sm={12}>
+          <TextField
+            id="branchTelephone"
+            name="branchTelephone"
+            label="Telepnone Number"
+            fullWidth
+            // required
+            value={formik.values.branchTelephone}
+            onChange={formik.handleChange}
+            error={
+              formik.touched.branchTelephone &&
+              Boolean(formik.errors.branchTelephone)
+            }
+            helperText={
+              formik.touched.branchTelephone && formik.errors.branchTelephone
+            }
+            variant="outlined"
+            InputLabelProps={{ shrink: Boolean(formik.values.branchTelephone) }}
             size="small"
           />
         </Grid>
@@ -139,7 +161,7 @@ const CompanyFields = ({ onClose, isLoading, data }) => {
         >
           <Button
             variant="contained"
-            onClick={handleFormSubmit}           
+            onClick={handleFormSubmit}
             sx={{ mt: 3, ml: 1, textTransform: "capitalize" }}
           >
             {submitButtonText}

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import forget from "../../../../assets/forget.avif";
+import forget from "../../../../assets/forget.png";
 import useAddForgotPasswordForm from "../../../hooks/auth/forgotPassword/useAddForgotPasswordForm";
 import { Grid, Button, TextField, Stack, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
@@ -38,6 +38,7 @@ const ForgotPassword = ({ onClose, isLoading }) => {
           justifyContent: "space-around",
           alignItems: "center",
           height: "100vh",
+          backgroundColor: mode === "light" ? "" : "#303030"
         }}
       >
         <Stack sx={{ width: "40%", height: "auto" }}>
