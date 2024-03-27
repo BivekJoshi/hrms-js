@@ -6,6 +6,8 @@ import {
   TextField,
   AccordionSummary,
   Tooltip,
+  Box,
+  Tab,
 } from "@mui/material";
 import { Accordion, AccordionDetails, Typography, Grid } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -13,13 +15,21 @@ import { addWorkShiftForm } from "../../../hooks/workShift/useWorkShiftForm";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "../../../../assets/DeleteIcon.png";
 import { FieldArray, FormikProvider } from "formik";
+import { TabContext, TabList, TabPanel } from "@mui/lab";
+import ThemeModeContext from "../../../../theme/ThemeModeContext";
+import NormalWorkShiftField from "./NormalWorkShiftField";
 
 export const WorkShiftModal = ({ open, handleCloseModal }) => {
   const onClose = handleCloseModal;
   const { formik } = addWorkShiftForm(onClose);
+  const [value, setValue] = React.useState('1');
+  const { palette, mode } = React.useContext(ThemeModeContext);
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
+  };
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
   };
 
   const daysOfWeek = [
@@ -31,6 +41,25 @@ export const WorkShiftModal = ({ open, handleCloseModal }) => {
     "FRIDAY",
     "SATURDAY",
   ];
+
+  const labelStyle = {
+    backgroundColor: palette.secondary.main,
+    marginLeft: '.5rem',
+    textTransform: 'none',
+    borderRadius: '.5rem',
+    color: mode === 'light' ? 'black' : 'white',
+    textDecoder: 'none',
+    marginBottom: "1rem"
+  };
+  const activeLabelStyle = {
+    ...labelStyle,
+    backgroundColor:
+      mode === 'dark' ? palette.text.primary : palette.secondary.light,
+    borderBottom: 'none',
+    textDecoder: 'none',
+    color: mode === 'dark' ? 'black' : 'white',
+  };
+
   return (
     <div>
       <FormModal
@@ -68,227 +97,256 @@ export const WorkShiftModal = ({ open, handleCloseModal }) => {
                 size="small"
               />
             </Grid>
+
             <Grid item xs={12} sm={12}>
-              <Autocomplete
-                id="startWeekDay"
-                name="startWeekDay"
-                options={daysOfWeek}
-                getOptionLabel={(option) => option}
-                fullWidth
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    label="Start Week Day"
-                    // InputLabelProps={{ shrink: true }}
-                    required
-                    error={
-                      formik.touched.startWeekDay &&
-                      Boolean(formik.errors.startWeekDay)
-                    }
-                    helperText={
-                      formik.touched.startWeekDay && formik.errors.startWeekDay
-                    }
-                    size="small"
-                  />
-                )}
-                value={formik.values.startWeekDay}
-                onChange={(event, newValue) => {
-                  formik.setFieldValue("startWeekDay", newValue);
-                }}
-              />
-            </Grid>
-            <Grid item xs={12} sm={12}>
-              <Accordion>
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel1-content"
-                  id="panel1-header"
-                  style={{ margin: "0px !important" }}
-                >
-                  Office Days
-                </AccordionSummary>
-                <AccordionDetails>
-                  <FormikProvider value={formik} {...formik}>
-                    <FieldArray
-                      name="onOffList"
-                      render={(arrayHelpers) => (
-                        <>
-                          {formik?.values?.onOffList?.map(
-                            (onOffLists, index) => (
-                              <div
-                                style={{
-                                  display: "flex",
-                                  alignItems: "center",
-                                }}
-                              >
-                                <Typography ml={1} width="8rem">
-                                  Shift Day {index + 1}
-                                </Typography>{" "}
-                                <>
-                                  <Grid display="flex" gap={1} mt={2}>
-                                    <TextField
-                                      id={`onOffList[${index}].startTime`}
-                                      name={`onOffList[${index}].startTime`}
-                                      type="time"
-                                      label="Start time "
-                                      InputLabelProps={{ shrink: true }}
-                                      value={onOffLists.startTime}
-                                      required
-                                      onChange={formik.handleChange}
-                                      error={
-                                        formik.touched.onOffList?.[index]
-                                          ?.startTime &&
-                                        formik.errors.onOffList?.[index]
-                                          ?.startTime
-                                      }
-                                      helperText={
-                                        formik.touched.onOffList?.[index]
-                                          ?.startTime &&
-                                        formik.errors.onOffList?.[index]
-                                          ?.startTime
-                                      }
-                                      size="small"
-                                    />
-                                    <TextField
-                                      id={`onOffList[${index}].endTime`}
-                                      name={`onOffList[${index}].endTime`}
-                                      type="time"
-                                      label="End time"
-                                      InputLabelProps={{ shrink: true }}
-                                      value={onOffLists.endTime}
-                                      required
-                                      onChange={formik.handleChange}
-                                      error={
-                                        formik.touched.onOffList?.[index]
-                                          ?.endTime &&
-                                        formik.errors.onOffList?.[index]
-                                          ?.endTime
-                                      }
-                                      helperText={
-                                        formik.touched.onOffList?.[index]
-                                          ?.endTime &&
-                                        formik.errors.onOffList?.[index]
-                                          ?.endTime
-                                      }
-                                      size="small"
-                                    />
-                                    <TextField
-                                      id={`onOffList[${index}].startLateTime`}
-                                      name={`onOffList[${index}].startLateTime`}
-                                      type="time"
-                                      label="Start Late Time"
-                                      InputLabelProps={{ shrink: true }}
-                                      value={onOffLists.startLateTime}
-                                      required
-                                      onChange={formik.handleChange}
-                                      error={
-                                        formik.touched.onOffList?.[index]
-                                          ?.startLateTime &&
-                                        formik.errors.onOffList?.[index]
-                                          ?.startLateTime
-                                      }
-                                      helperText={
-                                        formik.touched.onOffList?.[index]
-                                          ?.startLateTime &&
-                                        formik.errors.onOffList?.[index]
-                                          ?.startLateTime
-                                      }
-                                      size="small"
-                                    />
-                                    <TextField
-                                      id={`onOffList[${index}].endEarlyTime`}
-                                      name={`onOffList[${index}].endEarlyTime`}
-                                      type="time"
-                                      label="End EarlyTime"
-                                      InputLabelProps={{ shrink: true }}
-                                      value={onOffLists.endEarlyTime}
-                                      required
-                                      onChange={formik.handleChange}
-                                      error={
-                                        formik.touched.onOffList?.[index]
-                                          ?.endEarlyTime &&
-                                        formik.errors.onOffList?.[index]
-                                          ?.endEarlyTime
-                                      }
-                                      helperText={
-                                        formik.touched.onOffList?.[index]
-                                          ?.endEarlyTime &&
-                                        formik.errors.onOffList?.[index]
-                                          ?.endEarlyTime
-                                      }
-                                      size="small"
-                                    />
-                                  </Grid>
-                                  <div
-                                    style={{
-                                      display: "flex",
-                                      gap: ".5rem",
-                                      justifyContent: "flex-end",
-                                      marginTop: "20px",
-                                    }}
-                                  >
-                                    {index ===
-                                      formik.values.onOffList.length - 1 && (
-                                      <Button
-                                        onClick={() =>
-                                          arrayHelpers.push({
-                                            startTime: "",
-                                            endTime: "",
-                                            startLateTime: "",
-                                            endEarlyTime: "",
-                                          })
-                                        }
-                                        disabled={
-                                          index !==
-                                          formik.values.onOffList.length - 1
-                                        }
-                                      >
-                                        <Tooltip title="Add work schedule">
-                                          <AddIcon />
-                                        </Tooltip>
-                                      </Button>
-                                    )}
-                                    {formik.values.onOffList.length > 1 && (
-                                      <Button
-                                        onClick={() => {
-                                          arrayHelpers.remove(index);
-                                        }}
-                                        style={{
-                                          cursor: "pointer",
-                                          marginLeft:
-                                            index ===
-                                            formik.values.onOffList.length - 1
-                                              ? "0"
-                                              : "10px",
-                                        }}
-                                      >
-                                        <Tooltip title="Delete work schedule">
-                                          <img src={DeleteIcon} alt="icon" />
-                                        </Tooltip>
-                                      </Button>
-                                    )}
-                                  </div>
-                                </>
-                              </div>
-                            )
-                          )}
-                        </>
-                      )}
-                    />
-                  </FormikProvider>
-                </AccordionDetails>
-              </Accordion>
-              {formik.errors.onOffList && formik.touched.onOffList && (
-                <Typography
-                  color="#d32f2f"
-                  ml="14px"
-                  fontSize=".75rem"
-                  mt="4px"
-                >
-                  {" "}
-                  Required
-                </Typography>
-              )}
+              <TabContext value={value}>
+                <Box>
+                  <TabList onChange={handleChange} indicatorColor="none">
+                    <Tab label='Normal Office Days' value='1' style={value === '1' ? activeLabelStyle : labelStyle} />
+                    <Tab label='Advance Office Days' value='2' style={value === '2' ? activeLabelStyle : labelStyle} />
+                  </TabList>
+                  <TabPanel value="1" sx={{ padding: 0 }}>
+                    <Box>
+                      <Accordion defaultExpanded>
+                        <AccordionSummary
+                          expandIcon={<ExpandMoreIcon />}
+                          aria-controls="panel1-content"
+                          id="panel1-header"
+                          style={{ margin: "0px !important" }}
+                        >
+                          Normal Office Days
+                        </AccordionSummary>
+                        <AccordionDetails>
+                          <NormalWorkShiftField formik={formik}/>
+                        </AccordionDetails>
+                      </Accordion>
+                    </Box>
+                  </TabPanel>
+                  <TabPanel value="2" sx={{ padding: 0 }}>
+                    <Grid item xs={12} sm={12} sx={{marginBottom:"1rem"}}>
+                      <Autocomplete
+                        id="startWeekDay"
+                        name="startWeekDay"
+                        options={daysOfWeek}
+                        getOptionLabel={(option) => option}
+                        fullWidth
+                        renderInput={(params) => (
+                          <TextField
+                            {...params}
+                            label="Start Week Day"
+                            // InputLabelProps={{ shrink: true }}
+                            required
+                            error={
+                              formik.touched.startWeekDay &&
+                              Boolean(formik.errors.startWeekDay)
+                            }
+                            helperText={
+                              formik.touched.startWeekDay && formik.errors.startWeekDay
+                            }
+                            size="small"
+                          />
+                        )}
+                        value={formik.values.startWeekDay}
+                        onChange={(event, newValue) => {
+                          formik.setFieldValue("startWeekDay", newValue);
+                        }}
+                      />
+                    </Grid>
+                    <Accordion defaultExpanded>
+                      <AccordionSummary
+                        expandIcon={<ExpandMoreIcon />}
+                        aria-controls="panel1-content"
+                        id="panel1-header"
+                        style={{ margin: "0px !important" }}
+                      >
+                        Office Days
+                      </AccordionSummary>
+
+                      <AccordionDetails>
+                        <FormikProvider value={formik} {...formik}>
+                          <FieldArray
+                            name="shiftTimeReqList"
+                            render={(arrayHelpers) => (
+                              <>
+                                {formik?.values?.shiftTimeReqList?.map(
+                                  (shiftTimeReqList, index) => (
+                                    <div
+                                      style={{
+                                        display: "flex",
+                                        alignItems: "center",
+                                      }}
+                                    >
+                                      <Typography ml={1} width="8rem">
+                                        Shift Day {index + 1}
+                                      </Typography>{" "}
+                                      <>
+                                        <Grid display="flex" gap={1} mt={2}>
+                                          <TextField
+                                            id={`shiftTimeReqList[${index}].startTime`}
+                                            name={`shiftTimeReqList[${index}].startTime`}
+                                            type="time"
+                                            label="Start time "
+                                            InputLabelProps={{ shrink: true }}
+                                            value={shiftTimeReqList.startTime}
+                                            required
+                                            onChange={formik.handleChange}
+                                            error={
+                                              formik.touched.shiftTimeReqList?.[index]
+                                                ?.startTime &&
+                                              formik.errors.shiftTimeReqList?.[index]
+                                                ?.startTime
+                                            }
+                                            helperText={
+                                              formik.touched.shiftTimeReqList?.[index]
+                                                ?.startTime &&
+                                              formik.errors.shiftTimeReqList?.[index]
+                                                ?.startTime
+                                            }
+                                            size="small"
+                                          />
+                                          <TextField
+                                            id={`shiftTimeReqList[${index}].endTime`}
+                                            name={`shiftTimeReqList[${index}].endTime`}
+                                            type="time"
+                                            label="End time"
+                                            InputLabelProps={{ shrink: true }}
+                                            value={shiftTimeReqList.endTime}
+                                            required
+                                            onChange={formik.handleChange}
+                                            error={
+                                              formik.touched.shiftTimeReqList?.[index]
+                                                ?.endTime &&
+                                              formik.errors.shiftTimeReqList?.[index]
+                                                ?.endTime
+                                            }
+                                            helperText={
+                                              formik.touched.shiftTimeReqList?.[index]
+                                                ?.endTime &&
+                                              formik.errors.shiftTimeReqList?.[index]
+                                                ?.endTime
+                                            }
+                                            size="small"
+                                          />
+                                          <TextField
+                                            id={`shiftTimeReqList[${index}].startLateTime`}
+                                            name={`shiftTimeReqList[${index}].startLateTime`}
+                                            type="time"
+                                            label="Start Late Time"
+                                            InputLabelProps={{ shrink: true }}
+                                            value={shiftTimeReqList.startLateTime}
+                                            required
+                                            onChange={formik.handleChange}
+                                            error={
+                                              formik.touched.shiftTimeReqList?.[index]
+                                                ?.startLateTime &&
+                                              formik.errors.shiftTimeReqList?.[index]
+                                                ?.startLateTime
+                                            }
+                                            helperText={
+                                              formik.touched.shiftTimeReqList?.[index]
+                                                ?.startLateTime &&
+                                              formik.errors.shiftTimeReqList?.[index]
+                                                ?.startLateTime
+                                            }
+                                            size="small"
+                                          />
+                                          <TextField
+                                            id={`shiftTimeReqList[${index}].endEarlyTime`}
+                                            name={`shiftTimeReqList[${index}].endEarlyTime`}
+                                            type="time"
+                                            label="End EarlyTime"
+                                            InputLabelProps={{ shrink: true }}
+                                            value={shiftTimeReqList.endEarlyTime}
+                                            required
+                                            onChange={formik.handleChange}
+                                            error={
+                                              formik.touched.shiftTimeReqList?.[index]
+                                                ?.endEarlyTime &&
+                                              formik.errors.shiftTimeReqList?.[index]
+                                                ?.endEarlyTime
+                                            }
+                                            helperText={
+                                              formik.touched.shiftTimeReqList?.[index]
+                                                ?.endEarlyTime &&
+                                              formik.errors.shiftTimeReqList?.[index]
+                                                ?.endEarlyTime
+                                            }
+                                            size="small"
+                                          />
+                                        </Grid>
+                                        <div
+                                          style={{
+                                            display: "flex",
+                                            gap: ".5rem",
+                                            justifyContent: "flex-end",
+                                            marginTop: "20px",
+                                          }}
+                                        >
+                                          {index ===
+                                            formik.values.shiftTimeReqList.length - 1 && (
+                                              <Button
+                                                onClick={() =>
+                                                  arrayHelpers.push({
+                                                    startTime: "",
+                                                    endTime: "",
+                                                    startLateTime: "",
+                                                    endEarlyTime: "",
+                                                  })
+                                                }
+                                                disabled={
+                                                  index !==
+                                                  formik.values.shiftTimeReqList.length - 1
+                                                }
+                                              >
+                                                <Tooltip title="Add work schedule">
+                                                  <AddIcon />
+                                                </Tooltip>
+                                              </Button>
+                                            )}
+                                          {formik.values.shiftTimeReqList.length > 1 && (
+                                            <Button
+                                              onClick={() => {
+                                                arrayHelpers.remove(index);
+                                              }}
+                                              style={{
+                                                cursor: "pointer",
+                                                marginLeft:
+                                                  index ===
+                                                    formik.values.shiftTimeReqList.length - 1
+                                                    ? "0"
+                                                    : "10px",
+                                              }}
+                                            >
+                                              <Tooltip title="Delete work schedule">
+                                                <img src={DeleteIcon} alt="icon" />
+                                              </Tooltip>
+                                            </Button>
+                                          )}
+                                        </div>
+                                      </>
+                                    </div>
+                                  )
+                                )}
+                              </>
+                            )}
+                          />
+                        </FormikProvider>
+                      </AccordionDetails>
+                    </Accordion>
+                    {formik.errors.shiftTimeReqList && formik.touched.shiftTimeReqList && (
+                      <Typography
+                        color="#d32f2f"
+                        ml="14px"
+                        fontSize=".75rem"
+                        mt="4px"
+                      >
+                        {" "}
+                        Required
+                      </Typography>
+                    )}
+                  </TabPanel>
+                </Box>
+              </TabContext>
             </Grid>
             <Grid
               container

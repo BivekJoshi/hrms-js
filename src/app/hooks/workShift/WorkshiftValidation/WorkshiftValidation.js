@@ -3,7 +3,7 @@ import * as Yup from "yup";
 export const AddWorkShiftSchema = Yup.object().shape({
   scheduleName: Yup.string().required("Schedule Name is required"),
   startWeekDay: Yup.string().required("Please select start Week Day "),
-  onOffList: Yup.array()
+  shiftTimeReqList: Yup.array()
     .of(
       Yup.object().shape({
         startTime: Yup.string().required("Start time is required"),

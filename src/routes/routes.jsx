@@ -17,7 +17,7 @@ import EventAttendance from "../app/pages/Event/EventAttendance/EventAttendance"
 import EmploymentType from "../app/pages/EmploymentType/EmploymentType";
 import EmailLog from "../app/pages/EmailLog/EmailLog";
 import EmailLogUserId from "../app/pages/EmailLog/EmailLogUserId";
-import WorkShift from "../app/pages/WorkShift/WorkShift";
+// import WorkShift from "../app/pages/WorkShift/WorkShift";
 import NewAttendance from "../app/pages/Attendance/NewAttendance";
 
 const ProfileDetail = Loadable(
