@@ -17,7 +17,7 @@ export const addWorkShiftForm = (onClose) => {
     initialValues: {
       scheduleName: "",
       startWeekDay: "",
-      onOffList: [
+      shiftTimeReqList: [
         { startTime: "", endTime: "", startLateTime: "", endEarlyTime: "" },
       ],
     },
