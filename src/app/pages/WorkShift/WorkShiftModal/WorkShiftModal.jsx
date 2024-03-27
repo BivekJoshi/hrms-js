@@ -6,6 +6,8 @@ import {
   TextField,
   AccordionSummary,
   Tooltip,
+  Box,
+  Tab,
 } from "@mui/material";
 import { Accordion, AccordionDetails, Typography, Grid } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -13,13 +15,18 @@ import { addWorkShiftForm } from "../../../hooks/workShift/useWorkShiftForm";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "../../../../assets/DeleteIcon.png";
 import { FieldArray, FormikProvider } from "formik";
+import { TabContext, TabList } from "@mui/lab";
 
 export const WorkShiftModal = ({ open, handleCloseModal }) => {
   const onClose = handleCloseModal;
   const { formik } = addWorkShiftForm(onClose);
+  const [value, setValue] = React.useState('1');
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
+  };
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
   };
 
   const daysOfWeek = [
@@ -96,6 +103,16 @@ export const WorkShiftModal = ({ open, handleCloseModal }) => {
                   formik.setFieldValue("startWeekDay", newValue);
                 }}
               />
+            </Grid>
+            <Grid item xs={12} sm={12}>
+              <TabContext value={value}>
+                <Box>
+                  <TabList onChange={handleChange} indicatorColor="none">
+                    <Tab label='Normal Office Days' value='1'/>
+                    <Tab label='Advance Office Days' value='2'/>
+                  </TabList>
+                </Box>
+              </TabContext>
             </Grid>
             <Grid item xs={12} sm={12}>
               <Accordion>
@@ -229,25 +246,25 @@ export const WorkShiftModal = ({ open, handleCloseModal }) => {
                                   >
                                     {index ===
                                       formik.values.onOffList.length - 1 && (
-                                      <Button
-                                        onClick={() =>
-                                          arrayHelpers.push({
-                                            startTime: "",
-                                            endTime: "",
-                                            startLateTime: "",
-                                            endEarlyTime: "",
-                                          })
-                                        }
-                                        disabled={
-                                          index !==
-                                          formik.values.onOffList.length - 1
-                                        }
-                                      >
-                                        <Tooltip title="Add work schedule">
-                                          <AddIcon />
-                                        </Tooltip>
-                                      </Button>
-                                    )}
+                                        <Button
+                                          onClick={() =>
+                                            arrayHelpers.push({
+                                              startTime: "",
+                                              endTime: "",
+                                              startLateTime: "",
+                                              endEarlyTime: "",
+                                            })
+                                          }
+                                          disabled={
+                                            index !==
+                                            formik.values.onOffList.length - 1
+                                          }
+                                        >
+                                          <Tooltip title="Add work schedule">
+                                            <AddIcon />
+                                          </Tooltip>
+                                        </Button>
+                                      )}
                                     {formik.values.onOffList.length > 1 && (
                                       <Button
                                         onClick={() => {
@@ -257,7 +274,7 @@ export const WorkShiftModal = ({ open, handleCloseModal }) => {
                                           cursor: "pointer",
                                           marginLeft:
                                             index ===
-                                            formik.values.onOffList.length - 1
+                                              formik.values.onOffList.length - 1
                                               ? "0"
                                               : "10px",
                                         }}

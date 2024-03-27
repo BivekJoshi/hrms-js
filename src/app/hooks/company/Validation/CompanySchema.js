@@ -17,9 +17,14 @@ const CompanySchema = Yup.object().shape({
       "Invalid email format"
     ),
   branchContact: Yup.string()
-    .required("Contact is required")
-    .matches(/^[0-9]+$/, "Invalid contact number")
-    .max(10,"Contact must be at most 10 digits"),
+    // .required("Contact is required")
+    .matches(/^[0-9]+$/, "Invalid phone number")
+    .min(10, "Contact must be 10 digits")
+    .max(10, "Contact must be 10 digits")
+    .matches(/^98[0-9]{8}$/, "Invalid phone number"),
+  branchTelephone: Yup.string()
+    .matches(/^[0-9-]+$/,"Invalid telephone number")
+    .max(10, "Telephone number must be at most 10 digits"),
   branchAddress: Yup.string()
     .required("Branch Address is required")
     .max(50, "Branch Address cannot be greater than 50 characters")
@@ -27,7 +32,7 @@ const CompanySchema = Yup.object().shape({
       /^[^0-9!@#$%^&*()_+={}\[\]:;<>.?~\\/]*$/,
       "Branch Address cannot contain numbers or special characters"
     ),
-    
+
   branchDescription: Yup.string().max(
     255,
     "Description cannot be greater than 255 characters"

@@ -39,8 +39,15 @@ const CompanyTableView = ({
       sorting: false,
     },
     {
-      title: "Contact",
+      title: "Phone Number",
       field: "branchContact",
+      emptyValue: "-",
+      width: "80px",
+      sorting: false,
+    },
+    {
+      title: "Telephone Number",
+      field: "branchTelephone",
       emptyValue: "-",
       width: "80px",
       sorting: false,
